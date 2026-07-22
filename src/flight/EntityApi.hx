@@ -8,26 +8,23 @@ import flight.Types.EntityRuntime;
 import flight.Types.EntityRuntimeKey;
 import flight.Types.EntityWithoutRuntime;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.EntityApi")
 class EntityApi {
   public static var _guardsEnabled__guards:Dynamic = false;
 
-  @:keep public static function areEntityRuntimeGuardsEnabled():Bool {
+  public static function areEntityRuntimeGuardsEnabled():Bool {
     return cast EntityApi._guardsEnabled__guards;
     return cast null;
   }
 
-  @:keep public static function attachEntityBinding(entity:Entity, binding:Dynamic):Void {
+  public static function attachEntityBinding(entity:Entity, binding:Dynamic):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.getIndex(entity, EntityRuntimeKey), FlightRuntime.UNDEFINED))) {
   FlightRuntime.setIndex(entity, EntityRuntimeKey, FlightRuntime.callValue(createEntityRuntime, cast ([] : Array<Dynamic>)));
 }
     FlightRuntime.setField(FlightRuntime.getIndex(entity, EntityRuntimeKey), 'binding', binding);
   }
 
-  @:keep public static function cloneEntity<Type>(source:Type):Type {
+  public static function cloneEntity<Type>(source:Type):Type {
     var copy:Dynamic = cast FlightRuntime.UNDEFINED;
     copy = (cast FlightRuntime.mergeObjects([source]) : Dynamic);
     FlightRuntime.setIndex(copy, EntityRuntimeKey, FlightRuntime.UNDEFINED);
@@ -35,7 +32,7 @@ class EntityApi {
     return cast null;
   }
 
-  @:keep public static function createEntity<Type>(?obj:Type):Type {
+  public static function createEntity<Type>(?obj:Type):Type {
     if (obj == null) obj = cast {};
     final entity:Type = cast obj;
     FlightRuntime.setIndex(entity, EntityRuntimeKey, FlightRuntime.UNDEFINED);
@@ -43,12 +40,12 @@ class EntityApi {
     return cast null;
   }
 
-  @:keep public static function createEntityRuntime():EntityRuntime {
+  public static function createEntityRuntime():EntityRuntime {
     return cast { binding: null };
     return cast null;
   }
 
-  @:keep public static function createGuardedEntity<Type>(entity:Type):Type {
+  public static function createGuardedEntity<Type>(entity:Type):Type {
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(EntityApi._guardsEnabled__guards), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['Proxy'] : Array<Dynamic>)), 'undefined')))) { return cast entity; }
     return cast FlightRuntime.createProxy(entity, { set: function(target:Dynamic, prop:Dynamic, value:Dynamic) {
   if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.strictEquals(prop, EntityRuntimeKey), function():Dynamic return cast EntityApi._guardsEnabled__guards))) {
@@ -60,7 +57,7 @@ class EntityApi {
     return cast null;
   }
 
-  @:keep public static function createGuardedEntityRuntime(runtime:EntityRuntime):EntityRuntime {
+  public static function createGuardedEntityRuntime(runtime:EntityRuntime):EntityRuntime {
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(EntityApi._guardsEnabled__guards), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['Proxy'] : Array<Dynamic>)), 'undefined')))) { return cast runtime; }
     return cast FlightRuntime.createProxy(runtime, { set: function(target:Dynamic, prop:Dynamic, value:Dynamic) {
   if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.strictEquals(prop, 'binding'), function():Dynamic return cast EntityApi._guardsEnabled__guards))) {
@@ -72,29 +69,29 @@ class EntityApi {
     return cast null;
   }
 
-  @:keep public static function enableEntityRuntimeGuards():Void {
+  public static function enableEntityRuntimeGuards():Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['Proxy'] : Array<Dynamic>)), 'undefined'))) { return; }
     (EntityApi._guardsEnabled__guards = cast (true : Dynamic));
   }
 
-  @:keep public static function getEntityBinding(source:Entity):Null<Dynamic> {
+  public static function getEntityBinding(source:Entity):Null<Dynamic> {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getEntityRuntime, cast ([source] : Array<Dynamic>));
     return cast FlightRuntime.coalesce(FlightRuntime.optionalField(runtime, 'binding'), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getEntityRuntime(source:Entity):EntityRuntime {
+  public static function getEntityRuntime(source:Entity):EntityRuntime {
     return cast FlightRuntime.getIndex(source, EntityRuntimeKey);
     return cast null;
   }
 
-  @:keep public static function hasEntityRuntime(source:Entity):Bool {
+  public static function hasEntityRuntime(source:Entity):Bool {
     return cast !FlightRuntime.strictEquals(FlightRuntime.getIndex(source, EntityRuntimeKey), FlightRuntime.UNDEFINED);
     return cast null;
   }
 
-  @:keep public static function stripEntityRuntime<Type>(source:Type):EntityWithoutRuntime<Type> {
+  public static function stripEntityRuntime<Type>(source:Type):EntityWithoutRuntime<Type> {
     var copy:Dynamic = cast FlightRuntime.UNDEFINED;
     copy = (cast FlightRuntime.mergeObjects([source]) : Dynamic);
     FlightRuntime.deleteIndex(copy, EntityRuntimeKey);

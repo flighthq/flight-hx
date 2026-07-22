@@ -17,9 +17,6 @@ typedef VirtualKeyboard__keyboard = Dynamic;
 
 typedef WebKeyboardGeometry__keyboard = { var height:Float; var width:Float; var x:Float; var y:Float; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Keyboard")
 class Keyboard {
   public static var _backend__keyboard:Null<SoftKeyboardBackend> = FlightRuntime.explicitNull();
@@ -28,7 +25,7 @@ class Keyboard {
 
   public static final _subscriptions__keyboard:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function attachSoftKeyboard(keyboard:SoftKeyboard):Void {
+  public static function attachSoftKeyboard(keyboard:SoftKeyboard):Void {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var wasVisible:Dynamic = cast FlightRuntime.UNDEFINED;
     var unsubscribe:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -68,22 +65,22 @@ class Keyboard {
     FlightRuntime.callProperty(Keyboard._subscriptions__keyboard, 'set', cast ([keyboard, unsubscribe] : Array<Dynamic>));
   }
 
-  @:keep public static function createSoftKeyboard():SoftKeyboard {
+  public static function createSoftKeyboard():SoftKeyboard {
     return cast { onShow: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onHide: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onResize: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onWillShow: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onWillHide: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onWillResize: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onDidShow: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onDidHide: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onDidResize: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createSoftKeyboardInfo():SoftKeyboardInfo {
+  public static function createSoftKeyboardInfo():SoftKeyboardInfo {
     return cast { visible: false, height: 0.0, x: 0.0, y: 0.0, width: 0.0 };
     return cast null;
   }
 
-  @:keep public static function createSoftKeyboardTransition():SoftKeyboardTransition {
+  public static function createSoftKeyboardTransition():SoftKeyboardTransition {
     return cast { durationSeconds: 0.0, height: 0.0 };
     return cast null;
   }
 
-  @:keep public static function createWebSoftKeyboardBackend():SoftKeyboardBackend {
+  public static function createWebSoftKeyboardBackend():SoftKeyboardBackend {
     return cast { getInfo: function(out:Dynamic) {
   var geo:Dynamic = cast FlightRuntime.UNDEFINED;
   geo = FlightRuntime.callValue(Keyboard.getWebKeyboardGeometry__keyboard, cast ([] : Array<Dynamic>));
@@ -134,7 +131,7 @@ class Keyboard {
     return cast null;
   }
 
-  @:keep public static function detachSoftKeyboard(keyboard:SoftKeyboard):Void {
+  public static function detachSoftKeyboard(keyboard:SoftKeyboard):Void {
     var unsubscribe:Dynamic = cast FlightRuntime.UNDEFINED;
     unsubscribe = FlightRuntime.callProperty(Keyboard._subscriptions__keyboard, 'get', cast ([keyboard] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(unsubscribe, FlightRuntime.UNDEFINED))) {
@@ -143,34 +140,34 @@ class Keyboard {
 }
   }
 
-  @:keep public static function disposeSoftKeyboard(keyboard:SoftKeyboard):Void {
+  public static function disposeSoftKeyboard(keyboard:SoftKeyboard):Void {
     FlightRuntime.callValue(detachSoftKeyboard, cast ([keyboard] : Array<Dynamic>));
   }
 
-  @:keep public static function getSoftKeyboardBackend():SoftKeyboardBackend {
+  public static function getSoftKeyboardBackend():SoftKeyboardBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Keyboard._backend__keyboard, null))) { (Keyboard._backend__keyboard = cast (FlightRuntime.callValue(createWebSoftKeyboardBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Keyboard._backend__keyboard;
     return cast null;
   }
 
-  @:keep public static function getSoftKeyboardHeight():Float {
+  public static function getSoftKeyboardHeight():Float {
     return cast FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime.callValue(getSoftKeyboardBackend, cast ([] : Array<Dynamic>)), 'getInfo', cast ([Keyboard._scratch__keyboard] : Array<Dynamic>)), 'height');
     return cast null;
   }
 
-  @:keep public static function getSoftKeyboardInfo(out:SoftKeyboardInfo):SoftKeyboardInfo {
+  public static function getSoftKeyboardInfo(out:SoftKeyboardInfo):SoftKeyboardInfo {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getSoftKeyboardBackend, cast ([] : Array<Dynamic>)), 'getInfo', cast ([out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getSoftKeyboardResizeMode():SoftKeyboardResizeMode {
+  public static function getSoftKeyboardResizeMode():SoftKeyboardResizeMode {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     backend = FlightRuntime.callValue(getSoftKeyboardBackend, cast ([] : Array<Dynamic>));
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(backend, 'getResizeMode', cast ([] : Array<Dynamic>)), function():Dynamic return cast Types.SoftKeyboardResizeNoneKind);
     return cast null;
   }
 
-  @:keep public static function getVirtualKeyboard__keyboard():Null<VirtualKeyboard__keyboard> {
+  public static function getVirtualKeyboard__keyboard():Null<VirtualKeyboard__keyboard> {
     var nav:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
     nav = (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)) : { @:optional var virtualKeyboard:VirtualKeyboard__keyboard; });
@@ -178,7 +175,7 @@ class Keyboard {
     return cast null;
   }
 
-  @:keep public static function getWebKeyboardGeometry__keyboard():WebKeyboardGeometry__keyboard {
+  public static function getWebKeyboardGeometry__keyboard():WebKeyboardGeometry__keyboard {
     var vk:Dynamic = cast FlightRuntime.UNDEFINED;
     var viewport:Dynamic = cast FlightRuntime.UNDEFINED;
     var shrink:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -201,41 +198,41 @@ class Keyboard {
     return cast null;
   }
 
-  @:keep public static function hideSoftKeyboard():Void {
+  public static function hideSoftKeyboard():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getSoftKeyboardBackend, cast ([] : Array<Dynamic>)), 'hide', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function isSoftKeyboardAccessoryBarVisible():Bool {
+  public static function isSoftKeyboardAccessoryBarVisible():Bool {
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(FlightRuntime.callValue(getSoftKeyboardBackend, cast ([] : Array<Dynamic>)), 'getAccessoryBarVisible', cast ([] : Array<Dynamic>)), function():Dynamic return cast false);
     return cast null;
   }
 
-  @:keep public static function isSoftKeyboardScrollAssistEnabled():Bool {
+  public static function isSoftKeyboardScrollAssistEnabled():Bool {
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(FlightRuntime.callValue(getSoftKeyboardBackend, cast ([] : Array<Dynamic>)), 'getScrollAssistEnabled', cast ([] : Array<Dynamic>)), function():Dynamic return cast false);
     return cast null;
   }
 
-  @:keep public static function setSoftKeyboardAccessoryBarVisible(visible:Bool):Void {
+  public static function setSoftKeyboardAccessoryBarVisible(visible:Bool):Void {
     FlightRuntime.callOptionalProperty(FlightRuntime.callValue(getSoftKeyboardBackend, cast ([] : Array<Dynamic>)), 'setAccessoryBarVisible', cast ([visible] : Array<Dynamic>));
   }
 
-  @:keep public static function setSoftKeyboardBackend(backend:Null<SoftKeyboardBackend>):Void {
+  public static function setSoftKeyboardBackend(backend:Null<SoftKeyboardBackend>):Void {
     (Keyboard._backend__keyboard = cast (backend : Dynamic));
   }
 
-  @:keep public static function setSoftKeyboardResizeMode(mode:SoftKeyboardResizeMode):Void {
+  public static function setSoftKeyboardResizeMode(mode:SoftKeyboardResizeMode):Void {
     FlightRuntime.callOptionalProperty(FlightRuntime.callValue(getSoftKeyboardBackend, cast ([] : Array<Dynamic>)), 'setResizeMode', cast ([mode] : Array<Dynamic>));
   }
 
-  @:keep public static function setSoftKeyboardScrollAssistEnabled(enabled:Bool):Void {
+  public static function setSoftKeyboardScrollAssistEnabled(enabled:Bool):Void {
     FlightRuntime.callOptionalProperty(FlightRuntime.callValue(getSoftKeyboardBackend, cast ([] : Array<Dynamic>)), 'setScrollAssistEnabled', cast ([enabled] : Array<Dynamic>));
   }
 
-  @:keep public static function setSoftKeyboardStyle(style:SoftKeyboardStyleKind):Void {
+  public static function setSoftKeyboardStyle(style:SoftKeyboardStyleKind):Void {
     FlightRuntime.callOptionalProperty(FlightRuntime.callValue(getSoftKeyboardBackend, cast ([] : Array<Dynamic>)), 'setStyle', cast ([style] : Array<Dynamic>));
   }
 
-  @:keep public static function showSoftKeyboard():Void {
+  public static function showSoftKeyboard():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getSoftKeyboardBackend, cast ([] : Array<Dynamic>)), 'show', cast ([] : Array<Dynamic>));
   }
 }

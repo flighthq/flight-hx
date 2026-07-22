@@ -75,9 +75,6 @@ import flight.Types.Vector3Like;
 import flight.Types.Viewport;
 import flight.Types.ViewportAlign;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.NodeApi")
 class NodeApi {
   public static final _emptyChildren__traversal:Array<Dynamic> = cast ([] : Array<Dynamic>);
@@ -88,12 +85,12 @@ class NodeApi {
 
   public static var _worldTransformRevisionCounter__revision:Dynamic = 0.0;
 
-  @:keep public static function addNodeChild<Traits>(target:Node<Traits>, child:Node<Traits>):NodeOf<Traits> {
+  public static function addNodeChild<Traits>(target:Node<Traits>, child:Node<Traits>):NodeOf<Traits> {
     return cast FlightRuntime.callValue(addNodeChildAt, cast ([target, child, FlightRuntime.callValue(getNodeChildCount, cast ([target] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function addNodeChildAt<Traits>(target:Node<Traits>, child:Node<Traits>, index:Float):NodeOf<Traits> {
+  public static function addNodeChildAt<Traits>(target:Node<Traits>, child:Node<Traits>, index:Float):NodeOf<Traits> {
     var targetRuntime:Dynamic = cast FlightRuntime.UNDEFINED;
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     var childRuntime:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -141,7 +138,7 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function addNodeChildren<Traits>(target:Node<Traits>, ...children:Node<Traits>):Void {
+  public static function addNodeChildren<Traits>(target:Node<Traits>, ...children:Node<Traits>):Void {
     {
       var i:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(i, FlightRuntime.field(children, 'length'), '<'))) {
@@ -151,7 +148,7 @@ class NodeApi {
     }
   }
 
-  @:keep public static function computeNodeBoundsRectangle<Traits>(out:RectangleLike, source:Spatial2DNode<Traits>, targetCoordinateSpace:Null<Spatial2DNode<Traits>>):Void {
+  public static function computeNodeBoundsRectangle<Traits>(out:RectangleLike, source:Spatial2DNode<Traits>, targetCoordinateSpace:Null<Spatial2DNode<Traits>>):Void {
     var bounds:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(targetCoordinateSpace))) { (targetCoordinateSpace = cast (source : Dynamic)); }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callValue(getNodeParent, cast ([targetCoordinateSpace] : Array<Dynamic>)), null))) {
@@ -174,7 +171,7 @@ class NodeApi {
 }
   }
 
-  @:keep public static function computeNodeWorldTransformRevision<Traits>(runtime:NodeRuntime<Traits>, ?parentRuntime:NodeRuntime<Traits>):Void {
+  public static function computeNodeWorldTransformRevision<Traits>(runtime:NodeRuntime<Traits>, ?parentRuntime:NodeRuntime<Traits>):Void {
     FlightRuntime.setField(runtime, 'worldTransformUsingLocalTransformId', FlightRuntime.field(runtime, 'localTransformId'));
     FlightRuntime.setField(runtime, 'worldTransformUsingParentTransformId', FlightRuntime.select(parentRuntime, function():Dynamic return cast FlightRuntime.field(parentRuntime, 'worldTransformId'), function():Dynamic return cast 0.0));
     (NodeApi._worldTransformRevisionCounter__revision = cast (FlightRuntime.unsignedShiftRight(Std.int((NodeApi._worldTransformRevisionCounter__revision + 1.0)), Std.int(0.0)) : Dynamic));
@@ -182,31 +179,31 @@ class NodeApi {
     FlightRuntime.setField(runtime, 'worldTransformId', NodeApi._worldTransformRevisionCounter__revision);
   }
 
-  @:keep public static function computeViewportAlignX(scaledContentWidth:Float, viewWidth:Float, align:ViewportAlign):Float {
+  public static function computeViewportAlignX(scaledContentWidth:Float, viewWidth:Float, align:ViewportAlign):Float {
     if (FlightRuntime.truthy(FlightRuntime.includes(align, 'left'))) { return cast 0.0; }
     if (FlightRuntime.truthy(FlightRuntime.includes(align, 'right'))) { return cast (viewWidth - scaledContentWidth); }
     return cast ((viewWidth - scaledContentWidth) / 2.0);
     return cast null;
   }
 
-  @:keep public static function computeViewportAlignY(scaledContentHeight:Float, viewHeight:Float, align:ViewportAlign):Float {
+  public static function computeViewportAlignY(scaledContentHeight:Float, viewHeight:Float, align:ViewportAlign):Float {
     if (FlightRuntime.truthy(FlightRuntime.includes(align, 'top'))) { return cast 0.0; }
     if (FlightRuntime.truthy(FlightRuntime.includes(align, 'bottom'))) { return cast (viewHeight - scaledContentHeight); }
     return cast ((viewHeight - scaledContentHeight) / 2.0);
     return cast null;
   }
 
-  @:keep public static function computeViewportFillScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
+  public static function computeViewportFillScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
     return cast FlightRuntime.callProperty(HxMath, 'max', cast ([(viewWidth / contentWidth), (viewHeight / contentHeight)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function computeViewportFitScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
+  public static function computeViewportFitScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
     return cast FlightRuntime.callProperty(HxMath, 'min', cast ([(viewWidth / contentWidth), (viewHeight / contentHeight)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function computeViewportRenderTransform<Traits>(out:MatrixLike, scene:Viewport<Traits>, viewWidth:Float, viewHeight:Float):Void {
+  public static function computeViewportRenderTransform<Traits>(out:MatrixLike, scene:Viewport<Traits>, viewWidth:Float, viewHeight:Float):Void {
     var contentWidth:Dynamic = cast FlightRuntime.UNDEFINED;
     var contentHeight:Dynamic = cast FlightRuntime.UNDEFINED;
     var sx:Float = cast FlightRuntime.UNDEFINED;
@@ -251,7 +248,7 @@ class NodeApi {
     FlightRuntime.setField(out, 'ty', FlightRuntime.callValue(computeViewportAlignY, cast ([(contentHeight * sy), viewHeight, FlightRuntime.field(scene, 'align')] : Array<Dynamic>)));
   }
 
-  @:keep public static function containsNodeChild<Traits>(source:Node<Traits>, child:Node<Traits>):Bool {
+  public static function containsNodeChild<Traits>(source:Node<Traits>, child:Node<Traits>):Bool {
     var current:Null<Node<Traits>> = cast FlightRuntime.UNDEFINED;
     current = child;
     while (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(current, source), function():Dynamic return cast !FlightRuntime.strictEquals(current, null)))) {
@@ -261,15 +258,15 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function convertNodeVector2GlobalToLocal<Traits>(out:Vector2Like, source:Transform2DNode<Traits>, vector:Vector2Like):Void {
+  public static function convertNodeVector2GlobalToLocal<Traits>(out:Vector2Like, source:Transform2DNode<Traits>, vector:Vector2Like):Void {
     FlightRuntime.callValue(inverseMatrixTransformPointXY, cast ([out, FlightRuntime.callValue(getNodeWorldMatrix, cast ([source] : Array<Dynamic>)), FlightRuntime.field(vector, 'x'), FlightRuntime.field(vector, 'y')] : Array<Dynamic>));
   }
 
-  @:keep public static function convertNodeVector2LocalToGlobal<Traits>(out:Vector2Like, source:Transform2DNode<Traits>, vector:Vector2Like):Void {
+  public static function convertNodeVector2LocalToGlobal<Traits>(out:Vector2Like, source:Transform2DNode<Traits>, vector:Vector2Like):Void {
     FlightRuntime.callValue(matrixTransformPointXY, cast ([out, FlightRuntime.callValue(getNodeWorldMatrix, cast ([source] : Array<Dynamic>)), FlightRuntime.field(vector, 'x'), FlightRuntime.field(vector, 'y')] : Array<Dynamic>));
   }
 
-  @:keep public static function convertNodeVector3GlobalToLocal<Traits>(out:Vector3Like, source:Transform3DNode<Traits>, point:Vector3Like):Void {
+  public static function convertNodeVector3GlobalToLocal<Traits>(out:Vector3Like, source:Transform3DNode<Traits>, point:Vector3Like):Void {
     var inv:Dynamic = cast FlightRuntime.UNDEFINED;
     inv = FlightRuntime.callValue(acquireMatrix4, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(inverseMatrix4, cast ([inv, FlightRuntime.callValue(getNodeWorldMatrix4, cast ([source] : Array<Dynamic>))] : Array<Dynamic>));
@@ -277,11 +274,11 @@ class NodeApi {
     FlightRuntime.callValue(releaseMatrix4, cast ([inv] : Array<Dynamic>));
   }
 
-  @:keep public static function convertNodeVector3LocalToGlobal<Traits>(out:Vector3Like, source:Transform3DNode<Traits>, point:Vector3Like):Void {
+  public static function convertNodeVector3LocalToGlobal<Traits>(out:Vector3Like, source:Transform3DNode<Traits>, point:Vector3Like):Void {
     FlightRuntime.callValue(matrix4TransformPoint, cast ([out, FlightRuntime.callValue(getNodeWorldMatrix4, cast ([source] : Array<Dynamic>)), point] : Array<Dynamic>));
   }
 
-  @:keep public static function createNode<Traits, Data, Runtime>(nodeKind:Kind, ?obj:PartialNode<Node<Traits>>, ?createData:NodeDataFactory<Data>, ?createNodeRuntimeFactory:NodeRuntimeFactory<Runtime>):Node<Traits> {
+  public static function createNode<Traits, Data, Runtime>(nodeKind:Kind, ?obj:PartialNode<Node<Traits>>, ?createData:NodeDataFactory<Data>, ?createNodeRuntimeFactory:NodeRuntimeFactory<Runtime>):Node<Traits> {
     var runtimeFactory:Dynamic = cast FlightRuntime.UNDEFINED;
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     runtimeFactory = FlightRuntime.coalesce(createNodeRuntimeFactory, function():Dynamic return cast (cast (cast createNodeRuntime : Dynamic) : NodeRuntimeFactory<Runtime>));
@@ -291,7 +288,7 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function createNodeRuntime<Traits>(?methods:Dynamic):NodeRuntime<Traits> {
+  public static function createNodeRuntime<Traits>(?methods:Dynamic):NodeRuntime<Traits> {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = (cast FlightRuntime.callValue(createEntityRuntime, cast ([] : Array<Dynamic>)) : NodeRuntime<Traits>);
     FlightRuntime.setField(out, 'appearanceId', 0.0);
@@ -320,20 +317,20 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function createNodeSignals():NodeSignals {
+  public static function createNodeSignals():NodeSignals {
     return cast { onChildAdded: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onChildRemoved: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onChildrenChanged: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onChildrenOrderChanged: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onParentChanged: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createViewport<Traits>(?obj:Dynamic):Viewport<Traits> {
+  public static function createViewport<Traits>(?obj:Dynamic):Viewport<Traits> {
     return cast (cast FlightRuntime.callValue(createEntity, cast ([{ align: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'align'), function():Dynamic return cast 'topleft'), root: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'root'), function():Dynamic return cast null), scaleMode: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'scaleMode'), function():Dynamic return cast 'noscale') }] : Array<Dynamic>)) : Viewport<Traits>);
     return cast null;
   }
 
-  @:keep public static function defaultComputeLocalBoundsRectangle(_out:Rectangle, _source:BoundsNodeAny):Void {
+  public static function defaultComputeLocalBoundsRectangle(_out:Rectangle, _source:BoundsNodeAny):Void {
   }
 
-  @:keep public static function defaultNodeRuntimeCanAddChild<Traits>(_target:Node<Traits>, _child:Node<Traits>):Bool {
+  public static function defaultNodeRuntimeCanAddChild<Traits>(_target:Node<Traits>, _child:Node<Traits>):Bool {
     return cast true;
     return cast null;
   }
@@ -342,7 +339,7 @@ class NodeApi {
 
   public static final DEG_TO_RAD__transform2d:Dynamic = (HxMath.PI / 180.0);
 
-  @:keep public static function disposeNode<Traits>(target:Node<Traits>):Void {
+  public static function disposeNode<Traits>(target:Node<Traits>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var parent:Dynamic = cast FlightRuntime.UNDEFINED;
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -381,14 +378,14 @@ class NodeApi {
     FlightRuntime.setField(runtime, 'interactionState', null);
   }
 
-  @:keep public static function enableNodeSignals<Traits>(source:Node<Traits>):NodeSignals {
+  public static function enableNodeSignals<Traits>(source:Node<Traits>):NodeSignals {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getEntityRuntime, cast ([source] : Array<Dynamic>)) : NodeRuntime<Traits>);
     return cast FlightRuntime.setField(runtime, 'nodeSignals', (FlightRuntime.field(runtime, 'nodeSignals') ?? FlightRuntime.callValue(createNodeSignals, cast ([] : Array<Dynamic>))));
     return cast null;
   }
 
-  @:keep public static function ensureNodeLocalBoundsRectangle<Traits>(target:BoundsNode<Traits>):Void {
+  public static function ensureNodeLocalBoundsRectangle<Traits>(target:BoundsNode<Traits>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic);
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'localBoundsUsingLocalBoundsId'), FlightRuntime.field(runtime, 'localBoundsId')))) {
@@ -396,7 +393,7 @@ class NodeApi {
 }
   }
 
-  @:keep public static function ensureNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>):Void {
+  public static function ensureNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic);
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'localTransformUsingLocalTransformId'), FlightRuntime.field(runtime, 'localTransformId')))) {
@@ -404,7 +401,7 @@ class NodeApi {
 }
   }
 
-  @:keep public static function ensureNodeLocalMatrix4<Traits>(target:Transform3DNode<Traits>):Void {
+  public static function ensureNodeLocalMatrix4<Traits>(target:Transform3DNode<Traits>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic);
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'localMatrix4'), null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'localTransformUsingLocalTransformId'), FlightRuntime.field(runtime, 'localTransformId'))))) {
@@ -412,7 +409,7 @@ class NodeApi {
 }
   }
 
-  @:keep public static function ensureNodeParentBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Void {
+  public static function ensureNodeParentBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic);
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'boundsUsingLocalBoundsId'), FlightRuntime.field(runtime, 'localBoundsId')), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'boundsUsingLocalTransformId'), FlightRuntime.field(runtime, 'localTransformId'))))) {
@@ -420,7 +417,7 @@ class NodeApi {
 }
   }
 
-  @:keep public static function ensureNodeWorldBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Void {
+  public static function ensureNodeWorldBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var localBoundsInvalid:Dynamic = cast FlightRuntime.UNDEFINED;
     var hasChildren:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -439,7 +436,7 @@ class NodeApi {
 }
   }
 
-  @:keep public static function ensureNodeWorldMatrix<Traits>(target:Transform2DNode<Traits>):Void {
+  public static function ensureNodeWorldMatrix<Traits>(target:Transform2DNode<Traits>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var parent:Dynamic = cast FlightRuntime.UNDEFINED;
     var parentRuntime:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
@@ -457,7 +454,7 @@ class NodeApi {
 }
   }
 
-  @:keep public static function ensureNodeWorldMatrix4<Traits>(target:Transform3DNode<Traits>):Void {
+  public static function ensureNodeWorldMatrix4<Traits>(target:Transform3DNode<Traits>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var parent:Dynamic = cast FlightRuntime.UNDEFINED;
     var parentRuntime:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
@@ -475,7 +472,7 @@ class NodeApi {
 }
   }
 
-  @:keep public static function findNode<Traits>(source:Node<Traits>, predicate:Dynamic):Null<NodeOf<Traits>> {
+  public static function findNode<Traits>(source:Node<Traits>, predicate:Dynamic):Null<NodeOf<Traits>> {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     children = FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(children, null))) { return cast null; }
@@ -493,12 +490,12 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function findNodeByName<Traits>(source:Node<Traits>, name:String):Null<NodeOf<Traits>> {
+  public static function findNodeByName<Traits>(source:Node<Traits>, name:String):Null<NodeOf<Traits>> {
     return cast FlightRuntime.callValue(findNode, cast ([source, function(node:Dynamic) return FlightRuntime.strictEquals(FlightRuntime.field(node, 'name'), name)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function forEachNodeAncestor<Traits>(source:Node<Traits>, callback:Dynamic):Void {
+  public static function forEachNodeAncestor<Traits>(source:Node<Traits>, callback:Dynamic):Void {
     var current:Dynamic = cast FlightRuntime.UNDEFINED;
     current = FlightRuntime.callValue(getNodeParent, cast ([(cast source : Node<Traits>)] : Array<Dynamic>));
     while (FlightRuntime.truthy(!FlightRuntime.strictEquals(current, null))) {
@@ -507,7 +504,7 @@ class NodeApi {
 }
   }
 
-  @:keep public static function forEachNodeChild<Traits>(source:Node<Traits>, callback:Dynamic):Void {
+  public static function forEachNodeChild<Traits>(source:Node<Traits>, callback:Dynamic):Void {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     children = FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(children, null))) { return; }
@@ -520,7 +517,7 @@ class NodeApi {
     }
   }
 
-  @:keep public static function forEachNodeDescendant<Traits>(source:Node<Traits>, callback:Dynamic):Void {
+  public static function forEachNodeDescendant<Traits>(source:Node<Traits>, callback:Dynamic):Void {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     children = FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(children, null))) { return; }
@@ -534,7 +531,7 @@ class NodeApi {
     }
   }
 
-  @:keep public static function getNodeAncestors<Traits>(source:Node<Traits>):Array<NodeOf<Traits>> {
+  public static function getNodeAncestors<Traits>(source:Node<Traits>):Array<NodeOf<Traits>> {
     var result:Array<NodeOf<Traits>> = cast FlightRuntime.UNDEFINED;
     var current:Dynamic = cast FlightRuntime.UNDEFINED;
     result = cast ([] : Array<Dynamic>);
@@ -547,12 +544,12 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function getNodeAppearanceRevision<Traits>(source:Node<Traits>):Float {
+  public static function getNodeAppearanceRevision<Traits>(source:Node<Traits>):Float {
     return cast FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'appearanceId');
     return cast null;
   }
 
-  @:keep public static function getNodeChildAt<Traits>(source:Node<Traits>, index:Float):Null<NodeOf<Traits>> {
+  public static function getNodeChildAt<Traits>(source:Node<Traits>, index:Float):Null<NodeOf<Traits>> {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     children = FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(children, null), function():Dynamic return cast FlightRuntime.compare(index, 0.0, '>=')), function():Dynamic return cast FlightRuntime.compare(index, FlightRuntime.field(children, 'length'), '<')))) {
@@ -562,7 +559,7 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function getNodeChildByName<Traits>(source:Node<Traits>, name:String):Null<NodeOf<Traits>> {
+  public static function getNodeChildByName<Traits>(source:Node<Traits>, name:String):Null<NodeOf<Traits>> {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     children = FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(children, null))) {
@@ -578,14 +575,14 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function getNodeChildCount<Traits>(source:Node<Traits>):Float {
+  public static function getNodeChildCount<Traits>(source:Node<Traits>):Float {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     children = FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(children, null), function():Dynamic return cast FlightRuntime.field(children, 'length'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  @:keep public static function getNodeChildIndex<Traits>(source:Node<Traits>, child:Node<Traits>):Float {
+  public static function getNodeChildIndex<Traits>(source:Node<Traits>, child:Node<Traits>):Float {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     children = FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(children, null))) {
@@ -601,7 +598,7 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function getNodeChildren<Traits>(source:Node<Traits>):Array<NodeOf<Traits>> {
+  public static function getNodeChildren<Traits>(source:Node<Traits>):Array<NodeOf<Traits>> {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     children = FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(children, null))) { return cast (cast NodeApi._emptyChildren__traversal : Array<NodeOf<Traits>>); }
@@ -609,7 +606,7 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function getNodeCommonAncestor<Traits>(a:Node<Traits>, b:Node<Traits>):Null<NodeOf<Traits>> {
+  public static function getNodeCommonAncestor<Traits>(a:Node<Traits>, b:Node<Traits>):Null<NodeOf<Traits>> {
     var aAncestors:Dynamic = cast FlightRuntime.UNDEFINED;
     var cur:Dynamic = cast FlightRuntime.UNDEFINED;
     var bCur:Null<Node<Traits>> = cast FlightRuntime.UNDEFINED;
@@ -629,7 +626,7 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function getNodeDepth<Traits>(source:Node<Traits>):Float {
+  public static function getNodeDepth<Traits>(source:Node<Traits>):Float {
     var depth:Dynamic = cast FlightRuntime.UNDEFINED;
     var current:Dynamic = cast FlightRuntime.UNDEFINED;
     depth = 0.0;
@@ -642,46 +639,46 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function getNodeHeight<Traits>(source:Spatial2DNode<Traits>):Float {
+  public static function getNodeHeight<Traits>(source:Spatial2DNode<Traits>):Float {
     FlightRuntime.callValue(computeNodeBoundsRectangle, cast ([NodeApi._tempBoundsRectangle__boundsRectangle, source, (cast (cast FlightRuntime.callValue(getNodeParent, cast ([source] : Array<Dynamic>)) : Dynamic) : Null<Spatial2DNode<Traits>>)] : Array<Dynamic>));
     return cast FlightRuntime.field(NodeApi._tempBoundsRectangle__boundsRectangle, 'height');
     return cast null;
   }
 
-  @:keep public static function getNodeLocalBoundsRectangle<Traits>(target:BoundsNode<Traits>):Rectangle {
+  public static function getNodeLocalBoundsRectangle<Traits>(target:BoundsNode<Traits>):Rectangle {
     FlightRuntime.callValue(ensureNodeLocalBoundsRectangle, cast ([target] : Array<Dynamic>));
     return cast FlightRuntime.field((cast FlightRuntime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : HasBoundsRectangleRuntime), 'localBoundsRectangle');
     return cast null;
   }
 
-  @:keep public static function getNodeLocalBoundsRevision<Traits>(source:Node<Traits>):Float {
+  public static function getNodeLocalBoundsRevision<Traits>(source:Node<Traits>):Float {
     return cast FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'localBoundsId');
     return cast null;
   }
 
-  @:keep public static function getNodeLocalContentRevision<Traits>(source:Node<Traits>):Float {
+  public static function getNodeLocalContentRevision<Traits>(source:Node<Traits>):Float {
     return cast FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'localContentId');
     return cast null;
   }
 
-  @:keep public static function getNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>):Matrix {
+  public static function getNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>):Matrix {
     FlightRuntime.callValue(ensureNodeLocalMatrix, cast ([target] : Array<Dynamic>));
     return cast FlightRuntime.field((cast FlightRuntime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic), 'localMatrix');
     return cast null;
   }
 
-  @:keep public static function getNodeLocalMatrix4<Traits>(target:Transform3DNode<Traits>):Matrix4Like {
+  public static function getNodeLocalMatrix4<Traits>(target:Transform3DNode<Traits>):Matrix4Like {
     FlightRuntime.callValue(ensureNodeLocalMatrix4, cast ([target] : Array<Dynamic>));
     return cast FlightRuntime.field((cast FlightRuntime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic), 'localMatrix4');
     return cast null;
   }
 
-  @:keep public static function getNodeLocalTransformRevision<Traits>(source:Node<Traits>):Float {
+  public static function getNodeLocalTransformRevision<Traits>(source:Node<Traits>):Float {
     return cast FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'localTransformId');
     return cast null;
   }
 
-  @:keep public static function getNodeNextSibling<Traits>(source:Node<Traits>):Null<NodeOf<Traits>> {
+  public static function getNodeNextSibling<Traits>(source:Node<Traits>):Null<NodeOf<Traits>> {
     var parent:Dynamic = cast FlightRuntime.UNDEFINED;
     var siblings:Dynamic = cast FlightRuntime.UNDEFINED;
     var idx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -695,18 +692,18 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function getNodeParent<Traits>(source:Node<Traits>):Null<NodeOf<Traits>> {
+  public static function getNodeParent<Traits>(source:Node<Traits>):Null<NodeOf<Traits>> {
     return cast (cast FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'parent') : NodeOf<Traits>);
     return cast null;
   }
 
-  @:keep public static function getNodeParentBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Rectangle {
+  public static function getNodeParentBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Rectangle {
     FlightRuntime.callValue(ensureNodeParentBoundsRectangle, cast ([target] : Array<Dynamic>));
     return cast FlightRuntime.field((cast FlightRuntime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : HasBoundsRectangleRuntime), 'boundsRectangle');
     return cast null;
   }
 
-  @:keep public static function getNodePreviousSibling<Traits>(source:Node<Traits>):Null<NodeOf<Traits>> {
+  public static function getNodePreviousSibling<Traits>(source:Node<Traits>):Null<NodeOf<Traits>> {
     var parent:Dynamic = cast FlightRuntime.UNDEFINED;
     var siblings:Dynamic = cast FlightRuntime.UNDEFINED;
     var idx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -720,7 +717,7 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function getNodeRoot<Traits>(source:Node<Traits>):NodeOf<Traits> {
+  public static function getNodeRoot<Traits>(source:Node<Traits>):NodeOf<Traits> {
     var current:NodeOf<Traits> = cast FlightRuntime.UNDEFINED;
     var parent:Dynamic = cast FlightRuntime.UNDEFINED;
     current = (cast source : NodeOf<Traits>);
@@ -733,17 +730,17 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function getNodeRuntime<Traits>(source:Node<Traits>):NodeRuntime<Traits> {
+  public static function getNodeRuntime<Traits>(source:Node<Traits>):NodeRuntime<Traits> {
     return cast (cast FlightRuntime.callValue(getEntityRuntime, cast ([source] : Array<Dynamic>)) : NodeRuntime<Traits>);
     return cast null;
   }
 
-  @:keep public static function getNodeSignals<Traits>(source:Node<Traits>):Null<NodeSignals> {
+  public static function getNodeSignals<Traits>(source:Node<Traits>):Null<NodeSignals> {
     return cast FlightRuntime.field((cast FlightRuntime.callValue(getEntityRuntime, cast ([source] : Array<Dynamic>)) : NodeRuntime<Traits>), 'nodeSignals');
     return cast null;
   }
 
-  @:keep public static function getNodeTransform2D<Traits>(out:Transform2DLike, source:Transform2DNode<Traits>):Void {
+  public static function getNodeTransform2D<Traits>(out:Transform2DLike, source:Transform2DNode<Traits>):Void {
     FlightRuntime.setField(out, 'pivotX', FlightRuntime.field(source, 'pivotX'));
     FlightRuntime.setField(out, 'pivotY', FlightRuntime.field(source, 'pivotY'));
     FlightRuntime.setField(out, 'rotation', FlightRuntime.field(source, 'rotation'));
@@ -755,70 +752,70 @@ class NodeApi {
     FlightRuntime.setField(out, 'y', FlightRuntime.field(source, 'y'));
   }
 
-  @:keep public static function getNodeTransform3D<Traits>(out:Transform3DLike, source:Transform3DNode<Traits>):Void {
+  public static function getNodeTransform3D<Traits>(out:Transform3DLike, source:Transform3DNode<Traits>):Void {
     FlightRuntime.callValue(copyVector3, cast ([FlightRuntime.field(out, 'position'), FlightRuntime.field(source, 'position')] : Array<Dynamic>));
     FlightRuntime.callValue(copyQuaternion, cast ([FlightRuntime.field(out, 'rotation'), FlightRuntime.field(source, 'rotation')] : Array<Dynamic>));
     FlightRuntime.callValue(copyVector3, cast ([FlightRuntime.field(out, 'scale'), FlightRuntime.field(source, 'scale')] : Array<Dynamic>));
   }
 
-  @:keep public static function getNodeWidth<Traits>(source:Spatial2DNode<Traits>):Float {
+  public static function getNodeWidth<Traits>(source:Spatial2DNode<Traits>):Float {
     FlightRuntime.callValue(computeNodeBoundsRectangle, cast ([NodeApi._tempBoundsRectangle__boundsRectangle, source, (cast (cast FlightRuntime.callValue(getNodeParent, cast ([source] : Array<Dynamic>)) : Dynamic) : Null<Spatial2DNode<Traits>>)] : Array<Dynamic>));
     return cast FlightRuntime.field(NodeApi._tempBoundsRectangle__boundsRectangle, 'width');
     return cast null;
   }
 
-  @:keep public static function getNodeWorldBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Rectangle {
+  public static function getNodeWorldBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Rectangle {
     FlightRuntime.callValue(ensureNodeWorldBoundsRectangle, cast ([target] : Array<Dynamic>));
     return cast FlightRuntime.field((cast FlightRuntime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : HasBoundsRectangleRuntime), 'worldBoundsRectangle');
     return cast null;
   }
 
-  @:keep public static function getNodeWorldMatrix<Traits>(target:Transform2DNode<Traits>):Matrix {
+  public static function getNodeWorldMatrix<Traits>(target:Transform2DNode<Traits>):Matrix {
     FlightRuntime.callValue(ensureNodeWorldMatrix, cast ([target] : Array<Dynamic>));
     return cast FlightRuntime.field((cast FlightRuntime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic), 'worldMatrix');
     return cast null;
   }
 
-  @:keep public static function getNodeWorldMatrix4<Traits>(target:Transform3DNode<Traits>):Matrix4Like {
+  public static function getNodeWorldMatrix4<Traits>(target:Transform3DNode<Traits>):Matrix4Like {
     FlightRuntime.callValue(ensureNodeWorldMatrix4, cast ([target] : Array<Dynamic>));
     return cast FlightRuntime.field((cast FlightRuntime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic), 'worldMatrix4');
     return cast null;
   }
 
-  @:keep public static function getNodeWorldTransformRevision<Traits>(source:Node<Traits>):Float {
+  public static function getNodeWorldTransformRevision<Traits>(source:Node<Traits>):Float {
     return cast FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'worldTransformId');
     return cast null;
   }
 
-  @:keep public static function initAppearanceTrait(target:HasAppearance, ?obj:Dynamic):Void {
+  public static function initAppearanceTrait(target:HasAppearance, ?obj:Dynamic):Void {
     FlightRuntime.setField(target, 'alpha', FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'alpha'), function():Dynamic return cast 1.0));
     FlightRuntime.setField(target, 'visible', FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'visible'), function():Dynamic return cast true));
   }
 
-  @:keep public static function initBlendModeTrait(target:HasBlendMode, ?obj:Dynamic):Void {
+  public static function initBlendModeTrait(target:HasBlendMode, ?obj:Dynamic):Void {
     FlightRuntime.setField(target, 'blendMode', FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'blendMode'), function():Dynamic return cast null));
   }
 
-  @:keep public static function initBoundsRectangleRuntimeTrait(target:HasBoundsRectangleRuntime, ?methods:Dynamic):Void {
+  public static function initBoundsRectangleRuntimeTrait(target:HasBoundsRectangleRuntime, ?methods:Dynamic):Void {
     FlightRuntime.setField(target, 'boundsRectangle', null);
     FlightRuntime.setField(target, 'localBoundsRectangle', null);
     FlightRuntime.setField(target, 'worldBoundsRectangle', null);
     FlightRuntime.setField(target, 'computeLocalBoundsRectangle', FlightRuntime.coalesce(FlightRuntime.optionalField(methods, 'computeLocalBoundsRectangle'), function():Dynamic return cast defaultComputeLocalBoundsRectangle));
   }
 
-  @:keep public static function initBoundsRectangleTrait(_target:HasBoundsRectangle, ?_obj:Dynamic):Void {
+  public static function initBoundsRectangleTrait(_target:HasBoundsRectangle, ?_obj:Dynamic):Void {
   }
 
-  @:keep public static function initClipTrait(target:HasClip, ?obj:Dynamic):Void {
+  public static function initClipTrait(target:HasClip, ?obj:Dynamic):Void {
     FlightRuntime.setField(target, 'clip', FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'clip'), function():Dynamic return cast null));
   }
 
-  @:keep public static function initMaterialTrait(target:HasMaterial, ?obj:Dynamic):Void {
+  public static function initMaterialTrait(target:HasMaterial, ?obj:Dynamic):Void {
     FlightRuntime.setField(target, 'material', FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'material'), function():Dynamic return cast null));
     FlightRuntime.setField(target, 'materialData', FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'materialData'), function():Dynamic return cast null));
   }
 
-  @:keep public static function initTransform2DRuntimeTrait(target:HasTransform2DRuntime, ?_methods:Dynamic):Void {
+  public static function initTransform2DRuntimeTrait(target:HasTransform2DRuntime, ?_methods:Dynamic):Void {
     FlightRuntime.setField(target, 'localMatrix', null);
     FlightRuntime.setField(target, 'rotationAngle', 0.0);
     FlightRuntime.setField(target, 'rotationCosine', 1.0);
@@ -826,7 +823,7 @@ class NodeApi {
     FlightRuntime.setField(target, 'worldMatrix', null);
   }
 
-  @:keep public static function initTransform2DTrait(target:HasTransform2D, ?obj:Dynamic):Void {
+  public static function initTransform2DTrait(target:HasTransform2D, ?obj:Dynamic):Void {
     FlightRuntime.setField(target, 'pivotX', FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'pivotX'), function():Dynamic return cast 0.0));
     FlightRuntime.setField(target, 'pivotY', FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'pivotY'), function():Dynamic return cast 0.0));
     FlightRuntime.setField(target, 'rotation', FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'rotation'), function():Dynamic return cast 0.0));
@@ -838,24 +835,24 @@ class NodeApi {
     FlightRuntime.setField(target, 'y', FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'y'), function():Dynamic return cast 0.0));
   }
 
-  @:keep public static function initTransform3DRuntimeTrait(target:HasTransform3DRuntime):Void {
+  public static function initTransform3DRuntimeTrait(target:HasTransform3DRuntime):Void {
     FlightRuntime.setField(target, 'localMatrix4', null);
     FlightRuntime.setField(target, 'localMatrix4Detached', false);
     FlightRuntime.setField(target, 'worldMatrix4', null);
   }
 
-  @:keep public static function initTransform3DTrait(target:HasTransform3D, ?obj:Dynamic):Void {
+  public static function initTransform3DTrait(target:HasTransform3D, ?obj:Dynamic):Void {
     FlightRuntime.setField(target, 'rotation', FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'rotation'), function():Dynamic return cast FlightRuntime.callValue(createQuaternion, cast ([] : Array<Dynamic>))));
     FlightRuntime.setField(target, 'scale', FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'scale'), function():Dynamic return cast FlightRuntime.callValue(createVector3, cast ([1.0, 1.0, 1.0] : Array<Dynamic>))));
     FlightRuntime.setField(target, 'position', FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'position'), function():Dynamic return cast FlightRuntime.callValue(createVector3, cast ([] : Array<Dynamic>))));
   }
 
-  @:keep public static function invalidateContent<Traits>(target:Node<Traits>):Void {
+  public static function invalidateContent<Traits>(target:Node<Traits>):Void {
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([target] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateNodeLocalBounds, cast ([target] : Array<Dynamic>));
   }
 
-  @:keep public static function invalidateNode<Traits>(target:Node<Traits>):Void {
+  public static function invalidateNode<Traits>(target:Node<Traits>):Void {
     FlightRuntime.callValue(invalidateNodeAppearance, cast ([target] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateNodeLocalBounds, cast ([target] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([target] : Array<Dynamic>));
@@ -864,49 +861,49 @@ class NodeApi {
     FlightRuntime.callValue(invalidateNodeWorldBounds, cast ([target] : Array<Dynamic>));
   }
 
-  @:keep public static function invalidateNodeAppearance<Traits>(target:Node<Traits>):Void {
+  public static function invalidateNodeAppearance<Traits>(target:Node<Traits>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)) : NodeRuntime<Traits>);
     FlightRuntime.setField(runtime, 'appearanceId', FlightRuntime.unsignedShiftRight(Std.int((FlightRuntime.field(runtime, 'appearanceId') + 1.0)), Std.int(0.0)));
   }
 
-  @:keep public static function invalidateNodeLocalBounds<Traits>(target:Node<Traits>):Void {
+  public static function invalidateNodeLocalBounds<Traits>(target:Node<Traits>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)) : NodeRuntime<Traits>);
     FlightRuntime.setField(runtime, 'localBoundsId', FlightRuntime.unsignedShiftRight(Std.int((FlightRuntime.field(runtime, 'localBoundsId') + 1.0)), Std.int(0.0)));
   }
 
-  @:keep public static function invalidateNodeLocalContent<Traits>(target:Node<Traits>):Void {
+  public static function invalidateNodeLocalContent<Traits>(target:Node<Traits>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)) : NodeRuntime<Traits>);
     FlightRuntime.setField(runtime, 'localContentId', FlightRuntime.unsignedShiftRight(Std.int((FlightRuntime.field(runtime, 'localContentId') + 1.0)), Std.int(0.0)));
   }
 
-  @:keep public static function invalidateNodeLocalTransform<Traits>(target:Node<Traits>):Void {
+  public static function invalidateNodeLocalTransform<Traits>(target:Node<Traits>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)) : NodeRuntime<Traits>);
     FlightRuntime.setField(runtime, 'localTransformId', FlightRuntime.unsignedShiftRight(Std.int((FlightRuntime.field(runtime, 'localTransformId') + 1.0)), Std.int(0.0)));
   }
 
-  @:keep public static function invalidateNodeParentReference<Traits>(target:Node<Traits>):Void {
+  public static function invalidateNodeParentReference<Traits>(target:Node<Traits>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)) : NodeRuntime<Traits>);
     FlightRuntime.setField(runtime, 'worldTransformUsingParentTransformId', -1.0);
   }
 
-  @:keep public static function invalidateNodeRender<Traits>(target:Node<Traits>):Void {
+  public static function invalidateNodeRender<Traits>(target:Node<Traits>):Void {
     FlightRuntime.callValue(invalidateNodeAppearance, cast ([target] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateNodeLocalTransform, cast ([target] : Array<Dynamic>));
   }
 
-  @:keep public static function invalidateNodeWorldBounds<Traits>(target:Node<Traits>):Void {
+  public static function invalidateNodeWorldBounds<Traits>(target:Node<Traits>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)) : NodeRuntime<Traits>);
     FlightRuntime.setField(runtime, 'worldBoundsUsingWorldTransformId', -1.0);
     FlightRuntime.setField(runtime, 'worldBoundsUsingLocalBoundsId', -1.0);
   }
 
-  @:keep public static function isNodeAncestorOf<Traits>(ancestor:Node<Traits>, descendant:Node<Traits>):Bool {
+  public static function isNodeAncestorOf<Traits>(ancestor:Node<Traits>, descendant:Node<Traits>):Bool {
     var current:Null<Node<Traits>> = cast FlightRuntime.UNDEFINED;
     current = (cast descendant : Node<Traits>);
     while (FlightRuntime.truthy(!FlightRuntime.strictEquals(current, null))) {
@@ -917,7 +914,7 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function isNodeLocalMatrix4Detached<Traits>(target:Transform3DNode<Traits>):Bool {
+  public static function isNodeLocalMatrix4Detached<Traits>(target:Transform3DNode<Traits>):Bool {
     FlightRuntime.callValue(ensureNodeLocalMatrix4, cast ([target] : Array<Dynamic>));
     return cast FlightRuntime.field((cast FlightRuntime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic), 'localMatrix4Detached');
     return cast null;
@@ -925,13 +922,13 @@ class NodeApi {
 
   public static final RAD_TO_DEG__hierarchy:Dynamic = (180.0 / HxMath.PI);
 
-  @:keep public static function recomputeLocalBoundsRectangle__boundsRectangle<Traits>(target:BoundsNode<Traits>, runtime:Dynamic):Void {
+  public static function recomputeLocalBoundsRectangle__boundsRectangle<Traits>(target:BoundsNode<Traits>, runtime:Dynamic):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'localBoundsRectangle'), null))) { FlightRuntime.setField(runtime, 'localBoundsRectangle', FlightRuntime.callValue(createRectangle, cast ([] : Array<Dynamic>))); }
     FlightRuntime.callProperty(runtime, 'computeLocalBoundsRectangle', cast ([FlightRuntime.field(runtime, 'localBoundsRectangle'), target] : Array<Dynamic>));
     FlightRuntime.setField(runtime, 'localBoundsUsingLocalBoundsId', FlightRuntime.field(runtime, 'localBoundsId'));
   }
 
-  @:keep public static function recomputeLocalTransform2D__transform2d<Traits>(target:Transform2DNode<Traits>, runtime:Dynamic):Void {
+  public static function recomputeLocalTransform2D__transform2d<Traits>(target:Transform2DNode<Traits>, runtime:Dynamic):Void {
     var matrix:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(target, 'rotation'), FlightRuntime.field(runtime, 'rotationAngle')))) {
   var angle:Dynamic = (FlightRuntime.field(target, 'rotation') % 360.0);
@@ -967,21 +964,21 @@ class NodeApi {
     FlightRuntime.setField(runtime, 'localTransformUsingLocalTransformId', FlightRuntime.field(runtime, 'localTransformId'));
   }
 
-  @:keep public static function recomputeLocalTransform3D__transform3d<Traits>(target:Transform3DNode<Traits>, runtime:Dynamic):Void {
+  public static function recomputeLocalTransform3D__transform3d<Traits>(target:Transform3DNode<Traits>, runtime:Dynamic):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'localMatrix4'), null))) { FlightRuntime.setField(runtime, 'localMatrix4', FlightRuntime.callValue(createMatrix4, cast ([] : Array<Dynamic>))); }
     FlightRuntime.callValue(composeMatrix4, cast ([FlightRuntime.field(runtime, 'localMatrix4'), FlightRuntime.field(target, 'position'), FlightRuntime.field(target, 'rotation'), FlightRuntime.field(target, 'scale')] : Array<Dynamic>));
     FlightRuntime.setField(runtime, 'localMatrix4Detached', false);
     FlightRuntime.setField(runtime, 'localTransformUsingLocalTransformId', FlightRuntime.field(runtime, 'localTransformId'));
   }
 
-  @:keep public static function recomputeNodeBoundsRectangle__boundsRectangle<Traits>(target:Spatial2DNode<Traits>, runtime:Dynamic):Void {
+  public static function recomputeNodeBoundsRectangle__boundsRectangle<Traits>(target:Spatial2DNode<Traits>, runtime:Dynamic):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'boundsRectangle'), null))) { FlightRuntime.setField(runtime, 'boundsRectangle', FlightRuntime.callValue(createRectangle, cast ([] : Array<Dynamic>))); }
     FlightRuntime.callValue(matrixTransformRectangle, cast ([FlightRuntime.field(runtime, 'boundsRectangle'), FlightRuntime.callValue(getNodeLocalMatrix, cast ([target] : Array<Dynamic>)), FlightRuntime.callValue(getNodeLocalBoundsRectangle, cast ([target] : Array<Dynamic>))] : Array<Dynamic>));
     FlightRuntime.setField(runtime, 'boundsUsingLocalBoundsId', FlightRuntime.field(runtime, 'localBoundsId'));
     FlightRuntime.setField(runtime, 'boundsUsingLocalTransformId', FlightRuntime.field(runtime, 'localTransformId'));
   }
 
-  @:keep public static function recomputeWorldBoundsRectangle__boundsRectangle<Traits>(target:Spatial2DNode<Traits>, runtime:Dynamic):Void {
+  public static function recomputeWorldBoundsRectangle__boundsRectangle<Traits>(target:Spatial2DNode<Traits>, runtime:Dynamic):Void {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'worldBoundsRectangle'), null))) { FlightRuntime.setField(runtime, 'worldBoundsRectangle', FlightRuntime.callValue(createRectangle, cast ([] : Array<Dynamic>))); }
     FlightRuntime.callValue(matrixTransformRectangle, cast ([FlightRuntime.field(runtime, 'worldBoundsRectangle'), FlightRuntime.callValue(getNodeWorldMatrix, cast ([target] : Array<Dynamic>)), FlightRuntime.callValue(getNodeLocalBoundsRectangle, cast ([target] : Array<Dynamic>))] : Array<Dynamic>));
@@ -999,7 +996,7 @@ class NodeApi {
     FlightRuntime.setField(runtime, 'worldBoundsUsingLocalBoundsId', FlightRuntime.field(runtime, 'localBoundsId'));
   }
 
-  @:keep public static function recomputeWorldTransform2D__transform2d<Traits>(target:Transform2DNode<Traits>, runtime:Dynamic, ?parentRuntime:Dynamic):Void {
+  public static function recomputeWorldTransform2D__transform2d<Traits>(target:Transform2DNode<Traits>, runtime:Dynamic, ?parentRuntime:Dynamic):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'worldMatrix'), null))) { FlightRuntime.setField(runtime, 'worldMatrix', FlightRuntime.callValue(createMatrix, cast ([] : Array<Dynamic>))); }
     FlightRuntime.callValue(ensureNodeLocalMatrix, cast ([target] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(parentRuntime, FlightRuntime.UNDEFINED))) {
@@ -1010,7 +1007,7 @@ class NodeApi {
     FlightRuntime.callValue(computeNodeWorldTransformRevision, cast ([runtime, parentRuntime] : Array<Dynamic>));
   }
 
-  @:keep public static function recomputeWorldTransform3D__transform3d<Traits>(target:Transform3DNode<Traits>, runtime:Dynamic, ?parentRuntime:Dynamic):Void {
+  public static function recomputeWorldTransform3D__transform3d<Traits>(target:Transform3DNode<Traits>, runtime:Dynamic, ?parentRuntime:Dynamic):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'worldMatrix4'), null))) {
   FlightRuntime.setField(runtime, 'worldMatrix4', FlightRuntime.callValue(createMatrix4, cast ([] : Array<Dynamic>)));
 }
@@ -1023,7 +1020,7 @@ class NodeApi {
     FlightRuntime.callValue(computeNodeWorldTransformRevision, cast ([runtime, parentRuntime] : Array<Dynamic>));
   }
 
-  @:keep public static function removeNodeChild<Traits>(target:Node<Traits>, child:Node<Traits>):NodeOf<Traits> {
+  public static function removeNodeChild<Traits>(target:Node<Traits>, child:Node<Traits>):NodeOf<Traits> {
     var targetRuntime:Dynamic = cast FlightRuntime.UNDEFINED;
     var childRuntime:Dynamic = cast FlightRuntime.UNDEFINED;
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1050,7 +1047,7 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function removeNodeChildAt<Traits>(target:Node<Traits>, index:Float):Null<NodeOf<Traits>> {
+  public static function removeNodeChildAt<Traits>(target:Node<Traits>, index:Float):Null<NodeOf<Traits>> {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     children = FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)), 'children');
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(children, null), function():Dynamic return cast FlightRuntime.compare(index, 0.0, '>=')), function():Dynamic return cast FlightRuntime.compare(index, FlightRuntime.field(children, 'length'), '<')))) {
@@ -1060,7 +1057,7 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function removeNodeChildren<Traits>(target:Node<Traits>, beginIndex:Float = 0.0, ?endIndex:Float):Void {
+  public static function removeNodeChildren<Traits>(target:Node<Traits>, beginIndex:Float = 0.0, ?endIndex:Float):Void {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     var numRemovals:Dynamic = cast FlightRuntime.UNDEFINED;
     children = FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>)), 'children');
@@ -1079,7 +1076,7 @@ class NodeApi {
 }
   }
 
-  @:keep public static function reparentNode<Traits>(child:Transform2DNode<Traits>, newParent:Transform2DNode<Traits>):NodeOf<Traits> {
+  public static function reparentNode<Traits>(child:Transform2DNode<Traits>, newParent:Transform2DNode<Traits>):NodeOf<Traits> {
     var oldWorld:Dynamic = cast FlightRuntime.UNDEFINED;
     var localM:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(ensureNodeWorldMatrix, cast ([child] : Array<Dynamic>));
@@ -1121,7 +1118,7 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function replaceNodeChild<Traits>(target:Node<Traits>, oldChild:Node<Traits>, newChild:Node<Traits>):Void {
+  public static function replaceNodeChild<Traits>(target:Node<Traits>, oldChild:Node<Traits>, newChild:Node<Traits>):Void {
     var index:Dynamic = cast FlightRuntime.UNDEFINED;
     index = FlightRuntime.callValue(getNodeChildIndex, cast ([target, oldChild] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(index, -1.0))) { return; }
@@ -1129,7 +1126,7 @@ class NodeApi {
     FlightRuntime.callValue(addNodeChildAt, cast ([target, newChild, index] : Array<Dynamic>));
   }
 
-  @:keep public static function setNodeChildIndex<Traits>(target:Node<Traits>, child:Node<Traits>, index:Float):Void {
+  public static function setNodeChildIndex<Traits>(target:Node<Traits>, child:Node<Traits>, index:Float):Void {
     var targetRuntime:Dynamic = cast FlightRuntime.UNDEFINED;
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     targetRuntime = FlightRuntime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>));
@@ -1146,23 +1143,23 @@ class NodeApi {
 }
   }
 
-  @:keep public static function setNodeEnabled<Traits>(target:Node<Traits>, value:Bool):Void {
+  public static function setNodeEnabled<Traits>(target:Node<Traits>, value:Bool):Void {
     FlightRuntime.setField(target, 'enabled', value);
     FlightRuntime.callValue(invalidateNode, cast ([target] : Array<Dynamic>));
   }
 
-  @:keep public static function setNodeHeight<Traits>(target:Spatial2DNode<Traits>, value:Float):Void {
+  public static function setNodeHeight<Traits>(target:Spatial2DNode<Traits>, value:Float):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(target, 'scaleY'), 0.0))) { return; }
     FlightRuntime.setField(target, 'scaleY', ((value * FlightRuntime.field(target, 'scaleY')) / FlightRuntime.callValue(getNodeHeight, cast ([target] : Array<Dynamic>))));
     FlightRuntime.callValue(invalidateNodeLocalTransform, cast ([target] : Array<Dynamic>));
   }
 
-  @:keep public static function setNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>, source:MatrixLike):Void {
+  public static function setNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>, source:MatrixLike):Void {
     FlightRuntime.callValue(decomposeMatrixToTransform2D, cast ([target, source] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateNodeLocalTransform, cast ([target] : Array<Dynamic>));
   }
 
-  @:keep public static function setNodeLocalMatrix4<Traits>(target:Transform3DNode<Traits>, source:Matrix4Like):Void {
+  public static function setNodeLocalMatrix4<Traits>(target:Transform3DNode<Traits>, source:Matrix4Like):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic);
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'localMatrix4'), null))) { FlightRuntime.setField(runtime, 'localMatrix4', FlightRuntime.callValue(createMatrix4, cast ([] : Array<Dynamic>))); }
@@ -1172,7 +1169,7 @@ class NodeApi {
     FlightRuntime.setField(runtime, 'localMatrix4Detached', true);
   }
 
-  @:keep public static function setNodeTransform2D<Traits>(target:Transform2DNode<Traits>, source:Transform2DLike):Void {
+  public static function setNodeTransform2D<Traits>(target:Transform2DNode<Traits>, source:Transform2DLike):Void {
     FlightRuntime.setField(target, 'pivotX', FlightRuntime.field(source, 'pivotX'));
     FlightRuntime.setField(target, 'pivotY', FlightRuntime.field(source, 'pivotY'));
     FlightRuntime.setField(target, 'rotation', FlightRuntime.field(source, 'rotation'));
@@ -1185,20 +1182,20 @@ class NodeApi {
     FlightRuntime.callValue(invalidateNodeLocalTransform, cast ([target] : Array<Dynamic>));
   }
 
-  @:keep public static function setNodeTransform3D<Traits>(target:Transform3DNode<Traits>, source:Transform3DLike):Void {
+  public static function setNodeTransform3D<Traits>(target:Transform3DNode<Traits>, source:Transform3DLike):Void {
     FlightRuntime.callValue(copyVector3, cast ([FlightRuntime.field(target, 'position'), FlightRuntime.field(source, 'position')] : Array<Dynamic>));
     FlightRuntime.callValue(copyQuaternion, cast ([FlightRuntime.field(target, 'rotation'), FlightRuntime.field(source, 'rotation')] : Array<Dynamic>));
     FlightRuntime.callValue(copyVector3, cast ([FlightRuntime.field(target, 'scale'), FlightRuntime.field(source, 'scale')] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateNodeLocalTransform, cast ([target] : Array<Dynamic>));
   }
 
-  @:keep public static function setNodeWidth<Traits>(target:Spatial2DNode<Traits>, value:Float):Void {
+  public static function setNodeWidth<Traits>(target:Spatial2DNode<Traits>, value:Float):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(target, 'scaleX'), 0.0))) { return; }
     FlightRuntime.setField(target, 'scaleX', ((value * FlightRuntime.field(target, 'scaleX')) / FlightRuntime.callValue(getNodeWidth, cast ([target] : Array<Dynamic>))));
     FlightRuntime.callValue(invalidateNodeLocalTransform, cast ([target] : Array<Dynamic>));
   }
 
-  @:keep public static function swapNodeChildren<Traits>(target:Node<Traits>, child1:Node<Traits>, child2:Node<Traits>):Void {
+  public static function swapNodeChildren<Traits>(target:Node<Traits>, child1:Node<Traits>, child2:Node<Traits>):Void {
     var targetRuntime:Dynamic = cast FlightRuntime.UNDEFINED;
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     targetRuntime = FlightRuntime.callValue(getNodeRuntime, cast ([target] : Array<Dynamic>));
@@ -1213,7 +1210,7 @@ class NodeApi {
 }
   }
 
-  @:keep public static function swapNodeChildrenAt<Traits>(target:Node<Traits>, index1:Float, index2:Float):Void {
+  public static function swapNodeChildrenAt<Traits>(target:Node<Traits>, index1:Float, index2:Float):Void {
     var targetRuntime:Dynamic = cast FlightRuntime.UNDEFINED;
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     var len:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1233,7 +1230,7 @@ class NodeApi {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(targetSignals, null))) { FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(targetSignals, 'onChildrenOrderChanged')] : Array<Dynamic>)); }
   }
 
-  @:keep public static function syncNodeTransform3DFromMatrix4<Traits>(target:Transform3DNode<Traits>):Void {
+  public static function syncNodeTransform3DFromMatrix4<Traits>(target:Transform3DNode<Traits>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic);
     FlightRuntime.callValue(ensureNodeLocalMatrix4, cast ([target] : Array<Dynamic>));
@@ -1241,11 +1238,11 @@ class NodeApi {
     FlightRuntime.setField(runtime, 'localMatrix4Detached', false);
   }
 
-  @:keep public static function throwOutOfBoundsError__hierarchy():Void {
+  public static function throwOutOfBoundsError__hierarchy():Void {
     throw FlightRuntime.rangeError('The supplied index is out of bounds.');
   }
 
-  @:keep public static function tryFastRecomputeWorldBoundsRectangle__boundsRectangle<Traits>(target:Spatial2DNode<Traits>, runtime:Dynamic):Bool {
+  public static function tryFastRecomputeWorldBoundsRectangle__boundsRectangle<Traits>(target:Spatial2DNode<Traits>, runtime:Dynamic):Bool {
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'worldBoundsRectangle'), null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'worldMatrix'), null)))) {
   var __destructure0:Dynamic = FlightRuntime.field(runtime, 'worldMatrix');
   var _a:Dynamic = FlightRuntime.field(__destructure0, 'a');
@@ -1274,7 +1271,7 @@ class NodeApi {
     return cast null;
   }
 
-  @:keep public static function walkNodeDescendants<Traits>(source:Node<Traits>, visit:NodeDescendantVisitor<Traits>):Bool {
+  public static function walkNodeDescendants<Traits>(source:Node<Traits>, visit:NodeDescendantVisitor<Traits>):Bool {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     children = FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(children, null))) { return cast true; }

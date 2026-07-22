@@ -8,9 +8,6 @@ import flight.Types.BidiClassBackend;
 import flight.Types.BidiDirection;
 import flight.Types.BidiRun;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.TextBidi")
 class TextBidi {
   public static var _backend__bidiClassBackend:Null<BidiClassBackend> = FlightRuntime.explicitNull();
@@ -25,7 +22,7 @@ class TextBidi {
 
   public static final BN__bidiClassBackend:Dynamic = 9.0;
 
-  @:keep public static function applyExplicitLevels__resolveBidiLevels(original:Array<BidiClass>, working:Array<BidiClass>, levelArray:Array<Float>, matchingPdi:Dynamic, paragraphLevel:Float):Void {
+  public static function applyExplicitLevels__resolveBidiLevels(original:Array<BidiClass>, working:Array<BidiClass>, levelArray:Array<Float>, matchingPdi:Dynamic, paragraphLevel:Float):Void {
     var MAX_DEPTH:Dynamic = cast FlightRuntime.UNDEFINED;
     var stackLevel:Array<Float> = cast FlightRuntime.UNDEFINED;
     var stackOverride:Array<Null<BidiClass>> = cast FlightRuntime.UNDEFINED;
@@ -141,7 +138,7 @@ class TextBidi {
     }
   }
 
-  @:keep public static function applyLineReset__resolveBidiLevels(original:Array<BidiClass>, levelArray:Array<Float>, paragraphLevel:Float):Void {
+  public static function applyLineReset__resolveBidiLevels(original:Array<BidiClass>, levelArray:Array<Float>, paragraphLevel:Float):Void {
     var length:Dynamic = cast FlightRuntime.UNDEFINED;
     length = FlightRuntime.field(original, 'length');
     {
@@ -174,7 +171,7 @@ class TextBidi {
 
   public static final EN__bidiClassBackend:Dynamic = 3.0;
 
-  @:keep public static function computeParagraphLevel__resolveBidiLevels(types:Array<BidiClass>, start:Float, end:Float):Float {
+  public static function computeParagraphLevel__resolveBidiLevels(types:Array<BidiClass>, start:Float, end:Float):Float {
     var isolateDepth:Dynamic = cast FlightRuntime.UNDEFINED;
     isolateDepth = 0.0;
     {
@@ -196,7 +193,7 @@ class TextBidi {
     return cast null;
   }
 
-  @:keep public static function createCompactBidiClassBackend():BidiClassBackend {
+  public static function createCompactBidiClassBackend():BidiClassBackend {
     return cast { getBidiClass: TextBidi.getCompactBidiClass__bidiClassBackend };
     return cast null;
   }
@@ -211,13 +208,13 @@ class TextBidi {
 
   public static final LRE__bidiClassBackend:Dynamic = 14.0;
 
-  @:keep public static function getBidiClassBackend():BidiClassBackend {
+  public static function getBidiClassBackend():BidiClassBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(TextBidi._backend__bidiClassBackend, null))) { (TextBidi._backend__bidiClassBackend = cast (FlightRuntime.callValue(createCompactBidiClassBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast TextBidi._backend__bidiClassBackend;
     return cast null;
   }
 
-  @:keep public static function getBidiRuns(text:String, baseDirection:BidiDirection):Array<BidiRun> {
+  public static function getBidiRuns(text:String, baseDirection:BidiDirection):Array<BidiRun> {
     var levels:Dynamic = cast FlightRuntime.UNDEFINED;
     var runs:Array<BidiRun> = cast FlightRuntime.UNDEFINED;
     var length:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -241,7 +238,7 @@ class TextBidi {
     return cast null;
   }
 
-  @:keep public static function getCompactBidiClass__bidiClassBackend(codepoint:Float):BidiClass {
+  public static function getCompactBidiClass__bidiClassBackend(codepoint:Float):BidiClass {
     var lo:Dynamic = cast FlightRuntime.UNDEFINED;
     var hi:Dynamic = cast FlightRuntime.UNDEFINED;
     lo = 0.0;
@@ -262,12 +259,12 @@ class TextBidi {
     return cast null;
   }
 
-  @:keep public static function isNeutralOrIsolate__resolveBidiLevels(t:BidiClass):Bool {
+  public static function isNeutralOrIsolate__resolveBidiLevels(t:BidiClass):Bool {
     return cast FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(t, 'B'), function():Dynamic return cast FlightRuntime.strictEquals(t, 'S')), function():Dynamic return cast FlightRuntime.strictEquals(t, 'WS')), function():Dynamic return cast FlightRuntime.strictEquals(t, 'ON')), function():Dynamic return cast FlightRuntime.strictEquals(t, 'FSI')), function():Dynamic return cast FlightRuntime.strictEquals(t, 'LRI')), function():Dynamic return cast FlightRuntime.strictEquals(t, 'RLI')), function():Dynamic return cast FlightRuntime.strictEquals(t, 'PDI'));
     return cast null;
   }
 
-  @:keep public static function isResetType__resolveBidiLevels(t:BidiClass):Bool {
+  public static function isResetType__resolveBidiLevels(t:BidiClass):Bool {
     return cast FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(t, 'WS'), function():Dynamic return cast FlightRuntime.strictEquals(t, 'LRI')), function():Dynamic return cast FlightRuntime.strictEquals(t, 'RLI')), function():Dynamic return cast FlightRuntime.strictEquals(t, 'FSI')), function():Dynamic return cast FlightRuntime.strictEquals(t, 'PDI')), function():Dynamic return cast FlightRuntime.strictEquals(t, 'LRE')), function():Dynamic return cast FlightRuntime.strictEquals(t, 'RLE')), function():Dynamic return cast FlightRuntime.strictEquals(t, 'LRO')), function():Dynamic return cast FlightRuntime.strictEquals(t, 'RLO')), function():Dynamic return cast FlightRuntime.strictEquals(t, 'PDF')), function():Dynamic return cast FlightRuntime.strictEquals(t, 'BN'));
     return cast null;
   }
@@ -280,17 +277,17 @@ class TextBidi {
 
   public static final ON__bidiClassBackend:Dynamic = 13.0;
 
-  @:keep public static function neutralDirection__resolveBidiLevels(t:BidiClass):String {
+  public static function neutralDirection__resolveBidiLevels(t:BidiClass):String {
     return cast FlightRuntime.select(FlightRuntime.strictEquals(t, 'L'), function():Dynamic return cast 'L', function():Dynamic return cast 'R');
     return cast null;
   }
 
-  @:keep public static function nextEven__resolveBidiLevels(level:Float):Float {
+  public static function nextEven__resolveBidiLevels(level:Float):Float {
     return cast (Std.int((level + 2.0)) & Std.int(~Std.int(1.0)));
     return cast null;
   }
 
-  @:keep public static function nextOdd__resolveBidiLevels(level:Float):Float {
+  public static function nextOdd__resolveBidiLevels(level:Float):Float {
     return cast (Std.int((level + 1.0)) | Std.int(1.0));
     return cast null;
   }
@@ -299,7 +296,7 @@ class TextBidi {
 
   public static final PDI__bidiClassBackend:Dynamic = 22.0;
 
-  @:keep public static function pairIsolates__resolveBidiLevels(types:Array<BidiClass>, matchingPdi:Dynamic, matchingInitiator:Dynamic):Void {
+  public static function pairIsolates__resolveBidiLevels(types:Array<BidiClass>, matchingPdi:Dynamic, matchingInitiator:Dynamic):Void {
     var stack:Array<Float> = cast FlightRuntime.UNDEFINED;
     stack = cast ([] : Array<Dynamic>);
     {
@@ -324,7 +321,7 @@ class TextBidi {
 
   public static final RLI__bidiClassBackend:Dynamic = 20.0;
 
-  @:keep public static function reorderBidiLine(levels:Dynamic, start:Float, end:Float, out:Array<Float>):Void {
+  public static function reorderBidiLine(levels:Dynamic, start:Float, end:Float, out:Array<Float>):Void {
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     var highest:Dynamic = cast FlightRuntime.UNDEFINED;
     var lowestOdd:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -373,7 +370,7 @@ class TextBidi {
     }
   }
 
-  @:keep public static function resolveBidiLevels(text:String, baseDirection:BidiDirection):Dynamic {
+  public static function resolveBidiLevels(text:String, baseDirection:BidiDirection):Dynamic {
     var length:Dynamic = cast FlightRuntime.UNDEFINED;
     var levels:Dynamic = cast FlightRuntime.UNDEFINED;
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -421,7 +418,7 @@ class TextBidi {
     return cast null;
   }
 
-  @:keep public static function resolveIsolatingRunSequences__resolveBidiLevels(original:Array<BidiClass>, working:Array<BidiClass>, levelArray:Array<Float>, matchingPdi:Dynamic, matchingInitiator:Dynamic, paragraphLevel:Float):Void {
+  public static function resolveIsolatingRunSequences__resolveBidiLevels(original:Array<BidiClass>, working:Array<BidiClass>, levelArray:Array<Float>, matchingPdi:Dynamic, matchingInitiator:Dynamic, paragraphLevel:Float):Void {
     var length:Dynamic = cast FlightRuntime.UNDEFINED;
     var kept:Array<Float> = cast FlightRuntime.UNDEFINED;
     var runs:Array<{ var indices:Array<Float>; var keptStart:Float; var keptEnd:Float; }> = cast FlightRuntime.UNDEFINED;
@@ -502,7 +499,7 @@ class TextBidi {
     }
   }
 
-  @:keep public static function resolveSequence__resolveBidiLevels(original:Array<BidiClass>, working:Array<BidiClass>, levelArray:Array<Float>, kept:Array<Float>, sequence:Array<Float>, keptStart:Float, keptEnd:Float, matchingPdi:Dynamic, paragraphLevel:Float):Void {
+  public static function resolveSequence__resolveBidiLevels(original:Array<BidiClass>, working:Array<BidiClass>, levelArray:Array<Float>, kept:Array<Float>, sequence:Array<Float>, keptStart:Float, keptEnd:Float, matchingPdi:Dynamic, paragraphLevel:Float):Void {
     var seqLevel:Dynamic = cast FlightRuntime.UNDEFINED;
     var prevLevel:Dynamic = cast FlightRuntime.UNDEFINED;
     var sos:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -650,7 +647,7 @@ class TextBidi {
 
   public static final _ranges__bidiClassBackend:Array<Float> = cast ([0.0, 8.0, TextBidi.BN__bidiClassBackend, 9.0, 9.0, TextBidi.S__bidiClassBackend, 10.0, 10.0, TextBidi.B__bidiClassBackend, 11.0, 11.0, TextBidi.S__bidiClassBackend, 12.0, 12.0, TextBidi.WS__bidiClassBackend, 13.0, 13.0, TextBidi.B__bidiClassBackend, 14.0, 27.0, TextBidi.BN__bidiClassBackend, 28.0, 30.0, TextBidi.B__bidiClassBackend, 31.0, 31.0, TextBidi.S__bidiClassBackend, 32.0, 32.0, TextBidi.WS__bidiClassBackend, 33.0, 34.0, TextBidi.ON__bidiClassBackend, 35.0, 37.0, TextBidi.ET__bidiClassBackend, 38.0, 42.0, TextBidi.ON__bidiClassBackend, 43.0, 43.0, TextBidi.ES__bidiClassBackend, 44.0, 44.0, TextBidi.CS__bidiClassBackend, 45.0, 45.0, TextBidi.ES__bidiClassBackend, 46.0, 47.0, TextBidi.CS__bidiClassBackend, 48.0, 57.0, TextBidi.EN__bidiClassBackend, 58.0, 58.0, TextBidi.CS__bidiClassBackend, 59.0, 64.0, TextBidi.ON__bidiClassBackend, 65.0, 90.0, TextBidi.L__bidiClassBackend, 91.0, 96.0, TextBidi.ON__bidiClassBackend, 97.0, 122.0, TextBidi.L__bidiClassBackend, 123.0, 126.0, TextBidi.ON__bidiClassBackend, 127.0, 132.0, TextBidi.BN__bidiClassBackend, 133.0, 133.0, TextBidi.B__bidiClassBackend, 134.0, 159.0, TextBidi.BN__bidiClassBackend, 160.0, 160.0, TextBidi.CS__bidiClassBackend, 161.0, 161.0, TextBidi.ON__bidiClassBackend, 162.0, 165.0, TextBidi.ET__bidiClassBackend, 166.0, 169.0, TextBidi.ON__bidiClassBackend, 170.0, 170.0, TextBidi.L__bidiClassBackend, 171.0, 172.0, TextBidi.ON__bidiClassBackend, 173.0, 173.0, TextBidi.BN__bidiClassBackend, 174.0, 175.0, TextBidi.ON__bidiClassBackend, 176.0, 177.0, TextBidi.ET__bidiClassBackend, 178.0, 179.0, TextBidi.EN__bidiClassBackend, 180.0, 180.0, TextBidi.ON__bidiClassBackend, 181.0, 181.0, TextBidi.L__bidiClassBackend, 182.0, 184.0, TextBidi.ON__bidiClassBackend, 185.0, 185.0, TextBidi.EN__bidiClassBackend, 186.0, 186.0, TextBidi.L__bidiClassBackend, 187.0, 191.0, TextBidi.ON__bidiClassBackend, 192.0, 214.0, TextBidi.L__bidiClassBackend, 215.0, 215.0, TextBidi.ON__bidiClassBackend, 216.0, 246.0, TextBidi.L__bidiClassBackend, 247.0, 247.0, TextBidi.ON__bidiClassBackend, 248.0, 255.0, TextBidi.L__bidiClassBackend, 768.0, 879.0, TextBidi.NSM__bidiClassBackend, 1424.0, 1424.0, TextBidi.R__bidiClassBackend, 1425.0, 1469.0, TextBidi.NSM__bidiClassBackend, 1470.0, 1470.0, TextBidi.R__bidiClassBackend, 1471.0, 1471.0, TextBidi.NSM__bidiClassBackend, 1472.0, 1472.0, TextBidi.R__bidiClassBackend, 1473.0, 1474.0, TextBidi.NSM__bidiClassBackend, 1475.0, 1475.0, TextBidi.R__bidiClassBackend, 1476.0, 1477.0, TextBidi.NSM__bidiClassBackend, 1478.0, 1478.0, TextBidi.R__bidiClassBackend, 1479.0, 1479.0, TextBidi.NSM__bidiClassBackend, 1480.0, 1535.0, TextBidi.R__bidiClassBackend, 1536.0, 1541.0, TextBidi.AN__bidiClassBackend, 1542.0, 1543.0, TextBidi.ON__bidiClassBackend, 1544.0, 1544.0, TextBidi.AL__bidiClassBackend, 1545.0, 1546.0, TextBidi.ET__bidiClassBackend, 1547.0, 1547.0, TextBidi.AL__bidiClassBackend, 1548.0, 1548.0, TextBidi.CS__bidiClassBackend, 1549.0, 1551.0, TextBidi.AL__bidiClassBackend, 1552.0, 1562.0, TextBidi.NSM__bidiClassBackend, 1563.0, 1610.0, TextBidi.AL__bidiClassBackend, 1611.0, 1631.0, TextBidi.NSM__bidiClassBackend, 1632.0, 1641.0, TextBidi.AN__bidiClassBackend, 1642.0, 1642.0, TextBidi.ET__bidiClassBackend, 1643.0, 1644.0, TextBidi.AN__bidiClassBackend, 1645.0, 1647.0, TextBidi.AL__bidiClassBackend, 1648.0, 1648.0, TextBidi.NSM__bidiClassBackend, 1649.0, 1749.0, TextBidi.AL__bidiClassBackend, 1750.0, 1756.0, TextBidi.NSM__bidiClassBackend, 1757.0, 1758.0, TextBidi.AN__bidiClassBackend, 1759.0, 1764.0, TextBidi.NSM__bidiClassBackend, 1765.0, 1766.0, TextBidi.AL__bidiClassBackend, 1767.0, 1768.0, TextBidi.NSM__bidiClassBackend, 1769.0, 1769.0, TextBidi.ON__bidiClassBackend, 1770.0, 1773.0, TextBidi.NSM__bidiClassBackend, 1774.0, 1775.0, TextBidi.AL__bidiClassBackend, 1776.0, 1785.0, TextBidi.EN__bidiClassBackend, 1786.0, 1791.0, TextBidi.AL__bidiClassBackend, 1872.0, 1919.0, TextBidi.AL__bidiClassBackend, 2208.0, 2303.0, TextBidi.AL__bidiClassBackend, 5760.0, 5760.0, TextBidi.WS__bidiClassBackend, 8192.0, 8202.0, TextBidi.WS__bidiClassBackend, 8203.0, 8205.0, TextBidi.BN__bidiClassBackend, 8206.0, 8206.0, TextBidi.L__bidiClassBackend, 8207.0, 8207.0, TextBidi.R__bidiClassBackend, 8208.0, 8231.0, TextBidi.ON__bidiClassBackend, 8232.0, 8232.0, TextBidi.WS__bidiClassBackend, 8233.0, 8233.0, TextBidi.B__bidiClassBackend, 8234.0, 8234.0, TextBidi.LRE__bidiClassBackend, 8235.0, 8235.0, TextBidi.RLE__bidiClassBackend, 8236.0, 8236.0, TextBidi.PDF__bidiClassBackend, 8237.0, 8237.0, TextBidi.LRO__bidiClassBackend, 8238.0, 8238.0, TextBidi.RLO__bidiClassBackend, 8239.0, 8239.0, TextBidi.CS__bidiClassBackend, 8240.0, 8244.0, TextBidi.ET__bidiClassBackend, 8245.0, 8281.0, TextBidi.ON__bidiClassBackend, 8287.0, 8287.0, TextBidi.WS__bidiClassBackend, 8288.0, 8292.0, TextBidi.BN__bidiClassBackend, 8294.0, 8294.0, TextBidi.LRI__bidiClassBackend, 8295.0, 8295.0, TextBidi.RLI__bidiClassBackend, 8296.0, 8296.0, TextBidi.FSI__bidiClassBackend, 8297.0, 8297.0, TextBidi.PDI__bidiClassBackend, 12288.0, 12288.0, TextBidi.WS__bidiClassBackend, 64285.0, 64285.0, TextBidi.R__bidiClassBackend, 64286.0, 64286.0, TextBidi.NSM__bidiClassBackend, 64287.0, 64335.0, TextBidi.R__bidiClassBackend, 64336.0, 64975.0, TextBidi.AL__bidiClassBackend, 65008.0, 65023.0, TextBidi.AL__bidiClassBackend, 65136.0, 65278.0, TextBidi.AL__bidiClassBackend, 65279.0, 65279.0, TextBidi.BN__bidiClassBackend] : Array<Dynamic>);
 
-  @:keep public static function setBidiClassBackend(backend:Null<BidiClassBackend>):Void {
+  public static function setBidiClassBackend(backend:Null<BidiClassBackend>):Void {
     (TextBidi._backend__bidiClassBackend = cast (backend : Dynamic));
   }
 

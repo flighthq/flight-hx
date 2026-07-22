@@ -27,9 +27,6 @@ typedef FileSystemWritableFileStream__dialog = { var write:Dynamic; var close:Dy
 
 typedef WindowWithFileSystemAccess__dialog = Dynamic;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Dialog")
 class Dialog {
   public static var _backend__dialog:Null<DialogBackend> = FlightRuntime.explicitNull();
@@ -38,7 +35,7 @@ class Dialog {
 
   public static final _fileSystemHandleRegistry__dialog:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function buildAcceptAttribute__dialog(filters:Dynamic):String {
+  public static function buildAcceptAttribute__dialog(filters:Dynamic):String {
     var parts:Array<String> = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(filters, FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(filters, 'length'), 0.0)))) { return cast ''; }
     parts = cast ([] : Array<Dynamic>);
@@ -57,7 +54,7 @@ class Dialog {
     return cast null;
   }
 
-  @:keep public static function buildFileSystemAccessTypes__dialog(filters:Dynamic):Null<Array<{ var accept:Dynamic; var description:String; }>> {
+  public static function buildFileSystemAccessTypes__dialog(filters:Dynamic):Null<Array<{ var accept:Dynamic; var description:String; }>> {
     var types:Array<{ var accept:Dynamic; var description:String; }> = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(filters, FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(filters, 'length'), 0.0)))) { return cast FlightRuntime.UNDEFINED; }
     types = cast ([] : Array<Dynamic>);
@@ -80,7 +77,7 @@ class Dialog {
     return cast null;
   }
 
-  @:keep public static function createWebDialogBackend():DialogBackend {
+  public static function createWebDialogBackend():DialogBackend {
     return cast { confirm: flight.internal.FlightAsync.make(function(options:Dynamic):flight.internal.FlightPromise<Dynamic> {
   if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'confirm')), 'function')))) { return cast false; }
   try {
@@ -121,30 +118,28 @@ class Dialog {
     return cast null;
   }
 
-  @:keep public static function getDialogBackend():DialogBackend {
+  public static function getDialogBackend():DialogBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Dialog._backend__dialog, null))) { (Dialog._backend__dialog = cast (FlightRuntime.callValue(createWebDialogBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Dialog._backend__dialog;
     return cast null;
   }
 
-  @:keep public static function getWebDirectorySystemHandle(handle:FileDialogHandle):Null<Dynamic> {
+  public static function getWebDirectorySystemHandle(handle:FileDialogHandle):Null<Dynamic> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(Dialog._fileSystemDirectoryHandleRegistry__dialog, 'get', cast ([(cast handle : FileDialogHandle)] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getWebFileSystemHandle(handle:FileDialogHandle):Null<Dynamic> {
+  public static function getWebFileSystemHandle(handle:FileDialogHandle):Null<Dynamic> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(Dialog._fileSystemHandleRegistry__dialog, 'get', cast ([(cast handle : FileDialogHandle)] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function openDirectoryPickerAccessApi__dialog(options:OpenDirectoryDialogOptions):flight.internal.FlightPromise<Array<FileDialogHandle>> {
-    var win:Dynamic = cast FlightRuntime.UNDEFINED;
-    win = (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : WindowWithFileSystemAccess__dialog);
-    if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(win, 'showDirectoryPicker')), 'function'))) { return cast cast ([] : Array<Dynamic>); }
-    try {
+  public static function openDirectoryPickerAccessApi__dialog(options:OpenDirectoryDialogOptions):flight.internal.FlightPromise<Array<FileDialogHandle>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Array<FileDialogHandle>> {
+      var win:Dynamic = cast FlightRuntime.UNDEFINED;
+      win = (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : WindowWithFileSystemAccess__dialog);
+      if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(win, 'showDirectoryPicker')), 'function'))) { return cast cast ([] : Array<Dynamic>); }
+      try {
   var pickerOptions:Dynamic = { mode: 'readwrite' };
   if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(options, 'startIn'), FlightRuntime.UNDEFINED))) {
   var startIn:Dynamic = FlightRuntime.callValue(Dialog.toFileSystemAccessStartIn__dialog, cast ([FlightRuntime.field(options, 'startIn')] : Array<Dynamic>));
@@ -157,19 +152,18 @@ class Dialog {
 } catch (__error:Dynamic) {
   return cast cast ([] : Array<Dynamic>);
 }
-    return cast null;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function openFileSystemAccessPicker__dialog(options:OpenFileDialogOptions):flight.internal.FlightPromise<Array<FileDialogHandle>> {
-    var win:Dynamic = cast FlightRuntime.UNDEFINED;
-    var showPicker:Dynamic = cast FlightRuntime.UNDEFINED;
-    win = (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : WindowWithFileSystemAccess__dialog);
-    showPicker = FlightRuntime.field(win, 'showOpenFilePicker');
-    if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.typeofValue(showPicker), 'function'))) { return cast cast ([] : Array<Dynamic>); }
-    try {
+  public static function openFileSystemAccessPicker__dialog(options:OpenFileDialogOptions):flight.internal.FlightPromise<Array<FileDialogHandle>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Array<FileDialogHandle>> {
+      var win:Dynamic = cast FlightRuntime.UNDEFINED;
+      var showPicker:Dynamic = cast FlightRuntime.UNDEFINED;
+      win = (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : WindowWithFileSystemAccess__dialog);
+      showPicker = FlightRuntime.field(win, 'showOpenFilePicker');
+      if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.typeofValue(showPicker), 'function'))) { return cast cast ([] : Array<Dynamic>); }
+      try {
   var pickerOptions:Dynamic = { multiple: FlightRuntime.coalesce(FlightRuntime.field(options, 'multiple'), function():Dynamic return cast false) };
   var types:Dynamic = FlightRuntime.callValue(Dialog.buildFileSystemAccessTypes__dialog, cast ([FlightRuntime.field(options, 'filters')] : Array<Dynamic>));
   if (FlightRuntime.truthy(!FlightRuntime.strictEquals(types, FlightRuntime.UNDEFINED))) { FlightRuntime.setField(pickerOptions, 'types', types); }
@@ -188,10 +182,11 @@ class Dialog {
 } catch (__error:Dynamic) {
   return cast cast ([] : Array<Dynamic>);
 }
-    return cast null;
+      return cast null;
+    })();
   }
 
-  @:keep public static function openWebDirectoryDialog__dialog(options:OpenDirectoryDialogOptions):flight.internal.FlightPromise<Array<FileDialogHandle>> {
+  public static function openWebDirectoryDialog__dialog(options:OpenDirectoryDialogOptions):flight.internal.FlightPromise<Array<FileDialogHandle>> {
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field((cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : WindowWithFileSystemAccess__dialog), 'showDirectoryPicker')), 'function')))) {
   return cast FlightRuntime.callValue(Dialog.openDirectoryPickerAccessApi__dialog, cast ([options] : Array<Dynamic>));
 }
@@ -238,7 +233,7 @@ class Dialog {
     return cast null;
   }
 
-  @:keep public static function openWebFileDialog__dialog(options:OpenFileDialogOptions):flight.internal.FlightPromise<Array<FileDialogHandle>> {
+  public static function openWebFileDialog__dialog(options:OpenFileDialogOptions):flight.internal.FlightPromise<Array<FileDialogHandle>> {
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field((cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : WindowWithFileSystemAccess__dialog), 'showOpenFilePicker')), 'function')))) {
   return cast FlightRuntime.callValue(Dialog.openFileSystemAccessPicker__dialog, cast ([options] : Array<Dynamic>));
 }
@@ -282,16 +277,14 @@ class Dialog {
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function saveWebFile__dialog(options:SaveFileDialogOptions):flight.internal.FlightPromise<Null<FileDialogHandle>> {
-    var win:Dynamic = cast FlightRuntime.UNDEFINED;
-    win = (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : WindowWithFileSystemAccess__dialog);
-    if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(win, 'showSaveFilePicker')), 'function'))) {
+  public static function saveWebFile__dialog(options:SaveFileDialogOptions):flight.internal.FlightPromise<Null<FileDialogHandle>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Null<FileDialogHandle>> {
+      var win:Dynamic = cast FlightRuntime.UNDEFINED;
+      win = (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : WindowWithFileSystemAccess__dialog);
+      if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(win, 'showSaveFilePicker')), 'function'))) {
   return cast null;
 }
-    try {
+      try {
   var pickerOptions:Dynamic = {  };
   if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(options, 'defaultName'), FlightRuntime.UNDEFINED))) {
   FlightRuntime.setField(pickerOptions, 'suggestedName', FlightRuntime.field(options, 'defaultName'));
@@ -312,64 +305,65 @@ class Dialog {
 } catch (__error:Dynamic) {
   return cast null;
 }
-    return cast null;
+      return cast null;
+    })();
   }
 
-  @:keep public static function setDialogBackend(backend:Null<DialogBackend>):Void {
+  public static function setDialogBackend(backend:Null<DialogBackend>):Void {
     (Dialog._backend__dialog = cast (backend : Dynamic));
   }
 
-  @:keep public static function showConfirmDialog(options:MessageDialogOptions):flight.internal.FlightPromise<Bool> {
+  public static function showConfirmDialog(options:MessageDialogOptions):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getDialogBackend, cast ([] : Array<Dynamic>)), 'confirm', cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function showErrorBox(title:String, content:String):flight.internal.FlightPromise<MessageDialogResult> {
+  public static function showErrorBox(title:String, content:String):flight.internal.FlightPromise<MessageDialogResult> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getDialogBackend, cast ([] : Array<Dynamic>)), 'message', cast ([{ kind: 'error', message: content, title: title }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function showErrorDialog(options:MessageDialogOptions):flight.internal.FlightPromise<MessageDialogResult> {
+  public static function showErrorDialog(options:MessageDialogOptions):flight.internal.FlightPromise<MessageDialogResult> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getDialogBackend, cast ([] : Array<Dynamic>)), 'message', cast ([FlightRuntime.mergeObjects([options, { kind: 'error' }])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function showInfoDialog(options:MessageDialogOptions):flight.internal.FlightPromise<MessageDialogResult> {
+  public static function showInfoDialog(options:MessageDialogOptions):flight.internal.FlightPromise<MessageDialogResult> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getDialogBackend, cast ([] : Array<Dynamic>)), 'message', cast ([FlightRuntime.mergeObjects([options, { kind: 'info' }])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function showMessageDialog(options:MessageDialogOptions):flight.internal.FlightPromise<MessageDialogResult> {
+  public static function showMessageDialog(options:MessageDialogOptions):flight.internal.FlightPromise<MessageDialogResult> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getDialogBackend, cast ([] : Array<Dynamic>)), 'message', cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function showOpenDirectoryDialog(options:OpenDirectoryDialogOptions):flight.internal.FlightPromise<Array<FileDialogHandle>> {
+  public static function showOpenDirectoryDialog(options:OpenDirectoryDialogOptions):flight.internal.FlightPromise<Array<FileDialogHandle>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getDialogBackend, cast ([] : Array<Dynamic>)), 'openDirectory', cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function showOpenFileDialog(options:OpenFileDialogOptions):flight.internal.FlightPromise<Array<FileDialogHandle>> {
+  public static function showOpenFileDialog(options:OpenFileDialogOptions):flight.internal.FlightPromise<Array<FileDialogHandle>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getDialogBackend, cast ([] : Array<Dynamic>)), 'openFile', cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function showPromptDialog(options:PromptDialogOptions):flight.internal.FlightPromise<Null<String>> {
+  public static function showPromptDialog(options:PromptDialogOptions):flight.internal.FlightPromise<Null<String>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getDialogBackend, cast ([] : Array<Dynamic>)), 'prompt', cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function showSaveFileDialog(options:SaveFileDialogOptions):flight.internal.FlightPromise<Null<FileDialogHandle>> {
+  public static function showSaveFileDialog(options:SaveFileDialogOptions):flight.internal.FlightPromise<Null<FileDialogHandle>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getDialogBackend, cast ([] : Array<Dynamic>)), 'saveFile', cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function showWarningDialog(options:MessageDialogOptions):flight.internal.FlightPromise<MessageDialogResult> {
+  public static function showWarningDialog(options:MessageDialogOptions):flight.internal.FlightPromise<MessageDialogResult> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getDialogBackend, cast ([] : Array<Dynamic>)), 'message', cast ([FlightRuntime.mergeObjects([options, { kind: 'warning' }])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function toFileSystemAccessStartIn__dialog(startIn:FileDialogStartIn):Null<String> {
+  public static function toFileSystemAccessStartIn__dialog(startIn:FileDialogStartIn):Null<String> {
     var allowed:Dynamic = cast FlightRuntime.UNDEFINED;
     allowed = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Set'] : Array<Dynamic>)), [cast (['desktop', 'documents', 'downloads', 'music', 'pictures', 'videos'] : Array<Dynamic>)]);
     return cast FlightRuntime.select(FlightRuntime.callProperty(allowed, 'has', cast ([startIn] : Array<Dynamic>)), function():Dynamic return cast startIn, function():Dynamic return cast FlightRuntime.UNDEFINED);

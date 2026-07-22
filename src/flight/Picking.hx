@@ -28,9 +28,6 @@ import flight.Types.Vector3;
 
 typedef ScenePickOptions = { @:optional var cullBackfaces:Bool; @:optional var maxDistance:Float; @:optional var predicate:Dynamic; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Picking")
 class Picking {
   public static final _a__pickScene:Dynamic = FlightRuntime.callValue(createVector3, cast ([] : Array<Dynamic>));
@@ -61,19 +58,19 @@ class Picking {
 
   public static final _worldPoint__pickScene:Dynamic = FlightRuntime.callValue(createVector3, cast ([] : Array<Dynamic>));
 
-  @:keep public static function buildCameraPickRay__pickScene(out:Ray3D, camera:Camera, screenX:Float, screenY:Float):Bool {
+  public static function buildCameraPickRay__pickScene(out:Ray3D, camera:Camera, screenX:Float, screenY:Float):Bool {
     var aspect:Dynamic = cast FlightRuntime.UNDEFINED;
     aspect = FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(camera, 'projection'), 'kind'), 'perspective'), function():Dynamic return cast FlightRuntime.field(FlightRuntime.field(camera, 'projection'), 'aspect'), function():Dynamic return cast 1.0);
     return cast FlightRuntime.callValue(getCameraScreenToWorldRay, cast ([out, camera, screenX, screenY, aspect] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function compareSceneHitByDistance__pickScene(a:SceneHit, b:SceneHit):Float {
+  public static function compareSceneHitByDistance__pickScene(a:SceneHit, b:SceneHit):Float {
     return cast (FlightRuntime.field(a, 'distance') - FlightRuntime.field(b, 'distance'));
     return cast null;
   }
 
-  @:keep public static function copySceneHit__pickScene(out:SceneHit, src:SceneHit):Void {
+  public static function copySceneHit__pickScene(out:SceneHit, src:SceneHit):Void {
     FlightRuntime.setField(out, 'node', FlightRuntime.field(src, 'node'));
     FlightRuntime.setField(out, 'distance', FlightRuntime.field(src, 'distance'));
     FlightRuntime.setField(out, 'triangleIndex', FlightRuntime.field(src, 'triangleIndex'));
@@ -88,12 +85,12 @@ class Picking {
     FlightRuntime.setField(out, 'normalZ', FlightRuntime.field(src, 'normalZ'));
   }
 
-  @:keep public static function createSceneHit():SceneHit {
+  public static function createSceneHit():SceneHit {
     return cast { distance: 0.0, node: (cast (cast null : Dynamic) : Mesh), normalX: 0.0, normalY: 0.0, normalZ: 0.0, pointX: 0.0, pointY: 0.0, pointZ: 0.0, triangleIndex: -1.0, u: 0.0, v: 0.0, w: 0.0 };
     return cast null;
   }
 
-  @:keep public static function forEachSceneRayHit__pickScene(scene:SceneNode, ray:Ray3D, options:Null<ScenePickOptions>, onHit:Dynamic):Void {
+  public static function forEachSceneRayHit__pickScene(scene:SceneNode, ray:Ray3D, options:Null<ScenePickOptions>, onHit:Dynamic):Void {
     var predicate:Dynamic = cast FlightRuntime.UNDEFINED;
     var maxDistance:Dynamic = cast FlightRuntime.UNDEFINED;
     var cullBackfaces:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -103,7 +100,7 @@ class Picking {
     FlightRuntime.callValue(Picking.pickNode__pickScene, cast ([(cast (cast scene : Dynamic) : SceneNode), ray, predicate, maxDistance, cullBackfaces, onHit] : Array<Dynamic>));
   }
 
-  @:keep public static function intersectMeshTriangles__pickScene(mesh:Mesh, ray:Ray3D, maxDistance:Float, cullBackfaces:Bool, onHit:Dynamic):Void {
+  public static function intersectMeshTriangles__pickScene(mesh:Mesh, ray:Ray3D, maxDistance:Float, cullBackfaces:Bool, onHit:Dynamic):Void {
     var worldMatrix:Dynamic = cast FlightRuntime.UNDEFINED;
     var geometry:Dynamic = cast FlightRuntime.UNDEFINED;
     var indices:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -156,7 +153,7 @@ class Picking {
     }
   }
 
-  @:keep public static function pickNode__pickScene(node:SceneNode, ray:Ray3D, predicate:Null<Dynamic>, maxDistance:Float, cullBackfaces:Bool, onHit:Dynamic):Void {
+  public static function pickNode__pickScene(node:SceneNode, ray:Ray3D, predicate:Null<Dynamic>, maxDistance:Float, cullBackfaces:Bool, onHit:Dynamic):Void {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.field(node, 'enabled')))) { return; }
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.callValue(isMesh, cast ([node] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.orValue(FlightRuntime.strictEquals(predicate, FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.callValue(predicate, cast ([node] : Array<Dynamic>)))))) {
@@ -174,13 +171,13 @@ class Picking {
 }
   }
 
-  @:keep public static function pickScene(scene:SceneNode, camera:Camera, screenX:Float, screenY:Float, out:SceneHit, ?options:ScenePickOptions):Null<SceneHit> {
+  public static function pickScene(scene:SceneNode, camera:Camera, screenX:Float, screenY:Float, out:SceneHit, ?options:ScenePickOptions):Null<SceneHit> {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(Picking.buildCameraPickRay__pickScene, cast ([Picking._cameraRay__pickScene, camera, screenX, screenY] : Array<Dynamic>))))) { return cast null; }
     return cast FlightRuntime.callValue(pickSceneWithRay3D, cast ([scene, Picking._cameraRay__pickScene, out, options] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function pickSceneAll(scene:SceneNode, camera:Camera, screenX:Float, screenY:Float, outArray:Array<SceneHit>, ?options:ScenePickOptions):Array<SceneHit> {
+  public static function pickSceneAll(scene:SceneNode, camera:Camera, screenX:Float, screenY:Float, outArray:Array<SceneHit>, ?options:ScenePickOptions):Array<SceneHit> {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(Picking.buildCameraPickRay__pickScene, cast ([Picking._cameraRay__pickScene, camera, screenX, screenY] : Array<Dynamic>))))) {
   FlightRuntime.setLength(outArray, 0.0);
   return cast outArray;
@@ -189,7 +186,7 @@ class Picking {
     return cast null;
   }
 
-  @:keep public static function pickSceneAllWithRay3D(scene:SceneNode, ray:Ray3D, outArray:Array<SceneHit>, ?options:ScenePickOptions):Array<SceneHit> {
+  public static function pickSceneAllWithRay3D(scene:SceneNode, ray:Ray3D, outArray:Array<SceneHit>, ?options:ScenePickOptions):Array<SceneHit> {
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     count = 0.0;
     FlightRuntime.callValue(Picking.forEachSceneRayHit__pickScene, cast ([scene, ray, options, function(hit:Dynamic) {
@@ -208,7 +205,7 @@ class Picking {
     return cast null;
   }
 
-  @:keep public static function pickSceneWithRay3D(scene:SceneNode, ray:Ray3D, out:SceneHit, ?options:ScenePickOptions):Null<SceneHit> {
+  public static function pickSceneWithRay3D(scene:SceneNode, ray:Ray3D, out:SceneHit, ?options:ScenePickOptions):Null<SceneHit> {
     var found:Dynamic = cast FlightRuntime.UNDEFINED;
     var bestT:Dynamic = cast FlightRuntime.UNDEFINED;
     found = false;
@@ -223,7 +220,7 @@ class Picking {
     return cast null;
   }
 
-  @:keep public static function transformDirectionByMatrix4__pickScene(out:Vector3, d:Vector3, m:flight.internal.FlightFloat32Array):Void {
+  public static function transformDirectionByMatrix4__pickScene(out:Vector3, d:Vector3, m:flight.internal.FlightFloat32Array):Void {
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
     var z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -235,7 +232,7 @@ class Picking {
     FlightRuntime.setField(out, 'z', (((FlightRuntime.getIndex(m, 2.0) * x) + (FlightRuntime.getIndex(m, 6.0) * y)) + (FlightRuntime.getIndex(m, 10.0) * z)));
   }
 
-  @:keep public static function transformPointByMatrix4__pickScene(out:Vector3, p:Vector3, m:flight.internal.FlightFloat32Array):Void {
+  public static function transformPointByMatrix4__pickScene(out:Vector3, p:Vector3, m:flight.internal.FlightFloat32Array):Void {
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
     var z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -247,7 +244,7 @@ class Picking {
     FlightRuntime.setField(out, 'z', ((((FlightRuntime.getIndex(m, 2.0) * x) + (FlightRuntime.getIndex(m, 6.0) * y)) + (FlightRuntime.getIndex(m, 10.0) * z)) + FlightRuntime.getIndex(m, 14.0)));
   }
 
-  @:keep public static function writeBarycentric__pickScene(out:SceneHit, p:Vector3, a:Vector3, b:Vector3, c:Vector3):Void {
+  public static function writeBarycentric__pickScene(out:SceneHit, p:Vector3, a:Vector3, b:Vector3, c:Vector3):Void {
     var v0x:Dynamic = cast FlightRuntime.UNDEFINED;
     var v0y:Dynamic = cast FlightRuntime.UNDEFINED;
     var v0z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -295,7 +292,7 @@ class Picking {
     FlightRuntime.setField(out, 'w', w);
   }
 
-  @:keep public static function writeFaceNormal__pickScene(out:Vector3, a:Vector3, b:Vector3, c:Vector3):Bool {
+  public static function writeFaceNormal__pickScene(out:Vector3, a:Vector3, b:Vector3, c:Vector3):Bool {
     var e1x:Dynamic = cast FlightRuntime.UNDEFINED;
     var e1y:Dynamic = cast FlightRuntime.UNDEFINED;
     var e1z:Dynamic = cast FlightRuntime.UNDEFINED;

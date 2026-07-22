@@ -117,14 +117,11 @@ typedef UnityShape = { var enabled:Bool; var shapeType:UnityParticleShapeType; v
 
 typedef UnitySizeOverLifetime = { var enabled:Bool; var sizeStart:Float; var sizeEnd:Float; @:optional var curve:UnityAnimationCurve; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.ParticlesFormats")
 class ParticlesFormats {
   public static final _registry__formatRegistry:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
 
-  @:keep public static function alphaKeyframesToCurve__spineParse(arr:Dynamic):Null<ParticleCurve> {
+  public static function alphaKeyframesToCurve__spineParse(arr:Dynamic):Null<ParticleCurve> {
     var keys:Array<CurveKeyframe> = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(FlightRuntime.isArray(arr)), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(arr, 'length'), 2.0, '<=')))) { return cast null; }
     keys = cast ([] : Array<Dynamic>);
@@ -140,7 +137,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function alphaKeysToCurve__unityParse(arr:Dynamic):Null<ParticleCurve> {
+  public static function alphaKeysToCurve__unityParse(arr:Dynamic):Null<ParticleCurve> {
     var keys:Array<CurveKeyframe> = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(FlightRuntime.isArray(arr)), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(arr, 'length'), 2.0, '<=')))) { return cast null; }
     keys = cast ([] : Array<Dynamic>);
@@ -156,21 +153,21 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function blendModeToDst__particleDesignerSerialize(mode:Null<String>, fallback:Float):Float {
+  public static function blendModeToDst__particleDesignerSerialize(mode:Null<String>, fallback:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(mode, 'add'))) { return cast 1.0; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(mode, 'normal'))) { return cast 771.0; }
     return cast fallback;
     return cast null;
   }
 
-  @:keep public static function blendModeToSrc__particleDesignerSerialize(mode:Null<String>, fallback:Float):Float {
+  public static function blendModeToSrc__particleDesignerSerialize(mode:Null<String>, fallback:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(mode, 'add'))) { return cast 770.0; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(mode, 'normal'))) { return cast 770.0; }
     return cast fallback;
     return cast null;
   }
 
-  @:keep public static function boolKey__libgdxParse(section:LibgdxSection__libgdxParse, key:String, def:Dynamic = false):Bool {
+  public static function boolKey__libgdxParse(section:LibgdxSection__libgdxParse, key:String, def:Dynamic = false):Bool {
     var v:Dynamic = cast FlightRuntime.UNDEFINED;
     v = FlightRuntime.callProperty(section, 'get', cast ([key] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(v, FlightRuntime.UNDEFINED))) { return cast def; }
@@ -178,7 +175,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function buildGradient__unitySerialize(config:ParticleEmitterConfig):UnityGradient {
+  public static function buildGradient__unitySerialize(config:ParticleEmitterConfig):UnityGradient {
     var colorKeys:Dynamic = cast FlightRuntime.UNDEFINED;
     var alphaKeys:Dynamic = cast FlightRuntime.UNDEFINED;
     colorKeys = FlightRuntime.select(FlightRuntime.field(config, 'colorCurve'), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.callValue(particleColorCurveToKeyframes, cast ([FlightRuntime.field(config, 'colorCurve')] : Array<Dynamic>)), 'map', cast ([function(k:Dynamic) return { time: FlightRuntime.field(k, 'time'), color: { r: FlightRuntime.field(k, 'r'), g: FlightRuntime.field(k, 'g'), b: FlightRuntime.field(k, 'b') } }] : Array<Dynamic>)), function():Dynamic return cast cast ([{ time: 0.0, color: { r: FlightRuntime.field(config, 'colorStartR'), g: FlightRuntime.field(config, 'colorStartG'), b: FlightRuntime.field(config, 'colorStartB') } }, { time: 1.0, color: { r: FlightRuntime.field(config, 'colorEndR'), g: FlightRuntime.field(config, 'colorEndG'), b: FlightRuntime.field(config, 'colorEndB') } }] : Array<Dynamic>));
@@ -187,12 +184,12 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function buildSizeCurve__unitySerialize(scaleCurve:Array<Float>):UnityAnimationCurve {
+  public static function buildSizeCurve__unitySerialize(scaleCurve:Array<Float>):UnityAnimationCurve {
     return cast { keys: FlightRuntime.callProperty(FlightRuntime.callValue(particleCurveToKeyframes, cast ([scaleCurve] : Array<Dynamic>)), 'map', cast ([function(k:Dynamic) return { time: FlightRuntime.field(k, 'time'), value: FlightRuntime.field(k, 'value') }] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function collectLibgdxSerializeWarnings__libgdxSerialize(config:ParticleEmitterConfig):Array<String> {
+  public static function collectLibgdxSerializeWarnings__libgdxSerialize(config:ParticleEmitterConfig):Array<String> {
     var warnings:Array<String> = cast FlightRuntime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.field(config, 'blendMode'), null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(config, 'blendMode'), 'add')), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(config, 'blendMode'), 'normal')))) {
@@ -220,7 +217,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function collectLibgdxWarnings__libgdxParse(doc:LibgdxParticleDocument):Array<String> {
+  public static function collectLibgdxWarnings__libgdxParse(doc:LibgdxParticleDocument):Array<String> {
     var warnings:Array<String> = cast FlightRuntime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
     if (FlightRuntime.truthy(FlightRuntime.field(FlightRuntime.field(doc, 'delay'), 'active'))) { FlightRuntime.callProperty(warnings, 'push', cast (['libGDX emission delay is not supported and was ignored'] : Array<Dynamic>)); }
@@ -238,7 +235,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function collectParticleDesignerSerializeWarnings__particleDesignerSerialize(config:ParticleEmitterConfig):Array<String> {
+  public static function collectParticleDesignerSerializeWarnings__particleDesignerSerialize(config:ParticleEmitterConfig):Array<String> {
     var warnings:Array<String> = cast FlightRuntime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.field(config, 'blendMode'), null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(config, 'blendMode'), 'add')), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(config, 'blendMode'), 'normal')))) {
@@ -263,7 +260,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function collectParticleDesignerWarnings__particleDesignerParse(d:ParticleDesignerRawDict):Array<String> {
+  public static function collectParticleDesignerWarnings__particleDesignerParse(d:ParticleDesignerRawDict):Array<String> {
     var warnings:Array<String> = cast FlightRuntime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callValue(ParticlesFormats.num__particleDesignerParse, cast ([d, 'emitterType', 0.0] : Array<Dynamic>)), 1.0))) {
@@ -279,7 +276,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function collectPixiWarnings__pixiParse(raw:PixiRaw__pixiParse):Array<String> {
+  public static function collectPixiWarnings__pixiParse(raw:PixiRaw__pixiParse):Array<String> {
     var warnings:Array<String> = cast FlightRuntime.UNDEFINED;
     var accel:Dynamic = cast FlightRuntime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
@@ -300,7 +297,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function collectSpineSerializeWarnings__spineSerialize(config:ParticleEmitterConfig):Array<String> {
+  public static function collectSpineSerializeWarnings__spineSerialize(config:ParticleEmitterConfig):Array<String> {
     var warnings:Array<String> = cast FlightRuntime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(config, 'burstCount'), 0.0, '>'))) {
@@ -319,7 +316,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function collectSpineWarnings__spineParse(raw:Dynamic):Array<String> {
+  public static function collectSpineWarnings__spineParse(raw:Dynamic):Array<String> {
     var warnings:Array<String> = cast FlightRuntime.UNDEFINED;
     var nonZeroRange:Dynamic = cast FlightRuntime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
@@ -339,7 +336,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function collectStarlingPexSerializeWarnings__starlingPexSerialize(config:ParticleEmitterConfig):Array<String> {
+  public static function collectStarlingPexSerializeWarnings__starlingPexSerialize(config:ParticleEmitterConfig):Array<String> {
     var warnings:Array<String> = cast FlightRuntime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.field(config, 'blendMode'), null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(config, 'blendMode'), 'add')), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(config, 'blendMode'), 'normal')))) {
@@ -364,7 +361,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function collectStarlingPexWarnings__starlingPexParse(doc:StarlingPexDocument):Array<String> {
+  public static function collectStarlingPexWarnings__starlingPexParse(doc:StarlingPexDocument):Array<String> {
     var warnings:Array<String> = cast FlightRuntime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(doc, 'emitterType'), 1.0))) {
@@ -380,7 +377,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function collectUnitySerializeWarnings__unitySerialize(config:ParticleEmitterConfig):Array<String> {
+  public static function collectUnitySerializeWarnings__unitySerialize(config:ParticleEmitterConfig):Array<String> {
     var warnings:Array<String> = cast FlightRuntime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.orValue(!FlightRuntime.strictEquals(FlightRuntime.field(config, 'colorEndVarianceR'), 0.0), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(config, 'colorEndVarianceG'), 0.0)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(config, 'colorEndVarianceB'), 0.0)))) {
@@ -399,7 +396,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function collectUnityWarnings__unityParse(raw:Dynamic):Array<String> {
+  public static function collectUnityWarnings__unityParse(raw:Dynamic):Array<String> {
     var warnings:Array<String> = cast FlightRuntime.UNDEFINED;
     var em:Dynamic = cast FlightRuntime.UNDEFINED;
     var bursts:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -419,12 +416,12 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function color__unitySerialize(r:Float, g:Float, b:Float, a:Float):UnityColor {
+  public static function color__unitySerialize(r:Float, g:Float, b:Float, a:Float):UnityColor {
     return cast { r: r, g: g, b: b, a: a };
     return cast null;
   }
 
-  @:keep public static function colorAt__unityParse(obj:Dynamic, def:UnityColor):UnityColor {
+  public static function colorAt__unityParse(obj:Dynamic, def:UnityColor):UnityColor {
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.looseEquals(obj, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(obj), 'object')))) {
   var o:Dynamic = (cast obj : Dynamic);
   return cast { r: FlightRuntime.callValue(ParticlesFormats.rn__unityParse, cast ([FlightRuntime.field(o, 'r'), FlightRuntime.field(def, 'r')] : Array<Dynamic>)), g: FlightRuntime.callValue(ParticlesFormats.rn__unityParse, cast ([FlightRuntime.field(o, 'g'), FlightRuntime.field(def, 'g')] : Array<Dynamic>)), b: FlightRuntime.callValue(ParticlesFormats.rn__unityParse, cast ([FlightRuntime.field(o, 'b'), FlightRuntime.field(def, 'b')] : Array<Dynamic>)), a: FlightRuntime.callValue(ParticlesFormats.rn__unityParse, cast ([FlightRuntime.field(o, 'a'), FlightRuntime.field(def, 'a')] : Array<Dynamic>)) };
@@ -433,12 +430,12 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function colorAttr__starlingPexSerialize(name:String, c:StarlingPexColor):String {
+  public static function colorAttr__starlingPexSerialize(name:String, c:StarlingPexColor):String {
     return cast '  <attribute name="' + Std.string(name) + '" red="' + Std.string(FlightRuntime.field(c, 'red')) + '" green="' + Std.string(FlightRuntime.field(c, 'green')) + '" blue="' + Std.string(FlightRuntime.field(c, 'blue')) + '" alpha="' + Std.string(FlightRuntime.field(c, 'alpha')) + '"/>';
     return cast null;
   }
 
-  @:keep public static function colorKeysToCurve__unityParse(arr:Dynamic):Null<ParticleCurve> {
+  public static function colorKeysToCurve__unityParse(arr:Dynamic):Null<ParticleCurve> {
     var keys:Array<ColorKeyframe> = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(FlightRuntime.isArray(arr)), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(arr, 'length'), 2.0, '<=')))) { return cast null; }
     keys = cast ([] : Array<Dynamic>);
@@ -455,7 +452,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function configToDocument__libgdxSerialize(config:ParticleEmitterConfig, existing:Dynamic, textureSize:Float):LibgdxParticleDocument {
+  public static function configToDocument__libgdxSerialize(config:ParticleEmitterConfig, existing:Dynamic, textureSize:Float):LibgdxParticleDocument {
     var angleMid:Dynamic = cast FlightRuntime.UNDEFINED;
     var spreadDeg:Dynamic = cast FlightRuntime.UNDEFINED;
     var angleMin:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -498,7 +495,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function configToDocument__particleDesignerSerialize(config:ParticleEmitterConfig, existing:Dynamic, textureSize:Float):ParticleDesignerDocument {
+  public static function configToDocument__particleDesignerSerialize(config:ParticleEmitterConfig, existing:Dynamic, textureSize:Float):ParticleDesignerDocument {
     var angleDeg:Dynamic = cast FlightRuntime.UNDEFINED;
     var startSize:Dynamic = cast FlightRuntime.UNDEFINED;
     var startVar:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -532,7 +529,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function configToDocument__spineSerialize(config:ParticleEmitterConfig, existing:Dynamic):SpineParticleDocument {
+  public static function configToDocument__spineSerialize(config:ParticleEmitterConfig, existing:Dynamic):SpineParticleDocument {
     var angleMid:Dynamic = cast FlightRuntime.UNDEFINED;
     var spreadDeg:Dynamic = cast FlightRuntime.UNDEFINED;
     angleMid = (FlightRuntime.callProperty(HxMath, 'atan2', cast ([-FlightRuntime.field(config, 'directionY'), FlightRuntime.field(config, 'directionX')] : Array<Dynamic>)) * ParticlesFormats.RAD2DEG__spineSerialize);
@@ -541,7 +538,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function configToDocument__starlingPexSerialize(config:ParticleEmitterConfig, existing:Dynamic, textureSize:Float):StarlingPexDocument {
+  public static function configToDocument__starlingPexSerialize(config:ParticleEmitterConfig, existing:Dynamic, textureSize:Float):StarlingPexDocument {
     var angleDeg:Dynamic = cast FlightRuntime.UNDEFINED;
     var startSize:Dynamic = cast FlightRuntime.UNDEFINED;
     var startVar:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -581,7 +578,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function configToDocument__unitySerialize(config:ParticleEmitterConfig, existing:Dynamic, ppu:Float):UnityParticleDocument {
+  public static function configToDocument__unitySerialize(config:ParticleEmitterConfig, existing:Dynamic, ppu:Float):UnityParticleDocument {
     var rotSpeedDegLow:Dynamic = cast FlightRuntime.UNDEFINED;
     var rotSpeedDegHigh:Dynamic = cast FlightRuntime.UNDEFINED;
     var hasRotation:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -615,7 +612,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function configToSpineBlendMode__spineSerialize(mode:Null<ParticleBlendMode>):Null<Dynamic> {
+  public static function configToSpineBlendMode__spineSerialize(mode:Null<ParticleBlendMode>):Null<Dynamic> {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(mode, 'add'))) { return cast 'additive'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(mode, 'multiply'))) { return cast 'multiply'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(mode, 'screen'))) { return cast 'screen'; }
@@ -624,7 +621,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function constant__unitySerialize(v:Float):UnityMinMaxValue {
+  public static function constant__unitySerialize(v:Float):UnityMinMaxValue {
     return cast { mode: 'constant', constant: v };
     return cast null;
   }
@@ -647,7 +644,7 @@ class ParticlesFormats {
 
   public static final DEG2RAD__unityParse:Dynamic = (HxMath.PI / 180.0);
 
-  @:keep public static function detectParticleFormat(text:String):Null<ParticleFormatKind> {
+  public static function detectParticleFormat(text:String):Null<ParticleFormatKind> {
     var trimmed:Dynamic = cast FlightRuntime.UNDEFINED;
     var firstLine:Dynamic = cast FlightRuntime.UNDEFINED;
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -681,7 +678,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function detectRegisteredParticleFormat(text:String):Null<String> {
+  public static function detectRegisteredParticleFormat(text:String):Null<String> {
     for (__iteration0 in FlightRuntime.iterable(ParticlesFormats._registry__formatRegistry)) {
       var kind:Dynamic = FlightRuntime.getIndex(__iteration0, 0.0);
       var codec:Dynamic = FlightRuntime.getIndex(__iteration0, 1.0);
@@ -694,7 +691,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function dictToDocument__starlingPexParse(d:PexDict__starlingPexParse):StarlingPexDocument {
+  public static function dictToDocument__starlingPexParse(d:PexDict__starlingPexParse):StarlingPexDocument {
     var WHITE:StarlingPexColor = cast FlightRuntime.UNDEFINED;
     var CLEAR:StarlingPexColor = cast FlightRuntime.UNDEFINED;
     var ZERO:StarlingPexColor = cast FlightRuntime.UNDEFINED;
@@ -705,7 +702,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function documentToConfig__libgdxParse(doc:LibgdxParticleDocument, textureSize:Float):ParticleEmitterConfig {
+  public static function documentToConfig__libgdxParse(doc:LibgdxParticleDocument, textureSize:Float):ParticleEmitterConfig {
     var __destructure2:Dynamic = cast FlightRuntime.UNDEFINED;
     var lifeMin:Dynamic = cast FlightRuntime.UNDEFINED;
     var lifeMax:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -840,7 +837,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function documentToConfig__starlingPexParse(doc:StarlingPexDocument, textureSize:Float):ParticleEmitterConfig {
+  public static function documentToConfig__starlingPexParse(doc:StarlingPexDocument, textureSize:Float):ParticleEmitterConfig {
     var angleRad:Dynamic = cast FlightRuntime.UNDEFINED;
     var lifespan:Dynamic = cast FlightRuntime.UNDEFINED;
     var lifespanVar:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -883,7 +880,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function documentToPlist__particleDesignerSerialize(doc:ParticleDesignerDocument):String {
+  public static function documentToPlist__particleDesignerSerialize(doc:ParticleDesignerDocument):String {
     var lines:Array<String> = cast FlightRuntime.UNDEFINED;
     var kv:String->Dynamic->Void = cast FlightRuntime.UNDEFINED;
     lines = cast (['<?xml version="1.0" encoding="utf-8"?>', '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">', '<plist version="1.0">', '<dict>'] : Array<Dynamic>);
@@ -949,7 +946,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function documentToText__libgdxSerialize(doc:LibgdxParticleDocument):String {
+  public static function documentToText__libgdxSerialize(doc:LibgdxParticleDocument):String {
     var lines:Array<String> = cast FlightRuntime.UNDEFINED;
     lines = cast ([] : Array<Dynamic>);
     FlightRuntime.callProperty(lines, 'push', cast (['Particle Effect'] : Array<Dynamic>));
@@ -1009,7 +1006,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function documentToXml__starlingPexSerialize(doc:StarlingPexDocument):String {
+  public static function documentToXml__starlingPexSerialize(doc:StarlingPexDocument):String {
     var lines:Array<String> = cast FlightRuntime.UNDEFINED;
     lines = cast (['<?xml version="1.0" encoding="utf-8"?>', '<particleEmitterConfig>', '  <attribute name="maxParticles" value="' + Std.string(FlightRuntime.field(doc, 'maxParticles')) + '"/>', '  <attribute name="emitterType" value="' + Std.string(FlightRuntime.field(doc, 'emitterType')) + '"/>', FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['duration', FlightRuntime.field(doc, 'duration')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['particleLifespan', FlightRuntime.field(doc, 'particleLifespan')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['particleLifespanVariance', FlightRuntime.field(doc, 'particleLifespanVariance')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['speed', FlightRuntime.field(doc, 'speed')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['speedVariance', FlightRuntime.field(doc, 'speedVariance')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['angle', FlightRuntime.field(doc, 'angle')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['angleVariance', FlightRuntime.field(doc, 'angleVariance')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['gravityx', FlightRuntime.field(doc, 'gravityx')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['gravityy', FlightRuntime.field(doc, 'gravityy')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['sourcePositionVariancex', FlightRuntime.field(doc, 'sourcePositionVariancex')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['sourcePositionVariancey', FlightRuntime.field(doc, 'sourcePositionVariancey')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['startParticleSize', FlightRuntime.field(doc, 'startParticleSize')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['startParticleSizeVariance', FlightRuntime.field(doc, 'startParticleSizeVariance')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['finishParticleSize', FlightRuntime.field(doc, 'finishParticleSize')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['finishParticleSizeVariance', FlightRuntime.field(doc, 'finishParticleSizeVariance')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.colorAttr__starlingPexSerialize, cast (['startColor', FlightRuntime.field(doc, 'startColor')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.colorAttr__starlingPexSerialize, cast (['startColorVariance', FlightRuntime.field(doc, 'startColorVariance')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.colorAttr__starlingPexSerialize, cast (['finishColor', FlightRuntime.field(doc, 'finishColor')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.colorAttr__starlingPexSerialize, cast (['finishColorVariance', FlightRuntime.field(doc, 'finishColorVariance')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['rotationStart', FlightRuntime.field(doc, 'rotationStart')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['rotationStartVariance', FlightRuntime.field(doc, 'rotationStartVariance')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['rotationEnd', FlightRuntime.field(doc, 'rotationEnd')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['rotationEndVariance', FlightRuntime.field(doc, 'rotationEndVariance')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['maxRadius', FlightRuntime.field(doc, 'maxRadius')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['maxRadiusVariance', FlightRuntime.field(doc, 'maxRadiusVariance')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['minRadius', FlightRuntime.field(doc, 'minRadius')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['minRadiusVariance', FlightRuntime.field(doc, 'minRadiusVariance')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['rotatePerSecond', FlightRuntime.field(doc, 'rotatePerSecond')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['rotatePerSecondVariance', FlightRuntime.field(doc, 'rotatePerSecondVariance')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['radialAcceleration', FlightRuntime.field(doc, 'radialAcceleration')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['radialAccelVariance', FlightRuntime.field(doc, 'radialAccelVariance')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['tangentialAcceleration', FlightRuntime.field(doc, 'tangentialAcceleration')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['tangentialAccelVariance', FlightRuntime.field(doc, 'tangentialAccelVariance')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['blendFuncSource', FlightRuntime.field(doc, 'blendFuncSource')] : Array<Dynamic>)), FlightRuntime.callValue(ParticlesFormats.numAttr__starlingPexSerialize, cast (['blendFuncDestination', FlightRuntime.field(doc, 'blendFuncDestination')] : Array<Dynamic>))] : Array<Dynamic>);
     if (FlightRuntime.truthy(FlightRuntime.field(doc, 'textureFileName'))) {
@@ -1020,17 +1017,17 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function escapeXml__particleDesignerSerialize(s:String):String {
+  public static function escapeXml__particleDesignerSerialize(s:String):String {
     return cast FlightRuntime.replace(FlightRuntime.replace(FlightRuntime.replace(s, FlightRuntime.regexp('&', 'g'), '&amp;', false), FlightRuntime.regexp('<', 'g'), '&lt;', false), FlightRuntime.regexp('>', 'g'), '&gt;', false);
     return cast null;
   }
 
-  @:keep public static function escapeXml__starlingPexSerialize(s:String):String {
+  public static function escapeXml__starlingPexSerialize(s:String):String {
     return cast FlightRuntime.replace(FlightRuntime.replace(FlightRuntime.replace(s, FlightRuntime.regexp('&', 'g'), '&amp;', false), FlightRuntime.regexp('<', 'g'), '&lt;', false), FlightRuntime.regexp('>', 'g'), '&gt;', false);
     return cast null;
   }
 
-  @:keep public static function extractAttr__starlingPexParse(tag:String, attrName:String):Null<String> {
+  public static function extractAttr__starlingPexParse(tag:String, attrName:String):Null<String> {
     var re:Dynamic = cast FlightRuntime.UNDEFINED;
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     re = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['RegExp'] : Array<Dynamic>)), ['' + Std.string(attrName) + '\\s*=\\s*["\']([^"\']*)["\']']);
@@ -1039,32 +1036,32 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function firstAlpha__spineParse(arr:Dynamic):Float {
+  public static function firstAlpha__spineParse(arr:Dynamic):Float {
     return cast FlightRuntime.select(FlightRuntime.andValue(FlightRuntime.isArray(arr), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(arr, 'length'), 0.0, '>')), function():Dynamic return cast FlightRuntime.coalesce((cast FlightRuntime.field((cast FlightRuntime.getIndex(arr, 0.0) : Dynamic), 'alpha') : Float), function():Dynamic return cast 1.0), function():Dynamic return cast 1.0);
     return cast null;
   }
 
-  @:keep public static function firstTintColor__spineParse(arr:Dynamic):Array<Float> {
+  public static function firstTintColor__spineParse(arr:Dynamic):Array<Float> {
     return cast FlightRuntime.callValue(ParticlesFormats.hexToRgb__spineParse, cast ([FlightRuntime.select(FlightRuntime.andValue(FlightRuntime.isArray(arr), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(arr, 'length'), 0.0, '>')), function():Dynamic return cast FlightRuntime.coalesce((cast FlightRuntime.field((cast FlightRuntime.getIndex(arr, 0.0) : Dynamic), 'color') : String), function():Dynamic return cast 'ffffff'), function():Dynamic return cast 'ffffff')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getParticleFormatCodec(kind:ParticleFormatKind):Null<ParticleFormatCodec> {
+  public static function getParticleFormatCodec(kind:ParticleFormatKind):Null<ParticleFormatCodec> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(ParticlesFormats._registry__formatRegistry, 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getRegisteredParticleFormats():Array<String> {
+  public static function getRegisteredParticleFormats():Array<String> {
     return cast FlightRuntime.concatArrays([FlightRuntime.toArray(FlightRuntime.callProperty(ParticlesFormats._registry__formatRegistry, 'keys', cast ([] : Array<Dynamic>)))]);
     return cast null;
   }
 
-  @:keep public static function hasMinMaxCurveMode__detect(val:Dynamic):Bool {
+  public static function hasMinMaxCurveMode__detect(val:Dynamic):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(val, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(val), 'object')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field((cast val : { @:optional var mode:Dynamic; }), 'mode')), 'string'));
     return cast null;
   }
 
-  @:keep public static function hexToRgb__libgdxParse(hex:String):Array<Float> {
+  public static function hexToRgb__libgdxParse(hex:String):Array<Float> {
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
     var channel:Dynamic = cast FlightRuntime.UNDEFINED;
     s = FlightRuntime.padEnd(FlightRuntime.replace(hex, FlightRuntime.regexp('^#', ''), '', false), 6.0, 'f');
@@ -1077,7 +1074,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function hexToRgb__spineParse(hex:String):Array<Float> {
+  public static function hexToRgb__spineParse(hex:String):Array<Float> {
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
     var channel:Dynamic = cast FlightRuntime.UNDEFINED;
     s = FlightRuntime.padEnd(FlightRuntime.replace(hex, '#', '', false), 6.0, 'f');
@@ -1090,7 +1087,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function isRangeObject__detect(val:Dynamic):Bool {
+  public static function isRangeObject__detect(val:Dynamic):Bool {
     var o:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(val, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(val), 'object')))) { return cast false; }
     o = (cast val : { @:optional var low:Dynamic; @:optional var high:Dynamic; });
@@ -1098,24 +1095,24 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function lastAlpha__spineParse(arr:Dynamic):Float {
+  public static function lastAlpha__spineParse(arr:Dynamic):Float {
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(FlightRuntime.isArray(arr)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(arr, 'length'), 0.0)))) { return cast 0.0; }
     return cast FlightRuntime.coalesce((cast FlightRuntime.field((cast FlightRuntime.getIndex(arr, (FlightRuntime.field(arr, 'length') - 1.0)) : Dynamic), 'alpha') : Float), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  @:keep public static function lastTintColor__spineParse(arr:Dynamic):Array<Float> {
+  public static function lastTintColor__spineParse(arr:Dynamic):Array<Float> {
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(FlightRuntime.isArray(arr)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(arr, 'length'), 0.0)))) { return cast cast ([1.0, 1.0, 1.0] : Array<Dynamic>); }
     return cast FlightRuntime.callValue(ParticlesFormats.hexToRgb__spineParse, cast ([FlightRuntime.coalesce((cast FlightRuntime.field((cast FlightRuntime.getIndex(arr, (FlightRuntime.field(arr, 'length') - 1.0)) : Dynamic), 'color') : String), function():Dynamic return cast 'ffffff')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function makeConstRange__libgdxSerialize(v:Float):LibgdxRangeValue {
+  public static function makeConstRange__libgdxSerialize(v:Float):LibgdxRangeValue {
     return cast { lowMin: v, lowMax: v, highMin: v, highMax: v, relative: false, scaling: cast ([1.0] : Array<Dynamic>), timeline: cast ([0.0] : Array<Dynamic>) };
     return cast null;
   }
 
-  @:keep public static function mmHigh__unityParse(obj:Dynamic, def:Dynamic = 0.0):Float {
+  public static function mmHigh__unityParse(obj:Dynamic, def:Dynamic = 0.0):Float {
     var o:Dynamic = cast FlightRuntime.UNDEFINED;
     var mode:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.looseEquals(obj, null))) { return cast def; }
@@ -1127,7 +1124,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function mmLow__unityParse(obj:Dynamic, def:Dynamic = 0.0):Float {
+  public static function mmLow__unityParse(obj:Dynamic, def:Dynamic = 0.0):Float {
     var o:Dynamic = cast FlightRuntime.UNDEFINED;
     var mode:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.looseEquals(obj, null))) { return cast def; }
@@ -1139,19 +1136,19 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function num__particleDesignerParse(d:ParticleDesignerRawDict, key:String, def:Dynamic = 0.0):Float {
+  public static function num__particleDesignerParse(d:ParticleDesignerRawDict, key:String, def:Dynamic = 0.0):Float {
     var v:Dynamic = cast FlightRuntime.UNDEFINED;
     v = FlightRuntime.getIndex(d, key);
     return cast FlightRuntime.select(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.typeofValue(v), 'number'), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([v] : Array<Dynamic>))), function():Dynamic return cast v, function():Dynamic return cast def);
     return cast null;
   }
 
-  @:keep public static function numAttr__starlingPexSerialize(name:String, value:Float):String {
+  public static function numAttr__starlingPexSerialize(name:String, value:Float):String {
     return cast '  <attribute name="' + Std.string(name) + '" value="' + Std.string(value) + '"/>';
     return cast null;
   }
 
-  @:keep public static function numKey__libgdxParse(section:LibgdxSection__libgdxParse, key:String, def:Dynamic = 0.0):Float {
+  public static function numKey__libgdxParse(section:LibgdxSection__libgdxParse, key:String, def:Dynamic = 0.0):Float {
     var v:Dynamic = cast FlightRuntime.UNDEFINED;
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     v = FlightRuntime.callProperty(section, 'get', cast ([key] : Array<Dynamic>));
@@ -1161,7 +1158,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function parseLibgdxParticle(text:String, ?options:LibgdxParseOptions):ParticleEmitterConfig {
+  public static function parseLibgdxParticle(text:String, ?options:LibgdxParseOptions):ParticleEmitterConfig {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var sections:Dynamic = cast FlightRuntime.UNDEFINED;
     var doc:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1175,7 +1172,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function parseLibgdxParticleDocument(text:String, ?options:LibgdxParseOptions):LibgdxParseResult {
+  public static function parseLibgdxParticleDocument(text:String, ?options:LibgdxParseOptions):LibgdxParseResult {
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
     var sections:Dynamic = cast FlightRuntime.UNDEFINED;
     var doc:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1191,7 +1188,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function parseLibgdxText__libgdxParse(text:String):{ var header:String; var sections:Dynamic; } {
+  public static function parseLibgdxText__libgdxParse(text:String):{ var header:String; var sections:Dynamic; } {
     var lines:Dynamic = cast FlightRuntime.UNDEFINED;
     var sections:Dynamic = cast FlightRuntime.UNDEFINED;
     var currentSection:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1226,7 +1223,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function parseParticleConfig(text:String, ?options:ParseParticleConfigOptions):ParticleEmitterConfig {
+  public static function parseParticleConfig(text:String, ?options:ParseParticleConfigOptions):ParticleEmitterConfig {
     var format:Dynamic = cast FlightRuntime.UNDEFINED;
     format = FlightRuntime.callValue(detectParticleFormat, cast ([text] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(format, null))) { return cast FlightRuntime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)); }
@@ -1244,7 +1241,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function parseParticleConfigDocument(text:String, ?options:ParseParticleConfigOptions):ParticleConfigParseResult {
+  public static function parseParticleConfigDocument(text:String, ?options:ParseParticleConfigOptions):ParticleConfigParseResult {
     var format:Dynamic = cast FlightRuntime.UNDEFINED;
     format = FlightRuntime.callValue(detectParticleFormat, cast ([text] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(format, null))) {
@@ -1282,12 +1279,12 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function parseParticleDesignerPlist(plistXml:String, ?options:ParticleDesignerParseOptions):ParticleEmitterConfig {
+  public static function parseParticleDesignerPlist(plistXml:String, ?options:ParticleDesignerParseOptions):ParticleEmitterConfig {
     return cast FlightRuntime.callValue(ParticlesFormats.rawDictToConfig__particleDesignerParse, cast ([FlightRuntime.callValue(ParticlesFormats.parsePlistRawDict__particleDesignerParse, cast ([plistXml] : Array<Dynamic>)), FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'textureSize'), function():Dynamic return cast 1.0)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function parseParticleDesignerPlistDocument(plistXml:String, ?options:ParticleDesignerParseOptions):ParticleDesignerParsed {
+  public static function parseParticleDesignerPlistDocument(plistXml:String, ?options:ParticleDesignerParseOptions):ParticleDesignerParsed {
     var textureSize:Dynamic = cast FlightRuntime.UNDEFINED;
     var d:Dynamic = cast FlightRuntime.UNDEFINED;
     var document:ParticleDesignerDocument = cast FlightRuntime.UNDEFINED;
@@ -1298,7 +1295,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function parsePexXml__starlingPexParse(xml:String):PexDict__starlingPexParse {
+  public static function parsePexXml__starlingPexParse(xml:String):PexDict__starlingPexParse {
     var dict:PexDict__starlingPexParse = cast FlightRuntime.UNDEFINED;
     var ATTR_RE:Dynamic = cast FlightRuntime.UNDEFINED;
     var m:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
@@ -1366,7 +1363,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function parsePixiJson__pixiParse(json:String):PixiRaw__pixiParse {
+  public static function parsePixiJson__pixiParse(json:String):PixiRaw__pixiParse {
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
     try {
   (raw = cast (FlightRuntime.jsonParse(json) : Dynamic));
@@ -1380,19 +1377,19 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function parsePixiParticle(json:String):ParticleEmitterConfig {
+  public static function parsePixiParticle(json:String):ParticleEmitterConfig {
     return cast FlightRuntime.callValue(ParticlesFormats.rawToConfig__pixiParse, cast ([FlightRuntime.callValue(ParticlesFormats.parsePixiJson__pixiParse, cast ([json] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function parsePixiParticleDocument(json:String):PixiParseResult {
+  public static function parsePixiParticleDocument(json:String):PixiParseResult {
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
     raw = FlightRuntime.callValue(ParticlesFormats.parsePixiJson__pixiParse, cast ([json] : Array<Dynamic>));
     return cast { config: FlightRuntime.callValue(ParticlesFormats.rawToConfig__pixiParse, cast ([raw] : Array<Dynamic>)), warnings: FlightRuntime.callValue(ParticlesFormats.collectPixiWarnings__pixiParse, cast ([raw] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function parsePlistRawDict__particleDesignerParse(xml:String):ParticleDesignerRawDict {
+  public static function parsePlistRawDict__particleDesignerParse(xml:String):ParticleDesignerRawDict {
     var result:ParticleDesignerRawDict = cast FlightRuntime.UNDEFINED;
     var TAG_RE:Dynamic = cast FlightRuntime.UNDEFINED;
     var currentKey:Null<String> = cast FlightRuntime.UNDEFINED;
@@ -1437,7 +1434,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function parseRegisteredParticleFormat(text:String, kind:String):ParticleConfigParseResult {
+  public static function parseRegisteredParticleFormat(text:String, kind:String):ParticleConfigParseResult {
     var codec:Dynamic = cast FlightRuntime.UNDEFINED;
     codec = FlightRuntime.callProperty(ParticlesFormats._registry__formatRegistry, 'get', cast ([kind] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.truthy(codec))) {
@@ -1452,7 +1449,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function parseSpineJson__spineParse(json:String):Dynamic {
+  public static function parseSpineJson__spineParse(json:String):Dynamic {
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
     try {
   (raw = cast (FlightRuntime.jsonParse(json) : Dynamic));
@@ -1466,19 +1463,19 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function parseSpineParticle(json:String):ParticleEmitterConfig {
+  public static function parseSpineParticle(json:String):ParticleEmitterConfig {
     return cast FlightRuntime.callValue(ParticlesFormats.rawToConfig__spineParse, cast ([FlightRuntime.callValue(ParticlesFormats.parseSpineJson__spineParse, cast ([json] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function parseSpineParticleDocument(json:String):SpineParsed {
+  public static function parseSpineParticleDocument(json:String):SpineParsed {
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
     raw = FlightRuntime.callValue(ParticlesFormats.parseSpineJson__spineParse, cast ([json] : Array<Dynamic>));
     return cast { config: FlightRuntime.callValue(ParticlesFormats.rawToConfig__spineParse, cast ([raw] : Array<Dynamic>)), document: FlightRuntime.callValue(ParticlesFormats.rawToDocument__spineParse, cast ([raw] : Array<Dynamic>)), warnings: FlightRuntime.callValue(ParticlesFormats.collectSpineWarnings__spineParse, cast ([raw] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function parseStarlingPex(xml:String, ?options:StarlingPexParseOptions):ParticleEmitterConfig {
+  public static function parseStarlingPex(xml:String, ?options:StarlingPexParseOptions):ParticleEmitterConfig {
     var d:Dynamic = cast FlightRuntime.UNDEFINED;
     var doc:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.strictEquals(FlightRuntime.typeofValue(xml), 'string'), function():Dynamic return cast !FlightRuntime.truthy(StringTools.startsWith(StringTools.trim(Std.string(xml)), '<'))))) {
@@ -1490,7 +1487,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function parseStarlingPexDocument(xml:String, ?options:StarlingPexParseOptions):StarlingPexParseResult {
+  public static function parseStarlingPexDocument(xml:String, ?options:StarlingPexParseOptions):StarlingPexParseResult {
     var d:Dynamic = cast FlightRuntime.UNDEFINED;
     var doc:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.strictEquals(FlightRuntime.typeofValue(xml), 'string'), function():Dynamic return cast !FlightRuntime.truthy(StringTools.startsWith(StringTools.trim(Std.string(xml)), '<'))))) {
@@ -1502,7 +1499,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function parseUnityJson__unityParse(json:String):Dynamic {
+  public static function parseUnityJson__unityParse(json:String):Dynamic {
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
     try {
   (raw = cast (FlightRuntime.jsonParse(json) : Dynamic));
@@ -1516,12 +1513,12 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function parseUnityParticle(json:String, ?options:UnityParseOptions):ParticleEmitterConfig {
+  public static function parseUnityParticle(json:String, ?options:UnityParseOptions):ParticleEmitterConfig {
     return cast FlightRuntime.callValue(ParticlesFormats.rawToConfig__unityParse, cast ([FlightRuntime.callValue(ParticlesFormats.parseUnityJson__unityParse, cast ([json] : Array<Dynamic>)), FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'pixelsPerUnit'), function():Dynamic return cast ParticlesFormats.DEFAULT_PPU__unityParse)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function parseUnityParticleDocument(json:String, ?options:UnityParseOptions):UnityParsed {
+  public static function parseUnityParticleDocument(json:String, ?options:UnityParseOptions):UnityParsed {
     var ppu:Dynamic = cast FlightRuntime.UNDEFINED;
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
     ppu = FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'pixelsPerUnit'), function():Dynamic return cast ParticlesFormats.DEFAULT_PPU__unityParse);
@@ -1530,7 +1527,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function pColor__starlingPexParse(d:PexDict__starlingPexParse, prefix:String, defColor:StarlingPexColor):StarlingPexColor {
+  public static function pColor__starlingPexParse(d:PexDict__starlingPexParse, prefix:String, defColor:StarlingPexColor):StarlingPexColor {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1543,7 +1540,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function pdBlendMode__particleDesignerParse(src:Float, dst:Float):Null<ParticleBlendMode> {
+  public static function pdBlendMode__particleDesignerParse(src:Float, dst:Float):Null<ParticleBlendMode> {
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.orValue(FlightRuntime.strictEquals(src, 770.0), function():Dynamic return cast FlightRuntime.strictEquals(src, 1.0)), function():Dynamic return cast FlightRuntime.strictEquals(dst, 1.0)))) { return cast 'add'; }
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.strictEquals(src, 770.0), function():Dynamic return cast FlightRuntime.strictEquals(dst, 771.0)))) { return cast 'normal'; }
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.strictEquals(src, 1.0), function():Dynamic return cast FlightRuntime.strictEquals(dst, 771.0)))) { return cast 'normal'; }
@@ -1551,7 +1548,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function pexBlendMode__starlingPexParse(src:Float, dst:Float):Null<ParticleBlendMode> {
+  public static function pexBlendMode__starlingPexParse(src:Float, dst:Float):Null<ParticleBlendMode> {
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.orValue(FlightRuntime.strictEquals(src, 770.0), function():Dynamic return cast FlightRuntime.strictEquals(src, 1.0)), function():Dynamic return cast FlightRuntime.strictEquals(dst, 1.0)))) { return cast 'add'; }
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.strictEquals(src, 770.0), function():Dynamic return cast FlightRuntime.strictEquals(dst, 771.0)))) { return cast 'normal'; }
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.strictEquals(src, 1.0), function():Dynamic return cast FlightRuntime.strictEquals(dst, 771.0)))) { return cast 'normal'; }
@@ -1559,7 +1556,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function pNum__starlingPexParse(d:PexDict__starlingPexParse, key:String, def:Dynamic = 0.0):Float {
+  public static function pNum__starlingPexParse(d:PexDict__starlingPexParse, key:String, def:Dynamic = 0.0):Float {
     var v:Dynamic = cast FlightRuntime.UNDEFINED;
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     v = FlightRuntime.getIndex(d, key);
@@ -1569,7 +1566,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function pStr__starlingPexParse(d:PexDict__starlingPexParse, key:String, def:Dynamic = ''):String {
+  public static function pStr__starlingPexParse(d:PexDict__starlingPexParse, key:String, def:Dynamic = ''):String {
     return cast FlightRuntime.coalesce(FlightRuntime.getIndex(d, key), function():Dynamic return cast def);
     return cast null;
   }
@@ -1584,7 +1581,7 @@ class ParticlesFormats {
 
   public static final RAD2DEG__unitySerialize:Dynamic = (180.0 / HxMath.PI);
 
-  @:keep public static function rangeHigh__spineParse(obj:Dynamic, def:Dynamic = 0.0):Float {
+  public static function rangeHigh__spineParse(obj:Dynamic, def:Dynamic = 0.0):Float {
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.looseEquals(obj, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(obj), 'object')))) {
   var o:Dynamic = (cast obj : Dynamic);
   return cast FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(o, 'high')), 'number'), function():Dynamic return cast FlightRuntime.field(o, 'high'), function():Dynamic return cast def);
@@ -1593,7 +1590,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function rangeLow__spineParse(obj:Dynamic, def:Dynamic = 0.0):Float {
+  public static function rangeLow__spineParse(obj:Dynamic, def:Dynamic = 0.0):Float {
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.looseEquals(obj, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(obj), 'object')))) {
   var o:Dynamic = (cast obj : Dynamic);
   return cast FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(o, 'low')), 'number'), function():Dynamic return cast FlightRuntime.field(o, 'low'), function():Dynamic return cast def);
@@ -1602,7 +1599,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function rangeMid__spineParse(obj:Dynamic, def:Dynamic = 0.0):Float {
+  public static function rangeMid__spineParse(obj:Dynamic, def:Dynamic = 0.0):Float {
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.looseEquals(obj, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(obj), 'object')))) {
   var o:Dynamic = (cast obj : Dynamic);
   var lo:Dynamic = FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(o, 'low')), 'number'), function():Dynamic return cast FlightRuntime.field(o, 'low'), function():Dynamic return cast def);
@@ -1613,7 +1610,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function rangeToLines__libgdxSerialize(section:String, r:LibgdxRangeValue, ?active:Bool):Array<String> {
+  public static function rangeToLines__libgdxSerialize(section:String, r:LibgdxRangeValue, ?active:Bool):Array<String> {
     var lines:Dynamic = cast FlightRuntime.UNDEFINED;
     lines = cast ([section] : Array<Dynamic>);
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(active, FlightRuntime.UNDEFINED))) { FlightRuntime.callProperty(lines, 'push', cast (['active: ' + Std.string(active) + ''] : Array<Dynamic>)); }
@@ -1630,7 +1627,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function rangeToMinMax__libgdxParse(r:LibgdxRangeValue):Array<Float> {
+  public static function rangeToMinMax__libgdxParse(r:LibgdxRangeValue):Array<Float> {
     var lo:Dynamic = cast FlightRuntime.UNDEFINED;
     var hi:Dynamic = cast FlightRuntime.UNDEFINED;
     lo = ((FlightRuntime.field(r, 'lowMin') + FlightRuntime.field(r, 'lowMax')) * 0.5);
@@ -1639,7 +1636,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function rawDictToConfig__particleDesignerParse(d:ParticleDesignerRawDict, textureSize:Float):ParticleEmitterConfig {
+  public static function rawDictToConfig__particleDesignerParse(d:ParticleDesignerRawDict, textureSize:Float):ParticleEmitterConfig {
     var angleRad:Dynamic = cast FlightRuntime.UNDEFINED;
     var lifespan:Dynamic = cast FlightRuntime.UNDEFINED;
     var lifespanVar:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1682,7 +1679,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function rawToConfig__pixiParse(raw:PixiRaw__pixiParse):ParticleEmitterConfig {
+  public static function rawToConfig__pixiParse(raw:PixiRaw__pixiParse):ParticleEmitterConfig {
     var maxParticles:Dynamic = cast FlightRuntime.UNDEFINED;
     var frequency:Dynamic = cast FlightRuntime.UNDEFINED;
     var spawnRate:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1782,7 +1779,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function rawToConfig__spineParse(raw:Dynamic):ParticleEmitterConfig {
+  public static function rawToConfig__spineParse(raw:Dynamic):ParticleEmitterConfig {
     var lifeLow:Dynamic = cast FlightRuntime.UNDEFINED;
     var lifeHigh:Dynamic = cast FlightRuntime.UNDEFINED;
     var angleLow:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1823,7 +1820,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function rawToConfig__unityParse(raw:Dynamic, ppu:Float):ParticleEmitterConfig {
+  public static function rawToConfig__unityParse(raw:Dynamic, ppu:Float):ParticleEmitterConfig {
     var physicsGravity:Dynamic = cast FlightRuntime.UNDEFINED;
     var gravPixels:Dynamic = cast FlightRuntime.UNDEFINED;
     var emRaw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1922,7 +1919,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function rawToDocument__spineParse(raw:Dynamic):SpineParticleDocument {
+  public static function rawToDocument__spineParse(raw:Dynamic):SpineParticleDocument {
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1939,17 +1936,17 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function rawToDocument__unityParse(raw:Dynamic):UnityParticleDocument {
+  public static function rawToDocument__unityParse(raw:Dynamic):UnityParticleDocument {
     return cast { name: FlightRuntime.callValue(ParticlesFormats.rs__unityParse, cast ([FlightRuntime.field(raw, 'name'), ''] : Array<Dynamic>)), duration: FlightRuntime.callValue(ParticlesFormats.rn__unityParse, cast ([FlightRuntime.field(raw, 'duration'), 5.0] : Array<Dynamic>)), looping: FlightRuntime.callValue(ParticlesFormats.rb__unityParse, cast ([FlightRuntime.field(raw, 'looping'), true] : Array<Dynamic>)), prewarm: FlightRuntime.callValue(ParticlesFormats.rb__unityParse, cast ([FlightRuntime.field(raw, 'prewarm'), false] : Array<Dynamic>)), maxParticles: (Std.int(FlightRuntime.callValue(ParticlesFormats.rn__unityParse, cast ([FlightRuntime.field(raw, 'maxParticles'), 1000.0] : Array<Dynamic>))) | Std.int(0.0)), startLifetime: FlightRuntime.callValue(ParticlesFormats.readMinMax__unityParse, cast ([FlightRuntime.field(raw, 'startLifetime'), 1.0] : Array<Dynamic>)), startSpeed: FlightRuntime.callValue(ParticlesFormats.readMinMax__unityParse, cast ([FlightRuntime.field(raw, 'startSpeed'), 5.0] : Array<Dynamic>)), startSize: FlightRuntime.callValue(ParticlesFormats.readMinMax__unityParse, cast ([FlightRuntime.field(raw, 'startSize'), 1.0] : Array<Dynamic>)), startRotation: FlightRuntime.callValue(ParticlesFormats.readMinMax__unityParse, cast ([FlightRuntime.field(raw, 'startRotation'), 0.0] : Array<Dynamic>)), startColor: FlightRuntime.callValue(ParticlesFormats.colorAt__unityParse, cast ([FlightRuntime.field(raw, 'startColor'), { r: 1.0, g: 1.0, b: 1.0, a: 1.0 }] : Array<Dynamic>)), gravityModifier: FlightRuntime.callValue(ParticlesFormats.rn__unityParse, cast ([FlightRuntime.field(raw, 'gravityModifier'), 0.0] : Array<Dynamic>)), physicsGravity: FlightRuntime.callValue(ParticlesFormats.rn__unityParse, cast ([FlightRuntime.field(raw, 'physicsGravity'), ParticlesFormats.DEFAULT_GRAVITY__unityParse] : Array<Dynamic>)), emission: FlightRuntime.callValue(ParticlesFormats.readEmission__unityParse, cast ([FlightRuntime.field(raw, 'emission')] : Array<Dynamic>)), shape: FlightRuntime.callValue(ParticlesFormats.readShape__unityParse, cast ([FlightRuntime.field(raw, 'shape')] : Array<Dynamic>)), colorOverLifetime: FlightRuntime.callValue(ParticlesFormats.readColorLifetime__unityParse, cast ([FlightRuntime.field(raw, 'colorOverLifetime')] : Array<Dynamic>)), sizeOverLifetime: FlightRuntime.callValue(ParticlesFormats.readSizeLifetime__unityParse, cast ([FlightRuntime.field(raw, 'sizeOverLifetime')] : Array<Dynamic>)), rotationOverLifetime: FlightRuntime.callValue(ParticlesFormats.readRotationLifetime__unityParse, cast ([FlightRuntime.field(raw, 'rotationOverLifetime')] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function rb__unityParse(obj:Dynamic, def:Bool):Bool {
+  public static function rb__unityParse(obj:Dynamic, def:Bool):Bool {
     return cast FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(obj), 'boolean'), function():Dynamic return cast obj, function():Dynamic return cast def);
     return cast null;
   }
 
-  @:keep public static function readColor__pixiParse(obj:Dynamic, def:Dynamic = 'ffffff'):Array<Float> {
+  public static function readColor__pixiParse(obj:Dynamic, def:Dynamic = 'ffffff'):Array<Float> {
     var valueObj:Dynamic = cast FlightRuntime.UNDEFINED;
     var hex:Dynamic = cast FlightRuntime.UNDEFINED;
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1966,7 +1963,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function readColorLifetime__unityParse(obj:Dynamic):UnityColorOverLifetime {
+  public static function readColorLifetime__unityParse(obj:Dynamic):UnityColorOverLifetime {
     var def:UnityColorOverLifetime = cast FlightRuntime.UNDEFINED;
     var o:Dynamic = cast FlightRuntime.UNDEFINED;
     def = { enabled: false, colorStart: { r: 1.0, g: 1.0, b: 1.0, a: 1.0 }, colorEnd: { r: 1.0, g: 1.0, b: 1.0, a: 0.0 } };
@@ -1976,7 +1973,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function readEmission__unityParse(obj:Dynamic):UnityEmission {
+  public static function readEmission__unityParse(obj:Dynamic):UnityEmission {
     var o:Dynamic = cast FlightRuntime.UNDEFINED;
     var bursts:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.looseEquals(obj, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(obj), 'object')))) { return cast { rateOverTime: { mode: 'constant', constant: 10.0 }, bursts: cast ([] : Array<Dynamic>) }; }
@@ -1986,7 +1983,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function readMinMax__unityParse(obj:Dynamic, defConst:Dynamic = 1.0):UnityMinMaxValue {
+  public static function readMinMax__unityParse(obj:Dynamic, defConst:Dynamic = 1.0):UnityMinMaxValue {
     var o:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.looseEquals(obj, null))) { return cast { mode: 'constant', constant: defConst }; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.typeofValue(obj), 'number'))) { return cast { mode: 'constant', constant: obj }; }
@@ -1995,7 +1992,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function readRange__libgdxParse(section:LibgdxSection__libgdxParse, ?def:Dynamic):LibgdxRangeValue {
+  public static function readRange__libgdxParse(section:LibgdxSection__libgdxParse, ?def:Dynamic):LibgdxRangeValue {
     if (def == null) def = cast ({  } : Dynamic);
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     var scaling:Array<Float> = cast FlightRuntime.UNDEFINED;
@@ -2023,7 +2020,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function readRotationLifetime__unityParse(obj:Dynamic):UnityRotationOverLifetime {
+  public static function readRotationLifetime__unityParse(obj:Dynamic):UnityRotationOverLifetime {
     var o:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.looseEquals(obj, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(obj), 'object')))) { return cast { enabled: false, angularVelocity: { mode: 'constant', constant: 0.0 } }; }
     o = (cast obj : Dynamic);
@@ -2031,7 +2028,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function readShape__unityParse(obj:Dynamic):UnityShape {
+  public static function readShape__unityParse(obj:Dynamic):UnityShape {
     var def:UnityShape = cast FlightRuntime.UNDEFINED;
     var o:Dynamic = cast FlightRuntime.UNDEFINED;
     var sc:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2043,7 +2040,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function readSizeLifetime__unityParse(obj:Dynamic):UnitySizeOverLifetime {
+  public static function readSizeLifetime__unityParse(obj:Dynamic):UnitySizeOverLifetime {
     var o:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.looseEquals(obj, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(obj), 'object')))) { return cast { enabled: false, sizeStart: 1.0, sizeEnd: 1.0 }; }
     o = (cast obj : Dynamic);
@@ -2051,7 +2048,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function readStartEnd__pixiParse(obj:Dynamic, defStart:Dynamic = 1.0, defEnd:Dynamic = 0.0):Array<Float> {
+  public static function readStartEnd__pixiParse(obj:Dynamic, defStart:Dynamic = 1.0, defEnd:Dynamic = 0.0):Array<Float> {
     var o:Dynamic = cast FlightRuntime.UNDEFINED;
     var startObj:Dynamic = cast FlightRuntime.UNDEFINED;
     var endObj:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2067,45 +2064,45 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function registerParticleFormat(kind:ParticleFormatKind, codec:ParticleFormatCodec):Void {
+  public static function registerParticleFormat(kind:ParticleFormatKind, codec:ParticleFormatCodec):Void {
     FlightRuntime.callProperty(ParticlesFormats._registry__formatRegistry, 'set', cast ([kind, codec] : Array<Dynamic>));
   }
 
-  @:keep public static function rgbToHex__libgdxSerialize(r:Float, g:Float, b:Float):String {
+  public static function rgbToHex__libgdxSerialize(r:Float, g:Float, b:Float):String {
     var c:Dynamic = cast FlightRuntime.UNDEFINED;
     c = function(v:Float) return FlightRuntime.padStart(FlightRuntime.numberToString(FlightRuntime.callProperty(HxMath, 'round', cast ([(FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, v] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>)), 16.0), 2.0, '0');
     return cast '' + Std.string(FlightRuntime.callValue(c, cast ([r] : Array<Dynamic>))) + '' + Std.string(FlightRuntime.callValue(c, cast ([g] : Array<Dynamic>))) + '' + Std.string(FlightRuntime.callValue(c, cast ([b] : Array<Dynamic>))) + '';
     return cast null;
   }
 
-  @:keep public static function rgbToHex__spineSerialize(r:Float, g:Float, b:Float):String {
+  public static function rgbToHex__spineSerialize(r:Float, g:Float, b:Float):String {
     var byte:Dynamic = cast FlightRuntime.UNDEFINED;
     byte = function(v:Float) return FlightRuntime.padStart(FlightRuntime.numberToString(FlightRuntime.callProperty(HxMath, 'round', cast ([(FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, v] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>)), 16.0), 2.0, '0');
     return cast '' + Std.string(FlightRuntime.callValue(byte, cast ([r] : Array<Dynamic>))) + '' + Std.string(FlightRuntime.callValue(byte, cast ([g] : Array<Dynamic>))) + '' + Std.string(FlightRuntime.callValue(byte, cast ([b] : Array<Dynamic>))) + '';
     return cast null;
   }
 
-  @:keep public static function rn__pixiParse(v:Dynamic, def:Dynamic = 0.0):Float {
+  public static function rn__pixiParse(v:Dynamic, def:Dynamic = 0.0):Float {
     return cast FlightRuntime.select(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.typeofValue(v), 'number'), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([v] : Array<Dynamic>))), function():Dynamic return cast v, function():Dynamic return cast def);
     return cast null;
   }
 
-  @:keep public static function rn__unityParse(obj:Dynamic, def:Dynamic = 0.0):Float {
+  public static function rn__unityParse(obj:Dynamic, def:Dynamic = 0.0):Float {
     return cast FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(obj), 'number'), function():Dynamic return cast obj, function():Dynamic return cast def);
     return cast null;
   }
 
-  @:keep public static function rs__pixiParse(v:Dynamic, def:Dynamic = ''):String {
+  public static function rs__pixiParse(v:Dynamic, def:Dynamic = ''):String {
     return cast FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(v), 'string'), function():Dynamic return cast v, function():Dynamic return cast def);
     return cast null;
   }
 
-  @:keep public static function rs__unityParse(obj:Dynamic, def:String):String {
+  public static function rs__unityParse(obj:Dynamic, def:String):String {
     return cast FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(obj), 'string'), function():Dynamic return cast obj, function():Dynamic return cast def);
     return cast null;
   }
 
-  @:keep public static function sectionsToDocument__libgdxParse(sections:Dynamic):LibgdxParticleDocument {
+  public static function sectionsToDocument__libgdxParse(sections:Dynamic):LibgdxParticleDocument {
     var emitterKey:Dynamic = cast FlightRuntime.UNDEFINED;
     var emitterName:Dynamic = cast FlightRuntime.UNDEFINED;
     var root:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2181,7 +2178,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function serializeLibgdxParticle(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:LibgdxSerializeOptions):String {
+  public static function serializeLibgdxParticle(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:LibgdxSerializeOptions):String {
     var textureSize:Dynamic = cast FlightRuntime.UNDEFINED;
     var doc:Dynamic = cast FlightRuntime.UNDEFINED;
     textureSize = FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'textureSize'), function():Dynamic return cast 1.0);
@@ -2190,7 +2187,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function serializeLibgdxParticleDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:LibgdxSerializeOptions):ParticleSerializeResult {
+  public static function serializeLibgdxParticleDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:LibgdxSerializeOptions):ParticleSerializeResult {
     var text:Dynamic = cast FlightRuntime.UNDEFINED;
     var warnings:Dynamic = cast FlightRuntime.UNDEFINED;
     text = FlightRuntime.callValue(serializeLibgdxParticle, cast ([config, existing, options] : Array<Dynamic>));
@@ -2199,7 +2196,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function serializeParticleDesignerPlist(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:ParticleDesignerSerializeOptions):String {
+  public static function serializeParticleDesignerPlist(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:ParticleDesignerSerializeOptions):String {
     var textureSize:Dynamic = cast FlightRuntime.UNDEFINED;
     var doc:Dynamic = cast FlightRuntime.UNDEFINED;
     textureSize = FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'textureSize'), function():Dynamic return cast 1.0);
@@ -2208,7 +2205,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function serializeParticleDesignerPlistDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:ParticleDesignerSerializeOptions):ParticleSerializeResult {
+  public static function serializeParticleDesignerPlistDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:ParticleDesignerSerializeOptions):ParticleSerializeResult {
     var text:Dynamic = cast FlightRuntime.UNDEFINED;
     var warnings:Dynamic = cast FlightRuntime.UNDEFINED;
     text = FlightRuntime.callValue(serializeParticleDesignerPlist, cast ([config, existing, options] : Array<Dynamic>));
@@ -2217,14 +2214,14 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function serializeSpineParticle(config:ParticleEmitterConfig, ?existing:Dynamic):String {
+  public static function serializeSpineParticle(config:ParticleEmitterConfig, ?existing:Dynamic):String {
     var doc:Dynamic = cast FlightRuntime.UNDEFINED;
     doc = FlightRuntime.callValue(ParticlesFormats.configToDocument__spineSerialize, cast ([config, FlightRuntime.coalesce(existing, function():Dynamic return cast {  })] : Array<Dynamic>));
     return cast FlightRuntime.jsonStringify(doc, null, 2.0);
     return cast null;
   }
 
-  @:keep public static function serializeSpineParticleDocument(config:ParticleEmitterConfig, ?existing:Dynamic):ParticleSerializeResult {
+  public static function serializeSpineParticleDocument(config:ParticleEmitterConfig, ?existing:Dynamic):ParticleSerializeResult {
     var text:Dynamic = cast FlightRuntime.UNDEFINED;
     var warnings:Dynamic = cast FlightRuntime.UNDEFINED;
     text = FlightRuntime.callValue(serializeSpineParticle, cast ([config, existing] : Array<Dynamic>));
@@ -2233,7 +2230,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function serializeStarlingPex(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):String {
+  public static function serializeStarlingPex(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):String {
     var textureSize:Dynamic = cast FlightRuntime.UNDEFINED;
     var doc:Dynamic = cast FlightRuntime.UNDEFINED;
     textureSize = FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'textureSize'), function():Dynamic return cast 1.0);
@@ -2242,7 +2239,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function serializeStarlingPexDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):ParticleSerializeResult {
+  public static function serializeStarlingPexDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):ParticleSerializeResult {
     var text:Dynamic = cast FlightRuntime.UNDEFINED;
     var warnings:Dynamic = cast FlightRuntime.UNDEFINED;
     text = FlightRuntime.callValue(serializeStarlingPex, cast ([config, existing, options] : Array<Dynamic>));
@@ -2251,7 +2248,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function serializeUnityParticle(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:UnitySerializeOptions):String {
+  public static function serializeUnityParticle(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:UnitySerializeOptions):String {
     var ppu:Dynamic = cast FlightRuntime.UNDEFINED;
     var doc:Dynamic = cast FlightRuntime.UNDEFINED;
     ppu = FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'pixelsPerUnit'), function():Dynamic return cast ParticlesFormats.DEFAULT_PPU__unitySerialize);
@@ -2260,7 +2257,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function serializeUnityParticleDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:UnitySerializeOptions):ParticleSerializeResult {
+  public static function serializeUnityParticleDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:UnitySerializeOptions):ParticleSerializeResult {
     var text:Dynamic = cast FlightRuntime.UNDEFINED;
     var warnings:Dynamic = cast FlightRuntime.UNDEFINED;
     text = FlightRuntime.callValue(serializeUnityParticle, cast ([config, existing, options] : Array<Dynamic>));
@@ -2269,7 +2266,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function sizeKeysToCurve__unityParse(curve:Dynamic):Null<ParticleCurve> {
+  public static function sizeKeysToCurve__unityParse(curve:Dynamic):Null<ParticleCurve> {
     var arr:Dynamic = cast FlightRuntime.UNDEFINED;
     var keys:Array<CurveKeyframe> = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.looseEquals(curve, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(curve), 'object')))) { return cast null; }
@@ -2288,7 +2285,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function spineBlendMode__spineParse(mode:String):Null<ParticleBlendMode> {
+  public static function spineBlendMode__spineParse(mode:String):Null<ParticleBlendMode> {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(mode, 'additive'))) { return cast 'add'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(mode, 'multiply'))) { return cast 'multiply'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(mode, 'screen'))) { return cast 'screen'; }
@@ -2297,19 +2294,19 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function str__particleDesignerParse(d:ParticleDesignerRawDict, key:String, def:Dynamic = ''):String {
+  public static function str__particleDesignerParse(d:ParticleDesignerRawDict, key:String, def:Dynamic = ''):String {
     var v:Dynamic = cast FlightRuntime.UNDEFINED;
     v = FlightRuntime.getIndex(d, key);
     return cast FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(v), 'string'), function():Dynamic return cast v, function():Dynamic return cast def);
     return cast null;
   }
 
-  @:keep public static function strKey__libgdxParse(section:LibgdxSection__libgdxParse, key:String, def:Dynamic = ''):String {
+  public static function strKey__libgdxParse(section:LibgdxSection__libgdxParse, key:String, def:Dynamic = ''):String {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(section, 'get', cast ([key] : Array<Dynamic>)), function():Dynamic return cast def);
     return cast null;
   }
 
-  @:keep public static function tintKeyframesToCurve__spineParse(arr:Dynamic):Null<ParticleCurve> {
+  public static function tintKeyframesToCurve__spineParse(arr:Dynamic):Null<ParticleCurve> {
     var keys:Array<ColorKeyframe> = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(FlightRuntime.isArray(arr)), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(arr, 'length'), 2.0, '<=')))) { return cast null; }
     keys = cast ([] : Array<Dynamic>);
@@ -2329,18 +2326,18 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function twoConst__unitySerialize(low:Float, high:Float):UnityMinMaxValue {
+  public static function twoConst__unitySerialize(low:Float, high:Float):UnityMinMaxValue {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(low, high))) { return cast FlightRuntime.callValue(ParticlesFormats.constant__unitySerialize, cast ([low] : Array<Dynamic>)); }
     return cast { mode: 'twoConstants', constantMin: low, constantMax: high };
     return cast null;
   }
 
-  @:keep public static function unescapeXml__particleDesignerParse(s:String):String {
+  public static function unescapeXml__particleDesignerParse(s:String):String {
     return cast FlightRuntime.replace(FlightRuntime.replace(FlightRuntime.replace(FlightRuntime.replace(FlightRuntime.replace(s, FlightRuntime.regexp('&lt;', 'g'), '<', false), FlightRuntime.regexp('&gt;', 'g'), '>', false), FlightRuntime.regexp('&quot;', 'g'), '"', false), FlightRuntime.regexp('&apos;', 'g'), '\'', false), FlightRuntime.regexp('&amp;', 'g'), '&', false);
     return cast null;
   }
 
-  @:keep public static function unityBlendMode__unityParse(raw:Dynamic):Null<ParticleBlendMode> {
+  public static function unityBlendMode__unityParse(raw:Dynamic):Null<ParticleBlendMode> {
     var mode:Dynamic = cast FlightRuntime.UNDEFINED;
     mode = FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(raw, 'blendMode')), 'string'), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.field(raw, 'blendMode'), 'toLowerCase', cast ([] : Array<Dynamic>)), function():Dynamic return cast null);
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(mode, 'additive'), function():Dynamic return cast FlightRuntime.strictEquals(mode, 'add')))) { return cast 'add'; }
@@ -2351,7 +2348,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  @:keep public static function unregisterParticleFormat(kind:ParticleFormatKind):Bool {
+  public static function unregisterParticleFormat(kind:ParticleFormatKind):Bool {
     return cast FlightRuntime.callProperty(ParticlesFormats._registry__formatRegistry, 'delete', cast ([kind] : Array<Dynamic>));
     return cast null;
   }

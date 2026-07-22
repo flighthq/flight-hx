@@ -8,12 +8,9 @@ import flight.Math.lerp;
 import flight.Types.Snapshot;
 import flight.Types.SnapshotSchema;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.SnapshotApi")
 class SnapshotApi {
-  @:keep public static function captureSnapshot<T>(source:Dynamic):Snapshot<Dynamic> {
+  public static function captureSnapshot<T>(source:Dynamic):Snapshot<Dynamic> {
     var clone:Dynamic = cast FlightRuntime.UNDEFINED;
     clone = (cast FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['structuredClone'] : Array<Dynamic>)), cast ([source] : Array<Dynamic>)) : Dynamic);
     FlightRuntime.callValue(SnapshotApi.freezeSnapshotDeep__captureSnapshot, cast ([clone] : Array<Dynamic>));
@@ -21,7 +18,7 @@ class SnapshotApi {
     return cast null;
   }
 
-  @:keep public static function cloneSnapshotValue__interpolateSnapshots(value:Dynamic):Dynamic {
+  public static function cloneSnapshotValue__interpolateSnapshots(value:Dynamic):Dynamic {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(value, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(value), 'object')))) {
   return cast value;
 }
@@ -29,7 +26,7 @@ class SnapshotApi {
     return cast null;
   }
 
-  @:keep public static function ensureSnapshotContainer__interpolateSnapshots(existing:Dynamic, isArray:Bool):Dynamic {
+  public static function ensureSnapshotContainer__interpolateSnapshots(existing:Dynamic, isArray:Bool):Dynamic {
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(existing, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(existing), 'object')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.isArray(existing), isArray)))) {
   return cast (cast existing : Dynamic);
 }
@@ -37,12 +34,12 @@ class SnapshotApi {
     return cast null;
   }
 
-  @:keep public static function equalsSnapshot<T>(a:Snapshot<Dynamic>, b:Snapshot<Dynamic>):Bool {
+  public static function equalsSnapshot<T>(a:Snapshot<Dynamic>, b:Snapshot<Dynamic>):Bool {
     return cast FlightRuntime.callValue(SnapshotApi.snapshotValuesEqual__equalsSnapshot, cast ([a, b] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function freezeSnapshotDeep__captureSnapshot(value:Dynamic):Void {
+  public static function freezeSnapshotDeep__captureSnapshot(value:Dynamic):Void {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(value, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(value), 'object')))) {
   return;
 }
@@ -62,14 +59,14 @@ class SnapshotApi {
     }
   }
 
-  @:keep public static function interpolateSnapshots<T>(a:Snapshot<Dynamic>, b:Snapshot<Dynamic>, t:Float, out:Dynamic, ?schema:SnapshotSchema):Void {
+  public static function interpolateSnapshots<T>(a:Snapshot<Dynamic>, b:Snapshot<Dynamic>, t:Float, out:Dynamic, ?schema:SnapshotSchema):Void {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(a, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(a), 'object')), function():Dynamic return cast FlightRuntime.strictEquals(b, null)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(b), 'object')), function():Dynamic return cast FlightRuntime.strictEquals(out, null)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(out), 'object')))) {
   return;
 }
     FlightRuntime.callValue(SnapshotApi.interpolateSnapshotsInto__interpolateSnapshots, cast ([(cast out : Dynamic), (cast a : Dynamic), (cast b : Dynamic), FlightRuntime.callValue(clamp, cast ([t, 0.0, 1.0] : Array<Dynamic>)), schema, ''] : Array<Dynamic>));
   }
 
-  @:keep public static function interpolateSnapshotsInto__interpolateSnapshots(out:Dynamic, a:Dynamic, b:Dynamic, t:Float, schema:Null<SnapshotSchema>, prefix:String):Void {
+  public static function interpolateSnapshotsInto__interpolateSnapshots(out:Dynamic, a:Dynamic, b:Dynamic, t:Float, schema:Null<SnapshotSchema>, prefix:String):Void {
     var outRecord:Dynamic = cast FlightRuntime.UNDEFINED;
     var aRecord:Dynamic = cast FlightRuntime.UNDEFINED;
     var bRecord:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -97,19 +94,19 @@ class SnapshotApi {
     }
   }
 
-  @:keep public static function isSnapshotPathInterpolated__interpolateSnapshots(schema:Null<SnapshotSchema>, path:String):Bool {
+  public static function isSnapshotPathInterpolated__interpolateSnapshots(schema:Null<SnapshotSchema>, path:String):Bool {
     return cast FlightRuntime.orValue(FlightRuntime.strictEquals(schema, FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.includes(schema, path));
     return cast null;
   }
 
-  @:keep public static function restoreSnapshot<T>(snapshot:Snapshot<Dynamic>, target:Dynamic):Void {
+  public static function restoreSnapshot<T>(snapshot:Snapshot<Dynamic>, target:Dynamic):Void {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(snapshot, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(snapshot), 'object')), function():Dynamic return cast FlightRuntime.strictEquals(target, null)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(target), 'object')))) {
   return;
 }
     FlightRuntime.callValue(SnapshotApi.restoreSnapshotInto__restoreSnapshot, cast ([(cast target : Dynamic), (cast snapshot : Dynamic)] : Array<Dynamic>));
   }
 
-  @:keep public static function restoreSnapshotInto__restoreSnapshot(target:Dynamic, source:Dynamic):Void {
+  public static function restoreSnapshotInto__restoreSnapshot(target:Dynamic, source:Dynamic):Void {
     var targetObject:Dynamic = cast FlightRuntime.UNDEFINED;
     var sourceObject:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.isArray(source))) {
@@ -132,7 +129,7 @@ class SnapshotApi {
     }
   }
 
-  @:keep public static function restoreSnapshotValue__restoreSnapshot(targetValue:Dynamic, sourceValue:Dynamic):Dynamic {
+  public static function restoreSnapshotValue__restoreSnapshot(targetValue:Dynamic, sourceValue:Dynamic):Dynamic {
     var sourceIsArray:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(sourceValue, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(sourceValue), 'object')))) {
   return cast sourceValue;
@@ -146,7 +143,7 @@ class SnapshotApi {
     return cast null;
   }
 
-  @:keep public static function snapshotValuesEqual__equalsSnapshot(a:Dynamic, b:Dynamic):Bool {
+  public static function snapshotValuesEqual__equalsSnapshot(a:Dynamic, b:Dynamic):Bool {
     var aIsArray:Dynamic = cast FlightRuntime.UNDEFINED;
     var aObject:Dynamic = cast FlightRuntime.UNDEFINED;
     var bObject:Dynamic = cast FlightRuntime.UNDEFINED;

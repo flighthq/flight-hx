@@ -9,16 +9,13 @@ import flight.Types.CaptureBaseline;
 import flight.Types.CaptureCheckResult;
 import flight.Types.CaptureColumnBaseline;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Capture")
 class Capture {
   public static final CAPTURE_PARITY_TOLERANCE:Dynamic = 15.0;
 
   public static final CAPTURE_REGRESSION_TOLERANCE:Dynamic = 5.0;
 
-  @:keep public static function compareCaptureFingerprints(a:String, b:String):Float {
+  public static function compareCaptureFingerprints(a:String, b:String):Float {
     var fa:Dynamic = cast FlightRuntime.UNDEFINED;
     var fb:Dynamic = cast FlightRuntime.UNDEFINED;
     fa = FlightRuntime.callValue(parseSurfaceFingerprint, cast ([a] : Array<Dynamic>));
@@ -28,26 +25,26 @@ class Capture {
     return cast null;
   }
 
-  @:keep public static function createCaptureBaseline():CaptureBaseline {
+  public static function createCaptureBaseline():CaptureBaseline {
     return cast {  };
     return cast null;
   }
 
-  @:keep public static function evaluateCaptureParity(a:String, b:String, tolerance:Dynamic = 15.0):CaptureCheckResult {
+  public static function evaluateCaptureParity(a:String, b:String, tolerance:Dynamic = 15.0):CaptureCheckResult {
     var difference:Dynamic = cast FlightRuntime.UNDEFINED;
     difference = FlightRuntime.callValue(compareCaptureFingerprints, cast ([a, b] : Array<Dynamic>));
     return cast { pass: FlightRuntime.compare(difference, tolerance, '<='), difference: difference, tolerance: tolerance };
     return cast null;
   }
 
-  @:keep public static function evaluateCaptureRegression(fingerprint:String, baselineFingerprint:String, tolerance:Dynamic = 5.0):CaptureCheckResult {
+  public static function evaluateCaptureRegression(fingerprint:String, baselineFingerprint:String, tolerance:Dynamic = 5.0):CaptureCheckResult {
     var difference:Dynamic = cast FlightRuntime.UNDEFINED;
     difference = FlightRuntime.callValue(compareCaptureFingerprints, cast ([fingerprint, baselineFingerprint] : Array<Dynamic>));
     return cast { pass: FlightRuntime.compare(difference, tolerance, '<='), difference: difference, tolerance: tolerance };
     return cast null;
   }
 
-  @:keep public static function formatCaptureBaseline(baseline:CaptureBaseline):String {
+  public static function formatCaptureBaseline(baseline:CaptureBaseline):String {
     var sorted:CaptureBaseline = cast FlightRuntime.UNDEFINED;
     sorted = {  };
     for (column in FlightRuntime.iterable(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([baseline] : Array<Dynamic>)), 'sort', cast ([] : Array<Dynamic>)))) {
@@ -61,12 +58,12 @@ class Capture {
     return cast null;
   }
 
-  @:keep public static function getCaptureBaselineField(baseline:CaptureBaseline, column:String, field:CaptureColumnBaseline):Null<String> {
+  public static function getCaptureBaselineField(baseline:CaptureBaseline, column:String, field:CaptureColumnBaseline):Null<String> {
     return cast FlightRuntime.coalesce(FlightRuntime.optionalIndex(FlightRuntime.getIndex(baseline, column), field), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function parseCaptureBaseline(text:String):Null<CaptureBaseline> {
+  public static function parseCaptureBaseline(text:String):Null<CaptureBaseline> {
     var parsed:Dynamic = cast FlightRuntime.UNDEFINED;
     try {
   (parsed = cast (FlightRuntime.jsonParse(text) : Dynamic));
@@ -78,7 +75,7 @@ class Capture {
     return cast null;
   }
 
-  @:keep public static function setCaptureBaselineField(baseline:CaptureBaseline, column:String, field:CaptureColumnBaseline, value:String):Void {
+  public static function setCaptureBaselineField(baseline:CaptureBaseline, column:String, field:CaptureColumnBaseline, value:String):Void {
     FlightRuntime.setIndex(FlightRuntime.setIndex(baseline, column, (FlightRuntime.getIndex(baseline, column) ?? {  })), field, value);
   }
 }

@@ -19,16 +19,13 @@ import flight.UserAgent.parseUserAgentPointerWidth;
 import flight.UserAgent.parseUserAgentRuntime;
 import flight.UserAgent.parseUserAgentVersion;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Platform")
 class Platform {
   public static var _backend__platform:Null<PlatformBackend> = FlightRuntime.explicitNull();
 
   public static final _scratch__platform:PlatformInfo = FlightRuntime.callValue(createPlatformInfo, cast ([] : Array<Dynamic>));
 
-  @:keep public static function comparePlatformVersions(a:String, b:String):Float {
+  public static function comparePlatformVersions(a:String, b:String):Float {
     var aParts:Dynamic = cast FlightRuntime.UNDEFINED;
     var bParts:Dynamic = cast FlightRuntime.UNDEFINED;
     var len:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -52,48 +49,48 @@ class Platform {
     return cast null;
   }
 
-  @:keep public static function createPlatformInfo():PlatformInfo {
+  public static function createPlatformInfo():PlatformInfo {
     return cast { arch: '', distro: '', distroVersion: '', endianness: 'unknown', engine: 'unknown', engineVersion: '', isTouch: false, kind: 'unknown', locale: '', name: 'unknown', osBuild: '', pointerWidth: -1.0, runtime: 'unknown', version: '' };
     return cast null;
   }
 
-  @:keep public static function createWebPlatformBackend():PlatformBackend {
+  public static function createWebPlatformBackend():PlatformBackend {
     return cast { getInfo: Platform.getWebPlatformInfo__platform };
     return cast null;
   }
 
-  @:keep public static function getPlatformBackend():PlatformBackend {
+  public static function getPlatformBackend():PlatformBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Platform._backend__platform, null))) { (Platform._backend__platform = cast (FlightRuntime.callValue(createWebPlatformBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Platform._backend__platform;
     return cast null;
   }
 
-  @:keep public static function getPlatformEngine():PlatformEngine {
+  public static function getPlatformEngine():PlatformEngine {
     return cast FlightRuntime.field(FlightRuntime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)), 'engine');
     return cast null;
   }
 
-  @:keep public static function getPlatformInfo(out:PlatformInfo):PlatformInfo {
+  public static function getPlatformInfo(out:PlatformInfo):PlatformInfo {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getPlatformBackend, cast ([] : Array<Dynamic>)), 'getInfo', cast ([out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getPlatformKind():PlatformKind {
+  public static function getPlatformKind():PlatformKind {
     return cast FlightRuntime.field(FlightRuntime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)), 'kind');
     return cast null;
   }
 
-  @:keep public static function getPlatformName():PlatformName {
+  public static function getPlatformName():PlatformName {
     return cast FlightRuntime.field(FlightRuntime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)), 'name');
     return cast null;
   }
 
-  @:keep public static function getPlatformRuntime():PlatformRuntime {
+  public static function getPlatformRuntime():PlatformRuntime {
     return cast FlightRuntime.field(FlightRuntime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)), 'runtime');
     return cast null;
   }
 
-  @:keep public static function getWebPlatformInfo__platform(out:PlatformInfo):PlatformInfo {
+  public static function getWebPlatformInfo__platform(out:PlatformInfo):PlatformInfo {
     var nav:Dynamic = cast FlightRuntime.UNDEFINED;
     var ua:Dynamic = cast FlightRuntime.UNDEFINED;
     nav = FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), function():Dynamic return cast null);
@@ -116,29 +113,29 @@ class Platform {
     return cast null;
   }
 
-  @:keep public static function isPlatformDesktop():Bool {
+  public static function isPlatformDesktop():Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.callValue(getPlatformKind, cast ([] : Array<Dynamic>)), 'desktop');
     return cast null;
   }
 
-  @:keep public static function isPlatformMobile():Bool {
+  public static function isPlatformMobile():Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.callValue(getPlatformKind, cast ([] : Array<Dynamic>)), 'mobile');
     return cast null;
   }
 
-  @:keep public static function isPlatformNative():Bool {
+  public static function isPlatformNative():Bool {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getPlatformRuntime, cast ([] : Array<Dynamic>));
     return cast FlightRuntime.andValue(!FlightRuntime.strictEquals(runtime, 'web'), function():Dynamic return cast !FlightRuntime.strictEquals(runtime, 'unknown'));
     return cast null;
   }
 
-  @:keep public static function isPlatformTouch():Bool {
+  public static function isPlatformTouch():Bool {
     return cast FlightRuntime.field(FlightRuntime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)), 'isTouch');
     return cast null;
   }
 
-  @:keep public static function isPlatformVersionAtLeast(minimum:String):Bool {
+  public static function isPlatformVersionAtLeast(minimum:String):Bool {
     var version:Dynamic = cast FlightRuntime.UNDEFINED;
     version = FlightRuntime.field(FlightRuntime.callValue(getPlatformInfo, cast ([Platform._scratch__platform] : Array<Dynamic>)), 'version');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(version, ''))) { return cast false; }
@@ -146,12 +143,12 @@ class Platform {
     return cast null;
   }
 
-  @:keep public static function isPlatformWeb():Bool {
+  public static function isPlatformWeb():Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.callValue(getPlatformKind, cast ([] : Array<Dynamic>)), 'web');
     return cast null;
   }
 
-  @:keep public static function setPlatformBackend(backend:Null<PlatformBackend>):Void {
+  public static function setPlatformBackend(backend:Null<PlatformBackend>):Void {
     (Platform._backend__platform = cast (backend : Dynamic));
   }
 }

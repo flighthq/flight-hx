@@ -5,14 +5,11 @@ import Math as HxMath;
 import flight.internal.FlightRuntime;
 import flight.Types.LocaleInput;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Intl")
 class Intl {
   public static final cacheCapacity__cache:Dynamic = 256.0;
 
-  @:keep public static function compareStrings(a:String, b:String, locale:LocaleInput, ?options:Dynamic):Float {
+  public static function compareStrings(a:String, b:String, locale:LocaleInput, ?options:Dynamic):Float {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(Intl.getCollator__collator, cast ([locale, options] : Array<Dynamic>)), 'compare', cast ([a, b] : Array<Dynamic>));
     return cast null;
   }
@@ -23,27 +20,27 @@ class Intl {
 
   public static final defaultTimeOptions__datetime:Dynamic = { hour: 'numeric', minute: 'numeric' };
 
-  @:keep public static function formatCompactNumber(value:Float, locale:LocaleInput, ?options:Dynamic):String {
+  public static function formatCompactNumber(value:Float, locale:LocaleInput, ?options:Dynamic):String {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(Intl.getNumberFormat__number, cast ([locale, FlightRuntime.mergeObjects([{ notation: 'compact' }, options])] : Array<Dynamic>)), 'format', cast ([value] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function formatCurrency(value:Float, currency:String, locale:LocaleInput, ?options:Dynamic):String {
+  public static function formatCurrency(value:Float, currency:String, locale:LocaleInput, ?options:Dynamic):String {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(Intl.getNumberFormat__number, cast ([locale, FlightRuntime.mergeObjects([{ style: 'currency' }, { currency: currency }, options])] : Array<Dynamic>)), 'format', cast ([value] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function formatDate(date:Dynamic, locale:LocaleInput, ?options:Dynamic):String {
+  public static function formatDate(date:Dynamic, locale:LocaleInput, ?options:Dynamic):String {
     return cast FlightRuntime.callValue(Intl.formatDateValue__datetime, cast ([date, locale, FlightRuntime.coalesce(options, function():Dynamic return cast Intl.defaultDateOptions__datetime)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function formatDateTime(date:Dynamic, locale:LocaleInput, ?options:Dynamic):String {
+  public static function formatDateTime(date:Dynamic, locale:LocaleInput, ?options:Dynamic):String {
     return cast FlightRuntime.callValue(Intl.formatDateValue__datetime, cast ([date, locale, FlightRuntime.coalesce(options, function():Dynamic return cast Intl.defaultDateTimeOptions__datetime)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function formatDateValue__datetime(date:Dynamic, locale:LocaleInput, options:Dynamic):String {
+  public static function formatDateValue__datetime(date:Dynamic, locale:LocaleInput, options:Dynamic):String {
     var time:Dynamic = cast FlightRuntime.UNDEFINED;
     var key:Dynamic = cast FlightRuntime.UNDEFINED;
     var formatter:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -55,7 +52,7 @@ class Intl {
     return cast null;
   }
 
-  @:keep public static function formatList(items:Array<String>, locale:LocaleInput, ?options:Dynamic):String {
+  public static function formatList(items:Array<String>, locale:LocaleInput, ?options:Dynamic):String {
     var key:Dynamic = cast FlightRuntime.UNDEFINED;
     var formatter:Dynamic = cast FlightRuntime.UNDEFINED;
     key = FlightRuntime.callValue(getCacheKey, cast (['list', locale, options] : Array<Dynamic>));
@@ -64,17 +61,17 @@ class Intl {
     return cast null;
   }
 
-  @:keep public static function formatNumber(value:Float, locale:LocaleInput, ?options:Dynamic):String {
+  public static function formatNumber(value:Float, locale:LocaleInput, ?options:Dynamic):String {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(Intl.getNumberFormat__number, cast ([locale, options] : Array<Dynamic>)), 'format', cast ([value] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function formatPercent(value:Float, locale:LocaleInput, ?options:Dynamic):String {
+  public static function formatPercent(value:Float, locale:LocaleInput, ?options:Dynamic):String {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(Intl.getNumberFormat__number, cast ([locale, FlightRuntime.mergeObjects([{ style: 'percent' }, options])] : Array<Dynamic>)), 'format', cast ([value] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function formatRelativeTime(value:Float, unit:Dynamic, locale:LocaleInput, ?options:Dynamic):String {
+  public static function formatRelativeTime(value:Float, unit:Dynamic, locale:LocaleInput, ?options:Dynamic):String {
     var key:Dynamic = cast FlightRuntime.UNDEFINED;
     var formatter:Dynamic = cast FlightRuntime.UNDEFINED;
     key = FlightRuntime.callValue(getCacheKey, cast (['relativetime', locale, options] : Array<Dynamic>));
@@ -85,17 +82,17 @@ class Intl {
 
   public static final formatterCache__cache:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
 
-  @:keep public static function formatTime(date:Dynamic, locale:LocaleInput, ?options:Dynamic):String {
+  public static function formatTime(date:Dynamic, locale:LocaleInput, ?options:Dynamic):String {
     return cast FlightRuntime.callValue(Intl.formatDateValue__datetime, cast ([date, locale, FlightRuntime.coalesce(options, function():Dynamic return cast Intl.defaultTimeOptions__datetime)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function formatUnit(value:Float, unit:String, locale:LocaleInput, ?options:Dynamic):String {
+  public static function formatUnit(value:Float, unit:String, locale:LocaleInput, ?options:Dynamic):String {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(Intl.getNumberFormat__number, cast ([locale, FlightRuntime.mergeObjects([{ style: 'unit' }, { unit: unit }, options])] : Array<Dynamic>)), 'format', cast ([value] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getCached<T>(key:String, build:Dynamic):Dynamic {
+  public static function getCached<T>(key:String, build:Dynamic):Dynamic {
     var existing:Dynamic = cast FlightRuntime.UNDEFINED;
     var built:Dynamic = cast FlightRuntime.UNDEFINED;
     existing = FlightRuntime.callProperty(Intl.formatterCache__cache, 'get', cast ([key] : Array<Dynamic>));
@@ -110,45 +107,45 @@ class Intl {
     return cast null;
   }
 
-  @:keep public static function getCacheKey(kind:String, locale:LocaleInput, options:Null<Dynamic>):String {
+  public static function getCacheKey(kind:String, locale:LocaleInput, options:Null<Dynamic>):String {
     var localeKey:Dynamic = cast FlightRuntime.UNDEFINED;
     localeKey = FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(locale), 'string'), function():Dynamic return cast locale, function():Dynamic return cast FlightRuntime.join(locale, ','));
     return cast '' + Std.string(kind) + '|' + Std.string(localeKey) + '|' + Std.string(FlightRuntime.select(FlightRuntime.strictEquals(options, FlightRuntime.UNDEFINED), function():Dynamic return cast '', function():Dynamic return cast FlightRuntime.jsonStringify(options))) + '';
     return cast null;
   }
 
-  @:keep public static function getCollator__collator(locale:LocaleInput, options:Null<Dynamic>):Dynamic {
+  public static function getCollator__collator(locale:LocaleInput, options:Null<Dynamic>):Dynamic {
     var key:Dynamic = cast FlightRuntime.UNDEFINED;
     key = FlightRuntime.callValue(getCacheKey, cast (['collator', locale, options] : Array<Dynamic>));
     return cast FlightRuntime.callValue(getCached, cast ([key, function() return FlightRuntime.construct(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Intl'] : Array<Dynamic>)), 'Collator'), [(cast locale : Dynamic), options])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getNumberFormat__number(locale:LocaleInput, options:Null<Dynamic>):Dynamic {
+  public static function getNumberFormat__number(locale:LocaleInput, options:Null<Dynamic>):Dynamic {
     var key:Dynamic = cast FlightRuntime.UNDEFINED;
     key = FlightRuntime.callValue(getCacheKey, cast (['number', locale, options] : Array<Dynamic>));
     return cast FlightRuntime.callValue(getCached, cast ([key, function() return FlightRuntime.construct(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Intl'] : Array<Dynamic>)), 'NumberFormat'), [(cast locale : Dynamic), options])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getPluralRules__plural(locale:LocaleInput, options:Dynamic):Dynamic {
+  public static function getPluralRules__plural(locale:LocaleInput, options:Dynamic):Dynamic {
     var key:Dynamic = cast FlightRuntime.UNDEFINED;
     key = FlightRuntime.callValue(getCacheKey, cast (['plural', locale, options] : Array<Dynamic>));
     return cast FlightRuntime.callValue(getCached, cast ([key, function() return FlightRuntime.construct(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Intl'] : Array<Dynamic>)), 'PluralRules'), [(cast locale : Dynamic), options])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function selectOrdinalCategory(value:Float, locale:LocaleInput, ?options:Dynamic):Dynamic {
+  public static function selectOrdinalCategory(value:Float, locale:LocaleInput, ?options:Dynamic):Dynamic {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(Intl.getPluralRules__plural, cast ([locale, FlightRuntime.mergeObjects([{ type: 'ordinal' }, options])] : Array<Dynamic>)), 'select', cast ([value] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function selectPluralCategory(value:Float, locale:LocaleInput, ?options:Dynamic):Dynamic {
+  public static function selectPluralCategory(value:Float, locale:LocaleInput, ?options:Dynamic):Dynamic {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(Intl.getPluralRules__plural, cast ([locale, FlightRuntime.mergeObjects([{ type: 'cardinal' }, options])] : Array<Dynamic>)), 'select', cast ([value] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function sortStrings(items:Array<String>, locale:LocaleInput, ?options:Dynamic):Array<String> {
+  public static function sortStrings(items:Array<String>, locale:LocaleInput, ?options:Dynamic):Array<String> {
     var collator:Dynamic = cast FlightRuntime.UNDEFINED;
     collator = FlightRuntime.callValue(Intl.getCollator__collator, cast ([locale, options] : Array<Dynamic>));
     return cast FlightRuntime.sortAndReturn(FlightRuntime.slice(items, 0, null), function(a:Dynamic, b:Dynamic) return FlightRuntime.callProperty(collator, 'compare', cast ([a, b] : Array<Dynamic>)));

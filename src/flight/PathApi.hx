@@ -22,12 +22,9 @@ typedef Subpath__reversePath = { var closed:Bool; var points:Array<SubpathPoint_
 
 typedef SubpathPoint__reversePath = Dynamic;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.PathApi")
 class PathApi {
-  @:keep public static function acquirePathMesh(path:Path, tolerance:Dynamic = 0.25):PathMesh {
+  public static function acquirePathMesh(path:Path, tolerance:Dynamic = 0.25):PathMesh {
     var mesh:Dynamic = cast FlightRuntime.UNDEFINED;
     var fresh:Dynamic = cast FlightRuntime.UNDEFINED;
     mesh = FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(PathApi.pathMeshPool__pathMeshPool, 'length'), 0.0, '>'), function():Dynamic return cast FlightRuntime.callProperty(PathApi.pathMeshPool__pathMeshPool, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast { vertices: cast ([] : Array<Dynamic>), indices: cast ([] : Array<Dynamic>) });
@@ -54,7 +51,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function acquirePathMeshTyped(path:Path, tolerance:Dynamic = 0.25):PathMeshTyped {
+  public static function acquirePathMeshTyped(path:Path, tolerance:Dynamic = 0.25):PathMeshTyped {
     var fresh:Dynamic = cast FlightRuntime.UNDEFINED;
     var mesh:Dynamic = cast FlightRuntime.UNDEFINED;
     fresh = FlightRuntime.callValue(tessellatePathTyped, cast ([path, tolerance] : Array<Dynamic>));
@@ -65,7 +62,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function addArcPoints__strokePath(cx:Float, cy:Float, r:Float, startAngle:Float, endAngle:Float, ccw:Bool, tolerance:Float, out:Array<Float>):Void {
+  public static function addArcPoints__strokePath(cx:Float, cy:Float, r:Float, startAngle:Float, endAngle:Float, ccw:Bool, tolerance:Float, out:Array<Float>):Void {
     var ratio:Dynamic = cast FlightRuntime.UNDEFINED;
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var delta:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -92,7 +89,7 @@ class PathApi {
     }
   }
 
-  @:keep public static function addCap__strokePath(px:Float, py:Float, nx:Float, ny:Float, edx:Float, edy:Float, halfWidth:Float, cap:String, left:Array<Float>, right:Array<Float>, tolerance:Float, isStart:Bool):Void {
+  public static function addCap__strokePath(px:Float, py:Float, nx:Float, ny:Float, edx:Float, edy:Float, halfWidth:Float, cap:String, left:Array<Float>, right:Array<Float>, tolerance:Float, isStart:Bool):Void {
     var lx:Dynamic = cast FlightRuntime.UNDEFINED;
     var ly:Dynamic = cast FlightRuntime.UNDEFINED;
     var rx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -122,7 +119,7 @@ class PathApi {
 } }
   }
 
-  @:keep public static function addJoin__strokePath(px:Float, py:Float, nx0:Float, ny0:Float, nx1:Float, ny1:Float, halfWidth:Float, join:String, miterLimit:Float, left:Array<Float>, right:Array<Float>, tolerance:Float):Void {
+  public static function addJoin__strokePath(px:Float, py:Float, nx0:Float, ny0:Float, nx1:Float, ny1:Float, halfWidth:Float, join:String, miterLimit:Float, left:Array<Float>, right:Array<Float>, tolerance:Float):Void {
     var lx0:Dynamic = cast FlightRuntime.UNDEFINED;
     var ly0:Dynamic = cast FlightRuntime.UNDEFINED;
     var rx0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -174,7 +171,7 @@ class PathApi {
 } }
   }
 
-  @:keep public static function appendArcCubics__path(path:Path, cx:Float, cy:Float, rx:Float, ry:Float, xAxisRotation:Float, theta1:Float, dtheta:Float):Void {
+  public static function appendArcCubics__path(path:Path, cx:Float, cy:Float, rx:Float, ry:Float, xAxisRotation:Float, theta1:Float, dtheta:Float):Void {
     var nSegs:Dynamic = cast FlightRuntime.UNDEFINED;
     var dt:Dynamic = cast FlightRuntime.UNDEFINED;
     var cos_u3C6_:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -212,7 +209,7 @@ class PathApi {
     }
   }
 
-  @:keep public static function appendCornerArc__path(path:Path, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float):Void {
+  public static function appendCornerArc__path(path:Path, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float):Void {
     var k:Dynamic = cast FlightRuntime.UNDEFINED;
     var cosStart:Dynamic = cast FlightRuntime.UNDEFINED;
     var sinStart:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -227,7 +224,7 @@ class PathApi {
     FlightRuntime.callValue(appendPathCubicCurveTo, cast ([path, ((cx + (cosStart * radius)) - (sinStart * k)), ((cy + (sinStart * radius)) + (cosStart * k)), ((cx + (cosEnd * radius)) + (sinEnd * k)), ((cy + (sinEnd * radius)) - (cosEnd * k)), (cx + (cosEnd * radius)), (cy + (sinEnd * radius))] : Array<Dynamic>));
   }
 
-  @:keep public static function appendPathArc(path:Path, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, anticlockwise:Dynamic = false, connectToCurrent:Dynamic = false):Void {
+  public static function appendPathArc(path:Path, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, anticlockwise:Dynamic = false, connectToCurrent:Dynamic = false):Void {
     var sweep:Dynamic = cast FlightRuntime.UNDEFINED;
     var arcStartX:Dynamic = cast FlightRuntime.UNDEFINED;
     var arcStartY:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -248,7 +245,7 @@ class PathApi {
     FlightRuntime.callValue(PathApi.appendArcCubics__path, cast ([path, cx, cy, radius, radius, 0.0, startAngle, sweep] : Array<Dynamic>));
   }
 
-  @:keep public static function appendPathArcTo(path:Path, radiusX:Float, radiusY:Float, xAxisRotation:Float, largeArc:Bool, sweep:Bool, endX:Float, endY:Float):Void {
+  public static function appendPathArcTo(path:Path, radiusX:Float, radiusY:Float, xAxisRotation:Float, largeArc:Bool, sweep:Bool, endX:Float, endY:Float):Void {
     var x1:Dynamic = cast FlightRuntime.UNDEFINED;
     var y1:Dynamic = cast FlightRuntime.UNDEFINED;
     var x2:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -337,25 +334,25 @@ class PathApi {
     FlightRuntime.callValue(PathApi.appendArcCubics__path, cast ([path, cx, cy, rx, ry, xAxisRotation, theta1, dtheta] : Array<Dynamic>));
   }
 
-  @:keep public static function appendPathCircle(path:Path, cx:Float, cy:Float, radius:Float):Void {
+  public static function appendPathCircle(path:Path, cx:Float, cy:Float, radius:Float):Void {
     FlightRuntime.callValue(appendPathEllipse, cast ([path, cx, cy, radius, radius] : Array<Dynamic>));
   }
 
-  @:keep public static function appendPathClose(path:Path):Void {
+  public static function appendPathClose(path:Path):Void {
     FlightRuntime.callProperty(FlightRuntime.field(path, 'commands'), 'push', cast ([Types.PathCommandValue.CLOSE] : Array<Dynamic>));
   }
 
-  @:keep public static function appendPathCubicCurveTo(path:Path, control1X:Float, control1Y:Float, control2X:Float, control2Y:Float, anchorX:Float, anchorY:Float):Void {
+  public static function appendPathCubicCurveTo(path:Path, control1X:Float, control1Y:Float, control2X:Float, control2Y:Float, anchorX:Float, anchorY:Float):Void {
     FlightRuntime.callProperty(FlightRuntime.field(path, 'commands'), 'push', cast ([Types.PathCommandValue.CUBIC_CURVE_TO] : Array<Dynamic>));
     FlightRuntime.pushMany(FlightRuntime.field(path, 'data'), cast ([control1X, control1Y, control2X, control2Y, anchorX, anchorY] : Array<Dynamic>));
   }
 
-  @:keep public static function appendPathCurveTo(path:Path, controlX:Float, controlY:Float, anchorX:Float, anchorY:Float):Void {
+  public static function appendPathCurveTo(path:Path, controlX:Float, controlY:Float, anchorX:Float, anchorY:Float):Void {
     FlightRuntime.callProperty(FlightRuntime.field(path, 'commands'), 'push', cast ([Types.PathCommandValue.CURVE_TO] : Array<Dynamic>));
     FlightRuntime.pushMany(FlightRuntime.field(path, 'data'), cast ([controlX, controlY, anchorX, anchorY] : Array<Dynamic>));
   }
 
-  @:keep public static function appendPathEllipse(path:Path, cx:Float, cy:Float, radiusX:Float, radiusY:Float):Void {
+  public static function appendPathEllipse(path:Path, cx:Float, cy:Float, radiusX:Float, radiusY:Float):Void {
     var kx:Dynamic = cast FlightRuntime.UNDEFINED;
     var ky:Dynamic = cast FlightRuntime.UNDEFINED;
     kx = (radiusX * PathApi.KAPPA__path);
@@ -368,17 +365,17 @@ class PathApi {
     FlightRuntime.callValue(appendPathClose, cast ([path] : Array<Dynamic>));
   }
 
-  @:keep public static function appendPathLineTo(path:Path, x:Float, y:Float):Void {
+  public static function appendPathLineTo(path:Path, x:Float, y:Float):Void {
     FlightRuntime.callProperty(FlightRuntime.field(path, 'commands'), 'push', cast ([Types.PathCommandValue.LINE_TO] : Array<Dynamic>));
     FlightRuntime.pushMany(FlightRuntime.field(path, 'data'), cast ([x, y] : Array<Dynamic>));
   }
 
-  @:keep public static function appendPathMoveTo(path:Path, x:Float, y:Float):Void {
+  public static function appendPathMoveTo(path:Path, x:Float, y:Float):Void {
     FlightRuntime.callProperty(FlightRuntime.field(path, 'commands'), 'push', cast ([Types.PathCommandValue.MOVE_TO] : Array<Dynamic>));
     FlightRuntime.pushMany(FlightRuntime.field(path, 'data'), cast ([x, y] : Array<Dynamic>));
   }
 
-  @:keep public static function appendPathPolygon(path:Path, points:Array<Float>):Void {
+  public static function appendPathPolygon(path:Path, points:Array<Float>):Void {
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(points, 'length'), 6.0, '<'))) { return; }
     FlightRuntime.callValue(appendPathMoveTo, cast ([path, FlightRuntime.getIndex(points, 0.0), FlightRuntime.getIndex(points, 1.0)] : Array<Dynamic>));
     {
@@ -391,7 +388,7 @@ class PathApi {
     FlightRuntime.callValue(appendPathClose, cast ([path] : Array<Dynamic>));
   }
 
-  @:keep public static function appendPathPolyline(path:Path, points:Array<Float>):Void {
+  public static function appendPathPolyline(path:Path, points:Array<Float>):Void {
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(points, 'length'), 4.0, '<'))) { return; }
     FlightRuntime.callValue(appendPathMoveTo, cast ([path, FlightRuntime.getIndex(points, 0.0), FlightRuntime.getIndex(points, 1.0)] : Array<Dynamic>));
     {
@@ -403,7 +400,7 @@ class PathApi {
     }
   }
 
-  @:keep public static function appendPathRectangle(path:Path, x:Float, y:Float, width:Float, height:Float):Void {
+  public static function appendPathRectangle(path:Path, x:Float, y:Float, width:Float, height:Float):Void {
     FlightRuntime.callValue(appendPathMoveTo, cast ([path, x, y] : Array<Dynamic>));
     FlightRuntime.callValue(appendPathLineTo, cast ([path, (x + width), y] : Array<Dynamic>));
     FlightRuntime.callValue(appendPathLineTo, cast ([path, (x + width), (y + height)] : Array<Dynamic>));
@@ -411,7 +408,7 @@ class PathApi {
     FlightRuntime.callValue(appendPathClose, cast ([path] : Array<Dynamic>));
   }
 
-  @:keep public static function appendPathRoundRectangle(path:Path, x:Float, y:Float, width:Float, height:Float, radius:Dynamic):Void {
+  public static function appendPathRoundRectangle(path:Path, x:Float, y:Float, width:Float, height:Float, radius:Dynamic):Void {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var rtl:Dynamic = cast FlightRuntime.UNDEFINED;
     var rtr:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -434,7 +431,7 @@ class PathApi {
     FlightRuntime.callValue(appendPathClose, cast ([path] : Array<Dynamic>));
   }
 
-  @:keep public static function applyDash__strokePath(pts:Array<Float>, closed:Bool, dash:Array<Float>, dashOffset:Float):Array<DashSegment__strokePath> {
+  public static function applyDash__strokePath(pts:Array<Float>, closed:Bool, dash:Array<Float>, dashOffset:Float):Array<DashSegment__strokePath> {
     var result:Array<DashSegment__strokePath> = cast FlightRuntime.UNDEFINED;
     var totalDashLength:Dynamic = cast FlightRuntime.UNDEFINED;
     var offset:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -530,7 +527,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function applyDashToContour__dashPath(pts:Array<Float>, dash:Array<Float>, dashOffset:Float, totalDashLength:Float, out:Path):Void {
+  public static function applyDashToContour__dashPath(pts:Array<Float>, dash:Array<Float>, dashOffset:Float, totalDashLength:Float, out:Path):Void {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var offset:Dynamic = cast FlightRuntime.UNDEFINED;
     var dashIndex:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -613,7 +610,7 @@ class PathApi {
     }
   }
 
-  @:keep public static function chordDistSq__containsPathPoint(px:Float, py:Float, x0:Float, y0:Float, x1:Float, y1:Float):Float {
+  public static function chordDistSq__containsPathPoint(px:Float, py:Float, x0:Float, y0:Float, x1:Float, y1:Float):Float {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     var lenSq:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -631,7 +628,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function chordLengthParameterize__fitPathCurves(pts:Array<Float>, first:Float, last:Float):Array<Float> {
+  public static function chordLengthParameterize__fitPathCurves(pts:Array<Float>, first:Float, last:Float):Array<Float> {
     var u:Array<Float> = cast FlightRuntime.UNDEFINED;
     var total:Dynamic = cast FlightRuntime.UNDEFINED;
     u = cast ([0.0] : Array<Dynamic>);
@@ -658,7 +655,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function cleanPath(source:Path, tolerance:Float, out:Path, flattenTolerance:Dynamic = 0.25):Void {
+  public static function cleanPath(source:Path, tolerance:Float, out:Path, flattenTolerance:Dynamic = 0.25):Void {
     var contours:Dynamic = cast FlightRuntime.UNDEFINED;
     var winding:Dynamic = cast FlightRuntime.UNDEFINED;
     var toleranceSq:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -698,12 +695,12 @@ class PathApi {
     }
   }
 
-  @:keep public static function clonePath(source:Path):Path {
+  public static function clonePath(source:Path):Path {
     return cast FlightRuntime.callValue(copyPath, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function collapseClosedSeam__cleanPath(kept:Array<Float>, toleranceSq:Float):Void {
+  public static function collapseClosedSeam__cleanPath(kept:Array<Float>, toleranceSq:Float):Void {
     var changed:Dynamic = cast FlightRuntime.UNDEFINED;
     changed = true;
     while (FlightRuntime.truthy(FlightRuntime.andValue(changed, function():Dynamic return cast FlightRuntime.compare((Std.int(FlightRuntime.field(kept, 'length')) >> Std.int(1.0)), 3.0, '>')))) {
@@ -722,7 +719,7 @@ class PathApi {
 }
   }
 
-  @:keep public static function computeCenterTangent__fitPathCurves(pts:Array<Float>, idx:Float):Array<Float> {
+  public static function computeCenterTangent__fitPathCurves(pts:Array<Float>, idx:Float):Array<Float> {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     var len:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -733,7 +730,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function computeLeftTangent__fitPathCurves(pts:Array<Float>, idx:Float):Array<Float> {
+  public static function computeLeftTangent__fitPathCurves(pts:Array<Float>, idx:Float):Array<Float> {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     var len:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -744,7 +741,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function computeMaxError__fitPathCurves(pts:Array<Float>, first:Float, last:Float, bezier:Array<Float>, u:Array<Float>):Array<Float> {
+  public static function computeMaxError__fitPathCurves(pts:Array<Float>, first:Float, last:Float, bezier:Array<Float>, u:Array<Float>):Array<Float> {
     var maxDist:Dynamic = cast FlightRuntime.UNDEFINED;
     var splitPoint:Dynamic = cast FlightRuntime.UNDEFINED;
     maxDist = 0.0;
@@ -770,7 +767,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function computePathWindingNumber__containsPathPoint(path:Path, px:Float, py:Float, tolerance:Float):Float {
+  public static function computePathWindingNumber__containsPathPoint(path:Path, px:Float, py:Float, tolerance:Float):Float {
     var commands:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var toleranceSq:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -893,7 +890,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function computeRightTangent__fitPathCurves(pts:Array<Float>, idx:Float):Array<Float> {
+  public static function computeRightTangent__fitPathCurves(pts:Array<Float>, idx:Float):Array<Float> {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     var len:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -904,7 +901,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function containsPathPoint(path:Path, px:Float, py:Float, tolerance:Dynamic = 0.25):Bool {
+  public static function containsPathPoint(path:Path, px:Float, py:Float, tolerance:Dynamic = 0.25):Bool {
     var winding:Dynamic = cast FlightRuntime.UNDEFINED;
     winding = FlightRuntime.callValue(PathApi.computePathWindingNumber__containsPathPoint, cast ([path, px, py, tolerance] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(path, 'winding'), 'evenOdd'))) { return cast !FlightRuntime.strictEquals((Std.int(winding) & Std.int(1.0)), 0.0); }
@@ -912,7 +909,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function contourLength__getPathContourLengths(contour:Array<Float>):Float {
+  public static function contourLength__getPathContourLengths(contour:Array<Float>):Float {
     var len:Dynamic = cast FlightRuntime.UNDEFINED;
     len = 0.0;
     {
@@ -928,7 +925,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function contourLength__getPathLength(contour:Array<Float>):Float {
+  public static function contourLength__getPathLength(contour:Array<Float>):Float {
     var len:Dynamic = cast FlightRuntime.UNDEFINED;
     len = 0.0;
     {
@@ -944,7 +941,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function copyCommands__dashPath(source:Path, out:Path):Void {
+  public static function copyCommands__dashPath(source:Path, out:Path):Void {
     {
       var i:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(i, FlightRuntime.field(FlightRuntime.field(source, 'commands'), 'length'), '<'))) {
@@ -961,7 +958,7 @@ class PathApi {
     }
   }
 
-  @:keep public static function copyPath(source:Path, ?out:Path):Path {
+  public static function copyPath(source:Path, ?out:Path):Path {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(out, FlightRuntime.UNDEFINED))) {
   return cast { commands: FlightRuntime.slice(FlightRuntime.field(source, 'commands'), 0, null), data: FlightRuntime.slice(FlightRuntime.field(source, 'data'), 0, null), winding: FlightRuntime.field(source, 'winding') };
 }
@@ -988,7 +985,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function countSegmentCrossings__containsPathPoint(px:Float, py:Float, x0:Float, y0:Float, x1:Float, y1:Float):Float {
+  public static function countSegmentCrossings__containsPathPoint(px:Float, py:Float, x0:Float, y0:Float, x1:Float, y1:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.andValue(FlightRuntime.compare(y0, py, '<='), function():Dynamic return cast FlightRuntime.compare(y1, py, '>')), function():Dynamic return cast FlightRuntime.andValue(FlightRuntime.compare(y1, py, '<='), function():Dynamic return cast FlightRuntime.compare(y0, py, '>'))))) {
   var crossX:Dynamic = (x0 + (((py - y0) * (x1 - x0)) / (y1 - y0)));
   if (FlightRuntime.truthy(FlightRuntime.compare(px, crossX, '<'))) {
@@ -999,12 +996,12 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function createPath(winding:PathWinding = 'nonZero'):Path {
+  public static function createPath(winding:PathWinding = 'nonZero'):Path {
     return cast { commands: cast ([] : Array<Dynamic>), data: cast ([] : Array<Dynamic>), winding: winding };
     return cast null;
   }
 
-  @:keep public static function cubicExtremumRoots__getPathBounds(p0:Float, p1:Float, p2:Float, p3:Float, cb:Dynamic):Void {
+  public static function cubicExtremumRoots__getPathBounds(p0:Float, p1:Float, p2:Float, p3:Float, cb:Dynamic):Void {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     var c:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1030,7 +1027,7 @@ class PathApi {
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.compare(t2, 0.0, '>'), function():Dynamic return cast FlightRuntime.compare(t2, 1.0, '<')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callProperty(HxMath, 'abs', cast ([(t2 - t1)] : Array<Dynamic>)), 1e-12, '>')))) { FlightRuntime.callValue(cb, cast ([t2] : Array<Dynamic>)); }
   }
 
-  @:keep public static function dashPath(source:Path, dash:Array<Float>, dashOffset:Float, out:Path, tolerance:Dynamic = 0.25):Void {
+  public static function dashPath(source:Path, dash:Array<Float>, dashOffset:Float, out:Path, tolerance:Dynamic = 0.25):Void {
     var totalDashLength:Dynamic = cast FlightRuntime.UNDEFINED;
     var contours:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.setLength(FlightRuntime.field(out, 'commands'), 0.0);
@@ -1047,7 +1044,7 @@ class PathApi {
     }
   }
 
-  @:keep public static function dashTotal__dashPath(dash:Array<Float>):Float {
+  public static function dashTotal__dashPath(dash:Array<Float>):Float {
     var total:Dynamic = cast FlightRuntime.UNDEFINED;
     total = 0.0;
     {
@@ -1061,7 +1058,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function decimatePath(source:Path, tolerance:Float, out:Path, flattenTolerance:Dynamic = 0.25):Void {
+  public static function decimatePath(source:Path, tolerance:Float, out:Path, flattenTolerance:Dynamic = 0.25):Void {
     var contours:Dynamic = cast FlightRuntime.UNDEFINED;
     contours = FlightRuntime.callValue(flattenPath, cast ([source, flattenTolerance] : Array<Dynamic>));
     FlightRuntime.setLength(FlightRuntime.field(out, 'commands'), 0.0);
@@ -1097,7 +1094,7 @@ class PathApi {
     }
   }
 
-  @:keep public static function decodeSubpaths__reversePath(path:Path):Array<Subpath__reversePath> {
+  public static function decodeSubpaths__reversePath(path:Path):Array<Subpath__reversePath> {
     var subpaths:Array<Subpath__reversePath> = cast FlightRuntime.UNDEFINED;
     var current:Null<Subpath__reversePath> = cast FlightRuntime.UNDEFINED;
     var ensureCurrent:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1128,7 +1125,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function decodeSubpaths__strokePath(path:Path, tolerance:Float):Array<StrokeSubpath__strokePath> {
+  public static function decodeSubpaths__strokePath(path:Path, tolerance:Float):Array<StrokeSubpath__strokePath> {
     var commands:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var toleranceSq:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1218,7 +1215,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function distanceToChordSq__flattenPath(px:Float, py:Float, x0:Float, y0:Float, x1:Float, y1:Float):Float {
+  public static function distanceToChordSq__flattenPath(px:Float, py:Float, x0:Float, y0:Float, x1:Float, y1:Float):Float {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     var lengthSq:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1236,7 +1233,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function distChordSq__strokePath(px:Float, py:Float, x0:Float, y0:Float, x1:Float, y1:Float):Float {
+  public static function distChordSq__strokePath(px:Float, py:Float, x0:Float, y0:Float, x1:Float, y1:Float):Float {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     var lenSq:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1254,7 +1251,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function douglasPeucker__decimatePath(pts:Array<Float>, first:Float, last:Float, toleranceSq:Float, keep:Dynamic):Void {
+  public static function douglasPeucker__decimatePath(pts:Array<Float>, first:Float, last:Float, toleranceSq:Float, keep:Dynamic):Void {
     var x0:Dynamic = cast FlightRuntime.UNDEFINED;
     var y0:Dynamic = cast FlightRuntime.UNDEFINED;
     var x1:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1302,7 +1299,7 @@ class PathApi {
 }
   }
 
-  @:keep public static function encodeReversedSubpath__reversePath(subpath:Subpath__reversePath, out:Path):Void {
+  public static function encodeReversedSubpath__reversePath(subpath:Subpath__reversePath, out:Path):Void {
     var pts:Dynamic = cast FlightRuntime.UNDEFINED;
     var last:Dynamic = cast FlightRuntime.UNDEFINED;
     pts = FlightRuntime.field(subpath, 'points');
@@ -1333,7 +1330,7 @@ class PathApi {
 }
   }
 
-  @:keep public static function ensureContour__flattenPath(contours:Array<Array<Float>>, contour:Null<Array<Float>>):Array<Float> {
+  public static function ensureContour__flattenPath(contours:Array<Array<Float>>, contour:Null<Array<Float>>):Array<Float> {
     var started:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(contour, null))) { return cast contour; }
     started = cast ([0.0, 0.0] : Array<Dynamic>);
@@ -1342,21 +1339,21 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function evalCubic__getPathBounds(p0:Float, p1:Float, p2:Float, p3:Float, t:Float):Float {
+  public static function evalCubic__getPathBounds(p0:Float, p1:Float, p2:Float, p3:Float, t:Float):Float {
     var mt:Dynamic = cast FlightRuntime.UNDEFINED;
     mt = (1.0 - t);
     return cast ((((((mt * mt) * mt) * p0) + ((((3.0 * mt) * mt) * t) * p1)) + ((((3.0 * mt) * t) * t) * p2)) + (((t * t) * t) * p3));
     return cast null;
   }
 
-  @:keep public static function evalQuadratic__getPathBounds(p0:Float, p1:Float, p2:Float, t:Float):Float {
+  public static function evalQuadratic__getPathBounds(p0:Float, p1:Float, p2:Float, t:Float):Float {
     var mt:Dynamic = cast FlightRuntime.UNDEFINED;
     mt = (1.0 - t);
     return cast ((((mt * mt) * p0) + (((2.0 * mt) * t) * p1)) + ((t * t) * p2));
     return cast null;
   }
 
-  @:keep public static function expandCubicBounds__getPathBounds(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x3:Float, y3:Float, expand:Dynamic):Void {
+  public static function expandCubicBounds__getPathBounds(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x3:Float, y3:Float, expand:Dynamic):Void {
     FlightRuntime.callValue(expand, cast ([x3, y3] : Array<Dynamic>));
     FlightRuntime.callValue(PathApi.cubicExtremumRoots__getPathBounds, cast ([x0, c1x, c2x, x3, function(t:Dynamic) {
   FlightRuntime.callValue(expand, cast ([FlightRuntime.callValue(PathApi.evalCubic__getPathBounds, cast ([x0, c1x, c2x, x3, t] : Array<Dynamic>)), FlightRuntime.callValue(PathApi.evalCubic__getPathBounds, cast ([y0, c1y, c2y, y3, t] : Array<Dynamic>))] : Array<Dynamic>));
@@ -1366,7 +1363,7 @@ class PathApi {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function expandQuadraticBounds__getPathBounds(x0:Float, y0:Float, cx:Float, cy:Float, x2:Float, y2:Float, expand:Dynamic):Void {
+  public static function expandQuadraticBounds__getPathBounds(x0:Float, y0:Float, cx:Float, cy:Float, x2:Float, y2:Float, expand:Dynamic):Void {
     var tx:Dynamic = cast FlightRuntime.UNDEFINED;
     var ty:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(expand, cast ([x2, y2] : Array<Dynamic>));
@@ -1376,7 +1373,7 @@ class PathApi {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(ty, null))) { FlightRuntime.callValue(expand, cast ([FlightRuntime.callValue(PathApi.evalQuadratic__getPathBounds, cast ([x0, cx, x2, ty] : Array<Dynamic>)), FlightRuntime.callValue(PathApi.evalQuadratic__getPathBounds, cast ([y0, cy, y2, ty] : Array<Dynamic>))] : Array<Dynamic>)); }
   }
 
-  @:keep public static function findCorners__fitPathCurves(pts:Array<Float>, n:Float):Array<Float> {
+  public static function findCorners__fitPathCurves(pts:Array<Float>, n:Float):Array<Float> {
     var corners:Dynamic = cast FlightRuntime.UNDEFINED;
     corners = cast ([0.0] : Array<Dynamic>);
     {
@@ -1399,7 +1396,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function fitCubic__fitPathCurves(pts:Array<Float>, first:Float, last:Float, tHat1:Array<Float>, tHat2:Array<Float>, toleranceSq:Float, out:Path):Void {
+  public static function fitCubic__fitPathCurves(pts:Array<Float>, first:Float, last:Float, tHat1:Array<Float>, tHat2:Array<Float>, toleranceSq:Float, out:Path):Void {
     var nPts:Dynamic = cast FlightRuntime.UNDEFINED;
     var u:Dynamic = cast FlightRuntime.UNDEFINED;
     var MAX_ITERATIONS:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1437,7 +1434,7 @@ class PathApi {
     }
   }
 
-  @:keep public static function fitPathCurves(source:Path, tolerance:Float, out:Path, flattenTolerance:Dynamic = 0.25):Void {
+  public static function fitPathCurves(source:Path, tolerance:Float, out:Path, flattenTolerance:Dynamic = 0.25):Void {
     var contours:Dynamic = cast FlightRuntime.UNDEFINED;
     var toleranceSq:Dynamic = cast FlightRuntime.UNDEFINED;
     contours = FlightRuntime.callValue(flattenPath, cast ([source, flattenTolerance] : Array<Dynamic>));
@@ -1484,7 +1481,7 @@ class PathApi {
     }
   }
 
-  @:keep public static function flattenCubic__flattenPath(out:Array<Float>, x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Void {
+  public static function flattenCubic__flattenPath(out:Array<Float>, x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Void {
     var d1:Dynamic = cast FlightRuntime.UNDEFINED;
     var d2:Dynamic = cast FlightRuntime.UNDEFINED;
     var x01:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1521,7 +1518,7 @@ class PathApi {
     FlightRuntime.callValue(PathApi.flattenCubic__flattenPath, cast ([out, xm, ym, x123, y123, x23, y23, x1, y1, toleranceSq, (depth + 1.0)] : Array<Dynamic>));
   }
 
-  @:keep public static function flattenCubic__strokePath(out:Array<Float>, x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Void {
+  public static function flattenCubic__strokePath(out:Array<Float>, x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Void {
     var dxc1:Dynamic = cast FlightRuntime.UNDEFINED;
     var dxc2:Dynamic = cast FlightRuntime.UNDEFINED;
     var x01:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1558,7 +1555,7 @@ class PathApi {
     FlightRuntime.callValue(PathApi.flattenCubic__strokePath, cast ([out, xm, ym, x123, y123, x23, y23, x1, y1, toleranceSq, (depth + 1.0)] : Array<Dynamic>));
   }
 
-  @:keep public static function flattenCubicWindingNumber__containsPathPoint(px:Float, py:Float, x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Float {
+  public static function flattenCubicWindingNumber__containsPathPoint(px:Float, py:Float, x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Float {
     var d1:Dynamic = cast FlightRuntime.UNDEFINED;
     var d2:Dynamic = cast FlightRuntime.UNDEFINED;
     var x01:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1594,7 +1591,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function flattenPath(path:Path, tolerance:Dynamic = 0.25):Array<Array<Float>> {
+  public static function flattenPath(path:Path, tolerance:Dynamic = 0.25):Array<Array<Float>> {
     var commands:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var toleranceSq:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1674,7 +1671,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function flattenQuadratic__flattenPath(out:Array<Float>, x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Void {
+  public static function flattenQuadratic__flattenPath(out:Array<Float>, x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Void {
     var x01:Dynamic = cast FlightRuntime.UNDEFINED;
     var y01:Dynamic = cast FlightRuntime.UNDEFINED;
     var x12:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1695,7 +1692,7 @@ class PathApi {
     FlightRuntime.callValue(PathApi.flattenQuadratic__flattenPath, cast ([out, xm, ym, x12, y12, x1, y1, toleranceSq, (depth + 1.0)] : Array<Dynamic>));
   }
 
-  @:keep public static function flattenQuadratic__strokePath(out:Array<Float>, x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Void {
+  public static function flattenQuadratic__strokePath(out:Array<Float>, x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Void {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     var lengthSq:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1731,7 +1728,7 @@ class PathApi {
     FlightRuntime.callValue(PathApi.flattenQuadratic__strokePath, cast ([out, xm, ym, x12, y12, x1, y1, toleranceSq, (depth + 1.0)] : Array<Dynamic>));
   }
 
-  @:keep public static function flattenQuadraticWindingNumber__containsPathPoint(px:Float, py:Float, x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Float {
+  public static function flattenQuadraticWindingNumber__containsPathPoint(px:Float, py:Float, x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Float {
     var mx01:Dynamic = cast FlightRuntime.UNDEFINED;
     var my01:Dynamic = cast FlightRuntime.UNDEFINED;
     var mx12:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1751,7 +1748,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function forEachPathSegment(path:Path, visitor:Dynamic):Void {
+  public static function forEachPathSegment(path:Path, visitor:Dynamic):Void {
     var commands:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var di:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1806,7 +1803,7 @@ class PathApi {
     }
   }
 
-  @:keep public static function generateBezier__fitPathCurves(pts:Array<Float>, first:Float, last:Float, u:Array<Float>, tHat1:Array<Float>, tHat2:Array<Float>):Array<Float> {
+  public static function generateBezier__fitPathCurves(pts:Array<Float>, first:Float, last:Float, u:Array<Float>, tHat1:Array<Float>, tHat2:Array<Float>):Array<Float> {
     var nPts:Dynamic = cast FlightRuntime.UNDEFINED;
     var c00:Dynamic = cast FlightRuntime.UNDEFINED;
     var c01:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1863,7 +1860,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function getCubicBezierPoint(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
+  public static function getCubicBezierPoint(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
     var u:Dynamic = cast FlightRuntime.UNDEFINED;
     var u2:Dynamic = cast FlightRuntime.UNDEFINED;
     var u3:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1880,7 +1877,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function getCubicBezierTangent(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
+  public static function getCubicBezierTangent(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
     var u:Dynamic = cast FlightRuntime.UNDEFINED;
     var u2:Dynamic = cast FlightRuntime.UNDEFINED;
     var t2:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1893,7 +1890,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function getPathBounds(path:Path, out:RectangleLike):Bool {
+  public static function getPathBounds(path:Path, out:RectangleLike):Bool {
     var commands:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var minX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1986,7 +1983,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function getPathContourLengths(path:Path, tolerance:Dynamic = 0.25):Array<Float> {
+  public static function getPathContourLengths(path:Path, tolerance:Dynamic = 0.25):Array<Float> {
     var contours:Dynamic = cast FlightRuntime.UNDEFINED;
     var lengths:Array<Float> = cast FlightRuntime.UNDEFINED;
     contours = FlightRuntime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
@@ -2002,7 +1999,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function getPathContourOrientation(path:Path, tolerance:Dynamic = 0.25):String {
+  public static function getPathContourOrientation(path:Path, tolerance:Dynamic = 0.25):String {
     var contours:Dynamic = cast FlightRuntime.UNDEFINED;
     var area:Dynamic = cast FlightRuntime.UNDEFINED;
     contours = FlightRuntime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
@@ -2014,7 +2011,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function getPathLastPoint(path:Path):Null<Array<Float>> {
+  public static function getPathLastPoint(path:Path):Null<Array<Float>> {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     data = FlightRuntime.field(path, 'data');
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(data, 'length'), 2.0, '<'))) { return cast null; }
@@ -2022,7 +2019,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function getPathLength(path:Path, tolerance:Dynamic = 0.25):Float {
+  public static function getPathLength(path:Path, tolerance:Dynamic = 0.25):Float {
     var contours:Dynamic = cast FlightRuntime.UNDEFINED;
     var total:Dynamic = cast FlightRuntime.UNDEFINED;
     contours = FlightRuntime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
@@ -2038,7 +2035,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function getPathNearestPoint(path:Path, px:Float, py:Float, out:Vector2Like, tolerance:Dynamic = 0.25):Float {
+  public static function getPathNearestPoint(path:Path, px:Float, py:Float, out:Vector2Like, tolerance:Dynamic = 0.25):Float {
     var contours:Dynamic = cast FlightRuntime.UNDEFINED;
     var bestDistSq:Dynamic = cast FlightRuntime.UNDEFINED;
     var bestX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2089,14 +2086,14 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function getPathPointAtDistance(path:Path, distance:Float, out:Vector2Like, tolerance:Dynamic = 0.25):Bool {
+  public static function getPathPointAtDistance(path:Path, distance:Float, out:Vector2Like, tolerance:Dynamic = 0.25):Bool {
     var contours:Dynamic = cast FlightRuntime.UNDEFINED;
     contours = FlightRuntime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
     return cast FlightRuntime.callValue(PathApi.samplePathPoint__getPathPointAtDistance, cast ([contours, distance, out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getPathPositionAtDistance(path:Path, distance:Float, pointOut:Vector2Like, tangentOut:Vector2Like, tolerance:Dynamic = 0.25):Bool {
+  public static function getPathPositionAtDistance(path:Path, distance:Float, pointOut:Vector2Like, tangentOut:Vector2Like, tolerance:Dynamic = 0.25):Bool {
     var contours:Dynamic = cast FlightRuntime.UNDEFINED;
     var hasPoint:Dynamic = cast FlightRuntime.UNDEFINED;
     contours = FlightRuntime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
@@ -2106,17 +2103,17 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function getPathSegmentPointAtParameter(path:Path, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
+  public static function getPathSegmentPointAtParameter(path:Path, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
     return cast FlightRuntime.callValue(PathApi.walkPathSegment__getPathSegmentAtParameter, cast ([path, segmentIndex, t, out, false] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getPathSegmentTangentAtParameter(path:Path, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
+  public static function getPathSegmentTangentAtParameter(path:Path, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
     return cast FlightRuntime.callValue(PathApi.walkPathSegment__getPathSegmentAtParameter, cast ([path, segmentIndex, t, out, true] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getPathSignedArea(path:Path, tolerance:Dynamic = 0.25):Float {
+  public static function getPathSignedArea(path:Path, tolerance:Dynamic = 0.25):Float {
     var contours:Dynamic = cast FlightRuntime.UNDEFINED;
     var total:Dynamic = cast FlightRuntime.UNDEFINED;
     contours = FlightRuntime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
@@ -2132,14 +2129,14 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function getPathTangentAtDistance(path:Path, distance:Float, out:Vector2Like, tolerance:Dynamic = 0.25):Bool {
+  public static function getPathTangentAtDistance(path:Path, distance:Float, out:Vector2Like, tolerance:Dynamic = 0.25):Bool {
     var contours:Dynamic = cast FlightRuntime.UNDEFINED;
     contours = FlightRuntime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
     return cast FlightRuntime.callValue(PathApi.samplePathTangent__getPathPointAtDistance, cast ([contours, distance, out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getQuadraticBezierPoint(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
+  public static function getQuadraticBezierPoint(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
     var u:Dynamic = cast FlightRuntime.UNDEFINED;
     u = (1.0 - t);
     FlightRuntime.setField(out, 'x', ((((u * u) * x0) + (((2.0 * u) * t) * cx)) + ((t * t) * x1)));
@@ -2148,7 +2145,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function getQuadraticBezierTangent(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
+  public static function getQuadraticBezierTangent(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
     var u:Dynamic = cast FlightRuntime.UNDEFINED;
     u = (1.0 - t);
     FlightRuntime.setField(out, 'x', (2.0 * ((u * (cx - x0)) + (t * (x1 - cx)))));
@@ -2157,7 +2154,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function isEar__tessellatePath(contour:Array<Float>, ring:Array<Float>, a:Float, b:Float, c:Float):Bool {
+  public static function isEar__tessellatePath(contour:Array<Float>, ring:Array<Float>, a:Float, b:Float, c:Float):Bool {
     var ax:Dynamic = cast FlightRuntime.UNDEFINED;
     var ay:Dynamic = cast FlightRuntime.UNDEFINED;
     var bx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2184,7 +2181,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function isMiddleRemovable__cleanPath(kept:Array<Float>, prev:Float, mid:Float, next:Float, toleranceSq:Float):Bool {
+  public static function isMiddleRemovable__cleanPath(kept:Array<Float>, prev:Float, mid:Float, next:Float, toleranceSq:Float):Bool {
     var px:Dynamic = cast FlightRuntime.UNDEFINED;
     var py:Dynamic = cast FlightRuntime.UNDEFINED;
     var mx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2201,7 +2198,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function isPointInTriangle__tessellatePath(px:Float, py:Float, ax:Float, ay:Float, bx:Float, by:Float, cx:Float, cy:Float):Bool {
+  public static function isPointInTriangle__tessellatePath(px:Float, py:Float, ax:Float, ay:Float, bx:Float, by:Float, cx:Float, cy:Float):Bool {
     var d1:Dynamic = cast FlightRuntime.UNDEFINED;
     var d2:Dynamic = cast FlightRuntime.UNDEFINED;
     var d3:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2216,7 +2213,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function isRedundantMiddle__cleanPath(px:Float, py:Float, mx:Float, my:Float, sx:Float, sy:Float, toleranceSq:Float):Bool {
+  public static function isRedundantMiddle__cleanPath(px:Float, py:Float, mx:Float, my:Float, sx:Float, sy:Float, toleranceSq:Float):Bool {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     var lengthSq:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2238,7 +2235,7 @@ class PathApi {
 
   public static final MAX_SUBDIVISION_DEPTH__strokePath:Dynamic = 16.0;
 
-  @:keep public static function newtonRaphsonRootFind__fitPathCurves(bezier:Array<Float>, px:Float, py:Float, u:Float):Float {
+  public static function newtonRaphsonRootFind__fitPathCurves(bezier:Array<Float>, px:Float, py:Float, u:Float):Float {
     var mt:Dynamic = cast FlightRuntime.UNDEFINED;
     var qx:Dynamic = cast FlightRuntime.UNDEFINED;
     var qy:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2262,7 +2259,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function normalizeCornerRadii__path(radius:Dynamic, width:Float, height:Float):Array<Float> {
+  public static function normalizeCornerRadii__path(radius:Dynamic, width:Float, height:Float):Array<Float> {
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
     var rtl:Dynamic = cast FlightRuntime.UNDEFINED;
     var rtr:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2293,7 +2290,7 @@ class PathApi {
 
   public static final POOL_HIGH_WATER__pathMeshPool:Dynamic = 64.0;
 
-  @:keep public static function pushCleanVertex__cleanPath(kept:Array<Float>, x:Float, y:Float, toleranceSq:Float):Void {
+  public static function pushCleanVertex__cleanPath(kept:Array<Float>, x:Float, y:Float, toleranceSq:Float):Void {
     var k:Dynamic = cast FlightRuntime.UNDEFINED;
     k = FlightRuntime.field(kept, 'length');
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.compare(k, 2.0, '>='), function():Dynamic return cast FlightRuntime.callValue(PathApi.withinTolerance__cleanPath, cast ([FlightRuntime.getIndex(kept, (k - 2.0)), FlightRuntime.getIndex(kept, (k - 1.0)), x, y, toleranceSq] : Array<Dynamic>))))) { return; }
@@ -2305,7 +2302,7 @@ class PathApi {
     FlightRuntime.pushMany(kept, cast ([x, y] : Array<Dynamic>));
   }
 
-  @:keep public static function quadraticExtremumT__getPathBounds(p0:Float, p1:Float, p2:Float):Null<Float> {
+  public static function quadraticExtremumT__getPathBounds(p0:Float, p1:Float, p2:Float):Null<Float> {
     var denom:Dynamic = cast FlightRuntime.UNDEFINED;
     var t:Dynamic = cast FlightRuntime.UNDEFINED;
     denom = ((p0 - (2.0 * p1)) + p2);
@@ -2315,19 +2312,19 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function releasePathMesh(mesh:PathMesh):Void {
+  public static function releasePathMesh(mesh:PathMesh):Void {
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(PathApi.pathMeshPool__pathMeshPool, 'length'), PathApi.POOL_HIGH_WATER__pathMeshPool, '<'))) {
   FlightRuntime.callProperty(PathApi.pathMeshPool__pathMeshPool, 'push', cast ([mesh] : Array<Dynamic>));
 }
   }
 
-  @:keep public static function releasePathMeshTyped(mesh:PathMeshTyped):Void {
+  public static function releasePathMeshTyped(mesh:PathMeshTyped):Void {
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(PathApi.typedPool__pathMeshPool, 'length'), PathApi.POOL_HIGH_WATER__pathMeshPool, '<'))) {
   FlightRuntime.callProperty(PathApi.typedPool__pathMeshPool, 'push', cast ([mesh] : Array<Dynamic>));
 }
   }
 
-  @:keep public static function reparameterize__fitPathCurves(pts:Array<Float>, first:Float, last:Float, u:Array<Float>, bezier:Array<Float>):Array<Float> {
+  public static function reparameterize__fitPathCurves(pts:Array<Float>, first:Float, last:Float, u:Array<Float>, bezier:Array<Float>):Array<Float> {
     var uPrime:Array<Float> = cast FlightRuntime.UNDEFINED;
     uPrime = cast ([] : Array<Dynamic>);
     {
@@ -2341,7 +2338,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function reversePath(source:Path, out:Path):Void {
+  public static function reversePath(source:Path, out:Path):Void {
     var subpaths:Dynamic = cast FlightRuntime.UNDEFINED;
     subpaths = FlightRuntime.callValue(PathApi.decodeSubpaths__reversePath, cast ([source] : Array<Dynamic>));
     FlightRuntime.setLength(FlightRuntime.field(out, 'commands'), 0.0);
@@ -2352,7 +2349,7 @@ class PathApi {
     }
   }
 
-  @:keep public static function samplePathPoint__getPathPointAtDistance(contours:Array<Array<Float>>, distance:Float, out:Vector2Like):Bool {
+  public static function samplePathPoint__getPathPointAtDistance(contours:Array<Array<Float>>, distance:Float, out:Vector2Like):Bool {
     var remaining:Dynamic = cast FlightRuntime.UNDEFINED;
     var last:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(contours, 'length'), 0.0))) { return cast false; }
@@ -2393,7 +2390,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function samplePathTangent__getPathPointAtDistance(contours:Array<Array<Float>>, distance:Float, out:Vector2Like):Bool {
+  public static function samplePathTangent__getPathPointAtDistance(contours:Array<Array<Float>>, distance:Float, out:Vector2Like):Bool {
     var remaining:Dynamic = cast FlightRuntime.UNDEFINED;
     var lastTx:Dynamic = cast FlightRuntime.UNDEFINED;
     var lastTy:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2439,7 +2436,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function shoelaceArea__getPathSignedArea(contour:Array<Float>):Float {
+  public static function shoelaceArea__getPathSignedArea(contour:Array<Float>):Float {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var area:Dynamic = cast FlightRuntime.UNDEFINED;
     n = (Std.int(FlightRuntime.field(contour, 'length')) >> Std.int(1.0));
@@ -2458,7 +2455,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function strokePath(path:Path, style:StrokeStyle, tolerance:Dynamic = 0.25):Path {
+  public static function strokePath(path:Path, style:StrokeStyle, tolerance:Dynamic = 0.25):Path {
     var width:Dynamic = cast FlightRuntime.UNDEFINED;
     var join:Dynamic = cast FlightRuntime.UNDEFINED;
     var cap:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2489,7 +2486,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function strokeSubpath__strokePath(pts:Array<Float>, closed:Bool, halfWidth:Float, join:String, cap:String, miterLimit:Float, out:Path, tolerance:Float):Void {
+  public static function strokeSubpath__strokePath(pts:Array<Float>, closed:Bool, halfWidth:Float, join:String, cap:String, miterLimit:Float, out:Path, tolerance:Float):Void {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var left:Array<Float> = cast FlightRuntime.UNDEFINED;
     var right:Array<Float> = cast FlightRuntime.UNDEFINED;
@@ -2570,7 +2567,7 @@ class PathApi {
     FlightRuntime.callValue(appendPathClose, cast ([out] : Array<Dynamic>));
   }
 
-  @:keep public static function tessellateContour__tessellatePath(source:Array<Float>, vertices:Array<Float>, indices:Array<Float>):Void {
+  public static function tessellateContour__tessellatePath(source:Array<Float>, vertices:Array<Float>, indices:Array<Float>):Void {
     var pts:Array<Float> = cast FlightRuntime.UNDEFINED;
     var contour:Dynamic = cast FlightRuntime.UNDEFINED;
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2655,7 +2652,7 @@ class PathApi {
 }
   }
 
-  @:keep public static function tessellatePath(path:Path, tolerance:Dynamic = 0.25):PathMesh {
+  public static function tessellatePath(path:Path, tolerance:Dynamic = 0.25):PathMesh {
     var contours:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertices:Array<Float> = cast FlightRuntime.UNDEFINED;
     var indices:Array<Float> = cast FlightRuntime.UNDEFINED;
@@ -2673,14 +2670,14 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function tessellatePathTyped(path:Path, tolerance:Dynamic = 0.25):PathMeshTyped {
+  public static function tessellatePathTyped(path:Path, tolerance:Dynamic = 0.25):PathMeshTyped {
     var mesh:Dynamic = cast FlightRuntime.UNDEFINED;
     mesh = FlightRuntime.callValue(tessellatePath, cast ([path, tolerance] : Array<Dynamic>));
     return cast { vertices: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [FlightRuntime.field(mesh, 'vertices')]), indices: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [FlightRuntime.field(mesh, 'indices')]) };
     return cast null;
   }
 
-  @:keep public static function transformPath(source:Path, matrix:MatrixLike, out:Path):Void {
+  public static function transformPath(source:Path, matrix:MatrixLike, out:Path):Void {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2748,13 +2745,13 @@ class PathApi {
     }
   }
 
-  @:keep public static function translatePath(source:Path, dx:Float, dy:Float, out:Path):Void {
+  public static function translatePath(source:Path, dx:Float, dy:Float, out:Path):Void {
     FlightRuntime.callValue(transformPath, cast ([source, { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: dx, ty: dy }, out] : Array<Dynamic>));
   }
 
   public static final typedPool__pathMeshPool:Array<PathMeshTyped> = cast ([] : Array<Dynamic>);
 
-  @:keep public static function vectorAngle__path(ux:Float, uy:Float, vx:Float, vy:Float):Float {
+  public static function vectorAngle__path(ux:Float, uy:Float, vx:Float, vy:Float):Float {
     var dot:Dynamic = cast FlightRuntime.UNDEFINED;
     var lenU:Dynamic = cast FlightRuntime.UNDEFINED;
     var lenV:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2770,7 +2767,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function walkPathSegment__getPathSegmentAtParameter(path:Path, segmentIndex:Float, t:Float, out:Vector2Like, wantTangent:Bool):Bool {
+  public static function walkPathSegment__getPathSegmentAtParameter(path:Path, segmentIndex:Float, t:Float, out:Vector2Like, wantTangent:Bool):Bool {
     var commands:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var currentSegment:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2874,7 +2871,7 @@ class PathApi {
     return cast null;
   }
 
-  @:keep public static function withinTolerance__cleanPath(ax:Float, ay:Float, bx:Float, by:Float, toleranceSq:Float):Bool {
+  public static function withinTolerance__cleanPath(ax:Float, ay:Float, bx:Float, by:Float, toleranceSq:Float):Bool {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     dx = (ax - bx);

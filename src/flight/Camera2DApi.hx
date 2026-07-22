@@ -21,36 +21,33 @@ import flight.Types.MatrixLike;
 import flight.Types.RectangleLike;
 import flight.Types.Vector2Like;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Camera2DApi")
 class Camera2DApi {
-  @:keep public static function createCamera2D(viewportWidth:Float, viewportHeight:Float, ?options:Camera2DOptions):Camera2D {
+  public static function createCamera2D(viewportWidth:Float, viewportHeight:Float, ?options:Camera2DOptions):Camera2D {
     return cast { rotation: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'rotation'), function():Dynamic return cast 0.0), viewportHeight: viewportHeight, viewportWidth: viewportWidth, x: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'x'), function():Dynamic return cast 0.0), y: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'y'), function():Dynamic return cast 0.0), zoom: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'zoom'), function():Dynamic return cast 1.0) };
     return cast null;
   }
 
-  @:keep public static function getCamera2DParallaxPoint(camera:Camera2D, factor:Float, out:Vector2Like):Void {
+  public static function getCamera2DParallaxPoint(camera:Camera2D, factor:Float, out:Vector2Like):Void {
     FlightRuntime.callValue(getCamera2DViewMatrix, cast ([camera, Camera2DApi.scratchMatrix__parallax] : Array<Dynamic>));
     FlightRuntime.setField(out, 'x', ((FlightRuntime.field(Camera2DApi.scratchMatrix__parallax, 'tx') - (FlightRuntime.field(camera, 'viewportWidth') * 0.5)) * factor));
     FlightRuntime.setField(out, 'y', ((FlightRuntime.field(Camera2DApi.scratchMatrix__parallax, 'ty') - (FlightRuntime.field(camera, 'viewportHeight') * 0.5)) * factor));
   }
 
-  @:keep public static function getCamera2DViewMatrix(camera:Camera2D, out:MatrixLike):Void {
+  public static function getCamera2DViewMatrix(camera:Camera2D, out:MatrixLike):Void {
     var zoom:Dynamic = cast FlightRuntime.UNDEFINED;
     zoom = FlightRuntime.field(camera, 'zoom');
     FlightRuntime.callValue(setTransformMatrix, cast ([out, zoom, zoom, -FlightRuntime.field(camera, 'rotation'), (FlightRuntime.field(camera, 'viewportWidth') * 0.5), (FlightRuntime.field(camera, 'viewportHeight') * 0.5)] : Array<Dynamic>));
     FlightRuntime.callValue(translateMatrixByVectorXY, cast ([out, out, -FlightRuntime.field(camera, 'x'), -FlightRuntime.field(camera, 'y')] : Array<Dynamic>));
   }
 
-  @:keep public static function getCamera2DVisibleBounds(camera:Camera2D, out:RectangleLike):Void {
+  public static function getCamera2DVisibleBounds(camera:Camera2D, out:RectangleLike):Void {
     FlightRuntime.callValue(getCamera2DViewMatrix, cast ([camera, Camera2DApi.scratchMatrix__visibleBounds] : Array<Dynamic>));
     FlightRuntime.callValue(inverseMatrix, cast ([Camera2DApi.scratchInverse__visibleBounds, Camera2DApi.scratchMatrix__visibleBounds] : Array<Dynamic>));
     FlightRuntime.callValue(matrixTransformBounds, cast ([out, Camera2DApi.scratchInverse__visibleBounds, 0.0, 0.0, FlightRuntime.field(camera, 'viewportWidth'), FlightRuntime.field(camera, 'viewportHeight')] : Array<Dynamic>));
   }
 
-  @:keep public static function projectCamera2DPoint(camera:Camera2D, worldX:Float, worldY:Float, out:Vector2Like):Void {
+  public static function projectCamera2DPoint(camera:Camera2D, worldX:Float, worldY:Float, out:Vector2Like):Void {
     FlightRuntime.callValue(getCamera2DViewMatrix, cast ([camera, Camera2DApi.scratchMatrix__projection] : Array<Dynamic>));
     FlightRuntime.callValue(matrixTransformPointXY, cast ([out, Camera2DApi.scratchMatrix__projection, worldX, worldY] : Array<Dynamic>));
   }
@@ -69,12 +66,12 @@ class Camera2DApi {
 
   public static final scratchMatrix__visibleBounds:Dynamic = FlightRuntime.callValue(createMatrix, cast ([] : Array<Dynamic>));
 
-  @:keep public static function unprojectCamera2DPoint(camera:Camera2D, screenX:Float, screenY:Float, out:Vector2Like):Void {
+  public static function unprojectCamera2DPoint(camera:Camera2D, screenX:Float, screenY:Float, out:Vector2Like):Void {
     FlightRuntime.callValue(getCamera2DViewMatrix, cast ([camera, Camera2DApi.scratchMatrix__projection] : Array<Dynamic>));
     FlightRuntime.callValue(inverseMatrixTransformPointXY, cast ([out, Camera2DApi.scratchMatrix__projection, screenX, screenY] : Array<Dynamic>));
   }
 
-  @:keep public static function updateCamera2DFollow(camera:Camera2D, targetX:Float, targetY:Float, deltaTime:Float, ?options:Camera2DFollowOptions):Void {
+  public static function updateCamera2DFollow(camera:Camera2D, targetX:Float, targetY:Float, deltaTime:Float, ?options:Camera2DFollowOptions):Void {
     var camX:Dynamic = cast FlightRuntime.UNDEFINED;
     var camY:Dynamic = cast FlightRuntime.UNDEFINED;
     var deadHalfW:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -126,7 +123,7 @@ class Camera2DApi {
     FlightRuntime.setField(camera, 'y', nextY);
   }
 
-  @:keep public static function zoomCamera2DAtScreenPoint(camera:Camera2D, screenX:Float, screenY:Float, zoom:Float):Void {
+  public static function zoomCamera2DAtScreenPoint(camera:Camera2D, screenX:Float, screenY:Float, zoom:Float):Void {
     FlightRuntime.callValue(unprojectCamera2DPoint, cast ([camera, screenX, screenY, Camera2DApi.scratchBefore__zoom] : Array<Dynamic>));
     FlightRuntime.setField(camera, 'zoom', zoom);
     FlightRuntime.callValue(unprojectCamera2DPoint, cast ([camera, screenX, screenY, Camera2DApi.scratchAfter__zoom] : Array<Dynamic>));

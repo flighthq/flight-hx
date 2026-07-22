@@ -67,14 +67,11 @@ typedef SceneResourceRevealOptions = { @:optional var ease:EasingFunction; @:opt
 
 typedef SceneResourceSignals = { var onResourceFailed:Signal<Dynamic>; var onResourceResolved:Signal<Dynamic>; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.SceneResources")
 class SceneResources {
   public static final _resolvedVoid__resolveSceneResources:flight.internal.FlightPromise<flight.internal.FlightNothing> = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([] : Array<Dynamic>));
 
-  @:keep public static function cancelDroppedResolutions__resolveSceneResources(resolver:SceneResourceResolver, working:Dynamic):Void {
+  public static function cancelDroppedResolutions__resolveSceneResources(resolver:SceneResourceResolver, working:Dynamic):Void {
     for (__iteration0 in FlightRuntime.iterable(FlightRuntime.field(resolver, 'inFlight'))) {
       var texture:Dynamic = FlightRuntime.getIndex(__iteration0, 0.0);
       var entry:Dynamic = FlightRuntime.getIndex(__iteration0, 1.0);
@@ -88,7 +85,7 @@ class SceneResources {
     }
   }
 
-  @:keep public static function collectNodeResourceTextures__getSceneResourceTextures(node:SceneNode, registry:SceneMaterialTextureRegistry, out:Array<Texture>, seen:Dynamic, slots:Array<Texture>):Void {
+  public static function collectNodeResourceTextures__getSceneResourceTextures(node:SceneNode, registry:SceneMaterialTextureRegistry, out:Array<Texture>, seen:Dynamic, slots:Array<Texture>):Void {
     var materials:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(isMesh, cast ([node] : Array<Dynamic>))))) { return; }
     materials = FlightRuntime.field(node, 'materials');
@@ -114,7 +111,7 @@ class SceneResources {
     }
   }
 
-  @:keep public static function collectPendingTextureOwners__revealSceneResourcesOnResolve(scene:SceneNode, resolver:SceneResourceResolver, out:Dynamic):Void {
+  public static function collectPendingTextureOwners__revealSceneResourcesOnResolve(scene:SceneNode, resolver:SceneResourceResolver, out:Dynamic):Void {
     var slots:Array<Texture> = cast FlightRuntime.UNDEFINED;
     var visit:Dynamic = cast FlightRuntime.UNDEFINED;
     slots = cast ([] : Array<Dynamic>);
@@ -153,12 +150,12 @@ class SceneResources {
     FlightRuntime.callValue(forEachNodeDescendant, cast ([scene, function(node:Dynamic) return FlightRuntime.callValue(visit, cast ([(cast node : SceneNode)] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function createSceneMaterialTextureRegistry():SceneMaterialTextureRegistry {
+  public static function createSceneMaterialTextureRegistry():SceneMaterialTextureRegistry {
     return cast { listers: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };
     return cast null;
   }
 
-  @:keep public static function createSceneResourceResolver(?options:SceneResourceResolverOptions):SceneResourceResolver {
+  public static function createSceneResourceResolver(?options:SceneResourceResolverOptions):SceneResourceResolver {
     var loader:Dynamic = cast FlightRuntime.UNDEFINED;
     var registry:Dynamic = cast FlightRuntime.UNDEFINED;
     loader = FlightRuntime.callValue(createResourceLoader, cast ([{ dedupe: false, maxConcurrent: FlightRuntime.optionalField(options, 'maxConcurrent'), streaming: true }] : Array<Dynamic>));
@@ -172,12 +169,12 @@ class SceneResources {
     return cast null;
   }
 
-  @:keep public static function createSceneResourceSignals():SceneResourceSignals {
+  public static function createSceneResourceSignals():SceneResourceSignals {
     return cast { onResourceFailed: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onResourceResolved: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createWebSceneResourceFetch():SceneResourceFetch {
+  public static function createWebSceneResourceFetch():SceneResourceFetch {
     return cast flight.internal.FlightAsync.make(function(ref:Dynamic, signal:Dynamic):flight.internal.FlightPromise<Dynamic> {
   var url:Dynamic = cast FlightRuntime.UNDEFINED;
   url = FlightRuntime.callValue(resolveSceneResourceUri, cast ([FlightRuntime.field(ref, 'uri'), FlightRuntime.field(ref, 'basePath')] : Array<Dynamic>));
@@ -192,7 +189,7 @@ class SceneResources {
     return cast null;
   }
 
-  @:keep public static function disposeSceneResourceResolver(resolver:SceneResourceResolver):Void {
+  public static function disposeSceneResourceResolver(resolver:SceneResourceResolver):Void {
     FlightRuntime.callValue(cancelResourceLoad, cast ([FlightRuntime.field(resolver, 'loader')] : Array<Dynamic>));
     FlightRuntime.callValue(disposeResourceLoader, cast ([FlightRuntime.field(resolver, 'loader')] : Array<Dynamic>));
     for (entry in FlightRuntime.iterable(FlightRuntime.callProperty(FlightRuntime.field(resolver, 'inFlight'), 'values', cast ([] : Array<Dynamic>)))) {
@@ -201,7 +198,7 @@ class SceneResources {
     FlightRuntime.callProperty(FlightRuntime.field(resolver, 'inFlight'), 'clear', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function emitSceneResourceEvent__resolveSceneResources(resolver:SceneResourceResolver, texture:Texture, ref:SceneResourceRef, resolved:Bool):Void {
+  public static function emitSceneResourceEvent__resolveSceneResources(resolver:SceneResourceResolver, texture:Texture, ref:SceneResourceRef, resolved:Bool):Void {
     var signals:Dynamic = cast FlightRuntime.UNDEFINED;
     var event:Dynamic = cast FlightRuntime.UNDEFINED;
     signals = FlightRuntime.field(resolver, 'signals');
@@ -210,7 +207,7 @@ class SceneResources {
     FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.select(resolved, function():Dynamic return cast FlightRuntime.field(signals, 'onResourceResolved'), function():Dynamic return cast FlightRuntime.field(signals, 'onResourceFailed')), event] : Array<Dynamic>));
   }
 
-  @:keep public static function enableSceneResourceSignals(resolver:SceneResourceResolver):SceneResourceSignals {
+  public static function enableSceneResourceSignals(resolver:SceneResourceResolver):SceneResourceSignals {
     var signals:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(resolver, 'signals'), null))) { return cast FlightRuntime.field(resolver, 'signals'); }
     signals = FlightRuntime.callValue(createSceneResourceSignals, cast ([] : Array<Dynamic>));
@@ -219,7 +216,7 @@ class SceneResources {
     return cast null;
   }
 
-  @:keep public static function failSceneResourceResolution__resolveSceneResources(resolver:SceneResourceResolver, texture:Texture, ref:SceneResourceRef, entry:SceneResourceInFlight):Void {
+  public static function failSceneResourceResolution__resolveSceneResources(resolver:SceneResourceResolver, texture:Texture, ref:SceneResourceRef, entry:SceneResourceInFlight):Void {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime.field(resolver, 'inFlight'), 'get', cast ([texture] : Array<Dynamic>)), entry))) { return; }
     FlightRuntime.callProperty(FlightRuntime.field(resolver, 'inFlight'), 'delete', cast ([texture] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.field(FlightRuntime.field(FlightRuntime.field(entry, 'controller'), 'signal'), 'aborted'))) { return; }
@@ -227,7 +224,7 @@ class SceneResources {
     FlightRuntime.callValue(SceneResources.emitSceneResourceEvent__resolveSceneResources, cast ([resolver, texture, ref, false] : Array<Dynamic>));
   }
 
-  @:keep public static function finishSceneResourceResolution__resolveSceneResources(resolver:SceneResourceResolver, texture:Texture, ref:SceneResourceRef, entry:SceneResourceInFlight, image:Null<ImageResource>):Void {
+  public static function finishSceneResourceResolution__resolveSceneResources(resolver:SceneResourceResolver, texture:Texture, ref:SceneResourceRef, entry:SceneResourceInFlight, image:Null<ImageResource>):Void {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime.field(resolver, 'inFlight'), 'get', cast ([texture] : Array<Dynamic>)), entry))) { return; }
     FlightRuntime.callProperty(FlightRuntime.field(resolver, 'inFlight'), 'delete', cast ([texture] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(image, null))) {
@@ -240,18 +237,18 @@ class SceneResources {
     FlightRuntime.callValue(SceneResources.emitSceneResourceEvent__resolveSceneResources, cast ([resolver, texture, ref, true] : Array<Dynamic>));
   }
 
-  @:keep public static function getSceneMaterialTextures(registry:SceneMaterialTextureRegistry, material:Material, out:Array<Texture>):Void {
+  public static function getSceneMaterialTextures(registry:SceneMaterialTextureRegistry, material:Material, out:Array<Texture>):Void {
     var lister:Dynamic = cast FlightRuntime.UNDEFINED;
     lister = FlightRuntime.callProperty(FlightRuntime.field(registry, 'listers'), 'get', cast ([FlightRuntime.field(material, 'kind')] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(lister, FlightRuntime.UNDEFINED))) { FlightRuntime.callValue(lister, cast ([material, out] : Array<Dynamic>)); }
   }
 
-  @:keep public static function getSceneResourceSignals(resolver:SceneResourceResolver):Null<SceneResourceSignals> {
+  public static function getSceneResourceSignals(resolver:SceneResourceResolver):Null<SceneResourceSignals> {
     return cast FlightRuntime.field(resolver, 'signals');
     return cast null;
   }
 
-  @:keep public static function getSceneResourceTextures(scene:SceneNode, registry:SceneMaterialTextureRegistry, out:Array<Texture>):Void {
+  public static function getSceneResourceTextures(scene:SceneNode, registry:SceneMaterialTextureRegistry, out:Array<Texture>):Void {
     var seen:Dynamic = cast FlightRuntime.UNDEFINED;
     var slots:Array<Texture> = cast FlightRuntime.UNDEFINED;
     FlightRuntime.setLength(out, 0.0);
@@ -261,12 +258,12 @@ class SceneResources {
     FlightRuntime.callValue(forEachNodeDescendant, cast ([scene, function(node:Dynamic) return FlightRuntime.callValue(SceneResources.collectNodeResourceTextures__getSceneResourceTextures, cast ([(cast node : SceneNode), registry, out, seen, slots] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function isAbsoluteSceneResourceUri__sceneResourceFetch(uri:String):Bool {
+  public static function isAbsoluteSceneResourceUri__sceneResourceFetch(uri:String):Bool {
     return cast FlightRuntime.orValue(StringTools.startsWith(uri, '/'), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.regexp('^[a-zA-Z][a-zA-Z0-9+.-]*:', ''), 'test', cast ([uri] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function listStandardPbrMaterialTextures__sceneMaterialTextureRegistry(material:Material, out:Array<Texture>):Void {
+  public static function listStandardPbrMaterialTextures__sceneMaterialTextureRegistry(material:Material, out:Array<Texture>):Void {
     var pbr:Dynamic = cast FlightRuntime.UNDEFINED;
     pbr = (cast material : StandardPbrMaterial);
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(pbr, 'baseColorMap'), null))) { FlightRuntime.callProperty(out, 'push', cast ([FlightRuntime.field(pbr, 'baseColorMap')] : Array<Dynamic>)); }
@@ -276,121 +273,112 @@ class SceneResources {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(pbr, 'occlusionMap'), null))) { FlightRuntime.callProperty(out, 'push', cast ([FlightRuntime.field(pbr, 'occlusionMap')] : Array<Dynamic>)); }
   }
 
-  @:keep public static function listUnlitMaterialTextures__sceneMaterialTextureRegistry(material:Material, out:Array<Texture>):Void {
+  public static function listUnlitMaterialTextures__sceneMaterialTextureRegistry(material:Material, out:Array<Texture>):Void {
     var unlit:Dynamic = cast FlightRuntime.UNDEFINED;
     unlit = (cast material : UnlitMaterial);
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(unlit, 'baseColorMap'), null))) { FlightRuntime.callProperty(out, 'push', cast ([FlightRuntime.field(unlit, 'baseColorMap')] : Array<Dynamic>)); }
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadSceneFrom3ds(bytes:Dynamic, ?options:LoadSceneOptions):flight.internal.FlightPromise<Scene> {
-    var scene:Dynamic = cast FlightRuntime.UNDEFINED;
-    scene = FlightRuntime.callValue(createSceneFrom3ds, cast ([bytes] : Array<Dynamic>));
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveScenesWithOptions, cast ([cast ([scene] : Array<Dynamic>), options] : Array<Dynamic>)));
-    return cast scene;
-    return cast null;
+  public static function loadSceneFrom3ds(bytes:Dynamic, ?options:LoadSceneOptions):flight.internal.FlightPromise<Scene> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Scene> {
+      var scene:Dynamic = cast FlightRuntime.UNDEFINED;
+      scene = FlightRuntime.callValue(createSceneFrom3ds, cast ([bytes] : Array<Dynamic>));
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveScenesWithOptions, cast ([cast ([scene] : Array<Dynamic>), options] : Array<Dynamic>)));
+      return cast scene;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadSceneFromAwd(bytes:Dynamic, ?options:LoadSceneOptions):flight.internal.FlightPromise<Scene> {
-    var scene:Dynamic = cast FlightRuntime.UNDEFINED;
-    scene = FlightRuntime.callValue(createSceneFromAwd, cast ([bytes] : Array<Dynamic>));
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveScenesWithOptions, cast ([cast ([scene] : Array<Dynamic>), options] : Array<Dynamic>)));
-    return cast scene;
-    return cast null;
+  public static function loadSceneFromAwd(bytes:Dynamic, ?options:LoadSceneOptions):flight.internal.FlightPromise<Scene> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Scene> {
+      var scene:Dynamic = cast FlightRuntime.UNDEFINED;
+      scene = FlightRuntime.callValue(createSceneFromAwd, cast ([bytes] : Array<Dynamic>));
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveScenesWithOptions, cast ([cast ([scene] : Array<Dynamic>), options] : Array<Dynamic>)));
+      return cast scene;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadSceneFromGlb(bytes:Dynamic, ?options:LoadSceneOptions):flight.internal.FlightPromise<Scene> {
-    var scene:Dynamic = cast FlightRuntime.UNDEFINED;
-    scene = FlightRuntime.callValue(createSceneFromGlb, cast ([bytes] : Array<Dynamic>));
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveScenesWithOptions, cast ([cast ([scene] : Array<Dynamic>), options] : Array<Dynamic>)));
-    return cast scene;
-    return cast null;
+  public static function loadSceneFromGlb(bytes:Dynamic, ?options:LoadSceneOptions):flight.internal.FlightPromise<Scene> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Scene> {
+      var scene:Dynamic = cast FlightRuntime.UNDEFINED;
+      scene = FlightRuntime.callValue(createSceneFromGlb, cast ([bytes] : Array<Dynamic>));
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveScenesWithOptions, cast ([cast ([scene] : Array<Dynamic>), options] : Array<Dynamic>)));
+      return cast scene;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadSceneFromGltf(source:Dynamic, ?options:LoadSceneOptions):flight.internal.FlightPromise<Scene> {
-    var scene:Dynamic = cast FlightRuntime.UNDEFINED;
-    scene = FlightRuntime.callValue(createSceneFromGltf, cast ([source] : Array<Dynamic>));
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveScenesWithOptions, cast ([cast ([scene] : Array<Dynamic>), options] : Array<Dynamic>)));
-    return cast scene;
-    return cast null;
+  public static function loadSceneFromGltf(source:Dynamic, ?options:LoadSceneOptions):flight.internal.FlightPromise<Scene> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Scene> {
+      var scene:Dynamic = cast FlightRuntime.UNDEFINED;
+      scene = FlightRuntime.callValue(createSceneFromGltf, cast ([source] : Array<Dynamic>));
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveScenesWithOptions, cast ([cast ([scene] : Array<Dynamic>), options] : Array<Dynamic>)));
+      return cast scene;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadSceneFromMd2(bytes:Dynamic, ?options:LoadSceneOptions):flight.internal.FlightPromise<Scene> {
-    var scene:Dynamic = cast FlightRuntime.UNDEFINED;
-    scene = FlightRuntime.callValue(createSceneFromMd2, cast ([bytes] : Array<Dynamic>));
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveScenesWithOptions, cast ([cast ([scene] : Array<Dynamic>), options] : Array<Dynamic>)));
-    return cast scene;
-    return cast null;
+  public static function loadSceneFromMd2(bytes:Dynamic, ?options:LoadSceneOptions):flight.internal.FlightPromise<Scene> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Scene> {
+      var scene:Dynamic = cast FlightRuntime.UNDEFINED;
+      scene = FlightRuntime.callValue(createSceneFromMd2, cast ([bytes] : Array<Dynamic>));
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveScenesWithOptions, cast ([cast ([scene] : Array<Dynamic>), options] : Array<Dynamic>)));
+      return cast scene;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadSceneFromMd5Mesh(meshSource:String, ?options:LoadSceneOptions):flight.internal.FlightPromise<Scene> {
-    var scene:Dynamic = cast FlightRuntime.UNDEFINED;
-    scene = FlightRuntime.callValue(createSceneFromMd5Mesh, cast ([meshSource] : Array<Dynamic>));
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveScenesWithOptions, cast ([cast ([scene] : Array<Dynamic>), options] : Array<Dynamic>)));
-    return cast scene;
-    return cast null;
+  public static function loadSceneFromMd5Mesh(meshSource:String, ?options:LoadSceneOptions):flight.internal.FlightPromise<Scene> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Scene> {
+      var scene:Dynamic = cast FlightRuntime.UNDEFINED;
+      scene = FlightRuntime.callValue(createSceneFromMd5Mesh, cast ([meshSource] : Array<Dynamic>));
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveScenesWithOptions, cast ([cast ([scene] : Array<Dynamic>), options] : Array<Dynamic>)));
+      return cast scene;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadSceneFromObj(source:String, ?materials:ObjMaterialLibrary, ?options:LoadSceneOptions):flight.internal.FlightPromise<Scene> {
-    var scene:Dynamic = cast FlightRuntime.UNDEFINED;
-    scene = FlightRuntime.callValue(createSceneFromObj, cast ([source, materials] : Array<Dynamic>));
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveScenesWithOptions, cast ([cast ([scene] : Array<Dynamic>), options] : Array<Dynamic>)));
-    return cast scene;
-    return cast null;
+  public static function loadSceneFromObj(source:String, ?materials:ObjMaterialLibrary, ?options:LoadSceneOptions):flight.internal.FlightPromise<Scene> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Scene> {
+      var scene:Dynamic = cast FlightRuntime.UNDEFINED;
+      scene = FlightRuntime.callValue(createSceneFromObj, cast ([source, materials] : Array<Dynamic>));
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveScenesWithOptions, cast ([cast ([scene] : Array<Dynamic>), options] : Array<Dynamic>)));
+      return cast scene;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadScenesFromGlb(bytes:Dynamic, ?options:LoadSceneOptions):flight.internal.FlightPromise<Array<Scene>> {
-    var scenes:Dynamic = cast FlightRuntime.UNDEFINED;
-    scenes = FlightRuntime.callValue(createScenesFromGlb, cast ([bytes] : Array<Dynamic>));
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveScenesWithOptions, cast ([scenes, options] : Array<Dynamic>)));
-    return cast scenes;
-    return cast null;
+  public static function loadScenesFromGlb(bytes:Dynamic, ?options:LoadSceneOptions):flight.internal.FlightPromise<Array<Scene>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Array<Scene>> {
+      var scenes:Dynamic = cast FlightRuntime.UNDEFINED;
+      scenes = FlightRuntime.callValue(createScenesFromGlb, cast ([bytes] : Array<Dynamic>));
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveScenesWithOptions, cast ([scenes, options] : Array<Dynamic>)));
+      return cast scenes;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadScenesFromGltf(source:Dynamic, ?options:LoadSceneOptions):flight.internal.FlightPromise<Array<Scene>> {
-    var scenes:Dynamic = cast FlightRuntime.UNDEFINED;
-    scenes = FlightRuntime.callValue(createScenesFromGltf, cast ([source] : Array<Dynamic>));
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveScenesWithOptions, cast ([scenes, options] : Array<Dynamic>)));
-    return cast scenes;
-    return cast null;
+  public static function loadScenesFromGltf(source:Dynamic, ?options:LoadSceneOptions):flight.internal.FlightPromise<Array<Scene>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Array<Scene>> {
+      var scenes:Dynamic = cast FlightRuntime.UNDEFINED;
+      scenes = FlightRuntime.callValue(createScenesFromGltf, cast ([source] : Array<Dynamic>));
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveScenesWithOptions, cast ([scenes, options] : Array<Dynamic>)));
+      return cast scenes;
+      return cast null;
+    })();
   }
 
-  @:keep public static function registerBuiltInSceneMaterialTextures(registry:SceneMaterialTextureRegistry):Void {
+  public static function registerBuiltInSceneMaterialTextures(registry:SceneMaterialTextureRegistry):Void {
     FlightRuntime.callValue(registerSceneMaterialTextures, cast ([registry, Types.StandardPbrMaterialKind, SceneResources.listStandardPbrMaterialTextures__sceneMaterialTextureRegistry] : Array<Dynamic>));
     FlightRuntime.callValue(registerSceneMaterialTextures, cast ([registry, Types.UnlitMaterialKind, SceneResources.listUnlitMaterialTextures__sceneMaterialTextureRegistry] : Array<Dynamic>));
   }
 
-  @:keep public static function registerSceneMaterialTextures(registry:SceneMaterialTextureRegistry, kind:Kind, lister:SceneMaterialTextureLister):Void {
+  public static function registerSceneMaterialTextures(registry:SceneMaterialTextureRegistry, kind:Kind, lister:SceneMaterialTextureLister):Void {
     FlightRuntime.callProperty(FlightRuntime.field(registry, 'listers'), 'set', cast ([kind, lister] : Array<Dynamic>));
   }
 
-  @:keep public static function requestWorkingResolutions__resolveSceneResources(resolver:SceneResourceResolver, working:Dynamic, ?options:ResolveSceneResourcesOptions):Void {
+  public static function requestWorkingResolutions__resolveSceneResources(resolver:SceneResourceResolver, working:Dynamic, ?options:ResolveSceneResourcesOptions):Void {
     for (texture in FlightRuntime.iterable(working)) {
       var ref:Dynamic = FlightRuntime.field(texture, 'resource');
       if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.looseEquals(ref, null), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.field(resolver, 'inFlight'), 'has', cast ([texture] : Array<Dynamic>))), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(ref, 'state'), Types.ResourceResolutionStateValue.Unresolved)))) {
@@ -409,7 +397,7 @@ class SceneResources {
     }
   }
 
-  @:keep public static function resolveOneSceneResourceTexture(resolver:SceneResourceResolver, ref:SceneResourceRef, signal:Dynamic):flight.internal.FlightPromise<Null<ImageResource>> {
+  public static function resolveOneSceneResourceTexture(resolver:SceneResourceResolver, ref:SceneResourceRef, signal:Dynamic):flight.internal.FlightPromise<Null<ImageResource>> {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(ref, 'kind'), Types.SceneResourceRefKindValue.Embedded))) {
   return cast FlightRuntime.callValue(loadImageResourceFromBytes, cast ([FlightRuntime.field(ref, 'bytes'), FlightRuntime.coalesce(FlightRuntime.field(ref, 'mimeType'), function():Dynamic return cast FlightRuntime.UNDEFINED), signal] : Array<Dynamic>));
 }
@@ -417,7 +405,7 @@ class SceneResources {
     return cast null;
   }
 
-  @:keep public static function resolveSceneResources(scene:SceneNode, resolver:SceneResourceResolver, ?options:ResolveSceneResourcesOptions):Void {
+  public static function resolveSceneResources(scene:SceneNode, resolver:SceneResourceResolver, ?options:ResolveSceneResourcesOptions):Void {
     var pending:Array<Texture> = cast FlightRuntime.UNDEFINED;
     var working:Dynamic = cast FlightRuntime.UNDEFINED;
     pending = cast ([] : Array<Dynamic>);
@@ -437,60 +425,58 @@ class SceneResources {
     FlightRuntime.callValue(SceneResources.requestWorkingResolutions__resolveSceneResources, cast ([resolver, working, options] : Array<Dynamic>));
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function resolveSceneResourcesAndWait(scene:SceneNode, resolver:SceneResourceResolver, ?options:ResolveSceneResourcesOptions):flight.internal.FlightPromise<flight.internal.FlightNothing> {
-    var promises:Array<flight.internal.FlightPromise<flight.internal.FlightNothing>> = cast FlightRuntime.UNDEFINED;
-    FlightRuntime.callValue(resolveSceneResources, cast ([scene, resolver, options] : Array<Dynamic>));
-    promises = cast ([] : Array<Dynamic>);
-    for (entry in FlightRuntime.iterable(FlightRuntime.callProperty(FlightRuntime.field(resolver, 'inFlight'), 'values', cast ([] : Array<Dynamic>)))) {
-      FlightRuntime.callProperty(promises, 'push', cast ([FlightRuntime.field(entry, 'promise')] : Array<Dynamic>));
-    }
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'allSettled', cast ([promises] : Array<Dynamic>)));
-    #if js
-    return;
-    #else
-    return cast null;
-    #end
+  public static function resolveSceneResourcesAndWait(scene:SceneNode, resolver:SceneResourceResolver, ?options:ResolveSceneResourcesOptions):flight.internal.FlightPromise<flight.internal.FlightNothing> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<flight.internal.FlightNothing> {
+      var promises:Array<flight.internal.FlightPromise<flight.internal.FlightNothing>> = cast FlightRuntime.UNDEFINED;
+      FlightRuntime.callValue(resolveSceneResources, cast ([scene, resolver, options] : Array<Dynamic>));
+      promises = cast ([] : Array<Dynamic>);
+      for (entry in FlightRuntime.iterable(FlightRuntime.callProperty(FlightRuntime.field(resolver, 'inFlight'), 'values', cast ([] : Array<Dynamic>)))) {
+        FlightRuntime.callProperty(promises, 'push', cast ([FlightRuntime.field(entry, 'promise')] : Array<Dynamic>));
+      }
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'allSettled', cast ([promises] : Array<Dynamic>)));
+      #if js
+      return;
+      #else
+      return cast null;
+      #end
+    })();
   }
 
-  @:keep public static function resolveSceneResourceUri(uri:String, basePath:Null<String>):String {
+  public static function resolveSceneResourceUri(uri:String, basePath:Null<String>):String {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(basePath, null), function():Dynamic return cast FlightRuntime.callValue(SceneResources.isAbsoluteSceneResourceUri__sceneResourceFetch, cast ([uri] : Array<Dynamic>))))) { return cast uri; }
     if (FlightRuntime.truthy(FlightRuntime.orValue(StringTools.endsWith(Std.string(basePath), '/'), function():Dynamic return cast StringTools.startsWith(uri, '/')))) { return cast '' + Std.string(basePath) + '' + Std.string(uri) + ''; }
     return cast '' + Std.string(basePath) + '/' + Std.string(uri) + '';
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function resolveScenesWithOptions(scenes:Array<Scene>, ?options:LoadSceneOptions):flight.internal.FlightPromise<flight.internal.FlightNothing> {
-    var resolver:Dynamic = cast FlightRuntime.UNDEFINED;
-    resolver = FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'resolver'), function():Dynamic return cast FlightRuntime.callValue(createSceneResourceResolver, cast ([] : Array<Dynamic>)));
-    try {
+  public static function resolveScenesWithOptions(scenes:Array<Scene>, ?options:LoadSceneOptions):flight.internal.FlightPromise<flight.internal.FlightNothing> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<flight.internal.FlightNothing> {
+      var resolver:Dynamic = cast FlightRuntime.UNDEFINED;
+      resolver = FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'resolver'), function():Dynamic return cast FlightRuntime.callValue(createSceneResourceResolver, cast ([] : Array<Dynamic>)));
       try {
+        try {
   for (scene in FlightRuntime.iterable(scenes)) {
     flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(resolveSceneResourcesAndWait, cast ([FlightRuntime.field(scene, 'root'), resolver] : Array<Dynamic>)));
   }
 } catch (__error:Dynamic) { throw __error; }
-    } catch (__finallyError10:Dynamic) {
+      } catch (__finallyError10:Dynamic) {
+        {
+          if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.optionalField(options, 'resolver'), FlightRuntime.UNDEFINED))) { FlightRuntime.callValue(disposeSceneResourceResolver, cast ([resolver] : Array<Dynamic>)); }
+        }
+        throw __finallyError10;
+      }
       {
         if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.optionalField(options, 'resolver'), FlightRuntime.UNDEFINED))) { FlightRuntime.callValue(disposeSceneResourceResolver, cast ([resolver] : Array<Dynamic>)); }
       }
-      throw __finallyError10;
-    }
-    {
-      if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.optionalField(options, 'resolver'), FlightRuntime.UNDEFINED))) { FlightRuntime.callValue(disposeSceneResourceResolver, cast ([resolver] : Array<Dynamic>)); }
-    }
-    #if js
-    return;
-    #else
-    return cast null;
-    #end
+      #if js
+      return;
+      #else
+      return cast null;
+      #end
+    })();
   }
 
-  @:keep public static function revealSceneResourcesOnResolve(resolver:SceneResourceResolver, scene:SceneNode, tweenManager:TweenManager, ?options:SceneResourceRevealOptions):Dynamic {
+  public static function revealSceneResourcesOnResolve(resolver:SceneResourceResolver, scene:SceneNode, tweenManager:TweenManager, ?options:SceneResourceRevealOptions):Dynamic {
     var fadeSeconds:Dynamic = cast FlightRuntime.UNDEFINED;
     var from:Dynamic = cast FlightRuntime.UNDEFINED;
     var tweenOptions:Dynamic = cast FlightRuntime.UNDEFINED;

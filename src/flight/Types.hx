@@ -78,23 +78,23 @@ enum abstract AppearanceFlags(Int) from Int to Int {
   public static inline var Clip:AppearanceFlags = (Std.int(1.0) << Std.int(3.0));
   public static inline var Scale9Grid:AppearanceFlags = (Std.int(1.0) << Std.int(4.0));
   public static inline var Any:AppearanceFlags = (Std.int(1.0) << Std.int(31.0));
-  @:keep public static function any(flags:AppearanceFlags, test:AppearanceFlags):Bool {
+  public static function any(flags:AppearanceFlags, test:AppearanceFlags):Bool {
     return cast !FlightRuntime.strictEquals((Std.int(flags) & Std.int(test)), 0.0);
     return cast null;
   }
-  @:keep public static function has(flags:AppearanceFlags, test:AppearanceFlags):Bool {
+  public static function has(flags:AppearanceFlags, test:AppearanceFlags):Bool {
     return cast FlightRuntime.strictEquals((Std.int(flags) & Std.int(test)), test);
     return cast null;
   }
-  @:keep public static function add(flags:AppearanceFlags, add:AppearanceFlags):AppearanceFlags {
+  public static function add(flags:AppearanceFlags, add:AppearanceFlags):AppearanceFlags {
     return cast (Std.int(flags) | Std.int(add));
     return cast null;
   }
-  @:keep public static function remove(flags:AppearanceFlags, remove:AppearanceFlags):AppearanceFlags {
+  public static function remove(flags:AppearanceFlags, remove:AppearanceFlags):AppearanceFlags {
     return cast (Std.int(flags) & Std.int(~Std.int(remove)));
     return cast null;
   }
-  @:keep public static function clear():AppearanceFlags {
+  public static function clear():AppearanceFlags {
     return cast AppearanceFlags.None;
     return cast null;
   }
@@ -884,9 +884,6 @@ typedef IpcMessageEvent = { var channel:String; var senderId:Float; var args:Arr
 
 typedef IpcTarget = { var windowId:Float; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.IpcTimeoutError")
 class IpcTimeoutError extends haxe.Exception {
   public final channel:String;
@@ -2248,9 +2245,6 @@ typedef WindForce = { var kind:String; var x:Float; var y:Float; @:optional var 
 
 typedef WireframeMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var alphaType:AlphaType; var blendMode:BlendMode; var doubleSided:Bool; var color:Float; var thickness:Float; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Types")
 class Types {
   public static final __enum_AppearanceFlags:Dynamic = { None: AppearanceFlags.None, Visible: AppearanceFlags.Visible, Alpha: AppearanceFlags.Alpha, BlendMode: AppearanceFlags.BlendMode, Clip: AppearanceFlags.Clip, Scale9Grid: AppearanceFlags.Scale9Grid, Any: AppearanceFlags.Any };

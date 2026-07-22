@@ -11,26 +11,23 @@ import flight.Types.ShareOptions;
 import flight.Types.ShareResult;
 import flight.Types.ShareSignals;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Share")
 class Share {
   public static var _backend__share:Null<ShareBackend> = FlightRuntime.explicitNull();
 
   public static final _signalListeners__share:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
 
-  @:keep public static function attachShareSignals(signals:ShareSignals):Void {
+  public static function attachShareSignals(signals:ShareSignals):Void {
     FlightRuntime.callValue(detachShareSignals, cast ([signals] : Array<Dynamic>));
     FlightRuntime.callProperty(Share._signalListeners__share, 'set', cast ([signals, true] : Array<Dynamic>));
   }
 
-  @:keep public static function canShareContent(content:ShareContent):Bool {
+  public static function canShareContent(content:ShareContent):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getShareBackend, cast ([] : Array<Dynamic>)), 'canShare', cast ([content] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createWebShareBackend():ShareBackend {
+  public static function createWebShareBackend():ShareBackend {
     return cast { isAvailable: function() {
   return cast FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast FlightRuntime.hasField(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'share'));
 }, canShare: function(content:Dynamic) {
@@ -70,26 +67,26 @@ class Share {
     return cast null;
   }
 
-  @:keep public static function detachShareSignals(signals:ShareSignals):Void {
+  public static function detachShareSignals(signals:ShareSignals):Void {
     FlightRuntime.callProperty(Share._signalListeners__share, 'delete', cast ([signals] : Array<Dynamic>));
   }
 
-  @:keep public static function disposeShareSignals(signals:ShareSignals):Void {
+  public static function disposeShareSignals(signals:ShareSignals):Void {
     FlightRuntime.callValue(detachShareSignals, cast ([signals] : Array<Dynamic>));
   }
 
-  @:keep public static function enableShareSignals():ShareSignals {
+  public static function enableShareSignals():ShareSignals {
     return cast { onShareResult: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function getShareBackend():ShareBackend {
+  public static function getShareBackend():ShareBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Share._backend__share, null))) { (Share._backend__share = cast (FlightRuntime.callValue(createWebShareBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Share._backend__share;
     return cast null;
   }
 
-  @:keep public static function hasShareContentFields(content:ShareContent):Bool {
+  public static function hasShareContentFields(content:ShareContent):Bool {
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.field(content, 'title'), FlightRuntime.UNDEFINED), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(content, 'title'), '')))) { return cast true; }
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.field(content, 'text'), FlightRuntime.UNDEFINED), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(content, 'text'), '')))) { return cast true; }
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.field(content, 'url'), FlightRuntime.UNDEFINED), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(content, 'url'), '')))) { return cast true; }
@@ -98,22 +95,22 @@ class Share {
     return cast null;
   }
 
-  @:keep public static function isShareAvailable():Bool {
+  public static function isShareAvailable():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getShareBackend, cast ([] : Array<Dynamic>)), 'isAvailable', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setShareBackend(backend:Null<ShareBackend>):Void {
+  public static function setShareBackend(backend:Null<ShareBackend>):Void {
     (Share._backend__share = cast (backend : Dynamic));
   }
 
-  @:keep public static function shareContent(content:ShareContent, ?options:ShareOptions):flight.internal.FlightPromise<Bool> {
+  public static function shareContent(content:ShareContent, ?options:ShareOptions):flight.internal.FlightPromise<Bool> {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(hasShareContentFields, cast ([content] : Array<Dynamic>))))) { return cast FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([false] : Array<Dynamic>)); }
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getShareBackend, cast ([] : Array<Dynamic>)), 'share', cast ([content, options] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function shareContentToNavigatorData__share(content:ShareContent):Dynamic {
+  public static function shareContentToNavigatorData__share(content:ShareContent):Dynamic {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     data = {  };
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(content, 'title'), FlightRuntime.UNDEFINED))) { FlightRuntime.setField(data, 'title', FlightRuntime.field(content, 'title')); }
@@ -126,25 +123,24 @@ class Share {
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function shareContentWithResult(content:ShareContent, ?options:ShareOptions):flight.internal.FlightPromise<ShareResult> {
-    var result:Dynamic = cast FlightRuntime.UNDEFINED;
-    if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(hasShareContentFields, cast ([content] : Array<Dynamic>))))) {
+  public static function shareContentWithResult(content:ShareContent, ?options:ShareOptions):flight.internal.FlightPromise<ShareResult> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<ShareResult> {
+      var result:Dynamic = cast FlightRuntime.UNDEFINED;
+      if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(hasShareContentFields, cast ([content] : Array<Dynamic>))))) {
   return cast { completed: false, activityType: null, dismissed: false };
 }
-    result = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callValue(getShareBackend, cast ([] : Array<Dynamic>)), 'shareWithResult', cast ([content, options] : Array<Dynamic>)));
-    if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(Share._signalListeners__share, 'size'), 0.0, '>'))) {
+      result = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callValue(getShareBackend, cast ([] : Array<Dynamic>)), 'shareWithResult', cast ([content, options] : Array<Dynamic>)));
+      if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(Share._signalListeners__share, 'size'), 0.0, '>'))) {
   for (signals in FlightRuntime.iterable(FlightRuntime.callProperty(Share._signalListeners__share, 'keys', cast ([] : Array<Dynamic>)))) {
     FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(signals, 'onShareResult'), result] : Array<Dynamic>));
   }
 }
-    return cast result;
-    return cast null;
+      return cast result;
+      return cast null;
+    })();
   }
 
-  @:keep public static function shareFileToDomFile__share(file:{ var dataUrl:String; var mimeType:String; var name:String; }):Dynamic {
+  public static function shareFileToDomFile__share(file:{ var dataUrl:String; var mimeType:String; var name:String; }):Dynamic {
     var comma:Dynamic = cast FlightRuntime.UNDEFINED;
     var header:Dynamic = cast FlightRuntime.UNDEFINED;
     var body:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -174,12 +170,12 @@ class Share {
     return cast null;
   }
 
-  @:keep public static function shareText(text:String, ?options:ShareOptions):flight.internal.FlightPromise<Bool> {
+  public static function shareText(text:String, ?options:ShareOptions):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callValue(shareContent, cast ([{ text: text }, options] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function shareUrl(url:String, ?options:ShareOptions):flight.internal.FlightPromise<Bool> {
+  public static function shareUrl(url:String, ?options:ShareOptions):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callValue(shareContent, cast ([{ url: url }, options] : Array<Dynamic>));
     return cast null;
   }

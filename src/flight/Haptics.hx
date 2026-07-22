@@ -8,19 +8,16 @@ import flight.Types.HapticNotificationType;
 import flight.Types.HapticsBackend;
 import flight.Types.HapticsCapabilities;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Haptics")
 class Haptics {
   public static var _backend__haptics:Null<HapticsBackend> = FlightRuntime.explicitNull();
 
-  @:keep public static function cancelDeviceVibration():Bool {
+  public static function cancelDeviceVibration():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'cancel', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createWebHapticsBackend():HapticsBackend {
+  public static function createWebHapticsBackend():HapticsBackend {
     return cast { cancel: function() {
   return cast FlightRuntime.callValue(Haptics.webVibrate__haptics, cast ([0.0] : Array<Dynamic>));
 }, capabilities: function(out:HapticsCapabilities) {
@@ -61,57 +58,57 @@ class Haptics {
     return cast null;
   }
 
-  @:keep public static function getHapticsBackend():HapticsBackend {
+  public static function getHapticsBackend():HapticsBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Haptics._backend__haptics, null))) { (Haptics._backend__haptics = cast (FlightRuntime.callValue(createWebHapticsBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Haptics._backend__haptics;
     return cast null;
   }
 
-  @:keep public static function getHapticsCapabilities(out:HapticsCapabilities):HapticsCapabilities {
+  public static function getHapticsCapabilities(out:HapticsCapabilities):HapticsCapabilities {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'capabilities', cast ([out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function isHapticsSupported():Bool {
+  public static function isHapticsSupported():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'isSupported', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function prepareHaptics():Void {
+  public static function prepareHaptics():Void {
     FlightRuntime.callOptionalProperty(FlightRuntime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'prepare', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function setHapticsBackend(backend:Null<HapticsBackend>):Void {
+  public static function setHapticsBackend(backend:Null<HapticsBackend>):Void {
     (Haptics._backend__haptics = cast (backend : Dynamic));
   }
 
-  @:keep public static function triggerHapticImpact(style:HapticImpactStyle, ?intensity:Float):Bool {
+  public static function triggerHapticImpact(style:HapticImpactStyle, ?intensity:Float):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'impact', cast ([style, FlightRuntime.coalesce(intensity, function():Dynamic return cast 1.0)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function triggerHapticNotification(type:HapticNotificationType):Bool {
+  public static function triggerHapticNotification(type:HapticNotificationType):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'notification', cast ([type] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function triggerHapticSelection():Bool {
+  public static function triggerHapticSelection():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'selection', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function vibrateDevice(durationMs:Float):Bool {
+  public static function vibrateDevice(durationMs:Float):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'vibrate', cast ([durationMs] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function vibrateDevicePattern(pattern:Array<Float>):Bool {
+  public static function vibrateDevicePattern(pattern:Array<Float>):Bool {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(pattern, 'length'), 0.0))) { return cast false; }
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>)), 'vibratePattern', cast ([pattern] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function vibrateDeviceWaveform(timings:Array<Float>, amplitudes:Array<Float>, ?repeat:Dynamic):Bool {
+  public static function vibrateDeviceWaveform(timings:Array<Float>, amplitudes:Array<Float>, ?repeat:Dynamic):Bool {
     if (repeat == null) repeat = cast (-1.0 : Dynamic);
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     backend = FlightRuntime.callValue(getHapticsBackend, cast ([] : Array<Dynamic>));
@@ -123,7 +120,7 @@ class Haptics {
     return cast null;
   }
 
-  @:keep public static function webVibrate__haptics(pattern:Dynamic):Bool {
+  public static function webVibrate__haptics(pattern:Dynamic):Bool {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !FlightRuntime.truthy(FlightRuntime.hasField(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'vibrate'))), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'vibrate')), 'function')))) {
   return cast false;
 }

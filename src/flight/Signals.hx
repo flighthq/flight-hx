@@ -9,21 +9,18 @@ import flight.Types.SignalData;
 
 typedef SignalThrottleOptions = { @:optional var leading:Bool; @:optional var trailing:Bool; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Signals")
 class Signals {
-  @:keep public static function cancelSignal<T>(signal:Signal<Dynamic>):Void {
+  public static function cancelSignal<T>(signal:Signal<Dynamic>):Void {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(signal, 'data'), null))) { FlightRuntime.setField(FlightRuntime.field(signal, 'data'), 'cancelled', true); }
   }
 
-  @:keep public static function clearSignal<T>(signal:Signal<Dynamic>):Void {
+  public static function clearSignal<T>(signal:Signal<Dynamic>):Void {
     FlightRuntime.setField(signal, 'emit', (cast (cast nullSignalEmit : Dynamic) : Dynamic));
     FlightRuntime.setField(signal, 'data', null);
   }
 
-  @:keep public static function connectSignal<T>(signal:Signal<Dynamic>, slot:Dynamic, ?options:SignalConnectOptions):Void {
+  public static function connectSignal<T>(signal:Signal<Dynamic>, slot:Dynamic, ?options:SignalConnectOptions):Void {
     var priority:Dynamic = cast FlightRuntime.UNDEFINED;
     var repeat:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -48,7 +45,7 @@ class Signals {
     FlightRuntime.callProperty(FlightRuntime.field(data, 'repeat'), 'push', cast ([repeat] : Array<Dynamic>));
   }
 
-  @:keep public static function connectSignalAtFrameRate(source:Signal<Dynamic>, fps:Float, slot:Dynamic):Dynamic {
+  public static function connectSignalAtFrameRate(source:Signal<Dynamic>, fps:Float, slot:Dynamic):Dynamic {
     var period:Dynamic = cast FlightRuntime.UNDEFINED;
     var elapsed:Dynamic = cast FlightRuntime.UNDEFINED;
     var handler:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -66,7 +63,7 @@ class Signals {
     return cast null;
   }
 
-  @:keep public static function connectSignalDebounced<T>(source:Signal<Dynamic>, delayMs:Float, slot:Dynamic, ?options:SignalThrottleOptions):Dynamic {
+  public static function connectSignalDebounced<T>(source:Signal<Dynamic>, delayMs:Float, slot:Dynamic, ?options:SignalThrottleOptions):Dynamic {
     var leading:Dynamic = cast FlightRuntime.UNDEFINED;
     var trailing:Dynamic = cast FlightRuntime.UNDEFINED;
     var timer:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
@@ -109,7 +106,7 @@ class Signals {
     return cast null;
   }
 
-  @:keep public static function connectSignalThrottled<T>(source:Signal<Dynamic>, intervalMs:Float, slot:Dynamic, ?options:SignalThrottleOptions):Dynamic {
+  public static function connectSignalThrottled<T>(source:Signal<Dynamic>, intervalMs:Float, slot:Dynamic, ?options:SignalThrottleOptions):Dynamic {
     var leading:Dynamic = cast FlightRuntime.UNDEFINED;
     var trailing:Dynamic = cast FlightRuntime.UNDEFINED;
     var lastFiredAt:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -162,12 +159,12 @@ class Signals {
     return cast null;
   }
 
-  @:keep public static function createSignal<T>():Signal<Dynamic> {
+  public static function createSignal<T>():Signal<Dynamic> {
     return cast { emit: (cast (cast nullSignalEmit : Dynamic) : Dynamic), data: null };
     return cast null;
   }
 
-  @:keep public static function disconnectSignal<T>(signal:Signal<Dynamic>, slot:Dynamic):Void {
+  public static function disconnectSignal<T>(signal:Signal<Dynamic>, slot:Dynamic):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     data = FlightRuntime.field(signal, 'data');
@@ -186,16 +183,16 @@ class Signals {
 }
   }
 
-  @:keep public static function emitSignal<T>(signal:Signal<Dynamic>, ...args:Dynamic):Void {
+  public static function emitSignal<T>(signal:Signal<Dynamic>, ...args:Dynamic):Void {
     FlightRuntime.apply((cast FlightRuntime.field(signal, 'emit') : Dynamic), FlightRuntime.concatArrays([FlightRuntime.toArray(args)]));
   }
 
-  @:keep public static function hasSignalSlots<T>(signal:Signal<Dynamic>):Bool {
+  public static function hasSignalSlots<T>(signal:Signal<Dynamic>):Bool {
     return cast FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.field(signal, 'data'), null), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(FlightRuntime.field(FlightRuntime.field(signal, 'data'), 'slots'), 'length'), 0.0, '>'));
     return cast null;
   }
 
-  @:keep public static function initSignal__slot<T>(signal:Signal<Dynamic>):Void {
+  public static function initSignal__slot<T>(signal:Signal<Dynamic>):Void {
     var data:SignalData<Dynamic> = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(signal, 'data'), null))) { return; }
     data = { slots: cast ([] : Array<Dynamic>), priorities: cast ([] : Array<Dynamic>), repeat: cast ([] : Array<Dynamic>), cancelled: false };
@@ -203,12 +200,12 @@ class Signals {
     FlightRuntime.setField(signal, 'emit', FlightRuntime.callValue(Signals.makeDispatch__slot, cast ([data] : Array<Dynamic>)));
   }
 
-  @:keep public static function isSlotConnected<T>(signal:Signal<Dynamic>, slot:Dynamic):Bool {
+  public static function isSlotConnected<T>(signal:Signal<Dynamic>, slot:Dynamic):Bool {
     return cast FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.field(signal, 'data'), null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.field(signal, 'data'), 'slots'), 'indexOf', cast ([slot] : Array<Dynamic>)), -1.0));
     return cast null;
   }
 
-  @:keep public static function makeDispatch__slot<T>(data:SignalData<Dynamic>):Dynamic {
+  public static function makeDispatch__slot<T>(data:SignalData<Dynamic>):Dynamic {
     return cast (cast (cast function(...args:Dynamic) {
   var i:Dynamic = cast FlightRuntime.UNDEFINED;
   FlightRuntime.setField(data, 'cancelled', false);

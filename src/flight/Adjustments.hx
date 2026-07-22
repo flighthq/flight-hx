@@ -24,12 +24,9 @@ import flight.Types.LiftGammaGainAdjustment;
 import flight.Types.LookupTableGradeAdjustment;
 import flight.Types.SepiaAdjustment;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Adjustments")
 class Adjustments {
-  @:keep public static function applyColorMatrixToColor(matrix:Array<Float>, packedRgba:Float):Float {
+  public static function applyColorMatrixToColor(matrix:Array<Float>, packedRgba:Float):Float {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -50,7 +47,7 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function bakeColorLut(transforms:Array<ColorTransformFunction>, size:Float = 32.0):ColorLut {
+  public static function bakeColorLut(transforms:Array<ColorTransformFunction>, size:Float = 32.0):ColorLut {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var samples:Dynamic = cast FlightRuntime.UNDEFINED;
     var denom:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -98,7 +95,7 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function bakeColorLutForRun(cache:ColorLutCache, run:Array<{ var kind:String; }>, size:Float = 32.0):ColorLut {
+  public static function bakeColorLutForRun(cache:ColorLutCache, run:Array<{ var kind:String; }>, size:Float = 32.0):ColorLut {
     var signature:Dynamic = cast FlightRuntime.UNDEFINED;
     var transforms:Array<ColorTransformFunction> = cast FlightRuntime.UNDEFINED;
     var lut:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -116,27 +113,27 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function clamp01__colorGradeAdjustment(v:Float):Float {
+  public static function clamp01__colorGradeAdjustment(v:Float):Float {
     return cast FlightRuntime.select(FlightRuntime.compare(v, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast FlightRuntime.select(FlightRuntime.compare(v, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast v));
     return cast null;
   }
 
-  @:keep public static function clamp01__colorLut(v:Float):Float {
+  public static function clamp01__colorLut(v:Float):Float {
     return cast FlightRuntime.select(FlightRuntime.compare(v, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast FlightRuntime.select(FlightRuntime.compare(v, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast v));
     return cast null;
   }
 
-  @:keep public static function clamp01__hueSaturationAdjustment(v:Float):Float {
+  public static function clamp01__hueSaturationAdjustment(v:Float):Float {
     return cast FlightRuntime.select(FlightRuntime.compare(v, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast FlightRuntime.select(FlightRuntime.compare(v, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast v));
     return cast null;
   }
 
-  @:keep public static function clamp01__liftGammaGainAdjustment(v:Float):Float {
+  public static function clamp01__liftGammaGainAdjustment(v:Float):Float {
     return cast FlightRuntime.select(FlightRuntime.compare(v, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast FlightRuntime.select(FlightRuntime.compare(v, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast v));
     return cast null;
   }
 
-  @:keep public static function clampByte__colorMatrixMath(v:Float):Float {
+  public static function clampByte__colorMatrixMath(v:Float):Float {
     return cast FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'min', cast ([255.0, FlightRuntime.callProperty(HxMath, 'round', cast ([v] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
@@ -153,12 +150,12 @@ class Adjustments {
 
   public static final COLOR_MATRIX_LENGTH:Dynamic = 20.0;
 
-  @:keep public static function colorLutRunSignature__colorLutCache(run:Array<{ var kind:String; }>, size:Float):String {
+  public static function colorLutRunSignature__colorLutCache(run:Array<{ var kind:String; }>, size:Float):String {
     return cast '' + Std.string(size) + '\n' + Std.string(FlightRuntime.jsonStringify(run)) + '';
     return cast null;
   }
 
-  @:keep public static function colorMatrixTransform__colorLutAdjustment(m:Array<Float>):ColorTransformFunction {
+  public static function colorMatrixTransform__colorLutAdjustment(m:Array<Float>):ColorTransformFunction {
     return cast function(out:Dynamic, r:Dynamic, g:Dynamic, b:Dynamic) {
   FlightRuntime.setIndex(out, 0.0, (((((FlightRuntime.getIndex(m, 0.0) * r) + (FlightRuntime.getIndex(m, 1.0) * g)) + (FlightRuntime.getIndex(m, 2.0) * b)) + FlightRuntime.getIndex(m, 3.0)) + (FlightRuntime.getIndex(m, 4.0) / 255.0)));
   FlightRuntime.setIndex(out, 1.0, (((((FlightRuntime.getIndex(m, 5.0) * r) + (FlightRuntime.getIndex(m, 6.0) * g)) + (FlightRuntime.getIndex(m, 7.0) * b)) + FlightRuntime.getIndex(m, 8.0)) + (FlightRuntime.getIndex(m, 9.0) / 255.0)));
@@ -167,16 +164,16 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function concatColorMatrix(target:Array<Float>, source:Array<Float>):Void {
+  public static function concatColorMatrix(target:Array<Float>, source:Array<Float>):Void {
     FlightRuntime.callValue(multiplyColorMatrix, cast ([target, source, target] : Array<Dynamic>));
   }
 
-  @:keep public static function createBrightnessColorMatrix(amount:Float):Array<Float> {
+  public static function createBrightnessColorMatrix(amount:Float):Array<Float> {
     return cast cast ([1.0, 0.0, 0.0, 0.0, amount, 0.0, 1.0, 0.0, 0.0, amount, 0.0, 0.0, 1.0, 0.0, amount, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function createBrightnessContrastAdjustment(?options:Dynamic):BrightnessContrastAdjustment {
+  public static function createBrightnessContrastAdjustment(?options:Dynamic):BrightnessContrastAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var brightness:Dynamic = cast FlightRuntime.UNDEFINED;
     var contrast:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -192,7 +189,7 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function createChannelMixerAdjustment(?options:Dynamic):ChannelMixerAdjustment {
+  public static function createChannelMixerAdjustment(?options:Dynamic):ChannelMixerAdjustment {
     if (options == null) options = cast ({ matrix: Adjustments.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment } : Dynamic);
     var matrix:Dynamic = cast FlightRuntime.UNDEFINED;
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -207,12 +204,12 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function createChannelMixerColorMatrix(redOut:Array<Float>, greenOut:Array<Float>, blueOut:Array<Float>):Array<Float> {
+  public static function createChannelMixerColorMatrix(redOut:Array<Float>, greenOut:Array<Float>, blueOut:Array<Float>):Array<Float> {
     return cast cast ([FlightRuntime.getIndex(redOut, 0.0), FlightRuntime.getIndex(redOut, 1.0), FlightRuntime.getIndex(redOut, 2.0), 0.0, 0.0, FlightRuntime.getIndex(greenOut, 0.0), FlightRuntime.getIndex(greenOut, 1.0), FlightRuntime.getIndex(greenOut, 2.0), 0.0, 0.0, FlightRuntime.getIndex(blueOut, 0.0), FlightRuntime.getIndex(blueOut, 1.0), FlightRuntime.getIndex(blueOut, 2.0), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function createColorBalanceColorMatrix(shadows:Array<Float>, midtones:Array<Float>, highlights:Array<Float>):Array<Float> {
+  public static function createColorBalanceColorMatrix(shadows:Array<Float>, midtones:Array<Float>, highlights:Array<Float>):Array<Float> {
     var scale:Dynamic = cast FlightRuntime.UNDEFINED;
     var rOff:Dynamic = cast FlightRuntime.UNDEFINED;
     var gOff:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -225,7 +222,7 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function createColorBlindSimulationAdjustment(?options:Dynamic):ColorBlindSimulationAdjustment {
+  public static function createColorBlindSimulationAdjustment(?options:Dynamic):ColorBlindSimulationAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var type:ColorBlindType = cast FlightRuntime.UNDEFINED;
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -237,7 +234,7 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function createColorGradeAdjustment(?options:Dynamic):ColorGradeAdjustment {
+  public static function createColorGradeAdjustment(?options:Dynamic):ColorGradeAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var exposure:Dynamic = cast FlightRuntime.UNDEFINED;
     var brightness:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -286,12 +283,12 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function createColorLutCache():ColorLutCache {
+  public static function createColorLutCache():ColorLutCache {
     return cast { signature: null, lut: null };
     return cast null;
   }
 
-  @:keep public static function createColorMatrixFromTint(packedRgba:Float, amount:Float):Array<Float> {
+  public static function createColorMatrixFromTint(packedRgba:Float, amount:Float):Array<Float> {
     var tr:Dynamic = cast FlightRuntime.UNDEFINED;
     var tg:Dynamic = cast FlightRuntime.UNDEFINED;
     var tb:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -304,26 +301,26 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function createColorTransformAdjustment(colorTransform:ColorTransform):ColorTransformAdjustment {
+  public static function createColorTransformAdjustment(colorTransform:ColorTransform):ColorTransformAdjustment {
     var colorMatrix:Dynamic = cast FlightRuntime.UNDEFINED;
     colorMatrix = cast ([FlightRuntime.field(colorTransform, 'redMultiplier'), 0.0, 0.0, 0.0, FlightRuntime.field(colorTransform, 'redOffset'), 0.0, FlightRuntime.field(colorTransform, 'greenMultiplier'), 0.0, 0.0, FlightRuntime.field(colorTransform, 'greenOffset'), 0.0, 0.0, FlightRuntime.field(colorTransform, 'blueMultiplier'), 0.0, FlightRuntime.field(colorTransform, 'blueOffset'), 0.0, 0.0, 0.0, FlightRuntime.field(colorTransform, 'alphaMultiplier'), FlightRuntime.field(colorTransform, 'alphaOffset')] : Array<Dynamic>);
     return cast { kind: 'ColorTransformAdjustment', colorTransform: (cast colorTransform : ColorTransform), colorMatrix: colorMatrix };
     return cast null;
   }
 
-  @:keep public static function createContrastColorMatrix(amount:Float):Array<Float> {
+  public static function createContrastColorMatrix(amount:Float):Array<Float> {
     var offset:Dynamic = cast FlightRuntime.UNDEFINED;
     offset = (128.0 * (1.0 - amount));
     return cast cast ([amount, 0.0, 0.0, 0.0, offset, 0.0, amount, 0.0, 0.0, offset, 0.0, 0.0, amount, 0.0, offset, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function createDesaturateColorMatrix(amount:Float):Array<Float> {
+  public static function createDesaturateColorMatrix(amount:Float):Array<Float> {
     return cast FlightRuntime.callValue(createSaturationColorMatrix, cast ([(1.0 - amount)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createExposureAdjustment(?options:Dynamic):ExposureAdjustment {
+  public static function createExposureAdjustment(?options:Dynamic):ExposureAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     var colorMatrix:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -333,7 +330,7 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function createGrayscaleAdjustment(?options:Dynamic):GrayscaleAdjustment {
+  public static function createGrayscaleAdjustment(?options:Dynamic):GrayscaleAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var k:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -353,7 +350,7 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function createGrayscaleColorMatrix():Array<Float> {
+  public static function createGrayscaleColorMatrix():Array<Float> {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -364,7 +361,7 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function createHueRotateColorMatrix(degrees:Float):Array<Float> {
+  public static function createHueRotateColorMatrix(degrees:Float):Array<Float> {
     var rad:Dynamic = cast FlightRuntime.UNDEFINED;
     var cos:Dynamic = cast FlightRuntime.UNDEFINED;
     var sin:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -381,7 +378,7 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function createHueSaturationAdjustment(?options:Dynamic):HueSaturationAdjustment {
+  public static function createHueSaturationAdjustment(?options:Dynamic):HueSaturationAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var hue:Dynamic = cast FlightRuntime.UNDEFINED;
     var saturation:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -430,12 +427,12 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function createIdentityColorMatrix():Array<Float> {
+  public static function createIdentityColorMatrix():Array<Float> {
     return cast cast ([1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function createInvertAdjustment(?options:Dynamic):InvertAdjustment {
+  public static function createInvertAdjustment(?options:Dynamic):InvertAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -449,12 +446,12 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function createInvertColorMatrix():Array<Float> {
+  public static function createInvertColorMatrix():Array<Float> {
     return cast cast ([-1.0, 0.0, 0.0, 0.0, 255.0, 0.0, -1.0, 0.0, 0.0, 255.0, 0.0, 0.0, -1.0, 0.0, 255.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function createLevelsColorMatrix(inBlack:Float, inWhite:Float, outBlack:Float, outWhite:Float, gamma:Dynamic = 1.0):Array<Float> {
+  public static function createLevelsColorMatrix(inBlack:Float, inWhite:Float, outBlack:Float, outWhite:Float, gamma:Dynamic = 1.0):Array<Float> {
     var inRange:Dynamic = cast FlightRuntime.UNDEFINED;
     var scale:Dynamic = cast FlightRuntime.UNDEFINED;
     var gammaCorrectedScale:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -467,7 +464,7 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function createLiftGammaGainAdjustment(?options:Dynamic):LiftGammaGainAdjustment {
+  public static function createLiftGammaGainAdjustment(?options:Dynamic):LiftGammaGainAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var lift:Dynamic = cast FlightRuntime.UNDEFINED;
     var gammaRaw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -487,7 +484,7 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function createLookupTableGradeAdjustment(?options:Dynamic):LookupTableGradeAdjustment {
+  public static function createLookupTableGradeAdjustment(?options:Dynamic):LookupTableGradeAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var lut:Dynamic = cast FlightRuntime.UNDEFINED;
     var strength:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -510,17 +507,17 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function createOpacityColorMatrix(alpha:Float):Array<Float> {
+  public static function createOpacityColorMatrix(alpha:Float):Array<Float> {
     return cast cast ([1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, alpha, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function createPolaroidColorMatrix():Array<Float> {
+  public static function createPolaroidColorMatrix():Array<Float> {
     return cast cast ([1.438, -0.062, -0.062, 0.0, -31.8, -0.122, 1.378, -0.122, 0.0, 16.2, -0.016, -0.016, 1.484, 0.0, -47.6, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function createSaturationColorMatrix(amount:Float):Array<Float> {
+  public static function createSaturationColorMatrix(amount:Float):Array<Float> {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -531,7 +528,7 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function createSepiaAdjustment(?options:Dynamic):SepiaAdjustment {
+  public static function createSepiaAdjustment(?options:Dynamic):SepiaAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var k:Dynamic = cast FlightRuntime.UNDEFINED;
     var j:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -543,22 +540,22 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function createSepiaColorMatrix():Array<Float> {
+  public static function createSepiaColorMatrix():Array<Float> {
     return cast cast ([0.393, 0.769, 0.189, 0.0, 0.0, 0.349, 0.686, 0.168, 0.0, 0.0, 0.272, 0.534, 0.131, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function createTechnicolorColorMatrix():Array<Float> {
+  public static function createTechnicolorColorMatrix():Array<Float> {
     return cast cast ([1.9126, -0.8, -0.09, 0.0, 11.79, -0.2, 1.7, -0.27, 0.0, -14.69, -0.14, -0.21, 1.62, 0.0, -3.38, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function createVintageColorMatrix():Array<Float> {
+  public static function createVintageColorMatrix():Array<Float> {
     return cast cast ([0.9, 0.05, 0.05, 0.0, 10.0, 0.0, 0.85, 0.0, 0.0, 5.0, 0.0, 0.0, 0.75, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function createWhiteBalanceColorMatrix(temperature:Float, tint:Float):Array<Float> {
+  public static function createWhiteBalanceColorMatrix(temperature:Float, tint:Float):Array<Float> {
     var tempScale:Dynamic = cast FlightRuntime.UNDEFINED;
     var tintScale:Dynamic = cast FlightRuntime.UNDEFINED;
     var rGain:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -573,12 +570,12 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function fract__hueSaturationAdjustment(v:Float):Float {
+  public static function fract__hueSaturationAdjustment(v:Float):Float {
     return cast (v - FlightRuntime.callProperty(HxMath, 'floor', cast ([v] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function fuseColorMatrices(matrices:Array<Array<Float>>):Array<Float> {
+  public static function fuseColorMatrices(matrices:Array<Array<Float>>):Array<Float> {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(matrices, 'length'), 0.0))) { return cast FlightRuntime.callValue(createIdentityColorMatrix, cast ([] : Array<Dynamic>)); }
     out = FlightRuntime.slice(FlightRuntime.getIndex(matrices, 0.0), 0, null);
@@ -593,14 +590,14 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function getAdjustmentColorMatrix(operation:{ var kind:String; }):Null<Array<Float>> {
+  public static function getAdjustmentColorMatrix(operation:{ var kind:String; }):Null<Array<Float>> {
     var matrix:Dynamic = cast FlightRuntime.UNDEFINED;
     matrix = FlightRuntime.field((cast operation : Dynamic), 'colorMatrix');
     return cast FlightRuntime.select(FlightRuntime.andValue(FlightRuntime.isArray(matrix), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(matrix, 'length'), COLOR_MATRIX_LENGTH)), function():Dynamic return cast matrix, function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getAdjustmentColorTransform(operation:{ var kind:String; }):Null<ColorTransformFunction> {
+  public static function getAdjustmentColorTransform(operation:{ var kind:String; }):Null<ColorTransformFunction> {
     var transform:Dynamic = cast FlightRuntime.UNDEFINED;
     var matrix:Dynamic = cast FlightRuntime.UNDEFINED;
     transform = FlightRuntime.field((cast operation : Dynamic), 'transform');
@@ -610,7 +607,7 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function hue2rgb__hueSaturationAdjustment(p:Float, q:Float, tRaw:Float):Float {
+  public static function hue2rgb__hueSaturationAdjustment(p:Float, q:Float, tRaw:Float):Float {
     var t:Dynamic = cast FlightRuntime.UNDEFINED;
     t = tRaw;
     if (FlightRuntime.truthy(FlightRuntime.compare(t, 0.0, '<'))) { (t = cast ((t + 1.0) : Dynamic)); }
@@ -624,22 +621,22 @@ class Adjustments {
 
   public static final IDENTITY_CHANNEL_MIXER__channelMixerAdjustment:Array<Float> = cast ([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
 
-  @:keep public static function isAffineColorMatrix(matrix:Array<Float>):Bool {
+  public static function isAffineColorMatrix(matrix:Array<Float>):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.getIndex(matrix, 1.0), 0.0), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(matrix, 2.0), 0.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(matrix, 3.0), 0.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(matrix, 5.0), 0.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(matrix, 7.0), 0.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(matrix, 8.0), 0.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(matrix, 10.0), 0.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(matrix, 11.0), 0.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(matrix, 13.0), 0.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(matrix, 15.0), 0.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(matrix, 16.0), 0.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(matrix, 17.0), 0.0));
     return cast null;
   }
 
-  @:keep public static function isColorLutAdjustment(operation:{ var kind:String; }):Bool {
+  public static function isColorLutAdjustment(operation:{ var kind:String; }):Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field((cast operation : Dynamic), 'transform')), 'function');
     return cast null;
   }
 
-  @:keep public static function isColorMatrixAdjustment(operation:{ var kind:String; }):Bool {
+  public static function isColorMatrixAdjustment(operation:{ var kind:String; }):Bool {
     return cast !FlightRuntime.strictEquals(FlightRuntime.callValue(getAdjustmentColorMatrix, cast ([operation] : Array<Dynamic>)), null);
     return cast null;
   }
 
-  @:keep public static function multiplyColorMatrix(a:Array<Float>, b:Array<Float>, ?out:Array<Float>):Array<Float> {
+  public static function multiplyColorMatrix(a:Array<Float>, b:Array<Float>, ?out:Array<Float>):Array<Float> {
     var a0:Dynamic = cast FlightRuntime.UNDEFINED;
     var a1:Dynamic = cast FlightRuntime.UNDEFINED;
     var a2:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -746,7 +743,7 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function resolveColorAdjustmentsColorTransform(adjustments:Null<Array<Adjustment>>, out:ColorTransform):Float {
+  public static function resolveColorAdjustmentsColorTransform(adjustments:Null<Array<Adjustment>>, out:ColorTransform):Float {
     var matrices:Array<Array<Float>> = cast FlightRuntime.UNDEFINED;
     var inlineable:Dynamic = cast FlightRuntime.UNDEFINED;
     var fused:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -774,7 +771,7 @@ class Adjustments {
     return cast null;
   }
 
-  @:keep public static function sampleColorLut(lut:ColorLut, out:Array<Float>, r:Float, g:Float, b:Float):Void {
+  public static function sampleColorLut(lut:ColorLut, out:Array<Float>, r:Float, g:Float, b:Float):Void {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
     var max:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -828,12 +825,12 @@ class Adjustments {
     }
   }
 
-  @:keep public static function unpackRgb__colorGradeAdjustment(c:Float):Array<Float> {
+  public static function unpackRgb__colorGradeAdjustment(c:Float):Array<Float> {
     return cast cast ([((Std.int(FlightRuntime.unsignedShiftRight(Std.int(c), Std.int(24.0))) & Std.int(255.0)) / 255.0), ((Std.int(FlightRuntime.unsignedShiftRight(Std.int(c), Std.int(16.0))) & Std.int(255.0)) / 255.0), ((Std.int(FlightRuntime.unsignedShiftRight(Std.int(c), Std.int(8.0))) & Std.int(255.0)) / 255.0)] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function unpackRgb__liftGammaGainAdjustment(c:Float):Array<Float> {
+  public static function unpackRgb__liftGammaGainAdjustment(c:Float):Array<Float> {
     return cast cast ([((Std.int(FlightRuntime.unsignedShiftRight(Std.int(c), Std.int(24.0))) & Std.int(255.0)) / 255.0), ((Std.int(FlightRuntime.unsignedShiftRight(Std.int(c), Std.int(16.0))) & Std.int(255.0)) / 255.0), ((Std.int(FlightRuntime.unsignedShiftRight(Std.int(c), Std.int(8.0))) & Std.int(255.0)) / 255.0)] : Array<Dynamic>);
     return cast null;
   }

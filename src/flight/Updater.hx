@@ -12,14 +12,11 @@ import flight.Types.UpdaterConfig;
 import flight.Types.UpdaterSignatureConfig;
 import flight.Types.UpdaterState;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Updater")
 class Updater {
   public static var _backend__updater:Null<UpdaterBackend> = FlightRuntime.explicitNull();
 
-  @:keep public static function _setState__updater(updater:AppUpdater, update:Dynamic):Void {
+  public static function _setState__updater(updater:AppUpdater, update:Dynamic):Void {
     var prev:Dynamic = cast FlightRuntime.UNDEFINED;
     var next:Dynamic = cast FlightRuntime.UNDEFINED;
     prev = FlightRuntime.coalesce(FlightRuntime.callProperty(Updater._states__updater, 'get', cast ([updater] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(createUpdaterState, cast ([] : Array<Dynamic>)));
@@ -31,7 +28,7 @@ class Updater {
 
   public static final _subscriptions__updater:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function attachAppUpdater(updater:AppUpdater):Void {
+  public static function attachAppUpdater(updater:AppUpdater):Void {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var unsubscribes:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(detachAppUpdater, cast ([updater] : Array<Dynamic>));
@@ -73,11 +70,11 @@ class Updater {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function cancelAppUpdateDownload():Void {
+  public static function cancelAppUpdateDownload():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getUpdaterBackend, cast ([] : Array<Dynamic>)), 'cancelDownload', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function checkAndDownloadAppUpdate():Void {
+  public static function checkAndDownloadAppUpdate():Void {
     var config:Dynamic = cast FlightRuntime.UNDEFINED;
     config = FlightRuntime.callValue(getUpdaterConfig, cast ([] : Array<Dynamic>));
     FlightRuntime.callProperty(FlightRuntime.callValue(getUpdaterBackend, cast ([] : Array<Dynamic>)), 'checkForUpdates', cast ([] : Array<Dynamic>));
@@ -86,11 +83,11 @@ class Updater {
 }
   }
 
-  @:keep public static function checkForAppUpdate():Void {
+  public static function checkForAppUpdate():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getUpdaterBackend, cast ([] : Array<Dynamic>)), 'checkForUpdates', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function createAppUpdater():AppUpdater {
+  public static function createAppUpdater():AppUpdater {
     var updater:AppUpdater = cast FlightRuntime.UNDEFINED;
     updater = { onChecking: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onDownloadProgress: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onError: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onUpdateAvailable: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onUpdateCancelled: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onUpdateDownloaded: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onUpdateNotAvailable: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onUpdateRolledBack: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onUpdateStaging: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onUpdateVerified: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     FlightRuntime.callProperty(Updater._states__updater, 'set', cast ([updater, FlightRuntime.callValue(createUpdaterState, cast ([] : Array<Dynamic>))] : Array<Dynamic>));
@@ -98,17 +95,17 @@ class Updater {
     return cast null;
   }
 
-  @:keep public static function createUpdaterConfig():UpdaterConfig {
+  public static function createUpdaterConfig():UpdaterConfig {
     return cast { allowPrerelease: false, autoDownload: false, autoInstallOnAppQuit: false };
     return cast null;
   }
 
-  @:keep public static function createUpdaterState():UpdaterState {
+  public static function createUpdaterState():UpdaterState {
     return cast { error: null, info: null, phase: 'Idle', progress: null };
     return cast null;
   }
 
-  @:keep public static function createWebUpdaterBackend():UpdaterBackend {
+  public static function createWebUpdaterBackend():UpdaterBackend {
     var _config:UpdaterConfig = cast FlightRuntime.UNDEFINED;
     var _channel:Dynamic = cast FlightRuntime.UNDEFINED;
     _config = FlightRuntime.callValue(createUpdaterConfig, cast ([] : Array<Dynamic>));
@@ -179,7 +176,7 @@ class Updater {
     return cast null;
   }
 
-  @:keep public static function detachAppUpdater(updater:AppUpdater):Void {
+  public static function detachAppUpdater(updater:AppUpdater):Void {
     var unsubscribe:Dynamic = cast FlightRuntime.UNDEFINED;
     unsubscribe = FlightRuntime.callProperty(Updater._subscriptions__updater, 'get', cast ([updater] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(unsubscribe, FlightRuntime.UNDEFINED))) {
@@ -188,65 +185,65 @@ class Updater {
 }
   }
 
-  @:keep public static function disposeAppUpdater(updater:AppUpdater):Void {
+  public static function disposeAppUpdater(updater:AppUpdater):Void {
     FlightRuntime.callValue(detachAppUpdater, cast ([updater] : Array<Dynamic>));
   }
 
-  @:keep public static function downloadAppUpdate():Void {
+  public static function downloadAppUpdate():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getUpdaterBackend, cast ([] : Array<Dynamic>)), 'downloadUpdate', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function getAppUpdaterState(updater:AppUpdater):UpdaterState {
+  public static function getAppUpdaterState(updater:AppUpdater):UpdaterState {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(Updater._states__updater, 'get', cast ([updater] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(createUpdaterState, cast ([] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function getUpdaterBackend():UpdaterBackend {
+  public static function getUpdaterBackend():UpdaterBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Updater._backend__updater, null))) { (Updater._backend__updater = cast (FlightRuntime.callValue(createWebUpdaterBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Updater._backend__updater;
     return cast null;
   }
 
-  @:keep public static function getUpdaterChannel():String {
+  public static function getUpdaterChannel():String {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getUpdaterBackend, cast ([] : Array<Dynamic>)), 'getChannel', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getUpdaterConfig():UpdaterConfig {
+  public static function getUpdaterConfig():UpdaterConfig {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getUpdaterBackend, cast ([] : Array<Dynamic>)), 'getConfig', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function isAppUpdateEligible(info:UpdateInfo, rolloutSeed:Float):Bool {
+  public static function isAppUpdateEligible(info:UpdateInfo, rolloutSeed:Float):Bool {
     return cast FlightRuntime.compare((rolloutSeed * 100.0), FlightRuntime.field(info, 'stagedRolloutPercent'), '<');
     return cast null;
   }
 
-  @:keep public static function quitAndInstallUpdate():Void {
+  public static function quitAndInstallUpdate():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getUpdaterBackend, cast ([] : Array<Dynamic>)), 'quitAndInstall', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function rollbackAppUpdate():Void {
+  public static function rollbackAppUpdate():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getUpdaterBackend, cast ([] : Array<Dynamic>)), 'rollback', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function setUpdaterBackend(backend:Null<UpdaterBackend>):Void {
+  public static function setUpdaterBackend(backend:Null<UpdaterBackend>):Void {
     (Updater._backend__updater = cast (backend : Dynamic));
   }
 
-  @:keep public static function setUpdaterChannel(channel:String):Void {
+  public static function setUpdaterChannel(channel:String):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getUpdaterBackend, cast ([] : Array<Dynamic>)), 'setChannel', cast ([channel] : Array<Dynamic>));
   }
 
-  @:keep public static function setUpdaterConfig(config:UpdaterConfig):Void {
+  public static function setUpdaterConfig(config:UpdaterConfig):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getUpdaterBackend, cast ([] : Array<Dynamic>)), 'setConfig', cast ([config] : Array<Dynamic>));
   }
 
-  @:keep public static function setUpdaterFeedUrl(url:String):Void {
+  public static function setUpdaterFeedUrl(url:String):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getUpdaterBackend, cast ([] : Array<Dynamic>)), 'setFeedUrl', cast ([url] : Array<Dynamic>));
   }
 
-  @:keep public static function setUpdaterSignatureConfig(config:Null<UpdaterSignatureConfig>):Void {
+  public static function setUpdaterSignatureConfig(config:Null<UpdaterSignatureConfig>):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getUpdaterBackend, cast ([] : Array<Dynamic>)), 'setSignatureConfig', cast ([config] : Array<Dynamic>));
   }
 }

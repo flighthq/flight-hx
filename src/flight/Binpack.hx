@@ -14,12 +14,9 @@ typedef FreeRectangle__packRectangles = { var x:Float; var y:Float; var width:Fl
 
 typedef Placement__packRectangles = { var x:Float; var y:Float; var footprintWidth:Float; var footprintHeight:Float; var rotated:Bool; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Binpack")
 class Binpack {
-  @:keep public static function ceilToPowerOfTwo__packRectangles(value:Float):Float {
+  public static function ceilToPowerOfTwo__packRectangles(value:Float):Float {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(value, 1.0, '<='))) { return cast 1.0; }
     result = 1.0;
@@ -28,7 +25,7 @@ class Binpack {
     return cast null;
   }
 
-  @:keep public static function compareRectangleId__packRectangles(a:RectangleId, b:RectangleId):Float {
+  public static function compareRectangleId__packRectangles(a:RectangleId, b:RectangleId):Float {
     var aNumber:Dynamic = cast FlightRuntime.UNDEFINED;
     var bNumber:Dynamic = cast FlightRuntime.UNDEFINED;
     aNumber = FlightRuntime.strictEquals(FlightRuntime.typeofValue(a), 'number');
@@ -41,12 +38,12 @@ class Binpack {
 
   public static final DEFAULT_MAX_EXTENT__packRectangles:Dynamic = 16384.0;
 
-  @:keep public static function finalizeExtent__packRectangles(value:Float, powerOfTwo:Bool):Float {
+  public static function finalizeExtent__packRectangles(value:Float, powerOfTwo:Bool):Float {
     return cast FlightRuntime.select(FlightRuntime.andValue(powerOfTwo, function():Dynamic return cast FlightRuntime.compare(value, 0.0, '>')), function():Dynamic return cast FlightRuntime.callValue(Binpack.ceilToPowerOfTwo__packRectangles, cast ([value] : Array<Dynamic>)), function():Dynamic return cast value);
     return cast null;
   }
 
-  @:keep public static function finalizeResult__packRectangles(packed:{ var placements:Array<PackedRectangle>; var unpacked:Array<RectangleId>; }, border:Float, powerOfTwo:Bool, square:Bool):PackResult {
+  public static function finalizeResult__packRectangles(packed:{ var placements:Array<PackedRectangle>; var unpacked:Array<RectangleId>; }, border:Float, powerOfTwo:Bool, square:Bool):PackResult {
     var contentRight:Dynamic = cast FlightRuntime.UNDEFINED;
     var contentBottom:Dynamic = cast FlightRuntime.UNDEFINED;
     var width:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -73,7 +70,7 @@ class Binpack {
     return cast null;
   }
 
-  @:keep public static function findBestPlacement__packRectangles(free:Array<FreeRectangle__packRectangles>, pieceWidth:Float, pieceHeight:Float, allowRotation:Bool):Null<Placement__packRectangles> {
+  public static function findBestPlacement__packRectangles(free:Array<FreeRectangle__packRectangles>, pieceWidth:Float, pieceHeight:Float, allowRotation:Bool):Null<Placement__packRectangles> {
     var best:Null<Placement__packRectangles> = cast FlightRuntime.UNDEFINED;
     var bestShort:Dynamic = cast FlightRuntime.UNDEFINED;
     var bestLong:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -104,12 +101,12 @@ class Binpack {
     return cast null;
   }
 
-  @:keep public static function isFreeRectangleContained__packRectangles(inner:FreeRectangle__packRectangles, outer:FreeRectangle__packRectangles):Bool {
+  public static function isFreeRectangleContained__packRectangles(inner:FreeRectangle__packRectangles, outer:FreeRectangle__packRectangles):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.compare(FlightRuntime.field(inner, 'x'), FlightRuntime.field(outer, 'x'), '>='), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(inner, 'y'), FlightRuntime.field(outer, 'y'), '>=')), function():Dynamic return cast FlightRuntime.compare((FlightRuntime.field(inner, 'x') + FlightRuntime.field(inner, 'width')), (FlightRuntime.field(outer, 'x') + FlightRuntime.field(outer, 'width')), '<=')), function():Dynamic return cast FlightRuntime.compare((FlightRuntime.field(inner, 'y') + FlightRuntime.field(inner, 'height')), (FlightRuntime.field(outer, 'y') + FlightRuntime.field(outer, 'height')), '<='));
     return cast null;
   }
 
-  @:keep public static function packIntoBin__packRectangles(sorted:Array<PackableRectangle>, binWidth:Float, binHeight:Float, padding:Float, border:Float, allowRotation:Bool):{ var placements:Array<PackedRectangle>; var unpacked:Array<RectangleId>; } {
+  public static function packIntoBin__packRectangles(sorted:Array<PackableRectangle>, binWidth:Float, binHeight:Float, padding:Float, border:Float, allowRotation:Bool):{ var placements:Array<PackedRectangle>; var unpacked:Array<RectangleId>; } {
     var usableWidth:Dynamic = cast FlightRuntime.UNDEFINED;
     var usableHeight:Dynamic = cast FlightRuntime.UNDEFINED;
     var placements:Array<PackedRectangle> = cast FlightRuntime.UNDEFINED;
@@ -142,7 +139,7 @@ class Binpack {
     return cast null;
   }
 
-  @:keep public static function packRectangles(rects:Array<PackableRectangle>, ?options:BinPackOptions):PackResult {
+  public static function packRectangles(rects:Array<PackableRectangle>, ?options:BinPackOptions):PackResult {
     var padding:Dynamic = cast FlightRuntime.UNDEFINED;
     var border:Dynamic = cast FlightRuntime.UNDEFINED;
     var allowRotation:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -200,7 +197,7 @@ class Binpack {
     return cast null;
   }
 
-  @:keep public static function pruneFreeRectangles__packRectangles(free:Array<FreeRectangle__packRectangles>):Void {
+  public static function pruneFreeRectangles__packRectangles(free:Array<FreeRectangle__packRectangles>):Void {
     {
       var i:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(i, FlightRuntime.field(free, 'length'), '<'))) {
@@ -224,7 +221,7 @@ class Binpack {
     }
   }
 
-  @:keep public static function sortRectanglesForPacking__packRectangles(rects:Array<PackableRectangle>):Array<PackableRectangle> {
+  public static function sortRectanglesForPacking__packRectangles(rects:Array<PackableRectangle>):Array<PackableRectangle> {
     return cast FlightRuntime.callProperty(FlightRuntime.concatArrays([FlightRuntime.toArray(rects)]), 'sort', cast ([function(a:Dynamic, b:Dynamic) {
   var areaA:Dynamic = cast FlightRuntime.UNDEFINED;
   var areaB:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -238,7 +235,7 @@ class Binpack {
     return cast null;
   }
 
-  @:keep public static function splitFreeRectangles__packRectangles(free:Array<FreeRectangle__packRectangles>, placement:Placement__packRectangles):Void {
+  public static function splitFreeRectangles__packRectangles(free:Array<FreeRectangle__packRectangles>, placement:Placement__packRectangles):Void {
     var usedX:Dynamic = cast FlightRuntime.UNDEFINED;
     var usedY:Dynamic = cast FlightRuntime.UNDEFINED;
     var usedRight:Dynamic = cast FlightRuntime.UNDEFINED;

@@ -13,20 +13,17 @@ import flight.Types.AppLoginItemLike;
 import flight.Types.AppPathKind;
 import flight.Types.MenuItemTemplate;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.AppApi")
 class AppApi {
   public static var _backend__app:Null<AppBackend> = FlightRuntime.explicitNull();
 
   public static final _subscriptions__app:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function addAppRecentDocument(path:String):Void {
+  public static function addAppRecentDocument(path:String):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'addRecentDocument', cast ([path] : Array<Dynamic>));
   }
 
-  @:keep public static function attachApp(app:App):Void {
+  public static function attachApp(app:App):Void {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var unsubscribeActivate:Dynamic = cast FlightRuntime.UNDEFINED;
     var unsubscribeAllWindowsClosed:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -59,34 +56,34 @@ class AppApi {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function bounceAppDock():Float {
+  public static function bounceAppDock():Float {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'bounceDock', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cancelAppAttention(id:Float):Void {
+  public static function cancelAppAttention(id:Float):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'cancelAttention', cast ([id] : Array<Dynamic>));
   }
 
-  @:keep public static function cancelAppDockBounce(id:Float):Void {
+  public static function cancelAppDockBounce(id:Float):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'cancelDockBounce', cast ([id] : Array<Dynamic>));
   }
 
-  @:keep public static function clearAppRecentDocuments():Void {
+  public static function clearAppRecentDocuments():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'clearRecentDocuments', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function createApp():App {
+  public static function createApp():App {
     return cast { onActivate: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onAllWindowsClosed: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onOpenFile: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onQuitRequest: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onReady: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onSecondInstance: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createAppLoginItem():AppLoginItem {
+  public static function createAppLoginItem():AppLoginItem {
     return cast { args: cast ([] : Array<Dynamic>), openAsHidden: false, openAtLogin: false, path: '' };
     return cast null;
   }
 
-  @:keep public static function createWebAppBackend():AppBackend {
+  public static function createWebAppBackend():AppBackend {
     return cast { addRecentDocument: function() {
 
 }, bounceDock: function() {
@@ -210,7 +207,7 @@ class AppApi {
     return cast null;
   }
 
-  @:keep public static function detachApp(app:App):Void {
+  public static function detachApp(app:App):Void {
     var unsubscribe:Dynamic = cast FlightRuntime.UNDEFINED;
     unsubscribe = FlightRuntime.callProperty(AppApi._subscriptions__app, 'get', cast ([app] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(unsubscribe, FlightRuntime.UNDEFINED))) {
@@ -219,26 +216,26 @@ class AppApi {
 }
   }
 
-  @:keep public static function disposeApp(app:App):Void {
+  public static function disposeApp(app:App):Void {
     FlightRuntime.callValue(detachApp, cast ([app] : Array<Dynamic>));
   }
 
-  @:keep public static function focusApp():Void {
+  public static function focusApp():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'focus', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function getAppBackend():AppBackend {
+  public static function getAppBackend():AppBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(AppApi._backend__app, null))) { (AppApi._backend__app = cast (FlightRuntime.callValue(createWebAppBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast AppApi._backend__app;
     return cast null;
   }
 
-  @:keep public static function getAppCommandLine():Array<String> {
+  public static function getAppCommandLine():Array<String> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getCommandLine', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getAppCommandLineSwitch(name:String):Null<String> {
+  public static function getAppCommandLineSwitch(name:String):Null<String> {
     var prefix:Dynamic = cast FlightRuntime.UNDEFINED;
     var args:Dynamic = cast FlightRuntime.UNDEFINED;
     prefix = '--' + Std.string(name) + '=';
@@ -251,130 +248,130 @@ class AppApi {
     return cast null;
   }
 
-  @:keep public static function getAppDirectoryPath(kind:AppPathKind):String {
+  public static function getAppDirectoryPath(kind:AppPathKind):String {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getAppDirectoryPath', cast ([kind] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getAppExecutablePath():String {
+  public static function getAppExecutablePath():String {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getExecutablePath', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getAppLocale():String {
+  public static function getAppLocale():String {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getLocale', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getAppLoginItem():AppLoginItem {
+  public static function getAppLoginItem():AppLoginItem {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getLoginItem', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getAppName():String {
+  public static function getAppName():String {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getName', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getAppPath():String {
+  public static function getAppPath():String {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getAppPath', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getAppPreferredSystemLanguages():Array<String> {
+  public static function getAppPreferredSystemLanguages():Array<String> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getPreferredSystemLanguages', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getAppSystemLocale():String {
+  public static function getAppSystemLocale():String {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getSystemLocale', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getAppVersion():String {
+  public static function getAppVersion():String {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'getVersion', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hasAppCommandLineSwitch(name:String):Bool {
+  public static function hasAppCommandLineSwitch(name:String):Bool {
     return cast !FlightRuntime.strictEquals(FlightRuntime.callValue(getAppCommandLineSwitch, cast ([name] : Array<Dynamic>)), null);
     return cast null;
   }
 
-  @:keep public static function hasAppSingleInstanceLock():Bool {
+  public static function hasAppSingleInstanceLock():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'hasSingleInstanceLock', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hideApp():Bool {
+  public static function hideApp():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'hideApp', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function isAppHidden():Bool {
+  public static function isAppHidden():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'isAppHidden', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function quitApp():Void {
+  public static function quitApp():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'quit', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function relaunchApp():Void {
+  public static function relaunchApp():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'relaunch', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function releaseAppSingleInstanceLock():Void {
+  public static function releaseAppSingleInstanceLock():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'releaseSingleInstanceLock', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function requestAppAttention(critical:Bool):Float {
+  public static function requestAppAttention(critical:Bool):Float {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'requestAttention', cast ([critical] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function requestAppSingleInstanceLock():Bool {
+  public static function requestAppSingleInstanceLock():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'requestSingleInstanceLock', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setAppActivationPolicy(policy:AppActivationPolicy):Void {
+  public static function setAppActivationPolicy(policy:AppActivationPolicy):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'setActivationPolicy', cast ([policy] : Array<Dynamic>));
   }
 
-  @:keep public static function setAppBackend(backend:Null<AppBackend>):Void {
+  public static function setAppBackend(backend:Null<AppBackend>):Void {
     (AppApi._backend__app = cast (backend : Dynamic));
   }
 
-  @:keep public static function setAppBadgeCount(count:Float):Bool {
+  public static function setAppBadgeCount(count:Float):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'setBadgeCount', cast ([count] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setAppDockBadge(text:String):Void {
+  public static function setAppDockBadge(text:String):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'setDockBadge', cast ([text] : Array<Dynamic>));
   }
 
-  @:keep public static function setAppDockMenu(items:Array<MenuItemTemplate>):Void {
+  public static function setAppDockMenu(items:Array<MenuItemTemplate>):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'setDockMenu', cast ([items] : Array<Dynamic>));
   }
 
-  @:keep public static function setAppLoginItem(settings:AppLoginItemLike):Bool {
+  public static function setAppLoginItem(settings:AppLoginItemLike):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'setLoginItem', cast ([settings] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setAppName(name:String):Bool {
+  public static function setAppName(name:String):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'setName', cast ([name] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setAppUserModelId(id:String):Bool {
+  public static function setAppUserModelId(id:String):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'setUserModelId', cast ([id] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function showApp():Bool {
+  public static function showApp():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'showApp', cast ([] : Array<Dynamic>));
     return cast null;
   }

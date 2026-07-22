@@ -10,26 +10,23 @@ import flight.Types.MediaSessionMetadata;
 import flight.Types.MediaSessionPlaybackState;
 import flight.Types.MediaSessionPositionState;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.MediaSession")
 class MediaSession {
   public static var _backend__mediasession:Null<MediaSessionBackend> = FlightRuntime.explicitNull();
 
-  @:keep public static function clearMediaSessionActionHandler(action:MediaSessionAction):Void {
+  public static function clearMediaSessionActionHandler(action:MediaSessionAction):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getMediaSessionBackend, cast ([] : Array<Dynamic>)), 'setActionHandler', cast ([action, null] : Array<Dynamic>));
   }
 
-  @:keep public static function clearMediaSessionMetadata():Void {
+  public static function clearMediaSessionMetadata():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getMediaSessionBackend, cast ([] : Array<Dynamic>)), 'setMetadata', cast ([null] : Array<Dynamic>));
   }
 
-  @:keep public static function clearMediaSessionPositionState():Void {
+  public static function clearMediaSessionPositionState():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getMediaSessionBackend, cast ([] : Array<Dynamic>)), 'setPositionState', cast ([null] : Array<Dynamic>));
   }
 
-  @:keep public static function createWebMediaSessionBackend():MediaSessionBackend {
+  public static function createWebMediaSessionBackend():MediaSessionBackend {
     return cast { setMetadata: function(metadata:Dynamic) {
   var session:Dynamic = cast FlightRuntime.UNDEFINED;
   session = FlightRuntime.callValue(MediaSession.getWebMediaSession__mediasession, cast ([] : Array<Dynamic>));
@@ -62,35 +59,35 @@ class MediaSession {
     return cast null;
   }
 
-  @:keep public static function getMediaSessionBackend():MediaSessionBackend {
+  public static function getMediaSessionBackend():MediaSessionBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(MediaSession._backend__mediasession, null))) { (MediaSession._backend__mediasession = cast (FlightRuntime.callValue(createWebMediaSessionBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast MediaSession._backend__mediasession;
     return cast null;
   }
 
-  @:keep public static function getWebMediaSession__mediasession():Null<MediaSession> {
+  public static function getWebMediaSession__mediasession():Null<MediaSession> {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !FlightRuntime.truthy(FlightRuntime.hasField(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'mediaSession'))))) { return cast null; }
     return cast FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'mediaSession');
     return cast null;
   }
 
-  @:keep public static function setMediaSessionActionHandler(action:MediaSessionAction, handler:Dynamic):Void {
+  public static function setMediaSessionActionHandler(action:MediaSessionAction, handler:Dynamic):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getMediaSessionBackend, cast ([] : Array<Dynamic>)), 'setActionHandler', cast ([action, handler] : Array<Dynamic>));
   }
 
-  @:keep public static function setMediaSessionBackend(backend:Null<MediaSessionBackend>):Void {
+  public static function setMediaSessionBackend(backend:Null<MediaSessionBackend>):Void {
     (MediaSession._backend__mediasession = cast (backend : Dynamic));
   }
 
-  @:keep public static function setMediaSessionMetadata(metadata:MediaSessionMetadata):Void {
+  public static function setMediaSessionMetadata(metadata:MediaSessionMetadata):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getMediaSessionBackend, cast ([] : Array<Dynamic>)), 'setMetadata', cast ([metadata] : Array<Dynamic>));
   }
 
-  @:keep public static function setMediaSessionPlaybackState(state:MediaSessionPlaybackState):Void {
+  public static function setMediaSessionPlaybackState(state:MediaSessionPlaybackState):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getMediaSessionBackend, cast ([] : Array<Dynamic>)), 'setPlaybackState', cast ([state] : Array<Dynamic>));
   }
 
-  @:keep public static function setMediaSessionPositionState(state:MediaSessionPositionState):Void {
+  public static function setMediaSessionPositionState(state:MediaSessionPositionState):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getMediaSessionBackend, cast ([] : Array<Dynamic>)), 'setPositionState', cast ([state] : Array<Dynamic>));
   }
 }

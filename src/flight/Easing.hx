@@ -8,12 +8,9 @@ import flight.Types.EasingSegment;
 import flight.Types.ScalarRemap;
 import flight.Types.StepPosition;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Easing")
 class Easing {
-  @:keep public static function bounceOut__easeBounce(t:Float):Float {
+  public static function bounceOut__easeBounce(t:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.compare(t, (1.0 / 2.75), '<'))) { return cast ((7.5625 * t) * t); }
     if (FlightRuntime.truthy(FlightRuntime.compare(t, (2.0 / 2.75), '<'))) { return cast (((7.5625 * (t = cast ((t - (1.5 / 2.75)) : Dynamic))) * t) + 0.75); }
     if (FlightRuntime.truthy(FlightRuntime.compare(t, (2.5 / 2.75), '<'))) { return cast (((7.5625 * (t = cast ((t - (2.25 / 2.75)) : Dynamic))) * t) + 0.9375); }
@@ -21,7 +18,7 @@ class Easing {
     return cast null;
   }
 
-  @:keep public static function createEasingSamples(ease:EasingFunction, count:Float, ?out:flight.internal.FlightFloat32Array):flight.internal.FlightFloat32Array {
+  public static function createEasingSamples(ease:EasingFunction, count:Float, ?out:flight.internal.FlightFloat32Array):flight.internal.FlightFloat32Array {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     var step:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -51,12 +48,12 @@ class Easing {
 
   public static final defaultEpsilon__getEasingDerivative:Dynamic = 0.000001;
 
-  @:keep public static function easeClamp(ease:EasingFunction):EasingFunction {
+  public static function easeClamp(ease:EasingFunction):EasingFunction {
     return cast function(t:Dynamic) return FlightRuntime.callValue(ease, cast ([FlightRuntime.select(FlightRuntime.compare(t, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast FlightRuntime.select(FlightRuntime.compare(t, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast t))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function easeClampOutput(ease:EasingFunction, min:Float, max:Float):EasingFunction {
+  public static function easeClampOutput(ease:EasingFunction, min:Float, max:Float):EasingFunction {
     return cast function(t:Dynamic) {
   var v:Dynamic = cast FlightRuntime.UNDEFINED;
   v = FlightRuntime.callValue(ease, cast ([t] : Array<Dynamic>));
@@ -65,7 +62,7 @@ class Easing {
     return cast null;
   }
 
-  @:keep public static function easeCubicBezier(x1:Float, y1:Float, x2:Float, y2:Float):EasingFunction {
+  public static function easeCubicBezier(x1:Float, y1:Float, x2:Float, y2:Float):EasingFunction {
     var cx:Dynamic = cast FlightRuntime.UNDEFINED;
     var bx:Dynamic = cast FlightRuntime.UNDEFINED;
     var ax:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -174,7 +171,7 @@ class Easing {
   return cast FlightRuntime.select(FlightRuntime.compare(t, 0.5, '<'), function():Dynamic return cast (FlightRuntime.callProperty(HxMath, 'pow', cast ([2.0, ((20.0 * t) - 10.0)] : Array<Dynamic>)) / 2.0), function():Dynamic return cast ((2.0 - FlightRuntime.callProperty(HxMath, 'pow', cast ([2.0, ((-20.0 * t) + 10.0)] : Array<Dynamic>))) / 2.0));
 };
 
-  @:keep public static function easeInOutPower(exponent:Float):EasingFunction {
+  public static function easeInOutPower(exponent:Float):EasingFunction {
     return cast function(t:Dynamic) {
   if (FlightRuntime.truthy(FlightRuntime.compare(t, 0.5, '<'))) { return cast (FlightRuntime.callProperty(HxMath, 'pow', cast ([(t * 2.0), exponent] : Array<Dynamic>)) * 0.5); }
   return cast (1.0 - (FlightRuntime.callProperty(HxMath, 'pow', cast ([((1.0 - t) * 2.0), exponent] : Array<Dynamic>)) * 0.5));
@@ -190,7 +187,7 @@ class Easing {
 
   public static final easeInOutSine:EasingFunction = function(t:Dynamic) return (-(FlightRuntime.callProperty(HxMath, 'cos', cast ([(HxMath.PI * t)] : Array<Dynamic>)) - 1.0) / 2.0);
 
-  @:keep public static function easeInPower(exponent:Float):EasingFunction {
+  public static function easeInPower(exponent:Float):EasingFunction {
     return cast function(t:Dynamic) return FlightRuntime.callProperty(HxMath, 'pow', cast ([t, exponent] : Array<Dynamic>));
     return cast null;
   }
@@ -203,14 +200,14 @@ class Easing {
 
   public static final easeInSine:EasingFunction = function(t:Dynamic) return (1.0 - FlightRuntime.callProperty(HxMath, 'cos', cast ([((t * HxMath.PI) / 2.0)] : Array<Dynamic>)));
 
-  @:keep public static function easeInvert(ease:EasingFunction):EasingFunction {
+  public static function easeInvert(ease:EasingFunction):EasingFunction {
     return cast function(t:Dynamic) return (1.0 - FlightRuntime.callValue(ease, cast ([t] : Array<Dynamic>)));
     return cast null;
   }
 
   public static final easeLinear:EasingFunction = function(t:Dynamic) return t;
 
-  @:keep public static function easeMirror(easeIn:EasingFunction):EasingFunction {
+  public static function easeMirror(easeIn:EasingFunction):EasingFunction {
     return cast function(t:Dynamic) {
   if (FlightRuntime.truthy(FlightRuntime.compare(t, 0.5, '<'))) { return cast (FlightRuntime.callValue(easeIn, cast ([(t * 2.0)] : Array<Dynamic>)) * 0.5); }
   return cast (1.0 - (FlightRuntime.callValue(easeIn, cast ([((1.0 - t) * 2.0)] : Array<Dynamic>)) * 0.5));
@@ -233,7 +230,7 @@ class Easing {
 
   public static final easeOutExponential:EasingFunction = function(t:Dynamic) return FlightRuntime.select(FlightRuntime.strictEquals(t, 1.0), function():Dynamic return cast 1.0, function():Dynamic return cast (1.0 - FlightRuntime.callProperty(HxMath, 'pow', cast ([2.0, (-10.0 * t)] : Array<Dynamic>))));
 
-  @:keep public static function easeOutPower(exponent:Float):EasingFunction {
+  public static function easeOutPower(exponent:Float):EasingFunction {
     return cast function(t:Dynamic) return (1.0 - FlightRuntime.callProperty(HxMath, 'pow', cast ([(1.0 - t), exponent] : Array<Dynamic>)));
     return cast null;
   }
@@ -246,7 +243,7 @@ class Easing {
 
   public static final easeOutSine:EasingFunction = function(t:Dynamic) return FlightRuntime.callProperty(HxMath, 'sin', cast ([((t * HxMath.PI) / 2.0)] : Array<Dynamic>));
 
-  @:keep public static function easePiecewise(segments:Array<EasingSegment>):EasingFunction {
+  public static function easePiecewise(segments:Array<EasingSegment>):EasingFunction {
     var totalWeight:Dynamic = cast FlightRuntime.UNDEFINED;
     var breakpoints:Array<{ var ease:EasingFunction; var end:Float; var start:Float; }> = cast FlightRuntime.UNDEFINED;
     var accumulated:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -285,12 +282,12 @@ class Easing {
     return cast null;
   }
 
-  @:keep public static function easeReverse(easeIn:EasingFunction):EasingFunction {
+  public static function easeReverse(easeIn:EasingFunction):EasingFunction {
     return cast function(t:Dynamic) return (1.0 - FlightRuntime.callValue(easeIn, cast ([(1.0 - t)] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function easeScaleOutput(ease:EasingFunction, fromValue:Float, toValue:Float):EasingFunction {
+  public static function easeScaleOutput(ease:EasingFunction, fromValue:Float, toValue:Float):EasingFunction {
     return cast function(t:Dynamic) return (fromValue + (FlightRuntime.callValue(ease, cast ([t] : Array<Dynamic>)) * (toValue - fromValue)));
     return cast null;
   }
@@ -299,7 +296,7 @@ class Easing {
 
   public static final easeSmoothstep:EasingFunction = function(t:Dynamic) return ((t * t) * (3.0 - (2.0 * t)));
 
-  @:keep public static function easeSmoothstepRange(edge0:Float, edge1:Float):ScalarRemap {
+  public static function easeSmoothstepRange(edge0:Float, edge1:Float):ScalarRemap {
     return cast function(x:Dynamic) {
   var t:Dynamic = cast FlightRuntime.UNDEFINED;
   t = FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, ((x - edge0) / (edge1 - edge0))] : Array<Dynamic>))] : Array<Dynamic>));
@@ -308,7 +305,7 @@ class Easing {
     return cast null;
   }
 
-  @:keep public static function easeSteps(count:Float, position:StepPosition = 'jumpEnd'):EasingFunction {
+  public static function easeSteps(count:Float, position:StepPosition = 'jumpEnd'):EasingFunction {
     var jumps:Dynamic = cast FlightRuntime.UNDEFINED;
     var startOffset:Dynamic = cast FlightRuntime.UNDEFINED;
     jumps = FlightRuntime.select(FlightRuntime.strictEquals(position, 'jumpNone'), function():Dynamic return cast (count - 1.0), function():Dynamic return cast FlightRuntime.select(FlightRuntime.strictEquals(position, 'jumpBoth'), function():Dynamic return cast (count + 1.0), function():Dynamic return cast count));
@@ -327,7 +324,7 @@ class Easing {
     return cast null;
   }
 
-  @:keep public static function getEasingDerivative(ease:EasingFunction, t:Float, epsilon:Float = 0.000001):Float {
+  public static function getEasingDerivative(ease:EasingFunction, t:Float, epsilon:Float = 0.000001):Float {
     if (FlightRuntime.truthy(FlightRuntime.compare(t, epsilon, '<='))) {
   return cast ((FlightRuntime.callValue(ease, cast ([(epsilon * 2.0)] : Array<Dynamic>)) - FlightRuntime.callValue(ease, cast ([0.0] : Array<Dynamic>))) / (epsilon * 2.0));
 }

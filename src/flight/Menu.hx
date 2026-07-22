@@ -9,16 +9,13 @@ import flight.Types.MenuBackend;
 import flight.Types.MenuItemTemplate;
 import flight.Types.MenuSignals;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Menu")
 class Menu {
   public static var _backend__menu:Null<MenuBackend> = FlightRuntime.explicitNull();
 
   public static var _menuSignals__menu:Null<MenuSignals> = FlightRuntime.explicitNull();
 
-  @:keep public static function _validateItem__menu(item:MenuItemTemplate, seen:Dynamic):Null<String> {
+  public static function _validateItem__menu(item:MenuItemTemplate, seen:Dynamic):Null<String> {
     if (FlightRuntime.truthy(FlightRuntime.callProperty(seen, 'has', cast ([item] : Array<Dynamic>)))) {
   throw FlightRuntime.error('validateMenuItemTemplate: cyclic submenu reference detected');
 }
@@ -49,7 +46,7 @@ class Menu {
     return cast null;
   }
 
-  @:keep public static function buildWebMenuElement__menu(items:Array<MenuItemTemplate>, onSelect:Dynamic):Dynamic {
+  public static function buildWebMenuElement__menu(items:Array<MenuItemTemplate>, onSelect:Dynamic):Dynamic {
     var menu:Dynamic = cast FlightRuntime.UNDEFINED;
     menu = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['ul'] : Array<Dynamic>));
     FlightRuntime.setField(FlightRuntime.field(menu, 'style'), 'cssText', FlightRuntime.join(cast (['position:fixed', 'z-index:2147483647', 'margin:0', 'padding:4px 0', 'list-style:none', 'background:#fff', 'border:1px solid #ccc', 'border-radius:4px', 'box-shadow:0 4px 12px rgba(0,0,0,.15)', 'min-width:160px', 'font:13px/1.4 system-ui,sans-serif', 'color:#111', 'user-select:none'] : Array<Dynamic>), ';'));
@@ -131,7 +128,7 @@ class Menu {
     return cast null;
   }
 
-  @:keep public static function cloneMenuTemplate(template:MenuItemTemplate):MenuItemTemplate {
+  public static function cloneMenuTemplate(template:MenuItemTemplate):MenuItemTemplate {
     var clone:MenuItemTemplate = cast FlightRuntime.UNDEFINED;
     clone = FlightRuntime.mergeObjects([template]);
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(template, 'submenu'), FlightRuntime.UNDEFINED))) {
@@ -141,37 +138,37 @@ class Menu {
     return cast null;
   }
 
-  @:keep public static function createDefaultAppMenuTemplate(appName:String):MenuItemTemplate {
+  public static function createDefaultAppMenuTemplate(appName:String):MenuItemTemplate {
     return cast { label: appName, role: Types.WellKnownMenuItemRole.appMenu, type: 'submenu', submenu: cast ([{ id: 'about', label: 'About ' + Std.string(appName) + '', role: Types.WellKnownMenuItemRole.about, type: 'normal', enabled: true }, { type: 'separator', enabled: true }, { id: 'services', label: 'Services', role: Types.WellKnownMenuItemRole.services, type: 'submenu', submenu: cast ([] : Array<Dynamic>), enabled: true }, { type: 'separator', enabled: true }, { id: 'hide', label: 'Hide ' + Std.string(appName) + '', role: Types.WellKnownMenuItemRole.hide, accelerator: 'CmdOrCtrl+H', type: 'normal', enabled: true }, { id: 'hideOthers', label: 'Hide Others', role: Types.WellKnownMenuItemRole.hideOthers, accelerator: 'CmdOrCtrl+Alt+H', type: 'normal', enabled: true }, { id: 'unhide', label: 'Show All', role: Types.WellKnownMenuItemRole.unhide, type: 'normal', enabled: true }, { type: 'separator', enabled: true }, { id: 'quit', label: 'Quit ' + Std.string(appName) + '', role: Types.WellKnownMenuItemRole.quit, accelerator: 'CmdOrCtrl+Q', type: 'normal', enabled: true }] : Array<Dynamic>), enabled: true };
     return cast null;
   }
 
-  @:keep public static function createDefaultEditMenuTemplate():MenuItemTemplate {
+  public static function createDefaultEditMenuTemplate():MenuItemTemplate {
     return cast { label: 'Edit', role: Types.WellKnownMenuItemRole.editMenu, type: 'submenu', submenu: cast ([{ id: 'undo', label: 'Undo', role: Types.WellKnownMenuItemRole.undo, accelerator: 'CmdOrCtrl+Z', type: 'normal', enabled: true }, { id: 'redo', label: 'Redo', role: Types.WellKnownMenuItemRole.redo, accelerator: 'Shift+CmdOrCtrl+Z', type: 'normal', enabled: true }, { type: 'separator', enabled: true }, { id: 'cut', label: 'Cut', role: Types.WellKnownMenuItemRole.cut, accelerator: 'CmdOrCtrl+X', type: 'normal', enabled: true }, { id: 'copy', label: 'Copy', role: Types.WellKnownMenuItemRole.copy, accelerator: 'CmdOrCtrl+C', type: 'normal', enabled: true }, { id: 'paste', label: 'Paste', role: Types.WellKnownMenuItemRole.paste, accelerator: 'CmdOrCtrl+V', type: 'normal', enabled: true }, { id: 'pasteAndMatchStyle', label: 'Paste and Match Style', role: Types.WellKnownMenuItemRole.pasteAndMatchStyle, accelerator: 'Shift+CmdOrCtrl+V', type: 'normal', enabled: true }, { id: 'delete', label: 'Delete', role: Types.WellKnownMenuItemRole.delete, type: 'normal', enabled: true }, { id: 'selectAll', label: 'Select All', role: Types.WellKnownMenuItemRole.selectAll, accelerator: 'CmdOrCtrl+A', type: 'normal', enabled: true }] : Array<Dynamic>), enabled: true };
     return cast null;
   }
 
-  @:keep public static function createDefaultFileMenuTemplate():MenuItemTemplate {
+  public static function createDefaultFileMenuTemplate():MenuItemTemplate {
     return cast { label: 'File', role: Types.WellKnownMenuItemRole.fileMenu, type: 'submenu', submenu: cast ([{ id: 'newFile', label: 'New', type: 'normal', accelerator: 'CmdOrCtrl+N', enabled: true }, { id: 'openFile', label: 'Open…', type: 'normal', accelerator: 'CmdOrCtrl+O', enabled: true }, { type: 'separator', enabled: true }, { id: 'saveFile', label: 'Save', type: 'normal', accelerator: 'CmdOrCtrl+S', enabled: true }, { id: 'saveFileAs', label: 'Save As…', type: 'normal', accelerator: 'Shift+CmdOrCtrl+S', enabled: true }, { type: 'separator', enabled: true }, { id: 'closeFile', label: 'Close', role: Types.WellKnownMenuItemRole.close, accelerator: 'CmdOrCtrl+W', type: 'normal', enabled: true }] : Array<Dynamic>), enabled: true };
     return cast null;
   }
 
-  @:keep public static function createDefaultHelpMenuTemplate():MenuItemTemplate {
+  public static function createDefaultHelpMenuTemplate():MenuItemTemplate {
     return cast { label: 'Help', role: Types.WellKnownMenuItemRole.helpMenu, type: 'submenu', submenu: cast ([{ id: 'help', label: 'Search', role: Types.WellKnownMenuItemRole.help, type: 'normal', enabled: true }] : Array<Dynamic>), enabled: true };
     return cast null;
   }
 
-  @:keep public static function createDefaultViewMenuTemplate():MenuItemTemplate {
+  public static function createDefaultViewMenuTemplate():MenuItemTemplate {
     return cast { label: 'View', role: Types.WellKnownMenuItemRole.viewMenu, type: 'submenu', submenu: cast ([{ id: 'reload', label: 'Reload', role: Types.WellKnownMenuItemRole.reload, accelerator: 'CmdOrCtrl+R', type: 'normal', enabled: true }, { type: 'separator', enabled: true }, { id: 'resetZoom', label: 'Actual Size', role: Types.WellKnownMenuItemRole.resetZoom, accelerator: 'CmdOrCtrl+0', type: 'normal', enabled: true }, { id: 'zoomIn', label: 'Zoom In', role: Types.WellKnownMenuItemRole.zoomIn, accelerator: 'CmdOrCtrl+Plus', type: 'normal', enabled: true }, { id: 'zoomOut', label: 'Zoom Out', role: Types.WellKnownMenuItemRole.zoomOut, accelerator: 'CmdOrCtrl+-', type: 'normal', enabled: true }, { type: 'separator', enabled: true }, { id: 'toggleFullscreen', label: 'Toggle Full Screen', role: Types.WellKnownMenuItemRole.toggleFullscreen, accelerator: 'F11', type: 'normal', enabled: true }] : Array<Dynamic>), enabled: true };
     return cast null;
   }
 
-  @:keep public static function createDefaultWindowMenuTemplate():MenuItemTemplate {
+  public static function createDefaultWindowMenuTemplate():MenuItemTemplate {
     return cast { label: 'Window', role: Types.WellKnownMenuItemRole.windowMenu, type: 'submenu', submenu: cast ([{ id: 'minimize', label: 'Minimize', role: Types.WellKnownMenuItemRole.minimize, accelerator: 'CmdOrCtrl+M', type: 'normal', enabled: true }, { id: 'close', label: 'Close', role: Types.WellKnownMenuItemRole.close, accelerator: 'CmdOrCtrl+W', type: 'normal', enabled: true }] : Array<Dynamic>), enabled: true };
     return cast null;
   }
 
-  @:keep public static function createMenuItemTemplate(?template:Dynamic):MenuItemTemplate {
+  public static function createMenuItemTemplate(?template:Dynamic):MenuItemTemplate {
     var item:MenuItemTemplate = cast FlightRuntime.UNDEFINED;
     item = FlightRuntime.mergeObjects([{ type: 'normal' }, { enabled: true }, template]);
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(item, 'submenu'), FlightRuntime.UNDEFINED))) {
@@ -181,7 +178,7 @@ class Menu {
     return cast null;
   }
 
-  @:keep public static function createWebMenuBackend():MenuBackend {
+  public static function createWebMenuBackend():MenuBackend {
     return cast { setApplicationMenu: function() {
   return cast false;
 }, popupContextMenu: function(items:Dynamic, x:Dynamic, y:Dynamic) {
@@ -194,7 +191,7 @@ class Menu {
     return cast null;
   }
 
-  @:keep public static function enableMenuSignals():MenuSignals {
+  public static function enableMenuSignals():MenuSignals {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Menu._menuSignals__menu, null))) {
   (Menu._menuSignals__menu = cast ({ onContextMenuClose: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onContextMenuOpen: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onMenuItemHighlight: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onMenuItemSelect: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) } : Dynamic));
 }
@@ -202,18 +199,18 @@ class Menu {
     return cast null;
   }
 
-  @:keep public static function getMenuBackend():MenuBackend {
+  public static function getMenuBackend():MenuBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Menu._backend__menu, null))) { (Menu._backend__menu = cast (FlightRuntime.callValue(createWebMenuBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Menu._backend__menu;
     return cast null;
   }
 
-  @:keep public static function getMenuSignals():Null<MenuSignals> {
+  public static function getMenuSignals():Null<MenuSignals> {
     return cast Menu._menuSignals__menu;
     return cast null;
   }
 
-  @:keep public static function onMenuSelect(listener:Dynamic):Dynamic {
+  public static function onMenuSelect(listener:Dynamic):Dynamic {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getMenuBackend, cast ([] : Array<Dynamic>)), 'subscribeSelect', cast ([function(id:Dynamic) {
   FlightRuntime.callValue(listener, cast ([id] : Array<Dynamic>));
   if (FlightRuntime.truthy(!FlightRuntime.strictEquals(Menu._menuSignals__menu, null))) { FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(Menu._menuSignals__menu, 'onMenuItemSelect'), id] : Array<Dynamic>)); }
@@ -221,16 +218,16 @@ class Menu {
     return cast null;
   }
 
-  @:keep public static function setApplicationMenu(items:Array<MenuItemTemplate>):Bool {
+  public static function setApplicationMenu(items:Array<MenuItemTemplate>):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getMenuBackend, cast ([] : Array<Dynamic>)), 'setApplicationMenu', cast ([items] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setMenuBackend(backend:Null<MenuBackend>):Void {
+  public static function setMenuBackend(backend:Null<MenuBackend>):Void {
     (Menu._backend__menu = cast (backend : Dynamic));
   }
 
-  @:keep public static function showContextMenu(items:Array<MenuItemTemplate>, x:Float, y:Float):flight.internal.FlightPromise<Null<String>> {
+  public static function showContextMenu(items:Array<MenuItemTemplate>, x:Float, y:Float):flight.internal.FlightPromise<Null<String>> {
     var promise:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(Menu._menuSignals__menu, null))) { FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(Menu._menuSignals__menu, 'onContextMenuOpen')] : Array<Dynamic>)); }
     promise = FlightRuntime.callProperty(FlightRuntime.callValue(getMenuBackend, cast ([] : Array<Dynamic>)), 'popupContextMenu', cast ([items, x, y] : Array<Dynamic>));
@@ -242,7 +239,7 @@ class Menu {
     return cast null;
   }
 
-  @:keep public static function showWebContextMenu__menu(items:Array<MenuItemTemplate>, x:Float, y:Float):flight.internal.FlightPromise<Null<String>> {
+  public static function showWebContextMenu__menu(items:Array<MenuItemTemplate>, x:Float, y:Float):flight.internal.FlightPromise<Null<String>> {
     return cast FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(resolve:Dynamic) {
   var overlay:Dynamic = cast FlightRuntime.UNDEFINED;
   var menu:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -329,7 +326,7 @@ class Menu {
     return cast null;
   }
 
-  @:keep public static function validateMenuItemTemplate(template:MenuItemTemplate):Null<String> {
+  public static function validateMenuItemTemplate(template:MenuItemTemplate):Null<String> {
     return cast FlightRuntime.callValue(Menu._validateItem__menu, cast ([template, FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Set'] : Array<Dynamic>)), [])] : Array<Dynamic>));
     return cast null;
   }

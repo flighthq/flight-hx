@@ -37,12 +37,9 @@ typedef TiledTilesetResolver = Dynamic;
 
 typedef TilesetGroup__tiledProject = { var firstGid:Float; var tiles:flight.internal.FlightInt16Array; var tileset:Tileset; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.TilemapFormats")
 class TilemapFormats {
-  @:keep public static function arrayField__tiledJsonParse(obj:JsonObject__tiledJsonParse, key:String):Array<JsonObject__tiledJsonParse> {
+  public static function arrayField__tiledJsonParse(obj:JsonObject__tiledJsonParse, key:String):Array<JsonObject__tiledJsonParse> {
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
     value = FlightRuntime.getIndex(obj, key);
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.isArray(value)))) { return cast cast ([] : Array<Dynamic>); }
@@ -50,52 +47,52 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function asCompression__tiledJsonParse(value:Null<String>):Null<TiledCompression> {
+  public static function asCompression__tiledJsonParse(value:Null<String>):Null<TiledCompression> {
     return cast FlightRuntime.select(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(value, 'gzip'), function():Dynamic return cast FlightRuntime.strictEquals(value, 'zlib')), function():Dynamic return cast FlightRuntime.strictEquals(value, 'zstd')), function():Dynamic return cast value, function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function asCompression__tiledXmlParse(value:Null<String>):Null<TiledCompression> {
+  public static function asCompression__tiledXmlParse(value:Null<String>):Null<TiledCompression> {
     return cast FlightRuntime.select(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(value, 'gzip'), function():Dynamic return cast FlightRuntime.strictEquals(value, 'zlib')), function():Dynamic return cast FlightRuntime.strictEquals(value, 'zstd')), function():Dynamic return cast value, function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function asOrientation__tiledJsonParse(value:Null<String>):TiledOrientation {
+  public static function asOrientation__tiledJsonParse(value:Null<String>):TiledOrientation {
     return cast FlightRuntime.select(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(value, 'isometric'), function():Dynamic return cast FlightRuntime.strictEquals(value, 'staggered')), function():Dynamic return cast FlightRuntime.strictEquals(value, 'hexagonal')), function():Dynamic return cast value, function():Dynamic return cast 'orthogonal');
     return cast null;
   }
 
-  @:keep public static function asOrientation__tiledXmlParse(value:Null<String>):TiledOrientation {
+  public static function asOrientation__tiledXmlParse(value:Null<String>):TiledOrientation {
     return cast FlightRuntime.select(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(value, 'isometric'), function():Dynamic return cast FlightRuntime.strictEquals(value, 'staggered')), function():Dynamic return cast FlightRuntime.strictEquals(value, 'hexagonal')), function():Dynamic return cast value, function():Dynamic return cast 'orthogonal');
     return cast null;
   }
 
-  @:keep public static function asPropertyType__tiledJsonParse(value:Null<String>):TiledPropertyType {
+  public static function asPropertyType__tiledJsonParse(value:Null<String>):TiledPropertyType {
     return cast FlightRuntime.select(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(value, 'int'), function():Dynamic return cast FlightRuntime.strictEquals(value, 'float')), function():Dynamic return cast FlightRuntime.strictEquals(value, 'bool')), function():Dynamic return cast FlightRuntime.strictEquals(value, 'color')), function():Dynamic return cast FlightRuntime.strictEquals(value, 'file')), function():Dynamic return cast FlightRuntime.strictEquals(value, 'object')), function():Dynamic return cast value, function():Dynamic return cast 'string');
     return cast null;
   }
 
-  @:keep public static function asPropertyType__tiledXmlParse(value:Null<String>):TiledPropertyType {
+  public static function asPropertyType__tiledXmlParse(value:Null<String>):TiledPropertyType {
     return cast FlightRuntime.select(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(value, 'int'), function():Dynamic return cast FlightRuntime.strictEquals(value, 'float')), function():Dynamic return cast FlightRuntime.strictEquals(value, 'bool')), function():Dynamic return cast FlightRuntime.strictEquals(value, 'color')), function():Dynamic return cast FlightRuntime.strictEquals(value, 'file')), function():Dynamic return cast FlightRuntime.strictEquals(value, 'object')), function():Dynamic return cast value, function():Dynamic return cast 'string');
     return cast null;
   }
 
-  @:keep public static function asRenderOrder__tiledJsonParse(value:Null<String>):TiledRenderOrder {
+  public static function asRenderOrder__tiledJsonParse(value:Null<String>):TiledRenderOrder {
     return cast FlightRuntime.select(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(value, 'right-up'), function():Dynamic return cast FlightRuntime.strictEquals(value, 'left-down')), function():Dynamic return cast FlightRuntime.strictEquals(value, 'left-up')), function():Dynamic return cast value, function():Dynamic return cast 'right-down');
     return cast null;
   }
 
-  @:keep public static function asRenderOrder__tiledXmlParse(value:Null<String>):TiledRenderOrder {
+  public static function asRenderOrder__tiledXmlParse(value:Null<String>):TiledRenderOrder {
     return cast FlightRuntime.select(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(value, 'right-up'), function():Dynamic return cast FlightRuntime.strictEquals(value, 'left-down')), function():Dynamic return cast FlightRuntime.strictEquals(value, 'left-up')), function():Dynamic return cast value, function():Dynamic return cast 'right-down');
     return cast null;
   }
 
-  @:keep public static function attr__tiledTmxFormat(name:String, value:Dynamic):String {
+  public static function attr__tiledTmxFormat(name:String, value:Dynamic):String {
     return cast ' ' + Std.string(name) + '="' + Std.string(FlightRuntime.callValue(TilemapFormats.escapeXml__tiledTmxFormat, cast ([Std.string(value)] : Array<Dynamic>))) + '"';
     return cast null;
   }
 
-  @:keep public static function attrBool__tiledXmlParse(element:XmlElement, name:String, fallback:Bool):Bool {
+  public static function attrBool__tiledXmlParse(element:XmlElement, name:String, fallback:Bool):Bool {
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
     value = FlightRuntime.callValue(getXmlElementAttribute, cast ([element, name] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(value, null))) { return cast fallback; }
@@ -103,7 +100,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function attrNumber__tiledXmlParse(element:XmlElement, name:String, fallback:Float):Float {
+  public static function attrNumber__tiledXmlParse(element:XmlElement, name:String, fallback:Float):Float {
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     value = FlightRuntime.callValue(getXmlElementAttribute, cast ([element, name] : Array<Dynamic>));
@@ -113,7 +110,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function attrString__tiledXmlParse(element:XmlElement, name:String, fallback:String):String {
+  public static function attrString__tiledXmlParse(element:XmlElement, name:String, fallback:String):String {
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
     value = FlightRuntime.callValue(getXmlElementAttribute, cast ([element, name] : Array<Dynamic>));
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(value, null), function():Dynamic return cast value, function():Dynamic return cast fallback);
@@ -122,24 +119,24 @@ class TilemapFormats {
 
   public static final BASE64_TABLE__tiledLayerData:Dynamic = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
-  @:keep public static function boolField__tiledJsonParse(obj:JsonObject__tiledJsonParse, key:String, fallback:Bool):Bool {
+  public static function boolField__tiledJsonParse(obj:JsonObject__tiledJsonParse, key:String, fallback:Bool):Bool {
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
     value = FlightRuntime.getIndex(obj, key);
     return cast FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(value), 'boolean'), function():Dynamic return cast value, function():Dynamic return cast fallback);
     return cast null;
   }
 
-  @:keep public static function buildTiledLayerBaseFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse):{ var id:Float; var name:String; var offsetX:Float; var offsetY:Float; var opacity:Float; var properties:Array<TiledProperty>; var visible:Bool; } {
+  public static function buildTiledLayerBaseFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse):{ var id:Float; var name:String; var offsetX:Float; var offsetY:Float; var opacity:Float; var properties:Array<TiledProperty>; var visible:Bool; } {
     return cast { id: FlightRuntime.callValue(TilemapFormats.numField__tiledJsonParse, cast ([obj, 'id', 0.0] : Array<Dynamic>)), name: FlightRuntime.coalesce(FlightRuntime.callValue(TilemapFormats.strField__tiledJsonParse, cast ([obj, 'name'] : Array<Dynamic>)), function():Dynamic return cast ''), offsetX: FlightRuntime.callValue(TilemapFormats.numField__tiledJsonParse, cast ([obj, 'offsetx', 0.0] : Array<Dynamic>)), offsetY: FlightRuntime.callValue(TilemapFormats.numField__tiledJsonParse, cast ([obj, 'offsety', 0.0] : Array<Dynamic>)), opacity: FlightRuntime.callValue(TilemapFormats.numField__tiledJsonParse, cast ([obj, 'opacity', 1.0] : Array<Dynamic>)), properties: FlightRuntime.callValue(TilemapFormats.buildTiledPropertiesFromJson__tiledJsonParse, cast ([obj] : Array<Dynamic>)), visible: FlightRuntime.callValue(TilemapFormats.boolField__tiledJsonParse, cast ([obj, 'visible', true] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function buildTiledLayerBaseFromXml__tiledXmlParse(element:XmlElement):{ var id:Float; var name:String; var offsetX:Float; var offsetY:Float; var opacity:Float; var properties:Array<TiledProperty>; var visible:Bool; } {
+  public static function buildTiledLayerBaseFromXml__tiledXmlParse(element:XmlElement):{ var id:Float; var name:String; var offsetX:Float; var offsetY:Float; var opacity:Float; var properties:Array<TiledProperty>; var visible:Bool; } {
     return cast { id: FlightRuntime.callValue(TilemapFormats.attrNumber__tiledXmlParse, cast ([element, 'id', 0.0] : Array<Dynamic>)), name: FlightRuntime.callValue(TilemapFormats.attrString__tiledXmlParse, cast ([element, 'name', ''] : Array<Dynamic>)), offsetX: FlightRuntime.callValue(TilemapFormats.attrNumber__tiledXmlParse, cast ([element, 'offsetx', 0.0] : Array<Dynamic>)), offsetY: FlightRuntime.callValue(TilemapFormats.attrNumber__tiledXmlParse, cast ([element, 'offsety', 0.0] : Array<Dynamic>)), opacity: FlightRuntime.callValue(TilemapFormats.attrNumber__tiledXmlParse, cast ([element, 'opacity', 1.0] : Array<Dynamic>)), properties: FlightRuntime.callValue(TilemapFormats.buildTiledPropertiesFromXml__tiledXmlParse, cast ([element] : Array<Dynamic>)), visible: FlightRuntime.callValue(TilemapFormats.attrBool__tiledXmlParse, cast ([element, 'visible', true] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function buildTiledLayerDataFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse, width:Float, height:Float, ?options:TiledParseOptions):Dynamic {
+  public static function buildTiledLayerDataFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse, width:Float, height:Float, ?options:TiledParseOptions):Dynamic {
     var grid:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var decoded:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
@@ -157,7 +154,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function buildTiledLayerDataFromXml__tiledXmlParse(element:XmlElement, width:Float, height:Float, ?options:TiledParseOptions):Dynamic {
+  public static function buildTiledLayerDataFromXml__tiledXmlParse(element:XmlElement, width:Float, height:Float, ?options:TiledParseOptions):Dynamic {
     var grid:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var encoding:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -179,7 +176,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function buildTiledLayerFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse, ?options:TiledParseOptions):Null<TiledLayer> {
+  public static function buildTiledLayerFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse, ?options:TiledParseOptions):Null<TiledLayer> {
     var base:Dynamic = cast FlightRuntime.UNDEFINED;
     var type:Dynamic = cast FlightRuntime.UNDEFINED;
     base = FlightRuntime.callValue(TilemapFormats.buildTiledLayerBaseFromJson__tiledJsonParse, cast ([obj] : Array<Dynamic>));
@@ -202,7 +199,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function buildTiledLayerFromXml__tiledXmlParse(element:XmlElement, ?options:TiledParseOptions):Null<TiledLayer> {
+  public static function buildTiledLayerFromXml__tiledXmlParse(element:XmlElement, ?options:TiledParseOptions):Null<TiledLayer> {
     var base:Dynamic = cast FlightRuntime.UNDEFINED;
     base = FlightRuntime.callValue(TilemapFormats.buildTiledLayerBaseFromXml__tiledXmlParse, cast ([element] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(element, 'name'), 'layer'))) {
@@ -229,14 +226,14 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function buildTiledObjectFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse):TiledObject {
+  public static function buildTiledObjectFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse):TiledObject {
     var gid:Dynamic = cast FlightRuntime.UNDEFINED;
     gid = FlightRuntime.field(obj, 'gid');
     return cast { ellipse: FlightRuntime.callValue(TilemapFormats.boolField__tiledJsonParse, cast ([obj, 'ellipse', false] : Array<Dynamic>)), gid: FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(gid), 'number'), function():Dynamic return cast FlightRuntime.unsignedShiftRight(Std.int(gid), Std.int(0.0)), function():Dynamic return cast null), height: FlightRuntime.callValue(TilemapFormats.numField__tiledJsonParse, cast ([obj, 'height', 0.0] : Array<Dynamic>)), id: FlightRuntime.callValue(TilemapFormats.numField__tiledJsonParse, cast ([obj, 'id', 0.0] : Array<Dynamic>)), name: FlightRuntime.coalesce(FlightRuntime.callValue(TilemapFormats.strField__tiledJsonParse, cast ([obj, 'name'] : Array<Dynamic>)), function():Dynamic return cast ''), point: FlightRuntime.callValue(TilemapFormats.boolField__tiledJsonParse, cast ([obj, 'point', false] : Array<Dynamic>)), polygon: FlightRuntime.callValue(TilemapFormats.parsePointsField__tiledJsonParse, cast ([obj, 'polygon'] : Array<Dynamic>)), polyline: FlightRuntime.callValue(TilemapFormats.parsePointsField__tiledJsonParse, cast ([obj, 'polyline'] : Array<Dynamic>)), properties: FlightRuntime.callValue(TilemapFormats.buildTiledPropertiesFromJson__tiledJsonParse, cast ([obj] : Array<Dynamic>)), type: FlightRuntime.coalesce(FlightRuntime.coalesce(FlightRuntime.callValue(TilemapFormats.strField__tiledJsonParse, cast ([obj, 'type'] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(TilemapFormats.strField__tiledJsonParse, cast ([obj, 'class'] : Array<Dynamic>))), function():Dynamic return cast ''), width: FlightRuntime.callValue(TilemapFormats.numField__tiledJsonParse, cast ([obj, 'width', 0.0] : Array<Dynamic>)), x: FlightRuntime.callValue(TilemapFormats.numField__tiledJsonParse, cast ([obj, 'x', 0.0] : Array<Dynamic>)), y: FlightRuntime.callValue(TilemapFormats.numField__tiledJsonParse, cast ([obj, 'y', 0.0] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function buildTiledObjectFromXml__tiledXmlParse(element:XmlElement):TiledObject {
+  public static function buildTiledObjectFromXml__tiledXmlParse(element:XmlElement):TiledObject {
     var gid:Dynamic = cast FlightRuntime.UNDEFINED;
     var polygon:Dynamic = cast FlightRuntime.UNDEFINED;
     var polyline:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -247,7 +244,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function buildTiledPropertiesFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse):Array<TiledProperty> {
+  public static function buildTiledPropertiesFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse):Array<TiledProperty> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(TilemapFormats.arrayField__tiledJsonParse, cast ([obj, 'properties'] : Array<Dynamic>)), 'map', cast ([function(property:Dynamic) {
   var type:Dynamic = cast FlightRuntime.UNDEFINED;
   var raw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -258,7 +255,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function buildTiledPropertiesFromXml__tiledXmlParse(element:XmlElement):Array<TiledProperty> {
+  public static function buildTiledPropertiesFromXml__tiledXmlParse(element:XmlElement):Array<TiledProperty> {
     var container:Dynamic = cast FlightRuntime.UNDEFINED;
     container = FlightRuntime.callValue(getXmlElementChildByName, cast ([element, 'properties'] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(container, null))) { return cast cast ([] : Array<Dynamic>); }
@@ -272,33 +269,33 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function buildTiledTilesetFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse):TiledTileset {
+  public static function buildTiledTilesetFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse):TiledTileset {
     return cast { columns: FlightRuntime.callValue(TilemapFormats.numField__tiledJsonParse, cast ([obj, 'columns', 0.0] : Array<Dynamic>)), image: FlightRuntime.callValue(TilemapFormats.strField__tiledJsonParse, cast ([obj, 'image'] : Array<Dynamic>)), imageHeight: FlightRuntime.callValue(TilemapFormats.numField__tiledJsonParse, cast ([obj, 'imageheight', 0.0] : Array<Dynamic>)), imageWidth: FlightRuntime.callValue(TilemapFormats.numField__tiledJsonParse, cast ([obj, 'imagewidth', 0.0] : Array<Dynamic>)), margin: FlightRuntime.callValue(TilemapFormats.numField__tiledJsonParse, cast ([obj, 'margin', 0.0] : Array<Dynamic>)), name: FlightRuntime.coalesce(FlightRuntime.callValue(TilemapFormats.strField__tiledJsonParse, cast ([obj, 'name'] : Array<Dynamic>)), function():Dynamic return cast ''), properties: FlightRuntime.callValue(TilemapFormats.buildTiledPropertiesFromJson__tiledJsonParse, cast ([obj] : Array<Dynamic>)), spacing: FlightRuntime.callValue(TilemapFormats.numField__tiledJsonParse, cast ([obj, 'spacing', 0.0] : Array<Dynamic>)), tileCount: FlightRuntime.callValue(TilemapFormats.numField__tiledJsonParse, cast ([obj, 'tilecount', 0.0] : Array<Dynamic>)), tileHeight: FlightRuntime.callValue(TilemapFormats.numField__tiledJsonParse, cast ([obj, 'tileheight', 0.0] : Array<Dynamic>)), tileWidth: FlightRuntime.callValue(TilemapFormats.numField__tiledJsonParse, cast ([obj, 'tilewidth', 0.0] : Array<Dynamic>)), tiles: FlightRuntime.callProperty(FlightRuntime.callValue(TilemapFormats.arrayField__tiledJsonParse, cast ([obj, 'tiles'] : Array<Dynamic>)), 'map', cast ([TilemapFormats.buildTiledTilesetTileFromJson__tiledJsonParse] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function buildTiledTilesetFromXml__tiledXmlParse(element:XmlElement):TiledTileset {
+  public static function buildTiledTilesetFromXml__tiledXmlParse(element:XmlElement):TiledTileset {
     var image:Dynamic = cast FlightRuntime.UNDEFINED;
     image = FlightRuntime.callValue(getXmlElementChildByName, cast ([element, 'image'] : Array<Dynamic>));
     return cast { columns: FlightRuntime.callValue(TilemapFormats.attrNumber__tiledXmlParse, cast ([element, 'columns', 0.0] : Array<Dynamic>)), image: FlightRuntime.select(!FlightRuntime.strictEquals(image, null), function():Dynamic return cast FlightRuntime.callValue(TilemapFormats.attrString__tiledXmlParse, cast ([image, 'source', ''] : Array<Dynamic>)), function():Dynamic return cast null), imageHeight: FlightRuntime.select(!FlightRuntime.strictEquals(image, null), function():Dynamic return cast FlightRuntime.callValue(TilemapFormats.attrNumber__tiledXmlParse, cast ([image, 'height', 0.0] : Array<Dynamic>)), function():Dynamic return cast 0.0), imageWidth: FlightRuntime.select(!FlightRuntime.strictEquals(image, null), function():Dynamic return cast FlightRuntime.callValue(TilemapFormats.attrNumber__tiledXmlParse, cast ([image, 'width', 0.0] : Array<Dynamic>)), function():Dynamic return cast 0.0), margin: FlightRuntime.callValue(TilemapFormats.attrNumber__tiledXmlParse, cast ([element, 'margin', 0.0] : Array<Dynamic>)), name: FlightRuntime.callValue(TilemapFormats.attrString__tiledXmlParse, cast ([element, 'name', ''] : Array<Dynamic>)), properties: FlightRuntime.callValue(TilemapFormats.buildTiledPropertiesFromXml__tiledXmlParse, cast ([element] : Array<Dynamic>)), spacing: FlightRuntime.callValue(TilemapFormats.attrNumber__tiledXmlParse, cast ([element, 'spacing', 0.0] : Array<Dynamic>)), tileCount: FlightRuntime.callValue(TilemapFormats.attrNumber__tiledXmlParse, cast ([element, 'tilecount', 0.0] : Array<Dynamic>)), tileHeight: FlightRuntime.callValue(TilemapFormats.attrNumber__tiledXmlParse, cast ([element, 'tileheight', 0.0] : Array<Dynamic>)), tileWidth: FlightRuntime.callValue(TilemapFormats.attrNumber__tiledXmlParse, cast ([element, 'tilewidth', 0.0] : Array<Dynamic>)), tiles: FlightRuntime.callProperty(FlightRuntime.callValue(getXmlElementChildrenByName, cast ([element, 'tile'] : Array<Dynamic>)), 'map', cast ([TilemapFormats.buildTiledTilesetTileFromXml__tiledXmlParse] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function buildTiledTilesetRefFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse):TiledTilesetRef {
+  public static function buildTiledTilesetRefFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse):TiledTilesetRef {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     source = FlightRuntime.callValue(TilemapFormats.strField__tiledJsonParse, cast ([obj, 'source'] : Array<Dynamic>));
     return cast { firstGid: FlightRuntime.callValue(TilemapFormats.numField__tiledJsonParse, cast ([obj, 'firstgid', 1.0] : Array<Dynamic>)), source: source, tileset: FlightRuntime.select(!FlightRuntime.strictEquals(source, null), function():Dynamic return cast null, function():Dynamic return cast FlightRuntime.callValue(TilemapFormats.buildTiledTilesetFromJson__tiledJsonParse, cast ([obj] : Array<Dynamic>))) };
     return cast null;
   }
 
-  @:keep public static function buildTiledTilesetRefFromXml__tiledXmlParse(element:XmlElement):TiledTilesetRef {
+  public static function buildTiledTilesetRefFromXml__tiledXmlParse(element:XmlElement):TiledTilesetRef {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     source = FlightRuntime.callValue(getXmlElementAttribute, cast ([element, 'source'] : Array<Dynamic>));
     return cast { firstGid: FlightRuntime.callValue(TilemapFormats.attrNumber__tiledXmlParse, cast ([element, 'firstgid', 1.0] : Array<Dynamic>)), source: source, tileset: FlightRuntime.select(!FlightRuntime.strictEquals(source, null), function():Dynamic return cast null, function():Dynamic return cast FlightRuntime.callValue(TilemapFormats.buildTiledTilesetFromXml__tiledXmlParse, cast ([element] : Array<Dynamic>))) };
     return cast null;
   }
 
-  @:keep public static function buildTiledTilesetTileFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse):TiledTilesetTile {
+  public static function buildTiledTilesetTileFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse):TiledTilesetTile {
     var animation:Dynamic = cast FlightRuntime.UNDEFINED;
     var objectGroup:Dynamic = cast FlightRuntime.UNDEFINED;
     var frames:Null<Array<TiledTilesetTileFrame>> = cast FlightRuntime.UNDEFINED;
@@ -309,7 +306,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function buildTiledTilesetTileFromXml__tiledXmlParse(element:XmlElement):TiledTilesetTile {
+  public static function buildTiledTilesetTileFromXml__tiledXmlParse(element:XmlElement):TiledTilesetTile {
     var animation:Dynamic = cast FlightRuntime.UNDEFINED;
     var objectGroup:Dynamic = cast FlightRuntime.UNDEFINED;
     var image:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -322,7 +319,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function buildTilemapLayersFromTiled(map:TiledMap, layerIndex:Float, resolveTileset:TiledTilesetResolver):Null<Array<TilemapData>> {
+  public static function buildTilemapLayersFromTiled(map:TiledMap, layerIndex:Float, resolveTileset:TiledTilesetResolver):Null<Array<TilemapData>> {
     var layer:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var width:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -373,14 +370,14 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function coercePropertyValue__tiledJsonParse(type:TiledPropertyType, raw:Dynamic):Dynamic {
+  public static function coercePropertyValue__tiledJsonParse(type:TiledPropertyType, raw:Dynamic):Dynamic {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(type, 'bool'))) { return cast FlightRuntime.strictEquals(raw, true); }
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(type, 'int'), function():Dynamic return cast FlightRuntime.strictEquals(type, 'float')))) { return cast FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(raw), 'number'), function():Dynamic return cast raw, function():Dynamic return cast 0.0); }
     return cast FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(raw), 'string'), function():Dynamic return cast raw, function():Dynamic return cast Std.string(FlightRuntime.coalesce(raw, function():Dynamic return cast '')));
     return cast null;
   }
 
-  @:keep public static function decodeBase64__tiledLayerData(s:String):Dynamic {
+  public static function decodeBase64__tiledLayerData(s:String):Dynamic {
     var stripped:Dynamic = cast FlightRuntime.UNDEFINED;
     var out:Array<Float> = cast FlightRuntime.UNDEFINED;
     stripped = FlightRuntime.replace(s, FlightRuntime.regexp('[^A-Za-z0-9+/]', 'g'), '', false);
@@ -403,7 +400,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function decodeTiledBase64Layer(text:String, compression:Null<TiledCompression>, ?inflate:TiledInflate):Null<Dynamic> {
+  public static function decodeTiledBase64Layer(text:String, compression:Null<TiledCompression>, ?inflate:TiledInflate):Null<Dynamic> {
     var bytes:Dynamic = cast FlightRuntime.UNDEFINED;
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     var gids:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -428,7 +425,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function decodeTiledCsvLayer(text:String):Dynamic {
+  public static function decodeTiledCsvLayer(text:String):Dynamic {
     var out:Array<Float> = cast FlightRuntime.UNDEFINED;
     out = cast ([] : Array<Dynamic>);
     for (part in FlightRuntime.iterable(FlightRuntime.callProperty(text, 'split', cast ([','] : Array<Dynamic>)))) {
@@ -441,14 +438,14 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function decodeTiledGid(gid:Float):TiledGid {
+  public static function decodeTiledGid(gid:Float):TiledGid {
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     g = FlightRuntime.unsignedShiftRight(Std.int(gid), Std.int(0.0));
     return cast { flipDiagonal: !FlightRuntime.strictEquals((Std.int(g) & Std.int(TilemapFormats.FLIP_DIAGONAL__tiledGid)), 0.0), flipHorizontal: !FlightRuntime.strictEquals((Std.int(g) & Std.int(TilemapFormats.FLIP_HORIZONTAL__tiledGid)), 0.0), flipVertical: !FlightRuntime.strictEquals((Std.int(g) & Std.int(TilemapFormats.FLIP_VERTICAL__tiledGid)), 0.0), tileId: (Std.int(g) & Std.int(TilemapFormats.TILE_ID_MASK__tiledGid)) };
     return cast null;
   }
 
-  @:keep public static function escapeXml__tiledTmxFormat(value:String):String {
+  public static function escapeXml__tiledTmxFormat(value:String):String {
     return cast FlightRuntime.replace(FlightRuntime.replace(FlightRuntime.replace(FlightRuntime.replace(value, FlightRuntime.regexp('&', 'g'), '&amp;', false), FlightRuntime.regexp('<', 'g'), '&lt;', false), FlightRuntime.regexp('>', 'g'), '&gt;', false), FlightRuntime.regexp('"', 'g'), '&quot;', false);
     return cast null;
   }
@@ -459,7 +456,7 @@ class TilemapFormats {
 
   public static final FLIP_VERTICAL__tiledGid:Dynamic = 1073741824.0;
 
-  @:keep public static function formatLayerBaseAttrs__tiledTmxFormat(layer:TiledLayer):String {
+  public static function formatLayerBaseAttrs__tiledTmxFormat(layer:TiledLayer):String {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = (FlightRuntime.callValue(TilemapFormats.attr__tiledTmxFormat, cast (['id', FlightRuntime.field(layer, 'id')] : Array<Dynamic>)) + FlightRuntime.callValue(TilemapFormats.attr__tiledTmxFormat, cast (['name', FlightRuntime.field(layer, 'name')] : Array<Dynamic>)));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(layer, 'opacity'), 1.0))) { (out = cast ((out + FlightRuntime.callValue(TilemapFormats.attr__tiledTmxFormat, cast (['opacity', FlightRuntime.field(layer, 'opacity')] : Array<Dynamic>))) : Dynamic)); }
@@ -470,12 +467,12 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function formatPoints__tiledTmxFormat(points:Array<{ var x:Float; var y:Float; }>):String {
+  public static function formatPoints__tiledTmxFormat(points:Array<{ var x:Float; var y:Float; }>):String {
     return cast FlightRuntime.join(FlightRuntime.callProperty(points, 'map', cast ([function(p:Dynamic) return '' + Std.string(FlightRuntime.field(p, 'x')) + ',' + Std.string(FlightRuntime.field(p, 'y')) + ''] : Array<Dynamic>)), ' ');
     return cast null;
   }
 
-  @:keep public static function formatTiledColor(packed:Float):String {
+  public static function formatTiledColor(packed:Float):String {
     var p:Dynamic = cast FlightRuntime.UNDEFINED;
     var alpha:Dynamic = cast FlightRuntime.UNDEFINED;
     var rgb:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -486,7 +483,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function formatTiledTmx(map:TiledMap):String {
+  public static function formatTiledTmx(map:TiledMap):String {
     var lines:Array<String> = cast FlightRuntime.UNDEFINED;
     var open:Dynamic = cast FlightRuntime.UNDEFINED;
     lines = cast (['<?xml version="1.0" encoding="UTF-8"?>'] : Array<Dynamic>);
@@ -511,7 +508,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function getTiledTilesetRefForGid(map:TiledMap, tileId:Float):Null<TiledTilesetRef> {
+  public static function getTiledTilesetRefForGid(map:TiledMap, tileId:Float):Null<TiledTilesetRef> {
     var best:Null<TiledTilesetRef> = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(tileId, 0.0, '<='))) { return cast null; }
     best = null;
@@ -522,36 +519,36 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function hex2__tiledColor(value:Float):String {
+  public static function hex2__tiledColor(value:Float):String {
     return cast FlightRuntime.padStart(FlightRuntime.numberToString(value, 16.0), 2.0, '0');
     return cast null;
   }
 
-  @:keep public static function hex6__tiledColor(value:Float):String {
+  public static function hex6__tiledColor(value:Float):String {
     return cast FlightRuntime.padStart(FlightRuntime.numberToString(value, 16.0), 6.0, '0');
     return cast null;
   }
 
-  @:keep public static function isJsonObject__tiledJsonParse(value:Dynamic):Bool {
+  public static function isJsonObject__tiledJsonParse(value:Dynamic):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.typeofValue(value), 'object'), function():Dynamic return cast !FlightRuntime.strictEquals(value, null)), function():Dynamic return cast !FlightRuntime.truthy(FlightRuntime.isArray(value)));
     return cast null;
   }
 
-  @:keep public static function numField__tiledJsonParse(obj:JsonObject__tiledJsonParse, key:String, fallback:Float):Float {
+  public static function numField__tiledJsonParse(obj:JsonObject__tiledJsonParse, key:String, fallback:Float):Float {
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
     value = FlightRuntime.getIndex(obj, key);
     return cast FlightRuntime.select(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.typeofValue(value), 'number'), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([value] : Array<Dynamic>))), function():Dynamic return cast value, function():Dynamic return cast fallback);
     return cast null;
   }
 
-  @:keep public static function numOrString__tiledJsonParse(value:Dynamic):Null<Dynamic> {
+  public static function numOrString__tiledJsonParse(value:Dynamic):Null<Dynamic> {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.typeofValue(value), 'number'))) { return cast value; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.typeofValue(value), 'string'))) { return cast value; }
     return cast null;
     return cast null;
   }
 
-  @:keep public static function parseJson__tiledJsonParse(text:String):Null<JsonObject__tiledJsonParse> {
+  public static function parseJson__tiledJsonParse(text:String):Null<JsonObject__tiledJsonParse> {
     var root:Dynamic = cast FlightRuntime.UNDEFINED;
     try {
   (root = cast (FlightRuntime.jsonParse(text) : Dynamic));
@@ -562,7 +559,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function parsePointsField__tiledJsonParse(obj:JsonObject__tiledJsonParse, key:String):Null<Array<Vector2Like>> {
+  public static function parsePointsField__tiledJsonParse(obj:JsonObject__tiledJsonParse, key:String):Null<Array<Vector2Like>> {
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
     value = FlightRuntime.getIndex(obj, key);
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.isArray(value)))) { return cast null; }
@@ -570,7 +567,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function parsePropertyValue__tiledXmlParse(type:TiledPropertyType, raw:String):Dynamic {
+  public static function parsePropertyValue__tiledXmlParse(type:TiledPropertyType, raw:String):Dynamic {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(type, 'bool'))) { return cast FlightRuntime.strictEquals(raw, 'true'); }
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(type, 'int'), function():Dynamic return cast FlightRuntime.strictEquals(type, 'float')))) {
   var n:Dynamic = FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), cast ([raw] : Array<Dynamic>));
@@ -580,7 +577,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function parseTiledColor(text:String):Null<Float> {
+  public static function parseTiledColor(text:String):Null<Float> {
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
     s = StringTools.trim(Std.string(text));
     if (FlightRuntime.truthy(StringTools.startsWith(s, '#'))) { (s = cast (FlightRuntime.slice(s, 1.0, null) : Dynamic)); }
@@ -599,7 +596,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function parseTiledPoints__tiledXmlParse(text:String):Array<Vector2Like> {
+  public static function parseTiledPoints__tiledXmlParse(text:String):Array<Vector2Like> {
     var points:Array<Vector2Like> = cast FlightRuntime.UNDEFINED;
     points = cast ([] : Array<Dynamic>);
     for (pair in FlightRuntime.iterable(FlightRuntime.callProperty(StringTools.trim(Std.string(text)), 'split', cast ([FlightRuntime.regexp('\\s+', '')] : Array<Dynamic>)))) {
@@ -613,7 +610,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function parseTiledTileset(text:String, ?_options:TiledParseOptions):Null<TiledTileset> {
+  public static function parseTiledTileset(text:String, ?_options:TiledParseOptions):Null<TiledTileset> {
     var root:Dynamic = cast FlightRuntime.UNDEFINED;
     root = FlightRuntime.callValue(parseXmlDocument, cast ([text] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(root, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(root, 'name'), 'tileset')))) { return cast null; }
@@ -621,7 +618,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function parseTiledTilesetJson(text:String, ?_options:TiledParseOptions):Null<TiledTileset> {
+  public static function parseTiledTilesetJson(text:String, ?_options:TiledParseOptions):Null<TiledTileset> {
     var root:Dynamic = cast FlightRuntime.UNDEFINED;
     root = FlightRuntime.callValue(TilemapFormats.parseJson__tiledJsonParse, cast ([text] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(root, null))) { return cast null; }
@@ -629,7 +626,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function parseTiledTmj(text:String, ?options:TiledParseOptions):Null<TiledMap> {
+  public static function parseTiledTmj(text:String, ?options:TiledParseOptions):Null<TiledMap> {
     var root:Dynamic = cast FlightRuntime.UNDEFINED;
     var background:Dynamic = cast FlightRuntime.UNDEFINED;
     root = FlightRuntime.callValue(TilemapFormats.parseJson__tiledJsonParse, cast ([text] : Array<Dynamic>));
@@ -639,7 +636,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function parseTiledTmx(text:String, ?options:TiledParseOptions):Null<TiledMap> {
+  public static function parseTiledTmx(text:String, ?options:TiledParseOptions):Null<TiledMap> {
     var root:Dynamic = cast FlightRuntime.UNDEFINED;
     var tilesets:Array<TiledTilesetRef> = cast FlightRuntime.UNDEFINED;
     var layers:Array<TiledLayer> = cast FlightRuntime.UNDEFINED;
@@ -660,14 +657,14 @@ class TilemapFormats {
     return cast null;
   }
 
-  @:keep public static function strField__tiledJsonParse(obj:JsonObject__tiledJsonParse, key:String):Null<String> {
+  public static function strField__tiledJsonParse(obj:JsonObject__tiledJsonParse, key:String):Null<String> {
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
     value = FlightRuntime.getIndex(obj, key);
     return cast FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(value), 'string'), function():Dynamic return cast value, function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function stringOr__tiledJsonParse(value:Null<Dynamic>, fallback:String):String {
+  public static function stringOr__tiledJsonParse(value:Null<Dynamic>, fallback:String):String {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(value, null))) { return cast fallback; }
     return cast FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(value), 'number'), function():Dynamic return cast Std.string(value), function():Dynamic return cast value);
     return cast null;
@@ -675,7 +672,7 @@ class TilemapFormats {
 
   public static final TILE_ID_MASK__tiledGid:Dynamic = 536870911.0;
 
-  @:keep public static function writeLayer__tiledTmxFormat(lines:Array<String>, layer:TiledLayer):Void {
+  public static function writeLayer__tiledTmxFormat(lines:Array<String>, layer:TiledLayer):Void {
     var base:Dynamic = cast FlightRuntime.UNDEFINED;
     base = FlightRuntime.callValue(TilemapFormats.formatLayerBaseAttrs__tiledTmxFormat, cast ([layer] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(layer, 'type'), 'tilelayer'))) {
@@ -710,7 +707,7 @@ class TilemapFormats {
     FlightRuntime.callProperty(lines, 'push', cast (['</group>'] : Array<Dynamic>));
   }
 
-  @:keep public static function writeObject__tiledTmxFormat(lines:Array<String>, object:TiledObject):Void {
+  public static function writeObject__tiledTmxFormat(lines:Array<String>, object:TiledObject):Void {
     var open:Dynamic = cast FlightRuntime.UNDEFINED;
     var hasBody:Dynamic = cast FlightRuntime.UNDEFINED;
     open = '<object' + Std.string(FlightRuntime.callValue(TilemapFormats.attr__tiledTmxFormat, cast (['id', FlightRuntime.field(object, 'id')] : Array<Dynamic>))) + '';
@@ -734,7 +731,7 @@ class TilemapFormats {
     FlightRuntime.callProperty(lines, 'push', cast (['</object>'] : Array<Dynamic>));
   }
 
-  @:keep public static function writeProperties__tiledTmxFormat(lines:Array<String>, properties:Array<TiledProperty>):Void {
+  public static function writeProperties__tiledTmxFormat(lines:Array<String>, properties:Array<TiledProperty>):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(properties, 'length'), 0.0))) { return; }
     FlightRuntime.callProperty(lines, 'push', cast (['<properties>'] : Array<Dynamic>));
     for (property in FlightRuntime.iterable(properties)) {
@@ -746,7 +743,7 @@ class TilemapFormats {
     FlightRuntime.callProperty(lines, 'push', cast (['</properties>'] : Array<Dynamic>));
   }
 
-  @:keep public static function writeTileset__tiledTmxFormat(lines:Array<String>, tileset:TiledTileset, firstGid:Float):Void {
+  public static function writeTileset__tiledTmxFormat(lines:Array<String>, tileset:TiledTileset, firstGid:Float):Void {
     var open:Dynamic = cast FlightRuntime.UNDEFINED;
     open = '<tileset' + Std.string(FlightRuntime.callValue(TilemapFormats.attr__tiledTmxFormat, cast (['firstgid', firstGid] : Array<Dynamic>))) + '' + Std.string(FlightRuntime.callValue(TilemapFormats.attr__tiledTmxFormat, cast (['name', FlightRuntime.field(tileset, 'name')] : Array<Dynamic>))) + '';
     (open = cast ((open + (FlightRuntime.callValue(TilemapFormats.attr__tiledTmxFormat, cast (['tilewidth', FlightRuntime.field(tileset, 'tileWidth')] : Array<Dynamic>)) + FlightRuntime.callValue(TilemapFormats.attr__tiledTmxFormat, cast (['tileheight', FlightRuntime.field(tileset, 'tileHeight')] : Array<Dynamic>)))) : Dynamic));
@@ -764,7 +761,7 @@ class TilemapFormats {
     FlightRuntime.callProperty(lines, 'push', cast (['</tileset>'] : Array<Dynamic>));
   }
 
-  @:keep public static function writeTilesetRef__tiledTmxFormat(lines:Array<String>, ref:TiledTilesetRef):Void {
+  public static function writeTilesetRef__tiledTmxFormat(lines:Array<String>, ref:TiledTilesetRef):Void {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(ref, 'source'), null))) {
   FlightRuntime.callProperty(lines, 'push', cast (['<tileset' + Std.string(FlightRuntime.callValue(TilemapFormats.attr__tiledTmxFormat, cast (['firstgid', FlightRuntime.field(ref, 'firstGid')] : Array<Dynamic>))) + '' + Std.string(FlightRuntime.callValue(TilemapFormats.attr__tiledTmxFormat, cast (['source', FlightRuntime.field(ref, 'source')] : Array<Dynamic>))) + '/>'] : Array<Dynamic>));
   return;
@@ -772,7 +769,7 @@ class TilemapFormats {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(ref, 'tileset'), null))) { FlightRuntime.callValue(TilemapFormats.writeTileset__tiledTmxFormat, cast ([lines, FlightRuntime.field(ref, 'tileset'), FlightRuntime.field(ref, 'firstGid')] : Array<Dynamic>)); }
   }
 
-  @:keep public static function writeTilesetTile__tiledTmxFormat(lines:Array<String>, tile:TiledTilesetTile):Void {
+  public static function writeTilesetTile__tiledTmxFormat(lines:Array<String>, tile:TiledTilesetTile):Void {
     var open:Dynamic = cast FlightRuntime.UNDEFINED;
     var hasBody:Dynamic = cast FlightRuntime.UNDEFINED;
     open = '<tile' + Std.string(FlightRuntime.callValue(TilemapFormats.attr__tiledTmxFormat, cast (['id', FlightRuntime.field(tile, 'id')] : Array<Dynamic>))) + '';

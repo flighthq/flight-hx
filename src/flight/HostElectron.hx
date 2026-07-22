@@ -132,16 +132,13 @@ typedef ElectronTrayConstructor = { @:optional var __construct:Dynamic; };
 
 typedef TrayRecord__electronTray = { var tray:ElectronTray; var title:String; var tooltip:String; var menu:Null<ElectronMenu>; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.HostElectron")
 class HostElectron {
   public static final _windows__electronWindow:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
   public static final _windowsById__electronWindow:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
 
-  @:keep public static function basename__electronDialog(path:String):String {
+  public static function basename__electronDialog(path:String):String {
     var normalized:Dynamic = cast FlightRuntime.UNDEFINED;
     var index:Dynamic = cast FlightRuntime.UNDEFINED;
     normalized = FlightRuntime.replace(path, FlightRuntime.regexp('[/\\\\]+$$', ''), '', false);
@@ -150,7 +147,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function createElectronAppBackend(electron:ElectronApi):AppBackend {
+  public static function createElectronAppBackend(electron:ElectronApi):AppBackend {
     var app:Dynamic = cast FlightRuntime.UNDEFINED;
     app = FlightRuntime.field(electron, 'app');
     return cast { addRecentDocument: function(path:Dynamic) {
@@ -259,7 +256,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function createElectronClipboardBackend(electron:ElectronApi):ClipboardBackend {
+  public static function createElectronClipboardBackend(electron:ElectronApi):ClipboardBackend {
     var cb:Dynamic = cast FlightRuntime.UNDEFINED;
     cb = FlightRuntime.field(electron, 'clipboard');
     return cast { readText: flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Dynamic> {
@@ -433,7 +430,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function createElectronDialogBackend(electron:ElectronApi):DialogBackend {
+  public static function createElectronDialogBackend(electron:ElectronApi):DialogBackend {
     var dialog:Dynamic = cast FlightRuntime.UNDEFINED;
     dialog = FlightRuntime.field(electron, 'dialog');
     return cast { openFile: flight.internal.FlightAsync.make(function(options:Dynamic):flight.internal.FlightPromise<Dynamic> {
@@ -476,7 +473,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function createElectronIpcBackend(electron:ElectronApi):IpcBackend {
+  public static function createElectronIpcBackend(electron:ElectronApi):IpcBackend {
     var ipcMain:Dynamic = cast FlightRuntime.UNDEFINED;
     ipcMain = FlightRuntime.field(electron, 'ipcMain');
     return cast { send: function() {
@@ -492,7 +489,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function createElectronMenuBackend(electron:ElectronApi):MenuBackend {
+  public static function createElectronMenuBackend(electron:ElectronApi):MenuBackend {
     var selectListener:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
     selectListener = null;
     return cast { setApplicationMenu: function(items:Dynamic) {
@@ -517,7 +514,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function createElectronNotificationBackend(electron:ElectronApi):NotificationBackend {
+  public static function createElectronNotificationBackend(electron:ElectronApi):NotificationBackend {
     var clickListener:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
     var actionListener:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
     var dismissListener:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
@@ -618,7 +615,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function createElectronPlatformBackend(electron:ElectronApi):PlatformBackend {
+  public static function createElectronPlatformBackend(electron:ElectronApi):PlatformBackend {
     return cast { getInfo: function(out:Dynamic) {
   var proc:Dynamic = cast FlightRuntime.UNDEFINED;
   proc = FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['process'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['process'] : Array<Dynamic>)) : { @:optional var platform:String; @:optional var arch:String; @:optional var getSystemVersion:Dynamic; }), function():Dynamic return cast null);
@@ -633,7 +630,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function createElectronPowerBackend(electron:ElectronApi):PowerBackend {
+  public static function createElectronPowerBackend(electron:ElectronApi):PowerBackend {
     var powerMonitor:Dynamic = cast FlightRuntime.UNDEFINED;
     var powerSaveBlocker:Dynamic = cast FlightRuntime.UNDEFINED;
     var blockerId:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -705,7 +702,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function createElectronProtocolBackend(electron:ElectronApi):ProtocolBackend {
+  public static function createElectronProtocolBackend(electron:ElectronApi):ProtocolBackend {
     var app:Dynamic = cast FlightRuntime.UNDEFINED;
     var registered:Dynamic = cast FlightRuntime.UNDEFINED;
     app = FlightRuntime.field(electron, 'app');
@@ -746,7 +743,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function createElectronScreenBackend(electron:ElectronApi):ScreenBackend {
+  public static function createElectronScreenBackend(electron:ElectronApi):ScreenBackend {
     var screen:Dynamic = cast FlightRuntime.UNDEFINED;
     screen = FlightRuntime.field(electron, 'screen');
     return cast { getScreens: function(out:Dynamic) {
@@ -801,7 +798,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function createElectronShellBackend(electron:ElectronApi):ShellBackend {
+  public static function createElectronShellBackend(electron:ElectronApi):ShellBackend {
     var shell:Dynamic = cast FlightRuntime.UNDEFINED;
     shell = FlightRuntime.field(electron, 'shell');
     return cast { openExternal: flight.internal.FlightAsync.make(function(url:Dynamic):flight.internal.FlightPromise<Dynamic> {
@@ -877,7 +874,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function createElectronShortcutBackend(electron:ElectronApi):ShortcutBackend {
+  public static function createElectronShortcutBackend(electron:ElectronApi):ShortcutBackend {
     var globalShortcut:Dynamic = cast FlightRuntime.UNDEFINED;
     var registered:Dynamic = cast FlightRuntime.UNDEFINED;
     globalShortcut = FlightRuntime.field(electron, 'globalShortcut');
@@ -906,7 +903,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function createElectronStorageBackend(electron:ElectronApi, fileName:Dynamic = 'storage.json'):StorageBackend {
+  public static function createElectronStorageBackend(electron:ElectronApi, fileName:Dynamic = 'storage.json'):StorageBackend {
     var fs:Dynamic = cast FlightRuntime.UNDEFINED;
     var store:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
     var load:Void->Dynamic = cast FlightRuntime.UNDEFINED;
@@ -963,7 +960,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function createElectronTrayBackend(electron:ElectronApi):TrayBackend {
+  public static function createElectronTrayBackend(electron:ElectronApi):TrayBackend {
     var trays:Dynamic = cast FlightRuntime.UNDEFINED;
     var nextId:Dynamic = cast FlightRuntime.UNDEFINED;
     var eventListener:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
@@ -1064,7 +1061,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function createElectronUpdaterBackend(electron:ElectronApi):UpdaterBackend {
+  public static function createElectronUpdaterBackend(electron:ElectronApi):UpdaterBackend {
     var autoUpdater:Dynamic = cast FlightRuntime.UNDEFINED;
     var channel:Dynamic = cast FlightRuntime.UNDEFINED;
     var config:UpdaterConfig = cast FlightRuntime.UNDEFINED;
@@ -1146,7 +1143,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function createElectronWindowBackend(electron:ElectronApi):WindowBackend {
+  public static function createElectronWindowBackend(electron:ElectronApi):WindowBackend {
     return cast { open: function(win:Dynamic, options:Dynamic) {
   var bw:Dynamic = cast FlightRuntime.UNDEFINED;
   var onUnmaximize:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1439,7 +1436,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function fillScreenInfo__electronScreen(out:ScreenInfo, display:ElectronDisplay, isPrimary:Bool):ScreenInfo {
+  public static function fillScreenInfo__electronScreen(out:ScreenInfo, display:ElectronDisplay, isPrimary:Bool):ScreenInfo {
     FlightRuntime.setField(out, 'id', FlightRuntime.field(display, 'id'));
     FlightRuntime.setField(out, 'x', FlightRuntime.field(FlightRuntime.field(display, 'bounds'), 'x'));
     FlightRuntime.setField(out, 'y', FlightRuntime.field(FlightRuntime.field(display, 'bounds'), 'y'));
@@ -1453,7 +1450,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function formatKey__electronClipboard(format:String):String {
+  public static function formatKey__electronClipboard(format:String):String {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(format, 'text/html'), function():Dynamic return cast FlightRuntime.strictEquals(format, 'html')))) { return cast 'html'; }
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(format, 'text/rtf'), function():Dynamic return cast FlightRuntime.strictEquals(format, 'application/rtf')), function():Dynamic return cast FlightRuntime.strictEquals(format, 'rtf')))) { return cast 'rtf'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(format, 'bookmark'))) { return cast 'bookmark'; }
@@ -1461,22 +1458,22 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function getApplicationWindowForElectronId(id:Float):Null<ApplicationWindow> {
+  public static function getApplicationWindowForElectronId(id:Float):Null<ApplicationWindow> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(HostElectron._windowsById__electronWindow, 'get', cast ([id] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getElectronBrowserWindow(win:ApplicationWindow):Null<ElectronBrowserWindow> {
+  public static function getElectronBrowserWindow(win:ApplicationWindow):Null<ElectronBrowserWindow> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(HostElectron._windows__electronWindow, 'get', cast ([(cast win : ApplicationWindow)] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getElectronWindowId(win:ApplicationWindow):Float {
+  public static function getElectronWindowId(win:ApplicationWindow):Float {
     return cast FlightRuntime.coalesce(FlightRuntime.optionalField(FlightRuntime.callProperty(HostElectron._windows__electronWindow, 'get', cast ([(cast win : ApplicationWindow)] : Array<Dynamic>)), 'id'), function():Dynamic return cast -1.0);
     return cast null;
   }
 
-  @:keep public static function registerElectronBackends(electron:ElectronApi, ?options:ElectronBackendOptions):Void {
+  public static function registerElectronBackends(electron:ElectronApi, ?options:ElectronBackendOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     FlightRuntime.callValue(setPlatformBackend, cast ([FlightRuntime.callValue(createElectronPlatformBackend, cast ([electron] : Array<Dynamic>))] : Array<Dynamic>));
     FlightRuntime.callValue(setAppBackend, cast ([FlightRuntime.callValue(createElectronAppBackend, cast ([electron] : Array<Dynamic>))] : Array<Dynamic>));
@@ -1496,7 +1493,7 @@ class HostElectron {
     FlightRuntime.callValue(setIpcBackend, cast ([FlightRuntime.callValue(createElectronIpcBackend, cast ([electron] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function toBounds__electronTray(tray:ElectronTray):Null<{ var x:Float; var y:Float; var width:Float; var height:Float; }> {
+  public static function toBounds__electronTray(tray:ElectronTray):Null<{ var x:Float; var y:Float; var width:Float; var height:Float; }> {
     try {
   var bounds:Dynamic = FlightRuntime.callProperty(tray, 'getBounds', cast ([] : Array<Dynamic>));
   return cast { x: FlightRuntime.field(bounds, 'x'), y: FlightRuntime.field(bounds, 'y'), width: FlightRuntime.field(bounds, 'width'), height: FlightRuntime.field(bounds, 'height') };
@@ -1506,14 +1503,14 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function toElectronPathName__electronApp(kind:AppPathKind):String {
+  public static function toElectronPathName__electronApp(kind:AppPathKind):String {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(kind, 'logs'))) { return cast 'logs'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(kind, 'crashDumps'))) { return cast 'crashDumps'; }
     return cast 'userData';
     return cast null;
   }
 
-  @:keep public static function toElectronTemplate__electronMenu(items:Array<MenuItemTemplate>, ?onSelect:Dynamic):Array<ElectronMenuItemOptions> {
+  public static function toElectronTemplate__electronMenu(items:Array<MenuItemTemplate>, ?onSelect:Dynamic):Array<ElectronMenuItemOptions> {
     return cast FlightRuntime.callProperty(items, 'map', cast ([function(item:Dynamic) {
   var options:ElectronMenuItemOptions = cast FlightRuntime.UNDEFINED;
   options = { id: FlightRuntime.field(item, 'id'), label: FlightRuntime.field(item, 'label'), type: FlightRuntime.field(item, 'type'), role: FlightRuntime.field(item, 'role'), accelerator: FlightRuntime.field(item, 'accelerator'), enabled: FlightRuntime.field(item, 'enabled'), checked: FlightRuntime.field(item, 'checked') };
@@ -1527,7 +1524,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function toElectronTemplate__electronTray(items:Array<MenuItemTemplate>):Array<ElectronMenuItemOptions> {
+  public static function toElectronTemplate__electronTray(items:Array<MenuItemTemplate>):Array<ElectronMenuItemOptions> {
     return cast FlightRuntime.callProperty(items, 'map', cast ([function(item:Dynamic) {
   var options:ElectronMenuItemOptions = cast FlightRuntime.UNDEFINED;
   options = { id: FlightRuntime.field(item, 'id'), label: FlightRuntime.field(item, 'label'), type: FlightRuntime.field(item, 'type'), role: FlightRuntime.field(item, 'role'), accelerator: FlightRuntime.field(item, 'accelerator'), enabled: FlightRuntime.field(item, 'enabled'), checked: FlightRuntime.field(item, 'checked') };
@@ -1537,19 +1534,19 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function toFileHandle__electronDialog(path:String, kind:String):FileDialogHandle {
+  public static function toFileHandle__electronDialog(path:String, kind:String):FileDialogHandle {
     return cast { kind: kind, name: FlightRuntime.callValue(HostElectron.basename__electronDialog, cast ([path] : Array<Dynamic>)), path: path };
     return cast null;
   }
 
-  @:keep public static function toIdleState__electronPower(state:String):PowerIdleState {
+  public static function toIdleState__electronPower(state:String):PowerIdleState {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(state, 'active'))) { return cast 'Active'; }
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(state, 'idle'), function():Dynamic return cast FlightRuntime.strictEquals(state, 'locked')))) { return cast 'Idle'; }
     return cast 'Unknown';
     return cast null;
   }
 
-  @:keep public static function toMenuItemOptions__electronApp(item:MenuItemTemplate):ElectronMenuItemOptions {
+  public static function toMenuItemOptions__electronApp(item:MenuItemTemplate):ElectronMenuItemOptions {
     var out:ElectronMenuItemOptions = cast FlightRuntime.UNDEFINED;
     out = { id: FlightRuntime.field(item, 'id'), label: FlightRuntime.field(item, 'label'), type: FlightRuntime.field(item, 'type'), role: FlightRuntime.field(item, 'role'), accelerator: FlightRuntime.field(item, 'accelerator'), enabled: FlightRuntime.field(item, 'enabled'), checked: FlightRuntime.field(item, 'checked') };
     if (FlightRuntime.truthy(FlightRuntime.field(item, 'submenu'))) { FlightRuntime.setField(out, 'submenu', FlightRuntime.callProperty(FlightRuntime.field(item, 'submenu'), 'map', cast ([HostElectron.toMenuItemOptions__electronApp] : Array<Dynamic>))); }
@@ -1557,7 +1554,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function toPlatformName__electronPlatform(platform:Null<String>):PlatformName {
+  public static function toPlatformName__electronPlatform(platform:Null<String>):PlatformName {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(platform, 'win32'))) { return cast 'windows'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(platform, 'darwin'))) { return cast 'macos'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(platform, 'linux'))) { return cast 'linux'; }
@@ -1565,7 +1562,7 @@ class HostElectron {
     return cast null;
   }
 
-  @:keep public static function toUpdateInfo__electronUpdater(args:Array<Dynamic>):UpdateInfo {
+  public static function toUpdateInfo__electronUpdater(args:Array<Dynamic>):UpdateInfo {
     return cast { version: Std.string(FlightRuntime.coalesce(FlightRuntime.getIndex(args, 2.0), function():Dynamic return cast '')), notes: Std.string(FlightRuntime.coalesce(FlightRuntime.getIndex(args, 1.0), function():Dynamic return cast '')), releaseDate: Std.string(FlightRuntime.coalesce(FlightRuntime.getIndex(args, 3.0), function():Dynamic return cast '')), deltaFromVersion: null, downloadSizeBytes: -1.0, isMandatory: false, minimumOsVersion: null, sha512: '', stagedRolloutPercent: 100.0 };
     return cast null;
   }

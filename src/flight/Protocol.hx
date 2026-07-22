@@ -9,16 +9,13 @@ import flight.Types.ParsedProtocolUrl;
 import flight.Types.ProtocolBackend;
 import flight.Types.ProtocolHandler;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Protocol")
 class Protocol {
   public static var _backend__protocol:Null<ProtocolBackend> = FlightRuntime.explicitNull();
 
   public static final _reservedSchemes__protocol:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Set'] : Array<Dynamic>)), [cast (['file', 'ftp', 'ftps', 'http', 'https', 'mailto'] : Array<Dynamic>)]);
 
-  @:keep public static function _safeDecode__protocol(s:String):String {
+  public static function _safeDecode__protocol(s:String):String {
     try {
   return cast FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['decodeURIComponent'] : Array<Dynamic>)), cast ([FlightRuntime.replace(s, FlightRuntime.regexp('\\+', 'g'), ' ', false)] : Array<Dynamic>));
 } catch (__error:Dynamic) {
@@ -31,7 +28,7 @@ class Protocol {
 
   public static final _subscriptions__protocol:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function attachProtocolHandler(handler:ProtocolHandler):Void {
+  public static function attachProtocolHandler(handler:ProtocolHandler):Void {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var pending:Dynamic = cast FlightRuntime.UNDEFINED;
     var unsubscribe:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -45,12 +42,12 @@ class Protocol {
     FlightRuntime.callProperty(Protocol._subscriptions__protocol, 'set', cast ([handler, unsubscribe] : Array<Dynamic>));
   }
 
-  @:keep public static function createProtocolHandler():ProtocolHandler {
+  public static function createProtocolHandler():ProtocolHandler {
     return cast { onOpenUrl: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createProtocolUrl(parts:Dynamic):String {
+  public static function createProtocolUrl(parts:Dynamic):String {
     var scheme:Dynamic = cast FlightRuntime.UNDEFINED;
     var host:Dynamic = cast FlightRuntime.UNDEFINED;
     var path:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -86,7 +83,7 @@ class Protocol {
     return cast null;
   }
 
-  @:keep public static function createWebProtocolBackend():ProtocolBackend {
+  public static function createWebProtocolBackend():ProtocolBackend {
     var _registeredSchemes:Array<String> = cast FlightRuntime.UNDEFINED;
     _registeredSchemes = cast ([] : Array<Dynamic>);
     return cast { register: function(scheme:Dynamic) {
@@ -135,7 +132,7 @@ class Protocol {
     return cast null;
   }
 
-  @:keep public static function detachProtocolHandler(handler:ProtocolHandler):Void {
+  public static function detachProtocolHandler(handler:ProtocolHandler):Void {
     var unsubscribe:Dynamic = cast FlightRuntime.UNDEFINED;
     unsubscribe = FlightRuntime.callProperty(Protocol._subscriptions__protocol, 'get', cast ([handler] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(unsubscribe, FlightRuntime.UNDEFINED))) {
@@ -144,37 +141,37 @@ class Protocol {
 }
   }
 
-  @:keep public static function disposeProtocolHandler(handler:ProtocolHandler):Void {
+  public static function disposeProtocolHandler(handler:ProtocolHandler):Void {
     FlightRuntime.callValue(detachProtocolHandler, cast ([handler] : Array<Dynamic>));
   }
 
-  @:keep public static function getProtocolBackend():ProtocolBackend {
+  public static function getProtocolBackend():ProtocolBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Protocol._backend__protocol, null))) { (Protocol._backend__protocol = cast (FlightRuntime.callValue(createWebProtocolBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Protocol._backend__protocol;
     return cast null;
   }
 
-  @:keep public static function getProtocolLaunchUrl():Null<String> {
+  public static function getProtocolLaunchUrl():Null<String> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getProtocolBackend, cast ([] : Array<Dynamic>)), 'getLaunchUrl', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getRegisteredProtocolSchemes():Array<String> {
+  public static function getRegisteredProtocolSchemes():Array<String> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getProtocolBackend, cast ([] : Array<Dynamic>)), 'getRegisteredSchemes', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function isProtocolSchemeDefault(scheme:String):Bool {
+  public static function isProtocolSchemeDefault(scheme:String):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getProtocolBackend, cast ([] : Array<Dynamic>)), 'isDefault', cast ([scheme] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function isProtocolSchemeRegistered(scheme:String):Bool {
+  public static function isProtocolSchemeRegistered(scheme:String):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getProtocolBackend, cast ([] : Array<Dynamic>)), 'isRegistered', cast ([scheme] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function isValidProtocolScheme(scheme:String):Bool {
+  public static function isValidProtocolScheme(scheme:String):Bool {
     var lower:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.strictEquals(FlightRuntime.typeofValue(scheme), 'string'), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(scheme, 'length'), 0.0)))) { return cast false; }
     lower = FlightRuntime.callProperty(scheme, 'toLowerCase', cast ([] : Array<Dynamic>));
@@ -183,7 +180,7 @@ class Protocol {
     return cast null;
   }
 
-  @:keep public static function parseProtocolUrl(url:String):Null<ParsedProtocolUrl> {
+  public static function parseProtocolUrl(url:String):Null<ParsedProtocolUrl> {
     var colonIdx:Dynamic = cast FlightRuntime.UNDEFINED;
     var scheme:Dynamic = cast FlightRuntime.UNDEFINED;
     var rest:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -239,13 +236,13 @@ class Protocol {
     return cast null;
   }
 
-  @:keep public static function registerProtocolScheme(scheme:String):Bool {
+  public static function registerProtocolScheme(scheme:String):Bool {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(isValidProtocolScheme, cast ([scheme] : Array<Dynamic>))))) { return cast false; }
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getProtocolBackend, cast ([] : Array<Dynamic>)), 'register', cast ([scheme] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function registerProtocolSchemes(schemes:Array<String>):Bool {
+  public static function registerProtocolSchemes(schemes:Array<String>):Bool {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var allOk:Dynamic = cast FlightRuntime.UNDEFINED;
     backend = FlightRuntime.callValue(getProtocolBackend, cast ([] : Array<Dynamic>));
@@ -257,26 +254,26 @@ class Protocol {
     return cast null;
   }
 
-  @:keep public static function removeProtocolSchemeAsDefault(scheme:String):Bool {
+  public static function removeProtocolSchemeAsDefault(scheme:String):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getProtocolBackend, cast ([] : Array<Dynamic>)), 'removeAsDefault', cast ([scheme] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setProtocolBackend(backend:Null<ProtocolBackend>):Void {
+  public static function setProtocolBackend(backend:Null<ProtocolBackend>):Void {
     (Protocol._backend__protocol = cast (backend : Dynamic));
   }
 
-  @:keep public static function setProtocolSchemeAsDefault(scheme:String):Bool {
+  public static function setProtocolSchemeAsDefault(scheme:String):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getProtocolBackend, cast ([] : Array<Dynamic>)), 'setAsDefault', cast ([scheme] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function unregisterProtocolScheme(scheme:String):Bool {
+  public static function unregisterProtocolScheme(scheme:String):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getProtocolBackend, cast ([] : Array<Dynamic>)), 'unregister', cast ([scheme] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function unregisterProtocolSchemes(schemes:Array<String>):Bool {
+  public static function unregisterProtocolSchemes(schemes:Array<String>):Bool {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var allOk:Dynamic = cast FlightRuntime.UNDEFINED;
     backend = FlightRuntime.callValue(getProtocolBackend, cast ([] : Array<Dynamic>));

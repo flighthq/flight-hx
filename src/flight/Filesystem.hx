@@ -14,39 +14,36 @@ import flight.Types.FileSystemUsage;
 import flight.Types.FileWalkOptions;
 import flight.Types.FileWatchEvent;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Filesystem")
 class Filesystem {
   public static var _backend__filesystem:Null<Dynamic> = FlightRuntime.explicitNull();
 
-  @:keep public static function appendTextFile(path:String, data:String):flight.internal.FlightPromise<Bool> {
+  public static function appendTextFile(path:String, data:String):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'appendTextFile', cast ([path, data] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function asAsyncEntries__filesystem(dir:Dynamic):Dynamic {
+  public static function asAsyncEntries__filesystem(dir:Dynamic):Dynamic {
     return cast FlightRuntime.callProperty((cast (cast dir : Dynamic) : { var entries:Dynamic; }), 'entries', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function canAccessFile(path:String, mode:String):flight.internal.FlightPromise<Bool> {
+  public static function canAccessFile(path:String, mode:String):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'canAccessFile', cast ([path, mode] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function copyFile(from:String, to:String):flight.internal.FlightPromise<Bool> {
+  public static function copyFile(from:String, to:String):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'copy', cast ([from, to] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createFileSymlink(target:String, linkPath:String):flight.internal.FlightPromise<Bool> {
+  public static function createFileSymlink(target:String, linkPath:String):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'createFileSymlink', cast ([target, linkPath] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createWebFileSystemBackend():Dynamic {
+  public static function createWebFileSystemBackend():Dynamic {
     return cast { readTextFile: flight.internal.FlightAsync.make(function(path:Dynamic):flight.internal.FlightPromise<Dynamic> {
   var handle:Dynamic = cast FlightRuntime.UNDEFINED;
   handle = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, false] : Array<Dynamic>)));
@@ -323,37 +320,36 @@ class Filesystem {
     return cast null;
   }
 
-  @:keep public static function directoryExists(path:String):flight.internal.FlightPromise<Bool> {
+  public static function directoryExists(path:String):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'directoryExists', cast ([path] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function fileExists(path:String):flight.internal.FlightPromise<Bool> {
+  public static function fileExists(path:String):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'fileExists', cast ([path] : Array<Dynamic>));
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function findFiles(rootPath:String, pattern:String):flight.internal.FlightPromise<Array<FileEntry>> {
-    var all:Dynamic = cast FlightRuntime.UNDEFINED;
-    var re:Dynamic = cast FlightRuntime.UNDEFINED;
-    all = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readDirectoryRecursive', cast ([rootPath] : Array<Dynamic>)));
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(all, 'length'), 0.0))) { return cast cast ([] : Array<Dynamic>); }
-    re = FlightRuntime.callValue(Filesystem.globToRegExp__filesystem, cast ([pattern] : Array<Dynamic>));
-    return cast FlightRuntime.callProperty(all, 'filter', cast ([function(entry:Dynamic) return FlightRuntime.orValue(FlightRuntime.callProperty(re, 'test', cast ([FlightRuntime.field(entry, 'name')] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callProperty(re, 'test', cast ([FlightRuntime.field(entry, 'path')] : Array<Dynamic>)))] : Array<Dynamic>));
-    return cast null;
+  public static function findFiles(rootPath:String, pattern:String):flight.internal.FlightPromise<Array<FileEntry>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Array<FileEntry>> {
+      var all:Dynamic = cast FlightRuntime.UNDEFINED;
+      var re:Dynamic = cast FlightRuntime.UNDEFINED;
+      all = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readDirectoryRecursive', cast ([rootPath] : Array<Dynamic>)));
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(all, 'length'), 0.0))) { return cast cast ([] : Array<Dynamic>); }
+      re = FlightRuntime.callValue(Filesystem.globToRegExp__filesystem, cast ([pattern] : Array<Dynamic>));
+      return cast FlightRuntime.callProperty(all, 'filter', cast ([function(entry:Dynamic) return FlightRuntime.orValue(FlightRuntime.callProperty(re, 'test', cast ([FlightRuntime.field(entry, 'name')] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callProperty(re, 'test', cast ([FlightRuntime.field(entry, 'path')] : Array<Dynamic>)))] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  @:keep public static function getFileBaseName(path:String):String {
+  public static function getFileBaseName(path:String):String {
     var segments:Dynamic = cast FlightRuntime.UNDEFINED;
     segments = FlightRuntime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>));
     return cast FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.field(segments, 'length'), 0.0), function():Dynamic return cast '', function():Dynamic return cast (cast FlightRuntime.getIndex(segments, (FlightRuntime.field(segments, 'length') - 1.0)) : String));
     return cast null;
   }
 
-  @:keep public static function getFileDirectoryName(path:String):String {
+  public static function getFileDirectoryName(path:String):String {
     var segments:Dynamic = cast FlightRuntime.UNDEFINED;
     segments = FlightRuntime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(segments, 'length'), 1.0, '<='))) { return cast ''; }
@@ -361,7 +357,7 @@ class Filesystem {
     return cast null;
   }
 
-  @:keep public static function getFileExtensionName(path:String):String {
+  public static function getFileExtensionName(path:String):String {
     var base:Dynamic = cast FlightRuntime.UNDEFINED;
     var dot:Dynamic = cast FlightRuntime.UNDEFINED;
     base = FlightRuntime.callValue(getFileBaseName, cast ([path] : Array<Dynamic>));
@@ -370,39 +366,37 @@ class Filesystem {
     return cast null;
   }
 
-  @:keep public static function getFilePermissions(path:String):flight.internal.FlightPromise<Null<FilePermissions>> {
+  public static function getFilePermissions(path:String):flight.internal.FlightPromise<Null<FilePermissions>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'getFilePermissions', cast ([path] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getFileRealPath(path:String):flight.internal.FlightPromise<Null<String>> {
+  public static function getFileRealPath(path:String):flight.internal.FlightPromise<Null<String>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'getFileRealPath', cast ([path] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getFileSystemBackend():Dynamic {
+  public static function getFileSystemBackend():Dynamic {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Filesystem._backend__filesystem, null))) { (Filesystem._backend__filesystem = cast (FlightRuntime.callValue(createWebFileSystemBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Filesystem._backend__filesystem;
     return cast null;
   }
 
-  @:keep public static function getFileSystemPath(kind:Dynamic):String {
+  public static function getFileSystemPath(kind:Dynamic):String {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'getPath', cast ([kind] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getFileSystemUsage():flight.internal.FlightPromise<Null<Dynamic>> {
+  public static function getFileSystemUsage():flight.internal.FlightPromise<Null<Dynamic>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'getFileSystemUsage', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function getWebDirectoryHandle__filesystem(root:Dynamic, segments:Array<String>, create:Bool):flight.internal.FlightPromise<Null<Dynamic>> {
-    var current:Dynamic = cast FlightRuntime.UNDEFINED;
-    current = root;
-    try {
+  public static function getWebDirectoryHandle__filesystem(root:Dynamic, segments:Array<String>, create:Bool):flight.internal.FlightPromise<Null<Dynamic>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Null<Dynamic>> {
+      var current:Dynamic = cast FlightRuntime.UNDEFINED;
+      current = root;
+      try {
   for (segment in FlightRuntime.iterable(segments)) {
     (current = cast (flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(current, 'getDirectoryHandle', cast ([segment, { create: create }] : Array<Dynamic>))) : Dynamic));
   }
@@ -410,47 +404,46 @@ class Filesystem {
 } catch (__error:Dynamic) {
   return cast null;
 }
-    return cast null;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function getWebFileHandle__filesystem(path:String, create:Bool):flight.internal.FlightPromise<Null<Dynamic>> {
-    var root:Dynamic = cast FlightRuntime.UNDEFINED;
-    var segments:Dynamic = cast FlightRuntime.UNDEFINED;
-    var parent:Dynamic = cast FlightRuntime.UNDEFINED;
-    root = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)));
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(root, null))) { return cast null; }
-    segments = FlightRuntime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>));
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(segments, 'length'), 0.0))) { return cast null; }
-    parent = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, FlightRuntime.slice(segments, 0.0, -1.0), create] : Array<Dynamic>)));
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(parent, null))) { return cast null; }
-    try {
+  public static function getWebFileHandle__filesystem(path:String, create:Bool):flight.internal.FlightPromise<Null<Dynamic>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Null<Dynamic>> {
+      var root:Dynamic = cast FlightRuntime.UNDEFINED;
+      var segments:Dynamic = cast FlightRuntime.UNDEFINED;
+      var parent:Dynamic = cast FlightRuntime.UNDEFINED;
+      root = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)));
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(root, null))) { return cast null; }
+      segments = FlightRuntime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>));
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(segments, 'length'), 0.0))) { return cast null; }
+      parent = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, FlightRuntime.slice(segments, 0.0, -1.0), create] : Array<Dynamic>)));
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(parent, null))) { return cast null; }
+      try {
   return cast flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(parent, 'getFileHandle', cast ([FlightRuntime.getIndex(segments, (FlightRuntime.field(segments, 'length') - 1.0)), { create: create }] : Array<Dynamic>)));
 } catch (__error:Dynamic) {
   return cast null;
 }
-    return cast null;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function getWebRoot__filesystem():flight.internal.FlightPromise<Null<Dynamic>> {
-    var storage:Dynamic = cast FlightRuntime.UNDEFINED;
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
-    storage = FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'storage');
-    if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(storage, FlightRuntime.UNDEFINED), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(storage, 'getDirectory')), 'function')))) { return cast null; }
-    try {
+  public static function getWebRoot__filesystem():flight.internal.FlightPromise<Null<Dynamic>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Null<Dynamic>> {
+      var storage:Dynamic = cast FlightRuntime.UNDEFINED;
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
+      storage = FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'storage');
+      if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(storage, FlightRuntime.UNDEFINED), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(storage, 'getDirectory')), 'function')))) { return cast null; }
+      try {
   return cast flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(storage, 'getDirectory', cast ([] : Array<Dynamic>)));
 } catch (__error:Dynamic) {
   return cast null;
 }
-    return cast null;
+      return cast null;
+    })();
   }
 
-  @:keep public static function globToRegExp__filesystem(pattern:String):Dynamic {
+  public static function globToRegExp__filesystem(pattern:String):Dynamic {
     var re:Dynamic = cast FlightRuntime.UNDEFINED;
     re = '^';
     {
@@ -480,7 +473,7 @@ class Filesystem {
     return cast null;
   }
 
-  @:keep public static function isAbsoluteFilePath(path:String):Bool {
+  public static function isAbsoluteFilePath(path:String):Bool {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(path, 'length'), 0.0))) { return cast false; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.getIndex(path, 0.0), '/'))) { return cast true; }
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.compare(FlightRuntime.field(path, 'length'), 2.0, '>='), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.regexp('^[A-Za-z]:', ''), 'test', cast ([path] : Array<Dynamic>))))) { return cast true; }
@@ -488,7 +481,7 @@ class Filesystem {
     return cast null;
   }
 
-  @:keep public static function joinFilePath(...segments:String):String {
+  public static function joinFilePath(...segments:String):String {
     var parts:Array<String> = cast FlightRuntime.UNDEFINED;
     var prefix:Dynamic = cast FlightRuntime.UNDEFINED;
     parts = cast ([] : Array<Dynamic>);
@@ -503,12 +496,12 @@ class Filesystem {
     return cast null;
   }
 
-  @:keep public static function makeDirectory(path:String):flight.internal.FlightPromise<Bool> {
+  public static function makeDirectory(path:String):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'makeDirectory', cast ([path] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function normalizeFilePath(path:String):String {
+  public static function normalizeFilePath(path:String):String {
     var parts:Dynamic = cast FlightRuntime.UNDEFINED;
     var prefix:Dynamic = cast FlightRuntime.UNDEFINED;
     parts = FlightRuntime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>));
@@ -517,39 +510,37 @@ class Filesystem {
     return cast null;
   }
 
-  @:keep public static function normalizeWebPath__filesystem(path:String):String {
+  public static function normalizeWebPath__filesystem(path:String):String {
     return cast FlightRuntime.join(FlightRuntime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>)), '/');
     return cast null;
   }
 
-  @:keep public static function openFileReadStream(path:String):flight.internal.FlightPromise<Null<Dynamic>> {
+  public static function openFileReadStream(path:String):flight.internal.FlightPromise<Null<Dynamic>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'openFileReadStream', cast ([path] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function openFileWriteStream(path:String):flight.internal.FlightPromise<Null<Dynamic>> {
+  public static function openFileWriteStream(path:String):flight.internal.FlightPromise<Null<Dynamic>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'openFileWriteStream', cast ([path] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function readBinaryFile(path:String):flight.internal.FlightPromise<Null<Dynamic>> {
+  public static function readBinaryFile(path:String):flight.internal.FlightPromise<Null<Dynamic>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readBinaryFile', cast ([path] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function readBinaryFileRange(path:String, offset:Float, length:Float):flight.internal.FlightPromise<Null<Dynamic>> {
+  public static function readBinaryFileRange(path:String, offset:Float, length:Float):flight.internal.FlightPromise<Null<Dynamic>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readBinaryFileRange', cast ([path, offset, length] : Array<Dynamic>));
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function readDialogHandleBinaryFile(handle:FileDialogHandle):flight.internal.FlightPromise<Null<Dynamic>> {
-    var fsHandle:Dynamic = cast FlightRuntime.UNDEFINED;
-    if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(handle, 'path'), null))) { return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readBinaryFile', cast ([FlightRuntime.field(handle, 'path')] : Array<Dynamic>)); }
-    fsHandle = FlightRuntime.callValue(getWebFileSystemHandle, cast ([handle] : Array<Dynamic>));
-    if (FlightRuntime.truthy(!FlightRuntime.strictEquals(fsHandle, null))) {
+  public static function readDialogHandleBinaryFile(handle:FileDialogHandle):flight.internal.FlightPromise<Null<Dynamic>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Null<Dynamic>> {
+      var fsHandle:Dynamic = cast FlightRuntime.UNDEFINED;
+      if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(handle, 'path'), null))) { return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readBinaryFile', cast ([FlightRuntime.field(handle, 'path')] : Array<Dynamic>)); }
+      fsHandle = FlightRuntime.callValue(getWebFileSystemHandle, cast ([handle] : Array<Dynamic>));
+      if (FlightRuntime.truthy(!FlightRuntime.strictEquals(fsHandle, null))) {
   try {
   var file:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(fsHandle, 'getFile', cast ([] : Array<Dynamic>)));
   return cast FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(file, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
@@ -557,19 +548,18 @@ class Filesystem {
   return cast null;
 }
 }
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(handle, 'name'), ''))) { return cast null; }
-    return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readBinaryFile', cast ([FlightRuntime.field(handle, 'name')] : Array<Dynamic>));
-    return cast null;
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(handle, 'name'), ''))) { return cast null; }
+      return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readBinaryFile', cast ([FlightRuntime.field(handle, 'name')] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function readDialogHandleTextFile(handle:FileDialogHandle):flight.internal.FlightPromise<Null<String>> {
-    var fsHandle:Dynamic = cast FlightRuntime.UNDEFINED;
-    if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(handle, 'path'), null))) { return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readTextFile', cast ([FlightRuntime.field(handle, 'path')] : Array<Dynamic>)); }
-    fsHandle = FlightRuntime.callValue(getWebFileSystemHandle, cast ([handle] : Array<Dynamic>));
-    if (FlightRuntime.truthy(!FlightRuntime.strictEquals(fsHandle, null))) {
+  public static function readDialogHandleTextFile(handle:FileDialogHandle):flight.internal.FlightPromise<Null<String>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Null<String>> {
+      var fsHandle:Dynamic = cast FlightRuntime.UNDEFINED;
+      if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(handle, 'path'), null))) { return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readTextFile', cast ([FlightRuntime.field(handle, 'path')] : Array<Dynamic>)); }
+      fsHandle = FlightRuntime.callValue(getWebFileSystemHandle, cast ([handle] : Array<Dynamic>));
+      if (FlightRuntime.truthy(!FlightRuntime.strictEquals(fsHandle, null))) {
   try {
   var file:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(fsHandle, 'getFile', cast ([] : Array<Dynamic>)));
   return cast flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(file, 'text', cast ([] : Array<Dynamic>)));
@@ -577,112 +567,110 @@ class Filesystem {
   return cast null;
 }
 }
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(handle, 'name'), ''))) { return cast null; }
-    return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readTextFile', cast ([FlightRuntime.field(handle, 'name')] : Array<Dynamic>));
-    return cast null;
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(handle, 'name'), ''))) { return cast null; }
+      return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readTextFile', cast ([FlightRuntime.field(handle, 'name')] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  @:keep public static function readDirectory(path:String):flight.internal.FlightPromise<Array<FileEntry>> {
+  public static function readDirectory(path:String):flight.internal.FlightPromise<Array<FileEntry>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readDirectory', cast ([path] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function readDirectoryRecursive(path:String, ?options:FileWalkOptions):flight.internal.FlightPromise<Array<FileEntry>> {
+  public static function readDirectoryRecursive(path:String, ?options:FileWalkOptions):flight.internal.FlightPromise<Array<FileEntry>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readDirectoryRecursive', cast ([path, options] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function readFileSymlink(path:String):flight.internal.FlightPromise<Null<String>> {
+  public static function readFileSymlink(path:String):flight.internal.FlightPromise<Null<String>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readFileSymlink', cast ([path] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function readTextFile(path:String):flight.internal.FlightPromise<Null<String>> {
+  public static function readTextFile(path:String):flight.internal.FlightPromise<Null<String>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'readTextFile', cast ([path] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function removeDirectory(path:String, ?recursive:Bool):flight.internal.FlightPromise<Bool> {
+  public static function removeDirectory(path:String, ?recursive:Bool):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'removeDirectory', cast ([path, recursive] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function removeFile(path:String):flight.internal.FlightPromise<Bool> {
+  public static function removeFile(path:String):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'removeFile', cast ([path] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function renameFile(from:String, to:String):flight.internal.FlightPromise<Bool> {
+  public static function renameFile(from:String, to:String):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'rename', cast ([from, to] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setFilePermissions(path:String, permissions:FilePermissions):flight.internal.FlightPromise<Bool> {
+  public static function setFilePermissions(path:String, permissions:FilePermissions):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'setFilePermissions', cast ([path, permissions] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setFileSystemBackend(backend:Null<Dynamic>):Void {
+  public static function setFileSystemBackend(backend:Null<Dynamic>):Void {
     (Filesystem._backend__filesystem = cast (backend : Dynamic));
   }
 
-  @:keep public static function splitWebPath__filesystem(path:String):Array<String> {
+  public static function splitWebPath__filesystem(path:String):Array<String> {
     return cast FlightRuntime.callProperty(FlightRuntime.callProperty(path, 'split', cast (['/'] : Array<Dynamic>)), 'filter', cast ([function(segment:Dynamic) return FlightRuntime.andValue(!FlightRuntime.strictEquals(segment, ''), function():Dynamic return cast !FlightRuntime.strictEquals(segment, '.'))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function statFile(path:String):flight.internal.FlightPromise<Null<FileStat>> {
+  public static function statFile(path:String):flight.internal.FlightPromise<Null<FileStat>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'statFile', cast ([path] : Array<Dynamic>));
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function walkWebDirectory__filesystem(dir:Dynamic, basePath:String, out:Array<FileEntry>, depth:Float, maxDepth:Float):flight.internal.FlightPromise<flight.internal.FlightNothing> {
-    {
-      var __asyncIterator8:Dynamic = FlightRuntime.asyncIterator(FlightRuntime.callValue(Filesystem.asAsyncEntries__filesystem, cast ([dir] : Array<Dynamic>)));
-      while (true) {
-        var __asyncStep9:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(__asyncIterator8, 'next', cast ([] : Array<Dynamic>)));
-        if (FlightRuntime.truthy(FlightRuntime.field(__asyncStep9, 'done'))) break;
-        var __iteration1:Dynamic = FlightRuntime.field(__asyncStep9, 'value');
-        var name:Dynamic = FlightRuntime.getIndex(__iteration1, 0.0);
-        var handle:Dynamic = FlightRuntime.getIndex(__iteration1, 1.0);
-        var entryPath:Dynamic = FlightRuntime.select(FlightRuntime.strictEquals(basePath, ''), function():Dynamic return cast name, function():Dynamic return cast '' + Std.string(basePath) + '/' + Std.string(name) + '');
-        var isDirectory:Dynamic = FlightRuntime.strictEquals(FlightRuntime.field(handle, 'kind'), 'directory');
-        FlightRuntime.callProperty(out, 'push', cast ([{ name: name, path: entryPath, isDirectory: isDirectory }] : Array<Dynamic>));
-        if (FlightRuntime.truthy(FlightRuntime.andValue(isDirectory, function():Dynamic return cast FlightRuntime.compare(depth, maxDepth, '<')))) {
+  public static function walkWebDirectory__filesystem(dir:Dynamic, basePath:String, out:Array<FileEntry>, depth:Float, maxDepth:Float):flight.internal.FlightPromise<flight.internal.FlightNothing> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<flight.internal.FlightNothing> {
+      {
+        var __asyncIterator8:Dynamic = FlightRuntime.asyncIterator(FlightRuntime.callValue(Filesystem.asAsyncEntries__filesystem, cast ([dir] : Array<Dynamic>)));
+        while (true) {
+          var __asyncStep9:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(__asyncIterator8, 'next', cast ([] : Array<Dynamic>)));
+          if (FlightRuntime.truthy(FlightRuntime.field(__asyncStep9, 'done'))) break;
+          var __iteration1:Dynamic = FlightRuntime.field(__asyncStep9, 'value');
+          var name:Dynamic = FlightRuntime.getIndex(__iteration1, 0.0);
+          var handle:Dynamic = FlightRuntime.getIndex(__iteration1, 1.0);
+          var entryPath:Dynamic = FlightRuntime.select(FlightRuntime.strictEquals(basePath, ''), function():Dynamic return cast name, function():Dynamic return cast '' + Std.string(basePath) + '/' + Std.string(name) + '');
+          var isDirectory:Dynamic = FlightRuntime.strictEquals(FlightRuntime.field(handle, 'kind'), 'directory');
+          FlightRuntime.callProperty(out, 'push', cast ([{ name: name, path: entryPath, isDirectory: isDirectory }] : Array<Dynamic>));
+          if (FlightRuntime.truthy(FlightRuntime.andValue(isDirectory, function():Dynamic return cast FlightRuntime.compare(depth, maxDepth, '<')))) {
   flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(Filesystem.walkWebDirectory__filesystem, cast ([(cast handle : Dynamic), entryPath, out, (depth + 1.0), maxDepth] : Array<Dynamic>)));
 }
+        }
       }
-    }
-    #if js
-    return;
-    #else
-    return cast null;
-    #end
+      #if js
+      return;
+      #else
+      return cast null;
+      #end
+    })();
   }
 
-  @:keep public static function watchPath(path:String, listener:Dynamic):Dynamic {
+  public static function watchPath(path:String, listener:Dynamic):Dynamic {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'watch', cast ([path, listener] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function writeBinaryFile(path:String, data:Dynamic):flight.internal.FlightPromise<Bool> {
+  public static function writeBinaryFile(path:String, data:Dynamic):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'writeBinaryFile', cast ([path, data] : Array<Dynamic>));
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function writeBinaryFileChunks(path:String, chunks:Dynamic):flight.internal.FlightPromise<Bool> {
-    var stream:Dynamic = cast FlightRuntime.UNDEFINED;
-    var writer:Dynamic = cast FlightRuntime.UNDEFINED;
-    stream = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'openFileWriteStream', cast ([path] : Array<Dynamic>)));
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(stream, null))) { return cast false; }
-    writer = FlightRuntime.callProperty(stream, 'getWriter', cast ([] : Array<Dynamic>));
-    try {
+  public static function writeBinaryFileChunks(path:String, chunks:Dynamic):flight.internal.FlightPromise<Bool> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Bool> {
+      var stream:Dynamic = cast FlightRuntime.UNDEFINED;
+      var writer:Dynamic = cast FlightRuntime.UNDEFINED;
+      stream = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'openFileWriteStream', cast ([path] : Array<Dynamic>)));
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(stream, null))) { return cast false; }
+      writer = FlightRuntime.callProperty(stream, 'getWriter', cast ([] : Array<Dynamic>));
+      try {
   {
     var __asyncIterator10:Dynamic = FlightRuntime.asyncIterator(chunks);
     while (true) {
@@ -698,18 +686,17 @@ class Filesystem {
   flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(writer, 'abort', cast ([] : Array<Dynamic>)));
   return cast false;
 }
-    return cast null;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function writeDialogHandleBinaryFile(handle:FileDialogHandle, data:Dynamic):flight.internal.FlightPromise<Bool> {
-    var fsHandle:Dynamic = cast FlightRuntime.UNDEFINED;
-    if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(handle, 'path'), null))) { return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'writeBinaryFile', cast ([FlightRuntime.field(handle, 'path'), data] : Array<Dynamic>)); }
-    fsHandle = FlightRuntime.callValue(getWebFileSystemHandle, cast ([handle] : Array<Dynamic>));
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(fsHandle, null))) { return cast false; }
-    try {
+  public static function writeDialogHandleBinaryFile(handle:FileDialogHandle, data:Dynamic):flight.internal.FlightPromise<Bool> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Bool> {
+      var fsHandle:Dynamic = cast FlightRuntime.UNDEFINED;
+      if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(handle, 'path'), null))) { return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'writeBinaryFile', cast ([FlightRuntime.field(handle, 'path'), data] : Array<Dynamic>)); }
+      fsHandle = FlightRuntime.callValue(getWebFileSystemHandle, cast ([handle] : Array<Dynamic>));
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(fsHandle, null))) { return cast false; }
+      try {
   var writable:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(fsHandle, 'createWritable', cast ([] : Array<Dynamic>)));
   flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(writable, 'write', cast ([FlightRuntime.slice(data, 0, null)] : Array<Dynamic>)));
   flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(writable, 'close', cast ([] : Array<Dynamic>)));
@@ -717,18 +704,17 @@ class Filesystem {
 } catch (__error:Dynamic) {
   return cast false;
 }
-    return cast null;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function writeDialogHandleTextFile(handle:FileDialogHandle, data:String):flight.internal.FlightPromise<Bool> {
-    var fsHandle:Dynamic = cast FlightRuntime.UNDEFINED;
-    if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(handle, 'path'), null))) { return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'writeTextFile', cast ([FlightRuntime.field(handle, 'path'), data] : Array<Dynamic>)); }
-    fsHandle = FlightRuntime.callValue(getWebFileSystemHandle, cast ([handle] : Array<Dynamic>));
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(fsHandle, null))) { return cast false; }
-    try {
+  public static function writeDialogHandleTextFile(handle:FileDialogHandle, data:String):flight.internal.FlightPromise<Bool> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Bool> {
+      var fsHandle:Dynamic = cast FlightRuntime.UNDEFINED;
+      if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(handle, 'path'), null))) { return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'writeTextFile', cast ([FlightRuntime.field(handle, 'path'), data] : Array<Dynamic>)); }
+      fsHandle = FlightRuntime.callValue(getWebFileSystemHandle, cast ([handle] : Array<Dynamic>));
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(fsHandle, null))) { return cast false; }
+      try {
   var writable:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(fsHandle, 'createWritable', cast ([] : Array<Dynamic>)));
   flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(writable, 'write', cast ([data] : Array<Dynamic>)));
   flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(writable, 'close', cast ([] : Array<Dynamic>)));
@@ -736,27 +722,26 @@ class Filesystem {
 } catch (__error:Dynamic) {
   return cast false;
 }
-    return cast null;
+      return cast null;
+    })();
   }
 
-  @:keep public static function writeFileAtomic(path:String, data:Dynamic):flight.internal.FlightPromise<Bool> {
+  public static function writeFileAtomic(path:String, data:Dynamic):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'writeFileAtomic', cast ([path, data] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function writeTextFile(path:String, data:String):flight.internal.FlightPromise<Bool> {
+  public static function writeTextFile(path:String, data:String):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getFileSystemBackend, cast ([] : Array<Dynamic>)), 'writeTextFile', cast ([path, data] : Array<Dynamic>));
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function writeWebFile__filesystem(path:String, data:Dynamic):flight.internal.FlightPromise<Bool> {
-    var handle:Dynamic = cast FlightRuntime.UNDEFINED;
-    handle = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, true] : Array<Dynamic>)));
-    if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(handle, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(handle, 'createWritable')), 'function')))) { return cast false; }
-    try {
+  public static function writeWebFile__filesystem(path:String, data:Dynamic):flight.internal.FlightPromise<Bool> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Bool> {
+      var handle:Dynamic = cast FlightRuntime.UNDEFINED;
+      handle = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(Filesystem.getWebFileHandle__filesystem, cast ([path, true] : Array<Dynamic>)));
+      if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(handle, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(handle, 'createWritable')), 'function')))) { return cast false; }
+      try {
   var writable:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(handle, 'createWritable', cast ([] : Array<Dynamic>)));
   flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(writable, 'write', cast ([(cast data : Dynamic)] : Array<Dynamic>)));
   flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(writable, 'close', cast ([] : Array<Dynamic>)));
@@ -764,20 +749,19 @@ class Filesystem {
 } catch (__error:Dynamic) {
   return cast false;
 }
-    return cast null;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function writeWebRemove__filesystem(path:String, isDirectory:Bool):flight.internal.FlightPromise<Bool> {
-    var root:Dynamic = cast FlightRuntime.UNDEFINED;
-    var segments:Dynamic = cast FlightRuntime.UNDEFINED;
-    root = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)));
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(root, null))) { return cast false; }
-    segments = FlightRuntime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>));
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(segments, 'length'), 0.0))) { return cast false; }
-    try {
+  public static function writeWebRemove__filesystem(path:String, isDirectory:Bool):flight.internal.FlightPromise<Bool> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Bool> {
+      var root:Dynamic = cast FlightRuntime.UNDEFINED;
+      var segments:Dynamic = cast FlightRuntime.UNDEFINED;
+      root = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(Filesystem.getWebRoot__filesystem, cast ([] : Array<Dynamic>)));
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(root, null))) { return cast false; }
+      segments = FlightRuntime.callValue(Filesystem.splitWebPath__filesystem, cast ([path] : Array<Dynamic>));
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(segments, 'length'), 0.0))) { return cast false; }
+      try {
   var parent:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(Filesystem.getWebDirectoryHandle__filesystem, cast ([root, FlightRuntime.slice(segments, 0.0, -1.0), false] : Array<Dynamic>)));
   if (FlightRuntime.truthy(FlightRuntime.strictEquals(parent, null))) { return cast false; }
   if (FlightRuntime.truthy(!FlightRuntime.truthy(isDirectory))) {
@@ -789,6 +773,7 @@ class Filesystem {
 } catch (__error:Dynamic) {
   return cast false;
 }
-    return cast null;
+      return cast null;
+    })();
   }
 }

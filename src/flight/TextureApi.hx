@@ -22,38 +22,35 @@ import flight.Types.VideoResource;
 import flight.Types.VideoTexture;
 import flight.Types.VideoTextureLike;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.TextureApi")
 class TextureApi {
-  @:keep public static function advanceVideoTexture(videoTexture:VideoTextureLike):Float {
+  public static function advanceVideoTexture(videoTexture:VideoTextureLike):Float {
     FlightRuntime.setField(videoTexture, 'frameId', (FlightRuntime.field(videoTexture, 'frameId') + 1.0));
     return cast FlightRuntime.field(videoTexture, 'frameId');
     return cast null;
   }
 
-  @:keep public static function cloneCubeTexture(source:CubeTextureLike):CubeTexture {
+  public static function cloneCubeTexture(source:CubeTextureLike):CubeTexture {
     return cast FlightRuntime.callValue(createEntity, cast ([{ colorSpace: FlightRuntime.field(source, 'colorSpace'), faces: FlightRuntime.slice(FlightRuntime.field(source, 'faces'), 0, null), sampler: FlightRuntime.callValue(cloneSampler, cast ([FlightRuntime.field(source, 'sampler')] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cloneSampler(source:SamplerLike):Sampler {
+  public static function cloneSampler(source:SamplerLike):Sampler {
     return cast FlightRuntime.callValue(createEntity, cast ([{ anisotropy: FlightRuntime.field(source, 'anisotropy'), magFilter: FlightRuntime.field(source, 'magFilter'), minFilter: FlightRuntime.field(source, 'minFilter'), mipmaps: FlightRuntime.field(source, 'mipmaps'), wrapU: FlightRuntime.field(source, 'wrapU'), wrapV: FlightRuntime.field(source, 'wrapV') }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cloneTexture(source:TextureLike):Texture {
+  public static function cloneTexture(source:TextureLike):Texture {
     return cast FlightRuntime.callValue(createEntity, cast ([{ colorSpace: FlightRuntime.field(source, 'colorSpace'), image: FlightRuntime.field(source, 'image'), resource: FlightRuntime.coalesce(FlightRuntime.field(source, 'resource'), function():Dynamic return cast null), sampler: FlightRuntime.callValue(cloneSampler, cast ([FlightRuntime.field(source, 'sampler')] : Array<Dynamic>)), uvOffset: FlightRuntime.callValue(cloneVector2, cast ([FlightRuntime.field(source, 'uvOffset')] : Array<Dynamic>)), uvRotation: FlightRuntime.field(source, 'uvRotation'), uvScale: FlightRuntime.callValue(cloneVector2, cast ([FlightRuntime.field(source, 'uvScale')] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cloneVideoTexture(source:VideoTextureLike):VideoTexture {
+  public static function cloneVideoTexture(source:VideoTextureLike):VideoTexture {
     return cast FlightRuntime.callValue(createEntity, cast ([{ colorSpace: FlightRuntime.field(source, 'colorSpace'), frameId: -1.0, sampler: FlightRuntime.callValue(cloneSampler, cast ([FlightRuntime.field(source, 'sampler')] : Array<Dynamic>)), source: FlightRuntime.field(source, 'source'), uvOffset: FlightRuntime.callValue(cloneVector2, cast ([FlightRuntime.field(source, 'uvOffset')] : Array<Dynamic>)), uvRotation: FlightRuntime.field(source, 'uvRotation'), uvScale: FlightRuntime.callValue(cloneVector2, cast ([FlightRuntime.field(source, 'uvScale')] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function copyCubeTexture(out:CubeTextureLike, source:CubeTextureLike):Void {
+  public static function copyCubeTexture(out:CubeTextureLike, source:CubeTextureLike):Void {
     var colorSpace:Dynamic = cast FlightRuntime.UNDEFINED;
     var f0:Dynamic = cast FlightRuntime.UNDEFINED;
     var f1:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -80,7 +77,7 @@ class TextureApi {
     FlightRuntime.setIndex(faces, 5.0, f5);
   }
 
-  @:keep public static function copySampler(out:SamplerLike, source:SamplerLike):Void {
+  public static function copySampler(out:SamplerLike, source:SamplerLike):Void {
     FlightRuntime.setField(out, 'anisotropy', FlightRuntime.field(source, 'anisotropy'));
     FlightRuntime.setField(out, 'magFilter', FlightRuntime.field(source, 'magFilter'));
     FlightRuntime.setField(out, 'minFilter', FlightRuntime.field(source, 'minFilter'));
@@ -89,7 +86,7 @@ class TextureApi {
     FlightRuntime.setField(out, 'wrapV', FlightRuntime.field(source, 'wrapV'));
   }
 
-  @:keep public static function copyTexture(out:TextureLike, source:TextureLike):Void {
+  public static function copyTexture(out:TextureLike, source:TextureLike):Void {
     var colorSpace:Dynamic = cast FlightRuntime.UNDEFINED;
     var image:Dynamic = cast FlightRuntime.UNDEFINED;
     var resource:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -107,7 +104,7 @@ class TextureApi {
     FlightRuntime.setField(out, 'uvRotation', uvRotation);
   }
 
-  @:keep public static function copyVideoTexture(out:VideoTextureLike, source:VideoTextureLike):Void {
+  public static function copyVideoTexture(out:VideoTextureLike, source:VideoTextureLike):Void {
     var colorSpace:Dynamic = cast FlightRuntime.UNDEFINED;
     var frameId:Dynamic = cast FlightRuntime.UNDEFINED;
     var src:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -125,47 +122,47 @@ class TextureApi {
     FlightRuntime.setField(out, 'uvRotation', uvRotation);
   }
 
-  @:keep public static function createAnisotropicSampler(level:Float):Sampler {
+  public static function createAnisotropicSampler(level:Float):Sampler {
     return cast FlightRuntime.callValue(createSampler, cast ([{ anisotropy: level }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createClampLinearSampler():Sampler {
+  public static function createClampLinearSampler():Sampler {
     return cast FlightRuntime.callValue(createSampler, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createCubeTexture(?opts:Dynamic):CubeTexture {
+  public static function createCubeTexture(?opts:Dynamic):CubeTexture {
     return cast FlightRuntime.callValue(createEntity, cast ([{ colorSpace: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'colorSpace'), function():Dynamic return cast 'srgb'), faces: FlightRuntime.select(FlightRuntime.optionalField(opts, 'faces'), function():Dynamic return cast FlightRuntime.slice(FlightRuntime.field(opts, 'faces'), 0, null), function():Dynamic return cast cast ([null, null, null, null, null, null] : Array<Dynamic>)), sampler: FlightRuntime.select(FlightRuntime.optionalField(opts, 'sampler'), function():Dynamic return cast FlightRuntime.callValue(cloneSampler, cast ([FlightRuntime.field(opts, 'sampler')] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(createSampler, cast ([] : Array<Dynamic>))) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createPixelArtSampler():Sampler {
+  public static function createPixelArtSampler():Sampler {
     return cast FlightRuntime.callValue(createSampler, cast ([{ magFilter: 'nearest', minFilter: 'nearest', mipmaps: false }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createSampler(?opts:Dynamic):Sampler {
+  public static function createSampler(?opts:Dynamic):Sampler {
     return cast FlightRuntime.callValue(createEntity, cast ([{ anisotropy: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'anisotropy'), function():Dynamic return cast 1.0), magFilter: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'magFilter'), function():Dynamic return cast 'linear'), minFilter: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'minFilter'), function():Dynamic return cast 'linear-mipmap-linear'), mipmaps: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'mipmaps'), function():Dynamic return cast true), wrapU: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'wrapU'), function():Dynamic return cast 'clamp-to-edge'), wrapV: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'wrapV'), function():Dynamic return cast 'clamp-to-edge') }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createTexture(?opts:Dynamic):Texture {
+  public static function createTexture(?opts:Dynamic):Texture {
     return cast FlightRuntime.callValue(createEntity, cast ([{ colorSpace: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'colorSpace'), function():Dynamic return cast 'srgb'), image: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'image'), function():Dynamic return cast null), resource: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'resource'), function():Dynamic return cast null), sampler: FlightRuntime.select(FlightRuntime.optionalField(opts, 'sampler'), function():Dynamic return cast FlightRuntime.callValue(cloneSampler, cast ([FlightRuntime.field(opts, 'sampler')] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(createSampler, cast ([] : Array<Dynamic>))), uvOffset: FlightRuntime.select(FlightRuntime.optionalField(opts, 'uvOffset'), function():Dynamic return cast FlightRuntime.callValue(cloneVector2, cast ([FlightRuntime.field(opts, 'uvOffset')] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(createVector2, cast ([0.0, 0.0] : Array<Dynamic>))), uvRotation: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'uvRotation'), function():Dynamic return cast 0.0), uvScale: FlightRuntime.select(FlightRuntime.optionalField(opts, 'uvScale'), function():Dynamic return cast FlightRuntime.callValue(cloneVector2, cast ([FlightRuntime.field(opts, 'uvScale')] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(createVector2, cast ([1.0, 1.0] : Array<Dynamic>))) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createTilingSampler():Sampler {
+  public static function createTilingSampler():Sampler {
     return cast FlightRuntime.callValue(createSampler, cast ([{ wrapU: 'repeat', wrapV: 'repeat' }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createVideoTexture(source:VideoResource, ?opts:Dynamic):VideoTexture {
+  public static function createVideoTexture(source:VideoResource, ?opts:Dynamic):VideoTexture {
     return cast FlightRuntime.callValue(createEntity, cast ([{ colorSpace: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'colorSpace'), function():Dynamic return cast 'srgb'), frameId: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'frameId'), function():Dynamic return cast -1.0), sampler: FlightRuntime.select(FlightRuntime.optionalField(opts, 'sampler'), function():Dynamic return cast FlightRuntime.callValue(cloneSampler, cast ([FlightRuntime.field(opts, 'sampler')] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(createSampler, cast ([] : Array<Dynamic>))), source: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'source'), function():Dynamic return cast source), uvOffset: FlightRuntime.select(FlightRuntime.optionalField(opts, 'uvOffset'), function():Dynamic return cast FlightRuntime.callValue(cloneVector2, cast ([FlightRuntime.field(opts, 'uvOffset')] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(createVector2, cast ([0.0, 0.0] : Array<Dynamic>))), uvRotation: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'uvRotation'), function():Dynamic return cast 0.0), uvScale: FlightRuntime.select(FlightRuntime.optionalField(opts, 'uvScale'), function():Dynamic return cast FlightRuntime.callValue(cloneVector2, cast ([FlightRuntime.field(opts, 'uvScale')] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(createVector2, cast ([1.0, 1.0] : Array<Dynamic>))) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function equalsCubeTexture(a:Null<CubeTextureLike>, b:Null<CubeTextureLike>):Bool {
+  public static function equalsCubeTexture(a:Null<CubeTextureLike>, b:Null<CubeTextureLike>):Bool {
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(a), function():Dynamic return cast !FlightRuntime.truthy(b)))) { return cast false; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(a, b))) { return cast true; }
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(a, 'colorSpace'), FlightRuntime.field(b, 'colorSpace')))) { return cast false; }
@@ -181,20 +178,20 @@ class TextureApi {
     return cast null;
   }
 
-  @:keep public static function equalsSampler(a:Null<SamplerLike>, b:Null<SamplerLike>):Bool {
+  public static function equalsSampler(a:Null<SamplerLike>, b:Null<SamplerLike>):Bool {
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(a), function():Dynamic return cast !FlightRuntime.truthy(b)))) { return cast false; }
     return cast FlightRuntime.orValue(FlightRuntime.strictEquals(a, b), function():Dynamic return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.field(a, 'anisotropy'), FlightRuntime.field(b, 'anisotropy')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'magFilter'), FlightRuntime.field(b, 'magFilter'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'minFilter'), FlightRuntime.field(b, 'minFilter'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'mipmaps'), FlightRuntime.field(b, 'mipmaps'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'wrapU'), FlightRuntime.field(b, 'wrapU'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'wrapV'), FlightRuntime.field(b, 'wrapV'))));
     return cast null;
   }
 
-  @:keep public static function equalsTexture(a:Null<TextureLike>, b:Null<TextureLike>):Bool {
+  public static function equalsTexture(a:Null<TextureLike>, b:Null<TextureLike>):Bool {
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(a), function():Dynamic return cast !FlightRuntime.truthy(b)))) { return cast false; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(a, b))) { return cast true; }
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.field(a, 'colorSpace'), FlightRuntime.field(b, 'colorSpace')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'image'), FlightRuntime.field(b, 'image'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'uvRotation'), FlightRuntime.field(b, 'uvRotation'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(a, 'uvOffset'), 'x'), FlightRuntime.field(FlightRuntime.field(b, 'uvOffset'), 'x'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(a, 'uvOffset'), 'y'), FlightRuntime.field(FlightRuntime.field(b, 'uvOffset'), 'y'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(a, 'uvScale'), 'x'), FlightRuntime.field(FlightRuntime.field(b, 'uvScale'), 'x'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(a, 'uvScale'), 'y'), FlightRuntime.field(FlightRuntime.field(b, 'uvScale'), 'y'))), function():Dynamic return cast FlightRuntime.callValue(equalsSampler, cast ([FlightRuntime.field(a, 'sampler'), FlightRuntime.field(b, 'sampler')] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function getCubeTextureFaceSize(cube:CubeTextureLike):Float {
+  public static function getCubeTextureFaceSize(cube:CubeTextureLike):Float {
     {
       var i:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(i, 6.0, '<'))) {
@@ -207,17 +204,17 @@ class TextureApi {
     return cast null;
   }
 
-  @:keep public static function getTextureHeight(texture:TextureLike):Float {
+  public static function getTextureHeight(texture:TextureLike):Float {
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.field(texture, 'image'), null), function():Dynamic return cast FlightRuntime.field(FlightRuntime.field(texture, 'image'), 'height'), function():Dynamic return cast -1.0);
     return cast null;
   }
 
-  @:keep public static function getTextureInverseUvMatrix(out:Matrix3Like, texture:TextureLike):Void {
+  public static function getTextureInverseUvMatrix(out:Matrix3Like, texture:TextureLike):Void {
     FlightRuntime.callValue(getTextureUvMatrix, cast ([out, texture] : Array<Dynamic>));
     FlightRuntime.callValue(inverseMatrix3, cast ([out, out] : Array<Dynamic>));
   }
 
-  @:keep public static function getTextureUvMatrix(out:Matrix3Like, texture:TextureUvTransform):Void {
+  public static function getTextureUvMatrix(out:Matrix3Like, texture:TextureUvTransform):Void {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var sx:Dynamic = cast FlightRuntime.UNDEFINED;
     var sy:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -245,24 +242,24 @@ class TextureApi {
     FlightRuntime.setIndex(m, 8.0, 1.0);
   }
 
-  @:keep public static function getTextureWidth(texture:TextureLike):Float {
+  public static function getTextureWidth(texture:TextureLike):Float {
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.field(texture, 'image'), null), function():Dynamic return cast FlightRuntime.field(FlightRuntime.field(texture, 'image'), 'width'), function():Dynamic return cast -1.0);
     return cast null;
   }
 
-  @:keep public static function getVideoTextureHeight(videoTexture:VideoTextureLike):Float {
+  public static function getVideoTextureHeight(videoTexture:VideoTextureLike):Float {
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     element = FlightRuntime.field(FlightRuntime.field(videoTexture, 'source'), 'element');
     return cast FlightRuntime.select(FlightRuntime.andValue(!FlightRuntime.strictEquals(element, null), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(element, 'videoHeight'), 0.0, '>')), function():Dynamic return cast FlightRuntime.field(element, 'videoHeight'), function():Dynamic return cast -1.0);
     return cast null;
   }
 
-  @:keep public static function getVideoTextureInverseUvMatrix(out:Matrix3Like, videoTexture:VideoTextureLike):Void {
+  public static function getVideoTextureInverseUvMatrix(out:Matrix3Like, videoTexture:VideoTextureLike):Void {
     FlightRuntime.callValue(getVideoTextureUvMatrix, cast ([out, videoTexture] : Array<Dynamic>));
     FlightRuntime.callValue(inverseMatrix3, cast ([out, out] : Array<Dynamic>));
   }
 
-  @:keep public static function getVideoTextureUvMatrix(out:Matrix3Like, videoTexture:VideoTextureLike):Void {
+  public static function getVideoTextureUvMatrix(out:Matrix3Like, videoTexture:VideoTextureLike):Void {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var sx:Dynamic = cast FlightRuntime.UNDEFINED;
     var sy:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -290,38 +287,38 @@ class TextureApi {
     FlightRuntime.setIndex(m, 8.0, 1.0);
   }
 
-  @:keep public static function getVideoTextureWidth(videoTexture:VideoTextureLike):Float {
+  public static function getVideoTextureWidth(videoTexture:VideoTextureLike):Float {
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     element = FlightRuntime.field(FlightRuntime.field(videoTexture, 'source'), 'element');
     return cast FlightRuntime.select(FlightRuntime.andValue(!FlightRuntime.strictEquals(element, null), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(element, 'videoWidth'), 0.0, '>')), function():Dynamic return cast FlightRuntime.field(element, 'videoWidth'), function():Dynamic return cast -1.0);
     return cast null;
   }
 
-  @:keep public static function hasTextureUvTransform(texture:TextureUvTransform):Bool {
+  public static function hasTextureUvTransform(texture:TextureUvTransform):Bool {
     return cast FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(!FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(texture, 'uvScale'), 'x'), 1.0), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(texture, 'uvScale'), 'y'), 1.0)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(texture, 'uvOffset'), 'x'), 0.0)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(texture, 'uvOffset'), 'y'), 0.0)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(texture, 'uvRotation'), 0.0));
     return cast null;
   }
 
   public static final HAVE_CURRENT_DATA__videoTexture:Dynamic = 2.0;
 
-  @:keep public static function isCubeTextureComplete(cube:CubeTextureLike):Bool {
+  public static function isCubeTextureComplete(cube:CubeTextureLike):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.field(cube, 'faces'), 'every', cast ([function(face:Dynamic) return !FlightRuntime.strictEquals(face, null)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function isTextureReady(texture:TextureLike):Bool {
+  public static function isTextureReady(texture:TextureLike):Bool {
     return cast !FlightRuntime.strictEquals(FlightRuntime.field(texture, 'image'), null);
     return cast null;
   }
 
-  @:keep public static function isVideoTextureFrameReady(videoTexture:VideoTextureLike):Bool {
+  public static function isVideoTextureFrameReady(videoTexture:VideoTextureLike):Bool {
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     element = FlightRuntime.field(FlightRuntime.field(videoTexture, 'source'), 'element');
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(element, null), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(element, 'readyState'), TextureApi.HAVE_CURRENT_DATA__videoTexture, '>=')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(element, 'videoWidth'), 0.0, '>')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(element, 'videoHeight'), 0.0, '>'));
     return cast null;
   }
 
-  @:keep public static function resetTextureUvTransform(texture:TextureLike):Void {
+  public static function resetTextureUvTransform(texture:TextureLike):Void {
     FlightRuntime.setField(FlightRuntime.field(texture, 'uvOffset'), 'x', 0.0);
     FlightRuntime.setField(FlightRuntime.field(texture, 'uvOffset'), 'y', 0.0);
     FlightRuntime.setField(texture, 'uvRotation', 0.0);
@@ -329,38 +326,38 @@ class TextureApi {
     FlightRuntime.setField(FlightRuntime.field(texture, 'uvScale'), 'y', 1.0);
   }
 
-  @:keep public static function resetVideoTextureFrame(videoTexture:VideoTextureLike):Void {
+  public static function resetVideoTextureFrame(videoTexture:VideoTextureLike):Void {
     FlightRuntime.setField(videoTexture, 'frameId', -1.0);
   }
 
-  @:keep public static function setCubeTextureFace(cube:CubeTextureLike, faceIndex:Float, image:Null<ImageResource>):Void {
+  public static function setCubeTextureFace(cube:CubeTextureLike, faceIndex:Float, image:Null<ImageResource>):Void {
     FlightRuntime.setIndex((cast FlightRuntime.field(cube, 'faces') : Array<Null<ImageResource>>), faceIndex, image);
   }
 
-  @:keep public static function setTextureImage(texture:TextureLike, image:Null<ImageResource>):Void {
+  public static function setTextureImage(texture:TextureLike, image:Null<ImageResource>):Void {
     FlightRuntime.setField(texture, 'image', image);
   }
 
-  @:keep public static function setTextureUvOffset(texture:TextureLike, x:Float, y:Float):Void {
+  public static function setTextureUvOffset(texture:TextureLike, x:Float, y:Float):Void {
     FlightRuntime.setField(FlightRuntime.field(texture, 'uvOffset'), 'x', x);
     FlightRuntime.setField(FlightRuntime.field(texture, 'uvOffset'), 'y', y);
   }
 
-  @:keep public static function setTextureUvRotation(texture:TextureLike, radians:Float):Void {
+  public static function setTextureUvRotation(texture:TextureLike, radians:Float):Void {
     FlightRuntime.setField(texture, 'uvRotation', radians);
   }
 
-  @:keep public static function setTextureUvScale(texture:TextureLike, x:Float, y:Float):Void {
+  public static function setTextureUvScale(texture:TextureLike, x:Float, y:Float):Void {
     FlightRuntime.setField(FlightRuntime.field(texture, 'uvScale'), 'x', x);
     FlightRuntime.setField(FlightRuntime.field(texture, 'uvScale'), 'y', y);
   }
 
-  @:keep public static function setVideoTextureSource(videoTexture:VideoTextureLike, source:VideoResource):Void {
+  public static function setVideoTextureSource(videoTexture:VideoTextureLike, source:VideoResource):Void {
     FlightRuntime.setField(videoTexture, 'source', source);
     FlightRuntime.setField(videoTexture, 'frameId', -1.0);
   }
 
-  @:keep public static function transformTextureUv(out:Vector2Like, texture:TextureLike, u:Float, v:Float):Void {
+  public static function transformTextureUv(out:Vector2Like, texture:TextureLike, u:Float, v:Float):Void {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var sx:Dynamic = cast FlightRuntime.UNDEFINED;
     var sy:Dynamic = cast FlightRuntime.UNDEFINED;

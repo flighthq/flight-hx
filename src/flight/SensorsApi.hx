@@ -34,9 +34,6 @@ typedef WebOrientationSensor__sensors = Dynamic;
 
 typedef WebRotationRate__sensors = { @:optional var alpha:Null<Float>; @:optional var beta:Null<Float>; @:optional var gamma:Null<Float>; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.SensorsApi")
 class SensorsApi {
   public static final _absoluteOrientation__sensors:OrientationReading = FlightRuntime.callValue(createOrientationReading, cast ([] : Array<Dynamic>));
@@ -61,7 +58,7 @@ class SensorsApi {
 
   public static final _subscriptions__sensors:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function attachSensors(sensors:Sensors):Void {
+  public static function attachSensors(sensors:Sensors):Void {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var unsubscribeMotion:Dynamic = cast FlightRuntime.UNDEFINED;
     var unsubscribeLinearAcceleration:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -120,7 +117,7 @@ class SensorsApi {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function computeEulerFromQuaternion(out:OrientationReading, quaternion:QuaternionReading):Void {
+  public static function computeEulerFromQuaternion(out:OrientationReading, quaternion:QuaternionReading):Void {
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
     var z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -147,7 +144,7 @@ class SensorsApi {
     FlightRuntime.setField(out, 'accuracy', FlightRuntime.field(quaternion, 'accuracy'));
   }
 
-  @:keep public static function computeGravityFromOrientation(out:MotionReading, orientation:OrientationReading):Void {
+  public static function computeGravityFromOrientation(out:MotionReading, orientation:OrientationReading):Void {
     var toRad:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -172,7 +169,7 @@ class SensorsApi {
     FlightRuntime.setField(out, 'accuracy', FlightRuntime.field(orientation, 'accuracy'));
   }
 
-  @:keep public static function computeQuaternionFromOrientationReading(out:QuaternionReading, orientation:OrientationReading):Void {
+  public static function computeQuaternionFromOrientationReading(out:QuaternionReading, orientation:OrientationReading):Void {
     var toRad:Dynamic = cast FlightRuntime.UNDEFINED;
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -202,7 +199,7 @@ class SensorsApi {
     FlightRuntime.setField(out, 'accuracy', FlightRuntime.field(orientation, 'accuracy'));
   }
 
-  @:keep public static function computeRotationMatrixFromQuaternion(out:Array<Float>, quaternion:QuaternionReading):Void {
+  public static function computeRotationMatrixFromQuaternion(out:Array<Float>, quaternion:QuaternionReading):Void {
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
     var z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -246,7 +243,7 @@ class SensorsApi {
     FlightRuntime.setIndex(out, 8.0, (1.0 - (xx + yy)));
   }
 
-  @:keep public static function computeScreenRelativeOrientation(out:OrientationReading, orientation:OrientationReading, screenAngle:Float):Void {
+  public static function computeScreenRelativeOrientation(out:OrientationReading, orientation:OrientationReading, screenAngle:Float):Void {
     var alpha:Dynamic = cast FlightRuntime.UNDEFINED;
     var beta:Dynamic = cast FlightRuntime.UNDEFINED;
     var gamma:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -271,7 +268,7 @@ class SensorsApi {
     FlightRuntime.setField(out, 'accuracy', FlightRuntime.field(orientation, 'accuracy'));
   }
 
-  @:keep public static function computeWorldAccelerationFromDeviceAcceleration(out:MotionReading, acceleration:MotionReading, quaternion:QuaternionReading):Void {
+  public static function computeWorldAccelerationFromDeviceAcceleration(out:MotionReading, acceleration:MotionReading, quaternion:QuaternionReading):Void {
     var ax:Dynamic = cast FlightRuntime.UNDEFINED;
     var ay:Dynamic = cast FlightRuntime.UNDEFINED;
     var az:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -308,47 +305,47 @@ class SensorsApi {
     FlightRuntime.setField(out, 'accuracy', FlightRuntime.field(acceleration, 'accuracy'));
   }
 
-  @:keep public static function createAmbientLightReading():AmbientLightReading {
+  public static function createAmbientLightReading():AmbientLightReading {
     return cast { accuracy: 'unknown', illuminance: 0.0, interval: -1.0, timestamp: -1.0 };
     return cast null;
   }
 
-  @:keep public static function createMotionReading():MotionReading {
+  public static function createMotionReading():MotionReading {
     return cast { accuracy: 'unknown', interval: -1.0, timestamp: -1.0, x: 0.0, y: 0.0, z: 0.0 };
     return cast null;
   }
 
-  @:keep public static function createOrientationReading():OrientationReading {
+  public static function createOrientationReading():OrientationReading {
     return cast { absolute: false, accuracy: 'unknown', alpha: 0.0, beta: 0.0, gamma: 0.0, heading: -1.0, interval: -1.0, timestamp: -1.0 };
     return cast null;
   }
 
-  @:keep public static function createPressureReading():PressureReading {
+  public static function createPressureReading():PressureReading {
     return cast { accuracy: 'unknown', altitude: -1.0, interval: -1.0, pressure: 0.0, timestamp: -1.0 };
     return cast null;
   }
 
-  @:keep public static function createProximityReading():ProximityReading {
+  public static function createProximityReading():ProximityReading {
     return cast { accuracy: 'unknown', distance: -1.0, interval: -1.0, max: -1.0, near: false, timestamp: -1.0 };
     return cast null;
   }
 
-  @:keep public static function createQuaternionReading():QuaternionReading {
+  public static function createQuaternionReading():QuaternionReading {
     return cast { accuracy: 'unknown', interval: -1.0, timestamp: -1.0, w: 1.0, x: 0.0, y: 0.0, z: 0.0 };
     return cast null;
   }
 
-  @:keep public static function createRotationRateReading():RotationRateReading {
+  public static function createRotationRateReading():RotationRateReading {
     return cast { accuracy: 'unknown', alpha: 0.0, beta: 0.0, gamma: 0.0, interval: -1.0, timestamp: -1.0 };
     return cast null;
   }
 
-  @:keep public static function createSensors():Sensors {
+  public static function createSensors():Sensors {
     return cast { onAbsoluteOrientation: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onAccelerometer: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onAmbientLight: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onBarometer: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onGravity: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onGyroscope: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onLinearAcceleration: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onMagnetometer: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onOrientation: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onProximity: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onQuaternion: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createWebSensorsBackend():SensorsBackend {
+  public static function createWebSensorsBackend():SensorsBackend {
     return cast { getPermissionState: function(?sensor:String) {
   return cast FlightRuntime.callValue(SensorsApi.getWebSensorsPermissionState__sensors, cast ([sensor] : Array<Dynamic>));
 }, isAmbientLightSupported: function() {
@@ -619,7 +616,7 @@ class SensorsApi {
     return cast null;
   }
 
-  @:keep public static function detachSensors(sensors:Sensors):Void {
+  public static function detachSensors(sensors:Sensors):Void {
     var unsubscribe:Dynamic = cast FlightRuntime.UNDEFINED;
     unsubscribe = FlightRuntime.callProperty(SensorsApi._subscriptions__sensors, 'get', cast ([sensors] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(unsubscribe, FlightRuntime.UNDEFINED))) {
@@ -630,22 +627,22 @@ class SensorsApi {
 
   public static var DeviceOrientationEvent__sensors:Dynamic;
 
-  @:keep public static function disposeSensors(sensors:Sensors):Void {
+  public static function disposeSensors(sensors:Sensors):Void {
     FlightRuntime.callValue(detachSensors, cast ([sensors] : Array<Dynamic>));
   }
 
-  @:keep public static function getSensorsBackend():SensorsBackend {
+  public static function getSensorsBackend():SensorsBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(SensorsApi._backend__sensors, null))) { (SensorsApi._backend__sensors = cast (FlightRuntime.callValue(createWebSensorsBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast SensorsApi._backend__sensors;
     return cast null;
   }
 
-  @:keep public static function getSensorsPermissionState(?sensor:String):flight.internal.FlightPromise<SensorsPermissionState> {
+  public static function getSensorsPermissionState(?sensor:String):flight.internal.FlightPromise<SensorsPermissionState> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getSensorsBackend, cast ([] : Array<Dynamic>)), 'getPermissionState', cast ([sensor] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getWebGenericSensorConstructor__sensors(name:String):Null<Dynamic> {
+  public static function getWebGenericSensorConstructor__sensors(name:String):Null<Dynamic> {
     try {
   var ctor:Dynamic = FlightRuntime.getIndex((cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['globalThis'] : Array<Dynamic>)) : Dynamic), name);
   if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.typeofValue(ctor), 'function'))) { return cast null; }
@@ -656,13 +653,13 @@ class SensorsApi {
     return cast null;
   }
 
-  @:keep public static function getWebMagnetometerConstructor__sensors():Null<Dynamic> {
+  public static function getWebMagnetometerConstructor__sensors():Null<Dynamic> {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.typeofValue(SensorsApi.Magnetometer__sensors), 'undefined'))) { return cast null; }
     return cast (cast (cast SensorsApi.Magnetometer__sensors : Dynamic) : Dynamic);
     return cast null;
   }
 
-  @:keep public static function getWebMotionPermissionRequest__sensors():Null<Dynamic> {
+  public static function getWebMotionPermissionRequest__sensors():Null<Dynamic> {
     var ctor:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['DeviceMotionEvent'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
     ctor = (cast (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['DeviceMotionEvent'] : Array<Dynamic>)) : Dynamic) : { @:optional var requestPermission:Dynamic; });
@@ -671,14 +668,12 @@ class SensorsApi {
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function getWebSensorsPermissionState__sensors(?sensor:String):flight.internal.FlightPromise<SensorsPermissionState> {
-    var permissionName:Dynamic = cast FlightRuntime.UNDEFINED;
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'))) { return cast 'unsupported'; }
-    permissionName = FlightRuntime.select(FlightRuntime.strictEquals(sensor, 'magnetometer'), function():Dynamic return cast 'magnetometer', function():Dynamic return cast FlightRuntime.select(FlightRuntime.strictEquals(sensor, 'orientation'), function():Dynamic return cast 'gyroscope', function():Dynamic return cast 'accelerometer'));
-    if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'permissions')))) {
+  public static function getWebSensorsPermissionState__sensors(?sensor:String):flight.internal.FlightPromise<SensorsPermissionState> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<SensorsPermissionState> {
+      var permissionName:Dynamic = cast FlightRuntime.UNDEFINED;
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'))) { return cast 'unsupported'; }
+      permissionName = FlightRuntime.select(FlightRuntime.strictEquals(sensor, 'magnetometer'), function():Dynamic return cast 'magnetometer', function():Dynamic return cast FlightRuntime.select(FlightRuntime.strictEquals(sensor, 'orientation'), function():Dynamic return cast 'gyroscope', function():Dynamic return cast 'accelerometer'));
+      if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'permissions')))) {
   try {
   var status:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'permissions'), 'query', cast ([{ name: (cast permissionName : PermissionName) }] : Array<Dynamic>)));
   if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(status, 'state'), 'granted'))) { return cast 'granted'; }
@@ -687,72 +682,73 @@ class SensorsApi {
 } catch (__error:Dynamic) {
 }
 }
-    if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(sensor, 'magnetometer'), function():Dynamic return cast !FlightRuntime.strictEquals(sensor, 'orientation')))) {
+      if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(sensor, 'magnetometer'), function():Dynamic return cast !FlightRuntime.strictEquals(sensor, 'orientation')))) {
   var hasMotion:Dynamic = !FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['DeviceMotionEvent'] : Array<Dynamic>)), 'undefined');
   if (FlightRuntime.truthy(!FlightRuntime.truthy(hasMotion))) { return cast 'unsupported'; }
 }
-    return cast 'granted';
-    return cast null;
+      return cast 'granted';
+      return cast null;
+    })();
   }
 
-  @:keep public static function hasAccelerometer():Bool {
+  public static function hasAccelerometer():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getSensorsBackend, cast ([] : Array<Dynamic>)), 'isMotionSupported', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hasAmbientLightSensor():Bool {
+  public static function hasAmbientLightSensor():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getSensorsBackend, cast ([] : Array<Dynamic>)), 'isAmbientLightSupported', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hasBarometer():Bool {
+  public static function hasBarometer():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getSensorsBackend, cast ([] : Array<Dynamic>)), 'isBarometerSupported', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hasGravitySensor():Bool {
+  public static function hasGravitySensor():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getSensorsBackend, cast ([] : Array<Dynamic>)), 'isGravitySupported', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hasGyroscope():Bool {
+  public static function hasGyroscope():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getSensorsBackend, cast ([] : Array<Dynamic>)), 'isGyroscopeSupported', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hasLinearAccelerationSensor():Bool {
+  public static function hasLinearAccelerationSensor():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getSensorsBackend, cast ([] : Array<Dynamic>)), 'isLinearAccelerationSupported', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hasMagnetometer():Bool {
+  public static function hasMagnetometer():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getSensorsBackend, cast ([] : Array<Dynamic>)), 'isMagnetometerSupported', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hasOrientationSensor():Bool {
+  public static function hasOrientationSensor():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getSensorsBackend, cast ([] : Array<Dynamic>)), 'isOrientationSupported', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hasProximitySensor():Bool {
+  public static function hasProximitySensor():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getSensorsBackend, cast ([] : Array<Dynamic>)), 'isProximitySupported', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function isSensorsSupported():Bool {
+  public static function isSensorsSupported():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getSensorsBackend, cast ([] : Array<Dynamic>)), 'isMotionSupported', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
   public static var Magnetometer__sensors:Dynamic;
 
-  @:keep public static function requestSensorsPermission():flight.internal.FlightPromise<Bool> {
+  public static function requestSensorsPermission():flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getSensorsBackend, cast ([] : Array<Dynamic>)), 'requestPermission', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setSensorsBackend(backend:Null<SensorsBackend>):Void {
+  public static function setSensorsBackend(backend:Null<SensorsBackend>):Void {
     (SensorsApi._backend__sensors = cast (backend : Dynamic));
   }
 }

@@ -6,12 +6,9 @@ import flight.internal.FlightRuntime;
 import flight.Types.FlowStack;
 import flight.Types.FlowState;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Flow")
 class Flow {
-  @:keep public static function clearFlowStack(stack:FlowStack):Void {
+  public static function clearFlowStack(stack:FlowStack):Void {
     var states:Dynamic = cast FlightRuntime.UNDEFINED;
     states = FlightRuntime.field(stack, 'states');
     {
@@ -24,24 +21,24 @@ class Flow {
     FlightRuntime.setLength(states, 0.0);
   }
 
-  @:keep public static function createFlowStack():FlowStack {
+  public static function createFlowStack():FlowStack {
     return cast { states: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
-  @:keep public static function getActiveFlowState(stack:FlowStack):Null<FlowState> {
+  public static function getActiveFlowState(stack:FlowStack):Null<FlowState> {
     var states:Dynamic = cast FlightRuntime.UNDEFINED;
     states = FlightRuntime.field(stack, 'states');
     return cast FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(states, 'length'), 0.0, '>'), function():Dynamic return cast FlightRuntime.getIndex(states, (FlightRuntime.field(states, 'length') - 1.0)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getFlowStackDepth(stack:FlowStack):Float {
+  public static function getFlowStackDepth(stack:FlowStack):Float {
     return cast FlightRuntime.field(FlightRuntime.field(stack, 'states'), 'length');
     return cast null;
   }
 
-  @:keep public static function getFlowStackVisibleStates(stack:FlowStack, out:Array<FlowState>):Void {
+  public static function getFlowStackVisibleStates(stack:FlowStack, out:Array<FlowState>):Void {
     var states:Dynamic = cast FlightRuntime.UNDEFINED;
     var top:Dynamic = cast FlightRuntime.UNDEFINED;
     var lowest:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -64,7 +61,7 @@ class Flow {
     }
   }
 
-  @:keep public static function popFlowState(stack:FlowStack):Null<FlowState> {
+  public static function popFlowState(stack:FlowStack):Null<FlowState> {
     var states:Dynamic = cast FlightRuntime.UNDEFINED;
     var popped:Dynamic = cast FlightRuntime.UNDEFINED;
     var revealed:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -80,7 +77,7 @@ class Flow {
     return cast null;
   }
 
-  @:keep public static function pushFlowState(stack:FlowStack, state:FlowState):Void {
+  public static function pushFlowState(stack:FlowStack, state:FlowState):Void {
     var states:Dynamic = cast FlightRuntime.UNDEFINED;
     var previousTop:Dynamic = cast FlightRuntime.UNDEFINED;
     states = FlightRuntime.field(stack, 'states');
@@ -90,7 +87,7 @@ class Flow {
     FlightRuntime.callOptionalProperty(state, 'onEnter', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function replaceFlowState(stack:FlowStack, state:FlowState):Void {
+  public static function replaceFlowState(stack:FlowStack, state:FlowState):Void {
     var states:Dynamic = cast FlightRuntime.UNDEFINED;
     states = FlightRuntime.field(stack, 'states');
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(states, 'length'), 0.0, '>'))) {
@@ -101,7 +98,7 @@ class Flow {
     FlightRuntime.callOptionalProperty(state, 'onEnter', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function updateFlowStack(stack:FlowStack, deltaTime:Float):Void {
+  public static function updateFlowStack(stack:FlowStack, deltaTime:Float):Void {
     var states:Dynamic = cast FlightRuntime.UNDEFINED;
     var index:Dynamic = cast FlightRuntime.UNDEFINED;
     states = FlightRuntime.field(stack, 'states');

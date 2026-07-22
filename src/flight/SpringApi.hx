@@ -11,61 +11,58 @@ import flight.Types.Spring2D;
 import flight.Types.Spring3D;
 import flight.Types.SpringConfig;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.SpringApi")
 class SpringApi {
-  @:keep public static function createSpring(value:Float = 0.0, velocity:Float = 0.0):Spring {
+  public static function createSpring(value:Float = 0.0, velocity:Float = 0.0):Spring {
     return cast { value: value, velocity: velocity };
     return cast null;
   }
 
-  @:keep public static function createSpring2D(valueX:Float = 0.0, valueY:Float = 0.0, velocityX:Float = 0.0, velocityY:Float = 0.0):Spring2D {
+  public static function createSpring2D(valueX:Float = 0.0, valueY:Float = 0.0, velocityX:Float = 0.0, velocityY:Float = 0.0):Spring2D {
     return cast { x: FlightRuntime.callValue(createSpring, cast ([valueX, velocityX] : Array<Dynamic>)), y: FlightRuntime.callValue(createSpring, cast ([valueY, velocityY] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createSpring3D(valueX:Float = 0.0, valueY:Float = 0.0, valueZ:Float = 0.0, velocityX:Float = 0.0, velocityY:Float = 0.0, velocityZ:Float = 0.0):Spring3D {
+  public static function createSpring3D(valueX:Float = 0.0, valueY:Float = 0.0, valueZ:Float = 0.0, velocityX:Float = 0.0, velocityY:Float = 0.0, velocityZ:Float = 0.0):Spring3D {
     return cast { x: FlightRuntime.callValue(createSpring, cast ([valueX, velocityX] : Array<Dynamic>)), y: FlightRuntime.callValue(createSpring, cast ([valueY, velocityY] : Array<Dynamic>)), z: FlightRuntime.callValue(createSpring, cast ([valueZ, velocityZ] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createSpringConfig(frequency:Float, dampingRatio:Float):SpringConfig {
+  public static function createSpringConfig(frequency:Float, dampingRatio:Float):SpringConfig {
     return cast { dampingRatio: dampingRatio, frequency: frequency };
     return cast null;
   }
 
-  @:keep public static function createSpringConfigFromPhysical(stiffness:Float, damping:Float, mass:Float):SpringConfig {
+  public static function createSpringConfigFromPhysical(stiffness:Float, damping:Float, mass:Float):SpringConfig {
     return cast { dampingRatio: (damping / (2.0 * FlightRuntime.callProperty(HxMath, 'sqrt', cast ([(stiffness * mass)] : Array<Dynamic>)))), frequency: (FlightRuntime.callProperty(HxMath, 'sqrt', cast ([(stiffness / mass)] : Array<Dynamic>)) / TAU) };
     return cast null;
   }
 
   public static final CRITICAL_BAND__updateSpring:Dynamic = 0.0001;
 
-  @:keep public static function isSpring2DSettled(spring2D:Spring2D, targetX:Float, targetY:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
+  public static function isSpring2DSettled(spring2D:Spring2D, targetX:Float, targetY:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.callValue(isSpringSettled, cast ([FlightRuntime.field(spring2D, 'x'), targetX, positionEpsilon, velocityEpsilon] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(isSpringSettled, cast ([FlightRuntime.field(spring2D, 'y'), targetY, positionEpsilon, velocityEpsilon] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function isSpring3DSettled(spring3D:Spring3D, targetX:Float, targetY:Float, targetZ:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
+  public static function isSpring3DSettled(spring3D:Spring3D, targetX:Float, targetY:Float, targetZ:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.callValue(isSpringSettled, cast ([FlightRuntime.field(spring3D, 'x'), targetX, positionEpsilon, velocityEpsilon] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(isSpringSettled, cast ([FlightRuntime.field(spring3D, 'y'), targetY, positionEpsilon, velocityEpsilon] : Array<Dynamic>))), function():Dynamic return cast FlightRuntime.callValue(isSpringSettled, cast ([FlightRuntime.field(spring3D, 'z'), targetZ, positionEpsilon, velocityEpsilon] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function isSpringSettled(spring:Spring, target:Float, positionEpsilon:Float = 0.001, velocityEpsilon:Float = 0.001):Bool {
+  public static function isSpringSettled(spring:Spring, target:Float, positionEpsilon:Float = 0.001, velocityEpsilon:Float = 0.001):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.callValue(approxEqual, cast ([FlightRuntime.field(spring, 'value'), target, positionEpsilon] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(approxZero, cast ([FlightRuntime.field(spring, 'velocity'), velocityEpsilon] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function resetSpring(spring:Spring, value:Float, velocity:Float = 0.0):Void {
+  public static function resetSpring(spring:Spring, value:Float, velocity:Float = 0.0):Void {
     FlightRuntime.setField(spring, 'value', value);
     FlightRuntime.setField(spring, 'velocity', velocity);
   }
 
   public static final SPRING_SETTLE_EPSILON__isSpringSettled:Dynamic = 0.001;
 
-  @:keep public static function updateSpring(spring:Spring, target:Float, config:SpringConfig, deltaTime:Float):Void {
+  public static function updateSpring(spring:Spring, target:Float, config:SpringConfig, deltaTime:Float):Void {
     var frequency:Dynamic = cast FlightRuntime.UNDEFINED;
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
     var velocity:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -119,12 +116,12 @@ class SpringApi {
     FlightRuntime.setField(spring, 'velocity', ((velPosCoef * c0) + (velVelCoef * velocity)));
   }
 
-  @:keep public static function updateSpring2D(spring2D:Spring2D, targetX:Float, targetY:Float, config:SpringConfig, deltaTime:Float):Void {
+  public static function updateSpring2D(spring2D:Spring2D, targetX:Float, targetY:Float, config:SpringConfig, deltaTime:Float):Void {
     FlightRuntime.callValue(updateSpring, cast ([FlightRuntime.field(spring2D, 'x'), targetX, config, deltaTime] : Array<Dynamic>));
     FlightRuntime.callValue(updateSpring, cast ([FlightRuntime.field(spring2D, 'y'), targetY, config, deltaTime] : Array<Dynamic>));
   }
 
-  @:keep public static function updateSpring3D(spring3D:Spring3D, targetX:Float, targetY:Float, targetZ:Float, config:SpringConfig, deltaTime:Float):Void {
+  public static function updateSpring3D(spring3D:Spring3D, targetX:Float, targetY:Float, targetZ:Float, config:SpringConfig, deltaTime:Float):Void {
     FlightRuntime.callValue(updateSpring, cast ([FlightRuntime.field(spring3D, 'x'), targetX, config, deltaTime] : Array<Dynamic>));
     FlightRuntime.callValue(updateSpring, cast ([FlightRuntime.field(spring3D, 'y'), targetY, config, deltaTime] : Array<Dynamic>));
     FlightRuntime.callValue(updateSpring, cast ([FlightRuntime.field(spring3D, 'z'), targetZ, config, deltaTime] : Array<Dynamic>));

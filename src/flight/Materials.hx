@@ -37,14 +37,11 @@ import flight.Types.UnlitMaterial;
 import flight.Types.VertexColorMaterial;
 import flight.Types.WireframeMaterial;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Materials")
 class Materials {
   public static final _identity__colorTransform:ColorTransform = FlightRuntime.callValue(createColorTransform, cast ([] : Array<Dynamic>));
 
-  @:keep public static function assignStandardPbrMaterialProperties__pbrMaterials(target:StandardPbrMaterialProperties, ?opts:Dynamic):Void {
+  public static function assignStandardPbrMaterialProperties__pbrMaterials(target:StandardPbrMaterialProperties, ?opts:Dynamic):Void {
     FlightRuntime.setField(target, 'baseColor', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'baseColor'), function():Dynamic return cast 4294967295.0));
     FlightRuntime.setField(target, 'baseColorMap', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'baseColorMap'), function():Dynamic return cast null));
     FlightRuntime.setField(target, 'emissive', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'emissive'), function():Dynamic return cast 255.0));
@@ -59,7 +56,7 @@ class Materials {
     FlightRuntime.setField(target, 'roughness', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'roughness'), function():Dynamic return cast 1.0));
   }
 
-  @:keep public static function clampStandardPbrMaterialProperties(out:StandardPbrMaterialProperties):StandardPbrMaterialProperties {
+  public static function clampStandardPbrMaterialProperties(out:StandardPbrMaterialProperties):StandardPbrMaterialProperties {
     FlightRuntime.setField(out, 'metallic', FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.field(out, 'metallic')] : Array<Dynamic>))] : Array<Dynamic>)));
     FlightRuntime.setField(out, 'roughness', FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.field(out, 'roughness')] : Array<Dynamic>))] : Array<Dynamic>)));
     FlightRuntime.setField(out, 'occlusionStrength', FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.field(out, 'occlusionStrength')] : Array<Dynamic>))] : Array<Dynamic>)));
@@ -69,12 +66,12 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function cloneColorTransform(source:ColorTransformLike):ColorTransform {
+  public static function cloneColorTransform(source:ColorTransformLike):ColorTransform {
     return cast FlightRuntime.callValue(createColorTransform, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cloneMaterial(source:Material):Material {
+  public static function cloneMaterial(source:Material):Material {
     var clone:Dynamic = cast FlightRuntime.UNDEFINED;
     clone = (cast FlightRuntime.callValue(createEntity, cast ([{ kind: FlightRuntime.field(source, 'kind') }] : Array<Dynamic>)) : Material);
     FlightRuntime.callValue(Materials.copyMaterialFields__material, cast ([clone, source, FlightRuntime.field(source, 'kind')] : Array<Dynamic>));
@@ -82,7 +79,7 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function concatColorTransform(out:ColorTransformLike, source:ColorTransformLike, other:ColorTransformLike):Void {
+  public static function concatColorTransform(out:ColorTransformLike, source:ColorTransformLike, other:ColorTransformLike):Void {
     FlightRuntime.setField(out, 'redOffset', ((FlightRuntime.field(source, 'redMultiplier') * FlightRuntime.field(other, 'redOffset')) + FlightRuntime.field(source, 'redOffset')));
     FlightRuntime.setField(out, 'greenOffset', ((FlightRuntime.field(source, 'greenMultiplier') * FlightRuntime.field(other, 'greenOffset')) + FlightRuntime.field(source, 'greenOffset')));
     FlightRuntime.setField(out, 'blueOffset', ((FlightRuntime.field(source, 'blueMultiplier') * FlightRuntime.field(other, 'blueOffset')) + FlightRuntime.field(source, 'blueOffset')));
@@ -93,12 +90,12 @@ class Materials {
     FlightRuntime.setField(out, 'alphaMultiplier', (FlightRuntime.field(source, 'alphaMultiplier') * FlightRuntime.field(other, 'alphaMultiplier')));
   }
 
-  @:keep public static function convertPhongToStandardPbrMaterial(phong:PhongMaterial, ?opts:Dynamic):StandardPbrMaterial {
+  public static function convertPhongToStandardPbrMaterial(phong:PhongMaterial, ?opts:Dynamic):StandardPbrMaterial {
     return cast FlightRuntime.callValue(createStandardPbrMaterial, cast ([FlightRuntime.mergeObjects([{ baseColor: FlightRuntime.field(phong, 'diffuse') }, { baseColorMap: FlightRuntime.field(phong, 'diffuseMap') }, { metallic: FlightRuntime.callValue(getPbrMetallicFromPhongSpecular, cast ([FlightRuntime.field(phong, 'specular'), FlightRuntime.field(phong, 'diffuse')] : Array<Dynamic>)) }, { normalMap: FlightRuntime.field(phong, 'normalMap') }, { normalScale: FlightRuntime.field(phong, 'normalScale') }, { roughness: FlightRuntime.callValue(getPbrRoughnessFromPhongShininess, cast ([FlightRuntime.field(phong, 'shininess')] : Array<Dynamic>)) }, opts])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function convertSpecularGlossinessToStandardPbr(out:StandardPbrMaterialProperties, source:SpecularGlossinessPbrMaterial):Void {
+  public static function convertSpecularGlossinessToStandardPbr(out:StandardPbrMaterialProperties, source:SpecularGlossinessPbrMaterial):Void {
     var diffuse:Dynamic = cast FlightRuntime.UNDEFINED;
     var specular:Dynamic = cast FlightRuntime.UNDEFINED;
     var glossiness:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -171,7 +168,7 @@ class Materials {
     FlightRuntime.setField(out, 'roughness', (1.0 - glossiness));
   }
 
-  @:keep public static function copyColorTransform(out:ColorTransformLike, source:ColorTransformLike):Void {
+  public static function copyColorTransform(out:ColorTransformLike, source:ColorTransformLike):Void {
     FlightRuntime.setField(out, 'redMultiplier', FlightRuntime.field(source, 'redMultiplier'));
     FlightRuntime.setField(out, 'greenMultiplier', FlightRuntime.field(source, 'greenMultiplier'));
     FlightRuntime.setField(out, 'blueMultiplier', FlightRuntime.field(source, 'blueMultiplier'));
@@ -182,7 +179,7 @@ class Materials {
     FlightRuntime.setField(out, 'alphaOffset', FlightRuntime.field(source, 'alphaOffset'));
   }
 
-  @:keep public static function copyColorTransformToArrays(outColorMultipliers:Array<Float>, outColorOffsets:Array<Float>, source:ColorTransformLike):Void {
+  public static function copyColorTransformToArrays(outColorMultipliers:Array<Float>, outColorOffsets:Array<Float>, source:ColorTransformLike):Void {
     FlightRuntime.setIndex(outColorMultipliers, 0.0, FlightRuntime.field(source, 'redMultiplier'));
     FlightRuntime.setIndex(outColorMultipliers, 1.0, FlightRuntime.field(source, 'greenMultiplier'));
     FlightRuntime.setIndex(outColorMultipliers, 2.0, FlightRuntime.field(source, 'blueMultiplier'));
@@ -193,12 +190,12 @@ class Materials {
     FlightRuntime.setIndex(outColorOffsets, 3.0, FlightRuntime.field(source, 'alphaOffset'));
   }
 
-  @:keep public static function copyMaterial(out:Material, source:Material):Void {
+  public static function copyMaterial(out:Material, source:Material):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(out, source))) { return; }
     FlightRuntime.callValue(Materials.copyMaterialFields__material, cast ([out, source, FlightRuntime.field(source, 'kind')] : Array<Dynamic>));
   }
 
-  @:keep public static function copyMaterialFields__material(dst:Material, src:Material, kind:Kind):Void {
+  public static function copyMaterialFields__material(dst:Material, src:Material, kind:Kind):Void {
     var dstFields:Dynamic = cast FlightRuntime.UNDEFINED;
     var srcFields:Dynamic = cast FlightRuntime.UNDEFINED;
     dstFields = (cast (cast dst : Dynamic) : Dynamic);
@@ -215,12 +212,12 @@ class Materials {
     FlightRuntime.setIndex(dstFields, 'kind', kind);
   }
 
-  @:keep public static function createAluminumStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
+  public static function createAluminumStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
     return cast FlightRuntime.callValue(createStandardPbrMaterial, cast ([FlightRuntime.mergeObjects([{ baseColor: 2964369663.0 }, { metallic: 1.0 }, { roughness: 0.35 }, opts])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createAnisotropyPbrMaterial(?opts:Dynamic):AnisotropyPbrMaterial {
+  public static function createAnisotropyPbrMaterial(?opts:Dynamic):AnisotropyPbrMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.AnisotropyPbrMaterialKind] : Array<Dynamic>)) : AnisotropyPbrMaterial);
     FlightRuntime.setField(material, 'anisotropyMap', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'anisotropyMap'), function():Dynamic return cast null));
@@ -231,7 +228,7 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createBlinnPhongMaterial(?opts:Dynamic):BlinnPhongMaterial {
+  public static function createBlinnPhongMaterial(?opts:Dynamic):BlinnPhongMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.BlinnPhongMaterialKind] : Array<Dynamic>)) : BlinnPhongMaterial);
     FlightRuntime.setField(material, 'diffuse', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'diffuse'), function():Dynamic return cast 4294967295.0));
@@ -245,12 +242,12 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createCarbonStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
+  public static function createCarbonStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
     return cast FlightRuntime.callValue(createStandardPbrMaterial, cast ([FlightRuntime.mergeObjects([{ baseColor: 437918463.0 }, { metallic: 0.0 }, { roughness: 0.95 }, opts])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createClearcoatPbrMaterial(?opts:Dynamic):ClearcoatPbrMaterial {
+  public static function createClearcoatPbrMaterial(?opts:Dynamic):ClearcoatPbrMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.ClearcoatPbrMaterialKind] : Array<Dynamic>)) : ClearcoatPbrMaterial);
     FlightRuntime.setField(material, 'clearcoat', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'clearcoat'), function():Dynamic return cast 0.0));
@@ -263,12 +260,12 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createColorTransform(?opts:Dynamic):ColorTransform {
+  public static function createColorTransform(?opts:Dynamic):ColorTransform {
     return cast FlightRuntime.callValue(createEntity, cast ([{ redMultiplier: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'redMultiplier'), function():Dynamic return cast 1.0), greenMultiplier: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'greenMultiplier'), function():Dynamic return cast 1.0), blueMultiplier: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'blueMultiplier'), function():Dynamic return cast 1.0), alphaMultiplier: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'alphaMultiplier'), function():Dynamic return cast 1.0), redOffset: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'redOffset'), function():Dynamic return cast 0.0), greenOffset: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'greenOffset'), function():Dynamic return cast 0.0), blueOffset: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'blueOffset'), function():Dynamic return cast 0.0), alphaOffset: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'alphaOffset'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createCustomShaderMaterial(?opts:Dynamic):CustomShaderMaterial {
+  public static function createCustomShaderMaterial(?opts:Dynamic):CustomShaderMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.CustomShaderMaterialKind] : Array<Dynamic>)) : CustomShaderMaterial);
     FlightRuntime.setField(material, 'shaderKey', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'shaderKey'), function():Dynamic return cast ''));
@@ -278,7 +275,7 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createDepthMaterial(?opts:Dynamic):DepthMaterial {
+  public static function createDepthMaterial(?opts:Dynamic):DepthMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.DepthMaterialKind] : Array<Dynamic>)) : DepthMaterial);
     FlightRuntime.setField(material, 'far', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'far'), function():Dynamic return cast 1.0));
@@ -287,7 +284,7 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createEmissiveMaterial(?opts:Dynamic):EmissiveMaterial {
+  public static function createEmissiveMaterial(?opts:Dynamic):EmissiveMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.EmissiveMaterialKind] : Array<Dynamic>)) : EmissiveMaterial);
     FlightRuntime.setField(material, 'emissive', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'emissive'), function():Dynamic return cast 4294967295.0));
@@ -297,17 +294,17 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createGlassTransmissionVolumePbrMaterial(?opts:Dynamic):TransmissionVolumePbrMaterial {
+  public static function createGlassTransmissionVolumePbrMaterial(?opts:Dynamic):TransmissionVolumePbrMaterial {
     return cast FlightRuntime.callValue(createTransmissionVolumePbrMaterial, cast ([FlightRuntime.mergeObjects([{ ior: 1.5 }, { transmission: 1.0 }, opts])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createGoldStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
+  public static function createGoldStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
     return cast FlightRuntime.callValue(createStandardPbrMaterial, cast ([FlightRuntime.mergeObjects([{ baseColor: 4292280575.0 }, { metallic: 1.0 }, { roughness: 0.25 }, opts])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createIridescencePbrMaterial(?opts:Dynamic):IridescencePbrMaterial {
+  public static function createIridescencePbrMaterial(?opts:Dynamic):IridescencePbrMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.IridescencePbrMaterialKind] : Array<Dynamic>)) : IridescencePbrMaterial);
     FlightRuntime.setField(material, 'iridescence', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'iridescence'), function():Dynamic return cast 0.0));
@@ -321,12 +318,12 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createIronStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
+  public static function createIronStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
     return cast FlightRuntime.callValue(createStandardPbrMaterial, cast ([FlightRuntime.mergeObjects([{ baseColor: 1145324799.0 }, { metallic: 1.0 }, { roughness: 0.7 }, opts])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createLambertMaterial(?opts:Dynamic):LambertMaterial {
+  public static function createLambertMaterial(?opts:Dynamic):LambertMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.LambertMaterialKind] : Array<Dynamic>)) : LambertMaterial);
     FlightRuntime.setField(material, 'diffuse', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'diffuse'), function():Dynamic return cast 4294967295.0));
@@ -337,12 +334,12 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createMarbleStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
+  public static function createMarbleStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
     return cast FlightRuntime.callValue(createStandardPbrMaterial, cast ([FlightRuntime.mergeObjects([{ baseColor: 4126537215.0 }, { metallic: 0.0 }, { roughness: 0.05 }, opts])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createMatcapMaterial(?opts:Dynamic):MatcapMaterial {
+  public static function createMatcapMaterial(?opts:Dynamic):MatcapMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.MatcapMaterialKind] : Array<Dynamic>)) : MatcapMaterial);
     FlightRuntime.setField(material, 'matcap', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'matcap'), function():Dynamic return cast null));
@@ -351,7 +348,7 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createMaterial(kind:Kind):Material {
+  public static function createMaterial(kind:Kind):Material {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createEntity, cast ([{ kind: kind }] : Array<Dynamic>)) : Material);
     FlightRuntime.setField(material, 'name', null);
@@ -359,7 +356,7 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createNormalMaterial(?opts:Dynamic):NormalMaterial {
+  public static function createNormalMaterial(?opts:Dynamic):NormalMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.NormalMaterialKind] : Array<Dynamic>)) : NormalMaterial);
     FlightRuntime.setField(material, 'normalMap', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'normalMap'), function():Dynamic return cast null));
@@ -368,7 +365,7 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createPhongMaterial(?opts:Dynamic):PhongMaterial {
+  public static function createPhongMaterial(?opts:Dynamic):PhongMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.PhongMaterialKind] : Array<Dynamic>)) : PhongMaterial);
     FlightRuntime.setField(material, 'diffuse', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'diffuse'), function():Dynamic return cast 4294967295.0));
@@ -382,17 +379,17 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createPlasticStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
+  public static function createPlasticStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
     return cast FlightRuntime.callValue(createStandardPbrMaterial, cast ([FlightRuntime.mergeObjects([{ baseColor: 4294967295.0 }, { metallic: 0.0 }, { roughness: 0.05 }, opts])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createRubberStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
+  public static function createRubberStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
     return cast FlightRuntime.callValue(createStandardPbrMaterial, cast ([FlightRuntime.mergeObjects([{ baseColor: 471604479.0 }, { metallic: 0.0 }, { roughness: 0.9 }, opts])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createSheenPbrMaterial(?opts:Dynamic):SheenPbrMaterial {
+  public static function createSheenPbrMaterial(?opts:Dynamic):SheenPbrMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.SheenPbrMaterialKind] : Array<Dynamic>)) : SheenPbrMaterial);
     FlightRuntime.setField(material, 'sheenColor', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'sheenColor'), function():Dynamic return cast 255.0));
@@ -404,17 +401,17 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createSilverStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
+  public static function createSilverStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
     return cast FlightRuntime.callValue(createStandardPbrMaterial, cast ([FlightRuntime.mergeObjects([{ baseColor: 3233857791.0 }, { metallic: 1.0 }, { roughness: 0.1 }, opts])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createSkinStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
+  public static function createSkinStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
     return cast FlightRuntime.callValue(createStandardPbrMaterial, cast ([FlightRuntime.mergeObjects([{ baseColor: 4291598847.0 }, { metallic: 0.0 }, { roughness: 0.4 }, opts])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createSpecularGlossinessPbrMaterial(?opts:Dynamic):SpecularGlossinessPbrMaterial {
+  public static function createSpecularGlossinessPbrMaterial(?opts:Dynamic):SpecularGlossinessPbrMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.SpecularGlossinessPbrMaterialKind] : Array<Dynamic>)) : SpecularGlossinessPbrMaterial);
     FlightRuntime.setField(material, 'diffuse', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'diffuse'), function():Dynamic return cast 4294967295.0));
@@ -433,7 +430,7 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createSpecularPbrMaterial(?opts:Dynamic):SpecularPbrMaterial {
+  public static function createSpecularPbrMaterial(?opts:Dynamic):SpecularPbrMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.SpecularPbrMaterialKind] : Array<Dynamic>)) : SpecularPbrMaterial);
     FlightRuntime.setField(material, 'specular', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'specular'), function():Dynamic return cast 1.0));
@@ -445,7 +442,7 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
+  public static function createStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.StandardPbrMaterialKind] : Array<Dynamic>)) : StandardPbrMaterial);
     FlightRuntime.callValue(Materials.assignStandardPbrMaterialProperties__pbrMaterials, cast ([material, opts] : Array<Dynamic>));
@@ -453,7 +450,7 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createStandardPbrMaterialProperties(?opts:Dynamic):StandardPbrMaterialProperties {
+  public static function createStandardPbrMaterialProperties(?opts:Dynamic):StandardPbrMaterialProperties {
     var properties:Dynamic = cast FlightRuntime.UNDEFINED;
     properties = (cast {  } : StandardPbrMaterialProperties);
     FlightRuntime.callValue(Materials.assignStandardPbrMaterialProperties__pbrMaterials, cast ([properties, opts] : Array<Dynamic>));
@@ -461,7 +458,7 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createSubsurfacePbrMaterial(?opts:Dynamic):SubsurfacePbrMaterial {
+  public static function createSubsurfacePbrMaterial(?opts:Dynamic):SubsurfacePbrMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.SubsurfacePbrMaterialKind] : Array<Dynamic>)) : SubsurfacePbrMaterial);
     FlightRuntime.setField(material, 'standard', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'standard'), function():Dynamic return cast FlightRuntime.callValue(createStandardPbrMaterialProperties, cast ([] : Array<Dynamic>))));
@@ -474,7 +471,7 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createSurfaceMaterial(kind:Kind):SurfaceMaterial {
+  public static function createSurfaceMaterial(kind:Kind):SurfaceMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createMaterial, cast ([kind] : Array<Dynamic>)) : SurfaceMaterial);
     FlightRuntime.setField(material, 'alphaCutoff', Materials.DEFAULT_ALPHA_CUTOFF__surfaceMaterial);
@@ -486,7 +483,7 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createToonMaterial(?opts:Dynamic):ToonMaterial {
+  public static function createToonMaterial(?opts:Dynamic):ToonMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.ToonMaterialKind] : Array<Dynamic>)) : ToonMaterial);
     FlightRuntime.setField(material, 'baseColor', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'baseColor'), function():Dynamic return cast 4294967295.0));
@@ -497,7 +494,7 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createTransmissionVolumePbrMaterial(?opts:Dynamic):TransmissionVolumePbrMaterial {
+  public static function createTransmissionVolumePbrMaterial(?opts:Dynamic):TransmissionVolumePbrMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.TransmissionVolumePbrMaterialKind] : Array<Dynamic>)) : TransmissionVolumePbrMaterial);
     FlightRuntime.setField(material, 'attenuationColor', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'attenuationColor'), function():Dynamic return cast 4294967295.0));
@@ -512,7 +509,7 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createUnlitMaterial(?opts:Dynamic):UnlitMaterial {
+  public static function createUnlitMaterial(?opts:Dynamic):UnlitMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.UnlitMaterialKind] : Array<Dynamic>)) : UnlitMaterial);
     FlightRuntime.setField(material, 'baseColor', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'baseColor'), function():Dynamic return cast 4294967295.0));
@@ -522,7 +519,7 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createVertexColorMaterial(?opts:Dynamic):VertexColorMaterial {
+  public static function createVertexColorMaterial(?opts:Dynamic):VertexColorMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.VertexColorMaterialKind] : Array<Dynamic>)) : VertexColorMaterial);
     FlightRuntime.setField(material, 'tint', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'tint'), function():Dynamic return cast 4294967295.0));
@@ -530,7 +527,7 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createWireframeMaterial(?opts:Dynamic):WireframeMaterial {
+  public static function createWireframeMaterial(?opts:Dynamic):WireframeMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createSurfaceMaterial, cast ([Types.WireframeMaterialKind] : Array<Dynamic>)) : WireframeMaterial);
     FlightRuntime.setField(material, 'color', FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'color'), function():Dynamic return cast 4294967295.0));
@@ -539,7 +536,7 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function createWoodStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
+  public static function createWoodStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
     return cast FlightRuntime.callValue(createStandardPbrMaterial, cast ([FlightRuntime.mergeObjects([{ baseColor: 2337942527.0 }, { metallic: 0.0 }, { roughness: 0.8 }, opts])] : Array<Dynamic>));
     return cast null;
   }
@@ -552,22 +549,22 @@ class Materials {
 
   public static final DEFAULT_DOUBLE_SIDED__surfaceMaterial:Dynamic = false;
 
-  @:keep public static function equalsColorTransform(a:ColorTransformLike, b:ColorTransformLike):Bool {
+  public static function equalsColorTransform(a:ColorTransformLike, b:ColorTransformLike):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.callValue(equalsColorTransformOffsets, cast ([a, b] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(equalsColorTransformMultipliers, cast ([a, b] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function equalsColorTransformMultipliers(a:ColorTransformLike, b:ColorTransformLike, compareAlpha:Bool = true):Bool {
+  public static function equalsColorTransformMultipliers(a:ColorTransformLike, b:ColorTransformLike, compareAlpha:Bool = true):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.field(a, 'redMultiplier'), FlightRuntime.field(b, 'redMultiplier')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'greenMultiplier'), FlightRuntime.field(b, 'greenMultiplier'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'blueMultiplier'), FlightRuntime.field(b, 'blueMultiplier'))), function():Dynamic return cast FlightRuntime.orValue(!FlightRuntime.truthy(compareAlpha), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'alphaMultiplier'), FlightRuntime.field(b, 'alphaMultiplier'))));
     return cast null;
   }
 
-  @:keep public static function equalsColorTransformOffsets(a:ColorTransformLike, b:ColorTransformLike, compareAlpha:Bool = true):Bool {
+  public static function equalsColorTransformOffsets(a:ColorTransformLike, b:ColorTransformLike, compareAlpha:Bool = true):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.field(a, 'redOffset'), FlightRuntime.field(b, 'redOffset')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'greenOffset'), FlightRuntime.field(b, 'greenOffset'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'blueOffset'), FlightRuntime.field(b, 'blueOffset'))), function():Dynamic return cast FlightRuntime.orValue(!FlightRuntime.truthy(compareAlpha), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'alphaOffset'), FlightRuntime.field(b, 'alphaOffset'))));
     return cast null;
   }
 
-  @:keep public static function equalsMaterial(a:Material, b:Material):Bool {
+  public static function equalsMaterial(a:Material, b:Material):Bool {
     var aFields:Dynamic = cast FlightRuntime.UNDEFINED;
     var bFields:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(a, b))) { return cast true; }
@@ -582,37 +579,37 @@ class Materials {
     return cast null;
   }
 
-  @:keep public static function getColorTransformOffsetRgb(source:ColorTransformLike):Float {
+  public static function getColorTransformOffsetRgb(source:ColorTransformLike):Float {
     return cast (Std.int((Std.int((Std.int(FlightRuntime.callProperty(HxMath, 'fround', cast ([FlightRuntime.field(source, 'redOffset')] : Array<Dynamic>))) << Std.int(16.0))) | Std.int((Std.int(FlightRuntime.callProperty(HxMath, 'fround', cast ([FlightRuntime.field(source, 'greenOffset')] : Array<Dynamic>))) << Std.int(8.0))))) | Std.int(FlightRuntime.callProperty(HxMath, 'fround', cast ([FlightRuntime.field(source, 'blueOffset')] : Array<Dynamic>))));
     return cast null;
   }
 
-  @:keep public static function getColorTransformOffsetRgba(source:ColorTransformLike):Float {
+  public static function getColorTransformOffsetRgba(source:ColorTransformLike):Float {
     return cast (Std.int((Std.int((Std.int((Std.int(FlightRuntime.callProperty(HxMath, 'fround', cast ([FlightRuntime.field(source, 'redOffset')] : Array<Dynamic>))) << Std.int(24.0))) | Std.int((Std.int(FlightRuntime.callProperty(HxMath, 'fround', cast ([FlightRuntime.field(source, 'greenOffset')] : Array<Dynamic>))) << Std.int(16.0))))) | Std.int((Std.int(FlightRuntime.callProperty(HxMath, 'fround', cast ([FlightRuntime.field(source, 'blueOffset')] : Array<Dynamic>))) << Std.int(8.0))))) | Std.int(FlightRuntime.callProperty(HxMath, 'fround', cast ([FlightRuntime.field(source, 'alphaOffset')] : Array<Dynamic>))));
     return cast null;
   }
 
-  @:keep public static function getMaterialAlphaMode(source:SurfaceMaterial):MaterialAlphaMode {
+  public static function getMaterialAlphaMode(source:SurfaceMaterial):MaterialAlphaMode {
     return cast FlightRuntime.field(source, 'alphaMode');
     return cast null;
   }
 
-  @:keep public static function getPbrMetallicFromPhongSpecular(specular:Float, diffuse:Float):Float {
+  public static function getPbrMetallicFromPhongSpecular(specular:Float, diffuse:Float):Float {
     return cast FlightRuntime.select(FlightRuntime.andValue(FlightRuntime.compare(FlightRuntime.callValue(getColorLuminance, cast ([specular] : Array<Dynamic>)), 0.5, '>'), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callValue(getColorLuminance, cast ([diffuse] : Array<Dynamic>)), 0.04, '<')), function():Dynamic return cast 1.0, function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  @:keep public static function getPbrRoughnessFromPhongShininess(shininess:Float):Float {
+  public static function getPbrRoughnessFromPhongShininess(shininess:Float):Float {
     return cast FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'sqrt', cast ([(2.0 / (FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, shininess] : Array<Dynamic>)) + 2.0))] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getPhongToPbrLightExposure():Float {
+  public static function getPhongToPbrLightExposure():Float {
     return cast FlightRuntime.log2(HxMath.PI);
     return cast null;
   }
 
-  @:keep public static function invertColorTransform(out:ColorTransformLike, source:ColorTransformLike):Void {
+  public static function invertColorTransform(out:ColorTransformLike, source:ColorTransformLike):Void {
     FlightRuntime.setField(out, 'redMultiplier', FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.field(source, 'redMultiplier'), 0.0), function():Dynamic return cast (1.0 / FlightRuntime.field(source, 'redMultiplier')), function():Dynamic return cast 1.0));
     FlightRuntime.setField(out, 'greenMultiplier', FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.field(source, 'greenMultiplier'), 0.0), function():Dynamic return cast (1.0 / FlightRuntime.field(source, 'greenMultiplier')), function():Dynamic return cast 1.0));
     FlightRuntime.setField(out, 'blueMultiplier', FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.field(source, 'blueMultiplier'), 0.0), function():Dynamic return cast (1.0 / FlightRuntime.field(source, 'blueMultiplier')), function():Dynamic return cast 1.0));
@@ -623,47 +620,47 @@ class Materials {
     FlightRuntime.setField(out, 'alphaOffset', -FlightRuntime.field(source, 'alphaOffset'));
   }
 
-  @:keep public static function isIdentityColorTransform(source:ColorTransformLike, compareAlphaMultiplier:Bool = true):Bool {
+  public static function isIdentityColorTransform(source:ColorTransformLike, compareAlphaMultiplier:Bool = true):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.callValue(equalsColorTransformOffsets, cast ([source, Materials._identity__colorTransform] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(equalsColorTransformMultipliers, cast ([source, Materials._identity__colorTransform, compareAlphaMultiplier] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function isMaterialBlended(source:SurfaceMaterial):Bool {
+  public static function isMaterialBlended(source:SurfaceMaterial):Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.field(source, 'alphaMode'), 'blend');
     return cast null;
   }
 
-  @:keep public static function isMaterialMasked(source:SurfaceMaterial):Bool {
+  public static function isMaterialMasked(source:SurfaceMaterial):Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.field(source, 'alphaMode'), 'mask');
     return cast null;
   }
 
-  @:keep public static function isMaterialOpaque(source:SurfaceMaterial):Bool {
+  public static function isMaterialOpaque(source:SurfaceMaterial):Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.field(source, 'alphaMode'), 'opaque');
     return cast null;
   }
 
-  @:keep public static function isValidMaterialClearcoat(value:Float):Bool {
+  public static function isValidMaterialClearcoat(value:Float):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([value] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.compare(value, 0.0, '>=')), function():Dynamic return cast FlightRuntime.compare(value, 1.0, '<='));
     return cast null;
   }
 
-  @:keep public static function isValidMaterialIor(value:Float):Bool {
+  public static function isValidMaterialIor(value:Float):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([value] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.compare(value, Materials.MIN_MATERIAL_IOR__materialValidation, '>=')), function():Dynamic return cast FlightRuntime.compare(value, Materials.MAX_MATERIAL_IOR__materialValidation, '<='));
     return cast null;
   }
 
-  @:keep public static function isValidMaterialIridescenceThickness(value:Float):Bool {
+  public static function isValidMaterialIridescenceThickness(value:Float):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([value] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.compare(value, 0.0, '>='));
     return cast null;
   }
 
-  @:keep public static function isValidMaterialWeight(value:Float):Bool {
+  public static function isValidMaterialWeight(value:Float):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([value] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.compare(value, 0.0, '>=')), function():Dynamic return cast FlightRuntime.compare(value, 1.0, '<='));
     return cast null;
   }
 
-  @:keep public static function linearChannelToSrgb8__pbrMaterials(value:Float):Float {
+  public static function linearChannelToSrgb8__pbrMaterials(value:Float):Float {
     var srgb:Dynamic = cast FlightRuntime.UNDEFINED;
     srgb = FlightRuntime.select(FlightRuntime.compare(value, 0.0031308, '<='), function():Dynamic return cast (value * 12.92), function():Dynamic return cast ((1.055 * HxMath.pow(value, (1.0 / 2.4))) - 0.055));
     return cast FlightRuntime.callProperty(HxMath, 'round', cast ([(FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, srgb] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>));
@@ -674,7 +671,7 @@ class Materials {
 
   public static final MIN_MATERIAL_IOR__materialValidation:Dynamic = 1.0;
 
-  @:keep public static function packLinear__pbrMaterials(r:Float, g:Float, b:Float, a:Float):Float {
+  public static function packLinear__pbrMaterials(r:Float, g:Float, b:Float, a:Float):Float {
     return cast FlightRuntime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(FlightRuntime.callValue(Materials.linearChannelToSrgb8__pbrMaterials, cast ([r] : Array<Dynamic>))) << Std.int(24.0))) | Std.int((Std.int(FlightRuntime.callValue(Materials.linearChannelToSrgb8__pbrMaterials, cast ([g] : Array<Dynamic>))) << Std.int(16.0))))) | Std.int((Std.int(FlightRuntime.callValue(Materials.linearChannelToSrgb8__pbrMaterials, cast ([b] : Array<Dynamic>))) << Std.int(8.0))))) | Std.int(FlightRuntime.callProperty(HxMath, 'round', cast ([(a * 255.0)] : Array<Dynamic>))))), Std.int(0.0));
     return cast null;
   }
@@ -683,7 +680,7 @@ class Materials {
 
   public static final scratchLinear2__pbrMaterials:Array<Float> = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
 
-  @:keep public static function setColorTransform(out:ColorTransformLike, redMultiplier:Float, greenMultiplier:Float, blueMultiplier:Float, alphaMultiplier:Float, redOffset:Float, greenOffset:Float, blueOffset:Float, alphaOffset:Float):Void {
+  public static function setColorTransform(out:ColorTransformLike, redMultiplier:Float, greenMultiplier:Float, blueMultiplier:Float, alphaMultiplier:Float, redOffset:Float, greenOffset:Float, blueOffset:Float, alphaOffset:Float):Void {
     FlightRuntime.setField(out, 'redMultiplier', redMultiplier);
     FlightRuntime.setField(out, 'greenMultiplier', greenMultiplier);
     FlightRuntime.setField(out, 'blueMultiplier', blueMultiplier);
@@ -694,11 +691,11 @@ class Materials {
     FlightRuntime.setField(out, 'alphaOffset', alphaOffset);
   }
 
-  @:keep public static function setColorTransformIdentity(out:ColorTransform):Void {
+  public static function setColorTransformIdentity(out:ColorTransform):Void {
     FlightRuntime.callValue(setColorTransform, cast ([out, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function setColorTransformOffsetRgb(out:ColorTransformLike, value:Float):Void {
+  public static function setColorTransformOffsetRgb(out:ColorTransformLike, value:Float):Void {
     FlightRuntime.setField(out, 'redOffset', (Std.int((Std.int(value) >> Std.int(16.0))) & Std.int(255.0)));
     FlightRuntime.setField(out, 'greenOffset', (Std.int((Std.int(value) >> Std.int(8.0))) & Std.int(255.0)));
     FlightRuntime.setField(out, 'blueOffset', (Std.int(value) & Std.int(255.0)));
@@ -709,7 +706,7 @@ class Materials {
     FlightRuntime.setField(out, 'alphaMultiplier', 1.0);
   }
 
-  @:keep public static function setColorTransformOffsetRgba(out:ColorTransformLike, value:Float):Void {
+  public static function setColorTransformOffsetRgba(out:ColorTransformLike, value:Float):Void {
     FlightRuntime.setField(out, 'redOffset', (Std.int((Std.int(value) >> Std.int(24.0))) & Std.int(255.0)));
     FlightRuntime.setField(out, 'greenOffset', (Std.int((Std.int(value) >> Std.int(16.0))) & Std.int(255.0)));
     FlightRuntime.setField(out, 'blueOffset', (Std.int((Std.int(value) >> Std.int(8.0))) & Std.int(255.0)));

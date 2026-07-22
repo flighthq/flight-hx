@@ -30,9 +30,6 @@ import flight.Types.MouseWheelMode;
 
 typedef GamepadPollState__inputManager = { var axes:Dynamic; var buttons:Dynamic; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Input")
 class Input {
   public static final _axisData__inputManager:InputGamepadAxisData = { axis: 0.0, gamepad: 0.0, timeStamp: 0.0, value: 0.0 };
@@ -55,7 +52,7 @@ class Input {
 
   public static final _textData__inputManager:InputTextData = { isComposing: false, text: '' };
 
-  @:keep public static function applyGamepadAxisDeadZone(value:Float, deadZone:Float):Float {
+  public static function applyGamepadAxisDeadZone(value:Float, deadZone:Float):Float {
     var abs:Dynamic = cast FlightRuntime.UNDEFINED;
     var sign:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(deadZone, 0.0, '<='))) { return cast value; }
@@ -66,7 +63,7 @@ class Input {
     return cast null;
   }
 
-  @:keep public static function applyGamepadStickDeadZone(out:{ var x:Float; var y:Float; }, x:Float, y:Float, deadZone:Float):Void {
+  public static function applyGamepadStickDeadZone(out:{ var x:Float; var y:Float; }, x:Float, y:Float, deadZone:Float):Void {
     var mag:Dynamic = cast FlightRuntime.UNDEFINED;
     var scale:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(deadZone, 0.0, '<='))) {
@@ -85,7 +82,7 @@ class Input {
     FlightRuntime.setField(out, 'y', (y * scale));
   }
 
-  @:keep public static function attachGamepadInput(manager:InputManager, target:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachGamepadInput(manager:InputManager, target:Dynamic, ?options:AttachInputOptions):Void {
     var onGamepadConnected:Dynamic = cast FlightRuntime.UNDEFINED;
     var onGamepadDisconnected:Dynamic = cast FlightRuntime.UNDEFINED;
     var rafId:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -132,7 +129,7 @@ class Input {
     FlightRuntime.voidValue(options);
   }
 
-  @:keep public static function attachKeyboardInput(manager:InputManager, target:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachKeyboardInput(manager:InputManager, target:Dynamic, ?options:AttachInputOptions):Void {
     var preventDefault:Dynamic = cast FlightRuntime.UNDEFINED;
     var onKeyDown:Dynamic = cast FlightRuntime.UNDEFINED;
     var onKeyUp:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -161,7 +158,7 @@ class Input {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function attachPointerInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachPointerInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
     var preventDefault:Dynamic = cast FlightRuntime.UNDEFINED;
     var onContextMenu:Dynamic = cast FlightRuntime.UNDEFINED;
     var onPointerCancel:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -210,7 +207,7 @@ class Input {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function attachRelativePointerInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachRelativePointerInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
     var preventDefault:Dynamic = cast FlightRuntime.UNDEFINED;
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     var handler:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -228,7 +225,7 @@ class Input {
     FlightRuntime.callValue(Input.setInputBinding__inputManager, cast ([manager, element, Input.kRelativePointerInput__inputManager, function() return FlightRuntime.callProperty(target, 'removeEventListener', cast (['mousemove', handler] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function attachTextInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachTextInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
     var onBeforeInput:Dynamic = cast FlightRuntime.UNDEFINED;
     var onCompositionUpdate:Dynamic = cast FlightRuntime.UNDEFINED;
     onBeforeInput = function(e:Dynamic) {
@@ -260,7 +257,7 @@ class Input {
     FlightRuntime.voidValue(options);
   }
 
-  @:keep public static function attachWheelInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachWheelInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
     var preventDefault:Dynamic = cast FlightRuntime.UNDEFINED;
     var handler:Dynamic = cast FlightRuntime.UNDEFINED;
     preventDefault = FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'preventDefault'), function():Dynamic return cast true);
@@ -277,7 +274,7 @@ class Input {
     FlightRuntime.callValue(Input.setInputBinding__inputManager, cast ([manager, element, Input.kWheelInput__inputManager, function() return FlightRuntime.callProperty(element, 'removeEventListener', cast (['wheel', handler] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function clearInputBinding__inputManager(manager:InputManager, target:Dynamic, kind:Dynamic):Void {
+  public static function clearInputBinding__inputManager(manager:InputManager, target:Dynamic, kind:Dynamic):Void {
     var byKind:Dynamic = cast FlightRuntime.UNDEFINED;
     var cleanup:Dynamic = cast FlightRuntime.UNDEFINED;
     byKind = FlightRuntime.callOptionalProperty(FlightRuntime.callProperty(Input._inputBindings__inputManager, 'get', cast ([manager] : Array<Dynamic>)), 'get', cast ([target] : Array<Dynamic>));
@@ -287,7 +284,7 @@ class Input {
     FlightRuntime.callProperty(byKind, 'delete', cast ([kind] : Array<Dynamic>));
   }
 
-  @:keep public static function connectInputStateToInputManager(state:InputState, manager:InputManager):Dynamic {
+  public static function connectInputStateToInputManager(state:InputState, manager:InputManager):Dynamic {
     var onKeyDown:Dynamic = cast FlightRuntime.UNDEFINED;
     var onKeyUp:Dynamic = cast FlightRuntime.UNDEFINED;
     var onPointerDown:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -407,7 +404,7 @@ class Input {
     return cast null;
   }
 
-  @:keep public static function createInputKeyRepeatTimer(options:InputKeyRepeatOptions):InputKeyRepeatTimer {
+  public static function createInputKeyRepeatTimer(options:InputKeyRepeatOptions):InputKeyRepeatTimer {
     var delayId:Dynamic = cast FlightRuntime.UNDEFINED;
     var intervalId:Dynamic = cast FlightRuntime.UNDEFINED;
     var stop:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -432,59 +429,59 @@ class Input {
     return cast null;
   }
 
-  @:keep public static function createInputManager():InputManager {
+  public static function createInputManager():InputManager {
     return cast FlightRuntime.mergeObjects([FlightRuntime.callValue(createInputSignals, cast ([] : Array<Dynamic>)), { enabled: true }]);
     return cast null;
   }
 
-  @:keep public static function createInputSignals():InputSignals {
+  public static function createInputSignals():InputSignals {
     return cast { onGamepadAxisMove: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onGamepadButtonDown: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onGamepadButtonUp: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onGamepadConnect: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onGamepadDisconnect: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onKeyDown: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onKeyUp: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerCancel: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerDown: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerMove: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerMoveRelative: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerUp: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onTextEdit: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onTextInput: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onWheel: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createInputState():InputState {
+  public static function createInputState():InputState {
     return cast { axisValues: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), gamepadButtonsDown: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []), justPressedGamepadButtons: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []), justPressedKeys: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []), justReleasedGamepadButtons: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []), justReleasedKeys: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []), keysDown: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []), pointerButtonsDown: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };
     return cast null;
   }
 
-  @:keep public static function detachGamepadInput(manager:InputManager, target:Dynamic):Void {
+  public static function detachGamepadInput(manager:InputManager, target:Dynamic):Void {
     FlightRuntime.callValue(Input.clearInputBinding__inputManager, cast ([manager, target, Input.kGamepadInput__inputManager] : Array<Dynamic>));
   }
 
-  @:keep public static function detachKeyboardInput(manager:InputManager, target:Dynamic):Void {
+  public static function detachKeyboardInput(manager:InputManager, target:Dynamic):Void {
     FlightRuntime.callValue(Input.clearInputBinding__inputManager, cast ([manager, target, Input.kKeyboardInput__inputManager] : Array<Dynamic>));
   }
 
-  @:keep public static function detachPointerInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachPointerInput(manager:InputManager, element:Dynamic):Void {
     FlightRuntime.callValue(Input.clearInputBinding__inputManager, cast ([manager, element, Input.kPointerInput__inputManager] : Array<Dynamic>));
   }
 
-  @:keep public static function detachRelativePointerInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachRelativePointerInput(manager:InputManager, element:Dynamic):Void {
     FlightRuntime.callValue(Input.clearInputBinding__inputManager, cast ([manager, element, Input.kRelativePointerInput__inputManager] : Array<Dynamic>));
   }
 
-  @:keep public static function detachTextInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachTextInput(manager:InputManager, element:Dynamic):Void {
     FlightRuntime.callValue(Input.clearInputBinding__inputManager, cast ([manager, element, Input.kTextInput__inputManager] : Array<Dynamic>));
   }
 
-  @:keep public static function detachWheelInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachWheelInput(manager:InputManager, element:Dynamic):Void {
     FlightRuntime.callValue(Input.clearInputBinding__inputManager, cast ([manager, element, Input.kWheelInput__inputManager] : Array<Dynamic>));
   }
 
-  @:keep public static function endInputStateFrame(state:InputState):Void {
+  public static function endInputStateFrame(state:InputState):Void {
     FlightRuntime.callProperty(FlightRuntime.field(state, 'justPressedKeys'), 'clear', cast ([] : Array<Dynamic>));
     FlightRuntime.callProperty(FlightRuntime.field(state, 'justReleasedKeys'), 'clear', cast ([] : Array<Dynamic>));
     FlightRuntime.callProperty(FlightRuntime.field(state, 'justPressedGamepadButtons'), 'clear', cast ([] : Array<Dynamic>));
     FlightRuntime.callProperty(FlightRuntime.field(state, 'justReleasedGamepadButtons'), 'clear', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function exitInputPointerLock():Void {
+  public static function exitInputPointerLock():Void {
     if (FlightRuntime.truthy(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'exitPointerLock'))) {
   FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'exitPointerLock', cast ([] : Array<Dynamic>));
 }
   }
 
-  @:keep public static function getCoalescedInputPointerEvents(event:Dynamic, callback:Dynamic):Void {
+  public static function getCoalescedInputPointerEvents(event:Dynamic, callback:Dynamic):Void {
     var coalesced:Dynamic = cast FlightRuntime.UNDEFINED;
     coalesced = FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(event, 'getCoalescedEvents')), 'function'), function():Dynamic return cast FlightRuntime.callProperty(event, 'getCoalescedEvents', cast ([] : Array<Dynamic>)), function():Dynamic return cast null);
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(coalesced, null), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(coalesced, 'length'), 0.0, '>')))) {
@@ -498,24 +495,24 @@ class Input {
 }
   }
 
-  @:keep public static function getGamepadAxisName(mapping:GamepadMappingKind, index:Float):Null<GamepadAxisKind> {
+  public static function getGamepadAxisName(mapping:GamepadMappingKind, index:Float):Null<GamepadAxisKind> {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(mapping, 'standard'))) { return cast null; }
     return cast FlightRuntime.coalesce(FlightRuntime.getIndex(Input._standardAxisNames__inputManager, index), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getGamepadButtonName(mapping:GamepadMappingKind, index:Float):Null<GamepadButtonKind> {
+  public static function getGamepadButtonName(mapping:GamepadMappingKind, index:Float):Null<GamepadButtonKind> {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(mapping, 'standard'))) { return cast null; }
     return cast FlightRuntime.coalesce(FlightRuntime.getIndex(Input._standardButtonNames__inputManager, index), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getInputGamepadAxis(state:InputState, gamepad:Float, axis:Float):Float {
+  public static function getInputGamepadAxis(state:InputState, gamepad:Float, axis:Float):Float {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.field(state, 'axisValues'), 'get', cast ([((gamepad * Input.MAX_GAMEPAD_AXES__inputManager) + axis)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  @:keep public static function getKeyCodeFromDomKeyboardCode__inputManager(code:String, location:Float):Float {
+  public static function getKeyCodeFromDomKeyboardCode__inputManager(code:String, location:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.strictEquals(location, FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['KeyboardEvent'] : Array<Dynamic>)), 'DOM_KEY_LOCATION_NUMPAD')), function():Dynamic return cast FlightRuntime.hasField(Input.numpadKeyCodesByCode__inputManager, code)))) {
   return cast FlightRuntime.getIndex(Input.numpadKeyCodesByCode__inputManager, code);
 }
@@ -523,7 +520,7 @@ class Input {
     return cast null;
   }
 
-  @:keep public static function getKeyCodeFromDomKeyboardEvent(event:Dynamic):Float {
+  public static function getKeyCodeFromDomKeyboardEvent(event:Dynamic):Float {
     var code:Dynamic = cast FlightRuntime.UNDEFINED;
     code = FlightRuntime.callValue(Input.getKeyCodeFromDomKeyboardCode__inputManager, cast ([FlightRuntime.field(event, 'code'), FlightRuntime.field(event, 'location')] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(code, Types.KeyCodeValue.UNKNOWN))) { return cast code; }
@@ -532,7 +529,7 @@ class Input {
     return cast null;
   }
 
-  @:keep public static function getKeyModifierFromDomKeyboardEvent(event:Dynamic):Float {
+  public static function getKeyModifierFromDomKeyboardEvent(event:Dynamic):Float {
     var modifier:Dynamic = cast FlightRuntime.UNDEFINED;
     modifier = Types.KeyModifierValue.NONE;
     if (FlightRuntime.truthy(FlightRuntime.field(event, 'altKey'))) { (modifier = (Std.int(modifier) | Std.int(FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.field(event, 'location'), FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['KeyboardEvent'] : Array<Dynamic>)), 'DOM_KEY_LOCATION_RIGHT')), function():Dynamic return cast Types.KeyModifierValue.RIGHT_ALT, function():Dynamic return cast Types.KeyModifierValue.LEFT_ALT)))); }
@@ -545,7 +542,7 @@ class Input {
     return cast null;
   }
 
-  @:keep public static function getMouseWheelModeFromDomWheelEvent(event:Dynamic):MouseWheelMode {
+  public static function getMouseWheelModeFromDomWheelEvent(event:Dynamic):MouseWheelMode {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(event, 'deltaMode'), FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WheelEvent'] : Array<Dynamic>)), 'DOM_DELTA_PIXEL')))) { return cast 'pixels'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(event, 'deltaMode'), FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WheelEvent'] : Array<Dynamic>)), 'DOM_DELTA_LINE')))) { return cast 'lines'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(event, 'deltaMode'), FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WheelEvent'] : Array<Dynamic>)), 'DOM_DELTA_PAGE')))) { return cast 'pages'; }
@@ -553,7 +550,7 @@ class Input {
     return cast null;
   }
 
-  @:keep public static function getOrCreateGamepadPollState__inputManager(manager:InputManager):GamepadPollState__inputManager {
+  public static function getOrCreateGamepadPollState__inputManager(manager:InputManager):GamepadPollState__inputManager {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     state = FlightRuntime.callProperty(Input._gamepadPollStates__inputManager, 'get', cast ([manager] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(state, FlightRuntime.UNDEFINED))) {
@@ -564,27 +561,27 @@ class Input {
     return cast null;
   }
 
-  @:keep public static function getPointerTypeFromDomPointerEvent__inputManager(event:Dynamic):Dynamic {
+  public static function getPointerTypeFromDomPointerEvent__inputManager(event:Dynamic):Dynamic {
     return cast FlightRuntime.select(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.field(event, 'pointerType'), 'mouse'), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(event, 'pointerType'), 'pen')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(event, 'pointerType'), 'touch')), function():Dynamic return cast FlightRuntime.field(event, 'pointerType'), function():Dynamic return cast 'unknown');
     return cast null;
   }
 
-  @:keep public static function hasInputPointerLock():Bool {
+  public static function hasInputPointerLock():Bool {
     return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'pointerLockElement'), null);
     return cast null;
   }
 
-  @:keep public static function isInputGamepadButtonDown(state:InputState, gamepad:Float, button:Float):Bool {
+  public static function isInputGamepadButtonDown(state:InputState, gamepad:Float, button:Float):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.field(state, 'gamepadButtonsDown'), 'has', cast ([((gamepad * Input.MAX_GAMEPAD_BUTTONS__inputManager) + button)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function isInputKeyDown(state:InputState, keyCode:Float):Bool {
+  public static function isInputKeyDown(state:InputState, keyCode:Float):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.field(state, 'keysDown'), 'has', cast ([keyCode] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function isInputPointerButtonDown(state:InputState, pointerId:Float, button:Float):Bool {
+  public static function isInputPointerButtonDown(state:InputState, pointerId:Float, button:Float):Bool {
     return cast !FlightRuntime.strictEquals((Std.int(FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.field(state, 'pointerButtonsDown'), 'get', cast ([pointerId] : Array<Dynamic>)), function():Dynamic return cast 0.0)) & Std.int((Std.int(1.0) << Std.int(button)))), 0.0);
     return cast null;
   }
@@ -611,7 +608,7 @@ class Input {
 
   public static final numpadKeyCodesByCode__inputManager:Dynamic = { Enter: Types.KeyCodeValue.NUMPAD_ENTER, Numpad0: Types.KeyCodeValue.NUMPAD_0, Numpad1: Types.KeyCodeValue.NUMPAD_1, Numpad2: Types.KeyCodeValue.NUMPAD_2, Numpad3: Types.KeyCodeValue.NUMPAD_3, Numpad4: Types.KeyCodeValue.NUMPAD_4, Numpad5: Types.KeyCodeValue.NUMPAD_5, Numpad6: Types.KeyCodeValue.NUMPAD_6, Numpad7: Types.KeyCodeValue.NUMPAD_7, Numpad8: Types.KeyCodeValue.NUMPAD_8, Numpad9: Types.KeyCodeValue.NUMPAD_9, NumpadAdd: Types.KeyCodeValue.NUMPAD_PLUS, NumpadBackspace: Types.KeyCodeValue.NUMPAD_BACKSPACE, NumpadClear: Types.KeyCodeValue.NUMPAD_CLEAR, NumpadClearEntry: Types.KeyCodeValue.NUMPAD_CLEAR_ENTRY, NumpadComma: Types.KeyCodeValue.NUMPAD_COMMA, NumpadDecimal: Types.KeyCodeValue.NUMPAD_PERIOD, NumpadDivide: Types.KeyCodeValue.NUMPAD_DIVIDE, NumpadEqual: Types.KeyCodeValue.NUMPAD_EQUALS, NumpadHash: Types.KeyCodeValue.NUMPAD_HASH, NumpadMemoryAdd: Types.KeyCodeValue.NUMPAD_MEM_ADD, NumpadMemoryClear: Types.KeyCodeValue.NUMPAD_MEM_CLEAR, NumpadMemoryRecall: Types.KeyCodeValue.NUMPAD_MEM_RECALL, NumpadMemoryStore: Types.KeyCodeValue.NUMPAD_MEM_STORE, NumpadMemorySubtract: Types.KeyCodeValue.NUMPAD_MEM_SUBTRACT, NumpadMultiply: Types.KeyCodeValue.NUMPAD_MULTIPLY, NumpadParenLeft: Types.KeyCodeValue.NUMPAD_LEFT_PARENTHESIS, NumpadParenRight: Types.KeyCodeValue.NUMPAD_RIGHT_PARENTHESIS, NumpadSubtract: Types.KeyCodeValue.NUMPAD_MINUS };
 
-  @:keep public static function pollGamepadInput(manager:InputManager):Void {
+  public static function pollGamepadInput(manager:InputManager):Void {
     var now:Dynamic = cast FlightRuntime.UNDEFINED;
     var prev:Dynamic = cast FlightRuntime.UNDEFINED;
     var gamepads:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -663,14 +660,14 @@ class Input {
     }
   }
 
-  @:keep public static function releaseInputPointerCapture(element:Dynamic, pointerId:Float):Void {
+  public static function releaseInputPointerCapture(element:Dynamic, pointerId:Float):Void {
     try {
   FlightRuntime.callProperty(element, 'releasePointerCapture', cast ([pointerId] : Array<Dynamic>));
 } catch (__error:Dynamic) {
 }
   }
 
-  @:keep public static function requestInputPointerLock(element:Dynamic):flight.internal.FlightPromise<Bool> {
+  public static function requestInputPointerLock(element:Dynamic):flight.internal.FlightPromise<Bool> {
     try {
   var result:Dynamic = FlightRuntime.callProperty(element, 'requestPointerLock', cast ([] : Array<Dynamic>));
   if (FlightRuntime.truthy(FlightRuntime.isInstanceOf(result, FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>))))) {
@@ -683,7 +680,7 @@ class Input {
     return cast null;
   }
 
-  @:keep public static function setInputBinding__inputManager(manager:InputManager, target:Dynamic, kind:Dynamic, cleanup:Dynamic):Void {
+  public static function setInputBinding__inputManager(manager:InputManager, target:Dynamic, kind:Dynamic, cleanup:Dynamic):Void {
     var byTarget:Dynamic = cast FlightRuntime.UNDEFINED;
     var byKind:Dynamic = cast FlightRuntime.UNDEFINED;
     byTarget = FlightRuntime.callProperty(Input._inputBindings__inputManager, 'get', cast ([manager] : Array<Dynamic>));
@@ -700,7 +697,7 @@ class Input {
     FlightRuntime.callProperty(byKind, 'set', cast ([kind, cleanup] : Array<Dynamic>));
   }
 
-  @:keep public static function setInputKeyboardData__inputManager(out:InputKeyboardData, event:Dynamic):Void {
+  public static function setInputKeyboardData__inputManager(out:InputKeyboardData, event:Dynamic):Void {
     var modifier:Dynamic = cast FlightRuntime.UNDEFINED;
     modifier = FlightRuntime.callValue(getKeyModifierFromDomKeyboardEvent, cast ([event] : Array<Dynamic>));
     FlightRuntime.setField(out, 'altKey', FlightRuntime.field(event, 'altKey'));
@@ -718,11 +715,11 @@ class Input {
     FlightRuntime.setField(out, 'timeStamp', FlightRuntime.field(event, 'timeStamp'));
   }
 
-  @:keep public static function setInputPointerCapture(element:Dynamic, pointerId:Float):Void {
+  public static function setInputPointerCapture(element:Dynamic, pointerId:Float):Void {
     FlightRuntime.callProperty(element, 'setPointerCapture', cast ([pointerId] : Array<Dynamic>));
   }
 
-  @:keep public static function setInputPointerData__inputManager(out:InputPointerData, event:Dynamic, deltaX:Float, deltaY:Float):Void {
+  public static function setInputPointerData__inputManager(out:InputPointerData, event:Dynamic, deltaX:Float, deltaY:Float):Void {
     FlightRuntime.setField(out, 'altKey', FlightRuntime.field(event, 'altKey'));
     FlightRuntime.setField(out, 'button', FlightRuntime.field(event, 'button'));
     FlightRuntime.setField(out, 'buttons', FlightRuntime.field(event, 'buttons'));
@@ -746,22 +743,22 @@ class Input {
     FlightRuntime.setField(out, 'y', FlightRuntime.field(event, 'clientY'));
   }
 
-  @:keep public static function wasInputGamepadButtonPressed(state:InputState, gamepad:Float, button:Float):Bool {
+  public static function wasInputGamepadButtonPressed(state:InputState, gamepad:Float, button:Float):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.field(state, 'justPressedGamepadButtons'), 'has', cast ([((gamepad * Input.MAX_GAMEPAD_BUTTONS__inputManager) + button)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function wasInputGamepadButtonReleased(state:InputState, gamepad:Float, button:Float):Bool {
+  public static function wasInputGamepadButtonReleased(state:InputState, gamepad:Float, button:Float):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.field(state, 'justReleasedGamepadButtons'), 'has', cast ([((gamepad * Input.MAX_GAMEPAD_BUTTONS__inputManager) + button)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function wasInputKeyPressed(state:InputState, keyCode:Float):Bool {
+  public static function wasInputKeyPressed(state:InputState, keyCode:Float):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.field(state, 'justPressedKeys'), 'has', cast ([keyCode] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function wasInputKeyReleased(state:InputState, keyCode:Float):Bool {
+  public static function wasInputKeyReleased(state:InputState, keyCode:Float):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.field(state, 'justReleasedKeys'), 'has', cast ([keyCode] : Array<Dynamic>));
     return cast null;
   }

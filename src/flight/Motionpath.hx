@@ -12,12 +12,9 @@ import flight.Types.MotionPathLoopMode;
 import flight.Types.Path;
 import flight.Types.Vector2Like;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Motionpath")
 class Motionpath {
-  @:keep public static function applyMotionPathLoopMode__updateMotionPath(mp:MotionPath, move:Float, length:Float):Void {
+  public static function applyMotionPathLoopMode__updateMotionPath(mp:MotionPath, move:Float, length:Float):Void {
     var loopMode:Dynamic = cast FlightRuntime.UNDEFINED;
     var distance:Dynamic = cast FlightRuntime.UNDEFINED;
     var direction:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -50,30 +47,30 @@ class Motionpath {
     FlightRuntime.setField(mp, 'distance', clamped);
   }
 
-  @:keep public static function createMotionPath(path:Path, speed:Dynamic = 0.0, loopMode:MotionPathLoopMode = 'clamp', ?tolerance:Float):MotionPath {
+  public static function createMotionPath(path:Path, speed:Dynamic = 0.0, loopMode:MotionPathLoopMode = 'clamp', ?tolerance:Float):MotionPath {
     return cast { direction: 1.0, distance: 0.0, length: FlightRuntime.callValue(getPathLength, cast ([path, tolerance] : Array<Dynamic>)), loopMode: loopMode, path: path, speed: speed };
     return cast null;
   }
 
-  @:keep public static function getMotionPathHeading(mp:MotionPath):Float {
+  public static function getMotionPathHeading(mp:MotionPath):Float {
     FlightRuntime.callValue(getPathTangentAtDistance, cast ([FlightRuntime.field(mp, 'path'), FlightRuntime.field(mp, 'distance'), Motionpath.scratchTangent__getMotionPathHeading] : Array<Dynamic>));
     return cast FlightRuntime.callProperty(HxMath, 'atan2', cast ([FlightRuntime.field(Motionpath.scratchTangent__getMotionPathHeading, 'y'), FlightRuntime.field(Motionpath.scratchTangent__getMotionPathHeading, 'x')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getMotionPathPosition(mp:MotionPath, pointOut:Vector2Like, tangentOut:Vector2Like):Bool {
+  public static function getMotionPathPosition(mp:MotionPath, pointOut:Vector2Like, tangentOut:Vector2Like):Bool {
     return cast FlightRuntime.callValue(getPathPositionAtDistance, cast ([FlightRuntime.field(mp, 'path'), FlightRuntime.field(mp, 'distance'), pointOut, tangentOut] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getMotionPathProgress(mp:MotionPath):Float {
+  public static function getMotionPathProgress(mp:MotionPath):Float {
     return cast FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(mp, 'length'), 0.0, '>'), function():Dynamic return cast (FlightRuntime.field(mp, 'distance') / FlightRuntime.field(mp, 'length')), function():Dynamic return cast 0.0);
     return cast null;
   }
 
   public static final scratchTangent__getMotionPathHeading:Dynamic = FlightRuntime.callValue(createVector2, cast ([] : Array<Dynamic>));
 
-  @:keep public static function setMotionPathDistance(mp:MotionPath, distance:Float):Void {
+  public static function setMotionPathDistance(mp:MotionPath, distance:Float):Void {
     var length:Dynamic = cast FlightRuntime.UNDEFINED;
     var clamped:Dynamic = cast FlightRuntime.UNDEFINED;
     length = FlightRuntime.field(mp, 'length');
@@ -82,14 +79,14 @@ class Motionpath {
     FlightRuntime.setField(mp, 'distance', clamped);
   }
 
-  @:keep public static function setMotionPathProgress(mp:MotionPath, t:Float):Void {
+  public static function setMotionPathProgress(mp:MotionPath, t:Float):Void {
     var clamped:Dynamic = cast FlightRuntime.UNDEFINED;
     clamped = t;
     if (FlightRuntime.truthy(FlightRuntime.compare(clamped, 0.0, '<'))) { (clamped = cast (0.0 : Dynamic)); } else { if (FlightRuntime.truthy(FlightRuntime.compare(clamped, 1.0, '>'))) { (clamped = cast (1.0 : Dynamic)); } }
     FlightRuntime.setField(mp, 'distance', (clamped * FlightRuntime.field(mp, 'length')));
   }
 
-  @:keep public static function updateMotionPath(mp:MotionPath, deltaTime:Float):Void {
+  public static function updateMotionPath(mp:MotionPath, deltaTime:Float):Void {
     var length:Dynamic = cast FlightRuntime.UNDEFINED;
     var move:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(deltaTime, 0.0, '<='))) { return; }

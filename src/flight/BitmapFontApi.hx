@@ -10,12 +10,9 @@ import flight.Types.GlyphMetrics;
 import flight.Types.GlyphSource;
 import flight.Types.TextureAtlas;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.BitmapFontApi")
 class BitmapFontApi {
-  @:keep public static function createBitmapFont(data:BitmapFontData):BitmapFont {
+  public static function createBitmapFont(data:BitmapFontData):BitmapFont {
     var pageCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var glyphs:Dynamic = cast FlightRuntime.UNDEFINED;
     var kerning:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -35,7 +32,7 @@ class BitmapFontApi {
     return cast null;
   }
 
-  @:keep public static function createGlyphSourceFromBitmapFont(font:BitmapFont):GlyphSource {
+  public static function createGlyphSourceFromBitmapFont(font:BitmapFont):GlyphSource {
     return cast { getGlyphAtlasImage: function(page:Dynamic = 0.0) {
   return cast FlightRuntime.coalesce(FlightRuntime.optionalField(FlightRuntime.getIndex(FlightRuntime.field(font, 'pages'), page), 'image'), function():Dynamic return cast null);
 }, getGlyphEntry: function(codepoint:Dynamic) {
@@ -48,32 +45,32 @@ class BitmapFontApi {
     return cast null;
   }
 
-  @:keep public static function getBitmapFontGlyph(font:BitmapFont, codepoint:Float):Null<GlyphEntry> {
+  public static function getBitmapFontGlyph(font:BitmapFont, codepoint:Float):Null<GlyphEntry> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.field(font, 'glyphs'), 'get', cast ([codepoint] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getBitmapFontKerning(font:BitmapFont, left:Float, right:Float):Float {
+  public static function getBitmapFontKerning(font:BitmapFont, left:Float, right:Float):Float {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.field(font, 'kerning'), 'get', cast ([FlightRuntime.callValue(BitmapFontApi.packBitmapFontKerningKey__bitmapFont, cast ([left, right] : Array<Dynamic>))] : Array<Dynamic>)), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  @:keep public static function getBitmapFontMetrics(font:BitmapFont):GlyphMetrics {
+  public static function getBitmapFontMetrics(font:BitmapFont):GlyphMetrics {
     return cast FlightRuntime.field(font, 'metrics');
     return cast null;
   }
 
-  @:keep public static function getBitmapFontPage(font:BitmapFont, page:Dynamic = 0.0):Null<TextureAtlas> {
+  public static function getBitmapFontPage(font:BitmapFont, page:Dynamic = 0.0):Null<TextureAtlas> {
     return cast FlightRuntime.coalesce(FlightRuntime.getIndex(FlightRuntime.field(font, 'pages'), page), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getBitmapFontPages(font:BitmapFont):Array<TextureAtlas> {
+  public static function getBitmapFontPages(font:BitmapFont):Array<TextureAtlas> {
     return cast FlightRuntime.field(font, 'pages');
     return cast null;
   }
 
-  @:keep public static function packBitmapFontKerningKey__bitmapFont(left:Float, right:Float):Float {
+  public static function packBitmapFontKerningKey__bitmapFont(left:Float, right:Float):Float {
     return cast (Std.int((Std.int(left) << Std.int(16.0))) | Std.int(right));
     return cast null;
   }

@@ -9,17 +9,14 @@ typedef HslColor = Array<Float>;
 
 typedef HsvColor = Array<Float>;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Color")
 class Color {
-  @:keep public static function computeRgbHexString(color:Float):String {
+  public static function computeRgbHexString(color:Float):String {
     return cast '#' + Std.string(FlightRuntime.padStart(FlightRuntime.numberToString((Std.int(color) & Std.int(16777215.0)), 16.0), 6.0, '0')) + '';
     return cast null;
   }
 
-  @:keep public static function createColorFromKelvin(kelvin:Float):Float {
+  public static function createColorFromKelvin(kelvin:Float):Float {
     var temp:Dynamic = cast FlightRuntime.UNDEFINED;
     var r:Float = cast FlightRuntime.UNDEFINED;
     var g:Float = cast FlightRuntime.UNDEFINED;
@@ -52,27 +49,27 @@ class Color {
     return cast null;
   }
 
-  @:keep public static function createHslColor():HslColor {
+  public static function createHslColor():HslColor {
     return cast cast ([0.0, 0.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function createHsvColor():HsvColor {
+  public static function createHsvColor():HsvColor {
     return cast cast ([0.0, 0.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function createLinearColor():LinearColor {
+  public static function createLinearColor():LinearColor {
     return cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function getColorAlpha(color:Float):Float {
+  public static function getColorAlpha(color:Float):Float {
     return cast ((Std.int(color) & Std.int(255.0)) / 255.0);
     return cast null;
   }
 
-  @:keep public static function getColorContrastRatio(a:Float, b:Float):Float {
+  public static function getColorContrastRatio(a:Float, b:Float):Float {
     var la:Dynamic = cast FlightRuntime.UNDEFINED;
     var lb:Dynamic = cast FlightRuntime.UNDEFINED;
     var lighter:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -85,7 +82,7 @@ class Color {
     return cast null;
   }
 
-  @:keep public static function getColorLuminance(color:Float):Float {
+  public static function getColorLuminance(color:Float):Float {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -96,24 +93,24 @@ class Color {
     return cast null;
   }
 
-  @:keep public static function getColorRgb(color:Float):Float {
+  public static function getColorRgb(color:Float):Float {
     return cast (Std.int(FlightRuntime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(16777215.0));
     return cast null;
   }
 
-  @:keep public static function getRec2020LuminanceWeights(out:Array<Float>):Void {
+  public static function getRec2020LuminanceWeights(out:Array<Float>):Void {
     FlightRuntime.setIndex(out, 0.0, 0.2627);
     FlightRuntime.setIndex(out, 1.0, 0.678);
     FlightRuntime.setIndex(out, 2.0, 0.0593);
   }
 
-  @:keep public static function getRec709LuminanceWeights(out:Array<Float>):Void {
+  public static function getRec709LuminanceWeights(out:Array<Float>):Void {
     FlightRuntime.setIndex(out, 0.0, 0.2126);
     FlightRuntime.setIndex(out, 1.0, 0.7152);
     FlightRuntime.setIndex(out, 2.0, 0.0722);
   }
 
-  @:keep public static function hslToRgb(out:Array<Float>, h:Float, s:Float, l:Float):Void {
+  public static function hslToRgb(out:Array<Float>, h:Float, s:Float, l:Float):Void {
     var q:Dynamic = cast FlightRuntime.UNDEFINED;
     var p:Dynamic = cast FlightRuntime.UNDEFINED;
     var hn:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -131,7 +128,7 @@ class Color {
     FlightRuntime.setIndex(out, 2.0, FlightRuntime.callValue(Color.hueToRgbChannel__hslColor, cast ([p, q, (hn - (1.0 / 3.0))] : Array<Dynamic>)));
   }
 
-  @:keep public static function hsvToRgb(out:Array<Float>, h:Float, s:Float, v:Float):Void {
+  public static function hsvToRgb(out:Array<Float>, h:Float, s:Float, v:Float):Void {
     var hn:Dynamic = cast FlightRuntime.UNDEFINED;
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     var f:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -185,7 +182,7 @@ class Color {
     }
   }
 
-  @:keep public static function hueToRgbChannel__hslColor(p:Float, q:Float, t:Float):Float {
+  public static function hueToRgbChannel__hslColor(p:Float, q:Float, t:Float):Float {
     var tn:Dynamic = cast FlightRuntime.UNDEFINED;
     tn = (((t % 1.0) + 1.0) % 1.0);
     if (FlightRuntime.truthy(FlightRuntime.compare(tn, (1.0 / 6.0), '<'))) { return cast (p + (((q - p) * 6.0) * tn)); }
@@ -195,7 +192,7 @@ class Color {
     return cast null;
   }
 
-  @:keep public static function lerpColor(start:Float, end:Float, t:Float):Float {
+  public static function lerpColor(start:Float, end:Float, t:Float):Float {
     var tc:Dynamic = cast FlightRuntime.UNDEFINED;
     var sr:Dynamic = cast FlightRuntime.UNDEFINED;
     var sg:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -226,7 +223,7 @@ class Color {
     return cast null;
   }
 
-  @:keep public static function lerpLinearColor(out:LinearColor, start:LinearColor, end:LinearColor, t:Float):LinearColor {
+  public static function lerpLinearColor(out:LinearColor, start:LinearColor, end:LinearColor, t:Float):LinearColor {
     var tc:Dynamic = cast FlightRuntime.UNDEFINED;
     var r0:Dynamic = cast FlightRuntime.UNDEFINED;
     var g0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -253,12 +250,12 @@ class Color {
     return cast null;
   }
 
-  @:keep public static function linearChannelToSrgb(value:Float):Float {
+  public static function linearChannelToSrgb(value:Float):Float {
     return cast FlightRuntime.select(FlightRuntime.compare(value, 0.0031308, '<='), function():Dynamic return cast (value * 12.92), function():Dynamic return cast ((1.055 * HxMath.pow(value, (1.0 / 2.4))) - 0.055));
     return cast null;
   }
 
-  @:keep public static function linearRgbToOklab(out:Array<Float>, r:Float, g:Float, b:Float):Void {
+  public static function linearRgbToOklab(out:Array<Float>, r:Float, g:Float, b:Float):Void {
     var l:Dynamic = cast FlightRuntime.UNDEFINED;
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -276,7 +273,7 @@ class Color {
     FlightRuntime.setIndex(out, 2.0, (((0.0259040371 * lc) + (0.7827717662 * mc)) - (0.808675766 * sc)));
   }
 
-  @:keep public static function oklabToLinearRgb(out:Array<Float>, L:Float, a:Float, b:Float):Void {
+  public static function oklabToLinearRgb(out:Array<Float>, L:Float, a:Float, b:Float):Void {
     var lc:Dynamic = cast FlightRuntime.UNDEFINED;
     var mc:Dynamic = cast FlightRuntime.UNDEFINED;
     var sc:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -294,7 +291,7 @@ class Color {
     FlightRuntime.setIndex(out, 2.0, FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, (((-0.0041960863 * l) - (0.7034186147 * m)) + (1.707614701 * s))] : Array<Dynamic>)));
   }
 
-  @:keep public static function packColor(r:Float, g:Float, b:Float, a:Float):Float {
+  public static function packColor(r:Float, g:Float, b:Float, a:Float):Float {
     var ri:Dynamic = cast FlightRuntime.UNDEFINED;
     var gi:Dynamic = cast FlightRuntime.UNDEFINED;
     var bi:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -307,7 +304,7 @@ class Color {
     return cast null;
   }
 
-  @:keep public static function packLinearToColor(color:LinearColor):Float {
+  public static function packLinearToColor(color:LinearColor):Float {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -320,12 +317,12 @@ class Color {
     return cast null;
   }
 
-  @:keep public static function packOpaqueColor(rgb:Float):Float {
+  public static function packOpaqueColor(rgb:Float):Float {
     return cast FlightRuntime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int(rgb) & Std.int(16777215.0))) << Std.int(8.0))) | Std.int(255.0))), Std.int(0.0));
     return cast null;
   }
 
-  @:keep public static function premultiplyColorAlpha(color:Float):Float {
+  public static function premultiplyColorAlpha(color:Float):Float {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -338,7 +335,7 @@ class Color {
     return cast null;
   }
 
-  @:keep public static function rgbToHsl(out:HslColor, color:Float):HslColor {
+  public static function rgbToHsl(out:HslColor, color:Float):HslColor {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -376,7 +373,7 @@ class Color {
     return cast null;
   }
 
-  @:keep public static function rgbToHsv(out:HsvColor, color:Float):HsvColor {
+  public static function rgbToHsv(out:HsvColor, color:Float):HsvColor {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -410,26 +407,26 @@ class Color {
     return cast null;
   }
 
-  @:keep public static function setColorAlpha(color:Float, alpha:Float):Float {
+  public static function setColorAlpha(color:Float, alpha:Float):Float {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     a = FlightRuntime.callProperty(HxMath, 'round', cast ([(FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, alpha] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>));
     return cast FlightRuntime.unsignedShiftRight(Std.int((Std.int((Std.int(color) & Std.int(4294967040.0))) | Std.int(a))), Std.int(0.0));
     return cast null;
   }
 
-  @:keep public static function srgbChannelToLinear(value:Float):Float {
+  public static function srgbChannelToLinear(value:Float):Float {
     return cast FlightRuntime.select(FlightRuntime.compare(value, 0.04045, '<='), function():Dynamic return cast (value / 12.92), function():Dynamic return cast HxMath.pow(((value + 0.055) / 1.055), 2.4));
     return cast null;
   }
 
-  @:keep public static function unpackColorRgba(out:Array<Float>, color:Float):Void {
+  public static function unpackColorRgba(out:Array<Float>, color:Float):Void {
     FlightRuntime.setIndex(out, 0.0, ((Std.int(FlightRuntime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)) / 255.0));
     FlightRuntime.setIndex(out, 1.0, ((Std.int(FlightRuntime.unsignedShiftRight(Std.int(color), Std.int(16.0))) & Std.int(255.0)) / 255.0));
     FlightRuntime.setIndex(out, 2.0, ((Std.int(FlightRuntime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(255.0)) / 255.0));
     FlightRuntime.setIndex(out, 3.0, ((Std.int(color) & Std.int(255.0)) / 255.0));
   }
 
-  @:keep public static function unpackColorToLinear(out:LinearColor, color:Float):LinearColor {
+  public static function unpackColorToLinear(out:LinearColor, color:Float):LinearColor {
     FlightRuntime.setIndex(out, 0.0, FlightRuntime.callValue(srgbChannelToLinear, cast ([((Std.int(FlightRuntime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)) / 255.0)] : Array<Dynamic>)));
     FlightRuntime.setIndex(out, 1.0, FlightRuntime.callValue(srgbChannelToLinear, cast ([((Std.int(FlightRuntime.unsignedShiftRight(Std.int(color), Std.int(16.0))) & Std.int(255.0)) / 255.0)] : Array<Dynamic>)));
     FlightRuntime.setIndex(out, 2.0, FlightRuntime.callValue(srgbChannelToLinear, cast ([((Std.int(FlightRuntime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(255.0)) / 255.0)] : Array<Dynamic>)));
@@ -438,7 +435,7 @@ class Color {
     return cast null;
   }
 
-  @:keep public static function unpremultiplyColorAlpha(color:Float):Float {
+  public static function unpremultiplyColorAlpha(color:Float):Float {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;

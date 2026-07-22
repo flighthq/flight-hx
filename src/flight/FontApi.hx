@@ -8,22 +8,19 @@ import flight.Types.Font;
 import flight.Types.FontResource;
 import flight.Types.FontUrl;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.FontApi")
 class FontApi {
-  @:keep public static function createFont(name:String):Font {
+  public static function createFont(name:String):Font {
     return cast FlightRuntime.callValue(createEntity, cast ([{ name: name }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createFontResource(family:String):FontResource {
+  public static function createFontResource(family:String):FontResource {
     return cast { family: family, face: null };
     return cast null;
   }
 
-  @:keep public static function detectFontFormat(bytes:Dynamic):Null<String> {
+  public static function detectFontFormat(bytes:Dynamic):Null<String> {
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     b = FlightRuntime.select(FlightRuntime.isInstanceOf(bytes, FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>))), function():Dynamic return cast bytes, function():Dynamic return cast FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [bytes]));
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(b, 'byteLength'), 4.0, '<'))) { return cast null; }
@@ -37,14 +34,14 @@ class FontApi {
     return cast null;
   }
 
-  @:keep public static function getFontShorthand(family:String, ?style:String):String {
+  public static function getFontShorthand(family:String, ?style:String):String {
     var quoted:Dynamic = cast FlightRuntime.UNDEFINED;
     quoted = '\'' + Std.string(FlightRuntime.replace(family, FlightRuntime.regexp('[\\\\\']', 'g'), '\\$$&', false)) + '\'';
     return cast FlightRuntime.select(FlightRuntime.andValue(!FlightRuntime.strictEquals(style, FlightRuntime.UNDEFINED), function():Dynamic return cast !FlightRuntime.strictEquals(style, '')), function():Dynamic return cast '' + Std.string(style) + ' 1em ' + Std.string(quoted) + '', function():Dynamic return cast '1em ' + Std.string(quoted) + '');
     return cast null;
   }
 
-  @:keep public static function inferFontFormatFromUrl(url:String):Null<String> {
+  public static function inferFontFormatFromUrl(url:String):Null<String> {
     var ext:Dynamic = cast FlightRuntime.UNDEFINED;
     ext = FlightRuntime.callOptionalProperty(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime.getIndex(FlightRuntime.callProperty(url, 'split', cast (['?'] : Array<Dynamic>)), 0.0), 'split', cast (['.'] : Array<Dynamic>)), 'pop', cast ([] : Array<Dynamic>)), 'toLowerCase', cast ([] : Array<Dynamic>));
     {
@@ -74,51 +71,46 @@ class FontApi {
     return cast null;
   }
 
-  @:keep public static function isFontLoaded(family:String, ?style:String):Bool {
+  public static function isFontLoaded(family:String, ?style:String):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'check', cast ([FlightRuntime.callValue(getFontShorthand, cast ([family, style] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadFontFromBytes(bytes:Dynamic, family:String):flight.internal.FlightPromise<Font> {
-    var face:Dynamic = cast FlightRuntime.UNDEFINED;
-    face = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['FontFace'] : Array<Dynamic>)), [family, FlightRuntime.slice((cast FlightRuntime.field(bytes, 'buffer') : haxe.io.Bytes), FlightRuntime.field(bytes, 'byteOffset'), (FlightRuntime.field(bytes, 'byteOffset') + FlightRuntime.field(bytes, 'byteLength')))]);
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(face, 'load', cast ([] : Array<Dynamic>)));
-    FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
-    return cast FlightRuntime.callValue(createFont, cast ([family] : Array<Dynamic>));
-    return cast null;
+  public static function loadFontFromBytes(bytes:Dynamic, family:String):flight.internal.FlightPromise<Font> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Font> {
+      var face:Dynamic = cast FlightRuntime.UNDEFINED;
+      face = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['FontFace'] : Array<Dynamic>)), [family, FlightRuntime.slice((cast FlightRuntime.field(bytes, 'buffer') : haxe.io.Bytes), FlightRuntime.field(bytes, 'byteOffset'), (FlightRuntime.field(bytes, 'byteOffset') + FlightRuntime.field(bytes, 'byteLength')))]);
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(face, 'load', cast ([] : Array<Dynamic>)));
+      FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
+      return cast FlightRuntime.callValue(createFont, cast ([family] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadFontFromName(name:String):flight.internal.FlightPromise<Font> {
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'load', cast ([FlightRuntime.callValue(getFontShorthand, cast ([name] : Array<Dynamic>))] : Array<Dynamic>)));
-    return cast FlightRuntime.callValue(createFont, cast ([name] : Array<Dynamic>));
-    return cast null;
+  public static function loadFontFromName(name:String):flight.internal.FlightPromise<Font> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Font> {
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'load', cast ([FlightRuntime.callValue(getFontShorthand, cast ([name] : Array<Dynamic>))] : Array<Dynamic>)));
+      return cast FlightRuntime.callValue(createFont, cast ([name] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadFontFromUrl(url:String, family:String):flight.internal.FlightPromise<Font> {
-    var face:Dynamic = cast FlightRuntime.UNDEFINED;
-    face = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['FontFace'] : Array<Dynamic>)), [family, 'url(' + Std.string(url) + ')']);
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(face, 'load', cast ([] : Array<Dynamic>)));
-    FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
-    return cast FlightRuntime.callValue(createFont, cast ([family] : Array<Dynamic>));
-    return cast null;
+  public static function loadFontFromUrl(url:String, family:String):flight.internal.FlightPromise<Font> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Font> {
+      var face:Dynamic = cast FlightRuntime.UNDEFINED;
+      face = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['FontFace'] : Array<Dynamic>)), [family, 'url(' + Std.string(url) + ')']);
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(face, 'load', cast ([] : Array<Dynamic>)));
+      FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
+      return cast FlightRuntime.callValue(createFont, cast ([family] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadFontFromUrls(sources:Array<FontUrl>, family:String):flight.internal.FlightPromise<Font> {
-    var src:Dynamic = cast FlightRuntime.UNDEFINED;
-    var face:Dynamic = cast FlightRuntime.UNDEFINED;
-    src = FlightRuntime.join(FlightRuntime.callProperty(sources, 'map', cast ([function(__parameter0:Dynamic) {
+  public static function loadFontFromUrls(sources:Array<FontUrl>, family:String):flight.internal.FlightPromise<Font> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Font> {
+      var src:Dynamic = cast FlightRuntime.UNDEFINED;
+      var face:Dynamic = cast FlightRuntime.UNDEFINED;
+      src = FlightRuntime.join(FlightRuntime.callProperty(sources, 'map', cast ([function(__parameter0:Dynamic) {
   var url:Dynamic = cast FlightRuntime.UNDEFINED;
   var format:Dynamic = cast FlightRuntime.UNDEFINED;
   var fmt:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -127,57 +119,53 @@ class FontApi {
   fmt = FlightRuntime.coalesce(format, function():Dynamic return cast FlightRuntime.callValue(inferFontFormatFromUrl, cast ([url] : Array<Dynamic>)));
   return cast FlightRuntime.select(!FlightRuntime.strictEquals(fmt, null), function():Dynamic return cast 'url(' + Std.string(url) + ') format(\'' + Std.string(fmt) + '\')', function():Dynamic return cast 'url(' + Std.string(url) + ')');
 }] : Array<Dynamic>)), ', ');
-    face = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['FontFace'] : Array<Dynamic>)), [family, src]);
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(face, 'load', cast ([] : Array<Dynamic>)));
-    FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
-    return cast FlightRuntime.callValue(createFont, cast ([family] : Array<Dynamic>));
-    return cast null;
+      face = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['FontFace'] : Array<Dynamic>)), [family, src]);
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(face, 'load', cast ([] : Array<Dynamic>)));
+      FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
+      return cast FlightRuntime.callValue(createFont, cast ([family] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadFontResourceFromBytes(out:FontResource, bytes:Dynamic):flight.internal.FlightPromise<FontResource> {
-    var face:Dynamic = cast FlightRuntime.UNDEFINED;
-    face = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['FontFace'] : Array<Dynamic>)), [FlightRuntime.field(out, 'family'), FlightRuntime.slice((cast FlightRuntime.field(bytes, 'buffer') : haxe.io.Bytes), FlightRuntime.field(bytes, 'byteOffset'), (FlightRuntime.field(bytes, 'byteOffset') + FlightRuntime.field(bytes, 'byteLength')))]);
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(face, 'load', cast ([] : Array<Dynamic>)));
-    FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
-    FlightRuntime.setField(out, 'face', face);
-    return cast out;
-    return cast null;
+  public static function loadFontResourceFromBytes(out:FontResource, bytes:Dynamic):flight.internal.FlightPromise<FontResource> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<FontResource> {
+      var face:Dynamic = cast FlightRuntime.UNDEFINED;
+      face = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['FontFace'] : Array<Dynamic>)), [FlightRuntime.field(out, 'family'), FlightRuntime.slice((cast FlightRuntime.field(bytes, 'buffer') : haxe.io.Bytes), FlightRuntime.field(bytes, 'byteOffset'), (FlightRuntime.field(bytes, 'byteOffset') + FlightRuntime.field(bytes, 'byteLength')))]);
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(face, 'load', cast ([] : Array<Dynamic>)));
+      FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
+      FlightRuntime.setField(out, 'face', face);
+      return cast out;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadFontResourceFromName(out:FontResource):flight.internal.FlightPromise<FontResource> {
-    var faces:Dynamic = cast FlightRuntime.UNDEFINED;
-    faces = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'load', cast ([FlightRuntime.callValue(getFontShorthand, cast ([FlightRuntime.field(out, 'family')] : Array<Dynamic>))] : Array<Dynamic>)));
-    if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(faces, 'length'), 0.0, '>'))) { FlightRuntime.setField(out, 'face', FlightRuntime.getIndex(faces, 0.0)); }
-    return cast out;
-    return cast null;
+  public static function loadFontResourceFromName(out:FontResource):flight.internal.FlightPromise<FontResource> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<FontResource> {
+      var faces:Dynamic = cast FlightRuntime.UNDEFINED;
+      faces = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'load', cast ([FlightRuntime.callValue(getFontShorthand, cast ([FlightRuntime.field(out, 'family')] : Array<Dynamic>))] : Array<Dynamic>)));
+      if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(faces, 'length'), 0.0, '>'))) { FlightRuntime.setField(out, 'face', FlightRuntime.getIndex(faces, 0.0)); }
+      return cast out;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadFontResourceFromUrl(out:FontResource, url:String):flight.internal.FlightPromise<FontResource> {
-    var face:Dynamic = cast FlightRuntime.UNDEFINED;
-    face = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['FontFace'] : Array<Dynamic>)), [FlightRuntime.field(out, 'family'), 'url(' + Std.string(url) + ')']);
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(face, 'load', cast ([] : Array<Dynamic>)));
-    FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
-    FlightRuntime.setField(out, 'face', face);
-    return cast out;
-    return cast null;
+  public static function loadFontResourceFromUrl(out:FontResource, url:String):flight.internal.FlightPromise<FontResource> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<FontResource> {
+      var face:Dynamic = cast FlightRuntime.UNDEFINED;
+      face = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['FontFace'] : Array<Dynamic>)), [FlightRuntime.field(out, 'family'), 'url(' + Std.string(url) + ')']);
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(face, 'load', cast ([] : Array<Dynamic>)));
+      FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
+      FlightRuntime.setField(out, 'face', face);
+      return cast out;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadFontResourceFromUrls(out:FontResource, sources:Array<FontUrl>):flight.internal.FlightPromise<FontResource> {
-    var src:Dynamic = cast FlightRuntime.UNDEFINED;
-    var face:Dynamic = cast FlightRuntime.UNDEFINED;
-    src = FlightRuntime.join(FlightRuntime.callProperty(sources, 'map', cast ([function(__parameter0:Dynamic) {
+  public static function loadFontResourceFromUrls(out:FontResource, sources:Array<FontUrl>):flight.internal.FlightPromise<FontResource> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<FontResource> {
+      var src:Dynamic = cast FlightRuntime.UNDEFINED;
+      var face:Dynamic = cast FlightRuntime.UNDEFINED;
+      src = FlightRuntime.join(FlightRuntime.callProperty(sources, 'map', cast ([function(__parameter0:Dynamic) {
   var url:Dynamic = cast FlightRuntime.UNDEFINED;
   var format:Dynamic = cast FlightRuntime.UNDEFINED;
   var fmt:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -186,23 +174,23 @@ class FontApi {
   fmt = FlightRuntime.coalesce(format, function():Dynamic return cast FlightRuntime.callValue(inferFontFormatFromUrl, cast ([url] : Array<Dynamic>)));
   return cast FlightRuntime.select(!FlightRuntime.strictEquals(fmt, null), function():Dynamic return cast 'url(' + Std.string(url) + ') format(\'' + Std.string(fmt) + '\')', function():Dynamic return cast 'url(' + Std.string(url) + ')');
 }] : Array<Dynamic>)), ', ');
-    face = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['FontFace'] : Array<Dynamic>)), [FlightRuntime.field(out, 'family'), src]);
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(face, 'load', cast ([] : Array<Dynamic>)));
-    FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
-    FlightRuntime.setField(out, 'face', face);
-    return cast out;
-    return cast null;
+      face = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['FontFace'] : Array<Dynamic>)), [FlightRuntime.field(out, 'family'), src]);
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(face, 'load', cast ([] : Array<Dynamic>)));
+      FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
+      FlightRuntime.setField(out, 'face', face);
+      return cast out;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function whenFontsReady():flight.internal.FlightPromise<flight.internal.FlightNothing> {
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.field(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'ready'));
-    #if js
-    return;
-    #else
-    return cast null;
-    #end
+  public static function whenFontsReady():flight.internal.FlightPromise<flight.internal.FlightNothing> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<flight.internal.FlightNothing> {
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.field(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'ready'));
+      #if js
+      return;
+      #else
+      return cast null;
+      #end
+    })();
   }
 }

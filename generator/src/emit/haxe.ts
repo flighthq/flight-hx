@@ -60,13 +60,13 @@ export function emitHaxeModule(module: IrModule): string {
   for (const imported of module.imports) lines.push(`import ${imported};`);
   lines.push('');
   for (const declaration of typeDeclarations) lines.push(...emitDeclaration(declaration), '');
-  lines.push(
-    '#if js',
-    '@:build(jsasync.JSAsync.build())',
-    '#end',
-    `@:expose("flight.${module.name}")`,
-    `class ${module.name} {`,
-  );
+  // Barrel free functions live as public static members of a constructorless class
+  // that acts purely as their module namespace (Flight allocates via `create<Type>`,
+  // never `new`). The class-level `@:expose` both exposes and keeps every public
+  // static, so no per-field `@:keep` is needed, and `import flight.<Module>.*` keeps
+  // working. Async is applied per function through the `FlightAsync.make` expression
+  // macro, so no class-level `@:build(jsasync.JSAsync.build())` is needed.
+  lines.push(`@:expose("flight.${module.name}")`, `class ${module.name} {`);
   for (const declaration of typeDeclarations) {
     if (declaration.kind !== 'enum') continue;
     lines.push(
@@ -77,11 +77,78 @@ export function emitHaxeModule(module: IrModule): string {
     );
   }
   for (const declaration of valueDeclarations) {
-    lines.push(...indent(emitDeclaration(declaration)), '');
+    lines.push(...indent(emitModuleValue(declaration)), '');
   }
   if (lines.at(-1) === '') lines.pop();
   lines.push('}', '');
   return lines.join('\n');
+}
+
+/**
+ * Emit a barrel value (free function or variable) as a public static member of the
+ * module's namespace class. Exposure and keep come from the class-level `@:expose`,
+ * so members carry no `@:keep`. Async functions are made asynchronous per function
+ * via the `FlightAsync.make` expression macro rather than a class-level
+ * `@:build(jsasync.JSAsync.build())` macro, keeping the class free of the build.
+ */
+function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' | 'variable' }>): string[] {
+  if (declaration.kind === 'variable') {
+    const mutability = declaration.mutable || !declaration.initializer ? 'var' : 'final';
+    const type = declaration.type ? `:${emitType(declaration.type)}` : ':Dynamic';
+    // Haxe omits null-valued static initializers, which changes an explicit
+    // TypeScript `null` into `undefined`. Keep the initialization observable.
+    const initializer = declaration.initializer
+      ? ` = ${
+          declaration.initializer.kind === 'literal' && declaration.initializer.value === null
+            ? 'FlightRuntime.explicitNull()'
+            : emitExpression(declaration.initializer)
+        }`
+      : '';
+    return [`public static ${mutability} ${safeName(declaration.name)}${type}${initializer};`];
+  }
+  const generics = declaration.typeParameters.length > 0 ? `<${declaration.typeParameters.join(', ')}>` : '';
+  const directOnly = currentDirectFunctions.has(declaration.name);
+  const parameters = directOnly ? '__flightArguments:Array<Dynamic>' : emitParameters(declaration.parameters);
+  // High-arity `directOnly` shims stay private; everything else is public and kept
+  // and exposed by the class-level `@:expose`.
+  const access = directOnly ? 'private' : 'public';
+  const signature = `${access} static function ${safeName(declaration.name)}${generics}(${parameters}):${emitType(declaration.returns)}`;
+
+  const bodyLines: string[] = [];
+  if (directOnly) {
+    bodyLines.push(
+      ...declaration.parameters.map(
+        (parameter, index) =>
+          `var ${safeName(parameter.name)}:${emitType(parameter.type)} = cast FlightRuntime.getIndex(__flightArguments, ${index});`,
+      ),
+    );
+  }
+  if (declaration.haxeBody !== undefined) {
+    bodyLines.push(...emitParameterInitializers(declaration.parameters));
+    bodyLines.push(...declaration.haxeBody.replace(/\r\n/gu, '\n').split('\n'));
+  } else {
+    bodyLines.push(
+      ...emitFunctionBody(declaration.body, declaration.parameters, declaration.returns, declaration.async),
+    );
+  }
+  if (!isVoidType(declaration.returns)) {
+    if (declaration.async && isPromiseNothingType(declaration.returns)) {
+      bodyLines.push('#if js', 'return;', '#else', 'return cast null;', '#end');
+    } else {
+      bodyLines.push('return cast null;');
+    }
+  }
+
+  if (declaration.async) {
+    return [
+      `${signature} {`,
+      `  return cast flight.internal.FlightAsync.make(function():${emitType(declaration.returns)} {`,
+      ...indent(indent(bodyLines)),
+      '  })();',
+      '}',
+    ];
+  }
+  return [`${signature} {`, ...indent(bodyLines), '}'];
 }
 
 /**
@@ -160,9 +227,6 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
     const generics = declaration.typeParameters.length > 0 ? `<${declaration.typeParameters.join(', ')}>` : '';
     const parent = declaration.extends ? ` extends ${emitType(declaration.extends)}` : '';
     const lines = [
-      '#if js',
-      '@:build(jsasync.JSAsync.build())',
-      '#end',
       `@:expose("flight.${safeName(declaration.name)}")`,
       `class ${safeName(declaration.name)}${generics}${parent} {`,
     ];
@@ -201,13 +265,25 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
       const methodAccess = method.public ? 'public ' : 'private ';
       const static_ = method.static ? 'static ' : '';
       const methodGenerics = method.typeParameters.length > 0 ? `<${method.typeParameters.join(', ')}>` : '';
-      if (method.async) lines.push('#if js', '  @:jsasync', '#end');
+      const bodyLines = emitFunctionBody(method.body, method.parameters, method.returns, method.async);
+      if (!isVoidType(method.returns)) {
+        if (method.async && isPromiseNothingType(method.returns)) {
+          bodyLines.push('#if js', 'return;', '#else', 'return cast null;', '#end');
+        } else {
+          bodyLines.push('return cast null;');
+        }
+      }
       lines.push(
         `  ${methodAccess}${static_}function ${safeName(method.name)}${methodGenerics}(${emitParameters(method.parameters)}):${emitType(method.returns)} {`,
       );
-      lines.push(...indent(indent(emitFunctionBody(method.body, method.parameters, method.returns, method.async))));
-      if (!isVoidType(method.returns)) {
-        lines.push(method.async && isPromiseNothingType(method.returns) ? '    return;' : '    return cast null;');
+      // Async is applied per method via the `FlightAsync.make` expression macro, so
+      // the class needs no `@:build(jsasync.JSAsync.build())`.
+      if (method.async) {
+        lines.push(`    return cast flight.internal.FlightAsync.make(function():${emitType(method.returns)} {`);
+        lines.push(...indent(indent(indent(bodyLines))));
+        lines.push('    })();');
+      } else {
+        lines.push(...indent(indent(bodyLines)));
       }
       lines.push('  }');
     }
@@ -256,35 +332,41 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
   const generics = declaration.typeParameters.length > 0 ? `<${declaration.typeParameters.join(', ')}>` : '';
   const directOnly = currentDirectFunctions.has(declaration.name);
   const parameters = directOnly ? '__flightArguments:Array<Dynamic>' : emitParameters(declaration.parameters);
-  const lines = [
-    ...(declaration.async ? ['#if js', '@:jsasync', '#end'] : []),
-    `${directOnly ? 'private ' : `@:keep ${access}`}static function ${safeName(declaration.name)}${generics}(${parameters}):${emitType(declaration.returns)} {`,
-  ];
+  const signature = `${directOnly ? 'private ' : access}static function ${safeName(declaration.name)}${generics}(${parameters}):${emitType(declaration.returns)}`;
+  const bodyLines: string[] = [];
   if (directOnly) {
-    lines.push(
+    bodyLines.push(
       ...declaration.parameters.map(
         (parameter, index) =>
-          `  var ${safeName(parameter.name)}:${emitType(parameter.type)} = cast FlightRuntime.getIndex(__flightArguments, ${index});`,
+          `var ${safeName(parameter.name)}:${emitType(parameter.type)} = cast FlightRuntime.getIndex(__flightArguments, ${index});`,
       ),
     );
   }
   if (declaration.haxeBody !== undefined) {
-    lines.push(...indent(emitParameterInitializers(declaration.parameters)));
-    lines.push(...indent(declaration.haxeBody.replace(/\r\n/gu, '\n').split('\n')));
+    bodyLines.push(...emitParameterInitializers(declaration.parameters));
+    bodyLines.push(...declaration.haxeBody.replace(/\r\n/gu, '\n').split('\n'));
   } else {
-    lines.push(
-      ...indent(emitFunctionBody(declaration.body, declaration.parameters, declaration.returns, declaration.async)),
+    bodyLines.push(
+      ...emitFunctionBody(declaration.body, declaration.parameters, declaration.returns, declaration.async),
     );
   }
   if (!isVoidType(declaration.returns)) {
     if (declaration.async && isPromiseNothingType(declaration.returns)) {
-      lines.push('  #if js', '  return;', '  #else', '  return cast null;', '  #end');
+      bodyLines.push('#if js', 'return;', '#else', 'return cast null;', '#end');
     } else {
-      lines.push('  return cast null;');
+      bodyLines.push('return cast null;');
     }
   }
-  lines.push('}');
-  return lines;
+  if (declaration.async) {
+    return [
+      `${signature} {`,
+      `  return cast flight.internal.FlightAsync.make(function():${emitType(declaration.returns)} {`,
+      ...indent(indent(bodyLines)),
+      '  })();',
+      '}',
+    ];
+  }
+  return [`${signature} {`, ...indent(bodyLines), '}'];
 }
 
 function isSuperCall(statement: IrStatement): boolean {
@@ -720,6 +802,8 @@ function emitExpression(expression: IrExpression): string {
     }
     case 'identifier':
       if (expression.name === 'super' || expression.name === 'this') return expression.name;
+      // Barrel values are statics of the module's namespace class; nominal classes in
+      // the same module reference them cross-class, so qualify with the class name.
       if (currentModuleValues.has(expression.name) && expression.name.includes('__')) {
         return `${currentModuleName}.${qualifiedName(expression.name)}`;
       }

@@ -10,16 +10,13 @@ import flight.Types.ClipboardBookmark;
 import flight.Types.ClipboardWatch;
 import flight.Types.ClipboardWriteItem;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Clipboard")
 class Clipboard {
   public static var _backend__clipboard:Null<ClipboardBackend> = FlightRuntime.explicitNull();
 
   public static final _watchSubscriptions__clipboard:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function attachClipboardWatch(watch:ClipboardWatch):Void {
+  public static function attachClipboardWatch(watch:ClipboardWatch):Void {
     var unsubscribe:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(detachClipboardWatch, cast ([watch] : Array<Dynamic>));
     unsubscribe = FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'subscribeClipboardChange', cast ([function() {
@@ -28,29 +25,28 @@ class Clipboard {
     FlightRuntime.callProperty(Clipboard._watchSubscriptions__clipboard, 'set', cast ([watch, unsubscribe] : Array<Dynamic>));
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function blobFromFormatData__clipboard(format:String, data:String):flight.internal.FlightPromise<Dynamic> {
-    if (FlightRuntime.truthy(FlightRuntime.andValue(StringTools.startsWith(format, 'image/'), function():Dynamic return cast StringTools.startsWith(data, 'data:')))) {
+  public static function blobFromFormatData__clipboard(format:String, data:String):flight.internal.FlightPromise<Dynamic> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Dynamic> {
+      if (FlightRuntime.truthy(FlightRuntime.andValue(StringTools.startsWith(format, 'image/'), function():Dynamic return cast StringTools.startsWith(data, 'data:')))) {
   var response:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['fetch'] : Array<Dynamic>)), cast ([data] : Array<Dynamic>)));
   return cast FlightRuntime.callProperty(response, 'blob', cast ([] : Array<Dynamic>));
 }
-    return cast FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Blob'] : Array<Dynamic>)), [cast ([data] : Array<Dynamic>), { type: format }]);
-    return cast null;
+      return cast FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Blob'] : Array<Dynamic>)), [cast ([data] : Array<Dynamic>), { type: format }]);
+      return cast null;
+    })();
   }
 
-  @:keep public static function clearClipboard():flight.internal.FlightPromise<Bool> {
+  public static function clearClipboard():flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'clear', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createClipboardWatch():ClipboardWatch {
+  public static function createClipboardWatch():ClipboardWatch {
     return cast { onChange: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createWebClipboardBackend():ClipboardBackend {
+  public static function createWebClipboardBackend():ClipboardBackend {
     return cast { readFormat: flight.internal.FlightAsync.make(function(format:Dynamic):flight.internal.FlightPromise<Dynamic> {
   var cb:Dynamic = cast FlightRuntime.UNDEFINED;
   cb = FlightRuntime.callValue(Clipboard.getWebClipboard__clipboard, cast ([] : Array<Dynamic>));
@@ -243,7 +239,7 @@ class Clipboard {
     return cast null;
   }
 
-  @:keep public static function detachClipboardWatch(watch:ClipboardWatch):Void {
+  public static function detachClipboardWatch(watch:ClipboardWatch):Void {
     var unsubscribe:Dynamic = cast FlightRuntime.UNDEFINED;
     unsubscribe = FlightRuntime.callProperty(Clipboard._watchSubscriptions__clipboard, 'get', cast ([watch] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(unsubscribe, FlightRuntime.UNDEFINED))) {
@@ -252,33 +248,33 @@ class Clipboard {
 }
   }
 
-  @:keep public static function disposeClipboardWatch(watch:ClipboardWatch):Void {
+  public static function disposeClipboardWatch(watch:ClipboardWatch):Void {
     FlightRuntime.callValue(detachClipboardWatch, cast ([watch] : Array<Dynamic>));
   }
 
-  @:keep public static function getClipboardBackend():ClipboardBackend {
+  public static function getClipboardBackend():ClipboardBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Clipboard._backend__clipboard, null))) { (Clipboard._backend__clipboard = cast (FlightRuntime.callValue(createWebClipboardBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Clipboard._backend__clipboard;
     return cast null;
   }
 
-  @:keep public static function getClipboardChangeCount():Float {
+  public static function getClipboardChangeCount():Float {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'getChangeCount', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getClipboardFormats():flight.internal.FlightPromise<Array<String>> {
+  public static function getClipboardFormats():flight.internal.FlightPromise<Array<String>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'getFormats', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getWebClipboard__clipboard():Null<Clipboard> {
+  public static function getWebClipboard__clipboard():Null<Clipboard> {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
     return cast FlightRuntime.coalesce(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'clipboard'), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getWritableWebClipboard__clipboard():Null<Clipboard> {
+  public static function getWritableWebClipboard__clipboard():Null<Clipboard> {
     var cb:Dynamic = cast FlightRuntime.UNDEFINED;
     cb = FlightRuntime.callValue(Clipboard.getWebClipboard__clipboard, cast ([] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(cb, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(cb, 'write')), 'function')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['ClipboardItem'] : Array<Dynamic>)), 'undefined')))) { return cast null; }
@@ -286,37 +282,37 @@ class Clipboard {
     return cast null;
   }
 
-  @:keep public static function hasClipboardBookmark():flight.internal.FlightPromise<Bool> {
+  public static function hasClipboardBookmark():flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'hasFormat', cast ([Types.ClipboardFormatBookmark] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hasClipboardFormat(format:String):flight.internal.FlightPromise<Bool> {
+  public static function hasClipboardFormat(format:String):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'hasFormat', cast ([format] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hasClipboardHtml():flight.internal.FlightPromise<Bool> {
+  public static function hasClipboardHtml():flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'hasFormat', cast ([Types.ClipboardFormatHtml] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hasClipboardImage():flight.internal.FlightPromise<Bool> {
+  public static function hasClipboardImage():flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'hasImage', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hasClipboardRTF():flight.internal.FlightPromise<Bool> {
+  public static function hasClipboardRTF():flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'hasFormat', cast ([Types.ClipboardFormatRtf] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hasClipboardText():flight.internal.FlightPromise<Bool> {
+  public static function hasClipboardText():flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'hasText', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function readBlobAsDataUrl__clipboard(blob:Dynamic):flight.internal.FlightPromise<String> {
+  public static function readBlobAsDataUrl__clipboard(blob:Dynamic):flight.internal.FlightPromise<String> {
     return cast FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(resolve:Dynamic) {
   if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['FileReader'] : Array<Dynamic>)), 'undefined'))) {
   FlightRuntime.callValue(resolve, cast ([''] : Array<Dynamic>));
@@ -334,86 +330,86 @@ class Clipboard {
     return cast null;
   }
 
-  @:keep public static function readClipboard(formats:Array<String>):flight.internal.FlightPromise<Dynamic> {
+  public static function readClipboard(formats:Array<String>):flight.internal.FlightPromise<Dynamic> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'readItems', cast ([formats] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function readClipboardBookmark():flight.internal.FlightPromise<Null<ClipboardBookmark>> {
+  public static function readClipboardBookmark():flight.internal.FlightPromise<Null<ClipboardBookmark>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'readBookmark', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function readClipboardFiles():flight.internal.FlightPromise<Array<String>> {
+  public static function readClipboardFiles():flight.internal.FlightPromise<Array<String>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'readFiles', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function readClipboardFormat(format:String):flight.internal.FlightPromise<String> {
+  public static function readClipboardFormat(format:String):flight.internal.FlightPromise<String> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'readFormat', cast ([format] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function readClipboardHtml():flight.internal.FlightPromise<String> {
+  public static function readClipboardHtml():flight.internal.FlightPromise<String> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'readHtml', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function readClipboardImage():flight.internal.FlightPromise<String> {
+  public static function readClipboardImage():flight.internal.FlightPromise<String> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'readImage', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function readClipboardRTF():flight.internal.FlightPromise<String> {
+  public static function readClipboardRTF():flight.internal.FlightPromise<String> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'readRTF', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function readClipboardText():flight.internal.FlightPromise<String> {
+  public static function readClipboardText():flight.internal.FlightPromise<String> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'readText', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setClipboardBackend(backend:Null<ClipboardBackend>):Void {
+  public static function setClipboardBackend(backend:Null<ClipboardBackend>):Void {
     (Clipboard._backend__clipboard = cast (backend : Dynamic));
   }
 
-  @:keep public static function writeClipboard(items:Array<ClipboardWriteItem>):flight.internal.FlightPromise<Bool> {
+  public static function writeClipboard(items:Array<ClipboardWriteItem>):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'writeItems', cast ([items] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function writeClipboardBookmark(title:String, url:String):flight.internal.FlightPromise<Bool> {
+  public static function writeClipboardBookmark(title:String, url:String):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'writeBookmark', cast ([title, url] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function writeClipboardFiles(paths:Array<String>):flight.internal.FlightPromise<Bool> {
+  public static function writeClipboardFiles(paths:Array<String>):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'writeFiles', cast ([paths] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function writeClipboardFormat(format:String, data:String):flight.internal.FlightPromise<Bool> {
+  public static function writeClipboardFormat(format:String, data:String):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'writeFormat', cast ([format, data] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function writeClipboardHtml(html:String):flight.internal.FlightPromise<Bool> {
+  public static function writeClipboardHtml(html:String):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'writeHtml', cast ([html] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function writeClipboardImage(dataUrl:String):flight.internal.FlightPromise<Bool> {
+  public static function writeClipboardImage(dataUrl:String):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'writeImage', cast ([dataUrl] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function writeClipboardRTF(rtf:String):flight.internal.FlightPromise<Bool> {
+  public static function writeClipboardRTF(rtf:String):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'writeRTF', cast ([rtf] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function writeClipboardText(text:String):flight.internal.FlightPromise<Bool> {
+  public static function writeClipboardText(text:String):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getClipboardBackend, cast ([] : Array<Dynamic>)), 'writeText', cast ([text] : Array<Dynamic>));
     return cast null;
   }

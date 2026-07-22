@@ -29,12 +29,9 @@ typedef MemoryLogSinkState__log = { var buf:Array<LogEntry>; var head:Float; };
 
 typedef RateLimitedLogSink = { var sink:LogSink; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Log")
 class Log {
-  @:keep public static function _applyRedaction__log(data:Dynamic):Dynamic {
+  public static function _applyRedaction__log(data:Dynamic):Dynamic {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(Log._redactionPaths__log, 'length'), 0.0))) { return cast data; }
     result = FlightRuntime.mergeObjects([data]);
@@ -46,7 +43,7 @@ class Log {
     return cast null;
   }
 
-  @:keep public static function _applySerializers__log(data:Dynamic):Dynamic {
+  public static function _applySerializers__log(data:Dynamic):Dynamic {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(Log._serializers__log, 'size'), 0.0))) { return cast data; }
     result = {  };
@@ -85,7 +82,7 @@ class Log {
   return cast FlightRuntime.jsonStringify({ __flight: true, t: FlightRuntime.callValue(Log._timestamp__log, cast ([] : Array<Dynamic>)), level: FlightRuntime.getIndex(Log._levelNames__log, level), channel: channel, data: FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(data), 'string'), function():Dynamic return cast { msg: data }, function():Dynamic return cast data) });
 };
 
-  @:keep public static function _emitToSinks__log(entry:LogEntry):Void {
+  public static function _emitToSinks__log(entry:LogEntry):Void {
     for (sink in FlightRuntime.iterable(Log._sinks__log)) {
       FlightRuntime.callValue(sink, cast ([entry] : Array<Dynamic>));
     }
@@ -107,7 +104,7 @@ class Log {
 
   public static final _memorySinkStates__log:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function _mergeContextFields__log(context:LogContext, data:LogData):LogData {
+  public static function _mergeContextFields__log(context:LogContext, data:LogData):LogData {
     var __destructure11:Dynamic = cast FlightRuntime.UNDEFINED;
     var fields:Dynamic = cast FlightRuntime.UNDEFINED;
     __destructure11 = context;
@@ -118,7 +115,7 @@ class Log {
     return cast null;
   }
 
-  @:keep public static function _mergeSpanFields__log(data:LogData, _channel:Null<String>):LogData {
+  public static function _mergeSpanFields__log(data:LogData, _channel:Null<String>):LogData {
     var spanFields:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(Log._spanStack__log, 'length'), 0.0))) { return cast data; }
     spanFields = {  };
@@ -133,7 +130,7 @@ class Log {
 
   public static final _onceKeys__log:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
 
-  @:keep public static function _passesLevelGate__log(level:LogLevel, channel:Null<String>):Bool {
+  public static function _passesLevelGate__log(level:LogLevel, channel:Null<String>):Bool {
     var gate:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.field(Log._sinks__log, 'length'), 0.0), function():Dynamic return cast FlightRuntime.strictEquals(Log._logSignals__log, null)))) { return cast false; }
     gate = FlightRuntime.select(FlightRuntime.andValue(!FlightRuntime.strictEquals(channel, null), function():Dynamic return cast FlightRuntime.callProperty(Log._channelLevels__log, 'has', cast ([channel] : Array<Dynamic>))), function():Dynamic return cast FlightRuntime.callProperty(Log._channelLevels__log, 'get', cast ([channel] : Array<Dynamic>)), function():Dynamic return cast Log._level__log);
@@ -143,7 +140,7 @@ class Log {
 
   public static final _redactionPaths__log:Array<String> = cast ([] : Array<Dynamic>);
 
-  @:keep public static function _redactPath__log(obj:Dynamic, parts:Array<String>, idx:Float):Void {
+  public static function _redactPath__log(obj:Dynamic, parts:Array<String>, idx:Float):Void {
     var key:Dynamic = cast FlightRuntime.UNDEFINED;
     var next:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(idx, FlightRuntime.field(parts, 'length'), '>='))) { return; }
@@ -166,14 +163,14 @@ class Log {
 
   public static final _spanStack__log:Array<LogSpan> = cast ([] : Array<Dynamic>);
 
-  @:keep public static function _timestamp__log():Float {
+  public static function _timestamp__log():Float {
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['performance'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['performance'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Date'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>)));
     return cast null;
   }
 
   public static var _transportBackend__log:Null<LogTransportBackend> = FlightRuntime.explicitNull();
 
-  @:keep public static function _writeConsoleCaptureEntry__log(entry:LogEntry, envelopeFormatter:LogFormatter):Void {
+  public static function _writeConsoleCaptureEntry__log(entry:LogEntry, envelopeFormatter:LogFormatter):Void {
     var __destructure13:Dynamic = cast FlightRuntime.UNDEFINED;
     var level:Dynamic = cast FlightRuntime.UNDEFINED;
     var channel:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -191,39 +188,39 @@ class Log {
 }
   }
 
-  @:keep public static function addLogSink(sink:LogSink):Void {
+  public static function addLogSink(sink:LogSink):Void {
     if (FlightRuntime.truthy(FlightRuntime.includes(Log._sinks__log, sink))) { return; }
     FlightRuntime.callProperty(Log._sinks__log, 'push', cast ([sink] : Array<Dynamic>));
   }
 
-  @:keep public static function beginLogGroup(label:String, ?channel:Null<String>):Void {
+  public static function beginLogGroup(label:String, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
     Log._groupDepth__log++;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(Log._passesLevelGate__log, cast ([LogLevel.Debug, channel] : Array<Dynamic>))))) { return; }
     FlightRuntime.callValue(Log._emitToSinks__log, cast ([{ level: LogLevel.Debug, channel: channel, data: { msg: label, group: 'begin', depth: Log._groupDepth__log } }] : Array<Dynamic>));
   }
 
-  @:keep public static function clearLogChannelLevels():Void {
+  public static function clearLogChannelLevels():Void {
     FlightRuntime.callProperty(Log._channelLevels__log, 'clear', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function clearLogGroups():Void {
+  public static function clearLogGroups():Void {
     (Log._groupDepth__log = cast (0.0 : Dynamic));
   }
 
-  @:keep public static function clearLogRedactionPaths():Void {
+  public static function clearLogRedactionPaths():Void {
     FlightRuntime.setLength(Log._redactionPaths__log, 0.0);
   }
 
-  @:keep public static function clearLogSerializers():Void {
+  public static function clearLogSerializers():Void {
     FlightRuntime.callProperty(Log._serializers__log, 'clear', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function clearLogSinks():Void {
+  public static function clearLogSinks():Void {
     FlightRuntime.setLength(Log._sinks__log, 0.0);
   }
 
-  @:keep public static function clearMemoryLogSink(handle:MemoryLogSink):Void {
+  public static function clearMemoryLogSink(handle:MemoryLogSink):Void {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     state = FlightRuntime.callProperty(Log._memorySinkStates__log, 'get', cast ([handle] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.truthy(state))) { return; }
@@ -231,7 +228,7 @@ class Log {
     FlightRuntime.setField(state, 'head', 0.0);
   }
 
-  @:keep public static function createBufferedLogSink(target:LogSink, ?options:{ @:optional var size:Float; @:optional var intervalMs:Float; }):BufferedLogSink {
+  public static function createBufferedLogSink(target:LogSink, ?options:{ @:optional var size:Float; @:optional var intervalMs:Float; }):BufferedLogSink {
     if (options == null) options = cast ({  } : Dynamic);
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     var intervalMs:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -268,14 +265,14 @@ class Log {
     return cast null;
   }
 
-  @:keep public static function createChildLogContext(parent:LogContext, fields:Dynamic, ?channel:Null<String>):LogContext {
+  public static function createChildLogContext(parent:LogContext, fields:Dynamic, ?channel:Null<String>):LogContext {
     var merged:Dynamic = cast FlightRuntime.UNDEFINED;
     merged = FlightRuntime.mergeObjects([FlightRuntime.field(parent, 'fields'), fields]);
     return cast { channel: FlightRuntime.select(!FlightRuntime.strictEquals(channel, FlightRuntime.UNDEFINED), function():Dynamic return cast channel, function():Dynamic return cast FlightRuntime.field(parent, 'channel')), fields: merged };
     return cast null;
   }
 
-  @:keep public static function createConsoleCaptureSink(?options:{ @:optional var formatter:LogFormatter; }):LogSink {
+  public static function createConsoleCaptureSink(?options:{ @:optional var formatter:LogFormatter; }):LogSink {
     if (options == null) options = cast ({  } : Dynamic);
     var envelopeFormatter:Dynamic = cast FlightRuntime.UNDEFINED;
     envelopeFormatter = FlightRuntime.coalesce(FlightRuntime.field(options, 'formatter'), function():Dynamic return cast Log._defaultJsonFormatter__log);
@@ -283,7 +280,7 @@ class Log {
     return cast null;
   }
 
-  @:keep public static function createFanoutLogSink(...sinks:LogSink):LogSink {
+  public static function createFanoutLogSink(...sinks:LogSink):LogSink {
     var list:Dynamic = cast FlightRuntime.UNDEFINED;
     list = FlightRuntime.slice(sinks, 0, null);
     return cast function(entry:LogEntry) {
@@ -294,7 +291,7 @@ class Log {
     return cast null;
   }
 
-  @:keep public static function createFileLogSink(?options:{ @:optional var formatter:LogFormatter; }):FileLogSink {
+  public static function createFileLogSink(?options:{ @:optional var formatter:LogFormatter; }):FileLogSink {
     if (options == null) options = cast ({  } : Dynamic);
     var formatter:Dynamic = cast FlightRuntime.UNDEFINED;
     var sink:LogSink = cast FlightRuntime.UNDEFINED;
@@ -311,14 +308,14 @@ class Log {
     return cast null;
   }
 
-  @:keep public static function createFilterLogSink(target:LogSink, predicate:Dynamic):LogSink {
+  public static function createFilterLogSink(target:LogSink, predicate:Dynamic):LogSink {
     return cast function(entry:LogEntry) {
   if (FlightRuntime.truthy(FlightRuntime.callValue(predicate, cast ([entry] : Array<Dynamic>)))) { FlightRuntime.callValue(target, cast ([entry] : Array<Dynamic>)); }
 };
     return cast null;
   }
 
-  @:keep public static function createJsonLogFormatter():LogFormatter {
+  public static function createJsonLogFormatter():LogFormatter {
     return cast function(entry:LogEntry) {
   var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
   var level:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -337,20 +334,20 @@ class Log {
     return cast null;
   }
 
-  @:keep public static function createLogContext(channel:Null<String>, ?fields:Dynamic):LogContext {
+  public static function createLogContext(channel:Null<String>, ?fields:Dynamic):LogContext {
     if (fields == null) fields = cast ({  } : Dynamic);
     return cast { channel: channel, fields: fields };
     return cast null;
   }
 
-  @:keep public static function createLogSpan(name:String, ?fields:Dynamic, ?channel:Null<String>):LogSpan {
+  public static function createLogSpan(name:String, ?fields:Dynamic, ?channel:Null<String>):LogSpan {
     if (fields == null) fields = cast ({  } : Dynamic);
     if (channel == null) channel = cast (null : Dynamic);
     return cast { name: name, fields: fields, channel: channel };
     return cast null;
   }
 
-  @:keep public static function createMemoryLogSink(capacity:Float):MemoryLogSink {
+  public static function createMemoryLogSink(capacity:Float):MemoryLogSink {
     var state:MemoryLogSinkState__log = cast FlightRuntime.UNDEFINED;
     var sink:LogSink = cast FlightRuntime.UNDEFINED;
     var handle:MemoryLogSink = cast FlightRuntime.UNDEFINED;
@@ -371,7 +368,7 @@ class Log {
     return cast null;
   }
 
-  @:keep public static function createRateLimitedLogSink(target:LogSink, options:{ @:optional var perChannel:Bool; var maxPerInterval:Float; var intervalMs:Float; }):RateLimitedLogSink {
+  public static function createRateLimitedLogSink(target:LogSink, options:{ @:optional var perChannel:Bool; var maxPerInterval:Float; var intervalMs:Float; }):RateLimitedLogSink {
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
     var perChannel:Dynamic = cast FlightRuntime.UNDEFINED;
     var maxPerInterval:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -404,7 +401,7 @@ class Log {
     return cast null;
   }
 
-  @:keep public static function createSampledLogSink(target:LogSink, rate:Float):LogSink {
+  public static function createSampledLogSink(target:LogSink, rate:Float):LogSink {
     var counter:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(rate, 1.0, '<='))) { return cast target; }
     counter = 0.0;
@@ -415,7 +412,7 @@ class Log {
     return cast null;
   }
 
-  @:keep public static function createTextLogFormatter(?options:{ @:optional var indentGroups:Bool; @:optional var levelPrefix:Bool; @:optional var timestamp:Bool; }):LogFormatter {
+  public static function createTextLogFormatter(?options:{ @:optional var indentGroups:Bool; @:optional var levelPrefix:Bool; @:optional var timestamp:Bool; }):LogFormatter {
     if (options == null) options = cast ({  } : Dynamic);
     return cast function(entry:LogEntry) {
   var __destructure2:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -438,14 +435,14 @@ class Log {
     return cast null;
   }
 
-  @:keep public static function createWebLogTransportBackend():LogTransportBackend {
+  public static function createWebLogTransportBackend():LogTransportBackend {
     return cast { write: function(_line:String) {
 
 } };
     return cast null;
   }
 
-  @:keep public static function disposeFileLogSink(_handle:FileLogSink):Void {
+  public static function disposeFileLogSink(_handle:FileLogSink):Void {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     backend = Log._transportBackend__log;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(backend, null))) { return; }
@@ -453,7 +450,7 @@ class Log {
     if (FlightRuntime.truthy(FlightRuntime.field(backend, 'dispose'))) { FlightRuntime.callProperty(backend, 'dispose', cast ([] : Array<Dynamic>)); }
   }
 
-  @:keep public static function disposeLogSink(handle:BufferedLogSink):Void {
+  public static function disposeLogSink(handle:BufferedLogSink):Void {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     state = FlightRuntime.callProperty(Log._bufferedSinkStates__log, 'get', cast ([handle] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.truthy(state))) { return; }
@@ -462,14 +459,14 @@ class Log {
     FlightRuntime.setField(state, 'timer', null);
   }
 
-  @:keep public static function enableLogSignals():LogSignals {
+  public static function enableLogSignals():LogSignals {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(Log._logSignals__log, null))) { return cast Log._logSignals__log; }
     (Log._logSignals__log = cast ({ onLogEntry: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onLogError: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) } : Dynamic));
     return cast Log._logSignals__log;
     return cast null;
   }
 
-  @:keep public static function endLogGroup(?channel:Null<String>):Void {
+  public static function endLogGroup(?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
     if (FlightRuntime.truthy(FlightRuntime.compare(Log._groupDepth__log, 0.0, '<='))) { return; }
     Log._groupDepth__log--;
@@ -477,7 +474,7 @@ class Log {
     FlightRuntime.callValue(Log._emitToSinks__log, cast ([{ level: LogLevel.Debug, channel: channel, data: { group: 'end', depth: (Log._groupDepth__log + 1.0) } }] : Array<Dynamic>));
   }
 
-  @:keep public static function endLogTimer(timer:LogTimer):Float {
+  public static function endLogTimer(timer:LogTimer):Float {
     var elapsed:Dynamic = cast FlightRuntime.UNDEFINED;
     elapsed = (FlightRuntime.callValue(Log._timestamp__log, cast ([] : Array<Dynamic>)) - FlightRuntime.field(timer, 'startedAt'));
     FlightRuntime.callValue(logDebug, cast ([{ label: FlightRuntime.field(timer, 'label'), elapsedMs: elapsed }, FlightRuntime.field(timer, 'channel')] : Array<Dynamic>));
@@ -485,48 +482,48 @@ class Log {
     return cast null;
   }
 
-  @:keep public static function enterLogSpan(span:LogSpan):Void {
+  public static function enterLogSpan(span:LogSpan):Void {
     FlightRuntime.callProperty(Log._spanStack__log, 'push', cast ([span] : Array<Dynamic>));
   }
 
-  @:keep public static function exitLogSpan(span:LogSpan):Void {
+  public static function exitLogSpan(span:LogSpan):Void {
     var idx:Dynamic = cast FlightRuntime.UNDEFINED;
     idx = FlightRuntime.callProperty(Log._spanStack__log, 'indexOf', cast ([span] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.compare(idx, 0.0, '>='))) { FlightRuntime.splice(Log._spanStack__log, Std.int(idx), Std.int(1.0), []); }
   }
 
-  @:keep public static function flushLogSink(handle:BufferedLogSink):Void {
+  public static function flushLogSink(handle:BufferedLogSink):Void {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     state = FlightRuntime.callProperty(Log._bufferedSinkStates__log, 'get', cast ([handle] : Array<Dynamic>));
     if (FlightRuntime.truthy(state)) { FlightRuntime.callProperty(state, 'flush', cast ([] : Array<Dynamic>)); }
   }
 
-  @:keep public static function getLogChannelLevel(channel:String):Null<LogLevel> {
+  public static function getLogChannelLevel(channel:String):Null<LogLevel> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(Log._channelLevels__log, 'get', cast ([channel] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getLogConsoleLevel():LogLevel {
+  public static function getLogConsoleLevel():LogLevel {
     return cast Log._consoleLevel__log;
     return cast null;
   }
 
-  @:keep public static function getLogLevel():LogLevel {
+  public static function getLogLevel():LogLevel {
     return cast Log._level__log;
     return cast null;
   }
 
-  @:keep public static function getLogLevelName(level:LogLevel):String {
+  public static function getLogLevelName(level:LogLevel):String {
     return cast FlightRuntime.coalesce(FlightRuntime.getIndex(Log._levelNames__log, level), function():Dynamic return cast 'unknown');
     return cast null;
   }
 
-  @:keep public static function getLogTransportBackend():Null<LogTransportBackend> {
+  public static function getLogTransportBackend():Null<LogTransportBackend> {
     return cast Log._transportBackend__log;
     return cast null;
   }
 
-  @:keep public static function getMemoryLogSinkEntries(handle:MemoryLogSink):Array<LogEntry> {
+  public static function getMemoryLogSinkEntries(handle:MemoryLogSink):Array<LogEntry> {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure3:Dynamic = cast FlightRuntime.UNDEFINED;
     var buf:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -541,7 +538,7 @@ class Log {
     return cast null;
   }
 
-  @:keep public static function log(level:LogLevel, data:Dynamic, ?channel:Null<String>):Void {
+  public static function log(level:LogLevel, data:Dynamic, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
     var resolved:LogData = cast FlightRuntime.UNDEFINED;
     var entry:LogEntry = cast FlightRuntime.UNDEFINED;
@@ -551,7 +548,7 @@ class Log {
     FlightRuntime.callValue(Log._emitToSinks__log, cast ([entry] : Array<Dynamic>));
   }
 
-  @:keep public static function logAssert(condition:Bool, data:Dynamic, ?channel:Null<String>):Void {
+  public static function logAssert(condition:Bool, data:Dynamic, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
     var resolved:LogData = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(condition)) { return; }
@@ -560,7 +557,7 @@ class Log {
     FlightRuntime.callValue(Log._emitToSinks__log, cast ([{ level: LogLevel.Error, channel: channel, data: FlightRuntime.callValue(Log._mergeSpanFields__log, cast ([resolved, channel] : Array<Dynamic>)) }] : Array<Dynamic>));
   }
 
-  @:keep public static function logDebug(data:Dynamic, ?channel:Null<String>):Void {
+  public static function logDebug(data:Dynamic, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
     var resolved:LogData = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(Log._passesLevelGate__log, cast ([LogLevel.Debug, channel] : Array<Dynamic>))))) { return; }
@@ -568,7 +565,7 @@ class Log {
     FlightRuntime.callValue(Log._emitToSinks__log, cast ([{ level: LogLevel.Debug, channel: channel, data: FlightRuntime.callValue(Log._mergeSpanFields__log, cast ([resolved, channel] : Array<Dynamic>)) }] : Array<Dynamic>));
   }
 
-  @:keep public static function logDebugWith(context:LogContext, data:Dynamic):Void {
+  public static function logDebugWith(context:LogContext, data:Dynamic):Void {
     var __destructure4:Dynamic = cast FlightRuntime.UNDEFINED;
     var channel:Dynamic = cast FlightRuntime.UNDEFINED;
     var resolved:LogData = cast FlightRuntime.UNDEFINED;
@@ -579,7 +576,7 @@ class Log {
     FlightRuntime.callValue(Log._emitToSinks__log, cast ([{ level: LogLevel.Debug, channel: channel, data: FlightRuntime.callValue(Log._mergeContextFields__log, cast ([context, FlightRuntime.callValue(Log._mergeSpanFields__log, cast ([resolved, channel] : Array<Dynamic>))] : Array<Dynamic>)) }] : Array<Dynamic>));
   }
 
-  @:keep public static function logError(data:Dynamic, ?channel:Null<String>):Void {
+  public static function logError(data:Dynamic, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
     var resolved:LogData = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(Log._passesLevelGate__log, cast ([LogLevel.Error, channel] : Array<Dynamic>))))) { return; }
@@ -587,7 +584,7 @@ class Log {
     FlightRuntime.callValue(Log._emitToSinks__log, cast ([{ level: LogLevel.Error, channel: channel, data: FlightRuntime.callValue(Log._mergeSpanFields__log, cast ([resolved, channel] : Array<Dynamic>)) }] : Array<Dynamic>));
   }
 
-  @:keep public static function logErrorWith(context:LogContext, data:Dynamic):Void {
+  public static function logErrorWith(context:LogContext, data:Dynamic):Void {
     var __destructure5:Dynamic = cast FlightRuntime.UNDEFINED;
     var channel:Dynamic = cast FlightRuntime.UNDEFINED;
     var resolved:LogData = cast FlightRuntime.UNDEFINED;
@@ -598,7 +595,7 @@ class Log {
     FlightRuntime.callValue(Log._emitToSinks__log, cast ([{ level: LogLevel.Error, channel: channel, data: FlightRuntime.callValue(Log._mergeContextFields__log, cast ([context, FlightRuntime.callValue(Log._mergeSpanFields__log, cast ([resolved, channel] : Array<Dynamic>))] : Array<Dynamic>)) }] : Array<Dynamic>));
   }
 
-  @:keep public static function logInfo(data:Dynamic, ?channel:Null<String>):Void {
+  public static function logInfo(data:Dynamic, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
     var resolved:LogData = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(Log._passesLevelGate__log, cast ([LogLevel.Info, channel] : Array<Dynamic>))))) { return; }
@@ -606,7 +603,7 @@ class Log {
     FlightRuntime.callValue(Log._emitToSinks__log, cast ([{ level: LogLevel.Info, channel: channel, data: FlightRuntime.callValue(Log._mergeSpanFields__log, cast ([resolved, channel] : Array<Dynamic>)) }] : Array<Dynamic>));
   }
 
-  @:keep public static function logInfoWith(context:LogContext, data:Dynamic):Void {
+  public static function logInfoWith(context:LogContext, data:Dynamic):Void {
     var __destructure6:Dynamic = cast FlightRuntime.UNDEFINED;
     var channel:Dynamic = cast FlightRuntime.UNDEFINED;
     var resolved:LogData = cast FlightRuntime.UNDEFINED;
@@ -617,7 +614,7 @@ class Log {
     FlightRuntime.callValue(Log._emitToSinks__log, cast ([{ level: LogLevel.Info, channel: channel, data: FlightRuntime.callValue(Log._mergeContextFields__log, cast ([context, FlightRuntime.callValue(Log._mergeSpanFields__log, cast ([resolved, channel] : Array<Dynamic>))] : Array<Dynamic>)) }] : Array<Dynamic>));
   }
 
-  @:keep public static function logOnce(key:String, level:LogLevel, data:Dynamic, ?channel:Null<String>):Bool {
+  public static function logOnce(key:String, level:LogLevel, data:Dynamic, ?channel:Null<String>):Bool {
     if (channel == null) channel = cast (null : Dynamic);
     if (FlightRuntime.truthy(FlightRuntime.callProperty(Log._onceKeys__log, 'has', cast ([key] : Array<Dynamic>)))) { return cast false; }
     FlightRuntime.callProperty(Log._onceKeys__log, 'add', cast ([key] : Array<Dynamic>));
@@ -626,7 +623,7 @@ class Log {
     return cast null;
   }
 
-  @:keep public static function logVerbose(data:Dynamic, ?channel:Null<String>):Void {
+  public static function logVerbose(data:Dynamic, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
     var resolved:LogData = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(Log._passesLevelGate__log, cast ([LogLevel.Verbose, channel] : Array<Dynamic>))))) { return; }
@@ -634,7 +631,7 @@ class Log {
     FlightRuntime.callValue(Log._emitToSinks__log, cast ([{ level: LogLevel.Verbose, channel: channel, data: FlightRuntime.callValue(Log._mergeSpanFields__log, cast ([resolved, channel] : Array<Dynamic>)) }] : Array<Dynamic>));
   }
 
-  @:keep public static function logVerboseWith(context:LogContext, data:Dynamic):Void {
+  public static function logVerboseWith(context:LogContext, data:Dynamic):Void {
     var __destructure7:Dynamic = cast FlightRuntime.UNDEFINED;
     var channel:Dynamic = cast FlightRuntime.UNDEFINED;
     var resolved:LogData = cast FlightRuntime.UNDEFINED;
@@ -645,7 +642,7 @@ class Log {
     FlightRuntime.callValue(Log._emitToSinks__log, cast ([{ level: LogLevel.Verbose, channel: channel, data: FlightRuntime.callValue(Log._mergeContextFields__log, cast ([context, FlightRuntime.callValue(Log._mergeSpanFields__log, cast ([resolved, channel] : Array<Dynamic>))] : Array<Dynamic>)) }] : Array<Dynamic>));
   }
 
-  @:keep public static function logWarn(data:Dynamic, ?channel:Null<String>):Void {
+  public static function logWarn(data:Dynamic, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
     var resolved:LogData = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(Log._passesLevelGate__log, cast ([LogLevel.Warn, channel] : Array<Dynamic>))))) { return; }
@@ -653,7 +650,7 @@ class Log {
     FlightRuntime.callValue(Log._emitToSinks__log, cast ([{ level: LogLevel.Warn, channel: channel, data: FlightRuntime.callValue(Log._mergeSpanFields__log, cast ([resolved, channel] : Array<Dynamic>)) }] : Array<Dynamic>));
   }
 
-  @:keep public static function logWarnWith(context:LogContext, data:Dynamic):Void {
+  public static function logWarnWith(context:LogContext, data:Dynamic):Void {
     var __destructure8:Dynamic = cast FlightRuntime.UNDEFINED;
     var channel:Dynamic = cast FlightRuntime.UNDEFINED;
     var resolved:LogData = cast FlightRuntime.UNDEFINED;
@@ -664,7 +661,7 @@ class Log {
     FlightRuntime.callValue(Log._emitToSinks__log, cast ([{ level: LogLevel.Warn, channel: channel, data: FlightRuntime.callValue(Log._mergeContextFields__log, cast ([context, FlightRuntime.callValue(Log._mergeSpanFields__log, cast ([resolved, channel] : Array<Dynamic>))] : Array<Dynamic>)) }] : Array<Dynamic>));
   }
 
-  @:keep public static function logWith(context:LogContext, level:LogLevel, data:Dynamic):Void {
+  public static function logWith(context:LogContext, level:LogLevel, data:Dynamic):Void {
     var __destructure9:Dynamic = cast FlightRuntime.UNDEFINED;
     var channel:Dynamic = cast FlightRuntime.UNDEFINED;
     var resolved:LogData = cast FlightRuntime.UNDEFINED;
@@ -675,16 +672,16 @@ class Log {
     FlightRuntime.callValue(Log._emitToSinks__log, cast ([{ level: level, channel: channel, data: FlightRuntime.callValue(Log._mergeContextFields__log, cast ([context, FlightRuntime.callValue(Log._mergeSpanFields__log, cast ([resolved, channel] : Array<Dynamic>))] : Array<Dynamic>)) }] : Array<Dynamic>));
   }
 
-  @:keep public static function parseLogLevel(name:String):Null<LogLevel> {
+  public static function parseLogLevel(name:String):Null<LogLevel> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(Log._levelByName__log, 'get', cast ([FlightRuntime.callProperty(name, 'toLowerCase', cast ([] : Array<Dynamic>))] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function registerLogSerializer(kind:String, fn:Dynamic):Void {
+  public static function registerLogSerializer(kind:String, fn:Dynamic):Void {
     FlightRuntime.callProperty(Log._serializers__log, 'set', cast ([kind, fn] : Array<Dynamic>));
   }
 
-  @:keep public static function removeLogSink(sink:LogSink):Bool {
+  public static function removeLogSink(sink:LogSink):Bool {
     var idx:Dynamic = cast FlightRuntime.UNDEFINED;
     idx = FlightRuntime.callProperty(Log._sinks__log, 'indexOf', cast ([sink] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.compare(idx, 0.0, '<'))) { return cast false; }
@@ -693,7 +690,7 @@ class Log {
     return cast null;
   }
 
-  @:keep public static function serializeLogError(value:Dynamic):Dynamic {
+  public static function serializeLogError(value:Dynamic):Dynamic {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.isError(value)))) { return cast { value: Std.string(value) }; }
     result = { name: FlightRuntime.field(value, 'name'), message: FlightRuntime.field(value, 'message') };
@@ -703,35 +700,35 @@ class Log {
     return cast null;
   }
 
-  @:keep public static function setLogChannelLevel(channel:String, level:LogLevel):Void {
+  public static function setLogChannelLevel(channel:String, level:LogLevel):Void {
     FlightRuntime.callProperty(Log._channelLevels__log, 'set', cast ([channel, level] : Array<Dynamic>));
   }
 
-  @:keep public static function setLogConsoleLevel(level:LogLevel):Void {
+  public static function setLogConsoleLevel(level:LogLevel):Void {
     (Log._consoleLevel__log = cast (level : Dynamic));
   }
 
-  @:keep public static function setLogLevel(level:LogLevel):Void {
+  public static function setLogLevel(level:LogLevel):Void {
     (Log._level__log = cast (level : Dynamic));
   }
 
-  @:keep public static function setLogRedactionPaths(paths:Array<String>):Void {
+  public static function setLogRedactionPaths(paths:Array<String>):Void {
     FlightRuntime.setLength(Log._redactionPaths__log, 0.0);
     for (p in FlightRuntime.iterable(paths)) {
       FlightRuntime.callProperty(Log._redactionPaths__log, 'push', cast ([p] : Array<Dynamic>));
     }
   }
 
-  @:keep public static function setLogSink(sink:Null<LogSink>):Void {
+  public static function setLogSink(sink:Null<LogSink>):Void {
     FlightRuntime.setLength(Log._sinks__log, 0.0);
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(sink, null))) { FlightRuntime.callProperty(Log._sinks__log, 'push', cast ([sink] : Array<Dynamic>)); }
   }
 
-  @:keep public static function setLogTransportBackend(backend:Null<LogTransportBackend>):Void {
+  public static function setLogTransportBackend(backend:Null<LogTransportBackend>):Void {
     (Log._transportBackend__log = cast (backend : Dynamic));
   }
 
-  @:keep public static function startLogTimer(label:String, ?channel:Null<String>):LogTimer {
+  public static function startLogTimer(label:String, ?channel:Null<String>):LogTimer {
     if (channel == null) channel = cast (null : Dynamic);
     return cast { label: label, channel: channel, startedAt: FlightRuntime.callValue(Log._timestamp__log, cast ([] : Array<Dynamic>)) };
     return cast null;

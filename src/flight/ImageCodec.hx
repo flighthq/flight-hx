@@ -9,20 +9,17 @@ import flight.Types.ImageDecoder;
 import flight.Types.ImageEncodeOptions;
 import flight.Types.ImageEncoder;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.ImageCodec")
 class ImageCodec {
-  @:keep public static function clearImageDecoders():Void {
+  public static function clearImageDecoders():Void {
     FlightRuntime.callProperty(ImageCodec.decoders__imageDecoderRegistry, 'clear', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function clearImageEncoders():Void {
+  public static function clearImageEncoders():Void {
     FlightRuntime.callProperty(ImageCodec.encoders__imageEncoderRegistry, 'clear', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function createCanvasImageEncoder__registerWebImageEncoders(mimeType:String):ImageEncoder {
+  public static function createCanvasImageEncoder__registerWebImageEncoders(mimeType:String):ImageEncoder {
     return cast flight.internal.FlightAsync.make(function(image:DecodedImage, ?options:ImageEncodeOptions):flight.internal.FlightPromise<Dynamic> {
   var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
   var context:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -39,26 +36,24 @@ class ImageCodec {
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function decodeImage(bytes:Dynamic, ?mimeType:String):flight.internal.FlightPromise<Null<DecodedImage>> {
-    var decoder:Dynamic = cast FlightRuntime.UNDEFINED;
-    decoder = FlightRuntime.callValue(ImageCodec.resolveImageDecoder__decodeImage, cast ([bytes, mimeType] : Array<Dynamic>));
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(decoder, null))) { return cast null; }
-    return cast FlightRuntime.callValue(decoder, cast ([bytes] : Array<Dynamic>));
-    return cast null;
+  public static function decodeImage(bytes:Dynamic, ?mimeType:String):flight.internal.FlightPromise<Null<DecodedImage>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Null<DecodedImage>> {
+      var decoder:Dynamic = cast FlightRuntime.UNDEFINED;
+      decoder = FlightRuntime.callValue(ImageCodec.resolveImageDecoder__decodeImage, cast ([bytes, mimeType] : Array<Dynamic>));
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(decoder, null))) { return cast null; }
+      return cast FlightRuntime.callValue(decoder, cast ([bytes] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function decodeImagePremultiplied(bytes:Dynamic, ?mimeType:String):flight.internal.FlightPromise<Null<DecodedImage>> {
-    var decoder:Dynamic = cast FlightRuntime.UNDEFINED;
-    decoder = FlightRuntime.callValue(ImageCodec.resolveImageDecoder__decodeImage, cast ([bytes, mimeType] : Array<Dynamic>));
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(decoder, null))) { return cast null; }
-    return cast FlightRuntime.callValue(decoder, cast ([bytes, { premultiplyAlpha: true }] : Array<Dynamic>));
-    return cast null;
+  public static function decodeImagePremultiplied(bytes:Dynamic, ?mimeType:String):flight.internal.FlightPromise<Null<DecodedImage>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Null<DecodedImage>> {
+      var decoder:Dynamic = cast FlightRuntime.UNDEFINED;
+      decoder = FlightRuntime.callValue(ImageCodec.resolveImageDecoder__decodeImage, cast ([bytes, mimeType] : Array<Dynamic>));
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(decoder, null))) { return cast null; }
+      return cast FlightRuntime.callValue(decoder, cast ([bytes, { premultiplyAlpha: true }] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
   public static final decodeImageWithCanvas__registerWebImageDecoders:ImageDecoder = flight.internal.FlightAsync.make(function(bytes:Dynamic, ?options:ImageDecodeOptions):flight.internal.FlightPromise<DecodedImage> {
@@ -83,7 +78,7 @@ class ImageCodec {
 
   public static final decoders__imageDecoderRegistry:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
 
-  @:keep public static function detectImageMimeType(data:Dynamic):Null<String> {
+  public static function detectImageMimeType(data:Dynamic):Null<String> {
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     b = FlightRuntime.select(FlightRuntime.isInstanceOf(data, FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>))), function():Dynamic return cast data, function():Dynamic return cast FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [data]));
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(b, 'byteLength'), 4.0, '<'))) { return cast null; }
@@ -96,40 +91,39 @@ class ImageCodec {
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function encodeImage(image:DecodedImage, mimeType:String, ?options:ImageEncodeOptions):flight.internal.FlightPromise<Null<Dynamic>> {
-    var encoder:Dynamic = cast FlightRuntime.UNDEFINED;
-    encoder = FlightRuntime.callValue(getImageEncoder, cast ([mimeType] : Array<Dynamic>));
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(encoder, null))) { return cast null; }
-    return cast FlightRuntime.callValue(encoder, cast ([image, options] : Array<Dynamic>));
-    return cast null;
+  public static function encodeImage(image:DecodedImage, mimeType:String, ?options:ImageEncodeOptions):flight.internal.FlightPromise<Null<Dynamic>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Null<Dynamic>> {
+      var encoder:Dynamic = cast FlightRuntime.UNDEFINED;
+      encoder = FlightRuntime.callValue(getImageEncoder, cast ([mimeType] : Array<Dynamic>));
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(encoder, null))) { return cast null; }
+      return cast FlightRuntime.callValue(encoder, cast ([image, options] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
   public static final encoders__imageEncoderRegistry:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
 
-  @:keep public static function getImageDecoder(mimeType:String):Null<ImageDecoder> {
+  public static function getImageDecoder(mimeType:String):Null<ImageDecoder> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(ImageCodec.decoders__imageDecoderRegistry, 'get', cast ([mimeType] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getImageEncoder(mimeType:String):Null<ImageEncoder> {
+  public static function getImageEncoder(mimeType:String):Null<ImageEncoder> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(ImageCodec.encoders__imageEncoderRegistry, 'get', cast ([mimeType] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function hasImageDecoder(mimeType:String):Bool {
+  public static function hasImageDecoder(mimeType:String):Bool {
     return cast FlightRuntime.callProperty(ImageCodec.decoders__imageDecoderRegistry, 'has', cast ([mimeType] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hasImageEncoder(mimeType:String):Bool {
+  public static function hasImageEncoder(mimeType:String):Bool {
     return cast FlightRuntime.callProperty(ImageCodec.encoders__imageEncoderRegistry, 'has', cast ([mimeType] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function premultiplyRgbaInPlace__registerWebImageDecoders(data:Dynamic):Void {
+  public static function premultiplyRgbaInPlace__registerWebImageDecoders(data:Dynamic):Void {
     {
       var i:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(i, FlightRuntime.field(data, 'length'), '<'))) {
@@ -143,27 +137,27 @@ class ImageCodec {
     }
   }
 
-  @:keep public static function registerImageDecoder(mimeType:String, decoder:ImageDecoder):Void {
+  public static function registerImageDecoder(mimeType:String, decoder:ImageDecoder):Void {
     FlightRuntime.callProperty(ImageCodec.decoders__imageDecoderRegistry, 'set', cast ([mimeType, decoder] : Array<Dynamic>));
   }
 
-  @:keep public static function registerImageEncoder(mimeType:String, encoder:ImageEncoder):Void {
+  public static function registerImageEncoder(mimeType:String, encoder:ImageEncoder):Void {
     FlightRuntime.callProperty(ImageCodec.encoders__imageEncoderRegistry, 'set', cast ([mimeType, encoder] : Array<Dynamic>));
   }
 
-  @:keep public static function registerWebImageDecoders():Void {
+  public static function registerWebImageDecoders():Void {
     for (mimeType in FlightRuntime.iterable(ImageCodec.webDecodableMimeTypes__registerWebImageDecoders)) {
       FlightRuntime.callValue(registerImageDecoder, cast ([mimeType, ImageCodec.decodeImageWithCanvas__registerWebImageDecoders] : Array<Dynamic>));
     }
   }
 
-  @:keep public static function registerWebImageEncoders():Void {
+  public static function registerWebImageEncoders():Void {
     for (mimeType in FlightRuntime.iterable(ImageCodec.webEncodableMimeTypes__registerWebImageEncoders)) {
       FlightRuntime.callValue(registerImageEncoder, cast ([mimeType, FlightRuntime.callValue(ImageCodec.createCanvasImageEncoder__registerWebImageEncoders, cast ([mimeType] : Array<Dynamic>))] : Array<Dynamic>));
     }
   }
 
-  @:keep public static function resolveImageDecoder__decodeImage(bytes:Dynamic, ?mimeType:String):Null<ImageDecoder> {
+  public static function resolveImageDecoder__decodeImage(bytes:Dynamic, ?mimeType:String):Null<ImageDecoder> {
     var type:Dynamic = cast FlightRuntime.UNDEFINED;
     type = FlightRuntime.coalesce(mimeType, function():Dynamic return cast FlightRuntime.callValue(detectImageMimeType, cast ([bytes] : Array<Dynamic>)));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(type, null))) { return cast null; }
@@ -171,11 +165,11 @@ class ImageCodec {
     return cast null;
   }
 
-  @:keep public static function unregisterImageDecoder(mimeType:String):Void {
+  public static function unregisterImageDecoder(mimeType:String):Void {
     FlightRuntime.callProperty(ImageCodec.decoders__imageDecoderRegistry, 'delete', cast ([mimeType] : Array<Dynamic>));
   }
 
-  @:keep public static function unregisterImageEncoder(mimeType:String):Void {
+  public static function unregisterImageEncoder(mimeType:String):Void {
     FlightRuntime.callProperty(ImageCodec.encoders__imageEncoderRegistry, 'delete', cast ([mimeType] : Array<Dynamic>));
   }
 

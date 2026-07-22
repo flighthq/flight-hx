@@ -105,9 +105,6 @@ typedef DomTextInputOverlay = Dynamic;
 
 typedef DomVideoData__domVideo = Dynamic;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.DisplayObjectDom")
 class DisplayObjectDom {
   public static final _cssFilterBindings__domCSSFilterBinding:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
@@ -128,7 +125,7 @@ class DisplayObjectDom {
 
   public static final _richTextSelectionRectangles__domRichText:Array<{ var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }> = cast ([] : Array<Dynamic>);
 
-  @:keep public static function _verticalAlignToJustifyContent__domNativeText(verticalAlign:TextVerticalAlign):String {
+  public static function _verticalAlignToJustifyContent__domNativeText(verticalAlign:TextVerticalAlign):String {
     {
       var __switchValue = verticalAlign;
       if (__switchValue == 'bottom') {
@@ -144,11 +141,11 @@ class DisplayObjectDom {
     return cast null;
   }
 
-  @:keep public static function applyDomBlendMode(element:Dynamic, value:Null<BlendMode>):Void {
+  public static function applyDomBlendMode(element:Dynamic, value:Null<BlendMode>):Void {
     FlightRuntime.setField(FlightRuntime.field(element, 'style'), 'mixBlendMode', FlightRuntime.coalesce(FlightRuntime.select(!FlightRuntime.strictEquals(value, null), function():Dynamic return cast FlightRuntime.getIndex(DisplayObjectDom.DOM_BLEND_MODE__domMaterials, value), function():Dynamic return cast null), function():Dynamic return cast ''));
   }
 
-  @:keep public static function applyDomClipRectangles(state:DomRenderState, data:RenderProxy2D, entries:Array<DomClipEntry>):Void {
+  public static function applyDomClipRectangles(state:DomRenderState, data:RenderProxy2D, entries:Array<DomClipEntry>):Void {
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     var contour:Null<DomClipContourEntry> = cast FlightRuntime.UNDEFINED;
     var rect:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -192,7 +189,7 @@ class DisplayObjectDom {
     FlightRuntime.setField((cast FlightRuntime.field(element, 'style') : { var webkitClipPath:String; }), 'webkitClipPath', clipPath);
   }
 
-  @:keep public static function applyDomStyle(state:DomRenderState, element:Dynamic, node:RenderProxy2D):Void {
+  public static function applyDomStyle(state:DomRenderState, element:Dynamic, node:RenderProxy2D):Void {
     FlightRuntime.callValue(setDomTransform, cast ([element, FlightRuntime.field(node, 'transform2D'), FlightRuntime.field(state, 'roundPixels')] : Array<Dynamic>));
     FlightRuntime.setField(FlightRuntime.field(element, 'style'), 'opacity', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(node, 'alpha'), 1.0, '<'), function():Dynamic return cast Std.string(FlightRuntime.field(node, 'alpha')), function():Dynamic return cast ''));
     FlightRuntime.setField(FlightRuntime.field(element, 'style'), 'imageRendering', FlightRuntime.select(FlightRuntime.field(state, 'allowSmoothing'), function():Dynamic return cast '', function():Dynamic return cast 'pixelated'));
@@ -200,7 +197,7 @@ class DisplayObjectDom {
     FlightRuntime.callOptionalProperty(state, 'applyBlendMode', cast ([element, FlightRuntime.field(node, 'blendMode')] : Array<Dynamic>));
   }
 
-  @:keep public static function applyNativeTextStyle__domNativeText(element:Dynamic, style:NativeTextStyle):Void {
+  public static function applyNativeTextStyle__domNativeText(element:Dynamic, style:NativeTextStyle):Void {
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     var family:Dynamic = cast FlightRuntime.UNDEFINED;
     var weight:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -215,7 +212,7 @@ class DisplayObjectDom {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(style, 'leading'), FlightRuntime.UNDEFINED))) { FlightRuntime.setField(FlightRuntime.field(element, 'style'), 'lineHeight', '' + Std.string((size + FlightRuntime.field(style, 'leading'))) + 'px'); }
   }
 
-  @:keep public static function buildDomContourClipPath(entry:DomClipContourEntry, mapPointToElement:Dynamic):String {
+  public static function buildDomContourClipPath(entry:DomClipContourEntry, mapPointToElement:Dynamic):String {
     var d:Dynamic = cast FlightRuntime.UNDEFINED;
     var rule:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(entry, 'contours'), 'length'), 1.0))) {
@@ -257,7 +254,7 @@ class DisplayObjectDom {
     return cast null;
   }
 
-  @:keep public static function buildDomScale9Mapper(bounds:RectangleLike, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
+  public static function buildDomScale9Mapper(bounds:RectangleLike, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
     var gx:Dynamic = cast FlightRuntime.UNDEFINED;
     var gy:Dynamic = cast FlightRuntime.UNDEFINED;
     var gw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -275,7 +272,7 @@ class DisplayObjectDom {
     return cast null;
   }
 
-  @:keep public static function canvasFontAscentFallback__domRichText(ctx:Dynamic, font:String):Float {
+  public static function canvasFontAscentFallback__domRichText(ctx:Dynamic, font:String):Float {
     var metrics:Dynamic = cast FlightRuntime.UNDEFINED;
     var sizeMatch:Dynamic = cast FlightRuntime.UNDEFINED;
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -289,17 +286,17 @@ class DisplayObjectDom {
 
   public static final caretRectangle__domTextInput:Dynamic = { height: 0.0, lineIndex: 0.0, width: 0.0, x: 0.0, y: 0.0 };
 
-  @:keep public static function createDomBitmapData__domBitmap(_state:RenderState, _source:Renderable):DomBitmapData__domBitmap {
+  public static function createDomBitmapData__domBitmap(_state:RenderState, _source:Renderable):DomBitmapData__domBitmap {
     return cast FlightRuntime.callValue(createEntity, cast ([{ canvas: null, context: null, image: null }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createDomNativeTextData__domNativeText(_state:RenderState, _source:Renderable):Null<RendererData> {
+  public static function createDomNativeTextData__domNativeText(_state:RenderState, _source:Renderable):Null<RendererData> {
     return cast null;
     return cast null;
   }
 
-  @:keep public static function createDomRenderState(element:Dynamic, ?options:Dynamic):DomRenderState {
+  public static function createDomRenderState(element:Dynamic, ?options:Dynamic):DomRenderState {
     if (options == null) options = cast ({  } : Dynamic);
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -325,27 +322,27 @@ class DisplayObjectDom {
     return cast null;
   }
 
-  @:keep public static function createDomRenderStateRuntime():DomRenderStateRuntime {
+  public static function createDomRenderStateRuntime():DomRenderStateRuntime {
     return cast (cast FlightRuntime.callValue(createRenderStateRuntime, cast ([] : Array<Dynamic>)) : DomRenderStateRuntime);
     return cast null;
   }
 
-  @:keep public static function createDomRichTextData__domRichText(_state:RenderState, _source:Renderable):DomRichTextData__domRichText {
+  public static function createDomRichTextData__domRichText(_state:RenderState, _source:Renderable):DomRichTextData__domRichText {
     return cast FlightRuntime.callValue(createEntity, cast ([{ div: null }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createDomScale9ShapeData(_state:RenderState, _source:Renderable):DomScale9ShapeData__domScale9Shape {
+  public static function createDomScale9ShapeData(_state:RenderState, _source:Renderable):DomScale9ShapeData__domScale9Shape {
     return cast FlightRuntime.callValue(createEntity, cast ([{ canvas: null, context: null }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createDomShapeData__domShape(_state:RenderState, _source:Renderable):DomShapeData__domShape {
+  public static function createDomShapeData__domShape(_state:RenderState, _source:Renderable):DomShapeData__domShape {
     return cast FlightRuntime.callValue(createEntity, cast ([{ canvas: null, context: null }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createDomStageRectangle(rect:RectangleLike, transform:MatrixLike):DomStageRectangle {
+  public static function createDomStageRectangle(rect:RectangleLike, transform:MatrixLike):DomStageRectangle {
     var x0:Dynamic = cast FlightRuntime.UNDEFINED;
     var y0:Dynamic = cast FlightRuntime.UNDEFINED;
     var x1:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -366,17 +363,17 @@ class DisplayObjectDom {
     return cast null;
   }
 
-  @:keep public static function createDomTextData__domTextLabel(_state:RenderState, _source:Renderable):DomTextData__domTextLabel {
+  public static function createDomTextData__domTextLabel(_state:RenderState, _source:Renderable):DomTextData__domTextLabel {
     return cast FlightRuntime.callValue(createEntity, cast ([{ div: null }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createDomVideoData__domVideo(_state:RenderState, _source:Renderable):DomVideoData__domVideo {
+  public static function createDomVideoData__domVideo(_state:RenderState, _source:Renderable):DomVideoData__domVideo {
     return cast FlightRuntime.callValue(createEntity, cast ([{ element: null }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createStageToElementPointMapper__domClipRectangle(element:Dynamic):Dynamic {
+  public static function createStageToElementPointMapper__domClipRectangle(element:Dynamic):Dynamic {
     var matrix:Dynamic = cast FlightRuntime.UNDEFINED;
     var det:Dynamic = cast FlightRuntime.UNDEFINED;
     var invA:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -460,7 +457,7 @@ class DisplayObjectDom {
   FlightRuntime.incrementField(state, 'currentClipDepth', 1, true);
 } };
 
-  @:keep public static function drawDomBitmap(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomBitmap(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var imageSource:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -481,10 +478,10 @@ class DisplayObjectDom {
 }
   }
 
-  @:keep public static function drawDomDisplayObject(_state:DomRenderState, _renderProxy:RenderProxy2D):Void {
+  public static function drawDomDisplayObject(_state:DomRenderState, _renderProxy:RenderProxy2D):Void {
   }
 
-  @:keep public static function drawDomHtmlView(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomHtmlView(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -507,7 +504,7 @@ class DisplayObjectDom {
     FlightRuntime.callValue(setDomRendererElement, cast ([state, element] : Array<Dynamic>));
   }
 
-  @:keep public static function drawDomNativeText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomNativeText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -548,11 +545,11 @@ class DisplayObjectDom {
     FlightRuntime.callValue(setDomRendererElement, cast ([state, element] : Array<Dynamic>));
   }
 
-  @:keep public static function drawDomNativeTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomNativeTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     FlightRuntime.callValue(drawDomNativeText, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  @:keep public static function drawDomRenderCache__domCache(state:RenderState, data:RenderProxy2D):Void {
+  public static function drawDomRenderCache__domCache(state:RenderState, data:RenderProxy2D):Void {
     var cache:Dynamic = cast FlightRuntime.UNDEFINED;
     var domState:Dynamic = cast FlightRuntime.UNDEFINED;
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -570,7 +567,7 @@ class DisplayObjectDom {
     FlightRuntime.callValue(setDomRendererElement, cast ([domState, canvas] : Array<Dynamic>));
   }
 
-  @:keep public static function drawDomRenderView(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomRenderView(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var renderer:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -592,14 +589,14 @@ class DisplayObjectDom {
     FlightRuntime.callValue(setDomRendererElement, cast ([state, canvas] : Array<Dynamic>));
   }
 
-  @:keep public static function drawDomRichText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomRichText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     FlightRuntime.callValue(DisplayObjectDom.drawDomRichTextField__domRichText, cast ([state, renderProxy] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(DisplayObjectDom._domTextInputOverlay__domRichText, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.callValue(getRichTextRuntime, cast ([(cast FlightRuntime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null)))) {
   FlightRuntime.callValue(DisplayObjectDom._domTextInputOverlay__domRichText, cast ([state, renderProxy] : Array<Dynamic>));
 }
   }
 
-  @:keep public static function drawDomRichTextField__domRichText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomRichTextField__domRichText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -725,11 +722,11 @@ class DisplayObjectDom {
     FlightRuntime.callValue(setDomRendererElement, cast ([state, div] : Array<Dynamic>));
   }
 
-  @:keep public static function drawDomRichTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomRichTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     FlightRuntime.callValue(drawDomRichText, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  @:keep public static function drawDomScale9Shape(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomScale9Shape(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -775,7 +772,7 @@ class DisplayObjectDom {
     FlightRuntime.callValue(setDomRendererElement, cast ([state, FlightRuntime.field(data, 'canvas')] : Array<Dynamic>));
   }
 
-  @:keep public static function drawDomShape(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomShape(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -814,7 +811,7 @@ class DisplayObjectDom {
     FlightRuntime.callValue(setDomRendererElement, cast ([state, FlightRuntime.field(data, 'canvas')] : Array<Dynamic>));
   }
 
-  @:keep public static function drawDomTextInputOverlay(_state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomTextInputOverlay(_state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var input:Dynamic = cast FlightRuntime.UNDEFINED;
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -857,7 +854,7 @@ class DisplayObjectDom {
 }
   }
 
-  @:keep public static function drawDomTextLabel(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomTextLabel(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -911,7 +908,7 @@ class DisplayObjectDom {
     FlightRuntime.callValue(setDomRendererElement, cast ([state, FlightRuntime.field(data, 'div')] : Array<Dynamic>));
   }
 
-  @:keep public static function drawDomVideo(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomVideo(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -932,28 +929,28 @@ class DisplayObjectDom {
 
   public static final EMPTY_CLIP_PATH__domClipRectangle:Dynamic = 'inset(0 100% 100% 0)';
 
-  @:keep public static function enableDomBlendModeSupport(state:DomRenderState):Void {
+  public static function enableDomBlendModeSupport(state:DomRenderState):Void {
     FlightRuntime.setField(state, 'applyBlendMode', applyDomBlendMode);
   }
 
-  @:keep public static function enableDomClipSupport(state:DomRenderState):Void {
+  public static function enableDomClipSupport(state:DomRenderState):Void {
     FlightRuntime.setField(state, 'displayObjectClipHooks', DisplayObjectDom.domDisplayObjectClipHooks__domClip);
     FlightRuntime.callValue(setDomClipHooks, cast ([state] : Array<Dynamic>));
   }
 
-  @:keep public static function enableDomCssFilterSupport(state:DomRenderState):Void {
+  public static function enableDomCssFilterSupport(state:DomRenderState):Void {
     FlightRuntime.setField(state, 'domCssFilterResolver', getDomCssFilter);
   }
 
-  @:keep public static function enableDomRenderCache(state:RenderState):Void {
+  public static function enableDomRenderCache(state:RenderState):Void {
     FlightRuntime.callValue(registerRenderCacheRenderer, cast ([state, defaultDomRenderCacheRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function enableDomTextInput():Void {
+  public static function enableDomTextInput():Void {
     FlightRuntime.callValue(registerDomTextInputOverlay, cast ([drawDomTextInputOverlay] : Array<Dynamic>));
   }
 
-  @:keep public static function ensureDomRenderCacheTarget(state:DomRenderState, cache:RenderCache, width:Float, height:Float):Dynamic {
+  public static function ensureDomRenderCacheTarget(state:DomRenderState, cache:RenderCache, width:Float, height:Float):Dynamic {
     var targets:Dynamic = cast FlightRuntime.UNDEFINED;
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     targets = FlightRuntime.callValue(DisplayObjectDom.getTargets__domCache, cast ([state] : Array<Dynamic>));
@@ -969,29 +966,29 @@ class DisplayObjectDom {
     return cast null;
   }
 
-  @:keep public static function escapeDomHtmlString(str:String):String {
+  public static function escapeDomHtmlString(str:String):String {
     return cast FlightRuntime.replace(FlightRuntime.replace(FlightRuntime.replace(FlightRuntime.replace(str, FlightRuntime.regexp('&', 'g'), '&amp;', false), FlightRuntime.regexp('<', 'g'), '&lt;', false), FlightRuntime.regexp('>', 'g'), '&gt;', false), FlightRuntime.regexp(' ', 'g'), '&nbsp;', false);
     return cast null;
   }
 
-  @:keep public static function explainDomImageSource(image:ImageResource):DomImageSourceKind {
+  public static function explainDomImageSource(image:ImageResource):DomImageSourceKind {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(image, 'source'), null))) { return cast 'element'; }
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(image, 'data'), null))) { return cast 'data'; }
     return cast 'none';
     return cast null;
   }
 
-  @:keep public static function getDomBlendModeFidelity(blendMode:BlendMode):DomBlendModeFidelity {
+  public static function getDomBlendModeFidelity(blendMode:BlendMode):DomBlendModeFidelity {
     return cast FlightRuntime.getIndex(DisplayObjectDom.DOM_BLEND_MODE_FIDELITY__domMaterials, blendMode);
     return cast null;
   }
 
-  @:keep public static function getDomCssFilter(renderProxy:RenderProxy2D):Null<String> {
+  public static function getDomCssFilter(renderProxy:RenderProxy2D):Null<String> {
     return cast FlightRuntime.callProperty(DisplayObjectDom._cssFilterBindings__domCSSFilterBinding, 'get', cast ([renderProxy] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getDomFontAscent__domRichText(ctx:Dynamic, font:String):Float {
+  public static function getDomFontAscent__domRichText(ctx:Dynamic, font:String):Float {
     var cached:Dynamic = cast FlightRuntime.UNDEFINED;
     var ascent:Dynamic = cast FlightRuntime.UNDEFINED;
     cached = FlightRuntime.callValue(getDomFontAscentCached, cast ([font] : Array<Dynamic>));
@@ -1002,22 +999,22 @@ class DisplayObjectDom {
     return cast null;
   }
 
-  @:keep public static function getDomFontAscentCached(font:String):Null<Float> {
+  public static function getDomFontAscentCached(font:String):Null<Float> {
     return cast FlightRuntime.callProperty(DisplayObjectDom._domFontAscentCache__domFontSource, 'get', cast ([font] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getDomRenderCacheTarget(state:DomRenderState, cache:RenderCache):Null<Dynamic> {
+  public static function getDomRenderCacheTarget(state:DomRenderState, cache:RenderCache):Null<Dynamic> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.callValue(DisplayObjectDom.getTargets__domCache, cast ([state] : Array<Dynamic>)), 'get', cast ([cache] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getDomRenderStateRuntime(state:DomRenderState):DomRenderStateRuntime {
+  public static function getDomRenderStateRuntime(state:DomRenderState):DomRenderStateRuntime {
     return cast (cast FlightRuntime.getIndex(state, EntityRuntimeKey) : DomRenderStateRuntime);
     return cast null;
   }
 
-  @:keep public static function getElementMatrix__domClipRectangle(element:Dynamic):MatrixLike {
+  public static function getElementMatrix__domClipRectangle(element:Dynamic):MatrixLike {
     var transform:Dynamic = cast FlightRuntime.UNDEFINED;
     var match:Dynamic = cast FlightRuntime.UNDEFINED;
     var parts:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1031,7 +1028,7 @@ class DisplayObjectDom {
     return cast null;
   }
 
-  @:keep public static function getMeasureCtx__domRichText():Null<Dynamic> {
+  public static function getMeasureCtx__domRichText():Null<Dynamic> {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(DisplayObjectDom._measureCtx__domRichText, null))) {
   (DisplayObjectDom._measureCtx__domRichText = cast (FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
 }
@@ -1039,7 +1036,7 @@ class DisplayObjectDom {
     return cast null;
   }
 
-  @:keep public static function getMeasureCtx__domTextLabel():Null<Dynamic> {
+  public static function getMeasureCtx__domTextLabel():Null<Dynamic> {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(DisplayObjectDom._measureCtx__domTextLabel, null))) {
   (DisplayObjectDom._measureCtx__domTextLabel = cast (FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
 }
@@ -1047,7 +1044,7 @@ class DisplayObjectDom {
     return cast null;
   }
 
-  @:keep public static function getTargets__domCache(state:DomRenderState):Dynamic {
+  public static function getTargets__domCache(state:DomRenderState):Dynamic {
     var targets:Dynamic = cast FlightRuntime.UNDEFINED;
     targets = FlightRuntime.callProperty(DisplayObjectDom._renderCacheTargets__domCache, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(targets, FlightRuntime.UNDEFINED))) {
@@ -1058,7 +1055,7 @@ class DisplayObjectDom {
     return cast null;
   }
 
-  @:keep public static function hasDomStructureChanged(runtime:DomRenderStateRuntime, newLength:Float, needsReconcile:Bool):Bool {
+  public static function hasDomStructureChanged(runtime:DomRenderStateRuntime, newLength:Float, needsReconcile:Bool):Bool {
     if (FlightRuntime.truthy(needsReconcile)) { return cast true; }
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(newLength, FlightRuntime.field(runtime, 'domOrderLength')))) { return cast true; }
     {
@@ -1072,7 +1069,7 @@ class DisplayObjectDom {
     return cast null;
   }
 
-  @:keep public static function injectCaretBlinkKeyframes__domTextInput():Void {
+  public static function injectCaretBlinkKeyframes__domTextInput():Void {
     var id:Dynamic = cast FlightRuntime.UNDEFINED;
     var style:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'))) { return; }
@@ -1084,7 +1081,7 @@ class DisplayObjectDom {
     FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'head'), 'appendChild', cast ([style] : Array<Dynamic>));
   }
 
-  @:keep public static function intersectDomStageRectangles__domClipRectangle(rectangles:Array<DomStageRectangle>):Null<DomStageRectangle> {
+  public static function intersectDomStageRectangles__domClipRectangle(rectangles:Array<DomStageRectangle>):Null<DomStageRectangle> {
     var left:Dynamic = cast FlightRuntime.UNDEFINED;
     var top:Dynamic = cast FlightRuntime.UNDEFINED;
     var right:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1104,7 +1101,7 @@ class DisplayObjectDom {
     return cast null;
   }
 
-  @:keep public static function invalidateDomFontResource(source:FontResource):Void {
+  public static function invalidateDomFontResource(source:FontResource):Void {
     var family:Dynamic = cast FlightRuntime.UNDEFINED;
     family = FlightRuntime.field(source, 'family');
     for (key in FlightRuntime.iterable(FlightRuntime.callProperty(DisplayObjectDom._domFontAscentCache__domFontSource, 'keys', cast ([] : Array<Dynamic>)))) {
@@ -1114,7 +1111,7 @@ class DisplayObjectDom {
     }
   }
 
-  @:keep public static function mapStageRectangleToElement__domClipRectangle(rect:DomStageRectangle, element:Dynamic):DomStageRectangle {
+  public static function mapStageRectangleToElement__domClipRectangle(rect:DomStageRectangle, element:Dynamic):DomStageRectangle {
     var matrix:Dynamic = cast FlightRuntime.UNDEFINED;
     var det:Dynamic = cast FlightRuntime.UNDEFINED;
     var invA:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1152,7 +1149,7 @@ class DisplayObjectDom {
     return cast null;
   }
 
-  @:keep public static function prepareDomElement(element:Dynamic):Void {
+  public static function prepareDomElement(element:Dynamic):Void {
     FlightRuntime.setField(FlightRuntime.field(element, 'style'), 'position', 'absolute');
     FlightRuntime.setField(FlightRuntime.field(element, 'style'), 'left', '0');
     FlightRuntime.setField(FlightRuntime.field(element, 'style'), 'top', '0');
@@ -1160,7 +1157,7 @@ class DisplayObjectDom {
     FlightRuntime.setField(FlightRuntime.field(element, 'style'), 'pointerEvents', 'none');
   }
 
-  @:keep public static function probeCssFontAscent__domRichText(font:String):Float {
+  public static function probeCssFontAscent__domRichText(font:String):Float {
     var container:Dynamic = cast FlightRuntime.UNDEFINED;
     var probe:Dynamic = cast FlightRuntime.UNDEFINED;
     var containerTop:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1179,7 +1176,7 @@ class DisplayObjectDom {
     return cast null;
   }
 
-  @:keep public static function processDomNode(runtime:DomRenderStateRuntime, data:RenderProxy2D, currentFrameId:Float, drawFn:Dynamic, newLength:Float, forceDraw:Dynamic = false):{ var newLength:Float; var needsReconcile:Bool; } {
+  public static function processDomNode(runtime:DomRenderStateRuntime, data:RenderProxy2D, currentFrameId:Float, drawFn:Dynamic, newLength:Float, forceDraw:Dynamic = false):{ var newLength:Float; var needsReconcile:Bool; } {
     var isNew:Dynamic = cast FlightRuntime.UNDEFINED;
     var appearanceDirty:Dynamic = cast FlightRuntime.UNDEFINED;
     var transformDirty:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1209,7 +1206,7 @@ class DisplayObjectDom {
     return cast null;
   }
 
-  @:keep public static function pushDomClipContours(stack:{ var push:Dynamic; }, contours:Array<Array<Float>>, winding:PathWinding, transform:Matrix):Void {
+  public static function pushDomClipContours(stack:{ var push:Dynamic; }, contours:Array<Array<Float>>, winding:PathWinding, transform:Matrix):Void {
     var staged:Array<Array<Float>> = cast FlightRuntime.UNDEFINED;
     staged = cast ([] : Array<Dynamic>);
     {
@@ -1233,11 +1230,11 @@ class DisplayObjectDom {
     FlightRuntime.callProperty(stack, 'push', cast ([{ kind: 'contour', contours: staged, winding: winding }] : Array<Dynamic>));
   }
 
-  @:keep public static function pushDomClipRectangle(stack:Array<DomClipEntry>, rect:RectangleLike, transform:MatrixLike):Void {
+  public static function pushDomClipRectangle(stack:Array<DomClipEntry>, rect:RectangleLike, transform:MatrixLike):Void {
     FlightRuntime.callProperty(stack, 'push', cast ([FlightRuntime.callValue(createDomStageRectangle, cast ([rect, transform] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function reconcileDomContainer(container:Dynamic, runtime:DomRenderStateRuntime, newLength:Float):Void {
+  public static function reconcileDomContainer(container:Dynamic, runtime:DomRenderStateRuntime, newLength:Float):Void {
     var keepSet:Dynamic = cast FlightRuntime.UNDEFINED;
     var child:Dynamic = cast FlightRuntime.UNDEFINED;
     var nextSibling:Null<Node<Dynamic>> = cast FlightRuntime.UNDEFINED;
@@ -1271,15 +1268,15 @@ class DisplayObjectDom {
     }
   }
 
-  @:keep public static function registerDomTextInputOverlay(overlay:DomTextInputOverlay):Void {
+  public static function registerDomTextInputOverlay(overlay:DomTextInputOverlay):Void {
     (DisplayObjectDom._domTextInputOverlay__domRichText = cast (overlay : Dynamic));
   }
 
-  @:keep public static function releaseDomRenderCache(state:DomRenderState, cache:RenderCache):Void {
+  public static function releaseDomRenderCache(state:DomRenderState, cache:RenderCache):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(DisplayObjectDom.getTargets__domCache, cast ([state] : Array<Dynamic>)), 'delete', cast ([cache] : Array<Dynamic>));
   }
 
-  @:keep public static function renderBitmapAsCanvas__domBitmap(state:DomRenderState, renderProxy:RenderProxy2D, data:DomBitmapData__domBitmap, width:Float, height:Float, src:Dynamic, ?sourceRectangle:Null<{ var x:Float; var y:Float; var width:Float; var height:Float; }>):Void {
+  public static function renderBitmapAsCanvas__domBitmap(state:DomRenderState, renderProxy:RenderProxy2D, data:DomBitmapData__domBitmap, width:Float, height:Float, src:Dynamic, ?sourceRectangle:Null<{ var x:Float; var y:Float; var width:Float; var height:Float; }>):Void {
     if (sourceRectangle == null) sourceRectangle = cast (null : Dynamic);
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var smoothing:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1316,7 +1313,7 @@ class DisplayObjectDom {
     FlightRuntime.callValue(setDomRendererElement, cast ([state, FlightRuntime.field(data, 'canvas')] : Array<Dynamic>));
   }
 
-  @:keep public static function renderBitmapAsImage__domBitmap(state:DomRenderState, renderProxy:RenderProxy2D, data:DomBitmapData__domBitmap, src:Dynamic):Void {
+  public static function renderBitmapAsImage__domBitmap(state:DomRenderState, renderProxy:RenderProxy2D, data:DomBitmapData__domBitmap, src:Dynamic):Void {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(data, 'canvas'), null))) {
   FlightRuntime.setField(data, 'canvas', null);
   FlightRuntime.setField(data, 'context', null);
@@ -1333,7 +1330,7 @@ class DisplayObjectDom {
     FlightRuntime.callValue(setDomRendererElement, cast ([state, FlightRuntime.field(data, 'image')] : Array<Dynamic>));
   }
 
-  @:keep public static function renderDomBackground(state:DomRenderState):Void {
+  public static function renderDomBackground(state:DomRenderState):Void {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals((Std.int(FlightRuntime.field(state, 'backgroundColor')) & Std.int(255.0)), 0.0))) {
   FlightRuntime.setField(FlightRuntime.field(FlightRuntime.field(state, 'element'), 'style'), 'backgroundColor', FlightRuntime.field(state, 'backgroundColorString'));
 } else {
@@ -1341,7 +1338,7 @@ class DisplayObjectDom {
 }
   }
 
-  @:keep public static function renderDomDisplayObject(state:DomRenderState, source:DisplayObject):Void {
+  public static function renderDomDisplayObject(state:DomRenderState, source:DisplayObject):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var container:Dynamic = cast FlightRuntime.UNDEFINED;
     var clipHooks:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1395,7 +1392,7 @@ class DisplayObjectDom {
     FlightRuntime.callValue(swapDomOrderLists, cast ([runtime, newLength] : Array<Dynamic>));
   }
 
-  @:keep public static function resolveDomImageSource(state:DomRenderState, image:ImageResource):Null<Dynamic> {
+  public static function resolveDomImageSource(state:DomRenderState, image:ImageResource):Null<Dynamic> {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var cache:Dynamic = cast FlightRuntime.UNDEFINED;
     var entry:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1418,13 +1415,13 @@ class DisplayObjectDom {
 
   public static final selectionRectangles__domTextInput:Array<TextSelectionRectangle> = cast ([] : Array<Dynamic>);
 
-  @:keep public static function setDomClipHooks(state:DomRenderState):Void {
+  public static function setDomClipHooks(state:DomRenderState):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'domClipHooks'), null))) { FlightRuntime.setField(runtime, 'domClipHooks', DisplayObjectDom.domClipHooksImpl__domClipRectangle); }
   }
 
-  @:keep public static function setDomCssFilter(state:DomRenderState, node:DisplayObject, filter:Null<String>):Void {
+  public static function setDomCssFilter(state:DomRenderState, node:DisplayObject, filter:Null<String>):Void {
     var renderProxy:Dynamic = cast FlightRuntime.UNDEFINED;
     renderProxy = FlightRuntime.callValue(getOrCreateRenderProxy2D, cast ([state, node] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(filter, null))) {
@@ -1434,15 +1431,15 @@ class DisplayObjectDom {
     FlightRuntime.callProperty(DisplayObjectDom._cssFilterBindings__domCSSFilterBinding, 'set', cast ([renderProxy, filter] : Array<Dynamic>));
   }
 
-  @:keep public static function setDomFontAscentCached(font:String, ascent:Float):Void {
+  public static function setDomFontAscentCached(font:String, ascent:Float):Void {
     FlightRuntime.callProperty(DisplayObjectDom._domFontAscentCache__domFontSource, 'set', cast ([font, ascent] : Array<Dynamic>));
   }
 
-  @:keep public static function setDomRendererElement(state:DomRenderState, element:Dynamic):Void {
+  public static function setDomRendererElement(state:DomRenderState, element:Dynamic):Void {
     FlightRuntime.setField(FlightRuntime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'domCurrentElement', element);
   }
 
-  @:keep public static function setDomTransform(element:Dynamic, transform:Matrix, roundPixels:Bool):Void {
+  public static function setDomTransform(element:Dynamic, transform:Matrix, roundPixels:Bool):Void {
     var tx:Dynamic = cast FlightRuntime.UNDEFINED;
     var ty:Dynamic = cast FlightRuntime.UNDEFINED;
     tx = FlightRuntime.select(roundPixels, function():Dynamic return cast FlightRuntime.callProperty(HxMath, 'fround', cast ([FlightRuntime.field(transform, 'tx')] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.field(transform, 'tx'));
@@ -1450,7 +1447,7 @@ class DisplayObjectDom {
     FlightRuntime.setField(FlightRuntime.field(element, 'style'), 'transform', 'matrix(' + Std.string(FlightRuntime.field(transform, 'a')) + ',' + Std.string(FlightRuntime.field(transform, 'b')) + ',' + Std.string(FlightRuntime.field(transform, 'c')) + ',' + Std.string(FlightRuntime.field(transform, 'd')) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
   }
 
-  @:keep public static function setDomTransformWithOffset(element:Dynamic, transform:Matrix, offsetX:Float, offsetY:Float, roundPixels:Bool):Void {
+  public static function setDomTransformWithOffset(element:Dynamic, transform:Matrix, offsetX:Float, offsetY:Float, roundPixels:Bool):Void {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1472,7 +1469,7 @@ class DisplayObjectDom {
     FlightRuntime.setField(FlightRuntime.field(element, 'style'), 'transform', 'matrix(' + Std.string(a) + ',' + Std.string(b) + ',' + Std.string(c) + ',' + Std.string(d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
   }
 
-  @:keep public static function setStrippedDomTransform__domScale9Shape(element:Dynamic, transform:MatrixLike, scaleX:Float, scaleY:Float, roundPixels:Bool):Void {
+  public static function setStrippedDomTransform__domScale9Shape(element:Dynamic, transform:MatrixLike, scaleX:Float, scaleY:Float, roundPixels:Bool):Void {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     var c:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1488,7 +1485,7 @@ class DisplayObjectDom {
     FlightRuntime.setField(FlightRuntime.field(element, 'style'), 'transform', 'matrix(' + Std.string(a) + ',' + Std.string(b) + ',' + Std.string(c) + ',' + Std.string(d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
   }
 
-  @:keep public static function swapDomOrderLists(runtime:DomRenderStateRuntime, newLength:Float):Void {
+  public static function swapDomOrderLists(runtime:DomRenderStateRuntime, newLength:Float):Void {
     var prevList:Dynamic = cast FlightRuntime.UNDEFINED;
     prevList = FlightRuntime.field(runtime, 'domOrderList');
     FlightRuntime.setField(runtime, 'domOrderList', FlightRuntime.field(runtime, 'domNextOrderList'));
@@ -1496,7 +1493,7 @@ class DisplayObjectDom {
     FlightRuntime.setField(runtime, 'domNextOrderList', prevList);
   }
 
-  @:keep public static function toScale9Position__domScale9Mapper(pos:Float, scale9Start:Float, scale9Center:Float, unscaledSize:Float, scale:Float):Float {
+  public static function toScale9Position__domScale9Mapper(pos:Float, scale9Start:Float, scale9Center:Float, unscaledSize:Float, scale:Float):Float {
     var scale9End:Dynamic = cast FlightRuntime.UNDEFINED;
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     var center:Dynamic = cast FlightRuntime.UNDEFINED;

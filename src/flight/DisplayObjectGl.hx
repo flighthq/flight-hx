@@ -174,9 +174,6 @@ typedef GlVelocityProgram__glVelocity = { var program:Dynamic; var quadBuffer:Dy
 
 typedef GlVideoData__glVideo = { var source:Null<VideoResource>; var videoTexture:Null<VideoTexture>; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.DisplayObjectGl")
 class DisplayObjectGl {
   public static final _bounds__glCache:Dynamic = FlightRuntime.callValue(createRectangle, cast ([] : Array<Dynamic>));
@@ -205,12 +202,12 @@ class DisplayObjectGl {
 
   public static var _webglTextInputOverlay__glRichText:Null<GlRichTextOverlay> = FlightRuntime.explicitNull();
 
-  @:keep public static function areGlColorAdjustmentGuardsEnabled(state:GlRenderState):Bool {
+  public static function areGlColorAdjustmentGuardsEnabled(state:GlRenderState):Bool {
     return cast !FlightRuntime.looseEquals(FlightRuntime.field(FlightRuntime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glColorAdjustmentGuard'), null);
     return cast null;
   }
 
-  @:keep public static function bindGlQuadBatchBaseAttributes(state:GlRenderState, locCorner:Float):Void {
+  public static function bindGlQuadBatchBaseAttributes(state:GlRenderState, locCorner:Float):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var stride:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -242,7 +239,7 @@ class DisplayObjectGl {
     FlightRuntime.callProperty(gl, 'vertexAttribDivisor', cast ([6.0, 1.0] : Array<Dynamic>));
   }
 
-  @:keep public static function bindGlSpriteBatchInstancedColorTransform__glColorAdjustment(state:GlRenderState):Void {
+  public static function bindGlSpriteBatchInstancedColorTransform__glColorAdjustment(state:GlRenderState):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var shader:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -261,7 +258,7 @@ class DisplayObjectGl {
     FlightRuntime.callProperty(gl, 'vertexAttribDivisor', cast ([8.0, 1.0] : Array<Dynamic>));
   }
 
-  @:keep public static function bindGlSpriteBatchUniformColorTransform__glColorAdjustment(state:GlRenderState, colorTransform:ColorTransform):Void {
+  public static function bindGlSpriteBatchUniformColorTransform__glColorAdjustment(state:GlRenderState, colorTransform:ColorTransform):Void {
     var shader:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     shader = FlightRuntime.callValue(DisplayObjectGl.ensureGlUniformColorTransformShader__glColorAdjustment, cast ([state] : Array<Dynamic>));
@@ -273,7 +270,7 @@ class DisplayObjectGl {
     FlightRuntime.callValue(bindGlQuadBatchBaseAttributes, cast ([state, FlightRuntime.field(shader, 'locCorner')] : Array<Dynamic>));
   }
 
-  @:keep public static function buildGlScale9Mapper(bounds:RectangleLike, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
+  public static function buildGlScale9Mapper(bounds:RectangleLike, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
     var gx:Dynamic = cast FlightRuntime.UNDEFINED;
     var gy:Dynamic = cast FlightRuntime.UNDEFINED;
     var gw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -297,7 +294,7 @@ class DisplayObjectGl {
 
   public static final caretRectangle__glTextInput:Dynamic = { height: 0.0, lineIndex: 0.0, width: 0.0, x: 0.0, y: 0.0 };
 
-  @:keep public static function clipProgramFor__glClipContours(state:GlRenderState):ClipProgram__glClipContours {
+  public static function clipProgramFor__glClipContours(state:GlRenderState):ClipProgram__glClipContours {
     return cast FlightRuntime.callProperty(DisplayObjectGl.clipPrograms__glClipContours, 'get', cast ([FlightRuntime.field(state, 'gl')] : Array<Dynamic>));
     return cast null;
   }
@@ -308,31 +305,31 @@ class DisplayObjectGl {
 
   public static final COLOR_TRANSFORM_STRIDE__glColorAdjustment:Dynamic = (DisplayObjectGl.COLOR_TRANSFORM_FLOATS__glColorAdjustment * 4.0);
 
-  @:keep public static function compileParticleShader__glParticleEmitter(gl:Dynamic):GlParticleShader {
+  public static function compileParticleShader__glParticleEmitter(gl:Dynamic):GlParticleShader {
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     program = FlightRuntime.callValue(createGlProgram, cast ([gl, DisplayObjectGl.PARTICLE_VS__glParticleEmitter, DisplayObjectGl.PARTICLE_FS__glParticleEmitter, 'Particle emitter'] : Array<Dynamic>));
     return cast { program: program, locCorner: FlightRuntime.callProperty(gl, 'getAttribLocation', cast ([program, 'a_corner'] : Array<Dynamic>)), locPos: 1.0, locCosScale: 2.0, locSinScale: 3.0, locColor: 4.0, locUvRect: 5.0, locSize: 6.0, locWorldMatrix: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_world'] : Array<Dynamic>)), locTexture: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_texture'] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function compileProgram__glClipContours(gl:Dynamic, vertex:String, fragment:String):Dynamic {
+  public static function compileProgram__glClipContours(gl:Dynamic, vertex:String, fragment:String):Dynamic {
     return cast FlightRuntime.callValue(createGlProgram, cast ([gl, vertex, fragment, 'Clip-contours'] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function compileShapeMeshProgram__glShapeMesh(gl:Dynamic):Dynamic {
+  public static function compileShapeMeshProgram__glShapeMesh(gl:Dynamic):Dynamic {
     return cast FlightRuntime.callValue(createGlProgram, cast ([gl, DisplayObjectGl.VERTEX_SOURCE__glShapeMesh, DisplayObjectGl.FRAGMENT_SOURCE__glShapeMesh, 'Shape-mesh'] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function compileSpriteBatchShader__glSpriteBatch(gl:Dynamic):GlQuadBatchShader {
+  public static function compileSpriteBatchShader__glSpriteBatch(gl:Dynamic):GlQuadBatchShader {
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     program = FlightRuntime.callValue(createGlProgram, cast ([gl, QUAD_BATCH_VS, DisplayObjectGl.QUAD_BATCH_FS__glSpriteBatch, 'Sprite-batch'] : Array<Dynamic>));
     return cast { program: program, locCorner: 0.0, locMatAB: 1.0, locMatCD: 2.0, locMatTXTY: 3.0, locSize: 4.0, locUvRect: 5.0, locAlpha: 6.0, locWorldMatrix: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_world'] : Array<Dynamic>)), locTexture: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_texture'] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function computeScissorRect__glClipRectangle(state:GlRenderState, rect:RectangleLike, transform:MatrixLike):GlScissorRect {
+  public static function computeScissorRect__glClipRectangle(state:GlRenderState, rect:RectangleLike, transform:MatrixLike):GlScissorRect {
     var x0:Dynamic = cast FlightRuntime.UNDEFINED;
     var y0:Dynamic = cast FlightRuntime.UNDEFINED;
     var x1:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -363,12 +360,12 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function createGlBitmapData__glBitmap(_state:GlRenderState, _source:Renderable):Null<RendererData> {
+  public static function createGlBitmapData__glBitmap(_state:GlRenderState, _source:Renderable):Null<RendererData> {
     return cast (cast (cast { image: null } : Dynamic) : RendererData);
     return cast null;
   }
 
-  @:keep public static function createGlCacheState(screenState:GlRenderState):GlRenderState {
+  public static function createGlCacheState(screenState:GlRenderState):GlRenderState {
     var screenRuntime:Dynamic = cast FlightRuntime.UNDEFINED;
     var cacheState:Dynamic = cast FlightRuntime.UNDEFINED;
     var cacheRuntime:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -422,12 +419,12 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function createGlRichTextData(_state:GlRenderState, _source:Renderable):RendererData {
+  public static function createGlRichTextData(_state:GlRenderState, _source:Renderable):RendererData {
     return cast (cast (cast { texture: null } : Dynamic) : RendererData);
     return cast null;
   }
 
-  @:keep public static function createGlScale9ShapeData(state:GlRenderState, _source:Renderable):Null<RendererData> {
+  public static function createGlScale9ShapeData(state:GlRenderState, _source:Renderable):Null<RendererData> {
     var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
     var ctx:Dynamic = cast FlightRuntime.UNDEFINED;
     var texture:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -440,7 +437,7 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function createGlShapeData__glShape(_state:GlRenderState, _source:Renderable):Null<RendererData> {
+  public static function createGlShapeData__glShape(_state:GlRenderState, _source:Renderable):Null<RendererData> {
     var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
     var ctx:Dynamic = cast FlightRuntime.UNDEFINED;
     canvas = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -451,7 +448,7 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function createGlTextLabelData__glTextLabel(_state:GlRenderState, _source:Renderable):RendererData {
+  public static function createGlTextLabelData__glTextLabel(_state:GlRenderState, _source:Renderable):RendererData {
     var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
     var ctx:Dynamic = cast FlightRuntime.UNDEFINED;
     canvas = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -462,12 +459,12 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function createGlVelocityTarget(state:GlRenderState, width:Float, height:Float):GlRenderTarget {
+  public static function createGlVelocityTarget(state:GlRenderState, width:Float, height:Float):GlRenderTarget {
     return cast FlightRuntime.callValue(createGlRenderTarget, cast ([state, { width: width, height: height, format: 'rgba16f' }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createGlVideoData(_state:GlRenderState, _source:Renderable):RendererData {
+  public static function createGlVideoData(_state:GlRenderState, _source:Renderable):RendererData {
     return cast (cast (cast { source: null, videoTexture: null } : Dynamic) : RendererData);
     return cast null;
   }
@@ -748,7 +745,7 @@ class DisplayObjectGl {
 
   public static final defaultGlVideoRenderer:DisplayObjectRenderer = { createData: createGlVideoData, destroyData: destroyGlVideoData, submit: drawGlVideo };
 
-  @:keep public static function destroyGlBitmapData__glBitmap(state:GlRenderState, data:RendererData):Void {
+  public static function destroyGlBitmapData__glBitmap(state:GlRenderState, data:RendererData):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var image:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -764,7 +761,7 @@ class DisplayObjectGl {
 }
   }
 
-  @:keep public static function destroyGlRichTextData(state:GlRenderState, data:RendererData):Void {
+  public static function destroyGlRichTextData(state:GlRenderState, data:RendererData):Void {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var texture:Dynamic = cast FlightRuntime.UNDEFINED;
     __destructure0 = (cast (cast data : Dynamic) : GlRichTextData__glRichText);
@@ -772,7 +769,7 @@ class DisplayObjectGl {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(texture, null))) { FlightRuntime.callProperty(FlightRuntime.field(state, 'gl'), 'deleteTexture', cast ([texture] : Array<Dynamic>)); }
   }
 
-  @:keep public static function destroyGlScale9ShapeData(state:GlRenderState, data:RendererData):Void {
+  public static function destroyGlScale9ShapeData(state:GlRenderState, data:RendererData):Void {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var texture:Dynamic = cast FlightRuntime.UNDEFINED;
     __destructure0 = (cast (cast data : Dynamic) : GlScale9ShapeData__glScale9Shape);
@@ -780,7 +777,7 @@ class DisplayObjectGl {
     FlightRuntime.callProperty(FlightRuntime.field(state, 'gl'), 'deleteTexture', cast ([texture] : Array<Dynamic>));
   }
 
-  @:keep public static function destroyGlShapeData__glShape(state:GlRenderState, data:RendererData):Void {
+  public static function destroyGlShapeData__glShape(state:GlRenderState, data:RendererData):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var image:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -795,7 +792,7 @@ class DisplayObjectGl {
 }
   }
 
-  @:keep public static function destroyGlTextLabelData__glTextLabel(state:GlRenderState, data:RendererData):Void {
+  public static function destroyGlTextLabelData__glTextLabel(state:GlRenderState, data:RendererData):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var image:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -810,7 +807,7 @@ class DisplayObjectGl {
 }
   }
 
-  @:keep public static function destroyGlVideoData(state:GlRenderState, data:RendererData):Void {
+  public static function destroyGlVideoData(state:GlRenderState, data:RendererData):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var videoTexture:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -828,7 +825,7 @@ class DisplayObjectGl {
 }
   }
 
-  @:keep public static function drawClipContours__glClipContours(state:GlRenderState, program:ClipProgram__glClipContours, contours:Array<Array<Float>>):Void {
+  public static function drawClipContours__glClipContours(state:GlRenderState, program:ClipProgram__glClipContours, contours:Array<Array<Float>>):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     gl = FlightRuntime.field(state, 'gl');
     FlightRuntime.callProperty(gl, 'bindBuffer', cast ([FlightRuntime.field(gl, 'ARRAY_BUFFER'), FlightRuntime.field(program, 'buffer')] : Array<Dynamic>));
@@ -846,7 +843,7 @@ class DisplayObjectGl {
     }
   }
 
-  @:keep public static function drawGlBitmap(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawGlBitmap(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var imageSource:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -915,10 +912,10 @@ class DisplayObjectGl {
     FlightRuntime.incrementField(runtime, 'spriteBatchCount', 1, true);
   }
 
-  @:keep public static function drawGlDisplayObject(_state:GlRenderState, _renderProxy:RenderProxy2D):Void {
+  public static function drawGlDisplayObject(_state:GlRenderState, _renderProxy:RenderProxy2D):Void {
   }
 
-  @:keep public static function drawGlParticleEmitter(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawGlParticleEmitter(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1072,7 +1069,7 @@ class DisplayObjectGl {
     FlightRuntime.callProperty(gl, 'vertexAttribDivisor', cast ([FlightRuntime.field(shader, 'locSize'), 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function drawGlRenderCache__glCache(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawGlRenderCache__glCache(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var cache:Dynamic = cast FlightRuntime.UNDEFINED;
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     cache = FlightRuntime.callValue(getRenderProxyCache, cast ([state, FlightRuntime.field(renderProxy, 'source')] : Array<Dynamic>));
@@ -1083,13 +1080,13 @@ class DisplayObjectGl {
     FlightRuntime.callValue(drawGlRenderTargetResult, cast ([state, renderProxy, target, DisplayObjectGl._identity__glCache] : Array<Dynamic>));
   }
 
-  @:keep public static function drawGlRichText(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawGlRichText(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var overlay:Dynamic = cast FlightRuntime.UNDEFINED;
     overlay = FlightRuntime.select(FlightRuntime.andValue(!FlightRuntime.strictEquals(DisplayObjectGl._webglTextInputOverlay__glRichText, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.callValue(getRichTextRuntime, cast ([(cast FlightRuntime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null)), function():Dynamic return cast DisplayObjectGl._webglTextInputOverlay__glRichText, function():Dynamic return cast FlightRuntime.UNDEFINED);
     FlightRuntime.callValue(drawGlRichTextWithOverlay, cast ([state, renderProxy, overlay] : Array<Dynamic>));
   }
 
-  @:keep public static function drawGlRichTextWithOverlay(state:GlRenderState, renderProxy:RenderProxy2D, ?overlay:GlRichTextOverlay):Void {
+  public static function drawGlRichTextWithOverlay(state:GlRenderState, renderProxy:RenderProxy2D, ?overlay:GlRichTextOverlay):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var richTextRuntime:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1146,7 +1143,7 @@ class DisplayObjectGl {
     FlightRuntime.callValue(drawGlQuad, cast ([state, offsetX, 0.0, (offsetX + fieldW), fieldH, 0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
   }
 
-  @:keep public static function drawGlScale9Shape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawGlScale9Shape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1214,11 +1211,11 @@ class DisplayObjectGl {
     FlightRuntime.callValue(drawGlQuad, cast ([state, 0.0, 0.0, w, h, 0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
   }
 
-  @:keep public static function drawGlScale9ShapeMask(state:GlRenderState, data:RenderProxy2D):Void {
+  public static function drawGlScale9ShapeMask(state:GlRenderState, data:RenderProxy2D):Void {
     FlightRuntime.callValue(drawGlScale9Shape, cast ([state, data] : Array<Dynamic>));
   }
 
-  @:keep public static function drawGlShape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawGlShape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1305,7 +1302,7 @@ class DisplayObjectGl {
     FlightRuntime.incrementField(runtime, 'spriteBatchCount', 1, true);
   }
 
-  @:keep public static function drawGlShapeMeshBatch(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<GlShapeMesh>, binding:GlShapeMeshBinding, ?onProgramBound:Dynamic):Void {
+  public static function drawGlShapeMeshBatch(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<GlShapeMesh>, binding:GlShapeMeshBinding, ?onProgramBound:Dynamic):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var nodeAlpha:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1343,7 +1340,7 @@ class DisplayObjectGl {
     FlightRuntime.callProperty(gl, 'disableVertexAttribArray', cast ([FlightRuntime.field(binding, 'positionLocation')] : Array<Dynamic>));
   }
 
-  @:keep public static function drawGlShapeMeshes(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<GlShapeMesh>):Void {
+  public static function drawGlShapeMeshes(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<GlShapeMesh>):Void {
     var fold:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(meshes, 'length'), 0.0))) { return; }
     fold = FlightRuntime.field(FlightRuntime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glColorAdjustmentFold');
@@ -1354,7 +1351,7 @@ class DisplayObjectGl {
     FlightRuntime.callValue(drawGlShapeMeshBatch, cast ([state, renderProxy, meshes, FlightRuntime.callValue(ensureGlShapeMeshProgram, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function drawGlShapeMeshesColorTransform__glColorAdjustment(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<GlShapeMesh>):Void {
+  public static function drawGlShapeMeshesColorTransform__glColorAdjustment(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<GlShapeMesh>):Void {
     var colorTransform:Dynamic = cast FlightRuntime.UNDEFINED;
     var base:Dynamic = cast FlightRuntime.UNDEFINED;
     var shader:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1375,7 +1372,7 @@ class DisplayObjectGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function drawGlTextInputOverlay(context:Dynamic, source:RichText, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
+  public static function drawGlTextInputOverlay(context:Dynamic, source:RichText, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
     var input:Dynamic = cast FlightRuntime.UNDEFINED;
     var firstVisibleLine:Dynamic = cast FlightRuntime.UNDEFINED;
     var scrollYOffset:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1406,7 +1403,7 @@ class DisplayObjectGl {
     FlightRuntime.callProperty(context, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function drawGlTextLabel(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawGlTextLabel(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1504,7 +1501,7 @@ class DisplayObjectGl {
     FlightRuntime.incrementField(runtime, 'spriteBatchCount', 1, true);
   }
 
-  @:keep public static function drawGlVelocityQuad(ctx:GlVelocityContext, x:Float, y:Float, width:Float, height:Float, velocityX:Float, velocityY:Float):Void {
+  public static function drawGlVelocityQuad(ctx:GlVelocityContext, x:Float, y:Float, width:Float, height:Float, velocityX:Float, velocityY:Float):Void {
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var clipX0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1522,7 +1519,7 @@ class DisplayObjectGl {
     FlightRuntime.callProperty(gl, 'drawArrays', cast ([FlightRuntime.field(gl, 'TRIANGLES'), 0.0, 6.0] : Array<Dynamic>));
   }
 
-  @:keep public static function drawGlVideo(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawGlVideo(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var resource:Dynamic = cast FlightRuntime.UNDEFINED;
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1558,7 +1555,7 @@ class DisplayObjectGl {
     FlightRuntime.callValue(drawGlQuad, cast ([state, 0.0, 0.0, vw, vh, 0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
   }
 
-  @:keep public static function drawRichTextToCanvas__glRichText(context:Dynamic, source:RichText, result:Dynamic, fieldW:Float, fieldH:Float, text:String):Void {
+  public static function drawRichTextToCanvas__glRichText(context:Dynamic, source:RichText, result:Dynamic, fieldW:Float, fieldH:Float, text:String):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var firstVisibleLine:Dynamic = cast FlightRuntime.UNDEFINED;
     var scrollYOffset:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1594,11 +1591,11 @@ class DisplayObjectGl {
     FlightRuntime.callProperty(context, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function enableGlClipSupport(state:GlRenderState):Void {
+  public static function enableGlClipSupport(state:GlRenderState):Void {
     FlightRuntime.setField(state, 'displayObjectClipHooks', DisplayObjectGl.webglClipHooks__glClip);
   }
 
-  @:keep public static function enableGlColorAdjustment(state:GlRenderState):Void {
+  public static function enableGlColorAdjustment(state:GlRenderState):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     FlightRuntime.setField(runtime, 'glColorAdjustmentFold', DisplayObjectGl.glColorAdjustmentFold__glColorAdjustment);
@@ -1608,19 +1605,19 @@ class DisplayObjectGl {
 }
   }
 
-  @:keep public static function enableGlColorAdjustmentGuards(state:GlRenderState):Void {
+  public static function enableGlColorAdjustmentGuards(state:GlRenderState):Void {
     FlightRuntime.setField(FlightRuntime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glColorAdjustmentGuard', DisplayObjectGl.warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards);
   }
 
-  @:keep public static function enableGlRenderCache(state:GlRenderState):Void {
+  public static function enableGlRenderCache(state:GlRenderState):Void {
     FlightRuntime.callValue(registerRenderCacheRenderer, cast ([state, defaultGlRenderCacheRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function enableGlTextInput():Void {
+  public static function enableGlTextInput():Void {
     FlightRuntime.callValue(registerGlTextInputOverlay, cast ([drawGlTextInputOverlay] : Array<Dynamic>));
   }
 
-  @:keep public static function ensureClipProgram__glClipContours(state:GlRenderState):Void {
+  public static function ensureClipProgram__glClipContours(state:GlRenderState):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     gl = FlightRuntime.field(state, 'gl');
@@ -1629,7 +1626,7 @@ class DisplayObjectGl {
     FlightRuntime.callProperty(DisplayObjectGl.clipPrograms__glClipContours, 'set', cast ([gl, { program: program, buffer: FlightRuntime.callProperty(gl, 'createBuffer', cast ([] : Array<Dynamic>)), positionLocation: FlightRuntime.callProperty(gl, 'getAttribLocation', cast ([program, 'a_position'] : Array<Dynamic>)), worldMatrixLocation: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_worldMatrix'] : Array<Dynamic>)), projectionLocation: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_projection'] : Array<Dynamic>)) }] : Array<Dynamic>));
   }
 
-  @:keep public static function ensureGlColorTransformInstancedShader__glColorAdjustment(state:GlRenderState):GlColorTransformInstancedShader {
+  public static function ensureGlColorTransformInstancedShader__glColorAdjustment(state:GlRenderState):GlColorTransformInstancedShader {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1642,7 +1639,7 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function ensureGlQuadBatchShader(state:GlRenderState):GlQuadBatchShader {
+  public static function ensureGlQuadBatchShader(state:GlRenderState):GlQuadBatchShader {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var cornerData:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1660,7 +1657,7 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function ensureGlRenderCacheTarget(state:GlRenderState, cache:RenderCache, width:Float, height:Float):GlRenderTarget {
+  public static function ensureGlRenderCacheTarget(state:GlRenderState, cache:RenderCache, width:Float, height:Float):GlRenderTarget {
     var targets:Dynamic = cast FlightRuntime.UNDEFINED;
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     targets = FlightRuntime.callValue(DisplayObjectGl.getTargets__glCache, cast ([state] : Array<Dynamic>));
@@ -1675,7 +1672,7 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function ensureGlShapeMeshColorTransformShader__glColorAdjustment(state:GlRenderState):GlShapeMeshColorTransformShader {
+  public static function ensureGlShapeMeshColorTransformShader__glColorAdjustment(state:GlRenderState):GlShapeMeshColorTransformShader {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1688,7 +1685,7 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function ensureGlShapeMeshProgram(state:GlRenderState):GlShapeMeshBinding {
+  public static function ensureGlShapeMeshProgram(state:GlRenderState):GlShapeMeshBinding {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var existing:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1703,7 +1700,7 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function ensureGlUniformColorTransformShader__glColorAdjustment(state:GlRenderState):GlUniformColorTransformShader {
+  public static function ensureGlUniformColorTransformShader__glColorAdjustment(state:GlRenderState):GlUniformColorTransformShader {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1716,7 +1713,7 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function ensureGlVelocityProgram__glVelocity(state:GlRenderState):GlVelocityProgram__glVelocity {
+  public static function ensureGlVelocityProgram__glVelocity(state:GlRenderState):GlVelocityProgram__glVelocity {
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var glProgram:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1734,7 +1731,7 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function ensureInstanceCapacity__glParticleEmitter(state:GlRenderState, count:Float):Void {
+  public static function ensureInstanceCapacity__glParticleEmitter(state:GlRenderState, count:Float):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var needed:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1749,7 +1746,7 @@ class DisplayObjectGl {
     FlightRuntime.callProperty(gl, 'bufferData', cast ([FlightRuntime.field(gl, 'ARRAY_BUFFER'), (newSize * 4.0), FlightRuntime.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
   }
 
-  @:keep public static function ensureParticleShader__glParticleEmitter(state:GlRenderState):GlParticleShader {
+  public static function ensureParticleShader__glParticleEmitter(state:GlRenderState):GlParticleShader {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var cornerData:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1769,14 +1766,14 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function equalsRecordedColorTransform__glColorAdjustment(a:Null<ColorTransform>, b:Null<ColorTransform>):Bool {
+  public static function equalsRecordedColorTransform__glColorAdjustment(a:Null<ColorTransform>, b:Null<ColorTransform>):Bool {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(a, b))) { return cast true; }
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(a, null), function():Dynamic return cast FlightRuntime.strictEquals(b, null)))) { return cast false; }
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.field(a, 'redMultiplier'), FlightRuntime.field(b, 'redMultiplier')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'greenMultiplier'), FlightRuntime.field(b, 'greenMultiplier'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'blueMultiplier'), FlightRuntime.field(b, 'blueMultiplier'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'alphaMultiplier'), FlightRuntime.field(b, 'alphaMultiplier'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'redOffset'), FlightRuntime.field(b, 'redOffset'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'greenOffset'), FlightRuntime.field(b, 'greenOffset'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'blueOffset'), FlightRuntime.field(b, 'blueOffset'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'alphaOffset'), FlightRuntime.field(b, 'alphaOffset')));
     return cast null;
   }
 
-  @:keep public static function flushGlColorAdjustmentFold__glColorAdjustment(state:GlRenderState, count:Float):Bool {
+  public static function flushGlColorAdjustmentFold__glColorAdjustment(state:GlRenderState, count:Float):Bool {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var ctMode:Dynamic = cast FlightRuntime.UNDEFINED;
     var uniformColorTransform:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1801,7 +1798,7 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function flushGlSpriteBatch(state:GlRenderState):Void {
+  public static function flushGlSpriteBatch(state:GlRenderState):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     var texture:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1865,27 +1862,27 @@ class DisplayObjectGl {
 
   public static final FRAGMENT_SOURCE__glShapeMesh:Dynamic = '\nprecision mediump float;\nuniform vec4 u_color;\nvoid main() { gl_FragColor = u_color; }\n';
 
-  @:keep public static function getGlRenderCacheTarget(state:GlRenderState, cache:RenderCache):Null<GlRenderTarget> {
+  public static function getGlRenderCacheTarget(state:GlRenderState, cache:RenderCache):Null<GlRenderTarget> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.callValue(DisplayObjectGl.getTargets__glCache, cast ([state] : Array<Dynamic>)), 'get', cast ([cache] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getGlShapeData__glShape(data:RendererData):GlShapeData__glShape {
+  public static function getGlShapeData__glShape(data:RendererData):GlShapeData__glShape {
     return cast (cast (cast data : Dynamic) : GlShapeData__glShape);
     return cast null;
   }
 
-  @:keep public static function getGlTextLabelData__glTextLabel(data:RendererData):GlTextLabelData__glTextLabel {
+  public static function getGlTextLabelData__glTextLabel(data:RendererData):GlTextLabelData__glTextLabel {
     return cast (cast (cast data : Dynamic) : GlTextLabelData__glTextLabel);
     return cast null;
   }
 
-  @:keep public static function getGlVelocityWriter(state:GlRenderState, kind:Kind):Null<GlVelocityWriter> {
+  public static function getGlVelocityWriter(state:GlRenderState, kind:Kind):Null<GlVelocityWriter> {
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(FlightRuntime.callProperty(DisplayObjectGl._velocityWriters__glVelocity, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getOffscreenCanvas__glRichText(width:Float, height:Float, pixelRatio:Float = 1.0):Dynamic {
+  public static function getOffscreenCanvas__glRichText(width:Float, height:Float, pixelRatio:Float = 1.0):Dynamic {
     var pw:Dynamic = cast FlightRuntime.UNDEFINED;
     var ph:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(DisplayObjectGl._offscreenCanvas__glRichText))) {
@@ -1900,7 +1897,7 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function getProjectionMat3__glClipContours(state:GlRenderState):flight.internal.FlightFloat32Array {
+  public static function getProjectionMat3__glClipContours(state:GlRenderState):flight.internal.FlightFloat32Array {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1911,7 +1908,7 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function getScissorStack__glClipRectangle(state:GlRenderState):Array<GlScissorRect> {
+  public static function getScissorStack__glClipRectangle(state:GlRenderState):Array<GlScissorRect> {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     FlightRuntime.setField(runtime, 'scissorStack', (FlightRuntime.field(runtime, 'scissorStack') ?? cast ([] : Array<Dynamic>)));
@@ -1919,7 +1916,7 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function getTargets__glCache(state:GlRenderState):Dynamic {
+  public static function getTargets__glCache(state:GlRenderState):Dynamic {
     var targets:Dynamic = cast FlightRuntime.UNDEFINED;
     targets = FlightRuntime.callProperty(DisplayObjectGl._renderCacheTargets__glCache, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(targets, FlightRuntime.UNDEFINED))) {
@@ -1940,7 +1937,7 @@ class DisplayObjectGl {
 
   public static final INSTANCE_STRIDE__glParticleEmitter:Dynamic = (DisplayObjectGl.INSTANCE_FLOATS__glParticleEmitter * 4.0);
 
-  @:keep public static function intersectScissorRect__glClipRectangle(a:Null<GlScissorRect>, b:GlScissorRect):GlScissorRect {
+  public static function intersectScissorRect__glClipRectangle(a:Null<GlScissorRect>, b:GlScissorRect):GlScissorRect {
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
     var right:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1954,7 +1951,7 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function layoutRichText__glRichText(source:RichText, richTextRuntime:RichTextRuntime, text:String, formatRanges:Dynamic):Dynamic {
+  public static function layoutRichText__glRichText(source:RichText, richTextRuntime:RichTextRuntime, text:String, formatRanges:Dynamic):Dynamic {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var measure:Dynamic = cast FlightRuntime.UNDEFINED;
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1973,7 +1970,7 @@ class DisplayObjectGl {
 
   public static final MAX_INSTANCE_ATTRIB_LOCATION__glSpriteBatch:Dynamic = 8.0;
 
-  @:keep public static function packGlSpriteBatchMaterialInstance(state:GlRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
+  public static function packGlSpriteBatchMaterialInstance(state:GlRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var renderer:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -1986,7 +1983,7 @@ class DisplayObjectGl {
 
   public static final PARTICLE_VS__glParticleEmitter:Dynamic = '#version 300 es\nprecision mediump float;\n\nin vec2 a_corner;\n\nlayout(location = 1) in vec2  a_pos;\nlayout(location = 2) in float a_cosScale;\nlayout(location = 3) in float a_sinScale;\nlayout(location = 4) in vec4  a_color;\nlayout(location = 5) in vec4  a_uvRect;\nlayout(location = 6) in vec2  a_size;\n\nuniform mat3 u_world;\n\nout vec2 v_uv;\nout vec4 v_color;\n\nvoid main() {\n  float lx = a_corner.x * a_size.x;\n  float ly = a_corner.y * a_size.y;\n  float rx = a_cosScale * lx - a_sinScale * ly + a_pos.x;\n  float ry = a_sinScale * lx + a_cosScale * ly + a_pos.y;\n  vec3 clip = u_world * vec3(rx, ry, 1.0);\n  gl_Position = vec4(clip.xy, 0.0, 1.0);\n  v_uv    = mix(a_uvRect.xy, a_uvRect.zw, a_corner);\n  v_color = a_color;\n}';
 
-  @:keep public static function popGlClipContours(state:GlRenderState):Void {
+  public static function popGlClipContours(state:GlRenderState):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var nextDepth:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2001,7 +1998,7 @@ class DisplayObjectGl {
 }
   }
 
-  @:keep public static function popGlClipRectangle(state:GlRenderState):Void {
+  public static function popGlClipRectangle(state:GlRenderState):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var stack:Dynamic = cast FlightRuntime.UNDEFINED;
     var previous:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2020,13 +2017,13 @@ class DisplayObjectGl {
 }
   }
 
-  @:keep public static function popOneGlClip__glClip(state:GlRenderState):Void {
+  public static function popOneGlClip__glClip(state:GlRenderState):Void {
     var form:Dynamic = cast FlightRuntime.UNDEFINED;
     form = FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'clipForms'), 'pop', cast ([] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(form, 'contour'))) { FlightRuntime.callValue(popGlClipContours, cast ([state] : Array<Dynamic>)); } else { FlightRuntime.callValue(popGlClipRectangle, cast ([state] : Array<Dynamic>)); }
   }
 
-  @:keep public static function prepareGlSpriteBatchWrite(state:GlRenderState, texture:ImageResource, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:GlMaterialRenderer, maxInstances:Float):Float {
+  public static function prepareGlSpriteBatchWrite(state:GlRenderState, texture:ImageResource, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:GlMaterialRenderer, maxInstances:Float):Float {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var floats:Dynamic = cast FlightRuntime.UNDEFINED;
     var needed:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2066,7 +2063,7 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function promoteGlSpriteBatchColorTransformToPerInstance__glColorAdjustment(runtime:GlRenderStateRuntime, instanceCount:Float, fill:Null<ColorTransform>):Void {
+  public static function promoteGlSpriteBatchColorTransformToPerInstance__glColorAdjustment(runtime:GlRenderStateRuntime, instanceCount:Float, fill:Null<ColorTransform>):Void {
     FlightRuntime.setField(runtime, 'spriteBatchColorTransformMode', DisplayObjectGl.CT_MODE_PER_INSTANCE__glColorAdjustment);
     {
       var i:Dynamic = 0.0;
@@ -2077,7 +2074,7 @@ class DisplayObjectGl {
     }
   }
 
-  @:keep public static function pushGlClipContours(state:GlRenderState, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Matrix):Void {
+  public static function pushGlClipContours(state:GlRenderState, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Matrix):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var depth:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2119,7 +2116,7 @@ class DisplayObjectGl {
     FlightRuntime.setField(runtime, 'currentMaskDepth', (depth + 1.0));
   }
 
-  @:keep public static function pushGlClipRectangle(state:GlRenderState, rect:RectangleLike, transform:MatrixLike):Void {
+  public static function pushGlClipRectangle(state:GlRenderState, rect:RectangleLike, transform:MatrixLike):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var next:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2137,7 +2134,7 @@ class DisplayObjectGl {
 
   public static final QUAD_BATCH_VS:Dynamic = '#version 300 es\nprecision mediump float;\n\nlayout(location = 0) in vec2 a_corner;\nlayout(location = 1) in vec2 a_matAB;\nlayout(location = 2) in vec2 a_matCD;\nlayout(location = 3) in vec2 a_matTXTY;\nlayout(location = 4) in vec2 a_size;\nlayout(location = 5) in vec4 a_uvRect;\nlayout(location = 6) in float a_alpha;\n\nuniform mat3 u_world;\n\nout vec2 v_texCoord;\nout float v_alpha;\n\nvoid main() {\n  vec2 local = a_corner * a_size;\n  vec2 worldPos = vec2(\n    a_matAB.x * local.x + a_matCD.x * local.y + a_matTXTY.x,\n    a_matAB.y * local.x + a_matCD.y * local.y + a_matTXTY.y\n  );\n  vec3 clip = u_world * vec3(worldPos, 1.0);\n  gl_Position = vec4(clip.xy, 0.0, 1.0);\n  v_texCoord = mix(a_uvRect.xy, a_uvRect.zw, a_corner);\n  v_alpha = a_alpha;\n}';
 
-  @:keep public static function recordGlColorAdjustment__glColorAdjustment(runtime:GlRenderStateRuntime, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
+  public static function recordGlColorAdjustment__glColorAdjustment(runtime:GlRenderStateRuntime, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
     var mode:Dynamic = cast FlightRuntime.UNDEFINED;
     var tint:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'spriteBatchColorTransformData'), FlightRuntime.UNDEFINED))) {
@@ -2166,7 +2163,7 @@ class DisplayObjectGl {
     FlightRuntime.callValue(DisplayObjectGl.writeGlColorTransformInstance__glColorAdjustment, cast ([runtime, tint, instanceIndex] : Array<Dynamic>));
   }
 
-  @:keep public static function recordGlSpriteBatchColorTransform(state:GlRenderState, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
+  public static function recordGlSpriteBatchColorTransform(state:GlRenderState, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var fold:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -2178,7 +2175,7 @@ class DisplayObjectGl {
     if (FlightRuntime.truthy(!FlightRuntime.looseEquals(colorTransform, null))) { FlightRuntime.callOptionalProperty(runtime, 'glColorAdjustmentGuard', cast ([state, colorTransform] : Array<Dynamic>)); }
   }
 
-  @:keep public static function refreshGlRenderCache(cacheState:GlRenderState, cache:RenderCache, source:DisplayObject, ?options:RenderCacheRefreshOptions):Bool {
+  public static function refreshGlRenderCache(cacheState:GlRenderState, cache:RenderCache, source:DisplayObject, ?options:RenderCacheRefreshOptions):Bool {
     var screenState:Dynamic = cast FlightRuntime.UNDEFINED;
     var padding:Dynamic = cast FlightRuntime.UNDEFINED;
     var minWidth:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2227,11 +2224,11 @@ class DisplayObjectGl {
     return cast null;
   }
 
-  @:keep public static function registerDefaultGlMaterial(state:GlRenderState):Void {
+  public static function registerDefaultGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMaterialRenderer, cast ([state, Types.DefaultMaterialKind, defaultGlMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerGlDisplayObjectRenderers(state:GlRenderState):Void {
+  public static function registerGlDisplayObjectRenderers(state:GlRenderState):Void {
     FlightRuntime.callValue(registerRenderer, cast ([state, Types.BitmapKind, defaultGlBitmapRenderer] : Array<Dynamic>));
     FlightRuntime.callValue(registerRenderer, cast ([state, Types.DisplayObjectKind, defaultGlDisplayObjectRenderer] : Array<Dynamic>));
     FlightRuntime.callValue(registerRenderer, cast ([state, Types.ParticleEmitterKind, defaultGlParticleEmitterRenderer] : Array<Dynamic>));
@@ -2246,15 +2243,15 @@ class DisplayObjectGl {
     FlightRuntime.callValue(registerRenderer, cast ([state, Types.VideoKind, defaultGlVideoRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerGlShapeCommands(commands:Array<Dynamic>):Void {
+  public static function registerGlShapeCommands(commands:Array<Dynamic>):Void {
     FlightRuntime.callValue(facadeDisplayObjectGlDisplayObjectCanvasRegisterCanvasShapeCommands, cast ([commands] : Array<Dynamic>));
   }
 
-  @:keep public static function registerGlTextInputOverlay(overlay:GlRichTextOverlay):Void {
+  public static function registerGlTextInputOverlay(overlay:GlRichTextOverlay):Void {
     (DisplayObjectGl._webglTextInputOverlay__glRichText = cast (overlay : Dynamic));
   }
 
-  @:keep public static function registerGlVelocityWriter(state:GlRenderState, kind:Kind, writer:GlVelocityWriter):Void {
+  public static function registerGlVelocityWriter(state:GlRenderState, kind:Kind, writer:GlVelocityWriter):Void {
     var writers:Dynamic = cast FlightRuntime.UNDEFINED;
     writers = FlightRuntime.callProperty(DisplayObjectGl._velocityWriters__glVelocity, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(writers, FlightRuntime.UNDEFINED))) {
@@ -2264,7 +2261,7 @@ class DisplayObjectGl {
     FlightRuntime.callProperty(writers, 'set', cast ([kind, writer] : Array<Dynamic>));
   }
 
-  @:keep public static function releaseGlRenderCache(state:GlRenderState, cache:RenderCache):Void {
+  public static function releaseGlRenderCache(state:GlRenderState, cache:RenderCache):Void {
     var targets:Dynamic = cast FlightRuntime.UNDEFINED;
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     targets = FlightRuntime.callValue(DisplayObjectGl.getTargets__glCache, cast ([state] : Array<Dynamic>));
@@ -2274,7 +2271,7 @@ class DisplayObjectGl {
     FlightRuntime.callProperty(targets, 'delete', cast ([cache] : Array<Dynamic>));
   }
 
-  @:keep public static function remapGlScale9Commands(out:Array<Dynamic>, source:Array<Dynamic>, mapper:Dynamic):Void {
+  public static function remapGlScale9Commands(out:Array<Dynamic>, source:Array<Dynamic>, mapper:Dynamic):Void {
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(mapCanvasScale9ShapeCommands, cast ([out, source, mapper] : Array<Dynamic>));
     i = 0.0;
@@ -2297,7 +2294,7 @@ class DisplayObjectGl {
 }
   }
 
-  @:keep public static function renderGlDisplayObject(state:GlRenderState, source:DisplayObject):Void {
+  public static function renderGlDisplayObject(state:GlRenderState, source:DisplayObject):Void {
     var tempStack:Dynamic = cast FlightRuntime.UNDEFINED;
     var clipHooks:Dynamic = cast FlightRuntime.UNDEFINED;
     var stackLength:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2331,7 +2328,7 @@ class DisplayObjectGl {
     FlightRuntime.callOptionalProperty(clipHooks, 'finalize', cast ([state] : Array<Dynamic>));
   }
 
-  @:keep public static function renderGlSprite(state:GlRenderState, source:DisplayObject):Void {
+  public static function renderGlSprite(state:GlRenderState, source:DisplayObject):Void {
     var tempStack:Dynamic = cast FlightRuntime.UNDEFINED;
     var stackLength:Dynamic = cast FlightRuntime.UNDEFINED;
     tempStack = FlightRuntime.field(FlightRuntime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'tempStack');
@@ -2359,7 +2356,7 @@ class DisplayObjectGl {
     FlightRuntime.callValue(flushGlSpriteBatch, cast ([state] : Array<Dynamic>));
   }
 
-  @:keep public static function renderGlVelocity<Traits>(state:GlRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:GlRenderTarget):Void {
+  public static function renderGlVelocity<Traits>(state:GlRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:GlRenderTarget):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2384,7 +2381,7 @@ class DisplayObjectGl {
 
   public static final selectionRectangles__glTextInput:Array<TextSelectionRectangle> = cast ([] : Array<Dynamic>);
 
-  @:keep public static function setGlQuadBatchWorldAndTexture(state:GlRenderState, locWorldMatrix:Dynamic, locTexture:Dynamic):Void {
+  public static function setGlQuadBatchWorldAndTexture(state:GlRenderState, locWorldMatrix:Dynamic, locTexture:Dynamic):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var viewport:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2410,7 +2407,7 @@ class DisplayObjectGl {
     FlightRuntime.callProperty(gl, 'uniform1i', cast ([locTexture, 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function setStrippedGlMatrixFromValues__glScale9Shape(gl:Dynamic, loc:Dynamic, m:flight.internal.FlightFloat32Array, t:MatrixLike, scaleX:Float, scaleY:Float, viewport:{ var width:Float; var height:Float; }):Void {
+  public static function setStrippedGlMatrixFromValues__glScale9Shape(gl:Dynamic, loc:Dynamic, m:flight.internal.FlightFloat32Array, t:MatrixLike, scaleX:Float, scaleY:Float, viewport:{ var width:Float; var height:Float; }):Void {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     var c:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2426,7 +2423,7 @@ class DisplayObjectGl {
 
   public static final SHAPE_MESH_CT_VS__glColorAdjustment:Dynamic = '\nattribute vec2 a_position;\nuniform mat3 u_matrix;\nvoid main() {\n  vec3 p = u_matrix * vec3(a_position, 1.0);\n  gl_Position = vec4(p.xy, 0.0, 1.0);\n}\n';
 
-  @:keep public static function shapeMeshMatrix__glShapeMesh(state:GlRenderState, renderProxy:RenderProxy2D):flight.internal.FlightFloat32Array {
+  public static function shapeMeshMatrix__glShapeMesh(state:GlRenderState, renderProxy:RenderProxy2D):flight.internal.FlightFloat32Array {
     var viewport:Dynamic = cast FlightRuntime.UNDEFINED;
     var iw:Dynamic = cast FlightRuntime.UNDEFINED;
     var ih:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2445,7 +2442,7 @@ class DisplayObjectGl {
 
   public static final SPRITE_INSTANCE_STRIDE__glSpriteBatch:Dynamic = (DisplayObjectGl.SPRITE_INSTANCE_FLOATS__glSpriteBatch * 4.0);
 
-  @:keep public static function submitGlQuadBatch__glQuadBatch(state:GlRenderState, quadBatch:RenderProxy2D):Void {
+  public static function submitGlQuadBatch__glQuadBatch(state:GlRenderState, quadBatch:RenderProxy2D):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2560,7 +2557,7 @@ class DisplayObjectGl {
     FlightRuntime.setField(runtime, 'spriteBatchCount', (FlightRuntime.field(runtime, 'spriteBatchCount') + drawCount));
   }
 
-  @:keep public static function submitGlSpriteNode__glSpriteRenderer(state:GlRenderState, spriteNode:RenderProxy2D):Void {
+  public static function submitGlSpriteNode__glSpriteRenderer(state:GlRenderState, spriteNode:RenderProxy2D):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2614,7 +2611,7 @@ class DisplayObjectGl {
     FlightRuntime.incrementField(runtime, 'spriteBatchCount', 1, true);
   }
 
-  @:keep public static function submitGlTilemap__glTilemap(state:GlRenderState, tilemapNode:RenderProxy2D):Void {
+  public static function submitGlTilemap__glTilemap(state:GlRenderState, tilemapNode:RenderProxy2D):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2725,17 +2722,17 @@ class DisplayObjectGl {
     FlightRuntime.setField(runtime, 'spriteBatchCount', (FlightRuntime.field(runtime, 'spriteBatchCount') + drawCount));
   }
 
-  @:keep public static function toGlShapeRendererData__glShape(data:GlShapeData__glShape):RendererData {
+  public static function toGlShapeRendererData__glShape(data:GlShapeData__glShape):RendererData {
     return cast (cast (cast data : Dynamic) : RendererData);
     return cast null;
   }
 
-  @:keep public static function toGlTextLabelRendererData__glTextLabel(data:GlTextLabelData__glTextLabel):RendererData {
+  public static function toGlTextLabelRendererData__glTextLabel(data:GlTextLabelData__glTextLabel):RendererData {
     return cast (cast (cast data : Dynamic) : RendererData);
     return cast null;
   }
 
-  @:keep public static function toScale9Position__glScale9Mapper(pos:Float, scale9Start:Float, scale9Center:Float, unscaledSize:Float, scale:Float):Float {
+  public static function toScale9Position__glScale9Mapper(pos:Float, scale9Start:Float, scale9Center:Float, unscaledSize:Float, scale:Float):Float {
     var scale9End:Dynamic = cast FlightRuntime.UNDEFINED;
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     var center:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2763,14 +2760,14 @@ class DisplayObjectGl {
 
   public static final UNIFORM_CT_FS__glColorAdjustment:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nin float v_alpha;\nuniform sampler2D u_texture;\nuniform vec4 u_ctMult;\nuniform vec4 u_ctOff;\nout vec4 fragColor;\nvoid main() {\n  vec4 color = texture(u_texture, v_texCoord) * clamp(v_alpha, 0.0, 1.0);\n  if (color.a <= 0.0) discard;\n  color = vec4(color.rgb / color.a, color.a);\n  color = clamp(color * u_ctMult + u_ctOff, vec4(0.0), vec4(1.0));\n  fragColor = vec4(color.rgb * color.a, color.a);\n}';
 
-  @:keep public static function uploadClipUniforms__glClipContours(state:GlRenderState, program:ClipProgram__glClipContours, m:Matrix):Void {
+  public static function uploadClipUniforms__glClipContours(state:GlRenderState, program:ClipProgram__glClipContours, m:Matrix):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     gl = FlightRuntime.field(state, 'gl');
     FlightRuntime.callProperty(gl, 'uniformMatrix3fv', cast ([FlightRuntime.field(program, 'worldMatrixLocation'), false, cast ([FlightRuntime.field(m, 'a'), FlightRuntime.field(m, 'b'), 0.0, FlightRuntime.field(m, 'c'), FlightRuntime.field(m, 'd'), 0.0, FlightRuntime.field(m, 'tx'), FlightRuntime.field(m, 'ty'), 1.0] : Array<Dynamic>)] : Array<Dynamic>));
     FlightRuntime.callProperty(gl, 'uniformMatrix3fv', cast ([FlightRuntime.field(program, 'projectionLocation'), false, FlightRuntime.callValue(DisplayObjectGl.getProjectionMat3__glClipContours, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function useGlQuadBatchProgram(state:GlRenderState, program:Dynamic):Void {
+  public static function useGlQuadBatchProgram(state:GlRenderState, program:Dynamic):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'currentProgram'), program))) {
@@ -2787,7 +2784,7 @@ class DisplayObjectGl {
 
   public static final VERTEX_SOURCE__glShapeMesh:Dynamic = '\nattribute vec2 a_position;\nuniform mat3 u_matrix;\nvoid main() {\n  vec3 p = u_matrix * vec3(a_position, 1.0);\n  gl_Position = vec4(p.xy, 0.0, 1.0);\n}\n';
 
-  @:keep public static function visitGlVelocity__glVelocity<Traits>(ctx:GlVelocityContext, node:Transform2DNode<Traits>):Void {
+  public static function visitGlVelocity__glVelocity<Traits>(ctx:GlVelocityContext, node:Transform2DNode<Traits>):Void {
     var writer:Dynamic = cast FlightRuntime.UNDEFINED;
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     writer = FlightRuntime.callValue(getGlVelocityWriter, cast ([FlightRuntime.field(ctx, 'state'), FlightRuntime.field(node, 'kind')] : Array<Dynamic>));
@@ -2803,7 +2800,7 @@ class DisplayObjectGl {
     }
   }
 
-  @:keep public static function warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards():Void {
+  public static function warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards():Void {
     FlightRuntime.callValue(logOnce, cast (['displayobject-gl:color-adjustment-not-enabled', LogLevel.Warn, { message: 'recordGlSpriteBatchColorTransform: color transform present but GL color adjustment not enabled — call enableGlColorAdjustment(state)' }, 'displayobject-gl'] : Array<Dynamic>));
   }
 
@@ -2832,7 +2829,7 @@ class DisplayObjectGl {
 }
 } };
 
-  @:keep public static function writeGlColorTransformInstance__glColorAdjustment(runtime:GlRenderStateRuntime, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
+  public static function writeGlColorTransformInstance__glColorAdjustment(runtime:GlRenderStateRuntime, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
     var offset:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     offset = (instanceIndex * DisplayObjectGl.COLOR_TRANSFORM_FLOATS__glColorAdjustment);

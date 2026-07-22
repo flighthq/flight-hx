@@ -13,12 +13,9 @@ import flight.Types.AnimationPlayer;
 import flight.Types.AnimationTrack;
 import flight.Types.AnimationTrackValidationDiagnostic;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Animation")
 class Animation {
-  @:keep public static function advanceAnimationPlayer(player:AnimationPlayer, dt:Float):Void {
+  public static function advanceAnimationPlayer(player:AnimationPlayer, dt:Float):Void {
     var duration:Dynamic = cast FlightRuntime.UNDEFINED;
     var time:Dynamic = cast FlightRuntime.UNDEFINED;
     var looped:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -90,7 +87,7 @@ class Animation {
     if (FlightRuntime.truthy(looped)) { FlightRuntime.callValue(Animation.emitAnimationPlayerLooped__animationPlayer, cast ([player] : Array<Dynamic>)); }
   }
 
-  @:keep public static function cloneAnimationClip(clip:AnimationClip):AnimationClip {
+  public static function cloneAnimationClip(clip:AnimationClip):AnimationClip {
     var channels:Array<AnimationChannel> = cast FlightRuntime.UNDEFINED;
     channels = cast ([] : Array<Dynamic>);
     for (channel in FlightRuntime.iterable(FlightRuntime.field(clip, 'channels'))) {
@@ -100,17 +97,17 @@ class Animation {
     return cast null;
   }
 
-  @:keep public static function cloneAnimationPlayer(player:AnimationPlayer):AnimationPlayer {
+  public static function cloneAnimationPlayer(player:AnimationPlayer):AnimationPlayer {
     return cast { clip: FlightRuntime.field(player, 'clip'), loop: FlightRuntime.field(player, 'loop'), loopMode: FlightRuntime.field(player, 'loopMode'), onFinished: null, onLooped: null, playing: FlightRuntime.field(player, 'playing'), repeatCount: FlightRuntime.field(player, 'repeatCount'), speed: FlightRuntime.field(player, 'speed'), time: FlightRuntime.field(player, 'time') };
     return cast null;
   }
 
-  @:keep public static function cloneAnimationTrack(track:AnimationTrack):AnimationTrack {
+  public static function cloneAnimationTrack(track:AnimationTrack):AnimationTrack {
     return cast { components: FlightRuntime.field(track, 'components'), easing: FlightRuntime.field(track, 'easing'), interpolation: FlightRuntime.field(track, 'interpolation'), quaternion: FlightRuntime.field(track, 'quaternion'), times: FlightRuntime.callValue(Animation.cloneNumberBuffer__animationTrack, cast ([FlightRuntime.field(track, 'times')] : Array<Dynamic>)), values: FlightRuntime.callValue(Animation.cloneNumberBuffer__animationTrack, cast ([FlightRuntime.field(track, 'values')] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function cloneNumberBuffer__animationTrack(src:Dynamic):Dynamic {
+  public static function cloneNumberBuffer__animationTrack(src:Dynamic):Dynamic {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.isInstanceOf(src, FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>))))) { return cast FlightRuntime.slice(src, 0, null); }
     out = FlightRuntime.createArray(FlightRuntime.field(src, 'length'));
@@ -125,7 +122,7 @@ class Animation {
     return cast null;
   }
 
-  @:keep public static function computeChannelsDuration__animationClip(channels:Array<AnimationChannel>):Float {
+  public static function computeChannelsDuration__animationClip(channels:Array<AnimationChannel>):Float {
     var max:Dynamic = cast FlightRuntime.UNDEFINED;
     max = 0.0;
     for (channel in FlightRuntime.iterable(channels)) {
@@ -137,7 +134,7 @@ class Animation {
     return cast null;
   }
 
-  @:keep public static function consumeAnimationPlayerLoop__animationPlayer(player:AnimationPlayer):Bool {
+  public static function consumeAnimationPlayerLoop__animationPlayer(player:AnimationPlayer):Bool {
     var rc:Dynamic = cast FlightRuntime.UNDEFINED;
     rc = FlightRuntime.field(player, 'repeatCount');
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(rc, FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.compare(rc, 0.0, '<')))) { return cast true; }
@@ -147,7 +144,7 @@ class Animation {
     return cast null;
   }
 
-  @:keep public static function copyKeyframeValue__animationTrack(out:Dynamic, track:AnimationTrack, k:Float):Void {
+  public static function copyKeyframeValue__animationTrack(out:Dynamic, track:AnimationTrack, k:Float):Void {
     var off:Dynamic = cast FlightRuntime.UNDEFINED;
     off = FlightRuntime.callValue(Animation.keyframeValueOffset__animationTrack, cast ([track, k] : Array<Dynamic>));
     {
@@ -159,51 +156,51 @@ class Animation {
     }
   }
 
-  @:keep public static function createAnimationChannel(track:AnimationTrack, targetRef:Dynamic):AnimationChannel {
+  public static function createAnimationChannel(track:AnimationTrack, targetRef:Dynamic):AnimationChannel {
     return cast { targetRef: targetRef, track: track };
     return cast null;
   }
 
-  @:keep public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float):AnimationClip {
+  public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float):AnimationClip {
     return cast { channels: channels, duration: FlightRuntime.coalesce(duration, function():Dynamic return cast FlightRuntime.callValue(Animation.computeChannelsDuration__animationClip, cast ([channels] : Array<Dynamic>))) };
     return cast null;
   }
 
-  @:keep public static function createAnimationPlayer(clip:AnimationClip, ?opts:{ @:optional var loop:Bool; @:optional var loopMode:AnimationLoopMode; @:optional var playing:Bool; @:optional var repeatCount:Float; @:optional var speed:Float; @:optional var time:Float; }):AnimationPlayer {
+  public static function createAnimationPlayer(clip:AnimationClip, ?opts:{ @:optional var loop:Bool; @:optional var loopMode:AnimationLoopMode; @:optional var playing:Bool; @:optional var repeatCount:Float; @:optional var speed:Float; @:optional var time:Float; }):AnimationPlayer {
     return cast { clip: clip, loop: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'loop'), function():Dynamic return cast true), loopMode: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'loopMode'), function():Dynamic return cast Types.AnimationLoopModeRepeat), onFinished: null, onLooped: null, playing: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'playing'), function():Dynamic return cast true), repeatCount: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'repeatCount'), function():Dynamic return cast -1.0), speed: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'speed'), function():Dynamic return cast 1.0), time: FlightRuntime.coalesce(FlightRuntime.optionalField(opts, 'time'), function():Dynamic return cast 0.0) };
     return cast null;
   }
 
-  @:keep public static function createAnimationTrack(opts:{ var times:Dynamic; var values:Dynamic; @:optional var components:Float; @:optional var interpolation:AnimationInterpolation; @:optional var quaternion:Bool; @:optional var easing:Dynamic; }):AnimationTrack {
+  public static function createAnimationTrack(opts:{ var times:Dynamic; var values:Dynamic; @:optional var components:Float; @:optional var interpolation:AnimationInterpolation; @:optional var quaternion:Bool; @:optional var easing:Dynamic; }):AnimationTrack {
     return cast { components: FlightRuntime.coalesce(FlightRuntime.field(opts, 'components'), function():Dynamic return cast 1.0), easing: FlightRuntime.coalesce(FlightRuntime.field(opts, 'easing'), function():Dynamic return cast null), interpolation: FlightRuntime.coalesce(FlightRuntime.field(opts, 'interpolation'), function():Dynamic return cast Types.AnimationInterpolationLinear), quaternion: FlightRuntime.coalesce(FlightRuntime.field(opts, 'quaternion'), function():Dynamic return cast false), times: FlightRuntime.field(opts, 'times'), values: FlightRuntime.field(opts, 'values') };
     return cast null;
   }
 
-  @:keep public static function emitAnimationPlayerFinished__animationPlayer(player:AnimationPlayer):Void {
+  public static function emitAnimationPlayerFinished__animationPlayer(player:AnimationPlayer):Void {
     if (FlightRuntime.truthy(!FlightRuntime.looseEquals(FlightRuntime.field(player, 'onFinished'), null))) { FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(player, 'onFinished')] : Array<Dynamic>)); }
   }
 
-  @:keep public static function emitAnimationPlayerLooped__animationPlayer(player:AnimationPlayer):Void {
+  public static function emitAnimationPlayerLooped__animationPlayer(player:AnimationPlayer):Void {
     if (FlightRuntime.truthy(!FlightRuntime.looseEquals(FlightRuntime.field(player, 'onLooped'), null))) { FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(player, 'onLooped')] : Array<Dynamic>)); }
   }
 
-  @:keep public static function enableAnimationPlayerSignals(player:AnimationPlayer):Void {
+  public static function enableAnimationPlayerSignals(player:AnimationPlayer):Void {
     if (FlightRuntime.truthy(FlightRuntime.looseEquals(FlightRuntime.field(player, 'onFinished'), null))) { FlightRuntime.setField(player, 'onFinished', FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
     if (FlightRuntime.truthy(FlightRuntime.looseEquals(FlightRuntime.field(player, 'onLooped'), null))) { FlightRuntime.setField(player, 'onLooped', FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
   }
 
-  @:keep public static function finishAnimationPlayerAt__animationPlayer(player:AnimationPlayer, time:Float):Void {
+  public static function finishAnimationPlayerAt__animationPlayer(player:AnimationPlayer, time:Float):Void {
     FlightRuntime.setField(player, 'time', time);
     FlightRuntime.setField(player, 'playing', false);
     FlightRuntime.callValue(Animation.emitAnimationPlayerFinished__animationPlayer, cast ([player] : Array<Dynamic>));
   }
 
-  @:keep public static function getAnimationClipDuration(clip:AnimationClip):Float {
+  public static function getAnimationClipDuration(clip:AnimationClip):Float {
     return cast FlightRuntime.field(clip, 'duration');
     return cast null;
   }
 
-  @:keep public static function getAnimationPlayerNormalizedTime(player:AnimationPlayer):Float {
+  public static function getAnimationPlayerNormalizedTime(player:AnimationPlayer):Float {
     var duration:Dynamic = cast FlightRuntime.UNDEFINED;
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     duration = FlightRuntime.field(FlightRuntime.field(player, 'clip'), 'duration');
@@ -213,19 +210,19 @@ class Animation {
     return cast null;
   }
 
-  @:keep public static function keyframeStride__animationTrack(track:AnimationTrack):Float {
+  public static function keyframeStride__animationTrack(track:AnimationTrack):Float {
     return cast FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.field(track, 'interpolation'), 'Cubic'), function():Dynamic return cast (FlightRuntime.field(track, 'components') * 3.0), function():Dynamic return cast FlightRuntime.field(track, 'components'));
     return cast null;
   }
 
-  @:keep public static function keyframeValueOffset__animationTrack(track:AnimationTrack, k:Float):Float {
+  public static function keyframeValueOffset__animationTrack(track:AnimationTrack, k:Float):Float {
     var stride:Dynamic = cast FlightRuntime.UNDEFINED;
     stride = FlightRuntime.callValue(Animation.keyframeStride__animationTrack, cast ([track] : Array<Dynamic>));
     return cast FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.field(track, 'interpolation'), 'Cubic'), function():Dynamic return cast ((k * stride) + FlightRuntime.field(track, 'components')), function():Dynamic return cast (k * stride));
     return cast null;
   }
 
-  @:keep public static function normalizeFlatQuaternion__animationTrack(out:Dynamic):Void {
+  public static function normalizeFlatQuaternion__animationTrack(out:Dynamic):Void {
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
     var z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -245,11 +242,11 @@ class Animation {
 }
   }
 
-  @:keep public static function playAnimationPlayer(player:AnimationPlayer):Void {
+  public static function playAnimationPlayer(player:AnimationPlayer):Void {
     FlightRuntime.setField(player, 'playing', true);
   }
 
-  @:keep public static function sampleAnimationClip(out:Dynamic, clip:AnimationClip, time:Float, visit:Dynamic):Void {
+  public static function sampleAnimationClip(out:Dynamic, clip:AnimationClip, time:Float, visit:Dynamic):Void {
     var channels:Dynamic = cast FlightRuntime.UNDEFINED;
     channels = FlightRuntime.field(clip, 'channels');
     {
@@ -263,7 +260,7 @@ class Animation {
     }
   }
 
-  @:keep public static function sampleAnimationTrack(out:Dynamic, track:AnimationTrack, t:Float):Void {
+  public static function sampleAnimationTrack(out:Dynamic, track:AnimationTrack, t:Float):Void {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var components:Dynamic = cast FlightRuntime.UNDEFINED;
     var times:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -335,7 +332,7 @@ class Animation {
     }
   }
 
-  @:keep public static function sampleCubicSegment__animationTrack(out:Dynamic, track:AnimationTrack, i:Float, alpha:Float, dt:Float):Void {
+  public static function sampleCubicSegment__animationTrack(out:Dynamic, track:AnimationTrack, i:Float, alpha:Float, dt:Float):Void {
     var __destructure3:Dynamic = cast FlightRuntime.UNDEFINED;
     var components:Dynamic = cast FlightRuntime.UNDEFINED;
     var values:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -374,13 +371,13 @@ class Animation {
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.field(track, 'quaternion'), function():Dynamic return cast FlightRuntime.strictEquals(components, 4.0)))) { FlightRuntime.callValue(Animation.normalizeFlatQuaternion__animationTrack, cast ([out] : Array<Dynamic>)); }
   }
 
-  @:keep public static function seekAnimationPlayer(player:AnimationPlayer, time:Float):Void {
+  public static function seekAnimationPlayer(player:AnimationPlayer, time:Float):Void {
     var duration:Dynamic = cast FlightRuntime.UNDEFINED;
     duration = FlightRuntime.field(FlightRuntime.field(player, 'clip'), 'duration');
     FlightRuntime.setField(player, 'time', FlightRuntime.select(FlightRuntime.compare(time, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast FlightRuntime.select(FlightRuntime.compare(time, duration, '>'), function():Dynamic return cast duration, function():Dynamic return cast time)));
   }
 
-  @:keep public static function slerpFlatQuaternion__animationTrack(out:Dynamic, values:Dynamic, oa:Float, ob:Float, alpha:Float):Void {
+  public static function slerpFlatQuaternion__animationTrack(out:Dynamic, values:Dynamic, oa:Float, ob:Float, alpha:Float):Void {
     var ax:Dynamic = cast FlightRuntime.UNDEFINED;
     var ay:Dynamic = cast FlightRuntime.UNDEFINED;
     var az:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -423,12 +420,12 @@ class Animation {
     FlightRuntime.setIndex(out, 3.0, ((scale0 * aw) + (scale1 * bw)));
   }
 
-  @:keep public static function stopAnimationPlayer(player:AnimationPlayer):Void {
+  public static function stopAnimationPlayer(player:AnimationPlayer):Void {
     FlightRuntime.setField(player, 'playing', false);
     FlightRuntime.setField(player, 'time', 0.0);
   }
 
-  @:keep public static function trimAnimationTrack(track:AnimationTrack, startTime:Float, endTime:Float):AnimationTrack {
+  public static function trimAnimationTrack(track:AnimationTrack, startTime:Float, endTime:Float):AnimationTrack {
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
     var components:Dynamic = cast FlightRuntime.UNDEFINED;
     var times:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -464,7 +461,7 @@ class Animation {
     return cast null;
   }
 
-  @:keep public static function validateAnimationTrack(track:AnimationTrack):Null<Array<AnimationTrackValidationDiagnostic>> {
+  public static function validateAnimationTrack(track:AnimationTrack):Null<Array<AnimationTrackValidationDiagnostic>> {
     var diagnostics:Array<AnimationTrackValidationDiagnostic> = cast FlightRuntime.UNDEFINED;
     var __destructure2:Dynamic = cast FlightRuntime.UNDEFINED;
     var times:Dynamic = cast FlightRuntime.UNDEFINED;

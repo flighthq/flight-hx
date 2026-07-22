@@ -1,9 +1,10 @@
 {
-  "completedAt": "2026-07-22T13:29:25.055Z",
-  "failedPackages": 0,
+  "completedAt": "2026-07-22T18:03:36.738Z",
+  "failedPackages": 1,
+  "jobs": 12,
   "packages": [
     {
-      "durationMs": 4885,
+      "durationMs": 36332,
       "exitCode": 0,
       "package": "accessibility",
       "signal": null,
@@ -12,7 +13,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 6899,
+      "durationMs": 61808,
       "exitCode": 0,
       "package": "adjustments",
       "signal": null,
@@ -21,7 +22,7 @@
       "testFiles": 18
     },
     {
-      "durationMs": 5166,
+      "durationMs": 46091,
       "exitCode": 0,
       "package": "animation",
       "signal": null,
@@ -30,7 +31,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 4911,
+      "durationMs": 36394,
       "exitCode": 0,
       "package": "app",
       "signal": null,
@@ -39,7 +40,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 4998,
+      "durationMs": 48384,
       "exitCode": 0,
       "package": "application",
       "signal": null,
@@ -48,7 +49,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 4794,
+      "durationMs": 43870,
       "exitCode": 0,
       "package": "assets",
       "signal": null,
@@ -57,7 +58,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 5090,
+      "durationMs": 46181,
       "exitCode": 0,
       "package": "audio",
       "signal": null,
@@ -66,7 +67,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 4625,
+      "durationMs": 45716,
       "exitCode": 0,
       "package": "binpack",
       "signal": null,
@@ -75,7 +76,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 5254,
+      "durationMs": 43280,
       "exitCode": 0,
       "package": "bitmapfont",
       "signal": null,
@@ -84,7 +85,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 5492,
+      "durationMs": 50230,
       "exitCode": 0,
       "package": "bitmapfont-formats",
       "signal": null,
@@ -93,7 +94,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 5490,
+      "durationMs": 48850,
       "exitCode": 0,
       "package": "bitmaptext",
       "signal": null,
@@ -102,7 +103,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 5651,
+      "durationMs": 58111,
       "exitCode": 0,
       "package": "camera",
       "signal": null,
@@ -111,7 +112,7 @@
       "testFiles": 9
     },
     {
-      "durationMs": 5805,
+      "durationMs": 35028,
       "exitCode": 0,
       "package": "camera2d",
       "signal": null,
@@ -120,7 +121,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 4968,
+      "durationMs": 25874,
       "exitCode": 0,
       "package": "capture",
       "signal": null,
@@ -129,7 +130,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 4819,
+      "durationMs": 32044,
       "exitCode": 0,
       "package": "clip",
       "signal": null,
@@ -138,7 +139,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 4953,
+      "durationMs": 30628,
       "exitCode": 0,
       "package": "clipboard",
       "signal": null,
@@ -147,7 +148,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 6133,
+      "durationMs": 50268,
       "exitCode": 0,
       "package": "clock",
       "signal": null,
@@ -156,7 +157,7 @@
       "testFiles": 11
     },
     {
-      "durationMs": 5181,
+      "durationMs": 39767,
       "exitCode": 0,
       "package": "collision",
       "signal": null,
@@ -165,7 +166,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 5775,
+      "durationMs": 43507,
       "exitCode": 0,
       "package": "color",
       "signal": null,
@@ -174,7 +175,7 @@
       "testFiles": 9
     },
     {
-      "durationMs": 4986,
+      "durationMs": 35555,
       "exitCode": 0,
       "package": "connectivity",
       "signal": null,
@@ -183,7 +184,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 5135,
+      "durationMs": 37863,
       "exitCode": 0,
       "package": "debug",
       "signal": null,
@@ -192,7 +193,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 5310,
+      "durationMs": 35332,
       "exitCode": 0,
       "package": "device",
       "signal": null,
@@ -201,7 +202,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 4842,
+      "durationMs": 29158,
       "exitCode": 0,
       "package": "dialog",
       "signal": null,
@@ -210,7 +211,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 6586,
+      "durationMs": 39922,
       "exitCode": 0,
       "package": "displayobject",
       "signal": null,
@@ -219,7 +220,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 9658,
+      "durationMs": 105593,
       "exitCode": 0,
       "package": "displayobject-canvas",
       "signal": null,
@@ -228,7 +229,7 @@
       "testFiles": 30
     },
     {
-      "durationMs": 9123,
+      "durationMs": 90475,
       "exitCode": 0,
       "package": "displayobject-dom",
       "signal": null,
@@ -237,7 +238,7 @@
       "testFiles": 26
     },
     {
-      "durationMs": 11622,
+      "durationMs": 102537,
       "exitCode": 0,
       "package": "displayobject-gl",
       "signal": null,
@@ -246,16 +247,17 @@
       "testFiles": 25
     },
     {
-      "durationMs": 11248,
-      "exitCode": 0,
+      "durationMs": 51172,
+      "exitCode": 1,
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·········································\n\n Test Files  6 passed (7)\n      Tests  41 passed (41)\n     Errors  1 error\n   Start at  10:56:08\n   Duration  48.37s (transform 12.38s, setup 1.86s, import 30.56s, tests 4.26s, environment 7.35s)\n\n\n⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯\n\nVitest caught 1 unhandled error during the test run.\nThis might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.\n\n⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯\nError: [vitest-pool]: Worker forks emitted error.\n ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3459:21\n ❯ EventEmitter.emit node:events:519:28\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3025:22\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\nCaused by: Error: Worker exited unexpectedly\n ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:3023:33\n ❯ ChildProcess.emit node:events:519:28\n ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯",
       "package": "displayobject-wgpu",
       "signal": null,
-      "status": "passed",
-      "summary": "155 passed (155)",
+      "status": "failed",
+      "summary": "41 passed (41)",
       "testFiles": 27
     },
     {
-      "durationMs": 7019,
+      "durationMs": 54485,
       "exitCode": 0,
       "package": "easing",
       "signal": null,
@@ -264,7 +266,7 @@
       "testFiles": 19
     },
     {
-      "durationMs": 12413,
+      "durationMs": 110939,
       "exitCode": 0,
       "package": "effects",
       "signal": null,
@@ -273,7 +275,7 @@
       "testFiles": 71
     },
     {
-      "durationMs": 10376,
+      "durationMs": 79869,
       "exitCode": 0,
       "package": "effects-canvas",
       "signal": null,
@@ -282,7 +284,7 @@
       "testFiles": 47
     },
     {
-      "durationMs": 11776,
+      "durationMs": 89411,
       "exitCode": 0,
       "package": "effects-gl",
       "signal": null,
@@ -291,7 +293,7 @@
       "testFiles": 57
     },
     {
-      "durationMs": 11600,
+      "durationMs": 87298,
       "exitCode": 0,
       "package": "effects-wgpu",
       "signal": null,
@@ -300,7 +302,7 @@
       "testFiles": 55
     },
     {
-      "durationMs": 5320,
+      "durationMs": 44948,
       "exitCode": 0,
       "package": "entity",
       "signal": null,
@@ -309,7 +311,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 5008,
+      "durationMs": 30694,
       "exitCode": 0,
       "package": "filesystem",
       "signal": null,
@@ -318,7 +320,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 5976,
+      "durationMs": 43142,
       "exitCode": 0,
       "package": "flow",
       "signal": null,
@@ -327,7 +329,7 @@
       "testFiles": 9
     },
     {
-      "durationMs": 5441,
+      "durationMs": 37542,
       "exitCode": 0,
       "package": "font",
       "signal": null,
@@ -336,7 +338,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 4654,
+      "durationMs": 29891,
       "exitCode": 0,
       "package": "geolocation",
       "signal": null,
@@ -345,7 +347,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 7494,
+      "durationMs": 55695,
       "exitCode": 0,
       "package": "geometry",
       "signal": null,
@@ -354,7 +356,7 @@
       "testFiles": 26
     },
     {
-      "durationMs": 5445,
+      "durationMs": 35063,
       "exitCode": 0,
       "package": "glyphatlas",
       "signal": null,
@@ -363,7 +365,7 @@
       "testFiles": 6
     },
     {
-      "durationMs": 4785,
+      "durationMs": 24852,
       "exitCode": 0,
       "package": "haptics",
       "signal": null,
@@ -372,7 +374,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 7642,
+      "durationMs": 39676,
       "exitCode": 0,
       "package": "host-capacitor",
       "signal": null,
@@ -381,7 +383,7 @@
       "testFiles": 13
     },
     {
-      "durationMs": 7167,
+      "durationMs": 45557,
       "exitCode": 0,
       "package": "host-electron",
       "signal": null,
@@ -390,7 +392,7 @@
       "testFiles": 17
     },
     {
-      "durationMs": 7218,
+      "durationMs": 46202,
       "exitCode": 0,
       "package": "host-tauri",
       "signal": null,
@@ -399,7 +401,7 @@
       "testFiles": 11
     },
     {
-      "durationMs": 4772,
+      "durationMs": 32518,
       "exitCode": 0,
       "package": "image",
       "signal": null,
@@ -408,7 +410,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 5476,
+      "durationMs": 39404,
       "exitCode": 0,
       "package": "image-codec",
       "signal": null,
@@ -417,7 +419,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 5085,
+      "durationMs": 36053,
       "exitCode": 0,
       "package": "input",
       "signal": null,
@@ -426,7 +428,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 7869,
+      "durationMs": 74909,
       "exitCode": 0,
       "package": "interaction",
       "signal": null,
@@ -435,7 +437,7 @@
       "testFiles": 15
     },
     {
-      "durationMs": 5430,
+      "durationMs": 38589,
       "exitCode": 0,
       "package": "intl",
       "signal": null,
@@ -444,7 +446,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 5055,
+      "durationMs": 35950,
       "exitCode": 0,
       "package": "ipc",
       "signal": null,
@@ -453,7 +455,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 5053,
+      "durationMs": 33538,
       "exitCode": 0,
       "package": "keyboard",
       "signal": null,
@@ -462,7 +464,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 4947,
+      "durationMs": 26798,
       "exitCode": 0,
       "package": "lifecycle",
       "signal": null,
@@ -471,7 +473,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 6201,
+      "durationMs": 45967,
       "exitCode": 0,
       "package": "lighting",
       "signal": null,
@@ -480,7 +482,7 @@
       "testFiles": 10
     },
     {
-      "durationMs": 7228,
+      "durationMs": 29249,
       "exitCode": 0,
       "package": "loader",
       "signal": null,
@@ -489,7 +491,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 4873,
+      "durationMs": 28913,
       "exitCode": 0,
       "package": "log",
       "signal": null,
@@ -498,7 +500,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 6255,
+      "durationMs": 45959,
       "exitCode": 0,
       "package": "materials",
       "signal": null,
@@ -507,7 +509,7 @@
       "testFiles": 11
     },
     {
-      "durationMs": 6458,
+      "durationMs": 46906,
       "exitCode": 0,
       "package": "math",
       "signal": null,
@@ -516,7 +518,7 @@
       "testFiles": 15
     },
     {
-      "durationMs": 5430,
+      "durationMs": 37472,
       "exitCode": 0,
       "package": "media",
       "signal": null,
@@ -525,7 +527,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 4662,
+      "durationMs": 34755,
       "exitCode": 0,
       "package": "mediasession",
       "signal": null,
@@ -534,7 +536,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 5103,
+      "durationMs": 36881,
       "exitCode": 0,
       "package": "menu",
       "signal": null,
@@ -543,7 +545,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 6496,
+      "durationMs": 46669,
       "exitCode": 0,
       "package": "mesh",
       "signal": null,
@@ -552,7 +554,7 @@
       "testFiles": 11
     },
     {
-      "durationMs": 5707,
+      "durationMs": 44252,
       "exitCode": 0,
       "package": "motionpath",
       "signal": null,
@@ -561,7 +563,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 5428,
+      "durationMs": 33382,
       "exitCode": 0,
       "package": "movieclip",
       "signal": null,
@@ -570,7 +572,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 4746,
+      "durationMs": 28118,
       "exitCode": 0,
       "package": "net",
       "signal": null,
@@ -579,7 +581,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 7181,
+      "durationMs": 58373,
       "exitCode": 0,
       "package": "node",
       "signal": null,
@@ -588,7 +590,7 @@
       "testFiles": 15
     },
     {
-      "durationMs": 4550,
+      "durationMs": 27183,
       "exitCode": 0,
       "package": "notification",
       "signal": null,
@@ -597,7 +599,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 6481,
+      "durationMs": 57070,
       "exitCode": 0,
       "package": "particleemitter",
       "signal": null,
@@ -606,7 +608,7 @@
       "testFiles": 12
     },
     {
-      "durationMs": 5982,
+      "durationMs": 48744,
       "exitCode": 0,
       "package": "particles",
       "signal": null,
@@ -615,7 +617,7 @@
       "testFiles": 10
     },
     {
-      "durationMs": 6583,
+      "durationMs": 52583,
       "exitCode": 0,
       "package": "particles-formats",
       "signal": null,
@@ -624,7 +626,7 @@
       "testFiles": 14
     },
     {
-      "durationMs": 7668,
+      "durationMs": 63084,
       "exitCode": 0,
       "package": "path",
       "signal": null,
@@ -633,7 +635,7 @@
       "testFiles": 22
     },
     {
-      "durationMs": 6013,
+      "durationMs": 46188,
       "exitCode": 0,
       "package": "path-boolean",
       "signal": null,
@@ -642,7 +644,7 @@
       "testFiles": 8
     },
     {
-      "durationMs": 5021,
+      "durationMs": 34842,
       "exitCode": 0,
       "package": "path-formats",
       "signal": null,
@@ -651,7 +653,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 4941,
+      "durationMs": 36093,
       "exitCode": 0,
       "package": "permissions",
       "signal": null,
@@ -660,7 +662,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 5418,
+      "durationMs": 39434,
       "exitCode": 0,
       "package": "picking",
       "signal": null,
@@ -669,7 +671,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 4853,
+      "durationMs": 32014,
       "exitCode": 0,
       "package": "platform",
       "signal": null,
@@ -678,7 +680,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 4830,
+      "durationMs": 33556,
       "exitCode": 0,
       "package": "power",
       "signal": null,
@@ -687,7 +689,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 4871,
+      "durationMs": 26715,
       "exitCode": 0,
       "package": "protocol",
       "signal": null,
@@ -696,7 +698,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 8352,
+      "durationMs": 83413,
       "exitCode": 0,
       "package": "render",
       "signal": null,
@@ -705,7 +707,7 @@
       "testFiles": 16
     },
     {
-      "durationMs": 7784,
+      "durationMs": 81297,
       "exitCode": 0,
       "package": "render-gl",
       "signal": null,
@@ -714,7 +716,7 @@
       "testFiles": 20
     },
     {
-      "durationMs": 6830,
+      "durationMs": 63276,
       "exitCode": 0,
       "package": "render-wgpu",
       "signal": null,
@@ -723,7 +725,7 @@
       "testFiles": 16
     },
     {
-      "durationMs": 6952,
+      "durationMs": 77809,
       "exitCode": 0,
       "package": "scene",
       "signal": null,
@@ -732,7 +734,7 @@
       "testFiles": 13
     },
     {
-      "durationMs": 6958,
+      "durationMs": 65066,
       "exitCode": 0,
       "package": "scene-formats",
       "signal": null,
@@ -741,7 +743,7 @@
       "testFiles": 9
     },
     {
-      "durationMs": 12026,
+      "durationMs": 230208,
       "exitCode": 0,
       "package": "scene-gl",
       "signal": null,
@@ -750,7 +752,7 @@
       "testFiles": 52
     },
     {
-      "durationMs": 7538,
+      "durationMs": 92780,
       "exitCode": 0,
       "package": "scene-resources",
       "signal": null,
@@ -759,7 +761,7 @@
       "testFiles": 15
     },
     {
-      "durationMs": 10607,
+      "durationMs": 189453,
       "exitCode": 0,
       "package": "scene-wgpu",
       "signal": null,
@@ -768,7 +770,7 @@
       "testFiles": 40
     },
     {
-      "durationMs": 4607,
+      "durationMs": 36714,
       "exitCode": 0,
       "package": "screen",
       "signal": null,
@@ -777,7 +779,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 17049,
+      "durationMs": 100571,
       "exitCode": 0,
       "package": "sdk",
       "signal": null,
@@ -786,7 +788,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 4807,
+      "durationMs": 34616,
       "exitCode": 0,
       "package": "sensors",
       "signal": null,
@@ -795,7 +797,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 6761,
+      "durationMs": 60467,
       "exitCode": 0,
       "package": "shading",
       "signal": null,
@@ -804,7 +806,7 @@
       "testFiles": 16
     },
     {
-      "durationMs": 5720,
+      "durationMs": 39417,
       "exitCode": 0,
       "package": "shape",
       "signal": null,
@@ -813,7 +815,7 @@
       "testFiles": 6
     },
     {
-      "durationMs": 5355,
+      "durationMs": 29275,
       "exitCode": 0,
       "package": "shape-formats",
       "signal": null,
@@ -822,7 +824,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 4663,
+      "durationMs": 29047,
       "exitCode": 0,
       "package": "share",
       "signal": null,
@@ -831,7 +833,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 4789,
+      "durationMs": 26117,
       "exitCode": 0,
       "package": "shell",
       "signal": null,
@@ -840,7 +842,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 4776,
+      "durationMs": 33685,
       "exitCode": 0,
       "package": "shortcut",
       "signal": null,
@@ -849,7 +851,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 5493,
+      "durationMs": 43141,
       "exitCode": 0,
       "package": "signals",
       "signal": null,
@@ -858,7 +860,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 5896,
+      "durationMs": 47886,
       "exitCode": 0,
       "package": "skeleton3d",
       "signal": null,
@@ -867,7 +869,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 5261,
+      "durationMs": 40272,
       "exitCode": 0,
       "package": "snapshot",
       "signal": null,
@@ -876,7 +878,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 4768,
+      "durationMs": 35060,
       "exitCode": 0,
       "package": "socket",
       "signal": null,
@@ -885,7 +887,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 5029,
+      "durationMs": 36167,
       "exitCode": 0,
       "package": "spatial",
       "signal": null,
@@ -894,7 +896,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 5675,
+      "durationMs": 39395,
       "exitCode": 0,
       "package": "spring",
       "signal": null,
@@ -903,7 +905,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 5530,
+      "durationMs": 37950,
       "exitCode": 0,
       "package": "sprite",
       "signal": null,
@@ -912,7 +914,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 5846,
+      "durationMs": 42073,
       "exitCode": 0,
       "package": "spritesheet",
       "signal": null,
@@ -921,7 +923,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 6011,
+      "durationMs": 42794,
       "exitCode": 0,
       "package": "spritesheet-formats",
       "signal": null,
@@ -930,7 +932,7 @@
       "testFiles": 10
     },
     {
-      "durationMs": 4705,
+      "durationMs": 28412,
       "exitCode": 0,
       "package": "statusbar",
       "signal": null,
@@ -939,7 +941,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 4599,
+      "durationMs": 31113,
       "exitCode": 0,
       "package": "storage",
       "signal": null,
@@ -948,7 +950,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 9822,
+      "durationMs": 103762,
       "exitCode": 0,
       "package": "surface",
       "signal": null,
@@ -957,7 +959,7 @@
       "testFiles": 41
     },
     {
-      "durationMs": 5778,
+      "durationMs": 47964,
       "exitCode": 0,
       "package": "text",
       "signal": null,
@@ -966,7 +968,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 4920,
+      "durationMs": 40091,
       "exitCode": 0,
       "package": "text-markup",
       "signal": null,
@@ -975,7 +977,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 5060,
+      "durationMs": 34974,
       "exitCode": 0,
       "package": "textbidi",
       "signal": null,
@@ -984,7 +986,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 5444,
+      "durationMs": 41909,
       "exitCode": 0,
       "package": "textinput",
       "signal": null,
@@ -993,7 +995,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 6322,
+      "durationMs": 47932,
       "exitCode": 0,
       "package": "textlayout",
       "signal": null,
@@ -1002,7 +1004,7 @@
       "testFiles": 12
     },
     {
-      "durationMs": 5090,
+      "durationMs": 34267,
       "exitCode": 0,
       "package": "textsegment",
       "signal": null,
@@ -1011,7 +1013,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 5713,
+      "durationMs": 40431,
       "exitCode": 0,
       "package": "textshaper",
       "signal": null,
@@ -1020,7 +1022,7 @@
       "testFiles": 8
     },
     {
-      "durationMs": 4761,
+      "durationMs": 28784,
       "exitCode": 0,
       "package": "textshaper-canvas",
       "signal": null,
@@ -1029,7 +1031,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 5176,
+      "durationMs": 32084,
       "exitCode": 0,
       "package": "texture",
       "signal": null,
@@ -1038,7 +1040,7 @@
       "testFiles": 4
     },
     {
-      "durationMs": 5835,
+      "durationMs": 36183,
       "exitCode": 0,
       "package": "texture-formats",
       "signal": null,
@@ -1047,7 +1049,7 @@
       "testFiles": 8
     },
     {
-      "durationMs": 5093,
+      "durationMs": 31439,
       "exitCode": 0,
       "package": "textureatlas",
       "signal": null,
@@ -1056,7 +1058,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 5284,
+      "durationMs": 32999,
       "exitCode": 0,
       "package": "textureatlas-formats",
       "signal": null,
@@ -1065,7 +1067,7 @@
       "testFiles": 5
     },
     {
-      "durationMs": 5653,
+      "durationMs": 40563,
       "exitCode": 0,
       "package": "tilemap-formats",
       "signal": null,
@@ -1074,7 +1076,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 5161,
+      "durationMs": 31325,
       "exitCode": 0,
       "package": "tileset",
       "signal": null,
@@ -1083,7 +1085,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 4780,
+      "durationMs": 30482,
       "exitCode": 0,
       "package": "timeline",
       "signal": null,
@@ -1092,7 +1094,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 6024,
+      "durationMs": 41338,
       "exitCode": 0,
       "package": "tool-capture",
       "signal": null,
@@ -1101,7 +1103,7 @@
       "testFiles": 11
     },
     {
-      "durationMs": 4983,
+      "durationMs": 31989,
       "exitCode": 0,
       "package": "tray",
       "signal": null,
@@ -1110,7 +1112,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 5912,
+      "durationMs": 43275,
       "exitCode": 0,
       "package": "tween",
       "signal": null,
@@ -1119,7 +1121,7 @@
       "testFiles": 7
     },
     {
-      "durationMs": 7239,
+      "durationMs": 43553,
       "exitCode": 0,
       "package": "types",
       "signal": null,
@@ -1128,7 +1130,7 @@
       "testFiles": 29
     },
     {
-      "durationMs": 4871,
+      "durationMs": 29961,
       "exitCode": 0,
       "package": "updater",
       "signal": null,
@@ -1137,7 +1139,7 @@
       "testFiles": 1
     },
     {
-      "durationMs": 4740,
+      "durationMs": 31439,
       "exitCode": 0,
       "package": "useragent",
       "signal": null,
@@ -1146,7 +1148,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 5417,
+      "durationMs": 30498,
       "exitCode": 0,
       "package": "velocity",
       "signal": null,
@@ -1155,7 +1157,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 4875,
+      "durationMs": 27803,
       "exitCode": 0,
       "package": "video",
       "signal": null,
@@ -1164,7 +1166,7 @@
       "testFiles": 3
     },
     {
-      "durationMs": 5054,
+      "durationMs": 26068,
       "exitCode": 0,
       "package": "webcam",
       "signal": null,
@@ -1173,7 +1175,7 @@
       "testFiles": 2
     },
     {
-      "durationMs": 4748,
+      "durationMs": 22725,
       "exitCode": 0,
       "package": "xml",
       "signal": null,
@@ -1184,5 +1186,5 @@
   ],
   "schemaVersion": 1,
   "selectedPackage": null,
-  "startedAt": "2026-07-22T13:16:01.482Z"
+  "startedAt": "2026-07-22T17:54:50.690Z"
 }

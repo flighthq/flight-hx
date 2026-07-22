@@ -40,12 +40,9 @@ import flight.Types.Vector3Like;
 import flight.Types.Vector4;
 import flight.Types.Vector4Like;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Geometry")
 class Geometry {
-  @:keep public static function __getAxisRotation__matrix4(out:Matrix4Like, x:Float, y:Float, z:Float, radians:Float):Void {
+  public static function __getAxisRotation__matrix4(out:Matrix4Like, x:Float, y:Float, z:Float, radians:Float):Void {
     var _out:Dynamic = cast FlightRuntime.UNDEFINED;
     var ax:Dynamic = cast FlightRuntime.UNDEFINED;
     var ay:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -85,7 +82,7 @@ class Geometry {
 
   public static final __identity__matrix4:flight.internal.FlightFloat32Array = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [cast ([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>)]);
 
-  @:keep public static function __planeIntersectsAabb__frustum(plane:PlaneLike, aabb:AabbLike):Bool {
+  public static function __planeIntersectsAabb__frustum(plane:PlaneLike, aabb:AabbLike):Bool {
     var px:Dynamic = cast FlightRuntime.UNDEFINED;
     var py:Dynamic = cast FlightRuntime.UNDEFINED;
     var pz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -96,12 +93,12 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function __planeSignedDistance__frustum(plane:PlaneLike, point:Vector3Like):Float {
+  public static function __planeSignedDistance__frustum(plane:PlaneLike, point:Vector3Like):Float {
     return cast ((((FlightRuntime.field(plane, 'a') * FlightRuntime.field(point, 'x')) + (FlightRuntime.field(plane, 'b') * FlightRuntime.field(point, 'y'))) + (FlightRuntime.field(plane, 'c') * FlightRuntime.field(point, 'z'))) + FlightRuntime.field(plane, 'd'));
     return cast null;
   }
 
-  @:keep public static function __setPlane__frustum(out:PlaneLike, a:Float, b:Float, c:Float, d:Float):Void {
+  public static function __setPlane__frustum(out:PlaneLike, a:Float, b:Float, c:Float, d:Float):Void {
     var l:Dynamic = cast FlightRuntime.UNDEFINED;
     l = FlightRuntime.callProperty(HxMath, 'sqrt', cast ([(((a * a) + (b * b)) + (c * c))] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(l, 0.0))) {
@@ -118,14 +115,14 @@ class Geometry {
 }
   }
 
-  @:keep public static function __swap__matrix4(out:Matrix4Like, source:Matrix4Like, a:Float, b:Float):Void {
+  public static function __swap__matrix4(out:Matrix4Like, source:Matrix4Like, a:Float, b:Float):Void {
     var temp:Dynamic = cast FlightRuntime.UNDEFINED;
     temp = FlightRuntime.getIndex(FlightRuntime.field(source, 'm'), a);
     FlightRuntime.setIndex(FlightRuntime.field(out, 'm'), a, FlightRuntime.getIndex(FlightRuntime.field(source, 'm'), b));
     FlightRuntime.setIndex(FlightRuntime.field(out, 'm'), b, temp);
   }
 
-  @:keep public static function acquireEmptyRectangle():Rectangle {
+  public static function acquireEmptyRectangle():Rectangle {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     r = FlightRuntime.callValue(acquireRectangle, cast ([] : Array<Dynamic>));
     FlightRuntime.setField(r, 'x', 0.0);
@@ -136,7 +133,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function acquireEmptyVector2():Vector2 {
+  public static function acquireEmptyVector2():Vector2 {
     var v:Dynamic = cast FlightRuntime.UNDEFINED;
     v = FlightRuntime.callValue(acquireVector2, cast ([] : Array<Dynamic>));
     FlightRuntime.setField(v, 'x', 0.0);
@@ -145,7 +142,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function acquireEmptyVector3():Vector3 {
+  public static function acquireEmptyVector3():Vector3 {
     var v:Dynamic = cast FlightRuntime.UNDEFINED;
     v = FlightRuntime.callValue(acquireVector3, cast ([] : Array<Dynamic>));
     FlightRuntime.setField(v, 'x', 0.0);
@@ -155,7 +152,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function acquireEmptyVector4():Vector4 {
+  public static function acquireEmptyVector4():Vector4 {
     var v:Dynamic = cast FlightRuntime.UNDEFINED;
     v = FlightRuntime.callValue(acquireVector4, cast ([] : Array<Dynamic>));
     FlightRuntime.setField(v, 'x', 0.0);
@@ -166,7 +163,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function acquireIdentityMatrix():Matrix {
+  public static function acquireIdentityMatrix():Matrix {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.callValue(acquireMatrix, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(setMatrixIdentity, cast ([m] : Array<Dynamic>));
@@ -174,7 +171,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function acquireIdentityMatrix3():Matrix3 {
+  public static function acquireIdentityMatrix3():Matrix3 {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.callValue(acquireMatrix3, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(setMatrix3Identity, cast ([m] : Array<Dynamic>));
@@ -182,7 +179,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function acquireIdentityMatrix4():Matrix4 {
+  public static function acquireIdentityMatrix4():Matrix4 {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.callValue(acquireMatrix4, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(setMatrix4Identity, cast ([m] : Array<Dynamic>));
@@ -190,7 +187,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function acquireIdentityQuaternion():Quaternion {
+  public static function acquireIdentityQuaternion():Quaternion {
     var q:Dynamic = cast FlightRuntime.UNDEFINED;
     q = FlightRuntime.callValue(acquireQuaternion, cast ([] : Array<Dynamic>));
     FlightRuntime.setField(q, 'x', 0.0);
@@ -201,7 +198,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function acquireMatrix():Matrix {
+  public static function acquireMatrix():Matrix {
     var m:Matrix = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(Geometry.pool__matrixPool, 'length'), 0.0, '>'))) {
   (m = cast ((cast FlightRuntime.callProperty(Geometry.pool__matrixPool, 'pop', cast ([] : Array<Dynamic>)) : Matrix) : Dynamic));
@@ -212,7 +209,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function acquireMatrix3():Matrix3 {
+  public static function acquireMatrix3():Matrix3 {
     var m:Matrix3 = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(Geometry.pool__matrix3Pool, 'length'), 0.0, '>'))) {
   (m = cast ((cast FlightRuntime.callProperty(Geometry.pool__matrix3Pool, 'pop', cast ([] : Array<Dynamic>)) : Matrix3) : Dynamic));
@@ -223,7 +220,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function acquireMatrix4():Matrix4 {
+  public static function acquireMatrix4():Matrix4 {
     var m:Matrix4 = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(Geometry.pool__matrix4Pool, 'length'), 0.0, '>'))) {
   (m = cast ((cast FlightRuntime.callProperty(Geometry.pool__matrix4Pool, 'pop', cast ([] : Array<Dynamic>)) : Matrix4) : Dynamic));
@@ -234,7 +231,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function acquireQuaternion():Quaternion {
+  public static function acquireQuaternion():Quaternion {
     var q:Quaternion = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(Geometry.pool__quaternionPool, 'length'), 0.0, '>'))) {
   (q = cast ((cast FlightRuntime.callProperty(Geometry.pool__quaternionPool, 'pop', cast ([] : Array<Dynamic>)) : Quaternion) : Dynamic));
@@ -245,7 +242,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function acquireRectangle():Rectangle {
+  public static function acquireRectangle():Rectangle {
     var r:Rectangle = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(Geometry.pool__rectanglePool, 'length'), 0.0, '>'))) {
   (r = cast ((cast FlightRuntime.callProperty(Geometry.pool__rectanglePool, 'pop', cast ([] : Array<Dynamic>)) : Rectangle) : Dynamic));
@@ -256,12 +253,12 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function acquireVector2():Vector2 {
+  public static function acquireVector2():Vector2 {
     return cast FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(Geometry.pool__vector2Pool, 'length'), 0.0, '>'), function():Dynamic return cast (cast FlightRuntime.callProperty(Geometry.pool__vector2Pool, 'pop', cast ([] : Array<Dynamic>)) : Vector2), function():Dynamic return cast FlightRuntime.callValue(createVector2, cast ([] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function acquireVector3():Vector3 {
+  public static function acquireVector3():Vector3 {
     var v:Vector3 = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(Geometry.pool__vector3Pool, 'length'), 0.0, '>'))) {
   (v = cast ((cast FlightRuntime.callProperty(Geometry.pool__vector3Pool, 'pop', cast ([] : Array<Dynamic>)) : Vector3) : Dynamic));
@@ -272,7 +269,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function acquireVector4():Vector4 {
+  public static function acquireVector4():Vector4 {
     var v:Vector4 = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(Geometry.pool__vector4Pool, 'length'), 0.0, '>'))) {
   (v = cast ((cast FlightRuntime.callProperty(Geometry.pool__vector4Pool, 'pop', cast ([] : Array<Dynamic>)) : Vector4) : Dynamic));
@@ -283,29 +280,29 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function addVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
+  public static function addVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(a, 'x') + FlightRuntime.field(b, 'x')));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(a, 'y') + FlightRuntime.field(b, 'y')));
   }
 
-  @:keep public static function addVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
+  public static function addVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(a, 'x') + FlightRuntime.field(b, 'x')));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(a, 'y') + FlightRuntime.field(b, 'y')));
     FlightRuntime.setField(out, 'z', (FlightRuntime.field(a, 'z') + FlightRuntime.field(b, 'z')));
   }
 
-  @:keep public static function addVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
+  public static function addVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(a, 'x') + FlightRuntime.field(b, 'x')));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(a, 'y') + FlightRuntime.field(b, 'y')));
     FlightRuntime.setField(out, 'z', (FlightRuntime.field(a, 'z') + FlightRuntime.field(b, 'z')));
     FlightRuntime.setField(out, 'w', (FlightRuntime.field(a, 'w') + FlightRuntime.field(b, 'w')));
   }
 
-  @:keep public static function appendMatrix4(out:Matrix4Like, source:Matrix4Like, other:Matrix4Like):Void {
+  public static function appendMatrix4(out:Matrix4Like, source:Matrix4Like, other:Matrix4Like):Void {
     FlightRuntime.callValue(multiplyMatrix4, cast ([out, source, other] : Array<Dynamic>));
   }
 
-  @:keep public static function appendRotationMatrix4(out:Matrix4Like, source:Matrix4Like, radians:Float, axis:Vector4Like, ?pivotPoint:Vector4Like):Void {
+  public static function appendRotationMatrix4(out:Matrix4Like, source:Matrix4Like, radians:Float, axis:Vector4Like, ?pivotPoint:Vector4Like):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.callValue(acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(Geometry.__getAxisRotation__matrix4, cast ([m, FlightRuntime.field(axis, 'x'), FlightRuntime.field(axis, 'y'), FlightRuntime.field(axis, 'z'), radians] : Array<Dynamic>));
@@ -324,7 +321,7 @@ class Geometry {
     FlightRuntime.callValue(releaseMatrix4, cast ([m] : Array<Dynamic>));
   }
 
-  @:keep public static function appendScaleMatrix4(out:Matrix4Like, source:Matrix4Like, xScale:Float, yScale:Float, zScale:Float):Void {
+  public static function appendScaleMatrix4(out:Matrix4Like, source:Matrix4Like, xScale:Float, yScale:Float, zScale:Float):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.callValue(acquireMatrix4, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(setMatrix4, cast ([m, xScale, 0.0, 0.0, 0.0, 0.0, yScale, 0.0, 0.0, 0.0, 0.0, zScale, 0.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
@@ -332,7 +329,7 @@ class Geometry {
     FlightRuntime.callValue(releaseMatrix4, cast ([m] : Array<Dynamic>));
   }
 
-  @:keep public static function appendTranslationMatrix4(out:Matrix4Like, source:Matrix4Like, x:Float, y:Float, z:Float):Void {
+  public static function appendTranslationMatrix4(out:Matrix4Like, source:Matrix4Like, x:Float, y:Float, z:Float):Void {
     var _out:Dynamic = cast FlightRuntime.UNDEFINED;
     var _source:Dynamic = cast FlightRuntime.UNDEFINED;
     _out = FlightRuntime.field(out, 'm');
@@ -343,7 +340,7 @@ class Geometry {
     FlightRuntime.setIndex(_out, 14.0, (FlightRuntime.getIndex(_source, 14.0) + z));
   }
 
-  @:keep public static function clampVector2(out:Vector2Like, value:Vector2Like, min:Vector2Like, max:Vector2Like):Void {
+  public static function clampVector2(out:Vector2Like, value:Vector2Like, min:Vector2Like, max:Vector2Like):Void {
     var vx:Dynamic = cast FlightRuntime.UNDEFINED;
     var vy:Dynamic = cast FlightRuntime.UNDEFINED;
     var minX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -360,7 +357,7 @@ class Geometry {
     FlightRuntime.setField(out, 'y', FlightRuntime.select(FlightRuntime.compare(vy, minY, '<'), function():Dynamic return cast minY, function():Dynamic return cast FlightRuntime.select(FlightRuntime.compare(vy, maxY, '>'), function():Dynamic return cast maxY, function():Dynamic return cast vy)));
   }
 
-  @:keep public static function clampVector3(out:Vector3Like, value:Vector3Like, min:Vector3Like, max:Vector3Like):Void {
+  public static function clampVector3(out:Vector3Like, value:Vector3Like, min:Vector3Like, max:Vector3Like):Void {
     var vx:Dynamic = cast FlightRuntime.UNDEFINED;
     var vy:Dynamic = cast FlightRuntime.UNDEFINED;
     var vz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -384,7 +381,7 @@ class Geometry {
     FlightRuntime.setField(out, 'z', FlightRuntime.select(FlightRuntime.compare(vz, minZ, '<'), function():Dynamic return cast minZ, function():Dynamic return cast FlightRuntime.select(FlightRuntime.compare(vz, maxZ, '>'), function():Dynamic return cast maxZ, function():Dynamic return cast vz)));
   }
 
-  @:keep public static function clampVector4(out:Vector4Like, value:Vector4Like, min:Vector4Like, max:Vector4Like):Void {
+  public static function clampVector4(out:Vector4Like, value:Vector4Like, min:Vector4Like, max:Vector4Like):Void {
     var vx:Dynamic = cast FlightRuntime.UNDEFINED;
     var vy:Dynamic = cast FlightRuntime.UNDEFINED;
     var vz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -415,49 +412,49 @@ class Geometry {
     FlightRuntime.setField(out, 'w', FlightRuntime.select(FlightRuntime.compare(vw, minW, '<'), function():Dynamic return cast minW, function():Dynamic return cast FlightRuntime.select(FlightRuntime.compare(vw, maxW, '>'), function():Dynamic return cast maxW, function():Dynamic return cast vw)));
   }
 
-  @:keep public static function clearMatrix3Pool():Void {
+  public static function clearMatrix3Pool():Void {
     FlightRuntime.setLength(Geometry.pool__matrix3Pool, 0.0);
   }
 
-  @:keep public static function clearMatrix4Pool():Void {
+  public static function clearMatrix4Pool():Void {
     FlightRuntime.setLength(Geometry.pool__matrix4Pool, 0.0);
   }
 
-  @:keep public static function clearMatrixPool():Void {
+  public static function clearMatrixPool():Void {
     FlightRuntime.setLength(Geometry.pool__matrixPool, 0.0);
   }
 
-  @:keep public static function clearQuaternionPool():Void {
+  public static function clearQuaternionPool():Void {
     FlightRuntime.setLength(Geometry.pool__quaternionPool, 0.0);
   }
 
-  @:keep public static function clearRectanglePool():Void {
+  public static function clearRectanglePool():Void {
     FlightRuntime.setLength(Geometry.pool__rectanglePool, 0.0);
   }
 
-  @:keep public static function clearVector2Pool():Void {
+  public static function clearVector2Pool():Void {
     FlightRuntime.setLength(Geometry.pool__vector2Pool, 0.0);
   }
 
-  @:keep public static function clearVector3Pool():Void {
+  public static function clearVector3Pool():Void {
     FlightRuntime.setLength(Geometry.pool__vector3Pool, 0.0);
   }
 
-  @:keep public static function clearVector4Pool():Void {
+  public static function clearVector4Pool():Void {
     FlightRuntime.setLength(Geometry.pool__vector4Pool, 0.0);
   }
 
-  @:keep public static function cloneAabb(source:AabbLike):Aabb {
+  public static function cloneAabb(source:AabbLike):Aabb {
     return cast FlightRuntime.callValue(createAabb, cast ([FlightRuntime.field(FlightRuntime.field(source, 'min'), 'x'), FlightRuntime.field(FlightRuntime.field(source, 'min'), 'y'), FlightRuntime.field(FlightRuntime.field(source, 'min'), 'z'), FlightRuntime.field(FlightRuntime.field(source, 'max'), 'x'), FlightRuntime.field(FlightRuntime.field(source, 'max'), 'y'), FlightRuntime.field(FlightRuntime.field(source, 'max'), 'z')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cloneBoundingSphere(source:BoundingSphereLike):BoundingSphere {
+  public static function cloneBoundingSphere(source:BoundingSphereLike):BoundingSphere {
     return cast FlightRuntime.callValue(createBoundingSphere, cast ([FlightRuntime.field(FlightRuntime.field(source, 'center'), 'x'), FlightRuntime.field(FlightRuntime.field(source, 'center'), 'y'), FlightRuntime.field(FlightRuntime.field(source, 'center'), 'z'), FlightRuntime.field(source, 'radius')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cloneMatrix(source:MatrixLike):Matrix {
+  public static function cloneMatrix(source:MatrixLike):Matrix {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.callValue(createMatrix, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(copyMatrix, cast ([m, source] : Array<Dynamic>));
@@ -465,7 +462,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function cloneMatrix3(source:Matrix3Like):Matrix3 {
+  public static function cloneMatrix3(source:Matrix3Like):Matrix3 {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.callValue(createMatrix3, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(copyMatrix3, cast ([m, source] : Array<Dynamic>));
@@ -473,7 +470,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function cloneMatrix4(source:Matrix4Like):Matrix4 {
+  public static function cloneMatrix4(source:Matrix4Like):Matrix4 {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(copyMatrix4, cast ([m, source] : Array<Dynamic>));
@@ -481,37 +478,37 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function clonePlane(source:PlaneLike):Plane {
+  public static function clonePlane(source:PlaneLike):Plane {
     return cast FlightRuntime.callValue(createPlane, cast ([FlightRuntime.field(source, 'a'), FlightRuntime.field(source, 'b'), FlightRuntime.field(source, 'c'), FlightRuntime.field(source, 'd')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cloneQuaternion(source:QuaternionLike):Quaternion {
+  public static function cloneQuaternion(source:QuaternionLike):Quaternion {
     return cast FlightRuntime.callValue(createQuaternion, cast ([FlightRuntime.field(source, 'x'), FlightRuntime.field(source, 'y'), FlightRuntime.field(source, 'z'), FlightRuntime.field(source, 'w')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cloneRectangle(source:RectangleLike):Rectangle {
+  public static function cloneRectangle(source:RectangleLike):Rectangle {
     return cast FlightRuntime.callValue(createRectangle, cast ([FlightRuntime.field(source, 'x'), FlightRuntime.field(source, 'y'), FlightRuntime.field(source, 'width'), FlightRuntime.field(source, 'height')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cloneVector2(source:Vector2Like):Vector2 {
+  public static function cloneVector2(source:Vector2Like):Vector2 {
     return cast FlightRuntime.callValue(createVector2, cast ([FlightRuntime.field(source, 'x'), FlightRuntime.field(source, 'y')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cloneVector3(source:Vector3Like):Vector3 {
+  public static function cloneVector3(source:Vector3Like):Vector3 {
     return cast FlightRuntime.callValue(createVector3, cast ([FlightRuntime.field(source, 'x'), FlightRuntime.field(source, 'y'), FlightRuntime.field(source, 'z')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cloneVector4(source:Vector4Like):Vector4 {
+  public static function cloneVector4(source:Vector4Like):Vector4 {
     return cast FlightRuntime.callValue(createVector4, cast ([FlightRuntime.field(source, 'x'), FlightRuntime.field(source, 'y'), FlightRuntime.field(source, 'z'), FlightRuntime.field(source, 'w')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function composeMatrix4(out:Matrix4Like, position:Vector3Like, rotation:QuaternionLike, scale:Vector3Like):Void {
+  public static function composeMatrix4(out:Matrix4Like, position:Vector3Like, rotation:QuaternionLike, scale:Vector3Like):Void {
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
     var z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -570,11 +567,11 @@ class Geometry {
     FlightRuntime.setIndex(_out, 15.0, 1.0);
   }
 
-  @:keep public static function composeMatrix4FromTransform3D(out:Matrix4Like, source:Transform3DLike):Void {
+  public static function composeMatrix4FromTransform3D(out:Matrix4Like, source:Transform3DLike):Void {
     FlightRuntime.callValue(composeMatrix4, cast ([out, FlightRuntime.field(source, 'position'), FlightRuntime.field(source, 'rotation'), FlightRuntime.field(source, 'scale')] : Array<Dynamic>));
   }
 
-  @:keep public static function computeRectangleIntersection(out:RectangleLike, a:RectangleLike, b:RectangleLike):Void {
+  public static function computeRectangleIntersection(out:RectangleLike, a:RectangleLike, b:RectangleLike):Void {
     var x0:Dynamic = cast FlightRuntime.UNDEFINED;
     var x1:Dynamic = cast FlightRuntime.UNDEFINED;
     var y0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -593,19 +590,19 @@ class Geometry {
     FlightRuntime.setField(out, 'height', (y1 - y0));
   }
 
-  @:keep public static function conjugateQuaternion(out:QuaternionLike, source:QuaternionLike):Void {
+  public static function conjugateQuaternion(out:QuaternionLike, source:QuaternionLike):Void {
     FlightRuntime.setField(out, 'x', -FlightRuntime.field(source, 'x'));
     FlightRuntime.setField(out, 'y', -FlightRuntime.field(source, 'y'));
     FlightRuntime.setField(out, 'z', -FlightRuntime.field(source, 'z'));
     FlightRuntime.setField(out, 'w', FlightRuntime.field(source, 'w'));
   }
 
-  @:keep public static function containsAabbPoint(aabb:AabbLike, point:Vector3Like):Bool {
+  public static function containsAabbPoint(aabb:AabbLike, point:Vector3Like):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.compare(FlightRuntime.field(point, 'x'), FlightRuntime.field(FlightRuntime.field(aabb, 'min'), 'x'), '>='), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(point, 'x'), FlightRuntime.field(FlightRuntime.field(aabb, 'max'), 'x'), '<=')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(point, 'y'), FlightRuntime.field(FlightRuntime.field(aabb, 'min'), 'y'), '>=')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(point, 'y'), FlightRuntime.field(FlightRuntime.field(aabb, 'max'), 'y'), '<=')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(point, 'z'), FlightRuntime.field(FlightRuntime.field(aabb, 'min'), 'z'), '>=')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(point, 'z'), FlightRuntime.field(FlightRuntime.field(aabb, 'max'), 'z'), '<='));
     return cast null;
   }
 
-  @:keep public static function containsBoundingSpherePoint(sphere:BoundingSphereLike, point:Vector3Like):Bool {
+  public static function containsBoundingSpherePoint(sphere:BoundingSphereLike, point:Vector3Like):Bool {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     var dz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -617,12 +614,12 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function containsRectanglePoint(source:RectangleLike, vector:Vector2Like):Bool {
+  public static function containsRectanglePoint(source:RectangleLike, vector:Vector2Like):Bool {
     return cast FlightRuntime.callValue(containsRectanglePointXY, cast ([source, FlightRuntime.field(vector, 'x'), FlightRuntime.field(vector, 'y')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function containsRectanglePointXY(source:RectangleLike, x:Float, y:Float):Bool {
+  public static function containsRectanglePointXY(source:RectangleLike, x:Float, y:Float):Bool {
     var x0:Dynamic = cast FlightRuntime.UNDEFINED;
     var x1:Dynamic = cast FlightRuntime.UNDEFINED;
     var y0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -635,7 +632,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function copyAabb(out:AabbLike, source:AabbLike):Void {
+  public static function copyAabb(out:AabbLike, source:AabbLike):Void {
     FlightRuntime.setField(FlightRuntime.field(out, 'min'), 'x', FlightRuntime.field(FlightRuntime.field(source, 'min'), 'x'));
     FlightRuntime.setField(FlightRuntime.field(out, 'min'), 'y', FlightRuntime.field(FlightRuntime.field(source, 'min'), 'y'));
     FlightRuntime.setField(FlightRuntime.field(out, 'min'), 'z', FlightRuntime.field(FlightRuntime.field(source, 'min'), 'z'));
@@ -644,22 +641,22 @@ class Geometry {
     FlightRuntime.setField(FlightRuntime.field(out, 'max'), 'z', FlightRuntime.field(FlightRuntime.field(source, 'max'), 'z'));
   }
 
-  @:keep public static function copyBoundingSphere(out:BoundingSphereLike, source:BoundingSphereLike):Void {
+  public static function copyBoundingSphere(out:BoundingSphereLike, source:BoundingSphereLike):Void {
     FlightRuntime.setField(FlightRuntime.field(out, 'center'), 'x', FlightRuntime.field(FlightRuntime.field(source, 'center'), 'x'));
     FlightRuntime.setField(FlightRuntime.field(out, 'center'), 'y', FlightRuntime.field(FlightRuntime.field(source, 'center'), 'y'));
     FlightRuntime.setField(FlightRuntime.field(out, 'center'), 'z', FlightRuntime.field(FlightRuntime.field(source, 'center'), 'z'));
     FlightRuntime.setField(out, 'radius', FlightRuntime.field(source, 'radius'));
   }
 
-  @:keep public static function copyMatrix(out:MatrixLike, source:MatrixLike):Void {
+  public static function copyMatrix(out:MatrixLike, source:MatrixLike):Void {
     FlightRuntime.callValue(setMatrix, cast ([out, FlightRuntime.field(source, 'a'), FlightRuntime.field(source, 'b'), FlightRuntime.field(source, 'c'), FlightRuntime.field(source, 'd'), FlightRuntime.field(source, 'tx'), FlightRuntime.field(source, 'ty')] : Array<Dynamic>));
   }
 
-  @:keep public static function copyMatrix3(out:Matrix3Like, source:Matrix3Like):Void {
+  public static function copyMatrix3(out:Matrix3Like, source:Matrix3Like):Void {
     FlightRuntime.callProperty(FlightRuntime.field(out, 'm'), 'set', cast ([FlightRuntime.field(source, 'm')] : Array<Dynamic>));
   }
 
-  @:keep public static function copyMatrix3ColumnFromVector3(out:Matrix3Like, column:Float, source:Vector3Like):Void {
+  public static function copyMatrix3ColumnFromVector3(out:Matrix3Like, column:Float, source:Vector3Like):Void {
     var base:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(column, 2.0, '>'))) {
   throw FlightRuntime.rangeError((('Column ' + column) + ' out of bounds (2)'));
@@ -670,7 +667,7 @@ class Geometry {
     FlightRuntime.setIndex(FlightRuntime.field(out, 'm'), (base + 2.0), FlightRuntime.field(source, 'z'));
   }
 
-  @:keep public static function copyMatrix3ColumnToVector3(out:Vector3Like, column:Float, source:Matrix3Like):Void {
+  public static function copyMatrix3ColumnToVector3(out:Vector3Like, column:Float, source:Matrix3Like):Void {
     var base:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(column, 2.0, '>'))) {
   throw FlightRuntime.rangeError((('Column ' + column) + ' out of bounds (2)'));
@@ -681,7 +678,7 @@ class Geometry {
     FlightRuntime.setField(out, 'z', FlightRuntime.getIndex(FlightRuntime.field(source, 'm'), (base + 2.0)));
   }
 
-  @:keep public static function copyMatrix3RowFromVector3(out:Matrix3Like, row:Float, source:Vector3Like):Void {
+  public static function copyMatrix3RowFromVector3(out:Matrix3Like, row:Float, source:Vector3Like):Void {
     if (FlightRuntime.truthy(FlightRuntime.compare(row, 2.0, '>'))) {
   throw FlightRuntime.rangeError((('Row ' + row) + ' out of bounds (2)'));
 }
@@ -690,7 +687,7 @@ class Geometry {
     FlightRuntime.setIndex(FlightRuntime.field(out, 'm'), (row + 6.0), FlightRuntime.field(source, 'z'));
   }
 
-  @:keep public static function copyMatrix3RowToVector3(out:Vector3Like, row:Float, source:Matrix3Like):Void {
+  public static function copyMatrix3RowToVector3(out:Vector3Like, row:Float, source:Matrix3Like):Void {
     if (FlightRuntime.truthy(FlightRuntime.compare(row, 2.0, '>'))) {
   throw FlightRuntime.rangeError((('Row ' + row) + ' out of bounds (2)'));
 }
@@ -699,11 +696,11 @@ class Geometry {
     FlightRuntime.setField(out, 'z', FlightRuntime.getIndex(FlightRuntime.field(source, 'm'), (row + 6.0)));
   }
 
-  @:keep public static function copyMatrix4(out:Matrix4Like, source:Matrix4Like):Void {
+  public static function copyMatrix4(out:Matrix4Like, source:Matrix4Like):Void {
     FlightRuntime.callProperty(FlightRuntime.field(out, 'm'), 'set', cast ([FlightRuntime.field(source, 'm')] : Array<Dynamic>));
   }
 
-  @:keep public static function copyMatrix4ColumnFromVector4(out:Matrix4Like, column:Float, source:Vector4Like):Void {
+  public static function copyMatrix4ColumnFromVector4(out:Matrix4Like, column:Float, source:Vector4Like):Void {
     var _out:Dynamic = cast FlightRuntime.UNDEFINED;
     _out = FlightRuntime.field(out, 'm');
     {
@@ -738,7 +735,7 @@ class Geometry {
     }
   }
 
-  @:keep public static function copyMatrix4ColumnToVector4(out:Vector4Like, column:Float, source:Matrix4Like):Void {
+  public static function copyMatrix4ColumnToVector4(out:Vector4Like, column:Float, source:Matrix4Like):Void {
     var _source:Dynamic = cast FlightRuntime.UNDEFINED;
     _source = FlightRuntime.field(source, 'm');
     {
@@ -773,7 +770,7 @@ class Geometry {
     }
   }
 
-  @:keep public static function copyMatrix4RowFromVector4(out:Matrix4Like, row:Float, source:Vector4Like):Void {
+  public static function copyMatrix4RowFromVector4(out:Matrix4Like, row:Float, source:Vector4Like):Void {
     var _out:Dynamic = cast FlightRuntime.UNDEFINED;
     _out = FlightRuntime.field(out, 'm');
     {
@@ -808,7 +805,7 @@ class Geometry {
     }
   }
 
-  @:keep public static function copyMatrix4RowToVector4(out:Vector4Like, row:Float, source:Matrix4Like):Void {
+  public static function copyMatrix4RowToVector4(out:Vector4Like, row:Float, source:Matrix4Like):Void {
     var _source:Dynamic = cast FlightRuntime.UNDEFINED;
     _source = FlightRuntime.field(source, 'm');
     {
@@ -843,7 +840,7 @@ class Geometry {
     }
   }
 
-  @:keep public static function copyMatrixColumnFromVector3(out:MatrixLike, column:Float, source:Vector3Like):Void {
+  public static function copyMatrixColumnFromVector3(out:MatrixLike, column:Float, source:Vector3Like):Void {
     if (FlightRuntime.truthy(FlightRuntime.compare(column, 2.0, '>'))) {
   throw FlightRuntime.rangeError((('Column ' + column) + ' out of bounds (2)'));
 } else { if (FlightRuntime.truthy(FlightRuntime.strictEquals(column, 0.0))) {
@@ -858,7 +855,7 @@ class Geometry {
 } } }
   }
 
-  @:keep public static function copyMatrixColumnToVector3(out:Vector3Like, column:Float, source:MatrixLike):Void {
+  public static function copyMatrixColumnToVector3(out:Vector3Like, column:Float, source:MatrixLike):Void {
     if (FlightRuntime.truthy(FlightRuntime.compare(column, 2.0, '>'))) {
   throw FlightRuntime.rangeError((('Column ' + column) + ' out of bounds (2)'));
 } else { if (FlightRuntime.truthy(FlightRuntime.strictEquals(column, 0.0))) {
@@ -876,7 +873,7 @@ class Geometry {
 } } }
   }
 
-  @:keep public static function copyMatrixRowFromVector3(out:MatrixLike, row:Float, source:Vector3Like):Void {
+  public static function copyMatrixRowFromVector3(out:MatrixLike, row:Float, source:Vector3Like):Void {
     if (FlightRuntime.truthy(FlightRuntime.compare(row, 2.0, '>'))) {
   throw FlightRuntime.rangeError((('Row ' + row) + ' out of bounds (2)'));
 } else { if (FlightRuntime.truthy(FlightRuntime.strictEquals(row, 0.0))) {
@@ -890,7 +887,7 @@ class Geometry {
 } } }
   }
 
-  @:keep public static function copyMatrixRowToVector3(out:Vector3Like, row:Float, source:MatrixLike):Void {
+  public static function copyMatrixRowToVector3(out:Vector3Like, row:Float, source:MatrixLike):Void {
     if (FlightRuntime.truthy(FlightRuntime.compare(row, 2.0, '>'))) {
   throw FlightRuntime.rangeError((('Row ' + row) + ' out of bounds (2)'));
 } else { if (FlightRuntime.truthy(FlightRuntime.strictEquals(row, 0.0))) {
@@ -908,21 +905,21 @@ class Geometry {
 } } }
   }
 
-  @:keep public static function copyPlane(out:PlaneLike, source:PlaneLike):Void {
+  public static function copyPlane(out:PlaneLike, source:PlaneLike):Void {
     FlightRuntime.setField(out, 'a', FlightRuntime.field(source, 'a'));
     FlightRuntime.setField(out, 'b', FlightRuntime.field(source, 'b'));
     FlightRuntime.setField(out, 'c', FlightRuntime.field(source, 'c'));
     FlightRuntime.setField(out, 'd', FlightRuntime.field(source, 'd'));
   }
 
-  @:keep public static function copyQuaternion(out:QuaternionLike, source:QuaternionLike):Void {
+  public static function copyQuaternion(out:QuaternionLike, source:QuaternionLike):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.field(source, 'x'));
     FlightRuntime.setField(out, 'y', FlightRuntime.field(source, 'y'));
     FlightRuntime.setField(out, 'z', FlightRuntime.field(source, 'z'));
     FlightRuntime.setField(out, 'w', FlightRuntime.field(source, 'w'));
   }
 
-  @:keep public static function copyRectangle(out:RectangleLike, source:RectangleLike):Void {
+  public static function copyRectangle(out:RectangleLike, source:RectangleLike):Void {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(out, source))) {
   FlightRuntime.setField(out, 'x', FlightRuntime.field(source, 'x'));
   FlightRuntime.setField(out, 'y', FlightRuntime.field(source, 'y'));
@@ -931,25 +928,25 @@ class Geometry {
 }
   }
 
-  @:keep public static function copyVector2(out:Vector2Like, source:Vector2Like):Void {
+  public static function copyVector2(out:Vector2Like, source:Vector2Like):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.field(source, 'x'));
     FlightRuntime.setField(out, 'y', FlightRuntime.field(source, 'y'));
   }
 
-  @:keep public static function copyVector3(out:Vector3Like, source:Vector3Like):Void {
+  public static function copyVector3(out:Vector3Like, source:Vector3Like):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.field(source, 'x'));
     FlightRuntime.setField(out, 'y', FlightRuntime.field(source, 'y'));
     FlightRuntime.setField(out, 'z', FlightRuntime.field(source, 'z'));
   }
 
-  @:keep public static function copyVector4(out:Vector4Like, source:Vector4Like):Void {
+  public static function copyVector4(out:Vector4Like, source:Vector4Like):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.field(source, 'x'));
     FlightRuntime.setField(out, 'y', FlightRuntime.field(source, 'y'));
     FlightRuntime.setField(out, 'z', FlightRuntime.field(source, 'z'));
     FlightRuntime.setField(out, 'w', FlightRuntime.field(source, 'w'));
   }
 
-  @:keep public static function createAabb(?minX:Float, ?minY:Float, ?minZ:Float, ?maxX:Float, ?maxY:Float, ?maxZ:Float):Aabb {
+  public static function createAabb(?minX:Float, ?minY:Float, ?minZ:Float, ?maxX:Float, ?maxY:Float, ?maxZ:Float):Aabb {
     var min:Dynamic = cast FlightRuntime.UNDEFINED;
     var max:Dynamic = cast FlightRuntime.UNDEFINED;
     min = FlightRuntime.callValue(createVector3, cast ([FlightRuntime.coalesce(minX, function():Dynamic return cast FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY')), FlightRuntime.coalesce(minY, function():Dynamic return cast FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY')), FlightRuntime.coalesce(minZ, function():Dynamic return cast FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'))] : Array<Dynamic>));
@@ -958,24 +955,24 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function createBoundingSphere(?centerX:Float, ?centerY:Float, ?centerZ:Float, ?radius:Float):BoundingSphere {
+  public static function createBoundingSphere(?centerX:Float, ?centerY:Float, ?centerZ:Float, ?radius:Float):BoundingSphere {
     var center:Dynamic = cast FlightRuntime.UNDEFINED;
     center = FlightRuntime.callValue(createVector3, cast ([FlightRuntime.coalesce(centerX, function():Dynamic return cast 0.0), FlightRuntime.coalesce(centerY, function():Dynamic return cast 0.0), FlightRuntime.coalesce(centerZ, function():Dynamic return cast 0.0)] : Array<Dynamic>));
     return cast FlightRuntime.callValue(createEntity, cast ([{ center: center, radius: FlightRuntime.coalesce(radius, function():Dynamic return cast -1.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Capsule {
+  public static function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Capsule {
     return cast FlightRuntime.callValue(createEntity, cast ([{ endX: endX, endY: endY, endZ: endZ, radius: radius, startX: startX, startY: startY, startZ: startZ }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createFrustum():Frustum {
+  public static function createFrustum():Frustum {
     return cast FlightRuntime.callValue(createEntity, cast ([{ bottom: FlightRuntime.callValue(createPlane, cast ([] : Array<Dynamic>)), far: FlightRuntime.callValue(createPlane, cast ([] : Array<Dynamic>)), left: FlightRuntime.callValue(createPlane, cast ([] : Array<Dynamic>)), near: FlightRuntime.callValue(createPlane, cast ([] : Array<Dynamic>)), right: FlightRuntime.callValue(createPlane, cast ([] : Array<Dynamic>)), top: FlightRuntime.callValue(createPlane, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createGradientTransformMatrix(width:Float, height:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Matrix {
+  public static function createGradientTransformMatrix(width:Float, height:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Matrix {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = FlightRuntime.callValue(createMatrix, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(setGradientTransformMatrix, cast ([out, width, height, rotation, tx, ty] : Array<Dynamic>));
@@ -983,12 +980,12 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function createMatrix(?a:Float, ?b:Float, ?c:Float, ?d:Float, ?tx:Float, ?ty:Float):Matrix {
+  public static function createMatrix(?a:Float, ?b:Float, ?c:Float, ?d:Float, ?tx:Float, ?ty:Float):Matrix {
     return cast FlightRuntime.callValue(createEntity, cast ([{ a: FlightRuntime.coalesce(a, function():Dynamic return cast 1.0), b: FlightRuntime.coalesce(b, function():Dynamic return cast 0.0), c: FlightRuntime.coalesce(c, function():Dynamic return cast 0.0), d: FlightRuntime.coalesce(d, function():Dynamic return cast 1.0), tx: FlightRuntime.coalesce(tx, function():Dynamic return cast 0.0), ty: FlightRuntime.coalesce(ty, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createMatrix3(?m00:Float, ?m01:Float, ?m02:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m20:Float, ?m21:Float, ?m22:Float):Matrix3 {
+  public static function createMatrix3(?m00:Float, ?m01:Float, ?m02:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m20:Float, ?m21:Float, ?m22:Float):Matrix3 {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     var out:Matrix3 = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [Geometry.__identity__matrix3]);
@@ -1006,7 +1003,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function createMatrix4(?m00:Float, ?m01:Float, ?m02:Float, ?m03:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m13:Float, ?m20:Float, ?m21:Float, ?m22:Float, ?m23:Float, ?m30:Float, ?m31:Float, ?m32:Float, ?m33:Float):Matrix4 {
+  public static function createMatrix4(?m00:Float, ?m01:Float, ?m02:Float, ?m03:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m13:Float, ?m20:Float, ?m21:Float, ?m22:Float, ?m23:Float, ?m30:Float, ?m31:Float, ?m32:Float, ?m33:Float):Matrix4 {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     var out:Matrix4 = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [Geometry.__identity__matrix4]);
@@ -1031,7 +1028,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function createMatrix4From2D(a:Float, b:Float, c:Float, d:Float, ?tx:Float, ?ty:Float):Matrix4 {
+  public static function createMatrix4From2D(a:Float, b:Float, c:Float, d:Float, ?tx:Float, ?ty:Float):Matrix4 {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = FlightRuntime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(setMatrix4From2D, cast ([out, a, b, c, d, tx, ty] : Array<Dynamic>));
@@ -1039,12 +1036,12 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Obb {
+  public static function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Obb {
     return cast FlightRuntime.callValue(createEntity, cast ([{ centerX: centerX, centerY: centerY, centerZ: centerZ, halfExtentX: halfExtentX, halfExtentY: halfExtentY, halfExtentZ: halfExtentZ, orientationW: orientationW, orientationX: orientationX, orientationY: orientationY, orientationZ: orientationZ }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createOrthographicMatrix4(left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):Matrix4 {
+  public static function createOrthographicMatrix4(left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):Matrix4 {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = FlightRuntime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(setOrthographicMatrix4, cast ([out, left, right, bottom, top, zNear, zFar] : Array<Dynamic>));
@@ -1052,7 +1049,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function createPerspectiveMatrix4(fov:Float, aspect:Float, zNear:Float, zFar:Float):Matrix4 {
+  public static function createPerspectiveMatrix4(fov:Float, aspect:Float, zNear:Float, zFar:Float):Matrix4 {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = FlightRuntime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(setPerspectiveMatrix4, cast ([out, fov, aspect, zNear, zFar] : Array<Dynamic>));
@@ -1060,37 +1057,37 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function createPlane(?a:Float, ?b:Float, ?c:Float, ?d:Float):Plane {
+  public static function createPlane(?a:Float, ?b:Float, ?c:Float, ?d:Float):Plane {
     return cast FlightRuntime.callValue(createEntity, cast ([{ a: FlightRuntime.coalesce(a, function():Dynamic return cast 0.0), b: FlightRuntime.coalesce(b, function():Dynamic return cast 0.0), c: FlightRuntime.coalesce(c, function():Dynamic return cast 0.0), d: FlightRuntime.coalesce(d, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createQuaternion(?x:Float, ?y:Float, ?z:Float, ?w:Float):Quaternion {
+  public static function createQuaternion(?x:Float, ?y:Float, ?z:Float, ?w:Float):Quaternion {
     return cast FlightRuntime.callValue(createEntity, cast ([{ x: FlightRuntime.coalesce(x, function():Dynamic return cast 0.0), y: FlightRuntime.coalesce(y, function():Dynamic return cast 0.0), z: FlightRuntime.coalesce(z, function():Dynamic return cast 0.0), w: FlightRuntime.coalesce(w, function():Dynamic return cast 1.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createRay3D(?originX:Float, ?originY:Float, ?originZ:Float, ?directionX:Float, ?directionY:Float, ?directionZ:Float):Ray3D {
+  public static function createRay3D(?originX:Float, ?originY:Float, ?originZ:Float, ?directionX:Float, ?directionY:Float, ?directionZ:Float):Ray3D {
     return cast FlightRuntime.callValue(createEntity, cast ([{ direction: FlightRuntime.callValue(createVector3, cast ([FlightRuntime.coalesce(directionX, function():Dynamic return cast 0.0), FlightRuntime.coalesce(directionY, function():Dynamic return cast 0.0), FlightRuntime.coalesce(directionZ, function():Dynamic return cast 1.0)] : Array<Dynamic>)), origin: FlightRuntime.callValue(createVector3, cast ([FlightRuntime.coalesce(originX, function():Dynamic return cast 0.0), FlightRuntime.coalesce(originY, function():Dynamic return cast 0.0), FlightRuntime.coalesce(originZ, function():Dynamic return cast 0.0)] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createRectangle(?x:Float, ?y:Float, ?width:Float, ?height:Float):Rectangle {
+  public static function createRectangle(?x:Float, ?y:Float, ?width:Float, ?height:Float):Rectangle {
     return cast FlightRuntime.callValue(createEntity, cast ([{ x: FlightRuntime.coalesce(x, function():Dynamic return cast 0.0), y: FlightRuntime.coalesce(y, function():Dynamic return cast 0.0), width: FlightRuntime.coalesce(width, function():Dynamic return cast 0.0), height: FlightRuntime.coalesce(height, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createTransform2D(?x:Float, ?y:Float, ?rotation:Float, ?scaleX:Float, ?scaleY:Float, ?skewX:Float, ?skewY:Float, ?pivotX:Float, ?pivotY:Float):Transform2D {
+  public static function createTransform2D(?x:Float, ?y:Float, ?rotation:Float, ?scaleX:Float, ?scaleY:Float, ?skewX:Float, ?skewY:Float, ?pivotX:Float, ?pivotY:Float):Transform2D {
     return cast FlightRuntime.callValue(createEntity, cast ([{ pivotX: FlightRuntime.coalesce(pivotX, function():Dynamic return cast 0.0), pivotY: FlightRuntime.coalesce(pivotY, function():Dynamic return cast 0.0), rotation: FlightRuntime.coalesce(rotation, function():Dynamic return cast 0.0), scaleX: FlightRuntime.coalesce(scaleX, function():Dynamic return cast 1.0), scaleY: FlightRuntime.coalesce(scaleY, function():Dynamic return cast 1.0), skewX: FlightRuntime.coalesce(skewX, function():Dynamic return cast 0.0), skewY: FlightRuntime.coalesce(skewY, function():Dynamic return cast 0.0), x: FlightRuntime.coalesce(x, function():Dynamic return cast 0.0), y: FlightRuntime.coalesce(y, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createTransform3D():Transform3D {
+  public static function createTransform3D():Transform3D {
     return cast FlightRuntime.callValue(createEntity, cast ([{ rotation: FlightRuntime.callValue(createQuaternion, cast ([] : Array<Dynamic>)), scale: FlightRuntime.callValue(createVector3, cast ([1.0, 1.0, 1.0] : Array<Dynamic>)), position: FlightRuntime.callValue(createVector3, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createTransformMatrix(scaleX:Float, scaleY:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Matrix {
+  public static function createTransformMatrix(scaleX:Float, scaleY:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Matrix {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = FlightRuntime.callValue(createMatrix, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(setTransformMatrix, cast ([out, scaleX, scaleY, rotation, tx, ty] : Array<Dynamic>));
@@ -1098,12 +1095,12 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function createVector2(?x:Float, ?y:Float):Vector2 {
+  public static function createVector2(?x:Float, ?y:Float):Vector2 {
     return cast FlightRuntime.callValue(createEntity, cast ([{ x: FlightRuntime.coalesce(x, function():Dynamic return cast 0.0), y: FlightRuntime.coalesce(y, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createVector2FromPolar(length:Float, angle:Float):Vector2 {
+  public static function createVector2FromPolar(length:Float, angle:Float):Vector2 {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = FlightRuntime.callValue(createVector2, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(setVector2FromPolar, cast ([out, length, angle] : Array<Dynamic>));
@@ -1111,12 +1108,12 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function createVector3(?x:Float, ?y:Float, ?z:Float):Vector3 {
+  public static function createVector3(?x:Float, ?y:Float, ?z:Float):Vector3 {
     return cast FlightRuntime.callValue(createEntity, cast ([{ x: FlightRuntime.coalesce(x, function():Dynamic return cast 0.0), y: FlightRuntime.coalesce(y, function():Dynamic return cast 0.0), z: FlightRuntime.coalesce(z, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createVector3FromSpherical(radius:Float, theta:Float, phi:Float):Vector3 {
+  public static function createVector3FromSpherical(radius:Float, theta:Float, phi:Float):Vector3 {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = FlightRuntime.callValue(createVector3, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(setVector3FromSpherical, cast ([out, radius, theta, phi] : Array<Dynamic>));
@@ -1124,12 +1121,12 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function createVector4(?x:Float, ?y:Float, ?z:Float, ?w:Float):Vector4 {
+  public static function createVector4(?x:Float, ?y:Float, ?z:Float, ?w:Float):Vector4 {
     return cast FlightRuntime.callValue(createEntity, cast ([{ x: FlightRuntime.coalesce(x, function():Dynamic return cast 0.0), y: FlightRuntime.coalesce(y, function():Dynamic return cast 0.0), z: FlightRuntime.coalesce(z, function():Dynamic return cast 0.0), w: FlightRuntime.coalesce(w, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function crossVector3(out:Vector3Like, source:Vector3Like, other:Vector3Like):Void {
+  public static function crossVector3(out:Vector3Like, source:Vector3Like, other:Vector3Like):Void {
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
     var z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1141,7 +1138,7 @@ class Geometry {
     FlightRuntime.setField(out, 'z', z);
   }
 
-  @:keep public static function decomposeMatrix4(outPosition:Vector3Like, outRotation:QuaternionLike, outScale:Vector3Like, m:Matrix4Like):Void {
+  public static function decomposeMatrix4(outPosition:Vector3Like, outRotation:QuaternionLike, outScale:Vector3Like, m:Matrix4Like):Void {
     var _m:Dynamic = cast FlightRuntime.UNDEFINED;
     var m00:Dynamic = cast FlightRuntime.UNDEFINED;
     var m01:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1236,11 +1233,11 @@ class Geometry {
 } } }
   }
 
-  @:keep public static function decomposeMatrix4ToTransform3D(out:Transform3DLike, m:Matrix4Like):Void {
+  public static function decomposeMatrix4ToTransform3D(out:Transform3DLike, m:Matrix4Like):Void {
     FlightRuntime.callValue(decomposeMatrix4, cast ([FlightRuntime.field(out, 'position'), FlightRuntime.field(out, 'rotation'), FlightRuntime.field(out, 'scale'), m] : Array<Dynamic>));
   }
 
-  @:keep public static function decomposeMatrixToTransform2D(out:Transform2DLike, source:MatrixLike):Void {
+  public static function decomposeMatrixToTransform2D(out:Transform2DLike, source:MatrixLike):Void {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     var c:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1274,7 +1271,7 @@ class Geometry {
     FlightRuntime.setField(out, 'y', FlightRuntime.field(source, 'ty'));
   }
 
-  @:keep public static function divideVector2(out:Vector2Like, source:Vector2Like, divisor:Vector2Like):Void {
+  public static function divideVector2(out:Vector2Like, source:Vector2Like, divisor:Vector2Like):Void {
     var sx:Dynamic = cast FlightRuntime.UNDEFINED;
     var sy:Dynamic = cast FlightRuntime.UNDEFINED;
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1287,7 +1284,7 @@ class Geometry {
     FlightRuntime.setField(out, 'y', FlightRuntime.select(!FlightRuntime.strictEquals(dy, 0.0), function():Dynamic return cast (sy / dy), function():Dynamic return cast 0.0));
   }
 
-  @:keep public static function divideVector3(out:Vector3Like, source:Vector3Like, divisor:Vector3Like):Void {
+  public static function divideVector3(out:Vector3Like, source:Vector3Like, divisor:Vector3Like):Void {
     var sx:Dynamic = cast FlightRuntime.UNDEFINED;
     var sy:Dynamic = cast FlightRuntime.UNDEFINED;
     var sz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1305,7 +1302,7 @@ class Geometry {
     FlightRuntime.setField(out, 'z', FlightRuntime.select(!FlightRuntime.strictEquals(dz, 0.0), function():Dynamic return cast (sz / dz), function():Dynamic return cast 0.0));
   }
 
-  @:keep public static function divideVector4(out:Vector4Like, source:Vector4Like, divisor:Vector4Like):Void {
+  public static function divideVector4(out:Vector4Like, source:Vector4Like, divisor:Vector4Like):Void {
     var sx:Dynamic = cast FlightRuntime.UNDEFINED;
     var sy:Dynamic = cast FlightRuntime.UNDEFINED;
     var sz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1328,7 +1325,7 @@ class Geometry {
     FlightRuntime.setField(out, 'w', FlightRuntime.select(!FlightRuntime.strictEquals(dw, 0.0), function():Dynamic return cast (sw / dw), function():Dynamic return cast 0.0));
   }
 
-  @:keep public static function enclosesRectangle(source:RectangleLike, other:RectangleLike):Bool {
+  public static function enclosesRectangle(source:RectangleLike, other:RectangleLike):Bool {
     var sx0:Dynamic = cast FlightRuntime.UNDEFINED;
     var sx1:Dynamic = cast FlightRuntime.UNDEFINED;
     var sy0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1349,14 +1346,14 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function equalsMatrix(a:Null<MatrixLike>, b:Null<MatrixLike>, compareTranslation:Bool = true):Bool {
+  public static function equalsMatrix(a:Null<MatrixLike>, b:Null<MatrixLike>, compareTranslation:Bool = true):Bool {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(a, b))) { return cast true; }
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(a), function():Dynamic return cast !FlightRuntime.truthy(b)))) { return cast false; }
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.orValue(!FlightRuntime.truthy(compareTranslation), function():Dynamic return cast FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.field(a, 'tx'), FlightRuntime.field(b, 'tx')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'ty'), FlightRuntime.field(b, 'ty')))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'a'), FlightRuntime.field(b, 'a'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'b'), FlightRuntime.field(b, 'b'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'c'), FlightRuntime.field(b, 'c'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'd'), FlightRuntime.field(b, 'd')));
     return cast null;
   }
 
-  @:keep public static function equalsMatrix3(a:Null<Matrix3Like>, b:Null<Matrix3Like>):Bool {
+  public static function equalsMatrix3(a:Null<Matrix3Like>, b:Null<Matrix3Like>):Bool {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(a, b))) { return cast true; }
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(a), function():Dynamic return cast !FlightRuntime.truthy(b)))) { return cast false; }
     {
@@ -1370,7 +1367,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function equalsMatrix4(a:Null<Matrix4Like>, b:Null<Matrix4Like>):Bool {
+  public static function equalsMatrix4(a:Null<Matrix4Like>, b:Null<Matrix4Like>):Bool {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(a, b))) { return cast true; }
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(a), function():Dynamic return cast !FlightRuntime.truthy(b)))) { return cast false; }
     {
@@ -1384,39 +1381,39 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function equalsQuaternion(a:Null<QuaternionLike>, b:Null<QuaternionLike>):Bool {
+  public static function equalsQuaternion(a:Null<QuaternionLike>, b:Null<QuaternionLike>):Bool {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(a, b))) { return cast true; }
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(a), function():Dynamic return cast !FlightRuntime.truthy(b)))) { return cast false; }
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.field(a, 'x'), FlightRuntime.field(b, 'x')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'y'), FlightRuntime.field(b, 'y'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'z'), FlightRuntime.field(b, 'z'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'w'), FlightRuntime.field(b, 'w')));
     return cast null;
   }
 
-  @:keep public static function equalsRectangle(a:Null<RectangleLike>, b:Null<RectangleLike>):Bool {
+  public static function equalsRectangle(a:Null<RectangleLike>, b:Null<RectangleLike>):Bool {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(a, b))) { return cast true; }
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(a), function():Dynamic return cast !FlightRuntime.truthy(b)))) { return cast false; }
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.field(a, 'x'), FlightRuntime.field(b, 'x')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'y'), FlightRuntime.field(b, 'y'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'width'), FlightRuntime.field(b, 'width'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'height'), FlightRuntime.field(b, 'height')));
     return cast null;
   }
 
-  @:keep public static function equalsVector2(a:Null<Vector2Like>, b:Null<Vector2Like>):Bool {
+  public static function equalsVector2(a:Null<Vector2Like>, b:Null<Vector2Like>):Bool {
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(a), function():Dynamic return cast !FlightRuntime.truthy(b)))) { return cast false; }
     return cast FlightRuntime.orValue(FlightRuntime.strictEquals(a, b), function():Dynamic return cast FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.field(a, 'x'), FlightRuntime.field(b, 'x')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'y'), FlightRuntime.field(b, 'y'))));
     return cast null;
   }
 
-  @:keep public static function equalsVector3(a:Null<Vector3Like>, b:Null<Vector3Like>):Bool {
+  public static function equalsVector3(a:Null<Vector3Like>, b:Null<Vector3Like>):Bool {
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(a), function():Dynamic return cast !FlightRuntime.truthy(b)))) { return cast false; }
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.field(a, 'x'), FlightRuntime.field(b, 'x')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'y'), FlightRuntime.field(b, 'y'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'z'), FlightRuntime.field(b, 'z')));
     return cast null;
   }
 
-  @:keep public static function equalsVector4(a:Null<Vector4Like>, b:Null<Vector4Like>):Bool {
+  public static function equalsVector4(a:Null<Vector4Like>, b:Null<Vector4Like>):Bool {
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(a), function():Dynamic return cast !FlightRuntime.truthy(b)))) { return cast false; }
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.field(a, 'x'), FlightRuntime.field(b, 'x')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'y'), FlightRuntime.field(b, 'y'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'z'), FlightRuntime.field(b, 'z'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'w'), FlightRuntime.field(b, 'w')));
     return cast null;
   }
 
-  @:keep public static function expandAabbByPoint(out:AabbLike, aabb:AabbLike, point:Vector3Like):Void {
+  public static function expandAabbByPoint(out:AabbLike, aabb:AabbLike, point:Vector3Like):Void {
     var px:Dynamic = cast FlightRuntime.UNDEFINED;
     var py:Dynamic = cast FlightRuntime.UNDEFINED;
     var pz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1431,7 +1428,7 @@ class Geometry {
     FlightRuntime.setField(FlightRuntime.field(out, 'max'), 'z', FlightRuntime.callProperty(HxMath, 'max', cast ([FlightRuntime.field(FlightRuntime.field(aabb, 'max'), 'z'), pz] : Array<Dynamic>)));
   }
 
-  @:keep public static function expandAabbBySphere(out:AabbLike, aabb:AabbLike, sphere:BoundingSphereLike):Void {
+  public static function expandAabbBySphere(out:AabbLike, aabb:AabbLike, sphere:BoundingSphereLike):Void {
     var cx:Dynamic = cast FlightRuntime.UNDEFINED;
     var cy:Dynamic = cast FlightRuntime.UNDEFINED;
     var cz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1457,29 +1454,29 @@ class Geometry {
     FlightRuntime.setField(FlightRuntime.field(out, 'max'), 'z', FlightRuntime.callProperty(HxMath, 'max', cast ([FlightRuntime.field(FlightRuntime.field(aabb, 'max'), 'z'), (cz + r)] : Array<Dynamic>)));
   }
 
-  @:keep public static function expandRectangleToPoint(out:RectangleLike, sourceRect:RectangleLike, sourceVec2:Vector2Like):Void {
+  public static function expandRectangleToPoint(out:RectangleLike, sourceRect:RectangleLike, sourceVec2:Vector2Like):Void {
     FlightRuntime.callValue(inflateRectangle, cast ([out, sourceRect, FlightRuntime.field(sourceVec2, 'x'), FlightRuntime.field(sourceVec2, 'y')] : Array<Dynamic>));
   }
 
-  @:keep public static function getAabbCenter(out:Vector3Like, aabb:AabbLike):Void {
+  public static function getAabbCenter(out:Vector3Like, aabb:AabbLike):Void {
     FlightRuntime.setField(out, 'x', ((FlightRuntime.field(FlightRuntime.field(aabb, 'min'), 'x') + FlightRuntime.field(FlightRuntime.field(aabb, 'max'), 'x')) * 0.5));
     FlightRuntime.setField(out, 'y', ((FlightRuntime.field(FlightRuntime.field(aabb, 'min'), 'y') + FlightRuntime.field(FlightRuntime.field(aabb, 'max'), 'y')) * 0.5));
     FlightRuntime.setField(out, 'z', ((FlightRuntime.field(FlightRuntime.field(aabb, 'min'), 'z') + FlightRuntime.field(FlightRuntime.field(aabb, 'max'), 'z')) * 0.5));
   }
 
-  @:keep public static function getAabbExtents(out:Vector3Like, aabb:AabbLike):Void {
+  public static function getAabbExtents(out:Vector3Like, aabb:AabbLike):Void {
     FlightRuntime.setField(out, 'x', ((FlightRuntime.field(FlightRuntime.field(aabb, 'max'), 'x') - FlightRuntime.field(FlightRuntime.field(aabb, 'min'), 'x')) * 0.5));
     FlightRuntime.setField(out, 'y', ((FlightRuntime.field(FlightRuntime.field(aabb, 'max'), 'y') - FlightRuntime.field(FlightRuntime.field(aabb, 'min'), 'y')) * 0.5));
     FlightRuntime.setField(out, 'z', ((FlightRuntime.field(FlightRuntime.field(aabb, 'max'), 'z') - FlightRuntime.field(FlightRuntime.field(aabb, 'min'), 'z')) * 0.5));
   }
 
-  @:keep public static function getAabbSize(out:Vector3Like, aabb:AabbLike):Void {
+  public static function getAabbSize(out:Vector3Like, aabb:AabbLike):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(FlightRuntime.field(aabb, 'max'), 'x') - FlightRuntime.field(FlightRuntime.field(aabb, 'min'), 'x')));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(FlightRuntime.field(aabb, 'max'), 'y') - FlightRuntime.field(FlightRuntime.field(aabb, 'min'), 'y')));
     FlightRuntime.setField(out, 'z', (FlightRuntime.field(FlightRuntime.field(aabb, 'max'), 'z') - FlightRuntime.field(FlightRuntime.field(aabb, 'min'), 'z')));
   }
 
-  @:keep public static function getClosestPointBetweenRay3Ds(outA:Vector3Like, outB:Vector3Like, a:Ray3DLike, b:Ray3DLike):Void {
+  public static function getClosestPointBetweenRay3Ds(outA:Vector3Like, outB:Vector3Like, a:Ray3DLike, b:Ray3DLike):Void {
     var aox:Dynamic = cast FlightRuntime.UNDEFINED;
     var aoy:Dynamic = cast FlightRuntime.UNDEFINED;
     var aoz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1544,7 +1541,7 @@ class Geometry {
     FlightRuntime.setField(outB, 'z', (boz + (bdz * tb)));
   }
 
-  @:keep public static function getClosestPointOnAabb(out:Vector3Like, aabb:AabbLike, point:Vector3Like):Void {
+  public static function getClosestPointOnAabb(out:Vector3Like, aabb:AabbLike, point:Vector3Like):Void {
     var px:Dynamic = cast FlightRuntime.UNDEFINED;
     var py:Dynamic = cast FlightRuntime.UNDEFINED;
     var pz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1556,7 +1553,7 @@ class Geometry {
     FlightRuntime.setField(out, 'z', FlightRuntime.callProperty(HxMath, 'min', cast ([FlightRuntime.callProperty(HxMath, 'max', cast ([pz, FlightRuntime.field(FlightRuntime.field(aabb, 'min'), 'z')] : Array<Dynamic>)), FlightRuntime.field(FlightRuntime.field(aabb, 'max'), 'z')] : Array<Dynamic>)));
   }
 
-  @:keep public static function getClosestPointOnBoundingSphere(out:Vector3Like, sphere:BoundingSphereLike, point:Vector3Like):Void {
+  public static function getClosestPointOnBoundingSphere(out:Vector3Like, sphere:BoundingSphereLike, point:Vector3Like):Void {
     var cx:Dynamic = cast FlightRuntime.UNDEFINED;
     var cy:Dynamic = cast FlightRuntime.UNDEFINED;
     var cz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1592,7 +1589,7 @@ class Geometry {
     FlightRuntime.setField(out, 'z', (cz + (dz * scale)));
   }
 
-  @:keep public static function getClosestPointOnCapsule(out:Vector3Like, capsule:CapsuleLike, point:Vector3Like):Void {
+  public static function getClosestPointOnCapsule(out:Vector3Like, capsule:CapsuleLike, point:Vector3Like):Void {
     var ax:Dynamic = cast FlightRuntime.UNDEFINED;
     var ay:Dynamic = cast FlightRuntime.UNDEFINED;
     var az:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1654,7 +1651,7 @@ class Geometry {
 }
   }
 
-  @:keep public static function getClosestPointOnObb(out:Vector3Like, obb:ObbLike, point:Vector3Like):Void {
+  public static function getClosestPointOnObb(out:Vector3Like, obb:ObbLike, point:Vector3Like):Void {
     var cx:Dynamic = cast FlightRuntime.UNDEFINED;
     var cy:Dynamic = cast FlightRuntime.UNDEFINED;
     var cz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1710,7 +1707,7 @@ class Geometry {
     FlightRuntime.setField(out, 'z', (((cz + (d0 * az0)) + (d1 * az1)) + (d2 * az2)));
   }
 
-  @:keep public static function getClosestPointOnPlane(out:Vector3Like, plane:PlaneLike, point:Vector3Like):Void {
+  public static function getClosestPointOnPlane(out:Vector3Like, plane:PlaneLike, point:Vector3Like):Void {
     var px:Dynamic = cast FlightRuntime.UNDEFINED;
     var py:Dynamic = cast FlightRuntime.UNDEFINED;
     var pz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1724,7 +1721,7 @@ class Geometry {
     FlightRuntime.setField(out, 'z', (pz - (dist * FlightRuntime.field(plane, 'c'))));
   }
 
-  @:keep public static function getClosestPointOnRay3D(out:Vector3Like, ray:Ray3DLike, point:Vector3Like):Void {
+  public static function getClosestPointOnRay3D(out:Vector3Like, ray:Ray3DLike, point:Vector3Like):Void {
     var ox:Dynamic = cast FlightRuntime.UNDEFINED;
     var oy:Dynamic = cast FlightRuntime.UNDEFINED;
     var oz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1753,7 +1750,7 @@ class Geometry {
     FlightRuntime.setField(out, 'z', (oz + (dz * t)));
   }
 
-  @:keep public static function getFrustumCorners(out:Array<Vector3Like>, inverseViewProjection:Matrix4Like):Void {
+  public static function getFrustumCorners(out:Array<Vector3Like>, inverseViewProjection:Matrix4Like):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     var ndcCorners:Array<Array<Float>> = cast FlightRuntime.UNDEFINED;
     var len:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1781,31 +1778,31 @@ class Geometry {
     }
   }
 
-  @:keep public static function getMatrix3Determinant(source:Matrix3Like):Float {
+  public static function getMatrix3Determinant(source:Matrix3Like):Float {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.field(source, 'm');
     return cast (((((((FlightRuntime.getIndex(m, 0.0) * FlightRuntime.getIndex(m, 4.0)) * FlightRuntime.getIndex(m, 8.0)) + ((FlightRuntime.getIndex(m, 1.0) * FlightRuntime.getIndex(m, 5.0)) * FlightRuntime.getIndex(m, 6.0))) + ((FlightRuntime.getIndex(m, 2.0) * FlightRuntime.getIndex(m, 3.0)) * FlightRuntime.getIndex(m, 7.0))) - ((FlightRuntime.getIndex(m, 2.0) * FlightRuntime.getIndex(m, 4.0)) * FlightRuntime.getIndex(m, 6.0))) - ((FlightRuntime.getIndex(m, 1.0) * FlightRuntime.getIndex(m, 3.0)) * FlightRuntime.getIndex(m, 8.0))) - ((FlightRuntime.getIndex(m, 0.0) * FlightRuntime.getIndex(m, 5.0)) * FlightRuntime.getIndex(m, 7.0)));
     return cast null;
   }
 
-  @:keep public static function getMatrix3Element(source:Matrix3Like, row:Float, column:Float):Float {
+  public static function getMatrix3Element(source:Matrix3Like, row:Float, column:Float):Float {
     return cast FlightRuntime.getIndex(FlightRuntime.field(source, 'm'), ((column * 3.0) + row));
     return cast null;
   }
 
-  @:keep public static function getMatrix4Determinant(source:Matrix4Like):Float {
+  public static function getMatrix4Determinant(source:Matrix4Like):Float {
     var _source:Dynamic = cast FlightRuntime.UNDEFINED;
     _source = FlightRuntime.field(source, 'm');
     return cast (1.0 * ((((((((FlightRuntime.getIndex(_source, 0.0) * FlightRuntime.getIndex(_source, 5.0)) - (FlightRuntime.getIndex(_source, 4.0) * FlightRuntime.getIndex(_source, 1.0))) * ((FlightRuntime.getIndex(_source, 10.0) * FlightRuntime.getIndex(_source, 15.0)) - (FlightRuntime.getIndex(_source, 14.0) * FlightRuntime.getIndex(_source, 11.0)))) - (((FlightRuntime.getIndex(_source, 0.0) * FlightRuntime.getIndex(_source, 9.0)) - (FlightRuntime.getIndex(_source, 8.0) * FlightRuntime.getIndex(_source, 1.0))) * ((FlightRuntime.getIndex(_source, 6.0) * FlightRuntime.getIndex(_source, 15.0)) - (FlightRuntime.getIndex(_source, 14.0) * FlightRuntime.getIndex(_source, 7.0))))) + (((FlightRuntime.getIndex(_source, 0.0) * FlightRuntime.getIndex(_source, 13.0)) - (FlightRuntime.getIndex(_source, 12.0) * FlightRuntime.getIndex(_source, 1.0))) * ((FlightRuntime.getIndex(_source, 6.0) * FlightRuntime.getIndex(_source, 11.0)) - (FlightRuntime.getIndex(_source, 10.0) * FlightRuntime.getIndex(_source, 7.0))))) + (((FlightRuntime.getIndex(_source, 4.0) * FlightRuntime.getIndex(_source, 9.0)) - (FlightRuntime.getIndex(_source, 8.0) * FlightRuntime.getIndex(_source, 5.0))) * ((FlightRuntime.getIndex(_source, 2.0) * FlightRuntime.getIndex(_source, 15.0)) - (FlightRuntime.getIndex(_source, 14.0) * FlightRuntime.getIndex(_source, 3.0))))) - (((FlightRuntime.getIndex(_source, 4.0) * FlightRuntime.getIndex(_source, 13.0)) - (FlightRuntime.getIndex(_source, 12.0) * FlightRuntime.getIndex(_source, 5.0))) * ((FlightRuntime.getIndex(_source, 2.0) * FlightRuntime.getIndex(_source, 11.0)) - (FlightRuntime.getIndex(_source, 10.0) * FlightRuntime.getIndex(_source, 3.0))))) + (((FlightRuntime.getIndex(_source, 8.0) * FlightRuntime.getIndex(_source, 13.0)) - (FlightRuntime.getIndex(_source, 12.0) * FlightRuntime.getIndex(_source, 9.0))) * ((FlightRuntime.getIndex(_source, 2.0) * FlightRuntime.getIndex(_source, 7.0)) - (FlightRuntime.getIndex(_source, 6.0) * FlightRuntime.getIndex(_source, 3.0))))));
     return cast null;
   }
 
-  @:keep public static function getMatrix4Element(source:Matrix4Like, row:Float, column:Float):Float {
+  public static function getMatrix4Element(source:Matrix4Like, row:Float, column:Float):Float {
     return cast FlightRuntime.getIndex(FlightRuntime.field(source, 'm'), ((column * 4.0) + row));
     return cast null;
   }
 
-  @:keep public static function getMatrix4Position(out:Vector3Like, source:Matrix4Like):Void {
+  public static function getMatrix4Position(out:Vector3Like, source:Matrix4Like):Void {
     var _source:Dynamic = cast FlightRuntime.UNDEFINED;
     _source = FlightRuntime.field(source, 'm');
     FlightRuntime.setField(out, 'x', FlightRuntime.getIndex(_source, 12.0));
@@ -1813,30 +1810,30 @@ class Geometry {
     FlightRuntime.setField(out, 'z', FlightRuntime.getIndex(_source, 14.0));
   }
 
-  @:keep public static function getPlaneCoplanarPoint(out:Vector3Like, plane:PlaneLike):Void {
+  public static function getPlaneCoplanarPoint(out:Vector3Like, plane:PlaneLike):Void {
     FlightRuntime.setField(out, 'x', (-FlightRuntime.field(plane, 'a') * FlightRuntime.field(plane, 'd')));
     FlightRuntime.setField(out, 'y', (-FlightRuntime.field(plane, 'b') * FlightRuntime.field(plane, 'd')));
     FlightRuntime.setField(out, 'z', (-FlightRuntime.field(plane, 'c') * FlightRuntime.field(plane, 'd')));
   }
 
-  @:keep public static function getPlaneSignedDistanceToPoint(plane:PlaneLike, point:Vector3Like):Float {
+  public static function getPlaneSignedDistanceToPoint(plane:PlaneLike, point:Vector3Like):Float {
     return cast ((((FlightRuntime.field(plane, 'a') * FlightRuntime.field(point, 'x')) + (FlightRuntime.field(plane, 'b') * FlightRuntime.field(point, 'y'))) + (FlightRuntime.field(plane, 'c') * FlightRuntime.field(point, 'z'))) + FlightRuntime.field(plane, 'd'));
     return cast null;
   }
 
-  @:keep public static function getQuaternionAngleBetween(a:QuaternionLike, b:QuaternionLike):Float {
+  public static function getQuaternionAngleBetween(a:QuaternionLike, b:QuaternionLike):Float {
     var dot:Dynamic = cast FlightRuntime.UNDEFINED;
     dot = FlightRuntime.callProperty(HxMath, 'abs', cast ([FlightRuntime.callValue(getQuaternionDot, cast ([a, b] : Array<Dynamic>))] : Array<Dynamic>));
     return cast (2.0 * FlightRuntime.callProperty(HxMath, 'acos', cast ([FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, dot] : Array<Dynamic>))] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function getQuaternionDot(a:QuaternionLike, b:QuaternionLike):Float {
+  public static function getQuaternionDot(a:QuaternionLike, b:QuaternionLike):Float {
     return cast ((((FlightRuntime.field(a, 'x') * FlightRuntime.field(b, 'x')) + (FlightRuntime.field(a, 'y') * FlightRuntime.field(b, 'y'))) + (FlightRuntime.field(a, 'z') * FlightRuntime.field(b, 'z'))) + (FlightRuntime.field(a, 'w') * FlightRuntime.field(b, 'w')));
     return cast null;
   }
 
-  @:keep public static function getQuaternionEuler(out:Vector3Like, source:QuaternionLike, order:EulerOrder = 'XYZ'):Void {
+  public static function getQuaternionEuler(out:Vector3Like, source:QuaternionLike, order:EulerOrder = 'XYZ'):Void {
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
     var z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1958,7 +1955,7 @@ class Geometry {
     }
   }
 
-  @:keep public static function getRay3DPointAt(out:Vector3Like, ray:Ray3DLike, t:Float):Void {
+  public static function getRay3DPointAt(out:Vector3Like, ray:Ray3DLike, t:Float):Void {
     var ox:Dynamic = cast FlightRuntime.UNDEFINED;
     var oy:Dynamic = cast FlightRuntime.UNDEFINED;
     var oz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1976,72 +1973,72 @@ class Geometry {
     FlightRuntime.setField(out, 'z', (oz + (dz * t)));
   }
 
-  @:keep public static function getRectangleBottom(source:RectangleLike):Float {
+  public static function getRectangleBottom(source:RectangleLike):Float {
     return cast (FlightRuntime.field(source, 'y') + FlightRuntime.field(source, 'height'));
     return cast null;
   }
 
-  @:keep public static function getRectangleBottomRight(out:Vector2Like, source:RectangleLike):Void {
+  public static function getRectangleBottomRight(out:Vector2Like, source:RectangleLike):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(source, 'x') + FlightRuntime.field(source, 'width')));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(source, 'y') + FlightRuntime.field(source, 'height')));
   }
 
-  @:keep public static function getRectangleLeft(source:RectangleLike):Float {
+  public static function getRectangleLeft(source:RectangleLike):Float {
     return cast FlightRuntime.field(source, 'x');
     return cast null;
   }
 
-  @:keep public static function getRectangleMaxX(source:RectangleLike):Float {
+  public static function getRectangleMaxX(source:RectangleLike):Float {
     return cast FlightRuntime.callProperty(HxMath, 'max', cast ([FlightRuntime.field(source, 'x'), (FlightRuntime.field(source, 'x') + FlightRuntime.field(source, 'width'))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getRectangleMaxY(source:RectangleLike):Float {
+  public static function getRectangleMaxY(source:RectangleLike):Float {
     return cast FlightRuntime.callProperty(HxMath, 'max', cast ([FlightRuntime.field(source, 'y'), (FlightRuntime.field(source, 'y') + FlightRuntime.field(source, 'height'))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getRectangleMinX(source:RectangleLike):Float {
+  public static function getRectangleMinX(source:RectangleLike):Float {
     return cast FlightRuntime.callProperty(HxMath, 'min', cast ([FlightRuntime.field(source, 'x'), (FlightRuntime.field(source, 'x') + FlightRuntime.field(source, 'width'))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getRectangleMinY(source:RectangleLike):Float {
+  public static function getRectangleMinY(source:RectangleLike):Float {
     return cast FlightRuntime.callProperty(HxMath, 'min', cast ([FlightRuntime.field(source, 'y'), (FlightRuntime.field(source, 'y') + FlightRuntime.field(source, 'height'))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getRectangleNormalizedBottomRight(out:Vector2Like, source:RectangleLike):Void {
+  public static function getRectangleNormalizedBottomRight(out:Vector2Like, source:RectangleLike):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.callValue(getRectangleMaxX, cast ([source] : Array<Dynamic>)));
     FlightRuntime.setField(out, 'y', FlightRuntime.callValue(getRectangleMaxY, cast ([source] : Array<Dynamic>)));
   }
 
-  @:keep public static function getRectangleNormalizedTopLeft(out:Vector2Like, source:RectangleLike):Void {
+  public static function getRectangleNormalizedTopLeft(out:Vector2Like, source:RectangleLike):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.callValue(getRectangleMinX, cast ([source] : Array<Dynamic>)));
     FlightRuntime.setField(out, 'y', FlightRuntime.callValue(getRectangleMinY, cast ([source] : Array<Dynamic>)));
   }
 
-  @:keep public static function getRectangleRight(source:RectangleLike):Float {
+  public static function getRectangleRight(source:RectangleLike):Float {
     return cast (FlightRuntime.field(source, 'x') + FlightRuntime.field(source, 'width'));
     return cast null;
   }
 
-  @:keep public static function getRectangleSize(out:Vector2Like, source:RectangleLike):Void {
+  public static function getRectangleSize(out:Vector2Like, source:RectangleLike):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.field(source, 'width'));
     FlightRuntime.setField(out, 'y', FlightRuntime.field(source, 'height'));
   }
 
-  @:keep public static function getRectangleTop(source:RectangleLike):Float {
+  public static function getRectangleTop(source:RectangleLike):Float {
     return cast FlightRuntime.field(source, 'y');
     return cast null;
   }
 
-  @:keep public static function getRectangleTopLeft(out:Vector2Like, source:RectangleLike):Void {
+  public static function getRectangleTopLeft(out:Vector2Like, source:RectangleLike):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.field(source, 'x'));
     FlightRuntime.setField(out, 'y', FlightRuntime.field(source, 'y'));
   }
 
-  @:keep public static function getVector2AngleBetween(a:Vector2Like, b:Vector2Like):Float {
+  public static function getVector2AngleBetween(a:Vector2Like, b:Vector2Like):Float {
     var la:Dynamic = cast FlightRuntime.UNDEFINED;
     var lb:Dynamic = cast FlightRuntime.UNDEFINED;
     var _dot:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2053,7 +2050,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function getVector2Distance(a:Vector2Like, b:Vector2Like):Float {
+  public static function getVector2Distance(a:Vector2Like, b:Vector2Like):Float {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     dx = (FlightRuntime.field(a, 'x') - FlightRuntime.field(b, 'x'));
@@ -2062,7 +2059,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function getVector2DistanceSquared(a:Vector2Like, b:Vector2Like):Float {
+  public static function getVector2DistanceSquared(a:Vector2Like, b:Vector2Like):Float {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     dx = (FlightRuntime.field(a, 'x') - FlightRuntime.field(b, 'x'));
@@ -2071,22 +2068,22 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function getVector2Dot(a:Vector2Like, b:Vector2Like):Float {
+  public static function getVector2Dot(a:Vector2Like, b:Vector2Like):Float {
     return cast ((FlightRuntime.field(a, 'x') * FlightRuntime.field(b, 'x')) + (FlightRuntime.field(a, 'y') * FlightRuntime.field(b, 'y')));
     return cast null;
   }
 
-  @:keep public static function getVector2Length(source:Vector2Like):Float {
+  public static function getVector2Length(source:Vector2Like):Float {
     return cast FlightRuntime.callProperty(HxMath, 'sqrt', cast ([(HxMath.pow(FlightRuntime.field(source, 'x'), 2.0) + HxMath.pow(FlightRuntime.field(source, 'y'), 2.0))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getVector2LengthSquared(source:Vector2Like):Float {
+  public static function getVector2LengthSquared(source:Vector2Like):Float {
     return cast (HxMath.pow(FlightRuntime.field(source, 'x'), 2.0) + HxMath.pow(FlightRuntime.field(source, 'y'), 2.0));
     return cast null;
   }
 
-  @:keep public static function getVector3AngleBetween(a:Vector3Like, b:Vector3Like):Float {
+  public static function getVector3AngleBetween(a:Vector3Like, b:Vector3Like):Float {
     var la:Dynamic = cast FlightRuntime.UNDEFINED;
     var lb:Dynamic = cast FlightRuntime.UNDEFINED;
     var _dot:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2098,7 +2095,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function getVector3Distance(a:Vector3Like, b:Vector3Like):Float {
+  public static function getVector3Distance(a:Vector3Like, b:Vector3Like):Float {
     var x:Float = cast FlightRuntime.UNDEFINED;
     var y:Float = cast FlightRuntime.UNDEFINED;
     var z:Float = cast FlightRuntime.UNDEFINED;
@@ -2109,7 +2106,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function getVector3DistanceSquared(a:Vector3Like, b:Vector3Like):Float {
+  public static function getVector3DistanceSquared(a:Vector3Like, b:Vector3Like):Float {
     var x:Float = cast FlightRuntime.UNDEFINED;
     var y:Float = cast FlightRuntime.UNDEFINED;
     var z:Float = cast FlightRuntime.UNDEFINED;
@@ -2120,22 +2117,22 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function getVector3Dot(a:Vector3Like, b:Vector3Like):Float {
+  public static function getVector3Dot(a:Vector3Like, b:Vector3Like):Float {
     return cast (((FlightRuntime.field(a, 'x') * FlightRuntime.field(b, 'x')) + (FlightRuntime.field(a, 'y') * FlightRuntime.field(b, 'y'))) + (FlightRuntime.field(a, 'z') * FlightRuntime.field(b, 'z')));
     return cast null;
   }
 
-  @:keep public static function getVector3Length(source:Vector3Like):Float {
+  public static function getVector3Length(source:Vector3Like):Float {
     return cast FlightRuntime.callProperty(HxMath, 'sqrt', cast ([((HxMath.pow(FlightRuntime.field(source, 'x'), 2.0) + HxMath.pow(FlightRuntime.field(source, 'y'), 2.0)) + HxMath.pow(FlightRuntime.field(source, 'z'), 2.0))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getVector3LengthSquared(source:Vector3Like):Float {
+  public static function getVector3LengthSquared(source:Vector3Like):Float {
     return cast ((HxMath.pow(FlightRuntime.field(source, 'x'), 2.0) + HxMath.pow(FlightRuntime.field(source, 'y'), 2.0)) + HxMath.pow(FlightRuntime.field(source, 'z'), 2.0));
     return cast null;
   }
 
-  @:keep public static function getVector3Spherical(out:Vector3Like, source:Vector3Like):Void {
+  public static function getVector3Spherical(out:Vector3Like, source:Vector3Like):Void {
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
     var z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2155,7 +2152,7 @@ class Geometry {
     FlightRuntime.setField(out, 'z', FlightRuntime.callProperty(HxMath, 'atan2', cast ([z, x] : Array<Dynamic>)));
   }
 
-  @:keep public static function getVector4AngleBetween(a:Vector4Like, b:Vector4Like):Float {
+  public static function getVector4AngleBetween(a:Vector4Like, b:Vector4Like):Float {
     var la:Dynamic = cast FlightRuntime.UNDEFINED;
     var lb:Dynamic = cast FlightRuntime.UNDEFINED;
     var _dot:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2167,7 +2164,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function getVector4Distance(a:Vector4Like, b:Vector4Like):Float {
+  public static function getVector4Distance(a:Vector4Like, b:Vector4Like):Float {
     var x:Float = cast FlightRuntime.UNDEFINED;
     var y:Float = cast FlightRuntime.UNDEFINED;
     var z:Float = cast FlightRuntime.UNDEFINED;
@@ -2180,7 +2177,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function getVector4DistanceSquared(a:Vector4Like, b:Vector4Like):Float {
+  public static function getVector4DistanceSquared(a:Vector4Like, b:Vector4Like):Float {
     var x:Float = cast FlightRuntime.UNDEFINED;
     var y:Float = cast FlightRuntime.UNDEFINED;
     var z:Float = cast FlightRuntime.UNDEFINED;
@@ -2193,29 +2190,29 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function getVector4Dot(a:Vector4Like, b:Vector4Like):Float {
+  public static function getVector4Dot(a:Vector4Like, b:Vector4Like):Float {
     return cast ((((FlightRuntime.field(a, 'x') * FlightRuntime.field(b, 'x')) + (FlightRuntime.field(a, 'y') * FlightRuntime.field(b, 'y'))) + (FlightRuntime.field(a, 'z') * FlightRuntime.field(b, 'z'))) + (FlightRuntime.field(a, 'w') * FlightRuntime.field(b, 'w')));
     return cast null;
   }
 
-  @:keep public static function getVector4Length(source:Vector4Like):Float {
+  public static function getVector4Length(source:Vector4Like):Float {
     return cast FlightRuntime.callProperty(HxMath, 'sqrt', cast ([(((HxMath.pow(FlightRuntime.field(source, 'x'), 2.0) + HxMath.pow(FlightRuntime.field(source, 'y'), 2.0)) + HxMath.pow(FlightRuntime.field(source, 'z'), 2.0)) + HxMath.pow(FlightRuntime.field(source, 'w'), 2.0))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getVector4LengthSquared(source:Vector4Like):Float {
+  public static function getVector4LengthSquared(source:Vector4Like):Float {
     return cast (((HxMath.pow(FlightRuntime.field(source, 'x'), 2.0) + HxMath.pow(FlightRuntime.field(source, 'y'), 2.0)) + HxMath.pow(FlightRuntime.field(source, 'z'), 2.0)) + HxMath.pow(FlightRuntime.field(source, 'w'), 2.0));
     return cast null;
   }
 
-  @:keep public static function inflateRectangle(out:RectangleLike, source:RectangleLike, dx:Float, dy:Float):Void {
+  public static function inflateRectangle(out:RectangleLike, source:RectangleLike, dx:Float, dy:Float):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(source, 'x') - dx));
     FlightRuntime.setField(out, 'width', (FlightRuntime.field(source, 'width') + (dx * 2.0)));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(source, 'y') - dy));
     FlightRuntime.setField(out, 'height', (FlightRuntime.field(source, 'height') + (dy * 2.0)));
   }
 
-  @:keep public static function interpolateMatrix4(out:Matrix4Like, a:Matrix4Like, b:Matrix4Like, t:Float):Void {
+  public static function interpolateMatrix4(out:Matrix4Like, a:Matrix4Like, b:Matrix4Like, t:Float):Void {
     var _out:Dynamic = cast FlightRuntime.UNDEFINED;
     var _a:Dynamic = cast FlightRuntime.UNDEFINED;
     var _b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2231,12 +2228,12 @@ class Geometry {
     }
   }
 
-  @:keep public static function interpolateVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like, t:Float):Void {
+  public static function interpolateVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like, t:Float):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(a, 'x') + (t * (FlightRuntime.field(b, 'x') - FlightRuntime.field(a, 'x')))));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(a, 'y') + (t * (FlightRuntime.field(b, 'y') - FlightRuntime.field(a, 'y')))));
   }
 
-  @:keep public static function interpolateVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like, t:Float):Void {
+  public static function interpolateVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like, t:Float):Void {
     var ax:Dynamic = cast FlightRuntime.UNDEFINED;
     var ay:Dynamic = cast FlightRuntime.UNDEFINED;
     var az:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2248,7 +2245,7 @@ class Geometry {
     FlightRuntime.setField(out, 'z', (az + (t * (FlightRuntime.field(b, 'z') - az))));
   }
 
-  @:keep public static function interpolateVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like, t:Float):Void {
+  public static function interpolateVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like, t:Float):Void {
     var ax:Dynamic = cast FlightRuntime.UNDEFINED;
     var ay:Dynamic = cast FlightRuntime.UNDEFINED;
     var az:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2263,7 +2260,7 @@ class Geometry {
     FlightRuntime.setField(out, 'w', (aw + (t * (FlightRuntime.field(b, 'w') - aw))));
   }
 
-  @:keep public static function intersectAabb(out:AabbLike, a:AabbLike, b:AabbLike):Void {
+  public static function intersectAabb(out:AabbLike, a:AabbLike, b:AabbLike):Void {
     var aMinX:Dynamic = cast FlightRuntime.UNDEFINED;
     var aMinY:Dynamic = cast FlightRuntime.UNDEFINED;
     var aMinZ:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2296,7 +2293,7 @@ class Geometry {
     FlightRuntime.setField(FlightRuntime.field(out, 'max'), 'z', FlightRuntime.callProperty(HxMath, 'min', cast ([aMaxZ, bMaxZ] : Array<Dynamic>)));
   }
 
-  @:keep public static function intersectRay3DAabb(ray:Ray3DLike, aabb:AabbLike):Float {
+  public static function intersectRay3DAabb(ray:Ray3DLike, aabb:AabbLike):Float {
     var ox:Dynamic = cast FlightRuntime.UNDEFINED;
     var oy:Dynamic = cast FlightRuntime.UNDEFINED;
     var oz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2362,7 +2359,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function intersectRay3DCapsule(ray:Ray3DLike, capsule:CapsuleLike):Float {
+  public static function intersectRay3DCapsule(ray:Ray3DLike, capsule:CapsuleLike):Float {
     var ox:Dynamic = cast FlightRuntime.UNDEFINED;
     var oy:Dynamic = cast FlightRuntime.UNDEFINED;
     var oz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2484,7 +2481,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function intersectRay3DObb(ray:Ray3DLike, obb:ObbLike):Float {
+  public static function intersectRay3DObb(ray:Ray3DLike, obb:ObbLike):Float {
     var ox:Dynamic = cast FlightRuntime.UNDEFINED;
     var oy:Dynamic = cast FlightRuntime.UNDEFINED;
     var oz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2561,7 +2558,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function intersectRay3DPlane(ray:Ray3DLike, plane:PlaneLike):Float {
+  public static function intersectRay3DPlane(ray:Ray3DLike, plane:PlaneLike):Float {
     var denom:Dynamic = cast FlightRuntime.UNDEFINED;
     var t:Dynamic = cast FlightRuntime.UNDEFINED;
     denom = (((FlightRuntime.field(plane, 'a') * FlightRuntime.field(FlightRuntime.field(ray, 'direction'), 'x')) + (FlightRuntime.field(plane, 'b') * FlightRuntime.field(FlightRuntime.field(ray, 'direction'), 'y'))) + (FlightRuntime.field(plane, 'c') * FlightRuntime.field(FlightRuntime.field(ray, 'direction'), 'z')));
@@ -2571,7 +2568,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function intersectRay3DSphere(ray:Ray3DLike, sphere:BoundingSphereLike):Float {
+  public static function intersectRay3DSphere(ray:Ray3DLike, sphere:BoundingSphereLike):Float {
     var ox:Dynamic = cast FlightRuntime.UNDEFINED;
     var oy:Dynamic = cast FlightRuntime.UNDEFINED;
     var oz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2606,7 +2603,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function intersectRay3DTriangle(ray:Ray3DLike, a:Vector3Like, b:Vector3Like, c:Vector3Like):Float {
+  public static function intersectRay3DTriangle(ray:Ray3DLike, a:Vector3Like, b:Vector3Like, c:Vector3Like):Float {
     var e1x:Dynamic = cast FlightRuntime.UNDEFINED;
     var e1y:Dynamic = cast FlightRuntime.UNDEFINED;
     var e1z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2660,12 +2657,12 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function intersectsRectangle(a:RectangleLike, b:RectangleLike):Bool {
+  public static function intersectsRectangle(a:RectangleLike, b:RectangleLike):Bool {
     return cast !FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.compare(FlightRuntime.callValue(getRectangleMaxX, cast ([a] : Array<Dynamic>)), FlightRuntime.callValue(getRectangleMinX, cast ([b] : Array<Dynamic>)), '<='), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callValue(getRectangleMinX, cast ([a] : Array<Dynamic>)), FlightRuntime.callValue(getRectangleMaxX, cast ([b] : Array<Dynamic>)), '>=')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callValue(getRectangleMaxY, cast ([a] : Array<Dynamic>)), FlightRuntime.callValue(getRectangleMinY, cast ([b] : Array<Dynamic>)), '<=')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callValue(getRectangleMinY, cast ([a] : Array<Dynamic>)), FlightRuntime.callValue(getRectangleMaxY, cast ([b] : Array<Dynamic>)), '>=')));
     return cast null;
   }
 
-  @:keep public static function inverseMatrix(out:MatrixLike, source:MatrixLike):Bool {
+  public static function inverseMatrix(out:MatrixLike, source:MatrixLike):Bool {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     var c:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2706,7 +2703,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function inverseMatrix3(out:Matrix3Like, source:Matrix3Like):Bool {
+  public static function inverseMatrix3(out:Matrix3Like, source:Matrix3Like):Bool {
     var _out:Dynamic = cast FlightRuntime.UNDEFINED;
     var _in:Dynamic = cast FlightRuntime.UNDEFINED;
     var a00:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2772,7 +2769,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function inverseMatrix4(out:Matrix4Like, source:Matrix4Like):Bool {
+  public static function inverseMatrix4(out:Matrix4Like, source:Matrix4Like):Bool {
     var _out:Dynamic = cast FlightRuntime.UNDEFINED;
     var _source:Dynamic = cast FlightRuntime.UNDEFINED;
     var d:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2840,11 +2837,11 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function inverseMatrixTransformPoint(out:Vector2Like, matrix:MatrixLike, point:Vector2Like):Void {
+  public static function inverseMatrixTransformPoint(out:Vector2Like, matrix:MatrixLike, point:Vector2Like):Void {
     FlightRuntime.callValue(inverseMatrixTransformPointXY, cast ([out, matrix, FlightRuntime.field(point, 'x'), FlightRuntime.field(point, 'y')] : Array<Dynamic>));
   }
 
-  @:keep public static function inverseMatrixTransformPointXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
+  public static function inverseMatrixTransformPointXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
     var norm:Dynamic = cast FlightRuntime.UNDEFINED;
     norm = ((FlightRuntime.field(source, 'a') * FlightRuntime.field(source, 'd')) - (FlightRuntime.field(source, 'b') * FlightRuntime.field(source, 'c')));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(norm, 0.0))) {
@@ -2857,11 +2854,11 @@ class Geometry {
 }
   }
 
-  @:keep public static function inverseMatrixTransformVector(out:Vector2Like, matrix:MatrixLike, vector:Vector2Like):Void {
+  public static function inverseMatrixTransformVector(out:Vector2Like, matrix:MatrixLike, vector:Vector2Like):Void {
     FlightRuntime.callValue(inverseMatrixTransformVectorXY, cast ([out, matrix, FlightRuntime.field(vector, 'x'), FlightRuntime.field(vector, 'y')] : Array<Dynamic>));
   }
 
-  @:keep public static function inverseMatrixTransformVectorXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
+  public static function inverseMatrixTransformVectorXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
     var norm:Dynamic = cast FlightRuntime.UNDEFINED;
     norm = ((FlightRuntime.field(source, 'a') * FlightRuntime.field(source, 'd')) - (FlightRuntime.field(source, 'b') * FlightRuntime.field(source, 'c')));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(norm, 0.0))) {
@@ -2874,7 +2871,7 @@ class Geometry {
 }
   }
 
-  @:keep public static function inverseQuaternion(out:QuaternionLike, source:QuaternionLike):Void {
+  public static function inverseQuaternion(out:QuaternionLike, source:QuaternionLike):Void {
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
     var z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2900,24 +2897,24 @@ class Geometry {
     FlightRuntime.setField(out, 'w', (w * inv));
   }
 
-  @:keep public static function isAabbIntersectingAabb(a:AabbLike, b:AabbLike):Bool {
+  public static function isAabbIntersectingAabb(a:AabbLike, b:AabbLike):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.compare(FlightRuntime.field(FlightRuntime.field(a, 'min'), 'x'), FlightRuntime.field(FlightRuntime.field(b, 'max'), 'x'), '<='), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(FlightRuntime.field(a, 'max'), 'x'), FlightRuntime.field(FlightRuntime.field(b, 'min'), 'x'), '>=')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(FlightRuntime.field(a, 'min'), 'y'), FlightRuntime.field(FlightRuntime.field(b, 'max'), 'y'), '<=')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(FlightRuntime.field(a, 'max'), 'y'), FlightRuntime.field(FlightRuntime.field(b, 'min'), 'y'), '>=')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(FlightRuntime.field(a, 'min'), 'z'), FlightRuntime.field(FlightRuntime.field(b, 'max'), 'z'), '<=')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(FlightRuntime.field(a, 'max'), 'z'), FlightRuntime.field(FlightRuntime.field(b, 'min'), 'z'), '>='));
     return cast null;
   }
 
-  @:keep public static function isAffineMatrix3(source:Matrix3Like):Bool {
+  public static function isAffineMatrix3(source:Matrix3Like):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.getIndex(FlightRuntime.field(source, 'm'), 2.0), 0.0), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(FlightRuntime.field(source, 'm'), 5.0), 0.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(FlightRuntime.field(source, 'm'), 8.0), 1.0));
     return cast null;
   }
 
-  @:keep public static function isAffineMatrix4(source:Matrix4Like):Bool {
+  public static function isAffineMatrix4(source:Matrix4Like):Bool {
     var _source:Dynamic = cast FlightRuntime.UNDEFINED;
     _source = FlightRuntime.field(source, 'm');
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.getIndex(_source, 3.0), 0.0), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(_source, 7.0), 0.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(_source, 11.0), 0.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(_source, 15.0), 1.0));
     return cast null;
   }
 
-  @:keep public static function isBoundingSphereIntersectingBoundingSphere(a:BoundingSphereLike, b:BoundingSphereLike):Bool {
+  public static function isBoundingSphereIntersectingBoundingSphere(a:BoundingSphereLike, b:BoundingSphereLike):Bool {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     var dz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2933,7 +2930,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function isCapsuleIntersectingCapsule(a:CapsuleLike, b:CapsuleLike):Bool {
+  public static function isCapsuleIntersectingCapsule(a:CapsuleLike, b:CapsuleLike):Bool {
     var dist:Dynamic = cast FlightRuntime.UNDEFINED;
     var sumR:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.compare(FlightRuntime.field(a, 'radius'), 0.0, '<'), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(b, 'radius'), 0.0, '<')))) { return cast false; }
@@ -2943,7 +2940,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function isCapsuleIntersectingSphere(capsule:CapsuleLike, sphere:BoundingSphereLike):Bool {
+  public static function isCapsuleIntersectingSphere(capsule:CapsuleLike, sphere:BoundingSphereLike):Bool {
     var dist2:Dynamic = cast FlightRuntime.UNDEFINED;
     var sumR:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.compare(FlightRuntime.field(capsule, 'radius'), 0.0, '<'), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(sphere, 'radius'), 0.0, '<')))) { return cast false; }
@@ -2953,32 +2950,32 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function isEmptyRectangle(source:RectangleLike):Bool {
+  public static function isEmptyRectangle(source:RectangleLike):Bool {
     return cast FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.field(source, 'width'), 0.0), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(source, 'height'), 0.0));
     return cast null;
   }
 
-  @:keep public static function isFlippedXRectangle(source:RectangleLike):Bool {
+  public static function isFlippedXRectangle(source:RectangleLike):Bool {
     return cast FlightRuntime.compare(FlightRuntime.field(source, 'width'), 0.0, '<');
     return cast null;
   }
 
-  @:keep public static function isFlippedYRectangle(source:RectangleLike):Bool {
+  public static function isFlippedYRectangle(source:RectangleLike):Bool {
     return cast FlightRuntime.compare(FlightRuntime.field(source, 'height'), 0.0, '<');
     return cast null;
   }
 
-  @:keep public static function isFrustumContainingPoint(frustum:FrustumLike, point:Vector3Like):Bool {
+  public static function isFrustumContainingPoint(frustum:FrustumLike, point:Vector3Like):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.compare(FlightRuntime.callValue(Geometry.__planeSignedDistance__frustum, cast ([FlightRuntime.field(frustum, 'left'), point] : Array<Dynamic>)), 0.0, '>='), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callValue(Geometry.__planeSignedDistance__frustum, cast ([FlightRuntime.field(frustum, 'right'), point] : Array<Dynamic>)), 0.0, '>=')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callValue(Geometry.__planeSignedDistance__frustum, cast ([FlightRuntime.field(frustum, 'bottom'), point] : Array<Dynamic>)), 0.0, '>=')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callValue(Geometry.__planeSignedDistance__frustum, cast ([FlightRuntime.field(frustum, 'top'), point] : Array<Dynamic>)), 0.0, '>=')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callValue(Geometry.__planeSignedDistance__frustum, cast ([FlightRuntime.field(frustum, 'near'), point] : Array<Dynamic>)), 0.0, '>=')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callValue(Geometry.__planeSignedDistance__frustum, cast ([FlightRuntime.field(frustum, 'far'), point] : Array<Dynamic>)), 0.0, '>='));
     return cast null;
   }
 
-  @:keep public static function isFrustumIntersectingAabb(frustum:FrustumLike, aabb:AabbLike):Bool {
+  public static function isFrustumIntersectingAabb(frustum:FrustumLike, aabb:AabbLike):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.callValue(Geometry.__planeIntersectsAabb__frustum, cast ([FlightRuntime.field(frustum, 'left'), aabb] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(Geometry.__planeIntersectsAabb__frustum, cast ([FlightRuntime.field(frustum, 'right'), aabb] : Array<Dynamic>))), function():Dynamic return cast FlightRuntime.callValue(Geometry.__planeIntersectsAabb__frustum, cast ([FlightRuntime.field(frustum, 'bottom'), aabb] : Array<Dynamic>))), function():Dynamic return cast FlightRuntime.callValue(Geometry.__planeIntersectsAabb__frustum, cast ([FlightRuntime.field(frustum, 'top'), aabb] : Array<Dynamic>))), function():Dynamic return cast FlightRuntime.callValue(Geometry.__planeIntersectsAabb__frustum, cast ([FlightRuntime.field(frustum, 'near'), aabb] : Array<Dynamic>))), function():Dynamic return cast FlightRuntime.callValue(Geometry.__planeIntersectsAabb__frustum, cast ([FlightRuntime.field(frustum, 'far'), aabb] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function isFrustumIntersectingSphere(frustum:FrustumLike, sphere:BoundingSphereLike):Bool {
+  public static function isFrustumIntersectingSphere(frustum:FrustumLike, sphere:BoundingSphereLike):Bool {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(sphere, 'radius'), 0.0, '<'))) { return cast false; }
     r = FlightRuntime.field(sphere, 'radius');
@@ -2986,7 +2983,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function isObbIntersectingAabb(obb:ObbLike, aabb:AabbLike):Bool {
+  public static function isObbIntersectingAabb(obb:ObbLike, aabb:AabbLike):Bool {
     var acx:Dynamic = cast FlightRuntime.UNDEFINED;
     var acy:Dynamic = cast FlightRuntime.UNDEFINED;
     var acz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3029,7 +3026,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function isObbIntersectingObb(a:ObbLike, b:ObbLike):Bool {
+  public static function isObbIntersectingObb(a:ObbLike, b:ObbLike):Bool {
     var __destructure3:Dynamic = cast FlightRuntime.UNDEFINED;
     var ax0:Dynamic = cast FlightRuntime.UNDEFINED;
     var ay0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3080,7 +3077,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function matrix4TransformPoint(out:Vector3Like, source:Matrix4Like, point:Vector3Like):Void {
+  public static function matrix4TransformPoint(out:Vector3Like, source:Matrix4Like, point:Vector3Like):Void {
     var _source:Dynamic = cast FlightRuntime.UNDEFINED;
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3094,7 +3091,7 @@ class Geometry {
     FlightRuntime.setField(out, 'z', ((((x * FlightRuntime.getIndex(_source, 2.0)) + (y * FlightRuntime.getIndex(_source, 6.0))) + (z * FlightRuntime.getIndex(_source, 10.0))) + FlightRuntime.getIndex(_source, 14.0)));
   }
 
-  @:keep public static function matrix4TransformVector(out:Vector4Like, source:Matrix4Like, vector:Vector4Like):Void {
+  public static function matrix4TransformVector(out:Vector4Like, source:Matrix4Like, vector:Vector4Like):Void {
     var _source:Dynamic = cast FlightRuntime.UNDEFINED;
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3111,7 +3108,7 @@ class Geometry {
     FlightRuntime.setField(out, 'w', ((((x * FlightRuntime.getIndex(_source, 3.0)) + (y * FlightRuntime.getIndex(_source, 7.0))) + (z * FlightRuntime.getIndex(_source, 11.0))) + (w * FlightRuntime.getIndex(_source, 15.0))));
   }
 
-  @:keep public static function matrix4TransformVectors(out:flight.internal.FlightFloat32Array, source:Matrix4Like, vectors:flight.internal.FlightFloat32Array):Void {
+  public static function matrix4TransformVectors(out:flight.internal.FlightFloat32Array, source:Matrix4Like, vectors:flight.internal.FlightFloat32Array):Void {
     var _source:Dynamic = cast FlightRuntime.UNDEFINED;
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     var x:Float = cast FlightRuntime.UNDEFINED;
@@ -3130,7 +3127,7 @@ class Geometry {
 }
   }
 
-  @:keep public static function matrixTransformBounds(out:RectangleLike, source:MatrixLike, ax:Float, ay:Float, bx:Float, by:Float):Void {
+  public static function matrixTransformBounds(out:RectangleLike, source:MatrixLike, ax:Float, ay:Float, bx:Float, by:Float):Void {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3182,51 +3179,51 @@ class Geometry {
     FlightRuntime.setField(out, 'height', (ty1 - ty0));
   }
 
-  @:keep public static function matrixTransformBoundsVector2(out:RectangleLike, matrix:MatrixLike, a:Vector2Like, b:Vector2Like):Void {
+  public static function matrixTransformBoundsVector2(out:RectangleLike, matrix:MatrixLike, a:Vector2Like, b:Vector2Like):Void {
     FlightRuntime.callValue(matrixTransformBounds, cast ([out, matrix, FlightRuntime.field(a, 'x'), FlightRuntime.field(a, 'y'), FlightRuntime.field(b, 'x'), FlightRuntime.field(b, 'y')] : Array<Dynamic>));
   }
 
-  @:keep public static function matrixTransformPoint(out:Vector2Like, matrix:MatrixLike, point:Vector2Like):Void {
+  public static function matrixTransformPoint(out:Vector2Like, matrix:MatrixLike, point:Vector2Like):Void {
     FlightRuntime.callValue(matrixTransformPointXY, cast ([out, matrix, FlightRuntime.field(point, 'x'), FlightRuntime.field(point, 'y')] : Array<Dynamic>));
   }
 
-  @:keep public static function matrixTransformPointXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
+  public static function matrixTransformPointXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
     FlightRuntime.setField(out, 'x', (((x * FlightRuntime.field(source, 'a')) + (y * FlightRuntime.field(source, 'c'))) + FlightRuntime.field(source, 'tx')));
     FlightRuntime.setField(out, 'y', (((x * FlightRuntime.field(source, 'b')) + (y * FlightRuntime.field(source, 'd'))) + FlightRuntime.field(source, 'ty')));
   }
 
-  @:keep public static function matrixTransformRectangle(out:RectangleLike, matrix:MatrixLike, source:RectangleLike):Void {
+  public static function matrixTransformRectangle(out:RectangleLike, matrix:MatrixLike, source:RectangleLike):Void {
     FlightRuntime.callValue(matrixTransformBounds, cast ([out, matrix, FlightRuntime.field(source, 'x'), FlightRuntime.field(source, 'y'), (FlightRuntime.field(source, 'x') + FlightRuntime.field(source, 'width')), (FlightRuntime.field(source, 'y') + FlightRuntime.field(source, 'height'))] : Array<Dynamic>));
   }
 
-  @:keep public static function matrixTransformVector(out:Vector2Like, matrix:MatrixLike, vector:Vector2Like):Void {
+  public static function matrixTransformVector(out:Vector2Like, matrix:MatrixLike, vector:Vector2Like):Void {
     FlightRuntime.callValue(matrixTransformVectorXY, cast ([out, matrix, FlightRuntime.field(vector, 'x'), FlightRuntime.field(vector, 'y')] : Array<Dynamic>));
   }
 
-  @:keep public static function matrixTransformVectorXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
+  public static function matrixTransformVectorXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
     FlightRuntime.setField(out, 'x', ((x * FlightRuntime.field(source, 'a')) + (y * FlightRuntime.field(source, 'c'))));
     FlightRuntime.setField(out, 'y', ((x * FlightRuntime.field(source, 'b')) + (y * FlightRuntime.field(source, 'd'))));
   }
 
-  @:keep public static function maxVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
+  public static function maxVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(a, 'x'), FlightRuntime.field(b, 'x'), '>'), function():Dynamic return cast FlightRuntime.field(a, 'x'), function():Dynamic return cast FlightRuntime.field(b, 'x')));
     FlightRuntime.setField(out, 'y', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(a, 'y'), FlightRuntime.field(b, 'y'), '>'), function():Dynamic return cast FlightRuntime.field(a, 'y'), function():Dynamic return cast FlightRuntime.field(b, 'y')));
   }
 
-  @:keep public static function maxVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
+  public static function maxVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(a, 'x'), FlightRuntime.field(b, 'x'), '>'), function():Dynamic return cast FlightRuntime.field(a, 'x'), function():Dynamic return cast FlightRuntime.field(b, 'x')));
     FlightRuntime.setField(out, 'y', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(a, 'y'), FlightRuntime.field(b, 'y'), '>'), function():Dynamic return cast FlightRuntime.field(a, 'y'), function():Dynamic return cast FlightRuntime.field(b, 'y')));
     FlightRuntime.setField(out, 'z', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(a, 'z'), FlightRuntime.field(b, 'z'), '>'), function():Dynamic return cast FlightRuntime.field(a, 'z'), function():Dynamic return cast FlightRuntime.field(b, 'z')));
   }
 
-  @:keep public static function maxVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
+  public static function maxVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(a, 'x'), FlightRuntime.field(b, 'x'), '>'), function():Dynamic return cast FlightRuntime.field(a, 'x'), function():Dynamic return cast FlightRuntime.field(b, 'x')));
     FlightRuntime.setField(out, 'y', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(a, 'y'), FlightRuntime.field(b, 'y'), '>'), function():Dynamic return cast FlightRuntime.field(a, 'y'), function():Dynamic return cast FlightRuntime.field(b, 'y')));
     FlightRuntime.setField(out, 'z', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(a, 'z'), FlightRuntime.field(b, 'z'), '>'), function():Dynamic return cast FlightRuntime.field(a, 'z'), function():Dynamic return cast FlightRuntime.field(b, 'z')));
     FlightRuntime.setField(out, 'w', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(a, 'w'), FlightRuntime.field(b, 'w'), '>'), function():Dynamic return cast FlightRuntime.field(a, 'w'), function():Dynamic return cast FlightRuntime.field(b, 'w')));
   }
 
-  @:keep public static function mergeBoundingSphere(out:BoundingSphereLike, a:BoundingSphereLike, b:BoundingSphereLike):Void {
+  public static function mergeBoundingSphere(out:BoundingSphereLike, a:BoundingSphereLike, b:BoundingSphereLike):Void {
     var acx:Dynamic = cast FlightRuntime.UNDEFINED;
     var acy:Dynamic = cast FlightRuntime.UNDEFINED;
     var acz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3289,7 +3286,7 @@ class Geometry {
     FlightRuntime.setField(out, 'radius', newRadius);
   }
 
-  @:keep public static function mergeRectangle(out:RectangleLike, source:RectangleLike, other:RectangleLike):Void {
+  public static function mergeRectangle(out:RectangleLike, source:RectangleLike, other:RectangleLike):Void {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var sx:Dynamic = cast FlightRuntime.UNDEFINED;
     var sy:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3340,25 +3337,25 @@ class Geometry {
 }
   }
 
-  @:keep public static function minVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
+  public static function minVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(a, 'x'), FlightRuntime.field(b, 'x'), '<'), function():Dynamic return cast FlightRuntime.field(a, 'x'), function():Dynamic return cast FlightRuntime.field(b, 'x')));
     FlightRuntime.setField(out, 'y', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(a, 'y'), FlightRuntime.field(b, 'y'), '<'), function():Dynamic return cast FlightRuntime.field(a, 'y'), function():Dynamic return cast FlightRuntime.field(b, 'y')));
   }
 
-  @:keep public static function minVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
+  public static function minVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(a, 'x'), FlightRuntime.field(b, 'x'), '<'), function():Dynamic return cast FlightRuntime.field(a, 'x'), function():Dynamic return cast FlightRuntime.field(b, 'x')));
     FlightRuntime.setField(out, 'y', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(a, 'y'), FlightRuntime.field(b, 'y'), '<'), function():Dynamic return cast FlightRuntime.field(a, 'y'), function():Dynamic return cast FlightRuntime.field(b, 'y')));
     FlightRuntime.setField(out, 'z', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(a, 'z'), FlightRuntime.field(b, 'z'), '<'), function():Dynamic return cast FlightRuntime.field(a, 'z'), function():Dynamic return cast FlightRuntime.field(b, 'z')));
   }
 
-  @:keep public static function minVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
+  public static function minVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(a, 'x'), FlightRuntime.field(b, 'x'), '<'), function():Dynamic return cast FlightRuntime.field(a, 'x'), function():Dynamic return cast FlightRuntime.field(b, 'x')));
     FlightRuntime.setField(out, 'y', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(a, 'y'), FlightRuntime.field(b, 'y'), '<'), function():Dynamic return cast FlightRuntime.field(a, 'y'), function():Dynamic return cast FlightRuntime.field(b, 'y')));
     FlightRuntime.setField(out, 'z', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(a, 'z'), FlightRuntime.field(b, 'z'), '<'), function():Dynamic return cast FlightRuntime.field(a, 'z'), function():Dynamic return cast FlightRuntime.field(b, 'z')));
     FlightRuntime.setField(out, 'w', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(a, 'w'), FlightRuntime.field(b, 'w'), '<'), function():Dynamic return cast FlightRuntime.field(a, 'w'), function():Dynamic return cast FlightRuntime.field(b, 'w')));
   }
 
-  @:keep public static function multiplyMatrix(out:MatrixLike, a:MatrixLike, b:MatrixLike):Void {
+  public static function multiplyMatrix(out:MatrixLike, a:MatrixLike, b:MatrixLike):Void {
     var a1:Dynamic = cast FlightRuntime.UNDEFINED;
     var b1:Dynamic = cast FlightRuntime.UNDEFINED;
     var tx1:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3391,7 +3388,7 @@ class Geometry {
     FlightRuntime.setField(out, 'ty', (((b1 * tx2) + (d1 * ty2)) + ty1));
   }
 
-  @:keep public static function multiplyMatrix3(out:Matrix3Like, a:Matrix3Like, b:Matrix3Like):Void {
+  public static function multiplyMatrix3(out:Matrix3Like, a:Matrix3Like, b:Matrix3Like):Void {
     var _a:Dynamic = cast FlightRuntime.UNDEFINED;
     var _b:Dynamic = cast FlightRuntime.UNDEFINED;
     var _out:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3457,7 +3454,7 @@ class Geometry {
     FlightRuntime.setIndex(_out, 8.0, (((a20 * b02) + (a21 * b12)) + (a22 * b22)));
   }
 
-  @:keep public static function multiplyMatrix4(out:Matrix4Like, a:Matrix4Like, b:Matrix4Like):Void {
+  public static function multiplyMatrix4(out:Matrix4Like, a:Matrix4Like, b:Matrix4Like):Void {
     var _a:Dynamic = cast FlightRuntime.UNDEFINED;
     var _b:Dynamic = cast FlightRuntime.UNDEFINED;
     var _out:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3546,7 +3543,7 @@ class Geometry {
     FlightRuntime.setIndex(_out, 15.0, ((((m241 * m114) + (m242 * m124)) + (m243 * m134)) + (m244 * m144)));
   }
 
-  @:keep public static function multiplyQuaternion(out:QuaternionLike, a:QuaternionLike, b:QuaternionLike):Void {
+  public static function multiplyQuaternion(out:QuaternionLike, a:QuaternionLike, b:QuaternionLike):Void {
     var ax:Dynamic = cast FlightRuntime.UNDEFINED;
     var ay:Dynamic = cast FlightRuntime.UNDEFINED;
     var az:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3569,58 +3566,58 @@ class Geometry {
     FlightRuntime.setField(out, 'w', ((((aw * bw) - (ax * bx)) - (ay * by)) - (az * bz)));
   }
 
-  @:keep public static function multiplyVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
+  public static function multiplyVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(a, 'x') * FlightRuntime.field(b, 'x')));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(a, 'y') * FlightRuntime.field(b, 'y')));
   }
 
-  @:keep public static function multiplyVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
+  public static function multiplyVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(a, 'x') * FlightRuntime.field(b, 'x')));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(a, 'y') * FlightRuntime.field(b, 'y')));
     FlightRuntime.setField(out, 'z', (FlightRuntime.field(a, 'z') * FlightRuntime.field(b, 'z')));
   }
 
-  @:keep public static function multiplyVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
+  public static function multiplyVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(a, 'x') * FlightRuntime.field(b, 'x')));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(a, 'y') * FlightRuntime.field(b, 'y')));
     FlightRuntime.setField(out, 'z', (FlightRuntime.field(a, 'z') * FlightRuntime.field(b, 'z')));
     FlightRuntime.setField(out, 'w', (FlightRuntime.field(a, 'w') * FlightRuntime.field(b, 'w')));
   }
 
-  @:keep public static function nearEqualsVector2(a:Vector2Like, b:Vector2Like, tolerance:Float = 0.000001):Bool {
+  public static function nearEqualsVector2(a:Vector2Like, b:Vector2Like, tolerance:Float = 0.000001):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.compare(FlightRuntime.callProperty(HxMath, 'abs', cast ([(FlightRuntime.field(a, 'x') - FlightRuntime.field(b, 'x'))] : Array<Dynamic>)), tolerance, '<'), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callProperty(HxMath, 'abs', cast ([(FlightRuntime.field(a, 'y') - FlightRuntime.field(b, 'y'))] : Array<Dynamic>)), tolerance, '<'));
     return cast null;
   }
 
-  @:keep public static function nearEqualsVector3(a:Vector3Like, b:Vector3Like, tolerance:Float = 0.000001):Bool {
+  public static function nearEqualsVector3(a:Vector3Like, b:Vector3Like, tolerance:Float = 0.000001):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.compare(FlightRuntime.callProperty(HxMath, 'abs', cast ([(FlightRuntime.field(a, 'x') - FlightRuntime.field(b, 'x'))] : Array<Dynamic>)), tolerance, '<'), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callProperty(HxMath, 'abs', cast ([(FlightRuntime.field(a, 'y') - FlightRuntime.field(b, 'y'))] : Array<Dynamic>)), tolerance, '<')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callProperty(HxMath, 'abs', cast ([(FlightRuntime.field(a, 'z') - FlightRuntime.field(b, 'z'))] : Array<Dynamic>)), tolerance, '<'));
     return cast null;
   }
 
-  @:keep public static function nearEqualsVector4(a:Vector4Like, b:Vector4Like, tolerance:Float = 0.000001):Bool {
+  public static function nearEqualsVector4(a:Vector4Like, b:Vector4Like, tolerance:Float = 0.000001):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.compare(FlightRuntime.callProperty(HxMath, 'abs', cast ([(FlightRuntime.field(a, 'x') - FlightRuntime.field(b, 'x'))] : Array<Dynamic>)), tolerance, '<'), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callProperty(HxMath, 'abs', cast ([(FlightRuntime.field(a, 'y') - FlightRuntime.field(b, 'y'))] : Array<Dynamic>)), tolerance, '<')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callProperty(HxMath, 'abs', cast ([(FlightRuntime.field(a, 'z') - FlightRuntime.field(b, 'z'))] : Array<Dynamic>)), tolerance, '<')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callProperty(HxMath, 'abs', cast ([(FlightRuntime.field(a, 'w') - FlightRuntime.field(b, 'w'))] : Array<Dynamic>)), tolerance, '<'));
     return cast null;
   }
 
-  @:keep public static function negateVector2(out:Vector2Like, source:Vector2Like):Void {
+  public static function negateVector2(out:Vector2Like, source:Vector2Like):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(source, 'x') * -1.0));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(source, 'y') * -1.0));
   }
 
-  @:keep public static function negateVector3(out:Vector3Like, source:Vector3Like):Void {
+  public static function negateVector3(out:Vector3Like, source:Vector3Like):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(source, 'x') * -1.0));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(source, 'y') * -1.0));
     FlightRuntime.setField(out, 'z', (FlightRuntime.field(source, 'z') * -1.0));
   }
 
-  @:keep public static function negateVector4(out:Vector4Like, source:Vector4Like):Void {
+  public static function negateVector4(out:Vector4Like, source:Vector4Like):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(source, 'x') * -1.0));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(source, 'y') * -1.0));
     FlightRuntime.setField(out, 'z', (FlightRuntime.field(source, 'z') * -1.0));
     FlightRuntime.setField(out, 'w', (FlightRuntime.field(source, 'w') * -1.0));
   }
 
-  @:keep public static function normalizePlane(out:PlaneLike, source:PlaneLike):Void {
+  public static function normalizePlane(out:PlaneLike, source:PlaneLike):Void {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     var c:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3646,7 +3643,7 @@ class Geometry {
     FlightRuntime.setField(out, 'd', (d * inv));
   }
 
-  @:keep public static function normalizeQuaternion(out:QuaternionLike, source:QuaternionLike):Float {
+  public static function normalizeQuaternion(out:QuaternionLike, source:QuaternionLike):Float {
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
     var z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3673,7 +3670,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function normalizeRectangle(out:RectangleLike, source:RectangleLike):Void {
+  public static function normalizeRectangle(out:RectangleLike, source:RectangleLike):Void {
     var maxX:Dynamic = cast FlightRuntime.UNDEFINED;
     var maxY:Dynamic = cast FlightRuntime.UNDEFINED;
     var minX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3688,7 +3685,7 @@ class Geometry {
     FlightRuntime.setField(out, 'height', (maxY - minY));
   }
 
-  @:keep public static function normalizeVector2(out:Vector2Like, source:Vector2Like):Float {
+  public static function normalizeVector2(out:Vector2Like, source:Vector2Like):Float {
     var l:Dynamic = cast FlightRuntime.UNDEFINED;
     l = FlightRuntime.callValue(getVector2Length, cast ([source] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(l, 0.0))) {
@@ -3702,7 +3699,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function normalizeVector3(out:Vector3Like, source:Vector3Like):Float {
+  public static function normalizeVector3(out:Vector3Like, source:Vector3Like):Float {
     var l:Dynamic = cast FlightRuntime.UNDEFINED;
     l = FlightRuntime.callValue(getVector3Length, cast ([source] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(l, 0.0))) {
@@ -3718,7 +3715,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function normalizeVector4(out:Vector4Like, source:Vector4Like):Float {
+  public static function normalizeVector4(out:Vector4Like, source:Vector4Like):Float {
     var l:Dynamic = cast FlightRuntime.UNDEFINED;
     l = FlightRuntime.callValue(getVector4Length, cast ([source] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(l, 0.0))) {
@@ -3736,7 +3733,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function obbLocalAxes__obb(obb:ObbLike):Array<Float> {
+  public static function obbLocalAxes__obb(obb:ObbLike):Array<Float> {
     var qx:Dynamic = cast FlightRuntime.UNDEFINED;
     var qy:Dynamic = cast FlightRuntime.UNDEFINED;
     var qz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3827,39 +3824,39 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function offsetRectangle(out:RectangleLike, source:RectangleLike, dx:Float, dy:Float):Void {
+  public static function offsetRectangle(out:RectangleLike, source:RectangleLike, dx:Float, dy:Float):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(source, 'x') + dx));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(source, 'y') + dy));
     FlightRuntime.setField(out, 'width', FlightRuntime.field(source, 'width'));
     FlightRuntime.setField(out, 'height', FlightRuntime.field(source, 'height'));
   }
 
-  @:keep public static function offsetRectangleByPoint(out:RectangleLike, source:RectangleLike, point:Vector2Like):Void {
+  public static function offsetRectangleByPoint(out:RectangleLike, source:RectangleLike, point:Vector2Like):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(source, 'x') + FlightRuntime.field(point, 'x')));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(source, 'y') + FlightRuntime.field(point, 'y')));
     FlightRuntime.setField(out, 'width', FlightRuntime.field(source, 'width'));
     FlightRuntime.setField(out, 'height', FlightRuntime.field(source, 'height'));
   }
 
-  @:keep public static function offsetVector2(out:Vector2Like, source:Vector2Like, dx:Float, dy:Float):Void {
+  public static function offsetVector2(out:Vector2Like, source:Vector2Like, dx:Float, dy:Float):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(source, 'x') + dx));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(source, 'y') + dy));
   }
 
-  @:keep public static function offsetVector3(out:Vector3Like, source:Vector3Like, dx:Float, dy:Float, dz:Float):Void {
+  public static function offsetVector3(out:Vector3Like, source:Vector3Like, dx:Float, dy:Float, dz:Float):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(source, 'x') + dx));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(source, 'y') + dy));
     FlightRuntime.setField(out, 'z', (FlightRuntime.field(source, 'z') + dz));
   }
 
-  @:keep public static function offsetVector4(out:Vector4Like, source:Vector4Like, dx:Float, dy:Float, dz:Float, dw:Float):Void {
+  public static function offsetVector4(out:Vector4Like, source:Vector4Like, dx:Float, dy:Float, dz:Float, dw:Float):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(source, 'x') + dx));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(source, 'y') + dy));
     FlightRuntime.setField(out, 'z', (FlightRuntime.field(source, 'z') + dz));
     FlightRuntime.setField(out, 'w', (FlightRuntime.field(source, 'w') + dw));
   }
 
-  @:keep public static function pointToSegmentDistanceSq__capsule(px:Float, py:Float, pz:Float, ax:Float, ay:Float, az:Float, bx:Float, by:Float, bz:Float):Float {
+  public static function pointToSegmentDistanceSq__capsule(px:Float, py:Float, pz:Float, ax:Float, ay:Float, az:Float, bx:Float, by:Float, bz:Float):Float {
     var abx:Dynamic = cast FlightRuntime.UNDEFINED;
     var aby:Dynamic = cast FlightRuntime.UNDEFINED;
     var abz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3903,11 +3900,11 @@ class Geometry {
 
   public static final pool__vector4Pool:Array<Vector4> = cast ([] : Array<Dynamic>);
 
-  @:keep public static function prependMatrix4(out:Matrix4Like, source:Matrix4Like, other:Matrix4Like):Void {
+  public static function prependMatrix4(out:Matrix4Like, source:Matrix4Like, other:Matrix4Like):Void {
     FlightRuntime.callValue(multiplyMatrix4, cast ([out, other, source] : Array<Dynamic>));
   }
 
-  @:keep public static function prependRotationMatrix4(out:Matrix4Like, source:Matrix4Like, radians:Float, axis:Vector4Like, ?pivotPoint:Vector4Like):Void {
+  public static function prependRotationMatrix4(out:Matrix4Like, source:Matrix4Like, radians:Float, axis:Vector4Like, ?pivotPoint:Vector4Like):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.callValue(acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(Geometry.__getAxisRotation__matrix4, cast ([m, FlightRuntime.field(axis, 'x'), FlightRuntime.field(axis, 'y'), FlightRuntime.field(axis, 'z'), radians] : Array<Dynamic>));
@@ -3926,7 +3923,7 @@ class Geometry {
     FlightRuntime.callValue(releaseMatrix4, cast ([m] : Array<Dynamic>));
   }
 
-  @:keep public static function prependScaleMatrix4(out:Matrix4Like, source:Matrix4Like, xScale:Float, yScale:Float, zScale:Float):Void {
+  public static function prependScaleMatrix4(out:Matrix4Like, source:Matrix4Like, xScale:Float, yScale:Float, zScale:Float):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.callValue(acquireMatrix4, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(setMatrix4, cast ([m, xScale, 0.0, 0.0, 0.0, 0.0, yScale, 0.0, 0.0, 0.0, 0.0, zScale, 0.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
@@ -3934,7 +3931,7 @@ class Geometry {
     FlightRuntime.callValue(releaseMatrix4, cast ([m] : Array<Dynamic>));
   }
 
-  @:keep public static function prependTranslationMatrix4(out:Matrix4Like, source:Matrix4Like, x:Float, y:Float, z:Float):Void {
+  public static function prependTranslationMatrix4(out:Matrix4Like, source:Matrix4Like, x:Float, y:Float, z:Float):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.callValue(acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(translateMatrix4, cast ([m, m, x, y, z] : Array<Dynamic>));
@@ -3942,12 +3939,12 @@ class Geometry {
     FlightRuntime.callValue(releaseMatrix4, cast ([m] : Array<Dynamic>));
   }
 
-  @:keep public static function projectVector3(out:Vector2Like, source:Vector3Like):Void {
+  public static function projectVector3(out:Vector2Like, source:Vector3Like):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(source, 'x') / FlightRuntime.field(source, 'z')));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(source, 'y') / FlightRuntime.field(source, 'z')));
   }
 
-  @:keep public static function projectVector3OntoPlane(out:Vector3Like, point:Vector3Like, plane:PlaneLike):Void {
+  public static function projectVector3OntoPlane(out:Vector3Like, point:Vector3Like, plane:PlaneLike):Void {
     var px:Dynamic = cast FlightRuntime.UNDEFINED;
     var py:Dynamic = cast FlightRuntime.UNDEFINED;
     var pz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3961,7 +3958,7 @@ class Geometry {
     FlightRuntime.setField(out, 'z', (pz - (dist * FlightRuntime.field(plane, 'c'))));
   }
 
-  @:keep public static function projectVector4(out:Vector3Like, source:Vector4Like):Void {
+  public static function projectVector4(out:Vector3Like, source:Vector4Like):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(source, 'x') / FlightRuntime.field(source, 'w')));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(source, 'y') / FlightRuntime.field(source, 'w')));
     FlightRuntime.setField(out, 'z', (FlightRuntime.field(source, 'z') / FlightRuntime.field(source, 'w')));
@@ -3969,7 +3966,7 @@ class Geometry {
 
   public static final RAD_TO_DEG__transform2d:Dynamic = (180.0 / HxMath.PI);
 
-  @:keep public static function reflectVector2(out:Vector2Like, incident:Vector2Like, normal:Vector2Like):Void {
+  public static function reflectVector2(out:Vector2Like, incident:Vector2Like, normal:Vector2Like):Void {
     var ix:Dynamic = cast FlightRuntime.UNDEFINED;
     var iy:Dynamic = cast FlightRuntime.UNDEFINED;
     var nx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3984,7 +3981,7 @@ class Geometry {
     FlightRuntime.setField(out, 'y', (iy - (twoDot * ny)));
   }
 
-  @:keep public static function reflectVector3(out:Vector3Like, incident:Vector3Like, normal:Vector3Like):Void {
+  public static function reflectVector3(out:Vector3Like, incident:Vector3Like, normal:Vector3Like):Void {
     var ix:Dynamic = cast FlightRuntime.UNDEFINED;
     var iy:Dynamic = cast FlightRuntime.UNDEFINED;
     var iz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4004,7 +4001,7 @@ class Geometry {
     FlightRuntime.setField(out, 'z', (iz - (twoDot * nz)));
   }
 
-  @:keep public static function reflectVector4(out:Vector4Like, incident:Vector4Like, normal:Vector4Like):Void {
+  public static function reflectVector4(out:Vector4Like, incident:Vector4Like, normal:Vector4Like):Void {
     var ix:Dynamic = cast FlightRuntime.UNDEFINED;
     var iy:Dynamic = cast FlightRuntime.UNDEFINED;
     var iz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4029,47 +4026,47 @@ class Geometry {
     FlightRuntime.setField(out, 'w', (iw - (twoDot * nw)));
   }
 
-  @:keep public static function releaseMatrix(m:Matrix):Void {
+  public static function releaseMatrix(m:Matrix):Void {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(m))) { return; }
     FlightRuntime.callProperty(Geometry.pool__matrixPool, 'push', cast ([m] : Array<Dynamic>));
   }
 
-  @:keep public static function releaseMatrix3(m:Matrix3):Void {
+  public static function releaseMatrix3(m:Matrix3):Void {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(m))) { return; }
     FlightRuntime.callProperty(Geometry.pool__matrix3Pool, 'push', cast ([m] : Array<Dynamic>));
   }
 
-  @:keep public static function releaseMatrix4(m:Matrix4):Void {
+  public static function releaseMatrix4(m:Matrix4):Void {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(m))) { return; }
     FlightRuntime.callProperty(Geometry.pool__matrix4Pool, 'push', cast ([m] : Array<Dynamic>));
   }
 
-  @:keep public static function releaseQuaternion(q:Quaternion):Void {
+  public static function releaseQuaternion(q:Quaternion):Void {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(q))) { return; }
     FlightRuntime.callProperty(Geometry.pool__quaternionPool, 'push', cast ([q] : Array<Dynamic>));
   }
 
-  @:keep public static function releaseRectangle(r:Rectangle):Void {
+  public static function releaseRectangle(r:Rectangle):Void {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(r))) { return; }
     FlightRuntime.callProperty(Geometry.pool__rectanglePool, 'push', cast ([r] : Array<Dynamic>));
   }
 
-  @:keep public static function releaseVector2(v:Vector2):Void {
+  public static function releaseVector2(v:Vector2):Void {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(v))) { return; }
     FlightRuntime.callProperty(Geometry.pool__vector2Pool, 'push', cast ([v] : Array<Dynamic>));
   }
 
-  @:keep public static function releaseVector3(v:Vector3):Void {
+  public static function releaseVector3(v:Vector3):Void {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(v))) { return; }
     FlightRuntime.callProperty(Geometry.pool__vector3Pool, 'push', cast ([v] : Array<Dynamic>));
   }
 
-  @:keep public static function releaseVector4(v:Vector4):Void {
+  public static function releaseVector4(v:Vector4):Void {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(v))) { return; }
     FlightRuntime.callProperty(Geometry.pool__vector4Pool, 'push', cast ([v] : Array<Dynamic>));
   }
 
-  @:keep public static function reserveFloat32Array(array:flight.internal.FlightFloat32Array, capacity:Float):flight.internal.FlightFloat32Array {
+  public static function reserveFloat32Array(array:flight.internal.FlightFloat32Array, capacity:Float):flight.internal.FlightFloat32Array {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(array, 'length'), capacity, '>='))) { return cast array; }
     out = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [capacity]);
@@ -4078,7 +4075,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function reserveInt16Array(array:flight.internal.FlightInt16Array, capacity:Float):flight.internal.FlightInt16Array {
+  public static function reserveInt16Array(array:flight.internal.FlightInt16Array, capacity:Float):flight.internal.FlightInt16Array {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(array, 'length'), capacity, '>='))) { return cast array; }
     out = new flight.internal.FlightInt16Array(capacity);
@@ -4087,7 +4084,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function reserveUint16Array(array:flight.internal.FlightUInt16Array, capacity:Float):flight.internal.FlightUInt16Array {
+  public static function reserveUint16Array(array:flight.internal.FlightUInt16Array, capacity:Float):flight.internal.FlightUInt16Array {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(array, 'length'), capacity, '>='))) { return cast array; }
     out = new flight.internal.FlightUInt16Array(capacity);
@@ -4096,7 +4093,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function rotateMatrix(out:MatrixLike, source:MatrixLike, theta:Float):Void {
+  public static function rotateMatrix(out:MatrixLike, source:MatrixLike, theta:Float):Void {
     var cos:Dynamic = cast FlightRuntime.UNDEFINED;
     var sin:Dynamic = cast FlightRuntime.UNDEFINED;
     var a1:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4115,7 +4112,7 @@ class Geometry {
     FlightRuntime.setField(out, 'tx', tx1);
   }
 
-  @:keep public static function rotateMatrix3(out:Matrix3Like, source:Matrix3Like, theta:Float):Void {
+  public static function rotateMatrix3(out:Matrix3Like, source:Matrix3Like, theta:Float):Void {
     var c:Dynamic = cast FlightRuntime.UNDEFINED;
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4153,7 +4150,7 @@ class Geometry {
     FlightRuntime.setIndex(o, 8.0, a8);
   }
 
-  @:keep public static function rotateMatrix4(out:Matrix4Like, source:Matrix4Like, axis:Vector3Like, radians:Float):Void {
+  public static function rotateMatrix4(out:Matrix4Like, source:Matrix4Like, axis:Vector3Like, radians:Float):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.callValue(acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(Geometry.__getAxisRotation__matrix4, cast ([m, FlightRuntime.field(axis, 'x'), FlightRuntime.field(axis, 'y'), FlightRuntime.field(axis, 'z'), radians] : Array<Dynamic>));
@@ -4161,7 +4158,7 @@ class Geometry {
     FlightRuntime.callValue(releaseMatrix4, cast ([m] : Array<Dynamic>));
   }
 
-  @:keep public static function rotateVector3ByQuaternion(out:Vector3Like, vector:Vector3Like, q:QuaternionLike):Void {
+  public static function rotateVector3ByQuaternion(out:Vector3Like, vector:Vector3Like, q:QuaternionLike):Void {
     var qx:Dynamic = cast FlightRuntime.UNDEFINED;
     var qy:Dynamic = cast FlightRuntime.UNDEFINED;
     var qz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4187,7 +4184,7 @@ class Geometry {
     FlightRuntime.setField(out, 'z', ((vz + (qw * tz)) + ((qx * ty) - (qy * tx))));
   }
 
-  @:keep public static function scaleMatrix(out:MatrixLike, source:MatrixLike, sx:Float, sy:Float):Void {
+  public static function scaleMatrix(out:MatrixLike, source:MatrixLike, sx:Float, sy:Float):Void {
     FlightRuntime.setField(out, 'a', (FlightRuntime.field(source, 'a') * sx));
     FlightRuntime.setField(out, 'b', (FlightRuntime.field(source, 'b') * sy));
     FlightRuntime.setField(out, 'c', (FlightRuntime.field(source, 'c') * sx));
@@ -4196,7 +4193,7 @@ class Geometry {
     FlightRuntime.setField(out, 'ty', (FlightRuntime.field(source, 'ty') * sy));
   }
 
-  @:keep public static function scaleMatrix3(out:Matrix3Like, source:Matrix3Like, sx:Float, sy:Float):Void {
+  public static function scaleMatrix3(out:Matrix3Like, source:Matrix3Like, sx:Float, sy:Float):Void {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var o:Dynamic = cast FlightRuntime.UNDEFINED;
     a = FlightRuntime.field(source, 'm');
@@ -4212,7 +4209,7 @@ class Geometry {
     FlightRuntime.setIndex(o, 8.0, FlightRuntime.getIndex(a, 8.0));
   }
 
-  @:keep public static function scaleMatrix4(out:Matrix4Like, source:Matrix4Like, sx:Float, sy:Float, sz:Float):Void {
+  public static function scaleMatrix4(out:Matrix4Like, source:Matrix4Like, sx:Float, sy:Float, sz:Float):Void {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var o:Dynamic = cast FlightRuntime.UNDEFINED;
     a = FlightRuntime.field(source, 'm');
@@ -4235,12 +4232,12 @@ class Geometry {
 }
   }
 
-  @:keep public static function scaleVector2(out:Vector2Like, source:Vector2Like, scalar:Float):Void {
+  public static function scaleVector2(out:Vector2Like, source:Vector2Like, scalar:Float):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(source, 'x') * scalar));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(source, 'y') * scalar));
   }
 
-  @:keep public static function scaleVector2ToLength(out:Vector2Like, source:Vector2Like, length:Float):Void {
+  public static function scaleVector2ToLength(out:Vector2Like, source:Vector2Like, length:Float):Void {
     var currentLength:Dynamic = cast FlightRuntime.UNDEFINED;
     currentLength = FlightRuntime.callValue(getVector2Length, cast ([source] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(currentLength, 0.0))) {
@@ -4253,20 +4250,20 @@ class Geometry {
 }
   }
 
-  @:keep public static function scaleVector3(out:Vector3Like, source:Vector3Like, scalar:Float):Void {
+  public static function scaleVector3(out:Vector3Like, source:Vector3Like, scalar:Float):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(source, 'x') * scalar));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(source, 'y') * scalar));
     FlightRuntime.setField(out, 'z', (FlightRuntime.field(source, 'z') * scalar));
   }
 
-  @:keep public static function scaleVector4(out:Vector4Like, source:Vector4Like, scalar:Float):Void {
+  public static function scaleVector4(out:Vector4Like, source:Vector4Like, scalar:Float):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(source, 'x') * scalar));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(source, 'y') * scalar));
     FlightRuntime.setField(out, 'z', (FlightRuntime.field(source, 'z') * scalar));
     FlightRuntime.setField(out, 'w', (FlightRuntime.field(source, 'w') * scalar));
   }
 
-  @:keep public static function segmentToSegmentDistanceSq__capsule(ax:Float, ay:Float, az:Float, bx:Float, by:Float, bz:Float, cx:Float, cy:Float, cz:Float, dx:Float, dy:Float, dz:Float):Float {
+  public static function segmentToSegmentDistanceSq__capsule(ax:Float, ay:Float, az:Float, bx:Float, by:Float, bz:Float, cx:Float, cy:Float, cz:Float, dx:Float, dy:Float, dz:Float):Float {
     var d1x:Dynamic = cast FlightRuntime.UNDEFINED;
     var d1y:Dynamic = cast FlightRuntime.UNDEFINED;
     var d1z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4332,7 +4329,7 @@ class Geometry {
     return cast null;
   }
 
-  @:keep public static function setAabb(out:AabbLike, minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:Float, maxZ:Float):Void {
+  public static function setAabb(out:AabbLike, minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:Float, maxZ:Float):Void {
     FlightRuntime.setField(FlightRuntime.field(out, 'min'), 'x', minX);
     FlightRuntime.setField(FlightRuntime.field(out, 'min'), 'y', minY);
     FlightRuntime.setField(FlightRuntime.field(out, 'min'), 'z', minZ);
@@ -4341,7 +4338,7 @@ class Geometry {
     FlightRuntime.setField(FlightRuntime.field(out, 'max'), 'z', maxZ);
   }
 
-  @:keep public static function setAabbFromPoints(out:AabbLike, points:Array<Vector3Like>):Void {
+  public static function setAabbFromPoints(out:AabbLike, points:Array<Vector3Like>):Void {
     var minX:Dynamic = cast FlightRuntime.UNDEFINED;
     var minY:Dynamic = cast FlightRuntime.UNDEFINED;
     var minZ:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4375,14 +4372,14 @@ class Geometry {
     FlightRuntime.setField(FlightRuntime.field(out, 'max'), 'z', maxZ);
   }
 
-  @:keep public static function setBoundingSphere(out:BoundingSphereLike, centerX:Float, centerY:Float, centerZ:Float, radius:Float):Void {
+  public static function setBoundingSphere(out:BoundingSphereLike, centerX:Float, centerY:Float, centerZ:Float, radius:Float):Void {
     FlightRuntime.setField(FlightRuntime.field(out, 'center'), 'x', centerX);
     FlightRuntime.setField(FlightRuntime.field(out, 'center'), 'y', centerY);
     FlightRuntime.setField(FlightRuntime.field(out, 'center'), 'z', centerZ);
     FlightRuntime.setField(out, 'radius', radius);
   }
 
-  @:keep public static function setBoundingSphereFromAabb(out:BoundingSphereLike, aabb:AabbLike):Void {
+  public static function setBoundingSphereFromAabb(out:BoundingSphereLike, aabb:AabbLike):Void {
     var minX:Dynamic = cast FlightRuntime.UNDEFINED;
     var minY:Dynamic = cast FlightRuntime.UNDEFINED;
     var minZ:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4420,7 +4417,7 @@ class Geometry {
     FlightRuntime.setField(out, 'radius', FlightRuntime.callProperty(HxMath, 'sqrt', cast ([(((ex * ex) + (ey * ey)) + (ez * ez))] : Array<Dynamic>)));
   }
 
-  @:keep public static function setCapsule(out:CapsuleLike, startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Void {
+  public static function setCapsule(out:CapsuleLike, startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Void {
     FlightRuntime.setField(out, 'startX', startX);
     FlightRuntime.setField(out, 'startY', startY);
     FlightRuntime.setField(out, 'startZ', startZ);
@@ -4430,11 +4427,11 @@ class Geometry {
     FlightRuntime.setField(out, 'radius', radius);
   }
 
-  @:keep public static function setEmptyRectangle(out:RectangleLike):Void {
+  public static function setEmptyRectangle(out:RectangleLike):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.setField(out, 'y', FlightRuntime.setField(out, 'width', FlightRuntime.setField(out, 'height', 0.0))));
   }
 
-  @:keep public static function setFrustumFromMatrix4(out:FrustumLike, viewProjection:Matrix4Like):Void {
+  public static function setFrustumFromMatrix4(out:FrustumLike, viewProjection:Matrix4Like):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     var r00:Dynamic = cast FlightRuntime.UNDEFINED;
     var r01:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4477,7 +4474,7 @@ class Geometry {
     FlightRuntime.callValue(Geometry.__setPlane__frustum, cast ([FlightRuntime.field(out, 'far'), (r30 - r20), (r31 - r21), (r32 - r22), (r33 - r23)] : Array<Dynamic>));
   }
 
-  @:keep public static function setGradientTransformMatrix(out:MatrixLike, width:Float, height:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Void {
+  public static function setGradientTransformMatrix(out:MatrixLike, width:Float, height:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Void {
     FlightRuntime.setField(out, 'a', (width / 1638.4));
     FlightRuntime.setField(out, 'd', (height / 1638.4));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(rotation, 0.0))) {
@@ -4495,7 +4492,7 @@ class Geometry {
     FlightRuntime.setField(out, 'ty', (ty + (height / 2.0)));
   }
 
-  @:keep public static function setMatrix(out:MatrixLike, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
+  public static function setMatrix(out:MatrixLike, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
     FlightRuntime.setField(out, 'a', a);
     FlightRuntime.setField(out, 'b', b);
     FlightRuntime.setField(out, 'c', c);
@@ -4504,7 +4501,7 @@ class Geometry {
     FlightRuntime.setField(out, 'ty', ty);
   }
 
-  @:keep public static function setMatrix3(out:Matrix3Like, m00:Float, m01:Float, m02:Float, m10:Float, m11:Float, m12:Float, m20:Float, m21:Float, m22:Float):Void {
+  public static function setMatrix3(out:Matrix3Like, m00:Float, m01:Float, m02:Float, m10:Float, m11:Float, m12:Float, m20:Float, m21:Float, m22:Float):Void {
     var _out:Dynamic = cast FlightRuntime.UNDEFINED;
     _out = FlightRuntime.field(out, 'm');
     FlightRuntime.setIndex(_out, 0.0, m00);
@@ -4518,11 +4515,11 @@ class Geometry {
     FlightRuntime.setIndex(_out, 8.0, m22);
   }
 
-  @:keep public static function setMatrix3Element(out:Matrix3Like, row:Float, column:Float, value:Float):Void {
+  public static function setMatrix3Element(out:Matrix3Like, row:Float, column:Float, value:Float):Void {
     FlightRuntime.setIndex(FlightRuntime.field(out, 'm'), ((column * 3.0) + row), value);
   }
 
-  @:keep public static function setMatrix3FromFloat32Array(out:Matrix3Like, offset:Float, source:flight.internal.FlightFloat32Array):Void {
+  public static function setMatrix3FromFloat32Array(out:Matrix3Like, offset:Float, source:flight.internal.FlightFloat32Array):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.field(out, 'm');
     {
@@ -4534,7 +4531,7 @@ class Geometry {
     }
   }
 
-  @:keep public static function setMatrix3FromMatrix(out:Matrix3Like, source:MatrixLike):Void {
+  public static function setMatrix3FromMatrix(out:Matrix3Like, source:MatrixLike):Void {
     var _out:Dynamic = cast FlightRuntime.UNDEFINED;
     _out = FlightRuntime.field(out, 'm');
     FlightRuntime.setIndex(_out, 0.0, FlightRuntime.field(source, 'a'));
@@ -4548,7 +4545,7 @@ class Geometry {
     FlightRuntime.setIndex(_out, 8.0, 1.0);
   }
 
-  @:keep public static function setMatrix3FromMatrix4(out:Matrix3Like, source:Matrix4Like):Void {
+  public static function setMatrix3FromMatrix4(out:Matrix3Like, source:Matrix4Like):Void {
     var _out:Dynamic = cast FlightRuntime.UNDEFINED;
     var _source:Dynamic = cast FlightRuntime.UNDEFINED;
     _out = FlightRuntime.field(out, 'm');
@@ -4564,11 +4561,11 @@ class Geometry {
     FlightRuntime.setIndex(_out, 8.0, FlightRuntime.getIndex(_source, 10.0));
   }
 
-  @:keep public static function setMatrix3Identity(out:Matrix3Like):Void {
+  public static function setMatrix3Identity(out:Matrix3Like):Void {
     FlightRuntime.callProperty(FlightRuntime.field(out, 'm'), 'set', cast ([Geometry.__identity__matrix3] : Array<Dynamic>));
   }
 
-  @:keep public static function setMatrix3NormalFromMatrix4(out:Matrix3Like, source:Matrix4Like):Void {
+  public static function setMatrix3NormalFromMatrix4(out:Matrix3Like, source:Matrix4Like):Void {
     var scratch:Dynamic = cast FlightRuntime.UNDEFINED;
     scratch = FlightRuntime.callValue(acquireMatrix3, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(setMatrix3FromMatrix4, cast ([scratch, source] : Array<Dynamic>));
@@ -4577,7 +4574,7 @@ class Geometry {
     FlightRuntime.callValue(releaseMatrix3, cast ([scratch] : Array<Dynamic>));
   }
 
-  @:keep public static function setMatrix4(out:Matrix4Like, m00:Float, m01:Float, m02:Float, m03:Float, m10:Float, m11:Float, m12:Float, m13:Float, m20:Float, m21:Float, m22:Float, m23:Float, m30:Float, m31:Float, m32:Float, m33:Float):Void {
+  public static function setMatrix4(out:Matrix4Like, m00:Float, m01:Float, m02:Float, m03:Float, m10:Float, m11:Float, m12:Float, m13:Float, m20:Float, m21:Float, m22:Float, m23:Float, m30:Float, m31:Float, m32:Float, m33:Float):Void {
     var _out:Dynamic = cast FlightRuntime.UNDEFINED;
     _out = FlightRuntime.field(out, 'm');
     FlightRuntime.setIndex(_out, 0.0, m00);
@@ -4598,11 +4595,11 @@ class Geometry {
     FlightRuntime.setIndex(_out, 15.0, m33);
   }
 
-  @:keep public static function setMatrix4Element(out:Matrix4Like, row:Float, column:Float, value:Float):Void {
+  public static function setMatrix4Element(out:Matrix4Like, row:Float, column:Float, value:Float):Void {
     FlightRuntime.setIndex(FlightRuntime.field(out, 'm'), ((column * 4.0) + row), value);
   }
 
-  @:keep public static function setMatrix4From2D(out:Matrix4Like, a:Float, b:Float, c:Float, d:Float, ?tx:Float, ?ty:Float):Void {
+  public static function setMatrix4From2D(out:Matrix4Like, a:Float, b:Float, c:Float, d:Float, ?tx:Float, ?ty:Float):Void {
     var _out:Dynamic = cast FlightRuntime.UNDEFINED;
     _out = FlightRuntime.field(out, 'm');
     (tx = cast (FlightRuntime.coalesce(tx, function():Dynamic return cast 0.0) : Dynamic));
@@ -4625,15 +4622,15 @@ class Geometry {
     FlightRuntime.setIndex(_out, 15.0, 1.0);
   }
 
-  @:keep public static function setMatrix4FromFloat32Array(out:Matrix4Like, offset:Float, source:flight.internal.FlightFloat32Array):Void {
+  public static function setMatrix4FromFloat32Array(out:Matrix4Like, offset:Float, source:flight.internal.FlightFloat32Array):Void {
     FlightRuntime.callProperty(FlightRuntime.field(out, 'm'), 'set', cast ([source.subarray(Std.int(offset), Std.int((offset + 16.0)))] : Array<Dynamic>));
   }
 
-  @:keep public static function setMatrix4FromMatrix(out:Matrix4Like, source:MatrixLike):Void {
+  public static function setMatrix4FromMatrix(out:Matrix4Like, source:MatrixLike):Void {
     FlightRuntime.callValue(setMatrix4From2D, cast ([out, FlightRuntime.field(source, 'a'), FlightRuntime.field(source, 'b'), FlightRuntime.field(source, 'c'), FlightRuntime.field(source, 'd'), FlightRuntime.field(source, 'tx'), FlightRuntime.field(source, 'ty')] : Array<Dynamic>));
   }
 
-  @:keep public static function setMatrix4FromMatrix3(out:Matrix4Like, source:Matrix3Like):Void {
+  public static function setMatrix4FromMatrix3(out:Matrix4Like, source:Matrix3Like):Void {
     var _out:Dynamic = cast FlightRuntime.UNDEFINED;
     var _source:Dynamic = cast FlightRuntime.UNDEFINED;
     _out = FlightRuntime.field(out, 'm');
@@ -4644,7 +4641,7 @@ class Geometry {
     FlightRuntime.setIndex(_out, 10.0, FlightRuntime.getIndex(_source, 8.0));
   }
 
-  @:keep public static function setMatrix4FromQuaternion(out:Matrix4Like, source:QuaternionLike):Void {
+  public static function setMatrix4FromQuaternion(out:Matrix4Like, source:QuaternionLike):Void {
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
     var z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4697,11 +4694,11 @@ class Geometry {
     FlightRuntime.setIndex(_out, 15.0, 1.0);
   }
 
-  @:keep public static function setMatrix4Identity(out:Matrix4Like):Void {
+  public static function setMatrix4Identity(out:Matrix4Like):Void {
     FlightRuntime.callValue(setMatrix4, cast ([out, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
   }
 
-  @:keep public static function setMatrix4LookAt(out:Matrix4Like, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
+  public static function setMatrix4LookAt(out:Matrix4Like, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
     var eyeX:Dynamic = cast FlightRuntime.UNDEFINED;
     var eyeY:Dynamic = cast FlightRuntime.UNDEFINED;
     var eyeZ:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4766,7 +4763,7 @@ class Geometry {
     FlightRuntime.setIndex(_out, 15.0, 1.0);
   }
 
-  @:keep public static function setMatrix4Position(out:Matrix4Like, source:Vector3Like):Void {
+  public static function setMatrix4Position(out:Matrix4Like, source:Vector3Like):Void {
     var _out:Dynamic = cast FlightRuntime.UNDEFINED;
     _out = FlightRuntime.field(out, 'm');
     FlightRuntime.setIndex(_out, 12.0, FlightRuntime.field(source, 'x'));
@@ -4774,7 +4771,7 @@ class Geometry {
     FlightRuntime.setIndex(_out, 14.0, FlightRuntime.field(source, 'z'));
   }
 
-  @:keep public static function setMatrixFromFloat32Array(out:MatrixLike, offset:Float, source:flight.internal.FlightFloat32Array):Void {
+  public static function setMatrixFromFloat32Array(out:MatrixLike, offset:Float, source:flight.internal.FlightFloat32Array):Void {
     FlightRuntime.setField(out, 'a', FlightRuntime.getIndex(source, offset));
     FlightRuntime.setField(out, 'b', FlightRuntime.getIndex(source, (offset + 1.0)));
     FlightRuntime.setField(out, 'c', FlightRuntime.getIndex(source, (offset + 2.0)));
@@ -4783,13 +4780,13 @@ class Geometry {
     FlightRuntime.setField(out, 'ty', FlightRuntime.getIndex(source, (offset + 5.0)));
   }
 
-  @:keep public static function setMatrixFromMatrix3(out:MatrixLike, source:Matrix3Like):Void {
+  public static function setMatrixFromMatrix3(out:MatrixLike, source:Matrix3Like):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.field(source, 'm');
     FlightRuntime.callValue(setMatrix, cast ([out, FlightRuntime.getIndex(m, 0.0), FlightRuntime.getIndex(m, 3.0), FlightRuntime.getIndex(m, 1.0), FlightRuntime.getIndex(m, 4.0), FlightRuntime.getIndex(m, 6.0), FlightRuntime.getIndex(m, 7.0)] : Array<Dynamic>));
   }
 
-  @:keep public static function setMatrixFromMatrix4(out:MatrixLike, source:Matrix4Like):Void {
+  public static function setMatrixFromMatrix4(out:MatrixLike, source:Matrix4Like):Void {
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
     s = FlightRuntime.field(source, 'm');
     FlightRuntime.setField(out, 'a', FlightRuntime.getIndex(s, 0.0));
@@ -4800,11 +4797,11 @@ class Geometry {
     FlightRuntime.setField(out, 'ty', FlightRuntime.getIndex(s, 13.0));
   }
 
-  @:keep public static function setMatrixIdentity(out:MatrixLike):Void {
+  public static function setMatrixIdentity(out:MatrixLike):Void {
     FlightRuntime.callValue(setMatrix, cast ([out, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function setObb(out:ObbLike, centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Void {
+  public static function setObb(out:ObbLike, centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Void {
     FlightRuntime.setField(out, 'centerX', centerX);
     FlightRuntime.setField(out, 'centerY', centerY);
     FlightRuntime.setField(out, 'centerZ', centerZ);
@@ -4817,7 +4814,7 @@ class Geometry {
     FlightRuntime.setField(out, 'orientationW', orientationW);
   }
 
-  @:keep public static function setOrthographicMatrix4(out:Matrix4Like, left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):Void {
+  public static function setOrthographicMatrix4(out:Matrix4Like, left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):Void {
     var _out:Dynamic = cast FlightRuntime.UNDEFINED;
     var sx:Dynamic = cast FlightRuntime.UNDEFINED;
     var sy:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4844,7 +4841,7 @@ class Geometry {
     FlightRuntime.setIndex(_out, 15.0, 1.0);
   }
 
-  @:keep public static function setPerspectiveMatrix4(out:Matrix4Like, fov:Float, aspect:Float, zNear:Float, zFar:Float):Void {
+  public static function setPerspectiveMatrix4(out:Matrix4Like, fov:Float, aspect:Float, zNear:Float, zFar:Float):Void {
     var _out:Dynamic = cast FlightRuntime.UNDEFINED;
     var top:Dynamic = cast FlightRuntime.UNDEFINED;
     var bottom:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4876,21 +4873,21 @@ class Geometry {
     FlightRuntime.setIndex(_out, 15.0, 0.0);
   }
 
-  @:keep public static function setPlane(out:PlaneLike, a:Float, b:Float, c:Float, d:Float):Void {
+  public static function setPlane(out:PlaneLike, a:Float, b:Float, c:Float, d:Float):Void {
     FlightRuntime.setField(out, 'a', a);
     FlightRuntime.setField(out, 'b', b);
     FlightRuntime.setField(out, 'c', c);
     FlightRuntime.setField(out, 'd', d);
   }
 
-  @:keep public static function setPlaneFromNormalAndPoint(out:PlaneLike, normal:Vector3Like, point:Vector3Like):Void {
+  public static function setPlaneFromNormalAndPoint(out:PlaneLike, normal:Vector3Like, point:Vector3Like):Void {
     FlightRuntime.setField(out, 'a', FlightRuntime.field(normal, 'x'));
     FlightRuntime.setField(out, 'b', FlightRuntime.field(normal, 'y'));
     FlightRuntime.setField(out, 'c', FlightRuntime.field(normal, 'z'));
     FlightRuntime.setField(out, 'd', -(((FlightRuntime.field(normal, 'x') * FlightRuntime.field(point, 'x')) + (FlightRuntime.field(normal, 'y') * FlightRuntime.field(point, 'y'))) + (FlightRuntime.field(normal, 'z') * FlightRuntime.field(point, 'z'))));
   }
 
-  @:keep public static function setPlaneFromPoints(out:PlaneLike, a:Vector3Like, b:Vector3Like, c:Vector3Like):Void {
+  public static function setPlaneFromPoints(out:PlaneLike, a:Vector3Like, b:Vector3Like, c:Vector3Like):Void {
     var e1x:Dynamic = cast FlightRuntime.UNDEFINED;
     var e1y:Dynamic = cast FlightRuntime.UNDEFINED;
     var e1z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4926,14 +4923,14 @@ class Geometry {
     FlightRuntime.setField(out, 'd', -(((FlightRuntime.field(out, 'a') * FlightRuntime.field(a, 'x')) + (FlightRuntime.field(out, 'b') * FlightRuntime.field(a, 'y'))) + (FlightRuntime.field(out, 'c') * FlightRuntime.field(a, 'z'))));
   }
 
-  @:keep public static function setQuaternion(out:QuaternionLike, x:Float, y:Float, z:Float, w:Float):Void {
+  public static function setQuaternion(out:QuaternionLike, x:Float, y:Float, z:Float, w:Float):Void {
     FlightRuntime.setField(out, 'x', x);
     FlightRuntime.setField(out, 'y', y);
     FlightRuntime.setField(out, 'z', z);
     FlightRuntime.setField(out, 'w', w);
   }
 
-  @:keep public static function setQuaternionFromAxisAngle(out:QuaternionLike, axis:Vector3Like, angle:Float):Void {
+  public static function setQuaternionFromAxisAngle(out:QuaternionLike, axis:Vector3Like, angle:Float):Void {
     var half:Dynamic = cast FlightRuntime.UNDEFINED;
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
     half = (angle * 0.5);
@@ -4944,7 +4941,7 @@ class Geometry {
     FlightRuntime.setField(out, 'w', FlightRuntime.callProperty(HxMath, 'cos', cast ([half] : Array<Dynamic>)));
   }
 
-  @:keep public static function setQuaternionFromEuler(out:QuaternionLike, x:Float, y:Float, z:Float, order:EulerOrder = 'XYZ'):Void {
+  public static function setQuaternionFromEuler(out:QuaternionLike, x:Float, y:Float, z:Float, order:EulerOrder = 'XYZ'):Void {
     var c1:Dynamic = cast FlightRuntime.UNDEFINED;
     var s1:Dynamic = cast FlightRuntime.UNDEFINED;
     var c2:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4998,7 +4995,7 @@ class Geometry {
     }
   }
 
-  @:keep public static function setQuaternionFromMatrix4(out:QuaternionLike, source:Matrix4Like):Void {
+  public static function setQuaternionFromMatrix4(out:QuaternionLike, source:Matrix4Like):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     var m00:Dynamic = cast FlightRuntime.UNDEFINED;
     var m10:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -5048,7 +5045,7 @@ class Geometry {
 } } }
   }
 
-  @:keep public static function setQuaternionFromUnitVectors(out:QuaternionLike, from:Vector3Like, to:Vector3Like):Void {
+  public static function setQuaternionFromUnitVectors(out:QuaternionLike, from:Vector3Like, to:Vector3Like):Void {
     var fx:Dynamic = cast FlightRuntime.UNDEFINED;
     var fy:Dynamic = cast FlightRuntime.UNDEFINED;
     var fz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -5110,14 +5107,14 @@ class Geometry {
 }
   }
 
-  @:keep public static function setQuaternionIdentity(out:QuaternionLike):Void {
+  public static function setQuaternionIdentity(out:QuaternionLike):Void {
     FlightRuntime.setField(out, 'x', 0.0);
     FlightRuntime.setField(out, 'y', 0.0);
     FlightRuntime.setField(out, 'z', 0.0);
     FlightRuntime.setField(out, 'w', 1.0);
   }
 
-  @:keep public static function setQuaternionLookRotation(out:QuaternionLike, forward:Vector3Like, up:Vector3Like):Void {
+  public static function setQuaternionLookRotation(out:QuaternionLike, forward:Vector3Like, up:Vector3Like):Void {
     var fx:Dynamic = cast FlightRuntime.UNDEFINED;
     var fy:Dynamic = cast FlightRuntime.UNDEFINED;
     var fz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -5200,7 +5197,7 @@ class Geometry {
 } } }
   }
 
-  @:keep public static function setRay3D(out:Ray3DLike, origin:Vector3Like, direction:Vector3Like):Void {
+  public static function setRay3D(out:Ray3DLike, origin:Vector3Like, direction:Vector3Like):Void {
     var ox:Dynamic = cast FlightRuntime.UNDEFINED;
     var oy:Dynamic = cast FlightRuntime.UNDEFINED;
     var oz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -5221,47 +5218,47 @@ class Geometry {
     FlightRuntime.setField(FlightRuntime.field(out, 'direction'), 'z', dz);
   }
 
-  @:keep public static function setRectangle(out:RectangleLike, x:Float, y:Float, width:Float, height:Float):Void {
+  public static function setRectangle(out:RectangleLike, x:Float, y:Float, width:Float, height:Float):Void {
     FlightRuntime.setField(out, 'x', x);
     FlightRuntime.setField(out, 'y', y);
     FlightRuntime.setField(out, 'width', width);
     FlightRuntime.setField(out, 'height', height);
   }
 
-  @:keep public static function setRectangleBottom(target:RectangleLike, value:Float):Void {
+  public static function setRectangleBottom(target:RectangleLike, value:Float):Void {
     FlightRuntime.setField(target, 'height', (value - FlightRuntime.field(target, 'y')));
   }
 
-  @:keep public static function setRectangleBottomRight(target:RectangleLike, point:Vector2Like):Void {
+  public static function setRectangleBottomRight(target:RectangleLike, point:Vector2Like):Void {
     FlightRuntime.setField(target, 'width', (FlightRuntime.field(point, 'x') - FlightRuntime.field(target, 'x')));
     FlightRuntime.setField(target, 'height', (FlightRuntime.field(point, 'y') - FlightRuntime.field(target, 'y')));
   }
 
-  @:keep public static function setRectangleLeft(target:RectangleLike, value:Float):Void {
+  public static function setRectangleLeft(target:RectangleLike, value:Float):Void {
     FlightRuntime.setField(target, 'width', (FlightRuntime.field(target, 'width') - (value - FlightRuntime.field(target, 'x'))));
     FlightRuntime.setField(target, 'x', value);
   }
 
-  @:keep public static function setRectangleRight(target:RectangleLike, value:Float):Void {
+  public static function setRectangleRight(target:RectangleLike, value:Float):Void {
     FlightRuntime.setField(target, 'width', (value - FlightRuntime.field(target, 'x')));
   }
 
-  @:keep public static function setRectangleSize(out:RectangleLike, size:Vector2Like):Void {
+  public static function setRectangleSize(out:RectangleLike, size:Vector2Like):Void {
     FlightRuntime.setField(out, 'width', FlightRuntime.field(size, 'x'));
     FlightRuntime.setField(out, 'height', FlightRuntime.field(size, 'y'));
   }
 
-  @:keep public static function setRectangleTop(target:RectangleLike, value:Float):Void {
+  public static function setRectangleTop(target:RectangleLike, value:Float):Void {
     FlightRuntime.setField(target, 'height', (FlightRuntime.field(target, 'height') - (value - FlightRuntime.field(target, 'y'))));
     FlightRuntime.setField(target, 'y', value);
   }
 
-  @:keep public static function setRectangleTopLeft(out:RectangleLike, point:Vector2Like):Void {
+  public static function setRectangleTopLeft(out:RectangleLike, point:Vector2Like):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.field(point, 'x'));
     FlightRuntime.setField(out, 'y', FlightRuntime.field(point, 'y'));
   }
 
-  @:keep public static function setTransformMatrix(out:MatrixLike, scaleX:Float, scaleY:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Void {
+  public static function setTransformMatrix(out:MatrixLike, scaleX:Float, scaleY:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Void {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(rotation, 0.0))) {
   var cos:Dynamic = FlightRuntime.callProperty(HxMath, 'cos', cast ([rotation] : Array<Dynamic>));
   var sin:Dynamic = FlightRuntime.callProperty(HxMath, 'sin', cast ([rotation] : Array<Dynamic>));
@@ -5279,39 +5276,39 @@ class Geometry {
     FlightRuntime.setField(out, 'ty', ty);
   }
 
-  @:keep public static function setVector2(out:Vector2Like, x:Float, y:Float):Void {
+  public static function setVector2(out:Vector2Like, x:Float, y:Float):Void {
     FlightRuntime.setField(out, 'x', x);
     FlightRuntime.setField(out, 'y', y);
   }
 
-  @:keep public static function setVector2FromFloat32Array(out:Vector2Like, offset:Float, source:flight.internal.FlightFloat32Array):Void {
+  public static function setVector2FromFloat32Array(out:Vector2Like, offset:Float, source:flight.internal.FlightFloat32Array):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.getIndex(source, offset));
     FlightRuntime.setField(out, 'y', FlightRuntime.getIndex(source, (offset + 1.0)));
   }
 
-  @:keep public static function setVector2FromPolar(out:Vector2Like, length:Float, angle:Float):Void {
+  public static function setVector2FromPolar(out:Vector2Like, length:Float, angle:Float):Void {
     FlightRuntime.setField(out, 'x', (length * FlightRuntime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>))));
     FlightRuntime.setField(out, 'y', (length * FlightRuntime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>))));
   }
 
-  @:keep public static function setVector2FromVector3(out:Vector2Like, source:Vector3Like):Void {
+  public static function setVector2FromVector3(out:Vector2Like, source:Vector3Like):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.field(source, 'x'));
     FlightRuntime.setField(out, 'y', FlightRuntime.field(source, 'y'));
   }
 
-  @:keep public static function setVector3(out:Vector3Like, x:Float, y:Float, z:Float):Void {
+  public static function setVector3(out:Vector3Like, x:Float, y:Float, z:Float):Void {
     FlightRuntime.setField(out, 'x', x);
     FlightRuntime.setField(out, 'y', y);
     FlightRuntime.setField(out, 'z', z);
   }
 
-  @:keep public static function setVector3FromFloat32Array(out:Vector3Like, offset:Float, source:flight.internal.FlightFloat32Array):Void {
+  public static function setVector3FromFloat32Array(out:Vector3Like, offset:Float, source:flight.internal.FlightFloat32Array):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.getIndex(source, offset));
     FlightRuntime.setField(out, 'y', FlightRuntime.getIndex(source, (offset + 1.0)));
     FlightRuntime.setField(out, 'z', FlightRuntime.getIndex(source, (offset + 2.0)));
   }
 
-  @:keep public static function setVector3FromSpherical(out:Vector3Like, radius:Float, theta:Float, phi:Float):Void {
+  public static function setVector3FromSpherical(out:Vector3Like, radius:Float, theta:Float, phi:Float):Void {
     var sinTheta:Dynamic = cast FlightRuntime.UNDEFINED;
     sinTheta = FlightRuntime.callProperty(HxMath, 'sin', cast ([theta] : Array<Dynamic>));
     FlightRuntime.setField(out, 'x', ((radius * sinTheta) * FlightRuntime.callProperty(HxMath, 'cos', cast ([phi] : Array<Dynamic>))));
@@ -5319,7 +5316,7 @@ class Geometry {
     FlightRuntime.setField(out, 'z', ((radius * sinTheta) * FlightRuntime.callProperty(HxMath, 'sin', cast ([phi] : Array<Dynamic>))));
   }
 
-  @:keep public static function setVector3FromVector4(out:Vector3Like, source:Vector4Like):Void {
+  public static function setVector3FromVector4(out:Vector3Like, source:Vector4Like):Void {
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
     var z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -5331,21 +5328,21 @@ class Geometry {
     FlightRuntime.setField(out, 'z', z);
   }
 
-  @:keep public static function setVector4(out:Vector4Like, x:Float, y:Float, z:Float, w:Float):Void {
+  public static function setVector4(out:Vector4Like, x:Float, y:Float, z:Float, w:Float):Void {
     FlightRuntime.setField(out, 'x', x);
     FlightRuntime.setField(out, 'y', y);
     FlightRuntime.setField(out, 'z', z);
     FlightRuntime.setField(out, 'w', w);
   }
 
-  @:keep public static function setVector4FromFloat32Array(out:Vector4Like, offset:Float, source:flight.internal.FlightFloat32Array):Void {
+  public static function setVector4FromFloat32Array(out:Vector4Like, offset:Float, source:flight.internal.FlightFloat32Array):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.getIndex(source, offset));
     FlightRuntime.setField(out, 'y', FlightRuntime.getIndex(source, (offset + 1.0)));
     FlightRuntime.setField(out, 'z', FlightRuntime.getIndex(source, (offset + 2.0)));
     FlightRuntime.setField(out, 'w', FlightRuntime.getIndex(source, (offset + 3.0)));
   }
 
-  @:keep public static function setVector4FromVector3(out:Vector4Like, source:Vector3Like, w:Dynamic = 0.0):Void {
+  public static function setVector4FromVector3(out:Vector4Like, source:Vector3Like, w:Dynamic = 0.0):Void {
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
     var z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -5358,7 +5355,7 @@ class Geometry {
     FlightRuntime.setField(out, 'w', w);
   }
 
-  @:keep public static function slerpQuaternion(out:QuaternionLike, a:QuaternionLike, b:QuaternionLike, t:Float):Void {
+  public static function slerpQuaternion(out:QuaternionLike, a:QuaternionLike, b:QuaternionLike, t:Float):Void {
     var ax:Dynamic = cast FlightRuntime.UNDEFINED;
     var ay:Dynamic = cast FlightRuntime.UNDEFINED;
     var az:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -5401,25 +5398,25 @@ class Geometry {
     FlightRuntime.setField(out, 'w', ((aw * scaleA) + (bw * scaleB)));
   }
 
-  @:keep public static function subtractVector2(out:Vector2Like, source:Vector2Like, other:Vector2Like):Void {
+  public static function subtractVector2(out:Vector2Like, source:Vector2Like, other:Vector2Like):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(source, 'x') - FlightRuntime.field(other, 'x')));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(source, 'y') - FlightRuntime.field(other, 'y')));
   }
 
-  @:keep public static function subtractVector3(out:Vector3Like, source:Vector3Like, other:Vector3Like):Void {
+  public static function subtractVector3(out:Vector3Like, source:Vector3Like, other:Vector3Like):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(source, 'x') - FlightRuntime.field(other, 'x')));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(source, 'y') - FlightRuntime.field(other, 'y')));
     FlightRuntime.setField(out, 'z', (FlightRuntime.field(source, 'z') - FlightRuntime.field(other, 'z')));
   }
 
-  @:keep public static function subtractVector4(out:Vector4Like, source:Vector4Like, other:Vector4Like):Void {
+  public static function subtractVector4(out:Vector4Like, source:Vector4Like, other:Vector4Like):Void {
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(source, 'x') - FlightRuntime.field(other, 'x')));
     FlightRuntime.setField(out, 'y', (FlightRuntime.field(source, 'y') - FlightRuntime.field(other, 'y')));
     FlightRuntime.setField(out, 'z', (FlightRuntime.field(source, 'z') - FlightRuntime.field(other, 'z')));
     FlightRuntime.setField(out, 'w', (FlightRuntime.field(source, 'w') - FlightRuntime.field(other, 'w')));
   }
 
-  @:keep public static function transformAabbByMatrix4(out:AabbLike, aabb:AabbLike, m:Matrix4Like):Void {
+  public static function transformAabbByMatrix4(out:AabbLike, aabb:AabbLike, m:Matrix4Like):Void {
     var minX:Dynamic = cast FlightRuntime.UNDEFINED;
     var minY:Dynamic = cast FlightRuntime.UNDEFINED;
     var minZ:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -5466,7 +5463,7 @@ class Geometry {
     FlightRuntime.setField(FlightRuntime.field(out, 'max'), 'z', (tcz + tez));
   }
 
-  @:keep public static function transformBoundingSphereByMatrix4(out:BoundingSphereLike, sphere:BoundingSphereLike, m:Matrix4Like):Void {
+  public static function transformBoundingSphereByMatrix4(out:BoundingSphereLike, sphere:BoundingSphereLike, m:Matrix4Like):Void {
     var cx:Dynamic = cast FlightRuntime.UNDEFINED;
     var cy:Dynamic = cast FlightRuntime.UNDEFINED;
     var cz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -5497,7 +5494,7 @@ class Geometry {
     FlightRuntime.setField(out, 'radius', FlightRuntime.select(FlightRuntime.compare(radius, 0.0, '<'), function():Dynamic return cast radius, function():Dynamic return cast (radius * maxScale)));
   }
 
-  @:keep public static function transformObbByMatrix4(out:ObbLike, obb:ObbLike, m:Matrix4Like):Void {
+  public static function transformObbByMatrix4(out:ObbLike, obb:ObbLike, m:Matrix4Like):Void {
     var cx:Dynamic = cast FlightRuntime.UNDEFINED;
     var cy:Dynamic = cast FlightRuntime.UNDEFINED;
     var cz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -5593,7 +5590,7 @@ class Geometry {
     FlightRuntime.setField(out, 'orientationW', ((((mqw * oqw) - (mqx * oqx)) - (mqy * oqy)) - (mqz * oqz)));
   }
 
-  @:keep public static function transformVector3ByMatrix3(out:Vector3Like, source:Vector3Like, matrix:{ var m:flight.internal.FlightFloat32Array; }):Void {
+  public static function transformVector3ByMatrix3(out:Vector3Like, source:Vector3Like, matrix:{ var m:flight.internal.FlightFloat32Array; }):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -5607,12 +5604,12 @@ class Geometry {
     FlightRuntime.setField(out, 'z', (((FlightRuntime.getIndex(m, 2.0) * x) + (FlightRuntime.getIndex(m, 5.0) * y)) + (FlightRuntime.getIndex(m, 8.0) * z)));
   }
 
-  @:keep public static function translateMatrix(out:MatrixLike, source:MatrixLike, dx:Float, dy:Float):Void {
+  public static function translateMatrix(out:MatrixLike, source:MatrixLike, dx:Float, dy:Float):Void {
     FlightRuntime.setField(out, 'tx', (FlightRuntime.field(source, 'tx') + dx));
     FlightRuntime.setField(out, 'ty', (FlightRuntime.field(source, 'ty') + dy));
   }
 
-  @:keep public static function translateMatrix3(out:Matrix3Like, source:Matrix3Like, tx:Float, ty:Float):Void {
+  public static function translateMatrix3(out:Matrix3Like, source:Matrix3Like, tx:Float, ty:Float):Void {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var o:Dynamic = cast FlightRuntime.UNDEFINED;
     a = FlightRuntime.field(source, 'm');
@@ -5628,7 +5625,7 @@ class Geometry {
     FlightRuntime.setIndex(o, 8.0, (((FlightRuntime.getIndex(a, 2.0) * tx) + (FlightRuntime.getIndex(a, 5.0) * ty)) + FlightRuntime.getIndex(a, 8.0)));
   }
 
-  @:keep public static function translateMatrix4(out:Matrix4Like, source:Matrix4Like, tx:Float, ty:Float, tz:Float):Void {
+  public static function translateMatrix4(out:Matrix4Like, source:Matrix4Like, tx:Float, ty:Float, tz:Float):Void {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var o:Dynamic = cast FlightRuntime.UNDEFINED;
     a = FlightRuntime.field(source, 'm');
@@ -5639,16 +5636,16 @@ class Geometry {
     FlightRuntime.setIndex(o, 14.0, ((((FlightRuntime.getIndex(a, 2.0) * tx) + (FlightRuntime.getIndex(a, 6.0) * ty)) + (FlightRuntime.getIndex(a, 10.0) * tz)) + FlightRuntime.getIndex(a, 14.0)));
   }
 
-  @:keep public static function translateMatrixByVector(out:MatrixLike, matrix:MatrixLike, vector:Vector2Like):Void {
+  public static function translateMatrixByVector(out:MatrixLike, matrix:MatrixLike, vector:Vector2Like):Void {
     FlightRuntime.callValue(translateMatrixByVectorXY, cast ([out, matrix, FlightRuntime.field(vector, 'x'), FlightRuntime.field(vector, 'y')] : Array<Dynamic>));
   }
 
-  @:keep public static function translateMatrixByVectorXY(out:MatrixLike, source:MatrixLike, x:Float, y:Float):Void {
+  public static function translateMatrixByVectorXY(out:MatrixLike, source:MatrixLike, x:Float, y:Float):Void {
     FlightRuntime.setField(out, 'tx', ((FlightRuntime.field(source, 'tx') + (FlightRuntime.field(source, 'a') * x)) + (FlightRuntime.field(source, 'c') * y)));
     FlightRuntime.setField(out, 'ty', ((FlightRuntime.field(source, 'ty') + (FlightRuntime.field(source, 'b') * x)) + (FlightRuntime.field(source, 'd') * y)));
   }
 
-  @:keep public static function transposeMatrix3(out:Matrix3Like, source:Matrix3Like):Void {
+  public static function transposeMatrix3(out:Matrix3Like, source:Matrix3Like):Void {
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
     var m1:Dynamic = cast FlightRuntime.UNDEFINED;
     var m2:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -5676,7 +5673,7 @@ class Geometry {
     FlightRuntime.setIndex(o, 8.0, FlightRuntime.getIndex(s, 8.0));
   }
 
-  @:keep public static function transposeMatrix4(out:Matrix4Like, source:Matrix4Like):Void {
+  public static function transposeMatrix4(out:Matrix4Like, source:Matrix4Like):Void {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(out, source))) { FlightRuntime.callProperty(FlightRuntime.field(out, 'm'), 'set', cast ([FlightRuntime.field(source, 'm')] : Array<Dynamic>)); }
     FlightRuntime.callValue(Geometry.__swap__matrix4, cast ([out, source, 1.0, 4.0] : Array<Dynamic>));
     FlightRuntime.callValue(Geometry.__swap__matrix4, cast ([out, source, 2.0, 8.0] : Array<Dynamic>));
@@ -5686,7 +5683,7 @@ class Geometry {
     FlightRuntime.callValue(Geometry.__swap__matrix4, cast ([out, source, 11.0, 14.0] : Array<Dynamic>));
   }
 
-  @:keep public static function unionAabb(out:AabbLike, a:AabbLike, b:AabbLike):Void {
+  public static function unionAabb(out:AabbLike, a:AabbLike, b:AabbLike):Void {
     var aMinX:Dynamic = cast FlightRuntime.UNDEFINED;
     var aMinY:Dynamic = cast FlightRuntime.UNDEFINED;
     var aMinZ:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -5737,7 +5734,7 @@ class Geometry {
 
   public static final VECTOR4_Z_AXIS:Vector4 = FlightRuntime.callValue(createVector4, cast ([0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
 
-  @:keep public static function writeMatrix3ToFloat32Array(out:flight.internal.FlightFloat32Array, offset:Float, source:Matrix3Like):Void {
+  public static function writeMatrix3ToFloat32Array(out:flight.internal.FlightFloat32Array, offset:Float, source:Matrix3Like):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.field(source, 'm');
     {
@@ -5749,11 +5746,11 @@ class Geometry {
     }
   }
 
-  @:keep public static function writeMatrix4ToFloat32Array(out:flight.internal.FlightFloat32Array, offset:Float, source:Matrix4Like):Void {
+  public static function writeMatrix4ToFloat32Array(out:flight.internal.FlightFloat32Array, offset:Float, source:Matrix4Like):Void {
     FlightRuntime.callProperty(out, 'set', cast ([FlightRuntime.field(source, 'm'), offset] : Array<Dynamic>));
   }
 
-  @:keep public static function writeMatrixToFloat32Array(out:flight.internal.FlightFloat32Array, offset:Float, source:MatrixLike):Void {
+  public static function writeMatrixToFloat32Array(out:flight.internal.FlightFloat32Array, offset:Float, source:MatrixLike):Void {
     FlightRuntime.setIndex(out, offset, FlightRuntime.field(source, 'a'));
     FlightRuntime.setIndex(out, (offset + 1.0), FlightRuntime.field(source, 'b'));
     FlightRuntime.setIndex(out, (offset + 2.0), FlightRuntime.field(source, 'c'));
@@ -5762,18 +5759,18 @@ class Geometry {
     FlightRuntime.setIndex(out, (offset + 5.0), FlightRuntime.field(source, 'ty'));
   }
 
-  @:keep public static function writeVector2ToFloat32Array(out:flight.internal.FlightFloat32Array, offset:Float, source:Vector2Like):Void {
+  public static function writeVector2ToFloat32Array(out:flight.internal.FlightFloat32Array, offset:Float, source:Vector2Like):Void {
     FlightRuntime.setIndex(out, offset, FlightRuntime.field(source, 'x'));
     FlightRuntime.setIndex(out, (offset + 1.0), FlightRuntime.field(source, 'y'));
   }
 
-  @:keep public static function writeVector3ToFloat32Array(out:flight.internal.FlightFloat32Array, offset:Float, source:Vector3Like):Void {
+  public static function writeVector3ToFloat32Array(out:flight.internal.FlightFloat32Array, offset:Float, source:Vector3Like):Void {
     FlightRuntime.setIndex(out, offset, FlightRuntime.field(source, 'x'));
     FlightRuntime.setIndex(out, (offset + 1.0), FlightRuntime.field(source, 'y'));
     FlightRuntime.setIndex(out, (offset + 2.0), FlightRuntime.field(source, 'z'));
   }
 
-  @:keep public static function writeVector4ToFloat32Array(out:flight.internal.FlightFloat32Array, offset:Float, source:Vector4Like):Void {
+  public static function writeVector4ToFloat32Array(out:flight.internal.FlightFloat32Array, offset:Float, source:Vector4Like):Void {
     FlightRuntime.setIndex(out, offset, FlightRuntime.field(source, 'x'));
     FlightRuntime.setIndex(out, (offset + 1.0), FlightRuntime.field(source, 'y'));
     FlightRuntime.setIndex(out, (offset + 2.0), FlightRuntime.field(source, 'z'));

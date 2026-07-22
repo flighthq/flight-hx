@@ -36,12 +36,9 @@ import flight.Types.TriangleCulling;
 
 typedef AnyHitTestFn__shapeHitTestRegistry = Dynamic;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.ShapeApi")
 class ShapeApi {
-  @:keep public static function appendEllipseToPath__shapeFill(path:Path, cx:Float, cy:Float, rx:Float, ry:Float):Void {
+  public static function appendEllipseToPath__shapeFill(path:Path, cx:Float, cy:Float, rx:Float, ry:Float):Void {
     var kx:Dynamic = cast FlightRuntime.UNDEFINED;
     var ky:Dynamic = cast FlightRuntime.UNDEFINED;
     kx = (rx * ShapeApi.KAPPA__shapeFill);
@@ -53,7 +50,7 @@ class ShapeApi {
     FlightRuntime.callValue(ShapeApi.pushCubic__shapeFill, cast ([path, (cx + kx), (cy - ry), (cx + rx), (cy - ky), (cx + rx), cy] : Array<Dynamic>));
   }
 
-  @:keep public static function appendRawPath__shapeFill(path:Path, verbs:Array<Float>, data:Array<Float>):Void {
+  public static function appendRawPath__shapeFill(path:Path, verbs:Array<Float>, data:Array<Float>):Void {
     var d:Dynamic = cast FlightRuntime.UNDEFINED;
     d = 0.0;
     {
@@ -75,7 +72,7 @@ class ShapeApi {
     }
   }
 
-  @:keep public static function appendRectangleToPath__shapeFill(path:Path, x:Float, y:Float, w:Float, h:Float):Void {
+  public static function appendRectangleToPath__shapeFill(path:Path, x:Float, y:Float, w:Float, h:Float):Void {
     FlightRuntime.callValue(ShapeApi.pushVerb__shapeFill, cast ([path, Types.PathCommandValue.MOVE_TO, x, y] : Array<Dynamic>));
     FlightRuntime.callValue(ShapeApi.pushVerb__shapeFill, cast ([path, Types.PathCommandValue.LINE_TO, (x + w), y] : Array<Dynamic>));
     FlightRuntime.callValue(ShapeApi.pushVerb__shapeFill, cast ([path, Types.PathCommandValue.LINE_TO, (x + w), (y + h)] : Array<Dynamic>));
@@ -83,7 +80,7 @@ class ShapeApi {
     FlightRuntime.callValue(ShapeApi.pushVerb__shapeFill, cast ([path, Types.PathCommandValue.LINE_TO, x, y] : Array<Dynamic>));
   }
 
-  @:keep public static function appendRoundRectangleToPath__shapeFill(path:Path, x:Float, y:Float, w:Float, h:Float, rx:Float, ry:Float):Void {
+  public static function appendRoundRectangleToPath__shapeFill(path:Path, x:Float, y:Float, w:Float, h:Float, rx:Float, ry:Float):Void {
     var right:Dynamic = cast FlightRuntime.UNDEFINED;
     var bottom:Dynamic = cast FlightRuntime.UNDEFINED;
     right = (x + w);
@@ -99,7 +96,7 @@ class ShapeApi {
     FlightRuntime.callValue(ShapeApi.pushQuadratic__shapeFill, cast ([path, x, y, (x + rx), y] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeArc(shape:Shape, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, anticlockwise:Dynamic = false):Void {
+  public static function appendShapeArc(shape:Shape, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, anticlockwise:Dynamic = false):Void {
     var cmds:Dynamic = cast FlightRuntime.UNDEFINED;
     var sweep:Dynamic = cast FlightRuntime.UNDEFINED;
     var segmentCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -115,7 +112,7 @@ class ShapeApi {
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeArcTo(shape:Shape, x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Void {
+  public static function appendShapeArcTo(shape:Shape, x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Void {
     var cmds:Dynamic = cast FlightRuntime.UNDEFINED;
     var penX:Dynamic = cast FlightRuntime.UNDEFINED;
     var penY:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -224,88 +221,88 @@ class ShapeApi {
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeBeginBitmapFill(shape:Shape, bitmap:ImageResource, ?matrix:Null<Matrix>, repeat:Dynamic = true, smooth:Dynamic = false):Void {
+  public static function appendShapeBeginBitmapFill(shape:Shape, bitmap:ImageResource, ?matrix:Null<Matrix>, repeat:Dynamic = true, smooth:Dynamic = false):Void {
     if (matrix == null) matrix = cast (null : Dynamic);
     FlightRuntime.pushMany(FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands'), cast (['beginBitmapFill', 4.0, bitmap, matrix, repeat, smooth] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeBeginFill(shape:Shape, color:Dynamic = 0.0, alpha:Dynamic = 1.0):Void {
+  public static function appendShapeBeginFill(shape:Shape, color:Dynamic = 0.0, alpha:Dynamic = 1.0):Void {
     FlightRuntime.pushMany(FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands'), cast (['beginFill', 2.0, color, alpha] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeBeginGradientFill(shape:Shape, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Matrix>, spreadMethod:SpreadMethod = 'pad', interpolationMethod:InterpolationMethod = 'rgb', focalPointRatio:Dynamic = 0.0):Void {
+  public static function appendShapeBeginGradientFill(shape:Shape, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Matrix>, spreadMethod:SpreadMethod = 'pad', interpolationMethod:InterpolationMethod = 'rgb', focalPointRatio:Dynamic = 0.0):Void {
     if (matrix == null) matrix = cast (null : Dynamic);
     FlightRuntime.pushMany(FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands'), cast (['beginGradientFill', 8.0, gradientType, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeCircle(shape:Shape, x:Float, y:Float, radius:Float):Void {
+  public static function appendShapeCircle(shape:Shape, x:Float, y:Float, radius:Float):Void {
     FlightRuntime.pushMany(FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands'), cast (['drawCircle', 3.0, x, y, radius] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeCubicCurveTo(shape:Shape, controlX1:Float, controlY1:Float, controlX2:Float, controlY2:Float, anchorX:Float, anchorY:Float):Void {
+  public static function appendShapeCubicCurveTo(shape:Shape, controlX1:Float, controlY1:Float, controlX2:Float, controlY2:Float, anchorX:Float, anchorY:Float):Void {
     FlightRuntime.pushMany(FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands'), cast (['cubicCurveTo', 6.0, controlX1, controlY1, controlX2, controlY2, anchorX, anchorY] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeCurveTo(shape:Shape, controlX:Float, controlY:Float, anchorX:Float, anchorY:Float):Void {
+  public static function appendShapeCurveTo(shape:Shape, controlX:Float, controlY:Float, anchorX:Float, anchorY:Float):Void {
     FlightRuntime.pushMany(FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands'), cast (['curveTo', 4.0, controlX, controlY, anchorX, anchorY] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeDrawTriangles(shape:Shape, vertices:Array<Float>, ?indices:Null<Array<Float>>, ?uvtData:Null<Array<Float>>, culling:TriangleCulling = 'none'):Void {
+  public static function appendShapeDrawTriangles(shape:Shape, vertices:Array<Float>, ?indices:Null<Array<Float>>, ?uvtData:Null<Array<Float>>, culling:TriangleCulling = 'none'):Void {
     if (indices == null) indices = cast (null : Dynamic);
     if (uvtData == null) uvtData = cast (null : Dynamic);
     FlightRuntime.pushMany(FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands'), cast (['drawTriangles', 4.0, vertices, indices, uvtData, culling] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeEllipse(shape:Shape, x:Float, y:Float, width:Float, height:Float):Void {
+  public static function appendShapeEllipse(shape:Shape, x:Float, y:Float, width:Float, height:Float):Void {
     FlightRuntime.pushMany(FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands'), cast (['drawEllipse', 4.0, x, y, width, height] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeEndFill(shape:Shape):Void {
+  public static function appendShapeEndFill(shape:Shape):Void {
     FlightRuntime.pushMany(FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands'), cast (['endFill', 0.0] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeLineBitmapStyle(shape:Shape, bitmap:ImageResource, ?matrix:Null<Matrix>, repeat:Dynamic = true, smooth:Dynamic = false):Void {
+  public static function appendShapeLineBitmapStyle(shape:Shape, bitmap:ImageResource, ?matrix:Null<Matrix>, repeat:Dynamic = true, smooth:Dynamic = false):Void {
     if (matrix == null) matrix = cast (null : Dynamic);
     FlightRuntime.pushMany(FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands'), cast (['lineBitmapStyle', 4.0, bitmap, matrix, repeat, smooth] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeLineGradientStyle(shape:Shape, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Matrix>, spreadMethod:SpreadMethod = 'pad', interpolationMethod:InterpolationMethod = 'rgb', focalPointRatio:Dynamic = 0.0):Void {
+  public static function appendShapeLineGradientStyle(shape:Shape, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Matrix>, spreadMethod:SpreadMethod = 'pad', interpolationMethod:InterpolationMethod = 'rgb', focalPointRatio:Dynamic = 0.0):Void {
     if (matrix == null) matrix = cast (null : Dynamic);
     FlightRuntime.pushMany(FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands'), cast (['lineGradientStyle', 8.0, gradientType, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeLineStyle(shape:Shape, thickness:Dynamic = 1.0, color:Dynamic = 0.0, alpha:Dynamic = 1.0, pixelHinting:Dynamic = false, scaleMode:LineScaleMode = 'normal', caps:CapsStyle = 'none', joints:JointStyle = 'round', miterLimit:Dynamic = 3.0):Void {
+  public static function appendShapeLineStyle(shape:Shape, thickness:Dynamic = 1.0, color:Dynamic = 0.0, alpha:Dynamic = 1.0, pixelHinting:Dynamic = false, scaleMode:LineScaleMode = 'normal', caps:CapsStyle = 'none', joints:JointStyle = 'round', miterLimit:Dynamic = 3.0):Void {
     FlightRuntime.pushMany(FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands'), cast (['lineStyle', 8.0, thickness, color, alpha, pixelHinting, scaleMode, caps, joints, miterLimit] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeLineTo(shape:Shape, x:Float, y:Float):Void {
+  public static function appendShapeLineTo(shape:Shape, x:Float, y:Float):Void {
     FlightRuntime.pushMany(FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands'), cast (['lineTo', 2.0, x, y] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeMoveTo(shape:Shape, x:Float, y:Float):Void {
+  public static function appendShapeMoveTo(shape:Shape, x:Float, y:Float):Void {
     FlightRuntime.pushMany(FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands'), cast (['moveTo', 2.0, x, y] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapePath(shape:Shape, commands:Array<Float>, pathData:Array<Float>, winding:PathWinding = 'evenOdd'):Void {
+  public static function appendShapePath(shape:Shape, commands:Array<Float>, pathData:Array<Float>, winding:PathWinding = 'evenOdd'):Void {
     FlightRuntime.pushMany(FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands'), cast (['drawPath', 3.0, commands, pathData, winding] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapePolygon(shape:Shape, points:Array<Float>):Void {
+  public static function appendShapePolygon(shape:Shape, points:Array<Float>):Void {
     var cmds:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(points, 'length'), 4.0, '<'))) { return; }
     cmds = FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands');
@@ -321,7 +318,7 @@ class ShapeApi {
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapePolyline(shape:Shape, points:Array<Float>):Void {
+  public static function appendShapePolyline(shape:Shape, points:Array<Float>):Void {
     var cmds:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(points, 'length'), 4.0, '<'))) { return; }
     cmds = FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands');
@@ -336,17 +333,17 @@ class ShapeApi {
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeRectangle(shape:Shape, x:Float, y:Float, width:Float, height:Float):Void {
+  public static function appendShapeRectangle(shape:Shape, x:Float, y:Float, width:Float, height:Float):Void {
     FlightRuntime.pushMany(FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands'), cast (['drawRectangle', 4.0, x, y, width, height] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeRoundRectangle(shape:Shape, x:Float, y:Float, width:Float, height:Float, ellipseWidth:Float, ellipseHeight:Float):Void {
+  public static function appendShapeRoundRectangle(shape:Shape, x:Float, y:Float, width:Float, height:Float, ellipseWidth:Float, ellipseHeight:Float):Void {
     FlightRuntime.pushMany(FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands'), cast (['drawRoundRectangle', 6.0, x, y, width, height, ellipseWidth, ellipseHeight] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function appendShapeRoundRectangleVarying(shape:Shape, x:Float, y:Float, width:Float, height:Float, topLeftRadius:Float, topRightRadius:Float, bottomLeftRadius:Float, bottomRightRadius:Float):Void {
+  public static function appendShapeRoundRectangleVarying(shape:Shape, x:Float, y:Float, width:Float, height:Float, topLeftRadius:Float, topRightRadius:Float, bottomLeftRadius:Float, bottomRightRadius:Float):Void {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     var cmds:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -365,12 +362,12 @@ class ShapeApi {
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function clearShapeCommands(shape:Shape):Void {
+  public static function clearShapeCommands(shape:Shape):Void {
     FlightRuntime.setLength(FlightRuntime.field(FlightRuntime.field(shape, 'data'), 'commands'), 0.0);
     FlightRuntime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  @:keep public static function computeShapeLocalBoundsRectangle(out:Rectangle, source:BoundsNodeAny):Void {
+  public static function computeShapeLocalBoundsRectangle(out:Rectangle, source:BoundsNodeAny):Void {
     var shape:Dynamic = cast FlightRuntime.UNDEFINED;
     var commands:Dynamic = cast FlightRuntime.UNDEFINED;
     var minX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -642,43 +639,43 @@ class ShapeApi {
 }
   }
 
-  @:keep public static function copyShapeCommands(out:Shape, source:Shape):Void {
+  public static function copyShapeCommands(out:Shape, source:Shape):Void {
     FlightRuntime.setLength(FlightRuntime.field(FlightRuntime.field(out, 'data'), 'commands'), 0.0);
     FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.field(out, 'data'), 'commands'), 'push', FlightRuntime.concatArrays([FlightRuntime.toArray(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'commands'))]));
     FlightRuntime.callValue(invalidateContent, cast ([out] : Array<Dynamic>));
   }
 
-  @:keep public static function createScale9Shape(scale9Grid:RectangleLike, ?obj:PartialNode<Scale9Shape>):Scale9Shape {
+  public static function createScale9Shape(scale9Grid:RectangleLike, ?obj:PartialNode<Scale9Shape>):Scale9Shape {
     return cast (cast FlightRuntime.callValue(createDisplayObjectGeneric, cast ([Types.Scale9ShapeKind, (cast obj : PartialNode<Scale9Shape>), function(data:Dynamic) return FlightRuntime.callValue(createScale9ShapeData, cast ([scale9Grid, data] : Array<Dynamic>)), createScale9ShapeRuntime] : Array<Dynamic>)) : Scale9Shape);
     return cast null;
   }
 
-  @:keep public static function createScale9ShapeData(scale9Grid:RectangleLike, ?data:Dynamic):Scale9ShapeData {
+  public static function createScale9ShapeData(scale9Grid:RectangleLike, ?data:Dynamic):Scale9ShapeData {
     return cast { commands: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'commands'), function():Dynamic return cast cast ([] : Array<Dynamic>)), scale9Grid: scale9Grid };
     return cast null;
   }
 
-  @:keep public static function createScale9ShapeRuntime():Scale9ShapeRuntime {
+  public static function createScale9ShapeRuntime():Scale9ShapeRuntime {
     return cast (cast FlightRuntime.callValue(createShapeRuntime, cast ([] : Array<Dynamic>)) : Scale9ShapeRuntime);
     return cast null;
   }
 
-  @:keep public static function createShape(?obj:PartialNode<Shape>):Shape {
+  public static function createShape(?obj:PartialNode<Shape>):Shape {
     return cast (cast FlightRuntime.callValue(createDisplayObjectGeneric, cast ([Types.ShapeKind, obj, createShapeData, createShapeRuntime] : Array<Dynamic>)) : Shape);
     return cast null;
   }
 
-  @:keep public static function createShapeData(?data:Dynamic):ShapeData {
+  public static function createShapeData(?data:Dynamic):ShapeData {
     return cast { commands: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'commands'), function():Dynamic return cast cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createShapeRuntime():ShapeRuntime {
+  public static function createShapeRuntime():ShapeRuntime {
     return cast (cast FlightRuntime.callValue(createDisplayObjectRuntime, cast ([{ computeLocalBoundsRectangle: computeShapeLocalBoundsRectangle }] : Array<Dynamic>)) : ShapeRuntime);
     return cast null;
   }
 
-  @:keep public static function enableShapeHitTesting():Void {
+  public static function enableShapeHitTesting():Void {
     FlightRuntime.callValue(registerShapeHitTestCommand, cast ([{ key: 'drawCircle', hitTest: function(x:Float, y:Float, buf:Array<ShapeCommandToken>, i:Float) {
   var cx:Dynamic = cast FlightRuntime.UNDEFINED;
   var cy:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -763,16 +760,16 @@ class ShapeApi {
 } }] : Array<Dynamic>));
   }
 
-  @:keep public static function getScale9ShapeRuntime(source:Scale9Shape):Scale9ShapeRuntime {
+  public static function getScale9ShapeRuntime(source:Scale9Shape):Scale9ShapeRuntime {
     return cast (cast FlightRuntime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : Scale9ShapeRuntime);
     return cast null;
   }
 
-  @:keep public static function getShapeBounds(out:Rectangle, source:Shape):Void {
+  public static function getShapeBounds(out:Rectangle, source:Shape):Void {
     FlightRuntime.callValue(computeShapeLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  @:keep public static function getShapeCommandCount(source:Shape):Float {
+  public static function getShapeCommandCount(source:Shape):Float {
     var commands:Dynamic = cast FlightRuntime.UNDEFINED;
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -788,7 +785,7 @@ class ShapeApi {
     return cast null;
   }
 
-  @:keep public static function getShapeFillRegions(commands:Array<ShapeCommandToken>):Null<Array<ShapeFillRegion>> {
+  public static function getShapeFillRegions(commands:Array<ShapeCommandToken>):Null<Array<ShapeFillRegion>> {
     var regions:Array<ShapeFillRegion> = cast FlightRuntime.UNDEFINED;
     var path:Null<Path> = cast FlightRuntime.UNDEFINED;
     var color:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -896,12 +893,12 @@ class ShapeApi {
     return cast null;
   }
 
-  @:keep public static function getShapeRuntime(source:Shape):ShapeRuntime {
+  public static function getShapeRuntime(source:Shape):ShapeRuntime {
     return cast (cast FlightRuntime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : ShapeRuntime);
     return cast null;
   }
 
-  @:keep public static function hasNonSolidShapeFill(commands:Array<ShapeCommandToken>):Bool {
+  public static function hasNonSolidShapeFill(commands:Array<ShapeCommandToken>):Bool {
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     i = 0.0;
     while (FlightRuntime.truthy(FlightRuntime.compare(i, FlightRuntime.field(commands, 'length'), '<'))) {
@@ -921,7 +918,7 @@ class ShapeApi {
 
   public static final hitTests__shapeHitTestRegistry:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
 
-  @:keep public static function hitTestShapeCommandPoint(buf:Array<ShapeCommandToken>, i:Float, x:Float, y:Float):Null<Bool> {
+  public static function hitTestShapeCommandPoint(buf:Array<ShapeCommandToken>, i:Float, x:Float, y:Float):Null<Bool> {
     var key:Dynamic = cast FlightRuntime.UNDEFINED;
     var fn:Dynamic = cast FlightRuntime.UNDEFINED;
     key = (cast FlightRuntime.getIndex(buf, i) : String);
@@ -931,14 +928,14 @@ class ShapeApi {
     return cast null;
   }
 
-  @:keep public static function isShapeEmpty(source:Shape):Bool {
+  public static function isShapeEmpty(source:Shape):Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'commands'), 'length'), 0.0);
     return cast null;
   }
 
   public static final KAPPA__shapeFill:Dynamic = 0.5522847498307936;
 
-  @:keep public static function normalizeArcSweep__shapeCommands(startAngle:Float, endAngle:Float, anticlockwise:Bool):Float {
+  public static function normalizeArcSweep__shapeCommands(startAngle:Float, endAngle:Float, anticlockwise:Bool):Float {
     var sweep:Dynamic = cast FlightRuntime.UNDEFINED;
     sweep = (endAngle - startAngle);
     if (FlightRuntime.truthy(anticlockwise)) {
@@ -950,7 +947,7 @@ class ShapeApi {
     return cast null;
   }
 
-  @:keep public static function pushArcCubics__shapeCommands(cmds:Array<ShapeCommandToken>, cx:Float, cy:Float, radius:Float, startAngle:Float, segmentCount:Float, segmentAngle:Float, alpha:Float):Void {
+  public static function pushArcCubics__shapeCommands(cmds:Array<ShapeCommandToken>, cx:Float, cy:Float, radius:Float, startAngle:Float, segmentCount:Float, segmentAngle:Float, alpha:Float):Void {
     var angle:Dynamic = cast FlightRuntime.UNDEFINED;
     angle = startAngle;
     {
@@ -968,22 +965,22 @@ class ShapeApi {
     }
   }
 
-  @:keep public static function pushCubic__shapeFill(path:Path, c1x:Float, c1y:Float, c2x:Float, c2y:Float, ax:Float, ay:Float):Void {
+  public static function pushCubic__shapeFill(path:Path, c1x:Float, c1y:Float, c2x:Float, c2y:Float, ax:Float, ay:Float):Void {
     FlightRuntime.callProperty(FlightRuntime.field(path, 'commands'), 'push', cast ([Types.PathCommandValue.CUBIC_CURVE_TO] : Array<Dynamic>));
     FlightRuntime.pushMany(FlightRuntime.field(path, 'data'), cast ([c1x, c1y, c2x, c2y, ax, ay] : Array<Dynamic>));
   }
 
-  @:keep public static function pushQuadratic__shapeFill(path:Path, cx:Float, cy:Float, ax:Float, ay:Float):Void {
+  public static function pushQuadratic__shapeFill(path:Path, cx:Float, cy:Float, ax:Float, ay:Float):Void {
     FlightRuntime.callProperty(FlightRuntime.field(path, 'commands'), 'push', cast ([Types.PathCommandValue.CURVE_TO] : Array<Dynamic>));
     FlightRuntime.pushMany(FlightRuntime.field(path, 'data'), cast ([cx, cy, ax, ay] : Array<Dynamic>));
   }
 
-  @:keep public static function pushVerb__shapeFill(path:Path, verb:Float, x:Float, y:Float):Void {
+  public static function pushVerb__shapeFill(path:Path, verb:Float, x:Float, y:Float):Void {
     FlightRuntime.callProperty(FlightRuntime.field(path, 'commands'), 'push', cast ([verb] : Array<Dynamic>));
     FlightRuntime.pushMany(FlightRuntime.field(path, 'data'), cast ([x, y] : Array<Dynamic>));
   }
 
-  @:keep public static function registerShapeHitTestCommand<K>(command:ShapeHitTestCommand<Dynamic>):Void {
+  public static function registerShapeHitTestCommand<K>(command:ShapeHitTestCommand<Dynamic>):Void {
     FlightRuntime.callProperty(ShapeApi.hitTests__shapeHitTestRegistry, 'set', cast ([FlightRuntime.field(command, 'key'), (cast FlightRuntime.field(command, 'hitTest') : AnyHitTestFn__shapeHitTestRegistry)] : Array<Dynamic>));
   }
 }

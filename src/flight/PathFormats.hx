@@ -13,12 +13,9 @@ import flight.PathApi.createPath;
 import flight.PathApi.forEachPathSegment;
 import flight.Types.Path;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.PathFormats")
 class PathFormats {
-  @:keep public static function appendSvgPathData(path:Path, d:String):Bool {
+  public static function appendSvgPathData(path:Path, d:String):Bool {
     var length:Dynamic = cast FlightRuntime.UNDEFINED;
     var pos:Dynamic = cast FlightRuntime.UNDEFINED;
     var currentX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -249,7 +246,7 @@ class PathFormats {
     return cast null;
   }
 
-  @:keep public static function formatSvgNumber__svgPathData(value:Float, ?precision:Float):String {
+  public static function formatSvgNumber__svgPathData(value:Float, ?precision:Float):String {
     var factor:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(precision, FlightRuntime.UNDEFINED))) { return cast Std.string(value); }
     factor = HxMath.pow(10.0, precision);
@@ -257,7 +254,7 @@ class PathFormats {
     return cast null;
   }
 
-  @:keep public static function formatSvgPathData(path:Path, ?options:{ @:optional var precision:Float; }):String {
+  public static function formatSvgPathData(path:Path, ?options:{ @:optional var precision:Float; }):String {
     var precision:Dynamic = cast FlightRuntime.UNDEFINED;
     var parts:Array<String> = cast FlightRuntime.UNDEFINED;
     precision = FlightRuntime.optionalField(options, 'precision');
@@ -279,12 +276,12 @@ class PathFormats {
     return cast null;
   }
 
-  @:keep public static function isSvgCommandLetter__svgPathData(c:String):Bool {
+  public static function isSvgCommandLetter__svgPathData(c:String):Bool {
     return cast !FlightRuntime.strictEquals(FlightRuntime.callProperty('MmLlHhVvCcSsQqTtAaZz', 'indexOf', cast ([c] : Array<Dynamic>)), -1.0);
     return cast null;
   }
 
-  @:keep public static function parseSvgPathData(d:String):Null<Path> {
+  public static function parseSvgPathData(d:String):Null<Path> {
     var path:Dynamic = cast FlightRuntime.UNDEFINED;
     path = FlightRuntime.callValue(createPath, cast ([] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(appendSvgPathData, cast ([path, d] : Array<Dynamic>))))) { return cast null; }

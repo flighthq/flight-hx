@@ -7,24 +7,21 @@ import flight.Types.VideoResource;
 import flight.Types.VideoResourceLoadOptions;
 import flight.Types.VideoResourceUrl;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.VideoApi")
 class VideoApi {
-  @:keep public static function canPlayVideoType(mimeType:String):Bool {
+  public static function canPlayVideoType(mimeType:String):Bool {
     var probe:Dynamic = cast FlightRuntime.UNDEFINED;
     probe = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['video'] : Array<Dynamic>));
     return cast !FlightRuntime.strictEquals(FlightRuntime.callProperty(probe, 'canPlayType', cast ([mimeType] : Array<Dynamic>)), '');
     return cast null;
   }
 
-  @:keep public static function createVideoResource(?element:Dynamic):VideoResource {
+  public static function createVideoResource(?element:Dynamic):VideoResource {
     return cast { element: FlightRuntime.coalesce(element, function():Dynamic return cast null) };
     return cast null;
   }
 
-  @:keep public static function createVideoResourceFromMediaStream(stream:Dynamic):VideoResource {
+  public static function createVideoResourceFromMediaStream(stream:Dynamic):VideoResource {
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     element = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['video'] : Array<Dynamic>));
     FlightRuntime.setField(element, 'srcObject', stream);
@@ -32,7 +29,7 @@ class VideoApi {
     return cast null;
   }
 
-  @:keep public static function detectVideoMimeType(data:Dynamic):Null<String> {
+  public static function detectVideoMimeType(data:Dynamic):Null<String> {
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     b = FlightRuntime.select(FlightRuntime.isInstanceOf(data, FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>))), function():Dynamic return cast data, function():Dynamic return cast FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [data]));
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(b, 'byteLength'), 4.0, '<'))) { return cast null; }
@@ -43,7 +40,7 @@ class VideoApi {
     return cast null;
   }
 
-  @:keep public static function disposeVideoResource(resource:VideoResource):Void {
+  public static function disposeVideoResource(resource:VideoResource):Void {
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     element = FlightRuntime.field(resource, 'element');
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(element, null))) {
@@ -53,29 +50,29 @@ class VideoApi {
     FlightRuntime.setField(resource, 'element', null);
   }
 
-  @:keep public static function getVideoResourceDuration(resource:VideoResource):Float {
+  public static function getVideoResourceDuration(resource:VideoResource):Float {
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.field(resource, 'element'), null), function():Dynamic return cast FlightRuntime.field(FlightRuntime.field(resource, 'element'), 'duration'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  @:keep public static function getVideoResourceHeight(resource:VideoResource):Float {
+  public static function getVideoResourceHeight(resource:VideoResource):Float {
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.field(resource, 'element'), null), function():Dynamic return cast FlightRuntime.field(FlightRuntime.field(resource, 'element'), 'videoHeight'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  @:keep public static function getVideoResourceWidth(resource:VideoResource):Float {
+  public static function getVideoResourceWidth(resource:VideoResource):Float {
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.field(resource, 'element'), null), function():Dynamic return cast FlightRuntime.field(FlightRuntime.field(resource, 'element'), 'videoWidth'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  @:keep public static function hasVideoResourceElement(resource:VideoResource):Bool {
+  public static function hasVideoResourceElement(resource:VideoResource):Bool {
     return cast !FlightRuntime.strictEquals(FlightRuntime.field(resource, 'element'), null);
     return cast null;
   }
 
   public static final HAVE_CURRENT_DATA__videoResource:Dynamic = 2.0;
 
-  @:keep public static function inferVideoMimeType(url:String):Null<String> {
+  public static function inferVideoMimeType(url:String):Null<String> {
     var ext:Dynamic = cast FlightRuntime.UNDEFINED;
     ext = FlightRuntime.callOptionalProperty(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime.getIndex(FlightRuntime.callProperty(url, 'split', cast (['?'] : Array<Dynamic>)), 0.0), 'split', cast (['.'] : Array<Dynamic>)), 'pop', cast ([] : Array<Dynamic>)), 'toLowerCase', cast ([] : Array<Dynamic>));
     {
@@ -111,47 +108,46 @@ class VideoApi {
     return cast null;
   }
 
-  @:keep public static function isVideoResourceEmpty(resource:VideoResource):Bool {
+  public static function isVideoResourceEmpty(resource:VideoResource):Bool {
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     element = FlightRuntime.field(resource, 'element');
     return cast FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(element, null), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(element, 'videoWidth'), 0.0, '<=')), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(element, 'videoHeight'), 0.0, '<='));
     return cast null;
   }
 
-  @:keep public static function isVideoResourceReady(resource:VideoResource):Bool {
+  public static function isVideoResourceReady(resource:VideoResource):Bool {
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     element = FlightRuntime.field(resource, 'element');
     return cast FlightRuntime.andValue(!FlightRuntime.strictEquals(element, null), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(element, 'readyState'), VideoApi.HAVE_CURRENT_DATA__videoResource, '>='));
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadVideoResourceFromBlob(blob:Dynamic, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flight.internal.FlightPromise<VideoResource> {
-    var url:Dynamic = cast FlightRuntime.UNDEFINED;
-    url = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['URL'] : Array<Dynamic>)), 'createObjectURL', cast ([blob] : Array<Dynamic>));
-    try {
+  public static function loadVideoResourceFromBlob(blob:Dynamic, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flight.internal.FlightPromise<VideoResource> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<VideoResource> {
+      var url:Dynamic = cast FlightRuntime.UNDEFINED;
+      url = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['URL'] : Array<Dynamic>)), 'createObjectURL', cast ([blob] : Array<Dynamic>));
       try {
+        try {
   var __returnValue0:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(loadVideoResourceFromUrl, cast ([url, options, signal] : Array<Dynamic>)));
   {
     FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['URL'] : Array<Dynamic>)), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
   }
   return cast __returnValue0;
 } catch (__error:Dynamic) { throw __error; }
-    } catch (__finallyError1:Dynamic) {
+      } catch (__finallyError1:Dynamic) {
+        {
+          FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['URL'] : Array<Dynamic>)), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
+        }
+        throw __finallyError1;
+      }
       {
         FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['URL'] : Array<Dynamic>)), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
       }
-      throw __finallyError1;
-    }
-    {
-      FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['URL'] : Array<Dynamic>)), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
-    }
-    return cast null;
+      return cast null;
+    })();
   }
 
-  @:keep public static function loadVideoResourceFromUrl(url:String, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flight.internal.FlightPromise<VideoResource> {
+  public static function loadVideoResourceFromUrl(url:String, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flight.internal.FlightPromise<VideoResource> {
     if (FlightRuntime.truthy(FlightRuntime.optionalField(signal, 'aborted'))) { return cast FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'reject', cast ([FlightRuntime.field(signal, 'reason')] : Array<Dynamic>)); }
     return cast FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(resolve:Dynamic, reject:Dynamic) {
   var element:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -192,7 +188,7 @@ class VideoApi {
     return cast null;
   }
 
-  @:keep public static function loadVideoResourceFromUrls(sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flight.internal.FlightPromise<VideoResource> {
+  public static function loadVideoResourceFromUrls(sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flight.internal.FlightPromise<VideoResource> {
     var selected:Dynamic = cast FlightRuntime.UNDEFINED;
     selected = FlightRuntime.callValue(selectVideoResourceUrl, cast ([sources] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(selected, null))) { return cast FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([FlightRuntime.callValue(createVideoResource, cast ([] : Array<Dynamic>))] : Array<Dynamic>)); }
@@ -200,7 +196,7 @@ class VideoApi {
     return cast null;
   }
 
-  @:keep public static function readinessEventName__videoResourceFrom(readiness:Dynamic):String {
+  public static function readinessEventName__videoResourceFrom(readiness:Dynamic):String {
     {
       var __switchValue = readiness;
       if (__switchValue == 'metadata') {
@@ -216,7 +212,7 @@ class VideoApi {
     return cast null;
   }
 
-  @:keep public static function selectVideoResourceUrl(sources:Array<VideoResourceUrl>):Null<VideoResourceUrl> {
+  public static function selectVideoResourceUrl(sources:Array<VideoResourceUrl>):Null<VideoResourceUrl> {
     for (source in FlightRuntime.iterable(sources)) {
       if (FlightRuntime.truthy(FlightRuntime.callValue(canPlayVideoType, cast ([FlightRuntime.coalesce(FlightRuntime.coalesce(FlightRuntime.field(source, 'type'), function():Dynamic return cast FlightRuntime.callValue(inferVideoMimeType, cast ([FlightRuntime.field(source, 'url')] : Array<Dynamic>))), function():Dynamic return cast '')] : Array<Dynamic>)))) { return cast source; }
     }

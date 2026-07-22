@@ -22,12 +22,9 @@ typedef AudioMixerRuntime__audioMixer = { var activeChannels:Dynamic; var buses:
 
 typedef VideoChannelRuntime__videoChannel = { var loopsRemaining:Float; var onEnded:Dynamic; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Media")
 class Media {
-  @:keep public static function addAudioBusToMixer(mixer:AudioMixer, bus:AudioBus):Void {
+  public static function addAudioBusToMixer(mixer:AudioMixer, bus:AudioBus):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var gainNode:Dynamic = cast FlightRuntime.UNDEFINED;
     var pannerNode:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
@@ -55,22 +52,22 @@ class Media {
 
   public static final channelRuntime__audioChannel:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function clamp__audioChannel(value:Float, min:Float, max:Float):Float {
+  public static function clamp__audioChannel(value:Float, min:Float, max:Float):Float {
     return cast FlightRuntime.callProperty(HxMath, 'min', cast ([FlightRuntime.callProperty(HxMath, 'max', cast ([value, min] : Array<Dynamic>)), max] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function clamp__audioMixer(value:Float, min:Float, max:Float):Float {
+  public static function clamp__audioMixer(value:Float, min:Float, max:Float):Float {
     return cast FlightRuntime.callProperty(HxMath, 'min', cast ([FlightRuntime.callProperty(HxMath, 'max', cast ([value, min] : Array<Dynamic>)), max] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function clamp__videoChannel(value:Float, min:Float, max:Float):Float {
+  public static function clamp__videoChannel(value:Float, min:Float, max:Float):Float {
     return cast FlightRuntime.callProperty(HxMath, 'min', cast ([FlightRuntime.callProperty(HxMath, 'max', cast ([value, min] : Array<Dynamic>)), max] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function completeAudioChannel__audioChannel(channel:AudioChannel):Void {
+  public static function completeAudioChannel__audioChannel(channel:AudioChannel):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callProperty(Media.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(runtime, FlightRuntime.UNDEFINED), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(channel, 'state'), 'playing')))) { return; }
@@ -87,7 +84,7 @@ class Media {
     FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(channel, 'onComplete')] : Array<Dynamic>));
   }
 
-  @:keep public static function completeVideoChannel__videoChannel(channel:VideoChannel):Void {
+  public static function completeVideoChannel__videoChannel(channel:VideoChannel):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(channel, 'state'), 'playing'))) { return; }
     runtime = FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(channel, 'source'), 'element'), null), function():Dynamic return cast FlightRuntime.callProperty(Media.videoChannelRuntimes__videoChannel, 'get', cast ([FlightRuntime.field(FlightRuntime.field(channel, 'source'), 'element')] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.UNDEFINED);
@@ -102,7 +99,7 @@ class Media {
     FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(channel, 'onComplete')] : Array<Dynamic>));
   }
 
-  @:keep public static function connectAudioChannelToNode(channel:AudioChannel, destinationNode:Dynamic):Void {
+  public static function connectAudioChannelToNode(channel:AudioChannel, destinationNode:Dynamic):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callProperty(Media.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(runtime, FlightRuntime.UNDEFINED))) { return; }
@@ -113,12 +110,12 @@ class Media {
     FlightRuntime.setField(runtime, 'destinationNode', destinationNode);
   }
 
-  @:keep public static function createAudioBus(?options:AudioBusOptions):AudioBus {
+  public static function createAudioBus(?options:AudioBusOptions):AudioBus {
     return cast { gain: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'gain'), function():Dynamic return cast 1.0), muted: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'muted'), function():Dynamic return cast false), name: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'name'), function():Dynamic return cast ''), pan: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'pan'), function():Dynamic return cast 0.0) };
     return cast null;
   }
 
-  @:keep public static function createAudioMixer(context:Dynamic, ?options:AudioMixerOptions):AudioMixer {
+  public static function createAudioMixer(context:Dynamic, ?options:AudioMixerOptions):AudioMixer {
     var masterGainNode:Dynamic = cast FlightRuntime.UNDEFINED;
     var mixer:AudioMixer = cast FlightRuntime.UNDEFINED;
     masterGainNode = FlightRuntime.callProperty(context, 'createGain', cast ([] : Array<Dynamic>));
@@ -130,7 +127,7 @@ class Media {
     return cast null;
   }
 
-  @:keep public static function destroyAudioMixer(mixer:AudioMixer):Void {
+  public static function destroyAudioMixer(mixer:AudioMixer):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callProperty(Media.mixerRuntimes__audioMixer, 'get', cast ([mixer] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(runtime, FlightRuntime.UNDEFINED))) { return; }
@@ -154,7 +151,7 @@ class Media {
     FlightRuntime.callProperty(Media.mixerRuntimes__audioMixer, 'delete', cast ([mixer] : Array<Dynamic>));
   }
 
-  @:keep public static function fadeAudioBusGain(mixer:AudioMixer, bus:AudioBus, targetGain:Float, durationMs:Float):Void {
+  public static function fadeAudioBusGain(mixer:AudioMixer, bus:AudioBus, targetGain:Float, durationMs:Float):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var gainNode:Dynamic = cast FlightRuntime.UNDEFINED;
     var now:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -171,7 +168,7 @@ class Media {
     FlightRuntime.setField(bus, 'gain', targetGain);
   }
 
-  @:keep public static function fadeAudioChannelGain(channel:AudioChannel, targetGain:Float, durationMs:Float):Void {
+  public static function fadeAudioChannelGain(channel:AudioChannel, targetGain:Float, durationMs:Float):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var ctx:Dynamic = cast FlightRuntime.UNDEFINED;
     var now:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -188,7 +185,7 @@ class Media {
     FlightRuntime.setField(channel, 'gain', targetGain);
   }
 
-  @:keep public static function getAudioChannelCurrentTime(channel:AudioChannel):Float {
+  public static function getAudioChannelCurrentTime(channel:AudioChannel):Float {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callProperty(Media.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(runtime, FlightRuntime.UNDEFINED), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(channel, 'state'), 'playing')))) { return cast FlightRuntime.field(channel, 'currentTime'); }
@@ -196,26 +193,26 @@ class Media {
     return cast null;
   }
 
-  @:keep public static function getAudioChannelDuration(channel:AudioChannel):Float {
+  public static function getAudioChannelDuration(channel:AudioChannel):Float {
     return cast FlightRuntime.field(channel, 'length');
     return cast null;
   }
 
-  @:keep public static function getAudioChannelInputNode(channel:AudioChannel):Null<Dynamic> {
+  public static function getAudioChannelInputNode(channel:AudioChannel):Null<Dynamic> {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callProperty(Media.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
     return cast FlightRuntime.coalesce(FlightRuntime.optionalField(runtime, 'sourceNode'), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getAudioChannelOutputNode(channel:AudioChannel):Null<Dynamic> {
+  public static function getAudioChannelOutputNode(channel:AudioChannel):Null<Dynamic> {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callProperty(Media.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
     return cast FlightRuntime.coalesce(FlightRuntime.optionalField(runtime, 'gainNode'), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getAudioMixerActiveChannels(mixer:AudioMixer):Array<AudioChannel> {
+  public static function getAudioMixerActiveChannels(mixer:AudioMixer):Array<AudioChannel> {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callProperty(Media.mixerRuntimes__audioMixer, 'get', cast ([mixer] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(runtime, FlightRuntime.UNDEFINED))) { return cast cast ([] : Array<Dynamic>); }
@@ -223,7 +220,7 @@ class Media {
     return cast null;
   }
 
-  @:keep public static function getVideoChannelCurrentTime(channel:VideoChannel):Float {
+  public static function getVideoChannelCurrentTime(channel:VideoChannel):Float {
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     element = FlightRuntime.field(FlightRuntime.field(channel, 'source'), 'element');
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(element, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(channel, 'state'), 'playing')))) { return cast FlightRuntime.field(channel, 'currentTime'); }
@@ -231,38 +228,38 @@ class Media {
     return cast null;
   }
 
-  @:keep public static function getVideoChannelDuration(channel:VideoChannel):Float {
+  public static function getVideoChannelDuration(channel:VideoChannel):Float {
     return cast FlightRuntime.field(channel, 'length');
     return cast null;
   }
 
-  @:keep public static function getVideoChannelHeight(channel:VideoChannel):Float {
+  public static function getVideoChannelHeight(channel:VideoChannel):Float {
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     element = FlightRuntime.field(FlightRuntime.field(channel, 'source'), 'element');
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(element, null), function():Dynamic return cast FlightRuntime.field(element, 'videoHeight'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  @:keep public static function getVideoChannelWidth(channel:VideoChannel):Float {
+  public static function getVideoChannelWidth(channel:VideoChannel):Float {
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     element = FlightRuntime.field(FlightRuntime.field(channel, 'source'), 'element');
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(element, null), function():Dynamic return cast FlightRuntime.field(element, 'videoWidth'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  @:keep public static function isAudioChannelPlaying(channel:AudioChannel):Bool {
+  public static function isAudioChannelPlaying(channel:AudioChannel):Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.field(channel, 'state'), 'playing');
     return cast null;
   }
 
-  @:keep public static function isVideoChannelPlaying(channel:VideoChannel):Bool {
+  public static function isVideoChannelPlaying(channel:VideoChannel):Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.field(channel, 'state'), 'playing');
     return cast null;
   }
 
   public static final mixerRuntimes__audioMixer:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function pauseAllAudioMixerChannels(mixer:AudioMixer):Void {
+  public static function pauseAllAudioMixerChannels(mixer:AudioMixer):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callProperty(Media.mixerRuntimes__audioMixer, 'get', cast ([mixer] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(runtime, FlightRuntime.UNDEFINED))) { return; }
@@ -271,14 +268,14 @@ class Media {
     }
   }
 
-  @:keep public static function pauseAudioChannel(channel:AudioChannel):Void {
+  public static function pauseAudioChannel(channel:AudioChannel):Void {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(channel, 'state'), 'playing'))) { return; }
     FlightRuntime.setField(channel, 'currentTime', FlightRuntime.callValue(getAudioChannelCurrentTime, cast ([channel] : Array<Dynamic>)));
     FlightRuntime.setField(channel, 'state', 'paused');
     FlightRuntime.callValue(Media.stopActiveNode__audioChannel, cast ([channel, false] : Array<Dynamic>));
   }
 
-  @:keep public static function pauseVideoChannel(channel:VideoChannel):Void {
+  public static function pauseVideoChannel(channel:VideoChannel):Void {
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(channel, 'state'), 'playing'))) { return; }
     element = FlightRuntime.field(FlightRuntime.field(channel, 'source'), 'element');
@@ -288,7 +285,7 @@ class Media {
     FlightRuntime.callProperty(element, 'pause', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function playAudioResource(context:Dynamic, source:AudioResource, ?options:AudioPlayOptions):Null<AudioChannel> {
+  public static function playAudioResource(context:Dynamic, source:AudioResource, ?options:AudioPlayOptions):Null<AudioChannel> {
     var channel:AudioChannel = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(source, 'buffer'), null))) { return cast null; }
     channel = { currentTime: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'currentTime'), function():Dynamic return cast 0.0), gain: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'gain'), function():Dynamic return cast 1.0), length: (FlightRuntime.field(FlightRuntime.field(source, 'buffer'), 'duration') * 1000.0), loops: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'loops'), function():Dynamic return cast 0.0), playbackRate: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'playbackRate'), function():Dynamic return cast 1.0), source: source, state: 'stopped', onComplete: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
@@ -298,7 +295,7 @@ class Media {
     return cast null;
   }
 
-  @:keep public static function playVideoResource(source:VideoResource, ?options:VideoPlayOptions):Null<VideoChannel> {
+  public static function playVideoResource(source:VideoResource, ?options:VideoPlayOptions):Null<VideoChannel> {
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var channel:VideoChannel = cast FlightRuntime.UNDEFINED;
@@ -322,7 +319,7 @@ class Media {
     return cast null;
   }
 
-  @:keep public static function registerBusInReverseMap__audioMixer(bus:AudioBus, runtime:AudioMixerRuntime__audioMixer):Void {
+  public static function registerBusInReverseMap__audioMixer(bus:AudioBus, runtime:AudioMixerRuntime__audioMixer):Void {
     var runtimes:Dynamic = cast FlightRuntime.UNDEFINED;
     runtimes = FlightRuntime.callProperty(Media.busToMixerRuntimes__audioMixer, 'get', cast ([bus] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(runtimes, FlightRuntime.UNDEFINED))) {
@@ -332,7 +329,7 @@ class Media {
     FlightRuntime.callProperty(runtimes, 'add', cast ([runtime] : Array<Dynamic>));
   }
 
-  @:keep public static function resumeAllAudioMixerChannels(mixer:AudioMixer):Void {
+  public static function resumeAllAudioMixerChannels(mixer:AudioMixer):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callProperty(Media.mixerRuntimes__audioMixer, 'get', cast ([mixer] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(runtime, FlightRuntime.UNDEFINED))) { return; }
@@ -341,17 +338,17 @@ class Media {
     }
   }
 
-  @:keep public static function resumeAudioChannel(channel:AudioChannel):Void {
+  public static function resumeAudioChannel(channel:AudioChannel):Void {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.field(channel, 'state'), 'playing'), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(channel, 'source'), 'buffer'), null)))) { return; }
     FlightRuntime.callValue(Media.startAudioChannel__audioChannel, cast ([channel] : Array<Dynamic>));
   }
 
-  @:keep public static function resumeVideoChannel(channel:VideoChannel):Void {
+  public static function resumeVideoChannel(channel:VideoChannel):Void {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.field(channel, 'state'), 'playing'), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(channel, 'source'), 'element'), null)))) { return; }
     FlightRuntime.callValue(Media.startVideoChannel__videoChannel, cast ([channel] : Array<Dynamic>));
   }
 
-  @:keep public static function routeAudioChannelToMixerBus(mixer:AudioMixer, channel:AudioChannel, bus:AudioBus):Void {
+  public static function routeAudioChannelToMixerBus(mixer:AudioMixer, channel:AudioChannel, bus:AudioBus):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var busGainNode:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callProperty(Media.mixerRuntimes__audioMixer, 'get', cast ([mixer] : Array<Dynamic>));
@@ -365,28 +362,28 @@ class Media {
 }
   }
 
-  @:keep public static function setAudioBusGain(bus:AudioBus, value:Float):Float {
+  public static function setAudioBusGain(bus:AudioBus, value:Float):Float {
     FlightRuntime.setField(bus, 'gain', value);
     FlightRuntime.callValue(Media.updateBusGainNode__audioMixer, cast ([bus] : Array<Dynamic>));
     return cast FlightRuntime.field(bus, 'gain');
     return cast null;
   }
 
-  @:keep public static function setAudioBusMuted(bus:AudioBus, muted:Bool):Bool {
+  public static function setAudioBusMuted(bus:AudioBus, muted:Bool):Bool {
     FlightRuntime.setField(bus, 'muted', muted);
     FlightRuntime.callValue(Media.updateBusGainNode__audioMixer, cast ([bus] : Array<Dynamic>));
     return cast FlightRuntime.field(bus, 'muted');
     return cast null;
   }
 
-  @:keep public static function setAudioBusPan(bus:AudioBus, value:Float):Float {
+  public static function setAudioBusPan(bus:AudioBus, value:Float):Float {
     FlightRuntime.setField(bus, 'pan', FlightRuntime.callValue(Media.clamp__audioMixer, cast ([value, -1.0, 1.0] : Array<Dynamic>)));
     FlightRuntime.callValue(Media.updateBusPannerNode__audioMixer, cast ([bus] : Array<Dynamic>));
     return cast FlightRuntime.field(bus, 'pan');
     return cast null;
   }
 
-  @:keep public static function setAudioChannelCurrentTime(channel:AudioChannel, value:Float):Float {
+  public static function setAudioChannelCurrentTime(channel:AudioChannel, value:Float):Float {
     FlightRuntime.setField(channel, 'currentTime', FlightRuntime.callValue(Media.clamp__audioChannel, cast ([value, 0.0, FlightRuntime.field(channel, 'length')] : Array<Dynamic>)));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(channel, 'state'), 'playing'))) {
   FlightRuntime.callValue(Media.stopActiveNode__audioChannel, cast ([channel, false] : Array<Dynamic>));
@@ -396,7 +393,7 @@ class Media {
     return cast null;
   }
 
-  @:keep public static function setAudioChannelGain(channel:AudioChannel, value:Float):Float {
+  public static function setAudioChannelGain(channel:AudioChannel, value:Float):Float {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.setField(channel, 'gain', value);
     runtime = FlightRuntime.callProperty(Media.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
@@ -405,7 +402,7 @@ class Media {
     return cast null;
   }
 
-  @:keep public static function setAudioChannelPlaybackRate(channel:AudioChannel, value:Float):Float {
+  public static function setAudioChannelPlaybackRate(channel:AudioChannel, value:Float):Float {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.setField(channel, 'playbackRate', value);
     runtime = FlightRuntime.callProperty(Media.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
@@ -414,7 +411,7 @@ class Media {
     return cast null;
   }
 
-  @:keep public static function setAudioMixerMasterGain(mixer:AudioMixer, value:Float):Float {
+  public static function setAudioMixerMasterGain(mixer:AudioMixer, value:Float):Float {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.setField(mixer, 'masterGain', value);
     runtime = FlightRuntime.callProperty(Media.mixerRuntimes__audioMixer, 'get', cast ([mixer] : Array<Dynamic>));
@@ -425,7 +422,7 @@ class Media {
     return cast null;
   }
 
-  @:keep public static function setAudioMixerMasterMuted(mixer:AudioMixer, muted:Bool):Bool {
+  public static function setAudioMixerMasterMuted(mixer:AudioMixer, muted:Bool):Bool {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.setField(mixer, 'masterMuted', muted);
     runtime = FlightRuntime.callProperty(Media.mixerRuntimes__audioMixer, 'get', cast ([mixer] : Array<Dynamic>));
@@ -436,7 +433,7 @@ class Media {
     return cast null;
   }
 
-  @:keep public static function setVideoChannelCurrentTime(channel:VideoChannel, value:Float):Float {
+  public static function setVideoChannelCurrentTime(channel:VideoChannel, value:Float):Float {
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.setField(channel, 'currentTime', FlightRuntime.callValue(Media.clamp__videoChannel, cast ([value, 0.0, FlightRuntime.field(channel, 'length')] : Array<Dynamic>)));
     element = FlightRuntime.field(FlightRuntime.field(channel, 'source'), 'element');
@@ -445,7 +442,7 @@ class Media {
     return cast null;
   }
 
-  @:keep public static function setVideoChannelGain(channel:VideoChannel, value:Float):Float {
+  public static function setVideoChannelGain(channel:VideoChannel, value:Float):Float {
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.setField(channel, 'gain', value);
     element = FlightRuntime.field(FlightRuntime.field(channel, 'source'), 'element');
@@ -454,7 +451,7 @@ class Media {
     return cast null;
   }
 
-  @:keep public static function setVideoChannelPlaybackRate(channel:VideoChannel, value:Float):Float {
+  public static function setVideoChannelPlaybackRate(channel:VideoChannel, value:Float):Float {
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.setField(channel, 'playbackRate', value);
     element = FlightRuntime.field(FlightRuntime.field(channel, 'source'), 'element');
@@ -463,7 +460,7 @@ class Media {
     return cast null;
   }
 
-  @:keep public static function startAudioChannel__audioChannel(channel:AudioChannel):Void {
+  public static function startAudioChannel__audioChannel(channel:AudioChannel):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var buffer:Dynamic = cast FlightRuntime.UNDEFINED;
     var sourceNode:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -494,7 +491,7 @@ class Media {
 }
   }
 
-  @:keep public static function startVideoChannel__videoChannel(channel:VideoChannel):Void {
+  public static function startVideoChannel__videoChannel(channel:VideoChannel):Void {
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     element = FlightRuntime.field(FlightRuntime.field(channel, 'source'), 'element');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(element, null))) { return; }
@@ -505,7 +502,7 @@ class Media {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function stopActiveNode__audioChannel(channel:AudioChannel, complete:Bool):Void {
+  public static function stopActiveNode__audioChannel(channel:AudioChannel, complete:Bool):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var sourceNode:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callProperty(Media.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
@@ -517,7 +514,7 @@ class Media {
     FlightRuntime.callProperty(sourceNode, 'stop', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function stopAllAudioMixerChannels(mixer:AudioMixer):Void {
+  public static function stopAllAudioMixerChannels(mixer:AudioMixer):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callProperty(Media.mixerRuntimes__audioMixer, 'get', cast ([mixer] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(runtime, FlightRuntime.UNDEFINED))) { return; }
@@ -528,13 +525,13 @@ class Media {
     FlightRuntime.callProperty(FlightRuntime.field(runtime, 'activeChannels'), 'clear', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function stopAudioChannel(channel:AudioChannel):Void {
+  public static function stopAudioChannel(channel:AudioChannel):Void {
     FlightRuntime.callValue(Media.stopActiveNode__audioChannel, cast ([channel, false] : Array<Dynamic>));
     FlightRuntime.setField(channel, 'currentTime', 0.0);
     FlightRuntime.setField(channel, 'state', 'stopped');
   }
 
-  @:keep public static function stopVideoChannel(channel:VideoChannel):Void {
+  public static function stopVideoChannel(channel:VideoChannel):Void {
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     element = FlightRuntime.field(FlightRuntime.field(channel, 'source'), 'element');
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(element, null))) {
@@ -547,7 +544,7 @@ class Media {
     FlightRuntime.setField(channel, 'state', 'stopped');
   }
 
-  @:keep public static function unregisterBusFromReverseMap__audioMixer(bus:AudioBus, runtime:AudioMixerRuntime__audioMixer):Void {
+  public static function unregisterBusFromReverseMap__audioMixer(bus:AudioBus, runtime:AudioMixerRuntime__audioMixer):Void {
     var runtimes:Dynamic = cast FlightRuntime.UNDEFINED;
     runtimes = FlightRuntime.callProperty(Media.busToMixerRuntimes__audioMixer, 'get', cast ([bus] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(runtimes, FlightRuntime.UNDEFINED))) { return; }
@@ -555,7 +552,7 @@ class Media {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(runtimes, 'size'), 0.0))) { FlightRuntime.callProperty(Media.busToMixerRuntimes__audioMixer, 'delete', cast ([bus] : Array<Dynamic>)); }
   }
 
-  @:keep public static function unrouteAudioChannelFromMixerBus(mixer:AudioMixer, channel:AudioChannel):Void {
+  public static function unrouteAudioChannelFromMixerBus(mixer:AudioMixer, channel:AudioChannel):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callProperty(Media.mixerRuntimes__audioMixer, 'get', cast ([mixer] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(runtime, FlightRuntime.UNDEFINED))) { return; }
@@ -564,7 +561,7 @@ class Media {
     FlightRuntime.callValue(connectAudioChannelToNode, cast ([channel, FlightRuntime.field(FlightRuntime.field(runtime, 'context'), 'destination')] : Array<Dynamic>));
   }
 
-  @:keep public static function updateBusGainNode__audioMixer(bus:AudioBus):Void {
+  public static function updateBusGainNode__audioMixer(bus:AudioBus):Void {
     var runtimes:Dynamic = cast FlightRuntime.UNDEFINED;
     runtimes = FlightRuntime.callProperty(Media.busToMixerRuntimes__audioMixer, 'get', cast ([bus] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(runtimes, FlightRuntime.UNDEFINED))) { return; }
@@ -576,7 +573,7 @@ class Media {
     }
   }
 
-  @:keep public static function updateBusPannerNode__audioMixer(bus:AudioBus):Void {
+  public static function updateBusPannerNode__audioMixer(bus:AudioBus):Void {
     var runtimes:Dynamic = cast FlightRuntime.UNDEFINED;
     runtimes = FlightRuntime.callProperty(Media.busToMixerRuntimes__audioMixer, 'get', cast ([bus] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(runtimes, FlightRuntime.UNDEFINED))) { return; }

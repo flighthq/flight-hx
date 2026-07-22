@@ -13,20 +13,17 @@ import flight.Types.StorageNamespace;
 import flight.Types.StorageQuota;
 import flight.Types.StorageSignals;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Storage")
 class Storage {
   public static var _backend__storage:Null<StorageBackend> = FlightRuntime.explicitNull();
 
   public static var _crossTabUnsubscribe__storage:Null<Dynamic> = FlightRuntime.explicitNull();
 
-  @:keep public static function _emitStorageChange__storage(change:StorageChange):Void {
+  public static function _emitStorageChange__storage(change:StorageChange):Void {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(Storage._signals__storage, null))) { FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(Storage._signals__storage, 'onChange'), change] : Array<Dynamic>)); }
   }
 
-  @:keep public static function _namespacedKey__storage(namespace:StorageNamespace, key:String):String {
+  public static function _namespacedKey__storage(namespace:StorageNamespace, key:String):String {
     return cast ((FlightRuntime.field(namespace, 'prefix') + '.') + key);
     return cast null;
   }
@@ -35,7 +32,7 @@ class Storage {
 
   public static var _signalsActive__storage:Dynamic = false;
 
-  @:keep public static function clearStorage():Bool {
+  public static function clearStorage():Bool {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     result = FlightRuntime.callProperty(FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'clear', cast ([] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.andValue(Storage._signalsActive__storage, function():Dynamic return cast result))) {
@@ -45,7 +42,7 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function clearStorageNamespace(namespace:StorageNamespace):Bool {
+  public static function clearStorageNamespace(namespace:StorageNamespace):Bool {
     var prefix:Dynamic = cast FlightRuntime.UNDEFINED;
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var success:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -60,12 +57,12 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function createStorageNamespace(prefix:String):StorageNamespace {
+  public static function createStorageNamespace(prefix:String):StorageNamespace {
     return cast { prefix: prefix };
     return cast null;
   }
 
-  @:keep public static function createWebStorageBackend():StorageBackend {
+  public static function createWebStorageBackend():StorageBackend {
     return cast { getItem: function(key:Dynamic) {
   var ls:Dynamic = cast FlightRuntime.UNDEFINED;
   ls = FlightRuntime.callValue(Storage.getWebStorage__storage, cast ([] : Array<Dynamic>));
@@ -137,7 +134,7 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function disableStorageSignals():Void {
+  public static function disableStorageSignals():Void {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(Storage._signalsActive__storage))) { return; }
     (Storage._signalsActive__storage = cast (false : Dynamic));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(Storage._crossTabUnsubscribe__storage, null))) {
@@ -150,7 +147,7 @@ class Storage {
 }
   }
 
-  @:keep public static function enableStorageSignals():StorageSignals {
+  public static function enableStorageSignals():StorageSignals {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.andValue(Storage._signalsActive__storage, function():Dynamic return cast !FlightRuntime.strictEquals(Storage._signals__storage, null)))) { return cast Storage._signals__storage; }
     (Storage._signals__storage = cast ({ onChange: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) } : Dynamic));
@@ -165,7 +162,7 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function getNamespacedStorageByteSize(namespace:StorageNamespace):Float {
+  public static function getNamespacedStorageByteSize(namespace:StorageNamespace):Float {
     var prefix:Dynamic = cast FlightRuntime.UNDEFINED;
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var keys:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -185,7 +182,7 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function getNamespacedStorageEntries(namespace:StorageNamespace):Array<Array<String>> {
+  public static function getNamespacedStorageEntries(namespace:StorageNamespace):Array<Array<String>> {
     var prefix:Dynamic = cast FlightRuntime.UNDEFINED;
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var keys:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -204,12 +201,12 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function getNamespacedStorageItem(namespace:StorageNamespace, key:String):Null<String> {
+  public static function getNamespacedStorageItem(namespace:StorageNamespace, key:String):Null<String> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([FlightRuntime.callValue(Storage._namespacedKey__storage, cast ([namespace, key] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getNamespacedStorageKeys(namespace:StorageNamespace):Array<String> {
+  public static function getNamespacedStorageKeys(namespace:StorageNamespace):Array<String> {
     var prefix:Dynamic = cast FlightRuntime.UNDEFINED;
     var out:Array<String> = cast FlightRuntime.UNDEFINED;
     prefix = (FlightRuntime.field(namespace, 'prefix') + '.');
@@ -221,13 +218,13 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function getStorageBackend():StorageBackend {
+  public static function getStorageBackend():StorageBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Storage._backend__storage, null))) { (Storage._backend__storage = cast (FlightRuntime.callValue(createWebStorageBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Storage._backend__storage;
     return cast null;
   }
 
-  @:keep public static function getStorageBoolean(key:String):Null<Bool> {
+  public static function getStorageBoolean(key:String):Null<Bool> {
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
     raw = FlightRuntime.callProperty(FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(raw, null))) { return cast null; }
@@ -237,12 +234,12 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function getStorageBooleanOr(key:String, fallback:Bool):Bool {
+  public static function getStorageBooleanOr(key:String, fallback:Bool):Bool {
     return cast FlightRuntime.coalesce(FlightRuntime.callValue(getStorageBoolean, cast ([key] : Array<Dynamic>)), function():Dynamic return cast fallback);
     return cast null;
   }
 
-  @:keep public static function getStorageByteSize():Float {
+  public static function getStorageByteSize():Float {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var keys:Dynamic = cast FlightRuntime.UNDEFINED;
     var total:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -260,7 +257,7 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function getStorageEntries():Array<Array<String>> {
+  public static function getStorageEntries():Array<Array<String>> {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var keys:Dynamic = cast FlightRuntime.UNDEFINED;
     var out:Array<Array<String>> = cast FlightRuntime.UNDEFINED;
@@ -275,22 +272,22 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function getStorageItem(key:String):Null<String> {
+  public static function getStorageItem(key:String):Null<String> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getStorageItemCount():Float {
+  public static function getStorageItemCount():Float {
     return cast FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'keys', cast ([] : Array<Dynamic>)), 'length');
     return cast null;
   }
 
-  @:keep public static function getStorageItemOr(key:String, fallback:String):String {
+  public static function getStorageItemOr(key:String, fallback:String):String {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>)), function():Dynamic return cast fallback);
     return cast null;
   }
 
-  @:keep public static function getStorageItems(keys:Array<String>):Array<Null<String>> {
+  public static function getStorageItems(keys:Array<String>):Array<Null<String>> {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var out:Array<Null<String>> = cast FlightRuntime.UNDEFINED;
     backend = FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>));
@@ -306,7 +303,7 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function getStorageJSON<T>(key:String):Null<Dynamic> {
+  public static function getStorageJSON<T>(key:String):Null<Dynamic> {
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
     raw = FlightRuntime.callProperty(FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(raw, null))) { return cast null; }
@@ -318,7 +315,7 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function getStorageJSONOr<T>(key:String, fallback:Dynamic):Dynamic {
+  public static function getStorageJSONOr<T>(key:String, fallback:Dynamic):Dynamic {
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
     raw = FlightRuntime.callProperty(FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(raw, null))) { return cast fallback; }
@@ -330,12 +327,12 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function getStorageKeys():Array<String> {
+  public static function getStorageKeys():Array<String> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'keys', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getStorageNumber(key:String):Null<Float> {
+  public static function getStorageNumber(key:String):Null<Float> {
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     raw = FlightRuntime.callProperty(FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>));
@@ -345,20 +342,18 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function getStorageNumberOr(key:String, fallback:Float):Float {
+  public static function getStorageNumberOr(key:String, fallback:Float):Float {
     return cast FlightRuntime.coalesce(FlightRuntime.callValue(getStorageNumber, cast ([key] : Array<Dynamic>)), function():Dynamic return cast fallback);
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function getStorageQuotaEstimate():flight.internal.FlightPromise<Null<StorageQuota>> {
-    var storage:Dynamic = cast FlightRuntime.UNDEFINED;
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
-    storage = FlightRuntime.field((cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)) : { @:optional var storage:{ @:optional var estimate:Dynamic; }; }), 'storage');
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.optionalField(storage, 'estimate'), FlightRuntime.UNDEFINED))) { return cast null; }
-    try {
+  public static function getStorageQuotaEstimate():flight.internal.FlightPromise<Null<StorageQuota>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Null<StorageQuota>> {
+      var storage:Dynamic = cast FlightRuntime.UNDEFINED;
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
+      storage = FlightRuntime.field((cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)) : { @:optional var storage:{ @:optional var estimate:Dynamic; }; }), 'storage');
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.optionalField(storage, 'estimate'), FlightRuntime.UNDEFINED))) { return cast null; }
+      try {
   var estimate:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(storage, 'estimate', cast ([] : Array<Dynamic>)));
   var used:Dynamic = FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(estimate, 'usage')), 'number'), function():Dynamic return cast FlightRuntime.field(estimate, 'usage'), function():Dynamic return cast -1.0);
   var available:Dynamic = FlightRuntime.select(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(estimate, 'quota')), 'number'), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(estimate, 'quota'), 0.0, '>=')), function():Dynamic return cast (FlightRuntime.field(estimate, 'quota') - FlightRuntime.select(FlightRuntime.compare(used, 0.0, '>='), function():Dynamic return cast used, function():Dynamic return cast 0.0)), function():Dynamic return cast -1.0);
@@ -366,15 +361,16 @@ class Storage {
 } catch (__error:Dynamic) {
   return cast null;
 }
-    return cast null;
+      return cast null;
+    })();
   }
 
-  @:keep public static function getStorageSignals():Null<StorageSignals> {
+  public static function getStorageSignals():Null<StorageSignals> {
     return cast Storage._signals__storage;
     return cast null;
   }
 
-  @:keep public static function getWebStorage__storage():Null<Storage> {
+  public static function getWebStorage__storage():Null<Storage> {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
     try {
   return cast FlightRuntime.coalesce(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'localStorage'), function():Dynamic return cast null);
@@ -384,17 +380,17 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function hasNamespacedStorageItem(namespace:StorageNamespace, key:String):Bool {
+  public static function hasNamespacedStorageItem(namespace:StorageNamespace, key:String):Bool {
     return cast !FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([FlightRuntime.callValue(Storage._namespacedKey__storage, cast ([namespace, key] : Array<Dynamic>))] : Array<Dynamic>)), null);
     return cast null;
   }
 
-  @:keep public static function hasStorageItem(key:String):Bool {
+  public static function hasStorageItem(key:String):Bool {
     return cast !FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>)), null);
     return cast null;
   }
 
-  @:keep public static function migrateStorage(namespace:Null<StorageNamespace>, migrations:Array<StorageMigration>):Float {
+  public static function migrateStorage(namespace:Null<StorageNamespace>, migrations:Array<StorageMigration>):Float {
     var versionKey:Dynamic = cast FlightRuntime.UNDEFINED;
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
     var currentVersion:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -422,12 +418,12 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function removeNamespacedStorageItem(namespace:StorageNamespace, key:String):Bool {
+  public static function removeNamespacedStorageItem(namespace:StorageNamespace, key:String):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'removeItem', cast ([FlightRuntime.callValue(Storage._namespacedKey__storage, cast ([namespace, key] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function removeStorageItem(key:String):Bool {
+  public static function removeStorageItem(key:String):Bool {
     var oldValue:Dynamic = cast FlightRuntime.UNDEFINED;
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     oldValue = FlightRuntime.select(Storage._signalsActive__storage, function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>)), function():Dynamic return cast null);
@@ -439,7 +435,7 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function removeStorageItems(keys:Array<String>):Bool {
+  public static function removeStorageItems(keys:Array<String>):Bool {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var success:Dynamic = cast FlightRuntime.UNDEFINED;
     backend = FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>));
@@ -451,12 +447,12 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function setNamespacedStorageItem(namespace:StorageNamespace, key:String, value:String):Bool {
+  public static function setNamespacedStorageItem(namespace:StorageNamespace, key:String, value:String):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'setItem', cast ([FlightRuntime.callValue(Storage._namespacedKey__storage, cast ([namespace, key] : Array<Dynamic>)), value] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setStorageBackend(backend:Null<StorageBackend>):Void {
+  public static function setStorageBackend(backend:Null<StorageBackend>):Void {
     if (FlightRuntime.truthy(FlightRuntime.andValue(Storage._signalsActive__storage, function():Dynamic return cast !FlightRuntime.strictEquals(Storage._crossTabUnsubscribe__storage, null)))) {
   FlightRuntime.callValue(Storage._crossTabUnsubscribe__storage, cast ([] : Array<Dynamic>));
   (Storage._crossTabUnsubscribe__storage = cast (null : Dynamic));
@@ -472,12 +468,12 @@ class Storage {
 }
   }
 
-  @:keep public static function setStorageBoolean(key:String, value:Bool):Bool {
+  public static function setStorageBoolean(key:String, value:Bool):Bool {
     return cast FlightRuntime.callValue(setStorageItem, cast ([key, FlightRuntime.select(value, function():Dynamic return cast 'true', function():Dynamic return cast 'false')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setStorageItem(key:String, value:String):Bool {
+  public static function setStorageItem(key:String, value:String):Bool {
     var oldValue:Dynamic = cast FlightRuntime.UNDEFINED;
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     oldValue = FlightRuntime.select(Storage._signalsActive__storage, function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>)), function():Dynamic return cast null);
@@ -489,7 +485,7 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function setStorageItems(record:Dynamic):Bool {
+  public static function setStorageItems(record:Dynamic):Bool {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var success:Dynamic = cast FlightRuntime.UNDEFINED;
     backend = FlightRuntime.callValue(getStorageBackend, cast ([] : Array<Dynamic>));
@@ -501,7 +497,7 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function setStorageJSON<T>(key:String, value:Dynamic):Bool {
+  public static function setStorageJSON<T>(key:String, value:Dynamic):Bool {
     var raw:String = cast FlightRuntime.UNDEFINED;
     try {
   (raw = cast (FlightRuntime.jsonStringify(value) : Dynamic));
@@ -512,7 +508,7 @@ class Storage {
     return cast null;
   }
 
-  @:keep public static function setStorageNumber(key:String, value:Float):Bool {
+  public static function setStorageNumber(key:String, value:Float):Bool {
     return cast FlightRuntime.callValue(setStorageItem, cast ([key, Std.string(value)] : Array<Dynamic>));
     return cast null;
   }

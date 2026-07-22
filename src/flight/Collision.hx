@@ -14,12 +14,9 @@ import flight.Types.CollisionSegment;
 import flight.Types.CollisionShape;
 import flight.Types.CollisionShapeKind;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Collision")
 class Collision {
-  @:keep public static function accumulatePolygonAxes__shapeCollision(sx:Dynamic, sn:Float, ax:Dynamic, an:Float, bx:Dynamic, bn:Float, out:CollisionManifold):Bool {
+  public static function accumulatePolygonAxes__shapeCollision(sx:Dynamic, sn:Float, ax:Dynamic, an:Float, bx:Dynamic, bn:Float, out:CollisionManifold):Bool {
     {
       var i:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(i, sn, '<'))) {
@@ -51,7 +48,7 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function circleAabbOverlap__shapeCollision(cx:Float, cy:Float, radius:Float, minX:Float, minY:Float, maxX:Float, maxY:Float, out:CollisionManifold):Bool {
+  public static function circleAabbOverlap__shapeCollision(cx:Float, cy:Float, radius:Float, minX:Float, minY:Float, maxX:Float, maxY:Float, out:CollisionManifold):Bool {
     var closestX:Dynamic = cast FlightRuntime.UNDEFINED;
     var closestY:Dynamic = cast FlightRuntime.UNDEFINED;
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -112,7 +109,7 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function circlePolygonAxisOverlap__shapeCollision(axisX:Float, axisY:Float, cx:Float, cy:Float, radius:Float, px:Dynamic, pn:Float):Float {
+  public static function circlePolygonAxisOverlap__shapeCollision(axisX:Float, axisY:Float, cx:Float, cy:Float, radius:Float, px:Dynamic, pn:Float):Float {
     var minP:Dynamic = cast FlightRuntime.UNDEFINED;
     var maxP:Dynamic = cast FlightRuntime.UNDEFINED;
     var c:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -140,7 +137,7 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function clearCollisionManifold(out:CollisionManifold):Void {
+  public static function clearCollisionManifold(out:CollisionManifold):Void {
     FlightRuntime.setField(out, 'overlapping', false);
     FlightRuntime.setField(out, 'normalX', 0.0);
     FlightRuntime.setField(out, 'normalY', 0.0);
@@ -149,7 +146,7 @@ class Collision {
 
   public static final clipRange__segmentCollision:Dynamic = { t0: 0.0, t1: 1.0 };
 
-  @:keep public static function clipSegmentSlab__segmentCollision(p:Float, q:Float):Bool {
+  public static function clipSegmentSlab__segmentCollision(p:Float, q:Float):Bool {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.callProperty(HxMath, 'abs', cast ([p] : Array<Dynamic>)), Collision.EPS__segmentCollision, '<'))) {
   return cast FlightRuntime.compare(q, 0.0, '>=');
@@ -166,7 +163,7 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function createCollisionManifold():CollisionManifold {
+  public static function createCollisionManifold():CollisionManifold {
     return cast { overlapping: false, normalX: 0.0, normalY: 0.0, depth: 0.0 };
     return cast null;
   }
@@ -177,7 +174,7 @@ class Collision {
 
   public static final EPS__shapeCollision:Dynamic = 1e-9;
 
-  @:keep public static function getCollisionShapeContainsPoint(shape:CollisionShape, x:Float, y:Float):Bool {
+  public static function getCollisionShapeContainsPoint(shape:CollisionShape, x:Float, y:Float):Bool {
     {
       var __switchValue = FlightRuntime.field(shape, 'kind');
       if (__switchValue == 'circle') {
@@ -235,7 +232,7 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function isPointInConvexPolygon__pointContainment(x:Float, y:Float, px:Array<Float>, pn:Float):Bool {
+  public static function isPointInConvexPolygon__pointContainment(x:Float, y:Float, px:Array<Float>, pn:Float):Bool {
     var positive:Dynamic = cast FlightRuntime.UNDEFINED;
     var negative:Dynamic = cast FlightRuntime.UNDEFINED;
     positive = false;
@@ -258,7 +255,7 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function isPointInConvexPolygon__segmentCollision(x:Float, y:Float, px:Array<Float>, pn:Float):Bool {
+  public static function isPointInConvexPolygon__segmentCollision(x:Float, y:Float, px:Array<Float>, pn:Float):Bool {
     var positive:Dynamic = cast FlightRuntime.UNDEFINED;
     var negative:Dynamic = cast FlightRuntime.UNDEFINED;
     positive = false;
@@ -281,7 +278,7 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function isSegmentOverlappingBox__segmentCollision(x0:Float, y0:Float, x1:Float, y1:Float, minX:Float, minY:Float, maxX:Float, maxY:Float):Bool {
+  public static function isSegmentOverlappingBox__segmentCollision(x0:Float, y0:Float, x1:Float, y1:Float, minX:Float, minY:Float, maxX:Float, maxY:Float):Bool {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     dx = (x1 - x0);
@@ -296,7 +293,7 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function isSegmentsIntersecting__segmentCollision(ax0:Float, ay0:Float, ax1:Float, ay1:Float, bx0:Float, by0:Float, bx1:Float, by1:Float):Bool {
+  public static function isSegmentsIntersecting__segmentCollision(ax0:Float, ay0:Float, ax1:Float, ay1:Float, bx0:Float, by0:Float, bx1:Float, by1:Float):Bool {
     var d1x:Dynamic = cast FlightRuntime.UNDEFINED;
     var d1y:Dynamic = cast FlightRuntime.UNDEFINED;
     var d2x:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -341,7 +338,7 @@ class Collision {
 
   public static final minOverlapAxis__shapeCollision:Dynamic = { overlap: HxMath.POSITIVE_INFINITY, x: 0.0, y: 0.0 };
 
-  @:keep public static function polygonAxisOverlap__shapeCollision(axisX:Float, axisY:Float, ax:Dynamic, an:Float, bx:Dynamic, bn:Float):Float {
+  public static function polygonAxisOverlap__shapeCollision(axisX:Float, axisY:Float, ax:Dynamic, an:Float, bx:Dynamic, bn:Float):Float {
     var minA:Dynamic = cast FlightRuntime.UNDEFINED;
     var maxA:Dynamic = cast FlightRuntime.UNDEFINED;
     var minB:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -376,7 +373,7 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function satCircleConvexOverlap__shapeCollision(cx:Float, cy:Float, radius:Float, px:Dynamic, pn:Float, out:CollisionManifold):Bool {
+  public static function satCircleConvexOverlap__shapeCollision(cx:Float, cy:Float, radius:Float, px:Dynamic, pn:Float, out:CollisionManifold):Bool {
     var minOverlap:Dynamic = cast FlightRuntime.UNDEFINED;
     var normalX:Dynamic = cast FlightRuntime.UNDEFINED;
     var normalY:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -480,7 +477,7 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function satConvexOverlap__shapeCollision(ax:Dynamic, an:Float, bx:Dynamic, bn:Float, out:CollisionManifold):Bool {
+  public static function satConvexOverlap__shapeCollision(ax:Dynamic, an:Float, bx:Dynamic, bn:Float, out:CollisionManifold):Bool {
     var aCentroidX:Dynamic = cast FlightRuntime.UNDEFINED;
     var aCentroidY:Dynamic = cast FlightRuntime.UNDEFINED;
     var bCentroidX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -540,7 +537,7 @@ class Collision {
 
   public static final scratchB__shapeCollision:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float64Array'] : Array<Dynamic>)), [8.0]);
 
-  @:keep public static function shapeKindRank__testCollision(kind:CollisionShapeKind):Float {
+  public static function shapeKindRank__testCollision(kind:CollisionShapeKind):Float {
     {
       var __switchValue = kind;
       if (__switchValue == 'circle') {
@@ -562,7 +559,7 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function testAabbAabbCollision(a:CollisionAabb, b:CollisionAabb, out:CollisionManifold):Bool {
+  public static function testAabbAabbCollision(a:CollisionAabb, b:CollisionAabb, out:CollisionManifold):Bool {
     var aMinX:Dynamic = cast FlightRuntime.UNDEFINED;
     var aMinY:Dynamic = cast FlightRuntime.UNDEFINED;
     var aMaxX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -609,14 +606,14 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function testAabbObbCollision(a:CollisionAabb, b:CollisionObb, out:CollisionManifold):Bool {
+  public static function testAabbObbCollision(a:CollisionAabb, b:CollisionObb, out:CollisionManifold):Bool {
     FlightRuntime.callValue(Collision.writeAabbVertices__shapeCollision, cast ([a, Collision.scratchA__shapeCollision] : Array<Dynamic>));
     FlightRuntime.callValue(Collision.writeObbVertices__shapeCollision, cast ([b, Collision.scratchB__shapeCollision] : Array<Dynamic>));
     return cast FlightRuntime.callValue(Collision.satConvexOverlap__shapeCollision, cast ([Collision.scratchA__shapeCollision, 4.0, Collision.scratchB__shapeCollision, 4.0, out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function testAabbPolygonCollision(a:CollisionAabb, b:CollisionPolygon, out:CollisionManifold):Bool {
+  public static function testAabbPolygonCollision(a:CollisionAabb, b:CollisionPolygon, out:CollisionManifold):Bool {
     var bPoints:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(Collision.writeAabbVertices__shapeCollision, cast ([a, Collision.scratchA__shapeCollision] : Array<Dynamic>));
     bPoints = FlightRuntime.field(b, 'points');
@@ -624,12 +621,12 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function testCircleAabbCollision(a:CollisionCircle, b:CollisionAabb, out:CollisionManifold):Bool {
+  public static function testCircleAabbCollision(a:CollisionCircle, b:CollisionAabb, out:CollisionManifold):Bool {
     return cast FlightRuntime.callValue(Collision.circleAabbOverlap__shapeCollision, cast ([FlightRuntime.field(a, 'x'), FlightRuntime.field(a, 'y'), FlightRuntime.field(a, 'radius'), FlightRuntime.field(b, 'minX'), FlightRuntime.field(b, 'minY'), FlightRuntime.field(b, 'maxX'), FlightRuntime.field(b, 'maxY'), out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function testCircleCircleCollision(a:CollisionCircle, b:CollisionCircle, out:CollisionManifold):Bool {
+  public static function testCircleCircleCollision(a:CollisionCircle, b:CollisionCircle, out:CollisionManifold):Bool {
     var ax:Dynamic = cast FlightRuntime.UNDEFINED;
     var ay:Dynamic = cast FlightRuntime.UNDEFINED;
     var bx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -667,7 +664,7 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function testCircleObbCollision(a:CollisionCircle, b:CollisionObb, out:CollisionManifold):Bool {
+  public static function testCircleObbCollision(a:CollisionCircle, b:CollisionObb, out:CollisionManifold):Bool {
     var cx:Dynamic = cast FlightRuntime.UNDEFINED;
     var cy:Dynamic = cast FlightRuntime.UNDEFINED;
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -703,14 +700,14 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function testCirclePolygonCollision(a:CollisionCircle, b:CollisionPolygon, out:CollisionManifold):Bool {
+  public static function testCirclePolygonCollision(a:CollisionCircle, b:CollisionPolygon, out:CollisionManifold):Bool {
     var points:Dynamic = cast FlightRuntime.UNDEFINED;
     points = FlightRuntime.field(b, 'points');
     return cast FlightRuntime.callValue(Collision.satCircleConvexOverlap__shapeCollision, cast ([FlightRuntime.field(a, 'x'), FlightRuntime.field(a, 'y'), FlightRuntime.field(a, 'radius'), points, (Std.int(FlightRuntime.field(points, 'length')) >> Std.int(1.0)), out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function testCollision(a:CollisionShape, b:CollisionShape, out:CollisionManifold):Bool {
+  public static function testCollision(a:CollisionShape, b:CollisionShape, out:CollisionManifold):Bool {
     var rankA:Dynamic = cast FlightRuntime.UNDEFINED;
     var rankB:Dynamic = cast FlightRuntime.UNDEFINED;
     var swapped:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -785,14 +782,14 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function testObbObbCollision(a:CollisionObb, b:CollisionObb, out:CollisionManifold):Bool {
+  public static function testObbObbCollision(a:CollisionObb, b:CollisionObb, out:CollisionManifold):Bool {
     FlightRuntime.callValue(Collision.writeObbVertices__shapeCollision, cast ([a, Collision.scratchA__shapeCollision] : Array<Dynamic>));
     FlightRuntime.callValue(Collision.writeObbVertices__shapeCollision, cast ([b, Collision.scratchB__shapeCollision] : Array<Dynamic>));
     return cast FlightRuntime.callValue(Collision.satConvexOverlap__shapeCollision, cast ([Collision.scratchA__shapeCollision, 4.0, Collision.scratchB__shapeCollision, 4.0, out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function testObbPolygonCollision(a:CollisionObb, b:CollisionPolygon, out:CollisionManifold):Bool {
+  public static function testObbPolygonCollision(a:CollisionObb, b:CollisionPolygon, out:CollisionManifold):Bool {
     var bPoints:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(Collision.writeObbVertices__shapeCollision, cast ([a, Collision.scratchA__shapeCollision] : Array<Dynamic>));
     bPoints = FlightRuntime.field(b, 'points');
@@ -800,7 +797,7 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function testPolygonPolygonCollision(a:CollisionPolygon, b:CollisionPolygon, out:CollisionManifold):Bool {
+  public static function testPolygonPolygonCollision(a:CollisionPolygon, b:CollisionPolygon, out:CollisionManifold):Bool {
     var aPoints:Dynamic = cast FlightRuntime.UNDEFINED;
     var bPoints:Dynamic = cast FlightRuntime.UNDEFINED;
     aPoints = FlightRuntime.field(a, 'points');
@@ -809,12 +806,12 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function testSegmentAabbCollision(a:CollisionSegment, b:CollisionAabb):Bool {
+  public static function testSegmentAabbCollision(a:CollisionSegment, b:CollisionAabb):Bool {
     return cast FlightRuntime.callValue(Collision.isSegmentOverlappingBox__segmentCollision, cast ([FlightRuntime.field(a, 'x0'), FlightRuntime.field(a, 'y0'), FlightRuntime.field(a, 'x1'), FlightRuntime.field(a, 'y1'), FlightRuntime.field(b, 'minX'), FlightRuntime.field(b, 'minY'), FlightRuntime.field(b, 'maxX'), FlightRuntime.field(b, 'maxY')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function testSegmentCircleCollision(a:CollisionSegment, b:CollisionCircle):Bool {
+  public static function testSegmentCircleCollision(a:CollisionSegment, b:CollisionCircle):Bool {
     var x0:Dynamic = cast FlightRuntime.UNDEFINED;
     var y0:Dynamic = cast FlightRuntime.UNDEFINED;
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -843,7 +840,7 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function testSegmentObbCollision(a:CollisionSegment, b:CollisionObb):Bool {
+  public static function testSegmentObbCollision(a:CollisionSegment, b:CollisionObb):Bool {
     var cos:Dynamic = cast FlightRuntime.UNDEFINED;
     var sin:Dynamic = cast FlightRuntime.UNDEFINED;
     var d0x:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -868,7 +865,7 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function testSegmentPolygonCollision(a:CollisionSegment, b:CollisionPolygon):Bool {
+  public static function testSegmentPolygonCollision(a:CollisionSegment, b:CollisionPolygon):Bool {
     var points:Dynamic = cast FlightRuntime.UNDEFINED;
     var pn:Dynamic = cast FlightRuntime.UNDEFINED;
     points = FlightRuntime.field(b, 'points');
@@ -889,12 +886,12 @@ class Collision {
     return cast null;
   }
 
-  @:keep public static function testSegmentSegmentCollision(a:CollisionSegment, b:CollisionSegment):Bool {
+  public static function testSegmentSegmentCollision(a:CollisionSegment, b:CollisionSegment):Bool {
     return cast FlightRuntime.callValue(Collision.isSegmentsIntersecting__segmentCollision, cast ([FlightRuntime.field(a, 'x0'), FlightRuntime.field(a, 'y0'), FlightRuntime.field(a, 'x1'), FlightRuntime.field(a, 'y1'), FlightRuntime.field(b, 'x0'), FlightRuntime.field(b, 'y0'), FlightRuntime.field(b, 'x1'), FlightRuntime.field(b, 'y1')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function writeAabbVertices__shapeCollision(aabb:CollisionAabb, out:Dynamic):Void {
+  public static function writeAabbVertices__shapeCollision(aabb:CollisionAabb, out:Dynamic):Void {
     var minX:Dynamic = cast FlightRuntime.UNDEFINED;
     var minY:Dynamic = cast FlightRuntime.UNDEFINED;
     var maxX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -913,7 +910,7 @@ class Collision {
     FlightRuntime.setIndex(out, 7.0, maxY);
   }
 
-  @:keep public static function writeObbVertices__shapeCollision(obb:CollisionObb, out:Dynamic):Void {
+  public static function writeObbVertices__shapeCollision(obb:CollisionObb, out:Dynamic):Void {
     var cx:Dynamic = cast FlightRuntime.UNDEFINED;
     var cy:Dynamic = cast FlightRuntime.UNDEFINED;
     var halfW:Dynamic = cast FlightRuntime.UNDEFINED;

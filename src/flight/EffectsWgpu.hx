@@ -89,23 +89,20 @@ typedef WgpuEffectPassState__wgpuEffectPass = { var uniformBuffer:Dynamic; var u
 
 typedef WgpuEffectPipeline = { var pipeline:Dynamic; var blendMode:WgpuEffectBlendMode; @:optional var compileForFormat:Dynamic; @:optional var variants:Dynamic; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.EffectsWgpu")
 class EffectsWgpu {
   public static final _compositePipelines__wgpuBloomEffect:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
   public static final _motionBlurPipelines__wgpuMotionBlurEffect:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function _noopSetUniforms__wgpuTaaEffect():Void {
+  public static function _noopSetUniforms__wgpuTaaEffect():Void {
   }
 
   public static final _pipelines__wgpuEffectProgramCache:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
   public static final _registries__wgpuRenderEffectRegistry:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function acquireUniformSlot__wgpuEffectPass(fs:WgpuEffectPassState__wgpuEffectPass):Float {
+  public static function acquireUniformSlot__wgpuEffectPass(fs:WgpuEffectPassState__wgpuEffectPass):Float {
     var offset:Dynamic = cast FlightRuntime.UNDEFINED;
     offset = FlightRuntime.field(fs, 'uniformOffset');
     FlightRuntime.setField(fs, 'uniformOffset', ((offset + FlightRuntime.field(fs, 'uniformStride')) % (FlightRuntime.field(fs, 'uniformSlots') * FlightRuntime.field(fs, 'uniformStride'))));
@@ -113,7 +110,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function applyBevelEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:BevelEffect):Void {
+  public static function applyBevelEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:BevelEffect):Void {
     var src:Dynamic = cast FlightRuntime.UNDEFINED;
     var dst:Dynamic = cast FlightRuntime.UNDEFINED;
     var descriptor:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -161,7 +158,7 @@ class EffectsWgpu {
     FlightRuntime.callValue(releaseWgpuRenderTarget, cast ([pool, blurTemp] : Array<Dynamic>));
   }
 
-  @:keep public static function applyBloomEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:BloomEffect):Void {
+  public static function applyBloomEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:BloomEffect):Void {
     var threshold:Dynamic = cast FlightRuntime.UNDEFINED;
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -192,11 +189,11 @@ class EffectsWgpu {
     FlightRuntime.callValue(releaseWgpuRenderTarget, cast ([pool, temp] : Array<Dynamic>));
   }
 
-  @:keep public static function applyBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, effect:BlurEffect):Void {
+  public static function applyBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, effect:BlurEffect):Void {
     FlightRuntime.callValue(applyGaussianBlurToWgpu, cast ([state, source, dest, temp, { blurX: FlightRuntime.field(effect, 'blurX'), blurY: FlightRuntime.field(effect, 'blurY') }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyBokehDepthOfFieldEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:BokehDepthOfFieldEffect):Void {
+  public static function applyBokehDepthOfFieldEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:BokehDepthOfFieldEffect):Void {
     var maxBlur:Dynamic = cast FlightRuntime.UNDEFINED;
     var width:Dynamic = cast FlightRuntime.UNDEFINED;
     var height:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -212,7 +209,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyBoxBlurPass__wgpuEffectBoxBlur(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, radius:Float, dirX:Float, dirY:Float, edgeColor:Null<BoxBlurEdgeColor__wgpuEffectBoxBlur>):Void {
+  public static function applyBoxBlurPass__wgpuEffectBoxBlur(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, radius:Float, dirX:Float, dirY:Float, edgeColor:Null<BoxBlurEdgeColor__wgpuEffectBoxBlur>):Void {
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     pipeline = FlightRuntime.callValue(EffectsWgpu.getBoxBlurPipeline__wgpuEffectBoxBlur, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(drawWgpuEffectPass, cast ([state, source, dest, pipeline, function(f32:Dynamic) {
@@ -237,7 +234,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyCameraMotionBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:CameraMotionBlurEffect):Void {
+  public static function applyCameraMotionBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:CameraMotionBlurEffect):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var samples:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -250,7 +247,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyChromaticAberrationEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ChromaticAberrationEffect):Void {
+  public static function applyChromaticAberrationEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ChromaticAberrationEffect):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var radial:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -263,7 +260,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyColorLutPassToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, lut:ColorLut, cache:WgpuColorLutTextureCache):Void {
+  public static function applyColorLutPassToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, lut:ColorLut, cache:WgpuColorLutTextureCache):Void {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
     var fs:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -293,7 +290,7 @@ class EffectsWgpu {
     FlightRuntime.callProperty(pass, 'end', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function applyColorMatrixPassToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, matrix:Array<Float>):Void {
+  public static function applyColorMatrixPassToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, matrix:Array<Float>):Void {
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     pipeline = FlightRuntime.callValue(getWgpuEffectPipeline, cast ([state, 'adjustment.colorMatrix', EffectsWgpu.COLOR_MATRIX_FRAGMENT_WGSL__wgpuColorMatrixPass, 'replace'] : Array<Dynamic>));
     FlightRuntime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
@@ -320,7 +317,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyConvolutionEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ConvolutionEffect):Void {
+  public static function applyConvolutionEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ConvolutionEffect):Void {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var matrix:Dynamic = cast FlightRuntime.UNDEFINED;
     var matrixX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -367,7 +364,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyCrtEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:CrtEffect):Void {
+  public static function applyCrtEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:CrtEffect):Void {
     var curvature:Dynamic = cast FlightRuntime.UNDEFINED;
     var scanlineIntensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var vignette:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -388,7 +385,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyDirectionalBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DirectionalBlurEffect):Void {
+  public static function applyDirectionalBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DirectionalBlurEffect):Void {
     var angle:Dynamic = cast FlightRuntime.UNDEFINED;
     var length:Dynamic = cast FlightRuntime.UNDEFINED;
     var samples:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -406,7 +403,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyDisplacementEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DisplacementEffect):Void {
+  public static function applyDisplacementEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DisplacementEffect):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var frequency:Dynamic = cast FlightRuntime.UNDEFINED;
     var seed:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -424,7 +421,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyDitherEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DitherEffect):Void {
+  public static function applyDitherEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DitherEffect):Void {
     var levels:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     levels = FlightRuntime.coalesce(FlightRuntime.field(effect, 'levels'), function():Dynamic return cast 4.0);
@@ -436,7 +433,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyDropShadowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:DropShadowEffect):Void {
+  public static function applyDropShadowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:DropShadowEffect):Void {
     var src:Dynamic = cast FlightRuntime.UNDEFINED;
     var dst:Dynamic = cast FlightRuntime.UNDEFINED;
     var descriptor:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -491,7 +488,7 @@ class EffectsWgpu {
     FlightRuntime.callValue(releaseWgpuRenderTarget, cast ([pool, blurTemp] : Array<Dynamic>));
   }
 
-  @:keep public static function applyFilmGrainEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:FilmGrainEffect):Void {
+  public static function applyFilmGrainEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:FilmGrainEffect):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     var seed:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -507,7 +504,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyFxaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:FxaaEffect):Void {
+  public static function applyFxaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:FxaaEffect):Void {
     var edgeThreshold:Dynamic = cast FlightRuntime.UNDEFINED;
     var width:Dynamic = cast FlightRuntime.UNDEFINED;
     var height:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -523,7 +520,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGaussianBlurToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
+  public static function applyGaussianBlurToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
     var sigmaX:Dynamic = cast FlightRuntime.UNDEFINED;
     var sigmaY:Dynamic = cast FlightRuntime.UNDEFINED;
     var radiusX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -536,7 +533,7 @@ class EffectsWgpu {
     FlightRuntime.callValue(EffectsWgpu.applyWgpuGaussianBlurPass__wgpuBlurEffect, cast ([state, temp, dest, sigmaY, radiusY, 0.0, 1.0] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGlitchEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:GlitchEffect):Void {
+  public static function applyGlitchEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:GlitchEffect):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var blockSize:Dynamic = cast FlightRuntime.UNDEFINED;
     var colorShift:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -557,7 +554,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGodRaysEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:GodRaysEffect):Void {
+  public static function applyGodRaysEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:GodRaysEffect):Void {
     var centerX:Dynamic = cast FlightRuntime.UNDEFINED;
     var centerY:Dynamic = cast FlightRuntime.UNDEFINED;
     var density:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -584,7 +581,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGradientBevelEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:GradientBevelEffect):Void {
+  public static function applyGradientBevelEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:GradientBevelEffect):Void {
     var src:Dynamic = cast FlightRuntime.UNDEFINED;
     var dst:Dynamic = cast FlightRuntime.UNDEFINED;
     var descriptor:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -669,7 +666,7 @@ class EffectsWgpu {
     FlightRuntime.callValue(releaseWgpuRenderTarget, cast ([pool, s2] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGradientGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:GradientGlowEffect):Void {
+  public static function applyGradientGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:GradientGlowEffect):Void {
     var src:Dynamic = cast FlightRuntime.UNDEFINED;
     var dst:Dynamic = cast FlightRuntime.UNDEFINED;
     var descriptor:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -729,7 +726,7 @@ class EffectsWgpu {
     FlightRuntime.callValue(releaseWgpuRenderTarget, cast ([pool, s2] : Array<Dynamic>));
   }
 
-  @:keep public static function applyHalftoneEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:HalftoneEffect):Void {
+  public static function applyHalftoneEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:HalftoneEffect):Void {
     var scale:Dynamic = cast FlightRuntime.UNDEFINED;
     var angle:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -744,7 +741,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyInnerGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:InnerGlowEffect):Void {
+  public static function applyInnerGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:InnerGlowEffect):Void {
     var src:Dynamic = cast FlightRuntime.UNDEFINED;
     var dst:Dynamic = cast FlightRuntime.UNDEFINED;
     var descriptor:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -780,7 +777,7 @@ class EffectsWgpu {
     FlightRuntime.callValue(releaseWgpuRenderTarget, cast ([pool, s2] : Array<Dynamic>));
   }
 
-  @:keep public static function applyInnerShadowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:InnerShadowEffect):Void {
+  public static function applyInnerShadowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:InnerShadowEffect):Void {
     var src:Dynamic = cast FlightRuntime.UNDEFINED;
     var dst:Dynamic = cast FlightRuntime.UNDEFINED;
     var descriptor:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -825,7 +822,7 @@ class EffectsWgpu {
     FlightRuntime.callValue(releaseWgpuRenderTarget, cast ([pool, s2] : Array<Dynamic>));
   }
 
-  @:keep public static function applyKuwaharaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:KuwaharaEffect):Void {
+  public static function applyKuwaharaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:KuwaharaEffect):Void {
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     radius = FlightRuntime.coalesce(FlightRuntime.field(effect, 'radius'), function():Dynamic return cast 3.0);
@@ -837,7 +834,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyLensDirtEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensDirtEffect):Void {
+  public static function applyLensDirtEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensDirtEffect):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var threshold:Dynamic = cast FlightRuntime.UNDEFINED;
     var seed:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -853,7 +850,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyLensDistortionEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensDistortionEffect):Void {
+  public static function applyLensDistortionEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensDistortionEffect):Void {
     var amount:Dynamic = cast FlightRuntime.UNDEFINED;
     var scale:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -866,7 +863,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyLensFlareEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensFlareEffect):Void {
+  public static function applyLensFlareEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensFlareEffect):Void {
     var threshold:Dynamic = cast FlightRuntime.UNDEFINED;
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var ghosts:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -885,7 +882,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyMedianEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:MedianEffect):Void {
+  public static function applyMedianEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:MedianEffect):Void {
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     radius = FlightRuntime.callProperty(HxMath, 'min', cast ([MAX_MEDIAN_EFFECT_WGPU_RADIUS, FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'round', cast ([FlightRuntime.coalesce(FlightRuntime.field(effect, 'radius'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
@@ -897,7 +894,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyMotionBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, velocityTexture:Null<Dynamic>, effect:MotionBlurEffect):Void {
+  public static function applyMotionBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, velocityTexture:Null<Dynamic>, effect:MotionBlurEffect):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var samples:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -925,7 +922,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyOuterGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:OuterGlowEffect):Void {
+  public static function applyOuterGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:OuterGlowEffect):Void {
     var src:Dynamic = cast FlightRuntime.UNDEFINED;
     var dst:Dynamic = cast FlightRuntime.UNDEFINED;
     var descriptor:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -972,7 +969,7 @@ class EffectsWgpu {
     FlightRuntime.callValue(releaseWgpuRenderTarget, cast ([pool, blurTemp] : Array<Dynamic>));
   }
 
-  @:keep public static function applyOutlineEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:OutlineEffect):Void {
+  public static function applyOutlineEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:OutlineEffect):Void {
     var threshold:Dynamic = cast FlightRuntime.UNDEFINED;
     var thickness:Dynamic = cast FlightRuntime.UNDEFINED;
     var color:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1003,7 +1000,7 @@ class EffectsWgpu {
 
   public static final applyPipelines__wgpuGradientBevelEffect:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function applyPixelateEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:PixelateEffect):Void {
+  public static function applyPixelateEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:PixelateEffect):Void {
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     size = FlightRuntime.coalesce(FlightRuntime.field(effect, 'size'), function():Dynamic return cast 8.0);
@@ -1015,7 +1012,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyPosterizeEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:PosterizeEffect):Void {
+  public static function applyPosterizeEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:PosterizeEffect):Void {
     var levels:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     levels = FlightRuntime.callProperty(HxMath, 'max', cast ([2.0, FlightRuntime.coalesce(FlightRuntime.field(effect, 'levels'), function():Dynamic return cast 8.0)] : Array<Dynamic>));
@@ -1025,7 +1022,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyRadialBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:RadialBlurEffect):Void {
+  public static function applyRadialBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:RadialBlurEffect):Void {
     var centerX:Dynamic = cast FlightRuntime.UNDEFINED;
     var centerY:Dynamic = cast FlightRuntime.UNDEFINED;
     var strength:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1044,7 +1041,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyScanlinesEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ScanlinesEffect):Void {
+  public static function applyScanlinesEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ScanlinesEffect):Void {
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1057,7 +1054,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyScreenSpaceFogEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ScreenSpaceFogEffect):Void {
+  public static function applyScreenSpaceFogEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ScreenSpaceFogEffect):Void {
     var packed:Dynamic = cast FlightRuntime.UNDEFINED;
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1078,7 +1075,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applySharpenEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SharpenEffect):Void {
+  public static function applySharpenEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SharpenEffect):Void {
     var amount:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     amount = FlightRuntime.coalesce(FlightRuntime.field(effect, 'amount'), function():Dynamic return cast 0.5);
@@ -1090,7 +1087,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applySketchEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SketchEffect):Void {
+  public static function applySketchEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SketchEffect):Void {
     var strength:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     strength = FlightRuntime.coalesce(FlightRuntime.field(effect, 'strength'), function():Dynamic return cast 1.0);
@@ -1102,7 +1099,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applySmaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SmaaEffect):Void {
+  public static function applySmaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SmaaEffect):Void {
     var threshold:Dynamic = cast FlightRuntime.UNDEFINED;
     var width:Dynamic = cast FlightRuntime.UNDEFINED;
     var height:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1118,7 +1115,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applySsaoEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SsaoEffect):Void {
+  public static function applySsaoEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SsaoEffect):Void {
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1133,7 +1130,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applySsrEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SsrEffect):Void {
+  public static function applySsrEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SsrEffect):Void {
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     pipeline = FlightRuntime.callValue(getWgpuEffectPipeline, cast ([state, 'atmospheric.ssr', EffectsWgpu.SSR_FRAGMENT_WGSL__wgpuSsrEffect, 'replace'] : Array<Dynamic>));
     FlightRuntime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function() {
@@ -1141,13 +1138,13 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyTaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, _effect:TaaEffect):Void {
+  public static function applyTaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, _effect:TaaEffect):Void {
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     pipeline = FlightRuntime.callValue(getWgpuEffectPipeline, cast ([state, 'antialiasing.taa', EffectsWgpu.TAA_FRAGMENT_WGSL__wgpuTaaEffect, 'replace'] : Array<Dynamic>));
     FlightRuntime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, EffectsWgpu._noopSetUniforms__wgpuTaaEffect] : Array<Dynamic>));
   }
 
-  @:keep public static function applyTiltShiftEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:TiltShiftEffect):Void {
+  public static function applyTiltShiftEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:TiltShiftEffect):Void {
     var center:Dynamic = cast FlightRuntime.UNDEFINED;
     var width:Dynamic = cast FlightRuntime.UNDEFINED;
     var blur:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1165,7 +1162,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyToneMapEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ToneMapEffect):Void {
+  public static function applyToneMapEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ToneMapEffect):Void {
     var operator_:Dynamic = cast FlightRuntime.UNDEFINED;
     var exposure:Dynamic = cast FlightRuntime.UNDEFINED;
     var white:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1180,7 +1177,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyVignetteEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:VignetteEffect):Void {
+  public static function applyVignetteEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:VignetteEffect):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
     var softness:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1210,7 +1207,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyWgpuBevelCompositePass__wgpuBevelEffect(state:WgpuRenderState, field:WgpuRenderTarget, source:WgpuRenderTarget, dest:WgpuRenderTarget, params:BevelCompositeParams__wgpuBevelEffect):Void {
+  public static function applyWgpuBevelCompositePass__wgpuBevelEffect(state:WgpuRenderState, field:WgpuRenderTarget, source:WgpuRenderTarget, dest:WgpuRenderTarget, params:BevelCompositeParams__wgpuBevelEffect):Void {
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     pipeline = FlightRuntime.callValue(EffectsWgpu.getWgpuBevelCompositeShader__wgpuBevelEffect, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(drawWgpuDualSourceEffectPass, cast ([state, field, source, dest, pipeline, function(f32:Dynamic) {
@@ -1229,7 +1226,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyWgpuEffectBlitOffsetPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, dx:Float, dy:Float):Void {
+  public static function applyWgpuEffectBlitOffsetPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, dx:Float, dy:Float):Void {
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     pipeline = FlightRuntime.callValue(EffectsWgpu.getWgpuBlitOffsetShader__wgpuEffectBlitShader, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(drawWgpuEffectPass, cast ([state, source, dest, pipeline, function(f32:Dynamic) {
@@ -1238,7 +1235,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyWgpuEffectBlitPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
+  public static function applyWgpuEffectBlitPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     pipeline = FlightRuntime.callValue(EffectsWgpu.getWgpuBlitShader__wgpuEffectBlitShader, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(drawWgpuEffectPass, cast ([state, source, dest, pipeline, function() {
@@ -1246,7 +1243,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyWgpuEffectBoxBlur(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; @:optional var passes:Float; @:optional var edgeColor:Array<Float>; }):Void {
+  public static function applyWgpuEffectBoxBlur(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; @:optional var passes:Float; @:optional var edgeColor:Array<Float>; }):Void {
     var passes:Dynamic = cast FlightRuntime.UNDEFINED;
     var blurX:Dynamic = cast FlightRuntime.UNDEFINED;
     var blurY:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1282,7 +1279,7 @@ class EffectsWgpu {
 }
   }
 
-  @:keep public static function applyWgpuEffectErasePass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
+  public static function applyWgpuEffectErasePass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     pipeline = FlightRuntime.callValue(EffectsWgpu.getWgpuEraseShader__wgpuEffectBlitShader, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(drawWgpuEffectPass, cast ([state, source, dest, pipeline, function() {
@@ -1290,7 +1287,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyWgpuEffectInnerClipPass(state:WgpuRenderState, glow:WgpuRenderTarget, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
+  public static function applyWgpuEffectInnerClipPass(state:WgpuRenderState, glow:WgpuRenderTarget, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     pipeline = FlightRuntime.callValue(EffectsWgpu.getWgpuInnerClipShader__wgpuEffectTintShader, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(drawWgpuDualSourceEffectPass, cast ([state, glow, source, dest, pipeline, function() {
@@ -1298,7 +1295,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyWgpuEffectInvertTintPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, color:Float, alpha:Float, strength:Float):Void {
+  public static function applyWgpuEffectInvertTintPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, color:Float, alpha:Float, strength:Float):Void {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1318,7 +1315,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyWgpuEffectTintPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, color:Float, alpha:Float, strength:Float):Void {
+  public static function applyWgpuEffectTintPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, color:Float, alpha:Float, strength:Float):Void {
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1338,7 +1335,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyWgpuGaussianBlurPass__wgpuBlurEffect(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, sigma:Float, radius:Float, dirX:Float, dirY:Float):Void {
+  public static function applyWgpuGaussianBlurPass__wgpuBlurEffect(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, sigma:Float, radius:Float, dirX:Float, dirY:Float):Void {
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     pipeline = FlightRuntime.callValue(getWgpuEffectPipeline, cast ([state, 'blur.gaussian', EffectsWgpu.GAUSSIAN_BLUR_WGSL__wgpuBlurEffect, 'replace'] : Array<Dynamic>));
     FlightRuntime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
@@ -1351,7 +1348,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyWhiteBalanceEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:WhiteBalanceEffect):Void {
+  public static function applyWhiteBalanceEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:WhiteBalanceEffect):Void {
     var temperature:Dynamic = cast FlightRuntime.UNDEFINED;
     var tint:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1364,7 +1361,7 @@ class EffectsWgpu {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function beginEffectPass__wgpuEffectPass(state:WgpuRenderState, dest:Null<WgpuRenderTarget>, loadOp:Dynamic):Dynamic {
+  public static function beginEffectPass__wgpuEffectPass(state:WgpuRenderState, dest:Null<WgpuRenderTarget>, loadOp:Dynamic):Dynamic {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var view:Dynamic = cast FlightRuntime.UNDEFINED;
     var pass:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1387,7 +1384,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function beginWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline):Void {
+  public static function beginWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline):Void {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     var format:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1431,12 +1428,12 @@ class EffectsWgpu {
 
   public static final boxBlurPipelines__wgpuEffectBoxBlur:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function buildGodRaysFragment__wgpuGodRaysEffect(samples:Float):String {
+  public static function buildGodRaysFragment__wgpuGodRaysEffect(samples:Float):String {
     return cast ((EffectsWgpu.GOD_RAYS_FRAGMENT_HEAD__wgpuGodRaysEffect + FlightRuntime.callProperty(samples, 'toString', cast ([] : Array<Dynamic>))) + EffectsWgpu.GOD_RAYS_FRAGMENT_TAIL__wgpuGodRaysEffect);
     return cast null;
   }
 
-  @:keep public static function buildRampData__wgpuEffectGradientRamp(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
+  public static function buildRampData__wgpuEffectGradientRamp(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [(256.0 * 4.0)]);
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(colors, 'length'), 0.0))) { return cast out; }
@@ -1491,7 +1488,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function buildToneMapFragment__wgpuToneMapEffect(operator_:String):String {
+  public static function buildToneMapFragment__wgpuToneMapEffect(operator_:String):String {
     return cast ((EffectsWgpu.TONEMAP_FRAGMENT_HEAD__wgpuToneMapEffect + FlightRuntime.coalesce(FlightRuntime.getIndex(EffectsWgpu.TONEMAP_OPERATORS__wgpuToneMapEffect, operator_), function():Dynamic return cast EffectsWgpu.TONEMAP_OPERATORS__wgpuToneMapEffect.aces)) + EffectsWgpu.TONEMAP_FRAGMENT_TAIL__wgpuToneMapEffect);
     return cast null;
   }
@@ -1500,12 +1497,12 @@ class EffectsWgpu {
 
   public static final CHROMATIC_ABERRATION_FRAGMENT_WGSL__wgpuChromaticAberrationEffect:Dynamic = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_radial : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let centered = uv - vec2f(0.5);\n  let scale = mix(1.0, length(centered) * 2.0, uni.u_radial);\n  let dir = mix(vec2f(1.0, 0.0), normalize(centered + vec2f(1e-5)), uni.u_radial);\n  let offset = dir * uni.u_intensity * scale;\n  let r = textureSampleLevel(tex, smp, uv + offset, 0.0).r;\n  let g = textureSampleLevel(tex, smp, uv, 0.0).g;\n  let b = textureSampleLevel(tex, smp, uv - offset, 0.0).b;\n  let a = textureSampleLevel(tex, smp, uv, 0.0).a;\n  return vec4f(r, g, b, a);\n}';
 
-  @:keep public static function clamp01__wgpuColorLutPass(v:Float):Float {
+  public static function clamp01__wgpuColorLutPass(v:Float):Float {
     return cast FlightRuntime.select(FlightRuntime.compare(v, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast FlightRuntime.select(FlightRuntime.compare(v, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast v));
     return cast null;
   }
 
-  @:keep public static function clearWgpuEffectTarget(state:WgpuRenderState, target:WgpuRenderTarget):Void {
+  public static function clearWgpuEffectTarget(state:WgpuRenderState, target:WgpuRenderTarget):Void {
     var pass:Dynamic = cast FlightRuntime.UNDEFINED;
     pass = FlightRuntime.callValue(EffectsWgpu.beginEffectPass__wgpuEffectPass, cast ([state, target, 'clear'] : Array<Dynamic>));
     FlightRuntime.callProperty(pass, 'end', cast ([] : Array<Dynamic>));
@@ -1517,7 +1514,7 @@ class EffectsWgpu {
 
   public static final CRT_FRAGMENT_WGSL__wgpuCrtEffect:Dynamic = '\nstruct Uniforms {\n  u_curvature : f32,\n  u_scanlineIntensity : f32,\n  u_vignette : f32,\n  u_aberration : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn barrel(uv : vec2f) -> vec2f {\n  var c = uv * 2.0 - 1.0;\n  c += c * uni.u_curvature * dot(c, c);\n  return c * 0.5 + 0.5;\n}\n\n@fragment\nfn fs_main(@location(0) uvIn : vec2f) -> @location(0) vec4f {\n  let uv = barrel(uvIn);\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {\n    return vec4f(0.0, 0.0, 0.0, 1.0);\n  }\n  let off = vec2f(uni.u_aberration, 0.0);\n  let r = textureSampleLevel(tex, smp, uv + off, 0.0).r;\n  let g = textureSampleLevel(tex, smp, uv, 0.0).g;\n  let b = textureSampleLevel(tex, smp, uv - off, 0.0).b;\n  let a = textureSampleLevel(tex, smp, uv, 0.0).a;\n  var col = vec3f(r, g, b);\n  let line = sin(uv.y * uni.u_resolution.y * 3.14159265) * 0.5 + 0.5;\n  col *= 1.0 - uni.u_scanlineIntensity * (1.0 - line);\n  let vc = uv * 2.0 - 1.0;\n  col *= 1.0 - uni.u_vignette * dot(vc, vc);\n  return vec4f(col, a);\n}';
 
-  @:keep public static function createWgpuDualSourceEffectPipeline(state:WgpuRenderState, fragmentWGSL:String, blend:WgpuEffectBlendMode = 'premul'):WgpuDualSourceEffectPipeline {
+  public static function createWgpuDualSourceEffectPipeline(state:WgpuRenderState, fragmentWGSL:String, blend:WgpuEffectBlendMode = 'premul'):WgpuDualSourceEffectPipeline {
     var fs:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1534,7 +1531,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function createWgpuEffectGradientRampTexture__wgpuEffectGradientRamp(state:WgpuRenderState, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
+  public static function createWgpuEffectGradientRampTexture__wgpuEffectGradientRamp(state:WgpuRenderState, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1548,7 +1545,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function createWgpuEffectPipeline(state:WgpuRenderState, fragmentWGSL:String, blend:WgpuEffectBlendMode = 'premul'):WgpuEffectPipeline {
+  public static function createWgpuEffectPipeline(state:WgpuRenderState, fragmentWGSL:String, blend:WgpuEffectBlendMode = 'premul'):WgpuEffectPipeline {
     var fs:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure2:Dynamic = cast FlightRuntime.UNDEFINED;
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1565,7 +1562,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function createWgpuRenderEffectPipeline(_state:WgpuRenderState, ?options:RenderEffectPipelineOptions):WgpuRenderEffectPipeline {
+  public static function createWgpuRenderEffectPipeline(_state:WgpuRenderState, ?options:RenderEffectPipelineOptions):WgpuRenderEffectPipeline {
     if (options == null) options = cast ({  } : Dynamic);
     return cast { options: FlightRuntime.mergeObjects([options]), sceneTarget: null, pool: FlightRuntime.callValue(createWgpuRenderTargetPool, cast ([] : Array<Dynamic>)), lutCache: FlightRuntime.callValue(createColorLutCache, cast ([] : Array<Dynamic>)), lutTexture: { texture: null, size: 0.0, lut: null }, velocityTexture: null };
     return cast null;
@@ -1754,7 +1751,7 @@ class EffectsWgpu {
 
   public static final DIRECTIONAL_BLUR_FRAGMENT_WGSL__wgpuDirectionalBlurEffect:Dynamic = '\nstruct Uniforms {\n  u_angle : f32,\n  u_length : f32,\n  u_samples : f32,\n  _pad0 : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nconst SAMPLES : i32 = 16;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let dir = vec2f(cos(uni.u_angle), sin(uni.u_angle)) * (uni.u_length / uni.u_resolution);\n  let count = min(uni.u_samples, 16.0);\n  var sum = vec4f(0.0);\n  var taken = 0.0;\n  for (var i = 0; i < SAMPLES; i = i + 1) {\n    if (f32(i) >= count) { break; }\n    let t = select(0.0, (f32(i) / (count - 1.0)) - 0.5, count > 1.0);\n    let p = uv + dir * t;\n    sum = sum + textureSampleLevel(tex, smp, p, 0.0);\n    taken = taken + 1.0;\n  }\n  return sum / max(taken, 1.0);\n}';
 
-  @:keep public static function destroyWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline):Void {
+  public static function destroyWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline):Void {
     if (FlightRuntime.truthy(FlightRuntime.field(pipeline, 'sceneTarget'))) {
   FlightRuntime.callValue(destroyWgpuRenderTarget, cast ([state, FlightRuntime.field(pipeline, 'sceneTarget')] : Array<Dynamic>));
   FlightRuntime.setField(pipeline, 'sceneTarget', null);
@@ -1774,7 +1771,7 @@ class EffectsWgpu {
 
   public static final EFFECT_VERTEX_WGSL:Dynamic = '\nstruct VertexOut {\n  @builtin(position) position : vec4f,\n  @location(0) uv : vec2f,\n}\n\n@vertex\nfn vs_main(@builtin(vertex_index) vi : u32) -> VertexOut {\n  let xi = vi == 1u || vi == 2u || vi == 4u;\n  let yi = vi == 2u || vi == 4u || vi == 5u;\n  var out : VertexOut;\n  out.position = vec4f(select(-1.0, 1.0, xi), select(-1.0, 1.0, yi), 0.0, 1.0);\n  out.uv = vec2f(select(0.0, 1.0, xi), select(1.0, 0.0, yi));\n  return out;\n}\n';
 
-  @:keep public static function drawWgpuDualSourceEffectPass(state:WgpuRenderState, source0:WgpuRenderTarget, source1:WgpuRenderTarget, dest:Null<WgpuRenderTarget>, pipeline:WgpuDualSourceEffectPipeline, setUniforms:Dynamic):Void {
+  public static function drawWgpuDualSourceEffectPass(state:WgpuRenderState, source0:WgpuRenderTarget, source1:WgpuRenderTarget, dest:Null<WgpuRenderTarget>, pipeline:WgpuDualSourceEffectPipeline, setUniforms:Dynamic):Void {
     var fs:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure3:Dynamic = cast FlightRuntime.UNDEFINED;
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1798,7 +1795,7 @@ class EffectsWgpu {
     FlightRuntime.callProperty(pass, 'end', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function drawWgpuEffectPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:Null<WgpuRenderTarget>, pipeline:WgpuEffectPipeline, setUniforms:Dynamic):Void {
+  public static function drawWgpuEffectPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:Null<WgpuRenderTarget>, pipeline:WgpuEffectPipeline, setUniforms:Dynamic):Void {
     var fs:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure4:Dynamic = cast FlightRuntime.UNDEFINED;
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1825,7 +1822,7 @@ class EffectsWgpu {
 
   public static final ERASE_BLEND__wgpuEffectPass:Dynamic = { color: { srcFactor: 'zero', dstFactor: 'one-minus-src-alpha', operation: 'add' }, alpha: { srcFactor: 'zero', dstFactor: 'one-minus-src-alpha', operation: 'add' } };
 
-  @:keep public static function endWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline, operations:Array<Dynamic>):Void {
+  public static function endWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline, operations:Array<Dynamic>):Void {
     var scene:Dynamic = cast FlightRuntime.UNDEFINED;
     var format:Dynamic = cast FlightRuntime.UNDEFINED;
     var descriptor:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1897,7 +1894,7 @@ class EffectsWgpu {
 
   public static final GLITCH_FRAGMENT_WGSL__wgpuGlitchEffect:Dynamic = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_blockSize : f32,\n  u_colorShift : f32,\n  u_seed : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn glitchHash(n : f32) -> f32 { return fract(sin(n) * 43758.5453123); }\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let blockSize = max(2.0, uni.u_blockSize);\n  let block = floor(uv.y * uni.u_resolution.y / blockSize);\n  let r = glitchHash(block + uni.u_seed * 7.0);\n  // Higher intensity activates more blocks; a torn block tears horizontally.\n  let tear = step(1.0 - uni.u_intensity * 0.6, r);\n  let shiftPx = (glitchHash(block * 1.7 + uni.u_seed) - 0.5) * 2.0 * tear * uni.u_intensity * 40.0;\n  let baseUv = vec2f(uv.x + shiftPx / uni.u_resolution.x, uv.y);\n  // RGB channel separation, wider on torn blocks.\n  let cs = (uni.u_colorShift * (0.4 + tear)) / uni.u_resolution.x;\n  let rC = textureSampleLevel(tex, smp, vec2f(baseUv.x + cs, baseUv.y), 0.0).r;\n  let gC = textureSampleLevel(tex, smp, baseUv, 0.0).g;\n  let bC = textureSampleLevel(tex, smp, vec2f(baseUv.x - cs, baseUv.y), 0.0).b;\n  let a = textureSampleLevel(tex, smp, baseUv, 0.0).a;\n  var col = vec3f(rC, gC, bC);\n  // Occasional bright block corruption.\n  let corrupt = step(0.985 - uni.u_intensity * 0.04, glitchHash(block * 3.3 + uni.u_seed * 2.0));\n  col = mix(col, vec3f(1.0), corrupt * 0.6);\n  return vec4f(col, a);\n}';
 
-  @:keep public static function getApplyPipeline__wgpuGradientBevelEffect(state:WgpuRenderState):WgpuEffectPipeline {
+  public static function getApplyPipeline__wgpuGradientBevelEffect(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast FlightRuntime.UNDEFINED;
     p = FlightRuntime.callProperty(EffectsWgpu.applyPipelines__wgpuGradientBevelEffect, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(p, FlightRuntime.UNDEFINED))) {
@@ -1915,7 +1912,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getAutoDivisor__wgpuConvolutionEffect(matrix:Array<Float>, length:Float):Float {
+  public static function getAutoDivisor__wgpuConvolutionEffect(matrix:Array<Float>, length:Float):Float {
     var sum:Dynamic = cast FlightRuntime.UNDEFINED;
     sum = 0.0;
     {
@@ -1929,14 +1926,14 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getBlendState__wgpuEffectPass(blend:WgpuEffectBlendMode):Dynamic {
+  public static function getBlendState__wgpuEffectPass(blend:WgpuEffectBlendMode):Dynamic {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(blend, 'replace'))) { return cast EffectsWgpu.REPLACE_BLEND__wgpuEffectPass; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(blend, 'erase'))) { return cast EffectsWgpu.ERASE_BLEND__wgpuEffectPass; }
     return cast EffectsWgpu.PREMUL_BLEND__wgpuEffectPass;
     return cast null;
   }
 
-  @:keep public static function getBloomCompositePipeline__wgpuBloomEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
+  public static function getBloomCompositePipeline__wgpuBloomEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     pipeline = FlightRuntime.callProperty(EffectsWgpu._compositePipelines__wgpuBloomEffect, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(pipeline, FlightRuntime.UNDEFINED))) {
@@ -1947,7 +1944,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getBoxBlurPipeline__wgpuEffectBoxBlur(state:WgpuRenderState):WgpuEffectPipeline {
+  public static function getBoxBlurPipeline__wgpuEffectBoxBlur(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast FlightRuntime.UNDEFINED;
     p = FlightRuntime.callProperty(EffectsWgpu.boxBlurPipelines__wgpuEffectBoxBlur, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(p, FlightRuntime.UNDEFINED))) {
@@ -1958,7 +1955,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getEncodePipeline__wgpuGradientBevelEffect(state:WgpuRenderState):WgpuEffectPipeline {
+  public static function getEncodePipeline__wgpuGradientBevelEffect(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast FlightRuntime.UNDEFINED;
     p = FlightRuntime.callProperty(EffectsWgpu.encodePipelines__wgpuGradientBevelEffect, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(p, FlightRuntime.UNDEFINED))) {
@@ -1976,21 +1973,21 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getInvertTintEdgeColor__wgpuInnerGlowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
+  public static function getInvertTintEdgeColor__wgpuInnerGlowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
     var edgeAlpha:Dynamic = cast FlightRuntime.UNDEFINED;
     edgeAlpha = FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, (alpha * strength)] : Array<Dynamic>));
     return cast cast ([(((Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0)) / 255.0) * edgeAlpha), (((Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0)) / 255.0) * edgeAlpha), (((Std.int(color) & Std.int(255.0)) / 255.0) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function getInvertTintEdgeColor__wgpuInnerShadowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
+  public static function getInvertTintEdgeColor__wgpuInnerShadowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
     var edgeAlpha:Dynamic = cast FlightRuntime.UNDEFINED;
     edgeAlpha = FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, (alpha * strength)] : Array<Dynamic>));
     return cast cast ([(((Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0)) / 255.0) * edgeAlpha), (((Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0)) / 255.0) * edgeAlpha), (((Std.int(color) & Std.int(255.0)) / 255.0) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function getLookupPipeline__wgpuGradientGlowEffect(state:WgpuRenderState):WgpuEffectPipeline {
+  public static function getLookupPipeline__wgpuGradientGlowEffect(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast FlightRuntime.UNDEFINED;
     p = FlightRuntime.callProperty(EffectsWgpu.lookupPipelines__wgpuGradientGlowEffect, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(p, FlightRuntime.UNDEFINED))) {
@@ -2008,7 +2005,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getLutBindGroupLayout__wgpuColorLutPass(state:WgpuRenderState):Dynamic {
+  public static function getLutBindGroupLayout__wgpuColorLutPass(state:WgpuRenderState):Dynamic {
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     layout = FlightRuntime.callProperty(EffectsWgpu.lutBindGroupLayouts__wgpuColorLutPass, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(layout, FlightRuntime.UNDEFINED))) {
@@ -2019,7 +2016,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getLutPipeline__wgpuColorLutPass(state:WgpuRenderState, format:Dynamic):WgpuEffectPipeline {
+  public static function getLutPipeline__wgpuColorLutPass(state:WgpuRenderState, format:Dynamic):WgpuEffectPipeline {
     var byFormat:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     byFormat = FlightRuntime.callProperty(EffectsWgpu.lutPipelines__wgpuColorLutPass, 'get', cast ([state] : Array<Dynamic>));
@@ -2042,7 +2039,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getMotionBlurPipeline__wgpuMotionBlurEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
+  public static function getMotionBlurPipeline__wgpuMotionBlurEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     pipeline = FlightRuntime.callProperty(EffectsWgpu._motionBlurPipelines__wgpuMotionBlurEffect, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(pipeline, FlightRuntime.UNDEFINED))) {
@@ -2053,7 +2050,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getOrCreateEffectPassState__wgpuEffectPass(state:WgpuRenderState):WgpuEffectPassState__wgpuEffectPass {
+  public static function getOrCreateEffectPassState__wgpuEffectPass(state:WgpuRenderState):WgpuEffectPassState__wgpuEffectPass {
     var fs:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2087,7 +2084,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getOrCreateTextureBG__wgpuEffectPass(fs:WgpuEffectPassState__wgpuEffectPass, device:Dynamic, view:Dynamic):Dynamic {
+  public static function getOrCreateTextureBG__wgpuEffectPass(fs:WgpuEffectPassState__wgpuEffectPass, device:Dynamic, view:Dynamic):Dynamic {
     var bg:Dynamic = cast FlightRuntime.UNDEFINED;
     bg = FlightRuntime.callProperty(FlightRuntime.field(fs, 'textureBGs'), 'get', cast ([view] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(bg, FlightRuntime.UNDEFINED))) {
@@ -2098,7 +2095,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getWgpuBevelCompositeShader__wgpuBevelEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
+  public static function getWgpuBevelCompositeShader__wgpuBevelEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var p:Dynamic = cast FlightRuntime.UNDEFINED;
     p = FlightRuntime.callProperty(EffectsWgpu.bevelCompositePipelines__wgpuBevelEffect, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(p, FlightRuntime.UNDEFINED))) {
@@ -2109,7 +2106,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getWgpuBlitOffsetShader__wgpuEffectBlitShader(state:WgpuRenderState):WgpuEffectPipeline {
+  public static function getWgpuBlitOffsetShader__wgpuEffectBlitShader(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast FlightRuntime.UNDEFINED;
     p = FlightRuntime.callProperty(EffectsWgpu.blitOffsetPipelines__wgpuEffectBlitShader, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(p, FlightRuntime.UNDEFINED))) {
@@ -2120,7 +2117,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getWgpuBlitShader__wgpuEffectBlitShader(state:WgpuRenderState):WgpuEffectPipeline {
+  public static function getWgpuBlitShader__wgpuEffectBlitShader(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast FlightRuntime.UNDEFINED;
     p = FlightRuntime.callProperty(EffectsWgpu.blitPipelines__wgpuEffectBlitShader, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(p, FlightRuntime.UNDEFINED))) {
@@ -2131,7 +2128,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getWgpuEffectGradientRampTexture(state:WgpuRenderState, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
+  public static function getWgpuEffectGradientRampTexture(state:WgpuRenderState, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
     var cache:Dynamic = cast FlightRuntime.UNDEFINED;
     var key:Dynamic = cast FlightRuntime.UNDEFINED;
     var texture:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2150,14 +2147,14 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getWgpuEffectPassState(state:WgpuRenderState):{ var uniformBG:Dynamic; var textureBGLayout:Dynamic; var uniformBGLayout:Dynamic; var sampler:Dynamic; var acquireSlot:Dynamic; var writeSlot:Dynamic; var beginPass:Dynamic; } {
+  public static function getWgpuEffectPassState(state:WgpuRenderState):{ var uniformBG:Dynamic; var textureBGLayout:Dynamic; var uniformBGLayout:Dynamic; var sampler:Dynamic; var acquireSlot:Dynamic; var writeSlot:Dynamic; var beginPass:Dynamic; } {
     var fs:Dynamic = cast FlightRuntime.UNDEFINED;
     fs = FlightRuntime.callValue(EffectsWgpu.getOrCreateEffectPassState__wgpuEffectPass, cast ([state] : Array<Dynamic>));
     return cast { uniformBG: FlightRuntime.field(fs, 'uniformBG'), textureBGLayout: FlightRuntime.field(fs, 'textureBGLayout'), uniformBGLayout: FlightRuntime.field(fs, 'uniformBGLayout'), sampler: FlightRuntime.field(fs, 'sampler'), acquireSlot: function() return FlightRuntime.callValue(EffectsWgpu.acquireUniformSlot__wgpuEffectPass, cast ([fs] : Array<Dynamic>)), writeSlot: function(offset:Dynamic, fn:Dynamic) return FlightRuntime.callValue(EffectsWgpu.writeUniformSlot__wgpuEffectPass, cast ([state, fs, offset, fn] : Array<Dynamic>)), beginPass: function(dest:Dynamic, loadOp:Dynamic) return FlightRuntime.callValue(EffectsWgpu.beginEffectPass__wgpuEffectPass, cast ([state, dest, loadOp] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function getWgpuEffectPipeline(state:WgpuRenderState, key:String, fragmentWGSL:String, blend:String = 'replace'):WgpuEffectPipeline {
+  public static function getWgpuEffectPipeline(state:WgpuRenderState, key:String, fragmentWGSL:String, blend:String = 'replace'):WgpuEffectPipeline {
     var cache:Dynamic = cast FlightRuntime.UNDEFINED;
     var existing:Dynamic = cast FlightRuntime.UNDEFINED;
     var compiled:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2174,7 +2171,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getWgpuEraseShader__wgpuEffectBlitShader(state:WgpuRenderState):WgpuEffectPipeline {
+  public static function getWgpuEraseShader__wgpuEffectBlitShader(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast FlightRuntime.UNDEFINED;
     p = FlightRuntime.callProperty(EffectsWgpu.erasePipelines__wgpuEffectBlitShader, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(p, FlightRuntime.UNDEFINED))) {
@@ -2185,7 +2182,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getWgpuInnerClipShader__wgpuEffectTintShader(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
+  public static function getWgpuInnerClipShader__wgpuEffectTintShader(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var p:Dynamic = cast FlightRuntime.UNDEFINED;
     p = FlightRuntime.callProperty(EffectsWgpu.innerClipPipelines__wgpuEffectTintShader, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(p, FlightRuntime.UNDEFINED))) {
@@ -2196,7 +2193,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getWgpuInvertTintShader__wgpuEffectTintShader(state:WgpuRenderState):WgpuEffectPipeline {
+  public static function getWgpuInvertTintShader__wgpuEffectTintShader(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast FlightRuntime.UNDEFINED;
     p = FlightRuntime.callProperty(EffectsWgpu.invertTintPipelines__wgpuEffectTintShader, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(p, FlightRuntime.UNDEFINED))) {
@@ -2207,12 +2204,12 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function getWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Null<WgpuRenderEffectRunner> {
+  public static function getWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Null<WgpuRenderEffectRunner> {
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(FlightRuntime.callProperty(EffectsWgpu._registries__wgpuRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getWgpuTintShader__wgpuEffectTintShader(state:WgpuRenderState):WgpuEffectPipeline {
+  public static function getWgpuTintShader__wgpuEffectTintShader(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast FlightRuntime.UNDEFINED;
     p = FlightRuntime.callProperty(EffectsWgpu.tintPipelines__wgpuEffectTintShader, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(p, FlightRuntime.UNDEFINED))) {
@@ -2233,7 +2230,7 @@ class EffectsWgpu {
 
   public static final INNER_CLIP_WGSL__wgpuEffectTintShader:Dynamic = '\nstruct Uniforms { _u : f32, _pad0 : f32, _pad1 : f32, _pad2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var texGlow : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n@group(2) @binding(0) var texSrc : texture_2d<f32>;\n@group(2) @binding(1) var smp2 : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let glow = textureSampleLevel(texGlow, smp, uv, 0.0);\n  let srcAlpha = textureSampleLevel(texSrc, smp2, uv, 0.0).a;\n  return glow * srcAlpha;\n}';
 
-  @:keep public static function hasWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Bool {
+  public static function hasWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Bool {
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(FlightRuntime.callProperty(EffectsWgpu._registries__wgpuRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>)), 'has', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast false);
     return cast null;
   }
@@ -2272,7 +2269,7 @@ class EffectsWgpu {
 
   public static final OUTLINE_FRAGMENT_WGSL__wgpuOutlineEffect:Dynamic = '\nstruct Uniforms {\n  u_threshold : f32,\n  u_thickness : f32,\n  u_resolution : vec2f,\n  u_color : vec4f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn lum(uv : vec2f) -> f32 {\n  return dot(textureSampleLevel(tex, smp, uv, 0.0).rgb, vec3f(0.2126, 0.7152, 0.0722));\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = uni.u_thickness / uni.u_resolution;\n  let tl = lum(uv + texel * vec2f(-1.0, -1.0));\n  let t = lum(uv + texel * vec2f(0.0, -1.0));\n  let tr = lum(uv + texel * vec2f(1.0, -1.0));\n  let l = lum(uv + texel * vec2f(-1.0, 0.0));\n  let rr = lum(uv + texel * vec2f(1.0, 0.0));\n  let bl = lum(uv + texel * vec2f(-1.0, 1.0));\n  let b = lum(uv + texel * vec2f(0.0, 1.0));\n  let br = lum(uv + texel * vec2f(1.0, 1.0));\n  let gx = -tl - 2.0 * l - bl + tr + 2.0 * rr + br;\n  let gy = -tl - 2.0 * t - tr + bl + 2.0 * b + br;\n  let edge = sqrt(gx * gx + gy * gy);\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let k = step(uni.u_threshold, edge);\n  return mix(c, uni.u_color, k * uni.u_color.a);\n}';
 
-  @:keep public static function packBackgroundClearColor__wgpuRenderEffectPipeline(rgba:Array<Float>):Float {
+  public static function packBackgroundClearColor__wgpuRenderEffectPipeline(rgba:Array<Float>):Float {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2285,7 +2282,7 @@ class EffectsWgpu {
     return cast null;
   }
 
-  @:keep public static function packColor__wgpuEffectTintShader(color:Float):Array<Float> {
+  public static function packColor__wgpuEffectTintShader(color:Float):Array<Float> {
     return cast cast ([((Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0)) / 255.0), ((Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0)) / 255.0), ((Std.int(color) & Std.int(255.0)) / 255.0)] : Array<Dynamic>);
     return cast null;
   }
@@ -2298,7 +2295,7 @@ class EffectsWgpu {
 
   public static final PRESENT_FRAGMENT_WGSL__wgpuRenderEffectPipeline:Dynamic = '\nstruct Uniforms { _u : f32, _pad0 : f32, _pad1 : f32, _pad2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  return textureSampleLevel(tex, smp, uv, 0.0);\n}';
 
-  @:keep public static function presentWgpuRenderEffectResult__wgpuRenderEffectPipeline(state:WgpuRenderState, source:WgpuRenderTarget):Void {
+  public static function presentWgpuRenderEffectResult__wgpuRenderEffectPipeline(state:WgpuRenderState, source:WgpuRenderTarget):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -2313,13 +2310,13 @@ class EffectsWgpu {
 
   public static final rampCaches__wgpuEffectGradientRamp:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function registerAntialiasingWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerAntialiasingWgpuRenderEffects(state:WgpuRenderState):Void {
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'FxaaEffect', defaultWgpuFxaaEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'SmaaEffect', defaultWgpuSmaaEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'TaaEffect', defaultWgpuTaaEffectRunner] : Array<Dynamic>));
   }
 
-  @:keep public static function registerBloomWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerBloomWgpuRenderEffects(state:WgpuRenderState):Void {
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'BloomEffect', defaultWgpuBloomEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'ChromaticAberrationEffect', defaultWgpuChromaticAberrationEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'GodRaysEffect', defaultWgpuGodRaysEffectRunner] : Array<Dynamic>));
@@ -2329,7 +2326,7 @@ class EffectsWgpu {
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'VignetteEffect', defaultWgpuVignetteEffectRunner] : Array<Dynamic>));
   }
 
-  @:keep public static function registerBlurWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerBlurWgpuRenderEffects(state:WgpuRenderState):Void {
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'BlurEffect', defaultWgpuBlurEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'BokehDepthOfFieldEffect', defaultWgpuBokehDepthOfFieldEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'CameraMotionBlurEffect', defaultWgpuCameraMotionBlurEffectRunner] : Array<Dynamic>));
@@ -2339,12 +2336,12 @@ class EffectsWgpu {
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'TiltShiftEffect', defaultWgpuTiltShiftEffectRunner] : Array<Dynamic>));
   }
 
-  @:keep public static function registerColorWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerColorWgpuRenderEffects(state:WgpuRenderState):Void {
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'ToneMapEffect', defaultWgpuToneMapEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'WhiteBalanceEffect', defaultWgpuWhiteBalanceEffectRunner] : Array<Dynamic>));
   }
 
-  @:keep public static function registerCompositeWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerCompositeWgpuRenderEffects(state:WgpuRenderState):Void {
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'BevelEffect', defaultWgpuBevelEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'DropShadowEffect', defaultWgpuDropShadowEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'GradientBevelEffect', defaultWgpuGradientBevelEffectRunner] : Array<Dynamic>));
@@ -2354,7 +2351,7 @@ class EffectsWgpu {
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'OuterGlowEffect', defaultWgpuOuterGlowEffectRunner] : Array<Dynamic>));
   }
 
-  @:keep public static function registerScreenSpaceWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerScreenSpaceWgpuRenderEffects(state:WgpuRenderState):Void {
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'DisplacementEffect', defaultWgpuDisplacementEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'ScreenSpaceFogEffect', defaultWgpuScreenSpaceFogEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'SharpenEffect', defaultWgpuSharpenEffectRunner] : Array<Dynamic>));
@@ -2362,7 +2359,7 @@ class EffectsWgpu {
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'SsrEffect', defaultWgpuSsrEffectRunner] : Array<Dynamic>));
   }
 
-  @:keep public static function registerStandardWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerStandardWgpuRenderEffects(state:WgpuRenderState):Void {
     FlightRuntime.callValue(registerAntialiasingWgpuRenderEffects, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(registerBloomWgpuRenderEffects, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(registerBlurWgpuRenderEffects, cast ([state] : Array<Dynamic>));
@@ -2372,7 +2369,7 @@ class EffectsWgpu {
     FlightRuntime.callValue(registerStylizeWgpuRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  @:keep public static function registerStylizeWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerStylizeWgpuRenderEffects(state:WgpuRenderState):Void {
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'ConvolutionEffect', defaultWgpuConvolutionEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'CrtEffect', defaultWgpuCrtEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'DitherEffect', defaultWgpuDitherEffectRunner] : Array<Dynamic>));
@@ -2388,7 +2385,7 @@ class EffectsWgpu {
     FlightRuntime.callValue(registerWgpuRenderEffect, cast ([state, 'SketchEffect', defaultWgpuSketchEffectRunner] : Array<Dynamic>));
   }
 
-  @:keep public static function registerWgpuRenderEffect(state:WgpuRenderState, kind:String, runner:WgpuRenderEffectRunner):Void {
+  public static function registerWgpuRenderEffect(state:WgpuRenderState, kind:String, runner:WgpuRenderEffectRunner):Void {
     var registry:Dynamic = cast FlightRuntime.UNDEFINED;
     registry = FlightRuntime.callProperty(EffectsWgpu._registries__wgpuRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(registry, FlightRuntime.UNDEFINED))) {
@@ -2402,7 +2399,7 @@ class EffectsWgpu {
 
   public static final REPLACE_BLEND__wgpuEffectPass:Dynamic = { color: { srcFactor: 'one', dstFactor: 'zero', operation: 'add' }, alpha: { srcFactor: 'one', dstFactor: 'zero', operation: 'add' } };
 
-  @:keep public static function resolveEffectPipeline__wgpuEffectPass(state:WgpuRenderState, pipeline:WgpuEffectPipeline, dest:Null<WgpuRenderTarget>):Dynamic {
+  public static function resolveEffectPipeline__wgpuEffectPass(state:WgpuRenderState, pipeline:WgpuEffectPipeline, dest:Null<WgpuRenderTarget>):Dynamic {
     var canvasFormat:Dynamic = cast FlightRuntime.UNDEFINED;
     var targetFormat:Dynamic = cast FlightRuntime.UNDEFINED;
     var variant:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2424,7 +2421,7 @@ class EffectsWgpu {
 
   public static final SCREEN_SPACE_FOG_FRAGMENT_WGSL__wgpuScreenSpaceFogEffect:Dynamic = '\nstruct Uniforms {\n  u_density : f32,\n  _pad0 : f32,\n  _pad1 : f32,\n  _pad2 : f32,\n  u_fogColor : vec3f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  // Color-only fallback: no depth G-buffer in Wgpu yet — screen-Y gradient as a depth proxy.\n  // The real version reads depth and computes fog = 1 - exp(-density * remap(depth, near, far)).\n  let fog = clamp((1.0 - uv.y) * uni.u_density, 0.0, 1.0);\n  return vec4f(mix(c.rgb, uni.u_fogColor, fog), c.a);\n}';
 
-  @:keep public static function setWgpuRenderEffectVelocityTexture(pipeline:WgpuRenderEffectPipeline, texture:Null<Dynamic>):Void {
+  public static function setWgpuRenderEffectVelocityTexture(pipeline:WgpuRenderEffectPipeline, texture:Null<Dynamic>):Void {
     FlightRuntime.setField(pipeline, 'velocityTexture', texture);
   }
 
@@ -2452,7 +2449,7 @@ class EffectsWgpu {
 
   public static final TONEMAP_OPERATORS__wgpuToneMapEffect:Dynamic = { aces: '\n  let a = x * (2.51 * x + 0.03);\n  let b = x * (2.43 * x + 0.59) + 0.14;\n  return a / b;', reinhard: '\n  return x / (1.0 + x / (uni.u_white * uni.u_white));', filmic: '\n  let X = max(vec3f(0.0), x - 0.004);\n  return (X * (6.2 * X + 0.5)) / (X * (6.2 * X + 1.7) + 0.06);', uncharted2: '\n  let A = 0.15; let B = 0.50; let C = 0.10; let D = 0.20; let E = 0.02; let F = 0.30;\n  let v = ((x * (A * x + C * B) + D * E) / (x * (A * x + B) + D * F)) - E / F;\n  return v;', agx: '\n  let v = clamp((x - 0.004) / (1.0 + x), vec3f(0.0), vec3f(1.0));\n  return pow(v, vec3f(0.8));' };
 
-  @:keep public static function uploadLutTexture__wgpuColorLutPass(state:WgpuRenderState, lut:ColorLut, cache:WgpuColorLutTextureCache):Dynamic {
+  public static function uploadLutTexture__wgpuColorLutPass(state:WgpuRenderState, lut:ColorLut, cache:WgpuColorLutTextureCache):Dynamic {
     var __destructure2:Dynamic = cast FlightRuntime.UNDEFINED;
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2491,7 +2488,7 @@ class EffectsWgpu {
 
   public static final WHITE_BALANCE_FRAGMENT_WGSL__wgpuWhiteBalanceEffect:Dynamic = '\nstruct Uniforms { u_temperature : f32, u_tint : f32, _pad0 : f32, _pad1 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  var rgb = c.rgb;\n  rgb.r += uni.u_temperature * 0.5;\n  rgb.b -= uni.u_temperature * 0.5;\n  rgb.g += uni.u_tint * 0.5;\n  return vec4f(clamp(rgb, vec3f(0.0), vec3f(1.0)), c.a);\n}';
 
-  @:keep public static function writeUniformSlot__wgpuEffectPass(state:WgpuRenderState, fs:WgpuEffectPassState__wgpuEffectPass, slotOffset:Float, setUniforms:Dynamic):Void {
+  public static function writeUniformSlot__wgpuEffectPass(state:WgpuRenderState, fs:WgpuEffectPassState__wgpuEffectPass, slotOffset:Float, setUniforms:Dynamic):Void {
     var f32Start:Dynamic = cast FlightRuntime.UNDEFINED;
     var slotF32:Dynamic = cast FlightRuntime.UNDEFINED;
     var slotI32:Dynamic = cast FlightRuntime.UNDEFINED;

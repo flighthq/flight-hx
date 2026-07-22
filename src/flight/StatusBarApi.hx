@@ -13,12 +13,9 @@ import flight.Types.StatusBarStyle;
 import flight.Types.StatusBarStyleEntry;
 import flight.Types.StatusBarStyleEntryHandle;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.StatusBarApi")
 class StatusBarApi {
-  @:keep public static function _applyTopStyleEntry__statusbar():Void {
+  public static function _applyTopStyleEntry__statusbar():Void {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var style:Null<StatusBarStyle> = cast FlightRuntime.UNDEFINED;
     var visible:Null<Bool> = cast FlightRuntime.UNDEFINED;
@@ -54,7 +51,7 @@ class StatusBarApi {
 
   public static final _subscriptions__statusbar:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function _webReadThemeColor__statusbar():Float {
+  public static function _webReadThemeColor__statusbar():Float {
     var meta:Dynamic = cast FlightRuntime.UNDEFINED;
     var content:Dynamic = cast FlightRuntime.UNDEFINED;
     var hex:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -72,7 +69,7 @@ class StatusBarApi {
     return cast null;
   }
 
-  @:keep public static function attachStatusBar(bar:StatusBar):Void {
+  public static function attachStatusBar(bar:StatusBar):Void {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var unsubscribe:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(detachStatusBar, cast ([bar] : Array<Dynamic>));
@@ -85,17 +82,17 @@ class StatusBarApi {
     FlightRuntime.callProperty(StatusBarApi._subscriptions__statusbar, 'set', cast ([bar, unsubscribe] : Array<Dynamic>));
   }
 
-  @:keep public static function createStatusBar():StatusBar {
+  public static function createStatusBar():StatusBar {
     return cast { onChange: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createStatusBarInfo():StatusBarInfo {
+  public static function createStatusBarInfo():StatusBarInfo {
     return cast { color: 0.0, height: -1.0, overlaysContent: false, style: 'default', visible: true };
     return cast null;
   }
 
-  @:keep public static function createWebStatusBarBackend():StatusBarBackend {
+  public static function createWebStatusBarBackend():StatusBarBackend {
     return cast { getInfo: function(out:StatusBarInfo) {
   FlightRuntime.setField(out, 'color', FlightRuntime.callValue(StatusBarApi._webReadThemeColor__statusbar, cast ([] : Array<Dynamic>)));
   FlightRuntime.setField(out, 'height', -1.0);
@@ -130,7 +127,7 @@ class StatusBarApi {
     return cast null;
   }
 
-  @:keep public static function detachStatusBar(bar:StatusBar):Void {
+  public static function detachStatusBar(bar:StatusBar):Void {
     var unsubscribe:Dynamic = cast FlightRuntime.UNDEFINED;
     unsubscribe = FlightRuntime.callProperty(StatusBarApi._subscriptions__statusbar, 'get', cast ([bar] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(unsubscribe, FlightRuntime.UNDEFINED))) {
@@ -139,36 +136,36 @@ class StatusBarApi {
 }
   }
 
-  @:keep public static function disposeStatusBar(bar:StatusBar):Void {
+  public static function disposeStatusBar(bar:StatusBar):Void {
     FlightRuntime.callValue(detachStatusBar, cast ([bar] : Array<Dynamic>));
   }
 
-  @:keep public static function getStatusBarBackend():StatusBarBackend {
+  public static function getStatusBarBackend():StatusBarBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(StatusBarApi._backend__statusbar, null))) { (StatusBarApi._backend__statusbar = cast (FlightRuntime.callValue(createWebStatusBarBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast StatusBarApi._backend__statusbar;
     return cast null;
   }
 
-  @:keep public static function getStatusBarHeight():Float {
+  public static function getStatusBarHeight():Float {
     return cast FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime.callValue(getStatusBarBackend, cast ([] : Array<Dynamic>)), 'getInfo', cast ([StatusBarApi._scratchInfo__statusbar] : Array<Dynamic>)), 'height');
     return cast null;
   }
 
-  @:keep public static function getStatusBarInfo(out:StatusBarInfo):StatusBarInfo {
+  public static function getStatusBarInfo(out:StatusBarInfo):StatusBarInfo {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getStatusBarBackend, cast ([] : Array<Dynamic>)), 'getInfo', cast ([out] : Array<Dynamic>));
     return cast null;
   }
 
   public static final INVALID_HANDLE__statusbar:StatusBarStyleEntryHandle = -1.0;
 
-  @:keep public static function packedRgbaToHexColor__statusbar(color:Float):String {
+  public static function packedRgbaToHexColor__statusbar(color:Float):String {
     var rgb:Dynamic = cast FlightRuntime.UNDEFINED;
     rgb = (Std.int(FlightRuntime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(16777215.0));
     return cast ('#' + FlightRuntime.padStart(FlightRuntime.numberToString(rgb, 16.0), 6.0, '0'));
     return cast null;
   }
 
-  @:keep public static function popStatusBarStyleEntry(handle:StatusBarStyleEntryHandle):Void {
+  public static function popStatusBarStyleEntry(handle:StatusBarStyleEntryHandle):Void {
     var idx:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(handle, StatusBarApi.INVALID_HANDLE__statusbar))) { return; }
     idx = FlightRuntime.findIndex(StatusBarApi._styleStack__statusbar, function(e:Dynamic) return FlightRuntime.strictEquals(FlightRuntime.field(e, 'handle'), handle));
@@ -177,7 +174,7 @@ class StatusBarApi {
     FlightRuntime.callValue(StatusBarApi._applyTopStyleEntry__statusbar, cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function pushStatusBarStyleEntry(entry:StatusBarStyleEntry):StatusBarStyleEntryHandle {
+  public static function pushStatusBarStyleEntry(entry:StatusBarStyleEntry):StatusBarStyleEntryHandle {
     var handle:Dynamic = cast FlightRuntime.UNDEFINED;
     handle = StatusBarApi._nextHandle__statusbar++;
     FlightRuntime.callProperty(StatusBarApi._styleStack__statusbar, 'push', cast ([{ handle: handle, entry: entry }] : Array<Dynamic>));
@@ -186,23 +183,23 @@ class StatusBarApi {
     return cast null;
   }
 
-  @:keep public static function setStatusBarBackend(backend:Null<StatusBarBackend>):Void {
+  public static function setStatusBarBackend(backend:Null<StatusBarBackend>):Void {
     (StatusBarApi._backend__statusbar = cast (backend : Dynamic));
   }
 
-  @:keep public static function setStatusBarColor(color:Float, ?animated:Bool):Void {
+  public static function setStatusBarColor(color:Float, ?animated:Bool):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getStatusBarBackend, cast ([] : Array<Dynamic>)), 'setBackgroundColor', cast ([color, animated] : Array<Dynamic>));
   }
 
-  @:keep public static function setStatusBarOverlaysContent(overlay:Bool):Void {
+  public static function setStatusBarOverlaysContent(overlay:Bool):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getStatusBarBackend, cast ([] : Array<Dynamic>)), 'setOverlaysContent', cast ([overlay] : Array<Dynamic>));
   }
 
-  @:keep public static function setStatusBarStyle(style:StatusBarStyle):Void {
+  public static function setStatusBarStyle(style:StatusBarStyle):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getStatusBarBackend, cast ([] : Array<Dynamic>)), 'setStyle', cast ([style] : Array<Dynamic>));
   }
 
-  @:keep public static function setStatusBarVisible(visible:Bool, ?animation:StatusBarAnimation):Void {
+  public static function setStatusBarVisible(visible:Bool, ?animation:StatusBarAnimation):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getStatusBarBackend, cast ([] : Array<Dynamic>)), 'setVisible', cast ([visible, animation] : Array<Dynamic>));
   }
 }

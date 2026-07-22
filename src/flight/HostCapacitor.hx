@@ -151,12 +151,9 @@ typedef CapacitorStatusBarInfoResult = { @:optional var color:String; @:optional
 
 typedef CapacitorStatusBarPlugin = { var getInfo:Dynamic; var hide:Dynamic; var setBackgroundColor:Dynamic; var setOverlaysWebView:Dynamic; var setStyle:Dynamic; var show:Dynamic; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.HostCapacitor")
 class HostCapacitor {
-  @:keep public static function base64ToBytes__capacitorFileSystem(base64:String):Dynamic {
+  public static function base64ToBytes__capacitorFileSystem(base64:String):Dynamic {
     var binary:Dynamic = cast FlightRuntime.UNDEFINED;
     var bytes:Dynamic = cast FlightRuntime.UNDEFINED;
     binary = FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['atob'] : Array<Dynamic>)), cast ([base64] : Array<Dynamic>));
@@ -172,7 +169,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function bytesToBase64__capacitorFileSystem(bytes:Dynamic):String {
+  public static function bytesToBase64__capacitorFileSystem(bytes:Dynamic):String {
     var binary:Dynamic = cast FlightRuntime.UNDEFINED;
     binary = '';
     {
@@ -186,7 +183,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function createCapacitorAppBackend(capacitor:CapacitorApi):AppBackend {
+  public static function createCapacitorAppBackend(capacitor:CapacitorApi):AppBackend {
     var app:Dynamic = cast FlightRuntime.UNDEFINED;
     var cachedName:Dynamic = cast FlightRuntime.UNDEFINED;
     var cachedVersion:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -296,7 +293,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function createCapacitorClipboardBackend(capacitor:CapacitorApi):ClipboardBackend {
+  public static function createCapacitorClipboardBackend(capacitor:CapacitorApi):ClipboardBackend {
     var clipboard:Dynamic = cast FlightRuntime.UNDEFINED;
     clipboard = FlightRuntime.field(capacitor, 'clipboard');
     return cast { readText: flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Dynamic> {
@@ -406,7 +403,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function createCapacitorConnectivityBackend(capacitor:CapacitorApi):ConnectivityBackend {
+  public static function createCapacitorConnectivityBackend(capacitor:CapacitorApi):ConnectivityBackend {
     var network:Dynamic = cast FlightRuntime.UNDEFINED;
     var mirror:CapacitorConnectionStatus = cast FlightRuntime.UNDEFINED;
     network = FlightRuntime.field(capacitor, 'network');
@@ -437,7 +434,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function createCapacitorDeviceBackend(capacitor:CapacitorApi):DeviceBackend {
+  public static function createCapacitorDeviceBackend(capacitor:CapacitorApi):DeviceBackend {
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
     var cachedInfo:Null<CapacitorDeviceInfo> = cast FlightRuntime.UNDEFINED;
     var cachedId:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -509,7 +506,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function createCapacitorDialogBackend(capacitor:CapacitorApi):DialogBackend {
+  public static function createCapacitorDialogBackend(capacitor:CapacitorApi):DialogBackend {
     var dialog:Dynamic = cast FlightRuntime.UNDEFINED;
     dialog = FlightRuntime.field(capacitor, 'dialog');
     return cast { openFile: flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Dynamic> {
@@ -539,7 +536,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function createCapacitorFileSystemBackend(capacitor:CapacitorApi):Dynamic {
+  public static function createCapacitorFileSystemBackend(capacitor:CapacitorApi):Dynamic {
     var filesystem:Dynamic = cast FlightRuntime.UNDEFINED;
     filesystem = FlightRuntime.field(capacitor, 'filesystem');
     return cast { readTextFile: flight.internal.FlightAsync.make(function(path:Dynamic):flight.internal.FlightPromise<Dynamic> {
@@ -701,7 +698,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function createCapacitorGeolocationBackend(capacitor:CapacitorApi):GeolocationBackend {
+  public static function createCapacitorGeolocationBackend(capacitor:CapacitorApi):GeolocationBackend {
     var geolocation:Dynamic = cast FlightRuntime.UNDEFINED;
     var nextWatchId:Dynamic = cast FlightRuntime.UNDEFINED;
     var watchIds:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -766,7 +763,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function createCapacitorHapticsBackend(capacitor:CapacitorApi):HapticsBackend {
+  public static function createCapacitorHapticsBackend(capacitor:CapacitorApi):HapticsBackend {
     var haptics:Dynamic = cast FlightRuntime.UNDEFINED;
     haptics = FlightRuntime.field(capacitor, 'haptics');
     return cast { cancel: function() {
@@ -806,7 +803,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function createCapacitorKeyboardBackend(capacitor:CapacitorApi):SoftKeyboardBackend {
+  public static function createCapacitorKeyboardBackend(capacitor:CapacitorApi):SoftKeyboardBackend {
     var keyboard:Dynamic = cast FlightRuntime.UNDEFINED;
     var mirrorVisible:Dynamic = cast FlightRuntime.UNDEFINED;
     var mirrorHeight:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -869,7 +866,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function createCapacitorNotificationBackend(capacitor:CapacitorApi):NotificationBackend {
+  public static function createCapacitorNotificationBackend(capacitor:CapacitorApi):NotificationBackend {
     var notifications:Dynamic = cast FlightRuntime.UNDEFINED;
     var nextNumericId:Dynamic = cast FlightRuntime.UNDEFINED;
     var idByNumber:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -976,7 +973,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function createCapacitorShareBackend(capacitor:CapacitorApi):ShareBackend {
+  public static function createCapacitorShareBackend(capacitor:CapacitorApi):ShareBackend {
     var share:Dynamic = cast FlightRuntime.UNDEFINED;
     var cachedAvailable:Dynamic = cast FlightRuntime.UNDEFINED;
     share = FlightRuntime.field(capacitor, 'share');
@@ -1012,7 +1009,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function createCapacitorStatusBarBackend(capacitor:CapacitorApi):StatusBarBackend {
+  public static function createCapacitorStatusBarBackend(capacitor:CapacitorApi):StatusBarBackend {
     var statusBar:Dynamic = cast FlightRuntime.UNDEFINED;
     var cachedInfo:Null<CapacitorStatusBarInfoResult> = cast FlightRuntime.UNDEFINED;
     statusBar = FlightRuntime.field(capacitor, 'statusBar');
@@ -1057,7 +1054,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function findNumericId__capacitorNotification(idByNumber:Dynamic, stringId:String):Null<Float> {
+  public static function findNumericId__capacitorNotification(idByNumber:Dynamic, stringId:String):Null<Float> {
     var parsed:Dynamic = cast FlightRuntime.UNDEFINED;
     for (__iteration0 in FlightRuntime.iterable(idByNumber)) {
       var numericId:Dynamic = FlightRuntime.getIndex(__iteration0, 0.0);
@@ -1069,12 +1066,12 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function hasShareableText__capacitorShare(content:ShareContent):Bool {
+  public static function hasShareableText__capacitorShare(content:ShareContent):Bool {
     return cast FlightRuntime.orValue(FlightRuntime.orValue(!FlightRuntime.strictEquals(FlightRuntime.field(content, 'title'), FlightRuntime.UNDEFINED), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(content, 'text'), FlightRuntime.UNDEFINED)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(content, 'url'), FlightRuntime.UNDEFINED));
     return cast null;
   }
 
-  @:keep public static function hexToRgba__capacitorStatusBar(hex:String):Float {
+  public static function hexToRgba__capacitorStatusBar(hex:String):Float {
     var digits:Dynamic = cast FlightRuntime.UNDEFINED;
     digits = FlightRuntime.replace(hex, FlightRuntime.regexp('^#', ''), '', false);
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(digits, 'length'), 8.0))) { return cast FlightRuntime.unsignedShiftRight(Std.int(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))), Std.int(0.0)); }
@@ -1083,7 +1080,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function registerCapacitorBackends(capacitor:CapacitorApi):Void {
+  public static function registerCapacitorBackends(capacitor:CapacitorApi):Void {
     FlightRuntime.callValue(setAppBackend, cast ([FlightRuntime.callValue(createCapacitorAppBackend, cast ([capacitor] : Array<Dynamic>))] : Array<Dynamic>));
     FlightRuntime.callValue(setClipboardBackend, cast ([FlightRuntime.callValue(createCapacitorClipboardBackend, cast ([capacitor] : Array<Dynamic>))] : Array<Dynamic>));
     FlightRuntime.callValue(setConnectivityBackend, cast ([FlightRuntime.callValue(createCapacitorConnectivityBackend, cast ([capacitor] : Array<Dynamic>))] : Array<Dynamic>));
@@ -1098,35 +1095,35 @@ class HostCapacitor {
     FlightRuntime.callValue(setStatusBarBackend, cast ([FlightRuntime.callValue(createCapacitorStatusBarBackend, cast ([capacitor] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function rgbaToHex__capacitorStatusBar(color:Float):String {
+  public static function rgbaToHex__capacitorStatusBar(color:Float):String {
     var rgb:Dynamic = cast FlightRuntime.UNDEFINED;
     rgb = (Std.int(FlightRuntime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(16777215.0));
     return cast '#' + Std.string(FlightRuntime.padStart(FlightRuntime.numberToString(rgb, 16.0), 6.0, '0')) + '';
     return cast null;
   }
 
-  @:keep public static function toCapacitorImpactStyle__capacitorHaptics(style:HapticImpactStyle):String {
+  public static function toCapacitorImpactStyle__capacitorHaptics(style:HapticImpactStyle):String {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(style, 'heavy'), function():Dynamic return cast FlightRuntime.strictEquals(style, 'rigid')))) { return cast 'HEAVY'; }
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(style, 'light'), function():Dynamic return cast FlightRuntime.strictEquals(style, 'soft')))) { return cast 'LIGHT'; }
     return cast 'MEDIUM';
     return cast null;
   }
 
-  @:keep public static function toCapacitorResizeMode__capacitorKeyboard(mode:SoftKeyboardResizeMode):String {
+  public static function toCapacitorResizeMode__capacitorKeyboard(mode:SoftKeyboardResizeMode):String {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(mode, Types.SoftKeyboardResizeNoneKind))) { return cast 'none'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(mode, Types.SoftKeyboardResizeBodyKind))) { return cast 'body'; }
     return cast mode;
     return cast null;
   }
 
-  @:keep public static function toCapacitorStyle__capacitorStatusBar(style:StatusBarStyle):String {
+  public static function toCapacitorStyle__capacitorStatusBar(style:StatusBarStyle):String {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(style, 'light'))) { return cast 'Light'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(style, 'dark'))) { return cast 'Dark'; }
     return cast 'Default';
     return cast null;
   }
 
-  @:keep public static function toConnectionType__capacitorConnectivity(connectionType:String):ConnectivityConnectionType {
+  public static function toConnectionType__capacitorConnectivity(connectionType:String):ConnectivityConnectionType {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(connectionType, 'wifi'))) { return cast 'wifi'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(connectionType, 'cellular'))) { return cast 'cellular'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(connectionType, 'none'))) { return cast 'none'; }
@@ -1134,47 +1131,47 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function toFileEntry__capacitorFileSystem(name:String, path:String, type:String):FileEntry {
+  public static function toFileEntry__capacitorFileSystem(name:String, path:String, type:String):FileEntry {
     return cast { name: name, path: path, isDirectory: FlightRuntime.strictEquals(type, 'directory') };
     return cast null;
   }
 
-  @:keep public static function toFormFactor__capacitorDevice(info:Null<CapacitorDeviceInfo>):String {
+  public static function toFormFactor__capacitorDevice(info:Null<CapacitorDeviceInfo>):String {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(info, null))) { return cast Types.DeviceFormFactorUnknown; }
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.field(info, 'platform'), 'ios'), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(info, 'platform'), 'android')))) { return cast Types.DeviceFormFactorPhone; }
     return cast Types.DeviceFormFactorUnknown;
     return cast null;
   }
 
-  @:keep public static function toGeoPosition__capacitorGeolocation(position:CapacitorPosition):GeoPosition {
+  public static function toGeoPosition__capacitorGeolocation(position:CapacitorPosition):GeoPosition {
     var coords:Dynamic = cast FlightRuntime.UNDEFINED;
     coords = FlightRuntime.field(position, 'coords');
     return cast { latitude: FlightRuntime.field(coords, 'latitude'), longitude: FlightRuntime.field(coords, 'longitude'), accuracy: FlightRuntime.field(coords, 'accuracy'), altitude: FlightRuntime.coalesce(FlightRuntime.field(coords, 'altitude'), function():Dynamic return cast 0.0), altitudeAccuracy: FlightRuntime.coalesce(FlightRuntime.field(coords, 'altitudeAccuracy'), function():Dynamic return cast 0.0), floorLevel: 0.0, heading: FlightRuntime.coalesce(FlightRuntime.field(coords, 'heading'), function():Dynamic return cast 0.0), speed: FlightRuntime.coalesce(FlightRuntime.field(coords, 'speed'), function():Dynamic return cast 0.0), timestamp: FlightRuntime.field(position, 'timestamp') };
     return cast null;
   }
 
-  @:keep public static function toNotificationPermission__capacitorNotification(display:String):Dynamic {
+  public static function toNotificationPermission__capacitorNotification(display:String):Dynamic {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(display, 'granted'))) { return cast 'granted'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(display, 'denied'))) { return cast 'denied'; }
     return cast 'default';
     return cast null;
   }
 
-  @:keep public static function toPermissionState__capacitorGeolocation(location:String):GeolocationPermissionState {
+  public static function toPermissionState__capacitorGeolocation(location:String):GeolocationPermissionState {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(location, 'granted'))) { return cast 'granted'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(location, 'denied'))) { return cast 'denied'; }
     return cast 'prompt';
     return cast null;
   }
 
-  @:keep public static function toStatusBarStyle__capacitorStatusBar(style:String):StatusBarStyle {
+  public static function toStatusBarStyle__capacitorStatusBar(style:String):StatusBarStyle {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(style, 'Light'))) { return cast 'light'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(style, 'Dark'))) { return cast 'dark'; }
     return cast 'default';
     return cast null;
   }
 
-  @:keep public static function toUnsubscribe__capacitorApp(handlePromise:flight.internal.FlightPromise<CapacitorPluginListenerHandle>):Dynamic {
+  public static function toUnsubscribe__capacitorApp(handlePromise:flight.internal.FlightPromise<CapacitorPluginListenerHandle>):Dynamic {
     var removed:Dynamic = cast FlightRuntime.UNDEFINED;
     var handle:Null<CapacitorPluginListenerHandle> = cast FlightRuntime.UNDEFINED;
     removed = false;
@@ -1196,7 +1193,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function toUnsubscribe__capacitorConnectivity(handlePromise:flight.internal.FlightPromise<CapacitorPluginListenerHandle>):Dynamic {
+  public static function toUnsubscribe__capacitorConnectivity(handlePromise:flight.internal.FlightPromise<CapacitorPluginListenerHandle>):Dynamic {
     var removed:Dynamic = cast FlightRuntime.UNDEFINED;
     var handle:Null<CapacitorPluginListenerHandle> = cast FlightRuntime.UNDEFINED;
     removed = false;
@@ -1218,7 +1215,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function toUnsubscribe__capacitorKeyboard(handlePromise:flight.internal.FlightPromise<CapacitorPluginListenerHandle>):Dynamic {
+  public static function toUnsubscribe__capacitorKeyboard(handlePromise:flight.internal.FlightPromise<CapacitorPluginListenerHandle>):Dynamic {
     var removed:Dynamic = cast FlightRuntime.UNDEFINED;
     var handle:Null<CapacitorPluginListenerHandle> = cast FlightRuntime.UNDEFINED;
     removed = false;
@@ -1240,7 +1237,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  @:keep public static function toUnsubscribe__capacitorNotification(handlePromise:flight.internal.FlightPromise<CapacitorPluginListenerHandle>):Dynamic {
+  public static function toUnsubscribe__capacitorNotification(handlePromise:flight.internal.FlightPromise<CapacitorPluginListenerHandle>):Dynamic {
     var removed:Dynamic = cast FlightRuntime.UNDEFINED;
     var handle:Null<CapacitorPluginListenerHandle> = cast FlightRuntime.UNDEFINED;
     removed = false;

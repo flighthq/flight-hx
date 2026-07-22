@@ -19,9 +19,6 @@ import flight.Types.WindowOptions;
 
 typedef LoopState__application = { var fixedAccumulator:Float; var fpsBuffer:Array<Float>; var fpsHead:Float; var frameHandle:Dynamic; var frameRateAccumulated:Float; var lastTime:Float; var maxDeltaTime:Float; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.ApplicationApi")
 class ApplicationApi {
   public static final _applicationLoopState__application:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
@@ -30,7 +27,7 @@ class ApplicationApi {
 
   public static final _applicationWindowObservers__window:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function _isApplicationVisible__application():Bool {
+  public static function _isApplicationVisible__application():Bool {
     return cast FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !FlightRuntime.truthy(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'hidden')));
     return cast null;
   }
@@ -43,7 +40,7 @@ class ApplicationApi {
 
   public static var _windowBackend__window:Null<WindowBackend> = FlightRuntime.explicitNull();
 
-  @:keep public static function attachApplicationExit(app:Application):Void {
+  public static function attachApplicationExit(app:Application):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     var handler:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
@@ -53,7 +50,7 @@ class ApplicationApi {
     FlightRuntime.callProperty(observers, 'set', cast ([ApplicationApi.kExit__application, function() return FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'removeEventListener', cast (['beforeunload', handler] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function attachApplicationLifecycle(app:Application, win:ApplicationWindow):Void {
+  public static function attachApplicationLifecycle(app:Application, win:ApplicationWindow):Void {
     var kLifecycle:Dynamic = cast FlightRuntime.UNDEFINED;
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     var onDeactivate:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -81,7 +78,7 @@ class ApplicationApi {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function attachWindowClose(win:ApplicationWindow):Void {
+  public static function attachWindowClose(win:ApplicationWindow):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     var onBeforeUnload:Dynamic = cast FlightRuntime.UNDEFINED;
     var onPageHide:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -104,7 +101,7 @@ class ApplicationApi {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function attachWindowDropFile(win:ApplicationWindow, element:Dynamic):Void {
+  public static function attachWindowDropFile(win:ApplicationWindow, element:Dynamic):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     var onDragOver:Dynamic = cast FlightRuntime.UNDEFINED;
     var onDrop:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -125,7 +122,7 @@ class ApplicationApi {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function attachWindowFocus(win:ApplicationWindow, element:Dynamic):Void {
+  public static function attachWindowFocus(win:ApplicationWindow, element:Dynamic):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     var onFocus:Dynamic = cast FlightRuntime.UNDEFINED;
     var onBlur:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -141,7 +138,7 @@ class ApplicationApi {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function attachWindowFullscreen(win:ApplicationWindow):Void {
+  public static function attachWindowFullscreen(win:ApplicationWindow):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     var handler:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
@@ -151,7 +148,7 @@ class ApplicationApi {
     FlightRuntime.callProperty(observers, 'set', cast ([ApplicationApi.kFullscreen__window, function() return FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'removeEventListener', cast (['fullscreenchange', handler] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function attachWindowMove(win:ApplicationWindow):Void {
+  public static function attachWindowMove(win:ApplicationWindow):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     var handler:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
@@ -172,7 +169,7 @@ class ApplicationApi {
     FlightRuntime.callProperty(observers, 'set', cast ([ApplicationApi.kMove__window, function() return FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'removeEventListener', cast (['resize', handler] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function attachWindowOrientation(win:ApplicationWindow):Void {
+  public static function attachWindowOrientation(win:ApplicationWindow):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     var handler:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
@@ -183,7 +180,7 @@ class ApplicationApi {
     FlightRuntime.callProperty(observers, 'set', cast ([ApplicationApi.kOrientation__window, function() return FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['screen'] : Array<Dynamic>)), 'orientation'), 'removeEventListener', cast (['change', handler] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function attachWindowRenderContext(win:ApplicationWindow, canvas:Dynamic):Void {
+  public static function attachWindowRenderContext(win:ApplicationWindow, canvas:Dynamic):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     var onContextLost:Dynamic = cast FlightRuntime.UNDEFINED;
     var onContextRestored:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -202,7 +199,7 @@ class ApplicationApi {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function attachWindowRenderState(win:ApplicationWindow, state:RenderState, canvas:Dynamic):Void {
+  public static function attachWindowRenderState(win:ApplicationWindow, state:RenderState, canvas:Dynamic):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     var apply:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
@@ -217,7 +214,7 @@ class ApplicationApi {
     FlightRuntime.callProperty(observers, 'set', cast ([ApplicationApi.kRenderState__window, function() return FlightRuntime.callValue(disconnectSignal, cast ([FlightRuntime.field(win, 'onResize'), apply] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function attachWindowResize(win:ApplicationWindow, element:Dynamic):Void {
+  public static function attachWindowResize(win:ApplicationWindow, element:Dynamic):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     var observer:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
@@ -234,7 +231,7 @@ class ApplicationApi {
     FlightRuntime.callProperty(observers, 'set', cast ([ApplicationApi.kResize__window, function() return FlightRuntime.callProperty(observer, 'disconnect', cast ([] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function attachWindowVisibility(win:ApplicationWindow):Void {
+  public static function attachWindowVisibility(win:ApplicationWindow):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     var handler:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
@@ -250,11 +247,11 @@ class ApplicationApi {
     FlightRuntime.callProperty(observers, 'set', cast ([ApplicationApi.kVisibility__window, function() return FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'removeEventListener', cast (['visibilitychange', handler] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function centerWindow(win:ApplicationWindow):Void {
+  public static function centerWindow(win:ApplicationWindow):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'center', cast ([win] : Array<Dynamic>));
   }
 
-  @:keep public static function closeWindow(win:ApplicationWindow):Bool {
+  public static function closeWindow(win:ApplicationWindow):Bool {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(requestWindowClose, cast ([win] : Array<Dynamic>))))) { return cast false; }
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'close', cast ([win] : Array<Dynamic>));
     FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(win, 'onClose')] : Array<Dynamic>));
@@ -262,7 +259,7 @@ class ApplicationApi {
     return cast null;
   }
 
-  @:keep public static function computeWindowDeviceTransform(win:ApplicationWindow, out:Matrix):Matrix {
+  public static function computeWindowDeviceTransform(win:ApplicationWindow, out:Matrix):Matrix {
     var scale:Dynamic = cast FlightRuntime.UNDEFINED;
     scale = FlightRuntime.field(win, 'devicePixelRatio');
     FlightRuntime.setField(out, 'a', scale);
@@ -275,17 +272,17 @@ class ApplicationApi {
     return cast null;
   }
 
-  @:keep public static function createApplication():Application {
+  public static function createApplication():Application {
     return cast { deltaTime: 0.0, elapsedTime: 0.0, frameCount: 0.0, interpolationAlpha: 1.0, isRunning: false, onActivate: null, onDeactivate: null, onError: null, onExit: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onFixedUpdate: null, onRender: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onUpdate: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), windows: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
-  @:keep public static function createApplicationWindow():ApplicationWindow {
+  public static function createApplicationWindow():ApplicationWindow {
     return cast { alwaysOnTop: false, devicePixelRatio: 1.0, focused: false, fullscreen: false, height: 0.0, icon: '', maxHeight: -1.0, maximized: false, maxWidth: -1.0, minHeight: 0.0, minimized: false, minWidth: 0.0, opacity: 1.0, resizable: true, skipTaskbar: false, title: '', visible: true, width: 0.0, x: 0.0, y: 0.0, onActivate: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onClose: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onCloseRequest: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onDeactivate: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onDropFile: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onFocusIn: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onFocusOut: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onFullscreenChanged: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onMaximize: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onMinimize: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onMove: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onOrientationChanged: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onRenderContextLost: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onRenderContextRestored: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onResize: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onRestore: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createWebLoopBackend():LoopBackend {
+  public static function createWebLoopBackend():LoopBackend {
     return cast { requestFrame: function(callback:Dynamic) {
   return cast FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['requestAnimationFrame'] : Array<Dynamic>)), cast ([callback] : Array<Dynamic>));
 }, cancelFrame: function(handle:Dynamic) {
@@ -296,7 +293,7 @@ class ApplicationApi {
     return cast null;
   }
 
-  @:keep public static function createWebWindowBackend():WindowBackend {
+  public static function createWebWindowBackend():WindowBackend {
     return cast { open: function() {
   return cast !FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined');
 }, close: function() {
@@ -407,84 +404,84 @@ class ApplicationApi {
 
   public static final DEFAULT_MAX_UPDATES_PER_FRAME__application:Dynamic = 5.0;
 
-  @:keep public static function detachApplicationExit(app:Application):Void {
+  public static function detachApplicationExit(app:Application):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
     FlightRuntime.callOptionalValue(FlightRuntime.callProperty(observers, 'get', cast ([ApplicationApi.kExit__application] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
     FlightRuntime.callProperty(observers, 'delete', cast ([ApplicationApi.kExit__application] : Array<Dynamic>));
   }
 
-  @:keep public static function detachWindowClose(win:ApplicationWindow):Void {
+  public static function detachWindowClose(win:ApplicationWindow):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     FlightRuntime.callOptionalValue(FlightRuntime.callProperty(observers, 'get', cast ([ApplicationApi.kClose__window] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
     FlightRuntime.callProperty(observers, 'delete', cast ([ApplicationApi.kClose__window] : Array<Dynamic>));
   }
 
-  @:keep public static function detachWindowDropFile(win:ApplicationWindow):Void {
+  public static function detachWindowDropFile(win:ApplicationWindow):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     FlightRuntime.callOptionalValue(FlightRuntime.callProperty(observers, 'get', cast ([ApplicationApi.kDropFile__window] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
     FlightRuntime.callProperty(observers, 'delete', cast ([ApplicationApi.kDropFile__window] : Array<Dynamic>));
   }
 
-  @:keep public static function detachWindowFocus(win:ApplicationWindow):Void {
+  public static function detachWindowFocus(win:ApplicationWindow):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     FlightRuntime.callOptionalValue(FlightRuntime.callProperty(observers, 'get', cast ([ApplicationApi.kFocus__window] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
     FlightRuntime.callProperty(observers, 'delete', cast ([ApplicationApi.kFocus__window] : Array<Dynamic>));
   }
 
-  @:keep public static function detachWindowFullscreen(win:ApplicationWindow):Void {
+  public static function detachWindowFullscreen(win:ApplicationWindow):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     FlightRuntime.callOptionalValue(FlightRuntime.callProperty(observers, 'get', cast ([ApplicationApi.kFullscreen__window] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
     FlightRuntime.callProperty(observers, 'delete', cast ([ApplicationApi.kFullscreen__window] : Array<Dynamic>));
   }
 
-  @:keep public static function detachWindowMove(win:ApplicationWindow):Void {
+  public static function detachWindowMove(win:ApplicationWindow):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     FlightRuntime.callOptionalValue(FlightRuntime.callProperty(observers, 'get', cast ([ApplicationApi.kMove__window] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
     FlightRuntime.callProperty(observers, 'delete', cast ([ApplicationApi.kMove__window] : Array<Dynamic>));
   }
 
-  @:keep public static function detachWindowOrientation(win:ApplicationWindow):Void {
+  public static function detachWindowOrientation(win:ApplicationWindow):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     FlightRuntime.callOptionalValue(FlightRuntime.callProperty(observers, 'get', cast ([ApplicationApi.kOrientation__window] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
     FlightRuntime.callProperty(observers, 'delete', cast ([ApplicationApi.kOrientation__window] : Array<Dynamic>));
   }
 
-  @:keep public static function detachWindowRenderContext(win:ApplicationWindow):Void {
+  public static function detachWindowRenderContext(win:ApplicationWindow):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     FlightRuntime.callOptionalValue(FlightRuntime.callProperty(observers, 'get', cast ([ApplicationApi.kRenderContext__window] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
     FlightRuntime.callProperty(observers, 'delete', cast ([ApplicationApi.kRenderContext__window] : Array<Dynamic>));
   }
 
-  @:keep public static function detachWindowRenderState(win:ApplicationWindow):Void {
+  public static function detachWindowRenderState(win:ApplicationWindow):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     FlightRuntime.callOptionalValue(FlightRuntime.callProperty(observers, 'get', cast ([ApplicationApi.kRenderState__window] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
     FlightRuntime.callProperty(observers, 'delete', cast ([ApplicationApi.kRenderState__window] : Array<Dynamic>));
   }
 
-  @:keep public static function detachWindowResize(win:ApplicationWindow):Void {
+  public static function detachWindowResize(win:ApplicationWindow):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     FlightRuntime.callOptionalValue(FlightRuntime.callProperty(observers, 'get', cast ([ApplicationApi.kResize__window] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
     FlightRuntime.callProperty(observers, 'delete', cast ([ApplicationApi.kResize__window] : Array<Dynamic>));
   }
 
-  @:keep public static function detachWindowVisibility(win:ApplicationWindow):Void {
+  public static function detachWindowVisibility(win:ApplicationWindow):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     FlightRuntime.callOptionalValue(FlightRuntime.callProperty(observers, 'get', cast ([ApplicationApi.kVisibility__window] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
     FlightRuntime.callProperty(observers, 'delete', cast ([ApplicationApi.kVisibility__window] : Array<Dynamic>));
   }
 
-  @:keep public static function disposeApplication(app:Application):Void {
+  public static function disposeApplication(app:Application):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
     for (cleanup in FlightRuntime.iterable(FlightRuntime.callProperty(observers, 'values', cast ([] : Array<Dynamic>)))) {
@@ -494,7 +491,7 @@ class ApplicationApi {
     FlightRuntime.setField(app, 'isRunning', false);
   }
 
-  @:keep public static function disposeApplicationWindow(win:ApplicationWindow):Void {
+  public static function disposeApplicationWindow(win:ApplicationWindow):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     for (cleanup in FlightRuntime.iterable(FlightRuntime.callProperty(observers, 'values', cast ([] : Array<Dynamic>)))) {
@@ -503,19 +500,19 @@ class ApplicationApi {
     FlightRuntime.callProperty(observers, 'clear', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function enableApplicationLifecycleSignals(app:Application):Void {
+  public static function enableApplicationLifecycleSignals(app:Application):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(app, 'onActivate'), null))) { FlightRuntime.setField(app, 'onActivate', FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(app, 'onDeactivate'), null))) { FlightRuntime.setField(app, 'onDeactivate', FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(app, 'onError'), null))) { FlightRuntime.setField(app, 'onError', FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(app, 'onFixedUpdate'), null))) { FlightRuntime.setField(app, 'onFixedUpdate', FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
   }
 
-  @:keep public static function exitApplicationFullscreen():flight.internal.FlightPromise<flight.internal.FlightNothing> {
+  public static function exitApplicationFullscreen():flight.internal.FlightPromise<flight.internal.FlightNothing> {
     return cast FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'exitFullscreen', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function exitApplicationPointerLock():flight.internal.FlightPromise<flight.internal.FlightNothing> {
+  public static function exitApplicationPointerLock():flight.internal.FlightPromise<flight.internal.FlightNothing> {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'exitPointerLock')), 'function')))) {
   return cast FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([] : Array<Dynamic>));
 }
@@ -524,22 +521,22 @@ class ApplicationApi {
     return cast null;
   }
 
-  @:keep public static function flashWindowFrame(win:ApplicationWindow):Void {
+  public static function flashWindowFrame(win:ApplicationWindow):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'flashWindowFrame', cast ([win] : Array<Dynamic>));
   }
 
-  @:keep public static function focusWindow(win:ApplicationWindow):Void {
+  public static function focusWindow(win:ApplicationWindow):Void {
     FlightRuntime.setField(win, 'focused', true);
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'focus', cast ([win] : Array<Dynamic>));
   }
 
-  @:keep public static function forEachApplicationWindow(app:Application, fn:Dynamic):Void {
+  public static function forEachApplicationWindow(app:Application, fn:Dynamic):Void {
     for (win in FlightRuntime.iterable(FlightRuntime.field(app, 'windows'))) {
       FlightRuntime.callValue(fn, cast ([win] : Array<Dynamic>));
     }
   }
 
-  @:keep public static function getApplicationFrameRate(app:Application):Float {
+  public static function getApplicationFrameRate(app:Application):Float {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     var buf:Dynamic = cast FlightRuntime.UNDEFINED;
     var len:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -568,12 +565,12 @@ class ApplicationApi {
     return cast null;
   }
 
-  @:keep public static function getApplicationMainWindow(app:Application):Null<ApplicationWindow> {
+  public static function getApplicationMainWindow(app:Application):Null<ApplicationWindow> {
     return cast FlightRuntime.coalesce(FlightRuntime.coalesce(FlightRuntime.callProperty(ApplicationApi._mainWindows__application, 'get', cast ([(cast app : Application)] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.getIndex(FlightRuntime.field(app, 'windows'), 0.0)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getApplicationObservers__application(app:Application):Dynamic {
+  public static function getApplicationObservers__application(app:Application):Dynamic {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callProperty(ApplicationApi._applicationObservers__application, 'get', cast ([app] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(observers, FlightRuntime.UNDEFINED))) {
@@ -584,7 +581,7 @@ class ApplicationApi {
     return cast null;
   }
 
-  @:keep public static function getApplicationWindowObservers__window(win:ApplicationWindow):Dynamic {
+  public static function getApplicationWindowObservers__window(win:ApplicationWindow):Dynamic {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callProperty(ApplicationApi._applicationWindowObservers__window, 'get', cast ([win] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(observers, FlightRuntime.UNDEFINED))) {
@@ -595,40 +592,40 @@ class ApplicationApi {
     return cast null;
   }
 
-  @:keep public static function getApplicationWindows(app:Application):Array<ApplicationWindow> {
+  public static function getApplicationWindows(app:Application):Array<ApplicationWindow> {
     return cast FlightRuntime.slice(FlightRuntime.field(app, 'windows'), 0, null);
     return cast null;
   }
 
-  @:keep public static function getLoopBackend():LoopBackend {
+  public static function getLoopBackend():LoopBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(ApplicationApi._loopBackend__application, null))) { (ApplicationApi._loopBackend__application = cast (FlightRuntime.callValue(createWebLoopBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast ApplicationApi._loopBackend__application;
     return cast null;
   }
 
-  @:keep public static function getWindowBackend():WindowBackend {
+  public static function getWindowBackend():WindowBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(ApplicationApi._windowBackend__window, null))) { (ApplicationApi._windowBackend__window = cast (FlightRuntime.callValue(createWebWindowBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast ApplicationApi._windowBackend__window;
     return cast null;
   }
 
-  @:keep public static function getWindowBounds(win:ApplicationWindow, out:WindowBounds):WindowBounds {
+  public static function getWindowBounds(win:ApplicationWindow, out:WindowBounds):WindowBounds {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'getBounds', cast ([(cast win : ApplicationWindow), out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getWindowDisplay(win:ApplicationWindow):Float {
+  public static function getWindowDisplay(win:ApplicationWindow):Float {
     return cast -1.0;
     return cast null;
   }
 
-  @:keep public static function hideWindow(win:ApplicationWindow):Void {
+  public static function hideWindow(win:ApplicationWindow):Void {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.field(win, 'visible')))) { return; }
     FlightRuntime.setField(win, 'visible', false);
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'hide', cast ([win] : Array<Dynamic>));
   }
 
-  @:keep public static function isApplicationRunning(app:Application):Bool {
+  public static function isApplicationRunning(app:Application):Bool {
     return cast FlightRuntime.field(app, 'isRunning');
     return cast null;
   }
@@ -659,7 +656,7 @@ class ApplicationApi {
 
   public static final kVisibility__window:Dynamic = FlightRuntime.symbol();
 
-  @:keep public static function lockApplicationPointer(element:Dynamic):flight.internal.FlightPromise<flight.internal.FlightNothing> {
+  public static function lockApplicationPointer(element:Dynamic):flight.internal.FlightPromise<flight.internal.FlightNothing> {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(element, 'requestPointerLock')), 'function'))) { return cast FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([] : Array<Dynamic>)); }
     result = FlightRuntime.callProperty(element, 'requestPointerLock', cast ([] : Array<Dynamic>));
@@ -667,21 +664,21 @@ class ApplicationApi {
     return cast null;
   }
 
-  @:keep public static function maximizeWindow(win:ApplicationWindow):Void {
+  public static function maximizeWindow(win:ApplicationWindow):Void {
     if (FlightRuntime.truthy(FlightRuntime.field(win, 'maximized'))) { return; }
     FlightRuntime.setField(win, 'maximized', true);
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'maximize', cast ([win] : Array<Dynamic>));
     FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(win, 'onMaximize')] : Array<Dynamic>));
   }
 
-  @:keep public static function minimizeWindow(win:ApplicationWindow):Void {
+  public static function minimizeWindow(win:ApplicationWindow):Void {
     if (FlightRuntime.truthy(FlightRuntime.field(win, 'minimized'))) { return; }
     FlightRuntime.setField(win, 'minimized', true);
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'minimize', cast ([win] : Array<Dynamic>));
     FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(win, 'onMinimize')] : Array<Dynamic>));
   }
 
-  @:keep public static function openWindow(win:ApplicationWindow, ?options:WindowOptions):Bool {
+  public static function openWindow(win:ApplicationWindow, ?options:WindowOptions):Bool {
     if (options == null) options = cast ({  } : Dynamic);
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(options, 'title'), FlightRuntime.UNDEFINED))) { FlightRuntime.setField(win, 'title', FlightRuntime.field(options, 'title')); }
@@ -705,7 +702,7 @@ class ApplicationApi {
     return cast null;
   }
 
-  @:keep public static function pauseApplicationLoop(app:Application):Void {
+  public static function pauseApplicationLoop(app:Application):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(FlightRuntime.field(app, 'isRunning')), function():Dynamic return cast FlightRuntime.callProperty(observers, 'has', cast ([ApplicationApi.kPaused__application] : Array<Dynamic>))))) { return; }
@@ -715,7 +712,7 @@ class ApplicationApi {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function prepareElementForInput(element:Dynamic):Void {
+  public static function prepareElementForInput(element:Dynamic):Void {
     FlightRuntime.setField(FlightRuntime.field(element, 'style'), 'touchAction', 'none');
     FlightRuntime.setField(FlightRuntime.field(element, 'style'), 'userSelect', 'none');
     FlightRuntime.setField(FlightRuntime.field(element, 'style'), 'webkitUserSelect', 'none');
@@ -725,7 +722,7 @@ class ApplicationApi {
 }
   }
 
-  @:keep public static function recordFpsSample__application(state:LoopState__application, delta:Float):Void {
+  public static function recordFpsSample__application(state:LoopState__application, delta:Float):Void {
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(FlightRuntime.field(state, 'fpsBuffer'), 'length'), ApplicationApi.ROLLING_FPS_WINDOW__application, '<'))) {
   FlightRuntime.callProperty(FlightRuntime.field(state, 'fpsBuffer'), 'push', cast ([delta] : Array<Dynamic>));
 } else {
@@ -734,27 +731,27 @@ class ApplicationApi {
 }
   }
 
-  @:keep public static function registerApplicationWindow(app:Application, win:ApplicationWindow):Void {
+  public static function registerApplicationWindow(app:Application, win:ApplicationWindow):Void {
     if (FlightRuntime.truthy(FlightRuntime.includes(FlightRuntime.field(app, 'windows'), win))) { return; }
     FlightRuntime.callProperty(FlightRuntime.field(app, 'windows'), 'push', cast ([win] : Array<Dynamic>));
   }
 
-  @:keep public static function requestApplicationFullscreen(element:Dynamic):flight.internal.FlightPromise<flight.internal.FlightNothing> {
+  public static function requestApplicationFullscreen(element:Dynamic):flight.internal.FlightPromise<flight.internal.FlightNothing> {
     return cast FlightRuntime.callProperty(element, 'requestFullscreen', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function requestWindowAttention(win:ApplicationWindow, attention:Bool):Void {
+  public static function requestWindowAttention(win:ApplicationWindow, attention:Bool):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'requestAttention', cast ([win, attention] : Array<Dynamic>));
   }
 
-  @:keep public static function requestWindowClose(win:ApplicationWindow):Bool {
+  public static function requestWindowClose(win:ApplicationWindow):Bool {
     FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(win, 'onCloseRequest')] : Array<Dynamic>));
     return cast !FlightRuntime.strictEquals(FlightRuntime.optionalField(FlightRuntime.field(FlightRuntime.field(win, 'onCloseRequest'), 'data'), 'cancelled'), true);
     return cast null;
   }
 
-  @:keep public static function restoreWindow(win:ApplicationWindow):Void {
+  public static function restoreWindow(win:ApplicationWindow):Void {
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.truthy(FlightRuntime.field(win, 'minimized')), function():Dynamic return cast !FlightRuntime.truthy(FlightRuntime.field(win, 'maximized'))))) { return; }
     FlightRuntime.setField(win, 'minimized', false);
     FlightRuntime.setField(win, 'maximized', false);
@@ -762,7 +759,7 @@ class ApplicationApi {
     FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(win, 'onRestore')] : Array<Dynamic>));
   }
 
-  @:keep public static function resumeApplicationLoop(app:Application):Void {
+  public static function resumeApplicationLoop(app:Application):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     var loopState:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
@@ -779,109 +776,109 @@ class ApplicationApi {
 
   public static final ROLLING_FPS_WINDOW__application:Dynamic = 60.0;
 
-  @:keep public static function setApplicationMainWindow(app:Application, win:ApplicationWindow):Void {
+  public static function setApplicationMainWindow(app:Application, win:ApplicationWindow):Void {
     FlightRuntime.callValue(registerApplicationWindow, cast ([app, win] : Array<Dynamic>));
     FlightRuntime.callProperty(ApplicationApi._mainWindows__application, 'set', cast ([app, win] : Array<Dynamic>));
   }
 
-  @:keep public static function setLoopBackend(backend:Null<LoopBackend>):Void {
+  public static function setLoopBackend(backend:Null<LoopBackend>):Void {
     (ApplicationApi._loopBackend__application = cast (backend : Dynamic));
   }
 
-  @:keep public static function setWindowAlwaysOnTop(win:ApplicationWindow, alwaysOnTop:Bool):Void {
+  public static function setWindowAlwaysOnTop(win:ApplicationWindow, alwaysOnTop:Bool):Void {
     FlightRuntime.setField(win, 'alwaysOnTop', alwaysOnTop);
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setAlwaysOnTop', cast ([win, alwaysOnTop] : Array<Dynamic>));
   }
 
-  @:keep public static function setWindowBackend(backend:Null<WindowBackend>):Void {
+  public static function setWindowBackend(backend:Null<WindowBackend>):Void {
     (ApplicationApi._windowBackend__window = cast (backend : Dynamic));
   }
 
-  @:keep public static function setWindowContentProtection(win:ApplicationWindow, enabled:Bool):Void {
+  public static function setWindowContentProtection(win:ApplicationWindow, enabled:Bool):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setContentProtection', cast ([win, enabled] : Array<Dynamic>));
   }
 
-  @:keep public static function setWindowFullscreen(win:ApplicationWindow, fullscreen:Bool):Void {
+  public static function setWindowFullscreen(win:ApplicationWindow, fullscreen:Bool):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(win, 'fullscreen'), fullscreen))) { return; }
     FlightRuntime.setField(win, 'fullscreen', fullscreen);
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setFullscreen', cast ([win, fullscreen] : Array<Dynamic>));
     FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(win, 'onFullscreenChanged')] : Array<Dynamic>));
   }
 
-  @:keep public static function setWindowHasShadow(win:ApplicationWindow, hasShadow:Bool):Void {
+  public static function setWindowHasShadow(win:ApplicationWindow, hasShadow:Bool):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setHasShadow', cast ([win, hasShadow] : Array<Dynamic>));
   }
 
-  @:keep public static function setWindowIcon(win:ApplicationWindow, icon:String):Void {
+  public static function setWindowIcon(win:ApplicationWindow, icon:String):Void {
     FlightRuntime.setField(win, 'icon', icon);
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setIcon', cast ([win, icon] : Array<Dynamic>));
   }
 
-  @:keep public static function setWindowMaximumSize(win:ApplicationWindow, width:Float, height:Float):Void {
+  public static function setWindowMaximumSize(win:ApplicationWindow, width:Float, height:Float):Void {
     FlightRuntime.setField(win, 'maxWidth', width);
     FlightRuntime.setField(win, 'maxHeight', height);
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setMaximumSize', cast ([win, width, height] : Array<Dynamic>));
   }
 
-  @:keep public static function setWindowMenuBarVisible(win:ApplicationWindow, visible:Bool):Void {
+  public static function setWindowMenuBarVisible(win:ApplicationWindow, visible:Bool):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setMenuBarVisible', cast ([win, visible] : Array<Dynamic>));
   }
 
-  @:keep public static function setWindowMinimumSize(win:ApplicationWindow, width:Float, height:Float):Void {
+  public static function setWindowMinimumSize(win:ApplicationWindow, width:Float, height:Float):Void {
     FlightRuntime.setField(win, 'minWidth', width);
     FlightRuntime.setField(win, 'minHeight', height);
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setMinimumSize', cast ([win, width, height] : Array<Dynamic>));
   }
 
-  @:keep public static function setWindowOpacity(win:ApplicationWindow, opacity:Float):Void {
+  public static function setWindowOpacity(win:ApplicationWindow, opacity:Float):Void {
     FlightRuntime.setField(win, 'opacity', opacity);
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setOpacity', cast ([win, opacity] : Array<Dynamic>));
   }
 
-  @:keep public static function setWindowParent(win:ApplicationWindow, parent:Null<ApplicationWindow>):Void {
+  public static function setWindowParent(win:ApplicationWindow, parent:Null<ApplicationWindow>):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setParent', cast ([win, parent] : Array<Dynamic>));
   }
 
-  @:keep public static function setWindowPosition(win:ApplicationWindow, x:Float, y:Float):Void {
+  public static function setWindowPosition(win:ApplicationWindow, x:Float, y:Float):Void {
     FlightRuntime.setField(win, 'x', x);
     FlightRuntime.setField(win, 'y', y);
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setPosition', cast ([win, x, y] : Array<Dynamic>));
     FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(win, 'onMove')] : Array<Dynamic>));
   }
 
-  @:keep public static function setWindowProgress(win:ApplicationWindow, progress:Float):Void {
+  public static function setWindowProgress(win:ApplicationWindow, progress:Float):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setProgress', cast ([win, progress] : Array<Dynamic>));
   }
 
-  @:keep public static function setWindowResizable(win:ApplicationWindow, resizable:Bool):Void {
+  public static function setWindowResizable(win:ApplicationWindow, resizable:Bool):Void {
     FlightRuntime.setField(win, 'resizable', resizable);
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setResizable', cast ([win, resizable] : Array<Dynamic>));
   }
 
-  @:keep public static function setWindowSize(win:ApplicationWindow, width:Float, height:Float):Void {
+  public static function setWindowSize(win:ApplicationWindow, width:Float, height:Float):Void {
     FlightRuntime.setField(win, 'width', width);
     FlightRuntime.setField(win, 'height', height);
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setSize', cast ([win, width, height] : Array<Dynamic>));
     FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(win, 'onResize')] : Array<Dynamic>));
   }
 
-  @:keep public static function setWindowSkipTaskbar(win:ApplicationWindow, skip:Bool):Void {
+  public static function setWindowSkipTaskbar(win:ApplicationWindow, skip:Bool):Void {
     FlightRuntime.setField(win, 'skipTaskbar', skip);
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setSkipTaskbar', cast ([win, skip] : Array<Dynamic>));
   }
 
-  @:keep public static function setWindowTitle(win:ApplicationWindow, title:String):Void {
+  public static function setWindowTitle(win:ApplicationWindow, title:String):Void {
     FlightRuntime.setField(win, 'title', title);
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'setTitle', cast ([win, title] : Array<Dynamic>));
   }
 
-  @:keep public static function showWindow(win:ApplicationWindow):Void {
+  public static function showWindow(win:ApplicationWindow):Void {
     if (FlightRuntime.truthy(FlightRuntime.field(win, 'visible'))) { return; }
     FlightRuntime.setField(win, 'visible', true);
     FlightRuntime.callProperty(FlightRuntime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'show', cast ([win] : Array<Dynamic>));
   }
 
-  @:keep public static function startApplicationLoop(app:Application, ?options:ApplicationLoopOptions):Void {
+  public static function startApplicationLoop(app:Application, ?options:ApplicationLoopOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -981,7 +978,7 @@ class ApplicationApi {
     FlightRuntime.callProperty(observers, 'set', cast ([ApplicationApi.kLoop__application, function() return FlightRuntime.callProperty(backend, 'cancelFrame', cast ([FlightRuntime.field(loopState, 'frameHandle')] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function stepApplicationLoop(app:Application, deltaTime:Float):Void {
+  public static function stepApplicationLoop(app:Application, deltaTime:Float):Void {
     var loopState:Dynamic = cast FlightRuntime.UNDEFINED;
     var maxDelta:Dynamic = cast FlightRuntime.UNDEFINED;
     var clamped:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1010,7 +1007,7 @@ class ApplicationApi {
 }
   }
 
-  @:keep public static function stopApplicationLoop(app:Application):Void {
+  public static function stopApplicationLoop(app:Application):Void {
     var observers:Dynamic = cast FlightRuntime.UNDEFINED;
     observers = FlightRuntime.callValue(ApplicationApi.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
     FlightRuntime.callOptionalValue(FlightRuntime.callProperty(observers, 'get', cast ([ApplicationApi.kLoop__application] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
@@ -1020,7 +1017,7 @@ class ApplicationApi {
     FlightRuntime.setField(app, 'isRunning', false);
   }
 
-  @:keep public static function unregisterApplicationWindow(app:Application, win:ApplicationWindow):Void {
+  public static function unregisterApplicationWindow(app:Application, win:ApplicationWindow):Void {
     var idx:Dynamic = cast FlightRuntime.UNDEFINED;
     idx = FlightRuntime.callProperty(FlightRuntime.field(app, 'windows'), 'indexOf', cast ([win] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(idx, -1.0))) { FlightRuntime.splice(FlightRuntime.field(app, 'windows'), Std.int(idx), Std.int(1.0), []); }

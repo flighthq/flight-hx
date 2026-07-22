@@ -39,14 +39,11 @@ import flight.Types.WgpuTextureEntry;
 
 typedef StencilMode__wgpuShader = String;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.RenderWgpu")
 class RenderWgpu {
   public static final _shaderBindings__wgpuShaderBinding:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function acquireWgpuFrameCaptureTexture(state:WgpuRenderState):Null<Dynamic> {
+  public static function acquireWgpuFrameCaptureTexture(state:WgpuRenderState):Null<Dynamic> {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var width:Dynamic = cast FlightRuntime.UNDEFINED;
     var height:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -67,7 +64,7 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function acquireWgpuRenderTarget(state:WgpuRenderState, pool:WgpuRenderTargetPool, descriptor:{ var width:Float; var height:Float; @:optional var format:Dynamic; }):WgpuRenderTarget {
+  public static function acquireWgpuRenderTarget(state:WgpuRenderState, pool:WgpuRenderTargetPool, descriptor:{ var width:Float; var height:Float; @:optional var format:Dynamic; }):WgpuRenderTarget {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     var format:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -89,11 +86,11 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function applyWgpuBlendMode(state:WgpuRenderState, blendMode:Null<BlendMode>):Void {
+  public static function applyWgpuBlendMode(state:WgpuRenderState, blendMode:Null<BlendMode>):Void {
     FlightRuntime.setField(FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentBlendMode', blendMode);
   }
 
-  @:keep public static function applyWgpuScissorRect(state:WgpuRenderState, pass:Dynamic):Void {
+  public static function applyWgpuScissorRect(state:WgpuRenderState, pass:Dynamic):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var rect:Dynamic = cast FlightRuntime.UNDEFINED;
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -110,7 +107,7 @@ class RenderWgpu {
     FlightRuntime.callProperty(pass, 'setScissorRect', cast ([x, y, w, h] : Array<Dynamic>));
   }
 
-  @:keep public static function beginWgpuRenderPass(state:WgpuRenderState, target:WgpuRenderTarget, ?preserve:RenderPassPreserve):Void {
+  public static function beginWgpuRenderPass(state:WgpuRenderState, target:WgpuRenderTarget, ?preserve:RenderPassPreserve):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var colorLoadOp:Dynamic = cast FlightRuntime.UNDEFINED;
     var depthLoadOp:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -131,7 +128,7 @@ class RenderWgpu {
     FlightRuntime.setField(runtime, 'renderPass', FlightRuntime.callValue(RenderWgpu.beginWgpuRenderPassEncoder__wgpuRenderTarget, cast ([state, FlightRuntime.field(target, 'view'), FlightRuntime.field(target, 'depthStencilView'), FlightRuntime.field(target, 'width'), FlightRuntime.field(target, 'height'), colorLoadOp, FlightRuntime.callValue(RenderWgpu.resolveWgpuClearColor__wgpuRenderTarget, cast ([target] : Array<Dynamic>)), depthLoadOp, FlightRuntime.field(target, 'clearDepth')] : Array<Dynamic>)));
   }
 
-  @:keep public static function beginWgpuRenderPassEncoder__wgpuRenderTarget(state:WgpuRenderState, colorView:Dynamic, depthStencilView:Dynamic, width:Float, height:Float, loadOp:Dynamic, ?clearColor:Dynamic, depthLoadOp:Dynamic = 'clear', depthClearValue:Dynamic = 1.0):Dynamic {
+  public static function beginWgpuRenderPassEncoder__wgpuRenderTarget(state:WgpuRenderState, colorView:Dynamic, depthStencilView:Dynamic, width:Float, height:Float, loadOp:Dynamic, ?clearColor:Dynamic, depthLoadOp:Dynamic = 'clear', depthClearValue:Dynamic = 1.0):Dynamic {
     if (clearColor == null) clearColor = cast ({ r: 0.0, g: 0.0, b: 0.0, a: 0.0 } : Dynamic);
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var pass:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -142,7 +139,7 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function bindWgpuImageResourceTexture(state:WgpuRenderState, image:ImageResource, generateMips:Dynamic = false):WgpuTextureEntry {
+  public static function bindWgpuImageResourceTexture(state:WgpuRenderState, image:ImageResource, generateMips:Dynamic = false):WgpuTextureEntry {
     var cache:Dynamic = cast FlightRuntime.UNDEFINED;
     var cached:Dynamic = cast FlightRuntime.UNDEFINED;
     var built:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -165,7 +162,7 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function bindWgpuTexture(state:WgpuRenderState, imageSource:Dynamic, generateMips:Dynamic = false):WgpuTextureEntry {
+  public static function bindWgpuTexture(state:WgpuRenderState, imageSource:Dynamic, generateMips:Dynamic = false):WgpuTextureEntry {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var cached:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -222,7 +219,7 @@ class RenderWgpu {
 
   public static final FULLSCREEN_VERTEX_WGSL__wgpuFullscreenPass:Dynamic = '\n@vertex\nfn vs_main(@builtin(vertex_index) vi : u32) -> @builtin(position) vec4f {\n  // Full-screen triangle: three vertices covering the clip rect.\n  let x = f32((vi & 1u) << 2u) - 1.0;\n  let y = f32((vi & 2u) << 1u) - 1.0;\n  return vec4f(x, y, 0.0, 1.0);\n}\n';
 
-  @:keep public static function buildStencilFaceState__wgpuShader(stencilMode:StencilMode__wgpuShader):Dynamic {
+  public static function buildStencilFaceState__wgpuShader(stencilMode:StencilMode__wgpuShader):Dynamic {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(stencilMode, 'maskwrite'))) {
   return cast { compare: 'always', passOp: 'replace', failOp: 'keep', depthFailOp: 'keep' };
 }
@@ -233,7 +230,7 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function buildWgpuRenderTargetBindGroup(state:WgpuRenderState, view:Dynamic):Dynamic {
+  public static function buildWgpuRenderTargetBindGroup(state:WgpuRenderState, view:Dynamic):Dynamic {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var sampler:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -242,58 +239,57 @@ class RenderWgpu {
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function createSurfaceFromWgpuRenderState(state:WgpuRenderState):flight.internal.FlightPromise<Surface> {
-    var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
-    var buffer:Dynamic = cast FlightRuntime.UNDEFINED;
-    var width:Dynamic = cast FlightRuntime.UNDEFINED;
-    var height:Dynamic = cast FlightRuntime.UNDEFINED;
-    var bytesPerRow:Dynamic = cast FlightRuntime.UNDEFINED;
-    var mapped:Dynamic = cast FlightRuntime.UNDEFINED;
-    var surface:Dynamic = cast FlightRuntime.UNDEFINED;
-    var out:Dynamic = cast FlightRuntime.UNDEFINED;
-    var swizzleBGRA:Dynamic = cast FlightRuntime.UNDEFINED;
-    runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    buffer = FlightRuntime.field(runtime, 'frameCaptureBuffer');
-    if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(buffer, null), function():Dynamic return cast FlightRuntime.strictEquals(buffer, FlightRuntime.UNDEFINED)))) {
+  public static function createSurfaceFromWgpuRenderState(state:WgpuRenderState):flight.internal.FlightPromise<Surface> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Surface> {
+      var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
+      var buffer:Dynamic = cast FlightRuntime.UNDEFINED;
+      var width:Dynamic = cast FlightRuntime.UNDEFINED;
+      var height:Dynamic = cast FlightRuntime.UNDEFINED;
+      var bytesPerRow:Dynamic = cast FlightRuntime.UNDEFINED;
+      var mapped:Dynamic = cast FlightRuntime.UNDEFINED;
+      var surface:Dynamic = cast FlightRuntime.UNDEFINED;
+      var out:Dynamic = cast FlightRuntime.UNDEFINED;
+      var swizzleBGRA:Dynamic = cast FlightRuntime.UNDEFINED;
+      runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
+      buffer = FlightRuntime.field(runtime, 'frameCaptureBuffer');
+      if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(buffer, null), function():Dynamic return cast FlightRuntime.strictEquals(buffer, FlightRuntime.UNDEFINED)))) {
   throw FlightRuntime.error('createSurfaceFromWgpuRenderState requires enableWgpuFrameCapture(state) before rendering, then a submitWgpuRenderPass.');
 }
-    width = FlightRuntime.field(runtime, 'frameCaptureWidth');
-    height = FlightRuntime.field(runtime, 'frameCaptureHeight');
-    bytesPerRow = FlightRuntime.field(runtime, 'frameCaptureBytesPerRow');
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(buffer, 'mapAsync', cast ([FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['GPUMapMode'] : Array<Dynamic>)), 'READ')] : Array<Dynamic>)));
-    mapped = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [FlightRuntime.callProperty(buffer, 'getMappedRange', cast ([] : Array<Dynamic>))]);
-    surface = FlightRuntime.callValue(createSurface, cast ([width, height] : Array<Dynamic>));
-    out = FlightRuntime.field(surface, 'data');
-    swizzleBGRA = FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.field(state, 'format'), 'bgra8unorm'), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(state, 'format'), 'bgra8unorm-srgb'));
-    {
-      var y:Dynamic = 0.0;
-      while (FlightRuntime.truthy(FlightRuntime.compare(y, height, '<'))) {
-        var srcRow:Dynamic = (y * bytesPerRow);
-        var dstRow:Dynamic = ((y * width) * 4.0);
-        {
-          var x:Dynamic = 0.0;
-          while (FlightRuntime.truthy(FlightRuntime.compare(x, width, '<'))) {
-            var s:Dynamic = (srcRow + (x * 4.0));
-            var d:Dynamic = (dstRow + (x * 4.0));
-            FlightRuntime.setIndex(out, d, FlightRuntime.select(swizzleBGRA, function():Dynamic return cast FlightRuntime.getIndex(mapped, (s + 2.0)), function():Dynamic return cast FlightRuntime.getIndex(mapped, s)));
-            FlightRuntime.setIndex(out, (d + 1.0), FlightRuntime.getIndex(mapped, (s + 1.0)));
-            FlightRuntime.setIndex(out, (d + 2.0), FlightRuntime.select(swizzleBGRA, function():Dynamic return cast FlightRuntime.getIndex(mapped, s), function():Dynamic return cast FlightRuntime.getIndex(mapped, (s + 2.0))));
-            FlightRuntime.setIndex(out, (d + 3.0), FlightRuntime.getIndex(mapped, (s + 3.0)));
-            x++;
+      width = FlightRuntime.field(runtime, 'frameCaptureWidth');
+      height = FlightRuntime.field(runtime, 'frameCaptureHeight');
+      bytesPerRow = FlightRuntime.field(runtime, 'frameCaptureBytesPerRow');
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(buffer, 'mapAsync', cast ([FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['GPUMapMode'] : Array<Dynamic>)), 'READ')] : Array<Dynamic>)));
+      mapped = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [FlightRuntime.callProperty(buffer, 'getMappedRange', cast ([] : Array<Dynamic>))]);
+      surface = FlightRuntime.callValue(createSurface, cast ([width, height] : Array<Dynamic>));
+      out = FlightRuntime.field(surface, 'data');
+      swizzleBGRA = FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.field(state, 'format'), 'bgra8unorm'), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(state, 'format'), 'bgra8unorm-srgb'));
+      {
+        var y:Dynamic = 0.0;
+        while (FlightRuntime.truthy(FlightRuntime.compare(y, height, '<'))) {
+          var srcRow:Dynamic = (y * bytesPerRow);
+          var dstRow:Dynamic = ((y * width) * 4.0);
+          {
+            var x:Dynamic = 0.0;
+            while (FlightRuntime.truthy(FlightRuntime.compare(x, width, '<'))) {
+              var s:Dynamic = (srcRow + (x * 4.0));
+              var d:Dynamic = (dstRow + (x * 4.0));
+              FlightRuntime.setIndex(out, d, FlightRuntime.select(swizzleBGRA, function():Dynamic return cast FlightRuntime.getIndex(mapped, (s + 2.0)), function():Dynamic return cast FlightRuntime.getIndex(mapped, s)));
+              FlightRuntime.setIndex(out, (d + 1.0), FlightRuntime.getIndex(mapped, (s + 1.0)));
+              FlightRuntime.setIndex(out, (d + 2.0), FlightRuntime.select(swizzleBGRA, function():Dynamic return cast FlightRuntime.getIndex(mapped, s), function():Dynamic return cast FlightRuntime.getIndex(mapped, (s + 2.0))));
+              FlightRuntime.setIndex(out, (d + 3.0), FlightRuntime.getIndex(mapped, (s + 3.0)));
+              x++;
+            }
           }
+          y++;
         }
-        y++;
       }
-    }
-    FlightRuntime.callProperty(buffer, 'unmap', cast ([] : Array<Dynamic>));
-    return cast surface;
-    return cast null;
+      FlightRuntime.callProperty(buffer, 'unmap', cast ([] : Array<Dynamic>));
+      return cast surface;
+      return cast null;
+    })();
   }
 
-  @:keep public static function createWgpuBindGroupLayouts(device:Dynamic):{ var uniformBindGroupLayout:Dynamic; var textureBindGroupLayout:Dynamic; } {
+  public static function createWgpuBindGroupLayouts(device:Dynamic):{ var uniformBindGroupLayout:Dynamic; var textureBindGroupLayout:Dynamic; } {
     var uniformBindGroupLayout:Dynamic = cast FlightRuntime.UNDEFINED;
     var textureBindGroupLayout:Dynamic = cast FlightRuntime.UNDEFINED;
     uniformBindGroupLayout = FlightRuntime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: (Std.int(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'VERTEX')) | Std.int(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'))), buffer: { type: 'uniform', hasDynamicOffset: true, minBindingSize: UNIFORM_BYTE_SIZE } }] : Array<Dynamic>) }] : Array<Dynamic>));
@@ -302,14 +298,14 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function createWgpuBlendState__wgpuShader(srcFactor:Dynamic, dstFactor:Dynamic, operation:Dynamic = 'add'):Dynamic {
+  public static function createWgpuBlendState__wgpuShader(srcFactor:Dynamic, dstFactor:Dynamic, operation:Dynamic = 'add'):Dynamic {
     var component:Dynamic = cast FlightRuntime.UNDEFINED;
     component = { srcFactor: srcFactor, dstFactor: dstFactor, operation: operation };
     return cast { color: component, alpha: component };
     return cast null;
   }
 
-  @:keep public static function createWgpuCanvasElement(width:Float, height:Float, pixelRatio:Float = 1.0):Dynamic {
+  public static function createWgpuCanvasElement(width:Float, height:Float, pixelRatio:Float = 1.0):Dynamic {
     var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
     canvas = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
     FlightRuntime.setField(FlightRuntime.field(canvas, 'style'), 'width', '' + Std.string(width) + 'px');
@@ -320,7 +316,7 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function createWgpuFullscreenPipeline(state:WgpuRenderState, fragmentWgsl:String, textureInputCount:Dynamic = 1.0, ?format:Dynamic):WgpuFullscreenPipeline {
+  public static function createWgpuFullscreenPipeline(state:WgpuRenderState, fragmentWgsl:String, textureInputCount:Dynamic = 1.0, ?format:Dynamic):WgpuFullscreenPipeline {
     if (format == null) format = cast (FlightRuntime.field(state, 'format') : Dynamic);
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -349,135 +345,133 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function createWgpuPipelineLayout(device:Dynamic, uniformBindGroupLayout:Dynamic, textureBindGroupLayout:Dynamic):Dynamic {
+  public static function createWgpuPipelineLayout(device:Dynamic, uniformBindGroupLayout:Dynamic, textureBindGroupLayout:Dynamic):Dynamic {
     return cast FlightRuntime.callProperty(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([uniformBindGroupLayout, textureBindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function createWgpuRenderState(canvas:Dynamic, ?options:WgpuRenderOptions):flight.internal.FlightPromise<WgpuRenderState> {
-    if (options == null) options = cast ({  } : Dynamic);
-    var adapter:Dynamic = cast FlightRuntime.UNDEFINED;
-    var requiredLimits:Dynamic = cast FlightRuntime.UNDEFINED;
-    var device:Dynamic = cast FlightRuntime.UNDEFINED;
-    var format:Dynamic = cast FlightRuntime.UNDEFINED;
-    var context:Dynamic = cast FlightRuntime.UNDEFINED;
-    var uniformStride:Dynamic = cast FlightRuntime.UNDEFINED;
-    var ringByteSize:Dynamic = cast FlightRuntime.UNDEFINED;
-    var uniformBuffer:Dynamic = cast FlightRuntime.UNDEFINED;
-    var uniformData:Dynamic = cast FlightRuntime.UNDEFINED;
-    var uniformDataU32:Dynamic = cast FlightRuntime.UNDEFINED;
-    var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
-    var uniformBindGroupLayout:Dynamic = cast FlightRuntime.UNDEFINED;
-    var textureBindGroupLayout:Dynamic = cast FlightRuntime.UNDEFINED;
-    var uniformBindGroup:Dynamic = cast FlightRuntime.UNDEFINED;
-    var linearSampler:Dynamic = cast FlightRuntime.UNDEFINED;
-    var nearestSampler:Dynamic = cast FlightRuntime.UNDEFINED;
-    var state:Dynamic = cast FlightRuntime.UNDEFINED;
-    var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
-    if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'gpu')))) { throw FlightRuntime.error('WebGPU is not supported in this browser.'); }
-    adapter = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'gpu'), 'requestAdapter', cast ([FlightRuntime.select(!FlightRuntime.looseEquals(FlightRuntime.field(options, 'powerPreference'), null), function():Dynamic return cast { powerPreference: FlightRuntime.field(options, 'powerPreference') }, function():Dynamic return cast FlightRuntime.UNDEFINED)] : Array<Dynamic>)));
-    if (FlightRuntime.truthy(!FlightRuntime.truthy(adapter))) { throw FlightRuntime.error('Failed to get WebGPU adapter.'); }
-    requiredLimits = {  };
-    if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(FlightRuntime.field(adapter, 'limits'), 'maxBindGroups'), 5.0, '>='))) { FlightRuntime.setField(requiredLimits, 'maxBindGroups', 5.0); }
-    device = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(adapter, 'requestDevice', cast ([FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([requiredLimits] : Array<Dynamic>)), 'length'), 0.0, '>'), function():Dynamic return cast { requiredLimits: requiredLimits }, function():Dynamic return cast FlightRuntime.UNDEFINED)] : Array<Dynamic>)));
-    format = FlightRuntime.coalesce(FlightRuntime.field(options, 'format'), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'gpu'), 'getPreferredCanvasFormat', cast ([] : Array<Dynamic>)));
-    context = (cast FlightRuntime.callProperty(canvas, 'getContext', cast (['webgpu'] : Array<Dynamic>)) : Null<Dynamic>);
-    if (FlightRuntime.truthy(!FlightRuntime.truthy(context))) { throw FlightRuntime.error('Failed to get WebGPU canvas context.'); }
-    FlightRuntime.callProperty(context, 'configure', cast ([{ device: device, format: format, alphaMode: 'premultiplied', usage: (Std.int(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'RENDER_ATTACHMENT')) | Std.int(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'COPY_SRC'))) }] : Array<Dynamic>));
-    uniformStride = HxMath.max(HxMath.max(256.0, FlightRuntime.field(FlightRuntime.field(device, 'limits'), 'minUniformBufferOffsetAlignment')), UNIFORM_BYTE_SIZE);
-    ringByteSize = (uniformStride * RenderWgpu.RING_SLOT_COUNT__wgpuRenderState);
-    uniformBuffer = FlightRuntime.callProperty(device, 'createBuffer', cast ([{ size: ringByteSize, usage: (Std.int(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'UNIFORM')) | Std.int(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
-    uniformData = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(ringByteSize / 4.0)]);
-    uniformDataU32 = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [FlightRuntime.field(uniformData, 'buffer')]);
-    __destructure0 = FlightRuntime.callValue(createWgpuBindGroupLayouts, cast ([device] : Array<Dynamic>));
-    uniformBindGroupLayout = FlightRuntime.field(__destructure0, 'uniformBindGroupLayout');
-    textureBindGroupLayout = FlightRuntime.field(__destructure0, 'textureBindGroupLayout');
-    uniformBindGroup = FlightRuntime.callProperty(device, 'createBindGroup', cast ([{ layout: uniformBindGroupLayout, entries: cast ([{ binding: 0.0, resource: { buffer: uniformBuffer, size: UNIFORM_BYTE_SIZE } }] : Array<Dynamic>) }] : Array<Dynamic>));
-    linearSampler = FlightRuntime.callProperty(device, 'createSampler', cast ([{ minFilter: 'linear', magFilter: 'linear', addressModeU: 'clamp-to-edge', addressModeV: 'clamp-to-edge' }] : Array<Dynamic>));
-    nearestSampler = FlightRuntime.callProperty(device, 'createSampler', cast ([{ minFilter: 'nearest', magFilter: 'nearest', addressModeU: 'clamp-to-edge', addressModeV: 'clamp-to-edge' }] : Array<Dynamic>));
-    state = (cast FlightRuntime.callValue(_createRenderState, cast ([{ allowSmoothing: FlightRuntime.coalesce(FlightRuntime.field(options, 'imageSmoothingEnabled'), function():Dynamic return cast true), pixelRatio: FlightRuntime.coalesce(FlightRuntime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: FlightRuntime.callValue(createMatrix, cast ([] : Array<Dynamic>)), roundPixels: FlightRuntime.coalesce(FlightRuntime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: FlightRuntime.field(options, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : WgpuRenderState);
-    if (FlightRuntime.truthy(!FlightRuntime.looseEquals(FlightRuntime.field(options, 'backgroundColor'), null))) { FlightRuntime.callValue(setRenderStateBackgroundColor, cast ([state, FlightRuntime.field(options, 'backgroundColor')] : Array<Dynamic>)); }
-    FlightRuntime.setField(state, 'applyBlendMode', null);
-    FlightRuntime.setField((cast state : { var canvas:Dynamic; }), 'canvas', canvas);
-    FlightRuntime.setField((cast state : { var context:Dynamic; }), 'context', context);
-    FlightRuntime.setField((cast state : { var device:Dynamic; }), 'device', device);
-    FlightRuntime.setField((cast state : { var format:Dynamic; }), 'format', format);
-    runtime = FlightRuntime.callValue(createWgpuRenderStateRuntime, cast ([] : Array<Dynamic>));
-    FlightRuntime.setIndex(state, EntityRuntimeKey, runtime);
-    FlightRuntime.setField(runtime, 'currentBlendMode', null);
-    FlightRuntime.setField(runtime, 'uniformBindGroupLayout', uniformBindGroupLayout);
-    FlightRuntime.setField(runtime, 'textureBindGroupLayout', textureBindGroupLayout);
-    FlightRuntime.setField(runtime, 'uniformBuffer', uniformBuffer);
-    FlightRuntime.setField(runtime, 'uniformData', uniformData);
-    FlightRuntime.setField(runtime, 'uniformDataU32', uniformDataU32);
-    FlightRuntime.setField(runtime, 'uniformOffset', 0.0);
-    FlightRuntime.setField(runtime, 'uniformStride', uniformStride);
-    FlightRuntime.setField(runtime, 'uniformBindGroup', uniformBindGroup);
-    FlightRuntime.setField(runtime, 'matrixArray', FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [9.0]));
-    FlightRuntime.setField(runtime, 'pipelineCache', FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []));
-    FlightRuntime.setField(runtime, 'linearSampler', linearSampler);
-    FlightRuntime.setField(runtime, 'nearestSampler', nearestSampler);
-    FlightRuntime.setField(runtime, 'samplerCache', FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []));
-    FlightRuntime.setField(runtime, 'textureCache', FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []));
-    FlightRuntime.setField(runtime, 'imageResourceTextureCache', FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []));
-    FlightRuntime.setField(runtime, 'defaultBitmapShader', null);
-    FlightRuntime.setField(runtime, 'particleInstanceBuffer', null);
-    FlightRuntime.setField(runtime, 'particleInstanceData', null);
-    FlightRuntime.setField(runtime, 'particleInstanceCapacity', 0.0);
-    FlightRuntime.setField(runtime, 'spriteBatchBlendMode', null);
-    FlightRuntime.setField(runtime, 'spriteBatchMaterial', null);
-    FlightRuntime.setField(runtime, 'spriteBatchMaterialRenderer', null);
-    FlightRuntime.setField(runtime, 'spriteBatchMaterialFloats', 0.0);
-    FlightRuntime.setField(runtime, 'spriteBatchCount', 0.0);
-    FlightRuntime.setField(runtime, 'spriteBatchInstanceData', FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(13.0 * 256.0)]));
-    FlightRuntime.setField(runtime, 'spriteBatchMaterialData', FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(8.0 * 256.0)]));
-    FlightRuntime.setField(runtime, 'spriteBatchTexture', null);
-    FlightRuntime.setField(runtime, 'spriteBatchBufferPool', cast ([] : Array<Dynamic>));
-    FlightRuntime.setField(runtime, 'spriteBatchBufferCursor', 0.0);
-    FlightRuntime.setField(runtime, 'commandEncoder', null);
-    FlightRuntime.setField(runtime, 'renderPass', null);
-    FlightRuntime.setField(runtime, 'canvasTextureView', null);
-    FlightRuntime.setField(runtime, 'canvasViewCleared', false);
-    FlightRuntime.setField(runtime, 'depthStencilTexture', null);
-    FlightRuntime.setField(runtime, 'depthStencilView', null);
-    FlightRuntime.setField(runtime, 'depthStencilWidth', 0.0);
-    FlightRuntime.setField(runtime, 'depthStencilHeight', 0.0);
-    FlightRuntime.setField(runtime, 'currentMaskDepth', 0.0);
-    FlightRuntime.setField(runtime, 'maskWriteMode', false);
-    FlightRuntime.setField(runtime, 'clipContourPipelines', FlightRuntime.UNDEFINED);
-    FlightRuntime.setField(runtime, 'clipContourStack', cast ([] : Array<Dynamic>));
-    FlightRuntime.setField(runtime, 'shapeMeshPipelines', FlightRuntime.UNDEFINED);
-    FlightRuntime.setField(runtime, 'clipForms', cast ([] : Array<Dynamic>));
-    FlightRuntime.setField(runtime, 'scissorStack', cast ([] : Array<Dynamic>));
-    FlightRuntime.setField(runtime, 'currentScissorRect', null);
-    FlightRuntime.setField(runtime, 'renderTargetViewport', null);
-    FlightRuntime.setField(runtime, 'renderTargetStack', cast ([] : Array<Dynamic>));
-    FlightRuntime.callValue(warmWgpuPipelines, cast ([state] : Array<Dynamic>));
-    return cast state;
-    return cast null;
+  public static function createWgpuRenderState(canvas:Dynamic, ?options:WgpuRenderOptions):flight.internal.FlightPromise<WgpuRenderState> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<WgpuRenderState> {
+      if (options == null) options = cast ({  } : Dynamic);
+      var adapter:Dynamic = cast FlightRuntime.UNDEFINED;
+      var requiredLimits:Dynamic = cast FlightRuntime.UNDEFINED;
+      var device:Dynamic = cast FlightRuntime.UNDEFINED;
+      var format:Dynamic = cast FlightRuntime.UNDEFINED;
+      var context:Dynamic = cast FlightRuntime.UNDEFINED;
+      var uniformStride:Dynamic = cast FlightRuntime.UNDEFINED;
+      var ringByteSize:Dynamic = cast FlightRuntime.UNDEFINED;
+      var uniformBuffer:Dynamic = cast FlightRuntime.UNDEFINED;
+      var uniformData:Dynamic = cast FlightRuntime.UNDEFINED;
+      var uniformDataU32:Dynamic = cast FlightRuntime.UNDEFINED;
+      var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
+      var uniformBindGroupLayout:Dynamic = cast FlightRuntime.UNDEFINED;
+      var textureBindGroupLayout:Dynamic = cast FlightRuntime.UNDEFINED;
+      var uniformBindGroup:Dynamic = cast FlightRuntime.UNDEFINED;
+      var linearSampler:Dynamic = cast FlightRuntime.UNDEFINED;
+      var nearestSampler:Dynamic = cast FlightRuntime.UNDEFINED;
+      var state:Dynamic = cast FlightRuntime.UNDEFINED;
+      var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
+      if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'gpu')))) { throw FlightRuntime.error('WebGPU is not supported in this browser.'); }
+      adapter = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'gpu'), 'requestAdapter', cast ([FlightRuntime.select(!FlightRuntime.looseEquals(FlightRuntime.field(options, 'powerPreference'), null), function():Dynamic return cast { powerPreference: FlightRuntime.field(options, 'powerPreference') }, function():Dynamic return cast FlightRuntime.UNDEFINED)] : Array<Dynamic>)));
+      if (FlightRuntime.truthy(!FlightRuntime.truthy(adapter))) { throw FlightRuntime.error('Failed to get WebGPU adapter.'); }
+      requiredLimits = {  };
+      if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(FlightRuntime.field(adapter, 'limits'), 'maxBindGroups'), 5.0, '>='))) { FlightRuntime.setField(requiredLimits, 'maxBindGroups', 5.0); }
+      device = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(adapter, 'requestDevice', cast ([FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([requiredLimits] : Array<Dynamic>)), 'length'), 0.0, '>'), function():Dynamic return cast { requiredLimits: requiredLimits }, function():Dynamic return cast FlightRuntime.UNDEFINED)] : Array<Dynamic>)));
+      format = FlightRuntime.coalesce(FlightRuntime.field(options, 'format'), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'gpu'), 'getPreferredCanvasFormat', cast ([] : Array<Dynamic>)));
+      context = (cast FlightRuntime.callProperty(canvas, 'getContext', cast (['webgpu'] : Array<Dynamic>)) : Null<Dynamic>);
+      if (FlightRuntime.truthy(!FlightRuntime.truthy(context))) { throw FlightRuntime.error('Failed to get WebGPU canvas context.'); }
+      FlightRuntime.callProperty(context, 'configure', cast ([{ device: device, format: format, alphaMode: 'premultiplied', usage: (Std.int(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'RENDER_ATTACHMENT')) | Std.int(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'COPY_SRC'))) }] : Array<Dynamic>));
+      uniformStride = HxMath.max(HxMath.max(256.0, FlightRuntime.field(FlightRuntime.field(device, 'limits'), 'minUniformBufferOffsetAlignment')), UNIFORM_BYTE_SIZE);
+      ringByteSize = (uniformStride * RenderWgpu.RING_SLOT_COUNT__wgpuRenderState);
+      uniformBuffer = FlightRuntime.callProperty(device, 'createBuffer', cast ([{ size: ringByteSize, usage: (Std.int(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'UNIFORM')) | Std.int(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
+      uniformData = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(ringByteSize / 4.0)]);
+      uniformDataU32 = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [FlightRuntime.field(uniformData, 'buffer')]);
+      __destructure0 = FlightRuntime.callValue(createWgpuBindGroupLayouts, cast ([device] : Array<Dynamic>));
+      uniformBindGroupLayout = FlightRuntime.field(__destructure0, 'uniformBindGroupLayout');
+      textureBindGroupLayout = FlightRuntime.field(__destructure0, 'textureBindGroupLayout');
+      uniformBindGroup = FlightRuntime.callProperty(device, 'createBindGroup', cast ([{ layout: uniformBindGroupLayout, entries: cast ([{ binding: 0.0, resource: { buffer: uniformBuffer, size: UNIFORM_BYTE_SIZE } }] : Array<Dynamic>) }] : Array<Dynamic>));
+      linearSampler = FlightRuntime.callProperty(device, 'createSampler', cast ([{ minFilter: 'linear', magFilter: 'linear', addressModeU: 'clamp-to-edge', addressModeV: 'clamp-to-edge' }] : Array<Dynamic>));
+      nearestSampler = FlightRuntime.callProperty(device, 'createSampler', cast ([{ minFilter: 'nearest', magFilter: 'nearest', addressModeU: 'clamp-to-edge', addressModeV: 'clamp-to-edge' }] : Array<Dynamic>));
+      state = (cast FlightRuntime.callValue(_createRenderState, cast ([{ allowSmoothing: FlightRuntime.coalesce(FlightRuntime.field(options, 'imageSmoothingEnabled'), function():Dynamic return cast true), pixelRatio: FlightRuntime.coalesce(FlightRuntime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: FlightRuntime.callValue(createMatrix, cast ([] : Array<Dynamic>)), roundPixels: FlightRuntime.coalesce(FlightRuntime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: FlightRuntime.field(options, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : WgpuRenderState);
+      if (FlightRuntime.truthy(!FlightRuntime.looseEquals(FlightRuntime.field(options, 'backgroundColor'), null))) { FlightRuntime.callValue(setRenderStateBackgroundColor, cast ([state, FlightRuntime.field(options, 'backgroundColor')] : Array<Dynamic>)); }
+      FlightRuntime.setField(state, 'applyBlendMode', null);
+      FlightRuntime.setField((cast state : { var canvas:Dynamic; }), 'canvas', canvas);
+      FlightRuntime.setField((cast state : { var context:Dynamic; }), 'context', context);
+      FlightRuntime.setField((cast state : { var device:Dynamic; }), 'device', device);
+      FlightRuntime.setField((cast state : { var format:Dynamic; }), 'format', format);
+      runtime = FlightRuntime.callValue(createWgpuRenderStateRuntime, cast ([] : Array<Dynamic>));
+      FlightRuntime.setIndex(state, EntityRuntimeKey, runtime);
+      FlightRuntime.setField(runtime, 'currentBlendMode', null);
+      FlightRuntime.setField(runtime, 'uniformBindGroupLayout', uniformBindGroupLayout);
+      FlightRuntime.setField(runtime, 'textureBindGroupLayout', textureBindGroupLayout);
+      FlightRuntime.setField(runtime, 'uniformBuffer', uniformBuffer);
+      FlightRuntime.setField(runtime, 'uniformData', uniformData);
+      FlightRuntime.setField(runtime, 'uniformDataU32', uniformDataU32);
+      FlightRuntime.setField(runtime, 'uniformOffset', 0.0);
+      FlightRuntime.setField(runtime, 'uniformStride', uniformStride);
+      FlightRuntime.setField(runtime, 'uniformBindGroup', uniformBindGroup);
+      FlightRuntime.setField(runtime, 'matrixArray', FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [9.0]));
+      FlightRuntime.setField(runtime, 'pipelineCache', FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []));
+      FlightRuntime.setField(runtime, 'linearSampler', linearSampler);
+      FlightRuntime.setField(runtime, 'nearestSampler', nearestSampler);
+      FlightRuntime.setField(runtime, 'samplerCache', FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []));
+      FlightRuntime.setField(runtime, 'textureCache', FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []));
+      FlightRuntime.setField(runtime, 'imageResourceTextureCache', FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []));
+      FlightRuntime.setField(runtime, 'defaultBitmapShader', null);
+      FlightRuntime.setField(runtime, 'particleInstanceBuffer', null);
+      FlightRuntime.setField(runtime, 'particleInstanceData', null);
+      FlightRuntime.setField(runtime, 'particleInstanceCapacity', 0.0);
+      FlightRuntime.setField(runtime, 'spriteBatchBlendMode', null);
+      FlightRuntime.setField(runtime, 'spriteBatchMaterial', null);
+      FlightRuntime.setField(runtime, 'spriteBatchMaterialRenderer', null);
+      FlightRuntime.setField(runtime, 'spriteBatchMaterialFloats', 0.0);
+      FlightRuntime.setField(runtime, 'spriteBatchCount', 0.0);
+      FlightRuntime.setField(runtime, 'spriteBatchInstanceData', FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(13.0 * 256.0)]));
+      FlightRuntime.setField(runtime, 'spriteBatchMaterialData', FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(8.0 * 256.0)]));
+      FlightRuntime.setField(runtime, 'spriteBatchTexture', null);
+      FlightRuntime.setField(runtime, 'spriteBatchBufferPool', cast ([] : Array<Dynamic>));
+      FlightRuntime.setField(runtime, 'spriteBatchBufferCursor', 0.0);
+      FlightRuntime.setField(runtime, 'commandEncoder', null);
+      FlightRuntime.setField(runtime, 'renderPass', null);
+      FlightRuntime.setField(runtime, 'canvasTextureView', null);
+      FlightRuntime.setField(runtime, 'canvasViewCleared', false);
+      FlightRuntime.setField(runtime, 'depthStencilTexture', null);
+      FlightRuntime.setField(runtime, 'depthStencilView', null);
+      FlightRuntime.setField(runtime, 'depthStencilWidth', 0.0);
+      FlightRuntime.setField(runtime, 'depthStencilHeight', 0.0);
+      FlightRuntime.setField(runtime, 'currentMaskDepth', 0.0);
+      FlightRuntime.setField(runtime, 'maskWriteMode', false);
+      FlightRuntime.setField(runtime, 'clipContourPipelines', FlightRuntime.UNDEFINED);
+      FlightRuntime.setField(runtime, 'clipContourStack', cast ([] : Array<Dynamic>));
+      FlightRuntime.setField(runtime, 'shapeMeshPipelines', FlightRuntime.UNDEFINED);
+      FlightRuntime.setField(runtime, 'clipForms', cast ([] : Array<Dynamic>));
+      FlightRuntime.setField(runtime, 'scissorStack', cast ([] : Array<Dynamic>));
+      FlightRuntime.setField(runtime, 'currentScissorRect', null);
+      FlightRuntime.setField(runtime, 'renderTargetViewport', null);
+      FlightRuntime.setField(runtime, 'renderTargetStack', cast ([] : Array<Dynamic>));
+      FlightRuntime.callValue(warmWgpuPipelines, cast ([state] : Array<Dynamic>));
+      return cast state;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function createWgpuRenderStateForTest():flight.internal.FlightPromise<WgpuRenderState> {
-    var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
-    canvas = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
-    FlightRuntime.setField(canvas, 'width', 800.0);
-    FlightRuntime.setField(canvas, 'height', 600.0);
-    return cast FlightRuntime.callValue(createWgpuRenderState, cast ([canvas] : Array<Dynamic>));
-    return cast null;
+  public static function createWgpuRenderStateForTest():flight.internal.FlightPromise<WgpuRenderState> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<WgpuRenderState> {
+      var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
+      canvas = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
+      FlightRuntime.setField(canvas, 'width', 800.0);
+      FlightRuntime.setField(canvas, 'height', 600.0);
+      return cast FlightRuntime.callValue(createWgpuRenderState, cast ([canvas] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  @:keep public static function createWgpuRenderStateRuntime():WgpuRenderStateRuntime {
+  public static function createWgpuRenderStateRuntime():WgpuRenderStateRuntime {
     return cast (cast FlightRuntime.callValue(createRenderStateRuntime, cast ([] : Array<Dynamic>)) : WgpuRenderStateRuntime);
     return cast null;
   }
 
-  @:keep public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:Dynamic):WgpuRenderTarget {
+  public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:Dynamic):WgpuRenderTarget {
     if (format == null) format = cast (FlightRuntime.field(state, 'format') : Dynamic);
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -499,12 +493,12 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function createWgpuRenderTargetPool():WgpuRenderTargetPool {
+  public static function createWgpuRenderTargetPool():WgpuRenderTargetPool {
     return cast { free: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
-  @:keep public static function createWgpuTextureEntry(state:WgpuRenderState, width:Float, height:Float, canvas:Dynamic):WgpuTextureEntry {
+  public static function createWgpuTextureEntry(state:WgpuRenderState, width:Float, height:Float, canvas:Dynamic):WgpuTextureEntry {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure2:Dynamic = cast FlightRuntime.UNDEFINED;
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -532,10 +526,10 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function destroyWgpuFullscreenPipeline(_state:WgpuRenderState, _pipeline:WgpuFullscreenPipeline):Void {
+  public static function destroyWgpuFullscreenPipeline(_state:WgpuRenderState, _pipeline:WgpuFullscreenPipeline):Void {
   }
 
-  @:keep public static function destroyWgpuRenderState(state:WgpuRenderState):Void {
+  public static function destroyWgpuRenderState(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     FlightRuntime.callOptionalProperty(FlightRuntime.field(runtime, 'uniformBuffer'), 'destroy', cast ([] : Array<Dynamic>));
@@ -547,19 +541,19 @@ class RenderWgpu {
     }
   }
 
-  @:keep public static function destroyWgpuRenderTarget(_state:WgpuRenderState, target:WgpuRenderTarget):Void {
+  public static function destroyWgpuRenderTarget(_state:WgpuRenderState, target:WgpuRenderTarget):Void {
     FlightRuntime.callProperty(FlightRuntime.field(target, 'texture'), 'destroy', cast ([] : Array<Dynamic>));
     FlightRuntime.callProperty(FlightRuntime.field(target, 'depthStencilTexture'), 'destroy', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function destroyWgpuRenderTargetPool(state:WgpuRenderState, pool:WgpuRenderTargetPool):Void {
+  public static function destroyWgpuRenderTargetPool(state:WgpuRenderState, pool:WgpuRenderTargetPool):Void {
     for (target in FlightRuntime.iterable(FlightRuntime.field(pool, 'free'))) {
       FlightRuntime.callValue(destroyWgpuRenderTarget, cast ([state, target] : Array<Dynamic>));
     }
     FlightRuntime.setLength(FlightRuntime.field(pool, 'free'), 0.0);
   }
 
-  @:keep public static function drawWgpuFullscreenPass(state:WgpuRenderState, wgpuPipeline:WgpuFullscreenPipeline, inputs:Array<WgpuRenderTarget>, dest:Null<WgpuRenderTarget>, setUniforms:Null<Dynamic>):Void {
+  public static function drawWgpuFullscreenPass(state:WgpuRenderState, wgpuPipeline:WgpuFullscreenPipeline, inputs:Array<WgpuRenderTarget>, dest:Null<WgpuRenderTarget>, setUniforms:Null<Dynamic>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var pass:Dynamic = cast FlightRuntime.UNDEFINED;
     var runtime2:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -587,7 +581,7 @@ class RenderWgpu {
     FlightRuntime.callProperty(pass, 'draw', cast ([3.0] : Array<Dynamic>));
   }
 
-  @:keep public static function drawWgpuQuad(state:WgpuRenderState, renderProxy:RenderProxy2D, textureEntry:WgpuTextureEntry, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
+  public static function drawWgpuQuad(state:WgpuRenderState, renderProxy:RenderProxy2D, textureEntry:WgpuTextureEntry, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var pass:Dynamic = cast FlightRuntime.UNDEFINED;
     var uniformOffset:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -598,7 +592,7 @@ class RenderWgpu {
     FlightRuntime.callValue(submitWgpuQuadDraw, cast ([state, uniformOffset, FlightRuntime.field(textureEntry, 'bindGroup')] : Array<Dynamic>));
   }
 
-  @:keep public static function drawWgpuQuadWithTransform(state:WgpuRenderState, renderProxy:RenderProxy, transform:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, textureEntry:WgpuTextureEntry, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
+  public static function drawWgpuQuadWithTransform(state:WgpuRenderState, renderProxy:RenderProxy, transform:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, textureEntry:WgpuTextureEntry, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var uniformOffset:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -607,7 +601,7 @@ class RenderWgpu {
     FlightRuntime.callValue(submitWgpuQuadDraw, cast ([state, uniformOffset, FlightRuntime.field(textureEntry, 'bindGroup')] : Array<Dynamic>));
   }
 
-  @:keep public static function drawWgpuRenderTargetResult(state:WgpuRenderState, renderProxy:{ var alpha:Float; var material:Null<Material>; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }, target:WgpuRenderTarget, transform:Matrix):Void {
+  public static function drawWgpuRenderTargetResult(state:WgpuRenderState, renderProxy:{ var alpha:Float; var material:Null<Material>; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }, target:WgpuRenderTarget, transform:Matrix):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -645,15 +639,15 @@ class RenderWgpu {
     FlightRuntime.callValue(drawWgpuQuadWithTransform, cast ([state, (cast renderProxy : Dynamic), composedTransform, { texture: FlightRuntime.field(target, 'texture'), view: FlightRuntime.field(target, 'view'), bindGroup: FlightRuntime.field(target, 'bindGroup') }, 0.0, 0.0, FlightRuntime.field(target, 'width'), FlightRuntime.field(target, 'height'), 0.0, 1.0, 1.0, 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function enableWgpuBlendModeSupport(state:WgpuRenderState):Void {
+  public static function enableWgpuBlendModeSupport(state:WgpuRenderState):Void {
     FlightRuntime.setField(state, 'applyBlendMode', applyWgpuBlendMode);
   }
 
-  @:keep public static function enableWgpuFrameCapture(state:WgpuRenderState):Void {
+  public static function enableWgpuFrameCapture(state:WgpuRenderState):Void {
     FlightRuntime.setField(FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'frameCaptureEnabled', true);
   }
 
-  @:keep public static function encodeWgpuFrameCapture(state:WgpuRenderState, encoder:Dynamic):Void {
+  public static function encodeWgpuFrameCapture(state:WgpuRenderState, encoder:Dynamic):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var texture:Dynamic = cast FlightRuntime.UNDEFINED;
     var width:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -675,7 +669,7 @@ class RenderWgpu {
     FlightRuntime.callProperty(encoder, 'copyTextureToBuffer', cast ([{ texture: texture }, { buffer: FlightRuntime.field(runtime, 'frameCaptureBuffer'), bytesPerRow: bytesPerRow }, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
   }
 
-  @:keep public static function endWgpuRenderPass(state:WgpuRenderState):Void {
+  public static function endWgpuRenderPass(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var saved:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -699,7 +693,7 @@ class RenderWgpu {
 }
   }
 
-  @:keep public static function ensureWgpuDepthStencil__wgpuBackground(state:WgpuRenderState, width:Float, height:Float):Void {
+  public static function ensureWgpuDepthStencil__wgpuBackground(state:WgpuRenderState, width:Float, height:Float):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var texture:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -714,7 +708,7 @@ class RenderWgpu {
     FlightRuntime.setField(runtime, 'depthStencilHeight', height);
   }
 
-  @:keep public static function ensureWgpuMipmapPipeline__wgpuMipmap(state:WgpuRenderState, format:Dynamic):Dynamic {
+  public static function ensureWgpuMipmapPipeline__wgpuMipmap(state:WgpuRenderState, format:Dynamic):Dynamic {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -736,7 +730,7 @@ class RenderWgpu {
 
   public static final MASK_FRAGMENT_SRC__wgpuShader:Dynamic = '\nstruct Uniforms {\n  matrix : mat3x3f,\n  alpha : f32,\n  hasColorTransform : u32,\n  _pad0 : f32,\n  _pad1 : f32,\n  colorMultiplier : vec4f,\n  colorOffset : vec4f,\n  x0 : f32, y0 : f32, x1 : f32, y1 : f32,\n  u0 : f32, v0 : f32, u1 : f32, v1 : f32,\n}\n\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nstruct VertexOut {\n  @builtin(position) position : vec4f,\n  @location(0) uv : vec2f,\n}\n\n@vertex\nfn vs_main(@builtin(vertex_index) vi : u32) -> VertexOut {\n  let xi = (vi == 1u || vi == 2u || vi == 4u);\n  let yi = (vi == 2u || vi == 4u || vi == 5u);\n  let x = select(uni.x0, uni.x1, xi);\n  let y = select(uni.y0, uni.y1, yi);\n  let u = select(uni.u0, uni.u1, xi);\n  let v = select(uni.v0, uni.v1, yi);\n  let p = uni.matrix * vec3f(x, y, 1.0);\n  var out : VertexOut;\n  out.position = vec4f(p.x, p.y, 0.0, 1.0);\n  out.uv = vec2f(u, v);\n  return out;\n}\n\n@fragment\nfn fs_main(in : VertexOut) -> @location(0) vec4f {\n  let s = textureSample(tex, smp, in.uv);\n  if (s.a <= 0.0) { discard; }\n  return vec4f(0.0);\n}\n';
 
-  @:keep public static function generateWgpuMipmaps(state:WgpuRenderState, texture:Dynamic, width:Float, height:Float, format:Dynamic):Void {
+  public static function generateWgpuMipmaps(state:WgpuRenderState, texture:Dynamic, width:Float, height:Float, format:Dynamic):Void {
     var levelCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -769,7 +763,7 @@ class RenderWgpu {
     FlightRuntime.callProperty(FlightRuntime.field(device, 'queue'), 'submit', cast ([cast ([FlightRuntime.callProperty(encoder, 'finish', cast ([] : Array<Dynamic>))] : Array<Dynamic>)] : Array<Dynamic>));
   }
 
-  @:keep public static function getActiveWgpuPipeline(state:WgpuRenderState):Dynamic {
+  public static function getActiveWgpuPipeline(state:WgpuRenderState):Dynamic {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var stencilMode:StencilMode__wgpuShader = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -778,7 +772,7 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function getWgpuAdapterCapabilities(adapter:Dynamic):WgpuAdapterCapabilities {
+  public static function getWgpuAdapterCapabilities(adapter:Dynamic):WgpuAdapterCapabilities {
     var features:Dynamic = cast FlightRuntime.UNDEFINED;
     var limits:Dynamic = cast FlightRuntime.UNDEFINED;
     var supportsFloat32Filterable:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -795,19 +789,19 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function getWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMaterialRenderer> {
+  public static function getWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMaterialRenderer> {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(FlightRuntime.field(runtime, 'materialRendererMap'), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getWgpuMipLevelCount(width:Float, height:Float):Float {
+  public static function getWgpuMipLevelCount(width:Float, height:Float):Float {
     return cast (1.0 + FlightRuntime.callProperty(HxMath, 'floor', cast ([FlightRuntime.log2(HxMath.max(HxMath.max(1.0, width), height))] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function getWgpuPipeline(state:WgpuRenderState, blendMode:Null<BlendMode>, stencilMode:StencilMode__wgpuShader):Dynamic {
+  public static function getWgpuPipeline(state:WgpuRenderState, blendMode:Null<BlendMode>, stencilMode:StencilMode__wgpuShader):Dynamic {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var format:Dynamic = cast FlightRuntime.UNDEFINED;
     var key:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -840,17 +834,17 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function getWgpuRenderProxyColorTransform(renderProxy:RenderProxy):Null<ColorTransform> {
+  public static function getWgpuRenderProxyColorTransform(renderProxy:RenderProxy):Null<ColorTransform> {
     return cast FlightRuntime.coalesce(FlightRuntime.field((cast renderProxy : Dynamic), 'colorTransform'), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getWgpuRenderStateRuntime(state:WgpuRenderState):WgpuRenderStateRuntime {
+  public static function getWgpuRenderStateRuntime(state:WgpuRenderState):WgpuRenderStateRuntime {
     return cast (cast FlightRuntime.getIndex(state, EntityRuntimeKey) : WgpuRenderStateRuntime);
     return cast null;
   }
 
-  @:keep public static function getWgpuSampler(state:WgpuRenderState, filter:Dynamic, wrapU:TextureWrap, wrapV:TextureWrap, ?mipmapFilter:Dynamic, maxAnisotropy:Dynamic = 1.0):Dynamic {
+  public static function getWgpuSampler(state:WgpuRenderState, filter:Dynamic, wrapU:TextureWrap, wrapV:TextureWrap, ?mipmapFilter:Dynamic, maxAnisotropy:Dynamic = 1.0):Dynamic {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var anisotropy:Dynamic = cast FlightRuntime.UNDEFINED;
     var effectiveFilter:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -874,12 +868,12 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function getWgpuShader(renderProxy:RenderProxy2D):Null<WgpuBitmapShader> {
+  public static function getWgpuShader(renderProxy:RenderProxy2D):Null<WgpuBitmapShader> {
     return cast FlightRuntime.callProperty(RenderWgpu._shaderBindings__wgpuShaderBinding, 'get', cast ([renderProxy] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function installWgpuConstants__wgpuTestHelper():Void {
+  public static function installWgpuConstants__wgpuTestHelper():Void {
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     g = (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['globalThis'] : Array<Dynamic>)) : Dynamic);
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.getIndex(g, 'GPUBufferUsage')))) {
@@ -899,7 +893,7 @@ class RenderWgpu {
 }
   }
 
-  @:keep public static function installWgpuMock():Void {
+  public static function installWgpuMock():Void {
     var gpu:Dynamic = cast FlightRuntime.UNDEFINED;
     var origGetContext:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(RenderWgpu.installWgpuConstants__wgpuTestHelper, cast ([] : Array<Dynamic>));
@@ -919,45 +913,45 @@ class RenderWgpu {
 });
   }
 
-  @:keep public static function isWgpuColorPreserved__wgpuRenderTarget(preserve:Dynamic, index:Float):Bool {
+  public static function isWgpuColorPreserved__wgpuRenderTarget(preserve:Dynamic, index:Float):Bool {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.typeofValue(preserve), 'boolean'))) { return cast preserve; }
     return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(preserve, index), true);
     return cast null;
   }
 
-  @:keep public static function isWgpuSupported():Bool {
+  public static function isWgpuSupported():Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast FlightRuntime.hasField(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'gpu')), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'gpu'), null));
     return cast null;
   }
 
-  @:keep public static function makeAdapter__wgpuTestHelper():Dynamic {
+  public static function makeAdapter__wgpuTestHelper():Dynamic {
     return cast (cast (cast { limits: { maxBindGroups: 8.0, minUniformBufferOffsetAlignment: 256.0 }, requestDevice: function() return FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([FlightRuntime.callValue(RenderWgpu.makeDevice__wgpuTestHelper, cast ([] : Array<Dynamic>))] : Array<Dynamic>)) } : Dynamic) : Dynamic);
     return cast null;
   }
 
-  @:keep public static function makeBindGroup__wgpuTestHelper():Dynamic {
+  public static function makeBindGroup__wgpuTestHelper():Dynamic {
     return cast (cast {  } : Dynamic);
     return cast null;
   }
 
-  @:keep public static function makeBindGroupLayout__wgpuTestHelper():Dynamic {
+  public static function makeBindGroupLayout__wgpuTestHelper():Dynamic {
     return cast (cast {  } : Dynamic);
     return cast null;
   }
 
-  @:keep public static function makeBuffer__wgpuTestHelper():Dynamic {
+  public static function makeBuffer__wgpuTestHelper():Dynamic {
     return cast (cast (cast { destroy: function() {
 
 } } : Dynamic) : Dynamic);
     return cast null;
   }
 
-  @:keep public static function makeCommandEncoder__wgpuTestHelper():Dynamic {
+  public static function makeCommandEncoder__wgpuTestHelper():Dynamic {
     return cast (cast (cast { beginRenderPass: function() return FlightRuntime.callValue(RenderWgpu.makeRenderPassEncoder__wgpuTestHelper, cast ([] : Array<Dynamic>)), finish: function() return (cast {  } : Dynamic) } : Dynamic) : Dynamic);
     return cast null;
   }
 
-  @:keep public static function makeDevice__wgpuTestHelper():Dynamic {
+  public static function makeDevice__wgpuTestHelper():Dynamic {
     return cast (cast (cast { limits: { minUniformBufferOffsetAlignment: 256.0 }, createBindGroup: function() return FlightRuntime.callValue(RenderWgpu.makeBindGroup__wgpuTestHelper, cast ([] : Array<Dynamic>)), createBindGroupLayout: function() return FlightRuntime.callValue(RenderWgpu.makeBindGroupLayout__wgpuTestHelper, cast ([] : Array<Dynamic>)), createBuffer: function() return FlightRuntime.callValue(RenderWgpu.makeBuffer__wgpuTestHelper, cast ([] : Array<Dynamic>)), createCommandEncoder: function() return FlightRuntime.callValue(RenderWgpu.makeCommandEncoder__wgpuTestHelper, cast ([] : Array<Dynamic>)), createPipelineLayout: function() return FlightRuntime.callValue(RenderWgpu.makePipelineLayout__wgpuTestHelper, cast ([] : Array<Dynamic>)), createRenderPipeline: function(descriptor:Dynamic) return FlightRuntime.callValue(RenderWgpu.makePipeline__wgpuTestHelper, cast ([descriptor] : Array<Dynamic>)), createSampler: function() return FlightRuntime.callValue(RenderWgpu.makeSampler__wgpuTestHelper, cast ([] : Array<Dynamic>)), createShaderModule: function() return FlightRuntime.callValue(RenderWgpu.makeShaderModule__wgpuTestHelper, cast ([] : Array<Dynamic>)), createTexture: function() return FlightRuntime.callValue(RenderWgpu.makeTexture__wgpuTestHelper, cast ([] : Array<Dynamic>)), queue: { copyExternalImageToTexture: function() {
 
 }, submit: function() {
@@ -970,17 +964,17 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function makePipeline__wgpuTestHelper(?descriptor:Dynamic):Dynamic {
+  public static function makePipeline__wgpuTestHelper(?descriptor:Dynamic):Dynamic {
     return cast (cast (cast { __descriptor: descriptor } : Dynamic) : Dynamic);
     return cast null;
   }
 
-  @:keep public static function makePipelineLayout__wgpuTestHelper():Dynamic {
+  public static function makePipelineLayout__wgpuTestHelper():Dynamic {
     return cast (cast {  } : Dynamic);
     return cast null;
   }
 
-  @:keep public static function makeRenderPassEncoder__wgpuTestHelper():Dynamic {
+  public static function makeRenderPassEncoder__wgpuTestHelper():Dynamic {
     return cast (cast (cast { draw: function() {
 
 }, end: function() {
@@ -999,17 +993,17 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function makeSampler__wgpuTestHelper():Dynamic {
+  public static function makeSampler__wgpuTestHelper():Dynamic {
     return cast (cast {  } : Dynamic);
     return cast null;
   }
 
-  @:keep public static function makeShaderModule__wgpuTestHelper():Dynamic {
+  public static function makeShaderModule__wgpuTestHelper():Dynamic {
     return cast (cast {  } : Dynamic);
     return cast null;
   }
 
-  @:keep public static function makeTexture__wgpuTestHelper():Dynamic {
+  public static function makeTexture__wgpuTestHelper():Dynamic {
     return cast (cast (cast { createView: function() return (cast {  } : Dynamic), destroy: function() {
 
 } } : Dynamic) : Dynamic);
@@ -1022,7 +1016,7 @@ class RenderWgpu {
 
   public static final BLEND_MODES__wgpuShader:Dynamic = FlightRuntime.objectFromPairs([{ key: Types.BlendModeValue.Add, value: FlightRuntime.callValue(RenderWgpu.createWgpuBlendState__wgpuShader, cast (['one', 'one'] : Array<Dynamic>)) }, { key: Types.BlendModeValue.Darken, value: FlightRuntime.callValue(RenderWgpu.createWgpuBlendState__wgpuShader, cast (['one', 'one', 'min'] : Array<Dynamic>)) }, { key: Types.BlendModeValue.Lighten, value: FlightRuntime.callValue(RenderWgpu.createWgpuBlendState__wgpuShader, cast (['one', 'one', 'max'] : Array<Dynamic>)) }, { key: Types.BlendModeValue.Multiply, value: FlightRuntime.callValue(RenderWgpu.createWgpuBlendState__wgpuShader, cast (['dst', 'one-minus-src-alpha'] : Array<Dynamic>)) }, { key: Types.BlendModeValue.Normal, value: RenderWgpu.NORMAL_BLEND__wgpuShader }, { key: Types.BlendModeValue.Screen, value: FlightRuntime.callValue(RenderWgpu.createWgpuBlendState__wgpuShader, cast (['one', 'one-minus-src'] : Array<Dynamic>)) }]);
 
-  @:keep public static function popWgpuScissorRect(state:WgpuRenderState):Void {
+  public static function popWgpuScissorRect(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var prev:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -1030,7 +1024,7 @@ class RenderWgpu {
     FlightRuntime.setField(runtime, 'currentScissorRect', FlightRuntime.coalesce(prev, function():Dynamic return cast null));
   }
 
-  @:keep public static function premultiplyStraightRgba8__wgpuDraw(data:Dynamic):Dynamic {
+  public static function premultiplyStraightRgba8__wgpuDraw(data:Dynamic):Dynamic {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [FlightRuntime.field(data, 'length')]);
     {
@@ -1048,7 +1042,7 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function pushWgpuScissorRect(state:WgpuRenderState, rect:WgpuScissorRect):Void {
+  public static function pushWgpuScissorRect(state:WgpuRenderState, rect:WgpuScissorRect):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'currentScissorRect'), null))) {
@@ -1057,21 +1051,21 @@ class RenderWgpu {
     FlightRuntime.setField(runtime, 'currentScissorRect', { x: FlightRuntime.field(rect, 'x'), y: FlightRuntime.field(rect, 'y'), width: FlightRuntime.field(rect, 'width'), height: FlightRuntime.field(rect, 'height') });
   }
 
-  @:keep public static function registerWgpuBitmapShader(state:WgpuRenderState, shader:WgpuBitmapShader):Void {
+  public static function registerWgpuBitmapShader(state:WgpuRenderState, shader:WgpuBitmapShader):Void {
     FlightRuntime.setField(FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'defaultBitmapShader', shader);
   }
 
-  @:keep public static function registerWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind, renderer:WgpuMaterialRenderer):Void {
+  public static function registerWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind, renderer:WgpuMaterialRenderer):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     FlightRuntime.callProperty(FlightRuntime.setField(runtime, 'materialRendererMap', (FlightRuntime.field(runtime, 'materialRendererMap') ?? FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []))), 'set', cast ([kind, renderer] : Array<Dynamic>));
   }
 
-  @:keep public static function releaseWgpuRenderTarget(pool:WgpuRenderTargetPool, target:WgpuRenderTarget):Void {
+  public static function releaseWgpuRenderTarget(pool:WgpuRenderTargetPool, target:WgpuRenderTarget):Void {
     FlightRuntime.callProperty(FlightRuntime.field(pool, 'free'), 'push', cast ([target] : Array<Dynamic>));
   }
 
-  @:keep public static function renderWgpuBackground(state:WgpuRenderState):Void {
+  public static function renderWgpuBackground(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
     var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1117,7 +1111,7 @@ class RenderWgpu {
     FlightRuntime.setField(runtime, 'renderPass', renderPass);
   }
 
-  @:keep public static function resizeWgpuRenderTarget(state:WgpuRenderState, target:WgpuRenderTarget, width:Float, height:Float):Void {
+  public static function resizeWgpuRenderTarget(state:WgpuRenderState, target:WgpuRenderTarget, width:Float, height:Float):Void {
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
     var format:Dynamic = cast FlightRuntime.UNDEFINED;
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1141,7 +1135,7 @@ class RenderWgpu {
     FlightRuntime.setField(target, 'depthStencilView', FlightRuntime.callProperty(newDepth, 'createView', cast ([] : Array<Dynamic>)));
   }
 
-  @:keep public static function resolveWgpuClearColor__wgpuRenderTarget(target:WgpuRenderTarget):Dynamic {
+  public static function resolveWgpuClearColor__wgpuRenderTarget(target:WgpuRenderTarget):Dynamic {
     var packed:Dynamic = cast FlightRuntime.UNDEFINED;
     packed = FlightRuntime.getIndex(FlightRuntime.field(target, 'clearColors'), 0.0);
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(packed, FlightRuntime.UNDEFINED))) { return cast { r: 0.0, g: 0.0, b: 0.0, a: 0.0 }; }
@@ -1149,7 +1143,7 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function resolveWgpuMaterialRenderer(state:WgpuRenderState, material:Null<Material>):Null<WgpuMaterialRenderer> {
+  public static function resolveWgpuMaterialRenderer(state:WgpuRenderState, material:Null<Material>):Null<WgpuMaterialRenderer> {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var map:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -1163,7 +1157,7 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function resolveWgpuShader(state:WgpuRenderState, renderProxy:RenderProxy2D):Null<WgpuBitmapShader> {
+  public static function resolveWgpuShader(state:WgpuRenderState, renderProxy:RenderProxy2D):Null<WgpuBitmapShader> {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var resolver:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -1178,7 +1172,7 @@ class RenderWgpu {
 
   public static final RING_SLOT_COUNT__wgpuRenderState:Dynamic = 4096.0;
 
-  @:keep public static function setWgpuMatrixFromTransform(matrixArray:flight.internal.FlightFloat32Array, t:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, viewport:{ var width:Float; var height:Float; }):Void {
+  public static function setWgpuMatrixFromTransform(matrixArray:flight.internal.FlightFloat32Array, t:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, viewport:{ var width:Float; var height:Float; }):Void {
     var iw:Dynamic = cast FlightRuntime.UNDEFINED;
     var ih:Dynamic = cast FlightRuntime.UNDEFINED;
     iw = (2.0 / FlightRuntime.field(viewport, 'width'));
@@ -1194,14 +1188,14 @@ class RenderWgpu {
     FlightRuntime.setIndex(matrixArray, 8.0, 1.0);
   }
 
-  @:keep public static function setWgpuRenderTransform2D(state:WgpuRenderState, transform:Matrix):Void {
+  public static function setWgpuRenderTransform2D(state:WgpuRenderState, transform:Matrix):Void {
     var next:Dynamic = cast FlightRuntime.UNDEFINED;
     next = FlightRuntime.callValue(createMatrix, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(copyMatrix, cast ([next, transform] : Array<Dynamic>));
     FlightRuntime.setField(state, 'renderTransform2D', next);
   }
 
-  @:keep public static function setWgpuShader(state:WgpuRenderState, node:DisplayObject, shader:Null<WgpuBitmapShader>):Void {
+  public static function setWgpuShader(state:WgpuRenderState, node:DisplayObject, shader:Null<WgpuBitmapShader>):Void {
     var renderProxy:Dynamic = cast FlightRuntime.UNDEFINED;
     renderProxy = FlightRuntime.callValue(getOrCreateRenderProxy2D, cast ([state, node] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(shader, null))) {
@@ -1212,7 +1206,7 @@ class RenderWgpu {
     FlightRuntime.setField(FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'webgpuShaderBindingResolver', getWgpuShader);
   }
 
-  @:keep public static function submitWgpuQuadDraw(state:WgpuRenderState, uniformOffset:Float, textureBindGroup:Dynamic):Void {
+  public static function submitWgpuQuadDraw(state:WgpuRenderState, uniformOffset:Float, textureBindGroup:Dynamic):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var pass:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1227,7 +1221,7 @@ class RenderWgpu {
     FlightRuntime.callProperty(pass, 'draw', cast ([6.0] : Array<Dynamic>));
   }
 
-  @:keep public static function submitWgpuRenderPass(state:WgpuRenderState):Void {
+  public static function submitWgpuRenderPass(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var renderPass:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1273,7 +1267,7 @@ class RenderWgpu {
 
   public static final UNIFORM_BYTE_SIZE:Dynamic = 128.0;
 
-  @:keep public static function updateWgpuTextureEntry(state:WgpuRenderState, entry:WgpuTextureEntry, canvas:Dynamic):Void {
+  public static function updateWgpuTextureEntry(state:WgpuRenderState, entry:WgpuTextureEntry, canvas:Dynamic):Void {
     var __destructure4:Dynamic = cast FlightRuntime.UNDEFINED;
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1285,7 +1279,7 @@ class RenderWgpu {
     FlightRuntime.callProperty(FlightRuntime.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: canvas, flipY: false }, { texture: FlightRuntime.field(entry, 'texture'), premultipliedAlpha: true }, cast ([w, h] : Array<Dynamic>)] : Array<Dynamic>));
   }
 
-  @:keep public static function uploadWgpuImageResourceEntry__wgpuDraw(state:WgpuRenderState, image:ImageResource, generateMips:Bool):WgpuTextureEntry {
+  public static function uploadWgpuImageResourceEntry__wgpuDraw(state:WgpuRenderState, image:ImageResource, generateMips:Bool):WgpuTextureEntry {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure5:Dynamic = cast FlightRuntime.UNDEFINED;
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1317,15 +1311,15 @@ class RenderWgpu {
     return cast null;
   }
 
-  @:keep public static function uploadWgpuTextureData(device:Dynamic, texture:Dynamic, origin:Dynamic, width:Float, height:Float, data:Dynamic):Void {
+  public static function uploadWgpuTextureData(device:Dynamic, texture:Dynamic, origin:Dynamic, width:Float, height:Float, data:Dynamic):Void {
     FlightRuntime.callProperty(FlightRuntime.field(device, 'queue'), 'writeTexture', cast ([{ texture: texture, origin: origin }, (cast data : Dynamic), { bytesPerRow: (width * 4.0), rowsPerImage: height }, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
   }
 
-  @:keep public static function uploadWgpuTextureElement(device:Dynamic, texture:Dynamic, origin:Dynamic, width:Float, height:Float, source:Dynamic):Void {
+  public static function uploadWgpuTextureElement(device:Dynamic, texture:Dynamic, origin:Dynamic, width:Float, height:Float, source:Dynamic):Void {
     FlightRuntime.callProperty(FlightRuntime.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: source }, { texture: texture, origin: origin }, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
   }
 
-  @:keep public static function uploadWgpuTextureImageResource(device:Dynamic, texture:Dynamic, origin:Dynamic, image:ImageResource):Void {
+  public static function uploadWgpuTextureImageResource(device:Dynamic, texture:Dynamic, origin:Dynamic, image:ImageResource):Void {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(image, 'source'), null))) {
   FlightRuntime.callValue(uploadWgpuTextureElement, cast ([device, texture, origin, FlightRuntime.field(image, 'width'), FlightRuntime.field(image, 'height'), (cast FlightRuntime.field(image, 'source') : Dynamic)] : Array<Dynamic>));
 } else {
@@ -1333,17 +1327,17 @@ class RenderWgpu {
 }
   }
 
-  @:keep public static function warmWgpuPipelines(state:WgpuRenderState):Void {
+  public static function warmWgpuPipelines(state:WgpuRenderState):Void {
     FlightRuntime.callValue(getWgpuPipeline, cast ([state, Types.BlendModeValue.Normal, 'normal'] : Array<Dynamic>));
     FlightRuntime.callValue(getWgpuPipeline, cast ([state, Types.BlendModeValue.Add, 'normal'] : Array<Dynamic>));
   }
 
-  @:keep public static function writeWgpuMatrixOnlyUniforms(state:WgpuRenderState, renderProxy:RenderProxy, transform:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Float {
+  public static function writeWgpuMatrixOnlyUniforms(state:WgpuRenderState, renderProxy:RenderProxy, transform:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Float {
     return cast FlightRuntime.callValue(writeWgpuQuadUniforms, cast ([state, { alpha: FlightRuntime.field(renderProxy, 'alpha'), transform2D: transform }, null, x0, y0, x1, y1, u0, v0, u1, v1] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function writeWgpuQuadUniforms(state:WgpuRenderState, renderProxy:{ var alpha:Float; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }, colorTransform:Null<ColorTransform>, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Float {
+  public static function writeWgpuQuadUniforms(state:WgpuRenderState, renderProxy:{ var alpha:Float; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }, colorTransform:Null<ColorTransform>, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Float {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var byteOffset:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatBase:Dynamic = cast FlightRuntime.UNDEFINED;

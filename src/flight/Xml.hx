@@ -8,12 +8,9 @@ typedef ParseState__xmlParse = { var pos:Float; };
 
 typedef XmlElement = { var attributes:Dynamic; var children:Array<XmlElement>; var name:String; var text:String; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Xml")
 class Xml {
-  @:keep public static function decodeXmlEntities__xmlParse(s:String):String {
+  public static function decodeXmlEntities__xmlParse(s:String):String {
     return cast FlightRuntime.replace(s, FlightRuntime.regexp('&(?:#(\\d+)|#x([\\da-fA-F]+)|(\\w+));', 'g'), function(_:Dynamic, dec:Dynamic, hex:Dynamic, name:Dynamic) {
   if (FlightRuntime.truthy(dec)) { return cast FlightRuntime.fromCodePoint(FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([dec, 10.0] : Array<Dynamic>))); }
   if (FlightRuntime.truthy(hex)) { return cast FlightRuntime.fromCodePoint(FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([hex, 16.0] : Array<Dynamic>))); }
@@ -22,14 +19,14 @@ class Xml {
     return cast null;
   }
 
-  @:keep public static function getXmlElementAttribute(element:XmlElement, name:String):Null<String> {
+  public static function getXmlElementAttribute(element:XmlElement, name:String):Null<String> {
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
     value = FlightRuntime.getIndex(FlightRuntime.field(element, 'attributes'), name);
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(value, FlightRuntime.UNDEFINED), function():Dynamic return cast value, function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getXmlElementAttributeNumber(element:XmlElement, name:String):Null<Float> {
+  public static function getXmlElementAttributeNumber(element:XmlElement, name:String):Null<Float> {
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
     var parsed:Dynamic = cast FlightRuntime.UNDEFINED;
     value = FlightRuntime.getIndex(FlightRuntime.field(element, 'attributes'), name);
@@ -39,7 +36,7 @@ class Xml {
     return cast null;
   }
 
-  @:keep public static function getXmlElementChildByName(element:XmlElement, name:String):Null<XmlElement> {
+  public static function getXmlElementChildByName(element:XmlElement, name:String):Null<XmlElement> {
     for (child in FlightRuntime.iterable(FlightRuntime.field(element, 'children'))) {
       if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(child, 'name'), name))) { return cast child; }
     }
@@ -47,12 +44,12 @@ class Xml {
     return cast null;
   }
 
-  @:keep public static function getXmlElementChildrenByName(element:XmlElement, name:String):Array<XmlElement> {
+  public static function getXmlElementChildrenByName(element:XmlElement, name:String):Array<XmlElement> {
     return cast FlightRuntime.callProperty(FlightRuntime.field(element, 'children'), 'filter', cast ([function(child:Dynamic) return FlightRuntime.strictEquals(FlightRuntime.field(child, 'name'), name)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function parseElement__xmlParse(src:String, state:ParseState__xmlParse):Null<XmlElement> {
+  public static function parseElement__xmlParse(src:String, state:ParseState__xmlParse):Null<XmlElement> {
     var nameStart:Dynamic = cast FlightRuntime.UNDEFINED;
     var name:Dynamic = cast FlightRuntime.UNDEFINED;
     var attrsStr:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -116,7 +113,7 @@ class Xml {
     return cast null;
   }
 
-  @:keep public static function parseXmlAttributes(attrs:String):Dynamic {
+  public static function parseXmlAttributes(attrs:String):Dynamic {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     var re:Dynamic = cast FlightRuntime.UNDEFINED;
     var m:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
@@ -131,7 +128,7 @@ class Xml {
     return cast null;
   }
 
-  @:keep public static function parseXmlDocument(xml:String):Null<XmlElement> {
+  public static function parseXmlDocument(xml:String):Null<XmlElement> {
     var src:Dynamic = cast FlightRuntime.UNDEFINED;
     src = FlightRuntime.replace(FlightRuntime.callValue(Xml.stripCdata__xmlParse, cast ([FlightRuntime.callValue(Xml.stripXmlComments__xmlParse, cast ([xml] : Array<Dynamic>))] : Array<Dynamic>)), FlightRuntime.regexp('\\r\\n?', 'g'), '\n', false);
     (src = cast (StringTools.trim(Std.string(FlightRuntime.replace(FlightRuntime.replace(src, FlightRuntime.regexp('<\\?[\\s\\S]*?\\?>', 'g'), '', false), FlightRuntime.regexp('<!DOCTYPE[^>[]*(?:\\[[\\s\\S]*?\\][^>]*)?>', 'gi'), '', false))) : Dynamic));
@@ -139,16 +136,16 @@ class Xml {
     return cast null;
   }
 
-  @:keep public static function skipWhitespace__xmlParse(src:String, state:ParseState__xmlParse):Void {
+  public static function skipWhitespace__xmlParse(src:String, state:ParseState__xmlParse):Void {
     while (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.compare(FlightRuntime.field(state, 'pos'), FlightRuntime.field(src, 'length'), '<'), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.regexp('\\s', ''), 'test', cast ([FlightRuntime.getIndex(src, FlightRuntime.field(state, 'pos'))] : Array<Dynamic>))))) { FlightRuntime.incrementField(state, 'pos', 1, true); }
   }
 
-  @:keep public static function stripCdata__xmlParse(xml:String):String {
+  public static function stripCdata__xmlParse(xml:String):String {
     return cast FlightRuntime.replace(xml, FlightRuntime.regexp('<!\\[CDATA\\[[\\s\\S]*?]]>', 'g'), function(m:Dynamic) return FlightRuntime.slice(m, 9.0, (FlightRuntime.field(m, 'length') - 3.0)), false);
     return cast null;
   }
 
-  @:keep public static function stripXmlComments__xmlParse(xml:String):String {
+  public static function stripXmlComments__xmlParse(xml:String):String {
     return cast FlightRuntime.replace(xml, FlightRuntime.regexp('<!--[\\s\\S]*?-->', 'g'), '', false);
     return cast null;
   }

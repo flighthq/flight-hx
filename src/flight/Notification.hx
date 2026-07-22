@@ -13,14 +13,11 @@ import flight.Types.ScheduledNotification;
 
 typedef ServiceWorkerRegistrationLike__notification = { var showNotification:Dynamic; var getNotifications:Dynamic; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Notification")
 class Notification {
   public static var _backend__notification:Null<NotificationBackend> = FlightRuntime.explicitNull();
 
-  @:keep public static function _repeatMs__notification(repeat:Dynamic):Float {
+  public static function _repeatMs__notification(repeat:Dynamic):Float {
     {
       var __switchValue = repeat;
       if (__switchValue == 'minute') {
@@ -45,25 +42,25 @@ class Notification {
     return cast null;
   }
 
-  @:keep public static function cancelScheduledNotification(id:String):Void {
+  public static function cancelScheduledNotification(id:String):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)), 'cancelScheduledNotification', cast ([id] : Array<Dynamic>));
   }
 
-  @:keep public static function closeAllNotifications():Void {
+  public static function closeAllNotifications():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)), 'closeAllNotifications', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function closeNotification(id:String):Void {
+  public static function closeNotification(id:String):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)), 'closeNotification', cast ([id] : Array<Dynamic>));
   }
 
-  @:keep public static function createNotificationChannel(channel:NotificationChannel):Void {
+  public static function createNotificationChannel(channel:NotificationChannel):Void {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     backend = (cast FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)) : Dynamic);
     FlightRuntime.callOptionalProperty(backend, 'createNotificationChannel', cast ([channel] : Array<Dynamic>));
   }
 
-  @:keep public static function createServiceWorkerNotificationBackend(registration:ServiceWorkerRegistrationLike__notification):NotificationBackend {
+  public static function createServiceWorkerNotificationBackend(registration:ServiceWorkerRegistrationLike__notification):NotificationBackend {
     var _idCounter:Dynamic = cast FlightRuntime.UNDEFINED;
     var _clickListeners:Dynamic = cast FlightRuntime.UNDEFINED;
     var _actionListeners:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -239,7 +236,7 @@ class Notification {
     return cast null;
   }
 
-  @:keep public static function createWebNotificationBackend():NotificationBackend {
+  public static function createWebNotificationBackend():NotificationBackend {
     var _live:Dynamic = cast FlightRuntime.UNDEFINED;
     var _requests:Dynamic = cast FlightRuntime.UNDEFINED;
     var _clickListeners:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -423,56 +420,56 @@ class Notification {
     return cast null;
   }
 
-  @:keep public static function deleteNotificationChannel(id:String):Void {
+  public static function deleteNotificationChannel(id:String):Void {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     backend = (cast FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)) : Dynamic);
     FlightRuntime.callOptionalProperty(backend, 'deleteNotificationChannel', cast ([id] : Array<Dynamic>));
   }
 
-  @:keep public static function getActiveNotifications():flight.internal.FlightPromise<Array<NotificationRequest>> {
+  public static function getActiveNotifications():flight.internal.FlightPromise<Array<NotificationRequest>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)), 'getActiveNotifications', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getLaunchNotification():flight.internal.FlightPromise<Null<NotificationRequest>> {
+  public static function getLaunchNotification():flight.internal.FlightPromise<Null<NotificationRequest>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)), 'getLaunchNotification', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getNotificationBackend():NotificationBackend {
+  public static function getNotificationBackend():NotificationBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Notification._backend__notification, null))) { (Notification._backend__notification = cast (FlightRuntime.callValue(createWebNotificationBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Notification._backend__notification;
     return cast null;
   }
 
-  @:keep public static function getNotificationCapabilities():NotificationCapabilities {
+  public static function getNotificationCapabilities():NotificationCapabilities {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)), 'getCapabilities', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getNotificationChannels():Array<NotificationChannel> {
+  public static function getNotificationChannels():Array<NotificationChannel> {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     backend = (cast FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)) : Dynamic);
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(backend, 'getNotificationChannels', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getNotificationPermission():Dynamic {
+  public static function getNotificationPermission():Dynamic {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)), 'getPermission', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getPendingNotifications():flight.internal.FlightPromise<Array<ScheduledNotification>> {
+  public static function getPendingNotifications():flight.internal.FlightPromise<Array<ScheduledNotification>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)), 'getPendingNotifications', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function isNotificationSupported():Bool {
+  public static function isNotificationSupported():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)), 'isSupported', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function notifyServiceWorkerBackendAction(backend:NotificationBackend, message:{ var type:String; var notificationId:String; @:optional var actionId:String; @:optional var reply:String; }):Void {
+  public static function notifyServiceWorkerBackendAction(backend:NotificationBackend, message:{ var type:String; var notificationId:String; @:optional var actionId:String; @:optional var reply:String; }):Void {
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(message, 'type'), 'notificationclick'))) { return; }
     b = (cast backend : Dynamic);
@@ -485,51 +482,51 @@ class Notification {
 } } }
   }
 
-  @:keep public static function onNotificationAction(listener:Dynamic):Dynamic {
+  public static function onNotificationAction(listener:Dynamic):Dynamic {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)), 'subscribeAction', cast ([listener] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function onNotificationClick(listener:Dynamic):Dynamic {
+  public static function onNotificationClick(listener:Dynamic):Dynamic {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)), 'subscribeClick', cast ([listener] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function onNotificationDismiss(listener:Dynamic):Dynamic {
+  public static function onNotificationDismiss(listener:Dynamic):Dynamic {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)), 'subscribeDismiss', cast ([listener] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function onNotificationReply(listener:Dynamic):Dynamic {
+  public static function onNotificationReply(listener:Dynamic):Dynamic {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)), 'subscribeReply', cast ([listener] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function onNotificationShow(listener:Dynamic):Dynamic {
+  public static function onNotificationShow(listener:Dynamic):Dynamic {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)), 'subscribeShow', cast ([listener] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function requestNotificationPermission():flight.internal.FlightPromise<Dynamic> {
+  public static function requestNotificationPermission():flight.internal.FlightPromise<Dynamic> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)), 'requestPermission', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function scheduleNotification(request:NotificationRequest, schedule:NotificationSchedule):flight.internal.FlightPromise<String> {
+  public static function scheduleNotification(request:NotificationRequest, schedule:NotificationSchedule):flight.internal.FlightPromise<String> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)), 'scheduleNotification', cast ([request, schedule] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setNotificationBackend(backend:Null<NotificationBackend>):Void {
+  public static function setNotificationBackend(backend:Null<NotificationBackend>):Void {
     (Notification._backend__notification = cast (backend : Dynamic));
   }
 
-  @:keep public static function showNotification(request:NotificationRequest):flight.internal.FlightPromise<String> {
+  public static function showNotification(request:NotificationRequest):flight.internal.FlightPromise<String> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)), 'notify', cast ([request] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function updateNotification(id:String, partial:Dynamic):flight.internal.FlightPromise<Bool> {
+  public static function updateNotification(id:String, partial:Dynamic):flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getNotificationBackend, cast ([] : Array<Dynamic>)), 'updateNotification', cast ([id, partial] : Array<Dynamic>));
     return cast null;
   }

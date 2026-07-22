@@ -10,12 +10,9 @@ import flight.Types.PlatformKind;
 import flight.Types.PlatformName;
 import flight.Types.PlatformRuntime;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.UserAgent")
 class UserAgent {
-  @:keep public static function detectEndianness():PlatformEndianness {
+  public static function detectEndianness():PlatformEndianness {
     try {
   var buf:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['ArrayBuffer'] : Array<Dynamic>)), [2.0]);
   FlightRuntime.setIndex(new flight.internal.FlightUInt16Array(buf), 0.0, 258.0);
@@ -28,7 +25,7 @@ class UserAgent {
     return cast null;
   }
 
-  @:keep public static function parseUserAgentArch(ua:String, ?uadPlatform:String):String {
+  public static function parseUserAgentArch(ua:String, ?uadPlatform:String):String {
     if (FlightRuntime.truthy(uadPlatform)) {
   var p:Dynamic = FlightRuntime.callProperty(uadPlatform, 'toLowerCase', cast ([] : Array<Dynamic>));
   if (FlightRuntime.truthy(FlightRuntime.includes(p, 'arm'))) { return cast 'arm64'; }
@@ -47,7 +44,7 @@ class UserAgent {
     return cast null;
   }
 
-  @:keep public static function parseUserAgentEngine(ua:String):PlatformEngine {
+  public static function parseUserAgentEngine(ua:String):PlatformEngine {
     if (FlightRuntime.truthy(FlightRuntime.callProperty(FlightRuntime.regexp('firefox', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'gecko'; }
     if (FlightRuntime.truthy(FlightRuntime.callProperty(FlightRuntime.regexp('chrome|chromium|edg|opr|samsung', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'blink'; }
     if (FlightRuntime.truthy(FlightRuntime.callProperty(FlightRuntime.regexp('safari|webkit', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'webkit'; }
@@ -55,7 +52,7 @@ class UserAgent {
     return cast null;
   }
 
-  @:keep public static function parseUserAgentEngineVersion(ua:String, engine:PlatformEngine):String {
+  public static function parseUserAgentEngineVersion(ua:String, engine:PlatformEngine):String {
     {
       var __switchValue = engine;
       if (__switchValue == 'gecko') {
@@ -89,7 +86,7 @@ class UserAgent {
     return cast null;
   }
 
-  @:keep public static function parseUserAgentFormFactor(ua:String, maxTouchPoints:Float):DeviceFormFactor {
+  public static function parseUserAgentFormFactor(ua:String, maxTouchPoints:Float):DeviceFormFactor {
     if (FlightRuntime.truthy(FlightRuntime.callProperty(FlightRuntime.regexp('android auto|car browser|automotive', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast Types.DeviceFormFactorCar; }
     if (FlightRuntime.truthy(FlightRuntime.callProperty(FlightRuntime.regexp('smart[-_]?tv|smarttv|googletv|appletv|hbbtv|netcast|webos.*tv|tizen.*tv|tv safari', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) {
   return cast Types.DeviceFormFactorTV;
@@ -107,13 +104,13 @@ class UserAgent {
     return cast null;
   }
 
-  @:keep public static function parseUserAgentKind(name:PlatformName):PlatformKind {
+  public static function parseUserAgentKind(name:PlatformName):PlatformKind {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(name, 'ios'), function():Dynamic return cast FlightRuntime.strictEquals(name, 'android')))) { return cast 'mobile'; }
     return cast 'web';
     return cast null;
   }
 
-  @:keep public static function parseUserAgentName(ua:String):PlatformName {
+  public static function parseUserAgentName(ua:String):PlatformName {
     if (FlightRuntime.truthy(FlightRuntime.callProperty(FlightRuntime.regexp('android', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'android'; }
     if (FlightRuntime.truthy(FlightRuntime.callProperty(FlightRuntime.regexp('iphone|ipad|ipod', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'ios'; }
     if (FlightRuntime.truthy(FlightRuntime.callProperty(FlightRuntime.regexp('win', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'windows'; }
@@ -123,7 +120,7 @@ class UserAgent {
     return cast null;
   }
 
-  @:keep public static function parseUserAgentOsName(ua:String):String {
+  public static function parseUserAgentOsName(ua:String):String {
     if (FlightRuntime.truthy(FlightRuntime.callProperty(FlightRuntime.regexp('android', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'Android'; }
     if (FlightRuntime.truthy(FlightRuntime.callProperty(FlightRuntime.regexp('ipad', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'iPadOS'; }
     if (FlightRuntime.truthy(FlightRuntime.callProperty(FlightRuntime.regexp('iphone|ipod', 'i'), 'test', cast ([ua] : Array<Dynamic>)))) { return cast 'iOS'; }
@@ -138,7 +135,7 @@ class UserAgent {
     return cast null;
   }
 
-  @:keep public static function parseUserAgentOsVersion(ua:String):String {
+  public static function parseUserAgentOsVersion(ua:String):String {
     var android:Dynamic = cast FlightRuntime.UNDEFINED;
     var ios:Dynamic = cast FlightRuntime.UNDEFINED;
     var win:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -158,14 +155,14 @@ class UserAgent {
     return cast null;
   }
 
-  @:keep public static function parseUserAgentPointerWidth(arch:String):Float {
+  public static function parseUserAgentPointerWidth(arch:String):Float {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(arch, 'x64'), function():Dynamic return cast FlightRuntime.strictEquals(arch, 'arm64')))) { return cast 64.0; }
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(arch, 'x86'), function():Dynamic return cast FlightRuntime.strictEquals(arch, 'arm')))) { return cast 32.0; }
     return cast -1.0;
     return cast null;
   }
 
-  @:keep public static function parseUserAgentRuntime(win:Null<Dynamic>):PlatformRuntime {
+  public static function parseUserAgentRuntime(win:Null<Dynamic>):PlatformRuntime {
     var proc:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.looseEquals(win, null))) { return cast 'unknown'; }
     proc = (cast FlightRuntime.field(win, 'process') : Null<Dynamic>);
@@ -176,7 +173,7 @@ class UserAgent {
     return cast null;
   }
 
-  @:keep public static function parseUserAgentVersion(ua:String, name:PlatformName):String {
+  public static function parseUserAgentVersion(ua:String, name:PlatformName):String {
     {
       var __switchValue = name;
       if (__switchValue == 'windows') {

@@ -7,17 +7,14 @@ import flight.Types.RandomSource;
 import flight.Types.Vector2Like;
 import flight.Types.Vector3Like;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Math")
 class Math {
-  @:keep public static function approxEqual(a:Float, b:Float, epsilon:Float = 0.000001):Bool {
+  public static function approxEqual(a:Float, b:Float, epsilon:Float = 0.000001):Bool {
     return cast FlightRuntime.compare(FlightRuntime.callProperty(HxMath, 'abs', cast ([(a - b)] : Array<Dynamic>)), epsilon, '<=');
     return cast null;
   }
 
-  @:keep public static function approxEqualRelative(a:Float, b:Float, relativeEpsilon:Float = 0.000001):Bool {
+  public static function approxEqualRelative(a:Float, b:Float, relativeEpsilon:Float = 0.000001):Bool {
     var diff:Dynamic = cast FlightRuntime.UNDEFINED;
     var largest:Dynamic = cast FlightRuntime.UNDEFINED;
     diff = FlightRuntime.callProperty(HxMath, 'abs', cast ([(a - b)] : Array<Dynamic>));
@@ -26,28 +23,28 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function approxZero(value:Float, epsilon:Float = 0.000001):Bool {
+  public static function approxZero(value:Float, epsilon:Float = 0.000001):Bool {
     return cast FlightRuntime.compare(FlightRuntime.callProperty(HxMath, 'abs', cast ([value] : Array<Dynamic>)), epsilon, '<=');
     return cast null;
   }
 
-  @:keep public static function ceilPowerOfTwo(n:Float):Float {
+  public static function ceilPowerOfTwo(n:Float):Float {
     return cast FlightRuntime.callValue(nextPowerOfTwo, cast ([n] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function ceilTo(value:Float, step:Float):Float {
+  public static function ceilTo(value:Float, step:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.compare(step, 0.0, '<='))) { return cast value; }
     return cast (FlightRuntime.callProperty(HxMath, 'ceil', cast ([(value / step)] : Array<Dynamic>)) * step);
     return cast null;
   }
 
-  @:keep public static function clamp(value:Float, min:Float, max:Float):Float {
+  public static function clamp(value:Float, min:Float, max:Float):Float {
     return cast FlightRuntime.select(FlightRuntime.compare(value, min, '<'), function():Dynamic return cast min, function():Dynamic return cast FlightRuntime.select(FlightRuntime.compare(value, max, '>'), function():Dynamic return cast max, function():Dynamic return cast value));
     return cast null;
   }
 
-  @:keep public static function createRandomSource(seed:Float):RandomSource {
+  public static function createRandomSource(seed:Float):RandomSource {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     a = FlightRuntime.select(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([seed] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.unsignedShiftRight(Std.int(seed), Std.int(0.0)), function():Dynamic return cast 0.0);
     return cast function seededRandom() {
@@ -60,12 +57,12 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function createRandomSourceFromHash(x:Float, y:Float):RandomSource {
+  public static function createRandomSourceFromHash(x:Float, y:Float):RandomSource {
     return cast FlightRuntime.callValue(createRandomSource, cast ([FlightRuntime.callValue(hash2D, cast ([x, y] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function damp(current:Float, target:Float, lambda:Float, deltaTime:Float):Float {
+  public static function damp(current:Float, target:Float, lambda:Float, deltaTime:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.compare(deltaTime, 0.0, '<='), function():Dynamic return cast FlightRuntime.compare(lambda, 0.0, '<=')))) { return cast current; }
     return cast (target + ((current - target) * FlightRuntime.callProperty(HxMath, 'exp', cast ([(-lambda * deltaTime)] : Array<Dynamic>))));
     return cast null;
@@ -73,12 +70,12 @@ class Math {
 
   public static final DEG_TO_RAD:Dynamic = (HxMath.PI / 180.0);
 
-  @:keep public static function degToRad(degrees:Float):Float {
+  public static function degToRad(degrees:Float):Float {
     return cast (degrees * DEG_TO_RAD);
     return cast null;
   }
 
-  @:keep public static function deltaAngle(from:Float, to:Float):Float {
+  public static function deltaAngle(from:Float, to:Float):Float {
     var diff:Dynamic = cast FlightRuntime.UNDEFINED;
     diff = ((((to - from) % TAU) + TAU) % TAU);
     return cast FlightRuntime.select(FlightRuntime.compare(diff, HxMath.PI, '>'), function():Dynamic return cast (diff - TAU), function():Dynamic return cast diff);
@@ -87,13 +84,13 @@ class Math {
 
   public static final EPSILON:Dynamic = 0.000001;
 
-  @:keep public static function euclideanMod(value:Float, divisor:Float):Float {
+  public static function euclideanMod(value:Float, divisor:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(divisor, 0.0))) { throw FlightRuntime.rangeError('euclideanMod: divisor must not be 0'); }
     return cast (((value % divisor) + divisor) % divisor);
     return cast null;
   }
 
-  @:keep public static function factorial(n:Float):Float {
+  public static function factorial(n:Float):Float {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isInteger', cast ([n] : Array<Dynamic>))), function():Dynamic return cast FlightRuntime.compare(n, 0.0, '<')))) { throw FlightRuntime.rangeError('factorial: n must be a non-negative integer'); }
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(n, 0.0), function():Dynamic return cast FlightRuntime.strictEquals(n, 1.0)))) { return cast 1.0; }
@@ -109,23 +106,23 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function floorPowerOfTwo(n:Float):Float {
+  public static function floorPowerOfTwo(n:Float):Float {
     return cast FlightRuntime.callValue(previousPowerOfTwo, cast ([n] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function floorTo(value:Float, step:Float):Float {
+  public static function floorTo(value:Float, step:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.compare(step, 0.0, '<='))) { return cast value; }
     return cast (FlightRuntime.callProperty(HxMath, 'floor', cast ([(value / step)] : Array<Dynamic>)) * step);
     return cast null;
   }
 
-  @:keep public static function fract(value:Float):Float {
+  public static function fract(value:Float):Float {
     return cast (value - FlightRuntime.trunc(value));
     return cast null;
   }
 
-  @:keep public static function gcd(a:Float, b:Float):Float {
+  public static function gcd(a:Float, b:Float):Float {
     (a = cast (FlightRuntime.callProperty(HxMath, 'abs', cast ([FlightRuntime.trunc(a)] : Array<Dynamic>)) : Dynamic));
     (b = cast (FlightRuntime.callProperty(HxMath, 'abs', cast ([FlightRuntime.trunc(b)] : Array<Dynamic>)) : Dynamic));
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.strictEquals(a, 0.0), function():Dynamic return cast FlightRuntime.strictEquals(b, 0.0)))) { throw FlightRuntime.rangeError('gcd: both arguments must not be 0'); }
@@ -140,22 +137,22 @@ class Math {
 
   public static final HALF_PI:Dynamic = (HxMath.PI / 2.0);
 
-  @:keep public static function hash2D(x:Float, y:Float):Float {
+  public static function hash2D(x:Float, y:Float):Float {
     return cast FlightRuntime.callValue(hashCombine, cast ([FlightRuntime.callValue(hashUint32, cast ([(Std.int(x) | Std.int(0.0))] : Array<Dynamic>)), (Std.int(y) | Std.int(0.0))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hash3D(x:Float, y:Float, z:Float):Float {
+  public static function hash3D(x:Float, y:Float, z:Float):Float {
     return cast FlightRuntime.callValue(hashCombine, cast ([FlightRuntime.callValue(hash2D, cast ([x, y] : Array<Dynamic>)), (Std.int(z) | Std.int(0.0))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hashCombine(seed:Float, value:Float):Float {
+  public static function hashCombine(seed:Float, value:Float):Float {
     return cast FlightRuntime.callValue(hashUint32, cast ([(Std.int(seed) ^ Std.int((((value + 2654435769.0) + (Std.int(seed) << Std.int(6.0))) + (Std.int(seed) >> Std.int(2.0)))))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hashUint32(value:Float):Float {
+  public static function hashUint32(value:Float):Float {
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     h = (Std.int(value) | Std.int(0.0));
     (h = (Std.int(h) ^ Std.int(FlightRuntime.unsignedShiftRight(Std.int(h), Std.int(16.0)))));
@@ -167,51 +164,51 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function hypot2(x:Float, y:Float):Float {
+  public static function hypot2(x:Float, y:Float):Float {
     return cast ((x * x) + (y * y));
     return cast null;
   }
 
-  @:keep public static function inRange(value:Float, min:Float, max:Float):Bool {
+  public static function inRange(value:Float, min:Float, max:Float):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.compare(value, min, '>='), function():Dynamic return cast FlightRuntime.compare(value, max, '<='));
     return cast null;
   }
 
-  @:keep public static function inverseLerp(a:Float, b:Float, value:Float):Float {
+  public static function inverseLerp(a:Float, b:Float, value:Float):Float {
     var range:Dynamic = cast FlightRuntime.UNDEFINED;
     range = (b - a);
     return cast FlightRuntime.select(FlightRuntime.strictEquals(range, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast ((value - a) / range));
     return cast null;
   }
 
-  @:keep public static function isEven(n:Float):Bool {
+  public static function isEven(n:Float):Bool {
     return cast FlightRuntime.strictEquals((Std.int(n) & Std.int(1.0)), 0.0);
     return cast null;
   }
 
-  @:keep public static function isOdd(n:Float):Bool {
+  public static function isOdd(n:Float):Bool {
     return cast FlightRuntime.strictEquals((Std.int(n) & Std.int(1.0)), 1.0);
     return cast null;
   }
 
-  @:keep public static function isPowerOfTwo(n:Float):Bool {
+  public static function isPowerOfTwo(n:Float):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.compare(n, 0.0, '>'), function():Dynamic return cast FlightRuntime.strictEquals((Std.int(n) & Std.int((n - 1.0))), 0.0));
     return cast null;
   }
 
-  @:keep public static function lcm(a:Float, b:Float):Float {
+  public static function lcm(a:Float, b:Float):Float {
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     g = FlightRuntime.callValue(gcd, cast ([a, b] : Array<Dynamic>));
     return cast ((FlightRuntime.callProperty(HxMath, 'abs', cast ([FlightRuntime.trunc(a)] : Array<Dynamic>)) / g) * FlightRuntime.callProperty(HxMath, 'abs', cast ([FlightRuntime.trunc(b)] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function lerp(a:Float, b:Float, t:Float):Float {
+  public static function lerp(a:Float, b:Float, t:Float):Float {
     return cast (a + ((b - a) * t));
     return cast null;
   }
 
-  @:keep public static function lerpAngle(a:Float, b:Float, t:Float):Float {
+  public static function lerpAngle(a:Float, b:Float, t:Float):Float {
     var TAU:Dynamic = cast FlightRuntime.UNDEFINED;
     var diff:Dynamic = cast FlightRuntime.UNDEFINED;
     TAU = (HxMath.PI * 2.0);
@@ -221,7 +218,7 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function mean(values:Array<Float>):Float {
+  public static function mean(values:Array<Float>):Float {
     var sum:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(values, 'length'), 0.0))) { return cast HxMath.NaN; }
     sum = 0.0;
@@ -236,7 +233,7 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function median(values:Array<Float>):Float {
+  public static function median(values:Array<Float>):Float {
     var sorted:Dynamic = cast FlightRuntime.UNDEFINED;
     var mid:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(values, 'length'), 0.0))) { return cast HxMath.NaN; }
@@ -246,7 +243,7 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function moveTowards(current:Float, target:Float, maxDelta:Float):Float {
+  public static function moveTowards(current:Float, target:Float, maxDelta:Float):Float {
     var delta:Dynamic = cast FlightRuntime.UNDEFINED;
     delta = (target - current);
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.callProperty(HxMath, 'abs', cast ([delta] : Array<Dynamic>)), maxDelta, '<='))) { return cast target; }
@@ -254,7 +251,7 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function nextMultipleOf(value:Float, multiple:Float):Float {
+  public static function nextMultipleOf(value:Float, multiple:Float):Float {
     var remainder:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(multiple, 0.0, '<='))) { return cast value; }
     remainder = (value % multiple);
@@ -262,7 +259,7 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function nextPowerOfTwo(n:Float):Float {
+  public static function nextPowerOfTwo(n:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.compare(n, 1.0, '<='))) { return cast 1.0; }
     (n = cast ((Std.int((n - 1.0)) | Std.int(0.0)) : Dynamic));
     (n = (Std.int(n) | Std.int((Std.int(n) >> Std.int(1.0)))));
@@ -274,20 +271,20 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function normalizeAngle(radians:Float):Float {
+  public static function normalizeAngle(radians:Float):Float {
     var wrapped:Dynamic = cast FlightRuntime.UNDEFINED;
     wrapped = (((radians % TAU) + TAU) % TAU);
     return cast FlightRuntime.select(FlightRuntime.compare(wrapped, HxMath.PI, '>='), function():Dynamic return cast (wrapped - TAU), function():Dynamic return cast wrapped);
     return cast null;
   }
 
-  @:keep public static function pick<T>(random:RandomSource, items:Array<Dynamic>):Null<Dynamic> {
+  public static function pick<T>(random:RandomSource, items:Array<Dynamic>):Null<Dynamic> {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(items, 'length'), 0.0))) { return cast FlightRuntime.UNDEFINED; }
     return cast FlightRuntime.getIndex(items, FlightRuntime.callProperty(HxMath, 'floor', cast ([(FlightRuntime.callValue(random, cast ([] : Array<Dynamic>)) * FlightRuntime.field(items, 'length'))] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function pingPong(t:Float, length:Float):Float {
+  public static function pingPong(t:Float, length:Float):Float {
     var cycle:Dynamic = cast FlightRuntime.UNDEFINED;
     var mod:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(length, 0.0, '<='))) { return cast 0.0; }
@@ -297,7 +294,7 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function previousPowerOfTwo(n:Float):Float {
+  public static function previousPowerOfTwo(n:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.compare(n, 1.0, '<='))) { return cast 1.0; }
     (n = cast ((Std.int(n) | Std.int(0.0)) : Dynamic));
     (n = (Std.int(n) | Std.int((Std.int(n) >> Std.int(1.0)))));
@@ -309,7 +306,7 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function quantize(value:Float, steps:Float, min:Float, max:Float):Float {
+  public static function quantize(value:Float, steps:Float, min:Float, max:Float):Float {
     var t:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.compare(steps, 0.0, '<='), function():Dynamic return cast FlightRuntime.strictEquals(min, max)))) { return cast min; }
     t = ((value - min) / (max - min));
@@ -319,17 +316,17 @@ class Math {
 
   public static final RAD_TO_DEG:Dynamic = (180.0 / HxMath.PI);
 
-  @:keep public static function radToDeg(radians:Float):Float {
+  public static function radToDeg(radians:Float):Float {
     return cast (radians * RAD_TO_DEG);
     return cast null;
   }
 
-  @:keep public static function randomBool(random:RandomSource, probability:Float = 0.5):Bool {
+  public static function randomBool(random:RandomSource, probability:Float = 0.5):Bool {
     return cast FlightRuntime.compare(FlightRuntime.callValue(random, cast ([] : Array<Dynamic>)), probability, '<');
     return cast null;
   }
 
-  @:keep public static function randomExponential(random:RandomSource, rate:Float = 1.0):Float {
+  public static function randomExponential(random:RandomSource, rate:Float = 1.0):Float {
     var u:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(rate, 0.0, '<='))) { throw FlightRuntime.rangeError('randomExponential: rate must be > 0'); }
     u = FlightRuntime.callValue(random, cast ([] : Array<Dynamic>));
@@ -337,7 +334,7 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function randomGaussian(random:RandomSource, mean:Float = 0.0, standardDeviation:Float = 1.0):Float {
+  public static function randomGaussian(random:RandomSource, mean:Float = 0.0, standardDeviation:Float = 1.0):Float {
     var u1:Dynamic = cast FlightRuntime.UNDEFINED;
     var u2:Dynamic = cast FlightRuntime.UNDEFINED;
     var z:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -348,7 +345,7 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function randomGaussianPair(random:RandomSource, mean:Float = 0.0, standardDeviation:Float = 1.0):Array<Float> {
+  public static function randomGaussianPair(random:RandomSource, mean:Float = 0.0, standardDeviation:Float = 1.0):Array<Float> {
     var u1:Dynamic = cast FlightRuntime.UNDEFINED;
     var u2:Dynamic = cast FlightRuntime.UNDEFINED;
     var mag:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -365,7 +362,7 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function randomInsideUnitDisc(random:RandomSource, out:Vector2Like):Void {
+  public static function randomInsideUnitDisc(random:RandomSource, out:Vector2Like):Void {
     var x:Float = cast FlightRuntime.UNDEFINED;
     var y:Float = cast FlightRuntime.UNDEFINED;
     do {
@@ -376,7 +373,7 @@ class Math {
     FlightRuntime.setField(out, 'y', y);
   }
 
-  @:keep public static function randomInsideUnitSphere(random:RandomSource, out:Vector3Like):Void {
+  public static function randomInsideUnitSphere(random:RandomSource, out:Vector3Like):Void {
     var x:Float = cast FlightRuntime.UNDEFINED;
     var y:Float = cast FlightRuntime.UNDEFINED;
     var z:Float = cast FlightRuntime.UNDEFINED;
@@ -390,7 +387,7 @@ class Math {
     FlightRuntime.setField(out, 'z', z);
   }
 
-  @:keep public static function randomInt(random:RandomSource, min:Float, max:Float):Float {
+  public static function randomInt(random:RandomSource, min:Float, max:Float):Float {
     var lo:Dynamic = cast FlightRuntime.UNDEFINED;
     var hi:Dynamic = cast FlightRuntime.UNDEFINED;
     lo = FlightRuntime.callProperty(HxMath, 'floor', cast ([min] : Array<Dynamic>));
@@ -400,7 +397,7 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function randomOnUnitCircle(random:RandomSource, out:Vector2Like):Void {
+  public static function randomOnUnitCircle(random:RandomSource, out:Vector2Like):Void {
     var angle:Dynamic = cast FlightRuntime.UNDEFINED;
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -411,7 +408,7 @@ class Math {
     FlightRuntime.setField(out, 'y', y);
   }
 
-  @:keep public static function randomOnUnitSphere(random:RandomSource, out:Vector3Like):Void {
+  public static function randomOnUnitSphere(random:RandomSource, out:Vector3Like):Void {
     var x:Float = cast FlightRuntime.UNDEFINED;
     var y:Float = cast FlightRuntime.UNDEFINED;
     var s:Float = cast FlightRuntime.UNDEFINED;
@@ -433,7 +430,7 @@ class Math {
     FlightRuntime.setField(out, 'z', rz);
   }
 
-  @:keep public static function randomPoisson(random:RandomSource, lambda:Float = 1.0):Float {
+  public static function randomPoisson(random:RandomSource, lambda:Float = 1.0):Float {
     var limit:Dynamic = cast FlightRuntime.UNDEFINED;
     var k:Dynamic = cast FlightRuntime.UNDEFINED;
     var product:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -449,17 +446,17 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function randomRange(random:RandomSource, min:Float, max:Float):Float {
+  public static function randomRange(random:RandomSource, min:Float, max:Float):Float {
     return cast (min + (FlightRuntime.callValue(random, cast ([] : Array<Dynamic>)) * (max - min)));
     return cast null;
   }
 
-  @:keep public static function randomSign(random:RandomSource):Float {
+  public static function randomSign(random:RandomSource):Float {
     return cast FlightRuntime.select(FlightRuntime.compare(FlightRuntime.callValue(random, cast ([] : Array<Dynamic>)), 0.5, '<'), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0);
     return cast null;
   }
 
-  @:keep public static function randomWeighted(random:RandomSource, weights:Array<Float>):Float {
+  public static function randomWeighted(random:RandomSource, weights:Array<Float>):Float {
     var total:Dynamic = cast FlightRuntime.UNDEFINED;
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     total = 0.0;
@@ -484,7 +481,7 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function remap(value:Float, inMin:Float, inMax:Float, outMin:Float, outMax:Float):Float {
+  public static function remap(value:Float, inMin:Float, inMax:Float, outMin:Float, outMax:Float):Float {
     var inRange:Dynamic = cast FlightRuntime.UNDEFINED;
     inRange = (inMax - inMin);
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(inRange, 0.0))) { return cast outMin; }
@@ -492,25 +489,25 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function repeat(t:Float, length:Float):Float {
+  public static function repeat(t:Float, length:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.compare(length, 0.0, '<='))) { return cast 0.0; }
     return cast (((t % length) + length) % length);
     return cast null;
   }
 
-  @:keep public static function roundTo(value:Float, step:Float):Float {
+  public static function roundTo(value:Float, step:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.compare(step, 0.0, '<='))) { return cast value; }
     return cast (FlightRuntime.callProperty(HxMath, 'round', cast ([(value / step)] : Array<Dynamic>)) * step);
     return cast null;
   }
 
-  @:keep public static function saturate(value:Float):Float {
+  public static function saturate(value:Float):Float {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(value, value))) { return cast 0.0; }
     return cast FlightRuntime.select(FlightRuntime.compare(value, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast FlightRuntime.select(FlightRuntime.compare(value, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast value));
     return cast null;
   }
 
-  @:keep public static function shuffle<T>(random:RandomSource, items:Array<Dynamic>):Array<Dynamic> {
+  public static function shuffle<T>(random:RandomSource, items:Array<Dynamic>):Array<Dynamic> {
     var copy:Dynamic = cast FlightRuntime.UNDEFINED;
     copy = FlightRuntime.slice(items, 0, null);
     FlightRuntime.callValue(shuffleInPlace, cast ([random, copy] : Array<Dynamic>));
@@ -518,7 +515,7 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function shuffleInPlace<T>(random:RandomSource, items:Array<Dynamic>):Void {
+  public static function shuffleInPlace<T>(random:RandomSource, items:Array<Dynamic>):Void {
     {
       var i:Dynamic = (FlightRuntime.field(items, 'length') - 1.0);
       while (FlightRuntime.truthy(FlightRuntime.compare(i, 0.0, '>'))) {
@@ -531,12 +528,12 @@ class Math {
     }
   }
 
-  @:keep public static function sign(value:Float):Float {
+  public static function sign(value:Float):Float {
     return cast FlightRuntime.select(FlightRuntime.compare(value, 0.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast FlightRuntime.select(FlightRuntime.compare(value, 0.0, '<'), function():Dynamic return cast -1.0, function():Dynamic return cast 0.0));
     return cast null;
   }
 
-  @:keep public static function smootherStep(edge0:Float, edge1:Float, x:Float):Float {
+  public static function smootherStep(edge0:Float, edge1:Float, x:Float):Float {
     var t:Dynamic = cast FlightRuntime.UNDEFINED;
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
     t = ((x - edge0) / (edge1 - edge0));
@@ -545,7 +542,7 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function smoothStep(edge0:Float, edge1:Float, x:Float):Float {
+  public static function smoothStep(edge0:Float, edge1:Float, x:Float):Float {
     var t:Dynamic = cast FlightRuntime.UNDEFINED;
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
     t = ((x - edge0) / (edge1 - edge0));
@@ -554,19 +551,19 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function standardDeviation(values:Array<Float>):Float {
+  public static function standardDeviation(values:Array<Float>):Float {
     return cast FlightRuntime.callProperty(HxMath, 'sqrt', cast ([FlightRuntime.callValue(variance, cast ([values] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function step(edge:Float, x:Float):Float {
+  public static function step(edge:Float, x:Float):Float {
     return cast FlightRuntime.select(FlightRuntime.compare(x, edge, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast 1.0);
     return cast null;
   }
 
   public static final TAU:Dynamic = (HxMath.PI * 2.0);
 
-  @:keep public static function variance(values:Array<Float>):Float {
+  public static function variance(values:Array<Float>):Float {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     var sum:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(values, 'length'), 0.0))) { return cast HxMath.NaN; }
@@ -584,7 +581,7 @@ class Math {
     return cast null;
   }
 
-  @:keep public static function weightedAverage(values:Array<Float>, weights:Array<Float>):Float {
+  public static function weightedAverage(values:Array<Float>, weights:Array<Float>):Float {
     var sumWeights:Dynamic = cast FlightRuntime.UNDEFINED;
     var sumProduct:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(values, 'length'), FlightRuntime.field(weights, 'length')))) {

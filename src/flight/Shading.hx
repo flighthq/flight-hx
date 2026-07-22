@@ -46,9 +46,6 @@ typedef ToonModifierOptions = { var steps:Float; @:optional var smoothness:Float
 
 typedef VertexDisplaceModifierOptions = { var source:VertexDisplaceModifierSource; var amplitude:Float; @:optional var axis:Vector3Like; @:optional var map:Texture; @:optional var frequency:Float; @:optional var speed:Float; @:optional var direction:Vector3Like; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Shading")
 class Shading {
   public static final animatedNormalModifierDefinition:ModifierDefinition = { kind: Types.AnimatedNormalModifierKind, slot: Types.ModifierSlotValue.Normal, getDefineSignature: function(modifier:Modifier) {
@@ -60,7 +57,7 @@ class Shading {
 
   public static final BUILT_IN_SLOTS__isBuiltInModifierSlot:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Set'] : Array<Dynamic>)), [cast ([Types.ModifierSlotValue.Diffuse, Types.ModifierSlotValue.Effect, Types.ModifierSlotValue.Emissive, Types.ModifierSlotValue.Normal, Types.ModifierSlotValue.Specular, Types.ModifierSlotValue.Vertex] : Array<Dynamic>)]);
 
-  @:keep public static function createAnimatedNormalModifier(options:AnimatedNormalModifierOptions):AnimatedNormalModifier {
+  public static function createAnimatedNormalModifier(options:AnimatedNormalModifierOptions):AnimatedNormalModifier {
     var modifier:AnimatedNormalModifier = cast FlightRuntime.UNDEFINED;
     modifier = { kind: Types.AnimatedNormalModifierKind, slot: Types.ModifierSlotValue.Normal, map: FlightRuntime.field(options, 'map'), scroll: FlightRuntime.field(options, 'scroll'), strength: FlightRuntime.coalesce(FlightRuntime.field(options, 'strength'), function():Dynamic return cast 1.0) };
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(options, 'secondaryMap'), FlightRuntime.UNDEFINED))) { FlightRuntime.setField(modifier, 'secondaryMap', FlightRuntime.field(options, 'secondaryMap')); }
@@ -69,7 +66,7 @@ class Shading {
     return cast null;
   }
 
-  @:keep public static function createDissolveModifier(options:DissolveModifierOptions):DissolveModifier {
+  public static function createDissolveModifier(options:DissolveModifierOptions):DissolveModifier {
     var modifier:DissolveModifier = cast FlightRuntime.UNDEFINED;
     modifier = { kind: Types.DissolveModifierKind, slot: Types.ModifierSlotValue.Effect, threshold: FlightRuntime.field(options, 'threshold'), edgeColor: FlightRuntime.coalesce(FlightRuntime.field(options, 'edgeColor'), function():Dynamic return cast 4284875007.0), edgeWidth: FlightRuntime.coalesce(FlightRuntime.field(options, 'edgeWidth'), function():Dynamic return cast 0.05), scale: FlightRuntime.coalesce(FlightRuntime.field(options, 'scale'), function():Dynamic return cast 8.0) };
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(options, 'map'), FlightRuntime.UNDEFINED))) { FlightRuntime.setField(modifier, 'map', FlightRuntime.field(options, 'map')); }
@@ -77,7 +74,7 @@ class Shading {
     return cast null;
   }
 
-  @:keep public static function createEmissiveModifier(options:EmissiveModifierOptions):EmissiveModifier {
+  public static function createEmissiveModifier(options:EmissiveModifierOptions):EmissiveModifier {
     var modifier:EmissiveModifier = cast FlightRuntime.UNDEFINED;
     modifier = { kind: Types.EmissiveModifierKind, slot: Types.ModifierSlotValue.Emissive, color: FlightRuntime.field(options, 'color'), strength: FlightRuntime.coalesce(FlightRuntime.field(options, 'strength'), function():Dynamic return cast 1.0), facing: FlightRuntime.coalesce(FlightRuntime.field(options, 'facing'), function():Dynamic return cast Types.EmissiveModifierFacingValue.Ignore), facingSoftness: FlightRuntime.coalesce(FlightRuntime.field(options, 'facingSoftness'), function():Dynamic return cast 0.0) };
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(options, 'mask'), FlightRuntime.UNDEFINED))) { FlightRuntime.setField(modifier, 'mask', FlightRuntime.field(options, 'mask')); }
@@ -85,27 +82,27 @@ class Shading {
     return cast null;
   }
 
-  @:keep public static function createEnvReflectModifier(?options:EnvReflectModifierOptions):EnvReflectModifier {
+  public static function createEnvReflectModifier(?options:EnvReflectModifierOptions):EnvReflectModifier {
     return cast { kind: Types.EnvReflectModifierKind, slot: Types.ModifierSlotValue.Effect, tint: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'tint'), function():Dynamic return cast 4294967295.0), intensity: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), fresnelBias: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'fresnelBias'), function():Dynamic return cast 0.04), roughness: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'roughness'), function():Dynamic return cast 0.0) };
     return cast null;
   }
 
-  @:keep public static function createFogModifier(options:FogModifierOptions):FogModifier {
+  public static function createFogModifier(options:FogModifierOptions):FogModifier {
     return cast { kind: Types.FogModifierKind, slot: Types.ModifierSlotValue.Effect, color: FlightRuntime.field(options, 'color'), mode: FlightRuntime.coalesce(FlightRuntime.field(options, 'mode'), function():Dynamic return cast Types.FogModifierModeValue.Linear), near: FlightRuntime.coalesce(FlightRuntime.field(options, 'near'), function():Dynamic return cast 0.0), far: FlightRuntime.coalesce(FlightRuntime.field(options, 'far'), function():Dynamic return cast 1.0), density: FlightRuntime.coalesce(FlightRuntime.field(options, 'density'), function():Dynamic return cast 1.0) };
     return cast null;
   }
 
-  @:keep public static function createModifierRegistry():ModifierRegistry {
+  public static function createModifierRegistry():ModifierRegistry {
     return cast { definitions: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };
     return cast null;
   }
 
-  @:keep public static function createRimModifier(options:RimModifierOptions):RimModifier {
+  public static function createRimModifier(options:RimModifierOptions):RimModifier {
     return cast { kind: Types.RimModifierKind, slot: Types.ModifierSlotValue.Effect, color: FlightRuntime.field(options, 'color'), power: FlightRuntime.coalesce(FlightRuntime.field(options, 'power'), function():Dynamic return cast 3.0), intensity: FlightRuntime.coalesce(FlightRuntime.field(options, 'intensity'), function():Dynamic return cast 1.0), bias: FlightRuntime.coalesce(FlightRuntime.field(options, 'bias'), function():Dynamic return cast 0.0) };
     return cast null;
   }
 
-  @:keep public static function createShadedMaterial(?options:ShadedMaterialOptions):ShadedMaterial {
+  public static function createShadedMaterial(?options:ShadedMaterialOptions):ShadedMaterial {
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
     material = (cast FlightRuntime.callValue(createEntity, cast ([{ kind: Types.ShadedMaterialKind }] : Array<Dynamic>)) : ShadedMaterial);
     FlightRuntime.setField(material, 'alphaCutoff', 0.5);
@@ -125,12 +122,12 @@ class Shading {
     return cast null;
   }
 
-  @:keep public static function createToonModifier(options:ToonModifierOptions):ToonModifier {
+  public static function createToonModifier(options:ToonModifierOptions):ToonModifier {
     return cast { kind: Types.ToonModifierKind, slot: Types.ModifierSlotValue.Effect, steps: FlightRuntime.field(options, 'steps'), smoothness: FlightRuntime.coalesce(FlightRuntime.field(options, 'smoothness'), function():Dynamic return cast 0.0) };
     return cast null;
   }
 
-  @:keep public static function createVertexDisplaceModifier(options:VertexDisplaceModifierOptions):VertexDisplaceModifier {
+  public static function createVertexDisplaceModifier(options:VertexDisplaceModifierOptions):VertexDisplaceModifier {
     var modifier:VertexDisplaceModifier = cast FlightRuntime.UNDEFINED;
     modifier = { kind: Types.VertexDisplaceModifierKind, slot: Types.ModifierSlotValue.Vertex, source: FlightRuntime.field(options, 'source'), amplitude: FlightRuntime.field(options, 'amplitude'), frequency: FlightRuntime.coalesce(FlightRuntime.field(options, 'frequency'), function():Dynamic return cast 1.0), speed: FlightRuntime.coalesce(FlightRuntime.field(options, 'speed'), function():Dynamic return cast 1.0), direction: FlightRuntime.coalesce(FlightRuntime.field(options, 'direction'), function():Dynamic return cast Shading.DEFAULT_DIRECTION__createVertexDisplaceModifier) };
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(options, 'axis'), FlightRuntime.UNDEFINED))) { FlightRuntime.setField(modifier, 'axis', FlightRuntime.field(options, 'axis')); }
@@ -165,7 +162,7 @@ class Shading {
   return cast 'l';
 } };
 
-  @:keep public static function getDefineSignature__getModifierDefineKey(modifier:Modifier, ?registry:ModifierRegistry):String {
+  public static function getDefineSignature__getModifierDefineKey(modifier:Modifier, ?registry:ModifierRegistry):String {
     var definition:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(registry, FlightRuntime.UNDEFINED))) { return cast ''; }
     definition = FlightRuntime.callValue(resolveModifier, cast ([registry, FlightRuntime.field(modifier, 'kind')] : Array<Dynamic>));
@@ -174,7 +171,7 @@ class Shading {
     return cast null;
   }
 
-  @:keep public static function getModifierDefineKey(stack:Array<Modifier>, ?registry:ModifierRegistry):String {
+  public static function getModifierDefineKey(stack:Array<Modifier>, ?registry:ModifierRegistry):String {
     var ordered:Dynamic = cast FlightRuntime.UNDEFINED;
     var key:Dynamic = cast FlightRuntime.UNDEFINED;
     ordered = FlightRuntime.callValue(orderModifierStack, cast ([stack] : Array<Dynamic>));
@@ -188,14 +185,14 @@ class Shading {
     return cast null;
   }
 
-  @:keep public static function getModifierSlotRank__orderModifierStack(slot:ModifierSlot):Float {
+  public static function getModifierSlotRank__orderModifierStack(slot:ModifierSlot):Float {
     var rank:Dynamic = cast FlightRuntime.UNDEFINED;
     rank = FlightRuntime.callProperty(Shading.SLOT_RANK__orderModifierStack, 'get', cast ([slot] : Array<Dynamic>));
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(rank, FlightRuntime.UNDEFINED), function():Dynamic return cast rank, function():Dynamic return cast Shading.SLOT_RANK__orderModifierStack.size);
     return cast null;
   }
 
-  @:keep public static function getUnregisteredModifierKinds(registry:ModifierRegistry, stack:Array<Modifier>):Array<ModifierKind> {
+  public static function getUnregisteredModifierKinds(registry:ModifierRegistry, stack:Array<Modifier>):Array<ModifierKind> {
     var unregistered:Array<ModifierKind> = cast FlightRuntime.UNDEFINED;
     unregistered = cast ([] : Array<Dynamic>);
     for (modifier in FlightRuntime.iterable(stack)) {
@@ -207,17 +204,17 @@ class Shading {
     return cast null;
   }
 
-  @:keep public static function isBuiltInModifierSlot(value:String):Bool {
+  public static function isBuiltInModifierSlot(value:String):Bool {
     return cast FlightRuntime.callProperty(Shading.BUILT_IN_SLOTS__isBuiltInModifierSlot, 'has', cast ([value] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function isModifierStackValid(registry:ModifierRegistry, stack:Array<Modifier>):Bool {
+  public static function isModifierStackValid(registry:ModifierRegistry, stack:Array<Modifier>):Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.callValue(getUnregisteredModifierKinds, cast ([registry, stack] : Array<Dynamic>)), 'length'), 0.0);
     return cast null;
   }
 
-  @:keep public static function orderModifierStack(stack:Array<Modifier>):Array<Modifier> {
+  public static function orderModifierStack(stack:Array<Modifier>):Array<Modifier> {
     var indexed:Dynamic = cast FlightRuntime.UNDEFINED;
     indexed = FlightRuntime.callProperty(stack, 'map', cast ([function(modifier:Dynamic, index:Dynamic) return { index: index, modifier: modifier }] : Array<Dynamic>));
     FlightRuntime.callProperty(indexed, 'sort', cast ([function(a:Dynamic, b:Dynamic) {
@@ -229,7 +226,7 @@ class Shading {
     return cast null;
   }
 
-  @:keep public static function registerBuiltInModifiers(registry:ModifierRegistry):Void {
+  public static function registerBuiltInModifiers(registry:ModifierRegistry):Void {
     FlightRuntime.callValue(registerModifier, cast ([registry, animatedNormalModifierDefinition] : Array<Dynamic>));
     FlightRuntime.callValue(registerModifier, cast ([registry, dissolveModifierDefinition] : Array<Dynamic>));
     FlightRuntime.callValue(registerModifier, cast ([registry, emissiveModifierDefinition] : Array<Dynamic>));
@@ -240,11 +237,11 @@ class Shading {
     FlightRuntime.callValue(registerModifier, cast ([registry, vertexDisplaceModifierDefinition] : Array<Dynamic>));
   }
 
-  @:keep public static function registerModifier(registry:ModifierRegistry, definition:ModifierDefinition):Void {
+  public static function registerModifier(registry:ModifierRegistry, definition:ModifierDefinition):Void {
     FlightRuntime.callProperty(FlightRuntime.field(registry, 'definitions'), 'set', cast ([FlightRuntime.field(definition, 'kind'), definition] : Array<Dynamic>));
   }
 
-  @:keep public static function resolveModifier(registry:ModifierRegistry, kind:ModifierKind):Null<ModifierDefinition> {
+  public static function resolveModifier(registry:ModifierRegistry, kind:ModifierKind):Null<ModifierDefinition> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.field(registry, 'definitions'), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }

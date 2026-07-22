@@ -93,9 +93,6 @@ typedef RenderProxyVisitor = Dynamic;
 
 typedef RenderTargetSizeOptions = { @:optional var minWidth:Float; @:optional var minHeight:Float; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Render")
 class Render {
   public static final _buildStack__renderQueue:Array<Renderable> = cast ([] : Array<Dynamic>);
@@ -108,7 +105,7 @@ class Render {
 
   public static final _tempTranslation__renderTarget:Dynamic = FlightRuntime.callValue(createMatrix, cast ([] : Array<Dynamic>));
 
-  @:keep public static function applyRenderProxyAdapter(state:RenderState, source:Renderable, data:Dynamic):Void {
+  public static function applyRenderProxyAdapter(state:RenderState, source:Renderable, data:Dynamic):Void {
     var renderAdapter:Dynamic = cast FlightRuntime.UNDEFINED;
     var traverseChildren:Dynamic = cast FlightRuntime.UNDEFINED;
     renderAdapter = FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderProxyAdapterMap'), 'get', cast ([source] : Array<Dynamic>)), function():Dynamic return cast null);
@@ -123,12 +120,12 @@ class Render {
     FlightRuntime.setField(data, 'traverseChildren', traverseChildren);
   }
 
-  @:keep public static function areColorAdjustmentGuardsEnabled(state:RenderState):Bool {
+  public static function areColorAdjustmentGuardsEnabled(state:RenderState):Bool {
     return cast !FlightRuntime.looseEquals(FlightRuntime.field(FlightRuntime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'colorAdjustmentChannelMixingGuard'), null);
     return cast null;
   }
 
-  @:keep public static function buildRenderQueue(state:RenderState, source:Renderable, out:RenderQueue):Void {
+  public static function buildRenderQueue(state:RenderState, source:Renderable, out:RenderQueue):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var renderProxyMap:Dynamic = cast FlightRuntime.UNDEFINED;
     var stack:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -163,11 +160,11 @@ class Render {
 }
   }
 
-  @:keep public static function clearRenderQueue(queue:RenderQueue):Void {
+  public static function clearRenderQueue(queue:RenderQueue):Void {
     FlightRuntime.setField(queue, 'entryCount', 0.0);
   }
 
-  @:keep public static function collectVisibleMeshes__sceneRender(node:NodeAny, frustum:Frustum, worldBounds:Aabb, out:Array<Mesh>):Void {
+  public static function collectVisibleMeshes__sceneRender(node:NodeAny, frustum:Frustum, worldBounds:Aabb, out:Array<Mesh>):Void {
     var mesh:Dynamic = cast FlightRuntime.UNDEFINED;
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(FlightRuntime.field(node, 'enabled')), function():Dynamic return cast !FlightRuntime.truthy(FlightRuntime.field((cast (cast node : Dynamic) : HasAppearance), 'visible'))))) {
@@ -189,17 +186,17 @@ class Render {
 }
   }
 
-  @:keep public static function compareRenderQueueEntries(a:RenderQueueEntry, b:RenderQueueEntry):Float {
+  public static function compareRenderQueueEntries(a:RenderQueueEntry, b:RenderQueueEntry):Float {
     return cast (FlightRuntime.field(a, 'sortKey') - FlightRuntime.field(b, 'sortKey'));
     return cast null;
   }
 
-  @:keep public static function compareRenderQueueEntriesByKey__renderQueue(a:RenderQueueEntry, b:RenderQueueEntry):Float {
+  public static function compareRenderQueueEntriesByKey__renderQueue(a:RenderQueueEntry, b:RenderQueueEntry):Float {
     return cast (FlightRuntime.field(a, 'sortKey') - FlightRuntime.field(b, 'sortKey'));
     return cast null;
   }
 
-  @:keep public static function computeDisplayObjectRenderTargetTransform(outRenderTransform:MatrixLike, source:DisplayObject, bounds:RectangleLike, contentX:Float = 0.0, contentY:Float = 0.0):Void {
+  public static function computeDisplayObjectRenderTargetTransform(outRenderTransform:MatrixLike, source:DisplayObject, bounds:RectangleLike, contentX:Float = 0.0, contentY:Float = 0.0):Void {
     var localTransform:Dynamic = cast FlightRuntime.UNDEFINED;
     localTransform = FlightRuntime.callValue(getNodeLocalMatrix, cast ([source] : Array<Dynamic>));
     FlightRuntime.callValue(inverseMatrix, cast ([Render._tempInvLocal__renderTarget, localTransform] : Array<Dynamic>));
@@ -212,7 +209,7 @@ class Render {
     FlightRuntime.callValue(multiplyMatrix, cast ([outRenderTransform, Render._tempTranslation__renderTarget, Render._tempInvLocal__renderTarget] : Array<Dynamic>));
   }
 
-  @:keep public static function computeRenderCacheTransform(outCacheTransform:MatrixLike, bounds:RectangleLike, contentX:Float = 0.0, contentY:Float = 0.0):Void {
+  public static function computeRenderCacheTransform(outCacheTransform:MatrixLike, bounds:RectangleLike, contentX:Float = 0.0, contentY:Float = 0.0):Void {
     FlightRuntime.setField(outCacheTransform, 'a', 1.0);
     FlightRuntime.setField(outCacheTransform, 'b', 0.0);
     FlightRuntime.setField(outCacheTransform, 'c', 0.0);
@@ -221,7 +218,7 @@ class Render {
     FlightRuntime.setField(outCacheTransform, 'ty', (FlightRuntime.field(bounds, 'y') - contentY));
   }
 
-  @:keep public static function computeRenderProxyWorldBounds(out:Dynamic, source:Dynamic):Bool {
+  public static function computeRenderProxyWorldBounds(out:Dynamic, source:Dynamic):Bool {
     var worldBounds:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(Render.isSpatial2DNode__renderViewport, cast ([source] : Array<Dynamic>))))) { return cast false; }
     worldBounds = FlightRuntime.callValue(getNodeWorldBoundsRectangle, cast ([source] : Array<Dynamic>));
@@ -233,28 +230,28 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function computeRenderTargetSize(bounds:RectangleLike, padding:Float = 0.0, minWidth:Float = 1.0, minHeight:Float = 1.0):{ var width:Float; var height:Float; } {
+  public static function computeRenderTargetSize(bounds:RectangleLike, padding:Float = 0.0, minWidth:Float = 1.0, minHeight:Float = 1.0):{ var width:Float; var height:Float; } {
     return cast { width: FlightRuntime.callProperty(HxMath, 'max', cast ([minWidth, (FlightRuntime.callProperty(HxMath, 'ceil', cast ([FlightRuntime.field(bounds, 'width')] : Array<Dynamic>)) + (padding * 2.0))] : Array<Dynamic>)), height: FlightRuntime.callProperty(HxMath, 'max', cast ([minHeight, (FlightRuntime.callProperty(HxMath, 'ceil', cast ([FlightRuntime.field(bounds, 'height')] : Array<Dynamic>)) + (padding * 2.0))] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function copyAllRenderersFromRenderState(target:RenderState, source:RenderState):Void {
+  public static function copyAllRenderersFromRenderState(target:RenderState, source:RenderState):Void {
     FlightRuntime.callValue(copyRenderersFromRenderState, cast ([target, source] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(source, 'displayObjectClipHooks'), null))) { FlightRuntime.setField(target, 'displayObjectClipHooks', FlightRuntime.field(source, 'displayObjectClipHooks')); }
   }
 
-  @:keep public static function copyRenderersFromRenderState(target:RenderState, source:RenderState):Void {
+  public static function copyRenderersFromRenderState(target:RenderState, source:RenderState):Void {
     FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callValue(getRenderStateRuntime, cast ([source] : Array<Dynamic>)), 'rendererMap'), 'forEach', cast ([function(renderer:Dynamic, kind:Dynamic) {
   FlightRuntime.callValue(registerRenderer, cast ([target, kind, renderer] : Array<Dynamic>));
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function createRenderCache():RenderCache {
+  public static function createRenderCache():RenderCache {
     return cast FlightRuntime.callValue(createEntity, cast ([{ kind: Types.RenderCacheKindValue, transform: FlightRuntime.callValue(createMatrix, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createRenderCacheAdapter(?cache:Null<RenderCache>):RenderCacheAdapter {
+  public static function createRenderCacheAdapter(?cache:Null<RenderCache>):RenderCacheAdapter {
     if (cache == null) cache = cast (null : Dynamic);
     var adapter:RenderCacheAdapter = cast FlightRuntime.UNDEFINED;
     adapter = { cache: cache, signals: null, adapt: function(_state:Dynamic, _source:Dynamic, node:Dynamic) {
@@ -270,7 +267,7 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function createRenderProxy(state:RenderState, source:Renderable):RenderProxy {
+  public static function createRenderProxy(state:RenderState, source:Renderable):RenderProxy {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var renderer:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -279,7 +276,7 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function createRenderProxy2D(state:RenderState, source:Dynamic):RenderProxy2D {
+  public static function createRenderProxy2D(state:RenderState, source:Dynamic):RenderProxy2D {
     var node:Dynamic = cast FlightRuntime.UNDEFINED;
     node = (cast FlightRuntime.callValue(createRenderProxy, cast ([state, source] : Array<Dynamic>)) : RenderProxy2D);
     FlightRuntime.setField(node, 'transform2D', FlightRuntime.callValue(createMatrix, cast ([] : Array<Dynamic>)));
@@ -289,12 +286,12 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function createRenderQueue():RenderQueue {
+  public static function createRenderQueue():RenderQueue {
     return cast { entries: cast ([] : Array<Dynamic>), entryCount: 0.0 };
     return cast null;
   }
 
-  @:keep public static function createRenderState(?obj:Dynamic):RenderState {
+  public static function createRenderState(?obj:Dynamic):RenderState {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     state = (cast FlightRuntime.callValue(createEntity, cast ([{ allowSmoothing: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'allowSmoothing'), function():Dynamic return cast true), backgroundColor: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'backgroundColor'), function():Dynamic return cast 0.0), backgroundColorRgba: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'backgroundColorRgba'), function():Dynamic return cast cast ([] : Array<Dynamic>)), backgroundColorString: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'backgroundColorString'), function():Dynamic return cast ''), currentClipDepth: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'currentClipDepth'), function():Dynamic return cast 0.0), displayObjectClipHooks: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'displayObjectClipHooks'), function():Dynamic return cast null), pixelRatio: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'pixelRatio'), function():Dynamic return cast 1.0), renderAlpha: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'renderAlpha'), function():Dynamic return cast 1.0), renderBlendMode: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'renderBlendMode'), function():Dynamic return cast Types.BlendModeValue.Normal), renderTransform2D: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'renderTransform2D'), function():Dynamic return cast null), roundPixels: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'sceneGraphSyncPolicy'), function():Dynamic return cast 'refreshDerivedState') }] : Array<Dynamic>)) : RenderState);
     FlightRuntime.setIndex(state, EntityRuntimeKey, FlightRuntime.callValue(createRenderStateRuntime, cast ([] : Array<Dynamic>)));
@@ -302,7 +299,7 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function createRenderStateRuntime():RenderStateRuntime {
+  public static function createRenderStateRuntime():RenderStateRuntime {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(createEntityRuntime, cast ([] : Array<Dynamic>)) : RenderStateRuntime);
     FlightRuntime.setField(runtime, 'colorAdjustmentChannelMixingGuard', null);
@@ -317,18 +314,18 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function createRenderViewport2D(x:Float, y:Float, width:Float, height:Float):RenderViewport2D {
+  public static function createRenderViewport2D(x:Float, y:Float, width:Float, height:Float):RenderViewport2D {
     return cast { height: height, width: width, x: x, y: y };
     return cast null;
   }
 
   public static final DEFAULT_VIEWPORT_ASPECT__sceneRender:Dynamic = 1.0;
 
-  @:keep public static function disposeDisplayObjectRender(state:RenderState, root:Renderable):Void {
+  public static function disposeDisplayObjectRender(state:RenderState, root:Renderable):Void {
     FlightRuntime.callValue(Render.walkRenderSubtree__renderProxy, cast ([state, root, disposeRenderProxy] : Array<Dynamic>));
   }
 
-  @:keep public static function disposeRenderProxy(state:RenderState, source:Renderable):Void {
+  public static function disposeRenderProxy(state:RenderState, source:Renderable):Void {
     var renderProxyMap:Dynamic = cast FlightRuntime.UNDEFINED;
     var node:Dynamic = cast FlightRuntime.UNDEFINED;
     renderProxyMap = FlightRuntime.field(FlightRuntime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderProxyMap');
@@ -338,15 +335,15 @@ class Render {
     FlightRuntime.callProperty(renderProxyMap, 'delete', cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function enableColorAdjustmentGuards(state:RenderState):Void {
+  public static function enableColorAdjustmentGuards(state:RenderState):Void {
     FlightRuntime.setField(FlightRuntime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'colorAdjustmentChannelMixingGuard', Render.warnColorAdjustmentChannelMixingNotInlineable__enableColorAdjustmentGuards);
   }
 
-  @:keep public static function enableRenderCacheAdapterSignals(adapter:RenderCacheAdapter):Void {
+  public static function enableRenderCacheAdapterSignals(adapter:RenderCacheAdapter):Void {
     FlightRuntime.setField(adapter, 'signals', (FlightRuntime.field(adapter, 'signals') ?? { onPrepare: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) }));
   }
 
-  @:keep public static function ensurePreparedScene__sceneRender(state:RenderState):PreparedScene__sceneRender {
+  public static function ensurePreparedScene__sceneRender(state:RenderState):PreparedScene__sceneRender {
     var prepared:Dynamic = cast FlightRuntime.UNDEFINED;
     prepared = FlightRuntime.callProperty(Render.preparedScenes__sceneRender, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(prepared, FlightRuntime.UNDEFINED))) {
@@ -360,7 +357,7 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function explainDisplayObjectRender(state:RenderState, source:Renderable):DisplayObjectRenderExplanation {
+  public static function explainDisplayObjectRender(state:RenderState, source:Renderable):DisplayObjectRenderExplanation {
     var kind:Dynamic = cast FlightRuntime.UNDEFINED;
     var hasRenderer:Dynamic = cast FlightRuntime.UNDEFINED;
     var proxy:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -381,7 +378,7 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function getOrCreateRenderProxy2D(state:RenderState, source:Renderable):RenderProxy2D {
+  public static function getOrCreateRenderProxy2D(state:RenderState, source:Renderable):RenderProxy2D {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var renderProxyMap:Dynamic = cast FlightRuntime.UNDEFINED;
     var node:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -399,33 +396,33 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function getRenderProxy2D(state:RenderState, source:Renderable):Null<RenderProxy2D> {
+  public static function getRenderProxy2D(state:RenderState, source:Renderable):Null<RenderProxy2D> {
     return cast (cast FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderProxyMap'), 'get', cast ([source] : Array<Dynamic>)) : Null<RenderProxy2D>);
     return cast null;
   }
 
-  @:keep public static function getRenderProxyAdapter(state:RenderState, source:Renderable):Null<RenderProxyAdapter> {
+  public static function getRenderProxyAdapter(state:RenderState, source:Renderable):Null<RenderProxyAdapter> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderProxyAdapterMap'), 'get', cast ([source] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getRenderProxyCache(state:RenderState, source:Renderable):Null<RenderCache> {
+  public static function getRenderProxyCache(state:RenderState, source:Renderable):Null<RenderCache> {
     var adapter:Dynamic = cast FlightRuntime.UNDEFINED;
     adapter = FlightRuntime.callValue(getRenderProxyAdapter, cast ([state, source] : Array<Dynamic>));
     return cast FlightRuntime.select(FlightRuntime.callValue(isRenderCacheAdapter, cast ([adapter] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.coalesce(FlightRuntime.field(adapter, 'cache'), function():Dynamic return cast null), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getRenderStateRuntime(state:RenderState):RenderStateRuntime {
+  public static function getRenderStateRuntime(state:RenderState):RenderStateRuntime {
     return cast (cast FlightRuntime.getIndex(state, EntityRuntimeKey) : RenderStateRuntime);
     return cast null;
   }
 
-  @:keep public static function installRenderAdaptHook(state:RenderState, fn:AdaptHook__renderProxy):Void {
+  public static function installRenderAdaptHook(state:RenderState, fn:AdaptHook__renderProxy):Void {
     FlightRuntime.setField(FlightRuntime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderAdaptHook', fn);
   }
 
-  @:keep public static function isFloat32ArrayEqual__sceneRender(a:flight.internal.FlightFloat32Array, b:flight.internal.FlightFloat32Array):Bool {
+  public static function isFloat32ArrayEqual__sceneRender(a:flight.internal.FlightFloat32Array, b:flight.internal.FlightFloat32Array):Bool {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(a, 'length'), FlightRuntime.field(b, 'length')))) { return cast false; }
     {
       var i:Dynamic = 0.0;
@@ -438,7 +435,7 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function isMeshVisible__sceneRender(mesh:Mesh, frustum:Frustum, worldBounds:Aabb):Bool {
+  public static function isMeshVisible__sceneRender(mesh:Mesh, frustum:Frustum, worldBounds:Aabb):Bool {
     var bounds:Dynamic = cast FlightRuntime.UNDEFINED;
     bounds = FlightRuntime.field(FlightRuntime.field(mesh, 'geometry'), 'bounds');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(bounds, null))) {
@@ -449,7 +446,7 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function isRenderableInViewport(source:Dynamic, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
+  public static function isRenderableInViewport(source:Dynamic, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
     var bounds:Dynamic = cast FlightRuntime.UNDEFINED;
     var objMinX:Dynamic = cast FlightRuntime.UNDEFINED;
     var objMinY:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -477,17 +474,17 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function isRenderCache(source:Dynamic):Bool {
+  public static function isRenderCache(source:Dynamic):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.typeofValue(source), 'object'), function():Dynamic return cast !FlightRuntime.strictEquals(source, null)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field((cast source : RenderCache), 'kind'), Types.RenderCacheKindValue));
     return cast null;
   }
 
-  @:keep public static function isRenderCacheAdapter(value:Dynamic):Bool {
+  public static function isRenderCacheAdapter(value:Dynamic):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.typeofValue(value), 'object'), function():Dynamic return cast !FlightRuntime.strictEquals(value, null)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field((cast value : RenderCacheAdapter), 'adapt')), 'function')), function():Dynamic return cast FlightRuntime.hasField((cast value : RenderCacheAdapter), 'cache'));
     return cast null;
   }
 
-  @:keep public static function isRenderProxyDirty(state:RenderState, source:Renderable, data:RenderProxy, ?parentData:RenderProxy):Bool {
+  public static function isRenderProxyDirty(state:RenderState, source:Renderable, data:RenderProxy, ?parentData:RenderProxy):Bool {
     var currentFrameId:Dynamic = cast FlightRuntime.UNDEFINED;
     var parentDirty:Dynamic = cast FlightRuntime.UNDEFINED;
     var localDirty:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -498,27 +495,27 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function isRenderProxyInViewport(proxy:RenderProxy2D, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
+  public static function isRenderProxyInViewport(proxy:RenderProxy2D, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
     return cast FlightRuntime.callValue(isRenderableInViewport, cast ([FlightRuntime.field(proxy, 'source'), viewport, renderTransform2D] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function isRenderProxyVisible(data:RenderProxy2D):Bool {
+  public static function isRenderProxyVisible(data:RenderProxy2D):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.field(data, 'visible'), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(data, 'alpha'), 0.0, '>')), function():Dynamic return cast !FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(data, 'transform2D'), 'a'), 0.0), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(data, 'transform2D'), 'd'), 0.0))));
     return cast null;
   }
 
-  @:keep public static function isSpatial2DNode__renderViewport(source:Dynamic):Bool {
+  public static function isSpatial2DNode__renderViewport(source:Dynamic):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(source, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(source), 'object')), function():Dynamic return cast FlightRuntime.hasField((cast source : Dynamic), 'pivotX'));
     return cast null;
   }
 
-  @:keep public static function noopRendererData(_state:RenderState, _source:Renderable):Null<RendererData> {
+  public static function noopRendererData(_state:RenderState, _source:Renderable):Null<RendererData> {
     return cast null;
     return cast null;
   }
 
-  @:keep public static function packAmbientLight__sceneRender(data:flight.internal.FlightFloat32Array, ambient:AmbientLight):Void {
+  public static function packAmbientLight__sceneRender(data:flight.internal.FlightFloat32Array, ambient:AmbientLight):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(unpackColorToLinear, cast ([Render.scratchColor__sceneRender, FlightRuntime.field(ambient, 'color')] : Array<Dynamic>));
     intensity = FlightRuntime.field(ambient, 'intensity');
@@ -527,7 +524,7 @@ class Render {
     FlightRuntime.setIndex(data, (Types.SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET + 2.0), (FlightRuntime.getIndex(Render.scratchColor__sceneRender, 2.0) * intensity));
   }
 
-  @:keep public static function packDirectionalLight__sceneRender(data:flight.internal.FlightFloat32Array, directional:DirectionalLight):Void {
+  public static function packDirectionalLight__sceneRender(data:flight.internal.FlightFloat32Array, directional:DirectionalLight):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.setIndex(data, (Types.SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 0.0), FlightRuntime.field(FlightRuntime.field(directional, 'direction'), 'x'));
     FlightRuntime.setIndex(data, (Types.SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 1.0), FlightRuntime.field(FlightRuntime.field(directional, 'direction'), 'y'));
@@ -539,7 +536,7 @@ class Render {
     FlightRuntime.setIndex(data, (Types.SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET + 2.0), (FlightRuntime.getIndex(Render.scratchColor__sceneRender, 2.0) * intensity));
   }
 
-  @:keep public static function packHemisphereLight__sceneRender(data:flight.internal.FlightFloat32Array, offset:Float, hemisphere:HemisphereLight):Void {
+  public static function packHemisphereLight__sceneRender(data:flight.internal.FlightFloat32Array, offset:Float, hemisphere:HemisphereLight):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     intensity = FlightRuntime.field(hemisphere, 'intensity');
     FlightRuntime.callValue(unpackColorToLinear, cast ([Render.scratchColor__sceneRender, FlightRuntime.field(hemisphere, 'skyColor')] : Array<Dynamic>));
@@ -555,7 +552,7 @@ class Render {
     FlightRuntime.setIndex(data, (offset + 10.0), 0.0);
   }
 
-  @:keep public static function packPointLight__sceneRender(data:flight.internal.FlightFloat32Array, offset:Float, point:PointLight):Void {
+  public static function packPointLight__sceneRender(data:flight.internal.FlightFloat32Array, offset:Float, point:PointLight):Void {
     var range:Dynamic = cast FlightRuntime.UNDEFINED;
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     range = FlightRuntime.field(point, 'range');
@@ -571,7 +568,7 @@ class Render {
     FlightRuntime.setIndex(data, (offset + 7.0), FlightRuntime.select(FlightRuntime.compare(range, 0.0, '>'), function():Dynamic return cast (1.0 / (range * range)), function():Dynamic return cast 0.0));
   }
 
-  @:keep public static function packRenderSortKey(layer:Float, depth:Float, isTransparent:Bool):RenderSortKey {
+  public static function packRenderSortKey(layer:Float, depth:Float, isTransparent:Bool):RenderSortKey {
     var layerBits:Dynamic = cast FlightRuntime.UNDEFINED;
     var transparentBit:Dynamic = cast FlightRuntime.UNDEFINED;
     var depthBits:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -582,7 +579,7 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function packSceneLightBlock(out:SceneLightBlock, lights:SceneLights):Void {
+  public static function packSceneLightBlock(out:SceneLightBlock, lights:SceneLights):Void {
     var directionalCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var directional:Dynamic = cast FlightRuntime.UNDEFINED;
     var ambientCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -654,7 +651,7 @@ class Render {
     FlightRuntime.incrementField(out, 'version', 1, true);
   }
 
-  @:keep public static function packSpotLight__sceneRender(data:flight.internal.FlightFloat32Array, offset:Float, spot:SpotLight):Void {
+  public static function packSpotLight__sceneRender(data:flight.internal.FlightFloat32Array, offset:Float, spot:SpotLight):Void {
     var range:Dynamic = cast FlightRuntime.UNDEFINED;
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     range = FlightRuntime.field(spot, 'range');
@@ -675,14 +672,14 @@ class Render {
     FlightRuntime.setIndex(data, (offset + 13.0), FlightRuntime.field(spot, 'outerConeCos'));
   }
 
-  @:keep public static function prepareDisplayObjectRender(state:RenderState, source:Renderable):Bool {
+  public static function prepareDisplayObjectRender(state:RenderState, source:Renderable):Bool {
     return cast FlightRuntime.callValue(walkNode, cast ([state, source, updateRenderProxy2D] : Array<Dynamic>));
     return cast null;
   }
 
   public static final preparedScenes__sceneRender:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function prepareSceneRender(state:RenderState, scene:SceneNode, camera:Camera, lights:SceneLights):SceneRenderList {
+  public static function prepareSceneRender(state:RenderState, scene:SceneNode, camera:Camera, lights:SceneLights):SceneRenderList {
     var prepared:Dynamic = cast FlightRuntime.UNDEFINED;
     var list:Dynamic = cast FlightRuntime.UNDEFINED;
     prepared = FlightRuntime.callValue(Render.ensurePreparedScene__sceneRender, cast ([state] : Array<Dynamic>));
@@ -705,7 +702,7 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function pushRenderQueueEntry(queue:RenderQueue, proxy:RenderProxy, sortKey:RenderSortKey):Void {
+  public static function pushRenderQueueEntry(queue:RenderQueue, proxy:RenderProxy, sortKey:RenderSortKey):Void {
     var entry:Dynamic = cast FlightRuntime.UNDEFINED;
     entry = { proxy: proxy, sortKey: sortKey };
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(queue, 'entryCount'), FlightRuntime.field(FlightRuntime.field(queue, 'entries'), 'length'), '<'))) {
@@ -716,7 +713,7 @@ class Render {
     FlightRuntime.incrementField(queue, 'entryCount', 1, true);
   }
 
-  @:keep public static function recalculateAppearance__renderAppearance(state:RenderState, data:RenderProxy, ?parentData:RenderProxy):Void {
+  public static function recalculateAppearance__renderAppearance(state:RenderState, data:RenderProxy, ?parentData:RenderProxy):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     source = (cast (cast FlightRuntime.field(data, 'source') : Dynamic) : Dynamic);
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(parentData, FlightRuntime.UNDEFINED))) {
@@ -735,7 +732,7 @@ class Render {
     FlightRuntime.setField(data, 'appearanceFrameId', FlightRuntime.field(FlightRuntime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentFrameId'));
   }
 
-  @:keep public static function recalculateRenderTransform2D__renderTransform2d(state:RenderState, data:RenderProxy2D, ?parentData:RenderProxy2D):Void {
+  public static function recalculateRenderTransform2D__renderTransform2d(state:RenderState, data:RenderProxy2D, ?parentData:RenderProxy2D):Void {
     var transform2D:Dynamic = cast FlightRuntime.UNDEFINED;
     var parentTransform2D:Dynamic = cast FlightRuntime.UNDEFINED;
     transform2D = FlightRuntime.callValue(getNodeLocalMatrix, cast ([(cast FlightRuntime.field(data, 'source') : Dynamic)] : Array<Dynamic>));
@@ -748,11 +745,11 @@ class Render {
     FlightRuntime.setField(data, 'transformFrameId', FlightRuntime.field(FlightRuntime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentFrameId'));
   }
 
-  @:keep public static function registerRenderCacheRenderer(state:RenderState, renderer:Renderer):Void {
+  public static function registerRenderCacheRenderer(state:RenderState, renderer:Renderer):Void {
     FlightRuntime.callValue(registerRenderer, cast ([state, Types.RenderCacheKindValue, renderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerRenderer(state:RenderState, kind:Kind, renderer:Renderer):Void {
+  public static function registerRenderer(state:RenderState, kind:Kind, renderer:Renderer):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime.field(runtime, 'rendererMap'), 'get', cast ([kind] : Array<Dynamic>)), renderer))) { return; }
@@ -766,7 +763,7 @@ class Render {
 
   public static final scratchProjection__sceneRender:Dynamic = FlightRuntime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 
-  @:keep public static function setRenderProxyAdapter(state:RenderState, source:Renderable, adapter:Null<RenderProxyAdapter>):Void {
+  public static function setRenderProxyAdapter(state:RenderState, source:Renderable, adapter:Null<RenderProxyAdapter>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderAdaptHook'), applyRenderProxyAdapter))) {
   FlightRuntime.callValue(installRenderAdaptHook, cast ([state, applyRenderProxyAdapter] : Array<Dynamic>));
@@ -780,7 +777,7 @@ class Render {
     FlightRuntime.callValue(invalidateNodeAppearance, cast ([(cast source : Node<Dynamic>)] : Array<Dynamic>));
   }
 
-  @:keep public static function setRenderStateBackgroundColor(state:RenderState, color:Float):Void {
+  public static function setRenderStateBackgroundColor(state:RenderState, color:Float):Void {
     var _state:Dynamic = cast FlightRuntime.UNDEFINED;
     var uint:Dynamic = cast FlightRuntime.UNDEFINED;
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -801,7 +798,7 @@ class Render {
     FlightRuntime.setField(_state, 'backgroundColorString', ('#' + FlightRuntime.callProperty(FlightRuntime.padStart(FlightRuntime.numberToString(uint, 16.0), 8.0, '0'), 'toUpperCase', cast ([] : Array<Dynamic>))));
   }
 
-  @:keep public static function setSceneViewProjectionMatrix4__sceneRender(out:Matrix4, camera:Camera, aspect:Float):Void {
+  public static function setSceneViewProjectionMatrix4__sceneRender(out:Matrix4, camera:Camera, aspect:Float):Void {
     var projection:Dynamic = cast FlightRuntime.UNDEFINED;
     projection = FlightRuntime.field(camera, 'projection');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(projection, 'kind'), 'perspective'))) {
@@ -812,7 +809,7 @@ class Render {
     FlightRuntime.callValue(multiplyMatrix4, cast ([out, Render.scratchProjection__sceneRender, FlightRuntime.field(camera, 'view')] : Array<Dynamic>));
   }
 
-  @:keep public static function sortRenderQueue(queue:RenderQueue, ?compare:Dynamic):Void {
+  public static function sortRenderQueue(queue:RenderQueue, ?compare:Dynamic):Void {
     var slice:Dynamic = cast FlightRuntime.UNDEFINED;
     slice = FlightRuntime.slice(FlightRuntime.field(queue, 'entries'), 0.0, FlightRuntime.field(queue, 'entryCount'));
     FlightRuntime.callProperty(slice, 'sort', cast ([FlightRuntime.coalesce(compare, function():Dynamic return cast Render.compareRenderQueueEntriesByKey__renderQueue)] : Array<Dynamic>));
@@ -825,13 +822,13 @@ class Render {
     }
   }
 
-  @:keep public static function updateNodeClip(_state:RenderState, source:Renderable, data:RenderProxy2D, parentData:Null<RenderProxy2D>):Void {
+  public static function updateNodeClip(_state:RenderState, source:Renderable, data:RenderProxy2D, parentData:Null<RenderProxy2D>):Void {
     var parentDepth:Dynamic = cast FlightRuntime.UNDEFINED;
     parentDepth = FlightRuntime.select(!FlightRuntime.strictEquals(parentData, FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.field(parentData, 'clipDepth'), function():Dynamic return cast 0.0);
     FlightRuntime.setField(data, 'clipDepth', (parentDepth + FlightRuntime.select(!FlightRuntime.looseEquals(FlightRuntime.field((cast source : DisplayObject), 'clip'), null), function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)));
   }
 
-  @:keep public static function updateRenderProxy2D(state:RenderState, source:Renderable, data:RenderProxy2D, parentData:Null<RenderProxy2D>):Void {
+  public static function updateRenderProxy2D(state:RenderState, source:Renderable, data:RenderProxy2D, parentData:Null<RenderProxy2D>):Void {
     FlightRuntime.callValue(updateRenderProxyAppearance, cast ([state, data, parentData] : Array<Dynamic>));
     FlightRuntime.callValue(updateRenderProxy2DTransform, cast ([state, data, parentData] : Array<Dynamic>));
     FlightRuntime.callValue(updateRenderProxyMaterial, cast ([state, data, parentData] : Array<Dynamic>));
@@ -841,7 +838,7 @@ class Render {
     FlightRuntime.callOptionalProperty(FlightRuntime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderAdaptHook', cast ([state, source, data] : Array<Dynamic>));
   }
 
-  @:keep public static function updateRenderProxy2DTransform(state:RenderState, data:RenderProxy2D, ?parentData:RenderProxy2D):Bool {
+  public static function updateRenderProxy2DTransform(state:RenderState, data:RenderProxy2D, ?parentData:RenderProxy2D):Bool {
     var localTransformId:Dynamic = cast FlightRuntime.UNDEFINED;
     var parentDirty:Dynamic = cast FlightRuntime.UNDEFINED;
     var localDirty:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -857,7 +854,7 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function updateRenderProxyAppearance(state:RenderState, data:RenderProxy, ?parentData:RenderProxy):Bool {
+  public static function updateRenderProxyAppearance(state:RenderState, data:RenderProxy, ?parentData:RenderProxy):Bool {
     var appearanceId:Dynamic = cast FlightRuntime.UNDEFINED;
     appearanceId = FlightRuntime.callValue(getNodeAppearanceRevision, cast ([(cast FlightRuntime.field(data, 'source') : Node<Dynamic>)] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(parentData, FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(parentData, 'appearanceFrameId'), FlightRuntime.field(FlightRuntime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentFrameId'))), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(data, 'lastAppearanceId'), appearanceId)))) {
@@ -869,7 +866,7 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function updateRenderProxyColorTransform(state:RenderState, data:RenderProxy, ?_parentData:RenderProxy):Void {
+  public static function updateRenderProxyColorTransform(state:RenderState, data:RenderProxy, ?_parentData:RenderProxy):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getNodeRuntime, cast ([(cast FlightRuntime.field(data, 'source') : Node<Dynamic>)] : Array<Dynamic>));
     FlightRuntime.setField(data, 'colorTransform', FlightRuntime.coalesce(FlightRuntime.field(runtime, 'resolvedColorTransform'), function():Dynamic return cast null));
@@ -878,14 +875,14 @@ class Render {
 }
   }
 
-  @:keep public static function updateRenderProxyMaterial(state:RenderState, data:RenderProxy, ?_parentData:RenderProxy):Void {
+  public static function updateRenderProxyMaterial(state:RenderState, data:RenderProxy, ?_parentData:RenderProxy):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     source = (cast FlightRuntime.field(data, 'source') : Dynamic);
     FlightRuntime.setField(data, 'material', FlightRuntime.coalesce(FlightRuntime.field(source, 'material'), function():Dynamic return cast null));
     FlightRuntime.setField(data, 'materialData', FlightRuntime.coalesce(FlightRuntime.field(source, 'materialData'), function():Dynamic return cast null));
   }
 
-  @:keep public static function updateRenderProxyRenderer(state:RenderState, node:RenderProxy):Void {
+  public static function updateRenderProxyRenderer(state:RenderState, node:RenderProxy):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var renderer:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -899,7 +896,7 @@ class Render {
     FlightRuntime.setField(node, 'rendererMapId', FlightRuntime.field(runtime, 'rendererMapId'));
   }
 
-  @:keep public static function useRenderCache(state:RenderState, source:Renderable, cache:RenderCache):RenderCacheAdapter {
+  public static function useRenderCache(state:RenderState, source:Renderable, cache:RenderCache):RenderCacheAdapter {
     var existing:Dynamic = cast FlightRuntime.UNDEFINED;
     var adapter:Dynamic = cast FlightRuntime.UNDEFINED;
     existing = FlightRuntime.callValue(getRenderProxyAdapter, cast ([state, source] : Array<Dynamic>));
@@ -913,7 +910,7 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function walkNode(state:RenderState, root:Renderable, visit:RenderProxyVisitor):Bool {
+  public static function walkNode(state:RenderState, root:Renderable, visit:RenderProxyVisitor):Bool {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var tempStack:Dynamic = cast FlightRuntime.UNDEFINED;
     var stackLength:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -964,7 +961,7 @@ class Render {
     return cast null;
   }
 
-  @:keep public static function walkRenderSubtree__renderProxy(state:RenderState, root:Renderable, visit:Dynamic):Void {
+  public static function walkRenderSubtree__renderProxy(state:RenderState, root:Renderable, visit:Dynamic):Void {
     var tempStack:Dynamic = cast FlightRuntime.UNDEFINED;
     var stackLength:Dynamic = cast FlightRuntime.UNDEFINED;
     tempStack = FlightRuntime.field(FlightRuntime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'tempStack');
@@ -986,7 +983,7 @@ class Render {
 }
   }
 
-  @:keep public static function warnColorAdjustmentChannelMixingNotInlineable__enableColorAdjustmentGuards():Void {
+  public static function warnColorAdjustmentChannelMixingNotInlineable__enableColorAdjustmentGuards():Void {
     FlightRuntime.callValue(logOnce, cast (['render:color-adjustment-channel-mixing-not-inlineable', LogLevel.Warn, { message: 'updateRenderProxyColorTransform: per-object channel-mixing color adjustment (saturation/hue/sepia/channelMixer) is not inline-able yet — the 4×5 fold is deferred, so only the affine part of the stack was applied. Use an Effect pass for the channel-mixing op.' }, 'render'] : Array<Dynamic>));
   }
 }

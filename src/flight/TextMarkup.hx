@@ -17,19 +17,16 @@ import flight.Types.TextFormatAlign;
 import flight.Types.TextFormatListMarker;
 import flight.Types.TextFormatRange;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.TextMarkup")
 class TextMarkup {
-  @:keep public static function appendMarkupBreakBefore__textMarkup(content:RichTextContent):Void {
+  public static function appendMarkupBreakBefore__textMarkup(content:RichTextContent):Void {
     var text:Dynamic = cast FlightRuntime.UNDEFINED;
     text = FlightRuntime.field(content, 'text');
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.field(text, 'length'), 0.0), function():Dynamic return cast StringTools.endsWith(Std.string(text), '\n')))) { return; }
     FlightRuntime.callValue(TextMarkup.appendMarkupString__textMarkup, cast ([content, '\n', TextMarkup.emptyMarkupFormat__textMarkup] : Array<Dynamic>));
   }
 
-  @:keep public static function appendMarkupString__textMarkup(content:RichTextContent, value:String, format:TextFormat):Void {
+  public static function appendMarkupString__textMarkup(content:RichTextContent, value:String, format:TextFormat):Void {
     var start:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(value, 'length'), 0.0))) { return; }
     start = FlightRuntime.field(FlightRuntime.field(content, 'text'), 'length');
@@ -37,17 +34,17 @@ class TextMarkup {
     FlightRuntime.callValue(TextMarkup.pushMarkupRange__textMarkup, cast ([FlightRuntime.field(content, 'formatRanges'), format, start, FlightRuntime.field(FlightRuntime.field(content, 'text'), 'length')] : Array<Dynamic>));
   }
 
-  @:keep public static function appendMarkupText__textMarkup(content:RichTextContent, raw:String, format:TextFormat):Void {
+  public static function appendMarkupText__textMarkup(content:RichTextContent, raw:String, format:TextFormat):Void {
     FlightRuntime.callValue(TextMarkup.appendMarkupString__textMarkup, cast ([content, FlightRuntime.callValue(TextMarkup.decodeMarkupEntities__textMarkup, cast ([raw] : Array<Dynamic>)), format] : Array<Dynamic>));
   }
 
-  @:keep public static function codePointToString__textMarkup(code:Float, fallback:String):String {
+  public static function codePointToString__textMarkup(code:Float, fallback:String):String {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.orValue(!FlightRuntime.truthy(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([code] : Array<Dynamic>))), function():Dynamic return cast FlightRuntime.compare(code, 0.0, '<')), function():Dynamic return cast FlightRuntime.compare(code, 1114111.0, '>')))) { return cast fallback; }
     return cast FlightRuntime.fromCodePoint(code);
     return cast null;
   }
 
-  @:keep public static function createMarkupFontTagHandler__markupTagRegistry(registry:MarkupTagRegistry):MarkupTagHandler {
+  public static function createMarkupFontTagHandler__markupTagRegistry(registry:MarkupTagRegistry):MarkupTagHandler {
     return cast function(attributes:Dynamic) {
   var format:TextFormat = cast FlightRuntime.UNDEFINED;
   var color:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -72,7 +69,7 @@ class TextMarkup {
     return cast null;
   }
 
-  @:keep public static function createMarkupSpanTagHandler__markupTagRegistry(registry:MarkupTagRegistry):MarkupTagHandler {
+  public static function createMarkupSpanTagHandler__markupTagRegistry(registry:MarkupTagRegistry):MarkupTagHandler {
     return cast function(attributes:Dynamic) {
   var resolve:Null<MarkupClassResolver> = cast FlightRuntime.UNDEFINED;
   var classes:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -91,12 +88,12 @@ class TextMarkup {
     return cast null;
   }
 
-  @:keep public static function createMarkupTagRegistry():MarkupTagRegistry {
+  public static function createMarkupTagRegistry():MarkupTagRegistry {
     return cast { handlers: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };
     return cast null;
   }
 
-  @:keep public static function decodeMarkupEntities__textMarkup(value:String):String {
+  public static function decodeMarkupEntities__textMarkup(value:String):String {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(value, 'indexOf', cast (['&'] : Array<Dynamic>)), -1.0))) { return cast value; }
     return cast FlightRuntime.replace(value, FlightRuntime.regexp('&(#x[0-9a-f]+|#[0-9]+|[a-z]+);', 'gi'), function(matched:String, entity:String) {
   var lower:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -112,7 +109,7 @@ class TextMarkup {
 
   public static final emptyMarkupFormat__textMarkup:TextFormat = {  };
 
-  @:keep public static function equalsMarkupFormat__textMarkup(a:TextFormat, b:TextFormat):Bool {
+  public static function equalsMarkupFormat__textMarkup(a:TextFormat, b:TextFormat):Bool {
     var aKeys:Dynamic = cast FlightRuntime.UNDEFINED;
     var bKeys:Dynamic = cast FlightRuntime.UNDEFINED;
     aKeys = (cast FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([a] : Array<Dynamic>)) : Array<TextFormat>);
@@ -138,17 +135,17 @@ class TextMarkup {
     return cast null;
   }
 
-  @:keep public static function escapeMarkupAttribute__textMarkup(value:String):String {
+  public static function escapeMarkupAttribute__textMarkup(value:String):String {
     return cast FlightRuntime.replace(value, FlightRuntime.regexp('[&<>"]', 'g'), function(character:String) return FlightRuntime.getIndex(TextMarkup.markupAttributeEscapes__textMarkup, character), false);
     return cast null;
   }
 
-  @:keep public static function escapeMarkupText__textMarkup(value:String):String {
+  public static function escapeMarkupText__textMarkup(value:String):String {
     return cast FlightRuntime.replace(value, FlightRuntime.regexp('[&<>]', 'g'), function(character:String) return FlightRuntime.getIndex(TextMarkup.markupTextEscapes__textMarkup, character), false);
     return cast null;
   }
 
-  @:keep public static function formatMarkupAnchorTag__textMarkup(format:TextFormat):String {
+  public static function formatMarkupAnchorTag__textMarkup(format:TextFormat):String {
     var tag:Dynamic = cast FlightRuntime.UNDEFINED;
     tag = '<a';
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(format, 'url'), FlightRuntime.UNDEFINED))) { (tag = cast ((tag + ' href="' + Std.string(FlightRuntime.callValue(TextMarkup.escapeMarkupAttribute__textMarkup, cast ([FlightRuntime.field(format, 'url')] : Array<Dynamic>))) + '"') : Dynamic)); }
@@ -157,12 +154,12 @@ class TextMarkup {
     return cast null;
   }
 
-  @:keep public static function formatMarkupColor__textMarkup(color:Float):String {
+  public static function formatMarkupColor__textMarkup(color:Float):String {
     return cast '#' + Std.string(FlightRuntime.padStart(FlightRuntime.numberToString((Std.int(FlightRuntime.unsignedShiftRight(Std.int(color), Std.int(0.0))) & Std.int(16777215.0)), 16.0), 6.0, '0')) + '';
     return cast null;
   }
 
-  @:keep public static function formatMarkupFontTag__textMarkup(format:TextFormat):Null<String> {
+  public static function formatMarkupFontTag__textMarkup(format:TextFormat):Null<String> {
     var hasColor:Dynamic = cast FlightRuntime.UNDEFINED;
     var hasSize:Dynamic = cast FlightRuntime.UNDEFINED;
     var hasFace:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -179,13 +176,13 @@ class TextMarkup {
     return cast null;
   }
 
-  @:keep public static function formatMarkupListTag__textMarkup(format:TextFormat):String {
+  public static function formatMarkupListTag__textMarkup(format:TextFormat):String {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(format, 'listMarker'), FlightRuntime.UNDEFINED))) { return cast '<li type="' + Std.string(FlightRuntime.field(format, 'listMarker')) + '">'; }
     return cast '<li>';
     return cast null;
   }
 
-  @:keep public static function formatMarkupRun__textMarkup(format:TextFormat, text:String):String {
+  public static function formatMarkupRun__textMarkup(format:TextFormat, text:String):String {
     var open:Array<String> = cast FlightRuntime.UNDEFINED;
     var close:Array<String> = cast FlightRuntime.UNDEFINED;
     var textformat:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -234,7 +231,7 @@ class TextMarkup {
     return cast null;
   }
 
-  @:keep public static function formatMarkupTextformatTag__textMarkup(format:TextFormat):Null<String> {
+  public static function formatMarkupTextformatTag__textMarkup(format:TextFormat):Null<String> {
     var tag:Dynamic = cast FlightRuntime.UNDEFINED;
     var any:Dynamic = cast FlightRuntime.UNDEFINED;
     tag = '<textformat';
@@ -267,7 +264,7 @@ class TextMarkup {
     return cast null;
   }
 
-  @:keep public static function formatTextMarkup(content:RichTextContent):String {
+  public static function formatTextMarkup(content:RichTextContent):String {
     var text:Dynamic = cast FlightRuntime.UNDEFINED;
     var formats:Dynamic = cast FlightRuntime.UNDEFINED;
     var output:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -288,7 +285,7 @@ class TextMarkup {
     return cast null;
   }
 
-  @:keep public static function getDefaultMarkupTagRegistry__textMarkup():MarkupTagRegistry {
+  public static function getDefaultMarkupTagRegistry__textMarkup():MarkupTagRegistry {
     var registry:Dynamic = cast FlightRuntime.UNDEFINED;
     registry = TextMarkup.defaultMarkupTagRegistry__textMarkup;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(registry, null))) {
@@ -300,7 +297,7 @@ class TextMarkup {
     return cast null;
   }
 
-  @:keep public static function handleMarkupToken__textMarkup(content:RichTextContent, handlers:Dynamic, token:String, stack:Array<TextFormat>):Void {
+  public static function handleMarkupToken__textMarkup(content:RichTextContent, handlers:Dynamic, token:String, stack:Array<TextFormat>):Void {
     var inner:Dynamic = cast FlightRuntime.UNDEFINED;
     var closing:Dynamic = cast FlightRuntime.UNDEFINED;
     var selfClosing:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -341,7 +338,7 @@ class TextMarkup {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(selfClosing))) { FlightRuntime.callProperty(stack, 'push', cast ([merged] : Array<Dynamic>)); }
   }
 
-  @:keep public static function isMarkupAlign__markupTagRegistry(value:String):Bool {
+  public static function isMarkupAlign__markupTagRegistry(value:String):Bool {
     {
       var __switchValue = FlightRuntime.callProperty(value, 'toLowerCase', cast ([] : Array<Dynamic>));
       if (__switchValue == 'center' || __switchValue == 'end' || __switchValue == 'justify' || __switchValue == 'left' || __switchValue == 'right' || __switchValue == 'start') {
@@ -354,7 +351,7 @@ class TextMarkup {
     return cast null;
   }
 
-  @:keep public static function isMarkupListMarker__markupTagRegistry(value:String):Bool {
+  public static function isMarkupListMarker__markupTagRegistry(value:String):Bool {
     {
       var __switchValue = FlightRuntime.callProperty(value, 'toLowerCase', cast ([] : Array<Dynamic>));
       if (__switchValue == 'circle' || __switchValue == 'decimal' || __switchValue == 'disc' || __switchValue == 'none' || __switchValue == 'square') {
@@ -367,7 +364,7 @@ class TextMarkup {
     return cast null;
   }
 
-  @:keep public static function markupAnchorTagHandler__markupTagRegistry(attributes:Dynamic):Dynamic {
+  public static function markupAnchorTagHandler__markupTagRegistry(attributes:Dynamic):Dynamic {
     var format:TextFormat = cast FlightRuntime.UNDEFINED;
     format = {  };
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(attributes, 'href'), FlightRuntime.UNDEFINED))) { FlightRuntime.setField(format, 'url', FlightRuntime.field(attributes, 'href')); }
@@ -378,22 +375,22 @@ class TextMarkup {
 
   public static final markupAttributeEscapes__textMarkup:Dynamic = FlightRuntime.objectFromPairs([{ key: '"', value: '&quot;' }, { key: '&', value: '&amp;' }, { key: '<', value: '&lt;' }, { key: '>', value: '&gt;' }]);
 
-  @:keep public static function markupBoldTagHandler__markupTagRegistry():Dynamic {
+  public static function markupBoldTagHandler__markupTagRegistry():Dynamic {
     return cast { bold: true };
     return cast null;
   }
 
-  @:keep public static function markupBreakTagHandler__markupTagRegistry():{ var text:String; } {
+  public static function markupBreakTagHandler__markupTagRegistry():{ var text:String; } {
     return cast { text: '\n' };
     return cast null;
   }
 
-  @:keep public static function markupItalicTagHandler__markupTagRegistry():Dynamic {
+  public static function markupItalicTagHandler__markupTagRegistry():Dynamic {
     return cast { italic: true };
     return cast null;
   }
 
-  @:keep public static function markupListItemTagHandler__markupTagRegistry(attributes:Dynamic):{ var breakBefore:Bool; var format:Dynamic; } {
+  public static function markupListItemTagHandler__markupTagRegistry(attributes:Dynamic):{ var breakBefore:Bool; var format:Dynamic; } {
     var format:TextFormat = cast FlightRuntime.UNDEFINED;
     var marker:Dynamic = cast FlightRuntime.UNDEFINED;
     format = { bullet: true };
@@ -407,7 +404,7 @@ class TextMarkup {
 
   public static final markupNamedEntities__textMarkup:Dynamic = { amp: '&', apos: '\'', gt: '>', lt: '<', quot: '"' };
 
-  @:keep public static function markupParagraphTagHandler__markupTagRegistry(attributes:Dynamic):{ var breakBefore:Bool; var format:Dynamic; } {
+  public static function markupParagraphTagHandler__markupTagRegistry(attributes:Dynamic):{ var breakBefore:Bool; var format:Dynamic; } {
     var format:TextFormat = cast FlightRuntime.UNDEFINED;
     var align:Dynamic = cast FlightRuntime.UNDEFINED;
     format = {  };
@@ -417,14 +414,14 @@ class TextMarkup {
     return cast null;
   }
 
-  @:keep public static function markupStrikethroughTagHandler__markupTagRegistry():Dynamic {
+  public static function markupStrikethroughTagHandler__markupTagRegistry():Dynamic {
     return cast { strikethrough: true };
     return cast null;
   }
 
   public static final markupTextEscapes__textMarkup:Dynamic = FlightRuntime.objectFromPairs([{ key: '&', value: '&amp;' }, { key: '<', value: '&lt;' }, { key: '>', value: '&gt;' }]);
 
-  @:keep public static function markupTextformatTagHandler__markupTagRegistry(attributes:Dynamic):Dynamic {
+  public static function markupTextformatTagHandler__markupTagRegistry(attributes:Dynamic):Dynamic {
     var format:TextFormat = cast FlightRuntime.UNDEFINED;
     var blockIndent:Dynamic = cast FlightRuntime.UNDEFINED;
     var indent:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -449,18 +446,18 @@ class TextMarkup {
     return cast null;
   }
 
-  @:keep public static function markupUnderlineTagHandler__markupTagRegistry():Dynamic {
+  public static function markupUnderlineTagHandler__markupTagRegistry():Dynamic {
     return cast { underline: true };
     return cast null;
   }
 
-  @:keep public static function normalizeMarkupTagResult__textMarkup(result:MarkupTagResult):MarkupTagEffect {
+  public static function normalizeMarkupTagResult__textMarkup(result:MarkupTagResult):MarkupTagEffect {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.hasField(result, 'format'), function():Dynamic return cast FlightRuntime.hasField(result, 'breakBefore')), function():Dynamic return cast FlightRuntime.hasField(result, 'text')))) { return cast (cast result : MarkupTagEffect); }
     return cast { format: (cast result : Dynamic) };
     return cast null;
   }
 
-  @:keep public static function parseMarkupAttributes__textMarkup(source:String):Dynamic {
+  public static function parseMarkupAttributes__textMarkup(source:String):Dynamic {
     var attributes:Dynamic = cast FlightRuntime.UNDEFINED;
     var pattern:Dynamic = cast FlightRuntime.UNDEFINED;
     var match:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
@@ -474,14 +471,14 @@ class TextMarkup {
     return cast null;
   }
 
-  @:keep public static function parseMarkupNumber__markupTagRegistry(value:String):Null<Float> {
+  public static function parseMarkupNumber__markupTagRegistry(value:String):Null<Float> {
     var parsed:Dynamic = cast FlightRuntime.UNDEFINED;
     parsed = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'parseFloat', cast ([value] : Array<Dynamic>));
     return cast FlightRuntime.select(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast parsed, function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function parseTextMarkup(html:String, ?registry:MarkupTagRegistry):RichTextContent {
+  public static function parseTextMarkup(html:String, ?registry:MarkupTagRegistry):RichTextContent {
     var handlers:Dynamic = cast FlightRuntime.UNDEFINED;
     var content:Dynamic = cast FlightRuntime.UNDEFINED;
     var stack:Array<TextFormat> = cast FlightRuntime.UNDEFINED;
@@ -503,7 +500,7 @@ class TextMarkup {
     return cast null;
   }
 
-  @:keep public static function pushMarkupRange__textMarkup(ranges:Array<TextFormatRange>, format:TextFormat, start:Float, end:Float):Void {
+  public static function pushMarkupRange__textMarkup(ranges:Array<TextFormatRange>, format:TextFormat, start:Float, end:Float):Void {
     var previous:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(start, end))) { return; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([format] : Array<Dynamic>)), 'length'), 0.0))) { return; }
@@ -515,14 +512,14 @@ class TextMarkup {
     FlightRuntime.callProperty(ranges, 'push', cast ([FlightRuntime.callValue(createTextFormatRange, cast ([FlightRuntime.mergeObjects([format]), start, end] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function readMarkupNumberAttribute__markupTagRegistry(attributes:Dynamic, name:String):Null<Float> {
+  public static function readMarkupNumberAttribute__markupTagRegistry(attributes:Dynamic, name:String):Null<Float> {
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
     raw = FlightRuntime.getIndex(attributes, name);
     return cast FlightRuntime.select(FlightRuntime.strictEquals(raw, FlightRuntime.UNDEFINED), function():Dynamic return cast null, function():Dynamic return cast FlightRuntime.callValue(TextMarkup.parseMarkupNumber__markupTagRegistry, cast ([raw] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function readMarkupTabStopsAttribute__markupTagRegistry(attributes:Dynamic, name:String):Null<Array<Float>> {
+  public static function readMarkupTabStopsAttribute__markupTagRegistry(attributes:Dynamic, name:String):Null<Array<Float>> {
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
     var stops:Array<Float> = cast FlightRuntime.UNDEFINED;
     raw = FlightRuntime.getIndex(attributes, name);
@@ -536,21 +533,21 @@ class TextMarkup {
     return cast null;
   }
 
-  @:keep public static function registerMarkupClassStyles(registry:MarkupTagRegistry, styles:Dynamic):Void {
+  public static function registerMarkupClassStyles(registry:MarkupTagRegistry, styles:Dynamic):Void {
     var resolver:MarkupClassResolver = cast FlightRuntime.UNDEFINED;
     resolver = function(className:String) return FlightRuntime.coalesce(FlightRuntime.getIndex(styles, className), function():Dynamic return cast null);
     FlightRuntime.setField(registry, 'classResolver', resolver);
   }
 
-  @:keep public static function registerMarkupNamedColors(registry:MarkupTagRegistry):Void {
+  public static function registerMarkupNamedColors(registry:MarkupTagRegistry):Void {
     FlightRuntime.setField(registry, 'colorResolver', TextMarkup.resolveMarkupNamedColor__markupNamedColors);
   }
 
-  @:keep public static function registerMarkupTag(registry:MarkupTagRegistry, name:String, handler:MarkupTagHandler):Void {
+  public static function registerMarkupTag(registry:MarkupTagRegistry, name:String, handler:MarkupTagHandler):Void {
     FlightRuntime.callProperty(FlightRuntime.field(registry, 'handlers'), 'set', cast ([FlightRuntime.callProperty(name, 'toLowerCase', cast ([] : Array<Dynamic>)), handler] : Array<Dynamic>));
   }
 
-  @:keep public static function registerStandardMarkupTags(registry:MarkupTagRegistry):Void {
+  public static function registerStandardMarkupTags(registry:MarkupTagRegistry):Void {
     FlightRuntime.setField(registry, 'colorResolver', resolveMarkupHexColor);
     FlightRuntime.callValue(registerMarkupTag, cast ([registry, 'a', TextMarkup.markupAnchorTagHandler__markupTagRegistry] : Array<Dynamic>));
     FlightRuntime.callValue(registerMarkupTag, cast ([registry, 'b', TextMarkup.markupBoldTagHandler__markupTagRegistry] : Array<Dynamic>));
@@ -568,7 +565,7 @@ class TextMarkup {
     FlightRuntime.callValue(registerMarkupTag, cast ([registry, 'u', TextMarkup.markupUnderlineTagHandler__markupTagRegistry] : Array<Dynamic>));
   }
 
-  @:keep public static function resolveMarkupFormats__textMarkup(content:RichTextContent):Array<TextFormat> {
+  public static function resolveMarkupFormats__textMarkup(content:RichTextContent):Array<TextFormat> {
     var length:Dynamic = cast FlightRuntime.UNDEFINED;
     var formats:Array<TextFormat> = cast FlightRuntime.UNDEFINED;
     length = FlightRuntime.field(FlightRuntime.field(content, 'text'), 'length');
@@ -595,7 +592,7 @@ class TextMarkup {
     return cast null;
   }
 
-  @:keep public static function resolveMarkupHexColor(value:String):Null<Float> {
+  public static function resolveMarkupHexColor(value:String):Null<Float> {
     var color:Dynamic = cast FlightRuntime.UNDEFINED;
     color = FlightRuntime.callProperty(StringTools.trim(Std.string(value)), 'toLowerCase', cast ([] : Array<Dynamic>));
     if (FlightRuntime.truthy(StringTools.startsWith(color, '#'))) {
@@ -615,7 +612,7 @@ class TextMarkup {
     return cast null;
   }
 
-  @:keep public static function resolveMarkupNamedColor__markupNamedColors(value:String):Null<Float> {
+  public static function resolveMarkupNamedColor__markupNamedColors(value:String):Null<Float> {
     var hex:Dynamic = cast FlightRuntime.UNDEFINED;
     var named:Dynamic = cast FlightRuntime.UNDEFINED;
     hex = FlightRuntime.callValue(resolveMarkupHexColor, cast ([value] : Array<Dynamic>));

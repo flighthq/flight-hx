@@ -28,12 +28,9 @@ typedef BitmapFontPageRecord = { var file:String; var id:Float; };
 
 typedef BitmapFontRecord = { var base:Float; var chars:Array<BitmapFontCharRecord>; var encoding:BitmapFontEncoding; var kernings:Array<BitmapFontKerningRecord>; var lineHeight:Float; var pages:Array<BitmapFontPageRecord>; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.BitmapFontFormats")
 class BitmapFontFormats {
-  @:keep public static function buildBitmapFontFromRecord(record:BitmapFontRecord, ?options:BitmapFontParseOptions):Null<BitmapFont> {
+  public static function buildBitmapFontFromRecord(record:BitmapFontRecord, ?options:BitmapFontParseOptions):Null<BitmapFont> {
     var resolvePage:Dynamic = cast FlightRuntime.UNDEFINED;
     var resolved:Dynamic = cast FlightRuntime.UNDEFINED;
     var maxPageId:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -73,7 +70,7 @@ class BitmapFontFormats {
     return cast null;
   }
 
-  @:keep public static function formatBitmapFontFnt(font:BitmapFont):String {
+  public static function formatBitmapFontFnt(font:BitmapFont):String {
     var metrics:Dynamic = cast FlightRuntime.UNDEFINED;
     var lineHeight:Dynamic = cast FlightRuntime.UNDEFINED;
     var base:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -119,12 +116,12 @@ class BitmapFontFormats {
     return cast null;
   }
 
-  @:keep public static function isObject__bitmapFontJson(value:Dynamic):Bool {
+  public static function isObject__bitmapFontJson(value:Dynamic):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.typeofValue(value), 'object'), function():Dynamic return cast !FlightRuntime.strictEquals(value, null)), function():Dynamic return cast !FlightRuntime.truthy(FlightRuntime.isArray(value)));
     return cast null;
   }
 
-  @:keep public static function parseBitmapFontFnt(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
+  public static function parseBitmapFontFnt(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
     var record:Dynamic = cast FlightRuntime.UNDEFINED;
     record = FlightRuntime.callValue(BitmapFontFormats.parseBitmapFontFntRecord__bitmapFontFnt, cast ([text] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(record, null))) { return cast null; }
@@ -132,7 +129,7 @@ class BitmapFontFormats {
     return cast null;
   }
 
-  @:keep public static function parseBitmapFontFntRecord__bitmapFontFnt(text:String):Null<BitmapFontRecord> {
+  public static function parseBitmapFontFntRecord__bitmapFontFnt(text:String):Null<BitmapFontRecord> {
     var lineHeight:Null<Float> = cast FlightRuntime.UNDEFINED;
     var base:Null<Float> = cast FlightRuntime.UNDEFINED;
     var pages:Array<BitmapFontPageRecord> = cast FlightRuntime.UNDEFINED;
@@ -168,7 +165,7 @@ class BitmapFontFormats {
     return cast null;
   }
 
-  @:keep public static function parseBitmapFontJson(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
+  public static function parseBitmapFontJson(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
     var record:Dynamic = cast FlightRuntime.UNDEFINED;
     record = FlightRuntime.callValue(BitmapFontFormats.parseBitmapFontJsonRecord__bitmapFontJson, cast ([text] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(record, null))) { return cast null; }
@@ -176,7 +173,7 @@ class BitmapFontFormats {
     return cast null;
   }
 
-  @:keep public static function parseBitmapFontJsonRecord__bitmapFontJson(text:String):Null<BitmapFontRecord> {
+  public static function parseBitmapFontJsonRecord__bitmapFontJson(text:String):Null<BitmapFontRecord> {
     var root:Dynamic = cast FlightRuntime.UNDEFINED;
     var common:Dynamic = cast FlightRuntime.UNDEFINED;
     var lineHeight:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -226,7 +223,7 @@ class BitmapFontFormats {
     return cast null;
   }
 
-  @:keep public static function parseBitmapFontXml(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
+  public static function parseBitmapFontXml(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
     var record:Dynamic = cast FlightRuntime.UNDEFINED;
     record = FlightRuntime.callValue(BitmapFontFormats.parseBitmapFontXmlRecord__bitmapFontXml, cast ([text] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(record, null))) { return cast null; }
@@ -234,7 +231,7 @@ class BitmapFontFormats {
     return cast null;
   }
 
-  @:keep public static function parseBitmapFontXmlRecord__bitmapFontXml(text:String):Null<BitmapFontRecord> {
+  public static function parseBitmapFontXmlRecord__bitmapFontXml(text:String):Null<BitmapFontRecord> {
     var root:Dynamic = cast FlightRuntime.UNDEFINED;
     var common:Dynamic = cast FlightRuntime.UNDEFINED;
     var lineHeight:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -281,7 +278,7 @@ class BitmapFontFormats {
     return cast null;
   }
 
-  @:keep public static function parseFntFields__bitmapFontFnt(rest:String):Dynamic {
+  public static function parseFntFields__bitmapFontFnt(rest:String):Dynamic {
     var fields:Dynamic = cast FlightRuntime.UNDEFINED;
     var re:Dynamic = cast FlightRuntime.UNDEFINED;
     var match:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
@@ -294,7 +291,7 @@ class BitmapFontFormats {
     return cast null;
   }
 
-  @:keep public static function readFntChar__bitmapFontFnt(fields:Dynamic):Null<BitmapFontCharRecord> {
+  public static function readFntChar__bitmapFontFnt(fields:Dynamic):Null<BitmapFontCharRecord> {
     var id:Dynamic = cast FlightRuntime.UNDEFINED;
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -318,7 +315,7 @@ class BitmapFontFormats {
     return cast null;
   }
 
-  @:keep public static function readFntKerning__bitmapFontFnt(fields:Dynamic):Null<BitmapFontKerningRecord> {
+  public static function readFntKerning__bitmapFontFnt(fields:Dynamic):Null<BitmapFontKerningRecord> {
     var first:Dynamic = cast FlightRuntime.UNDEFINED;
     var second:Dynamic = cast FlightRuntime.UNDEFINED;
     var amount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -330,7 +327,7 @@ class BitmapFontFormats {
     return cast null;
   }
 
-  @:keep public static function readFntNumber__bitmapFontFnt(value:Null<String>):Null<Float> {
+  public static function readFntNumber__bitmapFontFnt(value:Null<String>):Null<Float> {
     var parsed:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(value, FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.strictEquals(StringTools.trim(Std.string(value)), '')))) { return cast null; }
     parsed = FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), cast ([value] : Array<Dynamic>));
@@ -338,7 +335,7 @@ class BitmapFontFormats {
     return cast null;
   }
 
-  @:keep public static function readJsonChar__bitmapFontJson(raw:Dynamic):Null<BitmapFontCharRecord> {
+  public static function readJsonChar__bitmapFontJson(raw:Dynamic):Null<BitmapFontCharRecord> {
     var id:Dynamic = cast FlightRuntime.UNDEFINED;
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -363,7 +360,7 @@ class BitmapFontFormats {
     return cast null;
   }
 
-  @:keep public static function readJsonEncoding__bitmapFontJson(distanceField:Dynamic):BitmapFontEncoding {
+  public static function readJsonEncoding__bitmapFontJson(distanceField:Dynamic):BitmapFontEncoding {
     if (FlightRuntime.truthy(FlightRuntime.callValue(BitmapFontFormats.isObject__bitmapFontJson, cast ([distanceField] : Array<Dynamic>)))) {
   var fieldType:Dynamic = FlightRuntime.field(distanceField, 'fieldType');
   if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(fieldType, 'msdf'), function():Dynamic return cast FlightRuntime.strictEquals(fieldType, 'sdf')))) { return cast fieldType; }
@@ -372,7 +369,7 @@ class BitmapFontFormats {
     return cast null;
   }
 
-  @:keep public static function readJsonKerning__bitmapFontJson(raw:Dynamic):Null<BitmapFontKerningRecord> {
+  public static function readJsonKerning__bitmapFontJson(raw:Dynamic):Null<BitmapFontKerningRecord> {
     var first:Dynamic = cast FlightRuntime.UNDEFINED;
     var second:Dynamic = cast FlightRuntime.UNDEFINED;
     var amount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -385,12 +382,12 @@ class BitmapFontFormats {
     return cast null;
   }
 
-  @:keep public static function readJsonNumber__bitmapFontJson(value:Dynamic):Null<Float> {
+  public static function readJsonNumber__bitmapFontJson(value:Dynamic):Null<Float> {
     return cast FlightRuntime.select(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.typeofValue(value), 'number'), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([value] : Array<Dynamic>))), function():Dynamic return cast value, function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function readXmlChar__bitmapFontXml(element:XmlElement):Null<BitmapFontCharRecord> {
+  public static function readXmlChar__bitmapFontXml(element:XmlElement):Null<BitmapFontCharRecord> {
     var id:Dynamic = cast FlightRuntime.UNDEFINED;
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -414,7 +411,7 @@ class BitmapFontFormats {
     return cast null;
   }
 
-  @:keep public static function readXmlKerning__bitmapFontXml(element:XmlElement):Null<BitmapFontKerningRecord> {
+  public static function readXmlKerning__bitmapFontXml(element:XmlElement):Null<BitmapFontKerningRecord> {
     var first:Dynamic = cast FlightRuntime.UNDEFINED;
     var second:Dynamic = cast FlightRuntime.UNDEFINED;
     var amount:Dynamic = cast FlightRuntime.UNDEFINED;

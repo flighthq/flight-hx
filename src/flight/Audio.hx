@@ -6,28 +6,25 @@ import flight.internal.FlightRuntime;
 import flight.Types.AudioResource;
 import flight.Types.AudioResourceUrl;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Audio")
 class Audio {
-  @:keep public static function canPlayAudioType(mimeType:String):Bool {
+  public static function canPlayAudioType(mimeType:String):Bool {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(mimeType, ''))) { return cast false; }
     return cast !FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Audio'] : Array<Dynamic>)), []), 'canPlayType', cast ([mimeType] : Array<Dynamic>)), '');
     return cast null;
   }
 
-  @:keep public static function cloneAudioResource(resource:AudioResource):AudioResource {
+  public static function cloneAudioResource(resource:AudioResource):AudioResource {
     return cast { buffer: FlightRuntime.field(resource, 'buffer') };
     return cast null;
   }
 
-  @:keep public static function createAudioResource(?buffer:Dynamic):AudioResource {
+  public static function createAudioResource(?buffer:Dynamic):AudioResource {
     return cast { buffer: FlightRuntime.coalesce(buffer, function():Dynamic return cast null) };
     return cast null;
   }
 
-  @:keep public static function createAudioResourceFromSamples(channels:Array<flight.internal.FlightFloat32Array>, sampleRate:Float):AudioResource {
+  public static function createAudioResourceFromSamples(channels:Array<flight.internal.FlightFloat32Array>, sampleRate:Float):AudioResource {
     var numberOfChannels:Dynamic = cast FlightRuntime.UNDEFINED;
     var length:Dynamic = cast FlightRuntime.UNDEFINED;
     var buffer:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -46,7 +43,7 @@ class Audio {
     return cast null;
   }
 
-  @:keep public static function detectAudioMimeType(data:Dynamic):Null<String> {
+  public static function detectAudioMimeType(data:Dynamic):Null<String> {
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     b = FlightRuntime.select(FlightRuntime.isInstanceOf(data, FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>))), function():Dynamic return cast data, function():Dynamic return cast FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [data]));
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(b, 'byteLength'), 4.0, '<'))) { return cast null; }
@@ -61,23 +58,23 @@ class Audio {
     return cast null;
   }
 
-  @:keep public static function disposeAudioResource(resource:AudioResource):Void {
+  public static function disposeAudioResource(resource:AudioResource):Void {
     FlightRuntime.setField(resource, 'buffer', null);
   }
 
-  @:keep public static function getAudioResourceByteSize(resource:AudioResource):Float {
+  public static function getAudioResourceByteSize(resource:AudioResource):Float {
     var buffer:Dynamic = cast FlightRuntime.UNDEFINED;
     buffer = FlightRuntime.field(resource, 'buffer');
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(buffer, null), function():Dynamic return cast ((FlightRuntime.field(buffer, 'numberOfChannels') * FlightRuntime.field(buffer, 'length')) * 4.0), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  @:keep public static function getAudioResourceChannelCount(resource:AudioResource):Float {
+  public static function getAudioResourceChannelCount(resource:AudioResource):Float {
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.field(resource, 'buffer'), null), function():Dynamic return cast FlightRuntime.field(FlightRuntime.field(resource, 'buffer'), 'numberOfChannels'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  @:keep public static function getAudioResourceChannelData(resource:AudioResource, channel:Float):Null<flight.internal.FlightFloat32Array> {
+  public static function getAudioResourceChannelData(resource:AudioResource, channel:Float):Null<flight.internal.FlightFloat32Array> {
     var buffer:Dynamic = cast FlightRuntime.UNDEFINED;
     buffer = FlightRuntime.field(resource, 'buffer');
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(buffer, null), function():Dynamic return cast FlightRuntime.compare(channel, 0.0, '<')), function():Dynamic return cast FlightRuntime.compare(channel, FlightRuntime.field(buffer, 'numberOfChannels'), '>=')))) { return cast null; }
@@ -85,22 +82,22 @@ class Audio {
     return cast null;
   }
 
-  @:keep public static function getAudioResourceDuration(resource:AudioResource):Float {
+  public static function getAudioResourceDuration(resource:AudioResource):Float {
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.field(resource, 'buffer'), null), function():Dynamic return cast FlightRuntime.field(FlightRuntime.field(resource, 'buffer'), 'duration'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  @:keep public static function getAudioResourceSampleRate(resource:AudioResource):Float {
+  public static function getAudioResourceSampleRate(resource:AudioResource):Float {
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.field(resource, 'buffer'), null), function():Dynamic return cast FlightRuntime.field(FlightRuntime.field(resource, 'buffer'), 'sampleRate'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  @:keep public static function hasAudioResourceBuffer(resource:AudioResource):Bool {
+  public static function hasAudioResourceBuffer(resource:AudioResource):Bool {
     return cast !FlightRuntime.strictEquals(FlightRuntime.field(resource, 'buffer'), null);
     return cast null;
   }
 
-  @:keep public static function inferAudioMimeType(url:String):Null<String> {
+  public static function inferAudioMimeType(url:String):Null<String> {
     var ext:Dynamic = cast FlightRuntime.UNDEFINED;
     ext = FlightRuntime.callOptionalProperty(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime.getIndex(FlightRuntime.callProperty(url, 'split', cast (['?'] : Array<Dynamic>)), 0.0), 'split', cast (['.'] : Array<Dynamic>)), 'pop', cast ([] : Array<Dynamic>)), 'toLowerCase', cast ([] : Array<Dynamic>));
     {
@@ -133,77 +130,72 @@ class Audio {
     return cast null;
   }
 
-  @:keep public static function isAudioResourceEmpty(resource:AudioResource):Bool {
+  public static function isAudioResourceEmpty(resource:AudioResource):Bool {
     return cast FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.field(resource, 'buffer'), null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(resource, 'buffer'), 'length'), 0.0));
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadAudioResourceFromBase64(context:Dynamic, base64:String, mimeType:String, ?signal:Dynamic):flight.internal.FlightPromise<AudioResource> {
-    var binary:Dynamic = cast FlightRuntime.UNDEFINED;
-    var bytes:Dynamic = cast FlightRuntime.UNDEFINED;
-    binary = FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['atob'] : Array<Dynamic>)), cast ([base64] : Array<Dynamic>));
-    bytes = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [FlightRuntime.field(binary, 'length')]);
-    {
-      var i:Dynamic = 0.0;
-      while (FlightRuntime.truthy(FlightRuntime.compare(i, FlightRuntime.field(binary, 'length'), '<'))) {
-        FlightRuntime.setIndex(bytes, i, FlightRuntime.charCodeAt(binary, i));
-        i++;
+  public static function loadAudioResourceFromBase64(context:Dynamic, base64:String, mimeType:String, ?signal:Dynamic):flight.internal.FlightPromise<AudioResource> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<AudioResource> {
+      var binary:Dynamic = cast FlightRuntime.UNDEFINED;
+      var bytes:Dynamic = cast FlightRuntime.UNDEFINED;
+      binary = FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['atob'] : Array<Dynamic>)), cast ([base64] : Array<Dynamic>));
+      bytes = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [FlightRuntime.field(binary, 'length')]);
+      {
+        var i:Dynamic = 0.0;
+        while (FlightRuntime.truthy(FlightRuntime.compare(i, FlightRuntime.field(binary, 'length'), '<'))) {
+          FlightRuntime.setIndex(bytes, i, FlightRuntime.charCodeAt(binary, i));
+          i++;
+        }
       }
-    }
-    return cast FlightRuntime.callValue(loadAudioResourceFromBytes, cast ([context, bytes, mimeType, signal] : Array<Dynamic>));
-    return cast null;
+      return cast FlightRuntime.callValue(loadAudioResourceFromBytes, cast ([context, bytes, mimeType, signal] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadAudioResourceFromBlob(context:Dynamic, blob:Dynamic, ?signal:Dynamic):flight.internal.FlightPromise<AudioResource> {
-    var arrayBuffer:Dynamic = cast FlightRuntime.UNDEFINED;
-    arrayBuffer = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(blob, 'arrayBuffer', cast ([] : Array<Dynamic>)));
-    return cast FlightRuntime.callValue(loadAudioResourceFromBytes, cast ([context, FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [arrayBuffer]), FlightRuntime.orValue(FlightRuntime.field(blob, 'type'), function():Dynamic return cast FlightRuntime.UNDEFINED), signal] : Array<Dynamic>));
-    return cast null;
+  public static function loadAudioResourceFromBlob(context:Dynamic, blob:Dynamic, ?signal:Dynamic):flight.internal.FlightPromise<AudioResource> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<AudioResource> {
+      var arrayBuffer:Dynamic = cast FlightRuntime.UNDEFINED;
+      arrayBuffer = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(blob, 'arrayBuffer', cast ([] : Array<Dynamic>)));
+      return cast FlightRuntime.callValue(loadAudioResourceFromBytes, cast ([context, FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [arrayBuffer]), FlightRuntime.orValue(FlightRuntime.field(blob, 'type'), function():Dynamic return cast FlightRuntime.UNDEFINED), signal] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadAudioResourceFromBytes(context:Dynamic, bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flight.internal.FlightPromise<AudioResource> {
-    var buffer:Dynamic = cast FlightRuntime.UNDEFINED;
-    var audioBuffer:Dynamic = cast FlightRuntime.UNDEFINED;
-    FlightRuntime.callOptionalProperty(signal, 'throwIfAborted', cast ([] : Array<Dynamic>));
-    buffer = FlightRuntime.slice((cast FlightRuntime.field(bytes, 'buffer') : haxe.io.Bytes), FlightRuntime.field(bytes, 'byteOffset'), (FlightRuntime.field(bytes, 'byteOffset') + FlightRuntime.field(bytes, 'byteLength')));
-    audioBuffer = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(context, 'decodeAudioData', cast ([buffer] : Array<Dynamic>)));
-    return cast FlightRuntime.callValue(createAudioResource, cast ([audioBuffer] : Array<Dynamic>));
-    return cast null;
+  public static function loadAudioResourceFromBytes(context:Dynamic, bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flight.internal.FlightPromise<AudioResource> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<AudioResource> {
+      var buffer:Dynamic = cast FlightRuntime.UNDEFINED;
+      var audioBuffer:Dynamic = cast FlightRuntime.UNDEFINED;
+      FlightRuntime.callOptionalProperty(signal, 'throwIfAborted', cast ([] : Array<Dynamic>));
+      buffer = FlightRuntime.slice((cast FlightRuntime.field(bytes, 'buffer') : haxe.io.Bytes), FlightRuntime.field(bytes, 'byteOffset'), (FlightRuntime.field(bytes, 'byteOffset') + FlightRuntime.field(bytes, 'byteLength')));
+      audioBuffer = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(context, 'decodeAudioData', cast ([buffer] : Array<Dynamic>)));
+      return cast FlightRuntime.callValue(createAudioResource, cast ([audioBuffer] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadAudioResourceFromUrl(context:Dynamic, url:String, ?signal:Dynamic):flight.internal.FlightPromise<AudioResource> {
-    var response:Dynamic = cast FlightRuntime.UNDEFINED;
-    var arrayBuffer:Dynamic = cast FlightRuntime.UNDEFINED;
-    response = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['fetch'] : Array<Dynamic>)), cast ([url, { signal: signal }] : Array<Dynamic>)));
-    arrayBuffer = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(response, 'arrayBuffer', cast ([] : Array<Dynamic>)));
-    return cast FlightRuntime.callValue(loadAudioResourceFromBytes, cast ([context, FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [arrayBuffer]), FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.field(response, 'headers'), 'get', cast (['content-type'] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.UNDEFINED), signal] : Array<Dynamic>));
-    return cast null;
+  public static function loadAudioResourceFromUrl(context:Dynamic, url:String, ?signal:Dynamic):flight.internal.FlightPromise<AudioResource> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<AudioResource> {
+      var response:Dynamic = cast FlightRuntime.UNDEFINED;
+      var arrayBuffer:Dynamic = cast FlightRuntime.UNDEFINED;
+      response = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['fetch'] : Array<Dynamic>)), cast ([url, { signal: signal }] : Array<Dynamic>)));
+      arrayBuffer = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(response, 'arrayBuffer', cast ([] : Array<Dynamic>)));
+      return cast FlightRuntime.callValue(loadAudioResourceFromBytes, cast ([context, FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [arrayBuffer]), FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.field(response, 'headers'), 'get', cast (['content-type'] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.UNDEFINED), signal] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadAudioResourceFromUrls(context:Dynamic, sources:Array<AudioResourceUrl>, ?signal:Dynamic):flight.internal.FlightPromise<AudioResource> {
-    var selected:Dynamic = cast FlightRuntime.UNDEFINED;
-    selected = FlightRuntime.callValue(selectAudioResourceUrl, cast ([sources] : Array<Dynamic>));
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(selected, null))) { return cast FlightRuntime.callValue(createAudioResource, cast ([] : Array<Dynamic>)); }
-    return cast FlightRuntime.callValue(loadAudioResourceFromUrl, cast ([context, selected, signal] : Array<Dynamic>));
-    return cast null;
+  public static function loadAudioResourceFromUrls(context:Dynamic, sources:Array<AudioResourceUrl>, ?signal:Dynamic):flight.internal.FlightPromise<AudioResource> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<AudioResource> {
+      var selected:Dynamic = cast FlightRuntime.UNDEFINED;
+      selected = FlightRuntime.callValue(selectAudioResourceUrl, cast ([sources] : Array<Dynamic>));
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(selected, null))) { return cast FlightRuntime.callValue(createAudioResource, cast ([] : Array<Dynamic>)); }
+      return cast FlightRuntime.callValue(loadAudioResourceFromUrl, cast ([context, selected, signal] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  @:keep public static function selectAudioResourceUrl(sources:Array<AudioResourceUrl>):Null<String> {
+  public static function selectAudioResourceUrl(sources:Array<AudioResourceUrl>):Null<String> {
     for (source in FlightRuntime.iterable(sources)) {
       var type:Dynamic = FlightRuntime.coalesce(FlightRuntime.coalesce(FlightRuntime.field(source, 'type'), function():Dynamic return cast FlightRuntime.callValue(inferAudioMimeType, cast ([FlightRuntime.field(source, 'url')] : Array<Dynamic>))), function():Dynamic return cast '');
       if (FlightRuntime.truthy(FlightRuntime.callValue(canPlayAudioType, cast ([type] : Array<Dynamic>)))) { return cast FlightRuntime.field(source, 'url'); }

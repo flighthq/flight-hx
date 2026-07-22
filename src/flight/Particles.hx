@@ -32,14 +32,11 @@ import flight.Types.TurbulenceForce;
 import flight.Types.VortexForce;
 import flight.Types.WindForce;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Particles")
 class Particles {
   public static final accel__applyParticleForces:Array<Float> = cast ([0.0, 0.0, 0.0] : Array<Dynamic>);
 
-  @:keep public static function accumulateForces__applyParticleForces(forces:Array<ParticleForce>, px:Float, py:Float, pz:Float, vx:Float, vy:Float, vz:Float, out:Array<Float>):Void {
+  public static function accumulateForces__applyParticleForces(forces:Array<ParticleForce>, px:Float, py:Float, pz:Float, vx:Float, vy:Float, vz:Float, out:Array<Float>):Void {
     {
       var f:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(f, FlightRuntime.field(forces, 'length'), '<'))) {
@@ -107,7 +104,7 @@ class Particles {
     }
   }
 
-  @:keep public static function applyParticleCollisions(emitter:ParticleEmitter, state:ParticleEmitterState, colliders:Array<ParticleCollider>):Void {
+  public static function applyParticleCollisions(emitter:ParticleEmitter, state:ParticleEmitterState, colliders:Array<ParticleCollider>):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     var transforms:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -143,7 +140,7 @@ class Particles {
     }
   }
 
-  @:keep public static function applyParticleForces(emitter:ParticleEmitter, state:ParticleEmitterState, forces:Array<ParticleForce>, deltaTime:Float):Void {
+  public static function applyParticleForces(emitter:ParticleEmitter, state:ParticleEmitterState, forces:Array<ParticleForce>, deltaTime:Float):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     var transforms:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -173,7 +170,7 @@ class Particles {
     }
   }
 
-  @:keep public static function applyParticleObjectCollisions(objects:Array<ParticleObject>, state:ParticleObjectsState, colliders:Array<ParticleCollider>):Void {
+  public static function applyParticleObjectCollisions(objects:Array<ParticleObject>, state:ParticleObjectsState, colliders:Array<ParticleCollider>):Void {
     var velocities:Dynamic = cast FlightRuntime.UNDEFINED;
     var lifetimes:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(colliders, 'length'), 0.0))) { return; }
@@ -201,7 +198,7 @@ class Particles {
     }
   }
 
-  @:keep public static function applyParticleObjectForces(objects:Array<ParticleObject>, state:ParticleObjectsState, forces:Array<ParticleForce>, deltaTime:Float):Void {
+  public static function applyParticleObjectForces(objects:Array<ParticleObject>, state:ParticleObjectsState, forces:Array<ParticleForce>, deltaTime:Float):Void {
     var velocities:Dynamic = cast FlightRuntime.UNDEFINED;
     var lifetimes:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.compare(deltaTime, 0.0, '<='), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(forces, 'length'), 0.0)))) { return; }
@@ -223,7 +220,7 @@ class Particles {
     }
   }
 
-  @:keep public static function buildParticleColorCurve(f:Dynamic, samples:Dynamic = 33.0):Array<Float> {
+  public static function buildParticleColorCurve(f:Dynamic, samples:Dynamic = 33.0):Array<Float> {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var lut:Dynamic = cast FlightRuntime.UNDEFINED;
     n = FlightRuntime.callProperty(HxMath, 'max', cast ([2.0, (Std.int(samples) | Std.int(0.0))] : Array<Dynamic>));
@@ -245,7 +242,7 @@ class Particles {
     return cast null;
   }
 
-  @:keep public static function buildParticleCurve(f:Dynamic, samples:Dynamic = 33.0):Array<Float> {
+  public static function buildParticleCurve(f:Dynamic, samples:Dynamic = 33.0):Array<Float> {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var lut:Dynamic = cast FlightRuntime.UNDEFINED;
     n = FlightRuntime.callProperty(HxMath, 'max', cast ([2.0, (Std.int(samples) | Std.int(0.0))] : Array<Dynamic>));
@@ -261,36 +258,36 @@ class Particles {
     return cast null;
   }
 
-  @:keep public static function createParticleEmitterConfig(?config:Dynamic):ParticleEmitterConfig {
+  public static function createParticleEmitterConfig(?config:Dynamic):ParticleEmitterConfig {
     return cast { alphaCurve: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'alphaCurve'), function():Dynamic return cast null), alphaEnd: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'alphaEnd'), function():Dynamic return cast 0.0), alphaStart: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'alphaStart'), function():Dynamic return cast 1.0), blendMode: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'blendMode'), function():Dynamic return cast null), burstCount: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'burstCount'), function():Dynamic return cast 0.0), burstInterval: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'burstInterval'), function():Dynamic return cast 0.0), colorCurve: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'colorCurve'), function():Dynamic return cast null), colorEndB: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'colorEndB'), function():Dynamic return cast 1.0), colorEndG: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'colorEndG'), function():Dynamic return cast 1.0), colorEndR: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'colorEndR'), function():Dynamic return cast 1.0), colorEndVarianceB: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'colorEndVarianceB'), function():Dynamic return cast 0.0), colorEndVarianceG: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'colorEndVarianceG'), function():Dynamic return cast 0.0), colorEndVarianceR: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'colorEndVarianceR'), function():Dynamic return cast 0.0), colorStartB: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'colorStartB'), function():Dynamic return cast 1.0), colorStartG: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'colorStartG'), function():Dynamic return cast 1.0), colorStartR: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'colorStartR'), function():Dynamic return cast 1.0), colorStartVarianceB: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'colorStartVarianceB'), function():Dynamic return cast 0.0), colorStartVarianceG: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'colorStartVarianceG'), function():Dynamic return cast 0.0), colorStartVarianceR: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'colorStartVarianceR'), function():Dynamic return cast 0.0), directionX: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'directionX'), function():Dynamic return cast 0.0), directionY: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'directionY'), function():Dynamic return cast -1.0), directionZ: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'directionZ'), function():Dynamic return cast 0.0), duration: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'duration'), function():Dynamic return cast 0.0), emitterConeAngle: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'emitterConeAngle'), function():Dynamic return cast 0.0), emitterDepth: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'emitterDepth'), function():Dynamic return cast 0.0), emitterHeight: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'emitterHeight'), function():Dynamic return cast 0.0), emitterRadius: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'emitterRadius'), function():Dynamic return cast 0.0), emitterShape: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'emitterShape'), function():Dynamic return cast 'point'), emitterWidth: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'emitterWidth'), function():Dynamic return cast 0.0), frameCount: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'frameCount'), function():Dynamic return cast 1.0), frameRate: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'frameRate'), function():Dynamic return cast 12.0), gravityX: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'gravityX'), function():Dynamic return cast 0.0), gravityY: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'gravityY'), function():Dynamic return cast 0.0), gravityZ: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'gravityZ'), function():Dynamic return cast 0.0), lifetimeMax: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'lifetimeMax'), function():Dynamic return cast 1.0), lifetimeMin: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'lifetimeMin'), function():Dynamic return cast 0.5), loop: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'loop'), function():Dynamic return cast true), maxParticles: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'maxParticles'), function():Dynamic return cast 1000.0), regionIdMax: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'regionIdMax'), function():Dynamic return cast 1.0), regionIdMin: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'regionIdMin'), function():Dynamic return cast 0.0), rotationSpeedMax: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'rotationSpeedMax'), function():Dynamic return cast 0.0), rotationSpeedMin: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'rotationSpeedMin'), function():Dynamic return cast 0.0), scaleCurve: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'scaleCurve'), function():Dynamic return cast null), scaleEnd: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'scaleEnd'), function():Dynamic return cast 1.0), scaleMax: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'scaleMax'), function():Dynamic return cast 1.0), scaleMin: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'scaleMin'), function():Dynamic return cast 1.0), spawnRate: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'spawnRate'), function():Dynamic return cast 10.0), speedMax: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'speedMax'), function():Dynamic return cast 100.0), speedMin: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'speedMin'), function():Dynamic return cast 50.0), spread: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'spread'), function():Dynamic return cast HxMath.PI), velocityInheritance: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'velocityInheritance'), function():Dynamic return cast 0.0), worldSpace: FlightRuntime.coalesce(FlightRuntime.optionalField(config, 'worldSpace'), function():Dynamic return cast false) };
     return cast null;
   }
 
-  @:keep public static function createParticleEmitterSignals():ParticleEmitterSignals {
+  public static function createParticleEmitterSignals():ParticleEmitterSignals {
     return cast { onEmitterComplete: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onParticleDeath: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onParticleSpawn: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createParticleEmitterState(?random:RandomSource):ParticleEmitterState {
+  public static function createParticleEmitterState(?random:RandomSource):ParticleEmitterState {
     if (random == null) random = cast (HxMath.random : Dynamic);
     return cast { burstTimer: 0.0, colorBirth: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), []), colorDeath: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), []), emitterAge: 0.0, lifetimes: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), []), prevX: HxMath.NaN, prevY: HxMath.NaN, prevZ: HxMath.NaN, random: random, rotationSpeeds: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), []), scales: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), []), spawnAccumulator: 0.0, velocities: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), []) };
     return cast null;
   }
 
-  @:keep public static function createParticleObjectsState(capacity:Float, ?random:RandomSource):ParticleObjectsState {
+  public static function createParticleObjectsState(capacity:Float, ?random:RandomSource):ParticleObjectsState {
     if (random == null) random = cast (HxMath.random : Dynamic);
     return cast { burstTimer: 0.0, emitterAge: 0.0, lifetimes: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(capacity * 2.0)]), prevX: HxMath.NaN, prevY: HxMath.NaN, random: random, rotationSpeeds: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [capacity]), scales: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [capacity]), spawnAccumulator: 0.0, velocities: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(capacity * 2.0)]) };
     return cast null;
   }
 
-  @:keep public static function enableParticleEmitterSignals(state:Dynamic):ParticleEmitterSignals {
+  public static function enableParticleEmitterSignals(state:Dynamic):ParticleEmitterSignals {
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
     s = (cast state : Dynamic);
     return cast FlightRuntime.setIndex(s, Particles.signalsSlot__particleEmitterSignals, (FlightRuntime.getIndex(s, Particles.signalsSlot__particleEmitterSignals) ?? FlightRuntime.callValue(createParticleEmitterSignals, cast ([] : Array<Dynamic>))));
     return cast null;
   }
 
-  @:keep public static function ensureParticleEmitterStateCapacity(state:ParticleEmitterState, capacity:Float, hasColorVariance:Bool):Void {
+  public static function ensureParticleEmitterStateCapacity(state:ParticleEmitterState, capacity:Float, hasColorVariance:Bool):Void {
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(FlightRuntime.field(state, 'lifetimes'), 'length'), (capacity * 2.0), '>='))) {
   if (FlightRuntime.truthy(FlightRuntime.andValue(hasColorVariance, function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(FlightRuntime.field(state, 'colorBirth'), 'length'), (capacity * 3.0), '<')))) {
   FlightRuntime.setField(state, 'colorBirth', FlightRuntime.callValue(reserveFloat32Array, cast ([FlightRuntime.field(state, 'colorBirth'), (capacity * 3.0)] : Array<Dynamic>)));
@@ -308,7 +305,7 @@ class Particles {
 }
   }
 
-  @:keep public static function ensureParticleObjectsStateCapacity(state:ParticleObjectsState, capacity:Float):Void {
+  public static function ensureParticleObjectsStateCapacity(state:ParticleObjectsState, capacity:Float):Void {
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(FlightRuntime.field(state, 'lifetimes'), 'length'), (capacity * 2.0), '>='))) { return; }
     FlightRuntime.setField(state, 'lifetimes', FlightRuntime.callValue(reserveFloat32Array, cast ([FlightRuntime.field(state, 'lifetimes'), (capacity * 2.0)] : Array<Dynamic>)));
     FlightRuntime.setField(state, 'velocities', FlightRuntime.callValue(reserveFloat32Array, cast ([FlightRuntime.field(state, 'velocities'), (capacity * 2.0)] : Array<Dynamic>)));
@@ -316,7 +313,7 @@ class Particles {
     FlightRuntime.setField(state, 'rotationSpeeds', FlightRuntime.callValue(reserveFloat32Array, cast ([FlightRuntime.field(state, 'rotationSpeeds'), capacity] : Array<Dynamic>)));
   }
 
-  @:keep public static function falloffFactor__applyParticleForces(falloff:Null<ForceFalloff>, dist:Float, radius:Null<Float>):Float {
+  public static function falloffFactor__applyParticleForces(falloff:Null<ForceFalloff>, dist:Float, radius:Null<Float>):Float {
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.looseEquals(radius, null), function():Dynamic return cast FlightRuntime.compare(radius, 0.0, '>')), function():Dynamic return cast FlightRuntime.compare(dist, radius, '>')))) { return cast 0.0; }
     {
       var __switchValue = falloff;
@@ -336,12 +333,12 @@ class Particles {
     return cast null;
   }
 
-  @:keep public static function getParticleEmitterSignals(state:Dynamic):Null<ParticleEmitterSignals> {
+  public static function getParticleEmitterSignals(state:Dynamic):Null<ParticleEmitterSignals> {
     return cast FlightRuntime.coalesce(FlightRuntime.getIndex((cast state : Dynamic), Particles.signalsSlot__particleEmitterSignals), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function hash2__applyParticleForces(x:Float, y:Float, seed:Float):Float {
+  public static function hash2__applyParticleForces(x:Float, y:Float, seed:Float):Float {
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     h = (Std.int((Std.int((Std.int(FlightRuntime.imul(Std.int(x), Std.int(668265261.0))) ^ Std.int(FlightRuntime.imul(Std.int(y), Std.int(374761393.0))))) ^ Std.int(FlightRuntime.imul(Std.int((seed + 1.0)), Std.int(2654435761.0))))) | Std.int(0.0));
     (h = cast (FlightRuntime.imul(Std.int((Std.int(h) ^ Std.int(FlightRuntime.unsignedShiftRight(Std.int(h), Std.int(15.0))))), Std.int(2246822507.0)) : Dynamic));
@@ -350,7 +347,7 @@ class Particles {
     return cast null;
   }
 
-  @:keep public static function hsvToRgb__curve(h:Float, s:Float, v:Float):Array<Float> {
+  public static function hsvToRgb__curve(h:Float, s:Float, v:Float):Array<Float> {
     var c:Dynamic = cast FlightRuntime.UNDEFINED;
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -402,7 +399,7 @@ class Particles {
     return cast null;
   }
 
-  @:keep public static function interpKeyframe__curve(sorted:Array<CurveKeyframe>, t:Float):Float {
+  public static function interpKeyframe__curve(sorted:Array<CurveKeyframe>, t:Float):Float {
     var seg:Dynamic = cast FlightRuntime.UNDEFINED;
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -414,7 +411,7 @@ class Particles {
     return cast null;
   }
 
-  @:keep public static function isFiniteCurve__validateParticleEmitterConfig(curve:Null<Array<Float>>):Bool {
+  public static function isFiniteCurve__validateParticleEmitterConfig(curve:Null<Array<Float>>):Bool {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.looseEquals(curve, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(curve, 'length'), 0.0)))) { return cast false; }
     {
       var i:Dynamic = 0.0;
@@ -427,7 +424,7 @@ class Particles {
     return cast null;
   }
 
-  @:keep public static function isParticleObjectsComplete(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig):Bool {
+  public static function isParticleObjectsComplete(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig):Bool {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.compare(FlightRuntime.field(config, 'duration'), 0.0, '<='), function():Dynamic return cast FlightRuntime.field(config, 'loop')))) { return cast false; }
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(state, 'emitterAge'), FlightRuntime.field(config, 'duration'), '<'))) { return cast false; }
     {
@@ -441,7 +438,7 @@ class Particles {
     return cast null;
   }
 
-  @:keep public static function lerpHsvDirect(out:Dynamic, offset:Float, r0:Float, g0:Float, b0:Float, r1:Float, g1:Float, b1:Float, t:Float):Void {
+  public static function lerpHsvDirect(out:Dynamic, offset:Float, r0:Float, g0:Float, b0:Float, r1:Float, g1:Float, b1:Float, t:Float):Void {
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
     var h0:Dynamic = cast FlightRuntime.UNDEFINED;
     var s0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -474,11 +471,11 @@ class Particles {
     FlightRuntime.setIndex(out, (offset + 2.0), b);
   }
 
-  @:keep public static function lerpHsvInPlace(colorsOut:Dynamic, offset:Float, birth:flight.internal.FlightFloat32Array, death:flight.internal.FlightFloat32Array, t:Float):Void {
+  public static function lerpHsvInPlace(colorsOut:Dynamic, offset:Float, birth:flight.internal.FlightFloat32Array, death:flight.internal.FlightFloat32Array, t:Float):Void {
     FlightRuntime.callValue(lerpHsvDirect, cast ([colorsOut, offset, FlightRuntime.getIndex(birth, offset), FlightRuntime.getIndex(birth, (offset + 1.0)), FlightRuntime.getIndex(birth, (offset + 2.0)), FlightRuntime.getIndex(death, offset), FlightRuntime.getIndex(death, (offset + 1.0)), FlightRuntime.getIndex(death, (offset + 2.0)), t] : Array<Dynamic>));
   }
 
-  @:keep public static function locateKeyframe__curve(sorted:Array<{ var time:Float; }>, t:Float):{ var f:Float; var i:Float; } {
+  public static function locateKeyframe__curve(sorted:Array<{ var time:Float; }>, t:Float):{ var f:Float; var i:Float; } {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     n = FlightRuntime.field(sorted, 'length');
     if (FlightRuntime.truthy(FlightRuntime.compare(t, FlightRuntime.field(FlightRuntime.getIndex(sorted, 0.0), 'time'), '<='))) { return cast { f: 0.0, i: 0.0 }; }
@@ -501,7 +498,7 @@ class Particles {
 
   public static final NON_NEGATIVE_FIELDS__validateParticleEmitterConfig:Dynamic = cast (['burstCount', 'burstInterval', 'duration', 'emitterConeAngle', 'emitterDepth', 'emitterHeight', 'emitterRadius', 'emitterWidth', 'frameRate', 'lifetimeMin', 'lifetimeMax', 'maxParticles', 'scaleMax', 'scaleMin', 'speedMax', 'speedMin', 'spawnRate'] : Array<Dynamic>);
 
-  @:keep public static function normalizeParticleEmitterConfig(?config:Dynamic):ParticleEmitterConfig {
+  public static function normalizeParticleEmitterConfig(?config:Dynamic):ParticleEmitterConfig {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     var defaults:Dynamic = cast FlightRuntime.UNDEFINED;
     var mutable:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -521,7 +518,7 @@ class Particles {
 
   public static final PARTICLE_VELOCITY_STRIDE:Dynamic = 3.0;
 
-  @:keep public static function particleColorCurveFromKeyframes(keys:Array<ColorKeyframe>, samples:Dynamic = 33.0):Array<Float> {
+  public static function particleColorCurveFromKeyframes(keys:Array<ColorKeyframe>, samples:Dynamic = 33.0):Array<Float> {
     var sorted:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(keys, 'length'), 0.0))) { return cast cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>); }
     sorted = FlightRuntime.sortAndReturn(FlightRuntime.slice(keys, 0, null), function(a:Dynamic, b:Dynamic) return (FlightRuntime.field(a, 'time') - FlightRuntime.field(b, 'time')));
@@ -538,7 +535,7 @@ class Particles {
     return cast null;
   }
 
-  @:keep public static function particleColorCurveToKeyframes(lut:ParticleCurve):Array<ColorKeyframe> {
+  public static function particleColorCurveToKeyframes(lut:ParticleCurve):Array<ColorKeyframe> {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var keys:Array<ColorKeyframe> = cast FlightRuntime.UNDEFINED;
     n = FlightRuntime.callProperty(HxMath, 'floor', cast ([(FlightRuntime.field(lut, 'length') / 3.0)] : Array<Dynamic>));
@@ -556,7 +553,7 @@ class Particles {
     return cast null;
   }
 
-  @:keep public static function particleCurveFromKeyframes(keys:Array<CurveKeyframe>, samples:Dynamic = 33.0):Array<Float> {
+  public static function particleCurveFromKeyframes(keys:Array<CurveKeyframe>, samples:Dynamic = 33.0):Array<Float> {
     var sorted:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(keys, 'length'), 0.0))) { return cast cast ([0.0, 0.0] : Array<Dynamic>); }
     sorted = FlightRuntime.sortAndReturn(FlightRuntime.slice(keys, 0, null), function(a:Dynamic, b:Dynamic) return (FlightRuntime.field(a, 'time') - FlightRuntime.field(b, 'time')));
@@ -564,7 +561,7 @@ class Particles {
     return cast null;
   }
 
-  @:keep public static function particleCurveToKeyframes(lut:ParticleCurve):Array<CurveKeyframe> {
+  public static function particleCurveToKeyframes(lut:ParticleCurve):Array<CurveKeyframe> {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var keys:Array<CurveKeyframe> = cast FlightRuntime.UNDEFINED;
     n = FlightRuntime.field(lut, 'length');
@@ -582,7 +579,7 @@ class Particles {
     return cast null;
   }
 
-  @:keep public static function reflect3__applyParticleCollisions(p:Array<Float>, nx:Float, ny:Float, nz:Float, restitution:Float, friction:Float):Void {
+  public static function reflect3__applyParticleCollisions(p:Array<Float>, nx:Float, ny:Float, nz:Float, restitution:Float, friction:Float):Void {
     var vn:Dynamic = cast FlightRuntime.UNDEFINED;
     var tvx:Dynamic = cast FlightRuntime.UNDEFINED;
     var tvy:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -597,7 +594,7 @@ class Particles {
     FlightRuntime.setIndex(p, 5.0, ((tvz * (1.0 - friction)) - ((restitution * vn) * nz)));
   }
 
-  @:keep public static function reportCurve__validateParticleEmitterConfig(issues:Array<ParticleConfigIssue>, curve:Null<Array<Float>>, field:ParticleEmitterConfig, stride:Float):Void {
+  public static function reportCurve__validateParticleEmitterConfig(issues:Array<ParticleConfigIssue>, curve:Null<Array<Float>>, field:ParticleEmitterConfig, stride:Float):Void {
     if (FlightRuntime.truthy(FlightRuntime.looseEquals(curve, null))) { return; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(curve, 'length'), 0.0))) {
   FlightRuntime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' is empty and will be ignored', severity: 'warning' }] : Array<Dynamic>));
@@ -618,7 +615,7 @@ class Particles {
     }
   }
 
-  @:keep public static function reportInvertedRange__validateParticleEmitterConfig(issues:Array<ParticleConfigIssue>, config:ParticleEmitterConfig, minField:ParticleEmitterConfig, maxField:ParticleEmitterConfig):Void {
+  public static function reportInvertedRange__validateParticleEmitterConfig(issues:Array<ParticleConfigIssue>, config:ParticleEmitterConfig, minField:ParticleEmitterConfig, maxField:ParticleEmitterConfig):Void {
     var min:Dynamic = cast FlightRuntime.UNDEFINED;
     var max:Dynamic = cast FlightRuntime.UNDEFINED;
     min = FlightRuntime.getIndex(config, minField);
@@ -628,7 +625,7 @@ class Particles {
 }
   }
 
-  @:keep public static function reportUnitRange__validateParticleEmitterConfig(issues:Array<ParticleConfigIssue>, config:ParticleEmitterConfig, field:ParticleEmitterConfig):Void {
+  public static function reportUnitRange__validateParticleEmitterConfig(issues:Array<ParticleConfigIssue>, config:ParticleEmitterConfig, field:ParticleEmitterConfig):Void {
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
     value = FlightRuntime.getIndex(config, field);
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([value] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.orValue(FlightRuntime.compare((cast value : Float), 0.0, '<'), function():Dynamic return cast FlightRuntime.compare((cast value : Float), 1.0, '>'))))) {
@@ -636,7 +633,7 @@ class Particles {
 }
   }
 
-  @:keep public static function resolveCircle__applyParticleCollisions(c:CircleCollider, p:Array<Float>):Bool {
+  public static function resolveCircle__applyParticleCollisions(c:CircleCollider, p:Array<Float>):Bool {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     var dist:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -664,7 +661,7 @@ class Particles {
     return cast null;
   }
 
-  @:keep public static function resolveColliders__applyParticleCollisions(colliders:Array<ParticleCollider>, p:Array<Float>):Bool {
+  public static function resolveColliders__applyParticleCollisions(colliders:Array<ParticleCollider>, p:Array<Float>):Bool {
     var hit:Dynamic = cast FlightRuntime.UNDEFINED;
     hit = false;
     {
@@ -693,7 +690,7 @@ class Particles {
     return cast null;
   }
 
-  @:keep public static function resolvePlane__applyParticleCollisions(c:PlaneCollider, p:Array<Float>):Bool {
+  public static function resolvePlane__applyParticleCollisions(c:PlaneCollider, p:Array<Float>):Bool {
     var nz:Dynamic = cast FlightRuntime.UNDEFINED;
     var depth:Dynamic = cast FlightRuntime.UNDEFINED;
     nz = FlightRuntime.coalesce(FlightRuntime.field(c, 'nz'), function():Dynamic return cast 0.0);
@@ -707,7 +704,7 @@ class Particles {
     return cast null;
   }
 
-  @:keep public static function resolveRect__applyParticleCollisions(c:RectangleCollider, p:Array<Float>):Bool {
+  public static function resolveRect__applyParticleCollisions(c:RectangleCollider, p:Array<Float>):Bool {
     var hw:Dynamic = cast FlightRuntime.UNDEFINED;
     var hh:Dynamic = cast FlightRuntime.UNDEFINED;
     var minX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -774,7 +771,7 @@ class Particles {
     return cast null;
   }
 
-  @:keep public static function resolveSphere__applyParticleCollisions(c:SphereCollider, p:Array<Float>):Bool {
+  public static function resolveSphere__applyParticleCollisions(c:SphereCollider, p:Array<Float>):Bool {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     var dz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -809,7 +806,7 @@ class Particles {
     return cast null;
   }
 
-  @:keep public static function rgbToHsv__curve(r:Float, g:Float, b:Float):Array<Float> {
+  public static function rgbToHsv__curve(r:Float, g:Float, b:Float):Array<Float> {
     var max:Dynamic = cast FlightRuntime.UNDEFINED;
     var min:Dynamic = cast FlightRuntime.UNDEFINED;
     var delta:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -829,7 +826,7 @@ class Particles {
 
   public static final s__applyParticleCollisions:Array<Float> = cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
 
-  @:keep public static function sampleParticleColorCurve(out:{  }, offset:Float, lut:ParticleCurve, t:Float):Void {
+  public static function sampleParticleColorCurve(out:{  }, offset:Float, lut:ParticleCurve, t:Float):Void {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -866,7 +863,7 @@ class Particles {
     FlightRuntime.setIndex(out, (offset + 2.0), (FlightRuntime.getIndex(lut, (a + 2.0)) + ((FlightRuntime.getIndex(lut, (b + 2.0)) - FlightRuntime.getIndex(lut, (a + 2.0))) * f)));
   }
 
-  @:keep public static function sampleParticleCurve(lut:ParticleCurve, t:Float):Float {
+  public static function sampleParticleCurve(lut:ParticleCurve, t:Float):Float {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -882,7 +879,7 @@ class Particles {
 
   public static final signalsSlot__particleEmitterSignals:Dynamic = FlightRuntime.symbol('particleEmitterSignals');
 
-  @:keep public static function stepParticleObjects(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?updateOptions:ParticleObjectsUpdateOptions):Void {
+  public static function stepParticleObjects(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?updateOptions:ParticleObjectsUpdateOptions):Void {
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.looseEquals(forces, null), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(forces, 'length'), 0.0, '>')))) {
   FlightRuntime.callValue(applyParticleObjectForces, cast ([objects, state, forces, deltaTime] : Array<Dynamic>));
 }
@@ -894,7 +891,7 @@ class Particles {
 
   public static final TWO_PI__updateParticleObjects:Dynamic = (HxMath.PI * 2.0);
 
-  @:keep public static function updateParticleObjects(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, ?options:ParticleObjectsUpdateOptions):Void {
+  public static function updateParticleObjects(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, ?options:ParticleObjectsUpdateOptions):Void {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var lifetimes:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1038,7 +1035,7 @@ class Particles {
 }
   }
 
-  @:keep public static function validateParticleEmitterConfig(config:ParticleEmitterConfig):Array<ParticleConfigIssue> {
+  public static function validateParticleEmitterConfig(config:ParticleEmitterConfig):Array<ParticleConfigIssue> {
     var issues:Array<ParticleConfigIssue> = cast FlightRuntime.UNDEFINED;
     issues = cast ([] : Array<Dynamic>);
     for (field in FlightRuntime.iterable(Particles.NUMERIC_FIELDS__validateParticleEmitterConfig)) {
@@ -1075,7 +1072,7 @@ class Particles {
     return cast null;
   }
 
-  @:keep public static function valueNoise__applyParticleForces(x:Float, y:Float, seed:Float):Float {
+  public static function valueNoise__applyParticleForces(x:Float, y:Float, seed:Float):Float {
     var x0:Dynamic = cast FlightRuntime.UNDEFINED;
     var y0:Dynamic = cast FlightRuntime.UNDEFINED;
     var fx:Dynamic = cast FlightRuntime.UNDEFINED;

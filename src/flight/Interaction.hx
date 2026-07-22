@@ -90,9 +90,6 @@ typedef KeyboardSignalName__interactionManager = String;
 
 typedef PointerSignalName__interactionManager = InteractionSignalName;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Interaction")
 class Interaction {
   public static final _candidateCenter__focusManager:Dynamic = { x: 0.0, y: 0.0 };
@@ -109,7 +106,7 @@ class Interaction {
 
   public static final _pointerData__interactionManager:PointerEventData = { altKey: false, button: 0.0, buttons: 0.0, ctrlKey: false, currentTarget: null, deltaX: 0.0, deltaY: 0.0, localX: 0.0, localY: 0.0, metaKey: false, pointerId: 0.0, pointerType: 'mouse', shiftKey: false, target: null, worldX: 0.0, worldY: 0.0, x: 0.0, y: 0.0 };
 
-  @:keep public static function anyHit__hitTests(node:NodeAny, x:Float, y:Float, precise:Bool):Bool {
+  public static function anyHit__hitTests(node:NodeAny, x:Float, y:Float, precise:Bool):Bool {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     var enabled:Dynamic = cast FlightRuntime.UNDEFINED;
     var hitArea:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -130,14 +127,14 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function applyInteractionCursor__interactionManager<N>(manager:InteractionManager<Dynamic>, target:Null<Dynamic>):Void {
+  public static function applyInteractionCursor__interactionManager<N>(manager:InteractionManager<Dynamic>, target:Null<Dynamic>):Void {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     backend = FlightRuntime.field(manager, 'cursorBackend');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(backend, null))) { return; }
     FlightRuntime.callProperty(backend, 'setCursor', cast ([FlightRuntime.callValue(Interaction.resolveInteractionCursor__interactionManager, cast ([target, FlightRuntime.field(manager, 'root')] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function arrowKeyDirection__focusManager(key:String):Null<FocusDirection> {
+  public static function arrowKeyDirection__focusManager(key:String):Null<FocusDirection> {
     {
       var __switchValue = key;
       if (__switchValue == 'ArrowDown') {
@@ -161,7 +158,7 @@ class Interaction {
 
   public static final bitmapAlphaLocalPoint__registerBitmapHitTest:Dynamic = { x: 0.0, y: 0.0 };
 
-  @:keep public static function boundsCenter__focusManager(node:NodeAny, out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
+  public static function boundsCenter__focusManager(node:NodeAny, out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
     var bounds:Dynamic = cast FlightRuntime.UNDEFINED;
     bounds = FlightRuntime.callValue(getNodeWorldBoundsRectangle, cast ([(cast (cast node : Dynamic) : Spatial2DNode<Dynamic>)] : Array<Dynamic>));
     FlightRuntime.setField(out, 'x', (FlightRuntime.field(bounds, 'x') + (FlightRuntime.field(bounds, 'width') / 2.0)));
@@ -170,22 +167,22 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function byTabIndexOrder__focusManager(a:NodeAny, b:NodeAny):Float {
+  public static function byTabIndexOrder__focusManager(a:NodeAny, b:NodeAny):Float {
     return cast (FlightRuntime.callValue(Interaction.focusOrderKey__focusManager, cast ([a] : Array<Dynamic>)) - FlightRuntime.callValue(Interaction.focusOrderKey__focusManager, cast ([b] : Array<Dynamic>)));
     return cast null;
   }
 
   public static final cancelSignalNames__interactionManager:Dynamic = cast (['onPointerCancel', 'onPointerOut', 'onPointerRollOut'] : Array<Dynamic>);
 
-  @:keep public static function captureInteractionPointer<N>(manager:InteractionManager<Dynamic>, pointerId:Float, target:Dynamic):Void {
+  public static function captureInteractionPointer<N>(manager:InteractionManager<Dynamic>, pointerId:Float, target:Dynamic):Void {
     FlightRuntime.callProperty(FlightRuntime.field(manager, 'pointerCaptures'), 'set', cast ([pointerId, target] : Array<Dynamic>));
   }
 
-  @:keep public static function clearFocus<N>(manager:FocusManager<Dynamic>):Void {
+  public static function clearFocus<N>(manager:FocusManager<Dynamic>):Void {
     FlightRuntime.callValue(setFocusedNode, cast ([manager, null] : Array<Dynamic>));
   }
 
-  @:keep public static function collectFocusStops__focusManager(node:NodeAny, out:Array<NodeAny>):Void {
+  public static function collectFocusStops__focusManager(node:NodeAny, out:Array<NodeAny>):Void {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.field(node, 'enabled')))) { return; }
     if (FlightRuntime.truthy(FlightRuntime.callValue(isNodeFocusable, cast ([node] : Array<Dynamic>)))) { FlightRuntime.callProperty(out, 'push', cast ([node] : Array<Dynamic>)); }
@@ -197,7 +194,7 @@ class Interaction {
 }
   }
 
-  @:keep public static function collectHits__hitTests(node:NodeAny, x:Float, y:Float, precise:Bool, out:Array<NodeAny>):Void {
+  public static function collectHits__hitTests(node:NodeAny, x:Float, y:Float, precise:Bool, out:Array<NodeAny>):Void {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     var enabled:Dynamic = cast FlightRuntime.UNDEFINED;
     var hitArea:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -223,7 +220,7 @@ class Interaction {
     if (FlightRuntime.truthy(FlightRuntime.andValue(enabled, function():Dynamic return cast FlightRuntime.callValue(Interaction.testNodeGeometry__hitTests, cast ([node, x, y, precise] : Array<Dynamic>))))) { FlightRuntime.callProperty(out, 'push', cast ([node] : Array<Dynamic>)); }
   }
 
-  @:keep public static function collectSpatialCandidates__interactionSpatialIndex(node:NodeAny, out:Array<NodeAny>):Void {
+  public static function collectSpatialCandidates__interactionSpatialIndex(node:NodeAny, out:Array<NodeAny>):Void {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     var enabled:Dynamic = cast FlightRuntime.UNDEFINED;
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -247,7 +244,7 @@ class Interaction {
     if (FlightRuntime.truthy(enabled)) { FlightRuntime.callProperty(out, 'push', cast ([node] : Array<Dynamic>)); }
   }
 
-  @:keep public static function connectFocusNavigation<N>(input:FocusNavigationInput, manager:FocusManager<Dynamic>, ?options:FocusNavigationOptions):Dynamic {
+  public static function connectFocusNavigation<N>(input:FocusNavigationInput, manager:FocusManager<Dynamic>, ?options:FocusNavigationOptions):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     var arrowKeys:Dynamic = cast FlightRuntime.UNDEFINED;
     var onKeyDown:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -267,7 +264,7 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function connectInputToInteraction<N>(input:InteractionInputSource, manager:InteractionManager<Dynamic>, coordScale:Float = 1.0):Dynamic {
+  public static function connectInputToInteraction<N>(input:InteractionInputSource, manager:InteractionManager<Dynamic>, coordScale:Float = 1.0):Dynamic {
     var sx:Dynamic = cast FlightRuntime.UNDEFINED;
     var onKeyDown:Dynamic = cast FlightRuntime.UNDEFINED;
     var onKeyUp:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -303,7 +300,7 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function connectInteractionSignal<N, Name>(manager:InteractionManager<Dynamic>, target:Dynamic, name:Name, slot:InteractionSignalSlot__interactionManager<Name>, ?options:SignalConnectOptions):Void {
+  public static function connectInteractionSignal<N, Name>(manager:InteractionManager<Dynamic>, target:Dynamic, name:Name, slot:InteractionSignalSlot__interactionManager<Name>, ?options:SignalConnectOptions):Void {
     var signal:Dynamic = cast FlightRuntime.UNDEFINED;
     var trackedSlot:Dynamic = cast FlightRuntime.UNDEFINED;
     var connectedSlot:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -326,41 +323,41 @@ class Interaction {
     FlightRuntime.callOptionalValue(Interaction.interactionConnectGuard__interactionManager, cast ([target, name] : Array<Dynamic>));
   }
 
-  @:keep public static function containsDisplayObject(outer:DisplayObject, inner:DisplayObject):Bool {
+  public static function containsDisplayObject(outer:DisplayObject, inner:DisplayObject):Bool {
     return cast FlightRuntime.callValue(enclosesRectangle, cast ([FlightRuntime.callValue(getNodeWorldBoundsRectangle, cast ([outer] : Array<Dynamic>)), FlightRuntime.callValue(getNodeWorldBoundsRectangle, cast ([inner] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createFocusManager<N>(root:Dynamic, ?options:FocusManagerOptions):FocusManager<Dynamic> {
+  public static function createFocusManager<N>(root:Dynamic, ?options:FocusManagerOptions):FocusManager<Dynamic> {
     if (options == null) options = cast ({  } : Dynamic);
     return cast { focused: null, root: root, wrap: FlightRuntime.coalesce(FlightRuntime.field(options, 'wrap'), function():Dynamic return cast true) };
     return cast null;
   }
 
-  @:keep public static function createInteractionManager<N>(root:Dynamic, ?options:InteractionManagerOptions):InteractionManager<Dynamic> {
+  public static function createInteractionManager<N>(root:Dynamic, ?options:InteractionManagerOptions):InteractionManager<Dynamic> {
     if (options == null) options = cast ({  } : Dynamic);
     return cast { cursorBackend: FlightRuntime.coalesce(FlightRuntime.field(options, 'cursorBackend'), function():Dynamic return cast null), doubleClickDelay: 500.0, enabled: FlightRuntime.coalesce(FlightRuntime.field(options, 'enabled'), function():Dynamic return cast true), pointerCaptures: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), pointerStates: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), precise: FlightRuntime.coalesce(FlightRuntime.field(options, 'precise'), function():Dynamic return cast false), root: root, spatialIndex: FlightRuntime.coalesce(FlightRuntime.field(options, 'spatialIndex'), function():Dynamic return cast null), signalSubscriberCounts: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), trackedSignalSlots: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), trackedSubscribersOnly: FlightRuntime.coalesce(FlightRuntime.field(options, 'trackedSubscribersOnly'), function():Dynamic return cast false) };
     return cast null;
   }
 
-  @:keep public static function createInteractionSignals():InteractionSignals {
+  public static function createInteractionSignals():InteractionSignals {
     return cast { onClick: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onContextMenu: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onDoubleClick: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onFocusIn: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onFocusOut: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onKeyDown: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onKeyUp: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerCancel: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerDown: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerMove: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerOut: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerOver: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerRollOut: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerRollOver: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPointerUp: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onReleaseOutside: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onWheel: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createNodeInteractionState():NodeInteractionState {
+  public static function createNodeInteractionState():NodeInteractionState {
     return cast { cursor: null, focusable: false, hitArea: null, hitTestEnabled: false, tabIndex: -1.0 };
     return cast null;
   }
 
-  @:keep public static function createWebCursorBackend(element:Dynamic):CursorBackend {
+  public static function createWebCursorBackend(element:Dynamic):CursorBackend {
     return cast { setCursor: function(cursor:Null<Cursor>) {
   FlightRuntime.setField(FlightRuntime.field(element, 'style'), 'cursor', FlightRuntime.coalesce(cursor, function():Dynamic return cast ''));
 } };
     return cast null;
   }
 
-  @:keep public static function decrementInteractionSignalSubscriberCount__interactionManager<N>(manager:InteractionManager<Dynamic>, name:InteractionSignalName):Void {
+  public static function decrementInteractionSignalSubscriberCount__interactionManager<N>(manager:InteractionManager<Dynamic>, name:InteractionSignalName):Void {
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     count = FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.field(manager, 'signalSubscriberCounts'), 'get', cast ([name] : Array<Dynamic>)), function():Dynamic return cast 0.0);
     if (FlightRuntime.truthy(FlightRuntime.compare(count, 1.0, '<='))) {
@@ -370,72 +367,72 @@ class Interaction {
 }
   }
 
-  @:keep public static function defaultBitmapHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
+  public static function defaultBitmapHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast FlightRuntime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function defaultDisplayObjectHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
+  public static function defaultDisplayObjectHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
     return cast false;
     return cast null;
   }
 
-  @:keep public static function defaultHtmlViewHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
+  public static function defaultHtmlViewHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
     return cast false;
     return cast null;
   }
 
-  @:keep public static function defaultMovieClipHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
+  public static function defaultMovieClipHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
     return cast false;
     return cast null;
   }
 
-  @:keep public static function defaultQuadBatchHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
+  public static function defaultQuadBatchHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast FlightRuntime.callValue(defaultSpriteHitTestHandler, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function defaultRenderViewHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
+  public static function defaultRenderViewHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast FlightRuntime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function defaultRichTextHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
+  public static function defaultRichTextHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast FlightRuntime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function defaultShapeHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
+  public static function defaultShapeHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast FlightRuntime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function defaultSpriteHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
+  public static function defaultSpriteHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast FlightRuntime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function defaultTextHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
+  public static function defaultTextHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast FlightRuntime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function defaultTextInputHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
+  public static function defaultTextInputHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast FlightRuntime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function defaultTilemapHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
+  public static function defaultTilemapHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast FlightRuntime.callValue(defaultSpriteHitTestHandler, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function defaultVideoHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
+  public static function defaultVideoHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast FlightRuntime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function describeGraphHit(node:NodeAny, x:Float, y:Float, out:HitTestResult):Void {
+  public static function describeGraphHit(node:NodeAny, x:Float, y:Float, out:HitTestResult):Void {
     var exact:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.setField(out, 'node', node);
     FlightRuntime.callValue(inverseMatrixTransformPointXY, cast ([Interaction.hitTestScratchPoint__hitTests, FlightRuntime.callValue(getNodeWorldMatrix, cast ([(cast node : DisplayObject)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
@@ -447,7 +444,7 @@ class Interaction {
 
   public static final DIRECTION_EPSILON__focusManager:Dynamic = 0.0001;
 
-  @:keep public static function directionScore__focusManager(direction:FocusDirection, ox:Float, oy:Float, cx:Float, cy:Float):Float {
+  public static function directionScore__focusManager(direction:FocusDirection, ox:Float, oy:Float, cx:Float, cy:Float):Float {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     var along:Float = cast FlightRuntime.UNDEFINED;
@@ -478,11 +475,11 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function disableInteractionGuards():Void {
+  public static function disableInteractionGuards():Void {
     FlightRuntime.callValue(setInteractionConnectGuard, cast ([null] : Array<Dynamic>));
   }
 
-  @:keep public static function disconnectInteractionSignal<N, Name>(manager:InteractionManager<Dynamic>, target:Dynamic, name:Name, slot:InteractionSignalSlot__interactionManager<Name>):Void {
+  public static function disconnectInteractionSignal<N, Name>(manager:InteractionManager<Dynamic>, target:Dynamic, name:Name, slot:InteractionSignalSlot__interactionManager<Name>):Void {
     var signal:Dynamic = cast FlightRuntime.UNDEFINED;
     var trackedSlot:Dynamic = cast FlightRuntime.UNDEFINED;
     var connectedSlot:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -496,19 +493,19 @@ class Interaction {
     FlightRuntime.callValue(Interaction.decrementInteractionSignalSubscriberCount__interactionManager, cast ([manager, name] : Array<Dynamic>));
   }
 
-  @:keep public static function dispatchInteractionContextMenu<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, button:Float = 2.0, ?options:InteractionPointerOptions):Void {
+  public static function dispatchInteractionContextMenu<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, button:Float = 2.0, ?options:InteractionPointerOptions):Void {
     FlightRuntime.callValue(Interaction.dispatchPointerSignalAt__interactionManager, cast ([manager, 'onContextMenu', x, y, button, 0.0, 0.0, options] : Array<Dynamic>));
   }
 
-  @:keep public static function dispatchInteractionKeyDown<N>(manager:InteractionManager<Dynamic>, key:String, keyCode:Float = 0.0, ?modifiers:Dynamic):Void {
+  public static function dispatchInteractionKeyDown<N>(manager:InteractionManager<Dynamic>, key:String, keyCode:Float = 0.0, ?modifiers:Dynamic):Void {
     FlightRuntime.callValue(Interaction.dispatchKeyboardSignal__interactionManager, cast ([manager, 'onKeyDown', key, keyCode, modifiers] : Array<Dynamic>));
   }
 
-  @:keep public static function dispatchInteractionKeyUp<N>(manager:InteractionManager<Dynamic>, key:String, keyCode:Float = 0.0, ?modifiers:Dynamic):Void {
+  public static function dispatchInteractionKeyUp<N>(manager:InteractionManager<Dynamic>, key:String, keyCode:Float = 0.0, ?modifiers:Dynamic):Void {
     FlightRuntime.callValue(Interaction.dispatchKeyboardSignal__interactionManager, cast ([manager, 'onKeyUp', key, keyCode, modifiers] : Array<Dynamic>));
   }
 
-  @:keep public static function dispatchInteractionPointerCancel<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?options:InteractionPointerOptions):Void {
+  public static function dispatchInteractionPointerCancel<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?options:InteractionPointerOptions):Void {
     var pointerId:Dynamic = cast FlightRuntime.UNDEFINED;
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     var captured:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -532,7 +529,7 @@ class Interaction {
 }
   }
 
-  @:keep public static function dispatchInteractionPointerDown<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, button:Float = 0.0, ?options:InteractionPointerOptions):Void {
+  public static function dispatchInteractionPointerDown<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, button:Float = 0.0, ?options:InteractionPointerOptions):Void {
     var pointerId:Dynamic = cast FlightRuntime.UNDEFINED;
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -546,7 +543,7 @@ class Interaction {
     FlightRuntime.callValue(Interaction.emitInteractionSignal__interactionManager, cast ([target, FlightRuntime.field(manager, 'root'), 'onPointerDown', Interaction._pointerData__interactionManager] : Array<Dynamic>));
   }
 
-  @:keep public static function dispatchInteractionPointerMove<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, button:Float = 0.0, ?options:InteractionPointerOptions):Void {
+  public static function dispatchInteractionPointerMove<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, button:Float = 0.0, ?options:InteractionPointerOptions):Void {
     var pointerId:Dynamic = cast FlightRuntime.UNDEFINED;
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     var oldTarget:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -569,7 +566,7 @@ class Interaction {
 }
   }
 
-  @:keep public static function dispatchInteractionPointerUp<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, button:Float = 0.0, ?time:Float, ?options:InteractionPointerOptions):Void {
+  public static function dispatchInteractionPointerUp<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, button:Float = 0.0, ?time:Float, ?options:InteractionPointerOptions):Void {
     if (time == null) time = cast (FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Date'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>)) : Dynamic);
     var pointerId:Dynamic = cast FlightRuntime.UNDEFINED;
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -601,17 +598,17 @@ class Interaction {
 }
   }
 
-  @:keep public static function dispatchInteractionWheel<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, deltaX:Float = 0.0, deltaY:Float = 0.0, ?options:InteractionPointerOptions):Void {
+  public static function dispatchInteractionWheel<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, deltaX:Float = 0.0, deltaY:Float = 0.0, ?options:InteractionPointerOptions):Void {
     FlightRuntime.callValue(Interaction.dispatchPointerSignalAt__interactionManager, cast ([manager, 'onWheel', x, y, 0.0, deltaX, deltaY, options] : Array<Dynamic>));
   }
 
-  @:keep public static function dispatchKeyboardSignal__interactionManager<N>(manager:InteractionManager<Dynamic>, name:KeyboardSignalName__interactionManager, key:String, keyCode:Float, ?modifiers:Dynamic):Void {
+  public static function dispatchKeyboardSignal__interactionManager<N>(manager:InteractionManager<Dynamic>, name:KeyboardSignalName__interactionManager, key:String, keyCode:Float, ?modifiers:Dynamic):Void {
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.truthy(FlightRuntime.field(manager, 'enabled')), function():Dynamic return cast !FlightRuntime.truthy(FlightRuntime.callValue(Interaction.hasInteractionSignalSubscriber__interactionManager, cast ([manager, name] : Array<Dynamic>)))))) { return; }
     FlightRuntime.callValue(Interaction.setKeyboardData__interactionManager, cast ([key, keyCode, modifiers] : Array<Dynamic>));
     FlightRuntime.callValue(Interaction.emitInteractionSignal__interactionManager, cast ([FlightRuntime.field(manager, 'root'), FlightRuntime.field(manager, 'root'), name, Interaction._keyboardData__interactionManager] : Array<Dynamic>));
   }
 
-  @:keep public static function dispatchPointerRolloverChange__interactionManager<N>(manager:InteractionManager<Dynamic>, oldTarget:Null<Dynamic>, target:Null<Dynamic>):Void {
+  public static function dispatchPointerRolloverChange__interactionManager<N>(manager:InteractionManager<Dynamic>, oldTarget:Null<Dynamic>, target:Null<Dynamic>):Void {
     var oldChain:Dynamic = cast FlightRuntime.UNDEFINED;
     var newChain:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(oldTarget, null))) {
@@ -642,7 +639,7 @@ class Interaction {
     FlightRuntime.callValue(Interaction.applyInteractionCursor__interactionManager, cast ([manager, target] : Array<Dynamic>));
   }
 
-  @:keep public static function dispatchPointerSignalAt__interactionManager<N>(manager:InteractionManager<Dynamic>, name:PointerSignalName__interactionManager, x:Float, y:Float, button:Float, deltaX:Float = 0.0, deltaY:Float = 0.0, ?options:InteractionPointerOptions):Void {
+  public static function dispatchPointerSignalAt__interactionManager<N>(manager:InteractionManager<Dynamic>, name:PointerSignalName__interactionManager, x:Float, y:Float, button:Float, deltaX:Float = 0.0, deltaY:Float = 0.0, ?options:InteractionPointerOptions):Void {
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(Interaction.isPointerSignalNeeded__interactionManager, cast ([manager, cast ([name] : Array<Dynamic>)] : Array<Dynamic>))))) { return; }
     target = FlightRuntime.callValue(Interaction.findInteractionTarget__interactionManager, cast ([manager, x, y, FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'pointerId'), function():Dynamic return cast 0.0)] : Array<Dynamic>));
@@ -653,7 +650,7 @@ class Interaction {
 
   public static final downSignalNames__interactionManager:Dynamic = cast (['onClick', 'onDoubleClick', 'onPointerCancel', 'onPointerDown', 'onReleaseOutside'] : Array<Dynamic>);
 
-  @:keep public static function emitFocusSignal__focusManager(target:NodeAny, root:NodeAny, name:FocusSignalName__focusManager, relatedTarget:Null<NodeAny>):Void {
+  public static function emitFocusSignal__focusManager(target:NodeAny, root:NodeAny, name:FocusSignalName__focusManager, relatedTarget:Null<NodeAny>):Void {
     var current:Null<NodeAny> = cast FlightRuntime.UNDEFINED;
     FlightRuntime.setField(Interaction._focusData__focusManager, 'relatedTarget', relatedTarget);
     FlightRuntime.setField(Interaction._focusData__focusManager, 'target', target);
@@ -668,7 +665,7 @@ class Interaction {
 }
   }
 
-  @:keep public static function emitInteractionSignal__interactionManager<N, Name>(target:Dynamic, root:Dynamic, name:Name, data:InteractionSignalPayload__interactionManager<Name>):Void {
+  public static function emitInteractionSignal__interactionManager<N, Name>(target:Dynamic, root:Dynamic, name:Name, data:InteractionSignalPayload__interactionManager<Name>):Void {
     var current:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
     current = target;
     while (FlightRuntime.truthy(!FlightRuntime.strictEquals(current, null))) {
@@ -680,36 +677,36 @@ class Interaction {
 }
   }
 
-  @:keep public static function emitInteractionSignalDirect__interactionManager<N, Name>(target:Dynamic, name:Name, data:InteractionSignalPayload__interactionManager<Name>):Void {
+  public static function emitInteractionSignalDirect__interactionManager<N, Name>(target:Dynamic, name:Name, data:InteractionSignalPayload__interactionManager<Name>):Void {
     var signal:Dynamic = cast FlightRuntime.UNDEFINED;
     signal = FlightRuntime.callValue(Interaction.getInteractionSignal__interactionManager, cast ([target, name] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(signal, null))) { FlightRuntime.callValue(emitSignal, cast ([(cast signal : Signal<Dynamic>), data] : Array<Dynamic>)); }
   }
 
-  @:keep public static function enableInteractionGuards():Void {
+  public static function enableInteractionGuards():Void {
     FlightRuntime.callValue(setInteractionConnectGuard, cast ([Interaction.warnOnInertInteractionTarget__enableInteractionGuards] : Array<Dynamic>));
   }
 
-  @:keep public static function enableInteractionSignals<N>(source:Dynamic):InteractionSignals {
+  public static function enableInteractionSignals<N>(source:Dynamic):InteractionSignals {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : NodeRuntime<NodeAny>);
     return cast FlightRuntime.setField(runtime, 'interactionSignals', (FlightRuntime.field(runtime, 'interactionSignals') ?? FlightRuntime.callValue(createInteractionSignals, cast ([] : Array<Dynamic>))));
     return cast null;
   }
 
-  @:keep public static function enableNodeInteractionState(source:NodeAny):NodeInteractionState {
+  public static function enableNodeInteractionState(source:NodeAny):NodeInteractionState {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : NodeRuntime<NodeAny>);
     return cast FlightRuntime.setField(runtime, 'interactionState', (FlightRuntime.field(runtime, 'interactionState') ?? FlightRuntime.callValue(createNodeInteractionState, cast ([] : Array<Dynamic>))));
     return cast null;
   }
 
-  @:keep public static function explainInteractionHitEligibility(node:NodeAny):InteractionHitEligibility {
+  public static function explainInteractionHitEligibility(node:NodeAny):InteractionHitEligibility {
     return cast { eligible: FlightRuntime.callValue(isNodeHitTestEnabled, cast ([node] : Array<Dynamic>)), hasEligibleInSubtree: FlightRuntime.callValue(Interaction.hasEligibleNodeInSubtree__enableInteractionGuards, cast ([node] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function findFirstHit__hitTests(node:NodeAny, x:Float, y:Float, precise:Bool):Null<NodeAny> {
+  public static function findFirstHit__hitTests(node:NodeAny, x:Float, y:Float, precise:Bool):Null<NodeAny> {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     var enabled:Dynamic = cast FlightRuntime.UNDEFINED;
     var hitArea:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -737,17 +734,17 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function findGraphHitTarget<Traits>(source:Node<Traits>, x:Float, y:Float):Null<Node<Traits>> {
+  public static function findGraphHitTarget<Traits>(source:Node<Traits>, x:Float, y:Float):Null<Node<Traits>> {
     return cast (cast FlightRuntime.callValue(Interaction.findFirstHit__hitTests, cast ([(cast source : NodeAny), x, y, false] : Array<Dynamic>)) : Null<Node<Traits>>);
     return cast null;
   }
 
-  @:keep public static function findGraphHitTargetPrecise<Traits>(source:Node<Traits>, x:Float, y:Float):Null<Node<Traits>> {
+  public static function findGraphHitTargetPrecise<Traits>(source:Node<Traits>, x:Float, y:Float):Null<Node<Traits>> {
     return cast (cast FlightRuntime.callValue(Interaction.findFirstHit__hitTests, cast ([(cast source : NodeAny), x, y, true] : Array<Dynamic>)) : Null<Node<Traits>>);
     return cast null;
   }
 
-  @:keep public static function findGraphHitTargets<Traits>(source:Node<Traits>, x:Float, y:Float, ?out:Array<Node<Traits>>):Array<Node<Traits>> {
+  public static function findGraphHitTargets<Traits>(source:Node<Traits>, x:Float, y:Float, ?out:Array<Node<Traits>>):Array<Node<Traits>> {
     if (out == null) out = cast (cast ([] : Array<Dynamic>) : Dynamic);
     FlightRuntime.setLength(out, 0.0);
     FlightRuntime.callValue(Interaction.collectHits__hitTests, cast ([(cast source : NodeAny), x, y, false, (cast out : Array<NodeAny>)] : Array<Dynamic>));
@@ -755,7 +752,7 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function findGraphHitTargetsPrecise<Traits>(source:Node<Traits>, x:Float, y:Float, ?out:Array<Node<Traits>>):Array<Node<Traits>> {
+  public static function findGraphHitTargetsPrecise<Traits>(source:Node<Traits>, x:Float, y:Float, ?out:Array<Node<Traits>>):Array<Node<Traits>> {
     if (out == null) out = cast (cast ([] : Array<Dynamic>) : Dynamic);
     FlightRuntime.setLength(out, 0.0);
     FlightRuntime.callValue(Interaction.collectHits__hitTests, cast ([(cast source : NodeAny), x, y, true, (cast out : Array<NodeAny>)] : Array<Dynamic>));
@@ -763,7 +760,7 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function findInteractionTarget__interactionManager<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, pointerId:Float):Null<Dynamic> {
+  public static function findInteractionTarget__interactionManager<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, pointerId:Float):Null<Dynamic> {
     var captured:Dynamic = cast FlightRuntime.UNDEFINED;
     var root:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.field(manager, 'enabled')))) { return cast null; }
@@ -775,7 +772,7 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function findSpatialInteractionTarget<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, precise:Bool = false):Null<Dynamic> {
+  public static function findSpatialInteractionTarget<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, precise:Bool = false):Null<Dynamic> {
     var index:Dynamic = cast FlightRuntime.UNDEFINED;
     var nodes:Dynamic = cast FlightRuntime.UNDEFINED;
     var best:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
@@ -804,12 +801,12 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function focusNextNode<N>(manager:FocusManager<Dynamic>):Null<Dynamic> {
+  public static function focusNextNode<N>(manager:FocusManager<Dynamic>):Null<Dynamic> {
     return cast FlightRuntime.callValue(Interaction.stepFocus__focusManager, cast ([manager, 1.0] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function focusNodeInDirection<N>(manager:FocusManager<Dynamic>, direction:FocusDirection):Null<Dynamic> {
+  public static function focusNodeInDirection<N>(manager:FocusManager<Dynamic>, direction:FocusDirection):Null<Dynamic> {
     var current:Dynamic = cast FlightRuntime.UNDEFINED;
     var order:Dynamic = cast FlightRuntime.UNDEFINED;
     var origin:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -839,30 +836,30 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function focusOrderKey__focusManager(node:NodeAny):Float {
+  public static function focusOrderKey__focusManager(node:NodeAny):Float {
     var tabIndex:Dynamic = cast FlightRuntime.UNDEFINED;
     tabIndex = FlightRuntime.callValue(getNodeTabIndex, cast ([node] : Array<Dynamic>));
     return cast FlightRuntime.select(FlightRuntime.compare(tabIndex, 0.0, '<'), function():Dynamic return cast FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'), function():Dynamic return cast tabIndex);
     return cast null;
   }
 
-  @:keep public static function focusPreviousNode<N>(manager:FocusManager<Dynamic>):Null<Dynamic> {
+  public static function focusPreviousNode<N>(manager:FocusManager<Dynamic>):Null<Dynamic> {
     return cast FlightRuntime.callValue(Interaction.stepFocus__focusManager, cast ([manager, -1.0] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getDisplayObjectOverlapRectangle(source:DisplayObject, other:DisplayObject, out:Rectangle):Rectangle {
+  public static function getDisplayObjectOverlapRectangle(source:DisplayObject, other:DisplayObject, out:Rectangle):Rectangle {
     FlightRuntime.callValue(computeRectangleIntersection, cast ([out, FlightRuntime.callValue(getNodeWorldBoundsRectangle, cast ([source] : Array<Dynamic>)), FlightRuntime.callValue(getNodeWorldBoundsRectangle, cast ([other] : Array<Dynamic>))] : Array<Dynamic>));
     return cast out;
     return cast null;
   }
 
-  @:keep public static function getFocusedNode<N>(manager:FocusManager<Dynamic>):Null<Dynamic> {
+  public static function getFocusedNode<N>(manager:FocusManager<Dynamic>):Null<Dynamic> {
     return cast FlightRuntime.field(manager, 'focused');
     return cast null;
   }
 
-  @:keep public static function getFocusOrder<N>(manager:FocusManager<Dynamic>, ?out:Array<Dynamic>):Array<Dynamic> {
+  public static function getFocusOrder<N>(manager:FocusManager<Dynamic>, ?out:Array<Dynamic>):Array<Dynamic> {
     if (out == null) out = cast (cast ([] : Array<Dynamic>) : Dynamic);
     FlightRuntime.setLength(out, 0.0);
     FlightRuntime.callValue(Interaction.collectFocusStops__focusManager, cast ([FlightRuntime.field(manager, 'root'), (cast out : Array<NodeAny>)] : Array<Dynamic>));
@@ -871,7 +868,7 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function getInteractionChain__interactionManager<N>(target:Dynamic, root:Dynamic):Array<Dynamic> {
+  public static function getInteractionChain__interactionManager<N>(target:Dynamic, root:Dynamic):Array<Dynamic> {
     var out:Array<Dynamic> = cast FlightRuntime.UNDEFINED;
     var current:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
     out = cast ([] : Array<Dynamic>);
@@ -885,7 +882,7 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function getInteractionPointerState__interactionManager<N>(manager:InteractionManager<Dynamic>, pointerId:Float):InteractionPointerState<Dynamic> {
+  public static function getInteractionPointerState__interactionManager<N>(manager:InteractionManager<Dynamic>, pointerId:Float):InteractionPointerState<Dynamic> {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     state = FlightRuntime.callProperty(FlightRuntime.field(manager, 'pointerStates'), 'get', cast ([pointerId] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(state, FlightRuntime.UNDEFINED))) {
@@ -896,44 +893,44 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function getInteractionSignal__interactionManager<N, Name>(source:Dynamic, name:Name):Null<Dynamic> {
+  public static function getInteractionSignal__interactionManager<N, Name>(source:Dynamic, name:Name):Null<Dynamic> {
     var signals:Dynamic = cast FlightRuntime.UNDEFINED;
     signals = FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'interactionSignals');
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(signals, null), function():Dynamic return cast FlightRuntime.getIndex(signals, name), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getInteractionSignals<N>(source:Dynamic):Null<InteractionSignals> {
+  public static function getInteractionSignals<N>(source:Dynamic):Null<InteractionSignals> {
     return cast FlightRuntime.field((cast FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : NodeRuntime<NodeAny>), 'interactionSignals');
     return cast null;
   }
 
-  @:keep public static function getNodeCursor(source:NodeAny):Null<Cursor> {
+  public static function getNodeCursor(source:NodeAny):Null<Cursor> {
     return cast FlightRuntime.coalesce(FlightRuntime.optionalField(FlightRuntime.callValue(getNodeInteractionState, cast ([source] : Array<Dynamic>)), 'cursor'), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getNodeHitArea(source:NodeAny):Null<HitArea> {
+  public static function getNodeHitArea(source:NodeAny):Null<HitArea> {
     return cast FlightRuntime.coalesce(FlightRuntime.optionalField(FlightRuntime.callValue(getNodeInteractionState, cast ([source] : Array<Dynamic>)), 'hitArea'), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getNodeInteractionState(source:NodeAny):Null<NodeInteractionState> {
+  public static function getNodeInteractionState(source:NodeAny):Null<NodeInteractionState> {
     return cast FlightRuntime.field((cast FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : NodeRuntime<NodeAny>), 'interactionState');
     return cast null;
   }
 
-  @:keep public static function getNodeTabIndex(source:NodeAny):Float {
+  public static function getNodeTabIndex(source:NodeAny):Float {
     return cast FlightRuntime.coalesce(FlightRuntime.optionalField(FlightRuntime.callValue(getNodeInteractionState, cast ([source] : Array<Dynamic>)), 'tabIndex'), function():Dynamic return cast -1.0);
     return cast null;
   }
 
-  @:keep public static function getTrackedInteractionSignalSlot__interactionManager<N, Name>(manager:InteractionManager<Dynamic>, target:Dynamic, name:Name, slot:InteractionSignalSlot__interactionManager<Name>):Null<AnyInteractionSignalSlot> {
+  public static function getTrackedInteractionSignalSlot__interactionManager<N, Name>(manager:InteractionManager<Dynamic>, target:Dynamic, name:Name, slot:InteractionSignalSlot__interactionManager<Name>):Null<AnyInteractionSignalSlot> {
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(FlightRuntime.callOptionalProperty(FlightRuntime.callProperty(FlightRuntime.field(manager, 'trackedSignalSlots'), 'get', cast ([target] : Array<Dynamic>)), 'get', cast ([name] : Array<Dynamic>)), 'get', cast ([(cast slot : AnyInteractionSignalSlot)] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function hasEligibleNodeInSubtree__enableInteractionGuards(node:NodeAny):Bool {
+  public static function hasEligibleNodeInSubtree__enableInteractionGuards(node:NodeAny):Bool {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.callValue(isNodeHitTestEnabled, cast ([node] : Array<Dynamic>)))) { return cast true; }
     children = FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
@@ -946,7 +943,7 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function hasFocusableNodeInSubtree__enableInteractionGuards(node:NodeAny):Bool {
+  public static function hasFocusableNodeInSubtree__enableInteractionGuards(node:NodeAny):Bool {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.callValue(isNodeFocusable, cast ([node] : Array<Dynamic>)))) { return cast true; }
     children = FlightRuntime.field(FlightRuntime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
@@ -959,14 +956,14 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function hasInteractionSignalSubscriber__interactionManager<N>(manager:InteractionManager<Dynamic>, name:InteractionSignalName):Bool {
+  public static function hasInteractionSignalSubscriber__interactionManager<N>(manager:InteractionManager<Dynamic>, name:InteractionSignalName):Bool {
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.field(manager, 'signalSubscriberCounts'), 'get', cast ([name] : Array<Dynamic>)), function():Dynamic return cast 0.0), 0.0, '>'))) { return cast true; }
     if (FlightRuntime.truthy(FlightRuntime.field(manager, 'trackedSubscribersOnly'))) { return cast false; }
     return cast FlightRuntime.callValue(Interaction.hasInteractionSignalSubscriberInGraph__interactionManager, cast ([FlightRuntime.field(manager, 'root'), name] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hasInteractionSignalSubscriberInGraph__interactionManager<N>(source:Dynamic, name:InteractionSignalName):Bool {
+  public static function hasInteractionSignalSubscriberInGraph__interactionManager<N>(source:Dynamic, name:InteractionSignalName):Bool {
     var signal:Dynamic = cast FlightRuntime.UNDEFINED;
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     signal = FlightRuntime.callValue(Interaction.getInteractionSignal__interactionManager, cast ([source, name] : Array<Dynamic>));
@@ -981,7 +978,7 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function hitAreaContainsPoint__hitTests(node:NodeAny, hitArea:HitArea, x:Float, y:Float):Bool {
+  public static function hitAreaContainsPoint__hitTests(node:NodeAny, hitArea:HitArea, x:Float, y:Float):Bool {
     var lx:Dynamic = cast FlightRuntime.UNDEFINED;
     var ly:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(hitArea, 'bounds'))) { return cast FlightRuntime.callValue(hitTestGraphLocalBounds, cast ([node, x, y] : Array<Dynamic>)); }
@@ -998,7 +995,7 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function hitTestAreaQuery(root:DisplayObject, rect:Rectangle, ?out:Array<DisplayObject>):Array<DisplayObject> {
+  public static function hitTestAreaQuery(root:DisplayObject, rect:Rectangle, ?out:Array<DisplayObject>):Array<DisplayObject> {
     if (out == null) out = cast (cast ([] : Array<Dynamic>) : Dynamic);
     var worldBounds:Dynamic = cast FlightRuntime.UNDEFINED;
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1017,7 +1014,7 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function hitTestAreaQueryCircle(root:DisplayObject, cx:Float, cy:Float, radius:Float, ?out:Array<DisplayObject>):Array<DisplayObject> {
+  public static function hitTestAreaQueryCircle(root:DisplayObject, cx:Float, cy:Float, radius:Float, ?out:Array<DisplayObject>):Array<DisplayObject> {
     if (out == null) out = cast (cast ([] : Array<Dynamic>) : Dynamic);
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     var nearX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1044,7 +1041,7 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function hitTestBitmapAlpha__registerBitmapHitTest(source:NodeAny, x:Float, y:Float, alphaThreshold:Float):Float {
+  public static function hitTestBitmapAlpha__registerBitmapHitTest(source:NodeAny, x:Float, y:Float, alphaThreshold:Float):Float {
     var bitmap:Dynamic = cast FlightRuntime.UNDEFINED;
     var image:Dynamic = cast FlightRuntime.UNDEFINED;
     var surface:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1066,7 +1063,7 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function hitTestDisplayObjects(source:DisplayObject, other:DisplayObject):Bool {
+  public static function hitTestDisplayObjects(source:DisplayObject, other:DisplayObject):Bool {
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.callValue(getNodeParent, cast ([source] : Array<Dynamic>)), null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.callValue(getNodeParent, cast ([other] : Array<Dynamic>)), null)))) {
   return cast FlightRuntime.callValue(intersectsRectangle, cast ([FlightRuntime.callValue(getNodeWorldBoundsRectangle, cast ([source] : Array<Dynamic>)), FlightRuntime.callValue(getNodeWorldBoundsRectangle, cast ([other] : Array<Dynamic>))] : Array<Dynamic>));
 }
@@ -1074,7 +1071,7 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function hitTestDisplayObjectsShape(source:DisplayObject, other:DisplayObject):Bool {
+  public static function hitTestDisplayObjectsShape(source:DisplayObject, other:DisplayObject):Bool {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     var aCenterX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1094,23 +1091,23 @@ class Interaction {
 
   public static final hitTestExactRegistry__hitTests:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
 
-  @:keep public static function hitTestGraphLocalBounds<Traits>(source:Node<Traits>, x:Float, y:Float):Bool {
+  public static function hitTestGraphLocalBounds<Traits>(source:Node<Traits>, x:Float, y:Float):Bool {
     FlightRuntime.callValue(inverseMatrixTransformPointXY, cast ([Interaction.hitTestScratchPoint__hitTests, FlightRuntime.callValue(getNodeWorldMatrix, cast ([(cast source : DisplayObject)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
     return cast FlightRuntime.callValue(containsRectanglePointXY, cast ([FlightRuntime.callValue(getNodeLocalBoundsRectangle, cast ([(cast source : DisplayObject)] : Array<Dynamic>)), FlightRuntime.field(Interaction.hitTestScratchPoint__hitTests, 'x'), FlightRuntime.field(Interaction.hitTestScratchPoint__hitTests, 'y')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hitTestGraphPoint<Traits>(source:Node<Traits>, x:Float, y:Float):Bool {
+  public static function hitTestGraphPoint<Traits>(source:Node<Traits>, x:Float, y:Float):Bool {
     return cast FlightRuntime.callValue(Interaction.anyHit__hitTests, cast ([(cast source : NodeAny), x, y, false] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hitTestGraphPointPrecise<Traits>(source:Node<Traits>, x:Float, y:Float):Bool {
+  public static function hitTestGraphPointPrecise<Traits>(source:Node<Traits>, x:Float, y:Float):Bool {
     return cast FlightRuntime.callValue(Interaction.anyHit__hitTests, cast ([(cast source : NodeAny), x, y, true] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hitTestNodeRegion(source:NodeAny, x:Float, y:Float, precise:Bool = false):Bool {
+  public static function hitTestNodeRegion(source:NodeAny, x:Float, y:Float, precise:Bool = false):Bool {
     var hitArea:Dynamic = cast FlightRuntime.UNDEFINED;
     hitArea = FlightRuntime.coalesce(FlightRuntime.optionalField(FlightRuntime.callValue(getNodeInteractionState, cast ([source] : Array<Dynamic>)), 'hitArea'), function():Dynamic return cast null);
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(hitArea, null))) { return cast FlightRuntime.callValue(Interaction.hitAreaContainsPoint__hitTests, cast ([source, hitArea, x, y] : Array<Dynamic>)); }
@@ -1122,7 +1119,7 @@ class Interaction {
 
   public static final hitTestScratchPoint__hitTests:Dynamic = { x: 0.0, y: 0.0 };
 
-  @:keep public static function hitTestShapeFill__registerShapeHitTest(source:NodeAny, x:Float, y:Float):Float {
+  public static function hitTestShapeFill__registerShapeHitTest(source:NodeAny, x:Float, y:Float):Float {
     var regions:Dynamic = cast FlightRuntime.UNDEFINED;
     regions = FlightRuntime.callValue(getShapeFillRegions, cast ([FlightRuntime.field(FlightRuntime.field((cast source : Shape), 'data'), 'commands')] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(regions, null))) { return cast -1.0; }
@@ -1134,33 +1131,33 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function incrementInteractionSignalSubscriberCount__interactionManager<N>(manager:InteractionManager<Dynamic>, name:InteractionSignalName):Void {
+  public static function incrementInteractionSignalSubscriberCount__interactionManager<N>(manager:InteractionManager<Dynamic>, name:InteractionSignalName):Void {
     FlightRuntime.callProperty(FlightRuntime.field(manager, 'signalSubscriberCounts'), 'set', cast ([name, (FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.field(manager, 'signalSubscriberCounts'), 'get', cast ([name] : Array<Dynamic>)), function():Dynamic return cast 0.0) + 1.0)] : Array<Dynamic>));
   }
 
   public static var interactionConnectGuard__interactionManager:Null<InteractionConnectGuard> = FlightRuntime.explicitNull();
 
-  @:keep public static function isInteractionSignalCancelled__interactionManager<N>(source:Dynamic, name:InteractionSignalName):Bool {
+  public static function isInteractionSignalCancelled__interactionManager<N>(source:Dynamic, name:InteractionSignalName):Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.optionalField(FlightRuntime.optionalField(FlightRuntime.callValue(Interaction.getInteractionSignal__interactionManager, cast ([source, name] : Array<Dynamic>)), 'data'), 'cancelled'), true);
     return cast null;
   }
 
-  @:keep public static function isNodeFocusable(source:NodeAny):Bool {
+  public static function isNodeFocusable(source:NodeAny):Bool {
     return cast FlightRuntime.coalesce(FlightRuntime.optionalField(FlightRuntime.callValue(getNodeInteractionState, cast ([source] : Array<Dynamic>)), 'focusable'), function():Dynamic return cast false);
     return cast null;
   }
 
-  @:keep public static function isNodeFocused<N>(manager:FocusManager<Dynamic>, node:Dynamic):Bool {
+  public static function isNodeFocused<N>(manager:FocusManager<Dynamic>, node:Dynamic):Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.field(manager, 'focused'), node);
     return cast null;
   }
 
-  @:keep public static function isNodeHitTestEnabled(source:NodeAny):Bool {
+  public static function isNodeHitTestEnabled(source:NodeAny):Bool {
     return cast FlightRuntime.coalesce(FlightRuntime.optionalField(FlightRuntime.callValue(getNodeInteractionState, cast ([source] : Array<Dynamic>)), 'hitTestEnabled'), function():Dynamic return cast false);
     return cast null;
   }
 
-  @:keep public static function isPointerSignalNeeded__interactionManager<N>(manager:InteractionManager<Dynamic>, names:Array<InteractionSignalName>):Bool {
+  public static function isPointerSignalNeeded__interactionManager<N>(manager:InteractionManager<Dynamic>, names:Array<InteractionSignalName>):Bool {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.field(manager, 'enabled')))) { return cast false; }
     for (name in FlightRuntime.iterable(names)) {
       if (FlightRuntime.truthy(FlightRuntime.callValue(Interaction.hasInteractionSignalSubscriber__interactionManager, cast ([manager, name] : Array<Dynamic>)))) { return cast true; }
@@ -1169,7 +1166,7 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function isTransform2DNode__interactionManager(source:NodeAny):Bool {
+  public static function isTransform2DNode__interactionManager(source:NodeAny):Bool {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : Dynamic);
     return cast FlightRuntime.hasField(runtime, 'worldMatrix');
@@ -1180,7 +1177,7 @@ class Interaction {
 
   public static final moveSignalNames__interactionManager:Dynamic = cast (['onPointerMove', 'onPointerOut', 'onPointerOver', 'onPointerRollOut', 'onPointerRollOver'] : Array<Dynamic>);
 
-  @:keep public static function refreshInteractionSpatialIndex<N>(manager:InteractionManager<Dynamic>):Void {
+  public static function refreshInteractionSpatialIndex<N>(manager:InteractionManager<Dynamic>):Void {
     var index:Dynamic = cast FlightRuntime.UNDEFINED;
     var nodes:Array<NodeAny> = cast FlightRuntime.UNDEFINED;
     index = FlightRuntime.field(manager, 'spatialIndex');
@@ -1203,11 +1200,11 @@ class Interaction {
     }
   }
 
-  @:keep public static function registerBitmapHitTest(alphaThreshold:Float = 1.0):Void {
+  public static function registerBitmapHitTest(alphaThreshold:Float = 1.0):Void {
     FlightRuntime.callValue(registerHitTestPrecise, cast ([Types.BitmapKind, function(source:Dynamic, x:Dynamic, y:Dynamic) return FlightRuntime.callValue(Interaction.hitTestBitmapAlpha__registerBitmapHitTest, cast ([source, x, y, alphaThreshold] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function registerDefaultHitTests():Void {
+  public static function registerDefaultHitTests():Void {
     FlightRuntime.callValue(registerHitTest, cast ([Types.BitmapKind, defaultBitmapHitTestHandler] : Array<Dynamic>));
     FlightRuntime.callValue(registerHitTest, cast ([Types.DisplayObjectKind, defaultDisplayObjectHitTestHandler] : Array<Dynamic>));
     FlightRuntime.callValue(registerHitTest, cast ([Types.HtmlViewKind, defaultHtmlViewHitTestHandler] : Array<Dynamic>));
@@ -1223,29 +1220,29 @@ class Interaction {
     FlightRuntime.callValue(registerHitTest, cast ([Types.VideoKind, defaultVideoHitTestHandler] : Array<Dynamic>));
   }
 
-  @:keep public static function registerHitTest(kind:Kind, fn:HitTestFunction):Void {
+  public static function registerHitTest(kind:Kind, fn:HitTestFunction):Void {
     FlightRuntime.callProperty(Interaction.hitTestRegistry__hitTests, 'set', cast ([kind, fn] : Array<Dynamic>));
   }
 
-  @:keep public static function registerHitTestPrecise(kind:Kind, fn:HitTestPreciseFunction):Void {
+  public static function registerHitTestPrecise(kind:Kind, fn:HitTestPreciseFunction):Void {
     FlightRuntime.callProperty(Interaction.hitTestExactRegistry__hitTests, 'set', cast ([kind, fn] : Array<Dynamic>));
   }
 
-  @:keep public static function registerShapeHitTest():Void {
+  public static function registerShapeHitTest():Void {
     FlightRuntime.callValue(registerHitTestPrecise, cast ([Types.ShapeKind, Interaction.hitTestShapeFill__registerShapeHitTest] : Array<Dynamic>));
     FlightRuntime.callValue(registerHitTestPrecise, cast ([Types.Scale9ShapeKind, Interaction.hitTestShapeFill__registerShapeHitTest] : Array<Dynamic>));
   }
 
-  @:keep public static function registerTextHitTest():Void {
+  public static function registerTextHitTest():Void {
     FlightRuntime.callValue(registerHitTestPrecise, cast ([Types.TextLabelKind, Interaction.resolveTextCharIndex__registerTextHitTest] : Array<Dynamic>));
     FlightRuntime.callValue(registerHitTestPrecise, cast ([Types.RichTextKind, Interaction.resolveTextCharIndex__registerTextHitTest] : Array<Dynamic>));
   }
 
-  @:keep public static function releaseInteractionPointer<N>(manager:InteractionManager<Dynamic>, pointerId:Float):Void {
+  public static function releaseInteractionPointer<N>(manager:InteractionManager<Dynamic>, pointerId:Float):Void {
     FlightRuntime.callProperty(FlightRuntime.field(manager, 'pointerCaptures'), 'delete', cast ([pointerId] : Array<Dynamic>));
   }
 
-  @:keep public static function removeTrackedInteractionSignalSlot__interactionManager<N, Name>(manager:InteractionManager<Dynamic>, target:Dynamic, name:Name, slot:InteractionSignalSlot__interactionManager<Name>):Void {
+  public static function removeTrackedInteractionSignalSlot__interactionManager<N, Name>(manager:InteractionManager<Dynamic>, target:Dynamic, name:Name, slot:InteractionSignalSlot__interactionManager<Name>):Void {
     var targetSlots:Dynamic = cast FlightRuntime.UNDEFINED;
     var signalSlots:Dynamic = cast FlightRuntime.UNDEFINED;
     targetSlots = FlightRuntime.callProperty(FlightRuntime.field(manager, 'trackedSignalSlots'), 'get', cast ([target] : Array<Dynamic>));
@@ -1256,7 +1253,7 @@ class Interaction {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(targetSlots, 'size'), 0.0))) { FlightRuntime.callProperty(FlightRuntime.field(manager, 'trackedSignalSlots'), 'delete', cast ([target] : Array<Dynamic>)); }
   }
 
-  @:keep public static function resolveInteractionCursor__interactionManager<N>(target:Null<Dynamic>, root:Dynamic):Null<Cursor> {
+  public static function resolveInteractionCursor__interactionManager<N>(target:Null<Dynamic>, root:Dynamic):Null<Cursor> {
     var current:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
     current = target;
     while (FlightRuntime.truthy(!FlightRuntime.strictEquals(current, null))) {
@@ -1269,7 +1266,7 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function resolveTextCharIndex__registerTextHitTest(source:NodeAny, x:Float, y:Float):Float {
+  public static function resolveTextCharIndex__registerTextHitTest(source:NodeAny, x:Float, y:Float):Float {
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>))))) { return cast -1.0; }
     layout = FlightRuntime.callValue(getTextLayout, cast ([(cast source : TextLabel)] : Array<Dynamic>));
@@ -1279,7 +1276,7 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function setFocusedNode<N>(manager:FocusManager<Dynamic>, node:Null<Dynamic>):Bool {
+  public static function setFocusedNode<N>(manager:FocusManager<Dynamic>, node:Null<Dynamic>):Bool {
     var previous:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(node, null), function():Dynamic return cast !FlightRuntime.truthy(FlightRuntime.callValue(isNodeFocusable, cast ([node] : Array<Dynamic>)))))) { return cast false; }
     previous = FlightRuntime.field(manager, 'focused');
@@ -1291,11 +1288,11 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function setInteractionConnectGuard(guard:Null<InteractionConnectGuard>):Void {
+  public static function setInteractionConnectGuard(guard:Null<InteractionConnectGuard>):Void {
     (Interaction.interactionConnectGuard__interactionManager = cast (guard : Dynamic));
   }
 
-  @:keep public static function setInteractionSignalCurrentTarget__interactionManager<Name>(data:InteractionSignalPayload__interactionManager<Name>, target:NodeAny, currentTarget:NodeAny):Void {
+  public static function setInteractionSignalCurrentTarget__interactionManager<Name>(data:InteractionSignalPayload__interactionManager<Name>, target:NodeAny, currentTarget:NodeAny):Void {
     if (FlightRuntime.truthy(FlightRuntime.hasField(data, 'currentTarget'))) {
   var pointerData:Dynamic = (cast data : PointerEventData);
   FlightRuntime.setField(pointerData, 'target', target);
@@ -1304,7 +1301,7 @@ class Interaction {
 }
   }
 
-  @:keep public static function setKeyboardData__interactionManager(key:String, keyCode:Float, modifiers:Null<Dynamic>):Void {
+  public static function setKeyboardData__interactionManager(key:String, keyCode:Float, modifiers:Null<Dynamic>):Void {
     FlightRuntime.setField(Interaction._keyboardData__interactionManager, 'altKey', FlightRuntime.coalesce(FlightRuntime.optionalField(modifiers, 'altKey'), function():Dynamic return cast false));
     FlightRuntime.setField(Interaction._keyboardData__interactionManager, 'ctrlKey', FlightRuntime.coalesce(FlightRuntime.optionalField(modifiers, 'ctrlKey'), function():Dynamic return cast false));
     FlightRuntime.setField(Interaction._keyboardData__interactionManager, 'key', key);
@@ -1313,27 +1310,27 @@ class Interaction {
     FlightRuntime.setField(Interaction._keyboardData__interactionManager, 'shiftKey', FlightRuntime.coalesce(FlightRuntime.optionalField(modifiers, 'shiftKey'), function():Dynamic return cast false));
   }
 
-  @:keep public static function setNodeCursor(source:NodeAny, cursor:Null<Cursor>):Void {
+  public static function setNodeCursor(source:NodeAny, cursor:Null<Cursor>):Void {
     FlightRuntime.setField(FlightRuntime.callValue(enableNodeInteractionState, cast ([source] : Array<Dynamic>)), 'cursor', cursor);
   }
 
-  @:keep public static function setNodeFocusable(source:NodeAny, focusable:Bool):Void {
+  public static function setNodeFocusable(source:NodeAny, focusable:Bool):Void {
     FlightRuntime.setField(FlightRuntime.callValue(enableNodeInteractionState, cast ([source] : Array<Dynamic>)), 'focusable', focusable);
   }
 
-  @:keep public static function setNodeHitArea(source:NodeAny, hitArea:Null<HitArea>):Void {
+  public static function setNodeHitArea(source:NodeAny, hitArea:Null<HitArea>):Void {
     FlightRuntime.setField(FlightRuntime.callValue(enableNodeInteractionState, cast ([source] : Array<Dynamic>)), 'hitArea', hitArea);
   }
 
-  @:keep public static function setNodeHitTestEnabled(source:NodeAny, enabled:Bool):Void {
+  public static function setNodeHitTestEnabled(source:NodeAny, enabled:Bool):Void {
     FlightRuntime.setField(FlightRuntime.callValue(enableNodeInteractionState, cast ([source] : Array<Dynamic>)), 'hitTestEnabled', enabled);
   }
 
-  @:keep public static function setNodeTabIndex(source:NodeAny, tabIndex:Float):Void {
+  public static function setNodeTabIndex(source:NodeAny, tabIndex:Float):Void {
     FlightRuntime.setField(FlightRuntime.callValue(enableNodeInteractionState, cast ([source] : Array<Dynamic>)), 'tabIndex', tabIndex);
   }
 
-  @:keep public static function setPointerData__interactionManager(target:Null<NodeAny>, currentTarget:Null<NodeAny>, x:Float, y:Float, button:Float, deltaX:Float = 0.0, deltaY:Float = 0.0, ?options:InteractionPointerOptions):Void {
+  public static function setPointerData__interactionManager(target:Null<NodeAny>, currentTarget:Null<NodeAny>, x:Float, y:Float, button:Float, deltaX:Float = 0.0, deltaY:Float = 0.0, ?options:InteractionPointerOptions):Void {
     FlightRuntime.setField(Interaction._pointerData__interactionManager, 'altKey', FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'altKey'), function():Dynamic return cast false));
     FlightRuntime.setField(Interaction._pointerData__interactionManager, 'button', button);
     FlightRuntime.setField(Interaction._pointerData__interactionManager, 'buttons', FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'buttons'), function():Dynamic return cast FlightRuntime.select(FlightRuntime.compare(button, 0.0, '>='), function():Dynamic return cast (Std.int(1.0) << Std.int(button)), function():Dynamic return cast 0.0)));
@@ -1355,7 +1352,7 @@ class Interaction {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(currentTarget, null))) { FlightRuntime.callValue(Interaction.setPointerDataLocalPosition__interactionManager, cast ([Interaction._pointerData__interactionManager, currentTarget] : Array<Dynamic>)); }
   }
 
-  @:keep public static function setPointerDataLocalPosition__interactionManager(data:PointerEventData, currentTarget:NodeAny):Void {
+  public static function setPointerDataLocalPosition__interactionManager(data:PointerEventData, currentTarget:NodeAny):Void {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(Interaction.isTransform2DNode__interactionManager, cast ([currentTarget] : Array<Dynamic>))))) {
   FlightRuntime.setField(data, 'localX', FlightRuntime.field(data, 'worldX'));
   FlightRuntime.setField(data, 'localY', FlightRuntime.field(data, 'worldY'));
@@ -1366,7 +1363,7 @@ class Interaction {
     FlightRuntime.setField(data, 'localY', FlightRuntime.field(Interaction._localPoint__interactionManager, 'y'));
   }
 
-  @:keep public static function setTrackedInteractionSignalSlot__interactionManager<N, Name>(manager:InteractionManager<Dynamic>, target:Dynamic, name:Name, slot:InteractionSignalSlot__interactionManager<Name>, connectedSlot:InteractionSignalSlot__interactionManager<Name>):Void {
+  public static function setTrackedInteractionSignalSlot__interactionManager<N, Name>(manager:InteractionManager<Dynamic>, target:Dynamic, name:Name, slot:InteractionSignalSlot__interactionManager<Name>, connectedSlot:InteractionSignalSlot__interactionManager<Name>):Void {
     var targetSlots:Dynamic = cast FlightRuntime.UNDEFINED;
     var signalSlots:Dynamic = cast FlightRuntime.UNDEFINED;
     targetSlots = FlightRuntime.callProperty(FlightRuntime.field(manager, 'trackedSignalSlots'), 'get', cast ([target] : Array<Dynamic>));
@@ -1388,7 +1385,7 @@ class Interaction {
 
   public static final spatialQueryOut__interactionSpatialIndex:Array<SpatialObjectId> = cast ([] : Array<Dynamic>);
 
-  @:keep public static function stepFocus__focusManager<N>(manager:FocusManager<Dynamic>, delta:Float):Null<Dynamic> {
+  public static function stepFocus__focusManager<N>(manager:FocusManager<Dynamic>, delta:Float):Null<Dynamic> {
     var order:Dynamic = cast FlightRuntime.UNDEFINED;
     var current:Dynamic = cast FlightRuntime.UNDEFINED;
     var from:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1415,7 +1412,7 @@ class Interaction {
 
   public static final surfaceCache__registerBitmapHitTest:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function surfaceForImage__registerBitmapHitTest(image:ImageResource):Null<Surface> {
+  public static function surfaceForImage__registerBitmapHitTest(image:ImageResource):Null<Surface> {
     var cached:Dynamic = cast FlightRuntime.UNDEFINED;
     var surface:Null<Surface> = cast FlightRuntime.UNDEFINED;
     cached = FlightRuntime.callProperty(Interaction.surfaceCache__registerBitmapHitTest, 'get', cast ([image] : Array<Dynamic>));
@@ -1431,7 +1428,7 @@ class Interaction {
     return cast null;
   }
 
-  @:keep public static function testNodeGeometry__hitTests(node:NodeAny, x:Float, y:Float, precise:Bool):Bool {
+  public static function testNodeGeometry__hitTests(node:NodeAny, x:Float, y:Float, precise:Bool):Bool {
     var coarse:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(precise)) {
   var exact:Dynamic = FlightRuntime.callProperty(Interaction.hitTestExactRegistry__hitTests, 'get', cast ([FlightRuntime.field(node, 'kind')] : Array<Dynamic>));
@@ -1446,7 +1443,7 @@ class Interaction {
 
   public static final upSignalNames__interactionManager:Dynamic = cast (['onClick', 'onDoubleClick', 'onPointerUp', 'onReleaseOutside'] : Array<Dynamic>);
 
-  @:keep public static function warnOnInertInteractionTarget__enableInteractionGuards(target:NodeAny, name:InteractionSignalName):Void {
+  public static function warnOnInertInteractionTarget__enableInteractionGuards(target:NodeAny, name:InteractionSignalName):Void {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(name, 'onKeyDown'), function():Dynamic return cast FlightRuntime.strictEquals(name, 'onKeyUp')))) { return; }
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(name, 'onFocusIn'), function():Dynamic return cast FlightRuntime.strictEquals(name, 'onFocusOut')))) {
   if (FlightRuntime.truthy(FlightRuntime.callValue(Interaction.hasFocusableNodeInSubtree__enableInteractionGuards, cast ([target] : Array<Dynamic>)))) { return; }

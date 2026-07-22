@@ -21,12 +21,9 @@ import flight.Types.SpritesheetValidationDiagnostic;
 import flight.Types.TextureAtlas;
 import flight.Types.Tileset;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.SpritesheetApi")
 class SpritesheetApi {
-  @:keep public static function acquireSpritesheetPlayer():SpritesheetPlayer {
+  public static function acquireSpritesheetPlayer():SpritesheetPlayer {
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(SpritesheetApi.playerPool__spritesheetPlayer, 'length'), 0.0, '>'))) {
   var p:Dynamic = FlightRuntime.callProperty(SpritesheetApi.playerPool__spritesheetPlayer, 'pop', cast ([] : Array<Dynamic>));
   FlightRuntime.setField(p, 'animation', null);
@@ -42,34 +39,34 @@ class SpritesheetApi {
     return cast null;
   }
 
-  @:keep public static function cloneSpritesheet(spritesheet:Spritesheet):Spritesheet {
+  public static function cloneSpritesheet(spritesheet:Spritesheet):Spritesheet {
     var frames:Dynamic = cast FlightRuntime.UNDEFINED;
     frames = FlightRuntime.callProperty(FlightRuntime.field(spritesheet, 'frames'), 'map', cast ([function(f:Dynamic) return FlightRuntime.callValue(createSpritesheetFrame, cast ([{ id: FlightRuntime.field(f, 'id'), offsetX: FlightRuntime.field(f, 'offsetX'), offsetY: FlightRuntime.field(f, 'offsetY'), pivotX: FlightRuntime.field(f, 'pivotX'), pivotY: FlightRuntime.field(f, 'pivotY'), rotated: FlightRuntime.field(f, 'rotated') }] : Array<Dynamic>))] : Array<Dynamic>));
     return cast FlightRuntime.callValue(createEntity, cast ([{ atlas: FlightRuntime.field(spritesheet, 'atlas'), animations: FlightRuntime.mergeObjects([FlightRuntime.field(spritesheet, 'animations')]), frames: frames }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cloneSpritesheetPlayer(player:SpritesheetPlayer):SpritesheetPlayer {
+  public static function cloneSpritesheetPlayer(player:SpritesheetPlayer):SpritesheetPlayer {
     return cast { animation: FlightRuntime.field(player, 'animation'), complete: FlightRuntime.field(player, 'complete'), elapsed: FlightRuntime.field(player, 'elapsed'), frameIndex: FlightRuntime.field(player, 'frameIndex'), onComplete: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onLoop: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), paused: FlightRuntime.field(player, 'paused'), queue: FlightRuntime.concatArrays([FlightRuntime.toArray(FlightRuntime.field(player, 'queue'))]), speed: FlightRuntime.field(player, 'speed') };
     return cast null;
   }
 
-  @:keep public static function createSpritesheet(?obj:Dynamic):Spritesheet {
+  public static function createSpritesheet(?obj:Dynamic):Spritesheet {
     return cast FlightRuntime.callValue(createEntity, cast ([{ atlas: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'atlas'), function():Dynamic return cast null), animations: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'animations'), function():Dynamic return cast {  }), frames: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'frames'), function():Dynamic return cast cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createSpritesheetAnimation(?obj:Dynamic):SpritesheetAnimation {
+  public static function createSpritesheetAnimation(?obj:Dynamic):SpritesheetAnimation {
     return cast FlightRuntime.callValue(createEntity, cast ([{ direction: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'direction'), function():Dynamic return cast 'forward'), frameDuration: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'frameDuration'), function():Dynamic return cast 0.0), frameDurations: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'frameDurations'), function():Dynamic return cast null), frames: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'frames'), function():Dynamic return cast cast ([] : Array<Dynamic>)), loop: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'loop'), function():Dynamic return cast false), originX: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'originX'), function():Dynamic return cast 0.0), originY: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'originY'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createSpritesheetAnimationData(?obj:Dynamic):SpritesheetAnimationData {
+  public static function createSpritesheetAnimationData(?obj:Dynamic):SpritesheetAnimationData {
     return cast { direction: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'direction'), function():Dynamic return cast 'forward'), frameDuration: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'frameDuration'), function():Dynamic return cast 100.0), frameDurations: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'frameDurations'), function():Dynamic return cast null), frameNames: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'frameNames'), function():Dynamic return cast cast ([] : Array<Dynamic>)), loop: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'loop'), function():Dynamic return cast true), name: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'name'), function():Dynamic return cast ''), originX: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'originX'), function():Dynamic return cast 0.0), originY: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'originY'), function():Dynamic return cast 0.0) };
     return cast null;
   }
 
-  @:keep public static function createSpritesheetAnimationFromFrameNames(spritesheet:Spritesheet, pattern:Dynamic, ?options:Dynamic):Null<SpritesheetAnimation> {
+  public static function createSpritesheetAnimationFromFrameNames(spritesheet:Spritesheet, pattern:Dynamic, ?options:Dynamic):Null<SpritesheetAnimation> {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var atlas:Dynamic = cast FlightRuntime.UNDEFINED;
     var frames:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -99,22 +96,22 @@ class SpritesheetApi {
     return cast null;
   }
 
-  @:keep public static function createSpritesheetData(?obj:Dynamic):SpritesheetData {
+  public static function createSpritesheetData(?obj:Dynamic):SpritesheetData {
     return cast { animations: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'animations'), function():Dynamic return cast cast ([] : Array<Dynamic>)), frames: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'frames'), function():Dynamic return cast cast ([] : Array<Dynamic>)), imageFile: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'imageFile'), function():Dynamic return cast ''), imageHeight: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'imageHeight'), function():Dynamic return cast 0.0), imageWidth: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'imageWidth'), function():Dynamic return cast 0.0), scale: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'scale'), function():Dynamic return cast 1.0) };
     return cast null;
   }
 
-  @:keep public static function createSpritesheetFrame(?obj:Dynamic):SpritesheetFrame {
+  public static function createSpritesheetFrame(?obj:Dynamic):SpritesheetFrame {
     return cast { id: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'id'), function():Dynamic return cast 0.0), offsetX: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'offsetX'), function():Dynamic return cast 0.0), offsetY: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'offsetY'), function():Dynamic return cast 0.0), pivotX: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'pivotX'), function():Dynamic return cast null), pivotY: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'pivotY'), function():Dynamic return cast null), rotated: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'rotated'), function():Dynamic return cast false) };
     return cast null;
   }
 
-  @:keep public static function createSpritesheetFrameData(?obj:Dynamic):SpritesheetFrameData {
+  public static function createSpritesheetFrameData(?obj:Dynamic):SpritesheetFrameData {
     return cast { height: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'height'), function():Dynamic return cast 0.0), name: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'name'), function():Dynamic return cast ''), offsetX: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'offsetX'), function():Dynamic return cast 0.0), offsetY: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'offsetY'), function():Dynamic return cast 0.0), pivotX: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'pivotX'), function():Dynamic return cast null), pivotY: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'pivotY'), function():Dynamic return cast null), rotated: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'rotated'), function():Dynamic return cast false), sourceHeight: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'sourceHeight'), function():Dynamic return cast 0.0), sourceWidth: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'sourceWidth'), function():Dynamic return cast 0.0), width: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'width'), function():Dynamic return cast 0.0), x: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'x'), function():Dynamic return cast 0.0), y: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'y'), function():Dynamic return cast 0.0) };
     return cast null;
   }
 
-  @:keep public static function createSpritesheetFromData(data:SpritesheetData, atlas:TextureAtlas):Spritesheet {
+  public static function createSpritesheetFromData(data:SpritesheetData, atlas:TextureAtlas):Spritesheet {
     var nameToRegionId:Dynamic = cast FlightRuntime.UNDEFINED;
     var frames:Dynamic = cast FlightRuntime.UNDEFINED;
     var frameNameToIndex:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -150,7 +147,7 @@ class SpritesheetApi {
     return cast null;
   }
 
-  @:keep public static function createSpritesheetFromGrid(options:GridSliceOptions):Spritesheet {
+  public static function createSpritesheetFromGrid(options:GridSliceOptions):Spritesheet {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var columns:Dynamic = cast FlightRuntime.UNDEFINED;
     var rows:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -203,7 +200,7 @@ class SpritesheetApi {
     return cast null;
   }
 
-  @:keep public static function createSpritesheetFromTileset(tileset:Tileset):Spritesheet {
+  public static function createSpritesheetFromTileset(tileset:Tileset):Spritesheet {
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
     var atlas:Dynamic = cast FlightRuntime.UNDEFINED;
     var frames:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -214,14 +211,14 @@ class SpritesheetApi {
     return cast null;
   }
 
-  @:keep public static function createSpritesheetPlayer(?obj:Dynamic):SpritesheetPlayer {
+  public static function createSpritesheetPlayer(?obj:Dynamic):SpritesheetPlayer {
     return cast { animation: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'animation'), function():Dynamic return cast null), complete: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'complete'), function():Dynamic return cast true), elapsed: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'elapsed'), function():Dynamic return cast 0.0), frameIndex: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'frameIndex'), function():Dynamic return cast 0.0), onComplete: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'onComplete'), function():Dynamic return cast FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>))), onLoop: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'onLoop'), function():Dynamic return cast FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>))), paused: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'paused'), function():Dynamic return cast false), queue: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'queue'), function():Dynamic return cast cast ([] : Array<Dynamic>)), speed: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'speed'), function():Dynamic return cast 1.0) };
     return cast null;
   }
 
   public static final cumulativeDurationsCache__spritesheetPlayer:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function disposeSpritesheetPlayer(player:SpritesheetPlayer):Void {
+  public static function disposeSpritesheetPlayer(player:SpritesheetPlayer):Void {
     FlightRuntime.callValue(clearSignal, cast ([FlightRuntime.field(player, 'onComplete')] : Array<Dynamic>));
     FlightRuntime.callValue(clearSignal, cast ([FlightRuntime.field(player, 'onLoop')] : Array<Dynamic>));
     FlightRuntime.setField(player, 'animation', null);
@@ -229,7 +226,7 @@ class SpritesheetApi {
     FlightRuntime.setLength(FlightRuntime.field(player, 'queue'), 0.0);
   }
 
-  @:keep public static function getCumulativeDurations__spritesheetPlayer(animation:SpritesheetAnimation):Dynamic {
+  public static function getCumulativeDurations__spritesheetPlayer(animation:SpritesheetAnimation):Dynamic {
     var cached:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure6:Dynamic = cast FlightRuntime.UNDEFINED;
     var frames:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -264,12 +261,12 @@ class SpritesheetApi {
     return cast null;
   }
 
-  @:keep public static function getSpritesheetAnimation(spritesheet:Spritesheet, label:String):Null<SpritesheetAnimation> {
+  public static function getSpritesheetAnimation(spritesheet:Spritesheet, label:String):Null<SpritesheetAnimation> {
     return cast FlightRuntime.coalesce(FlightRuntime.getIndex(FlightRuntime.field(spritesheet, 'animations'), label), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getSpritesheetPlayerFrame(player:SpritesheetPlayer, spritesheet:Spritesheet):Null<SpritesheetFrame> {
+  public static function getSpritesheetPlayerFrame(player:SpritesheetPlayer, spritesheet:Spritesheet):Null<SpritesheetFrame> {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var animation:Dynamic = cast FlightRuntime.UNDEFINED;
     var frameIndex:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -283,7 +280,7 @@ class SpritesheetApi {
     return cast null;
   }
 
-  @:keep public static function getSpritesheetPlayerFrameAt(player:SpritesheetPlayer, spritesheet:Spritesheet, frameOffset:Float):Null<SpritesheetFrame> {
+  public static function getSpritesheetPlayerFrameAt(player:SpritesheetPlayer, spritesheet:Spritesheet, frameOffset:Float):Null<SpritesheetFrame> {
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
     var animation:Dynamic = cast FlightRuntime.UNDEFINED;
     var frameIndex:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -301,13 +298,13 @@ class SpritesheetApi {
     return cast null;
   }
 
-  @:keep public static function pauseSpritesheetPlayer(player:SpritesheetPlayer):Void {
+  public static function pauseSpritesheetPlayer(player:SpritesheetPlayer):Void {
     FlightRuntime.setField(player, 'paused', true);
   }
 
   public static final playerPool__spritesheetPlayer:Array<SpritesheetPlayer> = cast ([] : Array<Dynamic>);
 
-  @:keep public static function playSpritesheetAnimation(player:SpritesheetPlayer, animation:Null<SpritesheetAnimation>, restart:Dynamic = true):Void {
+  public static function playSpritesheetAnimation(player:SpritesheetPlayer, animation:Null<SpritesheetAnimation>, restart:Dynamic = true):Void {
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.truthy(restart), function():Dynamic return cast FlightRuntime.strictEquals(animation, FlightRuntime.field(player, 'animation'))))) { return; }
     FlightRuntime.setField(player, 'animation', animation);
     FlightRuntime.setField(player, 'complete', FlightRuntime.strictEquals(animation, null));
@@ -316,11 +313,11 @@ class SpritesheetApi {
     FlightRuntime.setLength(FlightRuntime.field(player, 'queue'), 0.0);
   }
 
-  @:keep public static function queueSpritesheetAnimation(player:SpritesheetPlayer, animation:SpritesheetAnimation):Void {
+  public static function queueSpritesheetAnimation(player:SpritesheetPlayer, animation:SpritesheetAnimation):Void {
     FlightRuntime.callProperty(FlightRuntime.field(player, 'queue'), 'push', cast ([animation] : Array<Dynamic>));
   }
 
-  @:keep public static function releaseSpritesheetPlayer(player:SpritesheetPlayer):Void {
+  public static function releaseSpritesheetPlayer(player:SpritesheetPlayer):Void {
     FlightRuntime.callValue(clearSignal, cast ([FlightRuntime.field(player, 'onComplete')] : Array<Dynamic>));
     FlightRuntime.callValue(clearSignal, cast ([FlightRuntime.field(player, 'onLoop')] : Array<Dynamic>));
     FlightRuntime.setField(player, 'animation', null);
@@ -333,7 +330,7 @@ class SpritesheetApi {
     FlightRuntime.callProperty(SpritesheetApi.playerPool__spritesheetPlayer, 'push', cast ([player] : Array<Dynamic>));
   }
 
-  @:keep public static function resolveAnimationTotalTime__spritesheetPlayer(animation:SpritesheetAnimation):Float {
+  public static function resolveAnimationTotalTime__spritesheetPlayer(animation:SpritesheetAnimation):Float {
     var __destructure7:Dynamic = cast FlightRuntime.UNDEFINED;
     var frameDuration:Dynamic = cast FlightRuntime.UNDEFINED;
     var frameDurations:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -350,7 +347,7 @@ class SpritesheetApi {
     return cast null;
   }
 
-  @:keep public static function resolveFrameIndexFromElapsed__spritesheetPlayer(animation:SpritesheetAnimation, elapsed:Float):Float {
+  public static function resolveFrameIndexFromElapsed__spritesheetPlayer(animation:SpritesheetAnimation, elapsed:Float):Float {
     var totalTime:Dynamic = cast FlightRuntime.UNDEFINED;
     var timeInLoop:Dynamic = cast FlightRuntime.UNDEFINED;
     var vi:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -361,7 +358,7 @@ class SpritesheetApi {
     return cast null;
   }
 
-  @:keep public static function resolveVirtualFrameCount__spritesheetPlayer(animation:SpritesheetAnimation):Float {
+  public static function resolveVirtualFrameCount__spritesheetPlayer(animation:SpritesheetAnimation):Float {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var isPingpong:Dynamic = cast FlightRuntime.UNDEFINED;
     n = FlightRuntime.field(FlightRuntime.field(animation, 'frames'), 'length');
@@ -371,7 +368,7 @@ class SpritesheetApi {
     return cast null;
   }
 
-  @:keep public static function resolveVirtualIndexFromTime__spritesheetPlayer(animation:SpritesheetAnimation, timeInLoop:Float):Float {
+  public static function resolveVirtualIndexFromTime__spritesheetPlayer(animation:SpritesheetAnimation, timeInLoop:Float):Float {
     var __destructure8:Dynamic = cast FlightRuntime.UNDEFINED;
     var frameDuration:Dynamic = cast FlightRuntime.UNDEFINED;
     var frameDurations:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -398,7 +395,7 @@ class SpritesheetApi {
     return cast null;
   }
 
-  @:keep public static function resolveVirtualIndexStartTime__spritesheetPlayer(animation:SpritesheetAnimation, virtualIndex:Float):Float {
+  public static function resolveVirtualIndexStartTime__spritesheetPlayer(animation:SpritesheetAnimation, virtualIndex:Float):Float {
     var __destructure9:Dynamic = cast FlightRuntime.UNDEFINED;
     var frameDuration:Dynamic = cast FlightRuntime.UNDEFINED;
     var frameDurations:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -413,7 +410,7 @@ class SpritesheetApi {
     return cast null;
   }
 
-  @:keep public static function resolveVirtualIndexToDisplayIndex__spritesheetPlayer(animation:SpritesheetAnimation, virtualIndex:Float):Float {
+  public static function resolveVirtualIndexToDisplayIndex__spritesheetPlayer(animation:SpritesheetAnimation, virtualIndex:Float):Float {
     var __destructure10:Dynamic = cast FlightRuntime.UNDEFINED;
     var direction:Dynamic = cast FlightRuntime.UNDEFINED;
     var frames:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -443,11 +440,11 @@ class SpritesheetApi {
     return cast null;
   }
 
-  @:keep public static function resumeSpritesheetPlayer(player:SpritesheetPlayer):Void {
+  public static function resumeSpritesheetPlayer(player:SpritesheetPlayer):Void {
     FlightRuntime.setField(player, 'paused', false);
   }
 
-  @:keep public static function seekSpritesheetPlayerToFrame(player:SpritesheetPlayer, frameIndex:Float):Void {
+  public static function seekSpritesheetPlayerToFrame(player:SpritesheetPlayer, frameIndex:Float):Void {
     var __destructure2:Dynamic = cast FlightRuntime.UNDEFINED;
     var animation:Dynamic = cast FlightRuntime.UNDEFINED;
     var clamped:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -459,7 +456,7 @@ class SpritesheetApi {
     FlightRuntime.setField(player, 'elapsed', FlightRuntime.callValue(SpritesheetApi.resolveVirtualIndexStartTime__spritesheetPlayer, cast ([animation, clamped] : Array<Dynamic>)));
   }
 
-  @:keep public static function seekSpritesheetPlayerToTime(player:SpritesheetPlayer, time:Float):Void {
+  public static function seekSpritesheetPlayerToTime(player:SpritesheetPlayer, time:Float):Void {
     var __destructure3:Dynamic = cast FlightRuntime.UNDEFINED;
     var animation:Dynamic = cast FlightRuntime.UNDEFINED;
     var totalTime:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -471,14 +468,14 @@ class SpritesheetApi {
     FlightRuntime.setField(player, 'frameIndex', FlightRuntime.callValue(SpritesheetApi.resolveFrameIndexFromElapsed__spritesheetPlayer, cast ([animation, FlightRuntime.field(player, 'elapsed')] : Array<Dynamic>)));
   }
 
-  @:keep public static function stopSpritesheetPlayer(player:SpritesheetPlayer):Void {
+  public static function stopSpritesheetPlayer(player:SpritesheetPlayer):Void {
     FlightRuntime.setField(player, 'elapsed', 0.0);
     FlightRuntime.setField(player, 'frameIndex', 0.0);
     FlightRuntime.setField(player, 'complete', true);
     FlightRuntime.setLength(FlightRuntime.field(player, 'queue'), 0.0);
   }
 
-  @:keep public static function updateSpritesheetPlayer(player:SpritesheetPlayer, deltaTime:Float):Bool {
+  public static function updateSpritesheetPlayer(player:SpritesheetPlayer, deltaTime:Float):Bool {
     var __destructure4:Dynamic = cast FlightRuntime.UNDEFINED;
     var animation:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure5:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -518,7 +515,7 @@ class SpritesheetApi {
     return cast null;
   }
 
-  @:keep public static function validateSpritesheet(spritesheet:Spritesheet):Null<Array<SpritesheetValidationDiagnostic>> {
+  public static function validateSpritesheet(spritesheet:Spritesheet):Null<Array<SpritesheetValidationDiagnostic>> {
     var diagnostics:Array<SpritesheetValidationDiagnostic> = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var atlas:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -562,7 +559,7 @@ class SpritesheetApi {
     return cast null;
   }
 
-  @:keep public static function validateSpritesheetData(data:SpritesheetData):Null<Array<SpritesheetValidationDiagnostic>> {
+  public static function validateSpritesheetData(data:SpritesheetData):Null<Array<SpritesheetValidationDiagnostic>> {
     var diagnostics:Array<SpritesheetValidationDiagnostic> = cast FlightRuntime.UNDEFINED;
     var __destructure2:Dynamic = cast FlightRuntime.UNDEFINED;
     var animations:Dynamic = cast FlightRuntime.UNDEFINED;

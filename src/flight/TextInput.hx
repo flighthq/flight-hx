@@ -33,12 +33,9 @@ import flight.Types.TextSelectionRectangle;
 
 typedef KeyboardCommand__textInputEditing = String;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.TextInput")
 class TextInput {
-  @:keep public static function adjustTextFormatRanges__textInputEditing(ranges:Array<TextFormatRange>, defaultFormat:Dynamic, beginIndex:Float, endIndex:Float, insertLength:Float):Void {
+  public static function adjustTextFormatRanges__textInputEditing(ranges:Array<TextFormatRange>, defaultFormat:Dynamic, beginIndex:Float, endIndex:Float, insertLength:Float):Void {
     var removeLength:Dynamic = cast FlightRuntime.UNDEFINED;
     var offset:Dynamic = cast FlightRuntime.UNDEFINED;
     removeLength = (endIndex - beginIndex);
@@ -88,11 +85,11 @@ class TextInput {
 }
   }
 
-  @:keep public static function appendTextInput(source:RichText, text:String):Void {
+  public static function appendTextInput(source:RichText, text:String):Void {
     FlightRuntime.callValue(replaceTextInput, cast ([source, FlightRuntime.field(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text'), 'length'), FlightRuntime.field(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text'), 'length'), text] : Array<Dynamic>));
   }
 
-  @:keep public static function applyHistoryRecord__textInputEditing(source:RichText, state:TextInputState, text:String, caretIndex:Float, selectionIndex:Float):Void {
+  public static function applyHistoryRecord__textInputEditing(source:RichText, state:TextInputState, text:String, caretIndex:Float, selectionIndex:Float):Void {
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'text', text);
     FlightRuntime.setField(state, 'caretIndex', FlightRuntime.callValue(TextInput.clampIndex__textInputEditing, cast ([caretIndex, FlightRuntime.field(text, 'length')] : Array<Dynamic>)));
     FlightRuntime.setField(state, 'selectionIndex', FlightRuntime.callValue(TextInput.clampIndex__textInputEditing, cast ([selectionIndex, FlightRuntime.field(text, 'length')] : Array<Dynamic>)));
@@ -100,7 +97,7 @@ class TextInput {
     FlightRuntime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyTextInputOptions__textInput(state:TextInputState, options:TextInputOptions):Void {
+  public static function applyTextInputOptions__textInput(state:TextInputState, options:TextInputOptions):Void {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(options, 'alwaysShowSelection'), FlightRuntime.UNDEFINED))) { FlightRuntime.setField(state, 'alwaysShowSelection', FlightRuntime.field(options, 'alwaysShowSelection')); }
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(options, 'caretColor'), FlightRuntime.UNDEFINED))) { FlightRuntime.setField(state, 'caretColor', FlightRuntime.field(options, 'caretColor')); }
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(options, 'caretWidth'), FlightRuntime.UNDEFINED))) { FlightRuntime.setField(state, 'caretWidth', FlightRuntime.field(options, 'caretWidth')); }
@@ -112,7 +109,7 @@ class TextInput {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(options, 'selectionColor'), FlightRuntime.UNDEFINED))) { FlightRuntime.setField(state, 'selectionColor', FlightRuntime.field(options, 'selectionColor')); }
   }
 
-  @:keep public static function applyTextInputRestriction(source:RichText, text:String, replaceLength:Dynamic = 0.0):String {
+  public static function applyTextInputRestriction(source:RichText, text:String, replaceLength:Dynamic = 0.0):String {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
     data = FlightRuntime.field(source, 'data');
@@ -128,7 +125,7 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function blurSelectableRichText(manager:SelectableRichTextManager):Void {
+  public static function blurSelectableRichText(manager:SelectableRichTextManager):Void {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(manager, 'focused'), null))) {
   var runtime:Dynamic = FlightRuntime.callValue(TextInput.getMutableRuntime__selectableRichTextManager, cast ([FlightRuntime.field(manager, 'focused')] : Array<Dynamic>));
   FlightRuntime.setField(runtime, 'selectionBeginIndex', 0.0);
@@ -137,39 +134,39 @@ class TextInput {
     FlightRuntime.setField(manager, 'focused', null);
   }
 
-  @:keep public static function blurTextInput(manager:TextInputManager):Void {
+  public static function blurTextInput(manager:TextInputManager):Void {
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     target = FlightRuntime.field(manager, 'focused');
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(target, null))) { FlightRuntime.callValue(TextInput.setTextInputFocused__textInputManager, cast ([target, false] : Array<Dynamic>)); }
     FlightRuntime.setField(manager, 'focused', null);
   }
 
-  @:keep public static function canRedoTextInput(source:RichText):Bool {
+  public static function canRedoTextInput(source:RichText):Bool {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     state = FlightRuntime.callValue(TextInput.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
     return cast FlightRuntime.compare(FlightRuntime.field(state, 'historyIndex'), (FlightRuntime.field(FlightRuntime.field(state, 'history'), 'length') - 1.0), '<');
     return cast null;
   }
 
-  @:keep public static function canUndoTextInput(source:RichText):Bool {
+  public static function canUndoTextInput(source:RichText):Bool {
     return cast FlightRuntime.compare(FlightRuntime.field(FlightRuntime.callValue(TextInput.getInputState__textInputEditing, cast ([source] : Array<Dynamic>)), 'historyIndex'), 0.0, '>=');
     return cast null;
   }
 
-  @:keep public static function clampIndex__textInputEditing(value:Float, length:Float):Float {
+  public static function clampIndex__textInputEditing(value:Float, length:Float):Float {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([value] : Array<Dynamic>))))) { return cast 0.0; }
     return cast FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'min', cast ([length, FlightRuntime.trunc(value)] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function clearTextInputHistory(source:RichText):Void {
+  public static function clearTextInputHistory(source:RichText):Void {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     state = FlightRuntime.callValue(TextInput.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
     FlightRuntime.setField(state, 'history', cast ([] : Array<Dynamic>));
     FlightRuntime.setField(state, 'historyIndex', -1.0);
   }
 
-  @:keep public static function connectInputToTextInput(input:TextInputSource, manager:TextInputManager):Dynamic {
+  public static function connectInputToTextInput(input:TextInputSource, manager:TextInputManager):Dynamic {
     var onKeyDown:Dynamic = cast FlightRuntime.UNDEFINED;
     var onTextInput:Dynamic = cast FlightRuntime.UNDEFINED;
     onKeyDown = function(data:InputKeyboardData) return FlightRuntime.callValue(dispatchTextInputKeyDown, cast ([manager, data] : Array<Dynamic>));
@@ -183,22 +180,22 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function createSelectableRichTextManager():SelectableRichTextManager {
+  public static function createSelectableRichTextManager():SelectableRichTextManager {
     return cast { focused: null };
     return cast null;
   }
 
-  @:keep public static function createTextInputManager():TextInputManager {
+  public static function createTextInputManager():TextInputManager {
     return cast { enabled: true, focused: null };
     return cast null;
   }
 
-  @:keep public static function createTextInputState__textInput(?options:TextInputOptions):TextInputState {
+  public static function createTextInputState__textInput(?options:TextInputOptions):TextInputState {
     return cast { alwaysShowSelection: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'alwaysShowSelection'), function():Dynamic return cast false), caretColor: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'caretColor'), function():Dynamic return cast 0.0), caretIndex: 0.0, caretWidth: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'caretWidth'), function():Dynamic return cast 1.0), desiredCaretX: -1.0, displayAsPassword: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'displayAsPassword'), function():Dynamic return cast false), focused: false, history: cast ([] : Array<Dynamic>), historyIndex: -1.0, historyLimit: FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.optionalField(options, 'historyLimit'), FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.field(options, 'historyLimit')] : Array<Dynamic>)), function():Dynamic return cast 100.0), passwordCharacter: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'passwordCharacter'), function():Dynamic return cast '•'), restrict: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'restrict'), function():Dynamic return cast ''), selectionAlpha: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'selectionAlpha'), function():Dynamic return cast 0.35), selectionColor: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'selectionColor'), function():Dynamic return cast 30935.0), selectionIndex: 0.0 };
     return cast null;
   }
 
-  @:keep public static function deleteTextInputBackward(source:RichText):Void {
+  public static function deleteTextInputBackward(source:RichText):Void {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     var start:Dynamic = cast FlightRuntime.UNDEFINED;
     var end:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -213,7 +210,7 @@ class TextInput {
     FlightRuntime.setField(state, 'selectionIndex', FlightRuntime.field(state, 'caretIndex'));
   }
 
-  @:keep public static function deleteTextInputForward(source:RichText):Void {
+  public static function deleteTextInputForward(source:RichText):Void {
     var start:Dynamic = cast FlightRuntime.UNDEFINED;
     var end:Dynamic = cast FlightRuntime.UNDEFINED;
     start = FlightRuntime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>));
@@ -225,7 +222,7 @@ class TextInput {
 } }
   }
 
-  @:keep public static function deleteTextInputWordBackward(source:RichText):Void {
+  public static function deleteTextInputWordBackward(source:RichText):Void {
     var start:Dynamic = cast FlightRuntime.UNDEFINED;
     var end:Dynamic = cast FlightRuntime.UNDEFINED;
     var wordStart:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -239,7 +236,7 @@ class TextInput {
     if (FlightRuntime.truthy(FlightRuntime.compare(wordStart, start, '<'))) { FlightRuntime.callValue(replaceTextInput, cast ([source, wordStart, start, ''] : Array<Dynamic>)); }
   }
 
-  @:keep public static function deleteTextInputWordForward(source:RichText):Void {
+  public static function deleteTextInputWordForward(source:RichText):Void {
     var start:Dynamic = cast FlightRuntime.UNDEFINED;
     var end:Dynamic = cast FlightRuntime.UNDEFINED;
     var wordEnd:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -255,11 +252,11 @@ class TextInput {
 
   public static final DESIRED_CARET_X_UNSET__textInputEditing:Dynamic = -1.0;
 
-  @:keep public static function disableTextInput(node:RichText):Void {
+  public static function disableTextInput(node:RichText):Void {
     FlightRuntime.setField((cast FlightRuntime.callValue(getRichTextRuntime, cast ([node] : Array<Dynamic>)) : RichTextRuntime), 'input', null);
   }
 
-  @:keep public static function dispatchSelectableRichTextKeyDown(manager:SelectableRichTextManager, data:InputKeyboardData, ?onCopy:Dynamic):Bool {
+  public static function dispatchSelectableRichTextKeyDown(manager:SelectableRichTextManager, data:InputKeyboardData, ?onCopy:Dynamic):Bool {
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     target = FlightRuntime.field(manager, 'focused');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(target, null))) { return cast false; }
@@ -281,7 +278,7 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function dispatchSelectableRichTextPointerDown(manager:SelectableRichTextManager, target:RichText, x:Float, y:Float, extend:Dynamic = false):Void {
+  public static function dispatchSelectableRichTextPointerDown(manager:SelectableRichTextManager, target:RichText, x:Float, y:Float, extend:Dynamic = false):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     var index:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -304,7 +301,7 @@ class TextInput {
 }
   }
 
-  @:keep public static function dispatchSelectableRichTextPointerMove(manager:SelectableRichTextManager, x:Float, y:Float):Void {
+  public static function dispatchSelectableRichTextPointerMove(manager:SelectableRichTextManager, x:Float, y:Float):Void {
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -316,14 +313,14 @@ class TextInput {
     FlightRuntime.setField(runtime, 'selectionEndIndex', FlightRuntime.callValue(computeRichTextCharIndexAtPoint, cast ([layout, x, y] : Array<Dynamic>)));
   }
 
-  @:keep public static function dispatchSelectableRichTextWheel(manager:SelectableRichTextManager, deltaLines:Float):Void {
+  public static function dispatchSelectableRichTextWheel(manager:SelectableRichTextManager, deltaLines:Float):Void {
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     target = FlightRuntime.field(manager, 'focused');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(target, null))) { return; }
     FlightRuntime.callValue(setRichTextScrollV, cast ([target, (FlightRuntime.field(FlightRuntime.field(target, 'data'), 'scrollV') + FlightRuntime.callProperty(HxMath, 'round', cast ([deltaLines] : Array<Dynamic>)))] : Array<Dynamic>));
   }
 
-  @:keep public static function dispatchTextInput(manager:TextInputManager, text:String):Bool {
+  public static function dispatchTextInput(manager:TextInputManager, text:String):Bool {
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     target = FlightRuntime.callValue(TextInput.getTextInputFocusTarget__textInputManager, cast ([manager] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(target, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(text, 'length'), 0.0)))) { return cast false; }
@@ -332,7 +329,7 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function dispatchTextInputKeyDown(manager:TextInputManager, data:InputKeyboardData, ?clipboardText:String, ?onCopy:Dynamic):Bool {
+  public static function dispatchTextInputKeyDown(manager:TextInputManager, data:InputKeyboardData, ?clipboardText:String, ?onCopy:Dynamic):Bool {
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     target = FlightRuntime.callValue(TextInput.getTextInputFocusTarget__textInputManager, cast ([manager] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(target, null))) { return cast false; }
@@ -340,7 +337,7 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function dispatchTextInputPointerDown(manager:TextInputManager, target:RichText, x:Float, y:Float, extend:Dynamic = false, clickCount:Dynamic = 1.0):Void {
+  public static function dispatchTextInputPointerDown(manager:TextInputManager, target:RichText, x:Float, y:Float, extend:Dynamic = false, clickCount:Dynamic = 1.0):Void {
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     var index:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(focusTextInput, cast ([manager, target] : Array<Dynamic>));
@@ -356,7 +353,7 @@ class TextInput {
 } }
   }
 
-  @:keep public static function dispatchTextInputPointerMove(manager:TextInputManager, x:Float, y:Float):Void {
+  public static function dispatchTextInputPointerMove(manager:TextInputManager, x:Float, y:Float):Void {
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     var index:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -368,14 +365,14 @@ class TextInput {
     FlightRuntime.callValue(moveTextInputCaret, cast ([target, index, true] : Array<Dynamic>));
   }
 
-  @:keep public static function dispatchTextInputWheel(manager:TextInputManager, deltaLines:Float):Void {
+  public static function dispatchTextInputWheel(manager:TextInputManager, deltaLines:Float):Void {
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     target = FlightRuntime.field(manager, 'focused');
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(target, null), function():Dynamic return cast !FlightRuntime.truthy(FlightRuntime.field(target, 'enabled'))))) { return; }
     FlightRuntime.callValue(setRichTextScrollV, cast ([target, (FlightRuntime.field(FlightRuntime.field(target, 'data'), 'scrollV') + FlightRuntime.callProperty(HxMath, 'round', cast ([deltaLines] : Array<Dynamic>)))] : Array<Dynamic>));
   }
 
-  @:keep public static function enableTextInput(node:RichText, ?options:TextInputOptions):TextInputState {
+  public static function enableTextInput(node:RichText, ?options:TextInputOptions):TextInputState {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getRichTextRuntime, cast ([node] : Array<Dynamic>)) : RichTextRuntime);
@@ -390,7 +387,7 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function findWordEndAfter__textInputEditing(text:String, index:Float):Float {
+  public static function findWordEndAfter__textInputEditing(text:String, index:Float):Float {
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     i = index;
     while (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.compare(i, FlightRuntime.field(text, 'length'), '<'), function():Dynamic return cast !FlightRuntime.truthy(FlightRuntime.callValue(TextInput.isWordChar__textInputEditing, cast ([FlightRuntime.charAt(text, i)] : Array<Dynamic>)))))) { i++; }
@@ -399,7 +396,7 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function findWordStartBefore__textInputEditing(text:String, index:Float):Float {
+  public static function findWordStartBefore__textInputEditing(text:String, index:Float):Float {
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     i = index;
     while (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.compare(i, 0.0, '>'), function():Dynamic return cast !FlightRuntime.truthy(FlightRuntime.callValue(TextInput.isWordChar__textInputEditing, cast ([FlightRuntime.charAt(text, (i - 1.0))] : Array<Dynamic>)))))) { i--; }
@@ -408,11 +405,11 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function focusSelectableRichText(manager:SelectableRichTextManager, target:RichText):Void {
+  public static function focusSelectableRichText(manager:SelectableRichTextManager, target:RichText):Void {
     FlightRuntime.setField(manager, 'focused', target);
   }
 
-  @:keep public static function focusTextInput(manager:TextInputManager, target:RichText):Void {
+  public static function focusTextInput(manager:TextInputManager, target:RichText):Void {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(manager, 'focused'), target))) {
   var previous:Dynamic = FlightRuntime.field(manager, 'focused');
   if (FlightRuntime.truthy(!FlightRuntime.strictEquals(previous, null))) { FlightRuntime.callValue(TextInput.setTextInputFocused__textInputManager, cast ([previous, false] : Array<Dynamic>)); }
@@ -421,7 +418,7 @@ class TextInput {
     FlightRuntime.callValue(TextInput.setTextInputFocused__textInputManager, cast ([target, true] : Array<Dynamic>));
   }
 
-  @:keep public static function getCaretLineIndex__textInputEditing(source:RichText, layout:TextLayoutResult):Float {
+  public static function getCaretLineIndex__textInputEditing(source:RichText, layout:TextLayoutResult):Float {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = TextInput.scratchRect__textInputEditing;
     FlightRuntime.callValue(getTextInputCaretRectangle, cast ([out, source, layout] : Array<Dynamic>));
@@ -429,12 +426,12 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function getFallbackLineHeight__textInputEditing(layout:TextLayoutResult):Float {
+  public static function getFallbackLineHeight__textInputEditing(layout:TextLayoutResult):Float {
     return cast FlightRuntime.coalesce(FlightRuntime.getIndex(FlightRuntime.field(layout, 'lineHeights'), 0.0), function():Dynamic return cast 12.0);
     return cast null;
   }
 
-  @:keep public static function getInputState__textInputEditing(source:RichText):TextInputState {
+  public static function getInputState__textInputEditing(source:RichText):TextInputState {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     state = FlightRuntime.callValue(getTextInputState, cast ([source] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(state, null))) { throw FlightRuntime.error('text input is not enabled on this RichText; call enableTextInput first'); }
@@ -442,7 +439,7 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function getKeyboardCommand__textInputEditing(data:KeyboardEventData):KeyboardCommand__textInputEditing {
+  public static function getKeyboardCommand__textInputEditing(data:KeyboardEventData):KeyboardCommand__textInputEditing {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.field(data, 'ctrlKey'), function():Dynamic return cast FlightRuntime.field(data, 'metaKey')))) {
   var key:Dynamic = FlightRuntime.callProperty(FlightRuntime.field(data, 'key'), 'toLowerCase', cast ([] : Array<Dynamic>));
   if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(key, 'a'), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(data, 'keyCode'), Types.KeyCodeValue.A)))) { return cast 'selectAll'; }
@@ -476,7 +473,7 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function getLineEndIndex__textInputEditing(layout:TextLayoutResult, lineIndex:Float, textLength:Float):Float {
+  public static function getLineEndIndex__textInputEditing(layout:TextLayoutResult, lineIndex:Float, textLength:Float):Float {
     var end:Dynamic = cast FlightRuntime.UNDEFINED;
     end = -1.0;
     for (group in FlightRuntime.iterable(FlightRuntime.field(layout, 'groups'))) {
@@ -486,7 +483,7 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function getLineOffsetY__textInputEditing(layout:TextLayoutResult, lineIndex:Float):Float {
+  public static function getLineOffsetY__textInputEditing(layout:TextLayoutResult, lineIndex:Float):Float {
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
     for (group in FlightRuntime.iterable(FlightRuntime.field(layout, 'groups'))) {
       if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(group, 'lineIndex'), lineIndex))) { return cast FlightRuntime.field(group, 'offsetY'); }
@@ -503,7 +500,7 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function getLineStartIndex__textInputEditing(layout:TextLayoutResult, lineIndex:Float):Float {
+  public static function getLineStartIndex__textInputEditing(layout:TextLayoutResult, lineIndex:Float):Float {
     var start:Dynamic = cast FlightRuntime.UNDEFINED;
     start = -1.0;
     for (group in FlightRuntime.iterable(FlightRuntime.field(layout, 'groups'))) {
@@ -513,12 +510,12 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function getMutableRuntime__selectableRichTextManager(source:RichText):RichTextRuntime {
+  public static function getMutableRuntime__selectableRichTextManager(source:RichText):RichTextRuntime {
     return cast (cast FlightRuntime.callValue(getRichTextRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime);
     return cast null;
   }
 
-  @:keep public static function getSelectableRichTextSelectionText(manager:SelectableRichTextManager):String {
+  public static function getSelectableRichTextSelectionText(manager:SelectableRichTextManager):String {
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var start:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -532,12 +529,12 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function getTextInputCaretIndex(source:RichText):Float {
+  public static function getTextInputCaretIndex(source:RichText):Float {
     return cast FlightRuntime.callValue(TextInput.clampIndex__textInputEditing, cast ([FlightRuntime.field(FlightRuntime.callValue(TextInput.getInputState__textInputEditing, cast ([source] : Array<Dynamic>)), 'caretIndex'), FlightRuntime.field(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getTextInputCaretRectangle(out:TextSelectionRectangle, source:RichText, layout:TextLayoutResult):Void {
+  public static function getTextInputCaretRectangle(out:TextSelectionRectangle, source:RichText, layout:TextLayoutResult):Void {
     var caretIndex:Dynamic = cast FlightRuntime.UNDEFINED;
     var group:Dynamic = cast FlightRuntime.UNDEFINED;
     caretIndex = FlightRuntime.callValue(getTextInputCaretIndex, cast ([source] : Array<Dynamic>));
@@ -557,7 +554,7 @@ class TextInput {
     FlightRuntime.setField(out, 'lineIndex', FlightRuntime.field(group, 'lineIndex'));
   }
 
-  @:keep public static function getTextInputCharacterIndexAtPoint(source:RichText, layout:TextLayoutResult, x:Float, y:Float):Float {
+  public static function getTextInputCharacterIndexAtPoint(source:RichText, layout:TextLayoutResult, x:Float, y:Float):Float {
     var closestLineIndex:Dynamic = cast FlightRuntime.UNDEFINED;
     var closestLineDistance:Dynamic = cast FlightRuntime.UNDEFINED;
     var lineStart:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -591,7 +588,7 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function getTextInputDisplayText(source:RichText):String {
+  public static function getTextInputDisplayText(source:RichText):String {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     var passwordCharacter:Dynamic = cast FlightRuntime.UNDEFINED;
     state = FlightRuntime.callValue(TextInput.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
@@ -601,7 +598,7 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function getTextInputFocusTarget__textInputManager(manager:TextInputManager):Null<RichText> {
+  public static function getTextInputFocusTarget__textInputManager(manager:TextInputManager):Null<RichText> {
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.field(manager, 'enabled')))) { return cast null; }
     target = FlightRuntime.field(manager, 'focused');
@@ -610,35 +607,35 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function getTextInputSelectionBeginIndex(source:RichText):Float {
+  public static function getTextInputSelectionBeginIndex(source:RichText):Float {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     state = FlightRuntime.callValue(TextInput.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
     return cast FlightRuntime.callProperty(HxMath, 'min', cast ([FlightRuntime.callValue(TextInput.clampIndex__textInputEditing, cast ([FlightRuntime.field(state, 'caretIndex'), FlightRuntime.field(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>)), FlightRuntime.callValue(TextInput.clampIndex__textInputEditing, cast ([FlightRuntime.field(state, 'selectionIndex'), FlightRuntime.field(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getTextInputSelectionEndIndex(source:RichText):Float {
+  public static function getTextInputSelectionEndIndex(source:RichText):Float {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     state = FlightRuntime.callValue(TextInput.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
     return cast FlightRuntime.callProperty(HxMath, 'max', cast ([FlightRuntime.callValue(TextInput.clampIndex__textInputEditing, cast ([FlightRuntime.field(state, 'caretIndex'), FlightRuntime.field(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>)), FlightRuntime.callValue(TextInput.clampIndex__textInputEditing, cast ([FlightRuntime.field(state, 'selectionIndex'), FlightRuntime.field(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getTextInputSelectionRectangles(out:Array<TextSelectionRectangle>, source:RichText, layout:TextLayoutResult):Void {
+  public static function getTextInputSelectionRectangles(out:Array<TextSelectionRectangle>, source:RichText, layout:TextLayoutResult):Void {
     FlightRuntime.callValue(getRichTextSelectionRectangles, cast ([out, FlightRuntime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>)), FlightRuntime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>)), layout] : Array<Dynamic>));
   }
 
-  @:keep public static function getTextInputSelectionText(source:RichText):String {
+  public static function getTextInputSelectionText(source:RichText):String {
     return cast FlightRuntime.slice(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text'), FlightRuntime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>)), FlightRuntime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function getTextInputState(node:RichText):Null<TextInputState> {
+  public static function getTextInputState(node:RichText):Null<TextInputState> {
     return cast FlightRuntime.field(FlightRuntime.callValue(getRichTextRuntime, cast ([node] : Array<Dynamic>)), 'input');
     return cast null;
   }
 
-  @:keep public static function getTextLayoutGroupAtIndex__textInputEditing(layout:TextLayoutResult, index:Float):Null<TextLayoutGroup> {
+  public static function getTextLayoutGroupAtIndex__textInputEditing(layout:TextLayoutResult, index:Float):Null<TextLayoutGroup> {
     for (group in FlightRuntime.iterable(FlightRuntime.field(layout, 'groups'))) {
       if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.compare(index, FlightRuntime.field(group, 'startIndex'), '>='), function():Dynamic return cast FlightRuntime.compare(index, FlightRuntime.field(group, 'endIndex'), '<=')))) { return cast group; }
     }
@@ -646,7 +643,7 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function getTextLayoutGroupCaretX__textInputEditing(group:TextLayoutGroup, index:Float):Float {
+  public static function getTextLayoutGroupCaretX__textInputEditing(group:TextLayoutGroup, index:Float):Float {
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var limit:Dynamic = cast FlightRuntime.UNDEFINED;
     x = FlightRuntime.field(group, 'offsetX');
@@ -662,7 +659,7 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function getTextLayoutGroupCharacterIndexAtX__textInputEditing(group:TextLayoutGroup, x:Float):Float {
+  public static function getTextLayoutGroupCharacterIndexAtX__textInputEditing(group:TextLayoutGroup, x:Float):Float {
     var currentX:Dynamic = cast FlightRuntime.UNDEFINED;
     currentX = FlightRuntime.field(group, 'offsetX');
     {
@@ -678,7 +675,7 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function handleTextInputKeyboard(source:RichText, data:KeyboardEventData, ?options:HandleTextInputKeyboardOptions):Bool {
+  public static function handleTextInputKeyboard(source:RichText, data:KeyboardEventData, ?options:HandleTextInputKeyboardOptions):Bool {
     var command:Dynamic = cast FlightRuntime.UNDEFINED;
     command = FlightRuntime.callValue(TextInput.getKeyboardCommand__textInputEditing, cast ([data] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(command, 'none'))) { return cast false; }
@@ -774,21 +771,21 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function hasTextInput(node:RichText):Bool {
+  public static function hasTextInput(node:RichText):Bool {
     return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.callValue(getRichTextRuntime, cast ([node] : Array<Dynamic>)), 'input'), null);
     return cast null;
   }
 
-  @:keep public static function insertTextInput(source:RichText, text:String):Void {
+  public static function insertTextInput(source:RichText, text:String):Void {
     FlightRuntime.callValue(replaceSelectedTextInput, cast ([source, text, { applyInputRules: true }] : Array<Dynamic>));
   }
 
-  @:keep public static function isWordChar__textInputEditing(char:String):Bool {
+  public static function isWordChar__textInputEditing(char:String):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.regexp('\\w', ''), 'test', cast ([char] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function matchesRestrictRanges__textInputEditing(char:String, ranges:String):Bool {
+  public static function matchesRestrictRanges__textInputEditing(char:String, ranges:String):Bool {
     {
       var i:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(i, FlightRuntime.field(ranges, 'length'), '<'))) {
@@ -811,7 +808,7 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function moveTextInputCaret(source:RichText, index:Float, extendSelection:Dynamic = false):Void {
+  public static function moveTextInputCaret(source:RichText, index:Float, extendSelection:Dynamic = false):Void {
     var caret:Dynamic = cast FlightRuntime.UNDEFINED;
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     caret = FlightRuntime.callValue(TextInput.clampIndex__textInputEditing, cast ([index, FlightRuntime.field(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
@@ -822,7 +819,7 @@ class TextInput {
     FlightRuntime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function moveTextInputCaretByWord(source:RichText, direction:Float, extendSelection:Dynamic = false):Void {
+  public static function moveTextInputCaretByWord(source:RichText, direction:Float, extendSelection:Dynamic = false):Void {
     var caretIndex:Dynamic = cast FlightRuntime.UNDEFINED;
     var text:Dynamic = cast FlightRuntime.UNDEFINED;
     var target:Float = cast FlightRuntime.UNDEFINED;
@@ -836,7 +833,7 @@ class TextInput {
     FlightRuntime.callValue(moveTextInputCaret, cast ([source, target, extendSelection] : Array<Dynamic>));
   }
 
-  @:keep public static function moveTextInputCaretDown(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
+  public static function moveTextInputCaretDown(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     var targetLineIndex:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -864,7 +861,7 @@ class TextInput {
     FlightRuntime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function moveTextInputCaretToLineEnd(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
+  public static function moveTextInputCaretToLineEnd(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
     var lineIndex:Dynamic = cast FlightRuntime.UNDEFINED;
     var lineEnd:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(layout, null), function():Dynamic return cast FlightRuntime.strictEquals(layout, FlightRuntime.UNDEFINED)))) {
@@ -876,7 +873,7 @@ class TextInput {
     FlightRuntime.callValue(moveTextInputCaret, cast ([source, lineEnd, extendSelection] : Array<Dynamic>));
   }
 
-  @:keep public static function moveTextInputCaretToLineStart(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
+  public static function moveTextInputCaretToLineStart(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
     var lineIndex:Dynamic = cast FlightRuntime.UNDEFINED;
     var lineStart:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(layout, null), function():Dynamic return cast FlightRuntime.strictEquals(layout, FlightRuntime.UNDEFINED)))) {
@@ -888,7 +885,7 @@ class TextInput {
     FlightRuntime.callValue(moveTextInputCaret, cast ([source, lineStart, extendSelection] : Array<Dynamic>));
   }
 
-  @:keep public static function moveTextInputCaretUp(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
+  public static function moveTextInputCaretUp(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     var targetLineIndex:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -916,7 +913,7 @@ class TextInput {
     FlightRuntime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function recordTextInputEdit__textInputEditing(state:TextInputState, textBefore:String, textAfter:String, caretIndexBefore:Float, selectionIndexBefore:Float, mergeKind:Null<String>):Void {
+  public static function recordTextInputEdit__textInputEditing(state:TextInputState, textBefore:String, textAfter:String, caretIndexBefore:Float, selectionIndexBefore:Float, mergeKind:Null<String>):Void {
     var previous:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(state, 'historyIndex'), (FlightRuntime.field(FlightRuntime.field(state, 'history'), 'length') - 1.0), '<'))) {
   FlightRuntime.setLength(FlightRuntime.field(state, 'history'), (FlightRuntime.field(state, 'historyIndex') + 1.0));
@@ -937,7 +934,7 @@ class TextInput {
 }
   }
 
-  @:keep public static function redoTextInput(source:RichText):Void {
+  public static function redoTextInput(source:RichText):Void {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     var record:Dynamic = cast FlightRuntime.UNDEFINED;
     state = FlightRuntime.callValue(TextInput.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
@@ -947,11 +944,11 @@ class TextInput {
     FlightRuntime.callValue(TextInput.applyHistoryRecord__textInputEditing, cast ([source, state, FlightRuntime.field(record, 'textAfter'), FlightRuntime.field(record, 'caretIndexAfter'), FlightRuntime.field(record, 'selectionIndexAfter')] : Array<Dynamic>));
   }
 
-  @:keep public static function replaceSelectedTextInput(source:RichText, text:String, ?options:ReplaceTextInputOptions):Void {
+  public static function replaceSelectedTextInput(source:RichText, text:String, ?options:ReplaceTextInputOptions):Void {
     FlightRuntime.callValue(replaceTextInput, cast ([source, FlightRuntime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>)), FlightRuntime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>)), text, options] : Array<Dynamic>));
   }
 
-  @:keep public static function replaceTextInput(source:RichText, beginIndex:Float, endIndex:Float, text:String, ?options:ReplaceTextInputOptions):Void {
+  public static function replaceTextInput(source:RichText, beginIndex:Float, endIndex:Float, text:String, ?options:ReplaceTextInputOptions):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var start:Dynamic = cast FlightRuntime.UNDEFINED;
     var end:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -984,7 +981,7 @@ class TextInput {
     FlightRuntime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function restrictTextInput__textInputEditing(text:String, restrict:String):String {
+  public static function restrictTextInput__textInputEditing(text:String, restrict:String):String {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var accepted:Dynamic = cast FlightRuntime.UNDEFINED;
     var declined:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1005,7 +1002,7 @@ class TextInput {
 
   public static final scratchRect__textInputEditing:{ var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; } = { height: 0.0, lineIndex: 0.0, width: 0.0, x: 0.0, y: 0.0 };
 
-  @:keep public static function scrollTextInputCaretIntoView(source:RichText, layout:TextLayoutResult, viewportWidth:Float, viewportHeight:Float):Void {
+  public static function scrollTextInputCaretIntoView(source:RichText, layout:TextLayoutResult, viewportWidth:Float, viewportHeight:Float):Void {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     var caretTop:Dynamic = cast FlightRuntime.UNDEFINED;
     var caretBottom:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1059,11 +1056,11 @@ class TextInput {
 } }
   }
 
-  @:keep public static function selectAllTextInput(source:RichText):Void {
+  public static function selectAllTextInput(source:RichText):Void {
     FlightRuntime.callValue(setTextInputSelection, cast ([source, 0.0, FlightRuntime.field(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
   }
 
-  @:keep public static function selectLineAtTextInputIndex(source:RichText, index:Float):Void {
+  public static function selectLineAtTextInputIndex(source:RichText, index:Float):Void {
     var text:Dynamic = cast FlightRuntime.UNDEFINED;
     var clamped:Dynamic = cast FlightRuntime.UNDEFINED;
     var start:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1077,7 +1074,7 @@ class TextInput {
     FlightRuntime.callValue(setTextInputSelection, cast ([source, start, end] : Array<Dynamic>));
   }
 
-  @:keep public static function selectWordAtTextInputIndex(source:RichText, index:Float):Void {
+  public static function selectWordAtTextInputIndex(source:RichText, index:Float):Void {
     var text:Dynamic = cast FlightRuntime.UNDEFINED;
     var clamped:Dynamic = cast FlightRuntime.UNDEFINED;
     var start:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1095,13 +1092,13 @@ class TextInput {
     FlightRuntime.callValue(setTextInputSelection, cast ([source, start, end] : Array<Dynamic>));
   }
 
-  @:keep public static function setTextInputFocused__textInputManager(target:RichText, focused:Bool):Void {
+  public static function setTextInputFocused__textInputManager(target:RichText, focused:Bool):Void {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     state = FlightRuntime.callValue(getTextInputState, cast ([target] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(state, null))) { FlightRuntime.setField(state, 'focused', focused); }
   }
 
-  @:keep public static function setTextInputSelection(source:RichText, beginIndex:Float, endIndex:Float):Void {
+  public static function setTextInputSelection(source:RichText, beginIndex:Float, endIndex:Float):Void {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     state = FlightRuntime.callValue(TextInput.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
     FlightRuntime.setField(state, 'selectionIndex', FlightRuntime.callValue(TextInput.clampIndex__textInputEditing, cast ([beginIndex, FlightRuntime.field(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>)));
@@ -1109,7 +1106,7 @@ class TextInput {
     FlightRuntime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function splitRestrictRanges__textInputEditing(restrict:String):{ var accepted:String; var declined:String; } {
+  public static function splitRestrictRanges__textInputEditing(restrict:String):{ var accepted:String; var declined:String; } {
     var accepted:Dynamic = cast FlightRuntime.UNDEFINED;
     var declined:Dynamic = cast FlightRuntime.UNDEFINED;
     var declining:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1138,7 +1135,7 @@ class TextInput {
     return cast null;
   }
 
-  @:keep public static function undoTextInput(source:RichText):Void {
+  public static function undoTextInput(source:RichText):Void {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     var record:Dynamic = cast FlightRuntime.UNDEFINED;
     state = FlightRuntime.callValue(TextInput.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));

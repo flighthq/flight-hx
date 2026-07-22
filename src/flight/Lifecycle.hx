@@ -11,9 +11,6 @@ import flight.Types.AppLifecycleState;
 import flight.Types.AppMemoryPressure;
 import flight.Types.LifecycleBackend;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Lifecycle")
 class Lifecycle {
   public static var _backend__lifecycle:Null<LifecycleBackend> = FlightRuntime.explicitNull();
@@ -22,7 +19,7 @@ class Lifecycle {
 
   public static final _subscriptions__lifecycle:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function attachAppLifecycle(app:AppLifecycle):Void {
+  public static function attachAppLifecycle(app:AppLifecycle):Void {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var previous:Dynamic = cast FlightRuntime.UNDEFINED;
     var unsubscribeState:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -61,12 +58,12 @@ class Lifecycle {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function createAppLifecycle():AppLifecycle {
+  public static function createAppLifecycle():AppLifecycle {
     return cast { onStateChange: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onResume: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onPause: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onBackButton: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onMemoryWarning: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onSaveState: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onRestoreState: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createWebLifecycleBackend():LifecycleBackend {
+  public static function createWebLifecycleBackend():LifecycleBackend {
     var _windowFocused:Dynamic = cast FlightRuntime.UNDEFINED;
     _windowFocused = !FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined');
     return cast { getState: function() {
@@ -138,7 +135,7 @@ class Lifecycle {
     return cast null;
   }
 
-  @:keep public static function detachAppLifecycle(app:AppLifecycle):Void {
+  public static function detachAppLifecycle(app:AppLifecycle):Void {
     var unsubscribe:Dynamic = cast FlightRuntime.UNDEFINED;
     unsubscribe = FlightRuntime.callProperty(Lifecycle._subscriptions__lifecycle, 'get', cast ([app] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(unsubscribe, FlightRuntime.UNDEFINED))) {
@@ -147,51 +144,51 @@ class Lifecycle {
 }
   }
 
-  @:keep public static function disposeAppLifecycle(app:AppLifecycle):Void {
+  public static function disposeAppLifecycle(app:AppLifecycle):Void {
     FlightRuntime.callValue(detachAppLifecycle, cast ([app] : Array<Dynamic>));
     FlightRuntime.callProperty(Lifecycle._savedState__lifecycle, 'delete', cast ([app] : Array<Dynamic>));
   }
 
-  @:keep public static function getAppLaunchKind():AppLaunchKind {
+  public static function getAppLaunchKind():AppLaunchKind {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     backend = FlightRuntime.callValue(getLifecycleBackend, cast ([] : Array<Dynamic>));
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.field(backend, 'getLaunchKind'), FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.callProperty(backend, 'getLaunchKind', cast ([] : Array<Dynamic>)), function():Dynamic return cast 'warm');
     return cast null;
   }
 
-  @:keep public static function getAppLifecycleState():AppLifecycleState {
+  public static function getAppLifecycleState():AppLifecycleState {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getLifecycleBackend, cast ([] : Array<Dynamic>)), 'getState', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getLifecycleBackend():LifecycleBackend {
+  public static function getLifecycleBackend():LifecycleBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Lifecycle._backend__lifecycle, null))) { (Lifecycle._backend__lifecycle = cast (FlightRuntime.callValue(createWebLifecycleBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Lifecycle._backend__lifecycle;
     return cast null;
   }
 
-  @:keep public static function isAppActive():Bool {
+  public static function isAppActive():Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime.callValue(getLifecycleBackend, cast ([] : Array<Dynamic>)), 'getState', cast ([] : Array<Dynamic>)), 'active');
     return cast null;
   }
 
-  @:keep public static function isAppBackground():Bool {
+  public static function isAppBackground():Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime.callValue(getLifecycleBackend, cast ([] : Array<Dynamic>)), 'getState', cast ([] : Array<Dynamic>)), 'background');
     return cast null;
   }
 
-  @:keep public static function isAppInactive():Bool {
+  public static function isAppInactive():Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime.callValue(getLifecycleBackend, cast ([] : Array<Dynamic>)), 'getState', cast ([] : Array<Dynamic>)), 'inactive');
     return cast null;
   }
 
-  @:keep public static function requestAppBack(app:AppLifecycle):Bool {
+  public static function requestAppBack(app:AppLifecycle):Bool {
     FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(app, 'onBackButton')] : Array<Dynamic>));
     return cast !FlightRuntime.strictEquals(FlightRuntime.optionalField(FlightRuntime.field(FlightRuntime.field(app, 'onBackButton'), 'data'), 'cancelled'), true);
     return cast null;
   }
 
-  @:keep public static function setLifecycleBackend(backend:Null<LifecycleBackend>):Void {
+  public static function setLifecycleBackend(backend:Null<LifecycleBackend>):Void {
     (Lifecycle._backend__lifecycle = cast (backend : Dynamic));
   }
 }

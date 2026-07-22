@@ -23,12 +23,9 @@ import flight.Types.Path;
 import flight.Types.PathWinding;
 import flight.Types.RectangleLike;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Clip")
 class Clip {
-  @:keep public static function acquireClipRegion():ClipRegion {
+  public static function acquireClipRegion():ClipRegion {
     var region:Dynamic = cast FlightRuntime.UNDEFINED;
     region = FlightRuntime.callProperty(Clip.clipRegionPool__clipRegion, 'pop', cast ([] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(region, FlightRuntime.UNDEFINED))) {
@@ -45,7 +42,7 @@ class Clip {
     return cast null;
   }
 
-  @:keep public static function appendCircleToPath__clipRegion(path:Path, cx:Float, cy:Float, r:Float):Void {
+  public static function appendCircleToPath__clipRegion(path:Path, cx:Float, cy:Float, r:Float):Void {
     var k:Dynamic = cast FlightRuntime.UNDEFINED;
     k = (r * Clip.KAPPA__clipRegion);
     FlightRuntime.callValue(appendPathMoveTo, cast ([path, cx, (cy - r)] : Array<Dynamic>));
@@ -55,7 +52,7 @@ class Clip {
     FlightRuntime.callValue(appendPathCubicCurveTo, cast ([path, (cx - r), (cy - k), (cx - k), (cy - r), cx, (cy - r)] : Array<Dynamic>));
   }
 
-  @:keep public static function appendEllipseToPath__clipRegion(path:Path, x:Float, y:Float, w:Float, h:Float):Void {
+  public static function appendEllipseToPath__clipRegion(path:Path, x:Float, y:Float, w:Float, h:Float):Void {
     var cx:Dynamic = cast FlightRuntime.UNDEFINED;
     var cy:Dynamic = cast FlightRuntime.UNDEFINED;
     var rx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -75,7 +72,7 @@ class Clip {
     FlightRuntime.callValue(appendPathCubicCurveTo, cast ([path, (cx - rx), (cy - ky), (cx - kx), (cy - ry), cx, (cy - ry)] : Array<Dynamic>));
   }
 
-  @:keep public static function appendRoundedRectToPath__clipRegion(path:Path, x:Float, y:Float, w:Float, h:Float, r:Float):Void {
+  public static function appendRoundedRectToPath__clipRegion(path:Path, x:Float, y:Float, w:Float, h:Float, r:Float):Void {
     var maxR:Dynamic = cast FlightRuntime.UNDEFINED;
     var cr:Dynamic = cast FlightRuntime.UNDEFINED;
     var k:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -101,26 +98,26 @@ class Clip {
     FlightRuntime.callValue(appendPathCubicCurveTo, cast ([path, x, (y1 - k), (x1 - k), y, x1, y] : Array<Dynamic>));
   }
 
-  @:keep public static function clipRegionContainsPoint(clip:ClipRegion, x:Float, y:Float):Bool {
+  public static function clipRegionContainsPoint(clip:ClipRegion, x:Float, y:Float):Bool {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(containsRectanglePointXY, cast ([FlightRuntime.field(clip, 'rect'), x, y] : Array<Dynamic>))))) { return cast false; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(clip, 'contours'), null))) { return cast true; }
     return cast FlightRuntime.callValue(Clip.pointInContours__clipRegion, cast ([FlightRuntime.field(clip, 'contours'), FlightRuntime.field(clip, 'winding'), x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function clipRegionContainsRectangle(clip:ClipRegion, rectangle:RectangleLike):Bool {
+  public static function clipRegionContainsRectangle(clip:ClipRegion, rectangle:RectangleLike):Bool {
     return cast FlightRuntime.callValue(enclosesRectangle, cast ([FlightRuntime.field(clip, 'rect'), rectangle] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function clipRegionIntersectsRectangle(clip:ClipRegion, rectangle:RectangleLike):Bool {
+  public static function clipRegionIntersectsRectangle(clip:ClipRegion, rectangle:RectangleLike):Bool {
     return cast FlightRuntime.callValue(intersectsRectangle, cast ([FlightRuntime.field(clip, 'rect'), rectangle] : Array<Dynamic>));
     return cast null;
   }
 
   public static final clipRegionPool__clipRegion:Array<ClipRegion> = cast ([] : Array<Dynamic>);
 
-  @:keep public static function cloneClipRegion(clip:ClipRegion):ClipRegion {
+  public static function cloneClipRegion(clip:ClipRegion):ClipRegion {
     var rect:Dynamic = cast FlightRuntime.UNDEFINED;
     var contours:Dynamic = cast FlightRuntime.UNDEFINED;
     rect = FlightRuntime.callValue(cloneRectangle, cast ([FlightRuntime.field(clip, 'rect')] : Array<Dynamic>));
@@ -129,7 +126,7 @@ class Clip {
     return cast null;
   }
 
-  @:keep public static function copyClipRegion(out:ClipRegion, source:ClipRegion):Void {
+  public static function copyClipRegion(out:ClipRegion, source:ClipRegion):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals((cast out : Dynamic), (cast source : Dynamic)))) { return; }
     FlightRuntime.callValue(copyRectangle, cast ([FlightRuntime.field(out, 'rect'), FlightRuntime.field(source, 'rect')] : Array<Dynamic>));
     FlightRuntime.setField(out, 'contours', FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.field(source, 'contours'), null), function():Dynamic return cast null, function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.field(source, 'contours'), 'map', cast ([function(c:Dynamic) return FlightRuntime.slice(c, 0, null)] : Array<Dynamic>))));
@@ -137,7 +134,7 @@ class Clip {
     FlightRuntime.setField(out, 'version', FlightRuntime.unsignedShiftRight(Std.int((FlightRuntime.field(out, 'version') + 1.0)), Std.int(0.0)));
   }
 
-  @:keep public static function createClipRegionFromCircle(x:Float, y:Float, radius:Float, tolerance:Dynamic = 0.25):ClipRegion {
+  public static function createClipRegionFromCircle(x:Float, y:Float, radius:Float, tolerance:Dynamic = 0.25):ClipRegion {
     var path:Dynamic = cast FlightRuntime.UNDEFINED;
     path = FlightRuntime.callValue(createPath, cast (['nonZero'] : Array<Dynamic>));
     FlightRuntime.callValue(Clip.appendCircleToPath__clipRegion, cast ([path, x, y, radius] : Array<Dynamic>));
@@ -145,7 +142,7 @@ class Clip {
     return cast null;
   }
 
-  @:keep public static function createClipRegionFromContours(contours:Array<Array<Float>>, winding:PathWinding):ClipRegion {
+  public static function createClipRegionFromContours(contours:Array<Array<Float>>, winding:PathWinding):ClipRegion {
     var rect:Dynamic = cast FlightRuntime.UNDEFINED;
     var owned:Dynamic = cast FlightRuntime.UNDEFINED;
     rect = FlightRuntime.callValue(createRectangle, cast ([] : Array<Dynamic>));
@@ -155,7 +152,7 @@ class Clip {
     return cast null;
   }
 
-  @:keep public static function createClipRegionFromEllipse(rectangle:RectangleLike, tolerance:Dynamic = 0.25):ClipRegion {
+  public static function createClipRegionFromEllipse(rectangle:RectangleLike, tolerance:Dynamic = 0.25):ClipRegion {
     var path:Dynamic = cast FlightRuntime.UNDEFINED;
     path = FlightRuntime.callValue(createPath, cast (['nonZero'] : Array<Dynamic>));
     FlightRuntime.callValue(Clip.appendEllipseToPath__clipRegion, cast ([path, FlightRuntime.field(rectangle, 'x'), FlightRuntime.field(rectangle, 'y'), FlightRuntime.field(rectangle, 'width'), FlightRuntime.field(rectangle, 'height')] : Array<Dynamic>));
@@ -163,7 +160,7 @@ class Clip {
     return cast null;
   }
 
-  @:keep public static function createClipRegionFromPath(path:Path, tolerance:Dynamic = 0.25):ClipRegion {
+  public static function createClipRegionFromPath(path:Path, tolerance:Dynamic = 0.25):ClipRegion {
     var contours:Dynamic = cast FlightRuntime.UNDEFINED;
     var rect:Dynamic = cast FlightRuntime.UNDEFINED;
     contours = FlightRuntime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
@@ -173,12 +170,12 @@ class Clip {
     return cast null;
   }
 
-  @:keep public static function createClipRegionFromRectangle(rectangle:RectangleLike):ClipRegion {
+  public static function createClipRegionFromRectangle(rectangle:RectangleLike):ClipRegion {
     return cast { contours: null, rect: FlightRuntime.callValue(cloneRectangle, cast ([rectangle] : Array<Dynamic>)), version: 0.0, winding: 'nonZero' };
     return cast null;
   }
 
-  @:keep public static function createClipRegionFromRoundedRectangle(rectangle:RectangleLike, radius:Float, tolerance:Dynamic = 0.25):ClipRegion {
+  public static function createClipRegionFromRoundedRectangle(rectangle:RectangleLike, radius:Float, tolerance:Dynamic = 0.25):ClipRegion {
     var path:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(radius, 0.0, '<='))) { return cast FlightRuntime.callValue(createClipRegionFromRectangle, cast ([rectangle] : Array<Dynamic>)); }
     path = FlightRuntime.callValue(createPath, cast (['nonZero'] : Array<Dynamic>));
@@ -187,7 +184,7 @@ class Clip {
     return cast null;
   }
 
-  @:keep public static function equalsClipRegion(a:ClipRegion, b:ClipRegion):Bool {
+  public static function equalsClipRegion(a:ClipRegion, b:ClipRegion):Bool {
     var ar:Dynamic = cast FlightRuntime.UNDEFINED;
     var br:Dynamic = cast FlightRuntime.UNDEFINED;
     var ac:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -222,7 +219,7 @@ class Clip {
     return cast null;
   }
 
-  @:keep public static function getClipRegionBounds(out:RectangleLike, clip:ClipRegion):Void {
+  public static function getClipRegionBounds(out:RectangleLike, clip:ClipRegion):Void {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     r = FlightRuntime.field(clip, 'rect');
     FlightRuntime.setField(out, 'x', FlightRuntime.field(r, 'x'));
@@ -231,7 +228,7 @@ class Clip {
     FlightRuntime.setField(out, 'height', FlightRuntime.field(r, 'height'));
   }
 
-  @:keep public static function intersectClipRegions(out:ClipRegion, a:ClipRegion, b:ClipRegion):Void {
+  public static function intersectClipRegions(out:ClipRegion, a:ClipRegion, b:ClipRegion):Void {
     var aRect:Dynamic = cast FlightRuntime.UNDEFINED;
     var bRect:Dynamic = cast FlightRuntime.UNDEFINED;
     var ax:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -299,32 +296,32 @@ class Clip {
     FlightRuntime.setField(out, 'version', FlightRuntime.unsignedShiftRight(Std.int((FlightRuntime.field(out, 'version') + 1.0)), Std.int(0.0)));
   }
 
-  @:keep public static function invalidateClipRegion(clip:ClipRegion):Void {
+  public static function invalidateClipRegion(clip:ClipRegion):Void {
     FlightRuntime.setField(clip, 'version', FlightRuntime.unsignedShiftRight(Std.int((FlightRuntime.field(clip, 'version') + 1.0)), Std.int(0.0)));
   }
 
-  @:keep public static function isClipRegionEmpty(clip:ClipRegion):Bool {
+  public static function isClipRegionEmpty(clip:ClipRegion):Bool {
     if (FlightRuntime.truthy(FlightRuntime.callValue(isEmptyRectangle, cast ([FlightRuntime.field(clip, 'rect')] : Array<Dynamic>)))) { return cast true; }
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.field(clip, 'contours'), null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(clip, 'contours'), 'length'), 0.0)))) { return cast true; }
     return cast false;
     return cast null;
   }
 
-  @:keep public static function isClipRegionRectangular(clip:ClipRegion):Bool {
+  public static function isClipRegionRectangular(clip:ClipRegion):Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.field(clip, 'contours'), null);
     return cast null;
   }
 
   public static final KAPPA__clipRegion:Dynamic = 0.5522847498;
 
-  @:keep public static function makeEmptyClipRegion__clipRegion():ClipRegion {
+  public static function makeEmptyClipRegion__clipRegion():ClipRegion {
     return cast { contours: null, rect: FlightRuntime.callValue(createRectangle, cast ([] : Array<Dynamic>)), version: 0.0, winding: 'nonZero' };
     return cast null;
   }
 
   public static final NORMALIZE_EPSILON__clipRegion:Dynamic = 0.000001;
 
-  @:keep public static function normalizeClipRegion(out:ClipRegion, clip:ClipRegion):Void {
+  public static function normalizeClipRegion(out:ClipRegion, clip:ClipRegion):Void {
     var inContours:Dynamic = cast FlightRuntime.UNDEFINED;
     var inRect:Dynamic = cast FlightRuntime.UNDEFINED;
     var inWinding:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -391,7 +388,7 @@ class Clip {
     FlightRuntime.setField(out, 'version', FlightRuntime.unsignedShiftRight(Std.int((FlightRuntime.field(out, 'version') + 1.0)), Std.int(0.0)));
   }
 
-  @:keep public static function pointInContours__clipRegion(contours:Array<Array<Float>>, winding:PathWinding, px:Float, py:Float):Bool {
+  public static function pointInContours__clipRegion(contours:Array<Array<Float>>, winding:PathWinding, px:Float, py:Float):Bool {
     var windingNumber:Dynamic = cast FlightRuntime.UNDEFINED;
     windingNumber = 0.0;
     {
@@ -433,18 +430,18 @@ class Clip {
     return cast null;
   }
 
-  @:keep public static function releaseClipRegion(clip:ClipRegion):Void {
+  public static function releaseClipRegion(clip:ClipRegion):Void {
     FlightRuntime.callProperty(Clip.clipRegionPool__clipRegion, 'push', cast ([clip] : Array<Dynamic>));
   }
 
-  @:keep public static function setClipRegionToRectangle(out:ClipRegion, rectangle:RectangleLike):Void {
+  public static function setClipRegionToRectangle(out:ClipRegion, rectangle:RectangleLike):Void {
     FlightRuntime.callValue(copyRectangle, cast ([FlightRuntime.field(out, 'rect'), rectangle] : Array<Dynamic>));
     FlightRuntime.setField(out, 'contours', null);
     FlightRuntime.setField(out, 'winding', 'nonZero');
     FlightRuntime.setField(out, 'version', FlightRuntime.unsignedShiftRight(Std.int((FlightRuntime.field(out, 'version') + 1.0)), Std.int(0.0)));
   }
 
-  @:keep public static function setRectangleToContoursBounds__clipRegion(out:RectangleLike, contours:Array<Array<Float>>):Void {
+  public static function setRectangleToContoursBounds__clipRegion(out:RectangleLike, contours:Array<Array<Float>>):Void {
     var minX:Dynamic = cast FlightRuntime.UNDEFINED;
     var minY:Dynamic = cast FlightRuntime.UNDEFINED;
     var maxX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -485,7 +482,7 @@ class Clip {
     FlightRuntime.setField(out, 'height', (maxY - minY));
   }
 
-  @:keep public static function transformClipRegion(out:ClipRegion, clip:ClipRegion, matrix:MatrixLike):Void {
+  public static function transformClipRegion(out:ClipRegion, clip:ClipRegion, matrix:MatrixLike):Void {
     var ma:Dynamic = cast FlightRuntime.UNDEFINED;
     var mb:Dynamic = cast FlightRuntime.UNDEFINED;
     var mc:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -556,7 +553,7 @@ class Clip {
     FlightRuntime.setField(out, 'version', FlightRuntime.unsignedShiftRight(Std.int((FlightRuntime.field(out, 'version') + 1.0)), Std.int(0.0)));
   }
 
-  @:keep public static function unionClipRegions(out:ClipRegion, a:ClipRegion, b:ClipRegion):Void {
+  public static function unionClipRegions(out:ClipRegion, a:ClipRegion, b:ClipRegion):Void {
     var aRect:Dynamic = cast FlightRuntime.UNDEFINED;
     var bRect:Dynamic = cast FlightRuntime.UNDEFINED;
     var aContours:Dynamic = cast FlightRuntime.UNDEFINED;

@@ -20,12 +20,9 @@ typedef ColorComponents__colorTween = { var b:Float; var g:Float; var r:Float; }
 
 typedef TweenStaggerOptions = { @:optional var each:Float; @:optional var from:Dynamic; @:optional var staggerEase:EasingFunction; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.TweenApi")
 class TweenApi {
-  @:keep public static function applyTween<T>(manager:TweenManager, target:Dynamic, propertyMap:NumericProps<Dynamic>):Void {
+  public static function applyTween<T>(manager:TweenManager, target:Dynamic, propertyMap:NumericProps<Dynamic>):Void {
     var t:Dynamic = cast FlightRuntime.UNDEFINED;
     var p:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(stopTweens, cast ([manager, target, propertyMap] : Array<Dynamic>));
@@ -37,7 +34,7 @@ class TweenApi {
     }
   }
 
-  @:keep public static function completeTween<T>(tween:Tween<Dynamic>):Void {
+  public static function completeTween<T>(tween:Tween<Dynamic>):Void {
     var effectiveT:Dynamic = cast FlightRuntime.UNDEFINED;
     var easedT:Dynamic = cast FlightRuntime.UNDEFINED;
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -55,7 +52,7 @@ class TweenApi {
     FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(tween, 'onComplete')] : Array<Dynamic>));
   }
 
-  @:keep public static function computeStaggerDelay__tweenStagger(index:Float, count:Float, each:Float, from:Dynamic, ?staggerEase:EasingFunction):Float {
+  public static function computeStaggerDelay__tweenStagger(index:Float, count:Float, each:Float, from:Dynamic, ?staggerEase:EasingFunction):Float {
     var normalizedPosition:Float = cast FlightRuntime.UNDEFINED;
     var eased:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(count, 1.0, '<='))) { return cast 0.0; }
@@ -76,7 +73,7 @@ class TweenApi {
     return cast null;
   }
 
-  @:keep public static function createColorTween(manager:TweenManager, target:Dynamic, property:String, duration:Float, toColor:Float, ?options:TweenOptions):Tween<ColorComponents__colorTween> {
+  public static function createColorTween(manager:TweenManager, target:Dynamic, property:String, duration:Float, toColor:Float, ?options:TweenOptions):Tween<ColorComponents__colorTween> {
     var fromColor:Dynamic = cast FlightRuntime.UNDEFINED;
     var components:ColorComponents__colorTween = cast FlightRuntime.UNDEFINED;
     var tween:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -90,7 +87,7 @@ class TweenApi {
     return cast null;
   }
 
-  @:keep public static function createTween<T>(managerOrTarget:Dynamic, targetOrDuration:Dynamic, durationOrProps:Dynamic, ?propsOrOptions:Dynamic, ?maybeOptions:TweenOptions):Tween<Dynamic> {
+  public static function createTween<T>(managerOrTarget:Dynamic, targetOrDuration:Dynamic, durationOrProps:Dynamic, ?propsOrOptions:Dynamic, ?maybeOptions:TweenOptions):Tween<Dynamic> {
     var manager:TweenManager = cast FlightRuntime.UNDEFINED;
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     var duration:Float = cast FlightRuntime.UNDEFINED;
@@ -116,12 +113,12 @@ class TweenApi {
     return cast null;
   }
 
-  @:keep public static function createTweenManager(?options:TweenManagerOptions):TweenManager {
+  public static function createTweenManager(?options:TweenManagerOptions):TweenManager {
     return cast { __brand: 'TweenManager', defaultEase: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'defaultEase'), function():Dynamic return cast easeOutExponential), tweens: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };
     return cast null;
   }
 
-  @:keep public static function createTweenStagger<T>(manager:TweenManager, targets:Array<Dynamic>, duration:Float, propertyMap:NumericProps<Dynamic>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<Tween<Dynamic>> {
+  public static function createTweenStagger<T>(manager:TweenManager, targets:Array<Dynamic>, duration:Float, propertyMap:NumericProps<Dynamic>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<Tween<Dynamic>> {
     var each:Dynamic = cast FlightRuntime.UNDEFINED;
     var from:Dynamic = cast FlightRuntime.UNDEFINED;
     var staggerEase:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -148,14 +145,14 @@ class TweenApi {
     return cast null;
   }
 
-  @:keep public static function createTweenTimer(manager:TweenManager, duration:Float, ?options:TweenOptions):Tween<Dynamic> {
+  public static function createTweenTimer(manager:TweenManager, duration:Float, ?options:TweenOptions):Tween<Dynamic> {
     return cast FlightRuntime.callValue(createTween, cast ([manager, {  }, duration, {  }, options] : Array<Dynamic>));
     return cast null;
   }
 
   public static final defaultManager:TweenManager = FlightRuntime.callValue(createTweenManager, cast ([] : Array<Dynamic>));
 
-  @:keep public static function getActiveTweenCount(manager:TweenManager):Float {
+  public static function getActiveTweenCount(manager:TweenManager):Float {
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     count = 0.0;
     for (list in FlightRuntime.iterable(FlightRuntime.callProperty(FlightRuntime.field(manager, 'tweens'), 'values', cast ([] : Array<Dynamic>)))) {
@@ -165,7 +162,7 @@ class TweenApi {
     return cast null;
   }
 
-  @:keep public static function getTweenProgress(tween:Tween<Dynamic>):Float {
+  public static function getTweenProgress(tween:Tween<Dynamic>):Float {
     var activeElapsed:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.field(tween, 'complete'))) { return cast 1.0; }
     activeElapsed = (FlightRuntime.field(tween, 'elapsed') - FlightRuntime.field(tween, 'delay'));
@@ -174,19 +171,19 @@ class TweenApi {
     return cast null;
   }
 
-  @:keep public static function getTweensOf(manager:TweenManager, target:Dynamic):Array<Tween<Dynamic>> {
+  public static function getTweensOf(manager:TweenManager, target:Dynamic):Array<Tween<Dynamic>> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.field(manager, 'tweens'), 'get', cast ([target] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function hasTweensOf(manager:TweenManager, target:Dynamic):Bool {
+  public static function hasTweensOf(manager:TweenManager, target:Dynamic):Bool {
     var list:Dynamic = cast FlightRuntime.UNDEFINED;
     list = FlightRuntime.callProperty(FlightRuntime.field(manager, 'tweens'), 'get', cast ([target] : Array<Dynamic>));
     return cast FlightRuntime.andValue(!FlightRuntime.strictEquals(list, FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(list, 'length'), 0.0, '>'));
     return cast null;
   }
 
-  @:keep public static function initializeTween<T>(tween:Tween<Dynamic>):Void {
+  public static function initializeTween<T>(tween:Tween<Dynamic>):Void {
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     var propertyMap:Dynamic = cast FlightRuntime.UNDEFINED;
     target = (cast FlightRuntime.field(tween, 'target') : Dynamic);
@@ -205,18 +202,18 @@ class TweenApi {
     FlightRuntime.setField(tween, 'initialized', true);
   }
 
-  @:keep public static function invalidateTween(tween:Tween<Dynamic>):Void {
+  public static function invalidateTween(tween:Tween<Dynamic>):Void {
     FlightRuntime.setField(tween, 'initialized', false);
     FlightRuntime.setField(tween, 'complete', false);
     FlightRuntime.setField(tween, 'elapsed', 0.0);
   }
 
-  @:keep public static function isTweenManager__tween(value:Dynamic):Bool {
+  public static function isTweenManager__tween(value:Dynamic):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.typeofValue(value), 'object'), function():Dynamic return cast !FlightRuntime.strictEquals(value, null)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field((cast value : Dynamic), '__brand'), 'TweenManager'));
     return cast null;
   }
 
-  @:keep public static function killTweensOfProperty(manager:TweenManager, key:String):Void {
+  public static function killTweensOfProperty(manager:TweenManager, key:String):Void {
     for (list in FlightRuntime.iterable(FlightRuntime.callProperty(FlightRuntime.field(manager, 'tweens'), 'values', cast ([] : Array<Dynamic>)))) {
       for (tween in FlightRuntime.iterable(list)) {
         var p:Dynamic = (cast FlightRuntime.field(tween, 'propertyMap') : Dynamic);
@@ -225,7 +222,7 @@ class TweenApi {
     }
   }
 
-  @:keep public static function makeTween__tween<T>(target:Dynamic, duration:Float, propertyMap:NumericProps<Dynamic>, options:Null<TweenOptions>, defaultEase:EasingFunction):Tween<Dynamic> {
+  public static function makeTween__tween<T>(target:Dynamic, duration:Float, propertyMap:NumericProps<Dynamic>, options:Null<TweenOptions>, defaultEase:EasingFunction):Tween<Dynamic> {
     var keys:Dynamic = cast FlightRuntime.UNDEFINED;
     var properties:Array<TweenPropertyDetail> = cast FlightRuntime.UNDEFINED;
     keys = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([propertyMap] : Array<Dynamic>));
@@ -234,7 +231,7 @@ class TweenApi {
     return cast null;
   }
 
-  @:keep public static function pauseAllTweens(manager:TweenManager):Void {
+  public static function pauseAllTweens(manager:TweenManager):Void {
     for (list in FlightRuntime.iterable(FlightRuntime.callProperty(FlightRuntime.field(manager, 'tweens'), 'values', cast ([] : Array<Dynamic>)))) {
       for (tween in FlightRuntime.iterable(list)) {
         FlightRuntime.setField(tween, 'paused', true);
@@ -242,11 +239,11 @@ class TweenApi {
     }
   }
 
-  @:keep public static function pauseTween(tween:Tween<Dynamic>):Void {
+  public static function pauseTween(tween:Tween<Dynamic>):Void {
     FlightRuntime.setField(tween, 'paused', true);
   }
 
-  @:keep public static function pauseTweens(manager:TweenManager, target:Dynamic):Void {
+  public static function pauseTweens(manager:TweenManager, target:Dynamic):Void {
     var list:Dynamic = cast FlightRuntime.UNDEFINED;
     list = FlightRuntime.callProperty(FlightRuntime.field(manager, 'tweens'), 'get', cast ([target] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(list, FlightRuntime.UNDEFINED))) { return; }
@@ -255,7 +252,7 @@ class TweenApi {
     }
   }
 
-  @:keep public static function registerTween__tween<T>(manager:TweenManager, tween:Tween<Dynamic>, overwrite:Bool):Void {
+  public static function registerTween__tween<T>(manager:TweenManager, tween:Tween<Dynamic>, overwrite:Bool):Void {
     var list:Dynamic = cast FlightRuntime.UNDEFINED;
     list = FlightRuntime.callProperty(FlightRuntime.field(manager, 'tweens'), 'get', cast ([FlightRuntime.field(tween, 'target')] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(list, FlightRuntime.UNDEFINED))) {
@@ -283,17 +280,17 @@ class TweenApi {
     FlightRuntime.callProperty(list, 'push', cast ([tween] : Array<Dynamic>));
   }
 
-  @:keep public static function resetAllTweens(manager:TweenManager):Void {
+  public static function resetAllTweens(manager:TweenManager):Void {
     FlightRuntime.callProperty(FlightRuntime.field(manager, 'tweens'), 'clear', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function restartTween(tween:Tween<Dynamic>, includeDelay:Dynamic = true):Void {
+  public static function restartTween(tween:Tween<Dynamic>, includeDelay:Dynamic = true):Void {
     FlightRuntime.setField(tween, 'initialized', false);
     FlightRuntime.setField(tween, 'complete', false);
     FlightRuntime.setField(tween, 'elapsed', FlightRuntime.select(includeDelay, function():Dynamic return cast 0.0, function():Dynamic return cast FlightRuntime.field(tween, 'delay')));
   }
 
-  @:keep public static function resumeAllTweens(manager:TweenManager):Void {
+  public static function resumeAllTweens(manager:TweenManager):Void {
     for (list in FlightRuntime.iterable(FlightRuntime.callProperty(FlightRuntime.field(manager, 'tweens'), 'values', cast ([] : Array<Dynamic>)))) {
       for (tween in FlightRuntime.iterable(list)) {
         FlightRuntime.setField(tween, 'paused', false);
@@ -301,11 +298,11 @@ class TweenApi {
     }
   }
 
-  @:keep public static function resumeTween(tween:Tween<Dynamic>):Void {
+  public static function resumeTween(tween:Tween<Dynamic>):Void {
     FlightRuntime.setField(tween, 'paused', false);
   }
 
-  @:keep public static function resumeTweens(manager:TweenManager, target:Dynamic):Void {
+  public static function resumeTweens(manager:TweenManager, target:Dynamic):Void {
     var list:Dynamic = cast FlightRuntime.UNDEFINED;
     list = FlightRuntime.callProperty(FlightRuntime.field(manager, 'tweens'), 'get', cast ([target] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(list, FlightRuntime.UNDEFINED))) { return; }
@@ -314,7 +311,7 @@ class TweenApi {
     }
   }
 
-  @:keep public static function seekTween(tween:Tween<Dynamic>, timeSeconds:Float):Void {
+  public static function seekTween(tween:Tween<Dynamic>, timeSeconds:Float):Void {
     var maxElapsed:Dynamic = cast FlightRuntime.UNDEFINED;
     var clampedElapsed:Dynamic = cast FlightRuntime.UNDEFINED;
     var activeElapsed:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -351,7 +348,7 @@ class TweenApi {
 }
   }
 
-  @:keep public static function setTweenProgress(tween:Tween<Dynamic>, progress:Float):Void {
+  public static function setTweenProgress(tween:Tween<Dynamic>, progress:Float):Void {
     var clamped:Dynamic = cast FlightRuntime.UNDEFINED;
     var targetElapsed:Dynamic = cast FlightRuntime.UNDEFINED;
     clamped = FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'min', cast ([progress, 1.0] : Array<Dynamic>))] : Array<Dynamic>));
@@ -359,7 +356,7 @@ class TweenApi {
     FlightRuntime.callValue(seekTween, cast ([tween, targetElapsed] : Array<Dynamic>));
   }
 
-  @:keep public static function stopAllTweens(manager:TweenManager, ?options:StopTweenOptions):Void {
+  public static function stopAllTweens(manager:TweenManager, ?options:StopTweenOptions):Void {
     for (list in FlightRuntime.iterable(FlightRuntime.callProperty(FlightRuntime.field(manager, 'tweens'), 'values', cast ([] : Array<Dynamic>)))) {
       for (tween in FlightRuntime.iterable(list)) {
         FlightRuntime.callValue(stopTween, cast ([tween, options] : Array<Dynamic>));
@@ -367,7 +364,7 @@ class TweenApi {
     }
   }
 
-  @:keep public static function stopTween(tween:Tween<Dynamic>, ?options:StopTweenOptions):Void {
+  public static function stopTween(tween:Tween<Dynamic>, ?options:StopTweenOptions):Void {
     var doComplete:Dynamic = cast FlightRuntime.UNDEFINED;
     var doSendEvent:Dynamic = cast FlightRuntime.UNDEFINED;
     doComplete = FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'complete'), function():Dynamic return cast false);
@@ -387,7 +384,7 @@ class TweenApi {
     FlightRuntime.setField(tween, 'complete', true);
   }
 
-  @:keep public static function stopTweens(manager:TweenManager, target:Dynamic, ?propertyMap:NumericProps<Dynamic>, ?options:StopTweenOptions):Void {
+  public static function stopTweens(manager:TweenManager, target:Dynamic, ?propertyMap:NumericProps<Dynamic>, ?options:StopTweenOptions):Void {
     var list:Dynamic = cast FlightRuntime.UNDEFINED;
     list = FlightRuntime.callProperty(FlightRuntime.field(manager, 'tweens'), 'get', cast ([target] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(list, FlightRuntime.UNDEFINED))) { return; }
@@ -408,7 +405,7 @@ class TweenApi {
     }
   }
 
-  @:keep public static function updateTween__updateTweens<T>(tween:Tween<Dynamic>, deltaTime:Float):Void {
+  public static function updateTween__updateTweens<T>(tween:Tween<Dynamic>, deltaTime:Float):Void {
     var activeElapsed:Dynamic = cast FlightRuntime.UNDEFINED;
     var t:Dynamic = cast FlightRuntime.UNDEFINED;
     var effectiveT:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -445,7 +442,7 @@ class TweenApi {
 }
   }
 
-  @:keep public static function updateTweens(manager:TweenManager, deltaTime:Float):Void {
+  public static function updateTweens(manager:TweenManager, deltaTime:Float):Void {
     for (__iteration0 in FlightRuntime.iterable(FlightRuntime.field(manager, 'tweens'))) {
       var target:Dynamic = FlightRuntime.getIndex(__iteration0, 0.0);
       var list:Dynamic = FlightRuntime.getIndex(__iteration0, 1.0);

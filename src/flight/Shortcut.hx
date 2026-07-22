@@ -15,22 +15,19 @@ import flight.Types.ShortcutSignals;
 
 typedef _Parsed__shortcut = { var key:String; var modifiers:Array<ShortcutModifier>; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Shortcut")
 class Shortcut {
   public static var _backend__shortcut:Null<ShortcutBackend> = FlightRuntime.explicitNull();
 
   public static final _emptyList__shortcut:Array<String> = cast ([] : Array<Dynamic>);
 
-  @:keep public static function _formatNormalized__shortcut(parsed:_Parsed__shortcut):Accelerator {
+  public static function _formatNormalized__shortcut(parsed:_Parsed__shortcut):Accelerator {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(parsed, 'modifiers'), 'length'), 0.0))) { return cast FlightRuntime.field(parsed, 'key'); }
     return cast FlightRuntime.join(FlightRuntime.concatArrays([FlightRuntime.toArray(FlightRuntime.field(parsed, 'modifiers')), [FlightRuntime.field(parsed, 'key')]]), '+');
     return cast null;
   }
 
-  @:keep public static function _getModifierLabel__shortcut(resolved:ShortcutModifier, isMac:Bool):String {
+  public static function _getModifierLabel__shortcut(resolved:ShortcutModifier, isMac:Bool):String {
     {
       var __switchValue = resolved;
       if (__switchValue == 'Alt') {
@@ -55,7 +52,7 @@ class Shortcut {
     return cast null;
   }
 
-  @:keep public static function _isMacOS__shortcut(?platform:String):Bool {
+  public static function _isMacOS__shortcut(?platform:String):Bool {
     var p:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(platform, FlightRuntime.UNDEFINED))) { return cast FlightRuntime.callProperty(FlightRuntime.regexp('^mac', 'i'), 'test', cast ([platform] : Array<Dynamic>)); }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast false; }
@@ -72,7 +69,7 @@ class Shortcut {
 
   public static final _modifierOrder__shortcut:Array<ShortcutModifier> = cast (['Control', 'Alt', 'Shift', 'Meta', 'Super', 'CommandOrControl'] : Array<Dynamic>);
 
-  @:keep public static function _parse__shortcut(input:String):Null<_Parsed__shortcut> {
+  public static function _parse__shortcut(input:String):Null<_Parsed__shortcut> {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     result = FlightRuntime.callValue(Shortcut._parseDetailed__shortcut, cast ([input] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.hasField(result, 'reason'))) { return cast null; }
@@ -80,7 +77,7 @@ class Shortcut {
     return cast null;
   }
 
-  @:keep public static function _parseDetailed__shortcut(input:String):Dynamic {
+  public static function _parseDetailed__shortcut(input:String):Dynamic {
     var tokens:Dynamic = cast FlightRuntime.UNDEFINED;
     var modifiers:Array<ShortcutModifier> = cast FlightRuntime.UNDEFINED;
     var seenModifiers:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -126,17 +123,17 @@ class Shortcut {
 
   public static var _signals__shortcut:Null<ShortcutSignals> = FlightRuntime.explicitNull();
 
-  @:keep public static function _splitTokens__shortcut(input:String):Array<String> {
+  public static function _splitTokens__shortcut(input:String):Array<String> {
     return cast FlightRuntime.callProperty(FlightRuntime.callProperty(input, 'split', cast ([FlightRuntime.regexp('[+-]', '')] : Array<Dynamic>)), 'filter', cast ([function(t:Dynamic) return FlightRuntime.compare(FlightRuntime.field(t, 'length'), 0.0, '>')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createParsedAccelerator():ParsedAccelerator {
+  public static function createParsedAccelerator():ParsedAccelerator {
     return cast { key: '', modifiers: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
-  @:keep public static function createWebShortcutBackend():ShortcutBackend {
+  public static function createWebShortcutBackend():ShortcutBackend {
     return cast { getRegistered: function() {
   return cast Shortcut._emptyList__shortcut;
 }, isRegistered: function() {
@@ -155,7 +152,7 @@ class Shortcut {
     return cast null;
   }
 
-  @:keep public static function disableGlobalShortcut(accelerator:String):Bool {
+  public static function disableGlobalShortcut(accelerator:String):Bool {
     var normalized:Dynamic = cast FlightRuntime.UNDEFINED;
     normalized = FlightRuntime.callValue(normalizeAccelerator, cast ([accelerator] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(normalized, null))) { return cast false; }
@@ -163,7 +160,7 @@ class Shortcut {
     return cast null;
   }
 
-  @:keep public static function enableGlobalShortcut(accelerator:String):Bool {
+  public static function enableGlobalShortcut(accelerator:String):Bool {
     var normalized:Dynamic = cast FlightRuntime.UNDEFINED;
     normalized = FlightRuntime.callValue(normalizeAccelerator, cast ([accelerator] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(normalized, null))) { return cast false; }
@@ -171,14 +168,14 @@ class Shortcut {
     return cast null;
   }
 
-  @:keep public static function enableGlobalShortcutSignals():ShortcutSignals {
+  public static function enableGlobalShortcutSignals():ShortcutSignals {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(Shortcut._signals__shortcut, null))) { return cast Shortcut._signals__shortcut; }
     (Shortcut._signals__shortcut = cast ({ onTrigger: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) } : Dynamic));
     return cast Shortcut._signals__shortcut;
     return cast null;
   }
 
-  @:keep public static function equalsAccelerator(a:String, b:String):Bool {
+  public static function equalsAccelerator(a:String, b:String):Bool {
     var na:Dynamic = cast FlightRuntime.UNDEFINED;
     var nb:Dynamic = cast FlightRuntime.UNDEFINED;
     na = FlightRuntime.callValue(normalizeAccelerator, cast ([a] : Array<Dynamic>));
@@ -188,7 +185,7 @@ class Shortcut {
     return cast null;
   }
 
-  @:keep public static function formatAcceleratorForDisplay(accelerator:String, ?platform:String):String {
+  public static function formatAcceleratorForDisplay(accelerator:String, ?platform:String):String {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     var isMac:Dynamic = cast FlightRuntime.UNDEFINED;
     var parts:Array<String> = cast FlightRuntime.UNDEFINED;
@@ -205,26 +202,26 @@ class Shortcut {
     return cast null;
   }
 
-  @:keep public static function getAcceleratorKey(accelerator:String):Null<String> {
+  public static function getAcceleratorKey(accelerator:String):Null<String> {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     result = FlightRuntime.callValue(Shortcut._parse__shortcut, cast ([accelerator] : Array<Dynamic>));
     return cast FlightRuntime.select(FlightRuntime.strictEquals(result, null), function():Dynamic return cast null, function():Dynamic return cast FlightRuntime.field(result, 'key'));
     return cast null;
   }
 
-  @:keep public static function getAcceleratorKeyLabel(key:String):String {
+  public static function getAcceleratorKeyLabel(key:String):String {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(Shortcut._keyDisplayNames__shortcut, 'get', cast ([key] : Array<Dynamic>)), function():Dynamic return cast key);
     return cast null;
   }
 
-  @:keep public static function getAcceleratorModifierLabel(modifier:ShortcutModifier, ?platform:String):String {
+  public static function getAcceleratorModifierLabel(modifier:ShortcutModifier, ?platform:String):String {
     var resolved:Dynamic = cast FlightRuntime.UNDEFINED;
     resolved = FlightRuntime.select(FlightRuntime.strictEquals(modifier, 'CommandOrControl'), function():Dynamic return cast FlightRuntime.callValue(resolveCommandOrControlModifier, cast ([platform] : Array<Dynamic>)), function():Dynamic return cast modifier);
     return cast FlightRuntime.callValue(Shortcut._getModifierLabel__shortcut, cast ([resolved, FlightRuntime.callValue(Shortcut._isMacOS__shortcut, cast ([platform] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getAcceleratorModifiers(accelerator:String, out:Array<ShortcutModifier>):Null<Array<ShortcutModifier>> {
+  public static function getAcceleratorModifiers(accelerator:String, out:Array<ShortcutModifier>):Null<Array<ShortcutModifier>> {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     result = FlightRuntime.callValue(Shortcut._parse__shortcut, cast ([accelerator] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(result, null))) { return cast null; }
@@ -236,7 +233,7 @@ class Shortcut {
     return cast null;
   }
 
-  @:keep public static function getRegisteredGlobalShortcuts():Array<Accelerator> {
+  public static function getRegisteredGlobalShortcuts():Array<Accelerator> {
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
     var result:Array<Accelerator> = cast FlightRuntime.UNDEFINED;
     raw = FlightRuntime.callProperty(FlightRuntime.callValue(getShortcutBackend, cast ([] : Array<Dynamic>)), 'getRegistered', cast ([] : Array<Dynamic>));
@@ -249,13 +246,13 @@ class Shortcut {
     return cast null;
   }
 
-  @:keep public static function getShortcutBackend():ShortcutBackend {
+  public static function getShortcutBackend():ShortcutBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Shortcut._backend__shortcut, null))) { (Shortcut._backend__shortcut = cast (FlightRuntime.callValue(createWebShortcutBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Shortcut._backend__shortcut;
     return cast null;
   }
 
-  @:keep public static function hasGlobalShortcutConflict(accelerator:String):Bool {
+  public static function hasGlobalShortcutConflict(accelerator:String):Bool {
     var normalized:Dynamic = cast FlightRuntime.UNDEFINED;
     normalized = FlightRuntime.callValue(normalizeAccelerator, cast ([accelerator] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(normalized, null))) { return cast false; }
@@ -263,12 +260,12 @@ class Shortcut {
     return cast null;
   }
 
-  @:keep public static function isAcceleratorValid(input:String):Bool {
+  public static function isAcceleratorValid(input:String):Bool {
     return cast !FlightRuntime.strictEquals(FlightRuntime.callValue(Shortcut._parse__shortcut, cast ([input] : Array<Dynamic>)), null);
     return cast null;
   }
 
-  @:keep public static function isGlobalShortcutRegistered(accelerator:String):Bool {
+  public static function isGlobalShortcutRegistered(accelerator:String):Bool {
     var normalized:Dynamic = cast FlightRuntime.UNDEFINED;
     normalized = FlightRuntime.callValue(normalizeAccelerator, cast ([accelerator] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(normalized, null))) { return cast false; }
@@ -276,7 +273,7 @@ class Shortcut {
     return cast null;
   }
 
-  @:keep public static function normalizeAccelerator(input:String):Null<Accelerator> {
+  public static function normalizeAccelerator(input:String):Null<Accelerator> {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     result = FlightRuntime.callValue(Shortcut._parse__shortcut, cast ([input] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(result, null))) { return cast null; }
@@ -284,7 +281,7 @@ class Shortcut {
     return cast null;
   }
 
-  @:keep public static function parseAccelerator(input:String, out:ParsedAccelerator):Null<ParsedAccelerator> {
+  public static function parseAccelerator(input:String, out:ParsedAccelerator):Null<ParsedAccelerator> {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     result = FlightRuntime.callValue(Shortcut._parse__shortcut, cast ([input] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(result, null))) { return cast null; }
@@ -294,7 +291,7 @@ class Shortcut {
     return cast null;
   }
 
-  @:keep public static function parseAcceleratorDetailed(input:String, out:ParsedAccelerator):Dynamic {
+  public static function parseAcceleratorDetailed(input:String, out:ParsedAccelerator):Dynamic {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     result = FlightRuntime.callValue(Shortcut._parseDetailed__shortcut, cast ([input] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.hasField(result, 'reason'))) { return cast result; }
@@ -304,7 +301,7 @@ class Shortcut {
     return cast null;
   }
 
-  @:keep public static function registerGlobalShortcut(accelerator:String, handler:Dynamic):Bool {
+  public static function registerGlobalShortcut(accelerator:String, handler:Dynamic):Bool {
     var normalized:Dynamic = cast FlightRuntime.UNDEFINED;
     var wrappedHandler:Dynamic = cast FlightRuntime.UNDEFINED;
     normalized = FlightRuntime.callValue(normalizeAccelerator, cast ([accelerator] : Array<Dynamic>));
@@ -317,28 +314,28 @@ class Shortcut {
     return cast null;
   }
 
-  @:keep public static function resolveCommandOrControlModifier(?platform:String):ShortcutModifier {
+  public static function resolveCommandOrControlModifier(?platform:String):ShortcutModifier {
     return cast FlightRuntime.select(FlightRuntime.callValue(Shortcut._isMacOS__shortcut, cast ([platform] : Array<Dynamic>)), function():Dynamic return cast 'Meta', function():Dynamic return cast 'Control');
     return cast null;
   }
 
-  @:keep public static function resumeAllGlobalShortcuts():Void {
+  public static function resumeAllGlobalShortcuts():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getShortcutBackend, cast ([] : Array<Dynamic>)), 'setAllEnabled', cast ([true] : Array<Dynamic>));
   }
 
-  @:keep public static function setShortcutBackend(backend:Null<ShortcutBackend>):Void {
+  public static function setShortcutBackend(backend:Null<ShortcutBackend>):Void {
     (Shortcut._backend__shortcut = cast (backend : Dynamic));
   }
 
-  @:keep public static function suspendAllGlobalShortcuts():Void {
+  public static function suspendAllGlobalShortcuts():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getShortcutBackend, cast ([] : Array<Dynamic>)), 'setAllEnabled', cast ([false] : Array<Dynamic>));
   }
 
-  @:keep public static function unregisterAllGlobalShortcuts():Void {
+  public static function unregisterAllGlobalShortcuts():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getShortcutBackend, cast ([] : Array<Dynamic>)), 'unregisterAll', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function unregisterGlobalShortcut(accelerator:String):Bool {
+  public static function unregisterGlobalShortcut(accelerator:String):Bool {
     var normalized:Dynamic = cast FlightRuntime.UNDEFINED;
     normalized = FlightRuntime.callValue(normalizeAccelerator, cast ([accelerator] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(normalized, null))) { return cast false; }

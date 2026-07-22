@@ -14,9 +14,6 @@ import flight.Types.ConnectivityStatus;
 
 typedef WebConnectivityConnection__connectivity = { @:optional var type:String; @:optional var downlink:Float; @:optional var downlinkMax:Float; @:optional var effectiveType:String; @:optional var rtt:Float; @:optional var saveData:Bool; @:optional var addEventListener:Dynamic; @:optional var removeEventListener:Dynamic; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.ConnectivityApi")
 class ConnectivityApi {
   public static var _backend__connectivity:Null<ConnectivityBackend> = FlightRuntime.explicitNull();
@@ -27,7 +24,7 @@ class ConnectivityApi {
 
   public static final _subscriptions__connectivity:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function anyAbortSignal__connectivity(a:Dynamic, b:Dynamic):Dynamic {
+  public static function anyAbortSignal__connectivity(a:Dynamic, b:Dynamic):Dynamic {
     var controller:Dynamic = cast FlightRuntime.UNDEFINED;
     var onAbort:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['AbortSignal'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast FlightRuntime.hasField(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['AbortSignal'] : Array<Dynamic>)), 'any')))) {
@@ -45,7 +42,7 @@ class ConnectivityApi {
     return cast null;
   }
 
-  @:keep public static function attachConnectivity(net:Connectivity):Void {
+  public static function attachConnectivity(net:Connectivity):Void {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var initial:Dynamic = cast FlightRuntime.UNDEFINED;
     var wasOnline:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -78,17 +75,17 @@ class ConnectivityApi {
     FlightRuntime.callProperty(ConnectivityApi._subscriptions__connectivity, 'set', cast ([net, unsubscribe] : Array<Dynamic>));
   }
 
-  @:keep public static function createConnectivity():Connectivity {
+  public static function createConnectivity():Connectivity {
     return cast { onChange: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onConnectionTypeChange: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onMeteredChange: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onOffline: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onOnline: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createConnectivityStatus():ConnectivityStatus {
+  public static function createConnectivityStatus():ConnectivityStatus {
     return cast { downlink: -1.0, downlinkMax: -1.0, effectiveType: '', metered: false, online: false, rtt: -1.0, saveData: false, type: 'unknown' };
     return cast null;
   }
 
-  @:keep public static function createWebConnectivityBackend():ConnectivityBackend {
+  public static function createWebConnectivityBackend():ConnectivityBackend {
     return cast { getStatus: function(out:Dynamic) {
   var nav:Dynamic = cast FlightRuntime.UNDEFINED;
   var conn:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -149,7 +146,7 @@ class ConnectivityApi {
     return cast null;
   }
 
-  @:keep public static function detachConnectivity(net:Connectivity):Void {
+  public static function detachConnectivity(net:Connectivity):Void {
     var unsubscribe:Dynamic = cast FlightRuntime.UNDEFINED;
     unsubscribe = FlightRuntime.callProperty(ConnectivityApi._subscriptions__connectivity, 'get', cast ([net] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(unsubscribe, FlightRuntime.UNDEFINED))) {
@@ -158,43 +155,42 @@ class ConnectivityApi {
 }
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function detectConnectivityReachability(options:ConnectivityReachabilityOptions, out:ConnectivityReachability):flight.internal.FlightPromise<ConnectivityReachability> {
-    var backend:Dynamic = cast FlightRuntime.UNDEFINED;
-    var webBackend:Dynamic = cast FlightRuntime.UNDEFINED;
-    backend = FlightRuntime.callValue(getConnectivityBackend, cast ([] : Array<Dynamic>));
-    if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(backend, 'detectReachability'), FlightRuntime.UNDEFINED))) {
+  public static function detectConnectivityReachability(options:ConnectivityReachabilityOptions, out:ConnectivityReachability):flight.internal.FlightPromise<ConnectivityReachability> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<ConnectivityReachability> {
+      var backend:Dynamic = cast FlightRuntime.UNDEFINED;
+      var webBackend:Dynamic = cast FlightRuntime.UNDEFINED;
+      backend = FlightRuntime.callValue(getConnectivityBackend, cast ([] : Array<Dynamic>));
+      if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(backend, 'detectReachability'), FlightRuntime.UNDEFINED))) {
   return cast FlightRuntime.callProperty(backend, 'detectReachability', cast ([options, out] : Array<Dynamic>));
 }
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(ConnectivityApi._cachedWebBackend__connectivity, null))) { (ConnectivityApi._cachedWebBackend__connectivity = cast (FlightRuntime.callValue(createWebConnectivityBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
-    webBackend = ConnectivityApi._cachedWebBackend__connectivity;
-    if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(webBackend, 'detectReachability'), FlightRuntime.UNDEFINED))) {
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(ConnectivityApi._cachedWebBackend__connectivity, null))) { (ConnectivityApi._cachedWebBackend__connectivity = cast (FlightRuntime.callValue(createWebConnectivityBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
+      webBackend = ConnectivityApi._cachedWebBackend__connectivity;
+      if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(webBackend, 'detectReachability'), FlightRuntime.UNDEFINED))) {
   return cast FlightRuntime.callProperty(webBackend, 'detectReachability', cast ([options, out] : Array<Dynamic>));
 }
-    FlightRuntime.setField(out, 'reachable', false);
-    FlightRuntime.setField(out, 'latency', -1.0);
-    return cast out;
-    return cast null;
+      FlightRuntime.setField(out, 'reachable', false);
+      FlightRuntime.setField(out, 'latency', -1.0);
+      return cast out;
+      return cast null;
+    })();
   }
 
-  @:keep public static function disposeConnectivity(net:Connectivity):Void {
+  public static function disposeConnectivity(net:Connectivity):Void {
     FlightRuntime.callValue(detachConnectivity, cast ([net] : Array<Dynamic>));
   }
 
-  @:keep public static function getConnectivityBackend():ConnectivityBackend {
+  public static function getConnectivityBackend():ConnectivityBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(ConnectivityApi._backend__connectivity, null))) { (ConnectivityApi._backend__connectivity = cast (FlightRuntime.callValue(createWebConnectivityBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast ConnectivityApi._backend__connectivity;
     return cast null;
   }
 
-  @:keep public static function getConnectivityStatus(out:ConnectivityStatus):ConnectivityStatus {
+  public static function getConnectivityStatus(out:ConnectivityStatus):ConnectivityStatus {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getConnectivityBackend, cast ([] : Array<Dynamic>)), 'getStatus', cast ([out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getWebConnection__connectivity():Null<WebConnectivityConnection__connectivity> {
+  public static function getWebConnection__connectivity():Null<WebConnectivityConnection__connectivity> {
     var nav:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
     nav = (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)) : { @:optional var connection:WebConnectivityConnection__connectivity; });
@@ -202,27 +198,27 @@ class ConnectivityApi {
     return cast null;
   }
 
-  @:keep public static function hasConnectivityStatusChanged(a:ConnectivityStatus, b:ConnectivityStatus):Bool {
+  public static function hasConnectivityStatusChanged(a:ConnectivityStatus, b:ConnectivityStatus):Bool {
     return cast FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(!FlightRuntime.strictEquals(FlightRuntime.field(a, 'online'), FlightRuntime.field(b, 'online')), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(a, 'type'), FlightRuntime.field(b, 'type'))), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(a, 'downlink'), FlightRuntime.field(b, 'downlink'))), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(a, 'downlinkMax'), FlightRuntime.field(b, 'downlinkMax'))), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(a, 'effectiveType'), FlightRuntime.field(b, 'effectiveType'))), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(a, 'rtt'), FlightRuntime.field(b, 'rtt'))), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(a, 'saveData'), FlightRuntime.field(b, 'saveData'))), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(a, 'metered'), FlightRuntime.field(b, 'metered')));
     return cast null;
   }
 
-  @:keep public static function isConnectivityMetered():Bool {
+  public static function isConnectivityMetered():Bool {
     return cast FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime.callValue(getConnectivityBackend, cast ([] : Array<Dynamic>)), 'getStatus', cast ([ConnectivityApi._scratch__connectivity] : Array<Dynamic>)), 'metered');
     return cast null;
   }
 
-  @:keep public static function isConnectivityOnline():Bool {
+  public static function isConnectivityOnline():Bool {
     return cast FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime.callValue(getConnectivityBackend, cast ([] : Array<Dynamic>)), 'getStatus', cast ([ConnectivityApi._scratch__connectivity] : Array<Dynamic>)), 'online');
     return cast null;
   }
 
-  @:keep public static function isConnectivitySaveDataEnabled():Bool {
+  public static function isConnectivitySaveDataEnabled():Bool {
     return cast FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime.callValue(getConnectivityBackend, cast ([] : Array<Dynamic>)), 'getStatus', cast ([ConnectivityApi._scratch__connectivity] : Array<Dynamic>)), 'saveData');
     return cast null;
   }
 
-  @:keep public static function mapWebConnectionType__connectivity(type:Null<String>):ConnectivityConnectionType {
+  public static function mapWebConnectionType__connectivity(type:Null<String>):ConnectivityConnectionType {
     {
       var __switchValue = type;
       if (__switchValue == 'bluetooth') {
@@ -256,7 +252,7 @@ class ConnectivityApi {
     return cast null;
   }
 
-  @:keep public static function setConnectivityBackend(backend:Null<ConnectivityBackend>):Void {
+  public static function setConnectivityBackend(backend:Null<ConnectivityBackend>):Void {
     (ConnectivityApi._backend__connectivity = cast (backend : Dynamic));
   }
 }

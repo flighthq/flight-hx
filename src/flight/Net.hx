@@ -13,14 +13,11 @@ import flight.Types.NetResponseBody;
 import flight.Types.NetResponseType;
 import flight.Types.Signal;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Net")
 class Net {
   public static var _backend__net:Null<NetBackend> = FlightRuntime.explicitNull();
 
-  @:keep public static function _decodeNetBuffer__net(buffer:haxe.io.Bytes, responseType:NetResponseType):NetResponseBody {
+  public static function _decodeNetBuffer__net(buffer:haxe.io.Bytes, responseType:NetResponseType):NetResponseBody {
     var text:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(responseType, 'arraybuffer'))) { return cast buffer; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(responseType, 'blob'))) { return cast FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Blob'] : Array<Dynamic>)), [cast ([buffer] : Array<Dynamic>)]); }
@@ -36,7 +33,7 @@ class Net {
     return cast null;
   }
 
-  @:keep public static function _netContentLength__net(headers:Dynamic):Float {
+  public static function _netContentLength__net(headers:Dynamic):Float {
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
     var parsed:Dynamic = cast FlightRuntime.UNDEFINED;
     raw = FlightRuntime.callProperty(headers, 'get', cast (['content-length'] : Array<Dynamic>));
@@ -48,7 +45,7 @@ class Net {
 
   public static final _netTimeoutReason__net:Dynamic = { flightNetTimeout: true };
 
-  @:keep public static function _netTransportFailure__net(url:String, signal:Dynamic, error:Dynamic):NetResponse {
+  public static function _netTransportFailure__net(url:String, signal:Dynamic, error:Dynamic):NetResponse {
     var statusText:Dynamic = cast FlightRuntime.UNDEFINED;
     statusText = 'network error';
     if (FlightRuntime.truthy(FlightRuntime.field(signal, 'aborted'))) {
@@ -60,28 +57,27 @@ class Net {
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function _readNetResponseBody__net(response:Dynamic, responseType:NetResponseType, progress:Null<Signal<Dynamic>>):flight.internal.FlightPromise<NetResponseBody> {
-    if (FlightRuntime.truthy(!FlightRuntime.strictEquals(progress, FlightRuntime.UNDEFINED))) {
+  public static function _readNetResponseBody__net(response:Dynamic, responseType:NetResponseType, progress:Null<Signal<Dynamic>>):flight.internal.FlightPromise<NetResponseBody> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<NetResponseBody> {
+      if (FlightRuntime.truthy(!FlightRuntime.strictEquals(progress, FlightRuntime.UNDEFINED))) {
   var buffer:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(Net._readNetResponseWithProgress__net, cast ([response, progress] : Array<Dynamic>)));
   return cast FlightRuntime.callValue(Net._decodeNetBuffer__net, cast ([buffer, responseType] : Array<Dynamic>));
 }
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(responseType, 'arraybuffer'))) { return cast flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(response, 'arrayBuffer', cast ([] : Array<Dynamic>))); }
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(responseType, 'blob'))) { return cast flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(response, 'blob', cast ([] : Array<Dynamic>))); }
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(responseType, 'json'))) {
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(responseType, 'arraybuffer'))) { return cast flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(response, 'arrayBuffer', cast ([] : Array<Dynamic>))); }
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(responseType, 'blob'))) { return cast flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(response, 'blob', cast ([] : Array<Dynamic>))); }
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(responseType, 'json'))) {
   try {
   return cast (cast flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(response, 'json', cast ([] : Array<Dynamic>))) : Dynamic);
 } catch (__error:Dynamic) {
   return cast null;
 }
 }
-    return cast flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(response, 'text', cast ([] : Array<Dynamic>)));
-    return cast null;
+      return cast flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(response, 'text', cast ([] : Array<Dynamic>)));
+      return cast null;
+    })();
   }
 
-  @:keep public static function _readNetResponseHeaders__net(headers:Dynamic):Dynamic {
+  public static function _readNetResponseHeaders__net(headers:Dynamic):Dynamic {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = {  };
     FlightRuntime.callProperty(headers, 'forEach', cast ([function(value:Dynamic, key:Dynamic) {
@@ -91,50 +87,49 @@ class Net {
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function _readNetResponseWithProgress__net(response:Dynamic, progress:Signal<Dynamic>):flight.internal.FlightPromise<haxe.io.Bytes> {
-    var total:Dynamic = cast FlightRuntime.UNDEFINED;
-    var stream:Dynamic = cast FlightRuntime.UNDEFINED;
-    var reader:Dynamic = cast FlightRuntime.UNDEFINED;
-    var chunks:Array<Dynamic> = cast FlightRuntime.UNDEFINED;
-    var loaded:Dynamic = cast FlightRuntime.UNDEFINED;
-    var out:Dynamic = cast FlightRuntime.UNDEFINED;
-    var offset:Dynamic = cast FlightRuntime.UNDEFINED;
-    total = FlightRuntime.callValue(Net._netContentLength__net, cast ([FlightRuntime.field(response, 'headers')] : Array<Dynamic>));
-    stream = FlightRuntime.field(response, 'body');
-    if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(stream, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(stream, 'getReader')), 'function')))) {
+  public static function _readNetResponseWithProgress__net(response:Dynamic, progress:Signal<Dynamic>):flight.internal.FlightPromise<haxe.io.Bytes> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<haxe.io.Bytes> {
+      var total:Dynamic = cast FlightRuntime.UNDEFINED;
+      var stream:Dynamic = cast FlightRuntime.UNDEFINED;
+      var reader:Dynamic = cast FlightRuntime.UNDEFINED;
+      var chunks:Array<Dynamic> = cast FlightRuntime.UNDEFINED;
+      var loaded:Dynamic = cast FlightRuntime.UNDEFINED;
+      var out:Dynamic = cast FlightRuntime.UNDEFINED;
+      var offset:Dynamic = cast FlightRuntime.UNDEFINED;
+      total = FlightRuntime.callValue(Net._netContentLength__net, cast ([FlightRuntime.field(response, 'headers')] : Array<Dynamic>));
+      stream = FlightRuntime.field(response, 'body');
+      if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(stream, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(stream, 'getReader')), 'function')))) {
   var buffer:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(response, 'arrayBuffer', cast ([] : Array<Dynamic>)));
   FlightRuntime.callValue(emitSignal, cast ([progress, { phase: 'download', loaded: FlightRuntime.field(buffer, 'byteLength'), total: FlightRuntime.select(FlightRuntime.compare(total, 0.0, '>='), function():Dynamic return cast total, function():Dynamic return cast FlightRuntime.field(buffer, 'byteLength')) }] : Array<Dynamic>));
   return cast buffer;
 }
-    reader = FlightRuntime.callProperty(stream, 'getReader', cast ([] : Array<Dynamic>));
-    chunks = cast ([] : Array<Dynamic>);
-    loaded = 0.0;
-    {
-      while (true) {
-        var __destructure0:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(reader, 'read', cast ([] : Array<Dynamic>)));
-        var done:Dynamic = FlightRuntime.field(__destructure0, 'done');
-        var value:Dynamic = FlightRuntime.field(__destructure0, 'value');
-        if (FlightRuntime.truthy(done)) { break; }
-        if (FlightRuntime.truthy(FlightRuntime.strictEquals(value, FlightRuntime.UNDEFINED))) { continue; }
-        FlightRuntime.callProperty(chunks, 'push', cast ([value] : Array<Dynamic>));
-        (loaded = cast ((loaded + FlightRuntime.field(value, 'byteLength')) : Dynamic));
-        FlightRuntime.callValue(emitSignal, cast ([progress, { phase: 'download', loaded: loaded, total: FlightRuntime.select(FlightRuntime.compare(total, 0.0, '>='), function():Dynamic return cast total, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
+      reader = FlightRuntime.callProperty(stream, 'getReader', cast ([] : Array<Dynamic>));
+      chunks = cast ([] : Array<Dynamic>);
+      loaded = 0.0;
+      {
+        while (true) {
+          var __destructure0:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(reader, 'read', cast ([] : Array<Dynamic>)));
+          var done:Dynamic = FlightRuntime.field(__destructure0, 'done');
+          var value:Dynamic = FlightRuntime.field(__destructure0, 'value');
+          if (FlightRuntime.truthy(done)) { break; }
+          if (FlightRuntime.truthy(FlightRuntime.strictEquals(value, FlightRuntime.UNDEFINED))) { continue; }
+          FlightRuntime.callProperty(chunks, 'push', cast ([value] : Array<Dynamic>));
+          (loaded = cast ((loaded + FlightRuntime.field(value, 'byteLength')) : Dynamic));
+          FlightRuntime.callValue(emitSignal, cast ([progress, { phase: 'download', loaded: loaded, total: FlightRuntime.select(FlightRuntime.compare(total, 0.0, '>='), function():Dynamic return cast total, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
+        }
       }
-    }
-    out = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [loaded]);
-    offset = 0.0;
-    for (chunk in FlightRuntime.iterable(chunks)) {
-      FlightRuntime.callProperty(out, 'set', cast ([chunk, offset] : Array<Dynamic>));
-      (offset = cast ((offset + FlightRuntime.field(chunk, 'byteLength')) : Dynamic));
-    }
-    return cast FlightRuntime.field(out, 'buffer');
-    return cast null;
+      out = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [loaded]);
+      offset = 0.0;
+      for (chunk in FlightRuntime.iterable(chunks)) {
+        FlightRuntime.callProperty(out, 'set', cast ([chunk, offset] : Array<Dynamic>));
+        (offset = cast ((offset + FlightRuntime.field(chunk, 'byteLength')) : Dynamic));
+      }
+      return cast FlightRuntime.field(out, 'buffer');
+      return cast null;
+    })();
   }
 
-  @:keep public static function _toNetFetchInit__net(request:NetRequest, signal:Dynamic):Dynamic {
+  public static function _toNetFetchInit__net(request:NetRequest, signal:Dynamic):Dynamic {
     var init:Dynamic = cast FlightRuntime.UNDEFINED;
     init = { method: FlightRuntime.field(request, 'method'), signal: signal };
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(request, 'headers'), FlightRuntime.UNDEFINED))) { FlightRuntime.setField(init, 'headers', FlightRuntime.mergeObjects([FlightRuntime.field(request, 'headers')])); }
@@ -145,7 +140,7 @@ class Net {
     return cast null;
   }
 
-  @:keep public static function _wireNetAbort__net(controller:Dynamic, timeoutMs:Null<Float>, signal:Null<Dynamic>):Dynamic {
+  public static function _wireNetAbort__net(controller:Dynamic, timeoutMs:Null<Float>, signal:Null<Dynamic>):Dynamic {
     var timer:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
     var onAbort:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
     timer = null;
@@ -168,7 +163,7 @@ class Net {
     return cast null;
   }
 
-  @:keep public static function createWebNetBackend():NetBackend {
+  public static function createWebNetBackend():NetBackend {
     return cast { sendNetRequest: flight.internal.FlightAsync.make(function(request:Dynamic, options:Dynamic):flight.internal.FlightPromise<NetResponse> {
   var controller:Dynamic = cast FlightRuntime.UNDEFINED;
   var teardownAbort:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -205,18 +200,18 @@ class Net {
     return cast null;
   }
 
-  @:keep public static function getNetBackend():NetBackend {
+  public static function getNetBackend():NetBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Net._backend__net, null))) { (Net._backend__net = cast (FlightRuntime.callValue(createWebNetBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Net._backend__net;
     return cast null;
   }
 
-  @:keep public static function sendNetRequest(request:NetRequest, ?options:NetRequestOptions):flight.internal.FlightPromise<NetResponse> {
+  public static function sendNetRequest(request:NetRequest, ?options:NetRequestOptions):flight.internal.FlightPromise<NetResponse> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getNetBackend, cast ([] : Array<Dynamic>)), 'sendNetRequest', cast ([request, options] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setNetBackend(backend:Null<NetBackend>):Void {
+  public static function setNetBackend(backend:Null<NetBackend>):Void {
     (Net._backend__net = cast (backend : Dynamic));
   }
 }

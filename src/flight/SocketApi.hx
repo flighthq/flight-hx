@@ -16,18 +16,15 @@ import flight.Types.SocketReadyState;
 import flight.Types.SocketRuntime;
 import flight.Types.SocketSignals;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.SocketApi")
 class SocketApi {
   public static var _backend__socket:Null<SocketBackend> = FlightRuntime.explicitNull();
 
-  @:keep public static function attachSocket(socket:Socket):Void {
+  public static function attachSocket(socket:Socket):Void {
     FlightRuntime.setField(FlightRuntime.field(socket, 'runtime'), 'delivering', true);
   }
 
-  @:keep public static function closeSocket(socket:Socket, ?code:Float, ?reason:String):Void {
+  public static function closeSocket(socket:Socket, ?code:Float, ?reason:String):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.field(socket, 'runtime');
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'readyState'), 'closing'), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'readyState'), 'closed')))) { return; }
@@ -35,7 +32,7 @@ class SocketApi {
     FlightRuntime.callOptionalProperty(FlightRuntime.field(runtime, 'connection'), 'closeSocketConnection', cast ([code, reason] : Array<Dynamic>));
   }
 
-  @:keep public static function createSocket(options:SocketOptions):Socket {
+  public static function createSocket(options:SocketOptions):Socket {
     var runtime:SocketRuntime = cast FlightRuntime.UNDEFINED;
     var socket:Socket = cast FlightRuntime.UNDEFINED;
     runtime = { connection: null, signals: null, readyState: 'connecting', delivering: true };
@@ -45,7 +42,7 @@ class SocketApi {
     return cast null;
   }
 
-  @:keep public static function createWebSocketBackend():SocketBackend {
+  public static function createWebSocketBackend():SocketBackend {
     return cast { openSocket: function(options:Dynamic, events:Dynamic) {
   var ws:Dynamic = cast FlightRuntime.UNDEFINED;
   if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['WebSocket'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
@@ -66,17 +63,17 @@ class SocketApi {
     return cast null;
   }
 
-  @:keep public static function detachSocket(socket:Socket):Void {
+  public static function detachSocket(socket:Socket):Void {
     FlightRuntime.setField(FlightRuntime.field(socket, 'runtime'), 'delivering', false);
   }
 
-  @:keep public static function disposeSocket(socket:Socket):Void {
+  public static function disposeSocket(socket:Socket):Void {
     FlightRuntime.callValue(closeSocket, cast ([socket] : Array<Dynamic>));
     FlightRuntime.callValue(detachSocket, cast ([socket] : Array<Dynamic>));
     FlightRuntime.setField(FlightRuntime.field(socket, 'runtime'), 'signals', null);
   }
 
-  @:keep public static function enableSocketSignals(socket:Socket):SocketSignals {
+  public static function enableSocketSignals(socket:Socket):SocketSignals {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.field(socket, 'runtime');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'signals'), null))) {
@@ -86,18 +83,18 @@ class SocketApi {
     return cast null;
   }
 
-  @:keep public static function getSocketBackend():SocketBackend {
+  public static function getSocketBackend():SocketBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(SocketApi._backend__socket, null))) { (SocketApi._backend__socket = cast (FlightRuntime.callValue(createWebSocketBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast SocketApi._backend__socket;
     return cast null;
   }
 
-  @:keep public static function getSocketReadyState(socket:Socket):SocketReadyState {
+  public static function getSocketReadyState(socket:Socket):SocketReadyState {
     return cast FlightRuntime.field(FlightRuntime.field(socket, 'runtime'), 'readyState');
     return cast null;
   }
 
-  @:keep public static function makeSocketEventSink__socket(runtime:SocketRuntime):SocketEventSink {
+  public static function makeSocketEventSink__socket(runtime:SocketRuntime):SocketEventSink {
     return cast { handleSocketOpen: function() {
   if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.field(runtime, 'delivering')))) { return; }
   FlightRuntime.setField(runtime, 'readyState', 'open');
@@ -116,7 +113,7 @@ class SocketApi {
     return cast null;
   }
 
-  @:keep public static function sendSocketMessage(socket:Socket, data:Dynamic):Bool {
+  public static function sendSocketMessage(socket:Socket, data:Dynamic):Bool {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.field(socket, 'runtime');
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'readyState'), 'open'), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'connection'), null)))) { return cast false; }
@@ -124,11 +121,11 @@ class SocketApi {
     return cast null;
   }
 
-  @:keep public static function setSocketBackend(backend:Null<SocketBackend>):Void {
+  public static function setSocketBackend(backend:Null<SocketBackend>):Void {
     (SocketApi._backend__socket = cast (backend : Dynamic));
   }
 
-  @:keep public static function toSocketMessage__socket(data:Dynamic):SocketMessage {
+  public static function toSocketMessage__socket(data:Dynamic):SocketMessage {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.typeofValue(data), 'string'))) { return cast { data: data, binary: false }; }
     return cast { data: (cast data : haxe.io.Bytes), binary: true };
     return cast null;

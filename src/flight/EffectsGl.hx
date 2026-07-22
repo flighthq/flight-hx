@@ -110,16 +110,13 @@ typedef InnerClipLocations__glInnerShadowEffect = GlFullscreenProgram;
 
 typedef TintShaderLocations__glEffectTintShader = Dynamic;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.EffectsGl")
 class EffectsGl {
   public static final _backdrops__glBlendEffect:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
   public static final _customShaders__glCustomShaderEffect:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function _noopSetUniforms__glTaaEffect():Void {
+  public static function _noopSetUniforms__glTaaEffect():Void {
   }
 
   public static final _programs__glEffectProgramCache:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
@@ -130,7 +127,7 @@ class EffectsGl {
 
   public static final ALL_GL_EFFECT_KINDS__glRenderEffectRegistrar:Array<String> = cast (['BevelEffect', 'BlendEffect', 'BloomEffect', 'BlurEffect', 'BokehDepthOfFieldEffect', 'CameraMotionBlurEffect', 'ChromaticAberrationEffect', 'CompositeEffect', 'ConvolutionEffect', 'CrtEffect', 'CustomShaderEffect', 'DirectionalBlurEffect', 'DisplacementEffect', 'DitherEffect', 'DropShadowEffect', 'FilmGrainEffect', 'FxaaEffect', 'GlitchEffect', 'GodRaysEffect', 'GradientBevelEffect', 'GradientGlowEffect', 'HalftoneEffect', 'InnerGlowEffect', 'InnerShadowEffect', 'KuwaharaEffect', 'LensDirtEffect', 'LensDistortionEffect', 'LensFlareEffect', 'MedianEffect', 'MotionBlurEffect', 'OuterGlowEffect', 'OutlineEffect', 'PixelateEffect', 'PosterizeEffect', 'RadialBlurEffect', 'ScanlinesEffect', 'ScreenSpaceFogEffect', 'SharpenEffect', 'SketchEffect', 'SmaaEffect', 'SsaoEffect', 'SsrEffect', 'TaaEffect', 'TiltShiftEffect', 'ToneMapEffect', 'VignetteEffect', 'WhiteBalanceEffect'] : Array<Dynamic>);
 
-  @:keep public static function applyBevelApplyPass__glGradientBevelEffect(state:GlRenderState, encoded:GlRenderTarget, ramp:Dynamic, source:GlRenderTarget, dest:GlRenderTarget):Void {
+  public static function applyBevelApplyPass__glGradientBevelEffect(state:GlRenderState, encoded:GlRenderTarget, ramp:Dynamic, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callValue(EffectsGl.getApplyShader__glGradientBevelEffect, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([FlightRuntime.field(encoded, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -145,7 +142,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BevelEffect):Void {
+  public static function applyBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BevelEffect):Void {
     var descriptor:Dynamic = cast FlightRuntime.UNDEFINED;
     var s0:Dynamic = cast FlightRuntime.UNDEFINED;
     var s1:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -201,7 +198,7 @@ class EffectsGl {
     FlightRuntime.callValue(releaseGlRenderTarget, cast ([pool, s2] : Array<Dynamic>));
   }
 
-  @:keep public static function applyBevelEncodePass__glGradientBevelEffect(state:GlRenderState, blurred:GlRenderTarget, dest:GlRenderTarget, dx:Float, dy:Float):Void {
+  public static function applyBevelEncodePass__glGradientBevelEffect(state:GlRenderState, blurred:GlRenderTarget, dest:GlRenderTarget, dx:Float, dy:Float):Void {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callValue(EffectsGl.getEncodeShader__glGradientBevelEffect, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([FlightRuntime.field(blurred, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -210,7 +207,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyBlendEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:BlendEffect):Void {
+  public static function applyBlendEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:BlendEffect):Void {
     var backdrop:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     var modeIndex:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -236,7 +233,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyBloomEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BloomEffect):Void {
+  public static function applyBloomEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BloomEffect):Void {
     var threshold:Dynamic = cast FlightRuntime.UNDEFINED;
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -267,7 +264,7 @@ class EffectsGl {
     FlightRuntime.callValue(releaseGlRenderTarget, cast ([pool, temp] : Array<Dynamic>));
   }
 
-  @:keep public static function applyBlurBlit__glEffectBoxBlur(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
+  public static function applyBlurBlit__glEffectBoxBlur(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callValue(EffectsGl.getBoxBlurShader__glEffectBoxBlur, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([FlightRuntime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -280,11 +277,11 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, effect:BlurEffect):Void {
+  public static function applyBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, effect:BlurEffect):Void {
     FlightRuntime.callValue(applyGaussianBlurToGl, cast ([state, source, dest, temp, { blurX: FlightRuntime.field(effect, 'blurX'), blurY: FlightRuntime.field(effect, 'blurY') }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyBokehDepthOfFieldEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<Dynamic>, effect:BokehDepthOfFieldEffect):Void {
+  public static function applyBokehDepthOfFieldEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<Dynamic>, effect:BokehDepthOfFieldEffect):Void {
     var maxBlur:Dynamic = cast FlightRuntime.UNDEFINED;
     var focusDistance:Dynamic = cast FlightRuntime.UNDEFINED;
     var focusRange:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -304,7 +301,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyBoxBlurPass__glEffectBoxBlur(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, loc:BoxBlurShaderLocations__glEffectBoxBlur, radius:Float, dirX:Float, dirY:Float, edgeColor:Null<BoxBlurEdgeColor__glEffectBoxBlur>):Void {
+  public static function applyBoxBlurPass__glEffectBoxBlur(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, loc:BoxBlurShaderLocations__glEffectBoxBlur, radius:Float, dirX:Float, dirY:Float, edgeColor:Null<BoxBlurEdgeColor__glEffectBoxBlur>):Void {
     FlightRuntime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([FlightRuntime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
   FlightRuntime.callProperty(gl, 'uniform2f', cast ([FlightRuntime.field(loc, 'locTexelSize'), (1.0 / FlightRuntime.field(source, 'width')), (1.0 / FlightRuntime.field(source, 'height'))] : Array<Dynamic>));
   FlightRuntime.callProperty(gl, 'uniform1f', cast ([FlightRuntime.field(loc, 'locRadius'), radius] : Array<Dynamic>));
@@ -320,7 +317,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyCameraMotionBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CameraMotionBlurEffect):Void {
+  public static function applyCameraMotionBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CameraMotionBlurEffect):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var samples:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -333,7 +330,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyChromaticAberrationEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ChromaticAberrationEffect):Void {
+  public static function applyChromaticAberrationEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ChromaticAberrationEffect):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var radial:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -346,7 +343,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyColorLutPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, lut:ColorLut, cache:GlColorLutTextureCache):Void {
+  public static function applyColorLutPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, lut:ColorLut, cache:GlColorLutTextureCache):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     var texture:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -364,7 +361,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyColorMatrixPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, matrix:Array<Float>):Void {
+  public static function applyColorMatrixPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, matrix:Array<Float>):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [20.0]);
@@ -381,7 +378,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyCompositeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CompositeEffect):Void {
+  public static function applyCompositeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CompositeEffect):Void {
     var backdrop:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     var operatorIndex:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -402,7 +399,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyConvolutionEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ConvolutionEffect):Void {
+  public static function applyConvolutionEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ConvolutionEffect):Void {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var matrix:Dynamic = cast FlightRuntime.UNDEFINED;
     var matrixX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -448,7 +445,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyCrtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CrtEffect):Void {
+  public static function applyCrtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CrtEffect):Void {
     var curvature:Dynamic = cast FlightRuntime.UNDEFINED;
     var scanlineIntensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var vignette:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -468,7 +465,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyCustomShaderEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CustomShaderEffect):Void {
+  public static function applyCustomShaderEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CustomShaderEffect):Void {
     var fragmentSource:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     var uniforms:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -512,7 +509,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyDirectionalBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DirectionalBlurEffect):Void {
+  public static function applyDirectionalBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DirectionalBlurEffect):Void {
     var angle:Dynamic = cast FlightRuntime.UNDEFINED;
     var length:Dynamic = cast FlightRuntime.UNDEFINED;
     var samples:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -529,7 +526,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyDisplacementEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DisplacementEffect):Void {
+  public static function applyDisplacementEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DisplacementEffect):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var frequency:Dynamic = cast FlightRuntime.UNDEFINED;
     var seed:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -546,7 +543,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyDitherEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DitherEffect):Void {
+  public static function applyDitherEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DitherEffect):Void {
     var levels:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     levels = FlightRuntime.coalesce(FlightRuntime.field(effect, 'levels'), function():Dynamic return cast 4.0);
@@ -557,7 +554,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyDropShadowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:DropShadowEffect):Void {
+  public static function applyDropShadowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:DropShadowEffect):Void {
     var descriptor:Dynamic = cast FlightRuntime.UNDEFINED;
     var s0:Dynamic = cast FlightRuntime.UNDEFINED;
     var s1:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -620,7 +617,7 @@ class EffectsGl {
     FlightRuntime.callValue(releaseGlRenderTarget, cast ([pool, s2] : Array<Dynamic>));
   }
 
-  @:keep public static function applyFilmGrainEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:FilmGrainEffect):Void {
+  public static function applyFilmGrainEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:FilmGrainEffect):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     var seed:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -636,7 +633,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyFxaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:FxaaEffect):Void {
+  public static function applyFxaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:FxaaEffect):Void {
     var edgeThreshold:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     edgeThreshold = FlightRuntime.coalesce(FlightRuntime.field(effect, 'edgeThreshold'), function():Dynamic return cast 0.0312);
@@ -647,7 +644,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGaussianBlurToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
+  public static function applyGaussianBlurToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
     var sigmaX:Dynamic = cast FlightRuntime.UNDEFINED;
     var sigmaY:Dynamic = cast FlightRuntime.UNDEFINED;
     var radiusX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -660,7 +657,7 @@ class EffectsGl {
     FlightRuntime.callValue(EffectsGl.applyGlGaussianBlurPass__glBlurEffect, cast ([state, temp, dest, sigmaY, radiusY, 0.0, 1.0] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGlBevelCompositePass__glBevelEffect(state:GlRenderState, field:GlRenderTarget, source:GlRenderTarget, dest:GlRenderTarget, params:BevelCompositeParams__glBevelEffect):Void {
+  public static function applyGlBevelCompositePass__glBevelEffect(state:GlRenderState, field:GlRenderTarget, source:GlRenderTarget, dest:GlRenderTarget, params:BevelCompositeParams__glBevelEffect):Void {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callValue(EffectsGl.getGlBevelCompositeShader__glBevelEffect, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([FlightRuntime.field(field, 'texture'), FlightRuntime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -672,7 +669,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGlEffectBlitOffsetPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, dx:Float, dy:Float):Void {
+  public static function applyGlEffectBlitOffsetPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, dx:Float, dy:Float):Void {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callValue(EffectsGl.getGlBlitOffsetShader__glEffectBlitShader, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([FlightRuntime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -680,7 +677,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGlEffectBlitPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
+  public static function applyGlEffectBlitPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callValue(EffectsGl.getGlBlitShader__glEffectBlitShader, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([FlightRuntime.field(source, 'texture')] : Array<Dynamic>), dest, function() {
@@ -688,7 +685,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGlEffectBoxBlur(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; @:optional var passes:Float; @:optional var edgeColor:Array<Float>; }):Void {
+  public static function applyGlEffectBoxBlur(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; @:optional var passes:Float; @:optional var edgeColor:Array<Float>; }):Void {
     var passes:Dynamic = cast FlightRuntime.UNDEFINED;
     var blurX:Dynamic = cast FlightRuntime.UNDEFINED;
     var blurY:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -726,7 +723,7 @@ class EffectsGl {
 }
   }
 
-  @:keep public static function applyGlEffectErasePass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
+  public static function applyGlEffectErasePass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callValue(EffectsGl.getGlEraseShader__glEffectBlitShader, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([FlightRuntime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -734,7 +731,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGlEffectInvertTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
+  public static function applyGlEffectInvertTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callValue(EffectsGl.getGlInvertTintShader__glEffectTintShader, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([FlightRuntime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -745,7 +742,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGlEffectTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
+  public static function applyGlEffectTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callValue(EffectsGl.getGlTintShader__glEffectTintShader, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([FlightRuntime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -756,7 +753,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGlGaussianBlurPass__glBlurEffect(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, sigma:Float, radius:Float, dirX:Float, dirY:Float):Void {
+  public static function applyGlGaussianBlurPass__glBlurEffect(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, sigma:Float, radius:Float, dirX:Float, dirY:Float):Void {
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     program = FlightRuntime.callValue(getGlEffectProgram, cast ([state, 'blur.gaussian', EffectsGl.GAUSSIAN_BLUR_FRAGMENT_SRC__glBlurEffect] : Array<Dynamic>));
     FlightRuntime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([FlightRuntime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
@@ -767,7 +764,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGlInnerClipPass__glInnerGlowEffect(state:GlRenderState, glow:GlRenderTarget, source:GlRenderTarget, dest:GlRenderTarget):Void {
+  public static function applyGlInnerClipPass__glInnerGlowEffect(state:GlRenderState, glow:GlRenderTarget, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callValue(EffectsGl.getClipShader__glInnerGlowEffect, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([FlightRuntime.field(glow, 'texture'), FlightRuntime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -775,7 +772,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGlInnerClipPass__glInnerShadowEffect(state:GlRenderState, shadow:GlRenderTarget, source:GlRenderTarget, dest:GlRenderTarget):Void {
+  public static function applyGlInnerClipPass__glInnerShadowEffect(state:GlRenderState, shadow:GlRenderTarget, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callValue(EffectsGl.getClipShader__glInnerShadowEffect, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([FlightRuntime.field(shadow, 'texture'), FlightRuntime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -783,7 +780,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGlitchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GlitchEffect):Void {
+  public static function applyGlitchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GlitchEffect):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var blockSize:Dynamic = cast FlightRuntime.UNDEFINED;
     var colorShift:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -803,7 +800,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGodRaysEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GodRaysEffect):Void {
+  public static function applyGodRaysEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GodRaysEffect):Void {
     var centerX:Dynamic = cast FlightRuntime.UNDEFINED;
     var centerY:Dynamic = cast FlightRuntime.UNDEFINED;
     var density:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -830,7 +827,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGradientBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientBevelEffect):Void {
+  public static function applyGradientBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientBevelEffect):Void {
     var descriptor:Dynamic = cast FlightRuntime.UNDEFINED;
     var s0:Dynamic = cast FlightRuntime.UNDEFINED;
     var s1:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -879,7 +876,7 @@ class EffectsGl {
     FlightRuntime.callValue(releaseGlRenderTarget, cast ([pool, s2] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGradientGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientGlowEffect):Void {
+  public static function applyGradientGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientGlowEffect):Void {
     var descriptor:Dynamic = cast FlightRuntime.UNDEFINED;
     var s0:Dynamic = cast FlightRuntime.UNDEFINED;
     var s1:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -918,7 +915,7 @@ class EffectsGl {
     FlightRuntime.callValue(releaseGlRenderTarget, cast ([pool, s2] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGradientLookupPass__glGradientGlowEffect(state:GlRenderState, blurred:GlRenderTarget, ramp:Dynamic, dest:GlRenderTarget):Void {
+  public static function applyGradientLookupPass__glGradientGlowEffect(state:GlRenderState, blurred:GlRenderTarget, ramp:Dynamic, dest:GlRenderTarget):Void {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callValue(EffectsGl.getLookupShader__glGradientGlowEffect, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([FlightRuntime.field(blurred, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -930,7 +927,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyHalftoneEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:HalftoneEffect):Void {
+  public static function applyHalftoneEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:HalftoneEffect):Void {
     var scale:Dynamic = cast FlightRuntime.UNDEFINED;
     var angle:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -944,7 +941,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyInnerGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:InnerGlowEffect):Void {
+  public static function applyInnerGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:InnerGlowEffect):Void {
     var descriptor:Dynamic = cast FlightRuntime.UNDEFINED;
     var s0:Dynamic = cast FlightRuntime.UNDEFINED;
     var s1:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -981,7 +978,7 @@ class EffectsGl {
     FlightRuntime.callValue(releaseGlRenderTarget, cast ([pool, s2] : Array<Dynamic>));
   }
 
-  @:keep public static function applyInnerShadowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:InnerShadowEffect):Void {
+  public static function applyInnerShadowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:InnerShadowEffect):Void {
     var descriptor:Dynamic = cast FlightRuntime.UNDEFINED;
     var s0:Dynamic = cast FlightRuntime.UNDEFINED;
     var s1:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1028,7 +1025,7 @@ class EffectsGl {
     FlightRuntime.callValue(releaseGlRenderTarget, cast ([pool, s2] : Array<Dynamic>));
   }
 
-  @:keep public static function applyKuwaharaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:KuwaharaEffect):Void {
+  public static function applyKuwaharaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:KuwaharaEffect):Void {
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     radius = FlightRuntime.coalesce(FlightRuntime.field(effect, 'radius'), function():Dynamic return cast 3.0);
@@ -1039,7 +1036,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyLensDirtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensDirtEffect):Void {
+  public static function applyLensDirtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensDirtEffect):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var threshold:Dynamic = cast FlightRuntime.UNDEFINED;
     var seed:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1055,7 +1052,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyLensDistortionEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensDistortionEffect):Void {
+  public static function applyLensDistortionEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensDistortionEffect):Void {
     var amount:Dynamic = cast FlightRuntime.UNDEFINED;
     var scale:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1068,7 +1065,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyLensFlareEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensFlareEffect):Void {
+  public static function applyLensFlareEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensFlareEffect):Void {
     var threshold:Dynamic = cast FlightRuntime.UNDEFINED;
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var ghosts:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1087,7 +1084,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyMedianEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:MedianEffect):Void {
+  public static function applyMedianEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:MedianEffect):Void {
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     radius = FlightRuntime.callProperty(HxMath, 'min', cast ([MAX_MEDIAN_EFFECT_GL_RADIUS, FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'round', cast ([FlightRuntime.coalesce(FlightRuntime.field(effect, 'radius'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
@@ -1098,7 +1095,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyMotionBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, velocityTexture:Null<Dynamic>, effect:MotionBlurEffect):Void {
+  public static function applyMotionBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, velocityTexture:Null<Dynamic>, effect:MotionBlurEffect):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var samples:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1115,7 +1112,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyOuterGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:OuterGlowEffect):Void {
+  public static function applyOuterGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:OuterGlowEffect):Void {
     var descriptor:Dynamic = cast FlightRuntime.UNDEFINED;
     var s0:Dynamic = cast FlightRuntime.UNDEFINED;
     var s1:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1170,7 +1167,7 @@ class EffectsGl {
     FlightRuntime.callValue(releaseGlRenderTarget, cast ([pool, s2] : Array<Dynamic>));
   }
 
-  @:keep public static function applyOutlineEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:OutlineEffect):Void {
+  public static function applyOutlineEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:OutlineEffect):Void {
     var threshold:Dynamic = cast FlightRuntime.UNDEFINED;
     var thickness:Dynamic = cast FlightRuntime.UNDEFINED;
     var color:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1187,7 +1184,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyPixelateEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PixelateEffect):Void {
+  public static function applyPixelateEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PixelateEffect):Void {
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     size = FlightRuntime.coalesce(FlightRuntime.field(effect, 'size'), function():Dynamic return cast 8.0);
@@ -1198,7 +1195,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyPosterizeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PosterizeEffect):Void {
+  public static function applyPosterizeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PosterizeEffect):Void {
     var levels:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     levels = FlightRuntime.callProperty(HxMath, 'max', cast ([2.0, FlightRuntime.coalesce(FlightRuntime.field(effect, 'levels'), function():Dynamic return cast 8.0)] : Array<Dynamic>));
@@ -1208,7 +1205,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyRadialBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:RadialBlurEffect):Void {
+  public static function applyRadialBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:RadialBlurEffect):Void {
     var centerX:Dynamic = cast FlightRuntime.UNDEFINED;
     var centerY:Dynamic = cast FlightRuntime.UNDEFINED;
     var strength:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1226,7 +1223,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyScanlinesEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ScanlinesEffect):Void {
+  public static function applyScanlinesEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ScanlinesEffect):Void {
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1239,7 +1236,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyScreenSpaceFogEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<Dynamic>, effect:ScreenSpaceFogEffect):Void {
+  public static function applyScreenSpaceFogEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<Dynamic>, effect:ScreenSpaceFogEffect):Void {
     var packed:Dynamic = cast FlightRuntime.UNDEFINED;
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1269,7 +1266,7 @@ class EffectsGl {
 
   public static final applyShaders__glGradientBevelEffect:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function applySharpenEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SharpenEffect):Void {
+  public static function applySharpenEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SharpenEffect):Void {
     var amount:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     amount = FlightRuntime.coalesce(FlightRuntime.field(effect, 'amount'), function():Dynamic return cast 0.5);
@@ -1280,7 +1277,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applySketchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SketchEffect):Void {
+  public static function applySketchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SketchEffect):Void {
     var strength:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     strength = FlightRuntime.coalesce(FlightRuntime.field(effect, 'strength'), function():Dynamic return cast 1.0);
@@ -1291,7 +1288,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applySmaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SmaaEffect):Void {
+  public static function applySmaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SmaaEffect):Void {
     var threshold:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     threshold = FlightRuntime.coalesce(FlightRuntime.field(effect, 'threshold'), function():Dynamic return cast 0.1);
@@ -1302,7 +1299,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applySsaoEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SsaoEffect):Void {
+  public static function applySsaoEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SsaoEffect):Void {
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1316,7 +1313,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applySsrEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SsrEffect):Void {
+  public static function applySsrEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SsrEffect):Void {
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     program = FlightRuntime.callValue(getGlEffectProgram, cast ([state, 'atmospheric.ssr', EffectsGl.SSR_FRAGMENT_SRC__glSsrEffect] : Array<Dynamic>));
     FlightRuntime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([FlightRuntime.field(source, 'texture')] : Array<Dynamic>), dest, function() {
@@ -1324,13 +1321,13 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyTaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, _effect:TaaEffect):Void {
+  public static function applyTaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, _effect:TaaEffect):Void {
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     program = FlightRuntime.callValue(getGlEffectProgram, cast ([state, 'antialiasing.taa', EffectsGl.TAA_FRAGMENT_SRC__glTaaEffect] : Array<Dynamic>));
     FlightRuntime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([FlightRuntime.field(source, 'texture')] : Array<Dynamic>), dest, EffectsGl._noopSetUniforms__glTaaEffect] : Array<Dynamic>));
   }
 
-  @:keep public static function applyTiltShiftEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:TiltShiftEffect):Void {
+  public static function applyTiltShiftEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:TiltShiftEffect):Void {
     var center:Dynamic = cast FlightRuntime.UNDEFINED;
     var width:Dynamic = cast FlightRuntime.UNDEFINED;
     var blur:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1347,7 +1344,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyToneMapEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ToneMapEffect):Void {
+  public static function applyToneMapEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ToneMapEffect):Void {
     var operator_:Dynamic = cast FlightRuntime.UNDEFINED;
     var exposure:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1360,7 +1357,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyVignetteEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:VignetteEffect):Void {
+  public static function applyVignetteEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:VignetteEffect):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
     var softness:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1387,7 +1384,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyWhiteBalanceEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:WhiteBalanceEffect):Void {
+  public static function applyWhiteBalanceEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:WhiteBalanceEffect):Void {
     var temperature:Dynamic = cast FlightRuntime.UNDEFINED;
     var tint:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1400,7 +1397,7 @@ class EffectsGl {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function beginGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline):Void {
+  public static function beginGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline):Void {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1452,12 +1449,12 @@ class EffectsGl {
 
   public static final boxBlurShaders__glEffectBoxBlur:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function buildGodRaysFragment__glGodRaysEffect(samples:Float):String {
+  public static function buildGodRaysFragment__glGodRaysEffect(samples:Float):String {
     return cast ((EffectsGl.GOD_RAYS_FRAGMENT_HEAD__glGodRaysEffect + FlightRuntime.toFixed(samples, 1.0)) + EffectsGl.GOD_RAYS_FRAGMENT_TAIL__glGodRaysEffect);
     return cast null;
   }
 
-  @:keep public static function buildRampData__glEffectGradientRamp(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
+  public static function buildRampData__glEffectGradientRamp(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [(256.0 * 4.0)]);
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(colors, 'length'), 0.0))) { return cast out; }
@@ -1512,7 +1509,7 @@ class EffectsGl {
     return cast null;
   }
 
-  @:keep public static function buildToneMapFragment__glToneMapEffect(operator_:String):String {
+  public static function buildToneMapFragment__glToneMapEffect(operator_:String):String {
     return cast ((EffectsGl.TONEMAP_FRAGMENT_HEAD__glToneMapEffect + FlightRuntime.coalesce(FlightRuntime.getIndex(EffectsGl.TONEMAP_OPERATORS__glToneMapEffect, operator_), function():Dynamic return cast EffectsGl.TONEMAP_OPERATORS__glToneMapEffect.aces)) + EffectsGl.TONEMAP_FRAGMENT_TAIL__glToneMapEffect);
     return cast null;
   }
@@ -1521,7 +1518,7 @@ class EffectsGl {
 
   public static final CHROMATIC_ABERRATION_FRAGMENT_SRC__glChromaticAberrationEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_radial;\nout vec4 o_color;\nvoid main() {\n  vec2 centered = v_texCoord - 0.5;\n  float scale = mix(1.0, length(centered) * 2.0, u_radial);\n  vec2 dir = mix(vec2(1.0, 0.0), normalize(centered + vec2(1e-5)), u_radial);\n  vec2 offset = dir * u_intensity * scale;\n  float r = texture(u_texture0, v_texCoord + offset).r;\n  float g = texture(u_texture0, v_texCoord).g;\n  float b = texture(u_texture0, v_texCoord - offset).b;\n  float a = texture(u_texture0, v_texCoord).a;\n  o_color = vec4(r, g, b, a);\n}';
 
-  @:keep public static function clamp01__glColorLutPass(v:Float):Float {
+  public static function clamp01__glColorLutPass(v:Float):Float {
     return cast FlightRuntime.select(FlightRuntime.compare(v, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast FlightRuntime.select(FlightRuntime.compare(v, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast v));
     return cast null;
   }
@@ -1540,7 +1537,7 @@ class EffectsGl {
 
   public static final CRT_FRAGMENT_SRC__glCrtEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_curvature;\nuniform float u_scanlineIntensity;\nuniform float u_vignette;\nuniform float u_aberration;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvec2 barrel(vec2 uv) {\n  vec2 c = uv * 2.0 - 1.0;\n  c += c * u_curvature * dot(c, c);\n  return c * 0.5 + 0.5;\n}\nvoid main() {\n  vec2 uv = barrel(v_texCoord);\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {\n    o_color = vec4(0.0, 0.0, 0.0, 1.0);\n    return;\n  }\n  vec2 off = vec2(u_aberration, 0.0);\n  float r = texture(u_texture0, uv + off).r;\n  float g = texture(u_texture0, uv).g;\n  float b = texture(u_texture0, uv - off).b;\n  float a = texture(u_texture0, uv).a;\n  vec3 col = vec3(r, g, b);\n  float line = sin(uv.y * u_resolution.y * 3.14159265) * 0.5 + 0.5;\n  col *= 1.0 - u_scanlineIntensity * (1.0 - line);\n  vec2 vc = uv * 2.0 - 1.0;\n  col *= 1.0 - u_vignette * dot(vc, vc);\n  o_color = vec4(col, a);\n}';
 
-  @:keep public static function createGlEffectGradientRampTexture(gl:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
+  public static function createGlEffectGradientRampTexture(gl:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var texture:Dynamic = cast FlightRuntime.UNDEFINED;
     data = FlightRuntime.callValue(EffectsGl.buildRampData__glEffectGradientRamp, cast ([colors, alphas, ratios] : Array<Dynamic>));
@@ -1556,7 +1553,7 @@ class EffectsGl {
     return cast null;
   }
 
-  @:keep public static function createGlRenderEffectPipeline(_state:GlRenderState, ?options:RenderEffectPipelineOptions):GlRenderEffectPipeline {
+  public static function createGlRenderEffectPipeline(_state:GlRenderState, ?options:RenderEffectPipelineOptions):GlRenderEffectPipeline {
     if (options == null) options = cast ({  } : Dynamic);
     return cast { options: FlightRuntime.mergeObjects([options]), sceneTarget: null, pool: FlightRuntime.callValue(createGlRenderTargetPool, cast ([] : Array<Dynamic>)), lutCache: FlightRuntime.callValue(createColorLutCache, cast ([] : Array<Dynamic>)), lutTexture: { texture: null, lut: null }, velocityTexture: null };
     return cast null;
@@ -1757,7 +1754,7 @@ class EffectsGl {
 
   public static final DIRECTIONAL_BLUR_FRAGMENT_SRC__glDirectionalBlurEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_angle;\nuniform float u_length;\nuniform float u_samples;\nuniform vec2 u_resolution;\nout vec4 o_color;\nconst int SAMPLES = 16;\nvoid main() {\n  vec2 dir = vec2(cos(u_angle), sin(u_angle)) * (u_length / u_resolution);\n  float count = min(u_samples, 16.0);\n  vec4 sum = vec4(0.0);\n  float taken = 0.0;\n  for (int i = 0; i < SAMPLES; i++) {\n    if (float(i) >= count) break;\n    float t = count > 1.0 ? (float(i) / (count - 1.0)) - 0.5 : 0.0;\n    vec2 uv = v_texCoord + dir * t;\n    sum += texture(u_texture0, uv);\n    taken += 1.0;\n  }\n  o_color = sum / max(taken, 1.0);\n}';
 
-  @:keep public static function destroyGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline):Void {
+  public static function destroyGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline):Void {
     if (FlightRuntime.truthy(FlightRuntime.field(pipeline, 'sceneTarget'))) {
   FlightRuntime.callValue(destroyGlRenderTarget, cast ([state, FlightRuntime.field(pipeline, 'sceneTarget')] : Array<Dynamic>));
   FlightRuntime.setField(pipeline, 'sceneTarget', null);
@@ -1780,7 +1777,7 @@ class EffectsGl {
 
   public static final ERASE_FRAGMENT_SRC__glEffectBlitShader:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nout vec4 fragColor;\nvoid main() {\n  float a = texture(u_texture, v_texCoord).a;\n  fragColor = vec4(0.0, 0.0, 0.0, a);\n}';
 
-  @:keep public static function endGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline, operations:Array<Dynamic>):Void {
+  public static function endGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline, operations:Array<Dynamic>):Void {
     var scene:Dynamic = cast FlightRuntime.UNDEFINED;
     var format:Dynamic = cast FlightRuntime.UNDEFINED;
     var descriptor:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1852,7 +1849,7 @@ class EffectsGl {
 
   public static final GLITCH_FRAGMENT_SRC__glGlitchEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_blockSize;\nuniform float u_colorShift;\nuniform float u_seed;\nuniform vec2 u_resolution;\nout vec4 o_color;\nfloat ghash(float n) { return fract(sin(n) * 43758.5453123); }\nvoid main() {\n  float blockSize = max(2.0, u_blockSize);\n  float block = floor(v_texCoord.y * u_resolution.y / blockSize);\n  float r = ghash(block + u_seed * 7.0);\n  float tear = step(1.0 - u_intensity * 0.6, r);\n  float shiftPx = (ghash(block * 1.7 + u_seed) - 0.5) * 2.0 * tear * u_intensity * 40.0;\n  vec2 baseUv = vec2(v_texCoord.x + shiftPx / u_resolution.x, v_texCoord.y);\n  float cs = (u_colorShift * (0.4 + tear)) / u_resolution.x;\n  float rC = texture(u_texture0, vec2(baseUv.x + cs, baseUv.y)).r;\n  float gC = texture(u_texture0, baseUv).g;\n  float bC = texture(u_texture0, vec2(baseUv.x - cs, baseUv.y)).b;\n  float a = texture(u_texture0, baseUv).a;\n  vec3 col = vec3(rC, gC, bC);\n  float corrupt = step(0.985 - u_intensity * 0.04, ghash(block * 3.3 + u_seed * 2.0));\n  col = mix(col, vec3(1.0), corrupt * 0.6);\n  o_color = vec4(col, a);\n}';
 
-  @:keep public static function getApplyShader__glGradientBevelEffect(state:GlRenderState):BevelApplyLocations__glGradientBevelEffect {
+  public static function getApplyShader__glGradientBevelEffect(state:GlRenderState):BevelApplyLocations__glGradientBevelEffect {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callProperty(EffectsGl.applyShaders__glGradientBevelEffect, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(loc, FlightRuntime.UNDEFINED))) {
@@ -1865,7 +1862,7 @@ class EffectsGl {
     return cast null;
   }
 
-  @:keep public static function getAutoDivisor__glConvolutionEffect(matrix:Array<Float>, length:Float):Float {
+  public static function getAutoDivisor__glConvolutionEffect(matrix:Array<Float>, length:Float):Float {
     var sum:Dynamic = cast FlightRuntime.UNDEFINED;
     sum = 0.0;
     {
@@ -1879,12 +1876,12 @@ class EffectsGl {
     return cast null;
   }
 
-  @:keep public static function getBlendEffectModeIndex(mode:AdvancedBlendMode):Float {
+  public static function getBlendEffectModeIndex(mode:AdvancedBlendMode):Float {
     return cast FlightRuntime.coalesce(FlightRuntime.getIndex(EffectsGl.BLEND_MODE_INDEX__glBlendEffect, mode), function():Dynamic return cast -1.0);
     return cast null;
   }
 
-  @:keep public static function getBoxBlurShader__glEffectBoxBlur(state:GlRenderState):BoxBlurShaderLocations__glEffectBoxBlur {
+  public static function getBoxBlurShader__glEffectBoxBlur(state:GlRenderState):BoxBlurShaderLocations__glEffectBoxBlur {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callProperty(EffectsGl.boxBlurShaders__glEffectBoxBlur, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(loc, FlightRuntime.UNDEFINED))) {
@@ -1897,7 +1894,7 @@ class EffectsGl {
     return cast null;
   }
 
-  @:keep public static function getClipShader__glInnerGlowEffect(state:GlRenderState):InnerClipLocations__glInnerGlowEffect {
+  public static function getClipShader__glInnerGlowEffect(state:GlRenderState):InnerClipLocations__glInnerGlowEffect {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callProperty(EffectsGl.clipShaders__glInnerGlowEffect, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(loc, FlightRuntime.UNDEFINED))) {
@@ -1910,7 +1907,7 @@ class EffectsGl {
     return cast null;
   }
 
-  @:keep public static function getClipShader__glInnerShadowEffect(state:GlRenderState):InnerClipLocations__glInnerShadowEffect {
+  public static function getClipShader__glInnerShadowEffect(state:GlRenderState):InnerClipLocations__glInnerShadowEffect {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callProperty(EffectsGl.clipShaders__glInnerShadowEffect, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(loc, FlightRuntime.UNDEFINED))) {
@@ -1923,12 +1920,12 @@ class EffectsGl {
     return cast null;
   }
 
-  @:keep public static function getCompositeEffectOperatorIndex(operator_:CompositeOperator):Float {
+  public static function getCompositeEffectOperatorIndex(operator_:CompositeOperator):Float {
     return cast FlightRuntime.coalesce(FlightRuntime.getIndex(EffectsGl.COMPOSITE_OPERATOR_INDEX__glCompositeEffect, operator_), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  @:keep public static function getEncodeShader__glGradientBevelEffect(state:GlRenderState):BevelEncodeLocations__glGradientBevelEffect {
+  public static function getEncodeShader__glGradientBevelEffect(state:GlRenderState):BevelEncodeLocations__glGradientBevelEffect {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callProperty(EffectsGl.encodeShaders__glGradientBevelEffect, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(loc, FlightRuntime.UNDEFINED))) {
@@ -1941,7 +1938,7 @@ class EffectsGl {
     return cast null;
   }
 
-  @:keep public static function getGlBevelCompositeShader__glBevelEffect(state:GlRenderState):BevelCompositeLocations__glBevelEffect {
+  public static function getGlBevelCompositeShader__glBevelEffect(state:GlRenderState):BevelCompositeLocations__glBevelEffect {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callProperty(EffectsGl.bevelCompositeShaders__glBevelEffect, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(loc, FlightRuntime.UNDEFINED))) {
@@ -1954,13 +1951,13 @@ class EffectsGl {
     return cast null;
   }
 
-  @:keep public static function getGlBlendEffectBackdrop(state:GlRenderState, backdropKey:Null<String>):Null<Dynamic> {
+  public static function getGlBlendEffectBackdrop(state:GlRenderState, backdropKey:Null<String>):Null<Dynamic> {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(backdropKey, null))) { return cast null; }
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(FlightRuntime.callProperty(EffectsGl._backdrops__glBlendEffect, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([backdropKey] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getGlBlitOffsetShader__glEffectBlitShader(state:GlRenderState):BlitOffsetShaderLocations__glEffectBlitShader {
+  public static function getGlBlitOffsetShader__glEffectBlitShader(state:GlRenderState):BlitOffsetShaderLocations__glEffectBlitShader {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callProperty(EffectsGl.blitOffsetShaders__glEffectBlitShader, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(loc, FlightRuntime.UNDEFINED))) {
@@ -1973,7 +1970,7 @@ class EffectsGl {
     return cast null;
   }
 
-  @:keep public static function getGlBlitShader__glEffectBlitShader(state:GlRenderState):GlFullscreenProgram {
+  public static function getGlBlitShader__glEffectBlitShader(state:GlRenderState):GlFullscreenProgram {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callProperty(EffectsGl.blitShaders__glEffectBlitShader, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(loc, FlightRuntime.UNDEFINED))) {
@@ -1985,12 +1982,12 @@ class EffectsGl {
     return cast null;
   }
 
-  @:keep public static function getGlCustomShaderSource(state:GlRenderState, shaderKey:String):Null<String> {
+  public static function getGlCustomShaderSource(state:GlRenderState, shaderKey:String):Null<String> {
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(FlightRuntime.callProperty(EffectsGl._customShaders__glCustomShaderEffect, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([shaderKey] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getGlEffectProgram(state:GlRenderState, key:String, fragmentSource:String):GlFullscreenProgram {
+  public static function getGlEffectProgram(state:GlRenderState, key:String, fragmentSource:String):GlFullscreenProgram {
     var cache:Dynamic = cast FlightRuntime.UNDEFINED;
     var existing:Dynamic = cast FlightRuntime.UNDEFINED;
     var compiled:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2007,7 +2004,7 @@ class EffectsGl {
     return cast null;
   }
 
-  @:keep public static function getGlEffectUniformLocation(state:GlRenderState, program:GlFullscreenProgram, name:String):Null<Dynamic> {
+  public static function getGlEffectUniformLocation(state:GlRenderState, program:GlFullscreenProgram, name:String):Null<Dynamic> {
     var cache:Dynamic = cast FlightRuntime.UNDEFINED;
     var existing:Dynamic = cast FlightRuntime.UNDEFINED;
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2024,7 +2021,7 @@ class EffectsGl {
     return cast null;
   }
 
-  @:keep public static function getGlEraseShader__glEffectBlitShader(state:GlRenderState):GlFullscreenProgram {
+  public static function getGlEraseShader__glEffectBlitShader(state:GlRenderState):GlFullscreenProgram {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callProperty(EffectsGl.eraseShaders__glEffectBlitShader, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(loc, FlightRuntime.UNDEFINED))) {
@@ -2036,7 +2033,7 @@ class EffectsGl {
     return cast null;
   }
 
-  @:keep public static function getGlInvertTintShader__glEffectTintShader(state:GlRenderState):TintShaderLocations__glEffectTintShader {
+  public static function getGlInvertTintShader__glEffectTintShader(state:GlRenderState):TintShaderLocations__glEffectTintShader {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callProperty(EffectsGl.invertTintShaders__glEffectTintShader, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(loc, FlightRuntime.UNDEFINED))) {
@@ -2049,17 +2046,17 @@ class EffectsGl {
     return cast null;
   }
 
-  @:keep public static function getGlRenderEffectKinds():Array<String> {
+  public static function getGlRenderEffectKinds():Array<String> {
     return cast EffectsGl.ALL_GL_EFFECT_KINDS__glRenderEffectRegistrar;
     return cast null;
   }
 
-  @:keep public static function getGlRenderEffectRunner(state:GlRenderState, kind:String):Null<GlRenderEffectRunner> {
+  public static function getGlRenderEffectRunner(state:GlRenderState, kind:String):Null<GlRenderEffectRunner> {
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(FlightRuntime.callProperty(EffectsGl._registries__glRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getGlTintShader__glEffectTintShader(state:GlRenderState):TintShaderLocations__glEffectTintShader {
+  public static function getGlTintShader__glEffectTintShader(state:GlRenderState):TintShaderLocations__glEffectTintShader {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callProperty(EffectsGl.tintShaders__glEffectTintShader, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(loc, FlightRuntime.UNDEFINED))) {
@@ -2072,21 +2069,21 @@ class EffectsGl {
     return cast null;
   }
 
-  @:keep public static function getInvertTintEdgeColor__glInnerGlowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
+  public static function getInvertTintEdgeColor__glInnerGlowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
     var edgeAlpha:Dynamic = cast FlightRuntime.UNDEFINED;
     edgeAlpha = FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, (alpha * strength)] : Array<Dynamic>));
     return cast cast ([(((Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0)) / 255.0) * edgeAlpha), (((Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0)) / 255.0) * edgeAlpha), (((Std.int(color) & Std.int(255.0)) / 255.0) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function getInvertTintEdgeColor__glInnerShadowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
+  public static function getInvertTintEdgeColor__glInnerShadowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
     var edgeAlpha:Dynamic = cast FlightRuntime.UNDEFINED;
     edgeAlpha = FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, (alpha * strength)] : Array<Dynamic>));
     return cast cast ([(((Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0)) / 255.0) * edgeAlpha), (((Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0)) / 255.0) * edgeAlpha), (((Std.int(color) & Std.int(255.0)) / 255.0) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function getLookupShader__glGradientGlowEffect(state:GlRenderState):GradientLookupLocations__glGradientGlowEffect {
+  public static function getLookupShader__glGradientGlowEffect(state:GlRenderState):GradientLookupLocations__glGradientGlowEffect {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.callProperty(EffectsGl.lookupShaders__glGradientGlowEffect, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(loc, FlightRuntime.UNDEFINED))) {
@@ -2109,7 +2106,7 @@ class EffectsGl {
 
   public static final INNER_CLIP_FRAGMENT_SRC__glInnerGlowEffect:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nout vec4 fragColor;\nvoid main() {\n  vec4 glow = texture(u_texture0, v_texCoord);\n  float srcAlpha = texture(u_texture1, v_texCoord).a;\n  fragColor = glow * srcAlpha;\n}';
 
-  @:keep public static function hasGlRenderEffectRunner(state:GlRenderState, kind:String):Bool {
+  public static function hasGlRenderEffectRunner(state:GlRenderState, kind:String):Bool {
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(FlightRuntime.callProperty(EffectsGl._registries__glRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>)), 'has', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast false);
     return cast null;
   }
@@ -2156,7 +2153,7 @@ class EffectsGl {
 
   public static final PRESENT_FRAGMENT_SRC__glRenderEffectPipeline:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nout vec4 o_color;\nvoid main() {\n  o_color = texture(u_texture0, v_texCoord);\n}';
 
-  @:keep public static function presentGlRenderEffectResult__glRenderEffectPipeline(state:GlRenderState, source:GlRenderTarget):Void {
+  public static function presentGlRenderEffectResult__glRenderEffectPipeline(state:GlRenderState, source:GlRenderTarget):Void {
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(source, 'colorSpace'), 'linear'))) {
   FlightRuntime.callValue(drawGlLinearToSrgbPass, cast ([state, source, null] : Array<Dynamic>));
@@ -2170,13 +2167,13 @@ class EffectsGl {
 
   public static final RADIAL_BLUR_FRAGMENT_SRC__glRadialBlurEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_center;\nuniform float u_strength;\nuniform float u_samples;\nout vec4 o_color;\nconst int SAMPLES = 16;\nvoid main() {\n  vec2 toCenter = u_center - v_texCoord;\n  float count = min(u_samples, 16.0);\n  vec4 sum = vec4(0.0);\n  float taken = 0.0;\n  for (int i = 0; i < SAMPLES; i++) {\n    if (float(i) >= count) break;\n    float t = count > 1.0 ? float(i) / (count - 1.0) : 0.0;\n    vec2 uv = v_texCoord + toCenter * (t * u_strength);\n    sum += texture(u_texture0, uv);\n    taken += 1.0;\n  }\n  o_color = sum / max(taken, 1.0);\n}';
 
-  @:keep public static function registerAntialiasingGlRenderEffects(state:GlRenderState):Void {
+  public static function registerAntialiasingGlRenderEffects(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'FxaaEffect', defaultGlFxaaEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'SmaaEffect', defaultGlSmaaEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'TaaEffect', defaultGlTaaEffectRunner] : Array<Dynamic>));
   }
 
-  @:keep public static function registerBloomGlRenderEffects(state:GlRenderState):Void {
+  public static function registerBloomGlRenderEffects(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'BloomEffect', defaultGlBloomEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'ChromaticAberrationEffect', defaultGlChromaticAberrationEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'GodRaysEffect', defaultGlGodRaysEffectRunner] : Array<Dynamic>));
@@ -2186,7 +2183,7 @@ class EffectsGl {
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'VignetteEffect', defaultGlVignetteEffectRunner] : Array<Dynamic>));
   }
 
-  @:keep public static function registerBlurGlRenderEffects(state:GlRenderState):Void {
+  public static function registerBlurGlRenderEffects(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'BlurEffect', defaultGlBlurEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'BokehDepthOfFieldEffect', defaultGlBokehDepthOfFieldEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'CameraMotionBlurEffect', defaultGlCameraMotionBlurEffectRunner] : Array<Dynamic>));
@@ -2196,16 +2193,16 @@ class EffectsGl {
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'TiltShiftEffect', defaultGlTiltShiftEffectRunner] : Array<Dynamic>));
   }
 
-  @:keep public static function registerColorGlRenderEffects(state:GlRenderState):Void {
+  public static function registerColorGlRenderEffects(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'ToneMapEffect', defaultGlToneMapEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'WhiteBalanceEffect', defaultGlWhiteBalanceEffectRunner] : Array<Dynamic>));
   }
 
-  @:keep public static function registerColorGradeGlRenderEffects(state:GlRenderState):Void {
+  public static function registerColorGradeGlRenderEffects(state:GlRenderState):Void {
     FlightRuntime.callValue(registerColorGlRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  @:keep public static function registerCompositeGlRenderEffects(state:GlRenderState):Void {
+  public static function registerCompositeGlRenderEffects(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'BevelEffect', defaultGlBevelEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'BlendEffect', defaultGlBlendEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'CompositeEffect', defaultGlCompositeEffectRunner] : Array<Dynamic>));
@@ -2217,11 +2214,11 @@ class EffectsGl {
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'OuterGlowEffect', defaultGlOuterGlowEffectRunner] : Array<Dynamic>));
   }
 
-  @:keep public static function registerCustomShaderGlRenderEffect(state:GlRenderState):Void {
+  public static function registerCustomShaderGlRenderEffect(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'CustomShaderEffect', defaultGlCustomShaderEffectRunner] : Array<Dynamic>));
   }
 
-  @:keep public static function registerDefaultGlRenderEffects(state:GlRenderState):Void {
+  public static function registerDefaultGlRenderEffects(state:GlRenderState):Void {
     FlightRuntime.callValue(registerAntialiasingGlRenderEffects, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(registerBloomGlRenderEffects, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(registerBlurGlRenderEffects, cast ([state] : Array<Dynamic>));
@@ -2232,7 +2229,7 @@ class EffectsGl {
     FlightRuntime.callValue(registerStylizeGlRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  @:keep public static function registerGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String, texture:Dynamic):Void {
+  public static function registerGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String, texture:Dynamic):Void {
     var registry:Dynamic = cast FlightRuntime.UNDEFINED;
     registry = FlightRuntime.callProperty(EffectsGl._backdrops__glBlendEffect, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(registry, FlightRuntime.UNDEFINED))) {
@@ -2242,7 +2239,7 @@ class EffectsGl {
     FlightRuntime.callProperty(registry, 'set', cast ([backdropKey, texture] : Array<Dynamic>));
   }
 
-  @:keep public static function registerGlCustomShaderSource(state:GlRenderState, shaderKey:String, fragmentSource:String):Void {
+  public static function registerGlCustomShaderSource(state:GlRenderState, shaderKey:String, fragmentSource:String):Void {
     var registry:Dynamic = cast FlightRuntime.UNDEFINED;
     registry = FlightRuntime.callProperty(EffectsGl._customShaders__glCustomShaderEffect, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(registry, FlightRuntime.UNDEFINED))) {
@@ -2252,7 +2249,7 @@ class EffectsGl {
     FlightRuntime.callProperty(registry, 'set', cast ([shaderKey, fragmentSource] : Array<Dynamic>));
   }
 
-  @:keep public static function registerGlRenderEffect(state:GlRenderState, kind:String, runner:GlRenderEffectRunner):Void {
+  public static function registerGlRenderEffect(state:GlRenderState, kind:String, runner:GlRenderEffectRunner):Void {
     var registry:Dynamic = cast FlightRuntime.UNDEFINED;
     registry = FlightRuntime.callProperty(EffectsGl._registries__glRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(registry, FlightRuntime.UNDEFINED))) {
@@ -2262,7 +2259,7 @@ class EffectsGl {
     FlightRuntime.callProperty(registry, 'set', cast ([kind, runner] : Array<Dynamic>));
   }
 
-  @:keep public static function registerScreenSpaceGlRenderEffects(state:GlRenderState):Void {
+  public static function registerScreenSpaceGlRenderEffects(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'DisplacementEffect', defaultGlDisplacementEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'ScreenSpaceFogEffect', defaultGlScreenSpaceFogEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'SharpenEffect', defaultGlSharpenEffectRunner] : Array<Dynamic>));
@@ -2270,11 +2267,11 @@ class EffectsGl {
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'SsrEffect', defaultGlSsrEffectRunner] : Array<Dynamic>));
   }
 
-  @:keep public static function registerStandardGlRenderEffects(state:GlRenderState):Void {
+  public static function registerStandardGlRenderEffects(state:GlRenderState):Void {
     FlightRuntime.callValue(registerDefaultGlRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  @:keep public static function registerStylizeGlRenderEffects(state:GlRenderState):Void {
+  public static function registerStylizeGlRenderEffects(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'ConvolutionEffect', defaultGlConvolutionEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'CrtEffect', defaultGlCrtEffectRunner] : Array<Dynamic>));
     FlightRuntime.callValue(registerGlRenderEffect, cast ([state, 'DitherEffect', defaultGlDitherEffectRunner] : Array<Dynamic>));
@@ -2294,7 +2291,7 @@ class EffectsGl {
 
   public static final SCREEN_SPACE_FOG_FRAGMENT_SRC__glScreenSpaceFogEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform vec3 u_fogColor;\nuniform float u_density;\nuniform float u_near;\nuniform float u_far;\nuniform float u_hasDepth;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float fog;\n  if (u_hasDepth > 0.5) {\n    // Real depth path: window-space depth remapped over [near, far], exponential fog by density.\n    float depth = texture(u_texture1, v_texCoord).r;\n    float d = clamp((depth - u_near) / max(u_far - u_near, 1e-4), 0.0, 1.0);\n    fog = clamp(1.0 - exp(-u_density * d), 0.0, 1.0);\n  } else {\n    // Sentinel path: no depth written (flat 2D scene) — screen-Y gradient as a depth proxy.\n    fog = clamp((1.0 - v_texCoord.y) * u_density, 0.0, 1.0);\n  }\n  o_color = vec4(mix(c.rgb, u_fogColor, fog), c.a);\n}';
 
-  @:keep public static function setGlRenderEffectVelocityTexture(pipeline:GlRenderEffectPipeline, texture:Null<Dynamic>):Void {
+  public static function setGlRenderEffectVelocityTexture(pipeline:GlRenderEffectPipeline, texture:Null<Dynamic>):Void {
     FlightRuntime.setField(pipeline, 'velocityTexture', texture);
   }
 
@@ -2322,12 +2319,12 @@ class EffectsGl {
 
   public static final TONEMAP_OPERATORS__glToneMapEffect:Dynamic = { aces: '\n  vec3 a = x * (2.51 * x + 0.03);\n  vec3 b = x * (2.43 * x + 0.59) + 0.14;\n  return a / b;', reinhard: '\n  return x / (1.0 + x / (u_white * u_white));', filmic: '\n  vec3 X = max(vec3(0.0), x - 0.004);\n  return (X * (6.2 * X + 0.5)) / (X * (6.2 * X + 1.7) + 0.06);', uncharted2: '\n  float A = 0.15, B = 0.50, C = 0.10, D = 0.20, E = 0.02, F = 0.30;\n  vec3 v = ((x * (A * x + C * B) + D * E) / (x * (A * x + B) + D * F)) - E / F;\n  return v;', agx: '\n  vec3 v = clamp((x - 0.004) / (1.0 + x), 0.0, 1.0);\n  return pow(v, vec3(0.8));' };
 
-  @:keep public static function unregisterGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String):Bool {
+  public static function unregisterGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String):Bool {
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(FlightRuntime.callProperty(EffectsGl._backdrops__glBlendEffect, 'get', cast ([state] : Array<Dynamic>)), 'delete', cast ([backdropKey] : Array<Dynamic>)), function():Dynamic return cast false);
     return cast null;
   }
 
-  @:keep public static function uploadLutTexture__glColorLutPass(gl:Dynamic, lut:ColorLut, cache:GlColorLutTextureCache):Dynamic {
+  public static function uploadLutTexture__glColorLutPass(gl:Dynamic, lut:ColorLut, cache:GlColorLutTextureCache):Dynamic {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var samples:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;

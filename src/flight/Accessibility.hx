@@ -8,12 +8,9 @@ import flight.Types.AccessibilityLiveness;
 import flight.Types.AccessibilityNode;
 import flight.Types.AccessibilityState;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Accessibility")
 class Accessibility {
-  @:keep public static function _applyAccessibilityElementAttributes__accessibility(element:Dynamic, node:AccessibilityNode):Void {
+  public static function _applyAccessibilityElementAttributes__accessibility(element:Dynamic, node:AccessibilityNode):Void {
     FlightRuntime.callProperty(element, 'setAttribute', cast (['role', FlightRuntime.field(node, 'role')] : Array<Dynamic>));
     FlightRuntime.callValue(Accessibility._reflectAccessibilityAttribute__accessibility, cast ([element, 'aria-label', FlightRuntime.field(node, 'label')] : Array<Dynamic>));
     FlightRuntime.callValue(Accessibility._reflectAccessibilityAttribute__accessibility, cast ([element, 'aria-description', FlightRuntime.field(node, 'description')] : Array<Dynamic>));
@@ -24,7 +21,7 @@ class Accessibility {
     FlightRuntime.callValue(Accessibility._applyAccessibilityStateAttributes__accessibility, cast ([element, FlightRuntime.coalesce(FlightRuntime.field(node, 'states'), function():Dynamic return cast Accessibility._EMPTY_STATE__accessibility)] : Array<Dynamic>));
   }
 
-  @:keep public static function _applyAccessibilityStateAttributes__accessibility(element:Dynamic, state:AccessibilityState):Void {
+  public static function _applyAccessibilityStateAttributes__accessibility(element:Dynamic, state:AccessibilityState):Void {
     FlightRuntime.callValue(Accessibility._reflectAccessibilityBoolean__accessibility, cast ([element, 'aria-disabled', FlightRuntime.field(state, 'disabled')] : Array<Dynamic>));
     FlightRuntime.callValue(Accessibility._reflectAccessibilityBoolean__accessibility, cast ([element, 'aria-checked', FlightRuntime.field(state, 'checked')] : Array<Dynamic>));
     FlightRuntime.callValue(Accessibility._reflectAccessibilityBoolean__accessibility, cast ([element, 'aria-expanded', FlightRuntime.field(state, 'expanded')] : Array<Dynamic>));
@@ -42,7 +39,7 @@ class Accessibility {
 
   public static var _backend__accessibility:Null<AccessibilityBackend> = FlightRuntime.explicitNull();
 
-  @:keep public static function _createHiddenAccessibilityContainer__accessibility(doc:Dynamic):Dynamic {
+  public static function _createHiddenAccessibilityContainer__accessibility(doc:Dynamic):Dynamic {
     var container:Dynamic = cast FlightRuntime.UNDEFINED;
     var style:Dynamic = cast FlightRuntime.UNDEFINED;
     container = FlightRuntime.callProperty(doc, 'createElement', cast (['div'] : Array<Dynamic>));
@@ -64,7 +61,7 @@ class Accessibility {
 
   public static final _EMPTY_STATE__accessibility:AccessibilityState = {  };
 
-  @:keep public static function _getAccessibilityLiveRegion__accessibility(root:Dynamic, liveRegions:Dynamic, liveness:AccessibilityLiveness):Dynamic {
+  public static function _getAccessibilityLiveRegion__accessibility(root:Dynamic, liveRegions:Dynamic, liveness:AccessibilityLiveness):Dynamic {
     var region:Dynamic = cast FlightRuntime.UNDEFINED;
     region = FlightRuntime.callProperty(liveRegions, 'get', cast ([liveness] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(region, FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(region, 'parentNode'), null)))) {
@@ -79,7 +76,7 @@ class Accessibility {
     return cast null;
   }
 
-  @:keep public static function _reflectAccessibilityAttribute__accessibility(element:Dynamic, attribute:String, value:Null<String>):Void {
+  public static function _reflectAccessibilityAttribute__accessibility(element:Dynamic, attribute:String, value:Null<String>):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(value, FlightRuntime.UNDEFINED))) {
   FlightRuntime.callProperty(element, 'removeAttribute', cast ([attribute] : Array<Dynamic>));
   return;
@@ -87,7 +84,7 @@ class Accessibility {
     FlightRuntime.callProperty(element, 'setAttribute', cast ([attribute, value] : Array<Dynamic>));
   }
 
-  @:keep public static function _reflectAccessibilityBoolean__accessibility(element:Dynamic, attribute:String, value:Null<Bool>):Void {
+  public static function _reflectAccessibilityBoolean__accessibility(element:Dynamic, attribute:String, value:Null<Bool>):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(value, FlightRuntime.UNDEFINED))) {
   FlightRuntime.callProperty(element, 'removeAttribute', cast ([attribute] : Array<Dynamic>));
   return;
@@ -95,7 +92,7 @@ class Accessibility {
     FlightRuntime.callProperty(element, 'setAttribute', cast ([attribute, FlightRuntime.select(value, function():Dynamic return cast 'true', function():Dynamic return cast 'false')] : Array<Dynamic>));
   }
 
-  @:keep public static function _reflectAccessibilityNumber__accessibility(element:Dynamic, attribute:String, value:Null<Float>):Void {
+  public static function _reflectAccessibilityNumber__accessibility(element:Dynamic, attribute:String, value:Null<Float>):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(value, FlightRuntime.UNDEFINED))) {
   FlightRuntime.callProperty(element, 'removeAttribute', cast ([attribute] : Array<Dynamic>));
   return;
@@ -103,7 +100,7 @@ class Accessibility {
     FlightRuntime.callProperty(element, 'setAttribute', cast ([attribute, Std.string(value)] : Array<Dynamic>));
   }
 
-  @:keep public static function _reparentAccessibilityElement__accessibility(element:Dynamic, parentId:Null<String>, elements:Dynamic, root:Dynamic):Void {
+  public static function _reparentAccessibilityElement__accessibility(element:Dynamic, parentId:Null<String>, elements:Dynamic, root:Dynamic):Void {
     var parent:Dynamic = cast FlightRuntime.UNDEFINED;
     parent = root;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(parentId, FlightRuntime.UNDEFINED))) {
@@ -113,7 +110,7 @@ class Accessibility {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(element, 'parentNode'), parent))) { FlightRuntime.callProperty(parent, 'appendChild', cast ([element] : Array<Dynamic>)); }
   }
 
-  @:keep public static function _setAccessibilityElementValueText__accessibility(element:Dynamic, value:Null<String>):Void {
+  public static function _setAccessibilityElementValueText__accessibility(element:Dynamic, value:Null<String>):Void {
     var first:Dynamic = cast FlightRuntime.UNDEFINED;
     first = FlightRuntime.field(element, 'firstChild');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(value, FlightRuntime.UNDEFINED))) {
@@ -129,15 +126,15 @@ class Accessibility {
 
   public static final _TEXT_NODE__accessibility:Dynamic = 3.0;
 
-  @:keep public static function announceAccessibility(message:String, liveness:AccessibilityLiveness = 'polite'):Void {
+  public static function announceAccessibility(message:String, liveness:AccessibilityLiveness = 'polite'):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getAccessibilityBackend, cast ([] : Array<Dynamic>)), 'announce', cast ([message, liveness] : Array<Dynamic>));
   }
 
-  @:keep public static function clearAccessibilityTree():Void {
+  public static function clearAccessibilityTree():Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getAccessibilityBackend, cast ([] : Array<Dynamic>)), 'clear', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function createWebAccessibilityBackend(?container:Dynamic):AccessibilityBackend {
+  public static function createWebAccessibilityBackend(?container:Dynamic):AccessibilityBackend {
     var elements:Dynamic = cast FlightRuntime.UNDEFINED;
     var liveRegions:Dynamic = cast FlightRuntime.UNDEFINED;
     var root:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
@@ -207,26 +204,26 @@ class Accessibility {
     return cast null;
   }
 
-  @:keep public static function getAccessibilityBackend():AccessibilityBackend {
+  public static function getAccessibilityBackend():AccessibilityBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Accessibility._backend__accessibility, null))) { (Accessibility._backend__accessibility = cast (FlightRuntime.callValue(createWebAccessibilityBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Accessibility._backend__accessibility;
     return cast null;
   }
 
-  @:keep public static function removeAccessibilityNode(id:String):Void {
+  public static function removeAccessibilityNode(id:String):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getAccessibilityBackend, cast ([] : Array<Dynamic>)), 'removeNode', cast ([id] : Array<Dynamic>));
   }
 
-  @:keep public static function setAccessibilityBackend(backend:Null<AccessibilityBackend>):Void {
+  public static function setAccessibilityBackend(backend:Null<AccessibilityBackend>):Void {
     (Accessibility._backend__accessibility = cast (backend : Dynamic));
   }
 
-  @:keep public static function setAccessibilityFocus(id:String):Bool {
+  public static function setAccessibilityFocus(id:String):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getAccessibilityBackend, cast ([] : Array<Dynamic>)), 'setFocus', cast ([id] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setAccessibilityNode(node:AccessibilityNode):Void {
+  public static function setAccessibilityNode(node:AccessibilityNode):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(getAccessibilityBackend, cast ([] : Array<Dynamic>)), 'setNode', cast ([node] : Array<Dynamic>));
   }
 }

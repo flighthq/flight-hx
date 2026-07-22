@@ -10,19 +10,16 @@ import flight.Types.Clock;
 import flight.Types.ClockOptions;
 import flight.Types.Signal;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.ClockApi")
 class ClockApi {
-  @:keep public static function addClockChild(parent:Clock, child:Clock):Void {
+  public static function addClockChild(parent:Clock, child:Clock):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(child, 'parent'), parent))) { return; }
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(child, 'parent'), null))) { FlightRuntime.callValue(removeClockChild, cast ([FlightRuntime.field(child, 'parent'), child] : Array<Dynamic>)); }
     FlightRuntime.setField(child, 'parent', parent);
     FlightRuntime.callProperty(FlightRuntime.field(parent, 'children'), 'push', cast ([child] : Array<Dynamic>));
   }
 
-  @:keep public static function advanceClock(clock:Clock, deltaSeconds:Float):Void {
+  public static function advanceClock(clock:Clock, deltaSeconds:Float):Void {
     var scaledDelta:Dynamic = cast FlightRuntime.UNDEFINED;
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     scaledDelta = FlightRuntime.select(FlightRuntime.field(clock, 'paused'), function():Dynamic return cast 0.0, function():Dynamic return cast (deltaSeconds * FlightRuntime.field(clock, 'scale')));
@@ -39,7 +36,7 @@ class ClockApi {
     }
   }
 
-  @:keep public static function createChildClock(parent:Clock, ?options:ClockOptions):Clock {
+  public static function createChildClock(parent:Clock, ?options:ClockOptions):Clock {
     var child:Dynamic = cast FlightRuntime.UNDEFINED;
     child = FlightRuntime.callValue(createClock, cast ([options] : Array<Dynamic>));
     FlightRuntime.callValue(addClockChild, cast ([parent, child] : Array<Dynamic>));
@@ -47,12 +44,12 @@ class ClockApi {
     return cast null;
   }
 
-  @:keep public static function createClock(?options:ClockOptions):Clock {
+  public static function createClock(?options:ClockOptions):Clock {
     return cast { scale: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'scale'), function():Dynamic return cast 1.0), paused: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'paused'), function():Dynamic return cast false), deltaTime: 0.0, elapsed: 0.0, parent: null, children: cast ([] : Array<Dynamic>), onTick: null };
     return cast null;
   }
 
-  @:keep public static function disposeClock(clock:Clock):Void {
+  public static function disposeClock(clock:Clock):Void {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(clock, 'parent'), null))) { FlightRuntime.callValue(removeClockChild, cast ([FlightRuntime.field(clock, 'parent'), clock] : Array<Dynamic>)); }
     children = FlightRuntime.field(clock, 'children');
@@ -67,7 +64,7 @@ class ClockApi {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(clock, 'onTick'), null))) { FlightRuntime.callValue(clearSignal, cast ([FlightRuntime.field(clock, 'onTick')] : Array<Dynamic>)); }
   }
 
-  @:keep public static function enableClockSignals(clock:Clock):Signal<Dynamic> {
+  public static function enableClockSignals(clock:Clock):Signal<Dynamic> {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(clock, 'onTick'), null))) {
   FlightRuntime.setField(clock, 'onTick', FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)));
 }
@@ -75,7 +72,7 @@ class ClockApi {
     return cast null;
   }
 
-  @:keep public static function getClockEffectiveScale(clock:Clock):Float {
+  public static function getClockEffectiveScale(clock:Clock):Float {
     var scale:Dynamic = cast FlightRuntime.UNDEFINED;
     var current:Null<Clock> = cast FlightRuntime.UNDEFINED;
     scale = FlightRuntime.field(clock, 'scale');
@@ -88,12 +85,12 @@ class ClockApi {
     return cast null;
   }
 
-  @:keep public static function getClockParent(clock:Clock):Null<Clock> {
+  public static function getClockParent(clock:Clock):Null<Clock> {
     return cast FlightRuntime.field(clock, 'parent');
     return cast null;
   }
 
-  @:keep public static function isClockEffectivelyPaused(clock:Clock):Bool {
+  public static function isClockEffectivelyPaused(clock:Clock):Bool {
     var current:Null<Clock> = cast FlightRuntime.UNDEFINED;
     current = clock;
     while (FlightRuntime.truthy(!FlightRuntime.strictEquals(current, null))) {
@@ -104,11 +101,11 @@ class ClockApi {
     return cast null;
   }
 
-  @:keep public static function pauseClock(clock:Clock):Void {
+  public static function pauseClock(clock:Clock):Void {
     FlightRuntime.setField(clock, 'paused', true);
   }
 
-  @:keep public static function removeClockChild(parent:Clock, child:Clock):Void {
+  public static function removeClockChild(parent:Clock, child:Clock):Void {
     var index:Dynamic = cast FlightRuntime.UNDEFINED;
     index = FlightRuntime.callProperty(FlightRuntime.field(parent, 'children'), 'indexOf', cast ([child] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(index, -1.0))) { return; }
@@ -116,16 +113,16 @@ class ClockApi {
     FlightRuntime.setField(child, 'parent', null);
   }
 
-  @:keep public static function resetClock(clock:Clock):Void {
+  public static function resetClock(clock:Clock):Void {
     FlightRuntime.setField(clock, 'elapsed', 0.0);
     FlightRuntime.setField(clock, 'deltaTime', 0.0);
   }
 
-  @:keep public static function resumeClock(clock:Clock):Void {
+  public static function resumeClock(clock:Clock):Void {
     FlightRuntime.setField(clock, 'paused', false);
   }
 
-  @:keep public static function setClockScale(clock:Clock, scale:Float):Void {
+  public static function setClockScale(clock:Clock, scale:Float):Void {
     FlightRuntime.setField(clock, 'scale', scale);
   }
 }

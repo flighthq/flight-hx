@@ -74,9 +74,6 @@ typedef Tool = String;
 
 typedef VerificationWindow__functionalVerify = { @:optional var __ftRealRequestAnimationFrame:Dynamic; @:optional var __ftRenderImage:String; @:optional var __ftTarget:FunctionalTarget; @:optional var __ftVerification:FunctionalVerification; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.ToolCapture")
 class ToolCapture {
   public static var abortHandlerInstalled__captureInterrupt:Dynamic = false;
@@ -87,74 +84,72 @@ class ToolCapture {
 
   public static final BASELINE_ROOTS__baselineStore:Dynamic = { functional: 'functional', examples: 'examples' };
 
-  @:keep public static function baselinePath(root:String, subject:String, name:String):String {
+  public static function baselinePath(root:String, subject:String, name:String):String {
     var base:Dynamic = cast FlightRuntime.UNDEFINED;
     base = FlightRuntime.coalesce(FlightRuntime.getIndex(ToolCapture.BASELINE_ROOTS__baselineStore, subject), function():Dynamic return cast subject);
     return cast FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([root, base, 'baselines', '' + Std.string(name) + '.json'] : Array<Dynamic>));
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function captureEntry(opts:CaptureEntryOptions):flight.internal.FlightPromise<String> {
-    var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
-    var context:Dynamic = cast FlightRuntime.UNDEFINED;
-    var entry:Dynamic = cast FlightRuntime.UNDEFINED;
-    var renderers:Dynamic = cast FlightRuntime.UNDEFINED;
-    var baseUrl:Dynamic = cast FlightRuntime.UNDEFINED;
-    var tool:Dynamic = cast FlightRuntime.UNDEFINED;
-    var outBase:Dynamic = cast FlightRuntime.UNDEFINED;
-    var root:Dynamic = cast FlightRuntime.UNDEFINED;
-    var updateBaseline:Dynamic = cast FlightRuntime.UNDEFINED;
-    var extraWait:Dynamic = cast FlightRuntime.UNDEFINED;
-    var captureFrames:Dynamic = cast FlightRuntime.UNDEFINED;
-    var failOnError:Dynamic = cast FlightRuntime.UNDEFINED;
-    var isAborted:Dynamic = cast FlightRuntime.UNDEFINED;
-    var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
-    var displayLabel:Dynamic = cast FlightRuntime.UNDEFINED;
-    var verify:Dynamic = cast FlightRuntime.UNDEFINED;
-    var anyFailed:Dynamic = cast FlightRuntime.UNDEFINED;
-    var anyChanged:Dynamic = cast FlightRuntime.UNDEFINED;
-    var labelWidth:Dynamic = cast FlightRuntime.UNDEFINED;
-    var label:Dynamic = cast FlightRuntime.UNDEFINED;
-    var statusLine:Dynamic = cast FlightRuntime.UNDEFINED;
-    __destructure0 = opts;
-    context = FlightRuntime.field(__destructure0, 'context');
-    entry = FlightRuntime.field(__destructure0, 'entry');
-    renderers = FlightRuntime.field(__destructure0, 'renderers');
-    baseUrl = FlightRuntime.field(__destructure0, 'baseUrl');
-    tool = FlightRuntime.field(__destructure0, 'tool');
-    outBase = FlightRuntime.field(__destructure0, 'outBase');
-    root = FlightRuntime.field(__destructure0, 'root');
-    updateBaseline = FlightRuntime.defaultUndefined(FlightRuntime.field(__destructure0, 'updateBaseline'), function():Dynamic return cast false);
-    extraWait = FlightRuntime.defaultUndefined(FlightRuntime.field(__destructure0, 'extraWait'), function():Dynamic return cast 0.0);
-    captureFrames = FlightRuntime.defaultUndefined(FlightRuntime.field(__destructure0, 'captureFrames'), function():Dynamic return cast 0.0);
-    failOnError = FlightRuntime.defaultUndefined(FlightRuntime.field(__destructure0, 'failOnError'), function():Dynamic return cast false);
-    isAborted = FlightRuntime.defaultUndefined(FlightRuntime.field(__destructure0, 'isAborted'), function():Dynamic return cast function() return false);
-    __destructure1 = opts;
-    displayLabel = FlightRuntime.field(__destructure1, 'displayLabel');
-    verify = FlightRuntime.coalesce(FlightRuntime.field(opts, 'verify'), function():Dynamic return cast FlightRuntime.strictEquals(tool, 'functional'));
-    anyFailed = false;
-    anyChanged = false;
-    labelWidth = FlightRuntime.select(displayLabel, function():Dynamic return cast FlightRuntime.callProperty(HxMath, 'max', cast ([6.0, FlightRuntime.field(displayLabel, 'length')] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callProperty(HxMath, 'max', FlightRuntime.concatArrays([[6.0], FlightRuntime.toArray(FlightRuntime.callProperty(renderers, 'map', cast ([function(r:Dynamic) return FlightRuntime.field(r, 'length')] : Array<Dynamic>)))])));
-    label = function(renderer:String) return FlightRuntime.coalesce(displayLabel, function():Dynamic return cast renderer);
-    statusLine = function(tone:DetailTone, renderer:String, message:String) return FlightRuntime.callValue(formatStatusLine, cast ([tone, FlightRuntime.callValue(label, cast ([renderer] : Array<Dynamic>)), labelWidth, message] : Array<Dynamic>));
-    for (renderer in FlightRuntime.iterable(renderers)) {
-      if (FlightRuntime.truthy(FlightRuntime.callValue(isAborted, cast ([] : Array<Dynamic>)))) { break; }
-      var urlPath:Dynamic = FlightRuntime.select(FlightRuntime.field(entry, 'route'), function():Dynamic return cast FlightRuntime.callProperty(entry, 'route', cast ([renderer] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.select(FlightRuntime.strictEquals(tool, 'examples'), function():Dynamic return cast 'examples/' + Std.string(FlightRuntime.field(entry, 'name')) + '/' + Std.string(FlightRuntime.callValue(routeSegment, cast ([renderer] : Array<Dynamic>))) + '/', function():Dynamic return cast FlightRuntime.select(FlightRuntime.strictEquals(tool, 'functional'), function():Dynamic return cast 'tests/' + Std.string(FlightRuntime.field(entry, 'name')) + '/' + Std.string(FlightRuntime.callValue(routeSegment, cast ([renderer] : Array<Dynamic>))) + '/', function():Dynamic return cast '')));
-      var url:Dynamic = '' + Std.string(baseUrl) + '/' + Std.string(urlPath) + '';
-      var __destructure2:Dynamic = FlightRuntime.callValue(getCaptureOutputPaths, cast ([outBase, tool, FlightRuntime.field(entry, 'name'), renderer] : Array<Dynamic>));
-      var outDir:Dynamic = FlightRuntime.field(__destructure2, 'outDir');
-      var tmpScreenshot:Dynamic = FlightRuntime.field(__destructure2, 'tmpScreenshot');
-      var finalScreenshot:Dynamic = FlightRuntime.field(__destructure2, 'finalScreenshot');
-      var tmpLogs:Dynamic = FlightRuntime.field(__destructure2, 'tmpLogs');
-      var finalLogs:Dynamic = FlightRuntime.field(__destructure2, 'finalLogs');
-      var statusPath:Dynamic = FlightRuntime.field(__destructure2, 'statusPath');
-      FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:fs', 'mkdirSync'] : Array<Dynamic>)), cast ([outDir, { recursive: true }] : Array<Dynamic>));
-      var logs:Array<Dynamic> = cast ([] : Array<Dynamic>);
-      var page:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(context, 'newPage', cast ([] : Array<Dynamic>)));
-      FlightRuntime.callProperty(page, 'on', cast (['console', function(msg:Dynamic) {
+  public static function captureEntry(opts:CaptureEntryOptions):flight.internal.FlightPromise<String> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<String> {
+      var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
+      var context:Dynamic = cast FlightRuntime.UNDEFINED;
+      var entry:Dynamic = cast FlightRuntime.UNDEFINED;
+      var renderers:Dynamic = cast FlightRuntime.UNDEFINED;
+      var baseUrl:Dynamic = cast FlightRuntime.UNDEFINED;
+      var tool:Dynamic = cast FlightRuntime.UNDEFINED;
+      var outBase:Dynamic = cast FlightRuntime.UNDEFINED;
+      var root:Dynamic = cast FlightRuntime.UNDEFINED;
+      var updateBaseline:Dynamic = cast FlightRuntime.UNDEFINED;
+      var extraWait:Dynamic = cast FlightRuntime.UNDEFINED;
+      var captureFrames:Dynamic = cast FlightRuntime.UNDEFINED;
+      var failOnError:Dynamic = cast FlightRuntime.UNDEFINED;
+      var isAborted:Dynamic = cast FlightRuntime.UNDEFINED;
+      var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
+      var displayLabel:Dynamic = cast FlightRuntime.UNDEFINED;
+      var verify:Dynamic = cast FlightRuntime.UNDEFINED;
+      var anyFailed:Dynamic = cast FlightRuntime.UNDEFINED;
+      var anyChanged:Dynamic = cast FlightRuntime.UNDEFINED;
+      var labelWidth:Dynamic = cast FlightRuntime.UNDEFINED;
+      var label:Dynamic = cast FlightRuntime.UNDEFINED;
+      var statusLine:Dynamic = cast FlightRuntime.UNDEFINED;
+      __destructure0 = opts;
+      context = FlightRuntime.field(__destructure0, 'context');
+      entry = FlightRuntime.field(__destructure0, 'entry');
+      renderers = FlightRuntime.field(__destructure0, 'renderers');
+      baseUrl = FlightRuntime.field(__destructure0, 'baseUrl');
+      tool = FlightRuntime.field(__destructure0, 'tool');
+      outBase = FlightRuntime.field(__destructure0, 'outBase');
+      root = FlightRuntime.field(__destructure0, 'root');
+      updateBaseline = FlightRuntime.defaultUndefined(FlightRuntime.field(__destructure0, 'updateBaseline'), function():Dynamic return cast false);
+      extraWait = FlightRuntime.defaultUndefined(FlightRuntime.field(__destructure0, 'extraWait'), function():Dynamic return cast 0.0);
+      captureFrames = FlightRuntime.defaultUndefined(FlightRuntime.field(__destructure0, 'captureFrames'), function():Dynamic return cast 0.0);
+      failOnError = FlightRuntime.defaultUndefined(FlightRuntime.field(__destructure0, 'failOnError'), function():Dynamic return cast false);
+      isAborted = FlightRuntime.defaultUndefined(FlightRuntime.field(__destructure0, 'isAborted'), function():Dynamic return cast function() return false);
+      __destructure1 = opts;
+      displayLabel = FlightRuntime.field(__destructure1, 'displayLabel');
+      verify = FlightRuntime.coalesce(FlightRuntime.field(opts, 'verify'), function():Dynamic return cast FlightRuntime.strictEquals(tool, 'functional'));
+      anyFailed = false;
+      anyChanged = false;
+      labelWidth = FlightRuntime.select(displayLabel, function():Dynamic return cast FlightRuntime.callProperty(HxMath, 'max', cast ([6.0, FlightRuntime.field(displayLabel, 'length')] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callProperty(HxMath, 'max', FlightRuntime.concatArrays([[6.0], FlightRuntime.toArray(FlightRuntime.callProperty(renderers, 'map', cast ([function(r:Dynamic) return FlightRuntime.field(r, 'length')] : Array<Dynamic>)))])));
+      label = function(renderer:String) return FlightRuntime.coalesce(displayLabel, function():Dynamic return cast renderer);
+      statusLine = function(tone:DetailTone, renderer:String, message:String) return FlightRuntime.callValue(formatStatusLine, cast ([tone, FlightRuntime.callValue(label, cast ([renderer] : Array<Dynamic>)), labelWidth, message] : Array<Dynamic>));
+      for (renderer in FlightRuntime.iterable(renderers)) {
+        if (FlightRuntime.truthy(FlightRuntime.callValue(isAborted, cast ([] : Array<Dynamic>)))) { break; }
+        var urlPath:Dynamic = FlightRuntime.select(FlightRuntime.field(entry, 'route'), function():Dynamic return cast FlightRuntime.callProperty(entry, 'route', cast ([renderer] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.select(FlightRuntime.strictEquals(tool, 'examples'), function():Dynamic return cast 'examples/' + Std.string(FlightRuntime.field(entry, 'name')) + '/' + Std.string(FlightRuntime.callValue(routeSegment, cast ([renderer] : Array<Dynamic>))) + '/', function():Dynamic return cast FlightRuntime.select(FlightRuntime.strictEquals(tool, 'functional'), function():Dynamic return cast 'tests/' + Std.string(FlightRuntime.field(entry, 'name')) + '/' + Std.string(FlightRuntime.callValue(routeSegment, cast ([renderer] : Array<Dynamic>))) + '/', function():Dynamic return cast '')));
+        var url:Dynamic = '' + Std.string(baseUrl) + '/' + Std.string(urlPath) + '';
+        var __destructure2:Dynamic = FlightRuntime.callValue(getCaptureOutputPaths, cast ([outBase, tool, FlightRuntime.field(entry, 'name'), renderer] : Array<Dynamic>));
+        var outDir:Dynamic = FlightRuntime.field(__destructure2, 'outDir');
+        var tmpScreenshot:Dynamic = FlightRuntime.field(__destructure2, 'tmpScreenshot');
+        var finalScreenshot:Dynamic = FlightRuntime.field(__destructure2, 'finalScreenshot');
+        var tmpLogs:Dynamic = FlightRuntime.field(__destructure2, 'tmpLogs');
+        var finalLogs:Dynamic = FlightRuntime.field(__destructure2, 'finalLogs');
+        var statusPath:Dynamic = FlightRuntime.field(__destructure2, 'statusPath');
+        FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:fs', 'mkdirSync'] : Array<Dynamic>)), cast ([outDir, { recursive: true }] : Array<Dynamic>));
+        var logs:Array<Dynamic> = cast ([] : Array<Dynamic>);
+        var page:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(context, 'newPage', cast ([] : Array<Dynamic>)));
+        FlightRuntime.callProperty(page, 'on', cast (['console', function(msg:Dynamic) {
   var text:Dynamic = cast FlightRuntime.UNDEFINED;
   var type:Dynamic = cast FlightRuntime.UNDEFINED;
   text = FlightRuntime.callProperty(msg, 'text', cast ([] : Array<Dynamic>));
@@ -172,14 +167,14 @@ class ToolCapture {
   FlightRuntime.callProperty(logs, 'push', cast ([{ __flight: true, t: -1.0, level: FlightRuntime.select(FlightRuntime.strictEquals(type, 'error'), function():Dynamic return cast 'error', function():Dynamic return cast 'warn'), channel: 'console', data: { msg: text } }] : Array<Dynamic>));
 }
 }] : Array<Dynamic>));
-      FlightRuntime.callProperty(page, 'on', cast (['pageerror', function(err:Dynamic) {
+        FlightRuntime.callProperty(page, 'on', cast (['pageerror', function(err:Dynamic) {
   FlightRuntime.callProperty(logs, 'push', cast ([{ __flight: true, t: -1.0, level: 'pageerror', data: { msg: FlightRuntime.field(err, 'message') } }] : Array<Dynamic>));
 }] : Array<Dynamic>));
-      FlightRuntime.callProperty(page, 'on', cast (['requestfailed', function(req:Dynamic) {
+        FlightRuntime.callProperty(page, 'on', cast (['requestfailed', function(req:Dynamic) {
   FlightRuntime.callProperty(logs, 'push', cast ([{ __flight: true, t: -1.0, level: 'error', channel: 'network', data: { msg: 'request failed: ' + Std.string(FlightRuntime.callProperty(req, 'url', cast ([] : Array<Dynamic>))) + ' (' + Std.string(FlightRuntime.coalesce(FlightRuntime.optionalField(FlightRuntime.callProperty(req, 'failure', cast ([] : Array<Dynamic>)), 'errorText'), function():Dynamic return cast 'unknown')) + ')' } }] : Array<Dynamic>));
 }] : Array<Dynamic>));
-      try {
         try {
+          try {
   flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(page, 'goto', cast ([url, { waitUntil: 'domcontentloaded', timeout: 15000.0 }] : Array<Dynamic>)));
   flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callProperty(page, 'waitForSelector', cast (['canvas', { timeout: 8000.0 }] : Array<Dynamic>)), 'catch', cast ([function() {
 
@@ -266,60 +261,59 @@ class ToolCapture {
   FlightRuntime.console('error', [FlightRuntime.callValue(statusLine, cast (['fail', renderer, message] : Array<Dynamic>))]);
   (anyFailed = cast (true : Dynamic));
 }
-      } catch (__finallyError2:Dynamic) {
+        } catch (__finallyError2:Dynamic) {
+          {
+            flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callProperty(page, 'close', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+
+}] : Array<Dynamic>)));
+          }
+          throw __finallyError2;
+        }
         {
           flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callProperty(page, 'close', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
 
 }] : Array<Dynamic>)));
         }
-        throw __finallyError2;
       }
-      {
-        flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callProperty(page, 'close', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
-
-}] : Array<Dynamic>)));
-      }
-    }
-    if (FlightRuntime.truthy(anyFailed)) { return cast 'error'; }
-    if (FlightRuntime.truthy(anyChanged)) { return cast 'changed'; }
-    return cast 'ok';
-    return cast null;
+      if (FlightRuntime.truthy(anyFailed)) { return cast 'error'; }
+      if (FlightRuntime.truthy(anyChanged)) { return cast 'changed'; }
+      return cast 'ok';
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function captureParallel(opts:ParallelCaptureOptions):flight.internal.FlightPromise<ParallelCaptureResult> {
-    var __destructure3:Dynamic = cast FlightRuntime.UNDEFINED;
-    var context:Dynamic = cast FlightRuntime.UNDEFINED;
-    var entries:Dynamic = cast FlightRuntime.UNDEFINED;
-    var rendererFilter:Dynamic = cast FlightRuntime.UNDEFINED;
-    var workerCount:Dynamic = cast FlightRuntime.UNDEFINED;
-    var isAborted:Dynamic = cast FlightRuntime.UNDEFINED;
-    var jobs:Array<{ var entry:Entry; var renderer:String; }> = cast FlightRuntime.UNDEFINED;
-    var captured:Dynamic = cast FlightRuntime.UNDEFINED;
-    var changed:Dynamic = cast FlightRuntime.UNDEFINED;
-    var failed:Dynamic = cast FlightRuntime.UNDEFINED;
-    var activeWorkers:Dynamic = cast FlightRuntime.UNDEFINED;
-    var workers:Dynamic = cast FlightRuntime.UNDEFINED;
-    __destructure3 = opts;
-    context = FlightRuntime.field(__destructure3, 'context');
-    entries = FlightRuntime.field(__destructure3, 'entries');
-    rendererFilter = FlightRuntime.field(__destructure3, 'rendererFilter');
-    workerCount = FlightRuntime.defaultUndefined(FlightRuntime.field(__destructure3, 'workerCount'), function():Dynamic return cast 6.0);
-    isAborted = FlightRuntime.defaultUndefined(FlightRuntime.field(__destructure3, 'isAborted'), function():Dynamic return cast function() return false);
-    jobs = cast ([] : Array<Dynamic>);
-    for (entry in FlightRuntime.iterable(entries)) {
-      var renderers:Dynamic = FlightRuntime.callProperty(FlightRuntime.field(entry, 'renderers'), 'filter', cast ([function(r:Dynamic) return FlightRuntime.callValue(rendererMatchesFilter, cast ([r, rendererFilter] : Array<Dynamic>))] : Array<Dynamic>));
-      for (renderer in FlightRuntime.iterable(renderers)) {
-        FlightRuntime.callProperty(jobs, 'push', cast ([{ entry: entry, renderer: renderer }] : Array<Dynamic>));
+  public static function captureParallel(opts:ParallelCaptureOptions):flight.internal.FlightPromise<ParallelCaptureResult> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<ParallelCaptureResult> {
+      var __destructure3:Dynamic = cast FlightRuntime.UNDEFINED;
+      var context:Dynamic = cast FlightRuntime.UNDEFINED;
+      var entries:Dynamic = cast FlightRuntime.UNDEFINED;
+      var rendererFilter:Dynamic = cast FlightRuntime.UNDEFINED;
+      var workerCount:Dynamic = cast FlightRuntime.UNDEFINED;
+      var isAborted:Dynamic = cast FlightRuntime.UNDEFINED;
+      var jobs:Array<{ var entry:Entry; var renderer:String; }> = cast FlightRuntime.UNDEFINED;
+      var captured:Dynamic = cast FlightRuntime.UNDEFINED;
+      var changed:Dynamic = cast FlightRuntime.UNDEFINED;
+      var failed:Dynamic = cast FlightRuntime.UNDEFINED;
+      var activeWorkers:Dynamic = cast FlightRuntime.UNDEFINED;
+      var workers:Dynamic = cast FlightRuntime.UNDEFINED;
+      __destructure3 = opts;
+      context = FlightRuntime.field(__destructure3, 'context');
+      entries = FlightRuntime.field(__destructure3, 'entries');
+      rendererFilter = FlightRuntime.field(__destructure3, 'rendererFilter');
+      workerCount = FlightRuntime.defaultUndefined(FlightRuntime.field(__destructure3, 'workerCount'), function():Dynamic return cast 6.0);
+      isAborted = FlightRuntime.defaultUndefined(FlightRuntime.field(__destructure3, 'isAborted'), function():Dynamic return cast function() return false);
+      jobs = cast ([] : Array<Dynamic>);
+      for (entry in FlightRuntime.iterable(entries)) {
+        var renderers:Dynamic = FlightRuntime.callProperty(FlightRuntime.field(entry, 'renderers'), 'filter', cast ([function(r:Dynamic) return FlightRuntime.callValue(rendererMatchesFilter, cast ([r, rendererFilter] : Array<Dynamic>))] : Array<Dynamic>));
+        for (renderer in FlightRuntime.iterable(renderers)) {
+          FlightRuntime.callProperty(jobs, 'push', cast ([{ entry: entry, renderer: renderer }] : Array<Dynamic>));
+        }
       }
-    }
-    captured = 0.0;
-    changed = 0.0;
-    failed = 0.0;
-    activeWorkers = FlightRuntime.callProperty(HxMath, 'min', cast ([workerCount, FlightRuntime.field(jobs, 'length')] : Array<Dynamic>));
-    workers = FlightRuntime.toArray({ length: activeWorkers }, flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Dynamic> {
+      captured = 0.0;
+      changed = 0.0;
+      failed = 0.0;
+      activeWorkers = FlightRuntime.callProperty(HxMath, 'min', cast ([workerCount, FlightRuntime.field(jobs, 'length')] : Array<Dynamic>));
+      workers = FlightRuntime.toArray({ length: activeWorkers }, flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Dynamic> {
   while (FlightRuntime.truthy(true)) {
   if (FlightRuntime.truthy(FlightRuntime.callValue(isAborted, cast ([] : Array<Dynamic>)))) { break; }
   var job:Dynamic = FlightRuntime.callProperty(jobs, 'shift', cast ([] : Array<Dynamic>));
@@ -329,42 +323,42 @@ class ToolCapture {
 }
   return cast null;
 }));
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'all', cast ([workers] : Array<Dynamic>)));
-    return cast { captured: captured, changed: changed, failed: failed };
-    return cast null;
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'all', cast ([workers] : Array<Dynamic>)));
+      return cast { captured: captured, changed: changed, failed: failed };
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function captureRenderTarget(tool:Tool, name:String, renderer:String, options:CaptureRenderTargetOptions):flight.internal.FlightPromise<CaptureRenderTargetResult> {
-    var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
-    var context:Dynamic = cast FlightRuntime.UNDEFINED;
-    var baseUrl:Dynamic = cast FlightRuntime.UNDEFINED;
-    var outBase:Dynamic = cast FlightRuntime.UNDEFINED;
-    var root:Dynamic = cast FlightRuntime.UNDEFINED;
-    var result:Dynamic = cast FlightRuntime.UNDEFINED;
-    var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
-    var finalScreenshot:Dynamic = cast FlightRuntime.UNDEFINED;
-    var finalLogs:Dynamic = cast FlightRuntime.UNDEFINED;
-    var statusPath:Dynamic = cast FlightRuntime.UNDEFINED;
-    var status:Dynamic = cast FlightRuntime.UNDEFINED;
-    __destructure0 = options;
-    context = FlightRuntime.field(__destructure0, 'context');
-    baseUrl = FlightRuntime.field(__destructure0, 'baseUrl');
-    outBase = FlightRuntime.field(__destructure0, 'outBase');
-    root = FlightRuntime.field(__destructure0, 'root');
-    result = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(captureEntry, cast ([{ context: context, entry: { name: name, renderers: cast ([renderer] : Array<Dynamic>) }, renderers: cast ([renderer] : Array<Dynamic>), baseUrl: baseUrl, tool: tool, outBase: outBase, root: root, updateBaseline: FlightRuntime.field(options, 'updateBaseline'), extraWait: FlightRuntime.field(options, 'extraWait'), captureFrames: FlightRuntime.field(options, 'captureFrames'), failOnError: FlightRuntime.field(options, 'failOnError'), isAborted: FlightRuntime.field(options, 'isAborted') }] : Array<Dynamic>)));
-    __destructure1 = FlightRuntime.callValue(getCaptureOutputPaths, cast ([outBase, tool, name, renderer] : Array<Dynamic>));
-    finalScreenshot = FlightRuntime.field(__destructure1, 'finalScreenshot');
-    finalLogs = FlightRuntime.field(__destructure1, 'finalLogs');
-    statusPath = FlightRuntime.field(__destructure1, 'statusPath');
-    status = FlightRuntime.select(FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:fs', 'existsSync'] : Array<Dynamic>)), cast ([statusPath] : Array<Dynamic>)), function():Dynamic return cast (cast FlightRuntime.jsonParse(FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:fs', 'readFileSync'] : Array<Dynamic>)), cast ([statusPath, 'utf8'] : Array<Dynamic>))) : CaptureStatus), function():Dynamic return cast null);
-    return cast { screenshotPath: finalScreenshot, logsPath: finalLogs, statusPath: statusPath, status: status, result: result };
-    return cast null;
+  public static function captureRenderTarget(tool:Tool, name:String, renderer:String, options:CaptureRenderTargetOptions):flight.internal.FlightPromise<CaptureRenderTargetResult> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<CaptureRenderTargetResult> {
+      var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
+      var context:Dynamic = cast FlightRuntime.UNDEFINED;
+      var baseUrl:Dynamic = cast FlightRuntime.UNDEFINED;
+      var outBase:Dynamic = cast FlightRuntime.UNDEFINED;
+      var root:Dynamic = cast FlightRuntime.UNDEFINED;
+      var result:Dynamic = cast FlightRuntime.UNDEFINED;
+      var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
+      var finalScreenshot:Dynamic = cast FlightRuntime.UNDEFINED;
+      var finalLogs:Dynamic = cast FlightRuntime.UNDEFINED;
+      var statusPath:Dynamic = cast FlightRuntime.UNDEFINED;
+      var status:Dynamic = cast FlightRuntime.UNDEFINED;
+      __destructure0 = options;
+      context = FlightRuntime.field(__destructure0, 'context');
+      baseUrl = FlightRuntime.field(__destructure0, 'baseUrl');
+      outBase = FlightRuntime.field(__destructure0, 'outBase');
+      root = FlightRuntime.field(__destructure0, 'root');
+      result = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(captureEntry, cast ([{ context: context, entry: { name: name, renderers: cast ([renderer] : Array<Dynamic>) }, renderers: cast ([renderer] : Array<Dynamic>), baseUrl: baseUrl, tool: tool, outBase: outBase, root: root, updateBaseline: FlightRuntime.field(options, 'updateBaseline'), extraWait: FlightRuntime.field(options, 'extraWait'), captureFrames: FlightRuntime.field(options, 'captureFrames'), failOnError: FlightRuntime.field(options, 'failOnError'), isAborted: FlightRuntime.field(options, 'isAborted') }] : Array<Dynamic>)));
+      __destructure1 = FlightRuntime.callValue(getCaptureOutputPaths, cast ([outBase, tool, name, renderer] : Array<Dynamic>));
+      finalScreenshot = FlightRuntime.field(__destructure1, 'finalScreenshot');
+      finalLogs = FlightRuntime.field(__destructure1, 'finalLogs');
+      statusPath = FlightRuntime.field(__destructure1, 'statusPath');
+      status = FlightRuntime.select(FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:fs', 'existsSync'] : Array<Dynamic>)), cast ([statusPath] : Array<Dynamic>)), function():Dynamic return cast (cast FlightRuntime.jsonParse(FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:fs', 'readFileSync'] : Array<Dynamic>)), cast ([statusPath, 'utf8'] : Array<Dynamic>))) : CaptureStatus), function():Dynamic return cast null);
+      return cast { screenshotPath: finalScreenshot, logsPath: finalLogs, statusPath: statusPath, status: status, result: result };
+      return cast null;
+    })();
   }
 
-  @:keep public static function createSurfaceFromGlRenderState__functionalVerify(state:GlRenderState):Null<Surface> {
+  public static function createSurfaceFromGlRenderState__functionalVerify(state:GlRenderState):Null<Surface> {
     var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
     var width:Dynamic = cast FlightRuntime.UNDEFINED;
     var height:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -404,7 +398,7 @@ class ToolCapture {
 
   public static final DEV_SCRIPT__captureServer:Dynamic = { examples: 'dev:examples', functional: 'dev:functional', reference: 'dev:reference' };
 
-  @:keep public static function discoverEntries(tool:Tool, root:String):Array<Entry> {
+  public static function discoverEntries(tool:Tool, root:String):Array<Entry> {
     var dir:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(tool, 'reference'))) { return cast cast ([] : Array<Dynamic>); }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(tool, 'functional'))) { return cast FlightRuntime.callValue(discoverFunctionalScenes, cast ([FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([root, 'functional', 'scenes'] : Array<Dynamic>))] : Array<Dynamic>)); }
@@ -422,7 +416,7 @@ class ToolCapture {
     return cast null;
   }
 
-  @:keep public static function discoverFunctionalScenes(scenesDir:String):Array<FunctionalScene> {
+  public static function discoverFunctionalScenes(scenesDir:String):Array<FunctionalScene> {
     var agnostic:Dynamic = cast FlightRuntime.UNDEFINED;
     var specific:Dynamic = cast FlightRuntime.UNDEFINED;
     var scenes:Array<FunctionalScene> = cast FlightRuntime.UNDEFINED;
@@ -453,7 +447,7 @@ class ToolCapture {
     return cast null;
   }
 
-  @:keep public static function discoverReferenceEntries(checkoutDir:String):Array<Entry> {
+  public static function discoverReferenceEntries(checkoutDir:String):Array<Entry> {
     var frameworksDir:Dynamic = cast FlightRuntime.UNDEFINED;
     var entries:Array<Entry> = cast FlightRuntime.UNDEFINED;
     frameworksDir = FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([checkoutDir, 'content', 'frameworks'] : Array<Dynamic>));
@@ -477,7 +471,7 @@ class ToolCapture {
     return cast null;
   }
 
-  @:keep public static function encodeSurfaceToDataUrl__functionalVerify(surface:Surface):String {
+  public static function encodeSurfaceToDataUrl__functionalVerify(surface:Surface):String {
     var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
     var ctx:Dynamic = cast FlightRuntime.UNDEFINED;
     canvas = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -490,7 +484,7 @@ class ToolCapture {
     return cast null;
   }
 
-  @:keep public static function findRenderCanvas__functionalVerify():Null<Dynamic> {
+  public static function findRenderCanvas__functionalVerify():Null<Dynamic> {
     var best:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
     best = null;
     for (canvas in FlightRuntime.iterable(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'querySelectorAll', cast (['canvas'] : Array<Dynamic>)))) {
@@ -502,7 +496,7 @@ class ToolCapture {
 
   public static final FINGERPRINT_GRID__functionalVerify:Dynamic = 16.0;
 
-  @:keep public static function formatDetailLine(glyph:String, label:String, labelWidth:Float, message:String, ?paint:Dynamic):String {
+  public static function formatDetailLine(glyph:String, label:String, labelWidth:Float, message:String, ?paint:Dynamic):String {
     if (paint == null) paint = cast (function(s:Dynamic) return s : Dynamic);
     var paintedLabel:Dynamic = cast FlightRuntime.UNDEFINED;
     paintedLabel = FlightRuntime.callValue(paint, cast ([FlightRuntime.select(message, function():Dynamic return cast FlightRuntime.padEnd(label, labelWidth), function():Dynamic return cast label)] : Array<Dynamic>));
@@ -510,7 +504,7 @@ class ToolCapture {
     return cast null;
   }
 
-  @:keep public static function formatStatusLine(tone:DetailTone, label:String, labelWidth:Float, message:String):String {
+  public static function formatStatusLine(tone:DetailTone, label:String, labelWidth:Float, message:String):String {
     var paint:Dynamic = cast FlightRuntime.UNDEFINED;
     var body:Dynamic = cast FlightRuntime.UNDEFINED;
     paint = FlightRuntime.getIndex(ToolCapture.TONE_PAINT__captureFormat, tone);
@@ -519,7 +513,7 @@ class ToolCapture {
     return cast null;
   }
 
-  @:keep public static function formatSummaryCount(value:Float, label:String, tone:String):String {
+  public static function formatSummaryCount(value:Float, label:String, tone:String):String {
     var text:Dynamic = cast FlightRuntime.UNDEFINED;
     text = '' + Std.string(value) + ' ' + Std.string(label) + '';
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(value, 0.0))) { return cast FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['picocolors', 'default'] : Array<Dynamic>)), 'dim', cast ([text] : Array<Dynamic>)); }
@@ -529,7 +523,7 @@ class ToolCapture {
     return cast null;
   }
 
-  @:keep public static function formatSummaryLine(failed:Bool, counts:Array<String>):String {
+  public static function formatSummaryLine(failed:Bool, counts:Array<String>):String {
     var verdict:Dynamic = cast FlightRuntime.UNDEFINED;
     verdict = FlightRuntime.select(failed, function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['picocolors', 'default'] : Array<Dynamic>)), 'red', cast (['✗ FAILED'] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['picocolors', 'default'] : Array<Dynamic>)), 'green', cast (['✓ ok'] : Array<Dynamic>)));
     return cast '' + Std.string(verdict) + '   ' + Std.string(FlightRuntime.join(counts, '   ')) + '';
@@ -540,26 +534,26 @@ class ToolCapture {
 
   public static final FUNCTIONAL_VERIFICATION_IMAGE_KEY:Dynamic = '__ftRenderImage';
 
-  @:keep public static function functionalSceneFile(scenesDir:String, name:String, backend:String):String {
+  public static function functionalSceneFile(scenesDir:String, name:String, backend:String):String {
     var specific:Dynamic = cast FlightRuntime.UNDEFINED;
     specific = FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([scenesDir, '' + Std.string(name) + '.' + Std.string(backend) + '.ts'] : Array<Dynamic>));
     return cast FlightRuntime.select(FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:fs', 'existsSync'] : Array<Dynamic>)), cast ([specific] : Array<Dynamic>)), function():Dynamic return cast specific, function():Dynamic return cast FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([scenesDir, '' + Std.string(name) + '.ts'] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function getBaselineField(root:String, subject:String, name:String, column:String, field:BaselineField):Null<String> {
+  public static function getBaselineField(root:String, subject:String, name:String, column:String, field:BaselineField):Null<String> {
     return cast FlightRuntime.coalesce(FlightRuntime.optionalIndex(FlightRuntime.getIndex(FlightRuntime.callValue(ToolCapture.readBaseline__baselineStore, cast ([FlightRuntime.callValue(baselinePath, cast ([root, subject, name] : Array<Dynamic>))] : Array<Dynamic>)), column), field), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getCaptureOutputPaths(outBase:String, tool:Tool, name:String, renderer:String):CaptureOutputPaths {
+  public static function getCaptureOutputPaths(outBase:String, tool:Tool, name:String, renderer:String):CaptureOutputPaths {
     var outDir:Dynamic = cast FlightRuntime.UNDEFINED;
     outDir = FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:path', 'resolve'] : Array<Dynamic>)), cast ([outBase] : Array<Dynamic>)), tool, name, FlightRuntime.callValue(routeSegment, cast ([renderer] : Array<Dynamic>))] : Array<Dynamic>));
     return cast { outDir: outDir, tmpScreenshot: FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([outDir, 'screenshot.tmp.png'] : Array<Dynamic>)), finalScreenshot: FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([outDir, 'screenshot.png'] : Array<Dynamic>)), tmpLogs: FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([outDir, 'logs.tmp.jsonl'] : Array<Dynamic>)), finalLogs: FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([outDir, 'logs.jsonl'] : Array<Dynamic>)), statusPath: FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([outDir, 'status.json'] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function getFunctionalRenderImageSurface__functionalVerify():Null<Surface> {
+  public static function getFunctionalRenderImageSurface__functionalVerify():Null<Surface> {
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     target = FlightRuntime.field((cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftTarget');
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.optionalField(target, 'kind'), 'webgl'))) { return cast null; }
@@ -567,23 +561,21 @@ class ToolCapture {
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function getFunctionalTargetKind__captureEntry(page:Dynamic):flight.internal.FlightPromise<Null<String>> {
-    return cast FlightRuntime.callProperty(FlightRuntime.callProperty(page, 'evaluate', cast ([function() return FlightRuntime.coalesce(FlightRuntime.optionalField(FlightRuntime.field((cast (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : Dynamic) : { @:optional var __ftTarget:{ @:optional var kind:String; }; }), '__ftTarget'), 'kind'), function():Dynamic return cast null)] : Array<Dynamic>)), 'catch', cast ([function() return null] : Array<Dynamic>));
-    return cast null;
+  public static function getFunctionalTargetKind__captureEntry(page:Dynamic):flight.internal.FlightPromise<Null<String>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Null<String>> {
+      return cast FlightRuntime.callProperty(FlightRuntime.callProperty(page, 'evaluate', cast ([function() return FlightRuntime.coalesce(FlightRuntime.optionalField(FlightRuntime.field((cast (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : Dynamic) : { @:optional var __ftTarget:{ @:optional var kind:String; }; }), '__ftTarget'), 'kind'), function():Dynamic return cast null)] : Array<Dynamic>)), 'catch', cast ([function() return null] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function getRenderImageDataUrl__captureEntry(page:Dynamic):flight.internal.FlightPromise<Null<String>> {
-    return cast FlightRuntime.callProperty(FlightRuntime.callProperty(page, 'evaluate', cast ([function() return FlightRuntime.coalesce(FlightRuntime.field((cast (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : Dynamic) : { @:optional var __ftRenderImage:String; }), '__ftRenderImage'), function():Dynamic return cast null)] : Array<Dynamic>)), 'catch', cast ([function() return null] : Array<Dynamic>));
-    return cast null;
+  public static function getRenderImageDataUrl__captureEntry(page:Dynamic):flight.internal.FlightPromise<Null<String>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Null<String>> {
+      return cast FlightRuntime.callProperty(FlightRuntime.callProperty(page, 'evaluate', cast ([function() return FlightRuntime.coalesce(FlightRuntime.field((cast (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : Dynamic) : { @:optional var __ftRenderImage:String; }), '__ftRenderImage'), function():Dynamic return cast null)] : Array<Dynamic>)), 'catch', cast ([function() return null] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  @:keep public static function installAbortHandler():Dynamic {
+  public static function installAbortHandler():Dynamic {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(ToolCapture.abortHandlerInstalled__captureInterrupt))) {
   (ToolCapture.abortHandlerInstalled__captureInterrupt = cast (true : Dynamic));
   var onSignal:Dynamic = function() {
@@ -596,36 +588,34 @@ class ToolCapture {
     return cast null;
   }
 
-  @:keep public static function isBrowserClosedError(err:Dynamic):Bool {
+  public static function isBrowserClosedError(err:Dynamic):Bool {
     var message:Dynamic = cast FlightRuntime.UNDEFINED;
     message = FlightRuntime.select(FlightRuntime.isError(err), function():Dynamic return cast FlightRuntime.field(err, 'message'), function():Dynamic return cast Std.string(err));
     return cast FlightRuntime.callProperty(FlightRuntime.regexp('Target (page|closed)|has been closed|Browser has been closed|Target crashed', 'i'), 'test', cast ([message] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function isCaptureReadPixelsWarning__captureEntry(text:String):Bool {
+  public static function isCaptureReadPixelsWarning__captureEntry(text:String):Bool {
     return cast FlightRuntime.includes(text, 'GPU stall due to ReadPixels');
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function launchBrowser(?options:{ @:optional var captureFrames:Float; @:optional var verify:Bool; }):flight.internal.FlightPromise<{ var browser:Dynamic; var context:Dynamic; }> {
-    if (options == null) options = cast ({  } : Dynamic);
-    var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
-    var chromium:Dynamic = cast FlightRuntime.UNDEFINED;
-    var browser:Dynamic = cast FlightRuntime.UNDEFINED;
-    var context:Dynamic = cast FlightRuntime.UNDEFINED;
-    var captureFrames:Dynamic = cast FlightRuntime.UNDEFINED;
-    var verify:Dynamic = cast FlightRuntime.UNDEFINED;
-    __destructure0 = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(FlightRuntime.dynamicImport, cast (['@playwright/test'] : Array<Dynamic>)));
-    chromium = FlightRuntime.field(__destructure0, 'chromium');
-    browser = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(chromium, 'launch', cast ([{ args: cast (['--enable-unsafe-webgpu', '--use-webgpu-adapter=swiftshader'] : Array<Dynamic>) }] : Array<Dynamic>)));
-    context = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(browser, 'newContext', cast ([{ viewport: { width: 800.0, height: 600.0 } }] : Array<Dynamic>)));
-    captureFrames = FlightRuntime.coalesce(FlightRuntime.field(options, 'captureFrames'), function():Dynamic return cast 0.0);
-    verify = FlightRuntime.coalesce(FlightRuntime.field(options, 'verify'), function():Dynamic return cast true);
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(context, 'addInitScript', cast ([function(args:{ var frames:Float; var verify:Bool; }) {
+  public static function launchBrowser(?options:{ @:optional var captureFrames:Float; @:optional var verify:Bool; }):flight.internal.FlightPromise<{ var browser:Dynamic; var context:Dynamic; }> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<{ var browser:Dynamic; var context:Dynamic; }> {
+      if (options == null) options = cast ({  } : Dynamic);
+      var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
+      var chromium:Dynamic = cast FlightRuntime.UNDEFINED;
+      var browser:Dynamic = cast FlightRuntime.UNDEFINED;
+      var context:Dynamic = cast FlightRuntime.UNDEFINED;
+      var captureFrames:Dynamic = cast FlightRuntime.UNDEFINED;
+      var verify:Dynamic = cast FlightRuntime.UNDEFINED;
+      __destructure0 = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(FlightRuntime.dynamicImport, cast (['@playwright/test'] : Array<Dynamic>)));
+      chromium = FlightRuntime.field(__destructure0, 'chromium');
+      browser = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(chromium, 'launch', cast ([{ args: cast (['--enable-unsafe-webgpu', '--use-webgpu-adapter=swiftshader'] : Array<Dynamic>) }] : Array<Dynamic>)));
+      context = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(browser, 'newContext', cast ([{ viewport: { width: 800.0, height: 600.0 } }] : Array<Dynamic>)));
+      captureFrames = FlightRuntime.coalesce(FlightRuntime.field(options, 'captureFrames'), function():Dynamic return cast 0.0);
+      verify = FlightRuntime.coalesce(FlightRuntime.field(options, 'verify'), function():Dynamic return cast true);
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(context, 'addInitScript', cast ([function(args:{ var frames:Float; var verify:Bool; }) {
   var flags:Dynamic = cast FlightRuntime.UNDEFINED;
   var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
   var frames:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -677,11 +667,12 @@ class ToolCapture {
   FlightRuntime.callValue(callback, cast ([time] : Array<Dynamic>));
 }] : Array<Dynamic>)));
 }, { frames: captureFrames, verify: verify }] : Array<Dynamic>)));
-    return cast { browser: browser, context: context };
-    return cast null;
+      return cast { browser: browser, context: context };
+      return cast null;
+    })();
   }
 
-  @:keep public static function parseSceneFile__functionalScenes(file:String):Null<{ var name:String; var backend:Null<FunctionalBackend>; }> {
+  public static function parseSceneFile__functionalScenes(file:String):Null<{ var name:String; var backend:Null<FunctionalBackend>; }> {
     var stem:Dynamic = cast FlightRuntime.UNDEFINED;
     var dot:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(StringTools.endsWith(Std.string(file), '.ts')))) { return cast null; }
@@ -697,7 +688,7 @@ class ToolCapture {
     return cast null;
   }
 
-  @:keep public static function publishFunctionalRenderSync(render:String):Bool {
+  public static function publishFunctionalRenderSync(render:String):Bool {
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     var surface:Dynamic = cast FlightRuntime.UNDEFINED;
     var background:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -715,7 +706,7 @@ class ToolCapture {
     return cast null;
   }
 
-  @:keep public static function readBaseline__baselineStore(path:String):TestBaseline__baselineStore {
+  public static function readBaseline__baselineStore(path:String):TestBaseline__baselineStore {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:fs', 'existsSync'] : Array<Dynamic>)), cast ([path] : Array<Dynamic>))))) { return cast {  }; }
     try {
   return cast (cast FlightRuntime.jsonParse(FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:fs', 'readFileSync'] : Array<Dynamic>)), cast ([path, 'utf8'] : Array<Dynamic>))) : TestBaseline__baselineStore);
@@ -725,27 +716,27 @@ class ToolCapture {
     return cast null;
   }
 
-  @:keep public static function registerFunctionalTarget<T>(target:Dynamic):Dynamic {
+  public static function registerFunctionalTarget<T>(target:Dynamic):Dynamic {
     FlightRuntime.setField((cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftTarget', target);
     return cast target;
     return cast null;
   }
 
-  @:keep public static function registerWgpuFunctionalTarget(state:WgpuRenderState, scale:Dynamic = 1.0):Void {
+  public static function registerWgpuFunctionalTarget(state:WgpuRenderState, scale:Dynamic = 1.0):Void {
     FlightRuntime.callValue(enableWgpuFrameCapture, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(registerFunctionalTarget, cast ([{ kind: 'webgpu', state: state, width: FlightRuntime.field(FlightRuntime.field(state, 'canvas'), 'width'), height: FlightRuntime.field(FlightRuntime.field(state, 'canvas'), 'height'), scale: scale, render: function() {
 
 } }] : Array<Dynamic>));
   }
 
-  @:keep public static function rendererBackend__captureEntry(renderer:String):String {
+  public static function rendererBackend__captureEntry(renderer:String):String {
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     i = FlightRuntime.callProperty(renderer, 'indexOf', cast ([':'] : Array<Dynamic>));
     return cast FlightRuntime.select(FlightRuntime.strictEquals(i, -1.0), function():Dynamic return cast renderer, function():Dynamic return cast FlightRuntime.slice(renderer, (i + 1.0), null));
     return cast null;
   }
 
-  @:keep public static function rendererMatchesFilter(renderer:String, filter:Array<String>):Bool {
+  public static function rendererMatchesFilter(renderer:String, filter:Array<String>):Bool {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(filter, 'length'), 0.0))) { return cast true; }
     backend = FlightRuntime.select(FlightRuntime.includes(renderer, ':'), function():Dynamic return cast FlightRuntime.slice(renderer, (FlightRuntime.callProperty(renderer, 'indexOf', cast ([':'] : Array<Dynamic>)) + 1.0), null), function():Dynamic return cast renderer);
@@ -755,7 +746,7 @@ class ToolCapture {
 
   public static final RENDERERS:Dynamic = cast (['dom', 'canvas', 'webgl', 'webgpu'] : Array<Dynamic>);
 
-  @:keep public static function resolveServer(opts:{ var tool:Tool; var root:String; @:optional var externalUrl:String; }):flight.internal.FlightPromise<Server> {
+  public static function resolveServer(opts:{ var tool:Tool; var root:String; @:optional var externalUrl:String; }):flight.internal.FlightPromise<Server> {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var tool:Dynamic = cast FlightRuntime.UNDEFINED;
     var root:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -817,7 +808,7 @@ class ToolCapture {
     return cast null;
   }
 
-  @:keep public static function resolveStaticServer(opts:{ var tool:Tool; var root:String; @:optional var forceBuild:Bool; }):flight.internal.FlightPromise<Server> {
+  public static function resolveStaticServer(opts:{ var tool:Tool; var root:String; @:optional var forceBuild:Bool; }):flight.internal.FlightPromise<Server> {
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
     var tool:Dynamic = cast FlightRuntime.UNDEFINED;
     var root:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -878,79 +869,76 @@ class ToolCapture {
     return cast null;
   }
 
-  @:keep public static function routeSegment(renderer:String):String {
+  public static function routeSegment(renderer:String):String {
     return cast FlightRuntime.replace(renderer, ':', '-', false);
     return cast null;
   }
 
   public static var runAborted__captureInterrupt:Dynamic = false;
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function runReferenceCapture(options:ReferenceCaptureOptions):flight.internal.FlightPromise<ReferenceCaptureResult> {
-    var entries:Dynamic = cast FlightRuntime.UNDEFINED;
-    var server:Dynamic = cast FlightRuntime.UNDEFINED;
-    var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
-    var browser:Dynamic = cast FlightRuntime.UNDEFINED;
-    var context:Dynamic = cast FlightRuntime.UNDEFINED;
-    var isAborted:Dynamic = cast FlightRuntime.UNDEFINED;
-    var captured:Dynamic = cast FlightRuntime.UNDEFINED;
-    var changed:Dynamic = cast FlightRuntime.UNDEFINED;
-    var failed:Dynamic = cast FlightRuntime.UNDEFINED;
-    entries = FlightRuntime.callValue(discoverReferenceEntries, cast ([FlightRuntime.field(options, 'checkoutDir')] : Array<Dynamic>));
-    if (FlightRuntime.truthy(FlightRuntime.field(options, 'filter'))) { (entries = cast (FlightRuntime.callProperty(entries, 'filter', cast ([function(e:Dynamic) return FlightRuntime.includes(FlightRuntime.field(e, 'name'), FlightRuntime.field(options, 'filter'))] : Array<Dynamic>)) : Dynamic)); }
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(entries, 'length'), 0.0))) { throw FlightRuntime.error('No reference cases found  filter="' + Std.string(FlightRuntime.coalesce(FlightRuntime.field(options, 'filter'), function():Dynamic return cast '')) + '"'); }
-    FlightRuntime.console('log', ['Starting flight-reference Vite dev server…']);
-    server = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(startReferenceDevServer, cast ([FlightRuntime.field(options, 'checkoutDir'), FlightRuntime.field(options, 'repoRoot')] : Array<Dynamic>)));
-    FlightRuntime.console('log', ['Ready at ' + Std.string(FlightRuntime.field(server, 'url')) + '\n']);
-    __destructure0 = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(launchBrowser, cast ([{ captureFrames: FlightRuntime.coalesce(FlightRuntime.field(options, 'captureFrames'), function():Dynamic return cast 1.0), verify: true }] : Array<Dynamic>)));
-    browser = FlightRuntime.field(__destructure0, 'browser');
-    context = FlightRuntime.field(__destructure0, 'context');
-    isAborted = FlightRuntime.callValue(installAbortHandler, cast ([] : Array<Dynamic>));
-    captured = 0.0;
-    changed = 0.0;
-    failed = 0.0;
-    try {
+  public static function runReferenceCapture(options:ReferenceCaptureOptions):flight.internal.FlightPromise<ReferenceCaptureResult> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<ReferenceCaptureResult> {
+      var entries:Dynamic = cast FlightRuntime.UNDEFINED;
+      var server:Dynamic = cast FlightRuntime.UNDEFINED;
+      var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
+      var browser:Dynamic = cast FlightRuntime.UNDEFINED;
+      var context:Dynamic = cast FlightRuntime.UNDEFINED;
+      var isAborted:Dynamic = cast FlightRuntime.UNDEFINED;
+      var captured:Dynamic = cast FlightRuntime.UNDEFINED;
+      var changed:Dynamic = cast FlightRuntime.UNDEFINED;
+      var failed:Dynamic = cast FlightRuntime.UNDEFINED;
+      entries = FlightRuntime.callValue(discoverReferenceEntries, cast ([FlightRuntime.field(options, 'checkoutDir')] : Array<Dynamic>));
+      if (FlightRuntime.truthy(FlightRuntime.field(options, 'filter'))) { (entries = cast (FlightRuntime.callProperty(entries, 'filter', cast ([function(e:Dynamic) return FlightRuntime.includes(FlightRuntime.field(e, 'name'), FlightRuntime.field(options, 'filter'))] : Array<Dynamic>)) : Dynamic)); }
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(entries, 'length'), 0.0))) { throw FlightRuntime.error('No reference cases found  filter="' + Std.string(FlightRuntime.coalesce(FlightRuntime.field(options, 'filter'), function():Dynamic return cast '')) + '"'); }
+      FlightRuntime.console('log', ['Starting flight-reference Vite dev server…']);
+      server = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(startReferenceDevServer, cast ([FlightRuntime.field(options, 'checkoutDir'), FlightRuntime.field(options, 'repoRoot')] : Array<Dynamic>)));
+      FlightRuntime.console('log', ['Ready at ' + Std.string(FlightRuntime.field(server, 'url')) + '\n']);
+      __destructure0 = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(launchBrowser, cast ([{ captureFrames: FlightRuntime.coalesce(FlightRuntime.field(options, 'captureFrames'), function():Dynamic return cast 1.0), verify: true }] : Array<Dynamic>)));
+      browser = FlightRuntime.field(__destructure0, 'browser');
+      context = FlightRuntime.field(__destructure0, 'context');
+      isAborted = FlightRuntime.callValue(installAbortHandler, cast ([] : Array<Dynamic>));
+      captured = 0.0;
+      changed = 0.0;
+      failed = 0.0;
       try {
+        try {
   var result:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(captureParallel, cast ([{ context: context, entries: entries, rendererFilter: cast ([] : Array<Dynamic>), baseUrl: FlightRuntime.field(server, 'url'), tool: 'reference', outBase: FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:path', 'resolve'] : Array<Dynamic>)), cast ([FlightRuntime.field(options, 'outBase')] : Array<Dynamic>)), root: FlightRuntime.field(options, 'checkoutDir'), updateBaseline: FlightRuntime.field(options, 'updateBaseline'), extraWait: FlightRuntime.field(options, 'extraWait'), captureFrames: FlightRuntime.field(options, 'captureFrames'), failOnError: FlightRuntime.field(options, 'failOnError'), verify: true, isAborted: isAborted, workerCount: FlightRuntime.coalesce(FlightRuntime.field(options, 'workerCount'), function():Dynamic return cast 4.0) }] : Array<Dynamic>)));
   (captured = cast (FlightRuntime.field(result, 'captured') : Dynamic));
   (changed = cast (FlightRuntime.field(result, 'changed') : Dynamic));
   (failed = cast (FlightRuntime.field(result, 'failed') : Dynamic));
 } catch (__error:Dynamic) { throw __error; }
-    } catch (__finallyError21:Dynamic) {
+      } catch (__finallyError21:Dynamic) {
+        {
+          flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callProperty(browser, 'close', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+
+}] : Array<Dynamic>)));
+          FlightRuntime.callProperty(server, 'kill', cast ([] : Array<Dynamic>));
+        }
+        throw __finallyError21;
+      }
       {
         flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callProperty(browser, 'close', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
 
 }] : Array<Dynamic>)));
         FlightRuntime.callProperty(server, 'kill', cast ([] : Array<Dynamic>));
       }
-      throw __finallyError21;
-    }
-    {
-      flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callProperty(browser, 'close', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
-
-}] : Array<Dynamic>)));
-      FlightRuntime.callProperty(server, 'kill', cast ([] : Array<Dynamic>));
-    }
-    FlightRuntime.console('log', [('\n' + FlightRuntime.callValue(formatSummaryLine, cast ([FlightRuntime.compare(failed, 0.0, '>'), cast ([FlightRuntime.callValue(formatSummaryCount, cast ([captured, 'captured', 'pass'] : Array<Dynamic>)), FlightRuntime.callValue(formatSummaryCount, cast ([changed, 'changed', 'warn'] : Array<Dynamic>)), FlightRuntime.callValue(formatSummaryCount, cast ([failed, 'failed', 'fail'] : Array<Dynamic>))] : Array<Dynamic>)] : Array<Dynamic>)))]);
-    FlightRuntime.console('log', ['Output:   ' + Std.string(FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:path', 'resolve'] : Array<Dynamic>)), cast ([FlightRuntime.field(options, 'outBase')] : Array<Dynamic>))) + '/reference/']);
-    return cast { captured: captured, changed: changed, failed: failed, aborted: FlightRuntime.callValue(isAborted, cast ([] : Array<Dynamic>)) };
-    return cast null;
+      FlightRuntime.console('log', [('\n' + FlightRuntime.callValue(formatSummaryLine, cast ([FlightRuntime.compare(failed, 0.0, '>'), cast ([FlightRuntime.callValue(formatSummaryCount, cast ([captured, 'captured', 'pass'] : Array<Dynamic>)), FlightRuntime.callValue(formatSummaryCount, cast ([changed, 'changed', 'warn'] : Array<Dynamic>)), FlightRuntime.callValue(formatSummaryCount, cast ([failed, 'failed', 'fail'] : Array<Dynamic>))] : Array<Dynamic>)] : Array<Dynamic>)))]);
+      FlightRuntime.console('log', ['Output:   ' + Std.string(FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:path', 'resolve'] : Array<Dynamic>)), cast ([FlightRuntime.field(options, 'outBase')] : Array<Dynamic>))) + '/reference/']);
+      return cast { captured: captured, changed: changed, failed: failed, aborted: FlightRuntime.callValue(isAborted, cast ([] : Array<Dynamic>)) };
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function runRenderVerification(testModule:FunctionalTestModule, render:String):flight.internal.FlightPromise<flight.internal.FlightNothing> {
-    var result:FunctionalVerification = cast FlightRuntime.UNDEFINED;
-    var surface:Dynamic = cast FlightRuntime.UNDEFINED;
-    var background:Dynamic = cast FlightRuntime.UNDEFINED;
-    var coverage:Dynamic = cast FlightRuntime.UNDEFINED;
-    var minCoverage:Dynamic = cast FlightRuntime.UNDEFINED;
-    result = { render: render, coverage: null, fingerprint: null };
-    FlightRuntime.setField((cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftVerification', result);
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(render, 'dom'))) {
+  public static function runRenderVerification(testModule:FunctionalTestModule, render:String):flight.internal.FlightPromise<flight.internal.FlightNothing> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<flight.internal.FlightNothing> {
+      var result:FunctionalVerification = cast FlightRuntime.UNDEFINED;
+      var surface:Dynamic = cast FlightRuntime.UNDEFINED;
+      var background:Dynamic = cast FlightRuntime.UNDEFINED;
+      var coverage:Dynamic = cast FlightRuntime.UNDEFINED;
+      var minCoverage:Dynamic = cast FlightRuntime.UNDEFINED;
+      result = { render: render, coverage: null, fingerprint: null };
+      FlightRuntime.setField((cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftVerification', result);
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(render, 'dom'))) {
   var target:Dynamic = FlightRuntime.field((cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftTarget');
   if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.optionalField(target, 'kind'), 'dom'))) {
   var element:Dynamic = FlightRuntime.field(FlightRuntime.field(target, 'state'), 'element');
@@ -963,27 +951,28 @@ class ToolCapture {
   return cast null;
   #end
 }
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(ToolCapture.waitForPresentedFrame__functionalVerify, cast ([] : Array<Dynamic>)));
-    surface = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(snapshotFunctionalRender, cast ([] : Array<Dynamic>)));
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(surface, null))) { #if js return; #else return cast null; #end }
-    background = FlightRuntime.callValue(getSurfacePixel, cast ([surface, 0.0, 0.0] : Array<Dynamic>));
-    coverage = FlightRuntime.callValue(getSurfaceCoverage, cast ([surface, background, ToolCapture.BACKGROUND_CHANNEL_TOLERANCE__functionalVerify] : Array<Dynamic>));
-    FlightRuntime.setField(result, 'coverage', coverage);
-    FlightRuntime.setField(result, 'fingerprint', FlightRuntime.callValue(formatSurfaceFingerprint, cast ([FlightRuntime.callValue(createSurfaceFingerprint, cast ([surface, ToolCapture.FINGERPRINT_GRID__functionalVerify] : Array<Dynamic>))] : Array<Dynamic>)));
-    minCoverage = FlightRuntime.coalesce(FlightRuntime.field(testModule, 'minCoverage'), function():Dynamic return cast ToolCapture.DEFAULT_MIN_COVERAGE__functionalVerify);
-    if (FlightRuntime.truthy(FlightRuntime.compare(coverage, minCoverage, '<'))) {
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(ToolCapture.waitForPresentedFrame__functionalVerify, cast ([] : Array<Dynamic>)));
+      surface = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(snapshotFunctionalRender, cast ([] : Array<Dynamic>)));
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(surface, null))) { #if js return; #else return cast null; #end }
+      background = FlightRuntime.callValue(getSurfacePixel, cast ([surface, 0.0, 0.0] : Array<Dynamic>));
+      coverage = FlightRuntime.callValue(getSurfaceCoverage, cast ([surface, background, ToolCapture.BACKGROUND_CHANNEL_TOLERANCE__functionalVerify] : Array<Dynamic>));
+      FlightRuntime.setField(result, 'coverage', coverage);
+      FlightRuntime.setField(result, 'fingerprint', FlightRuntime.callValue(formatSurfaceFingerprint, cast ([FlightRuntime.callValue(createSurfaceFingerprint, cast ([surface, ToolCapture.FINGERPRINT_GRID__functionalVerify] : Array<Dynamic>))] : Array<Dynamic>)));
+      minCoverage = FlightRuntime.coalesce(FlightRuntime.field(testModule, 'minCoverage'), function():Dynamic return cast ToolCapture.DEFAULT_MIN_COVERAGE__functionalVerify);
+      if (FlightRuntime.truthy(FlightRuntime.compare(coverage, minCoverage, '<'))) {
   throw FlightRuntime.error('[verify:' + Std.string(render) + '] blank render: coverage ' + Std.string(FlightRuntime.toFixed(coverage, 5.0)) + ' below ' + Std.string(minCoverage) + '');
 }
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callOptionalProperty(testModule, 'assertRender', cast ([surface] : Array<Dynamic>)));
-    FlightRuntime.setField((cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftRenderImage', FlightRuntime.callValue(ToolCapture.encodeSurfaceToDataUrl__functionalVerify, cast ([FlightRuntime.coalesce(FlightRuntime.callValue(ToolCapture.getFunctionalRenderImageSurface__functionalVerify, cast ([] : Array<Dynamic>)), function():Dynamic return cast surface)] : Array<Dynamic>)));
-    #if js
-    return;
-    #else
-    return cast null;
-    #end
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callOptionalProperty(testModule, 'assertRender', cast ([surface] : Array<Dynamic>)));
+      FlightRuntime.setField((cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftRenderImage', FlightRuntime.callValue(ToolCapture.encodeSurfaceToDataUrl__functionalVerify, cast ([FlightRuntime.coalesce(FlightRuntime.callValue(ToolCapture.getFunctionalRenderImageSurface__functionalVerify, cast ([] : Array<Dynamic>)), function():Dynamic return cast surface)] : Array<Dynamic>)));
+      #if js
+      return;
+      #else
+      return cast null;
+      #end
+    })();
   }
 
-  @:keep public static function setBaselineField(root:String, subject:String, name:String, column:String, field:BaselineField, value:String):Void {
+  public static function setBaselineField(root:String, subject:String, name:String, column:String, field:BaselineField, value:String):Void {
     var path:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     path = FlightRuntime.callValue(baselinePath, cast ([root, subject, name] : Array<Dynamic>));
@@ -992,23 +981,22 @@ class ToolCapture {
     FlightRuntime.callValue(ToolCapture.writeBaseline__baselineStore, cast ([path, data] : Array<Dynamic>));
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function snapshotFunctionalRender():flight.internal.FlightPromise<Null<Surface>> {
-    var target:Dynamic = cast FlightRuntime.UNDEFINED;
-    var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
-    target = FlightRuntime.field((cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftTarget');
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.optionalField(target, 'kind'), 'dom'))) { return cast null; }
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.optionalField(target, 'kind'), 'webgpu'))) { return cast FlightRuntime.callValue(createSurfaceFromWgpuRenderState, cast ([FlightRuntime.field(target, 'state')] : Array<Dynamic>)); }
-    canvas = FlightRuntime.select(target, function():Dynamic return cast FlightRuntime.field(FlightRuntime.field(target, 'state'), 'canvas'), function():Dynamic return cast FlightRuntime.callValue(ToolCapture.findRenderCanvas__functionalVerify, cast ([] : Array<Dynamic>)));
-    if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(canvas, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(canvas, 'width'), 0.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(canvas, 'height'), 0.0)))) { return cast null; }
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.optionalField(target, 'kind'), 'webgl'))) { FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.field(target, 'state'), 'gl'), 'finish', cast ([] : Array<Dynamic>)); }
-    return cast FlightRuntime.callValue(createSurfaceFromImageSource, cast ([canvas, FlightRuntime.field(canvas, 'width'), FlightRuntime.field(canvas, 'height')] : Array<Dynamic>));
-    return cast null;
+  public static function snapshotFunctionalRender():flight.internal.FlightPromise<Null<Surface>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Null<Surface>> {
+      var target:Dynamic = cast FlightRuntime.UNDEFINED;
+      var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
+      target = FlightRuntime.field((cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftTarget');
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.optionalField(target, 'kind'), 'dom'))) { return cast null; }
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.optionalField(target, 'kind'), 'webgpu'))) { return cast FlightRuntime.callValue(createSurfaceFromWgpuRenderState, cast ([FlightRuntime.field(target, 'state')] : Array<Dynamic>)); }
+      canvas = FlightRuntime.select(target, function():Dynamic return cast FlightRuntime.field(FlightRuntime.field(target, 'state'), 'canvas'), function():Dynamic return cast FlightRuntime.callValue(ToolCapture.findRenderCanvas__functionalVerify, cast ([] : Array<Dynamic>)));
+      if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(canvas, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(canvas, 'width'), 0.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(canvas, 'height'), 0.0)))) { return cast null; }
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.optionalField(target, 'kind'), 'webgl'))) { FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.field(target, 'state'), 'gl'), 'finish', cast ([] : Array<Dynamic>)); }
+      return cast FlightRuntime.callValue(createSurfaceFromImageSource, cast ([canvas, FlightRuntime.field(canvas, 'width'), FlightRuntime.field(canvas, 'height')] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  @:keep public static function startReferenceDevServer(checkoutDir:String, repoRoot:String):flight.internal.FlightPromise<{ var url:String; var kill:Dynamic; }> {
+  public static function startReferenceDevServer(checkoutDir:String, repoRoot:String):flight.internal.FlightPromise<{ var url:String; var kill:Dynamic; }> {
     return cast FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(resolveUrl:Dynamic, reject:Dynamic) {
   var child:Dynamic = cast FlightRuntime.UNDEFINED;
   var resolved:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1050,7 +1038,7 @@ class ToolCapture {
 
   public static final TONE_PAINT__captureFormat:Dynamic = { pass: FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['picocolors', 'default'] : Array<Dynamic>)), 'green'), fail: FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['picocolors', 'default'] : Array<Dynamic>)), 'red'), skip: FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['picocolors', 'default'] : Array<Dynamic>)), 'yellow'), muted: FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['picocolors', 'default'] : Array<Dynamic>)), 'dim') };
 
-  @:keep public static function waitForPresentedFrame__functionalVerify():flight.internal.FlightPromise<flight.internal.FlightNothing> {
+  public static function waitForPresentedFrame__functionalVerify():flight.internal.FlightPromise<flight.internal.FlightNothing> {
     var raf:Dynamic = cast FlightRuntime.UNDEFINED;
     raf = FlightRuntime.coalesce(FlightRuntime.field((cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftRealRequestAnimationFrame'), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'requestAnimationFrame'), 'bind', cast ([FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>))] : Array<Dynamic>)));
     return cast FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(resolve:Dynamic) {
@@ -1059,11 +1047,9 @@ class ToolCapture {
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function waitForRenderVerification__captureEntry(page:Dynamic):flight.internal.FlightPromise<Null<RenderVerification__captureEntry>> {
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callProperty(page, 'waitForFunction', cast ([function() {
+  public static function waitForRenderVerification__captureEntry(page:Dynamic):flight.internal.FlightPromise<Null<RenderVerification__captureEntry>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Null<RenderVerification__captureEntry>> {
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.callProperty(page, 'waitForFunction', cast ([function() {
   var w:Dynamic = cast FlightRuntime.UNDEFINED;
   var verification:Dynamic = cast FlightRuntime.UNDEFINED;
   w = (cast (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : Dynamic) : { @:optional var __ftRenderImage:String; @:optional var __ftVerification:RenderVerification__captureEntry; });
@@ -1075,11 +1061,12 @@ class ToolCapture {
 }, null, { polling: 100.0, timeout: 15000.0 }] : Array<Dynamic>)), 'catch', cast ([function() {
 
 }] : Array<Dynamic>)));
-    return cast FlightRuntime.callProperty(FlightRuntime.callProperty(page, 'evaluate', cast ([function() return FlightRuntime.coalesce(FlightRuntime.field((cast (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : Dynamic) : { @:optional var __ftVerification:RenderVerification__captureEntry; }), '__ftVerification'), function():Dynamic return cast null)] : Array<Dynamic>)), 'catch', cast ([function() return null] : Array<Dynamic>));
-    return cast null;
+      return cast FlightRuntime.callProperty(FlightRuntime.callProperty(page, 'evaluate', cast ([function() return FlightRuntime.coalesce(FlightRuntime.field((cast (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : Dynamic) : { @:optional var __ftVerification:RenderVerification__captureEntry; }), '__ftVerification'), function():Dynamic return cast null)] : Array<Dynamic>)), 'catch', cast ([function() return null] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  @:keep public static function writeBaseline__baselineStore(path:String, data:TestBaseline__baselineStore):Void {
+  public static function writeBaseline__baselineStore(path:String, data:TestBaseline__baselineStore):Void {
     var sorted:TestBaseline__baselineStore = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:fs', 'mkdirSync'] : Array<Dynamic>)), cast ([FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'externalValue', cast (['node:path', 'dirname'] : Array<Dynamic>)), cast ([path] : Array<Dynamic>)), { recursive: true }] : Array<Dynamic>));
     sorted = {  };

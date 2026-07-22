@@ -191,9 +191,6 @@ typedef GlWireframeProgram = Dynamic;
 
 typedef GlWireframeUpload = { var indexType:Float; var lineIndexBuffer:Dynamic; var vao:Dynamic; var version:Float; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.SceneGl")
 class SceneGl {
   public static final _bakePrograms__glEnvironmentIblBake:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
@@ -214,13 +211,13 @@ class SceneGl {
 
   public static final _uploadedLightVersion__glLitProgram:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function acquireBlendedEntry__drawGlScene(pool:Array<GlSceneDrawEntry>):GlSceneDrawEntry {
+  public static function acquireBlendedEntry__drawGlScene(pool:Array<GlSceneDrawEntry>):GlSceneDrawEntry {
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(pool, 'length'), 0.0, '>'))) { return cast FlightRuntime.callProperty(pool, 'pop', cast ([] : Array<Dynamic>)); }
     return cast FlightRuntime.callValue(SceneGl.createDrawEntry__drawGlScene, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function acquireOpaqueEntry__drawGlScene(pool:Array<GlSceneDrawEntry>):GlSceneDrawEntry {
+  public static function acquireOpaqueEntry__drawGlScene(pool:Array<GlSceneDrawEntry>):GlSceneDrawEntry {
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(pool, 'length'), 0.0, '>'))) { return cast FlightRuntime.callProperty(pool, 'pop', cast ([] : Array<Dynamic>)); }
     return cast FlightRuntime.callValue(SceneGl.createDrawEntry__drawGlScene, cast ([] : Array<Dynamic>));
     return cast null;
@@ -294,7 +291,7 @@ class SceneGl {
   FlightRuntime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
 } };
 
-  @:keep public static function applyGlParticleBlendMode__glParticleEmitter3D(gl:Dynamic, mode:ParticleBlendMode):Void {
+  public static function applyGlParticleBlendMode__glParticleEmitter3D(gl:Dynamic, mode:ParticleBlendMode):Void {
     {
       var __switchValue = mode;
       if (__switchValue == 'add') {
@@ -312,17 +309,17 @@ class SceneGl {
     }
   }
 
-  @:keep public static function areGlSceneColorSpaceGuardsEnabled(state:GlRenderState):Bool {
+  public static function areGlSceneColorSpaceGuardsEnabled(state:GlRenderState):Bool {
     return cast !FlightRuntime.looseEquals(FlightRuntime.field(FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'colorSpaceGuard'), null);
     return cast null;
   }
 
-  @:keep public static function areGlSceneCustomShaderGuardsEnabled(state:GlRenderState):Bool {
+  public static function areGlSceneCustomShaderGuardsEnabled(state:GlRenderState):Bool {
     return cast !FlightRuntime.looseEquals(FlightRuntime.field(FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'customShaderGuard'), null);
     return cast null;
   }
 
-  @:keep public static function assembleGlShadedFragmentBody__glShadedPrelude(orderedModifiers:Array<Modifier>, registry:ModifierRegistry):String {
+  public static function assembleGlShadedFragmentBody__glShadedPrelude(orderedModifiers:Array<Modifier>, registry:ModifierRegistry):String {
     var declarations:Dynamic = cast FlightRuntime.UNDEFINED;
     var normal:Dynamic = cast FlightRuntime.UNDEFINED;
     var diffuse:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -351,7 +348,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function assembleGlShadedVertexBody__glShadedPrelude(orderedModifiers:Array<Modifier>, registry:ModifierRegistry):String {
+  public static function assembleGlShadedVertexBody__glShadedPrelude(orderedModifiers:Array<Modifier>, registry:ModifierRegistry):String {
     var declarations:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertex:Dynamic = cast FlightRuntime.UNDEFINED;
     declarations = '';
@@ -377,7 +374,7 @@ class SceneGl {
 
   public static final BAKE_VERTEX__glEnvironmentIblBake:Dynamic = '#version 300 es\nlayout(location = 0) in vec2 a_position;\nout vec2 v_uv;\nvoid main() {\n  v_uv = a_position;\n  gl_Position = vec4(a_position, 0.0, 1.0);\n}\n';
 
-  @:keep public static function bakeEnvironmentIbl(state:GlRenderState, environment:Environment):Void {
+  public static function bakeEnvironmentIbl(state:GlRenderState, environment:Environment):Void {
     var sourceCube:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -413,7 +410,7 @@ class SceneGl {
     FlightRuntime.setField(runtime, 'ibl', { brdfLut: brdfLut, intensity: FlightRuntime.field(environment, 'intensity'), irradianceCube: irradianceCube, prefilteredCube: prefilteredCube, prefilteredMipCount: prefilteredMipCount });
   }
 
-  @:keep public static function bakeGlBrdfLut__glEnvironmentIblBake(state:GlRenderState, fbo:Dynamic):Dynamic {
+  public static function bakeGlBrdfLut__glEnvironmentIblBake(state:GlRenderState, fbo:Dynamic):Dynamic {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var texture:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -435,7 +432,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function bakeGlIrradiance__glEnvironmentIblBake(state:GlRenderState, fbo:Dynamic, sourceCube:Dynamic):Dynamic {
+  public static function bakeGlIrradiance__glEnvironmentIblBake(state:GlRenderState, fbo:Dynamic, sourceCube:Dynamic):Dynamic {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var cube:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -450,7 +447,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function bakeGlPrefiltered__glEnvironmentIblBake(state:GlRenderState, fbo:Dynamic, sourceCube:Dynamic):{ var prefilteredCube:Dynamic; var prefilteredMipCount:Float; } {
+  public static function bakeGlPrefiltered__glEnvironmentIblBake(state:GlRenderState, fbo:Dynamic, sourceCube:Dynamic):{ var prefilteredCube:Dynamic; var prefilteredMipCount:Float; } {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var cube:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -476,7 +473,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function beginGlMeshDraw(state:GlRenderState, program:GlMeshProgram, doubleSided:Bool):Void {
+  public static function beginGlMeshDraw(state:GlRenderState, program:GlMeshProgram, doubleSided:Bool):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     gl = FlightRuntime.field(state, 'gl');
     FlightRuntime.setField(FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram', program);
@@ -492,13 +489,13 @@ class SceneGl {
 }
   }
 
-  @:keep public static function bindGlBakeSourceCube__glEnvironmentIblBake(gl:Dynamic, program:GlBakeProgram__glEnvironmentIblBake, sourceCube:Dynamic):Void {
+  public static function bindGlBakeSourceCube__glEnvironmentIblBake(gl:Dynamic, program:GlBakeProgram__glEnvironmentIblBake, sourceCube:Dynamic):Void {
     FlightRuntime.callProperty(gl, 'activeTexture', cast ([FlightRuntime.field(gl, 'TEXTURE0')] : Array<Dynamic>));
     FlightRuntime.callProperty(gl, 'bindTexture', cast ([FlightRuntime.field(gl, 'TEXTURE_CUBE_MAP'), sourceCube] : Array<Dynamic>));
     FlightRuntime.callProperty(gl, 'uniform1i', cast ([FlightRuntime.field(program, 'locEnvCube'), 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function bindGlBlinnPhongMaterialUniforms__blinnPhongGlMeshMaterialRenderer(state:GlRenderState, program:GlClassicProgram, material:Null<BlinnPhongMaterial>):Void {
+  public static function bindGlBlinnPhongMaterialUniforms__blinnPhongGlMeshMaterialRenderer(state:GlRenderState, program:GlClassicProgram, material:Null<BlinnPhongMaterial>):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var diffuseMap:Dynamic = cast FlightRuntime.UNDEFINED;
     var specularMap:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -540,7 +537,7 @@ class SceneGl {
     FlightRuntime.callValue(bindGlUvTransform, cast ([gl, program, diffuseMap] : Array<Dynamic>));
   }
 
-  @:keep public static function bindGlDebugNormalMap(state:GlRenderState, program:GlDebugProgram, normalMap:Null<Texture>, normalScale:Float):Void {
+  public static function bindGlDebugNormalMap(state:GlRenderState, program:GlDebugProgram, normalMap:Null<Texture>, normalScale:Float):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     gl = FlightRuntime.field(state, 'gl');
     FlightRuntime.callProperty(gl, 'uniform1f', cast ([FlightRuntime.field(program, 'locNormalScale'), normalScale] : Array<Dynamic>));
@@ -551,14 +548,14 @@ class SceneGl {
 }
   }
 
-  @:keep public static function bindGlDebugRange(state:GlRenderState, program:GlDebugProgram, near:Float, far:Float):Void {
+  public static function bindGlDebugRange(state:GlRenderState, program:GlDebugProgram, near:Float, far:Float):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     gl = FlightRuntime.field(state, 'gl');
     FlightRuntime.callProperty(gl, 'uniform1f', cast ([FlightRuntime.field(program, 'locNear'), near] : Array<Dynamic>));
     FlightRuntime.callProperty(gl, 'uniform1f', cast ([FlightRuntime.field(program, 'locFar'), far] : Array<Dynamic>));
   }
 
-  @:keep public static function bindGlLambertMaterialUniforms__lambertGlMeshMaterialRenderer(state:GlRenderState, program:GlClassicProgram, material:Null<LambertMaterial>):Void {
+  public static function bindGlLambertMaterialUniforms__lambertGlMeshMaterialRenderer(state:GlRenderState, program:GlClassicProgram, material:Null<LambertMaterial>):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var diffuseMap:Dynamic = cast FlightRuntime.UNDEFINED;
     gl = FlightRuntime.field(state, 'gl');
@@ -579,7 +576,7 @@ class SceneGl {
     FlightRuntime.callValue(bindGlUvTransform, cast ([gl, program, diffuseMap] : Array<Dynamic>));
   }
 
-  @:keep public static function bindGlMatcapSurface(state:GlRenderState, program:GlMatcapProgram, tint:LinearColor, matcap:Null<Texture>, alphaCutoff:Float):Void {
+  public static function bindGlMatcapSurface(state:GlRenderState, program:GlMatcapProgram, tint:LinearColor, matcap:Null<Texture>, alphaCutoff:Float):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     gl = FlightRuntime.field(state, 'gl');
     FlightRuntime.callProperty(gl, 'uniform4f', cast ([FlightRuntime.field(program, 'locTint'), FlightRuntime.getIndex(tint, 0.0), FlightRuntime.getIndex(tint, 1.0), FlightRuntime.getIndex(tint, 2.0), FlightRuntime.getIndex(tint, 3.0)] : Array<Dynamic>));
@@ -591,7 +588,7 @@ class SceneGl {
 }
   }
 
-  @:keep public static function bindGlMeshLightBlock(state:GlRenderState, program:GlLitProgram, lights:SceneLightBlock):Void {
+  public static function bindGlMeshLightBlock(state:GlRenderState, program:GlLitProgram, lights:SceneLightBlock):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var shadow:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -654,7 +651,7 @@ class SceneGl {
 }
   }
 
-  @:keep public static function bindGlModifierTexture__glShadedBuiltInModifiers(context:GlModifierBindContext, texture:Texture, uniformName:String):Void {
+  public static function bindGlModifierTexture__glShadedBuiltInModifiers(context:GlModifierBindContext, texture:Texture, uniformName:String):Void {
     var state:GlRenderState = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var unit:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -672,7 +669,7 @@ class SceneGl {
     FlightRuntime.callProperty(gl, 'activeTexture', cast ([FlightRuntime.field(gl, 'TEXTURE0')] : Array<Dynamic>));
   }
 
-  @:keep public static function bindGlPbrStandardBlock(state:GlRenderState, program:GlPbrProgram, standard:Null<StandardPbrMaterialProperties>):Void {
+  public static function bindGlPbrStandardBlock(state:GlRenderState, program:GlPbrProgram, standard:Null<StandardPbrMaterialProperties>):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     gl = FlightRuntime.field(state, 'gl');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(standard, null))) {
@@ -702,7 +699,7 @@ class SceneGl {
     FlightRuntime.callValue(bindGlUvTransform, cast ([gl, program, FlightRuntime.field(standard, 'baseColorMap')] : Array<Dynamic>));
   }
 
-  @:keep public static function bindGlPbrStandardTexture(state:GlRenderState, texture:Null<Texture>, location:Null<Dynamic>, unit:Float):Void {
+  public static function bindGlPbrStandardTexture(state:GlRenderState, texture:Null<Texture>, location:Null<Dynamic>, unit:Float):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.callValue(isGlTextureReady, cast ([texture] : Array<Dynamic>))))) { return; }
     gl = FlightRuntime.field(state, 'gl');
@@ -711,7 +708,7 @@ class SceneGl {
     FlightRuntime.callProperty(gl, 'uniform1i', cast ([location, unit] : Array<Dynamic>));
   }
 
-  @:keep public static function bindGlPhongMaterialUniforms__phongGlMeshMaterialRenderer(state:GlRenderState, program:GlClassicProgram, material:Null<PhongMaterial>):Void {
+  public static function bindGlPhongMaterialUniforms__phongGlMeshMaterialRenderer(state:GlRenderState, program:GlClassicProgram, material:Null<PhongMaterial>):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var diffuseMap:Dynamic = cast FlightRuntime.UNDEFINED;
     var specularMap:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -753,7 +750,7 @@ class SceneGl {
     FlightRuntime.callValue(bindGlUvTransform, cast ([gl, program, diffuseMap] : Array<Dynamic>));
   }
 
-  @:keep public static function bindGlShadedMaterialUniforms__shadedGlMeshMaterialRenderer(state:GlRenderState, program:GlShadedProgram, material:Null<ShadedMaterial>):Void {
+  public static function bindGlShadedMaterialUniforms__shadedGlMeshMaterialRenderer(state:GlRenderState, program:GlShadedProgram, material:Null<ShadedMaterial>):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var diffuseMap:Dynamic = cast FlightRuntime.UNDEFINED;
     var specularMap:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -795,7 +792,7 @@ class SceneGl {
     FlightRuntime.callValue(bindGlUvTransform, cast ([gl, program, diffuseMap] : Array<Dynamic>));
   }
 
-  @:keep public static function bindGlShadedModifiers__shadedGlMeshMaterialRenderer(state:GlRenderState, program:GlShadedProgram, modifiers:Array<Modifier>):Void {
+  public static function bindGlShadedModifiers__shadedGlMeshMaterialRenderer(state:GlRenderState, program:GlShadedProgram, modifiers:Array<Modifier>):Void {
     var registry:Null<ModifierRegistry> = cast FlightRuntime.UNDEFINED;
     var ordered:Dynamic = cast FlightRuntime.UNDEFINED;
     var nextTextureUnit:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -818,7 +815,7 @@ class SceneGl {
     }
   }
 
-  @:keep public static function bindGlToonMaterialUniforms__toonGlMeshMaterialRenderer(state:GlRenderState, program:GlToonProgram, material:Null<ToonMaterial>):Void {
+  public static function bindGlToonMaterialUniforms__toonGlMeshMaterialRenderer(state:GlRenderState, program:GlToonProgram, material:Null<ToonMaterial>):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var baseColorMap:Dynamic = cast FlightRuntime.UNDEFINED;
     var ramp:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -848,7 +845,7 @@ class SceneGl {
     FlightRuntime.callValue(bindGlUvTransform, cast ([gl, program, baseColorMap] : Array<Dynamic>));
   }
 
-  @:keep public static function bindGlUnlitSurface(state:GlRenderState, program:GlUnlitProgram, color:LinearColor, intensity:Float, colorMap:Null<Texture>, alphaCutoff:Float):Void {
+  public static function bindGlUnlitSurface(state:GlRenderState, program:GlUnlitProgram, color:LinearColor, intensity:Float, colorMap:Null<Texture>, alphaCutoff:Float):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     gl = FlightRuntime.field(state, 'gl');
     FlightRuntime.callProperty(gl, 'uniform4f', cast ([FlightRuntime.field(program, 'locColor'), FlightRuntime.getIndex(color, 0.0), FlightRuntime.getIndex(color, 1.0), FlightRuntime.getIndex(color, 2.0), FlightRuntime.getIndex(color, 3.0)] : Array<Dynamic>));
@@ -861,7 +858,7 @@ class SceneGl {
 }
   }
 
-  @:keep public static function bindGlUnlitVideoSurface(state:GlRenderState, program:GlUnlitProgram, color:LinearColor, intensity:Float, videoMap:VideoTexture, alphaCutoff:Float):Void {
+  public static function bindGlUnlitVideoSurface(state:GlRenderState, program:GlUnlitProgram, color:LinearColor, intensity:Float, videoMap:VideoTexture, alphaCutoff:Float):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     gl = FlightRuntime.field(state, 'gl');
     FlightRuntime.callProperty(gl, 'uniform4f', cast ([FlightRuntime.field(program, 'locColor'), FlightRuntime.getIndex(color, 0.0), FlightRuntime.getIndex(color, 1.0), FlightRuntime.getIndex(color, 2.0), FlightRuntime.getIndex(color, 3.0)] : Array<Dynamic>));
@@ -872,7 +869,7 @@ class SceneGl {
     FlightRuntime.callProperty(gl, 'uniform1i', cast ([FlightRuntime.field(program, 'locColorMap'), 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function bindGlUvTransform(gl:Dynamic, program:GlMeshProgram, texture:Null<TextureLike>):Void {
+  public static function bindGlUvTransform(gl:Dynamic, program:GlMeshProgram, texture:Null<TextureLike>):Void {
     var loc:Dynamic = cast FlightRuntime.UNDEFINED;
     loc = FlightRuntime.field(program, 'locUvTransform');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(loc, FlightRuntime.UNDEFINED))) {
@@ -884,7 +881,7 @@ class SceneGl {
     FlightRuntime.callProperty(gl, 'uniformMatrix3fv', cast ([loc, false, FlightRuntime.field(SceneGl.scratchUvMatrix__glMeshProgram, 'm')] : Array<Dynamic>));
   }
 
-  @:keep public static function bindGlVertexAttribute__glMeshUpload(gl:Dynamic, attribute:VertexAttribute, stride:Float):Void {
+  public static function bindGlVertexAttribute__glMeshUpload(gl:Dynamic, attribute:VertexAttribute, stride:Float):Void {
     var location:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -927,7 +924,7 @@ class SceneGl {
 
   public static final BRDF_LUT_SIZE__glEnvironmentIblBake:Dynamic = 128.0;
 
-  @:keep public static function buildDefineSource__glDebugPrelude(key:GlDebugDefineKey):String {
+  public static function buildDefineSource__glDebugPrelude(key:GlDebugDefineKey):String {
     var defines:Dynamic = cast FlightRuntime.UNDEFINED;
     defines = '#version 300 es\n';
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(key, 'mode'), 'depth'))) { (defines = cast ((defines + '#define DEPTH_MODE\n') : Dynamic)); } else { (defines = cast ((defines + '#define NORMAL_MODE\n') : Dynamic)); }
@@ -936,7 +933,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function buildDefineSource__glMatcapPrelude(key:GlMatcapDefineKey):String {
+  public static function buildDefineSource__glMatcapPrelude(key:GlMatcapDefineKey):String {
     var defines:Dynamic = cast FlightRuntime.UNDEFINED;
     defines = '#version 300 es\n';
     if (FlightRuntime.truthy(FlightRuntime.field(key, 'alphaMaskEnabled'))) { (defines = cast ((defines + '#define ALPHA_MASK\n') : Dynamic)); }
@@ -945,7 +942,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function buildDefineSource__glUnlitPrelude(key:GlUnlitDefineKey):String {
+  public static function buildDefineSource__glUnlitPrelude(key:GlUnlitDefineKey):String {
     var defines:Dynamic = cast FlightRuntime.UNDEFINED;
     defines = '#version 300 es\n';
     if (FlightRuntime.truthy(FlightRuntime.field(key, 'alphaMaskEnabled'))) { (defines = cast ((defines + '#define ALPHA_MASK\n') : Dynamic)); }
@@ -957,14 +954,14 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function buildGlClassicDefineKey(key:GlClassicDefineKey):String {
+  public static function buildGlClassicDefineKey(key:GlClassicDefineKey):String {
     var model:Dynamic = cast FlightRuntime.UNDEFINED;
     model = FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.field(key, 'lightingModel'), 'phong'), function():Dynamic return cast 'p', function():Dynamic return cast FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.field(key, 'lightingModel'), 'blinnphong'), function():Dynamic return cast 'b', function():Dynamic return cast 'l'));
     return cast '' + Std.string(model) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'alphaMaskEnabled'), function():Dynamic return cast 'm', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasDiffuseMap'), function():Dynamic return cast 'd', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasSpecularMap'), function():Dynamic return cast 's', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasNormalMap'), function():Dynamic return cast 'n', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasUvTransform'), function():Dynamic return cast 'u', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
     return cast null;
   }
 
-  @:keep public static function buildGlClassicDefineSource__glClassicPrelude(key:GlClassicDefineKey):String {
+  public static function buildGlClassicDefineSource__glClassicPrelude(key:GlClassicDefineKey):String {
     var defines:Dynamic = cast FlightRuntime.UNDEFINED;
     defines = '#version 300 es\n#define MAX_FORWARD_LIGHTS ' + Std.string(Types.MAX_FORWARD_LIGHTS) + '\n';
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(key, 'lightingModel'), 'phong'))) { (defines = cast ((defines + '#define LIGHTING_PHONG\n') : Dynamic)); }
@@ -979,22 +976,22 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function buildGlDebugDefineKey(key:GlDebugDefineKey):String {
+  public static function buildGlDebugDefineKey(key:GlDebugDefineKey):String {
     return cast '' + Std.string(FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.field(key, 'mode'), 'depth'), function():Dynamic return cast 'd', function():Dynamic return cast 'n')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasNormalMap'), function():Dynamic return cast 'm', function():Dynamic return cast '-')) + '';
     return cast null;
   }
 
-  @:keep public static function buildGlMatcapDefineKey(key:GlMatcapDefineKey):String {
+  public static function buildGlMatcapDefineKey(key:GlMatcapDefineKey):String {
     return cast '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'alphaMaskEnabled'), function():Dynamic return cast 'm', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasMatcap'), function():Dynamic return cast 't', function():Dynamic return cast '-')) + '';
     return cast null;
   }
 
-  @:keep public static function buildGlPbrDefineKey(key:GlPbrDefineKey):String {
+  public static function buildGlPbrDefineKey(key:GlPbrDefineKey):String {
     return cast (((((((((((((('' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'alphaMaskEnabled'), function():Dynamic return cast 'm', function():Dynamic return cast '-')) + '' + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasBaseColorMap'), function():Dynamic return cast 'b', function():Dynamic return cast '-')) + '') + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasNormalMap'), function():Dynamic return cast 'n', function():Dynamic return cast '-')) + '') + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasMetallicRoughnessMap'), function():Dynamic return cast 'r', function():Dynamic return cast '-')) + '') + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasOcclusionMap'), function():Dynamic return cast 'o', function():Dynamic return cast '-')) + '') + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasEmissiveMap'), function():Dynamic return cast 'e', function():Dynamic return cast '-')) + '') + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasUvTransform'), function():Dynamic return cast 'u', function():Dynamic return cast '-')) + '') + ':' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'clearcoatEnabled'), function():Dynamic return cast 'C', function():Dynamic return cast '-')) + '') + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'sheenEnabled'), function():Dynamic return cast 'S', function():Dynamic return cast '-')) + '') + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'anisotropyEnabled'), function():Dynamic return cast 'A', function():Dynamic return cast '-')) + '') + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'iridescenceEnabled'), function():Dynamic return cast 'I', function():Dynamic return cast '-')) + '') + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'specularEnabled'), function():Dynamic return cast 'P', function():Dynamic return cast '-')) + '') + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'subsurfaceEnabled'), function():Dynamic return cast 'U', function():Dynamic return cast '-')) + '') + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'transmissionEnabled'), function():Dynamic return cast 'T', function():Dynamic return cast '-')) + '') + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '');
     return cast null;
   }
 
-  @:keep public static function buildGlPbrDefineSource(key:GlPbrDefineKey):String {
+  public static function buildGlPbrDefineSource(key:GlPbrDefineKey):String {
     var defines:Dynamic = cast FlightRuntime.UNDEFINED;
     defines = '#version 300 es\n#define MAX_FORWARD_LIGHTS ' + Std.string(Types.MAX_FORWARD_LIGHTS) + '\n';
     if (FlightRuntime.truthy(FlightRuntime.field(key, 'alphaMaskEnabled'))) { (defines = cast ((defines + '#define ALPHA_MASK\n') : Dynamic)); }
@@ -1016,21 +1013,21 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function buildGlPbrStandardDefineKey(standard:Null<StandardPbrMaterialProperties>, alphaMaskEnabled:Bool):GlPbrDefineKey {
+  public static function buildGlPbrStandardDefineKey(standard:Null<StandardPbrMaterialProperties>, alphaMaskEnabled:Bool):GlPbrDefineKey {
     var baseColorMap:Dynamic = cast FlightRuntime.UNDEFINED;
     baseColorMap = FlightRuntime.coalesce(FlightRuntime.optionalField(standard, 'baseColorMap'), function():Dynamic return cast null);
     return cast { alphaMaskEnabled: alphaMaskEnabled, anisotropyEnabled: false, clearcoatEnabled: false, hasBaseColorMap: FlightRuntime.callValue(isGlTextureReady, cast ([baseColorMap] : Array<Dynamic>)), hasEmissiveMap: FlightRuntime.callValue(isGlTextureReady, cast ([FlightRuntime.coalesce(FlightRuntime.optionalField(standard, 'emissiveMap'), function():Dynamic return cast null)] : Array<Dynamic>)), hasMetallicRoughnessMap: FlightRuntime.callValue(isGlTextureReady, cast ([FlightRuntime.coalesce(FlightRuntime.optionalField(standard, 'metallicRoughnessMap'), function():Dynamic return cast null)] : Array<Dynamic>)), hasNormalMap: FlightRuntime.callValue(isGlTextureReady, cast ([FlightRuntime.coalesce(FlightRuntime.optionalField(standard, 'normalMap'), function():Dynamic return cast null)] : Array<Dynamic>)), hasOcclusionMap: FlightRuntime.callValue(isGlTextureReady, cast ([FlightRuntime.coalesce(FlightRuntime.optionalField(standard, 'occlusionMap'), function():Dynamic return cast null)] : Array<Dynamic>)), hasUvTransform: FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(baseColorMap, null), function():Dynamic return cast FlightRuntime.callValue(isGlTextureReady, cast ([baseColorMap] : Array<Dynamic>))), function():Dynamic return cast FlightRuntime.callValue(hasTextureUvTransform, cast ([baseColorMap] : Array<Dynamic>))), iridescenceEnabled: false, sheenEnabled: false, specularEnabled: false, subsurfaceEnabled: false, transmissionEnabled: false };
     return cast null;
   }
 
-  @:keep public static function buildGlShadedCacheKey(key:GlShadedDefineKey, modifierDefineKey:String):String {
+  public static function buildGlShadedCacheKey(key:GlShadedDefineKey, modifierDefineKey:String):String {
     var base:Dynamic = cast FlightRuntime.UNDEFINED;
     base = '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'alphaMaskEnabled'), function():Dynamic return cast 'm', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasDiffuseMap'), function():Dynamic return cast 'd', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasSpecularMap'), function():Dynamic return cast 's', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasNormalMap'), function():Dynamic return cast 'n', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasUvTransform'), function():Dynamic return cast 'u', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
     return cast 'shaded:' + Std.string(base) + '|' + Std.string(modifierDefineKey) + '';
     return cast null;
   }
 
-  @:keep public static function buildGlShadedDefineSource__glShadedPrelude(key:GlShadedDefineKey):String {
+  public static function buildGlShadedDefineSource__glShadedPrelude(key:GlShadedDefineKey):String {
     var defines:Dynamic = cast FlightRuntime.UNDEFINED;
     defines = '#version 300 es\n#define MAX_FORWARD_LIGHTS ' + Std.string(Types.MAX_FORWARD_LIGHTS) + '\n';
     if (FlightRuntime.truthy(FlightRuntime.field(key, 'alphaMaskEnabled'))) { (defines = cast ((defines + '#define ALPHA_MASK\n') : Dynamic)); }
@@ -1043,12 +1040,12 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function buildGlToonDefineKey(key:GlToonDefineKey):String {
+  public static function buildGlToonDefineKey(key:GlToonDefineKey):String {
     return cast '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'alphaMaskEnabled'), function():Dynamic return cast 'm', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasBaseColorMap'), function():Dynamic return cast 'b', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasRamp'), function():Dynamic return cast 'r', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasUvTransform'), function():Dynamic return cast 'u', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
     return cast null;
   }
 
-  @:keep public static function buildGlToonDefineSource__glToonPrelude(key:GlToonDefineKey):String {
+  public static function buildGlToonDefineSource__glToonPrelude(key:GlToonDefineKey):String {
     var defines:Dynamic = cast FlightRuntime.UNDEFINED;
     defines = '#version 300 es\n#define MAX_FORWARD_LIGHTS ' + Std.string(Types.MAX_FORWARD_LIGHTS) + '\n';
     if (FlightRuntime.truthy(FlightRuntime.field(key, 'alphaMaskEnabled'))) { (defines = cast ((defines + '#define ALPHA_MASK\n') : Dynamic)); }
@@ -1060,12 +1057,12 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function buildGlUnlitDefineKey(key:GlUnlitDefineKey):String {
+  public static function buildGlUnlitDefineKey(key:GlUnlitDefineKey):String {
     return cast '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'alphaMaskEnabled'), function():Dynamic return cast 'm', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasColorMap'), function():Dynamic return cast 'c', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'vertexColor'), function():Dynamic return cast 'v', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasUvTransform'), function():Dynamic return cast 'u', function():Dynamic return cast '-')) + '' + Std.string(FlightRuntime.select(FlightRuntime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
     return cast null;
   }
 
-  @:keep public static function buildLineIndices__glWireframeUpload(geometry:MeshGeometry):Dynamic {
+  public static function buildLineIndices__glWireframeUpload(geometry:MeshGeometry):Dynamic {
     var triangleIndices:Dynamic = cast FlightRuntime.UNDEFINED;
     var triangleCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var lineCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1097,7 +1094,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function buildSkinBindVertices__glMeshUpload(geometry:MeshGeometry, bindPose:MeshSkinBindPose):flight.internal.FlightFloat32Array {
+  public static function buildSkinBindVertices__glMeshUpload(geometry:MeshGeometry, bindPose:MeshSkinBindPose):flight.internal.FlightFloat32Array {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     var positionOffset:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1193,7 +1190,7 @@ class SceneGl {
   FlightRuntime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
 } };
 
-  @:keep public static function collectParticleEmitter3DNodes__glParticleEmitter3D(node:NodeAny, out:Array<ParticleEmitter3D>):Void {
+  public static function collectParticleEmitter3DNodes__glParticleEmitter3D(node:NodeAny, out:Array<ParticleEmitter3D>):Void {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.field(node, 'enabled')))) { return; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(node, 'kind'), Types.ParticleEmitter3DKind))) {
@@ -1211,12 +1208,12 @@ class SceneGl {
 }
   }
 
-  @:keep public static function compareBlendedEntriesDescending__drawGlScene(a:GlSceneDrawEntry, b:GlSceneDrawEntry):Float {
+  public static function compareBlendedEntriesDescending__drawGlScene(a:GlSceneDrawEntry, b:GlSceneDrawEntry):Float {
     return cast (FlightRuntime.field(b, 'clipW') - FlightRuntime.field(a, 'clipW'));
     return cast null;
   }
 
-  @:keep public static function compileGlClassicProgram(gl:Dynamic, key:GlClassicDefineKey):GlClassicProgram {
+  public static function compileGlClassicProgram(gl:Dynamic, key:GlClassicDefineKey):GlClassicProgram {
     var vertexSource:Dynamic = cast FlightRuntime.UNDEFINED;
     var fragmentSource:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1227,28 +1224,28 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function compileGlCustomShaderProgram__customShaderGlMeshMaterialRenderer(gl:Dynamic, source:GlCustomMaterialShaderSource):GlCustomShaderProgram__customShaderGlMeshMaterialRenderer {
+  public static function compileGlCustomShaderProgram__customShaderGlMeshMaterialRenderer(gl:Dynamic, source:GlCustomMaterialShaderSource):GlCustomShaderProgram__customShaderGlMeshMaterialRenderer {
     var linked:Dynamic = cast FlightRuntime.UNDEFINED;
     linked = FlightRuntime.callValue(compileGlProgram, cast ([gl, FlightRuntime.field(source, 'vertex'), FlightRuntime.field(source, 'fragment')] : Array<Dynamic>));
     return cast { locCameraPosition: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([linked, 'u_cameraPosition'] : Array<Dynamic>)), locModel: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([linked, 'u_model'] : Array<Dynamic>)), locNormalMatrix: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([linked, 'u_normalMatrix'] : Array<Dynamic>)), locViewProjection: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([linked, 'u_viewProjection'] : Array<Dynamic>)), program: linked };
     return cast null;
   }
 
-  @:keep public static function compileGlDebugProgram(gl:Dynamic, key:GlDebugDefineKey):GlDebugProgram {
+  public static function compileGlDebugProgram(gl:Dynamic, key:GlDebugDefineKey):GlDebugProgram {
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     program = FlightRuntime.callValue(compileGlProgram, cast ([gl, FlightRuntime.callValue(getGlDebugVertexSourceForKey, cast ([key] : Array<Dynamic>)), FlightRuntime.callValue(getGlDebugFragmentSourceForKey, cast ([key] : Array<Dynamic>))] : Array<Dynamic>));
     return cast { locFar: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_far'] : Array<Dynamic>)), locModel: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_model'] : Array<Dynamic>)), locNear: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_near'] : Array<Dynamic>)), locNormalMap: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_normalMap'] : Array<Dynamic>)), locNormalMatrix: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_normalMatrix'] : Array<Dynamic>)), locNormalScale: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_normalScale'] : Array<Dynamic>)), locViewProjection: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_viewProjection'] : Array<Dynamic>)), program: program };
     return cast null;
   }
 
-  @:keep public static function compileGlMatcapProgram(gl:Dynamic, key:GlMatcapDefineKey):GlMatcapProgram {
+  public static function compileGlMatcapProgram(gl:Dynamic, key:GlMatcapDefineKey):GlMatcapProgram {
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     program = FlightRuntime.callValue(compileGlProgram, cast ([gl, FlightRuntime.callValue(getGlMatcapVertexSourceForKey, cast ([key] : Array<Dynamic>)), FlightRuntime.callValue(getGlMatcapFragmentSourceForKey, cast ([key] : Array<Dynamic>))] : Array<Dynamic>));
     return cast { locAlphaCutoff: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_alphaCutoff'] : Array<Dynamic>)), locMatcap: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_matcap'] : Array<Dynamic>)), locModel: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_model'] : Array<Dynamic>)), locNormalMatrix: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_normalMatrix'] : Array<Dynamic>)), locTint: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_tint'] : Array<Dynamic>)), locView: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_view'] : Array<Dynamic>)), locViewProjection: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_viewProjection'] : Array<Dynamic>)), program: program };
     return cast null;
   }
 
-  @:keep public static function compileGlPbrProgram(gl:Dynamic, key:GlPbrDefineKey):GlPbrProgram {
+  public static function compileGlPbrProgram(gl:Dynamic, key:GlPbrDefineKey):GlPbrProgram {
     var vertexSource:Dynamic = cast FlightRuntime.UNDEFINED;
     var fragmentSource:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1259,12 +1256,12 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function compileGlProgram(gl:Dynamic, vertexSource:String, fragmentSource:String):Dynamic {
+  public static function compileGlProgram(gl:Dynamic, vertexSource:String, fragmentSource:String):Dynamic {
     return cast FlightRuntime.callValue(createGlProgram, cast ([gl, vertexSource, fragmentSource, 'Mesh'] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function compileGlShadedProgram(gl:Dynamic, key:GlShadedDefineKey, orderedModifiers:Array<Modifier>, registry:ModifierRegistry):GlShadedProgram {
+  public static function compileGlShadedProgram(gl:Dynamic, key:GlShadedDefineKey, orderedModifiers:Array<Modifier>, registry:ModifierRegistry):GlShadedProgram {
     var defineSource:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexSource:Dynamic = cast FlightRuntime.UNDEFINED;
     var fragmentSource:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1277,28 +1274,28 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function compileGlToonProgram(gl:Dynamic, key:GlToonDefineKey):GlToonProgram {
+  public static function compileGlToonProgram(gl:Dynamic, key:GlToonDefineKey):GlToonProgram {
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     program = FlightRuntime.callValue(compileGlProgram, cast ([gl, FlightRuntime.callValue(getGlToonVertexSourceForKey, cast ([key] : Array<Dynamic>)), FlightRuntime.callValue(getGlToonFragmentSourceForKey, cast ([key] : Array<Dynamic>))] : Array<Dynamic>));
     return cast FlightRuntime.mergeObjects([FlightRuntime.callValue(resolveGlLitLocations, cast ([gl, program] : Array<Dynamic>)), { program: program }, { locAlphaCutoff: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_alphaCutoff'] : Array<Dynamic>)) }, { locBaseColor: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_baseColor'] : Array<Dynamic>)) }, { locBaseColorMap: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_baseColorMap'] : Array<Dynamic>)) }, { locJointTexture: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_jointTexture'] : Array<Dynamic>)) }, { locModel: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_model'] : Array<Dynamic>)) }, { locNormalMatrix: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_normalMatrix'] : Array<Dynamic>)) }, { locRamp: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_ramp'] : Array<Dynamic>)) }, { locSteps: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_steps'] : Array<Dynamic>)) }, { locViewProjection: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_viewProjection'] : Array<Dynamic>)) }]);
     return cast null;
   }
 
-  @:keep public static function compileGlUnlitProgram(gl:Dynamic, key:GlUnlitDefineKey):GlUnlitProgram {
+  public static function compileGlUnlitProgram(gl:Dynamic, key:GlUnlitDefineKey):GlUnlitProgram {
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     program = FlightRuntime.callValue(compileGlProgram, cast ([gl, FlightRuntime.callValue(getGlUnlitVertexSourceForKey, cast ([key] : Array<Dynamic>)), FlightRuntime.callValue(getGlUnlitFragmentSourceForKey, cast ([key] : Array<Dynamic>))] : Array<Dynamic>));
     return cast { locAlphaCutoff: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_alphaCutoff'] : Array<Dynamic>)), locColor: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_color'] : Array<Dynamic>)), locColorMap: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_colorMap'] : Array<Dynamic>)), locIntensity: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_intensity'] : Array<Dynamic>)), locJointTexture: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_jointTexture'] : Array<Dynamic>)), locModel: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_model'] : Array<Dynamic>)), locNormalMatrix: null, locViewProjection: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_viewProjection'] : Array<Dynamic>)), program: program };
     return cast null;
   }
 
-  @:keep public static function compileGlWireframeProgram(gl:Dynamic):GlWireframeProgram {
+  public static function compileGlWireframeProgram(gl:Dynamic):GlWireframeProgram {
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     program = FlightRuntime.callValue(compileGlProgram, cast ([gl, FlightRuntime.callValue(getGlWireframeVertexSource, cast ([] : Array<Dynamic>)), FlightRuntime.callValue(getGlWireframeFragmentSource, cast ([] : Array<Dynamic>))] : Array<Dynamic>));
     return cast { locColor: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_color'] : Array<Dynamic>)), locModel: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_model'] : Array<Dynamic>)), locNormalMatrix: null, locViewProjection: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_viewProjection'] : Array<Dynamic>)), program: program };
     return cast null;
   }
 
-  @:keep public static function compileParticle3DShader__glParticleEmitter3D(gl:Dynamic):GlParticle3DShader__glParticleEmitter3D {
+  public static function compileParticle3DShader__glParticleEmitter3D(gl:Dynamic):GlParticle3DShader__glParticleEmitter3D {
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     var vao:Dynamic = cast FlightRuntime.UNDEFINED;
     var cornerData:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1323,21 +1320,21 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function compileShadowDepthProgram__glShadowMap(gl:Dynamic):GlMeshProgram {
+  public static function compileShadowDepthProgram__glShadowMap(gl:Dynamic):GlMeshProgram {
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     program = FlightRuntime.callValue(compileGlProgram, cast ([gl, SceneGl.SHADOW_DEPTH_VERTEX__glShadowMap, SceneGl.SHADOW_DEPTH_FRAGMENT__glShadowMap] : Array<Dynamic>));
     return cast { locModel: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_model'] : Array<Dynamic>)), locNormalMatrix: null, locViewProjection: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_viewProjection'] : Array<Dynamic>)), program: program };
     return cast null;
   }
 
-  @:keep public static function compileShadowDepthSkinnedProgram__glShadowMap(gl:Dynamic):GlMeshProgram {
+  public static function compileShadowDepthSkinnedProgram__glShadowMap(gl:Dynamic):GlMeshProgram {
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     program = FlightRuntime.callValue(compileGlProgram, cast ([gl, SceneGl.SHADOW_DEPTH_SKINNED_VERTEX__glShadowMap, SceneGl.SHADOW_DEPTH_FRAGMENT__glShadowMap] : Array<Dynamic>));
     return cast { locJointTexture: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_jointTexture'] : Array<Dynamic>)), locModel: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_model'] : Array<Dynamic>)), locNormalMatrix: null, locViewProjection: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_viewProjection'] : Array<Dynamic>)), program: program };
     return cast null;
   }
 
-  @:keep public static function convertSpecularGlossinessToStandard__specularGlossinessPbrGlMeshMaterialRenderer(material:SpecularGlossinessPbrMaterial):StandardPbrMaterialProperties {
+  public static function convertSpecularGlossinessToStandard__specularGlossinessPbrGlMeshMaterialRenderer(material:SpecularGlossinessPbrMaterial):StandardPbrMaterialProperties {
     var specularBrightness:Dynamic = cast FlightRuntime.UNDEFINED;
     var oneMinusSpecularStrength:Dynamic = cast FlightRuntime.UNDEFINED;
     var diffuseBrightness:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1360,12 +1357,12 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function createDrawEntry__drawGlScene():GlSceneDrawEntry {
+  public static function createDrawEntry__drawGlScene():GlSceneDrawEntry {
     return cast { alpha: 1.0, clipW: 0.0, material: SceneGl.DEFAULT_MATERIAL__drawGlScene, mesh: null, normalMatrix: FlightRuntime.callValue(createMatrix4, cast ([] : Array<Dynamic>)), renderer: null, subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: FlightRuntime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createGlBakeCube__glEnvironmentIblBake(gl:Dynamic, size:Float, mipped:Bool):Dynamic {
+  public static function createGlBakeCube__glEnvironmentIblBake(gl:Dynamic, size:Float, mipped:Bool):Dynamic {
     var texture:Dynamic = cast FlightRuntime.UNDEFINED;
     var levels:Dynamic = cast FlightRuntime.UNDEFINED;
     var minFilter:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1424,7 +1421,7 @@ class SceneGl {
   FlightRuntime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
 } };
 
-  @:keep public static function dedupeGlShadedDeclarations__glShadedPrelude(declarations:String):String {
+  public static function dedupeGlShadedDeclarations__glShadedPrelude(declarations:String):String {
     var seen:Dynamic = cast FlightRuntime.UNDEFINED;
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     seen = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
@@ -1444,47 +1441,47 @@ class SceneGl {
 
   public static final DIELECTRIC_SPECULAR__specularGlossinessPbrGlMeshMaterialRenderer:Dynamic = 0.04;
 
-  @:keep public static function defineKeyForMaterial__blinnPhongGlMeshMaterialRenderer(material:Null<BlinnPhongMaterial>):GlClassicDefineKey {
+  public static function defineKeyForMaterial__blinnPhongGlMeshMaterialRenderer(material:Null<BlinnPhongMaterial>):GlClassicDefineKey {
     return cast { alphaMaskEnabled: FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(material, 'alphaMode'), 'mask')), hasDiffuseMap: FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(material, 'diffuseMap'), null)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(material, 'diffuseMap'), 'image'), null)), hasNormalMap: FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(material, 'normalMap'), null)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(material, 'normalMap'), 'image'), null)), hasSpecularMap: FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(material, 'specularMap'), null)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(material, 'specularMap'), 'image'), null)), hasUvTransform: FlightRuntime.callValue(hasGlUvTransform, cast ([FlightRuntime.select(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast FlightRuntime.field(material, 'diffuseMap'), function():Dynamic return cast null)] : Array<Dynamic>)), lightingModel: 'blinnphong' };
     return cast null;
   }
 
-  @:keep public static function defineKeyForMaterial__emissiveGlMeshMaterialRenderer(material:Null<EmissiveMaterial>):GlUnlitDefineKey {
+  public static function defineKeyForMaterial__emissiveGlMeshMaterialRenderer(material:Null<EmissiveMaterial>):GlUnlitDefineKey {
     return cast { alphaMaskEnabled: FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(material, 'alphaMode'), 'mask')), hasColorMap: FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(material, 'emissiveMap'), null)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(material, 'emissiveMap'), 'image'), null)), hasUvTransform: FlightRuntime.callValue(hasGlUvTransform, cast ([FlightRuntime.select(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast FlightRuntime.field(material, 'emissiveMap'), function():Dynamic return cast null)] : Array<Dynamic>)), vertexColor: false };
     return cast null;
   }
 
-  @:keep public static function defineKeyForMaterial__lambertGlMeshMaterialRenderer(material:Null<LambertMaterial>):GlClassicDefineKey {
+  public static function defineKeyForMaterial__lambertGlMeshMaterialRenderer(material:Null<LambertMaterial>):GlClassicDefineKey {
     return cast { alphaMaskEnabled: FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(material, 'alphaMode'), 'mask')), hasDiffuseMap: FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(material, 'diffuseMap'), null)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(material, 'diffuseMap'), 'image'), null)), hasNormalMap: false, hasSpecularMap: false, hasUvTransform: FlightRuntime.callValue(hasGlUvTransform, cast ([FlightRuntime.select(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast FlightRuntime.field(material, 'diffuseMap'), function():Dynamic return cast null)] : Array<Dynamic>)), lightingModel: 'lambert' };
     return cast null;
   }
 
-  @:keep public static function defineKeyForMaterial__matcapGlMeshMaterialRenderer(material:Null<MatcapMaterial>):GlMatcapDefineKey {
+  public static function defineKeyForMaterial__matcapGlMeshMaterialRenderer(material:Null<MatcapMaterial>):GlMatcapDefineKey {
     return cast { alphaMaskEnabled: FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(material, 'alphaMode'), 'mask')), hasMatcap: FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(material, 'matcap'), null)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(material, 'matcap'), 'image'), null)) };
     return cast null;
   }
 
-  @:keep public static function defineKeyForMaterial__phongGlMeshMaterialRenderer(material:Null<PhongMaterial>):GlClassicDefineKey {
+  public static function defineKeyForMaterial__phongGlMeshMaterialRenderer(material:Null<PhongMaterial>):GlClassicDefineKey {
     return cast { alphaMaskEnabled: FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(material, 'alphaMode'), 'mask')), hasDiffuseMap: FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(material, 'diffuseMap'), null)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(material, 'diffuseMap'), 'image'), null)), hasNormalMap: FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(material, 'normalMap'), null)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(material, 'normalMap'), 'image'), null)), hasSpecularMap: FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(material, 'specularMap'), null)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(material, 'specularMap'), 'image'), null)), hasUvTransform: FlightRuntime.callValue(hasGlUvTransform, cast ([FlightRuntime.select(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast FlightRuntime.field(material, 'diffuseMap'), function():Dynamic return cast null)] : Array<Dynamic>)), lightingModel: 'phong' };
     return cast null;
   }
 
-  @:keep public static function defineKeyForMaterial__shadedGlMeshMaterialRenderer(material:Null<ShadedMaterial>):GlShadedDefineKey {
+  public static function defineKeyForMaterial__shadedGlMeshMaterialRenderer(material:Null<ShadedMaterial>):GlShadedDefineKey {
     return cast { alphaMaskEnabled: FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(material, 'alphaMode'), 'mask')), hasDiffuseMap: FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(material, 'diffuseMap'), null)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(material, 'diffuseMap'), 'image'), null)), hasNormalMap: FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(material, 'normalMap'), null)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(material, 'normalMap'), 'image'), null)), hasSpecularMap: FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(material, 'specularMap'), null)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(material, 'specularMap'), 'image'), null)), hasUvTransform: FlightRuntime.callValue(hasGlUvTransform, cast ([FlightRuntime.select(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast FlightRuntime.field(material, 'diffuseMap'), function():Dynamic return cast null)] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function defineKeyForMaterial__toonGlMeshMaterialRenderer(material:Null<ToonMaterial>):GlToonDefineKey {
+  public static function defineKeyForMaterial__toonGlMeshMaterialRenderer(material:Null<ToonMaterial>):GlToonDefineKey {
     return cast { alphaMaskEnabled: FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(material, 'alphaMode'), 'mask')), hasBaseColorMap: FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(material, 'baseColorMap'), null)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(material, 'baseColorMap'), 'image'), null)), hasRamp: FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(material, 'ramp'), null)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(material, 'ramp'), 'image'), null)), hasUvTransform: FlightRuntime.callValue(hasGlUvTransform, cast ([FlightRuntime.select(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast FlightRuntime.field(material, 'baseColorMap'), function():Dynamic return cast null)] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function defineKeyForMaterial__unlitGlMeshMaterialRenderer(material:Null<UnlitMaterial>):GlUnlitDefineKey {
+  public static function defineKeyForMaterial__unlitGlMeshMaterialRenderer(material:Null<UnlitMaterial>):GlUnlitDefineKey {
     return cast { alphaMaskEnabled: FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(material, 'alphaMode'), 'mask')), hasColorMap: FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(material, 'baseColorMap'), null)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(material, 'baseColorMap'), 'image'), null)), hasUvTransform: FlightRuntime.callValue(hasGlUvTransform, cast ([FlightRuntime.select(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast FlightRuntime.field(material, 'baseColorMap'), function():Dynamic return cast null)] : Array<Dynamic>)), vertexColor: false };
     return cast null;
   }
 
-  @:keep public static function defineKeyForMaterial__vertexColorGlMeshMaterialRenderer(material:Null<VertexColorMaterial>):GlUnlitDefineKey {
+  public static function defineKeyForMaterial__vertexColorGlMeshMaterialRenderer(material:Null<VertexColorMaterial>):GlUnlitDefineKey {
     return cast { alphaMaskEnabled: FlightRuntime.andValue(!FlightRuntime.strictEquals(material, null), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(material, 'alphaMode'), 'mask')), hasColorMap: false, hasUvTransform: false, vertexColor: true };
     return cast null;
   }
@@ -1520,7 +1517,7 @@ class SceneGl {
   return cast source;
 } }]);
 
-  @:keep public static function destroyGlBakePrograms(state:GlRenderState):Void {
+  public static function destroyGlBakePrograms(state:GlRenderState):Void {
     var byState:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     byState = FlightRuntime.callProperty(SceneGl._bakePrograms__glEnvironmentIblBake, 'get', cast ([state] : Array<Dynamic>));
@@ -1534,11 +1531,11 @@ class SceneGl {
     FlightRuntime.callProperty(SceneGl._bakePrograms__glEnvironmentIblBake, 'delete', cast ([state] : Array<Dynamic>));
   }
 
-  @:keep public static function destroyGlMeshProgram(state:GlRenderState, program:GlMeshProgram):Void {
+  public static function destroyGlMeshProgram(state:GlRenderState, program:GlMeshProgram):Void {
     FlightRuntime.callProperty(FlightRuntime.field(state, 'gl'), 'deleteProgram', cast ([FlightRuntime.field(program, 'program')] : Array<Dynamic>));
   }
 
-  @:keep public static function destroyGlMeshUpload(state:GlRenderState, upload:GlMeshUpload):Void {
+  public static function destroyGlMeshUpload(state:GlRenderState, upload:GlMeshUpload):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     gl = FlightRuntime.field(state, 'gl');
     FlightRuntime.callProperty(gl, 'deleteVertexArray', cast ([FlightRuntime.field(upload, 'vao')] : Array<Dynamic>));
@@ -1546,7 +1543,7 @@ class SceneGl {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(upload, 'indexBuffer'), null))) { FlightRuntime.callProperty(gl, 'deleteBuffer', cast ([FlightRuntime.field(upload, 'indexBuffer')] : Array<Dynamic>)); }
   }
 
-  @:keep public static function destroyGlParticleEmitter3DShader(state:GlRenderState):Void {
+  public static function destroyGlParticleEmitter3DShader(state:GlRenderState):Void {
     var shader:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     shader = FlightRuntime.callProperty(SceneGl.shaderCache__glParticleEmitter3D, 'get', cast ([state] : Array<Dynamic>));
@@ -1559,7 +1556,7 @@ class SceneGl {
     FlightRuntime.callProperty(SceneGl.shaderCache__glParticleEmitter3D, 'delete', cast ([state] : Array<Dynamic>));
   }
 
-  @:keep public static function destroyGlSceneRuntime(state:GlRenderState):Void {
+  public static function destroyGlSceneRuntime(state:GlRenderState):Void {
     var scene:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     scene = FlightRuntime.callProperty(SceneGl.sceneRuntimes__glSceneRuntime, 'get', cast ([state] : Array<Dynamic>));
@@ -1600,7 +1597,7 @@ class SceneGl {
     FlightRuntime.setLength(FlightRuntime.field(scene, 'opaquePool'), 0.0);
   }
 
-  @:keep public static function destroyGlWireframeUpload(state:GlRenderState, upload:GlWireframeUpload):Void {
+  public static function destroyGlWireframeUpload(state:GlRenderState, upload:GlWireframeUpload):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     gl = FlightRuntime.field(state, 'gl');
     FlightRuntime.callProperty(gl, 'deleteVertexArray', cast ([FlightRuntime.field(upload, 'vao')] : Array<Dynamic>));
@@ -1673,14 +1670,14 @@ class SceneGl {
   return cast source;
 } }]);
 
-  @:keep public static function drawGlBakeQuad__glEnvironmentIblBake(state:GlRenderState, program:GlBakeProgram__glEnvironmentIblBake):Void {
+  public static function drawGlBakeQuad__glEnvironmentIblBake(state:GlRenderState, program:GlBakeProgram__glEnvironmentIblBake):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     gl = FlightRuntime.field(state, 'gl');
     FlightRuntime.callProperty(gl, 'bindVertexArray', cast ([FlightRuntime.field(program, 'vao')] : Array<Dynamic>));
     FlightRuntime.callProperty(gl, 'drawArrays', cast ([FlightRuntime.field(gl, 'TRIANGLE_STRIP'), 0.0, 4.0] : Array<Dynamic>));
   }
 
-  @:keep public static function drawGlEnvironmentSkybox(state:GlRenderState, environment:Environment, camera:Camera, aspect:Float):Void {
+  public static function drawGlEnvironmentSkybox(state:GlRenderState, environment:Environment, camera:Camera, aspect:Float):Void {
     var cube:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var sky:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1707,7 +1704,7 @@ class SceneGl {
     if (FlightRuntime.truthy(prevDepthTest)) { FlightRuntime.callProperty(gl, 'enable', cast ([FlightRuntime.field(gl, 'DEPTH_TEST')] : Array<Dynamic>)); }
   }
 
-  @:keep public static function drawGlMeshSubset(state:GlRenderState, program:GlMeshProgram, proxy:SceneRenderProxy, geometry:MeshGeometry):Void {
+  public static function drawGlMeshSubset(state:GlRenderState, program:GlMeshProgram, proxy:SceneRenderProxy, geometry:MeshGeometry):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var locObjectAlpha:Dynamic = cast FlightRuntime.UNDEFINED;
     var jointMatrices:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1741,7 +1738,7 @@ class SceneGl {
 }
   }
 
-  @:keep public static function drawGlScene(state:GlRenderState, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
+  public static function drawGlScene(state:GlRenderState, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
     var list:Dynamic = cast FlightRuntime.UNDEFINED;
     var lightBlock:Dynamic = cast FlightRuntime.UNDEFINED;
     var viewProjection:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1873,7 +1870,7 @@ class SceneGl {
     FlightRuntime.callValue(invalidateGlRenderStateCache, cast ([state] : Array<Dynamic>));
   }
 
-  @:keep public static function drawGlSceneParticleEmitters(state:GlRenderState, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
+  public static function drawGlSceneParticleEmitters(state:GlRenderState, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
     var list:Dynamic = cast FlightRuntime.UNDEFINED;
     var shader:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1906,7 +1903,7 @@ class SceneGl {
     FlightRuntime.callValue(invalidateGlRenderStateCache, cast ([state] : Array<Dynamic>));
   }
 
-  @:keep public static function drawGlSceneShadowMap(state:GlRenderState, scene:SceneNode, shadowCamera:Camera):Void {
+  public static function drawGlSceneShadowMap(state:GlRenderState, scene:SceneNode, shadowCamera:Camera):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1975,7 +1972,7 @@ class SceneGl {
     FlightRuntime.setField(runtime, 'shadow', { matrix: matrix, texture: FlightRuntime.field(target, 'depthTexture') });
   }
 
-  @:keep public static function drawParticleEmitter3DNode__glParticleEmitter3D(state:GlRenderState, shader:GlParticle3DShader__glParticleEmitter3D, emitter:ParticleEmitter3D):Void {
+  public static function drawParticleEmitter3DNode__glParticleEmitter3D(state:GlRenderState, shader:GlParticle3DShader__glParticleEmitter3D, emitter:ParticleEmitter3D):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:ParticleEmitterData = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2185,15 +2182,15 @@ class SceneGl {
   return cast source;
 } }]);
 
-  @:keep public static function enableGlSceneColorSpaceGuards(state:GlRenderState):Void {
+  public static function enableGlSceneColorSpaceGuards(state:GlRenderState):Void {
     FlightRuntime.setField(FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'colorSpaceGuard', SceneGl.warnGlSceneDrawnToCanvas__enableGlSceneColorSpaceGuards);
   }
 
-  @:keep public static function enableGlSceneCustomShaderGuards(state:GlRenderState):Void {
+  public static function enableGlSceneCustomShaderGuards(state:GlRenderState):Void {
     FlightRuntime.setField(FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'customShaderGuard', SceneGl.warnGlCustomShaderUniformTypes__enableGlSceneCustomShaderGuards);
   }
 
-  @:keep public static function ensureGlBakeProgram__glEnvironmentIblBake(state:GlRenderState, key:String, fragment:String):GlBakeProgram__glEnvironmentIblBake {
+  public static function ensureGlBakeProgram__glEnvironmentIblBake(state:GlRenderState, key:String, fragment:String):GlBakeProgram__glEnvironmentIblBake {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var byState:Dynamic = cast FlightRuntime.UNDEFINED;
     var baked:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2223,24 +2220,24 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function ensureGlClassicProgram(state:GlRenderState, key:GlClassicDefineKey):GlClassicProgram {
+  public static function ensureGlClassicProgram(state:GlRenderState, key:GlClassicDefineKey):GlClassicProgram {
     var fullKey:GlClassicDefineKey = cast FlightRuntime.UNDEFINED;
     fullKey = FlightRuntime.mergeObjects([key, { hasSkin: FlightRuntime.field(FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeSkinnedRun') }]);
     return cast FlightRuntime.callValue(ensureGlSceneProgram, cast ([state, 'classic:' + Std.string(FlightRuntime.callValue(buildGlClassicDefineKey, cast ([fullKey] : Array<Dynamic>))) + '', function(gl:Dynamic) return FlightRuntime.callValue(compileGlClassicProgram, cast ([gl, fullKey] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function ensureGlCustomShaderProgram__customShaderGlMeshMaterialRenderer(state:GlRenderState, shaderKey:String, source:GlCustomMaterialShaderSource):GlCustomShaderProgram__customShaderGlMeshMaterialRenderer {
+  public static function ensureGlCustomShaderProgram__customShaderGlMeshMaterialRenderer(state:GlRenderState, shaderKey:String, source:GlCustomMaterialShaderSource):GlCustomShaderProgram__customShaderGlMeshMaterialRenderer {
     return cast FlightRuntime.callValue(ensureGlSceneProgram, cast ([state, 'custom:' + Std.string(shaderKey) + '', function(gl:Dynamic) return FlightRuntime.callValue(SceneGl.compileGlCustomShaderProgram__customShaderGlMeshMaterialRenderer, cast ([gl, source] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function ensureGlDebugProgram(state:GlRenderState, key:GlDebugDefineKey):GlDebugProgram {
+  public static function ensureGlDebugProgram(state:GlRenderState, key:GlDebugDefineKey):GlDebugProgram {
     return cast FlightRuntime.callValue(ensureGlSceneProgram, cast ([state, 'debug:' + Std.string(FlightRuntime.callValue(buildGlDebugDefineKey, cast ([key] : Array<Dynamic>))) + '', function(gl:Dynamic) return FlightRuntime.callValue(compileGlDebugProgram, cast ([gl, key] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function ensureGlEnvironmentSourceCube(state:GlRenderState, environment:Environment):Null<Dynamic> {
+  public static function ensureGlEnvironmentSourceCube(state:GlRenderState, environment:Environment):Null<Dynamic> {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var cube:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2270,7 +2267,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function ensureGlIblPlaceholders__glLitProgram(state:GlRenderState):GlIblPlaceholders__glLitProgram {
+  public static function ensureGlIblPlaceholders__glLitProgram(state:GlRenderState):GlIblPlaceholders__glLitProgram {
     var placeholders:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var black:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2303,12 +2300,12 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function ensureGlMatcapProgram(state:GlRenderState, key:GlMatcapDefineKey):GlMatcapProgram {
+  public static function ensureGlMatcapProgram(state:GlRenderState, key:GlMatcapDefineKey):GlMatcapProgram {
     return cast FlightRuntime.callValue(ensureGlSceneProgram, cast ([state, 'matcap:' + Std.string(FlightRuntime.callValue(buildGlMatcapDefineKey, cast ([key] : Array<Dynamic>))) + '', function(gl:Dynamic) return FlightRuntime.callValue(compileGlMatcapProgram, cast ([gl, key] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function ensureGlMeshUpload(state:GlRenderState, geometry:MeshGeometry, gpuSkinned:Dynamic = false):GlMeshUpload {
+  public static function ensureGlMeshUpload(state:GlRenderState, geometry:MeshGeometry, gpuSkinned:Dynamic = false):GlMeshUpload {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var cache:Dynamic = cast FlightRuntime.UNDEFINED;
     var upload:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2353,14 +2350,14 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function ensureGlPbrProgram(state:GlRenderState, key:GlPbrDefineKey):GlPbrProgram {
+  public static function ensureGlPbrProgram(state:GlRenderState, key:GlPbrDefineKey):GlPbrProgram {
     var fullKey:GlPbrDefineKey = cast FlightRuntime.UNDEFINED;
     fullKey = FlightRuntime.mergeObjects([key, { hasSkin: FlightRuntime.field(FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeSkinnedRun') }]);
     return cast FlightRuntime.callValue(ensureGlSceneProgram, cast ([state, 'pbr:' + Std.string(FlightRuntime.callValue(buildGlPbrDefineKey, cast ([fullKey] : Array<Dynamic>))) + '', function(gl:Dynamic) return FlightRuntime.callValue(compileGlPbrProgram, cast ([gl, fullKey] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function ensureGlSceneProgram<T>(state:GlRenderState, key:String, compile:Dynamic):Dynamic {
+  public static function ensureGlSceneProgram<T>(state:GlRenderState, key:String, compile:Dynamic):Dynamic {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>));
@@ -2373,7 +2370,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function ensureGlShadedProgram(state:GlRenderState, key:GlShadedDefineKey, modifiers:Array<Modifier>):GlShadedProgram {
+  public static function ensureGlShadedProgram(state:GlRenderState, key:GlShadedDefineKey, modifiers:Array<Modifier>):GlShadedProgram {
     var registry:Dynamic = cast FlightRuntime.UNDEFINED;
     var ordered:Dynamic = cast FlightRuntime.UNDEFINED;
     var fullKey:GlShadedDefineKey = cast FlightRuntime.UNDEFINED;
@@ -2386,7 +2383,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function ensureGlSkinPalette(state:GlRenderState):GlSkinPaletteTexture {
+  public static function ensureGlSkinPalette(state:GlRenderState):GlSkinPaletteTexture {
     var scene:Dynamic = cast FlightRuntime.UNDEFINED;
     var palette:Dynamic = cast FlightRuntime.UNDEFINED;
     scene = FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>));
@@ -2399,7 +2396,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function ensureGlSkybox__glEnvironmentSkybox(state:GlRenderState):GlSkybox__glEnvironmentSkybox {
+  public static function ensureGlSkybox__glEnvironmentSkybox(state:GlRenderState):GlSkybox__glEnvironmentSkybox {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var sky:Dynamic = cast FlightRuntime.UNDEFINED;
     var program:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2423,26 +2420,26 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function ensureGlToonProgram(state:GlRenderState, key:GlToonDefineKey):GlToonProgram {
+  public static function ensureGlToonProgram(state:GlRenderState, key:GlToonDefineKey):GlToonProgram {
     var fullKey:GlToonDefineKey = cast FlightRuntime.UNDEFINED;
     fullKey = FlightRuntime.mergeObjects([key, { hasSkin: FlightRuntime.field(FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeSkinnedRun') }]);
     return cast FlightRuntime.callValue(ensureGlSceneProgram, cast ([state, 'toon:' + Std.string(FlightRuntime.callValue(buildGlToonDefineKey, cast ([fullKey] : Array<Dynamic>))) + '', function(gl:Dynamic) return FlightRuntime.callValue(compileGlToonProgram, cast ([gl, fullKey] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function ensureGlUnlitProgram(state:GlRenderState, key:GlUnlitDefineKey):GlUnlitProgram {
+  public static function ensureGlUnlitProgram(state:GlRenderState, key:GlUnlitDefineKey):GlUnlitProgram {
     var fullKey:GlUnlitDefineKey = cast FlightRuntime.UNDEFINED;
     fullKey = FlightRuntime.mergeObjects([key, { hasSkin: FlightRuntime.field(FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeSkinnedRun') }]);
     return cast FlightRuntime.callValue(ensureGlSceneProgram, cast ([state, 'unlit:' + Std.string(FlightRuntime.callValue(buildGlUnlitDefineKey, cast ([fullKey] : Array<Dynamic>))) + '', function(gl:Dynamic) return FlightRuntime.callValue(compileGlUnlitProgram, cast ([gl, fullKey] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function ensureGlWireframeProgram(state:GlRenderState):GlWireframeProgram {
+  public static function ensureGlWireframeProgram(state:GlRenderState):GlWireframeProgram {
     return cast FlightRuntime.callValue(ensureGlSceneProgram, cast ([state, 'wireframe:', function(gl:Dynamic) return FlightRuntime.callValue(compileGlWireframeProgram, cast ([gl] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function ensureGlWireframeUpload(state:GlRenderState, geometry:MeshGeometry):GlWireframeUpload {
+  public static function ensureGlWireframeUpload(state:GlRenderState, geometry:MeshGeometry):GlWireframeUpload {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var meshUpload:Dynamic = cast FlightRuntime.UNDEFINED;
     var perState:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2485,7 +2482,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function ensureInstanceCapacity__glParticleEmitter3D(shader:GlParticle3DShader__glParticleEmitter3D, gl:Dynamic, count:Float):Void {
+  public static function ensureInstanceCapacity__glParticleEmitter3D(shader:GlParticle3DShader__glParticleEmitter3D, gl:Dynamic, count:Float):Void {
     var needed:Dynamic = cast FlightRuntime.UNDEFINED;
     var newSize:Dynamic = cast FlightRuntime.UNDEFINED;
     needed = (count * SceneGl.INSTANCE_FLOATS__glParticleEmitter3D);
@@ -2496,7 +2493,7 @@ class SceneGl {
     FlightRuntime.callProperty(gl, 'bufferData', cast ([FlightRuntime.field(gl, 'ARRAY_BUFFER'), (newSize * 4.0), FlightRuntime.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
   }
 
-  @:keep public static function ensureParticle3DShader__glParticleEmitter3D(state:GlRenderState):GlParticle3DShader__glParticleEmitter3D {
+  public static function ensureParticle3DShader__glParticleEmitter3D(state:GlRenderState):GlParticle3DShader__glParticleEmitter3D {
     var shader:Dynamic = cast FlightRuntime.UNDEFINED;
     shader = FlightRuntime.callProperty(SceneGl.shaderCache__glParticleEmitter3D, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(shader, FlightRuntime.UNDEFINED))) { return cast shader; }
@@ -2508,7 +2505,7 @@ class SceneGl {
 
   public static final GL_MESH_LIGHT_BLOCK_GLSL:Dynamic = '\nuniform vec4 u_directional;          // xyz = light travel direction (surface->light is -xyz)\nuniform vec4 u_directionalRadiance;  // rgb = linear radiance, premultiplied by intensity\nuniform vec3 u_ambientRadiance;      // linear ambient irradiance\nuniform float u_directionalCount;    // 0 or 1 — gates the directional term\nuniform float u_ambientCount;        // 0 or 1 — gates the ambient term\nuniform vec3 u_cameraPosition;       // world-space camera position for view-dependent terms\nuniform sampler2D u_shadowMap;       // directional shadow depth map\nuniform mat4 u_shadowMatrix;         // world -> shadow light-clip\nuniform float u_shadowEnabled;       // 0 or 1 — gates shadow sampling\n\n// Punctual (point/spot/hemisphere) forward-light arrays. Fixed MAX_FORWARD_LIGHTS-wide; each count\n// uniform bounds its loop. Layout matches SceneLightBlock.data (packSceneLightBlock) byte-for-byte:\n//   point[i]      = u_pointLights[i*2+0]={pos.xyz,range}, [i*2+1]={radiance.rgb,invSqrRange}\n//   spot[i]       = u_spotLights[i*4+0..1] as point, [i*4+2]={dir.xyz,_}, [i*4+3]={cosInner,cosOuter,_,_}\n//   hemisphere[i] = u_hemisphereLights[i*3+0]={sky.rgb,_}, [i*3+1]={ground.rgb,_}, [i*3+2]={up.xyz,_}\nuniform vec4 u_pointLights[MAX_FORWARD_LIGHTS * 2];\nuniform vec4 u_spotLights[MAX_FORWARD_LIGHTS * 4];\nuniform vec4 u_hemisphereLights[MAX_FORWARD_LIGHTS * 3];\nuniform int u_pointCount;\nuniform int u_spotCount;\nuniform int u_hemisphereCount;\n\n// Smooth inverse-square range window (glTF/UE4): 1 near the light, eased to 0 at the range. invSqrRange\n// is 1/range^2 (0 = infinite range, no cutoff). dist2 is the squared surface->light distance.\nfloat rangeWindow(float dist2, float invSqrRange) {\n  float factor = dist2 * invSqrRange;\n  float windowed = clamp(1.0 - factor * factor, 0.0, 1.0);\n  return windowed * windowed;\n}\n\n// Directional shadow factor at a world position: 1.0 fully lit, 0.0 fully shadowed, with 3x3 PCF.\n// Fragments outside the shadow frustum are treated as lit.\nfloat sampleDirectionalShadow(vec3 worldPos) {\n  if (u_shadowEnabled < 0.5) return 1.0;\n  vec4 clip = u_shadowMatrix * vec4(worldPos, 1.0);\n  vec3 ndc = clip.xyz / clip.w;\n  vec3 uvz = ndc * 0.5 + 0.5;\n  if (uvz.x < 0.0 || uvz.x > 1.0 || uvz.y < 0.0 || uvz.y > 1.0 || uvz.z > 1.0) return 1.0;\n  float current = uvz.z - 0.0025;\n  vec2 texel = 1.0 / vec2(textureSize(u_shadowMap, 0));\n  float sum = 0.0;\n  for (int x = -1; x <= 1; ++x) {\n    for (int y = -1; y <= 1; ++y) {\n      float closest = texture(u_shadowMap, uvz.xy + vec2(float(x), float(y)) * texel).r;\n      sum += current <= closest ? 1.0 : 0.0;\n    }\n  }\n  return sum / 9.0;\n}\n';
 
-  @:keep public static function floatOffsetForSemantic__glMeshUpload(geometry:MeshGeometry, semantic:String):Float {
+  public static function floatOffsetForSemantic__glMeshUpload(geometry:MeshGeometry, semantic:String):Float {
     var attributes:Dynamic = cast FlightRuntime.UNDEFINED;
     attributes = FlightRuntime.field(FlightRuntime.field(geometry, 'layout'), 'attributes');
     {
@@ -2524,84 +2521,84 @@ class SceneGl {
 
   public static final CLASSIC_FRAGMENT_BODY__glClassicPrelude:Dynamic = '\nprecision highp float;\n\nin vec3 v_worldPosition;\nin vec3 v_normal;\nin vec4 v_tangent;\nin vec2 v_uv0;\n\nuniform vec4 u_diffuse;\nuniform float u_alphaCutoff;\n' + Std.string(GL_MESH_LIGHT_BLOCK_GLSL) + '\n#if defined(LIGHTING_PHONG) || defined(LIGHTING_BLINNPHONG)\nuniform vec4 u_specular;\nuniform float u_shininess;\nuniform float u_normalScale;\n#endif\n\n#ifdef HAS_DIFFUSE_MAP\nuniform sampler2D u_diffuseMap;\n#endif\n#ifdef HAS_SPECULAR_MAP\nuniform sampler2D u_specularMap;\n#endif\n#ifdef HAS_NORMAL_MAP\nuniform sampler2D u_normalMap;\n#endif\n\nuniform float u_objectAlpha;\n\nout vec4 fragColor;\n\n// sRgb albedo texels are gamma-encoded; decode to linear before lighting.\nvec3 srgbToLinear(vec3 c) {\n  vec3 lo = c / 12.92;\n  vec3 hi = pow((c + 0.055) / 1.055, vec3(2.4));\n  return mix(lo, hi, step(0.04045, c));\n}\n\n// The classic shading for ONE light: Lambert diffuse plus the optional Phong/BlinnPhong specular\n// lobe. Every light type (directional, point, spot) routes through this one BRDF so they never fork\n// the shading model — the caller supplies the surface->light direction and the light\'s (attenuated,\n// cone-scaled) radiance. Specular reads the view vector and material specular/shininess from globals.\nvec3 shadeClassicLight(vec3 normal, vec3 lightDir, vec3 lightColor, vec3 diffuseRgb) {\n  float nDotL = max(dot(normal, lightDir), 0.0);\n  vec3 result = diffuseRgb * nDotL * lightColor;\n#if defined(LIGHTING_PHONG) || defined(LIGHTING_BLINNPHONG)\n  if (nDotL > 0.0) {\n    vec3 viewDir = normalize(u_cameraPosition - v_worldPosition);\n    vec3 specularColor = u_specular.rgb;\n  #ifdef HAS_SPECULAR_MAP\n    specularColor *= srgbToLinear(texture(u_specularMap, v_uv0).rgb);\n  #endif\n  #ifdef LIGHTING_PHONG\n    // Phong: reflection-vector specular.\n    vec3 reflectDir = reflect(-lightDir, normal);\n    float specAngle = max(dot(reflectDir, viewDir), 0.0);\n  #else\n    // BlinnPhong: half-vector specular.\n    vec3 halfVec = normalize(lightDir + viewDir);\n    float specAngle = max(dot(normal, halfVec), 0.0);\n  #endif\n    float specular = pow(specAngle, max(u_shininess, 1.0));\n    result += specular * specularColor * lightColor;\n  }\n#endif\n  return result;\n}\n\nvoid main() {\n  vec4 diffuse = u_diffuse;\n#ifdef HAS_DIFFUSE_MAP\n  vec4 sampledDiffuse = texture(u_diffuseMap, v_uv0);\n  diffuse.rgb *= srgbToLinear(sampledDiffuse.rgb);\n  diffuse.a *= sampledDiffuse.a;\n#endif\n\n#ifdef ALPHA_MASK\n  if (diffuse.a < u_alphaCutoff) discard;\n#endif\n\n  vec3 geometricNormal = normalize(v_normal);\n  if (!gl_FrontFacing) geometricNormal = -geometricNormal;\n\n  vec3 normal = geometricNormal;\n#ifdef HAS_NORMAL_MAP\n  vec3 tangent = normalize(v_tangent.xyz);\n  vec3 bitangent = cross(geometricNormal, tangent) * v_tangent.w;\n  vec3 tangentNormal = texture(u_normalMap, v_uv0).xyz * 2.0 - 1.0;\n  tangentNormal.xy *= u_normalScale;\n  mat3 tbn = mat3(tangent, bitangent, geometricNormal);\n  normal = normalize(tbn * tangentNormal);\n#endif\n\n  vec3 radiance = vec3(0.0);\n\n  // Directional light: -direction is the surface-to-light vector (light travels along direction).\n  // Only the directional term is shadow-mapped (mirrors the PBR path); point/spot/ambient stay unshadowed.\n  // sampleDirectionalShadow returns 1.0 when no shadow map is bound (u_shadowEnabled == 0), so a classic\n  // scene that never calls drawGlSceneShadowMap is unchanged.\n  if (u_directionalCount > 0.5) {\n    vec3 lightDir = normalize(-u_directional.xyz);\n    radiance += shadeClassicLight(normal, lightDir, u_directionalRadiance.rgb, diffuse.rgb)\n                * sampleDirectionalShadow(v_worldPosition);\n  }\n\n  // Point lights: surface->light direction with a smooth inverse-square range falloff.\n  for (int i = 0; i < MAX_FORWARD_LIGHTS; i++) {\n    if (i >= u_pointCount) break;\n    vec3 toLight = u_pointLights[i * 2 + 0].xyz - v_worldPosition;\n    float dist2 = dot(toLight, toLight);\n    vec3 lightDir = toLight * inversesqrt(max(dist2, 1e-8));\n    float atten = rangeWindow(dist2, u_pointLights[i * 2 + 1].w) / max(dist2, 1e-4);\n    radiance += shadeClassicLight(normal, lightDir, u_pointLights[i * 2 + 1].rgb * atten, diffuse.rgb);\n  }\n\n  // Spot lights: point attenuation times a smooth cone falloff between the inner/outer cosines.\n  for (int i = 0; i < MAX_FORWARD_LIGHTS; i++) {\n    if (i >= u_spotCount) break;\n    vec3 toLight = u_spotLights[i * 4 + 0].xyz - v_worldPosition;\n    float dist2 = dot(toLight, toLight);\n    vec3 lightDir = toLight * inversesqrt(max(dist2, 1e-8));\n    float atten = rangeWindow(dist2, u_spotLights[i * 4 + 1].w) / max(dist2, 1e-4);\n    float cone = smoothstep(u_spotLights[i * 4 + 3].y, u_spotLights[i * 4 + 3].x,\n                            dot(normalize(u_spotLights[i * 4 + 2].xyz), -lightDir));\n    radiance += shadeClassicLight(normal, lightDir, u_spotLights[i * 4 + 1].rgb * atten * cone, diffuse.rgb);\n  }\n\n  // Ambient term: flat irradiance over the diffuse albedo.\n  if (u_ambientCount > 0.5) {\n    radiance += diffuse.rgb * u_ambientRadiance;\n  }\n\n  // Hemisphere fill: sky/ground gradient blended by the normal\'s vertical component.\n  for (int i = 0; i < MAX_FORWARD_LIGHTS; i++) {\n    if (i >= u_hemisphereCount) break;\n    float f = 0.5 + 0.5 * dot(normal, u_hemisphereLights[i * 3 + 2].xyz);\n    radiance += mix(u_hemisphereLights[i * 3 + 1].rgb, u_hemisphereLights[i * 3 + 0].rgb, f) * diffuse.rgb;\n  }\n\n  fragColor = vec4(radiance, diffuse.a);\n  fragColor.a *= u_objectAlpha;\n}\n';
 
-  @:keep public static function getGlClassicFragmentSource():String {
+  public static function getGlClassicFragmentSource():String {
     return cast SceneGl.CLASSIC_FRAGMENT_BODY__glClassicPrelude;
     return cast null;
   }
 
-  @:keep public static function getGlClassicFragmentSourceForKey(key:GlClassicDefineKey):String {
+  public static function getGlClassicFragmentSourceForKey(key:GlClassicDefineKey):String {
     return cast (FlightRuntime.callValue(SceneGl.buildGlClassicDefineSource__glClassicPrelude, cast ([key] : Array<Dynamic>)) + SceneGl.CLASSIC_FRAGMENT_BODY__glClassicPrelude);
     return cast null;
   }
 
-  @:keep public static function getGlClassicVertexSource():String {
+  public static function getGlClassicVertexSource():String {
     return cast SceneGl.CLASSIC_VERTEX_BODY__glClassicPrelude;
     return cast null;
   }
 
-  @:keep public static function getGlClassicVertexSourceForKey(key:GlClassicDefineKey):String {
+  public static function getGlClassicVertexSourceForKey(key:GlClassicDefineKey):String {
     var skin:Dynamic = cast FlightRuntime.UNDEFINED;
     skin = FlightRuntime.select(FlightRuntime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '');
     return cast ((FlightRuntime.callValue(SceneGl.buildGlClassicDefineSource__glClassicPrelude, cast ([key] : Array<Dynamic>)) + skin) + SceneGl.CLASSIC_VERTEX_BODY__glClassicPrelude);
     return cast null;
   }
 
-  @:keep public static function getGlCubeFaceTarget(gl:Dynamic, face:Float):Float {
+  public static function getGlCubeFaceTarget(gl:Dynamic, face:Float):Float {
     return cast (FlightRuntime.field(gl, 'TEXTURE_CUBE_MAP_POSITIVE_X') + face);
     return cast null;
   }
 
-  @:keep public static function getGlCustomMaterialShaderSource(state:GlRenderState, shaderKey:String):Null<GlCustomMaterialShaderSource> {
+  public static function getGlCustomMaterialShaderSource(state:GlRenderState, shaderKey:String):Null<GlCustomMaterialShaderSource> {
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(FlightRuntime.callProperty(SceneGl._customMaterialShaders__customShaderGlMeshMaterialRenderer, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([shaderKey] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getGlDebugFragmentSourceForKey(key:GlDebugDefineKey):String {
+  public static function getGlDebugFragmentSourceForKey(key:GlDebugDefineKey):String {
     return cast (FlightRuntime.callValue(SceneGl.buildDefineSource__glDebugPrelude, cast ([key] : Array<Dynamic>)) + SceneGl.DEBUG_FRAGMENT_BODY__glDebugPrelude);
     return cast null;
   }
 
-  @:keep public static function getGlDebugVertexSourceForKey(key:GlDebugDefineKey):String {
+  public static function getGlDebugVertexSourceForKey(key:GlDebugDefineKey):String {
     return cast (FlightRuntime.callValue(SceneGl.buildDefineSource__glDebugPrelude, cast ([key] : Array<Dynamic>)) + SceneGl.DEBUG_VERTEX_BODY__glDebugPrelude);
     return cast null;
   }
 
-  @:keep public static function getGlMatcapFragmentSourceForKey(key:GlMatcapDefineKey):String {
+  public static function getGlMatcapFragmentSourceForKey(key:GlMatcapDefineKey):String {
     return cast (FlightRuntime.callValue(SceneGl.buildDefineSource__glMatcapPrelude, cast ([key] : Array<Dynamic>)) + SceneGl.MATCAP_FRAGMENT_BODY__glMatcapPrelude);
     return cast null;
   }
 
-  @:keep public static function getGlMatcapVertexSourceForKey(key:GlMatcapDefineKey):String {
+  public static function getGlMatcapVertexSourceForKey(key:GlMatcapDefineKey):String {
     return cast (FlightRuntime.callValue(SceneGl.buildDefineSource__glMatcapPrelude, cast ([key] : Array<Dynamic>)) + SceneGl.MATCAP_VERTEX_BODY__glMatcapPrelude);
     return cast null;
   }
 
-  @:keep public static function getGlMeshMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMeshMaterialRenderer> {
+  public static function getGlMeshMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMeshMaterialRenderer> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry'), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getGlPbrFragmentSource():String {
+  public static function getGlPbrFragmentSource():String {
     return cast SceneGl.PBR_FRAGMENT_BODY__glPbrPrelude;
     return cast null;
   }
 
-  @:keep public static function getGlPbrFragmentSourceForKey(key:GlPbrDefineKey):String {
+  public static function getGlPbrFragmentSourceForKey(key:GlPbrDefineKey):String {
     return cast (FlightRuntime.callValue(buildGlPbrDefineSource, cast ([key] : Array<Dynamic>)) + SceneGl.PBR_FRAGMENT_BODY__glPbrPrelude);
     return cast null;
   }
 
-  @:keep public static function getGlPbrVertexSource():String {
+  public static function getGlPbrVertexSource():String {
     return cast SceneGl.PBR_VERTEX_BODY__glPbrPrelude;
     return cast null;
   }
 
-  @:keep public static function getGlPbrVertexSourceForKey(key:GlPbrDefineKey):String {
+  public static function getGlPbrVertexSourceForKey(key:GlPbrDefineKey):String {
     return cast ((FlightRuntime.callValue(buildGlPbrDefineSource, cast ([key] : Array<Dynamic>)) + FlightRuntime.select(FlightRuntime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '')) + SceneGl.PBR_VERTEX_BODY__glPbrPrelude);
     return cast null;
   }
 
-  @:keep public static function getGlSceneRuntime(state:GlRenderState):GlSceneRuntime {
+  public static function getGlSceneRuntime(state:GlRenderState):GlSceneRuntime {
     var stateRuntime:Dynamic = cast FlightRuntime.UNDEFINED;
     var scene:Dynamic = cast FlightRuntime.UNDEFINED;
     stateRuntime = (cast FlightRuntime.getIndex(state, EntityRuntimeKey) : GlRenderStateRuntime);
@@ -2616,39 +2613,39 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function getGlSceneTime(state:GlRenderState):Float {
+  public static function getGlSceneTime(state:GlRenderState):Float {
     return cast FlightRuntime.field(FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'time');
     return cast null;
   }
 
-  @:keep public static function getGlToonFragmentSourceForKey(key:GlToonDefineKey):String {
+  public static function getGlToonFragmentSourceForKey(key:GlToonDefineKey):String {
     return cast (FlightRuntime.callValue(SceneGl.buildGlToonDefineSource__glToonPrelude, cast ([key] : Array<Dynamic>)) + SceneGl.TOON_FRAGMENT_BODY__glToonPrelude);
     return cast null;
   }
 
-  @:keep public static function getGlToonVertexSourceForKey(key:GlToonDefineKey):String {
+  public static function getGlToonVertexSourceForKey(key:GlToonDefineKey):String {
     var skin:Dynamic = cast FlightRuntime.UNDEFINED;
     skin = FlightRuntime.select(FlightRuntime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '');
     return cast ((FlightRuntime.callValue(SceneGl.buildGlToonDefineSource__glToonPrelude, cast ([key] : Array<Dynamic>)) + skin) + SceneGl.TOON_VERTEX_BODY__glToonPrelude);
     return cast null;
   }
 
-  @:keep public static function getGlUnlitFragmentSourceForKey(key:GlUnlitDefineKey):String {
+  public static function getGlUnlitFragmentSourceForKey(key:GlUnlitDefineKey):String {
     return cast (FlightRuntime.callValue(SceneGl.buildDefineSource__glUnlitPrelude, cast ([key] : Array<Dynamic>)) + SceneGl.UNLIT_FRAGMENT_BODY__glUnlitPrelude);
     return cast null;
   }
 
-  @:keep public static function getGlUnlitVertexSourceForKey(key:GlUnlitDefineKey):String {
+  public static function getGlUnlitVertexSourceForKey(key:GlUnlitDefineKey):String {
     return cast ((FlightRuntime.callValue(SceneGl.buildDefineSource__glUnlitPrelude, cast ([key] : Array<Dynamic>)) + FlightRuntime.select(FlightRuntime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '')) + SceneGl.UNLIT_VERTEX_BODY__glUnlitPrelude);
     return cast null;
   }
 
-  @:keep public static function getGlWireframeFragmentSource():String {
+  public static function getGlWireframeFragmentSource():String {
     return cast SceneGl.WIREFRAME_FRAGMENT__glWireframePrelude;
     return cast null;
   }
 
-  @:keep public static function getGlWireframeVertexSource():String {
+  public static function getGlWireframeVertexSource():String {
     return cast SceneGl.WIREFRAME_VERTEX__glWireframePrelude;
     return cast null;
   }
@@ -2671,7 +2668,7 @@ class SceneGl {
 
   public static final CLASSIC_VERTEX_BODY__glClassicPrelude:Dynamic = '\nlayout(location = 0) in vec3 a_position;\nlayout(location = 1) in vec3 a_normal;\nlayout(location = 2) in vec4 a_tangent;\nlayout(location = 3) in vec2 a_uv0;\n\nuniform mat4 u_viewProjection;\nuniform mat4 u_model;\nuniform mat3 u_normalMatrix;\n' + Std.string(GL_UV_TRANSFORM_VERTEX_GLSL) + '\nout vec3 v_worldPosition;\nout vec3 v_normal;\nout vec4 v_tangent;\nout vec2 v_uv0;\n\nvoid main() {\n#ifdef HAS_SKIN\n  mat4 skin = skinMatrix();\n  vec4 localPosition = skin * vec4(a_position, 1.0);\n  vec3 localNormal = mat3(skin) * a_normal;\n  vec3 localTangent = mat3(skin) * a_tangent.xyz;\n#else\n  vec4 localPosition = vec4(a_position, 1.0);\n  vec3 localNormal = a_normal;\n  vec3 localTangent = a_tangent.xyz;\n#endif\n  vec4 worldPosition = u_model * localPosition;\n  v_worldPosition = worldPosition.xyz;\n  v_normal = u_normalMatrix * localNormal;\n  v_tangent = vec4(u_normalMatrix * localTangent, a_tangent.w);\n  v_uv0 = applyUvTransform(a_uv0);\n  gl_Position = u_viewProjection * worldPosition;\n}\n';
 
-  @:keep public static function glUniformTypeName__enableGlSceneCustomShaderGuards(gl:Dynamic, type:Float):String {
+  public static function glUniformTypeName__enableGlSceneCustomShaderGuards(gl:Dynamic, type:Float):String {
     {
       var __switchValue = type;
       if (__switchValue == FlightRuntime.field(gl, 'FLOAT_MAT4')) {
@@ -2702,7 +2699,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function hasGlCubeFacePixels__glEnvironmentCube(cube:CubeTexture):Bool {
+  public static function hasGlCubeFacePixels__glEnvironmentCube(cube:CubeTexture):Bool {
     {
       var face:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(face, 6.0, '<'))) {
@@ -2715,7 +2712,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function hasGlMeshGeometryUv1(geometry:MeshGeometry):Bool {
+  public static function hasGlMeshGeometryUv1(geometry:MeshGeometry):Bool {
     var attributes:Dynamic = cast FlightRuntime.UNDEFINED;
     attributes = FlightRuntime.field(FlightRuntime.field(geometry, 'layout'), 'attributes');
     {
@@ -2729,7 +2726,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function hasGlUvTransform(texture:Null<TextureLike>):Bool {
+  public static function hasGlUvTransform(texture:Null<TextureLike>):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(texture, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(texture, 'image'), null)), function():Dynamic return cast FlightRuntime.callValue(hasTextureUvTransform, cast ([texture] : Array<Dynamic>)));
     return cast null;
   }
@@ -2783,22 +2780,22 @@ class SceneGl {
 
   public static final IRRADIANCE_SIZE__glEnvironmentIblBake:Dynamic = 16.0;
 
-  @:keep public static function isBlendedMaterial__drawGlScene(material:Material):Bool {
+  public static function isBlendedMaterial__drawGlScene(material:Material):Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.field((cast material : SurfaceMaterial), 'alphaMode'), 'blend');
     return cast null;
   }
 
-  @:keep public static function isEmissiveGated__glShadedBuiltInModifiers(modifier:EmissiveModifier):Bool {
+  public static function isEmissiveGated__glShadedBuiltInModifiers(modifier:EmissiveModifier):Bool {
     return cast FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.field(modifier, 'facing'), FlightRuntime.UNDEFINED), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(modifier, 'facing'), Types.EmissiveModifierFacingValue.Ignore));
     return cast null;
   }
 
-  @:keep public static function isGlTextureReady(texture:Null<Texture>):Bool {
+  public static function isGlTextureReady(texture:Null<Texture>):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(!FlightRuntime.strictEquals(texture, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(texture, 'image'), null)), function():Dynamic return cast FlightRuntime.callValue(hasImageResourcePixels, cast ([FlightRuntime.field(texture, 'image')] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function isGpuSkinnedDraw__drawGlScene(mesh:Mesh):Bool {
+  public static function isGpuSkinnedDraw__drawGlScene(mesh:Mesh):Bool {
     return cast FlightRuntime.andValue(!FlightRuntime.looseEquals(FlightRuntime.field(mesh, 'skin'), null), function():Dynamic return cast FlightRuntime.callValue(hasMeshGeometrySkin, cast ([FlightRuntime.field(mesh, 'geometry')] : Array<Dynamic>)));
     return cast null;
   }
@@ -2821,17 +2818,17 @@ class SceneGl {
   FlightRuntime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
 } };
 
-  @:keep public static function lerp__specularGlossinessPbrGlMeshMaterialRenderer(a:Float, b:Float, t:Float):Float {
+  public static function lerp__specularGlossinessPbrGlMeshMaterialRenderer(a:Float, b:Float, t:Float):Float {
     return cast (a + ((b - a) * t));
     return cast null;
   }
 
-  @:keep public static function linkGlBakeProgram__glEnvironmentIblBake(gl:Dynamic, fragment:String):Dynamic {
+  public static function linkGlBakeProgram__glEnvironmentIblBake(gl:Dynamic, fragment:String):Dynamic {
     return cast FlightRuntime.callValue(createGlProgram, cast ([gl, SceneGl.BAKE_VERTEX__glEnvironmentIblBake, fragment, 'IBL bake'] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function linkGlSkyboxProgram__glEnvironmentSkybox(gl:Dynamic):Dynamic {
+  public static function linkGlSkyboxProgram__glEnvironmentSkybox(gl:Dynamic):Dynamic {
     return cast FlightRuntime.callValue(createGlProgram, cast ([gl, SceneGl.SKYBOX_VERTEX__glEnvironmentSkybox, SceneGl.SKYBOX_FRAGMENT__glEnvironmentSkybox, 'Skybox'] : Array<Dynamic>));
     return cast null;
   }
@@ -2890,7 +2887,7 @@ class SceneGl {
   FlightRuntime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
 } };
 
-  @:keep public static function packLinearRgba__specularGlossinessPbrGlMeshMaterialRenderer(r:Float, g:Float, b:Float, a:Float):Float {
+  public static function packLinearRgba__specularGlossinessPbrGlMeshMaterialRenderer(r:Float, g:Float, b:Float, a:Float):Float {
     var toByte:Dynamic = cast FlightRuntime.UNDEFINED;
     var alpha:Dynamic = cast FlightRuntime.UNDEFINED;
     toByte = function(linear:Float) {
@@ -2940,7 +2937,7 @@ class SceneGl {
 
   public static final PREFILTERED_SIZE__glEnvironmentIblBake:Dynamic = 64.0;
 
-  @:keep public static function presentGlScene(state:GlRenderState, target:GlRenderTarget, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
+  public static function presentGlScene(state:GlRenderState, target:GlRenderTarget, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
     FlightRuntime.callValue(beginGlRenderPass, cast ([state, target] : Array<Dynamic>));
     FlightRuntime.callValue(drawGlScene, cast ([state, scene, camera, lights] : Array<Dynamic>));
     FlightRuntime.callValue(endGlRenderPass, cast ([state] : Array<Dynamic>));
@@ -2949,15 +2946,15 @@ class SceneGl {
 
   public static final proxy__drawGlScene:SceneRenderProxy = { jointMatrices: null, material: (cast { kind: Types.DefaultMaterialKind } : Material), normalMatrix: (cast FlightRuntime.callValue(createMatrix3, cast ([] : Array<Dynamic>)) : Matrix3), subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: (cast FlightRuntime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) : Matrix4) };
 
-  @:keep public static function registerAnisotropyPbrGlMaterial(state:GlRenderState):Void {
+  public static function registerAnisotropyPbrGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.AnisotropyPbrMaterialKind, anisotropyPbrGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerBlinnPhongGlMaterial(state:GlRenderState):Void {
+  public static function registerBlinnPhongGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.BlinnPhongMaterialKind, blinnPhongGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerBuiltInGlModifierSnippets(state:GlRenderState):Void {
+  public static function registerBuiltInGlModifierSnippets(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlModifierSnippet, cast ([state, animatedNormalGlModifierSnippet] : Array<Dynamic>));
     FlightRuntime.callValue(registerGlModifierSnippet, cast ([state, dissolveGlModifierSnippet] : Array<Dynamic>));
     FlightRuntime.callValue(registerGlModifierSnippet, cast ([state, emissiveGlModifierSnippet] : Array<Dynamic>));
@@ -2968,23 +2965,23 @@ class SceneGl {
     FlightRuntime.callValue(registerGlModifierSnippet, cast ([state, vertexDisplaceGlModifierSnippet] : Array<Dynamic>));
   }
 
-  @:keep public static function registerClearcoatPbrGlMaterial(state:GlRenderState):Void {
+  public static function registerClearcoatPbrGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.ClearcoatPbrMaterialKind, clearcoatPbrGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerCustomShaderGlMaterial(state:GlRenderState):Void {
+  public static function registerCustomShaderGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.CustomShaderMaterialKind, customShaderGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerDepthGlMaterial(state:GlRenderState):Void {
+  public static function registerDepthGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.DepthMaterialKind, depthGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerEmissiveGlMaterial(state:GlRenderState):Void {
+  public static function registerEmissiveGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.EmissiveMaterialKind, emissiveGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerGlCustomMaterialShader(state:GlRenderState, shaderKey:String, source:GlCustomMaterialShaderSource):Void {
+  public static function registerGlCustomMaterialShader(state:GlRenderState, shaderKey:String, source:GlCustomMaterialShaderSource):Void {
     var registry:Dynamic = cast FlightRuntime.UNDEFINED;
     registry = FlightRuntime.callProperty(SceneGl._customMaterialShaders__customShaderGlMeshMaterialRenderer, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(registry, FlightRuntime.UNDEFINED))) {
@@ -2994,82 +2991,82 @@ class SceneGl {
     FlightRuntime.callProperty(registry, 'set', cast ([shaderKey, source] : Array<Dynamic>));
   }
 
-  @:keep public static function registerGlMeshMaterialRenderer(state:GlRenderState, kind:Kind, renderer:GlMeshMaterialRenderer):Void {
+  public static function registerGlMeshMaterialRenderer(state:GlRenderState, kind:Kind, renderer:GlMeshMaterialRenderer):Void {
     FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry'), 'set', cast ([kind, renderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerGlModifierSnippet(state:GlRenderState, snippet:GlModifierSnippet):Void {
+  public static function registerGlModifierSnippet(state:GlRenderState, snippet:GlModifierSnippet):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'modifierSnippetRegistry'), null))) { FlightRuntime.setField(runtime, 'modifierSnippetRegistry', FlightRuntime.callValue(createModifierRegistry, cast ([] : Array<Dynamic>))); }
     FlightRuntime.callValue(registerModifier, cast ([FlightRuntime.field(runtime, 'modifierSnippetRegistry'), snippet] : Array<Dynamic>));
   }
 
-  @:keep public static function registerIridescencePbrGlMaterial(state:GlRenderState):Void {
+  public static function registerIridescencePbrGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.IridescencePbrMaterialKind, iridescencePbrGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerLambertGlMaterial(state:GlRenderState):Void {
+  public static function registerLambertGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.LambertMaterialKind, lambertGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerMatcapGlMaterial(state:GlRenderState):Void {
+  public static function registerMatcapGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.MatcapMaterialKind, matcapGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerNormalGlMaterial(state:GlRenderState):Void {
+  public static function registerNormalGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.NormalMaterialKind, normalGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerPhongGlMaterial(state:GlRenderState):Void {
+  public static function registerPhongGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.PhongMaterialKind, phongGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerShadedGlMaterial(state:GlRenderState):Void {
+  public static function registerShadedGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.ShadedMaterialKind, shadedGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerSheenPbrGlMaterial(state:GlRenderState):Void {
+  public static function registerSheenPbrGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.SheenPbrMaterialKind, sheenPbrGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerSpecularGlossinessPbrGlMaterial(state:GlRenderState):Void {
+  public static function registerSpecularGlossinessPbrGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.SpecularGlossinessPbrMaterialKind, specularGlossinessPbrGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerSpecularPbrGlMaterial(state:GlRenderState):Void {
+  public static function registerSpecularPbrGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.SpecularPbrMaterialKind, specularPbrGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerStandardPbrGlMaterial(state:GlRenderState):Void {
+  public static function registerStandardPbrGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.StandardPbrMaterialKind, standardPbrGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerSubsurfacePbrGlMaterial(state:GlRenderState):Void {
+  public static function registerSubsurfacePbrGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.SubsurfacePbrMaterialKind, subsurfacePbrGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerToonGlMaterial(state:GlRenderState):Void {
+  public static function registerToonGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.ToonMaterialKind, toonGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerTransmissionVolumePbrGlMaterial(state:GlRenderState):Void {
+  public static function registerTransmissionVolumePbrGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.TransmissionVolumePbrMaterialKind, transmissionVolumePbrGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerUnlitGlMaterial(state:GlRenderState):Void {
+  public static function registerUnlitGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.UnlitMaterialKind, unlitGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerVertexColorGlMaterial(state:GlRenderState):Void {
+  public static function registerVertexColorGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.VertexColorMaterialKind, vertexColorGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerWireframeGlMaterial(state:GlRenderState):Void {
+  public static function registerWireframeGlMaterial(state:GlRenderState):Void {
     FlightRuntime.callValue(registerGlMeshMaterialRenderer, cast ([state, Types.WireframeMaterialKind, wireframeGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function renderGlBakeCubeFaces__glEnvironmentIblBake(state:GlRenderState, fbo:Dynamic, program:GlBakeProgram__glEnvironmentIblBake, cube:Dynamic, size:Float, mipLevel:Float):Void {
+  public static function renderGlBakeCubeFaces__glEnvironmentIblBake(state:GlRenderState, fbo:Dynamic, program:GlBakeProgram__glEnvironmentIblBake, cube:Dynamic, size:Float, mipLevel:Float):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     gl = FlightRuntime.field(state, 'gl');
     FlightRuntime.callProperty(gl, 'viewport', cast ([0.0, 0.0, size, size] : Array<Dynamic>));
@@ -3088,12 +3085,12 @@ class SceneGl {
     FlightRuntime.voidValue(fbo);
   }
 
-  @:keep public static function resolveGlLitLocations(gl:Dynamic, program:Dynamic):Dynamic {
+  public static function resolveGlLitLocations(gl:Dynamic, program:Dynamic):Dynamic {
     return cast { locAmbientCount: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_ambientCount'] : Array<Dynamic>)), locAmbientRadiance: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_ambientRadiance'] : Array<Dynamic>)), locCameraPosition: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_cameraPosition'] : Array<Dynamic>)), locDirectional: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_directional'] : Array<Dynamic>)), locDirectionalCount: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_directionalCount'] : Array<Dynamic>)), locDirectionalRadiance: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_directionalRadiance'] : Array<Dynamic>)), locHemisphereCount: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_hemisphereCount'] : Array<Dynamic>)), locHemisphereLights: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_hemisphereLights'] : Array<Dynamic>)), locIblBrdf: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_iblBrdf'] : Array<Dynamic>)), locIblEnabled: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_iblEnabled'] : Array<Dynamic>)), locIblIntensity: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_iblIntensity'] : Array<Dynamic>)), locIblIrradiance: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_iblIrradiance'] : Array<Dynamic>)), locIblMaxMip: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_iblMaxMip'] : Array<Dynamic>)), locIblPrefiltered: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_iblPrefiltered'] : Array<Dynamic>)), locPointCount: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_pointCount'] : Array<Dynamic>)), locPointLights: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_pointLights'] : Array<Dynamic>)), locShadowEnabled: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_shadowEnabled'] : Array<Dynamic>)), locShadowMap: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_shadowMap'] : Array<Dynamic>)), locShadowMatrix: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_shadowMatrix'] : Array<Dynamic>)), locSpotCount: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_spotCount'] : Array<Dynamic>)), locSpotLights: FlightRuntime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_spotLights'] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function resolveGlMeshMaterialRenderer(state:GlRenderState, material:Null<Material>):Null<GlMeshMaterialRenderer> {
+  public static function resolveGlMeshMaterialRenderer(state:GlRenderState, material:Null<Material>):Null<GlMeshMaterialRenderer> {
     var registry:Dynamic = cast FlightRuntime.UNDEFINED;
     registry = FlightRuntime.field(FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry');
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(material, null))) {
@@ -3104,7 +3101,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function resolveGlModifierSnippet(state:GlRenderState, kind:ModifierKind):Null<GlModifierSnippet> {
+  public static function resolveGlModifierSnippet(state:GlRenderState, kind:ModifierKind):Null<GlModifierSnippet> {
     var registry:Dynamic = cast FlightRuntime.UNDEFINED;
     registry = FlightRuntime.field(FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'modifierSnippetRegistry');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(registry, null))) { return cast null; }
@@ -3112,7 +3109,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function resolveGlVertexFormat__glMeshUpload(gl:Dynamic, format:String):Array<Dynamic> {
+  public static function resolveGlVertexFormat__glMeshUpload(gl:Dynamic, format:String):Array<Dynamic> {
     {
       var __switchValue = format;
       if (__switchValue == 'float32x2') {
@@ -3140,7 +3137,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function resolveSubsetMaterial__drawGlScene(mesh:Mesh, subsetIndex:Float):Null<Material> {
+  public static function resolveSubsetMaterial__drawGlScene(mesh:Mesh, subsetIndex:Float):Null<Material> {
     var materials:Dynamic = cast FlightRuntime.UNDEFINED;
     materials = FlightRuntime.field(mesh, 'materials');
     return cast FlightRuntime.select(FlightRuntime.compare(subsetIndex, FlightRuntime.field(materials, 'length'), '<'), function():Dynamic return cast FlightRuntime.getIndex(materials, subsetIndex), function():Dynamic return cast null);
@@ -3217,20 +3214,20 @@ class SceneGl {
 
   public static final scratchViewProjection__glMeshProgram:Dynamic = FlightRuntime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 
-  @:keep public static function setGlMeshCameraPosition(gl:Dynamic, locCameraPosition:Null<Dynamic>, camera:Camera):Void {
+  public static function setGlMeshCameraPosition(gl:Dynamic, locCameraPosition:Null<Dynamic>, camera:Camera):Void {
     FlightRuntime.callValue(inverseMatrix4, cast ([SceneGl.scratchInverseView__glMeshProgram, FlightRuntime.field(camera, 'view')] : Array<Dynamic>));
     FlightRuntime.callValue(getMatrix4Position, cast ([SceneGl.scratchCameraPosition__glMeshProgram, SceneGl.scratchInverseView__glMeshProgram] : Array<Dynamic>));
     FlightRuntime.callProperty(gl, 'uniform3f', cast ([locCameraPosition, FlightRuntime.field(SceneGl.scratchCameraPosition__glMeshProgram, 'x'), FlightRuntime.field(SceneGl.scratchCameraPosition__glMeshProgram, 'y'), FlightRuntime.field(SceneGl.scratchCameraPosition__glMeshProgram, 'z')] : Array<Dynamic>));
   }
 
-  @:keep public static function setGlMeshViewProjection(gl:Dynamic, locViewProjection:Null<Dynamic>, camera:Camera):Void {
+  public static function setGlMeshViewProjection(gl:Dynamic, locViewProjection:Null<Dynamic>, camera:Camera):Void {
     var aspect:Dynamic = cast FlightRuntime.UNDEFINED;
     aspect = FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(camera, 'projection'), 'kind'), 'perspective'), function():Dynamic return cast FlightRuntime.field(FlightRuntime.field(camera, 'projection'), 'aspect'), function():Dynamic return cast 1.0);
     FlightRuntime.callValue(getCameraViewProjectionMatrix4, cast ([SceneGl.scratchViewProjection__glMeshProgram, camera, FlightRuntime.select(!FlightRuntime.strictEquals(aspect, 0.0), function():Dynamic return cast aspect, function():Dynamic return cast 1.0)] : Array<Dynamic>));
     FlightRuntime.callProperty(gl, 'uniformMatrix4fv', cast ([locViewProjection, false, FlightRuntime.field(SceneGl.scratchViewProjection__glMeshProgram, 'm')] : Array<Dynamic>));
   }
 
-  @:keep public static function setGlSceneTime(state:GlRenderState, timeSeconds:Float):Void {
+  public static function setGlSceneTime(state:GlRenderState, timeSeconds:Float):Void {
     FlightRuntime.setField(FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'time', timeSeconds);
   }
 
@@ -3312,7 +3309,7 @@ class SceneGl {
 
   public static final SKYBOX_VERTEX__glEnvironmentSkybox:Dynamic = '#version 300 es\nlayout(location = 0) in vec2 a_position;\nout vec2 v_ndc;\nvoid main() {\n  v_ndc = a_position;\n  // Emit at the far plane (z = w) so the backdrop sits behind every drawn fragment.\n  gl_Position = vec4(a_position, 1.0, 1.0);\n}\n';
 
-  @:keep public static function solveMetallic__specularGlossinessPbrGlMeshMaterialRenderer(diffuse:Float, specular:Float, oneMinusSpecularStrength:Float):Float {
+  public static function solveMetallic__specularGlossinessPbrGlMeshMaterialRenderer(diffuse:Float, specular:Float, oneMinusSpecularStrength:Float):Float {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     var c:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3538,7 +3535,7 @@ class SceneGl {
   FlightRuntime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
 } };
 
-  @:keep public static function updateGlEnvironmentCubeFace(state:GlRenderState, face:Float, image:ImageResource):Bool {
+  public static function updateGlEnvironmentCubeFace(state:GlRenderState, face:Float, image:ImageResource):Bool {
     var texture:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     texture = FlightRuntime.field(FlightRuntime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'environmentSourceCube');
@@ -3551,7 +3548,7 @@ class SceneGl {
     return cast null;
   }
 
-  @:keep public static function uploadCustomShaderMaterialTextures__customShaderGlMeshMaterialRenderer(state:GlRenderState, program:Dynamic, material:CustomShaderMaterial):Void {
+  public static function uploadCustomShaderMaterialTextures__customShaderGlMeshMaterialRenderer(state:GlRenderState, program:Dynamic, material:CustomShaderMaterial):Void {
     var textures:Dynamic = cast FlightRuntime.UNDEFINED;
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var unit:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3571,7 +3568,7 @@ class SceneGl {
     }
   }
 
-  @:keep public static function uploadCustomShaderMaterialUniforms__customShaderGlMeshMaterialRenderer(gl:Dynamic, program:Dynamic, material:CustomShaderMaterial):Void {
+  public static function uploadCustomShaderMaterialUniforms__customShaderGlMeshMaterialRenderer(gl:Dynamic, program:Dynamic, material:CustomShaderMaterial):Void {
     var uniforms:Dynamic = cast FlightRuntime.UNDEFINED;
     uniforms = FlightRuntime.field(material, 'uniforms');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(uniforms, null))) { return; }
@@ -3668,7 +3665,7 @@ class SceneGl {
   return cast source;
 } }]);
 
-  @:keep public static function warnGlCustomShaderUniformTypes__enableGlSceneCustomShaderGuards(state:GlRenderState, program:Dynamic, shaderKey:String):Void {
+  public static function warnGlCustomShaderUniformTypes__enableGlSceneCustomShaderGuards(state:GlRenderState, program:Dynamic, shaderKey:String):Void {
     var gl:Dynamic = cast FlightRuntime.UNDEFINED;
     var expected:Dynamic = cast FlightRuntime.UNDEFINED;
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3690,7 +3687,7 @@ class SceneGl {
     }
   }
 
-  @:keep public static function warnGlSceneDrawnToCanvas__enableGlSceneColorSpaceGuards():Void {
+  public static function warnGlSceneDrawnToCanvas__enableGlSceneColorSpaceGuards():Void {
     FlightRuntime.callValue(logOnce, cast (['scene-gl:scene-drawn-to-canvas-unencoded', LogLevel.Warn, { message: 'drawGlScene: scene drawn directly to the canvas — linear radiance is not sRGB-encoded (output will be dark). Render into a target and present with presentGlScene, or draw through the effect pipeline.' }, 'scene-gl'] : Array<Dynamic>));
   }
 

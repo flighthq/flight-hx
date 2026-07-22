@@ -17,12 +17,9 @@ import flight.Types.AssetLoaderAdapter;
 import flight.Types.AssetManifest;
 import flight.Types.AssetType;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Assets")
 class Assets {
-  @:keep public static function acquireAsset<T>(library:AssetLibrary, id:String):flight.internal.FlightPromise<Dynamic> {
+  public static function acquireAsset<T>(library:AssetLibrary, id:String):flight.internal.FlightPromise<Dynamic> {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var descriptor:Dynamic = cast FlightRuntime.UNDEFINED;
     var adapter:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -61,14 +58,14 @@ class Assets {
     return cast null;
   }
 
-  @:keep public static function createAssetLibrary():AssetLibrary {
+  public static function createAssetLibrary():AssetLibrary {
     var runtime:AssetLibraryRuntime = cast FlightRuntime.UNDEFINED;
     runtime = { adapters: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), descriptors: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), entries: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), groups: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };
     return cast { runtime: runtime };
     return cast null;
   }
 
-  @:keep public static function disposeAssetEntry__assetLibrary(runtime:AssetLibraryRuntime, id:String, entry:AssetEntry):Void {
+  public static function disposeAssetEntry__assetLibrary(runtime:AssetLibraryRuntime, id:String, entry:AssetEntry):Void {
     var descriptor:Dynamic = cast FlightRuntime.UNDEFINED;
     var adapter:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callProperty(FlightRuntime.field(runtime, 'entries'), 'delete', cast ([id] : Array<Dynamic>));
@@ -78,7 +75,7 @@ class Assets {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(adapter, FlightRuntime.UNDEFINED))) { FlightRuntime.callProperty(adapter, 'dispose', cast ([FlightRuntime.field(entry, 'value')] : Array<Dynamic>)); }
   }
 
-  @:keep public static function disposeAssetLibrary(library:AssetLibrary):Void {
+  public static function disposeAssetLibrary(library:AssetLibrary):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.field(library, 'runtime');
     for (__iteration0 in FlightRuntime.iterable(FlightRuntime.field(runtime, 'entries'))) {
@@ -95,59 +92,58 @@ class Assets {
     FlightRuntime.callProperty(FlightRuntime.field(runtime, 'groups'), 'clear', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function getAsset<T>(library:AssetLibrary, id:String):Null<Dynamic> {
+  public static function getAsset<T>(library:AssetLibrary, id:String):Null<Dynamic> {
     var entry:Dynamic = cast FlightRuntime.UNDEFINED;
     entry = FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.field(library, 'runtime'), 'entries'), 'get', cast ([id] : Array<Dynamic>));
     return cast FlightRuntime.select(FlightRuntime.andValue(!FlightRuntime.strictEquals(entry, FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.field(entry, 'resident')), function():Dynamic return cast (cast FlightRuntime.field(entry, 'value') : Dynamic), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getAssetRefCount(library:AssetLibrary, id:String):Float {
+  public static function getAssetRefCount(library:AssetLibrary, id:String):Float {
     var entry:Dynamic = cast FlightRuntime.UNDEFINED;
     entry = FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.field(library, 'runtime'), 'entries'), 'get', cast ([id] : Array<Dynamic>));
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(entry, FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.field(entry, 'refcount'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadAssetGroup(library:AssetLibrary, name:String, ?options:AssetGroupLoadOptions):flight.internal.FlightPromise<flight.internal.FlightNothing> {
-    var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
-    var ids:Dynamic = cast FlightRuntime.UNDEFINED;
-    var loader:Dynamic = cast FlightRuntime.UNDEFINED;
-    var progress:Dynamic = cast FlightRuntime.UNDEFINED;
-    runtime = FlightRuntime.field(library, 'runtime');
-    ids = FlightRuntime.callProperty(FlightRuntime.field(runtime, 'groups'), 'get', cast ([name] : Array<Dynamic>));
-    if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(ids, FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(ids, 'length'), 0.0)))) { #if js return; #else return cast null; #end }
-    loader = FlightRuntime.callValue(createResourceLoader, cast ([] : Array<Dynamic>));
-    progress = FlightRuntime.optionalField(options, 'progress');
-    if (FlightRuntime.truthy(!FlightRuntime.strictEquals(progress, FlightRuntime.UNDEFINED))) {
+  public static function loadAssetGroup(library:AssetLibrary, name:String, ?options:AssetGroupLoadOptions):flight.internal.FlightPromise<flight.internal.FlightNothing> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<flight.internal.FlightNothing> {
+      var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
+      var ids:Dynamic = cast FlightRuntime.UNDEFINED;
+      var loader:Dynamic = cast FlightRuntime.UNDEFINED;
+      var progress:Dynamic = cast FlightRuntime.UNDEFINED;
+      runtime = FlightRuntime.field(library, 'runtime');
+      ids = FlightRuntime.callProperty(FlightRuntime.field(runtime, 'groups'), 'get', cast ([name] : Array<Dynamic>));
+      if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(ids, FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(ids, 'length'), 0.0)))) { #if js return; #else return cast null; #end }
+      loader = FlightRuntime.callValue(createResourceLoader, cast ([] : Array<Dynamic>));
+      progress = FlightRuntime.optionalField(options, 'progress');
+      if (FlightRuntime.truthy(!FlightRuntime.strictEquals(progress, FlightRuntime.UNDEFINED))) {
   FlightRuntime.callValue(connectSignal, cast ([FlightRuntime.field(loader, 'onProgress'), function(loaded:Float, total:Float) {
   FlightRuntime.callValue(emitSignal, cast ([progress, { loaded: loaded, total: total }] : Array<Dynamic>));
 }] : Array<Dynamic>));
 }
-    for (id in FlightRuntime.iterable(ids)) {
-      var entry:Dynamic = FlightRuntime.callProperty(FlightRuntime.field(runtime, 'entries'), 'get', cast ([id] : Array<Dynamic>));
-      if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(entry, FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.field(entry, 'resident')))) {
+      for (id in FlightRuntime.iterable(ids)) {
+        var entry:Dynamic = FlightRuntime.callProperty(FlightRuntime.field(runtime, 'entries'), 'get', cast ([id] : Array<Dynamic>));
+        if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(entry, FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.field(entry, 'resident')))) {
   FlightRuntime.voidValue(FlightRuntime.callValue(acquireAsset, cast ([library, id] : Array<Dynamic>)));
   continue;
 }
-      FlightRuntime.callValue(queueResourceLoad, cast ([loader, function() return FlightRuntime.callValue(acquireAsset, cast ([library, id] : Array<Dynamic>))] : Array<Dynamic>));
-    }
-    flight.internal.FlightAsync.awaitValue(FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(resolve:Dynamic) {
+        FlightRuntime.callValue(queueResourceLoad, cast ([loader, function() return FlightRuntime.callValue(acquireAsset, cast ([library, id] : Array<Dynamic>))] : Array<Dynamic>));
+      }
+      flight.internal.FlightAsync.awaitValue(FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(resolve:Dynamic) {
   FlightRuntime.callValue(connectSignal, cast ([FlightRuntime.field(loader, 'onComplete'), function() return FlightRuntime.callValue(resolve, cast ([] : Array<Dynamic>))] : Array<Dynamic>));
   FlightRuntime.callValue(startResourceLoad, cast ([loader] : Array<Dynamic>));
 }]));
-    FlightRuntime.callValue(disposeResourceLoader, cast ([loader] : Array<Dynamic>));
-    #if js
-    return;
-    #else
-    return cast null;
-    #end
+      FlightRuntime.callValue(disposeResourceLoader, cast ([loader] : Array<Dynamic>));
+      #if js
+      return;
+      #else
+      return cast null;
+      #end
+    })();
   }
 
-  @:keep public static function loadAssetManifest(library:AssetLibrary, manifest:AssetManifest):Void {
+  public static function loadAssetManifest(library:AssetLibrary, manifest:AssetManifest):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.field(library, 'runtime');
     for (descriptor in FlightRuntime.iterable(manifest)) {
@@ -162,11 +158,11 @@ class Assets {
     }
   }
 
-  @:keep public static function registerAssetLoader<T>(library:AssetLibrary, type:AssetType, adapter:AssetLoaderAdapter<Dynamic>):Void {
+  public static function registerAssetLoader<T>(library:AssetLibrary, type:AssetType, adapter:AssetLoaderAdapter<Dynamic>):Void {
     FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.field(library, 'runtime'), 'adapters'), 'set', cast ([type, (cast adapter : AssetLoaderAdapter<Dynamic>)] : Array<Dynamic>));
   }
 
-  @:keep public static function releaseAsset(library:AssetLibrary, id:String):Void {
+  public static function releaseAsset(library:AssetLibrary, id:String):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var entry:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.field(library, 'runtime');
@@ -177,7 +173,7 @@ class Assets {
     FlightRuntime.callValue(Assets.disposeAssetEntry__assetLibrary, cast ([runtime, id, entry] : Array<Dynamic>));
   }
 
-  @:keep public static function releaseAssetGroup(library:AssetLibrary, name:String):Void {
+  public static function releaseAssetGroup(library:AssetLibrary, name:String):Void {
     var ids:Dynamic = cast FlightRuntime.UNDEFINED;
     ids = FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.field(library, 'runtime'), 'groups'), 'get', cast ([name] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(ids, FlightRuntime.UNDEFINED))) { return; }

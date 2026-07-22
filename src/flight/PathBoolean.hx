@@ -20,9 +20,6 @@ import flight.Types.PathOffsetOptions;
 
 typedef ArrangementSegment__martinezKernel = { var ax:Float; var ay:Float; var bx:Float; var by:Float; var isSubject:Bool; var windingDelta:Float; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.DirectedGraph__martinezKernel")
 class DirectedGraph__martinezKernel {
   private final keys:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
@@ -122,9 +119,6 @@ class DirectedGraph__martinezKernel {
   }
 }
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.EventHeap__martinezKernel")
 class EventHeap__martinezKernel {
   private final data:Array<Dynamic> = cast ([] : Array<Dynamic>);
@@ -181,14 +175,11 @@ typedef SweepEvent__martinezKernel = { var x:Float; var y:Float; var left:Bool; 
 
 typedef UniqueSegment__martinezKernel = { var ax:Float; var ay:Float; var bx:Float; var by:Float; var subjectDelta:Float; var clipDelta:Float; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.PathBoolean")
 class PathBoolean {
   public static var _backend__pathBooleanBackend:Null<PathBooleanBackend> = FlightRuntime.explicitNull();
 
-  @:keep public static function addEdge__martinezKernel(ax:Float, ay:Float, bx:Float, by:Float, isSubject:Bool, heap:EventHeap__martinezKernel):Void {
+  public static function addEdge__martinezKernel(ax:Float, ay:Float, bx:Float, by:Float, isSubject:Bool, heap:EventHeap__martinezKernel):Void {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     a = FlightRuntime.callValue(PathBoolean.createEvent__martinezKernel, cast ([ax, ay, isSubject] : Array<Dynamic>));
@@ -206,12 +197,12 @@ class PathBoolean {
     FlightRuntime.callProperty(heap, 'push', cast ([b] : Array<Dynamic>));
   }
 
-  @:keep public static function approxEqual__martinezKernel(a:Float, b:Float):Bool {
+  public static function approxEqual__martinezKernel(a:Float, b:Float):Bool {
     return cast FlightRuntime.compare(FlightRuntime.callProperty(HxMath, 'abs', cast ([(a - b)] : Array<Dynamic>)), PathBoolean.vertexSnap__martinezKernel, '<=');
     return cast null;
   }
 
-  @:keep public static function booleanPaths(subject:Path, clip:Path, operation:PathBooleanOperation, ?out:Path, ?options:PathBooleanOptions):Path {
+  public static function booleanPaths(subject:Path, clip:Path, operation:PathBooleanOperation, ?out:Path, ?options:PathBooleanOptions):Path {
     var fillRule:Dynamic = cast FlightRuntime.UNDEFINED;
     var subjectContours:Dynamic = cast FlightRuntime.UNDEFINED;
     var clipContours:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -224,7 +215,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function buildArrangement__martinezKernel(subject:Array<PathBooleanContour>, clip:Array<PathBooleanContour>):Array<ArrangementSegment__martinezKernel> {
+  public static function buildArrangement__martinezKernel(subject:Array<PathBooleanContour>, clip:Array<PathBooleanContour>):Array<ArrangementSegment__martinezKernel> {
     var heap:Dynamic = cast FlightRuntime.UNDEFINED;
     var status:Array<Dynamic> = cast FlightRuntime.UNDEFINED;
     var segments:Array<ArrangementSegment__martinezKernel> = cast FlightRuntime.UNDEFINED;
@@ -257,7 +248,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function buildOffsetRing__offsetPath(vertices:Array<Float>, signedDelta:Float, capIndices:Dynamic, join:PathOffsetJoin, end:PathOffsetEnd, miterLimit:Float, arcTolerance:Float):Array<Float> {
+  public static function buildOffsetRing__offsetPath(vertices:Array<Float>, signedDelta:Float, capIndices:Dynamic, join:PathOffsetJoin, end:PathOffsetEnd, miterLimit:Float, arcTolerance:Float):Array<Float> {
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     var dirX:Dynamic = cast FlightRuntime.UNDEFINED;
     var dirY:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -307,7 +298,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function classifySegments__martinezKernel(unique:Array<UniqueSegment__martinezKernel>, operation:PathBooleanOperation, fillRule:PathBooleanFillRule):Array<Array<Float>> {
+  public static function classifySegments__martinezKernel(unique:Array<UniqueSegment__martinezKernel>, operation:PathBooleanOperation, fillRule:PathBooleanFillRule):Array<Array<Float>> {
     var kept:Array<Array<Float>> = cast FlightRuntime.UNDEFINED;
     kept = cast ([] : Array<Dynamic>);
     for (seg in FlightRuntime.iterable(unique)) {
@@ -333,7 +324,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function combine__martinezKernel(operation:PathBooleanOperation, inSubject:Bool, inClip:Bool):Bool {
+  public static function combine__martinezKernel(operation:PathBooleanOperation, inSubject:Bool, inClip:Bool):Bool {
     {
       var __switchValue = operation;
       if (__switchValue == 'union') {
@@ -352,7 +343,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function compareEvents__martinezKernel(e1:Dynamic, e2:Dynamic):Float {
+  public static function compareEvents__martinezKernel(e1:Dynamic, e2:Dynamic):Float {
     var area:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(e1, 'x'), FlightRuntime.field(e2, 'x')))) { return cast FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(e1, 'x'), FlightRuntime.field(e2, 'x'), '<'), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0); }
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(e1, 'y'), FlightRuntime.field(e2, 'y')))) { return cast FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(e1, 'y'), FlightRuntime.field(e2, 'y'), '<'), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0); }
@@ -365,7 +356,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function compareSegments__martinezKernel(le1:Dynamic, le2:Dynamic):Float {
+  public static function compareSegments__martinezKernel(le1:Dynamic, le2:Dynamic):Float {
     var a1x:Dynamic = cast FlightRuntime.UNDEFINED;
     var a1y:Dynamic = cast FlightRuntime.UNDEFINED;
     var a2x:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -391,7 +382,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function computeMartinezBoolean__martinezKernel(subject:Array<PathBooleanContour>, clip:Array<PathBooleanContour>, operation:PathBooleanOperation, fillRule:PathBooleanFillRule):Array<PathBooleanContour> {
+  public static function computeMartinezBoolean__martinezKernel(subject:Array<PathBooleanContour>, clip:Array<PathBooleanContour>, operation:PathBooleanOperation, fillRule:PathBooleanFillRule):Array<PathBooleanContour> {
     var segments:Dynamic = cast FlightRuntime.UNDEFINED;
     var unique:Dynamic = cast FlightRuntime.UNDEFINED;
     var kept:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -406,7 +397,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function computeVertexSnap__martinezKernel(subject:Array<PathBooleanContour>, clip:Array<PathBooleanContour>):Float {
+  public static function computeVertexSnap__martinezKernel(subject:Array<PathBooleanContour>, clip:Array<PathBooleanContour>):Float {
     var minX:Dynamic = cast FlightRuntime.UNDEFINED;
     var minY:Dynamic = cast FlightRuntime.UNDEFINED;
     var maxX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -437,17 +428,17 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function createDefaultPathBooleanBackend():PathBooleanBackend {
+  public static function createDefaultPathBooleanBackend():PathBooleanBackend {
     return cast FlightRuntime.callValue(createMartinezPathBooleanBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createEvent__martinezKernel(x:Float, y:Float, isSubject:Bool):Dynamic {
+  public static function createEvent__martinezKernel(x:Float, y:Float, isSubject:Bool):Dynamic {
     return cast { x: x, y: y, left: false, otherEvent: (cast (cast null : Dynamic) : Dynamic), isSubject: isSubject, id: PathBoolean.nextEventId__martinezKernel++, windingDelta: 0.0 };
     return cast null;
   }
 
-  @:keep public static function createMartinezPathBooleanBackend():PathBooleanBackend {
+  public static function createMartinezPathBooleanBackend():PathBooleanBackend {
     return cast { computePathBoolean: function(subject:Array<PathBooleanContour>, clip:Array<PathBooleanContour>, operation:PathBooleanOperation, fillRule:PathBooleanFillRule) {
   return cast FlightRuntime.callValue(PathBoolean.computeMartinezBoolean__martinezKernel, cast ([subject, clip, operation, fillRule] : Array<Dynamic>));
 } };
@@ -458,16 +449,16 @@ class PathBoolean {
 
   public static final DEFAULT_MITER_LIMIT__offsetPath:Dynamic = 2.0;
 
-  @:keep public static function differencePaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
+  public static function differencePaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
     return cast FlightRuntime.callValue(booleanPaths, cast ([a, b, 'difference', out, options] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function divideIfInterior__martinezKernel(le:Dynamic, x:Float, y:Float, heap:EventHeap__martinezKernel):Void {
+  public static function divideIfInterior__martinezKernel(le:Dynamic, x:Float, y:Float, heap:EventHeap__martinezKernel):Void {
     if (FlightRuntime.truthy(FlightRuntime.callValue(PathBoolean.pointStrictlyInside__martinezKernel, cast ([FlightRuntime.field(le, 'x'), FlightRuntime.field(le, 'y'), FlightRuntime.field(FlightRuntime.field(le, 'otherEvent'), 'x'), FlightRuntime.field(FlightRuntime.field(le, 'otherEvent'), 'y'), x, y] : Array<Dynamic>)))) { FlightRuntime.callValue(PathBoolean.divideSegment__martinezKernel, cast ([le, x, y, heap] : Array<Dynamic>)); }
   }
 
-  @:keep public static function divideSegment__martinezKernel(le:Dynamic, x:Float, y:Float, heap:EventHeap__martinezKernel):Void {
+  public static function divideSegment__martinezKernel(le:Dynamic, x:Float, y:Float, heap:EventHeap__martinezKernel):Void {
     var right:Dynamic = cast FlightRuntime.UNDEFINED;
     var newRight:Dynamic = cast FlightRuntime.UNDEFINED;
     var newLeft:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -485,7 +476,7 @@ class PathBoolean {
     FlightRuntime.callProperty(heap, 'push', cast ([newRight] : Array<Dynamic>));
   }
 
-  @:keep public static function emitOffsetEndCap__offsetPath(ring:Array<Float>, vx:Float, vy:Float, previousEndX:Float, previousEndY:Float, thisStartX:Float, thisStartY:Float, previousDirX:Float, previousDirY:Float, thisDirX:Float, thisDirY:Float, radius:Float, end:PathOffsetEnd, arcTolerance:Float):Void {
+  public static function emitOffsetEndCap__offsetPath(ring:Array<Float>, vx:Float, vy:Float, previousEndX:Float, previousEndY:Float, thisStartX:Float, thisStartY:Float, previousDirX:Float, previousDirY:Float, thisDirX:Float, thisDirY:Float, radius:Float, end:PathOffsetEnd, arcTolerance:Float):Void {
     FlightRuntime.pushMany(ring, cast ([previousEndX, previousEndY] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(end, 'square'))) {
   FlightRuntime.pushMany(ring, cast ([(previousEndX + (radius * previousDirX)), (previousEndY + (radius * previousDirY))] : Array<Dynamic>));
@@ -500,7 +491,7 @@ class PathBoolean {
     FlightRuntime.pushMany(ring, cast ([thisStartX, thisStartY] : Array<Dynamic>));
   }
 
-  @:keep public static function emitOffsetJoin__offsetPath(ring:Array<Float>, vx:Float, vy:Float, previousEndX:Float, previousEndY:Float, thisStartX:Float, thisStartY:Float, previousDirX:Float, previousDirY:Float, thisDirX:Float, thisDirY:Float, signedDelta:Float, join:PathOffsetJoin, miterLimit:Float, arcTolerance:Float):Void {
+  public static function emitOffsetJoin__offsetPath(ring:Array<Float>, vx:Float, vy:Float, previousEndX:Float, previousEndY:Float, thisStartX:Float, thisStartY:Float, previousDirX:Float, previousDirY:Float, thisDirX:Float, thisDirY:Float, signedDelta:Float, join:PathOffsetJoin, miterLimit:Float, arcTolerance:Float):Void {
     var turn:Dynamic = cast FlightRuntime.UNDEFINED;
     var convex:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.pushMany(ring, cast ([previousEndX, previousEndY] : Array<Dynamic>));
@@ -538,7 +529,7 @@ class PathBoolean {
 
   public static final EMPTY_CONTOURS__unionAllPaths:Array<PathBooleanContour> = cast ([] : Array<Dynamic>);
 
-  @:keep public static function fillQueue__martinezKernel(contours:Array<PathBooleanContour>, isSubject:Bool, heap:EventHeap__martinezKernel):Void {
+  public static function fillQueue__martinezKernel(contours:Array<PathBooleanContour>, isSubject:Bool, heap:EventHeap__martinezKernel):Void {
     for (contour in FlightRuntime.iterable(contours)) {
       var count:Dynamic = (Std.int(FlightRuntime.field(contour, 'length')) >> Std.int(1.0));
       if (FlightRuntime.truthy(FlightRuntime.compare(count, 2.0, '<'))) { continue; }
@@ -562,7 +553,7 @@ class PathBoolean {
     }
   }
 
-  @:keep public static function findStatus__martinezKernel(status:Array<Dynamic>, event:Dynamic):Float {
+  public static function findStatus__martinezKernel(status:Array<Dynamic>, event:Dynamic):Float {
     {
       var i:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(i, FlightRuntime.field(status, 'length'), '<'))) {
@@ -574,7 +565,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function getCleanContourVertices__offsetPath(contour:Array<Float>, closed:Bool, pointEpsSq:Float):Array<Float> {
+  public static function getCleanContourVertices__offsetPath(contour:Array<Float>, closed:Bool, pointEpsSq:Float):Array<Float> {
     var out:Array<Float> = cast FlightRuntime.UNDEFINED;
     out = cast ([] : Array<Dynamic>);
     {
@@ -600,7 +591,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function getContourPointEps__offsetPath(contours:Array<Array<Float>>):Float {
+  public static function getContourPointEps__offsetPath(contours:Array<Array<Float>>):Float {
     var minX:Dynamic = cast FlightRuntime.UNDEFINED;
     var minY:Dynamic = cast FlightRuntime.UNDEFINED;
     var maxX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -629,7 +620,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function getOpenContourLoop__offsetPath(vertices:Array<Float>):Array<Float> {
+  public static function getOpenContourLoop__offsetPath(vertices:Array<Float>):Array<Float> {
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     var loop:Dynamic = cast FlightRuntime.UNDEFINED;
     count = (FlightRuntime.field(vertices, 'length') / 2.0);
@@ -645,20 +636,20 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function getPathBooleanBackend():PathBooleanBackend {
+  public static function getPathBooleanBackend():PathBooleanBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(PathBoolean._backend__pathBooleanBackend, null))) { (PathBoolean._backend__pathBooleanBackend = cast (FlightRuntime.callValue(createDefaultPathBooleanBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast PathBoolean._backend__pathBooleanBackend;
     return cast null;
   }
 
-  @:keep public static function getRingOrientationSign__offsetPath(vertices:Array<Float>):Float {
+  public static function getRingOrientationSign__offsetPath(vertices:Array<Float>):Float {
     var sign:Dynamic = cast FlightRuntime.UNDEFINED;
     sign = FlightRuntime.sign(FlightRuntime.callValue(PathBoolean.getRingSignedArea__offsetPath, cast ([vertices] : Array<Dynamic>)));
     return cast FlightRuntime.select(FlightRuntime.strictEquals(sign, 0.0), function():Dynamic return cast 1.0, function():Dynamic return cast sign);
     return cast null;
   }
 
-  @:keep public static function getRingSignedArea__offsetPath(vertices:Array<Float>):Float {
+  public static function getRingSignedArea__offsetPath(vertices:Array<Float>):Float {
     var area:Dynamic = cast FlightRuntime.UNDEFINED;
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     area = 0.0;
@@ -675,7 +666,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function getShortSweep__offsetPath(startAngle:Float, endAngle:Float):Float {
+  public static function getShortSweep__offsetPath(startAngle:Float, endAngle:Float):Float {
     var sweep:Dynamic = cast FlightRuntime.UNDEFINED;
     sweep = (endAngle - startAngle);
     while (FlightRuntime.truthy(FlightRuntime.compare(sweep, -HxMath.PI, '<='))) { (sweep = cast ((sweep + PathBoolean.TWO_PI__offsetPath) : Dynamic)); }
@@ -686,7 +677,7 @@ class PathBoolean {
 
   public static final HALF_PI__offsetPath:Dynamic = (HxMath.PI / 2.0);
 
-  @:keep public static function insertStatus__martinezKernel(status:Array<Dynamic>, event:Dynamic):Float {
+  public static function insertStatus__martinezKernel(status:Array<Dynamic>, event:Dynamic):Float {
     var lo:Dynamic = cast FlightRuntime.UNDEFINED;
     var hi:Dynamic = cast FlightRuntime.UNDEFINED;
     lo = 0.0;
@@ -702,17 +693,17 @@ class PathBoolean {
 
   public static final INTERSECTION_EPS__martinezKernel:Dynamic = 1e-12;
 
-  @:keep public static function intersectPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
+  public static function intersectPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
     return cast FlightRuntime.callValue(booleanPaths, cast ([a, b, 'intersection', out, options] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function isBelow__martinezKernel(le:Dynamic, x:Float, y:Float):Bool {
+  public static function isBelow__martinezKernel(le:Dynamic, x:Float, y:Float):Bool {
     return cast FlightRuntime.select(FlightRuntime.field(le, 'left'), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callValue(PathBoolean.signedArea__martinezKernel, cast ([FlightRuntime.field(le, 'x'), FlightRuntime.field(le, 'y'), FlightRuntime.field(FlightRuntime.field(le, 'otherEvent'), 'x'), FlightRuntime.field(FlightRuntime.field(le, 'otherEvent'), 'y'), x, y] : Array<Dynamic>)), 0.0, '>'), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callValue(PathBoolean.signedArea__martinezKernel, cast ([FlightRuntime.field(FlightRuntime.field(le, 'otherEvent'), 'x'), FlightRuntime.field(FlightRuntime.field(le, 'otherEvent'), 'y'), FlightRuntime.field(le, 'x'), FlightRuntime.field(le, 'y'), x, y] : Array<Dynamic>)), 0.0, '>'));
     return cast null;
   }
 
-  @:keep public static function isClosedContour__offsetPath(contour:Array<Float>, pointEpsSq:Float):Bool {
+  public static function isClosedContour__offsetPath(contour:Array<Float>, pointEpsSq:Float):Bool {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -724,7 +715,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function isInside__martinezKernel(winding:Float, fillRule:PathBooleanFillRule):Bool {
+  public static function isInside__martinezKernel(winding:Float, fillRule:PathBooleanFillRule):Bool {
     {
       var __switchValue = fillRule;
       if (__switchValue == 'evenOdd') {
@@ -743,7 +734,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function mergeCoincidentSegments__martinezKernel(segments:Array<ArrangementSegment__martinezKernel>):Array<UniqueSegment__martinezKernel> {
+  public static function mergeCoincidentSegments__martinezKernel(segments:Array<ArrangementSegment__martinezKernel>):Array<UniqueSegment__martinezKernel> {
     var map:Dynamic = cast FlightRuntime.UNDEFINED;
     map = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
     for (seg in FlightRuntime.iterable(segments)) {
@@ -773,7 +764,7 @@ class PathBoolean {
 
   public static final NO_CAPS__offsetPath:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
 
-  @:keep public static function offsetPath(path:Path, delta:Float, ?options:PathOffsetOptions):Path {
+  public static function offsetPath(path:Path, delta:Float, ?options:PathOffsetOptions):Path {
     var join:Dynamic = cast FlightRuntime.UNDEFINED;
     var end:Dynamic = cast FlightRuntime.UNDEFINED;
     var miterLimit:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -819,12 +810,12 @@ class PathBoolean {
 
   public static final POINT_EPS_RELATIVE__offsetPath:Dynamic = 1e-9;
 
-  @:keep public static function pointOnEndpoint__martinezKernel(le:Dynamic, x:Float, y:Float):Bool {
+  public static function pointOnEndpoint__martinezKernel(le:Dynamic, x:Float, y:Float):Bool {
     return cast FlightRuntime.orValue(FlightRuntime.andValue(FlightRuntime.callValue(PathBoolean.approxEqual__martinezKernel, cast ([FlightRuntime.field(le, 'x'), x] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(PathBoolean.approxEqual__martinezKernel, cast ([FlightRuntime.field(le, 'y'), y] : Array<Dynamic>))), function():Dynamic return cast FlightRuntime.andValue(FlightRuntime.callValue(PathBoolean.approxEqual__martinezKernel, cast ([FlightRuntime.field(FlightRuntime.field(le, 'otherEvent'), 'x'), x] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(PathBoolean.approxEqual__martinezKernel, cast ([FlightRuntime.field(FlightRuntime.field(le, 'otherEvent'), 'y'), y] : Array<Dynamic>))));
     return cast null;
   }
 
-  @:keep public static function pointOrder__martinezKernel(ax:Float, ay:Float, bx:Float, by:Float):Float {
+  public static function pointOrder__martinezKernel(ax:Float, ay:Float, bx:Float, by:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.compare(ax, bx, '<'))) { return cast -1.0; }
     if (FlightRuntime.truthy(FlightRuntime.compare(ax, bx, '>'))) { return cast 1.0; }
     if (FlightRuntime.truthy(FlightRuntime.compare(ay, by, '<'))) { return cast -1.0; }
@@ -833,7 +824,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function pointStrictlyInside__martinezKernel(lx:Float, ly:Float, rx:Float, ry:Float, x:Float, y:Float):Bool {
+  public static function pointStrictlyInside__martinezKernel(lx:Float, ly:Float, rx:Float, ry:Float, x:Float, y:Float):Bool {
     var cross:Dynamic = cast FlightRuntime.UNDEFINED;
     var lenSq:Dynamic = cast FlightRuntime.UNDEFINED;
     var dot:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -846,7 +837,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function possibleIntersection__martinezKernel(le1:Dynamic, le2:Dynamic, heap:EventHeap__martinezKernel):Void {
+  public static function possibleIntersection__martinezKernel(le1:Dynamic, le2:Dynamic, heap:EventHeap__martinezKernel):Void {
     var inter:Dynamic = cast FlightRuntime.UNDEFINED;
     inter = FlightRuntime.callValue(PathBoolean.segmentIntersection__martinezKernel, cast ([FlightRuntime.field(le1, 'x'), FlightRuntime.field(le1, 'y'), FlightRuntime.field(FlightRuntime.field(le1, 'otherEvent'), 'x'), FlightRuntime.field(FlightRuntime.field(le1, 'otherEvent'), 'y'), FlightRuntime.field(le2, 'x'), FlightRuntime.field(le2, 'y'), FlightRuntime.field(FlightRuntime.field(le2, 'otherEvent'), 'x'), FlightRuntime.field(FlightRuntime.field(le2, 'otherEvent'), 'y')] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(inter, null))) { return; }
@@ -863,7 +854,7 @@ class PathBoolean {
     FlightRuntime.callValue(PathBoolean.divideIfInterior__martinezKernel, cast ([le2, FlightRuntime.field(FlightRuntime.field(le1, 'otherEvent'), 'x'), FlightRuntime.field(FlightRuntime.field(le1, 'otherEvent'), 'y'), heap] : Array<Dynamic>));
   }
 
-  @:keep public static function pushOffsetArc__offsetPath(ring:Array<Float>, cx:Float, cy:Float, radius:Float, startAngle:Float, sweep:Float, arcTolerance:Float):Void {
+  public static function pushOffsetArc__offsetPath(ring:Array<Float>, cx:Float, cy:Float, radius:Float, startAngle:Float, sweep:Float, arcTolerance:Float):Void {
     var maxAngle:Dynamic = cast FlightRuntime.UNDEFINED;
     var steps:Dynamic = cast FlightRuntime.UNDEFINED;
     maxAngle = FlightRuntime.select(FlightRuntime.andValue(FlightRuntime.compare(arcTolerance, 0.0, '>'), function():Dynamic return cast FlightRuntime.compare(arcTolerance, radius, '<')), function():Dynamic return cast (2.0 * FlightRuntime.callProperty(HxMath, 'acos', cast ([(1.0 - (arcTolerance / radius))] : Array<Dynamic>))), function():Dynamic return cast HxMath.PI);
@@ -878,13 +869,13 @@ class PathBoolean {
     }
   }
 
-  @:keep public static function recordSegment__martinezKernel(leftEvent:Dynamic, rightEvent:Dynamic, segments:Array<ArrangementSegment__martinezKernel>):Void {
+  public static function recordSegment__martinezKernel(leftEvent:Dynamic, rightEvent:Dynamic, segments:Array<ArrangementSegment__martinezKernel>):Void {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.field(leftEvent, 'left')))) { return; }
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.callValue(PathBoolean.approxEqual__martinezKernel, cast ([FlightRuntime.field(leftEvent, 'x'), FlightRuntime.field(rightEvent, 'x')] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(PathBoolean.approxEqual__martinezKernel, cast ([FlightRuntime.field(leftEvent, 'y'), FlightRuntime.field(rightEvent, 'y')] : Array<Dynamic>))))) { return; }
     FlightRuntime.callProperty(segments, 'push', cast ([{ ax: FlightRuntime.field(leftEvent, 'x'), ay: FlightRuntime.field(leftEvent, 'y'), bx: FlightRuntime.field(rightEvent, 'x'), by: FlightRuntime.field(rightEvent, 'y'), isSubject: FlightRuntime.field(leftEvent, 'isSubject'), windingDelta: FlightRuntime.field(leftEvent, 'windingDelta') }] : Array<Dynamic>));
   }
 
-  @:keep public static function resolvePathRegions(rings:Array<PathBooleanContour>, fillRule:PathBooleanFillRule):Path {
+  public static function resolvePathRegions(rings:Array<PathBooleanContour>, fillRule:PathBooleanFillRule):Path {
     var path:Dynamic = cast FlightRuntime.UNDEFINED;
     var resolved:Dynamic = cast FlightRuntime.UNDEFINED;
     path = FlightRuntime.callValue(createPath, cast (['nonZero'] : Array<Dynamic>));
@@ -906,7 +897,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function reverseVertexLoop__offsetPath(vertices:Array<Float>):Array<Float> {
+  public static function reverseVertexLoop__offsetPath(vertices:Array<Float>):Array<Float> {
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     count = (FlightRuntime.field(vertices, 'length') / 2.0);
@@ -926,7 +917,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function segmentIntersection__martinezKernel(a1x:Float, a1y:Float, a2x:Float, a2y:Float, b1x:Float, b1y:Float, b2x:Float, b2y:Float):Null<Array<Array<Float>>> {
+  public static function segmentIntersection__martinezKernel(a1x:Float, a1y:Float, a2x:Float, a2y:Float, b1x:Float, b1y:Float, b2x:Float, b2y:Float):Null<Array<Array<Float>>> {
     var vax:Dynamic = cast FlightRuntime.UNDEFINED;
     var vay:Dynamic = cast FlightRuntime.UNDEFINED;
     var vbx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -971,16 +962,16 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function setPathBooleanBackend(backend:Null<PathBooleanBackend>):Void {
+  public static function setPathBooleanBackend(backend:Null<PathBooleanBackend>):Void {
     (PathBoolean._backend__pathBooleanBackend = cast (backend : Dynamic));
   }
 
-  @:keep public static function signedArea__martinezKernel(p0x:Float, p0y:Float, p1x:Float, p1y:Float, p2x:Float, p2y:Float):Float {
+  public static function signedArea__martinezKernel(p0x:Float, p0y:Float, p1x:Float, p1y:Float, p2x:Float, p2y:Float):Float {
     return cast (((p0x - p2x) * (p1y - p2y)) - ((p1x - p2x) * (p0y - p2y)));
     return cast null;
   }
 
-  @:keep public static function simplifyPath(path:Path, ?options:PathBooleanOptions):Path {
+  public static function simplifyPath(path:Path, ?options:PathBooleanOptions):Path {
     var fillRule:Dynamic = cast FlightRuntime.UNDEFINED;
     var contours:Dynamic = cast FlightRuntime.UNDEFINED;
     fillRule = FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'fillRule'), function():Dynamic return cast 'nonZero');
@@ -989,19 +980,19 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function snap__martinezKernel(v:Float):Float {
+  public static function snap__martinezKernel(v:Float):Float {
     return cast FlightRuntime.callProperty(HxMath, 'round', cast ([(v / PathBoolean.vertexSnap__martinezKernel)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function swap__martinezKernel(data:Array<Dynamic>, i:Float, j:Float):Void {
+  public static function swap__martinezKernel(data:Array<Dynamic>, i:Float, j:Float):Void {
     var tmp:Dynamic = cast FlightRuntime.UNDEFINED;
     tmp = FlightRuntime.getIndex(data, i);
     FlightRuntime.setIndex(data, i, FlightRuntime.getIndex(data, j));
     FlightRuntime.setIndex(data, j, tmp);
   }
 
-  @:keep public static function traceRings__martinezKernel(edges:Array<Array<Float>>):Array<PathBooleanContour> {
+  public static function traceRings__martinezKernel(edges:Array<Array<Float>>):Array<PathBooleanContour> {
     var graph:Dynamic = cast FlightRuntime.UNDEFINED;
     graph = new DirectedGraph__martinezKernel();
     for (e in FlightRuntime.iterable(edges)) {
@@ -1013,7 +1004,7 @@ class PathBoolean {
 
   public static final TWO_PI__offsetPath:Dynamic = (HxMath.PI * 2.0);
 
-  @:keep public static function unionAllPaths(paths:Array<Path>, ?out:Path, ?options:PathBooleanOptions):Path {
+  public static function unionAllPaths(paths:Array<Path>, ?out:Path, ?options:PathBooleanOptions):Path {
     var fillRule:Dynamic = cast FlightRuntime.UNDEFINED;
     var contours:Array<PathBooleanContour> = cast FlightRuntime.UNDEFINED;
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1046,7 +1037,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function unionPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
+  public static function unionPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
     return cast FlightRuntime.callValue(booleanPaths, cast ([a, b, 'union', out, options] : Array<Dynamic>));
     return cast null;
   }
@@ -1057,7 +1048,7 @@ class PathBoolean {
 
   public static var vertexSnap__martinezKernel:Dynamic = 1e-9;
 
-  @:keep public static function windingAt__martinezKernel(unique:Array<UniqueSegment__martinezKernel>, px:Float, py:Float, subject:Bool):Float {
+  public static function windingAt__martinezKernel(unique:Array<UniqueSegment__martinezKernel>, px:Float, py:Float, subject:Bool):Float {
     var winding:Dynamic = cast FlightRuntime.UNDEFINED;
     winding = 0.0;
     for (v in FlightRuntime.iterable(unique)) {
@@ -1072,7 +1063,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function writeContours__booleanPaths(contours:Array<Array<Float>>, ?out:Path):Path {
+  public static function writeContours__booleanPaths(contours:Array<Array<Float>>, ?out:Path):Path {
     var path:Dynamic = cast FlightRuntime.UNDEFINED;
     path = FlightRuntime.coalesce(out, function():Dynamic return cast FlightRuntime.callValue(createPath, cast (['nonZero'] : Array<Dynamic>)));
     FlightRuntime.setLength(FlightRuntime.field(path, 'commands'), 0.0);
@@ -1094,7 +1085,7 @@ class PathBoolean {
     return cast null;
   }
 
-  @:keep public static function xorPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
+  public static function xorPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
     return cast FlightRuntime.callValue(booleanPaths, cast ([a, b, 'xor', out, options] : Array<Dynamic>));
     return cast null;
   }

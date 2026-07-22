@@ -12,9 +12,6 @@ typedef ByteReader = { var view:Dynamic; var offset:Float; };
 
 typedef TextureFormatBlockInfo__textureLevelLayout = { var blockWidth:Float; var blockHeight:Float; var bytesPerBlock:Float; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.TextureFormats")
 class TextureFormats {
   public static final atfAlphaFormatCodes__parseAtf:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Set'] : Array<Dynamic>)), [cast ([4.0, 5.0, 13.0] : Array<Dynamic>)]);
@@ -53,12 +50,12 @@ class TextureFormats {
 
   public static final basisTotalSlicesOffset__parseBasis:Dynamic = 12.0;
 
-  @:keep public static function compressedBlock__textureLevelLayout(blockWidth:Float, blockHeight:Float, bytesPerBlock:Float):TextureFormatBlockInfo__textureLevelLayout {
+  public static function compressedBlock__textureLevelLayout(blockWidth:Float, blockHeight:Float, bytesPerBlock:Float):TextureFormatBlockInfo__textureLevelLayout {
     return cast { blockHeight: blockHeight, blockWidth: blockWidth, bytesPerBlock: bytesPerBlock };
     return cast null;
   }
 
-  @:keep public static function computeTextureContainerLevels(format:TextureContainerFormat, baseWidth:Float, baseHeight:Float, mipLevels:Float, layers:Float, faces:Float, startOffset:Float):Null<{ var levels:Array<TextureContainerLevel>; var endOffset:Float; }> {
+  public static function computeTextureContainerLevels(format:TextureContainerFormat, baseWidth:Float, baseHeight:Float, mipLevels:Float, layers:Float, faces:Float, startOffset:Float):Null<{ var levels:Array<TextureContainerLevel>; var endOffset:Float; }> {
     var levels:Array<TextureContainerLevel> = cast FlightRuntime.UNDEFINED;
     var offset:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callValue(TextureFormats.getTextureContainerFormatBlockInfo__textureLevelLayout, cast ([format] : Array<Dynamic>)), null))) { return cast null; }
@@ -91,7 +88,7 @@ class TextureFormats {
     return cast null;
   }
 
-  @:keep public static function createByteReader(bytes:Dynamic, offset:Dynamic = 0.0):ByteReader {
+  public static function createByteReader(bytes:Dynamic, offset:Dynamic = 0.0):ByteReader {
     return cast { view: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['DataView'] : Array<Dynamic>)), [FlightRuntime.field(bytes, 'buffer'), FlightRuntime.field(bytes, 'byteOffset'), FlightRuntime.field(bytes, 'byteLength')]), offset: offset };
     return cast null;
   }
@@ -114,7 +111,7 @@ class TextureFormats {
 
   public static final ddsPfRgb__parseDds:Dynamic = 64.0;
 
-  @:keep public static function detectTextureContainer(bytes:Dynamic):Null<String> {
+  public static function detectTextureContainer(bytes:Dynamic):Null<String> {
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.compare(FlightRuntime.field(bytes, 'byteLength'), 12.0, '>='), function():Dynamic return cast FlightRuntime.callValue(TextureFormats.isKtx2Magic__detectTextureContainer, cast ([bytes] : Array<Dynamic>))))) { return cast 'ktx2'; }
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.compare(FlightRuntime.field(bytes, 'byteLength'), 4.0, '>='), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(bytes, 0.0), 68.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(bytes, 1.0), 68.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(bytes, 2.0), 83.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(bytes, 3.0), 32.0)))) {
   return cast 'dds';
@@ -127,12 +124,12 @@ class TextureFormats {
 
   public static final formatBlockInfo__textureLevelLayout:Dynamic = { astc4x4: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 16.0] : Array<Dynamic>)), astc5x4: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([5.0, 4.0, 16.0] : Array<Dynamic>)), astc5x5: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([5.0, 5.0, 16.0] : Array<Dynamic>)), astc6x5: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([6.0, 5.0, 16.0] : Array<Dynamic>)), astc6x6: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([6.0, 6.0, 16.0] : Array<Dynamic>)), astc8x5: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([8.0, 5.0, 16.0] : Array<Dynamic>)), astc8x6: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([8.0, 6.0, 16.0] : Array<Dynamic>)), astc8x8: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([8.0, 8.0, 16.0] : Array<Dynamic>)), astc10x5: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([10.0, 5.0, 16.0] : Array<Dynamic>)), astc10x6: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([10.0, 6.0, 16.0] : Array<Dynamic>)), astc10x8: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([10.0, 8.0, 16.0] : Array<Dynamic>)), astc10x10: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([10.0, 10.0, 16.0] : Array<Dynamic>)), astc12x10: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([12.0, 10.0, 16.0] : Array<Dynamic>)), astc12x12: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([12.0, 12.0, 16.0] : Array<Dynamic>)), bc1: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 8.0] : Array<Dynamic>)), bc1Srgb: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 8.0] : Array<Dynamic>)), bc2: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 16.0] : Array<Dynamic>)), bc2Srgb: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 16.0] : Array<Dynamic>)), bc3: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 16.0] : Array<Dynamic>)), bc3Srgb: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 16.0] : Array<Dynamic>)), bc4: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 8.0] : Array<Dynamic>)), bc4Snorm: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 8.0] : Array<Dynamic>)), bc5: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 16.0] : Array<Dynamic>)), bc5Snorm: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 16.0] : Array<Dynamic>)), bc6hSfloat: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 16.0] : Array<Dynamic>)), bc6hUfloat: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 16.0] : Array<Dynamic>)), bc7: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 16.0] : Array<Dynamic>)), bc7Srgb: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 16.0] : Array<Dynamic>)), bgra8Srgb: FlightRuntime.callValue(TextureFormats.pixelBlock__textureLevelLayout, cast ([4.0] : Array<Dynamic>)), bgra8unorm: FlightRuntime.callValue(TextureFormats.pixelBlock__textureLevelLayout, cast ([4.0] : Array<Dynamic>)), eacR11: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 8.0] : Array<Dynamic>)), eacR11Snorm: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 8.0] : Array<Dynamic>)), eacRg11: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 16.0] : Array<Dynamic>)), eacRg11Snorm: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 16.0] : Array<Dynamic>)), etc1: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 8.0] : Array<Dynamic>)), etc1s: null, etc2Rgb: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 8.0] : Array<Dynamic>)), etc2RgbA1: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 8.0] : Array<Dynamic>)), etc2RgbA1Srgb: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 8.0] : Array<Dynamic>)), etc2RgbSrgb: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 8.0] : Array<Dynamic>)), etc2Rgba: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 16.0] : Array<Dynamic>)), etc2RgbaSrgb: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 16.0] : Array<Dynamic>)), pvrtc2bppRgb: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([8.0, 4.0, 8.0] : Array<Dynamic>)), pvrtc2bppRgba: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([8.0, 4.0, 8.0] : Array<Dynamic>)), pvrtc4bppRgb: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 8.0] : Array<Dynamic>)), pvrtc4bppRgba: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 8.0] : Array<Dynamic>)), r8unorm: FlightRuntime.callValue(TextureFormats.pixelBlock__textureLevelLayout, cast ([1.0] : Array<Dynamic>)), rg8unorm: FlightRuntime.callValue(TextureFormats.pixelBlock__textureLevelLayout, cast ([2.0] : Array<Dynamic>)), rgba16f: FlightRuntime.callValue(TextureFormats.pixelBlock__textureLevelLayout, cast ([8.0] : Array<Dynamic>)), rgba32f: FlightRuntime.callValue(TextureFormats.pixelBlock__textureLevelLayout, cast ([16.0] : Array<Dynamic>)), rgba8Srgb: FlightRuntime.callValue(TextureFormats.pixelBlock__textureLevelLayout, cast ([4.0] : Array<Dynamic>)), rgba8unorm: FlightRuntime.callValue(TextureFormats.pixelBlock__textureLevelLayout, cast ([4.0] : Array<Dynamic>)), uastc: FlightRuntime.callValue(TextureFormats.compressedBlock__textureLevelLayout, cast ([4.0, 4.0, 16.0] : Array<Dynamic>)) };
 
-  @:keep public static function getTextureContainerFormatBlockInfo__textureLevelLayout(format:TextureContainerFormat):Null<TextureFormatBlockInfo__textureLevelLayout> {
+  public static function getTextureContainerFormatBlockInfo__textureLevelLayout(format:TextureContainerFormat):Null<TextureFormatBlockInfo__textureLevelLayout> {
     return cast FlightRuntime.getIndex(TextureFormats.formatBlockInfo__textureLevelLayout, format);
     return cast null;
   }
 
-  @:keep public static function getTextureContainerLevelByteLength(format:TextureContainerFormat, width:Float, height:Float):Float {
+  public static function getTextureContainerLevelByteLength(format:TextureContainerFormat, width:Float, height:Float):Float {
     var block:Dynamic = cast FlightRuntime.UNDEFINED;
     var blocksWide:Dynamic = cast FlightRuntime.UNDEFINED;
     var blocksHigh:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -144,27 +141,27 @@ class TextureFormats {
     return cast null;
   }
 
-  @:keep public static function hasAtfSignature__parseAtf(bytes:Dynamic):Bool {
+  public static function hasAtfSignature__parseAtf(bytes:Dynamic):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.compare(FlightRuntime.field(bytes, 'byteLength'), 7.0, '>='), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(bytes, 0.0), 65.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(bytes, 1.0), 84.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(bytes, 2.0), 70.0));
     return cast null;
   }
 
-  @:keep public static function hasBasisSignature__parseBasis(bytes:Dynamic):Bool {
+  public static function hasBasisSignature__parseBasis(bytes:Dynamic):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.compare(FlightRuntime.field(bytes, 'byteLength'), 2.0, '>='), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(bytes, 0.0), 115.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(bytes, 1.0), 66.0));
     return cast null;
   }
 
-  @:keep public static function hasByteReaderBytes(reader:ByteReader, count:Float):Bool {
+  public static function hasByteReaderBytes(reader:ByteReader, count:Float):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.compare(count, 0.0, '>='), function():Dynamic return cast FlightRuntime.compare((FlightRuntime.field(reader, 'offset') + count), FlightRuntime.field(FlightRuntime.field(reader, 'view'), 'byteLength'), '<='));
     return cast null;
   }
 
-  @:keep public static function hasDdsMagic__parseDds(bytes:Dynamic):Bool {
+  public static function hasDdsMagic__parseDds(bytes:Dynamic):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.compare(FlightRuntime.field(bytes, 'byteLength'), 4.0, '>='), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(bytes, 0.0), 68.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(bytes, 1.0), 68.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(bytes, 2.0), 83.0)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.getIndex(bytes, 3.0), 32.0));
     return cast null;
   }
 
-  @:keep public static function hasKtx2Identifier__parseKtx2(bytes:Dynamic):Bool {
+  public static function hasKtx2Identifier__parseKtx2(bytes:Dynamic):Bool {
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(bytes, 'byteLength'), 12.0, '<'))) { return cast false; }
     {
       var i:Dynamic = 0.0;
@@ -177,7 +174,7 @@ class TextureFormats {
     return cast null;
   }
 
-  @:keep public static function isKtx2Magic__detectTextureContainer(bytes:Dynamic):Bool {
+  public static function isKtx2Magic__detectTextureContainer(bytes:Dynamic):Bool {
     {
       var i:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(i, 12.0, '<'))) {
@@ -199,7 +196,7 @@ class TextureFormats {
 
   public static final ktx2VkFormat__parseKtx2:Dynamic = FlightRuntime.objectFromPairs([{ key: '9', value: 'r8unorm' }, { key: '16', value: 'rg8unorm' }, { key: '37', value: 'rgba8unorm' }, { key: '43', value: 'rgba8Srgb' }, { key: '44', value: 'bgra8unorm' }, { key: '50', value: 'bgra8Srgb' }, { key: '97', value: 'rgba16f' }, { key: '109', value: 'rgba32f' }, { key: '131', value: 'bc1' }, { key: '132', value: 'bc1Srgb' }, { key: '133', value: 'bc1' }, { key: '134', value: 'bc1Srgb' }, { key: '135', value: 'bc2' }, { key: '136', value: 'bc2Srgb' }, { key: '137', value: 'bc3' }, { key: '138', value: 'bc3Srgb' }, { key: '139', value: 'bc4' }, { key: '140', value: 'bc4Snorm' }, { key: '141', value: 'bc5' }, { key: '142', value: 'bc5Snorm' }, { key: '143', value: 'bc6hUfloat' }, { key: '144', value: 'bc6hSfloat' }, { key: '145', value: 'bc7' }, { key: '146', value: 'bc7Srgb' }, { key: '147', value: 'etc2Rgb' }, { key: '148', value: 'etc2RgbSrgb' }, { key: '149', value: 'etc2RgbA1' }, { key: '150', value: 'etc2RgbA1Srgb' }, { key: '151', value: 'etc2Rgba' }, { key: '152', value: 'etc2RgbaSrgb' }, { key: '153', value: 'eacR11' }, { key: '154', value: 'eacR11Snorm' }, { key: '155', value: 'eacRg11' }, { key: '156', value: 'eacRg11Snorm' }, { key: '157', value: 'astc4x4' }, { key: '158', value: 'astc4x4' }, { key: '159', value: 'astc5x4' }, { key: '160', value: 'astc5x4' }, { key: '161', value: 'astc5x5' }, { key: '162', value: 'astc5x5' }, { key: '163', value: 'astc6x5' }, { key: '164', value: 'astc6x5' }, { key: '165', value: 'astc6x6' }, { key: '166', value: 'astc6x6' }, { key: '167', value: 'astc8x5' }, { key: '168', value: 'astc8x5' }, { key: '169', value: 'astc8x6' }, { key: '170', value: 'astc8x6' }, { key: '171', value: 'astc8x8' }, { key: '172', value: 'astc8x8' }, { key: '173', value: 'astc10x5' }, { key: '174', value: 'astc10x5' }, { key: '175', value: 'astc10x6' }, { key: '176', value: 'astc10x6' }, { key: '177', value: 'astc10x8' }, { key: '178', value: 'astc10x8' }, { key: '179', value: 'astc10x10' }, { key: '180', value: 'astc10x10' }, { key: '181', value: 'astc12x10' }, { key: '182', value: 'astc12x10' }, { key: '183', value: 'astc12x12' }, { key: '184', value: 'astc12x12' }]);
 
-  @:keep public static function mapDdsUncompressed__parseDds(rgbBitCount:Float, rMask:Float, gMask:Float, bMask:Float, aMask:Float):Null<TextureContainerFormat> {
+  public static function mapDdsUncompressed__parseDds(rgbBitCount:Float, rMask:Float, gMask:Float, bMask:Float, aMask:Float):Null<TextureContainerFormat> {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(rgbBitCount, 32.0))) { return cast null; }
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(rMask, 16711680.0), function():Dynamic return cast FlightRuntime.strictEquals(gMask, 65280.0)), function():Dynamic return cast FlightRuntime.strictEquals(bMask, 255.0)), function():Dynamic return cast FlightRuntime.strictEquals(aMask, 4278190080.0)))) {
   return cast 'bgra8unorm';
@@ -211,13 +208,13 @@ class TextureFormats {
     return cast null;
   }
 
-  @:keep public static function mapKtx2Format__parseKtx2(vkFormat:Float, supercompressionScheme:Float):Null<TextureContainerFormat> {
+  public static function mapKtx2Format__parseKtx2(vkFormat:Float, supercompressionScheme:Float):Null<TextureContainerFormat> {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(vkFormat, 0.0))) { return cast FlightRuntime.select(FlightRuntime.strictEquals(supercompressionScheme, 1.0), function():Dynamic return cast 'etc1s', function():Dynamic return cast 'uastc'); }
     return cast FlightRuntime.coalesce(FlightRuntime.getIndex(TextureFormats.ktx2VkFormat__parseKtx2, vkFormat), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function parseAtf(bytes:Dynamic):Null<Array<TextureContainer>> {
+  public static function parseAtf(bytes:Dynamic):Null<Array<TextureContainer>> {
     var versioned:Dynamic = cast FlightRuntime.UNDEFINED;
     var headerOffset:Dynamic = cast FlightRuntime.UNDEFINED;
     var version:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -312,7 +309,7 @@ class TextureFormats {
     return cast null;
   }
 
-  @:keep public static function parseBasis(bytes:Dynamic):Null<TextureContainer> {
+  public static function parseBasis(bytes:Dynamic):Null<TextureContainer> {
     var header:Dynamic = cast FlightRuntime.UNDEFINED;
     var totalSlices:Dynamic = cast FlightRuntime.UNDEFINED;
     var totalImages:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -367,7 +364,7 @@ class TextureFormats {
     return cast null;
   }
 
-  @:keep public static function parseDds(bytes:Dynamic):Null<TextureContainer> {
+  public static function parseDds(bytes:Dynamic):Null<TextureContainer> {
     var reader:Dynamic = cast FlightRuntime.UNDEFINED;
     var dwHeight:Dynamic = cast FlightRuntime.UNDEFINED;
     var dwWidth:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -443,7 +440,7 @@ class TextureFormats {
     return cast null;
   }
 
-  @:keep public static function parseKtx2(bytes:Dynamic):Null<TextureContainer> {
+  public static function parseKtx2(bytes:Dynamic):Null<TextureContainer> {
     var reader:Dynamic = cast FlightRuntime.UNDEFINED;
     var vkFormat:Dynamic = cast FlightRuntime.UNDEFINED;
     var pixelWidth:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -519,12 +516,12 @@ class TextureFormats {
     return cast null;
   }
 
-  @:keep public static function pixelBlock__textureLevelLayout(bytesPerPixel:Float):TextureFormatBlockInfo__textureLevelLayout {
+  public static function pixelBlock__textureLevelLayout(bytesPerPixel:Float):TextureFormatBlockInfo__textureLevelLayout {
     return cast { blockHeight: 1.0, blockWidth: 1.0, bytesPerBlock: bytesPerPixel };
     return cast null;
   }
 
-  @:keep public static function readByteReaderU16(reader:ByteReader):Float {
+  public static function readByteReaderU16(reader:ByteReader):Float {
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
     value = FlightRuntime.callProperty(FlightRuntime.field(reader, 'view'), 'getUint16', cast ([FlightRuntime.field(reader, 'offset'), true] : Array<Dynamic>));
     FlightRuntime.setField(reader, 'offset', (FlightRuntime.field(reader, 'offset') + 2.0));
@@ -532,7 +529,7 @@ class TextureFormats {
     return cast null;
   }
 
-  @:keep public static function readByteReaderU24BigEndian(reader:ByteReader):Float {
+  public static function readByteReaderU24BigEndian(reader:ByteReader):Float {
     var view:Dynamic = cast FlightRuntime.UNDEFINED;
     var offset:Dynamic = cast FlightRuntime.UNDEFINED;
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -544,7 +541,7 @@ class TextureFormats {
     return cast null;
   }
 
-  @:keep public static function readByteReaderU32(reader:ByteReader):Float {
+  public static function readByteReaderU32(reader:ByteReader):Float {
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
     value = FlightRuntime.callProperty(FlightRuntime.field(reader, 'view'), 'getUint32', cast ([FlightRuntime.field(reader, 'offset'), true] : Array<Dynamic>));
     FlightRuntime.setField(reader, 'offset', (FlightRuntime.field(reader, 'offset') + 4.0));
@@ -552,7 +549,7 @@ class TextureFormats {
     return cast null;
   }
 
-  @:keep public static function readByteReaderU32BigEndian(reader:ByteReader):Float {
+  public static function readByteReaderU32BigEndian(reader:ByteReader):Float {
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
     value = FlightRuntime.callProperty(FlightRuntime.field(reader, 'view'), 'getUint32', cast ([FlightRuntime.field(reader, 'offset'), false] : Array<Dynamic>));
     FlightRuntime.setField(reader, 'offset', (FlightRuntime.field(reader, 'offset') + 4.0));
@@ -560,7 +557,7 @@ class TextureFormats {
     return cast null;
   }
 
-  @:keep public static function readByteReaderU64(reader:ByteReader):Float {
+  public static function readByteReaderU64(reader:ByteReader):Float {
     var low:Dynamic = cast FlightRuntime.UNDEFINED;
     var high:Dynamic = cast FlightRuntime.UNDEFINED;
     low = FlightRuntime.callProperty(FlightRuntime.field(reader, 'view'), 'getUint32', cast ([FlightRuntime.field(reader, 'offset'), true] : Array<Dynamic>));
@@ -570,7 +567,7 @@ class TextureFormats {
     return cast null;
   }
 
-  @:keep public static function readByteReaderU8(reader:ByteReader):Float {
+  public static function readByteReaderU8(reader:ByteReader):Float {
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
     value = FlightRuntime.callProperty(FlightRuntime.field(reader, 'view'), 'getUint8', cast ([FlightRuntime.field(reader, 'offset')] : Array<Dynamic>));
     FlightRuntime.setField(reader, 'offset', (FlightRuntime.field(reader, 'offset') + 1.0));
@@ -578,7 +575,7 @@ class TextureFormats {
     return cast null;
   }
 
-  @:keep public static function selectTextureContainer(containers:Array<TextureContainer>, supportedFormats:Array<TextureContainerFormat>):Null<TextureContainer> {
+  public static function selectTextureContainer(containers:Array<TextureContainer>, supportedFormats:Array<TextureContainerFormat>):Null<TextureContainer> {
     for (container in FlightRuntime.iterable(containers)) {
       if (FlightRuntime.truthy(FlightRuntime.includes(supportedFormats, FlightRuntime.field(container, 'format')))) { return cast container; }
     }
@@ -586,7 +583,7 @@ class TextureFormats {
     return cast null;
   }
 
-  @:keep public static function skipByteReader(reader:ByteReader, count:Float):Void {
+  public static function skipByteReader(reader:ByteReader, count:Float):Void {
     FlightRuntime.setField(reader, 'offset', (FlightRuntime.field(reader, 'offset') + count));
   }
 }

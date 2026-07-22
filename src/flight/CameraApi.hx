@@ -37,9 +37,6 @@ typedef OrthographicProjectionOptions = { var halfHeight:Float; var halfWidth:Fl
 
 typedef PerspectiveProjectionOptions = { @:optional var aspect:Float; var fovY:Float; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.CameraApi")
 class CameraApi {
   public static final __scratchDir__picking:Dynamic = FlightRuntime.callValue(createVector3, cast ([] : Array<Dynamic>));
@@ -76,7 +73,7 @@ class CameraApi {
 
   public static final _upZ__shadowCamera:Vector3Like = { x: 0.0, y: 0.0, z: 1.0 };
 
-  @:keep public static function configureDirectionalShadowCamera(camera:Camera, lightDirection:Vector3Like, sceneBounds:AabbLike):Void {
+  public static function configureDirectionalShadowCamera(camera:Camera, lightDirection:Vector3Like, sceneBounds:AabbLike):Void {
     var min:Dynamic = cast FlightRuntime.UNDEFINED;
     var max:Dynamic = cast FlightRuntime.UNDEFINED;
     var cx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -114,22 +111,22 @@ class CameraApi {
     FlightRuntime.setField(camera, 'projection', FlightRuntime.callValue(createOrthographicProjection, cast ([{ halfHeight: radius, halfWidth: radius }] : Array<Dynamic>)));
   }
 
-  @:keep public static function createCamera(opts:CameraOptions):Camera {
+  public static function createCamera(opts:CameraOptions):Camera {
     return cast FlightRuntime.callValue(createEntity, cast ([{ far: FlightRuntime.field(opts, 'far'), inverseViewProjection: FlightRuntime.callValue(createMatrix4, cast ([] : Array<Dynamic>)), jitter: FlightRuntime.callValue(createVector2, cast ([0.0, 0.0] : Array<Dynamic>)), near: FlightRuntime.field(opts, 'near'), projection: FlightRuntime.field(opts, 'projection'), view: FlightRuntime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createOrthographicProjection(opts:OrthographicProjectionOptions):OrthographicProjection {
+  public static function createOrthographicProjection(opts:OrthographicProjectionOptions):OrthographicProjection {
     return cast { halfHeight: FlightRuntime.field(opts, 'halfHeight'), halfWidth: FlightRuntime.field(opts, 'halfWidth'), kind: 'orthographic' };
     return cast null;
   }
 
-  @:keep public static function createPerspectiveProjection(opts:PerspectiveProjectionOptions):PerspectiveProjection {
+  public static function createPerspectiveProjection(opts:PerspectiveProjectionOptions):PerspectiveProjection {
     return cast { aspect: FlightRuntime.coalesce(FlightRuntime.field(opts, 'aspect'), function():Dynamic return cast 1.0), fovY: FlightRuntime.field(opts, 'fovY'), kind: 'perspective' };
     return cast null;
   }
 
-  @:keep public static function getCameraForward(out:Vector3Like, camera:Camera):Void {
+  public static function getCameraForward(out:Vector3Like, camera:Camera):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.field(FlightRuntime.field(camera, 'view'), 'm');
     FlightRuntime.setField(out, 'x', -FlightRuntime.getIndex(m, 2.0));
@@ -137,12 +134,12 @@ class CameraApi {
     FlightRuntime.setField(out, 'z', -FlightRuntime.getIndex(m, 10.0));
   }
 
-  @:keep public static function getCameraFrustum(out:FrustumLike, camera:Camera, aspect:Float):Void {
+  public static function getCameraFrustum(out:FrustumLike, camera:Camera, aspect:Float):Void {
     FlightRuntime.callValue(getCameraViewProjectionMatrix4, cast ([CameraApi.__scratchViewProjection__culling, camera, aspect] : Array<Dynamic>));
     FlightRuntime.callValue(setFrustumFromMatrix4, cast ([out, CameraApi.__scratchViewProjection__culling] : Array<Dynamic>));
   }
 
-  @:keep public static function getCameraFrustumCorners(out:Array<Vector3Like>, camera:Camera, aspect:Float):Bool {
+  public static function getCameraFrustumCorners(out:Array<Vector3Like>, camera:Camera, aspect:Float):Bool {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     var ndcCorners:Array<Array<Float>> = cast FlightRuntime.UNDEFINED;
     var results:Array<Array<Float>> = cast FlightRuntime.UNDEFINED;
@@ -187,13 +184,13 @@ class CameraApi {
     return cast null;
   }
 
-  @:keep public static function getCameraInverseViewProjectionMatrix4(out:Matrix4Like, camera:Camera, aspect:Float):Bool {
+  public static function getCameraInverseViewProjectionMatrix4(out:Matrix4Like, camera:Camera, aspect:Float):Bool {
     FlightRuntime.callValue(getCameraViewProjectionMatrix4, cast ([CameraApi.__scratchViewProjection__camera, camera, aspect] : Array<Dynamic>));
     return cast FlightRuntime.callValue(inverseMatrix4, cast ([out, CameraApi.__scratchViewProjection__camera] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getCameraLinearDepth(camera:Camera, ndcZ:Float):Float {
+  public static function getCameraLinearDepth(camera:Camera, ndcZ:Float):Float {
     var near:Dynamic = cast FlightRuntime.UNDEFINED;
     var far:Dynamic = cast FlightRuntime.UNDEFINED;
     var range:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -212,7 +209,7 @@ class CameraApi {
     return cast null;
   }
 
-  @:keep public static function getCameraPosition(out:Vector3Like, camera:Camera):Void {
+  public static function getCameraPosition(out:Vector3Like, camera:Camera):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     var m00:Dynamic = cast FlightRuntime.UNDEFINED;
     var m01:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -244,7 +241,7 @@ class CameraApi {
     FlightRuntime.setField(out, 'z', -(((m20 * tx) + (m21 * ty)) + (m22 * tz)));
   }
 
-  @:keep public static function getCameraRayThroughBoundingSphere(out:Ray3DLike, camera:Camera, sphere:BoundingSphereLike, aspect:Float):Bool {
+  public static function getCameraRayThroughBoundingSphere(out:Ray3DLike, camera:Camera, sphere:BoundingSphereLike, aspect:Float):Bool {
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(sphere, 'radius'), 0.0, '<'))) {
   return cast false;
 }
@@ -255,7 +252,7 @@ class CameraApi {
     return cast null;
   }
 
-  @:keep public static function getCameraRight(out:Vector3Like, camera:Camera):Void {
+  public static function getCameraRight(out:Vector3Like, camera:Camera):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.field(FlightRuntime.field(camera, 'view'), 'm');
     FlightRuntime.setField(out, 'x', FlightRuntime.getIndex(m, 0.0));
@@ -263,7 +260,7 @@ class CameraApi {
     FlightRuntime.setField(out, 'z', FlightRuntime.getIndex(m, 8.0));
   }
 
-  @:keep public static function getCameraScreenToWorldRay(out:Ray3DLike, camera:Camera, ndcX:Float, ndcY:Float, aspect:Float):Bool {
+  public static function getCameraScreenToWorldRay(out:Ray3DLike, camera:Camera, ndcX:Float, ndcY:Float, aspect:Float):Bool {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     var nx:Dynamic = cast FlightRuntime.UNDEFINED;
     var ny:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -320,7 +317,7 @@ class CameraApi {
     return cast null;
   }
 
-  @:keep public static function getCameraUp(out:Vector3Like, camera:Camera):Void {
+  public static function getCameraUp(out:Vector3Like, camera:Camera):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.field(FlightRuntime.field(camera, 'view'), 'm');
     FlightRuntime.setField(out, 'x', FlightRuntime.getIndex(m, 1.0));
@@ -328,17 +325,17 @@ class CameraApi {
     FlightRuntime.setField(out, 'z', FlightRuntime.getIndex(m, 9.0));
   }
 
-  @:keep public static function getCameraViewProjectionMatrix4(out:Matrix4Like, camera:Camera, aspect:Float):Void {
+  public static function getCameraViewProjectionMatrix4(out:Matrix4Like, camera:Camera, aspect:Float):Void {
     FlightRuntime.callValue(setProjectionMatrix4, cast ([CameraApi.__scratchProjection__camera, FlightRuntime.field(camera, 'projection'), aspect, FlightRuntime.field(camera, 'near'), FlightRuntime.field(camera, 'far')] : Array<Dynamic>));
     FlightRuntime.callValue(multiplyMatrix4, cast ([out, CameraApi.__scratchProjection__camera, FlightRuntime.field(camera, 'view')] : Array<Dynamic>));
   }
 
-  @:keep public static function getCameraViewSpaceZ(camera:Camera, ndcZ:Float):Float {
+  public static function getCameraViewSpaceZ(camera:Camera, ndcZ:Float):Float {
     return cast -FlightRuntime.callValue(getCameraLinearDepth, cast ([camera, ndcZ] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getCameraWorldToScreen(out:Vector3Like, camera:Camera, worldPoint:Vector3Like, aspect:Float):Bool {
+  public static function getCameraWorldToScreen(out:Vector3Like, camera:Camera, worldPoint:Vector3Like, aspect:Float):Bool {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     var wx:Dynamic = cast FlightRuntime.UNDEFINED;
     var wy:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -368,7 +365,7 @@ class CameraApi {
     return cast null;
   }
 
-  @:keep public static function intersectCameraRayWithPlane(out:Vector3Like, ray:Ray3DLike, plane:PlaneLike):Bool {
+  public static function intersectCameraRayWithPlane(out:Vector3Like, ray:Ray3DLike, plane:PlaneLike):Bool {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     var dz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -406,48 +403,48 @@ class CameraApi {
     return cast null;
   }
 
-  @:keep public static function isBoxInCameraFrustum(camera:Camera, aabb:AabbLike, aspect:Float):Bool {
+  public static function isBoxInCameraFrustum(camera:Camera, aabb:AabbLike, aspect:Float):Bool {
     FlightRuntime.callValue(getCameraFrustum, cast ([CameraApi.__scratchFrustum__culling, camera, aspect] : Array<Dynamic>));
     return cast FlightRuntime.callValue(isFrustumIntersectingAabb, cast ([CameraApi.__scratchFrustum__culling, aabb] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function isOrthographicProjection(projection:Projection):Bool {
+  public static function isOrthographicProjection(projection:Projection):Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.field(projection, 'kind'), 'orthographic');
     return cast null;
   }
 
-  @:keep public static function isPerspectiveProjection(projection:Projection):Bool {
+  public static function isPerspectiveProjection(projection:Projection):Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.field(projection, 'kind'), 'perspective');
     return cast null;
   }
 
-  @:keep public static function isPointInCameraFrustum(camera:Camera, point:Vector3Like, aspect:Float):Bool {
+  public static function isPointInCameraFrustum(camera:Camera, point:Vector3Like, aspect:Float):Bool {
     FlightRuntime.callValue(getCameraFrustum, cast ([CameraApi.__scratchFrustum__culling, camera, aspect] : Array<Dynamic>));
     return cast FlightRuntime.callValue(isFrustumContainingPoint, cast ([CameraApi.__scratchFrustum__culling, point] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function isSphereInCameraFrustum(camera:Camera, sphere:BoundingSphereLike, aspect:Float):Bool {
+  public static function isSphereInCameraFrustum(camera:Camera, sphere:BoundingSphereLike, aspect:Float):Bool {
     FlightRuntime.callValue(getCameraFrustum, cast ([CameraApi.__scratchFrustum__culling, camera, aspect] : Array<Dynamic>));
     return cast FlightRuntime.callValue(isFrustumIntersectingSphere, cast ([CameraApi.__scratchFrustum__culling, sphere] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setCameraJitter(camera:Camera, x:Float, y:Float):Void {
+  public static function setCameraJitter(camera:Camera, x:Float, y:Float):Void {
     FlightRuntime.setField(FlightRuntime.field(camera, 'jitter'), 'x', x);
     FlightRuntime.setField(FlightRuntime.field(camera, 'jitter'), 'y', y);
   }
 
-  @:keep public static function setCameraViewMatrix4FromLookAt(camera:Camera, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
+  public static function setCameraViewMatrix4FromLookAt(camera:Camera, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
     FlightRuntime.callValue(setMatrix4LookAt, cast ([FlightRuntime.field(camera, 'view'), eye, target, up] : Array<Dynamic>));
   }
 
-  @:keep public static function setCameraViewMatrix4FromMatrix4(camera:Camera, view:Matrix4Like):Void {
+  public static function setCameraViewMatrix4FromMatrix4(camera:Camera, view:Matrix4Like):Void {
     FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.field(camera, 'view'), 'm'), 'set', cast ([FlightRuntime.field(view, 'm')] : Array<Dynamic>));
   }
 
-  @:keep public static function setProjectionMatrix4(out:Matrix4Like, projection:Projection, aspect:Float, near:Float, far:Float):Void {
+  public static function setProjectionMatrix4(out:Matrix4Like, projection:Projection, aspect:Float, near:Float, far:Float):Void {
     var halfWidth:Dynamic = cast FlightRuntime.UNDEFINED;
     var halfHeight:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(projection, 'kind'), 'perspective'))) {
@@ -460,7 +457,7 @@ class CameraApi {
     FlightRuntime.callValue(setOrthographicMatrix4, cast ([out, -halfWidth, halfWidth, -halfHeight, halfHeight, near, far] : Array<Dynamic>));
   }
 
-  @:keep public static function updateCameraInverseViewProjection(camera:Camera, aspect:Float):Bool {
+  public static function updateCameraInverseViewProjection(camera:Camera, aspect:Float):Bool {
     var ok:Dynamic = cast FlightRuntime.UNDEFINED;
     ok = FlightRuntime.callValue(getCameraInverseViewProjectionMatrix4, cast ([CameraApi.__scratchInverse__camera, camera, aspect] : Array<Dynamic>));
     if (FlightRuntime.truthy(ok)) {

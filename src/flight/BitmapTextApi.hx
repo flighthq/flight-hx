@@ -42,12 +42,9 @@ typedef BitmapTextToken__updateBitmapText = { var gap:Float; var word:BitmapText
 
 typedef BitmapTextWord__updateBitmapText = { var glyphs:Array<BitmapTextGlyph__updateBitmapText>; var width:Float; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.BitmapTextApi")
 class BitmapTextApi {
-  @:keep public static function applyBitmapTextColor__updateBitmapText(quadBatch:QuadBatch, color:Float):Void {
+  public static function applyBitmapTextColor__updateBitmapText(quadBatch:QuadBatch, color:Float):Void {
     var colorTransform:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(color, BitmapTextApi.BITMAP_TEXT_DEFAULT_COLOR__updateBitmapText))) {
   FlightRuntime.callValue(setDisplayObjectColorAdjustments, cast ([quadBatch, null] : Array<Dynamic>));
@@ -57,7 +54,7 @@ class BitmapTextApi {
     FlightRuntime.callValue(setDisplayObjectColorAdjustments, cast ([quadBatch, cast ([FlightRuntime.callValue(createColorTransformAdjustment, cast ([colorTransform] : Array<Dynamic>))] : Array<Dynamic>)] : Array<Dynamic>));
   }
 
-  @:keep public static function applyBitmapTextOptions__bitmapText(data:BitmapTextData, options:BitmapTextOptions):Void {
+  public static function applyBitmapTextOptions__bitmapText(data:BitmapTextData, options:BitmapTextOptions):Void {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(options, 'align'), FlightRuntime.UNDEFINED))) { FlightRuntime.setField(data, 'align', FlightRuntime.field(options, 'align')); }
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(options, 'color'), FlightRuntime.UNDEFINED))) { FlightRuntime.setField(data, 'color', FlightRuntime.field(options, 'color')); }
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(options, 'letterSpacing'), FlightRuntime.UNDEFINED))) { FlightRuntime.setField(data, 'letterSpacing', FlightRuntime.field(options, 'letterSpacing')); }
@@ -70,7 +67,7 @@ class BitmapTextApi {
 
   public static final BITMAP_TEXT_DEFAULT_COLOR__updateBitmapText:Dynamic = 4294967295.0;
 
-  @:keep public static function buildBitmapTextWords__updateBitmapText(glyphSource:GlyphSource, paragraph:String, letterSpacing:Float):Array<BitmapTextToken__updateBitmapText> {
+  public static function buildBitmapTextWords__updateBitmapText(glyphSource:GlyphSource, paragraph:String, letterSpacing:Float):Array<BitmapTextToken__updateBitmapText> {
     var tokens:Array<BitmapTextToken__updateBitmapText> = cast FlightRuntime.UNDEFINED;
     var pendingGap:Dynamic = cast FlightRuntime.UNDEFINED;
     var glyphs:Array<BitmapTextGlyph__updateBitmapText> = cast FlightRuntime.UNDEFINED;
@@ -117,7 +114,7 @@ class BitmapTextApi {
 
   public static final CARRIAGE_RETURN__updateBitmapText:Dynamic = 13.0;
 
-  @:keep public static function computeBitmapTextLocalBoundsRectangle(out:Rectangle, source:BitmapText):Void {
+  public static function computeBitmapTextLocalBoundsRectangle(out:Rectangle, source:BitmapText):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var bounds:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : BitmapTextRuntime);
@@ -132,13 +129,13 @@ class BitmapTextApi {
     FlightRuntime.callValue(copyRectangle, cast ([out, bounds] : Array<Dynamic>));
   }
 
-  @:keep public static function copyLocalBoundsRectangle__bitmapText(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function copyLocalBoundsRectangle__bitmapText(out:Rectangle, source:Node<Dynamic>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getDisplayObjectRuntime, cast ([(cast source : BitmapText)] : Array<Dynamic>)) : BitmapTextRuntime);
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'localBoundsRectangle'), null))) { FlightRuntime.callValue(copyRectangle, cast ([out, FlightRuntime.field(runtime, 'localBoundsRectangle')] : Array<Dynamic>)); }
   }
 
-  @:keep public static function createBitmapText(glyphSource:Null<GlyphSource>, ?options:BitmapTextOptions):BitmapText {
+  public static function createBitmapText(glyphSource:Null<GlyphSource>, ?options:BitmapTextOptions):BitmapText {
     var bitmapText:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var quadBatch:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -155,12 +152,12 @@ class BitmapTextApi {
     return cast null;
   }
 
-  @:keep public static function createBitmapTextData(?data:Dynamic):BitmapTextData {
+  public static function createBitmapTextData(?data:Dynamic):BitmapTextData {
     return cast { align: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'align'), function():Dynamic return cast 'left'), color: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'color'), function():Dynamic return cast BitmapTextApi.BITMAP_TEXT_DEFAULT_COLOR__bitmapText), glyphSource: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'glyphSource'), function():Dynamic return cast null), letterSpacing: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'letterSpacing'), function():Dynamic return cast 0.0), lineHeight: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'lineHeight'), function():Dynamic return cast 1.0), text: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'text'), function():Dynamic return cast ''), wrapWidth: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'wrapWidth'), function():Dynamic return cast null) };
     return cast null;
   }
 
-  @:keep public static function createBitmapTextRuntime():BitmapTextRuntime {
+  public static function createBitmapTextRuntime():BitmapTextRuntime {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(createDisplayObjectRuntime, cast ([BitmapTextApi.defaultMethods__bitmapText] : Array<Dynamic>)) : BitmapTextRuntime);
     FlightRuntime.setField(runtime, 'localBoundsRectangle', null);
@@ -171,7 +168,7 @@ class BitmapTextApi {
 
   public static final defaultMethods__bitmapText:Dynamic = { computeLocalBoundsRectangle: BitmapTextApi.copyLocalBoundsRectangle__bitmapText };
 
-  @:keep public static function ensureBitmapTextPageBatch__updateBitmapText(bitmapText:BitmapText, runtime:BitmapTextRuntime, glyphSource:GlyphSource, color:Float, pages:Dynamic, page:Float):Null<BitmapTextPageBatch__updateBitmapText> {
+  public static function ensureBitmapTextPageBatch__updateBitmapText(bitmapText:BitmapText, runtime:BitmapTextRuntime, glyphSource:GlyphSource, color:Float, pages:Dynamic, page:Float):Null<BitmapTextPageBatch__updateBitmapText> {
     var cached:Dynamic = cast FlightRuntime.UNDEFINED;
     var image:Dynamic = cast FlightRuntime.UNDEFINED;
     var quadBatch:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -196,13 +193,13 @@ class BitmapTextApi {
     return cast null;
   }
 
-  @:keep public static function ensureBoundsRectangle__updateBitmapText(runtime:BitmapTextRuntime):Rectangle {
+  public static function ensureBoundsRectangle__updateBitmapText(runtime:BitmapTextRuntime):Rectangle {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'localBoundsRectangle'), null))) { FlightRuntime.setField(runtime, 'localBoundsRectangle', FlightRuntime.callValue(createRectangle, cast ([] : Array<Dynamic>))); }
     return cast FlightRuntime.field(runtime, 'localBoundsRectangle');
     return cast null;
   }
 
-  @:keep public static function getBitmapTextBounds(source:BitmapText):Rectangle {
+  public static function getBitmapTextBounds(source:BitmapText):Rectangle {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = FlightRuntime.callValue(createRectangle, cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(computeBitmapTextLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
@@ -210,12 +207,12 @@ class BitmapTextApi {
     return cast null;
   }
 
-  @:keep public static function getBitmapTextQuadBatches(source:BitmapText):Array<QuadBatch> {
+  public static function getBitmapTextQuadBatches(source:BitmapText):Array<QuadBatch> {
     return cast FlightRuntime.field((cast FlightRuntime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : BitmapTextRuntime), 'quadBatches');
     return cast null;
   }
 
-  @:keep public static function layoutBitmapTextLines__updateBitmapText(glyphSource:GlyphSource, data:BitmapTextData):Array<BitmapTextLine__updateBitmapText> {
+  public static function layoutBitmapTextLines__updateBitmapText(glyphSource:GlyphSource, data:BitmapTextData):Array<BitmapTextLine__updateBitmapText> {
     var lines:Array<BitmapTextLine__updateBitmapText> = cast FlightRuntime.UNDEFINED;
     var paragraphs:Dynamic = cast FlightRuntime.UNDEFINED;
     lines = cast ([] : Array<Dynamic>);
@@ -248,7 +245,7 @@ class BitmapTextApi {
     return cast null;
   }
 
-  @:keep public static function maxLineWidth__updateBitmapText(lines:Array<BitmapTextLine__updateBitmapText>):Float {
+  public static function maxLineWidth__updateBitmapText(lines:Array<BitmapTextLine__updateBitmapText>):Float {
     var max:Dynamic = cast FlightRuntime.UNDEFINED;
     max = 0.0;
     for (line in FlightRuntime.iterable(lines)) {
@@ -258,7 +255,7 @@ class BitmapTextApi {
     return cast null;
   }
 
-  @:keep public static function reserveBitmapText(target:BitmapText, glyphCapacity:Float):Void {
+  public static function reserveBitmapText(target:BitmapText, glyphCapacity:Float):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getDisplayObjectRuntime, cast ([target] : Array<Dynamic>)) : BitmapTextRuntime);
     for (quadBatch in FlightRuntime.iterable(FlightRuntime.field(runtime, 'quadBatches'))) {
@@ -266,35 +263,35 @@ class BitmapTextApi {
     }
   }
 
-  @:keep public static function setBitmapTextAlign(target:BitmapText, align:BitmapTextAlign):Void {
+  public static function setBitmapTextAlign(target:BitmapText, align:BitmapTextAlign):Void {
     FlightRuntime.setField(FlightRuntime.field(target, 'data'), 'align', align);
   }
 
-  @:keep public static function setBitmapTextColor(target:BitmapText, color:Float):Void {
+  public static function setBitmapTextColor(target:BitmapText, color:Float):Void {
     FlightRuntime.setField(FlightRuntime.field(target, 'data'), 'color', color);
   }
 
-  @:keep public static function setBitmapTextGlyphSource(target:BitmapText, glyphSource:Null<GlyphSource>):Void {
+  public static function setBitmapTextGlyphSource(target:BitmapText, glyphSource:Null<GlyphSource>):Void {
     FlightRuntime.setField(FlightRuntime.field(target, 'data'), 'glyphSource', glyphSource);
   }
 
-  @:keep public static function setBitmapTextLetterSpacing(target:BitmapText, letterSpacing:Float):Void {
+  public static function setBitmapTextLetterSpacing(target:BitmapText, letterSpacing:Float):Void {
     FlightRuntime.setField(FlightRuntime.field(target, 'data'), 'letterSpacing', letterSpacing);
   }
 
-  @:keep public static function setBitmapTextLineHeight(target:BitmapText, lineHeight:Float):Void {
+  public static function setBitmapTextLineHeight(target:BitmapText, lineHeight:Float):Void {
     FlightRuntime.setField(FlightRuntime.field(target, 'data'), 'lineHeight', lineHeight);
   }
 
-  @:keep public static function setBitmapTextText(target:BitmapText, text:String):Void {
+  public static function setBitmapTextText(target:BitmapText, text:String):Void {
     FlightRuntime.setField(FlightRuntime.field(target, 'data'), 'text', text);
   }
 
-  @:keep public static function setBitmapTextWrapWidth(target:BitmapText, wrapWidth:Null<Float>):Void {
+  public static function setBitmapTextWrapWidth(target:BitmapText, wrapWidth:Null<Float>):Void {
     FlightRuntime.setField(FlightRuntime.field(target, 'data'), 'wrapWidth', wrapWidth);
   }
 
-  @:keep public static function setEmptyRectangle__updateBitmapText(out:Rectangle):Void {
+  public static function setEmptyRectangle__updateBitmapText(out:Rectangle):Void {
     FlightRuntime.setField(out, 'x', 0.0);
     FlightRuntime.setField(out, 'y', 0.0);
     FlightRuntime.setField(out, 'width', 0.0);
@@ -303,7 +300,7 @@ class BitmapTextApi {
 
   public static final SPACE__updateBitmapText:Dynamic = 32.0;
 
-  @:keep public static function updateBitmapText(bitmapText:BitmapText):Void {
+  public static function updateBitmapText(bitmapText:BitmapText):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var bounds:Dynamic = cast FlightRuntime.UNDEFINED;

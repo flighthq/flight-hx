@@ -8,9 +8,6 @@ import flight.Types.TextSegmentGranularity;
 import flight.Types.TextSegmentRange;
 import flight.Types.TextSegmenterBackend;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.TextSegmentApi")
 class TextSegmentApi {
   public static var _backend__textSegmenterBackend:Null<TextSegmenterBackend> = FlightRuntime.explicitNull();
@@ -19,19 +16,19 @@ class TextSegmentApi {
 
   public static final _segmenterCacheCapacity__textSegmenterBackend:Dynamic = 64.0;
 
-  @:keep public static function clampIndex__textSegmentBoundary(index:Float, length:Float):Float {
+  public static function clampIndex__textSegmentBoundary(index:Float, length:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.compare(index, 0.0, '<'))) { return cast 0.0; }
     if (FlightRuntime.truthy(FlightRuntime.compare(index, length, '>'))) { return cast length; }
     return cast index;
     return cast null;
   }
 
-  @:keep public static function createWebTextSegmenterBackend():TextSegmenterBackend {
+  public static function createWebTextSegmenterBackend():TextSegmenterBackend {
     return cast { segment: TextSegmentApi.segmentWithIntlSegmenter__textSegmenterBackend };
     return cast null;
   }
 
-  @:keep public static function getCachedSegmenter__textSegmenterBackend(locale:Null<String>, granularity:TextSegmentGranularity):Null<Dynamic> {
+  public static function getCachedSegmenter__textSegmenterBackend(locale:Null<String>, granularity:TextSegmentGranularity):Null<Dynamic> {
     var key:Dynamic = cast FlightRuntime.UNDEFINED;
     var existing:Dynamic = cast FlightRuntime.UNDEFINED;
     var built:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -49,33 +46,33 @@ class TextSegmentApi {
     return cast null;
   }
 
-  @:keep public static function getNextGraphemeBoundary(text:String, index:Float, ?locale:String):Float {
+  public static function getNextGraphemeBoundary(text:String, index:Float, ?locale:String):Float {
     return cast FlightRuntime.callValue(TextSegmentApi.nextSegmentBoundary__textSegmentBoundary, cast ([FlightRuntime.callValue(segmentGraphemes, cast ([text, locale] : Array<Dynamic>)), index, FlightRuntime.field(text, 'length')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getNextWordBoundary(text:String, index:Float, ?locale:String):Float {
+  public static function getNextWordBoundary(text:String, index:Float, ?locale:String):Float {
     return cast FlightRuntime.callValue(TextSegmentApi.nextSegmentBoundary__textSegmentBoundary, cast ([FlightRuntime.callValue(segmentWords, cast ([text, locale] : Array<Dynamic>)), index, FlightRuntime.field(text, 'length')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getPreviousGraphemeBoundary(text:String, index:Float, ?locale:String):Float {
+  public static function getPreviousGraphemeBoundary(text:String, index:Float, ?locale:String):Float {
     return cast FlightRuntime.callValue(TextSegmentApi.previousSegmentBoundary__textSegmentBoundary, cast ([FlightRuntime.callValue(segmentGraphemes, cast ([text, locale] : Array<Dynamic>)), index] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getPreviousWordBoundary(text:String, index:Float, ?locale:String):Float {
+  public static function getPreviousWordBoundary(text:String, index:Float, ?locale:String):Float {
     return cast FlightRuntime.callValue(TextSegmentApi.previousSegmentBoundary__textSegmentBoundary, cast ([FlightRuntime.callValue(segmentWords, cast ([text, locale] : Array<Dynamic>)), index] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getTextSegmenterBackend():TextSegmenterBackend {
+  public static function getTextSegmenterBackend():TextSegmenterBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(TextSegmentApi._backend__textSegmenterBackend, null))) { (TextSegmentApi._backend__textSegmenterBackend = cast (FlightRuntime.callValue(createWebTextSegmenterBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast TextSegmentApi._backend__textSegmenterBackend;
     return cast null;
   }
 
-  @:keep public static function getWordRangeAt(text:String, index:Float, ?locale:String):Null<TextSegmentRange> {
+  public static function getWordRangeAt(text:String, index:Float, ?locale:String):Null<TextSegmentRange> {
     var clamped:Dynamic = cast FlightRuntime.UNDEFINED;
     var lookup:Dynamic = cast FlightRuntime.UNDEFINED;
     var segments:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -92,7 +89,7 @@ class TextSegmentApi {
     return cast null;
   }
 
-  @:keep public static function nextSegmentBoundary__textSegmentBoundary(segments:Array<TextSegment>, index:Float, length:Float):Float {
+  public static function nextSegmentBoundary__textSegmentBoundary(segments:Array<TextSegment>, index:Float, length:Float):Float {
     var from:Dynamic = cast FlightRuntime.UNDEFINED;
     from = FlightRuntime.callValue(TextSegmentApi.clampIndex__textSegmentBoundary, cast ([index, length] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.compare(from, length, '>='))) { return cast length; }
@@ -103,7 +100,7 @@ class TextSegmentApi {
     return cast null;
   }
 
-  @:keep public static function previousSegmentBoundary__textSegmentBoundary(segments:Array<TextSegment>, index:Float):Float {
+  public static function previousSegmentBoundary__textSegmentBoundary(segments:Array<TextSegment>, index:Float):Float {
     var length:Dynamic = cast FlightRuntime.UNDEFINED;
     var from:Dynamic = cast FlightRuntime.UNDEFINED;
     var previous:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -119,17 +116,17 @@ class TextSegmentApi {
     return cast null;
   }
 
-  @:keep public static function segmentGraphemes(text:String, ?locale:String):Array<TextSegment> {
+  public static function segmentGraphemes(text:String, ?locale:String):Array<TextSegment> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getTextSegmenterBackend, cast ([] : Array<Dynamic>)), 'segment', cast ([text, 'grapheme', locale] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function segmentSentences(text:String, ?locale:String):Array<TextSegment> {
+  public static function segmentSentences(text:String, ?locale:String):Array<TextSegment> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getTextSegmenterBackend, cast ([] : Array<Dynamic>)), 'segment', cast ([text, 'sentence', locale] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function segmentWithIntlSegmenter__textSegmenterBackend(text:String, granularity:TextSegmentGranularity, ?locale:String):Array<TextSegment> {
+  public static function segmentWithIntlSegmenter__textSegmenterBackend(text:String, granularity:TextSegmentGranularity, ?locale:String):Array<TextSegment> {
     var segmenter:Dynamic = cast FlightRuntime.UNDEFINED;
     var out:Array<TextSegment> = cast FlightRuntime.UNDEFINED;
     var isWordGranularity:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -147,12 +144,12 @@ class TextSegmentApi {
     return cast null;
   }
 
-  @:keep public static function segmentWords(text:String, ?locale:String):Array<TextSegment> {
+  public static function segmentWords(text:String, ?locale:String):Array<TextSegment> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getTextSegmenterBackend, cast ([] : Array<Dynamic>)), 'segment', cast ([text, 'word', locale] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setTextSegmenterBackend(backend:Null<TextSegmenterBackend>):Void {
+  public static function setTextSegmenterBackend(backend:Null<TextSegmenterBackend>):Void {
     (TextSegmentApi._backend__textSegmenterBackend = cast (backend : Dynamic));
   }
 }

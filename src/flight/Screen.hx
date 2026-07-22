@@ -23,9 +23,6 @@ typedef ScreenDetails__screen = { var currentScreen:ScreenDetailed__screen; var 
 
 typedef WebScreenOrientationObject__screen = { @:optional var angle:Float; @:optional var type:String; @:optional var addEventListener:Dynamic; @:optional var removeEventListener:Dynamic; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Screen")
 class Screen {
   public static var _backend__screen:Null<ScreenBackend> = FlightRuntime.explicitNull();
@@ -34,7 +31,7 @@ class Screen {
 
   public static final _signalSubscriptions__screen:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function attachScreenSignals(signals:ScreenSignals):Void {
+  public static function attachScreenSignals(signals:ScreenSignals):Void {
     var unsubscribe:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(detachScreenSignals, cast ([signals] : Array<Dynamic>));
     unsubscribe = FlightRuntime.callProperty(FlightRuntime.callValue(getScreenBackend, cast ([] : Array<Dynamic>)), 'subscribe', cast ([function(event:Dynamic) {
@@ -49,7 +46,7 @@ class Screen {
     FlightRuntime.callProperty(Screen._signalSubscriptions__screen, 'set', cast ([signals, unsubscribe] : Array<Dynamic>));
   }
 
-  @:keep public static function copyScreenInfo__screen(src:ScreenInfo, dst:ScreenInfo):Void {
+  public static function copyScreenInfo__screen(src:ScreenInfo, dst:ScreenInfo):Void {
     FlightRuntime.setField(dst, 'id', FlightRuntime.field(src, 'id'));
     FlightRuntime.setField(dst, 'x', FlightRuntime.field(src, 'x'));
     FlightRuntime.setField(dst, 'y', FlightRuntime.field(src, 'y'));
@@ -77,22 +74,22 @@ class Screen {
     FlightRuntime.setField(dst, 'monochrome', FlightRuntime.field(src, 'monochrome'));
   }
 
-  @:keep public static function createScreenInfo():ScreenInfo {
+  public static function createScreenInfo():ScreenInfo {
     return cast { id: 0.0, x: 0.0, y: 0.0, width: 0.0, height: 0.0, workWidth: 0.0, workHeight: 0.0, scaleFactor: 1.0, isPrimary: false, rotation: -1.0, orientation: 'Landscape', refreshRate: -1.0, colorDepth: -1.0, pixelDepth: -1.0, physicalWidth: -1.0, physicalHeight: -1.0, isHdr: false, colorSpace: 'srgb', maxLuminance: -1.0, depthPerComponent: -1.0, dpi: -1.0, label: '', internal: false, touchSupport: 'unknown', monochrome: false };
     return cast null;
   }
 
-  @:keep public static function createScreenMode():ScreenMode {
+  public static function createScreenMode():ScreenMode {
     return cast { width: 0.0, height: 0.0, refreshRate: -1.0, colorDepth: -1.0, pixelFormat: '' };
     return cast null;
   }
 
-  @:keep public static function createScreenSignals():ScreenSignals {
+  public static function createScreenSignals():ScreenSignals {
     return cast { onScreenAdded: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onScreenMetricsChanged: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onScreenRemoved: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createWebScreenBackend():ScreenBackend {
+  public static function createWebScreenBackend():ScreenBackend {
     var _cursorX:Dynamic = cast FlightRuntime.UNDEFINED;
     var _cursorY:Dynamic = cast FlightRuntime.UNDEFINED;
     var _cursorTracking:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -319,7 +316,7 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function detachScreenSignals(signals:ScreenSignals):Void {
+  public static function detachScreenSignals(signals:ScreenSignals):Void {
     var unsubscribe:Dynamic = cast FlightRuntime.UNDEFINED;
     unsubscribe = FlightRuntime.callProperty(Screen._signalSubscriptions__screen, 'get', cast ([signals] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(unsubscribe, FlightRuntime.UNDEFINED))) {
@@ -328,7 +325,7 @@ class Screen {
 }
   }
 
-  @:keep public static function diffScreenInfo__screen(prev:ScreenInfo, curr:ScreenInfo):Null<ScreenChangedMetrics> {
+  public static function diffScreenInfo__screen(prev:ScreenInfo, curr:ScreenInfo):Null<ScreenChangedMetrics> {
     var boundsChanged:Dynamic = cast FlightRuntime.UNDEFINED;
     var workAreaChanged:Dynamic = cast FlightRuntime.UNDEFINED;
     var scaleChanged:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -342,7 +339,7 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function dipToScreenPoint(screen:ScreenInfo, point:Vector2Like, out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
+  public static function dipToScreenPoint(screen:ScreenInfo, point:Vector2Like, out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
     var px:Dynamic = cast FlightRuntime.UNDEFINED;
     var py:Dynamic = cast FlightRuntime.UNDEFINED;
     px = FlightRuntime.field(point, 'x');
@@ -353,7 +350,7 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function dipToScreenRect(screen:ScreenInfo, rect:RectangleLike, out:{ var x:Float; var y:Float; var width:Float; var height:Float; }):{ var x:Float; var y:Float; var width:Float; var height:Float; } {
+  public static function dipToScreenRect(screen:ScreenInfo, rect:RectangleLike, out:{ var x:Float; var y:Float; var width:Float; var height:Float; }):{ var x:Float; var y:Float; var width:Float; var height:Float; } {
     var rx:Dynamic = cast FlightRuntime.UNDEFINED;
     var ry:Dynamic = cast FlightRuntime.UNDEFINED;
     var rw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -372,16 +369,16 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function disposeScreenSignals(signals:ScreenSignals):Void {
+  public static function disposeScreenSignals(signals:ScreenSignals):Void {
     FlightRuntime.callValue(detachScreenSignals, cast ([signals] : Array<Dynamic>));
   }
 
-  @:keep public static function enableScreenSignals():ScreenSignals {
+  public static function enableScreenSignals():ScreenSignals {
     return cast FlightRuntime.callValue(createScreenSignals, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function fillDefaultScreenInfo__screen(out:ScreenInfo):Void {
+  public static function fillDefaultScreenInfo__screen(out:ScreenInfo):Void {
     FlightRuntime.setField(out, 'id', 0.0);
     FlightRuntime.setField(out, 'x', 0.0);
     FlightRuntime.setField(out, 'y', 0.0);
@@ -409,18 +406,18 @@ class Screen {
     FlightRuntime.setField(out, 'monochrome', false);
   }
 
-  @:keep public static function getPrimaryScreen(out:ScreenInfo):ScreenInfo {
+  public static function getPrimaryScreen(out:ScreenInfo):ScreenInfo {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getScreenBackend, cast ([] : Array<Dynamic>)), 'getPrimaryScreen', cast ([out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getScreenBackend():ScreenBackend {
+  public static function getScreenBackend():ScreenBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Screen._backend__screen, null))) { (Screen._backend__screen = cast (FlightRuntime.callValue(createWebScreenBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Screen._backend__screen;
     return cast null;
   }
 
-  @:keep public static function getScreenBounds(screen:ScreenInfo, out:{ var x:Float; var y:Float; var width:Float; var height:Float; }):{ var x:Float; var y:Float; var width:Float; var height:Float; } {
+  public static function getScreenBounds(screen:ScreenInfo, out:{ var x:Float; var y:Float; var width:Float; var height:Float; }):{ var x:Float; var y:Float; var width:Float; var height:Float; } {
     FlightRuntime.setField(out, 'x', FlightRuntime.field(screen, 'x'));
     FlightRuntime.setField(out, 'y', FlightRuntime.field(screen, 'y'));
     FlightRuntime.setField(out, 'width', FlightRuntime.field(screen, 'width'));
@@ -429,7 +426,7 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function getScreenById(id:Float, out:ScreenInfo):Null<ScreenInfo> {
+  public static function getScreenById(id:Float, out:ScreenInfo):Null<ScreenInfo> {
     var screens:Array<ScreenInfo> = cast FlightRuntime.UNDEFINED;
     screens = cast ([] : Array<Dynamic>);
     FlightRuntime.callValue(getScreens, cast ([screens] : Array<Dynamic>));
@@ -443,7 +440,7 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function getScreenContainingRect(rect:RectangleLike, out:ScreenInfo):ScreenInfo {
+  public static function getScreenContainingRect(rect:RectangleLike, out:ScreenInfo):ScreenInfo {
     var screens:Array<ScreenInfo> = cast FlightRuntime.UNDEFINED;
     var bestScreen:Dynamic = cast FlightRuntime.UNDEFINED;
     var bestOverlap:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -485,7 +482,7 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function getScreenCurrentMode(screen:ScreenInfo, out:ScreenMode):ScreenMode {
+  public static function getScreenCurrentMode(screen:ScreenInfo, out:ScreenMode):ScreenMode {
     FlightRuntime.setField(out, 'width', FlightRuntime.field(screen, 'width'));
     FlightRuntime.setField(out, 'height', FlightRuntime.field(screen, 'height'));
     FlightRuntime.setField(out, 'refreshRate', FlightRuntime.field(screen, 'refreshRate'));
@@ -495,12 +492,12 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function getScreenCursorPosition(out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
+  public static function getScreenCursorPosition(out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getScreenBackend, cast ([] : Array<Dynamic>)), 'getCursorPosition', cast ([out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getScreenCursorScreen(out:ScreenInfo):ScreenInfo {
+  public static function getScreenCursorScreen(out:ScreenInfo):ScreenInfo {
     var pos:Dynamic = cast FlightRuntime.UNDEFINED;
     pos = Screen._scratchPoint__screen;
     FlightRuntime.callValue(getScreenCursorPosition, cast ([pos] : Array<Dynamic>));
@@ -508,21 +505,20 @@ class Screen {
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function getScreenDetailPermission():flight.internal.FlightPromise<String> {
-    if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !FlightRuntime.truthy(FlightRuntime.hasField(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'permissions'))))) { return cast 'prompt'; }
-    try {
+  public static function getScreenDetailPermission():flight.internal.FlightPromise<String> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<String> {
+      if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !FlightRuntime.truthy(FlightRuntime.hasField(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'permissions'))))) { return cast 'prompt'; }
+      try {
   var status:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'permissions'), 'query', cast ([{ name: (cast 'window-management' : PermissionName) }] : Array<Dynamic>)));
   return cast (cast FlightRuntime.field(status, 'state') : String);
 } catch (__error:Dynamic) {
   return cast 'prompt';
 }
-    return cast null;
+      return cast null;
+    })();
   }
 
-  @:keep public static function getScreenModes(screen:ScreenInfo, out:Array<ScreenMode>):Array<ScreenMode> {
+  public static function getScreenModes(screen:ScreenInfo, out:Array<ScreenMode>):Array<ScreenMode> {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     backend = FlightRuntime.callValue(getScreenBackend, cast ([] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(backend, 'getModes'), FlightRuntime.UNDEFINED))) {
@@ -535,7 +531,7 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function getScreenNearestPoint(point:Vector2Like, out:ScreenInfo):ScreenInfo {
+  public static function getScreenNearestPoint(point:Vector2Like, out:ScreenInfo):ScreenInfo {
     var screens:Array<ScreenInfo> = cast FlightRuntime.UNDEFINED;
     var bestScreen:Dynamic = cast FlightRuntime.UNDEFINED;
     var bestDist:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -569,7 +565,7 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function getScreenNearestRect(rect:RectangleLike, out:ScreenInfo):ScreenInfo {
+  public static function getScreenNearestRect(rect:RectangleLike, out:ScreenInfo):ScreenInfo {
     var screens:Array<ScreenInfo> = cast FlightRuntime.UNDEFINED;
     var cx:Dynamic = cast FlightRuntime.UNDEFINED;
     var cy:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -607,12 +603,12 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function getScreens(out:Array<ScreenInfo>):Array<ScreenInfo> {
+  public static function getScreens(out:Array<ScreenInfo>):Array<ScreenInfo> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getScreenBackend, cast ([] : Array<Dynamic>)), 'getScreens', cast ([out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getScreenWorkArea(screen:ScreenInfo, out:{ var x:Float; var y:Float; var width:Float; var height:Float; }):{ var x:Float; var y:Float; var width:Float; var height:Float; } {
+  public static function getScreenWorkArea(screen:ScreenInfo, out:{ var x:Float; var y:Float; var width:Float; var height:Float; }):{ var x:Float; var y:Float; var width:Float; var height:Float; } {
     FlightRuntime.setField(out, 'x', FlightRuntime.field(screen, 'x'));
     FlightRuntime.setField(out, 'y', FlightRuntime.field(screen, 'y'));
     FlightRuntime.setField(out, 'width', FlightRuntime.field(screen, 'workWidth'));
@@ -621,7 +617,7 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function getWebColorSpace__screen():ScreenColorSpace {
+  public static function getWebColorSpace__screen():ScreenColorSpace {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'matchMedia')), 'function')))) { return cast 'srgb'; }
     if (FlightRuntime.truthy(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'matchMedia', cast (['(color-gamut: rec2020)'] : Array<Dynamic>)), 'matches'))) { return cast 'rec2020'; }
     if (FlightRuntime.truthy(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'matchMedia', cast (['(color-gamut: p3)'] : Array<Dynamic>)), 'matches'))) { return cast 'display-p3'; }
@@ -629,13 +625,13 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function getWebIsHdr__screen():Bool {
+  public static function getWebIsHdr__screen():Bool {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'matchMedia')), 'function')))) { return cast false; }
     return cast FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'matchMedia', cast (['(dynamic-range: high)'] : Array<Dynamic>)), 'matches');
     return cast null;
   }
 
-  @:keep public static function getWebOrientation__screen():ScreenOrientation {
+  public static function getWebOrientation__screen():ScreenOrientation {
     var obj:Dynamic = cast FlightRuntime.UNDEFINED;
     var type:Dynamic = cast FlightRuntime.UNDEFINED;
     obj = FlightRuntime.callValue(Screen.getWebScreenOrientationObject__screen, cast ([] : Array<Dynamic>));
@@ -647,7 +643,7 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function getWebRotation__screen():Float {
+  public static function getWebRotation__screen():Float {
     var obj:Dynamic = cast FlightRuntime.UNDEFINED;
     var angle:Dynamic = cast FlightRuntime.UNDEFINED;
     obj = FlightRuntime.callValue(Screen.getWebScreenOrientationObject__screen, cast ([] : Array<Dynamic>));
@@ -657,7 +653,7 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function getWebScreenOrientationObject__screen():Null<WebScreenOrientationObject__screen> {
+  public static function getWebScreenOrientationObject__screen():Null<WebScreenOrientationObject__screen> {
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'screen')), 'undefined')))) { return cast null; }
     s = (cast FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'screen') : Dynamic);
@@ -665,12 +661,12 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function onScreenChange(listener:Dynamic):Dynamic {
+  public static function onScreenChange(listener:Dynamic):Dynamic {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getScreenBackend, cast ([] : Array<Dynamic>)), 'subscribe', cast ([listener] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function onScreenDetailPermissionChange(listener:Dynamic):Dynamic {
+  public static function onScreenDetailPermissionChange(listener:Dynamic):Dynamic {
     var status:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
     var cancelled:Dynamic = cast FlightRuntime.UNDEFINED;
     var handleChange:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -696,18 +692,16 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function refreshScreens():Void {
+  public static function refreshScreens():Void {
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function requestScreenDetails():flight.internal.FlightPromise<Bool> {
-    var win:Dynamic = cast FlightRuntime.UNDEFINED;
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'))) { return cast false; }
-    win = (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : { @:optional var getScreenDetails:Dynamic; });
-    if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(win, 'getScreenDetails')), 'function'))) { return cast false; }
-    try {
+  public static function requestScreenDetails():flight.internal.FlightPromise<Bool> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Bool> {
+      var win:Dynamic = cast FlightRuntime.UNDEFINED;
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'))) { return cast false; }
+      win = (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['window'] : Array<Dynamic>)) : { @:optional var getScreenDetails:Dynamic; });
+      if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(win, 'getScreenDetails')), 'function'))) { return cast false; }
+      try {
   var details:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(win, 'getScreenDetails', cast ([] : Array<Dynamic>)));
   var b:Dynamic = (cast FlightRuntime.callValue(getScreenBackend, cast ([] : Array<Dynamic>)) : Dynamic);
   FlightRuntime.callOptionalProperty(b, '_upgrade', cast ([details] : Array<Dynamic>));
@@ -715,10 +709,11 @@ class Screen {
 } catch (__error:Dynamic) {
   return cast false;
 }
-    return cast null;
+      return cast null;
+    })();
   }
 
-  @:keep public static function screenToDipPoint(screen:ScreenInfo, point:Vector2Like, out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
+  public static function screenToDipPoint(screen:ScreenInfo, point:Vector2Like, out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
     var px:Dynamic = cast FlightRuntime.UNDEFINED;
     var py:Dynamic = cast FlightRuntime.UNDEFINED;
     px = FlightRuntime.field(point, 'x');
@@ -729,7 +724,7 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function screenToDipRect(screen:ScreenInfo, rect:RectangleLike, out:{ var x:Float; var y:Float; var width:Float; var height:Float; }):{ var x:Float; var y:Float; var width:Float; var height:Float; } {
+  public static function screenToDipRect(screen:ScreenInfo, rect:RectangleLike, out:{ var x:Float; var y:Float; var width:Float; var height:Float; }):{ var x:Float; var y:Float; var width:Float; var height:Float; } {
     var rx:Dynamic = cast FlightRuntime.UNDEFINED;
     var ry:Dynamic = cast FlightRuntime.UNDEFINED;
     var rw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -748,7 +743,7 @@ class Screen {
     return cast null;
   }
 
-  @:keep public static function setScreenBackend(backend:Null<ScreenBackend>):Void {
+  public static function setScreenBackend(backend:Null<ScreenBackend>):Void {
     (Screen._backend__screen = cast (backend : Dynamic));
   }
 }

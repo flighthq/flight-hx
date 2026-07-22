@@ -13,18 +13,15 @@ import flight.Types.TimelineLabel;
 import flight.Types.TimelineSignals;
 import flight.Types.TimelineSource;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.TimelineApi")
 class TimelineApi {
-  @:keep public static function addTimelineFrameScript(timeline:Timeline, frame:Dynamic, script:FrameScript):Void {
+  public static function addTimelineFrameScript(timeline:Timeline, frame:Dynamic, script:FrameScript):Void {
     var resolved:Dynamic = cast FlightRuntime.UNDEFINED;
     resolved = FlightRuntime.callValue(TimelineApi.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>));
     FlightRuntime.callProperty(FlightRuntime.setField(timeline, 'frameScripts', (FlightRuntime.field(timeline, 'frameScripts') ?? FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []))), 'set', cast ([resolved, script] : Array<Dynamic>));
   }
 
-  @:keep public static function advanceFrame__timeline(timeline:Timeline, deltaTime:Float):Float {
+  public static function advanceFrame__timeline(timeline:Timeline, deltaTime:Float):Float {
     var frameRate:Dynamic = cast FlightRuntime.UNDEFINED;
     var totalFrames:Dynamic = cast FlightRuntime.UNDEFINED;
     var next:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -65,38 +62,38 @@ class TimelineApi {
     return cast null;
   }
 
-  @:keep public static function createTimeline(?obj:Dynamic):Timeline {
+  public static function createTimeline(?obj:Dynamic):Timeline {
     return cast { source: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'source'), function():Dynamic return cast null), target: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'target'), function():Dynamic return cast null), currentFrame: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'currentFrame'), function():Dynamic return cast 1.0), frameScripts: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'frameScripts'), function():Dynamic return cast null), isPlaying: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'isPlaying'), function():Dynamic return cast false), lastFrameUpdate: -1.0, playMode: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'playMode'), function():Dynamic return cast 'loop'), signals: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'signals'), function():Dynamic return cast null), timeElapsed: 0.0 };
     return cast null;
   }
 
-  @:keep public static function createTimelineSignals__timeline():TimelineSignals {
+  public static function createTimelineSignals__timeline():TimelineSignals {
     return cast { onComplete: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onEnterFrame: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onExitFrame: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onFrameConstructed: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onLoop: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createTimelineSource(obj:{ @:optional var totalFrames:Float; @:optional var frameRate:Null<Float>; @:optional var labels:Array<TimelineLabel>; @:optional var constructFrame:Dynamic; }):TimelineSource {
+  public static function createTimelineSource(obj:{ @:optional var totalFrames:Float; @:optional var frameRate:Null<Float>; @:optional var labels:Array<TimelineLabel>; @:optional var constructFrame:Dynamic; }):TimelineSource {
     return cast { totalFrames: FlightRuntime.coalesce(FlightRuntime.field(obj, 'totalFrames'), function():Dynamic return cast 1.0), frameRate: FlightRuntime.coalesce(FlightRuntime.field(obj, 'frameRate'), function():Dynamic return cast null), labels: FlightRuntime.coalesce(FlightRuntime.field(obj, 'labels'), function():Dynamic return cast TimelineApi.EMPTY_LABELS__timeline), constructFrame: FlightRuntime.coalesce(FlightRuntime.field(obj, 'constructFrame'), function():Dynamic return cast TimelineApi.noopConstructFrame__timeline) };
     return cast null;
   }
 
-  @:keep public static function disposeTimelineSignals(timeline:Timeline):Void {
+  public static function disposeTimelineSignals(timeline:Timeline):Void {
     FlightRuntime.setField(timeline, 'signals', null);
   }
 
   public static final EMPTY_LABELS__timeline:Array<TimelineLabel> = cast ([] : Array<Dynamic>);
 
-  @:keep public static function enableTimelineSignals(timeline:Timeline):TimelineSignals {
+  public static function enableTimelineSignals(timeline:Timeline):TimelineSignals {
     return cast FlightRuntime.setField(timeline, 'signals', (FlightRuntime.field(timeline, 'signals') ?? FlightRuntime.callValue(TimelineApi.createTimelineSignals__timeline, cast ([] : Array<Dynamic>))));
     return cast null;
   }
 
-  @:keep public static function findTimelineLabel(timeline:Timeline, name:String):Null<TimelineLabel> {
+  public static function findTimelineLabel(timeline:Timeline, name:String):Null<TimelineLabel> {
     return cast FlightRuntime.coalesce(FlightRuntime.find(FlightRuntime.callValue(TimelineApi.getTimelineLabels__timeline, cast ([timeline] : Array<Dynamic>)), function(l:Dynamic) return FlightRuntime.strictEquals(FlightRuntime.field(l, 'name'), name)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function fireConstructFrame__timeline(timeline:Timeline):Void {
+  public static function fireConstructFrame__timeline(timeline:Timeline):Void {
     var previous:Dynamic = cast FlightRuntime.UNDEFINED;
     var current:Dynamic = cast FlightRuntime.UNDEFINED;
     var signals:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -119,7 +116,7 @@ class TimelineApi {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(signals, null))) { FlightRuntime.callValue(emitSignal, cast ([FlightRuntime.field(signals, 'onFrameConstructed'), frameEvent] : Array<Dynamic>)); }
   }
 
-  @:keep public static function getTimelineCurrentLabel(timeline:Timeline):Null<TimelineLabel> {
+  public static function getTimelineCurrentLabel(timeline:Timeline):Null<TimelineLabel> {
     var labels:Dynamic = cast FlightRuntime.UNDEFINED;
     var frame:Dynamic = cast FlightRuntime.UNDEFINED;
     var result:Null<TimelineLabel> = cast FlightRuntime.UNDEFINED;
@@ -135,12 +132,12 @@ class TimelineApi {
     return cast null;
   }
 
-  @:keep public static function getTimelineFrameRate__timeline(timeline:Timeline):Null<Float> {
+  public static function getTimelineFrameRate__timeline(timeline:Timeline):Null<Float> {
     return cast FlightRuntime.coalesce(FlightRuntime.optionalField(FlightRuntime.field(timeline, 'source'), 'frameRate'), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getTimelineFrameScript(timeline:Timeline, frame:Dynamic):Null<FrameScript> {
+  public static function getTimelineFrameScript(timeline:Timeline, frame:Dynamic):Null<FrameScript> {
     var resolved:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(timeline, 'frameScripts'), null))) { return cast null; }
     resolved = FlightRuntime.callValue(TimelineApi.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>));
@@ -148,46 +145,46 @@ class TimelineApi {
     return cast null;
   }
 
-  @:keep public static function getTimelineLabels__timeline(timeline:Timeline):Array<TimelineLabel> {
+  public static function getTimelineLabels__timeline(timeline:Timeline):Array<TimelineLabel> {
     return cast FlightRuntime.coalesce(FlightRuntime.optionalField(FlightRuntime.field(timeline, 'source'), 'labels'), function():Dynamic return cast TimelineApi.EMPTY_LABELS__timeline);
     return cast null;
   }
 
-  @:keep public static function getTimelineTotalFrames__timeline(timeline:Timeline):Float {
+  public static function getTimelineTotalFrames__timeline(timeline:Timeline):Float {
     return cast FlightRuntime.coalesce(FlightRuntime.optionalField(FlightRuntime.field(timeline, 'source'), 'totalFrames'), function():Dynamic return cast 1.0);
     return cast null;
   }
 
-  @:keep public static function gotoAndPlayTimeline(timeline:Timeline, frame:Dynamic):Void {
+  public static function gotoAndPlayTimeline(timeline:Timeline, frame:Dynamic):Void {
     FlightRuntime.callValue(playTimeline, cast ([timeline] : Array<Dynamic>));
     FlightRuntime.callValue(TimelineApi.seekTimeline__timeline, cast ([timeline, FlightRuntime.callValue(TimelineApi.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function gotoAndStopTimeline(timeline:Timeline, frame:Dynamic):Void {
+  public static function gotoAndStopTimeline(timeline:Timeline, frame:Dynamic):Void {
     FlightRuntime.callValue(stopTimeline, cast ([timeline] : Array<Dynamic>));
     FlightRuntime.callValue(TimelineApi.seekTimeline__timeline, cast ([timeline, FlightRuntime.callValue(TimelineApi.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function nextFrameTimeline(timeline:Timeline):Void {
+  public static function nextFrameTimeline(timeline:Timeline):Void {
     FlightRuntime.callValue(stopTimeline, cast ([timeline] : Array<Dynamic>));
     FlightRuntime.callValue(TimelineApi.seekTimeline__timeline, cast ([timeline, (FlightRuntime.field(timeline, 'currentFrame') + 1.0)] : Array<Dynamic>));
   }
 
-  @:keep public static function noopConstructFrame__timeline():Void {
+  public static function noopConstructFrame__timeline():Void {
   }
 
-  @:keep public static function playTimeline(timeline:Timeline):Void {
+  public static function playTimeline(timeline:Timeline):Void {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.field(timeline, 'isPlaying'), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.callValue(TimelineApi.getTimelineTotalFrames__timeline, cast ([timeline] : Array<Dynamic>)), 2.0, '<')))) { return; }
     FlightRuntime.setField(timeline, 'isPlaying', true);
     FlightRuntime.setField(timeline, 'timeElapsed', 0.0);
   }
 
-  @:keep public static function prevFrameTimeline(timeline:Timeline):Void {
+  public static function prevFrameTimeline(timeline:Timeline):Void {
     FlightRuntime.callValue(stopTimeline, cast ([timeline] : Array<Dynamic>));
     FlightRuntime.callValue(TimelineApi.seekTimeline__timeline, cast ([timeline, (FlightRuntime.field(timeline, 'currentFrame') - 1.0)] : Array<Dynamic>));
   }
 
-  @:keep public static function removeTimelineFrameScript(timeline:Timeline, frame:Dynamic):Void {
+  public static function removeTimelineFrameScript(timeline:Timeline, frame:Dynamic):Void {
     var resolved:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(timeline, 'frameScripts'), null))) { return; }
     resolved = FlightRuntime.callValue(TimelineApi.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>));
@@ -195,7 +192,7 @@ class TimelineApi {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(timeline, 'frameScripts'), 'size'), 0.0))) { FlightRuntime.setField(timeline, 'frameScripts', null); }
   }
 
-  @:keep public static function resolveFrame__timeline(timeline:Timeline, frame:Dynamic):Float {
+  public static function resolveFrame__timeline(timeline:Timeline, frame:Dynamic):Float {
     var label:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.typeofValue(frame), 'number'))) { return cast frame; }
     label = FlightRuntime.callValue(findTimelineLabel, cast ([timeline, frame] : Array<Dynamic>));
@@ -204,17 +201,17 @@ class TimelineApi {
     return cast null;
   }
 
-  @:keep public static function seekTimeline__timeline(timeline:Timeline, frame:Float):Void {
+  public static function seekTimeline__timeline(timeline:Timeline, frame:Float):Void {
     FlightRuntime.setField(timeline, 'currentFrame', FlightRuntime.callProperty(HxMath, 'max', cast ([1.0, FlightRuntime.callProperty(HxMath, 'min', cast ([frame, FlightRuntime.callValue(TimelineApi.getTimelineTotalFrames__timeline, cast ([timeline] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
     FlightRuntime.setField(timeline, 'lastFrameUpdate', -1.0);
     FlightRuntime.callValue(TimelineApi.fireConstructFrame__timeline, cast ([timeline] : Array<Dynamic>));
   }
 
-  @:keep public static function stopTimeline(timeline:Timeline):Void {
+  public static function stopTimeline(timeline:Timeline):Void {
     FlightRuntime.setField(timeline, 'isPlaying', false);
   }
 
-  @:keep public static function updateTimeline(timeline:Timeline, deltaTime:Float):Void {
+  public static function updateTimeline(timeline:Timeline, deltaTime:Float):Void {
     var frameRate:Dynamic = cast FlightRuntime.UNDEFINED;
     frameRate = FlightRuntime.callValue(TimelineApi.getTimelineFrameRate__timeline, cast ([timeline] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.field(timeline, 'isPlaying'), function():Dynamic return cast !FlightRuntime.strictEquals(frameRate, null)))) {

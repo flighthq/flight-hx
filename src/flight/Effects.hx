@@ -63,12 +63,9 @@ import flight.Types.VignetteEffect;
 import flight.Types.VolumetricLightEffect;
 import flight.Types.WhiteBalanceEffect;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Effects")
 class Effects {
-  @:keep public static function agxDefaultContrastApprox__toneMapMath(x:Float):Float {
+  public static function agxDefaultContrastApprox__toneMapMath(x:Float):Float {
     var x2:Dynamic = cast FlightRuntime.UNDEFINED;
     var x4:Dynamic = cast FlightRuntime.UNDEFINED;
     x2 = (x * x);
@@ -77,12 +74,12 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function blendLuminosity__blendModeMath(r:Float, g:Float, b:Float):Float {
+  public static function blendLuminosity__blendModeMath(r:Float, g:Float, b:Float):Float {
     return cast (((0.3 * r) + (0.59 * g)) + (0.11 * b));
     return cast null;
   }
 
-  @:keep public static function blendNonSeparableRgb(mode:AdvancedBlendMode, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float, out:Dynamic):Void {
+  public static function blendNonSeparableRgb(mode:AdvancedBlendMode, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float, out:Dynamic):Void {
     var r:Float = cast FlightRuntime.UNDEFINED;
     var g:Float = cast FlightRuntime.UNDEFINED;
     var b:Float = cast FlightRuntime.UNDEFINED;
@@ -113,19 +110,19 @@ class Effects {
     FlightRuntime.setIndex(out, 2.0, b);
   }
 
-  @:keep public static function blendSaturation__blendModeMath(r:Float, g:Float, b:Float):Float {
+  public static function blendSaturation__blendModeMath(r:Float, g:Float, b:Float):Float {
     return cast (HxMath.max(HxMath.max(r, g), b) - HxMath.min(HxMath.min(r, g), b));
     return cast null;
   }
 
   public static final BLUR_DOWNSAMPLE_MAX_SIGMA__blurDownsample:Dynamic = 4.0;
 
-  @:keep public static function canLerpRenderEffects(a:RenderEffect, b:RenderEffect):Bool {
+  public static function canLerpRenderEffects(a:RenderEffect, b:RenderEffect):Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'kind'), FlightRuntime.field(b, 'kind'));
     return cast null;
   }
 
-  @:keep public static function clipBlendColor__blendModeMath(r:Float, g:Float, b:Float):Array<Float> {
+  public static function clipBlendColor__blendModeMath(r:Float, g:Float, b:Float):Array<Float> {
     var l:Dynamic = cast FlightRuntime.UNDEFINED;
     var min:Dynamic = cast FlightRuntime.UNDEFINED;
     var max:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -154,7 +151,7 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function computeAcesToneMap(x:Float):Float {
+  public static function computeAcesToneMap(x:Float):Float {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     var c:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -169,7 +166,7 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function computeAgxToneMap(x:Float, ?options:AgxToneMapOptions):Float {
+  public static function computeAgxToneMap(x:Float, ?options:AgxToneMapOptions):Float {
     var min_ev:Dynamic = cast FlightRuntime.UNDEFINED;
     var max_ev:Dynamic = cast FlightRuntime.UNDEFINED;
     var val:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -184,27 +181,27 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function computeBloomBlurRadius(effect:BloomEffect):Float {
+  public static function computeBloomBlurRadius(effect:BloomEffect):Float {
     return cast FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.coalesce(FlightRuntime.field(effect, 'radius'), function():Dynamic return cast 8.0)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function computeBloomIntensity(effect:BloomEffect):Float {
+  public static function computeBloomIntensity(effect:BloomEffect):Float {
     return cast FlightRuntime.coalesce(FlightRuntime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     return cast null;
   }
 
-  @:keep public static function computeBloomThreshold(effect:BloomEffect):Float {
+  public static function computeBloomThreshold(effect:BloomEffect):Float {
     return cast FlightRuntime.coalesce(FlightRuntime.field(effect, 'threshold'), function():Dynamic return cast 0.8);
     return cast null;
   }
 
-  @:keep public static function computeBoxBlurLowerPassCount__boxBlurMath(sigma:Float, passes:Float, lowerWidth:Float):Float {
+  public static function computeBoxBlurLowerPassCount__boxBlurMath(sigma:Float, passes:Float, lowerWidth:Float):Float {
     return cast FlightRuntime.callProperty(HxMath, 'round', cast ([((((12.0 * sigma) * sigma) - (passes * (((lowerWidth * lowerWidth) + (4.0 * lowerWidth)) + 3.0))) / ((-4.0 * lowerWidth) - 4.0))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function computeBoxBlurLowerWidth__boxBlurMath(sigma:Float, passes:Float):Float {
+  public static function computeBoxBlurLowerWidth__boxBlurMath(sigma:Float, passes:Float):Float {
     var width:Dynamic = cast FlightRuntime.UNDEFINED;
     width = FlightRuntime.callProperty(HxMath, 'floor', cast ([FlightRuntime.callProperty(HxMath, 'sqrt', cast ([((((12.0 * sigma) * sigma) / passes) + 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals((width % 2.0), 0.0))) { (width = cast ((width - 1.0) : Dynamic)); }
@@ -212,7 +209,7 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function computeBoxBlurPassRadius(sigma:Float, passes:Float, pass:Float):Float {
+  public static function computeBoxBlurPassRadius(sigma:Float, passes:Float, pass:Float):Float {
     var lowerWidth:Dynamic = cast FlightRuntime.UNDEFINED;
     var lowerCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var width:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -224,13 +221,13 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function computeBoxBlurRadius(sigma:Float, passes:Float):Float {
+  public static function computeBoxBlurRadius(sigma:Float, passes:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.compare(sigma, 0.0, '<='))) { return cast 0.0; }
     return cast FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'round', cast ([((-1.0 + FlightRuntime.callProperty(HxMath, 'sqrt', cast ([(1.0 + (((12.0 * sigma) * sigma) / passes))] : Array<Dynamic>))) / 2.0)] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function computeColorTemperatureRgb(kelvin:Float, out:Array<Float>):Void {
+  public static function computeColorTemperatureRgb(kelvin:Float, out:Array<Float>):Void {
     var temp:Dynamic = cast FlightRuntime.UNDEFINED;
     var r:Float = cast FlightRuntime.UNDEFINED;
     var g:Float = cast FlightRuntime.UNDEFINED;
@@ -250,7 +247,7 @@ class Effects {
     FlightRuntime.setIndex(out, 2.0, FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, b] : Array<Dynamic>))] : Array<Dynamic>)));
   }
 
-  @:keep public static function computeCrtMaskParams(resolution:Float, curvature:Float, out:Array<Float>):Void {
+  public static function computeCrtMaskParams(resolution:Float, curvature:Float, out:Array<Float>):Void {
     var maskScale:Dynamic = cast FlightRuntime.UNDEFINED;
     var curv:Dynamic = cast FlightRuntime.UNDEFINED;
     maskScale = (FlightRuntime.callProperty(HxMath, 'max', cast ([1.0, resolution] : Array<Dynamic>)) / 360.0);
@@ -259,7 +256,7 @@ class Effects {
     FlightRuntime.setIndex(out, 1.0, (curv * 0.1));
   }
 
-  @:keep public static function computeDepthOfFieldCoc(depth:Float, focusDistance:Float, aperture:Float, focalLength:Float):Float {
+  public static function computeDepthOfFieldCoc(depth:Float, focusDistance:Float, aperture:Float, focalLength:Float):Float {
     var fd:Dynamic = cast FlightRuntime.UNDEFINED;
     var fl:Dynamic = cast FlightRuntime.UNDEFINED;
     var d:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -272,12 +269,12 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function computeExposureScale(exposure:Float):Float {
+  public static function computeExposureScale(exposure:Float):Float {
     return cast FlightRuntime.callProperty(HxMath, 'pow', cast ([2.0, exposure] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function computeFilmicToneMap(x:Float, ?options:FilmicToneMapOptions):Float {
+  public static function computeFilmicToneMap(x:Float, ?options:FilmicToneMapOptions):Float {
     var maxBrightness:Dynamic = cast FlightRuntime.UNDEFINED;
     var contrast:Dynamic = cast FlightRuntime.UNDEFINED;
     var linearStart:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -316,7 +313,7 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function computeGaussianKernelWeights(sigma:Float, out:Array<Float>):Array<Float> {
+  public static function computeGaussianKernelWeights(sigma:Float, out:Array<Float>):Array<Float> {
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
     var twoSigmaSquared:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -353,12 +350,12 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function computeGaussianRadiusFromSigma(sigma:Float):Float {
+  public static function computeGaussianRadiusFromSigma(sigma:Float):Float {
     return cast FlightRuntime.callProperty(HxMath, 'ceil', cast ([(3.0 * FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, sigma] : Array<Dynamic>)))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function computeGaussianSigmaForBlurRadius(radius:Float, passes:Float):Float {
+  public static function computeGaussianSigmaForBlurRadius(radius:Float, passes:Float):Float {
     var width:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.compare(radius, 0.0, '<='), function():Dynamic return cast FlightRuntime.compare(passes, 0.0, '<=')))) { return cast 0.0; }
     width = ((2.0 * radius) + 1.0);
@@ -366,12 +363,12 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function computeGaussianSigmaFromRadius(radius:Float):Float {
+  public static function computeGaussianSigmaFromRadius(radius:Float):Float {
     return cast (FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, radius] : Array<Dynamic>)) / 3.0);
     return cast null;
   }
 
-  @:keep public static function computeGodRaysAccumulationScale(effect:GodRaysEffect):Float {
+  public static function computeGodRaysAccumulationScale(effect:GodRaysEffect):Float {
     var samples:Dynamic = cast FlightRuntime.UNDEFINED;
     var weight:Dynamic = cast FlightRuntime.UNDEFINED;
     var exposure:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -382,12 +379,12 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function computeGodRaysLightCenter(effect:GodRaysEffect, out:Array<Float>):Void {
+  public static function computeGodRaysLightCenter(effect:GodRaysEffect, out:Array<Float>):Void {
     FlightRuntime.setIndex(out, 0.0, FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, FlightRuntime.coalesce(FlightRuntime.field(effect, 'centerX'), function():Dynamic return cast 0.5)] : Array<Dynamic>))] : Array<Dynamic>)));
     FlightRuntime.setIndex(out, 1.0, FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, FlightRuntime.coalesce(FlightRuntime.field(effect, 'centerY'), function():Dynamic return cast 0.5)] : Array<Dynamic>))] : Array<Dynamic>)));
   }
 
-  @:keep public static function computeGodRaysSampleWeight(effect:GodRaysEffect, sampleIndex:Float):Float {
+  public static function computeGodRaysSampleWeight(effect:GodRaysEffect, sampleIndex:Float):Float {
     var decay:Dynamic = cast FlightRuntime.UNDEFINED;
     var weight:Dynamic = cast FlightRuntime.UNDEFINED;
     var exposure:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -398,7 +395,7 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function computeGodRaysStepSize(effect:GodRaysEffect, px:Float, py:Float, out:Array<Float>):Void {
+  public static function computeGodRaysStepSize(effect:GodRaysEffect, px:Float, py:Float, out:Array<Float>):Void {
     var cx:Dynamic = cast FlightRuntime.UNDEFINED;
     var cy:Dynamic = cast FlightRuntime.UNDEFINED;
     var density:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -415,7 +412,7 @@ class Effects {
     FlightRuntime.setIndex(out, 1.0, dy);
   }
 
-  @:keep public static function computeHalftoneCellParams(frequency:Float, angle:Float, out:Array<Float>):Void {
+  public static function computeHalftoneCellParams(frequency:Float, angle:Float, out:Array<Float>):Void {
     var cellSize:Dynamic = cast FlightRuntime.UNDEFINED;
     cellSize = FlightRuntime.select(FlightRuntime.compare(frequency, 1e-10, '>'), function():Dynamic return cast (1.0 / frequency), function():Dynamic return cast 1.0);
     FlightRuntime.setIndex(out, 0.0, cellSize);
@@ -423,7 +420,7 @@ class Effects {
     FlightRuntime.setIndex(out, 2.0, FlightRuntime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>)));
   }
 
-  @:keep public static function computeKuwaharaGaussianWeights(radius:Float, out:flight.internal.FlightFloat32Array):Float {
+  public static function computeKuwaharaGaussianWeights(radius:Float, out:flight.internal.FlightFloat32Array):Float {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     var sigma:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -462,7 +459,7 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function computeKuwaharaSectorOffsets(radius:Float, out:Array<Float>):Void {
+  public static function computeKuwaharaSectorOffsets(radius:Float, out:Array<Float>):Void {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var half:Dynamic = cast FlightRuntime.UNDEFINED;
     var v0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -493,24 +490,24 @@ class Effects {
     FlightRuntime.setIndex(out, 7.0, v7);
   }
 
-  @:keep public static function computeKuwaharaSectorPixelCount(effect:KuwaharaEffect):Float {
+  public static function computeKuwaharaSectorPixelCount(effect:KuwaharaEffect):Float {
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
     s = FlightRuntime.callValue(computeKuwaharaSectorSize, cast ([effect] : Array<Dynamic>));
     return cast (s * s);
     return cast null;
   }
 
-  @:keep public static function computeKuwaharaSectorSize(effect:KuwaharaEffect):Float {
+  public static function computeKuwaharaSectorSize(effect:KuwaharaEffect):Float {
     return cast (FlightRuntime.callProperty(HxMath, 'max', cast ([1.0, FlightRuntime.callProperty(HxMath, 'floor', cast ([FlightRuntime.coalesce(FlightRuntime.field(effect, 'radius'), function():Dynamic return cast 3.0)] : Array<Dynamic>))] : Array<Dynamic>)) + 1.0);
     return cast null;
   }
 
-  @:keep public static function computeLinearDepthFromNonlinear(depth:Float, near:Float, far:Float):Float {
+  public static function computeLinearDepthFromNonlinear(depth:Float, near:Float, far:Float):Float {
     return cast ((near * far) / (far - (depth * (far - near))));
     return cast null;
   }
 
-  @:keep public static function computeLinearSampledGaussian(sigma:Float, outWeights:Array<Float>, outOffsets:Array<Float>):Array<Float> {
+  public static function computeLinearSampledGaussian(sigma:Float, outWeights:Array<Float>, outOffsets:Array<Float>):Array<Float> {
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
     var tapCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -542,7 +539,7 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function computeOutlineEdgeParams(effect:OutlineEffect, out:Array<Float>):Void {
+  public static function computeOutlineEdgeParams(effect:OutlineEffect, out:Array<Float>):Void {
     var threshold:Dynamic = cast FlightRuntime.UNDEFINED;
     var feather:Dynamic = cast FlightRuntime.UNDEFINED;
     var color:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -565,36 +562,36 @@ class Effects {
     FlightRuntime.setIndex(out, 5.0, a);
   }
 
-  @:keep public static function computeOutlineThicknessPx(effect:OutlineEffect):Float {
+  public static function computeOutlineThicknessPx(effect:OutlineEffect):Float {
     return cast FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'round', cast ([FlightRuntime.coalesce(FlightRuntime.field(effect, 'thickness'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function computeReinhardExtendedToneMap(x:Float, white:Float):Float {
+  public static function computeReinhardExtendedToneMap(x:Float, white:Float):Float {
     var w2:Dynamic = cast FlightRuntime.UNDEFINED;
     w2 = (white * white);
     return cast ((x * (1.0 + (x / w2))) / (1.0 + x));
     return cast null;
   }
 
-  @:keep public static function computeReinhardToneMap(x:Float):Float {
+  public static function computeReinhardToneMap(x:Float):Float {
     return cast (x / (1.0 + x));
     return cast null;
   }
 
-  @:keep public static function computeScanlineParams(resolution:Float, intensity:Float, out:Array<Float>):Void {
+  public static function computeScanlineParams(resolution:Float, intensity:Float, out:Array<Float>):Void {
     var scale:Dynamic = cast FlightRuntime.UNDEFINED;
     scale = (FlightRuntime.callProperty(HxMath, 'max', cast ([1.0, resolution] : Array<Dynamic>)) / 480.0);
     FlightRuntime.setIndex(out, 0.0, scale);
     FlightRuntime.setIndex(out, 1.0, FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, intensity] : Array<Dynamic>))] : Array<Dynamic>)));
   }
 
-  @:keep public static function computeSeparableBlurPassCount(samples:Null<Float>):Float {
+  public static function computeSeparableBlurPassCount(samples:Null<Float>):Float {
     return cast FlightRuntime.callProperty(HxMath, 'max', cast ([1.0, FlightRuntime.callProperty(HxMath, 'round', cast ([FlightRuntime.coalesce(samples, function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function computeSketchEdgeParams(effect:SketchEffect, out:Array<Float>):Void {
+  public static function computeSketchEdgeParams(effect:SketchEffect, out:Array<Float>):Void {
     var strength:Dynamic = cast FlightRuntime.UNDEFINED;
     var threshold:Dynamic = cast FlightRuntime.UNDEFINED;
     strength = FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, FlightRuntime.coalesce(FlightRuntime.field(effect, 'strength'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
@@ -603,7 +600,7 @@ class Effects {
     FlightRuntime.setIndex(out, 1.0, strength);
   }
 
-  @:keep public static function computeSsaoSampleKernel(samples:Float, out:flight.internal.FlightFloat32Array):Float {
+  public static function computeSsaoSampleKernel(samples:Float, out:flight.internal.FlightFloat32Array):Float {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     n = FlightRuntime.callProperty(HxMath, 'max', cast ([1.0, FlightRuntime.callProperty(HxMath, 'round', cast ([samples] : Array<Dynamic>))] : Array<Dynamic>));
     {
@@ -625,7 +622,7 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function computeUncharted2ToneMap(x:Float):Float {
+  public static function computeUncharted2ToneMap(x:Float):Float {
     var A:Dynamic = cast FlightRuntime.UNDEFINED;
     var B:Dynamic = cast FlightRuntime.UNDEFINED;
     var C:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -642,7 +639,7 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function computeWhiteBalanceMultipliers(temperature:Float, tint:Float, out:Array<Float>):Void {
+  public static function computeWhiteBalanceMultipliers(temperature:Float, tint:Float, out:Array<Float>):Void {
     var kelvin:Dynamic = cast FlightRuntime.UNDEFINED;
     var greenShift:Dynamic = cast FlightRuntime.UNDEFINED;
     kelvin = (6500.0 - (temperature * 4500.0));
@@ -653,19 +650,19 @@ class Effects {
     FlightRuntime.setIndex(out, 2.0, FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.getIndex(out, 2.0)] : Array<Dynamic>)));
   }
 
-  @:keep public static function createAutoExposureEffect(?options:Dynamic):AutoExposureEffect {
+  public static function createAutoExposureEffect(?options:Dynamic):AutoExposureEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'AutoExposureEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createBarrelDistortionEffect(?options:Dynamic):BarrelDistortionEffect {
+  public static function createBarrelDistortionEffect(?options:Dynamic):BarrelDistortionEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'BarrelDistortionEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createBayerMatrix(order:Float, out:flight.internal.FlightFloat32Array):Float {
+  public static function createBayerMatrix(order:Float, out:flight.internal.FlightFloat32Array):Float {
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     var sizeSq:Dynamic = cast FlightRuntime.UNDEFINED;
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -715,119 +712,119 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function createBevelEffect(?options:Dynamic):BevelEffect {
+  public static function createBevelEffect(?options:Dynamic):BevelEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'BevelEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createBlendEffect(mode:AdvancedBlendMode, ?options:Dynamic):BlendEffect {
+  public static function createBlendEffect(mode:AdvancedBlendMode, ?options:Dynamic):BlendEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'BlendEffect' }, { mode: mode }, options]);
     return cast null;
   }
 
-  @:keep public static function createBloomEffect(?options:Dynamic):BloomEffect {
+  public static function createBloomEffect(?options:Dynamic):BloomEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'BloomEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createBlurEffect(?options:Dynamic):BlurEffect {
+  public static function createBlurEffect(?options:Dynamic):BlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'BlurEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createBokehDepthOfFieldEffect(?options:Dynamic):BokehDepthOfFieldEffect {
+  public static function createBokehDepthOfFieldEffect(?options:Dynamic):BokehDepthOfFieldEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'BokehDepthOfFieldEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createCameraMotionBlurEffect(?options:Dynamic):CameraMotionBlurEffect {
+  public static function createCameraMotionBlurEffect(?options:Dynamic):CameraMotionBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'CameraMotionBlurEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createChromaticAberrationEffect(?options:Dynamic):ChromaticAberrationEffect {
+  public static function createChromaticAberrationEffect(?options:Dynamic):ChromaticAberrationEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'ChromaticAberrationEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createCompositeEffect(operator_:CompositeOperator, ?options:Dynamic):CompositeEffect {
+  public static function createCompositeEffect(operator_:CompositeOperator, ?options:Dynamic):CompositeEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'CompositeEffect' }, FlightRuntime.objectFromPairs([{ key: 'operator', value: operator_ }]), options]);
     return cast null;
   }
 
-  @:keep public static function createContactShadowsEffect(?options:Dynamic):ContactShadowsEffect {
+  public static function createContactShadowsEffect(?options:Dynamic):ContactShadowsEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'ContactShadowsEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createConvolutionEffect(options:Dynamic):ConvolutionEffect {
+  public static function createConvolutionEffect(options:Dynamic):ConvolutionEffect {
     return cast FlightRuntime.mergeObjects([{ kind: 'ConvolutionEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createCrtEffect(?options:Dynamic):CrtEffect {
+  public static function createCrtEffect(?options:Dynamic):CrtEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'CrtEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createCustomShaderEffect(options:Dynamic):CustomShaderEffect {
+  public static function createCustomShaderEffect(options:Dynamic):CustomShaderEffect {
     return cast FlightRuntime.mergeObjects([{ kind: 'CustomShaderEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createDirectionalBlurEffect(?options:Dynamic):DirectionalBlurEffect {
+  public static function createDirectionalBlurEffect(?options:Dynamic):DirectionalBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'DirectionalBlurEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createDisplacementEffect(?options:Dynamic):DisplacementEffect {
+  public static function createDisplacementEffect(?options:Dynamic):DisplacementEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'DisplacementEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createDitherEffect(?options:Dynamic):DitherEffect {
+  public static function createDitherEffect(?options:Dynamic):DitherEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'DitherEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createDropShadowEffect(?options:Dynamic):DropShadowEffect {
+  public static function createDropShadowEffect(?options:Dynamic):DropShadowEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'DropShadowEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createFilmEmulationEffect(?options:Dynamic):FilmEmulationEffect {
+  public static function createFilmEmulationEffect(?options:Dynamic):FilmEmulationEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'FilmEmulationEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createFilmGrainEffect(?options:Dynamic):FilmGrainEffect {
+  public static function createFilmGrainEffect(?options:Dynamic):FilmGrainEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'FilmGrainEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createFxaaEffect(?options:Dynamic):FxaaEffect {
+  public static function createFxaaEffect(?options:Dynamic):FxaaEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'FxaaEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createGaussianKernelWeights(radius:Float, sigma:Float, out:flight.internal.FlightFloat32Array):Float {
+  public static function createGaussianKernelWeights(radius:Float, sigma:Float, out:flight.internal.FlightFloat32Array):Float {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
     var twoSigmaSq:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -858,191 +855,191 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function createGlitchEffect(?options:Dynamic):GlitchEffect {
+  public static function createGlitchEffect(?options:Dynamic):GlitchEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'GlitchEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createGodRaysEffect(?options:Dynamic):GodRaysEffect {
+  public static function createGodRaysEffect(?options:Dynamic):GodRaysEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'GodRaysEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createGradientBevelEffect(options:Dynamic):GradientBevelEffect {
+  public static function createGradientBevelEffect(options:Dynamic):GradientBevelEffect {
     return cast FlightRuntime.mergeObjects([{ kind: 'GradientBevelEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createGradientGlowEffect(options:Dynamic):GradientGlowEffect {
+  public static function createGradientGlowEffect(options:Dynamic):GradientGlowEffect {
     return cast FlightRuntime.mergeObjects([{ kind: 'GradientGlowEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createHalftoneEffect(?options:Dynamic):HalftoneEffect {
+  public static function createHalftoneEffect(?options:Dynamic):HalftoneEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'HalftoneEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createInnerGlowEffect(?options:Dynamic):InnerGlowEffect {
+  public static function createInnerGlowEffect(?options:Dynamic):InnerGlowEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'InnerGlowEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createInnerShadowEffect(?options:Dynamic):InnerShadowEffect {
+  public static function createInnerShadowEffect(?options:Dynamic):InnerShadowEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'InnerShadowEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createKuwaharaEffect(?options:Dynamic):KuwaharaEffect {
+  public static function createKuwaharaEffect(?options:Dynamic):KuwaharaEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'KuwaharaEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createLensDirtEffect(?options:Dynamic):LensDirtEffect {
+  public static function createLensDirtEffect(?options:Dynamic):LensDirtEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'LensDirtEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createLensDistortionEffect(?options:Dynamic):LensDistortionEffect {
+  public static function createLensDistortionEffect(?options:Dynamic):LensDistortionEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'LensDistortionEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createLensFlareEffect(?options:Dynamic):LensFlareEffect {
+  public static function createLensFlareEffect(?options:Dynamic):LensFlareEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'LensFlareEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createMedianEffect(?options:Dynamic):MedianEffect {
+  public static function createMedianEffect(?options:Dynamic):MedianEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'MedianEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createMotionBlurEffect(?options:Dynamic):MotionBlurEffect {
+  public static function createMotionBlurEffect(?options:Dynamic):MotionBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'MotionBlurEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createOuterGlowEffect(?options:Dynamic):OuterGlowEffect {
+  public static function createOuterGlowEffect(?options:Dynamic):OuterGlowEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'OuterGlowEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createOutlineEffect(?options:Dynamic):OutlineEffect {
+  public static function createOutlineEffect(?options:Dynamic):OutlineEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'OutlineEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createPanniniProjectionEffect(?options:Dynamic):PanniniProjectionEffect {
+  public static function createPanniniProjectionEffect(?options:Dynamic):PanniniProjectionEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'PanniniProjectionEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createPixelateEffect(?options:Dynamic):PixelateEffect {
+  public static function createPixelateEffect(?options:Dynamic):PixelateEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'PixelateEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createPosterizeEffect(?options:Dynamic):PosterizeEffect {
+  public static function createPosterizeEffect(?options:Dynamic):PosterizeEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'PosterizeEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createRadialBlurEffect(?options:Dynamic):RadialBlurEffect {
+  public static function createRadialBlurEffect(?options:Dynamic):RadialBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'RadialBlurEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createScanlinesEffect(?options:Dynamic):ScanlinesEffect {
+  public static function createScanlinesEffect(?options:Dynamic):ScanlinesEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'ScanlinesEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createScreenSpaceFogEffect(?options:Dynamic):ScreenSpaceFogEffect {
+  public static function createScreenSpaceFogEffect(?options:Dynamic):ScreenSpaceFogEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'ScreenSpaceFogEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createSharpenEffect(?options:Dynamic):SharpenEffect {
+  public static function createSharpenEffect(?options:Dynamic):SharpenEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'SharpenEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createSketchEffect(?options:Dynamic):SketchEffect {
+  public static function createSketchEffect(?options:Dynamic):SketchEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'SketchEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createSmaaEffect(?options:Dynamic):SmaaEffect {
+  public static function createSmaaEffect(?options:Dynamic):SmaaEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'SmaaEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createSsaoEffect(?options:Dynamic):SsaoEffect {
+  public static function createSsaoEffect(?options:Dynamic):SsaoEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'SsaoEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createSsrEffect(?options:Dynamic):SsrEffect {
+  public static function createSsrEffect(?options:Dynamic):SsrEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'SsrEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createTaaEffect(?options:Dynamic):TaaEffect {
+  public static function createTaaEffect(?options:Dynamic):TaaEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'TaaEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createTiltShiftEffect(?options:Dynamic):TiltShiftEffect {
+  public static function createTiltShiftEffect(?options:Dynamic):TiltShiftEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'TiltShiftEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createToneMapEffect(?options:Dynamic):ToneMapEffect {
+  public static function createToneMapEffect(?options:Dynamic):ToneMapEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'ToneMapEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createVignetteEffect(?options:Dynamic):VignetteEffect {
+  public static function createVignetteEffect(?options:Dynamic):VignetteEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'VignetteEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createVolumetricLightEffect(?options:Dynamic):VolumetricLightEffect {
+  public static function createVolumetricLightEffect(?options:Dynamic):VolumetricLightEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'VolumetricLightEffect' }, options]);
     return cast null;
   }
 
-  @:keep public static function createWhiteBalanceEffect(?options:Dynamic):WhiteBalanceEffect {
+  public static function createWhiteBalanceEffect(?options:Dynamic):WhiteBalanceEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast FlightRuntime.mergeObjects([{ kind: 'WhiteBalanceEffect' }, options]);
     return cast null;
@@ -1050,7 +1047,7 @@ class Effects {
 
   public static final DEFAULTS__renderEffectDefaults:Dynamic = { AutoExposureEffect: { adaptationSpeed: 1.0, exposureCompensation: 0.0, maxExposure: 2.0, minExposure: -2.0 }, BarrelDistortionEffect: { amount: 0.5, scale: 0.9 }, BevelEffect: { angle: 45.0, bevelType: 'inner', blurX: 4.0, blurY: 4.0, distance: 4.0, highlightAlpha: 1.0, highlightColor: 16777215.0, quality: 1.0, shadowAlpha: 1.0, shadowColor: 0.0, sourceMode: 'draw', strength: 1.0 }, BlendEffect: { opacity: 1.0 }, BloomEffect: { brightness: 1.0, mipCount: 0.0, passes: 1.0, radius: 8.0, threshold: 0.8, thresholdKnee: 0.5 }, BlurEffect: { blurX: 4.0, blurY: 4.0 }, BokehDepthOfFieldEffect: { apertureBlades: 6.0, maxBlurRadius: 16.0, samples: 16.0 }, CameraMotionBlurEffect: { samples: 8.0 }, ChromaticAberrationEffect: { fringeStrength: 0.01, radial: true, samples: 3.0 }, ContactShadowsEffect: { distance: 0.5, opacity: 0.6, samples: 16.0, smoothness: 0.5 }, ConvolutionEffect: { bias: 0.0, clamp: true, preserveAlpha: true }, CrtEffect: { curvature: 0.1, scanlineIntensity: 0.5, vignette: 0.4, aberration: 0.0 }, DirectionalBlurEffect: { angle: 0.0, samples: 8.0 }, DisplacementEffect: { frequency: 12.0, intensity: 8.0 }, DitherEffect: { levels: 16.0 }, DropShadowEffect: { alpha: 1.0, angle: 45.0, blurX: 4.0, blurY: 4.0, distance: 4.0, quality: 1.0, sourceMode: 'draw', strength: 1.0 }, FilmEmulationEffect: { gateWeave: 0.0, grainIntensity: 0.1, halationRadius: 4.0, halationStrength: 0.3 }, FilmGrainEffect: { intensity: 0.2, size: 1.0, seed: 0.0 }, FxaaEffect: { edgeThreshold: 0.0312, subpixel: 0.75 }, GlitchEffect: { blockSize: 24.0, colorShift: 8.0, intensity: 0.5, seed: 0.0 }, GodRaysEffect: { centerX: 0.5, centerY: 0.5, decay: 0.96, density: 0.96, exposure: 0.1, samples: 100.0, weight: 0.4 }, GradientBevelEffect: { angle: 45.0, bevelType: 'inner', blurX: 4.0, blurY: 4.0, distance: 4.0, quality: 1.0, sourceMode: 'draw', strength: 1.0 }, GradientGlowEffect: { blurX: 6.0, blurY: 6.0, quality: 1.0, sourceMode: 'draw', strength: 1.0 }, HalftoneEffect: { angle: 0.785, scale: 8.0 }, InnerGlowEffect: { alpha: 1.0, blurX: 6.0, blurY: 6.0, color: 16711680.0, quality: 1.0, sourceMode: 'draw', strength: 1.0 }, InnerShadowEffect: { alpha: 1.0, angle: 45.0, blurX: 4.0, blurY: 4.0, distance: 4.0, quality: 1.0, sourceMode: 'draw', strength: 1.0 }, KuwaharaEffect: { radius: 3.0 }, LensDirtEffect: { intensity: 1.0, threshold: 0.55 }, LensDistortionEffect: { amount: 0.5, scale: 0.9 }, LensFlareEffect: { ghosts: 4.0, halo: 0.5, intensity: 1.0, threshold: 0.9 }, MedianEffect: { radius: 1.0 }, MotionBlurEffect: { intensity: 1.0, samples: 8.0, shutterAngle: 180.0, target: 'both' }, OuterGlowEffect: { alpha: 1.0, blurX: 6.0, blurY: 6.0, color: 16711680.0, quality: 1.0, sourceMode: 'draw', strength: 1.0 }, OutlineEffect: { color: 255.0, thickness: 1.0, threshold: 0.1 }, PanniniProjectionEffect: { compression: 0.5, crop: 0.0 }, PixelateEffect: { size: 8.0 }, PosterizeEffect: { levels: 8.0 }, RadialBlurEffect: { centerX: 0.5, centerY: 0.5, samples: 8.0, strength: 0.1 }, ScanlinesEffect: { count: 480.0, intensity: 0.25 }, ScreenSpaceFogEffect: { density: 0.5, far: 1000.0, near: 10.0 }, SharpenEffect: { amount: 0.5 }, SketchEffect: { strength: 1.0 }, SmaaEffect: { threshold: 0.1 }, SsaoEffect: { bias: 0.025, intensity: 1.0, radius: 0.5, samples: 16.0 }, SsrEffect: { maxDistance: 100.0, maxSteps: 64.0, resolution: 0.5, steps: 64.0, thickness: 0.1 }, TaaEffect: { feedback: 0.9 }, TiltShiftEffect: { blur: 1.0, center: 0.5, width: 0.2 }, ToneMapEffect: FlightRuntime.objectFromPairs([{ key: 'exposure', value: 0.0 }, { key: 'operator', value: 'aces' }]), VignetteEffect: { color: 255.0, intensity: 0.5, radius: 1.0, softness: 0.5 }, VolumetricLightEffect: { density: 0.5, lightColor: 4294967295.0, lightX: 0.5, lightY: 0.2, samples: 32.0, scattering: 0.7 }, WhiteBalanceEffect: { temperature: 0.0, tint: 0.0 } };
 
-  @:keep public static function getAcesInputMatrix(out:flight.internal.FlightFloat32Array):Void {
+  public static function getAcesInputMatrix(out:flight.internal.FlightFloat32Array):Void {
     FlightRuntime.setIndex(out, 0.0, 0.59719);
     FlightRuntime.setIndex(out, 1.0, 0.076);
     FlightRuntime.setIndex(out, 2.0, 0.0284);
@@ -1062,7 +1059,7 @@ class Effects {
     FlightRuntime.setIndex(out, 8.0, 0.83777);
   }
 
-  @:keep public static function getAcesOutputMatrix(out:flight.internal.FlightFloat32Array):Void {
+  public static function getAcesOutputMatrix(out:flight.internal.FlightFloat32Array):Void {
     FlightRuntime.setIndex(out, 0.0, 1.60475);
     FlightRuntime.setIndex(out, 1.0, -0.10208);
     FlightRuntime.setIndex(out, 2.0, -0.00327);
@@ -1074,7 +1071,7 @@ class Effects {
     FlightRuntime.setIndex(out, 8.0, 1.07602);
   }
 
-  @:keep public static function getAdvancedBlendRgb(mode:AdvancedBlendMode, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float, out:Dynamic):Void {
+  public static function getAdvancedBlendRgb(mode:AdvancedBlendMode, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float, out:Dynamic):Void {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1090,19 +1087,19 @@ class Effects {
     FlightRuntime.setIndex(out, 2.0, b);
   }
 
-  @:keep public static function getBlurDownsampleLevel(sigma:Float):Float {
+  public static function getBlurDownsampleLevel(sigma:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.compare(sigma, Effects.BLUR_DOWNSAMPLE_MAX_SIGMA__blurDownsample, '<='))) { return cast 0.0; }
     return cast FlightRuntime.callProperty(HxMath, 'ceil', cast ([FlightRuntime.log2((sigma / Effects.BLUR_DOWNSAMPLE_MAX_SIGMA__blurDownsample))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getBlurResidualSigma(sigma:Float, level:Float):Float {
+  public static function getBlurResidualSigma(sigma:Float, level:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.compare(sigma, 0.0, '<='))) { return cast 0.0; }
     return cast (sigma / HxMath.pow(2.0, level));
     return cast null;
   }
 
-  @:keep public static function getCompositeOperatorFactors(operator_:CompositeOperator, sourceAlpha:Float, backdropAlpha:Float, out:Dynamic):Void {
+  public static function getCompositeOperatorFactors(operator_:CompositeOperator, sourceAlpha:Float, backdropAlpha:Float, out:Dynamic):Void {
     var as:Dynamic = cast FlightRuntime.UNDEFINED;
     var ab:Dynamic = cast FlightRuntime.UNDEFINED;
     var fa:Float = cast FlightRuntime.UNDEFINED;
@@ -1160,7 +1157,7 @@ class Effects {
     FlightRuntime.setIndex(out, 1.0, fb);
   }
 
-  @:keep public static function getGaussianKernelSize(sigma:Float):Float {
+  public static function getGaussianKernelSize(sigma:Float):Float {
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare(sigma, 0.0, '<='))) { return cast 1.0; }
     radius = FlightRuntime.callProperty(HxMath, 'ceil', cast ([(3.0 * sigma)] : Array<Dynamic>));
@@ -1168,12 +1165,12 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function getLinearSampledGaussianTapCount(sigma:Float):Float {
+  public static function getLinearSampledGaussianTapCount(sigma:Float):Float {
     return cast FlightRuntime.callProperty(HxMath, 'ceil', cast ([(FlightRuntime.callValue(getGaussianKernelSize, cast ([sigma] : Array<Dynamic>)) / 2.0)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getRenderEffectDefaults(kind:String):Dynamic {
+  public static function getRenderEffectDefaults(kind:String):Dynamic {
     var entry:Dynamic = cast FlightRuntime.UNDEFINED;
     entry = FlightRuntime.getIndex(Effects.DEFAULTS__renderEffectDefaults, kind);
     if (FlightRuntime.truthy(!FlightRuntime.truthy(entry))) { return cast {  }; }
@@ -1181,17 +1178,17 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function getRenderEffectInputs(effect:RenderEffect):Array<RenderEffectInput> {
+  public static function getRenderEffectInputs(effect:RenderEffect):Array<RenderEffectInput> {
     return cast FlightRuntime.coalesce(FlightRuntime.getIndex(Effects.RENDER_EFFECT_INPUTS__renderEffectInputs, FlightRuntime.field(effect, 'kind')), function():Dynamic return cast cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getRenderEffectKinds():Array<String> {
+  public static function getRenderEffectKinds():Array<String> {
     return cast RENDER_EFFECT_KINDS;
     return cast null;
   }
 
-  @:keep public static function getSeparableBlendChannel(mode:AdvancedBlendMode, cb:Float, cs:Float):Float {
+  public static function getSeparableBlendChannel(mode:AdvancedBlendMode, cb:Float, cs:Float):Float {
     {
       var __switchValue = mode;
       if (__switchValue == Types.AdvancedBlendModeValue.Overlay) {
@@ -1229,7 +1226,7 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function getSobelKernelCoefficients(out:flight.internal.FlightFloat32Array):Void {
+  public static function getSobelKernelCoefficients(out:flight.internal.FlightFloat32Array):Void {
     FlightRuntime.setIndex(out, 0.0, -1.0);
     FlightRuntime.setIndex(out, 1.0, 0.0);
     FlightRuntime.setIndex(out, 2.0, 1.0);
@@ -1250,7 +1247,7 @@ class Effects {
     FlightRuntime.setIndex(out, 17.0, 1.0);
   }
 
-  @:keep public static function halton__depthMath(index:Float, base:Float):Float {
+  public static function halton__depthMath(index:Float, base:Float):Float {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     var f:Dynamic = cast FlightRuntime.UNDEFINED;
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1266,12 +1263,12 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function isNonSeparableBlendMode(mode:AdvancedBlendMode):Bool {
+  public static function isNonSeparableBlendMode(mode:AdvancedBlendMode):Bool {
     return cast FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(mode, Types.AdvancedBlendModeValue.Hue), function():Dynamic return cast FlightRuntime.strictEquals(mode, Types.AdvancedBlendModeValue.Saturation)), function():Dynamic return cast FlightRuntime.strictEquals(mode, Types.AdvancedBlendModeValue.Color)), function():Dynamic return cast FlightRuntime.strictEquals(mode, Types.AdvancedBlendModeValue.Luminosity));
     return cast null;
   }
 
-  @:keep public static function lerpRenderEffect(a:RenderEffect, b:RenderEffect, t:Float, out:RenderEffect):Bool {
+  public static function lerpRenderEffect(a:RenderEffect, b:RenderEffect, t:Float, out:RenderEffect):Bool {
     var tc:Dynamic = cast FlightRuntime.UNDEFINED;
     var numericKeys:Dynamic = cast FlightRuntime.UNDEFINED;
     var booleanKeys:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1325,7 +1322,7 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function normalizeRenderEffect(effect:RenderEffect, out:RenderEffect):Bool {
+  public static function normalizeRenderEffect(effect:RenderEffect, out:RenderEffect):Bool {
     var entry:Dynamic = cast FlightRuntime.UNDEFINED;
     var effectRec:Dynamic = cast FlightRuntime.UNDEFINED;
     var outRec:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1351,14 +1348,14 @@ class Effects {
 
   public static final scratchWeights__linearSampledGaussian:Array<Float> = cast ([] : Array<Dynamic>);
 
-  @:keep public static function setBlendLuminosity__blendModeMath(r:Float, g:Float, b:Float, target:Float):Array<Float> {
+  public static function setBlendLuminosity__blendModeMath(r:Float, g:Float, b:Float, target:Float):Array<Float> {
     var d:Dynamic = cast FlightRuntime.UNDEFINED;
     d = (target - FlightRuntime.callValue(Effects.blendLuminosity__blendModeMath, cast ([r, g, b] : Array<Dynamic>)));
     return cast FlightRuntime.callValue(Effects.clipBlendColor__blendModeMath, cast ([(r + d), (g + d), (b + d)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setBlendSaturation__blendModeMath(r:Float, g:Float, b:Float, target:Float):Array<Float> {
+  public static function setBlendSaturation__blendModeMath(r:Float, g:Float, b:Float, target:Float):Array<Float> {
     var out:Array<Float> = cast FlightRuntime.UNDEFINED;
     var iMin:Dynamic = cast FlightRuntime.UNDEFINED;
     var iMax:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1390,14 +1387,14 @@ class Effects {
     return cast null;
   }
 
-  @:keep public static function smoothstep01__toneMapMath(edge0:Float, edge1:Float, x:Float):Float {
+  public static function smoothstep01__toneMapMath(edge0:Float, edge1:Float, x:Float):Float {
     var t:Dynamic = cast FlightRuntime.UNDEFINED;
     t = FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, ((x - edge0) / (edge1 - edge0))] : Array<Dynamic>))] : Array<Dynamic>));
     return cast ((t * t) * (3.0 - (2.0 * t)));
     return cast null;
   }
 
-  @:keep public static function validateRenderEffectList(effects:Array<RenderEffect>, available:Array<RenderEffectInput>):Null<RenderEffectInput> {
+  public static function validateRenderEffectList(effects:Array<RenderEffect>, available:Array<RenderEffectInput>):Null<RenderEffectInput> {
     for (effect in FlightRuntime.iterable(effects)) {
       var required:Dynamic = FlightRuntime.callValue(getRenderEffectInputs, cast ([effect] : Array<Dynamic>));
       for (input in FlightRuntime.iterable(required)) {

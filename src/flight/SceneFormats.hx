@@ -154,14 +154,11 @@ typedef ThreeDsMaterial = { var ambient:Array<Float>; var diffuse:Array<Float>; 
 
 typedef ThreeDsMesh = { var faces:flight.internal.FlightUInt16Array; var materialNames:Array<String>; var name:String; var uvs:Null<flight.internal.FlightFloat32Array>; var vertices:flight.internal.FlightFloat32Array; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.SceneFormats")
 class SceneFormats {
   public static final _awdTransformScratch__awdParse:Dynamic = FlightRuntime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 
-  @:keep public static function appendGltfWeightsChannels__gltfParse(channels:Array<AnimationChannel>, node:SceneNode, times:Dynamic, values:Dynamic, interpolation:Null<String>, ?warnings:Array<String>):Void {
+  public static function appendGltfWeightsChannels__gltfParse(channels:Array<AnimationChannel>, node:SceneNode, times:Dynamic, values:Dynamic, interpolation:Null<String>, ?warnings:Array<String>):Void {
     var meshes:Dynamic = cast FlightRuntime.UNDEFINED;
     var bound:Dynamic = cast FlightRuntime.UNDEFINED;
     meshes = FlightRuntime.select(FlightRuntime.callValue(isMesh, cast ([node] : Array<Dynamic>)), function():Dynamic return cast cast ([(cast (cast node : Dynamic) : Mesh)] : Array<Dynamic>), function():Dynamic return cast FlightRuntime.callValue(SceneFormats.collectMorphableChildMeshes__gltfParse, cast ([node] : Array<Dynamic>)));
@@ -182,7 +179,7 @@ class SceneFormats {
 }
   }
 
-  @:keep public static function applyAccessorSparse__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, sparse:Dynamic, valueComponentType:GltfComponentType, componentCount:Float, normalize:Bool, out:{  }, ?warnings:Array<String>):Void {
+  public static function applyAccessorSparse__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, sparse:Dynamic, valueComponentType:GltfComponentType, componentCount:Float, normalize:Bool, out:{  }, ?warnings:Array<String>):Void {
     var indicesView:Dynamic = cast FlightRuntime.UNDEFINED;
     var valuesView:Dynamic = cast FlightRuntime.UNDEFINED;
     var indexBytes:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -228,12 +225,12 @@ class SceneFormats {
     }
   }
 
-  @:keep public static function applyAwdTransform__awdParse(node:SceneNode, transform:Dynamic):Void {
+  public static function applyAwdTransform__awdParse(node:SceneNode, transform:Dynamic):Void {
     FlightRuntime.callValue(SceneFormats.awdTransformToMatrix4__awdParse, cast ([SceneFormats._awdTransformScratch__awdParse, transform] : Array<Dynamic>));
     FlightRuntime.callValue(setNodeLocalMatrix4, cast ([node, SceneFormats._awdTransformScratch__awdParse] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGltfSampler__gltfParse(texture:Texture, sampler:Null<GltfSampler>):Void {
+  public static function applyGltfSampler__gltfParse(texture:Texture, sampler:Null<GltfSampler>):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(sampler, FlightRuntime.UNDEFINED))) { return; }
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(sampler, 'wrapS'), FlightRuntime.UNDEFINED))) { FlightRuntime.setField(FlightRuntime.field(texture, 'sampler'), 'wrapU', FlightRuntime.getIndex(SceneFormats.GLTF_TEXTURE_WRAP__gltfParse, FlightRuntime.field(sampler, 'wrapS'))); }
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(sampler, 'wrapT'), FlightRuntime.UNDEFINED))) { FlightRuntime.setField(FlightRuntime.field(texture, 'sampler'), 'wrapV', FlightRuntime.getIndex(SceneFormats.GLTF_TEXTURE_WRAP__gltfParse, FlightRuntime.field(sampler, 'wrapT'))); }
@@ -244,7 +241,7 @@ class SceneFormats {
 }
   }
 
-  @:keep public static function applyGltfTextureTransform__gltfParse(texture:Texture, transform:Null<Dynamic>):Void {
+  public static function applyGltfTextureTransform__gltfParse(texture:Texture, transform:Null<Dynamic>):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(transform, FlightRuntime.UNDEFINED))) { return; }
     FlightRuntime.setField(FlightRuntime.field(texture, 'uvOffset'), 'x', FlightRuntime.coalesce(FlightRuntime.optionalIndex(FlightRuntime.field(transform, 'offset'), 0.0), function():Dynamic return cast 0.0));
     FlightRuntime.setField(FlightRuntime.field(texture, 'uvOffset'), 'y', FlightRuntime.coalesce(FlightRuntime.optionalIndex(FlightRuntime.field(transform, 'offset'), 1.0), function():Dynamic return cast 0.0));
@@ -253,7 +250,7 @@ class SceneFormats {
     FlightRuntime.setField(FlightRuntime.field(texture, 'uvScale'), 'y', FlightRuntime.coalesce(FlightRuntime.optionalIndex(FlightRuntime.field(transform, 'scale'), 1.0), function():Dynamic return cast 1.0));
   }
 
-  @:keep public static function applyNodeTransform__gltfParse(node:SceneNode, gltfNode:GltfNode):Void {
+  public static function applyNodeTransform__gltfParse(node:SceneNode, gltfNode:GltfNode):Void {
     var t:Dynamic = cast FlightRuntime.UNDEFINED;
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -271,7 +268,7 @@ class SceneFormats {
     FlightRuntime.callValue(invalidateNodeLocalTransform, cast ([node] : Array<Dynamic>));
   }
 
-  @:keep public static function applySkinToMeshNodes__gltfParse(node:SceneNode, skin:Skin):Void {
+  public static function applySkinToMeshNodes__gltfParse(node:SceneNode, skin:Skin):Void {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.callValue(isMesh, cast ([node] : Array<Dynamic>)))) {
   FlightRuntime.setField((cast node : Mesh), 'skin', skin);
@@ -288,7 +285,7 @@ class SceneFormats {
     }
   }
 
-  @:keep public static function assembleGltfScene__gltfParse(doc:GltfDocument, sceneNodes:Array<SceneNode>, sceneIndex:Float):Scene {
+  public static function assembleGltfScene__gltfParse(doc:GltfDocument, sceneNodes:Array<SceneNode>, sceneIndex:Float):Scene {
     var scene:Dynamic = cast FlightRuntime.UNDEFINED;
     var roots:Dynamic = cast FlightRuntime.UNDEFINED;
     scene = FlightRuntime.callValue(createScene, cast ([] : Array<Dynamic>));
@@ -305,7 +302,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function attachGltfAnimations__gltfParse(scene:Scene, doc:GltfDocument, buffers:Array<Dynamic>, sceneNodes:Array<SceneNode>, ?warnings:Array<String>):Void {
+  public static function attachGltfAnimations__gltfParse(scene:Scene, doc:GltfDocument, buffers:Array<Dynamic>, sceneNodes:Array<SceneNode>, ?warnings:Array<String>):Void {
     var gltfAnimations:Dynamic = cast FlightRuntime.UNDEFINED;
     gltfAnimations = FlightRuntime.coalesce(FlightRuntime.field(doc, 'animations'), function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
@@ -398,12 +395,12 @@ class SceneFormats {
 
   public static final AWD_TEXTURE_TYPE_EXTERNAL:Dynamic = 0.0;
 
-  @:keep public static function awdColorToRgba__awdParse(color:Float):Float {
+  public static function awdColorToRgba__awdParse(color:Float):Float {
     return cast FlightRuntime.unsignedShiftRight(Std.int((Std.int((Std.int(color) << Std.int(8.0))) | Std.int(255.0))), Std.int(0.0));
     return cast null;
   }
 
-  @:keep public static function awdDataTypeByteSize__awdParse(dataType:Float):Float {
+  public static function awdDataTypeByteSize__awdParse(dataType:Float):Float {
     {
       var __switchValue = dataType;
       if (__switchValue == AWD_DATA_INT8 || __switchValue == AWD_DATA_UINT8) {
@@ -425,7 +422,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function awdTransformToMatrix4__awdParse(out:Matrix4, transform:Dynamic):Void {
+  public static function awdTransformToMatrix4__awdParse(out:Matrix4, transform:Dynamic):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.field(out, 'm');
     FlightRuntime.setIndex(m, 0.0, FlightRuntime.getIndex(transform, 0.0));
@@ -446,7 +443,7 @@ class SceneFormats {
     FlightRuntime.setIndex(m, 15.0, 1.0);
   }
 
-  @:keep public static function buildAnimationClip__md5AnimParse(joints:Array<SceneNode>, hierarchy:Array<Md5AnimHierarchyEntry__md5AnimParse>, baseframe:Array<Md5AnimBaseframePose__md5AnimParse>, frames:Array<Array<Float>>, frameRate:Float):AnimationClip {
+  public static function buildAnimationClip__md5AnimParse(joints:Array<SceneNode>, hierarchy:Array<Md5AnimHierarchyEntry__md5AnimParse>, baseframe:Array<Md5AnimBaseframePose__md5AnimParse>, frames:Array<Array<Float>>, frameRate:Float):AnimationClip {
     var frameCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var jointCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var channels:Array<AnimationChannel> = cast FlightRuntime.UNDEFINED;
@@ -525,7 +522,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function buildAwdSkeleton__awdParse(parsedSkeleton:ParsedSkeleton__awdParse):{ var jointNodes:Array<SceneNode>; var skeleton:Skeleton3D; var skeletonRoot:SceneNode; } {
+  public static function buildAwdSkeleton__awdParse(parsedSkeleton:ParsedSkeleton__awdParse):{ var jointNodes:Array<SceneNode>; var skeleton:Skeleton3D; var skeletonRoot:SceneNode; } {
     var jointCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var skeletonRoot:Dynamic = cast FlightRuntime.UNDEFINED;
     var jointNodes:Array<SceneNode> = cast FlightRuntime.UNDEFINED;
@@ -596,7 +593,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function buildAwdSkeletonAnimationClip__awdParse(parsedAnimation:ParsedSkeletonAnimation__awdParse, jointCount:Float, poseBlocks:Dynamic, joints:Array<SceneNode>, ?warnings:Array<String>):Null<AnimationClip> {
+  public static function buildAwdSkeletonAnimationClip__awdParse(parsedAnimation:ParsedSkeletonAnimation__awdParse, jointCount:Float, poseBlocks:Dynamic, joints:Array<SceneNode>, ?warnings:Array<String>):Null<AnimationClip> {
     var poseCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var times:Array<Float> = cast FlightRuntime.UNDEFINED;
     var timeAccumulator:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -659,7 +656,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function buildGltfAnimationClip__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, sceneNodes:Array<SceneNode>, animation:GltfAnimation, ?warnings:Array<String>):Null<AnimationClip> {
+  public static function buildGltfAnimationClip__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, sceneNodes:Array<SceneNode>, animation:GltfAnimation, ?warnings:Array<String>):Null<AnimationClip> {
     var channels:Array<AnimationChannel> = cast FlightRuntime.UNDEFINED;
     channels = cast ([] : Array<Dynamic>);
     for (channel in FlightRuntime.iterable(FlightRuntime.field(animation, 'channels'))) {
@@ -690,7 +687,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function buildGltfMorph__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, primitive:GltfPrimitive, meshWeights:Null<Array<Float>>, ?warnings:Array<String>):Null<MeshMorph> {
+  public static function buildGltfMorph__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, primitive:GltfPrimitive, meshWeights:Null<Array<Float>>, ?warnings:Array<String>):Null<MeshMorph> {
     var gltfTargets:Dynamic = cast FlightRuntime.UNDEFINED;
     var targets:Array<MorphTarget> = cast FlightRuntime.UNDEFINED;
     var weights:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -728,7 +725,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function buildGltfNodePool__gltfParse(doc:GltfDocument, binary:Null<Dynamic>, options:Null<GltfImportOptions>, ?warnings:Array<String>):Null<{ var buffers:Array<Dynamic>; var sceneNodes:Array<SceneNode>; }> {
+  public static function buildGltfNodePool__gltfParse(doc:GltfDocument, binary:Null<Dynamic>, options:Null<GltfImportOptions>, ?warnings:Array<String>):Null<{ var buffers:Array<Dynamic>; var sceneNodes:Array<SceneNode>; }> {
     var version:Dynamic = cast FlightRuntime.UNDEFINED;
     var buffers:Dynamic = cast FlightRuntime.UNDEFINED;
     var meshGeometries:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -788,7 +785,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function buildGltfSkin__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, skinIndex:Float, sceneNodes:Array<SceneNode>, ?warnings:Array<String>):Null<Skin> {
+  public static function buildGltfSkin__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, skinIndex:Float, sceneNodes:Array<SceneNode>, ?warnings:Array<String>):Null<Skin> {
     var gltfSkin:Dynamic = cast FlightRuntime.UNDEFINED;
     var joints:Array<SceneNode> = cast FlightRuntime.UNDEFINED;
     var names:Array<String> = cast FlightRuntime.UNDEFINED;
@@ -843,7 +840,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function buildMd2Morph__md2Parse(frames:Array<Md2Frame__md2Parse>, sourceVertexIndices:Array<Float>):Null<MeshMorph> {
+  public static function buildMd2Morph__md2Parse(frames:Array<Md2Frame__md2Parse>, sourceVertexIndices:Array<Float>):Null<MeshMorph> {
     var base:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var targets:Array<MorphTarget> = cast FlightRuntime.UNDEFINED;
@@ -879,7 +876,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function buildMd2MorphClip__md2Parse(root:SceneNode):Null<Dynamic> {
+  public static function buildMd2MorphClip__md2Parse(root:SceneNode):Null<Dynamic> {
     var mesh:Dynamic = cast FlightRuntime.UNDEFINED;
     var targetCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var frameCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -908,7 +905,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function buildMeshNode__threeDsParse(mesh:ThreeDsMesh, materials:Dynamic, resolved:Dynamic):Null<SceneNode> {
+  public static function buildMeshNode__threeDsParse(mesh:ThreeDsMesh, materials:Dynamic, resolved:Dynamic):Null<SceneNode> {
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var faceCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var positions:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1007,7 +1004,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function buildMeshSceneNode__gltfParse(geometries:Null<Array<MeshGeometry>>, materials:Null<Array<Null<Material>>>, morphs:Null<Array<Null<MeshMorph>>>):SceneNode {
+  public static function buildMeshSceneNode__gltfParse(geometries:Null<Array<MeshGeometry>>, materials:Null<Array<Null<Material>>>, morphs:Null<Array<Null<MeshMorph>>>):SceneNode {
     var materialsFor:Dynamic = cast FlightRuntime.UNDEFINED;
     var buildMesh:Dynamic = cast FlightRuntime.UNDEFINED;
     var group:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1038,7 +1035,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function buildSceneFromGltfDocument__gltfParse(doc:GltfDocument, binary:Null<Dynamic>, options:Null<GltfImportOptions>, ?warnings:Array<String>):Scene {
+  public static function buildSceneFromGltfDocument__gltfParse(doc:GltfDocument, binary:Null<Dynamic>, options:Null<GltfImportOptions>, ?warnings:Array<String>):Scene {
     var pool:Dynamic = cast FlightRuntime.UNDEFINED;
     var scene:Dynamic = cast FlightRuntime.UNDEFINED;
     pool = FlightRuntime.callValue(SceneFormats.buildGltfNodePool__gltfParse, cast ([doc, binary, options, warnings] : Array<Dynamic>));
@@ -1049,7 +1046,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function buildScenesFromGltfDocument__gltfParse(doc:GltfDocument, binary:Null<Dynamic>, options:Null<GltfImportOptions>, ?warnings:Array<String>):Array<Scene> {
+  public static function buildScenesFromGltfDocument__gltfParse(doc:GltfDocument, binary:Null<Dynamic>, options:Null<GltfImportOptions>, ?warnings:Array<String>):Array<Scene> {
     var pool:Dynamic = cast FlightRuntime.UNDEFINED;
     var sceneCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var scenes:Array<Scene> = cast FlightRuntime.UNDEFINED;
@@ -1078,12 +1075,12 @@ class SceneFormats {
 
   public static final CANONICAL_LAYOUT:VertexAttributeLayout = { attributes: cast ([{ byteOffset: 0.0, format: 'float32x3', semantic: 'position' }, { byteOffset: 12.0, format: 'float32x3', semantic: 'normal' }, { byteOffset: 24.0, format: 'float32x4', semantic: 'tangent' }, { byteOffset: 40.0, format: 'float32x2', semantic: 'uv0' }] : Array<Dynamic>), stride: 48.0 };
 
-  @:keep public static function clampChannel__objParse(value:Float):Float {
+  public static function clampChannel__objParse(value:Float):Float {
     return cast FlightRuntime.callProperty(HxMath, 'round', cast ([(FlightRuntime.callProperty(HxMath, 'min', cast ([1.0, FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, value] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function collectMeshes__threeDsParse(view:Dynamic, offset:Float, materials:Dynamic, ?warnings:Array<String>):Array<ThreeDsMesh> {
+  public static function collectMeshes__threeDsParse(view:Dynamic, offset:Float, materials:Dynamic, ?warnings:Array<String>):Array<ThreeDsMesh> {
     var end:Dynamic = cast FlightRuntime.UNDEFINED;
     var meshes:Array<ThreeDsMesh> = cast FlightRuntime.UNDEFINED;
     var cursor:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1120,7 +1117,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function collectMorphableChildMeshes__gltfParse(node:SceneNode):Array<Mesh> {
+  public static function collectMorphableChildMeshes__gltfParse(node:SceneNode):Array<Mesh> {
     var out:Array<Mesh> = cast FlightRuntime.UNDEFINED;
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     out = cast ([] : Array<Dynamic>);
@@ -1139,7 +1136,7 @@ class SceneFormats {
 
   public static final COMPONENT_BYTE_SIZE__gltfParse:Dynamic = FlightRuntime.objectFromPairs([{ key: '5120', value: 1.0 }, { key: '5121', value: 1.0 }, { key: '5122', value: 2.0 }, { key: '5123', value: 2.0 }, { key: '5125', value: 4.0 }, { key: '5126', value: 4.0 }]);
 
-  @:keep public static function convertPositionsZUpToYUp(values:{  }, stride:Dynamic = 3.0, offset:Dynamic = 0.0):Void {
+  public static function convertPositionsZUpToYUp(values:{  }, stride:Dynamic = 3.0, offset:Dynamic = 0.0):Void {
     {
       var i:Dynamic = offset;
       while (FlightRuntime.truthy(FlightRuntime.compare((i + 2.0), FlightRuntime.field(values, 'length'), '<'))) {
@@ -1151,7 +1148,7 @@ class SceneFormats {
     }
   }
 
-  @:keep public static function convertQuaternionsZUpToYUp(values:Array<Float>, stride:Dynamic = 4.0, offset:Dynamic = 0.0):Void {
+  public static function convertQuaternionsZUpToYUp(values:Array<Float>, stride:Dynamic = 4.0, offset:Dynamic = 0.0):Void {
     {
       var i:Dynamic = offset;
       while (FlightRuntime.truthy(FlightRuntime.compare((i + 3.0), FlightRuntime.field(values, 'length'), '<'))) {
@@ -1163,7 +1160,7 @@ class SceneFormats {
     }
   }
 
-  @:keep public static function convertTransformLhToRh(transform:Dynamic):Void {
+  public static function convertTransformLhToRh(transform:Dynamic):Void {
     FlightRuntime.setIndex(transform, 2.0, FlightRuntime.normalizeZero(-FlightRuntime.getIndex(transform, 2.0)));
     FlightRuntime.setIndex(transform, 5.0, FlightRuntime.normalizeZero(-FlightRuntime.getIndex(transform, 5.0)));
     FlightRuntime.setIndex(transform, 6.0, FlightRuntime.normalizeZero(-FlightRuntime.getIndex(transform, 6.0)));
@@ -1171,7 +1168,7 @@ class SceneFormats {
     FlightRuntime.setIndex(transform, 11.0, FlightRuntime.normalizeZero(-FlightRuntime.getIndex(transform, 11.0)));
   }
 
-  @:keep public static function createComponentArray__gltfParse(componentType:GltfComponentType, length:Float):ComponentArray__gltfParse {
+  public static function createComponentArray__gltfParse(componentType:GltfComponentType, length:Float):ComponentArray__gltfParse {
     {
       var __switchValue = componentType;
       if (__switchValue == 5120.0) {
@@ -1196,23 +1193,23 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function createDefaultObjMaterial__mtlParse(name:String):ObjMaterial {
+  public static function createDefaultObjMaterial__mtlParse(name:String):ObjMaterial {
     return cast { ambient: cast ([0.0, 0.0, 0.0] : Array<Dynamic>), diffuse: cast ([0.8, 0.8, 0.8] : Array<Dynamic>), dissolve: 1.0, illumination: 2.0, mapAmbient: null, mapBump: null, mapDiffuse: null, mapSpecular: null, name: name, specular: cast ([0.0, 0.0, 0.0] : Array<Dynamic>), specularExponent: 0.0 };
     return cast null;
   }
 
-  @:keep public static function createEmbeddedTextureRef(bytes:Dynamic, mimeType:Null<String>):Texture {
+  public static function createEmbeddedTextureRef(bytes:Dynamic, mimeType:Null<String>):Texture {
     return cast FlightRuntime.callValue(createTexture, cast ([{ resource: { bytes: bytes, kind: Types.SceneResourceRefKindValue.Embedded, mimeType: mimeType, state: Types.ResourceResolutionStateValue.Unresolved } }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createExternalTextureRef(uri:String, ?basePath:Null<String>):Texture {
+  public static function createExternalTextureRef(uri:String, ?basePath:Null<String>):Texture {
     if (basePath == null) basePath = cast (null : Dynamic);
     return cast FlightRuntime.callValue(createTexture, cast ([{ resource: { basePath: basePath, kind: Types.SceneResourceRefKindValue.External, mimeType: null, state: Types.ResourceResolutionStateValue.Unresolved, uri: uri } }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createSceneFrom3ds(bytes:Dynamic, ?warnings:Array<String>):Scene {
+  public static function createSceneFrom3ds(bytes:Dynamic, ?warnings:Array<String>):Scene {
     var scene:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var view:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1247,7 +1244,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function createSceneFromAwd(bytes:Dynamic, ?warnings:Array<String>):Scene {
+  public static function createSceneFromAwd(bytes:Dynamic, ?warnings:Array<String>):Scene {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var view:Dynamic = cast FlightRuntime.UNDEFINED;
     var compression:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1420,7 +1417,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function createSceneFromGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Scene {
+  public static function createSceneFromGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Scene {
     var container:Dynamic = cast FlightRuntime.UNDEFINED;
     container = FlightRuntime.callValue(SceneFormats.readGlbContainer__gltfParse, cast ([bytes, warnings] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(container, null))) { return cast FlightRuntime.callValue(createScene, cast ([] : Array<Dynamic>)); }
@@ -1428,7 +1425,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function createSceneFromGltf(source:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Scene {
+  public static function createSceneFromGltf(source:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Scene {
     var doc:GltfDocument = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.typeofValue(source), 'string'))) {
   try {
@@ -1444,7 +1441,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function createSceneFromMd2(bytes:Dynamic, ?warnings:Array<String>):Scene {
+  public static function createSceneFromMd2(bytes:Dynamic, ?warnings:Array<String>):Scene {
     var view:Dynamic = cast FlightRuntime.UNDEFINED;
     var magic:Dynamic = cast FlightRuntime.UNDEFINED;
     var version:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1607,7 +1604,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function createSceneFromMd5Mesh(source:String, ?warnings:Array<String>):Scene {
+  public static function createSceneFromMd5Mesh(source:String, ?warnings:Array<String>):Scene {
     var scene:Dynamic = cast FlightRuntime.UNDEFINED;
     var joints:Array<Md5Joint> = cast FlightRuntime.UNDEFINED;
     var meshes:Array<Md5Mesh> = cast FlightRuntime.UNDEFINED;
@@ -1795,7 +1792,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function createSceneFromObj(source:String, ?materials:ObjMaterialLibrary, ?warnings:Array<String>):Scene {
+  public static function createSceneFromObj(source:String, ?materials:ObjMaterialLibrary, ?warnings:Array<String>):Scene {
     var positions:Array<Float> = cast FlightRuntime.UNDEFINED;
     var normals:Array<Float> = cast FlightRuntime.UNDEFINED;
     var uvs:Array<Float> = cast FlightRuntime.UNDEFINED;
@@ -1930,7 +1927,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function createScenesFromGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Scene> {
+  public static function createScenesFromGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Scene> {
     var container:Dynamic = cast FlightRuntime.UNDEFINED;
     container = FlightRuntime.callValue(SceneFormats.readGlbContainer__gltfParse, cast ([bytes, warnings] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(container, null))) { return cast cast ([] : Array<Dynamic>); }
@@ -1938,7 +1935,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function createScenesFromGltf(source:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Scene> {
+  public static function createScenesFromGltf(source:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Scene> {
     var doc:GltfDocument = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.typeofValue(source), 'string'))) {
   try {
@@ -1954,7 +1951,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function decodeBase64__gltfParse(s:String):Dynamic {
+  public static function decodeBase64__gltfParse(s:String):Dynamic {
     var table:Dynamic = cast FlightRuntime.UNDEFINED;
     var stripped:Dynamic = cast FlightRuntime.UNDEFINED;
     var out:Array<Float> = cast FlightRuntime.UNDEFINED;
@@ -1979,7 +1976,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function decodeGltfBuffer__gltfParse(buffer:GltfBuffer, binary:Null<Dynamic>, options:Null<GltfImportOptions>, ?warnings:Array<String>):Dynamic {
+  public static function decodeGltfBuffer__gltfParse(buffer:GltfBuffer, binary:Null<Dynamic>, options:Null<GltfImportOptions>, ?warnings:Array<String>):Dynamic {
     var uri:Dynamic = cast FlightRuntime.UNDEFINED;
     var comma:Dynamic = cast FlightRuntime.UNDEFINED;
     var supplied:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2002,12 +1999,12 @@ class SceneFormats {
 
   public static final DEFAULT_BASEFRAME__md5AnimParse:Md5AnimBaseframePose__md5AnimParse = { orientationX: 0.0, orientationY: 0.0, orientationZ: 0.0, positionX: 0.0, positionY: 0.0, positionZ: 0.0 };
 
-  @:keep public static function externalObjTexture__objParse(uri:Null<String>):Null<Texture> {
+  public static function externalObjTexture__objParse(uri:Null<String>):Null<Texture> {
     return cast FlightRuntime.select(FlightRuntime.strictEquals(uri, null), function():Dynamic return cast null, function():Dynamic return cast FlightRuntime.callValue(createExternalTextureRef, cast ([uri] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function findMd2Mesh__md2Parse(root:SceneNode):Null<Mesh> {
+  public static function findMd2Mesh__md2Parse(root:SceneNode):Null<Mesh> {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     children = FlightRuntime.callValue(getNodeChildren, cast ([root] : Array<Dynamic>));
     {
@@ -2022,7 +2019,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function findSceneSkeletonJoints(root:SceneNode):Null<Array<SceneNode>> {
+  public static function findSceneSkeletonJoints(root:SceneNode):Null<Array<SceneNode>> {
     var stack:Array<SceneNode> = cast FlightRuntime.UNDEFINED;
     stack = FlightRuntime.concatArrays([FlightRuntime.toArray(FlightRuntime.callValue(getNodeChildren, cast ([root] : Array<Dynamic>)))]);
     while (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(stack, 'length'), 0.0, '>'))) {
@@ -2049,7 +2046,7 @@ class SceneFormats {
 
   public static final FLAG_TZ__md5AnimParse:Dynamic = 4.0;
 
-  @:keep public static function flushGroup__objParse(buckets:Dynamic, name:Null<String>, scene:Scene, library:Null<ObjMaterialLibrary>, resolvedMaterials:Dynamic):Void {
+  public static function flushGroup__objParse(buckets:Dynamic, name:Null<String>, scene:Scene, library:Null<ObjMaterialLibrary>, resolvedMaterials:Dynamic):Void {
     var vertices:Array<Float> = cast FlightRuntime.UNDEFINED;
     var indices:Array<Float> = cast FlightRuntime.UNDEFINED;
     var subsets:Array<MeshSubset> = cast FlightRuntime.UNDEFINED;
@@ -2087,7 +2084,7 @@ class SceneFormats {
     FlightRuntime.callValue(addNodeChild, cast ([FlightRuntime.field(scene, 'root'), FlightRuntime.callValue(createMesh, cast ([geometry, materials, Types.MeshKind, { name: name }] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function getOrCreateBucket__objParse(buckets:Dynamic, material:String):MaterialBucket__objParse {
+  public static function getOrCreateBucket__objParse(buckets:Dynamic, material:String):MaterialBucket__objParse {
     var bucket:Dynamic = cast FlightRuntime.UNDEFINED;
     bucket = FlightRuntime.callProperty(buckets, 'get', cast ([material] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(bucket, FlightRuntime.UNDEFINED))) {
@@ -2118,7 +2115,7 @@ class SceneFormats {
 
   public static final GLTF_TEXTURE_WRAP__gltfParse:Dynamic = FlightRuntime.objectFromPairs([{ key: '10497', value: 'repeat' }, { key: '33071', value: 'clamp-to-edge' }, { key: '33648', value: 'mirror-repeat' }]);
 
-  @:keep public static function gltfImageToTexture__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, image:GltfImage, options:Null<GltfImportOptions>):Null<Texture> {
+  public static function gltfImageToTexture__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, image:GltfImage, options:Null<GltfImportOptions>):Null<Texture> {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(image, 'uri'), FlightRuntime.UNDEFINED))) {
   if (FlightRuntime.truthy(StringTools.startsWith(FlightRuntime.field(image, 'uri'), 'data:'))) {
   var comma:Dynamic = FlightRuntime.callProperty(FlightRuntime.field(image, 'uri'), 'indexOf', cast ([','] : Array<Dynamic>));
@@ -2142,7 +2139,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function gltfMaterialToPbr__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, material:GltfMaterial, options:Null<GltfImportOptions>):Material {
+  public static function gltfMaterialToPbr__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, material:GltfMaterial, options:Null<GltfImportOptions>):Material {
     var pbr:Dynamic = cast FlightRuntime.UNDEFINED;
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     pbr = FlightRuntime.coalesce(FlightRuntime.field(material, 'pbrMetallicRoughness'), function():Dynamic return cast {  });
@@ -2155,7 +2152,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function isSupportedGltfVersion__gltfParse(version:String):Bool {
+  public static function isSupportedGltfVersion__gltfParse(version:String):Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'parseInt', cast ([version, 10.0] : Array<Dynamic>)), 2.0);
     return cast null;
   }
@@ -2182,7 +2179,7 @@ class SceneFormats {
 
   public static final MD2_VERSION:Dynamic = 8.0;
 
-  @:keep public static function negateVec3Z(values:Array<Float>):Void {
+  public static function negateVec3Z(values:Array<Float>):Void {
     {
       var i:Dynamic = 2.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(i, FlightRuntime.field(values, 'length'), '<'))) {
@@ -2192,7 +2189,7 @@ class SceneFormats {
     }
   }
 
-  @:keep public static function normalizeComponent__gltfParse(componentType:GltfComponentType, value:Float):Float {
+  public static function normalizeComponent__gltfParse(componentType:GltfComponentType, value:Float):Float {
     {
       var __switchValue = componentType;
       if (__switchValue == 5120.0) {
@@ -2217,7 +2214,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function objMaterialToBlinnPhong__objParse(material:ObjMaterial):BlinnPhongMaterial {
+  public static function objMaterialToBlinnPhong__objParse(material:ObjMaterial):BlinnPhongMaterial {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     result = FlightRuntime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: FlightRuntime.callValue(SceneFormats.packObjColor__objParse, cast ([FlightRuntime.field(material, 'diffuse'), FlightRuntime.field(material, 'dissolve')] : Array<Dynamic>)), diffuseMap: FlightRuntime.callValue(SceneFormats.externalObjTexture__objParse, cast ([FlightRuntime.field(material, 'mapDiffuse')] : Array<Dynamic>)), normalMap: FlightRuntime.callValue(SceneFormats.externalObjTexture__objParse, cast ([FlightRuntime.field(material, 'mapBump')] : Array<Dynamic>)), shininess: FlightRuntime.field(material, 'specularExponent'), specular: FlightRuntime.callValue(SceneFormats.packObjColor__objParse, cast ([FlightRuntime.field(material, 'specular'), 1.0] : Array<Dynamic>)), specularMap: FlightRuntime.callValue(SceneFormats.externalObjTexture__objParse, cast ([FlightRuntime.field(material, 'mapSpecular')] : Array<Dynamic>)) }] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(material, 'dissolve'), 1.0, '<'))) { FlightRuntime.setField(result, 'alphaMode', 'blend'); }
@@ -2225,14 +2222,14 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function packGltfLinearColor__gltfParse(factor:Array<Float>, channels:Float):Float {
+  public static function packGltfLinearColor__gltfParse(factor:Array<Float>, channels:Float):Float {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     a = FlightRuntime.select(FlightRuntime.strictEquals(channels, 4.0), function():Dynamic return cast FlightRuntime.coalesce(FlightRuntime.getIndex(factor, 3.0), function():Dynamic return cast 0.0), function():Dynamic return cast 1.0);
     return cast FlightRuntime.callValue(packLinearToColor, cast ([cast ([FlightRuntime.coalesce(FlightRuntime.getIndex(factor, 0.0), function():Dynamic return cast 0.0), FlightRuntime.coalesce(FlightRuntime.getIndex(factor, 1.0), function():Dynamic return cast 0.0), FlightRuntime.coalesce(FlightRuntime.getIndex(factor, 2.0), function():Dynamic return cast 0.0), a] : Array<Dynamic>)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function packObjColor__objParse(rgb:Array<Float>, alpha:Float):Float {
+  public static function packObjColor__objParse(rgb:Array<Float>, alpha:Float):Float {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2245,7 +2242,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function packSkinInfluences(influences:Array<SkinInfluence>, outJoints:Array<Float>, outWeights:Array<Float>):Void {
+  public static function packSkinInfluences(influences:Array<SkinInfluence>, outJoints:Array<Float>, outWeights:Array<Float>):Void {
     var kept:Dynamic = cast FlightRuntime.UNDEFINED;
     var sum:Dynamic = cast FlightRuntime.UNDEFINED;
     {
@@ -2276,7 +2273,7 @@ class SceneFormats {
     }
   }
 
-  @:keep public static function packThreeDsColor__threeDsParse(rgb:Array<Float>):Float {
+  public static function packThreeDsColor__threeDsParse(rgb:Array<Float>):Float {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2287,7 +2284,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseAwdSkeletonAnimations(bytes:Dynamic, joints:Array<SceneNode>, ?warnings:Array<String>):Dynamic {
+  public static function parseAwdSkeletonAnimations(bytes:Dynamic, joints:Array<SceneNode>, ?warnings:Array<String>):Dynamic {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var view:Dynamic = cast FlightRuntime.UNDEFINED;
     var compression:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2371,7 +2368,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseBaseframeBlock__md5AnimParse(lines:Array<String>, startLine:Float, baseframe:Array<Md5AnimBaseframePose__md5AnimParse>, warnings:Null<Array<String>>):Float {
+  public static function parseBaseframeBlock__md5AnimParse(lines:Array<String>, startLine:Float, baseframe:Array<Md5AnimBaseframePose__md5AnimParse>, warnings:Null<Array<String>>):Float {
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     i = startLine;
     while (FlightRuntime.truthy(FlightRuntime.compare(i, FlightRuntime.field(lines, 'length'), '<'))) {
@@ -2387,7 +2384,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseBaseframeLine__md5AnimParse(line:String, warnings:Null<Array<String>>, lineIndex:Float):Null<Md5AnimBaseframePose__md5AnimParse> {
+  public static function parseBaseframeLine__md5AnimParse(line:String, warnings:Null<Array<String>>, lineIndex:Float):Null<Md5AnimBaseframePose__md5AnimParse> {
     var tokens:Dynamic = cast FlightRuntime.UNDEFINED;
     var positionX:Dynamic = cast FlightRuntime.UNDEFINED;
     var positionY:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2414,7 +2411,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseColor__mtlParse(args:String, warnings:Null<Array<String>>, directive:String, lineIndex:Float):Null<Array<Float>> {
+  public static function parseColor__mtlParse(args:String, warnings:Null<Array<String>>, directive:String, lineIndex:Float):Null<Array<Float>> {
     var parts:Dynamic = cast FlightRuntime.UNDEFINED;
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2435,7 +2432,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseColorChunk__threeDsParse(view:Dynamic, offset:Float, end:Float):Null<Array<Float>> {
+  public static function parseColorChunk__threeDsParse(view:Dynamic, offset:Float, end:Float):Null<Array<Float>> {
     var cursor:Dynamic = cast FlightRuntime.UNDEFINED;
     cursor = offset;
     while (FlightRuntime.truthy(FlightRuntime.compare((cursor + THREE_DS_CHUNK_HEADER_BYTES), end, '<='))) {
@@ -2456,7 +2453,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseContainerBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, matrixWide:Bool, ?warnings:Array<String>):Null<ParsedContainer__awdParse> {
+  public static function parseContainerBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, matrixWide:Bool, ?warnings:Array<String>):Null<ParsedContainer__awdParse> {
     var dv:Dynamic = cast FlightRuntime.UNDEFINED;
     var offset:Dynamic = cast FlightRuntime.UNDEFINED;
     var parentId:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2490,7 +2487,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseFaces__threeDsParse(view:Dynamic, dataStart:Float, end:Float, ?warnings:Array<String>):Null<{ var faces:flight.internal.FlightUInt16Array; var materialNames:Array<String>; }> {
+  public static function parseFaces__threeDsParse(view:Dynamic, dataStart:Float, end:Float, ?warnings:Array<String>):Null<{ var faces:flight.internal.FlightUInt16Array; var materialNames:Array<String>; }> {
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     var facesEnd:Dynamic = cast FlightRuntime.UNDEFINED;
     var faces:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2537,7 +2534,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseFaceVertex__objParse(token:String, positions:Array<Float>, uvs:Array<Float>, normals:Array<Float>, bucket:MaterialBucket__objParse, warnings:Null<Array<String>>, lineIndex:Float):Float {
+  public static function parseFaceVertex__objParse(token:String, positions:Array<Float>, uvs:Array<Float>, normals:Array<Float>, bucket:MaterialBucket__objParse, warnings:Null<Array<String>>, lineIndex:Float):Float {
     var parts:Dynamic = cast FlightRuntime.UNDEFINED;
     var posCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var uvCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2606,7 +2603,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseFrameBlock__md5AnimParse(lines:Array<String>, startLine:Float, frameData:Array<Float>, warnings:Null<Array<String>>):Float {
+  public static function parseFrameBlock__md5AnimParse(lines:Array<String>, startLine:Float, frameData:Array<Float>, warnings:Null<Array<String>>):Float {
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     i = startLine;
     while (FlightRuntime.truthy(FlightRuntime.compare(i, FlightRuntime.field(lines, 'length'), '<'))) {
@@ -2629,7 +2626,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseHierarchyBlock__md5AnimParse(lines:Array<String>, startLine:Float, hierarchy:Array<Md5AnimHierarchyEntry__md5AnimParse>, warnings:Null<Array<String>>):Float {
+  public static function parseHierarchyBlock__md5AnimParse(lines:Array<String>, startLine:Float, hierarchy:Array<Md5AnimHierarchyEntry__md5AnimParse>, warnings:Null<Array<String>>):Float {
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     i = startLine;
     while (FlightRuntime.truthy(FlightRuntime.compare(i, FlightRuntime.field(lines, 'length'), '<'))) {
@@ -2645,7 +2642,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseHierarchyLine__md5AnimParse(line:String, warnings:Null<Array<String>>, lineIndex:Float):Null<Md5AnimHierarchyEntry__md5AnimParse> {
+  public static function parseHierarchyLine__md5AnimParse(line:String, warnings:Null<Array<String>>, lineIndex:Float):Null<Md5AnimHierarchyEntry__md5AnimParse> {
     var nameStart:Dynamic = cast FlightRuntime.UNDEFINED;
     var nameEnd:Dynamic = cast FlightRuntime.UNDEFINED;
     var name:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2678,7 +2675,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseJointLine__md5Parse(line:String, warnings:Null<Array<String>>, lineIndex:Float):Null<Md5Joint> {
+  public static function parseJointLine__md5Parse(line:String, warnings:Null<Array<String>>, lineIndex:Float):Null<Md5Joint> {
     var nameStart:Dynamic = cast FlightRuntime.UNDEFINED;
     var nameEnd:Dynamic = cast FlightRuntime.UNDEFINED;
     var name:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2723,7 +2720,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseJointsBlock__md5Parse(lines:Array<String>, startLine:Float, joints:Array<Md5Joint>, warnings:Null<Array<String>>):Float {
+  public static function parseJointsBlock__md5Parse(lines:Array<String>, startLine:Float, joints:Array<Md5Joint>, warnings:Null<Array<String>>):Float {
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     i = startLine;
     while (FlightRuntime.truthy(FlightRuntime.compare(i, FlightRuntime.field(lines, 'length'), '<'))) {
@@ -2739,7 +2736,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseMaterial__threeDsParse(view:Dynamic, offset:Float, end:Float):ThreeDsMaterial {
+  public static function parseMaterial__threeDsParse(view:Dynamic, offset:Float, end:Float):ThreeDsMaterial {
     var name:Dynamic = cast FlightRuntime.UNDEFINED;
     var ambient:Array<Float> = cast FlightRuntime.UNDEFINED;
     var diffuse:Array<Float> = cast FlightRuntime.UNDEFINED;
@@ -2775,7 +2772,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseMaterialBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, ?warnings:Array<String>):Null<ParsedMaterial__awdParse> {
+  public static function parseMaterialBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, ?warnings:Array<String>):Null<ParsedMaterial__awdParse> {
     var offset:Dynamic = cast FlightRuntime.UNDEFINED;
     var nameResult:Dynamic = cast FlightRuntime.UNDEFINED;
     var props:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2801,7 +2798,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseMd5Anim(source:String, joints:Array<SceneNode>, ?warnings:Array<String>):Null<AnimationClip> {
+  public static function parseMd5Anim(source:String, joints:Array<SceneNode>, ?warnings:Array<String>):Null<AnimationClip> {
     var lines:Dynamic = cast FlightRuntime.UNDEFINED;
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     var frameRate:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2892,7 +2889,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseMeshBlock__md5Parse(lines:Array<String>, startLine:Float, warnings:Null<Array<String>>):{ var nextLine:Float; var result:Md5Mesh; } {
+  public static function parseMeshBlock__md5Parse(lines:Array<String>, startLine:Float, warnings:Null<Array<String>>):{ var nextLine:Float; var result:Md5Mesh; } {
     var shader:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertices:Array<Md5Vertex> = cast FlightRuntime.UNDEFINED;
     var weights:Array<Md5Weight> = cast FlightRuntime.UNDEFINED;
@@ -2942,7 +2939,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseMeshInstanceBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, matrixWide:Bool, ?warnings:Array<String>):Null<ParsedMeshInstance__awdParse> {
+  public static function parseMeshInstanceBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, matrixWide:Bool, ?warnings:Array<String>):Null<ParsedMeshInstance__awdParse> {
     var dv:Dynamic = cast FlightRuntime.UNDEFINED;
     var offset:Dynamic = cast FlightRuntime.UNDEFINED;
     var parentId:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2997,7 +2994,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseObject__threeDsParse(view:Dynamic, offset:Float, end:Float, ?warnings:Array<String>):Null<ThreeDsMesh> {
+  public static function parseObject__threeDsParse(view:Dynamic, offset:Float, end:Float, ?warnings:Array<String>):Null<ThreeDsMesh> {
     var cursor:Dynamic = cast FlightRuntime.UNDEFINED;
     var name:Dynamic = cast FlightRuntime.UNDEFINED;
     cursor = (offset + THREE_DS_CHUNK_HEADER_BYTES);
@@ -3020,7 +3017,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseObjMaterialLibrary(source:String, ?warnings:Array<String>):ObjMaterialLibrary {
+  public static function parseObjMaterialLibrary(source:String, ?warnings:Array<String>):ObjMaterialLibrary {
     var materials:Dynamic = cast FlightRuntime.UNDEFINED;
     var current:Null<ObjMaterial> = cast FlightRuntime.UNDEFINED;
     var lines:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3166,7 +3163,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseSkeletonAnimationBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, ?warnings:Array<String>):Null<ParsedSkeletonAnimation__awdParse> {
+  public static function parseSkeletonAnimationBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, ?warnings:Array<String>):Null<ParsedSkeletonAnimation__awdParse> {
     var dv:Dynamic = cast FlightRuntime.UNDEFINED;
     var offset:Dynamic = cast FlightRuntime.UNDEFINED;
     var nameResult:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3211,7 +3208,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseSkeletonBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, matrixWide:Bool, ?warnings:Array<String>):Null<ParsedSkeleton__awdParse> {
+  public static function parseSkeletonBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, matrixWide:Bool, ?warnings:Array<String>):Null<ParsedSkeleton__awdParse> {
     var dv:Dynamic = cast FlightRuntime.UNDEFINED;
     var offset:Dynamic = cast FlightRuntime.UNDEFINED;
     var nameResult:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3266,7 +3263,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseSkeletonPoseBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, matrixWide:Bool, ?warnings:Array<String>):Null<ParsedSkeletonPose__awdParse> {
+  public static function parseSkeletonPoseBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, matrixWide:Bool, ?warnings:Array<String>):Null<ParsedSkeletonPose__awdParse> {
     var dv:Dynamic = cast FlightRuntime.UNDEFINED;
     var offset:Dynamic = cast FlightRuntime.UNDEFINED;
     var nameResult:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3316,7 +3313,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseTextureBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, ?warnings:Array<String>):Null<ParsedTexture__awdParse> {
+  public static function parseTextureBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, ?warnings:Array<String>):Null<ParsedTexture__awdParse> {
     var dv:Dynamic = cast FlightRuntime.UNDEFINED;
     var offset:Dynamic = cast FlightRuntime.UNDEFINED;
     var nameResult:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3357,7 +3354,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseTextureFilename__threeDsParse(view:Dynamic, offset:Float, end:Float):Null<String> {
+  public static function parseTextureFilename__threeDsParse(view:Dynamic, offset:Float, end:Float):Null<String> {
     var cursor:Dynamic = cast FlightRuntime.UNDEFINED;
     cursor = offset;
     while (FlightRuntime.truthy(FlightRuntime.compare((cursor + THREE_DS_CHUNK_HEADER_BYTES), end, '<='))) {
@@ -3375,7 +3372,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseTriangleGeometryBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, geometryWide:Bool, ?warnings:Array<String>):Array<ParsedGeometry__awdParse> {
+  public static function parseTriangleGeometryBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, geometryWide:Bool, ?warnings:Array<String>):Array<ParsedGeometry__awdParse> {
     var dv:Dynamic = cast FlightRuntime.UNDEFINED;
     var offset:Dynamic = cast FlightRuntime.UNDEFINED;
     var nameResult:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3545,7 +3542,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseTriLine__md5Parse(line:String, warnings:Null<Array<String>>, lineIndex:Float):Null<Array<Float>> {
+  public static function parseTriLine__md5Parse(line:String, warnings:Null<Array<String>>, lineIndex:Float):Null<Array<Float>> {
     var tokens:Dynamic = cast FlightRuntime.UNDEFINED;
     var v0:Dynamic = cast FlightRuntime.UNDEFINED;
     var v1:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3566,7 +3563,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseTrimesh__threeDsParse(view:Dynamic, offset:Float, end:Float, name:String, ?warnings:Array<String>):Null<ThreeDsMesh> {
+  public static function parseTrimesh__threeDsParse(view:Dynamic, offset:Float, end:Float, name:String, ?warnings:Array<String>):Null<ThreeDsMesh> {
     var vertices:Null<flight.internal.FlightFloat32Array> = cast FlightRuntime.UNDEFINED;
     var faces:Null<flight.internal.FlightUInt16Array> = cast FlightRuntime.UNDEFINED;
     var uvs:Null<flight.internal.FlightFloat32Array> = cast FlightRuntime.UNDEFINED;
@@ -3607,7 +3604,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseUvCoords__threeDsParse(view:Dynamic, dataStart:Float, end:Float, ?warnings:Array<String>):Null<flight.internal.FlightFloat32Array> {
+  public static function parseUvCoords__threeDsParse(view:Dynamic, dataStart:Float, end:Float, ?warnings:Array<String>):Null<flight.internal.FlightFloat32Array> {
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsNeeded:Dynamic = cast FlightRuntime.UNDEFINED;
     var bytesNeeded:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3638,7 +3635,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseVertices__threeDsParse(view:Dynamic, dataStart:Float, end:Float, ?warnings:Array<String>):Null<flight.internal.FlightFloat32Array> {
+  public static function parseVertices__threeDsParse(view:Dynamic, dataStart:Float, end:Float, ?warnings:Array<String>):Null<flight.internal.FlightFloat32Array> {
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsNeeded:Dynamic = cast FlightRuntime.UNDEFINED;
     var bytesNeeded:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3669,7 +3666,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseVertLine__md5Parse(line:String, warnings:Null<Array<String>>, lineIndex:Float):Null<Md5Vertex> {
+  public static function parseVertLine__md5Parse(line:String, warnings:Null<Array<String>>, lineIndex:Float):Null<Md5Vertex> {
     var tokens:Dynamic = cast FlightRuntime.UNDEFINED;
     var u:Dynamic = cast FlightRuntime.UNDEFINED;
     var v:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3692,7 +3689,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function parseWeightLine__md5Parse(line:String, warnings:Null<Array<String>>, lineIndex:Float):Null<Md5Weight> {
+  public static function parseWeightLine__md5Parse(line:String, warnings:Null<Array<String>>, lineIndex:Float):Null<Md5Weight> {
     var tokens:Dynamic = cast FlightRuntime.UNDEFINED;
     var jointIndex:Dynamic = cast FlightRuntime.UNDEFINED;
     var bias:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3717,7 +3714,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function primitiveToGeometry__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, primitive:GltfPrimitive, ?warnings:Array<String>):MeshGeometry {
+  public static function primitiveToGeometry__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, primitive:GltfPrimitive, ?warnings:Array<String>):MeshGeometry {
     var positionIndex:Dynamic = cast FlightRuntime.UNDEFINED;
     var position:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3794,7 +3791,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function quatRotateVec3X__md5Parse(qx:Float, qy:Float, qz:Float, qw:Float, vx:Float, vy:Float, vz:Float):Float {
+  public static function quatRotateVec3X__md5Parse(qx:Float, qy:Float, qz:Float, qw:Float, vx:Float, vy:Float, vz:Float):Float {
     var tx:Dynamic = cast FlightRuntime.UNDEFINED;
     var ty:Dynamic = cast FlightRuntime.UNDEFINED;
     var tz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3805,7 +3802,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function quatRotateVec3Y__md5Parse(qx:Float, qy:Float, qz:Float, qw:Float, vx:Float, vy:Float, vz:Float):Float {
+  public static function quatRotateVec3Y__md5Parse(qx:Float, qy:Float, qz:Float, qw:Float, vx:Float, vy:Float, vz:Float):Float {
     var tx:Dynamic = cast FlightRuntime.UNDEFINED;
     var ty:Dynamic = cast FlightRuntime.UNDEFINED;
     var tz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3816,7 +3813,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function quatRotateVec3Z__md5Parse(qx:Float, qy:Float, qz:Float, qw:Float, vx:Float, vy:Float, vz:Float):Float {
+  public static function quatRotateVec3Z__md5Parse(qx:Float, qy:Float, qz:Float, qw:Float, vx:Float, vy:Float, vz:Float):Float {
     var tx:Dynamic = cast FlightRuntime.UNDEFINED;
     var ty:Dynamic = cast FlightRuntime.UNDEFINED;
     var tz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3827,7 +3824,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function readAccessor__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, accessorIndex:Float, ?warnings:Array<String>):{ var count:Float; var data:Dynamic; } {
+  public static function readAccessor__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, accessorIndex:Float, ?warnings:Array<String>):{ var count:Float; var data:Dynamic; } {
     var accessor:Dynamic = cast FlightRuntime.UNDEFINED;
     var componentCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var componentByteSize:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3889,7 +3886,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function readAwdDataValue__awdParse(view:Dynamic, offset:Float, dataType:Float):Float {
+  public static function readAwdDataValue__awdParse(view:Dynamic, offset:Float, dataType:Float):Float {
     var dv:Dynamic = cast FlightRuntime.UNDEFINED;
     dv = (cast view : Dynamic);
     {
@@ -3925,7 +3922,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function readAwdProperties__awdParse(view:Dynamic, offset:Float, end:Float):{ var end:Float; var values:Dynamic; } {
+  public static function readAwdProperties__awdParse(view:Dynamic, offset:Float, end:Float):{ var end:Float; var values:Dynamic; } {
     var dv:Dynamic = cast FlightRuntime.UNDEFINED;
     var values:Dynamic = cast FlightRuntime.UNDEFINED;
     var listLength:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3949,7 +3946,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function readAwdPropertyUint32__awdParse(view:Dynamic, values:Dynamic, key:Float):Null<Float> {
+  public static function readAwdPropertyUint32__awdParse(view:Dynamic, values:Dynamic, key:Float):Null<Float> {
     var entry:Dynamic = cast FlightRuntime.UNDEFINED;
     entry = FlightRuntime.callProperty(values, 'get', cast ([key] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(entry, FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(entry, 'length'), 4.0, '<')))) { return cast null; }
@@ -3957,7 +3954,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function readAwdString__awdParse(view:Dynamic, source:Dynamic, offset:Float):{ var end:Float; var value:String; } {
+  public static function readAwdString__awdParse(view:Dynamic, source:Dynamic, offset:Float):{ var end:Float; var value:String; } {
     var length:Dynamic = cast FlightRuntime.UNDEFINED;
     var stringBytes:Dynamic = cast FlightRuntime.UNDEFINED;
     var value:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3968,7 +3965,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function readAwdTransform__awdParse(view:Dynamic, offset:Float, widePrecision:Bool):{ var end:Float; var transform:Dynamic; } {
+  public static function readAwdTransform__awdParse(view:Dynamic, offset:Float, widePrecision:Bool):{ var end:Float; var transform:Dynamic; } {
     var dv:Dynamic = cast FlightRuntime.UNDEFINED;
     var transform:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatSize:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3987,12 +3984,12 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function readChunkLength__threeDsParse(view:Dynamic, offset:Float):Float {
+  public static function readChunkLength__threeDsParse(view:Dynamic, offset:Float):Float {
     return cast FlightRuntime.callProperty(view, 'getUint32', cast ([(offset + 2.0), true] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function readComponent__gltfParse(view:Dynamic, componentType:GltfComponentType, offset:Float):Float {
+  public static function readComponent__gltfParse(view:Dynamic, componentType:GltfComponentType, offset:Float):Float {
     {
       var __switchValue = componentType;
       if (__switchValue == 5120.0) {
@@ -4017,7 +4014,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function readGlbContainer__gltfParse(bytes:Dynamic, ?warnings:Array<String>):Null<{ var binary:Null<Dynamic>; var document:GltfDocument; }> {
+  public static function readGlbContainer__gltfParse(bytes:Dynamic, ?warnings:Array<String>):Null<{ var binary:Null<Dynamic>; var document:GltfDocument; }> {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var view:Dynamic = cast FlightRuntime.UNDEFINED;
     var version:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4076,7 +4073,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function readMd2Frames__md2Parse(bytes:Dynamic, view:Dynamic, offFrames:Float, numFrames:Float, numVertices:Float, frameStride:Float):Array<Md2Frame__md2Parse> {
+  public static function readMd2Frames__md2Parse(bytes:Dynamic, view:Dynamic, offFrames:Float, numFrames:Float, numVertices:Float, frameStride:Float):Array<Md2Frame__md2Parse> {
     var frames:Array<Md2Frame__md2Parse> = cast FlightRuntime.UNDEFINED;
     frames = cast ([] : Array<Dynamic>);
     {
@@ -4121,7 +4118,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function readMd2SkinName__md2Parse(bytes:Dynamic, offset:Float):String {
+  public static function readMd2SkinName__md2Parse(bytes:Dynamic, offset:Float):String {
     var limit:Dynamic = cast FlightRuntime.UNDEFINED;
     var end:Dynamic = cast FlightRuntime.UNDEFINED;
     var name:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4140,7 +4137,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function readNullTerminatedString__threeDsParse(view:Dynamic, offset:Float, end:Float):String {
+  public static function readNullTerminatedString__threeDsParse(view:Dynamic, offset:Float, end:Float):String {
     var chars:Array<String> = cast FlightRuntime.UNDEFINED;
     var cursor:Dynamic = cast FlightRuntime.UNDEFINED;
     chars = cast ([] : Array<Dynamic>);
@@ -4155,7 +4152,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function resolveAwdMaterial__awdParse(materialId:Float, materialBlocks:Dynamic, textureBlocks:Dynamic, cache:Dynamic, ?warnings:Array<String>):Null<Material> {
+  public static function resolveAwdMaterial__awdParse(materialId:Float, materialBlocks:Dynamic, textureBlocks:Dynamic, cache:Dynamic, ?warnings:Array<String>):Null<Material> {
     var cached:Dynamic = cast FlightRuntime.UNDEFINED;
     var parsed:Dynamic = cast FlightRuntime.UNDEFINED;
     var diffuseTexture:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4180,7 +4177,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function resolveAwdTexture__awdParse(textureId:Float, textureBlocks:Dynamic, ?warnings:Array<String>):Null<Texture> {
+  public static function resolveAwdTexture__awdParse(textureId:Float, textureBlocks:Dynamic, ?warnings:Array<String>):Null<Texture> {
     var parsed:Dynamic = cast FlightRuntime.UNDEFINED;
     parsed = FlightRuntime.callProperty(textureBlocks, 'get', cast ([textureId] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(parsed, FlightRuntime.UNDEFINED))) {
@@ -4197,7 +4194,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function resolveGltfTexture__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, info:Null<GltfTextureInfo>, colorSpace:TextureColorSpace, options:Null<GltfImportOptions>):Null<Texture> {
+  public static function resolveGltfTexture__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, info:Null<GltfTextureInfo>, colorSpace:TextureColorSpace, options:Null<GltfImportOptions>):Null<Texture> {
     var texture:Dynamic = cast FlightRuntime.UNDEFINED;
     var image:Dynamic = cast FlightRuntime.UNDEFINED;
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4215,7 +4212,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function resolveObjMaterial__objParse(name:String, library:Null<ObjMaterialLibrary>, cache:Dynamic):Null<Material> {
+  public static function resolveObjMaterial__objParse(name:String, library:Null<ObjMaterialLibrary>, cache:Dynamic):Null<Material> {
     var cached:Dynamic = cast FlightRuntime.UNDEFINED;
     var parsed:Dynamic = cast FlightRuntime.UNDEFINED;
     var material:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4230,7 +4227,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function reverseTriangleWinding(indices:Array<Float>):Void {
+  public static function reverseTriangleWinding(indices:Array<Float>):Void {
     {
       var i:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare((i + 2.0), FlightRuntime.field(indices, 'length'), '<'))) {
@@ -4244,7 +4241,7 @@ class SceneFormats {
 
   public static final SKINNED_FLOATS_PER_VERTEX:Dynamic = (CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT.stride / 4.0);
 
-  @:keep public static function skipAwdAttrList__awdParse(view:Dynamic, offset:Float, end:Float):Float {
+  public static function skipAwdAttrList__awdParse(view:Dynamic, offset:Float, end:Float):Float {
     var byteLength:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.compare((offset + 4.0), end, '>'))) { return cast offset; }
     byteLength = FlightRuntime.callProperty((cast view : Dynamic), 'getUint32', cast ([offset, true] : Array<Dynamic>));
@@ -4252,7 +4249,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function skipBlock__md5AnimParse(lines:Array<String>, startLine:Float):Float {
+  public static function skipBlock__md5AnimParse(lines:Array<String>, startLine:Float):Float {
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     i = startLine;
     while (FlightRuntime.truthy(FlightRuntime.compare(i, FlightRuntime.field(lines, 'length'), '<'))) {
@@ -4303,7 +4300,7 @@ class SceneFormats {
 
   public static final THREE_DS_VERTICES:Dynamic = 16656.0;
 
-  @:keep public static function threeDsMaterialToBlinnPhong__threeDsParse(material:ThreeDsMaterial):Material {
+  public static function threeDsMaterialToBlinnPhong__threeDsParse(material:ThreeDsMaterial):Material {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     result = (cast (cast FlightRuntime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: FlightRuntime.callValue(SceneFormats.packThreeDsColor__threeDsParse, cast ([FlightRuntime.field(material, 'diffuse')] : Array<Dynamic>)), diffuseMap: FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.field(material, 'textureFilename'), null), function():Dynamic return cast FlightRuntime.callValue(createExternalTextureRef, cast ([FlightRuntime.field(material, 'textureFilename')] : Array<Dynamic>)), function():Dynamic return cast null), specular: FlightRuntime.callValue(SceneFormats.packThreeDsColor__threeDsParse, cast ([FlightRuntime.field(material, 'specular')] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Material);
     FlightRuntime.setField(result, 'name', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(FlightRuntime.field(material, 'name'), 'length'), 0.0, '>'), function():Dynamic return cast FlightRuntime.field(material, 'name'), function():Dynamic return cast null));
@@ -4311,7 +4308,7 @@ class SceneFormats {
     return cast null;
   }
 
-  @:keep public static function topLevelNodeIndices__gltfParse(nodes:Array<GltfNode>):Array<Float> {
+  public static function topLevelNodeIndices__gltfParse(nodes:Array<GltfNode>):Array<Float> {
     var referenced:Dynamic = cast FlightRuntime.UNDEFINED;
     var roots:Array<Float> = cast FlightRuntime.UNDEFINED;
     referenced = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
@@ -4332,7 +4329,7 @@ class SceneFormats {
 
   public static final TYPE_COMPONENTS__gltfParse:Dynamic = { MAT2: 4.0, MAT3: 9.0, MAT4: 16.0, SCALAR: 1.0, VEC2: 2.0, VEC3: 3.0, VEC4: 4.0 };
 
-  @:keep public static function warnNoMaterial__mtlParse(warnings:Null<Array<String>>, directive:String, lineIndex:Float):Void {
+  public static function warnNoMaterial__mtlParse(warnings:Null<Array<String>>, directive:String, lineIndex:Float):Void {
     FlightRuntime.callOptionalProperty(warnings, 'push', cast (['parseObjMaterialLibrary: ' + Std.string(directive) + ' on line ' + Std.string((lineIndex + 1.0)) + ' appears before any newmtl'] : Array<Dynamic>));
   }
 }

@@ -16,14 +16,11 @@ import flight.Types.WebcamVideo;
 
 typedef WebcamStreamRuntime = Dynamic;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Webcam")
 class Webcam {
   public static var _backend__webcam:Null<WebcamBackend> = FlightRuntime.explicitNull();
 
-  @:keep public static function createWebcamStreamEntity(data:{ var active:Bool; var deviceId:String; var facingMode:Null<WebcamFacingMode>; var frameRate:Float; var height:Float; var id:String; var width:Float; }):WebcamStream {
+  public static function createWebcamStreamEntity(data:{ var active:Bool; var deviceId:String; var facingMode:Null<WebcamFacingMode>; var frameRate:Float; var height:Float; var id:String; var width:Float; }):WebcamStream {
     var stream:Dynamic = cast FlightRuntime.UNDEFINED;
     var rt:WebcamStreamRuntime = cast FlightRuntime.UNDEFINED;
     stream = FlightRuntime.callValue(createEntity, cast ([{ active: FlightRuntime.field(data, 'active'), deviceId: FlightRuntime.field(data, 'deviceId'), facingMode: FlightRuntime.field(data, 'facingMode'), frameRate: FlightRuntime.field(data, 'frameRate'), height: FlightRuntime.field(data, 'height'), id: FlightRuntime.field(data, 'id'), width: FlightRuntime.field(data, 'width') }] : Array<Dynamic>));
@@ -33,7 +30,7 @@ class Webcam {
     return cast null;
   }
 
-  @:keep public static function createWebWebcamBackend():WebcamBackend {
+  public static function createWebWebcamBackend():WebcamBackend {
     return cast { capture: function(options:Dynamic) {
   return cast FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(resolve:Dynamic) {
   if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement')), 'function')))) {
@@ -111,13 +108,13 @@ class Webcam {
     return cast null;
   }
 
-  @:keep public static function getWebcamBackend():WebcamBackend {
+  public static function getWebcamBackend():WebcamBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Webcam._backend__webcam, null))) { (Webcam._backend__webcam = cast (FlightRuntime.callValue(createWebWebcamBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Webcam._backend__webcam;
     return cast null;
   }
 
-  @:keep public static function getWebcamStreamRuntime(stream:WebcamStream):Null<WebcamStreamRuntime> {
+  public static function getWebcamStreamRuntime(stream:WebcamStream):Null<WebcamStreamRuntime> {
     var rt:Dynamic = cast FlightRuntime.UNDEFINED;
     rt = FlightRuntime.getIndex(stream, EntityRuntimeKey);
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(rt, FlightRuntime.UNDEFINED), function():Dynamic return cast FlightRuntime.strictEquals(rt, null)))) { return cast null; }
@@ -125,26 +122,26 @@ class Webcam {
     return cast null;
   }
 
-  @:keep public static function recordWebcamVideo(?options:WebcamCaptureOptions):flight.internal.FlightPromise<Null<WebcamVideo>> {
+  public static function recordWebcamVideo(?options:WebcamCaptureOptions):flight.internal.FlightPromise<Null<WebcamVideo>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getWebcamBackend, cast ([] : Array<Dynamic>)), 'captureVideo', cast ([FlightRuntime.mergeObjects([options, { source: 'camera' }])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function requestWebcamPermission():flight.internal.FlightPromise<Bool> {
+  public static function requestWebcamPermission():flight.internal.FlightPromise<Bool> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getWebcamBackend, cast ([] : Array<Dynamic>)), 'requestPermission', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function selectWebcamImage(?options:WebcamCaptureOptions):flight.internal.FlightPromise<Null<WebcamPhoto>> {
+  public static function selectWebcamImage(?options:WebcamCaptureOptions):flight.internal.FlightPromise<Null<WebcamPhoto>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getWebcamBackend, cast ([] : Array<Dynamic>)), 'capture', cast ([FlightRuntime.mergeObjects([options, { source: 'photos' }])] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setWebcamBackend(backend:Null<WebcamBackend>):Void {
+  public static function setWebcamBackend(backend:Null<WebcamBackend>):Void {
     (Webcam._backend__webcam = cast (backend : Dynamic));
   }
 
-  @:keep public static function takeWebcamPhoto(?options:WebcamCaptureOptions):flight.internal.FlightPromise<Null<WebcamPhoto>> {
+  public static function takeWebcamPhoto(?options:WebcamCaptureOptions):flight.internal.FlightPromise<Null<WebcamPhoto>> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getWebcamBackend, cast ([] : Array<Dynamic>)), 'capture', cast ([FlightRuntime.mergeObjects([options, { source: 'camera' }])] : Array<Dynamic>));
     return cast null;
   }

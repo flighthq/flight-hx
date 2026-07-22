@@ -118,12 +118,9 @@ typedef TauriWindowModule = { var getCurrentWindow:Dynamic; var LogicalPosition:
 
 typedef TrayRecord__tauriTray = { var icon:Null<TauriTrayIcon>; var title:String; var tooltip:String; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.HostTauri")
 class HostTauri {
-  @:keep public static function basename__tauriDialog(path:String):String {
+  public static function basename__tauriDialog(path:String):String {
     var normalized:Dynamic = cast FlightRuntime.UNDEFINED;
     var index:Dynamic = cast FlightRuntime.UNDEFINED;
     normalized = FlightRuntime.replace(path, FlightRuntime.regexp('[/\\\\]+$$', ''), '', false);
@@ -132,56 +129,53 @@ class HostTauri {
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function buildItem__tauriMenu(menuModule:Dynamic, item:MenuItemTemplate, onSelect:Dynamic):flight.internal.FlightPromise<TauriMenuItemHandle> {
-    var id:Dynamic = cast FlightRuntime.UNDEFINED;
-    if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(item, 'type'), 'separator'))) {
+  public static function buildItem__tauriMenu(menuModule:Dynamic, item:MenuItemTemplate, onSelect:Dynamic):flight.internal.FlightPromise<TauriMenuItemHandle> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<TauriMenuItemHandle> {
+      var id:Dynamic = cast FlightRuntime.UNDEFINED;
+      if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(item, 'type'), 'separator'))) {
   return cast FlightRuntime.callProperty(FlightRuntime.field(menuModule, 'PredefinedMenuItem'), 'new', cast ([{ item: 'Separator' }] : Array<Dynamic>));
 }
-    if (FlightRuntime.truthy(FlightRuntime.field(item, 'submenu'))) {
+      if (FlightRuntime.truthy(FlightRuntime.field(item, 'submenu'))) {
   var children:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(HostTauri.buildItems__tauriMenu, cast ([menuModule, FlightRuntime.field(item, 'submenu'), onSelect] : Array<Dynamic>)));
   return cast FlightRuntime.callProperty(FlightRuntime.field(menuModule, 'Submenu'), 'new', cast ([{ text: FlightRuntime.field(item, 'label'), enabled: FlightRuntime.field(item, 'enabled'), items: children }] : Array<Dynamic>));
 }
-    id = FlightRuntime.field(item, 'id');
-    return cast FlightRuntime.callProperty(FlightRuntime.field(menuModule, 'MenuItem'), 'new', cast ([{ id: id, text: FlightRuntime.field(item, 'label'), enabled: FlightRuntime.field(item, 'enabled'), accelerator: FlightRuntime.field(item, 'accelerator'), action: FlightRuntime.select(!FlightRuntime.strictEquals(id, FlightRuntime.UNDEFINED), function():Dynamic return cast function() return FlightRuntime.callValue(onSelect, cast ([id] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.UNDEFINED) }] : Array<Dynamic>));
-    return cast null;
+      id = FlightRuntime.field(item, 'id');
+      return cast FlightRuntime.callProperty(FlightRuntime.field(menuModule, 'MenuItem'), 'new', cast ([{ id: id, text: FlightRuntime.field(item, 'label'), enabled: FlightRuntime.field(item, 'enabled'), accelerator: FlightRuntime.field(item, 'accelerator'), action: FlightRuntime.select(!FlightRuntime.strictEquals(id, FlightRuntime.UNDEFINED), function():Dynamic return cast function() return FlightRuntime.callValue(onSelect, cast ([id] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.UNDEFINED) }] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function buildItems__tauriMenu(menuModule:Dynamic, items:Array<MenuItemTemplate>, onSelect:Dynamic):flight.internal.FlightPromise<Array<TauriMenuItemHandle>> {
-    var built:Array<TauriMenuItemHandle> = cast FlightRuntime.UNDEFINED;
-    built = cast ([] : Array<Dynamic>);
-    for (item in FlightRuntime.iterable(items)) {
-      FlightRuntime.callProperty(built, 'push', cast ([flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(HostTauri.buildItem__tauriMenu, cast ([menuModule, item, onSelect] : Array<Dynamic>)))] : Array<Dynamic>));
-    }
-    return cast built;
-    return cast null;
+  public static function buildItems__tauriMenu(menuModule:Dynamic, items:Array<MenuItemTemplate>, onSelect:Dynamic):flight.internal.FlightPromise<Array<TauriMenuItemHandle>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Array<TauriMenuItemHandle>> {
+      var built:Array<TauriMenuItemHandle> = cast FlightRuntime.UNDEFINED;
+      built = cast ([] : Array<Dynamic>);
+      for (item in FlightRuntime.iterable(items)) {
+        FlightRuntime.callProperty(built, 'push', cast ([flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(HostTauri.buildItem__tauriMenu, cast ([menuModule, item, onSelect] : Array<Dynamic>)))] : Array<Dynamic>));
+      }
+      return cast built;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function buildTrayItems__tauriTray(menuModule:Dynamic, items:Array<MenuItemTemplate>):flight.internal.FlightPromise<Array<TauriMenuItemHandle>> {
-    var built:Array<TauriMenuItemHandle> = cast FlightRuntime.UNDEFINED;
-    built = cast ([] : Array<Dynamic>);
-    for (item in FlightRuntime.iterable(items)) {
-      if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(item, 'type'), 'separator'))) {
+  public static function buildTrayItems__tauriTray(menuModule:Dynamic, items:Array<MenuItemTemplate>):flight.internal.FlightPromise<Array<TauriMenuItemHandle>> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Array<TauriMenuItemHandle>> {
+      var built:Array<TauriMenuItemHandle> = cast FlightRuntime.UNDEFINED;
+      built = cast ([] : Array<Dynamic>);
+      for (item in FlightRuntime.iterable(items)) {
+        if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(item, 'type'), 'separator'))) {
   FlightRuntime.callProperty(built, 'push', cast ([flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.field(menuModule, 'PredefinedMenuItem'), 'new', cast ([{ item: 'Separator' }] : Array<Dynamic>)))] : Array<Dynamic>));
 } else { if (FlightRuntime.truthy(FlightRuntime.field(item, 'submenu'))) {
   FlightRuntime.callProperty(built, 'push', cast ([flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.field(menuModule, 'Submenu'), 'new', cast ([{ text: FlightRuntime.field(item, 'label'), enabled: FlightRuntime.field(item, 'enabled'), items: flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(HostTauri.buildTrayItems__tauriTray, cast ([menuModule, FlightRuntime.field(item, 'submenu')] : Array<Dynamic>))) }] : Array<Dynamic>)))] : Array<Dynamic>));
 } else {
   FlightRuntime.callProperty(built, 'push', cast ([flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(FlightRuntime.field(menuModule, 'MenuItem'), 'new', cast ([{ id: FlightRuntime.field(item, 'id'), text: FlightRuntime.field(item, 'label'), enabled: FlightRuntime.field(item, 'enabled') }] : Array<Dynamic>)))] : Array<Dynamic>));
 } }
-    }
-    return cast built;
-    return cast null;
+      }
+      return cast built;
+      return cast null;
+    })();
   }
 
-  @:keep public static function createTauriAppBackend(tauri:TauriApi):AppBackend {
+  public static function createTauriAppBackend(tauri:TauriApi):AppBackend {
     var app:Dynamic = cast FlightRuntime.UNDEFINED;
     var os:Dynamic = cast FlightRuntime.UNDEFINED;
     var process:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -308,7 +302,7 @@ class HostTauri {
     return cast null;
   }
 
-  @:keep public static function createTauriClipboardBackend(tauri:TauriApi):ClipboardBackend {
+  public static function createTauriClipboardBackend(tauri:TauriApi):ClipboardBackend {
     var clipboard:Dynamic = cast FlightRuntime.UNDEFINED;
     clipboard = FlightRuntime.field(tauri, 'clipboard');
     return cast { readText: flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Dynamic> {
@@ -402,7 +396,7 @@ class HostTauri {
     return cast null;
   }
 
-  @:keep public static function createTauriDialogBackend(tauri:TauriApi):DialogBackend {
+  public static function createTauriDialogBackend(tauri:TauriApi):DialogBackend {
     var dialog:Dynamic = cast FlightRuntime.UNDEFINED;
     dialog = FlightRuntime.field(tauri, 'dialog');
     return cast { openFile: flight.internal.FlightAsync.make(function(options:Dynamic):flight.internal.FlightPromise<Dynamic> {
@@ -436,7 +430,7 @@ class HostTauri {
     return cast null;
   }
 
-  @:keep public static function createTauriMenuBackend(tauri:TauriApi):MenuBackend {
+  public static function createTauriMenuBackend(tauri:TauriApi):MenuBackend {
     var menuModule:Dynamic = cast FlightRuntime.UNDEFINED;
     var selectListener:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
     menuModule = FlightRuntime.field(tauri, 'menu');
@@ -473,7 +467,7 @@ class HostTauri {
     return cast null;
   }
 
-  @:keep public static function createTauriNotificationBackend(tauri:TauriApi):NotificationBackend {
+  public static function createTauriNotificationBackend(tauri:TauriApi):NotificationBackend {
     var notification:Dynamic = cast FlightRuntime.UNDEFINED;
     var nextId:Dynamic = cast FlightRuntime.UNDEFINED;
     var cachedPermission:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -555,7 +549,7 @@ class HostTauri {
     return cast null;
   }
 
-  @:keep public static function createTauriPlatformBackend(tauri:TauriApi):PlatformBackend {
+  public static function createTauriPlatformBackend(tauri:TauriApi):PlatformBackend {
     var os:Dynamic = cast FlightRuntime.UNDEFINED;
     os = FlightRuntime.field(tauri, 'os');
     return cast { getInfo: function(out:Dynamic) {
@@ -571,7 +565,7 @@ class HostTauri {
     return cast null;
   }
 
-  @:keep public static function createTauriShellBackend(tauri:TauriApi):ShellBackend {
+  public static function createTauriShellBackend(tauri:TauriApi):ShellBackend {
     var opener:Dynamic = cast FlightRuntime.UNDEFINED;
     opener = FlightRuntime.field(tauri, 'opener');
     return cast { openExternal: flight.internal.FlightAsync.make(function(url:Dynamic):flight.internal.FlightPromise<Dynamic> {
@@ -624,7 +618,7 @@ class HostTauri {
     return cast null;
   }
 
-  @:keep public static function createTauriShortcutBackend(tauri:TauriApi):ShortcutBackend {
+  public static function createTauriShortcutBackend(tauri:TauriApi):ShortcutBackend {
     var globalShortcut:Dynamic = cast FlightRuntime.UNDEFINED;
     var registered:Dynamic = cast FlightRuntime.UNDEFINED;
     globalShortcut = FlightRuntime.field(tauri, 'globalShortcut');
@@ -660,7 +654,7 @@ class HostTauri {
     return cast null;
   }
 
-  @:keep public static function createTauriTrayBackend(tauri:TauriApi):TrayBackend {
+  public static function createTauriTrayBackend(tauri:TauriApi):TrayBackend {
     var trayModule:Dynamic = cast FlightRuntime.UNDEFINED;
     var menuModule:Dynamic = cast FlightRuntime.UNDEFINED;
     var trays:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -766,7 +760,7 @@ class HostTauri {
     return cast null;
   }
 
-  @:keep public static function createTauriWindowBackend(tauri:TauriApi):WindowBackend {
+  public static function createTauriWindowBackend(tauri:TauriApi):WindowBackend {
     var windowModule:Dynamic = cast FlightRuntime.UNDEFINED;
     var windows:Dynamic = cast FlightRuntime.UNDEFINED;
     var run:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -922,7 +916,7 @@ class HostTauri {
     return cast null;
   }
 
-  @:keep public static function registerTauriBackends(tauri:TauriApi):Void {
+  public static function registerTauriBackends(tauri:TauriApi):Void {
     FlightRuntime.callValue(setPlatformBackend, cast ([FlightRuntime.callValue(createTauriPlatformBackend, cast ([tauri] : Array<Dynamic>))] : Array<Dynamic>));
     FlightRuntime.callValue(setAppBackend, cast ([FlightRuntime.callValue(createTauriAppBackend, cast ([tauri] : Array<Dynamic>))] : Array<Dynamic>));
     FlightRuntime.callValue(setWindowBackend, cast ([FlightRuntime.callValue(createTauriWindowBackend, cast ([tauri] : Array<Dynamic>))] : Array<Dynamic>));
@@ -935,12 +929,12 @@ class HostTauri {
     FlightRuntime.callValue(setShellBackend, cast ([FlightRuntime.callValue(createTauriShellBackend, cast ([tauri] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  @:keep public static function toFileHandle__tauriDialog(path:String, kind:String):FileDialogHandle {
+  public static function toFileHandle__tauriDialog(path:String, kind:String):FileDialogHandle {
     return cast { kind: kind, name: FlightRuntime.callValue(HostTauri.basename__tauriDialog, cast ([path] : Array<Dynamic>)), path: path };
     return cast null;
   }
 
-  @:keep public static function toHandles__tauriDialog(result:Null<Dynamic>, kind:String):Array<FileDialogHandle> {
+  public static function toHandles__tauriDialog(result:Null<Dynamic>, kind:String):Array<FileDialogHandle> {
     var paths:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(result, null))) { return cast cast ([] : Array<Dynamic>); }
     paths = FlightRuntime.select(FlightRuntime.isArray(result), function():Dynamic return cast result, function():Dynamic return cast cast ([result] : Array<Dynamic>));
@@ -948,7 +942,7 @@ class HostTauri {
     return cast null;
   }
 
-  @:keep public static function toPlatformName__tauriPlatform(platform:String):PlatformName {
+  public static function toPlatformName__tauriPlatform(platform:String):PlatformName {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(platform, 'windows'))) { return cast 'windows'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(platform, 'macos'))) { return cast 'macos'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(platform, 'linux'))) { return cast 'linux'; }
@@ -958,19 +952,19 @@ class HostTauri {
     return cast null;
   }
 
-  @:keep public static function toTauriFilter__tauriDialog(filter:FileDialogFilter):TauriDialogFilter {
+  public static function toTauriFilter__tauriDialog(filter:FileDialogFilter):TauriDialogFilter {
     return cast { name: FlightRuntime.field(filter, 'name'), extensions: FlightRuntime.concatArrays([FlightRuntime.toArray(FlightRuntime.field(filter, 'extensions'))]) };
     return cast null;
   }
 
-  @:keep public static function toTauriMessageKind__tauriDialog(kind:Null<MessageDialogKind>):String {
+  public static function toTauriMessageKind__tauriDialog(kind:Null<MessageDialogKind>):String {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(kind, 'warning'))) { return cast 'warning'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(kind, 'error'))) { return cast 'error'; }
     return cast 'info';
     return cast null;
   }
 
-  @:keep public static function toTrayEventType__tauriTray(event:Dynamic):Null<TrayEventType> {
+  public static function toTrayEventType__tauriTray(event:Dynamic):Null<TrayEventType> {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(event, 'type'), 'DoubleClick'))) { return cast 'doubleClick'; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(event, 'type'), 'Click'))) { return cast FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.field(event, 'button'), 'Right'), function():Dynamic return cast 'rightClick', function():Dynamic return cast 'click'); }
     return cast null;

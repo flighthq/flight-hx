@@ -7,9 +7,6 @@ import flight.Types.PermissionBackend;
 import flight.Types.PermissionName;
 import flight.Types.PermissionState;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Permissions")
 class Permissions {
   public static var _backend__permission:Null<PermissionBackend> = FlightRuntime.explicitNull();
@@ -18,7 +15,7 @@ class Permissions {
 
   public static final _permissionRequestRouters__permission:Dynamic = FlightRuntime.objectFromPairs([{ key: 'camera', value: function() return FlightRuntime.callValue(Permissions.requestWebMediaPermission__permission, cast (['video'] : Array<Dynamic>)) }, { key: 'microphone', value: function() return FlightRuntime.callValue(Permissions.requestWebMediaPermission__permission, cast (['audio'] : Array<Dynamic>)) }, { key: 'geolocation', value: Permissions.requestWebGeolocationPermission__permission }, { key: 'notifications', value: Permissions.requestWebNotificationPermission__permission }, { key: 'persistent-storage', value: Permissions.requestWebPersistentStoragePermission__permission }]);
 
-  @:keep public static function createWebPermissionBackend():PermissionBackend {
+  public static function createWebPermissionBackend():PermissionBackend {
     return cast { getState: function(name:Dynamic) {
   return cast FlightRuntime.callValue(Permissions.readWebPermissionState__permission, cast ([name] : Array<Dynamic>));
 }, request: function(name:Dynamic) {
@@ -27,40 +24,40 @@ class Permissions {
     return cast null;
   }
 
-  @:keep public static function getPermissionBackend():PermissionBackend {
+  public static function getPermissionBackend():PermissionBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Permissions._backend__permission, null))) { (Permissions._backend__permission = cast (FlightRuntime.callValue(createWebPermissionBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Permissions._backend__permission;
     return cast null;
   }
 
-  @:keep public static function getPermissionQueryDescriptorName__permission(name:PermissionName):String {
+  public static function getPermissionQueryDescriptorName__permission(name:PermissionName):String {
     return cast FlightRuntime.coalesce(FlightRuntime.getIndex(Permissions._permissionQueryDescriptors__permission, name), function():Dynamic return cast name);
     return cast null;
   }
 
-  @:keep public static function getPermissionState(name:PermissionName):flight.internal.FlightPromise<PermissionState> {
+  public static function getPermissionState(name:PermissionName):flight.internal.FlightPromise<PermissionState> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getPermissionBackend, cast ([] : Array<Dynamic>)), 'getState', cast ([name] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getWebGeolocation__permission():Null<Geolocation> {
+  public static function getWebGeolocation__permission():Null<Geolocation> {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
     return cast FlightRuntime.coalesce(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'geolocation'), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getWebMediaDevices__permission():Null<Dynamic> {
+  public static function getWebMediaDevices__permission():Null<Dynamic> {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
     return cast FlightRuntime.coalesce(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'mediaDevices'), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getWebNotification__permission():Null<Dynamic> {
+  public static function getWebNotification__permission():Null<Dynamic> {
     return cast FlightRuntime.select(!FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['Notification'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Notification'] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getWebNotificationPermission__permission():Null<Dynamic> {
+  public static function getWebNotificationPermission__permission():Null<Dynamic> {
     var notification:Dynamic = cast FlightRuntime.UNDEFINED;
     notification = FlightRuntime.callValue(Permissions.getWebNotification__permission, cast ([] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(notification, null))) { return cast null; }
@@ -68,7 +65,7 @@ class Permissions {
     return cast null;
   }
 
-  @:keep public static function getWebPermissions__permission():Null<Dynamic> {
+  public static function getWebPermissions__permission():Null<Dynamic> {
     var permissions:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
     permissions = FlightRuntime.coalesce(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'permissions'), function():Dynamic return cast null);
@@ -77,13 +74,13 @@ class Permissions {
     return cast null;
   }
 
-  @:keep public static function getWebStorageManager__permission():Null<Dynamic> {
+  public static function getWebStorageManager__permission():Null<Dynamic> {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
     return cast FlightRuntime.coalesce(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'storage'), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function readWebFallbackPermissionState__permission(name:PermissionName):PermissionState {
+  public static function readWebFallbackPermissionState__permission(name:PermissionName):PermissionState {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(name, 'notifications'))) {
   var permission:Dynamic = FlightRuntime.callValue(Permissions.getWebNotificationPermission__permission, cast ([] : Array<Dynamic>));
   if (FlightRuntime.truthy(!FlightRuntime.strictEquals(permission, null))) { return cast FlightRuntime.select(FlightRuntime.strictEquals(permission, 'default'), function():Dynamic return cast 'prompt', function():Dynamic return cast (cast permission : PermissionState)); }
@@ -92,29 +89,28 @@ class Permissions {
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function readWebPermissionState__permission(name:PermissionName):flight.internal.FlightPromise<PermissionState> {
-    var permissions:Dynamic = cast FlightRuntime.UNDEFINED;
-    permissions = FlightRuntime.callValue(Permissions.getWebPermissions__permission, cast ([] : Array<Dynamic>));
-    if (FlightRuntime.truthy(!FlightRuntime.strictEquals(permissions, null))) {
+  public static function readWebPermissionState__permission(name:PermissionName):flight.internal.FlightPromise<PermissionState> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<PermissionState> {
+      var permissions:Dynamic = cast FlightRuntime.UNDEFINED;
+      permissions = FlightRuntime.callValue(Permissions.getWebPermissions__permission, cast ([] : Array<Dynamic>));
+      if (FlightRuntime.truthy(!FlightRuntime.strictEquals(permissions, null))) {
   try {
   var status:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(permissions, 'query', cast ([(cast (cast { name: FlightRuntime.callValue(Permissions.getPermissionQueryDescriptorName__permission, cast ([name] : Array<Dynamic>)) } : Dynamic) : Dynamic)] : Array<Dynamic>)));
   return cast (cast FlightRuntime.field(status, 'state') : PermissionState);
 } catch (__error:Dynamic) {
 }
 }
-    return cast FlightRuntime.callValue(Permissions.readWebFallbackPermissionState__permission, cast ([name] : Array<Dynamic>));
-    return cast null;
+      return cast FlightRuntime.callValue(Permissions.readWebFallbackPermissionState__permission, cast ([name] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  @:keep public static function requestPermission(name:PermissionName):flight.internal.FlightPromise<PermissionState> {
+  public static function requestPermission(name:PermissionName):flight.internal.FlightPromise<PermissionState> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getPermissionBackend, cast ([] : Array<Dynamic>)), 'request', cast ([name] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function requestWebGeolocationPermission__permission():flight.internal.FlightPromise<PermissionState> {
+  public static function requestWebGeolocationPermission__permission():flight.internal.FlightPromise<PermissionState> {
     return cast FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(resolve:Dynamic) {
   var geolocation:Dynamic = cast FlightRuntime.UNDEFINED;
   geolocation = FlightRuntime.callValue(Permissions.getWebGeolocation__permission, cast ([] : Array<Dynamic>));
@@ -131,70 +127,66 @@ class Permissions {
     return cast null;
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function requestWebMediaPermission__permission(kind:String):flight.internal.FlightPromise<PermissionState> {
-    var mediaDevices:Dynamic = cast FlightRuntime.UNDEFINED;
-    mediaDevices = FlightRuntime.callValue(Permissions.getWebMediaDevices__permission, cast ([] : Array<Dynamic>));
-    if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(mediaDevices, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(mediaDevices, 'getUserMedia')), 'function')))) { return cast 'prompt'; }
-    try {
+  public static function requestWebMediaPermission__permission(kind:String):flight.internal.FlightPromise<PermissionState> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<PermissionState> {
+      var mediaDevices:Dynamic = cast FlightRuntime.UNDEFINED;
+      mediaDevices = FlightRuntime.callValue(Permissions.getWebMediaDevices__permission, cast ([] : Array<Dynamic>));
+      if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(mediaDevices, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(mediaDevices, 'getUserMedia')), 'function')))) { return cast 'prompt'; }
+      try {
   var stream:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(mediaDevices, 'getUserMedia', cast ([FlightRuntime.select(FlightRuntime.strictEquals(kind, 'video'), function():Dynamic return cast { video: true }, function():Dynamic return cast { audio: true })] : Array<Dynamic>)));
   FlightRuntime.callValue(Permissions.stopMediaStreamTracks__permission, cast ([stream] : Array<Dynamic>));
   return cast 'granted';
 } catch (__error:Dynamic) {
   return cast 'denied';
 }
-    return cast null;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function requestWebNotificationPermission__permission():flight.internal.FlightPromise<PermissionState> {
-    var notification:Dynamic = cast FlightRuntime.UNDEFINED;
-    notification = FlightRuntime.callValue(Permissions.getWebNotification__permission, cast ([] : Array<Dynamic>));
-    if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(notification, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(notification, 'requestPermission')), 'function')))) { return cast 'prompt'; }
-    try {
+  public static function requestWebNotificationPermission__permission():flight.internal.FlightPromise<PermissionState> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<PermissionState> {
+      var notification:Dynamic = cast FlightRuntime.UNDEFINED;
+      notification = FlightRuntime.callValue(Permissions.getWebNotification__permission, cast ([] : Array<Dynamic>));
+      if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(notification, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(notification, 'requestPermission')), 'function')))) { return cast 'prompt'; }
+      try {
   var result:Dynamic = flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(notification, 'requestPermission', cast ([] : Array<Dynamic>)));
   return cast FlightRuntime.select(FlightRuntime.strictEquals(result, 'default'), function():Dynamic return cast 'prompt', function():Dynamic return cast (cast result : PermissionState));
 } catch (__error:Dynamic) {
   return cast 'prompt';
 }
-    return cast null;
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function requestWebPermission__permission(name:PermissionName):flight.internal.FlightPromise<PermissionState> {
-    var router:Dynamic = cast FlightRuntime.UNDEFINED;
-    router = FlightRuntime.getIndex(Permissions._permissionRequestRouters__permission, name);
-    if (FlightRuntime.truthy(!FlightRuntime.strictEquals(router, FlightRuntime.UNDEFINED))) { return cast flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(router, cast ([] : Array<Dynamic>))); }
-    return cast flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(Permissions.readWebPermissionState__permission, cast ([name] : Array<Dynamic>)));
-    return cast null;
+  public static function requestWebPermission__permission(name:PermissionName):flight.internal.FlightPromise<PermissionState> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<PermissionState> {
+      var router:Dynamic = cast FlightRuntime.UNDEFINED;
+      router = FlightRuntime.getIndex(Permissions._permissionRequestRouters__permission, name);
+      if (FlightRuntime.truthy(!FlightRuntime.strictEquals(router, FlightRuntime.UNDEFINED))) { return cast flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(router, cast ([] : Array<Dynamic>))); }
+      return cast flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(Permissions.readWebPermissionState__permission, cast ([name] : Array<Dynamic>)));
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function requestWebPersistentStoragePermission__permission():flight.internal.FlightPromise<PermissionState> {
-    var storage:Dynamic = cast FlightRuntime.UNDEFINED;
-    storage = FlightRuntime.callValue(Permissions.getWebStorageManager__permission, cast ([] : Array<Dynamic>));
-    if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(storage, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(storage, 'persist')), 'function')))) { return cast 'prompt'; }
-    try {
+  public static function requestWebPersistentStoragePermission__permission():flight.internal.FlightPromise<PermissionState> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<PermissionState> {
+      var storage:Dynamic = cast FlightRuntime.UNDEFINED;
+      storage = FlightRuntime.callValue(Permissions.getWebStorageManager__permission, cast ([] : Array<Dynamic>));
+      if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(storage, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(storage, 'persist')), 'function')))) { return cast 'prompt'; }
+      try {
   return cast FlightRuntime.select(flight.internal.FlightAsync.awaitValue(FlightRuntime.callProperty(storage, 'persist', cast ([] : Array<Dynamic>))), function():Dynamic return cast 'granted', function():Dynamic return cast 'prompt');
 } catch (__error:Dynamic) {
   return cast 'prompt';
 }
-    return cast null;
+      return cast null;
+    })();
   }
 
-  @:keep public static function setPermissionBackend(backend:Null<PermissionBackend>):Void {
+  public static function setPermissionBackend(backend:Null<PermissionBackend>):Void {
     (Permissions._backend__permission = cast (backend : Dynamic));
   }
 
-  @:keep public static function stopMediaStreamTracks__permission(stream:Dynamic):Void {
+  public static function stopMediaStreamTracks__permission(stream:Dynamic):Void {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(stream, 'getTracks')), 'function'))) { return; }
     for (track in FlightRuntime.iterable(FlightRuntime.callProperty(stream, 'getTracks', cast ([] : Array<Dynamic>)))) {
       if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(track, 'stop')), 'function'))) { FlightRuntime.callProperty(track, 'stop', cast ([] : Array<Dynamic>)); }

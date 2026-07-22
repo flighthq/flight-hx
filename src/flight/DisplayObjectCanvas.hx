@@ -106,9 +106,6 @@ typedef CanvasTextInputOverlay = Dynamic;
 
 typedef SavedCanvasState__canvasRenderTarget = { var canvas:Dynamic; var context:Dynamic; var renderTransform2D:Null<Matrix>; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.DisplayObjectCanvas")
 class DisplayObjectCanvas {
   public static final _blinkStart__canvasTextInput:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
@@ -137,7 +134,7 @@ class DisplayObjectCanvas {
 
   public static final _targetStack__canvasRenderTarget:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function addColorStops__canvasFillPattern(gradient:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Void {
+  public static function addColorStops__canvasFillPattern(gradient:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Void {
     {
       var i:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(i, FlightRuntime.field(colors, 'length'), '<'))) {
@@ -148,7 +145,7 @@ class DisplayObjectCanvas {
     }
   }
 
-  @:keep public static function applyCanvasBlendMode(state:Dynamic, value:Null<BlendMode>):Void {
+  public static function applyCanvasBlendMode(state:Dynamic, value:Null<BlendMode>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(value, FlightRuntime.field(runtime, 'currentBlendMode')))) { return; }
@@ -156,7 +153,7 @@ class DisplayObjectCanvas {
     FlightRuntime.setField(FlightRuntime.field(state, 'context'), 'globalCompositeOperation', FlightRuntime.coalesce(FlightRuntime.select(!FlightRuntime.strictEquals(value, null), function():Dynamic return cast FlightRuntime.getIndex(DisplayObjectCanvas.CANVAS_BLEND_MODE__canvasMaterials, value), function():Dynamic return cast null), function():Dynamic return cast 'source-over'));
   }
 
-  @:keep public static function applyCanvasMaterial(state:Dynamic, material:Null<Material>):Bool {
+  public static function applyCanvasMaterial(state:Dynamic, material:Null<Material>):Bool {
     var renderer:Dynamic = cast FlightRuntime.UNDEFINED;
     var drawState:Dynamic = cast FlightRuntime.UNDEFINED;
     var context:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -172,7 +169,7 @@ class DisplayObjectCanvas {
     return cast null;
   }
 
-  @:keep public static function applyStrippedTransform__canvasScale9Shape(state:Dynamic, context:Dynamic, t:MatrixLike, scaleX:Float, scaleY:Float):Void {
+  public static function applyStrippedTransform__canvasScale9Shape(state:Dynamic, context:Dynamic, t:MatrixLike, scaleX:Float, scaleY:Float):Void {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     var c:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -188,7 +185,7 @@ class DisplayObjectCanvas {
 }
   }
 
-  @:keep public static function beginCanvasRenderPass(state:Dynamic, target:Dynamic, ?preserve:RenderPassPreserve):Void {
+  public static function beginCanvasRenderPass(state:Dynamic, target:Dynamic, ?preserve:RenderPassPreserve):Void {
     var handles:Dynamic = cast FlightRuntime.UNDEFINED;
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var stack:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -211,7 +208,7 @@ class DisplayObjectCanvas {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(preserved))) { FlightRuntime.callProperty(FlightRuntime.field(handles, 'context'), 'clearRect', cast ([0.0, 0.0, FlightRuntime.field(target, 'width'), FlightRuntime.field(target, 'height')] : Array<Dynamic>)); }
   }
 
-  @:keep public static function buildScale9Mapper(commands:Array<Dynamic>, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
+  public static function buildScale9Mapper(commands:Array<Dynamic>, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
     var bounds:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var bw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -304,7 +301,7 @@ class DisplayObjectCanvas {
   FlightRuntime.setField(state, 'bitmapH', FlightRuntime.field(bitmap, 'height'));
 } };
 
-  @:keep public static function computeCommandsBounds__canvasScale9Mapper(commands:Array<Dynamic>):Null<{ var width:Float; var height:Float; }> {
+  public static function computeCommandsBounds__canvasScale9Mapper(commands:Array<Dynamic>):Null<{ var width:Float; var height:Float; }> {
     var minX:Dynamic = cast FlightRuntime.UNDEFINED;
     var minY:Dynamic = cast FlightRuntime.UNDEFINED;
     var maxX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -397,14 +394,14 @@ class DisplayObjectCanvas {
     return cast null;
   }
 
-  @:keep public static function createBitmapPattern(context:Dynamic, bitmap:ImageResource, repeat:Bool, smooth:Dynamic = false):Null<Dynamic> {
+  public static function createBitmapPattern(context:Dynamic, bitmap:ImageResource, repeat:Bool, smooth:Dynamic = false):Null<Dynamic> {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(bitmap, 'source'), null))) { return cast null; }
     FlightRuntime.callValue(DisplayObjectCanvas.setSmoothing__canvasFillPattern, cast ([context, smooth] : Array<Dynamic>));
     return cast FlightRuntime.callProperty(context, 'createPattern', cast ([FlightRuntime.field(bitmap, 'source'), FlightRuntime.select(repeat, function():Dynamic return cast 'repeat', function():Dynamic return cast 'no-repeat')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createCanvasCacheState(screenState:Dynamic):Dynamic {
+  public static function createCanvasCacheState(screenState:Dynamic):Dynamic {
     var screen:Dynamic = cast FlightRuntime.UNDEFINED;
     var cacheState:Dynamic = cast FlightRuntime.UNDEFINED;
     screen = FlightRuntime.callValue(getCanvasRenderStateRuntime, cast ([screenState] : Array<Dynamic>));
@@ -415,7 +412,7 @@ class DisplayObjectCanvas {
     return cast null;
   }
 
-  @:keep public static function createCanvasElement(width:Float, height:Float, pixelRatio:Float = 1.0):Dynamic {
+  public static function createCanvasElement(width:Float, height:Float, pixelRatio:Float = 1.0):Dynamic {
     var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
     canvas = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
     FlightRuntime.setField(FlightRuntime.field(canvas, 'style'), 'width', '' + Std.string(width) + 'px');
@@ -426,7 +423,7 @@ class DisplayObjectCanvas {
     return cast null;
   }
 
-  @:keep public static function createCanvasRenderState(canvas:Dynamic, ?options:Dynamic):Dynamic {
+  public static function createCanvasRenderState(canvas:Dynamic, ?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     var context:Dynamic = cast FlightRuntime.UNDEFINED;
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -451,12 +448,12 @@ class DisplayObjectCanvas {
     return cast null;
   }
 
-  @:keep public static function createCanvasRenderStateRuntime():Dynamic {
+  public static function createCanvasRenderStateRuntime():Dynamic {
     return cast (cast FlightRuntime.callValue(createRenderStateRuntime, cast ([] : Array<Dynamic>)) : Dynamic);
     return cast null;
   }
 
-  @:keep public static function createCanvasRenderTarget(width:Float, height:Float):Dynamic {
+  public static function createCanvasRenderTarget(width:Float, height:Float):Dynamic {
     var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
     var context:Dynamic = cast FlightRuntime.UNDEFINED;
     canvas = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -467,14 +464,14 @@ class DisplayObjectCanvas {
     return cast null;
   }
 
-  @:keep public static function createCanvasShapeDrawState__canvasShape(context:Dynamic):Dynamic {
+  public static function createCanvasShapeDrawState__canvasShape(context:Dynamic):Dynamic {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     state = { bitmapH: 0.0, bitmapSrc: null, bitmapW: 0.0, fillMatrix: null, fillMatrixInverse: null, fillStyle: '', hasFill: false, hasPendingPath: false, hasCurrentPoint: false, hasStroke: false, strokeStyle: '', strokeWidth: 1.0, windingRule: 'evenodd', flush: function() return FlightRuntime.callValue(DisplayObjectCanvas.flushCanvasShapePath__canvasShape, cast ([context, state] : Array<Dynamic>)) };
     return cast state;
     return cast null;
   }
 
-  @:keep public static function createCanvasTextMeasure():TextMeasureFunction {
+  public static function createCanvasTextMeasure():TextMeasureFunction {
     var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
     var context:Dynamic = cast FlightRuntime.UNDEFINED;
     canvas = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -486,7 +483,7 @@ class DisplayObjectCanvas {
     return cast null;
   }
 
-  @:keep public static function createGradientPattern(context:Dynamic, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:Null<Matrix>, spreadMethod:SpreadMethod, _interpolationMethod:InterpolationMethod, focalPointRatio:Float):Null<Dynamic> {
+  public static function createGradientPattern(context:Dynamic, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:Null<Matrix>, spreadMethod:SpreadMethod, _interpolationMethod:InterpolationMethod, focalPointRatio:Float):Null<Dynamic> {
     var mat:Dynamic = cast FlightRuntime.UNDEFINED;
     mat = FlightRuntime.coalesce(m, function():Dynamic return cast DisplayObjectCanvas.IDENTITY__canvasFillPattern);
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(gradientType, 'radial'))) {
@@ -496,7 +493,7 @@ class DisplayObjectCanvas {
     return cast null;
   }
 
-  @:keep public static function createLinearGradient__canvasFillPattern(context:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:MatrixLike, spreadMethod:SpreadMethod):Null<Dynamic> {
+  public static function createLinearGradient__canvasFillPattern(context:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:MatrixLike, spreadMethod:SpreadMethod):Null<Dynamic> {
     var STEPS:Dynamic = cast FlightRuntime.UNDEFINED;
     var step:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure5:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -582,7 +579,7 @@ class DisplayObjectCanvas {
     return cast null;
   }
 
-  @:keep public static function createRadialGradient__canvasFillPattern(context:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:MatrixLike, focalPointRatio:Float):Dynamic {
+  public static function createRadialGradient__canvasFillPattern(context:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:MatrixLike, focalPointRatio:Float):Dynamic {
     var clampedFocal:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var fx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -978,7 +975,7 @@ class DisplayObjectCanvas {
 
   public static final canvasDisplayObjectRendererEntries:Array<Array<Dynamic>> = cast ([cast ([Types.BitmapKind, defaultCanvasBitmapRenderer] : Array<Dynamic>), cast ([Types.DisplayObjectKind, defaultCanvasDisplayObjectRenderer] : Array<Dynamic>), cast ([Types.ParticleEmitterKind, defaultCanvasParticleEmitterRenderer] : Array<Dynamic>), cast ([Types.QuadBatchKind, defaultCanvasQuadBatchRenderer] : Array<Dynamic>), cast ([Types.RichTextKind, defaultCanvasRichTextRenderer] : Array<Dynamic>), cast ([Types.Scale9ShapeKind, defaultCanvasScale9ShapeRenderer] : Array<Dynamic>), cast ([Types.ShapeKind, defaultCanvasShapeRenderer] : Array<Dynamic>), cast ([Types.SpriteKind, defaultCanvasSpriteRenderer] : Array<Dynamic>), cast ([Types.TextLabelKind, defaultCanvasTextLabelRenderer] : Array<Dynamic>), cast ([Types.TilemapKind, defaultCanvasTilemapRenderer] : Array<Dynamic>), cast ([Types.VideoKind, defaultCanvasVideoRenderer] : Array<Dynamic>)] : Array<Dynamic>);
 
-  @:keep public static function destroyCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache):Void {
+  public static function destroyCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache):Void {
     var targets:Dynamic = cast FlightRuntime.UNDEFINED;
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     targets = FlightRuntime.callValue(DisplayObjectCanvas.getTargets__canvasCache, cast ([state] : Array<Dynamic>));
@@ -992,14 +989,14 @@ class DisplayObjectCanvas {
 }
   }
 
-  @:keep public static function destroyCanvasRenderTarget(target:Dynamic):Void {
+  public static function destroyCanvasRenderTarget(target:Dynamic):Void {
     FlightRuntime.setField(FlightRuntime.field(target, 'canvas'), 'width', 0.0);
     FlightRuntime.setField(FlightRuntime.field(target, 'canvas'), 'height', 0.0);
     FlightRuntime.setField(target, 'width', 0.0);
     FlightRuntime.setField(target, 'height', 0.0);
   }
 
-  @:keep public static function drawCanvasBitmap(state:Dynamic, bitmap:RenderProxy2D):Void {
+  public static function drawCanvasBitmap(state:Dynamic, bitmap:RenderProxy2D):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var imageSource:Dynamic = cast FlightRuntime.UNDEFINED;
     var drawable:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1027,10 +1024,10 @@ class DisplayObjectCanvas {
 }
   }
 
-  @:keep public static function drawCanvasDisplayObject(_state:Dynamic, _renderProxy:RenderProxy2D):Void {
+  public static function drawCanvasDisplayObject(_state:Dynamic, _renderProxy:RenderProxy2D):Void {
   }
 
-  @:keep public static function drawCanvasParticleEmitter(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawCanvasParticleEmitter(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var atlas:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1104,7 +1101,7 @@ class DisplayObjectCanvas {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.field(state, 'allowSmoothing')))) { FlightRuntime.setField(context, 'imageSmoothingEnabled', true); }
   }
 
-  @:keep public static function drawCanvasQuadBatch(state:Dynamic, quadBatch:RenderProxy2D):Void {
+  public static function drawCanvasQuadBatch(state:Dynamic, quadBatch:RenderProxy2D):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1180,7 +1177,7 @@ class DisplayObjectCanvas {
 }
   }
 
-  @:keep public static function drawCanvasRenderCache__canvasCache(state:RenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawCanvasRenderCache__canvasCache(state:RenderState, renderProxy:RenderProxy2D):Void {
     var cache:Dynamic = cast FlightRuntime.UNDEFINED;
     var canvasState:Dynamic = cast FlightRuntime.UNDEFINED;
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1193,14 +1190,14 @@ class DisplayObjectCanvas {
     FlightRuntime.callProperty(FlightRuntime.field(canvasState, 'context'), 'drawImage', cast ([FlightRuntime.field(target, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function drawCanvasRichText(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawCanvasRichText(state:Dynamic, renderProxy:RenderProxy2D):Void {
     FlightRuntime.callValue(DisplayObjectCanvas.drawCanvasRichTextField__canvasRichText, cast ([state, renderProxy] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(DisplayObjectCanvas._canvasTextInputOverlay__canvasRichText, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.callValue(getRichTextRuntime, cast ([(cast FlightRuntime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null)))) {
   FlightRuntime.callValue(DisplayObjectCanvas._canvasTextInputOverlay__canvasRichText, cast ([state, renderProxy] : Array<Dynamic>));
 }
   }
 
-  @:keep public static function drawCanvasRichTextField__canvasRichText(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawCanvasRichTextField__canvasRichText(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var context:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1300,11 +1297,11 @@ class DisplayObjectCanvas {
     FlightRuntime.callProperty(context, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function drawCanvasRichTextMask(state:Dynamic, data:RenderProxy2D):Void {
+  public static function drawCanvasRichTextMask(state:Dynamic, data:RenderProxy2D):Void {
     FlightRuntime.callValue(drawCanvasDisplayObject, cast ([state, data] : Array<Dynamic>));
   }
 
-  @:keep public static function drawCanvasScale9Shape(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawCanvasScale9Shape(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var commands:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1337,7 +1334,7 @@ class DisplayObjectCanvas {
 }
   }
 
-  @:keep public static function drawCanvasShape(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawCanvasShape(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var commands:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1354,7 +1351,7 @@ class DisplayObjectCanvas {
     FlightRuntime.callValue(renderCanvasShapeCommands, cast ([context, commands] : Array<Dynamic>));
   }
 
-  @:keep public static function drawCanvasSprite(state:Dynamic, spriteNode:RenderProxy2D):Void {
+  public static function drawCanvasSprite(state:Dynamic, spriteNode:RenderProxy2D):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var atlas:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1389,7 +1386,7 @@ class DisplayObjectCanvas {
 }
   }
 
-  @:keep public static function drawCanvasTextInputOverlay(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawCanvasTextInputOverlay(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var input:Dynamic = cast FlightRuntime.UNDEFINED;
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1434,7 +1431,7 @@ class DisplayObjectCanvas {
     FlightRuntime.callProperty(context, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function drawCanvasTextLabel(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawCanvasTextLabel(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var text:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1479,7 +1476,7 @@ class DisplayObjectCanvas {
     }
   }
 
-  @:keep public static function drawCanvasTilemap(state:Dynamic, tilemapNode:RenderProxy2D):Void {
+  public static function drawCanvasTilemap(state:Dynamic, tilemapNode:RenderProxy2D):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var tileset:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1545,7 +1542,7 @@ class DisplayObjectCanvas {
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.field(state, 'allowSmoothing')))) { FlightRuntime.setField(context, 'imageSmoothingEnabled', true); }
   }
 
-  @:keep public static function drawCanvasVideo(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawCanvasVideo(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(drawCanvasDisplayObject, cast ([state, renderProxy] : Array<Dynamic>));
@@ -1566,27 +1563,27 @@ class DisplayObjectCanvas {
 }
   }
 
-  @:keep public static function enableCanvasBlendMode(state:Dynamic):Void {
+  public static function enableCanvasBlendMode(state:Dynamic):Void {
     FlightRuntime.setField(state, 'applyBlendMode', applyCanvasBlendMode);
   }
 
-  @:keep public static function enableCanvasClip(state:Dynamic):Void {
+  public static function enableCanvasClip(state:Dynamic):Void {
     FlightRuntime.setField(state, 'displayObjectClipHooks', DisplayObjectCanvas.canvasClipHooks__canvasClip);
   }
 
-  @:keep public static function enableCanvasCssFilter(state:Dynamic):Void {
+  public static function enableCanvasCssFilter(state:Dynamic):Void {
     FlightRuntime.setField(state, 'canvasCssFilterResolver', resolveCanvasCssFilter);
   }
 
-  @:keep public static function enableCanvasRenderCache(state:RenderState):Void {
+  public static function enableCanvasRenderCache(state:RenderState):Void {
     FlightRuntime.callValue(registerRenderCacheRenderer, cast ([state, defaultCanvasRenderCacheRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function enableCanvasTextInput():Void {
+  public static function enableCanvasTextInput():Void {
     FlightRuntime.callValue(registerCanvasTextInputOverlay, cast ([drawCanvasTextInputOverlay] : Array<Dynamic>));
   }
 
-  @:keep public static function endCanvasRenderPass(state:Dynamic):Void {
+  public static function endCanvasRenderPass(state:Dynamic):Void {
     var handles:Dynamic = cast FlightRuntime.UNDEFINED;
     var saved:Dynamic = cast FlightRuntime.UNDEFINED;
     handles = (cast state : Dynamic);
@@ -1597,7 +1594,7 @@ class DisplayObjectCanvas {
     FlightRuntime.setField(handles, 'renderTransform2D', FlightRuntime.field(saved, 'renderTransform2D'));
   }
 
-  @:keep public static function ensureCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache, width:Float, height:Float):Dynamic {
+  public static function ensureCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache, width:Float, height:Float):Dynamic {
     var targets:Dynamic = cast FlightRuntime.UNDEFINED;
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     targets = FlightRuntime.callValue(DisplayObjectCanvas.getTargets__canvasCache, cast ([state] : Array<Dynamic>));
@@ -1612,14 +1609,14 @@ class DisplayObjectCanvas {
     return cast null;
   }
 
-  @:keep public static function explainCanvasImageSource(image:ImageResource):Dynamic {
+  public static function explainCanvasImageSource(image:ImageResource):Dynamic {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(image, 'source'), null))) { return cast 'element'; }
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(image, 'data'), null))) { return cast 'data'; }
     return cast 'none';
     return cast null;
   }
 
-  @:keep public static function flushCanvasShapePath__canvasShape(context:Dynamic, state:Dynamic):Void {
+  public static function flushCanvasShapePath__canvasShape(context:Dynamic, state:Dynamic):Void {
     if (FlightRuntime.truthy(FlightRuntime.field(state, 'hasFill'))) {
   FlightRuntime.setField(context, 'fillStyle', FlightRuntime.field(state, 'fillStyle'));
   if (FlightRuntime.truthy(FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.field(state, 'fillMatrix'), null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(state, 'fillMatrixInverse'), null)))) {
@@ -1642,32 +1639,32 @@ class DisplayObjectCanvas {
     FlightRuntime.callProperty(context, 'beginPath', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function getCanvasCssFilter(renderProxy:RenderProxy2D):Null<String> {
+  public static function getCanvasCssFilter(renderProxy:RenderProxy2D):Null<String> {
     return cast FlightRuntime.callProperty(DisplayObjectCanvas._cssFilterBindings__canvasCSSFilterBinding, 'get', cast ([renderProxy] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getCanvasMaterialRenderer(state:Dynamic, kind:Kind):Null<Dynamic> {
+  public static function getCanvasMaterialRenderer(state:Dynamic, kind:Kind):Null<Dynamic> {
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(FlightRuntime.field(FlightRuntime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'materialRendererMap'), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache):Null<Dynamic> {
+  public static function getCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache):Null<Dynamic> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.callValue(DisplayObjectCanvas.getTargets__canvasCache, cast ([state] : Array<Dynamic>)), 'get', cast ([cache] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getCanvasRenderStateRuntime(state:Dynamic):Dynamic {
+  public static function getCanvasRenderStateRuntime(state:Dynamic):Dynamic {
     return cast (cast FlightRuntime.getIndex(state, EntityRuntimeKey) : Dynamic);
     return cast null;
   }
 
-  @:keep public static function getCanvasShapeCommand(key:String):Null<Dynamic> {
+  public static function getCanvasShapeCommand(key:String):Null<Dynamic> {
     return cast FlightRuntime.callProperty(DisplayObjectCanvas.registry__canvasShapeRegistry, 'get', cast ([key] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getCaretVisible__canvasTextInput(source:Dynamic, focused:Bool):Bool {
+  public static function getCaretVisible__canvasTextInput(source:Dynamic, focused:Bool):Bool {
     var wasFocused:Dynamic = cast FlightRuntime.UNDEFINED;
     var elapsed:Dynamic = cast FlightRuntime.UNDEFINED;
     wasFocused = FlightRuntime.coalesce(FlightRuntime.callProperty(DisplayObjectCanvas._prevFocused__canvasTextInput, 'get', cast ([source] : Array<Dynamic>)), function():Dynamic return cast false);
@@ -1678,7 +1675,7 @@ class DisplayObjectCanvas {
     return cast null;
   }
 
-  @:keep public static function getTargets__canvasCache(state:Dynamic):Dynamic {
+  public static function getTargets__canvasCache(state:Dynamic):Dynamic {
     var targets:Dynamic = cast FlightRuntime.UNDEFINED;
     targets = FlightRuntime.callProperty(DisplayObjectCanvas._renderCacheTargets__canvasCache, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(targets, FlightRuntime.UNDEFINED))) {
@@ -1693,7 +1690,7 @@ class DisplayObjectCanvas {
 
   public static final IDENTITY__canvasFillPattern:Dynamic = FlightRuntime.callValue(createMatrix, cast ([] : Array<Dynamic>));
 
-  @:keep public static function mapCanvasScale9ShapeCommands(out:Array<Dynamic>, source:Array<Dynamic>, mapper:Scale9Mapper):Void {
+  public static function mapCanvasScale9ShapeCommands(out:Array<Dynamic>, source:Array<Dynamic>, mapper:Scale9Mapper):Void {
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(out, (cast source : Array<Dynamic>)))) {
   FlightRuntime.setLength(out, FlightRuntime.field(source, 'length'));
@@ -1770,11 +1767,11 @@ class DisplayObjectCanvas {
 }
   }
 
-  @:keep public static function popCanvasClipRectangle(state:Dynamic):Void {
+  public static function popCanvasClipRectangle(state:Dynamic):Void {
     FlightRuntime.callProperty(FlightRuntime.field(state, 'context'), 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function pushCanvasClipContours(state:Dynamic, contours:Array<Array<Float>>, winding:PathWinding, transform:Matrix):Void {
+  public static function pushCanvasClipContours(state:Dynamic, contours:Array<Array<Float>>, winding:PathWinding, transform:Matrix):Void {
     FlightRuntime.callProperty(FlightRuntime.field(state, 'context'), 'save', cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(setCanvasTransform, cast ([state, FlightRuntime.field(state, 'context'), transform] : Array<Dynamic>));
     FlightRuntime.callProperty(FlightRuntime.field(state, 'context'), 'beginPath', cast ([] : Array<Dynamic>));
@@ -1798,7 +1795,7 @@ class DisplayObjectCanvas {
     FlightRuntime.callProperty(FlightRuntime.field(state, 'context'), 'clip', cast ([FlightRuntime.select(FlightRuntime.strictEquals(winding, 'evenOdd'), function():Dynamic return cast 'evenodd', function():Dynamic return cast 'nonzero')] : Array<Dynamic>));
   }
 
-  @:keep public static function pushCanvasClipRectangle(state:Dynamic, rect:RectangleLike, transform:Matrix):Void {
+  public static function pushCanvasClipRectangle(state:Dynamic, rect:RectangleLike, transform:Matrix):Void {
     FlightRuntime.callProperty(FlightRuntime.field(state, 'context'), 'save', cast ([] : Array<Dynamic>));
     FlightRuntime.callValue(setCanvasTransform, cast ([state, FlightRuntime.field(state, 'context'), transform] : Array<Dynamic>));
     FlightRuntime.callProperty(FlightRuntime.field(state, 'context'), 'beginPath', cast ([] : Array<Dynamic>));
@@ -1806,7 +1803,7 @@ class DisplayObjectCanvas {
     FlightRuntime.callProperty(FlightRuntime.field(state, 'context'), 'clip', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function refreshCanvasRenderCache(cacheState:Dynamic, cache:RenderCache, source:DisplayObject, ?options:RenderCacheRefreshOptions):Bool {
+  public static function refreshCanvasRenderCache(cacheState:Dynamic, cache:RenderCache, source:DisplayObject, ?options:RenderCacheRefreshOptions):Bool {
     var screenState:Dynamic = cast FlightRuntime.UNDEFINED;
     var padding:Dynamic = cast FlightRuntime.UNDEFINED;
     var minWidth:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1849,7 +1846,7 @@ class DisplayObjectCanvas {
     return cast null;
   }
 
-  @:keep public static function registerCanvasDisplayObjectRenderers(state:Dynamic):Void {
+  public static function registerCanvasDisplayObjectRenderers(state:Dynamic):Void {
     for (__iteration0 in FlightRuntime.iterable(canvasDisplayObjectRendererEntries)) {
       var kind:Dynamic = FlightRuntime.getIndex(__iteration0, 0.0);
       var renderer:Dynamic = FlightRuntime.getIndex(__iteration0, 1.0);
@@ -1857,33 +1854,33 @@ class DisplayObjectCanvas {
     }
   }
 
-  @:keep public static function registerCanvasMaterialRenderer(state:Dynamic, kind:Kind, renderer:Dynamic):Void {
+  public static function registerCanvasMaterialRenderer(state:Dynamic, kind:Kind, renderer:Dynamic):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>));
     FlightRuntime.callProperty(FlightRuntime.setField(runtime, 'materialRendererMap', (FlightRuntime.field(runtime, 'materialRendererMap') ?? FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []))), 'set', cast ([kind, renderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerCanvasShapeCommand<K>(command:Dynamic):Void {
+  public static function registerCanvasShapeCommand<K>(command:Dynamic):Void {
     FlightRuntime.callProperty(DisplayObjectCanvas.registry__canvasShapeRegistry, 'set', cast ([FlightRuntime.field(command, 'key'), (cast command : Dynamic)] : Array<Dynamic>));
   }
 
-  @:keep public static function registerCanvasShapeCommands(commands:Array<Dynamic>):Void {
+  public static function registerCanvasShapeCommands(commands:Array<Dynamic>):Void {
     for (command in FlightRuntime.iterable(commands)) {
       FlightRuntime.callValue(registerCanvasShapeCommand, cast ([command] : Array<Dynamic>));
     }
   }
 
-  @:keep public static function registerCanvasTextInputOverlay(overlay:Dynamic):Void {
+  public static function registerCanvasTextInputOverlay(overlay:Dynamic):Void {
     (DisplayObjectCanvas._canvasTextInputOverlay__canvasRichText = cast (overlay : Dynamic));
   }
 
   public static final registry__canvasShapeRegistry:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
 
-  @:keep public static function releaseCanvasRenderCache(state:Dynamic, cache:RenderCache):Void {
+  public static function releaseCanvasRenderCache(state:Dynamic, cache:RenderCache):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(DisplayObjectCanvas.getTargets__canvasCache, cast ([state] : Array<Dynamic>)), 'delete', cast ([cache] : Array<Dynamic>));
   }
 
-  @:keep public static function remapPathData__canvasScale9Shape(out:Array<Float>, source:Array<Float>, cmds:Array<Float>, mapper:Scale9Mapper):Void {
+  public static function remapPathData__canvasScale9Shape(out:Array<Float>, source:Array<Float>, cmds:Array<Float>, mapper:Scale9Mapper):Void {
     var di:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(out, (cast source : Array<Float>)))) {
   FlightRuntime.setLength(out, FlightRuntime.field(source, 'length'));
@@ -1931,7 +1928,7 @@ class DisplayObjectCanvas {
     }
   }
 
-  @:keep public static function renderCanvasBackground(state:Dynamic):Void {
+  public static function renderCanvasBackground(state:Dynamic):Void {
     FlightRuntime.setField(FlightRuntime.field(state, 'context'), 'globalCompositeOperation', 'source-over');
     FlightRuntime.setField(FlightRuntime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentBlendMode', Types.BlendModeValue.Normal);
     FlightRuntime.callProperty(FlightRuntime.field(state, 'context'), 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
@@ -1944,7 +1941,7 @@ class DisplayObjectCanvas {
 }
   }
 
-  @:keep public static function renderCanvasDisplayObject(state:Dynamic, source:DisplayObject):Void {
+  public static function renderCanvasDisplayObject(state:Dynamic, source:DisplayObject):Void {
     var tempStack:Dynamic = cast FlightRuntime.UNDEFINED;
     var clipHooks:Dynamic = cast FlightRuntime.UNDEFINED;
     var stackLength:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1980,7 +1977,7 @@ class DisplayObjectCanvas {
     FlightRuntime.callOptionalProperty(clipHooks, 'finalize', cast ([state] : Array<Dynamic>));
   }
 
-  @:keep public static function renderCanvasShapeCommands(context:Dynamic, commands:Array<Dynamic>):Void {
+  public static function renderCanvasShapeCommands(context:Dynamic, commands:Array<Dynamic>):Void {
     var drawState:Dynamic = cast FlightRuntime.UNDEFINED;
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     drawState = FlightRuntime.callValue(DisplayObjectCanvas.createCanvasShapeDrawState__canvasShape, cast ([context] : Array<Dynamic>));
@@ -1998,7 +1995,7 @@ class DisplayObjectCanvas {
 }
   }
 
-  @:keep public static function renderCanvasSprite(state:Dynamic, source:DisplayObject):Void {
+  public static function renderCanvasSprite(state:Dynamic, source:DisplayObject):Void {
     var tempStack:Dynamic = cast FlightRuntime.UNDEFINED;
     var stackLength:Dynamic = cast FlightRuntime.UNDEFINED;
     tempStack = FlightRuntime.field(FlightRuntime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'tempStack');
@@ -2025,19 +2022,19 @@ class DisplayObjectCanvas {
 }
   }
 
-  @:keep public static function resizeCanvasRenderTarget(target:Dynamic, width:Float, height:Float):Void {
+  public static function resizeCanvasRenderTarget(target:Dynamic, width:Float, height:Float):Void {
     FlightRuntime.setField(FlightRuntime.field(target, 'canvas'), 'width', FlightRuntime.callProperty(HxMath, 'max', cast ([1.0, FlightRuntime.callProperty(HxMath, 'ceil', cast ([width] : Array<Dynamic>))] : Array<Dynamic>)));
     FlightRuntime.setField(FlightRuntime.field(target, 'canvas'), 'height', FlightRuntime.callProperty(HxMath, 'max', cast ([1.0, FlightRuntime.callProperty(HxMath, 'ceil', cast ([height] : Array<Dynamic>))] : Array<Dynamic>)));
     FlightRuntime.setField(target, 'width', FlightRuntime.field(FlightRuntime.field(target, 'canvas'), 'width'));
     FlightRuntime.setField(target, 'height', FlightRuntime.field(FlightRuntime.field(target, 'canvas'), 'height'));
   }
 
-  @:keep public static function resolveCanvasCssFilter(_state:Dynamic, renderProxy:RenderProxy2D):Null<String> {
+  public static function resolveCanvasCssFilter(_state:Dynamic, renderProxy:RenderProxy2D):Null<String> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(DisplayObjectCanvas._cssFilterBindings__canvasCSSFilterBinding, 'get', cast ([renderProxy] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function resolveCanvasImageSource(state:Dynamic, image:ImageResource):Null<Dynamic> {
+  public static function resolveCanvasImageSource(state:Dynamic, image:ImageResource):Null<Dynamic> {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var cache:Dynamic = cast FlightRuntime.UNDEFINED;
     var entry:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2058,7 +2055,7 @@ class DisplayObjectCanvas {
     return cast null;
   }
 
-  @:keep public static function resolveCanvasMaterialRenderer(state:Dynamic, material:Null<Material>):Null<Dynamic> {
+  public static function resolveCanvasMaterialRenderer(state:Dynamic, material:Null<Material>):Null<Dynamic> {
     var map:Dynamic = cast FlightRuntime.UNDEFINED;
     map = FlightRuntime.field(FlightRuntime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'materialRendererMap');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(map, FlightRuntime.UNDEFINED))) { return cast null; }
@@ -2070,7 +2067,7 @@ class DisplayObjectCanvas {
     return cast null;
   }
 
-  @:keep public static function rgbaString__canvasFillPattern(color:Float, alpha:Float):String {
+  public static function rgbaString__canvasFillPattern(color:Float, alpha:Float):String {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2081,7 +2078,7 @@ class DisplayObjectCanvas {
     return cast null;
   }
 
-  @:keep public static function rgbaString__canvasShapeCommands(color:Float, alpha:Float):String {
+  public static function rgbaString__canvasShapeCommands(color:Float, alpha:Float):String {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2098,7 +2095,7 @@ class DisplayObjectCanvas {
 
   public static final selectionRectangles__canvasTextInput:Array<TextSelectionRectangle> = cast ([] : Array<Dynamic>);
 
-  @:keep public static function setCanvasCssFilter(state:Dynamic, node:DisplayObject, filter:Null<String>):Void {
+  public static function setCanvasCssFilter(state:Dynamic, node:DisplayObject, filter:Null<String>):Void {
     var renderProxy:Dynamic = cast FlightRuntime.UNDEFINED;
     renderProxy = FlightRuntime.callValue(getOrCreateRenderProxy2D, cast ([state, node] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(filter, null))) {
@@ -2108,7 +2105,7 @@ class DisplayObjectCanvas {
     FlightRuntime.callProperty(DisplayObjectCanvas._cssFilterBindings__canvasCSSFilterBinding, 'set', cast ([renderProxy, filter] : Array<Dynamic>));
   }
 
-  @:keep public static function setCanvasRenderTransform2D(state:Dynamic, transform:Matrix):Void {
+  public static function setCanvasRenderTransform2D(state:Dynamic, transform:Matrix):Void {
     var handles:Dynamic = cast FlightRuntime.UNDEFINED;
     var next:Dynamic = cast FlightRuntime.UNDEFINED;
     handles = (cast state : Dynamic);
@@ -2117,7 +2114,7 @@ class DisplayObjectCanvas {
     FlightRuntime.setField(handles, 'renderTransform2D', next);
   }
 
-  @:keep public static function setCanvasTransform(state:Dynamic, context:Dynamic, transform:Matrix):Void {
+  public static function setCanvasTransform(state:Dynamic, context:Dynamic, transform:Matrix):Void {
     if (FlightRuntime.truthy(FlightRuntime.field(state, 'roundPixels'))) {
   FlightRuntime.callProperty(context, 'setTransform', cast ([FlightRuntime.field(transform, 'a'), FlightRuntime.field(transform, 'b'), FlightRuntime.field(transform, 'c'), FlightRuntime.field(transform, 'd'), FlightRuntime.callProperty(HxMath, 'fround', cast ([FlightRuntime.field(transform, 'tx')] : Array<Dynamic>)), FlightRuntime.callProperty(HxMath, 'fround', cast ([FlightRuntime.field(transform, 'ty')] : Array<Dynamic>))] : Array<Dynamic>));
 } else {
@@ -2125,13 +2122,13 @@ class DisplayObjectCanvas {
 }
   }
 
-  @:keep public static function setSmoothing__canvasFillPattern(context:Dynamic, smooth:Bool):Void {
+  public static function setSmoothing__canvasFillPattern(context:Dynamic, smooth:Bool):Void {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(context, 'imageSmoothingEnabled'), smooth))) {
   FlightRuntime.setField(context, 'imageSmoothingEnabled', smooth);
 }
   }
 
-  @:keep public static function toScale9Position__canvasScale9Mapper(pos:Float, scale9Start:Float, scale9Center:Float, unscaledSize:Float, scale:Float):Float {
+  public static function toScale9Position__canvasScale9Mapper(pos:Float, scale9Start:Float, scale9Center:Float, unscaledSize:Float, scale:Float):Float {
     var scale9End:Dynamic = cast FlightRuntime.UNDEFINED;
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     var center:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2157,7 +2154,7 @@ class DisplayObjectCanvas {
     return cast null;
   }
 
-  @:keep public static function tp__canvasFillPattern(m:MatrixLike, x:Float, y:Float):Array<Float> {
+  public static function tp__canvasFillPattern(m:MatrixLike, x:Float, y:Float):Array<Float> {
     return cast cast ([(((FlightRuntime.field(m, 'a') * x) + (FlightRuntime.field(m, 'c') * y)) + FlightRuntime.field(m, 'tx')), (((FlightRuntime.field(m, 'b') * x) + (FlightRuntime.field(m, 'd') * y)) + FlightRuntime.field(m, 'ty'))] : Array<Dynamic>);
     return cast null;
   }

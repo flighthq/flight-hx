@@ -72,12 +72,9 @@ import flight.Types.SceneNodeTraits;
 import flight.Types.SceneNodeTraitsKey;
 import flight.Types.Vector3Like;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.SceneApi")
 class SceneApi {
-  @:keep public static function _accumulateWorldBounds__sceneNodeBounds(out:AabbLike, node:SceneNode):Void {
+  public static function _accumulateWorldBounds__sceneNodeBounds(out:AabbLike, node:SceneNode):Void {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.callValue(isMesh, cast ([node] : Array<Dynamic>)))) {
   var geom:Dynamic = FlightRuntime.field(node, 'geometry');
@@ -131,7 +128,7 @@ class SceneApi {
 
   public static final _cameraWorld__billboardCamera:Dynamic = FlightRuntime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 
-  @:keep public static function _cullNode__sceneNodeCulling(out:Array<SceneNode>, node:SceneNode, frustum:FrustumLike):Void {
+  public static function _cullNode__sceneNodeCulling(out:Array<SceneNode>, node:SceneNode, frustum:FrustumLike):Void {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.field(node, 'enabled')))) { return; }
     if (FlightRuntime.truthy(FlightRuntime.callValue(isMesh, cast ([node] : Array<Dynamic>)))) {
@@ -188,7 +185,7 @@ class SceneApi {
 
   public static var _worldAppearanceRevisionCounter__sceneNodeAppearance:Dynamic = 0.0;
 
-  @:keep public static function applyAnimationClipToScene(clip:AnimationClip, time:Float):Void {
+  public static function applyAnimationClipToScene(clip:AnimationClip, time:Float):Void {
     var channels:Dynamic = cast FlightRuntime.UNDEFINED;
     channels = FlightRuntime.field(clip, 'channels');
     {
@@ -219,7 +216,7 @@ class SceneApi {
     }
   }
 
-  @:keep public static function applyBillboardFacing__billboardCamera(billboard:Billboard):Void {
+  public static function applyBillboardFacing__billboardCamera(billboard:Billboard):Void {
     var world:Dynamic = cast FlightRuntime.UNDEFINED;
     var parent:Dynamic = cast FlightRuntime.UNDEFINED;
     world = (cast FlightRuntime.callValue(getNodeWorldMatrix4, cast ([billboard] : Array<Dynamic>)) : Matrix4);
@@ -241,11 +238,11 @@ class SceneApi {
 
   public static final BillboardKind:Dynamic = facadeSceneApiTypesBillboardKind;
 
-  @:keep public static function buildSceneFrustum(out:FrustumLike, viewProjection:Matrix4Like):Void {
+  public static function buildSceneFrustum(out:FrustumLike, viewProjection:Matrix4Like):Void {
     FlightRuntime.callValue(setFrustumFromMatrix4, cast ([out, viewProjection] : Array<Dynamic>));
   }
 
-  @:keep public static function cloneMesh(source:Mesh):Mesh {
+  public static function cloneMesh(source:Mesh):Mesh {
     var clone:Dynamic = cast FlightRuntime.UNDEFINED;
     clone = FlightRuntime.callValue(createMesh, cast ([FlightRuntime.field(source, 'geometry'), FlightRuntime.slice(FlightRuntime.field(source, 'materials'), 0, null), FlightRuntime.field(source, 'kind'), { enabled: FlightRuntime.field(source, 'enabled'), name: FlightRuntime.field(source, 'name') }] : Array<Dynamic>));
     FlightRuntime.setField(clone, 'alpha', FlightRuntime.field(source, 'alpha'));
@@ -257,7 +254,7 @@ class SceneApi {
     return cast null;
   }
 
-  @:keep public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, mode:BillboardMode = 'full', ?kind:Kind, ?obj:Dynamic):Billboard {
+  public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, mode:BillboardMode = 'full', ?kind:Kind, ?obj:Dynamic):Billboard {
     if (kind == null) kind = cast (Types.BillboardKind : Dynamic);
     var billboard:Dynamic = cast FlightRuntime.UNDEFINED;
     billboard = (cast FlightRuntime.callValue(createSceneNode, cast ([kind, obj] : Array<Dynamic>)) : Billboard);
@@ -268,7 +265,7 @@ class SceneApi {
     return cast null;
   }
 
-  @:keep public static function createMesh(geometry:MeshGeometry, materials:Array<Null<Material>>, ?kind:Kind, ?obj:Dynamic):Mesh {
+  public static function createMesh(geometry:MeshGeometry, materials:Array<Null<Material>>, ?kind:Kind, ?obj:Dynamic):Mesh {
     if (kind == null) kind = cast (Types.MeshKind : Dynamic);
     var mesh:Dynamic = cast FlightRuntime.UNDEFINED;
     mesh = (cast FlightRuntime.callValue(createSceneNode, cast ([kind, obj] : Array<Dynamic>)) : Mesh);
@@ -278,14 +275,14 @@ class SceneApi {
     return cast null;
   }
 
-  @:keep public static function createScene(?obj:Dynamic):Scene {
+  public static function createScene(?obj:Dynamic):Scene {
     var root:Dynamic = cast FlightRuntime.UNDEFINED;
     root = FlightRuntime.callValue(createSceneNode, cast ([Types.SceneNodeKind, obj] : Array<Dynamic>));
     return cast (cast FlightRuntime.callValue(createEntity, cast ([{ animations: {  }, metadata: null, root: root }] : Array<Dynamic>)) : Scene);
     return cast null;
   }
 
-  @:keep public static function createSceneNode(?kind:Kind, ?obj:Dynamic):SceneNode {
+  public static function createSceneNode(?kind:Kind, ?obj:Dynamic):SceneNode {
     if (kind == null) kind = cast (Types.SceneNodeKind : Dynamic);
     var node:Dynamic = cast FlightRuntime.UNDEFINED;
     node = FlightRuntime.callValue(createNode, cast ([kind, obj, FlightRuntime.UNDEFINED, createSceneNodeRuntime] : Array<Dynamic>));
@@ -295,7 +292,7 @@ class SceneApi {
     return cast null;
   }
 
-  @:keep public static function createSceneNodeRuntime():SceneNodeRuntime {
+  public static function createSceneNodeRuntime():SceneNodeRuntime {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = (cast FlightRuntime.callValue(createNodeRuntime, cast ([] : Array<Dynamic>)) : SceneNodeRuntime);
     FlightRuntime.setField(out, 'traits', SceneNodeTraitsKey);
@@ -308,32 +305,32 @@ class SceneApi {
     return cast null;
   }
 
-  @:keep public static function cullSceneNodeByFrustum(out:Array<SceneNode>, root:SceneNode, frustum:FrustumLike):Array<SceneNode> {
+  public static function cullSceneNodeByFrustum(out:Array<SceneNode>, root:SceneNode, frustum:FrustumLike):Array<SceneNode> {
     FlightRuntime.callValue(SceneApi._cullNode__sceneNodeCulling, cast ([out, root, frustum] : Array<Dynamic>));
     return cast out;
     return cast null;
   }
 
-  @:keep public static function disposeSceneNode(node:SceneNode):Void {
+  public static function disposeSceneNode(node:SceneNode):Void {
     FlightRuntime.callValue(disposeNode, cast ([node] : Array<Dynamic>));
   }
 
-  @:keep public static function enableBillboardSignals(source:Billboard):NodeSignals {
+  public static function enableBillboardSignals(source:Billboard):NodeSignals {
     return cast FlightRuntime.callValue(enableNodeSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function enableMeshSignals(source:Mesh):NodeSignals {
+  public static function enableMeshSignals(source:Mesh):NodeSignals {
     return cast FlightRuntime.callValue(enableNodeSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function enableSceneNodeSignals(source:SceneNode):NodeSignals {
+  public static function enableSceneNodeSignals(source:SceneNode):NodeSignals {
     return cast FlightRuntime.callValue(enableNodeSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function ensureSceneNodeWorldAlpha(source:SceneNode):Void {
+  public static function ensureSceneNodeWorldAlpha(source:SceneNode):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var parent:Dynamic = cast FlightRuntime.UNDEFINED;
     var parentWorldAlpha:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -362,7 +359,7 @@ class SceneApi {
 
   public static final FACING_EPSILON__billboardCamera:Dynamic = 0.000001;
 
-  @:keep public static function findSceneMaterialByName(root:SceneNode, name:String):Null<Material> {
+  public static function findSceneMaterialByName(root:SceneNode, name:String):Null<Material> {
     var rootMatch:Dynamic = cast FlightRuntime.UNDEFINED;
     var found:Null<Material> = cast FlightRuntime.UNDEFINED;
     rootMatch = FlightRuntime.callValue(SceneApi.getNamedNodeMaterial__sceneMaterial, cast ([root, name] : Array<Dynamic>));
@@ -379,34 +376,34 @@ class SceneApi {
     return cast null;
   }
 
-  @:keep public static function getBillboardRuntime(source:Billboard):BillboardRuntime {
+  public static function getBillboardRuntime(source:Billboard):BillboardRuntime {
     return cast FlightRuntime.callValue(getSceneNodeRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getBillboardSignals(source:Billboard):Null<NodeSignals> {
+  public static function getBillboardSignals(source:Billboard):Null<NodeSignals> {
     return cast FlightRuntime.callValue(getNodeSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getMeshDeformer(source:Mesh):MeshDeformer {
+  public static function getMeshDeformer(source:Mesh):MeshDeformer {
     if (FlightRuntime.truthy(!FlightRuntime.looseEquals(FlightRuntime.field(source, 'skin'), null))) { return cast Types.MeshDeformerSkeletal; }
     if (FlightRuntime.truthy(!FlightRuntime.looseEquals(FlightRuntime.field(source, 'morph'), null))) { return cast Types.MeshDeformerMorph; }
     return cast Types.MeshDeformerNone;
     return cast null;
   }
 
-  @:keep public static function getMeshRuntime(source:Mesh):MeshRuntime {
+  public static function getMeshRuntime(source:Mesh):MeshRuntime {
     return cast FlightRuntime.callValue(getSceneNodeRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getMeshSignals(source:Mesh):Null<NodeSignals> {
+  public static function getMeshSignals(source:Mesh):Null<NodeSignals> {
     return cast FlightRuntime.callValue(getNodeSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getNamedNodeMaterial__sceneMaterial(node:SceneNode, name:String):Null<Material> {
+  public static function getNamedNodeMaterial__sceneMaterial(node:SceneNode, name:String):Null<Material> {
     var materials:Dynamic = cast FlightRuntime.UNDEFINED;
     materials = FlightRuntime.field((cast node : Dynamic), 'materials');
     if (FlightRuntime.truthy(FlightRuntime.looseEquals(materials, null))) { return cast null; }
@@ -422,42 +419,42 @@ class SceneApi {
     return cast null;
   }
 
-  @:keep public static function getSceneNodeRuntime(source:SceneNode):SceneNodeRuntime {
+  public static function getSceneNodeRuntime(source:SceneNode):SceneNodeRuntime {
     return cast (cast FlightRuntime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : SceneNodeRuntime);
     return cast null;
   }
 
-  @:keep public static function getSceneNodeSignals(source:SceneNode):Null<NodeSignals> {
+  public static function getSceneNodeSignals(source:SceneNode):Null<NodeSignals> {
     return cast FlightRuntime.callValue(getNodeSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getSceneNodeWorldAlpha(source:SceneNode):Float {
+  public static function getSceneNodeWorldAlpha(source:SceneNode):Float {
     FlightRuntime.callValue(ensureSceneNodeWorldAlpha, cast ([source] : Array<Dynamic>));
     return cast FlightRuntime.coalesce(FlightRuntime.field(FlightRuntime.callValue(getSceneNodeRuntime, cast ([source] : Array<Dynamic>)), 'worldAlpha'), function():Dynamic return cast 1.0);
     return cast null;
   }
 
-  @:keep public static function getSceneNodeWorldBounds(out:AabbLike, node:SceneNode):Void {
+  public static function getSceneNodeWorldBounds(out:AabbLike, node:SceneNode):Void {
     FlightRuntime.callValue(setAabb, cast ([out, FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'), FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'), FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'), FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY'), FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY'), FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY')] : Array<Dynamic>));
     FlightRuntime.callValue(SceneApi._accumulateWorldBounds__sceneNodeBounds, cast ([out, node] : Array<Dynamic>));
   }
 
-  @:keep public static function isBillboard(source:SceneNode):Bool {
+  public static function isBillboard(source:SceneNode):Bool {
     var candidate:Dynamic = cast FlightRuntime.UNDEFINED;
     candidate = (cast source : Dynamic);
     return cast FlightRuntime.andValue(!FlightRuntime.looseEquals(FlightRuntime.field(candidate, 'geometry'), null), function():Dynamic return cast !FlightRuntime.looseEquals(FlightRuntime.field(candidate, 'mode'), null));
     return cast null;
   }
 
-  @:keep public static function isMesh(source:Dynamic):Bool {
+  public static function isMesh(source:Dynamic):Bool {
     return cast !FlightRuntime.looseEquals(FlightRuntime.field((cast source : Dynamic), 'geometry'), null);
     return cast null;
   }
 
   public static final MeshKind:Dynamic = facadeSceneApiTypesMeshKind;
 
-  @:keep public static function orientBillboardSubtree__billboardCamera(node:SceneNode):Void {
+  public static function orientBillboardSubtree__billboardCamera(node:SceneNode):Void {
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.callValue(isBillboard, cast ([node] : Array<Dynamic>)))) {
   FlightRuntime.callValue(SceneApi.applyBillboardFacing__billboardCamera, cast ([node] : Array<Dynamic>));
@@ -474,19 +471,19 @@ class SceneApi {
 }
   }
 
-  @:keep public static function orientBillboardToCamera(billboard:Billboard, camera:Camera):Void {
+  public static function orientBillboardToCamera(billboard:Billboard, camera:Camera):Void {
     FlightRuntime.callValue(SceneApi.setBillboardCameraBasis__billboardCamera, cast ([camera] : Array<Dynamic>));
     FlightRuntime.callValue(SceneApi.applyBillboardFacing__billboardCamera, cast ([billboard] : Array<Dynamic>));
   }
 
-  @:keep public static function orientSceneBillboardsToCamera(scene:SceneNode, camera:Camera):Void {
+  public static function orientSceneBillboardsToCamera(scene:SceneNode, camera:Camera):Void {
     FlightRuntime.callValue(SceneApi.setBillboardCameraBasis__billboardCamera, cast ([camera] : Array<Dynamic>));
     FlightRuntime.callValue(SceneApi.orientBillboardSubtree__billboardCamera, cast ([scene] : Array<Dynamic>));
   }
 
   public static final SceneNodeKind:Dynamic = facadeSceneApiTypesSceneNodeKind;
 
-  @:keep public static function setBillboardCameraBasis__billboardCamera(camera:Camera):Void {
+  public static function setBillboardCameraBasis__billboardCamera(camera:Camera):Void {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     var rl:Dynamic = cast FlightRuntime.UNDEFINED;
     var ul:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -519,12 +516,12 @@ class SceneApi {
     (SceneApi._cameraBackZ__billboardCamera = cast ((SceneApi._cameraBackZ__billboardCamera / bl) : Dynamic));
   }
 
-  @:keep public static function setSceneNodeAlpha(source:SceneNode, alpha:Float):Void {
+  public static function setSceneNodeAlpha(source:SceneNode, alpha:Float):Void {
     FlightRuntime.setField(source, 'alpha', alpha);
     FlightRuntime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setSceneNodeLookAt(node:SceneNode, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
+  public static function setSceneNodeLookAt(node:SceneNode, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
     var eyeX:Dynamic = cast FlightRuntime.UNDEFINED;
     var eyeY:Dynamic = cast FlightRuntime.UNDEFINED;
     var eyeZ:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -586,7 +583,7 @@ class SceneApi {
     FlightRuntime.callValue(setNodeLocalMatrix4, cast ([node, SceneApi._scratchMatrix__sceneNodeTransform] : Array<Dynamic>));
   }
 
-  @:keep public static function updateMeshMorph(mesh:Mesh):Void {
+  public static function updateMeshMorph(mesh:Mesh):Void {
     var morph:Dynamic = cast FlightRuntime.UNDEFINED;
     var geometry:Dynamic = cast FlightRuntime.UNDEFINED;
     var bindPose:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -601,7 +598,7 @@ class SceneApi {
     FlightRuntime.callValue(blendMeshGeometryMorph, cast ([geometry, morph, bindPose] : Array<Dynamic>));
   }
 
-  @:keep public static function writeBillboardFacingMatrix__billboardCamera(out:Matrix4, mode:BillboardMode):Void {
+  public static function writeBillboardFacingMatrix__billboardCamera(out:Matrix4, mode:BillboardMode):Void {
     var px:Dynamic = cast FlightRuntime.UNDEFINED;
     var py:Dynamic = cast FlightRuntime.UNDEFINED;
     var pz:Dynamic = cast FlightRuntime.UNDEFINED;

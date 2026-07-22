@@ -65,14 +65,11 @@ import flight.Types.WhiteBalanceEffect;
 
 typedef CanvasEffectSourceMode = String;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.EffectsCanvas")
 class EffectsCanvas {
   public static final _registries__canvasRenderEffectRegistry:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  @:keep public static function acquireCanvasRenderTarget(pool:Dynamic, width:Float, height:Float):Dynamic {
+  public static function acquireCanvasRenderTarget(pool:Dynamic, width:Float, height:Float):Dynamic {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -85,7 +82,7 @@ class EffectsCanvas {
     return cast null;
   }
 
-  @:keep public static function applyBloomEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:BloomEffect):Void {
+  public static function applyBloomEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:BloomEffect):Void {
     var threshold:Dynamic = cast FlightRuntime.UNDEFINED;
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -120,7 +117,7 @@ class EffectsCanvas {
     FlightRuntime.callValue(releaseCanvasRenderTarget, cast ([pool, blurred] : Array<Dynamic>));
   }
 
-  @:keep public static function applyBlurEffectToCanvas(source:Dynamic, dest:Dynamic, effect:BlurEffect):Void {
+  public static function applyBlurEffectToCanvas(source:Dynamic, dest:Dynamic, effect:BlurEffect):Void {
     var blurX:Dynamic = cast FlightRuntime.UNDEFINED;
     var blurY:Dynamic = cast FlightRuntime.UNDEFINED;
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -130,19 +127,19 @@ class EffectsCanvas {
     FlightRuntime.callValue(drawCanvasEffectPass, cast ([dest, source, FlightRuntime.select(FlightRuntime.compare(radius, 0.0, '>'), function():Dynamic return cast 'blur(' + Std.string(radius) + 'px)', function():Dynamic return cast 'none')] : Array<Dynamic>));
   }
 
-  @:keep public static function applyBokehDepthOfFieldEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:BokehDepthOfFieldEffect):Void {
+  public static function applyBokehDepthOfFieldEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:BokehDepthOfFieldEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyCameraMotionBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:CameraMotionBlurEffect):Void {
+  public static function applyCameraMotionBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:CameraMotionBlurEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyChromaticAberrationEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:ChromaticAberrationEffect):Void {
+  public static function applyChromaticAberrationEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:ChromaticAberrationEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyColorLutPassToCanvas(source:Dynamic, dest:Dynamic, lut:ColorLut):Void {
+  public static function applyColorLutPassToCanvas(source:Dynamic, dest:Dynamic, lut:ColorLut):Void {
     var rgb:Array<Float> = cast FlightRuntime.UNDEFINED;
     rgb = cast ([0.0, 0.0, 0.0] : Array<Dynamic>);
     FlightRuntime.callValue(drawCanvasImageDataPass, cast ([dest, source, function(data:Dynamic, pixelCount:Dynamic) {
@@ -160,7 +157,7 @@ class EffectsCanvas {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyColorMatrixPassToCanvas(source:Dynamic, dest:Dynamic, matrix:Array<Float>):Void {
+  public static function applyColorMatrixPassToCanvas(source:Dynamic, dest:Dynamic, matrix:Array<Float>):Void {
     var m0:Dynamic = cast FlightRuntime.UNDEFINED;
     var m1:Dynamic = cast FlightRuntime.UNDEFINED;
     var m2:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -220,27 +217,27 @@ class EffectsCanvas {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function applyConvolutionEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:ConvolutionEffect):Void {
+  public static function applyConvolutionEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:ConvolutionEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyCrtEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:CrtEffect):Void {
+  public static function applyCrtEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:CrtEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyDirectionalBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:DirectionalBlurEffect):Void {
+  public static function applyDirectionalBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:DirectionalBlurEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyDisplacementEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:DisplacementEffect):Void {
+  public static function applyDisplacementEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:DisplacementEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyDitherEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:DitherEffect):Void {
+  public static function applyDitherEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:DitherEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyDropShadowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:DropShadowEffect):Void {
+  public static function applyDropShadowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:DropShadowEffect):Void {
     var effect:Dynamic = cast FlightRuntime.UNDEFINED;
     var css:Dynamic = cast FlightRuntime.UNDEFINED;
     var pool:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -254,7 +251,7 @@ class EffectsCanvas {
     FlightRuntime.callValue(EffectsCanvas.applyDropShadowEffectToCanvasWithPool__canvasDropShadowEffect, cast ([source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  @:keep public static function applyDropShadowEffectToCanvasWithPool__canvasDropShadowEffect(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:DropShadowEffect):Void {
+  public static function applyDropShadowEffectToCanvasWithPool__canvasDropShadowEffect(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:DropShadowEffect):Void {
     var mask:Dynamic = cast FlightRuntime.UNDEFINED;
     var blurred:Dynamic = cast FlightRuntime.UNDEFINED;
     var angle:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -292,7 +289,7 @@ class EffectsCanvas {
     FlightRuntime.callValue(releaseCanvasRenderTarget, cast ([pool, blurred] : Array<Dynamic>));
   }
 
-  @:keep public static function applyFilmGrainEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:FilmGrainEffect):Void {
+  public static function applyFilmGrainEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:FilmGrainEffect):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     var seed:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -349,47 +346,47 @@ class EffectsCanvas {
     FlightRuntime.callValue(releaseCanvasRenderTarget, cast ([pool, noise] : Array<Dynamic>));
   }
 
-  @:keep public static function applyFxaaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:FxaaEffect):Void {
+  public static function applyFxaaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:FxaaEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGlitchEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:GlitchEffect):Void {
+  public static function applyGlitchEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:GlitchEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyGodRaysEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:GodRaysEffect):Void {
+  public static function applyGodRaysEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:GodRaysEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyHalftoneEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:HalftoneEffect):Void {
+  public static function applyHalftoneEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:HalftoneEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyKuwaharaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:KuwaharaEffect):Void {
+  public static function applyKuwaharaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:KuwaharaEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyLensDirtEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:LensDirtEffect):Void {
+  public static function applyLensDirtEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:LensDirtEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyLensDistortionEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:LensDistortionEffect):Void {
+  public static function applyLensDistortionEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:LensDistortionEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyLensFlareEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:LensFlareEffect):Void {
+  public static function applyLensFlareEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:LensFlareEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyMedianEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:MedianEffect):Void {
+  public static function applyMedianEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:MedianEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyMotionBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:MotionBlurEffect):Void {
+  public static function applyMotionBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:MotionBlurEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyOuterGlowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:OuterGlowEffect):Void {
+  public static function applyOuterGlowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:OuterGlowEffect):Void {
     var effect:Dynamic = cast FlightRuntime.UNDEFINED;
     var css:Dynamic = cast FlightRuntime.UNDEFINED;
     var pool:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -403,7 +400,7 @@ class EffectsCanvas {
     FlightRuntime.callValue(EffectsCanvas.applyOuterGlowEffectToCanvasWithPool__canvasOuterGlowEffect, cast ([source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  @:keep public static function applyOuterGlowEffectToCanvasWithPool__canvasOuterGlowEffect(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:OuterGlowEffect):Void {
+  public static function applyOuterGlowEffectToCanvasWithPool__canvasOuterGlowEffect(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:OuterGlowEffect):Void {
     var mask:Dynamic = cast FlightRuntime.UNDEFINED;
     var blurred:Dynamic = cast FlightRuntime.UNDEFINED;
     var strength:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -433,11 +430,11 @@ class EffectsCanvas {
     FlightRuntime.callValue(releaseCanvasRenderTarget, cast ([pool, blurred] : Array<Dynamic>));
   }
 
-  @:keep public static function applyOutlineEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:OutlineEffect):Void {
+  public static function applyOutlineEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:OutlineEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyPixelateEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:PixelateEffect):Void {
+  public static function applyPixelateEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:PixelateEffect):Void {
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     var smallW:Dynamic = cast FlightRuntime.UNDEFINED;
     var smallH:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -472,15 +469,15 @@ class EffectsCanvas {
     FlightRuntime.callValue(releaseCanvasRenderTarget, cast ([pool, small] : Array<Dynamic>));
   }
 
-  @:keep public static function applyPosterizeEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:PosterizeEffect):Void {
+  public static function applyPosterizeEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:PosterizeEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyRadialBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:RadialBlurEffect):Void {
+  public static function applyRadialBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:RadialBlurEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyScanlinesEffectToCanvas(source:Dynamic, dest:Dynamic, effect:ScanlinesEffect):Void {
+  public static function applyScanlinesEffectToCanvas(source:Dynamic, dest:Dynamic, effect:ScanlinesEffect):Void {
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var ctx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -515,43 +512,43 @@ class EffectsCanvas {
     FlightRuntime.callProperty(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function applyScreenSpaceFogEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:ScreenSpaceFogEffect):Void {
+  public static function applyScreenSpaceFogEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:ScreenSpaceFogEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applySharpenEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SharpenEffect):Void {
+  public static function applySharpenEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SharpenEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applySketchEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SketchEffect):Void {
+  public static function applySketchEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SketchEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applySmaaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SmaaEffect):Void {
+  public static function applySmaaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SmaaEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applySsaoEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SsaoEffect):Void {
+  public static function applySsaoEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SsaoEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applySsrEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SsrEffect):Void {
+  public static function applySsrEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SsrEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyTaaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:TaaEffect):Void {
+  public static function applyTaaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:TaaEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyTiltShiftEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:TiltShiftEffect):Void {
+  public static function applyTiltShiftEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:TiltShiftEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyToneMapEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:ToneMapEffect):Void {
+  public static function applyToneMapEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:ToneMapEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function applyVignetteEffectToCanvas(source:Dynamic, dest:Dynamic, effect:VignetteEffect):Void {
+  public static function applyVignetteEffectToCanvas(source:Dynamic, dest:Dynamic, effect:VignetteEffect):Void {
     var intensity:Dynamic = cast FlightRuntime.UNDEFINED;
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
     var softness:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -600,11 +597,11 @@ class EffectsCanvas {
     FlightRuntime.callProperty(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function applyWhiteBalanceEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:WhiteBalanceEffect):Void {
+  public static function applyWhiteBalanceEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:WhiteBalanceEffect):Void {
     FlightRuntime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  @:keep public static function beginCanvasRenderEffectPipeline(state:Dynamic, pipeline:Dynamic):Void {
+  public static function beginCanvasRenderEffectPipeline(state:Dynamic, pipeline:Dynamic):Void {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     w = FlightRuntime.field(FlightRuntime.field(state, 'canvas'), 'width');
@@ -621,7 +618,7 @@ class EffectsCanvas {
   FlightRuntime.callValue(applyBloomEffectToCanvas, cast ([FlightRuntime.field(ctx, 'source'), FlightRuntime.field(ctx, 'dest'), FlightRuntime.field(ctx, 'pool'), (cast effect : BloomEffect)] : Array<Dynamic>));
 };
 
-  @:keep public static function clearCanvasTarget(dest:Dynamic):Void {
+  public static function clearCanvasTarget(dest:Dynamic):Void {
     var ctx:Dynamic = cast FlightRuntime.UNDEFINED;
     ctx = FlightRuntime.field(dest, 'context');
     FlightRuntime.callProperty(ctx, 'save', cast ([] : Array<Dynamic>));
@@ -641,7 +638,7 @@ class EffectsCanvas {
   FlightRuntime.callValue(applyBokehDepthOfFieldEffectToCanvas, cast ([FlightRuntime.field(ctx, 'source'), FlightRuntime.field(ctx, 'dest'), (cast effect : BokehDepthOfFieldEffect)] : Array<Dynamic>));
 };
 
-  @:keep public static function compositeCanvasImage(dest:Dynamic, source:Dynamic, dx:Dynamic = 0.0, dy:Dynamic = 0.0, compositeOperation:Dynamic = 'source-over'):Void {
+  public static function compositeCanvasImage(dest:Dynamic, source:Dynamic, dx:Dynamic = 0.0, dy:Dynamic = 0.0, compositeOperation:Dynamic = 'source-over'):Void {
     var ctx:Dynamic = cast FlightRuntime.UNDEFINED;
     ctx = FlightRuntime.field(dest, 'context');
     FlightRuntime.callProperty(ctx, 'save', cast ([] : Array<Dynamic>));
@@ -653,12 +650,12 @@ class EffectsCanvas {
     FlightRuntime.callProperty(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function compositeCanvasSourceMode(dest:Dynamic, source:Dynamic, sourceMode:Dynamic):Void {
+  public static function compositeCanvasSourceMode(dest:Dynamic, source:Dynamic, sourceMode:Dynamic):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(sourceMode, 'hide'))) { return; }
     FlightRuntime.callValue(compositeCanvasImage, cast ([dest, source, 0.0, 0.0, FlightRuntime.select(FlightRuntime.strictEquals(sourceMode, 'knockout'), function():Dynamic return cast 'destination-out', function():Dynamic return cast 'source-over')] : Array<Dynamic>));
   }
 
-  @:keep public static function computeDropShadowEffectCss(effect:DropShadowEffect):Null<String> {
+  public static function computeDropShadowEffectCss(effect:DropShadowEffect):Null<String> {
     var blurX:Dynamic = cast FlightRuntime.UNDEFINED;
     var blurY:Dynamic = cast FlightRuntime.UNDEFINED;
     var angle:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -679,7 +676,7 @@ class EffectsCanvas {
     return cast null;
   }
 
-  @:keep public static function computeOuterGlowEffectCss(effect:OuterGlowEffect):Null<String> {
+  public static function computeOuterGlowEffectCss(effect:OuterGlowEffect):Null<String> {
     var blurX:Dynamic = cast FlightRuntime.UNDEFINED;
     var blurY:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.coalesce(FlightRuntime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw'), 'draw'))) { return cast null; }
@@ -690,18 +687,18 @@ class EffectsCanvas {
     return cast null;
   }
 
-  @:keep public static function createCanvasRenderEffectPipeline(_state:Dynamic, ?options:RenderEffectPipelineOptions):Dynamic {
+  public static function createCanvasRenderEffectPipeline(_state:Dynamic, ?options:RenderEffectPipelineOptions):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast { options: FlightRuntime.mergeObjects([options]), sceneTarget: null, pool: FlightRuntime.callValue(createCanvasRenderTargetPool, cast ([] : Array<Dynamic>)), lutCache: FlightRuntime.callValue(createColorLutCache, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createCanvasRenderTargetPool():Dynamic {
+  public static function createCanvasRenderTargetPool():Dynamic {
     return cast { free: cast ([] : Array<Dynamic>), inUse: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
-  @:keep public static function cssRgbaFromColor__canvasEffectDropShadowCss(color:Float, alpha:Float):String {
+  public static function cssRgbaFromColor__canvasEffectDropShadowCss(color:Float, alpha:Float):String {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -712,7 +709,7 @@ class EffectsCanvas {
     return cast null;
   }
 
-  @:keep public static function cssRgbaFromColor__canvasSourceModeCompositing(color:Float, alpha:Float):String {
+  public static function cssRgbaFromColor__canvasSourceModeCompositing(color:Float, alpha:Float):String {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -875,7 +872,7 @@ class EffectsCanvas {
 
   public static final COLOR_GRADE_CANVAS_EFFECT_KINDS__canvasRenderEffectRegistration:Array<Array<Dynamic>> = cast ([cast (['DitherEffect', defaultCanvasDitherEffectRunner] : Array<Dynamic>), cast (['ToneMapEffect', defaultCanvasToneMapEffectRunner] : Array<Dynamic>), cast (['WhiteBalanceEffect', defaultCanvasWhiteBalanceEffectRunner] : Array<Dynamic>)] : Array<Dynamic>);
 
-  @:keep public static function destroyCanvasRenderEffectPipeline(_state:Dynamic, pipeline:Dynamic):Void {
+  public static function destroyCanvasRenderEffectPipeline(_state:Dynamic, pipeline:Dynamic):Void {
     FlightRuntime.setField(pipeline, 'sceneTarget', null);
     FlightRuntime.setLength(FlightRuntime.field(FlightRuntime.field(pipeline, 'pool'), 'free'), 0.0);
     FlightRuntime.setLength(FlightRuntime.field(FlightRuntime.field(pipeline, 'pool'), 'inUse'), 0.0);
@@ -883,7 +880,7 @@ class EffectsCanvas {
     FlightRuntime.setField(FlightRuntime.field(pipeline, 'lutCache'), 'lut', null);
   }
 
-  @:keep public static function drawCanvasAccumulationPass(dest:Dynamic, source:Dynamic, samples:Float, perSampleTransform:Dynamic):Void {
+  public static function drawCanvasAccumulationPass(dest:Dynamic, source:Dynamic, samples:Float, perSampleTransform:Dynamic):Void {
     var clampedSamples:Dynamic = cast FlightRuntime.UNDEFINED;
     var ctx:Dynamic = cast FlightRuntime.UNDEFINED;
     clampedSamples = FlightRuntime.callProperty(HxMath, 'max', cast ([1.0, FlightRuntime.callProperty(HxMath, 'round', cast ([samples] : Array<Dynamic>))] : Array<Dynamic>));
@@ -907,7 +904,7 @@ class EffectsCanvas {
     FlightRuntime.callProperty(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function drawCanvasEffectPass(dest:Dynamic, source:Dynamic, filter:String, compositeOperation:Dynamic = 'source-over'):Void {
+  public static function drawCanvasEffectPass(dest:Dynamic, source:Dynamic, filter:String, compositeOperation:Dynamic = 'source-over'):Void {
     var ctx:Dynamic = cast FlightRuntime.UNDEFINED;
     ctx = FlightRuntime.field(dest, 'context');
     FlightRuntime.callProperty(ctx, 'save', cast ([] : Array<Dynamic>));
@@ -922,7 +919,7 @@ class EffectsCanvas {
     FlightRuntime.callProperty(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function drawCanvasImageDataPass(dest:Dynamic, source:Dynamic, transform:Dynamic):Void {
+  public static function drawCanvasImageDataPass(dest:Dynamic, source:Dynamic, transform:Dynamic):Void {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     var srcCtx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -949,7 +946,7 @@ class EffectsCanvas {
     FlightRuntime.callProperty(dstCtx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function drawCanvasTintedAlphaMask(dest:Dynamic, source:Dynamic, color:Float, alpha:Float, strength:Float):Void {
+  public static function drawCanvasTintedAlphaMask(dest:Dynamic, source:Dynamic, color:Float, alpha:Float, strength:Float):Void {
     var ctx:Dynamic = cast FlightRuntime.UNDEFINED;
     ctx = FlightRuntime.field(dest, 'context');
     FlightRuntime.callProperty(ctx, 'save', cast ([] : Array<Dynamic>));
@@ -965,7 +962,7 @@ class EffectsCanvas {
     FlightRuntime.callProperty(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function endCanvasRenderEffectPipeline(state:Dynamic, pipeline:Dynamic, operations:Array<Dynamic>):Void {
+  public static function endCanvasRenderEffectPipeline(state:Dynamic, pipeline:Dynamic, operations:Array<Dynamic>):Void {
     var scene:Dynamic = cast FlightRuntime.UNDEFINED;
     var pool:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1023,21 +1020,21 @@ class EffectsCanvas {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(scratchB, null))) { FlightRuntime.callValue(releaseCanvasRenderTarget, cast ([pool, scratchB] : Array<Dynamic>)); }
   }
 
-  @:keep public static function getCanvasRenderEffectRunner(state:Dynamic, kind:String):Null<Dynamic> {
+  public static function getCanvasRenderEffectRunner(state:Dynamic, kind:String):Null<Dynamic> {
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(FlightRuntime.callProperty(EffectsCanvas._registries__canvasRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function hasCanvasRenderEffectRunner(state:Dynamic, kind:String):Bool {
+  public static function hasCanvasRenderEffectRunner(state:Dynamic, kind:String):Bool {
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(FlightRuntime.callProperty(EffectsCanvas._registries__canvasRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>)), 'has', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast false);
     return cast null;
   }
 
-  @:keep public static function passthroughCanvasEffectPass(dest:Dynamic, source:Dynamic):Void {
+  public static function passthroughCanvasEffectPass(dest:Dynamic, source:Dynamic):Void {
     FlightRuntime.callValue(drawCanvasEffectPass, cast ([dest, source, 'none'] : Array<Dynamic>));
   }
 
-  @:keep public static function presentCanvasRenderEffectResult__canvasRenderEffectPipeline(state:Dynamic, source:Dynamic):Void {
+  public static function presentCanvasRenderEffectResult__canvasRenderEffectPipeline(state:Dynamic, source:Dynamic):Void {
     var context:Dynamic = cast FlightRuntime.UNDEFINED;
     context = FlightRuntime.field(state, 'context');
     FlightRuntime.callProperty(context, 'save', cast ([] : Array<Dynamic>));
@@ -1050,7 +1047,7 @@ class EffectsCanvas {
     FlightRuntime.callProperty(context, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function registerAllCanvasRenderEffects(state:Dynamic):Void {
+  public static function registerAllCanvasRenderEffects(state:Dynamic):Void {
     FlightRuntime.callValue(registerBlurCanvasRenderEffects, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(registerColorGradeCanvasRenderEffects, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(registerCompositeCanvasRenderEffects, cast ([state] : Array<Dynamic>));
@@ -1058,7 +1055,7 @@ class EffectsCanvas {
     FlightRuntime.callValue(registerStylizeCanvasRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  @:keep public static function registerBlurCanvasRenderEffects(state:Dynamic):Void {
+  public static function registerBlurCanvasRenderEffects(state:Dynamic):Void {
     for (__iteration0 in FlightRuntime.iterable(EffectsCanvas.BLUR_CANVAS_EFFECT_KINDS__canvasRenderEffectRegistration)) {
       var kind:Dynamic = FlightRuntime.getIndex(__iteration0, 0.0);
       var runner:Dynamic = FlightRuntime.getIndex(__iteration0, 1.0);
@@ -1066,7 +1063,7 @@ class EffectsCanvas {
     }
   }
 
-  @:keep public static function registerCanvasRenderEffect(state:Dynamic, kind:String, runner:Dynamic):Void {
+  public static function registerCanvasRenderEffect(state:Dynamic, kind:String, runner:Dynamic):Void {
     var registry:Dynamic = cast FlightRuntime.UNDEFINED;
     registry = FlightRuntime.callProperty(EffectsCanvas._registries__canvasRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(registry, FlightRuntime.UNDEFINED))) {
@@ -1076,7 +1073,7 @@ class EffectsCanvas {
     FlightRuntime.callProperty(registry, 'set', cast ([kind, runner] : Array<Dynamic>));
   }
 
-  @:keep public static function registerColorGradeCanvasRenderEffects(state:Dynamic):Void {
+  public static function registerColorGradeCanvasRenderEffects(state:Dynamic):Void {
     for (__iteration1 in FlightRuntime.iterable(EffectsCanvas.COLOR_GRADE_CANVAS_EFFECT_KINDS__canvasRenderEffectRegistration)) {
       var kind:Dynamic = FlightRuntime.getIndex(__iteration1, 0.0);
       var runner:Dynamic = FlightRuntime.getIndex(__iteration1, 1.0);
@@ -1084,7 +1081,7 @@ class EffectsCanvas {
     }
   }
 
-  @:keep public static function registerCompositeCanvasRenderEffects(state:Dynamic):Void {
+  public static function registerCompositeCanvasRenderEffects(state:Dynamic):Void {
     for (__iteration2 in FlightRuntime.iterable(EffectsCanvas.COMPOSITE_CANVAS_EFFECT_KINDS__canvasRenderEffectRegistration)) {
       var kind:Dynamic = FlightRuntime.getIndex(__iteration2, 0.0);
       var runner:Dynamic = FlightRuntime.getIndex(__iteration2, 1.0);
@@ -1092,7 +1089,7 @@ class EffectsCanvas {
     }
   }
 
-  @:keep public static function registerScreenSpaceCanvasRenderEffects(state:Dynamic):Void {
+  public static function registerScreenSpaceCanvasRenderEffects(state:Dynamic):Void {
     for (__iteration3 in FlightRuntime.iterable(EffectsCanvas.SCREENSPACE_CANVAS_EFFECT_KINDS__canvasRenderEffectRegistration)) {
       var kind:Dynamic = FlightRuntime.getIndex(__iteration3, 0.0);
       var runner:Dynamic = FlightRuntime.getIndex(__iteration3, 1.0);
@@ -1100,7 +1097,7 @@ class EffectsCanvas {
     }
   }
 
-  @:keep public static function registerStylizeCanvasRenderEffects(state:Dynamic):Void {
+  public static function registerStylizeCanvasRenderEffects(state:Dynamic):Void {
     for (__iteration4 in FlightRuntime.iterable(EffectsCanvas.STYLIZE_CANVAS_EFFECT_KINDS__canvasRenderEffectRegistration)) {
       var kind:Dynamic = FlightRuntime.getIndex(__iteration4, 0.0);
       var runner:Dynamic = FlightRuntime.getIndex(__iteration4, 1.0);
@@ -1108,7 +1105,7 @@ class EffectsCanvas {
     }
   }
 
-  @:keep public static function releaseCanvasRenderTarget(pool:Dynamic, target:Dynamic):Void {
+  public static function releaseCanvasRenderTarget(pool:Dynamic, target:Dynamic):Void {
     var index:Dynamic = cast FlightRuntime.UNDEFINED;
     index = FlightRuntime.callProperty(FlightRuntime.field(pool, 'inUse'), 'indexOf', cast ([target] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(index, -1.0))) { FlightRuntime.splice(FlightRuntime.field(pool, 'inUse'), Std.int(index), Std.int(1.0), []); }

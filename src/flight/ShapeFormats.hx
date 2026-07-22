@@ -35,14 +35,11 @@ typedef ShapeJsonFormatOptions = { @:optional var space:Dynamic; };
 
 typedef ShapeJsonParseOptions = { @:optional var resolveBitmap:Dynamic; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.ShapeFormats")
 class ShapeFormats {
   public static final DROP_COMMAND__shapeJson:Dynamic = FlightRuntime.symbol('shapeFormats.dropCommand');
 
-  @:keep public static function formatShapeJson(shape:Shape, ?options:ShapeJsonFormatOptions):String {
+  public static function formatShapeJson(shape:Shape, ?options:ShapeJsonFormatOptions):String {
     var commands:Dynamic = cast FlightRuntime.UNDEFINED;
     var entries:Array<SerializedShapeCommand__shapeJson> = cast FlightRuntime.UNDEFINED;
     var bitmapOrdinal:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -79,17 +76,17 @@ class ShapeFormats {
     return cast null;
   }
 
-  @:keep public static function isMatrixValue__shapeJson(value:Dynamic):Bool {
+  public static function isMatrixValue__shapeJson(value:Dynamic):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.callValue(ShapeFormats.isPlainObject__shapeJson, cast ([value] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(value, 'a')), 'number')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(value, 'b')), 'number')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(value, 'c')), 'number')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(value, 'd')), 'number')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(value, 'tx')), 'number')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(value, 'ty')), 'number'));
     return cast null;
   }
 
-  @:keep public static function isPlainObject__shapeJson(value:Dynamic):Bool {
+  public static function isPlainObject__shapeJson(value:Dynamic):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.typeofValue(value), 'object'), function():Dynamic return cast !FlightRuntime.strictEquals(value, null)), function():Dynamic return cast !FlightRuntime.truthy(FlightRuntime.isArray(value)));
     return cast null;
   }
 
-  @:keep public static function isSerializableScalarOrArray__shapeJson(value:Dynamic):Bool {
+  public static function isSerializableScalarOrArray__shapeJson(value:Dynamic):Bool {
     var type:Dynamic = cast FlightRuntime.UNDEFINED;
     type = FlightRuntime.typeofValue(value);
     return cast FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(type, 'number'), function():Dynamic return cast FlightRuntime.strictEquals(type, 'string')), function():Dynamic return cast FlightRuntime.strictEquals(type, 'boolean')), function():Dynamic return cast FlightRuntime.isArray(value));
@@ -98,7 +95,7 @@ class ShapeFormats {
 
   public static final MALFORMED_ARG__shapeJson:Dynamic = FlightRuntime.symbol('shapeFormats.malformedArg');
 
-  @:keep public static function parseShapeJson(text:String, ?options:ShapeJsonParseOptions):Null<Shape> {
+  public static function parseShapeJson(text:String, ?options:ShapeJsonParseOptions):Null<Shape> {
     var root:Dynamic = cast FlightRuntime.UNDEFINED;
     var rawCommands:Dynamic = cast FlightRuntime.UNDEFINED;
     var resolveBitmap:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -139,7 +136,7 @@ class ShapeFormats {
     return cast null;
   }
 
-  @:keep public static function reconstructShapeCommandArg__shapeJson(value:Dynamic, resolveBitmap:Dynamic):Dynamic {
+  public static function reconstructShapeCommandArg__shapeJson(value:Dynamic, resolveBitmap:Dynamic):Dynamic {
     var type:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(value, null))) { return cast null; }
     type = FlightRuntime.typeofValue(value);

@@ -39,62 +39,59 @@ typedef SpotLightConeAngles = { var innerDegrees:Float; var outerDegrees:Float; 
 
 typedef SpotLightOptions = { @:optional var castsShadow:Bool; @:optional var color:Float; @:optional var direction:Vector3Like; @:optional var innerConeDegrees:Float; @:optional var intensity:Float; @:optional var normalBias:Float; @:optional var outerConeDegrees:Float; @:optional var pcfRadius:Float; @:optional var position:Vector3Like; @:optional var range:Float; @:optional var shadowBias:Float; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Lighting")
 class Lighting {
-  @:keep public static function applyLightExposure(intensity:Float, ev:Float):Float {
+  public static function applyLightExposure(intensity:Float, ev:Float):Float {
     return cast (intensity * HxMath.pow(2.0, ev));
     return cast null;
   }
 
-  @:keep public static function cloneAmbientLight(source:AmbientLight):AmbientLight {
+  public static function cloneAmbientLight(source:AmbientLight):AmbientLight {
     return cast FlightRuntime.callValue(createAmbientLight, cast ([{ color: FlightRuntime.field(source, 'color'), intensity: FlightRuntime.field(source, 'intensity') }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cloneAreaLight(source:AreaLight):AreaLight {
+  public static function cloneAreaLight(source:AreaLight):AreaLight {
     return cast FlightRuntime.callValue(createEntity, cast ([{ castsShadow: FlightRuntime.field(source, 'castsShadow'), color: FlightRuntime.field(source, 'color'), direction: FlightRuntime.callValue(cloneVector3, cast ([FlightRuntime.field(source, 'direction')] : Array<Dynamic>)), intensity: FlightRuntime.field(source, 'intensity'), kind: Types.AreaLightKind, normalBias: FlightRuntime.field(source, 'normalBias'), pcfRadius: FlightRuntime.field(source, 'pcfRadius'), position: FlightRuntime.callValue(cloneVector3, cast ([FlightRuntime.field(source, 'position')] : Array<Dynamic>)), range: FlightRuntime.field(source, 'range'), right: FlightRuntime.callValue(cloneVector3, cast ([FlightRuntime.field(source, 'right')] : Array<Dynamic>)), shadowBias: FlightRuntime.field(source, 'shadowBias'), up: FlightRuntime.callValue(cloneVector3, cast ([FlightRuntime.field(source, 'up')] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cloneDirectionalLight(source:DirectionalLight):DirectionalLight {
+  public static function cloneDirectionalLight(source:DirectionalLight):DirectionalLight {
     return cast FlightRuntime.callValue(createEntity, cast ([{ castsShadow: FlightRuntime.field(source, 'castsShadow'), color: FlightRuntime.field(source, 'color'), direction: FlightRuntime.callValue(cloneVector3, cast ([FlightRuntime.field(source, 'direction')] : Array<Dynamic>)), intensity: FlightRuntime.field(source, 'intensity'), kind: Types.DirectionalLightKind, normalBias: FlightRuntime.field(source, 'normalBias'), pcfRadius: FlightRuntime.field(source, 'pcfRadius'), shadowBias: FlightRuntime.field(source, 'shadowBias') }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cloneEnvironment(source:Environment):Environment {
+  public static function cloneEnvironment(source:Environment):Environment {
     return cast FlightRuntime.callValue(createEnvironment, cast ([{ environment: FlightRuntime.field(source, 'environment'), intensity: FlightRuntime.field(source, 'intensity') }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cloneHemisphereLight(source:HemisphereLight):HemisphereLight {
+  public static function cloneHemisphereLight(source:HemisphereLight):HemisphereLight {
     return cast FlightRuntime.callValue(createHemisphereLight, cast ([{ groundColor: FlightRuntime.field(source, 'groundColor'), intensity: FlightRuntime.field(source, 'intensity'), skyColor: FlightRuntime.field(source, 'skyColor') }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function clonePointLight(source:PointLight):PointLight {
+  public static function clonePointLight(source:PointLight):PointLight {
     return cast FlightRuntime.callValue(createEntity, cast ([{ castsShadow: FlightRuntime.field(source, 'castsShadow'), color: FlightRuntime.field(source, 'color'), intensity: FlightRuntime.field(source, 'intensity'), kind: Types.PointLightKind, normalBias: FlightRuntime.field(source, 'normalBias'), pcfRadius: FlightRuntime.field(source, 'pcfRadius'), position: FlightRuntime.callValue(cloneVector3, cast ([FlightRuntime.field(source, 'position')] : Array<Dynamic>)), range: FlightRuntime.field(source, 'range'), shadowBias: FlightRuntime.field(source, 'shadowBias') }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cloneSpotLight(source:SpotLight):SpotLight {
+  public static function cloneSpotLight(source:SpotLight):SpotLight {
     return cast FlightRuntime.callValue(createEntity, cast ([{ castsShadow: FlightRuntime.field(source, 'castsShadow'), color: FlightRuntime.field(source, 'color'), direction: FlightRuntime.callValue(cloneVector3, cast ([FlightRuntime.field(source, 'direction')] : Array<Dynamic>)), innerConeCos: FlightRuntime.field(source, 'innerConeCos'), intensity: FlightRuntime.field(source, 'intensity'), kind: Types.SpotLightKind, normalBias: FlightRuntime.field(source, 'normalBias'), outerConeCos: FlightRuntime.field(source, 'outerConeCos'), pcfRadius: FlightRuntime.field(source, 'pcfRadius'), position: FlightRuntime.callValue(cloneVector3, cast ([FlightRuntime.field(source, 'position')] : Array<Dynamic>)), range: FlightRuntime.field(source, 'range'), shadowBias: FlightRuntime.field(source, 'shadowBias') }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function convertLightIntensity(fromUnit:LightUnit, toUnit:LightUnit, value:Float):Float {
+  public static function convertLightIntensity(fromUnit:LightUnit, toUnit:LightUnit, value:Float):Float {
     return cast (FlightRuntime.callValue(getLightLinearIntensity, cast ([fromUnit, value] : Array<Dynamic>)) / FlightRuntime.getIndex(Lighting.LINEAR_PER_UNIT__lightIntensity, toUnit));
     return cast null;
   }
 
-  @:keep public static function createAmbientLight(?options:AmbientLightOptions):AmbientLight {
+  public static function createAmbientLight(?options:AmbientLightOptions):AmbientLight {
     return cast FlightRuntime.callValue(createEntity, cast ([{ color: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'color'), function():Dynamic return cast 4294967295.0), intensity: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: Types.AmbientLightKind }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createAreaLight(?options:AreaLightOptions):AreaLight {
+  public static function createAreaLight(?options:AreaLightOptions):AreaLight {
     var position:Dynamic = cast FlightRuntime.UNDEFINED;
     var direction:Dynamic = cast FlightRuntime.UNDEFINED;
     var right:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -107,36 +104,36 @@ class Lighting {
     return cast null;
   }
 
-  @:keep public static function createDirectionalLight(?options:DirectionalLightOptions):DirectionalLight {
+  public static function createDirectionalLight(?options:DirectionalLightOptions):DirectionalLight {
     var direction:Dynamic = cast FlightRuntime.UNDEFINED;
     direction = FlightRuntime.optionalField(options, 'direction');
     return cast FlightRuntime.callValue(createEntity, cast ([{ castsShadow: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'castsShadow'), function():Dynamic return cast false), color: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'color'), function():Dynamic return cast 4294967295.0), direction: FlightRuntime.select(direction, function():Dynamic return cast FlightRuntime.callValue(cloneVector3, cast ([direction] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(createVector3, cast ([0.0, -1.0, 0.0] : Array<Dynamic>))), intensity: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: Types.DirectionalLightKind, normalBias: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'normalBias'), function():Dynamic return cast 0.0), pcfRadius: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'pcfRadius'), function():Dynamic return cast 0.0), shadowBias: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'shadowBias'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createEnvironment(?options:EnvironmentOptions):Environment {
+  public static function createEnvironment(?options:EnvironmentOptions):Environment {
     return cast FlightRuntime.callValue(createEntity, cast ([{ environment: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'environment'), function():Dynamic return cast null), intensity: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: Types.EnvironmentKind }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createHemisphereLight(?options:HemisphereLightOptions):HemisphereLight {
+  public static function createHemisphereLight(?options:HemisphereLightOptions):HemisphereLight {
     return cast FlightRuntime.callValue(createEntity, cast ([{ groundColor: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'groundColor'), function():Dynamic return cast 4294967295.0), intensity: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: Types.HemisphereLightKind, skyColor: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'skyColor'), function():Dynamic return cast 4294967295.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createPointLight(?options:PointLightOptions):PointLight {
+  public static function createPointLight(?options:PointLightOptions):PointLight {
     var position:Dynamic = cast FlightRuntime.UNDEFINED;
     position = FlightRuntime.optionalField(options, 'position');
     return cast FlightRuntime.callValue(createEntity, cast ([{ castsShadow: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'castsShadow'), function():Dynamic return cast false), color: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'color'), function():Dynamic return cast 4294967295.0), intensity: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: Types.PointLightKind, normalBias: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'normalBias'), function():Dynamic return cast 0.0), pcfRadius: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'pcfRadius'), function():Dynamic return cast 0.0), position: FlightRuntime.select(position, function():Dynamic return cast FlightRuntime.callValue(cloneVector3, cast ([position] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callValue(createVector3, cast ([0.0, 0.0, 0.0] : Array<Dynamic>))), range: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'range'), function():Dynamic return cast -1.0), shadowBias: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'shadowBias'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createSceneLights(?options:Dynamic):SceneLights {
+  public static function createSceneLights(?options:Dynamic):SceneLights {
     return cast { ambient: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'ambient'), function():Dynamic return cast null), directional: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'directional'), function():Dynamic return cast null), hemisphere: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'hemisphere'), function():Dynamic return cast cast ([] : Array<Dynamic>)), point: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'point'), function():Dynamic return cast cast ([] : Array<Dynamic>)), spot: FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'spot'), function():Dynamic return cast cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createSpotLight(?options:SpotLightOptions):SpotLight {
+  public static function createSpotLight(?options:SpotLightOptions):SpotLight {
     var position:Dynamic = cast FlightRuntime.UNDEFINED;
     var direction:Dynamic = cast FlightRuntime.UNDEFINED;
     var light:SpotLight = cast FlightRuntime.UNDEFINED;
@@ -148,7 +145,7 @@ class Lighting {
     return cast null;
   }
 
-  @:keep public static function getLightInfluenceBounds(out:BoundingSphereLike, light:Light):Void {
+  public static function getLightInfluenceBounds(out:BoundingSphereLike, light:Light):Void {
     var kind:Dynamic = cast FlightRuntime.UNDEFINED;
     kind = FlightRuntime.field(light, 'kind');
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(kind, Types.AmbientLightKind), function():Dynamic return cast FlightRuntime.strictEquals(kind, Types.HemisphereLightKind)), function():Dynamic return cast FlightRuntime.strictEquals(kind, Types.EnvironmentKind)), function():Dynamic return cast FlightRuntime.strictEquals(kind, Types.DirectionalLightKind)))) {
@@ -180,12 +177,12 @@ class Lighting {
     FlightRuntime.setField(out, 'radius', -1.0);
   }
 
-  @:keep public static function getLightLinearIntensity(unit:LightUnit, value:Float):Float {
+  public static function getLightLinearIntensity(unit:LightUnit, value:Float):Float {
     return cast (value * FlightRuntime.getIndex(Lighting.LINEAR_PER_UNIT__lightIntensity, unit));
     return cast null;
   }
 
-  @:keep public static function getLightLuminance(light:Light):Float {
+  public static function getLightLuminance(light:Light):Float {
     var colored:Dynamic = cast FlightRuntime.UNDEFINED;
     var color:Dynamic = cast FlightRuntime.UNDEFINED;
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -205,12 +202,12 @@ class Lighting {
     return cast null;
   }
 
-  @:keep public static function getSpotLightConeDegrees(out:SpotLightConeAngles, source:SpotLight):Void {
+  public static function getSpotLightConeDegrees(out:SpotLightConeAngles, source:SpotLight):Void {
     FlightRuntime.setField(out, 'innerDegrees', ((FlightRuntime.callProperty(HxMath, 'acos', cast ([FlightRuntime.field(source, 'innerConeCos')] : Array<Dynamic>)) * 180.0) / HxMath.PI));
     FlightRuntime.setField(out, 'outerDegrees', ((FlightRuntime.callProperty(HxMath, 'acos', cast ([FlightRuntime.field(source, 'outerConeCos')] : Array<Dynamic>)) * 180.0) / HxMath.PI));
   }
 
-  @:keep public static function hasLightInfluenceOnBounds(light:Light, bounds:BoundingSphereLike):Bool {
+  public static function hasLightInfluenceOnBounds(light:Light, bounds:BoundingSphereLike):Bool {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     var dz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -228,7 +225,7 @@ class Lighting {
     return cast null;
   }
 
-  @:keep public static function isLightShadowCasting(light:Light):Bool {
+  public static function isLightShadowCasting(light:Light):Bool {
     var kind:Dynamic = cast FlightRuntime.UNDEFINED;
     kind = FlightRuntime.field(light, 'kind');
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.strictEquals(kind, Types.AmbientLightKind), function():Dynamic return cast FlightRuntime.strictEquals(kind, Types.HemisphereLightKind)), function():Dynamic return cast FlightRuntime.strictEquals(kind, Types.EnvironmentKind)))) {
@@ -244,7 +241,7 @@ class Lighting {
 
   public static final scratchSphere__lightAnalysis:Dynamic = FlightRuntime.callValue(createBoundingSphere, cast ([0.0, 0.0, 0.0, -1.0] : Array<Dynamic>));
 
-  @:keep public static function setAreaLightOrientation(out:AreaLight, direction:Vector3Like, right:Vector3Like, up:Vector3Like):Void {
+  public static function setAreaLightOrientation(out:AreaLight, direction:Vector3Like, right:Vector3Like, up:Vector3Like):Void {
     var rightLen:Dynamic = cast FlightRuntime.UNDEFINED;
     var upLen:Dynamic = cast FlightRuntime.UNDEFINED;
     var dirLen:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -272,7 +269,7 @@ class Lighting {
 }
   }
 
-  @:keep public static function setDirectionalLightDirection(out:DirectionalLight, x:Float, y:Float, z:Float):Void {
+  public static function setDirectionalLightDirection(out:DirectionalLight, x:Float, y:Float, z:Float):Void {
     var lx:Dynamic = cast FlightRuntime.UNDEFINED;
     var ly:Dynamic = cast FlightRuntime.UNDEFINED;
     var lz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -286,7 +283,7 @@ class Lighting {
 }
   }
 
-  @:keep public static function setDirectionalLightTarget(out:DirectionalLight, fromX:Float, fromY:Float, fromZ:Float, toX:Float, toY:Float, toZ:Float):Void {
+  public static function setDirectionalLightTarget(out:DirectionalLight, fromX:Float, fromY:Float, fromZ:Float, toX:Float, toY:Float, toZ:Float):Void {
     var dx:Dynamic = cast FlightRuntime.UNDEFINED;
     var dy:Dynamic = cast FlightRuntime.UNDEFINED;
     var dz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -300,12 +297,12 @@ class Lighting {
 }
   }
 
-  @:keep public static function setSpotLightCone(out:SpotLight, innerDegrees:Float, outerDegrees:Float):Void {
+  public static function setSpotLightCone(out:SpotLight, innerDegrees:Float, outerDegrees:Float):Void {
     FlightRuntime.setField(out, 'innerConeCos', FlightRuntime.callProperty(HxMath, 'cos', cast ([((innerDegrees * HxMath.PI) / 180.0)] : Array<Dynamic>)));
     FlightRuntime.setField(out, 'outerConeCos', FlightRuntime.callProperty(HxMath, 'cos', cast ([((outerDegrees * HxMath.PI) / 180.0)] : Array<Dynamic>)));
   }
 
-  @:keep public static function setSpotLightDirection(out:SpotLight, x:Float, y:Float, z:Float):Void {
+  public static function setSpotLightDirection(out:SpotLight, x:Float, y:Float, z:Float):Void {
     var lx:Dynamic = cast FlightRuntime.UNDEFINED;
     var ly:Dynamic = cast FlightRuntime.UNDEFINED;
     var lz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -319,7 +316,7 @@ class Lighting {
 }
   }
 
-  @:keep public static function setSpotLightTarget(out:SpotLight, targetX:Float, targetY:Float, targetZ:Float):Void {
+  public static function setSpotLightTarget(out:SpotLight, targetX:Float, targetY:Float, targetZ:Float):Void {
     var px:Dynamic = cast FlightRuntime.UNDEFINED;
     var py:Dynamic = cast FlightRuntime.UNDEFINED;
     var pz:Dynamic = cast FlightRuntime.UNDEFINED;

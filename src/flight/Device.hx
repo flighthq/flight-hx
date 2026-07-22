@@ -13,36 +13,33 @@ import flight.UserAgent.parseUserAgentFormFactor;
 import flight.UserAgent.parseUserAgentOsName;
 import flight.UserAgent.parseUserAgentOsVersion;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Device")
 class Device {
   public static var _backend__device:Null<DeviceBackend> = FlightRuntime.explicitNull();
 
   public static var _safeAreaInsets__device:Null<SafeAreaInsets> = FlightRuntime.explicitNull();
 
-  @:keep public static function createDeviceCapabilities():DeviceCapabilities {
+  public static function createDeviceCapabilities():DeviceCapabilities {
     return cast { hasKeyboard: false, hasMouse: false, hasStylus: false };
     return cast null;
   }
 
-  @:keep public static function createDeviceDisplayMetrics():DeviceDisplayMetrics {
+  public static function createDeviceDisplayMetrics():DeviceDisplayMetrics {
     return cast { colorDepth: -1.0, densityDpi: -1.0, logicalHeight: -1.0, logicalWidth: -1.0, physicalHeight: -1.0, physicalWidth: -1.0, pixelRatio: -1.0 };
     return cast null;
   }
 
-  @:keep public static function createDeviceInfo():DeviceInfo {
+  public static function createDeviceInfo():DeviceInfo {
     return cast { arch: '', availableMemory: -1.0, boardName: '', colorGamut: '', cpuCores: -1.0, fontScale: -1.0, formFactor: Types.DeviceFormFactorUnknown, gpuRenderer: '', gpuVendor: '', isHdr: false, isJailbroken: false, isLowEndDevice: false, isRooted: false, isVirtual: false, manufacturer: '', marketingName: '', model: '', osBuild: '', osName: '', osVersion: '', platformString: '', productName: '', supportedAbis: cast ([] : Array<Dynamic>), totalMemory: -1.0, webViewVersion: '' };
     return cast null;
   }
 
-  @:keep public static function createSafeAreaInsets():SafeAreaInsets {
+  public static function createSafeAreaInsets():SafeAreaInsets {
     return cast { bottom: 0.0, left: 0.0, right: 0.0, top: 0.0 };
     return cast null;
   }
 
-  @:keep public static function createWebDeviceBackend():DeviceBackend {
+  public static function createWebDeviceBackend():DeviceBackend {
     return cast { getCapabilities: function(out:DeviceCapabilities) {
   var nav:Dynamic = cast FlightRuntime.UNDEFINED;
   var maxTouch:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -139,19 +136,19 @@ class Device {
     return cast null;
   }
 
-  @:keep public static function detectDesktopUa__device(ua:String):Bool {
+  public static function detectDesktopUa__device(ua:String):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.regexp('win(?:dows)?nt|macintosh|mac os x|linux(?!.*android)|cros|x11', 'i'), 'test', cast ([ua] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function detectLowEndDevice__device(deviceMemoryGib:Float, cores:Float):Bool {
+  public static function detectLowEndDevice__device(deviceMemoryGib:Float, cores:Float):Bool {
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.compare(deviceMemoryGib, 0.0, '>'), function():Dynamic return cast FlightRuntime.compare(deviceMemoryGib, 1.0, '<=')))) { return cast true; }
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.compare(cores, 0.0, '>'), function():Dynamic return cast FlightRuntime.compare(cores, 2.0, '<=')))) { return cast true; }
     return cast false;
     return cast null;
   }
 
-  @:keep public static function enableWebSafeAreaInsets():Dynamic {
+  public static function enableWebSafeAreaInsets():Dynamic {
     var el:Dynamic = cast FlightRuntime.UNDEFINED;
     var readInsets:Void->Void = cast FlightRuntime.UNDEFINED;
     var observer:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -177,38 +174,38 @@ class Device {
     return cast null;
   }
 
-  @:keep public static function getDeviceBackend():DeviceBackend {
+  public static function getDeviceBackend():DeviceBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Device._backend__device, null))) { (Device._backend__device = cast (FlightRuntime.callValue(createWebDeviceBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Device._backend__device;
     return cast null;
   }
 
-  @:keep public static function getDeviceCapabilities(out:DeviceCapabilities):DeviceCapabilities {
+  public static function getDeviceCapabilities(out:DeviceCapabilities):DeviceCapabilities {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getDeviceBackend, cast ([] : Array<Dynamic>)), 'getCapabilities', cast ([out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getDeviceDisplayMetrics(out:DeviceDisplayMetrics):DeviceDisplayMetrics {
+  public static function getDeviceDisplayMetrics(out:DeviceDisplayMetrics):DeviceDisplayMetrics {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getDeviceBackend, cast ([] : Array<Dynamic>)), 'getDisplayMetrics', cast ([out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getDeviceId():String {
+  public static function getDeviceId():String {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getDeviceBackend, cast ([] : Array<Dynamic>)), 'getId', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getDeviceInfo(out:DeviceInfo):DeviceInfo {
+  public static function getDeviceInfo(out:DeviceInfo):DeviceInfo {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getDeviceBackend, cast ([] : Array<Dynamic>)), 'getInfo', cast ([out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getSafeAreaInsets(out:SafeAreaInsets):SafeAreaInsets {
+  public static function getSafeAreaInsets(out:SafeAreaInsets):SafeAreaInsets {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getDeviceBackend, cast ([] : Array<Dynamic>)), 'getSafeAreaInsets', cast ([out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function readWebGpuInfo__device():{ var vendor:String; var renderer:String; } {
+  public static function readWebGpuInfo__device():{ var vendor:String; var renderer:String; } {
     try {
   if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'))) { return cast { renderer: '', vendor: '' }; }
   var canvas:Dynamic = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -225,7 +222,7 @@ class Device {
     return cast null;
   }
 
-  @:keep public static function refreshDeviceInfo():Void {
+  public static function refreshDeviceInfo():Void {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var maybeRefreshable:Dynamic = cast FlightRuntime.UNDEFINED;
     backend = FlightRuntime.callValue(getDeviceBackend, cast ([] : Array<Dynamic>));
@@ -235,7 +232,7 @@ class Device {
 }
   }
 
-  @:keep public static function setDeviceBackend(backend:Null<DeviceBackend>):Void {
+  public static function setDeviceBackend(backend:Null<DeviceBackend>):Void {
     (Device._backend__device = cast (backend : Dynamic));
   }
 }

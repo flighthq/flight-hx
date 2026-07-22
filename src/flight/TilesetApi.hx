@@ -15,12 +15,9 @@ import flight.Types.ImageResource;
 import flight.Types.TextureAtlas;
 import flight.Types.Tileset;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.TilesetApi")
 class TilesetApi {
-  @:keep public static function buildTilesetRegions(target:Tileset):Void {
+  public static function buildTilesetRegions(target:Tileset):Void {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var atlas:Dynamic = cast FlightRuntime.UNDEFINED;
     var rows:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -69,12 +66,12 @@ class TilesetApi {
     }
   }
 
-  @:keep public static function createTileset(?obj:Dynamic):Tileset {
+  public static function createTileset(?obj:Dynamic):Tileset {
     return cast FlightRuntime.callValue(createEntity, cast ([{ atlas: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'atlas'), function():Dynamic return cast null), columns: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'columns'), function():Dynamic return cast 0.0), margin: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'margin'), function():Dynamic return cast 0.0), rows: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'rows'), function():Dynamic return cast 0.0), spacing: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'spacing'), function():Dynamic return cast 0.0), tileHeight: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'tileHeight'), function():Dynamic return cast 0.0), tileWidth: FlightRuntime.coalesce(FlightRuntime.optionalField(obj, 'tileWidth'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createTilesetFromAtlas(atlas:TextureAtlas, tileWidth:Float, tileHeight:Float, margin:Float = 0.0, spacing:Float = 0.0):Tileset {
+  public static function createTilesetFromAtlas(atlas:TextureAtlas, tileWidth:Float, tileHeight:Float, margin:Float = 0.0, spacing:Float = 0.0):Tileset {
     var image:Dynamic = cast FlightRuntime.UNDEFINED;
     var columns:Dynamic = cast FlightRuntime.UNDEFINED;
     var rows:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -88,44 +85,40 @@ class TilesetApi {
     return cast null;
   }
 
-  @:keep public static function createTilesetFromImageResource(resource:ImageResource, tileWidth:Float, tileHeight:Float, margin:Float = 0.0, spacing:Float = 0.0):Tileset {
+  public static function createTilesetFromImageResource(resource:ImageResource, tileWidth:Float, tileHeight:Float, margin:Float = 0.0, spacing:Float = 0.0):Tileset {
     return cast FlightRuntime.callValue(createTilesetFromAtlas, cast ([FlightRuntime.callValue(createTextureAtlas, cast ([{ image: resource }] : Array<Dynamic>)), tileWidth, tileHeight, margin, spacing] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function disposeTileset(tileset:Tileset):Void {
+  public static function disposeTileset(tileset:Tileset):Void {
     FlightRuntime.setField(tileset, 'atlas', null);
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadTilesetFromBase64(base64:String, mimeType:String, tileWidth:Float, tileHeight:Float, margin:Float = 0.0, spacing:Float = 0.0, ?signal:Dynamic):flight.internal.FlightPromise<Tileset> {
-    return cast FlightRuntime.callValue(createTilesetFromImageResource, cast ([flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(loadImageResourceFromBase64, cast ([base64, mimeType, signal] : Array<Dynamic>))), tileWidth, tileHeight, margin, spacing] : Array<Dynamic>));
-    return cast null;
+  public static function loadTilesetFromBase64(base64:String, mimeType:String, tileWidth:Float, tileHeight:Float, margin:Float = 0.0, spacing:Float = 0.0, ?signal:Dynamic):flight.internal.FlightPromise<Tileset> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Tileset> {
+      return cast FlightRuntime.callValue(createTilesetFromImageResource, cast ([flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(loadImageResourceFromBase64, cast ([base64, mimeType, signal] : Array<Dynamic>))), tileWidth, tileHeight, margin, spacing] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadTilesetFromBlob(blob:Dynamic, tileWidth:Float, tileHeight:Float, margin:Float = 0.0, spacing:Float = 0.0, ?signal:Dynamic):flight.internal.FlightPromise<Tileset> {
-    return cast FlightRuntime.callValue(createTilesetFromImageResource, cast ([flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(loadImageResourceFromBlob, cast ([blob, signal] : Array<Dynamic>))), tileWidth, tileHeight, margin, spacing] : Array<Dynamic>));
-    return cast null;
+  public static function loadTilesetFromBlob(blob:Dynamic, tileWidth:Float, tileHeight:Float, margin:Float = 0.0, spacing:Float = 0.0, ?signal:Dynamic):flight.internal.FlightPromise<Tileset> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Tileset> {
+      return cast FlightRuntime.callValue(createTilesetFromImageResource, cast ([flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(loadImageResourceFromBlob, cast ([blob, signal] : Array<Dynamic>))), tileWidth, tileHeight, margin, spacing] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadTilesetFromBytes(bytes:Dynamic, tileWidth:Float, tileHeight:Float, margin:Float = 0.0, spacing:Float = 0.0, ?mimeType:String, ?signal:Dynamic):flight.internal.FlightPromise<Tileset> {
-    return cast FlightRuntime.callValue(createTilesetFromImageResource, cast ([flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(loadImageResourceFromBytes, cast ([bytes, mimeType, signal] : Array<Dynamic>))), tileWidth, tileHeight, margin, spacing] : Array<Dynamic>));
-    return cast null;
+  public static function loadTilesetFromBytes(bytes:Dynamic, tileWidth:Float, tileHeight:Float, margin:Float = 0.0, spacing:Float = 0.0, ?mimeType:String, ?signal:Dynamic):flight.internal.FlightPromise<Tileset> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Tileset> {
+      return cast FlightRuntime.callValue(createTilesetFromImageResource, cast ([flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(loadImageResourceFromBytes, cast ([bytes, mimeType, signal] : Array<Dynamic>))), tileWidth, tileHeight, margin, spacing] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 
-  #if js
-  @:jsasync
-  #end
-  @:keep public static function loadTilesetFromUrl(url:String, tileWidth:Float, tileHeight:Float, margin:Float = 0.0, spacing:Float = 0.0, ?crossOrigin:String, ?signal:Dynamic):flight.internal.FlightPromise<Tileset> {
-    return cast FlightRuntime.callValue(createTilesetFromImageResource, cast ([flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(loadImageResourceFromUrl, cast ([url, crossOrigin, signal] : Array<Dynamic>))), tileWidth, tileHeight, margin, spacing] : Array<Dynamic>));
-    return cast null;
+  public static function loadTilesetFromUrl(url:String, tileWidth:Float, tileHeight:Float, margin:Float = 0.0, spacing:Float = 0.0, ?crossOrigin:String, ?signal:Dynamic):flight.internal.FlightPromise<Tileset> {
+    return cast flight.internal.FlightAsync.make(function():flight.internal.FlightPromise<Tileset> {
+      return cast FlightRuntime.callValue(createTilesetFromImageResource, cast ([flight.internal.FlightAsync.awaitValue(FlightRuntime.callValue(loadImageResourceFromUrl, cast ([url, crossOrigin, signal] : Array<Dynamic>))), tileWidth, tileHeight, margin, spacing] : Array<Dynamic>));
+      return cast null;
+    })();
   }
 }

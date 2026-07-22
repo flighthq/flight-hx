@@ -108,14 +108,11 @@ typedef TexturePackerSerializeOptions = { @:optional var variant:String; };
 
 typedef TexturePackerSize = { var h:Float; var w:Float; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.SpritesheetFormats")
 class SpritesheetFormats {
   public static var _registry__spritesheetDetect:Null<FormatRegistry__spritesheetDetect> = FlightRuntime.explicitNull();
 
-  @:keep public static function animationFromTag__asepriteParse(tag:AsepriteFrameTag, frameNames:Array<String>, durationMap:Dynamic):SpritesheetAnimationData {
+  public static function animationFromTag__asepriteParse(tag:AsepriteFrameTag, frameNames:Array<String>, durationMap:Dynamic):SpritesheetAnimationData {
     var tagFrameNames:Dynamic = cast FlightRuntime.UNDEFINED;
     var durations:Dynamic = cast FlightRuntime.UNDEFINED;
     var firstDuration:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -128,26 +125,26 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function animationsFromFrameTags__texturePackerParse(tags:Array<TexturePackerFrameTag>, frameNames:Array<String>):Array<SpritesheetAnimationData> {
+  public static function animationsFromFrameTags__texturePackerParse(tags:Array<TexturePackerFrameTag>, frameNames:Array<String>):Array<SpritesheetAnimationData> {
     return cast FlightRuntime.callProperty(tags, 'map', cast ([function(tag:Dynamic) return FlightRuntime.callValue(createSpritesheetAnimationData, cast ([{ direction: FlightRuntime.coalesce(FlightRuntime.field(tag, 'direction'), function():Dynamic return cast 'forward'), frameDuration: 100.0, frameNames: FlightRuntime.slice(frameNames, FlightRuntime.field(tag, 'from'), (FlightRuntime.field(tag, 'to') + 1.0)), loop: true, name: FlightRuntime.field(tag, 'name') }] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function dataToArrayDocument__asepriteSerialize(data:SpritesheetData, existing:Dynamic):AsepriteArrayDocument {
+  public static function dataToArrayDocument__asepriteSerialize(data:SpritesheetData, existing:Dynamic):AsepriteArrayDocument {
     var frames:Array<AsepriteArrayFrame> = cast FlightRuntime.UNDEFINED;
     frames = FlightRuntime.callProperty(FlightRuntime.field(data, 'frames'), 'map', cast ([function(frame:Dynamic) return FlightRuntime.mergeObjects([{ filename: FlightRuntime.field(frame, 'name') }, FlightRuntime.callValue(SpritesheetFormats.frameToEntry__asepriteSerialize, cast ([frame, FlightRuntime.callValue(SpritesheetFormats.resolveFrameDuration__asepriteSerialize, cast ([data, FlightRuntime.field(frame, 'name')] : Array<Dynamic>))] : Array<Dynamic>))])] : Array<Dynamic>));
     return cast { frames: frames, meta: FlightRuntime.callValue(SpritesheetFormats.dataToMeta__asepriteSerialize, cast ([data, FlightRuntime.coalesce(FlightRuntime.field(existing, 'meta'), function():Dynamic return cast {  })] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function dataToArrayDocument__texturePackerSerialize(data:SpritesheetData, existing:Dynamic):TexturePackerArrayDocument {
+  public static function dataToArrayDocument__texturePackerSerialize(data:SpritesheetData, existing:Dynamic):TexturePackerArrayDocument {
     var frames:Array<TexturePackerArrayFrame> = cast FlightRuntime.UNDEFINED;
     frames = FlightRuntime.callProperty(FlightRuntime.field(data, 'frames'), 'map', cast ([function(frame:Dynamic) return FlightRuntime.mergeObjects([{ filename: FlightRuntime.field(frame, 'name') }, FlightRuntime.callValue(SpritesheetFormats.frameToEntry__texturePackerSerialize, cast ([frame] : Array<Dynamic>))])] : Array<Dynamic>));
     return cast { frames: frames, meta: FlightRuntime.callValue(SpritesheetFormats.dataToMeta__texturePackerSerialize, cast ([data, FlightRuntime.coalesce(FlightRuntime.field(existing, 'meta'), function():Dynamic return cast {  })] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function dataToHashDocument__asepriteSerialize(data:SpritesheetData, existing:Dynamic):AsepriteHashDocument {
+  public static function dataToHashDocument__asepriteSerialize(data:SpritesheetData, existing:Dynamic):AsepriteHashDocument {
     var frames:Dynamic = cast FlightRuntime.UNDEFINED;
     frames = {  };
     for (frame in FlightRuntime.iterable(FlightRuntime.field(data, 'frames'))) {
@@ -157,7 +154,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function dataToHashDocument__texturePackerSerialize(data:SpritesheetData, existing:Dynamic):TexturePackerHashDocument {
+  public static function dataToHashDocument__texturePackerSerialize(data:SpritesheetData, existing:Dynamic):TexturePackerHashDocument {
     var frames:Dynamic = cast FlightRuntime.UNDEFINED;
     frames = {  };
     for (frame in FlightRuntime.iterable(FlightRuntime.field(data, 'frames'))) {
@@ -167,7 +164,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function dataToMeta__asepriteSerialize(data:SpritesheetData, existing:Dynamic):AsepriteMeta {
+  public static function dataToMeta__asepriteSerialize(data:SpritesheetData, existing:Dynamic):AsepriteMeta {
     var tags:Dynamic = cast FlightRuntime.UNDEFINED;
     tags = FlightRuntime.callProperty(FlightRuntime.field(data, 'animations'), 'map', cast ([function(anim:Dynamic, i:Dynamic) {
   var firstIdx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -180,7 +177,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function dataToMeta__texturePackerSerialize(data:SpritesheetData, existing:Dynamic):TexturePackerMeta {
+  public static function dataToMeta__texturePackerSerialize(data:SpritesheetData, existing:Dynamic):TexturePackerMeta {
     return cast { app: FlightRuntime.coalesce(FlightRuntime.field(existing, 'app'), function():Dynamic return cast 'https://www.codeandweb.com/texturepacker'), format: FlightRuntime.coalesce(FlightRuntime.field(existing, 'format'), function():Dynamic return cast 'RGBA8888'), frameTags: FlightRuntime.select(FlightRuntime.field(FlightRuntime.field(data, 'animations'), 'length'), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.field(data, 'animations'), 'map', cast ([function(anim:Dynamic) {
   var firstIdx:Dynamic = cast FlightRuntime.UNDEFINED;
   var lastIdx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -191,20 +188,20 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function detectAseprite__spritesheetDetect(text:String):Bool {
+  public static function detectAseprite__spritesheetDetect(text:String):Bool {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.getIndex(FlightRuntime.callProperty(text, 'trimStart', cast ([] : Array<Dynamic>)), 0.0), '{'))) { return cast false; }
     return cast FlightRuntime.andValue(FlightRuntime.callProperty(FlightRuntime.regexp('"meta"\\s*:', ''), 'test', cast ([text] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.regexp('aseprite\\.org', 'i'), 'test', cast ([text] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function detectCocosPlist__spritesheetDetect(text:String):Bool {
+  public static function detectCocosPlist__spritesheetDetect(text:String):Bool {
     var trimmed:Dynamic = cast FlightRuntime.UNDEFINED;
     trimmed = FlightRuntime.callProperty(text, 'trimStart', cast ([] : Array<Dynamic>));
     return cast FlightRuntime.andValue(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.getIndex(trimmed, 0.0), '<'), function():Dynamic return cast StringTools.startsWith(trimmed, '<?xml')), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.regexp('<plist\\b', 'i'), 'test', cast ([text] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function detectLibgdxAtlas__spritesheetDetect(text:String):Bool {
+  public static function detectLibgdxAtlas__spritesheetDetect(text:String):Bool {
     var ch:Dynamic = cast FlightRuntime.UNDEFINED;
     ch = FlightRuntime.getIndex(FlightRuntime.callProperty(text, 'trimStart', cast ([] : Array<Dynamic>)), 0.0);
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(ch, '<'), function():Dynamic return cast FlightRuntime.strictEquals(ch, '{')))) { return cast false; }
@@ -212,7 +209,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function detectSpritesheetFormat(text:String):Null<SpritesheetFormatKind> {
+  public static function detectSpritesheetFormat(text:String):Null<SpritesheetFormatKind> {
     for (__iteration0 in FlightRuntime.iterable(FlightRuntime.callValue(SpritesheetFormats.getRegistry__spritesheetDetect, cast ([] : Array<Dynamic>)))) {
       var kind:Dynamic = FlightRuntime.getIndex(__iteration0, 0.0);
       var entry:Dynamic = FlightRuntime.getIndex(__iteration0, 1.0);
@@ -222,18 +219,18 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function detectStarling__spritesheetDetect(text:String):Bool {
+  public static function detectStarling__spritesheetDetect(text:String):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.regexp('<TextureAtlas\\b', 'i'), 'test', cast ([text] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function detectTexturePacker__spritesheetDetect(text:String):Bool {
+  public static function detectTexturePacker__spritesheetDetect(text:String):Bool {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.getIndex(FlightRuntime.callProperty(text, 'trimStart', cast ([] : Array<Dynamic>)), 0.0), '{'))) { return cast false; }
     return cast FlightRuntime.andValue(FlightRuntime.callProperty(FlightRuntime.regexp('"meta"\\s*:', ''), 'test', cast ([text] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.regexp('"app"\\s*:', ''), 'test', cast ([text] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function dictToMap__cocosPlistParse(el:XmlElement):Dynamic {
+  public static function dictToMap__cocosPlistParse(el:XmlElement):Dynamic {
     var map:Dynamic = cast FlightRuntime.UNDEFINED;
     var children:Dynamic = cast FlightRuntime.UNDEFINED;
     map = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
@@ -253,7 +250,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function documentToData__asepriteParse(doc:AsepriteDocument):SpritesheetData {
+  public static function documentToData__asepriteParse(doc:AsepriteDocument):SpritesheetData {
     var regions:Dynamic = cast FlightRuntime.UNDEFINED;
     var frames:Array<SpritesheetFrameData> = cast FlightRuntime.UNDEFINED;
     var frameNames:Array<String> = cast FlightRuntime.UNDEFINED;
@@ -283,7 +280,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function documentToData__cocosPlistParse(doc:CocosPlistDocument):SpritesheetData {
+  public static function documentToData__cocosPlistParse(doc:CocosPlistDocument):SpritesheetData {
     var frames:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure4:Dynamic = cast FlightRuntime.UNDEFINED;
     var imageWidth:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -302,7 +299,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function documentToData__starlingParse(doc:StarlingDocument, regions:Array<TextureAtlasRegion>, frameDuration:Float):SpritesheetData {
+  public static function documentToData__starlingParse(doc:StarlingDocument, regions:Array<TextureAtlasRegion>, frameDuration:Float):SpritesheetData {
     var frames:Dynamic = cast FlightRuntime.UNDEFINED;
     var frameNames:Dynamic = cast FlightRuntime.UNDEFINED;
     var animations:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -313,7 +310,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function documentToData__texturePackerParse(doc:TexturePackerDocument):SpritesheetData {
+  public static function documentToData__texturePackerParse(doc:TexturePackerDocument):SpritesheetData {
     var regions:Dynamic = cast FlightRuntime.UNDEFINED;
     var frames:Array<SpritesheetFrameData> = cast FlightRuntime.UNDEFINED;
     var frameNames:Array<String> = cast FlightRuntime.UNDEFINED;
@@ -330,7 +327,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function documentToXml__cocosPlistSerialize(doc:CocosPlistDocument):String {
+  public static function documentToXml__cocosPlistSerialize(doc:CocosPlistDocument):String {
     var lines:Dynamic = cast FlightRuntime.UNDEFINED;
     lines = cast (['<?xml version="1.0" encoding="UTF-8"?>', '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">', '<plist version="1.0">', '<dict>', '	<key>frames</key>', '	<dict>'] : Array<Dynamic>);
     for (__iteration0 in FlightRuntime.iterable(FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'entries', cast ([FlightRuntime.field(doc, 'frames')] : Array<Dynamic>)))) {
@@ -368,7 +365,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function documentToXml__starlingSerialize(doc:StarlingDocument):String {
+  public static function documentToXml__starlingSerialize(doc:StarlingDocument):String {
     var lines:Array<String> = cast FlightRuntime.UNDEFINED;
     lines = cast (['<?xml version="1.0" encoding="UTF-8"?>', '<TextureAtlas imagePath="' + Std.string(FlightRuntime.field(doc, 'imagePath')) + '">'] : Array<Dynamic>);
     for (st in FlightRuntime.iterable(FlightRuntime.field(doc, 'subTextures'))) {
@@ -379,22 +376,22 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function escapeXml__cocosPlistSerialize(s:String):String {
+  public static function escapeXml__cocosPlistSerialize(s:String):String {
     return cast FlightRuntime.replace(FlightRuntime.replace(FlightRuntime.replace(FlightRuntime.replace(s, FlightRuntime.regexp('&', 'g'), '&amp;', false), FlightRuntime.regexp('<', 'g'), '&lt;', false), FlightRuntime.regexp('>', 'g'), '&gt;', false), FlightRuntime.regexp('"', 'g'), '&quot;', false);
     return cast null;
   }
 
-  @:keep public static function frameFromRegion__asepriteParse(region:TextureAtlasRegion):SpritesheetFrameData {
+  public static function frameFromRegion__asepriteParse(region:TextureAtlasRegion):SpritesheetFrameData {
     return cast FlightRuntime.callValue(createSpritesheetFrameData, cast ([{ height: FlightRuntime.field(region, 'height'), name: FlightRuntime.coalesce(FlightRuntime.field(region, 'name'), function():Dynamic return cast ''), offsetX: FlightRuntime.field(region, 'sourceX'), offsetY: FlightRuntime.field(region, 'sourceY'), pivotX: FlightRuntime.field(region, 'pivotX'), pivotY: FlightRuntime.field(region, 'pivotY'), rotated: FlightRuntime.field(region, 'rotated'), sourceHeight: FlightRuntime.coalesce(FlightRuntime.field(region, 'originalHeight'), function():Dynamic return cast FlightRuntime.field(region, 'height')), sourceWidth: FlightRuntime.coalesce(FlightRuntime.field(region, 'originalWidth'), function():Dynamic return cast FlightRuntime.field(region, 'width')), width: FlightRuntime.field(region, 'width'), x: FlightRuntime.field(region, 'x'), y: FlightRuntime.field(region, 'y') }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function frameFromRegion__libgdxAtlasParse(region:TextureAtlasRegion):SpritesheetFrameData {
+  public static function frameFromRegion__libgdxAtlasParse(region:TextureAtlasRegion):SpritesheetFrameData {
     return cast FlightRuntime.callValue(createSpritesheetFrameData, cast ([{ height: FlightRuntime.field(region, 'height'), name: FlightRuntime.coalesce(FlightRuntime.field(region, 'name'), function():Dynamic return cast ''), offsetX: FlightRuntime.field(region, 'sourceX'), offsetY: FlightRuntime.field(region, 'sourceY'), pivotX: FlightRuntime.field(region, 'pivotX'), pivotY: FlightRuntime.field(region, 'pivotY'), rotated: FlightRuntime.field(region, 'rotated'), sourceHeight: FlightRuntime.coalesce(FlightRuntime.field(region, 'originalHeight'), function():Dynamic return cast FlightRuntime.field(region, 'height')), sourceWidth: FlightRuntime.coalesce(FlightRuntime.field(region, 'originalWidth'), function():Dynamic return cast FlightRuntime.field(region, 'width')), width: FlightRuntime.field(region, 'width'), x: FlightRuntime.field(region, 'x'), y: FlightRuntime.field(region, 'y') }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function frameFromRegion__starlingParse(region:TextureAtlasRegion):SpritesheetFrameData {
+  public static function frameFromRegion__starlingParse(region:TextureAtlasRegion):SpritesheetFrameData {
     var sourceWidth:Dynamic = cast FlightRuntime.UNDEFINED;
     var sourceHeight:Dynamic = cast FlightRuntime.UNDEFINED;
     sourceWidth = FlightRuntime.coalesce(FlightRuntime.field(region, 'originalWidth'), function():Dynamic return cast FlightRuntime.field(region, 'width'));
@@ -403,19 +400,19 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function frameFromRegion__texturePackerParse(region:TextureAtlasRegion):SpritesheetFrameData {
+  public static function frameFromRegion__texturePackerParse(region:TextureAtlasRegion):SpritesheetFrameData {
     return cast FlightRuntime.callValue(createSpritesheetFrameData, cast ([{ height: FlightRuntime.field(region, 'height'), name: FlightRuntime.coalesce(FlightRuntime.field(region, 'name'), function():Dynamic return cast ''), offsetX: FlightRuntime.field(region, 'sourceX'), offsetY: FlightRuntime.field(region, 'sourceY'), pivotX: FlightRuntime.field(region, 'pivotX'), pivotY: FlightRuntime.field(region, 'pivotY'), rotated: FlightRuntime.field(region, 'rotated'), sourceHeight: FlightRuntime.coalesce(FlightRuntime.field(region, 'originalHeight'), function():Dynamic return cast FlightRuntime.field(region, 'height')), sourceWidth: FlightRuntime.coalesce(FlightRuntime.field(region, 'originalWidth'), function():Dynamic return cast FlightRuntime.field(region, 'width')), width: FlightRuntime.field(region, 'width'), x: FlightRuntime.field(region, 'x'), y: FlightRuntime.field(region, 'y') }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function frameToEntry__asepriteSerialize(frame:Dynamic, durationMs:Float):AsepriteBaseFrame {
+  public static function frameToEntry__asepriteSerialize(frame:Dynamic, durationMs:Float):AsepriteBaseFrame {
     var trimmed:Dynamic = cast FlightRuntime.UNDEFINED;
     trimmed = FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(!FlightRuntime.strictEquals(FlightRuntime.field(frame, 'offsetX'), 0.0), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(frame, 'offsetY'), 0.0)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(frame, 'sourceWidth'), FlightRuntime.field(frame, 'width'))), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(frame, 'sourceHeight'), FlightRuntime.field(frame, 'height')));
     return cast { duration: durationMs, frame: { h: FlightRuntime.field(frame, 'height'), w: FlightRuntime.field(frame, 'width'), x: FlightRuntime.field(frame, 'x'), y: FlightRuntime.field(frame, 'y') }, rotated: FlightRuntime.field(frame, 'rotated'), sourceSize: { h: FlightRuntime.field(frame, 'sourceHeight'), w: FlightRuntime.field(frame, 'sourceWidth') }, spriteSourceSize: { h: FlightRuntime.field(frame, 'height'), w: FlightRuntime.field(frame, 'width'), x: FlightRuntime.field(frame, 'offsetX'), y: FlightRuntime.field(frame, 'offsetY') }, trimmed: trimmed };
     return cast null;
   }
 
-  @:keep public static function frameToEntry__cocosPlistSerialize(frame:SpritesheetFrameData):CocosPlistFrame {
+  public static function frameToEntry__cocosPlistSerialize(frame:SpritesheetFrameData):CocosPlistFrame {
     var rectStr:Dynamic = cast FlightRuntime.UNDEFINED;
     var offsetStr:Dynamic = cast FlightRuntime.UNDEFINED;
     var sourceSizeStr:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -430,14 +427,14 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function frameToEntry__texturePackerSerialize(frame:Dynamic):TexturePackerHashFrame {
+  public static function frameToEntry__texturePackerSerialize(frame:Dynamic):TexturePackerHashFrame {
     var trimmed:Dynamic = cast FlightRuntime.UNDEFINED;
     trimmed = FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(!FlightRuntime.strictEquals(FlightRuntime.field(frame, 'offsetX'), 0.0), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(frame, 'offsetY'), 0.0)), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(frame, 'sourceWidth'), FlightRuntime.field(frame, 'width'))), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(frame, 'sourceHeight'), FlightRuntime.field(frame, 'height')));
     return cast FlightRuntime.mergeObjects([{ frame: { h: FlightRuntime.field(frame, 'height'), w: FlightRuntime.field(frame, 'width'), x: FlightRuntime.field(frame, 'x'), y: FlightRuntime.field(frame, 'y') } }, FlightRuntime.select(FlightRuntime.andValue(!FlightRuntime.strictEquals(FlightRuntime.field(frame, 'pivotX'), null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(frame, 'pivotY'), null)), function():Dynamic return cast { pivot: { x: FlightRuntime.field(frame, 'pivotX'), y: FlightRuntime.field(frame, 'pivotY') } }, function():Dynamic return cast {  }), { rotated: FlightRuntime.field(frame, 'rotated') }, { sourceSize: { h: FlightRuntime.field(frame, 'sourceHeight'), w: FlightRuntime.field(frame, 'sourceWidth') } }, { spriteSourceSize: { h: FlightRuntime.field(frame, 'height'), w: FlightRuntime.field(frame, 'width'), x: FlightRuntime.field(frame, 'offsetX'), y: FlightRuntime.field(frame, 'offsetY') } }, { trimmed: trimmed }]);
     return cast null;
   }
 
-  @:keep public static function frameToSubTexture__starlingSerialize(frame:Dynamic):StarlingSubTexture {
+  public static function frameToSubTexture__starlingSerialize(frame:Dynamic):StarlingSubTexture {
     var st:StarlingSubTexture = cast FlightRuntime.UNDEFINED;
     st = { height: FlightRuntime.field(frame, 'height'), name: FlightRuntime.field(frame, 'name'), width: FlightRuntime.field(frame, 'width'), x: FlightRuntime.field(frame, 'x'), y: FlightRuntime.field(frame, 'y') };
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(frame, 'offsetX'), 0.0))) { FlightRuntime.setField(st, 'frameX', -FlightRuntime.field(frame, 'offsetX')); }
@@ -455,17 +452,17 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function getBoolValue__cocosPlistParse(el:Null<XmlElement>):Bool {
+  public static function getBoolValue__cocosPlistParse(el:Null<XmlElement>):Bool {
     return cast FlightRuntime.strictEquals(FlightRuntime.optionalField(el, 'name'), 'true');
     return cast null;
   }
 
-  @:keep public static function getIntValue__cocosPlistParse(el:Null<XmlElement>):Float {
+  public static function getIntValue__cocosPlistParse(el:Null<XmlElement>):Float {
     return cast FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([FlightRuntime.coalesce(FlightRuntime.optionalField(el, 'text'), function():Dynamic return cast '0'), 10.0] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getRegistry__spritesheetDetect():FormatRegistry__spritesheetDetect {
+  public static function getRegistry__spritesheetDetect():FormatRegistry__spritesheetDetect {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(SpritesheetFormats._registry__spritesheetDetect, null))) { return cast SpritesheetFormats._registry__spritesheetDetect; }
     (SpritesheetFormats._registry__spritesheetDetect = cast (FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) : Dynamic));
     FlightRuntime.callProperty(SpritesheetFormats._registry__spritesheetDetect, 'set', cast ([ASEPRITE, { detect: SpritesheetFormats.detectAseprite__spritesheetDetect, parse: function(text:Dynamic) return FlightRuntime.callValue(parseAsepriteSpritesheet, cast ([text] : Array<Dynamic>)) }] : Array<Dynamic>));
@@ -477,17 +474,17 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function getSpritesheetFormat(kind:SpritesheetFormatKind):Null<{ var detect:Dynamic; var parse:Dynamic; }> {
+  public static function getSpritesheetFormat(kind:SpritesheetFormatKind):Null<{ var detect:Dynamic; var parse:Dynamic; }> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.callValue(SpritesheetFormats.getRegistry__spritesheetDetect, cast ([] : Array<Dynamic>)), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getTextValue__cocosPlistParse(el:Null<XmlElement>):String {
+  public static function getTextValue__cocosPlistParse(el:Null<XmlElement>):String {
     return cast FlightRuntime.coalesce(FlightRuntime.optionalField(el, 'text'), function():Dynamic return cast '');
     return cast null;
   }
 
-  @:keep public static function inferAnimations__libgdxAtlasParse(frameNames:Array<String>, frameDuration:Float):Array<SpritesheetAnimationData> {
+  public static function inferAnimations__libgdxAtlasParse(frameNames:Array<String>, frameDuration:Float):Array<SpritesheetAnimationData> {
     var groups:Dynamic = cast FlightRuntime.UNDEFINED;
     var animations:Array<SpritesheetAnimationData> = cast FlightRuntime.UNDEFINED;
     groups = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
@@ -514,7 +511,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function inferAnimations__starlingParse(frameNames:Array<String>, frameDuration:Float):Array<SpritesheetAnimationData> {
+  public static function inferAnimations__starlingParse(frameNames:Array<String>, frameDuration:Float):Array<SpritesheetAnimationData> {
     var groups:Dynamic = cast FlightRuntime.UNDEFINED;
     var animations:Array<SpritesheetAnimationData> = cast FlightRuntime.UNDEFINED;
     groups = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
@@ -541,36 +538,36 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function isFilename__libgdxAtlasParse(line:String):Bool {
+  public static function isFilename__libgdxAtlasParse(line:String):Bool {
     return cast FlightRuntime.orValue(FlightRuntime.callProperty(FlightRuntime.regexp('[./]', ''), 'test', cast ([line] : Array<Dynamic>)), function():Dynamic return cast FlightRuntime.callProperty(FlightRuntime.regexp('^\\w+\\.\\w+$$', ''), 'test', cast ([line] : Array<Dynamic>)));
     return cast null;
   }
 
-  @:keep public static function metaScale__asepriteParse(meta:AsepriteMeta):Float {
+  public static function metaScale__asepriteParse(meta:AsepriteMeta):Float {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(meta, 'scale')), 'string'))) { return cast FlightRuntime.orValue(FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([FlightRuntime.field(meta, 'scale')] : Array<Dynamic>)), function():Dynamic return cast 1.0); }
     return cast FlightRuntime.field(meta, 'scale');
     return cast null;
   }
 
-  @:keep public static function metaScale__texturePackerParse(meta:TexturePackerMeta):Float {
+  public static function metaScale__texturePackerParse(meta:TexturePackerMeta):Float {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.typeofValue(FlightRuntime.field(meta, 'scale')), 'string'))) { return cast FlightRuntime.orValue(FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([FlightRuntime.field(meta, 'scale')] : Array<Dynamic>)), function():Dynamic return cast 1.0); }
     return cast FlightRuntime.field(meta, 'scale');
     return cast null;
   }
 
-  @:keep public static function parseAsepriteSpritesheet(json:String):SpritesheetData {
+  public static function parseAsepriteSpritesheet(json:String):SpritesheetData {
     return cast FlightRuntime.callValue(SpritesheetFormats.documentToData__asepriteParse, cast ([(cast FlightRuntime.jsonParse(json) : AsepriteDocument)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function parseAsepriteSpritesheetDocument(json:String):AsepriteParsed {
+  public static function parseAsepriteSpritesheetDocument(json:String):AsepriteParsed {
     var document:Dynamic = cast FlightRuntime.UNDEFINED;
     document = (cast FlightRuntime.jsonParse(json) : AsepriteDocument);
     return cast { data: FlightRuntime.callValue(SpritesheetFormats.documentToData__asepriteParse, cast ([document] : Array<Dynamic>)), document: document };
     return cast null;
   }
 
-  @:keep public static function parseAttrs__starlingParse(attrs:String):Dynamic {
+  public static function parseAttrs__starlingParse(attrs:String):Dynamic {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     var RE:Dynamic = cast FlightRuntime.UNDEFINED;
     var m:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
@@ -583,19 +580,19 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function parseCocosPlistSpritesheet(xml:String):SpritesheetData {
+  public static function parseCocosPlistSpritesheet(xml:String):SpritesheetData {
     return cast FlightRuntime.callValue(SpritesheetFormats.documentToData__cocosPlistParse, cast ([FlightRuntime.callValue(SpritesheetFormats.parseCocosPlistXml__cocosPlistParse, cast ([xml] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function parseCocosPlistSpritesheetDocument(xml:String):CocosPlistParsed {
+  public static function parseCocosPlistSpritesheetDocument(xml:String):CocosPlistParsed {
     var document:Dynamic = cast FlightRuntime.UNDEFINED;
     document = FlightRuntime.callValue(SpritesheetFormats.parseCocosPlistXml__cocosPlistParse, cast ([xml] : Array<Dynamic>));
     return cast { data: FlightRuntime.callValue(SpritesheetFormats.documentToData__cocosPlistParse, cast ([document] : Array<Dynamic>)), document: document };
     return cast null;
   }
 
-  @:keep public static function parseCocosPlistXml__cocosPlistParse(xml:String):CocosPlistDocument {
+  public static function parseCocosPlistXml__cocosPlistParse(xml:String):CocosPlistDocument {
     var root:Dynamic = cast FlightRuntime.UNDEFINED;
     var rootDict:Null<XmlElement> = cast FlightRuntime.UNDEFINED;
     var rootMap:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -650,14 +647,14 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function parseIntPair__libgdxAtlasParse(value:String):Array<Float> {
+  public static function parseIntPair__libgdxAtlasParse(value:String):Array<Float> {
     var parts:Dynamic = cast FlightRuntime.UNDEFINED;
     parts = FlightRuntime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
     return cast cast ([FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([FlightRuntime.coalesce(FlightRuntime.getIndex(parts, 0.0), function():Dynamic return cast '0'), 10.0] : Array<Dynamic>)), FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([FlightRuntime.coalesce(FlightRuntime.getIndex(parts, 1.0), function():Dynamic return cast '0'), 10.0] : Array<Dynamic>))] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function parseLibgdxAtlas__libgdxAtlasParse(text:String):{ var pages:Array<LibgdxPage__libgdxAtlasParse>; var regions:Array<LibgdxRegion__libgdxAtlasParse>; } {
+  public static function parseLibgdxAtlas__libgdxAtlasParse(text:String):{ var pages:Array<LibgdxPage__libgdxAtlasParse>; var regions:Array<LibgdxRegion__libgdxAtlasParse>; } {
     var lines:Dynamic = cast FlightRuntime.UNDEFINED;
     var pages:Array<LibgdxPage__libgdxAtlasParse> = cast FlightRuntime.UNDEFINED;
     var regions:Array<LibgdxRegion__libgdxAtlasParse> = cast FlightRuntime.UNDEFINED;
@@ -770,7 +767,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function parseLibgdxAtlasSpritesheet(text:String, ?options:LibgdxAtlasParseOptions):SpritesheetData {
+  public static function parseLibgdxAtlasSpritesheet(text:String, ?options:LibgdxAtlasParseOptions):SpritesheetData {
     var frameDuration:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure7:Dynamic = cast FlightRuntime.UNDEFINED;
     var pages:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -797,21 +794,21 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function parsePlistPair__cocosPlistParse(s:String):Array<Float> {
+  public static function parsePlistPair__cocosPlistParse(s:String):Array<Float> {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.match(s, FlightRuntime.regexp('{?\\s*([-\\d.]+)\\s*,\\s*([-\\d.]+)\\s*}?', ''));
     return cast cast ([FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([FlightRuntime.coalesce(FlightRuntime.optionalIndex(m, 1.0), function():Dynamic return cast '0')] : Array<Dynamic>)), FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([FlightRuntime.coalesce(FlightRuntime.optionalIndex(m, 2.0), function():Dynamic return cast '0')] : Array<Dynamic>))] : Array<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function parsePlistRect__cocosPlistParse(s:String):{ var x:Float; var y:Float; var w:Float; var h:Float; } {
+  public static function parsePlistRect__cocosPlistParse(s:String):{ var x:Float; var y:Float; var w:Float; var h:Float; } {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     m = FlightRuntime.match(s, FlightRuntime.regexp('\\{\\s*\\{\\s*([-\\d.]+)\\s*,\\s*([-\\d.]+)\\s*\\}\\s*,\\s*\\{\\s*([-\\d.]+)\\s*,\\s*([-\\d.]+)\\s*\\}\\s*\\}', ''));
     return cast { h: FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([FlightRuntime.coalesce(FlightRuntime.optionalIndex(m, 4.0), function():Dynamic return cast '0')] : Array<Dynamic>)), w: FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([FlightRuntime.coalesce(FlightRuntime.optionalIndex(m, 3.0), function():Dynamic return cast '0')] : Array<Dynamic>)), x: FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([FlightRuntime.coalesce(FlightRuntime.optionalIndex(m, 1.0), function():Dynamic return cast '0')] : Array<Dynamic>)), y: FlightRuntime.callValue(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([FlightRuntime.coalesce(FlightRuntime.optionalIndex(m, 2.0), function():Dynamic return cast '0')] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function parseSpritesheet(text:String, ?formatKind:SpritesheetFormatKind, ?options:SpritesheetParseOptions):Null<SpritesheetData> {
+  public static function parseSpritesheet(text:String, ?formatKind:SpritesheetFormatKind, ?options:SpritesheetParseOptions):Null<SpritesheetData> {
     var opts:SpritesheetParseOptions = cast FlightRuntime.UNDEFINED;
     var kind:Dynamic = cast FlightRuntime.UNDEFINED;
     var entry:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -824,19 +821,19 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function parseStarlingSpritesheet(xml:String, ?options:StarlingParseOptions):SpritesheetData {
+  public static function parseStarlingSpritesheet(xml:String, ?options:StarlingParseOptions):SpritesheetData {
     return cast FlightRuntime.callValue(SpritesheetFormats.documentToData__starlingParse, cast ([FlightRuntime.callValue(SpritesheetFormats.parseStarlingXml__starlingParse, cast ([xml] : Array<Dynamic>)), FlightRuntime.callValue(SpritesheetFormats.regionsFromXml__starlingParse, cast ([xml] : Array<Dynamic>)), FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'frameDuration'), function():Dynamic return cast 100.0)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function parseStarlingSpritesheetDocument(xml:String, ?options:StarlingParseOptions):StarlingParsed {
+  public static function parseStarlingSpritesheetDocument(xml:String, ?options:StarlingParseOptions):StarlingParsed {
     var document:Dynamic = cast FlightRuntime.UNDEFINED;
     document = FlightRuntime.callValue(SpritesheetFormats.parseStarlingXml__starlingParse, cast ([xml] : Array<Dynamic>));
     return cast { data: FlightRuntime.callValue(SpritesheetFormats.documentToData__starlingParse, cast ([document, FlightRuntime.callValue(SpritesheetFormats.regionsFromXml__starlingParse, cast ([xml] : Array<Dynamic>)), FlightRuntime.coalesce(FlightRuntime.optionalField(options, 'frameDuration'), function():Dynamic return cast 100.0)] : Array<Dynamic>)), document: document };
     return cast null;
   }
 
-  @:keep public static function parseStarlingXml__starlingParse(xml:String):StarlingDocument {
+  public static function parseStarlingXml__starlingParse(xml:String):StarlingDocument {
     var atlasRE:Dynamic = cast FlightRuntime.UNDEFINED;
     var atlasMatch:Dynamic = cast FlightRuntime.UNDEFINED;
     var atlasAttrs:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -867,19 +864,19 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function parseTexturePackerSpritesheet(json:String):SpritesheetData {
+  public static function parseTexturePackerSpritesheet(json:String):SpritesheetData {
     return cast FlightRuntime.callValue(SpritesheetFormats.documentToData__texturePackerParse, cast ([(cast FlightRuntime.jsonParse(json) : TexturePackerDocument)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function parseTexturePackerSpritesheetDocument(json:String):TexturePackerParsed {
+  public static function parseTexturePackerSpritesheetDocument(json:String):TexturePackerParsed {
     var document:Dynamic = cast FlightRuntime.UNDEFINED;
     document = (cast FlightRuntime.jsonParse(json) : TexturePackerDocument);
     return cast { data: FlightRuntime.callValue(SpritesheetFormats.documentToData__texturePackerParse, cast ([document] : Array<Dynamic>)), document: document };
     return cast null;
   }
 
-  @:keep public static function plistFrameToData__cocosPlistParse(name:String, pf:CocosPlistFrame):SpritesheetFrameData {
+  public static function plistFrameToData__cocosPlistParse(name:String, pf:CocosPlistFrame):SpritesheetFrameData {
     var rect:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
     var offsetX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -902,22 +899,22 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function plistValue__cocosPlistSerialize(el:Bool):String {
+  public static function plistValue__cocosPlistSerialize(el:Bool):String {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.typeofValue(el), 'boolean'))) { return cast FlightRuntime.select(el, function():Dynamic return cast '<true/>', function():Dynamic return cast '<false/>'); }
     return cast '<string>' + Std.string(FlightRuntime.callValue(SpritesheetFormats.escapeXml__cocosPlistSerialize, cast ([Std.string(el)] : Array<Dynamic>))) + '</string>';
     return cast null;
   }
 
-  @:keep public static function regionsFromXml__starlingParse(xml:String):Array<TextureAtlasRegion> {
+  public static function regionsFromXml__starlingParse(xml:String):Array<TextureAtlasRegion> {
     return cast FlightRuntime.field(FlightRuntime.callValue(parseTextureAtlasStarlingXml, cast ([xml, FlightRuntime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>))] : Array<Dynamic>)), 'regions');
     return cast null;
   }
 
-  @:keep public static function registerSpritesheetFormat(kind:SpritesheetFormatKind, entry:{ var detect:Dynamic; var parse:Dynamic; }):Void {
+  public static function registerSpritesheetFormat(kind:SpritesheetFormatKind, entry:{ var detect:Dynamic; var parse:Dynamic; }):Void {
     FlightRuntime.callProperty(FlightRuntime.callValue(SpritesheetFormats.getRegistry__spritesheetDetect, cast ([] : Array<Dynamic>)), 'set', cast ([kind, entry] : Array<Dynamic>));
   }
 
-  @:keep public static function resolveFrameDuration__asepriteSerialize(data:SpritesheetData, frameName:String):Float {
+  public static function resolveFrameDuration__asepriteSerialize(data:SpritesheetData, frameName:String):Float {
     for (anim in FlightRuntime.iterable(FlightRuntime.field(data, 'animations'))) {
       var idx:Dynamic = FlightRuntime.callProperty(FlightRuntime.field(anim, 'frameNames'), 'indexOf', cast ([frameName] : Array<Dynamic>));
       if (FlightRuntime.truthy(FlightRuntime.strictEquals(idx, -1.0))) { continue; }
@@ -928,7 +925,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function serializeAsepriteSpritesheet(data:SpritesheetData, ?existing:Dynamic, ?options:AsepriteSerializeOptions):String {
+  public static function serializeAsepriteSpritesheet(data:SpritesheetData, ?existing:Dynamic, ?options:AsepriteSerializeOptions):String {
     var existingIsArray:Dynamic = cast FlightRuntime.UNDEFINED;
     var variant:Dynamic = cast FlightRuntime.UNDEFINED;
     var doc:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -943,7 +940,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function serializeCocosPlistSpritesheet(data:SpritesheetData, ?existing:Dynamic):String {
+  public static function serializeCocosPlistSpritesheet(data:SpritesheetData, ?existing:Dynamic):String {
     var frames:Dynamic = cast FlightRuntime.UNDEFINED;
     var doc:CocosPlistDocument = cast FlightRuntime.UNDEFINED;
     frames = {  };
@@ -955,14 +952,14 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function serializeStarlingSpritesheet(data:SpritesheetData, ?existing:Dynamic):String {
+  public static function serializeStarlingSpritesheet(data:SpritesheetData, ?existing:Dynamic):String {
     var doc:StarlingDocument = cast FlightRuntime.UNDEFINED;
     doc = { imagePath: FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.field(data, 'imageFile'), function():Dynamic return cast FlightRuntime.optionalField(existing, 'imagePath')), function():Dynamic return cast ''), subTextures: FlightRuntime.callProperty(FlightRuntime.field(data, 'frames'), 'map', cast ([SpritesheetFormats.frameToSubTexture__starlingSerialize] : Array<Dynamic>)) };
     return cast FlightRuntime.callValue(SpritesheetFormats.documentToXml__starlingSerialize, cast ([doc] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function serializeTexturePackerSpritesheet(data:SpritesheetData, ?existing:Dynamic, ?options:TexturePackerSerializeOptions):String {
+  public static function serializeTexturePackerSpritesheet(data:SpritesheetData, ?existing:Dynamic, ?options:TexturePackerSerializeOptions):String {
     var existingIsArray:Dynamic = cast FlightRuntime.UNDEFINED;
     var variant:Dynamic = cast FlightRuntime.UNDEFINED;
     var doc:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -977,7 +974,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  @:keep public static function subTextureToAttr__starlingSerialize(st:StarlingSubTexture):String {
+  public static function subTextureToAttr__starlingSerialize(st:StarlingSubTexture):String {
     var parts:Array<String> = cast FlightRuntime.UNDEFINED;
     parts = cast (['name="' + Std.string(FlightRuntime.field(st, 'name')) + '"', 'x="' + Std.string(FlightRuntime.field(st, 'x')) + '"', 'y="' + Std.string(FlightRuntime.field(st, 'y')) + '"'] : Array<Dynamic>);
     FlightRuntime.pushMany(parts, cast (['width="' + Std.string(FlightRuntime.field(st, 'width')) + '"', 'height="' + Std.string(FlightRuntime.field(st, 'height')) + '"'] : Array<Dynamic>));

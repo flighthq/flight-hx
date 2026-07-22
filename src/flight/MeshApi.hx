@@ -24,16 +24,13 @@ typedef MeshGeometryFromAttributesOptions = { @:optional var indices:Null<Dynami
 
 typedef MeshGeometryOptions = { @:optional var indices:Null<Dynamic>; var layout:VertexAttributeLayout; @:optional var subsets:Array<MeshSubset>; @:optional var topology:PrimitiveTopology; var vertices:flight.internal.FlightFloat32Array; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.MeshApi")
 class MeshApi {
   public static final _phi__meshGeometryBuilders:Dynamic = ((1.0 + FlightRuntime.callProperty(HxMath, 'sqrt', cast ([5.0] : Array<Dynamic>))) * 0.5);
 
   public static final _d__meshGeometryBuilders:Dynamic = (1.0 / MeshApi._phi__meshGeometryBuilders);
 
-  @:keep public static function accumulateDeltas__morphMeshGeometry(accumulator:flight.internal.FlightFloat32Array, deltas:flight.internal.FlightFloat32Array, weight:Float, count:Float):Void {
+  public static function accumulateDeltas__morphMeshGeometry(accumulator:flight.internal.FlightFloat32Array, deltas:flight.internal.FlightFloat32Array, weight:Float, count:Float):Void {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     n = FlightRuntime.callProperty(HxMath, 'min', cast ([count, FlightRuntime.field(deltas, 'length')] : Array<Dynamic>));
     {
@@ -45,7 +42,7 @@ class MeshApi {
     }
   }
 
-  @:keep public static function addDisc__meshGeometryBuilders(positions:Array<Float>, normals:Array<Float>, uvs:Array<Float>, indices:Array<Float>, segments:Float, radius:Float, y:Float, direction:Float):Void {
+  public static function addDisc__meshGeometryBuilders(positions:Array<Float>, normals:Array<Float>, uvs:Array<Float>, indices:Array<Float>, segments:Float, radius:Float, y:Float, direction:Float):Void {
     var center:Dynamic = cast FlightRuntime.UNDEFINED;
     var ringStart:Dynamic = cast FlightRuntime.UNDEFINED;
     center = (FlightRuntime.field(positions, 'length') / 3.0);
@@ -80,7 +77,7 @@ class MeshApi {
     }
   }
 
-  @:keep public static function addMeshGeometrySubset(geometry:MeshGeometry, subset:MeshSubset):Void {
+  public static function addMeshGeometrySubset(geometry:MeshGeometry, subset:MeshSubset):Void {
     var next:Array<MeshSubset> = cast FlightRuntime.UNDEFINED;
     next = cast ([] : Array<Dynamic>);
     {
@@ -94,7 +91,7 @@ class MeshApi {
     FlightRuntime.setField(geometry, 'subsets', next);
   }
 
-  @:keep public static function blendMeshGeometryMorph(geometry:MeshGeometry, morph:MeshMorph, bindPose:MeshMorphBindPose):Void {
+  public static function blendMeshGeometryMorph(geometry:MeshGeometry, morph:MeshMorph, bindPose:MeshMorphBindPose):Void {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var blendedNormals:Dynamic = cast FlightRuntime.UNDEFINED;
     var blendedPositions:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -178,7 +175,7 @@ class MeshApi {
     FlightRuntime.incrementField(geometry, 'version', 1, true);
   }
 
-  @:keep public static function buildCanonicalMeshGeometry__meshGeometryBuilders(positions:Array<Float>, normals:Array<Float>, uvs:Array<Float>, indices:Array<Float>):MeshGeometry {
+  public static function buildCanonicalMeshGeometry__meshGeometryBuilders(positions:Array<Float>, normals:Array<Float>, uvs:Array<Float>, indices:Array<Float>):MeshGeometry {
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertices:Dynamic = cast FlightRuntime.UNDEFINED;
     var indexArray:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -222,7 +219,7 @@ class MeshApi {
 
   public static final CANONICAL_VERTEX_LAYOUT__meshGeometryBuilders:VertexAttributeLayout = { attributes: cast ([{ byteOffset: 0.0, format: 'float32x3', semantic: 'position' }, { byteOffset: 12.0, format: 'float32x3', semantic: 'normal' }, { byteOffset: 24.0, format: 'float32x4', semantic: 'tangent' }, { byteOffset: 40.0, format: 'float32x2', semantic: 'uv0' }] : Array<Dynamic>), stride: 48.0 };
 
-  @:keep public static function captureMeshMorphBindPose(geometry:MeshGeometry):MeshMorphBindPose {
+  public static function captureMeshMorphBindPose(geometry:MeshGeometry):MeshMorphBindPose {
     var __destructure2:Dynamic = cast FlightRuntime.UNDEFINED;
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertices:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -272,7 +269,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function centerMeshGeometry(geometry:MeshGeometry):Void {
+  public static function centerMeshGeometry(geometry:MeshGeometry):Void {
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     var cx:Dynamic = cast FlightRuntime.UNDEFINED;
     var cy:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -290,7 +287,7 @@ class MeshApi {
     FlightRuntime.callValue(translateMeshGeometry, cast ([geometry, -cx, -cy, -cz] : Array<Dynamic>));
   }
 
-  @:keep public static function cloneMeshGeometry(source:MeshGeometry):MeshGeometry {
+  public static function cloneMeshGeometry(source:MeshGeometry):MeshGeometry {
     var vertices:Dynamic = cast FlightRuntime.UNDEFINED;
     var indices:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
     var subsets:Array<MeshSubset> = cast FlightRuntime.UNDEFINED;
@@ -323,7 +320,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function computeMatrix3x3InverseTranspose__meshGeometryTransforms(matrix:Matrix4Like):Null<flight.internal.FlightFloat32Array> {
+  public static function computeMatrix3x3InverseTranspose__meshGeometryTransforms(matrix:Matrix4Like):Null<flight.internal.FlightFloat32Array> {
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     var a00:Dynamic = cast FlightRuntime.UNDEFINED;
     var a01:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -382,7 +379,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function computeMeshGeometryBoundingSphere(out:BoundingSphereLike, geometry:MeshGeometry):Void {
+  public static function computeMeshGeometryBoundingSphere(out:BoundingSphereLike, geometry:MeshGeometry):Void {
     var vertices:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -450,7 +447,7 @@ class MeshApi {
     FlightRuntime.setField(out, 'radius', FlightRuntime.callProperty(HxMath, 'sqrt', cast ([radiusSq] : Array<Dynamic>)));
   }
 
-  @:keep public static function computeMeshGeometryBounds(out:AabbLike, geometry:MeshGeometry):Void {
+  public static function computeMeshGeometryBounds(out:AabbLike, geometry:MeshGeometry):Void {
     var vertices:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -493,7 +490,7 @@ class MeshApi {
     FlightRuntime.setField(FlightRuntime.field(out, 'max'), 'z', maxZ);
   }
 
-  @:keep public static function computeMeshGeometryFlatNormals(out:MeshGeometry, geometry:MeshGeometry):Void {
+  public static function computeMeshGeometryFlatNormals(out:MeshGeometry, geometry:MeshGeometry):Void {
     var srcVerts:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     var indices:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -555,7 +552,7 @@ class MeshApi {
     FlightRuntime.incrementField(out, 'version', 1, true);
   }
 
-  @:keep public static function computeMeshGeometryNormals(out:MeshGeometry, geometry:MeshGeometry):Void {
+  public static function computeMeshGeometryNormals(out:MeshGeometry, geometry:MeshGeometry):Void {
     var vertices:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -621,7 +618,7 @@ class MeshApi {
     }
   }
 
-  @:keep public static function computeMeshGeometryTangents(out:MeshGeometry, geometry:MeshGeometry):Void {
+  public static function computeMeshGeometryTangents(out:MeshGeometry, geometry:MeshGeometry):Void {
     var vertices:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -727,7 +724,7 @@ class MeshApi {
     }
   }
 
-  @:keep public static function computeMeshGeometryWireframeIndices(geometry:MeshGeometry):Dynamic {
+  public static function computeMeshGeometryWireframeIndices(geometry:MeshGeometry):Dynamic {
     var useUint32:Dynamic = cast FlightRuntime.UNDEFINED;
     var indices:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -778,7 +775,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function convertMeshGeometryLayout(source:MeshGeometry, targetLayout:VertexAttributeLayout):MeshGeometry {
+  public static function convertMeshGeometryLayout(source:MeshGeometry, targetLayout:VertexAttributeLayout):MeshGeometry {
     var srcStride:Dynamic = cast FlightRuntime.UNDEFINED;
     var dstStride:Dynamic = cast FlightRuntime.UNDEFINED;
     var srcFloatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -828,7 +825,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function createBoxMeshGeometry(width:Float = 1.0, height:Float = 1.0, depth:Float = 1.0):MeshGeometry {
+  public static function createBoxMeshGeometry(width:Float = 1.0, height:Float = 1.0, depth:Float = 1.0):MeshGeometry {
     var hx:Dynamic = cast FlightRuntime.UNDEFINED;
     var hy:Dynamic = cast FlightRuntime.UNDEFINED;
     var hz:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -874,7 +871,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function createCapsuleMeshGeometry(radius:Float = 0.5, height:Float = 1.0, radialSegments:Float = 16.0, capSegments:Float = 8.0):MeshGeometry {
+  public static function createCapsuleMeshGeometry(radius:Float = 0.5, height:Float = 1.0, radialSegments:Float = 16.0, capSegments:Float = 8.0):MeshGeometry {
     var rSeg:Dynamic = cast FlightRuntime.UNDEFINED;
     var cSeg:Dynamic = cast FlightRuntime.UNDEFINED;
     var halfH:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -968,7 +965,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function createCircleMeshGeometry(radius:Float = 0.5, segments:Float = 32.0):MeshGeometry {
+  public static function createCircleMeshGeometry(radius:Float = 0.5, segments:Float = 32.0):MeshGeometry {
     var segs:Dynamic = cast FlightRuntime.UNDEFINED;
     var positions:Array<Float> = cast FlightRuntime.UNDEFINED;
     var normals:Array<Float> = cast FlightRuntime.UNDEFINED;
@@ -984,12 +981,12 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function createConeMeshGeometry(radius:Float = 0.5, height:Float = 1.0, radialSegments:Float = 32.0, capped:Bool = true):MeshGeometry {
+  public static function createConeMeshGeometry(radius:Float = 0.5, height:Float = 1.0, radialSegments:Float = 32.0, capped:Bool = true):MeshGeometry {
     return cast FlightRuntime.callValue(createCylinderMeshGeometry, cast ([0.0, radius, height, radialSegments, capped] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createCylinderMeshGeometry(topRadius:Float = 0.5, bottomRadius:Float = 0.5, height:Float = 1.0, radialSegments:Float = 32.0, capped:Bool = true):MeshGeometry {
+  public static function createCylinderMeshGeometry(topRadius:Float = 0.5, bottomRadius:Float = 0.5, height:Float = 1.0, radialSegments:Float = 32.0, capped:Bool = true):MeshGeometry {
     var segments:Dynamic = cast FlightRuntime.UNDEFINED;
     var halfHeight:Dynamic = cast FlightRuntime.UNDEFINED;
     var positions:Array<Float> = cast FlightRuntime.UNDEFINED;
@@ -1056,17 +1053,17 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function createDodecahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
+  public static function createDodecahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
     return cast FlightRuntime.callValue(createPolyhedronMeshGeometry, cast ([MeshApi.DODECAHEDRON_VERTS__meshGeometryBuilders, MeshApi.DODECAHEDRON_FACES__meshGeometryBuilders, radius, detail] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createIcosahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
+  public static function createIcosahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
     return cast FlightRuntime.callValue(createPolyhedronMeshGeometry, cast ([MeshApi.ICOSAHEDRON_VERTS__meshGeometryBuilders, MeshApi.ICOSAHEDRON_FACES__meshGeometryBuilders, radius, detail] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createIcosphereMeshGeometry(radius:Float = 0.5, subdivisions:Float = 2.0):MeshGeometry {
+  public static function createIcosphereMeshGeometry(radius:Float = 0.5, subdivisions:Float = 2.0):MeshGeometry {
     var subs:Dynamic = cast FlightRuntime.UNDEFINED;
     var phi:Dynamic = cast FlightRuntime.UNDEFINED;
     var scale:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1170,7 +1167,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function createMeshGeometry(options:MeshGeometryOptions):MeshGeometry {
+  public static function createMeshGeometry(options:MeshGeometryOptions):MeshGeometry {
     var vertices:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var indices:Null<Dynamic> = cast FlightRuntime.UNDEFINED;
@@ -1190,7 +1187,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function createMeshGeometryFromAttributes(options:MeshGeometryFromAttributesOptions):MeshGeometry {
+  public static function createMeshGeometryFromAttributes(options:MeshGeometryFromAttributesOptions):MeshGeometry {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var positions:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1262,7 +1259,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function createMeshGeometryRuntime__meshGeometry(fields:Dynamic):MeshGeometry {
+  public static function createMeshGeometryRuntime__meshGeometry(fields:Dynamic):MeshGeometry {
     var geometry:Dynamic = cast FlightRuntime.UNDEFINED;
     var runtime:MeshGeometryRuntime = cast FlightRuntime.UNDEFINED;
     geometry = (cast FlightRuntime.callValue(createEntity, cast ([{ bounds: FlightRuntime.field(fields, 'bounds'), indices: FlightRuntime.field(fields, 'indices'), layout: FlightRuntime.field(fields, 'layout'), subsets: FlightRuntime.field(fields, 'subsets'), topology: FlightRuntime.field(fields, 'topology'), version: FlightRuntime.field(fields, 'version'), vertices: FlightRuntime.field(fields, 'vertices') }] : Array<Dynamic>)) : MeshGeometry);
@@ -1272,12 +1269,12 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function createOctahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
+  public static function createOctahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
     return cast FlightRuntime.callValue(createPolyhedronMeshGeometry, cast ([MeshApi.OCTAHEDRON_VERTS__meshGeometryBuilders, MeshApi.OCTAHEDRON_FACES__meshGeometryBuilders, radius, detail] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createPlaneMeshGeometry(width:Float = 1.0, depth:Float = 1.0, widthSegments:Float = 1.0, depthSegments:Float = 1.0):MeshGeometry {
+  public static function createPlaneMeshGeometry(width:Float = 1.0, depth:Float = 1.0, widthSegments:Float = 1.0, depthSegments:Float = 1.0):MeshGeometry {
     var wSeg:Dynamic = cast FlightRuntime.UNDEFINED;
     var dSeg:Dynamic = cast FlightRuntime.UNDEFINED;
     var hw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1336,7 +1333,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function createPolyhedronMeshGeometry(vertexPositions:Array<Array<Float>>, faceIndices:Array<Array<Float>>, radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
+  public static function createPolyhedronMeshGeometry(vertexPositions:Array<Array<Float>>, faceIndices:Array<Array<Float>>, radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
     var subs:Dynamic = cast FlightRuntime.UNDEFINED;
     var verts:Array<Array<Float>> = cast FlightRuntime.UNDEFINED;
     var faces:Array<Array<Float>> = cast FlightRuntime.UNDEFINED;
@@ -1436,7 +1433,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function createQuadMeshGeometry(width:Float = 1.0, height:Float = 1.0):MeshGeometry {
+  public static function createQuadMeshGeometry(width:Float = 1.0, height:Float = 1.0):MeshGeometry {
     var hw:Dynamic = cast FlightRuntime.UNDEFINED;
     var hh:Dynamic = cast FlightRuntime.UNDEFINED;
     var positions:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1453,7 +1450,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function createRingMeshGeometry(innerRadius:Float = 0.25, outerRadius:Float = 0.5, segments:Float = 32.0):MeshGeometry {
+  public static function createRingMeshGeometry(innerRadius:Float = 0.25, outerRadius:Float = 0.5, segments:Float = 32.0):MeshGeometry {
     var segs:Dynamic = cast FlightRuntime.UNDEFINED;
     var positions:Array<Float> = cast FlightRuntime.UNDEFINED;
     var normals:Array<Float> = cast FlightRuntime.UNDEFINED;
@@ -1494,7 +1491,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function createSphereMeshGeometry(radius:Float = 0.5, widthSegments:Float = 32.0, heightSegments:Float = 16.0):MeshGeometry {
+  public static function createSphereMeshGeometry(radius:Float = 0.5, widthSegments:Float = 32.0, heightSegments:Float = 16.0):MeshGeometry {
     var wSeg:Dynamic = cast FlightRuntime.UNDEFINED;
     var hSeg:Dynamic = cast FlightRuntime.UNDEFINED;
     var positions:Array<Float> = cast FlightRuntime.UNDEFINED;
@@ -1556,12 +1553,12 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function createTetrahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
+  public static function createTetrahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
     return cast FlightRuntime.callValue(createPolyhedronMeshGeometry, cast ([MeshApi.TETRAHEDRON_VERTS__meshGeometryBuilders, MeshApi.TETRAHEDRON_FACES__meshGeometryBuilders, radius, detail] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createTorusKnotMeshGeometry(radius:Float = 0.5, tube:Float = 0.15, tubularSegments:Float = 64.0, radialSegments:Float = 8.0, p:Float = 2.0, q:Float = 3.0):MeshGeometry {
+  public static function createTorusKnotMeshGeometry(radius:Float = 0.5, tube:Float = 0.15, tubularSegments:Float = 64.0, radialSegments:Float = 8.0, p:Float = 2.0, q:Float = 3.0):MeshGeometry {
     var tSeg:Dynamic = cast FlightRuntime.UNDEFINED;
     var rSeg:Dynamic = cast FlightRuntime.UNDEFINED;
     var positions:Array<Float> = cast FlightRuntime.UNDEFINED;
@@ -1668,7 +1665,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function createTorusMeshGeometry(radius:Float = 0.5, tube:Float = 0.2, radialSegments:Float = 24.0, tubularSegments:Float = 48.0):MeshGeometry {
+  public static function createTorusMeshGeometry(radius:Float = 0.5, tube:Float = 0.2, radialSegments:Float = 24.0, tubularSegments:Float = 48.0):MeshGeometry {
     var rSeg:Dynamic = cast FlightRuntime.UNDEFINED;
     var tSeg:Dynamic = cast FlightRuntime.UNDEFINED;
     var positions:Array<Float> = cast FlightRuntime.UNDEFINED;
@@ -1737,13 +1734,13 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function destroyMeshGeometryGlData(geometry:MeshGeometry):Void {
+  public static function destroyMeshGeometryGlData(geometry:MeshGeometry):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     if (FlightRuntime.truthy(runtime)) { FlightRuntime.setField(runtime, 'webglData', null); }
   }
 
-  @:keep public static function destroyMeshGeometryWgpuData(geometry:MeshGeometry):Void {
+  public static function destroyMeshGeometryWgpuData(geometry:MeshGeometry):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     if (FlightRuntime.truthy(runtime)) { FlightRuntime.setField(runtime, 'webgpuData', null); }
@@ -1753,7 +1750,7 @@ class MeshApi {
 
   public static final DODECAHEDRON_VERTS__meshGeometryBuilders:Array<Array<Float>> = cast ([cast ([-1.0, -1.0, -1.0] : Array<Dynamic>), cast ([-1.0, -1.0, 1.0] : Array<Dynamic>), cast ([-1.0, 1.0, -1.0] : Array<Dynamic>), cast ([-1.0, 1.0, 1.0] : Array<Dynamic>), cast ([1.0, -1.0, -1.0] : Array<Dynamic>), cast ([1.0, -1.0, 1.0] : Array<Dynamic>), cast ([1.0, 1.0, -1.0] : Array<Dynamic>), cast ([1.0, 1.0, 1.0] : Array<Dynamic>), cast ([0.0, -MeshApi._d__meshGeometryBuilders, -MeshApi._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([0.0, -MeshApi._d__meshGeometryBuilders, MeshApi._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([0.0, MeshApi._d__meshGeometryBuilders, -MeshApi._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([0.0, MeshApi._d__meshGeometryBuilders, MeshApi._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([-MeshApi._d__meshGeometryBuilders, -MeshApi._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([-MeshApi._d__meshGeometryBuilders, MeshApi._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([MeshApi._d__meshGeometryBuilders, -MeshApi._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([MeshApi._d__meshGeometryBuilders, MeshApi._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([-MeshApi._phi__meshGeometryBuilders, 0.0, -MeshApi._d__meshGeometryBuilders] : Array<Dynamic>), cast ([-MeshApi._phi__meshGeometryBuilders, 0.0, MeshApi._d__meshGeometryBuilders] : Array<Dynamic>), cast ([MeshApi._phi__meshGeometryBuilders, 0.0, -MeshApi._d__meshGeometryBuilders] : Array<Dynamic>), cast ([MeshApi._phi__meshGeometryBuilders, 0.0, MeshApi._d__meshGeometryBuilders] : Array<Dynamic>)] : Array<Dynamic>);
 
-  @:keep public static function expandMeshGeometryIndices(geometry:MeshGeometry):MeshGeometry {
+  public static function expandMeshGeometryIndices(geometry:MeshGeometry):MeshGeometry {
     var indices:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     var sourceVertices:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1786,7 +1783,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function getFloat32ComponentCount__meshGeometryLayout(format:String):Float {
+  public static function getFloat32ComponentCount__meshGeometryLayout(format:String):Float {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(format, 'float32'))) { return cast 1.0; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(format, 'float32x2'))) { return cast 2.0; }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(format, 'float32x3'))) { return cast 3.0; }
@@ -1795,7 +1792,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function getFloat3Attribute__meshGeometryAttributes(out:{ var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float, semantic:VertexSemantic):Bool {
+  public static function getFloat3Attribute__meshGeometryAttributes(out:{ var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float, semantic:VertexSemantic):Bool {
     var floatOffset:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1813,26 +1810,26 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function getMeshGeometryIndexCount(geometry:MeshGeometry):Float {
+  public static function getMeshGeometryIndexCount(geometry:MeshGeometry):Float {
     return cast FlightRuntime.select(FlightRuntime.field(geometry, 'indices'), function():Dynamic return cast FlightRuntime.field(FlightRuntime.field(geometry, 'indices'), 'length'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  @:keep public static function getMeshGeometryMorphBindPose(geometry:MeshGeometry):Null<MeshMorphBindPose> {
+  public static function getMeshGeometryMorphBindPose(geometry:MeshGeometry):Null<MeshMorphBindPose> {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     return cast FlightRuntime.select(runtime, function():Dynamic return cast FlightRuntime.field(runtime, 'morphBindPose'), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getMeshGeometrySkinBindPose(geometry:MeshGeometry):Null<MeshSkinBindPose> {
+  public static function getMeshGeometrySkinBindPose(geometry:MeshGeometry):Null<MeshSkinBindPose> {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     return cast FlightRuntime.select(runtime, function():Dynamic return cast FlightRuntime.field(runtime, 'skinBindPose'), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getMeshGeometrySubsetTriangleCount(geometry:MeshGeometry, subsetIndex:Float):Float {
+  public static function getMeshGeometrySubsetTriangleCount(geometry:MeshGeometry, subsetIndex:Float):Float {
     var indexCount:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.compare(subsetIndex, 0.0, '<'), function():Dynamic return cast FlightRuntime.compare(subsetIndex, FlightRuntime.field(FlightRuntime.field(geometry, 'subsets'), 'length'), '>=')))) { return cast 0.0; }
     indexCount = FlightRuntime.field(FlightRuntime.getIndex(FlightRuntime.field(geometry, 'subsets'), subsetIndex), 'indexCount');
@@ -1842,7 +1839,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function getMeshGeometryTriangleCount(geometry:MeshGeometry):Float {
+  public static function getMeshGeometryTriangleCount(geometry:MeshGeometry):Float {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(geometry, 'topology'), 'triangle-list'))) {
   var indexCount:Dynamic = FlightRuntime.select(FlightRuntime.field(geometry, 'indices'), function():Dynamic return cast FlightRuntime.field(FlightRuntime.field(geometry, 'indices'), 'length'), function():Dynamic return cast FlightRuntime.callValue(getMeshGeometryVertexCount, cast ([geometry] : Array<Dynamic>)));
   return cast FlightRuntime.callProperty(HxMath, 'floor', cast ([(indexCount / 3.0)] : Array<Dynamic>));
@@ -1855,22 +1852,22 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function getMeshGeometryVertexCount(geometry:MeshGeometry):Float {
+  public static function getMeshGeometryVertexCount(geometry:MeshGeometry):Float {
     return cast FlightRuntime.callValue(MeshApi.getVertexCountFromLayout__meshGeometry, cast ([FlightRuntime.field(geometry, 'vertices'), FlightRuntime.field(geometry, 'layout')] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getMeshGeometryVertexNormal(out:{ var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
+  public static function getMeshGeometryVertexNormal(out:{ var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
     return cast FlightRuntime.callValue(MeshApi.getFloat3Attribute__meshGeometryAttributes, cast ([out, geometry, vertexIndex, 'normal'] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getMeshGeometryVertexPosition(out:{ var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
+  public static function getMeshGeometryVertexPosition(out:{ var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
     return cast FlightRuntime.callValue(MeshApi.getFloat3Attribute__meshGeometryAttributes, cast ([out, geometry, vertexIndex, 'position'] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getMeshGeometryVertexTangent(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
+  public static function getMeshGeometryVertexTangent(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
     var floatOffset:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1889,7 +1886,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function getMeshGeometryVertexUv0(out:{ var x:Float; var y:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
+  public static function getMeshGeometryVertexUv0(out:{ var x:Float; var y:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
     var floatOffset:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1906,7 +1903,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function getVertexAttribute(layout:VertexAttributeLayout, semantic:VertexSemantic):Null<VertexAttribute> {
+  public static function getVertexAttribute(layout:VertexAttributeLayout, semantic:VertexSemantic):Null<VertexAttribute> {
     var attrs:Dynamic = cast FlightRuntime.UNDEFINED;
     attrs = FlightRuntime.field(layout, 'attributes');
     {
@@ -1920,7 +1917,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function getVertexAttributeFloatOffset(layout:VertexAttributeLayout, semantic:VertexSemantic):Float {
+  public static function getVertexAttributeFloatOffset(layout:VertexAttributeLayout, semantic:VertexSemantic):Float {
     var attrs:Dynamic = cast FlightRuntime.UNDEFINED;
     attrs = FlightRuntime.field(layout, 'attributes');
     {
@@ -1938,7 +1935,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function getVertexCountFromLayout__meshGeometry(vertices:flight.internal.FlightFloat32Array, layout:VertexAttributeLayout):Float {
+  public static function getVertexCountFromLayout__meshGeometry(vertices:flight.internal.FlightFloat32Array, layout:VertexAttributeLayout):Float {
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     floatsPerVertex = (FlightRuntime.field(layout, 'stride') / 4.0);
     if (FlightRuntime.truthy(FlightRuntime.compare(floatsPerVertex, 0.0, '<='))) { return cast 0.0; }
@@ -1946,7 +1943,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function hasMeshGeometrySkin(geometry:MeshGeometry):Bool {
+  public static function hasMeshGeometrySkin(geometry:MeshGeometry):Bool {
     var attributes:Dynamic = cast FlightRuntime.UNDEFINED;
     attributes = FlightRuntime.field(FlightRuntime.field(geometry, 'layout'), 'attributes');
     {
@@ -1964,7 +1961,7 @@ class MeshApi {
 
   public static final ICOSAHEDRON_VERTS__meshGeometryBuilders:Array<Array<Float>> = cast ([cast ([-1.0, MeshApi._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([1.0, MeshApi._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([-1.0, -MeshApi._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([1.0, -MeshApi._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([0.0, -1.0, MeshApi._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([0.0, 1.0, MeshApi._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([0.0, -1.0, -MeshApi._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([0.0, 1.0, -MeshApi._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([MeshApi._phi__meshGeometryBuilders, 0.0, -1.0] : Array<Dynamic>), cast ([MeshApi._phi__meshGeometryBuilders, 0.0, 1.0] : Array<Dynamic>), cast ([-MeshApi._phi__meshGeometryBuilders, 0.0, -1.0] : Array<Dynamic>), cast ([-MeshApi._phi__meshGeometryBuilders, 0.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>);
 
-  @:keep public static function layoutsMatch__meshGeometryOperations(a:VertexAttributeLayout, b:VertexAttributeLayout):Bool {
+  public static function layoutsMatch__meshGeometryOperations(a:VertexAttributeLayout, b:VertexAttributeLayout):Bool {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(a, 'stride'), FlightRuntime.field(b, 'stride')))) { return cast false; }
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(a, 'attributes'), 'length'), FlightRuntime.field(FlightRuntime.field(b, 'attributes'), 'length')))) { return cast false; }
     {
@@ -1980,7 +1977,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function mergeMeshGeometries(geometries:Array<MeshGeometry>):Null<MeshGeometry> {
+  public static function mergeMeshGeometries(geometries:Array<MeshGeometry>):Null<MeshGeometry> {
     var reference:Dynamic = cast FlightRuntime.UNDEFINED;
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2065,7 +2062,7 @@ class MeshApi {
 
   public static final OCTAHEDRON_VERTS__meshGeometryBuilders:Array<Array<Float>> = cast ([cast ([1.0, 0.0, 0.0] : Array<Dynamic>), cast ([-1.0, 0.0, 0.0] : Array<Dynamic>), cast ([0.0, 1.0, 0.0] : Array<Dynamic>), cast ([0.0, -1.0, 0.0] : Array<Dynamic>), cast ([0.0, 0.0, 1.0] : Array<Dynamic>), cast ([0.0, 0.0, -1.0] : Array<Dynamic>)] : Array<Dynamic>);
 
-  @:keep public static function offsetMeshGeometryUvs(geometry:MeshGeometry, du:Float, dv:Float):Void {
+  public static function offsetMeshGeometryUvs(geometry:MeshGeometry, du:Float, dv:Float):Void {
     var floatOffset:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2089,7 +2086,7 @@ class MeshApi {
 
   public static final POSITION_OFFSET__meshGeometryCompute:Dynamic = 0.0;
 
-  @:keep public static function promoteIndices__meshGeometry(source:Dynamic, vertexCount:Float):Dynamic {
+  public static function promoteIndices__meshGeometry(source:Dynamic, vertexCount:Float):Dynamic {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.compare(vertexCount, MeshApi.UINT16_INDEX_CEILING__meshGeometry, '>'), function():Dynamic return cast FlightRuntime.isInstanceOf(source, FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)))))) {
   var out:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [FlightRuntime.field(source, 'length')]);
@@ -2102,11 +2099,11 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function scaleMeshGeometry(geometry:MeshGeometry, sx:Float, sy:Float, sz:Float):Void {
+  public static function scaleMeshGeometry(geometry:MeshGeometry, sx:Float, sy:Float, sz:Float):Void {
     FlightRuntime.callValue(MeshApi.transformMeshGeometryPositions__meshGeometryTransforms, cast ([geometry, geometry, sx, sy, sz, 0.0, 0.0, 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function scaleMeshGeometryUvs(geometry:MeshGeometry, su:Float, sv:Float):Void {
+  public static function scaleMeshGeometryUvs(geometry:MeshGeometry, su:Float, sv:Float):Void {
     var floatOffset:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2128,7 +2125,7 @@ class MeshApi {
     if (FlightRuntime.truthy(FlightRuntime.compare(vertexCount, 0.0, '>'))) { FlightRuntime.incrementField(geometry, 'version', 1, true); }
   }
 
-  @:keep public static function setFloat3Attribute__meshGeometryAttributes(geometry:MeshGeometry, vertexIndex:Float, semantic:VertexSemantic, x:Float, y:Float, z:Float):Bool {
+  public static function setFloat3Attribute__meshGeometryAttributes(geometry:MeshGeometry, vertexIndex:Float, semantic:VertexSemantic, x:Float, y:Float, z:Float):Bool {
     var floatOffset:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2147,19 +2144,19 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function setMeshGeometryMorphBindPose(geometry:MeshGeometry, bindPose:Null<MeshMorphBindPose>):Void {
+  public static function setMeshGeometryMorphBindPose(geometry:MeshGeometry, bindPose:Null<MeshMorphBindPose>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     if (FlightRuntime.truthy(runtime)) { FlightRuntime.setField(runtime, 'morphBindPose', bindPose); }
   }
 
-  @:keep public static function setMeshGeometrySkinBindPose(geometry:MeshGeometry, bindPose:Null<MeshSkinBindPose>):Void {
+  public static function setMeshGeometrySkinBindPose(geometry:MeshGeometry, bindPose:Null<MeshSkinBindPose>):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     if (FlightRuntime.truthy(runtime)) { FlightRuntime.setField(runtime, 'skinBindPose', bindPose); }
   }
 
-  @:keep public static function setMeshGeometrySubsets(geometry:MeshGeometry, subsets:Array<MeshSubset>):Void {
+  public static function setMeshGeometrySubsets(geometry:MeshGeometry, subsets:Array<MeshSubset>):Void {
     var next:Array<MeshSubset> = cast FlightRuntime.UNDEFINED;
     next = cast ([] : Array<Dynamic>);
     {
@@ -2172,17 +2169,17 @@ class MeshApi {
     FlightRuntime.setField(geometry, 'subsets', next);
   }
 
-  @:keep public static function setMeshGeometryVertexNormal(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float):Bool {
+  public static function setMeshGeometryVertexNormal(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float):Bool {
     return cast FlightRuntime.callValue(MeshApi.setFloat3Attribute__meshGeometryAttributes, cast ([geometry, vertexIndex, 'normal', x, y, z] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setMeshGeometryVertexPosition(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float):Bool {
+  public static function setMeshGeometryVertexPosition(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float):Bool {
     return cast FlightRuntime.callValue(MeshApi.setFloat3Attribute__meshGeometryAttributes, cast ([geometry, vertexIndex, 'position', x, y, z] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setMeshGeometryVertexTangent(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float, w:Float):Bool {
+  public static function setMeshGeometryVertexTangent(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float, w:Float):Bool {
     var floatOffset:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2202,7 +2199,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function setMeshGeometryVertexUv0(geometry:MeshGeometry, vertexIndex:Float, u:Float, v:Float):Bool {
+  public static function setMeshGeometryVertexUv0(geometry:MeshGeometry, vertexIndex:Float, u:Float, v:Float):Bool {
     var floatOffset:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2226,12 +2223,12 @@ class MeshApi {
 
   public static final TETRAHEDRON_VERTS__meshGeometryBuilders:Array<Array<Float>> = cast ([cast ([1.0, 1.0, 1.0] : Array<Dynamic>), cast ([-1.0, -1.0, 1.0] : Array<Dynamic>), cast ([-1.0, 1.0, -1.0] : Array<Dynamic>), cast ([1.0, -1.0, -1.0] : Array<Dynamic>)] : Array<Dynamic>);
 
-  @:keep public static function transformMeshGeometry(geometry:MeshGeometry, matrix:Matrix4Like):Bool {
+  public static function transformMeshGeometry(geometry:MeshGeometry, matrix:Matrix4Like):Bool {
     return cast FlightRuntime.callValue(transformMeshGeometryInto, cast ([geometry, geometry, matrix] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function transformMeshGeometryInto(out:MeshGeometry, source:MeshGeometry, matrix:Matrix4Like):Bool {
+  public static function transformMeshGeometryInto(out:MeshGeometry, source:MeshGeometry, matrix:Matrix4Like):Bool {
     var invT:Dynamic = cast FlightRuntime.UNDEFINED;
     var m:Dynamic = cast FlightRuntime.UNDEFINED;
     var posFloatOffset:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2316,7 +2313,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function transformMeshGeometryPositions__meshGeometryTransforms(out:MeshGeometry, source:MeshGeometry, sx:Float, sy:Float, sz:Float, tx:Float, ty:Float, tz:Float):Void {
+  public static function transformMeshGeometryPositions__meshGeometryTransforms(out:MeshGeometry, source:MeshGeometry, sx:Float, sy:Float, sz:Float, tx:Float, ty:Float, tz:Float):Void {
     var posFloatOffset:Dynamic = cast FlightRuntime.UNDEFINED;
     var normFloatOffset:Dynamic = cast FlightRuntime.UNDEFINED;
     var tanFloatOffset:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2400,7 +2397,7 @@ class MeshApi {
 }
   }
 
-  @:keep public static function translateMeshGeometry(geometry:MeshGeometry, x:Float, y:Float, z:Float):Void {
+  public static function translateMeshGeometry(geometry:MeshGeometry, x:Float, y:Float, z:Float):Void {
     var posFloatOffset:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2437,7 +2434,7 @@ class MeshApi {
 
   public static final UV0_OFFSET__meshGeometryCompute:Dynamic = 10.0;
 
-  @:keep public static function validateMeshGeometry(geometry:MeshGeometry):Bool {
+  public static function validateMeshGeometry(geometry:MeshGeometry):Bool {
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var posOffset:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2484,7 +2481,7 @@ class MeshApi {
     return cast null;
   }
 
-  @:keep public static function wrapMeshGeometryUvs(geometry:MeshGeometry):Void {
+  public static function wrapMeshGeometryUvs(geometry:MeshGeometry):Void {
     var floatOffset:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;

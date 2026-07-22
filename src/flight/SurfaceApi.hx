@@ -54,9 +54,6 @@ typedef SurfaceShadowBlurOptions = { @:optional var radiusX:Float; @:optional va
 
 typedef SurfaceSharpenOptions = { @:optional var amount:Float; @:optional var radiusX:Float; @:optional var radiusY:Float; @:optional var passes:Float; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.SurfaceApi")
 class SurfaceApi {
   public static var _floodFillVisited__surfaceFill:Null<Dynamic> = FlightRuntime.explicitNull();
@@ -71,7 +68,7 @@ class SurfaceApi {
 
   public static var _windowRed__surfaceMedian:Null<Dynamic> = FlightRuntime.explicitNull();
 
-  @:keep public static function applyBlurPasses__surfaceShadow(out:Dynamic, scratch:Dynamic, width:Float, height:Float, options:SurfaceShadowBlurOptions):Void {
+  public static function applyBlurPasses__surfaceShadow(out:Dynamic, scratch:Dynamic, width:Float, height:Float, options:SurfaceShadowBlurOptions):Void {
     var radiusX:Dynamic = cast FlightRuntime.UNDEFINED;
     var radiusY:Dynamic = cast FlightRuntime.UNDEFINED;
     var passes:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -105,7 +102,7 @@ class SurfaceApi {
 }
   }
 
-  @:keep public static function applyInnerEffect__surfaceShadow(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, color:Float, options:Dynamic, offsetX:Float, offsetY:Float):Void {
+  public static function applyInnerEffect__surfaceShadow(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, color:Float, options:Dynamic, offsetX:Float, offsetY:Float):Void {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     var cr:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -159,7 +156,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function applyMorphological__surfaceMorphological(out:Dynamic, source:SurfaceRegion, radius:Float, dilate:Bool):Void {
+  public static function applyMorphological__surfaceMorphological(out:Dynamic, source:SurfaceRegion, radius:Float, dilate:Bool):Void {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -223,7 +220,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function applySurfaceColorTransform(dest:SurfaceRegion, source:SurfaceRegion, ct:ColorTransformLike):Void {
+  public static function applySurfaceColorTransform(dest:SurfaceRegion, source:SurfaceRegion, ct:ColorTransformLike):Void {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     w = FlightRuntime.callProperty(HxMath, 'min', cast ([FlightRuntime.field(dest, 'width'), FlightRuntime.field(source, 'width')] : Array<Dynamic>));
@@ -259,7 +256,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function applySurfaceCurve(out:SurfaceRegion, source:SurfaceRegion, redLut:Null<Dynamic>, greenLut:Null<Dynamic>, blueLut:Null<Dynamic>, ?alphaLut:Null<Dynamic>):Void {
+  public static function applySurfaceCurve(out:SurfaceRegion, source:SurfaceRegion, redLut:Null<Dynamic>, greenLut:Null<Dynamic>, blueLut:Null<Dynamic>, ?alphaLut:Null<Dynamic>):Void {
     if (alphaLut == null) alphaLut = cast (null : Dynamic);
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -300,7 +297,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(out, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function applySurfaceLevels(out:SurfaceRegion, source:SurfaceRegion, blackPoint:Float = 0.0, whitePoint:Float = 255.0, gamma:Float = 1.0):Void {
+  public static function applySurfaceLevels(out:SurfaceRegion, source:SurfaceRegion, blackPoint:Float = 0.0, whitePoint:Float = 255.0, gamma:Float = 1.0):Void {
     var bp:Dynamic = cast FlightRuntime.UNDEFINED;
     var wp:Dynamic = cast FlightRuntime.UNDEFINED;
     var span:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -322,7 +319,7 @@ class SurfaceApi {
     FlightRuntime.callValue(applySurfaceCurve, cast ([out, source, lut, lut, lut, null] : Array<Dynamic>));
   }
 
-  @:keep public static function applySurfacePaletteMap(dest:SurfaceRegion, source:SurfaceRegion, redMap:Null<Array<Float>>, greenMap:Null<Array<Float>>, blueMap:Null<Array<Float>>, alphaMap:Null<Array<Float>>):Void {
+  public static function applySurfacePaletteMap(dest:SurfaceRegion, source:SurfaceRegion, redMap:Null<Array<Float>>, greenMap:Null<Array<Float>>, blueMap:Null<Array<Float>>, alphaMap:Null<Array<Float>>):Void {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     var sd:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -362,7 +359,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function applySurfaceThreshold(dest:SurfaceRegion, source:SurfaceRegion, operation:ThresholdOperation, thresholdValue:Float, color:Float = 0.0, mask:Float = 4294967295.0, copySource:Bool = false):Float {
+  public static function applySurfaceThreshold(dest:SurfaceRegion, source:SurfaceRegion, operation:ThresholdOperation, thresholdValue:Float, color:Float = 0.0, mask:Float = 4294967295.0, copySource:Bool = false):Float {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     var sd:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -412,7 +409,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function bevelSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceBevelOptions):Void {
+  public static function bevelSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceBevelOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -478,7 +475,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function blendChannel__surfaceComposite(mode:SurfaceCompositeMode, cb:Float, cs:Float):Float {
+  public static function blendChannel__surfaceComposite(mode:SurfaceCompositeMode, cb:Float, cs:Float):Float {
     {
       var __switchValue = mode;
       if (__switchValue == Types.SurfaceCompositeModeValue.Multiply) {
@@ -530,7 +527,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function blurAlphaField__surfaceGradient(field:Dynamic, scratch:Dynamic, w:Float, h:Float, radiusX:Null<Float>, radiusY:Null<Float>, passes:Null<Float>):Void {
+  public static function blurAlphaField__surfaceGradient(field:Dynamic, scratch:Dynamic, w:Float, h:Float, radiusX:Null<Float>, radiusY:Null<Float>, passes:Null<Float>):Void {
     var rx:Dynamic = cast FlightRuntime.UNDEFINED;
     var ry:Dynamic = cast FlightRuntime.UNDEFINED;
     var p:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -562,7 +559,7 @@ class SurfaceApi {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(a, field))) { FlightRuntime.callProperty(field, 'set', cast ([a.subarray(Std.int(0.0), Std.int(((w * h) * 4.0)))] : Array<Dynamic>)); }
   }
 
-  @:keep public static function blurField__surfaceBevel(field:Dynamic, scratch:Dynamic, w:Float, h:Float, radiusX:Null<Float>, radiusY:Null<Float>, passes:Null<Float>):Void {
+  public static function blurField__surfaceBevel(field:Dynamic, scratch:Dynamic, w:Float, h:Float, radiusX:Null<Float>, radiusY:Null<Float>, passes:Null<Float>):Void {
     var rx:Dynamic = cast FlightRuntime.UNDEFINED;
     var ry:Dynamic = cast FlightRuntime.UNDEFINED;
     var p:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -594,7 +591,7 @@ class SurfaceApi {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(a, field))) { FlightRuntime.callProperty(field, 'set', cast ([a.subarray(Std.int(0.0), Std.int(((w * h) * 4.0)))] : Array<Dynamic>)); }
   }
 
-  @:keep public static function blurSurfacePixelsHorizontal(out:Dynamic, source:Dynamic, width:Float, height:Float, radius:Float):Void {
+  public static function blurSurfacePixelsHorizontal(out:Dynamic, source:Dynamic, width:Float, height:Float, radius:Float):Void {
     {
       var y:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(y, height, '<'))) {
@@ -651,7 +648,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function blurSurfacePixelsHorizontalWeighted(out:Dynamic, source:Dynamic, width:Float, height:Float, kernel:flight.internal.FlightFloat32Array):Void {
+  public static function blurSurfacePixelsHorizontalWeighted(out:Dynamic, source:Dynamic, width:Float, height:Float, kernel:flight.internal.FlightFloat32Array):Void {
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
     radius = (Std.int((FlightRuntime.field(kernel, 'length') - 1.0)) >> Std.int(1.0));
     {
@@ -690,7 +687,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function blurSurfacePixelsVertical(out:Dynamic, source:Dynamic, width:Float, height:Float, radius:Float):Void {
+  public static function blurSurfacePixelsVertical(out:Dynamic, source:Dynamic, width:Float, height:Float, radius:Float):Void {
     {
       var x:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(x, width, '<'))) {
@@ -746,7 +743,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function blurSurfacePixelsVerticalWeighted(out:Dynamic, source:Dynamic, width:Float, height:Float, kernel:flight.internal.FlightFloat32Array):Void {
+  public static function blurSurfacePixelsVerticalWeighted(out:Dynamic, source:Dynamic, width:Float, height:Float, kernel:flight.internal.FlightFloat32Array):Void {
     var radius:Dynamic = cast FlightRuntime.UNDEFINED;
     radius = (Std.int((FlightRuntime.field(kernel, 'length') - 1.0)) >> Std.int(1.0));
     {
@@ -785,7 +782,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function boxBlurSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceBoxBlurOptions):Void {
+  public static function boxBlurSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceBoxBlurOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var radiusX:Dynamic = cast FlightRuntime.UNDEFINED;
     var radiusY:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -821,7 +818,7 @@ class SurfaceApi {
 }
   }
 
-  @:keep public static function buildEqualizeMap__surfaceHistogram(bins:Array<Float>, total:Float):Array<Float> {
+  public static function buildEqualizeMap__surfaceHistogram(bins:Array<Float>, total:Float):Array<Float> {
     var map:Dynamic = cast FlightRuntime.UNDEFINED;
     var cdf:Dynamic = cast FlightRuntime.UNDEFINED;
     var cdfMin:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -841,17 +838,17 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function buildSurfaceBrightnessColorMatrix(out:Array<Float>, amount:Float):Void {
+  public static function buildSurfaceBrightnessColorMatrix(out:Array<Float>, amount:Float):Void {
     FlightRuntime.callValue(SurfaceApi.setColorMatrix__surfaceColorMatrix, cast ([out, amount, 0.0, 0.0, 0.0, 0.0, 0.0, amount, 0.0, 0.0, 0.0, 0.0, 0.0, amount, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function buildSurfaceContrastColorMatrix(out:Array<Float>, amount:Float):Void {
+  public static function buildSurfaceContrastColorMatrix(out:Array<Float>, amount:Float):Void {
     var t:Dynamic = cast FlightRuntime.UNDEFINED;
     t = (127.5 * (1.0 - amount));
     FlightRuntime.callValue(SurfaceApi.setColorMatrix__surfaceColorMatrix, cast ([out, amount, 0.0, 0.0, 0.0, t, 0.0, amount, 0.0, 0.0, t, 0.0, 0.0, amount, 0.0, t, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function buildSurfaceGradientRamp(out:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Void {
+  public static function buildSurfaceGradientRamp(out:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Void {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     n = FlightRuntime.field(ratios, 'length');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(n, 0.0))) {
@@ -895,11 +892,11 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function buildSurfaceGrayscaleColorMatrix(out:Array<Float>):Void {
+  public static function buildSurfaceGrayscaleColorMatrix(out:Array<Float>):Void {
     FlightRuntime.callValue(buildSurfaceSaturationColorMatrix, cast ([out, 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function buildSurfaceHueRotationColorMatrix(out:Array<Float>, degrees:Float):Void {
+  public static function buildSurfaceHueRotationColorMatrix(out:Array<Float>, degrees:Float):Void {
     var radians:Dynamic = cast FlightRuntime.UNDEFINED;
     var c:Dynamic = cast FlightRuntime.UNDEFINED;
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -909,11 +906,11 @@ class SurfaceApi {
     FlightRuntime.callValue(SurfaceApi.setColorMatrix__surfaceColorMatrix, cast ([out, ((0.213 + (c * 0.787)) - (s * 0.213)), ((0.715 - (c * 0.715)) - (s * 0.715)), ((0.072 - (c * 0.072)) + (s * 0.928)), 0.0, 0.0, ((0.213 - (c * 0.213)) + (s * 0.143)), ((0.715 + (c * 0.285)) + (s * 0.14)), ((0.072 - (c * 0.072)) - (s * 0.283)), 0.0, 0.0, ((0.213 - (c * 0.213)) - (s * 0.787)), ((0.715 - (c * 0.715)) + (s * 0.715)), ((0.072 + (c * 0.928)) + (s * 0.072)), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function buildSurfaceInvertColorMatrix(out:Array<Float>):Void {
+  public static function buildSurfaceInvertColorMatrix(out:Array<Float>):Void {
     FlightRuntime.callValue(SurfaceApi.setColorMatrix__surfaceColorMatrix, cast ([out, -1.0, 0.0, 0.0, 0.0, 255.0, 0.0, -1.0, 0.0, 0.0, 255.0, 0.0, 0.0, -1.0, 0.0, 255.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function buildSurfaceSaturationColorMatrix(out:Array<Float>, amount:Float):Void {
+  public static function buildSurfaceSaturationColorMatrix(out:Array<Float>, amount:Float):Void {
     var inv:Dynamic = cast FlightRuntime.UNDEFINED;
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -925,11 +922,11 @@ class SurfaceApi {
     FlightRuntime.callValue(SurfaceApi.setColorMatrix__surfaceColorMatrix, cast ([out, (r + amount), g, b, 0.0, 0.0, r, (g + amount), b, 0.0, 0.0, r, g, (b + amount), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function buildSurfaceSepiaColorMatrix(out:Array<Float>):Void {
+  public static function buildSurfaceSepiaColorMatrix(out:Array<Float>):Void {
     FlightRuntime.callValue(SurfaceApi.setColorMatrix__surfaceColorMatrix, cast ([out, 0.393, 0.769, 0.189, 0.0, 0.0, 0.349, 0.686, 0.168, 0.0, 0.0, 0.272, 0.534, 0.131, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function catmullRomWeight__surfaceAffine(t:Float):Float {
+  public static function catmullRomWeight__surfaceAffine(t:Float):Float {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     a = FlightRuntime.callProperty(HxMath, 'abs', cast ([t] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.compare(a, 2.0, '>='))) { return cast 0.0; }
@@ -938,7 +935,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function catmullRomWeight__surfaceResize(t:Float):Float {
+  public static function catmullRomWeight__surfaceResize(t:Float):Float {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     a = FlightRuntime.callProperty(HxMath, 'abs', cast ([t] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.compare(a, 2.0, '>='))) { return cast 0.0; }
@@ -947,7 +944,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function catmullRomWeight__surfaceWarp(t:Float):Float {
+  public static function catmullRomWeight__surfaceWarp(t:Float):Float {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     a = FlightRuntime.callProperty(HxMath, 'abs', cast ([t] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.compare(a, 2.0, '>='))) { return cast 0.0; }
@@ -956,7 +953,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function channelOffsets__surfaceFormat(order:PixelOrder):Array<Float> {
+  public static function channelOffsets__surfaceFormat(order:PixelOrder):Array<Float> {
     {
       var __switchValue = order;
       if (__switchValue == 'RGBA') {
@@ -975,22 +972,22 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function clampByte__surfaceColorMatrix(value:Float):Float {
+  public static function clampByte__surfaceColorMatrix(value:Float):Float {
     return cast FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'min', cast ([255.0, FlightRuntime.callProperty(HxMath, 'round', cast ([value] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function clampByte__surfaceConvolution(value:Float):Float {
+  public static function clampByte__surfaceConvolution(value:Float):Float {
     return cast FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'min', cast ([255.0, FlightRuntime.callProperty(HxMath, 'round', cast ([value] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function cloneSurface(source:Surface):Surface {
+  public static function cloneSurface(source:Surface):Surface {
     return cast FlightRuntime.callValue(createEntity, cast ([{ alphaType: FlightRuntime.field(source, 'alphaType'), colorSpace: FlightRuntime.field(source, 'colorSpace'), compressed: null, data: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [FlightRuntime.field(source, 'data')]), format: FlightRuntime.field(source, 'format'), height: FlightRuntime.field(source, 'height'), source: null, version: 0.0, width: FlightRuntime.field(source, 'width') }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function colorMatrixSurface(out:Dynamic, source:SurfaceRegion, matrix:Array<Float>):Void {
+  public static function colorMatrixSurface(out:Dynamic, source:SurfaceRegion, matrix:Array<Float>):Void {
     if (FlightRuntime.truthy(FlightRuntime.compare(FlightRuntime.field(matrix, 'length'), 20.0, '<'))) { throw FlightRuntime.error('Color matrix filter requires 20 values'); }
     {
       var py:Dynamic = 0.0;
@@ -1020,7 +1017,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function compare__surfaceTransform(a:Float, op:ThresholdOperation, b:Float):Bool {
+  public static function compare__surfaceTransform(a:Float, op:ThresholdOperation, b:Float):Bool {
     {
       var __switchValue = op;
       if (__switchValue == '<') {
@@ -1045,7 +1042,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function compareSurface(source:Surface, other:Surface):Null<Surface> {
+  public static function compareSurface(source:Surface, other:Surface):Null<Surface> {
     var result:Dynamic = cast FlightRuntime.UNDEFINED;
     var hasDiff:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(!FlightRuntime.strictEquals(FlightRuntime.field(source, 'width'), FlightRuntime.field(other, 'width')), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(source, 'height'), FlightRuntime.field(other, 'height'))))) {
@@ -1074,7 +1071,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function compareSurfaceFingerprints(a:SurfaceFingerprint, b:SurfaceFingerprint):Float {
+  public static function compareSurfaceFingerprints(a:SurfaceFingerprint, b:SurfaceFingerprint):Float {
     var sum:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(a, 'gridSize'), FlightRuntime.field(b, 'gridSize')))) {
   throw FlightRuntime.error('compareSurfaceFingerprints: gridSize mismatch (' + Std.string(FlightRuntime.field(a, 'gridSize')) + ' vs ' + Std.string(FlightRuntime.field(b, 'gridSize')) + ')');
@@ -1092,7 +1089,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function compositePixelInto__surfaceComposite(dest:Dynamic, di:Float, r:Float, g:Float, b:Float, a:Float, mode:SurfaceCompositeMode):Void {
+  public static function compositePixelInto__surfaceComposite(dest:Dynamic, di:Float, r:Float, g:Float, b:Float, a:Float, mode:SurfaceCompositeMode):Void {
     var srcA:Dynamic = cast FlightRuntime.UNDEFINED;
     var dstA:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1130,7 +1127,7 @@ class SurfaceApi {
     FlightRuntime.setIndex(dest, (di + 3.0), FlightRuntime.callProperty(HxMath, 'round', cast ([(outA * 255.0)] : Array<Dynamic>)));
   }
 
-  @:keep public static function compositeSurfacePixels(dest:SurfaceRegion, pixels:Dynamic, ?mode:SurfaceCompositeMode):Void {
+  public static function compositeSurfacePixels(dest:SurfaceRegion, pixels:Dynamic, ?mode:SurfaceCompositeMode):Void {
     if (mode == null) mode = cast (Types.SurfaceCompositeModeValue.Normal : Dynamic);
     {
       var py:Dynamic = 0.0;
@@ -1153,7 +1150,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function compositeSurfaceRegion(dest:SurfaceRegion, source:SurfaceRegion, ?mode:SurfaceCompositeMode):Void {
+  public static function compositeSurfaceRegion(dest:SurfaceRegion, source:SurfaceRegion, ?mode:SurfaceCompositeMode):Void {
     if (mode == null) mode = cast (Types.SurfaceCompositeModeValue.Normal : Dynamic);
     var sw:Dynamic = cast FlightRuntime.UNDEFINED;
     var sh:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1182,7 +1179,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function computeGaussianKernel(out:flight.internal.FlightFloat32Array, radius:Float, sigma:Float):Void {
+  public static function computeGaussianKernel(out:flight.internal.FlightFloat32Array, radius:Float, sigma:Float):Void {
     var len:Dynamic = cast FlightRuntime.UNDEFINED;
     var sum:Dynamic = cast FlightRuntime.UNDEFINED;
     var twoSigmaSq:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1212,7 +1209,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function computeHomography__surfaceWarp(src:Array<Float>, dst:Array<Float>):Null<Array<Float>> {
+  public static function computeHomography__surfaceWarp(src:Array<Float>, dst:Array<Float>):Null<Array<Float>> {
     var A:Array<Array<Float>> = cast FlightRuntime.UNDEFINED;
     var b:Array<Float> = cast FlightRuntime.UNDEFINED;
     var M:Array<Array<Float>> = cast FlightRuntime.UNDEFINED;
@@ -1247,7 +1244,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function concatSurfaceColorMatrix(out:Array<Float>, first:Array<Float>, second:Array<Float>):Void {
+  public static function concatSurfaceColorMatrix(out:Array<Float>, first:Array<Float>, second:Array<Float>):Void {
     {
       var row:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(row, 4.0, '<'))) {
@@ -1271,7 +1268,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function convertSurfaceAlphaType(out:Surface, target:AlphaType):Void {
+  public static function convertSurfaceAlphaType(out:Surface, target:AlphaType):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var len:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(out, 'alphaType'), target))) { return; }
@@ -1311,7 +1308,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([out] : Array<Dynamic>));
   }
 
-  @:keep public static function convertSurfacePixelOrder(out:Dynamic, source:Dynamic, length:Float, from:PixelOrder, to:PixelOrder):Void {
+  public static function convertSurfacePixelOrder(out:Dynamic, source:Dynamic, length:Float, from:PixelOrder, to:PixelOrder):Void {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var srcR:Dynamic = cast FlightRuntime.UNDEFINED;
     var srcG:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1352,7 +1349,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function convolveSurface(out:Dynamic, source:SurfaceRegion, options:SurfaceConvolutionOptions):Void {
+  public static function convolveSurface(out:Dynamic, source:SurfaceRegion, options:SurfaceConvolutionOptions):Void {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var matrix:Dynamic = cast FlightRuntime.UNDEFINED;
     var matrixX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1453,7 +1450,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function copyMirrored__surfaceFlip(dest:SurfaceRegion, source:SurfaceRegion, w:Float, h:Float, mirrorX:Bool, mirrorY:Bool):Void {
+  public static function copyMirrored__surfaceFlip(dest:SurfaceRegion, source:SurfaceRegion, w:Float, h:Float, mirrorX:Bool, mirrorY:Bool):Void {
     var sd:Dynamic = cast FlightRuntime.UNDEFINED;
     var dd:Dynamic = cast FlightRuntime.UNDEFINED;
     var sStride:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1488,14 +1485,14 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function copyPixel__surfaceRotate(dest:Dynamic, di:Float, source:Dynamic, si:Float):Void {
+  public static function copyPixel__surfaceRotate(dest:Dynamic, di:Float, source:Dynamic, si:Float):Void {
     FlightRuntime.setIndex(dest, di, FlightRuntime.getIndex(source, si));
     FlightRuntime.setIndex(dest, (di + 1.0), FlightRuntime.getIndex(source, (si + 1.0)));
     FlightRuntime.setIndex(dest, (di + 2.0), FlightRuntime.getIndex(source, (si + 2.0)));
     FlightRuntime.setIndex(dest, (di + 3.0), FlightRuntime.getIndex(source, (si + 3.0)));
   }
 
-  @:keep public static function copySurfaceAlpha(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function copySurfaceAlpha(dest:SurfaceRegion, source:SurfaceRegion):Void {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     var sd:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1529,7 +1526,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function copySurfaceChannel(dest:SurfaceRegion, destChannel:ImageChannel, source:SurfaceRegion, sourceChannel:ImageChannel):Void {
+  public static function copySurfaceChannel(dest:SurfaceRegion, destChannel:ImageChannel, source:SurfaceRegion, sourceChannel:ImageChannel):Void {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     w = FlightRuntime.callProperty(HxMath, 'min', cast ([FlightRuntime.field(dest, 'width'), FlightRuntime.field(source, 'width')] : Array<Dynamic>));
@@ -1558,7 +1555,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function copySurfacePixels(dest:SurfaceRegion, source:SurfaceRegion, composite:Bool = false):Void {
+  public static function copySurfacePixels(dest:SurfaceRegion, source:SurfaceRegion, composite:Bool = false):Void {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     var sd:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1606,7 +1603,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function createImageResourceFromSurface(surface:Surface):ImageResource {
+  public static function createImageResourceFromSurface(surface:Surface):ImageResource {
     var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
     var domImageData:Dynamic = cast FlightRuntime.UNDEFINED;
     canvas = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -1619,7 +1616,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function createSurface(width:Float, height:Float, color:Float = 0.0):Surface {
+  public static function createSurface(width:Float, height:Float, color:Float = 0.0):Surface {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     data = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [((width * height) * 4.0)]);
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(color, 0.0))) {
@@ -1642,7 +1639,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function createSurfaceFingerprint(source:Surface, gridSize:Float = 16.0):SurfaceFingerprint {
+  public static function createSurfaceFingerprint(source:Surface, gridSize:Float = 16.0):SurfaceFingerprint {
     var cells:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var width:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1701,7 +1698,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function createSurfaceFromCanvas(canvas:Dynamic, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):Surface {
+  public static function createSurfaceFromCanvas(canvas:Dynamic, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):Surface {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     var ctx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1714,7 +1711,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function createSurfaceFromImageResource(resource:ImageResource):Surface {
+  public static function createSurfaceFromImageResource(resource:ImageResource):Surface {
     var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
     var ctx:Dynamic = cast FlightRuntime.UNDEFINED;
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1731,7 +1728,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function createSurfaceFromImageSource(source:Dynamic, width:Float, height:Float):Surface {
+  public static function createSurfaceFromImageSource(source:Dynamic, width:Float, height:Float):Surface {
     var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
     var ctx:Dynamic = cast FlightRuntime.UNDEFINED;
     var raw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1745,14 +1742,14 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function createSurfaceRegion(surface:Surface, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):SurfaceRegion {
+  public static function createSurfaceRegion(surface:Surface, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):SurfaceRegion {
     if (width == null) width = cast (FlightRuntime.field(surface, 'width') : Dynamic);
     if (height == null) height = cast (FlightRuntime.field(surface, 'height') : Dynamic);
     return cast { surface: surface, x: x, y: y, width: width, height: height };
     return cast null;
   }
 
-  @:keep public static function cropSurface(source:Surface, rect:RectangleLike):Surface {
+  public static function cropSurface(source:Surface, rect:RectangleLike):Surface {
     var sw:Dynamic = cast FlightRuntime.UNDEFINED;
     var sh:Dynamic = cast FlightRuntime.UNDEFINED;
     var rx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1795,11 +1792,11 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function dilateSurface(out:Dynamic, source:SurfaceRegion, radius:Float):Void {
+  public static function dilateSurface(out:Dynamic, source:SurfaceRegion, radius:Float):Void {
     FlightRuntime.callValue(SurfaceApi.applyMorphological__surfaceMorphological, cast ([out, source, radius, true] : Array<Dynamic>));
   }
 
-  @:keep public static function displaceSurface(out:Dynamic, source:SurfaceRegion, options:SurfaceDisplacementMapOptions):Void {
+  public static function displaceSurface(out:Dynamic, source:SurfaceRegion, options:SurfaceDisplacementMapOptions):Void {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     var map:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1912,7 +1909,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function dissolveSurfacePixels(dest:SurfaceRegion, source:SurfaceRegion, seed:Float, pixelCount:Float, fillColor:Float = 0.0):Float {
+  public static function dissolveSurfacePixels(dest:SurfaceRegion, source:SurfaceRegion, seed:Float, pixelCount:Float, fillColor:Float = 0.0):Float {
     var width:Dynamic = cast FlightRuntime.UNDEFINED;
     var height:Dynamic = cast FlightRuntime.UNDEFINED;
     var total:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1986,7 +1983,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function drawSurface(dest:Dynamic, source:SurfaceRegion, x:Float, y:Float):Void {
+  public static function drawSurface(dest:Dynamic, source:SurfaceRegion, x:Float, y:Float):Void {
     var domImageData:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.compare(FlightRuntime.field(source, 'width'), 0.0, '<='), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(source, 'height'), 0.0, '<=')))) { return; }
     domImageData = FlightRuntime.construct(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['globalThis'] : Array<Dynamic>)), 'ImageData'), [FlightRuntime.field(source, 'width'), FlightRuntime.field(source, 'height')]);
@@ -1994,13 +1991,13 @@ class SurfaceApi {
     FlightRuntime.callProperty(FlightRuntime.callProperty(dest, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, x, y] : Array<Dynamic>));
   }
 
-  @:keep public static function dropShadowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceDropShadowOptions):Void {
+  public static function dropShadowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceDropShadowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     FlightRuntime.callValue(SurfaceApi.tintSurfaceAlphaMask__surfaceShadow, cast ([out, source, FlightRuntime.coalesce(FlightRuntime.field(options, 'color'), function():Dynamic return cast 255.0), FlightRuntime.coalesce(FlightRuntime.field(options, 'intensity'), function():Dynamic return cast 1.0)] : Array<Dynamic>));
     FlightRuntime.callValue(SurfaceApi.applyBlurPasses__surfaceShadow, cast ([out, scratch, FlightRuntime.field(source, 'width'), FlightRuntime.field(source, 'height'), options] : Array<Dynamic>));
   }
 
-  @:keep public static function encodeSurface(source:Surface, format:ImageFormat = 'png', quality:Float = 0.9):Dynamic {
+  public static function encodeSurface(source:Surface, format:ImageFormat = 'png', quality:Float = 0.9):Dynamic {
     var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
     var domImageData:Dynamic = cast FlightRuntime.UNDEFINED;
     var mimeType:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2030,7 +2027,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function equalizeSurfaceHistogram(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function equalizeSurfaceHistogram(dest:SurfaceRegion, source:SurfaceRegion):Void {
     var histogram:Dynamic = cast FlightRuntime.UNDEFINED;
     var total:Dynamic = cast FlightRuntime.UNDEFINED;
     histogram = FlightRuntime.callValue(getSurfaceHistogram, cast ([source] : Array<Dynamic>));
@@ -2039,11 +2036,11 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function erodeSurface(out:Dynamic, source:SurfaceRegion, radius:Float):Void {
+  public static function erodeSurface(out:Dynamic, source:SurfaceRegion, radius:Float):Void {
     FlightRuntime.callValue(SurfaceApi.applyMorphological__surfaceMorphological, cast ([out, source, radius, false] : Array<Dynamic>));
   }
 
-  @:keep public static function extendSurface(source:Surface, left:Float, top:Float, right:Float, bottom:Float, edgeMode:SurfaceEdgeMode = 'transparent', fillColor:Dynamic = 0.0):Surface {
+  public static function extendSurface(source:Surface, left:Float, top:Float, right:Float, bottom:Float, edgeMode:SurfaceEdgeMode = 'transparent', fillColor:Dynamic = 0.0):Surface {
     var sw:Dynamic = cast FlightRuntime.UNDEFINED;
     var sh:Dynamic = cast FlightRuntime.UNDEFINED;
     var dw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2105,7 +2102,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function extractSurfacePixels(out:Dynamic, source:SurfaceRegion):Void {
+  public static function extractSurfacePixels(out:Dynamic, source:SurfaceRegion):Void {
     {
       var py:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(py, FlightRuntime.field(source, 'height'), '<'))) {
@@ -2130,7 +2127,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function extractSurfacePixels32(out:Dynamic, source:SurfaceRegion):Void {
+  public static function extractSurfacePixels32(out:Dynamic, source:SurfaceRegion):Void {
     {
       var py:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(py, FlightRuntime.field(source, 'height'), '<'))) {
@@ -2151,7 +2148,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function fillSurfaceLinearGradient(dest:SurfaceRegion, ramp:Dynamic, x0:Float, y0:Float, x1:Float, y1:Float, spread:GradientSpread = 'pad'):Void {
+  public static function fillSurfaceLinearGradient(dest:SurfaceRegion, ramp:Dynamic, x0:Float, y0:Float, x1:Float, y1:Float, spread:GradientSpread = 'pad'):Void {
     var dw:Dynamic = cast FlightRuntime.UNDEFINED;
     var dh:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2197,7 +2194,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function fillSurfaceNoise(dest:SurfaceRegion, seed:Float, low:Float = 0.0, high:Float = 255.0, grayScale:Bool = false):Void {
+  public static function fillSurfaceNoise(dest:SurfaceRegion, seed:Float, low:Float = 0.0, high:Float = 255.0, grayScale:Bool = false):Void {
     var state:Dynamic = cast FlightRuntime.UNDEFINED;
     var lo:Dynamic = cast FlightRuntime.UNDEFINED;
     var span:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2241,7 +2238,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function fillSurfacePerlinNoise(dest:SurfaceRegion, baseX:Float, baseY:Float, octaves:Float, seed:Float, grayScale:Bool = false, stitch:Bool = false, channelOptions:Float = 7.0):Void {
+  public static function fillSurfacePerlinNoise(dest:SurfaceRegion, baseX:Float, baseY:Float, octaves:Float, seed:Float, grayScale:Bool = false, stitch:Bool = false, channelOptions:Float = 7.0):Void {
     var fx0:Dynamic = cast FlightRuntime.UNDEFINED;
     var fy0:Dynamic = cast FlightRuntime.UNDEFINED;
     var passes:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2300,7 +2297,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function fillSurfaceRadialGradient(dest:SurfaceRegion, ramp:Dynamic, cx:Float, cy:Float, radius:Float, ?focalX:Float, ?focalY:Float, spread:GradientSpread = 'pad'):Void {
+  public static function fillSurfaceRadialGradient(dest:SurfaceRegion, ramp:Dynamic, cx:Float, cy:Float, radius:Float, ?focalX:Float, ?focalY:Float, spread:GradientSpread = 'pad'):Void {
     if (focalX == null) focalX = cast (cx : Dynamic);
     if (focalY == null) focalY = cast (cy : Dynamic);
     var dw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2348,7 +2345,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function fillSurfaceRectangle(dest:SurfaceRegion, color:Float):Void {
+  public static function fillSurfaceRectangle(dest:SurfaceRegion, color:Float):Void {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var g:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2381,7 +2378,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function fillSurfaceTurbulence(dest:SurfaceRegion, baseX:Float, baseY:Float, octaves:Float, seed:Float, grayScale:Bool = false, stitch:Bool = false, channelOptions:Float = 7.0):Void {
+  public static function fillSurfaceTurbulence(dest:SurfaceRegion, baseX:Float, baseY:Float, octaves:Float, seed:Float, grayScale:Bool = false, stitch:Bool = false, channelOptions:Float = 7.0):Void {
     var fx0:Dynamic = cast FlightRuntime.UNDEFINED;
     var fy0:Dynamic = cast FlightRuntime.UNDEFINED;
     var passes:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2440,7 +2437,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function flipSurfaceHorizontal(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function flipSurfaceHorizontal(dest:SurfaceRegion, source:SurfaceRegion):Void {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2475,7 +2472,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function flipSurfaceVertical(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function flipSurfaceVertical(dest:SurfaceRegion, source:SurfaceRegion):Void {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2510,7 +2507,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function floodFillSurface(out:Surface, x:Float, y:Float, color:Float):Void {
+  public static function floodFillSurface(out:Surface, x:Float, y:Float, color:Float):Void {
     var fillR:Dynamic = cast FlightRuntime.UNDEFINED;
     var fillG:Dynamic = cast FlightRuntime.UNDEFINED;
     var fillB:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2564,7 +2561,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([out] : Array<Dynamic>));
   }
 
-  @:keep public static function formatSurfaceFingerprint(fingerprint:SurfaceFingerprint):String {
+  public static function formatSurfaceFingerprint(fingerprint:SurfaceFingerprint):String {
     var cells:Dynamic = cast FlightRuntime.UNDEFINED;
     var hex:Dynamic = cast FlightRuntime.UNDEFINED;
     cells = FlightRuntime.field(fingerprint, 'cells');
@@ -2580,7 +2577,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function fractalValueNoise__surfaceNoise(x:Float, y:Float, octaves:Float, seed:Float):Float {
+  public static function fractalValueNoise__surfaceNoise(x:Float, y:Float, octaves:Float, seed:Float):Float {
     var sum:Dynamic = cast FlightRuntime.UNDEFINED;
     var amplitude:Dynamic = cast FlightRuntime.UNDEFINED;
     var amplitudeSum:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2603,7 +2600,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function gaussianBlurSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, sigmaX:Float, ?sigmaY:Float, passes:Float = 1.0):Void {
+  public static function gaussianBlurSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, sigmaX:Float, ?sigmaY:Float, passes:Float = 1.0):Void {
     if (sigmaY == null) sigmaY = cast (sigmaX : Dynamic);
     var passCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var radiusX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2645,7 +2642,7 @@ class SurfaceApi {
 }
   }
 
-  @:keep public static function getConvolutionDivisor__surfaceConvolution(matrix:Array<Float>, length:Float):Float {
+  public static function getConvolutionDivisor__surfaceConvolution(matrix:Array<Float>, length:Float):Float {
     var sum:Dynamic = cast FlightRuntime.UNDEFINED;
     sum = 0.0;
     {
@@ -2659,7 +2656,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function getSurfaceColorBoundsRectangle(source:SurfaceRegion, mask:Float, color:Float, findColor:Bool = true):Null<RectangleLike> {
+  public static function getSurfaceColorBoundsRectangle(source:SurfaceRegion, mask:Float, color:Float, findColor:Bool = true):Null<RectangleLike> {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var surfaceWidth:Dynamic = cast FlightRuntime.UNDEFINED;
     var maskedColor:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2704,7 +2701,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function getSurfaceCoverage(source:Surface, backgroundColor:Float, channelTolerance:Float = 0.0):Float {
+  public static function getSurfaceCoverage(source:Surface, backgroundColor:Float, channelTolerance:Float = 0.0):Float {
     var br:Dynamic = cast FlightRuntime.UNDEFINED;
     var bg:Dynamic = cast FlightRuntime.UNDEFINED;
     var bb:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2733,7 +2730,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function getSurfaceHistogram(source:SurfaceRegion):SurfaceHistogram {
+  public static function getSurfaceHistogram(source:SurfaceRegion):SurfaceHistogram {
     var red:Dynamic = cast FlightRuntime.UNDEFINED;
     var green:Dynamic = cast FlightRuntime.UNDEFINED;
     var blue:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2771,7 +2768,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function getSurfaceMismatch(source:Surface, other:Surface, channelTolerance:Float = 0.0):SurfaceMismatch {
+  public static function getSurfaceMismatch(source:Surface, other:Surface, channelTolerance:Float = 0.0):SurfaceMismatch {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     var totalPixels:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2802,39 +2799,39 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function getSurfacePixel(source:Surface, x:Float, y:Float):Float {
+  public static function getSurfacePixel(source:Surface, x:Float, y:Float):Float {
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     i = (((y * FlightRuntime.field(source, 'width')) + x) * 4.0);
     return cast FlightRuntime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(FlightRuntime.getIndex(FlightRuntime.field(source, 'data'), i)) << Std.int(24.0))) | Std.int((Std.int(FlightRuntime.getIndex(FlightRuntime.field(source, 'data'), (i + 1.0))) << Std.int(16.0))))) | Std.int((Std.int(FlightRuntime.getIndex(FlightRuntime.field(source, 'data'), (i + 2.0))) << Std.int(8.0))))) | Std.int(FlightRuntime.getIndex(FlightRuntime.field(source, 'data'), (i + 3.0))))), Std.int(0.0));
     return cast null;
   }
 
-  @:keep public static function getSurfacePixelChannel(source:Surface, x:Float, y:Float, channel:ImageChannel):Float {
+  public static function getSurfacePixelChannel(source:Surface, x:Float, y:Float, channel:ImageChannel):Float {
     return cast FlightRuntime.getIndex(FlightRuntime.field(source, 'data'), ((((y * FlightRuntime.field(source, 'width')) + x) * 4.0) + channel));
     return cast null;
   }
 
-  @:keep public static function getSurfacePixelLuminance(source:Surface, x:Float, y:Float):Float {
+  public static function getSurfacePixelLuminance(source:Surface, x:Float, y:Float):Float {
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     i = (((y * FlightRuntime.field(source, 'width')) + x) * 4.0);
     return cast FlightRuntime.callProperty(HxMath, 'round', cast ([(((FlightRuntime.getIndex(FlightRuntime.field(source, 'data'), i) * SurfaceApi.LUMA_R__surfacePixel) + (FlightRuntime.getIndex(FlightRuntime.field(source, 'data'), (i + 1.0)) * SurfaceApi.LUMA_G__surfacePixel)) + (FlightRuntime.getIndex(FlightRuntime.field(source, 'data'), (i + 2.0)) * SurfaceApi.LUMA_B__surfacePixel))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getSurfacePixelRgb(source:Surface, x:Float, y:Float):Float {
+  public static function getSurfacePixelRgb(source:Surface, x:Float, y:Float):Float {
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     i = (((y * FlightRuntime.field(source, 'width')) + x) * 4.0);
     return cast FlightRuntime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int(FlightRuntime.getIndex(FlightRuntime.field(source, 'data'), i)) << Std.int(16.0))) | Std.int((Std.int(FlightRuntime.getIndex(FlightRuntime.field(source, 'data'), (i + 1.0))) << Std.int(8.0))))) | Std.int(FlightRuntime.getIndex(FlightRuntime.field(source, 'data'), (i + 2.0))))), Std.int(0.0));
     return cast null;
   }
 
-  @:keep public static function glowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceGlowOptions):Void {
+  public static function glowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceGlowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     FlightRuntime.callValue(SurfaceApi.tintSurfaceAlphaMask__surfaceShadow, cast ([out, source, FlightRuntime.coalesce(FlightRuntime.field(options, 'color'), function():Dynamic return cast 4278190335.0), FlightRuntime.coalesce(FlightRuntime.field(options, 'intensity'), function():Dynamic return cast 1.0)] : Array<Dynamic>));
     FlightRuntime.callValue(SurfaceApi.applyBlurPasses__surfaceShadow, cast ([out, scratch, FlightRuntime.field(source, 'width'), FlightRuntime.field(source, 'height'), options] : Array<Dynamic>));
   }
 
-  @:keep public static function gradientBevelSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ramp:Dynamic, ?options:SurfaceGradientBevelOptions):Void {
+  public static function gradientBevelSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ramp:Dynamic, ?options:SurfaceGradientBevelOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2895,7 +2892,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function gradientGlowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ramp:Dynamic, ?options:SurfaceGradientGlowOptions):Void {
+  public static function gradientGlowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ramp:Dynamic, ?options:SurfaceGradientGlowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2941,7 +2938,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function hashLattice__surfaceNoise(ix:Float, iy:Float, seed:Float):Float {
+  public static function hashLattice__surfaceNoise(ix:Float, iy:Float, seed:Float):Float {
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     h = (Std.int(((FlightRuntime.imul(Std.int(ix), Std.int(374761393.0)) + FlightRuntime.imul(Std.int(iy), Std.int(668265263.0))) + FlightRuntime.imul(Std.int(seed), Std.int(2654435761.0)))) | Std.int(0.0));
     (h = cast (FlightRuntime.imul(Std.int((Std.int(h) ^ Std.int(FlightRuntime.unsignedShiftRight(Std.int(h), Std.int(13.0))))), Std.int(1274126177.0)) : Dynamic));
@@ -2951,22 +2948,22 @@ class SurfaceApi {
 
   public static final HEX__surfaceFingerprint:Dynamic = '0123456789abcdef';
 
-  @:keep public static function inBounds__surfaceRotate(x:Float, y:Float, width:Float, height:Float):Bool {
+  public static function inBounds__surfaceRotate(x:Float, y:Float, width:Float, height:Float):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.compare(x, 0.0, '>='), function():Dynamic return cast FlightRuntime.compare(x, width, '<')), function():Dynamic return cast FlightRuntime.compare(y, 0.0, '>=')), function():Dynamic return cast FlightRuntime.compare(y, height, '<'));
     return cast null;
   }
 
-  @:keep public static function innerGlowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceInnerGlowOptions):Void {
+  public static function innerGlowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceInnerGlowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     FlightRuntime.callValue(SurfaceApi.applyInnerEffect__surfaceShadow, cast ([out, scratch, source, FlightRuntime.coalesce(FlightRuntime.field(options, 'color'), function():Dynamic return cast 4278190335.0), options, 0.0, 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function innerShadowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceInnerShadowOptions):Void {
+  public static function innerShadowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceInnerShadowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     FlightRuntime.callValue(SurfaceApi.applyInnerEffect__surfaceShadow, cast ([out, scratch, source, FlightRuntime.coalesce(FlightRuntime.field(options, 'color'), function():Dynamic return cast 255.0), options, FlightRuntime.coalesce(FlightRuntime.field(options, 'offsetX'), function():Dynamic return cast 0.0), FlightRuntime.coalesce(FlightRuntime.field(options, 'offsetY'), function():Dynamic return cast 0.0)] : Array<Dynamic>));
   }
 
-  @:keep public static function invertMatrix3x3__surfaceWarp(m:Array<Float>):Null<Array<Float>> {
+  public static function invertMatrix3x3__surfaceWarp(m:Array<Float>):Null<Array<Float>> {
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2996,17 +2993,17 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function isSameRegion__surfaceFlip(a:SurfaceRegion, b:SurfaceRegion):Bool {
+  public static function isSameRegion__surfaceFlip(a:SurfaceRegion, b:SurfaceRegion):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.field(a, 'surface'), FlightRuntime.field(b, 'surface')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'x'), FlightRuntime.field(b, 'x'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'y'), FlightRuntime.field(b, 'y'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'width'), FlightRuntime.field(b, 'width'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'height'), FlightRuntime.field(b, 'height')));
     return cast null;
   }
 
-  @:keep public static function isSameRegion__surfaceRotate(a:SurfaceRegion, b:SurfaceRegion):Bool {
+  public static function isSameRegion__surfaceRotate(a:SurfaceRegion, b:SurfaceRegion):Bool {
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.field(a, 'surface'), FlightRuntime.field(b, 'surface')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'x'), FlightRuntime.field(b, 'x'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'y'), FlightRuntime.field(b, 'y'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'width'), FlightRuntime.field(b, 'width'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'height'), FlightRuntime.field(b, 'height')));
     return cast null;
   }
 
-  @:keep public static function lerp__surfaceGradient(from:Float, to:Float, t:Float):Float {
+  public static function lerp__surfaceGradient(from:Float, to:Float, t:Float):Float {
     return cast (from + ((to - from) * t));
     return cast null;
   }
@@ -3023,12 +3020,12 @@ class SurfaceApi {
 
   public static final LUMA_R__surfacePixel:Dynamic = 0.2126;
 
-  @:keep public static function makeSurface__surfaceChannel(data:Dynamic, width:Float, height:Float, source:Surface):Surface {
+  public static function makeSurface__surfaceChannel(data:Dynamic, width:Float, height:Float, source:Surface):Surface {
     return cast FlightRuntime.callValue(createEntity, cast ([{ alphaType: FlightRuntime.field(source, 'alphaType'), colorSpace: FlightRuntime.field(source, 'colorSpace'), compressed: null, data: data, format: FlightRuntime.field(source, 'format'), height: height, source: null, version: 0.0, width: width }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function medianOf__surfaceMedian(values:Dynamic, n:Float, mid:Float):Float {
+  public static function medianOf__surfaceMedian(values:Dynamic, n:Float, mid:Float):Float {
     {
       var i:Dynamic = 1.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(i, n, '<'))) {
@@ -3046,7 +3043,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function medianSurface(out:Dynamic, source:SurfaceRegion, radius:Float):Void {
+  public static function medianSurface(out:Dynamic, source:SurfaceRegion, radius:Float):Void {
     var r:Dynamic = cast FlightRuntime.UNDEFINED;
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3116,7 +3113,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function mergeSurface(dest:SurfaceRegion, source:SurfaceRegion, redMultiplier:Float, greenMultiplier:Float, blueMultiplier:Float, alphaMultiplier:Float):Void {
+  public static function mergeSurface(dest:SurfaceRegion, source:SurfaceRegion, redMultiplier:Float, greenMultiplier:Float, blueMultiplier:Float, alphaMultiplier:Float):Void {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     var sd:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3152,7 +3149,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function mergeSurfaceChannels(out:SurfaceRegion, r:SurfaceRegion, g:SurfaceRegion, b:SurfaceRegion, a:SurfaceRegion):Void {
+  public static function mergeSurfaceChannels(out:SurfaceRegion, r:SurfaceRegion, g:SurfaceRegion, b:SurfaceRegion, a:SurfaceRegion):Void {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     var od:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3199,7 +3196,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(out, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function multiplySurfaceAlpha(out:SurfaceRegion, factor:Float):Void {
+  public static function multiplySurfaceAlpha(out:SurfaceRegion, factor:Float):Void {
     var f:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var surfaceWidth:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3227,7 +3224,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(out, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function nextRandomState__surfaceNoise(state:Float):Float {
+  public static function nextRandomState__surfaceNoise(state:Float):Float {
     var t:Dynamic = cast FlightRuntime.UNDEFINED;
     t = (Std.int((state + 1831565813.0)) | Std.int(0.0));
     (t = cast (FlightRuntime.imul(Std.int((Std.int(t) ^ Std.int(FlightRuntime.unsignedShiftRight(Std.int(t), Std.int(15.0))))), Std.int((Std.int(t) | Std.int(1.0)))) : Dynamic));
@@ -3236,7 +3233,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function parseSurfaceFingerprint(text:String):Null<SurfaceFingerprint> {
+  public static function parseSurfaceFingerprint(text:String):Null<SurfaceFingerprint> {
     var colon:Dynamic = cast FlightRuntime.UNDEFINED;
     var gridSize:Dynamic = cast FlightRuntime.UNDEFINED;
     var hex:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3262,7 +3259,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function permutePixelIndex__surfaceDissolve(cursor:Float, bits:Float, mask:Float):Float {
+  public static function permutePixelIndex__surfaceDissolve(cursor:Float, bits:Float, mask:Float):Float {
     var v:Dynamic = cast FlightRuntime.UNDEFINED;
     var shift:Dynamic = cast FlightRuntime.UNDEFINED;
     v = (Std.int(cursor) & Std.int(mask));
@@ -3275,7 +3272,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function pixelateSurface(out:Dynamic, source:SurfaceRegion, blockSize:Float):Void {
+  public static function pixelateSurface(out:Dynamic, source:SurfaceRegion, blockSize:Float):Void {
     var block:Dynamic = cast FlightRuntime.UNDEFINED;
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3353,7 +3350,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function porterDuffFactors__surfaceComposite(mode:SurfaceCompositeMode, srcA:Float, dstA:Float):Array<Float> {
+  public static function porterDuffFactors__surfaceComposite(mode:SurfaceCompositeMode, srcA:Float, dstA:Float):Array<Float> {
     {
       var __switchValue = mode;
       if (__switchValue == Types.SurfaceCompositeModeValue.DestinationOver) {
@@ -3393,7 +3390,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function premultiplySurfacePixels(out:Dynamic, source:Dynamic, length:Float):Void {
+  public static function premultiplySurfacePixels(out:Dynamic, source:Dynamic, length:Float):Void {
     {
       var i:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(i, length, '<'))) {
@@ -3407,7 +3404,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function readSourceAlpha__surfaceBevel(source:SurfaceRegion, px:Float, py:Float):Float {
+  public static function readSourceAlpha__surfaceBevel(source:SurfaceRegion, px:Float, py:Float):Float {
     var sx:Dynamic = cast FlightRuntime.UNDEFINED;
     var sy:Dynamic = cast FlightRuntime.UNDEFINED;
     sx = (FlightRuntime.field(source, 'x') + px);
@@ -3417,7 +3414,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function readSourceAlpha__surfaceGradient(source:SurfaceRegion, px:Float, py:Float):Float {
+  public static function readSourceAlpha__surfaceGradient(source:SurfaceRegion, px:Float, py:Float):Float {
     var sx:Dynamic = cast FlightRuntime.UNDEFINED;
     var sy:Dynamic = cast FlightRuntime.UNDEFINED;
     sx = (FlightRuntime.field(source, 'x') + px);
@@ -3427,7 +3424,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function readSourceAlpha__surfaceShadow(source:SurfaceRegion, px:Float, py:Float):Float {
+  public static function readSourceAlpha__surfaceShadow(source:SurfaceRegion, px:Float, py:Float):Float {
     var sx:Dynamic = cast FlightRuntime.UNDEFINED;
     var sy:Dynamic = cast FlightRuntime.UNDEFINED;
     sx = (FlightRuntime.field(source, 'x') + px);
@@ -3437,7 +3434,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function resizeSurface(dest:SurfaceRegion, source:SurfaceRegion, options:Dynamic = 'bilinear'):Void {
+  public static function resizeSurface(dest:SurfaceRegion, source:SurfaceRegion, options:Dynamic = 'bilinear'):Void {
     var opts:SurfaceResizeOptions = cast FlightRuntime.UNDEFINED;
     var mode:Dynamic = cast FlightRuntime.UNDEFINED;
     var edgeMode:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3629,7 +3626,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function resolveConvolutionMirror__surfaceConvolution(v:Float, size:Float):Float {
+  public static function resolveConvolutionMirror__surfaceConvolution(v:Float, size:Float):Float {
     var period:Dynamic = cast FlightRuntime.UNDEFINED;
     var wrapped:Dynamic = cast FlightRuntime.UNDEFINED;
     period = (2.0 * size);
@@ -3638,7 +3635,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function resolveDisplacementEdge__surfaceDisplacement(v:Float, size:Float, mode:SurfaceEdgeMode):Null<Float> {
+  public static function resolveDisplacementEdge__surfaceDisplacement(v:Float, size:Float, mode:SurfaceEdgeMode):Null<Float> {
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.compare(v, 0.0, '>='), function():Dynamic return cast FlightRuntime.compare(v, size, '<')))) { return cast v; }
     {
       var __switchValue = mode;
@@ -3662,7 +3659,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function resolveEdge__surfaceAffine(v:Float, size:Float, mode:SurfaceEdgeMode):Null<Float> {
+  public static function resolveEdge__surfaceAffine(v:Float, size:Float, mode:SurfaceEdgeMode):Null<Float> {
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.compare(v, 0.0, '>='), function():Dynamic return cast FlightRuntime.compare(v, size, '<')))) { return cast v; }
     {
       var __switchValue = mode;
@@ -3686,7 +3683,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function resolveEdge__surfaceCrop(v:Float, size:Float, mode:SurfaceEdgeMode):Null<Float> {
+  public static function resolveEdge__surfaceCrop(v:Float, size:Float, mode:SurfaceEdgeMode):Null<Float> {
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.compare(v, 0.0, '>='), function():Dynamic return cast FlightRuntime.compare(v, size, '<')))) { return cast v; }
     {
       var __switchValue = mode;
@@ -3710,7 +3707,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function resolveResizeEdge__surfaceResize(v:Float, size:Float, mode:SurfaceEdgeMode):Null<Float> {
+  public static function resolveResizeEdge__surfaceResize(v:Float, size:Float, mode:SurfaceEdgeMode):Null<Float> {
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.compare(v, 0.0, '>='), function():Dynamic return cast FlightRuntime.compare(v, size, '<')))) { return cast v; }
     {
       var __switchValue = mode;
@@ -3734,7 +3731,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function rotateSurface(dest:SurfaceRegion, source:SurfaceRegion, angle:Float, ?pivotX:Float, ?pivotY:Float, edgeMode:SurfaceEdgeMode = 'clamp', sampleMode:SurfaceResizeMode = 'bilinear'):Void {
+  public static function rotateSurface(dest:SurfaceRegion, source:SurfaceRegion, angle:Float, ?pivotX:Float, ?pivotY:Float, edgeMode:SurfaceEdgeMode = 'clamp', sampleMode:SurfaceResizeMode = 'bilinear'):Void {
     if (pivotX == null) pivotX = cast (((FlightRuntime.field(source, 'width') - 1.0) / 2.0) : Dynamic);
     if (pivotY == null) pivotY = cast (((FlightRuntime.field(source, 'height') - 1.0) / 2.0) : Dynamic);
     var cosA:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3752,7 +3749,7 @@ class SurfaceApi {
     FlightRuntime.callValue(transformSurface, cast ([dest, source, cast ([cosA, sinA, -sinA, cosA, e, f] : Array<Dynamic>), edgeMode, sampleMode] : Array<Dynamic>));
   }
 
-  @:keep public static function rotateSurface180(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function rotateSurface180(dest:SurfaceRegion, source:SurfaceRegion):Void {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     var sd:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3806,7 +3803,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function rotateSurfaceClockwise(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function rotateSurfaceClockwise(dest:SurfaceRegion, source:SurfaceRegion):Void {
     var sw:Dynamic = cast FlightRuntime.UNDEFINED;
     var sh:Dynamic = cast FlightRuntime.UNDEFINED;
     var sd:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3842,7 +3839,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function rotateSurfaceCounterClockwise(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function rotateSurfaceCounterClockwise(dest:SurfaceRegion, source:SurfaceRegion):Void {
     var sw:Dynamic = cast FlightRuntime.UNDEFINED;
     var sh:Dynamic = cast FlightRuntime.UNDEFINED;
     var sd:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3878,7 +3875,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function sampleBicubic__surfaceAffine(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:SurfaceEdgeMode):Void {
+  public static function sampleBicubic__surfaceAffine(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:SurfaceEdgeMode):Void {
     var x1:Dynamic = cast FlightRuntime.UNDEFINED;
     var y1:Dynamic = cast FlightRuntime.UNDEFINED;
     var tx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3915,7 +3912,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function sampleBilinear__surfaceAffine(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:SurfaceEdgeMode):Void {
+  public static function sampleBilinear__surfaceAffine(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:SurfaceEdgeMode):Void {
     var x0:Dynamic = cast FlightRuntime.UNDEFINED;
     var y0:Dynamic = cast FlightRuntime.UNDEFINED;
     var tx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3947,19 +3944,19 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function sampleField__surfaceBevel(field:Dynamic, w:Float, h:Float, x:Float, y:Float):Float {
+  public static function sampleField__surfaceBevel(field:Dynamic, w:Float, h:Float, x:Float, y:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.compare(x, 0.0, '<'), function():Dynamic return cast FlightRuntime.compare(x, w, '>=')), function():Dynamic return cast FlightRuntime.compare(y, 0.0, '<')), function():Dynamic return cast FlightRuntime.compare(y, h, '>=')))) { return cast 0.0; }
     return cast (FlightRuntime.getIndex(field, ((((y * w) + x) * 4.0) + 3.0)) / 255.0);
     return cast null;
   }
 
-  @:keep public static function sampleField__surfaceGradient(field:Dynamic, w:Float, h:Float, x:Float, y:Float):Float {
+  public static function sampleField__surfaceGradient(field:Dynamic, w:Float, h:Float, x:Float, y:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.orValue(FlightRuntime.compare(x, 0.0, '<'), function():Dynamic return cast FlightRuntime.compare(x, w, '>=')), function():Dynamic return cast FlightRuntime.compare(y, 0.0, '<')), function():Dynamic return cast FlightRuntime.compare(y, h, '>=')))) { return cast 0.0; }
     return cast (FlightRuntime.getIndex(field, ((((y * w) + x) * 4.0) + 3.0)) / 255.0);
     return cast null;
   }
 
-  @:keep public static function sampleMapChannel__surfaceDisplacement(map:SurfaceRegion, px:Float, py:Float, component:Float):Float {
+  public static function sampleMapChannel__surfaceDisplacement(map:SurfaceRegion, px:Float, py:Float, component:Float):Float {
     var mx:Dynamic = cast FlightRuntime.UNDEFINED;
     var my:Dynamic = cast FlightRuntime.UNDEFINED;
     mx = (FlightRuntime.field(map, 'x') + px);
@@ -3969,7 +3966,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function sampleSurface__surfaceAffine(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, sHeight:Float, sx:Float, sy:Float, sampleMode:SurfaceResizeMode, edgeMode:SurfaceEdgeMode):Void {
+  public static function sampleSurface__surfaceAffine(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, sHeight:Float, sx:Float, sy:Float, sampleMode:SurfaceResizeMode, edgeMode:SurfaceEdgeMode):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(sampleMode, 'nearest'))) {
   var ix:Dynamic = FlightRuntime.callProperty(HxMath, 'round', cast ([sx] : Array<Dynamic>));
   var iy:Dynamic = FlightRuntime.callProperty(HxMath, 'round', cast ([sy] : Array<Dynamic>));
@@ -3993,7 +3990,7 @@ class SurfaceApi {
     FlightRuntime.callValue(SurfaceApi.sampleBilinear__surfaceAffine, cast ([dd, di, sd, sw, sh, originX, originY, sStride, sHeight, sx, sy, edgeMode] : Array<Dynamic>));
   }
 
-  @:keep public static function scrollSurface(out:Surface, dx:Float, dy:Float):Void {
+  public static function scrollSurface(out:Surface, dx:Float, dy:Float):Void {
     var needed:Dynamic = cast FlightRuntime.UNDEFINED;
     needed = FlightRuntime.field(FlightRuntime.field(out, 'data'), 'length');
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(SurfaceApi._scrollScratch__surfaceTransform, null), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(SurfaceApi._scrollScratch__surfaceTransform, 'length'), needed, '<')))) {
@@ -4023,7 +4020,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([out] : Array<Dynamic>));
   }
 
-  @:keep public static function setColorMatrix__surfaceColorMatrix(out:Array<Float>, ...values:Float):Void {
+  public static function setColorMatrix__surfaceColorMatrix(out:Array<Float>, ...values:Float):Void {
     {
       var i:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(i, 20.0, '<'))) {
@@ -4033,7 +4030,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function setSurfaceAlpha(out:SurfaceRegion, alpha:Float):Void {
+  public static function setSurfaceAlpha(out:SurfaceRegion, alpha:Float):Void {
     var a:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var surfaceWidth:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4060,11 +4057,11 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(out, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function setSurfaceColorMatrixIdentity(out:Array<Float>):Void {
+  public static function setSurfaceColorMatrixIdentity(out:Array<Float>):Void {
     FlightRuntime.callValue(SurfaceApi.setColorMatrix__surfaceColorMatrix, cast ([out, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function setSurfacePixel(out:Surface, x:Float, y:Float, color:Float):Void {
+  public static function setSurfacePixel(out:Surface, x:Float, y:Float, color:Float):Void {
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     i = (((y * FlightRuntime.field(out, 'width')) + x) * 4.0);
     FlightRuntime.setIndex(FlightRuntime.field(out, 'data'), i, (Std.int(FlightRuntime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)));
@@ -4074,7 +4071,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([out] : Array<Dynamic>));
   }
 
-  @:keep public static function setSurfacePixelRgb(out:Surface, x:Float, y:Float, color:Float):Void {
+  public static function setSurfacePixelRgb(out:Surface, x:Float, y:Float, color:Float):Void {
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     i = (((y * FlightRuntime.field(out, 'width')) + x) * 4.0);
     FlightRuntime.setIndex(FlightRuntime.field(out, 'data'), i, (Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0)));
@@ -4083,7 +4080,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([out] : Array<Dynamic>));
   }
 
-  @:keep public static function setSurfaceRegion(out:SurfaceRegion, surface:Surface, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):SurfaceRegion {
+  public static function setSurfaceRegion(out:SurfaceRegion, surface:Surface, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):SurfaceRegion {
     if (width == null) width = cast (FlightRuntime.field(surface, 'width') : Dynamic);
     if (height == null) height = cast (FlightRuntime.field(surface, 'height') : Dynamic);
     FlightRuntime.setField(out, 'surface', surface);
@@ -4095,7 +4092,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function sharpenSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceSharpenOptions):Void {
+  public static function sharpenSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceSharpenOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var amount:Dynamic = cast FlightRuntime.UNDEFINED;
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4137,12 +4134,12 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function smoothStep__surfaceNoise(t:Float):Float {
+  public static function smoothStep__surfaceNoise(t:Float):Float {
     return cast ((t * t) * (3.0 - (2.0 * t)));
     return cast null;
   }
 
-  @:keep public static function softLightChannel__surfaceComposite(cb:Float, cs:Float):Float {
+  public static function softLightChannel__surfaceComposite(cb:Float, cs:Float):Float {
     var b:Dynamic = cast FlightRuntime.UNDEFINED;
     var s:Dynamic = cast FlightRuntime.UNDEFINED;
     var d:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4155,7 +4152,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function solveLinear8__surfaceWarp(M:Array<Array<Float>>, b:Array<Float>):Null<Array<Float>> {
+  public static function solveLinear8__surfaceWarp(M:Array<Array<Float>>, b:Array<Float>):Null<Array<Float>> {
     var n:Dynamic = cast FlightRuntime.UNDEFINED;
     var aug:Dynamic = cast FlightRuntime.UNDEFINED;
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4217,7 +4214,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function splitSurfaceChannels(source:Surface):Array<Surface> {
+  public static function splitSurfaceChannels(source:Surface):Array<Surface> {
     var w:Dynamic = cast FlightRuntime.UNDEFINED;
     var h:Dynamic = cast FlightRuntime.UNDEFINED;
     var sd:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4263,7 +4260,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function spreadIndex__surfaceGradientFill(t:Float, spread:GradientSpread):Float {
+  public static function spreadIndex__surfaceGradientFill(t:Float, spread:GradientSpread):Float {
     var s:Float = cast FlightRuntime.UNDEFINED;
     {
       var __switchValue = spread;
@@ -4288,7 +4285,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function stitchedCoord__surfaceNoise(t:Float, period:Float):Float {
+  public static function stitchedCoord__surfaceNoise(t:Float, period:Float):Float {
     if (FlightRuntime.truthy(FlightRuntime.compare(period, 0.0, '<='))) { return cast t; }
     return cast (((t % period) + period) % period);
     return cast null;
@@ -4302,7 +4299,7 @@ class SurfaceApi {
 
   public static final SURFACE_NOISE_CHANNEL_R:Dynamic = 1.0;
 
-  @:keep public static function swapPixels__surfaceFlip(data:Dynamic, a:Float, b:Float):Void {
+  public static function swapPixels__surfaceFlip(data:Dynamic, a:Float, b:Float):Void {
     {
       var c:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(c, 4.0, '<'))) {
@@ -4314,7 +4311,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function swapPixels__surfaceRotate(data:Dynamic, a:Float, b:Float):Void {
+  public static function swapPixels__surfaceRotate(data:Dynamic, a:Float, b:Float):Void {
     {
       var c:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(c, 4.0, '<'))) {
@@ -4326,7 +4323,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function tintSurfaceAlphaMask__surfaceShadow(out:Dynamic, source:SurfaceRegion, color:Float, intensity:Float):Void {
+  public static function tintSurfaceAlphaMask__surfaceShadow(out:Dynamic, source:SurfaceRegion, color:Float, intensity:Float):Void {
     var cr:Dynamic = cast FlightRuntime.UNDEFINED;
     var cg:Dynamic = cast FlightRuntime.UNDEFINED;
     var cb:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4361,7 +4358,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function transformSurface(dest:SurfaceRegion, source:SurfaceRegion, matrix:Array<Float>, edgeMode:SurfaceEdgeMode = 'transparent', sampleMode:SurfaceResizeMode = 'bilinear'):Void {
+  public static function transformSurface(dest:SurfaceRegion, source:SurfaceRegion, matrix:Array<Float>, edgeMode:SurfaceEdgeMode = 'transparent', sampleMode:SurfaceResizeMode = 'bilinear'):Void {
     var dw:Dynamic = cast FlightRuntime.UNDEFINED;
     var dh:Dynamic = cast FlightRuntime.UNDEFINED;
     var sw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4416,7 +4413,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function trimSurface(source:Surface):Surface {
+  public static function trimSurface(source:Surface):Surface {
     var sw:Dynamic = cast FlightRuntime.UNDEFINED;
     var sh:Dynamic = cast FlightRuntime.UNDEFINED;
     var sd:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4457,7 +4454,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function turbulenceNoise__surfaceNoise(x:Float, y:Float, octaves:Float, seed:Float):Float {
+  public static function turbulenceNoise__surfaceNoise(x:Float, y:Float, octaves:Float, seed:Float):Float {
     var sum:Dynamic = cast FlightRuntime.UNDEFINED;
     var amplitude:Dynamic = cast FlightRuntime.UNDEFINED;
     var amplitudeSum:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4480,7 +4477,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function unpremultiplySurfacePixels(out:Dynamic, source:Dynamic, length:Float):Void {
+  public static function unpremultiplySurfacePixels(out:Dynamic, source:Dynamic, length:Float):Void {
     {
       var i:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(i, length, '<'))) {
@@ -4502,7 +4499,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function valueNoise__surfaceNoise(x:Float, y:Float, seed:Float):Float {
+  public static function valueNoise__surfaceNoise(x:Float, y:Float, seed:Float):Float {
     var ix:Dynamic = cast FlightRuntime.UNDEFINED;
     var iy:Dynamic = cast FlightRuntime.UNDEFINED;
     var fx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4527,7 +4524,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function warpResolveEdge__surfaceWarp(v:Float, size:Float, mode:SurfaceEdgeMode):Null<Float> {
+  public static function warpResolveEdge__surfaceWarp(v:Float, size:Float, mode:SurfaceEdgeMode):Null<Float> {
     if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.compare(v, 0.0, '>='), function():Dynamic return cast FlightRuntime.compare(v, size, '<')))) { return cast v; }
     {
       var __switchValue = mode;
@@ -4551,7 +4548,7 @@ class SurfaceApi {
     return cast null;
   }
 
-  @:keep public static function warpSampleBicubic__surfaceWarp(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:SurfaceEdgeMode):Void {
+  public static function warpSampleBicubic__surfaceWarp(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:SurfaceEdgeMode):Void {
     var x1:Dynamic = cast FlightRuntime.UNDEFINED;
     var y1:Dynamic = cast FlightRuntime.UNDEFINED;
     var tx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4588,7 +4585,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function warpSampleBilinear__surfaceWarp(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:SurfaceEdgeMode):Void {
+  public static function warpSampleBilinear__surfaceWarp(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:SurfaceEdgeMode):Void {
     var x0:Dynamic = cast FlightRuntime.UNDEFINED;
     var y0:Dynamic = cast FlightRuntime.UNDEFINED;
     var tx:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4620,7 +4617,7 @@ class SurfaceApi {
     }
   }
 
-  @:keep public static function warpSampleSurface__surfaceWarp(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, sHeight:Float, sx:Float, sy:Float, sampleMode:SurfaceResizeMode, edgeMode:SurfaceEdgeMode):Void {
+  public static function warpSampleSurface__surfaceWarp(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, sHeight:Float, sx:Float, sy:Float, sampleMode:SurfaceResizeMode, edgeMode:SurfaceEdgeMode):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(sampleMode, 'nearest'))) {
   var ix:Dynamic = FlightRuntime.callProperty(HxMath, 'round', cast ([sx] : Array<Dynamic>));
   var iy:Dynamic = FlightRuntime.callProperty(HxMath, 'round', cast ([sy] : Array<Dynamic>));
@@ -4647,7 +4644,7 @@ class SurfaceApi {
     FlightRuntime.callValue(SurfaceApi.warpSampleBilinear__surfaceWarp, cast ([dd, di, sd, sw, sh, originX, originY, sStride, sHeight, sx, sy, edgeMode] : Array<Dynamic>));
   }
 
-  @:keep public static function warpSurface(dest:SurfaceRegion, source:SurfaceRegion, matrix:Array<Float>, edgeMode:SurfaceEdgeMode = 'transparent', sampleMode:SurfaceResizeMode = 'bilinear'):Void {
+  public static function warpSurface(dest:SurfaceRegion, source:SurfaceRegion, matrix:Array<Float>, edgeMode:SurfaceEdgeMode = 'transparent', sampleMode:SurfaceResizeMode = 'bilinear'):Void {
     var dw:Dynamic = cast FlightRuntime.UNDEFINED;
     var dh:Dynamic = cast FlightRuntime.UNDEFINED;
     var sw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -4718,7 +4715,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function warpSurfaceQuad(dest:SurfaceRegion, source:SurfaceRegion, dstQuad:Array<Float>, edgeMode:SurfaceEdgeMode = 'transparent', sampleMode:SurfaceResizeMode = 'bilinear'):Void {
+  public static function warpSurfaceQuad(dest:SurfaceRegion, source:SurfaceRegion, dstQuad:Array<Float>, edgeMode:SurfaceEdgeMode = 'transparent', sampleMode:SurfaceResizeMode = 'bilinear'):Void {
     var sw:Dynamic = cast FlightRuntime.UNDEFINED;
     var sh:Dynamic = cast FlightRuntime.UNDEFINED;
     var srcPts:Array<Float> = cast FlightRuntime.UNDEFINED;
@@ -4735,7 +4732,7 @@ class SurfaceApi {
     FlightRuntime.callValue(warpSurface, cast ([dest, source, Hinv, edgeMode, sampleMode] : Array<Dynamic>));
   }
 
-  @:keep public static function writeSurfacePixels(dest:SurfaceRegion, pixels:Dynamic):Void {
+  public static function writeSurfacePixels(dest:SurfaceRegion, pixels:Dynamic):Void {
     {
       var py:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(py, FlightRuntime.field(dest, 'height'), '<'))) {
@@ -4761,7 +4758,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function writeSurfacePixels32(dest:SurfaceRegion, pixels:Dynamic):Void {
+  public static function writeSurfacePixels32(dest:SurfaceRegion, pixels:Dynamic):Void {
     {
       var py:Dynamic = 0.0;
       while (FlightRuntime.truthy(FlightRuntime.compare(py, FlightRuntime.field(dest, 'height'), '<'))) {
@@ -4787,7 +4784,7 @@ class SurfaceApi {
     FlightRuntime.callValue(invalidateImageResource, cast ([FlightRuntime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  @:keep public static function writeTransparent__surfaceAffine(dd:Dynamic, di:Float):Void {
+  public static function writeTransparent__surfaceAffine(dd:Dynamic, di:Float):Void {
     FlightRuntime.setIndex(dd, di, 0.0);
     FlightRuntime.setIndex(dd, (di + 1.0), 0.0);
     FlightRuntime.setIndex(dd, (di + 2.0), 0.0);

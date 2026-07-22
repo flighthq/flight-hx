@@ -20,16 +20,13 @@ import flight.Types.Skeleton3D;
 import flight.Types.Skeleton3DValidationDiagnostic;
 import flight.Types.VertexAttributeLayout;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Skeleton3DApi")
 class Skeleton3DApi {
   public static final _invBind__skeleton3d:Dynamic = FlightRuntime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 
   public static final _result__skeleton3d:Dynamic = FlightRuntime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 
-  @:keep public static function captureMeshSkinBindPose(geometry:MeshGeometry):MeshSkinBindPose {
+  public static function captureMeshSkinBindPose(geometry:MeshGeometry):MeshSkinBindPose {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertices:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -91,7 +88,7 @@ class Skeleton3DApi {
     return cast null;
   }
 
-  @:keep public static function cloneSkeleton3D(skeleton:Skeleton3D):Skeleton3D {
+  public static function cloneSkeleton3D(skeleton:Skeleton3D):Skeleton3D {
     var clone:Skeleton3D = cast FlightRuntime.UNDEFINED;
     clone = { inverseBindMatrices: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [FlightRuntime.field(skeleton, 'inverseBindMatrices')]), jointMatrices: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [FlightRuntime.field(skeleton, 'jointMatrices')]), joints: FlightRuntime.slice(FlightRuntime.field(skeleton, 'joints'), 0, null) };
     if (FlightRuntime.truthy(!FlightRuntime.looseEquals(FlightRuntime.field(skeleton, 'names'), null))) { FlightRuntime.setField(clone, 'names', FlightRuntime.slice(FlightRuntime.field(skeleton, 'names'), 0, null)); } else { if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(skeleton, 'names'), null))) { FlightRuntime.setField(clone, 'names', null); } }
@@ -99,7 +96,7 @@ class Skeleton3DApi {
     return cast null;
   }
 
-  @:keep public static function computeSkeleton3DJointMatrices(skeleton:Skeleton3D):Void {
+  public static function computeSkeleton3DJointMatrices(skeleton:Skeleton3D):Void {
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
     var inverseBindMatrices:Dynamic = cast FlightRuntime.UNDEFINED;
     var jointMatrices:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -126,7 +123,7 @@ class Skeleton3DApi {
     }
   }
 
-  @:keep public static function createSkeleton3D(joints:Array<SceneNode>, ?inverseBindMatrices:flight.internal.FlightFloat32Array, ?names:Null<Array<String>>):Skeleton3D {
+  public static function createSkeleton3D(joints:Array<SceneNode>, ?inverseBindMatrices:flight.internal.FlightFloat32Array, ?names:Null<Array<String>>):Skeleton3D {
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     var skeleton:Skeleton3D = cast FlightRuntime.UNDEFINED;
     count = FlightRuntime.field(joints, 'length');
@@ -136,12 +133,12 @@ class Skeleton3DApi {
     return cast null;
   }
 
-  @:keep public static function disposeSkeleton3D(skeleton:Skeleton3D):Void {
+  public static function disposeSkeleton3D(skeleton:Skeleton3D):Void {
     FlightRuntime.setLength(FlightRuntime.field(skeleton, 'joints'), 0.0);
     FlightRuntime.setField(skeleton, 'names', null);
   }
 
-  @:keep public static function equalsSkeleton3D(a:Skeleton3D, b:Skeleton3D):Bool {
+  public static function equalsSkeleton3D(a:Skeleton3D, b:Skeleton3D):Bool {
     var aNames:Dynamic = cast FlightRuntime.UNDEFINED;
     var bNames:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(a, b))) { return cast true; }
@@ -169,7 +166,7 @@ class Skeleton3DApi {
     return cast null;
   }
 
-  @:keep public static function floatOffsetForSemantic__skinMeshGeometry(layout:VertexAttributeLayout, semantic:String):Float {
+  public static function floatOffsetForSemantic__skinMeshGeometry(layout:VertexAttributeLayout, semantic:String):Float {
     var attributes:Dynamic = cast FlightRuntime.UNDEFINED;
     attributes = FlightRuntime.field(layout, 'attributes');
     {
@@ -183,7 +180,7 @@ class Skeleton3DApi {
     return cast null;
   }
 
-  @:keep public static function getMeshSkinConservativeBounds(out:AabbLike, bindPose:MeshSkinBindPose, skeleton:Skeleton3D):Void {
+  public static function getMeshSkinConservativeBounds(out:AabbLike, bindPose:MeshSkinBindPose, skeleton:Skeleton3D):Void {
     var positions:Dynamic = cast FlightRuntime.UNDEFINED;
     var restVertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var restMinX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -283,7 +280,7 @@ class Skeleton3DApi {
     FlightRuntime.setField(FlightRuntime.field(out, 'max'), 'z', maxZ);
   }
 
-  @:keep public static function getMeshSkinExactBounds(out:AabbLike, bindPose:MeshSkinBindPose, skeleton:Skeleton3D):Void {
+  public static function getMeshSkinExactBounds(out:AabbLike, bindPose:MeshSkinBindPose, skeleton:Skeleton3D):Void {
     var skinned:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var minX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -325,7 +322,7 @@ class Skeleton3DApi {
     FlightRuntime.setField(FlightRuntime.field(out, 'max'), 'z', maxZ);
   }
 
-  @:keep public static function getReferencedJoints__getMeshSkinBounds(joints:flight.internal.FlightFloat32Array, weights:flight.internal.FlightFloat32Array, jointCount:Float):Dynamic {
+  public static function getReferencedJoints__getMeshSkinBounds(joints:flight.internal.FlightFloat32Array, weights:flight.internal.FlightFloat32Array, jointCount:Float):Dynamic {
     var referenced:Dynamic = cast FlightRuntime.UNDEFINED;
     var influenceCount:Dynamic = cast FlightRuntime.UNDEFINED;
     referenced = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [jointCount]);
@@ -343,7 +340,7 @@ class Skeleton3DApi {
     return cast null;
   }
 
-  @:keep public static function getSkeleton3DJointIndexByName(skeleton:Skeleton3D, name:String):Float {
+  public static function getSkeleton3DJointIndexByName(skeleton:Skeleton3D, name:String):Float {
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
     var names:Dynamic = cast FlightRuntime.UNDEFINED;
     __destructure1 = skeleton;
@@ -353,7 +350,7 @@ class Skeleton3DApi {
     return cast null;
   }
 
-  @:keep public static function getSkeleton3DJointWorldMatrix(out:Matrix4Like, skeleton:Skeleton3D, jointIndex:Float):Bool {
+  public static function getSkeleton3DJointWorldMatrix(out:Matrix4Like, skeleton:Skeleton3D, jointIndex:Float):Bool {
     var __destructure2:Dynamic = cast FlightRuntime.UNDEFINED;
     var joints:Dynamic = cast FlightRuntime.UNDEFINED;
     __destructure2 = skeleton;
@@ -364,12 +361,12 @@ class Skeleton3DApi {
     return cast null;
   }
 
-  @:keep public static function getSkeleton3DJointWorldMatrixByName(out:Matrix4Like, skeleton:Skeleton3D, name:String):Bool {
+  public static function getSkeleton3DJointWorldMatrixByName(out:Matrix4Like, skeleton:Skeleton3D, name:String):Bool {
     return cast FlightRuntime.callValue(getSkeleton3DJointWorldMatrix, cast ([out, skeleton, FlightRuntime.callValue(getSkeleton3DJointIndexByName, cast ([skeleton, name] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setSkeleton3DBindPose(skeleton:Skeleton3D):Void {
+  public static function setSkeleton3DBindPose(skeleton:Skeleton3D):Void {
     var __destructure3:Dynamic = cast FlightRuntime.UNDEFINED;
     var inverseBindMatrices:Dynamic = cast FlightRuntime.UNDEFINED;
     var joints:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -386,7 +383,7 @@ class Skeleton3DApi {
     }
   }
 
-  @:keep public static function skinMeshGeometry(geometry:MeshGeometry, skeleton:Skeleton3D, bindPose:MeshSkinBindPose):Void {
+  public static function skinMeshGeometry(geometry:MeshGeometry, skeleton:Skeleton3D, bindPose:MeshSkinBindPose):Void {
     var __destructure1:Dynamic = cast FlightRuntime.UNDEFINED;
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertices:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -429,7 +426,7 @@ class Skeleton3DApi {
     FlightRuntime.incrementField(geometry, 'version', 1, true);
   }
 
-  @:keep public static function skinVertices(outPositions:flight.internal.FlightFloat32Array, outNormals:flight.internal.FlightFloat32Array, positions:flight.internal.FlightFloat32Array, normals:flight.internal.FlightFloat32Array, joints:Dynamic, weights:flight.internal.FlightFloat32Array, jointMatrices:flight.internal.FlightFloat32Array):Void {
+  public static function skinVertices(outPositions:flight.internal.FlightFloat32Array, outNormals:flight.internal.FlightFloat32Array, positions:flight.internal.FlightFloat32Array, normals:flight.internal.FlightFloat32Array, joints:Dynamic, weights:flight.internal.FlightFloat32Array, jointMatrices:flight.internal.FlightFloat32Array):Void {
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
     vertexCount = (Std.int((FlightRuntime.field(positions, 'length') / 3.0)) | Std.int(0.0));
     {
@@ -484,7 +481,7 @@ class Skeleton3DApi {
     }
   }
 
-  @:keep public static function updateMeshSkin(mesh:Mesh):Void {
+  public static function updateMeshSkin(mesh:Mesh):Void {
     var skin:Dynamic = cast FlightRuntime.UNDEFINED;
     var geometry:Dynamic = cast FlightRuntime.UNDEFINED;
     var bindPose:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -500,7 +497,7 @@ class Skeleton3DApi {
     FlightRuntime.callValue(skinMeshGeometry, cast ([geometry, FlightRuntime.field(skin, 'skeleton'), bindPose] : Array<Dynamic>));
   }
 
-  @:keep public static function validateSkeleton3D(skeleton:Skeleton3D):Null<Skeleton3DValidationDiagnostic> {
+  public static function validateSkeleton3D(skeleton:Skeleton3D):Null<Skeleton3DValidationDiagnostic> {
     var jointCount:Dynamic = cast FlightRuntime.UNDEFINED;
     var expectedInverseBindMatricesLength:Dynamic = cast FlightRuntime.UNDEFINED;
     var inverseBindMatricesLength:Dynamic = cast FlightRuntime.UNDEFINED;

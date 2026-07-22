@@ -57,12 +57,9 @@ import flight.Types.TextMeasureFunction;
 import flight.Types.TextMetrics;
 import flight.Types.TextVerticalAlign;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Text")
 class Text {
-  @:keep public static function appendRichTextString(source:RichText, value:String):Void {
+  public static function appendRichTextString(source:RichText, value:String):Void {
     var previousText:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(value, 'length'), 0.0))) { return; }
     previousText = FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text');
@@ -71,13 +68,13 @@ class Text {
     FlightRuntime.callValue(Text.emitTextFieldChange__richText, cast ([source, previousText] : Array<Dynamic>));
   }
 
-  @:keep public static function appendTextLabelString(source:TextLabel, value:String):Void {
+  public static function appendTextLabelString(source:TextLabel, value:String):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(value, 'length'), 0.0))) { return; }
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'text', (FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text') + value));
     FlightRuntime.callValue(Text.invalidateTextLabelContent__textLabel, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function buildRichTextLayoutParams(source:TextLabel, measure:TextMeasureFunction):TextLayoutParams {
+  public static function buildRichTextLayoutParams(source:TextLabel, measure:TextMeasureFunction):TextLayoutParams {
     var richText:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -91,19 +88,19 @@ class Text {
     return cast null;
   }
 
-  @:keep public static function buildTextLabelLayoutParams__textLabel(source:TextLabel, measure:TextMeasureFunction):TextLayoutParams {
+  public static function buildTextLabelLayoutParams__textLabel(source:TextLabel, measure:TextMeasureFunction):TextLayoutParams {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     data = FlightRuntime.field(source, 'data');
     return cast { formatRanges: cast ([FlightRuntime.callValue(createTextFormatRange, cast ([FlightRuntime.field(data, 'textFormat'), 0.0, FlightRuntime.field(FlightRuntime.field(data, 'text'), 'length')] : Array<Dynamic>))] : Array<Dynamic>), height: FlightRuntime.field(data, 'height'), measure: measure, text: FlightRuntime.field(data, 'text'), verticalAlign: FlightRuntime.select(FlightRuntime.strictEquals(FlightRuntime.field(data, 'autoSize'), 'none'), function():Dynamic return cast FlightRuntime.field(data, 'verticalAlign'), function():Dynamic return cast 'top'), width: FlightRuntime.field(data, 'width') };
     return cast null;
   }
 
-  @:keep public static function clearRichTextFormatRanges(source:RichText):Void {
+  public static function clearRichTextFormatRanges(source:RichText):Void {
     FlightRuntime.setLength(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'textFormatRanges'), 0.0);
     FlightRuntime.callValue(Text.invalidateRichTextContent__richText, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     var native:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -121,7 +118,7 @@ class Text {
     FlightRuntime.setField(out, 'height', FlightRuntime.select(FlightRuntime.compare(FlightRuntime.field(runtime, 'measuredHeight'), 0.0, '>'), function():Dynamic return cast FlightRuntime.field(runtime, 'measuredHeight'), function():Dynamic return cast FlightRuntime.field(data, 'height')));
   }
 
-  @:keep public static function computeRichTextLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeRichTextLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     var richText:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -146,14 +143,14 @@ class Text {
     FlightRuntime.callValue(computeTextBoundsRectangle, cast ([out, data, layout] : Array<Dynamic>));
   }
 
-  @:keep public static function computeRichTextMaxScrollHFromLayout__richText(data:RichTextData, layout:TextLayoutResult):Float {
+  public static function computeRichTextMaxScrollHFromLayout__richText(data:RichTextData, layout:TextLayoutResult):Float {
     var fieldW:Dynamic = cast FlightRuntime.UNDEFINED;
     fieldW = FlightRuntime.select(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.field(data, 'autoSize'), 'none'), function():Dynamic return cast FlightRuntime.field(data, 'wordWrap')), function():Dynamic return cast FlightRuntime.field(data, 'width'), function():Dynamic return cast (FlightRuntime.field(layout, 'textWidth') + 4.0));
     return cast FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, FlightRuntime.callProperty(HxMath, 'ceil', cast ([(FlightRuntime.field(layout, 'textWidth') - FlightRuntime.callProperty(HxMath, 'max', cast ([0.0, (fieldW - 4.0)] : Array<Dynamic>)))] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function computeRichTextMaxScrollVFromLayout__richText(data:RichTextData, layout:TextLayoutResult):Float {
+  public static function computeRichTextMaxScrollVFromLayout__richText(data:RichTextData, layout:TextLayoutResult):Float {
     var fieldH:Dynamic = cast FlightRuntime.UNDEFINED;
     var visibleH:Dynamic = cast FlightRuntime.UNDEFINED;
     var total:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -172,7 +169,7 @@ class Text {
     return cast null;
   }
 
-  @:keep public static function computeTextFormatFontString(format:TextFormat):String {
+  public static function computeTextFormatFontString(format:TextFormat):String {
     var style:Dynamic = cast FlightRuntime.UNDEFINED;
     var weight:Dynamic = cast FlightRuntime.UNDEFINED;
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -185,7 +182,7 @@ class Text {
     return cast null;
   }
 
-  @:keep public static function computeTextLabelLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeTextLabelLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     var label:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -210,17 +207,17 @@ class Text {
     FlightRuntime.callValue(computeTextBoundsRectangle, cast ([out, data, layout] : Array<Dynamic>));
   }
 
-  @:keep public static function createNativeText(?obj:PartialNode<NativeText>):NativeText {
+  public static function createNativeText(?obj:PartialNode<NativeText>):NativeText {
     return cast (cast FlightRuntime.callValue(createDisplayObjectGeneric, cast ([Types.NativeTextKind, obj, createNativeTextData, createNativeTextRuntime] : Array<Dynamic>)) : NativeText);
     return cast null;
   }
 
-  @:keep public static function createNativeTextData(?data:Dynamic):NativeTextData {
+  public static function createNativeTextData(?data:Dynamic):NativeTextData {
     return cast { autoSize: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'autoSize'), function():Dynamic return cast 'none'), height: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'height'), function():Dynamic return cast 100.0), style: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'style'), function():Dynamic return cast {  }), text: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'text'), function():Dynamic return cast ''), verticalAlign: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'verticalAlign'), function():Dynamic return cast 'top'), width: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'width'), function():Dynamic return cast 100.0) };
     return cast null;
   }
 
-  @:keep public static function createNativeTextRuntime():NativeTextRuntime {
+  public static function createNativeTextRuntime():NativeTextRuntime {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = (cast FlightRuntime.callValue(createDisplayObjectRuntime, cast ([Text.defaultMethods__nativeText] : Array<Dynamic>)) : NativeTextRuntime);
     FlightRuntime.setField(out, 'element', null);
@@ -230,12 +227,12 @@ class Text {
     return cast null;
   }
 
-  @:keep public static function createRichText(?obj:PartialNode<RichText>):RichText {
+  public static function createRichText(?obj:PartialNode<RichText>):RichText {
     return cast (cast FlightRuntime.callValue(createDisplayObjectGeneric, cast ([Types.RichTextKind, obj, createRichTextData, createRichTextRuntime] : Array<Dynamic>)) : RichText);
     return cast null;
   }
 
-  @:keep public static function createRichTextData(?data:Dynamic):RichTextData {
+  public static function createRichTextData(?data:Dynamic):RichTextData {
     var _data:Dynamic = cast FlightRuntime.UNDEFINED;
     _data = (cast FlightRuntime.callValue(createTextLabelData, cast ([data] : Array<Dynamic>)) : RichTextData);
     FlightRuntime.setField(_data, 'background', FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'background'), function():Dynamic return cast false));
@@ -259,7 +256,7 @@ class Text {
     return cast null;
   }
 
-  @:keep public static function createRichTextRuntime():RichTextRuntime {
+  public static function createRichTextRuntime():RichTextRuntime {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = (cast FlightRuntime.callValue(createDisplayObjectRuntime, cast ([Text.defaultMethods__richText] : Array<Dynamic>)) : RichTextRuntime);
     FlightRuntime.setField(out, 'buildTextLayoutParams', buildRichTextLayoutParams);
@@ -274,22 +271,22 @@ class Text {
     return cast null;
   }
 
-  @:keep public static function createTextFieldSignals():TextFieldSignals {
+  public static function createTextFieldSignals():TextFieldSignals {
     return cast { onTextFieldChange: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onTextFieldLink: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)), onTextFieldScroll: FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:keep public static function createTextLabel(?obj:PartialNode<TextLabel>):TextLabel {
+  public static function createTextLabel(?obj:PartialNode<TextLabel>):TextLabel {
     return cast (cast FlightRuntime.callValue(createDisplayObjectGeneric, cast ([Types.TextLabelKind, obj, createTextLabelData, createTextLabelRuntime] : Array<Dynamic>)) : TextLabel);
     return cast null;
   }
 
-  @:keep public static function createTextLabelData(?data:Dynamic):TextLabelData {
+  public static function createTextLabelData(?data:Dynamic):TextLabelData {
     return cast { autoSize: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'autoSize'), function():Dynamic return cast 'none'), height: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'height'), function():Dynamic return cast 100.0), text: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'text'), function():Dynamic return cast ''), textFormat: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'textFormat'), function():Dynamic return cast {  }), verticalAlign: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'verticalAlign'), function():Dynamic return cast 'top'), width: FlightRuntime.coalesce(FlightRuntime.optionalField(data, 'width'), function():Dynamic return cast 100.0) };
     return cast null;
   }
 
-  @:keep public static function createTextLabelRuntime():TextLabelRuntime {
+  public static function createTextLabelRuntime():TextLabelRuntime {
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     out = (cast FlightRuntime.callValue(createDisplayObjectRuntime, cast ([Text.defaultMethods__textLabel] : Array<Dynamic>)) : TextLabelRuntime);
     FlightRuntime.setField(out, 'buildTextLayoutParams', Text.buildTextLabelLayoutParams__textLabel);
@@ -305,7 +302,7 @@ class Text {
 
   public static final defaultMethods__textLabel:Dynamic = { computeLocalBoundsRectangle: computeTextLabelLocalBoundsRectangle };
 
-  @:keep public static function dispatchRichTextLinkAtPoint(source:RichText, x:Float, y:Float):Null<String> {
+  public static function dispatchRichTextLinkAtPoint(source:RichText, x:Float, y:Float):Null<String> {
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     var url:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
@@ -323,11 +320,11 @@ class Text {
     return cast null;
   }
 
-  @:keep public static function dispatchRichTextWheel(source:RichText, deltaLines:Float, ?layout:TextLayoutResult):Void {
+  public static function dispatchRichTextWheel(source:RichText, deltaLines:Float, ?layout:TextLayoutResult):Void {
     FlightRuntime.callValue(setRichTextScrollV, cast ([source, (FlightRuntime.field(FlightRuntime.field(source, 'data'), 'scrollV') + FlightRuntime.callProperty(HxMath, 'round', cast ([deltaLines] : Array<Dynamic>))), layout] : Array<Dynamic>));
   }
 
-  @:keep public static function emitTextFieldChange__richText(source:RichText, previousText:String):Void {
+  public static function emitTextFieldChange__richText(source:RichText, previousText:String):Void {
     var signals:Dynamic = cast FlightRuntime.UNDEFINED;
     var event:Dynamic = cast FlightRuntime.UNDEFINED;
     signals = FlightRuntime.field((cast FlightRuntime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
@@ -336,7 +333,7 @@ class Text {
     FlightRuntime.callProperty(FlightRuntime.field(signals, 'onTextFieldChange'), 'emit', cast ([event] : Array<Dynamic>));
   }
 
-  @:keep public static function emitTextFieldScroll__richText(source:RichText, previousScrollH:Float, previousScrollV:Float):Void {
+  public static function emitTextFieldScroll__richText(source:RichText, previousScrollH:Float, previousScrollV:Float):Void {
     var signals:Dynamic = cast FlightRuntime.UNDEFINED;
     var event:Dynamic = cast FlightRuntime.UNDEFINED;
     signals = FlightRuntime.field((cast FlightRuntime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
@@ -345,14 +342,14 @@ class Text {
     FlightRuntime.callProperty(FlightRuntime.field(signals, 'onTextFieldScroll'), 'emit', cast ([event] : Array<Dynamic>));
   }
 
-  @:keep public static function enableTextFieldSignals(source:RichText):TextFieldSignals {
+  public static function enableTextFieldSignals(source:RichText):TextFieldSignals {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = (cast FlightRuntime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime);
     return cast FlightRuntime.setField(runtime, 'textFieldSignals', (FlightRuntime.field(runtime, 'textFieldSignals') ?? FlightRuntime.callValue(createTextFieldSignals, cast ([] : Array<Dynamic>))));
     return cast null;
   }
 
-  @:keep public static function ensureTextLayout(source:TextLabel):Void {
+  public static function ensureTextLayout(source:TextLabel):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var contentId:Dynamic = cast FlightRuntime.UNDEFINED;
     var measure:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -369,32 +366,32 @@ class Text {
     FlightRuntime.setField(runtime, 'textLayoutUsingContentId', contentId);
   }
 
-  @:keep public static function getNativeTextMeasuredHeight(source:NativeText):Float {
+  public static function getNativeTextMeasuredHeight(source:NativeText):Float {
     return cast FlightRuntime.field((cast FlightRuntime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : NativeTextRuntime), 'measuredHeight');
     return cast null;
   }
 
-  @:keep public static function getNativeTextMeasuredWidth(source:NativeText):Float {
+  public static function getNativeTextMeasuredWidth(source:NativeText):Float {
     return cast FlightRuntime.field((cast FlightRuntime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : NativeTextRuntime), 'measuredWidth');
     return cast null;
   }
 
-  @:keep public static function getNativeTextRuntime(source:NativeText):NativeTextRuntime {
+  public static function getNativeTextRuntime(source:NativeText):NativeTextRuntime {
     return cast (cast FlightRuntime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : NativeTextRuntime);
     return cast null;
   }
 
-  @:keep public static function getNativeTextString(source:NativeText):String {
+  public static function getNativeTextString(source:NativeText):String {
     return cast FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text');
     return cast null;
   }
 
-  @:keep public static function getNativeTextStyle(source:NativeText):NativeTextStyle {
+  public static function getNativeTextStyle(source:NativeText):NativeTextStyle {
     return cast FlightRuntime.field(FlightRuntime.field(source, 'data'), 'style');
     return cast null;
   }
 
-  @:keep public static function getRichTextBottomScrollV(source:RichText):Float {
+  public static function getRichTextBottomScrollV(source:RichText):Float {
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
     layout = FlightRuntime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
@@ -403,7 +400,7 @@ class Text {
     return cast null;
   }
 
-  @:keep public static function getRichTextCharIndexAtPoint(source:RichText, x:Float, y:Float):Float {
+  public static function getRichTextCharIndexAtPoint(source:RichText, x:Float, y:Float):Float {
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
     layout = FlightRuntime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
@@ -412,12 +409,12 @@ class Text {
     return cast null;
   }
 
-  @:keep public static function getRichTextDefaultTextFormat(source:RichText):TextFormat {
+  public static function getRichTextDefaultTextFormat(source:RichText):TextFormat {
     return cast FlightRuntime.field(FlightRuntime.field(source, 'data'), 'defaultTextFormat');
     return cast null;
   }
 
-  @:keep public static function getRichTextFormatRangeAt(out:TextFormat, source:RichText, index:Float):Void {
+  public static function getRichTextFormatRangeAt(out:TextFormat, source:RichText, index:Float):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var merged:TextFormat = cast FlightRuntime.UNDEFINED;
     var keys:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -434,7 +431,7 @@ class Text {
     }
   }
 
-  @:keep public static function getRichTextFormatRangeByIndex(out:TextFormatRange, source:RichText, i:Float):Bool {
+  public static function getRichTextFormatRangeByIndex(out:TextFormatRange, source:RichText, i:Float):Bool {
     var range:Dynamic = cast FlightRuntime.UNDEFINED;
     range = FlightRuntime.getIndex(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'textFormatRanges'), i);
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(range, FlightRuntime.UNDEFINED))) { return cast false; }
@@ -445,24 +442,24 @@ class Text {
     return cast null;
   }
 
-  @:keep public static function getRichTextFormatRangeCount(source:RichText):Float {
+  public static function getRichTextFormatRangeCount(source:RichText):Float {
     return cast FlightRuntime.field(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'textFormatRanges'), 'length');
     return cast null;
   }
 
-  @:keep public static function getRichTextFormatRangesIn(out:Array<TextFormatRange>, source:RichText, beginIndex:Float, endIndex:Float):Void {
+  public static function getRichTextFormatRangesIn(out:Array<TextFormatRange>, source:RichText, beginIndex:Float, endIndex:Float):Void {
     FlightRuntime.setLength(out, 0.0);
     for (range in FlightRuntime.iterable(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'textFormatRanges'))) {
       if (FlightRuntime.truthy(FlightRuntime.andValue(FlightRuntime.compare(FlightRuntime.field(range, 'start'), endIndex, '<'), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(range, 'end'), beginIndex, '>')))) { FlightRuntime.callProperty(out, 'push', cast ([range] : Array<Dynamic>)); }
     }
   }
 
-  @:keep public static function getRichTextLength(source:RichText):Float {
+  public static function getRichTextLength(source:RichText):Float {
     return cast FlightRuntime.field(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text'), 'length');
     return cast null;
   }
 
-  @:keep public static function getRichTextLineCount(source:RichText):Float {
+  public static function getRichTextLineCount(source:RichText):Float {
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
     layout = FlightRuntime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
@@ -471,7 +468,7 @@ class Text {
     return cast null;
   }
 
-  @:keep public static function getRichTextLineMetrics(source:RichText, lineIndex:Float):Null<TextLineMetrics> {
+  public static function getRichTextLineMetrics(source:RichText, lineIndex:Float):Null<TextLineMetrics> {
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
     layout = FlightRuntime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
@@ -480,7 +477,7 @@ class Text {
     return cast null;
   }
 
-  @:keep public static function getRichTextMaxScrollH(source:RichText):Float {
+  public static function getRichTextMaxScrollH(source:RichText):Float {
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
     layout = FlightRuntime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
@@ -489,7 +486,7 @@ class Text {
     return cast null;
   }
 
-  @:keep public static function getRichTextMaxScrollV(source:RichText):Float {
+  public static function getRichTextMaxScrollV(source:RichText):Float {
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
     layout = FlightRuntime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
@@ -498,24 +495,24 @@ class Text {
     return cast null;
   }
 
-  @:keep public static function getRichTextPasswordCharacter(source:RichText):Null<String> {
+  public static function getRichTextPasswordCharacter(source:RichText):Null<String> {
     var input:Dynamic = cast FlightRuntime.UNDEFINED;
     input = FlightRuntime.field((cast FlightRuntime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'input');
     return cast FlightRuntime.select(FlightRuntime.andValue(!FlightRuntime.strictEquals(input, null), function():Dynamic return cast FlightRuntime.field(input, 'displayAsPassword')), function():Dynamic return cast FlightRuntime.field(input, 'passwordCharacter'), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getRichTextRuntime(source:RichText):RichTextRuntime {
+  public static function getRichTextRuntime(source:RichText):RichTextRuntime {
     return cast (cast FlightRuntime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime);
     return cast null;
   }
 
-  @:keep public static function getRichTextString(source:RichText):String {
+  public static function getRichTextString(source:RichText):String {
     return cast FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text');
     return cast null;
   }
 
-  @:keep public static function getRichTextTextHeight(source:RichText):Float {
+  public static function getRichTextTextHeight(source:RichText):Float {
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
     layout = FlightRuntime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
@@ -524,7 +521,7 @@ class Text {
     return cast null;
   }
 
-  @:keep public static function getRichTextTextWidth(source:RichText):Float {
+  public static function getRichTextTextWidth(source:RichText):Float {
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
     layout = FlightRuntime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
@@ -533,33 +530,33 @@ class Text {
     return cast null;
   }
 
-  @:keep public static function getTextFieldSignals(source:RichText):Null<TextFieldSignals> {
+  public static function getTextFieldSignals(source:RichText):Null<TextFieldSignals> {
     return cast FlightRuntime.field((cast FlightRuntime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
     return cast null;
   }
 
-  @:keep public static function getTextLabelFormat(source:TextLabel):TextFormat {
+  public static function getTextLabelFormat(source:TextLabel):TextFormat {
     return cast FlightRuntime.field(FlightRuntime.field(source, 'data'), 'textFormat');
     return cast null;
   }
 
-  @:keep public static function getTextLabelRuntime(source:TextLabel):TextLabelRuntime {
+  public static function getTextLabelRuntime(source:TextLabel):TextLabelRuntime {
     return cast (cast FlightRuntime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime);
     return cast null;
   }
 
-  @:keep public static function getTextLabelString(source:TextLabel):String {
+  public static function getTextLabelString(source:TextLabel):String {
     return cast FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text');
     return cast null;
   }
 
-  @:keep public static function getTextLayout(source:TextLabel):Null<TextLayoutResult> {
+  public static function getTextLayout(source:TextLabel):Null<TextLayoutResult> {
     FlightRuntime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
     return cast FlightRuntime.field((cast FlightRuntime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime), 'textLayout');
     return cast null;
   }
 
-  @:keep public static function getTextLayoutMetrics(out:TextMetrics, source:TextLabel):Void {
+  public static function getTextLayoutMetrics(out:TextMetrics, source:TextLabel):Void {
     var layout:Dynamic = cast FlightRuntime.UNDEFINED;
     layout = FlightRuntime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(layout, null))) {
@@ -571,7 +568,7 @@ class Text {
     FlightRuntime.callValue(getTextMetrics, cast ([out, layout] : Array<Dynamic>));
   }
 
-  @:keep public static function insertRichTextString(source:RichText, index:Float, value:String):Void {
+  public static function insertRichTextString(source:RichText, index:Float, value:String):Void {
     var text:Dynamic = cast FlightRuntime.UNDEFINED;
     var clampedIndex:Dynamic = cast FlightRuntime.UNDEFINED;
     var previousText:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -594,23 +591,23 @@ class Text {
     FlightRuntime.callValue(Text.emitTextFieldChange__richText, cast ([source, previousText] : Array<Dynamic>));
   }
 
-  @:keep public static function invalidateRichTextContent__richText(source:RichText):Void {
+  public static function invalidateRichTextContent__richText(source:RichText):Void {
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'autoSize'), 'none'))) { FlightRuntime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>)); }
   }
 
-  @:keep public static function invalidateTextLabelContent__textLabel(source:TextLabel):Void {
+  public static function invalidateTextLabelContent__textLabel(source:TextLabel):Void {
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'autoSize'), 'none'))) { FlightRuntime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>)); }
   }
 
-  @:keep public static function patchNativeTextStyle(source:NativeText, patch:Dynamic):Void {
+  public static function patchNativeTextStyle(source:NativeText, patch:Dynamic):Void {
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'style', FlightRuntime.mergeObjects([FlightRuntime.field(FlightRuntime.field(source, 'data'), 'style'), patch]));
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function removeRichTextFormatRangesIn(source:RichText, begin:Float, end:Float):Void {
+  public static function removeRichTextFormatRangesIn(source:RichText, begin:Float, end:Float):Void {
     var ranges:Dynamic = cast FlightRuntime.UNDEFINED;
     var changed:Dynamic = cast FlightRuntime.UNDEFINED;
     ranges = FlightRuntime.field(FlightRuntime.field(source, 'data'), 'textFormatRanges');
@@ -629,7 +626,7 @@ class Text {
     if (FlightRuntime.truthy(changed)) { FlightRuntime.callValue(Text.invalidateRichTextContent__richText, cast ([source] : Array<Dynamic>)); }
   }
 
-  @:keep public static function replaceRichTextString(source:RichText, beginIndex:Float, endIndex:Float, value:String):Void {
+  public static function replaceRichTextString(source:RichText, beginIndex:Float, endIndex:Float, value:String):Void {
     var text:Dynamic = cast FlightRuntime.UNDEFINED;
     var start:Dynamic = cast FlightRuntime.UNDEFINED;
     var end:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -670,7 +667,7 @@ class Text {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(previousText, FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text')))) { FlightRuntime.callValue(Text.emitTextFieldChange__richText, cast ([source, previousText] : Array<Dynamic>)); }
   }
 
-  @:keep public static function setNativeTextAutoSize(source:NativeText, value:TextAutoSize):Void {
+  public static function setNativeTextAutoSize(source:NativeText, value:TextAutoSize):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     data = FlightRuntime.field(source, 'data');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(data, 'autoSize'), value))) { return; }
@@ -679,7 +676,7 @@ class Text {
     FlightRuntime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setNativeTextHeight(source:NativeText, value:Float):Void {
+  public static function setNativeTextHeight(source:NativeText, value:Float):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     data = FlightRuntime.field(source, 'data');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(data, 'height'), value))) { return; }
@@ -688,7 +685,7 @@ class Text {
     FlightRuntime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setNativeTextString(source:NativeText, value:String):Void {
+  public static function setNativeTextString(source:NativeText, value:String):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     data = FlightRuntime.field(source, 'data');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(data, 'text'), value))) { return; }
@@ -697,13 +694,13 @@ class Text {
     FlightRuntime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setNativeTextStyle(source:NativeText, value:NativeTextStyle):Void {
+  public static function setNativeTextStyle(source:NativeText, value:NativeTextStyle):Void {
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'style', value);
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setNativeTextVerticalAlign(source:NativeText, value:TextVerticalAlign):Void {
+  public static function setNativeTextVerticalAlign(source:NativeText, value:TextVerticalAlign):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     data = FlightRuntime.field(source, 'data');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(data, 'verticalAlign'), value))) { return; }
@@ -711,7 +708,7 @@ class Text {
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setNativeTextWidth(source:NativeText, value:Float):Void {
+  public static function setNativeTextWidth(source:NativeText, value:Float):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     data = FlightRuntime.field(source, 'data');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(data, 'width'), value))) { return; }
@@ -720,37 +717,37 @@ class Text {
     FlightRuntime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setRichTextBackground(source:RichText, value:Bool):Void {
+  public static function setRichTextBackground(source:RichText, value:Bool):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'background'), value))) { return; }
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'background', value);
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setRichTextBackgroundColor(source:RichText, value:Float):Void {
+  public static function setRichTextBackgroundColor(source:RichText, value:Float):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'backgroundColor'), value))) { return; }
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'backgroundColor', value);
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setRichTextBorder(source:RichText, value:Bool):Void {
+  public static function setRichTextBorder(source:RichText, value:Bool):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'border'), value))) { return; }
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'border', value);
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setRichTextBorderColor(source:RichText, value:Float):Void {
+  public static function setRichTextBorderColor(source:RichText, value:Float):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'borderColor'), value))) { return; }
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'borderColor', value);
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setRichTextCondenseWhite(source:RichText, value:Bool):Void {
+  public static function setRichTextCondenseWhite(source:RichText, value:Bool):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'condenseWhite'), value))) { return; }
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'condenseWhite', value);
     FlightRuntime.callValue(Text.invalidateRichTextContent__richText, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setRichTextContent(source:RichText, content:RichTextContent):Void {
+  public static function setRichTextContent(source:RichText, content:RichTextContent):Void {
     var previousText:Dynamic = cast FlightRuntime.UNDEFINED;
     previousText = FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text');
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'text', FlightRuntime.field(content, 'text'));
@@ -759,44 +756,44 @@ class Text {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(previousText, FlightRuntime.field(content, 'text')))) { FlightRuntime.callValue(Text.emitTextFieldChange__richText, cast ([source, previousText] : Array<Dynamic>)); }
   }
 
-  @:keep public static function setRichTextDefaultTextFormat(source:RichText, value:TextFormat):Void {
+  public static function setRichTextDefaultTextFormat(source:RichText, value:TextFormat):Void {
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'defaultTextFormat', value);
     FlightRuntime.callValue(Text.invalidateRichTextContent__richText, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setRichTextFormatRange(source:RichText, format:TextFormat, start:Dynamic = 0.0, ?end:Dynamic):Void {
+  public static function setRichTextFormatRange(source:RichText, format:TextFormat, start:Dynamic = 0.0, ?end:Dynamic):Void {
     if (end == null) end = cast (FlightRuntime.field(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text'), 'length') : Dynamic);
     FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'textFormatRanges'), 'push', cast ([{ end: end, format: format, start: start }] : Array<Dynamic>));
     FlightRuntime.callValue(Text.invalidateRichTextContent__richText, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setRichTextHeight(source:RichText, value:Float):Void {
+  public static function setRichTextHeight(source:RichText, value:Float):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'height'), value))) { return; }
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'height', value);
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setRichTextMaxChars(source:RichText, value:Float):Void {
+  public static function setRichTextMaxChars(source:RichText, value:Float):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'maxChars'), value))) { return; }
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'maxChars', value);
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setRichTextMouseWheelEnabled(source:RichText, value:Bool):Void {
+  public static function setRichTextMouseWheelEnabled(source:RichText, value:Bool):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'mouseWheelEnabled'), value))) { return; }
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'mouseWheelEnabled', value);
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setRichTextMultiline(source:RichText, value:Bool):Void {
+  public static function setRichTextMultiline(source:RichText, value:Bool):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'multiline'), value))) { return; }
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'multiline', value);
     FlightRuntime.callValue(Text.invalidateRichTextContent__richText, cast ([source] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setRichTextScrollH(source:RichText, value:Float, ?layout:TextLayoutResult):Void {
+  public static function setRichTextScrollH(source:RichText, value:Float, ?layout:TextLayoutResult):Void {
     var max:Dynamic = cast FlightRuntime.UNDEFINED;
     var clamped:Dynamic = cast FlightRuntime.UNDEFINED;
     var previousScrollH:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -811,7 +808,7 @@ class Text {
     FlightRuntime.callValue(Text.emitTextFieldScroll__richText, cast ([source, previousScrollH, previousScrollV] : Array<Dynamic>));
   }
 
-  @:keep public static function setRichTextScrollV(source:RichText, value:Float, ?layout:TextLayoutResult):Void {
+  public static function setRichTextScrollV(source:RichText, value:Float, ?layout:TextLayoutResult):Void {
     var max:Dynamic = cast FlightRuntime.UNDEFINED;
     var clamped:Dynamic = cast FlightRuntime.UNDEFINED;
     var previousScrollH:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -826,13 +823,13 @@ class Text {
     FlightRuntime.callValue(Text.emitTextFieldScroll__richText, cast ([source, previousScrollH, previousScrollV] : Array<Dynamic>));
   }
 
-  @:keep public static function setRichTextSelectable(source:RichText, value:Bool):Void {
+  public static function setRichTextSelectable(source:RichText, value:Bool):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'selectable'), value))) { return; }
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'selectable', value);
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setRichTextString(source:RichText, value:String):Void {
+  public static function setRichTextString(source:RichText, value:String):Void {
     var previousText:Dynamic = cast FlightRuntime.UNDEFINED;
     previousText = FlightRuntime.field(FlightRuntime.field(source, 'data'), 'text');
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'text', value);
@@ -840,33 +837,33 @@ class Text {
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(previousText, value))) { FlightRuntime.callValue(Text.emitTextFieldChange__richText, cast ([source, previousText] : Array<Dynamic>)); }
   }
 
-  @:keep public static function setRichTextTextColor(source:RichText, value:Float):Void {
+  public static function setRichTextTextColor(source:RichText, value:Float):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'textColor'), value))) { return; }
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'textColor', value);
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setRichTextVerticalAlign(source:RichText, value:TextVerticalAlign):Void {
+  public static function setRichTextVerticalAlign(source:RichText, value:TextVerticalAlign):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'verticalAlign'), value))) { return; }
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'verticalAlign', value);
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setRichTextWidth(source:RichText, value:Float):Void {
+  public static function setRichTextWidth(source:RichText, value:Float):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'width'), value))) { return; }
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'width', value);
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setRichTextWordWrap(source:RichText, value:Bool):Void {
+  public static function setRichTextWordWrap(source:RichText, value:Bool):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.field(source, 'data'), 'wordWrap'), value))) { return; }
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'wordWrap', value);
     FlightRuntime.callValue(Text.invalidateRichTextContent__richText, cast ([source] : Array<Dynamic>));
     FlightRuntime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setTextLabelAutoSize(source:TextLabel, value:TextAutoSize):Void {
+  public static function setTextLabelAutoSize(source:TextLabel, value:TextAutoSize):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     data = FlightRuntime.field(source, 'data');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(data, 'autoSize'), value))) { return; }
@@ -875,12 +872,12 @@ class Text {
     FlightRuntime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setTextLabelFormat(source:TextLabel, value:TextFormat):Void {
+  public static function setTextLabelFormat(source:TextLabel, value:TextFormat):Void {
     FlightRuntime.setField(FlightRuntime.field(source, 'data'), 'textFormat', value);
     FlightRuntime.callValue(Text.invalidateTextLabelContent__textLabel, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setTextLabelHeight(source:TextLabel, value:Float):Void {
+  public static function setTextLabelHeight(source:TextLabel, value:Float):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     data = FlightRuntime.field(source, 'data');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(data, 'height'), value))) { return; }
@@ -889,7 +886,7 @@ class Text {
     FlightRuntime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setTextLabelString(source:TextLabel, value:String):Void {
+  public static function setTextLabelString(source:TextLabel, value:String):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     data = FlightRuntime.field(source, 'data');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(data, 'text'), value))) { return; }
@@ -897,7 +894,7 @@ class Text {
     FlightRuntime.callValue(Text.invalidateTextLabelContent__textLabel, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setTextLabelVerticalAlign(source:TextLabel, value:TextVerticalAlign):Void {
+  public static function setTextLabelVerticalAlign(source:TextLabel, value:TextVerticalAlign):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     data = FlightRuntime.field(source, 'data');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(data, 'verticalAlign'), value))) { return; }
@@ -905,7 +902,7 @@ class Text {
     FlightRuntime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  @:keep public static function setTextLabelWidth(source:TextLabel, value:Float):Void {
+  public static function setTextLabelWidth(source:TextLabel, value:Float):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     data = FlightRuntime.field(source, 'data');
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(data, 'width'), value))) { return; }

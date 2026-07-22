@@ -16,29 +16,26 @@ typedef GridCell__uniformGrid = { var cx:Float; var cy:Float; var ids:Dynamic; }
 
 typedef UniformGrid__uniformGrid = { var cellSize:Float; var cells:Dynamic; var bounds:Dynamic; var minCellX:Float; var minCellY:Float; var maxCellX:Float; var maxCellY:Float; var empty:Bool; var seen:Dynamic; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Spatial")
 class Spatial {
-  @:keep public static function _cellIndex__uniformGrid(coord:Float, cellSize:Float):Float {
+  public static function _cellIndex__uniformGrid(coord:Float, cellSize:Float):Float {
     return cast FlightRuntime.callProperty(HxMath, 'floor', cast ([(coord / cellSize)] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function _cellKey__uniformGrid(cx:Float, cy:Float):String {
+  public static function _cellKey__uniformGrid(cx:Float, cy:Float):String {
     return cast '' + Std.string(cx) + ',' + Std.string(cy) + '';
     return cast null;
   }
 
-  @:keep public static function _fillRectFromAabb__uniformGrid(out:RectangleLike, aabb:SpatialAabb):Void {
+  public static function _fillRectFromAabb__uniformGrid(out:RectangleLike, aabb:SpatialAabb):Void {
     FlightRuntime.setField(out, 'x', FlightRuntime.field(aabb, 'minX'));
     FlightRuntime.setField(out, 'y', FlightRuntime.field(aabb, 'minY'));
     FlightRuntime.setField(out, 'width', (FlightRuntime.field(aabb, 'maxX') - FlightRuntime.field(aabb, 'minX')));
     FlightRuntime.setField(out, 'height', (FlightRuntime.field(aabb, 'maxY') - FlightRuntime.field(aabb, 'minY')));
   }
 
-  @:keep public static function _insertIntoGrid__uniformGrid(grid:UniformGrid__uniformGrid, id:SpatialObjectId, bounds:SpatialAabb):Void {
+  public static function _insertIntoGrid__uniformGrid(grid:UniformGrid__uniformGrid, id:SpatialObjectId, bounds:SpatialAabb):Void {
     var cs:Dynamic = cast FlightRuntime.UNDEFINED;
     var cx0:Dynamic = cast FlightRuntime.UNDEFINED;
     var cx1:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -83,20 +80,20 @@ class Spatial {
 }
   }
 
-  @:keep public static function _isSpatialAabbContainsPoint__uniformGrid(aabb:SpatialAabb, x:Float, y:Float):Bool {
+  public static function _isSpatialAabbContainsPoint__uniformGrid(aabb:SpatialAabb, x:Float, y:Float):Bool {
     FlightRuntime.callValue(Spatial._fillRectFromAabb__uniformGrid, cast ([Spatial._scratchRectA__uniformGrid, aabb] : Array<Dynamic>));
     return cast FlightRuntime.callValue(containsRectanglePointXY, cast ([Spatial._scratchRectA__uniformGrid, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function _isSpatialAabbOverlapping__uniformGrid(a:SpatialAabb, b:SpatialAabb):Bool {
+  public static function _isSpatialAabbOverlapping__uniformGrid(a:SpatialAabb, b:SpatialAabb):Bool {
     FlightRuntime.callValue(Spatial._fillRectFromAabb__uniformGrid, cast ([Spatial._scratchRectA__uniformGrid, a] : Array<Dynamic>));
     FlightRuntime.callValue(Spatial._fillRectFromAabb__uniformGrid, cast ([Spatial._scratchRectB__uniformGrid, b] : Array<Dynamic>));
     return cast FlightRuntime.callValue(intersectsRectangle, cast ([Spatial._scratchRectA__uniformGrid, Spatial._scratchRectB__uniformGrid] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function _queryGridPairs__uniformGrid(grid:UniformGrid__uniformGrid, out:Array<SpatialPair>):Void {
+  public static function _queryGridPairs__uniformGrid(grid:UniformGrid__uniformGrid, out:Array<SpatialPair>):Void {
     var cs:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.setLength(out, 0.0);
     cs = FlightRuntime.field(grid, 'cellSize');
@@ -132,7 +129,7 @@ class Spatial {
     }
   }
 
-  @:keep public static function _queryGridPoint__uniformGrid(grid:UniformGrid__uniformGrid, x:Float, y:Float, out:Array<SpatialObjectId>):Void {
+  public static function _queryGridPoint__uniformGrid(grid:UniformGrid__uniformGrid, x:Float, y:Float, out:Array<SpatialObjectId>):Void {
     var cs:Dynamic = cast FlightRuntime.UNDEFINED;
     var cell:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.setLength(out, 0.0);
@@ -145,7 +142,7 @@ class Spatial {
     }
   }
 
-  @:keep public static function _queryGridRay__uniformGrid(grid:UniformGrid__uniformGrid, ox:Float, oy:Float, dx:Float, dy:Float, out:Array<SpatialObjectId>):Void {
+  public static function _queryGridRay__uniformGrid(grid:UniformGrid__uniformGrid, ox:Float, oy:Float, dx:Float, dy:Float, out:Array<SpatialObjectId>):Void {
     var cs:Dynamic = cast FlightRuntime.UNDEFINED;
     var seen:Dynamic = cast FlightRuntime.UNDEFINED;
     var boxMinX:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -230,7 +227,7 @@ class Spatial {
     }
   }
 
-  @:keep public static function _queryGridRegion__uniformGrid(grid:UniformGrid__uniformGrid, region:SpatialAabb, out:Array<SpatialObjectId>):Void {
+  public static function _queryGridRegion__uniformGrid(grid:UniformGrid__uniformGrid, region:SpatialAabb, out:Array<SpatialObjectId>):Void {
     var cs:Dynamic = cast FlightRuntime.UNDEFINED;
     var seen:Dynamic = cast FlightRuntime.UNDEFINED;
     var cx0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -267,7 +264,7 @@ class Spatial {
     }
   }
 
-  @:keep public static function _rayBoxEntryT__uniformGrid(ox:Float, oy:Float, dx:Float, dy:Float, minX:Float, minY:Float, maxX:Float, maxY:Float):Float {
+  public static function _rayBoxEntryT__uniformGrid(ox:Float, oy:Float, dx:Float, dy:Float, minX:Float, minY:Float, maxX:Float, maxY:Float):Float {
     var tmin:Dynamic = cast FlightRuntime.UNDEFINED;
     var tmax:Dynamic = cast FlightRuntime.UNDEFINED;
     tmin = -HxMath.POSITIVE_INFINITY;
@@ -305,7 +302,7 @@ class Spatial {
     return cast null;
   }
 
-  @:keep public static function _removeFromGrid__uniformGrid(grid:UniformGrid__uniformGrid, id:SpatialObjectId):Void {
+  public static function _removeFromGrid__uniformGrid(grid:UniformGrid__uniformGrid, id:SpatialObjectId):Void {
     var bounds:Dynamic = cast FlightRuntime.UNDEFINED;
     var cs:Dynamic = cast FlightRuntime.UNDEFINED;
     var cx0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -344,16 +341,16 @@ class Spatial {
 
   public static final _scratchRectB__uniformGrid:RectangleLike = { x: 0.0, y: 0.0, width: 0.0, height: 0.0 };
 
-  @:keep public static function clearSpatialIndex(index:SpatialIndex):Void {
+  public static function clearSpatialIndex(index:SpatialIndex):Void {
     FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.field(index, 'runtime'), 'backend'), 'clearSpatialIndex', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function createSpatialIndex(?backend:SpatialIndexBackend):SpatialIndex {
+  public static function createSpatialIndex(?backend:SpatialIndexBackend):SpatialIndex {
     return cast { runtime: { backend: FlightRuntime.coalesce(backend, function():Dynamic return cast FlightRuntime.callValue(createUniformGridSpatialBackend, cast ([Spatial.DEFAULT_SPATIAL_CELL_SIZE__spatialIndex] : Array<Dynamic>))) } };
     return cast null;
   }
 
-  @:keep public static function createUniformGridSpatialBackend(cellSize:Float):SpatialIndexBackend {
+  public static function createUniformGridSpatialBackend(cellSize:Float):SpatialIndexBackend {
     var grid:UniformGrid__uniformGrid = cast FlightRuntime.UNDEFINED;
     grid = { cellSize: cellSize, cells: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), bounds: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), minCellX: 0.0, minCellY: 0.0, maxCellX: 0.0, maxCellY: 0.0, empty: true, seen: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []) };
     return cast { insertSpatialObject: function(id:Dynamic, bounds:Dynamic) {
@@ -382,31 +379,31 @@ class Spatial {
 
   public static final DEFAULT_SPATIAL_CELL_SIZE__spatialIndex:Dynamic = 128.0;
 
-  @:keep public static function insertSpatialObject(index:SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Void {
+  public static function insertSpatialObject(index:SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Void {
     FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.field(index, 'runtime'), 'backend'), 'insertSpatialObject', cast ([id, bounds] : Array<Dynamic>));
   }
 
-  @:keep public static function querySpatialPairs(index:SpatialIndex, out:Array<SpatialPair>):Void {
+  public static function querySpatialPairs(index:SpatialIndex, out:Array<SpatialPair>):Void {
     FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.field(index, 'runtime'), 'backend'), 'querySpatialPairs', cast ([out] : Array<Dynamic>));
   }
 
-  @:keep public static function querySpatialPoint(index:SpatialIndex, x:Float, y:Float, out:Array<SpatialObjectId>):Void {
+  public static function querySpatialPoint(index:SpatialIndex, x:Float, y:Float, out:Array<SpatialObjectId>):Void {
     FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.field(index, 'runtime'), 'backend'), 'querySpatialPoint', cast ([x, y, out] : Array<Dynamic>));
   }
 
-  @:keep public static function querySpatialRay(index:SpatialIndex, x:Float, y:Float, dx:Float, dy:Float, out:Array<SpatialObjectId>):Void {
+  public static function querySpatialRay(index:SpatialIndex, x:Float, y:Float, dx:Float, dy:Float, out:Array<SpatialObjectId>):Void {
     FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.field(index, 'runtime'), 'backend'), 'querySpatialRay', cast ([x, y, dx, dy, out] : Array<Dynamic>));
   }
 
-  @:keep public static function querySpatialRegion(index:SpatialIndex, region:SpatialAabb, out:Array<SpatialObjectId>):Void {
+  public static function querySpatialRegion(index:SpatialIndex, region:SpatialAabb, out:Array<SpatialObjectId>):Void {
     FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.field(index, 'runtime'), 'backend'), 'querySpatialRegion', cast ([region, out] : Array<Dynamic>));
   }
 
-  @:keep public static function removeSpatialObject(index:SpatialIndex, id:SpatialObjectId):Void {
+  public static function removeSpatialObject(index:SpatialIndex, id:SpatialObjectId):Void {
     FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.field(index, 'runtime'), 'backend'), 'removeSpatialObject', cast ([id] : Array<Dynamic>));
   }
 
-  @:keep public static function updateSpatialObject(index:SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Void {
+  public static function updateSpatialObject(index:SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Void {
     FlightRuntime.callProperty(FlightRuntime.field(FlightRuntime.field(index, 'runtime'), 'backend'), 'updateSpatialObject', cast ([id, bounds] : Array<Dynamic>));
   }
 }

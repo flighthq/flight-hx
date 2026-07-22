@@ -20,9 +20,6 @@ typedef WebWakeLock__power = { var request:Dynamic; };
 
 typedef WebWakeLockSentinel__power = { @:optional var addEventListener:Dynamic; @:optional var release:Dynamic; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.PowerApi")
 class PowerApi {
   public static var _backend__power:Null<PowerBackend> = FlightRuntime.explicitNull();
@@ -35,7 +32,7 @@ class PowerApi {
 
   public static var _wakeLockSentinel__power:Null<WebWakeLockSentinel__power> = FlightRuntime.explicitNull();
 
-  @:keep public static function attachPower(power:Power, idleThresholdSeconds:Dynamic = 60.0):Void {
+  public static function attachPower(power:Power, idleThresholdSeconds:Dynamic = 60.0):Void {
     var backend:Dynamic = cast FlightRuntime.UNDEFINED;
     var wasCharging:Dynamic = cast FlightRuntime.UNDEFINED;
     var unsubscribeChange:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -102,22 +99,22 @@ class PowerApi {
 }] : Array<Dynamic>));
   }
 
-  @:keep public static function createPower():Power {
+  public static function createPower():Power {
     return cast { onChange: null, onCharging: null, onDischarging: null, onIdleStateChange: null, onLockScreen: null, onLowPowerModeChange: null, onResume: null, onSuspend: null, onThermalStateChange: null, onUnlockScreen: null };
     return cast null;
   }
 
-  @:keep public static function createPowerBatteryHealth():PowerBatteryHealth {
+  public static function createPowerBatteryHealth():PowerBatteryHealth {
     return cast { capacityWearLevel: -1.0, cycleCount: -1.0, healthState: 'Unknown', temperatureCelsius: -1.0, voltage: -1.0 };
     return cast null;
   }
 
-  @:keep public static function createPowerStatus():PowerStatus {
+  public static function createPowerStatus():PowerStatus {
     return cast { batteryLevel: -1.0, chargingTime: -1.0, dischargingTime: -1.0, isBatteryLow: false, isCharging: false, isLowPower: false, isOnBattery: false, thermalState: 'Unknown' };
     return cast null;
   }
 
-  @:keep public static function createWebPowerBackend():PowerBackend {
+  public static function createWebPowerBackend():PowerBackend {
     var cachedLevel:Dynamic = cast FlightRuntime.UNDEFINED;
     var cachedCharging:Dynamic = cast FlightRuntime.UNDEFINED;
     var cachedChargingTime:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -277,7 +274,7 @@ class PowerApi {
     return cast null;
   }
 
-  @:keep public static function detachPower(power:Power):Void {
+  public static function detachPower(power:Power):Void {
     var unsubscribe:Dynamic = cast FlightRuntime.UNDEFINED;
     unsubscribe = FlightRuntime.callProperty(PowerApi._subscriptions__power, 'get', cast ([power] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(unsubscribe, FlightRuntime.UNDEFINED))) {
@@ -286,11 +283,11 @@ class PowerApi {
 }
   }
 
-  @:keep public static function disposePower(power:Power):Void {
+  public static function disposePower(power:Power):Void {
     FlightRuntime.callValue(detachPower, cast ([power] : Array<Dynamic>));
   }
 
-  @:keep public static function enablePowerSignals(power:Power):Void {
+  public static function enablePowerSignals(power:Power):Void {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(power, 'onChange'), null))) { FlightRuntime.setField(power, 'onChange', FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(power, 'onCharging'), null))) { FlightRuntime.setField(power, 'onCharging', FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(power, 'onDischarging'), null))) { FlightRuntime.setField(power, 'onDischarging', FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
@@ -303,43 +300,43 @@ class PowerApi {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(power, 'onUnlockScreen'), null))) { FlightRuntime.setField(power, 'onUnlockScreen', FlightRuntime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
   }
 
-  @:keep public static function getPowerBackend():PowerBackend {
+  public static function getPowerBackend():PowerBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(PowerApi._backend__power, null))) { (PowerApi._backend__power = cast (FlightRuntime.callValue(createWebPowerBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast PowerApi._backend__power;
     return cast null;
   }
 
-  @:keep public static function getPowerBatteryHealth(out:PowerBatteryHealth):Null<PowerBatteryHealth> {
+  public static function getPowerBatteryHealth(out:PowerBatteryHealth):Null<PowerBatteryHealth> {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getPowerBackend, cast ([] : Array<Dynamic>)), 'getBatteryHealth', cast ([out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getPowerIdlePollingIntervalMs():Float {
+  public static function getPowerIdlePollingIntervalMs():Float {
     return cast PowerApi._idlePollingIntervalMs__power;
     return cast null;
   }
 
-  @:keep public static function getPowerStatus(out:PowerStatus):PowerStatus {
+  public static function getPowerStatus(out:PowerStatus):PowerStatus {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getPowerBackend, cast ([] : Array<Dynamic>)), 'getStatus', cast ([out] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getPowerSystemIdleState(thresholdSeconds:Float):PowerIdleState {
+  public static function getPowerSystemIdleState(thresholdSeconds:Float):PowerIdleState {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getPowerBackend, cast ([] : Array<Dynamic>)), 'getSystemIdleState', cast ([thresholdSeconds] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getPowerSystemIdleTime():Float {
+  public static function getPowerSystemIdleTime():Float {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getPowerBackend, cast ([] : Array<Dynamic>)), 'getSystemIdleTime', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getPowerThermalState():PowerThermalState {
+  public static function getPowerThermalState():PowerThermalState {
     return cast FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime.callValue(getPowerBackend, cast ([] : Array<Dynamic>)), 'getStatus', cast ([PowerApi._scratch__power] : Array<Dynamic>)), 'thermalState');
     return cast null;
   }
 
-  @:keep public static function getWebBatteryManagerPromise__power():Null<flight.internal.FlightPromise<WebBatteryManager__power>> {
+  public static function getWebBatteryManagerPromise__power():Null<flight.internal.FlightPromise<WebBatteryManager__power>> {
     var nav:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
     nav = (cast FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['navigator'] : Array<Dynamic>)) : { @:optional var getBattery:Dynamic; });
@@ -352,20 +349,20 @@ class PowerApi {
     return cast null;
   }
 
-  @:keep public static function hasPowerKeepAwake():Bool {
+  public static function hasPowerKeepAwake():Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getPowerBackend, cast ([] : Array<Dynamic>)), 'isKeepAwakeActive', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function setPowerBackend(backend:Null<PowerBackend>):Void {
+  public static function setPowerBackend(backend:Null<PowerBackend>):Void {
     (PowerApi._backend__power = cast (backend : Dynamic));
   }
 
-  @:keep public static function setPowerIdlePollingIntervalMs(intervalMs:Float):Void {
+  public static function setPowerIdlePollingIntervalMs(intervalMs:Float):Void {
     (PowerApi._idlePollingIntervalMs__power = cast (intervalMs : Dynamic));
   }
 
-  @:keep public static function setPowerKeepAwake(enabled:Bool, ?mode:PowerKeepAwakeMode):Bool {
+  public static function setPowerKeepAwake(enabled:Bool, ?mode:PowerKeepAwakeMode):Bool {
     return cast FlightRuntime.callProperty(FlightRuntime.callValue(getPowerBackend, cast ([] : Array<Dynamic>)), 'setKeepAwake', cast ([enabled, mode] : Array<Dynamic>));
     return cast null;
   }

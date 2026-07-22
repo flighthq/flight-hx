@@ -171,9 +171,6 @@ typedef WgpuVelocityPipeline__wgpuVelocity = { var pipeline:Dynamic; var uniform
 
 typedef WgpuVideoData__wgpuVideo = { var entry:Null<WgpuTextureEntry>; var w:Float; var h:Float; };
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.DisplayObjectWgpu")
 class DisplayObjectWgpu {
   public static final _activeVelocityPasses__wgpuVelocity:Dynamic = FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
@@ -222,7 +219,7 @@ class DisplayObjectWgpu {
 
   public static final ADD_BLEND__wgpuSpriteBatch:Dynamic = { color: { srcFactor: 'one', dstFactor: 'one', operation: 'add' }, alpha: { srcFactor: 'one', dstFactor: 'one', operation: 'add' } };
 
-  @:keep public static function acquireWgpuSpriteBatchBufferSlot__wgpuSpriteBatch(state:WgpuRenderState):WgpuSpriteBatchBufferSlot {
+  public static function acquireWgpuSpriteBatchBufferSlot__wgpuSpriteBatch(state:WgpuRenderState):WgpuSpriteBatchBufferSlot {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var pool:Dynamic = cast FlightRuntime.UNDEFINED;
     var slot:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -240,12 +237,12 @@ class DisplayObjectWgpu {
 
   public static final CARET_COLOR__wgpuTextInput:Dynamic = '#000000';
 
-  @:keep public static function areWgpuColorAdjustmentGuardsEnabled(state:WgpuRenderState):Bool {
+  public static function areWgpuColorAdjustmentGuardsEnabled(state:WgpuRenderState):Bool {
     return cast !FlightRuntime.looseEquals(FlightRuntime.field(FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'wgpuColorAdjustmentGuard'), null);
     return cast null;
   }
 
-  @:keep public static function buildWgpuScale9Mapper(bounds:RectangleLike, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
+  public static function buildWgpuScale9Mapper(bounds:RectangleLike, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
     var gx:Dynamic = cast FlightRuntime.UNDEFINED;
     var gy:Dynamic = cast FlightRuntime.UNDEFINED;
     var gw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -277,7 +274,7 @@ class DisplayObjectWgpu {
 
   public static final CT_MODE_NONE__wgpuColorAdjustment:Dynamic = 0.0;
 
-  @:keep public static function computeWgpuScissorRect__wgpuClipRectangle(state:WgpuRenderState, rect:RectangleLike, transform:MatrixLike):WgpuScissorRect {
+  public static function computeWgpuScissorRect__wgpuClipRectangle(state:WgpuRenderState, rect:RectangleLike, transform:MatrixLike):WgpuScissorRect {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var x0:Dynamic = cast FlightRuntime.UNDEFINED;
     var y0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -310,7 +307,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function createClipContourUniformBuffer__wgpuClipContours(state:WgpuRenderState, t:Matrix):Dynamic {
+  public static function createClipContourUniformBuffer__wgpuClipContours(state:WgpuRenderState, t:Matrix):Dynamic {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var viewport:Dynamic = cast FlightRuntime.UNDEFINED;
     var iw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -337,7 +334,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function createClipContourVertexBuffer__wgpuClipContours(state:WgpuRenderState, contours:Array<Array<Float>>):{ var vertexBuffer:Dynamic; var vertexCount:Float; } {
+  public static function createClipContourVertexBuffer__wgpuClipContours(state:WgpuRenderState, contours:Array<Array<Float>>):{ var vertexBuffer:Dynamic; var vertexCount:Float; } {
     var tris:Array<Float> = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var vertexCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -367,7 +364,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function createWgpuCacheState(screenState:WgpuRenderState):WgpuRenderState {
+  public static function createWgpuCacheState(screenState:WgpuRenderState):WgpuRenderState {
     var screenRuntime:Dynamic = cast FlightRuntime.UNDEFINED;
     var cacheState:Dynamic = cast FlightRuntime.UNDEFINED;
     var cacheRuntime:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -435,17 +432,17 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function createWgpuRendererData<T>(data:Dynamic):RendererData {
+  public static function createWgpuRendererData<T>(data:Dynamic):RendererData {
     return cast (cast (cast data : Dynamic) : RendererData);
     return cast null;
   }
 
-  @:keep public static function createWgpuRichTextData(_state:RenderState, _source:Renderable):RendererData {
+  public static function createWgpuRichTextData(_state:RenderState, _source:Renderable):RendererData {
     return cast FlightRuntime.callValue(createWgpuRendererData, cast ([{ entry: null, h: 0.0, w: 0.0 }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createWgpuScale9ShapeData(_state:RenderState, _source:Renderable):RendererData {
+  public static function createWgpuScale9ShapeData(_state:RenderState, _source:Renderable):RendererData {
     var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
     var ctx:Dynamic = cast FlightRuntime.UNDEFINED;
     canvas = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -456,7 +453,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function createWgpuShapeData__wgpuShape(_state:RenderState, _source:Renderable):RendererData {
+  public static function createWgpuShapeData__wgpuShape(_state:RenderState, _source:Renderable):RendererData {
     var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
     var ctx:Dynamic = cast FlightRuntime.UNDEFINED;
     canvas = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -467,12 +464,12 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function createWgpuSpriteBatchBuffer__wgpuSpriteBatch(state:WgpuRenderState, size:Float):Dynamic {
+  public static function createWgpuSpriteBatchBuffer__wgpuSpriteBatch(state:WgpuRenderState, size:Float):Dynamic {
     return cast FlightRuntime.callProperty(FlightRuntime.field(state, 'device'), 'createBuffer', cast ([{ size: size, usage: (Std.int(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'STORAGE')) | Std.int(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createWgpuTextLabelData__wgpuTextLabel(_state:RenderState, _source:Renderable):RendererData {
+  public static function createWgpuTextLabelData__wgpuTextLabel(_state:RenderState, _source:Renderable):RendererData {
     var canvas:Dynamic = cast FlightRuntime.UNDEFINED;
     var ctx:Dynamic = cast FlightRuntime.UNDEFINED;
     canvas = FlightRuntime.callProperty(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -483,12 +480,12 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function createWgpuVelocityTarget(state:WgpuRenderState, width:Float, height:Float):WgpuRenderTarget {
+  public static function createWgpuVelocityTarget(state:WgpuRenderState, width:Float, height:Float):WgpuRenderTarget {
     return cast FlightRuntime.callValue(createWgpuRenderTarget, cast ([state, width, height, 'rgba16float'] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function createWgpuVideoData(_state:RenderState, _source:Renderable):RendererData {
+  public static function createWgpuVideoData(_state:RenderState, _source:Renderable):RendererData {
     return cast FlightRuntime.callValue(createWgpuRendererData, cast ([{ entry: null, h: 0.0, w: 0.0 }] : Array<Dynamic>));
     return cast null;
   }
@@ -769,21 +766,21 @@ class DisplayObjectWgpu {
 
   public static final INSTANCE_FLOATS__wgpuParticleEmitter:Dynamic = 14.0;
 
-  @:keep public static function destroyWgpuRichTextData(_state:RenderState, data:RendererData):Void {
+  public static function destroyWgpuRichTextData(_state:RenderState, data:RendererData):Void {
     var richData:Dynamic = cast FlightRuntime.UNDEFINED;
     richData = FlightRuntime.callValue(getWgpuRendererData, cast ([data] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(richData, null))) { return; }
     FlightRuntime.callOptionalProperty(FlightRuntime.optionalField(FlightRuntime.field(richData, 'entry'), 'texture'), 'destroy', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function destroyWgpuScale9ShapeData(_state:RenderState, data:RendererData):Void {
+  public static function destroyWgpuScale9ShapeData(_state:RenderState, data:RendererData):Void {
     var shapeData:Dynamic = cast FlightRuntime.UNDEFINED;
     shapeData = FlightRuntime.callValue(getWgpuRendererData, cast ([data] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(shapeData, null))) { return; }
     FlightRuntime.callOptionalProperty(FlightRuntime.optionalField(FlightRuntime.field(shapeData, 'entry'), 'texture'), 'destroy', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function destroyWgpuShapeData__wgpuShape(state:WgpuRenderState, data:RendererData):Void {
+  public static function destroyWgpuShapeData__wgpuShape(state:WgpuRenderState, data:RendererData):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var shapeData:Dynamic = cast FlightRuntime.UNDEFINED;
     var entry:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -806,7 +803,7 @@ class DisplayObjectWgpu {
     FlightRuntime.setField(b, 'bindGroup', null);
   }
 
-  @:keep public static function destroyWgpuTextLabelData__wgpuTextLabel(state:WgpuRenderState, data:RendererData):Void {
+  public static function destroyWgpuTextLabelData__wgpuTextLabel(state:WgpuRenderState, data:RendererData):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var textLabelData:Dynamic = cast FlightRuntime.UNDEFINED;
     var entry:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -820,14 +817,14 @@ class DisplayObjectWgpu {
 }
   }
 
-  @:keep public static function destroyWgpuVideoData(_state:RenderState, data:RendererData):Void {
+  public static function destroyWgpuVideoData(_state:RenderState, data:RendererData):Void {
     var videoData:Dynamic = cast FlightRuntime.UNDEFINED;
     videoData = FlightRuntime.callValue(getWgpuRendererData, cast ([data] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(videoData, null))) { return; }
     FlightRuntime.callOptionalProperty(FlightRuntime.optionalField(FlightRuntime.field(videoData, 'entry'), 'texture'), 'destroy', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function drawRichTextToCanvas__wgpuRichText(context:Dynamic, source:RichText, result:Dynamic, fieldW:Float, fieldH:Float, text:String):Void {
+  public static function drawRichTextToCanvas__wgpuRichText(context:Dynamic, source:RichText, result:Dynamic, fieldW:Float, fieldH:Float, text:String):Void {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var firstVisibleLine:Dynamic = cast FlightRuntime.UNDEFINED;
     var scrollYOffset:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -863,7 +860,7 @@ class DisplayObjectWgpu {
     FlightRuntime.callProperty(context, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function drawWgpuBitmap(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuBitmap(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var imageSource:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -940,10 +937,10 @@ class DisplayObjectWgpu {
     FlightRuntime.incrementField(runtime, 'spriteBatchCount', 1, true);
   }
 
-  @:keep public static function drawWgpuDisplayObject(_state:WgpuRenderState, _renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuDisplayObject(_state:WgpuRenderState, _renderProxy:RenderProxy2D):Void {
   }
 
-  @:keep public static function drawWgpuParticleEmitter(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuParticleEmitter(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure2:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1103,7 +1100,7 @@ class DisplayObjectWgpu {
     FlightRuntime.callProperty(pass, 'draw', cast ([6.0, drawCount, 0.0, 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function drawWgpuRenderCache__wgpuCache(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuRenderCache__wgpuCache(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var cache:Dynamic = cast FlightRuntime.UNDEFINED;
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     cache = FlightRuntime.callValue(getRenderProxyCache, cast ([state, FlightRuntime.field(renderProxy, 'source')] : Array<Dynamic>));
@@ -1114,13 +1111,13 @@ class DisplayObjectWgpu {
     FlightRuntime.callValue(drawWgpuRenderTargetResult, cast ([state, renderProxy, target, DisplayObjectWgpu._identity__wgpuCache] : Array<Dynamic>));
   }
 
-  @:keep public static function drawWgpuRichText(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuRichText(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var overlay:Dynamic = cast FlightRuntime.UNDEFINED;
     overlay = FlightRuntime.select(FlightRuntime.andValue(!FlightRuntime.strictEquals(DisplayObjectWgpu._webgpuTextInputOverlay__wgpuRichText, null), function():Dynamic return cast !FlightRuntime.strictEquals(FlightRuntime.field(FlightRuntime.callValue(getRichTextRuntime, cast ([(cast FlightRuntime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null)), function():Dynamic return cast DisplayObjectWgpu._webgpuTextInputOverlay__wgpuRichText, function():Dynamic return cast FlightRuntime.UNDEFINED);
     FlightRuntime.callValue(drawWgpuRichTextWithOverlay, cast ([state, renderProxy, overlay] : Array<Dynamic>));
   }
 
-  @:keep public static function drawWgpuRichTextWithOverlay(state:WgpuRenderState, renderProxy:RenderProxy2D, ?overlay:WgpuRichTextOverlay):Void {
+  public static function drawWgpuRichTextWithOverlay(state:WgpuRenderState, renderProxy:RenderProxy2D, ?overlay:WgpuRichTextOverlay):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1189,7 +1186,7 @@ class DisplayObjectWgpu {
     FlightRuntime.callValue(drawWgpuQuad, cast ([state, renderProxy, entry, offsetX, 0.0, (offsetX + fieldW), fieldH, 0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
   }
 
-  @:keep public static function drawWgpuScale9Shape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuScale9Shape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1258,11 +1255,11 @@ class DisplayObjectWgpu {
     FlightRuntime.callValue(drawWgpuQuadWithTransform, cast ([state, renderProxy, { a: a, b: b, c: c, d: d, tx: FlightRuntime.field(t, 'tx'), ty: FlightRuntime.field(t, 'ty') }, FlightRuntime.field(shapeData, 'entry'), 0.0, 0.0, w, h, 0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
   }
 
-  @:keep public static function drawWgpuScale9ShapeMask(state:WgpuRenderState, data:RenderProxy2D):Void {
+  public static function drawWgpuScale9ShapeMask(state:WgpuRenderState, data:RenderProxy2D):Void {
     FlightRuntime.callValue(drawWgpuScale9Shape, cast ([state, data] : Array<Dynamic>));
   }
 
-  @:keep public static function drawWgpuShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1352,7 +1349,7 @@ class DisplayObjectWgpu {
     FlightRuntime.incrementField(runtime, 'spriteBatchCount', 1, true);
   }
 
-  @:keep public static function drawWgpuShapeMeshes(state:WgpuRenderState, renderProxy:RenderProxy2D, meshes:Array<WgpuShapeMesh>, buffers:WgpuShapeMeshBuffers):Void {
+  public static function drawWgpuShapeMeshes(state:WgpuRenderState, renderProxy:RenderProxy2D, meshes:Array<WgpuShapeMesh>, buffers:WgpuShapeMeshBuffers):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var pass:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipelineEntry:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1401,7 +1398,7 @@ class DisplayObjectWgpu {
     }
   }
 
-  @:keep public static function drawWgpuTextInputOverlay(context:Dynamic, source:RichText, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
+  public static function drawWgpuTextInputOverlay(context:Dynamic, source:RichText, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
     var input:Dynamic = cast FlightRuntime.UNDEFINED;
     var firstVisibleLine:Dynamic = cast FlightRuntime.UNDEFINED;
     var scrollYOffset:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1432,7 +1429,7 @@ class DisplayObjectWgpu {
     FlightRuntime.callProperty(context, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:keep public static function drawWgpuTextLabel(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuTextLabel(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1537,7 +1534,7 @@ class DisplayObjectWgpu {
     FlightRuntime.incrementField(runtime, 'spriteBatchCount', 1, true);
   }
 
-  @:keep public static function drawWgpuVelocityQuad(ctx:WgpuVelocityContext, x:Float, y:Float, width:Float, height:Float, velocityX:Float, velocityY:Float):Void {
+  public static function drawWgpuVelocityQuad(ctx:WgpuVelocityContext, x:Float, y:Float, width:Float, height:Float, velocityX:Float, velocityY:Float):Void {
     var active:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     var clipX0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1567,7 +1564,7 @@ class DisplayObjectWgpu {
     FlightRuntime.callProperty(FlightRuntime.field(active, 'pass'), 'draw', cast ([6.0] : Array<Dynamic>));
   }
 
-  @:keep public static function drawWgpuVideo(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuVideo(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var element:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1606,11 +1603,11 @@ class DisplayObjectWgpu {
     FlightRuntime.callValue(drawWgpuQuad, cast ([state, renderProxy, entry, 0.0, 0.0, vw, vh, 0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
   }
 
-  @:keep public static function enableWgpuClipSupport(state:WgpuRenderState):Void {
+  public static function enableWgpuClipSupport(state:WgpuRenderState):Void {
     FlightRuntime.setField(state, 'displayObjectClipHooks', DisplayObjectWgpu.webgpuClipHooks__wgpuClip);
   }
 
-  @:keep public static function enableWgpuColorAdjustment(state:WgpuRenderState):Void {
+  public static function enableWgpuColorAdjustment(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     FlightRuntime.setField(runtime, 'wgpuColorAdjustmentFold', DisplayObjectWgpu.wgpuColorAdjustmentFold__wgpuColorAdjustment);
@@ -1620,19 +1617,19 @@ class DisplayObjectWgpu {
 }
   }
 
-  @:keep public static function enableWgpuColorAdjustmentGuards(state:WgpuRenderState):Void {
+  public static function enableWgpuColorAdjustmentGuards(state:WgpuRenderState):Void {
     FlightRuntime.setField(FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'wgpuColorAdjustmentGuard', DisplayObjectWgpu.warnWgpuColorAdjustmentNotEnabled__enableWgpuColorAdjustmentGuards);
   }
 
-  @:keep public static function enableWgpuRenderCache(state:WgpuRenderState):Void {
+  public static function enableWgpuRenderCache(state:WgpuRenderState):Void {
     FlightRuntime.callValue(registerRenderCacheRenderer, cast ([state, defaultWgpuRenderCacheRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function enableWgpuTextInput():Void {
+  public static function enableWgpuTextInput():Void {
     FlightRuntime.callValue(registerWgpuTextInputOverlay, cast ([drawWgpuTextInputOverlay] : Array<Dynamic>));
   }
 
-  @:keep public static function ensureClipContourPipelines__wgpuClipContours(state:WgpuRenderState):WgpuClipContourPipelines {
+  public static function ensureClipContourPipelines__wgpuClipContours(state:WgpuRenderState):WgpuClipContourPipelines {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var format:Dynamic = cast FlightRuntime.UNDEFINED;
     var cache:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1661,7 +1658,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function ensureParticleInstanceBuffer__wgpuParticleEmitter(state:WgpuRenderState, count:Float):Void {
+  public static function ensureParticleInstanceBuffer__wgpuParticleEmitter(state:WgpuRenderState, count:Float):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var needed:Dynamic = cast FlightRuntime.UNDEFINED;
     var newCapacity:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1677,7 +1674,7 @@ class DisplayObjectWgpu {
     FlightRuntime.setField(runtime, 'particleInstanceData', FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(newCapacity / 4.0)]));
   }
 
-  @:keep public static function ensureParticleResources__wgpuParticleEmitter(state:WgpuRenderState):WgpuParticleResources__wgpuParticleEmitter {
+  public static function ensureParticleResources__wgpuParticleEmitter(state:WgpuRenderState):WgpuParticleResources__wgpuParticleEmitter {
     var existing:Dynamic = cast FlightRuntime.UNDEFINED;
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1706,7 +1703,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function ensureShapeMeshIndexBuffer__wgpuShapeMesh(state:WgpuRenderState, buffers:WgpuShapeMeshBuffers, byteLength:Float):Dynamic {
+  public static function ensureShapeMeshIndexBuffer__wgpuShapeMesh(state:WgpuRenderState, buffers:WgpuShapeMeshBuffers, byteLength:Float):Dynamic {
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     size = FlightRuntime.callProperty(HxMath, 'max', cast ([4.0, (Std.int((byteLength + 3.0)) & Std.int(~Std.int(3.0)))] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.field(buffers, 'indexBuffer'), null), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(buffers, 'indexCapacity'), size, '<')))) {
@@ -1718,7 +1715,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function ensureShapeMeshPipeline__wgpuShapeMesh(state:WgpuRenderState):WgpuShapeMeshPipeline {
+  public static function ensureShapeMeshPipeline__wgpuShapeMesh(state:WgpuRenderState):WgpuShapeMeshPipeline {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var format:Dynamic = cast FlightRuntime.UNDEFINED;
     var cache:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1747,7 +1744,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function ensureShapeMeshUniform__wgpuShapeMesh(state:WgpuRenderState, pipelineEntry:WgpuShapeMeshPipeline, buffers:WgpuShapeMeshBuffers):flight.internal.FlightFloat32Array {
+  public static function ensureShapeMeshUniform__wgpuShapeMesh(state:WgpuRenderState, pipelineEntry:WgpuShapeMeshPipeline, buffers:WgpuShapeMeshBuffers):flight.internal.FlightFloat32Array {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(buffers, 'uniformBuffer'), null))) {
   FlightRuntime.setField(buffers, 'uniformBuffer', FlightRuntime.callProperty(FlightRuntime.field(state, 'device'), 'createBuffer', cast ([{ size: DisplayObjectWgpu.SHAPE_MESH_UNIFORM_BYTES__wgpuShapeMesh, usage: (Std.int(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'UNIFORM')) | Std.int(FlightRuntime.field(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>)));
   FlightRuntime.setField(buffers, 'bindGroup', FlightRuntime.callProperty(FlightRuntime.field(state, 'device'), 'createBindGroup', cast ([{ layout: FlightRuntime.field(pipelineEntry, 'bindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: FlightRuntime.field(buffers, 'uniformBuffer') } }] : Array<Dynamic>) }] : Array<Dynamic>)));
@@ -1756,7 +1753,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function ensureShapeMeshVertexBuffer__wgpuShapeMesh(state:WgpuRenderState, buffers:WgpuShapeMeshBuffers, byteLength:Float):Dynamic {
+  public static function ensureShapeMeshVertexBuffer__wgpuShapeMesh(state:WgpuRenderState, buffers:WgpuShapeMeshBuffers, byteLength:Float):Dynamic {
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     size = FlightRuntime.callProperty(HxMath, 'max', cast ([8.0, byteLength] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(FlightRuntime.field(buffers, 'vertexBuffer'), null), function():Dynamic return cast FlightRuntime.compare(FlightRuntime.field(buffers, 'vertexCapacity'), size, '<')))) {
@@ -1768,7 +1765,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function ensureWgpuColorTransformCapacity__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, floatsNeeded:Float):Void {
+  public static function ensureWgpuColorTransformCapacity__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, floatsNeeded:Float):Void {
     var existing:Dynamic = cast FlightRuntime.UNDEFINED;
     var newSize:Dynamic = cast FlightRuntime.UNDEFINED;
     var grown:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1780,7 +1777,7 @@ class DisplayObjectWgpu {
     FlightRuntime.setField(runtime, 'spriteBatchColorTransformData', grown);
   }
 
-  @:keep public static function ensureWgpuQuadBatchResources(state:WgpuRenderState):WgpuQuadBatchResources {
+  public static function ensureWgpuQuadBatchResources(state:WgpuRenderState):WgpuQuadBatchResources {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var existing:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1811,7 +1808,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function ensureWgpuRenderCacheTarget(state:WgpuRenderState, cache:RenderCache, width:Float, height:Float):WgpuRenderTarget {
+  public static function ensureWgpuRenderCacheTarget(state:WgpuRenderState, cache:RenderCache, width:Float, height:Float):WgpuRenderTarget {
     var targets:Dynamic = cast FlightRuntime.UNDEFINED;
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     targets = FlightRuntime.callValue(DisplayObjectWgpu.getTargets__wgpuCache, cast ([state] : Array<Dynamic>));
@@ -1826,7 +1823,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function ensureWgpuRenderStatsMutable__wgpuRenderStats(state:WgpuRenderState):Mutable__wgpuRenderStats<WgpuRenderStats> {
+  public static function ensureWgpuRenderStatsMutable__wgpuRenderStats(state:WgpuRenderState):Mutable__wgpuRenderStats<WgpuRenderStats> {
     var entry:Dynamic = cast FlightRuntime.UNDEFINED;
     entry = FlightRuntime.callProperty(DisplayObjectWgpu._stats__wgpuRenderStats, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(entry, FlightRuntime.UNDEFINED))) {
@@ -1837,7 +1834,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function ensureWgpuVelocityPipeline__wgpuVelocity(state:WgpuRenderState):WgpuVelocityPipeline__wgpuVelocity {
+  public static function ensureWgpuVelocityPipeline__wgpuVelocity(state:WgpuRenderState):WgpuVelocityPipeline__wgpuVelocity {
     var existing:Dynamic = cast FlightRuntime.UNDEFINED;
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
     var module:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1862,14 +1859,14 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function equalsRecordedColorTransform__wgpuColorAdjustment(a:Null<ColorTransform>, b:Null<ColorTransform>):Bool {
+  public static function equalsRecordedColorTransform__wgpuColorAdjustment(a:Null<ColorTransform>, b:Null<ColorTransform>):Bool {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(a, b))) { return cast true; }
     if (FlightRuntime.truthy(FlightRuntime.orValue(FlightRuntime.strictEquals(a, null), function():Dynamic return cast FlightRuntime.strictEquals(b, null)))) { return cast false; }
     return cast FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.andValue(FlightRuntime.strictEquals(FlightRuntime.field(a, 'redMultiplier'), FlightRuntime.field(b, 'redMultiplier')), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'greenMultiplier'), FlightRuntime.field(b, 'greenMultiplier'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'blueMultiplier'), FlightRuntime.field(b, 'blueMultiplier'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'alphaMultiplier'), FlightRuntime.field(b, 'alphaMultiplier'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'redOffset'), FlightRuntime.field(b, 'redOffset'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'greenOffset'), FlightRuntime.field(b, 'greenOffset'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'blueOffset'), FlightRuntime.field(b, 'blueOffset'))), function():Dynamic return cast FlightRuntime.strictEquals(FlightRuntime.field(a, 'alphaOffset'), FlightRuntime.field(b, 'alphaOffset')));
     return cast null;
   }
 
-  @:keep public static function fillWgpuSpriteBatchUniformColorTransform__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, colorTransform:ColorTransform, count:Float):Void {
+  public static function fillWgpuSpriteBatchUniformColorTransform__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, colorTransform:ColorTransform, count:Float):Void {
     FlightRuntime.callValue(DisplayObjectWgpu.ensureWgpuColorTransformCapacity__wgpuColorAdjustment, cast ([runtime, (count * DisplayObjectWgpu.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment)] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
@@ -1880,7 +1877,7 @@ class DisplayObjectWgpu {
     }
   }
 
-  @:keep public static function flushWgpuSpriteBatch(state:WgpuRenderState):Void {
+  public static function flushWgpuSpriteBatch(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     var texture:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1948,7 +1945,7 @@ class DisplayObjectWgpu {
     FlightRuntime.callProperty(pass, 'draw', cast ([6.0, count, 0.0, 0.0] : Array<Dynamic>));
   }
 
-  @:keep public static function getOffscreenCanvas__wgpuRichText(width:Float, height:Float, pixelRatio:Float = 1.0):Dynamic {
+  public static function getOffscreenCanvas__wgpuRichText(width:Float, height:Float, pixelRatio:Float = 1.0):Dynamic {
     var pw:Dynamic = cast FlightRuntime.UNDEFINED;
     var ph:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(!FlightRuntime.truthy(DisplayObjectWgpu._offscreenCanvas__wgpuRichText))) {
@@ -1963,7 +1960,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function getParticlePipeline__wgpuParticleEmitter(state:WgpuRenderState, resources:WgpuParticleResources__wgpuParticleEmitter):Dynamic {
+  public static function getParticlePipeline__wgpuParticleEmitter(state:WgpuRenderState, resources:WgpuParticleResources__wgpuParticleEmitter):Dynamic {
     var format:Dynamic = cast FlightRuntime.UNDEFINED;
     var existing:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -1976,7 +1973,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function getTargets__wgpuCache(state:WgpuRenderState):Dynamic {
+  public static function getTargets__wgpuCache(state:WgpuRenderState):Dynamic {
     var targets:Dynamic = cast FlightRuntime.UNDEFINED;
     targets = FlightRuntime.callProperty(DisplayObjectWgpu._renderCacheTargets__wgpuCache, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(targets, FlightRuntime.UNDEFINED))) {
@@ -1987,7 +1984,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function getWgpuQuadBatchPipeline(state:WgpuRenderState, resources:WgpuQuadBatchResources, module:Dynamic, hasMaterialData:Bool, blendMode:Null<BlendMode>):Dynamic {
+  public static function getWgpuQuadBatchPipeline(state:WgpuRenderState, resources:WgpuQuadBatchResources, module:Dynamic, hasMaterialData:Bool, blendMode:Null<BlendMode>):Dynamic {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var perModule:Dynamic = cast FlightRuntime.UNDEFINED;
     var stencilMode:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2028,27 +2025,27 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function getWgpuQuadBatchPreludeWGSL():String {
+  public static function getWgpuQuadBatchPreludeWGSL():String {
     return cast DisplayObjectWgpu.QUAD_BATCH_PRELUDE_WGSL__wgpuSpriteBatch;
     return cast null;
   }
 
-  @:keep public static function getWgpuRenderCacheTarget(state:WgpuRenderState, cache:RenderCache):Null<WgpuRenderTarget> {
+  public static function getWgpuRenderCacheTarget(state:WgpuRenderState, cache:RenderCache):Null<WgpuRenderTarget> {
     return cast FlightRuntime.coalesce(FlightRuntime.callProperty(FlightRuntime.callValue(DisplayObjectWgpu.getTargets__wgpuCache, cast ([state] : Array<Dynamic>)), 'get', cast ([cache] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:keep public static function getWgpuRendererData<T>(data:Null<RendererData>):Null<Dynamic> {
+  public static function getWgpuRendererData<T>(data:Null<RendererData>):Null<Dynamic> {
     return cast (cast (cast data : Dynamic) : Null<Dynamic>);
     return cast null;
   }
 
-  @:keep public static function getWgpuRenderStats(state:WgpuRenderState):WgpuRenderStats {
+  public static function getWgpuRenderStats(state:WgpuRenderState):WgpuRenderStats {
     return cast FlightRuntime.callValue(DisplayObjectWgpu.ensureWgpuRenderStatsMutable__wgpuRenderStats, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  @:keep public static function getWgpuSpriteBatchColorTransformModule__wgpuColorAdjustment(state:WgpuRenderState):Dynamic {
+  public static function getWgpuSpriteBatchColorTransformModule__wgpuColorAdjustment(state:WgpuRenderState):Dynamic {
     var cached:Dynamic = cast FlightRuntime.UNDEFINED;
     var module:Dynamic = cast FlightRuntime.UNDEFINED;
     cached = FlightRuntime.callProperty(DisplayObjectWgpu._colorTransformModules__wgpuColorAdjustment, 'get', cast ([FlightRuntime.field(state, 'device')] : Array<Dynamic>));
@@ -2059,7 +2056,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function getWgpuVelocityWriter(state:WgpuRenderState, kind:Kind):Null<WgpuVelocityWriter> {
+  public static function getWgpuVelocityWriter(state:WgpuRenderState, kind:Kind):Null<WgpuVelocityWriter> {
     return cast FlightRuntime.coalesce(FlightRuntime.callOptionalProperty(FlightRuntime.callProperty(DisplayObjectWgpu._velocityWriters__wgpuVelocity, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
@@ -2072,7 +2069,7 @@ class DisplayObjectWgpu {
 
   public static final NORMAL_BLEND__wgpuSpriteBatch:Dynamic = { color: { srcFactor: 'one', dstFactor: 'one-minus-src-alpha', operation: 'add' }, alpha: { srcFactor: 'one', dstFactor: 'one-minus-src-alpha', operation: 'add' } };
 
-  @:keep public static function intersectWgpuScissorRect__wgpuClipRectangle(a:Null<WgpuScissorRect>, b:WgpuScissorRect):WgpuScissorRect {
+  public static function intersectWgpuScissorRect__wgpuClipRectangle(a:Null<WgpuScissorRect>, b:WgpuScissorRect):WgpuScissorRect {
     var x:Dynamic = cast FlightRuntime.UNDEFINED;
     var y:Dynamic = cast FlightRuntime.UNDEFINED;
     var right:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2086,7 +2083,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function layoutRichText__wgpuRichText(source:RichText, richTextRuntime:RichTextRuntime, text:String, formatRanges:Dynamic, state:WgpuRenderState):Dynamic {
+  public static function layoutRichText__wgpuRichText(source:RichText, richTextRuntime:RichTextRuntime, text:String, formatRanges:Dynamic, state:WgpuRenderState):Dynamic {
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
     var maxTexDim:Dynamic = cast FlightRuntime.UNDEFINED;
     var maxLogical:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2109,7 +2106,7 @@ class DisplayObjectWgpu {
 
   public static final PARTICLE_SHADER_SRC__wgpuParticleEmitter:Dynamic = '\nstruct Uniforms {\n  matrix : mat3x3f,\n  alpha : f32,\n  hasColorTransform : u32,\n  _pad0 : f32,\n  _pad1 : f32,\n  colorMultiplier : vec4f,\n  colorOffset : vec4f,\n  x0 : f32, y0 : f32, x1 : f32, y1 : f32,\n  u0 : f32, v0 : f32, u1 : f32, v1 : f32,\n}\n\nstruct InstanceData {\n  px : f32, py : f32,\n  cosScale : f32, sinScale : f32,\n  r : f32, g : f32, b : f32, alpha : f32,\n  u0 : f32, v0 : f32, u1 : f32, v1 : f32,\n  width : f32, height : f32,\n}\n\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n@group(2) @binding(0) var<storage, read> instances : array<InstanceData>;\n\nstruct VertexOut {\n  @builtin(position) position : vec4f,\n  @location(0) uv : vec2f,\n  @location(1) color : vec4f,\n}\n\n@vertex\nfn vs_main(\n  @builtin(vertex_index) vi : u32,\n  @builtin(instance_index) ii : u32,\n) -> VertexOut {\n  let inst = instances[ii];\n  let xi = (vi == 1u || vi == 2u || vi == 4u);\n  let yi = (vi == 2u || vi == 4u || vi == 5u);\n  let lx = select(0.0, inst.width, xi);\n  let ly = select(0.0, inst.height, yi);\n  // Rotate and translate in world space\n  let rx = inst.cosScale * lx - inst.sinScale * ly + inst.px;\n  let ry = inst.sinScale * lx + inst.cosScale * ly + inst.py;\n  let p = uni.matrix * vec3f(rx, ry, 1.0);\n  let u = select(inst.u0, inst.u1, xi);\n  let v = select(inst.v0, inst.v1, yi);\n  var out : VertexOut;\n  out.position = vec4f(p.x, p.y, 0.0, 1.0);\n  out.uv = vec2f(u, v);\n  out.color = vec4f(inst.r, inst.g, inst.b, inst.alpha);\n  return out;\n}\n\n@fragment\nfn fs_main(in : VertexOut) -> @location(0) vec4f {\n  let tex_color = textureSample(tex, smp, in.uv);\n  let out_color = vec4f(tex_color.rgb * in.color.rgb, tex_color.a) * in.color.a;\n  if (out_color.a <= 0.0) { discard; }\n  return out_color;\n}\n';
 
-  @:keep public static function packWgpuSpriteBatchMaterialInstance(state:WgpuRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
+  public static function packWgpuSpriteBatchMaterialInstance(state:WgpuRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var floats:Dynamic = cast FlightRuntime.UNDEFINED;
     var renderer:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2123,7 +2120,7 @@ class DisplayObjectWgpu {
 
   public static final QUAD_BATCH_PRELUDE_WGSL__wgpuSpriteBatch:Dynamic = '\nstruct Uniforms {\n  matrix : mat3x3f,\n}\n\nstruct InstanceData {\n  a : f32, b : f32, c : f32, d : f32,\n  tx : f32, ty : f32,\n  width : f32, height : f32,\n  u0 : f32, v0 : f32, u1 : f32, v1 : f32,\n  alpha : f32,\n}\n\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n@group(2) @binding(0) var<storage, read> instances : array<InstanceData>;\n\nstruct BaseVertex {\n  position : vec4f,\n  uv : vec2f,\n  alpha : f32,\n}\n\nfn quadBaseVertex(vi : u32, ii : u32) -> BaseVertex {\n  let inst = instances[ii];\n  let xi = (vi == 1u || vi == 2u || vi == 4u);\n  let yi = (vi == 2u || vi == 4u || vi == 5u);\n  let lx = select(0.0, inst.width, xi);\n  let ly = select(0.0, inst.height, yi);\n  let wx = inst.a * lx + inst.c * ly + inst.tx;\n  let wy = inst.b * lx + inst.d * ly + inst.ty;\n  let p = uni.matrix * vec3f(wx, wy, 1.0);\n  var bv : BaseVertex;\n  bv.position = vec4f(p.x, p.y, 0.0, 1.0);\n  bv.uv = vec2f(select(inst.u0, inst.u1, xi), select(inst.v0, inst.v1, yi));\n  bv.alpha = inst.alpha;\n  return bv;\n}\n';
 
-  @:keep public static function popOneWgpuClip__wgpuClip(state:WgpuRenderState):Void {
+  public static function popOneWgpuClip__wgpuClip(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var form:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -2131,7 +2128,7 @@ class DisplayObjectWgpu {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(form, 'contour'))) { FlightRuntime.callValue(popWgpuClipContours, cast ([state] : Array<Dynamic>)); } else { FlightRuntime.callValue(popWgpuClipRectangle, cast ([state] : Array<Dynamic>)); }
   }
 
-  @:keep public static function popWgpuClipContours(state:WgpuRenderState):Void {
+  public static function popWgpuClipContours(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var entry:Dynamic = cast FlightRuntime.UNDEFINED;
     var pass:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2153,7 +2150,7 @@ class DisplayObjectWgpu {
 }
   }
 
-  @:keep public static function popWgpuClipRectangle(state:WgpuRenderState):Void {
+  public static function popWgpuClipRectangle(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var stack:Dynamic = cast FlightRuntime.UNDEFINED;
     var previous:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2176,7 +2173,7 @@ class DisplayObjectWgpu {
 } }
   }
 
-  @:keep public static function prepareWgpuSpriteBatchWrite(state:WgpuRenderState, texture:ImageResource, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:WgpuMaterialRenderer, maxInstances:Float):Float {
+  public static function prepareWgpuSpriteBatchWrite(state:WgpuRenderState, texture:ImageResource, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:WgpuMaterialRenderer, maxInstances:Float):Float {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var floats:Dynamic = cast FlightRuntime.UNDEFINED;
     var needed:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2206,7 +2203,7 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function promoteWgpuSpriteBatchColorTransformToPerInstance__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, instanceCount:Float, fill:Null<ColorTransform>):Void {
+  public static function promoteWgpuSpriteBatchColorTransformToPerInstance__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, instanceCount:Float, fill:Null<ColorTransform>):Void {
     FlightRuntime.setField(runtime, 'spriteBatchColorTransformMode', DisplayObjectWgpu.CT_MODE_PER_INSTANCE__wgpuColorAdjustment);
     {
       var i:Dynamic = 0.0;
@@ -2217,7 +2214,7 @@ class DisplayObjectWgpu {
     }
   }
 
-  @:keep public static function pushWgpuClipContours(state:WgpuRenderState, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Matrix):Void {
+  public static function pushWgpuClipContours(state:WgpuRenderState, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Matrix):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var device:Dynamic = cast FlightRuntime.UNDEFINED;
     var depth:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2251,7 +2248,7 @@ class DisplayObjectWgpu {
     FlightRuntime.setField(runtime, 'currentMaskDepth', (depth + 1.0));
   }
 
-  @:keep public static function pushWgpuClipRectangle(state:WgpuRenderState, rect:RectangleLike, transform:MatrixLike):Void {
+  public static function pushWgpuClipRectangle(state:WgpuRenderState, rect:RectangleLike, transform:MatrixLike):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var next:Dynamic = cast FlightRuntime.UNDEFINED;
     var pass:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2271,7 +2268,7 @@ class DisplayObjectWgpu {
 
   public static final selectionRectangles__wgpuTextInput:Array<TextSelectionRectangle> = cast ([] : Array<Dynamic>);
 
-  @:keep public static function recordWgpuBatchFlush(state:WgpuRenderState, instances:Float):Void {
+  public static function recordWgpuBatchFlush(state:WgpuRenderState, instances:Float):Void {
     var entry:Dynamic = cast FlightRuntime.UNDEFINED;
     entry = FlightRuntime.callProperty(DisplayObjectWgpu._stats__wgpuRenderStats, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(entry, FlightRuntime.UNDEFINED))) { return; }
@@ -2280,7 +2277,7 @@ class DisplayObjectWgpu {
     FlightRuntime.incrementField(entry, 'batchFlushCount', 1, true);
   }
 
-  @:keep public static function recordWgpuColorAdjustment__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
+  public static function recordWgpuColorAdjustment__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
     var mode:Dynamic = cast FlightRuntime.UNDEFINED;
     var tint:Dynamic = cast FlightRuntime.UNDEFINED;
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(FlightRuntime.field(runtime, 'spriteBatchColorTransformData'), FlightRuntime.UNDEFINED))) {
@@ -2309,7 +2306,7 @@ class DisplayObjectWgpu {
     FlightRuntime.callValue(DisplayObjectWgpu.writeWgpuColorTransformInstance__wgpuColorAdjustment, cast ([runtime, tint, instanceIndex] : Array<Dynamic>));
   }
 
-  @:keep public static function recordWgpuSpriteBatchColorTransform(state:WgpuRenderState, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
+  public static function recordWgpuSpriteBatchColorTransform(state:WgpuRenderState, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var fold:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -2321,14 +2318,14 @@ class DisplayObjectWgpu {
     if (FlightRuntime.truthy(!FlightRuntime.looseEquals(colorTransform, null))) { FlightRuntime.callOptionalProperty(runtime, 'wgpuColorAdjustmentGuard', cast ([state, colorTransform] : Array<Dynamic>)); }
   }
 
-  @:keep public static function recordWgpuTextureUpload(state:WgpuRenderState):Void {
+  public static function recordWgpuTextureUpload(state:WgpuRenderState):Void {
     var entry:Dynamic = cast FlightRuntime.UNDEFINED;
     entry = FlightRuntime.callProperty(DisplayObjectWgpu._stats__wgpuRenderStats, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(entry, FlightRuntime.UNDEFINED))) { return; }
     FlightRuntime.incrementField(entry, 'textureUploadCount', 1, true);
   }
 
-  @:keep public static function refreshWgpuRenderCache(cacheState:WgpuRenderState, cache:RenderCache, source:DisplayObject, ?options:RenderCacheRefreshOptions):Bool {
+  public static function refreshWgpuRenderCache(cacheState:WgpuRenderState, cache:RenderCache, source:DisplayObject, ?options:RenderCacheRefreshOptions):Bool {
     var screenState:Dynamic = cast FlightRuntime.UNDEFINED;
     var cacheRuntime:Dynamic = cast FlightRuntime.UNDEFINED;
     var screenRuntime:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2387,11 +2384,11 @@ class DisplayObjectWgpu {
     return cast null;
   }
 
-  @:keep public static function registerDefaultWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerDefaultWgpuMaterial(state:WgpuRenderState):Void {
     FlightRuntime.callValue(registerWgpuMaterialRenderer, cast ([state, Types.DefaultMaterialKind, defaultWgpuMaterialRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerWgpuDisplayObjectRenderers(state:WgpuRenderState):Void {
+  public static function registerWgpuDisplayObjectRenderers(state:WgpuRenderState):Void {
     FlightRuntime.callValue(registerDefaultWgpuMaterial, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(registerRenderer, cast ([state, Types.BitmapKind, defaultWgpuBitmapRenderer] : Array<Dynamic>));
     FlightRuntime.callValue(registerRenderer, cast ([state, Types.DisplayObjectKind, defaultWgpuDisplayObjectRenderer] : Array<Dynamic>));
@@ -2407,11 +2404,11 @@ class DisplayObjectWgpu {
     FlightRuntime.callValue(registerRenderer, cast ([state, Types.VideoKind, defaultWgpuVideoRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerWgpuShapeCommands(commands:Array<Dynamic>):Void {
+  public static function registerWgpuShapeCommands(commands:Array<Dynamic>):Void {
     FlightRuntime.callValue(facadeDisplayObjectWgpuDisplayObjectCanvasRegisterCanvasShapeCommands, cast ([commands] : Array<Dynamic>));
   }
 
-  @:keep public static function registerWgpuSpriteRenderers(state:WgpuRenderState):Void {
+  public static function registerWgpuSpriteRenderers(state:WgpuRenderState):Void {
     FlightRuntime.callValue(registerDefaultWgpuMaterial, cast ([state] : Array<Dynamic>));
     FlightRuntime.callValue(registerRenderer, cast ([state, Types.ParticleEmitterKind, defaultWgpuParticleEmitterRenderer] : Array<Dynamic>));
     FlightRuntime.callValue(registerRenderer, cast ([state, Types.QuadBatchKind, defaultWgpuQuadBatchRenderer] : Array<Dynamic>));
@@ -2419,11 +2416,11 @@ class DisplayObjectWgpu {
     FlightRuntime.callValue(registerRenderer, cast ([state, Types.TilemapKind, defaultWgpuTilemapRenderer] : Array<Dynamic>));
   }
 
-  @:keep public static function registerWgpuTextInputOverlay(overlay:WgpuRichTextOverlay):Void {
+  public static function registerWgpuTextInputOverlay(overlay:WgpuRichTextOverlay):Void {
     (DisplayObjectWgpu._webgpuTextInputOverlay__wgpuRichText = cast (overlay : Dynamic));
   }
 
-  @:keep public static function registerWgpuVelocityWriter(state:WgpuRenderState, kind:Kind, writer:WgpuVelocityWriter):Void {
+  public static function registerWgpuVelocityWriter(state:WgpuRenderState, kind:Kind, writer:WgpuVelocityWriter):Void {
     var writers:Dynamic = cast FlightRuntime.UNDEFINED;
     writers = FlightRuntime.callProperty(DisplayObjectWgpu._velocityWriters__wgpuVelocity, 'get', cast ([state] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(writers, FlightRuntime.UNDEFINED))) {
@@ -2433,7 +2430,7 @@ class DisplayObjectWgpu {
     FlightRuntime.callProperty(writers, 'set', cast ([kind, writer] : Array<Dynamic>));
   }
 
-  @:keep public static function releaseWgpuRenderCache(state:WgpuRenderState, cache:RenderCache):Void {
+  public static function releaseWgpuRenderCache(state:WgpuRenderState, cache:RenderCache):Void {
     var targets:Dynamic = cast FlightRuntime.UNDEFINED;
     var target:Dynamic = cast FlightRuntime.UNDEFINED;
     targets = FlightRuntime.callValue(DisplayObjectWgpu.getTargets__wgpuCache, cast ([state] : Array<Dynamic>));
@@ -2443,7 +2440,7 @@ class DisplayObjectWgpu {
     FlightRuntime.callProperty(targets, 'delete', cast ([cache] : Array<Dynamic>));
   }
 
-  @:keep public static function remapWgpuScale9Commands(out:Array<Dynamic>, source:Array<Dynamic>, mapper:Dynamic):Void {
+  public static function remapWgpuScale9Commands(out:Array<Dynamic>, source:Array<Dynamic>, mapper:Dynamic):Void {
     var i:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.callValue(mapCanvasScale9ShapeCommands, cast ([out, source, mapper] : Array<Dynamic>));
     i = 0.0;
@@ -2466,7 +2463,7 @@ class DisplayObjectWgpu {
 }
   }
 
-  @:keep public static function renderWgpuDisplayObject(state:WgpuRenderState, source:DisplayObject):Void {
+  public static function renderWgpuDisplayObject(state:WgpuRenderState, source:DisplayObject):Void {
     var tempStack:Dynamic = cast FlightRuntime.UNDEFINED;
     var clipHooks:Dynamic = cast FlightRuntime.UNDEFINED;
     var stackLength:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2500,7 +2497,7 @@ class DisplayObjectWgpu {
     FlightRuntime.callOptionalProperty(clipHooks, 'finalize', cast ([state] : Array<Dynamic>));
   }
 
-  @:keep public static function renderWgpuSprite(state:WgpuRenderState, source:DisplayObject):Void {
+  public static function renderWgpuSprite(state:WgpuRenderState, source:DisplayObject):Void {
     var tempStack:Dynamic = cast FlightRuntime.UNDEFINED;
     var stackLength:Dynamic = cast FlightRuntime.UNDEFINED;
     tempStack = FlightRuntime.field(FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'tempStack');
@@ -2528,7 +2525,7 @@ class DisplayObjectWgpu {
     FlightRuntime.callValue(flushWgpuSpriteBatch, cast ([state] : Array<Dynamic>));
   }
 
-  @:keep public static function renderWgpuVelocity<Traits>(state:WgpuRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:WgpuRenderTarget):Void {
+  public static function renderWgpuVelocity<Traits>(state:WgpuRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:WgpuRenderTarget):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var pipeline:Dynamic = cast FlightRuntime.UNDEFINED;
     var pass:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2553,7 +2550,7 @@ class DisplayObjectWgpu {
     FlightRuntime.callProperty(DisplayObjectWgpu._activeVelocityPasses__wgpuVelocity, 'delete', cast ([state] : Array<Dynamic>));
   }
 
-  @:keep public static function resetWgpuRenderStats(state:WgpuRenderState):Void {
+  public static function resetWgpuRenderStats(state:WgpuRenderState):Void {
     var entry:Dynamic = cast FlightRuntime.UNDEFINED;
     entry = FlightRuntime.callValue(DisplayObjectWgpu.ensureWgpuRenderStatsMutable__wgpuRenderStats, cast ([state] : Array<Dynamic>));
     FlightRuntime.setField(entry, 'batchFlushCount', 0.0);
@@ -2562,7 +2559,7 @@ class DisplayObjectWgpu {
     FlightRuntime.setField(entry, 'textureUploadCount', 0.0);
   }
 
-  @:keep public static function resetWgpuSpriteBatch__wgpuSpriteBatch(state:WgpuRenderState):Void {
+  public static function resetWgpuSpriteBatch__wgpuSpriteBatch(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     FlightRuntime.setField(runtime, 'spriteBatchCount', 0.0);
@@ -2573,11 +2570,11 @@ class DisplayObjectWgpu {
     FlightRuntime.setField(runtime, 'spriteBatchMaterialFloats', 0.0);
   }
 
-  @:keep public static function resetWgpuSpriteBatchBufferPool(state:WgpuRenderState):Void {
+  public static function resetWgpuSpriteBatchBufferPool(state:WgpuRenderState):Void {
     FlightRuntime.setField(FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'spriteBatchBufferCursor', 0.0);
   }
 
-  @:keep public static function resolveWgpuColorAdjustmentFlush__wgpuColorAdjustment(state:WgpuRenderState, count:Float):Null<WgpuColorAdjustmentFlush> {
+  public static function resolveWgpuColorAdjustmentFlush__wgpuColorAdjustment(state:WgpuRenderState, count:Float):Null<WgpuColorAdjustmentFlush> {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var ctMode:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -2600,7 +2597,7 @@ class DisplayObjectWgpu {
 
   public static final SHAPE_MESH_WGSL__wgpuShapeMesh:Dynamic = '\nstruct ShapeMeshUniforms { matrix : mat3x3f, color : vec4f }\n@group(0) @binding(0) var<uniform> u : ShapeMeshUniforms;\n@vertex fn vs_main(@location(0) position : vec2f) -> @builtin(position) vec4f {\n  let p = u.matrix * vec3f(position, 1.0);\n  return vec4f(p.x, p.y, 0.0, 1.0);\n}\n@fragment fn fs_main() -> @location(0) vec4f { return u.color; }\n';
 
-  @:keep public static function shapeMeshMatrix__wgpuShapeMesh(state:WgpuRenderState, renderProxy:RenderProxy2D):flight.internal.FlightFloat32Array {
+  public static function shapeMeshMatrix__wgpuShapeMesh(state:WgpuRenderState, renderProxy:RenderProxy2D):flight.internal.FlightFloat32Array {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var viewport:Dynamic = cast FlightRuntime.UNDEFINED;
     var iw:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2633,7 +2630,7 @@ class DisplayObjectWgpu {
 
   public static final SPRITE_INSTANCE_STRIDE__wgpuSpriteBatch:Dynamic = (SPRITE_INSTANCE_FLOATS * 4.0);
 
-  @:keep public static function submitWgpuQuadBatch__wgpuQuadBatch(state:WgpuRenderState, quadBatch:RenderProxy2D):Void {
+  public static function submitWgpuQuadBatch__wgpuQuadBatch(state:WgpuRenderState, quadBatch:RenderProxy2D):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var data:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2748,7 +2745,7 @@ class DisplayObjectWgpu {
     FlightRuntime.setField(runtime, 'spriteBatchCount', (FlightRuntime.field(runtime, 'spriteBatchCount') + drawCount));
   }
 
-  @:keep public static function submitWgpuSpriteNode__wgpuSpriteRenderer(state:WgpuRenderState, spriteNode:RenderProxy2D):Void {
+  public static function submitWgpuSpriteNode__wgpuSpriteRenderer(state:WgpuRenderState, spriteNode:RenderProxy2D):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2802,7 +2799,7 @@ class DisplayObjectWgpu {
     FlightRuntime.incrementField(runtime, 'spriteBatchCount', 1, true);
   }
 
-  @:keep public static function submitWgpuTilemap__wgpuTilemap(state:WgpuRenderState, tilemapNode:RenderProxy2D):Void {
+  public static function submitWgpuTilemap__wgpuTilemap(state:WgpuRenderState, tilemapNode:RenderProxy2D):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var source:Dynamic = cast FlightRuntime.UNDEFINED;
     var __destructure0:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2913,7 +2910,7 @@ class DisplayObjectWgpu {
     FlightRuntime.setField(runtime, 'spriteBatchCount', (FlightRuntime.field(runtime, 'spriteBatchCount') + drawCount));
   }
 
-  @:keep public static function toScale9Position__wgpuScale9Mapper(pos:Float, scale9Start:Float, scale9Center:Float, unscaledSize:Float, scale:Float):Float {
+  public static function toScale9Position__wgpuScale9Mapper(pos:Float, scale9Start:Float, scale9Center:Float, unscaledSize:Float, scale:Float):Float {
     var scale9End:Dynamic = cast FlightRuntime.UNDEFINED;
     var size:Dynamic = cast FlightRuntime.UNDEFINED;
     var center:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -2947,7 +2944,7 @@ class DisplayObjectWgpu {
 
   public static final VELOCITY_WGSL__wgpuVelocity:Dynamic = '\nstruct Uniforms {\n  clipRect : vec4f,\n  velocity : vec2f,\n  _pad : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n\n@vertex\nfn vs_main(@builtin(vertex_index) vi : u32) -> @builtin(position) vec4f {\n  var corners = array<vec2f, 6>(\n    vec2f(0.0, 0.0), vec2f(1.0, 0.0), vec2f(0.0, 1.0),\n    vec2f(0.0, 1.0), vec2f(1.0, 0.0), vec2f(1.0, 1.0),\n  );\n  let clip = uni.clipRect.xy + corners[vi] * uni.clipRect.zw;\n  return vec4f(clip, 0.0, 1.0);\n}\n\n@fragment\nfn fs_main() -> @location(0) vec4f {\n  return vec4f(uni.velocity, 0.0, 1.0);\n}';
 
-  @:keep public static function visitWgpuVelocity__wgpuVelocity<Traits>(ctx:WgpuVelocityContext, node:Transform2DNode<Traits>):Void {
+  public static function visitWgpuVelocity__wgpuVelocity<Traits>(ctx:WgpuVelocityContext, node:Transform2DNode<Traits>):Void {
     var writer:Dynamic = cast FlightRuntime.UNDEFINED;
     var count:Dynamic = cast FlightRuntime.UNDEFINED;
     writer = FlightRuntime.callValue(getWgpuVelocityWriter, cast ([FlightRuntime.field(ctx, 'state'), FlightRuntime.field(node, 'kind')] : Array<Dynamic>));
@@ -2963,7 +2960,7 @@ class DisplayObjectWgpu {
     }
   }
 
-  @:keep public static function warnWgpuColorAdjustmentNotEnabled__enableWgpuColorAdjustmentGuards():Void {
+  public static function warnWgpuColorAdjustmentNotEnabled__enableWgpuColorAdjustmentGuards():Void {
     FlightRuntime.callValue(logOnce, cast (['displayobject-wgpu:color-adjustment-not-enabled', LogLevel.Warn, { message: 'recordWgpuSpriteBatchColorTransform: color transform present but WGPU color adjustment not enabled — call enableWgpuColorAdjustment(state)' }, 'displayobject-wgpu'] : Array<Dynamic>));
   }
 
@@ -2994,7 +2991,7 @@ class DisplayObjectWgpu {
 
   public static final wgpuColorAdjustmentFold__wgpuColorAdjustment:WgpuColorAdjustmentFold = { record: DisplayObjectWgpu.recordWgpuColorAdjustment__wgpuColorAdjustment, resolveFlush: DisplayObjectWgpu.resolveWgpuColorAdjustmentFlush__wgpuColorAdjustment };
 
-  @:keep public static function writeShapeMeshIndices__wgpuShapeMesh(queue:Dynamic, indexBuffer:Dynamic, indices:flight.internal.FlightUInt16Array):Void {
+  public static function writeShapeMeshIndices__wgpuShapeMesh(queue:Dynamic, indexBuffer:Dynamic, indices:flight.internal.FlightUInt16Array):Void {
     var byteLength:Dynamic = cast FlightRuntime.UNDEFINED;
     var paddedBytes:Dynamic = cast FlightRuntime.UNDEFINED;
     var wordCount:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -3010,7 +3007,7 @@ class DisplayObjectWgpu {
     FlightRuntime.callProperty(queue, 'writeBuffer', cast ([indexBuffer, 0.0, FlightRuntime.field(DisplayObjectWgpu._shapeMeshIndexScratch__wgpuShapeMesh, 'buffer'), 0.0, paddedBytes] : Array<Dynamic>));
   }
 
-  @:keep public static function writeWgpuColorTransformInstance__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
+  public static function writeWgpuColorTransformInstance__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
     var offset:Dynamic = cast FlightRuntime.UNDEFINED;
     var out:Dynamic = cast FlightRuntime.UNDEFINED;
     offset = (instanceIndex * DisplayObjectWgpu.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment);
@@ -3037,7 +3034,7 @@ class DisplayObjectWgpu {
 }
   }
 
-  @:keep public static function writeWgpuSpriteBatchUniforms__wgpuSpriteBatch(state:WgpuRenderState):Float {
+  public static function writeWgpuSpriteBatchUniforms__wgpuSpriteBatch(state:WgpuRenderState):Float {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var uniformOffset:Dynamic = cast FlightRuntime.UNDEFINED;
     var floatBase:Dynamic = cast FlightRuntime.UNDEFINED;

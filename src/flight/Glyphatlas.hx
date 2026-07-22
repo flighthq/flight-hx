@@ -19,12 +19,9 @@ import flight.Types.GlyphSource;
 import flight.Types.Rectangle;
 import flight.Types.Surface;
 
-#if js
-@:build(jsasync.JSAsync.build())
-#end
 @:expose("flight.Glyphatlas")
 class Glyphatlas {
-  @:keep public static function _acquireGlyphRasterContext__glyphRasterizerBackend():Null<Dynamic> {
+  public static function _acquireGlyphRasterContext__glyphRasterizerBackend():Null<Dynamic> {
     try {
   if (FlightRuntime.truthy(!FlightRuntime.strictEquals(FlightRuntime.callProperty(FlightRuntime, 'typeofGlobal', cast (['OffscreenCanvas'] : Array<Dynamic>)), 'undefined'))) {
   var context:Dynamic = FlightRuntime.callProperty(FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['OffscreenCanvas'] : Array<Dynamic>)), [1.0, 1.0]), 'getContext', cast (['2d'] : Array<Dynamic>));
@@ -43,14 +40,14 @@ class Glyphatlas {
 
   public static var _backend__glyphRasterizerBackend:Null<GlyphRasterizerBackend> = FlightRuntime.explicitNull();
 
-  @:keep public static function _blitGlyphIntoAtlasSurface__glyphAtlasEntry(runtime:GlyphAtlasRuntime, entry:GlyphEntry, bitmap:GlyphRasterizedBitmap):Void {
+  public static function _blitGlyphIntoAtlasSurface__glyphAtlasEntry(runtime:GlyphAtlasRuntime, entry:GlyphEntry, bitmap:GlyphRasterizedBitmap):Void {
     var region:Dynamic = cast FlightRuntime.UNDEFINED;
     region = FlightRuntime.callValue(createSurfaceRegion, cast ([FlightRuntime.field(runtime, 'surface'), FlightRuntime.field(entry, 'x'), FlightRuntime.field(entry, 'y'), FlightRuntime.field(entry, 'width'), FlightRuntime.field(entry, 'height')] : Array<Dynamic>));
     FlightRuntime.callValue(writeSurfacePixels, cast ([region, FlightRuntime.field(bitmap, 'pixels')] : Array<Dynamic>));
     FlightRuntime.callValue(Glyphatlas._markGlyphAtlasDirtyRect__glyphAtlasEntry, cast ([runtime, FlightRuntime.field(entry, 'x'), FlightRuntime.field(entry, 'y'), FlightRuntime.field(entry, 'width'), FlightRuntime.field(entry, 'height')] : Array<Dynamic>));
   }
 
-  @:keep public static function _evictLeastRecentlyUsedGlyph__glyphAtlasEntry(runtime:GlyphAtlasRuntime):Bool {
+  public static function _evictLeastRecentlyUsedGlyph__glyphAtlasEntry(runtime:GlyphAtlasRuntime):Bool {
     var codepoint:Dynamic = cast FlightRuntime.UNDEFINED;
     codepoint = FlightRuntime.callProperty(FlightRuntime.field(runtime, 'lru'), 'shift', cast ([] : Array<Dynamic>));
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(codepoint, FlightRuntime.UNDEFINED))) { return cast false; }
@@ -60,7 +57,7 @@ class Glyphatlas {
     return cast null;
   }
 
-  @:keep public static function _markGlyphAtlasDirtyRect__glyphAtlasEntry(runtime:GlyphAtlasRuntime, x:Float, y:Float, width:Float, height:Float):Void {
+  public static function _markGlyphAtlasDirtyRect__glyphAtlasEntry(runtime:GlyphAtlasRuntime, x:Float, y:Float, width:Float, height:Float):Void {
     var maxX:Dynamic = cast FlightRuntime.UNDEFINED;
     var maxY:Dynamic = cast FlightRuntime.UNDEFINED;
     maxX = (x + width);
@@ -79,7 +76,7 @@ class Glyphatlas {
     FlightRuntime.setField(runtime, 'dirtyMaxY', FlightRuntime.callProperty(HxMath, 'max', cast ([FlightRuntime.field(runtime, 'dirtyMaxY'), maxY] : Array<Dynamic>)));
   }
 
-  @:keep public static function _placeGlyphOnShelf__glyphAtlasEntry(runtime:GlyphAtlasRuntime, width:Float, height:Float):Null<{ var x:Float; var y:Float; }> {
+  public static function _placeGlyphOnShelf__glyphAtlasEntry(runtime:GlyphAtlasRuntime, width:Float, height:Float):Null<{ var x:Float; var y:Float; }> {
     var padding:Dynamic = cast FlightRuntime.UNDEFINED;
     var surface:Dynamic = cast FlightRuntime.UNDEFINED;
     var rightLimit:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -114,7 +111,7 @@ class Glyphatlas {
     return cast null;
   }
 
-  @:keep public static function _rasterizeGlyphOnContext__glyphRasterizerBackend(context:Dynamic, codepoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
+  public static function _rasterizeGlyphOnContext__glyphRasterizerBackend(context:Dynamic, codepoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
     var text:Dynamic = cast FlightRuntime.UNDEFINED;
     var fontStyle:Dynamic = cast FlightRuntime.UNDEFINED;
     var fontWeight:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -159,7 +156,7 @@ class Glyphatlas {
     return cast null;
   }
 
-  @:keep public static function _repackGlyphAtlas__glyphAtlasEntry(runtime:GlyphAtlasRuntime):Void {
+  public static function _repackGlyphAtlas__glyphAtlasEntry(runtime:GlyphAtlasRuntime):Void {
     var codepoints:Dynamic = cast FlightRuntime.UNDEFINED;
     FlightRuntime.setLength(FlightRuntime.field(runtime, 'shelves'), 0.0);
     FlightRuntime.setField(runtime, 'packBottom', FlightRuntime.field(runtime, 'padding'));
@@ -188,25 +185,25 @@ class Glyphatlas {
     FlightRuntime.callValue(Glyphatlas._markGlyphAtlasDirtyRect__glyphAtlasEntry, cast ([runtime, 0.0, 0.0, FlightRuntime.field(FlightRuntime.field(runtime, 'surface'), 'width'), FlightRuntime.field(FlightRuntime.field(runtime, 'surface'), 'height')] : Array<Dynamic>));
   }
 
-  @:keep public static function _touchGlyphLru__glyphAtlasEntry(runtime:GlyphAtlasRuntime, codepoint:Float):Void {
+  public static function _touchGlyphLru__glyphAtlasEntry(runtime:GlyphAtlasRuntime, codepoint:Float):Void {
     var index:Dynamic = cast FlightRuntime.UNDEFINED;
     index = FlightRuntime.callProperty(FlightRuntime.field(runtime, 'lru'), 'indexOf', cast ([codepoint] : Array<Dynamic>));
     if (FlightRuntime.truthy(!FlightRuntime.strictEquals(index, -1.0))) { FlightRuntime.splice(FlightRuntime.field(runtime, 'lru'), Std.int(index), Std.int(1.0), []); }
     FlightRuntime.callProperty(FlightRuntime.field(runtime, 'lru'), 'push', cast ([codepoint] : Array<Dynamic>));
   }
 
-  @:keep public static function clearGlyphAtlasDirty(atlas:GlyphAtlas):Void {
+  public static function clearGlyphAtlasDirty(atlas:GlyphAtlas):Void {
     FlightRuntime.setField(FlightRuntime.field(atlas, 'runtime'), 'dirty', false);
   }
 
-  @:keep public static function createGlyphAtlas(options:GlyphAtlasOptions):GlyphAtlas {
+  public static function createGlyphAtlas(options:GlyphAtlasOptions):GlyphAtlas {
     var padding:Dynamic = cast FlightRuntime.UNDEFINED;
     padding = FlightRuntime.coalesce(FlightRuntime.field(options, 'padding'), function():Dynamic return cast 1.0);
     return cast { runtime: { bitmaps: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), dirty: false, dirtyMaxX: 0.0, dirtyMaxY: 0.0, dirtyMinX: 0.0, dirtyMinY: 0.0, entries: FlightRuntime.construct(FlightRuntime.callProperty(FlightRuntime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), lru: cast ([] : Array<Dynamic>), maxGlyphs: FlightRuntime.coalesce(FlightRuntime.field(options, 'maxGlyphs'), function():Dynamic return cast 0.0), metrics: FlightRuntime.callValue(deriveGlyphMetricsFromFontSize, cast ([FlightRuntime.field(options, 'fontSize')] : Array<Dynamic>)), packBottom: padding, padding: padding, rasterizeOptions: { fontFamily: FlightRuntime.field(options, 'fontFamily'), fontSize: FlightRuntime.field(options, 'fontSize') }, shelves: cast ([] : Array<Dynamic>), surface: FlightRuntime.callValue(createSurface, cast ([FlightRuntime.field(options, 'width'), FlightRuntime.field(options, 'height')] : Array<Dynamic>)) } };
     return cast null;
   }
 
-  @:keep public static function createGlyphSourceFromGlyphAtlas(atlas:GlyphAtlas):GlyphSource {
+  public static function createGlyphSourceFromGlyphAtlas(atlas:GlyphAtlas):GlyphSource {
     return cast { getGlyphAtlasImage: function(page:Dynamic = 0.0) {
   return cast FlightRuntime.select(FlightRuntime.strictEquals(page, 0.0), function():Dynamic return cast FlightRuntime.callValue(getGlyphAtlasSurface, cast ([atlas] : Array<Dynamic>)), function():Dynamic return cast null);
 }, getGlyphEntry: function(codepoint:Dynamic) {
@@ -219,7 +216,7 @@ class Glyphatlas {
     return cast null;
   }
 
-  @:keep public static function createStubGlyphRasterizerBackend():GlyphRasterizerBackend {
+  public static function createStubGlyphRasterizerBackend():GlyphRasterizerBackend {
     return cast { rasterize: function(_codepoint:Dynamic, options:Dynamic) {
   var size:Dynamic = cast FlightRuntime.UNDEFINED;
   var width:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -235,7 +232,7 @@ class Glyphatlas {
     return cast null;
   }
 
-  @:keep public static function createWebGlyphRasterizerBackend():GlyphRasterizerBackend {
+  public static function createWebGlyphRasterizerBackend():GlyphRasterizerBackend {
     return cast { rasterize: function(codepoint:Dynamic, options:Dynamic) {
   var context:Dynamic = cast FlightRuntime.UNDEFINED;
   context = FlightRuntime.callValue(Glyphatlas._acquireGlyphRasterContext__glyphRasterizerBackend, cast ([] : Array<Dynamic>));
@@ -245,12 +242,12 @@ class Glyphatlas {
     return cast null;
   }
 
-  @:keep public static function deriveGlyphMetricsFromFontSize(fontSize:Float):GlyphMetrics {
+  public static function deriveGlyphMetricsFromFontSize(fontSize:Float):GlyphMetrics {
     return cast { ascent: (fontSize * 0.8), descent: (fontSize * 0.2), lineGap: 0.0 };
     return cast null;
   }
 
-  @:keep public static function disposeGlyphAtlas(atlas:GlyphAtlas):Void {
+  public static function disposeGlyphAtlas(atlas:GlyphAtlas):Void {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.field(atlas, 'runtime');
     FlightRuntime.callProperty(FlightRuntime.field(runtime, 'entries'), 'clear', cast ([] : Array<Dynamic>));
@@ -261,7 +258,7 @@ class Glyphatlas {
     FlightRuntime.setField(runtime, 'dirty', false);
   }
 
-  @:keep public static function getGlyphAtlasDirtyRegion(atlas:GlyphAtlas):Null<Rectangle> {
+  public static function getGlyphAtlasDirtyRegion(atlas:GlyphAtlas):Null<Rectangle> {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     runtime = FlightRuntime.field(atlas, 'runtime');
     if (FlightRuntime.truthy(!FlightRuntime.truthy(FlightRuntime.field(runtime, 'dirty')))) { return cast null; }
@@ -269,7 +266,7 @@ class Glyphatlas {
     return cast null;
   }
 
-  @:keep public static function getGlyphAtlasEntry(atlas:GlyphAtlas, codepoint:Float):Null<GlyphEntry> {
+  public static function getGlyphAtlasEntry(atlas:GlyphAtlas, codepoint:Float):Null<GlyphEntry> {
     var runtime:Dynamic = cast FlightRuntime.UNDEFINED;
     var existing:Dynamic = cast FlightRuntime.UNDEFINED;
     var bitmap:Dynamic = cast FlightRuntime.UNDEFINED;
@@ -316,28 +313,28 @@ class Glyphatlas {
     return cast null;
   }
 
-  @:keep public static function getGlyphAtlasKerning(_atlas:GlyphAtlas, _left:Float, _right:Float):Float {
+  public static function getGlyphAtlasKerning(_atlas:GlyphAtlas, _left:Float, _right:Float):Float {
     return cast 0.0;
     return cast null;
   }
 
-  @:keep public static function getGlyphAtlasMetrics(atlas:GlyphAtlas):GlyphMetrics {
+  public static function getGlyphAtlasMetrics(atlas:GlyphAtlas):GlyphMetrics {
     return cast FlightRuntime.field(FlightRuntime.field(atlas, 'runtime'), 'metrics');
     return cast null;
   }
 
-  @:keep public static function getGlyphAtlasSurface(atlas:GlyphAtlas):Surface {
+  public static function getGlyphAtlasSurface(atlas:GlyphAtlas):Surface {
     return cast FlightRuntime.field(FlightRuntime.field(atlas, 'runtime'), 'surface');
     return cast null;
   }
 
-  @:keep public static function getGlyphRasterizerBackend():GlyphRasterizerBackend {
+  public static function getGlyphRasterizerBackend():GlyphRasterizerBackend {
     if (FlightRuntime.truthy(FlightRuntime.strictEquals(Glyphatlas._backend__glyphRasterizerBackend, null))) { (Glyphatlas._backend__glyphRasterizerBackend = cast (FlightRuntime.callValue(createWebGlyphRasterizerBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast Glyphatlas._backend__glyphRasterizerBackend;
     return cast null;
   }
 
-  @:keep public static function setGlyphRasterizerBackend(backend:Null<GlyphRasterizerBackend>):Void {
+  public static function setGlyphRasterizerBackend(backend:Null<GlyphRasterizerBackend>):Void {
     (Glyphatlas._backend__glyphRasterizerBackend = cast (backend : Dynamic));
   }
 }
