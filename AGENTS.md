@@ -92,6 +92,10 @@ The target quality commands are documented in [`agents/quality.md`](agents/quali
 - Test both distinct and aliased outputs for translated Flight functions with an `out` parameter.
 - Never weaken or silently skip an upstream test to make the port look complete. Record unsupported tests with a reason and a source identity in the coverage report.
 
+## Commit Conventions
+
+Every commit message is a single [Conventional Commits](https://www.conventionalcommits.org/) line — `type(scope): summary` — and nothing else. No body, no blank line, no bullet list, and no `Co-Authored-By` (or any other) trailer. Use `feat`, `fix`, `refactor`, `docs`, `test`, `chore`, `style`, `perf`, or `build`, with an optional scope such as `emit`, `generator`, `examples`, or `upstream`.
+
 ## Continuity
 
 Keep transient work state out of generated code and source comments. Update [`agents/status.md`](agents/status.md) when a phase changes, a decision is made, a new blocker appears, or work stops midstream. The status file should tell the next agent what is true, what was verified, and what to do next without reconstructing the project from chat history.
