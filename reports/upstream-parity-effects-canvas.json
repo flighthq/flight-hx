@@ -1,0 +1,18 @@
+{
+  "completedAt": "2026-07-22T11:54:52.359Z",
+  "failedPackages": 0,
+  "packages": [
+    {
+      "durationMs": 9591,
+      "exitCode": 0,
+      "package": "effects-canvas",
+      "signal": null,
+      "status": "passed",
+      "summary": "140 passed (140)",
+      "testFiles": 47
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "effects-canvas",
+  "startedAt": "2026-07-22T11:54:42.767Z"
+}

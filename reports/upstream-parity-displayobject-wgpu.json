@@ -1,0 +1,18 @@
+{
+  "completedAt": "2026-07-22T11:54:42.629Z",
+  "failedPackages": 0,
+  "packages": [
+    {
+      "durationMs": 10573,
+      "exitCode": 0,
+      "package": "displayobject-wgpu",
+      "signal": null,
+      "status": "passed",
+      "summary": "155 passed (155)",
+      "testFiles": 27
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "displayobject-wgpu",
+  "startedAt": "2026-07-22T11:54:32.054Z"
+}

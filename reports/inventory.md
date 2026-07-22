@@ -1,0 +1,145 @@
+# Upstream Inventory
+
+Upstream commit: `5d24729f7360475e28a105ae0caeeaa2e1328260`
+
+| Metric | Count |
+| --- | ---: |
+| Packages | 131 |
+| Source files | 1898 |
+| Test files | 1166 |
+| Public exports | 12149 |
+| Export conflicts | 0 |
+
+| Upstream package | Haxe module | Sources | Tests | Exports | SDK | Conflicts |
+| --- | --- | ---: | ---: | ---: | :---: | ---: |
+| `@flighthq/accessibility` | `flight.Accessibility` | 2 | 1 | 8 | yes | 0 |
+| `@flighthq/adjustments` | `flight.Adjustments` | 19 | 18 | 49 | yes | 0 |
+| `@flighthq/animation` | `flight.Animation` | 4 | 3 | 18 | yes | 0 |
+| `@flighthq/app` | `flight.AppApi` | 2 | 1 | 42 | yes | 0 |
+| `@flighthq/application` | `flight.ApplicationApi` | 3 | 2 | 83 | yes | 0 |
+| `@flighthq/assets` | `flight.Assets` | 2 | 1 | 10 | yes | 0 |
+| `@flighthq/audio` | `flight.Audio` | 4 | 3 | 20 | yes | 0 |
+| `@flighthq/binpack` | `flight.Binpack` | 2 | 1 | 1 | yes | 0 |
+| `@flighthq/bitmapfont` | `flight.BitmapFontApi` | 3 | 2 | 7 | yes | 0 |
+| `@flighthq/bitmapfont-formats` | `flight.BitmapFontFormats` | 5 | 4 | 4 | yes | 0 |
+| `@flighthq/bitmaptext` | `flight.BitmapTextApi` | 3 | 2 | 15 | yes | 0 |
+| `@flighthq/camera` | `flight.CameraApi` | 10 | 9 | 31 | yes | 0 |
+| `@flighthq/camera2d` | `flight.Camera2DApi` | 8 | 7 | 8 | yes | 0 |
+| `@flighthq/capture` | `flight.Capture` | 3 | 2 | 10 | yes | 0 |
+| `@flighthq/clip` | `flight.Clip` | 2 | 1 | 23 | yes | 0 |
+| `@flighthq/clipboard` | `flight.Clipboard` | 2 | 1 | 32 | yes | 0 |
+| `@flighthq/clock` | `flight.ClockApi` | 12 | 11 | 14 | yes | 0 |
+| `@flighthq/collision` | `flight.Collision` | 6 | 5 | 19 | yes | 0 |
+| `@flighthq/color` | `flight.Color` | 10 | 9 | 32 | yes | 0 |
+| `@flighthq/connectivity` | `flight.ConnectivityApi` | 2 | 1 | 14 | yes | 0 |
+| `@flighthq/debug` | `flight.Debug` | 3 | 2 | 9 | yes | 0 |
+| `@flighthq/device` | `flight.Device` | 2 | 1 | 14 | yes | 0 |
+| `@flighthq/dialog` | `flight.Dialog` | 2 | 1 | 15 | yes | 0 |
+| `@flighthq/displayobject` | `flight.DisplayObjectApi` | 8 | 7 | 46 | yes | 0 |
+| `@flighthq/displayobject-canvas` | `flight.DisplayObjectCanvas` | 31 | 30 | 94 | yes | 0 |
+| `@flighthq/displayobject-dom` | `flight.DisplayObjectDom` | 27 | 26 | 58 | yes | 0 |
+| `@flighthq/displayobject-gl` | `flight.DisplayObjectGl` | 28 | 25 | 89 | yes | 0 |
+| `@flighthq/displayobject-wgpu` | `flight.DisplayObjectWgpu` | 29 | 27 | 95 | yes | 0 |
+| `@flighthq/easing` | `flight.Easing` | 20 | 19 | 48 | yes | 0 |
+| `@flighthq/effects` | `flight.Effects` | 72 | 71 | 112 | yes | 0 |
+| `@flighthq/effects-canvas` | `flight.EffectsCanvas` | 48 | 47 | 102 | yes | 0 |
+| `@flighthq/effects-gl` | `flight.EffectsGl` | 58 | 57 | 135 | yes | 0 |
+| `@flighthq/effects-wgpu` | `flight.EffectsWgpu` | 56 | 55 | 128 | yes | 0 |
+| `@flighthq/entity` | `flight.EntityApi` | 6 | 5 | 12 | yes | 0 |
+| `@flighthq/filesystem` | `flight.Filesystem` | 2 | 1 | 43 | yes | 0 |
+| `@flighthq/flow` | `flight.Flow` | 10 | 9 | 9 | yes | 0 |
+| `@flighthq/font` | `flight.FontApi` | 8 | 7 | 15 | yes | 0 |
+| `@flighthq/geolocation` | `flight.Geolocation` | 2 | 1 | 12 | yes | 0 |
+| `@flighthq/geometry` | `flight.Geometry` | 27 | 26 | 377 | yes | 0 |
+| `@flighthq/glyphatlas` | `flight.Glyphatlas` | 7 | 6 | 14 | yes | 0 |
+| `@flighthq/haptics` | `flight.Haptics` | 2 | 1 | 13 | yes | 0 |
+| `@flighthq/host-capacitor` | `flight.HostCapacitor` | 15 | 13 | 63 | no | 0 |
+| `@flighthq/host-electron` | `flight.HostElectron` | 19 | 17 | 57 | no | 0 |
+| `@flighthq/host-tauri` | `flight.HostTauri` | 13 | 11 | 51 | no | 0 |
+| `@flighthq/image` | `flight.Image` | 3 | 2 | 20 | yes | 0 |
+| `@flighthq/image-codec` | `flight.ImageCodec` | 8 | 7 | 16 | yes | 0 |
+| `@flighthq/input` | `flight.Input` | 2 | 1 | 40 | yes | 0 |
+| `@flighthq/interaction` | `flight.Interaction` | 16 | 15 | 83 | yes | 0 |
+| `@flighthq/intl` | `flight.Intl` | 8 | 7 | 14 | yes | 0 |
+| `@flighthq/ipc` | `flight.Ipc` | 2 | 1 | 17 | yes | 0 |
+| `@flighthq/keyboard` | `flight.Keyboard` | 2 | 1 | 20 | yes | 0 |
+| `@flighthq/lifecycle` | `flight.Lifecycle` | 2 | 1 | 13 | yes | 0 |
+| `@flighthq/lighting` | `flight.Lighting` | 11 | 10 | 37 | yes | 0 |
+| `@flighthq/loader` | `flight.Loader` | 2 | 1 | 13 | yes | 0 |
+| `@flighthq/log` | `flight.Log` | 2 | 1 | 65 | yes | 0 |
+| `@flighthq/materials` | `flight.Materials` | 12 | 11 | 68 | yes | 0 |
+| `@flighthq/math` | `flight.Math` | 16 | 15 | 73 | yes | 0 |
+| `@flighthq/media` | `flight.Media` | 4 | 3 | 42 | yes | 0 |
+| `@flighthq/mediasession` | `flight.MediaSession` | 2 | 1 | 10 | yes | 0 |
+| `@flighthq/menu` | `flight.Menu` | 3 | 2 | 17 | yes | 0 |
+| `@flighthq/mesh` | `flight.MeshApi` | 12 | 11 | 67 | yes | 0 |
+| `@flighthq/motionpath` | `flight.Motionpath` | 8 | 7 | 7 | yes | 0 |
+| `@flighthq/movieclip` | `flight.Movieclip` | 3 | 2 | 23 | yes | 0 |
+| `@flighthq/net` | `flight.Net` | 2 | 1 | 4 | yes | 0 |
+| `@flighthq/node` | `flight.NodeApi` | 16 | 15 | 105 | yes | 0 |
+| `@flighthq/notification` | `flight.Notification` | 2 | 1 | 26 | yes | 0 |
+| `@flighthq/particleemitter` | `flight.ParticleEmitterApi` | 11 | 12 | 51 | yes | 0 |
+| `@flighthq/particles` | `flight.Particles` | 11 | 10 | 50 | yes | 0 |
+| `@flighthq/particles-formats` | `flight.ParticlesFormats` | 21 | 14 | 79 | yes | 0 |
+| `@flighthq/path` | `flight.PathApi` | 23 | 22 | 50 | yes | 0 |
+| `@flighthq/path-boolean` | `flight.PathBoolean` | 8 | 8 | 12 | yes | 0 |
+| `@flighthq/path-formats` | `flight.PathFormats` | 2 | 1 | 3 | yes | 0 |
+| `@flighthq/permissions` | `flight.Permissions` | 2 | 1 | 5 | yes | 0 |
+| `@flighthq/picking` | `flight.Picking` | 2 | 1 | 6 | yes | 0 |
+| `@flighthq/platform` | `flight.Platform` | 2 | 1 | 16 | yes | 0 |
+| `@flighthq/power` | `flight.PowerApi` | 2 | 1 | 19 | yes | 0 |
+| `@flighthq/protocol` | `flight.Protocol` | 2 | 1 | 20 | yes | 0 |
+| `@flighthq/render` | `flight.Render` | 17 | 16 | 63 | yes | 0 |
+| `@flighthq/render-gl` | `flight.RenderGl` | 24 | 20 | 75 | yes | 0 |
+| `@flighthq/render-wgpu` | `flight.RenderWgpu` | 18 | 16 | 68 | yes | 0 |
+| `@flighthq/scene` | `flight.SceneApi` | 14 | 13 | 43 | yes | 0 |
+| `@flighthq/scene-formats` | `flight.SceneFormats` | 16 | 9 | 15 | yes | 0 |
+| `@flighthq/scene-gl` | `flight.SceneGl` | 53 | 52 | 184 | yes | 0 |
+| `@flighthq/scene-resources` | `flight.SceneResources` | 16 | 15 | 37 | yes | 0 |
+| `@flighthq/scene-wgpu` | `flight.SceneWgpu` | 42 | 40 | 140 | yes | 0 |
+| `@flighthq/screen` | `flight.Screen` | 2 | 1 | 31 | yes | 0 |
+| `@flighthq/sdk` | `flight.Sdk` | 14 | 1 | 5923 | no | 0 |
+| `@flighthq/sensors` | `flight.SensorsApi` | 2 | 1 | 32 | yes | 0 |
+| `@flighthq/shading` | `flight.Shading` | 17 | 16 | 37 | yes | 0 |
+| `@flighthq/shape` | `flight.ShapeApi` | 7 | 6 | 42 | yes | 0 |
+| `@flighthq/shape-formats` | `flight.ShapeFormats` | 2 | 1 | 5 | yes | 0 |
+| `@flighthq/share` | `flight.Share` | 2 | 1 | 14 | yes | 0 |
+| `@flighthq/shell` | `flight.Shell` | 2 | 1 | 14 | yes | 0 |
+| `@flighthq/shortcut` | `flight.Shortcut` | 2 | 1 | 26 | yes | 0 |
+| `@flighthq/signals` | `flight.Signals` | 6 | 5 | 14 | yes | 0 |
+| `@flighthq/skeleton3d` | `flight.Skeleton3DApi` | 6 | 5 | 16 | yes | 0 |
+| `@flighthq/snapshot` | `flight.SnapshotApi` | 5 | 4 | 4 | yes | 0 |
+| `@flighthq/socket` | `flight.SocketApi` | 2 | 1 | 11 | yes | 0 |
+| `@flighthq/spatial` | `flight.Spatial` | 3 | 2 | 10 | yes | 0 |
+| `@flighthq/spring` | `flight.SpringApi` | 8 | 7 | 12 | yes | 0 |
+| `@flighthq/sprite` | `flight.SpriteApi` | 4 | 3 | 64 | yes | 0 |
+| `@flighthq/spritesheet` | `flight.SpritesheetApi` | 8 | 7 | 32 | yes | 0 |
+| `@flighthq/spritesheet-formats` | `flight.SpritesheetFormats` | 16 | 10 | 55 | yes | 0 |
+| `@flighthq/statusbar` | `flight.StatusBarApi` | 2 | 1 | 16 | yes | 0 |
+| `@flighthq/storage` | `flight.Storage` | 2 | 1 | 39 | yes | 0 |
+| `@flighthq/surface` | `flight.SurfaceApi` | 42 | 41 | 136 | yes | 0 |
+| `@flighthq/text` | `flight.Text` | 6 | 5 | 86 | yes | 0 |
+| `@flighthq/text-markup` | `flight.TextMarkup` | 5 | 4 | 8 | yes | 0 |
+| `@flighthq/textbidi` | `flight.TextBidi` | 5 | 4 | 6 | yes | 0 |
+| `@flighthq/textinput` | `flight.TextInput` | 5 | 4 | 55 | yes | 0 |
+| `@flighthq/textlayout` | `flight.TextLayout` | 13 | 12 | 47 | yes | 0 |
+| `@flighthq/textsegment` | `flight.TextSegmentApi` | 4 | 3 | 11 | yes | 0 |
+| `@flighthq/textshaper` | `flight.TextShaper` | 9 | 8 | 31 | yes | 0 |
+| `@flighthq/textshaper-canvas` | `flight.TextShaperCanvas` | 2 | 1 | 3 | yes | 0 |
+| `@flighthq/texture` | `flight.TextureApi` | 5 | 4 | 42 | yes | 0 |
+| `@flighthq/texture-formats` | `flight.TextureFormats` | 9 | 8 | 6 | yes | 0 |
+| `@flighthq/textureatlas` | `flight.TextureAtlasApi` | 4 | 3 | 20 | yes | 0 |
+| `@flighthq/textureatlas-formats` | `flight.TextureAtlasFormats` | 8 | 5 | 29 | yes | 0 |
+| `@flighthq/tilemap-formats` | `flight.TilemapFormats` | 9 | 7 | 16 | yes | 0 |
+| `@flighthq/tileset` | `flight.TilesetApi` | 3 | 2 | 9 | yes | 0 |
+| `@flighthq/timeline` | `flight.TimelineApi` | 2 | 1 | 16 | yes | 0 |
+| `@flighthq/tool-capture` | `flight.ToolCapture` | 12 | 11 | 57 | no | 0 |
+| `@flighthq/tray` | `flight.Tray` | 2 | 1 | 23 | yes | 0 |
+| `@flighthq/tween` | `flight.TweenApi` | 9 | 7 | 35 | yes | 0 |
+| `@flighthq/types` | `flight.Types` | 590 | 29 | 1261 | yes | 0 |
+| `@flighthq/updater` | `flight.Updater` | 2 | 1 | 23 | yes | 0 |
+| `@flighthq/useragent` | `flight.UserAgent` | 3 | 2 | 12 | yes | 0 |
+| `@flighthq/velocity` | `flight.Velocity` | 4 | 3 | 20 | yes | 0 |
+| `@flighthq/video` | `flight.VideoApi` | 4 | 3 | 16 | yes | 0 |
+| `@flighthq/webcam` | `flight.Webcam` | 3 | 2 | 10 | yes | 0 |
+| `@flighthq/xml` | `flight.Xml` | 3 | 2 | 7 | yes | 0 |

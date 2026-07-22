@@ -1,0 +1,18 @@
+{
+  "completedAt": "2026-07-22T11:54:31.911Z",
+  "failedPackages": 0,
+  "packages": [
+    {
+      "durationMs": 11336,
+      "exitCode": 0,
+      "package": "displayobject-gl",
+      "signal": null,
+      "status": "passed",
+      "summary": "207 passed (207)",
+      "testFiles": 25
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "displayobject-gl",
+  "startedAt": "2026-07-22T11:54:20.574Z"
+}

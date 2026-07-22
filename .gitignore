@@ -1,0 +1,11 @@
+node_modules/
+.cache/
+.haxe/
+dist/
+build/
+coverage/
+*.log
+*.tsbuildinfo
+.DS_Store
+
+.quimby

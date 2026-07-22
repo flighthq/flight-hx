@@ -1,0 +1,929 @@
+{
+  "packages": [
+    {
+      "declarations": 20,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 20,
+      "packageName": "@flighthq/accessibility"
+    },
+    {
+      "declarations": 62,
+      "diagnostics": [],
+      "files": 19,
+      "lowered": 62,
+      "packageName": "@flighthq/adjustments"
+    },
+    {
+      "declarations": 30,
+      "diagnostics": [],
+      "files": 4,
+      "lowered": 30,
+      "packageName": "@flighthq/animation"
+    },
+    {
+      "declarations": 44,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 44,
+      "packageName": "@flighthq/app"
+    },
+    {
+      "declarations": 113,
+      "diagnostics": [],
+      "files": 3,
+      "lowered": 113,
+      "packageName": "@flighthq/application"
+    },
+    {
+      "declarations": 11,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 11,
+      "packageName": "@flighthq/assets"
+    },
+    {
+      "declarations": 20,
+      "diagnostics": [],
+      "files": 4,
+      "lowered": 20,
+      "packageName": "@flighthq/audio"
+    },
+    {
+      "declarations": 14,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 14,
+      "packageName": "@flighthq/binpack"
+    },
+    {
+      "declarations": 8,
+      "diagnostics": [],
+      "files": 3,
+      "lowered": 8,
+      "packageName": "@flighthq/bitmapfont"
+    },
+    {
+      "declarations": 23,
+      "diagnostics": [],
+      "files": 5,
+      "lowered": 23,
+      "packageName": "@flighthq/bitmapfont-formats"
+    },
+    {
+      "declarations": 34,
+      "diagnostics": [],
+      "files": 3,
+      "lowered": 34,
+      "packageName": "@flighthq/bitmaptext"
+    },
+    {
+      "declarations": 48,
+      "diagnostics": [],
+      "files": 10,
+      "lowered": 48,
+      "packageName": "@flighthq/camera"
+    },
+    {
+      "declarations": 15,
+      "diagnostics": [],
+      "files": 8,
+      "lowered": 15,
+      "packageName": "@flighthq/camera2d"
+    },
+    {
+      "declarations": 10,
+      "diagnostics": [],
+      "files": 3,
+      "lowered": 10,
+      "packageName": "@flighthq/capture"
+    },
+    {
+      "declarations": 32,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 32,
+      "packageName": "@flighthq/clip"
+    },
+    {
+      "declarations": 38,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 38,
+      "packageName": "@flighthq/clipboard"
+    },
+    {
+      "declarations": 14,
+      "diagnostics": [],
+      "files": 12,
+      "lowered": 14,
+      "packageName": "@flighthq/clock"
+    },
+    {
+      "declarations": 41,
+      "diagnostics": [],
+      "files": 6,
+      "lowered": 41,
+      "packageName": "@flighthq/collision"
+    },
+    {
+      "declarations": 32,
+      "diagnostics": [],
+      "files": 10,
+      "lowered": 32,
+      "packageName": "@flighthq/color"
+    },
+    {
+      "declarations": 22,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 22,
+      "packageName": "@flighthq/connectivity"
+    },
+    {
+      "declarations": 23,
+      "diagnostics": [],
+      "files": 3,
+      "lowered": 23,
+      "packageName": "@flighthq/debug"
+    },
+    {
+      "declarations": 19,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 19,
+      "packageName": "@flighthq/device"
+    },
+    {
+      "declarations": 33,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 33,
+      "packageName": "@flighthq/dialog"
+    },
+    {
+      "declarations": 52,
+      "diagnostics": [],
+      "files": 8,
+      "lowered": 52,
+      "packageName": "@flighthq/displayobject"
+    },
+    {
+      "declarations": 141,
+      "diagnostics": [],
+      "files": 31,
+      "lowered": 141,
+      "packageName": "@flighthq/displayobject-canvas"
+    },
+    {
+      "declarations": 118,
+      "diagnostics": [],
+      "files": 27,
+      "lowered": 118,
+      "packageName": "@flighthq/displayobject-dom"
+    },
+    {
+      "declarations": 181,
+      "diagnostics": [],
+      "files": 28,
+      "lowered": 181,
+      "packageName": "@flighthq/displayobject-gl"
+    },
+    {
+      "declarations": 186,
+      "diagnostics": [],
+      "files": 29,
+      "lowered": 186,
+      "packageName": "@flighthq/displayobject-wgpu"
+    },
+    {
+      "declarations": 56,
+      "diagnostics": [],
+      "files": 20,
+      "lowered": 56,
+      "packageName": "@flighthq/easing"
+    },
+    {
+      "declarations": 126,
+      "diagnostics": [],
+      "files": 72,
+      "lowered": 126,
+      "packageName": "@flighthq/effects"
+    },
+    {
+      "declarations": 122,
+      "diagnostics": [],
+      "files": 48,
+      "lowered": 122,
+      "packageName": "@flighthq/effects-canvas"
+    },
+    {
+      "declarations": 258,
+      "diagnostics": [],
+      "files": 58,
+      "lowered": 258,
+      "packageName": "@flighthq/effects-gl"
+    },
+    {
+      "declarations": 248,
+      "diagnostics": [],
+      "files": 56,
+      "lowered": 248,
+      "packageName": "@flighthq/effects-wgpu"
+    },
+    {
+      "declarations": 13,
+      "diagnostics": [],
+      "files": 6,
+      "lowered": 13,
+      "packageName": "@flighthq/entity"
+    },
+    {
+      "declarations": 54,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 54,
+      "packageName": "@flighthq/filesystem"
+    },
+    {
+      "declarations": 9,
+      "diagnostics": [],
+      "files": 10,
+      "lowered": 9,
+      "packageName": "@flighthq/flow"
+    },
+    {
+      "declarations": 15,
+      "diagnostics": [],
+      "files": 8,
+      "lowered": 15,
+      "packageName": "@flighthq/font"
+    },
+    {
+      "declarations": 20,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 20,
+      "packageName": "@flighthq/geolocation"
+    },
+    {
+      "declarations": 397,
+      "diagnostics": [],
+      "files": 27,
+      "lowered": 397,
+      "packageName": "@flighthq/geometry"
+    },
+    {
+      "declarations": 23,
+      "diagnostics": [],
+      "files": 7,
+      "lowered": 23,
+      "packageName": "@flighthq/glyphatlas"
+    },
+    {
+      "declarations": 15,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 15,
+      "packageName": "@flighthq/haptics"
+    },
+    {
+      "declarations": 83,
+      "diagnostics": [],
+      "files": 15,
+      "lowered": 83,
+      "packageName": "@flighthq/host-capacitor"
+    },
+    {
+      "declarations": 72,
+      "diagnostics": [],
+      "files": 19,
+      "lowered": 72,
+      "packageName": "@flighthq/host-electron"
+    },
+    {
+      "declarations": 62,
+      "diagnostics": [],
+      "files": 13,
+      "lowered": 62,
+      "packageName": "@flighthq/host-tauri"
+    },
+    {
+      "declarations": 21,
+      "diagnostics": [],
+      "files": 3,
+      "lowered": 21,
+      "packageName": "@flighthq/image"
+    },
+    {
+      "declarations": 24,
+      "diagnostics": [],
+      "files": 8,
+      "lowered": 24,
+      "packageName": "@flighthq/image-codec"
+    },
+    {
+      "declarations": 69,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 69,
+      "packageName": "@flighthq/input"
+    },
+    {
+      "declarations": 158,
+      "diagnostics": [],
+      "files": 16,
+      "lowered": 158,
+      "packageName": "@flighthq/interaction"
+    },
+    {
+      "declarations": 25,
+      "diagnostics": [],
+      "files": 8,
+      "lowered": 25,
+      "packageName": "@flighthq/intl"
+    },
+    {
+      "declarations": 23,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 23,
+      "packageName": "@flighthq/ipc"
+    },
+    {
+      "declarations": 27,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 27,
+      "packageName": "@flighthq/keyboard"
+    },
+    {
+      "declarations": 16,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 16,
+      "packageName": "@flighthq/lifecycle"
+    },
+    {
+      "declarations": 40,
+      "diagnostics": [],
+      "files": 11,
+      "lowered": 40,
+      "packageName": "@flighthq/lighting"
+    },
+    {
+      "declarations": 35,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 35,
+      "packageName": "@flighthq/loader"
+    },
+    {
+      "declarations": 93,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 93,
+      "packageName": "@flighthq/log"
+    },
+    {
+      "declarations": 81,
+      "diagnostics": [],
+      "files": 12,
+      "lowered": 81,
+      "packageName": "@flighthq/materials"
+    },
+    {
+      "declarations": 72,
+      "diagnostics": [],
+      "files": 16,
+      "lowered": 72,
+      "packageName": "@flighthq/math"
+    },
+    {
+      "declarations": 61,
+      "diagnostics": [],
+      "files": 4,
+      "lowered": 61,
+      "packageName": "@flighthq/media"
+    },
+    {
+      "declarations": 12,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 12,
+      "packageName": "@flighthq/mediasession"
+    },
+    {
+      "declarations": 22,
+      "diagnostics": [],
+      "files": 3,
+      "lowered": 22,
+      "packageName": "@flighthq/menu"
+    },
+    {
+      "declarations": 98,
+      "diagnostics": [],
+      "files": 12,
+      "lowered": 98,
+      "packageName": "@flighthq/mesh"
+    },
+    {
+      "declarations": 9,
+      "diagnostics": [],
+      "files": 8,
+      "lowered": 9,
+      "packageName": "@flighthq/motionpath"
+    },
+    {
+      "declarations": 23,
+      "diagnostics": [],
+      "files": 3,
+      "lowered": 23,
+      "packageName": "@flighthq/movieclip"
+    },
+    {
+      "declarations": 14,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 14,
+      "packageName": "@flighthq/net"
+    },
+    {
+      "declarations": 119,
+      "diagnostics": [],
+      "files": 16,
+      "lowered": 119,
+      "packageName": "@flighthq/node"
+    },
+    {
+      "declarations": 29,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 29,
+      "packageName": "@flighthq/notification"
+    },
+    {
+      "declarations": 78,
+      "diagnostics": [],
+      "files": 11,
+      "lowered": 78,
+      "packageName": "@flighthq/particleemitter"
+    },
+    {
+      "declarations": 52,
+      "diagnostics": [],
+      "files": 11,
+      "lowered": 52,
+      "packageName": "@flighthq/particles"
+    },
+    {
+      "declarations": 197,
+      "diagnostics": [],
+      "files": 21,
+      "lowered": 197,
+      "packageName": "@flighthq/particles-formats"
+    },
+    {
+      "declarations": 118,
+      "diagnostics": [],
+      "files": 23,
+      "lowered": 118,
+      "packageName": "@flighthq/path"
+    },
+    {
+      "declarations": 76,
+      "diagnostics": [],
+      "files": 8,
+      "lowered": 76,
+      "packageName": "@flighthq/path-boolean"
+    },
+    {
+      "declarations": 5,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 5,
+      "packageName": "@flighthq/path-formats"
+    },
+    {
+      "declarations": 23,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 23,
+      "packageName": "@flighthq/permissions"
+    },
+    {
+      "declarations": 30,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 30,
+      "packageName": "@flighthq/picking"
+    },
+    {
+      "declarations": 19,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 19,
+      "packageName": "@flighthq/platform"
+    },
+    {
+      "declarations": 28,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 28,
+      "packageName": "@flighthq/power"
+    },
+    {
+      "declarations": 25,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 25,
+      "packageName": "@flighthq/protocol"
+    },
+    {
+      "declarations": 88,
+      "diagnostics": [],
+      "files": 17,
+      "lowered": 88,
+      "packageName": "@flighthq/render"
+    },
+    {
+      "declarations": 113,
+      "diagnostics": [],
+      "files": 24,
+      "lowered": 113,
+      "packageName": "@flighthq/render-gl"
+    },
+    {
+      "declarations": 96,
+      "diagnostics": [],
+      "files": 18,
+      "lowered": 96,
+      "packageName": "@flighthq/render-wgpu"
+    },
+    {
+      "declarations": 65,
+      "diagnostics": [],
+      "files": 14,
+      "lowered": 65,
+      "packageName": "@flighthq/scene"
+    },
+    {
+      "declarations": 261,
+      "diagnostics": [],
+      "files": 16,
+      "lowered": 261,
+      "packageName": "@flighthq/scene-formats"
+    },
+    {
+      "declarations": 352,
+      "diagnostics": [],
+      "files": 53,
+      "lowered": 352,
+      "packageName": "@flighthq/scene-gl"
+    },
+    {
+      "declarations": 48,
+      "diagnostics": [],
+      "files": 16,
+      "lowered": 48,
+      "packageName": "@flighthq/scene-resources"
+    },
+    {
+      "declarations": 317,
+      "diagnostics": [],
+      "files": 42,
+      "lowered": 317,
+      "packageName": "@flighthq/scene-wgpu"
+    },
+    {
+      "declarations": 45,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 45,
+      "packageName": "@flighthq/screen"
+    },
+    {
+      "declarations": 0,
+      "diagnostics": [],
+      "files": 14,
+      "lowered": 0,
+      "packageName": "@flighthq/sdk"
+    },
+    {
+      "declarations": 57,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 57,
+      "packageName": "@flighthq/sensors"
+    },
+    {
+      "declarations": 42,
+      "diagnostics": [],
+      "files": 17,
+      "lowered": 42,
+      "packageName": "@flighthq/shading"
+    },
+    {
+      "declarations": 53,
+      "diagnostics": [],
+      "files": 7,
+      "lowered": 53,
+      "packageName": "@flighthq/shape"
+    },
+    {
+      "declarations": 15,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 15,
+      "packageName": "@flighthq/shape-formats"
+    },
+    {
+      "declarations": 18,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 18,
+      "packageName": "@flighthq/share"
+    },
+    {
+      "declarations": 16,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 16,
+      "packageName": "@flighthq/shell"
+    },
+    {
+      "declarations": 40,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 40,
+      "packageName": "@flighthq/shortcut"
+    },
+    {
+      "declarations": 15,
+      "diagnostics": [],
+      "files": 6,
+      "lowered": 15,
+      "packageName": "@flighthq/signals"
+    },
+    {
+      "declarations": 20,
+      "diagnostics": [],
+      "files": 6,
+      "lowered": 20,
+      "packageName": "@flighthq/skeleton3d"
+    },
+    {
+      "declarations": 12,
+      "diagnostics": [],
+      "files": 5,
+      "lowered": 12,
+      "packageName": "@flighthq/snapshot"
+    },
+    {
+      "declarations": 14,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 14,
+      "packageName": "@flighthq/socket"
+    },
+    {
+      "declarations": 27,
+      "diagnostics": [],
+      "files": 3,
+      "lowered": 27,
+      "packageName": "@flighthq/spatial"
+    },
+    {
+      "declarations": 14,
+      "diagnostics": [],
+      "files": 8,
+      "lowered": 14,
+      "packageName": "@flighthq/spring"
+    },
+    {
+      "declarations": 78,
+      "diagnostics": [],
+      "files": 4,
+      "lowered": 78,
+      "packageName": "@flighthq/sprite"
+    },
+    {
+      "declarations": 38,
+      "diagnostics": [],
+      "files": 8,
+      "lowered": 38,
+      "packageName": "@flighthq/spritesheet"
+    },
+    {
+      "declarations": 110,
+      "diagnostics": [],
+      "files": 16,
+      "lowered": 110,
+      "packageName": "@flighthq/spritesheet-formats"
+    },
+    {
+      "declarations": 25,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 25,
+      "packageName": "@flighthq/statusbar"
+    },
+    {
+      "declarations": 46,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 46,
+      "packageName": "@flighthq/storage"
+    },
+    {
+      "declarations": 196,
+      "diagnostics": [],
+      "files": 42,
+      "lowered": 196,
+      "packageName": "@flighthq/surface"
+    },
+    {
+      "declarations": 96,
+      "diagnostics": [],
+      "files": 6,
+      "lowered": 96,
+      "packageName": "@flighthq/text"
+    },
+    {
+      "declarations": 51,
+      "diagnostics": [],
+      "files": 5,
+      "lowered": 51,
+      "packageName": "@flighthq/text-markup"
+    },
+    {
+      "declarations": 45,
+      "diagnostics": [],
+      "files": 5,
+      "lowered": 45,
+      "packageName": "@flighthq/textbidi"
+    },
+    {
+      "declarations": 83,
+      "diagnostics": [],
+      "files": 5,
+      "lowered": 83,
+      "packageName": "@flighthq/textinput"
+    },
+    {
+      "declarations": 74,
+      "diagnostics": [],
+      "files": 13,
+      "lowered": 74,
+      "packageName": "@flighthq/textlayout"
+    },
+    {
+      "declarations": 19,
+      "diagnostics": [],
+      "files": 4,
+      "lowered": 19,
+      "packageName": "@flighthq/textsegment"
+    },
+    {
+      "declarations": 40,
+      "diagnostics": [],
+      "files": 9,
+      "lowered": 40,
+      "packageName": "@flighthq/textshaper"
+    },
+    {
+      "declarations": 6,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 6,
+      "packageName": "@flighthq/textshaper-canvas"
+    },
+    {
+      "declarations": 43,
+      "diagnostics": [],
+      "files": 5,
+      "lowered": 43,
+      "packageName": "@flighthq/texture"
+    },
+    {
+      "declarations": 62,
+      "diagnostics": [],
+      "files": 9,
+      "lowered": 62,
+      "packageName": "@flighthq/texture-formats"
+    },
+    {
+      "declarations": 20,
+      "diagnostics": [],
+      "files": 4,
+      "lowered": 20,
+      "packageName": "@flighthq/textureatlas"
+    },
+    {
+      "declarations": 36,
+      "diagnostics": [],
+      "files": 8,
+      "lowered": 36,
+      "packageName": "@flighthq/textureatlas-formats"
+    },
+    {
+      "declarations": 75,
+      "diagnostics": [],
+      "files": 9,
+      "lowered": 75,
+      "packageName": "@flighthq/tilemap-formats"
+    },
+    {
+      "declarations": 9,
+      "diagnostics": [],
+      "files": 3,
+      "lowered": 9,
+      "packageName": "@flighthq/tileset"
+    },
+    {
+      "declarations": 26,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 26,
+      "packageName": "@flighthq/timeline"
+    },
+    {
+      "declarations": 84,
+      "diagnostics": [],
+      "files": 12,
+      "lowered": 84,
+      "packageName": "@flighthq/tool-capture"
+    },
+    {
+      "declarations": 25,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 25,
+      "packageName": "@flighthq/tray"
+    },
+    {
+      "declarations": 38,
+      "diagnostics": [],
+      "files": 9,
+      "lowered": 38,
+      "packageName": "@flighthq/tween"
+    },
+    {
+      "declarations": 1287,
+      "diagnostics": [],
+      "files": 590,
+      "lowered": 1287,
+      "packageName": "@flighthq/types"
+    },
+    {
+      "declarations": 27,
+      "diagnostics": [],
+      "files": 2,
+      "lowered": 27,
+      "packageName": "@flighthq/updater"
+    },
+    {
+      "declarations": 12,
+      "diagnostics": [],
+      "files": 3,
+      "lowered": 12,
+      "packageName": "@flighthq/useragent"
+    },
+    {
+      "declarations": 21,
+      "diagnostics": [],
+      "files": 4,
+      "lowered": 21,
+      "packageName": "@flighthq/velocity"
+    },
+    {
+      "declarations": 18,
+      "diagnostics": [],
+      "files": 4,
+      "lowered": 18,
+      "packageName": "@flighthq/video"
+    },
+    {
+      "declarations": 11,
+      "diagnostics": [],
+      "files": 3,
+      "lowered": 11,
+      "packageName": "@flighthq/webcam"
+    },
+    {
+      "declarations": 14,
+      "diagnostics": [],
+      "files": 3,
+      "lowered": 14,
+      "packageName": "@flighthq/xml"
+    }
+  ],
+  "schemaVersion": 1,
+  "summary": {
+    "declarations": 9122,
+    "diagnostics": 0,
+    "files": 1898,
+    "lowered": 9122,
+    "packages": 131
+  }
+}

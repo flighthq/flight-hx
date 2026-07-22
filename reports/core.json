@@ -1,0 +1,660 @@
+{
+  "modules": [
+    {
+      "declarations": 20,
+      "diagnostics": [],
+      "module": "flight.Accessibility"
+    },
+    {
+      "declarations": 62,
+      "diagnostics": [],
+      "module": "flight.Adjustments"
+    },
+    {
+      "declarations": 30,
+      "diagnostics": [],
+      "module": "flight.Animation"
+    },
+    {
+      "declarations": 44,
+      "diagnostics": [],
+      "module": "flight.AppApi"
+    },
+    {
+      "declarations": 113,
+      "diagnostics": [],
+      "module": "flight.ApplicationApi"
+    },
+    {
+      "declarations": 11,
+      "diagnostics": [],
+      "module": "flight.Assets"
+    },
+    {
+      "declarations": 20,
+      "diagnostics": [],
+      "module": "flight.Audio"
+    },
+    {
+      "declarations": 14,
+      "diagnostics": [],
+      "module": "flight.Binpack"
+    },
+    {
+      "declarations": 8,
+      "diagnostics": [],
+      "module": "flight.BitmapFontApi"
+    },
+    {
+      "declarations": 23,
+      "diagnostics": [],
+      "module": "flight.BitmapFontFormats"
+    },
+    {
+      "declarations": 34,
+      "diagnostics": [],
+      "module": "flight.BitmapTextApi"
+    },
+    {
+      "declarations": 48,
+      "diagnostics": [],
+      "module": "flight.CameraApi"
+    },
+    {
+      "declarations": 15,
+      "diagnostics": [],
+      "module": "flight.Camera2DApi"
+    },
+    {
+      "declarations": 10,
+      "diagnostics": [],
+      "module": "flight.Capture"
+    },
+    {
+      "declarations": 32,
+      "diagnostics": [],
+      "module": "flight.Clip"
+    },
+    {
+      "declarations": 38,
+      "diagnostics": [],
+      "module": "flight.Clipboard"
+    },
+    {
+      "declarations": 14,
+      "diagnostics": [],
+      "module": "flight.ClockApi"
+    },
+    {
+      "declarations": 41,
+      "diagnostics": [],
+      "module": "flight.Collision"
+    },
+    {
+      "declarations": 32,
+      "diagnostics": [],
+      "module": "flight.Color"
+    },
+    {
+      "declarations": 22,
+      "diagnostics": [],
+      "module": "flight.ConnectivityApi"
+    },
+    {
+      "declarations": 23,
+      "diagnostics": [],
+      "module": "flight.Debug"
+    },
+    {
+      "declarations": 19,
+      "diagnostics": [],
+      "module": "flight.Device"
+    },
+    {
+      "declarations": 33,
+      "diagnostics": [],
+      "module": "flight.Dialog"
+    },
+    {
+      "declarations": 52,
+      "diagnostics": [],
+      "module": "flight.DisplayObjectApi"
+    },
+    {
+      "declarations": 141,
+      "diagnostics": [],
+      "module": "flight.DisplayObjectCanvas"
+    },
+    {
+      "declarations": 118,
+      "diagnostics": [],
+      "module": "flight.DisplayObjectDom"
+    },
+    {
+      "declarations": 179,
+      "diagnostics": [],
+      "module": "flight.DisplayObjectGl"
+    },
+    {
+      "declarations": 185,
+      "diagnostics": [],
+      "module": "flight.DisplayObjectWgpu"
+    },
+    {
+      "declarations": 56,
+      "diagnostics": [],
+      "module": "flight.Easing"
+    },
+    {
+      "declarations": 126,
+      "diagnostics": [],
+      "module": "flight.Effects"
+    },
+    {
+      "declarations": 118,
+      "diagnostics": [],
+      "module": "flight.EffectsCanvas"
+    },
+    {
+      "declarations": 258,
+      "diagnostics": [],
+      "module": "flight.EffectsGl"
+    },
+    {
+      "declarations": 248,
+      "diagnostics": [],
+      "module": "flight.EffectsWgpu"
+    },
+    {
+      "declarations": 13,
+      "diagnostics": [],
+      "module": "flight.EntityApi"
+    },
+    {
+      "declarations": 54,
+      "diagnostics": [],
+      "module": "flight.Filesystem"
+    },
+    {
+      "declarations": 9,
+      "diagnostics": [],
+      "module": "flight.Flow"
+    },
+    {
+      "declarations": 15,
+      "diagnostics": [],
+      "module": "flight.FontApi"
+    },
+    {
+      "declarations": 20,
+      "diagnostics": [],
+      "module": "flight.Geolocation"
+    },
+    {
+      "declarations": 397,
+      "diagnostics": [],
+      "module": "flight.Geometry"
+    },
+    {
+      "declarations": 23,
+      "diagnostics": [],
+      "module": "flight.Glyphatlas"
+    },
+    {
+      "declarations": 15,
+      "diagnostics": [],
+      "module": "flight.Haptics"
+    },
+    {
+      "declarations": 83,
+      "diagnostics": [],
+      "module": "flight.HostCapacitor"
+    },
+    {
+      "declarations": 72,
+      "diagnostics": [],
+      "module": "flight.HostElectron"
+    },
+    {
+      "declarations": 62,
+      "diagnostics": [],
+      "module": "flight.HostTauri"
+    },
+    {
+      "declarations": 21,
+      "diagnostics": [],
+      "module": "flight.Image"
+    },
+    {
+      "declarations": 24,
+      "diagnostics": [],
+      "module": "flight.ImageCodec"
+    },
+    {
+      "declarations": 69,
+      "diagnostics": [],
+      "module": "flight.Input"
+    },
+    {
+      "declarations": 158,
+      "diagnostics": [],
+      "module": "flight.Interaction"
+    },
+    {
+      "declarations": 25,
+      "diagnostics": [],
+      "module": "flight.Intl"
+    },
+    {
+      "declarations": 23,
+      "diagnostics": [],
+      "module": "flight.Ipc"
+    },
+    {
+      "declarations": 27,
+      "diagnostics": [],
+      "module": "flight.Keyboard"
+    },
+    {
+      "declarations": 16,
+      "diagnostics": [],
+      "module": "flight.Lifecycle"
+    },
+    {
+      "declarations": 40,
+      "diagnostics": [],
+      "module": "flight.Lighting"
+    },
+    {
+      "declarations": 35,
+      "diagnostics": [],
+      "module": "flight.Loader"
+    },
+    {
+      "declarations": 93,
+      "diagnostics": [],
+      "module": "flight.Log"
+    },
+    {
+      "declarations": 81,
+      "diagnostics": [],
+      "module": "flight.Materials"
+    },
+    {
+      "declarations": 72,
+      "diagnostics": [],
+      "module": "flight.Math"
+    },
+    {
+      "declarations": 61,
+      "diagnostics": [],
+      "module": "flight.Media"
+    },
+    {
+      "declarations": 12,
+      "diagnostics": [],
+      "module": "flight.MediaSession"
+    },
+    {
+      "declarations": 22,
+      "diagnostics": [],
+      "module": "flight.Menu"
+    },
+    {
+      "declarations": 98,
+      "diagnostics": [],
+      "module": "flight.MeshApi"
+    },
+    {
+      "declarations": 9,
+      "diagnostics": [],
+      "module": "flight.Motionpath"
+    },
+    {
+      "declarations": 23,
+      "diagnostics": [],
+      "module": "flight.Movieclip"
+    },
+    {
+      "declarations": 14,
+      "diagnostics": [],
+      "module": "flight.Net"
+    },
+    {
+      "declarations": 119,
+      "diagnostics": [],
+      "module": "flight.NodeApi"
+    },
+    {
+      "declarations": 29,
+      "diagnostics": [],
+      "module": "flight.Notification"
+    },
+    {
+      "declarations": 78,
+      "diagnostics": [],
+      "module": "flight.ParticleEmitterApi"
+    },
+    {
+      "declarations": 52,
+      "diagnostics": [],
+      "module": "flight.Particles"
+    },
+    {
+      "declarations": 197,
+      "diagnostics": [],
+      "module": "flight.ParticlesFormats"
+    },
+    {
+      "declarations": 118,
+      "diagnostics": [],
+      "module": "flight.PathApi"
+    },
+    {
+      "declarations": 76,
+      "diagnostics": [],
+      "module": "flight.PathBoolean"
+    },
+    {
+      "declarations": 5,
+      "diagnostics": [],
+      "module": "flight.PathFormats"
+    },
+    {
+      "declarations": 23,
+      "diagnostics": [],
+      "module": "flight.Permissions"
+    },
+    {
+      "declarations": 30,
+      "diagnostics": [],
+      "module": "flight.Picking"
+    },
+    {
+      "declarations": 19,
+      "diagnostics": [],
+      "module": "flight.Platform"
+    },
+    {
+      "declarations": 28,
+      "diagnostics": [],
+      "module": "flight.PowerApi"
+    },
+    {
+      "declarations": 25,
+      "diagnostics": [],
+      "module": "flight.Protocol"
+    },
+    {
+      "declarations": 88,
+      "diagnostics": [],
+      "module": "flight.Render"
+    },
+    {
+      "declarations": 110,
+      "diagnostics": [],
+      "module": "flight.RenderGl"
+    },
+    {
+      "declarations": 96,
+      "diagnostics": [],
+      "module": "flight.RenderWgpu"
+    },
+    {
+      "declarations": 65,
+      "diagnostics": [],
+      "module": "flight.SceneApi"
+    },
+    {
+      "declarations": 261,
+      "diagnostics": [],
+      "module": "flight.SceneFormats"
+    },
+    {
+      "declarations": 349,
+      "diagnostics": [],
+      "module": "flight.SceneGl"
+    },
+    {
+      "declarations": 48,
+      "diagnostics": [],
+      "module": "flight.SceneResources"
+    },
+    {
+      "declarations": 314,
+      "diagnostics": [],
+      "module": "flight.SceneWgpu"
+    },
+    {
+      "declarations": 45,
+      "diagnostics": [],
+      "module": "flight.Screen"
+    },
+    {
+      "declarations": 0,
+      "diagnostics": [],
+      "module": "flight.Sdk"
+    },
+    {
+      "declarations": 57,
+      "diagnostics": [],
+      "module": "flight.SensorsApi"
+    },
+    {
+      "declarations": 42,
+      "diagnostics": [],
+      "module": "flight.Shading"
+    },
+    {
+      "declarations": 53,
+      "diagnostics": [],
+      "module": "flight.ShapeApi"
+    },
+    {
+      "declarations": 15,
+      "diagnostics": [],
+      "module": "flight.ShapeFormats"
+    },
+    {
+      "declarations": 18,
+      "diagnostics": [],
+      "module": "flight.Share"
+    },
+    {
+      "declarations": 16,
+      "diagnostics": [],
+      "module": "flight.Shell"
+    },
+    {
+      "declarations": 40,
+      "diagnostics": [],
+      "module": "flight.Shortcut"
+    },
+    {
+      "declarations": 15,
+      "diagnostics": [],
+      "module": "flight.Signals"
+    },
+    {
+      "declarations": 20,
+      "diagnostics": [],
+      "module": "flight.Skeleton3DApi"
+    },
+    {
+      "declarations": 12,
+      "diagnostics": [],
+      "module": "flight.SnapshotApi"
+    },
+    {
+      "declarations": 14,
+      "diagnostics": [],
+      "module": "flight.SocketApi"
+    },
+    {
+      "declarations": 27,
+      "diagnostics": [],
+      "module": "flight.Spatial"
+    },
+    {
+      "declarations": 14,
+      "diagnostics": [],
+      "module": "flight.SpringApi"
+    },
+    {
+      "declarations": 78,
+      "diagnostics": [],
+      "module": "flight.SpriteApi"
+    },
+    {
+      "declarations": 38,
+      "diagnostics": [],
+      "module": "flight.SpritesheetApi"
+    },
+    {
+      "declarations": 110,
+      "diagnostics": [],
+      "module": "flight.SpritesheetFormats"
+    },
+    {
+      "declarations": 25,
+      "diagnostics": [],
+      "module": "flight.StatusBarApi"
+    },
+    {
+      "declarations": 46,
+      "diagnostics": [],
+      "module": "flight.Storage"
+    },
+    {
+      "declarations": 196,
+      "diagnostics": [],
+      "module": "flight.SurfaceApi"
+    },
+    {
+      "declarations": 96,
+      "diagnostics": [],
+      "module": "flight.Text"
+    },
+    {
+      "declarations": 51,
+      "diagnostics": [],
+      "module": "flight.TextMarkup"
+    },
+    {
+      "declarations": 45,
+      "diagnostics": [],
+      "module": "flight.TextBidi"
+    },
+    {
+      "declarations": 83,
+      "diagnostics": [],
+      "module": "flight.TextInput"
+    },
+    {
+      "declarations": 74,
+      "diagnostics": [],
+      "module": "flight.TextLayout"
+    },
+    {
+      "declarations": 19,
+      "diagnostics": [],
+      "module": "flight.TextSegmentApi"
+    },
+    {
+      "declarations": 40,
+      "diagnostics": [],
+      "module": "flight.TextShaper"
+    },
+    {
+      "declarations": 6,
+      "diagnostics": [],
+      "module": "flight.TextShaperCanvas"
+    },
+    {
+      "declarations": 43,
+      "diagnostics": [],
+      "module": "flight.TextureApi"
+    },
+    {
+      "declarations": 62,
+      "diagnostics": [],
+      "module": "flight.TextureFormats"
+    },
+    {
+      "declarations": 20,
+      "diagnostics": [],
+      "module": "flight.TextureAtlasApi"
+    },
+    {
+      "declarations": 36,
+      "diagnostics": [],
+      "module": "flight.TextureAtlasFormats"
+    },
+    {
+      "declarations": 75,
+      "diagnostics": [],
+      "module": "flight.TilemapFormats"
+    },
+    {
+      "declarations": 9,
+      "diagnostics": [],
+      "module": "flight.TilesetApi"
+    },
+    {
+      "declarations": 26,
+      "diagnostics": [],
+      "module": "flight.TimelineApi"
+    },
+    {
+      "declarations": 84,
+      "diagnostics": [],
+      "module": "flight.ToolCapture"
+    },
+    {
+      "declarations": 25,
+      "diagnostics": [],
+      "module": "flight.Tray"
+    },
+    {
+      "declarations": 36,
+      "diagnostics": [],
+      "module": "flight.TweenApi"
+    },
+    {
+      "declarations": 1286,
+      "diagnostics": [],
+      "module": "flight.Types"
+    },
+    {
+      "declarations": 27,
+      "diagnostics": [],
+      "module": "flight.Updater"
+    },
+    {
+      "declarations": 12,
+      "diagnostics": [],
+      "module": "flight.UserAgent"
+    },
+    {
+      "declarations": 21,
+      "diagnostics": [],
+      "module": "flight.Velocity"
+    },
+    {
+      "declarations": 18,
+      "diagnostics": [],
+      "module": "flight.VideoApi"
+    },
+    {
+      "declarations": 11,
+      "diagnostics": [],
+      "module": "flight.Webcam"
+    },
+    {
+      "declarations": 14,
+      "diagnostics": [],
+      "module": "flight.Xml"
+    }
+  ],
+  "schemaVersion": 1
+}

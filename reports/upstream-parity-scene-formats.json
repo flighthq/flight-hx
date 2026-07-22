@@ -1,0 +1,18 @@
+{
+  "completedAt": "2026-07-22T11:34:16.336Z",
+  "failedPackages": 0,
+  "packages": [
+    {
+      "durationMs": 5645,
+      "exitCode": 0,
+      "package": "scene-formats",
+      "signal": null,
+      "status": "passed",
+      "summary": "215 passed (215)",
+      "testFiles": 9
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "scene-formats",
+  "startedAt": "2026-07-22T11:34:10.690Z"
+}

@@ -1,0 +1,12 @@
+{
+  "name": "flight",
+  "url": "https://github.com/flighthq/flight-hx",
+  "license": "MIT",
+  "tags": ["cross", "graphics", "flight", "sdk"],
+  "description": "A mechanically generated Haxe source port of the Flight SDK.",
+  "version": "0.0.0",
+  "classPath": "src",
+  "releasenote": "Pre-release generated port.",
+  "contributors": ["flighthq"],
+  "dependencies": { "jsasync": "1.3.1" }
+}

@@ -1,0 +1,18 @@
+{
+  "completedAt": "2026-07-22T11:55:03.210Z",
+  "failedPackages": 0,
+  "packages": [
+    {
+      "durationMs": 10711,
+      "exitCode": 0,
+      "package": "effects-gl",
+      "signal": null,
+      "status": "passed",
+      "summary": "183 passed (183)",
+      "testFiles": 57
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "effects-gl",
+  "startedAt": "2026-07-22T11:54:52.498Z"
+}

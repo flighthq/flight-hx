@@ -1,0 +1,18 @@
+{
+  "completedAt": "2026-07-22T11:54:14.233Z",
+  "failedPackages": 0,
+  "packages": [
+    {
+      "durationMs": 11896,
+      "exitCode": 0,
+      "package": "scene-gl",
+      "signal": null,
+      "status": "passed",
+      "summary": "363 passed (363)",
+      "testFiles": 52
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "scene-gl",
+  "startedAt": "2026-07-22T11:54:02.334Z"
+}

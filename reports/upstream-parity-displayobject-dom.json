@@ -1,0 +1,18 @@
+{
+  "completedAt": "2026-07-22T11:32:17.737Z",
+  "failedPackages": 0,
+  "packages": [
+    {
+      "durationMs": 12065,
+      "exitCode": 0,
+      "package": "displayobject-dom",
+      "signal": null,
+      "status": "passed",
+      "summary": "178 passed (178)",
+      "testFiles": 26
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "displayobject-dom",
+  "startedAt": "2026-07-22T11:32:05.670Z"
+}

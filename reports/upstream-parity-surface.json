@@ -1,0 +1,18 @@
+{
+  "completedAt": "2026-07-22T11:17:04.693Z",
+  "failedPackages": 0,
+  "packages": [
+    {
+      "durationMs": 5736,
+      "exitCode": 0,
+      "package": "surface",
+      "signal": null,
+      "status": "passed",
+      "summary": "359 passed (359)",
+      "testFiles": 41
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "surface",
+  "startedAt": "2026-07-22T11:16:58.956Z"
+}

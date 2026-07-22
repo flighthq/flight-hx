@@ -1,0 +1,18 @@
+{
+  "completedAt": "2026-07-22T11:53:40.328Z",
+  "failedPackages": 0,
+  "packages": [
+    {
+      "durationMs": 7407,
+      "exitCode": 0,
+      "package": "geometry",
+      "signal": null,
+      "status": "passed",
+      "summary": "996 passed (996)",
+      "testFiles": 26
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "geometry",
+  "startedAt": "2026-07-22T11:53:32.921Z"
+}

@@ -1,0 +1,4 @@
+# @install: lix --silent download "gh://github.com/basro/hx-jsasync#d032244ef7002af67c1fa2650abb7eb0981e911c" into jsasync/1.3.1/github/d032244ef7002af67c1fa2650abb7eb0981e911c
+-cp ${HAXE_LIBCACHE}/jsasync/1.3.1/github/d032244ef7002af67c1fa2650abb7eb0981e911c/src
+-D jsasync=1.3.1
+--macro jsasync.impl.Macro.init()

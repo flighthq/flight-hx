@@ -1,0 +1,18 @@
+{
+  "completedAt": "2026-07-22T12:09:44.226Z",
+  "failedPackages": 0,
+  "packages": [
+    {
+      "durationMs": 6062,
+      "exitCode": 0,
+      "package": "textshaper",
+      "signal": null,
+      "status": "passed",
+      "summary": "103 passed (103)",
+      "testFiles": 8
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "textshaper",
+  "startedAt": "2026-07-22T12:09:38.163Z"
+}

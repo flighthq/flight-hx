@@ -1,0 +1,18 @@
+{
+  "completedAt": "2026-07-22T11:53:47.370Z",
+  "failedPackages": 0,
+  "packages": [
+    {
+      "durationMs": 6891,
+      "exitCode": 0,
+      "package": "node",
+      "signal": null,
+      "status": "passed",
+      "summary": "311 passed (311)",
+      "testFiles": 15
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "node",
+  "startedAt": "2026-07-22T11:53:40.478Z"
+}

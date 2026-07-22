@@ -1,0 +1,22 @@
+{
+  "applied": [
+    {
+      "astHash": "sha256:e8e8ec56ac0d693d53dc93ebf38f390809e722b38285fd85aff1e9c1d5c98d77",
+      "id": "entity.create-entity.portable-runtime-slot",
+      "operation": "replaceBody",
+      "reason": "Haxe cannot assign an empty structural literal to an optional unconstrained generic without an explicit cast.",
+      "target": {
+        "export": "createEntity",
+        "package": "@flighthq/entity",
+        "source": "upstream/packages/entity/src/entity.ts"
+      }
+    }
+  ],
+  "schemaVersion": 1,
+  "summary": {
+    "applied": 1,
+    "conflicting": 0,
+    "stale": 0,
+    "unmatched": 0
+  }
+}

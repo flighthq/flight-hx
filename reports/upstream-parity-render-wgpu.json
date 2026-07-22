@@ -1,0 +1,18 @@
+{
+  "completedAt": "2026-07-22T11:54:02.183Z",
+  "failedPackages": 0,
+  "packages": [
+    {
+      "durationMs": 6424,
+      "exitCode": 0,
+      "package": "render-wgpu",
+      "signal": null,
+      "status": "passed",
+      "summary": "116 passed (116)",
+      "testFiles": 16
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "render-wgpu",
+  "startedAt": "2026-07-22T11:53:55.757Z"
+}

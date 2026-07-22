@@ -1,0 +1,1188 @@
+{
+  "completedAt": "2026-07-22T13:29:25.055Z",
+  "failedPackages": 0,
+  "packages": [
+    {
+      "durationMs": 4885,
+      "exitCode": 0,
+      "package": "accessibility",
+      "signal": null,
+      "status": "passed",
+      "summary": "23 passed (23)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 6899,
+      "exitCode": 0,
+      "package": "adjustments",
+      "signal": null,
+      "status": "passed",
+      "summary": "116 passed (116)",
+      "testFiles": 18
+    },
+    {
+      "durationMs": 5166,
+      "exitCode": 0,
+      "package": "animation",
+      "signal": null,
+      "status": "passed",
+      "summary": "56 passed (56)",
+      "testFiles": 3
+    },
+    {
+      "durationMs": 4911,
+      "exitCode": 0,
+      "package": "app",
+      "signal": null,
+      "status": "passed",
+      "summary": "56 passed (56)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 4998,
+      "exitCode": 0,
+      "package": "application",
+      "signal": null,
+      "status": "passed",
+      "summary": "133 passed (133)",
+      "testFiles": 2
+    },
+    {
+      "durationMs": 4794,
+      "exitCode": 0,
+      "package": "assets",
+      "signal": null,
+      "status": "passed",
+      "summary": "19 passed (19)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 5090,
+      "exitCode": 0,
+      "package": "audio",
+      "signal": null,
+      "status": "passed",
+      "summary": "52 passed (52)",
+      "testFiles": 3
+    },
+    {
+      "durationMs": 4625,
+      "exitCode": 0,
+      "package": "binpack",
+      "signal": null,
+      "status": "passed",
+      "summary": "12 passed (12)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 5254,
+      "exitCode": 0,
+      "package": "bitmapfont",
+      "signal": null,
+      "status": "passed",
+      "summary": "13 passed (13)",
+      "testFiles": 2
+    },
+    {
+      "durationMs": 5492,
+      "exitCode": 0,
+      "package": "bitmapfont-formats",
+      "signal": null,
+      "status": "passed",
+      "summary": "24 passed (24)",
+      "testFiles": 4
+    },
+    {
+      "durationMs": 5490,
+      "exitCode": 0,
+      "package": "bitmaptext",
+      "signal": null,
+      "status": "passed",
+      "summary": "38 passed (38)",
+      "testFiles": 2
+    },
+    {
+      "durationMs": 5651,
+      "exitCode": 0,
+      "package": "camera",
+      "signal": null,
+      "status": "passed",
+      "summary": "62 passed (62)",
+      "testFiles": 9
+    },
+    {
+      "durationMs": 5805,
+      "exitCode": 0,
+      "package": "camera2d",
+      "signal": null,
+      "status": "passed",
+      "summary": "23 passed (23)",
+      "testFiles": 7
+    },
+    {
+      "durationMs": 4968,
+      "exitCode": 0,
+      "package": "capture",
+      "signal": null,
+      "status": "passed",
+      "summary": "25 passed (25)",
+      "testFiles": 2
+    },
+    {
+      "durationMs": 4819,
+      "exitCode": 0,
+      "package": "clip",
+      "signal": null,
+      "status": "passed",
+      "summary": "57 passed (57)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 4953,
+      "exitCode": 0,
+      "package": "clipboard",
+      "signal": null,
+      "status": "passed",
+      "summary": "55 passed (55)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 6133,
+      "exitCode": 0,
+      "package": "clock",
+      "signal": null,
+      "status": "passed",
+      "summary": "36 passed (36)",
+      "testFiles": 11
+    },
+    {
+      "durationMs": 5181,
+      "exitCode": 0,
+      "package": "collision",
+      "signal": null,
+      "status": "passed",
+      "summary": "68 passed (68)",
+      "testFiles": 5
+    },
+    {
+      "durationMs": 5775,
+      "exitCode": 0,
+      "package": "color",
+      "signal": null,
+      "status": "passed",
+      "summary": "81 passed (81)",
+      "testFiles": 9
+    },
+    {
+      "durationMs": 4986,
+      "exitCode": 0,
+      "package": "connectivity",
+      "signal": null,
+      "status": "passed",
+      "summary": "32 passed (32)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 5135,
+      "exitCode": 0,
+      "package": "debug",
+      "signal": null,
+      "status": "passed",
+      "summary": "26 passed (26)",
+      "testFiles": 2
+    },
+    {
+      "durationMs": 5310,
+      "exitCode": 0,
+      "package": "device",
+      "signal": null,
+      "status": "passed",
+      "summary": "26 passed (26)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 4842,
+      "exitCode": 0,
+      "package": "dialog",
+      "signal": null,
+      "status": "passed",
+      "summary": "28 passed (28)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 6586,
+      "exitCode": 0,
+      "package": "displayobject",
+      "signal": null,
+      "status": "passed",
+      "summary": "91 passed (91)",
+      "testFiles": 7
+    },
+    {
+      "durationMs": 9658,
+      "exitCode": 0,
+      "package": "displayobject-canvas",
+      "signal": null,
+      "status": "passed",
+      "summary": "228 passed (228)",
+      "testFiles": 30
+    },
+    {
+      "durationMs": 9123,
+      "exitCode": 0,
+      "package": "displayobject-dom",
+      "signal": null,
+      "status": "passed",
+      "summary": "178 passed (178)",
+      "testFiles": 26
+    },
+    {
+      "durationMs": 11622,
+      "exitCode": 0,
+      "package": "displayobject-gl",
+      "signal": null,
+      "status": "passed",
+      "summary": "207 passed (207)",
+      "testFiles": 25
+    },
+    {
+      "durationMs": 11248,
+      "exitCode": 0,
+      "package": "displayobject-wgpu",
+      "signal": null,
+      "status": "passed",
+      "summary": "155 passed (155)",
+      "testFiles": 27
+    },
+    {
+      "durationMs": 7019,
+      "exitCode": 0,
+      "package": "easing",
+      "signal": null,
+      "status": "passed",
+      "summary": "147 passed (147)",
+      "testFiles": 19
+    },
+    {
+      "durationMs": 12413,
+      "exitCode": 0,
+      "package": "effects",
+      "signal": null,
+      "status": "passed",
+      "summary": "318 passed (318)",
+      "testFiles": 71
+    },
+    {
+      "durationMs": 10376,
+      "exitCode": 0,
+      "package": "effects-canvas",
+      "signal": null,
+      "status": "passed",
+      "summary": "140 passed (140)",
+      "testFiles": 47
+    },
+    {
+      "durationMs": 11776,
+      "exitCode": 0,
+      "package": "effects-gl",
+      "signal": null,
+      "status": "passed",
+      "summary": "183 passed (183)",
+      "testFiles": 57
+    },
+    {
+      "durationMs": 11600,
+      "exitCode": 0,
+      "package": "effects-wgpu",
+      "signal": null,
+      "status": "passed",
+      "summary": "144 passed (144)",
+      "testFiles": 55
+    },
+    {
+      "durationMs": 5320,
+      "exitCode": 0,
+      "package": "entity",
+      "signal": null,
+      "status": "passed",
+      "summary": "29 passed (29)",
+      "testFiles": 5
+    },
+    {
+      "durationMs": 5008,
+      "exitCode": 0,
+      "package": "filesystem",
+      "signal": null,
+      "status": "passed",
+      "summary": "97 passed (97)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 5976,
+      "exitCode": 0,
+      "package": "flow",
+      "signal": null,
+      "status": "passed",
+      "summary": "28 passed (28)",
+      "testFiles": 9
+    },
+    {
+      "durationMs": 5441,
+      "exitCode": 0,
+      "package": "font",
+      "signal": null,
+      "status": "passed",
+      "summary": "55 passed (55)",
+      "testFiles": 7
+    },
+    {
+      "durationMs": 4654,
+      "exitCode": 0,
+      "package": "geolocation",
+      "signal": null,
+      "status": "passed",
+      "summary": "25 passed (25)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 7494,
+      "exitCode": 0,
+      "package": "geometry",
+      "signal": null,
+      "status": "passed",
+      "summary": "996 passed (996)",
+      "testFiles": 26
+    },
+    {
+      "durationMs": 5445,
+      "exitCode": 0,
+      "package": "glyphatlas",
+      "signal": null,
+      "status": "passed",
+      "summary": "29 passed (29)",
+      "testFiles": 6
+    },
+    {
+      "durationMs": 4785,
+      "exitCode": 0,
+      "package": "haptics",
+      "signal": null,
+      "status": "passed",
+      "summary": "31 passed (31)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 7642,
+      "exitCode": 0,
+      "package": "host-capacitor",
+      "signal": null,
+      "status": "passed",
+      "summary": "43 passed (43)",
+      "testFiles": 13
+    },
+    {
+      "durationMs": 7167,
+      "exitCode": 0,
+      "package": "host-electron",
+      "signal": null,
+      "status": "passed",
+      "summary": "68 passed (68)",
+      "testFiles": 17
+    },
+    {
+      "durationMs": 7218,
+      "exitCode": 0,
+      "package": "host-tauri",
+      "signal": null,
+      "status": "passed",
+      "summary": "42 passed (42)",
+      "testFiles": 11
+    },
+    {
+      "durationMs": 4772,
+      "exitCode": 0,
+      "package": "image",
+      "signal": null,
+      "status": "passed",
+      "summary": "51 passed (51)",
+      "testFiles": 2
+    },
+    {
+      "durationMs": 5476,
+      "exitCode": 0,
+      "package": "image-codec",
+      "signal": null,
+      "status": "passed",
+      "summary": "38 passed (38)",
+      "testFiles": 7
+    },
+    {
+      "durationMs": 5085,
+      "exitCode": 0,
+      "package": "input",
+      "signal": null,
+      "status": "passed",
+      "summary": "104 passed (104)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 7869,
+      "exitCode": 0,
+      "package": "interaction",
+      "signal": null,
+      "status": "passed",
+      "summary": "159 passed (159)",
+      "testFiles": 15
+    },
+    {
+      "durationMs": 5430,
+      "exitCode": 0,
+      "package": "intl",
+      "signal": null,
+      "status": "passed",
+      "summary": "26 passed (26)",
+      "testFiles": 7
+    },
+    {
+      "durationMs": 5055,
+      "exitCode": 0,
+      "package": "ipc",
+      "signal": null,
+      "status": "passed",
+      "summary": "43 passed (43)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 5053,
+      "exitCode": 0,
+      "package": "keyboard",
+      "signal": null,
+      "status": "passed",
+      "summary": "60 passed (60)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 4947,
+      "exitCode": 0,
+      "package": "lifecycle",
+      "signal": null,
+      "status": "passed",
+      "summary": "43 passed (43)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 6201,
+      "exitCode": 0,
+      "package": "lighting",
+      "signal": null,
+      "status": "passed",
+      "summary": "81 passed (81)",
+      "testFiles": 10
+    },
+    {
+      "durationMs": 7228,
+      "exitCode": 0,
+      "package": "loader",
+      "signal": null,
+      "status": "passed",
+      "summary": "62 passed (62)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 4873,
+      "exitCode": 0,
+      "package": "log",
+      "signal": null,
+      "status": "passed",
+      "summary": "114 passed (114)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 6255,
+      "exitCode": 0,
+      "package": "materials",
+      "signal": null,
+      "status": "passed",
+      "summary": "150 passed (150)",
+      "testFiles": 11
+    },
+    {
+      "durationMs": 6458,
+      "exitCode": 0,
+      "package": "math",
+      "signal": null,
+      "status": "passed",
+      "summary": "278 passed (278)",
+      "testFiles": 15
+    },
+    {
+      "durationMs": 5430,
+      "exitCode": 0,
+      "package": "media",
+      "signal": null,
+      "status": "passed",
+      "summary": "55 passed (55)",
+      "testFiles": 3
+    },
+    {
+      "durationMs": 4662,
+      "exitCode": 0,
+      "package": "mediasession",
+      "signal": null,
+      "status": "passed",
+      "summary": "22 passed (22)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 5103,
+      "exitCode": 0,
+      "package": "menu",
+      "signal": null,
+      "status": "passed",
+      "summary": "33 passed (33)",
+      "testFiles": 2
+    },
+    {
+      "durationMs": 6496,
+      "exitCode": 0,
+      "package": "mesh",
+      "signal": null,
+      "status": "passed",
+      "summary": "140 passed (140)",
+      "testFiles": 11
+    },
+    {
+      "durationMs": 5707,
+      "exitCode": 0,
+      "package": "motionpath",
+      "signal": null,
+      "status": "passed",
+      "summary": "26 passed (26)",
+      "testFiles": 7
+    },
+    {
+      "durationMs": 5428,
+      "exitCode": 0,
+      "package": "movieclip",
+      "signal": null,
+      "status": "passed",
+      "summary": "52 passed (52)",
+      "testFiles": 2
+    },
+    {
+      "durationMs": 4746,
+      "exitCode": 0,
+      "package": "net",
+      "signal": null,
+      "status": "passed",
+      "summary": "18 passed (18)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 7181,
+      "exitCode": 0,
+      "package": "node",
+      "signal": null,
+      "status": "passed",
+      "summary": "311 passed (311)",
+      "testFiles": 15
+    },
+    {
+      "durationMs": 4550,
+      "exitCode": 0,
+      "package": "notification",
+      "signal": null,
+      "status": "passed",
+      "summary": "66 passed (66)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 6481,
+      "exitCode": 0,
+      "package": "particleemitter",
+      "signal": null,
+      "status": "passed",
+      "summary": "188 passed (188)",
+      "testFiles": 12
+    },
+    {
+      "durationMs": 5982,
+      "exitCode": 0,
+      "package": "particles",
+      "signal": null,
+      "status": "passed",
+      "summary": "110 passed (110)",
+      "testFiles": 10
+    },
+    {
+      "durationMs": 6583,
+      "exitCode": 0,
+      "package": "particles-formats",
+      "signal": null,
+      "status": "passed",
+      "summary": "234 passed (234)",
+      "testFiles": 14
+    },
+    {
+      "durationMs": 7668,
+      "exitCode": 0,
+      "package": "path",
+      "signal": null,
+      "status": "passed",
+      "summary": "199 passed (199)",
+      "testFiles": 22
+    },
+    {
+      "durationMs": 6013,
+      "exitCode": 0,
+      "package": "path-boolean",
+      "signal": null,
+      "status": "passed",
+      "summary": "100 passed (100)",
+      "testFiles": 8
+    },
+    {
+      "durationMs": 5021,
+      "exitCode": 0,
+      "package": "path-formats",
+      "signal": null,
+      "status": "passed",
+      "summary": "25 passed (25)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 4941,
+      "exitCode": 0,
+      "package": "permissions",
+      "signal": null,
+      "status": "passed",
+      "summary": "22 passed (22)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 5418,
+      "exitCode": 0,
+      "package": "picking",
+      "signal": null,
+      "status": "passed",
+      "summary": "20 passed (20)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 4853,
+      "exitCode": 0,
+      "package": "platform",
+      "signal": null,
+      "status": "passed",
+      "summary": "73 passed (73)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 4830,
+      "exitCode": 0,
+      "package": "power",
+      "signal": null,
+      "status": "passed",
+      "summary": "46 passed (46)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 4871,
+      "exitCode": 0,
+      "package": "protocol",
+      "signal": null,
+      "status": "passed",
+      "summary": "50 passed (50)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 8352,
+      "exitCode": 0,
+      "package": "render",
+      "signal": null,
+      "status": "passed",
+      "summary": "188 passed (188)",
+      "testFiles": 16
+    },
+    {
+      "durationMs": 7784,
+      "exitCode": 0,
+      "package": "render-gl",
+      "signal": null,
+      "status": "passed",
+      "summary": "263 passed (263)",
+      "testFiles": 20
+    },
+    {
+      "durationMs": 6830,
+      "exitCode": 0,
+      "package": "render-wgpu",
+      "signal": null,
+      "status": "passed",
+      "summary": "116 passed (116)",
+      "testFiles": 16
+    },
+    {
+      "durationMs": 6952,
+      "exitCode": 0,
+      "package": "scene",
+      "signal": null,
+      "status": "passed",
+      "summary": "126 passed (126)",
+      "testFiles": 13
+    },
+    {
+      "durationMs": 6958,
+      "exitCode": 0,
+      "package": "scene-formats",
+      "signal": null,
+      "status": "passed",
+      "summary": "215 passed (215)",
+      "testFiles": 9
+    },
+    {
+      "durationMs": 12026,
+      "exitCode": 0,
+      "package": "scene-gl",
+      "signal": null,
+      "status": "passed",
+      "summary": "363 passed (363)",
+      "testFiles": 52
+    },
+    {
+      "durationMs": 7538,
+      "exitCode": 0,
+      "package": "scene-resources",
+      "signal": null,
+      "status": "passed",
+      "summary": "59 passed (59)",
+      "testFiles": 15
+    },
+    {
+      "durationMs": 10607,
+      "exitCode": 0,
+      "package": "scene-wgpu",
+      "signal": null,
+      "status": "passed",
+      "summary": "231 passed (231)",
+      "testFiles": 40
+    },
+    {
+      "durationMs": 4607,
+      "exitCode": 0,
+      "package": "screen",
+      "signal": null,
+      "status": "passed",
+      "summary": "63 passed (63)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 17049,
+      "exitCode": 0,
+      "package": "sdk",
+      "signal": null,
+      "status": "passed",
+      "summary": "22 passed (22)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 4807,
+      "exitCode": 0,
+      "package": "sensors",
+      "signal": null,
+      "status": "passed",
+      "summary": "60 passed (60)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 6761,
+      "exitCode": 0,
+      "package": "shading",
+      "signal": null,
+      "status": "passed",
+      "summary": "74 passed (74)",
+      "testFiles": 16
+    },
+    {
+      "durationMs": 5720,
+      "exitCode": 0,
+      "package": "shape",
+      "signal": null,
+      "status": "passed",
+      "summary": "105 passed (105)",
+      "testFiles": 6
+    },
+    {
+      "durationMs": 5355,
+      "exitCode": 0,
+      "package": "shape-formats",
+      "signal": null,
+      "status": "passed",
+      "summary": "14 passed (14)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 4663,
+      "exitCode": 0,
+      "package": "share",
+      "signal": null,
+      "status": "passed",
+      "summary": "44 passed (44)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 4789,
+      "exitCode": 0,
+      "package": "shell",
+      "signal": null,
+      "status": "passed",
+      "summary": "32 passed (32)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 4776,
+      "exitCode": 0,
+      "package": "shortcut",
+      "signal": null,
+      "status": "passed",
+      "summary": "98 passed (98)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 5493,
+      "exitCode": 0,
+      "package": "signals",
+      "signal": null,
+      "status": "passed",
+      "summary": "39 passed (39)",
+      "testFiles": 5
+    },
+    {
+      "durationMs": 5896,
+      "exitCode": 0,
+      "package": "skeleton3d",
+      "signal": null,
+      "status": "passed",
+      "summary": "33 passed (33)",
+      "testFiles": 5
+    },
+    {
+      "durationMs": 5261,
+      "exitCode": 0,
+      "package": "snapshot",
+      "signal": null,
+      "status": "passed",
+      "summary": "35 passed (35)",
+      "testFiles": 4
+    },
+    {
+      "durationMs": 4768,
+      "exitCode": 0,
+      "package": "socket",
+      "signal": null,
+      "status": "passed",
+      "summary": "28 passed (28)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 5029,
+      "exitCode": 0,
+      "package": "spatial",
+      "signal": null,
+      "status": "passed",
+      "summary": "15 passed (15)",
+      "testFiles": 2
+    },
+    {
+      "durationMs": 5675,
+      "exitCode": 0,
+      "package": "spring",
+      "signal": null,
+      "status": "passed",
+      "summary": "30 passed (30)",
+      "testFiles": 7
+    },
+    {
+      "durationMs": 5530,
+      "exitCode": 0,
+      "package": "sprite",
+      "signal": null,
+      "status": "passed",
+      "summary": "167 passed (167)",
+      "testFiles": 3
+    },
+    {
+      "durationMs": 5846,
+      "exitCode": 0,
+      "package": "spritesheet",
+      "signal": null,
+      "status": "passed",
+      "summary": "129 passed (129)",
+      "testFiles": 7
+    },
+    {
+      "durationMs": 6011,
+      "exitCode": 0,
+      "package": "spritesheet-formats",
+      "signal": null,
+      "status": "passed",
+      "summary": "133 passed (133)",
+      "testFiles": 10
+    },
+    {
+      "durationMs": 4705,
+      "exitCode": 0,
+      "package": "statusbar",
+      "signal": null,
+      "status": "passed",
+      "summary": "30 passed (30)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 4599,
+      "exitCode": 0,
+      "package": "storage",
+      "signal": null,
+      "status": "passed",
+      "summary": "82 passed (82)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 9822,
+      "exitCode": 0,
+      "package": "surface",
+      "signal": null,
+      "status": "passed",
+      "summary": "359 passed (359)",
+      "testFiles": 41
+    },
+    {
+      "durationMs": 5778,
+      "exitCode": 0,
+      "package": "text",
+      "signal": null,
+      "status": "passed",
+      "summary": "191 passed (191)",
+      "testFiles": 5
+    },
+    {
+      "durationMs": 4920,
+      "exitCode": 0,
+      "package": "text-markup",
+      "signal": null,
+      "status": "passed",
+      "summary": "56 passed (56)",
+      "testFiles": 4
+    },
+    {
+      "durationMs": 5060,
+      "exitCode": 0,
+      "package": "textbidi",
+      "signal": null,
+      "status": "passed",
+      "summary": "41 passed (41)",
+      "testFiles": 4
+    },
+    {
+      "durationMs": 5444,
+      "exitCode": 0,
+      "package": "textinput",
+      "signal": null,
+      "status": "passed",
+      "summary": "147 passed (147)",
+      "testFiles": 4
+    },
+    {
+      "durationMs": 6322,
+      "exitCode": 0,
+      "package": "textlayout",
+      "signal": null,
+      "status": "passed",
+      "summary": "150 passed (150)",
+      "testFiles": 12
+    },
+    {
+      "durationMs": 5090,
+      "exitCode": 0,
+      "package": "textsegment",
+      "signal": null,
+      "status": "passed",
+      "summary": "27 passed (27)",
+      "testFiles": 3
+    },
+    {
+      "durationMs": 5713,
+      "exitCode": 0,
+      "package": "textshaper",
+      "signal": null,
+      "status": "passed",
+      "summary": "103 passed (103)",
+      "testFiles": 8
+    },
+    {
+      "durationMs": 4761,
+      "exitCode": 0,
+      "package": "textshaper-canvas",
+      "signal": null,
+      "status": "passed",
+      "summary": "17 passed (17)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 5176,
+      "exitCode": 0,
+      "package": "texture",
+      "signal": null,
+      "status": "passed",
+      "summary": "76 passed (76)",
+      "testFiles": 4
+    },
+    {
+      "durationMs": 5835,
+      "exitCode": 0,
+      "package": "texture-formats",
+      "signal": null,
+      "status": "passed",
+      "summary": "57 passed (57)",
+      "testFiles": 8
+    },
+    {
+      "durationMs": 5093,
+      "exitCode": 0,
+      "package": "textureatlas",
+      "signal": null,
+      "status": "passed",
+      "summary": "63 passed (63)",
+      "testFiles": 3
+    },
+    {
+      "durationMs": 5284,
+      "exitCode": 0,
+      "package": "textureatlas-formats",
+      "signal": null,
+      "status": "passed",
+      "summary": "57 passed (57)",
+      "testFiles": 5
+    },
+    {
+      "durationMs": 5653,
+      "exitCode": 0,
+      "package": "tilemap-formats",
+      "signal": null,
+      "status": "passed",
+      "summary": "45 passed (45)",
+      "testFiles": 7
+    },
+    {
+      "durationMs": 5161,
+      "exitCode": 0,
+      "package": "tileset",
+      "signal": null,
+      "status": "passed",
+      "summary": "31 passed (31)",
+      "testFiles": 2
+    },
+    {
+      "durationMs": 4780,
+      "exitCode": 0,
+      "package": "timeline",
+      "signal": null,
+      "status": "passed",
+      "summary": "53 passed (53)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 6024,
+      "exitCode": 0,
+      "package": "tool-capture",
+      "signal": null,
+      "status": "passed",
+      "summary": "48 passed (48)",
+      "testFiles": 11
+    },
+    {
+      "durationMs": 4983,
+      "exitCode": 0,
+      "package": "tray",
+      "signal": null,
+      "status": "passed",
+      "summary": "50 passed (50)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 5912,
+      "exitCode": 0,
+      "package": "tween",
+      "signal": null,
+      "status": "passed",
+      "summary": "118 passed (118)",
+      "testFiles": 7
+    },
+    {
+      "durationMs": 7239,
+      "exitCode": 0,
+      "package": "types",
+      "signal": null,
+      "status": "passed",
+      "summary": "97 passed (97)",
+      "testFiles": 29
+    },
+    {
+      "durationMs": 4871,
+      "exitCode": 0,
+      "package": "updater",
+      "signal": null,
+      "status": "passed",
+      "summary": "39 passed (39)",
+      "testFiles": 1
+    },
+    {
+      "durationMs": 4740,
+      "exitCode": 0,
+      "package": "useragent",
+      "signal": null,
+      "status": "passed",
+      "summary": "83 passed (83)",
+      "testFiles": 2
+    },
+    {
+      "durationMs": 5417,
+      "exitCode": 0,
+      "package": "velocity",
+      "signal": null,
+      "status": "passed",
+      "summary": "48 passed (48)",
+      "testFiles": 3
+    },
+    {
+      "durationMs": 4875,
+      "exitCode": 0,
+      "package": "video",
+      "signal": null,
+      "status": "passed",
+      "summary": "56 passed (56)",
+      "testFiles": 3
+    },
+    {
+      "durationMs": 5054,
+      "exitCode": 0,
+      "package": "webcam",
+      "signal": null,
+      "status": "passed",
+      "summary": "15 passed (15)",
+      "testFiles": 2
+    },
+    {
+      "durationMs": 4748,
+      "exitCode": 0,
+      "package": "xml",
+      "signal": null,
+      "status": "passed",
+      "summary": "34 passed (34)",
+      "testFiles": 2
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": null,
+  "startedAt": "2026-07-22T13:16:01.482Z"
+}

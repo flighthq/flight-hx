@@ -1,0 +1,18 @@
+{
+  "completedAt": "2026-07-22T11:31:59.572Z",
+  "failedPackages": 0,
+  "packages": [
+    {
+      "durationMs": 6864,
+      "exitCode": 0,
+      "package": "displayobject-canvas",
+      "signal": null,
+      "status": "passed",
+      "summary": "228 passed (228)",
+      "testFiles": 30
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "displayobject-canvas",
+  "startedAt": "2026-07-22T11:31:52.707Z"
+}

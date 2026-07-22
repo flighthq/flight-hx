@@ -1,0 +1,18 @@
+{
+  "completedAt": "2026-07-22T11:55:21.782Z",
+  "failedPackages": 0,
+  "packages": [
+    {
+      "durationMs": 6922,
+      "exitCode": 0,
+      "package": "scene-resources",
+      "signal": null,
+      "status": "passed",
+      "summary": "59 passed (59)",
+      "testFiles": 15
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "scene-resources",
+  "startedAt": "2026-07-22T11:55:14.859Z"
+}

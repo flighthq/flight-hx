@@ -1,0 +1,18 @@
+{
+  "completedAt": "2026-07-22T11:55:14.719Z",
+  "failedPackages": 0,
+  "packages": [
+    {
+      "durationMs": 11365,
+      "exitCode": 0,
+      "package": "effects-wgpu",
+      "signal": null,
+      "status": "passed",
+      "summary": "144 passed (144)",
+      "testFiles": 55
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "effects-wgpu",
+  "startedAt": "2026-07-22T11:55:03.351Z"
+}
