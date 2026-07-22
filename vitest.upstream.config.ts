@@ -67,7 +67,10 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     isolate: false,
-    setupFiles: [path.join(repositoryRoot, 'upstream/vitest.setup.ts')],
+    setupFiles: [
+      path.join(repositoryRoot, 'upstream/vitest.setup.ts'),
+      path.join(repositoryRoot, 'tests/upstream/reset.setup.ts'),
+    ],
     unstubGlobals: true,
     exclude: ['**/.claude/**', '**/node_modules/**', '**/surfaceWasm.test.ts'],
     include: selectedPackage
