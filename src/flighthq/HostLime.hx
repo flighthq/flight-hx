@@ -46,7 +46,16 @@ class HostLime extends Application {
     Sdk.registerDefaultGlMaterial(renderState);
     Sdk.registerRenderer(renderState, Sdk.ShapeKind, Sdk.defaultGlShapeRenderer);
     Sdk.registerRenderer(renderState, Sdk.TextLabelKind, Sdk.defaultGlTextLabelRenderer);
+    Sdk.registerRenderer(renderState, Sdk.BitmapKind, Sdk.defaultGlBitmapRenderer);
+    Sdk.registerRenderer(renderState, Sdk.ParticleEmitterKind, Sdk.defaultGlParticleEmitterRenderer);
+    Sdk.registerRenderer(renderState, Sdk.QuadBatchKind, Sdk.defaultGlQuadBatchRenderer);
+    Sdk.registerRenderer(renderState, Sdk.RichTextKind, Sdk.defaultGlRichTextRenderer);
+    Sdk.registerRenderer(renderState, Sdk.Scale9ShapeKind, Sdk.defaultGlScale9ShapeRenderer);
+    Sdk.registerRenderer(renderState, Sdk.SpriteKind, Sdk.defaultGlSpriteRenderer);
+    Sdk.registerRenderer(renderState, Sdk.TilemapKind, Sdk.defaultGlTilemapRenderer);
+    Sdk.registerRenderer(renderState, Sdk.VideoKind, Sdk.defaultGlVideoRenderer);
     Sdk.registerGlShapeCommands(Sdk.defaultGlShapeCommands);
+    Sdk.enableGlBlendModeSupport(renderState);
     ready = true;
     flightReady();
   }
@@ -57,15 +66,23 @@ class HostLime extends Application {
   /** Called once per frame with the elapsed time in seconds. */
   public function flightUpdate(deltaSeconds:Float):Void {}
 
+  /**
+   * Override for a specialized GL pass such as effects or a 3D scene. The
+   * default implementation renders the display-object `root`.
+   */
+  public function flightRender(context:RenderContext):Void {
+    if (root == null) return;
+    if (!Sdk.prepareDisplayObjectRender(renderState, root)) return;
+    Sdk.renderGlBackground(renderState);
+    Sdk.renderGlDisplayObject(renderState, root);
+  }
+
   override public function update(deltaTime:Int):Void {
     if (ready) flightUpdate(deltaTime / 1000.0);
   }
 
   override public function render(context:RenderContext):Void {
-    if (!ready || root == null) return;
-    if (!Sdk.prepareDisplayObjectRender(renderState, root)) return;
-    Sdk.renderGlBackground(renderState);
-    Sdk.renderGlDisplayObject(renderState, root);
+    if (ready) flightRender(context);
   }
 }
 

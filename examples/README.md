@@ -1,32 +1,54 @@
-# Examples
+# Lime examples
 
-Haxe programs written directly against the generated Flight Haxe surface (`flighthq.*`) — no TypeScript and no JavaScript bridge. Their purpose is the reason this port exists: a user writes Haxe over Flight and ships it to a native cross-platform target. Each example therefore stays headless (logic and simulation, no rendering) so it compiles and runs on every Haxe target, not just JavaScript.
+These are mechanical Haxe ports of every package under `upstream/examples/packages`. Each example is an ordinary Lime project with a `project.xml` and `Main.hx`, and each runs through `flighthq.HostLime` rather than the upstream Vite/browser render adapters.
 
-Rendering is intentionally out of scope here: it is platform-specific and belongs behind target adapters, whereas these examples exercise the portable API surface.
-
-## Layout
-
-Each example is a directory with a `Main` class:
-
-```
-examples/<name>/Main.hx   // class Main { static function main() { … } }
-```
+The ports keep the upstream example names and core feature demonstrations. Browser lifecycle, keyboard, pointer, and overlay code is expressed with Lime callbacks. Procedurally generated browser canvas assets are represented by asset-free Flight shapes where a native Lime image/media bridge would otherwise be required.
 
 ## Running
 
-```
-npm run example <name> [eval|js|python|cpp]   # default target: eval
-```
+From an example directory, use Lime normally:
 
-For example:
-
-```
-npm run example clock          # run on the Eval interpreter
-npm run example clock cpp      # compile to native C++ and run the binary
+```sh
+cd examples/clock
+lime test html5
+lime test linux     # or windows / mac
 ```
 
-The runner compiles the example against the maintained `src` and generated `generated` classpaths and executes it on the chosen target. `cpp` requires a C++ compiler; `python` requires Python 3.
+The root convenience command delegates to the same Lime project:
 
-## Examples
+```sh
+npm run example -- clock html5
+```
 
-- `clock` — a hierarchy of scaled, pausable clocks (`flighthq.ClockApi`), asserting elapsed-time composition, pause semantics, and effective-scale propagation.
+Each `project.xml` loads this checkout as the local `flight` Haxelib, which supplies both maintained `src/` and generated `generated/` classpaths, and adds the shared presentation helper in `examples/common/`. No Vite, npm development server, or JavaScript bridge is involved.
+
+## Ports
+
+- `adjustments`
+- `benchmark`
+- `bitmap`
+- `camera2d`
+- `clock`
+- `collision`
+- `effects`
+- `flowstates`
+- `interaction`
+- `motionpath`
+- `movieclip`
+- `particleeditor`
+- `particles`
+- `pathboolean`
+- `platformer`
+- `scene3d`
+- `shapes`
+- `skeleton`
+- `snapshot`
+- `sound`
+- `spatial`
+- `spring`
+- `spritesheet`
+- `text`
+- `textinput`
+- `tilemap`
+- `tween`
+- `video`

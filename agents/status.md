@@ -6,6 +6,8 @@ Last updated: 2026-07-22
 
 The initial full port is implemented through Phase 9 for upstream revision `5d24729f7360475e28a105ae0caeeaa2e1328260`. The repository generates executable Haxe source for every in-scope package, exposes granular flat modules and a broad `flight.Sdk` facade, verifies upstream behavior through compiled Haxe JavaScript, smoke-runs the portable core on four targets, and builds an installable Haxelib artifact.
 
+All 28 packages under `upstream/examples/packages` now have matching Lime projects under `examples/`. Each port has a `project.xml` and `Main.hx`, uses the shared Lime host adapter, and replaces the upstream Vite/browser lifecycle with Lime callbacks. The adapter registers the standard 2D GL renderers and exposes a specialized render hook for the effects and 3D examples. Source/API coverage was checked locally, but the Lime projects remain compile-unverified because this workspace has neither the repository-local Haxe compiler nor a Lime/Haxelib installation.
+
 The latest complete local `npm run ci` finished successfully on 2026-07-22. Its canonical parity portion ran from `2026-07-22T13:16:01Z` through `2026-07-22T13:29:25Z` and wrote the committed-format report at `reports/upstream-parity.json`.
 
 ## Stable Decisions

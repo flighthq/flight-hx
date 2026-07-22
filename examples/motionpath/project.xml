@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+  <meta title="Flight Motionpath" package="hq.flight.examples.motionpath" version="0.0.1" />
+  <app main="Main" file="FlightMotionpath" />
+  <window width="800" height="500" fps="60" hardware="true" vsync="true" />
+  <haxelib name="flight" path="../../" />
+  <classpath name="../common" />
+  <classpath name="." />
+  <haxelib name="lime" />
+  <haxelib name="jsasync" />
+</project>
