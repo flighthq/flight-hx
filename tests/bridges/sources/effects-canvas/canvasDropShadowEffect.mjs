@@ -4,16 +4,16 @@ import * as __dependency0 from './canvasEffectCompositing.mjs';
 import * as __dependency1 from './canvasRenderEffectPipeline.mjs';
 import * as __dependency2 from './canvasSourceModeCompositing.mjs';
 
-const api = compiled.flight.EffectsCanvas;
+const api = compiled.flighthq.EffectsCanvas;
 function __syncDependencies() {
-  compiled.flight.EffectsCanvas.drawCanvasEffectPass = __dependency0.drawCanvasEffectPass;
-  compiled.flight.EffectsCanvas.acquireCanvasRenderTarget = __dependency1.acquireCanvasRenderTarget;
-  compiled.flight.EffectsCanvas.createCanvasRenderTargetPool = __dependency1.createCanvasRenderTargetPool;
-  compiled.flight.EffectsCanvas.releaseCanvasRenderTarget = __dependency1.releaseCanvasRenderTarget;
-  compiled.flight.EffectsCanvas.clearCanvasTarget = __dependency2.clearCanvasTarget;
-  compiled.flight.EffectsCanvas.compositeCanvasImage = __dependency2.compositeCanvasImage;
-  compiled.flight.EffectsCanvas.compositeCanvasSourceMode = __dependency2.compositeCanvasSourceMode;
-  compiled.flight.EffectsCanvas.drawCanvasTintedAlphaMask = __dependency2.drawCanvasTintedAlphaMask;
+  compiled.flighthq.EffectsCanvas.drawCanvasEffectPass = __dependency0.drawCanvasEffectPass;
+  compiled.flighthq.EffectsCanvas.acquireCanvasRenderTarget = __dependency1.acquireCanvasRenderTarget;
+  compiled.flighthq.EffectsCanvas.createCanvasRenderTargetPool = __dependency1.createCanvasRenderTargetPool;
+  compiled.flighthq.EffectsCanvas.releaseCanvasRenderTarget = __dependency1.releaseCanvasRenderTarget;
+  compiled.flighthq.EffectsCanvas.clearCanvasTarget = __dependency2.clearCanvasTarget;
+  compiled.flighthq.EffectsCanvas.compositeCanvasImage = __dependency2.compositeCanvasImage;
+  compiled.flighthq.EffectsCanvas.compositeCanvasSourceMode = __dependency2.compositeCanvasSourceMode;
+  compiled.flighthq.EffectsCanvas.drawCanvasTintedAlphaMask = __dependency2.drawCanvasTintedAlphaMask;
 }
 __syncDependencies();
 

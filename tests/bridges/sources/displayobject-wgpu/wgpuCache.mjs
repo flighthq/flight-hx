@@ -4,19 +4,19 @@ import * as __dependency0 from '@flighthq/render-wgpu';
 import * as __dependency1 from './wgpuDisplayObject.mjs';
 import * as __dependency2 from './wgpuSpriteBatch.mjs';
 
-const api = compiled.flight.DisplayObjectWgpu;
+const api = compiled.flighthq.DisplayObjectWgpu;
 function __syncDependencies() {
-  compiled.flight.RenderWgpu.createWgpuRenderStateRuntime = __dependency0.createWgpuRenderStateRuntime;
-  compiled.flight.RenderWgpu.getWgpuRenderStateRuntime = __dependency0.getWgpuRenderStateRuntime;
-  compiled.flight.RenderWgpu.beginWgpuRenderPass = __dependency0.beginWgpuRenderPass;
-  compiled.flight.RenderWgpu.createWgpuRenderTarget = __dependency0.createWgpuRenderTarget;
-  compiled.flight.RenderWgpu.destroyWgpuRenderTarget = __dependency0.destroyWgpuRenderTarget;
-  compiled.flight.RenderWgpu.drawWgpuRenderTargetResult = __dependency0.drawWgpuRenderTargetResult;
-  compiled.flight.RenderWgpu.endWgpuRenderPass = __dependency0.endWgpuRenderPass;
-  compiled.flight.RenderWgpu.resizeWgpuRenderTarget = __dependency0.resizeWgpuRenderTarget;
-  compiled.flight.RenderWgpu.setWgpuRenderTransform2D = __dependency0.setWgpuRenderTransform2D;
-  compiled.flight.DisplayObjectWgpu.renderWgpuDisplayObject = __dependency1.renderWgpuDisplayObject;
-  compiled.flight.DisplayObjectWgpu.flushWgpuSpriteBatch = __dependency2.flushWgpuSpriteBatch;
+  compiled.flighthq.RenderWgpu.createWgpuRenderStateRuntime = __dependency0.createWgpuRenderStateRuntime;
+  compiled.flighthq.RenderWgpu.getWgpuRenderStateRuntime = __dependency0.getWgpuRenderStateRuntime;
+  compiled.flighthq.RenderWgpu.beginWgpuRenderPass = __dependency0.beginWgpuRenderPass;
+  compiled.flighthq.RenderWgpu.createWgpuRenderTarget = __dependency0.createWgpuRenderTarget;
+  compiled.flighthq.RenderWgpu.destroyWgpuRenderTarget = __dependency0.destroyWgpuRenderTarget;
+  compiled.flighthq.RenderWgpu.drawWgpuRenderTargetResult = __dependency0.drawWgpuRenderTargetResult;
+  compiled.flighthq.RenderWgpu.endWgpuRenderPass = __dependency0.endWgpuRenderPass;
+  compiled.flighthq.RenderWgpu.resizeWgpuRenderTarget = __dependency0.resizeWgpuRenderTarget;
+  compiled.flighthq.RenderWgpu.setWgpuRenderTransform2D = __dependency0.setWgpuRenderTransform2D;
+  compiled.flighthq.DisplayObjectWgpu.renderWgpuDisplayObject = __dependency1.renderWgpuDisplayObject;
+  compiled.flighthq.DisplayObjectWgpu.flushWgpuSpriteBatch = __dependency2.flushWgpuSpriteBatch;
 }
 __syncDependencies();
 

@@ -2,9 +2,9 @@ package;
 
 class JsEntry {
   static function main():Void {
-    final math = flight.Math.EPSILON;
-    final entity = flight.EntityApi.areEntityRuntimeGuardsEnabled;
-    final geometry = flight.Geometry.createVector2;
-    final signals = flight.Signals.createSignal;
+    final math = flighthq.Math.EPSILON;
+    final entity = flighthq.EntityApi.areEntityRuntimeGuardsEnabled;
+    final geometry = flighthq.Geometry.createVector2;
+    final signals = flighthq.Signals.createSignal;
   }
 }

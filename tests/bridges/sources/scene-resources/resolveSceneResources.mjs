@@ -2,9 +2,9 @@
 import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from '@flighthq/image';
 
-const api = compiled.flight.SceneResources;
+const api = compiled.flighthq.SceneResources;
 function __syncDependencies() {
-  compiled.flight.Image.loadImageResourceFromBytes = __dependency0.loadImageResourceFromBytes;
+  compiled.flighthq.Image.loadImageResourceFromBytes = __dependency0.loadImageResourceFromBytes;
 }
 __syncDependencies();
 

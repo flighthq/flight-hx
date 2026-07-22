@@ -72,7 +72,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     );
     const lowered = lowerTypeScriptSource(source, '@flighthq/math', '/workspace');
     const fixtureDirectory = path.resolve('build/haxe-fixture');
-    const packageDirectory = path.join(fixtureDirectory, 'flight');
+    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
     rmSync(fixtureDirectory, { force: true, recursive: true });
     mkdirSync(packageDirectory, { recursive: true });
     writeFileSync(
@@ -87,7 +87,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     writeFileSync(
       path.join(fixtureDirectory, 'Main.hx'),
       `
-        import flight.MathFixture.*;
+        import flighthq.MathFixture.*;
         class Main {
           static function main() {
             if (clamp(12, 0, 10) != 10) throw 'clamp failed';
@@ -134,16 +134,16 @@ describe('TypeScript lowering and Haxe emission', () => {
       packageName: '@flighthq/types',
     });
     const fixtureDirectory = path.resolve('build/haxe-type-fixture');
-    const packageDirectory = path.join(fixtureDirectory, 'flight');
+    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
     rmSync(fixtureDirectory, { force: true, recursive: true });
     mkdirSync(packageDirectory, { recursive: true });
     writeFileSync(path.join(packageDirectory, 'TypesFixture.hx'), output);
     writeFileSync(
       path.join(fixtureDirectory, 'Main.hx'),
       `
-        import flight.TypesFixture.Callback;
-        import flight.TypesFixture.Vector2;
-        import flight.TypesFixture.Vector2Like;
+        import flighthq.TypesFixture.Callback;
+        import flighthq.TypesFixture.Vector2;
+        import flighthq.TypesFixture.Vector2Like;
         class Main {
           static function main() {
             final value:Vector2 = { id: 1, x: 2, y: 3 };
@@ -205,7 +205,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain('FlightRuntime.voidValue(FlightRuntime.callValue(task');
     expect(output).toContain('FlightRuntime.typeofValue(value)');
-    expect(output).toContain('FlightAsync.make(function():flight.internal.FlightPromise<String>');
+    expect(output).toContain('FlightAsync.make(function():flighthq.internal.FlightPromise<String>');
     expect(output).toContain('FlightRuntime.asyncIterator(values)');
   });
 

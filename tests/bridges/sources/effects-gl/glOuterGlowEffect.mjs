@@ -5,15 +5,15 @@ import * as __dependency1 from './glEffectBlitShader.mjs';
 import * as __dependency2 from './glEffectBoxBlur.mjs';
 import * as __dependency3 from './glEffectTintShader.mjs';
 
-const api = compiled.flight.EffectsGl;
+const api = compiled.flighthq.EffectsGl;
 function __syncDependencies() {
-  compiled.flight.RenderGl.acquireGlRenderTarget = __dependency0.acquireGlRenderTarget;
-  compiled.flight.RenderGl.clearGlRenderTarget = __dependency0.clearGlRenderTarget;
-  compiled.flight.RenderGl.releaseGlRenderTarget = __dependency0.releaseGlRenderTarget;
-  compiled.flight.EffectsGl.applyGlEffectBlitPass = __dependency1.applyGlEffectBlitPass;
-  compiled.flight.EffectsGl.applyGlEffectErasePass = __dependency1.applyGlEffectErasePass;
-  compiled.flight.EffectsGl.applyGlEffectBoxBlur = __dependency2.applyGlEffectBoxBlur;
-  compiled.flight.EffectsGl.applyGlEffectTintPass = __dependency3.applyGlEffectTintPass;
+  compiled.flighthq.RenderGl.acquireGlRenderTarget = __dependency0.acquireGlRenderTarget;
+  compiled.flighthq.RenderGl.clearGlRenderTarget = __dependency0.clearGlRenderTarget;
+  compiled.flighthq.RenderGl.releaseGlRenderTarget = __dependency0.releaseGlRenderTarget;
+  compiled.flighthq.EffectsGl.applyGlEffectBlitPass = __dependency1.applyGlEffectBlitPass;
+  compiled.flighthq.EffectsGl.applyGlEffectErasePass = __dependency1.applyGlEffectErasePass;
+  compiled.flighthq.EffectsGl.applyGlEffectBoxBlur = __dependency2.applyGlEffectBoxBlur;
+  compiled.flighthq.EffectsGl.applyGlEffectTintPass = __dependency3.applyGlEffectTintPass;
 }
 __syncDependencies();
 

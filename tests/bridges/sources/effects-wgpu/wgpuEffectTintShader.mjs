@@ -2,12 +2,12 @@
 import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from './wgpuEffectPass.mjs';
 
-const api = compiled.flight.EffectsWgpu;
+const api = compiled.flighthq.EffectsWgpu;
 function __syncDependencies() {
-  compiled.flight.EffectsWgpu.createWgpuDualSourceEffectPipeline = __dependency0.createWgpuDualSourceEffectPipeline;
-  compiled.flight.EffectsWgpu.createWgpuEffectPipeline = __dependency0.createWgpuEffectPipeline;
-  compiled.flight.EffectsWgpu.drawWgpuDualSourceEffectPass = __dependency0.drawWgpuDualSourceEffectPass;
-  compiled.flight.EffectsWgpu.drawWgpuEffectPass = __dependency0.drawWgpuEffectPass;
+  compiled.flighthq.EffectsWgpu.createWgpuDualSourceEffectPipeline = __dependency0.createWgpuDualSourceEffectPipeline;
+  compiled.flighthq.EffectsWgpu.createWgpuEffectPipeline = __dependency0.createWgpuEffectPipeline;
+  compiled.flighthq.EffectsWgpu.drawWgpuDualSourceEffectPass = __dependency0.drawWgpuDualSourceEffectPass;
+  compiled.flighthq.EffectsWgpu.drawWgpuEffectPass = __dependency0.drawWgpuEffectPass;
 }
 __syncDependencies();
 

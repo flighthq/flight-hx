@@ -4,4 +4,4 @@ import compiled from '../../../../build/haxe-js/flight.cjs';
 function __syncDependencies() {}
 __syncDependencies();
 
-export const IpcTimeoutError = compiled.flight.IpcTimeoutError;
+export const IpcTimeoutError = compiled.flighthq.IpcTimeoutError;

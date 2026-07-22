@@ -20,9 +20,9 @@ const fingerprintPrinter = ts.createPrinter({ removeComments: true });
 const portableTypeReferenceMap: Readonly<Record<string, string>> = {
   ArrayBuffer: 'haxe.io.Bytes',
   ArrayBufferView: 'haxe.io.ArrayBufferView',
-  Float32Array: 'flight.internal.FlightFloat32Array',
-  Int16Array: 'flight.internal.FlightInt16Array',
-  Uint16Array: 'flight.internal.FlightUInt16Array',
+  Float32Array: 'flighthq.internal.FlightFloat32Array',
+  Int16Array: 'flighthq.internal.FlightInt16Array',
+  Uint16Array: 'flighthq.internal.FlightUInt16Array',
 };
 
 const platformDynamicTypes = new Set([
@@ -566,9 +566,9 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     if (name === 'Promise') {
       const promiseType =
         arguments_[0]?.kind === 'primitive' && arguments_[0].name === 'Void'
-          ? { arguments: [], kind: 'named' as const, name: 'flight.internal.FlightNothing' }
+          ? { arguments: [], kind: 'named' as const, name: 'flighthq.internal.FlightNothing' }
           : (arguments_[0] ?? { kind: 'dynamic' as const });
-      return { arguments: [promiseType], kind: 'named', name: 'flight.internal.FlightPromise' };
+      return { arguments: [promiseType], kind: 'named', name: 'flighthq.internal.FlightPromise' };
     }
     if (name === 'ArrayLike') return { kind: 'dynamic' };
     if (name === 'Array' || name === 'ReadonlyArray') {
@@ -1173,7 +1173,7 @@ function isThisParameter(node: ts.ParameterDeclaration): boolean {
 function promiseOfDynamic(): IrType {
   return {
     kind: 'named',
-    name: 'flight.internal.FlightPromise',
+    name: 'flighthq.internal.FlightPromise',
     arguments: [{ kind: 'dynamic' }],
   };
 }

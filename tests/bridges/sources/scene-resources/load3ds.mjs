@@ -2,9 +2,9 @@
 import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from '@flighthq/scene-formats';
 
-const api = compiled.flight.SceneResources;
+const api = compiled.flighthq.SceneResources;
 function __syncDependencies() {
-  compiled.flight.SceneFormats.createSceneFrom3ds = __dependency0.createSceneFrom3ds;
+  compiled.flighthq.SceneFormats.createSceneFrom3ds = __dependency0.createSceneFrom3ds;
 }
 __syncDependencies();
 
