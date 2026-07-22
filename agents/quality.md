@@ -18,33 +18,33 @@ Aliases chain leaf scripts; they do not duplicate command implementations.
 
 ## Root Scripts
 
-| Script           | Responsibility                                                   |
-| ---------------- | ---------------------------------------------------------------- |
+| Script           | Responsibility                                                    |
+| ---------------- | ----------------------------------------------------------------- |
 | `setup`          | Install local Haxe, download pinned libraries, and prepare hxcpp. |
-| `generate`       | Analyze upstream, apply patches, emit Haxe and reports.          |
-| `generate:check` | Regenerate in check mode and fail on drift or nondeterminism.    |
-| `api`            | Emit the public TypeScript-to-Haxe API map.                      |
-| `api:check`      | Fail on export omissions, duplicate names, or stale API output.  |
-| `api:json`       | Print or write the machine-readable API map.                     |
-| `build`          | Build maintained TypeScript tooling.                             |
-| `build:check`    | Validate build graphs and compile without retained output.       |
-| `typecheck`      | Type-check maintained TypeScript with no emit.                   |
-| `lint`           | Run Oxlint with zero warnings over maintained TypeScript.        |
-| `lint:fix`       | Apply safe lint fixes.                                           |
-| `format`         | Format maintained non-generated files.                           |
-| `format:check`   | Verify formatting without writes.                                |
-| `fix`            | Run ordering, lint fixes, and formatting in deterministic order. |
-| `test`           | Run the complete normal test umbrella.                           |
-| `test:generator` | Run analyzer, lowering, patch, and emitter unit tests.           |
+| `generate`       | Analyze upstream, apply patches, emit Haxe and reports.           |
+| `generate:check` | Regenerate in check mode and fail on drift or nondeterminism.     |
+| `api`            | Emit the public TypeScript-to-Haxe API map.                       |
+| `api:check`      | Fail on export omissions, duplicate names, or stale API output.   |
+| `api:json`       | Print or write the machine-readable API map.                      |
+| `build`          | Build maintained TypeScript tooling.                              |
+| `build:check`    | Validate build graphs and compile without retained output.        |
+| `typecheck`      | Type-check maintained TypeScript with no emit.                    |
+| `lint`           | Run Oxlint with zero warnings over maintained TypeScript.         |
+| `lint:fix`       | Apply safe lint fixes.                                            |
+| `format`         | Format maintained non-generated files.                            |
+| `format:check`   | Verify formatting without writes.                                 |
+| `fix`            | Run ordering, lint fixes, and formatting in deterministic order.  |
+| `test`           | Run the complete normal test umbrella.                            |
+| `test:generator` | Run analyzer, lowering, patch, and emitter unit tests.            |
 | `test:haxe:core` | Run the focused Haxe API/runtime smoke test under Eval.           |
 | `test:haxe:all`  | Compile the complete generated namespace and run the Eval smoke.  |
-| `test:upstream`  | Run upstream Vitest through generated Haxe JS bridges.           |
-| `test:portable`  | Run the supported cross-target compile/smoke matrix.             |
-| `test:coverage`  | Run maintained-code coverage reporting.                          |
-| `check`          | Run static, formatting, API, patch, and generated-drift gates.   |
-| `ci`             | Run build, check, all tests, and packaging verification.         |
-| `clean`          | Remove only known transient build outputs.                       |
-| `package`        | Assemble and validate the `flight` Haxelib artifact.             |
+| `test:upstream`  | Run upstream Vitest through generated Haxe JS bridges.            |
+| `test:portable`  | Run the supported cross-target compile/smoke matrix.              |
+| `test:coverage`  | Run maintained-code coverage reporting.                           |
+| `check`          | Run static, formatting, API, patch, and generated-drift gates.    |
+| `ci`             | Run build, check, all tests, and packaging verification.          |
+| `clean`          | Remove only known transient build outputs.                        |
+| `package`        | Assemble and validate the `flight` Haxelib artifact.              |
 
 The portability leaves are `test:portable:eval`, `test:portable:js`, `test:portable:python`, and `test:portable:cpp`. The required matrix and host prerequisites are tracked in [`status.md`](status.md).
 
