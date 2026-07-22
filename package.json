@@ -13,6 +13,7 @@
     "check": "npm run generate:check && npm run typecheck && npm run lint && npm run format:check && npm run api:check",
     "ci": "npm run build && npm run check && npm run test && npm run package",
     "clean": "node -e \"for (const path of ['dist', 'build', 'coverage']) require('fs').rmSync(path, { force: true, recursive: true })\"",
+    "example": "node tooling/run-example.mjs",
     "fix": "npm run lint:fix && npm run format",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
