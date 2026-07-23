@@ -58,4 +58,11 @@ The latest complete local `npm run ci` finished successfully on 2026-07-22. Its 
 
 The implementation has no known correctness blocker. Before a public non-zero release, choose the release/versioning policy, Haxelib publication credentials, and generated API-documentation presentation. Those are release-management decisions rather than gaps in the port.
 
+## Planned API Realignment
+
+- Replace the flat generated API with a mechanical source-derived namespace: `@flighthq/<npm-package>` maps to `flighthq.<lowerCamelPackage>`, and each defining TypeScript filename maps to a PascalCase Haxe module beneath it.
+- Do not emit source-derived modules for `index.ts`, `internal.ts`, or test helpers. Preserve defining-file identity through re-exports, and fail generation when an omitted file has public exports or two source files map to the same Haxe module.
+- Refactor ambiguous source organization upstream rather than adding semantic Haxe-only buckets or naming exceptions.
+- Fix generated Haxe indentation in the emitter. Nested blocks, multiline anonymous functions, and patched Haxe bodies must be canonically indented in raw generator output; do not add a formatter repair pass after emission. Add focused emitter assertions and keep formatting deterministic.
+
 For an upstream update, run setup, regenerate, review manifest and patch drift, then run `npm run ci`. Update this file whenever the upstream revision, support matrix, release policy, or verified counts change.
