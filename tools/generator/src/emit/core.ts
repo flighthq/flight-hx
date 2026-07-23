@@ -353,7 +353,8 @@ function populateSourceImports(
   const valueOwner = new Map<string, IrModule>();
   for (const module of modules) {
     for (const declaration of module.declarations) {
-      if (declaration.kind === 'variable' && canonicalValues.has(declaration.name)) valueOwner.set(declaration.name, module);
+      if (declaration.kind === 'variable' && canonicalValues.has(declaration.name))
+        valueOwner.set(declaration.name, module);
     }
   }
   for (const item of loweredPackages) {
@@ -394,7 +395,8 @@ function populateSourceImports(
           }
           // Shadowed types (package-private secondaries, or generic types shadowed by a
           // namespace class) are emitted as `Dynamic` and must not be imported by name.
-          if (isPackagePrivateDeclaration(resolved.declaration) || shadowedTypeNames.has(resolved.declaration.name)) continue;
+          if (isPackagePrivateDeclaration(resolved.declaration) || shadowedTypeNames.has(resolved.declaration.name))
+            continue;
           const alias = element.name.text === resolved.declaration.name ? '' : ` as ${element.name.text}`;
           const importPath = `${declarationImportPath(resolved.module, resolved.declaration)}${alias}`;
           const bindingName = element.name.text;
@@ -484,7 +486,9 @@ function computeSelfShadowTypeModules(modules: IrModule[]): Map<string, string> 
   for (const pass of [true, false]) {
     for (const module of modules) {
       if (isTypesPackage(module) !== pass) continue;
-      if (module.declarations.some((declaration) => declaration.kind === 'function' || declaration.kind === 'variable')) {
+      if (
+        module.declarations.some((declaration) => declaration.kind === 'function' || declaration.kind === 'variable')
+      ) {
         continue;
       }
       for (const declaration of module.declarations) {
@@ -523,7 +527,8 @@ function collectReferencedValueIdentifiers(value: unknown, names: ReadonlySet<st
   }
   if (!value || typeof value !== 'object') return;
   const record = value as Record<string, unknown>;
-  if (record.kind === 'identifier' && typeof record.name === 'string' && names.has(record.name)) output.add(record.name);
+  if (record.kind === 'identifier' && typeof record.name === 'string' && names.has(record.name))
+    output.add(record.name);
   Object.values(record).forEach((item) => collectReferencedValueIdentifiers(item, names, output));
 }
 
@@ -537,7 +542,8 @@ function importCanonicalValues(modules: IrModule[], canonicalValueAliases: Reado
   const valueOwner = new Map<string, IrModule>();
   for (const module of modules) {
     for (const declaration of module.declarations) {
-      if (declaration.kind === 'variable' && canonicalValues.has(declaration.name)) valueOwner.set(declaration.name, module);
+      if (declaration.kind === 'variable' && canonicalValues.has(declaration.name))
+        valueOwner.set(declaration.name, module);
     }
   }
   for (const module of modules) {
@@ -564,11 +570,25 @@ function computeExternalTypeNames(modules: IrModule[]): Set<string> {
         for (const parameter of declaration.typeParameters) typeParameters.add(parameter);
       }
       if (declaration.kind === 'class') {
-        for (const method of declaration.methods) for (const parameter of method.typeParameters) typeParameters.add(parameter);
+        for (const method of declaration.methods)
+          for (const parameter of method.typeParameters) typeParameters.add(parameter);
       }
     }
   }
-  const builtins = new Set(['Dynamic', 'Void', 'Bool', 'Int', 'Float', 'String', 'Array', 'Null', 'Map', 'Any', 'EReg', 'Date']);
+  const builtins = new Set([
+    'Dynamic',
+    'Void',
+    'Bool',
+    'Int',
+    'Float',
+    'String',
+    'Array',
+    'Null',
+    'Map',
+    'Any',
+    'EReg',
+    'Date',
+  ]);
   const referenced = new Set<string>();
   const collect = (value: unknown): void => {
     if (Array.isArray(value)) {
