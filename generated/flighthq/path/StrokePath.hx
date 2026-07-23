@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.path.Path.appendPathClose;
 import flighthq.types.Path.PathCommand;
 import flighthq.types.StrokeStyle;
+import flighthq.types._internal._PathValues.PathCommandValue;
 
 typedef DashSegment__strokePath = { var closed:Bool; var points:Array<Float>; };
 
@@ -284,7 +285,7 @@ class StrokePath {
       var ci:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(ci, _Runtime.field(commands, 'length'), '<'))) {
         var command:Dynamic = _Runtime.getIndex(commands, ci);
-        if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.MOVE_TO))) {
+        if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.MOVE_TO))) {
           (x = cast (_Runtime.getIndex(data, di) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
@@ -292,7 +293,7 @@ class StrokePath {
           (contourStartY = cast (y : Dynamic));
           (current = cast ({ points: cast ([x, y] : Array<Dynamic>), closed: false } : Dynamic));
           _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.WIDE_MOVE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO))) {
           (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
@@ -300,31 +301,31 @@ class StrokePath {
           (contourStartY = cast (y : Dynamic));
           (current = cast ({ points: cast ([x, y] : Array<Dynamic>), closed: false } : Dynamic));
           _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.LINE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.LINE_TO))) {
           var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
           (x = cast (_Runtime.getIndex(data, di) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
           _Runtime.pushMany(_Runtime.field(sp, 'points'), cast ([x, y] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.WIDE_LINE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO))) {
           var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
           (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.pushMany(_Runtime.field(sp, 'points'), cast ([x, y] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.CURVE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CURVE_TO))) {
           var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
           _Runtime.callValue(StrokePath.flattenQuadratic__strokePath, cast ([_Runtime.field(sp, 'points'), x, y, _Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0)), _Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0)), toleranceSq, 0.0] : Array<Dynamic>));
           (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.CUBIC_CURVE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO))) {
           var sp:Dynamic = _Runtime.callValue(ensureCurrent, cast ([] : Array<Dynamic>));
           _Runtime.callValue(StrokePath.flattenCubic__strokePath, cast ([_Runtime.field(sp, 'points'), x, y, _Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0)), _Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0)), _Runtime.getIndex(data, (di + 4.0)), _Runtime.getIndex(data, (di + 5.0)), toleranceSq, 0.0] : Array<Dynamic>));
           (x = cast (_Runtime.getIndex(data, (di + 4.0)) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 5.0)) : Dynamic));
           (di = cast ((di + 6.0) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.CLOSE))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CLOSE))) {
           if (_Runtime.truthy(!_Runtime.strictEquals(current, null))) {
             _Runtime.setField(current, 'closed', true);
             (x = cast (contourStartX : Dynamic));
@@ -490,12 +491,12 @@ class StrokePath {
       _Runtime.callValue(StrokePath.addCap__strokePath, cast ([_Runtime.getIndex(pts, ((n - 1.0) * 2.0)), _Runtime.getIndex(pts, (((n - 1.0) * 2.0) + 1.0)), snLx, snLy, snLy, -snLx, halfWidth, cap, left, right, tolerance, false] : Array<Dynamic>));
     }
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(left, 'length'), 4.0, '<'))) { return; }
-    _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommand.MOVE_TO] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
     _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(left, 0.0), _Runtime.getIndex(left, 1.0)] : Array<Dynamic>));
     {
       var i:Dynamic = 2.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(left, 'length'), '<'))) {
-        _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommand.LINE_TO] : Array<Dynamic>));
+        _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
         _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(left, i), _Runtime.getIndex(left, (i + 1.0))] : Array<Dynamic>));
         (i = cast ((i + 2.0) : Dynamic));
       }
@@ -503,7 +504,7 @@ class StrokePath {
     {
       var i:Dynamic = (_Runtime.field(right, 'length') - 2.0);
       while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
-        _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommand.LINE_TO] : Array<Dynamic>));
+        _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
         _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(right, i), _Runtime.getIndex(right, (i + 1.0))] : Array<Dynamic>));
         (i = cast ((i - 2.0) : Dynamic));
       }

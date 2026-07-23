@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Vector3.cloneVector3;
 import flighthq.geometry.Vector3.createVector3;
+import flighthq.types.Types.PointLightKind;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._PointLightValues.PointLightKind;
 

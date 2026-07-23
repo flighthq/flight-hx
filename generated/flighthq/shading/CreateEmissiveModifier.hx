@@ -6,7 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.types.EmissiveModifier;
 import flighthq.types.EmissiveModifier.EmissiveModifierFacing;
 import flighthq.types.ModifierSlot;
+import flighthq.types.Types.EmissiveModifierKind;
+import flighthq.types._internal._EmissiveModifierValues.EmissiveModifierFacingValue;
 import flighthq.types._internal._EmissiveModifierValues.EmissiveModifierKind;
+import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
 typedef EmissiveModifierOptions = { var color:Float; @:optional var strength:Float; @:optional var mask:Dynamic; @:optional var facing:EmissiveModifierFacing; @:optional var facingSoftness:Float; };
 
@@ -14,7 +17,7 @@ typedef EmissiveModifierOptions = { var color:Float; @:optional var strength:Flo
 class CreateEmissiveModifier {
   public static function createEmissiveModifier(options:EmissiveModifierOptions):EmissiveModifier {
     var modifier:EmissiveModifier = cast _Runtime.UNDEFINED;
-    modifier = { kind: EmissiveModifierKind, slot: ModifierSlot.Emissive, color: _Runtime.field(options, 'color'), strength: _Runtime.coalesce(_Runtime.field(options, 'strength'), function():Dynamic return cast 1.0), facing: _Runtime.coalesce(_Runtime.field(options, 'facing'), function():Dynamic return cast EmissiveModifierFacing.Ignore), facingSoftness: _Runtime.coalesce(_Runtime.field(options, 'facingSoftness'), function():Dynamic return cast 0.0) };
+    modifier = { kind: EmissiveModifierKind, slot: ModifierSlotValue.Emissive, color: _Runtime.field(options, 'color'), strength: _Runtime.coalesce(_Runtime.field(options, 'strength'), function():Dynamic return cast 1.0), facing: _Runtime.coalesce(_Runtime.field(options, 'facing'), function():Dynamic return cast EmissiveModifierFacingValue.Ignore), facingSoftness: _Runtime.coalesce(_Runtime.field(options, 'facingSoftness'), function():Dynamic return cast 0.0) };
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'mask'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(modifier, 'mask', _Runtime.field(options, 'mask')); }
     return cast modifier;
     return cast null;

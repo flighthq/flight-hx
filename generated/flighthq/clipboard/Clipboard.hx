@@ -12,6 +12,9 @@ import flighthq.types.ClipboardFormat.ClipboardFormatBookmark;
 import flighthq.types.ClipboardFormat.ClipboardFormatHtml;
 import flighthq.types.ClipboardFormat.ClipboardFormatRtf;
 import flighthq.types.ClipboardWatch;
+import flighthq.types.Types.ClipboardFormatBookmark;
+import flighthq.types.Types.ClipboardFormatHtml;
+import flighthq.types.Types.ClipboardFormatRtf;
 
 @:expose("flighthq.clipboard.Clipboard")
 class Clipboard {

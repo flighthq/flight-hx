@@ -8,6 +8,7 @@ import flighthq.geometry.Vector3.cloneVector3;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.geometry.Vector3.normalizeVector3;
 import flighthq.geometry.Vector3.setVector3;
+import flighthq.types.Types.AreaLightKind;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._AreaLightValues.AreaLightKind;
 

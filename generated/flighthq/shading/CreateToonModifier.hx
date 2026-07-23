@@ -5,6 +5,8 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ModifierSlot;
 import flighthq.types.ToonModifier;
+import flighthq.types.Types.ToonModifierKind;
+import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 import flighthq.types._internal._ToonModifierValues.ToonModifierKind;
 
 typedef ToonModifierOptions = { var steps:Float; @:optional var smoothness:Float; };
@@ -12,7 +14,7 @@ typedef ToonModifierOptions = { var steps:Float; @:optional var smoothness:Float
 @:expose("flighthq.shading.CreateToonModifier")
 class CreateToonModifier {
   public static function createToonModifier(options:ToonModifierOptions):ToonModifier {
-    return cast { kind: ToonModifierKind, slot: ModifierSlot.Effect, steps: _Runtime.field(options, 'steps'), smoothness: _Runtime.coalesce(_Runtime.field(options, 'smoothness'), function():Dynamic return cast 0.0) };
+    return cast { kind: ToonModifierKind, slot: ModifierSlotValue.Effect, steps: _Runtime.field(options, 'steps'), smoothness: _Runtime.coalesce(_Runtime.field(options, 'smoothness'), function():Dynamic return cast 0.0) };
     return cast null;
   }
 }

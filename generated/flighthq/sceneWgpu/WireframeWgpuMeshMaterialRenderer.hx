@@ -16,6 +16,7 @@ import flighthq.sceneWgpu._internal._WgpuWireframeUploadValues.ensureWgpuWirefra
 import flighthq.types.LinearColor;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Types.WireframeMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WireframeMaterial;
 import flighthq.types._internal._WireframeMaterialValues.WireframeMaterialKind;

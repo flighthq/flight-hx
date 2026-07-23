@@ -9,6 +9,8 @@ import flighthq.animation.AnimationTrack.createAnimationTrack;
 import flighthq.sceneFormats.Shared.convertPositionsZUpToYUp;
 import flighthq.sceneFormats.Shared.convertQuaternionsZUpToYUp;
 import flighthq.types.AnimationChannel;
+import flighthq.types.Types.SceneAnimationPathRotation;
+import flighthq.types.Types.SceneAnimationPathTranslation;
 import flighthq.types._internal._SceneAnimationPathValues.SceneAnimationPathRotation;
 import flighthq.types._internal._SceneAnimationPathValues.SceneAnimationPathTranslation;
 

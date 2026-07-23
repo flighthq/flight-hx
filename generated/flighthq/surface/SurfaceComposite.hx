@@ -5,11 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.SurfaceCompositeMode;
+import flighthq.types._internal._SurfaceCompositeModeValues.SurfaceCompositeModeValue;
 
 @:expose("flighthq.surface.SurfaceComposite")
 class SurfaceComposite {
   public static function compositeSurfacePixels(dest:Dynamic, pixels:Dynamic, ?mode:SurfaceCompositeMode):Void {
-    if (mode == null) mode = cast (SurfaceCompositeMode.Normal : Dynamic);
+    if (mode == null) mode = cast (SurfaceCompositeModeValue.Normal : Dynamic);
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(dest, 'height'), '<'))) {
@@ -32,7 +33,7 @@ class SurfaceComposite {
   }
 
   public static function compositeSurfaceRegion(dest:Dynamic, source:Dynamic, ?mode:SurfaceCompositeMode):Void {
-    if (mode == null) mode = cast (SurfaceCompositeMode.Normal : Dynamic);
+    if (mode == null) mode = cast (SurfaceCompositeModeValue.Normal : Dynamic);
     var sw:Dynamic = cast _Runtime.UNDEFINED;
     var sh:Dynamic = cast _Runtime.UNDEFINED;
     sw = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'width'), _Runtime.field(source, 'width')] : Array<Dynamic>));
@@ -161,34 +162,34 @@ class SurfaceComposite {
   public static function porterDuffFactors__surfaceComposite(mode:SurfaceCompositeMode, srcA:Float, dstA:Float):Array<Float> {
     {
       var __switchValue = mode;
-      if (__switchValue == SurfaceCompositeMode.DestinationOver) {
+      if (__switchValue == SurfaceCompositeModeValue.DestinationOver) {
         return cast cast ([(1.0 - dstA), 1.0] : Array<Dynamic>);
       }
-      else if (__switchValue == SurfaceCompositeMode.SourceIn) {
+      else if (__switchValue == SurfaceCompositeModeValue.SourceIn) {
         return cast cast ([dstA, 0.0] : Array<Dynamic>);
       }
-      else if (__switchValue == SurfaceCompositeMode.DestinationIn) {
+      else if (__switchValue == SurfaceCompositeModeValue.DestinationIn) {
         return cast cast ([0.0, srcA] : Array<Dynamic>);
       }
-      else if (__switchValue == SurfaceCompositeMode.SourceOut) {
+      else if (__switchValue == SurfaceCompositeModeValue.SourceOut) {
         return cast cast ([(1.0 - dstA), 0.0] : Array<Dynamic>);
       }
-      else if (__switchValue == SurfaceCompositeMode.DestinationOut) {
+      else if (__switchValue == SurfaceCompositeModeValue.DestinationOut) {
         return cast cast ([0.0, (1.0 - srcA)] : Array<Dynamic>);
       }
-      else if (__switchValue == SurfaceCompositeMode.SourceAtop) {
+      else if (__switchValue == SurfaceCompositeModeValue.SourceAtop) {
         return cast cast ([dstA, (1.0 - srcA)] : Array<Dynamic>);
       }
-      else if (__switchValue == SurfaceCompositeMode.DestinationAtop) {
+      else if (__switchValue == SurfaceCompositeModeValue.DestinationAtop) {
         return cast cast ([(1.0 - dstA), srcA] : Array<Dynamic>);
       }
-      else if (__switchValue == SurfaceCompositeMode.Xor) {
+      else if (__switchValue == SurfaceCompositeModeValue.Xor) {
         return cast cast ([(1.0 - dstA), (1.0 - srcA)] : Array<Dynamic>);
       }
-      else if (__switchValue == SurfaceCompositeMode.Copy) {
+      else if (__switchValue == SurfaceCompositeModeValue.Copy) {
         return cast cast ([1.0, 0.0] : Array<Dynamic>);
       }
-      else if (__switchValue == SurfaceCompositeMode.Clear) {
+      else if (__switchValue == SurfaceCompositeModeValue.Clear) {
         return cast cast ([0.0, 0.0] : Array<Dynamic>);
       }
       else  {
@@ -201,46 +202,46 @@ class SurfaceComposite {
   public static function blendChannel__surfaceComposite(mode:SurfaceCompositeMode, cb:Float, cs:Float):Float {
     {
       var __switchValue = mode;
-      if (__switchValue == SurfaceCompositeMode.Multiply) {
+      if (__switchValue == SurfaceCompositeModeValue.Multiply) {
         return cast ((cb * cs) / 255.0);
       }
-      else if (__switchValue == SurfaceCompositeMode.Screen) {
+      else if (__switchValue == SurfaceCompositeModeValue.Screen) {
         return cast ((cb + cs) - ((cb * cs) / 255.0));
       }
-      else if (__switchValue == SurfaceCompositeMode.Add) {
+      else if (__switchValue == SurfaceCompositeModeValue.Add) {
         return cast _Runtime.callProperty(HxMath, 'min', cast ([255.0, (cb + cs)] : Array<Dynamic>));
       }
-      else if (__switchValue == SurfaceCompositeMode.Subtract) {
+      else if (__switchValue == SurfaceCompositeModeValue.Subtract) {
         return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, (cb - cs)] : Array<Dynamic>));
       }
-      else if (__switchValue == SurfaceCompositeMode.Darken) {
+      else if (__switchValue == SurfaceCompositeModeValue.Darken) {
         return cast _Runtime.callProperty(HxMath, 'min', cast ([cb, cs] : Array<Dynamic>));
       }
-      else if (__switchValue == SurfaceCompositeMode.Lighten) {
+      else if (__switchValue == SurfaceCompositeModeValue.Lighten) {
         return cast _Runtime.callProperty(HxMath, 'max', cast ([cb, cs] : Array<Dynamic>));
       }
-      else if (__switchValue == SurfaceCompositeMode.Difference) {
+      else if (__switchValue == SurfaceCompositeModeValue.Difference) {
         return cast _Runtime.callProperty(HxMath, 'abs', cast ([(cb - cs)] : Array<Dynamic>));
       }
-      else if (__switchValue == SurfaceCompositeMode.Exclusion) {
+      else if (__switchValue == SurfaceCompositeModeValue.Exclusion) {
         return cast ((cb + cs) - (((2.0 * cb) * cs) / 255.0));
       }
-      else if (__switchValue == SurfaceCompositeMode.Overlay) {
+      else if (__switchValue == SurfaceCompositeModeValue.Overlay) {
         return cast _Runtime.select(_Runtime.compare(cb, 128.0, '<'), function():Dynamic return cast (((2.0 * cb) * cs) / 255.0), function():Dynamic return cast (255.0 - (((2.0 * (255.0 - cb)) * (255.0 - cs)) / 255.0)));
       }
-      else if (__switchValue == SurfaceCompositeMode.HardLight) {
+      else if (__switchValue == SurfaceCompositeModeValue.HardLight) {
         return cast _Runtime.select(_Runtime.compare(cs, 128.0, '<'), function():Dynamic return cast (((2.0 * cb) * cs) / 255.0), function():Dynamic return cast (255.0 - (((2.0 * (255.0 - cb)) * (255.0 - cs)) / 255.0)));
       }
-      else if (__switchValue == SurfaceCompositeMode.SoftLight) {
+      else if (__switchValue == SurfaceCompositeModeValue.SoftLight) {
         return cast _Runtime.callValue(SurfaceComposite.softLightChannel__surfaceComposite, cast ([cb, cs] : Array<Dynamic>));
       }
-      else if (__switchValue == SurfaceCompositeMode.ColorDodge) {
+      else if (__switchValue == SurfaceCompositeModeValue.ColorDodge) {
         return cast _Runtime.select(_Runtime.compare(cs, 255.0, '>='), function():Dynamic return cast 255.0, function():Dynamic return cast _Runtime.callProperty(HxMath, 'min', cast ([255.0, ((cb * 255.0) / (255.0 - cs))] : Array<Dynamic>)));
       }
-      else if (__switchValue == SurfaceCompositeMode.ColorBurn) {
+      else if (__switchValue == SurfaceCompositeModeValue.ColorBurn) {
         return cast _Runtime.select(_Runtime.compare(cs, 0.0, '<='), function():Dynamic return cast 0.0, function():Dynamic return cast (255.0 - _Runtime.callProperty(HxMath, 'min', cast ([255.0, (((255.0 - cb) * 255.0) / cs)] : Array<Dynamic>))));
       }
-      else if (__switchValue == SurfaceCompositeMode.Invert) {
+      else if (__switchValue == SurfaceCompositeModeValue.Invert) {
         return cast (255.0 - cb);
       }
       else  {

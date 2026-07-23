@@ -10,6 +10,7 @@ import flighthq.types.PartialNode;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Scale9Shape.Scale9ShapeData;
 import flighthq.types.Scale9Shape.Scale9ShapeRuntime;
+import flighthq.types.Types.Scale9ShapeKind;
 import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 
 @:expose("flighthq.shape.Scale9Shape")

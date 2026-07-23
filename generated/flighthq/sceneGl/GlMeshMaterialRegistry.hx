@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.GlMeshMaterialRenderer;
+import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
 @:expose("flighthq.sceneGl.GlMeshMaterialRegistry")

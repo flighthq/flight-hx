@@ -11,7 +11,9 @@ import flighthq.surface.SurfaceFrom.createSurfaceFromImageResource;
 import flighthq.surface.SurfacePixel.getSurfacePixelChannel;
 import flighthq.types.ImageChannel;
 import flighthq.types.Node.NodeAny;
+import flighthq.types.Types.BitmapKind;
 import flighthq.types._internal._BitmapValues.BitmapKind;
+import flighthq.types._internal._ImageChannelValues.ImageChannelValue;
 
 @:expose("flighthq.interaction.RegisterBitmapHitTest")
 class RegisterBitmapHitTest {
@@ -37,7 +39,7 @@ class RegisterBitmapHitTest {
     px = _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(RegisterBitmapHitTest.bitmapAlphaLocalPoint__registerBitmapHitTest, 'x') + _Runtime.select(!_Runtime.strictEquals(rect, null), function():Dynamic return cast _Runtime.field(rect, 'x'), function():Dynamic return cast 0.0))] : Array<Dynamic>));
     py = _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(RegisterBitmapHitTest.bitmapAlphaLocalPoint__registerBitmapHitTest, 'y') + _Runtime.select(!_Runtime.strictEquals(rect, null), function():Dynamic return cast _Runtime.field(rect, 'y'), function():Dynamic return cast 0.0))] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(px, 0.0, '<'), function():Dynamic return cast _Runtime.compare(py, 0.0, '<')), function():Dynamic return cast _Runtime.compare(px, _Runtime.field(surface, 'width'), '>=')), function():Dynamic return cast _Runtime.compare(py, _Runtime.field(surface, 'height'), '>=')))) { return cast -1.0; }
-    return cast _Runtime.select(_Runtime.compare(_Runtime.callValue(getSurfacePixelChannel, cast ([surface, px, py, ImageChannel.Alpha] : Array<Dynamic>)), alphaThreshold, '>='), function():Dynamic return cast 0.0, function():Dynamic return cast -1.0);
+    return cast _Runtime.select(_Runtime.compare(_Runtime.callValue(getSurfacePixelChannel, cast ([surface, px, py, ImageChannelValue.Alpha] : Array<Dynamic>)), alphaThreshold, '>='), function():Dynamic return cast 0.0, function():Dynamic return cast -1.0);
     return cast null;
   }
 

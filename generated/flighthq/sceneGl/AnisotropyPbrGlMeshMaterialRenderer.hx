@@ -17,6 +17,7 @@ import flighthq.types.AnisotropyPbrMaterial;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Types.AnisotropyPbrMaterialKind;
 import flighthq.types._internal._AnisotropyPbrMaterialValues.AnisotropyPbrMaterialKind;
 
 @:expose("flighthq.sceneGl.AnisotropyPbrGlMeshMaterialRenderer")

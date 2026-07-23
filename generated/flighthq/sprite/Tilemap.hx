@@ -12,6 +12,7 @@ import flighthq.types.PartialNode;
 import flighthq.types.Tilemap.TilemapData;
 import flighthq.types.Tilemap.TilemapRuntime;
 import flighthq.types.TilemapSignals;
+import flighthq.types.Types.TilemapKind;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types._internal._TilemapValues.TilemapKind;
 

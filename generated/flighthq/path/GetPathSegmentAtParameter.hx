@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Path.PathCommand;
 import flighthq.types.Vector2.Vector2Like;
+import flighthq.types._internal._PathValues.PathCommandValue;
 
 @:expose("flighthq.path.GetPathSegmentAtParameter")
 class GetPathSegmentAtParameter {
@@ -83,15 +84,15 @@ class GetPathSegmentAtParameter {
       var ci:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(ci, _Runtime.field(commands, 'length'), '<'))) {
         var command:Dynamic = _Runtime.getIndex(commands, ci);
-        if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.MOVE_TO))) {
+        if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.MOVE_TO))) {
           (x = cast (_Runtime.getIndex(data, di) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.WIDE_MOVE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO))) {
           (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.LINE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.LINE_TO))) {
           var x1:Dynamic = _Runtime.getIndex(data, di);
           var y1:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           (di = cast ((di + 2.0) : Dynamic));
@@ -108,7 +109,7 @@ class GetPathSegmentAtParameter {
           (x = cast (x1 : Dynamic));
           (y = cast (y1 : Dynamic));
           currentSegment++;
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.WIDE_LINE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO))) {
           var x1:Dynamic = _Runtime.getIndex(data, (di + 2.0));
           var y1:Dynamic = _Runtime.getIndex(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
@@ -125,7 +126,7 @@ class GetPathSegmentAtParameter {
           (x = cast (x1 : Dynamic));
           (y = cast (y1 : Dynamic));
           currentSegment++;
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.CURVE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CURVE_TO))) {
           var cx:Dynamic = _Runtime.getIndex(data, di);
           var cy:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           var x1:Dynamic = _Runtime.getIndex(data, (di + 2.0));
@@ -142,7 +143,7 @@ class GetPathSegmentAtParameter {
           (x = cast (x1 : Dynamic));
           (y = cast (y1 : Dynamic));
           currentSegment++;
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.CUBIC_CURVE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO))) {
           var c1x:Dynamic = _Runtime.getIndex(data, di);
           var c1y:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           var c2x:Dynamic = _Runtime.getIndex(data, (di + 2.0));
@@ -161,7 +162,7 @@ class GetPathSegmentAtParameter {
           (x = cast (x1 : Dynamic));
           (y = cast (y1 : Dynamic));
           currentSegment++;
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.CLOSE))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CLOSE))) {
         } } } } } } }
         ci++;
       }

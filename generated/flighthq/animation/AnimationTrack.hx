@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.AnimationInterpolation;
 import flighthq.types.AnimationTrackValidationDiagnostic;
+import flighthq.types.Types.AnimationInterpolationLinear;
 import flighthq.types._internal._AnimationInterpolationValues.AnimationInterpolationLinear;
 
 @:expose("flighthq.animation.AnimationTrack")

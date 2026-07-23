@@ -3,6 +3,13 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Types.MAX_FORWARD_LIGHTS;
+import flighthq.types.Types.SCENE_LIGHT_HEMISPHERE_OFFSET;
+import flighthq.types.Types.SCENE_LIGHT_HEMISPHERE_STRIDE;
+import flighthq.types.Types.SCENE_LIGHT_POINT_OFFSET;
+import flighthq.types.Types.SCENE_LIGHT_POINT_STRIDE;
+import flighthq.types.Types.SCENE_LIGHT_SPOT_OFFSET;
+import flighthq.types.Types.SCENE_LIGHT_SPOT_STRIDE;
 
 @:expose("flighthq.types._internal._SceneLightBlockValues")
 class _SceneLightBlockValues {

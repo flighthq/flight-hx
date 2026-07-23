@@ -16,6 +16,7 @@ import flighthq.types.LinearColor;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.ToonMaterial;
+import flighthq.types.Types.ToonMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types._internal._ToonMaterialValues.ToonMaterialKind;
 

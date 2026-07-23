@@ -9,6 +9,8 @@ import flighthq.node.Transform2d.getNodeWorldMatrix;
 import flighthq.path.ContainsPathPoint.containsPathPoint;
 import flighthq.shape.ShapeFill.getShapeFillRegions;
 import flighthq.types.Node.NodeAny;
+import flighthq.types.Types.Scale9ShapeKind;
+import flighthq.types.Types.ShapeKind;
 import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 import flighthq.types._internal._ShapeValues.ShapeKind;
 

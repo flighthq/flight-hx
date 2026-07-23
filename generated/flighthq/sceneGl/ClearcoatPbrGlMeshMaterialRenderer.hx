@@ -17,6 +17,7 @@ import flighthq.types.ClearcoatPbrMaterial;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Types.ClearcoatPbrMaterialKind;
 import flighthq.types._internal._ClearcoatPbrMaterialValues.ClearcoatPbrMaterialKind;
 
 @:expose("flighthq.sceneGl.ClearcoatPbrGlMeshMaterialRenderer")

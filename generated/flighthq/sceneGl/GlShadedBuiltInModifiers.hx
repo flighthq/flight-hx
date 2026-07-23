@@ -30,6 +30,9 @@ import flighthq.types.RimModifier;
 import flighthq.types.ToonModifier;
 import flighthq.types.VertexDisplaceModifier;
 import flighthq.types.VertexDisplaceModifier.VertexDisplaceModifierSource;
+import flighthq.types._internal._EmissiveModifierValues.EmissiveModifierFacingValue;
+import flighthq.types._internal._FogModifierValues.FogModifierModeValue;
+import flighthq.types._internal._VertexDisplaceModifierValues.VertexDisplaceModifierSourceValue;
 
 @:expose("flighthq.sceneGl.GlShadedBuiltInModifiers")
 class GlShadedBuiltInModifiers {
@@ -86,7 +89,7 @@ class GlShadedBuiltInModifiers {
     _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(context, 'program'), 'u_emissiveStrength' + Std.string(suffix) + ''] : Array<Dynamic>)), _Runtime.field(emissive, 'strength')] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(emissive, 'mask'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(GlShadedBuiltInModifiers.bindGlModifierTexture__glShadedBuiltInModifiers, cast ([context, _Runtime.field(emissive, 'mask'), 'u_emissiveMask' + Std.string(suffix) + ''] : Array<Dynamic>)); }
     if (_Runtime.truthy(_Runtime.callValue(GlShadedBuiltInModifiers.isEmissiveGated__glShadedBuiltInModifiers, cast ([emissive] : Array<Dynamic>)))) {
-      var sign:Dynamic = _Runtime.select(_Runtime.strictEquals(_Runtime.field(emissive, 'facing'), EmissiveModifierFacing.AwayFromLight), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0);
+      var sign:Dynamic = _Runtime.select(_Runtime.strictEquals(_Runtime.field(emissive, 'facing'), EmissiveModifierFacingValue.AwayFromLight), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0);
       _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(context, 'program'), 'u_emissiveFacingSign' + Std.string(suffix) + ''] : Array<Dynamic>)), sign] : Array<Dynamic>));
       _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(context, 'program'), 'u_emissiveFacingSoftness' + Std.string(suffix) + ''] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.field(emissive, 'facingSoftness'), function():Dynamic return cast 0.0)] : Array<Dynamic>));
     }
@@ -201,7 +204,7 @@ class GlShadedBuiltInModifiers {
     suffix = '_' + Std.string(_Runtime.field(context, 'index')) + '';
     _Runtime.callValue(unpackColorToLinear, cast ([GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers, _Runtime.field(fog, 'color')] : Array<Dynamic>));
     _Runtime.callProperty(gl, 'uniform3f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(context, 'program'), 'u_fogColor' + Std.string(suffix) + ''] : Array<Dynamic>)), _Runtime.getIndex(GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers, 0.0), _Runtime.getIndex(GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers, 1.0), _Runtime.getIndex(GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers, 2.0)] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(fog, 'mode'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(fog, 'mode'), FogModifierMode.Linear)))) {
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(fog, 'mode'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(fog, 'mode'), FogModifierModeValue.Linear)))) {
       _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(context, 'program'), 'u_fogNear' + Std.string(suffix) + ''] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.field(fog, 'near'), function():Dynamic return cast 0.0)] : Array<Dynamic>));
       _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(context, 'program'), 'u_fogFar' + Std.string(suffix) + ''] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.field(fog, 'far'), function():Dynamic return cast 1.0)] : Array<Dynamic>));
     } else {
@@ -213,9 +216,9 @@ class GlShadedBuiltInModifiers {
     var factor:String = cast _Runtime.UNDEFINED;
     fog = (cast modifier : FogModifier);
     suffix = '_' + Std.string(index) + '';
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(fog, 'mode'), FogModifierMode.Exponential))) {
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(fog, 'mode'), FogModifierModeValue.Exponential))) {
       (factor = cast ('  float fogFactor = 1.0 - exp(-u_fogDensity' + Std.string(suffix) + ' * fogDist);\n' : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(fog, 'mode'), FogModifierMode.Exponential2))) {
+    } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(fog, 'mode'), FogModifierModeValue.Exponential2))) {
       (factor = cast ('  float fogTerm = u_fogDensity' + Std.string(suffix) + ' * fogDist;\n  float fogFactor = 1.0 - exp(-fogTerm * fogTerm);\n' : Dynamic));
     } else {
       (factor = cast ('  float fogFactor = clamp((fogDist - u_fogNear' + Std.string(suffix) + ') / max(u_fogFar' + Std.string(suffix) + ' - u_fogNear' + Std.string(suffix) + ', 1e-4), 0.0, 1.0);\n' : Dynamic));
@@ -228,7 +231,7 @@ class GlShadedBuiltInModifiers {
     fog = (cast modifier : FogModifier);
     suffix = '_' + Std.string(index) + '';
     source = 'uniform vec3 u_fogColor' + Std.string(suffix) + ';\n';
-    (source = cast ((source + _Runtime.select(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(fog, 'mode'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(fog, 'mode'), FogModifierMode.Linear)), function():Dynamic return cast 'uniform float u_fogNear' + Std.string(suffix) + ';\nuniform float u_fogFar' + Std.string(suffix) + ';\n', function():Dynamic return cast 'uniform float u_fogDensity' + Std.string(suffix) + ';\n')) : Dynamic));
+    (source = cast ((source + _Runtime.select(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(fog, 'mode'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(fog, 'mode'), FogModifierModeValue.Linear)), function():Dynamic return cast 'uniform float u_fogNear' + Std.string(suffix) + ';\nuniform float u_fogFar' + Std.string(suffix) + ';\n', function():Dynamic return cast 'uniform float u_fogDensity' + Std.string(suffix) + ';\n')) : Dynamic));
     return cast source;
   } }]);
 
@@ -262,7 +265,7 @@ class GlShadedBuiltInModifiers {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(displace, 'axis'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callProperty(gl, 'uniform3f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(context, 'program'), 'u_vDisplaceAxis' + Std.string(suffix) + ''] : Array<Dynamic>)), _Runtime.field(_Runtime.field(displace, 'axis'), 'x'), _Runtime.field(_Runtime.field(displace, 'axis'), 'y'), _Runtime.field(_Runtime.field(displace, 'axis'), 'z')] : Array<Dynamic>));
     }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(displace, 'source'), VertexDisplaceModifierSource.HeightMap))) {
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(displace, 'source'), VertexDisplaceModifierSourceValue.HeightMap))) {
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(displace, 'map'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(GlShadedBuiltInModifiers.bindGlModifierTexture__glShadedBuiltInModifiers, cast ([context, _Runtime.field(displace, 'map'), 'u_vDisplaceMap' + Std.string(suffix) + ''] : Array<Dynamic>)); }
     } else {
       _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(context, 'program'), 'u_vDisplaceFrequency' + Std.string(suffix) + ''] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.field(displace, 'frequency'), function():Dynamic return cast 1.0)] : Array<Dynamic>));
@@ -278,7 +281,7 @@ class GlShadedBuiltInModifiers {
     displace = (cast modifier : VertexDisplaceModifier);
     suffix = '_' + Std.string(index) + '';
     axis = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(displace, 'axis'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast '  vec3 vDisplaceAxis = normalize(u_vDisplaceAxis' + Std.string(suffix) + ');\n', function():Dynamic return cast '  vec3 vDisplaceAxis = normalize(localNormal);\n');
-    amount = _Runtime.select(_Runtime.strictEquals(_Runtime.field(displace, 'source'), VertexDisplaceModifierSource.HeightMap), function():Dynamic return cast '  float vDisplaceAmount = texture(u_vDisplaceMap' + Std.string(suffix) + ', vertexUv).r * u_vDisplaceAmplitude' + Std.string(suffix) + ';\n', function():Dynamic return cast '  float vDisplacePhase = dot(localPosition.xyz, normalize(u_vDisplaceDir' + Std.string(suffix) + ')) * u_vDisplaceFrequency' + Std.string(suffix) + ' + u_time * u_vDisplaceSpeed' + Std.string(suffix) + ';\n  float vDisplaceAmount = sin(vDisplacePhase) * u_vDisplaceAmplitude' + Std.string(suffix) + ';\n');
+    amount = _Runtime.select(_Runtime.strictEquals(_Runtime.field(displace, 'source'), VertexDisplaceModifierSourceValue.HeightMap), function():Dynamic return cast '  float vDisplaceAmount = texture(u_vDisplaceMap' + Std.string(suffix) + ', vertexUv).r * u_vDisplaceAmplitude' + Std.string(suffix) + ';\n', function():Dynamic return cast '  float vDisplacePhase = dot(localPosition.xyz, normalize(u_vDisplaceDir' + Std.string(suffix) + ')) * u_vDisplaceFrequency' + Std.string(suffix) + ' + u_time * u_vDisplaceSpeed' + Std.string(suffix) + ';\n  float vDisplaceAmount = sin(vDisplacePhase) * u_vDisplaceAmplitude' + Std.string(suffix) + ';\n');
     return cast (((('{\n' + axis) + amount) + '  localPosition.xyz += vDisplaceAxis * vDisplaceAmount;\n') + '}');
   } }, { declarations: function(modifier:Modifier, index:Float) {
     var displace:Dynamic = cast _Runtime.UNDEFINED;
@@ -288,7 +291,7 @@ class GlShadedBuiltInModifiers {
     suffix = '_' + Std.string(index) + '';
     source = 'uniform float u_vDisplaceAmplitude' + Std.string(suffix) + ';\n';
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(displace, 'axis'), _Runtime.field(_Runtime, 'UNDEFINED')))) { (source = cast ((source + 'uniform vec3 u_vDisplaceAxis' + Std.string(suffix) + ';\n') : Dynamic)); }
-    (source = cast ((source + _Runtime.select(_Runtime.strictEquals(_Runtime.field(displace, 'source'), VertexDisplaceModifierSource.HeightMap), function():Dynamic return cast 'uniform sampler2D u_vDisplaceMap' + Std.string(suffix) + ';\n', function():Dynamic return cast 'uniform float u_vDisplaceFrequency' + Std.string(suffix) + ';\nuniform float u_vDisplaceSpeed' + Std.string(suffix) + ';\nuniform vec3 u_vDisplaceDir' + Std.string(suffix) + ';\n')) : Dynamic));
+    (source = cast ((source + _Runtime.select(_Runtime.strictEquals(_Runtime.field(displace, 'source'), VertexDisplaceModifierSourceValue.HeightMap), function():Dynamic return cast 'uniform sampler2D u_vDisplaceMap' + Std.string(suffix) + ';\n', function():Dynamic return cast 'uniform float u_vDisplaceFrequency' + Std.string(suffix) + ';\nuniform float u_vDisplaceSpeed' + Std.string(suffix) + ';\nuniform vec3 u_vDisplaceDir' + Std.string(suffix) + ';\n')) : Dynamic));
     return cast source;
   } }]);
 
@@ -322,7 +325,7 @@ class GlShadedBuiltInModifiers {
   }
 
   public static function isEmissiveGated__glShadedBuiltInModifiers(modifier:EmissiveModifier):Bool {
-    return cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(modifier, 'facing'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(modifier, 'facing'), EmissiveModifierFacing.Ignore));
+    return cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(modifier, 'facing'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(modifier, 'facing'), EmissiveModifierFacingValue.Ignore));
     return cast null;
   }
 

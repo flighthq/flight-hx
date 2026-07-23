@@ -10,6 +10,7 @@ import flighthq.node.Revision.invalidateNodeLocalBounds;
 import flighthq.node.Revision.invalidateNodeLocalContent;
 import flighthq.types.MethodsOf;
 import flighthq.types.PartialNode;
+import flighthq.types.Types.VideoKind;
 import flighthq.types.Video.VideoData;
 import flighthq.types.Video.VideoRuntime;
 import flighthq.types._internal._VideoValues.VideoKind;

@@ -17,6 +17,7 @@ import flighthq.types.LinearColor;
 import flighthq.types.MatcapMaterial;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Types.MatcapMaterialKind;
 import flighthq.types._internal._MatcapMaterialValues.MatcapMaterialKind;
 
 @:expose("flighthq.sceneGl.MatcapGlMeshMaterialRenderer")

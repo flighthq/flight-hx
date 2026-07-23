@@ -27,6 +27,7 @@ import flighthq.types.MovieClipSignals;
 import flighthq.types.PartialNode;
 import flighthq.types.TimelineLabel;
 import flighthq.types.TimelineSource;
+import flighthq.types.Types.MovieClipKind;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 import flighthq.types._internal._MovieClipValues.MovieClipKind;
 

@@ -9,6 +9,7 @@ import flighthq.types.BlendMode;
 import flighthq.types.Material.MaterialData;
 import flighthq.types.WgpuMaterialRenderer;
 import flighthq.types.WgpuRenderState.WgpuSpriteBatchBufferSlot;
+import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
 typedef WgpuQuadBatchResources = { var instanceBindGroupLayout:Dynamic; var materialBindGroupLayout:Dynamic; var basePipelineLayout:Dynamic; var materialPipelineLayout:Dynamic; var pipelines:Dynamic; };
 
@@ -151,7 +152,7 @@ class WgpuSpriteBatch {
     if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
     __destructure2 = state;
     device = _Runtime.field(__destructure2, 'device');
-    blend = _Runtime.select(_Runtime.strictEquals(blendMode, BlendMode.Add), function():Dynamic return cast WgpuSpriteBatch.ADD_BLEND__wgpuSpriteBatch, function():Dynamic return cast WgpuSpriteBatch.NORMAL_BLEND__wgpuSpriteBatch);
+    blend = _Runtime.select(_Runtime.strictEquals(blendMode, BlendModeValue.Add), function():Dynamic return cast WgpuSpriteBatch.ADD_BLEND__wgpuSpriteBatch, function():Dynamic return cast WgpuSpriteBatch.NORMAL_BLEND__wgpuSpriteBatch);
     isMaskWrite = _Runtime.strictEquals(stencilMode, 'maskwrite');
     if (_Runtime.truthy(isMaskWrite)) {
       (stencilFace = cast ({ compare: 'always', passOp: 'replace', failOp: 'keep', depthFailOp: 'keep' } : Dynamic));

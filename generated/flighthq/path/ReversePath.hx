@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.ForEachPathSegment.forEachPathSegment;
 import flighthq.types.Path.PathCommand;
+import flighthq.types._internal._PathValues.PathCommandValue;
 
 typedef Subpath__reversePath = { var closed:Bool; var points:Array<SubpathPoint__reversePath>; };
 
@@ -60,7 +61,7 @@ class ReversePath {
     pts = _Runtime.field(subpath, 'points');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(pts, 'length'), 0.0))) { return; }
     last = _Runtime.getIndex(pts, (_Runtime.field(pts, 'length') - 1.0));
-    _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommand.MOVE_TO] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
     _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.field(last, 'x'), _Runtime.field(last, 'y')] : Array<Dynamic>));
     {
       var i:Dynamic = (_Runtime.field(pts, 'length') - 1.0);
@@ -68,20 +69,20 @@ class ReversePath {
         var from:Dynamic = _Runtime.getIndex(pts, i);
         var to:Dynamic = _Runtime.getIndex(pts, (i - 1.0));
         if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(from, 'kind'), 'line'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(from, 'kind'), 'move')))) {
-          _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommand.LINE_TO] : Array<Dynamic>));
+          _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
           _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.field(to, 'x'), _Runtime.field(to, 'y')] : Array<Dynamic>));
         } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(from, 'kind'), 'quad'))) {
-          _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommand.CURVE_TO] : Array<Dynamic>));
+          _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CURVE_TO] : Array<Dynamic>));
           _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.field(from, 'cx'), _Runtime.field(from, 'cy'), _Runtime.field(to, 'x'), _Runtime.field(to, 'y')] : Array<Dynamic>));
         } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(from, 'kind'), 'cubic'))) {
-          _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommand.CUBIC_CURVE_TO] : Array<Dynamic>));
+          _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CUBIC_CURVE_TO] : Array<Dynamic>));
           _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.field(from, 'c2x'), _Runtime.field(from, 'c2y'), _Runtime.field(from, 'c1x'), _Runtime.field(from, 'c1y'), _Runtime.field(to, 'x'), _Runtime.field(to, 'y')] : Array<Dynamic>));
         } } }
         i--;
       }
     }
     if (_Runtime.truthy(_Runtime.field(subpath, 'closed'))) {
-      _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommand.CLOSE] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CLOSE] : Array<Dynamic>));
     }
   }
 }

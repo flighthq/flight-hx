@@ -17,6 +17,7 @@ import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.IridescencePbrMaterial;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Types.IridescencePbrMaterialKind;
 import flighthq.types._internal._IridescencePbrMaterialValues.IridescencePbrMaterialKind;
 
 @:expose("flighthq.sceneGl.IridescencePbrGlMeshMaterialRenderer")

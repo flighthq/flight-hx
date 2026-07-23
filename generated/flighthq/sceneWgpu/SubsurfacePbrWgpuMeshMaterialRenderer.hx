@@ -19,6 +19,7 @@ import flighthq.types.LinearColor;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.SubsurfacePbrMaterial;
+import flighthq.types.Types.SubsurfacePbrMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types._internal._SubsurfacePbrMaterialValues.SubsurfacePbrMaterialKind;
 

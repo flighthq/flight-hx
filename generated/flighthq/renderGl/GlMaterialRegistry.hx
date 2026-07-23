@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.GlMaterialRenderer;
+import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
 @:expose("flighthq.renderGl.GlMaterialRegistry")

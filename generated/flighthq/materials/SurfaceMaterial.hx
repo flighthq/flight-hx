@@ -8,6 +8,7 @@ import flighthq.types.AlphaType;
 import flighthq.types.BlendMode;
 import flighthq.types.Entity.Kind;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
+import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
 @:expose("flighthq.materials.SurfaceMaterial")
 class SurfaceMaterial {
@@ -17,7 +18,7 @@ class SurfaceMaterial {
     _Runtime.setField(material, 'alphaCutoff', SurfaceMaterial.DEFAULT_ALPHA_CUTOFF__surfaceMaterial);
     _Runtime.setField(material, 'alphaMode', SurfaceMaterial.DEFAULT_ALPHA_MODE__surfaceMaterial);
     _Runtime.setField(material, 'alphaType', SurfaceMaterial.DEFAULT_ALPHA_TYPE__surfaceMaterial);
-    _Runtime.setField(material, 'blendMode', BlendMode.Normal);
+    _Runtime.setField(material, 'blendMode', BlendModeValue.Normal);
     _Runtime.setField(material, 'doubleSided', SurfaceMaterial.DEFAULT_DOUBLE_SIDED__surfaceMaterial);
     return cast material;
     return cast null;

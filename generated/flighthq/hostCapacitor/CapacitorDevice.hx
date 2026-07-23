@@ -10,6 +10,8 @@ import flighthq.types.Device.DeviceInfo;
 import flighthq.types.Device.SafeAreaInsets;
 import flighthq.types.DeviceCapabilities;
 import flighthq.types.DeviceDisplayMetrics;
+import flighthq.types.Types.DeviceFormFactorPhone;
+import flighthq.types.Types.DeviceFormFactorUnknown;
 import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorPhone;
 import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorUnknown;
 

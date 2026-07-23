@@ -10,6 +10,7 @@ import flighthq.sceneGl._internal._GlMeshProgramValues.GL_UV_TRANSFORM_VERTEX_GL
 import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
 import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._SceneLightBlockValues.MAX_FORWARD_LIGHTS;
 
 typedef GlToonDefineKey = { var alphaMaskEnabled:Bool; var hasBaseColorMap:Bool; var hasRamp:Bool; @:optional var hasSkin:Bool; var hasUvTransform:Bool; };

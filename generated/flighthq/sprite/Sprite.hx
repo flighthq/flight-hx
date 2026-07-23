@@ -21,6 +21,7 @@ import flighthq.types.SpriteSignals;
 import flighthq.types.Tilemap.TilemapData;
 import flighthq.types.Tilemap.TilemapRuntime;
 import flighthq.types.TilemapSignals;
+import flighthq.types.Types.SpriteKind;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types._internal._SpriteValues.SpriteKind;
 

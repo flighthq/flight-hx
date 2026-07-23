@@ -11,6 +11,7 @@ import flighthq.types.Billboard.BillboardMode;
 import flighthq.types.Billboard.BillboardRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.NodeSignals;
+import flighthq.types.Types.BillboardKind;
 import flighthq.types._internal._BillboardValues.BillboardKind;
 
 @:expose("flighthq.scene.Billboard")

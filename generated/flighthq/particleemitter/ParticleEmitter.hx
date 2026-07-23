@@ -15,6 +15,7 @@ import flighthq.types.MethodsOf;
 import flighthq.types.PartialNode;
 import flighthq.types.ParticleEmitter.ParticleEmitterData;
 import flighthq.types.ParticleEmitter.ParticleEmitterRuntime;
+import flighthq.types.Types.ParticleEmitterKind;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types._internal._ParticleEmitterValues.ParticleEmitterKind;
 

@@ -6,10 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.displayobjectCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.types.AdvancedBlendMode;
 import flighthq.types.BlendMode;
+import flighthq.types._internal._AdvancedBlendModeValues.AdvancedBlendModeValue;
+import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
 @:expose("flighthq.displayobjectCanvas.CanvasMaterials")
 class CanvasMaterials {
-  public static final CANVAS_BLEND_MODE__canvasMaterials:Dynamic = _Runtime.objectFromPairs([{ key: BlendMode.Add, value: 'lighter' }, { key: BlendMode.Darken, value: 'darken' }, { key: BlendMode.Lighten, value: 'lighten' }, { key: BlendMode.Multiply, value: 'multiply' }, { key: BlendMode.Normal, value: 'source-over' }, { key: BlendMode.Screen, value: 'screen' }, { key: AdvancedBlendMode.Color, value: 'color' }, { key: AdvancedBlendMode.ColorBurn, value: 'color-burn' }, { key: AdvancedBlendMode.ColorDodge, value: 'color-dodge' }, { key: AdvancedBlendMode.Difference, value: 'difference' }, { key: AdvancedBlendMode.Exclusion, value: 'exclusion' }, { key: AdvancedBlendMode.HardLight, value: 'hard-light' }, { key: AdvancedBlendMode.Hue, value: 'hue' }, { key: AdvancedBlendMode.Luminosity, value: 'luminosity' }, { key: AdvancedBlendMode.Overlay, value: 'overlay' }, { key: AdvancedBlendMode.Saturation, value: 'saturation' }, { key: AdvancedBlendMode.SoftLight, value: 'soft-light' }]);
+  public static final CANVAS_BLEND_MODE__canvasMaterials:Dynamic = _Runtime.objectFromPairs([{ key: BlendModeValue.Add, value: 'lighter' }, { key: BlendModeValue.Darken, value: 'darken' }, { key: BlendModeValue.Lighten, value: 'lighten' }, { key: BlendModeValue.Multiply, value: 'multiply' }, { key: BlendModeValue.Normal, value: 'source-over' }, { key: BlendModeValue.Screen, value: 'screen' }, { key: AdvancedBlendModeValue.Color, value: 'color' }, { key: AdvancedBlendModeValue.ColorBurn, value: 'color-burn' }, { key: AdvancedBlendModeValue.ColorDodge, value: 'color-dodge' }, { key: AdvancedBlendModeValue.Difference, value: 'difference' }, { key: AdvancedBlendModeValue.Exclusion, value: 'exclusion' }, { key: AdvancedBlendModeValue.HardLight, value: 'hard-light' }, { key: AdvancedBlendModeValue.Hue, value: 'hue' }, { key: AdvancedBlendModeValue.Luminosity, value: 'luminosity' }, { key: AdvancedBlendModeValue.Overlay, value: 'overlay' }, { key: AdvancedBlendModeValue.Saturation, value: 'saturation' }, { key: AdvancedBlendModeValue.SoftLight, value: 'soft-light' }]);
 
   public static function applyCanvasBlendMode(state:Dynamic, value:Null<BlendMode>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

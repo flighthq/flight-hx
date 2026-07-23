@@ -15,6 +15,7 @@ import flighthq.types.NativeText.NativeTextStyle;
 import flighthq.types.PartialNode;
 import flighthq.types.TextAutoSize;
 import flighthq.types.TextVerticalAlign;
+import flighthq.types.Types.NativeTextKind;
 import flighthq.types._internal._NativeTextValues.NativeTextKind;
 
 @:expose("flighthq.text.NativeText")

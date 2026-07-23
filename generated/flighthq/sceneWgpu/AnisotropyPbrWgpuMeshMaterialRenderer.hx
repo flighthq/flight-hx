@@ -17,6 +17,7 @@ import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUnifor
 import flighthq.types.AnisotropyPbrMaterial;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Types.AnisotropyPbrMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types._internal._AnisotropyPbrMaterialValues.AnisotropyPbrMaterialKind;
 

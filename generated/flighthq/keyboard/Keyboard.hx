@@ -13,6 +13,7 @@ import flighthq.types.Keyboard.SoftKeyboardResizeMode;
 import flighthq.types.Keyboard.SoftKeyboardResizeNoneKind;
 import flighthq.types.Keyboard.SoftKeyboardStyleKind;
 import flighthq.types.Keyboard.SoftKeyboardTransition;
+import flighthq.types.Types.SoftKeyboardResizeNoneKind;
 
 typedef VirtualKeyboard__keyboard = Dynamic;
 

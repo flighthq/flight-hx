@@ -19,6 +19,7 @@ import flighthq.types.LinearColor;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.SheenPbrMaterial;
+import flighthq.types.Types.SheenPbrMaterialKind;
 import flighthq.types._internal._SheenPbrMaterialValues.SheenPbrMaterialKind;
 
 @:expose("flighthq.sceneGl.SheenPbrGlMeshMaterialRenderer")

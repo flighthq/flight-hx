@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Modifier;
 import flighthq.types.ModifierSlot;
+import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
 @:expose("flighthq.shading.OrderModifierStack")
 class OrderModifierStack {
@@ -27,5 +28,5 @@ class OrderModifierStack {
     return cast null;
   }
 
-  public static final SLOT_RANK__orderModifierStack:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), [cast ([cast ([ModifierSlot.Vertex, 0.0] : Array<Dynamic>), cast ([ModifierSlot.Normal, 1.0] : Array<Dynamic>), cast ([ModifierSlot.Diffuse, 2.0] : Array<Dynamic>), cast ([ModifierSlot.Specular, 3.0] : Array<Dynamic>), cast ([ModifierSlot.Emissive, 4.0] : Array<Dynamic>), cast ([ModifierSlot.Effect, 5.0] : Array<Dynamic>)] : Array<Dynamic>)]);
+  public static final SLOT_RANK__orderModifierStack:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), [cast ([cast ([ModifierSlotValue.Vertex, 0.0] : Array<Dynamic>), cast ([ModifierSlotValue.Normal, 1.0] : Array<Dynamic>), cast ([ModifierSlotValue.Diffuse, 2.0] : Array<Dynamic>), cast ([ModifierSlotValue.Specular, 3.0] : Array<Dynamic>), cast ([ModifierSlotValue.Emissive, 4.0] : Array<Dynamic>), cast ([ModifierSlotValue.Effect, 5.0] : Array<Dynamic>)] : Array<Dynamic>)]);
 }

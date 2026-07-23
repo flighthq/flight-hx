@@ -18,6 +18,7 @@ import flighthq.types.QuadBatch.QuadBatchData;
 import flighthq.types.QuadBatch.QuadBatchRuntime;
 import flighthq.types.QuadBatchSignals;
 import flighthq.types.QuadTransformType;
+import flighthq.types.Types.QuadBatchKind;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types._internal._QuadBatchValues.QuadBatchKind;
 

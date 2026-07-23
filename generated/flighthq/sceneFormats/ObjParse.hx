@@ -15,6 +15,7 @@ import flighthq.sceneFormats.Shared.CANONICAL_LAYOUT;
 import flighthq.sceneFormats.Shared.createExternalTextureRef;
 import flighthq.types.BlinnPhongMaterial;
 import flighthq.types.MeshGeometry.MeshSubset;
+import flighthq.types.Types.MeshKind;
 import flighthq.types._internal._MeshValues.MeshKind;
 
 typedef MaterialBucket__objParse = { var dedup:Dynamic; var indices:Array<Float>; var vertices:Array<Float>; };

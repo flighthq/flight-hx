@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneGl._internal._GlMeshProgramValues.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
 import flighthq.sceneGl._internal._GlMeshProgramValues.GL_UV_TRANSFORM_VERTEX_GLSL;
+import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._SceneLightBlockValues.MAX_FORWARD_LIGHTS;
 
 typedef GlPbrDefineKey = { var alphaMaskEnabled:Bool; var anisotropyEnabled:Bool; var clearcoatEnabled:Bool; var hasBaseColorMap:Bool; var hasEmissiveMap:Bool; var hasMetallicRoughnessMap:Bool; var hasNormalMap:Bool; var hasOcclusionMap:Bool; @:optional var hasSkin:Bool; var hasUvTransform:Bool; var iridescenceEnabled:Bool; var sheenEnabled:Bool; var specularEnabled:Bool; var subsurfaceEnabled:Bool; var transmissionEnabled:Bool; };

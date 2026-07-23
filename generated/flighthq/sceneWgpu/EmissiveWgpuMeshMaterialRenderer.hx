@@ -17,6 +17,7 @@ import flighthq.types.EmissiveMaterial;
 import flighthq.types.LinearColor;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Types.EmissiveMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types._internal._EmissiveMaterialValues.EmissiveMaterialKind;
 

@@ -20,6 +20,7 @@ import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.MeshGeometry.MeshSubset;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
 typedef DrawEntry__drawGlScene = { var alpha:Float; var clipW:Float; var material:Dynamic; var mesh:Dynamic; var normalMatrix:Dynamic; var renderer:GlMeshMaterialRenderer; var subset:MeshSubset; var worldMatrix:Dynamic; };

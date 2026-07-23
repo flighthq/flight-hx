@@ -27,6 +27,7 @@ import flighthq.types.Mesh.MeshRuntime;
 import flighthq.types.MeshDeformer;
 import flighthq.types.NodeSignals;
 import flighthq.types.SceneNode.SceneNodeRuntime;
+import flighthq.types.Types.SceneNodeKind;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._BillboardValues as Facade_Scene_flighthq_types__internal__BillboardValues;
 import flighthq.types._internal._MeshValues as Facade_Scene_flighthq_types__internal__MeshValues;

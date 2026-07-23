@@ -12,6 +12,9 @@ import flighthq.types.Keyboard.SoftKeyboardResizeMode;
 import flighthq.types.Keyboard.SoftKeyboardResizeNoneKind;
 import flighthq.types.Keyboard.SoftKeyboardStyleDarkKind;
 import flighthq.types.Keyboard.SoftKeyboardStyleKind;
+import flighthq.types.Types.SoftKeyboardResizeBodyKind;
+import flighthq.types.Types.SoftKeyboardResizeNoneKind;
+import flighthq.types.Types.SoftKeyboardStyleDarkKind;
 
 @:expose("flighthq.hostCapacitor.CapacitorKeyboard")
 class CapacitorKeyboard {

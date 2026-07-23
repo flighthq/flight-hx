@@ -7,6 +7,8 @@ import flighthq.sceneResources.SceneMaterialTextureRegistry;
 import flighthq.sceneResources.SceneMaterialTextureRegistry.SceneMaterialTextureLister;
 import flighthq.types.Entity.Kind;
 import flighthq.types.StandardPbrMaterial;
+import flighthq.types.Types.StandardPbrMaterialKind;
+import flighthq.types.Types.UnlitMaterialKind;
 import flighthq.types.UnlitMaterial;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 import flighthq.types._internal._UnlitMaterialValues.UnlitMaterialKind;

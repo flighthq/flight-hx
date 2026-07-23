@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.displayobjectCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.types.BlendMode;
+import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
 @:expose("flighthq.displayobjectCanvas.CanvasBackground")
 class CanvasBackground {
   public static function renderCanvasBackground(state:Dynamic):Void {
     _Runtime.setField(_Runtime.field(state, 'context'), 'globalCompositeOperation', 'source-over');
-    _Runtime.setField(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentBlendMode', BlendMode.Normal);
+    _Runtime.setField(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentBlendMode', BlendModeValue.Normal);
     _Runtime.callProperty(_Runtime.field(state, 'context'), 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(state, 'context'), 'globalAlpha', 1.0);
     if (_Runtime.truthy(!_Runtime.strictEquals((Std.int(_Runtime.field(state, 'backgroundColor')) & Std.int(255.0)), 0.0))) {

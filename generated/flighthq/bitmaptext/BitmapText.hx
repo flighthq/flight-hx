@@ -17,6 +17,7 @@ import flighthq.types.BitmapText.BitmapTextData;
 import flighthq.types.BitmapText.BitmapTextOptions;
 import flighthq.types.BitmapText.BitmapTextRuntime;
 import flighthq.types.MethodsOf;
+import flighthq.types.Types.BitmapTextKind;
 import flighthq.types._internal._BitmapTextValues.BitmapTextKind;
 
 @:expose("flighthq.bitmaptext.BitmapText")

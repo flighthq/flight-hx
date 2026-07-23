@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.displayobjectWgpu.WgpuSpriteBatch.getWgpuQuadBatchPreludeWGSL;
 import flighthq.renderWgpu.WgpuMaterialRegistry.registerWgpuMaterialRenderer;
+import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types.WgpuMaterialRenderer;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 

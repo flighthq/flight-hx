@@ -16,6 +16,7 @@ import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUnifor
 import flighthq.types.LinearColor;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Types.UnlitMaterialKind;
 import flighthq.types.UnlitMaterial;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types._internal._UnlitMaterialValues.UnlitMaterialKind;

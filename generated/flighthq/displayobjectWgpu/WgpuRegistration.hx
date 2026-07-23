@@ -18,10 +18,22 @@ import flighthq.displayobjectWgpu.WgpuTilemap.defaultWgpuTilemapRenderer;
 import flighthq.displayobjectWgpu.WgpuVideo.defaultWgpuVideoRenderer;
 import flighthq.render.Renderer.registerRenderer;
 import flighthq.types.RenderCache.RenderCacheKind;
+import flighthq.types.Types.BitmapKind;
+import flighthq.types.Types.DisplayObjectKind;
+import flighthq.types.Types.ParticleEmitterKind;
+import flighthq.types.Types.QuadBatchKind;
+import flighthq.types.Types.RichTextKind;
+import flighthq.types.Types.Scale9ShapeKind;
+import flighthq.types.Types.ShapeKind;
+import flighthq.types.Types.SpriteKind;
+import flighthq.types.Types.TextLabelKind;
+import flighthq.types.Types.TilemapKind;
+import flighthq.types.Types.VideoKind;
 import flighthq.types._internal._BitmapValues.BitmapKind;
 import flighthq.types._internal._DisplayObjectValues.DisplayObjectKind;
 import flighthq.types._internal._ParticleEmitterValues.ParticleEmitterKind;
 import flighthq.types._internal._QuadBatchValues.QuadBatchKind;
+import flighthq.types._internal._RenderCacheValues.RenderCacheKindValue;
 import flighthq.types._internal._RichTextValues.RichTextKind;
 import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 import flighthq.types._internal._ShapeValues.ShapeKind;
@@ -44,7 +56,7 @@ class WgpuRegistration {
     _Runtime.callValue(registerRenderer, cast ([state, SpriteKind, defaultWgpuSpriteRenderer] : Array<Dynamic>));
     _Runtime.callValue(registerRenderer, cast ([state, TextLabelKind, defaultWgpuTextLabelRenderer] : Array<Dynamic>));
     _Runtime.callValue(registerRenderer, cast ([state, TilemapKind, defaultWgpuTilemapRenderer] : Array<Dynamic>));
-    _Runtime.callValue(registerRenderer, cast ([state, RenderCacheKind, defaultWgpuRenderCacheRenderer] : Array<Dynamic>));
+    _Runtime.callValue(registerRenderer, cast ([state, RenderCacheKindValue, defaultWgpuRenderCacheRenderer] : Array<Dynamic>));
     _Runtime.callValue(registerRenderer, cast ([state, VideoKind, defaultWgpuVideoRenderer] : Array<Dynamic>));
   }
 

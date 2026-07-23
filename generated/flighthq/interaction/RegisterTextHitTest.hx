@@ -10,6 +10,8 @@ import flighthq.node.Transform2d.getNodeWorldMatrix;
 import flighthq.text.TextLabelLayout.getTextLayout;
 import flighthq.textlayout.RichTextQuery.computeRichTextCharIndexAtPoint;
 import flighthq.types.Node.NodeAny;
+import flighthq.types.Types.RichTextKind;
+import flighthq.types.Types.TextLabelKind;
 import flighthq.types._internal._RichTextValues.RichTextKind;
 import flighthq.types._internal._TextLabelValues.TextLabelKind;
 

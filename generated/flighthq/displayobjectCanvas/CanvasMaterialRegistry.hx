@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.displayobjectCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.types.CanvasMaterialRenderer;
 import flighthq.types.Entity.Kind;
+import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
 @:expose("flighthq.displayobjectCanvas.CanvasMaterialRegistry")

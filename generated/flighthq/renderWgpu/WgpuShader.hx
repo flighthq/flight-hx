@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.BlendMode;
+import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
 typedef StencilMode__wgpuShader = String;
 
@@ -18,7 +19,7 @@ class WgpuShader {
 
   public static final NORMAL_BLEND__wgpuShader:Dynamic = _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one-minus-src-alpha'] : Array<Dynamic>));
 
-  public static final BLEND_MODES__wgpuShader:Dynamic = _Runtime.objectFromPairs([{ key: BlendMode.Add, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one'] : Array<Dynamic>)) }, { key: BlendMode.Darken, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one', 'min'] : Array<Dynamic>)) }, { key: BlendMode.Lighten, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one', 'max'] : Array<Dynamic>)) }, { key: BlendMode.Multiply, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['dst', 'one-minus-src-alpha'] : Array<Dynamic>)) }, { key: BlendMode.Normal, value: WgpuShader.NORMAL_BLEND__wgpuShader }, { key: BlendMode.Screen, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one-minus-src'] : Array<Dynamic>)) }]);
+  public static final BLEND_MODES__wgpuShader:Dynamic = _Runtime.objectFromPairs([{ key: BlendModeValue.Add, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one'] : Array<Dynamic>)) }, { key: BlendModeValue.Darken, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one', 'min'] : Array<Dynamic>)) }, { key: BlendModeValue.Lighten, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one', 'max'] : Array<Dynamic>)) }, { key: BlendModeValue.Multiply, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['dst', 'one-minus-src-alpha'] : Array<Dynamic>)) }, { key: BlendModeValue.Normal, value: WgpuShader.NORMAL_BLEND__wgpuShader }, { key: BlendModeValue.Screen, value: _Runtime.callValue(WgpuShader.createWgpuBlendState__wgpuShader, cast (['one', 'one-minus-src'] : Array<Dynamic>)) }]);
 
   public static function createWgpuBindGroupLayouts(device:Dynamic):{ var uniformBindGroupLayout:Dynamic; var textureBindGroupLayout:Dynamic; } {
     var uniformBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;

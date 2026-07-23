@@ -15,6 +15,7 @@ import flighthq.types.Entity.Kind;
 import flighthq.types.NodeSignals;
 import flighthq.types.SceneNode.SceneNodeRuntime;
 import flighthq.types.SceneNode.SceneNodeTraits;
+import flighthq.types.Types.SceneNodeKind;
 import flighthq.types._internal._SceneNodeValues.SceneNodeKind;
 import flighthq.types._internal._SceneNodeValues.SceneNodeTraitsKey;
 

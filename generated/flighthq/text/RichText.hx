@@ -38,6 +38,7 @@ import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextLayout.TextMeasureFunction;
 import flighthq.types.TextLineMetrics;
 import flighthq.types.TextVerticalAlign;
+import flighthq.types.Types.RichTextKind;
 import flighthq.types._internal._RichTextValues.RichTextKind;
 
 @:expose("flighthq.text.RichText")

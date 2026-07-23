@@ -16,6 +16,7 @@ import flighthq.types.GlShaderLocations.GlBitmapShader;
 import flighthq.types.Sampler.SamplerLike;
 import flighthq.types.Sampler.TextureFilter;
 import flighthq.types.Sampler.TextureWrap;
+import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
 @:expose("flighthq.renderGl.GlDraw")
 class GlDraw {
@@ -343,5 +344,5 @@ class GlDraw {
 
   public static final NORMAL_BLEND__glDraw:GlBlendRealization = { src: 'ONE', dst: 'ONE_MINUS_SRC_ALPHA' };
 
-  public static final DEFAULT_GL_BLEND_MODES__glDraw:Array<Array<Dynamic>> = cast ([cast ([BlendMode.Add, { src: 'ONE', dst: 'ONE' }] : Array<Dynamic>), cast ([BlendMode.Darken, { src: 'ONE', dst: 'ONE', equation: 'MIN' }] : Array<Dynamic>), cast ([BlendMode.Lighten, { src: 'ONE', dst: 'ONE', equation: 'MAX' }] : Array<Dynamic>), cast ([BlendMode.Multiply, { src: 'DST_COLOR', dst: 'ONE_MINUS_SRC_ALPHA' }] : Array<Dynamic>), cast ([BlendMode.Normal, GlDraw.NORMAL_BLEND__glDraw] : Array<Dynamic>), cast ([BlendMode.Screen, { src: 'ONE', dst: 'ONE_MINUS_SRC_COLOR' }] : Array<Dynamic>)] : Array<Dynamic>);
+  public static final DEFAULT_GL_BLEND_MODES__glDraw:Array<Array<Dynamic>> = cast ([cast ([BlendModeValue.Add, { src: 'ONE', dst: 'ONE' }] : Array<Dynamic>), cast ([BlendModeValue.Darken, { src: 'ONE', dst: 'ONE', equation: 'MIN' }] : Array<Dynamic>), cast ([BlendModeValue.Lighten, { src: 'ONE', dst: 'ONE', equation: 'MAX' }] : Array<Dynamic>), cast ([BlendModeValue.Multiply, { src: 'DST_COLOR', dst: 'ONE_MINUS_SRC_ALPHA' }] : Array<Dynamic>), cast ([BlendModeValue.Normal, GlDraw.NORMAL_BLEND__glDraw] : Array<Dynamic>), cast ([BlendModeValue.Screen, { src: 'ONE', dst: 'ONE_MINUS_SRC_COLOR' }] : Array<Dynamic>)] : Array<Dynamic>);
 }

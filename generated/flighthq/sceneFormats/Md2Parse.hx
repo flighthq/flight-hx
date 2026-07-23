@@ -29,6 +29,7 @@ import flighthq.sceneFormats.Shared.createExternalTextureRef;
 import flighthq.types.AnimationChannel;
 import flighthq.types.MorphTarget;
 import flighthq.types.MorphTarget.MeshMorph;
+import flighthq.types.Types.SceneAnimationPathWeights;
 import flighthq.types._internal._SceneAnimationPathValues.SceneAnimationPathWeights;
 
 typedef Md2Frame__md2Parse = { var normals:flighthq._internal._Float32Array; var positions:flighthq._internal._Float32Array; };

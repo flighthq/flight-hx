@@ -5,7 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.DissolveModifier;
 import flighthq.types.ModifierSlot;
+import flighthq.types.Types.DissolveModifierKind;
 import flighthq.types._internal._DissolveModifierValues.DissolveModifierKind;
+import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
 typedef DissolveModifierOptions = { var threshold:Float; @:optional var edgeColor:Float; @:optional var edgeWidth:Float; @:optional var map:Dynamic; @:optional var scale:Float; };
 
@@ -13,7 +15,7 @@ typedef DissolveModifierOptions = { var threshold:Float; @:optional var edgeColo
 class CreateDissolveModifier {
   public static function createDissolveModifier(options:DissolveModifierOptions):DissolveModifier {
     var modifier:DissolveModifier = cast _Runtime.UNDEFINED;
-    modifier = { kind: DissolveModifierKind, slot: ModifierSlot.Effect, threshold: _Runtime.field(options, 'threshold'), edgeColor: _Runtime.coalesce(_Runtime.field(options, 'edgeColor'), function():Dynamic return cast 4284875007.0), edgeWidth: _Runtime.coalesce(_Runtime.field(options, 'edgeWidth'), function():Dynamic return cast 0.05), scale: _Runtime.coalesce(_Runtime.field(options, 'scale'), function():Dynamic return cast 8.0) };
+    modifier = { kind: DissolveModifierKind, slot: ModifierSlotValue.Effect, threshold: _Runtime.field(options, 'threshold'), edgeColor: _Runtime.coalesce(_Runtime.field(options, 'edgeColor'), function():Dynamic return cast 4284875007.0), edgeWidth: _Runtime.coalesce(_Runtime.field(options, 'edgeWidth'), function():Dynamic return cast 0.05), scale: _Runtime.coalesce(_Runtime.field(options, 'scale'), function():Dynamic return cast 8.0) };
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'map'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(modifier, 'map', _Runtime.field(options, 'map')); }
     return cast modifier;
     return cast null;

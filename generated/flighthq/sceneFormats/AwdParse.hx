@@ -70,9 +70,14 @@ import flighthq.types.ResourceResolutionState;
 import flighthq.types.SceneResourceRef.SceneResourceRefKind;
 import flighthq.types.Skeleton3D;
 import flighthq.types.Skin;
+import flighthq.types.Types.MeshKind;
+import flighthq.types.Types.SceneAnimationPathRotation;
+import flighthq.types.Types.SceneAnimationPathTranslation;
 import flighthq.types._internal._MeshValues.MeshKind;
+import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
 import flighthq.types._internal._SceneAnimationPathValues.SceneAnimationPathRotation;
 import flighthq.types._internal._SceneAnimationPathValues.SceneAnimationPathTranslation;
+import flighthq.types._internal._SceneResourceRefValues.SceneResourceRefKindValue;
 
 typedef ParsedGeometry__awdParse = { var geometry:Dynamic; var skinned:Bool; };
 
@@ -1000,10 +1005,10 @@ class AwdParse {
       return cast null;
     }
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(parsed, 'bytes'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(parsed, 'mimeType'), null)))) {
-      return cast _Runtime.callValue(createTexture, cast ([{ resource: { kind: SceneResourceRefKind.Embedded, bytes: _Runtime.field(parsed, 'bytes'), mimeType: _Runtime.field(parsed, 'mimeType'), state: ResourceResolutionState.Unresolved } }] : Array<Dynamic>));
+      return cast _Runtime.callValue(createTexture, cast ([{ resource: { kind: SceneResourceRefKindValue.Embedded, bytes: _Runtime.field(parsed, 'bytes'), mimeType: _Runtime.field(parsed, 'mimeType'), state: ResourceResolutionStateValue.Unresolved } }] : Array<Dynamic>));
     }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(parsed, 'url'), null))) {
-      return cast _Runtime.callValue(createTexture, cast ([{ resource: { kind: SceneResourceRefKind.External, uri: _Runtime.field(parsed, 'url'), basePath: null, mimeType: null, state: ResourceResolutionState.Unresolved } }] : Array<Dynamic>));
+      return cast _Runtime.callValue(createTexture, cast ([{ resource: { kind: SceneResourceRefKindValue.External, uri: _Runtime.field(parsed, 'url'), basePath: null, mimeType: null, state: ResourceResolutionStateValue.Unresolved } }] : Array<Dynamic>));
     }
     return cast null;
     return cast null;

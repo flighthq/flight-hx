@@ -11,6 +11,7 @@ import flighthq.types.MethodsOf;
 import flighthq.types.PartialNode;
 import flighthq.types.RenderView.RenderViewData;
 import flighthq.types.RenderView.RenderViewRuntime;
+import flighthq.types.Types.RenderViewKind;
 import flighthq.types._internal._RenderViewValues.RenderViewKind;
 
 @:expose("flighthq.displayobject.RenderView")

@@ -30,6 +30,7 @@ import flighthq.types.Modifier;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.ShadedMaterial;
+import flighthq.types.Types.ShadedMaterialKind;
 import flighthq.types._internal._ShadedMaterialValues.ShadedMaterialKind;
 
 @:expose("flighthq.sceneGl.ShadedGlMeshMaterialRenderer")

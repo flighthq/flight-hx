@@ -14,6 +14,7 @@ import flighthq.types.DepthMaterial;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Types.DepthMaterialKind;
 import flighthq.types._internal._DepthMaterialValues.DepthMaterialKind;
 
 @:expose("flighthq.sceneGl.DepthGlMeshMaterialRenderer")

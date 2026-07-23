@@ -19,6 +19,7 @@ import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.LinearColor;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Types.EmissiveMaterialKind;
 import flighthq.types._internal._EmissiveMaterialValues.EmissiveMaterialKind;
 
 @:expose("flighthq.sceneGl.EmissiveGlMeshMaterialRenderer")

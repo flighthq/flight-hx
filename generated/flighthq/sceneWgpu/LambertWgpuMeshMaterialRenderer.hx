@@ -17,6 +17,7 @@ import flighthq.types.LambertMaterial;
 import flighthq.types.LinearColor;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Types.LambertMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types._internal._LambertMaterialValues.LambertMaterialKind;
 

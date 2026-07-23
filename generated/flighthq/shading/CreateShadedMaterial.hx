@@ -7,6 +7,8 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.types.BlendMode;
 import flighthq.types.Modifier;
 import flighthq.types.ShadedMaterial;
+import flighthq.types.Types.ShadedMaterialKind;
+import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._ShadedMaterialValues.ShadedMaterialKind;
 
 typedef ShadedMaterialOptions = { @:optional var diffuse:Float; @:optional var diffuseMap:Dynamic; @:optional var modifiers:Array<Modifier>; @:optional var normalMap:Dynamic; @:optional var normalScale:Float; @:optional var shininess:Float; @:optional var specular:Float; @:optional var specularMap:Dynamic; };
@@ -19,7 +21,7 @@ class CreateShadedMaterial {
     _Runtime.setField(material, 'alphaCutoff', 0.5);
     _Runtime.setField(material, 'alphaMode', 'opaque');
     _Runtime.setField(material, 'alphaType', 'straight');
-    _Runtime.setField(material, 'blendMode', BlendMode.Normal);
+    _Runtime.setField(material, 'blendMode', BlendModeValue.Normal);
     _Runtime.setField(material, 'diffuse', _Runtime.coalesce(_Runtime.optionalField(options, 'diffuse'), function():Dynamic return cast 4294967295.0));
     _Runtime.setField(material, 'diffuseMap', _Runtime.coalesce(_Runtime.optionalField(options, 'diffuseMap'), function():Dynamic return cast null));
     _Runtime.setField(material, 'doubleSided', false);

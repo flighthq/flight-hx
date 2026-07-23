@@ -4,9 +4,11 @@ package flighthq.shading;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ModifierSlot;
+import flighthq.types.Types.VertexDisplaceModifierKind;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types.VertexDisplaceModifier;
 import flighthq.types.VertexDisplaceModifier.VertexDisplaceModifierSource;
+import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 import flighthq.types._internal._VertexDisplaceModifierValues.VertexDisplaceModifierKind;
 
 typedef VertexDisplaceModifierOptions = { var source:VertexDisplaceModifierSource; var amplitude:Float; @:optional var axis:Vector3Like; @:optional var map:Dynamic; @:optional var frequency:Float; @:optional var speed:Float; @:optional var direction:Vector3Like; };
@@ -15,7 +17,7 @@ typedef VertexDisplaceModifierOptions = { var source:VertexDisplaceModifierSourc
 class CreateVertexDisplaceModifier {
   public static function createVertexDisplaceModifier(options:VertexDisplaceModifierOptions):VertexDisplaceModifier {
     var modifier:VertexDisplaceModifier = cast _Runtime.UNDEFINED;
-    modifier = { kind: VertexDisplaceModifierKind, slot: ModifierSlot.Vertex, source: _Runtime.field(options, 'source'), amplitude: _Runtime.field(options, 'amplitude'), frequency: _Runtime.coalesce(_Runtime.field(options, 'frequency'), function():Dynamic return cast 1.0), speed: _Runtime.coalesce(_Runtime.field(options, 'speed'), function():Dynamic return cast 1.0), direction: _Runtime.coalesce(_Runtime.field(options, 'direction'), function():Dynamic return cast CreateVertexDisplaceModifier.DEFAULT_DIRECTION__createVertexDisplaceModifier) };
+    modifier = { kind: VertexDisplaceModifierKind, slot: ModifierSlotValue.Vertex, source: _Runtime.field(options, 'source'), amplitude: _Runtime.field(options, 'amplitude'), frequency: _Runtime.coalesce(_Runtime.field(options, 'frequency'), function():Dynamic return cast 1.0), speed: _Runtime.coalesce(_Runtime.field(options, 'speed'), function():Dynamic return cast 1.0), direction: _Runtime.coalesce(_Runtime.field(options, 'direction'), function():Dynamic return cast CreateVertexDisplaceModifier.DEFAULT_DIRECTION__createVertexDisplaceModifier) };
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'axis'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(modifier, 'axis', _Runtime.field(options, 'axis')); }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'map'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(modifier, 'map', _Runtime.field(options, 'map')); }
     return cast modifier;

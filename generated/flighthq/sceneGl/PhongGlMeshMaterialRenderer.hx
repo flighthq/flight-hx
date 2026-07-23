@@ -23,6 +23,7 @@ import flighthq.types.LinearColor;
 import flighthq.types.PhongMaterial;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Types.PhongMaterialKind;
 import flighthq.types._internal._PhongMaterialValues.PhongMaterialKind;
 
 @:expose("flighthq.sceneGl.PhongGlMeshMaterialRenderer")

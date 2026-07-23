@@ -14,6 +14,7 @@ import flighthq.types.HasColorTransform;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.WgpuRenderState.WgpuImageResourceTextureEntry;
 import flighthq.types.WgpuRenderState.WgpuTextureEntry;
+import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
 @:expose("flighthq.renderWgpu.WgpuDraw")
 class WgpuDraw {
@@ -191,8 +192,8 @@ class WgpuDraw {
   }
 
   public static function warmWgpuPipelines(state:Dynamic):Void {
-    _Runtime.callValue(getWgpuPipeline, cast ([state, BlendMode.Normal, 'normal'] : Array<Dynamic>));
-    _Runtime.callValue(getWgpuPipeline, cast ([state, BlendMode.Add, 'normal'] : Array<Dynamic>));
+    _Runtime.callValue(getWgpuPipeline, cast ([state, BlendModeValue.Normal, 'normal'] : Array<Dynamic>));
+    _Runtime.callValue(getWgpuPipeline, cast ([state, BlendModeValue.Add, 'normal'] : Array<Dynamic>));
   }
 
   public static function premultiplyStraightRgba8__wgpuDraw(data:Dynamic):Dynamic {

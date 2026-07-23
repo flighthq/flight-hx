@@ -16,6 +16,7 @@ import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Types.CustomShaderMaterialKind;
 import flighthq.types._internal._CustomShaderMaterialValues.CustomShaderMaterialKind;
 
 typedef GlCustomShaderProgram__customShaderGlMeshMaterialRenderer = Dynamic;

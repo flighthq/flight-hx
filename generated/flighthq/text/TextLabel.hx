@@ -20,6 +20,7 @@ import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.TextLayout.TextLayoutParams;
 import flighthq.types.TextLayout.TextMeasureFunction;
 import flighthq.types.TextVerticalAlign;
+import flighthq.types.Types.TextLabelKind;
 import flighthq.types._internal._TextLabelValues.TextLabelKind;
 
 @:expose("flighthq.text.TextLabel")

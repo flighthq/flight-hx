@@ -8,6 +8,8 @@ import flighthq.materials.SurfaceMaterial.createSurfaceMaterial;
 import flighthq.types.SpecularGlossinessPbrMaterial;
 import flighthq.types.StandardPbrMaterial;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
+import flighthq.types.Types.SpecularGlossinessPbrMaterialKind;
+import flighthq.types.Types.StandardPbrMaterialKind;
 import flighthq.types._internal._SpecularGlossinessPbrMaterialValues.SpecularGlossinessPbrMaterialKind;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 

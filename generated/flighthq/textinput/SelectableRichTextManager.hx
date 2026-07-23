@@ -9,6 +9,7 @@ import flighthq.textlayout.RichTextQuery.computeRichTextCharIndexAtPoint;
 import flighthq.types.InputKeyboardData;
 import flighthq.types.KeyCode;
 import flighthq.types.RichText.RichTextRuntime;
+import flighthq.types._internal._KeyCodeValues.KeyCodeValue;
 
 @:expose("flighthq.textinput.SelectableRichTextManager")
 class SelectableRichTextManager {
@@ -30,13 +31,13 @@ class SelectableRichTextManager {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.field(manager, 'focused');
     if (_Runtime.truthy(_Runtime.strictEquals(target, null))) { return cast false; }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.orValue(_Runtime.field(data, 'ctrlKey'), function():Dynamic return cast _Runtime.field(data, 'metaKey')), function():Dynamic return cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(data, 'key'), 'toLowerCase', cast ([] : Array<Dynamic>)), 'a'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.A))))) {
+    if (_Runtime.truthy(_Runtime.andValue(_Runtime.orValue(_Runtime.field(data, 'ctrlKey'), function():Dynamic return cast _Runtime.field(data, 'metaKey')), function():Dynamic return cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(data, 'key'), 'toLowerCase', cast ([] : Array<Dynamic>)), 'a'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.A))))) {
       var runtime:Dynamic = _Runtime.callValue(SelectableRichTextManager.getMutableRuntime__selectableRichTextManager, cast ([target] : Array<Dynamic>));
       _Runtime.setField(runtime, 'selectionBeginIndex', 0.0);
       _Runtime.setField(runtime, 'selectionEndIndex', _Runtime.field(_Runtime.field(_Runtime.field(target, 'data'), 'text'), 'length'));
       return cast true;
     }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.orValue(_Runtime.field(data, 'ctrlKey'), function():Dynamic return cast _Runtime.field(data, 'metaKey')), function():Dynamic return cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(data, 'key'), 'toLowerCase', cast ([] : Array<Dynamic>)), 'c'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.C))))) {
+    if (_Runtime.truthy(_Runtime.andValue(_Runtime.orValue(_Runtime.field(data, 'ctrlKey'), function():Dynamic return cast _Runtime.field(data, 'metaKey')), function():Dynamic return cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(data, 'key'), 'toLowerCase', cast ([] : Array<Dynamic>)), 'c'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.C))))) {
       var runtime:Dynamic = _Runtime.callValue(SelectableRichTextManager.getMutableRuntime__selectableRichTextManager, cast ([target] : Array<Dynamic>));
       var start:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(runtime, 'selectionBeginIndex'), _Runtime.field(runtime, 'selectionEndIndex')] : Array<Dynamic>));
       var end:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(runtime, 'selectionBeginIndex'), _Runtime.field(runtime, 'selectionEndIndex')] : Array<Dynamic>));

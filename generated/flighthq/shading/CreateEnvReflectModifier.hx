@@ -5,14 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EnvReflectModifier;
 import flighthq.types.ModifierSlot;
+import flighthq.types.Types.EnvReflectModifierKind;
 import flighthq.types._internal._EnvReflectModifierValues.EnvReflectModifierKind;
+import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
 typedef EnvReflectModifierOptions = { @:optional var tint:Float; @:optional var intensity:Float; @:optional var fresnelBias:Float; @:optional var roughness:Float; };
 
 @:expose("flighthq.shading.CreateEnvReflectModifier")
 class CreateEnvReflectModifier {
   public static function createEnvReflectModifier(?options:EnvReflectModifierOptions):EnvReflectModifier {
-    return cast { kind: EnvReflectModifierKind, slot: ModifierSlot.Effect, tint: _Runtime.coalesce(_Runtime.optionalField(options, 'tint'), function():Dynamic return cast 4294967295.0), intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), fresnelBias: _Runtime.coalesce(_Runtime.optionalField(options, 'fresnelBias'), function():Dynamic return cast 0.04), roughness: _Runtime.coalesce(_Runtime.optionalField(options, 'roughness'), function():Dynamic return cast 0.0) };
+    return cast { kind: EnvReflectModifierKind, slot: ModifierSlotValue.Effect, tint: _Runtime.coalesce(_Runtime.optionalField(options, 'tint'), function():Dynamic return cast 4294967295.0), intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), fresnelBias: _Runtime.coalesce(_Runtime.optionalField(options, 'fresnelBias'), function():Dynamic return cast 0.04), roughness: _Runtime.coalesce(_Runtime.optionalField(options, 'roughness'), function():Dynamic return cast 0.0) };
     return cast null;
   }
 }

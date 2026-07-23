@@ -14,6 +14,7 @@ import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.NormalMaterial;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Types.NormalMaterialKind;
 import flighthq.types._internal._NormalMaterialValues.NormalMaterialKind;
 
 @:expose("flighthq.sceneGl.NormalGlMeshMaterialRenderer")

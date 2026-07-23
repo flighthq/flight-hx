@@ -8,6 +8,7 @@ import flighthq.displayobject.DisplayObject.createDisplayObjectRuntime;
 import flighthq.displayobject.DisplayObject.getDisplayObjectRuntime;
 import flighthq.types.DisplayContainer.DisplayContainerRuntime;
 import flighthq.types.PartialNode;
+import flighthq.types.Types.DisplayObjectKind;
 import flighthq.types._internal._DisplayObjectValues.DisplayObjectKind;
 
 @:expose("flighthq.displayobject.DisplayContainer")

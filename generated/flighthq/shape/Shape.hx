@@ -30,6 +30,7 @@ import flighthq.types.ShapeCommand.ShapeHitTestCommand;
 import flighthq.types.ShapeCommand.SpreadMethod;
 import flighthq.types.ShapeFillRegion;
 import flighthq.types.TriangleCulling;
+import flighthq.types.Types.ShapeKind;
 import flighthq.types._internal._ShapeValues.ShapeKind;
 
 @:expose("flighthq.shape.Shape")

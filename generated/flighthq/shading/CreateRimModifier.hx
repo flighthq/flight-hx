@@ -5,6 +5,8 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ModifierSlot;
 import flighthq.types.RimModifier;
+import flighthq.types.Types.RimModifierKind;
+import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 import flighthq.types._internal._RimModifierValues.RimModifierKind;
 
 typedef RimModifierOptions = { var color:Float; @:optional var power:Float; @:optional var intensity:Float; @:optional var bias:Float; };
@@ -12,7 +14,7 @@ typedef RimModifierOptions = { var color:Float; @:optional var power:Float; @:op
 @:expose("flighthq.shading.CreateRimModifier")
 class CreateRimModifier {
   public static function createRimModifier(options:RimModifierOptions):RimModifier {
-    return cast { kind: RimModifierKind, slot: ModifierSlot.Effect, color: _Runtime.field(options, 'color'), power: _Runtime.coalesce(_Runtime.field(options, 'power'), function():Dynamic return cast 3.0), intensity: _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0), bias: _Runtime.coalesce(_Runtime.field(options, 'bias'), function():Dynamic return cast 0.0) };
+    return cast { kind: RimModifierKind, slot: ModifierSlotValue.Effect, color: _Runtime.field(options, 'color'), power: _Runtime.coalesce(_Runtime.field(options, 'power'), function():Dynamic return cast 3.0), intensity: _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0), bias: _Runtime.coalesce(_Runtime.field(options, 'bias'), function():Dynamic return cast 0.0) };
     return cast null;
   }
 }

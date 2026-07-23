@@ -11,6 +11,7 @@ import flighthq.types.HtmlView.HtmlViewData;
 import flighthq.types.HtmlView.HtmlViewRuntime;
 import flighthq.types.MethodsOf;
 import flighthq.types.PartialNode;
+import flighthq.types.Types.HtmlViewKind;
 import flighthq.types._internal._HtmlViewValues.HtmlViewKind;
 
 @:expose("flighthq.displayobject.HtmlView")

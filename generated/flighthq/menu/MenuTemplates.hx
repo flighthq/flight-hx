@@ -4,6 +4,7 @@ package flighthq.menu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Menu.MenuItemTemplate;
+import flighthq.types.Types.WellKnownMenuItemRole;
 import flighthq.types.WellKnownMenuItemRole.WellKnownMenuItemRole;
 
 @:expose("flighthq.menu.MenuTemplates")

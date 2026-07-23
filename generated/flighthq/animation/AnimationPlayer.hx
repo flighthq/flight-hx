@@ -6,6 +6,8 @@ import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.AnimationLoopMode;
+import flighthq.types.Types.AnimationLoopModePingPong;
+import flighthq.types.Types.AnimationLoopModeRepeat;
 import flighthq.types._internal._AnimationLoopModeValues.AnimationLoopModePingPong;
 import flighthq.types._internal._AnimationLoopModeValues.AnimationLoopModeRepeat;
 

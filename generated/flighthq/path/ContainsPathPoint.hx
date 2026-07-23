@@ -4,6 +4,7 @@ package flighthq.path;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Path.PathCommand;
+import flighthq.types._internal._PathValues.PathCommandValue;
 
 @:expose("flighthq.path.ContainsPathPoint")
 class ContainsPathPoint {
@@ -68,7 +69,7 @@ class ContainsPathPoint {
       var ci:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(ci, _Runtime.field(commands, 'length'), '<'))) {
         var command:Dynamic = _Runtime.getIndex(commands, ci);
-        if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.MOVE_TO))) {
+        if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.MOVE_TO))) {
           _Runtime.callValue(flushContour, cast ([] : Array<Dynamic>));
           (x = cast (_Runtime.getIndex(data, di) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
@@ -78,7 +79,7 @@ class ContainsPathPoint {
           (lastX = cast (x : Dynamic));
           (lastY = cast (y : Dynamic));
           (hasContour = cast (true : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.WIDE_MOVE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO))) {
           _Runtime.callValue(flushContour, cast ([] : Array<Dynamic>));
           (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
@@ -88,7 +89,7 @@ class ContainsPathPoint {
           (lastX = cast (x : Dynamic));
           (lastY = cast (y : Dynamic));
           (hasContour = cast (true : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.LINE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.LINE_TO))) {
           var nx:Dynamic = _Runtime.getIndex(data, di);
           var ny:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           (di = cast ((di + 2.0) : Dynamic));
@@ -99,7 +100,7 @@ class ContainsPathPoint {
           (lastY = cast (ny : Dynamic));
           (x = cast (nx : Dynamic));
           (y = cast (ny : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.WIDE_LINE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO))) {
           var nx:Dynamic = _Runtime.getIndex(data, (di + 2.0));
           var ny:Dynamic = _Runtime.getIndex(data, (di + 3.0));
           (di = cast ((di + 4.0) : Dynamic));
@@ -110,7 +111,7 @@ class ContainsPathPoint {
           (lastY = cast (ny : Dynamic));
           (x = cast (nx : Dynamic));
           (y = cast (ny : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.CURVE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CURVE_TO))) {
           var cx:Dynamic = _Runtime.getIndex(data, di);
           var cy:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           var ax:Dynamic = _Runtime.getIndex(data, (di + 2.0));
@@ -123,7 +124,7 @@ class ContainsPathPoint {
           (lastY = cast (ay : Dynamic));
           (x = cast (ax : Dynamic));
           (y = cast (ay : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.CUBIC_CURVE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO))) {
           var c1x:Dynamic = _Runtime.getIndex(data, di);
           var c1y:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           var c2x:Dynamic = _Runtime.getIndex(data, (di + 2.0));
@@ -138,7 +139,7 @@ class ContainsPathPoint {
           (lastY = cast (ay : Dynamic));
           (x = cast (ax : Dynamic));
           (y = cast (ay : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.CLOSE))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CLOSE))) {
           if (_Runtime.truthy(hasContour)) {
             (windingNumber = cast ((windingNumber + _Runtime.callValue(ContainsPathPoint.countSegmentCrossings__containsPathPoint, cast ([px, py, lastX, lastY, contourStartX, contourStartY] : Array<Dynamic>))) : Dynamic));
             (lastX = cast (contourStartX : Dynamic));

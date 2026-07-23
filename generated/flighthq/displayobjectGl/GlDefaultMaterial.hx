@@ -9,6 +9,7 @@ import flighthq.displayobjectGl.GlSpriteBatch.setGlQuadBatchWorldAndTexture;
 import flighthq.displayobjectGl.GlSpriteBatch.useGlQuadBatchProgram;
 import flighthq.renderGl.GlMaterialRegistry.registerGlMaterialRenderer;
 import flighthq.types.GlMaterialRenderer;
+import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
 @:expose("flighthq.displayobjectGl.GlDefaultMaterial")

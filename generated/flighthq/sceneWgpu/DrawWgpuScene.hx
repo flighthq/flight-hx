@@ -11,6 +11,7 @@ import flighthq.render.SceneRender.prepareSceneRender;
 import flighthq.sceneWgpu.WgpuMeshMaterialRegistry.resolveWgpuMeshMaterialRenderer;
 import flighthq.sceneWgpu.WgpuParticleEmitter3D.drawWgpuSceneParticleEmitters;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
 @:expose("flighthq.sceneWgpu.DrawWgpuScene")

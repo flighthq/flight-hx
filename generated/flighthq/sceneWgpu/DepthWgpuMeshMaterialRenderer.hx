@@ -13,6 +13,7 @@ import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUnifor
 import flighthq.types.DepthMaterial;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Types.DepthMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types._internal._DepthMaterialValues.DepthMaterialKind;
 

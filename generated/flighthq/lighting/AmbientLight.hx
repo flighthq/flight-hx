@@ -4,6 +4,7 @@ package flighthq.lighting;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Types.AmbientLightKind;
 import flighthq.types._internal._AmbientLightValues.AmbientLightKind;
 
 typedef AmbientLightOptions = { @:optional var color:Float; @:optional var intensity:Float; };

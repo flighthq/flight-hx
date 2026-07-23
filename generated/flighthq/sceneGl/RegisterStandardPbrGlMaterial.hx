@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneGl.GlMeshMaterialRegistry.registerGlMeshMaterialRenderer;
 import flighthq.sceneGl.StandardPbrGlMeshMaterialRenderer.standardPbrGlMeshMaterialRenderer;
+import flighthq.types.Types.StandardPbrMaterialKind;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
 @:expose("flighthq.sceneGl.RegisterStandardPbrGlMaterial")

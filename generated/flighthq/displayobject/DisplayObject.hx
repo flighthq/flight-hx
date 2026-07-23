@@ -29,6 +29,7 @@ import flighthq.types.MethodsOf;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.Node.NodeRuntimeFactory;
 import flighthq.types.PartialNode;
+import flighthq.types.Types.DisplayObjectKind;
 import flighthq.types._internal._DisplayObjectValues.DisplayObjectKind;
 import flighthq.types._internal._DisplayObjectValues.DisplayObjectTraitsKey;
 

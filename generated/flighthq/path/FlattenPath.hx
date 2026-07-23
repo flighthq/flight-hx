@@ -4,6 +4,7 @@ package flighthq.path;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Path.PathCommand;
+import flighthq.types._internal._PathValues.PathCommandValue;
 
 @:expose("flighthq.path.FlattenPath")
 class FlattenPath {
@@ -32,7 +33,7 @@ class FlattenPath {
       var ci:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(ci, _Runtime.field(commands, 'length'), '<'))) {
         var command:Dynamic = _Runtime.getIndex(commands, ci);
-        if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.MOVE_TO))) {
+        if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.MOVE_TO))) {
           (x = cast (_Runtime.getIndex(data, di) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
@@ -40,7 +41,7 @@ class FlattenPath {
           (contourStartY = cast (y : Dynamic));
           (contour = cast (cast ([x, y] : Array<Dynamic>) : Dynamic));
           _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.WIDE_MOVE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO))) {
           (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
@@ -48,31 +49,31 @@ class FlattenPath {
           (contourStartY = cast (y : Dynamic));
           (contour = cast (cast ([x, y] : Array<Dynamic>) : Dynamic));
           _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.LINE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.LINE_TO))) {
           (contour = cast (_Runtime.callValue(FlattenPath.ensureContour__flattenPath, cast ([contours, contour] : Array<Dynamic>)) : Dynamic));
           (x = cast (_Runtime.getIndex(data, di) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 1.0)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
           _Runtime.pushMany(contour, cast ([x, y] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.WIDE_LINE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO))) {
           (contour = cast (_Runtime.callValue(FlattenPath.ensureContour__flattenPath, cast ([contours, contour] : Array<Dynamic>)) : Dynamic));
           (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.pushMany(contour, cast ([x, y] : Array<Dynamic>));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.CURVE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CURVE_TO))) {
           (contour = cast (_Runtime.callValue(FlattenPath.ensureContour__flattenPath, cast ([contours, contour] : Array<Dynamic>)) : Dynamic));
           _Runtime.callValue(FlattenPath.flattenQuadratic__flattenPath, cast ([contour, x, y, _Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0)), _Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0)), toleranceSq, 0.0] : Array<Dynamic>));
           (x = cast (_Runtime.getIndex(data, (di + 2.0)) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.CUBIC_CURVE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO))) {
           (contour = cast (_Runtime.callValue(FlattenPath.ensureContour__flattenPath, cast ([contours, contour] : Array<Dynamic>)) : Dynamic));
           _Runtime.callValue(FlattenPath.flattenCubic__flattenPath, cast ([contour, x, y, _Runtime.getIndex(data, di), _Runtime.getIndex(data, (di + 1.0)), _Runtime.getIndex(data, (di + 2.0)), _Runtime.getIndex(data, (di + 3.0)), _Runtime.getIndex(data, (di + 4.0)), _Runtime.getIndex(data, (di + 5.0)), toleranceSq, 0.0] : Array<Dynamic>));
           (x = cast (_Runtime.getIndex(data, (di + 4.0)) : Dynamic));
           (y = cast (_Runtime.getIndex(data, (di + 5.0)) : Dynamic));
           (di = cast ((di + 6.0) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.CLOSE))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CLOSE))) {
           if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(contour, null), function():Dynamic return cast _Runtime.orValue(!_Runtime.strictEquals(x, contourStartX), function():Dynamic return cast !_Runtime.strictEquals(y, contourStartY))))) {
             _Runtime.pushMany(contour, cast ([contourStartX, contourStartY] : Array<Dynamic>));
           }

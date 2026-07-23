@@ -12,6 +12,7 @@ import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.ParticleEmitter.ParticleEmitterData;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
+import flighthq.types.Types.ParticleEmitter3DKind;
 import flighthq.types._internal._ParticleEmitter3DValues.ParticleEmitter3DKind;
 
 typedef WgpuParticle3DInstanceBuffer__wgpuParticleEmitter3D = { var buffer:Dynamic; var capacity:Float; };

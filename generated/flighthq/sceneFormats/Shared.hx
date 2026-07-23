@@ -10,6 +10,8 @@ import flighthq.texture.Texture.createTexture;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
 import flighthq.types.ResourceResolutionState;
 import flighthq.types.SceneResourceRef.SceneResourceRefKind;
+import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
+import flighthq.types._internal._SceneResourceRefValues.SceneResourceRefKindValue;
 
 typedef SkinInfluence = { var jointIndex:Float; var weight:Float; };
 
@@ -56,13 +58,13 @@ class Shared {
   }
 
   public static function createEmbeddedTextureRef(bytes:Dynamic, mimeType:Null<String>):Dynamic {
-    return cast _Runtime.callValue(createTexture, cast ([{ resource: { bytes: bytes, kind: SceneResourceRefKind.Embedded, mimeType: mimeType, state: ResourceResolutionState.Unresolved } }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createTexture, cast ([{ resource: { bytes: bytes, kind: SceneResourceRefKindValue.Embedded, mimeType: mimeType, state: ResourceResolutionStateValue.Unresolved } }] : Array<Dynamic>));
     return cast null;
   }
 
   public static function createExternalTextureRef(uri:String, ?basePath:Null<String>):Dynamic {
     if (basePath == null) basePath = cast (null : Dynamic);
-    return cast _Runtime.callValue(createTexture, cast ([{ resource: { basePath: basePath, kind: SceneResourceRefKind.External, mimeType: null, state: ResourceResolutionState.Unresolved, uri: uri } }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createTexture, cast ([{ resource: { basePath: basePath, kind: SceneResourceRefKindValue.External, mimeType: null, state: ResourceResolutionStateValue.Unresolved, uri: uri } }] : Array<Dynamic>));
     return cast null;
   }
 

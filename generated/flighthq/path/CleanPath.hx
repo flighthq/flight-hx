@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
 import flighthq.types.Path.PathCommand;
+import flighthq.types._internal._PathValues.PathCommandValue;
 
 @:expose("flighthq.path.CleanPath")
 class CleanPath {
@@ -34,17 +35,17 @@ class CleanPath {
       if (_Runtime.truthy(closed)) { _Runtime.callValue(CleanPath.collapseClosedSeam__cleanPath, cast ([kept, toleranceSq] : Array<Dynamic>)); }
       var keptCount:Dynamic = (Std.int(_Runtime.field(kept, 'length')) >> Std.int(1.0));
       if (_Runtime.truthy(_Runtime.select(closed, function():Dynamic return cast _Runtime.compare(keptCount, 3.0, '<'), function():Dynamic return cast _Runtime.compare(keptCount, 2.0, '<')))) { continue; }
-      _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommand.MOVE_TO] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
       _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(kept, 0.0), _Runtime.getIndex(kept, 1.0)] : Array<Dynamic>));
       {
         var i:Dynamic = 1.0;
         while (_Runtime.truthy(_Runtime.compare(i, keptCount, '<'))) {
-          _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommand.LINE_TO] : Array<Dynamic>));
+          _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
           _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(kept, (i * 2.0)), _Runtime.getIndex(kept, ((i * 2.0) + 1.0))] : Array<Dynamic>));
           i++;
         }
       }
-      if (_Runtime.truthy(closed)) { _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommand.CLOSE] : Array<Dynamic>)); }
+      if (_Runtime.truthy(closed)) { _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CLOSE] : Array<Dynamic>)); }
     }
   }
 

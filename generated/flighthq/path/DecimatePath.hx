@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
 import flighthq.types.Path.PathCommand;
+import flighthq.types._internal._PathValues.PathCommandValue;
 
 @:expose("flighthq.path.DecimatePath")
 class DecimatePath {
@@ -29,17 +30,17 @@ class DecimatePath {
         while (_Runtime.truthy(_Runtime.compare(i, last, '<'))) {
           if (_Runtime.truthy(!_Runtime.truthy(_Runtime.getIndex(keep, i)))) { i++; continue; }
           if (_Runtime.truthy(first)) {
-            _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommand.MOVE_TO] : Array<Dynamic>));
+            _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
             (first = cast (false : Dynamic));
           } else {
-            _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommand.LINE_TO] : Array<Dynamic>));
+            _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
           }
           _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([_Runtime.getIndex(contour, (i * 2.0)), _Runtime.getIndex(contour, ((i * 2.0) + 1.0))] : Array<Dynamic>));
           i++;
         }
       }
       if (_Runtime.truthy(closed)) {
-        _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommand.CLOSE] : Array<Dynamic>));
+        _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CLOSE] : Array<Dynamic>));
       }
     }
   }

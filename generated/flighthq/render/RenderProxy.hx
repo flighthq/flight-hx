@@ -19,6 +19,7 @@ import flighthq.types.BlendMode;
 import flighthq.types.HasTransform2D;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Renderable;
+import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
 typedef AdaptHook__renderProxy = Dynamic;
 
@@ -31,7 +32,7 @@ class RenderProxy {
     var renderer:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
     renderer = _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(runtime, 'rendererMap'), 'get', cast ([_Runtime.field(source, 'kind')] : Array<Dynamic>)), function():Dynamic return cast null);
-    return cast _Runtime.callValue(createEntity, cast ([{ source: source, kind: _Runtime.field(source, 'kind'), next: null, alpha: 1.0, appearanceFrameId: -1.0, blendMode: BlendMode.Normal, colorTransform: null, material: null, materialData: null, lastAppearanceId: -1.0, lastLocalContentId: -1.0, lastLocalTransformId: -1.0, name: null, renderer: renderer, rendererData: _Runtime.coalesce(_Runtime.callOptionalProperty(renderer, 'createData', cast ([state, source] : Array<Dynamic>)), function():Dynamic return cast null), rendererDataSource: source, rendererMapId: _Runtime.field(runtime, 'rendererMapId'), transformFrameId: -1.0, visible: true }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ source: source, kind: _Runtime.field(source, 'kind'), next: null, alpha: 1.0, appearanceFrameId: -1.0, blendMode: BlendModeValue.Normal, colorTransform: null, material: null, materialData: null, lastAppearanceId: -1.0, lastLocalContentId: -1.0, lastLocalTransformId: -1.0, name: null, renderer: renderer, rendererData: _Runtime.coalesce(_Runtime.callOptionalProperty(renderer, 'createData', cast ([state, source] : Array<Dynamic>)), function():Dynamic return cast null), rendererDataSource: source, rendererMapId: _Runtime.field(runtime, 'rendererMapId'), transformFrameId: -1.0, visible: true }] : Array<Dynamic>));
     return cast null;
   }
 

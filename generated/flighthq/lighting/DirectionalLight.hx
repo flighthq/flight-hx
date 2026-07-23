@@ -7,6 +7,7 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Vector3.cloneVector3;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.geometry.Vector3.setVector3;
+import flighthq.types.Types.DirectionalLightKind;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._DirectionalLightValues.DirectionalLightKind;
 

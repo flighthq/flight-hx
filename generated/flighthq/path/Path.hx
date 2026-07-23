@@ -32,6 +32,7 @@ import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.ShapeCommand.PathWinding;
 import flighthq.types.StrokeStyle;
 import flighthq.types.Vector2.Vector2Like;
+import flighthq.types._internal._PathValues.PathCommandValue;
 
 @:expose("flighthq.path.Path")
 class Path {
@@ -213,16 +214,16 @@ class Path {
   }
 
   public static function appendPathClose(path:Dynamic):Void {
-    _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([PathCommand.CLOSE] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([PathCommandValue.CLOSE] : Array<Dynamic>));
   }
 
   public static function appendPathCubicCurveTo(path:Dynamic, control1X:Float, control1Y:Float, control2X:Float, control2Y:Float, anchorX:Float, anchorY:Float):Void {
-    _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([PathCommand.CUBIC_CURVE_TO] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([PathCommandValue.CUBIC_CURVE_TO] : Array<Dynamic>));
     _Runtime.pushMany(_Runtime.field(path, 'data'), cast ([control1X, control1Y, control2X, control2Y, anchorX, anchorY] : Array<Dynamic>));
   }
 
   public static function appendPathCurveTo(path:Dynamic, controlX:Float, controlY:Float, anchorX:Float, anchorY:Float):Void {
-    _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([PathCommand.CURVE_TO] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([PathCommandValue.CURVE_TO] : Array<Dynamic>));
     _Runtime.pushMany(_Runtime.field(path, 'data'), cast ([controlX, controlY, anchorX, anchorY] : Array<Dynamic>));
   }
 
@@ -240,12 +241,12 @@ class Path {
   }
 
   public static function appendPathLineTo(path:Dynamic, x:Float, y:Float):Void {
-    _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([PathCommand.LINE_TO] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
     _Runtime.pushMany(_Runtime.field(path, 'data'), cast ([x, y] : Array<Dynamic>));
   }
 
   public static function appendPathMoveTo(path:Dynamic, x:Float, y:Float):Void {
-    _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([PathCommand.MOVE_TO] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
     _Runtime.pushMany(_Runtime.field(path, 'data'), cast ([x, y] : Array<Dynamic>));
   }
 

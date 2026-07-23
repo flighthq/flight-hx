@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
 import flighthq.types.Path.PathCommand;
+import flighthq.types._internal._PathValues.PathCommandValue;
 
 @:expose("flighthq.path.DashPath")
 class DashPath {
@@ -66,7 +67,7 @@ class DashPath {
         var dy:Dynamic = (y1 - y0);
         var segLen:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([((dx * dx) + (dy * dy))] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.andValue(isOn, function():Dynamic return cast !_Runtime.truthy(segStarted)))) {
-          _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommand.MOVE_TO] : Array<Dynamic>));
+          _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
           _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([x0, y0] : Array<Dynamic>));
           (segStarted = cast (true : Dynamic));
         }
@@ -79,11 +80,11 @@ class DashPath {
           if (_Runtime.truthy(isOn)) {
             if (_Runtime.truthy(!_Runtime.truthy(segStarted))) {
               var tStart:Dynamic = _Runtime.select(_Runtime.compare(segLen, 0.0, '>'), function():Dynamic return cast (consumed / segLen), function():Dynamic return cast 0.0);
-              _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommand.MOVE_TO] : Array<Dynamic>));
+              _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
               _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([(x0 + (tStart * dx)), (y0 + (tStart * dy))] : Array<Dynamic>));
               (segStarted = cast (true : Dynamic));
             }
-            _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommand.LINE_TO] : Array<Dynamic>));
+            _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.LINE_TO] : Array<Dynamic>));
             _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([ix, iy] : Array<Dynamic>));
           }
           (consumed = cast ((consumed + step) : Dynamic));
@@ -97,7 +98,7 @@ class DashPath {
               (segStarted = cast (false : Dynamic));
             }
             if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(wasOn), function():Dynamic return cast isOn))) {
-              _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommand.MOVE_TO] : Array<Dynamic>));
+              _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
               _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([ix, iy] : Array<Dynamic>));
               (segStarted = cast (true : Dynamic));
             }

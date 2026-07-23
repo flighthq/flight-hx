@@ -19,6 +19,7 @@ import flighthq.types.LinearColor;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.TransmissionVolumePbrMaterial;
+import flighthq.types.Types.TransmissionVolumePbrMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types._internal._TransmissionVolumePbrMaterialValues.TransmissionVolumePbrMaterialKind;
 

@@ -16,6 +16,7 @@ import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.LinearColor;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Types.VertexColorMaterialKind;
 import flighthq.types.VertexColorMaterial;
 import flighthq.types._internal._VertexColorMaterialValues.VertexColorMaterialKind;
 

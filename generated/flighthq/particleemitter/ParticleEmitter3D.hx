@@ -12,6 +12,7 @@ import flighthq.types.Aabb.AabbLike;
 import flighthq.types.PartialNode;
 import flighthq.types.ParticleEmitter.ParticleEmitterData;
 import flighthq.types.ParticleEmitter3D.ParticleEmitter3DRuntime;
+import flighthq.types.Types.ParticleEmitter3DKind;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._ParticleEmitter3DValues.ParticleEmitter3DKind;
 

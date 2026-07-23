@@ -18,6 +18,8 @@ import flighthq.shading._internal._ModifierRegistryValues.createModifierRegistry
 import flighthq.shading._internal._ModifierRegistryValues.resolveModifier;
 import flighthq.types.Modifier;
 import flighthq.types.ModifierSlot;
+import flighthq.types.Types.MAX_FORWARD_LIGHTS;
+import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 import flighthq.types._internal._SceneLightBlockValues.MAX_FORWARD_LIGHTS;
 
 typedef GlShadedDefineKey = { var alphaMaskEnabled:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; @:optional var hasSkin:Bool; var hasSpecularMap:Bool; var hasUvTransform:Bool; };
@@ -77,10 +79,10 @@ class GlShadedPrelude {
       while (_Runtime.truthy(_Runtime.compare(index, _Runtime.field(orderedModifiers, 'length'), '<'))) {
         var modifier:Dynamic = _Runtime.getIndex(orderedModifiers, index);
         var snippet:Dynamic = (cast _Runtime.callValue(resolveModifier, cast ([registry, _Runtime.field(modifier, 'kind')] : Array<Dynamic>)) : Null<GlModifierSnippet>);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(snippet, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlot.Vertex)))) { index++; continue; }
+        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(snippet, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Vertex)))) { index++; continue; }
         if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(snippet, 'declarations'), _Runtime.field(_Runtime, 'UNDEFINED')))) { (declarations = cast ((declarations + '' + Std.string(_Runtime.callProperty(snippet, 'declarations', cast ([modifier, index] : Array<Dynamic>))) + '\n') : Dynamic)); }
         var contribution:Dynamic = '' + Std.string(_Runtime.callProperty(snippet, 'contribution', cast ([modifier, index] : Array<Dynamic>))) + '\n';
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlot.Normal))) { (normal = cast ((normal + contribution) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlot.Diffuse))) { (diffuse = cast ((diffuse + contribution) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlot.Specular))) { (specular = cast ((specular + contribution) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlot.Emissive))) { (emissive = cast ((emissive + contribution) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlot.Effect))) { (effect = cast ((effect + contribution) : Dynamic)); } } } } }
+        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Normal))) { (normal = cast ((normal + contribution) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Diffuse))) { (diffuse = cast ((diffuse + contribution) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Specular))) { (specular = cast ((specular + contribution) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Emissive))) { (emissive = cast ((emissive + contribution) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Effect))) { (effect = cast ((effect + contribution) : Dynamic)); } } } } }
         index++;
       }
     }
@@ -98,7 +100,7 @@ class GlShadedPrelude {
       while (_Runtime.truthy(_Runtime.compare(index, _Runtime.field(orderedModifiers, 'length'), '<'))) {
         var modifier:Dynamic = _Runtime.getIndex(orderedModifiers, index);
         var snippet:Dynamic = (cast _Runtime.callValue(resolveModifier, cast ([registry, _Runtime.field(modifier, 'kind')] : Array<Dynamic>)) : Null<GlModifierSnippet>);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(snippet, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlot.Vertex)))) { index++; continue; }
+        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(snippet, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(snippet, 'slot'), ModifierSlotValue.Vertex)))) { index++; continue; }
         if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(snippet, 'declarations'), _Runtime.field(_Runtime, 'UNDEFINED')))) { (declarations = cast ((declarations + '' + Std.string(_Runtime.callProperty(snippet, 'declarations', cast ([modifier, index] : Array<Dynamic>))) + '\n') : Dynamic)); }
         (vertex = cast ((vertex + '' + Std.string(_Runtime.callProperty(snippet, 'contribution', cast ([modifier, index] : Array<Dynamic>))) + '\n') : Dynamic));
         index++;

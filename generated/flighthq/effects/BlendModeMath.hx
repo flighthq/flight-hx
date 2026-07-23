@@ -4,6 +4,7 @@ package flighthq.effects;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.AdvancedBlendMode;
+import flighthq.types._internal._AdvancedBlendModeValues.AdvancedBlendModeValue;
 
 @:expose("flighthq.effects.BlendModeMath")
 class BlendModeMath {
@@ -13,18 +14,18 @@ class BlendModeMath {
     var b:Float = cast _Runtime.UNDEFINED;
     {
       var __switchValue = mode;
-      if (__switchValue == AdvancedBlendMode.Hue) {
+      if (__switchValue == AdvancedBlendModeValue.Hue) {
         ({ var __destructure0:Dynamic = _Runtime.callValue(BlendModeMath.setBlendSaturation__blendModeMath, cast ([csR, csG, csB, _Runtime.callValue(BlendModeMath.blendSaturation__blendModeMath, cast ([cbR, cbG, cbB] : Array<Dynamic>))] : Array<Dynamic>)); r = cast _Runtime.getIndex(__destructure0, 0); g = cast _Runtime.getIndex(__destructure0, 1); b = cast _Runtime.getIndex(__destructure0, 2); __destructure0; });
         ({ var __destructure1:Dynamic = _Runtime.callValue(BlendModeMath.setBlendLuminosity__blendModeMath, cast ([r, g, b, _Runtime.callValue(BlendModeMath.blendLuminosity__blendModeMath, cast ([cbR, cbG, cbB] : Array<Dynamic>))] : Array<Dynamic>)); r = cast _Runtime.getIndex(__destructure1, 0); g = cast _Runtime.getIndex(__destructure1, 1); b = cast _Runtime.getIndex(__destructure1, 2); __destructure1; });
       }
-      else if (__switchValue == AdvancedBlendMode.Saturation) {
+      else if (__switchValue == AdvancedBlendModeValue.Saturation) {
         ({ var __destructure2:Dynamic = _Runtime.callValue(BlendModeMath.setBlendSaturation__blendModeMath, cast ([cbR, cbG, cbB, _Runtime.callValue(BlendModeMath.blendSaturation__blendModeMath, cast ([csR, csG, csB] : Array<Dynamic>))] : Array<Dynamic>)); r = cast _Runtime.getIndex(__destructure2, 0); g = cast _Runtime.getIndex(__destructure2, 1); b = cast _Runtime.getIndex(__destructure2, 2); __destructure2; });
         ({ var __destructure3:Dynamic = _Runtime.callValue(BlendModeMath.setBlendLuminosity__blendModeMath, cast ([r, g, b, _Runtime.callValue(BlendModeMath.blendLuminosity__blendModeMath, cast ([cbR, cbG, cbB] : Array<Dynamic>))] : Array<Dynamic>)); r = cast _Runtime.getIndex(__destructure3, 0); g = cast _Runtime.getIndex(__destructure3, 1); b = cast _Runtime.getIndex(__destructure3, 2); __destructure3; });
       }
-      else if (__switchValue == AdvancedBlendMode.Color) {
+      else if (__switchValue == AdvancedBlendModeValue.Color) {
         ({ var __destructure4:Dynamic = _Runtime.callValue(BlendModeMath.setBlendLuminosity__blendModeMath, cast ([csR, csG, csB, _Runtime.callValue(BlendModeMath.blendLuminosity__blendModeMath, cast ([cbR, cbG, cbB] : Array<Dynamic>))] : Array<Dynamic>)); r = cast _Runtime.getIndex(__destructure4, 0); g = cast _Runtime.getIndex(__destructure4, 1); b = cast _Runtime.getIndex(__destructure4, 2); __destructure4; });
       }
-      else if (__switchValue == AdvancedBlendMode.Luminosity) {
+      else if (__switchValue == AdvancedBlendModeValue.Luminosity) {
         ({ var __destructure5:Dynamic = _Runtime.callValue(BlendModeMath.setBlendLuminosity__blendModeMath, cast ([cbR, cbG, cbB, _Runtime.callValue(BlendModeMath.blendLuminosity__blendModeMath, cast ([csR, csG, csB] : Array<Dynamic>))] : Array<Dynamic>)); r = cast _Runtime.getIndex(__destructure5, 0); g = cast _Runtime.getIndex(__destructure5, 1); b = cast _Runtime.getIndex(__destructure5, 2); __destructure5; });
       }
       else  {
@@ -57,30 +58,30 @@ class BlendModeMath {
   public static function getSeparableBlendChannel(mode:AdvancedBlendMode, cb:Float, cs:Float):Float {
     {
       var __switchValue = mode;
-      if (__switchValue == AdvancedBlendMode.Overlay) {
+      if (__switchValue == AdvancedBlendModeValue.Overlay) {
         return cast _Runtime.select(_Runtime.compare(cb, 0.5, '<='), function():Dynamic return cast ((2.0 * cb) * cs), function():Dynamic return cast (1.0 - ((2.0 * (1.0 - cb)) * (1.0 - cs))));
       }
-      else if (__switchValue == AdvancedBlendMode.HardLight) {
+      else if (__switchValue == AdvancedBlendModeValue.HardLight) {
         return cast _Runtime.select(_Runtime.compare(cs, 0.5, '<='), function():Dynamic return cast ((2.0 * cb) * cs), function():Dynamic return cast (1.0 - ((2.0 * (1.0 - cb)) * (1.0 - cs))));
       }
-      else if (__switchValue == AdvancedBlendMode.SoftLight) {
+      else if (__switchValue == AdvancedBlendModeValue.SoftLight) {
         {
           var d:Dynamic = _Runtime.select(_Runtime.compare(cb, 0.25, '<='), function():Dynamic return cast (((((16.0 * cb) - 12.0) * cb) + 4.0) * cb), function():Dynamic return cast _Runtime.callProperty(HxMath, 'sqrt', cast ([cb] : Array<Dynamic>)));
           return cast _Runtime.select(_Runtime.compare(cs, 0.5, '<='), function():Dynamic return cast (cb - (((1.0 - (2.0 * cs)) * cb) * (1.0 - cb))), function():Dynamic return cast (cb + (((2.0 * cs) - 1.0) * (d - cb))));
         }
       }
-      else if (__switchValue == AdvancedBlendMode.Difference) {
+      else if (__switchValue == AdvancedBlendModeValue.Difference) {
         return cast _Runtime.callProperty(HxMath, 'abs', cast ([(cb - cs)] : Array<Dynamic>));
       }
-      else if (__switchValue == AdvancedBlendMode.Exclusion) {
+      else if (__switchValue == AdvancedBlendModeValue.Exclusion) {
         return cast ((cb + cs) - ((2.0 * cb) * cs));
       }
-      else if (__switchValue == AdvancedBlendMode.ColorDodge) {
+      else if (__switchValue == AdvancedBlendModeValue.ColorDodge) {
         if (_Runtime.truthy(_Runtime.compare(cb, 0.0, '<='))) { return cast 0.0; }
         if (_Runtime.truthy(_Runtime.compare(cs, 1.0, '>='))) { return cast 1.0; }
         return cast _Runtime.callProperty(HxMath, 'min', cast ([1.0, (cb / (1.0 - cs))] : Array<Dynamic>));
       }
-      else if (__switchValue == AdvancedBlendMode.ColorBurn) {
+      else if (__switchValue == AdvancedBlendModeValue.ColorBurn) {
         if (_Runtime.truthy(_Runtime.compare(cb, 1.0, '>='))) { return cast 1.0; }
         if (_Runtime.truthy(_Runtime.compare(cs, 0.0, '<='))) { return cast 0.0; }
         return cast (1.0 - _Runtime.callProperty(HxMath, 'min', cast ([1.0, ((1.0 - cb) / cs)] : Array<Dynamic>)));
@@ -93,7 +94,7 @@ class BlendModeMath {
   }
 
   public static function isNonSeparableBlendMode(mode:AdvancedBlendMode):Bool {
-    return cast _Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(mode, AdvancedBlendMode.Hue), function():Dynamic return cast _Runtime.strictEquals(mode, AdvancedBlendMode.Saturation)), function():Dynamic return cast _Runtime.strictEquals(mode, AdvancedBlendMode.Color)), function():Dynamic return cast _Runtime.strictEquals(mode, AdvancedBlendMode.Luminosity));
+    return cast _Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(mode, AdvancedBlendModeValue.Hue), function():Dynamic return cast _Runtime.strictEquals(mode, AdvancedBlendModeValue.Saturation)), function():Dynamic return cast _Runtime.strictEquals(mode, AdvancedBlendModeValue.Color)), function():Dynamic return cast _Runtime.strictEquals(mode, AdvancedBlendModeValue.Luminosity));
     return cast null;
   }
 

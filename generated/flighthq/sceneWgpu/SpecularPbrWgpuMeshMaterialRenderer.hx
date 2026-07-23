@@ -19,6 +19,7 @@ import flighthq.types.LinearColor;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.SpecularPbrMaterial;
+import flighthq.types.Types.SpecularPbrMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types._internal._SpecularPbrMaterialValues.SpecularPbrMaterialKind;
 

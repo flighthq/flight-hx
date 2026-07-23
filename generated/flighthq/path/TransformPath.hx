@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.path.CopyPath.copyPath;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Path.PathCommand;
+import flighthq.types._internal._PathValues.PathCommandValue;
 
 @:expose("flighthq.path.TransformPath")
 class TransformPath {
@@ -35,13 +36,13 @@ class TransformPath {
       var ci:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(ci, _Runtime.field(commands, 'length'), '<'))) {
         var command:Dynamic = _Runtime.getIndex(commands, ci);
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(command, PathCommand.MOVE_TO), function():Dynamic return cast _Runtime.strictEquals(command, PathCommand.LINE_TO)))) {
+        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(command, PathCommandValue.MOVE_TO), function():Dynamic return cast _Runtime.strictEquals(command, PathCommandValue.LINE_TO)))) {
           var x:Dynamic = _Runtime.getIndex(data, di);
           var y:Dynamic = _Runtime.getIndex(data, (di + 1.0));
           _Runtime.setIndex(data, di, (((a * x) + (c * y)) + tx));
           _Runtime.setIndex(data, (di + 1.0), (((b * x) + (d * y)) + ty));
           (di = cast ((di + 2.0) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.CURVE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CURVE_TO))) {
           {
             var k:Dynamic = 0.0;
             while (_Runtime.truthy(_Runtime.compare(k, 4.0, '<'))) {
@@ -53,7 +54,7 @@ class TransformPath {
             }
           }
           (di = cast ((di + 4.0) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommand.CUBIC_CURVE_TO))) {
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(command, PathCommandValue.CUBIC_CURVE_TO))) {
           {
             var k:Dynamic = 0.0;
             while (_Runtime.truthy(_Runtime.compare(k, 6.0, '<'))) {
@@ -65,7 +66,7 @@ class TransformPath {
             }
           }
           (di = cast ((di + 6.0) : Dynamic));
-        } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(command, PathCommand.WIDE_MOVE_TO), function():Dynamic return cast _Runtime.strictEquals(command, PathCommand.WIDE_LINE_TO)))) {
+        } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(command, PathCommandValue.WIDE_MOVE_TO), function():Dynamic return cast _Runtime.strictEquals(command, PathCommandValue.WIDE_LINE_TO)))) {
           var x:Dynamic = _Runtime.getIndex(data, (di + 2.0));
           var y:Dynamic = _Runtime.getIndex(data, (di + 3.0));
           _Runtime.setIndex(data, (di + 2.0), (((a * x) + (c * y)) + tx));

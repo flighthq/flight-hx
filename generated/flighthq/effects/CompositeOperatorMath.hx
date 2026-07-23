@@ -4,6 +4,7 @@ package flighthq.effects;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CompositeOperator;
+import flighthq.types._internal._CompositeOperatorValues.CompositeOperatorValue;
 
 @:expose("flighthq.effects.CompositeOperatorMath")
 class CompositeOperatorMath {
@@ -16,43 +17,43 @@ class CompositeOperatorMath {
     ab = backdropAlpha;
     {
       var __switchValue = operator_;
-      if (__switchValue == CompositeOperator.Clear) {
+      if (__switchValue == CompositeOperatorValue.Clear) {
         (fa = cast (0.0 : Dynamic));
         (fb = cast (0.0 : Dynamic));
       }
-      else if (__switchValue == CompositeOperator.Copy) {
+      else if (__switchValue == CompositeOperatorValue.Copy) {
         (fa = cast (1.0 : Dynamic));
         (fb = cast (0.0 : Dynamic));
       }
-      else if (__switchValue == CompositeOperator.DestinationAtop) {
+      else if (__switchValue == CompositeOperatorValue.DestinationAtop) {
         (fa = cast ((1.0 - ab) : Dynamic));
         (fb = cast (as : Dynamic));
       }
-      else if (__switchValue == CompositeOperator.DestinationIn) {
+      else if (__switchValue == CompositeOperatorValue.DestinationIn) {
         (fa = cast (0.0 : Dynamic));
         (fb = cast (as : Dynamic));
       }
-      else if (__switchValue == CompositeOperator.DestinationOut) {
+      else if (__switchValue == CompositeOperatorValue.DestinationOut) {
         (fa = cast (0.0 : Dynamic));
         (fb = cast ((1.0 - as) : Dynamic));
       }
-      else if (__switchValue == CompositeOperator.DestinationOver) {
+      else if (__switchValue == CompositeOperatorValue.DestinationOver) {
         (fa = cast ((1.0 - ab) : Dynamic));
         (fb = cast (1.0 : Dynamic));
       }
-      else if (__switchValue == CompositeOperator.SourceAtop) {
+      else if (__switchValue == CompositeOperatorValue.SourceAtop) {
         (fa = cast (ab : Dynamic));
         (fb = cast ((1.0 - as) : Dynamic));
       }
-      else if (__switchValue == CompositeOperator.SourceIn) {
+      else if (__switchValue == CompositeOperatorValue.SourceIn) {
         (fa = cast (ab : Dynamic));
         (fb = cast (0.0 : Dynamic));
       }
-      else if (__switchValue == CompositeOperator.SourceOut) {
+      else if (__switchValue == CompositeOperatorValue.SourceOut) {
         (fa = cast ((1.0 - ab) : Dynamic));
         (fb = cast (0.0 : Dynamic));
       }
-      else if (__switchValue == CompositeOperator.Xor) {
+      else if (__switchValue == CompositeOperatorValue.Xor) {
         (fa = cast ((1.0 - ab) : Dynamic));
         (fb = cast ((1.0 - as) : Dynamic));
       }

@@ -13,11 +13,12 @@ import flighthq.signals.Signal.createSignal;
 import flighthq.types.RenderCache.RenderCacheKind;
 import flighthq.types.RenderCacheAdapter;
 import flighthq.types.Renderable;
+import flighthq.types._internal._RenderCacheValues.RenderCacheKindValue;
 
 @:expose("flighthq.render.RenderCache")
 class RenderCache {
   public static function createRenderCache():Dynamic {
-    return cast _Runtime.callValue(createEntity, cast ([{ kind: RenderCacheKind, transform: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ kind: RenderCacheKindValue, transform: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -29,7 +30,7 @@ class RenderCache {
       _Runtime.callOptionalProperty(_Runtime.optionalField(_Runtime.field(adapter, 'signals'), 'onPrepare'), 'emit', cast ([] : Array<Dynamic>));
       attached = _Runtime.coalesce(_Runtime.field(adapter, 'cache'), function():Dynamic return cast null);
       if (_Runtime.truthy(_Runtime.strictEquals(attached, null))) { return cast null; }
-      _Runtime.setField(node, 'kind', RenderCacheKind);
+      _Runtime.setField(node, 'kind', RenderCacheKindValue);
       _Runtime.callValue(multiplyMatrix, cast ([_Runtime.field(node, 'transform2D'), _Runtime.field(node, 'transform2D'), _Runtime.field(attached, 'transform')] : Array<Dynamic>));
       return cast false;
     } };
@@ -49,7 +50,7 @@ class RenderCache {
   }
 
   public static function isRenderCache(source:Dynamic):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(source), 'object'), function():Dynamic return cast !_Runtime.strictEquals(source, null)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field((cast source : Dynamic), 'kind'), RenderCacheKind));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(source), 'object'), function():Dynamic return cast !_Runtime.strictEquals(source, null)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field((cast source : Dynamic), 'kind'), RenderCacheKindValue));
     return cast null;
   }
 
@@ -59,7 +60,7 @@ class RenderCache {
   }
 
   public static function registerRenderCacheRenderer(state:Dynamic, renderer:Dynamic):Void {
-    _Runtime.callValue(registerRenderer, cast ([state, RenderCacheKind, renderer] : Array<Dynamic>));
+    _Runtime.callValue(registerRenderer, cast ([state, RenderCacheKindValue, renderer] : Array<Dynamic>));
   }
 
   public static function useRenderCache(state:Dynamic, source:Renderable, cache:Dynamic):RenderCacheAdapter {

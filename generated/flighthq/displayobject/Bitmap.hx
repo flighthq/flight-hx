@@ -12,6 +12,7 @@ import flighthq.types.Bitmap.BitmapData;
 import flighthq.types.Bitmap.BitmapRuntime;
 import flighthq.types.MethodsOf;
 import flighthq.types.PartialNode;
+import flighthq.types.Types.BitmapKind;
 import flighthq.types._internal._BitmapValues.BitmapKind;
 
 @:expose("flighthq.displayobject.Bitmap")

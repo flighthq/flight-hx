@@ -13,6 +13,7 @@ import flighthq.renderGl.GlRenderState.invalidateGlRenderStateCache;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.ParticleEmitter.ParticleEmitterData;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
+import flighthq.types.Types.ParticleEmitter3DKind;
 import flighthq.types._internal._ParticleEmitter3DValues.ParticleEmitter3DKind;
 
 typedef GlParticle3DShader__glParticleEmitter3D = { var cornerBuffer:Dynamic; var indexBuffer:Dynamic; var instanceBuffer:Dynamic; var instanceData:flighthq._internal._Float32Array; var locCameraRight:Dynamic; var locCameraUp:Dynamic; var locColor:Float; var locCorner:Float; var locCosScale:Float; var locHasTexture:Dynamic; var locPos:Float; var locSinScale:Float; var locSize:Float; var locTexture:Dynamic; var locUvRect:Float; var locViewProjection:Dynamic; var program:Dynamic; var vao:Dynamic; };

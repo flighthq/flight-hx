@@ -17,6 +17,7 @@ import flighthq.types.TextInputEditingOptions.ReplaceTextInputOptions;
 import flighthq.types.TextInputState;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextSelectionRectangle;
+import flighthq.types._internal._KeyCodeValues.KeyCodeValue;
 
 typedef KeyboardCommand__textInputEditing = String;
 
@@ -658,33 +659,33 @@ class TextInputEditing {
   public static function getKeyboardCommand__textInputEditing(data:KeyboardEventData):KeyboardCommand__textInputEditing {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.field(data, 'ctrlKey'), function():Dynamic return cast _Runtime.field(data, 'metaKey')))) {
       var key:Dynamic = _Runtime.callProperty(_Runtime.field(data, 'key'), 'toLowerCase', cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(key, 'a'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.A)))) { return cast 'selectAll'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(key, 'c'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.C)))) { return cast 'copy'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(key, 'v'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.V)))) { return cast 'paste'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(key, 'x'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.X)))) { return cast 'cut'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.LEFT), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowLeft')))) { return cast 'wordLeft'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.RIGHT), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowRight')))) { return cast 'wordRight'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.BACKSPACE), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Backspace')))) { return cast 'deleteWordBackward'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.DELETE), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Delete')))) { return cast 'deleteWordForward'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.HOME), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Home')))) { return cast 'documentStart'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.END), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'End')))) { return cast 'documentEnd'; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(key, 'a'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.A)))) { return cast 'selectAll'; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(key, 'c'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.C)))) { return cast 'copy'; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(key, 'v'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.V)))) { return cast 'paste'; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(key, 'x'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.X)))) { return cast 'cut'; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.LEFT), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowLeft')))) { return cast 'wordLeft'; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.RIGHT), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowRight')))) { return cast 'wordRight'; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.BACKSPACE), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Backspace')))) { return cast 'deleteWordBackward'; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.DELETE), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Delete')))) { return cast 'deleteWordForward'; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.HOME), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Home')))) { return cast 'documentStart'; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.END), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'End')))) { return cast 'documentEnd'; }
       return cast 'none';
     }
     if (_Runtime.truthy(_Runtime.field(data, 'altKey'))) {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.LEFT), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowLeft')))) { return cast 'wordLeft'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.RIGHT), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowRight')))) { return cast 'wordRight'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.BACKSPACE), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Backspace')))) { return cast 'deleteWordBackward'; }
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.DELETE), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Delete')))) { return cast 'deleteWordForward'; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.LEFT), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowLeft')))) { return cast 'wordLeft'; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.RIGHT), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowRight')))) { return cast 'wordRight'; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.BACKSPACE), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Backspace')))) { return cast 'deleteWordBackward'; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.DELETE), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Delete')))) { return cast 'deleteWordForward'; }
     }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.BACKSPACE), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Backspace')))) { return cast 'backspace'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.DELETE), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Delete')))) { return cast 'delete'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.DOWN), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowDown')))) { return cast 'down'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.END), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'End')))) { return cast 'end'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.HOME), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Home')))) { return cast 'home'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.LEFT), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowLeft')))) { return cast 'left'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.RETURN), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Enter')))) { return cast 'return'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.RIGHT), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowRight')))) { return cast 'right'; }
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCode.UP), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowUp')))) { return cast 'up'; }
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.BACKSPACE), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Backspace')))) { return cast 'backspace'; }
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.DELETE), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Delete')))) { return cast 'delete'; }
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.DOWN), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowDown')))) { return cast 'down'; }
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.END), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'End')))) { return cast 'end'; }
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.HOME), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Home')))) { return cast 'home'; }
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.LEFT), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowLeft')))) { return cast 'left'; }
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.RETURN), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Enter')))) { return cast 'return'; }
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.RIGHT), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowRight')))) { return cast 'right'; }
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.UP), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'ArrowUp')))) { return cast 'up'; }
     return cast 'none';
     return cast null;
   }

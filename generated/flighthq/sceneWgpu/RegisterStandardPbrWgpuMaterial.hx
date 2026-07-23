@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneWgpu.StandardPbrWgpuMeshMaterialRenderer.standardPbrWgpuMeshMaterialRenderer;
 import flighthq.sceneWgpu.WgpuMeshMaterialRegistry.registerWgpuMeshMaterialRenderer;
+import flighthq.types.Types.StandardPbrMaterialKind;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
 @:expose("flighthq.sceneWgpu.RegisterStandardPbrWgpuMaterial")

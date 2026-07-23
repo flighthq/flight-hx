@@ -4,6 +4,7 @@ package flighthq.shading;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ModifierSlot;
+import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
 @:expose("flighthq.shading.IsBuiltInModifierSlot")
 class IsBuiltInModifierSlot {
@@ -12,5 +13,5 @@ class IsBuiltInModifierSlot {
     return cast null;
   }
 
-  public static final BUILT_IN_SLOTS__isBuiltInModifierSlot:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), [cast ([ModifierSlot.Diffuse, ModifierSlot.Effect, ModifierSlot.Emissive, ModifierSlot.Normal, ModifierSlot.Specular, ModifierSlot.Vertex] : Array<Dynamic>)]);
+  public static final BUILT_IN_SLOTS__isBuiltInModifierSlot:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), [cast ([ModifierSlotValue.Diffuse, ModifierSlotValue.Effect, ModifierSlotValue.Emissive, ModifierSlotValue.Normal, ModifierSlotValue.Specular, ModifierSlotValue.Vertex] : Array<Dynamic>)]);
 }
