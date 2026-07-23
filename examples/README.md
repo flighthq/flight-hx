@@ -1,6 +1,6 @@
 # Lime examples
 
-These are mechanical Haxe ports of every package under `upstream/examples/packages`. Each example is an ordinary Lime project with a `project.xml` and `Main.hx`, and each runs through `flighthq.HostLime` rather than the upstream Vite/browser render adapters.
+These are mechanical Haxe ports of every package under `upstream/examples/packages`. Each example is an ordinary Lime project with a `project.xml` and `Main.hx`. Their local `ExampleHost` extends `lime.app.Application`, explicitly installs `LimeApp.createLimeAppBackend(this)`, and replaces the upstream Vite/browser render adapters.
 
 The ports keep the upstream example names and core feature demonstrations. Browser lifecycle, keyboard, pointer, and overlay code is expressed with Lime callbacks. Procedurally generated browser canvas assets are represented by asset-free Flight shapes where a native Lime image/media bridge would otherwise be required.
 

@@ -28,7 +28,7 @@ Qualified calls such as `flight.Geometry.createVector2()` and `flight.Sdk.create
 
 ## Lime host
 
-`flighthq.hostLime.LimeApp` is a maintained optional host for rendering a Flight scene through Lime. Add Lime to the application, subclass `LimeApp`, create the scene in `flightReady`, update it in `flightUpdate`, and assign its root to `root`. The app installs `LimeApp.createLimeAppBackend()` when its window is created, matching the backend registration model used by the Capacitor, Tauri, and Electron hosts. The module is compiled only when Lime's `lime` define is active, so the base Flight library does not require Lime. The adapter still needs verification against an installed Lime toolchain.
+`flighthq.hostLime.LimeApp` provides the optional Lime application backend. A Lime application explicitly installs it with `AppApi.setAppBackend(LimeApp.createLimeAppBackend(this))`, matching the factory-based Capacitor, Tauri, and Electron hosts. The adapter does not own the Lime application lifecycle or renderer. It is compiled only when Lime's `lime` define is active, so the base Flight library does not require Lime. The adapter still needs verification against an installed Lime toolchain.
 
 ## Repository setup
 
