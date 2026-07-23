@@ -5,7 +5,6 @@
   <window width="800" height="500" fps="60" hardware="true" vsync="true" />
   <!-- <haxelib name="flight" path="../../" /> -->
   <include path="../../" />
-  <classpath name="../common" />
   <classpath name="." />
   <haxelib name="lime" />
   <haxelib name="jsasync" />
