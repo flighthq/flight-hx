@@ -21,7 +21,7 @@ The latest complete local `npm run ci` finished successfully on 2026-07-22. Its 
 - Distribution: Haxelib name `flight`, currently at pre-release version `0.0.0`.
 - Sources: maintained Haxe lives under `src/`, generated Haxe under `generated/`, and Haxelib adds the latter through `extraParams.hxml`.
 - Internals: maintained runtime types live under `flighthq._internal` and use underscore-prefixed names such as `_Runtime` and `_Promise`.
-- Hosts: optional maintained hosts live in the main source tree; `flighthq.HostLime` is conditional on Lime's `lime` define.
+- Hosts: optional maintained hosts live in the main source tree; `flighthq.hostLime.LimeApp` installs a Lime-specific App backend and is conditional on Lime's `lime` define.
 - Tools: generator code, semantic patches, and operational scripts share the `tools/` hierarchy.
 - Toolchain: npm-managed dependencies, repository-local Haxe 4.3.7, pinned Lix library specifications, and no required global Haxe installation.
 - Exceptions: typed semantic patches with source identity and normalized AST fingerprints; generated text is never patched.

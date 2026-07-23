@@ -1,16 +1,20 @@
-package flighthq;
+package flighthq.hostLime;
 
 #if lime
+import flighthq.AppApi;
+import flighthq.Sdk;
+import flighthq.Types.AppBackend;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.Window;
 
 /**
- * A Lime application that hosts a Flight scene and renders it through Flight's
- * WebGL renderer. Subclass it, build the scene in `flightReady`, advance it in
+ * A Lime application that hosts and renders a Flight scene.
+ *
+ * Subclass it, build the scene in `flightReady`, advance it in
  * `flightUpdate`, and assign the scene root to `root`.
  */
-class HostLime extends Application {
+class LimeApp extends Application {
   /** The Flight GL render state, available before `flightReady` is called. */
   public var renderState(default, null):Dynamic;
 
@@ -27,12 +31,45 @@ class HostLime extends Application {
   }
 
   override public function onWindowCreate():Void {
+    AppApi.setAppBackend(createLimeAppBackend());
     switch (window.context.type) {
       case OPENGL, OPENGLES, WEBGL:
         setupFlight();
       default:
-        throw 'flighthq.HostLime requires an OpenGL/WebGL render context.';
+        throw 'flighthq.hostLime.LimeApp requires an OpenGL/WebGL render context.';
     }
+  }
+
+  /**
+   * Creates Flight's application backend for the current Lime application.
+   *
+   * Lime supplies application identity and process/window lifecycle while the
+   * web backend retains Flight's documented sentinels for unsupported desktop
+   * integration such as dock menus, login items, and recent documents.
+   */
+  public static function createLimeAppBackend():AppBackend {
+    final backend = AppApi.createWebAppBackend();
+    final application = Application.current;
+    if (application == null) return backend;
+
+    backend.focus = function():Void {
+      if (application.window != null) application.window.focus();
+    };
+    backend.getName = function():String {
+      return getMetadata(application, 'title');
+    };
+    backend.getVersion = function():String {
+      return getMetadata(application, 'version');
+    };
+    backend.quit = function():Void {
+      if (application.window != null) application.window.close();
+    };
+    backend.showApp = function():Bool {
+      if (application.window == null) return false;
+      application.window.focus();
+      return true;
+    };
+    return backend;
   }
 
   function setupFlight():Void {
@@ -83,6 +120,13 @@ class HostLime extends Application {
 
   override public function render(context:RenderContext):Void {
     if (ready) flightRender(context);
+  }
+
+  static function getMetadata(application:Application, field:String):String {
+    final config = Reflect.field(application, 'config');
+    final meta = config == null ? null : Reflect.field(config, 'meta');
+    final value = meta == null ? null : Reflect.field(meta, field);
+    return value == null ? '' : Std.string(value);
   }
 }
 

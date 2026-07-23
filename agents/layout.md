@@ -19,7 +19,8 @@ flight-hx/
 ├── src/                         # maintained publishable Haxe classpath
 │   └── flighthq/
 │       ├── _internal/           # hidden portable runtime types
-│       └── HostLime.hx          # optional Lime host
+│       └── hostLime/            # optional Lime host and backend
+│           └── LimeApp.hx
 ├── generated/                   # disposable generated Haxe classpath
 │   └── flighthq/
 │       ├── Sdk.hx
