@@ -25,7 +25,7 @@ npm run example clock          # run on the Eval interpreter
 npm run example clock cpp      # compile to native C++ and run the binary
 ```
 
-The runner compiles the example against the generated `src` classpath and executes it on the chosen target. `cpp` requires a C++ compiler; `python` requires Python 3.
+The runner compiles the example against the maintained `src` and generated `generated` classpaths and executes it on the chosen target. `cpp` requires a C++ compiler; `python` requires Python 3.
 
 ## Examples
 

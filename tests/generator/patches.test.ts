@@ -1,8 +1,8 @@
 import ts from 'typescript';
 
-import { lowerTypeScriptSource } from '../../generator/src/lower/typescript.ts';
-import type { SemanticPatch } from '../../generator/src/model/patch.ts';
-import { applySemanticPatches } from '../../generator/src/patch/apply.ts';
+import { lowerTypeScriptSource } from '../../tools/generator/src/lower/typescript.ts';
+import type { SemanticPatch } from '../../tools/generator/src/model/patch.ts';
+import { applySemanticPatches } from '../../tools/generator/src/patch/apply.ts';
 
 function fixture() {
   const source = ts.createSourceFile(

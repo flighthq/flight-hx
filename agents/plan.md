@@ -8,7 +8,7 @@ All phases reached their exit criteria on 2026-07-22 for upstream revision `5d24
 2. **Inventory and symbol graph:** complete package/source/export/test inventory with stable TypeScript identities, fingerprints, SDK policy, collision checks, and generated reports.
 3. **Intermediate model and lowering:** executable lowering for all 9,122 candidate declarations with deterministic Haxe emission and zero current diagnostics.
 4. **Public modules and types:** flat `flight.*` modules, canonical type ownership, granular package-barrel facades, renamed cross-package re-exports, and the broad `flight.Sdk` facade.
-5. **Runtime semantics:** maintained templates for JavaScript-compatible numeric, nullish, reflection, collection, typed-array, callback, and async behavior with explicit portability seams.
+5. **Runtime semantics:** maintained Haxe sources for JavaScript-compatible numeric, nullish, reflection, collection, typed-array, callback, and async behavior with explicit portability seams.
 6. **Semantic patches:** typed target matching, AST fingerprints, deterministic ordering, conflict/staleness validation, fragment loading, audit output, and drift tests.
 7. **Package translation:** all 131 packages, including host integrations and `tool-capture`, with complete export accounting and no placeholder bodies.
 8. **Upstream Vitest harness:** compiled Haxe JavaScript, package and per-source ESM bridges, exact mock seams, focused package commands, and a canonical 131/131 parity report covering all 1,166 test files.
@@ -32,7 +32,7 @@ An upstream revision is complete only when:
 
 - every in-scope package, source file, public export, declaration, and test file is accounted for;
 - generated Haxe contains executable implementations and is deterministic;
-- every exception is a validated semantic patch or maintained runtime template;
+- every exception is a validated semantic patch or maintained runtime source;
 - granular modules and `flight.Sdk` compile from consumer-style fixtures;
 - upstream Vitest passes through the compiled Haxe bridges with an honest report;
 - the portability matrix passes on its declared host tools;

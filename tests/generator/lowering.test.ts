@@ -3,8 +3,8 @@ import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
 
-import { emitHaxeModule } from '../../generator/src/emit/haxe.ts';
-import { lowerTypeScriptSource } from '../../generator/src/lower/typescript.ts';
+import { emitHaxeModule } from '../../tools/generator/src/emit/haxe.ts';
+import { lowerTypeScriptSource } from '../../tools/generator/src/lower/typescript.ts';
 
 describe('TypeScript lowering and Haxe emission', () => {
   it('normalizes pure functions into deterministic executable Haxe', () => {
@@ -39,7 +39,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toBe(emitHaxeModule(module));
     expect(output).toContain('class MathFixture');
     expect(output).toContain('static function clamp');
-    expect(output).toContain('FlightRuntime.select');
+    expect(output).toContain('_Runtime.select');
   });
 
   it('compiles and runs the generated module through Haxe', () => {
@@ -106,7 +106,7 @@ describe('TypeScript lowering and Haxe emission', () => {
 
     expect(lowered.diagnostics).toEqual([]);
     expect(() =>
-      execFileSync('node', ['tooling/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '--main', 'Main', '--interp'], {
+      execFileSync('node', ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '-cp', 'generated', '--main', 'Main', '--interp'], {
         cwd: path.resolve('.'),
         stdio: 'pipe',
       }),
@@ -157,7 +157,7 @@ describe('TypeScript lowering and Haxe emission', () => {
 
     expect(lowered.diagnostics).toEqual([]);
     expect(() =>
-      execFileSync('node', ['tooling/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '--main', 'Main', '--interp'], {
+      execFileSync('node', ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '-cp', 'generated', '--main', 'Main', '--interp'], {
         cwd: path.resolve('.'),
         stdio: 'pipe',
       }),
@@ -203,10 +203,10 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('FlightRuntime.voidValue(FlightRuntime.callValue(task');
-    expect(output).toContain('FlightRuntime.typeofValue(value)');
-    expect(output).toContain('FlightAsync.make(function():flighthq.internal.FlightPromise<String>');
-    expect(output).toContain('FlightRuntime.asyncIterator(values)');
+    expect(output).toContain('_Runtime.voidValue(_Runtime.callValue(task');
+    expect(output).toContain('_Runtime.typeofValue(value)');
+    expect(output).toContain('_Async.make(function():flighthq._internal._Promise<String>');
+    expect(output).toContain('_Runtime.asyncIterator(values)');
   });
 
   it('preserves computed object keys as runtime values', () => {
@@ -231,7 +231,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('FlightRuntime.objectFromPairs([{ key: RuntimeKey');
+    expect(output).toContain('_Runtime.objectFromPairs([{ key: RuntimeKey');
     expect(output).not.toContain('__RuntimeKey');
   });
 
@@ -252,7 +252,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain("FlightRuntime.callProperty(task, 'catch'");
+    expect(output).toContain("_Runtime.callProperty(task, 'catch'");
     expect(output).not.toContain('.catchError(');
   });
 
@@ -273,7 +273,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain("FlightRuntime.callProperty(target, 'push', FlightRuntime.concatArrays");
+    expect(output).toContain("_Runtime.callProperty(target, 'push', _Runtime.concatArrays");
   });
 
   it('propagates optional chains through properties and element access', () => {
@@ -293,9 +293,9 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain("FlightRuntime.callOptionalProperty(FlightRuntime.optionalField(value, 'nested'), 'call'");
-    expect(output).toContain("FlightRuntime.callOptionalProperty(value, 'slice'");
-    expect(output).toContain("FlightRuntime.optionalIndex(FlightRuntime.optionalField(value, 'nested'), key)");
+    expect(output).toContain("_Runtime.callOptionalProperty(_Runtime.optionalField(value, 'nested'), 'call'");
+    expect(output).toContain("_Runtime.callOptionalProperty(value, 'slice'");
+    expect(output).toContain("_Runtime.optionalIndex(_Runtime.optionalField(value, 'nested'), key)");
   });
 
   it('deletes the owning object property instead of its evaluated value', () => {
@@ -315,8 +315,8 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('FlightRuntime.deleteIndex(value, key)');
-    expect(output).toContain("FlightRuntime.deleteField(value, 'fixed')");
+    expect(output).toContain('_Runtime.deleteIndex(value, key)');
+    expect(output).toContain("_Runtime.deleteField(value, 'fixed')");
   });
 
   it('applies destructuring defaults only to undefined values', () => {
@@ -336,7 +336,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain("FlightRuntime.defaultUndefined(FlightRuntime.field(__destructure0, 'mode')");
+    expect(output).toContain("_Runtime.defaultUndefined(_Runtime.field(__destructure0, 'mode')");
   });
 
   it('erases TypeScript this parameters from runtime function arity', () => {
@@ -377,8 +377,8 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('FlightRuntime.strictEquals(a, b)');
-    expect(output).toContain('FlightRuntime.looseEquals(a, b)');
+    expect(output).toContain('_Runtime.strictEquals(a, b)');
+    expect(output).toContain('_Runtime.looseEquals(a, b)');
   });
 
   it('preserves Haxe keyword property names in JavaScript objects', () => {
@@ -440,8 +440,8 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('FlightRuntime.fill(value, 1.0, 0, null, 1)');
-    expect(output).toContain('FlightRuntime.fill(value, 2.0, 3.0, null, 2)');
+    expect(output).toContain('_Runtime.fill(value, 1.0, 0, null, 1)');
+    expect(output).toContain('_Runtime.fill(value, 2.0, 3.0, null, 2)');
   });
 
   it('preserves negative-zero normalization and fractional sort comparators', () => {
@@ -462,8 +462,8 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('FlightRuntime.normalizeZero(-value)');
-    expect(output).toContain("return (FlightRuntime.field(b, 'weight') - FlightRuntime.field(a, 'weight'))");
+    expect(output).toContain('_Runtime.normalizeZero(-value)');
+    expect(output).toContain("return (_Runtime.field(b, 'weight') - _Runtime.field(a, 'weight'))");
     expect(output).not.toContain('return Std.int(');
   });
 
@@ -489,6 +489,6 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain('private static function oversized(__flightArguments:Array<Dynamic>)');
     expect(output).toContain('CppArityFixture.oversized(cast ([');
-    expect(output).not.toContain('FlightRuntime.callValue(CppArityFixture.oversized');
+    expect(output).not.toContain('_Runtime.callValue(CppArityFixture.oversized');
   });
 });

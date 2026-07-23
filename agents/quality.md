@@ -55,7 +55,7 @@ Borrow upstream's pinned Oxc tooling for maintained TypeScript and configuration
 - Oxlint runs with zero warnings.
 - Oxfmt handles supported maintained files.
 - The Haxe emitter owns generated Haxe formatting; output must already be canonical and stable.
-- Handwritten Haxe fragments and runtime templates follow the surrounding canonical style and are compiler-tested. No Haxe-aware formatter is currently added to the toolchain.
+- Handwritten Haxe fragments and runtime sources follow the surrounding canonical style and are compiler-tested. No Haxe-aware formatter is currently added to the toolchain.
 
 Do not run a generic formatter over generated Haxe after emission. If generated formatting is wrong, fix the emitter so idempotence remains meaningful.
 
@@ -99,7 +99,7 @@ Behavior that can be checked without a browser should be exercised on multiple t
 - After analyzer or lowering changes: run the focused generator test and `generate:check`.
 - After patch changes: run the target fixture, patch audit, and `generate:check`.
 - After public API changes: run `api:check`, consumer compile fixtures, and the affected upstream package tests.
-- After runtime-template changes: run Haxe runtime tests and all supported targets touched by that runtime primitive.
+- After maintained-runtime changes: run Haxe runtime tests and all supported targets touched by that runtime primitive.
 - After bridge changes: run a focused upstream Vitest file, then `test:upstream`.
 - Before completing a broad phase: run `npm run ci` and record the result in `agents/status.md`.
 

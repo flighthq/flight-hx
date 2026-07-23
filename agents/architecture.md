@@ -10,7 +10,7 @@ The output must be reproducible from the same inputs:
 upstream revision
   + generator revision
   + configuration
-  + templates
+  + maintained runtime and templates
   + semantic patches
   = publishable Haxe source
 ```
@@ -150,12 +150,12 @@ Generated ordinary implementation code should use portable Haxe constructs. A sm
 - object reflection and property presence;
 - platform globals.
 
-Runtime source lives under `templates/runtime/` and is copied or rendered into the generated classpath. It never hides target-specific behavior behind an apparently portable implementation.
+Runtime source lives under `src/flighthq/_internal/` on the maintained classpath. Its underscore-prefixed package and type names, such as `flighthq._internal._Promise`, keep implementation details out of normal code completion. It never hides target-specific behavior behind an apparently portable implementation.
 
 Platform adapters follow these rules:
 
 - An obvious, small target distinction may use a local Haxe conditional.
-- A maintained platform implementation lives in a named runtime template or adapter, not inside bulk generated source.
+- A maintained platform implementation lives in a named runtime type or adapter under `src/`, not inside bulk generated source.
 - Generated upstream backend code remains generated wherever possible; only the primitive host access crosses the adapter seam.
 - Unsupported targets return the upstream sentinel or expose an explicit compile limitation. They do not silently behave as though the capability worked.
 

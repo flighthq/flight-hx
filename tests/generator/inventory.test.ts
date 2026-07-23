@@ -1,7 +1,7 @@
 import path from 'node:path';
 
-import { analyzeUpstream, packageNameToModule } from '../../generator/src/analyze/inventory.ts';
-import { auditLowering } from '../../generator/src/analyze/lowering.ts';
+import { analyzeUpstream, packageNameToModule } from '../../tools/generator/src/analyze/inventory.ts';
+import { auditLowering } from '../../tools/generator/src/analyze/lowering.ts';
 
 describe('analyzeUpstream', () => {
   it('accounts for every upstream package and representative export', () => {

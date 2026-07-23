@@ -17,6 +17,10 @@ The latest complete local `npm run ci` finished successfully on 2026-07-22. Its 
 - SDK: `flight.Sdk` is a generated facade over the actual upstream SDK export graph, including renamed cross-package re-exports.
 - Types: canonical declarations live under their owning module, principally `flight.Types`; type re-exports stay in the API manifest when Haxe's package-level secondary-type namespace prevents duplicate aliases.
 - Distribution: Haxelib name `flight`, currently at pre-release version `0.0.0`.
+- Sources: maintained Haxe lives under `src/`, generated Haxe under `generated/`, and Haxelib adds the latter through `extraParams.hxml`.
+- Internals: maintained runtime types live under `flighthq._internal` and use underscore-prefixed names such as `_Runtime` and `_Promise`.
+- Hosts: optional maintained hosts live in the main source tree; `flighthq.HostLime` is conditional on Lime's `lime` define.
+- Tools: generator code, semantic patches, and operational scripts share the `tools/` hierarchy.
 - Toolchain: npm-managed dependencies, repository-local Haxe 4.3.7, pinned Lix library specifications, and no required global Haxe installation.
 - Exceptions: typed semantic patches with source identity and normalized AST fingerprints; generated text is never patched.
 
@@ -37,7 +41,7 @@ The latest complete local `npm run ci` finished successfully on 2026-07-22. Its 
 - Python 3 is required by `test:portable:python`.
 - `g++` or `clang++` is required by `test:portable:cpp`.
 - Neko is required to run the Haxe-distributed `haxelib` executable during package-install validation.
-- The checked-in setup fallback currently installs Haxe itself only on Linux x64. Other hosts must provide an equivalent Haxe 4.3.7 installation path or extend `tooling/setup-haxe.mjs` deliberately.
+- The checked-in setup fallback currently installs Haxe itself only on Linux x64. Other hosts must provide an equivalent Haxe 4.3.7 installation path or extend `tools/setup-haxe.mjs` deliberately.
 
 ## Command Surface
 

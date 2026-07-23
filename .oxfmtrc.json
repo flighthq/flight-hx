@@ -13,5 +13,5 @@
   "proseWrap": "never",
   "embeddedLanguageFormatting": "auto",
   "sortPackageJson": false,
-  "ignorePatterns": ["upstream/**", "src/**", "tests/bridges/**", "reports/**", "build/**", "dist/**", "**/*.hx"]
+  "ignorePatterns": ["upstream/**", "generated/**", "tests/bridges/**", "reports/**", "build/**", "dist/**", "**/*.hx"]
 }

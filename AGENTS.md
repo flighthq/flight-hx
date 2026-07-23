@@ -59,14 +59,13 @@ The current public-module direction is flat under `flight`: `flight.Sdk` mirrors
 The intended source-of-truth split is:
 
 - `upstream/`: read-only Flight TypeScript input.
-- `generator/`: TypeScript analyzer, intermediate model, transforms, and emitter.
-- `patches/`: declarative semantic exceptions and handwritten fragments.
-- `templates/`: portable runtime and JavaScript bridge source templates.
-- `src/`: publishable Haxe classpath produced by generation.
+- `tools/generator/`: TypeScript analyzer, intermediate model, transforms, emitter, semantic patches, and generator templates.
+- `src/`: maintained publishable Haxe, including `flighthq._internal` runtime types and conditional host adapters.
+- `generated/`: disposable publishable Haxe produced by generation.
 - `tests/`: generator, Haxe, portability, and bridge tests.
 - `build/`: ignored transient compiler and test output.
 
-Do not put handwritten source-of-truth Haxe in `src/`. Runtime or adapter code that appears there must originate in `templates/` or a declared patch and be reproduced by generation.
+Do not edit `generated/` directly. Handwritten runtime and adapter code belongs in `src/`; handwritten generator fragments belong under `tools/generator/patches/`.
 
 ## Tooling and Commands
 

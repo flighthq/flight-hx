@@ -15,5 +15,5 @@
     "target": "ES2022",
     "types": ["node", "vitest/globals"]
   },
-  "include": ["generator/**/*.ts", "tests/**/*.ts", "vitest.config.ts"]
+  "include": ["tools/generator/**/*.ts", "tests/**/*.ts", "vitest.config.ts"]
 }

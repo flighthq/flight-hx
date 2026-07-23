@@ -38,7 +38,7 @@ export default definePatches([
       astHash: 'sha256:...',
     },
     operation: 'replaceBody',
-    fragment: 'patches/bodies/entity/createEntity.hx',
+    fragment: 'tools/generator/patches/bodies/entity/createEntity.hx',
     reason: 'Explain the Haxe semantic requirement, not the work history.',
   },
 ]);
