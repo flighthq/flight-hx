@@ -3,13 +3,14 @@ package flighthq.bitmapfontFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontCharRecord;
-import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontKerningRecord;
-import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontPageRecord;
-import flighthq.bitmapfontFormats._internal._BitmapFontRecordValues.buildBitmapFontFromRecord;
+import flighthq.bitmapfontFormats.BitmapFontRecord.buildBitmapFontFromRecord;
 import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontEncoding;
 import flighthq.types.BitmapFont.BitmapFontParseOptions;
+import flighthq.types.BitmapFontRecord;
+import flighthq.types.BitmapFontRecord.BitmapFontCharRecord;
+import flighthq.types.BitmapFontRecord.BitmapFontKerningRecord;
+import flighthq.types.BitmapFontRecord.BitmapFontPageRecord;
 
 @:expose("flighthq.bitmapfontFormats.BitmapFontJson")
 class BitmapFontJson {

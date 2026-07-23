@@ -4,23 +4,18 @@ package flighthq.particles;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterState.PARTICLE_VELOCITY_STRIDE;
-import flighthq.types.AttractorForce;
-import flighthq.types.DragForce;
 import flighthq.types.ForceFalloff;
-import flighthq.types.ParticleEmitter;
+import flighthq.types.ParticleEmitter2D;
 import flighthq.types.ParticleEmitterState;
 import flighthq.types.ParticleForce;
 import flighthq.types.ParticleObject;
 import flighthq.types.ParticleObjectsState;
-import flighthq.types.TurbulenceForce;
-import flighthq.types.VortexForce;
-import flighthq.types.WindForce;
 
 @:expose("flighthq.particles.ApplyParticleForces")
 class ApplyParticleForces {
   public static final accel__applyParticleForces:Array<Float> = cast ([0.0, 0.0, 0.0] : Array<Dynamic>);
 
-  public static function applyParticleForces(emitter:ParticleEmitter, state:ParticleEmitterState, forces:Array<ParticleForce>, deltaTime:Float):Void {
+  public static function applyParticleForces(emitter:ParticleEmitter2D, state:ParticleEmitterState, forces:Array<ParticleForce>, deltaTime:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var transforms:Dynamic = cast _Runtime.UNDEFINED;

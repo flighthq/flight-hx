@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterState.PARTICLE_VELOCITY_STRIDE;
 import flighthq.types.CircleCollider;
 import flighthq.types.ParticleCollider;
-import flighthq.types.ParticleEmitter;
+import flighthq.types.ParticleEmitter2D;
 import flighthq.types.ParticleEmitterState;
 import flighthq.types.ParticleObject;
 import flighthq.types.ParticleObjectsState;
@@ -18,7 +18,7 @@ import flighthq.types.SphereCollider;
 class ApplyParticleCollisions {
   public static final s__applyParticleCollisions:Array<Float> = cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
 
-  public static function applyParticleCollisions(emitter:ParticleEmitter, state:ParticleEmitterState, colliders:Array<ParticleCollider>):Void {
+  public static function applyParticleCollisions(emitter:ParticleEmitter2D, state:ParticleEmitterState, colliders:Array<ParticleCollider>):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var transforms:Dynamic = cast _Runtime.UNDEFINED;

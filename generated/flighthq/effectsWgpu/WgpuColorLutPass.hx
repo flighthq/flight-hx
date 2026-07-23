@@ -4,10 +4,10 @@ package flighthq.effectsWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.EFFECT_VERTEX_WGSL;
-import flighthq.effectsWgpu.WgpuEffectPass.WgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.getWgpuEffectPassState;
 import flighthq.types.ColorLut;
 import flighthq.types.WgpuColorLutTextureCache;
+import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 

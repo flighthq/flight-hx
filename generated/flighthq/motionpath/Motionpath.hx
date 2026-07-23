@@ -3,13 +3,7 @@ package flighthq.motionpath;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.motionpath.CreateMotionPath as Facade_Motionpath_flighthq_motionpath_CreateMotionPath;
-import flighthq.motionpath.GetMotionPathHeading as Facade_Motionpath_flighthq_motionpath_GetMotionPathHeading;
-import flighthq.motionpath.GetMotionPathPosition as Facade_Motionpath_flighthq_motionpath_GetMotionPathPosition;
-import flighthq.motionpath.GetMotionPathProgress as Facade_Motionpath_flighthq_motionpath_GetMotionPathProgress;
-import flighthq.motionpath.SetMotionPathDistance as Facade_Motionpath_flighthq_motionpath_SetMotionPathDistance;
-import flighthq.motionpath.SetMotionPathProgress as Facade_Motionpath_flighthq_motionpath_SetMotionPathProgress;
-import flighthq.motionpath.UpdateMotionPath as Facade_Motionpath_flighthq_motionpath_UpdateMotionPath;
+import flighthq.motionpath.MotionPath as Facade_Motionpath_flighthq_motionpath_MotionPath;
 import flighthq.types.MotionPath;
 import flighthq.types.MotionPath.MotionPathLoopMode;
 import flighthq.types.Path;
@@ -18,34 +12,34 @@ import flighthq.types.Vector2.Vector2Like;
 @:expose("flighthq.motionpath.Motionpath")
 class Motionpath {
   public static function createMotionPath(path:Path, ?speed:Dynamic, ?loopMode:MotionPathLoopMode, ?tolerance:Float):MotionPath {
-    return cast _Runtime.callValue(Facade_Motionpath_flighthq_motionpath_CreateMotionPath.createMotionPath, cast ([path, speed, loopMode, tolerance] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_Motionpath_flighthq_motionpath_MotionPath.createMotionPath, cast ([path, speed, loopMode, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
   public static function getMotionPathHeading(mp:MotionPath):Float {
-    return cast _Runtime.callValue(Facade_Motionpath_flighthq_motionpath_GetMotionPathHeading.getMotionPathHeading, cast ([mp] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_Motionpath_flighthq_motionpath_MotionPath.getMotionPathHeading, cast ([mp] : Array<Dynamic>));
     return cast null;
   }
 
   public static function getMotionPathPosition(mp:MotionPath, pointOut:Vector2Like, tangentOut:Vector2Like):Bool {
-    return cast _Runtime.callValue(Facade_Motionpath_flighthq_motionpath_GetMotionPathPosition.getMotionPathPosition, cast ([mp, pointOut, tangentOut] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_Motionpath_flighthq_motionpath_MotionPath.getMotionPathPosition, cast ([mp, pointOut, tangentOut] : Array<Dynamic>));
     return cast null;
   }
 
   public static function getMotionPathProgress(mp:MotionPath):Float {
-    return cast _Runtime.callValue(Facade_Motionpath_flighthq_motionpath_GetMotionPathProgress.getMotionPathProgress, cast ([mp] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_Motionpath_flighthq_motionpath_MotionPath.getMotionPathProgress, cast ([mp] : Array<Dynamic>));
     return cast null;
   }
 
   public static function setMotionPathDistance(mp:MotionPath, distance:Float):Void {
-    _Runtime.callValue(Facade_Motionpath_flighthq_motionpath_SetMotionPathDistance.setMotionPathDistance, cast ([mp, distance] : Array<Dynamic>));
+    _Runtime.callValue(Facade_Motionpath_flighthq_motionpath_MotionPath.setMotionPathDistance, cast ([mp, distance] : Array<Dynamic>));
   }
 
   public static function setMotionPathProgress(mp:MotionPath, t:Float):Void {
-    _Runtime.callValue(Facade_Motionpath_flighthq_motionpath_SetMotionPathProgress.setMotionPathProgress, cast ([mp, t] : Array<Dynamic>));
+    _Runtime.callValue(Facade_Motionpath_flighthq_motionpath_MotionPath.setMotionPathProgress, cast ([mp, t] : Array<Dynamic>));
   }
 
   public static function updateMotionPath(mp:MotionPath, deltaTime:Float):Void {
-    _Runtime.callValue(Facade_Motionpath_flighthq_motionpath_UpdateMotionPath.updateMotionPath, cast ([mp, deltaTime] : Array<Dynamic>));
+    _Runtime.callValue(Facade_Motionpath_flighthq_motionpath_MotionPath.updateMotionPath, cast ([mp, deltaTime] : Array<Dynamic>));
   }
 }

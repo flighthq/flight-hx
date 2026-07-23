@@ -9,8 +9,10 @@ import flighthq.types.BatchFormat as Facade_Types_flighthq_types_BatchFormat_Bat
 import flighthq.types.ClipboardFormat as Facade_Types_flighthq_types_ClipboardFormat;
 import flighthq.types.Keyboard as Facade_Types_flighthq_types_Keyboard;
 import flighthq.types.Log.LogLevel as Facade_Types_flighthq_types_Log_LogLevel;
+import flighthq.types.SceneResources as Facade_Types_flighthq_types_SceneResources;
 import flighthq.types.SpritesheetFormat as Facade_Types_flighthq_types_SpritesheetFormat;
 import flighthq.types.TextureKind as Facade_Types_flighthq_types_TextureKind;
+import flighthq.types.ThreeDsSchema as Facade_Types_flighthq_types_ThreeDsSchema;
 import flighthq.types.WellKnownMenuItemRole as Facade_Types_flighthq_types_WellKnownMenuItemRole;
 import flighthq.types._internal._AmbientLightValues as Facade_Types_flighthq_types__internal__AmbientLightValues;
 import flighthq.types._internal._AnimatedNormalModifierValues as Facade_Types_flighthq_types__internal__AnimatedNormalModifierValues;
@@ -55,8 +57,8 @@ import flighthq.types._internal._MovieClipValues as Facade_Types_flighthq_types_
 import flighthq.types._internal._NativeTextValues as Facade_Types_flighthq_types__internal__NativeTextValues;
 import flighthq.types._internal._NodeValues as Facade_Types_flighthq_types__internal__NodeValues;
 import flighthq.types._internal._NormalMaterialValues as Facade_Types_flighthq_types__internal__NormalMaterialValues;
+import flighthq.types._internal._ParticleEmitter2DValues as Facade_Types_flighthq_types__internal__ParticleEmitter2DValues;
 import flighthq.types._internal._ParticleEmitter3DValues as Facade_Types_flighthq_types__internal__ParticleEmitter3DValues;
-import flighthq.types._internal._ParticleEmitterValues as Facade_Types_flighthq_types__internal__ParticleEmitterValues;
 import flighthq.types._internal._ParticleFormatKindValues as Facade_Types_flighthq_types__internal__ParticleFormatKindValues;
 import flighthq.types._internal._PhongMaterialValues as Facade_Types_flighthq_types__internal__PhongMaterialValues;
 import flighthq.types._internal._PlaneColliderValues as Facade_Types_flighthq_types__internal__PlaneColliderValues;
@@ -264,9 +266,9 @@ class Types {
 
   public static final ParticleDesignerFormatKind:Dynamic = Facade_Types_flighthq_types__internal__ParticleFormatKindValues.ParticleDesignerFormatKind;
 
-  public static final ParticleEmitter3DKind:Dynamic = Facade_Types_flighthq_types__internal__ParticleEmitter3DValues.ParticleEmitter3DKind;
+  public static final ParticleEmitter2DKind:Dynamic = Facade_Types_flighthq_types__internal__ParticleEmitter2DValues.ParticleEmitter2DKind;
 
-  public static final ParticleEmitterKind:Dynamic = Facade_Types_flighthq_types__internal__ParticleEmitterValues.ParticleEmitterKind;
+  public static final ParticleEmitter3DKind:Dynamic = Facade_Types_flighthq_types__internal__ParticleEmitter3DValues.ParticleEmitter3DKind;
 
   public static final PhaserParticleFormatKind:Dynamic = Facade_Types_flighthq_types__internal__ParticleFormatKindValues.PhaserParticleFormatKind;
 
@@ -327,6 +329,8 @@ class Types {
   public static final SceneNodeKind:Dynamic = Facade_Types_flighthq_scene_Scene.SceneNodeKind;
 
   public static final SceneNodeTraitsKey:Dynamic = Facade_Types_flighthq_types__internal__SceneNodeValues.SceneNodeTraitsKey;
+
+  public static final SceneResourceResolverRuntimeKey:Dynamic = Facade_Types_flighthq_types_SceneResources.SceneResourceResolverRuntimeKey;
 
   public static final ShadedMaterialKind:Dynamic = Facade_Types_flighthq_types__internal__ShadedMaterialValues.ShadedMaterialKind;
 
@@ -413,6 +417,46 @@ class Types {
   public static final TextureAtlasFormatKindTexturePacker:Dynamic = Facade_Types_flighthq_types__internal__TextureAtlasFormatKindValues.TextureAtlasFormatKindTexturePacker;
 
   public static final TextureKind:Dynamic = Facade_Types_flighthq_types_TextureKind.TextureKind;
+
+  public static final THREE_DS_CHUNK_HEADER_BYTES:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_CHUNK_HEADER_BYTES;
+
+  public static final THREE_DS_COLOR_BYTE:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_COLOR_BYTE;
+
+  public static final THREE_DS_COLOR_FLOAT:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_COLOR_FLOAT;
+
+  public static final THREE_DS_EDITOR:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_EDITOR;
+
+  public static final THREE_DS_FACE_MATERIAL:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_FACE_MATERIAL;
+
+  public static final THREE_DS_FACES:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_FACES;
+
+  public static final THREE_DS_KEYFRAME:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_KEYFRAME;
+
+  public static final THREE_DS_MAIN:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MAIN;
+
+  public static final THREE_DS_MATERIAL:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL;
+
+  public static final THREE_DS_MATERIAL_AMBIENT:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_AMBIENT;
+
+  public static final THREE_DS_MATERIAL_DIFFUSE:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_DIFFUSE;
+
+  public static final THREE_DS_MATERIAL_NAME:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_NAME;
+
+  public static final THREE_DS_MATERIAL_SPECULAR:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_SPECULAR;
+
+  public static final THREE_DS_MATERIAL_TEXTURE_FILENAME:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_TEXTURE_FILENAME;
+
+  public static final THREE_DS_MATERIAL_TEXTURE_MAP:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_MATERIAL_TEXTURE_MAP;
+
+  public static final THREE_DS_OBJECT:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_OBJECT;
+
+  public static final THREE_DS_TRANSFORM_MATRIX:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_TRANSFORM_MATRIX;
+
+  public static final THREE_DS_TRIMESH:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_TRIMESH;
+
+  public static final THREE_DS_UV_COORDS:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_UV_COORDS;
+
+  public static final THREE_DS_VERTICES:Dynamic = Facade_Types_flighthq_types_ThreeDsSchema.THREE_DS_VERTICES;
 
   public static final TilemapKind:Dynamic = Facade_Types_flighthq_types__internal__TilemapValues.TilemapKind;
 

@@ -6,8 +6,8 @@ import flighthq._internal._Runtime;
 import flighthq.sprite.Tilemap.createTilemapData;
 import flighthq.tilemapFormats.TiledGid.decodeTiledGid;
 import flighthq.tilemapFormats.TiledGid.getTiledTilesetRefForGid;
-import flighthq.tilemapFormats.TiledOptions.TiledTilesetResolver;
 import flighthq.types.TiledMap;
+import flighthq.types.TiledParseOptions.TiledTilesetResolver;
 import flighthq.types.Tilemap.TilemapData;
 import flighthq.types.Tileset;
 

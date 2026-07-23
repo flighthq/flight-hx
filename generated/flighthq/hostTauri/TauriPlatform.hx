@@ -3,9 +3,9 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostTauri.TauriModule.TauriApi;
 import flighthq.types.Platform.PlatformBackend;
 import flighthq.types.Platform.PlatformName;
+import flighthq.types.TauriApi;
 
 @:expose("flighthq.hostTauri.TauriPlatform")
 class TauriPlatform {

@@ -5,11 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ModifierSlot;
 import flighthq.types.RimModifier;
+import flighthq.types.RimModifierOptions;
 import flighthq.types.Types.RimModifierKind;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 import flighthq.types._internal._RimModifierValues.RimModifierKind;
-
-typedef RimModifierOptions = { var color:Float; @:optional var power:Float; @:optional var intensity:Float; @:optional var bias:Float; };
 
 @:expose("flighthq.shading.CreateRimModifier")
 class CreateRimModifier {

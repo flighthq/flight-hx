@@ -5,17 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.surface.SurfaceBlur.blurSurfacePixelsHorizontal;
 import flighthq.surface.SurfaceBlur.blurSurfacePixelsVertical;
+import flighthq.types.SurfaceDropShadowOptions;
+import flighthq.types.SurfaceGlowOptions;
+import flighthq.types.SurfaceInnerGlowOptions;
+import flighthq.types.SurfaceInnerShadowOptions;
 import flighthq.types.SurfaceRegion;
-
-typedef SurfaceShadowBlurOptions = { @:optional var radiusX:Float; @:optional var radiusY:Float; @:optional var passes:Float; };
-
-typedef SurfaceDropShadowOptions = Dynamic;
-
-typedef SurfaceGlowOptions = Dynamic;
-
-typedef SurfaceInnerGlowOptions = Dynamic;
-
-typedef SurfaceInnerShadowOptions = Dynamic;
+import flighthq.types.SurfaceShadowBlurOptions;
 
 @:expose("flighthq.surface.SurfaceShadow")
 class SurfaceShadow {

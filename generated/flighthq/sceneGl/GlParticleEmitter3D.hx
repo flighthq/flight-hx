@@ -5,19 +5,19 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.hasImageResourcePixels;
 import flighthq.node.Node.getNodeRuntime;
-import flighthq.node.Transform3d.getNodeWorldMatrix4;
+import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.render.SceneRender.prepareSceneRender;
 import flighthq.renderGl.GlDraw.bindGlTexture;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.invalidateGlRenderStateCache;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.GlRenderState;
 import flighthq.types.Matrix4;
 import flighthq.types.Node.NodeAny;
-import flighthq.types.ParticleEmitter.ParticleEmitterData;
+import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
 import flighthq.types.ParticleEmitter3D;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-import flighthq.types.SceneLights;
+import flighthq.types.SceneLights.SceneLightsLike;
 import flighthq.types.SceneNode;
 import flighthq.types.Types.ParticleEmitter3DKind;
 import flighthq.types._internal._ParticleEmitter3DValues.ParticleEmitter3DKind;
@@ -273,7 +273,7 @@ class GlParticleEmitter3D {
     _Runtime.callProperty(GlParticleEmitter3D.shaderCache__glParticleEmitter3D, 'delete', cast ([state] : Array<Dynamic>));
   }
 
-  public static function drawGlSceneParticleEmitters(state:GlRenderState, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
+  public static function drawGlSceneParticleEmitter2Ds(state:GlRenderState, scene:SceneNode, camera:Camera3D, lights:SceneLightsLike):Void {
     var list:Dynamic = cast _Runtime.UNDEFINED;
     var shader:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;

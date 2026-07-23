@@ -7,15 +7,15 @@ import flighthq.renderGl.GlPresentRenderTarget.presentGlRenderTarget;
 import flighthq.renderGl.GlRenderPass.beginGlRenderPass;
 import flighthq.renderGl.GlRenderPass.endGlRenderPass;
 import flighthq.sceneGl.DrawGlScene.drawGlScene;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
-import flighthq.types.SceneLights;
+import flighthq.types.SceneLights.SceneLightsLike;
 import flighthq.types.SceneNode;
 
 @:expose("flighthq.sceneGl.PresentGlScene")
 class PresentGlScene {
-  public static function presentGlScene(state:GlRenderState, target:GlRenderTarget, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
+  public static function presentGlScene(state:GlRenderState, target:GlRenderTarget, scene:SceneNode, camera:Camera3D, lights:SceneLightsLike):Void {
     _Runtime.callValue(beginGlRenderPass, cast ([state, target] : Array<Dynamic>));
     _Runtime.callValue(drawGlScene, cast ([state, scene, camera, lights] : Array<Dynamic>));
     _Runtime.callValue(endGlRenderPass, cast ([state] : Array<Dynamic>));

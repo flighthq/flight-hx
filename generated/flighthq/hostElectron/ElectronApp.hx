@@ -3,11 +3,11 @@ package flighthq.hostElectron;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostElectron.ElectronModule.ElectronApi;
-import flighthq.hostElectron.ElectronModule.ElectronMenuItemOptions;
 import flighthq.types.App.AppBackend;
 import flighthq.types.App.AppLoginItem;
 import flighthq.types.App.AppPathKind;
+import flighthq.types.ElectronApi;
+import flighthq.types.ElectronApi.ElectronMenuItemOptions;
 import flighthq.types.Menu.MenuItemTemplate;
 
 @:expose("flighthq.hostElectron.ElectronApp")

@@ -4,10 +4,10 @@ package flighthq.textureatlasFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textureatlas.TextureAtlasRegion.createTextureAtlasRegion;
-import flighthq.textureatlasFormats.TextureAtlasAsepriteSchema.TextureAtlasAsepriteArrayFrame;
-import flighthq.textureatlasFormats.TextureAtlasAsepriteSchema.TextureAtlasAsepriteBaseFrame;
-import flighthq.textureatlasFormats.TextureAtlasAsepriteSchema.TextureAtlasAsepriteDocument;
 import flighthq.types.TextureAtlas;
+import flighthq.types.TextureAtlasAsepriteSchema.TextureAtlasAsepriteArrayFrame;
+import flighthq.types.TextureAtlasAsepriteSchema.TextureAtlasAsepriteBaseFrame;
+import flighthq.types.TextureAtlasAsepriteSchema.TextureAtlasAsepriteDocument;
 
 @:expose("flighthq.textureatlasFormats.TextureAtlasAsepriteParse")
 class TextureAtlasAsepriteParse {

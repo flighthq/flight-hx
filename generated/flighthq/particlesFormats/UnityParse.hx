@@ -6,23 +6,21 @@ import flighthq._internal._Runtime;
 import flighthq.particles.Curve.particleColorCurveFromKeyframes;
 import flighthq.particles.Curve.particleCurveFromKeyframes;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
-import flighthq.particlesFormats.UnitySchema.UnityColor;
-import flighthq.particlesFormats.UnitySchema.UnityColorOverLifetime;
-import flighthq.particlesFormats.UnitySchema.UnityEmission;
-import flighthq.particlesFormats.UnitySchema.UnityMinMaxValue;
-import flighthq.particlesFormats.UnitySchema.UnityParticleDocument;
-import flighthq.particlesFormats.UnitySchema.UnityRotationOverLifetime;
-import flighthq.particlesFormats.UnitySchema.UnityShape;
-import flighthq.particlesFormats.UnitySchema.UnitySizeOverLifetime;
 import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleCurve.ColorKeyframe;
 import flighthq.types.ParticleCurve.CurveKeyframe;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-
-typedef UnityParseOptions = { @:optional var pixelsPerUnit:Float; };
-
-typedef UnityParsed = { var config:ParticleEmitterConfig; var document:UnityParticleDocument; var warnings:Array<String>; };
+import flighthq.types.UnitySchema.UnityColor;
+import flighthq.types.UnitySchema.UnityColorOverLifetime;
+import flighthq.types.UnitySchema.UnityEmission;
+import flighthq.types.UnitySchema.UnityMinMaxValue;
+import flighthq.types.UnitySchema.UnityParseOptions;
+import flighthq.types.UnitySchema.UnityParsed;
+import flighthq.types.UnitySchema.UnityParticleDocument;
+import flighthq.types.UnitySchema.UnityRotationOverLifetime;
+import flighthq.types.UnitySchema.UnityShape;
+import flighthq.types.UnitySchema.UnitySizeOverLifetime;
 
 @:expose("flighthq.particlesFormats.UnityParse")
 class UnityParse {

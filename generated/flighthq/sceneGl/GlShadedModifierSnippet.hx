@@ -3,18 +3,13 @@ package flighthq.sceneGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
-import flighthq.shading.ModifierRegistry.ModifierDefinition;
-import flighthq.shading._internal._ModifierRegistryValues.createModifierRegistry;
-import flighthq.shading._internal._ModifierRegistryValues.registerModifier;
-import flighthq.shading._internal._ModifierRegistryValues.resolveModifier;
+import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
+import flighthq.shading.ModifierRegistry.createModifierRegistry;
+import flighthq.shading.ModifierRegistry.registerModifier;
+import flighthq.shading.ModifierRegistry.resolveModifier;
+import flighthq.types.GlModifierSnippet;
 import flighthq.types.GlRenderState;
-import flighthq.types.Modifier;
 import flighthq.types.ModifierKind;
-
-typedef GlModifierBindContext = { var acquireModifierTextureUnit:Dynamic; var index:Float; var program:Dynamic; var state:GlRenderState; };
-
-typedef GlModifierSnippet = Dynamic;
 
 @:expose("flighthq.sceneGl.GlShadedModifierSnippet")
 class GlShadedModifierSnippet {

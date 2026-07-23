@@ -6,20 +6,20 @@ import flighthq._internal._Runtime;
 import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.image.ImageResource.hasImageResourcePixels;
 import flighthq.renderGl.GlDraw.bindGlImageResourceTexture;
-import flighthq.sceneGl.GlClassicPrelude.GlClassicDefineKey;
-import flighthq.sceneGl.GlClassicPrelude.GlClassicProgram;
 import flighthq.sceneGl.GlClassicPrelude.ensureGlClassicProgram;
+import flighthq.sceneGl.GlLitProgram.bindGlMeshLightBlock;
 import flighthq.sceneGl.GlMeshMaterialRegistry.registerGlMeshMaterialRenderer;
-import flighthq.sceneGl._internal._GlLitProgramValues.bindGlMeshLightBlock;
-import flighthq.sceneGl._internal._GlMeshProgramValues.beginGlMeshDraw;
-import flighthq.sceneGl._internal._GlMeshProgramValues.bindGlUvTransform;
-import flighthq.sceneGl._internal._GlMeshProgramValues.drawGlMeshSubset;
-import flighthq.sceneGl._internal._GlMeshProgramValues.hasGlUvTransform;
-import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshCameraPosition;
-import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
-import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.sceneGl.GlMeshProgram.beginGlMeshDraw;
+import flighthq.sceneGl.GlMeshProgram.bindGlUvTransform;
+import flighthq.sceneGl.GlMeshProgram.drawGlMeshSubset;
+import flighthq.sceneGl.GlMeshProgram.hasGlUvTransform;
+import flighthq.sceneGl.GlMeshProgram.setGlMeshCameraPosition;
+import flighthq.sceneGl.GlMeshProgram.setGlMeshViewProjection;
+import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
 import flighthq.types.BlinnPhongMaterial;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
+import flighthq.types.GlClassicProgram;
+import flighthq.types.GlClassicProgram.GlClassicDefineKey;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
@@ -32,7 +32,7 @@ import flighthq.types._internal._BlinnPhongMaterialValues.BlinnPhongMaterialKind
 
 @:expose("flighthq.sceneGl.BlinnPhongGlMeshMaterialRenderer")
 class BlinnPhongGlMeshMaterialRenderer {
-  public static final blinnPhongGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
+  public static final blinnPhongGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var blinnPhong:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;

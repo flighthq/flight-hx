@@ -3,10 +3,10 @@ package flighthq.textureFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.textureFormats._internal._ByteReaderValues.createByteReader;
-import flighthq.textureFormats._internal._ByteReaderValues.hasByteReaderBytes;
-import flighthq.textureFormats._internal._ByteReaderValues.readByteReaderU24BigEndian;
-import flighthq.textureFormats._internal._ByteReaderValues.readByteReaderU32BigEndian;
+import flighthq.textureFormats.ByteReader.createByteReader;
+import flighthq.textureFormats.ByteReader.hasByteReaderBytes;
+import flighthq.textureFormats.ByteReader.readByteReaderU24BigEndian;
+import flighthq.textureFormats.ByteReader.readByteReaderU32BigEndian;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 import flighthq.types.TextureContainerLevel;

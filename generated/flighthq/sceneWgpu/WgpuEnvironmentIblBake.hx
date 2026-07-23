@@ -4,10 +4,10 @@ package flighthq.sceneWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneWgpu.WgpuEnvironmentCube.ensureWgpuEnvironmentSourceCube;
-import flighthq.sceneWgpu.WgpuSceneRuntime.WgpuSceneIbl;
-import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
+import flighthq.sceneWgpu.WgpuSceneRuntime.getWgpuSceneRuntime;
 import flighthq.types.Environment;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuSceneRuntime.WgpuSceneIbl;
 
 typedef WgpuBakedCube__wgpuEnvironmentIblBake = { var texture:Dynamic; var view:Dynamic; };
 

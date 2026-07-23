@@ -8,11 +8,10 @@ import flighthq.interaction.NodeInteractionState.isNodeFocusable;
 import flighthq.interaction.NodeInteractionState.isNodeHitTestEnabled;
 import flighthq.log.Log.logOnce;
 import flighthq.node.Node.getNodeRuntime;
+import flighthq.types.InteractionHitEligibility;
 import flighthq.types.InteractionManager.InteractionSignalName;
 import flighthq.types.Log.LogLevel;
 import flighthq.types.Node.NodeAny;
-
-typedef InteractionHitEligibility = { var eligible:Bool; var hasEligibleInSubtree:Bool; };
 
 @:expose("flighthq.interaction.EnableInteractionGuards")
 class EnableInteractionGuards {

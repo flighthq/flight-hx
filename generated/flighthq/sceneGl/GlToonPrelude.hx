@@ -3,20 +3,18 @@ package flighthq.sceneGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.sceneGl._internal._GlLitProgramValues.GL_MESH_LIGHT_BLOCK_GLSL;
-import flighthq.sceneGl._internal._GlLitProgramValues.resolveGlLitLocations;
-import flighthq.sceneGl._internal._GlMeshProgramValues.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
-import flighthq.sceneGl._internal._GlMeshProgramValues.GL_UV_TRANSFORM_VERTEX_GLSL;
-import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
-import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
-import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.sceneGl.GlLitProgram.GL_MESH_LIGHT_BLOCK_GLSL;
+import flighthq.sceneGl.GlLitProgram.resolveGlLitLocations;
+import flighthq.sceneGl.GlMeshProgram.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
+import flighthq.sceneGl.GlMeshProgram.GL_UV_TRANSFORM_VERTEX_GLSL;
+import flighthq.sceneGl.GlMeshProgram.compileGlProgram;
+import flighthq.sceneGl.GlMeshProgram.ensureGlSceneProgram;
+import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlToonProgram;
+import flighthq.types.GlToonProgram.GlToonDefineKey;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._SceneLightBlockValues.MAX_FORWARD_LIGHTS;
-
-typedef GlToonDefineKey = { var alphaMaskEnabled:Bool; var hasBaseColorMap:Bool; var hasRamp:Bool; @:optional var hasSkin:Bool; var hasUvTransform:Bool; };
-
-typedef GlToonProgram = Dynamic;
 
 @:expose("flighthq.sceneGl.GlToonPrelude")
 class GlToonPrelude {

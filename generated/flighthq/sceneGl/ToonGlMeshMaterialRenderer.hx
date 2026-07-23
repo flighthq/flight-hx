@@ -6,21 +6,21 @@ import flighthq._internal._Runtime;
 import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.image.ImageResource.hasImageResourcePixels;
 import flighthq.renderGl.GlDraw.bindGlImageResourceTexture;
+import flighthq.sceneGl.GlLitProgram.bindGlMeshLightBlock;
 import flighthq.sceneGl.GlMeshMaterialRegistry.registerGlMeshMaterialRenderer;
-import flighthq.sceneGl.GlToonPrelude.GlToonDefineKey;
-import flighthq.sceneGl.GlToonPrelude.GlToonProgram;
+import flighthq.sceneGl.GlMeshProgram.beginGlMeshDraw;
+import flighthq.sceneGl.GlMeshProgram.bindGlUvTransform;
+import flighthq.sceneGl.GlMeshProgram.drawGlMeshSubset;
+import flighthq.sceneGl.GlMeshProgram.hasGlUvTransform;
+import flighthq.sceneGl.GlMeshProgram.setGlMeshCameraPosition;
+import flighthq.sceneGl.GlMeshProgram.setGlMeshViewProjection;
+import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
 import flighthq.sceneGl.GlToonPrelude.ensureGlToonProgram;
-import flighthq.sceneGl._internal._GlLitProgramValues.bindGlMeshLightBlock;
-import flighthq.sceneGl._internal._GlMeshProgramValues.beginGlMeshDraw;
-import flighthq.sceneGl._internal._GlMeshProgramValues.bindGlUvTransform;
-import flighthq.sceneGl._internal._GlMeshProgramValues.drawGlMeshSubset;
-import flighthq.sceneGl._internal._GlMeshProgramValues.hasGlUvTransform;
-import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshCameraPosition;
-import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
-import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlToonProgram;
+import flighthq.types.GlToonProgram.GlToonDefineKey;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
@@ -32,7 +32,7 @@ import flighthq.types._internal._ToonMaterialValues.ToonMaterialKind;
 
 @:expose("flighthq.sceneGl.ToonGlMeshMaterialRenderer")
 class ToonGlMeshMaterialRenderer {
-  public static final toonGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
+  public static final toonGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var toon:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;

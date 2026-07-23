@@ -12,16 +12,14 @@ import flighthq.geometry.Matrix4.inverseMatrix4;
 import flighthq.geometry.Matrix4.multiplyMatrix4;
 import flighthq.geometry.Quaternion.createQuaternion;
 import flighthq.geometry.Quaternion.setQuaternionFromMatrix4;
+import flighthq.geometry.Transform3d.createTransform3D;
+import flighthq.geometry.Transform3d.decomposeMatrix4ToTransform3D;
 import flighthq.imageCodec.DetectImageMimeType.detectImageMimeType;
 import flighthq.materials.ClassicMaterials.createBlinnPhongMaterial;
 import flighthq.mesh.MeshGeometry.createMeshGeometry;
 import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryNormals;
 import flighthq.mesh.MeshGeometryLayout.CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT;
-import flighthq.node.Hierarchy.addNodeChild;
-import flighthq.node.Transform3d.setNodeLocalMatrix4;
-import flighthq.scene.Mesh.createMesh;
-import flighthq.scene.Scene.createScene;
-import flighthq.scene.SceneNode.createSceneNode;
+import flighthq.scene.SceneDocument.createSceneFromDocument;
 import flighthq.sceneFormats.AwdSchema.AWD_BLOCK_CONTAINER;
 import flighthq.sceneFormats.AwdSchema.AWD_BLOCK_HEADER_BYTES;
 import flighthq.sceneFormats.AwdSchema.AWD_BLOCK_MATERIAL;
@@ -58,32 +56,36 @@ import flighthq.sceneFormats.AwdSchema.AWD_TEXTURE_TYPE_EMBEDDED;
 import flighthq.sceneFormats.Shared.CANONICAL_FLOATS_PER_VERTEX;
 import flighthq.sceneFormats.Shared.CANONICAL_LAYOUT;
 import flighthq.sceneFormats.Shared.SKINNED_FLOATS_PER_VERTEX;
-import flighthq.sceneFormats.Shared.SkinInfluence;
 import flighthq.sceneFormats.Shared.convertTransformLhToRh;
-import flighthq.sceneFormats.Shared.findSceneSkeletonJoints;
+import flighthq.sceneFormats.Shared.createEmbeddedTextureRef;
+import flighthq.sceneFormats.Shared.createExternalTextureRef;
 import flighthq.sceneFormats.Shared.negateVec3Z;
 import flighthq.sceneFormats.Shared.packSkinInfluences;
 import flighthq.sceneFormats.Shared.reverseTriangleWinding;
-import flighthq.skeleton3d.Skeleton3d.createSkeleton3D;
-import flighthq.texture.Texture.createTexture;
 import flighthq.types.AnimationClip;
+import flighthq.types.AnimationTrack;
 import flighthq.types.Material;
+import flighthq.types.Material.MaterialLike;
 import flighthq.types.Matrix4;
-import flighthq.types.ResourceResolutionState;
 import flighthq.types.Scene;
+import flighthq.types.SceneDocument;
+import flighthq.types.SceneDocument.SceneDocumentAnimation;
+import flighthq.types.SceneDocument.SceneDocumentAnimationChannel;
+import flighthq.types.SceneDocument.SceneDocumentMesh;
+import flighthq.types.SceneDocument.SceneDocumentNode;
+import flighthq.types.SceneDocument.SceneDocumentSkin;
 import flighthq.types.SceneNode;
-import flighthq.types.SceneResourceRef.SceneResourceRefKind;
-import flighthq.types.Skeleton3D;
-import flighthq.types.Skin;
+import flighthq.types.SkinInfluence;
 import flighthq.types.Texture;
+import flighthq.types.Transform3D;
 import flighthq.types.Types.MeshKind;
 import flighthq.types.Types.SceneAnimationPathRotation;
 import flighthq.types.Types.SceneAnimationPathTranslation;
+import flighthq.types.Types.SceneNodeKind;
 import flighthq.types._internal._MeshValues.MeshKind;
-import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
 import flighthq.types._internal._SceneAnimationPathValues.SceneAnimationPathRotation;
 import flighthq.types._internal._SceneAnimationPathValues.SceneAnimationPathTranslation;
-import flighthq.types._internal._SceneResourceRefValues.SceneResourceRefKindValue;
+import flighthq.types._internal._SceneNodeValues.SceneNodeKind;
 
 typedef ParsedGeometry__awdParse = { var geometry:Dynamic; var skinned:Bool; };
 
@@ -106,6 +108,11 @@ typedef ParsedSkeletonPose__awdParse = { var jointTransforms:Array<Null<Dynamic>
 @:expose("flighthq.sceneFormats.AwdParse")
 class AwdParse {
   public static function createSceneFromAwd(bytes:Dynamic, ?warnings:Array<String>):Scene {
+    return cast _Runtime.callValue(createSceneFromDocument, cast ([_Runtime.callValue(parseAwd, cast ([bytes, warnings] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function parseAwd(bytes:Dynamic, ?warnings:Array<String>):SceneDocument {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var view:Dynamic = cast _Runtime.UNDEFINED;
     var compression:Dynamic = cast _Runtime.UNDEFINED;
@@ -118,27 +125,27 @@ class AwdParse {
     var textureBlocks:Dynamic = cast _Runtime.UNDEFINED;
     var skeletonBlocks:Dynamic = cast _Runtime.UNDEFINED;
     var offset:Dynamic = cast _Runtime.UNDEFINED;
-    var scene:Dynamic = cast _Runtime.UNDEFINED;
-    var sceneNodes:Dynamic = cast _Runtime.UNDEFINED;
-    var skin:Null<Skin> = cast _Runtime.UNDEFINED;
+    var document:Dynamic = cast _Runtime.UNDEFINED;
+    var nodeIndexForBlock:Dynamic = cast _Runtime.UNDEFINED;
+    var skinIndex:Null<Float> = cast _Runtime.UNDEFINED;
+    var skeletonJointNodeIndices:Array<Float> = cast _Runtime.UNDEFINED;
     var resolvedMaterials:Dynamic = cast _Runtime.UNDEFINED;
     var materialForSubset:Dynamic = cast _Runtime.UNDEFINED;
     var parented:Dynamic = cast _Runtime.UNDEFINED;
-    var joints:Dynamic = cast _Runtime.UNDEFINED;
     source = (cast bytes : Dynamic);
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(source, 'byteLength'), AWD_HEADER_BYTES, '<'))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromAwd: byte length is smaller than the 12-byte AWD header'] : Array<Dynamic>));
-      return cast _Runtime.callValue(createScene, cast ([] : Array<Dynamic>));
+      return cast _Runtime.callValue(AwdParse.emptyAwdDocument__awdParse, cast ([] : Array<Dynamic>));
     }
     view = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['DataView'] : Array<Dynamic>)), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.getIndex(source, 0.0), AWD_MAGIC_0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(source, 1.0), AWD_MAGIC_1)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(source, 2.0), AWD_MAGIC_2)))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromAwd: magic is not \'AWD\'; not an AWD file'] : Array<Dynamic>));
-      return cast _Runtime.callValue(createScene, cast ([] : Array<Dynamic>));
+      return cast _Runtime.callValue(AwdParse.emptyAwdDocument__awdParse, cast ([] : Array<Dynamic>));
     }
     compression = _Runtime.getIndex(source, 7.0);
     if (_Runtime.truthy(!_Runtime.strictEquals(compression, AWD_COMPRESSION_NONE))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromAwd: compression method ' + Std.string(compression) + ' is not supported; only uncompressed AWD is supported'] : Array<Dynamic>));
-      return cast _Runtime.callValue(createScene, cast ([] : Array<Dynamic>));
+      return cast _Runtime.callValue(AwdParse.emptyAwdDocument__awdParse, cast ([] : Array<Dynamic>));
     }
     bodyLength = _Runtime.callProperty(view, 'getUint32', cast ([8.0, true] : Array<Dynamic>));
     bodyEnd = _Runtime.callProperty(HxMath, 'min', cast ([(AWD_HEADER_BYTES + bodyLength), _Runtime.field(source, 'byteLength')] : Array<Dynamic>));
@@ -185,13 +192,15 @@ class AwdParse {
       }
       (offset = cast ((blockDataStart + blockLength) : Dynamic));
     }
-    scene = _Runtime.callValue(createScene, cast ([] : Array<Dynamic>));
-    sceneNodes = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
-    skin = null;
+    document = _Runtime.callValue(AwdParse.emptyAwdDocument__awdParse, cast ([] : Array<Dynamic>));
+    nodeIndexForBlock = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    skeletonJointNodeIndices = cast ([] : Array<Dynamic>);
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(skeletonBlocks, 'size'), 0.0, '>'))) {
-      var built:Dynamic = _Runtime.callValue(AwdParse.buildAwdSkeleton__awdParse, cast ([_Runtime.field(_Runtime.callProperty(_Runtime.callProperty(skeletonBlocks, 'values', cast ([] : Array<Dynamic>)), 'next', cast ([] : Array<Dynamic>)), 'value')] : Array<Dynamic>));
-      _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), _Runtime.field(built, 'skeletonRoot')] : Array<Dynamic>));
-      (skin = cast ({ skeleton: _Runtime.field(built, 'skeleton'), skeletonRoot: _Runtime.field(built, 'skeletonRoot') } : Dynamic));
+      var built:Dynamic = _Runtime.callValue(AwdParse.buildAwdSkeletonDocument__awdParse, cast ([_Runtime.field(_Runtime.callProperty(_Runtime.callProperty(skeletonBlocks, 'values', cast ([] : Array<Dynamic>)), 'next', cast ([] : Array<Dynamic>)), 'value'), document] : Array<Dynamic>));
+      (skeletonJointNodeIndices = cast (_Runtime.field(built, 'jointNodeIndices') : Dynamic));
+      (skinIndex = cast (_Runtime.field(_Runtime.field(document, 'skins'), 'length') : Dynamic));
+      _Runtime.callProperty(_Runtime.field(document, 'skins'), 'push', cast ([_Runtime.field(built, 'skin')] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(_Runtime.getIndex(_Runtime.field(document, 'scenes'), 0.0), 'rootNodes'), 'push', cast ([_Runtime.field(built, 'skeletonRootIndex')] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.compare(_Runtime.field(skeletonBlocks, 'size'), 1.0, '>'))) {
         _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromAwd: file has ' + Std.string(_Runtime.field(skeletonBlocks, 'size')) + ' skeletons; every skinned mesh binds to the first'] : Array<Dynamic>));
       }
@@ -199,57 +208,67 @@ class AwdParse {
     for (__iteration0 in _Runtime.iterable(containerBlocks)) {
       var blockId:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
       var container:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
-      var node:Dynamic = _Runtime.callValue(createSceneNode, cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { name: _Runtime.orValue(_Runtime.field(container, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }] : Array<Dynamic>));
-      _Runtime.callValue(AwdParse.applyAwdTransform__awdParse, cast ([node, _Runtime.field(container, 'transform')] : Array<Dynamic>));
-      _Runtime.callProperty(sceneNodes, 'set', cast ([blockId, node] : Array<Dynamic>));
+      var nodeIndex:Dynamic = _Runtime.field(_Runtime.field(document, 'nodes'), 'length');
+      _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: SceneNodeKind, name: _Runtime.orValue(_Runtime.field(container, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: _Runtime.callValue(AwdParse.awdTransformToTransform3D__awdParse, cast ([_Runtime.field(container, 'transform')] : Array<Dynamic>)) }] : Array<Dynamic>));
+      _Runtime.callProperty(nodeIndexForBlock, 'set', cast ([blockId, nodeIndex] : Array<Dynamic>));
     }
     resolvedMaterials = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
     materialForSubset = function(meshInst:ParsedMeshInstance__awdParse, subsetIndex:Float) {
       var materialId:Dynamic = cast _Runtime.UNDEFINED;
-      var material:Dynamic = cast _Runtime.UNDEFINED;
+      var index:Dynamic = cast _Runtime.UNDEFINED;
       materialId = _Runtime.select(_Runtime.compare(subsetIndex, _Runtime.field(_Runtime.field(meshInst, 'materialIds'), 'length'), '<'), function():Dynamic return cast _Runtime.getIndex(_Runtime.field(meshInst, 'materialIds'), subsetIndex), function():Dynamic return cast 0.0);
-      material = _Runtime.callValue(AwdParse.resolveAwdMaterial__awdParse, cast ([materialId, materialBlocks, textureBlocks, resolvedMaterials, warnings] : Array<Dynamic>));
-      return cast _Runtime.select(!_Runtime.strictEquals(material, null), function():Dynamic return cast cast ([material] : Array<Dynamic>), function():Dynamic return cast cast ([] : Array<Dynamic>));
+      index = _Runtime.callValue(AwdParse.resolveAwdMaterial__awdParse, cast ([materialId, materialBlocks, textureBlocks, resolvedMaterials, document, warnings] : Array<Dynamic>));
+      return cast _Runtime.select(_Runtime.compare(index, 0.0, '>='), function():Dynamic return cast cast ([index] : Array<Dynamic>), function():Dynamic return cast cast ([] : Array<Dynamic>));
     };
     for (__iteration1 in _Runtime.iterable(meshInstanceBlocks)) {
       var blockId:Dynamic = _Runtime.getIndex(__iteration1, 0.0);
       var meshInst:Dynamic = _Runtime.getIndex(__iteration1, 1.0);
       var geometries:Dynamic = _Runtime.callProperty(geometryBlocks, 'get', cast ([_Runtime.field(meshInst, 'geometryId')] : Array<Dynamic>));
-      var node:SceneNode = cast _Runtime.UNDEFINED;
+      var transform:Dynamic = _Runtime.callValue(AwdParse.awdTransformToTransform3D__awdParse, cast ([_Runtime.field(meshInst, 'transform')] : Array<Dynamic>));
+      var nodeIndex:Float = cast _Runtime.UNDEFINED;
       if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(geometries, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(_Runtime.field(geometries, 'length'), 0.0, '>')))) {
         if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometries, 'length'), 1.0))) {
-          var mesh:Dynamic = _Runtime.callValue(createMesh, cast ([_Runtime.field(_Runtime.getIndex(geometries, 0.0), 'geometry'), _Runtime.callValue(materialForSubset, cast ([meshInst, 0.0] : Array<Dynamic>)), MeshKind, { name: _Runtime.orValue(_Runtime.field(meshInst, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }] : Array<Dynamic>));
-          if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(skin, null), function():Dynamic return cast _Runtime.field(_Runtime.getIndex(geometries, 0.0), 'skinned')))) { _Runtime.setField(mesh, 'skin', skin); }
-          (node = cast ((cast (cast mesh : Dynamic) : SceneNode) : Dynamic));
+          var meshIndex:Dynamic = _Runtime.field(_Runtime.field(document, 'meshes'), 'length');
+          var mesh:SceneDocumentMesh = { geometry: _Runtime.field(_Runtime.getIndex(geometries, 0.0), 'geometry'), materials: _Runtime.callValue(materialForSubset, cast ([meshInst, 0.0] : Array<Dynamic>)) };
+          if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(_Runtime.getIndex(geometries, 0.0), 'skinned')))) { _Runtime.setField(mesh, 'skin', skinIndex); }
+          _Runtime.callProperty(_Runtime.field(document, 'meshes'), 'push', cast ([mesh] : Array<Dynamic>));
+          (nodeIndex = cast (_Runtime.field(_Runtime.field(document, 'nodes'), 'length') : Dynamic));
+          _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, name: _Runtime.orValue(_Runtime.field(meshInst, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: transform }] : Array<Dynamic>));
         } else {
-          (node = cast (_Runtime.callValue(createSceneNode, cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { name: _Runtime.orValue(_Runtime.field(meshInst, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }] : Array<Dynamic>)) : Dynamic));
+          (nodeIndex = cast (_Runtime.field(_Runtime.field(document, 'nodes'), 'length') : Dynamic));
+          var group:SceneDocumentNode = { children: cast ([] : Array<Dynamic>), kind: SceneNodeKind, name: _Runtime.orValue(_Runtime.field(meshInst, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: transform };
+          _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([group] : Array<Dynamic>));
           {
             var i:Dynamic = 0.0;
             while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(geometries, 'length'), '<'))) {
-              var mesh:Dynamic = _Runtime.callValue(createMesh, cast ([_Runtime.field(_Runtime.getIndex(geometries, i), 'geometry'), _Runtime.callValue(materialForSubset, cast ([meshInst, i] : Array<Dynamic>))] : Array<Dynamic>));
-              if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(skin, null), function():Dynamic return cast _Runtime.field(_Runtime.getIndex(geometries, i), 'skinned')))) { _Runtime.setField(mesh, 'skin', skin); }
-              _Runtime.callValue(addNodeChild, cast ([node, (cast (cast mesh : Dynamic) : SceneNode)] : Array<Dynamic>));
+              var meshIndex:Dynamic = _Runtime.field(_Runtime.field(document, 'meshes'), 'length');
+              var mesh:SceneDocumentMesh = { geometry: _Runtime.field(_Runtime.getIndex(geometries, i), 'geometry'), materials: _Runtime.callValue(materialForSubset, cast ([meshInst, i] : Array<Dynamic>)) };
+              if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(_Runtime.getIndex(geometries, i), 'skinned')))) { _Runtime.setField(mesh, 'skin', skinIndex); }
+              _Runtime.callProperty(_Runtime.field(document, 'meshes'), 'push', cast ([mesh] : Array<Dynamic>));
+              var childIndex:Dynamic = _Runtime.field(_Runtime.field(document, 'nodes'), 'length');
+              _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+              _Runtime.callProperty(_Runtime.field(group, 'children'), 'push', cast ([childIndex] : Array<Dynamic>));
               i++;
             }
           }
         }
       } else {
-        (node = cast (_Runtime.callValue(createSceneNode, cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { name: _Runtime.orValue(_Runtime.field(meshInst, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }] : Array<Dynamic>)) : Dynamic));
+        (nodeIndex = cast (_Runtime.field(_Runtime.field(document, 'nodes'), 'length') : Dynamic));
+        _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: SceneNodeKind, name: _Runtime.orValue(_Runtime.field(meshInst, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: transform }] : Array<Dynamic>));
         if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(meshInst, 'geometryId'), 0.0))) {
           _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromAwd: mesh instance block ' + Std.string(blockId) + ' references geometry block ' + Std.string(_Runtime.field(meshInst, 'geometryId')) + ' which was not found'] : Array<Dynamic>));
         }
       }
-      _Runtime.callValue(AwdParse.applyAwdTransform__awdParse, cast ([node, _Runtime.field(meshInst, 'transform')] : Array<Dynamic>));
-      _Runtime.callProperty(sceneNodes, 'set', cast ([blockId, node] : Array<Dynamic>));
+      _Runtime.callProperty(nodeIndexForBlock, 'set', cast ([blockId, nodeIndex] : Array<Dynamic>));
     }
     parented = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
     for (__iteration2 in _Runtime.iterable(containerBlocks)) {
       var blockId:Dynamic = _Runtime.getIndex(__iteration2, 0.0);
       var container:Dynamic = _Runtime.getIndex(__iteration2, 1.0);
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(container, 'parentId'), 0.0))) {
-        var parent:Dynamic = _Runtime.callProperty(sceneNodes, 'get', cast ([_Runtime.field(container, 'parentId')] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(parent, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-          _Runtime.callValue(addNodeChild, cast ([parent, _Runtime.callProperty(sceneNodes, 'get', cast ([blockId] : Array<Dynamic>))] : Array<Dynamic>));
+        var parentIndex:Dynamic = _Runtime.callProperty(nodeIndexForBlock, 'get', cast ([_Runtime.field(container, 'parentId')] : Array<Dynamic>));
+        if (_Runtime.truthy(!_Runtime.strictEquals(parentIndex, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+          _Runtime.callProperty(_Runtime.field(_Runtime.getIndex(_Runtime.field(document, 'nodes'), parentIndex), 'children'), 'push', cast ([_Runtime.callProperty(nodeIndexForBlock, 'get', cast ([blockId] : Array<Dynamic>))] : Array<Dynamic>));
           _Runtime.callProperty(parented, 'add', cast ([blockId] : Array<Dynamic>));
         }
       }
@@ -258,23 +277,20 @@ class AwdParse {
       var blockId:Dynamic = _Runtime.getIndex(__iteration3, 0.0);
       var meshInst:Dynamic = _Runtime.getIndex(__iteration3, 1.0);
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(meshInst, 'parentId'), 0.0))) {
-        var parent:Dynamic = _Runtime.callProperty(sceneNodes, 'get', cast ([_Runtime.field(meshInst, 'parentId')] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(parent, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-          _Runtime.callValue(addNodeChild, cast ([parent, _Runtime.callProperty(sceneNodes, 'get', cast ([blockId] : Array<Dynamic>))] : Array<Dynamic>));
+        var parentIndex:Dynamic = _Runtime.callProperty(nodeIndexForBlock, 'get', cast ([_Runtime.field(meshInst, 'parentId')] : Array<Dynamic>));
+        if (_Runtime.truthy(!_Runtime.strictEquals(parentIndex, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+          _Runtime.callProperty(_Runtime.field(_Runtime.getIndex(_Runtime.field(document, 'nodes'), parentIndex), 'children'), 'push', cast ([_Runtime.callProperty(nodeIndexForBlock, 'get', cast ([blockId] : Array<Dynamic>))] : Array<Dynamic>));
           _Runtime.callProperty(parented, 'add', cast ([blockId] : Array<Dynamic>));
         }
       }
     }
-    for (__iteration4 in _Runtime.iterable(sceneNodes)) {
-      var blockId:Dynamic = _Runtime.getIndex(__iteration4, 0.0);
-      var node:Dynamic = _Runtime.getIndex(__iteration4, 1.0);
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(parented, 'has', cast ([blockId] : Array<Dynamic>))))) {
-        _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), node] : Array<Dynamic>));
-      }
+    for (blockId in _Runtime.iterable(_Runtime.callProperty(nodeIndexForBlock, 'keys', cast ([] : Array<Dynamic>)))) {
+      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(parented, 'has', cast ([blockId] : Array<Dynamic>))))) { _Runtime.callProperty(_Runtime.field(_Runtime.getIndex(_Runtime.field(document, 'scenes'), 0.0), 'rootNodes'), 'push', cast ([_Runtime.callProperty(nodeIndexForBlock, 'get', cast ([blockId] : Array<Dynamic>))] : Array<Dynamic>)); }
     }
-    joints = _Runtime.callValue(findSceneSkeletonJoints, cast ([_Runtime.field(scene, 'root')] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(joints, null))) { _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'assign', cast ([_Runtime.field(scene, 'animations'), _Runtime.callValue(parseAwdSkeletonAnimations, cast ([bytes, joints, warnings] : Array<Dynamic>))] : Array<Dynamic>)); }
-    return cast scene;
+    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(skeletonJointNodeIndices, 'length'), 0.0, '>'))) {
+      _Runtime.callProperty(_Runtime.field(document, 'animations'), 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(AwdParse.buildAwdDocumentAnimations__awdParse, cast ([bytes, skeletonJointNodeIndices, warnings] : Array<Dynamic>)))]));
+    }
+    return cast document;
     return cast null;
   }
 
@@ -425,27 +441,154 @@ class AwdParse {
     return cast null;
   }
 
-  public static function buildAwdSkeleton__awdParse(parsedSkeleton:ParsedSkeleton__awdParse):{ var jointNodes:Array<SceneNode>; var skeleton:Skeleton3D; var skeletonRoot:SceneNode; } {
+  public static function buildAwdDocumentAnimations__awdParse(bytes:Dynamic, jointNodeIndices:Array<Float>, ?warnings:Array<String>):Array<SceneDocumentAnimation> {
+    var source:Dynamic = cast _Runtime.UNDEFINED;
+    var view:Dynamic = cast _Runtime.UNDEFINED;
+    var bodyLength:Dynamic = cast _Runtime.UNDEFINED;
+    var bodyEnd:Dynamic = cast _Runtime.UNDEFINED;
+    var skeletonBlocks:Dynamic = cast _Runtime.UNDEFINED;
+    var poseBlocks:Dynamic = cast _Runtime.UNDEFINED;
+    var animationBlocks:Dynamic = cast _Runtime.UNDEFINED;
+    var offset:Dynamic = cast _Runtime.UNDEFINED;
+    var parsedSkeleton:Dynamic = cast _Runtime.UNDEFINED;
     var jointCount:Dynamic = cast _Runtime.UNDEFINED;
-    var skeletonRoot:Dynamic = cast _Runtime.UNDEFINED;
-    var jointNodes:Array<SceneNode> = cast _Runtime.UNDEFINED;
-    var jointNames:Array<String> = cast _Runtime.UNDEFINED;
-    var inverseBindMatrices:Dynamic = cast _Runtime.UNDEFINED;
-    var bindWorld:Array<Matrix4> = cast _Runtime.UNDEFINED;
-    var invBind:Dynamic = cast _Runtime.UNDEFINED;
-    var invParent:Dynamic = cast _Runtime.UNDEFINED;
-    var local:Dynamic = cast _Runtime.UNDEFINED;
-    var skeleton:Dynamic = cast _Runtime.UNDEFINED;
+    var animations:Array<SceneDocumentAnimation> = cast _Runtime.UNDEFINED;
+    var index:Dynamic = cast _Runtime.UNDEFINED;
+    source = (cast bytes : Dynamic);
+    view = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['DataView'] : Array<Dynamic>)), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
+    bodyLength = _Runtime.callProperty(view, 'getUint32', cast ([8.0, true] : Array<Dynamic>));
+    bodyEnd = _Runtime.callProperty(HxMath, 'min', cast ([(AWD_HEADER_BYTES + bodyLength), _Runtime.field(source, 'byteLength')] : Array<Dynamic>));
+    skeletonBlocks = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    poseBlocks = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    animationBlocks = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    offset = AWD_HEADER_BYTES;
+    while (_Runtime.truthy(_Runtime.compare((offset + AWD_BLOCK_HEADER_BYTES), bodyEnd, '<='))) {
+      var namespace:Dynamic = _Runtime.getIndex(source, (offset + 4.0));
+      var blockType:Dynamic = _Runtime.getIndex(source, (offset + 5.0));
+      var blockFlags:Dynamic = _Runtime.getIndex(source, (offset + 6.0));
+      var blockLength:Dynamic = _Runtime.callProperty(view, 'getUint32', cast ([(offset + 7.0), true] : Array<Dynamic>));
+      var blockDataStart:Dynamic = (offset + AWD_BLOCK_HEADER_BYTES);
+      if (_Runtime.truthy(_Runtime.compare((blockDataStart + blockLength), bodyEnd, '>'))) { break; }
+      var blockId:Dynamic = _Runtime.callProperty(view, 'getUint32', cast ([offset, true] : Array<Dynamic>));
+      var matrixWide:Dynamic = !_Runtime.strictEquals((Std.int(blockFlags) & Std.int(1.0)), 0.0);
+      if (_Runtime.truthy(_Runtime.strictEquals(namespace, AWD_NAMESPACE_CORE))) {
+        if (_Runtime.truthy(_Runtime.strictEquals(blockType, AWD_BLOCK_SKELETON))) {
+          var skeleton:Dynamic = _Runtime.callValue(AwdParse.parseSkeletonBlock__awdParse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide] : Array<Dynamic>));
+          if (_Runtime.truthy(!_Runtime.strictEquals(skeleton, null))) { _Runtime.callProperty(skeletonBlocks, 'set', cast ([blockId, skeleton] : Array<Dynamic>)); }
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(blockType, AWD_BLOCK_SKELETON_POSE))) {
+          var pose:Dynamic = _Runtime.callValue(AwdParse.parseSkeletonPoseBlock__awdParse, cast ([view, source, blockDataStart, (blockDataStart + blockLength), matrixWide] : Array<Dynamic>));
+          if (_Runtime.truthy(!_Runtime.strictEquals(pose, null))) { _Runtime.callProperty(poseBlocks, 'set', cast ([blockId, pose] : Array<Dynamic>)); }
+        } else { if (_Runtime.truthy(_Runtime.strictEquals(blockType, AWD_BLOCK_SKELETON_ANIMATION))) {
+          var anim:Dynamic = _Runtime.callValue(AwdParse.parseSkeletonAnimationBlock__awdParse, cast ([view, source, blockDataStart, (blockDataStart + blockLength)] : Array<Dynamic>));
+          if (_Runtime.truthy(!_Runtime.strictEquals(anim, null))) { _Runtime.callProperty(animationBlocks, 'set', cast ([blockId, anim] : Array<Dynamic>)); }
+        } } }
+      }
+      (offset = cast ((blockDataStart + blockLength) : Dynamic));
+    }
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(skeletonBlocks, 'size'), 0.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(animationBlocks, 'size'), 0.0)))) { return cast cast ([] : Array<Dynamic>); }
+    parsedSkeleton = _Runtime.field(_Runtime.callProperty(_Runtime.callProperty(skeletonBlocks, 'values', cast ([] : Array<Dynamic>)), 'next', cast ([] : Array<Dynamic>)), 'value');
     jointCount = _Runtime.field(_Runtime.field(parsedSkeleton, 'joints'), 'length');
-    skeletonRoot = _Runtime.callValue(createSceneNode, cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { name: 'skeleton' }] : Array<Dynamic>));
-    jointNodes = cast ([] : Array<Dynamic>);
-    jointNames = cast ([] : Array<Dynamic>);
+    animations = cast ([] : Array<Dynamic>);
+    index = 0.0;
+    for (parsedAnimation in _Runtime.iterable(_Runtime.callProperty(animationBlocks, 'values', cast ([] : Array<Dynamic>)))) {
+      var built:Dynamic = _Runtime.callValue(AwdParse.buildAwdDocumentAnimation__awdParse, cast ([parsedAnimation, jointCount, poseBlocks, jointNodeIndices, warnings] : Array<Dynamic>));
+      if (_Runtime.truthy(!_Runtime.strictEquals(built, null))) {
+        _Runtime.setField(built, 'name', _Runtime.orValue(_Runtime.field(parsedAnimation, 'name'), function():Dynamic return cast 'animation' + Std.string(index) + ''));
+        _Runtime.callProperty(animations, 'push', cast ([built] : Array<Dynamic>));
+      }
+      index++;
+    }
+    return cast animations;
+    return cast null;
+  }
+
+  public static function buildAwdDocumentAnimation__awdParse(parsedAnimation:ParsedSkeletonAnimation__awdParse, jointCount:Float, poseBlocks:Dynamic, jointNodeIndices:Array<Float>, ?warnings:Array<String>):Null<SceneDocumentAnimation> {
+    var poseCount:Dynamic = cast _Runtime.UNDEFINED;
+    var times:Array<Float> = cast _Runtime.UNDEFINED;
+    var timeAccumulator:Dynamic = cast _Runtime.UNDEFINED;
+    var rotationMatrix:Dynamic = cast _Runtime.UNDEFINED;
+    var rotationQuat:Dynamic = cast _Runtime.UNDEFINED;
+    var channels:Array<SceneDocumentAnimationChannel> = cast _Runtime.UNDEFINED;
+    poseCount = _Runtime.field(_Runtime.field(parsedAnimation, 'poses'), 'length');
+    if (_Runtime.truthy(_Runtime.strictEquals(poseCount, 0.0))) {
+      _Runtime.callOptionalProperty(warnings, 'push', cast (['parseAwdSkeletonAnimations: skeleton animation has no poses'] : Array<Dynamic>));
+      return cast null;
+    }
+    times = cast ([] : Array<Dynamic>);
+    timeAccumulator = 0.0;
+    {
+      var p:Dynamic = 0.0;
+      while (_Runtime.truthy(_Runtime.compare(p, poseCount, '<'))) {
+        _Runtime.callProperty(times, 'push', cast ([timeAccumulator] : Array<Dynamic>));
+        (timeAccumulator = cast ((timeAccumulator + (_Runtime.field(_Runtime.getIndex(_Runtime.field(parsedAnimation, 'poses'), p), 'duration') / 1000.0)) : Dynamic));
+        p++;
+      }
+    }
+    rotationMatrix = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+    rotationQuat = _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>));
+    channels = cast ([] : Array<Dynamic>);
     {
       var j:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(j, jointCount, '<'))) {
-        var joint:Dynamic = _Runtime.getIndex(_Runtime.field(parsedSkeleton, 'joints'), j);
-        _Runtime.callProperty(jointNodes, 'push', cast ([_Runtime.callValue(createSceneNode, cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { name: _Runtime.orValue(_Runtime.field(joint, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }] : Array<Dynamic>))] : Array<Dynamic>));
-        _Runtime.callProperty(jointNames, 'push', cast ([_Runtime.field(joint, 'name')] : Array<Dynamic>));
+        if (_Runtime.truthy(_Runtime.compare(j, _Runtime.field(jointNodeIndices, 'length'), '>='))) { break; }
+        var translationValues:Array<Float> = cast ([] : Array<Dynamic>);
+        var rotationValues:Array<Float> = cast ([] : Array<Dynamic>);
+        {
+          var p:Dynamic = 0.0;
+          while (_Runtime.truthy(_Runtime.compare(p, poseCount, '<'))) {
+            var poseBlockId:Dynamic = _Runtime.field(_Runtime.getIndex(_Runtime.field(parsedAnimation, 'poses'), p), 'poseBlockId');
+            var pose:Dynamic = _Runtime.callProperty(poseBlocks, 'get', cast ([poseBlockId] : Array<Dynamic>));
+            if (_Runtime.truthy(_Runtime.strictEquals(pose, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+              _Runtime.callOptionalProperty(warnings, 'push', cast (['parseAwdSkeletonAnimations: pose block ' + Std.string(poseBlockId) + ' referenced by animation not found; using identity'] : Array<Dynamic>));
+              _Runtime.pushMany(translationValues, cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
+              _Runtime.pushMany(rotationValues, cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
+            } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(j, _Runtime.field(_Runtime.field(pose, 'jointTransforms'), 'length'), '<'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(pose, 'jointTransforms'), j), null)))) {
+              var transform:Dynamic = _Runtime.getIndex(_Runtime.field(pose, 'jointTransforms'), j);
+              _Runtime.pushMany(translationValues, cast ([_Runtime.getIndex(transform, 9.0), _Runtime.getIndex(transform, 10.0), _Runtime.getIndex(transform, 11.0)] : Array<Dynamic>));
+              _Runtime.callValue(AwdParse.awdTransformToMatrix4__awdParse, cast ([rotationMatrix, transform] : Array<Dynamic>));
+              _Runtime.callValue(setQuaternionFromMatrix4, cast ([rotationQuat, rotationMatrix] : Array<Dynamic>));
+              _Runtime.pushMany(rotationValues, cast ([_Runtime.field(rotationQuat, 'x'), _Runtime.field(rotationQuat, 'y'), _Runtime.field(rotationQuat, 'z'), _Runtime.field(rotationQuat, 'w')] : Array<Dynamic>));
+            } else {
+              _Runtime.pushMany(translationValues, cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
+              _Runtime.pushMany(rotationValues, cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
+            } }
+            p++;
+          }
+        }
+        var translationTrack:AnimationTrack = _Runtime.callValue(createAnimationTrack, cast ([{ components: 3.0, times: times, values: translationValues }] : Array<Dynamic>));
+        _Runtime.callProperty(channels, 'push', cast ([{ node: _Runtime.getIndex(jointNodeIndices, j), path: SceneAnimationPathTranslation, track: translationTrack }] : Array<Dynamic>));
+        var rotationTrack:AnimationTrack = _Runtime.callValue(createAnimationTrack, cast ([{ components: 4.0, quaternion: true, times: times, values: rotationValues }] : Array<Dynamic>));
+        _Runtime.callProperty(channels, 'push', cast ([{ node: _Runtime.getIndex(jointNodeIndices, j), path: SceneAnimationPathRotation, track: rotationTrack }] : Array<Dynamic>));
+        j++;
+      }
+    }
+    return cast { channels: channels, duration: timeAccumulator, name: _Runtime.field(parsedAnimation, 'name') };
+    return cast null;
+  }
+
+  public static function emptyAwdDocument__awdParse():SceneDocument {
+    return cast { animations: cast ([] : Array<Dynamic>), cameras: cast ([] : Array<Dynamic>), lights: cast ([] : Array<Dynamic>), materials: cast ([] : Array<Dynamic>), meshes: cast ([] : Array<Dynamic>), metadata: null, nodes: cast ([] : Array<Dynamic>), resources: cast ([] : Array<Dynamic>), scenes: cast ([{ rootNodes: cast ([] : Array<Dynamic>) }] : Array<Dynamic>), skins: cast ([] : Array<Dynamic>) };
+    return cast null;
+  }
+
+  public static function buildAwdSkeletonDocument__awdParse(parsedSkeleton:ParsedSkeleton__awdParse, document:SceneDocument):{ var jointNodeIndices:Array<Float>; var skeletonRootIndex:Float; var skin:SceneDocumentSkin; } {
+    var jointCount:Dynamic = cast _Runtime.UNDEFINED;
+    var skeletonRootIndex:Dynamic = cast _Runtime.UNDEFINED;
+    var jointNodeIndices:Array<Float> = cast _Runtime.UNDEFINED;
+    var inverseBind:Array<Matrix4> = cast _Runtime.UNDEFINED;
+    var bindWorld:Array<Matrix4> = cast _Runtime.UNDEFINED;
+    var invParent:Dynamic = cast _Runtime.UNDEFINED;
+    var local:Dynamic = cast _Runtime.UNDEFINED;
+    var skin:SceneDocumentSkin = cast _Runtime.UNDEFINED;
+    jointCount = _Runtime.field(_Runtime.field(parsedSkeleton, 'joints'), 'length');
+    skeletonRootIndex = _Runtime.field(_Runtime.field(document, 'nodes'), 'length');
+    _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: SceneNodeKind, name: 'skeleton', transform: _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+    jointNodeIndices = cast ([] : Array<Dynamic>);
+    {
+      var j:Dynamic = 0.0;
+      while (_Runtime.truthy(_Runtime.compare(j, jointCount, '<'))) {
+        _Runtime.callProperty(jointNodeIndices, 'push', cast ([_Runtime.field(_Runtime.field(document, 'nodes'), 'length')] : Array<Dynamic>));
+        _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: SceneNodeKind, name: _Runtime.orValue(_Runtime.field(_Runtime.getIndex(_Runtime.field(parsedSkeleton, 'joints'), j), 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
         j++;
       }
     }
@@ -453,22 +596,22 @@ class AwdParse {
       var j:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(j, jointCount, '<'))) {
         var parentIndex1:Dynamic = _Runtime.field(_Runtime.getIndex(_Runtime.field(parsedSkeleton, 'joints'), j), 'parentIndex');
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(parentIndex1, 0.0, '>'), function():Dynamic return cast _Runtime.compare((parentIndex1 - 1.0), _Runtime.field(jointNodes, 'length'), '<')))) {
-          _Runtime.callValue(addNodeChild, cast ([_Runtime.getIndex(jointNodes, (parentIndex1 - 1.0)), _Runtime.getIndex(jointNodes, j)] : Array<Dynamic>));
+        if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(parentIndex1, 0.0, '>'), function():Dynamic return cast _Runtime.compare((parentIndex1 - 1.0), jointCount, '<')))) {
+          _Runtime.callProperty(_Runtime.field(_Runtime.getIndex(_Runtime.field(document, 'nodes'), _Runtime.getIndex(jointNodeIndices, (parentIndex1 - 1.0))), 'children'), 'push', cast ([_Runtime.getIndex(jointNodeIndices, j)] : Array<Dynamic>));
         } else {
-          _Runtime.callValue(addNodeChild, cast ([skeletonRoot, _Runtime.getIndex(jointNodes, j)] : Array<Dynamic>));
+          _Runtime.callProperty(_Runtime.field(_Runtime.getIndex(_Runtime.field(document, 'nodes'), skeletonRootIndex), 'children'), 'push', cast ([_Runtime.getIndex(jointNodeIndices, j)] : Array<Dynamic>));
         }
         j++;
       }
     }
-    inverseBindMatrices = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(jointCount * 16.0)]);
+    inverseBind = cast ([] : Array<Dynamic>);
     bindWorld = cast ([] : Array<Dynamic>);
-    invBind = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
     {
       var j:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(j, jointCount, '<'))) {
+        var invBind:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
         _Runtime.callValue(AwdParse.awdTransformToMatrix4__awdParse, cast ([invBind, _Runtime.field(_Runtime.getIndex(_Runtime.field(parsedSkeleton, 'joints'), j), 'transform')] : Array<Dynamic>));
-        _Runtime.callProperty(inverseBindMatrices, 'set', cast ([_Runtime.field(invBind, 'm'), (j * 16.0)] : Array<Dynamic>));
+        _Runtime.callProperty(inverseBind, 'push', cast ([invBind] : Array<Dynamic>));
         var bw:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
         _Runtime.callValue(inverseMatrix4, cast ([bw, invBind] : Array<Dynamic>));
         _Runtime.callProperty(bindWorld, 'push', cast ([bw] : Array<Dynamic>));
@@ -487,12 +630,12 @@ class AwdParse {
         } else {
           _Runtime.callValue(copyMatrix4, cast ([local, _Runtime.getIndex(bindWorld, j)] : Array<Dynamic>));
         }
-        _Runtime.callValue(setNodeLocalMatrix4, cast ([_Runtime.getIndex(jointNodes, j), local] : Array<Dynamic>));
+        _Runtime.callValue(decomposeMatrix4ToTransform3D, cast ([_Runtime.field(_Runtime.getIndex(_Runtime.field(document, 'nodes'), _Runtime.getIndex(jointNodeIndices, j)), 'transform'), local] : Array<Dynamic>));
         j++;
       }
     }
-    skeleton = _Runtime.callValue(createSkeleton3D, cast ([jointNodes, inverseBindMatrices, jointNames] : Array<Dynamic>));
-    return cast { jointNodes: jointNodes, skeleton: skeleton, skeletonRoot: skeletonRoot };
+    skin = { inverseBind: inverseBind, joints: jointNodeIndices };
+    return cast { jointNodeIndices: jointNodeIndices, skeletonRootIndex: skeletonRootIndex, skin: skin };
     return cast null;
   }
 
@@ -526,9 +669,13 @@ class AwdParse {
     return cast null;
   }
 
-  public static function applyAwdTransform__awdParse(node:SceneNode, transform:Dynamic):Void {
+  public static function awdTransformToTransform3D__awdParse(transform:Dynamic):Transform3D {
+    var out:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(AwdParse.awdTransformToMatrix4__awdParse, cast ([AwdParse._awdTransformScratch__awdParse, transform] : Array<Dynamic>));
-    _Runtime.callValue(setNodeLocalMatrix4, cast ([node, AwdParse._awdTransformScratch__awdParse] : Array<Dynamic>));
+    out = _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>));
+    _Runtime.callValue(decomposeMatrix4ToTransform3D, cast ([out, AwdParse._awdTransformScratch__awdParse] : Array<Dynamic>));
+    return cast out;
+    return cast null;
   }
 
   public static final _awdTransformScratch__awdParse:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
@@ -978,32 +1125,36 @@ class AwdParse {
     return cast null;
   }
 
-  public static function resolveAwdMaterial__awdParse(materialId:Float, materialBlocks:Dynamic, textureBlocks:Dynamic, cache:Dynamic, ?warnings:Array<String>):Null<Material> {
+  public static function resolveAwdMaterial__awdParse(materialId:Float, materialBlocks:Dynamic, textureBlocks:Dynamic, cache:Dynamic, document:SceneDocument, ?warnings:Array<String>):Float {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     var diffuseTexture:Dynamic = cast _Runtime.UNDEFINED;
-    var material:Null<Material> = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(materialId, 0.0))) { return cast null; }
+    var material:Dynamic = cast _Runtime.UNDEFINED;
+    var index:Dynamic = cast _Runtime.UNDEFINED;
+    if (_Runtime.truthy(_Runtime.strictEquals(materialId, 0.0))) { return cast -1.0; }
     cached = _Runtime.callProperty(cache, 'get', cast ([materialId] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
     parsed = _Runtime.callProperty(materialBlocks, 'get', cast ([materialId] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromAwd: mesh references material block ' + Std.string(materialId) + ' which was not found'] : Array<Dynamic>));
-      _Runtime.callProperty(cache, 'set', cast ([materialId, null] : Array<Dynamic>));
-      return cast null;
+      _Runtime.callProperty(cache, 'set', cast ([materialId, -1.0] : Array<Dynamic>));
+      return cast -1.0;
     }
-    diffuseTexture = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(parsed, 'diffuseTextureId'), 0.0), function():Dynamic return cast _Runtime.callValue(AwdParse.resolveAwdTexture__awdParse, cast ([_Runtime.field(parsed, 'diffuseTextureId'), textureBlocks, warnings] : Array<Dynamic>)), function():Dynamic return cast null);
-    material = null;
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(diffuseTexture, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(parsed, 'color'), null)))) {
-      (material = cast ((cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.select(!_Runtime.strictEquals(_Runtime.field(parsed, 'color'), null), function():Dynamic return cast _Runtime.callValue(AwdParse.awdColorToRgba__awdParse, cast ([_Runtime.field(parsed, 'color')] : Array<Dynamic>)), function():Dynamic return cast 4294967295.0), diffuseMap: diffuseTexture }] : Array<Dynamic>)) : Dynamic) : Material) : Dynamic));
-      _Runtime.setField(material, 'name', _Runtime.select(_Runtime.compare(_Runtime.field(_Runtime.field(parsed, 'name'), 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.field(parsed, 'name'), function():Dynamic return cast null));
+    diffuseTexture = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(parsed, 'diffuseTextureId'), 0.0), function():Dynamic return cast _Runtime.callValue(AwdParse.resolveAwdTexture__awdParse, cast ([_Runtime.field(parsed, 'diffuseTextureId'), textureBlocks, document, warnings] : Array<Dynamic>)), function():Dynamic return cast null);
+    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(diffuseTexture, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(parsed, 'color'), null)))) {
+      _Runtime.callProperty(cache, 'set', cast ([materialId, -1.0] : Array<Dynamic>));
+      return cast -1.0;
     }
-    _Runtime.callProperty(cache, 'set', cast ([materialId, material] : Array<Dynamic>));
-    return cast material;
+    material = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.select(!_Runtime.strictEquals(_Runtime.field(parsed, 'color'), null), function():Dynamic return cast _Runtime.callValue(AwdParse.awdColorToRgba__awdParse, cast ([_Runtime.field(parsed, 'color')] : Array<Dynamic>)), function():Dynamic return cast 4294967295.0), diffuseMap: diffuseTexture }] : Array<Dynamic>)) : Dynamic) : Material);
+    _Runtime.setField(material, 'name', _Runtime.select(_Runtime.compare(_Runtime.field(_Runtime.field(parsed, 'name'), 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.field(parsed, 'name'), function():Dynamic return cast null));
+    index = _Runtime.field(_Runtime.field(document, 'materials'), 'length');
+    _Runtime.callProperty(_Runtime.field(document, 'materials'), 'push', cast ([(cast (cast material : Dynamic) : MaterialLike)] : Array<Dynamic>));
+    _Runtime.callProperty(cache, 'set', cast ([materialId, index] : Array<Dynamic>));
+    return cast index;
     return cast null;
   }
 
-  public static function resolveAwdTexture__awdParse(textureId:Float, textureBlocks:Dynamic, ?warnings:Array<String>):Null<Texture> {
+  public static function resolveAwdTexture__awdParse(textureId:Float, textureBlocks:Dynamic, document:SceneDocument, ?warnings:Array<String>):Null<Texture> {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     parsed = _Runtime.callProperty(textureBlocks, 'get', cast ([textureId] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -1011,10 +1162,10 @@ class AwdParse {
       return cast null;
     }
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(parsed, 'bytes'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(parsed, 'mimeType'), null)))) {
-      return cast _Runtime.callValue(createTexture, cast ([{ resource: { kind: SceneResourceRefKindValue.Embedded, bytes: _Runtime.field(parsed, 'bytes'), mimeType: _Runtime.field(parsed, 'mimeType'), state: ResourceResolutionStateValue.Unresolved } }] : Array<Dynamic>));
+      return cast _Runtime.callValue(createEmbeddedTextureRef, cast ([_Runtime.field(parsed, 'bytes'), _Runtime.field(parsed, 'mimeType'), _Runtime.field(document, 'resources')] : Array<Dynamic>));
     }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(parsed, 'url'), null))) {
-      return cast _Runtime.callValue(createTexture, cast ([{ resource: { kind: SceneResourceRefKindValue.External, uri: _Runtime.field(parsed, 'url'), basePath: null, mimeType: null, state: ResourceResolutionStateValue.Unresolved } }] : Array<Dynamic>));
+      return cast _Runtime.callValue(createExternalTextureRef, cast ([_Runtime.field(parsed, 'url'), null, _Runtime.field(document, 'resources')] : Array<Dynamic>));
     }
     return cast null;
     return cast null;

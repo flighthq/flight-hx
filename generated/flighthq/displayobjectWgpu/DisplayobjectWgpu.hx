@@ -14,26 +14,24 @@ import flighthq.displayobjectWgpu.WgpuClipRectangle as Facade_DisplayobjectWgpu_
 import flighthq.displayobjectWgpu.WgpuColorAdjustment as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuColorAdjustment;
 import flighthq.displayobjectWgpu.WgpuDefaultMaterial as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuDefaultMaterial;
 import flighthq.displayobjectWgpu.WgpuDisplayObject as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuDisplayObject;
-import flighthq.displayobjectWgpu.WgpuParticleEmitter as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuParticleEmitter;
+import flighthq.displayobjectWgpu.WgpuParticleEmitter2D as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuParticleEmitter2D;
 import flighthq.displayobjectWgpu.WgpuQuadBatch as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuQuadBatch;
 import flighthq.displayobjectWgpu.WgpuRegistration as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuRegistration;
 import flighthq.displayobjectWgpu.WgpuRenderStats as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuRenderStats;
 import flighthq.displayobjectWgpu.WgpuRendererData as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuRendererData;
 import flighthq.displayobjectWgpu.WgpuRichText as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuRichText;
-import flighthq.displayobjectWgpu.WgpuRichText.WgpuRichTextOverlay;
 import flighthq.displayobjectWgpu.WgpuScale9Mapper as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuScale9Mapper;
 import flighthq.displayobjectWgpu.WgpuScale9Shape as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuScale9Shape;
 import flighthq.displayobjectWgpu.WgpuShape as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuShape;
+import flighthq.displayobjectWgpu.WgpuShapeMesh as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuShapeMesh;
 import flighthq.displayobjectWgpu.WgpuSprite as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuSprite;
 import flighthq.displayobjectWgpu.WgpuSpriteBatch as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuSpriteBatch;
-import flighthq.displayobjectWgpu.WgpuSpriteBatch.WgpuQuadBatchResources;
 import flighthq.displayobjectWgpu.WgpuSpriteRenderer as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuSpriteRenderer;
 import flighthq.displayobjectWgpu.WgpuTextInput as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuTextInput;
 import flighthq.displayobjectWgpu.WgpuTextLabel as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuTextLabel;
 import flighthq.displayobjectWgpu.WgpuTilemap as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuTilemap;
 import flighthq.displayobjectWgpu.WgpuVelocity as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuVelocity;
 import flighthq.displayobjectWgpu.WgpuVideo as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuVideo;
-import flighthq.displayobjectWgpu._internal._WgpuShapeMeshValues as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu__internal__WgpuShapeMeshValues;
 import flighthq.types.BlendMode;
 import flighthq.types.ColorTransform;
 import flighthq.types.DisplayObject;
@@ -59,10 +57,13 @@ import flighthq.types.SpriteRenderer;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.Velocity.VelocityField;
 import flighthq.types.WgpuMaterialRenderer;
+import flighthq.types.WgpuQuadBatchResources;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuShapeMeshBuffers;
 import flighthq.types.WgpuRenderStats;
 import flighthq.types.WgpuRenderTarget;
+import flighthq.types.WgpuRichTextOverlay;
+import flighthq.types.WgpuShapeMesh;
 import flighthq.types.WgpuVelocityWriter;
 import flighthq.types.WgpuVelocityWriter.WgpuVelocityContext;
 
@@ -142,9 +143,9 @@ class DisplayobjectWgpu {
 
   public static final defaultWgpuMoveTo:Dynamic = Facade_DisplayobjectWgpu_flighthq_displayobjectCanvas_CanvasShapeCommands.defaultCanvasMoveTo;
 
-  public static final defaultWgpuParticleEmitterRenderer:SpriteRenderer = Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuParticleEmitter.defaultWgpuParticleEmitterRenderer;
+  public static final defaultWgpuParticleEmitter2DRenderer:SpriteRenderer = Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuParticleEmitter2D.defaultWgpuParticleEmitter2DRenderer;
 
-  public static final defaultWgpuParticleEmitterVelocityWriter:WgpuVelocityWriter = Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuVelocity.defaultWgpuParticleEmitterVelocityWriter;
+  public static final defaultWgpuParticleEmitter2DVelocityWriter:WgpuVelocityWriter = Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuVelocity.defaultWgpuParticleEmitter2DVelocityWriter;
 
   public static final defaultWgpuQuadBatchRenderer:SpriteRenderer = Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuQuadBatch.defaultWgpuQuadBatchRenderer;
 
@@ -188,8 +189,8 @@ class DisplayobjectWgpu {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuDisplayObject.drawWgpuDisplayObject, cast ([_state, _renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawWgpuParticleEmitter(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuParticleEmitter.drawWgpuParticleEmitter, cast ([state, renderProxy] : Array<Dynamic>));
+  public static function drawWgpuParticleEmitter2D(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+    _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuParticleEmitter2D.drawWgpuParticleEmitter2D, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
   public static function drawWgpuRichText(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
@@ -213,7 +214,7 @@ class DisplayobjectWgpu {
   }
 
   public static function drawWgpuShapeMeshes(state:WgpuRenderState, renderProxy:RenderProxy2D, meshes:Array<WgpuShapeMesh>, buffers:WgpuShapeMeshBuffers):Void {
-    _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu__internal__WgpuShapeMeshValues.drawWgpuShapeMeshes, cast ([state, renderProxy, meshes, buffers] : Array<Dynamic>));
+    _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuShapeMesh.drawWgpuShapeMeshes, cast ([state, renderProxy, meshes, buffers] : Array<Dynamic>));
   }
 
   public static function drawWgpuTextInputOverlay(context:Dynamic, source:RichText, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {

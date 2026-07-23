@@ -7,11 +7,9 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Vector3.cloneVector3;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.types.PointLight;
+import flighthq.types.PointLightOptions;
 import flighthq.types.Types.PointLightKind;
-import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._PointLightValues.PointLightKind;
-
-typedef PointLightOptions = { @:optional var castsShadow:Bool; @:optional var color:Float; @:optional var intensity:Float; @:optional var normalBias:Float; @:optional var pcfRadius:Float; @:optional var position:Vector3Like; @:optional var range:Float; @:optional var shadowBias:Float; };
 
 @:expose("flighthq.lighting.PointLight")
 class PointLight {

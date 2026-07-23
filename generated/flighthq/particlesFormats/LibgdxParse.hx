@@ -4,15 +4,11 @@ package flighthq.particlesFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
-import flighthq.particlesFormats.LibgdxSchema.LibgdxParticleDocument;
-import flighthq.particlesFormats.LibgdxSchema.LibgdxRangeValue;
+import flighthq.types.LibgdxParticleSchema.LibgdxParseOptions;
+import flighthq.types.LibgdxParticleSchema.LibgdxParseResult;
+import flighthq.types.LibgdxParticleSchema.LibgdxParticleDocument;
+import flighthq.types.LibgdxParticleSchema.LibgdxRangeValue;
 import flighthq.types.ParticleEmitterConfig;
-
-typedef LibgdxParseOptions = { @:optional var textureSize:Float; };
-
-typedef LibgdxParseResult = { var config:ParticleEmitterConfig; var document:LibgdxParticleDocument; var warnings:Array<String>; };
-
-typedef LibgdxParsed = LibgdxParseResult;
 
 typedef LibgdxSection__libgdxParse = Dynamic;
 

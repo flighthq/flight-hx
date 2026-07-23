@@ -6,11 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.sceneGl.GlDebugPrelude.bindGlDebugNormalMap;
 import flighthq.sceneGl.GlDebugPrelude.ensureGlDebugProgram;
 import flighthq.sceneGl.GlMeshMaterialRegistry.registerGlMeshMaterialRenderer;
-import flighthq.sceneGl._internal._GlMeshProgramValues.beginGlMeshDraw;
-import flighthq.sceneGl._internal._GlMeshProgramValues.drawGlMeshSubset;
-import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
-import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
-import flighthq.types.Camera;
+import flighthq.sceneGl.GlMeshProgram.beginGlMeshDraw;
+import flighthq.sceneGl.GlMeshProgram.drawGlMeshSubset;
+import flighthq.sceneGl.GlMeshProgram.setGlMeshViewProjection;
+import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
+import flighthq.types.Camera3D;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlRenderState;
 import flighthq.types.Material;
@@ -23,7 +23,7 @@ import flighthq.types._internal._NormalMaterialValues.NormalMaterialKind;
 
 @:expose("flighthq.sceneGl.NormalGlMeshMaterialRenderer")
 class NormalGlMeshMaterialRenderer {
-  public static final normalGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera) {
+  public static final normalGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var normal:Dynamic = cast _Runtime.UNDEFINED;
     var hasNormalMap:Dynamic = cast _Runtime.UNDEFINED;

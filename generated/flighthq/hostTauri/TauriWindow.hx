@@ -3,10 +3,11 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostTauri.TauriModule.TauriApi;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.types.ApplicationWindow;
 import flighthq.types.ApplicationWindow.WindowBackend;
+import flighthq.types.TauriApi;
+import flighthq.types.TauriApi.TauriWindow;
 
 @:expose("flighthq.hostTauri.TauriWindow")
 class TauriWindow {

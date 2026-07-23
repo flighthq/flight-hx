@@ -4,7 +4,7 @@ package flighthq.sceneWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuTextureUpload.uploadWgpuTextureImageResource;
-import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
+import flighthq.sceneWgpu.WgpuSceneRuntime.getWgpuSceneRuntime;
 import flighthq.types.CubeTexture;
 import flighthq.types.Environment;
 import flighthq.types.ImageResource;

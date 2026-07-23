@@ -3,8 +3,8 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostTauri.TauriModule.TauriApi;
 import flighthq.types.Clipboard.ClipboardBackend;
+import flighthq.types.TauriApi;
 
 @:expose("flighthq.hostTauri.TauriClipboard")
 class TauriClipboard {

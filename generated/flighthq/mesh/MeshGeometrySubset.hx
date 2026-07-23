@@ -32,6 +32,26 @@ class MeshGeometrySubset {
     return cast null;
   }
 
+  public static function getMeshGeometryTriangleSubsetIndex(geometry:MeshGeometry, triangleIndex:Float):Float {
+    var firstElement:Float = cast _Runtime.UNDEFINED;
+    var subsets:Dynamic = cast _Runtime.UNDEFINED;
+    if (_Runtime.truthy(_Runtime.compare(triangleIndex, 0.0, '<'))) { return cast -1.0; }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-list'))) { (firstElement = cast ((triangleIndex * 3.0) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-strip'))) { (firstElement = cast (triangleIndex : Dynamic)); } else { return cast -1.0; } }
+    subsets = _Runtime.field(geometry, 'subsets');
+    {
+      var subsetIndex:Dynamic = 0.0;
+      while (_Runtime.truthy(_Runtime.compare(subsetIndex, _Runtime.field(subsets, 'length'), '<'))) {
+        var subset:Dynamic = _Runtime.getIndex(subsets, subsetIndex);
+        if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(firstElement, _Runtime.field(subset, 'indexOffset'), '>='), function():Dynamic return cast _Runtime.compare((firstElement + 3.0), (_Runtime.field(subset, 'indexOffset') + _Runtime.field(subset, 'indexCount')), '<=')))) {
+          return cast subsetIndex;
+        }
+        subsetIndex++;
+      }
+    }
+    return cast -1.0;
+    return cast null;
+  }
+
   public static function setMeshGeometrySubsets(geometry:MeshGeometry, subsets:Array<MeshSubset>):Void {
     var next:Array<MeshSubset> = cast _Runtime.UNDEFINED;
     next = cast ([] : Array<Dynamic>);

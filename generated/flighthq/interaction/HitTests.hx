@@ -11,7 +11,7 @@ import flighthq.node.BoundsRectangle.getNodeLocalBoundsRectangle;
 import flighthq.node.BoundsRectangle.getNodeWorldBoundsRectangle;
 import flighthq.node.Hierarchy.getNodeParent;
 import flighthq.node.Node.getNodeRuntime;
-import flighthq.node.Transform2d.getNodeWorldMatrix;
+import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.path.ContainsPathPoint.containsPathPoint;
 import flighthq.types.DisplayObject;
 import flighthq.types.Entity.Kind;

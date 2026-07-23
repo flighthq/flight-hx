@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 
 typedef AssetType = String;
 
-typedef AssetDescriptor = { var id:String; var url:String; var type:AssetType; @:optional var group:String; };
+typedef AssetDescriptor = { var id:String; var url:String; var type:AssetType; @:optional var groups:Array<String>; };
 
 typedef AssetManifest = Array<AssetDescriptor>;
 

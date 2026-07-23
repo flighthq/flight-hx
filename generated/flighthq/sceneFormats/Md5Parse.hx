@@ -3,50 +3,59 @@ package flighthq.sceneFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.geometry.Matrix4.composeMatrix4;
+import flighthq.geometry.Matrix4.createMatrix4;
+import flighthq.geometry.Matrix4.inverseMatrix4;
 import flighthq.geometry.Quaternion.conjugateQuaternion;
 import flighthq.geometry.Quaternion.createQuaternion;
 import flighthq.geometry.Quaternion.multiplyQuaternion;
 import flighthq.geometry.Quaternion.rotateVector3ByQuaternion;
 import flighthq.geometry.Quaternion.setQuaternion;
+import flighthq.geometry.Transform3d.createTransform3D;
 import flighthq.geometry.Vector3.setVector3;
 import flighthq.materials.ClassicMaterials.createBlinnPhongMaterial;
 import flighthq.mesh.MeshGeometry.createMeshGeometry;
 import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryNormals;
 import flighthq.mesh.MeshGeometryLayout.CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT;
-import flighthq.node.Hierarchy.addNodeChild;
-import flighthq.node.Revision.invalidateNodeLocalTransform;
-import flighthq.scene.Mesh.createMesh;
-import flighthq.scene.Scene.createScene;
-import flighthq.scene.SceneNode.createSceneNode;
-import flighthq.sceneFormats.Md5Schema.Md5Joint;
-import flighthq.sceneFormats.Md5Schema.Md5Mesh;
-import flighthq.sceneFormats.Md5Schema.Md5Vertex;
-import flighthq.sceneFormats.Md5Schema.Md5Weight;
+import flighthq.scene.SceneDocument.createSceneFromDocument;
 import flighthq.sceneFormats.Shared.SKINNED_FLOATS_PER_VERTEX;
-import flighthq.sceneFormats.Shared.SkinInfluence;
 import flighthq.sceneFormats.Shared.convertPositionsZUpToYUp;
 import flighthq.sceneFormats.Shared.convertQuaternionsZUpToYUp;
 import flighthq.sceneFormats.Shared.createExternalTextureRef;
 import flighthq.sceneFormats.Shared.packSkinInfluences;
 import flighthq.sceneFormats.Shared.reverseTriangleWinding;
-import flighthq.skeleton3d.Skeleton3d.createSkeleton3D;
 import flighthq.types.Material;
-import flighthq.types.Mesh;
+import flighthq.types.Material.MaterialLike;
+import flighthq.types.Matrix4;
+import flighthq.types.Md5Schema.Md5Joint;
+import flighthq.types.Md5Schema.Md5Mesh;
+import flighthq.types.Md5Schema.Md5Vertex;
+import flighthq.types.Md5Schema.Md5Weight;
 import flighthq.types.Scene;
-import flighthq.types.SceneNode;
-import flighthq.types.Skeleton3D;
+import flighthq.types.SceneDocument;
+import flighthq.types.SceneDocument.SceneDocumentMesh;
+import flighthq.types.SceneDocument.SceneDocumentSkin;
+import flighthq.types.SkinInfluence;
+import flighthq.types.Types.MeshKind;
+import flighthq.types.Types.SceneNodeKind;
+import flighthq.types._internal._MeshValues.MeshKind;
+import flighthq.types._internal._SceneNodeValues.SceneNodeKind;
 
 @:expose("flighthq.sceneFormats.Md5Parse")
 class Md5Parse {
   public static function createSceneFromMd5Mesh(source:String, ?warnings:Array<String>):Scene {
-    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    return cast _Runtime.callValue(createSceneFromDocument, cast ([_Runtime.callValue(parseMd5Mesh, cast ([source, warnings] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function parseMd5Mesh(source:String, ?warnings:Array<String>):SceneDocument {
+    var document:Dynamic = cast _Runtime.UNDEFINED;
     var joints:Array<Md5Joint> = cast _Runtime.UNDEFINED;
     var meshes:Array<Md5Mesh> = cast _Runtime.UNDEFINED;
     var lines:Dynamic = cast _Runtime.UNDEFINED;
     var i:Dynamic = cast _Runtime.UNDEFINED;
-    var skeleton:Null<Skeleton3D> = cast _Runtime.UNDEFINED;
-    var skeletonRoot:Null<SceneNode> = cast _Runtime.UNDEFINED;
-    scene = _Runtime.callValue(createScene, cast ([] : Array<Dynamic>));
+    var skinIndex:Null<Float> = cast _Runtime.UNDEFINED;
+    document = _Runtime.callValue(Md5Parse.emptyMd5Document__md5Parse, cast ([] : Array<Dynamic>));
     joints = cast ([] : Array<Dynamic>);
     meshes = cast ([] : Array<Dynamic>);
     lines = _Runtime.callProperty(source, 'split', cast (['\n'] : Array<Dynamic>));
@@ -76,75 +85,9 @@ class Md5Parse {
         continue;
       }
     }
-    skeleton = null;
-    skeletonRoot = null;
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(joints, 'length'), 0.0, '>'))) {
-      (skeletonRoot = cast (_Runtime.callValue(createSceneNode, cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { name: 'skeleton' }] : Array<Dynamic>)) : Dynamic));
-      var jointNodes:Array<SceneNode> = cast ([] : Array<Dynamic>);
-      var jointPositions:Array<Float> = cast ([] : Array<Dynamic>);
-      var jointOrientations:Array<Float> = cast ([] : Array<Dynamic>);
-      for (joint in _Runtime.iterable(joints)) {
-        _Runtime.pushMany(jointPositions, cast ([_Runtime.field(joint, 'positionX'), _Runtime.field(joint, 'positionY'), _Runtime.field(joint, 'positionZ')] : Array<Dynamic>));
-        _Runtime.pushMany(jointOrientations, cast ([_Runtime.field(joint, 'orientationX'), _Runtime.field(joint, 'orientationY'), _Runtime.field(joint, 'orientationZ'), _Runtime.field(joint, 'orientationW')] : Array<Dynamic>));
-      }
-      _Runtime.callValue(convertPositionsZUpToYUp, cast ([jointPositions] : Array<Dynamic>));
-      _Runtime.callValue(convertQuaternionsZUpToYUp, cast ([jointOrientations] : Array<Dynamic>));
-      var parentConj:Dynamic = _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>));
-      var relPos:Dynamic = { x: 0.0, y: 0.0, z: 0.0 };
-      var relQuat:Dynamic = _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>));
-      {
-        var j:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(j, _Runtime.field(joints, 'length'), '<'))) {
-          var joint:Dynamic = _Runtime.getIndex(joints, j);
-          var node:Dynamic = _Runtime.callValue(createSceneNode, cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { name: _Runtime.field(joint, 'name') }] : Array<Dynamic>));
-          var pi:Dynamic = (j * 3.0);
-          var qi:Dynamic = (j * 4.0);
-          var parentIndex:Dynamic = _Runtime.field(joint, 'parentIndex');
-          var localPx:Dynamic = _Runtime.getIndex(jointPositions, pi);
-          var localPy:Dynamic = _Runtime.getIndex(jointPositions, (pi + 1.0));
-          var localPz:Dynamic = _Runtime.getIndex(jointPositions, (pi + 2.0));
-          var localQx:Dynamic = _Runtime.getIndex(jointOrientations, qi);
-          var localQy:Dynamic = _Runtime.getIndex(jointOrientations, (qi + 1.0));
-          var localQz:Dynamic = _Runtime.getIndex(jointOrientations, (qi + 2.0));
-          var localQw:Dynamic = _Runtime.getIndex(jointOrientations, (qi + 3.0));
-          if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(parentIndex, 0.0, '>='), function():Dynamic return cast _Runtime.compare(parentIndex, _Runtime.field(joints, 'length'), '<')))) {
-            var ppi:Dynamic = (parentIndex * 3.0);
-            var pqi:Dynamic = (parentIndex * 4.0);
-            _Runtime.callValue(conjugateQuaternion, cast ([parentConj, { w: _Runtime.getIndex(jointOrientations, (pqi + 3.0)), x: _Runtime.getIndex(jointOrientations, pqi), y: _Runtime.getIndex(jointOrientations, (pqi + 1.0)), z: _Runtime.getIndex(jointOrientations, (pqi + 2.0)) }] : Array<Dynamic>));
-            _Runtime.callValue(rotateVector3ByQuaternion, cast ([relPos, { x: (localPx - _Runtime.getIndex(jointPositions, ppi)), y: (localPy - _Runtime.getIndex(jointPositions, (ppi + 1.0))), z: (localPz - _Runtime.getIndex(jointPositions, (ppi + 2.0))) }, parentConj] : Array<Dynamic>));
-            _Runtime.callValue(multiplyQuaternion, cast ([relQuat, parentConj, { w: localQw, x: localQx, y: localQy, z: localQz }] : Array<Dynamic>));
-            (localPx = cast (_Runtime.field(relPos, 'x') : Dynamic));
-            (localPy = cast (_Runtime.field(relPos, 'y') : Dynamic));
-            (localPz = cast (_Runtime.field(relPos, 'z') : Dynamic));
-            (localQx = cast (_Runtime.field(relQuat, 'x') : Dynamic));
-            (localQy = cast (_Runtime.field(relQuat, 'y') : Dynamic));
-            (localQz = cast (_Runtime.field(relQuat, 'z') : Dynamic));
-            (localQw = cast (_Runtime.field(relQuat, 'w') : Dynamic));
-          } else { if (_Runtime.truthy(_Runtime.compare(parentIndex, _Runtime.field(joints, 'length'), '>='))) {
-            _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: joint ' + Std.string(j) + ' has out-of-range parent index ' + Std.string(parentIndex) + ''] : Array<Dynamic>));
-          } }
-          _Runtime.callValue(setVector3, cast ([_Runtime.field(node, 'position'), localPx, localPy, localPz] : Array<Dynamic>));
-          _Runtime.callValue(setQuaternion, cast ([_Runtime.field(node, 'rotation'), localQx, localQy, localQz, localQw] : Array<Dynamic>));
-          _Runtime.callValue(invalidateNodeLocalTransform, cast ([node] : Array<Dynamic>));
-          _Runtime.callProperty(jointNodes, 'push', cast ([node] : Array<Dynamic>));
-          j++;
-        }
-      }
-      {
-        var j:Dynamic = 0.0;
-        while (_Runtime.truthy(_Runtime.compare(j, _Runtime.field(joints, 'length'), '<'))) {
-          var parentIndex:Dynamic = _Runtime.field(_Runtime.getIndex(joints, j), 'parentIndex');
-          if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(parentIndex, 0.0, '>='), function():Dynamic return cast _Runtime.compare(parentIndex, _Runtime.field(jointNodes, 'length'), '<')))) {
-            _Runtime.callValue(addNodeChild, cast ([_Runtime.getIndex(jointNodes, parentIndex), _Runtime.getIndex(jointNodes, j)] : Array<Dynamic>));
-          } else {
-            _Runtime.callValue(addNodeChild, cast ([skeletonRoot, _Runtime.getIndex(jointNodes, j)] : Array<Dynamic>));
-          }
-          j++;
-        }
-      }
-      _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), skeletonRoot] : Array<Dynamic>));
-      var jointNames:Dynamic = _Runtime.callProperty(joints, 'map', cast ([function(joint:Dynamic) return _Runtime.field(joint, 'name')] : Array<Dynamic>));
-      (skeleton = cast (_Runtime.callValue(createSkeleton3D, cast ([jointNodes, _Runtime.field(_Runtime, 'UNDEFINED'), jointNames] : Array<Dynamic>)) : Dynamic));
+      (skinIndex = cast (_Runtime.field(_Runtime.field(document, 'skins'), 'length') : Dynamic));
+      _Runtime.callProperty(_Runtime.field(document, 'skins'), 'push', cast ([_Runtime.callValue(Md5Parse.buildMd5SkeletonDocument__md5Parse, cast ([joints, document, warnings] : Array<Dynamic>))] : Array<Dynamic>));
     }
     {
       var m:Dynamic = 0.0;
@@ -209,20 +152,128 @@ class Md5Parse {
         if (_Runtime.truthy(_Runtime.compare(_Runtime.field(indices, 'length'), 0.0, '>'))) {
           var geometry:Dynamic = _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), 'from', cast ([indices] : Array<Dynamic>)), layout: CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT, vertices: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [vertices]) }] : Array<Dynamic>));
           _Runtime.callValue(computeMeshGeometryNormals, cast ([geometry, geometry] : Array<Dynamic>));
-          var materials:Array<Material> = cast ([] : Array<Dynamic>);
+          var meshMaterials:Array<Float> = cast ([] : Array<Dynamic>);
           if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(md5Mesh, 'shader'), 'length'), 0.0, '>'))) {
-            var material:Dynamic = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuseMap: _Runtime.callValue(createExternalTextureRef, cast ([_Runtime.field(md5Mesh, 'shader')] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Material);
+            var material:Dynamic = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuseMap: _Runtime.callValue(createExternalTextureRef, cast ([_Runtime.field(md5Mesh, 'shader'), null, _Runtime.field(document, 'resources')] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Material);
             _Runtime.setField(material, 'name', _Runtime.field(md5Mesh, 'shader'));
-            _Runtime.callProperty(materials, 'push', cast ([material] : Array<Dynamic>));
+            _Runtime.callProperty(meshMaterials, 'push', cast ([_Runtime.field(_Runtime.field(document, 'materials'), 'length')] : Array<Dynamic>));
+            _Runtime.callProperty(_Runtime.field(document, 'materials'), 'push', cast ([(cast (cast material : Dynamic) : MaterialLike)] : Array<Dynamic>));
           }
-          var meshNode:Mesh = _Runtime.callValue(createMesh, cast ([geometry, materials] : Array<Dynamic>));
-          if (_Runtime.truthy(!_Runtime.strictEquals(skeleton, null))) { _Runtime.setField(meshNode, 'skin', { skeleton: skeleton, skeletonRoot: skeletonRoot }); }
-          _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), (cast (cast meshNode : Dynamic) : SceneNode)] : Array<Dynamic>));
+          var documentMesh:SceneDocumentMesh = { geometry: geometry, materials: meshMaterials };
+          if (_Runtime.truthy(!_Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(documentMesh, 'skin', skinIndex); }
+          var meshIndex:Dynamic = _Runtime.field(_Runtime.field(document, 'meshes'), 'length');
+          _Runtime.callProperty(_Runtime.field(document, 'meshes'), 'push', cast ([documentMesh] : Array<Dynamic>));
+          var nodeIndex:Dynamic = _Runtime.field(_Runtime.field(document, 'nodes'), 'length');
+          _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+          _Runtime.callProperty(_Runtime.field(_Runtime.getIndex(_Runtime.field(document, 'scenes'), 0.0), 'rootNodes'), 'push', cast ([nodeIndex] : Array<Dynamic>));
         }
         m++;
       }
     }
-    return cast scene;
+    return cast document;
+    return cast null;
+  }
+
+  public static function buildMd5SkeletonDocument__md5Parse(joints:Array<Md5Joint>, document:SceneDocument, ?warnings:Array<String>):SceneDocumentSkin {
+    var skeletonRootIndex:Dynamic = cast _Runtime.UNDEFINED;
+    var jointPositions:Array<Float> = cast _Runtime.UNDEFINED;
+    var jointOrientations:Array<Float> = cast _Runtime.UNDEFINED;
+    var jointNodeIndices:Array<Float> = cast _Runtime.UNDEFINED;
+    var parentConj:Dynamic = cast _Runtime.UNDEFINED;
+    var relPos:Dynamic = cast _Runtime.UNDEFINED;
+    var relQuat:Dynamic = cast _Runtime.UNDEFINED;
+    var inverseBind:Array<Matrix4> = cast _Runtime.UNDEFINED;
+    var bindWorld:Dynamic = cast _Runtime.UNDEFINED;
+    skeletonRootIndex = _Runtime.field(_Runtime.field(document, 'nodes'), 'length');
+    _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: SceneNodeKind, name: 'skeleton', transform: _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(_Runtime.getIndex(_Runtime.field(document, 'scenes'), 0.0), 'rootNodes'), 'push', cast ([skeletonRootIndex] : Array<Dynamic>));
+    jointPositions = cast ([] : Array<Dynamic>);
+    jointOrientations = cast ([] : Array<Dynamic>);
+    for (joint in _Runtime.iterable(joints)) {
+      _Runtime.pushMany(jointPositions, cast ([_Runtime.field(joint, 'positionX'), _Runtime.field(joint, 'positionY'), _Runtime.field(joint, 'positionZ')] : Array<Dynamic>));
+      _Runtime.pushMany(jointOrientations, cast ([_Runtime.field(joint, 'orientationX'), _Runtime.field(joint, 'orientationY'), _Runtime.field(joint, 'orientationZ'), _Runtime.field(joint, 'orientationW')] : Array<Dynamic>));
+    }
+    _Runtime.callValue(convertPositionsZUpToYUp, cast ([jointPositions] : Array<Dynamic>));
+    _Runtime.callValue(convertQuaternionsZUpToYUp, cast ([jointOrientations] : Array<Dynamic>));
+    jointNodeIndices = cast ([] : Array<Dynamic>);
+    {
+      var j:Dynamic = 0.0;
+      while (_Runtime.truthy(_Runtime.compare(j, _Runtime.field(joints, 'length'), '<'))) {
+        _Runtime.callProperty(jointNodeIndices, 'push', cast ([_Runtime.field(_Runtime.field(document, 'nodes'), 'length')] : Array<Dynamic>));
+        _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: SceneNodeKind, name: _Runtime.field(_Runtime.getIndex(joints, j), 'name'), transform: _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+        j++;
+      }
+    }
+    parentConj = _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>));
+    relPos = { x: 0.0, y: 0.0, z: 0.0 };
+    relQuat = _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>));
+    {
+      var j:Dynamic = 0.0;
+      while (_Runtime.truthy(_Runtime.compare(j, _Runtime.field(joints, 'length'), '<'))) {
+        var pi:Dynamic = (j * 3.0);
+        var qi:Dynamic = (j * 4.0);
+        var parentIndex:Dynamic = _Runtime.field(_Runtime.getIndex(joints, j), 'parentIndex');
+        var localPx:Dynamic = _Runtime.getIndex(jointPositions, pi);
+        var localPy:Dynamic = _Runtime.getIndex(jointPositions, (pi + 1.0));
+        var localPz:Dynamic = _Runtime.getIndex(jointPositions, (pi + 2.0));
+        var localQx:Dynamic = _Runtime.getIndex(jointOrientations, qi);
+        var localQy:Dynamic = _Runtime.getIndex(jointOrientations, (qi + 1.0));
+        var localQz:Dynamic = _Runtime.getIndex(jointOrientations, (qi + 2.0));
+        var localQw:Dynamic = _Runtime.getIndex(jointOrientations, (qi + 3.0));
+        if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(parentIndex, 0.0, '>='), function():Dynamic return cast _Runtime.compare(parentIndex, _Runtime.field(joints, 'length'), '<')))) {
+          var ppi:Dynamic = (parentIndex * 3.0);
+          var pqi:Dynamic = (parentIndex * 4.0);
+          _Runtime.callValue(conjugateQuaternion, cast ([parentConj, { w: _Runtime.getIndex(jointOrientations, (pqi + 3.0)), x: _Runtime.getIndex(jointOrientations, pqi), y: _Runtime.getIndex(jointOrientations, (pqi + 1.0)), z: _Runtime.getIndex(jointOrientations, (pqi + 2.0)) }] : Array<Dynamic>));
+          _Runtime.callValue(rotateVector3ByQuaternion, cast ([relPos, { x: (localPx - _Runtime.getIndex(jointPositions, ppi)), y: (localPy - _Runtime.getIndex(jointPositions, (ppi + 1.0))), z: (localPz - _Runtime.getIndex(jointPositions, (ppi + 2.0))) }, parentConj] : Array<Dynamic>));
+          _Runtime.callValue(multiplyQuaternion, cast ([relQuat, parentConj, { w: localQw, x: localQx, y: localQy, z: localQz }] : Array<Dynamic>));
+          (localPx = cast (_Runtime.field(relPos, 'x') : Dynamic));
+          (localPy = cast (_Runtime.field(relPos, 'y') : Dynamic));
+          (localPz = cast (_Runtime.field(relPos, 'z') : Dynamic));
+          (localQx = cast (_Runtime.field(relQuat, 'x') : Dynamic));
+          (localQy = cast (_Runtime.field(relQuat, 'y') : Dynamic));
+          (localQz = cast (_Runtime.field(relQuat, 'z') : Dynamic));
+          (localQw = cast (_Runtime.field(relQuat, 'w') : Dynamic));
+        } else { if (_Runtime.truthy(_Runtime.compare(parentIndex, _Runtime.field(joints, 'length'), '>='))) {
+          _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: joint ' + Std.string(j) + ' has out-of-range parent index ' + Std.string(parentIndex) + ''] : Array<Dynamic>));
+        } }
+        var transform:Dynamic = _Runtime.field(_Runtime.getIndex(_Runtime.field(document, 'nodes'), _Runtime.getIndex(jointNodeIndices, j)), 'transform');
+        _Runtime.callValue(setVector3, cast ([_Runtime.field(transform, 'position'), localPx, localPy, localPz] : Array<Dynamic>));
+        _Runtime.callValue(setQuaternion, cast ([_Runtime.field(transform, 'rotation'), localQx, localQy, localQz, localQw] : Array<Dynamic>));
+        j++;
+      }
+    }
+    {
+      var j:Dynamic = 0.0;
+      while (_Runtime.truthy(_Runtime.compare(j, _Runtime.field(joints, 'length'), '<'))) {
+        var parentIndex:Dynamic = _Runtime.field(_Runtime.getIndex(joints, j), 'parentIndex');
+        if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(parentIndex, 0.0, '>='), function():Dynamic return cast _Runtime.compare(parentIndex, _Runtime.field(joints, 'length'), '<')))) {
+          _Runtime.callProperty(_Runtime.field(_Runtime.getIndex(_Runtime.field(document, 'nodes'), _Runtime.getIndex(jointNodeIndices, parentIndex)), 'children'), 'push', cast ([_Runtime.getIndex(jointNodeIndices, j)] : Array<Dynamic>));
+        } else {
+          _Runtime.callProperty(_Runtime.field(_Runtime.getIndex(_Runtime.field(document, 'nodes'), skeletonRootIndex), 'children'), 'push', cast ([_Runtime.getIndex(jointNodeIndices, j)] : Array<Dynamic>));
+        }
+        j++;
+      }
+    }
+    inverseBind = cast ([] : Array<Dynamic>);
+    bindWorld = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+    {
+      var j:Dynamic = 0.0;
+      while (_Runtime.truthy(_Runtime.compare(j, _Runtime.field(joints, 'length'), '<'))) {
+        var pi:Dynamic = (j * 3.0);
+        var qi:Dynamic = (j * 4.0);
+        _Runtime.callValue(composeMatrix4, cast ([bindWorld, { x: _Runtime.getIndex(jointPositions, pi), y: _Runtime.getIndex(jointPositions, (pi + 1.0)), z: _Runtime.getIndex(jointPositions, (pi + 2.0)) }, { w: _Runtime.getIndex(jointOrientations, (qi + 3.0)), x: _Runtime.getIndex(jointOrientations, qi), y: _Runtime.getIndex(jointOrientations, (qi + 1.0)), z: _Runtime.getIndex(jointOrientations, (qi + 2.0)) }, { x: 1.0, y: 1.0, z: 1.0 }] : Array<Dynamic>));
+        var inv:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+        _Runtime.callValue(inverseMatrix4, cast ([inv, bindWorld] : Array<Dynamic>));
+        _Runtime.callProperty(inverseBind, 'push', cast ([inv] : Array<Dynamic>));
+        j++;
+      }
+    }
+    return cast { inverseBind: inverseBind, joints: jointNodeIndices };
+    return cast null;
+  }
+
+  public static function emptyMd5Document__md5Parse():SceneDocument {
+    return cast { animations: cast ([] : Array<Dynamic>), cameras: cast ([] : Array<Dynamic>), lights: cast ([] : Array<Dynamic>), materials: cast ([] : Array<Dynamic>), meshes: cast ([] : Array<Dynamic>), metadata: null, nodes: cast ([] : Array<Dynamic>), resources: cast ([] : Array<Dynamic>), scenes: cast ([{ rootNodes: cast ([] : Array<Dynamic>) }] : Array<Dynamic>), skins: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 

@@ -5,8 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.surface.SurfaceBlur.boxBlurSurface;
 import flighthq.types.SurfaceRegion;
-
-typedef SurfaceSharpenOptions = { @:optional var amount:Float; @:optional var radiusX:Float; @:optional var radiusY:Float; @:optional var passes:Float; };
+import flighthq.types.SurfaceSharpenOptions;
 
 @:expose("flighthq.surface.SurfaceSharpen")
 class SurfaceSharpen {

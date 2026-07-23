@@ -6,16 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix3.createMatrix3;
 import flighthq.geometry.Matrix3.setMatrix3NormalFromMatrix4;
 import flighthq.geometry.Matrix4.createMatrix4;
-import flighthq.node.Transform3d.getNodeWorldMatrix4;
+import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.render.SceneRender.prepareSceneRender;
 import flighthq.sceneWgpu.WgpuMeshMaterialRegistry.resolveWgpuMeshMaterialRenderer;
-import flighthq.sceneWgpu.WgpuParticleEmitter3D.drawWgpuSceneParticleEmitters;
-import flighthq.types.Camera;
+import flighthq.sceneWgpu.WgpuParticleEmitter3D.drawWgpuSceneParticleEmitter2Ds;
+import flighthq.types.Camera3D;
 import flighthq.types.Material;
 import flighthq.types.Matrix3;
 import flighthq.types.Matrix4;
 import flighthq.types.Mesh;
-import flighthq.types.SceneLights;
+import flighthq.types.SceneLights.SceneLightsLike;
 import flighthq.types.SceneNode;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.Types.DefaultMaterialKind;
@@ -24,7 +24,7 @@ import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
 @:expose("flighthq.sceneWgpu.DrawWgpuScene")
 class DrawWgpuScene {
-  public static function drawWgpuScene(state:WgpuRenderState, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
+  public static function drawWgpuScene(state:WgpuRenderState, scene:SceneNode, camera:Camera3D, lights:SceneLightsLike):Void {
     var list:Dynamic = cast _Runtime.UNDEFINED;
     var lightBlock:Dynamic = cast _Runtime.UNDEFINED;
     var boundMaterial:Null<Material> = cast _Runtime.UNDEFINED;
@@ -62,7 +62,7 @@ class DrawWgpuScene {
         m++;
       }
     }
-    _Runtime.callValue(drawWgpuSceneParticleEmitters, cast ([state, scene, camera, lights] : Array<Dynamic>));
+    _Runtime.callValue(drawWgpuSceneParticleEmitter2Ds, cast ([state, scene, camera, lights] : Array<Dynamic>));
   }
 
   public static function resolveSubsetMaterial__drawWgpuScene(mesh:Mesh, subsetIndex:Float):Null<Material> {

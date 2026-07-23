@@ -5,22 +5,20 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
 import flighthq.particlesFormats.Detect.detectParticleFormat;
-import flighthq.particlesFormats.LibgdxParse.LibgdxParseOptions;
 import flighthq.particlesFormats.LibgdxParse.parseLibgdxParticle;
 import flighthq.particlesFormats.LibgdxParse.parseLibgdxParticleDocument;
-import flighthq.particlesFormats.ParticleDesignerParse.ParticleDesignerParseOptions;
 import flighthq.particlesFormats.ParticleDesignerParse.parseParticleDesignerPlist;
 import flighthq.particlesFormats.ParticleDesignerParse.parseParticleDesignerPlistDocument;
 import flighthq.particlesFormats.PixiParse.parsePixiParticle;
 import flighthq.particlesFormats.PixiParse.parsePixiParticleDocument;
 import flighthq.particlesFormats.SpineParse.parseSpineParticle;
 import flighthq.particlesFormats.SpineParse.parseSpineParticleDocument;
-import flighthq.particlesFormats.StarlingPexParse.StarlingPexParseOptions;
 import flighthq.particlesFormats.StarlingPexParse.parseStarlingPex;
 import flighthq.particlesFormats.StarlingPexParse.parseStarlingPexDocument;
-import flighthq.particlesFormats.UnityParse.UnityParseOptions;
 import flighthq.particlesFormats.UnityParse.parseUnityParticle;
 import flighthq.particlesFormats.UnityParse.parseUnityParticleDocument;
+import flighthq.types.ParticleConfigParse.ParseParticleConfigOptions;
+import flighthq.types.ParticleConfigParse.ParticleConfigParseResult;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.Types.LibgdxParticleFormatKind;
 import flighthq.types.Types.ParticleDesignerFormatKind;
@@ -34,10 +32,6 @@ import flighthq.types._internal._ParticleFormatKindValues.PixiParticleFormatKind
 import flighthq.types._internal._ParticleFormatKindValues.SpineParticleFormatKind;
 import flighthq.types._internal._ParticleFormatKindValues.StarlingPexFormatKind;
 import flighthq.types._internal._ParticleFormatKindValues.UnityParticleFormatKind;
-
-typedef ParseParticleConfigOptions = Dynamic;
-
-typedef ParticleConfigParseResult = { var config:ParticleEmitterConfig; var format:Null<String>; var warnings:Array<String>; };
 
 @:expose("flighthq.particlesFormats.ParseParticleConfig")
 class ParseParticleConfig {

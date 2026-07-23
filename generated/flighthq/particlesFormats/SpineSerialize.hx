@@ -5,12 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particles.Curve.particleColorCurveToKeyframes;
 import flighthq.particles.Curve.particleCurveToKeyframes;
-import flighthq.particlesFormats.SerializeResult.ParticleSerializeResult;
-import flighthq.particlesFormats.SpineSchema.SpineAlphaKeyframe;
-import flighthq.particlesFormats.SpineSchema.SpineParticleDocument;
-import flighthq.particlesFormats.SpineSchema.SpineTintKeyframe;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
+import flighthq.types.ParticleSerializeResult;
+import flighthq.types.SpineParticleSchema.SpineAlphaKeyframe;
+import flighthq.types.SpineParticleSchema.SpineParticleDocument;
+import flighthq.types.SpineParticleSchema.SpineTintKeyframe;
 
 @:expose("flighthq.particlesFormats.SpineSerialize")
 class SpineSerialize {

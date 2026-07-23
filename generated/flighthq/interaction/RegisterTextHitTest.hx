@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix.inverseMatrixTransformPointXY;
 import flighthq.interaction.HitTests.hitTestGraphLocalBounds;
 import flighthq.interaction.HitTests.registerHitTestPrecise;
-import flighthq.node.Transform2d.getNodeWorldMatrix;
+import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.text.TextLabelLayout.getTextLayout;
 import flighthq.textlayout.RichTextQuery.computeRichTextCharIndexAtPoint;
 import flighthq.types.DisplayObject;

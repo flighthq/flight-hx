@@ -6,14 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.sceneWgpu.WgpuMeshMaterialRegistry.registerWgpuMeshMaterialRenderer;
-import flighthq.sceneWgpu.WgpuUnlitPrelude.WgpuUnlitDefineKey;
+import flighthq.sceneWgpu.WgpuMeshPipeline.beginWgpuMeshDraw;
+import flighthq.sceneWgpu.WgpuMeshPipeline.drawWgpuMeshSubset;
+import flighthq.sceneWgpu.WgpuMeshPipeline.isWgpuTextureReady;
+import flighthq.sceneWgpu.WgpuMeshPipeline.writeWgpuFrameUniform;
 import flighthq.sceneWgpu.WgpuUnlitPrelude.bindWgpuUnlitSurface;
 import flighthq.sceneWgpu.WgpuUnlitPrelude.ensureWgpuUnlitPipeline;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.beginWgpuMeshDraw;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.drawWgpuMeshSubset;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.isWgpuTextureReady;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUniform;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
@@ -23,11 +22,12 @@ import flighthq.types.Types.UnlitMaterialKind;
 import flighthq.types.UnlitMaterial;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuUnlitPipeline.WgpuUnlitDefineKey;
 import flighthq.types._internal._UnlitMaterialValues.UnlitMaterialKind;
 
 @:expose("flighthq.sceneWgpu.UnlitWgpuMeshMaterialRenderer")
 class UnlitWgpuMeshMaterialRenderer {
-  public static final unlitWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera) {
+  public static final unlitWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var unlit:Dynamic = cast _Runtime.UNDEFINED;

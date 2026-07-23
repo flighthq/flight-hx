@@ -5,13 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.BlendMode;
-import flighthq.types.Modifier;
 import flighthq.types.ShadedMaterial;
+import flighthq.types.ShadedMaterialOptions;
 import flighthq.types.Types.ShadedMaterialKind;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._ShadedMaterialValues.ShadedMaterialKind;
-
-typedef ShadedMaterialOptions = { @:optional var diffuse:Float; @:optional var diffuseMap:Dynamic; @:optional var modifiers:Array<Modifier>; @:optional var normalMap:Dynamic; @:optional var normalScale:Float; @:optional var shininess:Float; @:optional var specular:Float; @:optional var specularMap:Dynamic; };
 
 @:expose("flighthq.shading.CreateShadedMaterial")
 class CreateShadedMaterial {

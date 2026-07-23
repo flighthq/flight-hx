@@ -3,9 +3,10 @@ package flighthq.shading;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.shading._internal._ModifierRegistryValues.resolveModifier;
+import flighthq.shading.ModifierRegistry.resolveModifier;
 import flighthq.types.Modifier;
 import flighthq.types.ModifierKind;
+import flighthq.types.ModifierRegistry;
 
 @:expose("flighthq.shading.GetUnregisteredModifierKinds")
 class GetUnregisteredModifierKinds {

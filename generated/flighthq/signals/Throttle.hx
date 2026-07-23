@@ -6,8 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.signals.Slot.connectSignal;
 import flighthq.signals.Slot.disconnectSignal;
 import flighthq.types.Signal;
-
-typedef SignalThrottleOptions = { @:optional var leading:Bool; @:optional var trailing:Bool; };
+import flighthq.types.SignalThrottleOptions;
 
 @:expose("flighthq.signals.Throttle")
 class Throttle {

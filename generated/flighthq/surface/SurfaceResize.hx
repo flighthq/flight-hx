@@ -7,8 +7,7 @@ import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.SurfaceEdgeMode;
 import flighthq.types.SurfaceRegion;
 import flighthq.types.SurfaceResizeMode;
-
-typedef SurfaceResizeOptions = { @:optional var mode:SurfaceResizeMode; @:optional var edgeMode:SurfaceEdgeMode; @:optional var premultiplied:Bool; };
+import flighthq.types.SurfaceResizeOptions;
 
 @:expose("flighthq.surface.SurfaceResize")
 class SurfaceResize {

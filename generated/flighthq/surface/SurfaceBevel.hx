@@ -5,11 +5,8 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.surface.SurfaceBlur.blurSurfacePixelsHorizontal;
 import flighthq.surface.SurfaceBlur.blurSurfacePixelsVertical;
+import flighthq.types.SurfaceBevelOptions;
 import flighthq.types.SurfaceRegion;
-
-typedef SurfaceBevelType = String;
-
-typedef SurfaceBevelOptions = { @:optional var angle:Float; @:optional var distance:Float; @:optional var radiusX:Float; @:optional var radiusY:Float; @:optional var passes:Float; @:optional var highlightColor:Float; @:optional var shadowColor:Float; @:optional var intensity:Float; @:optional var type:SurfaceBevelType; };
 
 @:expose("flighthq.surface.SurfaceBevel")
 class SurfaceBevel {

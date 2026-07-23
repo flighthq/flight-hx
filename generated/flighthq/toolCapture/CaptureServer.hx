@@ -9,7 +9,12 @@ typedef Server = { var url:String; var kill:Dynamic; };
 
 @:expose("flighthq.toolCapture.CaptureServer")
 class CaptureServer {
-  public static function resolveServer(opts:{ var tool:Tool; var root:String; @:optional var externalUrl:String; }):flighthq._internal._Promise<Server> {
+  public static function resolveCaptureDirectoryServer(directory:String):flighthq._internal._Promise<Server> {
+    return cast _Runtime.callValue(CaptureServer.serveDirectory__captureServer, cast ([directory] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function resolveServer(opts:{ @:optional var tool:Tool; var root:String; @:optional var externalUrl:String; }):flighthq._internal._Promise<Server> {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var tool:Dynamic = cast _Runtime.UNDEFINED;
     var root:Dynamic = cast _Runtime.UNDEFINED;
@@ -28,6 +33,7 @@ class CaptureServer {
       
       } }] : Array<Dynamic>));
     }
+    if (_Runtime.truthy(_Runtime.strictEquals(tool, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'reject', cast ([_Runtime.error('A built-in tool is required when no external URL is set')] : Array<Dynamic>)); }
     toolDir = _Runtime.select(_Runtime.strictEquals(tool, 'examples'), function():Dynamic return cast _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([root, 'examples', 'runners', 'web'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([root, 'tools', tool] : Array<Dynamic>)));
     viteJs = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([root, 'node_modules', 'vite', 'bin', 'vite.js'] : Array<Dynamic>));
     configPath = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([toolDir, 'vite.config.ts'] : Array<Dynamic>));
@@ -78,7 +84,6 @@ class CaptureServer {
     var forceBuild:Dynamic = cast _Runtime.UNDEFINED;
     var toolDir:Dynamic = cast _Runtime.UNDEFINED;
     var distDir:Dynamic = cast _Runtime.UNDEFINED;
-    var MIME:Dynamic = cast _Runtime.UNDEFINED;
     __destructure1 = opts;
     tool = _Runtime.field(__destructure1, 'tool');
     root = _Runtime.field(__destructure1, 'root');
@@ -98,6 +103,12 @@ class CaptureServer {
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'existsSync'] : Array<Dynamic>)), cast ([distDir] : Array<Dynamic>))))) {
       return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'reject', cast ([_Runtime.error('No build found at ' + Std.string(distDir) + ' after build. Run "npm run build:' + Std.string(tool) + '" to debug.')] : Array<Dynamic>));
     }
+    return cast _Runtime.callValue(CaptureServer.serveDirectory__captureServer, cast ([distDir] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function serveDirectory__captureServer(directory:String):flighthq._internal._Promise<Server> {
+    var MIME:Dynamic = cast _Runtime.UNDEFINED;
     MIME = _Runtime.objectFromPairs([{ key: '.css', value: 'text/css' }, { key: '.gif', value: 'image/gif' }, { key: '.html', value: 'text/html; charset=utf-8' }, { key: '.jpeg', value: 'image/jpeg' }, { key: '.jpg', value: 'image/jpeg' }, { key: '.js', value: 'application/javascript' }, { key: '.json', value: 'application/json' }, { key: '.jsonl', value: 'text/plain; charset=utf-8' }, { key: '.mp3', value: 'audio/mpeg' }, { key: '.ogg', value: 'audio/ogg' }, { key: '.png', value: 'image/png' }, { key: '.svg', value: 'image/svg+xml' }, { key: '.ttf', value: 'font/ttf' }, { key: '.utf8', value: 'text/plain; charset=utf-8' }, { key: '.wav', value: 'audio/wav' }, { key: '.wasm', value: 'application/wasm' }, { key: '.webp', value: 'image/webp' }, { key: '.woff', value: 'font/woff' }, { key: '.woff2', value: 'font/woff2' }]);
     return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(resolve:Dynamic, reject:Dynamic) {
       var server:Dynamic = cast _Runtime.UNDEFINED;
@@ -106,8 +117,8 @@ class CaptureServer {
         var fsPath:Dynamic = cast _Runtime.UNDEFINED;
         urlPath = _Runtime.getIndex(_Runtime.callProperty(_Runtime.coalesce(_Runtime.field(req, 'url'), function():Dynamic return cast '/'), 'split', cast (['?'] : Array<Dynamic>)), 0.0);
         if (_Runtime.truthy(StringTools.endsWith(Std.string(urlPath), '/'))) { (urlPath = cast ((urlPath + 'index.html') : Dynamic)); }
-        fsPath = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([distDir, urlPath] : Array<Dynamic>));
-        if (_Runtime.truthy(StringTools.startsWith(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'relative'] : Array<Dynamic>)), cast ([distDir, fsPath] : Array<Dynamic>)), '..'))) {
+        fsPath = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([directory, urlPath] : Array<Dynamic>));
+        if (_Runtime.truthy(StringTools.startsWith(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'relative'] : Array<Dynamic>)), cast ([directory, fsPath] : Array<Dynamic>)), '..'))) {
           _Runtime.callProperty(res, 'writeHead', cast ([403.0] : Array<Dynamic>));
           _Runtime.callProperty(res, 'end', cast ([] : Array<Dynamic>));
           return;

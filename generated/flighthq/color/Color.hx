@@ -4,40 +4,42 @@ package flighthq.color;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.ColorFromKelvin as Facade_Color_flighthq_color_ColorFromKelvin;
+import flighthq.color.HslColor as Facade_Color_flighthq_color_HslColor;
+import flighthq.color.HsvColor as Facade_Color_flighthq_color_HsvColor;
 import flighthq.color.LerpColor as Facade_Color_flighthq_color_LerpColor;
 import flighthq.color.Luminance as Facade_Color_flighthq_color_Luminance;
 import flighthq.color.Oklab as Facade_Color_flighthq_color_Oklab;
 import flighthq.color.PackColor as Facade_Color_flighthq_color_PackColor;
 import flighthq.color.PremultiplyColorAlpha as Facade_Color_flighthq_color_PremultiplyColorAlpha;
 import flighthq.color.SrgbTransfer as Facade_Color_flighthq_color_SrgbTransfer;
-import flighthq.color._internal._HslColorValues as Facade_Color_flighthq_color__internal__HslColorValues;
-import flighthq.color._internal._HsvColorValues as Facade_Color_flighthq_color__internal__HsvColorValues;
+import flighthq.types.HslColor;
+import flighthq.types.HsvColor;
 import flighthq.types.LinearColor;
 
 @:expose("flighthq.color.Color")
 class Color {
+  public static function allocateHslColor():HslColor {
+    return cast _Runtime.callValue(Facade_Color_flighthq_color_HslColor.allocateHslColor, cast ([] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function allocateHsvColor():HsvColor {
+    return cast _Runtime.callValue(Facade_Color_flighthq_color_HsvColor.allocateHsvColor, cast ([] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function allocateLinearColor():LinearColor {
+    return cast _Runtime.callValue(Facade_Color_flighthq_color_PackColor.allocateLinearColor, cast ([] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function colorFromKelvin(kelvin:Float):Float {
+    return cast _Runtime.callValue(Facade_Color_flighthq_color_ColorFromKelvin.colorFromKelvin, cast ([kelvin] : Array<Dynamic>));
+    return cast null;
+  }
+
   public static function computeRgbHexString(color:Float):String {
     return cast _Runtime.callValue(Facade_Color_flighthq_color_PackColor.computeRgbHexString, cast ([color] : Array<Dynamic>));
-    return cast null;
-  }
-
-  public static function createColorFromKelvin(kelvin:Float):Float {
-    return cast _Runtime.callValue(Facade_Color_flighthq_color_ColorFromKelvin.createColorFromKelvin, cast ([kelvin] : Array<Dynamic>));
-    return cast null;
-  }
-
-  public static function createHslColor():HslColor {
-    return cast _Runtime.callValue(Facade_Color_flighthq_color__internal__HslColorValues.createHslColor, cast ([] : Array<Dynamic>));
-    return cast null;
-  }
-
-  public static function createHsvColor():HsvColor {
-    return cast _Runtime.callValue(Facade_Color_flighthq_color__internal__HsvColorValues.createHsvColor, cast ([] : Array<Dynamic>));
-    return cast null;
-  }
-
-  public static function createLinearColor():LinearColor {
-    return cast _Runtime.callValue(Facade_Color_flighthq_color_PackColor.createLinearColor, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
@@ -70,11 +72,11 @@ class Color {
   }
 
   public static function hslToRgb(out:Array<Float>, h:Float, s:Float, l:Float):Void {
-    _Runtime.callValue(Facade_Color_flighthq_color__internal__HslColorValues.hslToRgb, cast ([out, h, s, l] : Array<Dynamic>));
+    _Runtime.callValue(Facade_Color_flighthq_color_HslColor.hslToRgb, cast ([out, h, s, l] : Array<Dynamic>));
   }
 
   public static function hsvToRgb(out:Array<Float>, h:Float, s:Float, v:Float):Void {
-    _Runtime.callValue(Facade_Color_flighthq_color__internal__HsvColorValues.hsvToRgb, cast ([out, h, s, v] : Array<Dynamic>));
+    _Runtime.callValue(Facade_Color_flighthq_color_HsvColor.hsvToRgb, cast ([out, h, s, v] : Array<Dynamic>));
   }
 
   public static function lerpColor(start:Float, end:Float, t:Float):Float {
@@ -121,12 +123,12 @@ class Color {
   }
 
   public static function rgbToHsl(out:HslColor, color:Float):HslColor {
-    return cast _Runtime.callValue(Facade_Color_flighthq_color__internal__HslColorValues.rgbToHsl, cast ([out, color] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_Color_flighthq_color_HslColor.rgbToHsl, cast ([out, color] : Array<Dynamic>));
     return cast null;
   }
 
   public static function rgbToHsv(out:HsvColor, color:Float):HsvColor {
-    return cast _Runtime.callValue(Facade_Color_flighthq_color__internal__HsvColorValues.rgbToHsv, cast ([out, color] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_Color_flighthq_color_HsvColor.rgbToHsv, cast ([out, color] : Array<Dynamic>));
     return cast null;
   }
 

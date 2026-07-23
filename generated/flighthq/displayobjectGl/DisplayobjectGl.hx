@@ -15,15 +15,13 @@ import flighthq.displayobjectGl.GlColorAdjustment as Facade_DisplayobjectGl_flig
 import flighthq.displayobjectGl.GlDefaultMaterial as Facade_DisplayobjectGl_flighthq_displayobjectGl_GlDefaultMaterial;
 import flighthq.displayobjectGl.GlDisplayObject as Facade_DisplayobjectGl_flighthq_displayobjectGl_GlDisplayObject;
 import flighthq.displayobjectGl.GlDisplayObjectRegistration as Facade_DisplayobjectGl_flighthq_displayobjectGl_GlDisplayObjectRegistration;
-import flighthq.displayobjectGl.GlParticleEmitter as Facade_DisplayobjectGl_flighthq_displayobjectGl_GlParticleEmitter;
+import flighthq.displayobjectGl.GlParticleEmitter2D as Facade_DisplayobjectGl_flighthq_displayobjectGl_GlParticleEmitter2D;
 import flighthq.displayobjectGl.GlQuadBatch as Facade_DisplayobjectGl_flighthq_displayobjectGl_GlQuadBatch;
 import flighthq.displayobjectGl.GlRichText as Facade_DisplayobjectGl_flighthq_displayobjectGl_GlRichText;
-import flighthq.displayobjectGl.GlRichText.GlRichTextOverlay;
 import flighthq.displayobjectGl.GlScale9Mapper as Facade_DisplayobjectGl_flighthq_displayobjectGl_GlScale9Mapper;
 import flighthq.displayobjectGl.GlScale9Shape as Facade_DisplayobjectGl_flighthq_displayobjectGl_GlScale9Shape;
 import flighthq.displayobjectGl.GlShape as Facade_DisplayobjectGl_flighthq_displayobjectGl_GlShape;
 import flighthq.displayobjectGl.GlShapeMesh as Facade_DisplayobjectGl_flighthq_displayobjectGl_GlShapeMesh;
-import flighthq.displayobjectGl.GlShapeMesh.GlShapeMeshBinding;
 import flighthq.displayobjectGl.GlSprite as Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSprite;
 import flighthq.displayobjectGl.GlSpriteBatch as Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteBatch;
 import flighthq.displayobjectGl.GlSpriteRenderer as Facade_DisplayobjectGl_flighthq_displayobjectGl_GlSpriteRenderer;
@@ -41,7 +39,9 @@ import flighthq.types.GlMaterialRenderer;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlQuadBatchShader;
 import flighthq.types.GlRenderTarget;
+import flighthq.types.GlRichTextOverlay;
 import flighthq.types.GlShapeMesh;
+import flighthq.types.GlShapeMeshBinding;
 import flighthq.types.GlVelocityWriter;
 import flighthq.types.GlVelocityWriter.GlVelocityContext;
 import flighthq.types.HasTransform2D.Transform2DNode;
@@ -138,9 +138,9 @@ class DisplayobjectGl {
 
   public static final defaultGlMoveTo:Dynamic = Facade_DisplayobjectGl_flighthq_displayobjectCanvas_CanvasShapeCommands.defaultCanvasMoveTo;
 
-  public static final defaultGlParticleEmitterRenderer:SpriteRenderer = Facade_DisplayobjectGl_flighthq_displayobjectGl_GlParticleEmitter.defaultGlParticleEmitterRenderer;
+  public static final defaultGlParticleEmitter2DRenderer:SpriteRenderer = Facade_DisplayobjectGl_flighthq_displayobjectGl_GlParticleEmitter2D.defaultGlParticleEmitter2DRenderer;
 
-  public static final defaultGlParticleEmitterVelocityWriter:GlVelocityWriter = Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVelocity.defaultGlParticleEmitterVelocityWriter;
+  public static final defaultGlParticleEmitter2DVelocityWriter:GlVelocityWriter = Facade_DisplayobjectGl_flighthq_displayobjectGl_GlVelocity.defaultGlParticleEmitter2DVelocityWriter;
 
   public static final defaultGlQuadBatchRenderer:SpriteRenderer = Facade_DisplayobjectGl_flighthq_displayobjectGl_GlQuadBatch.defaultGlQuadBatchRenderer;
 
@@ -184,8 +184,8 @@ class DisplayobjectGl {
     _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlDisplayObject.drawGlDisplayObject, cast ([_state, _renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawGlParticleEmitter(state:GlRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlParticleEmitter.drawGlParticleEmitter, cast ([state, renderProxy] : Array<Dynamic>));
+  public static function drawGlParticleEmitter2D(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+    _Runtime.callValue(Facade_DisplayobjectGl_flighthq_displayobjectGl_GlParticleEmitter2D.drawGlParticleEmitter2D, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
   public static function drawGlRichText(state:GlRenderState, renderProxy:RenderProxy2D):Void {

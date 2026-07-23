@@ -4,14 +4,11 @@ package flighthq.effectsWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
+import flighthq.types.WgpuDualSourceEffectPipeline;
+import flighthq.types.WgpuEffectBlendMode;
+import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
-
-typedef WgpuEffectBlendMode = String;
-
-typedef WgpuEffectPipeline = { var pipeline:Dynamic; var blendMode:WgpuEffectBlendMode; @:optional var compileForFormat:Dynamic; @:optional var variants:Dynamic; };
-
-typedef WgpuDualSourceEffectPipeline = WgpuEffectPipeline;
 
 typedef WgpuEffectPassState__wgpuEffectPass = { var uniformBuffer:Dynamic; var uniformData:flighthq._internal._Float32Array; var uniformDataI32:Dynamic; var uniformOffset:Float; var uniformStride:Float; var uniformSlots:Float; var uniformBGLayout:Dynamic; var uniformBG:Dynamic; var textureBGLayout:Dynamic; var textureBGs:Dynamic; var sampler:Dynamic; var format:Dynamic; };
 

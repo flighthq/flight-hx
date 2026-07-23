@@ -5,16 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.sceneGl.GlMeshMaterialRegistry.registerGlMeshMaterialRenderer;
-import flighthq.sceneGl.GlUnlitPrelude.GlUnlitDefineKey;
+import flighthq.sceneGl.GlMeshProgram.beginGlMeshDraw;
+import flighthq.sceneGl.GlMeshProgram.drawGlMeshSubset;
+import flighthq.sceneGl.GlMeshProgram.setGlMeshViewProjection;
+import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
 import flighthq.sceneGl.GlUnlitPrelude.bindGlUnlitSurface;
 import flighthq.sceneGl.GlUnlitPrelude.ensureGlUnlitProgram;
-import flighthq.sceneGl._internal._GlMeshProgramValues.beginGlMeshDraw;
-import flighthq.sceneGl._internal._GlMeshProgramValues.drawGlMeshSubset;
-import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
-import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlUnlitProgram.GlUnlitDefineKey;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
@@ -26,7 +26,7 @@ import flighthq.types._internal._VertexColorMaterialValues.VertexColorMaterialKi
 
 @:expose("flighthq.sceneGl.VertexColorGlMeshMaterialRenderer")
 class VertexColorGlMeshMaterialRenderer {
-  public static final vertexColorGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera) {
+  public static final vertexColorGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var vertexColor:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;

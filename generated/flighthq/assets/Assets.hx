@@ -4,6 +4,7 @@ package flighthq.assets;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.assets.AssetLibrary as Facade_Assets_flighthq_assets_AssetLibrary;
+import flighthq.types.Assets.AssetDescriptor;
 import flighthq.types.Assets.AssetGroupLoadOptions;
 import flighthq.types.Assets.AssetLibrary;
 import flighthq.types.Assets.AssetLoaderAdapter;
@@ -41,12 +42,16 @@ class Assets {
     return cast null;
   }
 
-  public static function loadAssetManifest(library:AssetLibrary, manifest:AssetManifest):Void {
-    _Runtime.callValue(Facade_Assets_flighthq_assets_AssetLibrary.loadAssetManifest, cast ([library, manifest] : Array<Dynamic>));
+  public static function registerAssetDescriptor(library:AssetLibrary, descriptor:AssetDescriptor):Void {
+    _Runtime.callValue(Facade_Assets_flighthq_assets_AssetLibrary.registerAssetDescriptor, cast ([library, descriptor] : Array<Dynamic>));
   }
 
   public static function registerAssetLoader<T>(library:AssetLibrary, type:AssetType, adapter:AssetLoaderAdapter<Dynamic>):Void {
     _Runtime.callValue(Facade_Assets_flighthq_assets_AssetLibrary.registerAssetLoader, cast ([library, type, adapter] : Array<Dynamic>));
+  }
+
+  public static function registerAssetManifest(library:AssetLibrary, manifest:AssetManifest):Void {
+    _Runtime.callValue(Facade_Assets_flighthq_assets_AssetLibrary.registerAssetManifest, cast ([library, manifest] : Array<Dynamic>));
   }
 
   public static function releaseAsset(library:AssetLibrary, id:String):Void {

@@ -3,72 +3,110 @@ package flighthq.sceneResources;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.sceneFormats.ObjSchema.ObjMaterialLibrary;
+import flighthq.sceneResources.AwdLoad as Facade_SceneResources_flighthq_sceneResources_AwdLoad;
+import flighthq.sceneResources.EnableSceneResourceFailureGuards as Facade_SceneResources_flighthq_sceneResources_EnableSceneResourceFailureGuards;
 import flighthq.sceneResources.GetSceneResourceTextures as Facade_SceneResources_flighthq_sceneResources_GetSceneResourceTextures;
-import flighthq.sceneResources.Load3ds as Facade_SceneResources_flighthq_sceneResources_Load3ds;
-import flighthq.sceneResources.LoadGltf as Facade_SceneResources_flighthq_sceneResources_LoadGltf;
-import flighthq.sceneResources.LoadMd2 as Facade_SceneResources_flighthq_sceneResources_LoadMd2;
-import flighthq.sceneResources.LoadMd5 as Facade_SceneResources_flighthq_sceneResources_LoadMd5;
-import flighthq.sceneResources.LoadObj as Facade_SceneResources_flighthq_sceneResources_LoadObj;
-import flighthq.sceneResources.LoadSceneFromAwd as Facade_SceneResources_flighthq_sceneResources_LoadSceneFromAwd;
+import flighthq.sceneResources.GltfLoad as Facade_SceneResources_flighthq_sceneResources_GltfLoad;
+import flighthq.sceneResources.ImageResourceFetch as Facade_SceneResources_flighthq_sceneResources_ImageResourceFetch;
+import flighthq.sceneResources.Md2Load as Facade_SceneResources_flighthq_sceneResources_Md2Load;
+import flighthq.sceneResources.Md5Load as Facade_SceneResources_flighthq_sceneResources_Md5Load;
+import flighthq.sceneResources.ObjLoad as Facade_SceneResources_flighthq_sceneResources_ObjLoad;
 import flighthq.sceneResources.ResolveSceneResources as Facade_SceneResources_flighthq_sceneResources_ResolveSceneResources;
-import flighthq.sceneResources.ResolveSceneResources.ResolveSceneResourcesOptions;
 import flighthq.sceneResources.ResolveSceneResourcesAndWait as Facade_SceneResources_flighthq_sceneResources_ResolveSceneResourcesAndWait;
 import flighthq.sceneResources.RevealSceneResourcesOnResolve as Facade_SceneResources_flighthq_sceneResources_RevealSceneResourcesOnResolve;
-import flighthq.sceneResources.RevealSceneResourcesOnResolve.SceneResourceRevealOptions;
-import flighthq.sceneResources.SceneMaterialTextureRegistry.SceneMaterialTextureLister;
-import flighthq.sceneResources.SceneResourceResolver.SceneResourceResolverOptions;
-import flighthq.sceneResources._internal._LoadSceneOptionsValues as Facade_SceneResources_flighthq_sceneResources__internal__LoadSceneOptionsValues;
-import flighthq.sceneResources._internal._SceneMaterialTextureRegistryValues as Facade_SceneResources_flighthq_sceneResources__internal__SceneMaterialTextureRegistryValues;
-import flighthq.sceneResources._internal._SceneResourceFetchValues as Facade_SceneResources_flighthq_sceneResources__internal__SceneResourceFetchValues;
-import flighthq.sceneResources._internal._SceneResourceResolverValues as Facade_SceneResources_flighthq_sceneResources__internal__SceneResourceResolverValues;
-import flighthq.sceneResources._internal._SceneResourceSignalsValues as Facade_SceneResources_flighthq_sceneResources__internal__SceneResourceSignalsValues;
+import flighthq.sceneResources.SceneDocumentSource as Facade_SceneResources_flighthq_sceneResources_SceneDocumentSource;
+import flighthq.sceneResources.SceneMaterialTextureRegistry as Facade_SceneResources_flighthq_sceneResources_SceneMaterialTextureRegistry;
+import flighthq.sceneResources.SceneResourceRecovery as Facade_SceneResources_flighthq_sceneResources_SceneResourceRecovery;
+import flighthq.sceneResources.SceneResourceResolver as Facade_SceneResources_flighthq_sceneResources_SceneResourceResolver;
+import flighthq.sceneResources.SceneResourceSignals as Facade_SceneResources_flighthq_sceneResources_SceneResourceSignals;
+import flighthq.sceneResources.ThreeDsLoad as Facade_SceneResources_flighthq_sceneResources_ThreeDsLoad;
 import flighthq.types.Entity.Kind;
 import flighthq.types.ImageResource;
+import flighthq.types.ImageResourceReference;
+import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
+import flighthq.types.ImageResourceReference.ImageResourceReferenceResolutionExplanation;
 import flighthq.types.Material;
-import flighthq.types.Scene;
+import flighthq.types.ObjSchema.ObjMaterialLibrary;
+import flighthq.types.SceneDocument;
 import flighthq.types.SceneNode;
-import flighthq.types.SceneResourceRef;
+import flighthq.types.SceneResources.LoadSceneResourcesOptions;
+import flighthq.types.SceneResources.ResolveSceneResourcesOptions;
+import flighthq.types.SceneResources.SceneDocumentLoadOptions;
+import flighthq.types.SceneResources.SceneMaterialTextureLister;
+import flighthq.types.SceneResources.SceneMaterialTextureRegistry;
+import flighthq.types.SceneResources.SceneResourceResolver;
+import flighthq.types.SceneResources.SceneResourceResolverOptions;
+import flighthq.types.SceneResources.SceneResourceRevealOptions;
+import flighthq.types.SceneResources.SceneResourceSignals;
 import flighthq.types.Texture;
 import flighthq.types.TweenManager;
 
 @:expose("flighthq.sceneResources.SceneResources")
 class SceneResources {
+  public static function areSceneResourceFailureGuardsEnabled(resolver:SceneResourceResolver):Bool {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_EnableSceneResourceFailureGuards.areSceneResourceFailureGuardsEnabled, cast ([resolver] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function createBuiltInSceneResourceResolver(?options:SceneResourceResolverOptions):SceneResourceResolver {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_SceneResourceResolver.createBuiltInSceneResourceResolver, cast ([options] : Array<Dynamic>));
+    return cast null;
+  }
+
   public static function createSceneMaterialTextureRegistry():SceneMaterialTextureRegistry {
-    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources__internal__SceneMaterialTextureRegistryValues.createSceneMaterialTextureRegistry, cast ([] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_SceneMaterialTextureRegistry.createSceneMaterialTextureRegistry, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
   public static function createSceneResourceResolver(?options:SceneResourceResolverOptions):SceneResourceResolver {
-    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources__internal__SceneResourceResolverValues.createSceneResourceResolver, cast ([options] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_SceneResourceResolver.createSceneResourceResolver, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
   public static function createSceneResourceSignals():SceneResourceSignals {
-    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources__internal__SceneResourceSignalsValues.createSceneResourceSignals, cast ([] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_SceneResourceSignals.createSceneResourceSignals, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createWebSceneResourceFetch():SceneResourceFetch {
-    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources__internal__SceneResourceFetchValues.createWebSceneResourceFetch, cast ([] : Array<Dynamic>));
-    return cast null;
+  public static function disableSceneResourceFailureGuards(resolver:SceneResourceResolver):Void {
+    _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_EnableSceneResourceFailureGuards.disableSceneResourceFailureGuards, cast ([resolver] : Array<Dynamic>));
   }
 
   public static function disposeSceneResourceResolver(resolver:SceneResourceResolver):Void {
-    _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources__internal__SceneResourceResolverValues.disposeSceneResourceResolver, cast ([resolver] : Array<Dynamic>));
+    _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_SceneResourceResolver.disposeSceneResourceResolver, cast ([resolver] : Array<Dynamic>));
+  }
+
+  public static function enableSceneResourceFailureGuards(resolver:SceneResourceResolver):Dynamic {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_EnableSceneResourceFailureGuards.enableSceneResourceFailureGuards, cast ([resolver] : Array<Dynamic>));
+    return cast null;
   }
 
   public static function enableSceneResourceSignals(resolver:SceneResourceResolver):SceneResourceSignals {
-    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources__internal__SceneResourceSignalsValues.enableSceneResourceSignals, cast ([resolver] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_SceneResourceSignals.enableSceneResourceSignals, cast ([resolver] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function explainImageResourceReferenceResolution(ref:ImageResourceReference):ImageResourceReferenceResolutionExplanation {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_SceneResourceRecovery.explainImageResourceReferenceResolution, cast ([ref] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function fetchWebImageResource(ref:ExternalImageResourceReference, signal:Dynamic):flighthq._internal._Promise<Null<ImageResource>> {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_ImageResourceFetch.fetchWebImageResource, cast ([ref, signal] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function getSceneDocumentBasePathFromUrl(url:String):Null<String> {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_SceneDocumentSource.getSceneDocumentBasePathFromUrl, cast ([url] : Array<Dynamic>));
     return cast null;
   }
 
   public static function getSceneMaterialTextures(registry:SceneMaterialTextureRegistry, material:Material, out:Array<Texture>):Void {
-    _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources__internal__SceneMaterialTextureRegistryValues.getSceneMaterialTextures, cast ([registry, material, out] : Array<Dynamic>));
+    _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_SceneMaterialTextureRegistry.getSceneMaterialTextures, cast ([registry, material, out] : Array<Dynamic>));
   }
 
   public static function getSceneResourceSignals(resolver:SceneResourceResolver):Null<SceneResourceSignals> {
-    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources__internal__SceneResourceSignalsValues.getSceneResourceSignals, cast ([resolver] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_SceneResourceSignals.getSceneResourceSignals, cast ([resolver] : Array<Dynamic>));
     return cast null;
   }
 
@@ -76,60 +114,75 @@ class SceneResources {
     _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_GetSceneResourceTextures.getSceneResourceTextures, cast ([scene, registry, out] : Array<Dynamic>));
   }
 
-  public static function loadSceneFrom3ds(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Scene> {
-    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_Load3ds.loadSceneFrom3ds, cast ([bytes, options] : Array<Dynamic>));
+  public static function loadSceneDocumentBytesFromUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<Dynamic>> {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_SceneDocumentSource.loadSceneDocumentBytesFromUrl, cast ([url, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadSceneFromAwd(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Scene> {
-    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_LoadSceneFromAwd.loadSceneFromAwd, cast ([bytes, options] : Array<Dynamic>));
+  public static function loadSceneDocumentFrom3dsUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<SceneDocument>> {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_ThreeDsLoad.loadSceneDocumentFrom3dsUrl, cast ([url, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadSceneFromGlb(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Scene> {
-    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_LoadGltf.loadSceneFromGlb, cast ([bytes, options] : Array<Dynamic>));
+  public static function loadSceneDocumentFromAwdUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<SceneDocument>> {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_AwdLoad.loadSceneDocumentFromAwdUrl, cast ([url, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadSceneFromGltf(source:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Scene> {
-    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_LoadGltf.loadSceneFromGltf, cast ([source, options] : Array<Dynamic>));
+  public static function loadSceneDocumentFromGlbUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<SceneDocument>> {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_GltfLoad.loadSceneDocumentFromGlbUrl, cast ([url, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadSceneFromMd2(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Scene> {
-    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_LoadMd2.loadSceneFromMd2, cast ([bytes, options] : Array<Dynamic>));
+  public static function loadSceneDocumentFromGltfUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<SceneDocument>> {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_GltfLoad.loadSceneDocumentFromGltfUrl, cast ([url, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadSceneFromMd5Mesh(meshSource:String, ?options:LoadSceneOptions):flighthq._internal._Promise<Scene> {
-    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_LoadMd5.loadSceneFromMd5Mesh, cast ([meshSource, options] : Array<Dynamic>));
+  public static function loadSceneDocumentFromMd2Url(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<SceneDocument>> {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_Md2Load.loadSceneDocumentFromMd2Url, cast ([url, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadSceneFromObj(source:String, ?materials:ObjMaterialLibrary, ?options:LoadSceneOptions):flighthq._internal._Promise<Scene> {
-    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_LoadObj.loadSceneFromObj, cast ([source, materials, options] : Array<Dynamic>));
+  public static function loadSceneDocumentFromMd5MeshUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<SceneDocument>> {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_Md5Load.loadSceneDocumentFromMd5MeshUrl, cast ([url, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadScenesFromGlb(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Array<Scene>> {
-    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_LoadGltf.loadScenesFromGlb, cast ([bytes, options] : Array<Dynamic>));
+  public static function loadSceneDocumentFromObjUrl(url:String, ?materials:ObjMaterialLibrary, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<SceneDocument>> {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_ObjLoad.loadSceneDocumentFromObjUrl, cast ([url, materials, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadScenesFromGltf(source:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Array<Scene>> {
-    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_LoadGltf.loadScenesFromGltf, cast ([source, options] : Array<Dynamic>));
+  public static function loadSceneDocumentTextFromUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<String>> {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_SceneDocumentSource.loadSceneDocumentTextFromUrl, cast ([url, options] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function loadSceneResources(scene:SceneNode, resolver:SceneResourceResolver, ?options:LoadSceneResourcesOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_ResolveSceneResourcesAndWait.loadSceneResources, cast ([scene, resolver, options] : Array<Dynamic>));
     return cast null;
   }
 
   public static function registerBuiltInSceneMaterialTextures(registry:SceneMaterialTextureRegistry):Void {
-    _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources__internal__SceneMaterialTextureRegistryValues.registerBuiltInSceneMaterialTextures, cast ([registry] : Array<Dynamic>));
+    _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_SceneMaterialTextureRegistry.registerBuiltInSceneMaterialTextures, cast ([registry] : Array<Dynamic>));
   }
 
   public static function registerSceneMaterialTextures(registry:SceneMaterialTextureRegistry, kind:Kind, lister:SceneMaterialTextureLister):Void {
-    _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources__internal__SceneMaterialTextureRegistryValues.registerSceneMaterialTextures, cast ([registry, kind, lister] : Array<Dynamic>));
+    _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_SceneMaterialTextureRegistry.registerSceneMaterialTextures, cast ([registry, kind, lister] : Array<Dynamic>));
   }
 
-  public static function resolveOneSceneResourceTexture(resolver:SceneResourceResolver, ref:SceneResourceRef, signal:Dynamic):flighthq._internal._Promise<Null<ImageResource>> {
+  public static function resetFailedImageResourceReference(ref:ImageResourceReference):Bool {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_SceneResourceRecovery.resetFailedImageResourceReference, cast ([ref] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function resolveImageResourceUri(uri:String, basePath:Null<String>):String {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_ImageResourceFetch.resolveImageResourceUri, cast ([uri, basePath] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function resolveOneSceneResourceTexture(resolver:SceneResourceResolver, ref:ImageResourceReference, signal:Dynamic):flighthq._internal._Promise<Null<ImageResource>> {
     return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_ResolveSceneResources.resolveOneSceneResourceTexture, cast ([resolver, ref, signal] : Array<Dynamic>));
     return cast null;
   }
@@ -138,23 +191,22 @@ class SceneResources {
     _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_ResolveSceneResources.resolveSceneResources, cast ([scene, resolver, options] : Array<Dynamic>));
   }
 
-  public static function resolveSceneResourcesAndWait(scene:SceneNode, resolver:SceneResourceResolver, ?options:ResolveSceneResourcesOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
-    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_ResolveSceneResourcesAndWait.resolveSceneResourcesAndWait, cast ([scene, resolver, options] : Array<Dynamic>));
-    return cast null;
-  }
-
-  public static function resolveSceneResourceUri(uri:String, basePath:Null<String>):String {
-    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources__internal__SceneResourceFetchValues.resolveSceneResourceUri, cast ([uri, basePath] : Array<Dynamic>));
-    return cast null;
-  }
-
-  public static function resolveScenesWithOptions(scenes:Array<Scene>, ?options:LoadSceneOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
-    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources__internal__LoadSceneOptionsValues.resolveScenesWithOptions, cast ([scenes, options] : Array<Dynamic>));
+  public static function retryFailedSceneResources(scene:SceneNode, resolver:SceneResourceResolver, ?options:ResolveSceneResourcesOptions):Float {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_SceneResourceRecovery.retryFailedSceneResources, cast ([scene, resolver, options] : Array<Dynamic>));
     return cast null;
   }
 
   public static function revealSceneResourcesOnResolve(resolver:SceneResourceResolver, scene:SceneNode, tweenManager:TweenManager, ?options:SceneResourceRevealOptions):Dynamic {
     return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_RevealSceneResourcesOnResolve.revealSceneResourcesOnResolve, cast ([resolver, scene, tweenManager, options] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function setSceneDocumentResourceBasePathFromUrl(document:SceneDocument, url:String):Void {
+    _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_SceneDocumentSource.setSceneDocumentResourceBasePathFromUrl, cast ([document, url] : Array<Dynamic>));
+  }
+
+  public static function waitForSceneResourceResolver(resolver:SceneResourceResolver):flighthq._internal._Promise<flighthq._internal._Nothing> {
+    return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_ResolveSceneResourcesAndWait.waitForSceneResourceResolver, cast ([resolver] : Array<Dynamic>));
     return cast null;
   }
 }

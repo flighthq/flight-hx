@@ -11,24 +11,24 @@ import flighthq.geometry.Matrix4.multiplyMatrix4;
 import flighthq.geometry.Quaternion.createQuaternion;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.node.Hierarchy.getNodeParent;
-import flighthq.node.Transform3d.getNodeWorldMatrix4;
-import flighthq.node.Transform3d.setNodeLocalMatrix4;
+import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
+import flighthq.node.NodeTransform3d.setNodeLocalMatrix4;
 import flighthq.scene.Billboard.isBillboard;
 import flighthq.scene.SceneNode.getSceneNodeRuntime;
 import flighthq.types.Billboard;
 import flighthq.types.Billboard.BillboardMode;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.Matrix4;
 import flighthq.types.SceneNode;
 
 @:expose("flighthq.scene.BillboardCamera")
 class BillboardCamera {
-  public static function orientBillboardToCamera(billboard:Billboard, camera:Camera):Void {
+  public static function orientBillboardToCamera(billboard:Billboard, camera:Camera3D):Void {
     _Runtime.callValue(BillboardCamera.setBillboardCameraBasis__billboardCamera, cast ([camera] : Array<Dynamic>));
     _Runtime.callValue(BillboardCamera.applyBillboardFacing__billboardCamera, cast ([billboard] : Array<Dynamic>));
   }
 
-  public static function orientSceneBillboardsToCamera(scene:SceneNode, camera:Camera):Void {
+  public static function orientSceneBillboardsToCamera(scene:SceneNode, camera:Camera3D):Void {
     _Runtime.callValue(BillboardCamera.setBillboardCameraBasis__billboardCamera, cast ([camera] : Array<Dynamic>));
     _Runtime.callValue(BillboardCamera.orientBillboardSubtree__billboardCamera, cast ([scene] : Array<Dynamic>));
   }
@@ -70,7 +70,7 @@ class BillboardCamera {
     }
   }
 
-  public static function setBillboardCameraBasis__billboardCamera(camera:Camera):Void {
+  public static function setBillboardCameraBasis__billboardCamera(camera:Camera3D):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var rl:Dynamic = cast _Runtime.UNDEFINED;
     var ul:Dynamic = cast _Runtime.UNDEFINED;

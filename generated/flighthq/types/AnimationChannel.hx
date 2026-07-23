@@ -3,5 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Entity.EntityRuntime;
 
-typedef AnimationChannel = { var track:AnimationTrack; var targetRef:Dynamic; };
+typedef AnimationChannel = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var track:AnimationTrack; var targetRef:Dynamic; };

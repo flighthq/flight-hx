@@ -3,6 +3,7 @@ package flighthq.animation;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.entity.Entity.createEntity;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.AnimationClip;
@@ -88,12 +89,12 @@ class AnimationPlayer {
   }
 
   public static function cloneAnimationPlayer(player:flighthq.types.AnimationPlayer):flighthq.types.AnimationPlayer {
-    return cast { clip: _Runtime.field(player, 'clip'), loop: _Runtime.field(player, 'loop'), loopMode: _Runtime.field(player, 'loopMode'), onFinished: null, onLooped: null, playing: _Runtime.field(player, 'playing'), repeatCount: _Runtime.field(player, 'repeatCount'), speed: _Runtime.field(player, 'speed'), time: _Runtime.field(player, 'time') };
+    return cast _Runtime.callValue(createEntity, cast ([{ clip: _Runtime.field(player, 'clip'), loop: _Runtime.field(player, 'loop'), loopMode: _Runtime.field(player, 'loopMode'), onFinished: null, onLooped: null, playing: _Runtime.field(player, 'playing'), repeatCount: _Runtime.field(player, 'repeatCount'), speed: _Runtime.field(player, 'speed'), time: _Runtime.field(player, 'time') }] : Array<Dynamic>));
     return cast null;
   }
 
   public static function createAnimationPlayer(clip:AnimationClip, ?opts:{ @:optional var loop:Bool; @:optional var loopMode:AnimationLoopMode; @:optional var playing:Bool; @:optional var repeatCount:Float; @:optional var speed:Float; @:optional var time:Float; }):flighthq.types.AnimationPlayer {
-    return cast { clip: clip, loop: _Runtime.coalesce(_Runtime.optionalField(opts, 'loop'), function():Dynamic return cast true), loopMode: _Runtime.coalesce(_Runtime.optionalField(opts, 'loopMode'), function():Dynamic return cast AnimationLoopModeRepeat), onFinished: null, onLooped: null, playing: _Runtime.coalesce(_Runtime.optionalField(opts, 'playing'), function():Dynamic return cast true), repeatCount: _Runtime.coalesce(_Runtime.optionalField(opts, 'repeatCount'), function():Dynamic return cast -1.0), speed: _Runtime.coalesce(_Runtime.optionalField(opts, 'speed'), function():Dynamic return cast 1.0), time: _Runtime.coalesce(_Runtime.optionalField(opts, 'time'), function():Dynamic return cast 0.0) };
+    return cast _Runtime.callValue(createEntity, cast ([{ clip: clip, loop: _Runtime.coalesce(_Runtime.optionalField(opts, 'loop'), function():Dynamic return cast true), loopMode: _Runtime.coalesce(_Runtime.optionalField(opts, 'loopMode'), function():Dynamic return cast AnimationLoopModeRepeat), onFinished: null, onLooped: null, playing: _Runtime.coalesce(_Runtime.optionalField(opts, 'playing'), function():Dynamic return cast true), repeatCount: _Runtime.coalesce(_Runtime.optionalField(opts, 'repeatCount'), function():Dynamic return cast -1.0), speed: _Runtime.coalesce(_Runtime.optionalField(opts, 'speed'), function():Dynamic return cast 1.0), time: _Runtime.coalesce(_Runtime.optionalField(opts, 'time'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 

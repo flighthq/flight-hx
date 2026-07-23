@@ -4,12 +4,9 @@ package flighthq.particlesFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
-import flighthq.particlesFormats.ParseParticleConfig.ParticleConfigParseResult;
-import flighthq.particlesFormats.SerializeResult.ParticleSerializeResult;
-import flighthq.types.ParticleEmitterConfig;
+import flighthq.types.ParticleConfigParse.ParticleConfigParseResult;
+import flighthq.types.ParticleFormatCodec;
 import flighthq.types.ParticleFormatKind;
-
-typedef ParticleFormatCodec = { var detect:Dynamic; var parseToConfig:Dynamic; var parseToDocument:Dynamic; var serialize:Dynamic; };
 
 @:expose("flighthq.particlesFormats.FormatRegistry")
 class FormatRegistry {

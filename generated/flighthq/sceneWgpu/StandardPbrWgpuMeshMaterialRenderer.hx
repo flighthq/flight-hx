@@ -5,19 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
-import flighthq.sceneWgpu.WgpuPbrPipelineCache.WgpuPbrPipeline;
+import flighthq.sceneWgpu.WgpuMeshPipeline.beginWgpuMeshDraw;
+import flighthq.sceneWgpu.WgpuMeshPipeline.drawWgpuMeshSubset;
+import flighthq.sceneWgpu.WgpuMeshPipeline.getWgpuMaterialSampler;
+import flighthq.sceneWgpu.WgpuMeshPipeline.isWgpuTextureReady;
+import flighthq.sceneWgpu.WgpuMeshPipeline.resolveWgpuMaterialTextureView;
+import flighthq.sceneWgpu.WgpuMeshPipeline.stashWgpuUvTransform;
+import flighthq.sceneWgpu.WgpuMeshPipeline.writeWgpuFrameUniform;
 import flighthq.sceneWgpu.WgpuPbrPipelineCache.ensureWgpuPbrPipeline;
-import flighthq.sceneWgpu.WgpuPbrPrelude.WgpuPbrDefineKey;
-import flighthq.sceneWgpu.WgpuSceneRuntime.WgpuMaterialBinding;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.beginWgpuMeshDraw;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.drawWgpuMeshSubset;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.getWgpuMaterialSampler;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.isWgpuTextureReady;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.resolveWgpuMaterialTextureView;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.stashWgpuUvTransform;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUniform;
-import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
-import flighthq.types.Camera;
+import flighthq.sceneWgpu.WgpuSceneRuntime.getWgpuSceneRuntime;
+import flighthq.types.Camera3D;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
@@ -27,7 +24,10 @@ import flighthq.types.StandardPbrMaterial;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 import flighthq.types.SurfaceMaterial;
 import flighthq.types.WgpuMeshMaterialRenderer;
+import flighthq.types.WgpuPbrPipeline;
+import flighthq.types.WgpuPbrPipeline.WgpuPbrDefineKey;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuSceneRuntime.WgpuMaterialBinding;
 
 @:expose("flighthq.sceneWgpu.StandardPbrWgpuMeshMaterialRenderer")
 class StandardPbrWgpuMeshMaterialRenderer {
@@ -105,7 +105,7 @@ class StandardPbrWgpuMeshMaterialRenderer {
     _Runtime.setIndex(out, 15.0, 0.0);
   }
 
-  public static final standardPbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
+  public static final standardPbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var pbr:Dynamic = cast _Runtime.UNDEFINED;

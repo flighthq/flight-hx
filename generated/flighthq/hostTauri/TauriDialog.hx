@@ -3,12 +3,12 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostTauri.TauriModule.TauriApi;
-import flighthq.hostTauri.TauriModule.TauriDialogFilter;
 import flighthq.types.Dialog.DialogBackend;
 import flighthq.types.Dialog.FileDialogFilter;
 import flighthq.types.Dialog.FileDialogHandle;
 import flighthq.types.Dialog.MessageDialogKind;
+import flighthq.types.TauriApi;
+import flighthq.types.TauriApi.TauriDialogFilter;
 
 @:expose("flighthq.hostTauri.TauriDialog")
 class TauriDialog {

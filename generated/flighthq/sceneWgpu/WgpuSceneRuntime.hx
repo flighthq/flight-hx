@@ -3,19 +3,27 @@ package flighthq.sceneWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
-import flighthq.types.Matrix4;
-import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuSceneRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-typedef WgpuSceneShadow = { var depthTexture:Dynamic; var depthView:Dynamic; var matrix:Matrix4; };
+@:expose("flighthq.sceneWgpu.WgpuSceneRuntime")
+class WgpuSceneRuntime {
+  public static function getWgpuSceneRuntime(state:WgpuRenderState):flighthq.types.WgpuSceneRuntime {
+    var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
+    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    stateRuntime = (cast _Runtime.getIndex(state, EntityRuntimeKey) : WgpuRenderStateRuntime);
+    scene = _Runtime.callProperty(WgpuSceneRuntime.sceneRuntimes__wgpuSceneRuntime, 'get', cast ([state] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.strictEquals(scene, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      (scene = cast ({ activeMeshPipeline: null, drawBindGroup: null, drawBindGroupLayout: null, frameBindGroup: null, frameBindGroupLayout: null, frameBuffer: null, environmentSourceCube: null, environmentSourceCubeView: null, ibl: null, iblDummyCubeTexture: null, iblDummyCubeView: null, iblDummyLutTexture: null, iblDummyLutView: null, iblSampleBindGroup: null, iblSampleCubeView: null, iblSampleLayout: null, iblSampler: null, iblUniformBuffer: null, materialBindGroups: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []), pbrSampleBindGroup: null, pbrSampleIblCubeView: null, pbrSampleLayout: null, pbrSampleShadowView: null, materialRegistry: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), pendingDrawOffset: 0.0, pendingUvTransform: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [cast ([1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>)]), pipelineCache: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), placeholderView: null, shadow: null, shadowComparisonSampler: null, shadowDepthPipeline: null, shadowDummyTexture: null, shadowDummyView: null, shadowSampleBindGroup: null, shadowSampleLayout: null, shadowSampleView: null, shadowUniformBuffer: null, uploadCache: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []) } : Dynamic));
+      _Runtime.callProperty(WgpuSceneRuntime.sceneRuntimes__wgpuSceneRuntime, 'set', cast ([state, scene] : Array<Dynamic>));
+      _Runtime.setField(stateRuntime, 'sceneMeshMaterialRegistry', _Runtime.field(scene, 'materialRegistry'));
+      _Runtime.setField(stateRuntime, 'sceneMeshUploadCache', _Runtime.field(scene, 'uploadCache'));
+    }
+    return cast scene;
+    return cast null;
+  }
 
-typedef WgpuSceneIbl = { var brdfLut:Dynamic; var brdfLutView:Dynamic; var intensity:Float; var irradianceCube:Dynamic; var irradianceCubeView:Dynamic; var prefilteredCube:Dynamic; var prefilteredCubeView:Dynamic; var prefilteredMipCount:Float; };
-
-typedef WgpuSceneRuntime = { var activeMeshPipeline:Null<WgpuMeshPipeline>; var drawBindGroup:Null<Dynamic>; var drawBindGroupLayout:Null<Dynamic>; var frameBindGroup:Null<Dynamic>; var frameBindGroupLayout:Null<Dynamic>; var frameBuffer:Null<Dynamic>; var environmentSourceCube:Null<Dynamic>; var environmentSourceCubeView:Null<Dynamic>; var ibl:Null<WgpuSceneIbl>; var iblDummyCubeTexture:Null<Dynamic>; var iblDummyCubeView:Null<Dynamic>; var iblDummyLutTexture:Null<Dynamic>; var iblDummyLutView:Null<Dynamic>; var iblSampleBindGroup:Null<Dynamic>; var iblSampleCubeView:Null<Dynamic>; var iblSampleLayout:Null<Dynamic>; var iblSampler:Null<Dynamic>; var iblUniformBuffer:Null<Dynamic>; var materialBindGroups:Dynamic; var pbrSampleBindGroup:Null<Dynamic>; var pbrSampleIblCubeView:Null<Dynamic>; var pbrSampleLayout:Null<Dynamic>; var pbrSampleShadowView:Null<Dynamic>; var materialRegistry:Dynamic; var pendingDrawOffset:Float; var pendingUvTransform:flighthq._internal._Float32Array; var pipelineCache:Dynamic; var placeholderView:Null<Dynamic>; var shadow:Null<WgpuSceneShadow>; var shadowComparisonSampler:Null<Dynamic>; var shadowDepthPipeline:Null<Dynamic>; var shadowDummyTexture:Null<Dynamic>; var shadowDummyView:Null<Dynamic>; var shadowSampleBindGroup:Null<Dynamic>; var shadowSampleLayout:Null<Dynamic>; var shadowSampleView:Null<Dynamic>; var shadowUniformBuffer:Null<Dynamic>; var uploadCache:Dynamic; };
-
-private typedef WgpuMeshUpload = { var indexBuffer:Null<Dynamic>; var indexCount:Float; var indexFormat:Dynamic; var version:Float; var vertexBuffer:Dynamic; };
-
-typedef WgpuMaterialBinding = { var bindGroup:Dynamic; var buffer:Dynamic; };
+  public static final sceneRuntimes__wgpuSceneRuntime:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+}

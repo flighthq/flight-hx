@@ -3,6 +3,7 @@ package flighthq.animation;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.animation.AnimationBlend as Facade_Animation_flighthq_animation_AnimationBlend;
 import flighthq.animation.AnimationClip as Facade_Animation_flighthq_animation_AnimationClip;
 import flighthq.animation.AnimationPlayer as Facade_Animation_flighthq_animation_AnimationPlayer;
 import flighthq.animation.AnimationTrack as Facade_Animation_flighthq_animation_AnimationTrack;
@@ -11,13 +12,26 @@ import flighthq.types.AnimationClip;
 import flighthq.types.AnimationInterpolation;
 import flighthq.types.AnimationLoopMode;
 import flighthq.types.AnimationPlayer;
+import flighthq.types.AnimationSampleAccumulator;
 import flighthq.types.AnimationTrack;
 import flighthq.types.AnimationTrackValidationDiagnostic;
 
 @:expose("flighthq.animation.Animation")
 class Animation {
+  public static function accumulateAnimationSample(accumulator:AnimationSampleAccumulator, sample:Dynamic, weight:Float):Void {
+    _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationBlend.accumulateAnimationSample, cast ([accumulator, sample, weight] : Array<Dynamic>));
+  }
+
+  public static function addAnimationSample(out:Dynamic, base:Dynamic, delta:Dynamic, weight:Float, ?quaternion:Dynamic):Void {
+    _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationBlend.addAnimationSample, cast ([out, base, delta, weight, quaternion] : Array<Dynamic>));
+  }
+
   public static function advanceAnimationPlayer(player:AnimationPlayer, dt:Float):Void {
     _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationPlayer.advanceAnimationPlayer, cast ([player, dt] : Array<Dynamic>));
+  }
+
+  public static function blendAnimationSamples(out:Dynamic, a:Dynamic, b:Dynamic, alpha:Float, ?quaternion:Dynamic):Void {
+    _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationBlend.blendAnimationSamples, cast ([out, a, b, alpha, quaternion] : Array<Dynamic>));
   }
 
   public static function cloneAnimationClip(clip:AnimationClip):AnimationClip {
@@ -50,6 +64,11 @@ class Animation {
     return cast null;
   }
 
+  public static function createAnimationSampleAccumulator(components:Float, ?quaternion:Dynamic):AnimationSampleAccumulator {
+    return cast _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationBlend.createAnimationSampleAccumulator, cast ([components, quaternion] : Array<Dynamic>));
+    return cast null;
+  }
+
   public static function createAnimationTrack(opts:{ var times:Dynamic; var values:Dynamic; @:optional var components:Float; @:optional var interpolation:AnimationInterpolation; @:optional var quaternion:Bool; @:optional var easing:Dynamic; }):AnimationTrack {
     return cast _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationTrack.createAnimationTrack, cast ([opts] : Array<Dynamic>));
     return cast null;
@@ -57,6 +76,11 @@ class Animation {
 
   public static function enableAnimationPlayerSignals(player:AnimationPlayer):Void {
     _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationPlayer.enableAnimationPlayerSignals, cast ([player] : Array<Dynamic>));
+  }
+
+  public static function finishAnimationSample(out:Dynamic, accumulator:AnimationSampleAccumulator):Bool {
+    return cast _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationBlend.finishAnimationSample, cast ([out, accumulator] : Array<Dynamic>));
+    return cast null;
   }
 
   public static function getAnimationClipDuration(clip:AnimationClip):Float {
@@ -71,6 +95,10 @@ class Animation {
 
   public static function playAnimationPlayer(player:AnimationPlayer):Void {
     _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationPlayer.playAnimationPlayer, cast ([player] : Array<Dynamic>));
+  }
+
+  public static function resetAnimationSampleAccumulator(accumulator:AnimationSampleAccumulator):Void {
+    _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationBlend.resetAnimationSampleAccumulator, cast ([accumulator] : Array<Dynamic>));
   }
 
   public static function sampleAnimationClip(out:Dynamic, clip:AnimationClip, time:Float, visit:Dynamic):Void {

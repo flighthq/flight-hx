@@ -3,7 +3,8 @@ package flighthq.picking;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.camera.Picking.getCameraScreenToWorldRay;
+import flighthq.camera.Picking.getCamera3DScreenToWorldRay;
+import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Aabb.createAabb;
 import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.geometry.Matrix4.inverseMatrix4;
@@ -14,34 +15,34 @@ import flighthq.geometry.Ray3d.intersectRay3DTriangle;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.mesh.MeshGeometryAttributes.getMeshGeometryVertexPosition;
 import flighthq.mesh.MeshGeometryOperations.getMeshGeometryTriangleCount;
+import flighthq.mesh.MeshGeometryOperations.getMeshGeometryTriangleVertexIndices;
 import flighthq.node.Node.getNodeRuntime;
-import flighthq.node.Transform3d.ensureNodeWorldMatrix4;
-import flighthq.node.Transform3d.getNodeWorldMatrix4;
+import flighthq.node.NodeTransform3d.ensureNodeWorldMatrix4;
+import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.scene.Mesh.isMesh;
 import flighthq.scene.SceneNodeBounds.getSceneNodeWorldBounds;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.Mesh;
 import flighthq.types.Ray3D;
 import flighthq.types.SceneHit;
 import flighthq.types.SceneNode;
+import flighthq.types.ScenePickOptions;
 import flighthq.types.Vector3;
-
-typedef ScenePickOptions = { @:optional var cullBackfaces:Bool; @:optional var maxDistance:Float; @:optional var predicate:Dynamic; };
 
 @:expose("flighthq.picking.PickScene")
 class PickScene {
   public static function createSceneHit():SceneHit {
-    return cast { distance: 0.0, node: (cast (cast null : Dynamic) : Mesh), normalX: 0.0, normalY: 0.0, normalZ: 0.0, pointX: 0.0, pointY: 0.0, pointZ: 0.0, triangleIndex: -1.0, u: 0.0, v: 0.0, w: 0.0 };
+    return cast _Runtime.callValue(createEntity, cast ([{ distance: 0.0, node: (cast (cast null : Dynamic) : Mesh), normalX: 0.0, normalY: 0.0, normalZ: 0.0, pointX: 0.0, pointY: 0.0, pointZ: 0.0, triangleIndex: -1.0, u: 0.0, v: 0.0, w: 0.0 }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function pickScene(scene:SceneNode, camera:Camera, screenX:Float, screenY:Float, out:SceneHit, ?options:ScenePickOptions):Null<SceneHit> {
+  public static function pickScene(scene:SceneNode, camera:Camera3D, screenX:Float, screenY:Float, out:SceneHit, ?options:ScenePickOptions):Null<SceneHit> {
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(PickScene.buildCameraPickRay__pickScene, cast ([PickScene._cameraRay__pickScene, camera, screenX, screenY] : Array<Dynamic>))))) { return cast null; }
     return cast _Runtime.callValue(pickSceneWithRay3D, cast ([scene, PickScene._cameraRay__pickScene, out, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function pickSceneAll(scene:SceneNode, camera:Camera, screenX:Float, screenY:Float, outArray:Array<SceneHit>, ?options:ScenePickOptions):Array<SceneHit> {
+  public static function pickSceneAll(scene:SceneNode, camera:Camera3D, screenX:Float, screenY:Float, outArray:Array<SceneHit>, ?options:ScenePickOptions):Array<SceneHit> {
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(PickScene.buildCameraPickRay__pickScene, cast ([PickScene._cameraRay__pickScene, camera, screenX, screenY] : Array<Dynamic>))))) {
       _Runtime.setLength(outArray, 0.0);
       return cast outArray;
@@ -84,10 +85,10 @@ class PickScene {
     return cast null;
   }
 
-  public static function buildCameraPickRay__pickScene(out:Ray3D, camera:Camera, screenX:Float, screenY:Float):Bool {
+  public static function buildCameraPickRay__pickScene(out:Ray3D, camera:Camera3D, screenX:Float, screenY:Float):Bool {
     var aspect:Dynamic = cast _Runtime.UNDEFINED;
     aspect = _Runtime.select(_Runtime.strictEquals(_Runtime.field(_Runtime.field(camera, 'projection'), 'kind'), 'perspective'), function():Dynamic return cast _Runtime.field(_Runtime.field(camera, 'projection'), 'aspect'), function():Dynamic return cast 1.0);
-    return cast _Runtime.callValue(getCameraScreenToWorldRay, cast ([out, camera, screenX, screenY, aspect] : Array<Dynamic>));
+    return cast _Runtime.callValue(getCamera3DScreenToWorldRay, cast ([out, camera, screenX, screenY, aspect] : Array<Dynamic>));
     return cast null;
   }
 
@@ -142,7 +143,6 @@ class PickScene {
   public static function intersectMeshTriangles__pickScene(mesh:Mesh, ray:Ray3D, maxDistance:Float, cullBackfaces:Bool, onHit:Dynamic):Void {
     var worldMatrix:Dynamic = cast _Runtime.UNDEFINED;
     var geometry:Dynamic = cast _Runtime.UNDEFINED;
-    var indices:Dynamic = cast _Runtime.UNDEFINED;
     var triangleCount:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(getSceneNodeWorldBounds, cast ([PickScene._worldBounds__pickScene, mesh] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(_Runtime.callValue(intersectRay3DAabb, cast ([ray, PickScene._worldBounds__pickScene] : Array<Dynamic>)), 0.0, '<'))) { return; }
@@ -152,18 +152,14 @@ class PickScene {
     _Runtime.callValue(PickScene.transformPointByMatrix4__pickScene, cast ([_Runtime.field(PickScene._localRay__pickScene, 'origin'), _Runtime.field(ray, 'origin'), _Runtime.field(PickScene._inverseWorld__pickScene, 'm')] : Array<Dynamic>));
     _Runtime.callValue(PickScene.transformDirectionByMatrix4__pickScene, cast ([_Runtime.field(PickScene._localRay__pickScene, 'direction'), _Runtime.field(ray, 'direction'), _Runtime.field(PickScene._inverseWorld__pickScene, 'm')] : Array<Dynamic>));
     geometry = _Runtime.field(mesh, 'geometry');
-    indices = _Runtime.field(geometry, 'indices');
     triangleCount = _Runtime.callValue(getMeshGeometryTriangleCount, cast ([geometry] : Array<Dynamic>));
     {
       var triangle:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(triangle, triangleCount, '<'))) {
-        var base:Dynamic = (triangle * 3.0);
-        var i0:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, base), function():Dynamic return cast base);
-        var i1:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (base + 1.0)), function():Dynamic return cast (base + 1.0));
-        var i2:Dynamic = _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, (base + 2.0)), function():Dynamic return cast (base + 2.0));
-        _Runtime.callValue(getMeshGeometryVertexPosition, cast ([PickScene._a__pickScene, geometry, i0] : Array<Dynamic>));
-        _Runtime.callValue(getMeshGeometryVertexPosition, cast ([PickScene._b__pickScene, geometry, i1] : Array<Dynamic>));
-        _Runtime.callValue(getMeshGeometryVertexPosition, cast ([PickScene._c__pickScene, geometry, i2] : Array<Dynamic>));
+        if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(getMeshGeometryTriangleVertexIndices, cast ([PickScene._triangle__pickScene, geometry, triangle] : Array<Dynamic>))))) { triangle++; continue; }
+        _Runtime.callValue(getMeshGeometryVertexPosition, cast ([PickScene._a__pickScene, geometry, _Runtime.field(PickScene._triangle__pickScene, 'i0')] : Array<Dynamic>));
+        _Runtime.callValue(getMeshGeometryVertexPosition, cast ([PickScene._b__pickScene, geometry, _Runtime.field(PickScene._triangle__pickScene, 'i1')] : Array<Dynamic>));
+        _Runtime.callValue(getMeshGeometryVertexPosition, cast ([PickScene._c__pickScene, geometry, _Runtime.field(PickScene._triangle__pickScene, 'i2')] : Array<Dynamic>));
         var t:Dynamic = _Runtime.callValue(intersectRay3DTriangle, cast ([PickScene._localRay__pickScene, PickScene._a__pickScene, PickScene._b__pickScene, PickScene._c__pickScene] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(t, 0.0, '<'), function():Dynamic return cast _Runtime.compare(t, maxDistance, '>')))) { triangle++; continue; }
         _Runtime.callValue(PickScene.transformPointByMatrix4__pickScene, cast ([PickScene._wa__pickScene, PickScene._a__pickScene, _Runtime.field(worldMatrix, 'm')] : Array<Dynamic>));
@@ -322,4 +318,6 @@ class PickScene {
   public static final _worldPoint__pickScene:Dynamic = _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>));
 
   public static final _hit__pickScene:Dynamic = _Runtime.callValue(createSceneHit, cast ([] : Array<Dynamic>));
+
+  public static final _triangle__pickScene:Dynamic = { i0: 0.0, i1: 0.0, i2: 0.0 };
 }

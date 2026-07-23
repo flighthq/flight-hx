@@ -5,15 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.hasImageResourcePixels;
 import flighthq.renderGl.GlDraw.bindGlImageResourceTexture;
-import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
-import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
+import flighthq.sceneGl.GlMeshProgram.compileGlProgram;
+import flighthq.sceneGl.GlMeshProgram.ensureGlSceneProgram;
+import flighthq.types.GlMatcapProgram;
+import flighthq.types.GlMatcapProgram.GlMatcapDefineKey;
 import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
 import flighthq.types.Texture;
-
-typedef GlMatcapDefineKey = { var alphaMaskEnabled:Bool; var hasMatcap:Bool; };
-
-typedef GlMatcapProgram = Dynamic;
 
 @:expose("flighthq.sceneGl.GlMatcapPrelude")
 class GlMatcapPrelude {

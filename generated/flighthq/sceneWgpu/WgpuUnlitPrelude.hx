@@ -3,21 +3,19 @@ package flighthq.sceneWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.sceneWgpu.WgpuSceneRuntime.WgpuMaterialBinding;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.WGPU_MESH_PRELUDE_WGSL;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.createWgpuMeshPipeline;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuScenePipeline;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.getWgpuMaterialSampler;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.resolveWgpuMaterialTextureView;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.stashWgpuUvTransform;
-import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
+import flighthq.sceneWgpu.WgpuMeshPipeline.WGPU_MESH_PRELUDE_WGSL;
+import flighthq.sceneWgpu.WgpuMeshPipeline.createWgpuMeshPipeline;
+import flighthq.sceneWgpu.WgpuMeshPipeline.ensureWgpuScenePipeline;
+import flighthq.sceneWgpu.WgpuMeshPipeline.getWgpuMaterialSampler;
+import flighthq.sceneWgpu.WgpuMeshPipeline.resolveWgpuMaterialTextureView;
+import flighthq.sceneWgpu.WgpuMeshPipeline.stashWgpuUvTransform;
+import flighthq.sceneWgpu.WgpuSceneRuntime.getWgpuSceneRuntime;
 import flighthq.types.LinearColor;
 import flighthq.types.Texture;
 import flighthq.types.WgpuRenderState;
-
-typedef WgpuUnlitDefineKey = { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasColorMap:Bool; };
-
-typedef WgpuUnlitPipeline = Dynamic;
+import flighthq.types.WgpuSceneRuntime.WgpuMaterialBinding;
+import flighthq.types.WgpuUnlitPipeline;
+import flighthq.types.WgpuUnlitPipeline.WgpuUnlitDefineKey;
 
 @:expose("flighthq.sceneWgpu.WgpuUnlitPrelude")
 class WgpuUnlitPrelude {

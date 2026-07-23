@@ -19,6 +19,7 @@ import flighthq.textlayout.TextBounds.computeTextBoundsWidth;
 import flighthq.textlayout.TextLayout.computeTextLayout;
 import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
 import flighthq.types.CanvasRenderState;
+import flighthq.types.CanvasTextInputOverlay;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RichText;
@@ -26,8 +27,6 @@ import flighthq.types.RichText.RichTextRuntime;
 import flighthq.types.TextFormat;
 import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.TextSelectionRectangle;
-
-typedef CanvasTextInputOverlay = Dynamic;
 
 @:expose("flighthq.displayobjectCanvas.CanvasRichText")
 class CanvasRichText {

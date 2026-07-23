@@ -996,11 +996,11 @@ class Matrix4 {
     _Runtime.setIndex(_out, 7.0, 0.0);
     _Runtime.setIndex(_out, 8.0, ((right + left) / (right - left)));
     _Runtime.setIndex(_out, 9.0, ((top + bottom) / (top - bottom)));
-    _Runtime.setIndex(_out, 10.0, (-(zFar + zNear) / (zFar - zNear)));
+    _Runtime.setIndex(_out, 10.0, _Runtime.select(_Runtime.strictEquals(zFar, _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY')), function():Dynamic return cast -1.0, function():Dynamic return cast (-(zFar + zNear) / (zFar - zNear))));
     _Runtime.setIndex(_out, 11.0, -1.0);
     _Runtime.setIndex(_out, 12.0, 0.0);
     _Runtime.setIndex(_out, 13.0, 0.0);
-    _Runtime.setIndex(_out, 14.0, (((-2.0 * zFar) * zNear) / (zFar - zNear)));
+    _Runtime.setIndex(_out, 14.0, _Runtime.select(_Runtime.strictEquals(zFar, _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY')), function():Dynamic return cast (-2.0 * zNear), function():Dynamic return cast (((-2.0 * zFar) * zNear) / (zFar - zNear))));
     _Runtime.setIndex(_out, 15.0, 0.0);
   }
 

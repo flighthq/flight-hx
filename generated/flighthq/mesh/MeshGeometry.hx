@@ -8,13 +8,11 @@ import flighthq.geometry.Aabb.createAabb;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshGeometryRuntime;
 import flighthq.types.MeshGeometry.MeshSubset;
-import flighthq.types.MeshGeometry.PrimitiveTopology;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
+import flighthq.types.MeshGeometryOptions;
 import flighthq.types.MeshMorphBindPose;
 import flighthq.types.MeshSkinBindPose;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
-
-typedef MeshGeometryOptions = { @:optional var indices:Null<Dynamic>; var layout:VertexAttributeLayout; @:optional var subsets:Array<MeshSubset>; @:optional var topology:PrimitiveTopology; var vertices:flighthq._internal._Float32Array; };
 
 @:expose("flighthq.mesh.MeshGeometry")
 class MeshGeometry {

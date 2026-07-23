@@ -3,7 +3,6 @@ package flighthq.displayobjectGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.displayobjectGl.GlShapeMesh.GlShapeMeshBinding;
 import flighthq.displayobjectGl.GlShapeMesh.drawGlShapeMeshBatch;
 import flighthq.displayobjectGl.GlShapeMesh.ensureGlShapeMeshProgram;
 import flighthq.displayobjectGl.GlSpriteBatch.QUAD_BATCH_VS;
@@ -20,6 +19,7 @@ import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.GlRenderState.GlShapeMeshColorTransformShader;
 import flighthq.types.GlRenderState.GlUniformColorTransformShader;
 import flighthq.types.GlShapeMesh;
+import flighthq.types.GlShapeMeshBinding;
 import flighthq.types.RenderProxy2D;
 
 @:expose("flighthq.displayobjectGl.GlColorAdjustment")

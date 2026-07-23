@@ -3,8 +3,8 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostTauri.TauriModule.TauriApi;
 import flighthq.types.Shortcut.ShortcutBackend;
+import flighthq.types.TauriApi;
 
 @:expose("flighthq.hostTauri.TauriShortcut")
 class TauriShortcut {

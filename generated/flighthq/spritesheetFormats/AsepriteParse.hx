@@ -6,18 +6,17 @@ import flighthq._internal._Runtime;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetAnimationData;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetData;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetFrameData;
-import flighthq.spritesheetFormats.AsepriteSchema.AsepriteArrayFrame;
-import flighthq.spritesheetFormats.AsepriteSchema.AsepriteDocument;
-import flighthq.spritesheetFormats.AsepriteSchema.AsepriteFrameTag;
-import flighthq.spritesheetFormats.AsepriteSchema.AsepriteMeta;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.textureatlasFormats.TextureAtlasAsepriteParse.parseTextureAtlasAsepriteDocument;
+import flighthq.types.AsepriteSchema.AsepriteArrayFrame;
+import flighthq.types.AsepriteSchema.AsepriteDocument;
+import flighthq.types.AsepriteSchema.AsepriteFrameTag;
+import flighthq.types.AsepriteSchema.AsepriteMeta;
+import flighthq.types.AsepriteSchema.AsepriteParsed;
 import flighthq.types.SpritesheetAnimationData;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
 import flighthq.types.TextureAtlasRegion;
-
-typedef AsepriteParsed = { var data:SpritesheetData; var document:AsepriteDocument; };
 
 @:expose("flighthq.spritesheetFormats.AsepriteParse")
 class AsepriteParse {

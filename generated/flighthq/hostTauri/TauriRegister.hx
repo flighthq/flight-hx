@@ -11,7 +11,6 @@ import flighthq.hostTauri.TauriApp.createTauriAppBackend;
 import flighthq.hostTauri.TauriClipboard.createTauriClipboardBackend;
 import flighthq.hostTauri.TauriDialog.createTauriDialogBackend;
 import flighthq.hostTauri.TauriMenu.createTauriMenuBackend;
-import flighthq.hostTauri.TauriModule.TauriApi;
 import flighthq.hostTauri.TauriNotification.createTauriNotificationBackend;
 import flighthq.hostTauri.TauriPlatform.createTauriPlatformBackend;
 import flighthq.hostTauri.TauriShell.createTauriShellBackend;
@@ -24,6 +23,7 @@ import flighthq.platform.Platform.setPlatformBackend;
 import flighthq.shell.Shell.setShellBackend;
 import flighthq.shortcut.Shortcut.setShortcutBackend;
 import flighthq.tray.Tray.setTrayBackend;
+import flighthq.types.TauriApi;
 
 @:expose("flighthq.hostTauri.TauriRegister")
 class TauriRegister {

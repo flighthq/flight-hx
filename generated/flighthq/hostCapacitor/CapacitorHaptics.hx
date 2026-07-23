@@ -3,7 +3,7 @@ package flighthq.hostCapacitor;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorApi;
+import flighthq.types.CapacitorApi;
 import flighthq.types.Haptics.HapticImpactStyle;
 import flighthq.types.Haptics.HapticNotificationType;
 import flighthq.types.Haptics.HapticsBackend;

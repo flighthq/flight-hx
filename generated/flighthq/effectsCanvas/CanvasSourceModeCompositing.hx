@@ -3,9 +3,8 @@ package flighthq.effectsCanvas;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.CanvasEffectSourceMode;
 import flighthq.types.CanvasRenderTarget;
-
-typedef CanvasEffectSourceMode = String;
 
 @:expose("flighthq.effectsCanvas.CanvasSourceModeCompositing")
 class CanvasSourceModeCompositing {

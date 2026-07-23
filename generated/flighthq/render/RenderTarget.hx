@@ -6,12 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix.createMatrix;
 import flighthq.geometry.Matrix.inverseMatrix;
 import flighthq.geometry.Matrix.multiplyMatrix;
-import flighthq.node.Transform2d.getNodeLocalMatrix;
+import flighthq.node.NodeTransform2d.getNodeLocalMatrix;
 import flighthq.types.DisplayObject;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Rectangle.RectangleLike;
-
-typedef RenderTargetSizeOptions = { @:optional var minWidth:Float; @:optional var minHeight:Float; };
 
 @:expose("flighthq.render.RenderTarget")
 class RenderTarget {

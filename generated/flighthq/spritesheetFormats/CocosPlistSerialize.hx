@@ -3,8 +3,8 @@ package flighthq.spritesheetFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.spritesheetFormats.CocosPlistSchema.CocosPlistDocument;
-import flighthq.spritesheetFormats.CocosPlistSchema.CocosPlistFrame;
+import flighthq.types.CocosPlistSchema.CocosPlistDocument;
+import flighthq.types.CocosPlistSchema.CocosPlistFrame;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
 

@@ -6,10 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-
-typedef PixiParseResult = { var config:ParticleEmitterConfig; var warnings:Array<String>; };
-
-typedef PixiParsed = PixiParseResult;
+import flighthq.types.PixiParseResult;
 
 typedef PixiRaw__pixiParse = Dynamic;
 

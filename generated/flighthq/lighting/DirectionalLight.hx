@@ -8,11 +8,9 @@ import flighthq.geometry.Vector3.cloneVector3;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.geometry.Vector3.setVector3;
 import flighthq.types.DirectionalLight;
+import flighthq.types.DirectionalLightOptions;
 import flighthq.types.Types.DirectionalLightKind;
-import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._DirectionalLightValues.DirectionalLightKind;
-
-typedef DirectionalLightOptions = { @:optional var castsShadow:Bool; @:optional var color:Float; @:optional var direction:Vector3Like; @:optional var intensity:Float; @:optional var normalBias:Float; @:optional var pcfRadius:Float; @:optional var shadowBias:Float; };
 
 @:expose("flighthq.lighting.DirectionalLight")
 class DirectionalLight {

@@ -3,16 +3,16 @@ package flighthq.sceneGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.sceneGl.GlLitProgram.bindGlMeshLightBlock;
+import flighthq.sceneGl.GlMeshProgram.beginGlMeshDraw;
+import flighthq.sceneGl.GlMeshProgram.drawGlMeshSubset;
+import flighthq.sceneGl.GlMeshProgram.setGlMeshCameraPosition;
+import flighthq.sceneGl.GlMeshProgram.setGlMeshViewProjection;
 import flighthq.sceneGl.GlPbrProgramCache.ensureGlPbrProgram;
 import flighthq.sceneGl.GlPbrStandardBlock.bindGlPbrStandardBlock;
 import flighthq.sceneGl.GlPbrStandardBlock.buildGlPbrStandardDefineKey;
-import flighthq.sceneGl._internal._GlLitProgramValues.bindGlMeshLightBlock;
-import flighthq.sceneGl._internal._GlMeshProgramValues.beginGlMeshDraw;
-import flighthq.sceneGl._internal._GlMeshProgramValues.drawGlMeshSubset;
-import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshCameraPosition;
-import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
-import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
-import flighthq.types.Camera;
+import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
+import flighthq.types.Camera3D;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlRenderState;
 import flighthq.types.Material;
@@ -23,7 +23,7 @@ import flighthq.types.StandardPbrMaterial;
 
 @:expose("flighthq.sceneGl.StandardPbrGlMeshMaterialRenderer")
 class StandardPbrGlMeshMaterialRenderer {
-  public static final standardPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
+  public static final standardPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var pbr:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;

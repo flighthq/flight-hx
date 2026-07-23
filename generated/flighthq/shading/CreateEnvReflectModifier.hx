@@ -4,12 +4,11 @@ package flighthq.shading;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EnvReflectModifier;
+import flighthq.types.EnvReflectModifierOptions;
 import flighthq.types.ModifierSlot;
 import flighthq.types.Types.EnvReflectModifierKind;
 import flighthq.types._internal._EnvReflectModifierValues.EnvReflectModifierKind;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
-
-typedef EnvReflectModifierOptions = { @:optional var tint:Float; @:optional var intensity:Float; @:optional var fresnelBias:Float; @:optional var roughness:Float; };
 
 @:expose("flighthq.shading.CreateEnvReflectModifier")
 class CreateEnvReflectModifier {

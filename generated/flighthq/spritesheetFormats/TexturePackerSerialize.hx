@@ -3,15 +3,14 @@ package flighthq.spritesheetFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.spritesheetFormats.TexturePackerSchema.TexturePackerArrayDocument;
-import flighthq.spritesheetFormats.TexturePackerSchema.TexturePackerArrayFrame;
-import flighthq.spritesheetFormats.TexturePackerSchema.TexturePackerDocument;
-import flighthq.spritesheetFormats.TexturePackerSchema.TexturePackerHashDocument;
-import flighthq.spritesheetFormats.TexturePackerSchema.TexturePackerHashFrame;
-import flighthq.spritesheetFormats.TexturePackerSchema.TexturePackerMeta;
 import flighthq.types.SpritesheetData;
-
-typedef TexturePackerSerializeOptions = { @:optional var variant:String; };
+import flighthq.types.TexturePackerSchema.TexturePackerArrayDocument;
+import flighthq.types.TexturePackerSchema.TexturePackerArrayFrame;
+import flighthq.types.TexturePackerSchema.TexturePackerDocument;
+import flighthq.types.TexturePackerSchema.TexturePackerHashDocument;
+import flighthq.types.TexturePackerSchema.TexturePackerHashFrame;
+import flighthq.types.TexturePackerSchema.TexturePackerMeta;
+import flighthq.types.TexturePackerSchema.TexturePackerSerializeOptions;
 
 @:expose("flighthq.spritesheetFormats.TexturePackerSerialize")
 class TexturePackerSerialize {

@@ -22,13 +22,12 @@ import flighthq.types.HasTransform2D;
 import flighthq.types.Node;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderProxyVisitor;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
 typedef AdaptHook__renderProxy = Dynamic;
-
-typedef RenderProxyVisitor = Dynamic;
 
 @:expose("flighthq.render.RenderProxy")
 class RenderProxy {

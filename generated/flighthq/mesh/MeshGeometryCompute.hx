@@ -3,6 +3,7 @@ package flighthq.mesh;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.geometry.Aabb.createAabb;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.MeshGeometry;
@@ -352,6 +353,16 @@ class MeshGeometryCompute {
         i++;
       }
     }
+  }
+
+  public static function refreshMeshGeometryBounds(geometry:MeshGeometry):Void {
+    var bounds:Dynamic = cast _Runtime.UNDEFINED;
+    bounds = _Runtime.field(geometry, 'bounds');
+    if (_Runtime.truthy(_Runtime.strictEquals(bounds, null))) {
+      (bounds = cast (_Runtime.callValue(createAabb, cast ([] : Array<Dynamic>)) : Dynamic));
+      _Runtime.setField(geometry, 'bounds', bounds);
+    }
+    _Runtime.callValue(computeMeshGeometryBounds, cast ([bounds, geometry] : Array<Dynamic>));
   }
 
   public static final NORMAL_OFFSET__meshGeometryCompute:Dynamic = 3.0;

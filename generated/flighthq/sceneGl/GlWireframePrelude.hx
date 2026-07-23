@@ -3,11 +3,10 @@ package flighthq.sceneGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
-import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
+import flighthq.sceneGl.GlMeshProgram.compileGlProgram;
+import flighthq.sceneGl.GlMeshProgram.ensureGlSceneProgram;
 import flighthq.types.GlRenderState;
-
-typedef GlWireframeProgram = Dynamic;
+import flighthq.types.GlWireframeProgram;
 
 @:expose("flighthq.sceneGl.GlWireframePrelude")
 class GlWireframePrelude {

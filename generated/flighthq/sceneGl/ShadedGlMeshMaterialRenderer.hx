@@ -6,31 +6,31 @@ import flighthq._internal._Runtime;
 import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.image.ImageResource.hasImageResourcePixels;
 import flighthq.renderGl.GlDraw.bindGlImageResourceTexture;
+import flighthq.sceneGl.GlLitProgram.bindGlMeshLightBlock;
 import flighthq.sceneGl.GlMeshMaterialRegistry.registerGlMeshMaterialRenderer;
+import flighthq.sceneGl.GlMeshProgram.beginGlMeshDraw;
+import flighthq.sceneGl.GlMeshProgram.bindGlUvTransform;
+import flighthq.sceneGl.GlMeshProgram.drawGlMeshSubset;
+import flighthq.sceneGl.GlMeshProgram.hasGlUvTransform;
+import flighthq.sceneGl.GlMeshProgram.setGlMeshCameraPosition;
+import flighthq.sceneGl.GlMeshProgram.setGlMeshViewProjection;
+import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
 import flighthq.sceneGl.GlSceneTime.getGlSceneTime;
-import flighthq.sceneGl.GlShadedModifierSnippet.GlModifierBindContext;
-import flighthq.sceneGl.GlShadedModifierSnippet.GlModifierSnippet;
-import flighthq.sceneGl.GlShadedPrelude.GlShadedDefineKey;
-import flighthq.sceneGl.GlShadedPrelude.GlShadedProgram;
 import flighthq.sceneGl.GlShadedPrelude.ensureGlShadedProgram;
-import flighthq.sceneGl._internal._GlLitProgramValues.bindGlMeshLightBlock;
-import flighthq.sceneGl._internal._GlMeshProgramValues.beginGlMeshDraw;
-import flighthq.sceneGl._internal._GlMeshProgramValues.bindGlUvTransform;
-import flighthq.sceneGl._internal._GlMeshProgramValues.drawGlMeshSubset;
-import flighthq.sceneGl._internal._GlMeshProgramValues.hasGlUvTransform;
-import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshCameraPosition;
-import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
-import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
-import flighthq.shading.ModifierRegistry;
+import flighthq.shading.ModifierRegistry.resolveModifier;
 import flighthq.shading.OrderModifierStack.orderModifierStack;
-import flighthq.shading._internal._ModifierRegistryValues.resolveModifier;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.GlMeshMaterialRenderer;
+import flighthq.types.GlModifierSnippet;
+import flighthq.types.GlModifierSnippet.GlModifierBindContext;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlShadedProgram;
+import flighthq.types.GlShadedProgram.GlShadedDefineKey;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Modifier;
+import flighthq.types.ModifierRegistry;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.ShadedMaterial;
@@ -39,7 +39,7 @@ import flighthq.types._internal._ShadedMaterialValues.ShadedMaterialKind;
 
 @:expose("flighthq.sceneGl.ShadedGlMeshMaterialRenderer")
 class ShadedGlMeshMaterialRenderer {
-  public static final shadedGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
+  public static final shadedGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var shaded:Dynamic = cast _Runtime.UNDEFINED;
     var modifiers:Dynamic = cast _Runtime.UNDEFINED;

@@ -4,7 +4,7 @@ package flighthq.sceneGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlTextureUpload.uploadGlTextureImageResource;
-import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
 import flighthq.types.CubeTexture;
 import flighthq.types.Environment;
 import flighthq.types.GlRenderState;

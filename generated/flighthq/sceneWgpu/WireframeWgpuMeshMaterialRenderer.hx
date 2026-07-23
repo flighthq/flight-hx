@@ -6,14 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.sceneWgpu.WgpuMeshMaterialRegistry.registerWgpuMeshMaterialRenderer;
+import flighthq.sceneWgpu.WgpuMeshPipeline.beginWgpuMeshDraw;
+import flighthq.sceneWgpu.WgpuMeshPipeline.writeWgpuDrawUniform;
+import flighthq.sceneWgpu.WgpuMeshPipeline.writeWgpuFrameUniform;
+import flighthq.sceneWgpu.WgpuSceneRuntime.getWgpuSceneRuntime;
 import flighthq.sceneWgpu.WgpuWireframePrelude.bindWgpuWireframeColor;
 import flighthq.sceneWgpu.WgpuWireframePrelude.ensureWgpuWireframePipeline;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.beginWgpuMeshDraw;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuDrawUniform;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUniform;
-import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
-import flighthq.sceneWgpu._internal._WgpuWireframeUploadValues.ensureWgpuWireframeUpload;
-import flighthq.types.Camera;
+import flighthq.sceneWgpu.WgpuWireframeUpload.ensureWgpuWireframeUpload;
+import flighthq.types.Camera3D;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
@@ -27,7 +27,7 @@ import flighthq.types._internal._WireframeMaterialValues.WireframeMaterialKind;
 
 @:expose("flighthq.sceneWgpu.WireframeWgpuMeshMaterialRenderer")
 class WireframeWgpuMeshMaterialRenderer {
-  public static final wireframeWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera) {
+  public static final wireframeWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var wireframe:Dynamic = cast _Runtime.UNDEFINED;

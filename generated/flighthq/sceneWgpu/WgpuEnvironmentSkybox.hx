@@ -3,12 +3,12 @@ package flighthq.sceneWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.camera.Camera.getCameraInverseViewProjectionMatrix4;
+import flighthq.camera.Camera.getCamera3DInverseViewProjectionMatrix4;
 import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.sceneWgpu.WgpuEnvironmentCube.ensureWgpuEnvironmentSourceCube;
-import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
-import flighthq.types.Camera;
+import flighthq.sceneWgpu.WgpuSceneRuntime.getWgpuSceneRuntime;
+import flighthq.types.Camera3D;
 import flighthq.types.Environment;
 import flighthq.types.Matrix4;
 import flighthq.types.WgpuRenderState;
@@ -17,7 +17,7 @@ typedef WgpuSkybox__wgpuEnvironmentSkybox = { var cubeBindGroup:Null<Dynamic>; v
 
 @:expose("flighthq.sceneWgpu.WgpuEnvironmentSkybox")
 class WgpuEnvironmentSkybox {
-  public static function drawWgpuEnvironmentSkybox(state:WgpuRenderState, environment:Environment, camera:Camera, aspect:Float):Void {
+  public static function drawWgpuEnvironmentSkybox(state:WgpuRenderState, environment:Environment, camera:Camera3D, aspect:Float):Void {
     var cubeView:Dynamic = cast _Runtime.UNDEFINED;
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
@@ -34,7 +34,7 @@ class WgpuEnvironmentSkybox {
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     format = _Runtime.coalesce(_Runtime.field(stateRuntime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
     sky = _Runtime.callValue(WgpuEnvironmentSkybox.ensureWgpuSkyboxPipeline__wgpuEnvironmentSkybox, cast ([state, format] : Array<Dynamic>));
-    _Runtime.callValue(getCameraInverseViewProjectionMatrix4, cast ([WgpuEnvironmentSkybox._inverseViewProjection__wgpuEnvironmentSkybox, camera, aspect] : Array<Dynamic>));
+    _Runtime.callValue(getCamera3DInverseViewProjectionMatrix4, cast ([WgpuEnvironmentSkybox._inverseViewProjection__wgpuEnvironmentSkybox, camera, aspect] : Array<Dynamic>));
     u = WgpuEnvironmentSkybox._skyScratch__wgpuEnvironmentSkybox;
     m = _Runtime.field(WgpuEnvironmentSkybox._inverseViewProjection__wgpuEnvironmentSkybox, 'm');
     {

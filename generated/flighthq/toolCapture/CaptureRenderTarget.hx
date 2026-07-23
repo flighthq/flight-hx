@@ -3,7 +3,6 @@ package flighthq.toolCapture;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.toolCapture.CaptureEntries.Tool;
 import flighthq.toolCapture.CaptureEntry.CaptureStatus;
 import flighthq.toolCapture.CaptureEntry.captureEntry;
 import flighthq.toolCapture.CaptureEntry.getCaptureOutputPaths;
@@ -14,7 +13,7 @@ typedef CaptureRenderTargetResult = { var screenshotPath:String; var logsPath:St
 
 @:expose("flighthq.toolCapture.CaptureRenderTarget")
 class CaptureRenderTarget {
-  public static function captureRenderTarget(tool:Tool, name:String, renderer:String, options:CaptureRenderTargetOptions):flighthq._internal._Promise<CaptureRenderTargetResult> {
+  public static function captureRenderTarget(tool:String, name:String, renderer:String, options:CaptureRenderTargetOptions):flighthq._internal._Promise<CaptureRenderTargetResult> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<CaptureRenderTargetResult> {
       var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
       var context:Dynamic = cast _Runtime.UNDEFINED;

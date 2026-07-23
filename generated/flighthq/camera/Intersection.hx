@@ -3,28 +3,28 @@ package flighthq.camera;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.camera.Picking.getCameraScreenToWorldRay;
-import flighthq.camera.Picking.getCameraWorldToScreen;
+import flighthq.camera.Picking.getCamera3DScreenToWorldRay;
+import flighthq.camera.Picking.getCamera3DWorldToScreen;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.Plane.PlaneLike;
 import flighthq.types.Ray3D.Ray3DLike;
 import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.camera.Intersection")
 class Intersection {
-  public static function getCameraRayThroughBoundingSphere(out:Ray3DLike, camera:Camera, sphere:BoundingSphereLike, aspect:Float):Bool {
+  public static function getCamera3DRayThroughBoundingSphere(out:Ray3DLike, camera:Camera3D, sphere:BoundingSphereLike, aspect:Float):Bool {
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(sphere, 'radius'), 0.0, '<'))) {
       return cast false;
     }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(getCameraWorldToScreen, cast ([Intersection.__scratchNdc__intersection, camera, _Runtime.field(sphere, 'center'), aspect] : Array<Dynamic>))))) {
+    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(getCamera3DWorldToScreen, cast ([Intersection.__scratchNdc__intersection, camera, _Runtime.field(sphere, 'center'), aspect] : Array<Dynamic>))))) {
       return cast false;
     }
-    return cast _Runtime.callValue(getCameraScreenToWorldRay, cast ([out, camera, _Runtime.field(Intersection.__scratchNdc__intersection, 'x'), _Runtime.field(Intersection.__scratchNdc__intersection, 'y'), aspect] : Array<Dynamic>));
+    return cast _Runtime.callValue(getCamera3DScreenToWorldRay, cast ([out, camera, _Runtime.field(Intersection.__scratchNdc__intersection, 'x'), _Runtime.field(Intersection.__scratchNdc__intersection, 'y'), aspect] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function intersectCameraRayWithPlane(out:Vector3Like, ray:Ray3DLike, plane:PlaneLike):Bool {
+  public static function intersectCamera3DRayWithPlane(out:Vector3Like, ray:Ray3DLike, plane:PlaneLike):Bool {
     var dx:Dynamic = cast _Runtime.UNDEFINED;
     var dy:Dynamic = cast _Runtime.UNDEFINED;
     var dz:Dynamic = cast _Runtime.UNDEFINED;

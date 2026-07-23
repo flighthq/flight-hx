@@ -3,7 +3,7 @@ package flighthq.sceneGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
 import flighthq.types.GlRenderState;
 
 @:expose("flighthq.sceneGl.GlSceneTime")

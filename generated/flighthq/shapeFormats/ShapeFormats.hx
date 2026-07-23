@@ -4,9 +4,9 @@ package flighthq.shapeFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.shapeFormats.ShapeJson as Facade_ShapeFormats_flighthq_shapeFormats_ShapeJson;
-import flighthq.shapeFormats.ShapeJson.ShapeJsonFormatOptions;
-import flighthq.shapeFormats.ShapeJson.ShapeJsonParseOptions;
 import flighthq.types.Shape;
+import flighthq.types.ShapeJson.ShapeJsonFormatOptions;
+import flighthq.types.ShapeJson.ShapeJsonParseOptions;
 
 @:expose("flighthq.shapeFormats.ShapeFormats")
 class ShapeFormats {

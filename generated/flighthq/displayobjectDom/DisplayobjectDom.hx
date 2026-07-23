@@ -11,14 +11,13 @@ import flighthq.displayobjectDom.DomClip as Facade_DisplayobjectDom_flighthq_dis
 import flighthq.displayobjectDom.DomClipRectangle as Facade_DisplayobjectDom_flighthq_displayobjectDom_DomClipRectangle;
 import flighthq.displayobjectDom.DomDisplayObject as Facade_DisplayobjectDom_flighthq_displayobjectDom_DomDisplayObject;
 import flighthq.displayobjectDom.DomFontSource as Facade_DisplayobjectDom_flighthq_displayobjectDom_DomFontSource;
+import flighthq.displayobjectDom.DomHtmlView as Facade_DisplayobjectDom_flighthq_displayobjectDom_DomHtmlView;
 import flighthq.displayobjectDom.DomImageSource as Facade_DisplayobjectDom_flighthq_displayobjectDom_DomImageSource;
-import flighthq.displayobjectDom.DomImageSource.DomImageSourceKind;
 import flighthq.displayobjectDom.DomMaterials as Facade_DisplayobjectDom_flighthq_displayobjectDom_DomMaterials;
 import flighthq.displayobjectDom.DomNativeText as Facade_DisplayobjectDom_flighthq_displayobjectDom_DomNativeText;
 import flighthq.displayobjectDom.DomRenderState as Facade_DisplayobjectDom_flighthq_displayobjectDom_DomRenderState;
 import flighthq.displayobjectDom.DomRenderView as Facade_DisplayobjectDom_flighthq_displayobjectDom_DomRenderView;
 import flighthq.displayobjectDom.DomRichText as Facade_DisplayobjectDom_flighthq_displayobjectDom_DomRichText;
-import flighthq.displayobjectDom.DomRichText.DomTextInputOverlay;
 import flighthq.displayobjectDom.DomScale9Shape as Facade_DisplayobjectDom_flighthq_displayobjectDom_DomScale9Shape;
 import flighthq.displayobjectDom.DomScale9Shape.DomScale9ShapeData__domScale9Shape;
 import flighthq.displayobjectDom.DomShape as Facade_DisplayobjectDom_flighthq_displayobjectDom_DomShape;
@@ -28,15 +27,16 @@ import flighthq.displayobjectDom.DomTextInput as Facade_DisplayobjectDom_flighth
 import flighthq.displayobjectDom.DomTextLabel as Facade_DisplayobjectDom_flighthq_displayobjectDom_DomTextLabel;
 import flighthq.displayobjectDom.DomTransform as Facade_DisplayobjectDom_flighthq_displayobjectDom_DomTransform;
 import flighthq.displayobjectDom.DomVideo as Facade_DisplayobjectDom_flighthq_displayobjectDom_DomVideo;
-import flighthq.displayobjectDom.HtmlView as Facade_DisplayobjectDom_flighthq_displayobjectDom_HtmlView;
 import flighthq.types.BlendMode;
 import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.DomBlendModeFidelity;
+import flighthq.types.DomImageSourceKind;
 import flighthq.types.DomRenderState;
 import flighthq.types.DomRenderState.DomClipEntry;
 import flighthq.types.DomRenderState.DomRenderStateRuntime;
 import flighthq.types.DomStageRectangle;
+import flighthq.types.DomTextInputOverlay;
 import flighthq.types.FontResource;
 import flighthq.types.ImageResource;
 import flighthq.types.Matrix;
@@ -101,7 +101,7 @@ class DisplayobjectDom {
 
   public static final defaultDomVideoRenderer:DisplayObjectRenderer = Facade_DisplayobjectDom_flighthq_displayobjectDom_DomVideo.defaultDomVideoRenderer;
 
-  public static final defaultHtmlViewRenderer:DisplayObjectRenderer = Facade_DisplayobjectDom_flighthq_displayobjectDom_HtmlView.defaultHtmlViewRenderer;
+  public static final defaultHtmlViewRenderer:DisplayObjectRenderer = Facade_DisplayobjectDom_flighthq_displayobjectDom_DomHtmlView.defaultHtmlViewRenderer;
 
   public static function drawDomBitmap(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomBitmap.drawDomBitmap, cast ([state, renderProxy] : Array<Dynamic>));
@@ -112,7 +112,7 @@ class DisplayobjectDom {
   }
 
   public static function drawDomHtmlView(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_HtmlView.drawDomHtmlView, cast ([state, renderProxy] : Array<Dynamic>));
+    _Runtime.callValue(Facade_DisplayobjectDom_flighthq_displayobjectDom_DomHtmlView.drawDomHtmlView, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
   public static function drawDomNativeText(state:DomRenderState, renderProxy:RenderProxy2D):Void {

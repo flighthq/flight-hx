@@ -11,7 +11,7 @@ import flighthq.toolCapture.CaptureFormat.formatSummaryCount;
 import flighthq.toolCapture.CaptureFormat.formatSummaryLine;
 import flighthq.toolCapture.CaptureInterrupt.installAbortHandler;
 
-typedef ReferenceCaptureOptions = { var checkoutDir:String; var repoRoot:String; @:optional var filter:String; @:optional var captureFrames:Float; @:optional var extraWait:Float; @:optional var updateBaseline:Bool; @:optional var failOnError:Bool; var outBase:String; @:optional var workerCount:Float; };
+typedef ReferenceCaptureOptions = { var checkoutDir:String; var repoRoot:String; @:optional var filter:String; @:optional var captureFrames:Float; @:optional var extraWait:Float; @:optional var updateBaseline:Bool; @:optional var failOnError:Bool; @:optional var observe:Bool; var outBase:String; @:optional var workerCount:Float; };
 
 typedef ReferenceCaptureResult = { var captured:Float; var changed:Float; var failed:Float; var aborted:Bool; };
 
@@ -58,7 +58,7 @@ class ReferenceCapture {
       _Runtime.console('log', ['Starting flight-reference Vite dev server…']);
       server = flighthq._internal._Async.awaitValue(_Runtime.callValue(startReferenceDevServer, cast ([_Runtime.field(options, 'checkoutDir'), _Runtime.field(options, 'repoRoot')] : Array<Dynamic>)));
       _Runtime.console('log', ['Ready at ' + Std.string(_Runtime.field(server, 'url')) + '\n']);
-      __destructure0 = flighthq._internal._Async.awaitValue(_Runtime.callValue(launchBrowser, cast ([{ captureFrames: _Runtime.coalesce(_Runtime.field(options, 'captureFrames'), function():Dynamic return cast 1.0), verify: true }] : Array<Dynamic>)));
+      __destructure0 = flighthq._internal._Async.awaitValue(_Runtime.callValue(launchBrowser, cast ([{ captureFrames: _Runtime.coalesce(_Runtime.field(options, 'captureFrames'), function():Dynamic return cast 1.0), verify: true, observe: _Runtime.field(options, 'observe') }] : Array<Dynamic>)));
       browser = _Runtime.field(__destructure0, 'browser');
       context = _Runtime.field(__destructure0, 'context');
       isAborted = _Runtime.callValue(installAbortHandler, cast ([] : Array<Dynamic>));
@@ -67,7 +67,7 @@ class ReferenceCapture {
       failed = 0.0;
       try {
         try {
-          var result:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(captureParallel, cast ([{ context: context, entries: entries, rendererFilter: cast ([] : Array<Dynamic>), baseUrl: _Runtime.field(server, 'url'), tool: 'reference', outBase: _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'resolve'] : Array<Dynamic>)), cast ([_Runtime.field(options, 'outBase')] : Array<Dynamic>)), root: _Runtime.field(options, 'checkoutDir'), updateBaseline: _Runtime.field(options, 'updateBaseline'), extraWait: _Runtime.field(options, 'extraWait'), captureFrames: _Runtime.field(options, 'captureFrames'), failOnError: _Runtime.field(options, 'failOnError'), verify: true, isAborted: isAborted, workerCount: _Runtime.coalesce(_Runtime.field(options, 'workerCount'), function():Dynamic return cast 4.0) }] : Array<Dynamic>)));
+          var result:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(captureParallel, cast ([{ context: context, entries: entries, rendererFilter: cast ([] : Array<Dynamic>), baseUrl: _Runtime.field(server, 'url'), tool: 'reference', outBase: _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'resolve'] : Array<Dynamic>)), cast ([_Runtime.field(options, 'outBase')] : Array<Dynamic>)), root: _Runtime.field(options, 'checkoutDir'), updateBaseline: _Runtime.field(options, 'updateBaseline'), extraWait: _Runtime.field(options, 'extraWait'), captureFrames: _Runtime.field(options, 'captureFrames'), failOnError: _Runtime.field(options, 'failOnError'), observe: _Runtime.field(options, 'observe'), verify: true, isAborted: isAborted, workerCount: _Runtime.coalesce(_Runtime.field(options, 'workerCount'), function():Dynamic return cast 4.0) }] : Array<Dynamic>)));
           (captured = cast (_Runtime.field(result, 'captured') : Dynamic));
           (changed = cast (_Runtime.field(result, 'changed') : Dynamic));
           (failed = cast (_Runtime.field(result, 'failed') : Dynamic));
@@ -101,7 +101,7 @@ class ReferenceCapture {
       var timeout:Dynamic = cast _Runtime.UNDEFINED;
       var ansi:Dynamic = cast _Runtime.UNDEFINED;
       var onData:Dynamic = cast _Runtime.UNDEFINED;
-      child = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:child_process', 'spawn'] : Array<Dynamic>)), cast (['npx', cast (['vite', '--host', '0.0.0.0'] : Array<Dynamic>), { cwd: checkoutDir, stdio: cast (['ignore', 'pipe', 'pipe'] : Array<Dynamic>), env: _Runtime.mergeObjects([_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['process'] : Array<Dynamic>)), 'env'), { FLIGHT_REPO: repoRoot }]) }] : Array<Dynamic>));
+      child = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:child_process', 'spawn'] : Array<Dynamic>)), cast (['npx', cast (['vite', '--host', '0.0.0.0'] : Array<Dynamic>), { cwd: checkoutDir, stdio: cast (['ignore', 'pipe', 'pipe'] : Array<Dynamic>), env: _Runtime.mergeObjects([_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['process'] : Array<Dynamic>)), 'env'), { FLIGHT_REPO: repoRoot }, { FLIGHT_SDK_WATCH: '1' }]) }] : Array<Dynamic>));
       resolved = false;
       timeout = _Runtime.setTimeout(function() {
         if (_Runtime.truthy(!_Runtime.truthy(resolved))) {

@@ -3,22 +3,23 @@ package flighthq.sceneGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.camera.Camera.getCameraViewProjectionMatrix4;
+import flighthq.camera.Camera.getCamera3DViewProjectionMatrix4;
 import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.mesh.MeshGeometry.hasMeshGeometrySkin;
-import flighthq.node.Transform3d.getNodeWorldMatrix4;
+import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.node.Traversal.forEachNodeDescendant;
 import flighthq.renderGl.GlRenderTarget.createGlRenderTarget;
 import flighthq.renderGl.GlSkinPaletteTexture.uploadGlSkinPaletteTexture;
 import flighthq.scene.UpdateMeshMorph.updateMeshMorph;
+import flighthq.sceneGl.GlMeshProgram.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
+import flighthq.sceneGl.GlMeshProgram.SKIN_PALETTE_TEXTURE_UNIT;
+import flighthq.sceneGl.GlMeshProgram.compileGlProgram;
+import flighthq.sceneGl.GlMeshProgram.ensureGlSceneProgram;
 import flighthq.sceneGl.GlMeshUpload.ensureGlMeshUpload;
-import flighthq.sceneGl._internal._GlMeshProgramValues.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
-import flighthq.sceneGl._internal._GlMeshProgramValues.SKIN_PALETTE_TEXTURE_UNIT;
-import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
-import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
-import flighthq.sceneGl._internal._GlSceneRuntimeValues.ensureGlSkinPalette;
-import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
-import flighthq.types.Camera;
+import flighthq.sceneGl.GlSceneRuntime.ensureGlSkinPalette;
+import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
+import flighthq.types.Camera3D;
+import flighthq.types.GlMeshProgram;
 import flighthq.types.GlRenderState;
 import flighthq.types.Mesh;
 import flighthq.types.SceneNode;
@@ -26,7 +27,7 @@ import flighthq.types.SceneNode.SceneNodeTraits;
 
 @:expose("flighthq.sceneGl.GlShadowMap")
 class GlShadowMap {
-  public static function drawGlSceneShadowMap(state:GlRenderState, scene:SceneNode, shadowCamera:Camera):Void {
+  public static function drawGlSceneShadowMap(state:GlRenderState, scene:SceneNode, shadowCamera:Camera3D):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
@@ -43,7 +44,7 @@ class GlShadowMap {
     }
     target = _Runtime.field(runtime, 'shadowTarget');
     matrix = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'shadow'), 'matrix'), function():Dynamic return cast _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)));
-    _Runtime.callValue(getCameraViewProjectionMatrix4, cast ([matrix, shadowCamera, 1.0] : Array<Dynamic>));
+    _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([matrix, shadowCamera, 1.0] : Array<Dynamic>));
     rigidProgram = _Runtime.callValue(ensureGlSceneProgram, cast ([state, 'shadow:depth', GlShadowMap.compileShadowDepthProgram__glShadowMap] : Array<Dynamic>));
     skinnedProgram = null;
     prevFramebuffer = (cast _Runtime.callProperty(gl, 'getParameter', cast ([_Runtime.field(gl, 'FRAMEBUFFER_BINDING')] : Array<Dynamic>)) : Null<Dynamic>);
@@ -82,9 +83,9 @@ class GlShadowMap {
       upload = _Runtime.callValue(ensureGlMeshUpload, cast ([state, _Runtime.field(mesh, 'geometry'), skinned] : Array<Dynamic>));
       _Runtime.callProperty(gl, 'bindVertexArray', cast ([_Runtime.field(upload, 'vao')] : Array<Dynamic>));
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null))) {
-        _Runtime.callProperty(gl, 'drawElements', cast ([_Runtime.field(gl, 'TRIANGLES'), _Runtime.field(upload, 'indexCount'), _Runtime.field(upload, 'indexType'), 0.0] : Array<Dynamic>));
+        _Runtime.callProperty(gl, 'drawElements', cast ([_Runtime.field(upload, 'primitiveMode'), _Runtime.field(upload, 'indexCount'), _Runtime.field(upload, 'indexType'), 0.0] : Array<Dynamic>));
       } else {
-        _Runtime.callProperty(gl, 'drawArrays', cast ([_Runtime.field(gl, 'TRIANGLES'), 0.0, _Runtime.field(upload, 'indexCount')] : Array<Dynamic>));
+        _Runtime.callProperty(gl, 'drawArrays', cast ([_Runtime.field(upload, 'primitiveMode'), 0.0, _Runtime.field(upload, 'indexCount')] : Array<Dynamic>));
       }
     }] : Array<Dynamic>));
     _Runtime.callProperty(gl, 'activeTexture', cast ([_Runtime.field(gl, 'TEXTURE0')] : Array<Dynamic>));

@@ -5,14 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
-import flighthq.sceneWgpu.WgpuMatcapPrelude.WgpuMatcapDefineKey;
 import flighthq.sceneWgpu.WgpuMatcapPrelude.bindWgpuMatcapSurface;
 import flighthq.sceneWgpu.WgpuMatcapPrelude.ensureWgpuMatcapPipeline;
 import flighthq.sceneWgpu.WgpuMeshMaterialRegistry.registerWgpuMeshMaterialRenderer;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.beginWgpuMeshDraw;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.drawWgpuMeshSubset;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUniform;
-import flighthq.types.Camera;
+import flighthq.sceneWgpu.WgpuMeshPipeline.beginWgpuMeshDraw;
+import flighthq.sceneWgpu.WgpuMeshPipeline.drawWgpuMeshSubset;
+import flighthq.sceneWgpu.WgpuMeshPipeline.writeWgpuFrameUniform;
+import flighthq.types.Camera3D;
 import flighthq.types.LinearColor;
 import flighthq.types.MatcapMaterial;
 import flighthq.types.Material;
@@ -20,13 +19,14 @@ import flighthq.types.MeshGeometry;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.Types.MatcapMaterialKind;
+import flighthq.types.WgpuMatcapPipeline.WgpuMatcapDefineKey;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._MatcapMaterialValues.MatcapMaterialKind;
 
 @:expose("flighthq.sceneWgpu.MatcapWgpuMeshMaterialRenderer")
 class MatcapWgpuMeshMaterialRenderer {
-  public static final matcapWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera) {
+  public static final matcapWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var matcap:Dynamic = cast _Runtime.UNDEFINED;

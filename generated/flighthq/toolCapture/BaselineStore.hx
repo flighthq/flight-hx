@@ -3,12 +3,14 @@ package flighthq.toolCapture;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.capture.CaptureBaseline.createCaptureBaseline;
+import flighthq.capture.CaptureBaseline.formatCaptureBaseline;
+import flighthq.capture.CaptureBaseline.getCaptureBaselineField;
+import flighthq.capture.CaptureBaseline.parseCaptureBaseline;
+import flighthq.capture.CaptureBaseline.setCaptureBaselineField;
+import flighthq.types.CaptureBaseline;
 
 typedef BaselineField = String;
-
-typedef ColumnBaseline__baselineStore = Dynamic;
-
-typedef TestBaseline__baselineStore = Dynamic;
 
 @:expose("flighthq.toolCapture.BaselineStore")
 class BaselineStore {
@@ -22,7 +24,7 @@ class BaselineStore {
   }
 
   public static function getBaselineField(root:String, subject:String, name:String, column:String, field:BaselineField):Null<String> {
-    return cast _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.getIndex(_Runtime.callValue(BaselineStore.readBaseline__baselineStore, cast ([_Runtime.callValue(baselinePath, cast ([root, subject, name] : Array<Dynamic>))] : Array<Dynamic>)), column), field), function():Dynamic return cast null);
+    return cast _Runtime.callValue(getCaptureBaselineField, cast ([_Runtime.callValue(BaselineStore.readBaseline__baselineStore, cast ([_Runtime.callValue(baselinePath, cast ([root, subject, name] : Array<Dynamic>))] : Array<Dynamic>)), column, field] : Array<Dynamic>));
     return cast null;
   }
 
@@ -31,31 +33,18 @@ class BaselineStore {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     path = _Runtime.callValue(baselinePath, cast ([root, subject, name] : Array<Dynamic>));
     data = _Runtime.callValue(BaselineStore.readBaseline__baselineStore, cast ([path] : Array<Dynamic>));
-    _Runtime.setIndex(_Runtime.setIndex(data, column, (_Runtime.getIndex(data, column) ?? {  })), field, value);
+    _Runtime.callValue(setCaptureBaselineField, cast ([data, column, field, value] : Array<Dynamic>));
     _Runtime.callValue(BaselineStore.writeBaseline__baselineStore, cast ([path, data] : Array<Dynamic>));
   }
 
-  public static function readBaseline__baselineStore(path:String):TestBaseline__baselineStore {
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'existsSync'] : Array<Dynamic>)), cast ([path] : Array<Dynamic>))))) { return cast {  }; }
-    try {
-      return cast (cast _Runtime.jsonParse(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'readFileSync'] : Array<Dynamic>)), cast ([path, 'utf8'] : Array<Dynamic>))) : TestBaseline__baselineStore);
-    } catch (__error:Dynamic) {
-      return cast {  };
-    }
+  public static function readBaseline__baselineStore(path:String):CaptureBaseline {
+    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'existsSync'] : Array<Dynamic>)), cast ([path] : Array<Dynamic>))))) { return cast _Runtime.callValue(createCaptureBaseline, cast ([] : Array<Dynamic>)); }
+    return cast _Runtime.coalesce(_Runtime.callValue(parseCaptureBaseline, cast ([_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'readFileSync'] : Array<Dynamic>)), cast ([path, 'utf8'] : Array<Dynamic>))] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createCaptureBaseline, cast ([] : Array<Dynamic>)));
     return cast null;
   }
 
-  public static function writeBaseline__baselineStore(path:String, data:TestBaseline__baselineStore):Void {
-    var sorted:TestBaseline__baselineStore = cast _Runtime.UNDEFINED;
+  public static function writeBaseline__baselineStore(path:String, data:CaptureBaseline):Void {
     _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'mkdirSync'] : Array<Dynamic>)), cast ([_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'dirname'] : Array<Dynamic>)), cast ([path] : Array<Dynamic>)), { recursive: true }] : Array<Dynamic>));
-    sorted = {  };
-    for (column in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([data] : Array<Dynamic>)), 'sort', cast ([] : Array<Dynamic>)))) {
-      var entry:Dynamic = _Runtime.getIndex(data, column);
-      var out:ColumnBaseline__baselineStore = {  };
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(entry, 'fingerprint'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(out, 'fingerprint', _Runtime.field(entry, 'fingerprint')); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(entry, 'sha256'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(out, 'sha256', _Runtime.field(entry, 'sha256')); }
-      _Runtime.setIndex(sorted, column, out);
-    }
-    _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'writeFileSync'] : Array<Dynamic>)), cast ([path, (_Runtime.jsonStringify(sorted, null, 2.0) + '\n')] : Array<Dynamic>));
+    _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'writeFileSync'] : Array<Dynamic>)), cast ([path, _Runtime.callValue(formatCaptureBaseline, cast ([data] : Array<Dynamic>))] : Array<Dynamic>));
   }
 }

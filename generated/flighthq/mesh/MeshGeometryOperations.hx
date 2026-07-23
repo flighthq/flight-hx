@@ -13,8 +13,8 @@ import flighthq.mesh.MeshGeometryLayout.CANONICAL_MESH_GEOMETRY_LAYOUT;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshSubset;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
-
-typedef MeshGeometryFromAttributesOptions = { @:optional var indices:Null<Dynamic>; @:optional var normals:Null<Array<Float>>; var positions:Array<Float>; @:optional var uvs:Null<Array<Float>>; };
+import flighthq.types.MeshGeometryFromAttributesOptions;
+import flighthq.types.MeshTriangleVertexIndices;
 
 @:expose("flighthq.mesh.MeshGeometryOperations")
 class MeshGeometryOperations {
@@ -100,6 +100,36 @@ class MeshGeometryOperations {
       return cast _Runtime.select(_Runtime.compare(indexCount, 3.0, '>='), function():Dynamic return cast (indexCount - 2.0), function():Dynamic return cast 0.0);
     }
     return cast 0.0;
+    return cast null;
+  }
+
+  public static function getMeshGeometryTriangleVertexIndices(out:MeshTriangleVertexIndices, geometry:MeshGeometry, triangleIndex:Float):Bool {
+    var element0:Float = cast _Runtime.UNDEFINED;
+    var element1:Float = cast _Runtime.UNDEFINED;
+    var element2:Float = cast _Runtime.UNDEFINED;
+    var indices:Dynamic = cast _Runtime.UNDEFINED;
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(triangleIndex, 0.0, '<'), function():Dynamic return cast _Runtime.compare(triangleIndex, _Runtime.callValue(getMeshGeometryTriangleCount, cast ([geometry] : Array<Dynamic>)), '>=')))) { return cast false; }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-list'))) {
+      (element0 = cast ((triangleIndex * 3.0) : Dynamic));
+      (element1 = cast ((element0 + 1.0) : Dynamic));
+      (element2 = cast ((element0 + 2.0) : Dynamic));
+    } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-strip'))) {
+      (element0 = cast (triangleIndex : Dynamic));
+      (element1 = cast ((triangleIndex + 1.0) : Dynamic));
+      (element2 = cast ((triangleIndex + 2.0) : Dynamic));
+      if (_Runtime.truthy(!_Runtime.strictEquals((Std.int(triangleIndex) & Std.int(1.0)), 0.0))) {
+        var swap:Dynamic = element0;
+        (element0 = cast (element1 : Dynamic));
+        (element1 = cast (swap : Dynamic));
+      }
+    } else {
+      return cast false;
+    } }
+    indices = _Runtime.field(geometry, 'indices');
+    _Runtime.setField(out, 'i0', _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, element0), function():Dynamic return cast element0));
+    _Runtime.setField(out, 'i1', _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, element1), function():Dynamic return cast element1));
+    _Runtime.setField(out, 'i2', _Runtime.select(indices, function():Dynamic return cast _Runtime.getIndex(indices, element2), function():Dynamic return cast element2));
+    return cast true;
     return cast null;
   }
 

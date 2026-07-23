@@ -7,11 +7,11 @@ import flighthq._internal.WebExterns.WgpuShapeData;
 import flighthq.displayobjectCanvas.CanvasShape.renderCanvasShapeCommands;
 import flighthq.displayobjectWgpu.WgpuRendererData.createWgpuRendererData;
 import flighthq.displayobjectWgpu.WgpuRendererData.getWgpuRendererData;
+import flighthq.displayobjectWgpu.WgpuShapeMesh.drawWgpuShapeMeshes;
 import flighthq.displayobjectWgpu.WgpuSpriteBatch.ensureWgpuQuadBatchResources;
 import flighthq.displayobjectWgpu.WgpuSpriteBatch.packWgpuSpriteBatchMaterialInstance;
 import flighthq.displayobjectWgpu.WgpuSpriteBatch.prepareWgpuSpriteBatchWrite;
 import flighthq.displayobjectWgpu.WgpuSpriteBatch.recordWgpuSpriteBatchColorTransform;
-import flighthq.displayobjectWgpu._internal._WgpuShapeMeshValues.drawWgpuShapeMeshes;
 import flighthq.image.ImageResource.createImageResource;
 import flighthq.image.ImageResource.setImageResourceSource;
 import flighthq.node.BoundsRectangle.getNodeLocalBoundsRectangle;
@@ -30,6 +30,7 @@ import flighthq.types.RendererData;
 import flighthq.types.Shape;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuShapeMeshBuffers;
+import flighthq.types.WgpuShapeMesh;
 
 typedef WgpuShapeData__wgpuShape = { var canvas:Dynamic; var ctx:Dynamic; var image:ImageResource; var lastContentId:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:Null<Array<WgpuShapeMesh>>; var meshBuffers:WgpuShapeMeshBuffers; };
 

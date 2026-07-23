@@ -3,57 +3,113 @@ package flighthq.flow;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.flow.ClearFlowStack as Facade_Flow_flighthq_flow_ClearFlowStack;
-import flighthq.flow.CreateFlowStack as Facade_Flow_flighthq_flow_CreateFlowStack;
-import flighthq.flow.GetActiveFlowState as Facade_Flow_flighthq_flow_GetActiveFlowState;
-import flighthq.flow.GetFlowStackDepth as Facade_Flow_flighthq_flow_GetFlowStackDepth;
-import flighthq.flow.GetFlowStackVisibleStates as Facade_Flow_flighthq_flow_GetFlowStackVisibleStates;
-import flighthq.flow.PopFlowState as Facade_Flow_flighthq_flow_PopFlowState;
-import flighthq.flow.PushFlowState as Facade_Flow_flighthq_flow_PushFlowState;
-import flighthq.flow.ReplaceFlowState as Facade_Flow_flighthq_flow_ReplaceFlowState;
-import flighthq.flow.UpdateFlowStack as Facade_Flow_flighthq_flow_UpdateFlowStack;
 import flighthq.types.Flow.FlowStack;
 import flighthq.types.Flow.FlowState;
 
 @:expose("flighthq.flow.Flow")
 class Flow {
   public static function clearFlowStack(stack:FlowStack):Void {
-    _Runtime.callValue(Facade_Flow_flighthq_flow_ClearFlowStack.clearFlowStack, cast ([stack] : Array<Dynamic>));
+    var states:Dynamic = cast _Runtime.UNDEFINED;
+    states = _Runtime.field(stack, 'states');
+    {
+      var i:Dynamic = (_Runtime.field(states, 'length') - 1.0);
+      while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
+        _Runtime.callOptionalProperty(_Runtime.getIndex(states, i), 'onExit', cast ([] : Array<Dynamic>));
+        i--;
+      }
+    }
+    _Runtime.setLength(states, 0.0);
   }
 
   public static function createFlowStack():FlowStack {
-    return cast _Runtime.callValue(Facade_Flow_flighthq_flow_CreateFlowStack.createFlowStack, cast ([] : Array<Dynamic>));
+    return cast { states: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
   public static function getActiveFlowState(stack:FlowStack):Null<FlowState> {
-    return cast _Runtime.callValue(Facade_Flow_flighthq_flow_GetActiveFlowState.getActiveFlowState, cast ([stack] : Array<Dynamic>));
+    var states:Dynamic = cast _Runtime.UNDEFINED;
+    states = _Runtime.field(stack, 'states');
+    return cast _Runtime.select(_Runtime.compare(_Runtime.field(states, 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.getIndex(states, (_Runtime.field(states, 'length') - 1.0)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getFlowStackDepth(stack:FlowStack):Float {
-    return cast _Runtime.callValue(Facade_Flow_flighthq_flow_GetFlowStackDepth.getFlowStackDepth, cast ([stack] : Array<Dynamic>));
+    return cast _Runtime.field(_Runtime.field(stack, 'states'), 'length');
     return cast null;
   }
 
   public static function getFlowStackVisibleStates(stack:FlowStack, out:Array<FlowState>):Void {
-    _Runtime.callValue(Facade_Flow_flighthq_flow_GetFlowStackVisibleStates.getFlowStackVisibleStates, cast ([stack, out] : Array<Dynamic>));
+    var states:Dynamic = cast _Runtime.UNDEFINED;
+    var top:Dynamic = cast _Runtime.UNDEFINED;
+    var lowest:Dynamic = cast _Runtime.UNDEFINED;
+    _Runtime.setLength(out, 0.0);
+    states = _Runtime.field(stack, 'states');
+    top = (_Runtime.field(states, 'length') - 1.0);
+    if (_Runtime.truthy(_Runtime.compare(top, 0.0, '<'))) {
+      return;
+    }
+    lowest = top;
+    while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(lowest, 0.0, '>'), function():Dynamic return cast _Runtime.field(_Runtime.getIndex(states, lowest), 'renderBelow')))) {
+      lowest--;
+    }
+    {
+      var i:Dynamic = lowest;
+      while (_Runtime.truthy(_Runtime.compare(i, top, '<='))) {
+        _Runtime.callProperty(out, 'push', cast ([_Runtime.getIndex(states, i)] : Array<Dynamic>));
+        i++;
+      }
+    }
   }
 
   public static function popFlowState(stack:FlowStack):Null<FlowState> {
-    return cast _Runtime.callValue(Facade_Flow_flighthq_flow_PopFlowState.popFlowState, cast ([stack] : Array<Dynamic>));
+    var states:Dynamic = cast _Runtime.UNDEFINED;
+    var popped:Dynamic = cast _Runtime.UNDEFINED;
+    var revealed:Dynamic = cast _Runtime.UNDEFINED;
+    states = _Runtime.field(stack, 'states');
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(states, 'length'), 0.0))) {
+      return cast null;
+    }
+    popped = (cast _Runtime.callProperty(states, 'pop', cast ([] : Array<Dynamic>)) : FlowState);
+    _Runtime.callOptionalProperty(popped, 'onExit', cast ([] : Array<Dynamic>));
+    revealed = _Runtime.select(_Runtime.compare(_Runtime.field(states, 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.getIndex(states, (_Runtime.field(states, 'length') - 1.0)), function():Dynamic return cast null);
+    _Runtime.callOptionalProperty(revealed, 'onResume', cast ([] : Array<Dynamic>));
+    return cast popped;
     return cast null;
   }
 
   public static function pushFlowState(stack:FlowStack, state:FlowState):Void {
-    _Runtime.callValue(Facade_Flow_flighthq_flow_PushFlowState.pushFlowState, cast ([stack, state] : Array<Dynamic>));
+    var states:Dynamic = cast _Runtime.UNDEFINED;
+    var previousTop:Dynamic = cast _Runtime.UNDEFINED;
+    states = _Runtime.field(stack, 'states');
+    previousTop = _Runtime.select(_Runtime.compare(_Runtime.field(states, 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.getIndex(states, (_Runtime.field(states, 'length') - 1.0)), function():Dynamic return cast null);
+    _Runtime.callOptionalProperty(previousTop, 'onPause', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty(states, 'push', cast ([state] : Array<Dynamic>));
+    _Runtime.callOptionalProperty(state, 'onEnter', cast ([] : Array<Dynamic>));
   }
 
   public static function replaceFlowState(stack:FlowStack, state:FlowState):Void {
-    _Runtime.callValue(Facade_Flow_flighthq_flow_ReplaceFlowState.replaceFlowState, cast ([stack, state] : Array<Dynamic>));
+    var states:Dynamic = cast _Runtime.UNDEFINED;
+    states = _Runtime.field(stack, 'states');
+    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(states, 'length'), 0.0, '>'))) {
+      var previousTop:Dynamic = (cast _Runtime.callProperty(states, 'pop', cast ([] : Array<Dynamic>)) : FlowState);
+      _Runtime.callOptionalProperty(previousTop, 'onExit', cast ([] : Array<Dynamic>));
+    }
+    _Runtime.callProperty(states, 'push', cast ([state] : Array<Dynamic>));
+    _Runtime.callOptionalProperty(state, 'onEnter', cast ([] : Array<Dynamic>));
   }
 
   public static function updateFlowStack(stack:FlowStack, deltaTime:Float):Void {
-    _Runtime.callValue(Facade_Flow_flighthq_flow_UpdateFlowStack.updateFlowStack, cast ([stack, deltaTime] : Array<Dynamic>));
+    var states:Dynamic = cast _Runtime.UNDEFINED;
+    var index:Dynamic = cast _Runtime.UNDEFINED;
+    states = _Runtime.field(stack, 'states');
+    index = (_Runtime.field(states, 'length') - 1.0);
+    if (_Runtime.truthy(_Runtime.compare(index, 0.0, '<'))) {
+      return;
+    }
+    _Runtime.callOptionalProperty(_Runtime.getIndex(states, index), 'onUpdate', cast ([deltaTime] : Array<Dynamic>));
+    while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(index, 0.0, '>'), function():Dynamic return cast _Runtime.field(_Runtime.getIndex(states, index), 'updateBelow')))) {
+      index--;
+      _Runtime.callOptionalProperty(_Runtime.getIndex(states, index), 'onUpdate', cast ([deltaTime] : Array<Dynamic>));
+    }
   }
 }

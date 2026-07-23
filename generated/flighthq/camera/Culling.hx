@@ -3,7 +3,7 @@ package flighthq.camera;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.camera.Camera.getCameraViewProjectionMatrix4;
+import flighthq.camera.Camera.getCamera3DViewProjectionMatrix4;
 import flighthq.geometry.Frustum.createFrustum;
 import flighthq.geometry.Frustum.isFrustumContainingPoint;
 import flighthq.geometry.Frustum.isFrustumIntersectingAabb;
@@ -12,31 +12,31 @@ import flighthq.geometry.Frustum.setFrustumFromMatrix4;
 import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.Frustum.FrustumLike;
 import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.camera.Culling")
 class Culling {
-  public static function getCameraFrustum(out:FrustumLike, camera:Camera, aspect:Float):Void {
-    _Runtime.callValue(getCameraViewProjectionMatrix4, cast ([Culling.__scratchViewProjection__culling, camera, aspect] : Array<Dynamic>));
+  public static function getCamera3DFrustum(out:FrustumLike, camera:Camera3D, aspect:Float):Void {
+    _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([Culling.__scratchViewProjection__culling, camera, aspect] : Array<Dynamic>));
     _Runtime.callValue(setFrustumFromMatrix4, cast ([out, Culling.__scratchViewProjection__culling] : Array<Dynamic>));
   }
 
-  public static function isBoxInCameraFrustum(camera:Camera, aabb:AabbLike, aspect:Float):Bool {
-    _Runtime.callValue(getCameraFrustum, cast ([Culling.__scratchFrustum__culling, camera, aspect] : Array<Dynamic>));
+  public static function isBoxInCamera3DFrustum(camera:Camera3D, aabb:AabbLike, aspect:Float):Bool {
+    _Runtime.callValue(getCamera3DFrustum, cast ([Culling.__scratchFrustum__culling, camera, aspect] : Array<Dynamic>));
     return cast _Runtime.callValue(isFrustumIntersectingAabb, cast ([Culling.__scratchFrustum__culling, aabb] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isPointInCameraFrustum(camera:Camera, point:Vector3Like, aspect:Float):Bool {
-    _Runtime.callValue(getCameraFrustum, cast ([Culling.__scratchFrustum__culling, camera, aspect] : Array<Dynamic>));
+  public static function isPointInCamera3DFrustum(camera:Camera3D, point:Vector3Like, aspect:Float):Bool {
+    _Runtime.callValue(getCamera3DFrustum, cast ([Culling.__scratchFrustum__culling, camera, aspect] : Array<Dynamic>));
     return cast _Runtime.callValue(isFrustumContainingPoint, cast ([Culling.__scratchFrustum__culling, point] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isSphereInCameraFrustum(camera:Camera, sphere:BoundingSphereLike, aspect:Float):Bool {
-    _Runtime.callValue(getCameraFrustum, cast ([Culling.__scratchFrustum__culling, camera, aspect] : Array<Dynamic>));
+  public static function isSphereInCamera3DFrustum(camera:Camera3D, sphere:BoundingSphereLike, aspect:Float):Bool {
+    _Runtime.callValue(getCamera3DFrustum, cast ([Culling.__scratchFrustum__culling, camera, aspect] : Array<Dynamic>));
     return cast _Runtime.callValue(isFrustumIntersectingSphere, cast ([Culling.__scratchFrustum__culling, sphere] : Array<Dynamic>));
     return cast null;
   }

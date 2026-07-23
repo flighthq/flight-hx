@@ -3,8 +3,8 @@ package flighthq.tilemapFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.tilemapFormats.TiledOptions.TiledCompression;
-import flighthq.tilemapFormats.TiledOptions.TiledInflate;
+import flighthq.types.TiledParseOptions.TiledCompression;
+import flighthq.types.TiledParseOptions.TiledInflate;
 
 @:expose("flighthq.tilemapFormats.TiledLayerData")
 class TiledLayerData {

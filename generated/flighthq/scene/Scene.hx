@@ -8,6 +8,7 @@ import flighthq.scene.Billboard as Facade_Scene_flighthq_scene_Billboard;
 import flighthq.scene.BillboardCamera as Facade_Scene_flighthq_scene_BillboardCamera;
 import flighthq.scene.Mesh as Facade_Scene_flighthq_scene_Mesh;
 import flighthq.scene.SceneAnimation as Facade_Scene_flighthq_scene_SceneAnimation;
+import flighthq.scene.SceneDocument as Facade_Scene_flighthq_scene_SceneDocument;
 import flighthq.scene.SceneMaterial as Facade_Scene_flighthq_scene_SceneMaterial;
 import flighthq.scene.SceneNode as Facade_Scene_flighthq_scene_SceneNode;
 import flighthq.scene.SceneNode.createSceneNode;
@@ -22,7 +23,7 @@ import flighthq.types.AnimationClip;
 import flighthq.types.Billboard;
 import flighthq.types.Billboard.BillboardMode;
 import flighthq.types.Billboard.BillboardRuntime;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.Entity.Kind;
 import flighthq.types.Frustum.FrustumLike;
 import flighthq.types.Material;
@@ -33,6 +34,7 @@ import flighthq.types.MeshDeformer;
 import flighthq.types.MeshGeometry;
 import flighthq.types.NodeSignals;
 import flighthq.types.Scene;
+import flighthq.types.SceneDocument;
 import flighthq.types.SceneNode;
 import flighthq.types.SceneNode.SceneNodeRuntime;
 import flighthq.types.Types.SceneNodeKind;
@@ -76,6 +78,11 @@ class Scene {
     return cast null;
   }
 
+  public static function createSceneFromDocument(document:SceneDocument, ?sceneIndex:Dynamic):flighthq.types.Scene {
+    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_SceneDocument.createSceneFromDocument, cast ([document, sceneIndex] : Array<Dynamic>));
+    return cast null;
+  }
+
   public static function createSceneNode(?kind:Kind, ?obj:Dynamic):SceneNode {
     return cast _Runtime.callValue(Facade_Scene_flighthq_scene_SceneNode.createSceneNode, cast ([kind, obj] : Array<Dynamic>));
     return cast null;
@@ -83,6 +90,11 @@ class Scene {
 
   public static function createSceneNodeRuntime():SceneNodeRuntime {
     return cast _Runtime.callValue(Facade_Scene_flighthq_scene_SceneNode.createSceneNodeRuntime, cast ([] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function createScenesFromDocument(document:SceneDocument):Array<flighthq.types.Scene> {
+    return cast _Runtime.callValue(Facade_Scene_flighthq_scene_SceneDocument.createScenesFromDocument, cast ([document] : Array<Dynamic>));
     return cast null;
   }
 
@@ -144,6 +156,10 @@ class Scene {
     return cast null;
   }
 
+  public static function getSceneMaterials(root:SceneNode, out:Array<Material>):Void {
+    _Runtime.callValue(Facade_Scene_flighthq_scene_SceneMaterial.getSceneMaterials, cast ([root, out] : Array<Dynamic>));
+  }
+
   public static function getSceneNodeRuntime(source:SceneNode):SceneNodeRuntime {
     return cast _Runtime.callValue(Facade_Scene_flighthq_scene_SceneNode.getSceneNodeRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
@@ -175,11 +191,11 @@ class Scene {
 
   public static final MeshKind:Dynamic = Facade_Scene_flighthq_types__internal__MeshValues.MeshKind;
 
-  public static function orientBillboardToCamera(billboard:Billboard, camera:Camera):Void {
+  public static function orientBillboardToCamera(billboard:Billboard, camera:Camera3D):Void {
     _Runtime.callValue(Facade_Scene_flighthq_scene_BillboardCamera.orientBillboardToCamera, cast ([billboard, camera] : Array<Dynamic>));
   }
 
-  public static function orientSceneBillboardsToCamera(scene:SceneNode, camera:Camera):Void {
+  public static function orientSceneBillboardsToCamera(scene:SceneNode, camera:Camera3D):Void {
     _Runtime.callValue(Facade_Scene_flighthq_scene_BillboardCamera.orientSceneBillboardsToCamera, cast ([scene, camera] : Array<Dynamic>));
   }
 

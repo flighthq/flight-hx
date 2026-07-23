@@ -3,8 +3,8 @@ package flighthq.particleemitter;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.node.Transform3d.getNodeLocalMatrix4;
-import flighthq.node.Transform3d.getNodeWorldMatrix4;
+import flighthq.node.NodeTransform3d.getNodeLocalMatrix4;
+import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.particleemitter.ParticleEmitter3D.reserveParticleEmitter3D;
 import flighthq.particles.Curve.sampleParticleColorCurve;
 import flighthq.particles.Curve.sampleParticleCurve;

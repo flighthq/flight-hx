@@ -3,10 +3,10 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostTauri.TauriModule.TauriApi;
 import flighthq.types.Notification.NotificationBackend;
 import flighthq.types.Notification.NotificationCapabilities;
 import flighthq.types.Notification.NotificationPermission;
+import flighthq.types.TauriApi;
 
 @:expose("flighthq.hostTauri.TauriNotification")
 class TauriNotification {

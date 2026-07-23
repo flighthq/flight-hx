@@ -4,9 +4,8 @@ package flighthq.surface;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.surface.SurfaceComposite.extractSurfacePixels;
+import flighthq.types.SurfaceBoxBlurOptions;
 import flighthq.types.SurfaceRegion;
-
-typedef SurfaceBoxBlurOptions = { @:optional var radiusX:Float; @:optional var radiusY:Float; @:optional var passes:Float; };
 
 @:expose("flighthq.surface.SurfaceBlur")
 class SurfaceBlur {

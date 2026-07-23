@@ -15,7 +15,7 @@ import flighthq.displayobjectCanvas.CanvasFillPattern as Facade_DisplayobjectCan
 import flighthq.displayobjectCanvas.CanvasImageSource as Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasImageSource;
 import flighthq.displayobjectCanvas.CanvasMaterialRegistry as Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasMaterialRegistry;
 import flighthq.displayobjectCanvas.CanvasMaterials as Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasMaterials;
-import flighthq.displayobjectCanvas.CanvasParticleEmitter as Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasParticleEmitter;
+import flighthq.displayobjectCanvas.CanvasParticleEmitter2D as Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasParticleEmitter2D;
 import flighthq.displayobjectCanvas.CanvasQuadBatch as Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasQuadBatch;
 import flighthq.displayobjectCanvas.CanvasRegistration as Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRegistration;
 import flighthq.displayobjectCanvas.CanvasRenderState as Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasRenderState;
@@ -152,7 +152,7 @@ class DisplayobjectCanvas {
 
   public static final defaultCanvasMoveTo:Dynamic = Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasShapeCommands.defaultCanvasMoveTo;
 
-  public static final defaultCanvasParticleEmitterRenderer:SpriteRenderer = Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasParticleEmitter.defaultCanvasParticleEmitterRenderer;
+  public static final defaultCanvasParticleEmitter2DRenderer:SpriteRenderer = Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasParticleEmitter2D.defaultCanvasParticleEmitter2DRenderer;
 
   public static final defaultCanvasQuadBatchRenderer:SpriteRenderer = Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasQuadBatch.defaultCanvasQuadBatchRenderer;
 
@@ -190,8 +190,8 @@ class DisplayobjectCanvas {
     _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasDisplayObject.drawCanvasDisplayObject, cast ([_state, _renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawCanvasParticleEmitter(state:Dynamic, renderProxy:RenderProxy2D):Void {
-    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasParticleEmitter.drawCanvasParticleEmitter, cast ([state, renderProxy] : Array<Dynamic>));
+  public static function drawCanvasParticleEmitter2D(state:Dynamic, renderProxy:RenderProxy2D):Void {
+    _Runtime.callValue(Facade_DisplayobjectCanvas_flighthq_displayobjectCanvas_CanvasParticleEmitter2D.drawCanvasParticleEmitter2D, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
   public static function drawCanvasQuadBatch(state:Dynamic, quadBatch:RenderProxy2D):Void {

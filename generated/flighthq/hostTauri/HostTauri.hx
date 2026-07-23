@@ -7,7 +7,6 @@ import flighthq.hostTauri.TauriApp as Facade_HostTauri_flighthq_hostTauri_TauriA
 import flighthq.hostTauri.TauriClipboard as Facade_HostTauri_flighthq_hostTauri_TauriClipboard;
 import flighthq.hostTauri.TauriDialog as Facade_HostTauri_flighthq_hostTauri_TauriDialog;
 import flighthq.hostTauri.TauriMenu as Facade_HostTauri_flighthq_hostTauri_TauriMenu;
-import flighthq.hostTauri.TauriModule.TauriApi;
 import flighthq.hostTauri.TauriNotification as Facade_HostTauri_flighthq_hostTauri_TauriNotification;
 import flighthq.hostTauri.TauriPlatform as Facade_HostTauri_flighthq_hostTauri_TauriPlatform;
 import flighthq.hostTauri.TauriRegister as Facade_HostTauri_flighthq_hostTauri_TauriRegister;
@@ -24,6 +23,7 @@ import flighthq.types.Notification.NotificationBackend;
 import flighthq.types.Platform.PlatformBackend;
 import flighthq.types.Shell.ShellBackend;
 import flighthq.types.Shortcut.ShortcutBackend;
+import flighthq.types.TauriApi;
 import flighthq.types.Tray.TrayBackend;
 
 @:expose("flighthq.hostTauri.HostTauri")

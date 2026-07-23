@@ -5,14 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.hasImageResourcePixels;
 import flighthq.renderGl.GlDraw.bindGlImageResourceTexture;
-import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
-import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
+import flighthq.sceneGl.GlMeshProgram.compileGlProgram;
+import flighthq.sceneGl.GlMeshProgram.ensureGlSceneProgram;
+import flighthq.types.GlDebugProgram;
+import flighthq.types.GlDebugProgram.GlDebugDefineKey;
 import flighthq.types.GlRenderState;
 import flighthq.types.Texture;
-
-typedef GlDebugProgram = Dynamic;
-
-typedef GlDebugDefineKey = { var hasNormalMap:Bool; var mode:String; };
 
 @:expose("flighthq.sceneGl.GlDebugPrelude")
 class GlDebugPrelude {

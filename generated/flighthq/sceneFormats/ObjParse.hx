@@ -3,20 +3,23 @@ package flighthq.sceneFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.geometry.Transform3d.createTransform3D;
 import flighthq.materials.ClassicMaterials.createBlinnPhongMaterial;
 import flighthq.mesh.MeshGeometry.createMeshGeometry;
-import flighthq.node.Hierarchy.addNodeChild;
-import flighthq.scene.Mesh.createMesh;
-import flighthq.scene.Scene.createScene;
-import flighthq.sceneFormats.ObjSchema.ObjMaterial;
-import flighthq.sceneFormats.ObjSchema.ObjMaterialLibrary;
+import flighthq.scene.SceneDocument.createSceneFromDocument;
 import flighthq.sceneFormats.Shared.CANONICAL_FLOATS_PER_VERTEX;
 import flighthq.sceneFormats.Shared.CANONICAL_LAYOUT;
 import flighthq.sceneFormats.Shared.createExternalTextureRef;
 import flighthq.types.BlinnPhongMaterial;
 import flighthq.types.Material;
+import flighthq.types.Material.MaterialLike;
 import flighthq.types.MeshGeometry.MeshSubset;
+import flighthq.types.ObjSchema.ObjMaterial;
+import flighthq.types.ObjSchema.ObjMaterialLibrary;
 import flighthq.types.Scene;
+import flighthq.types.SceneDocument;
+import flighthq.types.SceneDocument.SceneDocumentMesh;
+import flighthq.types.SceneDocument.SceneDocumentNode;
 import flighthq.types.Texture;
 import flighthq.types.Types.MeshKind;
 import flighthq.types._internal._MeshValues.MeshKind;
@@ -26,10 +29,15 @@ typedef MaterialBucket__objParse = { var dedup:Dynamic; var indices:Array<Float>
 @:expose("flighthq.sceneFormats.ObjParse")
 class ObjParse {
   public static function createSceneFromObj(source:String, ?materials:ObjMaterialLibrary, ?warnings:Array<String>):Scene {
+    return cast _Runtime.callValue(createSceneFromDocument, cast ([_Runtime.callValue(parseObj, cast ([source, materials, warnings] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function parseObj(source:String, ?materials:ObjMaterialLibrary, ?warnings:Array<String>):SceneDocument {
     var positions:Array<Float> = cast _Runtime.UNDEFINED;
     var normals:Array<Float> = cast _Runtime.UNDEFINED;
     var uvs:Array<Float> = cast _Runtime.UNDEFINED;
-    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    var document:SceneDocument = cast _Runtime.UNDEFINED;
     var currentGroupName:Null<String> = cast _Runtime.UNDEFINED;
     var materialBuckets:Dynamic = cast _Runtime.UNDEFINED;
     var activeMaterial:Dynamic = cast _Runtime.UNDEFINED;
@@ -38,7 +46,7 @@ class ObjParse {
     positions = cast ([] : Array<Dynamic>);
     normals = cast ([] : Array<Dynamic>);
     uvs = cast ([] : Array<Dynamic>);
-    scene = _Runtime.callValue(createScene, cast ([] : Array<Dynamic>));
+    document = { animations: cast ([] : Array<Dynamic>), cameras: cast ([] : Array<Dynamic>), lights: cast ([] : Array<Dynamic>), materials: cast ([] : Array<Dynamic>), meshes: cast ([] : Array<Dynamic>), metadata: null, nodes: cast ([] : Array<Dynamic>), resources: cast ([] : Array<Dynamic>), scenes: cast ([{ rootNodes: cast ([] : Array<Dynamic>) }] : Array<Dynamic>), skins: cast ([] : Array<Dynamic>) };
     materialBuckets = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
     activeMaterial = '';
     resolvedMaterials = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
@@ -135,7 +143,7 @@ class ObjParse {
           }
           else if (__switchValue == 'g' || __switchValue == 'o') {
             {
-              _Runtime.callValue(ObjParse.flushGroup__objParse, cast ([materialBuckets, currentGroupName, scene, materials, resolvedMaterials] : Array<Dynamic>));
+              _Runtime.callValue(ObjParse.flushGroup__objParse, cast ([materialBuckets, currentGroupName, document, materials, resolvedMaterials] : Array<Dynamic>));
               (materialBuckets = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) : Dynamic));
               (currentGroupName = cast (_Runtime.orValue(args, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) : Dynamic));
             }
@@ -155,8 +163,8 @@ class ObjParse {
         i++;
       }
     }
-    _Runtime.callValue(ObjParse.flushGroup__objParse, cast ([materialBuckets, currentGroupName, scene, materials, resolvedMaterials] : Array<Dynamic>));
-    return cast scene;
+    _Runtime.callValue(ObjParse.flushGroup__objParse, cast ([materialBuckets, currentGroupName, document, materials, resolvedMaterials] : Array<Dynamic>));
+    return cast document;
     return cast null;
   }
 
@@ -240,12 +248,16 @@ class ObjParse {
     return cast null;
   }
 
-  public static function flushGroup__objParse(buckets:Dynamic, name:Null<String>, scene:Scene, library:Null<ObjMaterialLibrary>, resolvedMaterials:Dynamic):Void {
+  public static function flushGroup__objParse(buckets:Dynamic, name:Null<String>, document:SceneDocument, library:Null<ObjMaterialLibrary>, resolvedMaterials:Dynamic):Void {
     var vertices:Array<Float> = cast _Runtime.UNDEFINED;
     var indices:Array<Float> = cast _Runtime.UNDEFINED;
     var subsets:Array<MeshSubset> = cast _Runtime.UNDEFINED;
-    var materials:Array<Null<Material>> = cast _Runtime.UNDEFINED;
+    var materials:Array<Float> = cast _Runtime.UNDEFINED;
     var geometry:Dynamic = cast _Runtime.UNDEFINED;
+    var meshIndex:Dynamic = cast _Runtime.UNDEFINED;
+    var mesh:SceneDocumentMesh = cast _Runtime.UNDEFINED;
+    var nodeIndex:Dynamic = cast _Runtime.UNDEFINED;
+    var node:SceneDocumentNode = cast _Runtime.UNDEFINED;
     vertices = cast ([] : Array<Dynamic>);
     indices = cast ([] : Array<Dynamic>);
     subsets = cast ([] : Array<Dynamic>);
@@ -271,23 +283,30 @@ class ObjParse {
         }
       }
       _Runtime.callProperty(subsets, 'push', cast ([{ indexCount: _Runtime.field(_Runtime.field(bucket, 'indices'), 'length'), indexOffset: indexOffset }] : Array<Dynamic>));
-      _Runtime.callProperty(materials, 'push', cast ([_Runtime.callValue(ObjParse.resolveObjMaterial__objParse, cast ([materialName, library, resolvedMaterials] : Array<Dynamic>))] : Array<Dynamic>));
+      _Runtime.callProperty(materials, 'push', cast ([_Runtime.callValue(ObjParse.resolveObjMaterial__objParse, cast ([materialName, library, resolvedMaterials, document] : Array<Dynamic>))] : Array<Dynamic>));
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(subsets, 'length'), 0.0))) { return; }
     geometry = _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), 'from', cast ([indices] : Array<Dynamic>)), layout: CANONICAL_LAYOUT, subsets: subsets, vertices: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [vertices]) }] : Array<Dynamic>));
-    _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), _Runtime.callValue(createMesh, cast ([geometry, materials, MeshKind, { name: name }] : Array<Dynamic>))] : Array<Dynamic>));
+    meshIndex = _Runtime.field(_Runtime.field(document, 'meshes'), 'length');
+    mesh = { geometry: geometry, materials: materials };
+    _Runtime.callProperty(_Runtime.field(document, 'meshes'), 'push', cast ([mesh] : Array<Dynamic>));
+    nodeIndex = _Runtime.field(_Runtime.field(document, 'nodes'), 'length');
+    node = { children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>)) };
+    if (_Runtime.truthy(!_Runtime.strictEquals(name, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(node, 'name', name); }
+    _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([node] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(_Runtime.getIndex(_Runtime.field(document, 'scenes'), 0.0), 'rootNodes'), 'push', cast ([nodeIndex] : Array<Dynamic>));
   }
 
-  public static function objMaterialToBlinnPhong__objParse(material:ObjMaterial):BlinnPhongMaterial {
+  public static function objMaterialToBlinnPhong__objParse(material:ObjMaterial, document:SceneDocument):BlinnPhongMaterial {
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    result = _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.callValue(ObjParse.packObjColor__objParse, cast ([_Runtime.field(material, 'diffuse'), _Runtime.field(material, 'dissolve')] : Array<Dynamic>)), diffuseMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([_Runtime.field(material, 'mapDiffuse')] : Array<Dynamic>)), normalMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([_Runtime.field(material, 'mapBump')] : Array<Dynamic>)), shininess: _Runtime.field(material, 'specularExponent'), specular: _Runtime.callValue(ObjParse.packObjColor__objParse, cast ([_Runtime.field(material, 'specular'), 1.0] : Array<Dynamic>)), specularMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([_Runtime.field(material, 'mapSpecular')] : Array<Dynamic>)) }] : Array<Dynamic>));
+    result = _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.callValue(ObjParse.packObjColor__objParse, cast ([_Runtime.field(material, 'diffuse'), _Runtime.field(material, 'dissolve')] : Array<Dynamic>)), diffuseMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([_Runtime.field(material, 'mapDiffuse'), document] : Array<Dynamic>)), normalMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([_Runtime.field(material, 'mapBump'), document] : Array<Dynamic>)), shininess: _Runtime.field(material, 'specularExponent'), specular: _Runtime.callValue(ObjParse.packObjColor__objParse, cast ([_Runtime.field(material, 'specular'), 1.0] : Array<Dynamic>)), specularMap: _Runtime.callValue(ObjParse.externalObjTexture__objParse, cast ([_Runtime.field(material, 'mapSpecular'), document] : Array<Dynamic>)) }] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(material, 'dissolve'), 1.0, '<'))) { _Runtime.setField(result, 'alphaMode', 'blend'); }
     return cast result;
     return cast null;
   }
 
-  public static function externalObjTexture__objParse(uri:Null<String>):Null<Texture> {
-    return cast _Runtime.select(_Runtime.strictEquals(uri, null), function():Dynamic return cast null, function():Dynamic return cast _Runtime.callValue(createExternalTextureRef, cast ([uri] : Array<Dynamic>)));
+  public static function externalObjTexture__objParse(uri:Null<String>, document:SceneDocument):Null<Texture> {
+    return cast _Runtime.select(_Runtime.strictEquals(uri, null), function():Dynamic return cast null, function():Dynamic return cast _Runtime.callValue(createExternalTextureRef, cast ([uri, null, _Runtime.field(document, 'resources')] : Array<Dynamic>)));
     return cast null;
   }
 
@@ -309,18 +328,25 @@ class ObjParse {
     return cast null;
   }
 
-  public static function resolveObjMaterial__objParse(name:String, library:Null<ObjMaterialLibrary>, cache:Dynamic):Null<Material> {
+  public static function resolveObjMaterial__objParse(name:String, library:Null<ObjMaterialLibrary>, cache:Dynamic, document:SceneDocument):Float {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     var material:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(name, ''))) { return cast null; }
+    var index:Dynamic = cast _Runtime.UNDEFINED;
+    if (_Runtime.truthy(_Runtime.strictEquals(name, ''))) { return cast -1.0; }
     cached = _Runtime.callProperty(cache, 'get', cast ([name] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
     parsed = _Runtime.callOptionalProperty(_Runtime.optionalField(library, 'materials'), 'get', cast ([name] : Array<Dynamic>));
-    material = _Runtime.select(!_Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast (cast (cast _Runtime.callValue(ObjParse.objMaterialToBlinnPhong__objParse, cast ([parsed] : Array<Dynamic>)) : Dynamic) : Material), function():Dynamic return cast null);
-    if (_Runtime.truthy(!_Runtime.strictEquals(material, null))) { _Runtime.setField(material, 'name', name); }
-    _Runtime.callProperty(cache, 'set', cast ([name, material] : Array<Dynamic>));
-    return cast material;
+    if (_Runtime.truthy(_Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      _Runtime.callProperty(cache, 'set', cast ([name, -1.0] : Array<Dynamic>));
+      return cast -1.0;
+    }
+    material = (cast (cast _Runtime.callValue(ObjParse.objMaterialToBlinnPhong__objParse, cast ([parsed, document] : Array<Dynamic>)) : Dynamic) : Material);
+    _Runtime.setField(material, 'name', name);
+    index = _Runtime.field(_Runtime.field(document, 'materials'), 'length');
+    _Runtime.callProperty(_Runtime.field(document, 'materials'), 'push', cast ([(cast (cast material : Dynamic) : MaterialLike)] : Array<Dynamic>));
+    _Runtime.callProperty(cache, 'set', cast ([name, index] : Array<Dynamic>));
+    return cast index;
     return cast null;
   }
 }

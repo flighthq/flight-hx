@@ -3,11 +3,33 @@ package flighthq.sceneResources;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.entity.Entity.createEntity;
 import flighthq.signals.Signal.createSignal;
-import flighthq.types.SceneResourceRef;
-import flighthq.types.Signal;
-import flighthq.types.Texture;
+import flighthq.types.SceneResources.SceneResourceResolver;
+import flighthq.types.SceneResources.SceneResourceResolverRuntimeKey;
+import flighthq.types.SceneResources.SceneResourceResolverWithRuntime;
+import flighthq.types.SceneResources.SceneResourceSignals;
 
-typedef SceneResourceEvent = { var ref:SceneResourceRef; var texture:Texture; };
+@:expose("flighthq.sceneResources.SceneResourceSignals")
+class SceneResourceSignals {
+  public static function createSceneResourceSignals():SceneResourceSignals {
+    return cast _Runtime.callValue(createEntity, cast ([{ onResourceFailed: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onResourceResolved: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast null;
+  }
 
-typedef SceneResourceSignals = { var onResourceFailed:Signal<Dynamic>; var onResourceResolved:Signal<Dynamic>; };
+  public static function enableSceneResourceSignals(resolver:SceneResourceResolver):SceneResourceSignals {
+    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var signals:Dynamic = cast _Runtime.UNDEFINED;
+    runtime = _Runtime.getIndex((cast resolver : SceneResourceResolverWithRuntime), SceneResourceResolverRuntimeKey);
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null))) { return cast _Runtime.field(runtime, 'signals'); }
+    signals = _Runtime.callValue(createSceneResourceSignals, cast ([] : Array<Dynamic>));
+    _Runtime.setField(runtime, 'signals', signals);
+    return cast signals;
+    return cast null;
+  }
+
+  public static function getSceneResourceSignals(resolver:SceneResourceResolver):Null<SceneResourceSignals> {
+    return cast _Runtime.field(_Runtime.getIndex((cast resolver : SceneResourceResolverWithRuntime), SceneResourceResolverRuntimeKey), 'signals');
+    return cast null;
+  }
+}

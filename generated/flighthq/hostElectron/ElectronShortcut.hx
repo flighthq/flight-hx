@@ -3,7 +3,7 @@ package flighthq.hostElectron;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostElectron.ElectronModule.ElectronApi;
+import flighthq.types.ElectronApi;
 import flighthq.types.Shortcut.ShortcutBackend;
 
 @:expose("flighthq.hostElectron.ElectronShortcut")

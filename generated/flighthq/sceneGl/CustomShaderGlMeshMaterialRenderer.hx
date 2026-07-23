@@ -6,16 +6,18 @@ import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.hasImageResourcePixels;
 import flighthq.renderGl.GlDraw.bindGlImageResourceTexture;
 import flighthq.sceneGl.GlMeshMaterialRegistry.registerGlMeshMaterialRenderer;
-import flighthq.sceneGl._internal._GlMeshProgramValues.beginGlMeshDraw;
-import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
-import flighthq.sceneGl._internal._GlMeshProgramValues.drawGlMeshSubset;
-import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
-import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshCameraPosition;
-import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
-import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
-import flighthq.types.Camera;
+import flighthq.sceneGl.GlMeshProgram.beginGlMeshDraw;
+import flighthq.sceneGl.GlMeshProgram.compileGlProgram;
+import flighthq.sceneGl.GlMeshProgram.drawGlMeshSubset;
+import flighthq.sceneGl.GlMeshProgram.ensureGlSceneProgram;
+import flighthq.sceneGl.GlMeshProgram.setGlMeshCameraPosition;
+import flighthq.sceneGl.GlMeshProgram.setGlMeshViewProjection;
+import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
+import flighthq.types.Camera3D;
 import flighthq.types.CustomShaderMaterial;
+import flighthq.types.GlCustomMaterialShaderSource;
 import flighthq.types.GlMeshMaterialRenderer;
+import flighthq.types.GlMeshProgram;
 import flighthq.types.GlRenderState;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
@@ -27,11 +29,9 @@ import flighthq.types._internal._CustomShaderMaterialValues.CustomShaderMaterial
 
 typedef GlCustomShaderProgram__customShaderGlMeshMaterialRenderer = Dynamic;
 
-typedef GlCustomMaterialShaderSource = { var fragment:String; var vertex:String; };
-
 @:expose("flighthq.sceneGl.CustomShaderGlMeshMaterialRenderer")
 class CustomShaderGlMeshMaterialRenderer {
-  public static final customShaderGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera) {
+  public static final customShaderGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var custom:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;

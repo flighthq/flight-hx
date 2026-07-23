@@ -3,14 +3,15 @@ package flighthq.shading;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.shading.ModifierRegistry.ModifierDefinition;
-import flighthq.shading._internal._ModifierRegistryValues.registerModifier;
+import flighthq.shading.ModifierRegistry.registerModifier;
 import flighthq.types.AnimatedNormalModifier;
 import flighthq.types.EmissiveModifier;
 import flighthq.types.EmissiveModifier.EmissiveModifierFacing;
 import flighthq.types.FogModifier;
 import flighthq.types.FogModifier.FogModifierMode;
 import flighthq.types.Modifier;
+import flighthq.types.ModifierDefinition;
+import flighthq.types.ModifierRegistry;
 import flighthq.types.ModifierSlot;
 import flighthq.types.Types.AnimatedNormalModifierKind;
 import flighthq.types.Types.DissolveModifierKind;

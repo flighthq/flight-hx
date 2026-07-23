@@ -4,14 +4,11 @@ package flighthq.shading;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.AnimatedNormalModifier;
+import flighthq.types.AnimatedNormalModifierOptions;
 import flighthq.types.ModifierSlot;
-import flighthq.types.Texture;
 import flighthq.types.Types.AnimatedNormalModifierKind;
-import flighthq.types.Vector2.Vector2Like;
 import flighthq.types._internal._AnimatedNormalModifierValues.AnimatedNormalModifierKind;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
-
-typedef AnimatedNormalModifierOptions = { var map:Null<Texture>; var scroll:Vector2Like; @:optional var strength:Float; @:optional var secondaryMap:Texture; @:optional var secondaryScroll:Vector2Like; };
 
 @:expose("flighthq.shading.CreateAnimatedNormalModifier")
 class CreateAnimatedNormalModifier {

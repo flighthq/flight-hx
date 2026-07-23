@@ -4,16 +4,12 @@ package flighthq.particlesFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
-import flighthq.particlesFormats.StarlingPexSchema.StarlingPexColor;
-import flighthq.particlesFormats.StarlingPexSchema.StarlingPexDocument;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-
-typedef StarlingPexParseOptions = { @:optional var textureSize:Float; };
-
-typedef StarlingPexParseResult = { var config:ParticleEmitterConfig; var document:StarlingPexDocument; var warnings:Array<String>; };
-
-typedef StarlingPexParsed = StarlingPexParseResult;
+import flighthq.types.StarlingPexSchema.StarlingPexColor;
+import flighthq.types.StarlingPexSchema.StarlingPexDocument;
+import flighthq.types.StarlingPexSchema.StarlingPexParseOptions;
+import flighthq.types.StarlingPexSchema.StarlingPexParseResult;
 
 typedef PexDict__starlingPexParse = Dynamic;
 

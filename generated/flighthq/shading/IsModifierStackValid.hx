@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.shading.GetUnregisteredModifierKinds.getUnregisteredModifierKinds;
 import flighthq.types.Modifier;
+import flighthq.types.ModifierRegistry;
 
 @:expose("flighthq.shading.IsModifierStackValid")
 class IsModifierStackValid {

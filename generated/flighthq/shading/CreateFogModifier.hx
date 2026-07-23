@@ -5,13 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.FogModifier;
 import flighthq.types.FogModifier.FogModifierMode;
+import flighthq.types.FogModifierOptions;
 import flighthq.types.ModifierSlot;
 import flighthq.types.Types.FogModifierKind;
 import flighthq.types._internal._FogModifierValues.FogModifierKind;
 import flighthq.types._internal._FogModifierValues.FogModifierModeValue;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
-
-typedef FogModifierOptions = { var color:Float; @:optional var mode:FogModifierMode; @:optional var near:Float; @:optional var far:Float; @:optional var density:Float; };
 
 @:expose("flighthq.shading.CreateFogModifier")
 class CreateFogModifier {

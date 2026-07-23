@@ -10,8 +10,8 @@ import flighthq.types.Webcam.WebcamPhoto;
 import flighthq.types.Webcam.WebcamVideo;
 import flighthq.types.WebcamFacingMode;
 import flighthq.types.WebcamStream;
+import flighthq.types.WebcamStreamRuntime;
 import flighthq.webcam.WebcamStream as Facade_Webcam_flighthq_webcam_WebcamStream;
-import flighthq.webcam.WebcamStream.WebcamStreamRuntime;
 
 @:expose("flighthq.webcam.Webcam")
 class Webcam {

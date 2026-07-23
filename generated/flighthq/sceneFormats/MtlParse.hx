@@ -3,8 +3,8 @@ package flighthq.sceneFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.sceneFormats.ObjSchema.ObjMaterial;
-import flighthq.sceneFormats.ObjSchema.ObjMaterialLibrary;
+import flighthq.types.ObjSchema.ObjMaterial;
+import flighthq.types.ObjSchema.ObjMaterialLibrary;
 
 @:expose("flighthq.sceneFormats.MtlParse")
 class MtlParse {

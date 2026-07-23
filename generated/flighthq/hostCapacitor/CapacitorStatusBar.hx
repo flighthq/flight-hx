@@ -3,8 +3,8 @@ package flighthq.hostCapacitor;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorApi;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorStatusBarInfoResult;
+import flighthq.types.CapacitorApi;
+import flighthq.types.CapacitorApi.CapacitorStatusBarInfoResult;
 import flighthq.types.StatusBar.StatusBarBackend;
 import flighthq.types.StatusBar.StatusBarInfo;
 import flighthq.types.StatusBar.StatusBarStyle;

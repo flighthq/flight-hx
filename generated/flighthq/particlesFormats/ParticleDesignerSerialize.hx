@@ -3,11 +3,10 @@ package flighthq.particlesFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.particlesFormats.ParticleDesignerSchema.ParticleDesignerDocument;
-import flighthq.particlesFormats.SerializeResult.ParticleSerializeResult;
+import flighthq.types.ParticleDesignerSchema.ParticleDesignerDocument;
+import flighthq.types.ParticleDesignerSchema.ParticleDesignerSerializeOptions;
 import flighthq.types.ParticleEmitterConfig;
-
-typedef ParticleDesignerSerializeOptions = { @:optional var textureSize:Float; };
+import flighthq.types.ParticleSerializeResult;
 
 @:expose("flighthq.particlesFormats.ParticleDesignerSerialize")
 class ParticleDesignerSerialize {

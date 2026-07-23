@@ -3,22 +3,18 @@ package flighthq.sceneGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.sceneGl._internal._GlLitProgramValues.GL_MESH_LIGHT_BLOCK_GLSL;
-import flighthq.sceneGl._internal._GlLitProgramValues.resolveGlLitLocations;
-import flighthq.sceneGl._internal._GlMeshProgramValues.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
-import flighthq.sceneGl._internal._GlMeshProgramValues.GL_UV_TRANSFORM_VERTEX_GLSL;
-import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
-import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
-import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.sceneGl.GlLitProgram.GL_MESH_LIGHT_BLOCK_GLSL;
+import flighthq.sceneGl.GlLitProgram.resolveGlLitLocations;
+import flighthq.sceneGl.GlMeshProgram.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
+import flighthq.sceneGl.GlMeshProgram.GL_UV_TRANSFORM_VERTEX_GLSL;
+import flighthq.sceneGl.GlMeshProgram.compileGlProgram;
+import flighthq.sceneGl.GlMeshProgram.ensureGlSceneProgram;
+import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
+import flighthq.types.GlClassicProgram;
+import flighthq.types.GlClassicProgram.GlClassicDefineKey;
 import flighthq.types.GlRenderState;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._SceneLightBlockValues.MAX_FORWARD_LIGHTS;
-
-typedef GlClassicLightingModel = String;
-
-typedef GlClassicDefineKey = { var alphaMaskEnabled:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; @:optional var hasSkin:Bool; var hasSpecularMap:Bool; var hasUvTransform:Bool; var lightingModel:GlClassicLightingModel; };
-
-typedef GlClassicProgram = Dynamic;
 
 @:expose("flighthq.sceneGl.GlClassicPrelude")
 class GlClassicPrelude {

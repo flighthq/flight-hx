@@ -3,7 +3,7 @@ package flighthq.sceneWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.camera.Camera.getCameraViewProjectionMatrix4;
+import flighthq.camera.Camera.getCamera3DViewProjectionMatrix4;
 import flighthq.geometry.Matrix3.createMatrix3;
 import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.geometry.Matrix4.getMatrix4Position;
@@ -13,15 +13,24 @@ import flighthq.renderWgpu.WgpuDraw.bindWgpuImageResourceTexture;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuSampler;
 import flighthq.sceneWgpu.WgpuMeshUpload.ensureWgpuMeshUpload;
-import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
+import flighthq.sceneWgpu.WgpuSceneRuntime.getWgpuSceneRuntime;
 import flighthq.texture.Texture.getTextureUvMatrix;
 import flighthq.texture.Texture.hasTextureUvTransform;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.MeshGeometry;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.Texture;
 import flighthq.types.Texture.TextureLike;
+import flighthq.types.Types.MAX_FORWARD_LIGHTS;
+import flighthq.types.Types.SCENE_LIGHT_HEMISPHERE_OFFSET;
+import flighthq.types.Types.SCENE_LIGHT_HEMISPHERE_STRIDE;
+import flighthq.types.Types.SCENE_LIGHT_POINT_OFFSET;
+import flighthq.types.Types.SCENE_LIGHT_POINT_STRIDE;
+import flighthq.types.Types.SCENE_LIGHT_SPOT_OFFSET;
+import flighthq.types.Types.SCENE_LIGHT_SPOT_STRIDE;
+import flighthq.types.WgpuMeshPipeline;
+import flighthq.types.WgpuMeshPipeline.WgpuSceneLayouts;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._SceneLightBlockValues.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_HEMISPHERE_OFFSET;
@@ -31,6 +40,587 @@ import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_POINT_STRIDE;
 import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_SPOT_OFFSET;
 import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_SPOT_STRIDE;
 
-typedef WgpuMeshPipeline = { var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:Dynamic; var pipeline:Dynamic; };
+@:expose("flighthq.sceneWgpu.WgpuMeshPipeline")
+class WgpuMeshPipeline {
+  public static function beginWgpuMeshDraw(state:WgpuRenderState, pipeline:flighthq.types.WgpuMeshPipeline):Void {
+    var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
+    var pass:Dynamic = cast _Runtime.UNDEFINED;
+    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
+    pass = _Runtime.field(stateRuntime, 'renderPass');
+    if (_Runtime.truthy(_Runtime.strictEquals(pass, null))) { return; }
+    scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
+    _Runtime.setField(scene, 'activeMeshPipeline', pipeline);
+    _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(pipeline, 'pipeline')] : Array<Dynamic>));
+    _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, _Runtime.field(scene, 'frameBindGroup')] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.field(pipeline, 'hasPbrSampleGroup'))) {
+      _Runtime.callProperty(pass, 'setBindGroup', cast ([3.0, _Runtime.callValue(ensureWgpuPbrSampleBindGroup, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
+    } else { if (_Runtime.truthy(_Runtime.field(pipeline, 'hasShadowGroup'))) {
+      _Runtime.callProperty(pass, 'setBindGroup', cast ([3.0, _Runtime.callValue(ensureWgpuShadowSampleBindGroup, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
+    } }
+    if (_Runtime.truthy(_Runtime.field(pipeline, 'hasIblGroup'))) {
+      _Runtime.callProperty(pass, 'setBindGroup', cast ([4.0, _Runtime.callValue(ensureWgpuIblSampleBindGroup, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
+    }
+  }
 
-typedef WgpuSceneLayouts = { var drawBindGroupLayout:Dynamic; var frameBindGroupLayout:Dynamic; };
+  public static function createWgpuMeshPipeline(state:WgpuRenderState, options:{ var doubleSided:Bool; var format:Dynamic; @:optional var iblBindGroupLayout:Dynamic; var materialBindGroupLayout:Dynamic; var module:Dynamic; @:optional var pbrSampleBindGroupLayout:Dynamic; @:optional var shadowBindGroupLayout:Dynamic; @:optional var topology:Dynamic; }):flighthq.types.WgpuMeshPipeline {
+    var device:Dynamic = cast _Runtime.UNDEFINED;
+    var layouts:Dynamic = cast _Runtime.UNDEFINED;
+    var bindGroupLayouts:Array<Dynamic> = cast _Runtime.UNDEFINED;
+    var layout:Dynamic = cast _Runtime.UNDEFINED;
+    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    device = _Runtime.field(state, 'device');
+    layouts = _Runtime.callValue(ensureWgpuSceneLayouts, cast ([state] : Array<Dynamic>));
+    bindGroupLayouts = cast ([_Runtime.field(layouts, 'frameBindGroupLayout'), _Runtime.field(layouts, 'drawBindGroupLayout'), _Runtime.field(options, 'materialBindGroupLayout')] : Array<Dynamic>);
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'pbrSampleBindGroupLayout'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      _Runtime.callProperty(bindGroupLayouts, 'push', cast ([_Runtime.field(options, 'pbrSampleBindGroupLayout')] : Array<Dynamic>));
+    } else {
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'shadowBindGroupLayout'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(bindGroupLayouts, 'push', cast ([_Runtime.field(options, 'shadowBindGroupLayout')] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'iblBindGroupLayout'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(bindGroupLayouts, 'push', cast ([_Runtime.field(options, 'iblBindGroupLayout')] : Array<Dynamic>)); }
+    }
+    layout = _Runtime.callProperty(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: bindGroupLayouts }] : Array<Dynamic>));
+    pipeline = _Runtime.callProperty(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: _Runtime.field(options, 'module'), entryPoint: 'vs_main', buffers: WgpuMeshPipeline.VERTEX_BUFFER_LAYOUTS__wgpuMeshPipeline }, fragment: { module: _Runtime.field(options, 'module'), entryPoint: 'fs_main', targets: cast ([{ format: _Runtime.field(options, 'format') }] : Array<Dynamic>) }, primitive: { topology: _Runtime.coalesce(_Runtime.field(options, 'topology'), function():Dynamic return cast 'triangle-list'), frontFace: 'ccw', cullMode: _Runtime.select(_Runtime.field(options, 'doubleSided'), function():Dynamic return cast 'none', function():Dynamic return cast 'back') }, depthStencil: { format: WgpuMeshPipeline.DEPTH_STENCIL_FORMAT__wgpuMeshPipeline, depthWriteEnabled: true, depthCompare: 'less' } }] : Array<Dynamic>));
+    return cast { hasIblGroup: !_Runtime.strictEquals(_Runtime.field(options, 'iblBindGroupLayout'), _Runtime.field(_Runtime, 'UNDEFINED')), hasPbrSampleGroup: !_Runtime.strictEquals(_Runtime.field(options, 'pbrSampleBindGroupLayout'), _Runtime.field(_Runtime, 'UNDEFINED')), hasShadowGroup: !_Runtime.strictEquals(_Runtime.field(options, 'shadowBindGroupLayout'), _Runtime.field(_Runtime, 'UNDEFINED')), materialBindGroupLayout: _Runtime.field(options, 'materialBindGroupLayout'), pipeline: pipeline };
+    return cast null;
+  }
+
+  public static function drawWgpuMeshSubset(state:WgpuRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry):Void {
+    var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
+    var pass:Dynamic = cast _Runtime.UNDEFINED;
+    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    var subset:Dynamic = cast _Runtime.UNDEFINED;
+    var upload:Dynamic = cast _Runtime.UNDEFINED;
+    var drawBindGroup:Dynamic = cast _Runtime.UNDEFINED;
+    stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
+    pass = _Runtime.field(stateRuntime, 'renderPass');
+    scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(pass, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(scene, 'activeMeshPipeline'), null)))) { return; }
+    subset = _Runtime.field(proxy, 'subset');
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(subset, 'indexCount'), 0.0))) { return; }
+    upload = _Runtime.callValue(ensureWgpuMeshUpload, cast ([state, geometry] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(upload, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null)))) { return; }
+    drawBindGroup = _Runtime.callValue(writeWgpuDrawUniform, cast ([state, proxy] : Array<Dynamic>));
+    _Runtime.setIndex(WgpuMeshPipeline._dynamicOffsets__wgpuMeshPipeline, 0.0, _Runtime.field(scene, 'pendingDrawOffset'));
+    _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, drawBindGroup, WgpuMeshPipeline._dynamicOffsets__wgpuMeshPipeline] : Array<Dynamic>));
+    _Runtime.callProperty(pass, 'setVertexBuffer', cast ([0.0, _Runtime.field(upload, 'vertexBuffer')] : Array<Dynamic>));
+    _Runtime.callProperty(pass, 'setIndexBuffer', cast ([_Runtime.field(upload, 'indexBuffer'), _Runtime.field(upload, 'indexFormat')] : Array<Dynamic>));
+    _Runtime.callProperty(pass, 'drawIndexed', cast ([_Runtime.field(subset, 'indexCount'), 1.0, _Runtime.field(subset, 'indexOffset'), 0.0, 0.0] : Array<Dynamic>));
+  }
+
+  public static function ensureWgpuFrameBindGroup(state:WgpuRenderState):Dynamic {
+    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'frameBuffer'), null))) {
+      _Runtime.setField(scene, 'frameBuffer', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: WgpuMeshPipeline.FRAME_UNIFORM_BYTES__wgpuMeshPipeline, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>)));
+    }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'frameBindGroup'), null))) {
+      _Runtime.setField(scene, 'frameBindGroup', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(_Runtime.callValue(ensureWgpuSceneLayouts, cast ([state] : Array<Dynamic>)), 'frameBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: _Runtime.field(scene, 'frameBuffer') } }] : Array<Dynamic>) }] : Array<Dynamic>)));
+    }
+    return cast _Runtime.field(scene, 'frameBindGroup');
+    return cast null;
+  }
+
+  public static function ensureWgpuIblSampleBindGroup(state:WgpuRenderState):Dynamic {
+    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    var device:Dynamic = cast _Runtime.UNDEFINED;
+    var ibl:Dynamic = cast _Runtime.UNDEFINED;
+    var u:Dynamic = cast _Runtime.UNDEFINED;
+    var irradianceView:Dynamic = cast _Runtime.UNDEFINED;
+    var prefilteredView:Dynamic = cast _Runtime.UNDEFINED;
+    var brdfView:Dynamic = cast _Runtime.UNDEFINED;
+    scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
+    device = _Runtime.field(state, 'device');
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'iblUniformBuffer'), null))) {
+      _Runtime.setField(scene, 'iblUniformBuffer', _Runtime.callProperty(device, 'createBuffer', cast ([{ size: WgpuMeshPipeline.IBL_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>)));
+    }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'iblSampler'), null))) {
+      _Runtime.setField(scene, 'iblSampler', _Runtime.callProperty(device, 'createSampler', cast ([{ magFilter: 'linear', minFilter: 'linear', mipmapFilter: 'linear' }] : Array<Dynamic>)));
+    }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'iblDummyCubeView'), null))) {
+      _Runtime.setField(scene, 'iblDummyCubeTexture', _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 6.0] : Array<Dynamic>), format: WgpuMeshPipeline.IBL_DUMMY_FORMAT__wgpuMeshPipeline, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'iblDummyCubeView', _Runtime.callProperty(_Runtime.field(scene, 'iblDummyCubeTexture'), 'createView', cast ([{ dimension: 'cube' }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'iblDummyLutTexture', _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: WgpuMeshPipeline.IBL_DUMMY_FORMAT__wgpuMeshPipeline, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'iblDummyLutView', _Runtime.callProperty(_Runtime.field(scene, 'iblDummyLutTexture'), 'createView', cast ([] : Array<Dynamic>)));
+    }
+    ibl = _Runtime.field(scene, 'ibl');
+    u = WgpuMeshPipeline._iblSampleScratch__wgpuMeshPipeline;
+    if (_Runtime.truthy(!_Runtime.strictEquals(ibl, null))) {
+      _Runtime.setIndex(u, 0.0, 1.0);
+      _Runtime.setIndex(u, 1.0, _Runtime.field(ibl, 'intensity'));
+      _Runtime.setIndex(u, 2.0, (_Runtime.field(ibl, 'prefilteredMipCount') - 1.0));
+    } else {
+      _Runtime.setIndex(u, 0.0, 0.0);
+      _Runtime.setIndex(u, 1.0, 1.0);
+      _Runtime.setIndex(u, 2.0, 0.0);
+    }
+    _Runtime.setIndex(u, 3.0, 0.0);
+    _Runtime.callProperty(_Runtime.field(device, 'queue'), 'writeBuffer', cast ([_Runtime.field(scene, 'iblUniformBuffer'), 0.0, _Runtime.field(u, 'buffer'), 0.0, WgpuMeshPipeline.IBL_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline] : Array<Dynamic>));
+    irradianceView = _Runtime.select(!_Runtime.strictEquals(ibl, null), function():Dynamic return cast _Runtime.field(ibl, 'irradianceCubeView'), function():Dynamic return cast _Runtime.field(scene, 'iblDummyCubeView'));
+    prefilteredView = _Runtime.select(!_Runtime.strictEquals(ibl, null), function():Dynamic return cast _Runtime.field(ibl, 'prefilteredCubeView'), function():Dynamic return cast _Runtime.field(scene, 'iblDummyCubeView'));
+    brdfView = _Runtime.select(!_Runtime.strictEquals(ibl, null), function():Dynamic return cast _Runtime.field(ibl, 'brdfLutView'), function():Dynamic return cast _Runtime.field(scene, 'iblDummyLutView'));
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(scene, 'iblSampleBindGroup'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(scene, 'iblSampleCubeView'), irradianceView)))) {
+      _Runtime.setField(scene, 'iblSampleBindGroup', _Runtime.callProperty(device, 'createBindGroup', cast ([{ layout: _Runtime.callValue(ensureWgpuIblSampleLayout, cast ([state] : Array<Dynamic>)), entries: cast ([{ binding: 0.0, resource: { buffer: _Runtime.field(scene, 'iblUniformBuffer') } }, { binding: 1.0, resource: irradianceView }, { binding: 2.0, resource: prefilteredView }, { binding: 3.0, resource: brdfView }, { binding: 4.0, resource: _Runtime.field(scene, 'iblSampler') }] : Array<Dynamic>) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'iblSampleCubeView', irradianceView);
+    }
+    return cast _Runtime.field(scene, 'iblSampleBindGroup');
+    return cast null;
+  }
+
+  public static function ensureWgpuIblSampleLayout(state:WgpuRenderState):Dynamic {
+    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'iblSampleLayout'), null))) {
+      _Runtime.setField(scene, 'iblSampleLayout', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), buffer: { type: 'uniform' } }, { binding: 1.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), texture: { sampleType: 'float', viewDimension: 'cube' } }, { binding: 2.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), texture: { sampleType: 'float', viewDimension: 'cube' } }, { binding: 3.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), texture: { sampleType: 'float' } }, { binding: 4.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), sampler: { type: 'filtering' } }] : Array<Dynamic>) }] : Array<Dynamic>)));
+    }
+    return cast _Runtime.field(scene, 'iblSampleLayout');
+    return cast null;
+  }
+
+  public static function ensureWgpuPbrSampleBindGroup(state:WgpuRenderState):Dynamic {
+    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    var device:Dynamic = cast _Runtime.UNDEFINED;
+    var shadow:Dynamic = cast _Runtime.UNDEFINED;
+    var s:Dynamic = cast _Runtime.UNDEFINED;
+    var ibl:Dynamic = cast _Runtime.UNDEFINED;
+    var u:Dynamic = cast _Runtime.UNDEFINED;
+    var shadowView:Dynamic = cast _Runtime.UNDEFINED;
+    var irradianceView:Dynamic = cast _Runtime.UNDEFINED;
+    var prefilteredView:Dynamic = cast _Runtime.UNDEFINED;
+    var brdfView:Dynamic = cast _Runtime.UNDEFINED;
+    scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
+    device = _Runtime.field(state, 'device');
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'shadowUniformBuffer'), null))) {
+      _Runtime.setField(scene, 'shadowUniformBuffer', _Runtime.callProperty(device, 'createBuffer', cast ([{ size: WgpuMeshPipeline.SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>)));
+    }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'shadowComparisonSampler'), null))) {
+      _Runtime.setField(scene, 'shadowComparisonSampler', _Runtime.callProperty(device, 'createSampler', cast ([{ compare: 'less-equal' }] : Array<Dynamic>)));
+    }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'shadowDummyView'), null))) {
+      _Runtime.setField(scene, 'shadowDummyTexture', _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: SHADOW_DEPTH_FORMAT, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'shadowDummyView', _Runtime.callProperty(_Runtime.field(scene, 'shadowDummyTexture'), 'createView', cast ([] : Array<Dynamic>)));
+    }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'iblUniformBuffer'), null))) {
+      _Runtime.setField(scene, 'iblUniformBuffer', _Runtime.callProperty(device, 'createBuffer', cast ([{ size: WgpuMeshPipeline.IBL_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>)));
+    }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'iblSampler'), null))) {
+      _Runtime.setField(scene, 'iblSampler', _Runtime.callProperty(device, 'createSampler', cast ([{ magFilter: 'linear', minFilter: 'linear', mipmapFilter: 'linear' }] : Array<Dynamic>)));
+    }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'iblDummyCubeView'), null))) {
+      _Runtime.setField(scene, 'iblDummyCubeTexture', _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 6.0] : Array<Dynamic>), format: WgpuMeshPipeline.IBL_DUMMY_FORMAT__wgpuMeshPipeline, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'iblDummyCubeView', _Runtime.callProperty(_Runtime.field(scene, 'iblDummyCubeTexture'), 'createView', cast ([{ dimension: 'cube' }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'iblDummyLutTexture', _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: WgpuMeshPipeline.IBL_DUMMY_FORMAT__wgpuMeshPipeline, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'iblDummyLutView', _Runtime.callProperty(_Runtime.field(scene, 'iblDummyLutTexture'), 'createView', cast ([] : Array<Dynamic>)));
+    }
+    shadow = _Runtime.field(scene, 'shadow');
+    s = WgpuMeshPipeline._shadowSampleScratch__wgpuMeshPipeline;
+    if (_Runtime.truthy(!_Runtime.strictEquals(shadow, null))) {
+      var m:Dynamic = _Runtime.field(_Runtime.field(shadow, 'matrix'), 'm');
+      {
+        var i:Dynamic = 0.0;
+        while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {
+          _Runtime.setIndex(s, i, _Runtime.getIndex(m, i));
+          i++;
+        }
+      }
+      _Runtime.setIndex(s, 16.0, 1.0);
+    } else {
+      {
+        var i:Dynamic = 0.0;
+        while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {
+          _Runtime.setIndex(s, i, 0.0);
+          i++;
+        }
+      }
+      _Runtime.setIndex(s, 0.0, 1.0);
+      _Runtime.setIndex(s, 5.0, 1.0);
+      _Runtime.setIndex(s, 10.0, 1.0);
+      _Runtime.setIndex(s, 15.0, 1.0);
+      _Runtime.setIndex(s, 16.0, 0.0);
+    }
+    _Runtime.setIndex(s, 17.0, 0.0);
+    _Runtime.setIndex(s, 18.0, 0.0);
+    _Runtime.setIndex(s, 19.0, 0.0);
+    _Runtime.callProperty(_Runtime.field(device, 'queue'), 'writeBuffer', cast ([_Runtime.field(scene, 'shadowUniformBuffer'), 0.0, _Runtime.field(s, 'buffer'), 0.0, WgpuMeshPipeline.SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline] : Array<Dynamic>));
+    ibl = _Runtime.field(scene, 'ibl');
+    u = WgpuMeshPipeline._iblSampleScratch__wgpuMeshPipeline;
+    if (_Runtime.truthy(!_Runtime.strictEquals(ibl, null))) {
+      _Runtime.setIndex(u, 0.0, 1.0);
+      _Runtime.setIndex(u, 1.0, _Runtime.field(ibl, 'intensity'));
+      _Runtime.setIndex(u, 2.0, (_Runtime.field(ibl, 'prefilteredMipCount') - 1.0));
+    } else {
+      _Runtime.setIndex(u, 0.0, 0.0);
+      _Runtime.setIndex(u, 1.0, 1.0);
+      _Runtime.setIndex(u, 2.0, 0.0);
+    }
+    _Runtime.setIndex(u, 3.0, 0.0);
+    _Runtime.callProperty(_Runtime.field(device, 'queue'), 'writeBuffer', cast ([_Runtime.field(scene, 'iblUniformBuffer'), 0.0, _Runtime.field(u, 'buffer'), 0.0, WgpuMeshPipeline.IBL_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline] : Array<Dynamic>));
+    shadowView = _Runtime.select(!_Runtime.strictEquals(shadow, null), function():Dynamic return cast _Runtime.field(shadow, 'depthView'), function():Dynamic return cast _Runtime.field(scene, 'shadowDummyView'));
+    irradianceView = _Runtime.select(!_Runtime.strictEquals(ibl, null), function():Dynamic return cast _Runtime.field(ibl, 'irradianceCubeView'), function():Dynamic return cast _Runtime.field(scene, 'iblDummyCubeView'));
+    prefilteredView = _Runtime.select(!_Runtime.strictEquals(ibl, null), function():Dynamic return cast _Runtime.field(ibl, 'prefilteredCubeView'), function():Dynamic return cast _Runtime.field(scene, 'iblDummyCubeView'));
+    brdfView = _Runtime.select(!_Runtime.strictEquals(ibl, null), function():Dynamic return cast _Runtime.field(ibl, 'brdfLutView'), function():Dynamic return cast _Runtime.field(scene, 'iblDummyLutView'));
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(scene, 'pbrSampleBindGroup'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(scene, 'pbrSampleShadowView'), shadowView)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(scene, 'pbrSampleIblCubeView'), irradianceView)))) {
+      _Runtime.setField(scene, 'pbrSampleBindGroup', _Runtime.callProperty(device, 'createBindGroup', cast ([{ layout: _Runtime.callValue(ensureWgpuPbrSampleLayout, cast ([state] : Array<Dynamic>)), entries: cast ([{ binding: 0.0, resource: { buffer: _Runtime.field(scene, 'shadowUniformBuffer') } }, { binding: 1.0, resource: shadowView }, { binding: 2.0, resource: _Runtime.field(scene, 'shadowComparisonSampler') }, { binding: 3.0, resource: { buffer: _Runtime.field(scene, 'iblUniformBuffer') } }, { binding: 4.0, resource: irradianceView }, { binding: 5.0, resource: prefilteredView }, { binding: 6.0, resource: brdfView }, { binding: 7.0, resource: _Runtime.field(scene, 'iblSampler') }] : Array<Dynamic>) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'pbrSampleShadowView', shadowView);
+      _Runtime.setField(scene, 'pbrSampleIblCubeView', irradianceView);
+    }
+    return cast _Runtime.field(scene, 'pbrSampleBindGroup');
+    return cast null;
+  }
+
+  public static function ensureWgpuPbrSampleLayout(state:WgpuRenderState):Dynamic {
+    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'pbrSampleLayout'), null))) {
+      _Runtime.setField(scene, 'pbrSampleLayout', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), buffer: { type: 'uniform' } }, { binding: 1.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), texture: { sampleType: 'depth' } }, { binding: 2.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), sampler: { type: 'comparison' } }, { binding: 3.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), buffer: { type: 'uniform' } }, { binding: 4.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), texture: { sampleType: 'float', viewDimension: 'cube' } }, { binding: 5.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), texture: { sampleType: 'float', viewDimension: 'cube' } }, { binding: 6.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), texture: { sampleType: 'float' } }, { binding: 7.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), sampler: { type: 'filtering' } }] : Array<Dynamic>) }] : Array<Dynamic>)));
+    }
+    return cast _Runtime.field(scene, 'pbrSampleLayout');
+    return cast null;
+  }
+
+  public static function ensureWgpuPlaceholderTextureView(state:WgpuRenderState):Dynamic {
+    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    var view:Dynamic = cast _Runtime.UNDEFINED;
+    scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
+    view = _Runtime.field(scene, 'placeholderView');
+    if (_Runtime.truthy(_Runtime.strictEquals(view, null))) {
+      var texture:Dynamic = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(_Runtime.field(state, 'device'), 'queue'), 'writeTexture', cast ([{ texture: texture }, WgpuMeshPipeline.WHITE_PIXEL__wgpuMeshPipeline, { bytesPerRow: 4.0 }, cast ([1.0, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
+      (view = cast (_Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>)) : Dynamic));
+      _Runtime.setField(scene, 'placeholderView', view);
+    }
+    return cast view;
+    return cast null;
+  }
+
+  public static function ensureWgpuSceneLayouts(state:WgpuRenderState):WgpuSceneLayouts {
+    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(scene, 'frameBindGroupLayout'), null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(scene, 'drawBindGroupLayout'), null)))) {
+      var device:Dynamic = _Runtime.field(state, 'device');
+      _Runtime.setField(scene, 'frameBindGroupLayout', _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'VERTEX')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'))), buffer: { type: 'uniform' } }] : Array<Dynamic>) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'drawBindGroupLayout', _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'VERTEX'), buffer: { type: 'uniform', hasDynamicOffset: true } }] : Array<Dynamic>) }] : Array<Dynamic>)));
+    }
+    return cast { drawBindGroupLayout: _Runtime.field(scene, 'drawBindGroupLayout'), frameBindGroupLayout: _Runtime.field(scene, 'frameBindGroupLayout') };
+    return cast null;
+  }
+
+  public static function ensureWgpuScenePipeline<T>(state:WgpuRenderState, key:String, compile:Dynamic):Dynamic {
+    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var pipeline:Dynamic = cast _Runtime.UNDEFINED;
+    runtime = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
+    pipeline = _Runtime.callProperty(_Runtime.field(runtime, 'pipelineCache'), 'get', cast ([key] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+      (pipeline = cast (_Runtime.callValue(compile, cast ([] : Array<Dynamic>)) : Dynamic));
+      _Runtime.callProperty(_Runtime.field(runtime, 'pipelineCache'), 'set', cast ([key, pipeline] : Array<Dynamic>));
+    }
+    return cast (cast pipeline : Dynamic);
+    return cast null;
+  }
+
+  public static function ensureWgpuShadowSampleBindGroup(state:WgpuRenderState):Dynamic {
+    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    var device:Dynamic = cast _Runtime.UNDEFINED;
+    var shadow:Dynamic = cast _Runtime.UNDEFINED;
+    var s:Dynamic = cast _Runtime.UNDEFINED;
+    var view:Dynamic = cast _Runtime.UNDEFINED;
+    scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
+    device = _Runtime.field(state, 'device');
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'shadowUniformBuffer'), null))) {
+      _Runtime.setField(scene, 'shadowUniformBuffer', _Runtime.callProperty(device, 'createBuffer', cast ([{ size: WgpuMeshPipeline.SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>)));
+    }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'shadowComparisonSampler'), null))) {
+      _Runtime.setField(scene, 'shadowComparisonSampler', _Runtime.callProperty(device, 'createSampler', cast ([{ compare: 'less-equal' }] : Array<Dynamic>)));
+    }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'shadowDummyView'), null))) {
+      _Runtime.setField(scene, 'shadowDummyTexture', _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: SHADOW_DEPTH_FORMAT, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'shadowDummyView', _Runtime.callProperty(_Runtime.field(scene, 'shadowDummyTexture'), 'createView', cast ([] : Array<Dynamic>)));
+    }
+    shadow = _Runtime.field(scene, 'shadow');
+    s = WgpuMeshPipeline._shadowSampleScratch__wgpuMeshPipeline;
+    if (_Runtime.truthy(!_Runtime.strictEquals(shadow, null))) {
+      var m:Dynamic = _Runtime.field(_Runtime.field(shadow, 'matrix'), 'm');
+      {
+        var i:Dynamic = 0.0;
+        while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {
+          _Runtime.setIndex(s, i, _Runtime.getIndex(m, i));
+          i++;
+        }
+      }
+      _Runtime.setIndex(s, 16.0, 1.0);
+    } else {
+      {
+        var i:Dynamic = 0.0;
+        while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {
+          _Runtime.setIndex(s, i, 0.0);
+          i++;
+        }
+      }
+      _Runtime.setIndex(s, 0.0, 1.0);
+      _Runtime.setIndex(s, 5.0, 1.0);
+      _Runtime.setIndex(s, 10.0, 1.0);
+      _Runtime.setIndex(s, 15.0, 1.0);
+      _Runtime.setIndex(s, 16.0, 0.0);
+    }
+    _Runtime.setIndex(s, 17.0, 0.0);
+    _Runtime.setIndex(s, 18.0, 0.0);
+    _Runtime.setIndex(s, 19.0, 0.0);
+    _Runtime.callProperty(_Runtime.field(device, 'queue'), 'writeBuffer', cast ([_Runtime.field(scene, 'shadowUniformBuffer'), 0.0, _Runtime.field(s, 'buffer'), 0.0, WgpuMeshPipeline.SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline] : Array<Dynamic>));
+    view = _Runtime.select(!_Runtime.strictEquals(shadow, null), function():Dynamic return cast _Runtime.field(shadow, 'depthView'), function():Dynamic return cast _Runtime.field(scene, 'shadowDummyView'));
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(scene, 'shadowSampleBindGroup'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(scene, 'shadowSampleView'), view)))) {
+      _Runtime.setField(scene, 'shadowSampleBindGroup', _Runtime.callProperty(device, 'createBindGroup', cast ([{ layout: _Runtime.callValue(ensureWgpuShadowSampleLayout, cast ([state] : Array<Dynamic>)), entries: cast ([{ binding: 0.0, resource: { buffer: _Runtime.field(scene, 'shadowUniformBuffer') } }, { binding: 1.0, resource: view }, { binding: 2.0, resource: _Runtime.field(scene, 'shadowComparisonSampler') }] : Array<Dynamic>) }] : Array<Dynamic>)));
+      _Runtime.setField(scene, 'shadowSampleView', view);
+    }
+    return cast _Runtime.field(scene, 'shadowSampleBindGroup');
+    return cast null;
+  }
+
+  public static function ensureWgpuShadowSampleLayout(state:WgpuRenderState):Dynamic {
+    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'shadowSampleLayout'), null))) {
+      _Runtime.setField(scene, 'shadowSampleLayout', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), buffer: { type: 'uniform' } }, { binding: 1.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), texture: { sampleType: 'depth' } }, { binding: 2.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), sampler: { type: 'comparison' } }] : Array<Dynamic>) }] : Array<Dynamic>)));
+    }
+    return cast _Runtime.field(scene, 'shadowSampleLayout');
+    return cast null;
+  }
+
+  public static function getWgpuMaterialSampler(state:WgpuRenderState, texture:Null<Texture>):Dynamic {
+    var sampler:Dynamic = cast _Runtime.UNDEFINED;
+    var filter:Dynamic = cast _Runtime.UNDEFINED;
+    var useMips:Dynamic = cast _Runtime.UNDEFINED;
+    var mipmapFilter:Null<Dynamic> = cast _Runtime.UNDEFINED;
+    if (_Runtime.truthy(_Runtime.strictEquals(texture, null))) { return cast _Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'linearSampler'); }
+    sampler = _Runtime.field(texture, 'sampler');
+    filter = _Runtime.select(StringTools.startsWith(_Runtime.field(sampler, 'magFilter'), 'nearest'), function():Dynamic return cast 'nearest', function():Dynamic return cast 'linear');
+    useMips = _Runtime.andValue(_Runtime.andValue(_Runtime.field(sampler, 'mipmaps'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(sampler, 'minFilter'), 'linear')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(sampler, 'minFilter'), 'nearest'));
+    mipmapFilter = _Runtime.select(useMips, function():Dynamic return cast _Runtime.select(StringTools.endsWith(Std.string(_Runtime.field(sampler, 'minFilter')), 'nearest'), function():Dynamic return cast 'nearest', function():Dynamic return cast 'linear'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
+    return cast _Runtime.callValue(getWgpuSampler, cast ([state, filter, _Runtime.field(sampler, 'wrapU'), _Runtime.field(sampler, 'wrapV'), mipmapFilter, _Runtime.field(sampler, 'anisotropy')] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function isWgpuTextureReady(texture:Null<Texture>):Bool {
+    return cast _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(texture, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(texture, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(texture, 'image')] : Array<Dynamic>)));
+    return cast null;
+  }
+
+  public static function resolveWgpuMaterialTextureView(state:WgpuRenderState, texture:Null<Texture>):Dynamic {
+    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(texture, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(texture, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(texture, 'image')] : Array<Dynamic>))))) {
+      return cast _Runtime.field(_Runtime.callValue(bindWgpuImageResourceTexture, cast ([state, _Runtime.field(texture, 'image'), _Runtime.field(_Runtime.field(texture, 'sampler'), 'mipmaps')] : Array<Dynamic>)), 'view');
+    }
+    return cast _Runtime.callValue(ensureWgpuPlaceholderTextureView, cast ([state] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function stashWgpuUvTransform(state:WgpuRenderState, texture:Null<TextureLike>):Void {
+    var out:Dynamic = cast _Runtime.UNDEFINED;
+    var m:Dynamic = cast _Runtime.UNDEFINED;
+    out = _Runtime.field(_Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>)), 'pendingUvTransform');
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(texture, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(texture, 'image'), null)), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(hasTextureUvTransform, cast ([texture] : Array<Dynamic>)))))) {
+      _Runtime.callValue(WgpuMeshPipeline.resetWgpuUvTransformStash__wgpuMeshPipeline, cast ([out] : Array<Dynamic>));
+      return;
+    }
+    _Runtime.callValue(getTextureUvMatrix, cast ([WgpuMeshPipeline.scratchUvMatrix__wgpuMeshPipeline, texture] : Array<Dynamic>));
+    m = _Runtime.field(WgpuMeshPipeline.scratchUvMatrix__wgpuMeshPipeline, 'm');
+    {
+      var i:Dynamic = 0.0;
+      while (_Runtime.truthy(_Runtime.compare(i, 9.0, '<'))) {
+        _Runtime.setIndex(out, i, _Runtime.getIndex(m, i));
+        i++;
+      }
+    }
+  }
+
+  public static function writeWgpuDrawUniform(state:WgpuRenderState, proxy:SceneRenderProxy):Dynamic {
+    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
+    var offset:Dynamic = cast _Runtime.UNDEFINED;
+    var floatOffset:Dynamic = cast _Runtime.UNDEFINED;
+    var u:Dynamic = cast _Runtime.UNDEFINED;
+    var world:Dynamic = cast _Runtime.UNDEFINED;
+    var n:Dynamic = cast _Runtime.UNDEFINED;
+    var uv:Dynamic = cast _Runtime.UNDEFINED;
+    scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
+    stateRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'drawBindGroup'), null))) {
+      _Runtime.setField(scene, 'drawBindGroup', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(_Runtime.callValue(ensureWgpuSceneLayouts, cast ([state] : Array<Dynamic>)), 'drawBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: _Runtime.field(stateRuntime, 'uniformBuffer'), size: WgpuMeshPipeline.DRAW_UNIFORM_BYTES__wgpuMeshPipeline } }] : Array<Dynamic>) }] : Array<Dynamic>)));
+    }
+    offset = _Runtime.field(stateRuntime, 'uniformOffset');
+    floatOffset = (offset / 4.0);
+    u = _Runtime.field(stateRuntime, 'uniformData');
+    world = _Runtime.field(_Runtime.field(proxy, 'worldMatrix'), 'm');
+    {
+      var i:Dynamic = 0.0;
+      while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {
+        _Runtime.setIndex(u, (floatOffset + i), _Runtime.getIndex(world, i));
+        i++;
+      }
+    }
+    n = _Runtime.field(_Runtime.field(proxy, 'normalMatrix'), 'm');
+    _Runtime.setIndex(u, (floatOffset + 16.0), _Runtime.getIndex(n, 0.0));
+    _Runtime.setIndex(u, (floatOffset + 17.0), _Runtime.getIndex(n, 1.0));
+    _Runtime.setIndex(u, (floatOffset + 18.0), _Runtime.getIndex(n, 2.0));
+    _Runtime.setIndex(u, (floatOffset + 19.0), 0.0);
+    _Runtime.setIndex(u, (floatOffset + 20.0), _Runtime.getIndex(n, 3.0));
+    _Runtime.setIndex(u, (floatOffset + 21.0), _Runtime.getIndex(n, 4.0));
+    _Runtime.setIndex(u, (floatOffset + 22.0), _Runtime.getIndex(n, 5.0));
+    _Runtime.setIndex(u, (floatOffset + 23.0), 0.0);
+    _Runtime.setIndex(u, (floatOffset + 24.0), _Runtime.getIndex(n, 6.0));
+    _Runtime.setIndex(u, (floatOffset + 25.0), _Runtime.getIndex(n, 7.0));
+    _Runtime.setIndex(u, (floatOffset + 26.0), _Runtime.getIndex(n, 8.0));
+    _Runtime.setIndex(u, (floatOffset + 27.0), 0.0);
+    uv = _Runtime.field(scene, 'pendingUvTransform');
+    _Runtime.setIndex(u, (floatOffset + 28.0), _Runtime.getIndex(uv, 0.0));
+    _Runtime.setIndex(u, (floatOffset + 29.0), _Runtime.getIndex(uv, 1.0));
+    _Runtime.setIndex(u, (floatOffset + 30.0), _Runtime.getIndex(uv, 2.0));
+    _Runtime.setIndex(u, (floatOffset + 31.0), 0.0);
+    _Runtime.setIndex(u, (floatOffset + 32.0), _Runtime.getIndex(uv, 3.0));
+    _Runtime.setIndex(u, (floatOffset + 33.0), _Runtime.getIndex(uv, 4.0));
+    _Runtime.setIndex(u, (floatOffset + 34.0), _Runtime.getIndex(uv, 5.0));
+    _Runtime.setIndex(u, (floatOffset + 35.0), 0.0);
+    _Runtime.setIndex(u, (floatOffset + 36.0), _Runtime.getIndex(uv, 6.0));
+    _Runtime.setIndex(u, (floatOffset + 37.0), _Runtime.getIndex(uv, 7.0));
+    _Runtime.setIndex(u, (floatOffset + 38.0), _Runtime.getIndex(uv, 8.0));
+    _Runtime.setIndex(u, (floatOffset + 39.0), 0.0);
+    _Runtime.setField(scene, 'pendingDrawOffset', offset);
+    _Runtime.setField(stateRuntime, 'uniformOffset', (_Runtime.field(stateRuntime, 'uniformOffset') + _Runtime.field(stateRuntime, 'uniformStride')));
+    return cast _Runtime.field(scene, 'drawBindGroup');
+    return cast null;
+  }
+
+  public static function writeWgpuFrameUniform(state:WgpuRenderState, camera:Camera3D, lights:SceneLightBlock):Void {
+    var scene:Dynamic = cast _Runtime.UNDEFINED;
+    var f:Dynamic = cast _Runtime.UNDEFINED;
+    var aspect:Dynamic = cast _Runtime.UNDEFINED;
+    var vp:Dynamic = cast _Runtime.UNDEFINED;
+    var data:Dynamic = cast _Runtime.UNDEFINED;
+    var view:Dynamic = cast _Runtime.UNDEFINED;
+    var pointFloats:Dynamic = cast _Runtime.UNDEFINED;
+    var spotFloats:Dynamic = cast _Runtime.UNDEFINED;
+    var hemisphereFloats:Dynamic = cast _Runtime.UNDEFINED;
+    _Runtime.callValue(ensureWgpuFrameBindGroup, cast ([state] : Array<Dynamic>));
+    scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
+    f = WgpuMeshPipeline._frameScratch__wgpuMeshPipeline;
+    aspect = _Runtime.select(_Runtime.strictEquals(_Runtime.field(_Runtime.field(camera, 'projection'), 'kind'), 'perspective'), function():Dynamic return cast _Runtime.field(_Runtime.field(camera, 'projection'), 'aspect'), function():Dynamic return cast 1.0);
+    _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([WgpuMeshPipeline.scratchViewProjection__wgpuMeshPipeline, camera, _Runtime.select(!_Runtime.strictEquals(aspect, 0.0), function():Dynamic return cast aspect, function():Dynamic return cast 1.0)] : Array<Dynamic>));
+    vp = _Runtime.field(WgpuMeshPipeline.scratchViewProjection__wgpuMeshPipeline, 'm');
+    {
+      var i:Dynamic = 0.0;
+      while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {
+        _Runtime.setIndex(f, i, _Runtime.getIndex(vp, i));
+        i++;
+      }
+    }
+    _Runtime.callValue(inverseMatrix4, cast ([WgpuMeshPipeline.scratchInverseView__wgpuMeshPipeline, _Runtime.field(camera, 'view')] : Array<Dynamic>));
+    _Runtime.callValue(getMatrix4Position, cast ([WgpuMeshPipeline.scratchCameraPosition__wgpuMeshPipeline, WgpuMeshPipeline.scratchInverseView__wgpuMeshPipeline] : Array<Dynamic>));
+    _Runtime.setIndex(f, 16.0, _Runtime.field(WgpuMeshPipeline.scratchCameraPosition__wgpuMeshPipeline, 'x'));
+    _Runtime.setIndex(f, 17.0, _Runtime.field(WgpuMeshPipeline.scratchCameraPosition__wgpuMeshPipeline, 'y'));
+    _Runtime.setIndex(f, 18.0, _Runtime.field(WgpuMeshPipeline.scratchCameraPosition__wgpuMeshPipeline, 'z'));
+    _Runtime.setIndex(f, 19.0, 0.0);
+    data = _Runtime.field(lights, 'data');
+    _Runtime.setIndex(f, 20.0, _Runtime.getIndex(data, 0.0));
+    _Runtime.setIndex(f, 21.0, _Runtime.getIndex(data, 1.0));
+    _Runtime.setIndex(f, 22.0, _Runtime.getIndex(data, 2.0));
+    _Runtime.setIndex(f, 23.0, _Runtime.field(lights, 'directionalCount'));
+    _Runtime.setIndex(f, 24.0, _Runtime.getIndex(data, 4.0));
+    _Runtime.setIndex(f, 25.0, _Runtime.getIndex(data, 5.0));
+    _Runtime.setIndex(f, 26.0, _Runtime.getIndex(data, 6.0));
+    _Runtime.setIndex(f, 27.0, 0.0);
+    _Runtime.setIndex(f, 28.0, _Runtime.getIndex(data, 8.0));
+    _Runtime.setIndex(f, 29.0, _Runtime.getIndex(data, 9.0));
+    _Runtime.setIndex(f, 30.0, _Runtime.getIndex(data, 10.0));
+    _Runtime.setIndex(f, 31.0, _Runtime.field(lights, 'ambientCount'));
+    view = _Runtime.field(_Runtime.field(camera, 'view'), 'm');
+    {
+      var i:Dynamic = 0.0;
+      while (_Runtime.truthy(_Runtime.compare(i, 16.0, '<'))) {
+        _Runtime.setIndex(f, (32.0 + i), _Runtime.getIndex(view, i));
+        i++;
+      }
+    }
+    pointFloats = (SCENE_LIGHT_POINT_STRIDE * MAX_FORWARD_LIGHTS);
+    {
+      var i:Dynamic = 0.0;
+      while (_Runtime.truthy(_Runtime.compare(i, pointFloats, '<'))) {
+        _Runtime.setIndex(f, (WgpuMeshPipeline.FRAME_POINT_OFFSET__wgpuMeshPipeline + i), _Runtime.getIndex(data, (SCENE_LIGHT_POINT_OFFSET + i)));
+        i++;
+      }
+    }
+    spotFloats = (SCENE_LIGHT_SPOT_STRIDE * MAX_FORWARD_LIGHTS);
+    {
+      var i:Dynamic = 0.0;
+      while (_Runtime.truthy(_Runtime.compare(i, spotFloats, '<'))) {
+        _Runtime.setIndex(f, (WgpuMeshPipeline.FRAME_SPOT_OFFSET__wgpuMeshPipeline + i), _Runtime.getIndex(data, (SCENE_LIGHT_SPOT_OFFSET + i)));
+        i++;
+      }
+    }
+    hemisphereFloats = (SCENE_LIGHT_HEMISPHERE_STRIDE * MAX_FORWARD_LIGHTS);
+    {
+      var i:Dynamic = 0.0;
+      while (_Runtime.truthy(_Runtime.compare(i, hemisphereFloats, '<'))) {
+        _Runtime.setIndex(f, (WgpuMeshPipeline.FRAME_HEMISPHERE_OFFSET__wgpuMeshPipeline + i), _Runtime.getIndex(data, (SCENE_LIGHT_HEMISPHERE_OFFSET + i)));
+        i++;
+      }
+    }
+    _Runtime.setIndex(f, WgpuMeshPipeline.FRAME_COUNTS_OFFSET__wgpuMeshPipeline, _Runtime.field(lights, 'pointCount'));
+    _Runtime.setIndex(f, (WgpuMeshPipeline.FRAME_COUNTS_OFFSET__wgpuMeshPipeline + 1.0), _Runtime.field(lights, 'spotCount'));
+    _Runtime.setIndex(f, (WgpuMeshPipeline.FRAME_COUNTS_OFFSET__wgpuMeshPipeline + 2.0), _Runtime.field(lights, 'hemisphereCount'));
+    _Runtime.setIndex(f, (WgpuMeshPipeline.FRAME_COUNTS_OFFSET__wgpuMeshPipeline + 3.0), 0.0);
+    _Runtime.callProperty(_Runtime.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(scene, 'frameBuffer'), 0.0, _Runtime.field(f, 'buffer'), 0.0, WgpuMeshPipeline.FRAME_UNIFORM_BYTES__wgpuMeshPipeline] : Array<Dynamic>));
+  }
+
+  public static final WGPU_MESH_PRELUDE_WGSL:Dynamic = '\nconst PI : f32 = 3.14159265359;\nconst MAX_FORWARD_LIGHTS : u32 = 4u;\n\nstruct Frame {\n  viewProjection : mat4x4f,\n  cameraPosition : vec4f,\n  lightDirection : vec4f,       // xyz = directional light travel direction; w = directionalCount\n  directionalRadiance : vec4f,  // rgb = linear premultiplied radiance\n  ambientRadiance : vec4f,      // rgb = linear premultiplied radiance; w = ambientCount\n  view : mat4x4f,               // camera view matrix; rotates world normals into view space (matcap)\n  // Punctual light arrays — layout mirrors SceneLightBlock.data (packSceneLightBlock).\n  //   point[i]      = pointLights[i*2+0]={pos.xyz,range}, [i*2+1]={radiance.rgb,invSqrRange}\n  //   spot[i]       = spotLights[i*4+0..1] as point, [i*4+2]={dir.xyz,_}, [i*4+3]={cosInner,cosOuter,_,_}\n  //   hemisphere[i] = hemisphereLights[i*3+0]={sky.rgb,_}, [i*3+1]={ground.rgb,_}, [i*3+2]={up.xyz,_}\n  pointLights : array<vec4f, 8>,       // MAX_FORWARD_LIGHTS * 2\n  spotLights : array<vec4f, 16>,       // MAX_FORWARD_LIGHTS * 4\n  hemisphereLights : array<vec4f, 12>, // MAX_FORWARD_LIGHTS * 3\n  punctualCounts : vec4f,              // x = pointCount, y = spotCount, z = hemisphereCount\n};\n\nstruct Draw {\n  world : mat4x4f,\n  normalMatrix : mat3x3f,\n  uvTransform : mat3x3f,   // KHR_texture_transform of the material\'s primary map (identity when unused)\n};\n\n@group(0) @binding(0) var<uniform> frame : Frame;\n@group(1) @binding(0) var<uniform> draw : Draw;\n\nstruct VertexOutput {\n  @builtin(position) clipPosition : vec4f,\n  @location(0) worldPosition : vec3f,\n  @location(1) worldNormal : vec3f,\n  @location(2) worldTangent : vec4f,\n  @location(3) uv : vec2f,\n};\n\n@vertex fn vs_main(\n  @location(0) position : vec3f,\n  @location(1) normal : vec3f,\n  @location(2) tangent : vec4f,\n  @location(3) uv : vec2f,\n) -> VertexOutput {\n  var out : VertexOutput;\n  let world = draw.world * vec4f(position, 1.0);\n  out.worldPosition = world.xyz;\n  out.clipPosition = frame.viewProjection * world;\n  out.worldNormal = draw.normalMatrix * normal;\n  out.worldTangent = vec4f(draw.normalMatrix * tangent.xyz, tangent.w);\n  // Apply the material\'s KHR_texture_transform to the uv. draw.uvTransform is identity for an untiled\n  // material (writeWgpuDrawUniform\'s default), so this is a no-op there — applied unconditionally rather\n  // than behind a pipeline const because this vs_main is shared by every family (classic/unlit/toon/\n  // matcap/debug/wireframe) and a const would have to thread through all of them; a per-vertex mat3\n  // multiply is negligible. The scene-gl mirror gates the equivalent branch via its #ifdef variant.\n  out.uv = (draw.uvTransform * vec3f(uv, 1.0)).xy;\n  return out;\n}\n\n// sRgb albedo texels are gamma-encoded; decode to linear before lighting.\nfn srgbToLinear(c : vec3f) -> vec3f {\n  let lo = c / 12.92;\n  let hi = pow((c + vec3f(0.055)) / 1.055, vec3f(2.4));\n  return select(lo, hi, c > vec3f(0.04045));\n}\n';
+
+  public static final FRAME_POINT_OFFSET__wgpuMeshPipeline:Dynamic = 48.0;
+
+  public static final FRAME_SPOT_OFFSET__wgpuMeshPipeline:Dynamic = (WgpuMeshPipeline.FRAME_POINT_OFFSET__wgpuMeshPipeline + (SCENE_LIGHT_POINT_STRIDE * MAX_FORWARD_LIGHTS));
+
+  public static final FRAME_HEMISPHERE_OFFSET__wgpuMeshPipeline:Dynamic = (WgpuMeshPipeline.FRAME_SPOT_OFFSET__wgpuMeshPipeline + (SCENE_LIGHT_SPOT_STRIDE * MAX_FORWARD_LIGHTS));
+
+  public static final FRAME_COUNTS_OFFSET__wgpuMeshPipeline:Dynamic = (WgpuMeshPipeline.FRAME_HEMISPHERE_OFFSET__wgpuMeshPipeline + (SCENE_LIGHT_HEMISPHERE_STRIDE * MAX_FORWARD_LIGHTS));
+
+  public static final FRAME_UNIFORM_BYTES__wgpuMeshPipeline:Dynamic = ((WgpuMeshPipeline.FRAME_COUNTS_OFFSET__wgpuMeshPipeline + 4.0) * 4.0);
+
+  public static final DRAW_UNIFORM_BYTES__wgpuMeshPipeline:Dynamic = 160.0;
+
+  public static function resetWgpuUvTransformStash__wgpuMeshPipeline(out:flighthq._internal._Float32Array):Void {
+    _Runtime.setIndex(out, 0.0, 1.0);
+    _Runtime.setIndex(out, 1.0, 0.0);
+    _Runtime.setIndex(out, 2.0, 0.0);
+    _Runtime.setIndex(out, 3.0, 0.0);
+    _Runtime.setIndex(out, 4.0, 1.0);
+    _Runtime.setIndex(out, 5.0, 0.0);
+    _Runtime.setIndex(out, 6.0, 0.0);
+    _Runtime.setIndex(out, 7.0, 0.0);
+    _Runtime.setIndex(out, 8.0, 1.0);
+  }
+
+  public static final scratchUvMatrix__wgpuMeshPipeline:Dynamic = _Runtime.callValue(createMatrix3, cast ([] : Array<Dynamic>));
+
+  public static final DEPTH_STENCIL_FORMAT__wgpuMeshPipeline:Dynamic = 'depth24plus-stencil8';
+
+  public static final SHADOW_DEPTH_FORMAT:Dynamic = 'depth32float';
+
+  public static final SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline:Dynamic = 80.0;
+
+  public static final IBL_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline:Dynamic = 16.0;
+
+  public static final IBL_DUMMY_FORMAT__wgpuMeshPipeline:Dynamic = 'rgba8unorm';
+
+  public static final WHITE_PIXEL__wgpuMeshPipeline:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [cast ([255.0, 255.0, 255.0, 255.0] : Array<Dynamic>)]);
+
+  public static final VERTEX_BUFFER_LAYOUTS__wgpuMeshPipeline:Array<Dynamic> = cast ([{ arrayStride: 48.0, attributes: cast ([{ shaderLocation: 0.0, offset: 0.0, format: 'float32x3' }, { shaderLocation: 1.0, offset: 12.0, format: 'float32x3' }, { shaderLocation: 2.0, offset: 24.0, format: 'float32x4' }, { shaderLocation: 3.0, offset: 40.0, format: 'float32x2' }] : Array<Dynamic>) }] : Array<Dynamic>);
+
+  public static final scratchViewProjection__wgpuMeshPipeline:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+
+  public static final scratchInverseView__wgpuMeshPipeline:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+
+  public static final scratchCameraPosition__wgpuMeshPipeline:Dynamic = { x: 0.0, y: 0.0, z: 0.0 };
+
+  public static final _frameScratch__wgpuMeshPipeline:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(WgpuMeshPipeline.FRAME_UNIFORM_BYTES__wgpuMeshPipeline / 4.0)]);
+
+  public static final _dynamicOffsets__wgpuMeshPipeline:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [1.0]);
+
+  public static final _shadowSampleScratch__wgpuMeshPipeline:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(WgpuMeshPipeline.SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline / 4.0)]);
+
+  public static final _iblSampleScratch__wgpuMeshPipeline:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(WgpuMeshPipeline.IBL_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline / 4.0)]);
+}

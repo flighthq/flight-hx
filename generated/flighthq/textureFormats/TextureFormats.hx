@@ -9,13 +9,25 @@ import flighthq.textureFormats.ParseBasis as Facade_TextureFormats_flighthq_text
 import flighthq.textureFormats.ParseDds as Facade_TextureFormats_flighthq_textureFormats_ParseDds;
 import flighthq.textureFormats.ParseKtx2 as Facade_TextureFormats_flighthq_textureFormats_ParseKtx2;
 import flighthq.textureFormats.SelectTextureContainer as Facade_TextureFormats_flighthq_textureFormats_SelectTextureContainer;
+import flighthq.textureFormats.TextureLevelLayout as Facade_TextureFormats_flighthq_textureFormats_TextureLevelLayout;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
+import flighthq.types.TextureContainerLevel;
 
 @:expose("flighthq.textureFormats.TextureFormats")
 class TextureFormats {
+  public static function computeTextureContainerLevels(format:TextureContainerFormat, baseWidth:Float, baseHeight:Float, mipLevels:Float, layers:Float, faces:Float, startOffset:Float):Null<{ var levels:Array<TextureContainerLevel>; var endOffset:Float; }> {
+    return cast _Runtime.callValue(Facade_TextureFormats_flighthq_textureFormats_TextureLevelLayout.computeTextureContainerLevels, cast ([format, baseWidth, baseHeight, mipLevels, layers, faces, startOffset] : Array<Dynamic>));
+    return cast null;
+  }
+
   public static function detectTextureContainer(bytes:Dynamic):Null<String> {
     return cast _Runtime.callValue(Facade_TextureFormats_flighthq_textureFormats_DetectTextureContainer.detectTextureContainer, cast ([bytes] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function getTextureContainerLevelByteLength(format:TextureContainerFormat, width:Float, height:Float):Float {
+    return cast _Runtime.callValue(Facade_TextureFormats_flighthq_textureFormats_TextureLevelLayout.getTextureContainerLevelByteLength, cast ([format, width, height] : Array<Dynamic>));
     return cast null;
   }
 

@@ -3,5 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Entity.EntityRuntime;
 
-typedef AnimationPlayer = { var clip:AnimationClip; var loop:Bool; @:optional var loopMode:AnimationLoopMode; @:optional var onFinished:Null<Signal<Dynamic>>; @:optional var onLooped:Null<Signal<Dynamic>>; var playing:Bool; @:optional var repeatCount:Float; var speed:Float; var time:Float; };
+typedef AnimationPlayer = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var clip:AnimationClip; var loop:Bool; @:optional var loopMode:AnimationLoopMode; @:optional var onFinished:Null<Signal<Dynamic>>; @:optional var onLooped:Null<Signal<Dynamic>>; var playing:Bool; @:optional var repeatCount:Float; var speed:Float; var time:Float; };

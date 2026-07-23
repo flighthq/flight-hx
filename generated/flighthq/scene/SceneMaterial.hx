@@ -4,6 +4,7 @@ package flighthq.scene;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.node.Traversal.findNode;
+import flighthq.node.Traversal.forEachNodeDescendant;
 import flighthq.types.Material;
 import flighthq.types.Mesh;
 import flighthq.types.SceneNode;
@@ -25,6 +26,25 @@ class SceneMaterial {
     }] : Array<Dynamic>));
     return cast found;
     return cast null;
+  }
+
+  public static function getSceneMaterials(root:SceneNode, out:Array<Material>):Void {
+    _Runtime.callValue(SceneMaterial.collectNodeMaterials__sceneMaterial, cast ([root, out] : Array<Dynamic>));
+    _Runtime.callValue(forEachNodeDescendant, cast ([root, function(node:Dynamic) return _Runtime.callValue(SceneMaterial.collectNodeMaterials__sceneMaterial, cast ([(cast node : SceneNode), out] : Array<Dynamic>))] : Array<Dynamic>));
+  }
+
+  public static function collectNodeMaterials__sceneMaterial(node:SceneNode, out:Array<Material>):Void {
+    var materials:Dynamic = cast _Runtime.UNDEFINED;
+    materials = _Runtime.field((cast node : Dynamic), 'materials');
+    if (_Runtime.truthy(_Runtime.looseEquals(materials, null))) { return; }
+    {
+      var i:Dynamic = 0.0;
+      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(materials, 'length'), '<'))) {
+        var material:Dynamic = _Runtime.getIndex(materials, i);
+        if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.includes(out, material))))) { _Runtime.callProperty(out, 'push', cast ([material] : Array<Dynamic>)); }
+        i++;
+      }
+    }
   }
 
   public static function getNamedNodeMaterial__sceneMaterial(node:SceneNode, name:String):Null<Material> {

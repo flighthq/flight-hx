@@ -8,9 +8,8 @@ import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlShapeMesh;
+import flighthq.types.GlShapeMeshBinding;
 import flighthq.types.RenderProxy2D;
-
-typedef GlShapeMeshBinding = { var program:Dynamic; var vertexBuffer:Dynamic; var indexBuffer:Dynamic; var positionLocation:Float; var matrixLocation:Null<Dynamic>; var colorLocation:Null<Dynamic>; };
 
 @:expose("flighthq.displayobjectGl.GlShapeMesh")
 class GlShapeMesh {

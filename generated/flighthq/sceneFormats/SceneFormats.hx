@@ -5,16 +5,19 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneFormats.AwdParse as Facade_SceneFormats_flighthq_sceneFormats_AwdParse;
 import flighthq.sceneFormats.GltfParse as Facade_SceneFormats_flighthq_sceneFormats_GltfParse;
-import flighthq.sceneFormats.GltfSchema.GltfImportOptions;
+import flighthq.sceneFormats.GltfPunctualLights as Facade_SceneFormats_flighthq_sceneFormats_GltfPunctualLights;
 import flighthq.sceneFormats.Md2Parse as Facade_SceneFormats_flighthq_sceneFormats_Md2Parse;
 import flighthq.sceneFormats.Md5AnimParse as Facade_SceneFormats_flighthq_sceneFormats_Md5AnimParse;
 import flighthq.sceneFormats.Md5Parse as Facade_SceneFormats_flighthq_sceneFormats_Md5Parse;
 import flighthq.sceneFormats.MtlParse as Facade_SceneFormats_flighthq_sceneFormats_MtlParse;
 import flighthq.sceneFormats.ObjParse as Facade_SceneFormats_flighthq_sceneFormats_ObjParse;
-import flighthq.sceneFormats.ObjSchema.ObjMaterialLibrary;
 import flighthq.sceneFormats.ThreeDsParse as Facade_SceneFormats_flighthq_sceneFormats_ThreeDsParse;
 import flighthq.types.AnimationClip;
+import flighthq.types.GltfExtension.GltfExtensionHandler;
+import flighthq.types.GltfExtension.GltfImportOptions;
+import flighthq.types.ObjSchema.ObjMaterialLibrary;
 import flighthq.types.Scene;
+import flighthq.types.SceneDocument;
 import flighthq.types.SceneNode;
 
 @:expose("flighthq.sceneFormats.SceneFormats")
@@ -64,13 +67,50 @@ class SceneFormats {
     return cast null;
   }
 
+  public static final GltfPunctualLightsExtensionHandler:GltfExtensionHandler = Facade_SceneFormats_flighthq_sceneFormats_GltfPunctualLights.GltfPunctualLightsExtensionHandler;
+
+  public static function parse3ds(bytes:Dynamic, ?warnings:Array<String>):SceneDocument {
+    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_ThreeDsParse.parse3ds, cast ([bytes, warnings] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function parseAwd(bytes:Dynamic, ?warnings:Array<String>):SceneDocument {
+    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_AwdParse.parseAwd, cast ([bytes, warnings] : Array<Dynamic>));
+    return cast null;
+  }
+
   public static function parseAwdSkeletonAnimations(bytes:Dynamic, joints:Array<SceneNode>, ?warnings:Array<String>):Dynamic {
     return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_AwdParse.parseAwdSkeletonAnimations, cast ([bytes, joints, warnings] : Array<Dynamic>));
     return cast null;
   }
 
+  public static function parseGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):SceneDocument {
+    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_GltfParse.parseGlb, cast ([bytes, warnings, options] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function parseGltf(source:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):SceneDocument {
+    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_GltfParse.parseGltf, cast ([source, warnings, options] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function parseMd2(bytes:Dynamic, ?warnings:Array<String>):SceneDocument {
+    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_Md2Parse.parseMd2, cast ([bytes, warnings] : Array<Dynamic>));
+    return cast null;
+  }
+
   public static function parseMd5Anim(source:String, joints:Array<SceneNode>, ?warnings:Array<String>):Null<AnimationClip> {
     return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_Md5AnimParse.parseMd5Anim, cast ([source, joints, warnings] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function parseMd5Mesh(source:String, ?warnings:Array<String>):SceneDocument {
+    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_Md5Parse.parseMd5Mesh, cast ([source, warnings] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function parseObj(source:String, ?materials:ObjMaterialLibrary, ?warnings:Array<String>):SceneDocument {
+    return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_ObjParse.parseObj, cast ([source, materials, warnings] : Array<Dynamic>));
     return cast null;
   }
 

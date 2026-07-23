@@ -47,7 +47,7 @@ class Texture {
   }
 
   public static function cloneTexture(source:TextureLike):flighthq.types.Texture {
-    return cast _Runtime.callValue(createEntity, cast ([{ colorSpace: _Runtime.field(source, 'colorSpace'), image: _Runtime.field(source, 'image'), resource: _Runtime.coalesce(_Runtime.field(source, 'resource'), function():Dynamic return cast null), sampler: _Runtime.callValue(cloneSampler, cast ([_Runtime.field(source, 'sampler')] : Array<Dynamic>)), uvOffset: _Runtime.callValue(cloneVector2, cast ([_Runtime.field(source, 'uvOffset')] : Array<Dynamic>)), uvRotation: _Runtime.field(source, 'uvRotation'), uvScale: _Runtime.callValue(cloneVector2, cast ([_Runtime.field(source, 'uvScale')] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ colorSpace: _Runtime.field(source, 'colorSpace'), flipX: _Runtime.field(source, 'flipX'), flipY: _Runtime.field(source, 'flipY'), image: _Runtime.field(source, 'image'), resource: _Runtime.coalesce(_Runtime.field(source, 'resource'), function():Dynamic return cast null), sampler: _Runtime.callValue(cloneSampler, cast ([_Runtime.field(source, 'sampler')] : Array<Dynamic>)), uvOffset: _Runtime.callValue(cloneVector2, cast ([_Runtime.field(source, 'uvOffset')] : Array<Dynamic>)), uvRotation: _Runtime.field(source, 'uvRotation'), uvScale: _Runtime.callValue(cloneVector2, cast ([_Runtime.field(source, 'uvScale')] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -66,10 +66,14 @@ class Texture {
 
   public static function copyTexture(out:TextureLike, source:TextureLike):Void {
     var colorSpace:Dynamic = cast _Runtime.UNDEFINED;
+    var flipX:Dynamic = cast _Runtime.UNDEFINED;
+    var flipY:Dynamic = cast _Runtime.UNDEFINED;
     var image:Dynamic = cast _Runtime.UNDEFINED;
     var resource:Dynamic = cast _Runtime.UNDEFINED;
     var uvRotation:Dynamic = cast _Runtime.UNDEFINED;
     colorSpace = _Runtime.field(source, 'colorSpace');
+    flipX = _Runtime.field(source, 'flipX');
+    flipY = _Runtime.field(source, 'flipY');
     image = _Runtime.field(source, 'image');
     resource = _Runtime.coalesce(_Runtime.field(source, 'resource'), function():Dynamic return cast null);
     uvRotation = _Runtime.field(source, 'uvRotation');
@@ -77,6 +81,8 @@ class Texture {
     _Runtime.callValue(copyVector2, cast ([_Runtime.field(out, 'uvOffset'), _Runtime.field(source, 'uvOffset')] : Array<Dynamic>));
     _Runtime.callValue(copyVector2, cast ([_Runtime.field(out, 'uvScale'), _Runtime.field(source, 'uvScale')] : Array<Dynamic>));
     _Runtime.setField(out, 'colorSpace', colorSpace);
+    _Runtime.setField(out, 'flipX', flipX);
+    _Runtime.setField(out, 'flipY', flipY);
     _Runtime.setField(out, 'image', image);
     _Runtime.setField(out, 'resource', resource);
     _Runtime.setField(out, 'uvRotation', uvRotation);
@@ -112,7 +118,7 @@ class Texture {
   }
 
   public static function createTexture(?opts:Dynamic):flighthq.types.Texture {
-    return cast _Runtime.callValue(createEntity, cast ([{ colorSpace: _Runtime.coalesce(_Runtime.optionalField(opts, 'colorSpace'), function():Dynamic return cast 'srgb'), image: _Runtime.coalesce(_Runtime.optionalField(opts, 'image'), function():Dynamic return cast null), resource: _Runtime.coalesce(_Runtime.optionalField(opts, 'resource'), function():Dynamic return cast null), sampler: _Runtime.select(_Runtime.optionalField(opts, 'sampler'), function():Dynamic return cast _Runtime.callValue(cloneSampler, cast ([_Runtime.field(opts, 'sampler')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createSampler, cast ([] : Array<Dynamic>))), uvOffset: _Runtime.select(_Runtime.optionalField(opts, 'uvOffset'), function():Dynamic return cast _Runtime.callValue(cloneVector2, cast ([_Runtime.field(opts, 'uvOffset')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector2, cast ([0.0, 0.0] : Array<Dynamic>))), uvRotation: _Runtime.coalesce(_Runtime.optionalField(opts, 'uvRotation'), function():Dynamic return cast 0.0), uvScale: _Runtime.select(_Runtime.optionalField(opts, 'uvScale'), function():Dynamic return cast _Runtime.callValue(cloneVector2, cast ([_Runtime.field(opts, 'uvScale')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector2, cast ([1.0, 1.0] : Array<Dynamic>))) }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ colorSpace: _Runtime.coalesce(_Runtime.optionalField(opts, 'colorSpace'), function():Dynamic return cast 'srgb'), flipX: _Runtime.coalesce(_Runtime.optionalField(opts, 'flipX'), function():Dynamic return cast false), flipY: _Runtime.coalesce(_Runtime.optionalField(opts, 'flipY'), function():Dynamic return cast false), image: _Runtime.coalesce(_Runtime.optionalField(opts, 'image'), function():Dynamic return cast null), resource: _Runtime.coalesce(_Runtime.optionalField(opts, 'resource'), function():Dynamic return cast null), sampler: _Runtime.select(_Runtime.optionalField(opts, 'sampler'), function():Dynamic return cast _Runtime.callValue(cloneSampler, cast ([_Runtime.field(opts, 'sampler')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createSampler, cast ([] : Array<Dynamic>))), uvOffset: _Runtime.select(_Runtime.optionalField(opts, 'uvOffset'), function():Dynamic return cast _Runtime.callValue(cloneVector2, cast ([_Runtime.field(opts, 'uvOffset')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector2, cast ([0.0, 0.0] : Array<Dynamic>))), uvRotation: _Runtime.coalesce(_Runtime.optionalField(opts, 'uvRotation'), function():Dynamic return cast 0.0), uvScale: _Runtime.select(_Runtime.optionalField(opts, 'uvScale'), function():Dynamic return cast _Runtime.callValue(cloneVector2, cast ([_Runtime.field(opts, 'uvScale')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector2, cast ([1.0, 1.0] : Array<Dynamic>))) }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -139,7 +145,7 @@ class Texture {
   public static function equalsTexture(a:Null<TextureLike>, b:Null<TextureLike>):Bool {
     if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(a), function():Dynamic return cast !_Runtime.truthy(b)))) { return cast false; }
     if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'colorSpace'), _Runtime.field(b, 'colorSpace')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'image'), _Runtime.field(b, 'image'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'uvRotation'), _Runtime.field(b, 'uvRotation'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(a, 'uvOffset'), 'x'), _Runtime.field(_Runtime.field(b, 'uvOffset'), 'x'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(a, 'uvOffset'), 'y'), _Runtime.field(_Runtime.field(b, 'uvOffset'), 'y'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(a, 'uvScale'), 'x'), _Runtime.field(_Runtime.field(b, 'uvScale'), 'x'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(a, 'uvScale'), 'y'), _Runtime.field(_Runtime.field(b, 'uvScale'), 'y'))), function():Dynamic return cast _Runtime.callValue(equalsSampler, cast ([_Runtime.field(a, 'sampler'), _Runtime.field(b, 'sampler')] : Array<Dynamic>)));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'colorSpace'), _Runtime.field(b, 'colorSpace')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'flipX'), _Runtime.field(b, 'flipX'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'flipY'), _Runtime.field(b, 'flipY'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'image'), _Runtime.field(b, 'image'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'uvRotation'), _Runtime.field(b, 'uvRotation'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(a, 'uvOffset'), 'x'), _Runtime.field(_Runtime.field(b, 'uvOffset'), 'x'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(a, 'uvOffset'), 'y'), _Runtime.field(_Runtime.field(b, 'uvOffset'), 'y'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(a, 'uvScale'), 'x'), _Runtime.field(_Runtime.field(b, 'uvScale'), 'x'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(a, 'uvScale'), 'y'), _Runtime.field(_Runtime.field(b, 'uvScale'), 'y'))), function():Dynamic return cast _Runtime.callValue(equalsSampler, cast ([_Runtime.field(a, 'sampler'), _Runtime.field(b, 'sampler')] : Array<Dynamic>)));
     return cast null;
   }
 
@@ -160,20 +166,28 @@ class Texture {
 
   public static function getTextureUvMatrix(out:Matrix3Like, texture:TextureUvTransform):Void {
     var r:Dynamic = cast _Runtime.UNDEFINED;
+    var flipScaleX:Dynamic = cast _Runtime.UNDEFINED;
+    var flipScaleY:Dynamic = cast _Runtime.UNDEFINED;
     var sx:Dynamic = cast _Runtime.UNDEFINED;
     var sy:Dynamic = cast _Runtime.UNDEFINED;
-    var tx:Dynamic = cast _Runtime.UNDEFINED;
-    var ty:Dynamic = cast _Runtime.UNDEFINED;
+    var preOffsetX:Dynamic = cast _Runtime.UNDEFINED;
+    var preOffsetY:Dynamic = cast _Runtime.UNDEFINED;
     var cosR:Dynamic = cast _Runtime.UNDEFINED;
     var sinR:Dynamic = cast _Runtime.UNDEFINED;
+    var tx:Dynamic = cast _Runtime.UNDEFINED;
+    var ty:Dynamic = cast _Runtime.UNDEFINED;
     var m:Dynamic = cast _Runtime.UNDEFINED;
     r = _Runtime.field(texture, 'uvRotation');
-    sx = _Runtime.field(_Runtime.field(texture, 'uvScale'), 'x');
-    sy = _Runtime.field(_Runtime.field(texture, 'uvScale'), 'y');
-    tx = _Runtime.field(_Runtime.field(texture, 'uvOffset'), 'x');
-    ty = _Runtime.field(_Runtime.field(texture, 'uvOffset'), 'y');
+    flipScaleX = _Runtime.select(_Runtime.field(texture, 'flipX'), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0);
+    flipScaleY = _Runtime.select(_Runtime.field(texture, 'flipY'), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0);
+    sx = (_Runtime.field(_Runtime.field(texture, 'uvScale'), 'x') * flipScaleX);
+    sy = (_Runtime.field(_Runtime.field(texture, 'uvScale'), 'y') * flipScaleY);
+    preOffsetX = _Runtime.select(_Runtime.field(texture, 'flipX'), function():Dynamic return cast _Runtime.field(_Runtime.field(texture, 'uvScale'), 'x'), function():Dynamic return cast 0.0);
+    preOffsetY = _Runtime.select(_Runtime.field(texture, 'flipY'), function():Dynamic return cast _Runtime.field(_Runtime.field(texture, 'uvScale'), 'y'), function():Dynamic return cast 0.0);
     cosR = _Runtime.callProperty(HxMath, 'cos', cast ([r] : Array<Dynamic>));
     sinR = _Runtime.callProperty(HxMath, 'sin', cast ([r] : Array<Dynamic>));
+    tx = ((_Runtime.field(_Runtime.field(texture, 'uvOffset'), 'x') + (cosR * preOffsetX)) - (sinR * preOffsetY));
+    ty = ((_Runtime.field(_Runtime.field(texture, 'uvOffset'), 'y') + (sinR * preOffsetX)) + (cosR * preOffsetY));
     m = _Runtime.field(out, 'm');
     _Runtime.setIndex(m, 0.0, (sx * cosR));
     _Runtime.setIndex(m, 1.0, (sx * sinR));
@@ -210,7 +224,7 @@ class Texture {
   }
 
   public static function hasTextureUvTransform(texture:TextureUvTransform):Bool {
-    return cast _Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(texture, 'uvScale'), 'x'), 1.0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(texture, 'uvScale'), 'y'), 1.0)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(texture, 'uvOffset'), 'x'), 0.0)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(texture, 'uvOffset'), 'y'), 0.0)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(texture, 'uvRotation'), 0.0));
+    return cast _Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.field(texture, 'flipX'), function():Dynamic return cast _Runtime.field(texture, 'flipY')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(texture, 'uvScale'), 'x'), 1.0)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(texture, 'uvScale'), 'y'), 1.0)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(texture, 'uvOffset'), 'x'), 0.0)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(texture, 'uvOffset'), 'y'), 0.0)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(texture, 'uvRotation'), 0.0));
     return cast null;
   }
 
@@ -230,6 +244,8 @@ class Texture {
   }
 
   public static function resetTextureUvTransform(texture:TextureLike):Void {
+    _Runtime.setField(texture, 'flipX', false);
+    _Runtime.setField(texture, 'flipY', false);
     _Runtime.setField(_Runtime.field(texture, 'uvOffset'), 'x', 0.0);
     _Runtime.setField(_Runtime.field(texture, 'uvOffset'), 'y', 0.0);
     _Runtime.setField(texture, 'uvRotation', 0.0);
@@ -243,6 +259,11 @@ class Texture {
 
   public static function setCubeTextureFace(cube:CubeTextureLike, faceIndex:Float, image:Null<ImageResource>):Void {
     _Runtime.callValue(Facade_Texture_flighthq_texture_CubeTexture.setCubeTextureFace, cast ([cube, faceIndex, image] : Array<Dynamic>));
+  }
+
+  public static function setTextureFlip(texture:TextureLike, flipX:Bool, flipY:Bool):Void {
+    _Runtime.setField(texture, 'flipX', flipX);
+    _Runtime.setField(texture, 'flipY', flipY);
   }
 
   public static function setTextureImage(texture:TextureLike, image:Null<ImageResource>):Void {
@@ -268,6 +289,8 @@ class Texture {
   }
 
   public static function transformTextureUv(out:Vector2Like, texture:TextureLike, u:Float, v:Float):Void {
+    var fu:Dynamic = cast _Runtime.UNDEFINED;
+    var fv:Dynamic = cast _Runtime.UNDEFINED;
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var sx:Dynamic = cast _Runtime.UNDEFINED;
     var sy:Dynamic = cast _Runtime.UNDEFINED;
@@ -275,6 +298,8 @@ class Texture {
     var ty:Dynamic = cast _Runtime.UNDEFINED;
     var cosR:Dynamic = cast _Runtime.UNDEFINED;
     var sinR:Dynamic = cast _Runtime.UNDEFINED;
+    fu = _Runtime.select(_Runtime.field(texture, 'flipX'), function():Dynamic return cast (1.0 - u), function():Dynamic return cast u);
+    fv = _Runtime.select(_Runtime.field(texture, 'flipY'), function():Dynamic return cast (1.0 - v), function():Dynamic return cast v);
     r = _Runtime.field(texture, 'uvRotation');
     sx = _Runtime.field(_Runtime.field(texture, 'uvScale'), 'x');
     sy = _Runtime.field(_Runtime.field(texture, 'uvScale'), 'y');
@@ -282,7 +307,7 @@ class Texture {
     ty = _Runtime.field(_Runtime.field(texture, 'uvOffset'), 'y');
     cosR = _Runtime.callProperty(HxMath, 'cos', cast ([r] : Array<Dynamic>));
     sinR = _Runtime.callProperty(HxMath, 'sin', cast ([r] : Array<Dynamic>));
-    _Runtime.setField(out, 'x', ((((sx * cosR) * u) - ((sy * sinR) * v)) + tx));
-    _Runtime.setField(out, 'y', ((((sx * sinR) * u) + ((sy * cosR) * v)) + ty));
+    _Runtime.setField(out, 'x', ((((sx * cosR) * fu) - ((sy * sinR) * fv)) + tx));
+    _Runtime.setField(out, 'y', ((((sx * sinR) * fu) + ((sy * cosR) * fv)) + ty));
   }
 }

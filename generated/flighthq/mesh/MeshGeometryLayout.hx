@@ -7,65 +7,141 @@ import flighthq.mesh.MeshGeometry.createMeshGeometry;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
 
+typedef AttributeMapping__meshGeometryLayout = { var destination:Dynamic; var source:Dynamic; var sourceByteLength:Float; };
+
 @:expose("flighthq.mesh.MeshGeometryLayout")
 class MeshGeometryLayout {
   public static function convertMeshGeometryLayout(source:MeshGeometry, targetLayout:VertexAttributeLayout):MeshGeometry {
     var srcStride:Dynamic = cast _Runtime.UNDEFINED;
     var dstStride:Dynamic = cast _Runtime.UNDEFINED;
-    var srcFloatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
-    var dstFloatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var dstVertices:Dynamic = cast _Runtime.UNDEFINED;
-    var srcVerts:Dynamic = cast _Runtime.UNDEFINED;
-    var mapping:Array<{ var componentCount:Float; var dstFloatOffset:Float; var srcFloatOffset:Float; }> = cast _Runtime.UNDEFINED;
+    var sourceBytes:Dynamic = cast _Runtime.UNDEFINED;
+    var destinationBytes:Dynamic = cast _Runtime.UNDEFINED;
+    var sourceView:Dynamic = cast _Runtime.UNDEFINED;
+    var destinationView:Dynamic = cast _Runtime.UNDEFINED;
+    var mappings:Array<AttributeMapping__meshGeometryLayout> = cast _Runtime.UNDEFINED;
     srcStride = _Runtime.field(_Runtime.field(source, 'layout'), 'stride');
     dstStride = _Runtime.field(targetLayout, 'stride');
-    srcFloatsPerVertex = (srcStride / 4.0);
-    dstFloatsPerVertex = (dstStride / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(srcFloatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(_Runtime.field(source, 'vertices'), 'length') / srcFloatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
-    dstVertices = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(vertexCount * dstFloatsPerVertex)]);
-    srcVerts = _Runtime.field(source, 'vertices');
-    mapping = cast ([] : Array<Dynamic>);
+    vertexCount = _Runtime.select(_Runtime.compare(srcStride, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(_Runtime.field(source, 'vertices'), 'byteLength') / srcStride)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    dstVertices = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [((vertexCount * dstStride) / 4.0)]);
+    sourceBytes = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [_Runtime.field(_Runtime.field(source, 'vertices'), 'buffer'), _Runtime.field(_Runtime.field(source, 'vertices'), 'byteOffset'), _Runtime.field(_Runtime.field(source, 'vertices'), 'byteLength')]);
+    destinationBytes = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [_Runtime.field(dstVertices, 'buffer')]);
+    sourceView = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['DataView'] : Array<Dynamic>)), [_Runtime.field(sourceBytes, 'buffer'), _Runtime.field(sourceBytes, 'byteOffset'), _Runtime.field(sourceBytes, 'byteLength')]);
+    destinationView = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['DataView'] : Array<Dynamic>)), [_Runtime.field(destinationBytes, 'buffer')]);
+    mappings = cast ([] : Array<Dynamic>);
     for (dstAttr in _Runtime.iterable(_Runtime.field(targetLayout, 'attributes'))) {
-      if (_Runtime.truthy(!_Runtime.truthy(StringTools.startsWith(_Runtime.field(dstAttr, 'format'), 'float32')))) { continue; }
-      var dstFloatOffset:Dynamic = (_Runtime.field(dstAttr, 'byteOffset') / 4.0);
-      var componentCount:Dynamic = _Runtime.callValue(MeshGeometryLayout.getFloat32ComponentCount__meshGeometryLayout, cast ([_Runtime.field(dstAttr, 'format')] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.strictEquals(componentCount, 0.0))) { continue; }
-      var srcAttr:Dynamic = _Runtime.find(_Runtime.field(_Runtime.field(source, 'layout'), 'attributes'), function(a:Dynamic) return _Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'semantic'), _Runtime.field(dstAttr, 'semantic')), function():Dynamic return cast StringTools.startsWith(_Runtime.field(a, 'format'), 'float32')));
+      var srcAttr:Dynamic = _Runtime.find(_Runtime.field(_Runtime.field(source, 'layout'), 'attributes'), function(attribute:Dynamic) return _Runtime.strictEquals(_Runtime.field(attribute, 'semantic'), _Runtime.field(dstAttr, 'semantic')));
       if (_Runtime.truthy(!_Runtime.truthy(srcAttr))) { continue; }
-      _Runtime.callProperty(mapping, 'push', cast ([{ componentCount: componentCount, dstFloatOffset: dstFloatOffset, srcFloatOffset: (_Runtime.field(srcAttr, 'byteOffset') / 4.0) }] : Array<Dynamic>));
+      var sourceByteLength:Dynamic = _Runtime.callValue(MeshGeometryLayout.getVertexFormatByteLength__meshGeometryLayout, cast ([_Runtime.field(srcAttr, 'format')] : Array<Dynamic>));
+      var destinationByteLength:Dynamic = _Runtime.callValue(MeshGeometryLayout.getVertexFormatByteLength__meshGeometryLayout, cast ([_Runtime.field(dstAttr, 'format')] : Array<Dynamic>));
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(sourceByteLength, 0.0), function():Dynamic return cast _Runtime.strictEquals(destinationByteLength, 0.0)), function():Dynamic return cast _Runtime.compare(_Runtime.field(srcAttr, 'byteOffset'), 0.0, '<')), function():Dynamic return cast _Runtime.compare(_Runtime.field(dstAttr, 'byteOffset'), 0.0, '<')), function():Dynamic return cast _Runtime.compare((_Runtime.field(srcAttr, 'byteOffset') + sourceByteLength), srcStride, '>')), function():Dynamic return cast _Runtime.compare((_Runtime.field(dstAttr, 'byteOffset') + destinationByteLength), dstStride, '>')))) {
+        continue;
+      }
+      _Runtime.callProperty(mappings, 'push', cast ([{ destination: dstAttr, source: srcAttr, sourceByteLength: sourceByteLength }] : Array<Dynamic>));
     }
     {
-      var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
-        var srcBase:Dynamic = (i * srcFloatsPerVertex);
-        var dstBase:Dynamic = (i * dstFloatsPerVertex);
-        for (__iteration0 in _Runtime.iterable(mapping)) {
-          var dstFloatOffset:Dynamic = _Runtime.field(__iteration0, 'dstFloatOffset');
-          var srcFloatOffset:Dynamic = _Runtime.field(__iteration0, 'srcFloatOffset');
-          var componentCount:Dynamic = _Runtime.field(__iteration0, 'componentCount');
+      var vertex:Dynamic = 0.0;
+      while (_Runtime.truthy(_Runtime.compare(vertex, vertexCount, '<'))) {
+        for (mapping in _Runtime.iterable(mappings)) {
+          var sourceOffset:Dynamic = ((vertex * srcStride) + _Runtime.field(_Runtime.field(mapping, 'source'), 'byteOffset'));
+          var destinationOffset:Dynamic = ((vertex * dstStride) + _Runtime.field(_Runtime.field(mapping, 'destination'), 'byteOffset'));
+          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(mapping, 'source'), 'format'), _Runtime.field(_Runtime.field(mapping, 'destination'), 'format')))) {
+            _Runtime.callProperty(destinationBytes, 'set', cast ([sourceBytes.subarray(Std.int(sourceOffset), Std.int((sourceOffset + _Runtime.field(mapping, 'sourceByteLength')))), destinationOffset] : Array<Dynamic>));
+            continue;
+          }
+          var componentCount:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callValue(MeshGeometryLayout.getVertexFormatComponentCount__meshGeometryLayout, cast ([_Runtime.field(_Runtime.field(mapping, 'source'), 'format')] : Array<Dynamic>)), _Runtime.callValue(MeshGeometryLayout.getVertexFormatComponentCount__meshGeometryLayout, cast ([_Runtime.field(_Runtime.field(mapping, 'destination'), 'format')] : Array<Dynamic>))] : Array<Dynamic>));
           {
-            var c:Dynamic = 0.0;
-            while (_Runtime.truthy(_Runtime.compare(c, componentCount, '<'))) {
-              _Runtime.setIndex(dstVertices, ((dstBase + dstFloatOffset) + c), _Runtime.getIndex(srcVerts, ((srcBase + srcFloatOffset) + c)));
-              c++;
+            var component:Dynamic = 0.0;
+            while (_Runtime.truthy(_Runtime.compare(component, componentCount, '<'))) {
+              _Runtime.callValue(MeshGeometryLayout.writeVertexFormatComponent__meshGeometryLayout, cast ([destinationView, destinationOffset, _Runtime.field(_Runtime.field(mapping, 'destination'), 'format'), component, _Runtime.callValue(MeshGeometryLayout.readVertexFormatComponent__meshGeometryLayout, cast ([sourceView, sourceOffset, _Runtime.field(_Runtime.field(mapping, 'source'), 'format'), component] : Array<Dynamic>))] : Array<Dynamic>));
+              component++;
             }
           }
         }
-        i++;
+        vertex++;
       }
     }
     return cast _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.coalesce(_Runtime.field(source, 'indices'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), layout: targetLayout, subsets: _Runtime.field(source, 'subsets'), topology: _Runtime.field(source, 'topology'), vertices: dstVertices }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getFloat32ComponentCount__meshGeometryLayout(format:String):Float {
-    if (_Runtime.truthy(_Runtime.strictEquals(format, 'float32'))) { return cast 1.0; }
-    if (_Runtime.truthy(_Runtime.strictEquals(format, 'float32x2'))) { return cast 2.0; }
-    if (_Runtime.truthy(_Runtime.strictEquals(format, 'float32x3'))) { return cast 3.0; }
-    if (_Runtime.truthy(_Runtime.strictEquals(format, 'float32x4'))) { return cast 4.0; }
-    return cast 0.0;
+  public static function getVertexFormatByteLength__meshGeometryLayout(format:Dynamic):Float {
+    {
+      var __switchValue = format;
+      if (__switchValue == 'float32x2') {
+        return cast 8.0;
+      }
+      else if (__switchValue == 'float32x3') {
+        return cast 12.0;
+      }
+      else if (__switchValue == 'float32x4') {
+        return cast 16.0;
+      }
+      else if (__switchValue == 'uint16x4') {
+        return cast 8.0;
+      }
+      else if (__switchValue == 'uint8x4' || __switchValue == 'unorm8x4') {
+        return cast 4.0;
+      }
+    }
     return cast null;
+  }
+
+  public static function getVertexFormatComponentCount__meshGeometryLayout(format:Dynamic):Float {
+    {
+      var __switchValue = format;
+      if (__switchValue == 'float32x2') {
+        return cast 2.0;
+      }
+      else if (__switchValue == 'float32x3') {
+        return cast 3.0;
+      }
+      else if (__switchValue == 'float32x4' || __switchValue == 'uint16x4' || __switchValue == 'uint8x4' || __switchValue == 'unorm8x4') {
+        return cast 4.0;
+      }
+    }
+    return cast null;
+  }
+
+  public static function readVertexFormatComponent__meshGeometryLayout(view:Dynamic, byteOffset:Float, format:Dynamic, component:Float):Float {
+    {
+      var __switchValue = format;
+      if (__switchValue == 'float32x2' || __switchValue == 'float32x3' || __switchValue == 'float32x4') {
+        return cast _Runtime.callProperty(view, 'getFloat32', cast ([(byteOffset + (component * 4.0)), true] : Array<Dynamic>));
+      }
+      else if (__switchValue == 'uint16x4') {
+        return cast _Runtime.callProperty(view, 'getUint16', cast ([(byteOffset + (component * 2.0)), true] : Array<Dynamic>));
+      }
+      else if (__switchValue == 'uint8x4') {
+        return cast _Runtime.callProperty(view, 'getUint8', cast ([(byteOffset + component)] : Array<Dynamic>));
+      }
+      else if (__switchValue == 'unorm8x4') {
+        return cast (_Runtime.callProperty(view, 'getUint8', cast ([(byteOffset + component)] : Array<Dynamic>)) / 255.0);
+      }
+    }
+    return cast null;
+  }
+
+  public static function writeVertexFormatComponent__meshGeometryLayout(view:Dynamic, byteOffset:Float, format:Dynamic, component:Float, value:Float):Void {
+    {
+      var __switchValue = format;
+      if (__switchValue == 'float32x2' || __switchValue == 'float32x3' || __switchValue == 'float32x4') {
+        _Runtime.callProperty(view, 'setFloat32', cast ([(byteOffset + (component * 4.0)), value, true] : Array<Dynamic>));
+        return;
+      }
+      else if (__switchValue == 'uint16x4') {
+        _Runtime.callProperty(view, 'setUint16', cast ([(byteOffset + (component * 2.0)), _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.callProperty(HxMath, 'min', cast ([65535.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, value] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)), true] : Array<Dynamic>));
+        return;
+      }
+      else if (__switchValue == 'uint8x4') {
+        _Runtime.callProperty(view, 'setUint8', cast ([(byteOffset + component), _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, value] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+        return;
+      }
+      else if (__switchValue == 'unorm8x4') {
+        _Runtime.callProperty(view, 'setUint8', cast ([(byteOffset + component), _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, value] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>))] : Array<Dynamic>));
+      }
+    }
   }
 
   public static final CANONICAL_MESH_GEOMETRY_LAYOUT:VertexAttributeLayout = { attributes: cast ([{ byteOffset: 0.0, format: 'float32x3', semantic: 'position' }, { byteOffset: 12.0, format: 'float32x3', semantic: 'normal' }, { byteOffset: 24.0, format: 'float32x4', semantic: 'tangent' }, { byteOffset: 40.0, format: 'float32x2', semantic: 'uv0' }] : Array<Dynamic>), stride: 48.0 };

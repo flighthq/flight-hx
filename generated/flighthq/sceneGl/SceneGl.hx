@@ -7,48 +7,35 @@ import flighthq.sceneGl.AnisotropyPbrGlMeshMaterialRenderer as Facade_SceneGl_fl
 import flighthq.sceneGl.BlinnPhongGlMeshMaterialRenderer as Facade_SceneGl_flighthq_sceneGl_BlinnPhongGlMeshMaterialRenderer;
 import flighthq.sceneGl.ClearcoatPbrGlMeshMaterialRenderer as Facade_SceneGl_flighthq_sceneGl_ClearcoatPbrGlMeshMaterialRenderer;
 import flighthq.sceneGl.CustomShaderGlMeshMaterialRenderer as Facade_SceneGl_flighthq_sceneGl_CustomShaderGlMeshMaterialRenderer;
-import flighthq.sceneGl.CustomShaderGlMeshMaterialRenderer.GlCustomMaterialShaderSource;
 import flighthq.sceneGl.DepthGlMeshMaterialRenderer as Facade_SceneGl_flighthq_sceneGl_DepthGlMeshMaterialRenderer;
 import flighthq.sceneGl.DrawGlScene as Facade_SceneGl_flighthq_sceneGl_DrawGlScene;
 import flighthq.sceneGl.EmissiveGlMeshMaterialRenderer as Facade_SceneGl_flighthq_sceneGl_EmissiveGlMeshMaterialRenderer;
 import flighthq.sceneGl.EnableGlSceneColorSpaceGuards as Facade_SceneGl_flighthq_sceneGl_EnableGlSceneColorSpaceGuards;
 import flighthq.sceneGl.EnableGlSceneCustomShaderGuards as Facade_SceneGl_flighthq_sceneGl_EnableGlSceneCustomShaderGuards;
 import flighthq.sceneGl.GlClassicPrelude as Facade_SceneGl_flighthq_sceneGl_GlClassicPrelude;
-import flighthq.sceneGl.GlClassicPrelude.GlClassicDefineKey;
-import flighthq.sceneGl.GlClassicPrelude.GlClassicProgram;
 import flighthq.sceneGl.GlDebugPrelude as Facade_SceneGl_flighthq_sceneGl_GlDebugPrelude;
-import flighthq.sceneGl.GlDebugPrelude.GlDebugDefineKey;
-import flighthq.sceneGl.GlDebugPrelude.GlDebugProgram;
 import flighthq.sceneGl.GlEnvironmentCube as Facade_SceneGl_flighthq_sceneGl_GlEnvironmentCube;
 import flighthq.sceneGl.GlEnvironmentIblBake as Facade_SceneGl_flighthq_sceneGl_GlEnvironmentIblBake;
 import flighthq.sceneGl.GlEnvironmentSkybox as Facade_SceneGl_flighthq_sceneGl_GlEnvironmentSkybox;
+import flighthq.sceneGl.GlLitProgram as Facade_SceneGl_flighthq_sceneGl_GlLitProgram;
 import flighthq.sceneGl.GlMatcapPrelude as Facade_SceneGl_flighthq_sceneGl_GlMatcapPrelude;
-import flighthq.sceneGl.GlMatcapPrelude.GlMatcapDefineKey;
-import flighthq.sceneGl.GlMatcapPrelude.GlMatcapProgram;
 import flighthq.sceneGl.GlMeshMaterialRegistry as Facade_SceneGl_flighthq_sceneGl_GlMeshMaterialRegistry;
+import flighthq.sceneGl.GlMeshProgram as Facade_SceneGl_flighthq_sceneGl_GlMeshProgram;
 import flighthq.sceneGl.GlMeshUpload as Facade_SceneGl_flighthq_sceneGl_GlMeshUpload;
 import flighthq.sceneGl.GlParticleEmitter3D as Facade_SceneGl_flighthq_sceneGl_GlParticleEmitter3D;
 import flighthq.sceneGl.GlPbrPrelude as Facade_SceneGl_flighthq_sceneGl_GlPbrPrelude;
-import flighthq.sceneGl.GlPbrPrelude.GlPbrDefineKey;
 import flighthq.sceneGl.GlPbrProgramCache as Facade_SceneGl_flighthq_sceneGl_GlPbrProgramCache;
-import flighthq.sceneGl.GlPbrProgramCache.GlPbrProgram;
 import flighthq.sceneGl.GlPbrStandardBlock as Facade_SceneGl_flighthq_sceneGl_GlPbrStandardBlock;
+import flighthq.sceneGl.GlSceneRuntime as Facade_SceneGl_flighthq_sceneGl_GlSceneRuntime;
 import flighthq.sceneGl.GlSceneTime as Facade_SceneGl_flighthq_sceneGl_GlSceneTime;
 import flighthq.sceneGl.GlShadedBuiltInModifiers as Facade_SceneGl_flighthq_sceneGl_GlShadedBuiltInModifiers;
 import flighthq.sceneGl.GlShadedModifierSnippet as Facade_SceneGl_flighthq_sceneGl_GlShadedModifierSnippet;
-import flighthq.sceneGl.GlShadedModifierSnippet.GlModifierSnippet;
 import flighthq.sceneGl.GlShadedPrelude as Facade_SceneGl_flighthq_sceneGl_GlShadedPrelude;
-import flighthq.sceneGl.GlShadedPrelude.GlShadedDefineKey;
-import flighthq.sceneGl.GlShadedPrelude.GlShadedProgram;
 import flighthq.sceneGl.GlShadowMap as Facade_SceneGl_flighthq_sceneGl_GlShadowMap;
 import flighthq.sceneGl.GlToonPrelude as Facade_SceneGl_flighthq_sceneGl_GlToonPrelude;
-import flighthq.sceneGl.GlToonPrelude.GlToonDefineKey;
-import flighthq.sceneGl.GlToonPrelude.GlToonProgram;
 import flighthq.sceneGl.GlUnlitPrelude as Facade_SceneGl_flighthq_sceneGl_GlUnlitPrelude;
-import flighthq.sceneGl.GlUnlitPrelude.GlUnlitDefineKey;
-import flighthq.sceneGl.GlUnlitPrelude.GlUnlitProgram;
 import flighthq.sceneGl.GlWireframePrelude as Facade_SceneGl_flighthq_sceneGl_GlWireframePrelude;
-import flighthq.sceneGl.GlWireframePrelude.GlWireframeProgram;
+import flighthq.sceneGl.GlWireframeUpload as Facade_SceneGl_flighthq_sceneGl_GlWireframeUpload;
 import flighthq.sceneGl.IridescencePbrGlMeshMaterialRenderer as Facade_SceneGl_flighthq_sceneGl_IridescencePbrGlMeshMaterialRenderer;
 import flighthq.sceneGl.LambertGlMeshMaterialRenderer as Facade_SceneGl_flighthq_sceneGl_LambertGlMeshMaterialRenderer;
 import flighthq.sceneGl.MatcapGlMeshMaterialRenderer as Facade_SceneGl_flighthq_sceneGl_MatcapGlMeshMaterialRenderer;
@@ -67,26 +54,44 @@ import flighthq.sceneGl.TransmissionVolumePbrGlMeshMaterialRenderer as Facade_Sc
 import flighthq.sceneGl.UnlitGlMeshMaterialRenderer as Facade_SceneGl_flighthq_sceneGl_UnlitGlMeshMaterialRenderer;
 import flighthq.sceneGl.VertexColorGlMeshMaterialRenderer as Facade_SceneGl_flighthq_sceneGl_VertexColorGlMeshMaterialRenderer;
 import flighthq.sceneGl.WireframeGlMeshMaterialRenderer as Facade_SceneGl_flighthq_sceneGl_WireframeGlMeshMaterialRenderer;
-import flighthq.sceneGl._internal._GlLitProgramValues as Facade_SceneGl_flighthq_sceneGl__internal__GlLitProgramValues;
-import flighthq.sceneGl._internal._GlMeshProgramValues as Facade_SceneGl_flighthq_sceneGl__internal__GlMeshProgramValues;
-import flighthq.sceneGl._internal._GlSceneRuntimeValues as Facade_SceneGl_flighthq_sceneGl__internal__GlSceneRuntimeValues;
-import flighthq.sceneGl._internal._GlWireframeUploadValues as Facade_SceneGl_flighthq_sceneGl__internal__GlWireframeUploadValues;
-import flighthq.shading.ModifierRegistry;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.Entity.Kind;
 import flighthq.types.Environment;
+import flighthq.types.GlClassicProgram;
+import flighthq.types.GlClassicProgram.GlClassicDefineKey;
+import flighthq.types.GlCustomMaterialShaderSource;
+import flighthq.types.GlDebugProgram;
+import flighthq.types.GlDebugProgram.GlDebugDefineKey;
+import flighthq.types.GlLitProgram;
+import flighthq.types.GlMatcapProgram;
+import flighthq.types.GlMatcapProgram.GlMatcapDefineKey;
 import flighthq.types.GlMeshMaterialRenderer;
+import flighthq.types.GlMeshProgram;
+import flighthq.types.GlModifierSnippet;
+import flighthq.types.GlPbrProgram;
+import flighthq.types.GlPbrProgram.GlPbrDefineKey;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
+import flighthq.types.GlSceneRuntime;
+import flighthq.types.GlSceneRuntime.GlMeshUpload;
+import flighthq.types.GlShadedProgram;
+import flighthq.types.GlShadedProgram.GlShadedDefineKey;
 import flighthq.types.GlSkinPaletteTexture;
+import flighthq.types.GlToonProgram;
+import flighthq.types.GlToonProgram.GlToonDefineKey;
+import flighthq.types.GlUnlitProgram;
+import flighthq.types.GlUnlitProgram.GlUnlitDefineKey;
+import flighthq.types.GlWireframeProgram;
+import flighthq.types.GlWireframeProgram.GlWireframeUpload;
 import flighthq.types.ImageResource;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Modifier;
 import flighthq.types.ModifierKind;
+import flighthq.types.ModifierRegistry;
 import flighthq.types.SceneLightBlock;
-import flighthq.types.SceneLights;
+import flighthq.types.SceneLights.SceneLightsLike;
 import flighthq.types.SceneNode;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
@@ -115,7 +120,7 @@ class SceneGl {
   }
 
   public static function beginGlMeshDraw(state:GlRenderState, program:GlMeshProgram, doubleSided:Bool):Void {
-    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl__internal__GlMeshProgramValues.beginGlMeshDraw, cast ([state, program, doubleSided] : Array<Dynamic>));
+    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlMeshProgram.beginGlMeshDraw, cast ([state, program, doubleSided] : Array<Dynamic>));
   }
 
   public static function bindGlDebugNormalMap(state:GlRenderState, program:GlDebugProgram, normalMap:Null<Texture>, normalScale:Float):Void {
@@ -131,7 +136,7 @@ class SceneGl {
   }
 
   public static function bindGlMeshLightBlock(state:GlRenderState, program:GlLitProgram, lights:SceneLightBlock):Void {
-    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl__internal__GlLitProgramValues.bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
+    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlLitProgram.bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
   }
 
   public static function bindGlPbrStandardBlock(state:GlRenderState, program:GlPbrProgram, standard:Null<StandardPbrMaterialProperties>):Void {
@@ -151,7 +156,7 @@ class SceneGl {
   }
 
   public static function bindGlUvTransform(gl:Dynamic, program:GlMeshProgram, texture:Null<TextureLike>):Void {
-    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl__internal__GlMeshProgramValues.bindGlUvTransform, cast ([gl, program, texture] : Array<Dynamic>));
+    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlMeshProgram.bindGlUvTransform, cast ([gl, program, texture] : Array<Dynamic>));
   }
 
   public static final blinnPhongGlMeshMaterialRenderer:GlMeshMaterialRenderer = Facade_SceneGl_flighthq_sceneGl_BlinnPhongGlMeshMaterialRenderer.blinnPhongGlMeshMaterialRenderer;
@@ -224,7 +229,7 @@ class SceneGl {
   }
 
   public static function compileGlProgram(gl:Dynamic, vertexSource:String, fragmentSource:String):Dynamic {
-    return cast _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl__internal__GlMeshProgramValues.compileGlProgram, cast ([gl, vertexSource, fragmentSource] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlMeshProgram.compileGlProgram, cast ([gl, vertexSource, fragmentSource] : Array<Dynamic>));
     return cast null;
   }
 
@@ -257,10 +262,10 @@ class SceneGl {
   }
 
   public static function destroyGlMeshProgram(state:GlRenderState, program:GlMeshProgram):Void {
-    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl__internal__GlMeshProgramValues.destroyGlMeshProgram, cast ([state, program] : Array<Dynamic>));
+    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlMeshProgram.destroyGlMeshProgram, cast ([state, program] : Array<Dynamic>));
   }
 
-  public static function destroyGlMeshUpload(state:GlRenderState, upload:Dynamic):Void {
+  public static function destroyGlMeshUpload(state:GlRenderState, upload:GlMeshUpload):Void {
     _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlMeshUpload.destroyGlMeshUpload, cast ([state, upload] : Array<Dynamic>));
   }
 
@@ -269,32 +274,32 @@ class SceneGl {
   }
 
   public static function destroyGlSceneRuntime(state:GlRenderState):Void {
-    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl__internal__GlSceneRuntimeValues.destroyGlSceneRuntime, cast ([state] : Array<Dynamic>));
+    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlSceneRuntime.destroyGlSceneRuntime, cast ([state] : Array<Dynamic>));
   }
 
   public static function destroyGlWireframeUpload(state:GlRenderState, upload:GlWireframeUpload):Void {
-    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl__internal__GlWireframeUploadValues.destroyGlWireframeUpload, cast ([state, upload] : Array<Dynamic>));
+    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlWireframeUpload.destroyGlWireframeUpload, cast ([state, upload] : Array<Dynamic>));
   }
 
   public static final dissolveGlModifierSnippet:GlModifierSnippet = Facade_SceneGl_flighthq_sceneGl_GlShadedBuiltInModifiers.dissolveGlModifierSnippet;
 
-  public static function drawGlEnvironmentSkybox(state:GlRenderState, environment:Environment, camera:Camera, aspect:Float):Void {
+  public static function drawGlEnvironmentSkybox(state:GlRenderState, environment:Environment, camera:Camera3D, aspect:Float):Void {
     _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlEnvironmentSkybox.drawGlEnvironmentSkybox, cast ([state, environment, camera, aspect] : Array<Dynamic>));
   }
 
   public static function drawGlMeshSubset(state:GlRenderState, program:GlMeshProgram, proxy:SceneRenderProxy, geometry:MeshGeometry):Void {
-    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl__internal__GlMeshProgramValues.drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
+    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlMeshProgram.drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   }
 
-  public static function drawGlScene(state:GlRenderState, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
+  public static function drawGlScene(state:GlRenderState, scene:SceneNode, camera:Camera3D, lights:SceneLightsLike):Void {
     _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_DrawGlScene.drawGlScene, cast ([state, scene, camera, lights] : Array<Dynamic>));
   }
 
-  public static function drawGlSceneParticleEmitters(state:GlRenderState, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
-    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlParticleEmitter3D.drawGlSceneParticleEmitters, cast ([state, scene, camera, lights] : Array<Dynamic>));
+  public static function drawGlSceneParticleEmitter2Ds(state:GlRenderState, scene:SceneNode, camera:Camera3D, lights:SceneLightsLike):Void {
+    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlParticleEmitter3D.drawGlSceneParticleEmitter2Ds, cast ([state, scene, camera, lights] : Array<Dynamic>));
   }
 
-  public static function drawGlSceneShadowMap(state:GlRenderState, scene:SceneNode, shadowCamera:Camera):Void {
+  public static function drawGlSceneShadowMap(state:GlRenderState, scene:SceneNode, shadowCamera:Camera3D):Void {
     _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlShadowMap.drawGlSceneShadowMap, cast ([state, scene, shadowCamera] : Array<Dynamic>));
   }
 
@@ -330,7 +335,7 @@ class SceneGl {
     return cast null;
   }
 
-  public static function ensureGlMeshUpload(state:GlRenderState, geometry:MeshGeometry, ?gpuSkinned:Dynamic):Dynamic {
+  public static function ensureGlMeshUpload(state:GlRenderState, geometry:MeshGeometry, ?gpuSkinned:Dynamic):GlMeshUpload {
     return cast _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlMeshUpload.ensureGlMeshUpload, cast ([state, geometry, gpuSkinned] : Array<Dynamic>));
     return cast null;
   }
@@ -341,7 +346,7 @@ class SceneGl {
   }
 
   public static function ensureGlSceneProgram<T>(state:GlRenderState, key:String, compile:Dynamic):Dynamic {
-    return cast _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl__internal__GlMeshProgramValues.ensureGlSceneProgram, cast ([state, key, compile] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlMeshProgram.ensureGlSceneProgram, cast ([state, key, compile] : Array<Dynamic>));
     return cast null;
   }
 
@@ -351,7 +356,7 @@ class SceneGl {
   }
 
   public static function ensureGlSkinPalette(state:GlRenderState):GlSkinPaletteTexture {
-    return cast _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl__internal__GlSceneRuntimeValues.ensureGlSkinPalette, cast ([state] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlSceneRuntime.ensureGlSkinPalette, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
@@ -371,7 +376,7 @@ class SceneGl {
   }
 
   public static function ensureGlWireframeUpload(state:GlRenderState, geometry:MeshGeometry):GlWireframeUpload {
-    return cast _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl__internal__GlWireframeUploadValues.ensureGlWireframeUpload, cast ([state, geometry] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlWireframeUpload.ensureGlWireframeUpload, cast ([state, geometry] : Array<Dynamic>));
     return cast null;
   }
 
@@ -455,7 +460,7 @@ class SceneGl {
   }
 
   public static function getGlSceneRuntime(state:GlRenderState):GlSceneRuntime {
-    return cast _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl__internal__GlSceneRuntimeValues.getGlSceneRuntime, cast ([state] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlSceneRuntime.getGlSceneRuntime, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
@@ -494,7 +499,7 @@ class SceneGl {
     return cast null;
   }
 
-  public static final GL_MESH_LIGHT_BLOCK_GLSL:Dynamic = Facade_SceneGl_flighthq_sceneGl__internal__GlLitProgramValues.GL_MESH_LIGHT_BLOCK_GLSL;
+  public static final GL_MESH_LIGHT_BLOCK_GLSL:Dynamic = Facade_SceneGl_flighthq_sceneGl_GlLitProgram.GL_MESH_LIGHT_BLOCK_GLSL;
 
   public static final GL_PBR_BASE_COLOR_TEXTURE_UNIT:Dynamic = Facade_SceneGl_flighthq_sceneGl_GlPbrStandardBlock.GL_PBR_BASE_COLOR_TEXTURE_UNIT;
 
@@ -508,17 +513,12 @@ class SceneGl {
 
   public static final GL_PBR_OCCLUSION_TEXTURE_UNIT:Dynamic = Facade_SceneGl_flighthq_sceneGl_GlPbrStandardBlock.GL_PBR_OCCLUSION_TEXTURE_UNIT;
 
-  public static final GL_SKIN_VERTEX_DECLARATIONS_GLSL:Dynamic = Facade_SceneGl_flighthq_sceneGl__internal__GlMeshProgramValues.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
+  public static final GL_SKIN_VERTEX_DECLARATIONS_GLSL:Dynamic = Facade_SceneGl_flighthq_sceneGl_GlMeshProgram.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
 
-  public static final GL_UV_TRANSFORM_VERTEX_GLSL:Dynamic = Facade_SceneGl_flighthq_sceneGl__internal__GlMeshProgramValues.GL_UV_TRANSFORM_VERTEX_GLSL;
-
-  public static function hasGlMeshGeometryUv1(geometry:MeshGeometry):Bool {
-    return cast _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlMeshUpload.hasGlMeshGeometryUv1, cast ([geometry] : Array<Dynamic>));
-    return cast null;
-  }
+  public static final GL_UV_TRANSFORM_VERTEX_GLSL:Dynamic = Facade_SceneGl_flighthq_sceneGl_GlMeshProgram.GL_UV_TRANSFORM_VERTEX_GLSL;
 
   public static function hasGlUvTransform(texture:Null<TextureLike>):Bool {
-    return cast _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl__internal__GlMeshProgramValues.hasGlUvTransform, cast ([texture] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlMeshProgram.hasGlUvTransform, cast ([texture] : Array<Dynamic>));
     return cast null;
   }
 
@@ -537,7 +537,7 @@ class SceneGl {
 
   public static final phongGlMeshMaterialRenderer:GlMeshMaterialRenderer = Facade_SceneGl_flighthq_sceneGl_PhongGlMeshMaterialRenderer.phongGlMeshMaterialRenderer;
 
-  public static function presentGlScene(state:GlRenderState, target:GlRenderTarget, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
+  public static function presentGlScene(state:GlRenderState, target:GlRenderTarget, scene:SceneNode, camera:Camera3D, lights:SceneLightsLike):Void {
     _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_PresentGlScene.presentGlScene, cast ([state, target, scene, camera, lights] : Array<Dynamic>));
   }
 
@@ -646,7 +646,7 @@ class SceneGl {
   }
 
   public static function resolveGlLitLocations(gl:Dynamic, program:Dynamic):Dynamic {
-    return cast _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl__internal__GlLitProgramValues.resolveGlLitLocations, cast ([gl, program] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlLitProgram.resolveGlLitLocations, cast ([gl, program] : Array<Dynamic>));
     return cast null;
   }
 
@@ -662,12 +662,12 @@ class SceneGl {
 
   public static final rimGlModifierSnippet:GlModifierSnippet = Facade_SceneGl_flighthq_sceneGl_GlShadedBuiltInModifiers.rimGlModifierSnippet;
 
-  public static function setGlMeshCameraPosition(gl:Dynamic, locCameraPosition:Null<Dynamic>, camera:Camera):Void {
-    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl__internal__GlMeshProgramValues.setGlMeshCameraPosition, cast ([gl, locCameraPosition, camera] : Array<Dynamic>));
+  public static function setGlMeshCameraPosition(gl:Dynamic, locCameraPosition:Null<Dynamic>, camera:Camera3D):Void {
+    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlMeshProgram.setGlMeshCameraPosition, cast ([gl, locCameraPosition, camera] : Array<Dynamic>));
   }
 
-  public static function setGlMeshViewProjection(gl:Dynamic, locViewProjection:Null<Dynamic>, camera:Camera):Void {
-    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl__internal__GlMeshProgramValues.setGlMeshViewProjection, cast ([gl, locViewProjection, camera] : Array<Dynamic>));
+  public static function setGlMeshViewProjection(gl:Dynamic, locViewProjection:Null<Dynamic>, camera:Camera3D):Void {
+    _Runtime.callValue(Facade_SceneGl_flighthq_sceneGl_GlMeshProgram.setGlMeshViewProjection, cast ([gl, locViewProjection, camera] : Array<Dynamic>));
   }
 
   public static function setGlSceneTime(state:GlRenderState, timeSeconds:Float):Void {
@@ -678,7 +678,7 @@ class SceneGl {
 
   public static final sheenPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = Facade_SceneGl_flighthq_sceneGl_SheenPbrGlMeshMaterialRenderer.sheenPbrGlMeshMaterialRenderer;
 
-  public static final SKIN_PALETTE_TEXTURE_UNIT:Dynamic = Facade_SceneGl_flighthq_sceneGl__internal__GlMeshProgramValues.SKIN_PALETTE_TEXTURE_UNIT;
+  public static final SKIN_PALETTE_TEXTURE_UNIT:Dynamic = Facade_SceneGl_flighthq_sceneGl_GlMeshProgram.SKIN_PALETTE_TEXTURE_UNIT;
 
   public static final specularGlossinessPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = Facade_SceneGl_flighthq_sceneGl_SpecularGlossinessPbrGlMeshMaterialRenderer.specularGlossinessPbrGlMeshMaterialRenderer;
 

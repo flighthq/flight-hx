@@ -4,8 +4,6 @@ package flighthq.particles;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-import flighthq.types.ParticleEmitterConfig.ParticleEmitterShape;
 
 @:expose("flighthq.particles.ParticleEmitterConfig")
 class ParticleEmitterConfig {

@@ -4,15 +4,15 @@ package flighthq.sceneGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.PackColor.unpackColorToLinear;
-import flighthq.sceneGl.GlMatcapPrelude.GlMatcapDefineKey;
 import flighthq.sceneGl.GlMatcapPrelude.bindGlMatcapSurface;
 import flighthq.sceneGl.GlMatcapPrelude.ensureGlMatcapProgram;
 import flighthq.sceneGl.GlMeshMaterialRegistry.registerGlMeshMaterialRenderer;
-import flighthq.sceneGl._internal._GlMeshProgramValues.beginGlMeshDraw;
-import flighthq.sceneGl._internal._GlMeshProgramValues.drawGlMeshSubset;
-import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
-import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
-import flighthq.types.Camera;
+import flighthq.sceneGl.GlMeshProgram.beginGlMeshDraw;
+import flighthq.sceneGl.GlMeshProgram.drawGlMeshSubset;
+import flighthq.sceneGl.GlMeshProgram.setGlMeshViewProjection;
+import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
+import flighthq.types.Camera3D;
+import flighthq.types.GlMatcapProgram.GlMatcapDefineKey;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
@@ -26,7 +26,7 @@ import flighthq.types._internal._MatcapMaterialValues.MatcapMaterialKind;
 
 @:expose("flighthq.sceneGl.MatcapGlMeshMaterialRenderer")
 class MatcapGlMeshMaterialRenderer {
-  public static final matcapGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera) {
+  public static final matcapGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var matcap:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;

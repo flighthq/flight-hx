@@ -6,16 +6,15 @@ import flighthq._internal._Runtime;
 import flighthq.particles.Curve.particleColorCurveFromKeyframes;
 import flighthq.particles.Curve.particleCurveFromKeyframes;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
-import flighthq.particlesFormats.SpineSchema.SpineAlphaKeyframe;
-import flighthq.particlesFormats.SpineSchema.SpineParticleDocument;
-import flighthq.particlesFormats.SpineSchema.SpineTintKeyframe;
 import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleCurve.ColorKeyframe;
 import flighthq.types.ParticleCurve.CurveKeyframe;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-
-typedef SpineParsed = { var config:ParticleEmitterConfig; var document:SpineParticleDocument; var warnings:Array<String>; };
+import flighthq.types.SpineParticleSchema.SpineAlphaKeyframe;
+import flighthq.types.SpineParticleSchema.SpineParsed;
+import flighthq.types.SpineParticleSchema.SpineParticleDocument;
+import flighthq.types.SpineParticleSchema.SpineTintKeyframe;
 
 @:expose("flighthq.particlesFormats.SpineParse")
 class SpineParse {

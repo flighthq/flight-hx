@@ -3,12 +3,13 @@ package flighthq.scene;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.mesh.MeshGeometryDeformationClone.cloneMeshGeometryForDeformation;
 import flighthq.node.Node.enableNodeSignals;
 import flighthq.node.Node.getNodeSignals;
-import flighthq.node.Transform3d.getNodeLocalMatrix4;
-import flighthq.node.Transform3d.isNodeLocalMatrix4Detached;
-import flighthq.node.Transform3d.setNodeLocalMatrix4;
-import flighthq.node.Transform3d.setNodeTransform3D;
+import flighthq.node.NodeTransform3d.getNodeLocalMatrix4;
+import flighthq.node.NodeTransform3d.isNodeLocalMatrix4Detached;
+import flighthq.node.NodeTransform3d.setNodeLocalMatrix4;
+import flighthq.node.NodeTransform3d.setNodeTransform3D;
 import flighthq.scene.SceneNode.createSceneNode;
 import flighthq.scene.SceneNode.getSceneNodeRuntime;
 import flighthq.types.Entity.Kind;
@@ -30,13 +31,19 @@ import flighthq.types._internal._MeshValues.MeshKind;
 @:expose("flighthq.scene.Mesh")
 class Mesh {
   public static function cloneMesh(source:flighthq.types.Mesh):flighthq.types.Mesh {
+    var hasDeformation:Dynamic = cast _Runtime.UNDEFINED;
+    var geometry:Dynamic = cast _Runtime.UNDEFINED;
     var clone:Dynamic = cast _Runtime.UNDEFINED;
-    clone = _Runtime.callValue(createMesh, cast ([_Runtime.field(source, 'geometry'), _Runtime.slice(_Runtime.field(source, 'materials'), 0, null), _Runtime.field(source, 'kind'), { enabled: _Runtime.field(source, 'enabled'), name: _Runtime.field(source, 'name') }] : Array<Dynamic>));
+    hasDeformation = _Runtime.orValue(!_Runtime.looseEquals(_Runtime.field(source, 'skin'), null), function():Dynamic return cast !_Runtime.looseEquals(_Runtime.field(source, 'morph'), null));
+    geometry = _Runtime.select(hasDeformation, function():Dynamic return cast _Runtime.callValue(cloneMeshGeometryForDeformation, cast ([_Runtime.field(source, 'geometry')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(source, 'geometry'));
+    clone = _Runtime.callValue(createMesh, cast ([geometry, _Runtime.slice(_Runtime.field(source, 'materials'), 0, null), _Runtime.field(source, 'kind'), { enabled: _Runtime.field(source, 'enabled'), name: _Runtime.field(source, 'name') }] : Array<Dynamic>));
     _Runtime.setField(clone, 'alpha', _Runtime.field(source, 'alpha'));
     _Runtime.callValue(setNodeTransform3D, cast ([clone, source] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.callValue(isNodeLocalMatrix4Detached, cast ([source] : Array<Dynamic>)))) { _Runtime.callValue(setNodeLocalMatrix4, cast ([clone, _Runtime.callValue(getNodeLocalMatrix4, cast ([source] : Array<Dynamic>))] : Array<Dynamic>)); }
     if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(source, 'skin'), null))) { _Runtime.setField(clone, 'skin', _Runtime.field(source, 'skin')); }
-    if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(source, 'morph'), null))) { _Runtime.setField(clone, 'morph', _Runtime.field(source, 'morph')); }
+    if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(source, 'morph'), null))) {
+      _Runtime.setField(clone, 'morph', { targets: _Runtime.field(_Runtime.field(source, 'morph'), 'targets'), weights: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [_Runtime.field(_Runtime.field(source, 'morph'), 'weights')]) });
+    }
     return cast clone;
     return cast null;
   }

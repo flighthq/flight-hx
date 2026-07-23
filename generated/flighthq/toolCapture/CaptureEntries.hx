@@ -7,7 +7,7 @@ import flighthq.toolCapture.FunctionalScenes.discoverFunctionalScenes;
 
 typedef Tool = String;
 
-typedef Entry = { var name:String; var renderers:Array<String>; @:optional var route:Dynamic; };
+typedef Entry = { var name:String; var renderers:Array<String>; @:optional var routes:Dynamic; @:optional var route:Dynamic; };
 
 @:expose("flighthq.toolCapture.CaptureEntries")
 class CaptureEntries {
@@ -30,6 +30,16 @@ class CaptureEntries {
       customRenderers = _Runtime.callProperty((cast RENDERERS : Array<String>), 'filter', cast ([function(r:Dynamic) return _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'existsSync'] : Array<Dynamic>)), cast ([_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([testDir, 'src/render.' + Std.string(r) + '.ts'] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
       return cast { name: name, renderers: customRenderers };
     }] : Array<Dynamic>)), 'filter', cast ([function(e:Dynamic) return _Runtime.compare(_Runtime.field(_Runtime.field(e, 'renderers'), 'length'), 0.0, '>')] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function getCaptureEntryRoute(entry:Entry, renderer:String, subject:String):String {
+    var prefix:Dynamic = cast _Runtime.UNDEFINED;
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.optionalIndex(_Runtime.field(entry, 'routes'), renderer), _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast _Runtime.getIndex(_Runtime.field(entry, 'routes'), renderer); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(entry, 'route'), _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast _Runtime.callProperty(entry, 'route', cast ([renderer] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.strictEquals(subject, 'reference'))) { return cast ''; }
+    prefix = _Runtime.select(_Runtime.strictEquals(subject, 'examples'), function():Dynamic return cast 'examples', function():Dynamic return cast 'tests');
+    return cast '' + Std.string(prefix) + '/' + Std.string(_Runtime.field(entry, 'name')) + '/' + Std.string(_Runtime.callValue(routeSegment, cast ([renderer] : Array<Dynamic>))) + '/';
     return cast null;
   }
 

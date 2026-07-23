@@ -5,17 +5,17 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.hasImageResourcePixels;
 import flighthq.node.Node.getNodeRuntime;
-import flighthq.node.Transform3d.getNodeWorldMatrix4;
+import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.render.SceneRender.prepareSceneRender;
 import flighthq.renderWgpu.WgpuDraw.bindWgpuImageResourceTexture;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.Matrix4;
 import flighthq.types.Node.NodeAny;
-import flighthq.types.ParticleEmitter.ParticleEmitterData;
+import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
 import flighthq.types.ParticleEmitter3D;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-import flighthq.types.SceneLights;
+import flighthq.types.SceneLights.SceneLightsLike;
 import flighthq.types.SceneNode;
 import flighthq.types.Types.ParticleEmitter3DKind;
 import flighthq.types.WgpuRenderState;
@@ -292,7 +292,7 @@ class WgpuParticleEmitter3D {
     _Runtime.callProperty(WgpuParticleEmitter3D.dummyTextureCache__wgpuParticleEmitter3D, 'delete', cast ([state] : Array<Dynamic>));
   }
 
-  public static function drawWgpuSceneParticleEmitters(state:WgpuRenderState, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
+  public static function drawWgpuSceneParticleEmitter2Ds(state:WgpuRenderState, scene:SceneNode, camera:Camera3D, lights:SceneLightsLike):Void {
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var list:Dynamic = cast _Runtime.UNDEFINED;
     var resources:Dynamic = cast _Runtime.UNDEFINED;

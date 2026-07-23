@@ -3,8 +3,7 @@ package flighthq.xml;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-
-typedef XmlElement = { var attributes:Dynamic; var children:Array<XmlElement>; var name:String; var text:String; };
+import flighthq.types.XmlElement;
 
 typedef ParseState__xmlParse = { var pos:Float; };
 

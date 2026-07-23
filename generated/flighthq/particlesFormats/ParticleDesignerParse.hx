@@ -4,14 +4,12 @@ package flighthq.particlesFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
-import flighthq.particlesFormats.ParticleDesignerSchema.ParticleDesignerDocument;
-import flighthq.particlesFormats.ParticleDesignerSchema.ParticleDesignerRawDict;
+import flighthq.types.ParticleDesignerSchema.ParticleDesignerDocument;
+import flighthq.types.ParticleDesignerSchema.ParticleDesignerParseOptions;
+import flighthq.types.ParticleDesignerSchema.ParticleDesignerParsed;
+import flighthq.types.ParticleDesignerSchema.ParticleDesignerRawDict;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-
-typedef ParticleDesignerParseOptions = { @:optional var textureSize:Float; };
-
-typedef ParticleDesignerParsed = { var config:ParticleEmitterConfig; var document:ParticleDesignerDocument; var warnings:Array<String>; };
 
 @:expose("flighthq.particlesFormats.ParticleDesignerParse")
 class ParticleDesignerParse {

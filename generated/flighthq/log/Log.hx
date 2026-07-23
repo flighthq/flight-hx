@@ -5,6 +5,8 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
+import flighthq.types.BufferedLogSink;
+import flighthq.types.FileLogSink;
 import flighthq.types.Log.LogContext;
 import flighthq.types.Log.LogData;
 import flighthq.types.Log.LogDataProvider;
@@ -16,18 +18,12 @@ import flighthq.types.Log.LogSpan;
 import flighthq.types.Log.LogTimer;
 import flighthq.types.Log.LogTransportBackend;
 import flighthq.types.LogSignals;
-
-typedef BufferedLogSink = { var sink:LogSink; };
+import flighthq.types.MemoryLogSink;
+import flighthq.types.RateLimitedLogSink;
 
 typedef BufferedLogSinkState__log = { var buf:Array<LogEntry>; var flush:Dynamic; var timer:Null<Dynamic>; };
 
-typedef FileLogSink = { var sink:LogSink; };
-
-typedef MemoryLogSink = { var sink:LogSink; };
-
 typedef MemoryLogSinkState__log = { var buf:Array<LogEntry>; var head:Float; };
-
-typedef RateLimitedLogSink = { var sink:LogSink; };
 
 @:expose("flighthq.log.Log")
 class Log {

@@ -3,15 +3,14 @@ package flighthq.spritesheetFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.spritesheetFormats.AsepriteSchema.AsepriteArrayDocument;
-import flighthq.spritesheetFormats.AsepriteSchema.AsepriteArrayFrame;
-import flighthq.spritesheetFormats.AsepriteSchema.AsepriteBaseFrame;
-import flighthq.spritesheetFormats.AsepriteSchema.AsepriteDocument;
-import flighthq.spritesheetFormats.AsepriteSchema.AsepriteHashDocument;
-import flighthq.spritesheetFormats.AsepriteSchema.AsepriteMeta;
+import flighthq.types.AsepriteSchema.AsepriteArrayDocument;
+import flighthq.types.AsepriteSchema.AsepriteArrayFrame;
+import flighthq.types.AsepriteSchema.AsepriteBaseFrame;
+import flighthq.types.AsepriteSchema.AsepriteDocument;
+import flighthq.types.AsepriteSchema.AsepriteHashDocument;
+import flighthq.types.AsepriteSchema.AsepriteMeta;
+import flighthq.types.AsepriteSchema.AsepriteSerializeOptions;
 import flighthq.types.SpritesheetData;
-
-typedef AsepriteSerializeOptions = { @:optional var variant:String; };
 
 @:expose("flighthq.spritesheetFormats.AsepriteSerialize")
 class AsepriteSerialize {

@@ -5,7 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.displayobjectCanvas.CanvasBitmap.defaultCanvasBitmapRenderer;
 import flighthq.displayobjectCanvas.CanvasDisplayObject.defaultCanvasDisplayObjectRenderer;
-import flighthq.displayobjectCanvas.CanvasParticleEmitter.defaultCanvasParticleEmitterRenderer;
+import flighthq.displayobjectCanvas.CanvasParticleEmitter2D.defaultCanvasParticleEmitter2DRenderer;
 import flighthq.displayobjectCanvas.CanvasQuadBatch.defaultCanvasQuadBatchRenderer;
 import flighthq.displayobjectCanvas.CanvasRichText.defaultCanvasRichTextRenderer;
 import flighthq.displayobjectCanvas.CanvasScale9Shape.defaultCanvasScale9ShapeRenderer;
@@ -20,7 +20,7 @@ import flighthq.types.Entity.Kind;
 import flighthq.types.Renderer;
 import flighthq.types.Types.BitmapKind;
 import flighthq.types.Types.DisplayObjectKind;
-import flighthq.types.Types.ParticleEmitterKind;
+import flighthq.types.Types.ParticleEmitter2DKind;
 import flighthq.types.Types.QuadBatchKind;
 import flighthq.types.Types.RichTextKind;
 import flighthq.types.Types.Scale9ShapeKind;
@@ -31,7 +31,7 @@ import flighthq.types.Types.TilemapKind;
 import flighthq.types.Types.VideoKind;
 import flighthq.types._internal._BitmapValues.BitmapKind;
 import flighthq.types._internal._DisplayObjectValues.DisplayObjectKind;
-import flighthq.types._internal._ParticleEmitterValues.ParticleEmitterKind;
+import flighthq.types._internal._ParticleEmitter2DValues.ParticleEmitter2DKind;
 import flighthq.types._internal._QuadBatchValues.QuadBatchKind;
 import flighthq.types._internal._RichTextValues.RichTextKind;
 import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
@@ -43,7 +43,7 @@ import flighthq.types._internal._VideoValues.VideoKind;
 
 @:expose("flighthq.displayobjectCanvas.CanvasRegistration")
 class CanvasRegistration {
-  public static final canvasDisplayObjectRendererEntries:Array<Array<Dynamic>> = cast ([cast ([BitmapKind, defaultCanvasBitmapRenderer] : Array<Dynamic>), cast ([DisplayObjectKind, defaultCanvasDisplayObjectRenderer] : Array<Dynamic>), cast ([ParticleEmitterKind, defaultCanvasParticleEmitterRenderer] : Array<Dynamic>), cast ([QuadBatchKind, defaultCanvasQuadBatchRenderer] : Array<Dynamic>), cast ([RichTextKind, defaultCanvasRichTextRenderer] : Array<Dynamic>), cast ([Scale9ShapeKind, defaultCanvasScale9ShapeRenderer] : Array<Dynamic>), cast ([ShapeKind, defaultCanvasShapeRenderer] : Array<Dynamic>), cast ([SpriteKind, defaultCanvasSpriteRenderer] : Array<Dynamic>), cast ([TextLabelKind, defaultCanvasTextLabelRenderer] : Array<Dynamic>), cast ([TilemapKind, defaultCanvasTilemapRenderer] : Array<Dynamic>), cast ([VideoKind, defaultCanvasVideoRenderer] : Array<Dynamic>)] : Array<Dynamic>);
+  public static final canvasDisplayObjectRendererEntries:Array<Array<Dynamic>> = cast ([cast ([BitmapKind, defaultCanvasBitmapRenderer] : Array<Dynamic>), cast ([DisplayObjectKind, defaultCanvasDisplayObjectRenderer] : Array<Dynamic>), cast ([ParticleEmitter2DKind, defaultCanvasParticleEmitter2DRenderer] : Array<Dynamic>), cast ([QuadBatchKind, defaultCanvasQuadBatchRenderer] : Array<Dynamic>), cast ([RichTextKind, defaultCanvasRichTextRenderer] : Array<Dynamic>), cast ([Scale9ShapeKind, defaultCanvasScale9ShapeRenderer] : Array<Dynamic>), cast ([ShapeKind, defaultCanvasShapeRenderer] : Array<Dynamic>), cast ([SpriteKind, defaultCanvasSpriteRenderer] : Array<Dynamic>), cast ([TextLabelKind, defaultCanvasTextLabelRenderer] : Array<Dynamic>), cast ([TilemapKind, defaultCanvasTilemapRenderer] : Array<Dynamic>), cast ([VideoKind, defaultCanvasVideoRenderer] : Array<Dynamic>)] : Array<Dynamic>);
 
   public static function registerCanvasDisplayObjectRenderers(state:Dynamic):Void {
     for (__iteration0 in _Runtime.iterable(canvasDisplayObjectRendererEntries)) {

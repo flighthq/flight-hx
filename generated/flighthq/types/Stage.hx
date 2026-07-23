@@ -3,9 +3,8 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.DisplayObject.DisplayObjectTraits;
 import flighthq.types.Entity.EntityRuntime;
 
-typedef Stage = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var align:ViewportAlign; var root:Null<Node<DisplayObjectTraits>>; var scaleMode:ViewportScaleMode; var color:Null<Float>; var stageHeight:Float; var stageWidth:Float; };
+typedef Stage = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var align:ViewportAlign; var color:Null<Float>; var root:DisplayObject; var scaleMode:ViewportScaleMode; var stageHeight:Float; var stageWidth:Float; };
 
 typedef StageRuntime = { var binding:Null<Dynamic>; var stageSignals:Null<StageSignals>; };

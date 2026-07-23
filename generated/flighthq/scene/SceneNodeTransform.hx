@@ -4,7 +4,7 @@ package flighthq.scene;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix4.createMatrix4;
-import flighthq.node.Transform3d.setNodeLocalMatrix4;
+import flighthq.node.NodeTransform3d.setNodeLocalMatrix4;
 import flighthq.types.SceneNode;
 import flighthq.types.Vector3.Vector3Like;
 

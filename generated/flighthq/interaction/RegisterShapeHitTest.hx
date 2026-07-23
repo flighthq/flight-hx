@@ -5,7 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix.inverseMatrixTransformPointXY;
 import flighthq.interaction.HitTests.registerHitTestPrecise;
-import flighthq.node.Transform2d.getNodeWorldMatrix;
+import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.path.ContainsPathPoint.containsPathPoint;
 import flighthq.shape.ShapeFill.getShapeFillRegions;
 import flighthq.types.DisplayObject;

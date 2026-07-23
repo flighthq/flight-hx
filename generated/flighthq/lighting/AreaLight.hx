@@ -9,11 +9,10 @@ import flighthq.geometry.Vector3.createVector3;
 import flighthq.geometry.Vector3.normalizeVector3;
 import flighthq.geometry.Vector3.setVector3;
 import flighthq.types.AreaLight;
+import flighthq.types.AreaLightOptions;
 import flighthq.types.Types.AreaLightKind;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._AreaLightValues.AreaLightKind;
-
-typedef AreaLightOptions = { @:optional var castsShadow:Bool; @:optional var color:Float; @:optional var direction:Vector3Like; @:optional var intensity:Float; @:optional var normalBias:Float; @:optional var pcfRadius:Float; @:optional var position:Vector3Like; @:optional var range:Float; @:optional var right:Vector3Like; @:optional var shadowBias:Float; @:optional var up:Vector3Like; };
 
 @:expose("flighthq.lighting.AreaLight")
 class AreaLight {

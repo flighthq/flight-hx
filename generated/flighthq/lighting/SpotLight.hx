@@ -8,13 +8,10 @@ import flighthq.geometry.Vector3.cloneVector3;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.geometry.Vector3.setVector3;
 import flighthq.types.SpotLight;
+import flighthq.types.SpotLightConeAngles;
+import flighthq.types.SpotLightOptions;
 import flighthq.types.Types.SpotLightKind;
-import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._SpotLightValues.SpotLightKind;
-
-typedef SpotLightConeAngles = { var innerDegrees:Float; var outerDegrees:Float; };
-
-typedef SpotLightOptions = { @:optional var castsShadow:Bool; @:optional var color:Float; @:optional var direction:Vector3Like; @:optional var innerConeDegrees:Float; @:optional var intensity:Float; @:optional var normalBias:Float; @:optional var outerConeDegrees:Float; @:optional var pcfRadius:Float; @:optional var position:Vector3Like; @:optional var range:Float; @:optional var shadowBias:Float; };
 
 @:expose("flighthq.lighting.SpotLight")
 class SpotLight {

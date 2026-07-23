@@ -300,6 +300,11 @@ class Materials {
     return cast null;
   }
 
+  public static function getMaterialOfKind<T>(material:Null<Material>, kind:Kind):Null<Dynamic> {
+    return cast _Runtime.callValue(Facade_Materials_flighthq_materials_Material.getMaterialOfKind, cast ([material, kind] : Array<Dynamic>));
+    return cast null;
+  }
+
   public static function getPbrMetallicFromPhongSpecular(specular:Float, diffuse:Float):Float {
     return cast _Runtime.callValue(Facade_Materials_flighthq_materials_PhongToPbr.getPbrMetallicFromPhongSpecular, cast ([specular, diffuse] : Array<Dynamic>));
     return cast null;

@@ -3,12 +3,11 @@ package flighthq.particlesFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.particlesFormats.SerializeResult.ParticleSerializeResult;
-import flighthq.particlesFormats.StarlingPexSchema.StarlingPexColor;
-import flighthq.particlesFormats.StarlingPexSchema.StarlingPexDocument;
 import flighthq.types.ParticleEmitterConfig;
-
-typedef StarlingPexSerializeOptions = { @:optional var textureSize:Float; };
+import flighthq.types.ParticleSerializeResult;
+import flighthq.types.StarlingPexSchema.StarlingPexColor;
+import flighthq.types.StarlingPexSchema.StarlingPexDocument;
+import flighthq.types.StarlingPexSchema.StarlingPexSerializeOptions;
 
 @:expose("flighthq.particlesFormats.StarlingPexSerialize")
 class StarlingPexSerialize {

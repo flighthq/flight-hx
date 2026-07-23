@@ -3,8 +3,8 @@ package flighthq.hostCapacitor;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorApi;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorDeviceInfo;
+import flighthq.types.CapacitorApi;
+import flighthq.types.CapacitorApi.CapacitorDeviceInfo;
 import flighthq.types.Device.DeviceBackend;
 import flighthq.types.Device.DeviceInfo;
 import flighthq.types.Device.SafeAreaInsets;

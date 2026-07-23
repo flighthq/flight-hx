@@ -14,11 +14,12 @@ import flighthq.geometry.Matrix4.multiplyMatrix4;
 import flighthq.geometry.Matrix4.setOrthographicMatrix4;
 import flighthq.geometry.Matrix4.setPerspectiveMatrix4;
 import flighthq.node.Node.getNodeRuntime;
-import flighthq.node.Transform3d.getNodeWorldMatrix4;
+import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
+import flighthq.node.Revision.invalidateNodeLocalTransform;
 import flighthq.skeleton3d.Skeleton3d.computeSkeleton3DJointMatrices;
 import flighthq.types.Aabb;
 import flighthq.types.AmbientLight;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.DirectionalLight;
 import flighthq.types.Frustum;
 import flighthq.types.HasAppearance;
@@ -30,7 +31,7 @@ import flighthq.types.Node.NodeAny;
 import flighthq.types.PointLight;
 import flighthq.types.RenderState;
 import flighthq.types.SceneLightBlock;
-import flighthq.types.SceneLights;
+import flighthq.types.SceneLights.SceneLightsLike;
 import flighthq.types.SceneNode;
 import flighthq.types.SceneRenderList;
 import flighthq.types.SpotLight;
@@ -61,7 +62,7 @@ typedef PreparedScene__sceneRender = { var frustum:Frustum; var list:SceneRender
 
 @:expose("flighthq.render.SceneRender")
 class SceneRender {
-  public static function packSceneLightBlock(out:SceneLightBlock, lights:SceneLights):Void {
+  public static function packSceneLightBlock(out:SceneLightBlock, lights:SceneLightsLike):Void {
     var directionalCount:Dynamic = cast _Runtime.UNDEFINED;
     var directional:Dynamic = cast _Runtime.UNDEFINED;
     var ambientCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -133,16 +134,18 @@ class SceneRender {
     _Runtime.incrementField(out, 'version', 1, true);
   }
 
-  public static function prepareSceneRender(state:RenderState, scene:SceneNode, camera:Camera, lights:SceneLights):SceneRenderList {
+  public static function prepareSceneRender(state:RenderState, scene:SceneNode, camera:Camera3D, lights:SceneLightsLike):SceneRenderList {
     var prepared:Dynamic = cast _Runtime.UNDEFINED;
     var list:Dynamic = cast _Runtime.UNDEFINED;
+    var refreshTransforms:Dynamic = cast _Runtime.UNDEFINED;
     prepared = _Runtime.callValue(SceneRender.ensurePreparedScene__sceneRender, cast ([state] : Array<Dynamic>));
     list = _Runtime.field(prepared, 'list');
     _Runtime.callValue(SceneRender.setSceneViewProjectionMatrix4__sceneRender, cast ([_Runtime.field(prepared, 'viewProjection'), camera, SceneRender.DEFAULT_VIEWPORT_ASPECT__sceneRender] : Array<Dynamic>));
     _Runtime.callValue(setFrustumFromMatrix4, cast ([_Runtime.field(prepared, 'frustum'), _Runtime.field(prepared, 'viewProjection')] : Array<Dynamic>));
     _Runtime.callValue(packSceneLightBlock, cast ([_Runtime.field(list, 'lights'), lights] : Array<Dynamic>));
     _Runtime.setLength(_Runtime.field(prepared, 'meshes'), 0.0);
-    _Runtime.callValue(SceneRender.collectVisibleMeshes__sceneRender, cast ([scene, _Runtime.field(prepared, 'frustum'), _Runtime.field(prepared, 'worldBounds'), _Runtime.field(prepared, 'meshes')] : Array<Dynamic>));
+    refreshTransforms = _Runtime.strictEquals(_Runtime.field(state, 'sceneGraphSyncPolicy'), 'refreshDerivedState');
+    _Runtime.callValue(SceneRender.collectVisibleMeshes__sceneRender, cast ([scene, _Runtime.field(prepared, 'frustum'), _Runtime.field(prepared, 'worldBounds'), _Runtime.field(prepared, 'meshes'), refreshTransforms] : Array<Dynamic>));
     _Runtime.setField(list, 'meshCount', _Runtime.field(_Runtime.field(prepared, 'meshes'), 'length'));
     {
       var m:Dynamic = 0.0;
@@ -156,12 +159,13 @@ class SceneRender {
     return cast null;
   }
 
-  public static function collectVisibleMeshes__sceneRender(node:NodeAny, frustum:Frustum, worldBounds:Aabb, out:Array<Mesh>):Void {
+  public static function collectVisibleMeshes__sceneRender(node:NodeAny, frustum:Frustum, worldBounds:Aabb, out:Array<Mesh>, refreshTransforms:Bool):Void {
     var mesh:Dynamic = cast _Runtime.UNDEFINED;
     var children:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(node, 'enabled')), function():Dynamic return cast !_Runtime.truthy(_Runtime.field((cast (cast node : Dynamic) : HasAppearance), 'visible'))))) {
       return;
     }
+    if (_Runtime.truthy(refreshTransforms)) { _Runtime.callValue(invalidateNodeLocalTransform, cast ([(cast node : NodeAny)] : Array<Dynamic>)); }
     mesh = (cast (cast node : Dynamic) : Mesh);
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.looseEquals(_Runtime.field(mesh, 'geometry'), null), function():Dynamic return cast _Runtime.callValue(SceneRender.isMeshVisible__sceneRender, cast ([mesh, frustum, worldBounds] : Array<Dynamic>))))) {
       _Runtime.callProperty(out, 'push', cast ([mesh] : Array<Dynamic>));
@@ -171,7 +175,7 @@ class SceneRender {
       {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
-          _Runtime.callValue(SceneRender.collectVisibleMeshes__sceneRender, cast ([_Runtime.getIndex(children, i), frustum, worldBounds, out] : Array<Dynamic>));
+          _Runtime.callValue(SceneRender.collectVisibleMeshes__sceneRender, cast ([_Runtime.getIndex(children, i), frustum, worldBounds, out, refreshTransforms] : Array<Dynamic>));
           i++;
         }
       }
@@ -290,7 +294,7 @@ class SceneRender {
     _Runtime.setIndex(data, (offset + 13.0), _Runtime.field(spot, 'outerConeCos'));
   }
 
-  public static function setSceneViewProjectionMatrix4__sceneRender(out:Matrix4, camera:Camera, aspect:Float):Void {
+  public static function setSceneViewProjectionMatrix4__sceneRender(out:Matrix4, camera:Camera3D, aspect:Float):Void {
     var projection:Dynamic = cast _Runtime.UNDEFINED;
     projection = _Runtime.field(camera, 'projection');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective'))) {

@@ -7,32 +7,32 @@ import flighthq.geometry.Matrix3.createMatrix3;
 import flighthq.geometry.Matrix3.setMatrix3NormalFromMatrix4;
 import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.mesh.MeshGeometry.hasMeshGeometrySkin;
-import flighthq.node.Transform3d.getNodeWorldMatrix4;
+import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.render.SceneRender.prepareSceneRender;
 import flighthq.renderGl.GlRenderState.invalidateGlRenderStateCache;
 import flighthq.renderGl.GlRenderTarget.declareGlRenderTargetColorSpace;
 import flighthq.scene.SceneNodeAppearance.getSceneNodeWorldAlpha;
 import flighthq.scene.UpdateMeshMorph.updateMeshMorph;
 import flighthq.sceneGl.GlMeshMaterialRegistry.resolveGlMeshMaterialRenderer;
-import flighthq.sceneGl.GlParticleEmitter3D.drawGlSceneParticleEmitters;
-import flighthq.sceneGl.GlSceneRuntime.GlSceneDrawEntry;
-import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
-import flighthq.types.Camera;
+import flighthq.sceneGl.GlParticleEmitter3D.drawGlSceneParticleEmitter2Ds;
+import flighthq.sceneGl.GlSceneRuntime.getGlSceneRuntime;
+import flighthq.types.Camera3D;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlSceneRuntime.GlSceneDrawEntry;
 import flighthq.types.Material;
 import flighthq.types.Matrix3;
 import flighthq.types.Matrix4;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry.MeshSubset;
-import flighthq.types.SceneLights;
+import flighthq.types.SceneLights.SceneLightsLike;
 import flighthq.types.SceneNode;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.SurfaceMaterial;
 import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
-typedef DrawEntry__drawGlScene = { var alpha:Float; var clipW:Float; var material:Material; var mesh:Mesh; var normalMatrix:Matrix4; var renderer:GlMeshMaterialRenderer; var subset:MeshSubset; var worldMatrix:Matrix4; };
+typedef DrawEntry__drawGlScene = { var alpha:Float; var clipW:Float; var material:Material; var mesh:Mesh; var renderer:GlMeshMaterialRenderer; var subset:MeshSubset; var worldMatrix:Matrix4; };
 
 @:expose("flighthq.sceneGl.DrawGlScene")
 class DrawGlScene {
@@ -41,7 +41,7 @@ class DrawGlScene {
     return cast null;
   }
 
-  public static function drawGlScene(state:GlRenderState, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
+  public static function drawGlScene(state:GlRenderState, scene:SceneNode, camera:Camera3D, lights:SceneLightsLike):Void {
     var list:Dynamic = cast _Runtime.UNDEFINED;
     var lightBlock:Dynamic = cast _Runtime.UNDEFINED;
     var viewProjection:Dynamic = cast _Runtime.UNDEFINED;
@@ -58,8 +58,8 @@ class DrawGlScene {
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(declareGlRenderTargetColorSpace, cast ([state, 'linear'] : Array<Dynamic>))))) { _Runtime.callOptionalProperty(runtime, 'colorSpaceGuard', cast ([] : Array<Dynamic>)); }
     opaqueDrawList = _Runtime.field(runtime, 'opaqueDrawList');
     blendedDrawList = _Runtime.field(runtime, 'blendedDrawList');
-    _Runtime.setLength(opaqueDrawList, 0.0);
-    _Runtime.setLength(blendedDrawList, 0.0);
+    _Runtime.callValue(DrawGlScene.recycleDrawEntries__drawGlScene, cast ([opaqueDrawList, _Runtime.field(runtime, 'opaquePool')] : Array<Dynamic>));
+    _Runtime.callValue(DrawGlScene.recycleDrawEntries__drawGlScene, cast ([blendedDrawList, _Runtime.field(runtime, 'blendedPool')] : Array<Dynamic>));
     {
       var m:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(m, _Runtime.field(list, 'meshCount'), '<'))) {
@@ -88,12 +88,11 @@ class DrawGlScene {
             if (_Runtime.truthy(_Runtime.strictEquals(renderer, null))) { s++; continue; }
             var resolvedMaterial:Dynamic = _Runtime.coalesce(material, function():Dynamic return cast DrawGlScene.DEFAULT_MATERIAL__drawGlScene);
             var isBlended:Dynamic = _Runtime.orValue(_Runtime.callValue(DrawGlScene.isBlendedMaterial__drawGlScene, cast ([resolvedMaterial] : Array<Dynamic>)), function():Dynamic return cast _Runtime.compare(objectAlpha, 1.0, '<'));
-            var entry:Dynamic = _Runtime.select(isBlended, function():Dynamic return cast _Runtime.callValue(DrawGlScene.acquireBlendedEntry__drawGlScene, cast ([_Runtime.field(runtime, 'blendedPool')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(DrawGlScene.acquireOpaqueEntry__drawGlScene, cast ([_Runtime.field(runtime, 'opaquePool')] : Array<Dynamic>)));
+            var entry:Dynamic = _Runtime.callValue(DrawGlScene.acquireDrawEntry__drawGlScene, cast ([_Runtime.select(isBlended, function():Dynamic return cast _Runtime.field(runtime, 'blendedPool'), function():Dynamic return cast _Runtime.field(runtime, 'opaquePool'))] : Array<Dynamic>));
             _Runtime.setField(entry, 'alpha', objectAlpha);
             _Runtime.setField(entry, 'clipW', clipW);
             _Runtime.setField(entry, 'mesh', mesh);
             _Runtime.setField(entry, 'material', resolvedMaterial);
-            _Runtime.setField(entry, 'normalMatrix', worldMatrix);
             _Runtime.setField(entry, 'renderer', renderer);
             _Runtime.setField(entry, 'subset', _Runtime.getIndex(subsets, s));
             _Runtime.setField(entry, 'worldMatrix', worldMatrix);
@@ -169,7 +168,7 @@ class DrawGlScene {
       }
       _Runtime.callProperty(gl, 'disable', cast ([_Runtime.field(gl, 'BLEND')] : Array<Dynamic>));
     }
-    _Runtime.callValue(drawGlSceneParticleEmitters, cast ([state, scene, camera, lights] : Array<Dynamic>));
+    _Runtime.callValue(drawGlSceneParticleEmitter2Ds, cast ([state, scene, camera, lights] : Array<Dynamic>));
     _Runtime.callValue(invalidateGlRenderStateCache, cast ([state] : Array<Dynamic>));
   }
 
@@ -190,20 +189,18 @@ class DrawGlScene {
     return cast null;
   }
 
-  public static function acquireOpaqueEntry__drawGlScene(pool:Array<GlSceneDrawEntry>):GlSceneDrawEntry {
+  public static function acquireDrawEntry__drawGlScene(pool:Array<GlSceneDrawEntry>):GlSceneDrawEntry {
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(pool, 'length'), 0.0, '>'))) { return cast _Runtime.callProperty(pool, 'pop', cast ([] : Array<Dynamic>)); }
     return cast _Runtime.callValue(DrawGlScene.createDrawEntry__drawGlScene, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireBlendedEntry__drawGlScene(pool:Array<GlSceneDrawEntry>):GlSceneDrawEntry {
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(pool, 'length'), 0.0, '>'))) { return cast _Runtime.callProperty(pool, 'pop', cast ([] : Array<Dynamic>)); }
-    return cast _Runtime.callValue(DrawGlScene.createDrawEntry__drawGlScene, cast ([] : Array<Dynamic>));
-    return cast null;
+  public static function recycleDrawEntries__drawGlScene(entries:Array<GlSceneDrawEntry>, pool:Array<GlSceneDrawEntry>):Void {
+    while (_Runtime.truthy(_Runtime.compare(_Runtime.field(entries, 'length'), 0.0, '>'))) { _Runtime.callProperty(pool, 'push', cast ([_Runtime.callProperty(entries, 'pop', cast ([] : Array<Dynamic>))] : Array<Dynamic>)); }
   }
 
   public static function createDrawEntry__drawGlScene():GlSceneDrawEntry {
-    return cast { alpha: 1.0, clipW: 0.0, material: DrawGlScene.DEFAULT_MATERIAL__drawGlScene, mesh: null, normalMatrix: _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)), renderer: null, subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) };
+    return cast { alpha: 1.0, clipW: 0.0, material: DrawGlScene.DEFAULT_MATERIAL__drawGlScene, mesh: null, renderer: null, subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 

@@ -6,17 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetAnimationData;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetData;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetFrameData;
-import flighthq.spritesheetFormats.TexturePackerSchema.TexturePackerDocument;
-import flighthq.spritesheetFormats.TexturePackerSchema.TexturePackerFrameTag;
-import flighthq.spritesheetFormats.TexturePackerSchema.TexturePackerMeta;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.textureatlasFormats.TextureAtlasPackerParse.parseTextureAtlasPackerDocument;
 import flighthq.types.SpritesheetAnimationData;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
 import flighthq.types.TextureAtlasRegion;
-
-typedef TexturePackerParsed = { var data:SpritesheetData; var document:TexturePackerDocument; };
+import flighthq.types.TexturePackerSchema.TexturePackerDocument;
+import flighthq.types.TexturePackerSchema.TexturePackerFrameTag;
+import flighthq.types.TexturePackerSchema.TexturePackerMeta;
+import flighthq.types.TexturePackerSchema.TexturePackerParsed;
 
 @:expose("flighthq.spritesheetFormats.TexturePackerParse")
 class TexturePackerParse {

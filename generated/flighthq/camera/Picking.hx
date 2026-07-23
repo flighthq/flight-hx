@@ -3,19 +3,19 @@ package flighthq.camera;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.camera.Camera.getCameraViewProjectionMatrix4;
+import flighthq.camera.Camera.getCamera3DViewProjectionMatrix4;
 import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.geometry.Matrix4.inverseMatrix4;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.geometry.Vector3.normalizeVector3;
 import flighthq.geometry.Vector3.subtractVector3;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.Ray3D.Ray3DLike;
 import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.camera.Picking")
 class Picking {
-  public static function getCameraScreenToWorldRay(out:Ray3DLike, camera:Camera, ndcX:Float, ndcY:Float, aspect:Float):Bool {
+  public static function getCamera3DScreenToWorldRay(out:Ray3DLike, camera:Camera3D, ndcX:Float, ndcY:Float, aspect:Float):Bool {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var nx:Dynamic = cast _Runtime.UNDEFINED;
     var ny:Dynamic = cast _Runtime.UNDEFINED;
@@ -27,7 +27,7 @@ class Picking {
     var farY:Dynamic = cast _Runtime.UNDEFINED;
     var farZ:Dynamic = cast _Runtime.UNDEFINED;
     var farW:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(getCameraViewProjectionMatrix4, cast ([Picking.__scratchViewProjection__picking, camera, aspect] : Array<Dynamic>));
+    _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([Picking.__scratchViewProjection__picking, camera, aspect] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(inverseMatrix4, cast ([Picking.__scratchInverseVP__picking, Picking.__scratchViewProjection__picking] : Array<Dynamic>))))) {
       return cast false;
     }
@@ -72,7 +72,7 @@ class Picking {
     return cast null;
   }
 
-  public static function getCameraWorldToScreen(out:Vector3Like, camera:Camera, worldPoint:Vector3Like, aspect:Float):Bool {
+  public static function getCamera3DWorldToScreen(out:Vector3Like, camera:Camera3D, worldPoint:Vector3Like, aspect:Float):Bool {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var wx:Dynamic = cast _Runtime.UNDEFINED;
     var wy:Dynamic = cast _Runtime.UNDEFINED;
@@ -82,7 +82,7 @@ class Picking {
     var clipZ:Dynamic = cast _Runtime.UNDEFINED;
     var clipW:Dynamic = cast _Runtime.UNDEFINED;
     var invW:Dynamic = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(getCameraViewProjectionMatrix4, cast ([Picking.__scratchViewProjection__picking, camera, aspect] : Array<Dynamic>));
+    _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([Picking.__scratchViewProjection__picking, camera, aspect] : Array<Dynamic>));
     m = _Runtime.field(Picking.__scratchViewProjection__picking, 'm');
     wx = _Runtime.field(worldPoint, 'x');
     wy = _Runtime.field(worldPoint, 'y');

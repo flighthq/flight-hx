@@ -7,6 +7,6 @@ import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.EntityWithoutRuntime;
 import flighthq.types.Texture.TextureColorSpace;
 
-typedef VideoTexture = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var colorSpace:TextureColorSpace; var frameId:Float; var sampler:Sampler; var source:VideoResource; };
+typedef VideoTexture = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var colorSpace:TextureColorSpace; var frameId:Float; var sampler:Sampler; var source:VideoResource; };
 
 typedef VideoTextureLike = EntityWithoutRuntime<flighthq.types.VideoTexture>;

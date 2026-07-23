@@ -5,10 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.displayobjectDom.DomRenderState.getDomRenderStateRuntime;
 import flighthq.image.ImageResourceFrom.createCanvasFromImageResource;
+import flighthq.types.DomImageSourceKind;
 import flighthq.types.DomRenderState;
 import flighthq.types.ImageResource;
-
-typedef DomImageSourceKind = String;
 
 @:expose("flighthq.displayobjectDom.DomImageSource")
 class DomImageSource {

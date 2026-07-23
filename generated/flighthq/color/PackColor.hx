@@ -9,13 +9,13 @@ import flighthq.types.LinearColor;
 
 @:expose("flighthq.color.PackColor")
 class PackColor {
-  public static function computeRgbHexString(color:Float):String {
-    return cast '#' + Std.string(_Runtime.padStart(_Runtime.numberToString((Std.int(color) & Std.int(16777215.0)), 16.0), 6.0, '0')) + '';
+  public static function allocateLinearColor():LinearColor {
+    return cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  public static function createLinearColor():LinearColor {
-    return cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
+  public static function computeRgbHexString(color:Float):String {
+    return cast '#' + Std.string(_Runtime.padStart(_Runtime.numberToString((Std.int(color) & Std.int(16777215.0)), 16.0), 6.0, '0')) + '';
     return cast null;
   }
 

@@ -3,5 +3,9 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.Entity.EntityWithoutRuntime;
 
-typedef SceneLights = { var ambient:Null<AmbientLight>; var directional:Null<DirectionalLight>; @:optional var hemisphere:Array<HemisphereLight>; @:optional var point:Array<PointLight>; @:optional var spot:Array<SpotLight>; };
+typedef SceneLights = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var ambient:Null<AmbientLight>; var directional:Null<DirectionalLight>; @:optional var hemisphere:Array<HemisphereLight>; @:optional var point:Array<PointLight>; @:optional var spot:Array<SpotLight>; };
+
+typedef SceneLightsLike = EntityWithoutRuntime<flighthq.types.SceneLights>;

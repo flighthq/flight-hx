@@ -4,12 +4,10 @@ package flighthq.lighting;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
-import flighthq.types.CubeTexture;
 import flighthq.types.Environment;
+import flighthq.types.EnvironmentOptions;
 import flighthq.types.Types.EnvironmentKind;
 import flighthq.types._internal._EnvironmentValues.EnvironmentKind;
-
-typedef EnvironmentOptions = { @:optional var environment:Null<CubeTexture>; @:optional var intensity:Float; };
 
 @:expose("flighthq.lighting.Environment")
 class Environment {

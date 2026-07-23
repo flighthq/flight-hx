@@ -7,7 +7,7 @@ import flighthq.displayobjectWgpu.WgpuBitmap.defaultWgpuBitmapRenderer;
 import flighthq.displayobjectWgpu.WgpuCache.defaultWgpuRenderCacheRenderer;
 import flighthq.displayobjectWgpu.WgpuDefaultMaterial.registerDefaultWgpuMaterial;
 import flighthq.displayobjectWgpu.WgpuDisplayObject.defaultWgpuDisplayObjectRenderer;
-import flighthq.displayobjectWgpu.WgpuParticleEmitter.defaultWgpuParticleEmitterRenderer;
+import flighthq.displayobjectWgpu.WgpuParticleEmitter2D.defaultWgpuParticleEmitter2DRenderer;
 import flighthq.displayobjectWgpu.WgpuQuadBatch.defaultWgpuQuadBatchRenderer;
 import flighthq.displayobjectWgpu.WgpuRichText.defaultWgpuRichTextRenderer;
 import flighthq.displayobjectWgpu.WgpuScale9Shape.defaultWgpuScale9ShapeRenderer;
@@ -20,7 +20,7 @@ import flighthq.render.Renderer.registerRenderer;
 import flighthq.types.RenderCache.RenderCacheKind;
 import flighthq.types.Types.BitmapKind;
 import flighthq.types.Types.DisplayObjectKind;
-import flighthq.types.Types.ParticleEmitterKind;
+import flighthq.types.Types.ParticleEmitter2DKind;
 import flighthq.types.Types.QuadBatchKind;
 import flighthq.types.Types.RichTextKind;
 import flighthq.types.Types.Scale9ShapeKind;
@@ -32,7 +32,7 @@ import flighthq.types.Types.VideoKind;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._BitmapValues.BitmapKind;
 import flighthq.types._internal._DisplayObjectValues.DisplayObjectKind;
-import flighthq.types._internal._ParticleEmitterValues.ParticleEmitterKind;
+import flighthq.types._internal._ParticleEmitter2DValues.ParticleEmitter2DKind;
 import flighthq.types._internal._QuadBatchValues.QuadBatchKind;
 import flighthq.types._internal._RenderCacheValues.RenderCacheKindValue;
 import flighthq.types._internal._RichTextValues.RichTextKind;
@@ -49,7 +49,7 @@ class WgpuRegistration {
     _Runtime.callValue(registerDefaultWgpuMaterial, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(registerRenderer, cast ([state, BitmapKind, defaultWgpuBitmapRenderer] : Array<Dynamic>));
     _Runtime.callValue(registerRenderer, cast ([state, DisplayObjectKind, defaultWgpuDisplayObjectRenderer] : Array<Dynamic>));
-    _Runtime.callValue(registerRenderer, cast ([state, ParticleEmitterKind, defaultWgpuParticleEmitterRenderer] : Array<Dynamic>));
+    _Runtime.callValue(registerRenderer, cast ([state, ParticleEmitter2DKind, defaultWgpuParticleEmitter2DRenderer] : Array<Dynamic>));
     _Runtime.callValue(registerRenderer, cast ([state, QuadBatchKind, defaultWgpuQuadBatchRenderer] : Array<Dynamic>));
     _Runtime.callValue(registerRenderer, cast ([state, RichTextKind, defaultWgpuRichTextRenderer] : Array<Dynamic>));
     _Runtime.callValue(registerRenderer, cast ([state, Scale9ShapeKind, defaultWgpuScale9ShapeRenderer] : Array<Dynamic>));
@@ -63,7 +63,7 @@ class WgpuRegistration {
 
   public static function registerWgpuSpriteRenderers(state:WgpuRenderState):Void {
     _Runtime.callValue(registerDefaultWgpuMaterial, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(registerRenderer, cast ([state, ParticleEmitterKind, defaultWgpuParticleEmitterRenderer] : Array<Dynamic>));
+    _Runtime.callValue(registerRenderer, cast ([state, ParticleEmitter2DKind, defaultWgpuParticleEmitter2DRenderer] : Array<Dynamic>));
     _Runtime.callValue(registerRenderer, cast ([state, QuadBatchKind, defaultWgpuQuadBatchRenderer] : Array<Dynamic>));
     _Runtime.callValue(registerRenderer, cast ([state, SpriteKind, defaultWgpuSpriteRenderer] : Array<Dynamic>));
     _Runtime.callValue(registerRenderer, cast ([state, TilemapKind, defaultWgpuTilemapRenderer] : Array<Dynamic>));

@@ -9,8 +9,9 @@ import flighthq.particleemitter.ParticleEmitter.createParticleEmitterData;
 import flighthq.scene.SceneNode.createSceneNode;
 import flighthq.scene.SceneNode.getSceneNodeRuntime;
 import flighthq.types.Aabb.AabbLike;
+import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.PartialNode;
-import flighthq.types.ParticleEmitter.ParticleEmitterData;
+import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
 import flighthq.types.ParticleEmitter3D;
 import flighthq.types.ParticleEmitter3D.ParticleEmitter3DRuntime;
 import flighthq.types.SceneNode;
@@ -177,10 +178,14 @@ class ParticleEmitter3D {
 
   public static function getParticleEmitter3DCapacity(source:flighthq.types.ParticleEmitter3D):Float {
     var data:Dynamic = cast _Runtime.UNDEFINED;
+    var colorCapacity:Dynamic = cast _Runtime.UNDEFINED;
     var transformCapacity:Dynamic = cast _Runtime.UNDEFINED;
+    var velocityCapacity:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
+    colorCapacity = (Std.int((_Runtime.field(_Runtime.field(data, 'colors'), 'length') / ParticleEmitter3D.PARTICLE_COLOR_STRIDE__particleEmitter3D)) | Std.int(0.0));
     transformCapacity = (Std.int((_Runtime.field(_Runtime.field(data, 'transforms'), 'length') / ParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__particleEmitter3D)) | Std.int(0.0));
-    return cast HxMath.min(HxMath.min(_Runtime.field(_Runtime.field(data, 'ids'), 'length'), _Runtime.field(_Runtime.field(data, 'alphas'), 'length')), transformCapacity);
+    velocityCapacity = (Std.int((_Runtime.field(_Runtime.field(data, 'velocities'), 'length') / ParticleEmitter3D.PARTICLE_VELOCITY_STRIDE__particleEmitter3D)) | Std.int(0.0));
+    return cast HxMath.min(HxMath.min(HxMath.min(HxMath.min(HxMath.min(_Runtime.field(_Runtime.field(data, 'ids'), 'length'), _Runtime.field(_Runtime.field(data, 'alphas'), 'length')), _Runtime.field(_Runtime.field(data, 'positionsZ'), 'length')), colorCapacity), transformCapacity), velocityCapacity);
     return cast null;
   }
 
@@ -294,5 +299,74 @@ class ParticleEmitter3D {
     _Runtime.setIndex(_Runtime.field(_Runtime.field(target, 'data'), 'velocities'), vt, vx);
     _Runtime.setIndex(_Runtime.field(_Runtime.field(target, 'data'), 'velocities'), (vt + 1.0), vy);
     _Runtime.setIndex(_Runtime.field(_Runtime.field(target, 'data'), 'velocities'), (vt + 2.0), vz);
+  }
+
+  public static function sortParticleEmitter3DIndicesByViewDepth(outIndices:Dynamic, outViewDepths:Dynamic, source:flighthq.types.ParticleEmitter3D, positionToView:Matrix4Like):Bool {
+    var count:Dynamic = cast _Runtime.UNDEFINED;
+    var matrix:Dynamic = cast _Runtime.UNDEFINED;
+    var transforms:Dynamic = cast _Runtime.UNDEFINED;
+    var positionsZ:Dynamic = cast _Runtime.UNDEFINED;
+    count = _Runtime.field(_Runtime.field(source, 'data'), 'particleCount');
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isInteger', cast ([count] : Array<Dynamic>))), function():Dynamic return cast _Runtime.compare(count, 0.0, '<')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(getParticleEmitter3DCapacity, cast ([source] : Array<Dynamic>)), count, '<')), function():Dynamic return cast _Runtime.compare(_Runtime.field(outIndices, 'length'), count, '<')), function():Dynamic return cast _Runtime.compare(_Runtime.field(outViewDepths, 'length'), count, '<')))) {
+      return cast false;
+    }
+    matrix = _Runtime.field(positionToView, 'm');
+    transforms = _Runtime.field(_Runtime.field(source, 'data'), 'transforms');
+    positionsZ = _Runtime.field(_Runtime.field(source, 'data'), 'positionsZ');
+    {
+      var index:Dynamic = 0.0;
+      while (_Runtime.truthy(_Runtime.compare(index, count, '<'))) {
+        var transformOffset:Dynamic = (index * ParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__particleEmitter3D);
+        var x:Dynamic = _Runtime.getIndex(transforms, transformOffset);
+        var y:Dynamic = _Runtime.getIndex(transforms, (transformOffset + 1.0));
+        var z:Dynamic = _Runtime.getIndex(positionsZ, index);
+        _Runtime.setIndex(outIndices, index, index);
+        _Runtime.setIndex(outViewDepths, index, ((((_Runtime.getIndex(matrix, 2.0) * x) + (_Runtime.getIndex(matrix, 6.0) * y)) + (_Runtime.getIndex(matrix, 10.0) * z)) + _Runtime.getIndex(matrix, 14.0)));
+        index++;
+      }
+    }
+    {
+      var start:Dynamic = ((Std.int(count) >> Std.int(1.0)) - 1.0);
+      while (_Runtime.truthy(_Runtime.compare(start, 0.0, '>='))) {
+        _Runtime.callValue(ParticleEmitter3D.siftParticleDepthMaxHeap__particleEmitter3D, cast ([outIndices, outViewDepths, start, count] : Array<Dynamic>));
+        start--;
+      }
+    }
+    {
+      var end:Dynamic = (count - 1.0);
+      while (_Runtime.truthy(_Runtime.compare(end, 0.0, '>'))) {
+        var first:Dynamic = _Runtime.getIndex(outIndices, 0.0);
+        _Runtime.setIndex(outIndices, 0.0, _Runtime.getIndex(outIndices, end));
+        _Runtime.setIndex(outIndices, end, first);
+        _Runtime.callValue(ParticleEmitter3D.siftParticleDepthMaxHeap__particleEmitter3D, cast ([outIndices, outViewDepths, 0.0, end] : Array<Dynamic>));
+        end--;
+      }
+    }
+    return cast true;
+    return cast null;
+  }
+
+  public static function isParticleDepthGreater__particleEmitter3D(a:Float, b:Float, depths:Dynamic):Bool {
+    var aDepth:Dynamic = cast _Runtime.UNDEFINED;
+    var bDepth:Dynamic = cast _Runtime.UNDEFINED;
+    aDepth = _Runtime.getIndex(depths, a);
+    bDepth = _Runtime.getIndex(depths, b);
+    return cast _Runtime.orValue(_Runtime.compare(aDepth, bDepth, '>'), function():Dynamic return cast _Runtime.andValue(_Runtime.strictEquals(aDepth, bDepth), function():Dynamic return cast _Runtime.compare(a, b, '>')));
+    return cast null;
+  }
+
+  public static function siftParticleDepthMaxHeap__particleEmitter3D(indices:Dynamic, depths:Dynamic, root:Float, length:Float):Void {
+    while (_Runtime.truthy(true)) {
+      var left:Dynamic = ((root * 2.0) + 1.0);
+      if (_Runtime.truthy(_Runtime.compare(left, length, '>='))) { return; }
+      var right:Dynamic = (left + 1.0);
+      var greater:Dynamic = left;
+      if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(right, length, '<'), function():Dynamic return cast _Runtime.callValue(ParticleEmitter3D.isParticleDepthGreater__particleEmitter3D, cast ([_Runtime.getIndex(indices, right), _Runtime.getIndex(indices, left), depths] : Array<Dynamic>))))) { (greater = cast (right : Dynamic)); }
+      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(ParticleEmitter3D.isParticleDepthGreater__particleEmitter3D, cast ([_Runtime.getIndex(indices, greater), _Runtime.getIndex(indices, root), depths] : Array<Dynamic>))))) { return; }
+      var swap:Dynamic = _Runtime.getIndex(indices, root);
+      _Runtime.setIndex(indices, root, _Runtime.getIndex(indices, greater));
+      _Runtime.setIndex(indices, greater, swap);
+      (root = cast (greater : Dynamic));
+    }
   }
 }

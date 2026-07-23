@@ -5,15 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
-import flighthq.sceneWgpu.WgpuClassicPrelude.WgpuClassicDefineKey;
 import flighthq.sceneWgpu.WgpuClassicPrelude.bindWgpuClassicSurface;
 import flighthq.sceneWgpu.WgpuClassicPrelude.ensureWgpuClassicPipeline;
 import flighthq.sceneWgpu.WgpuMeshMaterialRegistry.registerWgpuMeshMaterialRenderer;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.beginWgpuMeshDraw;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.drawWgpuMeshSubset;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.isWgpuTextureReady;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUniform;
-import flighthq.types.Camera;
+import flighthq.sceneWgpu.WgpuMeshPipeline.beginWgpuMeshDraw;
+import flighthq.sceneWgpu.WgpuMeshPipeline.drawWgpuMeshSubset;
+import flighthq.sceneWgpu.WgpuMeshPipeline.isWgpuTextureReady;
+import flighthq.sceneWgpu.WgpuMeshPipeline.writeWgpuFrameUniform;
+import flighthq.types.Camera3D;
 import flighthq.types.LambertMaterial;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
@@ -21,13 +20,14 @@ import flighthq.types.MeshGeometry;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.Types.LambertMaterialKind;
+import flighthq.types.WgpuClassicPipeline.WgpuClassicDefineKey;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._LambertMaterialValues.LambertMaterialKind;
 
 @:expose("flighthq.sceneWgpu.LambertWgpuMeshMaterialRenderer")
 class LambertWgpuMeshMaterialRenderer {
-  public static final lambertWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
+  public static final lambertWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var lambert:Dynamic = cast _Runtime.UNDEFINED;

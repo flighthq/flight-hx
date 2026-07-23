@@ -3,8 +3,8 @@ package flighthq.hostCapacitor;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorApi;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorPluginListenerHandle;
+import flighthq.types.CapacitorApi;
+import flighthq.types.CapacitorApi.CapacitorPluginListenerHandle;
 import flighthq.types.Keyboard.SoftKeyboardBackend;
 import flighthq.types.Keyboard.SoftKeyboardInfo;
 import flighthq.types.Keyboard.SoftKeyboardResizeBodyKind;

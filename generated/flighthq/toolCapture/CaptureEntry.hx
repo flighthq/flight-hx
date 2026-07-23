@@ -5,30 +5,61 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.toolCapture.BaselineStore.getBaselineField;
 import flighthq.toolCapture.BaselineStore.setBaselineField;
+import flighthq.toolCapture.CaptureBrowser.launchBrowser;
 import flighthq.toolCapture.CaptureEntries.BACKEND_UNAVAILABLE;
 import flighthq.toolCapture.CaptureEntries.Entry;
-import flighthq.toolCapture.CaptureEntries.Tool;
+import flighthq.toolCapture.CaptureEntries.getCaptureEntryRoute;
 import flighthq.toolCapture.CaptureEntries.rendererMatchesFilter;
 import flighthq.toolCapture.CaptureEntries.routeSegment;
 import flighthq.toolCapture.CaptureFormat.DetailTone;
 import flighthq.toolCapture.CaptureFormat.formatDetailLine;
 import flighthq.toolCapture.CaptureFormat.formatStatusLine;
 import flighthq.toolCapture.CaptureInterrupt.isBrowserClosedError;
+import flighthq.toolCapture.CaptureProtocol.CAPTURE_PROTOCOL_VERSION;
+import flighthq.toolCapture.CaptureReport.writeCaptureReport;
+import flighthq.toolCapture.FunctionalVerify.FunctionalVerification;
 
-typedef CaptureStatus = { var state:String; var capturedAt:Float; var error:Null<String>; var hash:Null<String>; var baselineHash:Null<String>; var changed:Null<Bool>; };
+typedef CaptureStatus = { var protocolVersion:Dynamic; var state:String; var capturedAt:Float; var error:Null<String>; var hash:Null<String>; var baselineHash:Null<String>; var changed:Null<Bool>; @:optional var observe:CaptureObserveDiagnostics; };
 
-typedef CaptureEntryOptions = { var context:Dynamic; var entry:Entry; var renderers:Array<String>; var baseUrl:String; var tool:Tool; var outBase:String; var root:String; @:optional var updateBaseline:Bool; @:optional var extraWait:Float; @:optional var captureFrames:Float; @:optional var failOnError:Bool; @:optional var isAborted:Dynamic; @:optional var displayLabel:String; @:optional var verify:Bool; };
+typedef CaptureObserveDiagnostics = { var usable:Bool; var attempts:Float; var timedOut:Bool; var pageEvidence:Bool; var attemptErrors:Array<String>; var blank:Bool; var backend:String; var verifyTargetKind:Null<String>; var verifyPublished:Bool; var coverage:Null<Float>; var pageErrorCount:Float; var errorCount:Float; var warmupFrames:Float; };
 
-typedef ParallelCaptureOptions = { var context:Dynamic; var entries:Array<Entry>; var rendererFilter:Array<String>; var baseUrl:String; var tool:Tool; var outBase:String; var root:String; @:optional var updateBaseline:Bool; @:optional var extraWait:Float; @:optional var captureFrames:Float; @:optional var failOnError:Bool; @:optional var isAborted:Dynamic; @:optional var verify:Bool; @:optional var workerCount:Float; };
+typedef CaptureEntryOptions = { var context:Dynamic; var entry:Entry; var renderers:Array<String>; var baseUrl:String; var tool:String; var outBase:String; var root:String; @:optional var updateBaseline:Bool; @:optional var extraWait:Float; @:optional var captureFrames:Float; @:optional var failOnError:Bool; @:optional var observe:Bool; @:optional var isAborted:Dynamic; @:optional var displayLabel:String; @:optional var verify:Bool; @:optional var onVerifiedFingerprint:Dynamic; @:optional var maxRetries:Float; };
 
-typedef ParallelCaptureResult = { var captured:Float; var changed:Float; var failed:Float; };
+typedef ParallelCaptureOptions = { var context:Dynamic; var entries:Array<Entry>; var rendererFilter:Array<String>; var baseUrl:String; var tool:String; var outBase:String; var root:String; @:optional var updateBaseline:Bool; @:optional var extraWait:Float; @:optional var captureFrames:Float; @:optional var failOnError:Bool; @:optional var observe:Bool; @:optional var isAborted:Dynamic; @:optional var verify:Bool; @:optional var onVerifiedFingerprint:Dynamic; @:optional var maxRetries:Float; @:optional var workerCount:Float; };
+
+typedef ParallelCaptureResult = { var captured:Float; var changed:Float; var failed:Float; var targets:Array<CaptureTargetReport>; };
+
+typedef CaptureTargetReport = { var entry:String; var renderer:String; var result:String; var durationMs:Float; var retries:Float; var usable:Bool; var error:Null<String>; var artifacts:{ var screenshot:String; var logs:String; var status:String; }; };
 
 typedef CaptureOutputPaths = { var outDir:String; var tmpScreenshot:String; var finalScreenshot:String; var tmpLogs:String; var finalLogs:String; var statusPath:String; };
 
-typedef RenderVerification__captureEntry = { var coverage:Null<Float>; var fingerprint:Null<String>; var render:String; };
+typedef RenderVerification__captureEntry = FunctionalVerification;
+
+typedef CaptureUrlOptions = { var outDir:String; @:optional var wait:Float; @:optional var captureFrames:Float; @:optional var maxRetries:Float; };
 
 @:expose("flighthq.toolCapture.CaptureEntry")
 class CaptureEntry {
+  public static final OBSERVE_BLANK_COVERAGE__captureEntry:Dynamic = 0.001;
+
+  public static final OBSERVE_WARMUP_TIMEOUT_MS__captureEntry:Dynamic = 5000.0;
+
+  public static function buildCaptureObserveDiagnostics(args:{ var backend:String; var blank:Bool; var coverage:Null<Float>; var logs:Array<Dynamic>; var verifyPublished:Bool; var verifyTargetKind:Null<String>; var warmupFrames:Float; @:optional var attempts:Float; @:optional var timedOut:Bool; @:optional var pageEvidence:Bool; @:optional var attemptErrors:Array<String>; }):CaptureObserveDiagnostics {
+    var pageErrorCount:Dynamic = cast _Runtime.UNDEFINED;
+    var errorCount:Dynamic = cast _Runtime.UNDEFINED;
+    var blank:Dynamic = cast _Runtime.UNDEFINED;
+    var usable:Dynamic = cast _Runtime.UNDEFINED;
+    pageErrorCount = 0.0;
+    errorCount = 0.0;
+    for (entry in _Runtime.iterable(_Runtime.field(args, 'logs'))) {
+      var level:Dynamic = _Runtime.field((cast entry : { @:optional var level:String; }), 'level');
+      if (_Runtime.truthy(_Runtime.strictEquals(level, 'pageerror'))) { (pageErrorCount = cast ((pageErrorCount + 1.0) : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(level, 'error'))) { (errorCount = cast ((errorCount + 1.0) : Dynamic)); } }
+    }
+    blank = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(args, 'coverage'), null), function():Dynamic return cast _Runtime.compare(_Runtime.field(args, 'coverage'), CaptureEntry.OBSERVE_BLANK_COVERAGE__captureEntry, '<='), function():Dynamic return cast _Runtime.field(args, 'blank'));
+    usable = _Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(blank), function():Dynamic return cast _Runtime.compare(pageErrorCount, 0.0, '>')), function():Dynamic return cast _Runtime.compare(errorCount, 0.0, '>')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(args, 'pageEvidence'), true));
+    return cast { attemptErrors: _Runtime.concatArrays([_Runtime.toArray(_Runtime.coalesce(_Runtime.field(args, 'attemptErrors'), function():Dynamic return cast cast ([] : Array<Dynamic>)))]), attempts: _Runtime.coalesce(_Runtime.field(args, 'attempts'), function():Dynamic return cast 1.0), backend: _Runtime.field(args, 'backend'), blank: blank, coverage: _Runtime.field(args, 'coverage'), errorCount: errorCount, pageErrorCount: pageErrorCount, pageEvidence: _Runtime.coalesce(_Runtime.field(args, 'pageEvidence'), function():Dynamic return cast false), verifyPublished: _Runtime.field(args, 'verifyPublished'), verifyTargetKind: _Runtime.field(args, 'verifyTargetKind'), warmupFrames: _Runtime.field(args, 'warmupFrames'), timedOut: _Runtime.coalesce(_Runtime.field(args, 'timedOut'), function():Dynamic return cast false), usable: usable };
+    return cast null;
+  }
+
   public static function captureEntry(opts:CaptureEntryOptions):flighthq._internal._Promise<String> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<String> {
       var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -43,6 +74,7 @@ class CaptureEntry {
       var extraWait:Dynamic = cast _Runtime.UNDEFINED;
       var captureFrames:Dynamic = cast _Runtime.UNDEFINED;
       var failOnError:Dynamic = cast _Runtime.UNDEFINED;
+      var observe:Dynamic = cast _Runtime.UNDEFINED;
       var isAborted:Dynamic = cast _Runtime.UNDEFINED;
       var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
       var displayLabel:Dynamic = cast _Runtime.UNDEFINED;
@@ -64,6 +96,7 @@ class CaptureEntry {
       extraWait = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'extraWait'), function():Dynamic return cast 0.0);
       captureFrames = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'captureFrames'), function():Dynamic return cast 0.0);
       failOnError = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'failOnError'), function():Dynamic return cast false);
+      observe = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'observe'), function():Dynamic return cast false);
       isAborted = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'isAborted'), function():Dynamic return cast function() return false);
       __destructure1 = opts;
       displayLabel = _Runtime.field(__destructure1, 'displayLabel');
@@ -75,7 +108,7 @@ class CaptureEntry {
       statusLine = function(tone:DetailTone, renderer:String, message:String) return _Runtime.callValue(formatStatusLine, cast ([tone, _Runtime.callValue(label, cast ([renderer] : Array<Dynamic>)), labelWidth, message] : Array<Dynamic>));
       for (renderer in _Runtime.iterable(renderers)) {
         if (_Runtime.truthy(_Runtime.callValue(isAborted, cast ([] : Array<Dynamic>)))) { break; }
-        var urlPath:Dynamic = _Runtime.select(_Runtime.field(entry, 'route'), function():Dynamic return cast _Runtime.callProperty(entry, 'route', cast ([renderer] : Array<Dynamic>)), function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(tool, 'examples'), function():Dynamic return cast 'examples/' + Std.string(_Runtime.field(entry, 'name')) + '/' + Std.string(_Runtime.callValue(routeSegment, cast ([renderer] : Array<Dynamic>))) + '/', function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(tool, 'functional'), function():Dynamic return cast 'tests/' + Std.string(_Runtime.field(entry, 'name')) + '/' + Std.string(_Runtime.callValue(routeSegment, cast ([renderer] : Array<Dynamic>))) + '/', function():Dynamic return cast '')));
+        var urlPath:Dynamic = _Runtime.callValue(getCaptureEntryRoute, cast ([entry, renderer, tool] : Array<Dynamic>));
         var url:Dynamic = '' + Std.string(baseUrl) + '/' + Std.string(urlPath) + '';
         var __destructure2:Dynamic = _Runtime.callValue(getCaptureOutputPaths, cast ([outBase, tool, _Runtime.field(entry, 'name'), renderer] : Array<Dynamic>));
         var outDir:Dynamic = _Runtime.field(__destructure2, 'outDir');
@@ -109,51 +142,93 @@ class CaptureEntry {
           _Runtime.callProperty(logs, 'push', cast ([{ __flight: true, t: -1.0, level: 'pageerror', data: { msg: _Runtime.field(err, 'message') } }] : Array<Dynamic>));
         }] : Array<Dynamic>));
         _Runtime.callProperty(page, 'on', cast (['requestfailed', function(req:Dynamic) {
+          if (_Runtime.truthy(_Runtime.callValue(CaptureEntry.isCaptureTransportNoise__captureEntry, cast ([_Runtime.callProperty(req, 'url', cast ([] : Array<Dynamic>))] : Array<Dynamic>)))) { return; }
           _Runtime.callProperty(logs, 'push', cast ([{ __flight: true, t: -1.0, level: 'error', channel: 'network', data: { msg: 'request failed: ' + Std.string(_Runtime.callProperty(req, 'url', cast ([] : Array<Dynamic>))) + ' (' + Std.string(_Runtime.coalesce(_Runtime.optionalField(_Runtime.callProperty(req, 'failure', cast ([] : Array<Dynamic>)), 'errorText'), function():Dynamic return cast 'unknown')) + ')' } }] : Array<Dynamic>));
         }] : Array<Dynamic>));
         try {
           try {
             flighthq._internal._Async.awaitValue(_Runtime.callProperty(page, 'goto', cast ([url, { waitUntil: 'domcontentloaded', timeout: 15000.0 }] : Array<Dynamic>)));
-            flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(page, 'waitForSelector', cast (['canvas', { timeout: 8000.0 }] : Array<Dynamic>)), 'catch', cast ([function() {
-            
-            }] : Array<Dynamic>)));
-            if (_Runtime.truthy(_Runtime.andValue(captureFrames, function():Dynamic return cast _Runtime.compare(captureFrames, 0.0, '>')))) {
-              flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(page, 'waitForFunction', cast ([function() return _Runtime.strictEquals(_Runtime.field((cast (cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : Dynamic) : { @:optional var __captureFramesReached:Bool; }), '__captureFramesReached'), true), null, { timeout: 15000.0 }] : Array<Dynamic>)), 'catch', cast ([function() {
+            var earlyObserveIntercept:Null<{ var coverage:Float; var dataUrl:String; }> = null;
+            var observeTimedOut:Dynamic = false;
+            if (_Runtime.truthy(!_Runtime.truthy(verify))) {
+              var selector:Dynamic = _Runtime.select(_Runtime.strictEquals(_Runtime.callValue(CaptureEntry.rendererBackend__captureEntry, cast ([renderer] : Array<Dynamic>)), 'dom'), function():Dynamic return cast 'body > div', function():Dynamic return cast 'canvas');
+              flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(page, 'waitForSelector', cast ([selector, { timeout: 8000.0 }] : Array<Dynamic>)), 'catch', cast ([function() {
               
               }] : Array<Dynamic>)));
-            } else {
-              flighthq._internal._Async.awaitValue(_Runtime.callProperty(page, 'evaluate', cast ([function() return _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(r:Dynamic) return _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['requestAnimationFrame'] : Array<Dynamic>)), cast ([function() return _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['requestAnimationFrame'] : Array<Dynamic>)), cast ([function() return _Runtime.callValue(r, cast ([] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>))])] : Array<Dynamic>)));
             }
+            if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.truthy(verify), function():Dynamic return cast captureFrames), function():Dynamic return cast _Runtime.compare(captureFrames, 0.0, '>')))) {
+              flighthq._internal._Async.awaitValue(_Runtime.callProperty(page, 'evaluate', cast ([function() {
+                _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['requestAnimationFrame'] : Array<Dynamic>)), cast ([function() return _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['requestAnimationFrame'] : Array<Dynamic>)), cast ([function() {
+                
+                }] : Array<Dynamic>))] : Array<Dynamic>));
+              }] : Array<Dynamic>)));
+              (earlyObserveIntercept = cast (_Runtime.select(observe, function():Dynamic return cast flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.grabInterceptedGlFrame__captureEntry, cast ([page] : Array<Dynamic>))), function():Dynamic return cast null) : Dynamic));
+              var alreadyObserved:Dynamic = _Runtime.compare(_Runtime.coalesce(_Runtime.coalesce(_Runtime.optionalField(earlyObserveIntercept, 'coverage'), function():Dynamic return cast _Runtime.select(observe, function():Dynamic return cast flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.measureObservedCanvasCoverage__captureEntry, cast ([page] : Array<Dynamic>))), function():Dynamic return cast null)), function():Dynamic return cast 0.0), CaptureEntry.OBSERVE_BLANK_COVERAGE__captureEntry, '>');
+              if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(alreadyObserved), function():Dynamic return cast observe))) {
+                var observed:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.waitForObservedPixels__captureEntry, cast ([page, CaptureEntry.OBSERVE_WARMUP_TIMEOUT_MS__captureEntry] : Array<Dynamic>)));
+                (earlyObserveIntercept ??= _Runtime.field(observed, 'intercept'));
+                (observeTimedOut = cast (!_Runtime.truthy(_Runtime.field(observed, 'reached')) : Dynamic));
+              } else { if (_Runtime.truthy(!_Runtime.truthy(alreadyObserved))) {
+                flighthq._internal._Async.awaitValue(_Runtime.callProperty(page, 'waitForFunction', cast ([function() return _Runtime.strictEquals(_Runtime.field((cast (cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : Dynamic) : { @:optional var __captureFramesReached:Bool; }), '__captureFramesReached'), true), null, { timeout: 15000.0 }] : Array<Dynamic>)));
+              } }
+            } else { if (_Runtime.truthy(!_Runtime.truthy(verify))) {
+              flighthq._internal._Async.awaitValue(_Runtime.callProperty(page, 'evaluate', cast ([function() return _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(r:Dynamic) return _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['requestAnimationFrame'] : Array<Dynamic>)), cast ([function() return _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['requestAnimationFrame'] : Array<Dynamic>)), cast ([function() return _Runtime.callValue(r, cast ([] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>))])] : Array<Dynamic>)));
+            } }
             if (_Runtime.truthy(_Runtime.compare(extraWait, 0.0, '>'))) { flighthq._internal._Async.awaitValue(_Runtime.callProperty(page, 'waitForTimeout', cast ([extraWait] : Array<Dynamic>))); }
             var waitsForVerification:Dynamic = verify;
+            var verification:Null<RenderVerification__captureEntry> = null;
             if (_Runtime.truthy(waitsForVerification)) {
               _Runtime.console('log', [_Runtime.callValue(statusLine, cast (['muted', renderer, 'verifying render…'] : Array<Dynamic>))]);
-              flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.waitForRenderVerification__captureEntry, cast ([page] : Array<Dynamic>)));
+              (verification = cast (flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.waitForRenderVerification__captureEntry, cast ([page] : Array<Dynamic>))) : Dynamic));
+              if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(verification, 'state'), 'failed'))) { throw _Runtime.error(_Runtime.coalesce(_Runtime.field(verification, 'error'), function():Dynamic return cast 'render verification failed')); }
+              if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.optionalField(verification, 'state'), 'passed'))) { throw _Runtime.error('render verifier did not reach a terminal state'); }
+              if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(verification, 'fingerprint'), null))) {
+                _Runtime.callOptionalProperty(opts, 'onVerifiedFingerprint', cast ([_Runtime.field(entry, 'name'), renderer, _Runtime.field(verification, 'fingerprint')] : Array<Dynamic>));
+              }
             }
             var verificationTargetKind:Dynamic = _Runtime.select(waitsForVerification, function():Dynamic return cast flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.getFunctionalTargetKind__captureEntry, cast ([page] : Array<Dynamic>))), function():Dynamic return cast null);
             var screenshotBuffer:Dynamic = cast _Runtime.UNDEFINED;
+            var blank:Dynamic = false;
             var backend:Dynamic = _Runtime.callValue(CaptureEntry.rendererBackend__captureEntry, cast ([renderer] : Array<Dynamic>));
             var dataUrl:Dynamic = _Runtime.select(waitsForVerification, function():Dynamic return cast flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.getRenderImageDataUrl__captureEntry, cast ([page] : Array<Dynamic>))), function():Dynamic return cast null);
-            if (_Runtime.truthy(_Runtime.andValue(dataUrl, function():Dynamic return cast !_Runtime.strictEquals(backend, 'dom')))) {
+            var intercept:Dynamic = _Runtime.select(_Runtime.andValue(observe, function():Dynamic return cast _Runtime.strictEquals(backend, 'webgl')), function():Dynamic return cast _Runtime.coalesce(earlyObserveIntercept, function():Dynamic return cast flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.grabInterceptedGlFrame__captureEntry, cast ([page] : Array<Dynamic>)))), function():Dynamic return cast null);
+            if (_Runtime.truthy(!_Runtime.strictEquals(intercept, null))) {
+              (screenshotBuffer = cast (_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Buffer'] : Array<Dynamic>)), 'from', cast ([_Runtime.getIndex(_Runtime.callProperty(_Runtime.field(intercept, 'dataUrl'), 'split', cast ([','] : Array<Dynamic>)), 1.0), 'base64'] : Array<Dynamic>)) : Dynamic));
+              (blank = cast (_Runtime.compare(_Runtime.field(intercept, 'coverage'), CaptureEntry.OBSERVE_BLANK_COVERAGE__captureEntry, '<=') : Dynamic));
+            } else { if (_Runtime.truthy(_Runtime.andValue(dataUrl, function():Dynamic return cast !_Runtime.strictEquals(backend, 'dom')))) {
               (screenshotBuffer = cast (_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Buffer'] : Array<Dynamic>)), 'from', cast ([_Runtime.getIndex(_Runtime.callProperty(dataUrl, 'split', cast ([','] : Array<Dynamic>)), 1.0), 'base64'] : Array<Dynamic>)) : Dynamic));
+            } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(backend, 'webgpu'), function():Dynamic return cast waitsForVerification))) {
+              if (_Runtime.truthy(!_Runtime.truthy(observe))) { throw _Runtime.error('WebGPU verifier did not produce a render image'); }
+              (blank = cast (true : Dynamic));
+              (screenshotBuffer = cast (flighthq._internal._Async.awaitValue(_Runtime.callProperty(page, 'screenshot', cast ([] : Array<Dynamic>))) : Dynamic));
             } else { if (_Runtime.truthy(_Runtime.strictEquals(backend, 'webgpu'))) {
-              if (_Runtime.truthy(waitsForVerification)) {
-                throw _Runtime.error('WebGPU verifier did not produce a render image');
-              } else {
-                (screenshotBuffer = cast (flighthq._internal._Async.awaitValue(_Runtime.callProperty(page, 'screenshot', cast ([] : Array<Dynamic>))) : Dynamic));
-              }
+              (screenshotBuffer = cast (flighthq._internal._Async.awaitValue(_Runtime.callProperty(page, 'screenshot', cast ([] : Array<Dynamic>))) : Dynamic));
             } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(backend, 'webgl'), function():Dynamic return cast waitsForVerification), function():Dynamic return cast _Runtime.strictEquals(verificationTargetKind, 'webgl')))) {
-              throw _Runtime.error('WebGL verifier did not produce a render image (blank or failed render)');
+              if (_Runtime.truthy(!_Runtime.truthy(observe))) { throw _Runtime.error('WebGL verifier did not produce a render image (blank or failed render)'); }
+              (blank = cast (true : Dynamic));
+              (screenshotBuffer = cast (flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(page, 'locator', cast (['canvas'] : Array<Dynamic>)), 'first', cast ([] : Array<Dynamic>)), 'screenshot', cast ([] : Array<Dynamic>)), 'catch', cast ([function() return _Runtime.callProperty(page, 'screenshot', cast ([] : Array<Dynamic>))] : Array<Dynamic>))) : Dynamic));
             } else { if (_Runtime.truthy(_Runtime.strictEquals(backend, 'dom'))) {
-              (screenshotBuffer = cast (flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(page, 'locator', cast (['body > div'] : Array<Dynamic>)), 'first', cast ([] : Array<Dynamic>)), 'screenshot', cast ([] : Array<Dynamic>)), 'catch', cast ([function() return _Runtime.callProperty(page, 'screenshot', cast ([] : Array<Dynamic>))] : Array<Dynamic>))) : Dynamic));
+              (screenshotBuffer = cast (flighthq._internal._Async.awaitValue(_Runtime.callProperty(page, 'screenshot', cast ([] : Array<Dynamic>))) : Dynamic));
+            } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(backend, 'webgl'), function():Dynamic return cast _Runtime.compare(captureFrames, 0.0, '>')))) {
+              var canvasDataUrl:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.getCanvasImageDataUrl__captureEntry, cast ([page] : Array<Dynamic>)));
+              if (_Runtime.truthy(_Runtime.strictEquals(canvasDataUrl, null))) { throw _Runtime.error('WebGL canvas did not produce a capture image'); }
+              (screenshotBuffer = cast (_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Buffer'] : Array<Dynamic>)), 'from', cast ([_Runtime.getIndex(_Runtime.callProperty(canvasDataUrl, 'split', cast ([','] : Array<Dynamic>)), 1.0), 'base64'] : Array<Dynamic>)) : Dynamic));
             } else {
               (screenshotBuffer = cast (flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(page, 'locator', cast (['canvas'] : Array<Dynamic>)), 'first', cast ([] : Array<Dynamic>)), 'screenshot', cast ([] : Array<Dynamic>)), 'catch', cast ([function() return _Runtime.callProperty(page, 'screenshot', cast ([] : Array<Dynamic>))] : Array<Dynamic>))) : Dynamic));
-            } } } }
+            } } } } } } }
             var hash:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:crypto', 'createHash'] : Array<Dynamic>)), cast (['sha256'] : Array<Dynamic>)), 'update', cast ([screenshotBuffer] : Array<Dynamic>)), 'digest', cast (['hex'] : Array<Dynamic>));
             _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'writeFileSync'] : Array<Dynamic>)), cast ([tmpScreenshot, screenshotBuffer] : Array<Dynamic>));
             _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'writeFileSync'] : Array<Dynamic>)), cast ([tmpLogs, _Runtime.join(_Runtime.callProperty(logs, 'map', cast ([function(l:Dynamic) return _Runtime.jsonStringify(l)] : Array<Dynamic>)), '\n')] : Array<Dynamic>));
             _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'renameSync'] : Array<Dynamic>)), cast ([tmpScreenshot, finalScreenshot] : Array<Dynamic>));
             _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'renameSync'] : Array<Dynamic>)), cast ([tmpLogs, finalLogs] : Array<Dynamic>));
+            if (_Runtime.truthy(observe)) {
+              var coverage:Dynamic = _Runtime.coalesce(_Runtime.coalesce(_Runtime.optionalField(intercept, 'coverage'), function():Dynamic return cast _Runtime.optionalField(verification, 'coverage')), function():Dynamic return cast flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.measureObservedCanvasCoverage__captureEntry, cast ([page] : Array<Dynamic>))));
+              var diagnostics:Dynamic = _Runtime.callValue(buildCaptureObserveDiagnostics, cast ([{ backend: backend, blank: blank, coverage: coverage, logs: logs, verifyPublished: !_Runtime.strictEquals(dataUrl, null), verifyTargetKind: verificationTargetKind, warmupFrames: flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.getObserveWarmupFrames__captureEntry, cast ([page] : Array<Dynamic>))), pageEvidence: flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.hasVisiblePageEvidence__captureEntry, cast ([page] : Array<Dynamic>))), timedOut: observeTimedOut }] : Array<Dynamic>));
+              var observeStatus:CaptureStatus = { protocolVersion: CAPTURE_PROTOCOL_VERSION, state: 'ready', capturedAt: _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Date'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>)), error: null, hash: hash, baselineHash: null, changed: null, observe: diagnostics };
+              _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'writeFileSync'] : Array<Dynamic>)), cast ([statusPath, _Runtime.jsonStringify(observeStatus, null, 2.0)] : Array<Dynamic>));
+              _Runtime.console('log', [_Runtime.callValue(statusLine, cast (['pass', renderer, _Runtime.callValue(CaptureEntry.formatObserveDetail__captureEntry, cast ([diagnostics] : Array<Dynamic>))] : Array<Dynamic>))]);
+              continue;
+            }
             var baselineHash:Null<String> = null;
             var changed:Null<Bool> = null;
             if (_Runtime.truthy(updateBaseline)) {
@@ -170,10 +245,9 @@ class CaptureEntry {
             } else {
               _Runtime.console('log', [_Runtime.callValue(statusLine, cast (['pass', renderer, ''] : Array<Dynamic>))]);
             }
-            var status:CaptureStatus = { state: 'ready', capturedAt: _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Date'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>)), error: null, hash: hash, baselineHash: baselineHash, changed: changed };
+            var status:CaptureStatus = { protocolVersion: CAPTURE_PROTOCOL_VERSION, state: 'ready', capturedAt: _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Date'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>)), error: null, hash: hash, baselineHash: baselineHash, changed: changed };
             _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'writeFileSync'] : Array<Dynamic>)), cast ([statusPath, _Runtime.jsonStringify(status, null, 2.0)] : Array<Dynamic>));
             if (_Runtime.truthy(failOnError)) {
-              flighthq._internal._Async.awaitValue(_Runtime.callProperty(page, 'waitForTimeout', cast ([120.0] : Array<Dynamic>)));
               var errorLog:Dynamic = _Runtime.find(logs, function(l:Dynamic) {
                 var level:Dynamic = cast _Runtime.UNDEFINED;
                 level = _Runtime.field((cast l : { @:optional var level:String; }), 'level');
@@ -194,18 +268,18 @@ class CaptureEntry {
             if (_Runtime.truthy(_Runtime.orValue(_Runtime.callValue(isAborted, cast ([] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(isBrowserClosedError, cast ([err] : Array<Dynamic>))))) { break; }
             _Runtime.callProperty(logs, 'push', cast ([{ __flight: true, t: -1.0, level: 'capture-error', data: { msg: message } }] : Array<Dynamic>));
             _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'writeFileSync'] : Array<Dynamic>)), cast ([finalLogs, _Runtime.join(_Runtime.callProperty(logs, 'map', cast ([function(l:Dynamic) return _Runtime.jsonStringify(l)] : Array<Dynamic>)), '\n')] : Array<Dynamic>));
-            var errorStatus:CaptureStatus = { state: 'error', capturedAt: _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Date'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>)), error: message, hash: null, baselineHash: null, changed: null };
+            var errorStatus:CaptureStatus = { protocolVersion: CAPTURE_PROTOCOL_VERSION, state: 'error', capturedAt: _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Date'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>)), error: message, hash: null, baselineHash: null, changed: null };
             _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'writeFileSync'] : Array<Dynamic>)), cast ([statusPath, _Runtime.jsonStringify(errorStatus, null, 2.0)] : Array<Dynamic>));
             _Runtime.console('error', [_Runtime.callValue(statusLine, cast (['fail', renderer, message] : Array<Dynamic>))]);
             (anyFailed = cast (true : Dynamic));
           }
-        } catch (__finallyError2:Dynamic) {
+        } catch (__finallyError4:Dynamic) {
           {
             flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(page, 'close', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
             
             }] : Array<Dynamic>)));
           }
-          throw __finallyError2;
+          throw __finallyError4;
         }
         {
           flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(page, 'close', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
@@ -220,6 +294,24 @@ class CaptureEntry {
     })();
   }
 
+  public static function formatObserveDetail__captureEntry(d:CaptureObserveDiagnostics):String {
+    var parts:Array<String> = cast _Runtime.UNDEFINED;
+    parts = cast ([_Runtime.select(_Runtime.field(d, 'blank'), function():Dynamic return cast 'observed (blank — no verified frame)', function():Dynamic return cast 'observed')] : Array<Dynamic>);
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(d, 'coverage'), null))) { _Runtime.callProperty(parts, 'push', cast (['coverage ' + Std.string(_Runtime.toFixed(_Runtime.field(d, 'coverage'), 3.0)) + ''] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(d, 'warmupFrames'), 0.0, '>'))) { _Runtime.callProperty(parts, 'push', cast (['warmed up ' + Std.string(_Runtime.field(d, 'warmupFrames')) + ' extra frame' + Std.string(_Runtime.select(_Runtime.strictEquals(_Runtime.field(d, 'warmupFrames'), 1.0), function():Dynamic return cast '', function():Dynamic return cast 's')) + ''] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(d, 'pageErrorCount'), 0.0, '>'))) { _Runtime.callProperty(parts, 'push', cast (['' + Std.string(_Runtime.field(d, 'pageErrorCount')) + ' page error' + Std.string(_Runtime.select(_Runtime.strictEquals(_Runtime.field(d, 'pageErrorCount'), 1.0), function():Dynamic return cast '', function():Dynamic return cast 's')) + ''] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.compare(_Runtime.field(d, 'errorCount'), 0.0, '>'))) { _Runtime.callProperty(parts, 'push', cast (['' + Std.string(_Runtime.field(d, 'errorCount')) + ' error' + Std.string(_Runtime.select(_Runtime.strictEquals(_Runtime.field(d, 'errorCount'), 1.0), function():Dynamic return cast '', function():Dynamic return cast 's')) + ''] : Array<Dynamic>)); }
+    return cast _Runtime.join(parts, ', ');
+    return cast null;
+  }
+
+  public static function getObserveWarmupFrames__captureEntry(page:Dynamic):flighthq._internal._Promise<Float> {
+    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Float> {
+      return cast _Runtime.callProperty(_Runtime.callProperty(page, 'evaluate', cast ([function() return _Runtime.coalesce(_Runtime.field((cast (cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : Dynamic) : { @:optional var __ftWarmupFrames:Float; }), '__ftWarmupFrames'), function():Dynamic return cast 0.0)] : Array<Dynamic>)), 'catch', cast ([function() return 0.0] : Array<Dynamic>));
+      return cast null;
+    })();
+  }
+
   public static function getRenderImageDataUrl__captureEntry(page:Dynamic):flighthq._internal._Promise<Null<String>> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<String>> {
       return cast _Runtime.callProperty(_Runtime.callProperty(page, 'evaluate', cast ([function() return _Runtime.coalesce(_Runtime.field((cast (cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : Dynamic) : { @:optional var __ftRenderImage:String; }), '__ftRenderImage'), function():Dynamic return cast null)] : Array<Dynamic>)), 'catch', cast ([function() return null] : Array<Dynamic>));
@@ -227,9 +319,127 @@ class CaptureEntry {
     })();
   }
 
+  public static function getCanvasImageDataUrl__captureEntry(page:Dynamic):flighthq._internal._Promise<Null<String>> {
+    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<String>> {
+      return cast _Runtime.callProperty(_Runtime.callProperty(page, 'evaluate', cast ([function() return _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'querySelector', cast (['canvas'] : Array<Dynamic>)), 'toDataURL', cast (['image/png'] : Array<Dynamic>)), function():Dynamic return cast null)] : Array<Dynamic>)), 'catch', cast ([function() return null] : Array<Dynamic>));
+      return cast null;
+    })();
+  }
+
   public static function getFunctionalTargetKind__captureEntry(page:Dynamic):flighthq._internal._Promise<Null<String>> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<String>> {
       return cast _Runtime.callProperty(_Runtime.callProperty(page, 'evaluate', cast ([function() return _Runtime.coalesce(_Runtime.optionalField(_Runtime.field((cast (cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : Dynamic) : { @:optional var __ftTarget:{ @:optional var kind:String; }; }), '__ftTarget'), 'kind'), function():Dynamic return cast null)] : Array<Dynamic>)), 'catch', cast ([function() return null] : Array<Dynamic>));
+      return cast null;
+    })();
+  }
+
+  public static function measureObservedCanvasCoverage__captureEntry(page:Dynamic):flighthq._internal._Promise<Null<Float>> {
+    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<Float>> {
+      return cast _Runtime.callProperty(_Runtime.callProperty(page, 'evaluate', cast ([function() {
+        var canvas:Dynamic = cast _Runtime.UNDEFINED;
+        var w:Dynamic = cast _Runtime.UNDEFINED;
+        var h:Dynamic = cast _Runtime.UNDEFINED;
+        var off:Dynamic = cast _Runtime.UNDEFINED;
+        var ctx:Dynamic = cast _Runtime.UNDEFINED;
+        var data:Dynamic = cast _Runtime.UNDEFINED;
+        var br:Dynamic = cast _Runtime.UNDEFINED;
+        var bg:Dynamic = cast _Runtime.UNDEFINED;
+        var bb:Dynamic = cast _Runtime.UNDEFINED;
+        var differing:Dynamic = cast _Runtime.UNDEFINED;
+        var pixels:Dynamic = cast _Runtime.UNDEFINED;
+        canvas = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'querySelector', cast (['canvas'] : Array<Dynamic>));
+        if (_Runtime.truthy(!_Runtime.truthy(canvas))) { return cast null; }
+        w = _Runtime.field(canvas, 'width');
+        h = _Runtime.field(canvas, 'height');
+        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(w, 0.0), function():Dynamic return cast _Runtime.strictEquals(h, 0.0)))) { return cast null; }
+        off = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
+        _Runtime.setField(off, 'width', w);
+        _Runtime.setField(off, 'height', h);
+        ctx = _Runtime.callProperty(off, 'getContext', cast (['2d'] : Array<Dynamic>));
+        if (_Runtime.truthy(!_Runtime.truthy(ctx))) { return cast null; }
+        _Runtime.callProperty(ctx, 'drawImage', cast ([canvas, 0.0, 0.0] : Array<Dynamic>));
+        data = _Runtime.field(_Runtime.callProperty(ctx, 'getImageData', cast ([0.0, 0.0, w, h] : Array<Dynamic>)), 'data');
+        br = _Runtime.getIndex(data, 0.0);
+        bg = _Runtime.getIndex(data, 1.0);
+        bb = _Runtime.getIndex(data, 2.0);
+        differing = 0.0;
+        pixels = (w * h);
+        {
+          var i:Dynamic = 0.0;
+          while (_Runtime.truthy(_Runtime.compare(i, pixels, '<'))) {
+            var o:Dynamic = (i * 4.0);
+            if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(data, o) - br)] : Array<Dynamic>)), 8.0, '>'), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(data, (o + 1.0)) - bg)] : Array<Dynamic>)), 8.0, '>')), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(data, (o + 2.0)) - bb)] : Array<Dynamic>)), 8.0, '>')))) {
+              (differing = cast ((differing + 1.0) : Dynamic));
+            }
+            i++;
+          }
+        }
+        return cast (differing / pixels);
+      }] : Array<Dynamic>)), 'catch', cast ([function() return null] : Array<Dynamic>));
+      return cast null;
+    })();
+  }
+
+  public static function grabInterceptedGlFrame__captureEntry(page:Dynamic):flighthq._internal._Promise<Null<{ var coverage:Float; var dataUrl:String; }>> {
+    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<{ var coverage:Float; var dataUrl:String; }>> {
+      return cast _Runtime.callProperty(_Runtime.callProperty(page, 'evaluate', cast ([function() {
+        var flags:Dynamic = cast _Runtime.UNDEFINED;
+        var ctxs:Dynamic = cast _Runtime.UNDEFINED;
+        var best:Null<{ var coverage:Float; var dataUrl:String; }> = cast _Runtime.UNDEFINED;
+        flags = (cast (cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : Dynamic) : { @:optional var __ftBestGlFrame:{ var coverage:Float; var dataUrl:String; }; @:optional var __ftGlContexts:Array<{ var canvas:Dynamic; var gl:Dynamic; }>; });
+        ctxs = _Runtime.field(flags, '__ftGlContexts');
+        best = _Runtime.coalesce(_Runtime.field(flags, '__ftBestGlFrame'), function():Dynamic return cast null);
+        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(ctxs, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(ctxs, 'length'), 0.0)))) { return cast best; }
+        for (entry in _Runtime.iterable(ctxs)) {
+          var canvas:Dynamic = _Runtime.field(entry, 'canvas');
+          var gl:Dynamic = _Runtime.field(entry, 'gl');
+          var w:Dynamic = _Runtime.field(canvas, 'width');
+          var h:Dynamic = _Runtime.field(canvas, 'height');
+          if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(w, 0.0), function():Dynamic return cast _Runtime.strictEquals(h, 0.0)))) { continue; }
+          try {
+            _Runtime.callProperty(gl, 'finish', cast ([] : Array<Dynamic>));
+            _Runtime.callProperty(gl, 'bindFramebuffer', cast ([_Runtime.field(gl, 'FRAMEBUFFER'), null] : Array<Dynamic>));
+            var buf:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [((w * h) * 4.0)]);
+            _Runtime.callProperty(gl, 'readPixels', cast ([0.0, 0.0, w, h, _Runtime.field(gl, 'RGBA'), _Runtime.field(gl, 'UNSIGNED_BYTE'), buf] : Array<Dynamic>));
+            var br:Dynamic = _Runtime.getIndex(buf, 0.0);
+            var bg:Dynamic = _Runtime.getIndex(buf, 1.0);
+            var bb:Dynamic = _Runtime.getIndex(buf, 2.0);
+            var differing:Dynamic = 0.0;
+            var pixels:Dynamic = (w * h);
+            {
+              var i:Dynamic = 0.0;
+              while (_Runtime.truthy(_Runtime.compare(i, pixels, '<'))) {
+                var o:Dynamic = (i * 4.0);
+                if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(buf, o) - br)] : Array<Dynamic>)), 8.0, '>'), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(buf, (o + 1.0)) - bg)] : Array<Dynamic>)), 8.0, '>')), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(buf, (o + 2.0)) - bb)] : Array<Dynamic>)), 8.0, '>')))) {
+                  (differing = cast ((differing + 1.0) : Dynamic));
+                }
+                i++;
+              }
+            }
+            var coverage:Dynamic = (differing / pixels);
+            if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(best, null), function():Dynamic return cast _Runtime.compare(coverage, _Runtime.field(best, 'coverage'), '<=')))) { continue; }
+            var off:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
+            _Runtime.setField(off, 'width', w);
+            _Runtime.setField(off, 'height', h);
+            var c2d:Dynamic = _Runtime.callProperty(off, 'getContext', cast (['2d'] : Array<Dynamic>));
+            if (_Runtime.truthy(_Runtime.strictEquals(c2d, null))) { continue; }
+            var img:Dynamic = _Runtime.callProperty(c2d, 'createImageData', cast ([w, h] : Array<Dynamic>));
+            var rowBytes:Dynamic = (w * 4.0);
+            {
+              var y:Dynamic = 0.0;
+              while (_Runtime.truthy(_Runtime.compare(y, h, '<'))) {
+                var src:Dynamic = (((h - 1.0) - y) * rowBytes);
+                _Runtime.callProperty(_Runtime.field(img, 'data'), 'set', cast ([buf.subarray(Std.int(src), Std.int((src + rowBytes))), (y * rowBytes)] : Array<Dynamic>));
+                y++;
+              }
+            }
+            _Runtime.callProperty(c2d, 'putImageData', cast ([img, 0.0, 0.0] : Array<Dynamic>));
+            (best = cast ({ coverage: coverage, dataUrl: _Runtime.callProperty(off, 'toDataURL', cast (['image/png'] : Array<Dynamic>)) } : Dynamic));
+          } catch (__error:Dynamic) {
+          }
+        }
+        return cast best;
+      }] : Array<Dynamic>)), 'catch', cast ([function() return null] : Array<Dynamic>));
       return cast null;
     })();
   }
@@ -255,6 +465,8 @@ class CaptureEntry {
         verification = _Runtime.field(w, '__ftVerification');
         if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'getElementById', cast (['ft-error'] : Array<Dynamic>)), null))) { return cast true; }
         if (_Runtime.truthy(_Runtime.strictEquals(verification, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast false; }
+        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(verification, 'state'), 'failed'))) { return cast true; }
+        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(verification, 'state'), 'passed'))) { return cast false; }
         if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(verification, 'render'), 'dom'))) { return cast true; }
         return cast _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(verification, 'fingerprint'), null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(w, '__ftRenderImage')), 'string')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(w, '__ftRenderImage'), ''));
       }, null, { polling: 100.0, timeout: 15000.0 }] : Array<Dynamic>)), 'catch', cast ([function() {
@@ -263,6 +475,11 @@ class CaptureEntry {
       return cast _Runtime.callProperty(_Runtime.callProperty(page, 'evaluate', cast ([function() return _Runtime.coalesce(_Runtime.field((cast (cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : Dynamic) : { @:optional var __ftVerification:RenderVerification__captureEntry; }), '__ftVerification'), function():Dynamic return cast null)] : Array<Dynamic>)), 'catch', cast ([function() return null] : Array<Dynamic>));
       return cast null;
     })();
+  }
+
+  public static function isCaptureTransportNoise__captureEntry(url:String):Bool {
+    return cast _Runtime.orValue(StringTools.startsWith(url, 'ws://'), function():Dynamic return cast StringTools.startsWith(url, 'wss://'));
+    return cast null;
   }
 
   public static function captureParallel(opts:ParallelCaptureOptions):flighthq._internal._Promise<ParallelCaptureResult> {
@@ -277,6 +494,7 @@ class CaptureEntry {
       var captured:Dynamic = cast _Runtime.UNDEFINED;
       var changed:Dynamic = cast _Runtime.UNDEFINED;
       var failed:Dynamic = cast _Runtime.UNDEFINED;
+      var targets:Array<CaptureTargetReport> = cast _Runtime.UNDEFINED;
       var activeWorkers:Dynamic = cast _Runtime.UNDEFINED;
       var workers:Dynamic = cast _Runtime.UNDEFINED;
       __destructure3 = opts;
@@ -295,27 +513,232 @@ class CaptureEntry {
       captured = 0.0;
       changed = 0.0;
       failed = 0.0;
+      targets = cast ([] : Array<Dynamic>);
       activeWorkers = _Runtime.callProperty(HxMath, 'min', cast ([workerCount, _Runtime.field(jobs, 'length')] : Array<Dynamic>));
       workers = _Runtime.toArray({ length: activeWorkers }, flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
         while (_Runtime.truthy(true)) {
           if (_Runtime.truthy(_Runtime.callValue(isAborted, cast ([] : Array<Dynamic>)))) { break; }
           var job:Dynamic = _Runtime.callProperty(jobs, 'shift', cast ([] : Array<Dynamic>));
           if (_Runtime.truthy(!_Runtime.truthy(job))) { break; }
-          var result:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(captureEntry, cast ([{ context: context, entry: _Runtime.field(job, 'entry'), renderers: cast ([_Runtime.field(job, 'renderer')] : Array<Dynamic>), displayLabel: '' + Std.string(_Runtime.field(_Runtime.field(job, 'entry'), 'name')) + '/' + Std.string(_Runtime.field(job, 'renderer')) + '', baseUrl: _Runtime.field(opts, 'baseUrl'), tool: _Runtime.field(opts, 'tool'), outBase: _Runtime.field(opts, 'outBase'), root: _Runtime.field(opts, 'root'), updateBaseline: _Runtime.field(opts, 'updateBaseline'), extraWait: _Runtime.field(opts, 'extraWait'), captureFrames: _Runtime.field(opts, 'captureFrames'), failOnError: _Runtime.field(opts, 'failOnError'), verify: _Runtime.field(opts, 'verify'), isAborted: function() return _Runtime.callValue(isAborted, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>)));
+          var startedAt:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['performance'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>));
+          var maxRetries:Dynamic = _Runtime.coalesce(_Runtime.field(opts, 'maxRetries'), function():Dynamic return cast 1.0);
+          var retries:Dynamic = 0.0;
+          var result:String = cast _Runtime.UNDEFINED;
+          while (_Runtime.truthy(true)) {
+            (result = cast (flighthq._internal._Async.awaitValue(_Runtime.callValue(captureEntry, cast ([{ context: context, entry: _Runtime.field(job, 'entry'), renderers: cast ([_Runtime.field(job, 'renderer')] : Array<Dynamic>), displayLabel: '' + Std.string(_Runtime.field(_Runtime.field(job, 'entry'), 'name')) + '/' + Std.string(_Runtime.field(job, 'renderer')) + '', baseUrl: _Runtime.field(opts, 'baseUrl'), tool: _Runtime.field(opts, 'tool'), outBase: _Runtime.field(opts, 'outBase'), root: _Runtime.field(opts, 'root'), updateBaseline: _Runtime.field(opts, 'updateBaseline'), extraWait: _Runtime.field(opts, 'extraWait'), captureFrames: _Runtime.field(opts, 'captureFrames'), failOnError: _Runtime.field(opts, 'failOnError'), observe: _Runtime.field(opts, 'observe'), verify: _Runtime.field(opts, 'verify'), onVerifiedFingerprint: _Runtime.field(opts, 'onVerifiedFingerprint'), isAborted: function() return _Runtime.callValue(isAborted, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>))) : Dynamic));
+            var status:Dynamic = _Runtime.callValue(CaptureEntry.readCaptureStatus__captureEntry, cast ([_Runtime.field(opts, 'outBase'), _Runtime.field(opts, 'tool'), _Runtime.field(_Runtime.field(job, 'entry'), 'name'), _Runtime.field(job, 'renderer')] : Array<Dynamic>));
+            var transientError:Dynamic = _Runtime.andValue(_Runtime.strictEquals(result, 'error'), function():Dynamic return cast _Runtime.callValue(isTransientCaptureError, cast ([_Runtime.coalesce(_Runtime.optionalField(status, 'error'), function():Dynamic return cast '')] : Array<Dynamic>)));
+            var unusableObservation:Dynamic = _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(opts, 'observe'), true), function():Dynamic return cast _Runtime.strictEquals(result, 'ok')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.optionalField(status, 'observe'), _Runtime.field(_Runtime, 'UNDEFINED'))), function():Dynamic return cast _Runtime.orValue(_Runtime.field(_Runtime.field(status, 'observe'), 'blank'), function():Dynamic return cast _Runtime.field(_Runtime.field(status, 'observe'), 'timedOut')));
+            if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.andValue(!_Runtime.truthy(transientError), function():Dynamic return cast !_Runtime.truthy(unusableObservation)), function():Dynamic return cast _Runtime.compare(retries, maxRetries, '>=')), function():Dynamic return cast _Runtime.callValue(isAborted, cast ([] : Array<Dynamic>))))) { break; }
+            retries++;
+            _Runtime.console('log', [_Runtime.callValue(formatStatusLine, cast (['muted', '' + Std.string(_Runtime.field(_Runtime.field(job, 'entry'), 'name')) + '/' + Std.string(_Runtime.field(job, 'renderer')) + '', 6.0, 'retrying (' + Std.string(retries) + '/' + Std.string(maxRetries) + ')…'] : Array<Dynamic>))]);
+          }
           if (_Runtime.truthy(_Runtime.strictEquals(result, 'ok'))) { captured++; } else { if (_Runtime.truthy(_Runtime.strictEquals(result, 'changed'))) { changed++; } else { failed++; } }
+          var paths:Dynamic = _Runtime.callValue(getCaptureOutputPaths, cast ([_Runtime.field(opts, 'outBase'), _Runtime.field(opts, 'tool'), _Runtime.field(_Runtime.field(job, 'entry'), 'name'), _Runtime.field(job, 'renderer')] : Array<Dynamic>));
+          var status:Dynamic = _Runtime.callValue(CaptureEntry.readCaptureStatus__captureEntry, cast ([_Runtime.field(opts, 'outBase'), _Runtime.field(opts, 'tool'), _Runtime.field(_Runtime.field(job, 'entry'), 'name'), _Runtime.field(job, 'renderer')] : Array<Dynamic>));
+          _Runtime.callProperty(targets, 'push', cast ([{ entry: _Runtime.field(_Runtime.field(job, 'entry'), 'name'), renderer: _Runtime.field(job, 'renderer'), result: _Runtime.select(_Runtime.strictEquals(result, 'ok'), function():Dynamic return cast 'captured', function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(result, 'changed'), function():Dynamic return cast 'changed', function():Dynamic return cast 'failed')), durationMs: (_Runtime.callProperty(HxMath, 'round', cast ([((_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['performance'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>)) - startedAt) * 100.0)] : Array<Dynamic>)) / 100.0), retries: retries, usable: _Runtime.andValue(_Runtime.strictEquals(_Runtime.optionalField(status, 'state'), 'ready'), function():Dynamic return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(status, 'observe'), 'usable'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(status, 'hash'), null))), error: _Runtime.coalesce(_Runtime.optionalField(status, 'error'), function():Dynamic return cast null), artifacts: { screenshot: _Runtime.field(paths, 'finalScreenshot'), logs: _Runtime.field(paths, 'finalLogs'), status: _Runtime.field(paths, 'statusPath') } }] : Array<Dynamic>));
         }
         return cast null;
       }));
       flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'all', cast ([workers] : Array<Dynamic>)));
-      return cast { captured: captured, changed: changed, failed: failed };
+      return cast { captured: captured, changed: changed, failed: failed, targets: targets };
       return cast null;
     })();
   }
 
-  public static function getCaptureOutputPaths(outBase:String, tool:Tool, name:String, renderer:String):CaptureOutputPaths {
+  public static function readCaptureStatus__captureEntry(outBase:String, tool:String, entry:String, renderer:String):Null<CaptureStatus> {
+    try {
+      return cast (cast _Runtime.jsonParse(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'readFileSync'] : Array<Dynamic>)), cast ([_Runtime.field(_Runtime.callValue(getCaptureOutputPaths, cast ([outBase, tool, entry, renderer] : Array<Dynamic>)), 'statusPath'), 'utf8'] : Array<Dynamic>))) : CaptureStatus);
+    } catch (__error:Dynamic) {
+      return cast null;
+    }
+    return cast null;
+  }
+
+  public static function captureUrl(url:String, options:CaptureUrlOptions):flighthq._internal._Promise<CaptureObserveDiagnostics> {
+    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<CaptureObserveDiagnostics> {
+      var attempts:Dynamic = cast _Runtime.UNDEFINED;
+      var last:Null<CaptureObserveDiagnostics> = cast _Runtime.UNDEFINED;
+      var attemptErrors:Array<String> = cast _Runtime.UNDEFINED;
+      attempts = _Runtime.callProperty(HxMath, 'max', cast ([1.0, (_Runtime.coalesce(_Runtime.field(options, 'maxRetries'), function():Dynamic return cast 2.0) + 1.0)] : Array<Dynamic>));
+      last = null;
+      attemptErrors = cast ([] : Array<Dynamic>);
+      {
+        var attempt:Dynamic = 1.0;
+        while (_Runtime.truthy(_Runtime.compare(attempt, attempts, '<='))) {
+          (last = cast (flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.captureUrlAttempt__captureEntry, cast ([url, options, attempt] : Array<Dynamic>))) : Dynamic));
+          _Runtime.callProperty(attemptErrors, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(last, 'attemptErrors'))]));
+          if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(_Runtime.field(last, 'blank')), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(last, 'timedOut'))))) { break; }
+          if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(last, 'attemptErrors'), 'length'), 0.0))) {
+            _Runtime.callProperty(attemptErrors, 'push', cast ([_Runtime.select(_Runtime.field(last, 'timedOut'), function():Dynamic return cast 'attempt ' + Std.string(attempt) + ': render warmup timed out', function():Dynamic return cast 'attempt ' + Std.string(attempt) + ': blank render')] : Array<Dynamic>));
+          }
+          attempt++;
+        }
+      }
+      (last = cast (_Runtime.mergeObjects([last, { attemptErrors: attemptErrors }]) : Dynamic));
+      _Runtime.callValue(CaptureEntry.updateObserveStatus__captureEntry, cast ([_Runtime.field(options, 'outDir'), last] : Array<Dynamic>));
+      _Runtime.callValue(writeCaptureReport, cast ([_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([_Runtime.field(options, 'outDir'), 'report.json'] : Array<Dynamic>)), 'observe', { url: url, diagnostics: last }] : Array<Dynamic>));
+      return cast last;
+      return cast null;
+    })();
+  }
+
+  public static function getCaptureOutputPaths(outBase:String, tool:String, name:String, renderer:String):CaptureOutputPaths {
     var outDir:Dynamic = cast _Runtime.UNDEFINED;
     outDir = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'resolve'] : Array<Dynamic>)), cast ([outBase] : Array<Dynamic>)), tool, name, _Runtime.callValue(routeSegment, cast ([renderer] : Array<Dynamic>))] : Array<Dynamic>));
     return cast { outDir: outDir, tmpScreenshot: _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([outDir, 'screenshot.tmp.png'] : Array<Dynamic>)), finalScreenshot: _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([outDir, 'screenshot.png'] : Array<Dynamic>)), tmpLogs: _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([outDir, 'logs.tmp.jsonl'] : Array<Dynamic>)), finalLogs: _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([outDir, 'logs.jsonl'] : Array<Dynamic>)), statusPath: _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([outDir, 'status.json'] : Array<Dynamic>)) };
+    return cast null;
+  }
+
+  public static function captureUrlAttempt__captureEntry(url:String, options:CaptureUrlOptions, attempt:Float):flighthq._internal._Promise<CaptureObserveDiagnostics> {
+    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<CaptureObserveDiagnostics> {
+      var __destructure4:Dynamic = cast _Runtime.UNDEFINED;
+      var outDir:Dynamic = cast _Runtime.UNDEFINED;
+      var wait:Dynamic = cast _Runtime.UNDEFINED;
+      var captureFrames:Dynamic = cast _Runtime.UNDEFINED;
+      var logs:Array<Dynamic> = cast _Runtime.UNDEFINED;
+      var __destructure5:Dynamic = cast _Runtime.UNDEFINED;
+      var browser:Dynamic = cast _Runtime.UNDEFINED;
+      var context:Dynamic = cast _Runtime.UNDEFINED;
+      var page:Dynamic = cast _Runtime.UNDEFINED;
+      __destructure4 = options;
+      outDir = _Runtime.field(__destructure4, 'outDir');
+      wait = _Runtime.defaultUndefined(_Runtime.field(__destructure4, 'wait'), function():Dynamic return cast 0.0);
+      captureFrames = _Runtime.defaultUndefined(_Runtime.field(__destructure4, 'captureFrames'), function():Dynamic return cast 1.0);
+      _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'mkdirSync'] : Array<Dynamic>)), cast ([outDir, { recursive: true }] : Array<Dynamic>));
+      logs = cast ([] : Array<Dynamic>);
+      __destructure5 = flighthq._internal._Async.awaitValue(_Runtime.callValue(launchBrowser, cast ([{ captureFrames: captureFrames, verify: false, observe: true }] : Array<Dynamic>)));
+      browser = _Runtime.field(__destructure5, 'browser');
+      context = _Runtime.field(__destructure5, 'context');
+      page = flighthq._internal._Async.awaitValue(_Runtime.callProperty(context, 'newPage', cast ([] : Array<Dynamic>)));
+      _Runtime.callProperty(page, 'on', cast (['pageerror', function(err:Dynamic) {
+        _Runtime.callProperty(logs, 'push', cast ([{ __flight: true, t: -1.0, level: 'pageerror', data: { msg: _Runtime.field(err, 'message') } }] : Array<Dynamic>));
+      }] : Array<Dynamic>));
+      _Runtime.callProperty(page, 'on', cast (['console', function(msg:Dynamic) {
+        var type:Dynamic = cast _Runtime.UNDEFINED;
+        type = _Runtime.callProperty(msg, 'type', cast ([] : Array<Dynamic>));
+        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(type, 'error'), function():Dynamic return cast _Runtime.strictEquals(type, 'warning')))) {
+          _Runtime.callProperty(logs, 'push', cast ([{ __flight: true, t: -1.0, level: _Runtime.select(_Runtime.strictEquals(type, 'error'), function():Dynamic return cast 'error', function():Dynamic return cast 'warn'), channel: 'console', data: { msg: _Runtime.callProperty(msg, 'text', cast ([] : Array<Dynamic>)) } }] : Array<Dynamic>));
+        }
+      }] : Array<Dynamic>));
+      _Runtime.callProperty(page, 'on', cast (['requestfailed', function(req:Dynamic) {
+        if (_Runtime.truthy(_Runtime.callValue(CaptureEntry.isCaptureTransportNoise__captureEntry, cast ([_Runtime.callProperty(req, 'url', cast ([] : Array<Dynamic>))] : Array<Dynamic>)))) { return; }
+        _Runtime.callProperty(logs, 'push', cast ([{ __flight: true, t: -1.0, level: 'error', channel: 'network', data: { msg: 'request failed: ' + Std.string(_Runtime.callProperty(req, 'url', cast ([] : Array<Dynamic>))) + ' (' + Std.string(_Runtime.coalesce(_Runtime.optionalField(_Runtime.callProperty(req, 'failure', cast ([] : Array<Dynamic>)), 'errorText'), function():Dynamic return cast 'unknown')) + ')' } }] : Array<Dynamic>));
+      }] : Array<Dynamic>));
+      try {
+        try {
+          flighthq._internal._Async.awaitValue(_Runtime.callProperty(page, 'goto', cast ([url, { waitUntil: 'domcontentloaded', timeout: 15000.0 }] : Array<Dynamic>)));
+          flighthq._internal._Async.awaitValue(_Runtime.callProperty(page, 'evaluate', cast ([function() {
+            _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['requestAnimationFrame'] : Array<Dynamic>)), cast ([function() return _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['requestAnimationFrame'] : Array<Dynamic>)), cast ([function() {
+            
+            }] : Array<Dynamic>))] : Array<Dynamic>));
+          }] : Array<Dynamic>)));
+          var bestIntercept:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.grabInterceptedGlFrame__captureEntry, cast ([page] : Array<Dynamic>)));
+          var earlyCoverage:Dynamic = _Runtime.coalesce(_Runtime.optionalField(bestIntercept, 'coverage'), function():Dynamic return cast flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.measureObservedCanvasCoverage__captureEntry, cast ([page] : Array<Dynamic>))));
+          var reachedFrame:Dynamic = _Runtime.andValue(!_Runtime.strictEquals(earlyCoverage, null), function():Dynamic return cast _Runtime.compare(earlyCoverage, CaptureEntry.OBSERVE_BLANK_COVERAGE__captureEntry, '>'));
+          if (_Runtime.truthy(!_Runtime.truthy(reachedFrame))) {
+            var observed:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.waitForObservedPixels__captureEntry, cast ([page, CaptureEntry.OBSERVE_WARMUP_TIMEOUT_MS__captureEntry] : Array<Dynamic>)));
+            (bestIntercept = cast (_Runtime.callValue(CaptureEntry.betterObservedGlFrame__captureEntry, cast ([bestIntercept, _Runtime.field(observed, 'intercept')] : Array<Dynamic>)) : Dynamic));
+            (reachedFrame = cast (_Runtime.field(observed, 'reached') : Dynamic));
+          }
+          if (_Runtime.truthy(!_Runtime.truthy(reachedFrame))) {
+            _Runtime.callProperty(logs, 'push', cast ([{ __flight: true, t: -1.0, level: 'warn', channel: 'capture', data: { msg: 'render warmup reached its 5s safety bound; emitting the best available page image' } }] : Array<Dynamic>));
+          }
+          if (_Runtime.truthy(_Runtime.compare(wait, 0.0, '>'))) { flighthq._internal._Async.awaitValue(_Runtime.callProperty(page, 'waitForTimeout', cast ([wait] : Array<Dynamic>))); }
+          var intercept:Dynamic = _Runtime.callValue(CaptureEntry.betterObservedGlFrame__captureEntry, cast ([bestIntercept, flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.grabInterceptedGlFrame__captureEntry, cast ([page] : Array<Dynamic>)))] : Array<Dynamic>));
+          var coverage:Dynamic = _Runtime.coalesce(_Runtime.optionalField(intercept, 'coverage'), function():Dynamic return cast flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.measureObservedCanvasCoverage__captureEntry, cast ([page] : Array<Dynamic>))));
+          var canvasIsBlank:Dynamic = _Runtime.andValue(!_Runtime.strictEquals(coverage, null), function():Dynamic return cast _Runtime.compare(coverage, CaptureEntry.OBSERVE_BLANK_COVERAGE__captureEntry, '<='));
+          var screenshotBuffer:Dynamic = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(intercept, null), function():Dynamic return cast !_Runtime.truthy(canvasIsBlank)), function():Dynamic return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Buffer'] : Array<Dynamic>)), 'from', cast ([_Runtime.getIndex(_Runtime.callProperty(_Runtime.field(intercept, 'dataUrl'), 'split', cast ([','] : Array<Dynamic>)), 1.0), 'base64'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.select(canvasIsBlank, function():Dynamic return cast flighthq._internal._Async.awaitValue(_Runtime.callProperty(page, 'screenshot', cast ([] : Array<Dynamic>))), function():Dynamic return cast flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(page, 'locator', cast (['canvas'] : Array<Dynamic>)), 'first', cast ([] : Array<Dynamic>)), 'screenshot', cast ([] : Array<Dynamic>)), 'catch', cast ([function() return _Runtime.callProperty(page, 'screenshot', cast ([] : Array<Dynamic>))] : Array<Dynamic>)))));
+          var diagnostics:Dynamic = _Runtime.callValue(buildCaptureObserveDiagnostics, cast ([{ backend: _Runtime.select(!_Runtime.strictEquals(intercept, null), function():Dynamic return cast 'webgl', function():Dynamic return cast _Runtime.select(_Runtime.compare(flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(page, 'locator', cast (['canvas'] : Array<Dynamic>)), 'count', cast ([] : Array<Dynamic>))), 0.0, '>'), function():Dynamic return cast 'canvas', function():Dynamic return cast 'dom')), blank: canvasIsBlank, coverage: coverage, logs: logs, verifyPublished: false, verifyTargetKind: null, warmupFrames: flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.getObserveWarmupFrames__captureEntry, cast ([page] : Array<Dynamic>))), attempts: attempt, timedOut: !_Runtime.truthy(reachedFrame), pageEvidence: flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.hasVisiblePageEvidence__captureEntry, cast ([page] : Array<Dynamic>))) }] : Array<Dynamic>));
+          _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'writeFileSync'] : Array<Dynamic>)), cast ([_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([outDir, 'screenshot.png'] : Array<Dynamic>)), screenshotBuffer] : Array<Dynamic>));
+          _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'writeFileSync'] : Array<Dynamic>)), cast ([_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([outDir, 'logs.jsonl'] : Array<Dynamic>)), _Runtime.join(_Runtime.callProperty(logs, 'map', cast ([function(l:Dynamic) return _Runtime.jsonStringify(l)] : Array<Dynamic>)), '\n')] : Array<Dynamic>));
+          var status:CaptureStatus = { protocolVersion: CAPTURE_PROTOCOL_VERSION, state: 'ready', capturedAt: _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Date'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>)), error: null, hash: _Runtime.callProperty(_Runtime.callProperty(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:crypto', 'createHash'] : Array<Dynamic>)), cast (['sha256'] : Array<Dynamic>)), 'update', cast ([screenshotBuffer] : Array<Dynamic>)), 'digest', cast (['hex'] : Array<Dynamic>)), baselineHash: null, changed: null, observe: diagnostics };
+          _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'writeFileSync'] : Array<Dynamic>)), cast ([_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([outDir, 'status.json'] : Array<Dynamic>)), _Runtime.jsonStringify(status, null, 2.0)] : Array<Dynamic>));
+          var __returnValue13:Dynamic = diagnostics;
+          {
+            flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(browser, 'close', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+            
+            }] : Array<Dynamic>)));
+          }
+          return cast __returnValue13;
+        } catch (error:Dynamic) {
+          var message:Dynamic = _Runtime.select(_Runtime.isError(error), function():Dynamic return cast _Runtime.field(error, 'message'), function():Dynamic return cast Std.string(error));
+          _Runtime.callProperty(logs, 'push', cast ([{ __flight: true, t: -1.0, level: 'error', channel: 'capture', data: { msg: message } }] : Array<Dynamic>));
+          var screenshotBuffer:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(page, 'screenshot', cast ([] : Array<Dynamic>)), 'catch', cast ([function() return null] : Array<Dynamic>)));
+          var diagnostics:Dynamic = _Runtime.callValue(buildCaptureObserveDiagnostics, cast ([{ backend: 'page', blank: true, coverage: null, logs: logs, verifyPublished: false, verifyTargetKind: null, warmupFrames: flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.getObserveWarmupFrames__captureEntry, cast ([page] : Array<Dynamic>))), attempts: attempt, timedOut: _Runtime.callProperty(_Runtime.regexp('timeout', 'i'), 'test', cast ([message] : Array<Dynamic>)), pageEvidence: flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.hasVisiblePageEvidence__captureEntry, cast ([page] : Array<Dynamic>))), attemptErrors: cast ([message] : Array<Dynamic>) }] : Array<Dynamic>));
+          if (_Runtime.truthy(!_Runtime.strictEquals(screenshotBuffer, null))) { _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'writeFileSync'] : Array<Dynamic>)), cast ([_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([outDir, 'screenshot.png'] : Array<Dynamic>)), screenshotBuffer] : Array<Dynamic>)); }
+          _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'writeFileSync'] : Array<Dynamic>)), cast ([_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([outDir, 'logs.jsonl'] : Array<Dynamic>)), _Runtime.join(_Runtime.callProperty(logs, 'map', cast ([function(entry:Dynamic) return _Runtime.jsonStringify(entry)] : Array<Dynamic>)), '\n')] : Array<Dynamic>));
+          var status:CaptureStatus = { protocolVersion: CAPTURE_PROTOCOL_VERSION, state: 'error', capturedAt: _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Date'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>)), error: message, hash: _Runtime.select(_Runtime.strictEquals(screenshotBuffer, null), function():Dynamic return cast null, function():Dynamic return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:crypto', 'createHash'] : Array<Dynamic>)), cast (['sha256'] : Array<Dynamic>)), 'update', cast ([screenshotBuffer] : Array<Dynamic>)), 'digest', cast (['hex'] : Array<Dynamic>))), baselineHash: null, changed: null, observe: diagnostics };
+          _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'writeFileSync'] : Array<Dynamic>)), cast ([_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([outDir, 'status.json'] : Array<Dynamic>)), _Runtime.jsonStringify(status, null, 2.0)] : Array<Dynamic>));
+          var __returnValue14:Dynamic = diagnostics;
+          {
+            flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(browser, 'close', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+            
+            }] : Array<Dynamic>)));
+          }
+          return cast __returnValue14;
+        }
+      } catch (__finallyError15:Dynamic) {
+        {
+          flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(browser, 'close', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+          
+          }] : Array<Dynamic>)));
+        }
+        throw __finallyError15;
+      }
+      {
+        flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(browser, 'close', cast ([] : Array<Dynamic>)), 'catch', cast ([function() {
+        
+        }] : Array<Dynamic>)));
+      }
+      return cast null;
+    })();
+  }
+
+  public static function updateObserveStatus__captureEntry(outDir:String, diagnostics:CaptureObserveDiagnostics):Void {
+    var path:Dynamic = cast _Runtime.UNDEFINED;
+    path = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:path', 'join'] : Array<Dynamic>)), cast ([outDir, 'status.json'] : Array<Dynamic>));
+    try {
+      var status:Dynamic = (cast _Runtime.jsonParse(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'readFileSync'] : Array<Dynamic>)), cast ([path, 'utf8'] : Array<Dynamic>))) : CaptureStatus);
+      _Runtime.setField(status, 'observe', diagnostics);
+      _Runtime.callValue(_Runtime.callProperty(_Runtime, 'externalValue', cast (['node:fs', 'writeFileSync'] : Array<Dynamic>)), cast ([path, _Runtime.jsonStringify(status, null, 2.0)] : Array<Dynamic>));
+    } catch (__error:Dynamic) {
+    }
+  }
+
+  public static function hasVisiblePageEvidence__captureEntry(page:Dynamic):flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Bool> {
+      return cast _Runtime.callProperty(_Runtime.callProperty(page, 'evaluate', cast ([function() return _Runtime.callProperty(_Runtime.concatArrays([_Runtime.toArray(_Runtime.field(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'body'), 'children'))]), 'some', cast ([function(element:Dynamic) return _Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(element, 'tagName'), 'CANVAS'), function():Dynamic return cast _Runtime.orValue(!_Runtime.strictEquals(StringTools.trim(Std.string(_Runtime.coalesce(_Runtime.field(element, 'textContent'), function():Dynamic return cast ''))), ''), function():Dynamic return cast _Runtime.compare(_Runtime.field((cast element : Dynamic), 'offsetWidth'), 0.0, '>')))] : Array<Dynamic>))] : Array<Dynamic>)), 'catch', cast ([function() return false] : Array<Dynamic>));
+      return cast null;
+    })();
+  }
+
+  public static function waitForObservedPixels__captureEntry(page:Dynamic, timeoutMs:Float):flighthq._internal._Promise<{ var reached:Bool; var intercept:Null<{ var coverage:Float; var dataUrl:String; }>; }> {
+    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<{ var reached:Bool; var intercept:Null<{ var coverage:Float; var dataUrl:String; }>; }> {
+      var deadline:Dynamic = cast _Runtime.UNDEFINED;
+      var bestIntercept:Null<{ var coverage:Float; var dataUrl:String; }> = cast _Runtime.UNDEFINED;
+      deadline = (_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['performance'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>)) + timeoutMs);
+      bestIntercept = null;
+      while (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['performance'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>)), deadline, '<'))) {
+        var intercept:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.grabInterceptedGlFrame__captureEntry, cast ([page] : Array<Dynamic>)));
+        (bestIntercept = cast (_Runtime.callValue(CaptureEntry.betterObservedGlFrame__captureEntry, cast ([bestIntercept, intercept] : Array<Dynamic>)) : Dynamic));
+        var coverage:Dynamic = _Runtime.coalesce(_Runtime.optionalField(intercept, 'coverage'), function():Dynamic return cast flighthq._internal._Async.awaitValue(_Runtime.callValue(CaptureEntry.measureObservedCanvasCoverage__captureEntry, cast ([page] : Array<Dynamic>))));
+        if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(coverage, null), function():Dynamic return cast _Runtime.compare(coverage, CaptureEntry.OBSERVE_BLANK_COVERAGE__captureEntry, '>')))) { return cast { reached: true, intercept: bestIntercept }; }
+        flighthq._internal._Async.awaitValue(_Runtime.callProperty(page, 'waitForTimeout', cast ([100.0] : Array<Dynamic>)));
+      }
+      return cast { reached: false, intercept: bestIntercept };
+      return cast null;
+    })();
+  }
+
+  public static function betterObservedGlFrame__captureEntry(current:Null<{ var coverage:Float; var dataUrl:String; }>, candidate:Null<{ var coverage:Float; var dataUrl:String; }>):Null<{ var coverage:Float; var dataUrl:String; }> {
+    if (_Runtime.truthy(_Runtime.strictEquals(candidate, null))) { return cast current; }
+    return cast _Runtime.select(_Runtime.orValue(_Runtime.strictEquals(current, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(candidate, 'coverage'), _Runtime.field(current, 'coverage'), '>')), function():Dynamic return cast candidate, function():Dynamic return cast current);
+    return cast null;
+  }
+
+  public static function isTransientCaptureError(message:String):Bool {
+    return cast _Runtime.callProperty(_Runtime.regexp('timeout|net::ERR_|page crashed|execution context was destroyed|target page|navigation failed|protocol error|render verifier did not reach', 'i'), 'test', cast ([message] : Array<Dynamic>));
     return cast null;
   }
 }

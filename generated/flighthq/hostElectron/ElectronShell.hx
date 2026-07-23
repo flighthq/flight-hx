@@ -3,8 +3,8 @@ package flighthq.hostElectron;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostElectron.ElectronModule.ElectronApi;
-import flighthq.hostElectron.ElectronModule.ElectronShortcutDetails;
+import flighthq.types.ElectronApi;
+import flighthq.types.ElectronApi.ElectronShortcutDetails;
 import flighthq.types.Shell.ShellBackend;
 import flighthq.types.Shell.ShellShortcutLink;
 

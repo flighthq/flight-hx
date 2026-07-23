@@ -208,6 +208,7 @@ class GlCompressedTexture {
     var faces:Dynamic = cast _Runtime.UNDEFINED;
     var layers:Dynamic = cast _Runtime.UNDEFINED;
     var mipLevels:Dynamic = cast _Runtime.UNDEFINED;
+    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(GlCompressedTexture.isSupportedGlCompressedTextureContainerShape__glCompressedTexture, cast ([container] : Array<Dynamic>))))) { return cast false; }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(container, 'supercompression'), 'None'))) { return cast false; }
     nativeFormat = _Runtime.callValue(getGlCompressedTextureFormat, cast ([gl, _Runtime.field(container, 'format')] : Array<Dynamic>));
     faces = _Runtime.field(container, 'faces');
@@ -258,11 +259,21 @@ class GlCompressedTexture {
     return cast null;
   }
 
+  public static function isSupportedGlCompressedTextureContainerShape__glCompressedTexture(container:TextureContainer):Bool {
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(container, 'depth'), 1.0), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isInteger', cast ([_Runtime.field(container, 'layers')] : Array<Dynamic>)))), function():Dynamic return cast _Runtime.compare(_Runtime.field(container, 'layers'), 1.0, '<')))) { return cast false; }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(container, 'faces'), 1.0))) { return cast true; }
+    return cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.field(container, 'faces'), 6.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(container, 'layers'), 1.0));
+    return cast null;
+  }
+
   public static function uploadGlCompressedImageResource__glCompressedTexture(gl:Dynamic, image:ImageResource, decode:Null<GlCompressedTextureDecoder>):Bool {
     var compressed:Dynamic = cast _Runtime.UNDEFINED;
+    var container:Dynamic = cast _Runtime.UNDEFINED;
     compressed = _Runtime.field(image, 'compressed');
     if (_Runtime.truthy(_Runtime.strictEquals(compressed, null))) { return cast false; }
-    return cast _Runtime.callValue(uploadGlCompressedTextureContainer, cast ([gl, _Runtime.field(compressed, 'container'), _Runtime.field(compressed, 'payload'), _Runtime.coalesce(decode, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>));
+    container = _Runtime.field(compressed, 'container');
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(container, 'depth'), 1.0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(container, 'faces'), 1.0)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(container, 'layers'), 1.0)))) { return cast false; }
+    return cast _Runtime.callValue(uploadGlCompressedTextureContainer, cast ([gl, container, _Runtime.field(compressed, 'payload'), _Runtime.coalesce(decode, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>));
     return cast null;
   }
 }

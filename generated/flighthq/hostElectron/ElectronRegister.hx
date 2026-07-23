@@ -12,7 +12,6 @@ import flighthq.hostElectron.ElectronClipboard.createElectronClipboardBackend;
 import flighthq.hostElectron.ElectronDialog.createElectronDialogBackend;
 import flighthq.hostElectron.ElectronIpc.createElectronIpcBackend;
 import flighthq.hostElectron.ElectronMenu.createElectronMenuBackend;
-import flighthq.hostElectron.ElectronModule.ElectronApi;
 import flighthq.hostElectron.ElectronNotification.createElectronNotificationBackend;
 import flighthq.hostElectron.ElectronPlatform.createElectronPlatformBackend;
 import flighthq.hostElectron.ElectronPower.createElectronPowerBackend;
@@ -35,9 +34,9 @@ import flighthq.shell.Shell.setShellBackend;
 import flighthq.shortcut.Shortcut.setShortcutBackend;
 import flighthq.storage.Storage.setStorageBackend;
 import flighthq.tray.Tray.setTrayBackend;
+import flighthq.types.ElectronApi;
+import flighthq.types.ElectronBackendOptions;
 import flighthq.updater.Updater.setUpdaterBackend;
-
-typedef ElectronBackendOptions = { @:optional var storageFileName:String; };
 
 @:expose("flighthq.hostElectron.ElectronRegister")
 class ElectronRegister {

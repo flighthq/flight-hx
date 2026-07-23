@@ -11,11 +11,10 @@ import flighthq.types.ImageResource;
 import flighthq.types.Material;
 import flighthq.types.Material.MaterialData;
 import flighthq.types.WgpuMaterialRenderer;
+import flighthq.types.WgpuQuadBatchResources;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuSpriteBatchBufferSlot;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
-
-typedef WgpuQuadBatchResources = { var instanceBindGroupLayout:Dynamic; var materialBindGroupLayout:Dynamic; var basePipelineLayout:Dynamic; var materialPipelineLayout:Dynamic; var pipelines:Dynamic; };
 
 @:expose("flighthq.displayobjectWgpu.WgpuSpriteBatch")
 class WgpuSpriteBatch {

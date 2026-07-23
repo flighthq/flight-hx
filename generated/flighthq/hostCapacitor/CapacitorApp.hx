@@ -3,10 +3,10 @@ package flighthq.hostCapacitor;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorApi;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorPluginListenerHandle;
 import flighthq.types.App.AppBackend;
 import flighthq.types.App.AppLoginItem;
+import flighthq.types.CapacitorApi;
+import flighthq.types.CapacitorApi.CapacitorPluginListenerHandle;
 
 @:expose("flighthq.hostCapacitor.CapacitorApp")
 class CapacitorApp {

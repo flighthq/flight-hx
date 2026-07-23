@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 
 @:expose("flighthq.color.ColorFromKelvin")
 class ColorFromKelvin {
-  public static function createColorFromKelvin(kelvin:Float):Float {
+  public static function colorFromKelvin(kelvin:Float):Float {
     var temp:Dynamic = cast _Runtime.UNDEFINED;
     var r:Float = cast _Runtime.UNDEFINED;
     var g:Float = cast _Runtime.UNDEFINED;

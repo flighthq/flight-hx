@@ -3,19 +3,19 @@ package flighthq.camera;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.camera.Camera.getCameraViewProjectionMatrix4;
+import flighthq.camera.Camera.getCamera3DViewProjectionMatrix4;
 import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.geometry.Matrix4.inverseMatrix4;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.camera.FrustumCorners")
 class FrustumCorners {
-  public static function getCameraFrustumCorners(out:Array<Vector3Like>, camera:Camera, aspect:Float):Bool {
+  public static function getCamera3DFrustumCorners(out:Array<Vector3Like>, camera:Camera3D, aspect:Float):Bool {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var ndcCorners:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var results:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    _Runtime.callValue(getCameraViewProjectionMatrix4, cast ([FrustumCorners.__scratchViewProjection__frustumCorners, camera, aspect] : Array<Dynamic>));
+    _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([FrustumCorners.__scratchViewProjection__frustumCorners, camera, aspect] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(inverseMatrix4, cast ([FrustumCorners.__scratchInverseVP__frustumCorners, FrustumCorners.__scratchViewProjection__frustumCorners] : Array<Dynamic>))))) {
       return cast false;
     }

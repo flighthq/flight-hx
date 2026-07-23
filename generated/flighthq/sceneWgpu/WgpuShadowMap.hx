@@ -3,19 +3,19 @@ package flighthq.sceneWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.camera.Camera.getCameraViewProjectionMatrix4;
+import flighthq.camera.Camera.getCamera3DViewProjectionMatrix4;
 import flighthq.geometry.Matrix3.createMatrix3;
 import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.geometry.Matrix4.multiplyMatrix4;
-import flighthq.node.Transform3d.getNodeWorldMatrix4;
+import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.node.Traversal.forEachNodeDescendant;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
+import flighthq.sceneWgpu.WgpuMeshPipeline.SHADOW_DEPTH_FORMAT;
+import flighthq.sceneWgpu.WgpuMeshPipeline.ensureWgpuSceneLayouts;
+import flighthq.sceneWgpu.WgpuMeshPipeline.writeWgpuDrawUniform;
 import flighthq.sceneWgpu.WgpuMeshUpload.ensureWgpuMeshUpload;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.SHADOW_DEPTH_FORMAT;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuSceneLayouts;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuDrawUniform;
-import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
-import flighthq.types.Camera;
+import flighthq.sceneWgpu.WgpuSceneRuntime.getWgpuSceneRuntime;
+import flighthq.types.Camera3D;
 import flighthq.types.Material;
 import flighthq.types.Matrix3;
 import flighthq.types.Matrix4;
@@ -52,7 +52,7 @@ class WgpuShadowMap {
     _Runtime.setField(scene, 'pbrSampleShadowView', null);
   }
 
-  public static function drawWgpuSceneShadowMap(state:WgpuRenderState, scene:SceneNode, shadowCamera:Camera):Void {
+  public static function drawWgpuSceneShadowMap(state:WgpuRenderState, scene:SceneNode, shadowCamera:Camera3D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var encoder:Dynamic = cast _Runtime.UNDEFINED;
     var sceneRuntime:Dynamic = cast _Runtime.UNDEFINED;
@@ -71,7 +71,7 @@ class WgpuShadowMap {
       _Runtime.setField(sceneRuntime, 'shadow', shadow);
     }
     lightMatrix = _Runtime.field(shadow, 'matrix');
-    _Runtime.callValue(getCameraViewProjectionMatrix4, cast ([lightMatrix, shadowCamera, 1.0] : Array<Dynamic>));
+    _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([lightMatrix, shadowCamera, 1.0] : Array<Dynamic>));
     pipeline = _Runtime.callValue(WgpuShadowMap.ensureWgpuShadowDepthPipeline__wgpuShadowMap, cast ([state] : Array<Dynamic>));
     pass = _Runtime.callProperty(encoder, 'beginRenderPass', cast ([{ colorAttachments: cast ([] : Array<Dynamic>), depthStencilAttachment: { view: _Runtime.field(shadow, 'depthView'), depthClearValue: 1.0, depthLoadOp: 'clear', depthStoreOp: 'store' } }] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setViewport', cast ([0.0, 0.0, WgpuShadowMap.SHADOW_MAP_SIZE__wgpuShadowMap, WgpuShadowMap.SHADOW_MAP_SIZE__wgpuShadowMap, 0.0, 1.0] : Array<Dynamic>));

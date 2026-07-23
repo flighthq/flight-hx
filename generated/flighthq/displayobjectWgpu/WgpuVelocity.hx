@@ -7,14 +7,14 @@ import flighthq.node.BoundsRectangle.ensureNodeWorldBoundsRectangle;
 import flighthq.node.BoundsRectangle.getNodeWorldBoundsRectangle;
 import flighthq.node.Hierarchy.getNodeChildAt;
 import flighthq.node.Hierarchy.getNodeChildCount;
-import flighthq.node.Transform2d.ensureNodeWorldMatrix;
-import flighthq.node.Transform2d.getNodeWorldMatrix;
+import flighthq.node.NodeTransform2d.ensureNodeWorldMatrix;
+import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.renderWgpu.WgpuRenderTarget.createWgpuRenderTarget;
 import flighthq.types.Entity.Kind;
 import flighthq.types.HasBoundsRectangle.Spatial2DNode;
 import flighthq.types.HasTransform2D.Transform2DNode;
-import flighthq.types.ParticleEmitter;
+import flighthq.types.ParticleEmitter2D;
 import flighthq.types.QuadBatch;
 import flighthq.types.QuadBatch.QuadBatchRuntime;
 import flighthq.types.Velocity.Velocity2D;
@@ -46,7 +46,7 @@ class WgpuVelocity {
     _Runtime.callValue(drawWgpuVelocityQuad, cast ([ctx, _Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'y'), _Runtime.field(bounds, 'width'), _Runtime.field(bounds, 'height'), _Runtime.field(WgpuVelocity._scratchVelocity__wgpuVelocity, 'x'), _Runtime.field(WgpuVelocity._scratchVelocity__wgpuVelocity, 'y')] : Array<Dynamic>));
   };
 
-  public static final defaultWgpuParticleEmitterVelocityWriter:WgpuVelocityWriter = function(ctx:Dynamic, node:Dynamic) {
+  public static final defaultWgpuParticleEmitter2DVelocityWriter:WgpuVelocityWriter = function(ctx:Dynamic, node:Dynamic) {
     var emitter:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var atlas:Dynamic = cast _Runtime.UNDEFINED;
@@ -63,7 +63,7 @@ class WgpuVelocity {
     var wd:Dynamic = cast _Runtime.UNDEFINED;
     var wtx:Dynamic = cast _Runtime.UNDEFINED;
     var wty:Dynamic = cast _Runtime.UNDEFINED;
-    emitter = (cast (cast node : Dynamic) : ParticleEmitter);
+    emitter = (cast (cast node : Dynamic) : ParticleEmitter2D);
     __destructure0 = _Runtime.field(emitter, 'data');
     atlas = _Runtime.field(__destructure0, 'atlas');
     ids = _Runtime.field(__destructure0, 'ids');

@@ -3,8 +3,8 @@ package flighthq.hostCapacitor;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorApi;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorPosition;
+import flighthq.types.CapacitorApi;
+import flighthq.types.CapacitorApi.CapacitorPosition;
 import flighthq.types.Geolocation.GeoPosition;
 import flighthq.types.Geolocation.GeoPositionResult;
 import flighthq.types.Geolocation.GeolocationBackend;

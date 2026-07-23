@@ -3,8 +3,8 @@ package flighthq.xml;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.XmlElement;
 import flighthq.xml.XmlParse as Facade_Xml_flighthq_xml_XmlParse;
-import flighthq.xml.XmlParse.XmlElement;
 import flighthq.xml.XmlQuery as Facade_Xml_flighthq_xml_XmlQuery;
 
 @:expose("flighthq.xml.Xml")

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.mesh.MeshGeometry.getMeshGeometryMorphBindPose;
 import flighthq.mesh.MeshGeometry.setMeshGeometryMorphBindPose;
+import flighthq.mesh.MeshGeometryCompute.refreshMeshGeometryBounds;
 import flighthq.mesh.MorphMeshGeometry.blendMeshGeometryMorph;
 import flighthq.mesh.MorphMeshGeometry.captureMeshMorphBindPose;
 import flighthq.types.Mesh;
@@ -24,5 +25,6 @@ class UpdateMeshMorph {
       _Runtime.callValue(setMeshGeometryMorphBindPose, cast ([geometry, bindPose] : Array<Dynamic>));
     }
     _Runtime.callValue(blendMeshGeometryMorph, cast ([geometry, morph, bindPose] : Array<Dynamic>));
+    _Runtime.callValue(refreshMeshGeometryBounds, cast ([geometry] : Array<Dynamic>));
   }
 }

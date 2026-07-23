@@ -6,23 +6,28 @@ import flighthq._internal._Runtime;
 import flighthq.image.ImageResourceFrom.loadImageResourceFromBytes;
 import flighthq.loader.ResourceLoader.queueResourceLoad;
 import flighthq.sceneResources.GetSceneResourceTextures.getSceneResourceTextures;
-import flighthq.sceneResources.SceneResourceResolver.SceneResourceInFlight;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.types.ImageResource;
+import flighthq.types.ImageResourceReference;
+import flighthq.types.ImageResourceReference.ImageResourceFailure;
+import flighthq.types.ImageResourceReference.ImageResourceFailureKind;
+import flighthq.types.ImageResourceReference.ImageResourceReferenceKind;
 import flighthq.types.ResourceResolutionState;
 import flighthq.types.SceneNode;
-import flighthq.types.SceneResourceRef;
-import flighthq.types.SceneResourceRef.SceneResourceRefKind;
+import flighthq.types.SceneResources.ResolveSceneResourcesOptions;
+import flighthq.types.SceneResources.SceneResourceInFlight;
+import flighthq.types.SceneResources.SceneResourceResolver;
+import flighthq.types.SceneResources.SceneResourceResolverRuntimeKey;
+import flighthq.types.SceneResources.SceneResourceResolverWithRuntime;
 import flighthq.types.Texture;
+import flighthq.types._internal._ImageResourceReferenceValues.ImageResourceFailureKindValue;
+import flighthq.types._internal._ImageResourceReferenceValues.ImageResourceReferenceKindValue;
 import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
-import flighthq.types._internal._SceneResourceRefValues.SceneResourceRefKindValue;
-
-typedef ResolveSceneResourcesOptions = { @:optional var priority:Dynamic; @:optional var select:Dynamic; };
 
 @:expose("flighthq.sceneResources.ResolveSceneResources")
 class ResolveSceneResources {
-  public static function resolveOneSceneResourceTexture(resolver:SceneResourceResolver, ref:SceneResourceRef, signal:Dynamic):flighthq._internal._Promise<Null<ImageResource>> {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(ref, 'kind'), SceneResourceRefKindValue.Embedded))) {
+  public static function resolveOneSceneResourceTexture(resolver:SceneResourceResolver, ref:ImageResourceReference, signal:Dynamic):flighthq._internal._Promise<Null<ImageResource>> {
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(ref, 'kind'), ImageResourceReferenceKindValue.Embedded))) {
       return cast _Runtime.callValue(loadImageResourceFromBytes, cast ([_Runtime.field(ref, 'bytes'), _Runtime.coalesce(_Runtime.field(ref, 'mimeType'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), signal] : Array<Dynamic>));
     }
     return cast _Runtime.callProperty(resolver, 'fetch', cast ([ref, signal] : Array<Dynamic>));
@@ -30,18 +35,31 @@ class ResolveSceneResources {
   }
 
   public static function resolveSceneResources(scene:SceneNode, resolver:SceneResourceResolver, ?options:ResolveSceneResourcesOptions):Void {
-    var pending:Array<Texture> = cast _Runtime.UNDEFINED;
+    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    var textures:Array<Texture> = cast _Runtime.UNDEFINED;
     var working:Dynamic = cast _Runtime.UNDEFINED;
-    pending = cast ([] : Array<Dynamic>);
-    _Runtime.callValue(getSceneResourceTextures, cast ([scene, _Runtime.field(resolver, 'registry'), pending] : Array<Dynamic>));
-    working = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
+    runtime = _Runtime.getIndex((cast resolver : SceneResourceResolverWithRuntime), SceneResourceResolverRuntimeKey);
+    textures = cast ([] : Array<Dynamic>);
+    _Runtime.callValue(getSceneResourceTextures, cast ([scene, _Runtime.field(resolver, 'registry'), textures] : Array<Dynamic>));
+    working = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
     {
       var i:Dynamic = 0.0;
-      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(pending, 'length'), '<'))) {
-        var texture:Dynamic = _Runtime.getIndex(pending, i);
+      while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(textures, 'length'), '<'))) {
+        var texture:Dynamic = _Runtime.getIndex(textures, i);
         var ref:Dynamic = _Runtime.field(texture, 'resource');
         if (_Runtime.truthy(_Runtime.looseEquals(ref, null))) { i++; continue; }
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.optionalField(options, 'select'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callProperty(options, 'select', cast ([texture, ref] : Array<Dynamic>))))) { _Runtime.callProperty(working, 'add', cast ([texture] : Array<Dynamic>)); }
+        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(texture, 'image'), null))) {
+          _Runtime.callProperty(_Runtime.field(runtime, 'resolved'), 'set', cast ([ref, _Runtime.field(texture, 'image')] : Array<Dynamic>));
+          _Runtime.setField(ref, 'failure', null);
+          _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Resolved);
+        }
+        if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.optionalField(options, 'select'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(options, 'select', cast ([texture, ref] : Array<Dynamic>)))))) { i++; continue; }
+        var subscribers:Dynamic = _Runtime.callProperty(working, 'get', cast ([ref] : Array<Dynamic>));
+        if (_Runtime.truthy(_Runtime.strictEquals(subscribers, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+          (subscribers = cast (cast ([] : Array<Dynamic>) : Dynamic));
+          _Runtime.callProperty(working, 'set', cast ([ref, subscribers] : Array<Dynamic>));
+        }
+        _Runtime.callProperty(subscribers, 'push', cast ([texture] : Array<Dynamic>));
         i++;
       }
     }
@@ -50,67 +68,133 @@ class ResolveSceneResources {
   }
 
   public static function cancelDroppedResolutions__resolveSceneResources(resolver:SceneResourceResolver, working:Dynamic):Void {
-    for (__iteration0 in _Runtime.iterable(_Runtime.field(resolver, 'inFlight'))) {
-      var texture:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
+    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    runtime = _Runtime.getIndex((cast resolver : SceneResourceResolverWithRuntime), SceneResourceResolverRuntimeKey);
+    for (__iteration0 in _Runtime.iterable(_Runtime.field(runtime, 'inFlight'))) {
+      var ref:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
       var entry:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
-      if (_Runtime.truthy(_Runtime.callProperty(working, 'has', cast ([texture] : Array<Dynamic>)))) { continue; }
+      var subscribers:Dynamic = _Runtime.callProperty(working, 'get', cast ([ref] : Array<Dynamic>));
+      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(subscribers, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(_Runtime.field(subscribers, 'length'), 0.0, '>')))) {
+        _Runtime.callProperty(_Runtime.field(entry, 'subscribers'), 'clear', cast ([] : Array<Dynamic>));
+        {
+          var i:Dynamic = 0.0;
+          while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(subscribers, 'length'), '<'))) {
+            _Runtime.callProperty(_Runtime.field(entry, 'subscribers'), 'add', cast ([_Runtime.getIndex(subscribers, i)] : Array<Dynamic>));
+            i++;
+          }
+        }
+        continue;
+      }
       _Runtime.callProperty(_Runtime.field(entry, 'controller'), 'abort', cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.field(resolver, 'inFlight'), 'delete', cast ([texture] : Array<Dynamic>));
-      var ref:Dynamic = _Runtime.field(texture, 'resource');
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.looseEquals(ref, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Loading)))) {
+      _Runtime.callProperty(_Runtime.field(runtime, 'inFlight'), 'delete', cast ([ref] : Array<Dynamic>));
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Loading))) {
         _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Unresolved);
       }
     }
   }
 
-  public static function finishSceneResourceResolution__resolveSceneResources(resolver:SceneResourceResolver, texture:Texture, ref:SceneResourceRef, entry:SceneResourceInFlight, image:Null<ImageResource>):Void {
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(resolver, 'inFlight'), 'get', cast ([texture] : Array<Dynamic>)), entry))) { return; }
-    _Runtime.callProperty(_Runtime.field(resolver, 'inFlight'), 'delete', cast ([texture] : Array<Dynamic>));
+  public static function finishSceneResourceResolution__resolveSceneResources(resolver:SceneResourceResolver, ref:ImageResourceReference, entry:SceneResourceInFlight, image:Null<ImageResource>):Void {
+    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    runtime = _Runtime.getIndex((cast resolver : SceneResourceResolverWithRuntime), SceneResourceResolverRuntimeKey);
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(runtime, 'inFlight'), 'get', cast ([ref] : Array<Dynamic>)), entry))) { return; }
+    _Runtime.callProperty(_Runtime.field(runtime, 'inFlight'), 'delete', cast ([ref] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(image, null))) {
+      _Runtime.setField(ref, 'failure', { kind: ImageResourceFailureKindValue.Unavailable, message: 'Image resource resolution returned no image', name: null });
       _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Failed);
-      _Runtime.callValue(ResolveSceneResources.emitSceneResourceEvent__resolveSceneResources, cast ([resolver, texture, ref, false] : Array<Dynamic>));
+      for (texture in _Runtime.iterable(_Runtime.field(entry, 'subscribers'))) {
+        _Runtime.callValue(ResolveSceneResources.emitSceneResourceEvent__resolveSceneResources, cast ([resolver, texture, ref, false] : Array<Dynamic>));
+      }
       return;
     }
-    _Runtime.setField(texture, 'image', image);
+    _Runtime.callProperty(_Runtime.field(runtime, 'resolved'), 'set', cast ([ref, image] : Array<Dynamic>));
+    _Runtime.setField(ref, 'failure', null);
     _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Resolved);
+    for (texture in _Runtime.iterable(_Runtime.field(entry, 'subscribers'))) {
+      _Runtime.callValue(ResolveSceneResources.bindResolvedSceneResource__resolveSceneResources, cast ([resolver, texture, ref, image] : Array<Dynamic>));
+    }
+  }
+
+  public static function failSceneResourceResolution__resolveSceneResources(resolver:SceneResourceResolver, ref:ImageResourceReference, entry:SceneResourceInFlight, cause:Dynamic):Void {
+    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    runtime = _Runtime.getIndex((cast resolver : SceneResourceResolverWithRuntime), SceneResourceResolverRuntimeKey);
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(runtime, 'inFlight'), 'get', cast ([ref] : Array<Dynamic>)), entry))) { return; }
+    _Runtime.callProperty(_Runtime.field(runtime, 'inFlight'), 'delete', cast ([ref] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.field(_Runtime.field(_Runtime.field(entry, 'controller'), 'signal'), 'aborted'))) { return; }
+    _Runtime.setField(ref, 'failure', _Runtime.callValue(ResolveSceneResources.createImageResourceFailure__resolveSceneResources, cast ([cause] : Array<Dynamic>)));
+    _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Failed);
+    for (texture in _Runtime.iterable(_Runtime.field(entry, 'subscribers'))) {
+      _Runtime.callValue(ResolveSceneResources.emitSceneResourceEvent__resolveSceneResources, cast ([resolver, texture, ref, false] : Array<Dynamic>));
+    }
+  }
+
+  public static function bindResolvedSceneResource__resolveSceneResources(resolver:SceneResourceResolver, texture:Texture, ref:ImageResourceReference, image:ImageResource):Void {
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(texture, 'image'), image))) { return; }
+    _Runtime.setField(texture, 'image', image);
     _Runtime.callValue(ResolveSceneResources.emitSceneResourceEvent__resolveSceneResources, cast ([resolver, texture, ref, true] : Array<Dynamic>));
   }
 
-  public static function failSceneResourceResolution__resolveSceneResources(resolver:SceneResourceResolver, texture:Texture, ref:SceneResourceRef, entry:SceneResourceInFlight):Void {
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(resolver, 'inFlight'), 'get', cast ([texture] : Array<Dynamic>)), entry))) { return; }
-    _Runtime.callProperty(_Runtime.field(resolver, 'inFlight'), 'delete', cast ([texture] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.field(_Runtime.field(_Runtime.field(entry, 'controller'), 'signal'), 'aborted'))) { return; }
-    _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Failed);
-    _Runtime.callValue(ResolveSceneResources.emitSceneResourceEvent__resolveSceneResources, cast ([resolver, texture, ref, false] : Array<Dynamic>));
-  }
-
-  public static function emitSceneResourceEvent__resolveSceneResources(resolver:SceneResourceResolver, texture:Texture, ref:SceneResourceRef, resolved:Bool):Void {
+  public static function emitSceneResourceEvent__resolveSceneResources(resolver:SceneResourceResolver, texture:Texture, ref:ImageResourceReference, resolved:Bool):Void {
     var signals:Dynamic = cast _Runtime.UNDEFINED;
     var event:Dynamic = cast _Runtime.UNDEFINED;
-    signals = _Runtime.field(resolver, 'signals');
+    signals = _Runtime.field(_Runtime.getIndex((cast resolver : SceneResourceResolverWithRuntime), SceneResourceResolverRuntimeKey), 'signals');
     if (_Runtime.truthy(_Runtime.strictEquals(signals, null))) { return; }
     event = { ref: ref, texture: texture };
     _Runtime.callValue(emitSignal, cast ([_Runtime.select(resolved, function():Dynamic return cast _Runtime.field(signals, 'onResourceResolved'), function():Dynamic return cast _Runtime.field(signals, 'onResourceFailed')), event] : Array<Dynamic>));
   }
 
   public static function requestWorkingResolutions__resolveSceneResources(resolver:SceneResourceResolver, working:Dynamic, ?options:ResolveSceneResourcesOptions):Void {
-    for (texture in _Runtime.iterable(working)) {
-      var ref:Dynamic = _Runtime.field(texture, 'resource');
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.looseEquals(ref, null), function():Dynamic return cast _Runtime.callProperty(_Runtime.field(resolver, 'inFlight'), 'has', cast ([texture] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Unresolved)))) {
+    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    runtime = _Runtime.getIndex((cast resolver : SceneResourceResolverWithRuntime), SceneResourceResolverRuntimeKey);
+    for (__iteration1 in _Runtime.iterable(working)) {
+      var ref:Dynamic = _Runtime.getIndex(__iteration1, 0.0);
+      var subscribers:Dynamic = _Runtime.getIndex(__iteration1, 1.0);
+      var resolved:Dynamic = _Runtime.callProperty(_Runtime.field(runtime, 'resolved'), 'get', cast ([ref] : Array<Dynamic>));
+      if (_Runtime.truthy(!_Runtime.strictEquals(resolved, _Runtime.field(_Runtime, 'UNDEFINED')))) {
+        _Runtime.setField(ref, 'failure', null);
+        _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Resolved);
+        {
+          var i:Dynamic = 0.0;
+          while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(subscribers, 'length'), '<'))) {
+            _Runtime.callValue(ResolveSceneResources.bindResolvedSceneResource__resolveSceneResources, cast ([resolver, _Runtime.getIndex(subscribers, i), ref, resolved] : Array<Dynamic>));
+            i++;
+          }
+        }
         continue;
       }
+      if (_Runtime.truthy(_Runtime.callProperty(_Runtime.field(runtime, 'inFlight'), 'has', cast ([ref] : Array<Dynamic>)))) { continue; }
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Resolved))) { _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Unresolved); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Unresolved))) { continue; }
+      _Runtime.setField(ref, 'failure', null);
       _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Loading);
       var controller:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['AbortController'] : Array<Dynamic>)), []);
-      var priority:Dynamic = _Runtime.coalesce(_Runtime.callOptionalProperty(options, 'priority', cast ([texture, ref] : Array<Dynamic>)), function():Dynamic return cast 0.0);
-      var handle:Dynamic = _Runtime.callValue(queueResourceLoad, cast ([_Runtime.field(resolver, 'loader'), { load: function(loaderSignal:Dynamic) {
+      var priority:Dynamic = 0.0;
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.optionalField(options, 'priority'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
+        (priority = cast (_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY') : Dynamic));
+        {
+          var i:Dynamic = 0.0;
+          while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(subscribers, 'length'), '<'))) {
+            (priority = cast (_Runtime.callProperty(HxMath, 'max', cast ([priority, _Runtime.callProperty(options, 'priority', cast ([_Runtime.getIndex(subscribers, i), ref] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));
+            i++;
+          }
+        }
+      }
+      var handle:Dynamic = _Runtime.callValue(queueResourceLoad, cast ([_Runtime.field(runtime, 'loader'), { load: function(loaderSignal:Dynamic) {
         if (_Runtime.truthy(_Runtime.field(loaderSignal, 'aborted'))) { _Runtime.callProperty(controller, 'abort', cast ([_Runtime.field(loaderSignal, 'reason')] : Array<Dynamic>)); } else { _Runtime.callProperty(loaderSignal, 'addEventListener', cast (['abort', function() return _Runtime.callProperty(controller, 'abort', cast ([_Runtime.field(loaderSignal, 'reason')] : Array<Dynamic>)), { once: true }] : Array<Dynamic>)); }
         return cast _Runtime.callValue(resolveOneSceneResourceTexture, cast ([resolver, ref, _Runtime.field(controller, 'signal')] : Array<Dynamic>));
       }, priority: priority }] : Array<Dynamic>));
-      var entry:SceneResourceInFlight = { controller: controller, key: _Runtime.field(handle, 'key'), promise: ResolveSceneResources._resolvedVoid__resolveSceneResources };
-      _Runtime.setField(entry, 'promise', _Runtime.callProperty(_Runtime.field(handle, 'promise'), 'then', cast ([function(image:Dynamic) return _Runtime.callValue(ResolveSceneResources.finishSceneResourceResolution__resolveSceneResources, cast ([resolver, texture, ref, entry, image] : Array<Dynamic>)), function() return _Runtime.callValue(ResolveSceneResources.failSceneResourceResolution__resolveSceneResources, cast ([resolver, texture, ref, entry] : Array<Dynamic>))] : Array<Dynamic>)));
-      _Runtime.callProperty(_Runtime.field(resolver, 'inFlight'), 'set', cast ([texture, entry] : Array<Dynamic>));
+      var entry:SceneResourceInFlight = { controller: controller, promise: ResolveSceneResources._resolvedVoid__resolveSceneResources, subscribers: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), [subscribers]) };
+      _Runtime.setField(entry, 'promise', _Runtime.callProperty(_Runtime.field(handle, 'promise'), 'then', cast ([function(image:Dynamic) return _Runtime.callValue(ResolveSceneResources.finishSceneResourceResolution__resolveSceneResources, cast ([resolver, ref, entry, image] : Array<Dynamic>)), function(cause:Dynamic) return _Runtime.callValue(ResolveSceneResources.failSceneResourceResolution__resolveSceneResources, cast ([resolver, ref, entry, cause] : Array<Dynamic>))] : Array<Dynamic>)));
+      _Runtime.callProperty(_Runtime.field(runtime, 'inFlight'), 'set', cast ([ref, entry] : Array<Dynamic>));
     }
   }
 
   public static final _resolvedVoid__resolveSceneResources:flighthq._internal._Promise<flighthq._internal._Nothing> = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([] : Array<Dynamic>));
+
+  public static function createImageResourceFailure__resolveSceneResources(cause:Dynamic):ImageResourceFailure {
+    if (_Runtime.truthy(_Runtime.isError(cause))) {
+      return cast { kind: ImageResourceFailureKindValue.Error, message: _Runtime.field(cause, 'message'), name: _Runtime.field(cause, 'name') };
+    }
+    return cast { kind: ImageResourceFailureKindValue.Error, message: Std.string(cause), name: null };
+    return cast null;
+  }
 }

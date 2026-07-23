@@ -32,11 +32,9 @@ import flighthq.types.RichText;
 import flighthq.types.RichText.RichTextRuntime;
 import flighthq.types.TextFormat;
 import flighthq.types.TextLabel.TextLabelRuntime;
-import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuTextureEntry;
-
-typedef WgpuRichTextOverlay = Dynamic;
+import flighthq.types.WgpuRichTextOverlay;
 
 typedef WgpuRichTextData__wgpuRichText = { var entry:Null<WgpuTextureEntry>; var w:Float; var h:Float; };
 

@@ -3,15 +3,14 @@ package flighthq.sceneWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.sceneWgpu.WgpuPbrPrelude.WgpuPbrDefineKey;
+import flighthq.sceneWgpu.WgpuMeshPipeline.createWgpuMeshPipeline;
+import flighthq.sceneWgpu.WgpuMeshPipeline.ensureWgpuPbrSampleLayout;
+import flighthq.sceneWgpu.WgpuMeshPipeline.ensureWgpuScenePipeline;
 import flighthq.sceneWgpu.WgpuPbrPrelude.buildWgpuPbrDefineKey;
 import flighthq.sceneWgpu.WgpuPbrPrelude.getWgpuPbrModuleSourceForKey;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.createWgpuMeshPipeline;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuPbrSampleLayout;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuScenePipeline;
+import flighthq.types.WgpuPbrPipeline;
+import flighthq.types.WgpuPbrPipeline.WgpuPbrDefineKey;
 import flighthq.types.WgpuRenderState;
-
-typedef WgpuPbrPipeline = Dynamic;
 
 @:expose("flighthq.sceneWgpu.WgpuPbrPipelineCache")
 class WgpuPbrPipelineCache {

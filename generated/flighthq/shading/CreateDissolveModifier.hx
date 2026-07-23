@@ -4,13 +4,11 @@ package flighthq.shading;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.DissolveModifier;
+import flighthq.types.DissolveModifierOptions;
 import flighthq.types.ModifierSlot;
-import flighthq.types.Texture;
 import flighthq.types.Types.DissolveModifierKind;
 import flighthq.types._internal._DissolveModifierValues.DissolveModifierKind;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
-
-typedef DissolveModifierOptions = { var threshold:Float; @:optional var edgeColor:Float; @:optional var edgeWidth:Float; @:optional var map:Texture; @:optional var scale:Float; };
 
 @:expose("flighthq.shading.CreateDissolveModifier")
 class CreateDissolveModifier {

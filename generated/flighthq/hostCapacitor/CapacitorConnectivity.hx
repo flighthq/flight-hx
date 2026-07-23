@@ -3,9 +3,9 @@ package flighthq.hostCapacitor;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorApi;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorConnectionStatus;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorPluginListenerHandle;
+import flighthq.types.CapacitorApi;
+import flighthq.types.CapacitorApi.CapacitorConnectionStatus;
+import flighthq.types.CapacitorApi.CapacitorPluginListenerHandle;
 import flighthq.types.Connectivity.ConnectivityBackend;
 import flighthq.types.Connectivity.ConnectivityConnectionType;
 import flighthq.types.Connectivity.ConnectivityStatus;

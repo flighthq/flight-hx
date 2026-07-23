@@ -3,9 +3,9 @@ package flighthq.hostCapacitor;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorApi;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorLocalNotificationSchema;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorPluginListenerHandle;
+import flighthq.types.CapacitorApi;
+import flighthq.types.CapacitorApi.CapacitorLocalNotificationSchema;
+import flighthq.types.CapacitorApi.CapacitorPluginListenerHandle;
 import flighthq.types.Notification.NotificationBackend;
 import flighthq.types.Notification.NotificationCapabilities;
 import flighthq.types.Notification.NotificationPermission;

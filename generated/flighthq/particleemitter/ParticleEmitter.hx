@@ -15,13 +15,13 @@ import flighthq.types.DisplayObject;
 import flighthq.types.MethodsOf;
 import flighthq.types.Node;
 import flighthq.types.PartialNode;
-import flighthq.types.ParticleEmitter;
-import flighthq.types.ParticleEmitter.ParticleEmitterData;
-import flighthq.types.ParticleEmitter.ParticleEmitterRuntime;
+import flighthq.types.ParticleEmitter2D;
+import flighthq.types.ParticleEmitter2D.ParticleEmitter2DRuntime;
+import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
 import flighthq.types.Rectangle;
-import flighthq.types.Types.ParticleEmitterKind;
+import flighthq.types.Types.ParticleEmitter2DKind;
 import flighthq.types.Vector2.Vector2Like;
-import flighthq.types._internal._ParticleEmitterValues.ParticleEmitterKind;
+import flighthq.types._internal._ParticleEmitter2DValues.ParticleEmitter2DKind;
 
 @:expose("flighthq.particleemitter.ParticleEmitter")
 class ParticleEmitter {
@@ -35,11 +35,11 @@ class ParticleEmitter {
 
   public static function copyLocalBoundsRectangle__particleEmitter(out:Rectangle, source:Node<Dynamic>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([(cast source : DisplayObject)] : Array<Dynamic>)) : ParticleEmitterRuntime);
+    runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([(cast source : DisplayObject)] : Array<Dynamic>)) : ParticleEmitter2DRuntime);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null))) { _Runtime.callValue(copyRectangle, cast ([out, _Runtime.field(runtime, 'localBoundsRectangle')] : Array<Dynamic>)); }
   }
 
-  public static function appendParticleEmitterParticle(target:flighthq.types.ParticleEmitter, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Float {
+  public static function appendParticleEmitter2DParticle(target:ParticleEmitter2D, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Float {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     var needed:Dynamic = cast _Runtime.UNDEFINED;
     var tt:Dynamic = cast _Runtime.UNDEFINED;
@@ -47,9 +47,9 @@ class ParticleEmitter {
     var vt:Dynamic = cast _Runtime.UNDEFINED;
     index = _Runtime.field(_Runtime.field(target, 'data'), 'particleCount');
     needed = (index + 1.0);
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.callValue(getParticleEmitterCapacity, cast ([target] : Array<Dynamic>)), needed, '<'))) {
+    if (_Runtime.truthy(_Runtime.compare(_Runtime.callValue(getParticleEmitter2DCapacity, cast ([target] : Array<Dynamic>)), needed, '<'))) {
       var newCapacity:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([needed, _Runtime.orValue((_Runtime.field(_Runtime.field(target, 'data'), 'particleCount') * 2.0), function():Dynamic return cast 8.0)] : Array<Dynamic>));
-      _Runtime.callValue(reserveParticleEmitter, cast ([target, newCapacity] : Array<Dynamic>));
+      _Runtime.callValue(reserveParticleEmitter2D, cast ([target, newCapacity] : Array<Dynamic>));
     }
     _Runtime.setField(_Runtime.field(target, 'data'), 'particleCount', needed);
     _Runtime.setIndex(_Runtime.field(_Runtime.field(target, 'data'), 'ids'), index, id);
@@ -71,18 +71,18 @@ class ParticleEmitter {
     return cast null;
   }
 
-  public static function clearParticleEmitter(target:flighthq.types.ParticleEmitter):Void {
+  public static function clearParticleEmitter2D(target:ParticleEmitter2D):Void {
     _Runtime.setField(_Runtime.field(target, 'data'), 'particleCount', 0.0);
   }
 
-  public static function cloneParticleEmitter(source:flighthq.types.ParticleEmitter):flighthq.types.ParticleEmitter {
+  public static function cloneParticleEmitter2D(source:ParticleEmitter2D):ParticleEmitter2D {
     var src:Dynamic = cast _Runtime.UNDEFINED;
     src = _Runtime.field(source, 'data');
-    return cast _Runtime.callValue(createParticleEmitter, cast ([{ data: { alphas: _Runtime.slice(_Runtime.field(src, 'alphas'), 0, null), atlas: _Runtime.field(src, 'atlas'), colors: _Runtime.slice(_Runtime.field(src, 'colors'), 0, null), ids: _Runtime.slice(_Runtime.field(src, 'ids'), 0, null), particleCount: _Runtime.field(src, 'particleCount'), positionsZ: _Runtime.slice(_Runtime.field(src, 'positionsZ'), 0, null), transforms: _Runtime.slice(_Runtime.field(src, 'transforms'), 0, null), velocities: _Runtime.slice(_Runtime.field(src, 'velocities'), 0, null), worldSpace: _Runtime.field(src, 'worldSpace') } }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createParticleEmitter2D, cast ([{ data: { alphas: _Runtime.slice(_Runtime.field(src, 'alphas'), 0, null), atlas: _Runtime.field(src, 'atlas'), colors: _Runtime.slice(_Runtime.field(src, 'colors'), 0, null), ids: _Runtime.slice(_Runtime.field(src, 'ids'), 0, null), particleCount: _Runtime.field(src, 'particleCount'), positionsZ: _Runtime.slice(_Runtime.field(src, 'positionsZ'), 0, null), transforms: _Runtime.slice(_Runtime.field(src, 'transforms'), 0, null), velocities: _Runtime.slice(_Runtime.field(src, 'velocities'), 0, null), worldSpace: _Runtime.field(src, 'worldSpace') } }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function compactParticleEmitter(target:flighthq.types.ParticleEmitter):Void {
+  public static function compactParticleEmitter2D(target:ParticleEmitter2D):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var write:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(target, 'data');
@@ -119,7 +119,7 @@ class ParticleEmitter {
     _Runtime.setField(data, 'particleCount', write);
   }
 
-  public static function computeParticleEmitterLocalBoundsRectangle(out:Rectangle, source:flighthq.types.ParticleEmitter):Void {
+  public static function computeParticleEmitter2DLocalBoundsRectangle(out:Rectangle, source:ParticleEmitter2D):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var atlas:Dynamic = cast _Runtime.UNDEFINED;
     var ids:Dynamic = cast _Runtime.UNDEFINED;
@@ -197,8 +197,16 @@ class ParticleEmitter {
     }
   }
 
-  public static function createParticleEmitter(?obj:PartialNode<flighthq.types.ParticleEmitter>):flighthq.types.ParticleEmitter {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([ParticleEmitterKind, obj, createParticleEmitterData, createParticleEmitterRuntime] : Array<Dynamic>)) : flighthq.types.ParticleEmitter);
+  public static function createParticleEmitter2D(?obj:PartialNode<ParticleEmitter2D>):ParticleEmitter2D {
+    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([ParticleEmitter2DKind, obj, createParticleEmitterData, createParticleEmitter2DRuntime] : Array<Dynamic>)) : ParticleEmitter2D);
+    return cast null;
+  }
+
+  public static function createParticleEmitter2DRuntime():ParticleEmitter2DRuntime {
+    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    runtime = (cast _Runtime.callValue(createDisplayObjectRuntime, cast ([ParticleEmitter.defaultMethods__particleEmitter] : Array<Dynamic>)) : ParticleEmitter2DRuntime);
+    _Runtime.setField(runtime, 'localBoundsRectangle', null);
+    return cast runtime;
     return cast null;
   }
 
@@ -207,15 +215,7 @@ class ParticleEmitter {
     return cast null;
   }
 
-  public static function createParticleEmitterRuntime():ParticleEmitterRuntime {
-    var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = (cast _Runtime.callValue(createDisplayObjectRuntime, cast ([ParticleEmitter.defaultMethods__particleEmitter] : Array<Dynamic>)) : ParticleEmitterRuntime);
-    _Runtime.setField(runtime, 'localBoundsRectangle', null);
-    return cast runtime;
-    return cast null;
-  }
-
-  public static function getParticleEmitterCapacity(source:flighthq.types.ParticleEmitter):Float {
+  public static function getParticleEmitter2DCapacity(source:ParticleEmitter2D):Float {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var transformCapacity:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
@@ -224,19 +224,19 @@ class ParticleEmitter {
     return cast null;
   }
 
-  public static function getParticleEmitterParticleAlpha(source:flighthq.types.ParticleEmitter, index:Float):Float {
+  public static function getParticleEmitter2DParticleAlpha(source:ParticleEmitter2D, index:Float):Float {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(source, 'data'), 'particleCount'), '>=')))) { return cast -1.0; }
     return cast _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'alphas'), index);
     return cast null;
   }
 
-  public static function getParticleEmitterParticleId(source:flighthq.types.ParticleEmitter, index:Float):Float {
+  public static function getParticleEmitter2DParticleId(source:ParticleEmitter2D, index:Float):Float {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(source, 'data'), 'particleCount'), '>=')))) { return cast -1.0; }
     return cast _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'ids'), index);
     return cast null;
   }
 
-  public static function getParticleEmitterParticleVelocity(out:Vector2Like, source:flighthq.types.ParticleEmitter, index:Float):Bool {
+  public static function getParticleEmitter2DParticleVelocity(out:Vector2Like, source:ParticleEmitter2D, index:Float):Bool {
     var vt:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(source, 'data'), 'particleCount'), '>=')))) { return cast false; }
     vt = (index * ParticleEmitter.PARTICLE_VELOCITY_STRIDE__particleEmitter);
@@ -246,12 +246,12 @@ class ParticleEmitter {
     return cast null;
   }
 
-  public static function getParticleEmitterRuntime(source:flighthq.types.ParticleEmitter):ParticleEmitterRuntime {
-    return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : ParticleEmitterRuntime);
+  public static function getParticleEmitter2DRuntime(source:ParticleEmitter2D):ParticleEmitter2DRuntime {
+    return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : ParticleEmitter2DRuntime);
     return cast null;
   }
 
-  public static function removeParticleEmitterParticle(target:flighthq.types.ParticleEmitter, index:Float):Void {
+  public static function removeParticleEmitter2DParticle(target:ParticleEmitter2D, index:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var last:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(target, 'data');
@@ -280,9 +280,9 @@ class ParticleEmitter {
     _Runtime.setField(data, 'particleCount', last);
   }
 
-  public static function reserveParticleEmitter(target:flighthq.types.ParticleEmitter, capacity:Float):Void {
+  public static function reserveParticleEmitter2D(target:ParticleEmitter2D, capacity:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.callValue(getParticleEmitterCapacity, cast ([target] : Array<Dynamic>)), capacity, '>='))) { return; }
+    if (_Runtime.truthy(_Runtime.compare(_Runtime.callValue(getParticleEmitter2DCapacity, cast ([target] : Array<Dynamic>)), capacity, '>='))) { return; }
     data = _Runtime.field(target, 'data');
     _Runtime.setField(data, 'alphas', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(data, 'alphas'), capacity] : Array<Dynamic>)));
     _Runtime.setField(data, 'colors', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(data, 'colors'), (capacity * 3.0)] : Array<Dynamic>)));
@@ -292,15 +292,15 @@ class ParticleEmitter {
     _Runtime.setField(data, 'velocities', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(data, 'velocities'), (capacity * 2.0)] : Array<Dynamic>)));
   }
 
-  public static function setParticleEmitterLocalBoundsRectangle(target:flighthq.types.ParticleEmitter, rect:Rectangle):Void {
+  public static function setParticleEmitter2DLocalBoundsRectangle(target:ParticleEmitter2D, rect:Rectangle):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([target] : Array<Dynamic>)) : ParticleEmitterRuntime);
+    runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([target] : Array<Dynamic>)) : ParticleEmitter2DRuntime);
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null))) { _Runtime.setField(runtime, 'localBoundsRectangle', _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>))); }
     _Runtime.callValue(copyRectangle, cast ([_Runtime.field(runtime, 'localBoundsRectangle'), rect] : Array<Dynamic>));
     _Runtime.callValue(invalidateNodeLocalBounds, cast ([target] : Array<Dynamic>));
   }
 
-  public static function setParticleEmitterParticle(target:flighthq.types.ParticleEmitter, index:Float, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Void {
+  public static function setParticleEmitter2DParticle(target:ParticleEmitter2D, index:Float, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var tt:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(target, 'data');
@@ -313,12 +313,12 @@ class ParticleEmitter {
     _Runtime.setIndex(_Runtime.field(data, 'transforms'), (tt + 3.0), scale);
   }
 
-  public static function setParticleEmitterParticleAlpha(target:flighthq.types.ParticleEmitter, index:Float, alpha:Float):Void {
+  public static function setParticleEmitter2DParticleAlpha(target:ParticleEmitter2D, index:Float, alpha:Float):Void {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(target, 'data'), 'particleCount'), '>=')))) { return; }
     _Runtime.setIndex(_Runtime.field(_Runtime.field(target, 'data'), 'alphas'), index, alpha);
   }
 
-  public static function setParticleEmitterParticleColor(target:flighthq.types.ParticleEmitter, index:Float, r:Float, g:Float, b:Float):Void {
+  public static function setParticleEmitter2DParticleColor(target:ParticleEmitter2D, index:Float, r:Float, g:Float, b:Float):Void {
     var ct:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(target, 'data'), 'particleCount'), '>=')))) { return; }
     ct = (index * ParticleEmitter.PARTICLE_COLOR_STRIDE__particleEmitter);
@@ -327,7 +327,7 @@ class ParticleEmitter {
     _Runtime.setIndex(_Runtime.field(_Runtime.field(target, 'data'), 'colors'), (ct + 2.0), b);
   }
 
-  public static function setParticleEmitterParticleVelocity(target:flighthq.types.ParticleEmitter, index:Float, vx:Float, vy:Float):Void {
+  public static function setParticleEmitter2DParticleVelocity(target:ParticleEmitter2D, index:Float, vx:Float, vy:Float):Void {
     var vt:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(target, 'data'), 'particleCount'), '>=')))) { return; }
     vt = (index * ParticleEmitter.PARTICLE_VELOCITY_STRIDE__particleEmitter);

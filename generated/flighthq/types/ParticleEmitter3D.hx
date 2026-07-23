@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.Node.NodeData;
 import flighthq.types.Node.NodeRuntime;
-import flighthq.types.ParticleEmitter.ParticleEmitterData;
+import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
 import flighthq.types.SceneNode.SceneNodeRuntime;
 import flighthq.types.SceneNode.SceneNodeTraits;

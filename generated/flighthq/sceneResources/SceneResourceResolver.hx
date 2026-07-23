@@ -3,18 +3,46 @@ package flighthq.sceneResources;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.entity.Entity.createEntity;
 import flighthq.loader.ResourceLoader.cancelResourceLoad;
 import flighthq.loader.ResourceLoader.createResourceLoader;
 import flighthq.loader.ResourceLoader.disposeResourceLoader;
 import flighthq.loader.ResourceLoader.startResourceLoad;
-import flighthq.sceneResources._internal._SceneMaterialTextureRegistryValues.createSceneMaterialTextureRegistry;
-import flighthq.sceneResources._internal._SceneMaterialTextureRegistryValues.registerBuiltInSceneMaterialTextures;
-import flighthq.sceneResources._internal._SceneResourceFetchValues.createWebSceneResourceFetch;
-import flighthq.types.ResourceLoader;
-import flighthq.types.Texture;
+import flighthq.sceneResources.ImageResourceFetch.fetchWebImageResource;
+import flighthq.sceneResources.SceneMaterialTextureRegistry.createSceneMaterialTextureRegistry;
+import flighthq.sceneResources.SceneMaterialTextureRegistry.registerBuiltInSceneMaterialTextures;
+import flighthq.types.SceneResources.SceneResourceResolver;
+import flighthq.types.SceneResources.SceneResourceResolverOptions;
+import flighthq.types.SceneResources.SceneResourceResolverRuntimeKey;
+import flighthq.types.SceneResources.SceneResourceResolverWithRuntime;
 
-typedef SceneResourceInFlight = { var controller:Dynamic; var key:String; var promise:flighthq._internal._Promise<flighthq._internal._Nothing>; };
+@:expose("flighthq.sceneResources.SceneResourceResolver")
+class SceneResourceResolver {
+  public static function createBuiltInSceneResourceResolver(?options:SceneResourceResolverOptions):SceneResourceResolver {
+    var resolver:Dynamic = cast _Runtime.UNDEFINED;
+    resolver = _Runtime.callValue(createSceneResourceResolver, cast ([options] : Array<Dynamic>));
+    _Runtime.callValue(registerBuiltInSceneMaterialTextures, cast ([_Runtime.field(resolver, 'registry')] : Array<Dynamic>));
+    return cast resolver;
+    return cast null;
+  }
 
-typedef SceneResourceResolver = { var fetch:SceneResourceFetch; var inFlight:Dynamic; var loader:ResourceLoader; var registry:SceneMaterialTextureRegistry; var signals:Null<SceneResourceSignals>; };
+  public static function createSceneResourceResolver(?options:SceneResourceResolverOptions):SceneResourceResolver {
+    var loader:Dynamic = cast _Runtime.UNDEFINED;
+    loader = _Runtime.callValue(createResourceLoader, cast ([{ dedupe: false, maxConcurrent: _Runtime.optionalField(options, 'maxConcurrent'), streaming: true }] : Array<Dynamic>));
+    _Runtime.callValue(startResourceLoad, cast ([loader] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([_Runtime.objectFromPairs([{ key: 'fetch', value: _Runtime.coalesce(_Runtime.optionalField(options, 'fetch'), function():Dynamic return cast fetchWebImageResource) }, { key: 'registry', value: _Runtime.coalesce(_Runtime.optionalField(options, 'registry'), function():Dynamic return cast _Runtime.callValue(createSceneMaterialTextureRegistry, cast ([] : Array<Dynamic>))) }, { key: SceneResourceResolverRuntimeKey, value: { inFlight: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), loader: loader, resolved: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), signals: null } }])] : Array<Dynamic>));
+    return cast null;
+  }
 
-typedef SceneResourceResolverOptions = { @:optional var fetch:SceneResourceFetch; @:optional var maxConcurrent:Float; @:optional var registry:SceneMaterialTextureRegistry; };
+  public static function disposeSceneResourceResolver(resolver:SceneResourceResolver):Void {
+    var runtime:Dynamic = cast _Runtime.UNDEFINED;
+    runtime = _Runtime.getIndex((cast resolver : SceneResourceResolverWithRuntime), SceneResourceResolverRuntimeKey);
+    _Runtime.callValue(cancelResourceLoad, cast ([_Runtime.field(runtime, 'loader')] : Array<Dynamic>));
+    _Runtime.callValue(disposeResourceLoader, cast ([_Runtime.field(runtime, 'loader')] : Array<Dynamic>));
+    for (entry in _Runtime.iterable(_Runtime.callProperty(_Runtime.field(runtime, 'inFlight'), 'values', cast ([] : Array<Dynamic>)))) {
+      _Runtime.callProperty(_Runtime.field(entry, 'controller'), 'abort', cast ([] : Array<Dynamic>));
+    }
+    _Runtime.callProperty(_Runtime.field(runtime, 'inFlight'), 'clear', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(runtime, 'resolved'), 'clear', cast ([] : Array<Dynamic>));
+  }
+}

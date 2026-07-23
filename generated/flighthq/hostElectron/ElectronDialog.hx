@@ -3,9 +3,9 @@ package flighthq.hostElectron;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostElectron.ElectronModule.ElectronApi;
 import flighthq.types.Dialog.DialogBackend;
 import flighthq.types.Dialog.FileDialogHandle;
+import flighthq.types.ElectronApi;
 
 @:expose("flighthq.hostElectron.ElectronDialog")
 class ElectronDialog {

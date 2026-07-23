@@ -3,7 +3,7 @@ package flighthq.hostCapacitor;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorApi;
+import flighthq.types.CapacitorApi;
 import flighthq.types.Dialog.DialogBackend;
 
 @:expose("flighthq.hostCapacitor.CapacitorDialog")

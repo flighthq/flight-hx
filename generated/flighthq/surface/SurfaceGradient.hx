@@ -3,14 +3,11 @@ package flighthq.surface;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.surface.SurfaceBevel.SurfaceBevelType;
 import flighthq.surface.SurfaceBlur.blurSurfacePixelsHorizontal;
 import flighthq.surface.SurfaceBlur.blurSurfacePixelsVertical;
+import flighthq.types.SurfaceGradientBevelOptions;
+import flighthq.types.SurfaceGradientGlowOptions;
 import flighthq.types.SurfaceRegion;
-
-typedef SurfaceGradientBevelOptions = { @:optional var angle:Float; @:optional var distance:Float; @:optional var radiusX:Float; @:optional var radiusY:Float; @:optional var passes:Float; @:optional var intensity:Float; @:optional var type:SurfaceBevelType; };
-
-typedef SurfaceGradientGlowOptions = { @:optional var radiusX:Float; @:optional var radiusY:Float; @:optional var passes:Float; @:optional var intensity:Float; };
 
 @:expose("flighthq.surface.SurfaceGradient")
 class SurfaceGradient {

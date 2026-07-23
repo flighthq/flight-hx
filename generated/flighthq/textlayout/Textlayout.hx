@@ -7,7 +7,6 @@ import flighthq.textlayout.RichTextContent as Facade_Textlayout_flighthq_textlay
 import flighthq.textlayout.RichTextMetrics as Facade_Textlayout_flighthq_textlayout_RichTextMetrics;
 import flighthq.textlayout.RichTextQuery as Facade_Textlayout_flighthq_textlayout_RichTextQuery;
 import flighthq.textlayout.TextBounds as Facade_Textlayout_flighthq_textlayout_TextBounds;
-import flighthq.textlayout.TextBounds.TextBoundsSpec;
 import flighthq.textlayout.TextFormat as Facade_Textlayout_flighthq_textlayout_TextFormat;
 import flighthq.textlayout.TextFormatRange as Facade_Textlayout_flighthq_textlayout_TextFormatRange;
 import flighthq.textlayout.TextLayout as Facade_Textlayout_flighthq_textlayout_TextLayout;
@@ -21,6 +20,7 @@ import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.RichText.RichTextData;
 import flighthq.types.RichText.RichTextRuntime;
 import flighthq.types.RichTextContent;
+import flighthq.types.TextBoundsSpec;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 import flighthq.types.TextLabel.TextLabelRuntime;

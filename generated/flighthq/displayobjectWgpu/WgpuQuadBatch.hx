@@ -4,7 +4,6 @@ package flighthq.displayobjectWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.displayobjectWgpu.WgpuSpriteBatch.SPRITE_INSTANCE_FLOATS;
-import flighthq.displayobjectWgpu.WgpuSpriteBatch.WgpuQuadBatchResources;
 import flighthq.displayobjectWgpu.WgpuSpriteBatch.ensureWgpuQuadBatchResources;
 import flighthq.displayobjectWgpu.WgpuSpriteBatch.getWgpuQuadBatchPipeline;
 import flighthq.displayobjectWgpu.WgpuSpriteBatch.packWgpuSpriteBatchMaterialInstance;

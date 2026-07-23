@@ -6,18 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetAnimationData;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetData;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetFrameData;
-import flighthq.spritesheetFormats.StarlingSchema.StarlingDocument;
-import flighthq.spritesheetFormats.StarlingSchema.StarlingSubTexture;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.textureatlasFormats.TextureAtlasStarlingParse.parseTextureAtlasStarlingXml;
 import flighthq.types.SpritesheetAnimationData;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
+import flighthq.types.StarlingSchema.StarlingDocument;
+import flighthq.types.StarlingSchema.StarlingParseOptions;
+import flighthq.types.StarlingSchema.StarlingParsed;
+import flighthq.types.StarlingSchema.StarlingSubTexture;
 import flighthq.types.TextureAtlasRegion;
-
-typedef StarlingParsed = { var data:SpritesheetData; var document:StarlingDocument; };
-
-typedef StarlingParseOptions = { @:optional var frameDuration:Float; };
 
 @:expose("flighthq.spritesheetFormats.StarlingParse")
 class StarlingParse {

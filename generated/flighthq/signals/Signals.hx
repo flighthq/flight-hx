@@ -7,9 +7,9 @@ import flighthq.signals.Emitter as Facade_Signals_flighthq_signals_Emitter;
 import flighthq.signals.Signal as Facade_Signals_flighthq_signals_Signal;
 import flighthq.signals.Slot as Facade_Signals_flighthq_signals_Slot;
 import flighthq.signals.Throttle as Facade_Signals_flighthq_signals_Throttle;
-import flighthq.signals.Throttle.SignalThrottleOptions;
 import flighthq.types.Signal;
 import flighthq.types.SignalConnectOptions;
+import flighthq.types.SignalThrottleOptions;
 
 @:expose("flighthq.signals.Signals")
 class Signals {

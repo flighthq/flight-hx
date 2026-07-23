@@ -4,19 +4,17 @@ package flighthq.sceneWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
-import flighthq.sceneWgpu.WgpuSceneRuntime.WgpuMaterialBinding;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.WGPU_MESH_PRELUDE_WGSL;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.createWgpuMeshPipeline;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuPlaceholderTextureView;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuScenePipeline;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuShadowSampleLayout;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.stashWgpuUvTransform;
-import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
+import flighthq.sceneWgpu.WgpuMeshPipeline.WGPU_MESH_PRELUDE_WGSL;
+import flighthq.sceneWgpu.WgpuMeshPipeline.createWgpuMeshPipeline;
+import flighthq.sceneWgpu.WgpuMeshPipeline.ensureWgpuPlaceholderTextureView;
+import flighthq.sceneWgpu.WgpuMeshPipeline.ensureWgpuScenePipeline;
+import flighthq.sceneWgpu.WgpuMeshPipeline.ensureWgpuShadowSampleLayout;
+import flighthq.sceneWgpu.WgpuMeshPipeline.stashWgpuUvTransform;
+import flighthq.sceneWgpu.WgpuSceneRuntime.getWgpuSceneRuntime;
 import flighthq.types.WgpuRenderState;
-
-typedef WgpuToonDefineKey = { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasBaseColorMap:Bool; var hasRamp:Bool; };
-
-typedef WgpuToonPipeline = Dynamic;
+import flighthq.types.WgpuSceneRuntime.WgpuMaterialBinding;
+import flighthq.types.WgpuToonPipeline;
+import flighthq.types.WgpuToonPipeline.WgpuToonDefineKey;
 
 @:expose("flighthq.sceneWgpu.WgpuToonPrelude")
 class WgpuToonPrelude {

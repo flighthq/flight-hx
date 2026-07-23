@@ -18,7 +18,7 @@ import flighthq.types.ParticleConfigIssue;
 import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleCurve.ColorKeyframe;
 import flighthq.types.ParticleCurve.CurveKeyframe;
-import flighthq.types.ParticleEmitter;
+import flighthq.types.ParticleEmitter2D;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterSignals;
 import flighthq.types.ParticleEmitterState;
@@ -30,11 +30,11 @@ import flighthq.types.RandomSource;
 
 @:expose("flighthq.particles.Particles")
 class Particles {
-  public static function applyParticleCollisions(emitter:ParticleEmitter, state:ParticleEmitterState, colliders:Array<ParticleCollider>):Void {
+  public static function applyParticleCollisions(emitter:ParticleEmitter2D, state:ParticleEmitterState, colliders:Array<ParticleCollider>):Void {
     _Runtime.callValue(Facade_Particles_flighthq_particles_ApplyParticleCollisions.applyParticleCollisions, cast ([emitter, state, colliders] : Array<Dynamic>));
   }
 
-  public static function applyParticleForces(emitter:ParticleEmitter, state:ParticleEmitterState, forces:Array<ParticleForce>, deltaTime:Float):Void {
+  public static function applyParticleForces(emitter:ParticleEmitter2D, state:ParticleEmitterState, forces:Array<ParticleForce>, deltaTime:Float):Void {
     _Runtime.callValue(Facade_Particles_flighthq_particles_ApplyParticleForces.applyParticleForces, cast ([emitter, state, forces, deltaTime] : Array<Dynamic>));
   }
 

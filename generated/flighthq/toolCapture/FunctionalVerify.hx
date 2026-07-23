@@ -11,6 +11,9 @@ import flighthq.surface.SurfaceFingerprint.createSurfaceFingerprint;
 import flighthq.surface.SurfaceFingerprint.formatSurfaceFingerprint;
 import flighthq.surface.SurfaceFrom.createSurfaceFromImageSource;
 import flighthq.surface.SurfacePixel.getSurfacePixel;
+import flighthq.toolCapture.CaptureProtocol.CAPTURE_PROTOCOL_VERSION;
+import flighthq.toolCapture.CaptureProtocol.CaptureBenchmarkTarget;
+import flighthq.toolCapture.CaptureProtocol.CaptureVerification;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.DisplayObject;
 import flighthq.types.DomRenderState;
@@ -20,21 +23,21 @@ import flighthq.types.WgpuRenderState;
 
 typedef FunctionalRenderOracle = Dynamic;
 
-typedef FunctionalCanvasTarget = { var kind:String; var state:Dynamic; var width:Float; var height:Float; var scale:Float; var render:Dynamic; };
+typedef FunctionalCanvasTarget = { var kind:String; var state:Dynamic; var width:Float; var height:Float; var scale:Float; var render:Dynamic; @:optional var benchmark:Dynamic; };
 
-typedef FunctionalDomTarget = { var kind:String; var state:DomRenderState; var width:Float; var height:Float; var scale:Float; var render:Dynamic; };
+typedef FunctionalDomTarget = { var kind:String; var state:DomRenderState; var width:Float; var height:Float; var scale:Float; var render:Dynamic; @:optional var benchmark:Dynamic; };
 
-typedef FunctionalGlTarget = { var kind:String; var state:GlRenderState; var width:Float; var height:Float; var scale:Float; var render:Dynamic; };
+typedef FunctionalGlTarget = { var kind:String; var state:GlRenderState; var width:Float; var height:Float; var scale:Float; var render:Dynamic; @:optional var benchmark:Dynamic; };
 
 typedef FunctionalTestModule = { @:optional var assertRender:FunctionalRenderOracle; @:optional var minCoverage:Float; };
 
-typedef FunctionalVerification = { var render:String; var coverage:Null<Float>; var fingerprint:Null<String>; };
+typedef FunctionalVerification = CaptureVerification;
 
-typedef FunctionalWgpuTarget = { var kind:String; var state:WgpuRenderState; var width:Float; var height:Float; var scale:Float; var render:Dynamic; };
+typedef FunctionalWgpuTarget = { var kind:String; var state:WgpuRenderState; var width:Float; var height:Float; var scale:Float; var render:Dynamic; @:optional var benchmark:Dynamic; };
 
 typedef FunctionalTarget = Dynamic;
 
-typedef VerificationWindow__functionalVerify = { @:optional var __ftRealRequestAnimationFrame:Dynamic; @:optional var __ftRenderImage:String; @:optional var __ftTarget:FunctionalTarget; @:optional var __ftVerification:FunctionalVerification; };
+typedef VerificationWindow__functionalVerify = { @:optional var __ftRealRequestAnimationFrame:Dynamic; @:optional var __ftRenderImage:String; @:optional var __ftTarget:FunctionalTarget; @:optional var __ftBenchmarkTarget:CaptureBenchmarkTarget; @:optional var __ftVerification:FunctionalVerification; };
 
 @:expose("flighthq.toolCapture.FunctionalVerify")
 class FunctionalVerify {
@@ -58,14 +61,43 @@ class FunctionalVerify {
     background = _Runtime.callValue(getSurfacePixel, cast ([surface, 0.0, 0.0] : Array<Dynamic>));
     coverage = _Runtime.callValue(getSurfaceCoverage, cast ([surface, background, FunctionalVerify.BACKGROUND_CHANNEL_TOLERANCE__functionalVerify] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(coverage, FunctionalVerify.DEFAULT_MIN_COVERAGE__functionalVerify, '<'))) { return cast false; }
-    _Runtime.setField((cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftVerification', { render: render, coverage: coverage, fingerprint: _Runtime.callValue(formatSurfaceFingerprint, cast ([_Runtime.callValue(createSurfaceFingerprint, cast ([surface, FunctionalVerify.FINGERPRINT_GRID__functionalVerify] : Array<Dynamic>))] : Array<Dynamic>)) });
+    _Runtime.setField((cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftVerification', { protocolVersion: CAPTURE_PROTOCOL_VERSION, render: render, coverage: coverage, fingerprint: _Runtime.callValue(formatSurfaceFingerprint, cast ([_Runtime.callValue(createSurfaceFingerprint, cast ([surface, FunctionalVerify.FINGERPRINT_GRID__functionalVerify] : Array<Dynamic>))] : Array<Dynamic>)), state: 'passed', error: null });
     _Runtime.setField((cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftRenderImage', _Runtime.callValue(FunctionalVerify.encodeSurfaceToDataUrl__functionalVerify, cast ([surface] : Array<Dynamic>)));
     return cast true;
     return cast null;
   }
 
   public static function registerFunctionalTarget<T>(target:Dynamic):Dynamic {
-    _Runtime.setField((cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftTarget', target);
+    var captureWindow:Dynamic = cast _Runtime.UNDEFINED;
+    var render:Dynamic = cast _Runtime.UNDEFINED;
+    var lastRoot:Null<DisplayObject> = cast _Runtime.UNDEFINED;
+    var benchmarkTarget:CaptureBenchmarkTarget = cast _Runtime.UNDEFINED;
+    captureWindow = (cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify);
+    render = _Runtime.callProperty(_Runtime.field(target, 'render'), 'bind', cast ([target] : Array<Dynamic>));
+    benchmarkTarget = { protocolVersion: CAPTURE_PROTOCOL_VERSION, ready: false, kind: _Runtime.field(target, 'kind'), run: function() {
+      if (_Runtime.truthy(_Runtime.strictEquals(lastRoot, _Runtime.field(_Runtime, 'UNDEFINED')))) { throw _Runtime.error('benchmark target ' + Std.string(_Runtime.field(target, 'kind')) + ' has not rendered its first frame'); }
+      return cast _Runtime.select(_Runtime.strictEquals(_Runtime.field(target, 'benchmark'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(render, cast ([lastRoot] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callProperty(target, 'benchmark', cast ([lastRoot] : Array<Dynamic>)));
+    }, synchronize: flighthq._internal._Async.make(function():flighthq._internal._Promise<flighthq._internal._Nothing> {
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(target, 'kind'), 'webgl'))) {
+        _Runtime.callProperty(_Runtime.field(_Runtime.field(target, 'state'), 'gl'), 'finish', cast ([] : Array<Dynamic>));
+      } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(target, 'kind'), 'webgpu'))) {
+        flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.field(_Runtime.field(_Runtime.field(target, 'state'), 'device'), 'queue'), 'onSubmittedWorkDone', cast ([] : Array<Dynamic>)));
+      } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(target, 'kind'), 'dom'))) {
+        _Runtime.callProperty(_Runtime.field(_Runtime.field(target, 'state'), 'element'), 'getBoundingClientRect', cast ([] : Array<Dynamic>));
+      } } }
+      #if js
+      return;
+      #else
+      return cast null;
+      #end
+    }) };
+    _Runtime.setField(target, 'render', function(root:DisplayObject) {
+      (lastRoot = cast (root : Dynamic));
+      _Runtime.setField(benchmarkTarget, 'ready', true);
+      _Runtime.callValue(render, cast ([root] : Array<Dynamic>));
+    });
+    _Runtime.setField(captureWindow, '__ftTarget', target);
+    _Runtime.setField(captureWindow, '__ftBenchmarkTarget', benchmarkTarget);
     return cast target;
     return cast null;
   }
@@ -80,38 +112,42 @@ class FunctionalVerify {
   public static function runRenderVerification(testModule:FunctionalTestModule, render:String):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<flighthq._internal._Nothing> {
       var result:FunctionalVerification = cast _Runtime.UNDEFINED;
-      var surface:Dynamic = cast _Runtime.UNDEFINED;
-      var background:Dynamic = cast _Runtime.UNDEFINED;
-      var coverage:Dynamic = cast _Runtime.UNDEFINED;
-      var minCoverage:Dynamic = cast _Runtime.UNDEFINED;
-      result = { render: render, coverage: null, fingerprint: null };
+      result = { protocolVersion: CAPTURE_PROTOCOL_VERSION, render: render, coverage: null, fingerprint: null, state: 'pending', error: null };
       _Runtime.setField((cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftVerification', result);
-      if (_Runtime.truthy(_Runtime.strictEquals(render, 'dom'))) {
-        var target:Dynamic = _Runtime.field((cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftTarget');
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(target, 'kind'), 'dom'))) {
+      try {
+        if (_Runtime.truthy(_Runtime.strictEquals(render, 'dom'))) {
+          var target:Dynamic = _Runtime.field((cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftTarget');
+          if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.optionalField(target, 'kind'), 'dom'))) { throw _Runtime.error('[verify:' + Std.string(render) + '] blank render: no DOM target registered'); }
           var element:Dynamic = _Runtime.field(_Runtime.field(target, 'state'), 'element');
           var hasContent:Dynamic = _Runtime.orValue(_Runtime.compare(_Runtime.field(element, 'childElementCount'), 0.0, '>'), function():Dynamic return cast !_Runtime.strictEquals(StringTools.trim(Std.string(_Runtime.coalesce(_Runtime.field(element, 'textContent'), function():Dynamic return cast ''))), ''));
           if (_Runtime.truthy(!_Runtime.truthy(hasContent))) { throw _Runtime.error('[verify:' + Std.string(render) + '] blank render: no DOM output produced'); }
+          _Runtime.setField(result, 'state', 'passed');
+          #if js
+          return;
+          #else
+          return cast null;
+          #end
         }
-        #if js
-        return;
-        #else
-        return cast null;
-        #end
+        flighthq._internal._Async.awaitValue(_Runtime.callValue(FunctionalVerify.waitForPresentedFrame__functionalVerify, cast ([] : Array<Dynamic>)));
+        var surface:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(snapshotFunctionalRender, cast ([] : Array<Dynamic>)));
+        if (_Runtime.truthy(_Runtime.strictEquals(surface, null))) { throw _Runtime.error('[verify:' + Std.string(render) + '] blank render: no readable render surface'); }
+        var background:Dynamic = _Runtime.callValue(getSurfacePixel, cast ([surface, 0.0, 0.0] : Array<Dynamic>));
+        var coverage:Dynamic = _Runtime.callValue(getSurfaceCoverage, cast ([surface, background, FunctionalVerify.BACKGROUND_CHANNEL_TOLERANCE__functionalVerify] : Array<Dynamic>));
+        var fingerprint:Dynamic = _Runtime.callValue(formatSurfaceFingerprint, cast ([_Runtime.callValue(createSurfaceFingerprint, cast ([surface, FunctionalVerify.FINGERPRINT_GRID__functionalVerify] : Array<Dynamic>))] : Array<Dynamic>));
+        var minCoverage:Dynamic = _Runtime.coalesce(_Runtime.field(testModule, 'minCoverage'), function():Dynamic return cast FunctionalVerify.DEFAULT_MIN_COVERAGE__functionalVerify);
+        if (_Runtime.truthy(_Runtime.compare(coverage, minCoverage, '<'))) {
+          throw _Runtime.error('[verify:' + Std.string(render) + '] blank render: coverage ' + Std.string(_Runtime.toFixed(coverage, 5.0)) + ' below ' + Std.string(minCoverage) + '');
+        }
+        flighthq._internal._Async.awaitValue(_Runtime.callOptionalProperty(testModule, 'assertRender', cast ([surface] : Array<Dynamic>)));
+        _Runtime.setField((cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftRenderImage', _Runtime.callValue(FunctionalVerify.encodeSurfaceToDataUrl__functionalVerify, cast ([_Runtime.coalesce(_Runtime.callValue(FunctionalVerify.getFunctionalRenderImageSurface__functionalVerify, cast ([] : Array<Dynamic>)), function():Dynamic return cast surface)] : Array<Dynamic>)));
+        _Runtime.setField(result, 'coverage', coverage);
+        _Runtime.setField(result, 'fingerprint', fingerprint);
+        _Runtime.setField(result, 'state', 'passed');
+      } catch (error:Dynamic) {
+        _Runtime.setField(result, 'error', _Runtime.select(_Runtime.isError(error), function():Dynamic return cast _Runtime.field(error, 'message'), function():Dynamic return cast Std.string(error)));
+        _Runtime.setField(result, 'state', 'failed');
+        throw error;
       }
-      flighthq._internal._Async.awaitValue(_Runtime.callValue(FunctionalVerify.waitForPresentedFrame__functionalVerify, cast ([] : Array<Dynamic>)));
-      surface = flighthq._internal._Async.awaitValue(_Runtime.callValue(snapshotFunctionalRender, cast ([] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.strictEquals(surface, null))) { #if js return; #else return cast null; #end }
-      background = _Runtime.callValue(getSurfacePixel, cast ([surface, 0.0, 0.0] : Array<Dynamic>));
-      coverage = _Runtime.callValue(getSurfaceCoverage, cast ([surface, background, FunctionalVerify.BACKGROUND_CHANNEL_TOLERANCE__functionalVerify] : Array<Dynamic>));
-      _Runtime.setField(result, 'coverage', coverage);
-      _Runtime.setField(result, 'fingerprint', _Runtime.callValue(formatSurfaceFingerprint, cast ([_Runtime.callValue(createSurfaceFingerprint, cast ([surface, FunctionalVerify.FINGERPRINT_GRID__functionalVerify] : Array<Dynamic>))] : Array<Dynamic>)));
-      minCoverage = _Runtime.coalesce(_Runtime.field(testModule, 'minCoverage'), function():Dynamic return cast FunctionalVerify.DEFAULT_MIN_COVERAGE__functionalVerify);
-      if (_Runtime.truthy(_Runtime.compare(coverage, minCoverage, '<'))) {
-        throw _Runtime.error('[verify:' + Std.string(render) + '] blank render: coverage ' + Std.string(_Runtime.toFixed(coverage, 5.0)) + ' below ' + Std.string(minCoverage) + '');
-      }
-      flighthq._internal._Async.awaitValue(_Runtime.callOptionalProperty(testModule, 'assertRender', cast ([surface] : Array<Dynamic>)));
-      _Runtime.setField((cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftRenderImage', _Runtime.callValue(FunctionalVerify.encodeSurfaceToDataUrl__functionalVerify, cast ([_Runtime.coalesce(_Runtime.callValue(FunctionalVerify.getFunctionalRenderImageSurface__functionalVerify, cast ([] : Array<Dynamic>)), function():Dynamic return cast surface)] : Array<Dynamic>)));
       #if js
       return;
       #else

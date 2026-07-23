@@ -10,11 +10,11 @@ import flighthq.sceneWgpu.StandardPbrWgpuMeshMaterialRenderer.getWgpuPbrMaterial
 import flighthq.sceneWgpu.StandardPbrWgpuMeshMaterialRenderer.writeWgpuPbrMaterialUniform;
 import flighthq.sceneWgpu.StandardPbrWgpuMeshMaterialRenderer.writeWgpuPbrStandardBlock;
 import flighthq.sceneWgpu.WgpuMeshMaterialRegistry.registerWgpuMeshMaterialRenderer;
+import flighthq.sceneWgpu.WgpuMeshPipeline.beginWgpuMeshDraw;
+import flighthq.sceneWgpu.WgpuMeshPipeline.drawWgpuMeshSubset;
+import flighthq.sceneWgpu.WgpuMeshPipeline.writeWgpuFrameUniform;
 import flighthq.sceneWgpu.WgpuPbrPipelineCache.ensureWgpuPbrPipeline;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.beginWgpuMeshDraw;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.drawWgpuMeshSubset;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUniform;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.ClearcoatPbrMaterial;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
@@ -27,7 +27,7 @@ import flighthq.types._internal._ClearcoatPbrMaterialValues.ClearcoatPbrMaterial
 
 @:expose("flighthq.sceneWgpu.ClearcoatPbrWgpuMeshMaterialRenderer")
 class ClearcoatPbrWgpuMeshMaterialRenderer {
-  public static final clearcoatPbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
+  public static final clearcoatPbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var clearcoat:Dynamic = cast _Runtime.UNDEFINED;

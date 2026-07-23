@@ -3,22 +3,23 @@ package flighthq.particleemitter;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.particleemitter.EmitParticleBurst as Facade_Particleemitter_flighthq_particleemitter_EmitParticleBurst;
+import flighthq.particleemitter.EmitParticleBurst2D as Facade_Particleemitter_flighthq_particleemitter_EmitParticleBurst2D;
 import flighthq.particleemitter.EmitParticleBurst3D as Facade_Particleemitter_flighthq_particleemitter_EmitParticleBurst3D;
 import flighthq.particleemitter.ParticleEmitter as Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter;
 import flighthq.particleemitter.ParticleEmitter3D as Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter3D;
-import flighthq.particleemitter.PrewarmParticleEmitter as Facade_Particleemitter_flighthq_particleemitter_PrewarmParticleEmitter;
+import flighthq.particleemitter.PrewarmParticleEmitter2D as Facade_Particleemitter_flighthq_particleemitter_PrewarmParticleEmitter2D;
 import flighthq.particleemitter.PrewarmParticleEmitter3D as Facade_Particleemitter_flighthq_particleemitter_PrewarmParticleEmitter3D;
-import flighthq.particleemitter.StepParticleEmitter as Facade_Particleemitter_flighthq_particleemitter_StepParticleEmitter;
+import flighthq.particleemitter.StepParticleEmitter2D as Facade_Particleemitter_flighthq_particleemitter_StepParticleEmitter2D;
 import flighthq.particleemitter.StepParticleEmitter3D as Facade_Particleemitter_flighthq_particleemitter_StepParticleEmitter3D;
-import flighthq.particleemitter.UpdateParticleEmitter as Facade_Particleemitter_flighthq_particleemitter_UpdateParticleEmitter;
+import flighthq.particleemitter.UpdateParticleEmitter2D as Facade_Particleemitter_flighthq_particleemitter_UpdateParticleEmitter2D;
 import flighthq.particleemitter.UpdateParticleEmitter3D as Facade_Particleemitter_flighthq_particleemitter_UpdateParticleEmitter3D;
 import flighthq.types.Aabb.AabbLike;
+import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.PartialNode;
 import flighthq.types.ParticleCollider;
-import flighthq.types.ParticleEmitter;
-import flighthq.types.ParticleEmitter.ParticleEmitterData;
-import flighthq.types.ParticleEmitter.ParticleEmitterRuntime;
+import flighthq.types.ParticleEmitter2D;
+import flighthq.types.ParticleEmitter2D.ParticleEmitter2DRuntime;
+import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
 import flighthq.types.ParticleEmitter3D;
 import flighthq.types.ParticleEmitter3D.ParticleEmitter3DRuntime;
 import flighthq.types.ParticleEmitterCallbacks;
@@ -31,26 +32,26 @@ import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.particleemitter.Particleemitter")
 class Particleemitter {
+  public static function appendParticleEmitter2DParticle(target:ParticleEmitter2D, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Float {
+    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.appendParticleEmitter2DParticle, cast ([target, id, x, y, rotation, scale] : Array<Dynamic>));
+    return cast null;
+  }
+
   public static function appendParticleEmitter3DParticle(target:ParticleEmitter3D, id:Float, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Float {
     return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter3D.appendParticleEmitter3DParticle, cast ([target, id, x, y, z, rotation, scale] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function appendParticleEmitterParticle(target:ParticleEmitter, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Float {
-    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.appendParticleEmitterParticle, cast ([target, id, x, y, rotation, scale] : Array<Dynamic>));
-    return cast null;
-  }
-
-  public static function clearParticleEmitter(target:ParticleEmitter):Void {
-    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.clearParticleEmitter, cast ([target] : Array<Dynamic>));
+  public static function clearParticleEmitter2D(target:ParticleEmitter2D):Void {
+    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.clearParticleEmitter2D, cast ([target] : Array<Dynamic>));
   }
 
   public static function clearParticleEmitter3D(target:ParticleEmitter3D):Void {
     _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter3D.clearParticleEmitter3D, cast ([target] : Array<Dynamic>));
   }
 
-  public static function cloneParticleEmitter(source:ParticleEmitter):ParticleEmitter {
-    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.cloneParticleEmitter, cast ([source] : Array<Dynamic>));
+  public static function cloneParticleEmitter2D(source:ParticleEmitter2D):ParticleEmitter2D {
+    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.cloneParticleEmitter2D, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
@@ -59,24 +60,29 @@ class Particleemitter {
     return cast null;
   }
 
-  public static function compactParticleEmitter(target:ParticleEmitter):Void {
-    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.compactParticleEmitter, cast ([target] : Array<Dynamic>));
+  public static function compactParticleEmitter2D(target:ParticleEmitter2D):Void {
+    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.compactParticleEmitter2D, cast ([target] : Array<Dynamic>));
   }
 
   public static function compactParticleEmitter3D(target:ParticleEmitter3D):Void {
     _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter3D.compactParticleEmitter3D, cast ([target] : Array<Dynamic>));
   }
 
+  public static function computeParticleEmitter2DLocalBoundsRectangle(out:Rectangle, source:ParticleEmitter2D):Void {
+    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.computeParticleEmitter2DLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
+  }
+
   public static function computeParticleEmitter3DLocalBoundsAabb(out:AabbLike, source:ParticleEmitter3D):Void {
     _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter3D.computeParticleEmitter3DLocalBoundsAabb, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function computeParticleEmitterLocalBoundsRectangle(out:Rectangle, source:ParticleEmitter):Void {
-    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.computeParticleEmitterLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
+  public static function createParticleEmitter2D(?obj:PartialNode<ParticleEmitter2D>):ParticleEmitter2D {
+    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.createParticleEmitter2D, cast ([obj] : Array<Dynamic>));
+    return cast null;
   }
 
-  public static function createParticleEmitter(?obj:PartialNode<ParticleEmitter>):ParticleEmitter {
-    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.createParticleEmitter, cast ([obj] : Array<Dynamic>));
+  public static function createParticleEmitter2DRuntime():ParticleEmitter2DRuntime {
+    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.createParticleEmitter2DRuntime, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
@@ -90,18 +96,38 @@ class Particleemitter {
     return cast null;
   }
 
-  public static function createParticleEmitterRuntime():ParticleEmitterRuntime {
-    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.createParticleEmitterRuntime, cast ([] : Array<Dynamic>));
-    return cast null;
-  }
-
-  public static function emitParticleBurst(emitter:ParticleEmitter, state:ParticleEmitterState, config:ParticleEmitterConfig, count:Float, x:Float, y:Float, ?tint:Float):Float {
-    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_EmitParticleBurst.emitParticleBurst, cast ([emitter, state, config, count, x, y, tint] : Array<Dynamic>));
+  public static function emitParticleBurst2D(emitter:ParticleEmitter2D, state:ParticleEmitterState, config:ParticleEmitterConfig, count:Float, x:Float, y:Float, ?tint:Float):Float {
+    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_EmitParticleBurst2D.emitParticleBurst2D, cast ([emitter, state, config, count, x, y, tint] : Array<Dynamic>));
     return cast null;
   }
 
   public static function emitParticleBurst3D(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig, count:Float, x:Float, y:Float, z:Float, ?tint:Float):Float {
     return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_EmitParticleBurst3D.emitParticleBurst3D, cast ([emitter, state, config, count, x, y, z, tint] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function getParticleEmitter2DCapacity(source:ParticleEmitter2D):Float {
+    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.getParticleEmitter2DCapacity, cast ([source] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function getParticleEmitter2DParticleAlpha(source:ParticleEmitter2D, index:Float):Float {
+    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.getParticleEmitter2DParticleAlpha, cast ([source, index] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function getParticleEmitter2DParticleId(source:ParticleEmitter2D, index:Float):Float {
+    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.getParticleEmitter2DParticleId, cast ([source, index] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function getParticleEmitter2DParticleVelocity(out:Vector2Like, source:ParticleEmitter2D, index:Float):Bool {
+    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.getParticleEmitter2DParticleVelocity, cast ([out, source, index] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function getParticleEmitter2DRuntime(source:ParticleEmitter2D):ParticleEmitter2DRuntime {
+    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.getParticleEmitter2DRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
@@ -130,28 +156,8 @@ class Particleemitter {
     return cast null;
   }
 
-  public static function getParticleEmitterCapacity(source:ParticleEmitter):Float {
-    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.getParticleEmitterCapacity, cast ([source] : Array<Dynamic>));
-    return cast null;
-  }
-
-  public static function getParticleEmitterParticleAlpha(source:ParticleEmitter, index:Float):Float {
-    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.getParticleEmitterParticleAlpha, cast ([source, index] : Array<Dynamic>));
-    return cast null;
-  }
-
-  public static function getParticleEmitterParticleId(source:ParticleEmitter, index:Float):Float {
-    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.getParticleEmitterParticleId, cast ([source, index] : Array<Dynamic>));
-    return cast null;
-  }
-
-  public static function getParticleEmitterParticleVelocity(out:Vector2Like, source:ParticleEmitter, index:Float):Bool {
-    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.getParticleEmitterParticleVelocity, cast ([out, source, index] : Array<Dynamic>));
-    return cast null;
-  }
-
-  public static function getParticleEmitterRuntime(source:ParticleEmitter):ParticleEmitterRuntime {
-    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.getParticleEmitterRuntime, cast ([source] : Array<Dynamic>));
+  public static function isParticleEmitter2DComplete(emitter:ParticleEmitter2D, state:ParticleEmitterState, config:ParticleEmitterConfig):Bool {
+    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_UpdateParticleEmitter2D.isParticleEmitter2DComplete, cast ([emitter, state, config] : Array<Dynamic>));
     return cast null;
   }
 
@@ -165,37 +171,52 @@ class Particleemitter {
     return cast null;
   }
 
-  public static function isParticleEmitterComplete(emitter:ParticleEmitter, state:ParticleEmitterState, config:ParticleEmitterConfig):Bool {
-    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_UpdateParticleEmitter.isParticleEmitterComplete, cast ([emitter, state, config] : Array<Dynamic>));
-    return cast null;
-  }
-
   public static final PARTICLE_EMITTER_3D_DELETED_ID:Dynamic = Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter3D.PARTICLE_EMITTER_3D_DELETED_ID;
 
   public static final PARTICLE_EMITTER_DELETED_ID:Dynamic = Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.PARTICLE_EMITTER_DELETED_ID;
 
-  public static function prewarmParticleEmitter(emitter:ParticleEmitter, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, ?stepDeltaTime:Dynamic, ?callbacks:ParticleEmitterCallbacks):Void {
-    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_PrewarmParticleEmitter.prewarmParticleEmitter, cast ([emitter, state, config, duration, stepDeltaTime, callbacks] : Array<Dynamic>));
+  public static function prewarmParticleEmitter2D(emitter:ParticleEmitter2D, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, ?stepDeltaTime:Dynamic, ?callbacks:ParticleEmitterCallbacks):Void {
+    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_PrewarmParticleEmitter2D.prewarmParticleEmitter2D, cast ([emitter, state, config, duration, stepDeltaTime, callbacks] : Array<Dynamic>));
   }
 
   public static function prewarmParticleEmitter3D(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, ?stepDeltaTime:Dynamic, ?callbacks:ParticleEmitterCallbacks):Void {
     _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_PrewarmParticleEmitter3D.prewarmParticleEmitter3D, cast ([emitter, state, config, duration, stepDeltaTime, callbacks] : Array<Dynamic>));
   }
 
+  public static function removeParticleEmitter2DParticle(target:ParticleEmitter2D, index:Float):Void {
+    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.removeParticleEmitter2DParticle, cast ([target, index] : Array<Dynamic>));
+  }
+
   public static function removeParticleEmitter3DParticle(target:ParticleEmitter3D, index:Float):Void {
     _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter3D.removeParticleEmitter3DParticle, cast ([target, index] : Array<Dynamic>));
   }
 
-  public static function removeParticleEmitterParticle(target:ParticleEmitter, index:Float):Void {
-    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.removeParticleEmitterParticle, cast ([target, index] : Array<Dynamic>));
-  }
-
-  public static function reserveParticleEmitter(target:ParticleEmitter, capacity:Float):Void {
-    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.reserveParticleEmitter, cast ([target, capacity] : Array<Dynamic>));
+  public static function reserveParticleEmitter2D(target:ParticleEmitter2D, capacity:Float):Void {
+    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.reserveParticleEmitter2D, cast ([target, capacity] : Array<Dynamic>));
   }
 
   public static function reserveParticleEmitter3D(target:ParticleEmitter3D, capacity:Float):Void {
     _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter3D.reserveParticleEmitter3D, cast ([target, capacity] : Array<Dynamic>));
+  }
+
+  public static function setParticleEmitter2DLocalBoundsRectangle(target:ParticleEmitter2D, rect:Rectangle):Void {
+    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.setParticleEmitter2DLocalBoundsRectangle, cast ([target, rect] : Array<Dynamic>));
+  }
+
+  public static function setParticleEmitter2DParticle(target:ParticleEmitter2D, index:Float, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Void {
+    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.setParticleEmitter2DParticle, cast ([target, index, id, x, y, rotation, scale] : Array<Dynamic>));
+  }
+
+  public static function setParticleEmitter2DParticleAlpha(target:ParticleEmitter2D, index:Float, alpha:Float):Void {
+    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.setParticleEmitter2DParticleAlpha, cast ([target, index, alpha] : Array<Dynamic>));
+  }
+
+  public static function setParticleEmitter2DParticleColor(target:ParticleEmitter2D, index:Float, r:Float, g:Float, b:Float):Void {
+    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.setParticleEmitter2DParticleColor, cast ([target, index, r, g, b] : Array<Dynamic>));
+  }
+
+  public static function setParticleEmitter2DParticleVelocity(target:ParticleEmitter2D, index:Float, vx:Float, vy:Float):Void {
+    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.setParticleEmitter2DParticleVelocity, cast ([target, index, vx, vy] : Array<Dynamic>));
   }
 
   public static function setParticleEmitter3DParticle(target:ParticleEmitter3D, index:Float, id:Float, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Void {
@@ -214,36 +235,21 @@ class Particleemitter {
     _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter3D.setParticleEmitter3DParticleVelocity, cast ([target, index, vx, vy, vz] : Array<Dynamic>));
   }
 
-  public static function setParticleEmitterLocalBoundsRectangle(target:ParticleEmitter, rect:Rectangle):Void {
-    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.setParticleEmitterLocalBoundsRectangle, cast ([target, rect] : Array<Dynamic>));
+  public static function sortParticleEmitter3DIndicesByViewDepth(outIndices:Dynamic, outViewDepths:Dynamic, source:ParticleEmitter3D, positionToView:Matrix4Like):Bool {
+    return cast _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter3D.sortParticleEmitter3DIndicesByViewDepth, cast ([outIndices, outViewDepths, source, positionToView] : Array<Dynamic>));
+    return cast null;
   }
 
-  public static function setParticleEmitterParticle(target:ParticleEmitter, index:Float, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Void {
-    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.setParticleEmitterParticle, cast ([target, index, id, x, y, rotation, scale] : Array<Dynamic>));
-  }
-
-  public static function setParticleEmitterParticleAlpha(target:ParticleEmitter, index:Float, alpha:Float):Void {
-    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.setParticleEmitterParticleAlpha, cast ([target, index, alpha] : Array<Dynamic>));
-  }
-
-  public static function setParticleEmitterParticleColor(target:ParticleEmitter, index:Float, r:Float, g:Float, b:Float):Void {
-    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.setParticleEmitterParticleColor, cast ([target, index, r, g, b] : Array<Dynamic>));
-  }
-
-  public static function setParticleEmitterParticleVelocity(target:ParticleEmitter, index:Float, vx:Float, vy:Float):Void {
-    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_ParticleEmitter.setParticleEmitterParticleVelocity, cast ([target, index, vx, vy] : Array<Dynamic>));
-  }
-
-  public static function stepParticleEmitter(emitter:ParticleEmitter, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?callbacks:ParticleEmitterCallbacks):Void {
-    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_StepParticleEmitter.stepParticleEmitter, cast ([emitter, state, config, deltaTime, forces, colliders, callbacks] : Array<Dynamic>));
+  public static function stepParticleEmitter2D(emitter:ParticleEmitter2D, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?callbacks:ParticleEmitterCallbacks):Void {
+    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_StepParticleEmitter2D.stepParticleEmitter2D, cast ([emitter, state, config, deltaTime, forces, colliders, callbacks] : Array<Dynamic>));
   }
 
   public static function stepParticleEmitter3D(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?callbacks:ParticleEmitterCallbacks):Void {
     _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_StepParticleEmitter3D.stepParticleEmitter3D, cast ([emitter, state, config, deltaTime, forces, colliders, callbacks] : Array<Dynamic>));
   }
 
-  public static function updateParticleEmitter(emitter:ParticleEmitter, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?callbacks:ParticleEmitterCallbacks):Void {
-    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_UpdateParticleEmitter.updateParticleEmitter, cast ([emitter, state, config, deltaTime, callbacks] : Array<Dynamic>));
+  public static function updateParticleEmitter2D(emitter:ParticleEmitter2D, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?callbacks:ParticleEmitterCallbacks):Void {
+    _Runtime.callValue(Facade_Particleemitter_flighthq_particleemitter_UpdateParticleEmitter2D.updateParticleEmitter2D, cast ([emitter, state, config, deltaTime, callbacks] : Array<Dynamic>));
   }
 
   public static function updateParticleEmitter3D(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?callbacks:ParticleEmitterCallbacks):Void {

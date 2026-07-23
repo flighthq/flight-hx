@@ -4,42 +4,43 @@ package flighthq.shading;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.shading.CreateAnimatedNormalModifier as Facade_Shading_flighthq_shading_CreateAnimatedNormalModifier;
-import flighthq.shading.CreateAnimatedNormalModifier.AnimatedNormalModifierOptions;
 import flighthq.shading.CreateDissolveModifier as Facade_Shading_flighthq_shading_CreateDissolveModifier;
-import flighthq.shading.CreateDissolveModifier.DissolveModifierOptions;
 import flighthq.shading.CreateEmissiveModifier as Facade_Shading_flighthq_shading_CreateEmissiveModifier;
-import flighthq.shading.CreateEmissiveModifier.EmissiveModifierOptions;
 import flighthq.shading.CreateEnvReflectModifier as Facade_Shading_flighthq_shading_CreateEnvReflectModifier;
-import flighthq.shading.CreateEnvReflectModifier.EnvReflectModifierOptions;
 import flighthq.shading.CreateFogModifier as Facade_Shading_flighthq_shading_CreateFogModifier;
-import flighthq.shading.CreateFogModifier.FogModifierOptions;
 import flighthq.shading.CreateRimModifier as Facade_Shading_flighthq_shading_CreateRimModifier;
-import flighthq.shading.CreateRimModifier.RimModifierOptions;
 import flighthq.shading.CreateShadedMaterial as Facade_Shading_flighthq_shading_CreateShadedMaterial;
-import flighthq.shading.CreateShadedMaterial.ShadedMaterialOptions;
 import flighthq.shading.CreateToonModifier as Facade_Shading_flighthq_shading_CreateToonModifier;
-import flighthq.shading.CreateToonModifier.ToonModifierOptions;
 import flighthq.shading.CreateVertexDisplaceModifier as Facade_Shading_flighthq_shading_CreateVertexDisplaceModifier;
-import flighthq.shading.CreateVertexDisplaceModifier.VertexDisplaceModifierOptions;
 import flighthq.shading.GetModifierDefineKey as Facade_Shading_flighthq_shading_GetModifierDefineKey;
 import flighthq.shading.GetUnregisteredModifierKinds as Facade_Shading_flighthq_shading_GetUnregisteredModifierKinds;
 import flighthq.shading.IsBuiltInModifierSlot as Facade_Shading_flighthq_shading_IsBuiltInModifierSlot;
 import flighthq.shading.IsModifierStackValid as Facade_Shading_flighthq_shading_IsModifierStackValid;
-import flighthq.shading.ModifierRegistry.ModifierDefinition;
+import flighthq.shading.ModifierRegistry as Facade_Shading_flighthq_shading_ModifierRegistry;
 import flighthq.shading.OrderModifierStack as Facade_Shading_flighthq_shading_OrderModifierStack;
 import flighthq.shading.RegisterBuiltInModifiers as Facade_Shading_flighthq_shading_RegisterBuiltInModifiers;
-import flighthq.shading._internal._ModifierRegistryValues as Facade_Shading_flighthq_shading__internal__ModifierRegistryValues;
 import flighthq.types.AnimatedNormalModifier;
+import flighthq.types.AnimatedNormalModifierOptions;
 import flighthq.types.DissolveModifier;
+import flighthq.types.DissolveModifierOptions;
 import flighthq.types.EmissiveModifier;
+import flighthq.types.EmissiveModifierOptions;
 import flighthq.types.EnvReflectModifier;
+import flighthq.types.EnvReflectModifierOptions;
 import flighthq.types.FogModifier;
+import flighthq.types.FogModifierOptions;
 import flighthq.types.Modifier;
+import flighthq.types.ModifierDefinition;
 import flighthq.types.ModifierKind;
+import flighthq.types.ModifierRegistry;
 import flighthq.types.RimModifier;
+import flighthq.types.RimModifierOptions;
 import flighthq.types.ShadedMaterial;
+import flighthq.types.ShadedMaterialOptions;
 import flighthq.types.ToonModifier;
+import flighthq.types.ToonModifierOptions;
 import flighthq.types.VertexDisplaceModifier;
+import flighthq.types.VertexDisplaceModifierOptions;
 
 @:expose("flighthq.shading.Shading")
 class Shading {
@@ -71,7 +72,7 @@ class Shading {
   }
 
   public static function createModifierRegistry():ModifierRegistry {
-    return cast _Runtime.callValue(Facade_Shading_flighthq_shading__internal__ModifierRegistryValues.createModifierRegistry, cast ([] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_Shading_flighthq_shading_ModifierRegistry.createModifierRegistry, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
@@ -133,11 +134,11 @@ class Shading {
   }
 
   public static function registerModifier(registry:ModifierRegistry, definition:ModifierDefinition):Void {
-    _Runtime.callValue(Facade_Shading_flighthq_shading__internal__ModifierRegistryValues.registerModifier, cast ([registry, definition] : Array<Dynamic>));
+    _Runtime.callValue(Facade_Shading_flighthq_shading_ModifierRegistry.registerModifier, cast ([registry, definition] : Array<Dynamic>));
   }
 
   public static function resolveModifier(registry:ModifierRegistry, kind:ModifierKind):Null<ModifierDefinition> {
-    return cast _Runtime.callValue(Facade_Shading_flighthq_shading__internal__ModifierRegistryValues.resolveModifier, cast ([registry, kind] : Array<Dynamic>));
+    return cast _Runtime.callValue(Facade_Shading_flighthq_shading_ModifierRegistry.resolveModifier, cast ([registry, kind] : Array<Dynamic>));
     return cast null;
   }
 

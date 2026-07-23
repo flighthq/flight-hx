@@ -3,11 +3,11 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostTauri.TauriModule.TauriApi;
-import flighthq.hostTauri.TauriModule.TauriMenuItemHandle;
-import flighthq.hostTauri.TauriModule.TauriTrayIcon;
-import flighthq.hostTauri.TauriModule.TauriTrayIconEvent;
 import flighthq.types.Menu.MenuItemTemplate;
+import flighthq.types.TauriApi;
+import flighthq.types.TauriApi.TauriMenuItemHandle;
+import flighthq.types.TauriApi.TauriTrayIcon;
+import flighthq.types.TauriApi.TauriTrayIconEvent;
 import flighthq.types.Tray.TrayBackend;
 import flighthq.types.Tray.TrayEventData;
 import flighthq.types.Tray.TrayEventType;

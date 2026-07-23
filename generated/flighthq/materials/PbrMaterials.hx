@@ -20,7 +20,6 @@ class PbrMaterials {
     var specular:Dynamic = cast _Runtime.UNDEFINED;
     var glossiness:Dynamic = cast _Runtime.UNDEFINED;
     var diffuseMap:Dynamic = cast _Runtime.UNDEFINED;
-    var specularGlossinessMap:Dynamic = cast _Runtime.UNDEFINED;
     var emissive:Dynamic = cast _Runtime.UNDEFINED;
     var emissiveMap:Dynamic = cast _Runtime.UNDEFINED;
     var emissiveStrength:Dynamic = cast _Runtime.UNDEFINED;
@@ -48,7 +47,6 @@ class PbrMaterials {
     specular = _Runtime.field(source, 'specular');
     glossiness = _Runtime.field(source, 'glossiness');
     diffuseMap = _Runtime.field(source, 'diffuseMap');
-    specularGlossinessMap = _Runtime.field(source, 'specularGlossinessMap');
     emissive = _Runtime.field(source, 'emissive');
     emissiveMap = _Runtime.field(source, 'emissiveMap');
     emissiveStrength = _Runtime.field(source, 'emissiveStrength');
@@ -80,7 +78,7 @@ class PbrMaterials {
     _Runtime.setField(out, 'emissiveMap', emissiveMap);
     _Runtime.setField(out, 'emissiveStrength', emissiveStrength);
     _Runtime.setField(out, 'metallic', metallic);
-    _Runtime.setField(out, 'metallicRoughnessMap', specularGlossinessMap);
+    _Runtime.setField(out, 'metallicRoughnessMap', null);
     _Runtime.setField(out, 'normalMap', normalMap);
     _Runtime.setField(out, 'normalScale', normalScale);
     _Runtime.setField(out, 'occlusionMap', occlusionMap);

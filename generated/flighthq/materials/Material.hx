@@ -45,6 +45,11 @@ class Material {
     return cast null;
   }
 
+  public static function getMaterialOfKind<T>(material:Null<flighthq.types.Material>, kind:Kind):Null<Dynamic> {
+    return cast _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(material, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(material, 'kind'), kind)), function():Dynamic return cast (cast material : Dynamic), function():Dynamic return cast null);
+    return cast null;
+  }
+
   public static function copyMaterialFields__material(dst:flighthq.types.Material, src:flighthq.types.Material, kind:Kind):Void {
     var dstFields:Dynamic = cast _Runtime.UNDEFINED;
     var srcFields:Dynamic = cast _Runtime.UNDEFINED;

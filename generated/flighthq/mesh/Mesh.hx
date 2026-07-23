@@ -4,14 +4,13 @@ package flighthq.mesh;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.mesh.MeshGeometry as Facade_Mesh_flighthq_mesh_MeshGeometry;
-import flighthq.mesh.MeshGeometry.MeshGeometryOptions;
 import flighthq.mesh.MeshGeometryAttributes as Facade_Mesh_flighthq_mesh_MeshGeometryAttributes;
 import flighthq.mesh.MeshGeometryBuilders as Facade_Mesh_flighthq_mesh_MeshGeometryBuilders;
 import flighthq.mesh.MeshGeometryCompute as Facade_Mesh_flighthq_mesh_MeshGeometryCompute;
+import flighthq.mesh.MeshGeometryDeformationClone as Facade_Mesh_flighthq_mesh_MeshGeometryDeformationClone;
 import flighthq.mesh.MeshGeometryIndex as Facade_Mesh_flighthq_mesh_MeshGeometryIndex;
 import flighthq.mesh.MeshGeometryLayout as Facade_Mesh_flighthq_mesh_MeshGeometryLayout;
 import flighthq.mesh.MeshGeometryOperations as Facade_Mesh_flighthq_mesh_MeshGeometryOperations;
-import flighthq.mesh.MeshGeometryOperations.MeshGeometryFromAttributesOptions;
 import flighthq.mesh.MeshGeometrySubset as Facade_Mesh_flighthq_mesh_MeshGeometrySubset;
 import flighthq.mesh.MeshGeometryTransforms as Facade_Mesh_flighthq_mesh_MeshGeometryTransforms;
 import flighthq.mesh.MeshGeometryUvs as Facade_Mesh_flighthq_mesh_MeshGeometryUvs;
@@ -24,8 +23,11 @@ import flighthq.types.MeshGeometry.MeshSubset;
 import flighthq.types.MeshGeometry.VertexAttribute;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
 import flighthq.types.MeshGeometry.VertexSemantic;
+import flighthq.types.MeshGeometryFromAttributesOptions;
+import flighthq.types.MeshGeometryOptions;
 import flighthq.types.MeshMorphBindPose;
 import flighthq.types.MeshSkinBindPose;
+import flighthq.types.MeshTriangleVertexIndices;
 import flighthq.types.MorphTarget.MeshMorph;
 
 @:expose("flighthq.mesh.Mesh")
@@ -53,6 +55,16 @@ class Mesh {
 
   public static function cloneMeshGeometry(source:MeshGeometry):MeshGeometry {
     return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometry.cloneMeshGeometry, cast ([source] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function cloneMeshGeometryForDeformation(source:MeshGeometry):MeshGeometry {
+    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryDeformationClone.cloneMeshGeometryForDeformation, cast ([source] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function compactMeshGeometryVertices(geometry:MeshGeometry):MeshGeometry {
+    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryIndex.compactMeshGeometryVertices, cast ([geometry] : Array<Dynamic>));
     return cast null;
   }
 
@@ -219,8 +231,28 @@ class Mesh {
     return cast null;
   }
 
+  public static function getMeshGeometryTriangleSubsetIndex(geometry:MeshGeometry, triangleIndex:Float):Float {
+    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometrySubset.getMeshGeometryTriangleSubsetIndex, cast ([geometry, triangleIndex] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function getMeshGeometryTriangleVertexIndices(out:MeshTriangleVertexIndices, geometry:MeshGeometry, triangleIndex:Float):Bool {
+    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryOperations.getMeshGeometryTriangleVertexIndices, cast ([out, geometry, triangleIndex] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function getMeshGeometryVertexColor0(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
+    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexColor0, cast ([out, geometry, vertexIndex] : Array<Dynamic>));
+    return cast null;
+  }
+
   public static function getMeshGeometryVertexCount(geometry:MeshGeometry):Float {
     return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometry.getMeshGeometryVertexCount, cast ([geometry] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function getMeshGeometryVertexJoints0(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
+    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexJoints0, cast ([out, geometry, vertexIndex] : Array<Dynamic>));
     return cast null;
   }
 
@@ -244,6 +276,16 @@ class Mesh {
     return cast null;
   }
 
+  public static function getMeshGeometryVertexUv1(out:{ var x:Float; var y:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
+    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexUv1, cast ([out, geometry, vertexIndex] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function getMeshGeometryVertexWeights0(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
+    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexWeights0, cast ([out, geometry, vertexIndex] : Array<Dynamic>));
+    return cast null;
+  }
+
   public static function getVertexAttribute(layout:VertexAttributeLayout, semantic:VertexSemantic):Null<VertexAttribute> {
     return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.getVertexAttribute, cast ([layout, semantic] : Array<Dynamic>));
     return cast null;
@@ -259,6 +301,11 @@ class Mesh {
     return cast null;
   }
 
+  public static function indexMeshGeometryVertices(geometry:MeshGeometry):MeshGeometry {
+    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryIndex.indexMeshGeometryVertices, cast ([geometry] : Array<Dynamic>));
+    return cast null;
+  }
+
   public static function mergeMeshGeometries(geometries:Array<MeshGeometry>):Null<MeshGeometry> {
     return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryOperations.mergeMeshGeometries, cast ([geometries] : Array<Dynamic>));
     return cast null;
@@ -266,6 +313,10 @@ class Mesh {
 
   public static function offsetMeshGeometryUvs(geometry:MeshGeometry, du:Float, dv:Float):Void {
     _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryUvs.offsetMeshGeometryUvs, cast ([geometry, du, dv] : Array<Dynamic>));
+  }
+
+  public static function refreshMeshGeometryBounds(geometry:MeshGeometry):Void {
+    _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryCompute.refreshMeshGeometryBounds, cast ([geometry] : Array<Dynamic>));
   }
 
   public static function scaleMeshGeometry(geometry:MeshGeometry, sx:Float, sy:Float, sz:Float):Void {
@@ -288,6 +339,16 @@ class Mesh {
     _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometrySubset.setMeshGeometrySubsets, cast ([geometry, subsets] : Array<Dynamic>));
   }
 
+  public static function setMeshGeometryVertexColor0(geometry:MeshGeometry, vertexIndex:Float, r:Float, g:Float, b:Float, a:Float):Bool {
+    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexColor0, cast ([geometry, vertexIndex, r, g, b, a] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function setMeshGeometryVertexJoints0(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float, w:Float):Bool {
+    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexJoints0, cast ([geometry, vertexIndex, x, y, z, w] : Array<Dynamic>));
+    return cast null;
+  }
+
   public static function setMeshGeometryVertexNormal(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float):Bool {
     return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexNormal, cast ([geometry, vertexIndex, x, y, z] : Array<Dynamic>));
     return cast null;
@@ -308,6 +369,16 @@ class Mesh {
     return cast null;
   }
 
+  public static function setMeshGeometryVertexUv1(geometry:MeshGeometry, vertexIndex:Float, u:Float, v:Float):Bool {
+    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexUv1, cast ([geometry, vertexIndex, u, v] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function setMeshGeometryVertexWeights0(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float, w:Float):Bool {
+    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexWeights0, cast ([geometry, vertexIndex, x, y, z, w] : Array<Dynamic>));
+    return cast null;
+  }
+
   public static function transformMeshGeometry(geometry:MeshGeometry, matrix:Matrix4Like):Bool {
     return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryTransforms.transformMeshGeometry, cast ([geometry, matrix] : Array<Dynamic>));
     return cast null;
@@ -324,6 +395,11 @@ class Mesh {
 
   public static function validateMeshGeometry(geometry:MeshGeometry):Bool {
     return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryOperations.validateMeshGeometry, cast ([geometry] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function weldMeshGeometryVertices(geometry:MeshGeometry):MeshGeometry {
+    return cast _Runtime.callValue(Facade_Mesh_flighthq_mesh_MeshGeometryIndex.weldMeshGeometryVertices, cast ([geometry] : Array<Dynamic>));
     return cast null;
   }
 

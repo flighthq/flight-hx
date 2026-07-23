@@ -6,13 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.sceneWgpu.WgpuMeshMaterialRegistry.registerWgpuMeshMaterialRenderer;
-import flighthq.sceneWgpu.WgpuToonPrelude.WgpuToonDefineKey;
+import flighthq.sceneWgpu.WgpuMeshPipeline.beginWgpuMeshDraw;
+import flighthq.sceneWgpu.WgpuMeshPipeline.drawWgpuMeshSubset;
+import flighthq.sceneWgpu.WgpuMeshPipeline.writeWgpuFrameUniform;
 import flighthq.sceneWgpu.WgpuToonPrelude.bindWgpuToonSurface;
 import flighthq.sceneWgpu.WgpuToonPrelude.ensureWgpuToonPipeline;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.beginWgpuMeshDraw;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.drawWgpuMeshSubset;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUniform;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
@@ -22,11 +21,12 @@ import flighthq.types.ToonMaterial;
 import flighthq.types.Types.ToonMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuToonPipeline.WgpuToonDefineKey;
 import flighthq.types._internal._ToonMaterialValues.ToonMaterialKind;
 
 @:expose("flighthq.sceneWgpu.ToonWgpuMeshMaterialRenderer")
 class ToonWgpuMeshMaterialRenderer {
-  public static final toonWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
+  public static final toonWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var toon:Dynamic = cast _Runtime.UNDEFINED;

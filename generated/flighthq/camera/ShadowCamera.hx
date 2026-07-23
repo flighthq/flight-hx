@@ -3,15 +3,15 @@ package flighthq.camera;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.camera.Camera.setCameraViewMatrix4FromLookAt;
+import flighthq.camera.Camera.setCamera3DViewMatrix4FromLookAt;
 import flighthq.camera.Projection.createOrthographicProjection;
 import flighthq.types.Aabb.AabbLike;
-import flighthq.types.Camera;
+import flighthq.types.Camera3D;
 import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.camera.ShadowCamera")
 class ShadowCamera {
-  public static function configureDirectionalShadowCamera(camera:Camera, lightDirection:Vector3Like, sceneBounds:AabbLike):Void {
+  public static function configureDirectionalShadowCamera3D(camera:Camera3D, lightDirection:Vector3Like, sceneBounds:AabbLike):Void {
     var min:Dynamic = cast _Runtime.UNDEFINED;
     var max:Dynamic = cast _Runtime.UNDEFINED;
     var cx:Dynamic = cast _Runtime.UNDEFINED;
@@ -43,7 +43,7 @@ class ShadowCamera {
     _Runtime.setField(ShadowCamera._target__shadowCamera, 'y', cy);
     _Runtime.setField(ShadowCamera._target__shadowCamera, 'z', cz);
     up = _Runtime.select(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([dy] : Array<Dynamic>)), 0.99, '>'), function():Dynamic return cast ShadowCamera._upZ__shadowCamera, function():Dynamic return cast ShadowCamera._upY__shadowCamera);
-    _Runtime.callValue(setCameraViewMatrix4FromLookAt, cast ([camera, ShadowCamera._eye__shadowCamera, ShadowCamera._target__shadowCamera, up] : Array<Dynamic>));
+    _Runtime.callValue(setCamera3DViewMatrix4FromLookAt, cast ([camera, ShadowCamera._eye__shadowCamera, ShadowCamera._target__shadowCamera, up] : Array<Dynamic>));
     _Runtime.setField(camera, 'near', radius);
     _Runtime.setField(camera, 'far', (radius * 3.0));
     _Runtime.setField(camera, 'projection', _Runtime.callValue(createOrthographicProjection, cast ([{ halfHeight: radius, halfWidth: radius }] : Array<Dynamic>)));

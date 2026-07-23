@@ -20,7 +20,6 @@ import flighthq.hostCapacitor.CapacitorFileSystem.createCapacitorFileSystemBacke
 import flighthq.hostCapacitor.CapacitorGeolocation.createCapacitorGeolocationBackend;
 import flighthq.hostCapacitor.CapacitorHaptics.createCapacitorHapticsBackend;
 import flighthq.hostCapacitor.CapacitorKeyboard.createCapacitorKeyboardBackend;
-import flighthq.hostCapacitor.CapacitorModule.CapacitorApi;
 import flighthq.hostCapacitor.CapacitorNotification.createCapacitorNotificationBackend;
 import flighthq.hostCapacitor.CapacitorShare.createCapacitorShareBackend;
 import flighthq.hostCapacitor.CapacitorStatusBar.createCapacitorStatusBarBackend;
@@ -28,6 +27,7 @@ import flighthq.keyboard.Keyboard.setSoftKeyboardBackend;
 import flighthq.notification.Notification.setNotificationBackend;
 import flighthq.share.Share.setShareBackend;
 import flighthq.statusbar.Statusbar.setStatusBarBackend;
+import flighthq.types.CapacitorApi;
 
 @:expose("flighthq.hostCapacitor.CapacitorRegister")
 class CapacitorRegister {

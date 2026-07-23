@@ -5,14 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.RenderProxy.getRenderProxy2D;
 import flighthq.render.RenderState.getRenderStateRuntime;
-import flighthq.types.Entity.Kind;
+import flighthq.types.DisplayObjectRenderBlankReason;
+import flighthq.types.DisplayObjectRenderExplanation;
 import flighthq.types.HasAppearance;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
-
-typedef DisplayObjectRenderExplanation = { var kind:Kind; var hasRenderer:Bool; var prepared:Bool; var visible:Bool; var effectiveAlpha:Float; var reason:DisplayObjectRenderBlankReason; };
-
-typedef DisplayObjectRenderBlankReason = String;
 
 @:expose("flighthq.render.ExplainDisplayObjectRender")
 class ExplainDisplayObjectRender {

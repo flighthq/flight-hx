@@ -3,10 +3,10 @@ package flighthq.hostElectron;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.hostElectron.ElectronModule.ElectronApi;
-import flighthq.hostElectron.ElectronModule.ElectronClipboardData;
 import flighthq.types.Clipboard.ClipboardBackend;
 import flighthq.types.Clipboard.ClipboardBookmark;
+import flighthq.types.ElectronApi;
+import flighthq.types.ElectronApi.ElectronClipboardData;
 
 @:expose("flighthq.hostElectron.ElectronClipboard")
 class ElectronClipboard {

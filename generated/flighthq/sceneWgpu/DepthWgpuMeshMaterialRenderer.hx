@@ -7,10 +7,10 @@ import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.sceneWgpu.WgpuDebugPrelude.bindWgpuDebugSurface;
 import flighthq.sceneWgpu.WgpuDebugPrelude.ensureWgpuDebugPipeline;
 import flighthq.sceneWgpu.WgpuMeshMaterialRegistry.registerWgpuMeshMaterialRenderer;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.beginWgpuMeshDraw;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.drawWgpuMeshSubset;
-import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUniform;
-import flighthq.types.Camera;
+import flighthq.sceneWgpu.WgpuMeshPipeline.beginWgpuMeshDraw;
+import flighthq.sceneWgpu.WgpuMeshPipeline.drawWgpuMeshSubset;
+import flighthq.sceneWgpu.WgpuMeshPipeline.writeWgpuFrameUniform;
+import flighthq.types.Camera3D;
 import flighthq.types.DepthMaterial;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
@@ -23,7 +23,7 @@ import flighthq.types._internal._DepthMaterialValues.DepthMaterialKind;
 
 @:expose("flighthq.sceneWgpu.DepthWgpuMeshMaterialRenderer")
 class DepthWgpuMeshMaterialRenderer {
-  public static final depthWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera) {
+  public static final depthWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera3D) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var depth:Dynamic = cast _Runtime.UNDEFINED;
