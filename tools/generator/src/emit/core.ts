@@ -23,7 +23,7 @@ import type {
   LoweringDiagnostic,
 } from '../model/ir.ts';
 import { applySemanticPatches } from '../patch/apply.ts';
-import { emitHaxeModule, setShadowedTypeNames } from './haxe.ts';
+import { emitHaxeModule, setSelfShadowTypeModules, setShadowedTypeNames } from './haxe.ts';
 import { stableJson, writeOrCheck } from './reports.ts';
 
 export interface CoreGenerationReport {
@@ -143,10 +143,9 @@ export function generateCoreModules(workspaceDirectory: string, check: boolean):
     shadowedTypeNames,
   );
   buildPublicFacades(modules, inventoryByName, canonicalValueAliases, shadowedTypeNames);
-  // Facades exist now, so their namespace class names are known: fold in generic data types
-  // shadowed by a like-named namespace/facade class, then drop any import that binds a shadowed
-  // name (references to them are emitted as `Dynamic`).
-  addNamespaceShadowCollisions(modules, shadowedTypeNames);
+  // Inside a namespace module, a bare reference to its own-named data type resolves to the
+  // function-only class; emit the type's fully-qualified path there instead (real type, no Dynamic).
+  setSelfShadowTypeModules(computeSelfShadowTypeModules(modules));
   for (const module of modules) {
     module.imports = module.imports.filter((imported) => !importBindsShadowedName(imported, shadowedTypeNames));
   }
@@ -338,6 +337,14 @@ function populateSourceImports(
     names.add(module.name);
     moduleNamesByPackage.set(pkg, names);
   }
+  // Owning module of each renamed canonical const value (`PathCommand` -> `PathCommandValue`).
+  const canonicalValues = new Set(canonicalValueAliases.values());
+  const valueOwner = new Map<string, IrModule>();
+  for (const module of modules) {
+    for (const declaration of module.declarations) {
+      if (declaration.kind === 'variable' && canonicalValues.has(declaration.name)) valueOwner.set(declaration.name, module);
+    }
+  }
   for (const item of loweredPackages) {
     for (const loweredSource of item.lowered.sources) {
       const relativeSource = path.relative(workspaceDirectory, loweredSource.file).split(path.sep).join('/');
@@ -361,6 +368,19 @@ function populateSourceImports(
               ? resolvePackageImport(statement.moduleSpecifier.text, importedName)
               : undefined;
           if (!resolved) continue;
+          // A renamed import of a const value/type dual (`import { X as Y }` where the code uses
+          // `Y` as a value) resolves to the type, which has no members. Bind the renamed value
+          // `XValue` from its values module to `Y` instead. The non-renamed case is handled by
+          // reference rewriting + `importCanonicalValues`.
+          if (canonicalValueAliases.has(importedName) && element.name.text !== importedName) {
+            const generatedValue = canonicalValueAliases.get(importedName);
+            const valueModule = generatedValue ? valueOwner.get(generatedValue) : undefined;
+            if (valueModule) {
+              const importPath = `${modulePath(valueModule)}.${generatedValue} as ${element.name.text}`;
+              for (const owner of owners) if (owner !== valueModule) owner.imports.push(importPath);
+              continue;
+            }
+          }
           // Shadowed types (package-private secondaries, or generic types shadowed by a
           // namespace class) are emitted as `Dynamic` and must not be imported by name.
           if (isPackagePrivateDeclaration(resolved.declaration) || shadowedTypeNames.has(resolved.declaration.name)) continue;
@@ -433,20 +453,37 @@ function markShadowedSecondaryTypes(modules: IrModule[]): Set<string> {
  * value of such a type already flows through `Dynamic` in generated code. Runs after
  * `buildPublicFacades` so facade class names are included among the namespace names.
  */
-function addNamespaceShadowCollisions(modules: IrModule[], shadowedTypeNames: Set<string>): void {
-  const dataTypeNames = new Set<string>();
+/**
+ * A data type whose name also names a `create<Type>` namespace module is shadowed by that
+ * function-only class inside the namespace module itself (a bare `Tween`/`Snapshot`/`AudioChannel`
+ * there resolves to the class, not the type). Map each such name to its canonical data type's
+ * fully-qualified path so the emitter can reference the real type there instead of degrading to
+ * `Dynamic`. Consumers in other modules import the type normally and need no rewrite.
+ */
+function computeSelfShadowTypeModules(modules: IrModule[]): Map<string, string> {
   const namespaceModuleNames = new Set<string>();
   for (const module of modules) {
     if (module.declarations.some((declaration) => declaration.kind === 'function' || declaration.kind === 'variable')) {
       namespaceModuleNames.add(module.name);
     }
-    for (const declaration of module.declarations) {
-      if (declaration.kind === 'type' || declaration.kind === 'class' || declaration.kind === 'enum') {
-        dataTypeNames.add(declaration.name);
+  }
+  const selfShadowTypeModules = new Map<string, string>();
+  // Prefer the canonical `flighthq.types.*` declaration; fall back to any other type-only module.
+  const isTypesPackage = (module: IrModule): boolean => (module.haxePackage ?? '').startsWith('flighthq.types');
+  for (const pass of [true, false]) {
+    for (const module of modules) {
+      if (isTypesPackage(module) !== pass) continue;
+      if (module.declarations.some((declaration) => declaration.kind === 'function' || declaration.kind === 'variable')) {
+        continue;
+      }
+      for (const declaration of module.declarations) {
+        if (declaration.kind !== 'type' && declaration.kind !== 'class' && declaration.kind !== 'enum') continue;
+        if (!namespaceModuleNames.has(declaration.name) || selfShadowTypeModules.has(declaration.name)) continue;
+        selfShadowTypeModules.set(declaration.name, declarationImportPath(module, declaration));
       }
     }
   }
-  for (const name of dataTypeNames) if (namespaceModuleNames.has(name)) shadowedTypeNames.add(name);
+  return selfShadowTypeModules;
 }
 
 /** The Haxe name an import statement binds into scope: the alias, or the trailing path segment. */

@@ -1276,9 +1276,14 @@ export function emitType(type: IrType): string {
       return 'Dynamic';
     case 'function':
       return `${type.parameters.length === 0 ? 'Void' : type.parameters.map(emitType).join('->')}->${emitType(type.returns)}`;
-    case 'named':
+    case 'named': {
+      const arguments_ = type.arguments.length > 0 ? `<${type.arguments.map(emitType).join(', ')}>` : '';
       if (!type.name.includes('.') && shadowedTypeNames.has(type.name)) return 'Dynamic';
-      return `${qualifiedName(type.name)}${type.arguments.length > 0 ? `<${type.arguments.map(emitType).join(', ')}>` : ''}`;
+      if (!type.name.includes('.') && type.name === currentModuleName && selfShadowTypeModules.has(type.name)) {
+        return `${selfShadowTypeModules.get(type.name)}${arguments_}`;
+      }
+      return `${qualifiedName(type.name)}${arguments_}`;
+    }
     case 'nullable':
       return `Null<${emitType(type.inner)}>`;
     case 'primitive':
@@ -1317,6 +1322,16 @@ let shadowedTypeNames = new Set<string>();
 
 export function setShadowedTypeNames(names: Set<string>): void {
   shadowedTypeNames = names;
+}
+
+// Type name -> fully-qualified path of its canonical data type, for names that also name a
+// `create<Type>` namespace module. Inside that namespace module a bare type reference resolves
+// to the (function-only) class and shadows the real type; emitting the fully-qualified path
+// resolves to the actual type without degrading to `Dynamic`.
+let selfShadowTypeModules = new Map<string, string>();
+
+export function setSelfShadowTypeModules(paths: Map<string, string>): void {
+  selfShadowTypeModules = paths;
 }
 
 function qualifiedName(name: string): string {
