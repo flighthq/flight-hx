@@ -139,11 +139,12 @@ export function generateCoreModules(workspaceDirectory: string, check: boolean):
   // Facades exist now, so their namespace class names are known: fold in generic data types
   // shadowed by a like-named namespace/facade class, then drop any import that binds a shadowed
   // name (references to them are emitted as `Dynamic`).
-  addGenericShadowCollisions(modules, shadowedTypeNames);
+  addNamespaceShadowCollisions(modules, shadowedTypeNames);
   for (const module of modules) {
     module.imports = module.imports.filter((imported) => !importBindsShadowedName(imported, shadowedTypeNames));
   }
   setShadowedTypeNames(shadowedTypeNames);
+  importExternalTypesFromLut(modules);
   validateHaxeModuleIdentities(modules);
   const maintainedDirectory = path.join(workspaceDirectory, 'src');
   const conflicts = modules.map(moduleRelativePath).filter((file) => existsSync(path.join(maintainedDirectory, file)));
@@ -417,26 +418,27 @@ function markShadowedSecondaryTypes(modules: IrModule[]): Set<string> {
 }
 
 /**
- * Fold in generic data types whose name is also a non-generic namespace/facade class (the
- * `create<Type>` API named after its module). The class shadows the type but cannot accept its
- * type parameters ("too many type parameters"), so such references are emitted as `Dynamic` —
- * every value of these types already flows through `Dynamic` in generated code. Runs after
+ * Fold in data types whose name is also a `create<Type>` namespace/facade class (named after its
+ * module). The namespace class shadows the like-named data type, so a bare reference resolves to
+ * the class: a generic type then fails ("too many type parameters") and an anonymous-struct value
+ * fails to unify with the class. Both are avoided by emitting these references as `Dynamic` — every
+ * value of such a type already flows through `Dynamic` in generated code. Runs after
  * `buildPublicFacades` so facade class names are included among the namespace names.
  */
-function addGenericShadowCollisions(modules: IrModule[], shadowedTypeNames: Set<string>): void {
-  const genericTypeNames = new Set<string>();
+function addNamespaceShadowCollisions(modules: IrModule[], shadowedTypeNames: Set<string>): void {
+  const dataTypeNames = new Set<string>();
   const namespaceModuleNames = new Set<string>();
   for (const module of modules) {
     if (module.declarations.some((declaration) => declaration.kind === 'function' || declaration.kind === 'variable')) {
       namespaceModuleNames.add(module.name);
     }
     for (const declaration of module.declarations) {
-      if ((declaration.kind === 'type' || declaration.kind === 'class') && declaration.typeParameters.length > 0) {
-        genericTypeNames.add(declaration.name);
+      if (declaration.kind === 'type' || declaration.kind === 'class' || declaration.kind === 'enum') {
+        dataTypeNames.add(declaration.name);
       }
     }
   }
-  for (const name of genericTypeNames) if (namespaceModuleNames.has(name)) shadowedTypeNames.add(name);
+  for (const name of dataTypeNames) if (namespaceModuleNames.has(name)) shadowedTypeNames.add(name);
 }
 
 /** The Haxe name an import statement binds into scope: the alias, or the trailing path segment. */
@@ -452,6 +454,69 @@ function isPackagePrivateDeclaration(declaration: IrDeclaration): boolean {
     (declaration.kind === 'type' || declaration.kind === 'class' || declaration.kind === 'enum') &&
     declaration.packagePrivate === true
   );
+}
+
+/** Maintained lookup module (in `src/`) that declares host/DOM extern types per target. */
+const WEB_EXTERNS_MODULE = 'flighthq._internal.WebExterns';
+
+/** Type names referenced by generated declarations that have no Haxe declaration of their own. */
+function computeExternalTypeNames(modules: IrModule[]): Set<string> {
+  const declared = new Set<string>();
+  const typeParameters = new Set<string>();
+  for (const module of modules) {
+    for (const declaration of module.declarations) {
+      if (declaration.kind === 'class' || declaration.kind === 'enum' || declaration.kind === 'type') {
+        declared.add(declaration.name);
+      }
+      if ('typeParameters' in declaration) {
+        for (const parameter of declaration.typeParameters) typeParameters.add(parameter);
+      }
+      if (declaration.kind === 'class') {
+        for (const method of declaration.methods) for (const parameter of method.typeParameters) typeParameters.add(parameter);
+      }
+    }
+  }
+  const builtins = new Set(['Dynamic', 'Void', 'Bool', 'Int', 'Float', 'String', 'Array', 'Null', 'Map', 'Any', 'EReg', 'Date']);
+  const referenced = new Set<string>();
+  const collect = (value: unknown): void => {
+    if (Array.isArray(value)) {
+      value.forEach(collect);
+      return;
+    }
+    if (!value || typeof value !== 'object') return;
+    const record = value as Record<string, unknown>;
+    if (record.kind === 'named' && typeof record.name === 'string') referenced.add(record.name);
+    Object.values(record).forEach(collect);
+  };
+  for (const module of modules) collect(module.declarations);
+  const external = new Set<string>();
+  for (const name of referenced) {
+    // Fully-qualified references (`flighthq._internal.*`, `haxe.*`) already resolve.
+    if (name.includes('.') || declared.has(name) || typeParameters.has(name) || builtins.has(name)) continue;
+    external.add(name);
+  }
+  return external;
+}
+
+/**
+ * Some generated declarations reference type names with no Haxe declaration in the emitted output:
+ * host/DOM globals (Clipboard, Geolocation, MediaSession, Screen, Storage) and a few renderer-internal
+ * data shapes. These are provided by the maintained lookup module `flighthq._internal.WebExterns`
+ * (a per-target typedef: `js.html.X` on JS, `Dynamic` elsewhere). Import each referenced external name
+ * into the module so the reference resolves; a module that IS the like-named namespace resolves the
+ * name to itself and needs no import.
+ */
+function importExternalTypesFromLut(modules: IrModule[]): void {
+  const externalTypeNames = computeExternalTypeNames(modules);
+  for (const module of modules) {
+    const referenced = new Set<string>();
+    collectReferencedNamedTypes(module.declarations, externalTypeNames, referenced);
+    for (const name of referenced) {
+      if (name === module.name) continue;
+      module.imports.push(`${WEB_EXTERNS_MODULE}.${name}`);
+    }
+    module.imports = [...new Set(module.imports)].sort();
+  }
 }
 
 export function validateHaxeModuleIdentities(modules: IrModule[]): void {
