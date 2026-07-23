@@ -285,11 +285,11 @@ private class _GlCanvas {
   }
 
   function get_width():Int {
-    return window.width;
+    return Std.int(window.width * window.scale);
   }
 
   function get_height():Int {
-    return window.height;
+    return Std.int(window.height * window.scale);
   }
 
   static function resolveContext(window:Window):Dynamic {
