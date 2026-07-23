@@ -192,3 +192,111 @@ surface-rs (standalone)                 earned wasm/native accelerator behind th
   monorepo (restore it if it was removed) as the mechanical-port source and the
   oracle that surface-rs must match. Do not move the Rust implementation into
   the TS monorepo; keep Flight uniformly TS-is-truth.
+
+## Appendix: vector record schema (`flight-vectors/1`)
+
+### File layout
+
+One file per package, `vectors/<pkg>.jsonl`, JSON Lines. The first line is a
+`header`; every subsequent line is a `call`. Records are emitted in a
+deterministic order (export name, then capture index) with stable key ordering
+and **no timestamps**, so re-capture over unchanged upstream is byte-identical
+and the idempotence gate is meaningful.
+
+### Header record
+
+```json
+{
+  "kind": "header",
+  "schema": "flight-vectors/1",
+  "package": "@flighthq/geometry",
+  "upstream": { "repo": "flighthq/flight", "commit": "<40-hex>" },
+  "captureTool": "<generator commit or semver>",
+  "exports": {
+    "captured": ["addVector2", "normalizeVector2", "..."],
+    "skipped": [{ "name": "createGeometryStream", "reason": "opaque-return -> bridge" }]
+  },
+  "policy": {
+    "default": { "float": "exact" },
+    "getVector2Length": { "float": "ulp", "maxUlp": 2 }
+  },
+  "counts": { "calls": 1234, "exports": 96 }
+}
+```
+
+`exports.skipped` is the per-file half of the coverage manifest: nothing leaves
+the inventory silently.
+
+### Call record
+
+| field | meaning |
+|---|---|
+| `kind` | `"call"` |
+| `fn` | exported function name |
+| `seq` | stable per-`fn` index (ordering + dedup) |
+| `drivenBy` | upstream test file + test name that triggered the call |
+| `objs` | object table: **pre-call** state of every reference-typed value (id → encoded object) |
+| `out` | the `out`/`target` parameter as a ref `{"$": id}`, or absent if the fn has none |
+| `args` | ordered args; each an encoded scalar, `null`, or a ref `{"$": id}` |
+| `outcome` | `"return"` or `"throw"` |
+| `ret` | on return: encoded value, `{"void": true}`, or a ref (fn returned an input object) |
+| `error` | on throw: `{ "name", "message" }` |
+| `post` | object table **after** the call: post-state of every ref (mutations visible) |
+| `seed` | present only for stochastic fns: RNG seed to install before the call |
+
+Aliasing is expressed structurally: two arg slots — or `out` and an arg — that
+share the same `{"$": id}` were the same object. `addVector2` with `out === a`
+is just `"out": {"$":0}, "args": [{"$":0}, {"$":1}]`. Both a distinct-output and
+an aliased-output call are captured for every `out` function.
+
+### Value encoding
+
+| value | encoding |
+|---|---|
+| `number` (f64) | `{"f":"<16 hex>"}` — big-endian IEEE-754 bits; exact for `NaN`, `±Inf`, `−0` |
+| boolean / string / null | JSON literal |
+| structural object / entity | entry in `objs`/`post`; fields recursively encoded |
+| typed array | `{"ta":"f32"\|"i16"\|"u16"\|..., "b64":"<raw little-endian bytes>"}` |
+| plain array | JSON array of encoded values |
+| reference to a table object | `{"$": id}` |
+
+Only reference-typed values (objects, typed arrays) enter the object table;
+scalars are inline, since they cannot alias.
+
+### Comparison policy
+
+- `exact` (default): bit-equal. All `NaN` bit patterns compare equal
+  (canonicalize on capture); `−0` and `+0` are distinct unless the policy sets
+  `"signedZero": false`.
+- `ulp` with `maxUlp`: within N units-in-the-last-place, for transcendental
+  functions where JS `Math` and Rust/`libm` legitimately differ. Seed the set by
+  statically scanning upstream matchers — `toBeCloseTo` → `ulp`, `toEqual`/`toBe`
+  → `exact`.
+
+### Replay algorithm
+
+```text
+for each call record:
+  install seed if present
+  table = {}
+  for (id, enc) in record.objs: table[id] = decode(enc)      # shared id => one instance => aliasing preserved
+  out  = record.out ? table[record.out.$] : undefined
+  args = record.args.map(a => a?.$ != null ? table[a.$] : decode(a))
+  try r = TARGET[record.fn](out?, ...args)
+  catch e:
+    assert record.outcome == "throw" and matches(e, record.error); continue
+  assert record.outcome == "return"
+  compare(r, record.ret, policy[fn])                          # ref / void / scalar per encoding
+  for (id, enc) in record.post: compare(table[id], decode(enc), policy[fn])
+```
+
+A mismatch is a parity failure reported as `<pkg>::<fn>` with `drivenBy`.
+
+### Determinism requirements
+
+- The capturer emits sorted, stable-keyed, timestamp-free records so re-capture
+  is idempotent.
+- Stochastic fns require the port to use the same seedable PRNG algorithm as
+  upstream; otherwise classify them `bridge`, not `vector`.
+- Wall-clock/time-dependent fns are not vector-eligible; route them to the bridge
+  or exclude them with a recorded reason.
