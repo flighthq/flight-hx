@@ -229,10 +229,12 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
   if (declaration.kind === 'class') {
     const generics = declaration.typeParameters.length > 0 ? `<${declaration.typeParameters.join(', ')}>` : '';
     const parent = declaration.extends ? ` extends ${emitType(declaration.extends)}` : '';
-    const lines = [
-      `@:expose("${currentHaxePackage}.${safeName(declaration.name)}")`,
-      `class ${safeName(declaration.name)}${generics}${parent} {`,
-    ];
+    const lines = declaration.packagePrivate
+      ? [`private class ${safeName(declaration.name)}${generics}${parent} {`]
+      : [
+          `@:expose("${currentHaxePackage}.${safeName(declaration.name)}")`,
+          `class ${safeName(declaration.name)}${generics}${parent} {`,
+        ];
     for (const field of declaration.fields) {
       const fieldAccess = field.public ? 'public ' : 'private ';
       const static_ = field.static ? 'static ' : '';
@@ -299,7 +301,9 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
   }
   if (declaration.kind === 'enum') {
     let nextValue = 0;
-    const lines = [`enum abstract ${safeName(declaration.name)}(Int) from Int to Int {`];
+    const lines = [
+      `${declaration.packagePrivate ? 'private ' : ''}enum abstract ${safeName(declaration.name)}(Int) from Int to Int {`,
+    ];
     for (const member of declaration.members) {
       const initializer =
         member.initializer?.kind === 'literal' && typeof member.initializer.value === 'number'
@@ -324,7 +328,8 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
   }
   if (declaration.kind === 'type') {
     const generics = declaration.typeParameters.length > 0 ? `<${declaration.typeParameters.join(', ')}>` : '';
-    return [`typedef ${safeName(declaration.name)}${generics} = ${emitType(declaration.type)};`];
+    const modifier = declaration.packagePrivate ? 'private ' : '';
+    return [`${modifier}typedef ${safeName(declaration.name)}${generics} = ${emitType(declaration.type)};`];
   }
   if (declaration.kind === 'variable') {
     const mutability = declaration.mutable || !declaration.initializer ? 'var' : 'final';
@@ -1272,6 +1277,7 @@ export function emitType(type: IrType): string {
     case 'function':
       return `${type.parameters.length === 0 ? 'Void' : type.parameters.map(emitType).join('->')}->${emitType(type.returns)}`;
     case 'named':
+      if (!type.name.includes('.') && shadowedTypeNames.has(type.name)) return 'Dynamic';
       return `${qualifiedName(type.name)}${type.arguments.length > 0 ? `<${type.arguments.map(emitType).join(', ')}>` : ''}`;
     case 'nullable':
       return `Null<${emitType(type.inner)}>`;
@@ -1301,6 +1307,16 @@ function safeName(name: string): string {
   }
   if (/^[0-9]/u.test(normalized)) normalized = `_${normalized}`;
   return haxeKeywords.has(normalized) ? `${normalized}_` : normalized;
+}
+
+// Secondary types made package-private because their name collides with a same-package module.
+// Such a type is not importable across modules and its name is ambiguous with the module, so
+// type-position references to it are emitted as `Dynamic` — every value of these types already
+// flows through `Dynamic` (`_Runtime.field`/`cast`) in generated code.
+let shadowedTypeNames = new Set<string>();
+
+export function setShadowedTypeNames(names: Set<string>): void {
+  shadowedTypeNames = names;
 }
 
 function qualifiedName(name: string): string {

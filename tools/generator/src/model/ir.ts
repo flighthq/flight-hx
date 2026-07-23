@@ -133,6 +133,10 @@ export interface IrTypeDeclaration {
   kind: 'type';
   name: string;
   origin: SourceOrigin;
+  // Emitted as a module-private type when its name collides with a like-named module
+  // in the same Haxe package (the module owns the package identity; this secondary type
+  // shadow-resolves to it). See `markShadowedSecondaryTypes` in emit/core.ts.
+  packagePrivate?: boolean;
   type: IrType;
   typeParameters: string[];
 }
@@ -144,6 +148,7 @@ export interface IrEnumDeclaration {
   methods: IrFunctionDeclaration[];
   name: string;
   origin: SourceOrigin;
+  packagePrivate?: boolean;
 }
 
 export interface IrClassField {
@@ -176,6 +181,7 @@ export interface IrClassDeclaration {
   methods: IrClassMethod[];
   name: string;
   origin: SourceOrigin;
+  packagePrivate?: boolean;
   typeParameters: string[];
 }
 

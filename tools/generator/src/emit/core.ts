@@ -23,7 +23,7 @@ import type {
   LoweringDiagnostic,
 } from '../model/ir.ts';
 import { applySemanticPatches } from '../patch/apply.ts';
-import { emitHaxeModule } from './haxe.ts';
+import { emitHaxeModule, setShadowedTypeNames } from './haxe.ts';
 import { stableJson, writeOrCheck } from './reports.ts';
 
 export interface CoreGenerationReport {
@@ -126,8 +126,24 @@ export function generateCoreModules(workspaceDirectory: string, check: boolean):
       });
     }
   }
-  populateSourceImports(modules, loweredPackages, inventoryByName, canonicalValueAliases, workspaceDirectory);
-  buildPublicFacades(modules, inventoryByName, canonicalValueAliases);
+  const shadowedTypeNames = markShadowedSecondaryTypes(modules);
+  populateSourceImports(
+    modules,
+    loweredPackages,
+    inventoryByName,
+    canonicalValueAliases,
+    workspaceDirectory,
+    shadowedTypeNames,
+  );
+  buildPublicFacades(modules, inventoryByName, canonicalValueAliases, shadowedTypeNames);
+  // Facades exist now, so their namespace class names are known: fold in generic data types
+  // shadowed by a like-named namespace/facade class, then drop any import that binds a shadowed
+  // name (references to them are emitted as `Dynamic`).
+  addGenericShadowCollisions(modules, shadowedTypeNames);
+  for (const module of modules) {
+    module.imports = module.imports.filter((imported) => !importBindsShadowedName(imported, shadowedTypeNames));
+  }
+  setShadowedTypeNames(shadowedTypeNames);
   validateHaxeModuleIdentities(modules);
   const maintainedDirectory = path.join(workspaceDirectory, 'src');
   const conflicts = modules.map(moduleRelativePath).filter((file) => existsSync(path.join(maintainedDirectory, file)));
@@ -257,6 +273,7 @@ function populateSourceImports(
   inventoryByName: ReadonlyMap<string, ReturnType<typeof analyzeUpstream>['packages'][number]>,
   canonicalValueAliases: ReadonlyMap<string, string>,
   workspaceDirectory: string,
+  shadowedTypeNames: ReadonlySet<string>,
 ): void {
   const modulesBySource = new Map<string, IrModule[]>();
   for (const module of modules) {
@@ -300,6 +317,18 @@ function populateSourceImports(
     if (reexport) return resolveRecord(reexport);
     throw new Error(`Cannot resolve imported declaration ${importedName} from ${relativeTarget}`);
   };
+  // Names that Haxe already makes visible in each package without an import: every
+  // module's own top-level type. Importing a secondary type by a bare name that
+  // collides with one of these (the owner's own type, or a sibling module in the
+  // same package) is rejected by Haxe as a redefinition — and is redundant, since
+  // the same-package type is auto-imported and shadows it. Such imports are dropped.
+  const moduleNamesByPackage = new Map<string, Set<string>>();
+  for (const module of modules) {
+    const pkg = module.haxePackage ?? 'flighthq';
+    const names = moduleNamesByPackage.get(pkg) ?? new Set<string>();
+    names.add(module.name);
+    moduleNamesByPackage.set(pkg, names);
+  }
   for (const item of loweredPackages) {
     for (const loweredSource of item.lowered.sources) {
       const relativeSource = path.relative(workspaceDirectory, loweredSource.file).split(path.sep).join('/');
@@ -323,10 +352,21 @@ function populateSourceImports(
               ? resolvePackageImport(statement.moduleSpecifier.text, importedName)
               : undefined;
           if (!resolved) continue;
+          // Shadowed types (package-private secondaries, or generic types shadowed by a
+          // namespace class) are emitted as `Dynamic` and must not be imported by name.
+          if (isPackagePrivateDeclaration(resolved.declaration) || shadowedTypeNames.has(resolved.declaration.name)) continue;
           const alias = element.name.text === resolved.declaration.name ? '' : ` as ${element.name.text}`;
           const importPath = `${declarationImportPath(resolved.module, resolved.declaration)}${alias}`;
+          const bindingName = element.name.text;
+          const importedPackage = resolved.module.haxePackage ?? 'flighthq';
           for (const owner of owners) {
-            if (owner !== resolved.module) owner.imports.push(importPath);
+            if (owner === resolved.module) continue;
+            // Drop a same-package import whose bound name collides with a top-level
+            // module in that package (the owner itself or a sibling): Haxe rejects it
+            // as a redefinition, and the colliding same-package type is already visible.
+            const ownerPackage = owner.haxePackage ?? 'flighthq';
+            if (ownerPackage === importedPackage && moduleNamesByPackage.get(ownerPackage)?.has(bindingName)) continue;
+            owner.imports.push(importPath);
           }
         }
       }
@@ -350,6 +390,70 @@ function moduleRelativePath(module: IrModule): string {
   return `${(module.haxePackage ?? 'flighthq').split('.').join(path.sep)}${path.sep}${module.name}.hx`;
 }
 
+/**
+ * A `create<Type>` namespace module and a like-named secondary type declared in a sibling
+ * module of the same package both claim the package-level Haxe identity `pkg.Name`. Haxe
+ * rejects the duplicate whenever both load (e.g. `import pkg.SiblingModule` surfaces the
+ * secondary type by its bare name). The namespace module owns the identity; the secondary
+ * type is marked `private` so it no longer pollutes the package namespace, and references to
+ * the bare name shadow-resolve to the module (all such values flow through `Dynamic`).
+ */
+function markShadowedSecondaryTypes(modules: IrModule[]): Set<string> {
+  const moduleIdentities = new Set(modules.map((module) => modulePath(module)));
+  const shadowedTypeNames = new Set<string>();
+  // (a) A secondary type colliding with a same-package module: make it private and shadow-route.
+  for (const module of modules) {
+    const pkg = module.haxePackage ?? 'flighthq';
+    for (const declaration of module.declarations) {
+      if (declaration.kind !== 'type' && declaration.kind !== 'class' && declaration.kind !== 'enum') continue;
+      if (declaration.name === module.name) continue;
+      if (moduleIdentities.has(`${pkg}.${declaration.name}`)) {
+        declaration.packagePrivate = true;
+        shadowedTypeNames.add(declaration.name);
+      }
+    }
+  }
+  return shadowedTypeNames;
+}
+
+/**
+ * Fold in generic data types whose name is also a non-generic namespace/facade class (the
+ * `create<Type>` API named after its module). The class shadows the type but cannot accept its
+ * type parameters ("too many type parameters"), so such references are emitted as `Dynamic` —
+ * every value of these types already flows through `Dynamic` in generated code. Runs after
+ * `buildPublicFacades` so facade class names are included among the namespace names.
+ */
+function addGenericShadowCollisions(modules: IrModule[], shadowedTypeNames: Set<string>): void {
+  const genericTypeNames = new Set<string>();
+  const namespaceModuleNames = new Set<string>();
+  for (const module of modules) {
+    if (module.declarations.some((declaration) => declaration.kind === 'function' || declaration.kind === 'variable')) {
+      namespaceModuleNames.add(module.name);
+    }
+    for (const declaration of module.declarations) {
+      if ((declaration.kind === 'type' || declaration.kind === 'class') && declaration.typeParameters.length > 0) {
+        genericTypeNames.add(declaration.name);
+      }
+    }
+  }
+  for (const name of genericTypeNames) if (namespaceModuleNames.has(name)) shadowedTypeNames.add(name);
+}
+
+/** The Haxe name an import statement binds into scope: the alias, or the trailing path segment. */
+function importBindsShadowedName(imported: string, shadowedTypeNames: ReadonlySet<string>): boolean {
+  const aliasMatch = / as (\w+)$/u.exec(imported);
+  const bound = aliasMatch?.[1] ?? imported.split('.').pop() ?? imported;
+  return shadowedTypeNames.has(bound);
+}
+
+/** Whether a declaration was marked package-private (only type/class/enum declarations can be). */
+function isPackagePrivateDeclaration(declaration: IrDeclaration): boolean {
+  return (
+    (declaration.kind === 'type' || declaration.kind === 'class' || declaration.kind === 'enum') &&
+    declaration.packagePrivate === true
+  );
+}
+
 export function validateHaxeModuleIdentities(modules: IrModule[]): void {
   const ownersByIdentity = new Map<string, string[]>();
   const ownersByModulePath = new Map<string, string[]>();
@@ -371,6 +475,8 @@ export function validateHaxeModuleIdentities(modules: IrModule[]): void {
     }
     for (const declaration of module.declarations) {
       if (declaration.kind === 'class' || declaration.kind === 'enum' || declaration.kind === 'type') {
+        // Package-private shadowed secondaries do not occupy the package namespace.
+        if (declaration.packagePrivate) continue;
         addOwner(
           `${module.haxePackage ?? 'flighthq'}.${declaration.name}`,
           `${module.source ?? `${module.packageName} barrel`} declaration ${declaration.name}`,
@@ -384,11 +490,26 @@ export function validateHaxeModuleIdentities(modules: IrModule[]): void {
   const moduleCollisions = [...ownersByModulePath]
     .filter(([, owners]) => owners.length > 1)
     .sort(([left], [right]) => left.localeCompare(right));
-  if (collisions.length === 0 && moduleCollisions.length === 0) return;
+  // A collision whose identity is also a real module path is handled mechanically:
+  // that module (a `create<Type>` namespace) owns the Haxe type name, and a like-named
+  // secondary type declared elsewhere in the same package resolves to it. The same-package
+  // import of the secondary type is dropped during emission (see `populateSourceImports`),
+  // so references shadow-resolve to the owning module rather than triggering a redefinition.
+  const moduleIdentities = new Set(ownersByModulePath.keys());
+  const handledCollisions = collisions.filter(([identity]) => moduleIdentities.has(identity));
+  const unresolvedCollisions = collisions.filter(([identity]) => !moduleIdentities.has(identity));
+  if (handledCollisions.length > 0) {
+    process.stderr.write(
+      `Note: ${handledCollisions.length} Haxe module/secondary-type name collision(s) resolved by same-package import elision:\n${handledCollisions
+        .map(([identity, owners]) => `- ${identity}: ${owners.join('; ')}`)
+        .join('\n')}\n`,
+    );
+  }
+  if (unresolvedCollisions.length === 0 && moduleCollisions.length === 0) return;
   throw new Error(
     `Haxe module/type identity collisions require upstream source reorganization:\n${[
       ...moduleCollisions.map(([identity, owners]) => `- duplicate module ${identity}: ${owners.join('; ')}`),
-      ...collisions.map(([identity, owners]) => `- ${identity}: ${owners.join('; ')}`),
+      ...unresolvedCollisions.map(([identity, owners]) => `- ${identity}: ${owners.join('; ')}`),
     ].join('\n')}`,
   );
 }
@@ -398,6 +519,7 @@ function buildPublicFacades(
   modules: IrModule[],
   inventoryByName: ReadonlyMap<string, ReturnType<typeof analyzeUpstream>['packages'][number]>,
   _canonicalValueAliases: ReadonlyMap<string, string>,
+  shadowedTypeNames: ReadonlySet<string>,
 ): void {
   const facadeForPackage = (packageName: string): IrModule | undefined => {
     const haxePackage = packageNameToHaxePackage(packageName);
@@ -561,9 +683,22 @@ function buildPublicFacades(
     addFacade(sdk, record.name, resolved.module, resolved.declaration);
   }
   sdk.declarations.sort((left, right) => left.name.localeCompare(right.name));
+  // Names Haxe makes visible in a package without an import (each module's own top-level
+  // type). A referenced type whose name matches one of these in the target's own package is
+  // already in scope; importing it by that bare name (when it is actually a secondary type
+  // declared in a sibling module) is rejected by Haxe as a redefinition, so the import is
+  // elided and the reference shadow-resolves to the same-package module.
+  const moduleNamesByPackage = new Map<string, Set<string>>();
+  for (const module of modules) {
+    const pkg = module.haxePackage ?? 'flighthq';
+    const names = moduleNamesByPackage.get(pkg) ?? new Set<string>();
+    names.add(module.name);
+    moduleNamesByPackage.set(pkg, names);
+  }
   for (const target of modules) {
     const referencedTypes = new Set<string>();
     collectReferencedNamedTypes(target.declarations, new Set(typeOwnerByName.keys()), referencedTypes);
+    const targetPackage = target.haxePackage ?? 'flighthq';
     for (const typeName of referencedTypes) {
       const owner = typeOwnerByName.get(typeName);
       const declaration = owner?.declarations.find(
@@ -571,7 +706,13 @@ function buildPublicFacades(
           candidate.name === typeName &&
           (candidate.kind === 'class' || candidate.kind === 'enum' || candidate.kind === 'type'),
       );
-      if (owner && owner !== target && declaration) target.imports.push(declarationImportPath(owner, declaration));
+      if (!owner || owner === target || !declaration) continue;
+      // Shadowed types (package-private secondaries, or generic types shadowed by a namespace
+      // class) are emitted as `Dynamic` and must not be imported by name.
+      if (isPackagePrivateDeclaration(declaration) || shadowedTypeNames.has(typeName)) continue;
+      const ownerPackage = owner.haxePackage ?? 'flighthq';
+      if (ownerPackage === targetPackage && moduleNamesByPackage.get(targetPackage)?.has(typeName)) continue;
+      target.imports.push(declarationImportPath(owner, declaration));
     }
     target.imports = [...new Set(target.imports)].sort();
   }
