@@ -90,7 +90,14 @@ export function generateCoreModules(workspaceDirectory: string, check: boolean):
       );
     }
   }
-  rewriteCanonicalValueReferences(types.lowered.declarations, canonicalValueAliases, false);
+  // Rewrite value references to renamed canonical values (`PathCommand` -> `PathCommandValue`)
+  // across every package, not just `types`: consumers in other packages reference these const
+  // values too (e.g. `PathCommand.MOVE_TO` in shape code), and a bare reference resolves to the
+  // like-named type instead of the value. Only value identifiers are rewritten; type positions
+  // are untouched.
+  for (const item of loweredPackages) {
+    rewriteCanonicalValueReferences(item.lowered.declarations, canonicalValueAliases, false);
+  }
   for (const declaration of types.lowered.declarations) {
     if (declaration.kind === 'variable') {
       declaration.name = canonicalValueAliases.get(declaration.name) ?? declaration.name;
@@ -145,6 +152,7 @@ export function generateCoreModules(workspaceDirectory: string, check: boolean):
   }
   setShadowedTypeNames(shadowedTypeNames);
   importExternalTypesFromLut(modules);
+  importCanonicalValues(modules, canonicalValueAliases);
   validateHaxeModuleIdentities(modules);
   const maintainedDirectory = path.join(workspaceDirectory, 'src');
   const conflicts = modules.map(moduleRelativePath).filter((file) => existsSync(path.join(maintainedDirectory, file)));
@@ -458,6 +466,42 @@ function isPackagePrivateDeclaration(declaration: IrDeclaration): boolean {
 
 /** Maintained lookup module (in `src/`) that declares host/DOM extern types per target. */
 const WEB_EXTERNS_MODULE = 'flighthq._internal.WebExterns';
+
+/** Collect value identifiers (not type references) referenced anywhere in `value` that are in `names`. */
+function collectReferencedValueIdentifiers(value: unknown, names: ReadonlySet<string>, output: Set<string>): void {
+  if (Array.isArray(value)) {
+    value.forEach((item) => collectReferencedValueIdentifiers(item, names, output));
+    return;
+  }
+  if (!value || typeof value !== 'object') return;
+  const record = value as Record<string, unknown>;
+  if (record.kind === 'identifier' && typeof record.name === 'string' && names.has(record.name)) output.add(record.name);
+  Object.values(record).forEach((item) => collectReferencedValueIdentifiers(item, names, output));
+}
+
+/**
+ * Canonical const values renamed to avoid a type name clash (`PathCommand` -> `PathCommandValue`)
+ * live in a values module. A module that references such a value must import it; import each
+ * referenced canonical value by name from its owning module so the reference resolves.
+ */
+function importCanonicalValues(modules: IrModule[], canonicalValueAliases: ReadonlyMap<string, string>): void {
+  const canonicalValues = new Set(canonicalValueAliases.values());
+  const valueOwner = new Map<string, IrModule>();
+  for (const module of modules) {
+    for (const declaration of module.declarations) {
+      if (declaration.kind === 'variable' && canonicalValues.has(declaration.name)) valueOwner.set(declaration.name, module);
+    }
+  }
+  for (const module of modules) {
+    const referenced = new Set<string>();
+    collectReferencedValueIdentifiers(module.declarations, canonicalValues, referenced);
+    for (const name of referenced) {
+      const owner = valueOwner.get(name);
+      if (owner && owner !== module) module.imports.push(`${modulePath(owner)}.${name}`);
+    }
+    module.imports = [...new Set(module.imports)].sort();
+  }
+}
 
 /** Type names referenced by generated declarations that have no Haxe declaration of their own. */
 function computeExternalTypeNames(modules: IrModule[]): Set<string> {
