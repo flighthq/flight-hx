@@ -62,18 +62,70 @@ should be neutral; language-idiom exceptions are target-scoped.
 ## Oracle unification
 
 Both targets are validated against upstream's own tests, never re-authored
-assertions:
+assertions. Two mechanisms, chosen per package by classification recorded in the
+manifest (nothing is silently outside it):
 
-- Pure/computational packages: extract upstream test I/O as **vectors** and
-  replay them natively per target (Rust `#[test]`, Haxe test). No JS runtime
-  required.
-- Stateful/behavioral packages: a **generated** bridge compiles the target to a
-  JS-callable surface (Haxe→JS ESM today; Rust→wasm/napi) and runs upstream
-  Vitest. Generated from the manifest — never hand-shimmed per package.
+- **Pure / value-in-value-out packages** (math, geometry, path, easing, spring,
+  …): **vector replay**. Capture upstream test I/O once as a target-neutral
+  vector set and replay it natively per target (Rust `#[test]`, Haxe test on
+  every Haxe backend). No JS runtime, no per-package bridge.
+- **Stateful / opaque-return packages**: a **generated** bridge compiles the
+  target to a JS-callable surface (Haxe→JS ESM; Rust→wasm) and runs upstream
+  Vitest against it. Generated from the manifest — never hand-shimmed.
 
 The manifest schema, fingerprint algorithm, and patch-identity model are defined
 once in core and shared, so "covered", "stale", and "excluded with reason" mean
 the same thing across every target.
+
+### Harness engine vs. substitute shims
+
+The prior hand-Rust effort proved the shape but mislocated the cost. A parity
+system of this kind has two parts that must be treated oppositely:
+
+- **Harness engine** — package-agnostic, one copy: the contract driver and
+  target registry, the shared wasm-host runtime, the wasm build mechanism, and
+  the capture/baseline and functional-render plumbing. It encodes the oracle
+  contract and does not scale with package count. **Keep and generalize it.**
+- **Substitute shim** — one per package (a hundred-plus): a module that
+  re-declares every upstream export and forwards each into the target. It scales
+  linearly, is mechanically shaped, and in practice it also smuggles per-function
+  logic (target-side magnitude math, host-only fallbacks, hand-mapped argument
+  keys). That makes every shim a drift site *and* a correctness leak — a shim
+  that reimplements can pass while the crate is wrong. **Never hand-author
+  shims.** Pure packages delete the shim entirely (vector replay); stateful
+  packages generate a *pure-forwarder* shim from the manifest.
+
+### Vector capture
+
+Vectors are a generated, committed, drift-checked oracle owned by core — captured
+once from upstream, replayed by every target:
+
+- **Capture at the function boundary, not by parsing test source.** Instrument
+  the upstream package's exports generically (from the manifest) and run upstream
+  Vitest once; record each call as `{pkg, fn, args, ret, threw, drivenBy}`.
+  Capturing TS's *actual output* is a stricter oracle than replaying the authored
+  matcher, which may be looser than TS's real behavior — and for a port,
+  byte-parity with TS is exactly the target.
+- **Record what value-only capture loses.** Flight is out-param and sentinel
+  heavy, so each record must carry: the aliasing relationships among args and
+  `out` (capture both distinct and aliased calls), the full post-call state of
+  `out` *and* every arg, thrown/sentinel outcomes, and any RNG seed. Encode
+  floats as exact IEEE-754 bits so replay is bit-faithful, not lossy-decimal.
+- **Per-function float policy.** JS `Math` transcendentals and Rust/`libm` are
+  not bit-identical, so bit-exact replay will falsely fail on sin/cos/atan2-heavy
+  functions. Default to exact compare for integer/algebraic ops and a small-ULP
+  tolerance for transcendental ones; seed that policy by statically scanning
+  which upstream matchers used `toBeCloseTo` vs `toEqual` — the one place static
+  test analysis earns its keep.
+- **Treat vectors like generated code.** Stamp the upstream and capture-tool
+  revision into each `vectors/<pkg>.jsonl`; regenerate via script; commit them so
+  a changed vector surfaces as a reviewable behavior diff; gate with a capture
+  idempotence check. Coverage — captured vs bridged vs skipped-with-reason — goes
+  in the same manifest.
+
+Vectors are also the *only* way to get parity coverage on Haxe's non-JS backends
+(hxcpp/HL), which cannot run the Vitest bridge. They serve the native Haxe story,
+not just Rust.
 
 ## Target topology
 
@@ -122,10 +174,18 @@ surface-rs (standalone)                 earned wasm/native accelerator behind th
 
 ## Related decisions
 
-- **flight-rs:** freeze as an unmaintained reference corpus — capture vectors
-  while parity is green, pin a known-green commit — and stop agent maintenance,
-  which is the drift engine. Atrophy the effort, preserve the artifact. Gate
-  public visibility so a half-trusted port cannot be depended on.
+- **flight-rs topology:** slim the repo to the maintained keeper under the
+  retained name, so the `flight ↔ flight-rs` seam and its testing contract stay
+  stable while contents transition from hand-authored to generated. Keep the
+  harness engine, `runtime-rs`, and the surface keeper (`crates/flighthq-surface`
+  + `surface-rs` — a real self-contained wasm module, not a marshalling façade);
+  drop the hundred-plus substitute shims and hand crates. Build the slim repo by
+  `git filter-repo` over a clone, keeping surface's paths plus the engine, so
+  surface's real history and blame survive and the pile never enters it; record
+  the source archive SHA for lineage. The full current repo becomes a **separate
+  private** archive, pinned at a known-green commit and unmaintained — the
+  differential-test corpus. Capture vectors *before* it goes cold. Stop agent
+  maintenance, which is the drift engine.
 - **surface-rs:** extract to its own maintained crate; do not let it die inside
   the atrophying pile. It is the one earned wasm/native accelerator.
 - **surface reference:** the portable TS `surface` belongs in the Flight
