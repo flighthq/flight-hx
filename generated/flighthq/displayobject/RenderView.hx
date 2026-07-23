@@ -8,7 +8,6 @@ import flighthq.displayobject.DisplayObject.createDisplayObjectRuntime;
 import flighthq.displayobject.DisplayObject.getDisplayObjectRuntime;
 import flighthq.node.Revision.invalidateNodeLocalBounds;
 import flighthq.types.MethodsOf;
-import flighthq.types.Node;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
 import flighthq.types.RenderView;
@@ -18,7 +17,7 @@ import flighthq.types._internal._RenderViewValues.RenderViewKind;
 
 @:expose("flighthq.displayobject.RenderView")
 class RenderView {
-  public static function computeRenderViewLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeRenderViewLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field((cast source : RenderView), 'data');
     _Runtime.setField(out, 'width', _Runtime.field(data, 'width'));

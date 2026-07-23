@@ -11,7 +11,6 @@ import flighthq.node.Traversal.forEachNodeDescendant;
 import flighthq.renderGl.GlRenderTarget.createGlRenderTarget;
 import flighthq.renderGl.GlSkinPaletteTexture.uploadGlSkinPaletteTexture;
 import flighthq.scene.UpdateMeshMorph.updateMeshMorph;
-import flighthq.sceneGl.GlMeshProgram;
 import flighthq.sceneGl.GlMeshUpload.ensureGlMeshUpload;
 import flighthq.sceneGl._internal._GlMeshProgramValues.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
 import flighthq.sceneGl._internal._GlMeshProgramValues.SKIN_PALETTE_TEXTURE_UNIT;

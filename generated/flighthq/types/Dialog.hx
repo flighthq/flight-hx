@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ApplicationWindow;
 
 typedef FileDialogFilter = { var name:String; var extensions:Array<String>; @:optional var mimeTypes:Array<String>; };
 

@@ -4,6 +4,5 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.Kind;
-import flighthq.types.RenderEffect;
 
 typedef ConvolutionEffect = { var kind:Kind; var matrix:Array<Float>; var matrixX:Float; var matrixY:Float; @:optional var bias:Float; @:optional var clamp:Bool; @:optional var color:Float; @:optional var divisor:Float; @:optional var preserveAlpha:Bool; };

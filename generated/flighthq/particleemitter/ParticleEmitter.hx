@@ -13,7 +13,6 @@ import flighthq.geometry.Typedarray.reserveUint16Array;
 import flighthq.node.Revision.invalidateNodeLocalBounds;
 import flighthq.types.DisplayObject;
 import flighthq.types.MethodsOf;
-import flighthq.types.Node;
 import flighthq.types.PartialNode;
 import flighthq.types.ParticleEmitter;
 import flighthq.types.ParticleEmitter.ParticleEmitterData;
@@ -32,7 +31,7 @@ class ParticleEmitter {
 
   public static final PARTICLE_EMITTER_DELETED_ID:Dynamic = 65535.0;
 
-  public static function copyLocalBoundsRectangle__particleEmitter(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function copyLocalBoundsRectangle__particleEmitter(out:Rectangle, source:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([(cast source : DisplayObject)] : Array<Dynamic>)) : ParticleEmitterRuntime);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null))) { _Runtime.callValue(copyRectangle, cast ([out, _Runtime.field(runtime, 'localBoundsRectangle')] : Array<Dynamic>)); }

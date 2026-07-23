@@ -3,7 +3,6 @@ package flighthq.sceneWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.sceneWgpu.WgpuMeshPipeline;
 import flighthq.sceneWgpu.WgpuPbrPrelude.WgpuPbrDefineKey;
 import flighthq.sceneWgpu.WgpuPbrPrelude.buildWgpuPbrDefineKey;
 import flighthq.sceneWgpu.WgpuPbrPrelude.getWgpuPbrModuleSourceForKey;

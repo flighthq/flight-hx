@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
 
 typedef WebcamRecording = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var active:Bool; var id:String; var mimeType:String; var startedAtMs:Float; };

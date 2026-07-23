@@ -10,7 +10,6 @@ import flighthq.signals.Signal.createSignal;
 import flighthq.sprite.QuadBatch as Facade_Sprite_flighthq_sprite_QuadBatch;
 import flighthq.sprite.Tilemap as Facade_Sprite_flighthq_sprite_Tilemap;
 import flighthq.types.MethodsOf;
-import flighthq.types.Node;
 import flighthq.types.PartialNode;
 import flighthq.types.QuadBatch;
 import flighthq.types.QuadBatch.QuadBatchData;
@@ -73,7 +72,7 @@ class Sprite {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.computeQuadBatchLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function computeSpriteLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeSpriteLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field((cast source : Sprite), 'data');
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(data, 'rect'), null))) {
@@ -94,7 +93,7 @@ class Sprite {
     }
   }
 
-  public static function computeTilemapLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeTilemapLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.computeTilemapLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 

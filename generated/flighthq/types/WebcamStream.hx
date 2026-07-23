@@ -3,8 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.WebcamFacingMode;
 
 typedef WebcamStream = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var active:Bool; var deviceId:String; var facingMode:Null<WebcamFacingMode>; var frameRate:Float; var height:Float; var id:String; var width:Float; };

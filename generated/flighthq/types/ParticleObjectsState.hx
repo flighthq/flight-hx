@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.RandomSource;
 
 typedef ParticleObjectsState = { var burstTimer:Float; var emitterAge:Float; var lifetimes:flighthq._internal._Float32Array; var prevX:Float; var prevY:Float; var random:RandomSource; var rotationSpeeds:flighthq._internal._Float32Array; var scales:flighthq._internal._Float32Array; var spawnAccumulator:Float; var velocities:flighthq._internal._Float32Array; };

@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Cursor;
 import flighthq.types.NodeInteraction.HitArea;
 
 typedef NodeInteractionState = { var hitTestEnabled:Bool; var hitArea:Null<HitArea>; var cursor:Null<Cursor>; var focusable:Bool; var tabIndex:Float; };

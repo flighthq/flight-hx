@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.GlRenderState;
 import flighthq.types.Velocity.VelocityField;
 
 typedef GlVelocityContext = { var state:GlRenderState; var field:VelocityField; var width:Float; var height:Float; var pixelRatio:Float; };

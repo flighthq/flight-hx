@@ -3,7 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ModifierKind;
-import flighthq.types.ModifierSlot;
 
 typedef Modifier = { var kind:ModifierKind; var slot:ModifierSlot; };

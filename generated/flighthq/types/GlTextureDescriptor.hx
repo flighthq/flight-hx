@@ -3,8 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.GlTextureFilterKind;
-import flighthq.types.GlTextureWrapKind;
 
 typedef GlTextureDescriptor = { @:optional var wrapS:GlTextureWrapKind; @:optional var wrapT:GlTextureWrapKind; @:optional var minFilter:GlTextureFilterKind; @:optional var magFilter:GlTextureFilterKind; @:optional var mipmaps:Bool; @:optional var anisotropy:Float; @:optional var premultiplyAlpha:Bool; @:optional var format:GlTextureInternalFormat; };
 

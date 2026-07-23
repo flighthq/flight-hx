@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.hasImageResourcePixels;
 import flighthq.renderGl.GlDraw.bindGlImageResourceTexture;
 import flighthq.sceneGl.GlMeshMaterialRegistry.registerGlMeshMaterialRenderer;
-import flighthq.sceneGl.GlMeshProgram;
 import flighthq.sceneGl._internal._GlMeshProgramValues.beginGlMeshDraw;
 import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
 import flighthq.sceneGl._internal._GlMeshProgramValues.drawGlMeshSubset;

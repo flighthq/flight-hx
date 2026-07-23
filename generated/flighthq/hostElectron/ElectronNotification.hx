@@ -4,7 +4,6 @@ package flighthq.hostElectron;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.hostElectron.ElectronModule.ElectronApi;
-import flighthq.hostElectron.ElectronModule.ElectronNotification;
 import flighthq.types.Notification.NotificationBackend;
 import flighthq.types.Notification.NotificationCapabilities;
 import flighthq.types.Notification.NotificationPermission;

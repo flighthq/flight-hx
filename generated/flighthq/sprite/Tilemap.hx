@@ -8,7 +8,6 @@ import flighthq.displayobject.DisplayObject.createDisplayObjectRuntime;
 import flighthq.displayobject.DisplayObject.getDisplayObjectRuntime;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.MethodsOf;
-import flighthq.types.Node;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
 import flighthq.types.Tilemap;
@@ -36,7 +35,7 @@ class Tilemap {
     return cast null;
   }
 
-  public static function computeTilemapLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeTilemapLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     var tilemap:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var tileset:Dynamic = cast _Runtime.UNDEFINED;

@@ -3,12 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.BatchFormat;
-import flighthq.types.DisplayObject;
-import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderState;
-import flighthq.types.Renderer;
-import flighthq.types.RendererData;
 
 typedef DisplayObjectRenderer = { @:optional var format:BatchFormat; var createData:Dynamic; @:optional var destroyData:Dynamic; var submit:Dynamic; };
 

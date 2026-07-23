@@ -3,12 +3,7 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ColorLutCache;
-import flighthq.types.GlColorLutTextureCache;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
 import flighthq.types.GlRenderTarget.GlRenderTargetPool;
-import flighthq.types.RenderEffect;
 import flighthq.types.RenderTarget.RenderTargetDepth;
 import flighthq.types.RenderTarget.RenderTargetFormat;
 

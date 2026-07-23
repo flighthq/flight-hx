@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.RenderCache;
-import flighthq.types.RenderCacheAdapterSignals;
-import flighthq.types.RenderProxyAdapter;
 
 typedef RenderCacheAdapter = { var adapt:Dynamic; var cache:Null<RenderCache>; var signals:Null<RenderCacheAdapterSignals>; };

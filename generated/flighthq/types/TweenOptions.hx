@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.EasingFunction;
 
 typedef TweenOptions = { @:optional var delay:Float; @:optional var ease:EasingFunction; @:optional var overwrite:Bool; @:optional var reflect:Bool; @:optional var repeat:Float; @:optional var reverse:Bool; @:optional var smartRotation:Bool; @:optional var snapping:Bool; };

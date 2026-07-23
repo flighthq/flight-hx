@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.render.RenderState.getRenderStateRuntime;
-import flighthq.types.Node;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
@@ -14,7 +13,7 @@ import flighthq.types.Renderable;
 class RenderColorTransform {
   public static function updateRenderProxyColorTransform(state:RenderState, data:RenderProxy, ?_parentData:RenderProxy):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getNodeRuntime, cast ([(cast _Runtime.field(data, 'source') : Node<Dynamic>)] : Array<Dynamic>));
+    runtime = _Runtime.callValue(getNodeRuntime, cast ([(cast _Runtime.field(data, 'source') : Dynamic)] : Array<Dynamic>));
     _Runtime.setField(data, 'colorTransform', _Runtime.coalesce(_Runtime.field(runtime, 'resolvedColorTransform'), function():Dynamic return cast null));
     if (_Runtime.truthy(_Runtime.field(runtime, 'colorAdjustmentsChannelMixing'))) {
       _Runtime.callOptionalProperty(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'colorAdjustmentChannelMixingGuard', cast ([state, (cast _Runtime.field(data, 'source') : Renderable)] : Array<Dynamic>));

@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Signal;
 
-typedef IpcSignals = { var onBackendChanged:Signal<Dynamic>; var onChannelMessage:Signal<Dynamic>; };
+typedef IpcSignals = { var onBackendChanged:Dynamic; var onChannelMessage:Dynamic; };

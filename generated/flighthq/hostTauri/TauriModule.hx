@@ -56,13 +56,13 @@ typedef TauriPredefinedMenuItemOptions = { var item:String; };
 
 typedef TauriMenuItemHandle = { var id:String; };
 
-typedef TauriMenu = { var popup:Dynamic; var setAsAppMenu:Dynamic; };
+private typedef TauriMenu = { var popup:Dynamic; var setAsAppMenu:Dynamic; };
 
 typedef TauriTrayModule = { var TrayIcon:TauriTrayIconFactory; };
 
 typedef TauriTrayIconFactory = { var new_:Dynamic; };
 
-typedef TauriTrayIconOptions = { @:optional var action:Dynamic; @:optional var icon:String; @:optional var menu:TauriMenu; @:optional var title:String; @:optional var tooltip:String; };
+typedef TauriTrayIconOptions = { @:optional var action:Dynamic; @:optional var icon:String; @:optional var menu:Dynamic; @:optional var title:String; @:optional var tooltip:String; };
 
 typedef TauriTrayIconEvent = { @:optional var button:String; var type:String; };
 
@@ -80,6 +80,6 @@ typedef TauriLogicalSizeLike = { var height:Float; var width:Float; };
 
 typedef TauriUnlisten = Dynamic;
 
-typedef TauriWindow = { var center:Dynamic; var close:Dynamic; var hide:Dynamic; var maximize:Dynamic; var minimize:Dynamic; var onCloseRequested:Dynamic; var onFocusChanged:Dynamic; var onMoved:Dynamic; var onResized:Dynamic; var requestUserAttention:Dynamic; var setAlwaysOnTop:Dynamic; var setContentProtected:Dynamic; var setFocus:Dynamic; var setFullscreen:Dynamic; var setIcon:Dynamic; var setMaxSize:Dynamic; var setMinSize:Dynamic; var setPosition:Dynamic; var setResizable:Dynamic; var setShadow:Dynamic; var setSize:Dynamic; var setSkipTaskbar:Dynamic; var setTitle:Dynamic; var show:Dynamic; var unmaximize:Dynamic; };
+private typedef TauriWindow = { var center:Dynamic; var close:Dynamic; var hide:Dynamic; var maximize:Dynamic; var minimize:Dynamic; var onCloseRequested:Dynamic; var onFocusChanged:Dynamic; var onMoved:Dynamic; var onResized:Dynamic; var requestUserAttention:Dynamic; var setAlwaysOnTop:Dynamic; var setContentProtected:Dynamic; var setFocus:Dynamic; var setFullscreen:Dynamic; var setIcon:Dynamic; var setMaxSize:Dynamic; var setMinSize:Dynamic; var setPosition:Dynamic; var setResizable:Dynamic; var setShadow:Dynamic; var setSize:Dynamic; var setSkipTaskbar:Dynamic; var setTitle:Dynamic; var show:Dynamic; var unmaximize:Dynamic; };
 
 typedef TauriCloseRequestedEvent = { var preventDefault:Dynamic; };

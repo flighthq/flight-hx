@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Rectangle;
 
 typedef Camera2D = { var rotation:Float; var viewportHeight:Float; var viewportWidth:Float; var x:Float; var y:Float; var zoom:Float; };
 

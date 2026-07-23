@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.AdjustmentKind;
-import flighthq.types.ColorLutAdjustment;
-import flighthq.types.ColorTransformFunction;
 
 typedef LiftGammaGainAdjustment = { var kind:AdjustmentKind; var transform:ColorTransformFunction; @:optional var lift:Float; @:optional var gamma:Float; @:optional var gain:Float; };

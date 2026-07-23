@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.node.Traversal.forEachNodeDescendant;
 import flighthq.scene.Mesh.isMesh;
-import flighthq.sceneResources.SceneResourceResolver;
 import flighthq.sceneResources._internal._SceneMaterialTextureRegistryValues.getSceneMaterialTextures;
 import flighthq.sceneResources._internal._SceneResourceSignalsValues.enableSceneResourceSignals;
 import flighthq.signals.Slot.connectSignal;

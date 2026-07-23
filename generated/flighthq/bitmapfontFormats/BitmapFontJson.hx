@@ -3,7 +3,6 @@ package flighthq.bitmapfontFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.bitmapfontFormats.BitmapFontRecord;
 import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontCharRecord;
 import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontKerningRecord;
 import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontPageRecord;

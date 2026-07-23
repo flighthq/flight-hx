@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.MarkupClassResolver;
-import flighthq.types.MarkupColorResolver;
-import flighthq.types.MarkupTagHandler;
 
 typedef MarkupTagRegistry = { @:optional var classResolver:MarkupClassResolver; @:optional var colorResolver:MarkupColorResolver; var handlers:Dynamic; };

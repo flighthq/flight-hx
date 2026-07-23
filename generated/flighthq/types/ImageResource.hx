@@ -3,10 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.AlphaType;
-import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.ImageResourceCompressed;
-import flighthq.types.PixelFormat;
 
 typedef ImageResource = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var alphaType:AlphaType; var compressed:Null<ImageResourceCompressed>; var data:Null<Dynamic>; var format:PixelFormat; var height:Float; var source:Null<Dynamic>; var version:Float; var width:Float; };

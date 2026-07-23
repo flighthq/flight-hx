@@ -6,9 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.InputGamepadData.InputGamepadAxisData;
 import flighthq.types.InputGamepadData.InputGamepadButtonData;
 import flighthq.types.InputGamepadData.InputGamepadConnectData;
-import flighthq.types.InputKeyboardData;
-import flighthq.types.InputPointerData;
-import flighthq.types.InputTextData;
-import flighthq.types.Signal;
 
-typedef InputSignals = { var onGamepadAxisMove:Signal<Dynamic>; var onGamepadButtonDown:Signal<Dynamic>; var onGamepadButtonUp:Signal<Dynamic>; var onGamepadConnect:Signal<Dynamic>; var onGamepadDisconnect:Signal<Dynamic>; var onKeyDown:Signal<Dynamic>; var onKeyUp:Signal<Dynamic>; var onPointerCancel:Signal<Dynamic>; var onPointerDown:Signal<Dynamic>; var onPointerMove:Signal<Dynamic>; var onPointerMoveRelative:Signal<Dynamic>; var onPointerUp:Signal<Dynamic>; var onTextEdit:Signal<Dynamic>; var onTextInput:Signal<Dynamic>; var onWheel:Signal<Dynamic>; };
+typedef InputSignals = { var onGamepadAxisMove:Dynamic; var onGamepadButtonDown:Dynamic; var onGamepadButtonUp:Dynamic; var onGamepadConnect:Dynamic; var onGamepadDisconnect:Dynamic; var onKeyDown:Dynamic; var onKeyUp:Dynamic; var onPointerCancel:Dynamic; var onPointerDown:Dynamic; var onPointerMove:Dynamic; var onPointerMoveRelative:Dynamic; var onPointerUp:Dynamic; var onTextEdit:Dynamic; var onTextInput:Dynamic; var onWheel:Dynamic; };

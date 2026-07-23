@@ -810,7 +810,6 @@ import flighthq.sceneGl.GlPbrProgramCache as Facade_Sdk_flighthq_sceneGl_GlPbrPr
 import flighthq.sceneGl.GlPbrProgramCache.GlPbrProgram;
 import flighthq.sceneGl.GlPbrStandardBlock as Facade_Sdk_flighthq_sceneGl_GlPbrStandardBlock;
 import flighthq.sceneGl.GlSceneRuntime;
-import flighthq.sceneGl.GlSceneRuntime.GlMeshUpload;
 import flighthq.sceneGl.GlSceneTime as Facade_Sdk_flighthq_sceneGl_GlSceneTime;
 import flighthq.sceneGl.GlShadedBuiltInModifiers as Facade_Sdk_flighthq_sceneGl_GlShadedBuiltInModifiers;
 import flighthq.sceneGl.GlShadedModifierSnippet as Facade_Sdk_flighthq_sceneGl_GlShadedModifierSnippet;
@@ -918,7 +917,6 @@ import flighthq.sceneWgpu.WgpuPbrPrelude as Facade_Sdk_flighthq_sceneWgpu_WgpuPb
 import flighthq.sceneWgpu.WgpuPbrPrelude.WgpuPbrDefineKey;
 import flighthq.sceneWgpu.WgpuSceneRuntime;
 import flighthq.sceneWgpu.WgpuSceneRuntime.WgpuMaterialBinding;
-import flighthq.sceneWgpu.WgpuSceneRuntime.WgpuMeshUpload;
 import flighthq.sceneWgpu.WgpuShadowMap as Facade_Sdk_flighthq_sceneWgpu_WgpuShadowMap;
 import flighthq.sceneWgpu.WgpuToonPrelude as Facade_Sdk_flighthq_sceneWgpu_WgpuToonPrelude;
 import flighthq.sceneWgpu.WgpuToonPrelude.WgpuToonDefineKey;
@@ -1302,7 +1300,6 @@ import flighthq.types.FilmGrainEffect;
 import flighthq.types.FilmicToneMapOptions;
 import flighthq.types.Flow.FlowStack;
 import flighthq.types.Flow.FlowState;
-import flighthq.types.FocusManager;
 import flighthq.types.FocusManager.FocusDirection;
 import flighthq.types.FocusManager.FocusManagerOptions;
 import flighthq.types.FocusManager.FocusNavigationInput;
@@ -1404,7 +1401,6 @@ import flighthq.types.InputManager;
 import flighthq.types.InputManager.AttachInputOptions;
 import flighthq.types.InputSignals;
 import flighthq.types.InputState;
-import flighthq.types.InteractionManager;
 import flighthq.types.InteractionManager.InteractionInputSource;
 import flighthq.types.InteractionManager.InteractionManagerOptions;
 import flighthq.types.InteractionManager.InteractionPointerOptions;
@@ -1498,7 +1494,6 @@ import flighthq.types.Net.NetBackend;
 import flighthq.types.Net.NetRequest;
 import flighthq.types.Net.NetRequestOptions;
 import flighthq.types.Net.NetResponse;
-import flighthq.types.Node;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.Node.NodeDataFactory;
 import flighthq.types.Node.NodeOf;
@@ -1686,13 +1681,11 @@ import flighthq.types.Shell.ShellShortcutWriteOperation;
 import flighthq.types.Shortcut.ShortcutBackend;
 import flighthq.types.ShortcutModifier;
 import flighthq.types.ShortcutSignals;
-import flighthq.types.Signal;
 import flighthq.types.SignalConnectOptions;
 import flighthq.types.Skeleton3D;
 import flighthq.types.Skeleton3DValidationDiagnostic;
 import flighthq.types.SketchEffect;
 import flighthq.types.SmaaEffect;
-import flighthq.types.Snapshot;
 import flighthq.types.Snapshot.SnapshotSchema;
 import flighthq.types.Socket;
 import flighthq.types.Socket.SocketBackend;
@@ -1827,7 +1820,6 @@ import flighthq.types.Tray.TrayCapabilities;
 import flighthq.types.Tray.TrayIcon;
 import flighthq.types.Tray.TrayIconOptions;
 import flighthq.types.TriangleCulling;
-import flighthq.types.Tween;
 import flighthq.types.Tween.NumericProps;
 import flighthq.types.TweenManager;
 import flighthq.types.TweenManagerOptions;
@@ -1860,7 +1852,6 @@ import flighthq.types.VideoResource.VideoResourceLoadOptions;
 import flighthq.types.VideoResource.VideoResourceUrl;
 import flighthq.types.VideoTexture;
 import flighthq.types.VideoTexture.VideoTextureLike;
-import flighthq.types.Viewport;
 import flighthq.types.ViewportAlign;
 import flighthq.types.VignetteEffect;
 import flighthq.types.VolumetricLightEffect;
@@ -2158,17 +2149,17 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.addMovieClipFrameScript, cast ([clip, frame, script] : Array<Dynamic>));
   }
 
-  public static function addNodeChild<Traits>(target:Node<Traits>, child:Node<Traits>):NodeOf<Traits> {
+  public static function addNodeChild<Traits>(target:Dynamic, child:Dynamic):NodeOf<Traits> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.addNodeChild, cast ([target, child] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function addNodeChildAt<Traits>(target:Node<Traits>, child:Node<Traits>, index:Float):NodeOf<Traits> {
+  public static function addNodeChildAt<Traits>(target:Dynamic, child:Dynamic, index:Float):NodeOf<Traits> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.addNodeChildAt, cast ([target, child, index] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function addNodeChildren<Traits>(target:Node<Traits>, ...children:Node<Traits>):Void {
+  public static function addNodeChildren<Traits>(target:Dynamic, ...children:Dynamic):Void {
     _Runtime.apply(Facade_Sdk_flighthq_node_Hierarchy.addNodeChildren, _Runtime.concatArrays([[target], _Runtime.toArray(children)]));
   }
 
@@ -3749,7 +3740,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_notification_Notification.cancelScheduledNotification, cast ([id] : Array<Dynamic>));
   }
 
-  public static function cancelSignal<T>(signal:Signal<Dynamic>):Void {
+  public static function cancelSignal<T>(signal:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_signals_Emitter.cancelSignal, cast ([signal] : Array<Dynamic>));
   }
 
@@ -3795,7 +3786,7 @@ class Sdk {
 
   public static final CAPTURE_REGRESSION_TOLERANCE:Dynamic = Facade_Sdk_flighthq_capture_CaptureComparison.CAPTURE_REGRESSION_TOLERANCE;
 
-  public static function captureInteractionPointer<N>(manager:InteractionManager<Dynamic>, pointerId:Float, target:Dynamic):Void {
+  public static function captureInteractionPointer<N>(manager:Dynamic, pointerId:Float, target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionManager.captureInteractionPointer, cast ([manager, pointerId, target] : Array<Dynamic>));
   }
 
@@ -3809,7 +3800,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function captureSnapshot<T>(source:Dynamic):Snapshot<Dynamic> {
+  public static function captureSnapshot<T>(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_snapshot_CaptureSnapshot.captureSnapshot, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -3904,7 +3895,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_flow_ClearFlowStack.clearFlowStack, cast ([stack] : Array<Dynamic>));
   }
 
-  public static function clearFocus<N>(manager:FocusManager<Dynamic>):Void {
+  public static function clearFocus<N>(manager:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_FocusManager.clearFocus, cast ([manager] : Array<Dynamic>));
   }
 
@@ -4017,7 +4008,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function clearSignal<T>(signal:Signal<Dynamic>):Void {
+  public static function clearSignal<T>(signal:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_signals_Slot.clearSignal, cast ([signal] : Array<Dynamic>));
   }
 
@@ -4487,7 +4478,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function completeTween<T>(tween:Tween<Dynamic>):Void {
+  public static function completeTween<T>(tween:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.completeTween, cast ([tween] : Array<Dynamic>));
   }
 
@@ -4517,7 +4508,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function computeBitmapLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeBitmapLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobject_Bitmap.computeBitmapLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4636,7 +4627,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_effects_StylizeMath.computeHalftoneCellParams, cast ([frequency, angle, out] : Array<Dynamic>));
   }
 
-  public static function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobject_HtmlView.computeHtmlViewLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4694,7 +4685,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_NativeText.computeNativeTextLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4764,7 +4755,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function computeRenderViewLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeRenderViewLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobject_RenderView.computeRenderViewLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4797,7 +4788,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function computeRichTextLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeRichTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.computeRichTextLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4850,7 +4841,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_effects_EdgeDetectMath.computeSketchEdgeParams, cast ([effect, out] : Array<Dynamic>));
   }
 
-  public static function computeSpriteLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeSpriteLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.computeSpriteLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4883,7 +4874,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function computeTextLabelLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeTextLabelLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_TextLabel.computeTextLabelLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4891,7 +4882,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_textlayout_TextLayout.computeTextLayout, cast ([out, params] : Array<Dynamic>));
   }
 
-  public static function computeTilemapLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeTilemapLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.computeTilemapLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4900,7 +4891,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function computeVideoLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeVideoLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobject_Video.computeVideoLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4924,7 +4915,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function computeViewportRenderTransform<Traits>(out:MatrixLike, scene:Viewport<Traits>, viewWidth:Float, viewHeight:Float):Void {
+  public static function computeViewportRenderTransform<Traits>(out:MatrixLike, scene:Dynamic, viewWidth:Float, viewHeight:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.computeViewportRenderTransform, cast ([out, scene, viewWidth, viewHeight] : Array<Dynamic>));
   }
 
@@ -4965,7 +4956,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_media_AudioChannel.connectAudioChannelToNode, cast ([channel, destinationNode] : Array<Dynamic>));
   }
 
-  public static function connectFocusNavigation<N>(input:FocusNavigationInput, manager:FocusManager<Dynamic>, ?options:FocusNavigationOptions):Dynamic {
+  public static function connectFocusNavigation<N>(input:FocusNavigationInput, manager:Dynamic, ?options:FocusNavigationOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_FocusManager.connectFocusNavigation, cast ([input, manager, options] : Array<Dynamic>));
     return cast null;
   }
@@ -4975,7 +4966,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function connectInputToInteraction<N>(input:InteractionInputSource, manager:InteractionManager<Dynamic>, ?coordScale:Float):Dynamic {
+  public static function connectInputToInteraction<N>(input:InteractionInputSource, manager:Dynamic, ?coordScale:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionManager.connectInputToInteraction, cast ([input, manager, coordScale] : Array<Dynamic>));
     return cast null;
   }
@@ -4985,25 +4976,25 @@ class Sdk {
     return cast null;
   }
 
-  public static function connectInteractionSignal<N, Name>(manager:InteractionManager<Dynamic>, target:Dynamic, name:Name, slot:InteractionSignalSlot__interactionManager<Name>, ?options:SignalConnectOptions):Void {
+  public static function connectInteractionSignal<N, Name>(manager:Dynamic, target:Dynamic, name:Name, slot:InteractionSignalSlot__interactionManager<Name>, ?options:SignalConnectOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionManager.connectInteractionSignal, cast ([manager, target, name, slot, options] : Array<Dynamic>));
   }
 
-  public static function connectSignal<T>(signal:Signal<Dynamic>, slot:Dynamic, ?options:SignalConnectOptions):Void {
+  public static function connectSignal<T>(signal:Dynamic, slot:Dynamic, ?options:SignalConnectOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_signals_Slot.connectSignal, cast ([signal, slot, options] : Array<Dynamic>));
   }
 
-  public static function connectSignalAtFrameRate(source:Signal<Dynamic>, fps:Float, slot:Dynamic):Dynamic {
+  public static function connectSignalAtFrameRate(source:Dynamic, fps:Float, slot:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_signals_Throttle.connectSignalAtFrameRate, cast ([source, fps, slot] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function connectSignalDebounced<T>(source:Signal<Dynamic>, delayMs:Float, slot:Dynamic, ?options:SignalThrottleOptions):Dynamic {
+  public static function connectSignalDebounced<T>(source:Dynamic, delayMs:Float, slot:Dynamic, ?options:SignalThrottleOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_signals_Throttle.connectSignalDebounced, cast ([source, delayMs, slot, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function connectSignalThrottled<T>(source:Signal<Dynamic>, intervalMs:Float, slot:Dynamic, ?options:SignalThrottleOptions):Dynamic {
+  public static function connectSignalThrottled<T>(source:Dynamic, intervalMs:Float, slot:Dynamic, ?options:SignalThrottleOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_signals_Throttle.connectSignalThrottled, cast ([source, intervalMs, slot, options] : Array<Dynamic>));
     return cast null;
   }
@@ -5023,7 +5014,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function containsNodeChild<Traits>(source:Node<Traits>, child:Node<Traits>):Bool {
+  public static function containsNodeChild<Traits>(source:Dynamic, child:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.containsNodeChild, cast ([source, child] : Array<Dynamic>));
     return cast null;
   }
@@ -5701,7 +5692,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createColorTween(manager:TweenManager, target:Dynamic, property:String, duration:Float, toColor:Float, ?options:TweenOptions):Tween<ColorComponents__colorTween> {
+  public static function createColorTween(manager:TweenManager, target:Dynamic, property:String, duration:Float, toColor:Float, ?options:TweenOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tween_ColorTween.createColorTween, cast ([manager, target, property, duration, toColor, options] : Array<Dynamic>));
     return cast null;
   }
@@ -6001,7 +5992,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createFocusManager<N>(root:Dynamic, ?options:FocusManagerOptions):FocusManager<Dynamic> {
+  public static function createFocusManager<N>(root:Dynamic, ?options:FocusManagerOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_FocusManager.createFocusManager, cast ([root, options] : Array<Dynamic>));
     return cast null;
   }
@@ -6311,7 +6302,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createInteractionManager<N>(root:Dynamic, ?options:InteractionManagerOptions):InteractionManager<Dynamic> {
+  public static function createInteractionManager<N>(root:Dynamic, ?options:InteractionManagerOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionManager.createInteractionManager, cast ([root, options] : Array<Dynamic>));
     return cast null;
   }
@@ -6531,7 +6522,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createNode<Traits, Data, Runtime>(nodeKind:Kind, ?obj:PartialNode<Node<Traits>>, ?createData:NodeDataFactory<Data>, ?createNodeRuntimeFactory:NodeRuntimeFactory<Runtime>):Node<Traits> {
+  public static function createNode<Traits, Data, Runtime>(nodeKind:Kind, ?obj:PartialNode<Dynamic>, ?createData:NodeDataFactory<Data>, ?createNodeRuntimeFactory:NodeRuntimeFactory<Runtime>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.createNode, cast ([nodeKind, obj, createData, createNodeRuntimeFactory] : Array<Dynamic>));
     return cast null;
   }
@@ -7125,7 +7116,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSignal<T>():Signal<Dynamic> {
+  public static function createSignal<T>():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_signals_Signal.createSignal, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -7615,7 +7606,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTween<T>(managerOrTarget:Dynamic, targetOrDuration:Dynamic, durationOrProps:Dynamic, ?propsOrOptions:Dynamic, ?maybeOptions:TweenOptions):Tween<Dynamic> {
+  public static function createTween<T>(managerOrTarget:Dynamic, targetOrDuration:Dynamic, durationOrProps:Dynamic, ?propsOrOptions:Dynamic, ?maybeOptions:TweenOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.createTween, cast ([managerOrTarget, targetOrDuration, durationOrProps, propsOrOptions, maybeOptions] : Array<Dynamic>));
     return cast null;
   }
@@ -7625,12 +7616,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTweenStagger<T>(manager:TweenManager, targets:Array<Dynamic>, duration:Float, propertyMap:NumericProps<Dynamic>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<Tween<Dynamic>> {
+  public static function createTweenStagger<T>(manager:TweenManager, targets:Array<Dynamic>, duration:Float, propertyMap:NumericProps<Dynamic>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.createTweenStagger, cast ([manager, targets, duration, propertyMap, stagger, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTweenTimer(manager:TweenManager, duration:Float, ?options:TweenOptions):Tween<Dynamic> {
+  public static function createTweenTimer(manager:TweenManager, duration:Float, ?options:TweenOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tween_Timer.createTweenTimer, cast ([manager, duration, options] : Array<Dynamic>));
     return cast null;
   }
@@ -7725,7 +7716,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createViewport<Traits>(?obj:Dynamic):Viewport<Traits> {
+  public static function createViewport<Traits>(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.createViewport, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -8489,7 +8480,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function defaultNodeRuntimeCanAddChild<Traits>(_target:Node<Traits>, _child:Node<Traits>):Bool {
+  public static function defaultNodeRuntimeCanAddChild<Traits>(_target:Dynamic, _child:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.defaultNodeRuntimeCanAddChild, cast ([_target, _child] : Array<Dynamic>));
     return cast null;
   }
@@ -8758,7 +8749,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl__internal__GlMeshProgramValues.destroyGlMeshProgram, cast ([state, program] : Array<Dynamic>));
   }
 
-  public static function destroyGlMeshUpload(state:GlRenderState, upload:GlMeshUpload):Void {
+  public static function destroyGlMeshUpload(state:GlRenderState, upload:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlMeshUpload.destroyGlMeshUpload, cast ([state, upload] : Array<Dynamic>));
   }
 
@@ -9103,43 +9094,43 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInput.disableTextInput, cast ([node] : Array<Dynamic>));
   }
 
-  public static function disconnectInteractionSignal<N, Name>(manager:InteractionManager<Dynamic>, target:Dynamic, name:Name, slot:InteractionSignalSlot__interactionManager<Name>):Void {
+  public static function disconnectInteractionSignal<N, Name>(manager:Dynamic, target:Dynamic, name:Name, slot:InteractionSignalSlot__interactionManager<Name>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionManager.disconnectInteractionSignal, cast ([manager, target, name, slot] : Array<Dynamic>));
   }
 
-  public static function disconnectSignal<T>(signal:Signal<Dynamic>, slot:Dynamic):Void {
+  public static function disconnectSignal<T>(signal:Dynamic, slot:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_signals_Slot.disconnectSignal, cast ([signal, slot] : Array<Dynamic>));
   }
 
-  public static function dispatchInteractionContextMenu<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?button:Float, ?options:InteractionPointerOptions):Void {
+  public static function dispatchInteractionContextMenu<N>(manager:Dynamic, x:Float, y:Float, ?button:Float, ?options:InteractionPointerOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionManager.dispatchInteractionContextMenu, cast ([manager, x, y, button, options] : Array<Dynamic>));
   }
 
-  public static function dispatchInteractionKeyDown<N>(manager:InteractionManager<Dynamic>, key:String, ?keyCode:Float, ?modifiers:Dynamic):Void {
+  public static function dispatchInteractionKeyDown<N>(manager:Dynamic, key:String, ?keyCode:Float, ?modifiers:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionManager.dispatchInteractionKeyDown, cast ([manager, key, keyCode, modifiers] : Array<Dynamic>));
   }
 
-  public static function dispatchInteractionKeyUp<N>(manager:InteractionManager<Dynamic>, key:String, ?keyCode:Float, ?modifiers:Dynamic):Void {
+  public static function dispatchInteractionKeyUp<N>(manager:Dynamic, key:String, ?keyCode:Float, ?modifiers:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionManager.dispatchInteractionKeyUp, cast ([manager, key, keyCode, modifiers] : Array<Dynamic>));
   }
 
-  public static function dispatchInteractionPointerCancel<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?options:InteractionPointerOptions):Void {
+  public static function dispatchInteractionPointerCancel<N>(manager:Dynamic, x:Float, y:Float, ?options:InteractionPointerOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionManager.dispatchInteractionPointerCancel, cast ([manager, x, y, options] : Array<Dynamic>));
   }
 
-  public static function dispatchInteractionPointerDown<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?button:Float, ?options:InteractionPointerOptions):Void {
+  public static function dispatchInteractionPointerDown<N>(manager:Dynamic, x:Float, y:Float, ?button:Float, ?options:InteractionPointerOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionManager.dispatchInteractionPointerDown, cast ([manager, x, y, button, options] : Array<Dynamic>));
   }
 
-  public static function dispatchInteractionPointerMove<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?button:Float, ?options:InteractionPointerOptions):Void {
+  public static function dispatchInteractionPointerMove<N>(manager:Dynamic, x:Float, y:Float, ?button:Float, ?options:InteractionPointerOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionManager.dispatchInteractionPointerMove, cast ([manager, x, y, button, options] : Array<Dynamic>));
   }
 
-  public static function dispatchInteractionPointerUp<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?button:Float, ?time:Float, ?options:InteractionPointerOptions):Void {
+  public static function dispatchInteractionPointerUp<N>(manager:Dynamic, x:Float, y:Float, ?button:Float, ?time:Float, ?options:InteractionPointerOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionManager.dispatchInteractionPointerUp, cast ([manager, x, y, button, time, options] : Array<Dynamic>));
   }
 
-  public static function dispatchInteractionWheel<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?deltaX:Float, ?deltaY:Float, ?options:InteractionPointerOptions):Void {
+  public static function dispatchInteractionWheel<N>(manager:Dynamic, x:Float, y:Float, ?deltaX:Float, ?deltaY:Float, ?options:InteractionPointerOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionManager.dispatchInteractionWheel, cast ([manager, x, y, deltaX, deltaY, options] : Array<Dynamic>));
   }
 
@@ -9267,7 +9258,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.disposeMovieClipSignals, cast ([clip] : Array<Dynamic>));
   }
 
-  public static function disposeNode<Traits>(target:Node<Traits>):Void {
+  public static function disposeNode<Traits>(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.disposeNode, cast ([target] : Array<Dynamic>));
   }
 
@@ -9843,7 +9834,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function emitSignal<T>(signal:Signal<Dynamic>, ...args:Dynamic):Void {
+  public static function emitSignal<T>(signal:Dynamic, ...args:Dynamic):Void {
     _Runtime.apply(Facade_Sdk_flighthq_signals_Emitter.emitSignal, _Runtime.concatArrays([[signal], _Runtime.toArray(args)]));
   }
 
@@ -9880,7 +9871,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasTextInput.enableCanvasTextInput, cast ([] : Array<Dynamic>));
   }
 
-  public static function enableClockSignals(clock:Clock):Signal<Dynamic> {
+  public static function enableClockSignals(clock:Clock):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clock_EnableClockSignals.enableClockSignals, cast ([clock] : Array<Dynamic>));
     return cast null;
   }
@@ -9998,7 +9989,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function enableNodeSignals<Traits>(source:Node<Traits>):NodeSignals {
+  public static function enableNodeSignals<Traits>(source:Dynamic):NodeSignals {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.enableNodeSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -10219,7 +10210,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function ensureGlMeshUpload(state:GlRenderState, geometry:MeshGeometry, ?gpuSkinned:Dynamic):GlMeshUpload {
+  public static function ensureGlMeshUpload(state:GlRenderState, geometry:MeshGeometry, ?gpuSkinned:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlMeshUpload.ensureGlMeshUpload, cast ([state, geometry, gpuSkinned] : Array<Dynamic>));
     return cast null;
   }
@@ -10363,7 +10354,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function ensureWgpuMeshUpload(state:WgpuRenderState, geometry:MeshGeometry):Null<WgpuMeshUpload> {
+  public static function ensureWgpuMeshUpload(state:WgpuRenderState, geometry:MeshGeometry):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuMeshUpload.ensureWgpuMeshUpload, cast ([state, geometry] : Array<Dynamic>));
     return cast null;
   }
@@ -10533,7 +10524,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function equalsSnapshot<T>(a:Snapshot<Dynamic>, b:Snapshot<Dynamic>):Bool {
+  public static function equalsSnapshot<T>(a:Dynamic, b:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_snapshot_EqualsSnapshot.equalsSnapshot, cast ([a, b] : Array<Dynamic>));
     return cast null;
   }
@@ -10701,32 +10692,32 @@ class Sdk {
     return cast null;
   }
 
-  public static function findGraphHitTarget<Traits>(source:Node<Traits>, x:Float, y:Float):Null<Node<Traits>> {
+  public static function findGraphHitTarget<Traits>(source:Dynamic, x:Float, y:Float):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_HitTests.findGraphHitTarget, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function findGraphHitTargetPrecise<Traits>(source:Node<Traits>, x:Float, y:Float):Null<Node<Traits>> {
+  public static function findGraphHitTargetPrecise<Traits>(source:Dynamic, x:Float, y:Float):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_HitTests.findGraphHitTargetPrecise, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function findGraphHitTargets<Traits>(source:Node<Traits>, x:Float, y:Float, ?out:Array<Node<Traits>>):Array<Node<Traits>> {
+  public static function findGraphHitTargets<Traits>(source:Dynamic, x:Float, y:Float, ?out:Array<Dynamic>):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_HitTests.findGraphHitTargets, cast ([source, x, y, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function findGraphHitTargetsPrecise<Traits>(source:Node<Traits>, x:Float, y:Float, ?out:Array<Node<Traits>>):Array<Node<Traits>> {
+  public static function findGraphHitTargetsPrecise<Traits>(source:Dynamic, x:Float, y:Float, ?out:Array<Dynamic>):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_HitTests.findGraphHitTargetsPrecise, cast ([source, x, y, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function findNode<Traits>(source:Node<Traits>, predicate:Dynamic):Null<NodeOf<Traits>> {
+  public static function findNode<Traits>(source:Dynamic, predicate:Dynamic):Null<NodeOf<Traits>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.findNode, cast ([source, predicate] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function findNodeByName<Traits>(source:Node<Traits>, name:String):Null<NodeOf<Traits>> {
+  public static function findNodeByName<Traits>(source:Dynamic, name:String):Null<NodeOf<Traits>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.findNodeByName, cast ([source, name] : Array<Dynamic>));
     return cast null;
   }
@@ -10736,7 +10727,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function findSpatialInteractionTarget<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, ?precise:Bool):Null<Dynamic> {
+  public static function findSpatialInteractionTarget<N>(manager:Dynamic, x:Float, y:Float, ?precise:Bool):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionSpatialIndex.findSpatialInteractionTarget, cast ([manager, x, y, precise] : Array<Dynamic>));
     return cast null;
   }
@@ -10797,17 +10788,17 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_app_App.focusApp, cast ([] : Array<Dynamic>));
   }
 
-  public static function focusNextNode<N>(manager:FocusManager<Dynamic>):Null<Dynamic> {
+  public static function focusNextNode<N>(manager:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_FocusManager.focusNextNode, cast ([manager] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function focusNodeInDirection<N>(manager:FocusManager<Dynamic>, direction:FocusDirection):Null<Dynamic> {
+  public static function focusNodeInDirection<N>(manager:Dynamic, direction:FocusDirection):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_FocusManager.focusNodeInDirection, cast ([manager, direction] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function focusPreviousNode<N>(manager:FocusManager<Dynamic>):Null<Dynamic> {
+  public static function focusPreviousNode<N>(manager:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_FocusManager.focusPreviousNode, cast ([manager] : Array<Dynamic>));
     return cast null;
   }
@@ -10844,15 +10835,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.forEachApplicationWindow, cast ([app, fn] : Array<Dynamic>));
   }
 
-  public static function forEachNodeAncestor<Traits>(source:Node<Traits>, callback:Dynamic):Void {
+  public static function forEachNodeAncestor<Traits>(source:Dynamic, callback:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.forEachNodeAncestor, cast ([source, callback] : Array<Dynamic>));
   }
 
-  public static function forEachNodeChild<Traits>(source:Node<Traits>, callback:Dynamic):Void {
+  public static function forEachNodeChild<Traits>(source:Dynamic, callback:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.forEachNodeChild, cast ([source, callback] : Array<Dynamic>));
   }
 
-  public static function forEachNodeDescendant<Traits>(source:Node<Traits>, callback:Dynamic):Void {
+  public static function forEachNodeDescendant<Traits>(source:Dynamic, callback:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.forEachNodeDescendant, cast ([source, callback] : Array<Dynamic>));
   }
 
@@ -11692,12 +11683,12 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_flow_GetFlowStackVisibleStates.getFlowStackVisibleStates, cast ([stack, out] : Array<Dynamic>));
   }
 
-  public static function getFocusedNode<N>(manager:FocusManager<Dynamic>):Null<Dynamic> {
+  public static function getFocusedNode<N>(manager:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_FocusManager.getFocusedNode, cast ([manager] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getFocusOrder<N>(manager:FocusManager<Dynamic>, ?out:Array<Dynamic>):Array<Dynamic> {
+  public static function getFocusOrder<N>(manager:Dynamic, ?out:Array<Dynamic>):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_FocusManager.getFocusOrder, cast ([manager, out] : Array<Dynamic>));
     return cast null;
   }
@@ -12352,42 +12343,42 @@ class Sdk {
     return cast null;
   }
 
-  public static function getNodeAncestors<Traits>(source:Node<Traits>):Array<NodeOf<Traits>> {
+  public static function getNodeAncestors<Traits>(source:Dynamic):Array<NodeOf<Traits>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.getNodeAncestors, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNodeAppearanceRevision<Traits>(source:Node<Traits>):Float {
+  public static function getNodeAppearanceRevision<Traits>(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.getNodeAppearanceRevision, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNodeChildAt<Traits>(source:Node<Traits>, index:Float):Null<NodeOf<Traits>> {
+  public static function getNodeChildAt<Traits>(source:Dynamic, index:Float):Null<NodeOf<Traits>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.getNodeChildAt, cast ([source, index] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNodeChildByName<Traits>(source:Node<Traits>, name:String):Null<NodeOf<Traits>> {
+  public static function getNodeChildByName<Traits>(source:Dynamic, name:String):Null<NodeOf<Traits>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.getNodeChildByName, cast ([source, name] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNodeChildCount<Traits>(source:Node<Traits>):Float {
+  public static function getNodeChildCount<Traits>(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.getNodeChildCount, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNodeChildIndex<Traits>(source:Node<Traits>, child:Node<Traits>):Float {
+  public static function getNodeChildIndex<Traits>(source:Dynamic, child:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.getNodeChildIndex, cast ([source, child] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNodeChildren<Traits>(source:Node<Traits>):Array<NodeOf<Traits>> {
+  public static function getNodeChildren<Traits>(source:Dynamic):Array<NodeOf<Traits>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.getNodeChildren, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNodeCommonAncestor<Traits>(a:Node<Traits>, b:Node<Traits>):Null<NodeOf<Traits>> {
+  public static function getNodeCommonAncestor<Traits>(a:Dynamic, b:Dynamic):Null<NodeOf<Traits>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.getNodeCommonAncestor, cast ([a, b] : Array<Dynamic>));
     return cast null;
   }
@@ -12397,7 +12388,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getNodeDepth<Traits>(source:Node<Traits>):Float {
+  public static function getNodeDepth<Traits>(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.getNodeDepth, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -12422,12 +12413,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getNodeLocalBoundsRevision<Traits>(source:Node<Traits>):Float {
+  public static function getNodeLocalBoundsRevision<Traits>(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.getNodeLocalBoundsRevision, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNodeLocalContentRevision<Traits>(source:Node<Traits>):Float {
+  public static function getNodeLocalContentRevision<Traits>(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.getNodeLocalContentRevision, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -12442,17 +12433,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function getNodeLocalTransformRevision<Traits>(source:Node<Traits>):Float {
+  public static function getNodeLocalTransformRevision<Traits>(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.getNodeLocalTransformRevision, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNodeNextSibling<Traits>(source:Node<Traits>):Null<NodeOf<Traits>> {
+  public static function getNodeNextSibling<Traits>(source:Dynamic):Null<NodeOf<Traits>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.getNodeNextSibling, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNodeParent<Traits>(source:Node<Traits>):Null<NodeOf<Traits>> {
+  public static function getNodeParent<Traits>(source:Dynamic):Null<NodeOf<Traits>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.getNodeParent, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -12462,22 +12453,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function getNodePreviousSibling<Traits>(source:Node<Traits>):Null<NodeOf<Traits>> {
+  public static function getNodePreviousSibling<Traits>(source:Dynamic):Null<NodeOf<Traits>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.getNodePreviousSibling, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNodeRoot<Traits>(source:Node<Traits>):NodeOf<Traits> {
+  public static function getNodeRoot<Traits>(source:Dynamic):NodeOf<Traits> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.getNodeRoot, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNodeRuntime<Traits>(source:Node<Traits>):NodeRuntime<Traits> {
+  public static function getNodeRuntime<Traits>(source:Dynamic):NodeRuntime<Traits> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.getNodeRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNodeSignals<Traits>(source:Node<Traits>):Null<NodeSignals> {
+  public static function getNodeSignals<Traits>(source:Dynamic):Null<NodeSignals> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.getNodeSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -12515,7 +12506,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getNodeWorldTransformRevision<Traits>(source:Node<Traits>):Float {
+  public static function getNodeWorldTransformRevision<Traits>(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.getNodeWorldTransformRevision, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -13793,12 +13784,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getTweenProgress(tween:Tween<Dynamic>):Float {
+  public static function getTweenProgress(tween:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.getTweenProgress, cast ([tween] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTweensOf(manager:TweenManager, target:Dynamic):Array<Tween<Dynamic>> {
+  public static function getTweensOf(manager:TweenManager, target:Dynamic):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.getTweensOf, cast ([manager, target] : Array<Dynamic>));
     return cast null;
   }
@@ -14475,7 +14466,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasSignalSlots<T>(signal:Signal<Dynamic>):Bool {
+  public static function hasSignalSlots<T>(signal:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_signals_Slot.hasSignalSlots, cast ([signal] : Array<Dynamic>));
     return cast null;
   }
@@ -14550,17 +14541,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function hitTestGraphLocalBounds<Traits>(source:Node<Traits>, x:Float, y:Float):Bool {
+  public static function hitTestGraphLocalBounds<Traits>(source:Dynamic, x:Float, y:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_HitTests.hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestGraphPoint<Traits>(source:Node<Traits>, x:Float, y:Float):Bool {
+  public static function hitTestGraphPoint<Traits>(source:Dynamic, x:Float, y:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_HitTests.hitTestGraphPoint, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestGraphPointPrecise<Traits>(source:Node<Traits>, x:Float, y:Float):Bool {
+  public static function hitTestGraphPointPrecise<Traits>(source:Dynamic, x:Float, y:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_HitTests.hitTestGraphPointPrecise, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
@@ -14704,7 +14695,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix4.interpolateMatrix4, cast ([out, a, b, t] : Array<Dynamic>));
   }
 
-  public static function interpolateSnapshots<T>(a:Snapshot<Dynamic>, b:Snapshot<Dynamic>, t:Float, out:Dynamic, ?schema:SnapshotSchema):Void {
+  public static function interpolateSnapshots<T>(a:Dynamic, b:Dynamic, t:Float, out:Dynamic, ?schema:SnapshotSchema):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_snapshot_InterpolateSnapshots.interpolateSnapshots, cast ([a, b, t, out, schema] : Array<Dynamic>));
   }
 
@@ -14777,7 +14768,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.invalidateClipRegion, cast ([clip] : Array<Dynamic>));
   }
 
-  public static function invalidateContent<Traits>(target:Node<Traits>):Void {
+  public static function invalidateContent<Traits>(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.invalidateContent, cast ([target] : Array<Dynamic>));
   }
 
@@ -14793,39 +14784,39 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResource.invalidateImageResource, cast ([resource] : Array<Dynamic>));
   }
 
-  public static function invalidateNode<Traits>(target:Node<Traits>):Void {
+  public static function invalidateNode<Traits>(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.invalidateNode, cast ([target] : Array<Dynamic>));
   }
 
-  public static function invalidateNodeAppearance<Traits>(target:Node<Traits>):Void {
+  public static function invalidateNodeAppearance<Traits>(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.invalidateNodeAppearance, cast ([target] : Array<Dynamic>));
   }
 
-  public static function invalidateNodeLocalBounds<Traits>(target:Node<Traits>):Void {
+  public static function invalidateNodeLocalBounds<Traits>(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.invalidateNodeLocalBounds, cast ([target] : Array<Dynamic>));
   }
 
-  public static function invalidateNodeLocalContent<Traits>(target:Node<Traits>):Void {
+  public static function invalidateNodeLocalContent<Traits>(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.invalidateNodeLocalContent, cast ([target] : Array<Dynamic>));
   }
 
-  public static function invalidateNodeLocalTransform<Traits>(target:Node<Traits>):Void {
+  public static function invalidateNodeLocalTransform<Traits>(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.invalidateNodeLocalTransform, cast ([target] : Array<Dynamic>));
   }
 
-  public static function invalidateNodeParentReference<Traits>(target:Node<Traits>):Void {
+  public static function invalidateNodeParentReference<Traits>(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.invalidateNodeParentReference, cast ([target] : Array<Dynamic>));
   }
 
-  public static function invalidateNodeRender<Traits>(target:Node<Traits>):Void {
+  public static function invalidateNodeRender<Traits>(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.invalidateNodeRender, cast ([target] : Array<Dynamic>));
   }
 
-  public static function invalidateNodeWorldBounds<Traits>(target:Node<Traits>):Void {
+  public static function invalidateNodeWorldBounds<Traits>(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.invalidateNodeWorldBounds, cast ([target] : Array<Dynamic>));
   }
 
-  public static function invalidateTween(tween:Tween<Dynamic>):Void {
+  public static function invalidateTween(tween:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.invalidateTween, cast ([tween] : Array<Dynamic>));
   }
 
@@ -15174,7 +15165,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function isNodeAncestorOf<Traits>(ancestor:Node<Traits>, descendant:Node<Traits>):Bool {
+  public static function isNodeAncestorOf<Traits>(ancestor:Dynamic, descendant:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.isNodeAncestorOf, cast ([ancestor, descendant] : Array<Dynamic>));
     return cast null;
   }
@@ -15184,7 +15175,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function isNodeFocused<N>(manager:FocusManager<Dynamic>, node:Dynamic):Bool {
+  public static function isNodeFocused<N>(manager:Dynamic, node:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_FocusManager.isNodeFocused, cast ([manager, node] : Array<Dynamic>));
     return cast null;
   }
@@ -15354,7 +15345,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function isSlotConnected<T>(signal:Signal<Dynamic>, slot:Dynamic):Bool {
+  public static function isSlotConnected<T>(signal:Dynamic, slot:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_signals_Slot.isSlotConnected, cast ([signal, slot] : Array<Dynamic>));
     return cast null;
   }
@@ -16776,7 +16767,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.pauseSpritesheetPlayer, cast ([player] : Array<Dynamic>));
   }
 
-  public static function pauseTween(tween:Tween<Dynamic>):Void {
+  public static function pauseTween(tween:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.pauseTween, cast ([tween] : Array<Dynamic>));
   }
 
@@ -17307,7 +17298,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function refreshInteractionSpatialIndex<N>(manager:InteractionManager<Dynamic>):Void {
+  public static function refreshInteractionSpatialIndex<N>(manager:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionSpatialIndex.refreshInteractionSpatialIndex, cast ([manager] : Array<Dynamic>));
   }
 
@@ -17895,7 +17886,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_input_InputManager.releaseInputPointerCapture, cast ([element, pointerId] : Array<Dynamic>));
   }
 
-  public static function releaseInteractionPointer<N>(manager:InteractionManager<Dynamic>, pointerId:Float):Void {
+  public static function releaseInteractionPointer<N>(manager:Dynamic, pointerId:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionManager.releaseInteractionPointer, cast ([manager, pointerId] : Array<Dynamic>));
   }
 
@@ -18004,17 +17995,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function removeNodeChild<Traits>(target:Node<Traits>, child:Node<Traits>):NodeOf<Traits> {
+  public static function removeNodeChild<Traits>(target:Dynamic, child:Dynamic):NodeOf<Traits> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.removeNodeChild, cast ([target, child] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function removeNodeChildAt<Traits>(target:Node<Traits>, index:Float):Null<NodeOf<Traits>> {
+  public static function removeNodeChildAt<Traits>(target:Dynamic, index:Float):Null<NodeOf<Traits>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.removeNodeChildAt, cast ([target, index] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function removeNodeChildren<Traits>(target:Node<Traits>, ?beginIndex:Float, ?endIndex:Float):Void {
+  public static function removeNodeChildren<Traits>(target:Dynamic, ?beginIndex:Float, ?endIndex:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.removeNodeChildren, cast ([target, beginIndex, endIndex] : Array<Dynamic>));
   }
 
@@ -18144,7 +18135,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_flow_ReplaceFlowState.replaceFlowState, cast ([stack, state] : Array<Dynamic>));
   }
 
-  public static function replaceNodeChild<Traits>(target:Node<Traits>, oldChild:Node<Traits>, newChild:Node<Traits>):Void {
+  public static function replaceNodeChild<Traits>(target:Dynamic, oldChild:Dynamic, newChild:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.replaceNodeChild, cast ([target, oldChild, newChild] : Array<Dynamic>));
   }
 
@@ -18429,11 +18420,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function restartTween(tween:Tween<Dynamic>, ?includeDelay:Dynamic):Void {
+  public static function restartTween(tween:Dynamic, ?includeDelay:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.restartTween, cast ([tween, includeDelay] : Array<Dynamic>));
   }
 
-  public static function restoreSnapshot<T>(snapshot:Snapshot<Dynamic>, target:Dynamic):Void {
+  public static function restoreSnapshot<T>(snapshot:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_snapshot_RestoreSnapshot.restoreSnapshot, cast ([snapshot, target] : Array<Dynamic>));
   }
 
@@ -18473,7 +18464,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.resumeSpritesheetPlayer, cast ([player] : Array<Dynamic>));
   }
 
-  public static function resumeTween(tween:Tween<Dynamic>):Void {
+  public static function resumeTween(tween:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.resumeTween, cast ([tween] : Array<Dynamic>));
   }
 
@@ -18697,7 +18688,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.seekSpritesheetPlayerToTime, cast ([player, time] : Array<Dynamic>));
   }
 
-  public static function seekTween(tween:Tween<Dynamic>, timeSeconds:Float):Void {
+  public static function seekTween(tween:Dynamic, timeSeconds:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.seekTween, cast ([tween, timeSeconds] : Array<Dynamic>));
   }
 
@@ -19139,7 +19130,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_filesystem_Filesystem.setFileSystemBackend, cast ([backend] : Array<Dynamic>));
   }
 
-  public static function setFocusedNode<N>(manager:FocusManager<Dynamic>, node:Null<Dynamic>):Bool {
+  public static function setFocusedNode<N>(manager:Dynamic, node:Null<Dynamic>):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_FocusManager.setFocusedNode, cast ([manager, node] : Array<Dynamic>));
     return cast null;
   }
@@ -19453,7 +19444,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_net_Net.setNetBackend, cast ([backend] : Array<Dynamic>));
   }
 
-  public static function setNodeChildIndex<Traits>(target:Node<Traits>, child:Node<Traits>, index:Float):Void {
+  public static function setNodeChildIndex<Traits>(target:Dynamic, child:Dynamic, index:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.setNodeChildIndex, cast ([target, child, index] : Array<Dynamic>));
   }
 
@@ -19461,7 +19452,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_NodeInteractionState.setNodeCursor, cast ([source, cursor] : Array<Dynamic>));
   }
 
-  public static function setNodeEnabled<Traits>(target:Node<Traits>, value:Bool):Void {
+  public static function setNodeEnabled<Traits>(target:Dynamic, value:Bool):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.setNodeEnabled, cast ([target, value] : Array<Dynamic>));
   }
 
@@ -20049,7 +20040,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_tray_Tray.setTrayPressedIcon, cast ([tray, icon] : Array<Dynamic>));
   }
 
-  public static function setTweenProgress(tween:Tween<Dynamic>, progress:Float):Void {
+  public static function setTweenProgress(tween:Dynamic, progress:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.setTweenProgress, cast ([tween, progress] : Array<Dynamic>));
   }
 
@@ -20567,7 +20558,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_timeline_Timeline.stopTimeline, cast ([timeline] : Array<Dynamic>));
   }
 
-  public static function stopTween(tween:Tween<Dynamic>, ?options:StopTweenOptions):Void {
+  public static function stopTween(tween:Dynamic, ?options:StopTweenOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.stopTween, cast ([tween, options] : Array<Dynamic>));
   }
 
@@ -20636,11 +20627,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_shortcut_Shortcut.suspendAllGlobalShortcuts, cast ([] : Array<Dynamic>));
   }
 
-  public static function swapNodeChildren<Traits>(target:Node<Traits>, child1:Node<Traits>, child2:Node<Traits>):Void {
+  public static function swapNodeChildren<Traits>(target:Dynamic, child1:Dynamic, child2:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.swapNodeChildren, cast ([target, child1, child2] : Array<Dynamic>));
   }
 
-  public static function swapNodeChildrenAt<Traits>(target:Node<Traits>, index1:Float, index2:Float):Void {
+  public static function swapNodeChildrenAt<Traits>(target:Dynamic, index1:Float, index2:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.swapNodeChildrenAt, cast ([target, index1, index2] : Array<Dynamic>));
   }
 
@@ -21301,7 +21292,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function walkNodeDescendants<Traits>(source:Node<Traits>, visit:NodeDescendantVisitor<Traits>):Bool {
+  public static function walkNodeDescendants<Traits>(source:Dynamic, visit:NodeDescendantVisitor<Traits>):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.walkNodeDescendants, cast ([source, visit] : Array<Dynamic>));
     return cast null;
   }

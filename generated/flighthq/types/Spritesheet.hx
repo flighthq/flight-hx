@@ -3,10 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.SpritesheetAnimation;
-import flighthq.types.SpritesheetFrame;
-import flighthq.types.TextureAtlas;
 
 typedef Spritesheet = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var atlas:Null<TextureAtlas>; var animations:Dynamic; var frames:Array<SpritesheetFrame>; };

@@ -4,7 +4,6 @@ package flighthq.sceneGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.mesh.MeshGeometry.getMeshGeometrySkinBindPose;
-import flighthq.sceneGl.GlSceneRuntime.GlMeshUpload;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
 import flighthq.types.GlRenderState;
 import flighthq.types.MeshGeometry;
@@ -13,7 +12,7 @@ import flighthq.types.MeshSkinBindPose;
 
 @:expose("flighthq.sceneGl.GlMeshUpload")
 class GlMeshUpload {
-  public static function destroyGlMeshUpload(state:GlRenderState, upload:GlMeshUpload):Void {
+  public static function destroyGlMeshUpload(state:GlRenderState, upload:Dynamic):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     _Runtime.callProperty(gl, 'deleteVertexArray', cast ([_Runtime.field(upload, 'vao')] : Array<Dynamic>));
@@ -21,7 +20,7 @@ class GlMeshUpload {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null))) { _Runtime.callProperty(gl, 'deleteBuffer', cast ([_Runtime.field(upload, 'indexBuffer')] : Array<Dynamic>)); }
   }
 
-  public static function ensureGlMeshUpload(state:GlRenderState, geometry:MeshGeometry, gpuSkinned:Dynamic = false):GlMeshUpload {
+  public static function ensureGlMeshUpload(state:GlRenderState, geometry:MeshGeometry, gpuSkinned:Dynamic = false):Dynamic {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var upload:Dynamic = cast _Runtime.UNDEFINED;

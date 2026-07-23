@@ -11,14 +11,13 @@ import flighthq.types.HtmlView;
 import flighthq.types.HtmlView.HtmlViewData;
 import flighthq.types.HtmlView.HtmlViewRuntime;
 import flighthq.types.MethodsOf;
-import flighthq.types.Node;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
 import flighthq.types._internal._HtmlViewValues.HtmlViewKind;
 
 @:expose("flighthq.displayobject.HtmlView")
 class HtmlView {
-  public static function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field((cast source : HtmlView), 'data');
     _Runtime.setField(out, 'width', _Runtime.field(data, 'width'));

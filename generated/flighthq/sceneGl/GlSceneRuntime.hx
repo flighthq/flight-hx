@@ -7,7 +7,6 @@ import flighthq.renderGl.GlRenderTarget.destroyGlRenderTarget;
 import flighthq.renderGl.GlSkinPaletteTexture.createGlSkinPaletteTexture;
 import flighthq.renderGl.GlSkinPaletteTexture.destroyGlSkinPaletteTexture;
 import flighthq.sceneGl.GlEnvironmentIblBake.destroyGlBakePrograms;
-import flighthq.sceneGl.GlMeshProgram;
 import flighthq.shading.ModifierRegistry;
 import flighthq.types.Entity.Kind;
 import flighthq.types.GlMeshMaterialRenderer;
@@ -27,4 +26,4 @@ typedef GlSceneDrawEntry = { var alpha:Float; var clipW:Float; var material:Dyna
 
 typedef GlSceneRuntime = { var activeMeshProgram:Null<GlMeshProgram>; var activeSkinnedRun:Bool; var blendedDrawList:Array<GlSceneDrawEntry>; var blendedPool:Array<GlSceneDrawEntry>; @:optional var colorSpaceGuard:Null<Dynamic>; @:optional var customShaderGuard:Null<Dynamic>; var environmentSourceCube:Null<Dynamic>; var ibl:Null<GlSceneIbl>; var iblBakeFramebuffer:Null<Dynamic>; var materialRegistry:Dynamic; var modifierSnippetRegistry:Null<ModifierRegistry>; var opaqueDrawList:Array<GlSceneDrawEntry>; var opaquePool:Array<GlSceneDrawEntry>; var programCache:Dynamic; var shadow:Null<GlSceneShadow>; var shadowTarget:Null<GlRenderTarget>; var skinPalette:Null<GlSkinPaletteTexture>; var time:Float; var uploadCache:Dynamic; };
 
-typedef GlMeshUpload = { var indexBuffer:Null<Dynamic>; var indexCount:Float; var indexType:Float; @:optional var skinBindUploaded:Bool; var vao:Dynamic; var version:Float; var vertexBuffer:Dynamic; };
+private typedef GlMeshUpload = { var indexBuffer:Null<Dynamic>; var indexCount:Float; var indexType:Float; @:optional var skinBindUploaded:Bool; var vao:Dynamic; var version:Float; var vertexBuffer:Dynamic; };

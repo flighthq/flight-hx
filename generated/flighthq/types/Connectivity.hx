@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Signal;
 
 typedef ConnectivityConnectionType = String;
 
@@ -15,4 +14,4 @@ typedef ConnectivityReachabilityOptions = { var url:String; @:optional var timeo
 
 typedef ConnectivityBackend = { var getStatus:Dynamic; @:optional var detectReachability:Dynamic; var subscribe:Dynamic; };
 
-typedef Connectivity = { var onChange:Signal<Dynamic>; var onConnectionTypeChange:Signal<Dynamic>; var onMeteredChange:Signal<Dynamic>; var onOnline:Signal<Dynamic>; var onOffline:Signal<Dynamic>; };
+typedef Connectivity = { var onChange:Dynamic; var onConnectionTypeChange:Dynamic; var onMeteredChange:Dynamic; var onOnline:Dynamic; var onOffline:Dynamic; };

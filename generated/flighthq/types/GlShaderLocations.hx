@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.GlShader;
 
 typedef GlShaderLocations = { var program:Dynamic; var locPosition:Float; var locTexCoord:Float; var locMatrix:Dynamic; var locAlpha:Dynamic; @:optional var locColorMultiplier:Dynamic; @:optional var locColorOffset:Dynamic; @:optional var locHasColorTransform:Dynamic; var locTexture:Dynamic; };
 

@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ShortcutModifier;
 
 typedef ParsedAccelerator = { var key:String; var modifiers:Array<ShortcutModifier>; };

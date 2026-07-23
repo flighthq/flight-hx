@@ -3,7 +3,6 @@ package flighthq.sceneGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.sceneGl.GlLitProgram;
 import flighthq.sceneGl.GlShadedModifierSnippet.GlModifierSnippet;
 import flighthq.sceneGl._internal._GlLitProgramValues.GL_MESH_LIGHT_BLOCK_GLSL;
 import flighthq.sceneGl._internal._GlLitProgramValues.resolveGlLitLocations;

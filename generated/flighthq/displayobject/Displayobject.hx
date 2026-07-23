@@ -26,7 +26,6 @@ import flighthq.types.Entity.Kind;
 import flighthq.types.HtmlView;
 import flighthq.types.HtmlView.HtmlViewData;
 import flighthq.types.HtmlView.HtmlViewRuntime;
-import flighthq.types.Node;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
@@ -46,19 +45,19 @@ class Displayobject {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_DisplayObject.addDisplayObjectColorAdjustment, cast ([source, adjustment] : Array<Dynamic>));
   }
 
-  public static function computeBitmapLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeBitmapLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_Bitmap.computeBitmapLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_HtmlView.computeHtmlViewLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function computeRenderViewLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeRenderViewLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_RenderView.computeRenderViewLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function computeVideoLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeVideoLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_Video.computeVideoLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 

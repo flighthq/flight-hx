@@ -6,11 +6,8 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.Node.NodeData;
 import flighthq.types.Node.NodeRuntime;
-import flighthq.types.Quaternion;
-import flighthq.types.SceneNode;
 import flighthq.types.SceneNode.SceneNodeRuntime;
 import flighthq.types.SceneNode.SceneNodeTraits;
-import flighthq.types.Vector3;
 
 typedef Group = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<SceneNodeTraits>>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; };
 

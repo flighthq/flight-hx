@@ -3,8 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.TiledObject;
-import flighthq.types.TiledProperty;
 
 typedef TiledTilesetTileFrame = { var tileId:Float; var duration:Float; };
 

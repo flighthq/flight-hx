@@ -3,17 +3,9 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.BlendMode;
 import flighthq.types.DisplayObjectRenderer.DisplayObjectClipHooks;
-import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
-import flighthq.types.Matrix;
-import flighthq.types.RenderProxy;
-import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderProxyAdapter;
-import flighthq.types.Renderable;
-import flighthq.types.Renderer;
 
 typedef SceneGraphSyncPolicy = String;
 

@@ -3,7 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.AdjustmentKind;
-import flighthq.types.ColorMatrixAdjustment;
 
 typedef InvertAdjustment = { var kind:AdjustmentKind; var colorMatrix:Array<Float>; @:optional var intensity:Float; };

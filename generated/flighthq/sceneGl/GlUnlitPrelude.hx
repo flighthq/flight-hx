@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.hasImageResourcePixels;
 import flighthq.renderGl.GlDraw.bindGlImageResourceTexture;
 import flighthq.renderGl.GlDraw.bindGlVideoTexture;
-import flighthq.sceneGl.GlMeshProgram;
 import flighthq.sceneGl._internal._GlMeshProgramValues.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
 import flighthq.sceneGl._internal._GlMeshProgramValues.GL_UV_TRANSFORM_VERTEX_GLSL;
 import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;

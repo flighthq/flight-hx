@@ -3,8 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.PathBooleanFillRule;
-import flighthq.types.PathBooleanOperation;
 
 typedef PathBooleanContour = Array<Float>;
 

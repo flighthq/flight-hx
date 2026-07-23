@@ -13,7 +13,6 @@ import flighthq.text.TextLabelLayout.getTextLayout;
 import flighthq.textlayout.TextBounds.computeTextBoundsRectangle;
 import flighthq.textlayout.TextFormatRange.createTextFormatRange;
 import flighthq.types.MethodsOf;
-import flighthq.types.Node;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
 import flighthq.types.TextAutoSize;
@@ -41,7 +40,7 @@ class TextLabel {
     _Runtime.callValue(TextLabel.invalidateTextLabelContent__textLabel, cast ([source] : Array<Dynamic>));
   }
 
-  public static function computeTextLabelLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeTextLabelLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     var label:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var layout:Dynamic = cast _Runtime.UNDEFINED;

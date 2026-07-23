@@ -4,7 +4,5 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Screen.ScreenInfo;
-import flighthq.types.ScreenChangeEvent;
-import flighthq.types.Signal;
 
-typedef ScreenSignals = { var onScreenAdded:Signal<Dynamic>; var onScreenMetricsChanged:Signal<Dynamic>; var onScreenRemoved:Signal<Dynamic>; };
+typedef ScreenSignals = { var onScreenAdded:Dynamic; var onScreenMetricsChanged:Dynamic; var onScreenRemoved:Dynamic; };

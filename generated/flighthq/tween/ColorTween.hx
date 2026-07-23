@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Slot.connectSignal;
 import flighthq.tween.Tween.createTween;
-import flighthq.types.Tween;
 import flighthq.types.TweenManager;
 import flighthq.types.TweenOptions;
 
@@ -13,7 +12,7 @@ typedef ColorComponents__colorTween = { var b:Float; var g:Float; var r:Float; }
 
 @:expose("flighthq.tween.ColorTween")
 class ColorTween {
-  public static function createColorTween(manager:TweenManager, target:Dynamic, property:String, duration:Float, toColor:Float, ?options:TweenOptions):Tween<ColorComponents__colorTween> {
+  public static function createColorTween(manager:TweenManager, target:Dynamic, property:String, duration:Float, toColor:Float, ?options:TweenOptions):Dynamic {
     var fromColor:Dynamic = cast _Runtime.UNDEFINED;
     var components:ColorComponents__colorTween = cast _Runtime.UNDEFINED;
     var tween:Dynamic = cast _Runtime.UNDEFINED;

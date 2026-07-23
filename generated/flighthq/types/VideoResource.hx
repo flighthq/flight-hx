@@ -3,11 +3,10 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Signal;
 
 typedef VideoChannelState = String;
 
-typedef VideoChannel = { var currentTime:Float; var gain:Float; var length:Float; var loops:Float; var playbackRate:Float; var source:VideoResource; var state:VideoChannelState; var onComplete:Signal<Dynamic>; };
+typedef VideoChannel = { var currentTime:Float; var gain:Float; var length:Float; var loops:Float; var playbackRate:Float; var source:VideoResource; var state:VideoChannelState; var onComplete:Dynamic; };
 
 typedef VideoPlayOptions = { @:optional var currentTime:Float; @:optional var gain:Float; @:optional var loops:Float; @:optional var playbackRate:Float; };
 

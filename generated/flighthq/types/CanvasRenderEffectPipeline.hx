@@ -3,11 +3,7 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.CanvasRenderState;
-import flighthq.types.CanvasRenderTarget;
-import flighthq.types.ColorLutCache;
 import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
-import flighthq.types.RenderEffect;
 
 typedef CanvasRenderEffectContext = { var state:Dynamic; var source:Dynamic; var dest:Dynamic; var pool:Dynamic; };
 

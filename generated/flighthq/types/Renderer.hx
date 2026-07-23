@@ -3,10 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.BatchFormat;
-import flighthq.types.RenderProxy;
-import flighthq.types.RenderState;
-import flighthq.types.Renderable;
-import flighthq.types.RendererData;
 
 typedef Renderer = { @:optional var format:BatchFormat; var createData:Dynamic; @:optional var destroyData:Dynamic; var submit:Dynamic; };

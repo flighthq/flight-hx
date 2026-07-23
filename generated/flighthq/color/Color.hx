@@ -4,8 +4,6 @@ package flighthq.color;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.ColorFromKelvin as Facade_Color_flighthq_color_ColorFromKelvin;
-import flighthq.color.HslColor;
-import flighthq.color.HsvColor;
 import flighthq.color.LerpColor as Facade_Color_flighthq_color_LerpColor;
 import flighthq.color.Luminance as Facade_Color_flighthq_color_Luminance;
 import flighthq.color.Oklab as Facade_Color_flighthq_color_Oklab;

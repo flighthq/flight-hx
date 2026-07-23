@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Signal;
 
-typedef ParticleEmitterSignals = { var onParticleSpawn:Signal<Dynamic>; var onParticleDeath:Signal<Dynamic>; var onEmitterComplete:Signal<Dynamic>; };
+typedef ParticleEmitterSignals = { var onParticleSpawn:Dynamic; var onParticleDeath:Dynamic; var onEmitterComplete:Dynamic; };

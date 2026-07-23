@@ -3,7 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.SpritesheetAnimationData;
-import flighthq.types.SpritesheetFrameData;
 
 typedef SpritesheetData = { var animations:Array<SpritesheetAnimationData>; var frames:Array<SpritesheetFrameData>; var imageFile:String; var imageHeight:Float; var imageWidth:Float; var scale:Float; };

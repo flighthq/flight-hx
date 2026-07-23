@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.DisplayObject;
-import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderState;
 
 typedef RenderProxyResolver = { var resolve:Dynamic; };

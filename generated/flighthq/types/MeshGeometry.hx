@@ -3,11 +3,7 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Aabb;
-import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.MeshMorphBindPose;
-import flighthq.types.MeshSkinBindPose;
 
 typedef VertexSemantic = String;
 

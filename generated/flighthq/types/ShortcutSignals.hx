@@ -3,7 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ShortcutEvent;
-import flighthq.types.Signal;
 
-typedef ShortcutSignals = { var onTrigger:Signal<Dynamic>; };
+typedef ShortcutSignals = { var onTrigger:Dynamic; };

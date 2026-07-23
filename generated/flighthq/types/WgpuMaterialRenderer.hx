@@ -3,8 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Material;
 import flighthq.types.Material.MaterialData;
-import flighthq.types.WgpuRenderState;
 
 typedef WgpuMaterialRenderer = { var instanceFloatCount:Float; var getShaderModule:Dynamic; @:optional var packInstance:Dynamic; };

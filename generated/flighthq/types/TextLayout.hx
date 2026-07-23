@@ -3,12 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.TextAutoSize;
-import flighthq.types.TextDirection;
-import flighthq.types.TextFormat;
-import flighthq.types.TextFormatRange;
-import flighthq.types.TextJustification;
-import flighthq.types.TextVerticalAlign;
 
 typedef TextMeasureFunction = Dynamic;
 

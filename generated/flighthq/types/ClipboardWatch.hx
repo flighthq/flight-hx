@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Signal;
 
-typedef ClipboardWatch = { var onChange:Signal<Dynamic>; };
+typedef ClipboardWatch = { var onChange:Dynamic; };

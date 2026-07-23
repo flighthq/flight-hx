@@ -13,7 +13,6 @@ import flighthq.types.NativeText;
 import flighthq.types.NativeText.NativeTextData;
 import flighthq.types.NativeText.NativeTextRuntime;
 import flighthq.types.NativeText.NativeTextStyle;
-import flighthq.types.Node;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
 import flighthq.types.TextAutoSize;
@@ -22,7 +21,7 @@ import flighthq.types._internal._NativeTextValues.NativeTextKind;
 
 @:expose("flighthq.text.NativeText")
 class NativeText {
-  public static function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     var native:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;

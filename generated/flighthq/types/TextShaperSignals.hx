@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Signal;
 import flighthq.types.TextShaper.TextShaperBackend;
 
-typedef TextShaperSignals = { var onBackendChanged:Signal<Dynamic>; };
+typedef TextShaperSignals = { var onBackendChanged:Dynamic; };

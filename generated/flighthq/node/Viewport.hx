@@ -10,7 +10,6 @@ import flighthq.types.HasBoundsRectangle.HasBoundsRectangleRuntime;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Node.NodeTraits;
 import flighthq.types.Rectangle;
-import flighthq.types.Viewport;
 import flighthq.types.ViewportAlign;
 
 @:expose("flighthq.node.Viewport")
@@ -39,7 +38,7 @@ class Viewport {
     return cast null;
   }
 
-  public static function computeViewportRenderTransform<Traits>(out:MatrixLike, scene:Viewport<Traits>, viewWidth:Float, viewHeight:Float):Void {
+  public static function computeViewportRenderTransform<Traits>(out:MatrixLike, scene:Dynamic, viewWidth:Float, viewHeight:Float):Void {
     var contentWidth:Dynamic = cast _Runtime.UNDEFINED;
     var contentHeight:Dynamic = cast _Runtime.UNDEFINED;
     var sx:Float = cast _Runtime.UNDEFINED;
@@ -84,8 +83,8 @@ class Viewport {
     _Runtime.setField(out, 'ty', _Runtime.callValue(computeViewportAlignY, cast ([(contentHeight * sy), viewHeight, _Runtime.field(scene, 'align')] : Array<Dynamic>)));
   }
 
-  public static function createViewport<Traits>(?obj:Dynamic):Viewport<Traits> {
-    return cast (cast _Runtime.callValue(createEntity, cast ([{ align: _Runtime.coalesce(_Runtime.optionalField(obj, 'align'), function():Dynamic return cast 'topleft'), root: _Runtime.coalesce(_Runtime.optionalField(obj, 'root'), function():Dynamic return cast null), scaleMode: _Runtime.coalesce(_Runtime.optionalField(obj, 'scaleMode'), function():Dynamic return cast 'noscale') }] : Array<Dynamic>)) : Viewport<Traits>);
+  public static function createViewport<Traits>(?obj:Dynamic):Dynamic {
+    return cast (cast _Runtime.callValue(createEntity, cast ([{ align: _Runtime.coalesce(_Runtime.optionalField(obj, 'align'), function():Dynamic return cast 'topleft'), root: _Runtime.coalesce(_Runtime.optionalField(obj, 'root'), function():Dynamic return cast null), scaleMode: _Runtime.coalesce(_Runtime.optionalField(obj, 'scaleMode'), function():Dynamic return cast 'noscale') }] : Array<Dynamic>)) : Dynamic);
     return cast null;
   }
 

@@ -3,9 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.AdjustmentKind;
-import flighthq.types.ColorLut;
-import flighthq.types.ColorLutAdjustment;
-import flighthq.types.ColorTransformFunction;
 
 typedef LookupTableGradeAdjustment = { var kind:AdjustmentKind; var transform:ColorTransformFunction; @:optional var lut:ColorLut; @:optional var strength:Float; };

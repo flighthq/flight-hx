@@ -16,7 +16,6 @@ import flighthq.clock.ResetClock as Facade_Clock_flighthq_clock_ResetClock;
 import flighthq.clock.SetClockScale as Facade_Clock_flighthq_clock_SetClockScale;
 import flighthq.types.Clock;
 import flighthq.types.ClockOptions;
-import flighthq.types.Signal;
 
 @:expose("flighthq.clock.Clock")
 class Clock {
@@ -42,7 +41,7 @@ class Clock {
     _Runtime.callValue(Facade_Clock_flighthq_clock_DisposeClock.disposeClock, cast ([clock] : Array<Dynamic>));
   }
 
-  public static function enableClockSignals(clock:Clock):Signal<Dynamic> {
+  public static function enableClockSignals(clock:Clock):Dynamic {
     return cast _Runtime.callValue(Facade_Clock_flighthq_clock_EnableClockSignals.enableClockSignals, cast ([clock] : Array<Dynamic>));
     return cast null;
   }

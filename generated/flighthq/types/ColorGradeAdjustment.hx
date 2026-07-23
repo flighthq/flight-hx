@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.AdjustmentKind;
-import flighthq.types.ColorLutAdjustment;
-import flighthq.types.ColorTransformFunction;
 
 typedef ColorGradeAdjustment = { var kind:AdjustmentKind; var transform:ColorTransformFunction; @:optional var exposure:Float; @:optional var brightness:Float; @:optional var contrast:Float; @:optional var saturation:Float; @:optional var temperature:Float; @:optional var tint:Float; @:optional var lift:Float; @:optional var gamma:Float; @:optional var gain:Float; };

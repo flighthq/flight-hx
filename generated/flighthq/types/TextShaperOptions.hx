@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.FontVariation;
-import flighthq.types.TextDirection;
-import flighthq.types.TextFeature;
 
 typedef TextShaperOptions = { @:optional var direction:TextDirection; @:optional var features:Array<TextFeature>; @:optional var language:String; @:optional var script:String; @:optional var variations:Array<FontVariation>; };

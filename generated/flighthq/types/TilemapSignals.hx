@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Signal;
 
-typedef TilemapSignals = { var onCleared:Signal<Dynamic>; var onTileChanged:Signal<Dynamic>; var onTilesChanged:Signal<Dynamic>; };
+typedef TilemapSignals = { var onCleared:Dynamic; var onTileChanged:Dynamic; var onTilesChanged:Dynamic; };

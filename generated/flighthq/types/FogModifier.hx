@@ -3,9 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Modifier;
-import flighthq.types.ModifierKind;
-import flighthq.types.ModifierSlot;
 
 typedef FogModifierMode = Dynamic;
 

@@ -7,7 +7,6 @@ import flighthq.types.HasAppearance;
 import flighthq.types.HasAppearance.HasAppearanceRuntime;
 import flighthq.types.HasTransform3D;
 import flighthq.types.HasTransform3D.HasTransform3DRuntime;
-import flighthq.types.Node;
 import flighthq.types.Node.NodeRuntime;
 
 @:expose("flighthq.types._internal._SceneNodeValues")

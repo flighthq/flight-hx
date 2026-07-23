@@ -4,6 +4,5 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.Kind;
-import flighthq.types.RenderEffect;
 
 typedef SketchEffect = { var kind:Kind; @:optional var strength:Float; };

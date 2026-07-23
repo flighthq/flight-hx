@@ -3,9 +3,7 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Vector3;
 import flighthq.types.Vector3.Vector3Like;
 
 typedef Aabb = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var max:Vector3; var min:Vector3; };

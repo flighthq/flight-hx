@@ -3,15 +3,14 @@ package flighthq.signals;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Signal;
 
 @:expose("flighthq.signals.Emitter")
 class Emitter {
-  public static function cancelSignal<T>(signal:Signal<Dynamic>):Void {
+  public static function cancelSignal<T>(signal:Dynamic):Void {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(signal, 'data'), null))) { _Runtime.setField(_Runtime.field(signal, 'data'), 'cancelled', true); }
   }
 
-  public static function emitSignal<T>(signal:Signal<Dynamic>, ...args:Dynamic):Void {
+  public static function emitSignal<T>(signal:Dynamic, ...args:Dynamic):Void {
     _Runtime.apply((cast _Runtime.field(signal, 'emit') : Dynamic), _Runtime.concatArrays([_Runtime.toArray(args)]));
   }
 }

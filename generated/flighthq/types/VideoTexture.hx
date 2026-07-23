@@ -3,14 +3,9 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.EntityWithoutRuntime;
-import flighthq.types.Sampler;
 import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.TextureUvTransform;
-import flighthq.types.Vector2;
-import flighthq.types.VideoResource;
 
 typedef VideoTexture = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var colorSpace:TextureColorSpace; var frameId:Float; var sampler:Sampler; var source:VideoResource; };
 

@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Matrix4;
-import flighthq.types.Mesh;
-import flighthq.types.SceneLightBlock;
 
 typedef SceneRenderList = { var lights:SceneLightBlock; var meshCount:Float; var viewProjection:Matrix4; var visibleMeshes:Array<Mesh>; };

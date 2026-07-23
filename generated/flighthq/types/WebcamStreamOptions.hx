@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.WebcamFacingMode;
 
 typedef WebcamStreamOptions = { @:optional var audio:Bool; @:optional var deviceId:String; @:optional var facingMode:WebcamFacingMode; @:optional var frameRate:Float; @:optional var height:Float; @:optional var width:Float; };

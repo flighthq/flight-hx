@@ -3,7 +3,6 @@ package flighthq.sceneGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.sceneGl.GlMeshProgram;
 import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
 import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
 import flighthq.types.GlRenderState;

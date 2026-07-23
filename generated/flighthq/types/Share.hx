@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ShareFile;
 
 typedef ShareContent = { @:optional var title:String; @:optional var text:String; @:optional var url:String; @:optional var files:Array<ShareFile>; };
 

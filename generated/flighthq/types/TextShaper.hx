@@ -3,11 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.FontMetrics;
-import flighthq.types.GlyphExtents;
-import flighthq.types.ShapedRun;
-import flighthq.types.TextDirection;
-import flighthq.types.TextFormat;
 import flighthq.types.TextLayout.TextMeasureFunction;
 
 typedef ShapeRunOptions = { @:optional var direction:TextDirection; @:optional var script:String; };

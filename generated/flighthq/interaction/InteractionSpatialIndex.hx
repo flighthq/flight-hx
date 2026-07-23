@@ -11,14 +11,13 @@ import flighthq.spatial.SpatialIndex.clearSpatialIndex;
 import flighthq.spatial.SpatialIndex.insertSpatialObject;
 import flighthq.spatial.SpatialIndex.querySpatialPoint;
 import flighthq.types.DisplayObject;
-import flighthq.types.InteractionManager;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.Spatial.SpatialAabb;
 import flighthq.types.Spatial.SpatialObjectId;
 
 @:expose("flighthq.interaction.InteractionSpatialIndex")
 class InteractionSpatialIndex {
-  public static function findSpatialInteractionTarget<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, precise:Bool = false):Null<Dynamic> {
+  public static function findSpatialInteractionTarget<N>(manager:Dynamic, x:Float, y:Float, precise:Bool = false):Null<Dynamic> {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     var nodes:Dynamic = cast _Runtime.UNDEFINED;
     var best:Null<Dynamic> = cast _Runtime.UNDEFINED;
@@ -47,7 +46,7 @@ class InteractionSpatialIndex {
     return cast null;
   }
 
-  public static function refreshInteractionSpatialIndex<N>(manager:InteractionManager<Dynamic>):Void {
+  public static function refreshInteractionSpatialIndex<N>(manager:Dynamic):Void {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     var nodes:Array<NodeAny> = cast _Runtime.UNDEFINED;
     index = _Runtime.field(manager, 'spatialIndex');

@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.BlendMode;
 
 typedef RenderBlendStateEntry = { var alpha:Float; var blendMode:Null<BlendMode>; };

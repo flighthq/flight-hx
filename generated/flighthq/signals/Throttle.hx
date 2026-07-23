@@ -5,13 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Slot.connectSignal;
 import flighthq.signals.Slot.disconnectSignal;
-import flighthq.types.Signal;
 
 typedef SignalThrottleOptions = { @:optional var leading:Bool; @:optional var trailing:Bool; };
 
 @:expose("flighthq.signals.Throttle")
 class Throttle {
-  public static function connectSignalAtFrameRate(source:Signal<Dynamic>, fps:Float, slot:Dynamic):Dynamic {
+  public static function connectSignalAtFrameRate(source:Dynamic, fps:Float, slot:Dynamic):Dynamic {
     var period:Dynamic = cast _Runtime.UNDEFINED;
     var elapsed:Dynamic = cast _Runtime.UNDEFINED;
     var handler:Dynamic = cast _Runtime.UNDEFINED;
@@ -29,7 +28,7 @@ class Throttle {
     return cast null;
   }
 
-  public static function connectSignalDebounced<T>(source:Signal<Dynamic>, delayMs:Float, slot:Dynamic, ?options:SignalThrottleOptions):Dynamic {
+  public static function connectSignalDebounced<T>(source:Dynamic, delayMs:Float, slot:Dynamic, ?options:SignalThrottleOptions):Dynamic {
     var leading:Dynamic = cast _Runtime.UNDEFINED;
     var trailing:Dynamic = cast _Runtime.UNDEFINED;
     var timer:Null<Dynamic> = cast _Runtime.UNDEFINED;
@@ -72,7 +71,7 @@ class Throttle {
     return cast null;
   }
 
-  public static function connectSignalThrottled<T>(source:Signal<Dynamic>, intervalMs:Float, slot:Dynamic, ?options:SignalThrottleOptions):Dynamic {
+  public static function connectSignalThrottled<T>(source:Dynamic, intervalMs:Float, slot:Dynamic, ?options:SignalThrottleOptions):Dynamic {
     var leading:Dynamic = cast _Runtime.UNDEFINED;
     var trailing:Dynamic = cast _Runtime.UNDEFINED;
     var lastFiredAt:Dynamic = cast _Runtime.UNDEFINED;

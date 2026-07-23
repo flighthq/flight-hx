@@ -5,13 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
-import flighthq.types.Matrix4;
-import flighthq.types.Node;
 import flighthq.types.Node.NodeData;
 import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node.NodeTraits;
-import flighthq.types.Quaternion;
-import flighthq.types.Vector3;
 
 typedef HasTransform3D = { var position:Vector3; var rotation:Quaternion; var scale:Vector3; };
 

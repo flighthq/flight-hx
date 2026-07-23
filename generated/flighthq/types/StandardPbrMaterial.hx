@@ -3,13 +3,9 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.AlphaType;
-import flighthq.types.BlendMode;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
-import flighthq.types.SurfaceMaterial;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
-import flighthq.types.Texture;
 
 typedef StandardPbrMaterialProperties = { var baseColor:Float; var baseColorMap:Null<Texture>; var emissive:Float; var emissiveMap:Null<Texture>; var emissiveStrength:Float; var metallic:Float; var metallicRoughnessMap:Null<Texture>; var normalMap:Null<Texture>; var normalScale:Float; var occlusionMap:Null<Texture>; var occlusionStrength:Float; var roughness:Float; };
 

@@ -4,14 +4,10 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.Kind;
-import flighthq.types.Mesh;
 import flighthq.types.Node.NodeData;
 import flighthq.types.Node.NodeRuntime;
-import flighthq.types.Quaternion;
-import flighthq.types.SceneNode;
 import flighthq.types.SceneNode.SceneNodeRuntime;
 import flighthq.types.SceneNode.SceneNodeTraits;
-import flighthq.types.Vector3;
 
 typedef LodLevel = { var mesh:Mesh; var minDistance:Float; };
 

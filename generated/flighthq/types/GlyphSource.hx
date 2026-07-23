@@ -3,8 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ImageResource;
-import flighthq.types.Surface;
 
 typedef GlyphSource = { var getGlyphAtlasImage:Dynamic; var getGlyphEntry:Dynamic; var getGlyphKerning:Dynamic; var getGlyphMetrics:Dynamic; };
 

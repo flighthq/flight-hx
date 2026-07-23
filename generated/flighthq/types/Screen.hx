@@ -3,10 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ScreenChangeEvent;
-import flighthq.types.ScreenColorSpace;
-import flighthq.types.ScreenMode;
-import flighthq.types.ScreenOrientation;
 
 typedef ScreenInfo = { var id:Float; var x:Float; var y:Float; var width:Float; var height:Float; var workWidth:Float; var workHeight:Float; var scaleFactor:Float; var isPrimary:Bool; var rotation:Float; var orientation:ScreenOrientation; var refreshRate:Float; var colorDepth:Float; var pixelDepth:Float; var physicalWidth:Float; var physicalHeight:Float; var isHdr:Bool; var colorSpace:ScreenColorSpace; var maxLuminance:Float; var depthPerComponent:Float; var dpi:Float; var label:String; var internal:Bool; var touchSupport:String; var monochrome:Bool; };
 

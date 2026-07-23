@@ -4,7 +4,6 @@ package flighthq.sceneResources;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneResources.ResolveSceneResourcesAndWait.resolveSceneResourcesAndWait;
-import flighthq.sceneResources.SceneResourceResolver;
 import flighthq.sceneResources._internal._SceneResourceResolverValues.createSceneResourceResolver;
 import flighthq.sceneResources._internal._SceneResourceResolverValues.disposeSceneResourceResolver;
 import flighthq.types.Scene;

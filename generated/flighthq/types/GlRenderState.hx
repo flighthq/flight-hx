@@ -3,28 +3,12 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.BlendMode;
-import flighthq.types.ColorTransform;
 import flighthq.types.DisplayObjectRenderer.DisplayObjectClipHooks;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
-import flighthq.types.GlCompressedTextureDecoder;
-import flighthq.types.GlCompressedTextureUploader;
-import flighthq.types.GlMaterialRenderer;
-import flighthq.types.GlMeshMaterialRenderer;
-import flighthq.types.GlRenderTarget;
-import flighthq.types.GlShaderLocations;
 import flighthq.types.GlShaderLocations.GlBitmapShader;
-import flighthq.types.GlShapeMesh;
-import flighthq.types.ImageResource;
-import flighthq.types.Material;
-import flighthq.types.Matrix;
-import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderState;
 import flighthq.types.RenderState.RenderStateRuntime;
 import flighthq.types.RenderState.SceneGraphSyncPolicy;
-import flighthq.types.Renderable;
-import flighthq.types.VideoTexture;
 
 typedef GlRenderState = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<DisplayObjectClipHooks>; var pixelRatio:Float; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:SceneGraphSyncPolicy; var roundPixels:Bool; var applyBlendMode:Null<Dynamic>; var canvas:Dynamic; var gl:Dynamic; };
 

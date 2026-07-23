@@ -3,9 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.FocusEventData;
-import flighthq.types.KeyboardEventData;
-import flighthq.types.PointerEventData;
-import flighthq.types.Signal;
 
-typedef InteractionSignals = { var onClick:Signal<Dynamic>; var onContextMenu:Signal<Dynamic>; var onDoubleClick:Signal<Dynamic>; var onFocusIn:Signal<Dynamic>; var onFocusOut:Signal<Dynamic>; var onKeyDown:Signal<Dynamic>; var onKeyUp:Signal<Dynamic>; var onPointerCancel:Signal<Dynamic>; var onPointerDown:Signal<Dynamic>; var onPointerMove:Signal<Dynamic>; var onPointerOut:Signal<Dynamic>; var onPointerOver:Signal<Dynamic>; var onPointerRollOut:Signal<Dynamic>; var onPointerRollOver:Signal<Dynamic>; var onPointerUp:Signal<Dynamic>; var onReleaseOutside:Signal<Dynamic>; var onWheel:Signal<Dynamic>; };
+typedef InteractionSignals = { var onClick:Dynamic; var onContextMenu:Dynamic; var onDoubleClick:Dynamic; var onFocusIn:Dynamic; var onFocusOut:Dynamic; var onKeyDown:Dynamic; var onKeyUp:Dynamic; var onPointerCancel:Dynamic; var onPointerDown:Dynamic; var onPointerMove:Dynamic; var onPointerOut:Dynamic; var onPointerOver:Dynamic; var onPointerRollOut:Dynamic; var onPointerRollOver:Dynamic; var onPointerUp:Dynamic; var onReleaseOutside:Dynamic; var onWheel:Dynamic; };

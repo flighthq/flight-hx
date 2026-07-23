@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.TextDirection;
 
 typedef TextItem = { var direction:TextDirection; var end:Float; var script:String; var start:Float; };

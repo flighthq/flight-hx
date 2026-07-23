@@ -3,7 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.SceneNode;
-import flighthq.types.Skeleton3D;
 
 typedef Skin = { var skeleton:Skeleton3D; @:optional var skeletonRoot:Null<SceneNode>; };

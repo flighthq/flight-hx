@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ForceFalloff;
 
 typedef AttractorForce = { var kind:String; var x:Float; var y:Float; @:optional var z:Float; var strength:Float; @:optional var radius:Float; @:optional var falloff:ForceFalloff; };

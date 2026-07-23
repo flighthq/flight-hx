@@ -4,6 +4,5 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Node.NodeAny;
-import flighthq.types.Signal;
 
-typedef NodeSignals = { var onChildAdded:Signal<Dynamic>; var onChildRemoved:Signal<Dynamic>; var onChildrenChanged:Signal<Dynamic>; var onChildrenOrderChanged:Signal<Dynamic>; var onParentChanged:Signal<Dynamic>; };
+typedef NodeSignals = { var onChildAdded:Dynamic; var onChildRemoved:Dynamic; var onChildrenChanged:Dynamic; var onChildrenOrderChanged:Dynamic; var onParentChanged:Dynamic; };

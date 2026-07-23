@@ -3,10 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.AttractorForce;
-import flighthq.types.DragForce;
-import flighthq.types.TurbulenceForce;
-import flighthq.types.VortexForce;
-import flighthq.types.WindForce;
 
 typedef ParticleForce = Dynamic;

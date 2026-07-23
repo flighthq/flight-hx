@@ -3,14 +3,8 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.EntityWithoutRuntime;
-import flighthq.types.ImageResource;
-import flighthq.types.Sampler;
-import flighthq.types.SceneResourceRef;
-import flighthq.types.TextureUvTransform;
-import flighthq.types.Vector2;
 
 typedef TextureColorSpace = String;
 

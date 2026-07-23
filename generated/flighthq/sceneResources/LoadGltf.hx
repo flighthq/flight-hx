@@ -8,7 +8,6 @@ import flighthq.sceneFormats.GltfParse.createSceneFromGltf;
 import flighthq.sceneFormats.GltfParse.createScenesFromGlb;
 import flighthq.sceneFormats.GltfParse.createScenesFromGltf;
 import flighthq.sceneFormats.GltfSchema.GltfDocument;
-import flighthq.sceneResources.LoadSceneOptions;
 import flighthq.sceneResources._internal._LoadSceneOptionsValues.resolveScenesWithOptions;
 import flighthq.types.Scene;
 

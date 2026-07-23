@@ -11,7 +11,6 @@ import flighthq.types.HasClip;
 import flighthq.types.HasMaterial;
 import flighthq.types.HasTransform2D;
 import flighthq.types.HasTransform2D.HasTransform2DRuntime;
-import flighthq.types.Node;
 import flighthq.types.Node.NodeData;
 import flighthq.types.Node.NodeDataFactory;
 import flighthq.types.Node.NodeRuntime;

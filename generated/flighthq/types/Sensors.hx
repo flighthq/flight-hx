@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Signal;
 
 typedef SensorAccuracy = String;
 
@@ -29,4 +28,4 @@ typedef RotationRateReading = { var accuracy:SensorAccuracy; var interval:Float;
 
 typedef SensorsBackend = { var getPermissionState:Dynamic; var isAmbientLightSupported:Dynamic; var isBarometerSupported:Dynamic; var isGravitySupported:Dynamic; var isGyroscopeSupported:Dynamic; var isLinearAccelerationSupported:Dynamic; var isMagnetometerSupported:Dynamic; var isMotionSupported:Dynamic; var isOrientationSupported:Dynamic; var isProximitySupported:Dynamic; var requestPermission:Dynamic; var subscribeAbsoluteOrientation:Dynamic; var subscribeAmbientLight:Dynamic; var subscribeBarometer:Dynamic; var subscribeGravity:Dynamic; var subscribeLinearAcceleration:Dynamic; var subscribeMagnetometer:Dynamic; var subscribeMotion:Dynamic; var subscribeOrientation:Dynamic; var subscribeProximity:Dynamic; var subscribeQuaternion:Dynamic; };
 
-typedef Sensors = { var onAbsoluteOrientation:Signal<Dynamic>; var onAccelerometer:Signal<Dynamic>; var onAmbientLight:Signal<Dynamic>; var onBarometer:Signal<Dynamic>; var onGravity:Signal<Dynamic>; var onGyroscope:Signal<Dynamic>; var onLinearAcceleration:Signal<Dynamic>; var onMagnetometer:Signal<Dynamic>; var onOrientation:Signal<Dynamic>; var onProximity:Signal<Dynamic>; var onQuaternion:Signal<Dynamic>; };
+typedef Sensors = { var onAbsoluteOrientation:Dynamic; var onAccelerometer:Dynamic; var onAmbientLight:Dynamic; var onBarometer:Dynamic; var onGravity:Dynamic; var onGyroscope:Dynamic; var onLinearAcceleration:Dynamic; var onMagnetometer:Dynamic; var onOrientation:Dynamic; var onProximity:Dynamic; var onQuaternion:Dynamic; };

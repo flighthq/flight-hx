@@ -3,8 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.TiledLayer;
-import flighthq.types.TiledProperty;
 import flighthq.types.TiledTileset.TiledTilesetRef;
 
 typedef TiledOrientation = String;

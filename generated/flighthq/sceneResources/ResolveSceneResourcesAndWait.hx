@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneResources.ResolveSceneResources.ResolveSceneResourcesOptions;
 import flighthq.sceneResources.ResolveSceneResources.resolveSceneResources;
-import flighthq.sceneResources.SceneResourceResolver;
 import flighthq.types.SceneNode;
 
 @:expose("flighthq.sceneResources.ResolveSceneResourcesAndWait")

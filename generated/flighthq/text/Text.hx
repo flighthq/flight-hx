@@ -12,7 +12,6 @@ import flighthq.types.NativeText;
 import flighthq.types.NativeText.NativeTextData;
 import flighthq.types.NativeText.NativeTextRuntime;
 import flighthq.types.NativeText.NativeTextStyle;
-import flighthq.types.Node;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
 import flighthq.types.RichText;
@@ -52,11 +51,11 @@ class Text {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.clearRichTextFormatRanges, cast ([source] : Array<Dynamic>));
   }
 
-  public static function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_NativeText.computeNativeTextLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function computeRichTextLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeRichTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.computeRichTextLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -65,7 +64,7 @@ class Text {
     return cast null;
   }
 
-  public static function computeTextLabelLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeTextLabelLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_TextLabel.computeTextLabelLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 

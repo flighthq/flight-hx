@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.GlRenderState;
 
 typedef GlContextLossSignals = { var onGlContextLost:Array<Dynamic>; var onGlContextRestored:Array<Dynamic>; };

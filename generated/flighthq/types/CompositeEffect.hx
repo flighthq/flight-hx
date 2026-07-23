@@ -3,8 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.CompositeOperator;
 import flighthq.types.Entity.Kind;
-import flighthq.types.RenderEffect;
 
 typedef CompositeEffect = { var kind:Kind; var operator_:CompositeOperator; @:optional var backdropKey:String; };

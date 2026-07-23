@@ -19,7 +19,6 @@ import flighthq.types.BitmapText.BitmapTextOptions;
 import flighthq.types.BitmapText.BitmapTextRuntime;
 import flighthq.types.GlyphSource;
 import flighthq.types.MethodsOf;
-import flighthq.types.Node;
 import flighthq.types.QuadBatch;
 import flighthq.types.Rectangle;
 import flighthq.types._internal._BitmapTextValues.BitmapTextKind;
@@ -132,7 +131,7 @@ class BitmapText {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'wrapWidth'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'wrapWidth', _Runtime.field(options, 'wrapWidth')); }
   }
 
-  public static function copyLocalBoundsRectangle__bitmapText(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function copyLocalBoundsRectangle__bitmapText(out:Rectangle, source:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([(cast source : BitmapText)] : Array<Dynamic>)) : BitmapTextRuntime);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null))) { _Runtime.callValue(copyRectangle, cast ([out, _Runtime.field(runtime, 'localBoundsRectangle')] : Array<Dynamic>)); }

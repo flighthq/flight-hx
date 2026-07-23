@@ -19,7 +19,6 @@ import flighthq.types.BlendMode;
 import flighthq.types.DisplayObject;
 import flighthq.types.HasBoundsRectangle;
 import flighthq.types.HasTransform2D;
-import flighthq.types.Node;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
@@ -97,7 +96,7 @@ class RenderProxy {
     var localDirty:Dynamic = cast _Runtime.UNDEFINED;
     currentFrameId = _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentFrameId');
     parentDirty = _Runtime.andValue(!_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.field(parentData, 'transformFrameId'), currentFrameId), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(parentData, 'appearanceFrameId'), currentFrameId)));
-    localDirty = _Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(state, 'sceneGraphSyncPolicy'), 'refreshDerivedState'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(data, 'lastLocalTransformId'), _Runtime.callValue(getNodeLocalTransformRevision, cast ([(cast source : Node<Dynamic>)] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(data, 'lastAppearanceId'), _Runtime.callValue(getNodeAppearanceRevision, cast ([(cast source : Node<Dynamic>)] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(data, 'lastLocalContentId'), _Runtime.callValue(getNodeLocalContentRevision, cast ([(cast source : Node<Dynamic>)] : Array<Dynamic>))));
+    localDirty = _Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(state, 'sceneGraphSyncPolicy'), 'refreshDerivedState'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(data, 'lastLocalTransformId'), _Runtime.callValue(getNodeLocalTransformRevision, cast ([(cast source : Dynamic)] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(data, 'lastAppearanceId'), _Runtime.callValue(getNodeAppearanceRevision, cast ([(cast source : Dynamic)] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(data, 'lastLocalContentId'), _Runtime.callValue(getNodeLocalContentRevision, cast ([(cast source : Dynamic)] : Array<Dynamic>))));
     return cast _Runtime.orValue(parentDirty, function():Dynamic return cast localDirty);
     return cast null;
   }
@@ -124,7 +123,7 @@ class RenderProxy {
     _Runtime.callValue(updateRenderProxyMaterial, cast ([state, data, parentData] : Array<Dynamic>));
     _Runtime.callValue(updateRenderProxyColorTransform, cast ([state, data, parentData] : Array<Dynamic>));
     _Runtime.callValue(updateNodeClip, cast ([state, source, data, parentData] : Array<Dynamic>));
-    _Runtime.setField(data, 'lastLocalContentId', _Runtime.callValue(getNodeLocalContentRevision, cast ([(cast source : Node<Dynamic>)] : Array<Dynamic>)));
+    _Runtime.setField(data, 'lastLocalContentId', _Runtime.callValue(getNodeLocalContentRevision, cast ([(cast source : Dynamic)] : Array<Dynamic>)));
     _Runtime.callOptionalProperty(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderAdaptHook', cast ([state, source, data] : Array<Dynamic>));
   }
 
@@ -147,7 +146,7 @@ class RenderProxy {
     var tempStack:Dynamic = cast _Runtime.UNDEFINED;
     var stackLength:Dynamic = cast _Runtime.UNDEFINED;
     var parentData:Null<RenderProxy2D> = cast _Runtime.UNDEFINED;
-    var lastParent:Null<Node<Dynamic>> = cast _Runtime.UNDEFINED;
+    var lastParent:Null<Dynamic> = cast _Runtime.UNDEFINED;
     var treeDirty:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.incrementField(runtime, 'currentFrameId', 1, false);
@@ -159,9 +158,9 @@ class RenderProxy {
     treeDirty = false;
     while (_Runtime.truthy(_Runtime.compare(stackLength, 0.0, '>'))) {
       var current:Dynamic = (cast _Runtime.getIndex(tempStack, --stackLength) : Renderable);
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field((cast current : Node<Dynamic>), 'enabled')))) { continue; }
+      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field((cast current : Dynamic), 'enabled')))) { continue; }
       if (_Runtime.truthy(!_Runtime.strictEquals(current, root))) {
-        var parent:Dynamic = _Runtime.callValue(getNodeParent, cast ([(cast current : Node<Dynamic>)] : Array<Dynamic>));
+        var parent:Dynamic = _Runtime.callValue(getNodeParent, cast ([(cast current : Dynamic)] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.strictEquals(parent, null))) {
           (parentData = cast (_Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
           (lastParent = cast (null : Dynamic));
@@ -177,7 +176,7 @@ class RenderProxy {
       }
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(isRenderProxyVisible, cast ([data] : Array<Dynamic>))))) { continue; }
       if (_Runtime.truthy(_Runtime.field(data, 'traverseChildren'))) {
-        var children:Dynamic = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([(cast current : Node<Dynamic>)] : Array<Dynamic>)), 'children');
+        var children:Dynamic = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([(cast current : Dynamic)] : Array<Dynamic>)), 'children');
         if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
           {
             var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
@@ -202,7 +201,7 @@ class RenderProxy {
     while (_Runtime.truthy(_Runtime.compare(stackLength, 0.0, '>'))) {
       var current:Dynamic = (cast _Runtime.getIndex(tempStack, --stackLength) : Renderable);
       _Runtime.callValue(visit, cast ([state, current] : Array<Dynamic>));
-      var children:Dynamic = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([(cast current : Node<Dynamic>)] : Array<Dynamic>)), 'children');
+      var children:Dynamic = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([(cast current : Dynamic)] : Array<Dynamic>)), 'children');
       if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
         {
           var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);

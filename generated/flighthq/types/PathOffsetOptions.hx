@@ -3,7 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.PathOffsetEnd;
-import flighthq.types.PathOffsetJoin;
 
 typedef PathOffsetOptions = { @:optional var join:PathOffsetJoin; @:optional var end:PathOffsetEnd; @:optional var miterLimit:Float; @:optional var tolerance:Float; @:optional var arcTolerance:Float; };

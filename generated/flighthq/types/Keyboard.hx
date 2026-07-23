@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Signal;
 
 typedef SoftKeyboardResizeMode = String;
 
@@ -17,7 +16,7 @@ typedef SoftKeyboardInfo = { var visible:Bool; var height:Float; var x:Float; va
 
 typedef SoftKeyboardBackend = { var getInfo:Dynamic; var subscribe:Dynamic; var show:Dynamic; var hide:Dynamic; @:optional var getResizeMode:Dynamic; @:optional var setResizeMode:Dynamic; @:optional var getAccessoryBarVisible:Dynamic; @:optional var setAccessoryBarVisible:Dynamic; @:optional var getScrollAssistEnabled:Dynamic; @:optional var setScrollAssistEnabled:Dynamic; @:optional var setStyle:Dynamic; };
 
-typedef SoftKeyboard = { var onShow:Signal<Dynamic>; var onHide:Signal<Dynamic>; var onResize:Signal<Dynamic>; var onWillShow:Signal<Dynamic>; var onWillHide:Signal<Dynamic>; var onWillResize:Signal<Dynamic>; var onDidShow:Signal<Dynamic>; var onDidHide:Signal<Dynamic>; var onDidResize:Signal<Dynamic>; };
+typedef SoftKeyboard = { var onShow:Dynamic; var onHide:Dynamic; var onResize:Dynamic; var onWillShow:Dynamic; var onWillHide:Dynamic; var onWillResize:Dynamic; var onDidShow:Dynamic; var onDidHide:Dynamic; var onDidResize:Dynamic; };
 
 @:expose("flighthq.types.Keyboard")
 class Keyboard {

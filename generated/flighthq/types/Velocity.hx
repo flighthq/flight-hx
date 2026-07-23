@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Matrix;
 
 typedef Velocity2D = { var x:Float; var y:Float; };
 

@@ -18,7 +18,6 @@ import flighthq.types.Entity.Kind;
 import flighthq.types.HitTestFunction;
 import flighthq.types.HitTestFunction.HitTestPreciseFunction;
 import flighthq.types.HitTestResult;
-import flighthq.types.Node;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.NodeInteraction.HitArea;
 import flighthq.types.Path;
@@ -36,17 +35,17 @@ class HitTests {
     _Runtime.setField(out, 'subIndex', _Runtime.select(exact, function():Dynamic return cast _Runtime.callValue(exact, cast ([node, x, y] : Array<Dynamic>)), function():Dynamic return cast -1.0));
   }
 
-  public static function findGraphHitTarget<Traits>(source:Node<Traits>, x:Float, y:Float):Null<Node<Traits>> {
-    return cast (cast _Runtime.callValue(HitTests.findFirstHit__hitTests, cast ([(cast source : NodeAny), x, y, false] : Array<Dynamic>)) : Null<Node<Traits>>);
+  public static function findGraphHitTarget<Traits>(source:Dynamic, x:Float, y:Float):Null<Dynamic> {
+    return cast (cast _Runtime.callValue(HitTests.findFirstHit__hitTests, cast ([(cast source : NodeAny), x, y, false] : Array<Dynamic>)) : Null<Dynamic>);
     return cast null;
   }
 
-  public static function findGraphHitTargetPrecise<Traits>(source:Node<Traits>, x:Float, y:Float):Null<Node<Traits>> {
-    return cast (cast _Runtime.callValue(HitTests.findFirstHit__hitTests, cast ([(cast source : NodeAny), x, y, true] : Array<Dynamic>)) : Null<Node<Traits>>);
+  public static function findGraphHitTargetPrecise<Traits>(source:Dynamic, x:Float, y:Float):Null<Dynamic> {
+    return cast (cast _Runtime.callValue(HitTests.findFirstHit__hitTests, cast ([(cast source : NodeAny), x, y, true] : Array<Dynamic>)) : Null<Dynamic>);
     return cast null;
   }
 
-  public static function findGraphHitTargets<Traits>(source:Node<Traits>, x:Float, y:Float, ?out:Array<Node<Traits>>):Array<Node<Traits>> {
+  public static function findGraphHitTargets<Traits>(source:Dynamic, x:Float, y:Float, ?out:Array<Dynamic>):Array<Dynamic> {
     if (out == null) out = cast (cast ([] : Array<Dynamic>) : Dynamic);
     _Runtime.setLength(out, 0.0);
     _Runtime.callValue(HitTests.collectHits__hitTests, cast ([(cast source : NodeAny), x, y, false, (cast out : Array<NodeAny>)] : Array<Dynamic>));
@@ -54,7 +53,7 @@ class HitTests {
     return cast null;
   }
 
-  public static function findGraphHitTargetsPrecise<Traits>(source:Node<Traits>, x:Float, y:Float, ?out:Array<Node<Traits>>):Array<Node<Traits>> {
+  public static function findGraphHitTargetsPrecise<Traits>(source:Dynamic, x:Float, y:Float, ?out:Array<Dynamic>):Array<Dynamic> {
     if (out == null) out = cast (cast ([] : Array<Dynamic>) : Dynamic);
     _Runtime.setLength(out, 0.0);
     _Runtime.callValue(HitTests.collectHits__hitTests, cast ([(cast source : NodeAny), x, y, true, (cast out : Array<NodeAny>)] : Array<Dynamic>));
@@ -70,18 +69,18 @@ class HitTests {
     return cast null;
   }
 
-  public static function hitTestGraphLocalBounds<Traits>(source:Node<Traits>, x:Float, y:Float):Bool {
+  public static function hitTestGraphLocalBounds<Traits>(source:Dynamic, x:Float, y:Float):Bool {
     _Runtime.callValue(inverseMatrixTransformPointXY, cast ([HitTests.hitTestScratchPoint__hitTests, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast source : DisplayObject)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
     return cast _Runtime.callValue(containsRectanglePointXY, cast ([_Runtime.callValue(getNodeLocalBoundsRectangle, cast ([(cast source : DisplayObject)] : Array<Dynamic>)), _Runtime.field(HitTests.hitTestScratchPoint__hitTests, 'x'), _Runtime.field(HitTests.hitTestScratchPoint__hitTests, 'y')] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestGraphPoint<Traits>(source:Node<Traits>, x:Float, y:Float):Bool {
+  public static function hitTestGraphPoint<Traits>(source:Dynamic, x:Float, y:Float):Bool {
     return cast _Runtime.callValue(HitTests.anyHit__hitTests, cast ([(cast source : NodeAny), x, y, false] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestGraphPointPrecise<Traits>(source:Node<Traits>, x:Float, y:Float):Bool {
+  public static function hitTestGraphPointPrecise<Traits>(source:Dynamic, x:Float, y:Float):Bool {
     return cast _Runtime.callValue(HitTests.anyHit__hitTests, cast ([(cast source : NodeAny), x, y, true] : Array<Dynamic>));
     return cast null;
   }

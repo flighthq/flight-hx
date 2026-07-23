@@ -3,7 +3,6 @@ package flighthq.shading;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.shading.ModifierRegistry;
 import flighthq.shading.ModifierRegistry.ModifierDefinition;
 import flighthq.shading._internal._ModifierRegistryValues.registerModifier;
 import flighthq.types.AnimatedNormalModifier;

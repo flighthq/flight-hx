@@ -3,8 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.TiledObject;
-import flighthq.types.TiledProperty;
 
 typedef TiledLayerBase = { var id:Float; var name:String; var opacity:Float; var visible:Bool; var offsetX:Float; var offsetY:Float; var properties:Array<TiledProperty>; };
 

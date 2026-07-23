@@ -4,15 +4,13 @@ package flighthq.hostElectron;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.hostElectron.ElectronModule.ElectronApi;
-import flighthq.hostElectron.ElectronModule.ElectronMenu;
 import flighthq.hostElectron.ElectronModule.ElectronMenuItemOptions;
-import flighthq.hostElectron.ElectronModule.ElectronTray;
 import flighthq.types.Menu.MenuItemTemplate;
 import flighthq.types.Tray.TrayBackend;
 import flighthq.types.Tray.TrayEventData;
 import flighthq.types.Tray.TrayEventType;
 
-typedef TrayRecord__electronTray = { var tray:ElectronTray; var title:String; var tooltip:String; var menu:Null<ElectronMenu>; };
+typedef TrayRecord__electronTray = { var tray:Dynamic; var title:String; var tooltip:String; var menu:Null<Dynamic>; };
 
 @:expose("flighthq.hostElectron.ElectronTray")
 class ElectronTray {
@@ -117,7 +115,7 @@ class ElectronTray {
     return cast null;
   }
 
-  public static function toBounds__electronTray(tray:ElectronTray):Null<{ var x:Float; var y:Float; var width:Float; var height:Float; }> {
+  public static function toBounds__electronTray(tray:Dynamic):Null<{ var x:Float; var y:Float; var width:Float; var height:Float; }> {
     try {
       var bounds:Dynamic = _Runtime.callProperty(tray, 'getBounds', cast ([] : Array<Dynamic>));
       return cast { x: _Runtime.field(bounds, 'x'), y: _Runtime.field(bounds, 'y'), width: _Runtime.field(bounds, 'width'), height: _Runtime.field(bounds, 'height') };

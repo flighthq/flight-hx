@@ -4,7 +4,6 @@ package flighthq.sceneResources;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneFormats.ThreeDsParse.createSceneFrom3ds;
-import flighthq.sceneResources.LoadSceneOptions;
 import flighthq.sceneResources._internal._LoadSceneOptionsValues.resolveScenesWithOptions;
 import flighthq.types.Scene;
 

@@ -3,10 +3,7 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.BatchFormat;
-import flighthq.types.BlendMode;
 import flighthq.types.Entity.Kind;
-import flighthq.types.Material;
 
 typedef RenderBatchKey = { var blend:Null<BlendMode>; var format:BatchFormat; var material:Null<Material>; var rendererKind:Kind; var texture:Null<Dynamic>; };
 

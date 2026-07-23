@@ -4,7 +4,6 @@ package flighthq.sceneResources;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneFormats.Md2Parse.createSceneFromMd2;
-import flighthq.sceneResources.LoadSceneOptions;
 import flighthq.sceneResources._internal._LoadSceneOptionsValues.resolveScenesWithOptions;
 import flighthq.types.Scene;
 

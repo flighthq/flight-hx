@@ -3,8 +3,7 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Signal;
 
 typedef MediaReadyState = String;
 
-typedef MediaChannelSignals = { var onBuffering:Signal<Dynamic>; var onError:Signal<Dynamic>; var onReady:Signal<Dynamic>; var onSeeked:Signal<Dynamic>; };
+typedef MediaChannelSignals = { var onBuffering:Dynamic; var onError:Dynamic; var onReady:Dynamic; var onSeeked:Dynamic; };

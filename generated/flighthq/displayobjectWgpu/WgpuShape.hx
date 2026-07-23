@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.displayobjectCanvas.CanvasShape.renderCanvasShapeCommands;
 import flighthq.displayobjectWgpu.WgpuRendererData.createWgpuRendererData;
 import flighthq.displayobjectWgpu.WgpuRendererData.getWgpuRendererData;
-import flighthq.displayobjectWgpu.WgpuShapeMesh;
 import flighthq.displayobjectWgpu.WgpuSpriteBatch.ensureWgpuQuadBatchResources;
 import flighthq.displayobjectWgpu.WgpuSpriteBatch.packWgpuSpriteBatchMaterialInstance;
 import flighthq.displayobjectWgpu.WgpuSpriteBatch.prepareWgpuSpriteBatchWrite;

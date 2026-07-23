@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Signal;
 
 typedef AppLifecycleState = String;
 
@@ -13,4 +12,4 @@ typedef AppMemoryPressure = String;
 
 typedef LifecycleBackend = { var getState:Dynamic; var subscribe:Dynamic; @:optional var getLaunchKind:Dynamic; @:optional var subscribeMemoryWarning:Dynamic; };
 
-typedef AppLifecycle = { var onStateChange:Signal<Dynamic>; var onResume:Signal<Dynamic>; var onPause:Signal<Dynamic>; var onBackButton:Signal<Dynamic>; var onMemoryWarning:Signal<Dynamic>; var onSaveState:Signal<Dynamic>; var onRestoreState:Signal<Dynamic>; };
+typedef AppLifecycle = { var onStateChange:Dynamic; var onResume:Dynamic; var onPause:Dynamic; var onBackButton:Dynamic; var onMemoryWarning:Dynamic; var onSaveState:Dynamic; var onRestoreState:Dynamic; };

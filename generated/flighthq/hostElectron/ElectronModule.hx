@@ -4,11 +4,11 @@ package flighthq.hostElectron;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ElectronApi = { var app:ElectronApp; var clipboard:ElectronClipboard; var fs:ElectronFs; var shell:ElectronShell; var dialog:ElectronDialog; var globalShortcut:ElectronGlobalShortcut; var screen:ElectronScreen; var powerMonitor:ElectronPowerMonitor; var powerSaveBlocker:ElectronPowerSaveBlocker; var nativeImage:ElectronNativeImageModule; var ipcMain:ElectronIpcMain; var autoUpdater:ElectronAutoUpdater; var BrowserWindow:ElectronBrowserWindowConstructor; var Menu:ElectronMenuConstructor; var Tray:ElectronTrayConstructor; var Notification:ElectronNotificationConstructor; };
+typedef ElectronApi = { var app:Dynamic; var clipboard:Dynamic; var fs:ElectronFs; var shell:Dynamic; var dialog:Dynamic; var globalShortcut:ElectronGlobalShortcut; var screen:Dynamic; var powerMonitor:ElectronPowerMonitor; var powerSaveBlocker:ElectronPowerSaveBlocker; var nativeImage:ElectronNativeImageModule; var ipcMain:ElectronIpcMain; var autoUpdater:ElectronAutoUpdater; var BrowserWindow:ElectronBrowserWindowConstructor; var Menu:ElectronMenuConstructor; var Tray:ElectronTrayConstructor; var Notification:ElectronNotificationConstructor; };
 
 typedef ElectronFs = { var existsSync:Dynamic; var readFileSync:Dynamic; var writeFileSync:Dynamic; };
 
-typedef ElectronApp = { var getName:Dynamic; var getVersion:Dynamic; var getLocale:Dynamic; var getSystemLocale:Dynamic; var getPreferredSystemLanguages:Dynamic; var getAppPath:Dynamic; var getPath:Dynamic; var setName:Dynamic; var setAppUserModelId:Dynamic; var setActivationPolicy:Dynamic; var hide:Dynamic; var show:Dynamic; var isHidden:Dynamic; var addRecentDocument:Dynamic; var clearRecentDocuments:Dynamic; var getLoginItemSettings:Dynamic; var setLoginItemSettings:Dynamic; var quit:Dynamic; var exit:Dynamic; var relaunch:Dynamic; var focus:Dynamic; var requestSingleInstanceLock:Dynamic; var hasSingleInstanceLock:Dynamic; var releaseSingleInstanceLock:Dynamic; var setBadgeCount:Dynamic; var setAsDefaultProtocolClient:Dynamic; var removeAsDefaultProtocolClient:Dynamic; var isDefaultProtocolClient:Dynamic; var on:Dynamic; var removeListener:Dynamic; @:optional var dock:ElectronDock; };
+private typedef ElectronApp = { var getName:Dynamic; var getVersion:Dynamic; var getLocale:Dynamic; var getSystemLocale:Dynamic; var getPreferredSystemLanguages:Dynamic; var getAppPath:Dynamic; var getPath:Dynamic; var setName:Dynamic; var setAppUserModelId:Dynamic; var setActivationPolicy:Dynamic; var hide:Dynamic; var show:Dynamic; var isHidden:Dynamic; var addRecentDocument:Dynamic; var clearRecentDocuments:Dynamic; var getLoginItemSettings:Dynamic; var setLoginItemSettings:Dynamic; var quit:Dynamic; var exit:Dynamic; var relaunch:Dynamic; var focus:Dynamic; var requestSingleInstanceLock:Dynamic; var hasSingleInstanceLock:Dynamic; var releaseSingleInstanceLock:Dynamic; var setBadgeCount:Dynamic; var setAsDefaultProtocolClient:Dynamic; var removeAsDefaultProtocolClient:Dynamic; var isDefaultProtocolClient:Dynamic; var on:Dynamic; var removeListener:Dynamic; @:optional var dock:ElectronDock; };
 
 typedef ElectronLoginItemSettings = { var openAtLogin:Bool; var openAsHidden:Bool; @:optional var executableWillLaunchAtLogin:Bool; };
 
@@ -16,15 +16,15 @@ typedef ElectronLoginItemSettingsLike = { @:optional var openAtLogin:Bool; @:opt
 
 typedef ElectronDock = { var bounce:Dynamic; var cancelBounce:Dynamic; var setBadge:Dynamic; var setMenu:Dynamic; };
 
-typedef ElectronClipboard = { var readText:Dynamic; var writeText:Dynamic; var readHtml:Dynamic; var writeHtml:Dynamic; var readRTF:Dynamic; var writeRTF:Dynamic; var readBookmark:Dynamic; var writeBookmark:Dynamic; var readImage:Dynamic; var writeImage:Dynamic; var read:Dynamic; var write:Dynamic; var has:Dynamic; var availableFormats:Dynamic; var clear:Dynamic; };
+private typedef ElectronClipboard = { var readText:Dynamic; var writeText:Dynamic; var readHtml:Dynamic; var writeHtml:Dynamic; var readRTF:Dynamic; var writeRTF:Dynamic; var readBookmark:Dynamic; var writeBookmark:Dynamic; var readImage:Dynamic; var writeImage:Dynamic; var read:Dynamic; var write:Dynamic; var has:Dynamic; var availableFormats:Dynamic; var clear:Dynamic; };
 
 typedef ElectronClipboardData = { @:optional var text:String; @:optional var html:String; @:optional var rtf:String; @:optional var bookmark:String; @:optional var image:ElectronNativeImage; };
 
-typedef ElectronShell = { var openExternal:Dynamic; var openPath:Dynamic; var showItemInFolder:Dynamic; var trashItem:Dynamic; var beep:Dynamic; var readShortcutLink:Dynamic; var writeShortcutLink:Dynamic; };
+private typedef ElectronShell = { var openExternal:Dynamic; var openPath:Dynamic; var showItemInFolder:Dynamic; var trashItem:Dynamic; var beep:Dynamic; var readShortcutLink:Dynamic; var writeShortcutLink:Dynamic; };
 
 typedef ElectronShortcutDetails = { var target:String; @:optional var appUserModelId:String; @:optional var args:String; @:optional var description:String; @:optional var icon:String; @:optional var iconIndex:Float; @:optional var cwd:String; };
 
-typedef ElectronDialog = { var showOpenDialog:Dynamic; var showSaveDialog:Dynamic; var showMessageBox:Dynamic; };
+private typedef ElectronDialog = { var showOpenDialog:Dynamic; var showSaveDialog:Dynamic; var showMessageBox:Dynamic; };
 
 typedef ElectronOpenDialogOptions = { @:optional var title:String; @:optional var defaultPath:String; @:optional var filters:Array<{ var name:String; var extensions:Array<String>; }>; @:optional var properties:Array<String>; };
 
@@ -34,7 +34,7 @@ typedef ElectronMessageBoxOptions = { @:optional var type:String; @:optional var
 
 typedef ElectronGlobalShortcut = { var register:Dynamic; var unregister:Dynamic; var unregisterAll:Dynamic; var isRegistered:Dynamic; };
 
-typedef ElectronScreen = { var getPrimaryDisplay:Dynamic; var getAllDisplays:Dynamic; var getCursorScreenPoint:Dynamic; var on:Dynamic; var removeListener:Dynamic; };
+private typedef ElectronScreen = { var getPrimaryDisplay:Dynamic; var getAllDisplays:Dynamic; var getCursorScreenPoint:Dynamic; var on:Dynamic; var removeListener:Dynamic; };
 
 typedef ElectronDisplay = { var id:Float; var bounds:{ var x:Float; var y:Float; var width:Float; var height:Float; }; var workArea:{ var x:Float; var y:Float; var width:Float; var height:Float; }; var scaleFactor:Float; };
 
@@ -60,13 +60,13 @@ typedef ElectronBrowserWindow = { var id:Float; var loadURL:Dynamic; var loadFil
 
 typedef ElectronMenuConstructor = { @:optional var __construct:Dynamic; var buildFromTemplate:Dynamic; var setApplicationMenu:Dynamic; };
 
-typedef ElectronMenu = { var popup:Dynamic; };
+private typedef ElectronMenu = { var popup:Dynamic; };
 
 typedef ElectronMenuItemOptions = { @:optional var id:String; @:optional var label:String; @:optional var type:String; @:optional var role:String; @:optional var accelerator:String; @:optional var enabled:Bool; @:optional var checked:Bool; @:optional var click:Dynamic; @:optional var submenu:Array<ElectronMenuItemOptions>; };
 
 typedef ElectronTrayConstructor = { @:optional var __construct:Dynamic; };
 
-typedef ElectronTray = { var setToolTip:Dynamic; var setTitle:Dynamic; var setImage:Dynamic; var setPressedImage:Dynamic; var setContextMenu:Dynamic; var popUpContextMenu:Dynamic; var setIgnoreDoubleClickEvents:Dynamic; var displayBalloon:Dynamic; var removeBalloon:Dynamic; var getBounds:Dynamic; var isDestroyed:Dynamic; var on:Dynamic; var destroy:Dynamic; };
+private typedef ElectronTray = { var setToolTip:Dynamic; var setTitle:Dynamic; var setImage:Dynamic; var setPressedImage:Dynamic; var setContextMenu:Dynamic; var popUpContextMenu:Dynamic; var setIgnoreDoubleClickEvents:Dynamic; var displayBalloon:Dynamic; var removeBalloon:Dynamic; var getBounds:Dynamic; var isDestroyed:Dynamic; var on:Dynamic; var destroy:Dynamic; };
 
 typedef ElectronTrayBalloonOptions = { @:optional var icon:Dynamic; @:optional var iconType:String; var title:String; var content:String; @:optional var largeIcon:Bool; @:optional var noSound:Bool; @:optional var respectQuietTime:Bool; };
 
@@ -74,4 +74,4 @@ typedef ElectronNotificationConstructor = { @:optional var __construct:Dynamic; 
 
 typedef ElectronNotificationOptions = { var title:String; @:optional var body:String; @:optional var icon:String; @:optional var silent:Bool; @:optional var actions:Array<{ var type:String; var text:String; }>; };
 
-typedef ElectronNotification = { var show:Dynamic; var close:Dynamic; var on:Dynamic; };
+private typedef ElectronNotification = { var show:Dynamic; var close:Dynamic; var on:Dynamic; };

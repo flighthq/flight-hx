@@ -13,7 +13,6 @@ import flighthq.geometry.Typedarray.reserveUint16Array;
 import flighthq.node.Revision.invalidateNodeLocalBounds;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.MethodsOf;
-import flighthq.types.Node;
 import flighthq.types.PartialNode;
 import flighthq.types.QuadBatch;
 import flighthq.types.QuadBatch.QuadBatchData;
@@ -64,7 +63,7 @@ class QuadBatch {
     return cast null;
   }
 
-  public static function copyLocalBoundsRectangle__quadBatch(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function copyLocalBoundsRectangle__quadBatch(out:Rectangle, source:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([(cast source : QuadBatch)] : Array<Dynamic>)) : QuadBatchRuntime);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null))) { _Runtime.callValue(copyRectangle, cast ([out, _Runtime.field(runtime, 'localBoundsRectangle')] : Array<Dynamic>)); }

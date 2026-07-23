@@ -3,15 +3,8 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.BlendMode;
-import flighthq.types.ColorTransform;
-import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
-import flighthq.types.Material;
 import flighthq.types.Material.MaterialData;
-import flighthq.types.Renderable;
-import flighthq.types.Renderer;
-import flighthq.types.RendererData;
 
 typedef RenderProxy = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var source:Renderable; var kind:Kind; var next:Null<RenderProxy>; var alpha:Float; var appearanceFrameId:Float; var blendMode:Null<BlendMode>; var colorTransform:Null<ColorTransform>; var material:Null<Material>; var materialData:Null<MaterialData>; var lastAppearanceId:Float; var lastLocalContentId:Float; var lastLocalTransformId:Float; var name:Null<String>; var renderer:Null<Renderer>; var rendererData:Null<RendererData>; var rendererDataSource:Null<Renderable>; var rendererMapId:Float; var transformFrameId:Float; var visible:Bool; };

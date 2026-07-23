@@ -3,12 +3,7 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ColorLutCache;
 import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
-import flighthq.types.RenderEffect;
-import flighthq.types.WgpuColorLutTextureCache;
-import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget;
 import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
 typedef WgpuRenderEffectContext = { var state:WgpuRenderState; var source:WgpuRenderTarget; var dest:WgpuRenderTarget; var pool:WgpuRenderTargetPool; var sceneDepthTexture:Null<Dynamic>; var sceneVelocityTexture:Null<Dynamic>; };

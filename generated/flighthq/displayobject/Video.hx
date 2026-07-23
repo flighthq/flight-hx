@@ -9,7 +9,6 @@ import flighthq.displayobject.DisplayObject.getDisplayObjectRuntime;
 import flighthq.node.Revision.invalidateNodeLocalBounds;
 import flighthq.node.Revision.invalidateNodeLocalContent;
 import flighthq.types.MethodsOf;
-import flighthq.types.Node;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
 import flighthq.types.Video;
@@ -19,7 +18,7 @@ import flighthq.types._internal._VideoValues.VideoKind;
 
 @:expose("flighthq.displayobject.Video")
 class Video {
-  public static function computeVideoLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeVideoLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.optionalField(_Runtime.field((cast _Runtime.field(source, 'data') : VideoData), 'source'), 'element');
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(element, null)))) {

@@ -3,9 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.DeviceCapabilities;
-import flighthq.types.DeviceDisplayMetrics;
-import flighthq.types.DeviceFormFactor;
 
 typedef DeviceInfo = { var arch:String; var availableMemory:Float; var boardName:String; var colorGamut:String; var cpuCores:Float; var fontScale:Float; var formFactor:DeviceFormFactor; var gpuRenderer:String; var gpuVendor:String; var isHdr:Bool; var isJailbroken:Bool; var isLowEndDevice:Bool; var isRooted:Bool; var isVirtual:Bool; var manufacturer:String; var marketingName:String; var model:String; var osBuild:String; var osName:String; var osVersion:String; var platformString:String; var productName:String; var supportedAbis:Array<String>; var totalMemory:Float; var webViewVersion:String; };
 

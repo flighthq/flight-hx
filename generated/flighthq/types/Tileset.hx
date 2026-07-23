@@ -3,8 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.TextureAtlas;
 
 typedef Tileset = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var atlas:Null<TextureAtlas>; var columns:Float; var margin:Float; var rows:Float; var spacing:Float; var tileHeight:Float; var tileWidth:Float; };

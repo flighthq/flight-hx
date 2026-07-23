@@ -4,7 +4,6 @@ package flighthq.textshaper;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textshaper.TextShaper as Facade_Textshaper_flighthq_textshaper_TextShaper;
-import flighthq.textshaper.TextShaperCache;
 import flighthq.textshaper.TextShaperCluster as Facade_Textshaper_flighthq_textshaper_TextShaperCluster;
 import flighthq.textshaper.TextShaperItemize as Facade_Textshaper_flighthq_textshaper_TextShaperItemize;
 import flighthq.textshaper.TextShaperPool as Facade_Textshaper_flighthq_textshaper_TextShaperPool;

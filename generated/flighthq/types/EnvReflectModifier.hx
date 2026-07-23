@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Modifier;
-import flighthq.types.ModifierKind;
-import flighthq.types.ModifierSlot;
 
 typedef EnvReflectModifier = { var kind:ModifierKind; var slot:ModifierSlot; var tint:Float; @:optional var intensity:Float; @:optional var fresnelBias:Float; @:optional var roughness:Float; };

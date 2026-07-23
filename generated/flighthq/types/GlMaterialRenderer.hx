@@ -3,8 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.GlRenderState;
-import flighthq.types.Material;
 import flighthq.types.Material.MaterialData;
 
 typedef GlMaterialRenderer = { var instanceFloatCount:Float; var bind:Dynamic; @:optional var packInstance:Dynamic; };

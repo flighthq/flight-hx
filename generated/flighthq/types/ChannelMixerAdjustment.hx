@@ -3,7 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.AdjustmentKind;
-import flighthq.types.ColorMatrixAdjustment;
 
 typedef ChannelMixerAdjustment = { var kind:AdjustmentKind; var colorMatrix:Array<Float>; var matrix:Array<Float>; };

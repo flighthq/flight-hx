@@ -37,7 +37,6 @@ import flighthq.sceneWgpu.WgpuMatcapPrelude as Facade_SceneWgpu_flighthq_sceneWg
 import flighthq.sceneWgpu.WgpuMatcapPrelude.WgpuMatcapDefineKey;
 import flighthq.sceneWgpu.WgpuMatcapPrelude.WgpuMatcapPipeline;
 import flighthq.sceneWgpu.WgpuMeshMaterialRegistry as Facade_SceneWgpu_flighthq_sceneWgpu_WgpuMeshMaterialRegistry;
-import flighthq.sceneWgpu.WgpuMeshPipeline;
 import flighthq.sceneWgpu.WgpuMeshPipeline.WgpuSceneLayouts;
 import flighthq.sceneWgpu.WgpuMeshUpload as Facade_SceneWgpu_flighthq_sceneWgpu_WgpuMeshUpload;
 import flighthq.sceneWgpu.WgpuParticleEmitter3D as Facade_SceneWgpu_flighthq_sceneWgpu_WgpuParticleEmitter3D;
@@ -45,9 +44,7 @@ import flighthq.sceneWgpu.WgpuPbrPipelineCache as Facade_SceneWgpu_flighthq_scen
 import flighthq.sceneWgpu.WgpuPbrPipelineCache.WgpuPbrPipeline;
 import flighthq.sceneWgpu.WgpuPbrPrelude as Facade_SceneWgpu_flighthq_sceneWgpu_WgpuPbrPrelude;
 import flighthq.sceneWgpu.WgpuPbrPrelude.WgpuPbrDefineKey;
-import flighthq.sceneWgpu.WgpuSceneRuntime;
 import flighthq.sceneWgpu.WgpuSceneRuntime.WgpuMaterialBinding;
-import flighthq.sceneWgpu.WgpuSceneRuntime.WgpuMeshUpload;
 import flighthq.sceneWgpu.WgpuShadowMap as Facade_SceneWgpu_flighthq_sceneWgpu_WgpuShadowMap;
 import flighthq.sceneWgpu.WgpuToonPrelude as Facade_SceneWgpu_flighthq_sceneWgpu_WgpuToonPrelude;
 import flighthq.sceneWgpu.WgpuToonPrelude.WgpuToonDefineKey;
@@ -57,7 +54,6 @@ import flighthq.sceneWgpu.WgpuUnlitPrelude.WgpuUnlitDefineKey;
 import flighthq.sceneWgpu.WgpuUnlitPrelude.WgpuUnlitPipeline;
 import flighthq.sceneWgpu.WgpuWireframePrelude as Facade_SceneWgpu_flighthq_sceneWgpu_WgpuWireframePrelude;
 import flighthq.sceneWgpu.WgpuWireframePrelude.WgpuWireframePipeline;
-import flighthq.sceneWgpu.WgpuWireframeUpload;
 import flighthq.sceneWgpu.WireframeWgpuMeshMaterialRenderer as Facade_SceneWgpu_flighthq_sceneWgpu_WireframeWgpuMeshMaterialRenderer;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues as Facade_SceneWgpu_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues;
 import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues as Facade_SceneWgpu_flighthq_sceneWgpu__internal__WgpuSceneRuntimeValues;
@@ -277,7 +273,7 @@ class SceneWgpu {
     return cast null;
   }
 
-  public static function ensureWgpuMeshUpload(state:WgpuRenderState, geometry:MeshGeometry):Null<WgpuMeshUpload> {
+  public static function ensureWgpuMeshUpload(state:WgpuRenderState, geometry:MeshGeometry):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_SceneWgpu_flighthq_sceneWgpu_WgpuMeshUpload.ensureWgpuMeshUpload, cast ([state, geometry] : Array<Dynamic>));
     return cast null;
   }

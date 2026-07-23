@@ -7,7 +7,6 @@ import flighthq.node.Revision.invalidateNodeAppearance;
 import flighthq.render.RenderProxy.installRenderAdaptHook;
 import flighthq.render.RenderProxy.updateRenderProxyRenderer;
 import flighthq.render.RenderState.getRenderStateRuntime;
-import flighthq.types.Node;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderProxyAdapter;
 import flighthq.types.RenderState;
@@ -46,6 +45,6 @@ class RenderProxyAdapter {
     } else {
       _Runtime.callProperty(_Runtime.field(runtime, 'renderProxyAdapterMap'), 'set', cast ([source, adapter] : Array<Dynamic>));
     }
-    _Runtime.callValue(invalidateNodeAppearance, cast ([(cast source : Node<Dynamic>)] : Array<Dynamic>));
+    _Runtime.callValue(invalidateNodeAppearance, cast ([(cast source : Dynamic)] : Array<Dynamic>));
   }
 }

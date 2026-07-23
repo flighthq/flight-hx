@@ -3,7 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ResourceLoadReport;
-import flighthq.types.Signal;
 
-typedef ResourceLoader = { var onCancel:Signal<Dynamic>; var onComplete:Signal<Dynamic>; var onError:Signal<Dynamic>; var onPause:Signal<Dynamic>; var onProgress:Signal<Dynamic>; var onResume:Signal<Dynamic>; };
+typedef ResourceLoader = { var onCancel:Dynamic; var onComplete:Dynamic; var onError:Dynamic; var onPause:Dynamic; var onProgress:Dynamic; var onResume:Dynamic; };

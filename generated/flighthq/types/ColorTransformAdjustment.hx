@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.AdjustmentKind;
-import flighthq.types.ColorMatrixAdjustment;
-import flighthq.types.ColorTransform;
 
 typedef ColorTransformAdjustment = { var kind:AdjustmentKind; var colorMatrix:Array<Float>; var colorTransform:ColorTransform; };

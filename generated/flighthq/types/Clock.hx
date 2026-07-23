@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Signal;
 
-typedef Clock = { var scale:Float; var paused:Bool; var deltaTime:Float; var elapsed:Float; var parent:Null<Clock>; var children:Array<Clock>; var onTick:Null<Signal<Dynamic>>; };
+typedef Clock = { var scale:Float; var paused:Bool; var deltaTime:Float; var elapsed:Float; var parent:Null<Clock>; var children:Array<Clock>; var onTick:Null<Dynamic>; };

@@ -3,9 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.CircleCollider;
-import flighthq.types.PlaneCollider;
-import flighthq.types.RectangleCollider;
-import flighthq.types.SphereCollider;
 
 typedef ParticleCollider = Dynamic;

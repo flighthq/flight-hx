@@ -3,7 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.DisplayObject;
-import flighthq.types.TimelineLabel;
 
 typedef TimelineSource = { var totalFrames:Float; var labels:Array<TimelineLabel>; var frameRate:Null<Float>; var constructFrame:Dynamic; };

@@ -26,7 +26,6 @@ import flighthq.textlayout.RichTextQuery.getRichTextLinkAtPoint;
 import flighthq.textlayout.TextBounds.computeTextBoundsRectangle;
 import flighthq.textlayout.TextFormat.mergeTextFormat;
 import flighthq.types.MethodsOf;
-import flighthq.types.Node;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
 import flighthq.types.RichText;
@@ -77,7 +76,7 @@ class RichText {
     _Runtime.callValue(RichText.invalidateRichTextContent__richText, cast ([source] : Array<Dynamic>));
   }
 
-  public static function computeRichTextLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeRichTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     var richText:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var layout:Dynamic = cast _Runtime.UNDEFINED;

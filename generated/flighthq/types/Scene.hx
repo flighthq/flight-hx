@@ -3,11 +3,7 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.AnimationClip;
-import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.SceneMetadata;
-import flighthq.types.SceneNode;
 
 typedef Scene = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var animations:Dynamic; var metadata:Null<SceneMetadata>; var root:SceneNode; };
 

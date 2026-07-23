@@ -4,7 +4,6 @@ package flighthq.displayobjectDom;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.DomRenderState.DomRenderStateRuntime;
-import flighthq.types.Node;
 import flighthq.types.RenderProxy2D;
 
 @:expose("flighthq.displayobjectDom.DomReconcile")
@@ -56,7 +55,7 @@ class DomReconcile {
   public static function reconcileDomContainer(container:Dynamic, runtime:DomRenderStateRuntime, newLength:Float):Void {
     var keepSet:Dynamic = cast _Runtime.UNDEFINED;
     var child:Dynamic = cast _Runtime.UNDEFINED;
-    var nextSibling:Null<Node<Dynamic>> = cast _Runtime.UNDEFINED;
+    var nextSibling:Null<Dynamic> = cast _Runtime.UNDEFINED;
     keepSet = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
     {
       var i:Dynamic = 0.0;

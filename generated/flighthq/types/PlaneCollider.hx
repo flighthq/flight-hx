@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.CollisionResponse;
 
 typedef PlaneCollider = { @:optional var restitution:Float; @:optional var friction:Float; var kind:String; var nx:Float; var ny:Float; @:optional var nz:Float; var distance:Float; };

@@ -3,8 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.FontResource;
-import flighthq.types.TextDirection;
 
 typedef ShapedGlyph = { var cluster:Float; var glyphId:Float; var xAdvance:Float; var xOffset:Float; var yAdvance:Float; var yOffset:Float; };
 

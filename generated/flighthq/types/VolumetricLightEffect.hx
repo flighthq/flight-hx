@@ -4,6 +4,5 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.Kind;
-import flighthq.types.RenderEffect;
 
 typedef VolumetricLightEffect = { var kind:Kind; @:optional var density:Float; @:optional var lightColor:Float; @:optional var lightX:Float; @:optional var lightY:Float; @:optional var samples:Float; @:optional var scattering:Float; };

@@ -3,8 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.EffectSourceMode;
 import flighthq.types.Entity.Kind;
-import flighthq.types.RenderEffect;
 
 typedef OuterGlowEffect = { var kind:Kind; @:optional var alpha:Float; @:optional var blurX:Float; @:optional var blurY:Float; @:optional var color:Float; @:optional var quality:Float; @:optional var sourceMode:EffectSourceMode; @:optional var strength:Float; };

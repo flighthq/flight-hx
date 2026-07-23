@@ -12,14 +12,13 @@ import flighthq.types.Bitmap;
 import flighthq.types.Bitmap.BitmapData;
 import flighthq.types.Bitmap.BitmapRuntime;
 import flighthq.types.MethodsOf;
-import flighthq.types.Node;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
 import flighthq.types._internal._BitmapValues.BitmapKind;
 
 @:expose("flighthq.displayobject.Bitmap")
 class Bitmap {
-  public static function computeBitmapLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
+  public static function computeBitmapLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
     var bitmapData:BitmapData = cast _Runtime.UNDEFINED;
     bitmapData = (cast _Runtime.field(source, 'data') : BitmapData);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(bitmapData, 'sourceRectangle'), null))) {

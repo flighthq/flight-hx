@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Signal;
 
 typedef StorageBackend = { var getItem:Dynamic; var setItem:Dynamic; var removeItem:Dynamic; var clear:Dynamic; var keys:Dynamic; @:optional var byteSize:Dynamic; @:optional var subscribeChanges:Dynamic; };
 
@@ -15,4 +14,4 @@ typedef StorageNamespace = { var prefix:String; };
 
 typedef StorageQuota = { var available:Float; var used:Float; };
 
-typedef StorageSignals = { var onChange:Signal<Dynamic>; };
+typedef StorageSignals = { var onChange:Dynamic; };

@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneFormats.ObjParse.createSceneFromObj;
 import flighthq.sceneFormats.ObjSchema.ObjMaterialLibrary;
-import flighthq.sceneResources.LoadSceneOptions;
 import flighthq.sceneResources._internal._LoadSceneOptionsValues.resolveScenesWithOptions;
 import flighthq.types.Scene;
 

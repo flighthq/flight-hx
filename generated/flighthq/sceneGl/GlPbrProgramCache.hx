@@ -3,7 +3,6 @@ package flighthq.sceneGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.sceneGl.GlLitProgram;
 import flighthq.sceneGl.GlPbrPrelude.GlPbrDefineKey;
 import flighthq.sceneGl.GlPbrPrelude.buildGlPbrDefineKey;
 import flighthq.sceneGl.GlPbrPrelude.getGlPbrFragmentSourceForKey;

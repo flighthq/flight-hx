@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Signal;
 
 typedef UpdateInfo = { var version:String; var notes:String; var releaseDate:String; var deltaFromVersion:Null<String>; var downloadSizeBytes:Float; var isMandatory:Bool; var minimumOsVersion:Null<String>; var sha512:String; var stagedRolloutPercent:Float; };
 
@@ -19,6 +18,6 @@ typedef UpdaterPhase = String;
 
 typedef UpdaterState = { var phase:UpdaterPhase; var info:Null<UpdateInfo>; var progress:Null<UpdateProgress>; var error:Null<UpdaterError>; };
 
-typedef AppUpdater = { var onChecking:Signal<Dynamic>; var onUpdateAvailable:Signal<Dynamic>; var onUpdateNotAvailable:Signal<Dynamic>; var onDownloadProgress:Signal<Dynamic>; var onUpdateDownloaded:Signal<Dynamic>; var onError:Signal<Dynamic>; var onUpdateCancelled:Signal<Dynamic>; var onUpdateStaging:Signal<Dynamic>; var onUpdateVerified:Signal<Dynamic>; var onUpdateRolledBack:Signal<Dynamic>; };
+typedef AppUpdater = { var onChecking:Dynamic; var onUpdateAvailable:Dynamic; var onUpdateNotAvailable:Dynamic; var onDownloadProgress:Dynamic; var onUpdateDownloaded:Dynamic; var onError:Dynamic; var onUpdateCancelled:Dynamic; var onUpdateStaging:Dynamic; var onUpdateVerified:Dynamic; var onUpdateRolledBack:Dynamic; };
 
 typedef UpdaterBackend = { var cancelDownload:Dynamic; var checkForUpdates:Dynamic; var downloadUpdate:Dynamic; var getChannel:Dynamic; var getConfig:Dynamic; var quitAndInstall:Dynamic; var rollback:Dynamic; var setChannel:Dynamic; var setConfig:Dynamic; var setFeedUrl:Dynamic; var setSignatureConfig:Dynamic; var subscribeChecking:Dynamic; var subscribeDownloadProgress:Dynamic; var subscribeError:Dynamic; var subscribeUpdateAvailable:Dynamic; var subscribeUpdateCancelled:Dynamic; var subscribeUpdateDownloaded:Dynamic; var subscribeUpdateNotAvailable:Dynamic; var subscribeUpdateRolledBack:Dynamic; var subscribeUpdateStaging:Dynamic; var subscribeUpdateVerified:Dynamic; };

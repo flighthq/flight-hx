@@ -3,11 +3,8 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.EntityWithoutRuntime;
-import flighthq.types.Matrix4;
-import flighthq.types.Vector2;
 
 typedef Camera = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var far:Float; var inverseViewProjection:Matrix4; var jitter:Vector2; var near:Float; var projection:Projection; var view:Matrix4; };
 

@@ -3,8 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.EffectSourceMode;
 import flighthq.types.Entity.Kind;
-import flighthq.types.RenderEffect;
 
 typedef BevelEffect = { var kind:Kind; @:optional var angle:Float; @:optional var bevelType:String; @:optional var blurX:Float; @:optional var blurY:Float; @:optional var distance:Float; @:optional var highlightAlpha:Float; @:optional var highlightColor:Float; @:optional var quality:Float; @:optional var shadowAlpha:Float; @:optional var shadowColor:Float; @:optional var sourceMode:EffectSourceMode; @:optional var strength:Float; };

@@ -7,7 +7,6 @@ import flighthq.node.Revision.getNodeAppearanceRevision;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.HasAppearance;
 import flighthq.types.HasBlendMode;
-import flighthq.types.Node;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderState;
 
@@ -15,7 +14,7 @@ import flighthq.types.RenderState;
 class RenderAppearance {
   public static function updateRenderProxyAppearance(state:RenderState, data:RenderProxy, ?parentData:RenderProxy):Bool {
     var appearanceId:Dynamic = cast _Runtime.UNDEFINED;
-    appearanceId = _Runtime.callValue(getNodeAppearanceRevision, cast ([(cast _Runtime.field(data, 'source') : Node<Dynamic>)] : Array<Dynamic>));
+    appearanceId = _Runtime.callValue(getNodeAppearanceRevision, cast ([(cast _Runtime.field(data, 'source') : Dynamic)] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.andValue(!_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(parentData, 'appearanceFrameId'), _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentFrameId'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(data, 'lastAppearanceId'), appearanceId)))) {
       _Runtime.callValue(RenderAppearance.recalculateAppearance__renderAppearance, cast ([state, data, parentData] : Array<Dynamic>));
       _Runtime.setField(data, 'lastAppearanceId', appearanceId);

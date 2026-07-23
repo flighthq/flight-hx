@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Signal;
 
 typedef AssetType = String;
 
@@ -21,4 +20,4 @@ typedef AssetLibrary = { var runtime:AssetLibraryRuntime; };
 
 typedef AssetLoadProgress = { var loaded:Float; var total:Float; };
 
-typedef AssetGroupLoadOptions = { @:optional var progress:Signal<Dynamic>; };
+typedef AssetGroupLoadOptions = { @:optional var progress:Dynamic; };

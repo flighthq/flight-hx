@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.TextureContainerFormat;
-import flighthq.types.TextureContainerLevel;
-import flighthq.types.TextureContainerSupercompression;
 
 typedef TextureContainer = { var format:TextureContainerFormat; var width:Float; var height:Float; var depth:Float; var mipLevels:Float; var layers:Float; var faces:Float; var supercompression:TextureContainerSupercompression; var levels:Array<TextureContainerLevel>; };

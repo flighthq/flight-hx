@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.image.ImageResourceFrom.loadImageResourceFromBytes;
 import flighthq.loader.ResourceLoader.queueResourceLoad;
 import flighthq.sceneResources.GetSceneResourceTextures.getSceneResourceTextures;
-import flighthq.sceneResources.SceneResourceResolver;
 import flighthq.sceneResources.SceneResourceResolver.SceneResourceInFlight;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.types.ImageResource;

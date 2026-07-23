@@ -9,7 +9,6 @@ import flighthq.node.Revision.getNodeLocalTransformRevision;
 import flighthq.node.Transform2d.getNodeLocalMatrix;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.HasTransform2D;
-import flighthq.types.Node;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 
@@ -19,7 +18,7 @@ class RenderTransform2d {
     var localTransformId:Dynamic = cast _Runtime.UNDEFINED;
     var parentDirty:Dynamic = cast _Runtime.UNDEFINED;
     var localDirty:Dynamic = cast _Runtime.UNDEFINED;
-    localTransformId = _Runtime.callValue(getNodeLocalTransformRevision, cast ([(cast _Runtime.field(data, 'source') : Node<Dynamic>)] : Array<Dynamic>));
+    localTransformId = _Runtime.callValue(getNodeLocalTransformRevision, cast ([(cast _Runtime.field(data, 'source') : Dynamic)] : Array<Dynamic>));
     parentDirty = _Runtime.andValue(!_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(parentData, 'transformFrameId'), _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentFrameId')));
     localDirty = !_Runtime.strictEquals(_Runtime.field(data, 'lastLocalTransformId'), localTransformId);
     if (_Runtime.truthy(_Runtime.orValue(parentDirty, function():Dynamic return cast localDirty))) {

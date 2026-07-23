@@ -3,7 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.GlRenderState;
-import flighthq.types.RenderProxy2D;
 
 typedef GlShader = { var program:Dynamic; var bind:Dynamic; };
