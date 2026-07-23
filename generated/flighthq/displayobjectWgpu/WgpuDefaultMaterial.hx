@@ -6,16 +6,15 @@ import flighthq._internal._Runtime;
 import flighthq.displayobjectWgpu.WgpuSpriteBatch.getWgpuQuadBatchPreludeWGSL;
 import flighthq.renderWgpu.WgpuMaterialRegistry.registerWgpuMaterialRenderer;
 import flighthq.types.WgpuMaterialRenderer;
-import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
 @:expose("flighthq.displayobjectWgpu.WgpuDefaultMaterial")
 class WgpuDefaultMaterial {
-  public static function registerDefaultWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerDefaultWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(registerWgpuMaterialRenderer, cast ([state, DefaultMaterialKind, defaultWgpuMaterialRenderer] : Array<Dynamic>));
   }
 
-  public static final defaultWgpuMaterialRenderer:WgpuMaterialRenderer = { instanceFloatCount: 0.0, getShaderModule: function(state:WgpuRenderState) {
+  public static final defaultWgpuMaterialRenderer:WgpuMaterialRenderer = { instanceFloatCount: 0.0, getShaderModule: function(state:Dynamic) {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     cached = _Runtime.callProperty(WgpuDefaultMaterial._modules__wgpuDefaultMaterial, 'get', cast ([_Runtime.field(state, 'device')] : Array<Dynamic>));

@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SurfaceRegion = { var height:Float; var surface:Surface; var width:Float; var x:Float; var y:Float; };
+typedef SurfaceRegion = { var height:Float; var surface:Dynamic; var width:Float; var x:Float; var y:Float; };

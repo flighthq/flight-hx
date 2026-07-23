@@ -5,12 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.node.Transform3d.setNodeLocalMatrix4;
-import flighthq.types.SceneNode;
 import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.scene.SceneNodeTransform")
 class SceneNodeTransform {
-  public static function setSceneNodeLookAt(node:SceneNode, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
+  public static function setSceneNodeLookAt(node:Dynamic, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
     var eyeX:Dynamic = cast _Runtime.UNDEFINED;
     var eyeY:Dynamic = cast _Runtime.UNDEFINED;
     var eyeZ:Dynamic = cast _Runtime.UNDEFINED;

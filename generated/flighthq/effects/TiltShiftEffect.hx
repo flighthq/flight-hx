@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.TiltShiftEffect;
 
 @:expose("flighthq.effects.TiltShiftEffect")
 class TiltShiftEffect {
-  public static function createTiltShiftEffect(?options:Dynamic):TiltShiftEffect {
+  public static function createTiltShiftEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'TiltShiftEffect' }, options]);
     return cast null;

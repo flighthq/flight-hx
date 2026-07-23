@@ -7,16 +7,13 @@ import flighthq.geometry.Matrix.copyMatrix;
 import flighthq.geometry.Matrix.createMatrix;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.renderGl.GlRenderTarget.resolveGlRenderTarget;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
-import flighthq.types.Matrix;
 import flighthq.types.RenderPassPreserve;
 
-typedef SavedGlPass__glRenderPass = { var framebuffer:Null<Dynamic>; var renderTarget:Null<GlRenderTarget>; var renderTargetViewport:Null<{ var width:Float; var height:Float; }>; var renderTransform2D:Null<Matrix>; };
+typedef SavedGlPass__glRenderPass = { var framebuffer:Null<Dynamic>; var renderTarget:Null<Dynamic>; var renderTargetViewport:Null<{ var width:Float; var height:Float; }>; var renderTransform2D:Null<Dynamic>; };
 
 @:expose("flighthq.renderGl.GlRenderPass")
 class GlRenderPass {
-  public static function beginGlRenderPass(state:GlRenderState, target:GlRenderTarget, ?preserve:RenderPassPreserve):Void {
+  public static function beginGlRenderPass(state:Dynamic, target:Dynamic, ?preserve:RenderPassPreserve):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var stack:Dynamic = cast _Runtime.UNDEFINED;
@@ -38,7 +35,7 @@ class GlRenderPass {
     _Runtime.callValue(GlRenderPass.clearGlRenderPass__glRenderPass, cast ([state, target, preserve] : Array<Dynamic>));
   }
 
-  public static function endGlRenderPass(state:GlRenderState):Void {
+  public static function endGlRenderPass(state:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var ended:Dynamic = cast _Runtime.UNDEFINED;
@@ -61,14 +58,14 @@ class GlRenderPass {
     if (_Runtime.truthy(!_Runtime.strictEquals(ended, null))) { _Runtime.callValue(resolveGlRenderTarget, cast ([state, ended] : Array<Dynamic>)); }
   }
 
-  public static function setGlRenderTransform2D(state:GlRenderState, transform:Matrix):Void {
+  public static function setGlRenderTransform2D(state:Dynamic, transform:Dynamic):Void {
     var next:Dynamic = cast _Runtime.UNDEFINED;
     next = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
     _Runtime.callValue(copyMatrix, cast ([next, transform] : Array<Dynamic>));
     _Runtime.setField(state, 'renderTransform2D', next);
   }
 
-  public static function clearGlRenderPass__glRenderPass(state:GlRenderState, target:GlRenderTarget, preserve:Null<RenderPassPreserve>):Void {
+  public static function clearGlRenderPass__glRenderPass(state:Dynamic, target:Dynamic, preserve:Null<RenderPassPreserve>):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var preserveColor:Dynamic = cast _Runtime.UNDEFINED;
     var hasDepth:Dynamic = cast _Runtime.UNDEFINED;
@@ -97,7 +94,7 @@ class GlRenderPass {
     return cast null;
   }
 
-  public static function resolveGlClearColor__glRenderPass(state:GlRenderState, target:GlRenderTarget, index:Float, out:flighthq._internal._Float32Array):Void {
+  public static function resolveGlClearColor__glRenderPass(state:Dynamic, target:Dynamic, index:Float, out:flighthq._internal._Float32Array):Void {
     var packed:Dynamic = cast _Runtime.UNDEFINED;
     var bg:Dynamic = cast _Runtime.UNDEFINED;
     packed = _Runtime.getIndex(_Runtime.field(target, 'clearColors'), index);

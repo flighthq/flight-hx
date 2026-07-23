@@ -9,12 +9,8 @@ import flighthq.interaction.HitTests.registerHitTestPrecise;
 import flighthq.node.Transform2d.getNodeWorldMatrix;
 import flighthq.surface.SurfaceFrom.createSurfaceFromImageResource;
 import flighthq.surface.SurfacePixel.getSurfacePixelChannel;
-import flighthq.types.Bitmap;
-import flighthq.types.DisplayObject;
 import flighthq.types.ImageChannel;
-import flighthq.types.ImageResource;
 import flighthq.types.Node.NodeAny;
-import flighthq.types.Surface;
 import flighthq.types._internal._BitmapValues.BitmapKind;
 
 @:expose("flighthq.interaction.RegisterBitmapHitTest")
@@ -31,12 +27,12 @@ class RegisterBitmapHitTest {
     var px:Dynamic = cast _Runtime.UNDEFINED;
     var py:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(hitTestGraphLocalBounds, cast ([source, x, y] : Array<Dynamic>))))) { return cast -1.0; }
-    bitmap = (cast source : Bitmap);
+    bitmap = (cast source : Dynamic);
     image = _Runtime.field(_Runtime.field(bitmap, 'data'), 'image');
     if (_Runtime.truthy(_Runtime.strictEquals(image, null))) { return cast 0.0; }
     surface = _Runtime.callValue(RegisterBitmapHitTest.surfaceForImage__registerBitmapHitTest, cast ([image] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(surface, null))) { return cast 0.0; }
-    _Runtime.callValue(inverseMatrixTransformPointXY, cast ([RegisterBitmapHitTest.bitmapAlphaLocalPoint__registerBitmapHitTest, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast source : DisplayObject)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
+    _Runtime.callValue(inverseMatrixTransformPointXY, cast ([RegisterBitmapHitTest.bitmapAlphaLocalPoint__registerBitmapHitTest, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast source : Dynamic)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
     rect = _Runtime.field(_Runtime.field(bitmap, 'data'), 'sourceRectangle');
     px = _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(RegisterBitmapHitTest.bitmapAlphaLocalPoint__registerBitmapHitTest, 'x') + _Runtime.select(!_Runtime.strictEquals(rect, null), function():Dynamic return cast _Runtime.field(rect, 'x'), function():Dynamic return cast 0.0))] : Array<Dynamic>));
     py = _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(RegisterBitmapHitTest.bitmapAlphaLocalPoint__registerBitmapHitTest, 'y') + _Runtime.select(!_Runtime.strictEquals(rect, null), function():Dynamic return cast _Runtime.field(rect, 'y'), function():Dynamic return cast 0.0))] : Array<Dynamic>));
@@ -45,9 +41,9 @@ class RegisterBitmapHitTest {
     return cast null;
   }
 
-  public static function surfaceForImage__registerBitmapHitTest(image:ImageResource):Null<Surface> {
+  public static function surfaceForImage__registerBitmapHitTest(image:Dynamic):Null<Dynamic> {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
-    var surface:Null<Surface> = cast _Runtime.UNDEFINED;
+    var surface:Null<Dynamic> = cast _Runtime.UNDEFINED;
     cached = _Runtime.callProperty(RegisterBitmapHitTest.surfaceCache__registerBitmapHitTest, 'get', cast ([image] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
     surface = null;

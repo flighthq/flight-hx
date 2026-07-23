@@ -12,13 +12,10 @@ import flighthq.displayobjectDom.DomStyle.setDomRendererElement;
 import flighthq.entity.Entity.createEntity;
 import flighthq.node.BoundsRectangle.getNodeLocalBoundsRectangle;
 import flighthq.types.DisplayObjectRenderer;
-import flighthq.types.DomRenderState;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
-import flighthq.types.Scale9Shape;
 
 typedef DomScale9ShapeData__domScale9Shape = Dynamic;
 
@@ -26,12 +23,12 @@ typedef DomScale9ShapeData__domScale9Shape = Dynamic;
 class DomScale9Shape {
   public static final _remappedCommands__domScale9Shape:Array<Dynamic> = cast ([] : Array<Dynamic>);
 
-  public static function createDomScale9ShapeData(_state:RenderState, _source:Renderable):DomScale9ShapeData__domScale9Shape {
+  public static function createDomScale9ShapeData(_state:Dynamic, _source:Renderable):DomScale9ShapeData__domScale9Shape {
     return cast _Runtime.callValue(createEntity, cast ([{ canvas: null, context: null }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function drawDomScale9Shape(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomScale9Shape(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -44,7 +41,7 @@ class DomScale9Shape {
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     data = (cast _Runtime.field(renderProxy, 'rendererData') : Null<DomScale9ShapeData__domScale9Shape>);
     if (_Runtime.truthy(_Runtime.strictEquals(data, null))) { return; }
-    source = (cast _Runtime.field(renderProxy, 'source') : Scale9Shape);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     __destructure0 = _Runtime.field(source, 'data');
     commands = _Runtime.field(__destructure0, 'commands');
     scale9Grid = _Runtime.field(__destructure0, 'scale9Grid');

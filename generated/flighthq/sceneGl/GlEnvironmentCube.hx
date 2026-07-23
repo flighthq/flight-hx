@@ -5,14 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlTextureUpload.uploadGlTextureImageResource;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
-import flighthq.types.CubeTexture;
-import flighthq.types.Environment;
-import flighthq.types.GlRenderState;
-import flighthq.types.ImageResource;
 
 @:expose("flighthq.sceneGl.GlEnvironmentCube")
 class GlEnvironmentCube {
-  public static function ensureGlEnvironmentSourceCube(state:GlRenderState, environment:Environment):Null<Dynamic> {
+  public static function ensureGlEnvironmentSourceCube(state:Dynamic, environment:Dynamic):Null<Dynamic> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var cube:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -47,7 +43,7 @@ class GlEnvironmentCube {
     return cast null;
   }
 
-  public static function updateGlEnvironmentCubeFace(state:GlRenderState, face:Float, image:ImageResource):Bool {
+  public static function updateGlEnvironmentCubeFace(state:Dynamic, face:Float, image:Dynamic):Bool {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     texture = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'environmentSourceCube');
@@ -60,7 +56,7 @@ class GlEnvironmentCube {
     return cast null;
   }
 
-  public static function hasGlCubeFacePixels__glEnvironmentCube(cube:CubeTexture):Bool {
+  public static function hasGlCubeFacePixels__glEnvironmentCube(cube:Dynamic):Bool {
     {
       var face:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(face, 6.0, '<'))) {

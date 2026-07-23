@@ -14,16 +14,14 @@ import flighthq.effectsCanvas.CanvasSourceModeCompositing.compositeCanvasSourceM
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.drawCanvasTintedAlphaMask;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
-import flighthq.types.CanvasRenderTarget;
-import flighthq.types.DropShadowEffect;
 
 @:expose("flighthq.effectsCanvas.CanvasDropShadowEffect")
 class CanvasDropShadowEffect {
-  public static function applyDropShadowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:DropShadowEffect):Void {
+  public static function applyDropShadowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:Dynamic):Void {
     var effect:Dynamic = cast _Runtime.UNDEFINED;
     var css:Dynamic = cast _Runtime.UNDEFINED;
     var pool:Dynamic = cast _Runtime.UNDEFINED;
-    effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : DropShadowEffect));
+    effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : Dynamic));
     css = _Runtime.callValue(computeDropShadowEffectCss, cast ([effect] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(css, null))) {
       _Runtime.callValue(drawCanvasEffectPass, cast ([dest, source, css] : Array<Dynamic>));
@@ -34,10 +32,10 @@ class CanvasDropShadowEffect {
   }
 
   public static final defaultCanvasDropShadowEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyDropShadowEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : DropShadowEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyDropShadowEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
-  public static function applyDropShadowEffectToCanvasWithPool__canvasDropShadowEffect(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:DropShadowEffect):Void {
+  public static function applyDropShadowEffectToCanvasWithPool__canvasDropShadowEffect(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     var mask:Dynamic = cast _Runtime.UNDEFINED;
     var blurred:Dynamic = cast _Runtime.UNDEFINED;
     var angle:Dynamic = cast _Runtime.UNDEFINED;

@@ -4,17 +4,15 @@ package flighthq.spritesheet;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
-import flighthq.types.Spritesheet;
-import flighthq.types.SpritesheetAnimation;
 
 @:expose("flighthq.spritesheet.SpritesheetAnimation")
 class SpritesheetAnimation {
-  public static function createSpritesheetAnimation(?obj:Dynamic):SpritesheetAnimation {
+  public static function createSpritesheetAnimation(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(createEntity, cast ([{ direction: _Runtime.coalesce(_Runtime.optionalField(obj, 'direction'), function():Dynamic return cast 'forward'), frameDuration: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameDuration'), function():Dynamic return cast 0.0), frameDurations: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameDurations'), function():Dynamic return cast null), frames: _Runtime.coalesce(_Runtime.optionalField(obj, 'frames'), function():Dynamic return cast cast ([] : Array<Dynamic>)), loop: _Runtime.coalesce(_Runtime.optionalField(obj, 'loop'), function():Dynamic return cast false), originX: _Runtime.coalesce(_Runtime.optionalField(obj, 'originX'), function():Dynamic return cast 0.0), originY: _Runtime.coalesce(_Runtime.optionalField(obj, 'originY'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpritesheetAnimationFromFrameNames(spritesheet:Spritesheet, pattern:Dynamic, ?options:Dynamic):Null<SpritesheetAnimation> {
+  public static function createSpritesheetAnimationFromFrameNames(spritesheet:Dynamic, pattern:Dynamic, ?options:Dynamic):Null<Dynamic> {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var atlas:Dynamic = cast _Runtime.UNDEFINED;
     var frames:Dynamic = cast _Runtime.UNDEFINED;

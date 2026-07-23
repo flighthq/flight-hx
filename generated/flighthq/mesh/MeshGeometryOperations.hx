@@ -10,7 +10,6 @@ import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryBounds;
 import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryNormals;
 import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryTangents;
 import flighthq.mesh.MeshGeometryLayout.CANONICAL_MESH_GEOMETRY_LAYOUT;
-import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshSubset;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
 
@@ -18,7 +17,7 @@ typedef MeshGeometryFromAttributesOptions = { @:optional var indices:Null<Dynami
 
 @:expose("flighthq.mesh.MeshGeometryOperations")
 class MeshGeometryOperations {
-  public static function createMeshGeometryFromAttributes(options:MeshGeometryFromAttributesOptions):MeshGeometry {
+  public static function createMeshGeometryFromAttributes(options:MeshGeometryFromAttributesOptions):Dynamic {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var positions:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -90,7 +89,7 @@ class MeshGeometryOperations {
     return cast null;
   }
 
-  public static function getMeshGeometryTriangleCount(geometry:MeshGeometry):Float {
+  public static function getMeshGeometryTriangleCount(geometry:Dynamic):Float {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-list'))) {
       var indexCount:Dynamic = _Runtime.select(_Runtime.field(geometry, 'indices'), function():Dynamic return cast _Runtime.field(_Runtime.field(geometry, 'indices'), 'length'), function():Dynamic return cast _Runtime.callValue(getMeshGeometryVertexCount, cast ([geometry] : Array<Dynamic>)));
       return cast _Runtime.callProperty(HxMath, 'floor', cast ([(indexCount / 3.0)] : Array<Dynamic>));
@@ -103,7 +102,7 @@ class MeshGeometryOperations {
     return cast null;
   }
 
-  public static function mergeMeshGeometries(geometries:Array<MeshGeometry>):Null<MeshGeometry> {
+  public static function mergeMeshGeometries(geometries:Array<Dynamic>):Null<Dynamic> {
     var reference:Dynamic = cast _Runtime.UNDEFINED;
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
@@ -182,7 +181,7 @@ class MeshGeometryOperations {
     return cast null;
   }
 
-  public static function validateMeshGeometry(geometry:MeshGeometry):Bool {
+  public static function validateMeshGeometry(geometry:Dynamic):Bool {
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var posOffset:Dynamic = cast _Runtime.UNDEFINED;

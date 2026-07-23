@@ -6,13 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
-import flighthq.types.KuwaharaEffect;
 
 @:expose("flighthq.effectsGl.GlKuwaharaEffect")
 class GlKuwaharaEffect {
-  public static function applyKuwaharaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:KuwaharaEffect):Void {
+  public static function applyKuwaharaEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     var radius:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
     radius = _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 3.0);
@@ -24,7 +21,7 @@ class GlKuwaharaEffect {
   }
 
   public static final defaultGlKuwaharaEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyKuwaharaEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : KuwaharaEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyKuwaharaEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static final KUWAHARA_FRAGMENT_SRC__glKuwaharaEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_radius;\nuniform vec2 u_resolution;\nout vec4 o_color;\nconst int R = 4;\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  int r = int(min(float(R), u_radius));\n  vec3 means[4];\n  float vars[4];\n  ivec2 lo[4] = ivec2[4](ivec2(-1, -1), ivec2(0, -1), ivec2(-1, 0), ivec2(0, 0));\n  for (int q = 0; q < 4; q++) {\n    vec3 sum = vec3(0.0);\n    vec3 sumSq = vec3(0.0);\n    float n = 0.0;\n    for (int y = 0; y <= R; y++) {\n      for (int x = 0; x <= R; x++) {\n        if (x > r || y > r) continue;\n        ivec2 d = ivec2(x, y) * sign(lo[q] + ivec2(1)) + lo[q] * r;\n        vec2 off = vec2(float(d.x), float(d.y)) * texel;\n        vec3 col = texture(u_texture0, v_texCoord + off).rgb;\n        sum += col;\n        sumSq += col * col;\n        n += 1.0;\n      }\n    }\n    vec3 mean = sum / n;\n    means[q] = mean;\n    vec3 v = sumSq / n - mean * mean;\n    vars[q] = v.r + v.g + v.b;\n  }\n  float minVar = vars[0];\n  vec3 result = means[0];\n  for (int q = 1; q < 4; q++) {\n    if (vars[q] < minVar) {\n      minVar = vars[q];\n      result = means[q];\n    }\n  }\n  o_color = vec4(result, texture(u_texture0, v_texCoord).a);\n}';

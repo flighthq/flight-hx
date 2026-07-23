@@ -22,7 +22,6 @@ import flighthq.spritesheetFormats.TexturePackerParse as Facade_SpritesheetForma
 import flighthq.spritesheetFormats.TexturePackerParse.TexturePackerParsed;
 import flighthq.spritesheetFormats.TexturePackerSerialize as Facade_SpritesheetFormats_flighthq_spritesheetFormats_TexturePackerSerialize;
 import flighthq.spritesheetFormats.TexturePackerSerialize.TexturePackerSerializeOptions;
-import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFormat.SpritesheetFormatKind;
 
 @:expose("flighthq.spritesheetFormats.SpritesheetFormats")
@@ -37,7 +36,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  public static function parseAsepriteSpritesheet(json:String):SpritesheetData {
+  public static function parseAsepriteSpritesheet(json:String):Dynamic {
     return cast _Runtime.callValue(Facade_SpritesheetFormats_flighthq_spritesheetFormats_AsepriteParse.parseAsepriteSpritesheet, cast ([json] : Array<Dynamic>));
     return cast null;
   }
@@ -47,7 +46,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  public static function parseCocosPlistSpritesheet(xml:String):SpritesheetData {
+  public static function parseCocosPlistSpritesheet(xml:String):Dynamic {
     return cast _Runtime.callValue(Facade_SpritesheetFormats_flighthq_spritesheetFormats_CocosPlistParse.parseCocosPlistSpritesheet, cast ([xml] : Array<Dynamic>));
     return cast null;
   }
@@ -57,17 +56,17 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  public static function parseLibgdxAtlasSpritesheet(text:String, ?options:LibgdxAtlasParseOptions):SpritesheetData {
+  public static function parseLibgdxAtlasSpritesheet(text:String, ?options:LibgdxAtlasParseOptions):Dynamic {
     return cast _Runtime.callValue(Facade_SpritesheetFormats_flighthq_spritesheetFormats_LibgdxAtlasParse.parseLibgdxAtlasSpritesheet, cast ([text, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseSpritesheet(text:String, ?formatKind:SpritesheetFormatKind, ?options:SpritesheetParseOptions):Null<SpritesheetData> {
+  public static function parseSpritesheet(text:String, ?formatKind:SpritesheetFormatKind, ?options:SpritesheetParseOptions):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_SpritesheetFormats_flighthq_spritesheetFormats_SpritesheetDetect.parseSpritesheet, cast ([text, formatKind, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseStarlingSpritesheet(xml:String, ?options:StarlingParseOptions):SpritesheetData {
+  public static function parseStarlingSpritesheet(xml:String, ?options:StarlingParseOptions):Dynamic {
     return cast _Runtime.callValue(Facade_SpritesheetFormats_flighthq_spritesheetFormats_StarlingParse.parseStarlingSpritesheet, cast ([xml, options] : Array<Dynamic>));
     return cast null;
   }
@@ -77,7 +76,7 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  public static function parseTexturePackerSpritesheet(json:String):SpritesheetData {
+  public static function parseTexturePackerSpritesheet(json:String):Dynamic {
     return cast _Runtime.callValue(Facade_SpritesheetFormats_flighthq_spritesheetFormats_TexturePackerParse.parseTexturePackerSpritesheet, cast ([json] : Array<Dynamic>));
     return cast null;
   }
@@ -91,22 +90,22 @@ class SpritesheetFormats {
     _Runtime.callValue(Facade_SpritesheetFormats_flighthq_spritesheetFormats_SpritesheetDetect.registerSpritesheetFormat, cast ([kind, entry] : Array<Dynamic>));
   }
 
-  public static function serializeAsepriteSpritesheet(data:SpritesheetData, ?existing:Dynamic, ?options:AsepriteSerializeOptions):String {
+  public static function serializeAsepriteSpritesheet(data:Dynamic, ?existing:Dynamic, ?options:AsepriteSerializeOptions):String {
     return cast _Runtime.callValue(Facade_SpritesheetFormats_flighthq_spritesheetFormats_AsepriteSerialize.serializeAsepriteSpritesheet, cast ([data, existing, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeCocosPlistSpritesheet(data:SpritesheetData, ?existing:Dynamic):String {
+  public static function serializeCocosPlistSpritesheet(data:Dynamic, ?existing:Dynamic):String {
     return cast _Runtime.callValue(Facade_SpritesheetFormats_flighthq_spritesheetFormats_CocosPlistSerialize.serializeCocosPlistSpritesheet, cast ([data, existing] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeStarlingSpritesheet(data:SpritesheetData, ?existing:Dynamic):String {
+  public static function serializeStarlingSpritesheet(data:Dynamic, ?existing:Dynamic):String {
     return cast _Runtime.callValue(Facade_SpritesheetFormats_flighthq_spritesheetFormats_StarlingSerialize.serializeStarlingSpritesheet, cast ([data, existing] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeTexturePackerSpritesheet(data:SpritesheetData, ?existing:Dynamic, ?options:TexturePackerSerializeOptions):String {
+  public static function serializeTexturePackerSpritesheet(data:Dynamic, ?existing:Dynamic, ?options:TexturePackerSerializeOptions):String {
     return cast _Runtime.callValue(Facade_SpritesheetFormats_flighthq_spritesheetFormats_TexturePackerSerialize.serializeTexturePackerSpritesheet, cast ([data, existing, options] : Array<Dynamic>));
     return cast null;
   }

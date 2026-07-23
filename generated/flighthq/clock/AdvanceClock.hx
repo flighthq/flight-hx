@@ -4,11 +4,10 @@ package flighthq.clock;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
-import flighthq.types.Clock;
 
 @:expose("flighthq.clock.AdvanceClock")
 class AdvanceClock {
-  public static function advanceClock(clock:Clock, deltaSeconds:Float):Void {
+  public static function advanceClock(clock:Dynamic, deltaSeconds:Float):Void {
     var scaledDelta:Dynamic = cast _Runtime.UNDEFINED;
     var children:Dynamic = cast _Runtime.UNDEFINED;
     scaledDelta = _Runtime.select(_Runtime.field(clock, 'paused'), function():Dynamic return cast 0.0, function():Dynamic return cast (deltaSeconds * _Runtime.field(clock, 'scale')));

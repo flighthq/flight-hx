@@ -6,8 +6,8 @@ import flighthq._internal._Runtime;
 
 typedef TextMeasureFunction = Dynamic;
 
-typedef TextLayoutGroup = { var ascent:Float; var descent:Float; var endIndex:Float; var format:TextFormat; var height:Float; var leading:Float; var lineIndex:Float; var offsetX:Float; var offsetY:Float; var positions:Array<Float>; var startIndex:Float; var width:Float; };
+typedef TextLayoutGroup = { var ascent:Float; var descent:Float; var endIndex:Float; var format:Dynamic; var height:Float; var leading:Float; var lineIndex:Float; var offsetX:Float; var offsetY:Float; var positions:Array<Float>; var startIndex:Float; var width:Float; };
 
-typedef TextLayoutParams = { @:optional var autoSize:TextAutoSize; @:optional var border:Bool; @:optional var direction:TextDirection; var formatRanges:Array<TextFormatRange>; var height:Float; @:optional var justification:TextJustification; @:optional var maxLines:Float; var measure:TextMeasureFunction; @:optional var multiline:Bool; var text:String; @:optional var truncationCharacter:String; @:optional var verticalAlign:TextVerticalAlign; var width:Float; @:optional var wordWrap:Bool; };
+typedef TextLayoutParams = { @:optional var autoSize:TextAutoSize; @:optional var border:Bool; @:optional var direction:TextDirection; var formatRanges:Array<Dynamic>; var height:Float; @:optional var justification:TextJustification; @:optional var maxLines:Float; var measure:TextMeasureFunction; @:optional var multiline:Bool; var text:String; @:optional var truncationCharacter:String; @:optional var verticalAlign:TextVerticalAlign; var width:Float; @:optional var wordWrap:Bool; };
 
-typedef TextLayoutResult = { var groups:Array<TextLayoutGroup>; var lineAscents:Array<Float>; var lineDescents:Array<Float>; var lineHeights:Array<Float>; var lineLeadings:Array<Float>; var lineWidths:Array<Float>; var numLines:Float; var textHeight:Float; var textWidth:Float; };
+typedef TextLayoutResult = { var groups:Array<Dynamic>; var lineAscents:Array<Float>; var lineDescents:Array<Float>; var lineHeights:Array<Float>; var lineLeadings:Array<Float>; var lineWidths:Array<Float>; var numLines:Float; var textHeight:Float; var textWidth:Float; };

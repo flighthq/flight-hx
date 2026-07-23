@@ -10,7 +10,6 @@ import flighthq.sceneGl._internal._GlMeshProgramValues.GL_UV_TRANSFORM_VERTEX_GL
 import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
 import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
-import flighthq.types.GlRenderState;
 import flighthq.types._internal._SceneLightBlockValues.MAX_FORWARD_LIGHTS;
 
 typedef GlClassicLightingModel = String;
@@ -39,7 +38,7 @@ class GlClassicPrelude {
     return cast null;
   }
 
-  public static function ensureGlClassicProgram(state:GlRenderState, key:GlClassicDefineKey):GlClassicProgram {
+  public static function ensureGlClassicProgram(state:Dynamic, key:GlClassicDefineKey):GlClassicProgram {
     var fullKey:GlClassicDefineKey = cast _Runtime.UNDEFINED;
     fullKey = _Runtime.mergeObjects([key, { hasSkin: _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeSkinnedRun') }]);
     return cast _Runtime.callValue(ensureGlSceneProgram, cast ([state, 'classic:' + Std.string(_Runtime.callValue(buildGlClassicDefineKey, cast ([fullKey] : Array<Dynamic>))) + '', function(gl:Dynamic) return _Runtime.callValue(compileGlClassicProgram, cast ([gl, fullKey] : Array<Dynamic>))] : Array<Dynamic>));

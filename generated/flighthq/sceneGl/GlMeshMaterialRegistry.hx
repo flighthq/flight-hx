@@ -6,22 +6,20 @@ import flighthq._internal._Runtime;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.GlMeshMaterialRenderer;
-import flighthq.types.GlRenderState;
-import flighthq.types.Material;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
 @:expose("flighthq.sceneGl.GlMeshMaterialRegistry")
 class GlMeshMaterialRegistry {
-  public static function getGlMeshMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMeshMaterialRenderer> {
+  public static function getGlMeshMaterialRenderer(state:Dynamic, kind:Kind):Null<GlMeshMaterialRenderer> {
     return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry'), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function registerGlMeshMaterialRenderer(state:GlRenderState, kind:Kind, renderer:GlMeshMaterialRenderer):Void {
+  public static function registerGlMeshMaterialRenderer(state:Dynamic, kind:Kind, renderer:GlMeshMaterialRenderer):Void {
     _Runtime.callProperty(_Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry'), 'set', cast ([kind, renderer] : Array<Dynamic>));
   }
 
-  public static function resolveGlMeshMaterialRenderer(state:GlRenderState, material:Null<Material>):Null<GlMeshMaterialRenderer> {
+  public static function resolveGlMeshMaterialRenderer(state:Dynamic, material:Null<Dynamic>):Null<GlMeshMaterialRenderer> {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry');
     if (_Runtime.truthy(!_Runtime.strictEquals(material, null))) {

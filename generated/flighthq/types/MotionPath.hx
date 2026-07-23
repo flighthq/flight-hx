@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 
 typedef MotionPathLoopMode = String;
 
-typedef MotionPath = { var direction:Float; var distance:Float; var length:Float; var loopMode:MotionPathLoopMode; var path:Path; var speed:Float; };
+typedef MotionPath = { var direction:Float; var distance:Float; var length:Float; var loopMode:MotionPathLoopMode; var path:Dynamic; var speed:Float; };

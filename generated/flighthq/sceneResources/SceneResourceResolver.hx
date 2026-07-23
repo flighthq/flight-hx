@@ -10,11 +10,9 @@ import flighthq.loader.ResourceLoader.startResourceLoad;
 import flighthq.sceneResources._internal._SceneMaterialTextureRegistryValues.createSceneMaterialTextureRegistry;
 import flighthq.sceneResources._internal._SceneMaterialTextureRegistryValues.registerBuiltInSceneMaterialTextures;
 import flighthq.sceneResources._internal._SceneResourceFetchValues.createWebSceneResourceFetch;
-import flighthq.types.ResourceLoader;
-import flighthq.types.Texture;
 
 typedef SceneResourceInFlight = { var controller:Dynamic; var key:String; var promise:flighthq._internal._Promise<flighthq._internal._Nothing>; };
 
-typedef SceneResourceResolver = { var fetch:SceneResourceFetch; var inFlight:Dynamic; var loader:ResourceLoader; var registry:SceneMaterialTextureRegistry; var signals:Null<SceneResourceSignals>; };
+typedef SceneResourceResolver = { var fetch:SceneResourceFetch; var inFlight:Dynamic; var loader:Dynamic; var registry:SceneMaterialTextureRegistry; var signals:Null<SceneResourceSignals>; };
 
 typedef SceneResourceResolverOptions = { @:optional var fetch:SceneResourceFetch; @:optional var maxConcurrent:Float; @:optional var registry:SceneMaterialTextureRegistry; };

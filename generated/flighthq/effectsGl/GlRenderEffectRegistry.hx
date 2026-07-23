@@ -4,21 +4,20 @@ package flighthq.effectsGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
-import flighthq.types.GlRenderState;
 
 @:expose("flighthq.effectsGl.GlRenderEffectRegistry")
 class GlRenderEffectRegistry {
-  public static function getGlRenderEffectRunner(state:GlRenderState, kind:String):Null<GlRenderEffectRunner> {
+  public static function getGlRenderEffectRunner(state:Dynamic, kind:String):Null<GlRenderEffectRunner> {
     return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(GlRenderEffectRegistry._registries__glRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function hasGlRenderEffectRunner(state:GlRenderState, kind:String):Bool {
+  public static function hasGlRenderEffectRunner(state:Dynamic, kind:String):Bool {
     return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(GlRenderEffectRegistry._registries__glRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>)), 'has', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast false);
     return cast null;
   }
 
-  public static function registerGlRenderEffect(state:GlRenderState, kind:String, runner:GlRenderEffectRunner):Void {
+  public static function registerGlRenderEffect(state:Dynamic, kind:String, runner:GlRenderEffectRunner):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = _Runtime.callProperty(GlRenderEffectRegistry._registries__glRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')))) {

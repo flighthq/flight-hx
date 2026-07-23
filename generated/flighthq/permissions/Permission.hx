@@ -3,6 +3,7 @@ package flighthq.permissions;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.Geolocation;
 import flighthq.types.Permission.PermissionBackend;
 import flighthq.types.Permission.PermissionName;
 import flighthq.types.Permission.PermissionState;

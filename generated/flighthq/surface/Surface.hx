@@ -60,43 +60,38 @@ import flighthq.types.ColorTransform.ColorTransformLike;
 import flighthq.types.GradientSpread;
 import flighthq.types.ImageChannel;
 import flighthq.types.ImageFormat;
-import flighthq.types.ImageResource;
 import flighthq.types.PixelOrder;
 import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.Surface;
 import flighthq.types.SurfaceCompositeMode;
 import flighthq.types.SurfaceEdgeMode;
-import flighthq.types.SurfaceFingerprint;
-import flighthq.types.SurfaceHistogram;
 import flighthq.types.SurfaceMismatch;
-import flighthq.types.SurfaceRegion;
 import flighthq.types.SurfaceResizeMode;
 import flighthq.types.ThresholdOperation;
 
 @:expose("flighthq.surface.Surface")
 class Surface {
-  public static function applySurfaceColorTransform(dest:SurfaceRegion, source:SurfaceRegion, ct:ColorTransformLike):Void {
+  public static function applySurfaceColorTransform(dest:Dynamic, source:Dynamic, ct:ColorTransformLike):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceTransform.applySurfaceColorTransform, cast ([dest, source, ct] : Array<Dynamic>));
   }
 
-  public static function applySurfaceCurve(out:SurfaceRegion, source:SurfaceRegion, redLut:Null<Dynamic>, greenLut:Null<Dynamic>, blueLut:Null<Dynamic>, ?alphaLut:Null<Dynamic>):Void {
+  public static function applySurfaceCurve(out:Dynamic, source:Dynamic, redLut:Null<Dynamic>, greenLut:Null<Dynamic>, blueLut:Null<Dynamic>, ?alphaLut:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceTone.applySurfaceCurve, cast ([out, source, redLut, greenLut, blueLut, alphaLut] : Array<Dynamic>));
   }
 
-  public static function applySurfaceLevels(out:SurfaceRegion, source:SurfaceRegion, ?blackPoint:Float, ?whitePoint:Float, ?gamma:Float):Void {
+  public static function applySurfaceLevels(out:Dynamic, source:Dynamic, ?blackPoint:Float, ?whitePoint:Float, ?gamma:Float):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceTone.applySurfaceLevels, cast ([out, source, blackPoint, whitePoint, gamma] : Array<Dynamic>));
   }
 
-  public static function applySurfacePaletteMap(dest:SurfaceRegion, source:SurfaceRegion, redMap:Null<Array<Float>>, greenMap:Null<Array<Float>>, blueMap:Null<Array<Float>>, alphaMap:Null<Array<Float>>):Void {
+  public static function applySurfacePaletteMap(dest:Dynamic, source:Dynamic, redMap:Null<Array<Float>>, greenMap:Null<Array<Float>>, blueMap:Null<Array<Float>>, alphaMap:Null<Array<Float>>):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfacePaletteMap.applySurfacePaletteMap, cast ([dest, source, redMap, greenMap, blueMap, alphaMap] : Array<Dynamic>));
   }
 
-  public static function applySurfaceThreshold(dest:SurfaceRegion, source:SurfaceRegion, operation:ThresholdOperation, thresholdValue:Float, ?color:Float, ?mask:Float, ?copySource:Bool):Float {
+  public static function applySurfaceThreshold(dest:Dynamic, source:Dynamic, operation:ThresholdOperation, thresholdValue:Float, ?color:Float, ?mask:Float, ?copySource:Bool):Float {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceTransform.applySurfaceThreshold, cast ([dest, source, operation, thresholdValue, color, mask, copySource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bevelSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceBevelOptions):Void {
+  public static function bevelSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceBevelOptions):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceBevel.bevelSurface, cast ([out, scratch, source, options] : Array<Dynamic>));
   }
 
@@ -116,7 +111,7 @@ class Surface {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceBlur.blurSurfacePixelsVerticalWeighted, cast ([out, source, width, height, kernel] : Array<Dynamic>));
   }
 
-  public static function boxBlurSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceBoxBlurOptions):Void {
+  public static function boxBlurSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceBoxBlurOptions):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceBlur.boxBlurSurface, cast ([out, scratch, source, options] : Array<Dynamic>));
   }
 
@@ -152,30 +147,30 @@ class Surface {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceColorMatrix.buildSurfaceSepiaColorMatrix, cast ([out] : Array<Dynamic>));
   }
 
-  public static function cloneSurface(source:Surface):Surface {
+  public static function cloneSurface(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(source, 'alphaType'), colorSpace: _Runtime.field(source, 'colorSpace'), compressed: null, data: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [_Runtime.field(source, 'data')]), format: _Runtime.field(source, 'format'), height: _Runtime.field(source, 'height'), source: null, version: 0.0, width: _Runtime.field(source, 'width') }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function colorMatrixSurface(out:Dynamic, source:SurfaceRegion, matrix:Array<Float>):Void {
+  public static function colorMatrixSurface(out:Dynamic, source:Dynamic, matrix:Array<Float>):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceColorMatrix.colorMatrixSurface, cast ([out, source, matrix] : Array<Dynamic>));
   }
 
-  public static function compareSurface(source:Surface, other:Surface):Null<Surface> {
+  public static function compareSurface(source:Dynamic, other:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceCompare.compareSurface, cast ([source, other] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function compareSurfaceFingerprints(a:SurfaceFingerprint, b:SurfaceFingerprint):Float {
+  public static function compareSurfaceFingerprints(a:Dynamic, b:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceFingerprint.compareSurfaceFingerprints, cast ([a, b] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function compositeSurfacePixels(dest:SurfaceRegion, pixels:Dynamic, ?mode:SurfaceCompositeMode):Void {
+  public static function compositeSurfacePixels(dest:Dynamic, pixels:Dynamic, ?mode:SurfaceCompositeMode):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceComposite.compositeSurfacePixels, cast ([dest, pixels, mode] : Array<Dynamic>));
   }
 
-  public static function compositeSurfaceRegion(dest:SurfaceRegion, source:SurfaceRegion, ?mode:SurfaceCompositeMode):Void {
+  public static function compositeSurfaceRegion(dest:Dynamic, source:Dynamic, ?mode:SurfaceCompositeMode):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceComposite.compositeSurfaceRegion, cast ([dest, source, mode] : Array<Dynamic>));
   }
 
@@ -187,7 +182,7 @@ class Surface {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceColorMatrix.concatSurfaceColorMatrix, cast ([out, first, second] : Array<Dynamic>));
   }
 
-  public static function convertSurfaceAlphaType(out:Surface, target:AlphaType):Void {
+  public static function convertSurfaceAlphaType(out:Dynamic, target:AlphaType):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var len:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(out, 'alphaType'), target))) { return; }
@@ -231,28 +226,28 @@ class Surface {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceFormat.convertSurfacePixelOrder, cast ([out, source, length, from, to] : Array<Dynamic>));
   }
 
-  public static function convolveSurface(out:Dynamic, source:SurfaceRegion, options:SurfaceConvolutionOptions):Void {
+  public static function convolveSurface(out:Dynamic, source:Dynamic, options:SurfaceConvolutionOptions):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceConvolution.convolveSurface, cast ([out, source, options] : Array<Dynamic>));
   }
 
-  public static function copySurfaceAlpha(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function copySurfaceAlpha(dest:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceAlpha.copySurfaceAlpha, cast ([dest, source] : Array<Dynamic>));
   }
 
-  public static function copySurfaceChannel(dest:SurfaceRegion, destChannel:ImageChannel, source:SurfaceRegion, sourceChannel:ImageChannel):Void {
+  public static function copySurfaceChannel(dest:Dynamic, destChannel:ImageChannel, source:Dynamic, sourceChannel:ImageChannel):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceCopy.copySurfaceChannel, cast ([dest, destChannel, source, sourceChannel] : Array<Dynamic>));
   }
 
-  public static function copySurfacePixels(dest:SurfaceRegion, source:SurfaceRegion, ?composite:Bool):Void {
+  public static function copySurfacePixels(dest:Dynamic, source:Dynamic, ?composite:Bool):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceCopy.copySurfacePixels, cast ([dest, source, composite] : Array<Dynamic>));
   }
 
-  public static function createImageResourceFromSurface(surface:Surface):ImageResource {
+  public static function createImageResourceFromSurface(surface:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceFrom.createImageResourceFromSurface, cast ([surface] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSurface(width:Float, height:Float, color:Float = 0.0):Surface {
+  public static function createSurface(width:Float, height:Float, color:Float = 0.0):Dynamic {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [((width * height) * 4.0)]);
     if (_Runtime.truthy(!_Runtime.strictEquals(color, 0.0))) {
@@ -275,210 +270,210 @@ class Surface {
     return cast null;
   }
 
-  public static function createSurfaceFingerprint(source:Surface, ?gridSize:Float):SurfaceFingerprint {
+  public static function createSurfaceFingerprint(source:Dynamic, ?gridSize:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceFingerprint.createSurfaceFingerprint, cast ([source, gridSize] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSurfaceFromCanvas(canvas:Dynamic, ?x:Float, ?y:Float, ?width:Float, ?height:Float):Surface {
+  public static function createSurfaceFromCanvas(canvas:Dynamic, ?x:Float, ?y:Float, ?width:Float, ?height:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceFrom.createSurfaceFromCanvas, cast ([canvas, x, y, width, height] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSurfaceFromImageResource(resource:ImageResource):Surface {
+  public static function createSurfaceFromImageResource(resource:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceFrom.createSurfaceFromImageResource, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSurfaceFromImageSource(source:Dynamic, width:Float, height:Float):Surface {
+  public static function createSurfaceFromImageSource(source:Dynamic, width:Float, height:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceFrom.createSurfaceFromImageSource, cast ([source, width, height] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSurfaceRegion(surface:Surface, ?x:Float, ?y:Float, ?width:Float, ?height:Float):SurfaceRegion {
+  public static function createSurfaceRegion(surface:Dynamic, ?x:Float, ?y:Float, ?width:Float, ?height:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceRegion.createSurfaceRegion, cast ([surface, x, y, width, height] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cropSurface(source:Surface, rect:RectangleLike):Surface {
+  public static function cropSurface(source:Dynamic, rect:RectangleLike):Dynamic {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceCrop.cropSurface, cast ([source, rect] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function dilateSurface(out:Dynamic, source:SurfaceRegion, radius:Float):Void {
+  public static function dilateSurface(out:Dynamic, source:Dynamic, radius:Float):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceMorphological.dilateSurface, cast ([out, source, radius] : Array<Dynamic>));
   }
 
-  public static function displaceSurface(out:Dynamic, source:SurfaceRegion, options:SurfaceDisplacementMapOptions):Void {
+  public static function displaceSurface(out:Dynamic, source:Dynamic, options:SurfaceDisplacementMapOptions):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceDisplacement.displaceSurface, cast ([out, source, options] : Array<Dynamic>));
   }
 
-  public static function dissolveSurfacePixels(dest:SurfaceRegion, source:SurfaceRegion, seed:Float, pixelCount:Float, ?fillColor:Float):Float {
+  public static function dissolveSurfacePixels(dest:Dynamic, source:Dynamic, seed:Float, pixelCount:Float, ?fillColor:Float):Float {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceDissolve.dissolveSurfacePixels, cast ([dest, source, seed, pixelCount, fillColor] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function drawSurface(dest:Dynamic, source:SurfaceRegion, x:Float, y:Float):Void {
+  public static function drawSurface(dest:Dynamic, source:Dynamic, x:Float, y:Float):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceDraw.drawSurface, cast ([dest, source, x, y] : Array<Dynamic>));
   }
 
-  public static function dropShadowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceDropShadowOptions):Void {
+  public static function dropShadowSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceDropShadowOptions):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceShadow.dropShadowSurface, cast ([out, scratch, source, options] : Array<Dynamic>));
   }
 
-  public static function encodeSurface(source:Surface, ?format:ImageFormat, ?quality:Float):Dynamic {
+  public static function encodeSurface(source:Dynamic, ?format:ImageFormat, ?quality:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceEncode.encodeSurface, cast ([source, format, quality] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function equalizeSurfaceHistogram(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function equalizeSurfaceHistogram(dest:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceHistogram.equalizeSurfaceHistogram, cast ([dest, source] : Array<Dynamic>));
   }
 
-  public static function erodeSurface(out:Dynamic, source:SurfaceRegion, radius:Float):Void {
+  public static function erodeSurface(out:Dynamic, source:Dynamic, radius:Float):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceMorphological.erodeSurface, cast ([out, source, radius] : Array<Dynamic>));
   }
 
-  public static function extendSurface(source:Surface, left:Float, top:Float, right:Float, bottom:Float, ?edgeMode:SurfaceEdgeMode, ?fillColor:Dynamic):Surface {
+  public static function extendSurface(source:Dynamic, left:Float, top:Float, right:Float, bottom:Float, ?edgeMode:SurfaceEdgeMode, ?fillColor:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceCrop.extendSurface, cast ([source, left, top, right, bottom, edgeMode, fillColor] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function extractSurfacePixels(out:Dynamic, source:SurfaceRegion):Void {
+  public static function extractSurfacePixels(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceComposite.extractSurfacePixels, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function extractSurfacePixels32(out:Dynamic, source:SurfaceRegion):Void {
+  public static function extractSurfacePixels32(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceComposite.extractSurfacePixels32, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function fillSurfaceLinearGradient(dest:SurfaceRegion, ramp:Dynamic, x0:Float, y0:Float, x1:Float, y1:Float, ?spread:GradientSpread):Void {
+  public static function fillSurfaceLinearGradient(dest:Dynamic, ramp:Dynamic, x0:Float, y0:Float, x1:Float, y1:Float, ?spread:GradientSpread):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceGradientFill.fillSurfaceLinearGradient, cast ([dest, ramp, x0, y0, x1, y1, spread] : Array<Dynamic>));
   }
 
-  public static function fillSurfaceNoise(dest:SurfaceRegion, seed:Float, ?low:Float, ?high:Float, ?grayScale:Bool):Void {
+  public static function fillSurfaceNoise(dest:Dynamic, seed:Float, ?low:Float, ?high:Float, ?grayScale:Bool):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceNoise.fillSurfaceNoise, cast ([dest, seed, low, high, grayScale] : Array<Dynamic>));
   }
 
-  public static function fillSurfacePerlinNoise(dest:SurfaceRegion, baseX:Float, baseY:Float, octaves:Float, seed:Float, ?grayScale:Bool, ?stitch:Bool, ?channelOptions:Float):Void {
+  public static function fillSurfacePerlinNoise(dest:Dynamic, baseX:Float, baseY:Float, octaves:Float, seed:Float, ?grayScale:Bool, ?stitch:Bool, ?channelOptions:Float):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceNoise.fillSurfacePerlinNoise, cast ([dest, baseX, baseY, octaves, seed, grayScale, stitch, channelOptions] : Array<Dynamic>));
   }
 
-  public static function fillSurfaceRadialGradient(dest:SurfaceRegion, ramp:Dynamic, cx:Float, cy:Float, radius:Float, ?focalX:Float, ?focalY:Float, ?spread:GradientSpread):Void {
+  public static function fillSurfaceRadialGradient(dest:Dynamic, ramp:Dynamic, cx:Float, cy:Float, radius:Float, ?focalX:Float, ?focalY:Float, ?spread:GradientSpread):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceGradientFill.fillSurfaceRadialGradient, cast ([dest, ramp, cx, cy, radius, focalX, focalY, spread] : Array<Dynamic>));
   }
 
-  public static function fillSurfaceRectangle(dest:SurfaceRegion, color:Float):Void {
+  public static function fillSurfaceRectangle(dest:Dynamic, color:Float):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceFill.fillSurfaceRectangle, cast ([dest, color] : Array<Dynamic>));
   }
 
-  public static function fillSurfaceTurbulence(dest:SurfaceRegion, baseX:Float, baseY:Float, octaves:Float, seed:Float, ?grayScale:Bool, ?stitch:Bool, ?channelOptions:Float):Void {
+  public static function fillSurfaceTurbulence(dest:Dynamic, baseX:Float, baseY:Float, octaves:Float, seed:Float, ?grayScale:Bool, ?stitch:Bool, ?channelOptions:Float):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceNoise.fillSurfaceTurbulence, cast ([dest, baseX, baseY, octaves, seed, grayScale, stitch, channelOptions] : Array<Dynamic>));
   }
 
-  public static function flipSurfaceHorizontal(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function flipSurfaceHorizontal(dest:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceFlip.flipSurfaceHorizontal, cast ([dest, source] : Array<Dynamic>));
   }
 
-  public static function flipSurfaceVertical(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function flipSurfaceVertical(dest:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceFlip.flipSurfaceVertical, cast ([dest, source] : Array<Dynamic>));
   }
 
-  public static function floodFillSurface(out:Surface, x:Float, y:Float, color:Float):Void {
+  public static function floodFillSurface(out:Dynamic, x:Float, y:Float, color:Float):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceFill.floodFillSurface, cast ([out, x, y, color] : Array<Dynamic>));
   }
 
-  public static function formatSurfaceFingerprint(fingerprint:SurfaceFingerprint):String {
+  public static function formatSurfaceFingerprint(fingerprint:Dynamic):String {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceFingerprint.formatSurfaceFingerprint, cast ([fingerprint] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function gaussianBlurSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, sigmaX:Float, ?sigmaY:Float, ?passes:Float):Void {
+  public static function gaussianBlurSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, sigmaX:Float, ?sigmaY:Float, ?passes:Float):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceBlur.gaussianBlurSurface, cast ([out, scratch, source, sigmaX, sigmaY, passes] : Array<Dynamic>));
   }
 
-  public static function getSurfaceColorBoundsRectangle(source:SurfaceRegion, mask:Float, color:Float, ?findColor:Bool):Null<RectangleLike> {
+  public static function getSurfaceColorBoundsRectangle(source:Dynamic, mask:Float, color:Float, ?findColor:Bool):Null<RectangleLike> {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceQuery.getSurfaceColorBoundsRectangle, cast ([source, mask, color, findColor] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSurfaceCoverage(source:Surface, backgroundColor:Float, ?channelTolerance:Float):Float {
+  public static function getSurfaceCoverage(source:Dynamic, backgroundColor:Float, ?channelTolerance:Float):Float {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceCoverage.getSurfaceCoverage, cast ([source, backgroundColor, channelTolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSurfaceHistogram(source:SurfaceRegion):SurfaceHistogram {
+  public static function getSurfaceHistogram(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceHistogram.getSurfaceHistogram, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSurfaceMismatch(source:Surface, other:Surface, ?channelTolerance:Float):SurfaceMismatch {
+  public static function getSurfaceMismatch(source:Dynamic, other:Dynamic, ?channelTolerance:Float):SurfaceMismatch {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceCompare.getSurfaceMismatch, cast ([source, other, channelTolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSurfacePixel(source:Surface, x:Float, y:Float):Float {
+  public static function getSurfacePixel(source:Dynamic, x:Float, y:Float):Float {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfacePixel.getSurfacePixel, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSurfacePixelChannel(source:Surface, x:Float, y:Float, channel:ImageChannel):Float {
+  public static function getSurfacePixelChannel(source:Dynamic, x:Float, y:Float, channel:ImageChannel):Float {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfacePixel.getSurfacePixelChannel, cast ([source, x, y, channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSurfacePixelLuminance(source:Surface, x:Float, y:Float):Float {
+  public static function getSurfacePixelLuminance(source:Dynamic, x:Float, y:Float):Float {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfacePixel.getSurfacePixelLuminance, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSurfacePixelRgb(source:Surface, x:Float, y:Float):Float {
+  public static function getSurfacePixelRgb(source:Dynamic, x:Float, y:Float):Float {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfacePixel.getSurfacePixelRgb, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function glowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceGlowOptions):Void {
+  public static function glowSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceGlowOptions):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceShadow.glowSurface, cast ([out, scratch, source, options] : Array<Dynamic>));
   }
 
-  public static function gradientBevelSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ramp:Dynamic, ?options:SurfaceGradientBevelOptions):Void {
+  public static function gradientBevelSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ramp:Dynamic, ?options:SurfaceGradientBevelOptions):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceGradient.gradientBevelSurface, cast ([out, scratch, source, ramp, options] : Array<Dynamic>));
   }
 
-  public static function gradientGlowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ramp:Dynamic, ?options:SurfaceGradientGlowOptions):Void {
+  public static function gradientGlowSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ramp:Dynamic, ?options:SurfaceGradientGlowOptions):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceGradient.gradientGlowSurface, cast ([out, scratch, source, ramp, options] : Array<Dynamic>));
   }
 
-  public static function innerGlowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceInnerGlowOptions):Void {
+  public static function innerGlowSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceInnerGlowOptions):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceShadow.innerGlowSurface, cast ([out, scratch, source, options] : Array<Dynamic>));
   }
 
-  public static function innerShadowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceInnerShadowOptions):Void {
+  public static function innerShadowSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceInnerShadowOptions):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceShadow.innerShadowSurface, cast ([out, scratch, source, options] : Array<Dynamic>));
   }
 
-  public static function medianSurface(out:Dynamic, source:SurfaceRegion, radius:Float):Void {
+  public static function medianSurface(out:Dynamic, source:Dynamic, radius:Float):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceMedian.medianSurface, cast ([out, source, radius] : Array<Dynamic>));
   }
 
-  public static function mergeSurface(dest:SurfaceRegion, source:SurfaceRegion, redMultiplier:Float, greenMultiplier:Float, blueMultiplier:Float, alphaMultiplier:Float):Void {
+  public static function mergeSurface(dest:Dynamic, source:Dynamic, redMultiplier:Float, greenMultiplier:Float, blueMultiplier:Float, alphaMultiplier:Float):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceTransform.mergeSurface, cast ([dest, source, redMultiplier, greenMultiplier, blueMultiplier, alphaMultiplier] : Array<Dynamic>));
   }
 
-  public static function mergeSurfaceChannels(out:SurfaceRegion, r:SurfaceRegion, g:SurfaceRegion, b:SurfaceRegion, a:SurfaceRegion):Void {
+  public static function mergeSurfaceChannels(out:Dynamic, r:Dynamic, g:Dynamic, b:Dynamic, a:Dynamic):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceChannel.mergeSurfaceChannels, cast ([out, r, g, b, a] : Array<Dynamic>));
   }
 
-  public static function multiplySurfaceAlpha(out:SurfaceRegion, factor:Float):Void {
+  public static function multiplySurfaceAlpha(out:Dynamic, factor:Float):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceAlpha.multiplySurfaceAlpha, cast ([out, factor] : Array<Dynamic>));
   }
 
-  public static function parseSurfaceFingerprint(text:String):Null<SurfaceFingerprint> {
+  public static function parseSurfaceFingerprint(text:String):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceFingerprint.parseSurfaceFingerprint, cast ([text] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function pixelateSurface(out:Dynamic, source:SurfaceRegion, blockSize:Float):Void {
+  public static function pixelateSurface(out:Dynamic, source:Dynamic, blockSize:Float):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfacePixelate.pixelateSurface, cast ([out, source, blockSize] : Array<Dynamic>));
   }
 
@@ -486,31 +481,31 @@ class Surface {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceFormat.premultiplySurfacePixels, cast ([out, source, length] : Array<Dynamic>));
   }
 
-  public static function resizeSurface(dest:SurfaceRegion, source:SurfaceRegion, ?options:Dynamic):Void {
+  public static function resizeSurface(dest:Dynamic, source:Dynamic, ?options:Dynamic):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceResize.resizeSurface, cast ([dest, source, options] : Array<Dynamic>));
   }
 
-  public static function rotateSurface(dest:SurfaceRegion, source:SurfaceRegion, angle:Float, ?pivotX:Float, ?pivotY:Float, ?edgeMode:SurfaceEdgeMode, ?sampleMode:SurfaceResizeMode):Void {
+  public static function rotateSurface(dest:Dynamic, source:Dynamic, angle:Float, ?pivotX:Float, ?pivotY:Float, ?edgeMode:SurfaceEdgeMode, ?sampleMode:SurfaceResizeMode):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceRotate.rotateSurface, cast ([dest, source, angle, pivotX, pivotY, edgeMode, sampleMode] : Array<Dynamic>));
   }
 
-  public static function rotateSurface180(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function rotateSurface180(dest:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceRotate.rotateSurface180, cast ([dest, source] : Array<Dynamic>));
   }
 
-  public static function rotateSurfaceClockwise(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function rotateSurfaceClockwise(dest:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceRotate.rotateSurfaceClockwise, cast ([dest, source] : Array<Dynamic>));
   }
 
-  public static function rotateSurfaceCounterClockwise(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function rotateSurfaceCounterClockwise(dest:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceRotate.rotateSurfaceCounterClockwise, cast ([dest, source] : Array<Dynamic>));
   }
 
-  public static function scrollSurface(out:Surface, dx:Float, dy:Float):Void {
+  public static function scrollSurface(out:Dynamic, dx:Float, dy:Float):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceTransform.scrollSurface, cast ([out, dx, dy] : Array<Dynamic>));
   }
 
-  public static function setSurfaceAlpha(out:SurfaceRegion, alpha:Float):Void {
+  public static function setSurfaceAlpha(out:Dynamic, alpha:Float):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceAlpha.setSurfaceAlpha, cast ([out, alpha] : Array<Dynamic>));
   }
 
@@ -518,24 +513,24 @@ class Surface {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceColorMatrix.setSurfaceColorMatrixIdentity, cast ([out] : Array<Dynamic>));
   }
 
-  public static function setSurfacePixel(out:Surface, x:Float, y:Float, color:Float):Void {
+  public static function setSurfacePixel(out:Dynamic, x:Float, y:Float, color:Float):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfacePixel.setSurfacePixel, cast ([out, x, y, color] : Array<Dynamic>));
   }
 
-  public static function setSurfacePixelRgb(out:Surface, x:Float, y:Float, color:Float):Void {
+  public static function setSurfacePixelRgb(out:Dynamic, x:Float, y:Float, color:Float):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfacePixel.setSurfacePixelRgb, cast ([out, x, y, color] : Array<Dynamic>));
   }
 
-  public static function setSurfaceRegion(out:SurfaceRegion, surface:Surface, ?x:Float, ?y:Float, ?width:Float, ?height:Float):SurfaceRegion {
+  public static function setSurfaceRegion(out:Dynamic, surface:Dynamic, ?x:Float, ?y:Float, ?width:Float, ?height:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceRegion.setSurfaceRegion, cast ([out, surface, x, y, width, height] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function sharpenSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceSharpenOptions):Void {
+  public static function sharpenSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceSharpenOptions):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceSharpen.sharpenSurface, cast ([out, scratch, source, options] : Array<Dynamic>));
   }
 
-  public static function splitSurfaceChannels(source:Surface):Array<Surface> {
+  public static function splitSurfaceChannels(source:Dynamic):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceChannel.splitSurfaceChannels, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -548,11 +543,11 @@ class Surface {
 
   public static final SURFACE_NOISE_CHANNEL_R:Dynamic = Facade_Surface_flighthq_surface_SurfaceNoise.SURFACE_NOISE_CHANNEL_R;
 
-  public static function transformSurface(dest:SurfaceRegion, source:SurfaceRegion, matrix:Array<Float>, ?edgeMode:SurfaceEdgeMode, ?sampleMode:SurfaceResizeMode):Void {
+  public static function transformSurface(dest:Dynamic, source:Dynamic, matrix:Array<Float>, ?edgeMode:SurfaceEdgeMode, ?sampleMode:SurfaceResizeMode):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceAffine.transformSurface, cast ([dest, source, matrix, edgeMode, sampleMode] : Array<Dynamic>));
   }
 
-  public static function trimSurface(source:Surface):Surface {
+  public static function trimSurface(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceCrop.trimSurface, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -561,19 +556,19 @@ class Surface {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceFormat.unpremultiplySurfacePixels, cast ([out, source, length] : Array<Dynamic>));
   }
 
-  public static function warpSurface(dest:SurfaceRegion, source:SurfaceRegion, matrix:Array<Float>, ?edgeMode:SurfaceEdgeMode, ?sampleMode:SurfaceResizeMode):Void {
+  public static function warpSurface(dest:Dynamic, source:Dynamic, matrix:Array<Float>, ?edgeMode:SurfaceEdgeMode, ?sampleMode:SurfaceResizeMode):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceWarp.warpSurface, cast ([dest, source, matrix, edgeMode, sampleMode] : Array<Dynamic>));
   }
 
-  public static function warpSurfaceQuad(dest:SurfaceRegion, source:SurfaceRegion, dstQuad:Array<Float>, ?edgeMode:SurfaceEdgeMode, ?sampleMode:SurfaceResizeMode):Void {
+  public static function warpSurfaceQuad(dest:Dynamic, source:Dynamic, dstQuad:Array<Float>, ?edgeMode:SurfaceEdgeMode, ?sampleMode:SurfaceResizeMode):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceWarp.warpSurfaceQuad, cast ([dest, source, dstQuad, edgeMode, sampleMode] : Array<Dynamic>));
   }
 
-  public static function writeSurfacePixels(dest:SurfaceRegion, pixels:Dynamic):Void {
+  public static function writeSurfacePixels(dest:Dynamic, pixels:Dynamic):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceComposite.writeSurfacePixels, cast ([dest, pixels] : Array<Dynamic>));
   }
 
-  public static function writeSurfacePixels32(dest:SurfaceRegion, pixels:Dynamic):Void {
+  public static function writeSurfacePixels32(dest:Dynamic, pixels:Dynamic):Void {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceComposite.writeSurfacePixels32, cast ([dest, pixels] : Array<Dynamic>));
   }
 }

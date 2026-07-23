@@ -8,67 +8,59 @@ import flighthq.text.RichText as Facade_Text_flighthq_text_RichText;
 import flighthq.text.TextFormatFont as Facade_Text_flighthq_text_TextFormatFont;
 import flighthq.text.TextLabel as Facade_Text_flighthq_text_TextLabel;
 import flighthq.text.TextLabelLayout as Facade_Text_flighthq_text_TextLabelLayout;
-import flighthq.types.NativeText;
 import flighthq.types.NativeText.NativeTextData;
 import flighthq.types.NativeText.NativeTextRuntime;
 import flighthq.types.NativeText.NativeTextStyle;
 import flighthq.types.PartialNode;
-import flighthq.types.Rectangle;
-import flighthq.types.RichText;
 import flighthq.types.RichText.RichTextData;
 import flighthq.types.RichText.RichTextRuntime;
-import flighthq.types.RichTextContent;
 import flighthq.types.TextAutoSize;
 import flighthq.types.TextFieldSignals;
-import flighthq.types.TextFormat;
-import flighthq.types.TextFormatRange;
-import flighthq.types.TextLabel;
 import flighthq.types.TextLabel.TextLabelData;
 import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.TextLayout.TextLayoutParams;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextLayout.TextMeasureFunction;
 import flighthq.types.TextLineMetrics;
-import flighthq.types.TextMetrics;
 import flighthq.types.TextVerticalAlign;
 
 @:expose("flighthq.text.Text")
 class Text {
-  public static function appendRichTextString(source:RichText, value:String):Void {
+  public static function appendRichTextString(source:Dynamic, value:String):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.appendRichTextString, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function appendTextLabelString(source:TextLabel, value:String):Void {
+  public static function appendTextLabelString(source:Dynamic, value:String):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_TextLabel.appendTextLabelString, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function buildRichTextLayoutParams(source:TextLabel, measure:TextMeasureFunction):TextLayoutParams {
+  public static function buildRichTextLayoutParams(source:Dynamic, measure:TextMeasureFunction):TextLayoutParams {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.buildRichTextLayoutParams, cast ([source, measure] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function clearRichTextFormatRanges(source:RichText):Void {
+  public static function clearRichTextFormatRanges(source:Dynamic):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.clearRichTextFormatRanges, cast ([source] : Array<Dynamic>));
   }
 
-  public static function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+  public static function computeNativeTextLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_NativeText.computeNativeTextLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function computeRichTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+  public static function computeRichTextLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.computeRichTextLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function computeTextFormatFontString(format:TextFormat):String {
+  public static function computeTextFormatFontString(format:Dynamic):String {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_TextFormatFont.computeTextFormatFontString, cast ([format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function computeTextLabelLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+  public static function computeTextLabelLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_TextLabel.computeTextLabelLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function createNativeText(?obj:PartialNode<NativeText>):NativeText {
+  public static function createNativeText(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_NativeText.createNativeText, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -83,7 +75,7 @@ class Text {
     return cast null;
   }
 
-  public static function createRichText(?obj:PartialNode<RichText>):RichText {
+  public static function createRichText(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.createRichText, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -103,7 +95,7 @@ class Text {
     return cast null;
   }
 
-  public static function createTextLabel(?obj:PartialNode<TextLabel>):TextLabel {
+  public static function createTextLabel(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_TextLabel.createTextLabel, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -118,302 +110,302 @@ class Text {
     return cast null;
   }
 
-  public static function dispatchRichTextLinkAtPoint(source:RichText, x:Float, y:Float):Null<String> {
+  public static function dispatchRichTextLinkAtPoint(source:Dynamic, x:Float, y:Float):Null<String> {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.dispatchRichTextLinkAtPoint, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function dispatchRichTextWheel(source:RichText, deltaLines:Float, ?layout:TextLayoutResult):Void {
+  public static function dispatchRichTextWheel(source:Dynamic, deltaLines:Float, ?layout:TextLayoutResult):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.dispatchRichTextWheel, cast ([source, deltaLines, layout] : Array<Dynamic>));
   }
 
-  public static function enableTextFieldSignals(source:RichText):TextFieldSignals {
+  public static function enableTextFieldSignals(source:Dynamic):TextFieldSignals {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.enableTextFieldSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureTextLayout(source:TextLabel):Void {
+  public static function ensureTextLayout(source:Dynamic):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_TextLabelLayout.ensureTextLayout, cast ([source] : Array<Dynamic>));
   }
 
-  public static function getNativeTextMeasuredHeight(source:NativeText):Float {
+  public static function getNativeTextMeasuredHeight(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_NativeText.getNativeTextMeasuredHeight, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNativeTextMeasuredWidth(source:NativeText):Float {
+  public static function getNativeTextMeasuredWidth(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_NativeText.getNativeTextMeasuredWidth, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNativeTextRuntime(source:NativeText):NativeTextRuntime {
+  public static function getNativeTextRuntime(source:Dynamic):NativeTextRuntime {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_NativeText.getNativeTextRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNativeTextString(source:NativeText):String {
+  public static function getNativeTextString(source:Dynamic):String {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_NativeText.getNativeTextString, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNativeTextStyle(source:NativeText):NativeTextStyle {
+  public static function getNativeTextStyle(source:Dynamic):NativeTextStyle {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_NativeText.getNativeTextStyle, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextBottomScrollV(source:RichText):Float {
+  public static function getRichTextBottomScrollV(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.getRichTextBottomScrollV, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextCharIndexAtPoint(source:RichText, x:Float, y:Float):Float {
+  public static function getRichTextCharIndexAtPoint(source:Dynamic, x:Float, y:Float):Float {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.getRichTextCharIndexAtPoint, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextDefaultTextFormat(source:RichText):TextFormat {
+  public static function getRichTextDefaultTextFormat(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.getRichTextDefaultTextFormat, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextFormatRangeAt(out:TextFormat, source:RichText, index:Float):Void {
+  public static function getRichTextFormatRangeAt(out:Dynamic, source:Dynamic, index:Float):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.getRichTextFormatRangeAt, cast ([out, source, index] : Array<Dynamic>));
   }
 
-  public static function getRichTextFormatRangeByIndex(out:TextFormatRange, source:RichText, i:Float):Bool {
+  public static function getRichTextFormatRangeByIndex(out:Dynamic, source:Dynamic, i:Float):Bool {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.getRichTextFormatRangeByIndex, cast ([out, source, i] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextFormatRangeCount(source:RichText):Float {
+  public static function getRichTextFormatRangeCount(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.getRichTextFormatRangeCount, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextFormatRangesIn(out:Array<TextFormatRange>, source:RichText, beginIndex:Float, endIndex:Float):Void {
+  public static function getRichTextFormatRangesIn(out:Array<Dynamic>, source:Dynamic, beginIndex:Float, endIndex:Float):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.getRichTextFormatRangesIn, cast ([out, source, beginIndex, endIndex] : Array<Dynamic>));
   }
 
-  public static function getRichTextLength(source:RichText):Float {
+  public static function getRichTextLength(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.getRichTextLength, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextLineCount(source:RichText):Float {
+  public static function getRichTextLineCount(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.getRichTextLineCount, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextLineMetrics(source:RichText, lineIndex:Float):Null<TextLineMetrics> {
+  public static function getRichTextLineMetrics(source:Dynamic, lineIndex:Float):Null<TextLineMetrics> {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.getRichTextLineMetrics, cast ([source, lineIndex] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextMaxScrollH(source:RichText):Float {
+  public static function getRichTextMaxScrollH(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.getRichTextMaxScrollH, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextMaxScrollV(source:RichText):Float {
+  public static function getRichTextMaxScrollV(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.getRichTextMaxScrollV, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextPasswordCharacter(source:RichText):Null<String> {
+  public static function getRichTextPasswordCharacter(source:Dynamic):Null<String> {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.getRichTextPasswordCharacter, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextRuntime(source:RichText):RichTextRuntime {
+  public static function getRichTextRuntime(source:Dynamic):RichTextRuntime {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.getRichTextRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextString(source:RichText):String {
+  public static function getRichTextString(source:Dynamic):String {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.getRichTextString, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextTextHeight(source:RichText):Float {
+  public static function getRichTextTextHeight(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.getRichTextTextHeight, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextTextWidth(source:RichText):Float {
+  public static function getRichTextTextWidth(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.getRichTextTextWidth, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextFieldSignals(source:RichText):Null<TextFieldSignals> {
+  public static function getTextFieldSignals(source:Dynamic):Null<TextFieldSignals> {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_RichText.getTextFieldSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextLabelFormat(source:TextLabel):TextFormat {
+  public static function getTextLabelFormat(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_TextLabel.getTextLabelFormat, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextLabelRuntime(source:TextLabel):TextLabelRuntime {
+  public static function getTextLabelRuntime(source:Dynamic):TextLabelRuntime {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_TextLabel.getTextLabelRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextLabelString(source:TextLabel):String {
+  public static function getTextLabelString(source:Dynamic):String {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_TextLabel.getTextLabelString, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextLayout(source:TextLabel):Null<TextLayoutResult> {
+  public static function getTextLayout(source:Dynamic):Null<TextLayoutResult> {
     return cast _Runtime.callValue(Facade_Text_flighthq_text_TextLabelLayout.getTextLayout, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextLayoutMetrics(out:TextMetrics, source:TextLabel):Void {
+  public static function getTextLayoutMetrics(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_TextLabelLayout.getTextLayoutMetrics, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function insertRichTextString(source:RichText, index:Float, value:String):Void {
+  public static function insertRichTextString(source:Dynamic, index:Float, value:String):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.insertRichTextString, cast ([source, index, value] : Array<Dynamic>));
   }
 
-  public static function patchNativeTextStyle(source:NativeText, patch:Dynamic):Void {
+  public static function patchNativeTextStyle(source:Dynamic, patch:Dynamic):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_NativeText.patchNativeTextStyle, cast ([source, patch] : Array<Dynamic>));
   }
 
-  public static function removeRichTextFormatRangesIn(source:RichText, begin:Float, end:Float):Void {
+  public static function removeRichTextFormatRangesIn(source:Dynamic, begin:Float, end:Float):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.removeRichTextFormatRangesIn, cast ([source, begin, end] : Array<Dynamic>));
   }
 
-  public static function replaceRichTextString(source:RichText, beginIndex:Float, endIndex:Float, value:String):Void {
+  public static function replaceRichTextString(source:Dynamic, beginIndex:Float, endIndex:Float, value:String):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.replaceRichTextString, cast ([source, beginIndex, endIndex, value] : Array<Dynamic>));
   }
 
-  public static function setNativeTextAutoSize(source:NativeText, value:TextAutoSize):Void {
+  public static function setNativeTextAutoSize(source:Dynamic, value:TextAutoSize):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_NativeText.setNativeTextAutoSize, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setNativeTextHeight(source:NativeText, value:Float):Void {
+  public static function setNativeTextHeight(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_NativeText.setNativeTextHeight, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setNativeTextString(source:NativeText, value:String):Void {
+  public static function setNativeTextString(source:Dynamic, value:String):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_NativeText.setNativeTextString, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setNativeTextStyle(source:NativeText, value:NativeTextStyle):Void {
+  public static function setNativeTextStyle(source:Dynamic, value:NativeTextStyle):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_NativeText.setNativeTextStyle, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setNativeTextVerticalAlign(source:NativeText, value:TextVerticalAlign):Void {
+  public static function setNativeTextVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_NativeText.setNativeTextVerticalAlign, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setNativeTextWidth(source:NativeText, value:Float):Void {
+  public static function setNativeTextWidth(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_NativeText.setNativeTextWidth, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextBackground(source:RichText, value:Bool):Void {
+  public static function setRichTextBackground(source:Dynamic, value:Bool):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextBackground, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextBackgroundColor(source:RichText, value:Float):Void {
+  public static function setRichTextBackgroundColor(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextBackgroundColor, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextBorder(source:RichText, value:Bool):Void {
+  public static function setRichTextBorder(source:Dynamic, value:Bool):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextBorder, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextBorderColor(source:RichText, value:Float):Void {
+  public static function setRichTextBorderColor(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextBorderColor, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextCondenseWhite(source:RichText, value:Bool):Void {
+  public static function setRichTextCondenseWhite(source:Dynamic, value:Bool):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextCondenseWhite, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextContent(source:RichText, content:RichTextContent):Void {
+  public static function setRichTextContent(source:Dynamic, content:Dynamic):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextContent, cast ([source, content] : Array<Dynamic>));
   }
 
-  public static function setRichTextDefaultTextFormat(source:RichText, value:TextFormat):Void {
+  public static function setRichTextDefaultTextFormat(source:Dynamic, value:Dynamic):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextDefaultTextFormat, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextFormatRange(source:RichText, format:TextFormat, ?start:Dynamic, ?end:Dynamic):Void {
+  public static function setRichTextFormatRange(source:Dynamic, format:Dynamic, ?start:Dynamic, ?end:Dynamic):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextFormatRange, cast ([source, format, start, end] : Array<Dynamic>));
   }
 
-  public static function setRichTextHeight(source:RichText, value:Float):Void {
+  public static function setRichTextHeight(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextHeight, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextMaxChars(source:RichText, value:Float):Void {
+  public static function setRichTextMaxChars(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextMaxChars, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextMouseWheelEnabled(source:RichText, value:Bool):Void {
+  public static function setRichTextMouseWheelEnabled(source:Dynamic, value:Bool):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextMouseWheelEnabled, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextMultiline(source:RichText, value:Bool):Void {
+  public static function setRichTextMultiline(source:Dynamic, value:Bool):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextMultiline, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextScrollH(source:RichText, value:Float, ?layout:TextLayoutResult):Void {
+  public static function setRichTextScrollH(source:Dynamic, value:Float, ?layout:TextLayoutResult):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextScrollH, cast ([source, value, layout] : Array<Dynamic>));
   }
 
-  public static function setRichTextScrollV(source:RichText, value:Float, ?layout:TextLayoutResult):Void {
+  public static function setRichTextScrollV(source:Dynamic, value:Float, ?layout:TextLayoutResult):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextScrollV, cast ([source, value, layout] : Array<Dynamic>));
   }
 
-  public static function setRichTextSelectable(source:RichText, value:Bool):Void {
+  public static function setRichTextSelectable(source:Dynamic, value:Bool):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextSelectable, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextString(source:RichText, value:String):Void {
+  public static function setRichTextString(source:Dynamic, value:String):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextString, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextTextColor(source:RichText, value:Float):Void {
+  public static function setRichTextTextColor(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextTextColor, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextVerticalAlign(source:RichText, value:TextVerticalAlign):Void {
+  public static function setRichTextVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextVerticalAlign, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextWidth(source:RichText, value:Float):Void {
+  public static function setRichTextWidth(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextWidth, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextWordWrap(source:RichText, value:Bool):Void {
+  public static function setRichTextWordWrap(source:Dynamic, value:Bool):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_RichText.setRichTextWordWrap, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setTextLabelAutoSize(source:TextLabel, value:TextAutoSize):Void {
+  public static function setTextLabelAutoSize(source:Dynamic, value:TextAutoSize):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_TextLabel.setTextLabelAutoSize, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setTextLabelFormat(source:TextLabel, value:TextFormat):Void {
+  public static function setTextLabelFormat(source:Dynamic, value:Dynamic):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_TextLabel.setTextLabelFormat, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setTextLabelHeight(source:TextLabel, value:Float):Void {
+  public static function setTextLabelHeight(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_TextLabel.setTextLabelHeight, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setTextLabelString(source:TextLabel, value:String):Void {
+  public static function setTextLabelString(source:Dynamic, value:String):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_TextLabel.setTextLabelString, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setTextLabelVerticalAlign(source:TextLabel, value:TextVerticalAlign):Void {
+  public static function setTextLabelVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_TextLabel.setTextLabelVerticalAlign, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setTextLabelWidth(source:TextLabel, value:Float):Void {
+  public static function setTextLabelWidth(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Text_flighthq_text_TextLabel.setTextLabelWidth, cast ([source, value] : Array<Dynamic>));
   }
 }

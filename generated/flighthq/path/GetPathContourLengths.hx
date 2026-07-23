@@ -4,11 +4,10 @@ package flighthq.path;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
-import flighthq.types.Path;
 
 @:expose("flighthq.path.GetPathContourLengths")
 class GetPathContourLengths {
-  public static function getPathContourLengths(path:Path, tolerance:Dynamic = 0.25):Array<Float> {
+  public static function getPathContourLengths(path:Dynamic, tolerance:Dynamic = 0.25):Array<Float> {
     var contours:Dynamic = cast _Runtime.UNDEFINED;
     var lengths:Array<Float> = cast _Runtime.UNDEFINED;
     contours = _Runtime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));

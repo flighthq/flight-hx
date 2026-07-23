@@ -3,13 +3,9 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.RichTextContent;
 import flighthq.types.TextAutoSize;
 import flighthq.types.TextFieldSignals;
-import flighthq.types.TextFormat;
-import flighthq.types.TextFormatRange;
 import flighthq.types.TextInputState;
-import flighthq.types.TextLabel;
 import flighthq.types.TextLabel.TextLabelData;
 import flighthq.types.TextLabel.TextLabelRuntime;
 

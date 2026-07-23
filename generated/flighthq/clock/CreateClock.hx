@@ -4,12 +4,11 @@ package flighthq.clock;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.clock.AddClockChild.addClockChild;
-import flighthq.types.Clock;
 import flighthq.types.ClockOptions;
 
 @:expose("flighthq.clock.CreateClock")
 class CreateClock {
-  public static function createChildClock(parent:Clock, ?options:ClockOptions):Clock {
+  public static function createChildClock(parent:Dynamic, ?options:ClockOptions):Dynamic {
     var child:Dynamic = cast _Runtime.UNDEFINED;
     child = _Runtime.callValue(createClock, cast ([options] : Array<Dynamic>));
     _Runtime.callValue(addClockChild, cast ([parent, child] : Array<Dynamic>));
@@ -17,7 +16,7 @@ class CreateClock {
     return cast null;
   }
 
-  public static function createClock(?options:ClockOptions):Clock {
+  public static function createClock(?options:ClockOptions):Dynamic {
     return cast { scale: _Runtime.coalesce(_Runtime.optionalField(options, 'scale'), function():Dynamic return cast 1.0), paused: _Runtime.coalesce(_Runtime.optionalField(options, 'paused'), function():Dynamic return cast false), deltaTime: 0.0, elapsed: 0.0, parent: null, children: cast ([] : Array<Dynamic>), onTick: null };
     return cast null;
   }

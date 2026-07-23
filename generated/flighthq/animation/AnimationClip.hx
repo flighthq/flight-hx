@@ -6,12 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.animation.AnimationTrack.cloneAnimationTrack;
 import flighthq.animation.AnimationTrack.sampleAnimationTrack;
 import flighthq.types.AnimationChannel;
-import flighthq.types.AnimationClip;
-import flighthq.types.AnimationTrack;
 
 @:expose("flighthq.animation.AnimationClip")
 class AnimationClip {
-  public static function cloneAnimationClip(clip:AnimationClip):AnimationClip {
+  public static function cloneAnimationClip(clip:Dynamic):Dynamic {
     var channels:Array<AnimationChannel> = cast _Runtime.UNDEFINED;
     channels = cast ([] : Array<Dynamic>);
     for (channel in _Runtime.iterable(_Runtime.field(clip, 'channels'))) {
@@ -21,22 +19,22 @@ class AnimationClip {
     return cast null;
   }
 
-  public static function createAnimationChannel(track:AnimationTrack, targetRef:Dynamic):AnimationChannel {
+  public static function createAnimationChannel(track:Dynamic, targetRef:Dynamic):AnimationChannel {
     return cast { targetRef: targetRef, track: track };
     return cast null;
   }
 
-  public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float):AnimationClip {
+  public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float):Dynamic {
     return cast { channels: channels, duration: _Runtime.coalesce(duration, function():Dynamic return cast _Runtime.callValue(AnimationClip.computeChannelsDuration__animationClip, cast ([channels] : Array<Dynamic>))) };
     return cast null;
   }
 
-  public static function getAnimationClipDuration(clip:AnimationClip):Float {
+  public static function getAnimationClipDuration(clip:Dynamic):Float {
     return cast _Runtime.field(clip, 'duration');
     return cast null;
   }
 
-  public static function sampleAnimationClip(out:Dynamic, clip:AnimationClip, time:Float, visit:Dynamic):Void {
+  public static function sampleAnimationClip(out:Dynamic, clip:Dynamic, time:Float, visit:Dynamic):Void {
     var channels:Dynamic = cast _Runtime.UNDEFINED;
     channels = _Runtime.field(clip, 'channels');
     {

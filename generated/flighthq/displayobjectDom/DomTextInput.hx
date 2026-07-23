@@ -12,10 +12,8 @@ import flighthq.textinput.TextInputEditing.getTextInputSelectionBeginIndex;
 import flighthq.textinput.TextInputEditing.getTextInputSelectionEndIndex;
 import flighthq.textinput.TextInputEditing.getTextInputSelectionRectangles;
 import flighthq.textlayout.RichTextMetrics.getRichTextScrollYOffset;
-import flighthq.types.DomRenderState;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RendererData;
-import flighthq.types.RichText;
 import flighthq.types.TextSelectionRectangle;
 
 typedef DomTextInputData__domTextInput = Dynamic;
@@ -24,7 +22,7 @@ typedef DomTextInputData__domTextInput = Dynamic;
 class DomTextInput {
   public static var _keyframesInjected__domTextInput:Dynamic = false;
 
-  public static function drawDomTextInputOverlay(_state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomTextInputOverlay(_state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var input:Dynamic = cast _Runtime.UNDEFINED;
     var layout:Dynamic = cast _Runtime.UNDEFINED;
@@ -39,7 +37,7 @@ class DomTextInput {
       _Runtime.callValue(DomTextInput.injectCaretBlinkKeyframes__domTextInput, cast ([] : Array<Dynamic>));
       (DomTextInput._keyframesInjected__domTextInput = cast (true : Dynamic));
     }
-    source = (cast _Runtime.field(renderProxy, 'source') : RichText);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     input = _Runtime.callValue(getTextInputState, cast ([source] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(input, null))) { return; }
     layout = _Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([source] : Array<Dynamic>)), 'textLayout');

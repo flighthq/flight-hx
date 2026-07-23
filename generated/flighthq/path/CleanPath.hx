@@ -4,12 +4,11 @@ package flighthq.path;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
-import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 
 @:expose("flighthq.path.CleanPath")
 class CleanPath {
-  public static function cleanPath(source:Path, tolerance:Float, out:Path, flattenTolerance:Dynamic = 0.25):Void {
+  public static function cleanPath(source:Dynamic, tolerance:Float, out:Dynamic, flattenTolerance:Dynamic = 0.25):Void {
     var contours:Dynamic = cast _Runtime.UNDEFINED;
     var winding:Dynamic = cast _Runtime.UNDEFINED;
     var toleranceSq:Dynamic = cast _Runtime.UNDEFINED;

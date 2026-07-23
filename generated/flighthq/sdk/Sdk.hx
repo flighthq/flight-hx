@@ -1107,7 +1107,6 @@ import flighthq.tween.ColorTween.ColorComponents__colorTween;
 import flighthq.tween.Timer as Facade_Sdk_flighthq_tween_Timer;
 import flighthq.tween.Tween as Facade_Sdk_flighthq_tween_Tween;
 import flighthq.tween.TweenStagger.TweenStaggerOptions;
-import flighthq.types.Aabb;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.Accelerator;
 import flighthq.types.Accessibility.AccessibilityBackend;
@@ -1117,99 +1116,65 @@ import flighthq.types.Adjustment;
 import flighthq.types.AdvancedBlendMode;
 import flighthq.types.AgxToneMapOptions;
 import flighthq.types.AlphaType;
-import flighthq.types.AmbientLight;
 import flighthq.types.AnimatedNormalModifier;
 import flighthq.types.AnimationChannel;
-import flighthq.types.AnimationClip;
 import flighthq.types.AnimationInterpolation;
 import flighthq.types.AnimationLoopMode;
-import flighthq.types.AnimationPlayer;
-import flighthq.types.AnimationTrack;
 import flighthq.types.AnimationTrackValidationDiagnostic;
 import flighthq.types.AnisotropyPbrMaterial;
-import flighthq.types.App;
 import flighthq.types.App.AppActivationPolicy;
 import flighthq.types.App.AppBackend;
 import flighthq.types.App.AppLoginItem;
 import flighthq.types.App.AppLoginItemLike;
 import flighthq.types.App.AppPathKind;
-import flighthq.types.Application;
 import flighthq.types.ApplicationLoopOptions;
 import flighthq.types.ApplicationWindow;
 import flighthq.types.ApplicationWindow.WindowBackend;
 import flighthq.types.ApplicationWindow.WindowBounds;
 import flighthq.types.ApplicationWindow.WindowOptions;
-import flighthq.types.AreaLight;
 import flighthq.types.Assets.AssetGroupLoadOptions;
-import flighthq.types.Assets.AssetLibrary;
 import flighthq.types.Assets.AssetLoaderAdapter;
 import flighthq.types.Assets.AssetManifest;
 import flighthq.types.Assets.AssetType;
 import flighthq.types.AudioBus;
 import flighthq.types.AudioBus.AudioBusOptions;
-import flighthq.types.AudioBus.AudioMixer;
 import flighthq.types.AudioBus.AudioMixerOptions;
-import flighthq.types.AudioResource;
-import flighthq.types.AudioResource.AudioChannel;
 import flighthq.types.AudioResource.AudioPlayOptions;
 import flighthq.types.AudioResource.AudioResourceUrl;
-import flighthq.types.AutoExposureEffect;
-import flighthq.types.BarrelDistortionEffect;
 import flighthq.types.BatchBarrier as Facade_Sdk_flighthq_types_BatchBarrier_BatchBarrier;
 import flighthq.types.BatchFormat as Facade_Sdk_flighthq_types_BatchFormat_BatchFormat;
-import flighthq.types.BevelEffect;
-import flighthq.types.Bidi.BidiClassBackend;
 import flighthq.types.Bidi.BidiDirection;
 import flighthq.types.Bidi.BidiRun;
-import flighthq.types.Billboard;
 import flighthq.types.Billboard.BillboardMode;
 import flighthq.types.Billboard.BillboardRuntime;
 import flighthq.types.BinPack.BinPackOptions;
 import flighthq.types.BinPack.PackResult;
 import flighthq.types.BinPack.PackableRectangle;
-import flighthq.types.Bitmap;
 import flighthq.types.Bitmap.BitmapData;
 import flighthq.types.Bitmap.BitmapRuntime;
-import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontData;
 import flighthq.types.BitmapFont.BitmapFontParseOptions;
-import flighthq.types.BitmapText;
 import flighthq.types.BitmapText.BitmapTextAlign;
 import flighthq.types.BitmapText.BitmapTextData;
 import flighthq.types.BitmapText.BitmapTextOptions;
 import flighthq.types.BitmapText.BitmapTextRuntime;
-import flighthq.types.BlendEffect;
 import flighthq.types.BlendMode;
 import flighthq.types.BlinnPhongMaterial;
-import flighthq.types.BloomEffect;
-import flighthq.types.BlurEffect;
-import flighthq.types.BokehDepthOfFieldEffect;
-import flighthq.types.BoundingSphere;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
-import flighthq.types.BrightnessContrastAdjustment;
-import flighthq.types.Camera;
 import flighthq.types.Camera.OrthographicProjection;
 import flighthq.types.Camera.PerspectiveProjection;
-import flighthq.types.Camera.Projection;
 import flighthq.types.Camera2D;
 import flighthq.types.Camera2D.Camera2DFollowOptions;
 import flighthq.types.Camera2D.Camera2DOptions;
-import flighthq.types.CameraMotionBlurEffect;
-import flighthq.types.Capsule;
 import flighthq.types.Capsule.CapsuleLike;
-import flighthq.types.CaptureBaseline;
 import flighthq.types.CaptureCheckResult;
 import flighthq.types.CaptureColumnBaseline;
-import flighthq.types.ChannelMixerAdjustment;
-import flighthq.types.ChromaticAberrationEffect;
 import flighthq.types.ClearcoatPbrMaterial;
-import flighthq.types.ClipRegion;
 import flighthq.types.Clipboard.ClipboardBackend;
 import flighthq.types.Clipboard.ClipboardBookmark;
 import flighthq.types.Clipboard.ClipboardWriteItem;
 import flighthq.types.ClipboardFormat as Facade_Sdk_flighthq_types_ClipboardFormat;
 import flighthq.types.ClipboardWatch;
-import flighthq.types.Clock;
 import flighthq.types.ClockOptions;
 import flighthq.types.Collision.CollisionAabb;
 import flighthq.types.Collision.CollisionCircle;
@@ -1218,30 +1183,15 @@ import flighthq.types.Collision.CollisionObb;
 import flighthq.types.Collision.CollisionPolygon;
 import flighthq.types.Collision.CollisionSegment;
 import flighthq.types.Collision.CollisionShape;
-import flighthq.types.ColorBlindSimulationAdjustment;
-import flighthq.types.ColorGradeAdjustment;
-import flighthq.types.ColorLut;
-import flighthq.types.ColorLutCache;
-import flighthq.types.ColorTransform;
 import flighthq.types.ColorTransform.ColorTransformLike;
-import flighthq.types.ColorTransformAdjustment;
 import flighthq.types.ColorTransformFunction;
-import flighthq.types.CompositeEffect;
 import flighthq.types.CompositeOperator;
-import flighthq.types.Connectivity;
 import flighthq.types.Connectivity.ConnectivityBackend;
 import flighthq.types.Connectivity.ConnectivityReachability;
 import flighthq.types.Connectivity.ConnectivityReachabilityOptions;
 import flighthq.types.Connectivity.ConnectivityStatus;
-import flighthq.types.ContactShadowsEffect;
-import flighthq.types.ConvolutionEffect;
-import flighthq.types.CrtEffect;
-import flighthq.types.CubeTexture;
 import flighthq.types.CubeTexture.CubeTextureLike;
 import flighthq.types.Cursor;
-import flighthq.types.Cursor.CursorBackend;
-import flighthq.types.CustomShaderEffect;
-import flighthq.types.CustomShaderMaterial;
 import flighthq.types.Debug.DebugOptions;
 import flighthq.types.Debug.DebugSubsystemHooks;
 import flighthq.types.Debug.DebugSubsystemName;
@@ -1261,42 +1211,29 @@ import flighthq.types.Dialog.OpenDirectoryDialogOptions;
 import flighthq.types.Dialog.OpenFileDialogOptions;
 import flighthq.types.Dialog.PromptDialogOptions;
 import flighthq.types.Dialog.SaveFileDialogOptions;
-import flighthq.types.DirectionalBlurEffect;
-import flighthq.types.DirectionalLight;
-import flighthq.types.DisplacementEffect;
-import flighthq.types.DisplayContainer;
 import flighthq.types.DisplayContainer.DisplayContainerRuntime;
-import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObject.DisplayObjectDataFactory;
 import flighthq.types.DisplayObject.DisplayObjectRuntime;
 import flighthq.types.DisplayObject.DisplayObjectRuntimeFactory;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.DissolveModifier;
-import flighthq.types.DitherEffect;
 import flighthq.types.DomBlendModeFidelity;
-import flighthq.types.DomRenderState;
 import flighthq.types.DomRenderState.DomClipEntry;
 import flighthq.types.DomRenderState.DomRenderStateRuntime;
 import flighthq.types.DomStageRectangle;
-import flighthq.types.DropShadowEffect;
 import flighthq.types.EasingFunction;
 import flighthq.types.EasingSegment;
 import flighthq.types.EmissiveMaterial;
 import flighthq.types.EmissiveModifier;
-import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.EntityWithoutRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.EnvReflectModifier;
-import flighthq.types.Environment;
 import flighthq.types.EulerOrder;
-import flighthq.types.ExposureAdjustment;
 import flighthq.types.FileSystem.FileEntry;
 import flighthq.types.FileSystem.FilePermissions;
 import flighthq.types.FileSystem.FileStat;
 import flighthq.types.FileSystem.FileWalkOptions;
-import flighthq.types.FilmEmulationEffect;
-import flighthq.types.FilmGrainEffect;
 import flighthq.types.FilmicToneMapOptions;
 import flighthq.types.Flow.FlowStack;
 import flighthq.types.Flow.FlowState;
@@ -1305,14 +1242,10 @@ import flighthq.types.FocusManager.FocusManagerOptions;
 import flighthq.types.FocusManager.FocusNavigationInput;
 import flighthq.types.FocusManager.FocusNavigationOptions;
 import flighthq.types.FogModifier;
-import flighthq.types.Font;
 import flighthq.types.Font.FontUrl;
 import flighthq.types.FontMetrics;
-import flighthq.types.FontResource;
 import flighthq.types.FrameScript;
-import flighthq.types.Frustum;
 import flighthq.types.Frustum.FrustumLike;
-import flighthq.types.FxaaEffect;
 import flighthq.types.GamepadAxisKind;
 import flighthq.types.GamepadButtonKind;
 import flighthq.types.GamepadMappingKind;
@@ -1327,77 +1260,50 @@ import flighthq.types.GlCompressedTextureSupport;
 import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlMaterialRenderer;
 import flighthq.types.GlMeshMaterialRenderer;
-import flighthq.types.GlRenderEffectPipeline;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
 import flighthq.types.GlRenderOptions;
-import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlBlendRealization;
 import flighthq.types.GlRenderState.GlQuadBatchShader;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
-import flighthq.types.GlRenderTarget;
-import flighthq.types.GlRenderTarget.GlRenderTargetPool;
 import flighthq.types.GlShaderLocations;
 import flighthq.types.GlShaderLocations.GlBitmapShader;
-import flighthq.types.GlShapeMesh;
-import flighthq.types.GlSkinPaletteTexture;
 import flighthq.types.GlVelocityWriter;
 import flighthq.types.GlVelocityWriter.GlVelocityContext;
-import flighthq.types.GlitchEffect;
 import flighthq.types.GlyphExtents;
-import flighthq.types.GlyphSource;
-import flighthq.types.GlyphSource.GlyphAtlas;
 import flighthq.types.GlyphSource.GlyphAtlasOptions;
 import flighthq.types.GlyphSource.GlyphEntry;
 import flighthq.types.GlyphSource.GlyphMetrics;
-import flighthq.types.GlyphSource.GlyphRasterizerBackend;
-import flighthq.types.GodRaysEffect;
-import flighthq.types.GradientBevelEffect;
-import flighthq.types.GradientGlowEffect;
 import flighthq.types.GradientSpread;
-import flighthq.types.GrayscaleAdjustment;
 import flighthq.types.GridSliceOptions;
-import flighthq.types.HalftoneEffect;
 import flighthq.types.Haptics.HapticImpactStyle;
 import flighthq.types.Haptics.HapticNotificationType;
 import flighthq.types.Haptics.HapticsBackend;
 import flighthq.types.Haptics.HapticsCapabilities;
-import flighthq.types.HasAppearance;
-import flighthq.types.HasBlendMode;
-import flighthq.types.HasBoundsRectangle;
 import flighthq.types.HasBoundsRectangle.BoundsNode;
 import flighthq.types.HasBoundsRectangle.BoundsNodeAny;
 import flighthq.types.HasBoundsRectangle.HasBoundsRectangleRuntime;
 import flighthq.types.HasBoundsRectangle.Spatial2DNode;
-import flighthq.types.HasClip;
-import flighthq.types.HasMaterial;
 import flighthq.types.HasTransform2D;
 import flighthq.types.HasTransform2D.HasTransform2DRuntime;
 import flighthq.types.HasTransform2D.Transform2DNode;
 import flighthq.types.HasTransform3D;
 import flighthq.types.HasTransform3D.HasTransform3DRuntime;
 import flighthq.types.HasTransform3D.Transform3DNode;
-import flighthq.types.HemisphereLight;
 import flighthq.types.HitTestFunction;
 import flighthq.types.HitTestFunction.HitTestPreciseFunction;
 import flighthq.types.HitTestResult;
-import flighthq.types.HtmlView;
 import flighthq.types.HtmlView.HtmlViewData;
 import flighthq.types.HtmlView.HtmlViewRuntime;
-import flighthq.types.HueSaturationAdjustment;
 import flighthq.types.ImageChannel;
 import flighthq.types.ImageDecoder;
 import flighthq.types.ImageEncodeOptions;
 import flighthq.types.ImageEncoder;
 import flighthq.types.ImageFormat;
-import flighthq.types.ImageResource;
 import flighthq.types.ImageResourceCompressed;
-import flighthq.types.InnerGlowEffect;
-import flighthq.types.InnerShadowEffect;
 import flighthq.types.InputKeyRepeatOptions;
 import flighthq.types.InputKeyRepeatTimer;
 import flighthq.types.InputKeyboardData;
-import flighthq.types.InputManager;
 import flighthq.types.InputManager.AttachInputOptions;
 import flighthq.types.InputSignals;
 import flighthq.types.InputState;
@@ -1405,7 +1311,6 @@ import flighthq.types.InteractionManager.InteractionInputSource;
 import flighthq.types.InteractionManager.InteractionManagerOptions;
 import flighthq.types.InteractionManager.InteractionPointerOptions;
 import flighthq.types.InteractionSignals;
-import flighthq.types.InvertAdjustment;
 import flighthq.types.Ipc.IpcBackend;
 import flighthq.types.Ipc.IpcChannel;
 import flighthq.types.Ipc.IpcTarget;
@@ -1419,16 +1324,11 @@ import flighthq.types.Keyboard.SoftKeyboardResizeMode;
 import flighthq.types.Keyboard.SoftKeyboardStyleKind;
 import flighthq.types.Keyboard.SoftKeyboardTransition;
 import flighthq.types.KeyboardEventData;
-import flighthq.types.KuwaharaEffect;
 import flighthq.types.LambertMaterial;
-import flighthq.types.LensDirtEffect;
-import flighthq.types.LensDistortionEffect;
-import flighthq.types.LensFlareEffect;
 import flighthq.types.Lifecycle.AppLaunchKind;
 import flighthq.types.Lifecycle.AppLifecycle;
 import flighthq.types.Lifecycle.AppLifecycleState;
 import flighthq.types.Lifecycle.LifecycleBackend;
-import flighthq.types.LiftGammaGainAdjustment;
 import flighthq.types.Light;
 import flighthq.types.LightUnit;
 import flighthq.types.LinearColor;
@@ -1443,32 +1343,23 @@ import flighthq.types.Log.LogSpan;
 import flighthq.types.Log.LogTimer;
 import flighthq.types.Log.LogTransportBackend;
 import flighthq.types.LogSignals;
-import flighthq.types.LookupTableGradeAdjustment;
 import flighthq.types.LoopBackend;
 import flighthq.types.MarkupTagHandler;
-import flighthq.types.MarkupTagRegistry;
 import flighthq.types.MatcapMaterial;
-import flighthq.types.Material;
 import flighthq.types.Material.MaterialData;
-import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.Matrix3;
 import flighthq.types.Matrix3.Matrix3Like;
-import flighthq.types.Matrix4;
 import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.MediaSession.MediaSessionAction;
 import flighthq.types.MediaSession.MediaSessionBackend;
 import flighthq.types.MediaSession.MediaSessionMetadata;
 import flighthq.types.MediaSession.MediaSessionPlaybackState;
 import flighthq.types.MediaSession.MediaSessionPositionState;
-import flighthq.types.MedianEffect;
 import flighthq.types.Menu.MenuBackend;
 import flighthq.types.Menu.MenuItemTemplate;
 import flighthq.types.MenuSignals;
-import flighthq.types.Mesh;
 import flighthq.types.Mesh.MeshRuntime;
 import flighthq.types.MeshDeformer;
-import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshSubset;
 import flighthq.types.MeshGeometry.VertexAttribute;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
@@ -1478,15 +1369,12 @@ import flighthq.types.MeshSkinBindPose;
 import flighthq.types.Modifier;
 import flighthq.types.ModifierKind;
 import flighthq.types.MorphTarget.MeshMorph;
-import flighthq.types.MotionBlurEffect;
 import flighthq.types.MotionPath;
 import flighthq.types.MotionPath.MotionPathLoopMode;
 import flighthq.types.MouseWheelMode;
-import flighthq.types.MovieClip;
 import flighthq.types.MovieClip.MovieClipData;
 import flighthq.types.MovieClip.MovieClipRuntime;
 import flighthq.types.MovieClipSignals;
-import flighthq.types.NativeText;
 import flighthq.types.NativeText.NativeTextData;
 import flighthq.types.NativeText.NativeTextRuntime;
 import flighthq.types.NativeText.NativeTextStyle;
@@ -1501,7 +1389,6 @@ import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node.NodeRuntimeFactory;
 import flighthq.types.NodeDescendantVisitor;
 import flighthq.types.NodeInteraction.HitArea;
-import flighthq.types.NodeInteractionState;
 import flighthq.types.NodeSignals;
 import flighthq.types.NormalMaterial;
 import flighthq.types.Notification.NotificationBackend;
@@ -1510,11 +1397,7 @@ import flighthq.types.Notification.NotificationChannel;
 import flighthq.types.Notification.NotificationRequest;
 import flighthq.types.Notification.NotificationSchedule;
 import flighthq.types.Notification.ScheduledNotification;
-import flighthq.types.Obb;
 import flighthq.types.Obb.ObbLike;
-import flighthq.types.OuterGlowEffect;
-import flighthq.types.OutlineEffect;
-import flighthq.types.PanniniProjectionEffect;
 import flighthq.types.ParsedAccelerator;
 import flighthq.types.PartialNode;
 import flighthq.types.ParticleCollider;
@@ -1522,22 +1405,14 @@ import flighthq.types.ParticleConfigIssue;
 import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleCurve.ColorKeyframe;
 import flighthq.types.ParticleCurve.CurveKeyframe;
-import flighthq.types.ParticleEmitter;
 import flighthq.types.ParticleEmitter.ParticleEmitterData;
 import flighthq.types.ParticleEmitter.ParticleEmitterRuntime;
-import flighthq.types.ParticleEmitter3D;
 import flighthq.types.ParticleEmitter3D.ParticleEmitter3DRuntime;
 import flighthq.types.ParticleEmitterCallbacks;
-import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterSignals;
-import flighthq.types.ParticleEmitterState;
 import flighthq.types.ParticleForce;
 import flighthq.types.ParticleFormatKind;
 import flighthq.types.ParticleObject;
-import flighthq.types.ParticleObjectsState;
 import flighthq.types.ParticleObjectsUpdateOptions;
-import flighthq.types.Path;
-import flighthq.types.PathBooleanBackend;
 import flighthq.types.PathBooleanOperation;
 import flighthq.types.PathBooleanOptions;
 import flighthq.types.PathMesh;
@@ -1548,8 +1423,6 @@ import flighthq.types.Permission.PermissionName;
 import flighthq.types.Permission.PermissionState;
 import flighthq.types.PhongMaterial;
 import flighthq.types.PixelOrder;
-import flighthq.types.PixelateEffect;
-import flighthq.types.Plane;
 import flighthq.types.Plane.PlaneLike;
 import flighthq.types.Platform.PlatformBackend;
 import flighthq.types.Platform.PlatformEndianness;
@@ -1558,9 +1431,6 @@ import flighthq.types.Platform.PlatformInfo;
 import flighthq.types.Platform.PlatformKind;
 import flighthq.types.Platform.PlatformName;
 import flighthq.types.Platform.PlatformRuntime;
-import flighthq.types.PointLight;
-import flighthq.types.PosterizeEffect;
-import flighthq.types.Power;
 import flighthq.types.Power.PowerBackend;
 import flighthq.types.Power.PowerIdleState;
 import flighthq.types.Power.PowerKeepAwakeMode;
@@ -1570,66 +1440,46 @@ import flighthq.types.PowerBatteryHealth;
 import flighthq.types.Protocol.ParsedProtocolUrl;
 import flighthq.types.Protocol.ProtocolBackend;
 import flighthq.types.Protocol.ProtocolHandler;
-import flighthq.types.QuadBatch;
 import flighthq.types.QuadBatch.QuadBatchData;
 import flighthq.types.QuadBatch.QuadBatchRuntime;
 import flighthq.types.QuadBatchSignals;
 import flighthq.types.QuadTransformType;
-import flighthq.types.Quaternion;
 import flighthq.types.Quaternion.QuaternionLike;
-import flighthq.types.RadialBlurEffect;
 import flighthq.types.RandomSource;
 import flighthq.types.Ray3D;
 import flighthq.types.Ray3D.Ray3DLike;
-import flighthq.types.Rectangle;
 import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.RenderCache;
 import flighthq.types.RenderCacheAdapter;
 import flighthq.types.RenderCacheRefreshOptions;
 import flighthq.types.RenderEffect;
 import flighthq.types.RenderEffectInput;
 import flighthq.types.RenderPassPreserve;
-import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderProxyAdapter;
-import flighthq.types.RenderQueue;
 import flighthq.types.RenderQueue.RenderQueueEntry;
 import flighthq.types.RenderQueue.RenderSortKey;
-import flighthq.types.RenderState;
 import flighthq.types.RenderState.RenderStateRuntime;
 import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.RenderTarget.RenderTargetDescriptor;
-import flighthq.types.RenderView;
 import flighthq.types.RenderView.RenderViewData;
 import flighthq.types.RenderView.RenderViewRuntime;
 import flighthq.types.RenderViewport2D;
 import flighthq.types.Renderable;
-import flighthq.types.Renderer;
 import flighthq.types.RendererData;
 import flighthq.types.ResourceLoadHandle;
 import flighthq.types.ResourceLoadItemStatus;
-import flighthq.types.ResourceLoader;
 import flighthq.types.ResourceLoaderItemSignals;
 import flighthq.types.ResourceLoaderOptions;
-import flighthq.types.RichText;
 import flighthq.types.RichText.RichTextData;
 import flighthq.types.RichText.RichTextRuntime;
-import flighthq.types.RichTextContent;
 import flighthq.types.RimModifier;
-import flighthq.types.Sampler;
 import flighthq.types.Sampler.SamplerLike;
 import flighthq.types.Sampler.TextureWrap;
 import flighthq.types.ScalarRemap;
 import flighthq.types.Scale9Mapper;
-import flighthq.types.Scale9Shape;
 import flighthq.types.Scale9Shape.Scale9ShapeData;
 import flighthq.types.Scale9Shape.Scale9ShapeRuntime;
-import flighthq.types.ScanlinesEffect;
-import flighthq.types.Scene;
 import flighthq.types.SceneHit;
 import flighthq.types.SceneLightBlock;
-import flighthq.types.SceneLights;
-import flighthq.types.SceneNode;
 import flighthq.types.SceneNode.SceneNodeRuntime;
 import flighthq.types.SceneRenderList;
 import flighthq.types.SceneRenderProxy;
@@ -1638,9 +1488,6 @@ import flighthq.types.Screen.ScreenBackend;
 import flighthq.types.Screen.ScreenInfo;
 import flighthq.types.ScreenMode;
 import flighthq.types.ScreenSignals;
-import flighthq.types.ScreenSpaceFogEffect;
-import flighthq.types.SelectableRichTextManager;
-import flighthq.types.Sensors;
 import flighthq.types.Sensors.AmbientLightReading;
 import flighthq.types.Sensors.MotionReading;
 import flighthq.types.Sensors.OrientationReading;
@@ -1650,9 +1497,7 @@ import flighthq.types.Sensors.QuaternionReading;
 import flighthq.types.Sensors.RotationRateReading;
 import flighthq.types.Sensors.SensorsBackend;
 import flighthq.types.Sensors.SensorsPermissionState;
-import flighthq.types.SepiaAdjustment;
 import flighthq.types.ShadedMaterial;
-import flighthq.types.Shape;
 import flighthq.types.Shape.ShapeData;
 import flighthq.types.Shape.ShapeRuntime;
 import flighthq.types.ShapeCommand.CapsStyle;
@@ -1671,7 +1516,6 @@ import flighthq.types.Share.ShareContent;
 import flighthq.types.Share.ShareOptions;
 import flighthq.types.Share.ShareResult;
 import flighthq.types.ShareSignals;
-import flighthq.types.SharpenEffect;
 import flighthq.types.SheenPbrMaterial;
 import flighthq.types.Shell.ShellBackend;
 import flighthq.types.Shell.ShellOpenExternalOptions;
@@ -1684,44 +1528,26 @@ import flighthq.types.ShortcutSignals;
 import flighthq.types.SignalConnectOptions;
 import flighthq.types.Skeleton3D;
 import flighthq.types.Skeleton3DValidationDiagnostic;
-import flighthq.types.SketchEffect;
-import flighthq.types.SmaaEffect;
 import flighthq.types.Snapshot.SnapshotSchema;
-import flighthq.types.Socket;
 import flighthq.types.Socket.SocketBackend;
 import flighthq.types.Socket.SocketOptions;
 import flighthq.types.Socket.SocketReadyState;
 import flighthq.types.Socket.SocketSignals;
 import flighthq.types.Spatial.SpatialAabb;
-import flighthq.types.Spatial.SpatialIndex;
 import flighthq.types.Spatial.SpatialIndexBackend;
 import flighthq.types.Spatial.SpatialObjectId;
 import flighthq.types.Spatial.SpatialPair;
 import flighthq.types.SpecularGlossinessPbrMaterial;
 import flighthq.types.SpecularPbrMaterial;
-import flighthq.types.SpotLight;
-import flighthq.types.Spring;
-import flighthq.types.Spring.Spring2D;
-import flighthq.types.Spring.Spring3D;
-import flighthq.types.Spring.SpringConfig;
-import flighthq.types.Sprite;
 import flighthq.types.Sprite.SpriteData;
 import flighthq.types.Sprite.SpriteRuntime;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.SpriteSignals;
-import flighthq.types.Spritesheet;
-import flighthq.types.SpritesheetAnimation;
 import flighthq.types.SpritesheetAnimationData;
-import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFormat as Facade_Sdk_flighthq_types_SpritesheetFormat;
 import flighthq.types.SpritesheetFormat.SpritesheetFormatKind;
-import flighthq.types.SpritesheetFrame;
 import flighthq.types.SpritesheetFrameData;
-import flighthq.types.SpritesheetPlayer;
 import flighthq.types.SpritesheetValidationDiagnostic;
-import flighthq.types.SsaoEffect;
-import flighthq.types.SsrEffect;
-import flighthq.types.Stage;
 import flighthq.types.Stage.StageRuntime;
 import flighthq.types.StageSignals;
 import flighthq.types.StandardPbrMaterial;
@@ -1742,71 +1568,47 @@ import flighthq.types.Storage.StorageQuota;
 import flighthq.types.Storage.StorageSignals;
 import flighthq.types.StrokeStyle;
 import flighthq.types.SubsurfacePbrMaterial;
-import flighthq.types.Surface;
 import flighthq.types.SurfaceCompositeMode;
 import flighthq.types.SurfaceEdgeMode;
-import flighthq.types.SurfaceFingerprint;
-import flighthq.types.SurfaceHistogram;
-import flighthq.types.SurfaceMaterial;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.SurfaceMismatch;
-import flighthq.types.SurfaceRegion;
 import flighthq.types.SurfaceResizeMode;
-import flighthq.types.TaaEffect;
 import flighthq.types.TextAutoSize;
 import flighthq.types.TextFieldSignals;
-import flighthq.types.TextFormat;
-import flighthq.types.TextFormatRange;
 import flighthq.types.TextInputEditingOptions.HandleTextInputKeyboardOptions;
 import flighthq.types.TextInputEditingOptions.ReplaceTextInputOptions;
-import flighthq.types.TextInputManager;
 import flighthq.types.TextInputManager.TextInputSource;
 import flighthq.types.TextInputState;
 import flighthq.types.TextInputState.TextInputOptions;
 import flighthq.types.TextItem;
-import flighthq.types.TextLabel;
 import flighthq.types.TextLabel.TextLabelData;
 import flighthq.types.TextLabel.TextLabelRuntime;
-import flighthq.types.TextLayout.TextLayoutGroup;
 import flighthq.types.TextLayout.TextLayoutParams;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextLayout.TextMeasureFunction;
 import flighthq.types.TextLineMetrics;
-import flighthq.types.TextMetrics;
-import flighthq.types.TextSegment;
 import flighthq.types.TextSegment.TextSegmentRange;
-import flighthq.types.TextSegment.TextSegmenterBackend;
 import flighthq.types.TextSelectionRectangle;
 import flighthq.types.TextShaper.ShapeRunOptions;
 import flighthq.types.TextShaper.TextShaperBackend;
 import flighthq.types.TextShaperOptions;
-import flighthq.types.TextShaperSignals;
 import flighthq.types.TextVerticalAlign;
-import flighthq.types.Texture;
 import flighthq.types.Texture.TextureLike;
-import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasFormatKind;
-import flighthq.types.TextureAtlasRegion;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 import flighthq.types.TextureKind as Facade_Sdk_flighthq_types_TextureKind;
 import flighthq.types.TextureUvTransform;
 import flighthq.types.ThresholdOperation;
-import flighthq.types.TiledGid;
 import flighthq.types.TiledMap;
 import flighthq.types.TiledTileset;
 import flighthq.types.TiledTileset.TiledTilesetRef;
-import flighthq.types.Tilemap;
 import flighthq.types.Tilemap.TilemapData;
 import flighthq.types.Tilemap.TilemapRuntime;
 import flighthq.types.TilemapSignals;
-import flighthq.types.Tileset;
-import flighthq.types.TiltShiftEffect;
-import flighthq.types.Timeline;
 import flighthq.types.TimelineLabel;
 import flighthq.types.TimelineSignals;
 import flighthq.types.TimelineSource;
-import flighthq.types.ToneMapEffect;
 import flighthq.types.ToonMaterial;
 import flighthq.types.ToonModifier;
 import flighthq.types.Transform2D;
@@ -1821,7 +1623,6 @@ import flighthq.types.Tray.TrayIcon;
 import flighthq.types.Tray.TrayIconOptions;
 import flighthq.types.TriangleCulling;
 import flighthq.types.Tween.NumericProps;
-import flighthq.types.TweenManager;
 import flighthq.types.TweenManagerOptions;
 import flighthq.types.TweenOptions;
 import flighthq.types.UnlitMaterial;
@@ -1831,57 +1632,38 @@ import flighthq.types.Updater.UpdaterBackend;
 import flighthq.types.Updater.UpdaterConfig;
 import flighthq.types.Updater.UpdaterSignatureConfig;
 import flighthq.types.Updater.UpdaterState;
-import flighthq.types.Vector2;
 import flighthq.types.Vector2.Vector2Like;
-import flighthq.types.Vector3;
 import flighthq.types.Vector3.Vector3Like;
-import flighthq.types.Vector4;
 import flighthq.types.Vector4.Vector4Like;
 import flighthq.types.Velocity.Velocity2D;
-import flighthq.types.Velocity.VelocityField;
-import flighthq.types.Velocity.VelocitySample;
 import flighthq.types.VertexColorMaterial;
 import flighthq.types.VertexDisplaceModifier;
-import flighthq.types.Video;
 import flighthq.types.Video.VideoData;
 import flighthq.types.Video.VideoRuntime;
-import flighthq.types.VideoResource;
-import flighthq.types.VideoResource.VideoChannel;
 import flighthq.types.VideoResource.VideoPlayOptions;
 import flighthq.types.VideoResource.VideoResourceLoadOptions;
 import flighthq.types.VideoResource.VideoResourceUrl;
-import flighthq.types.VideoTexture;
 import flighthq.types.VideoTexture.VideoTextureLike;
 import flighthq.types.ViewportAlign;
-import flighthq.types.VignetteEffect;
-import flighthq.types.VolumetricLightEffect;
 import flighthq.types.Webcam.WebcamBackend;
 import flighthq.types.Webcam.WebcamCaptureOptions;
 import flighthq.types.Webcam.WebcamPhoto;
 import flighthq.types.Webcam.WebcamVideo;
 import flighthq.types.WebcamFacingMode;
-import flighthq.types.WebcamStream;
 import flighthq.types.WellKnownMenuItemRole as Facade_Sdk_flighthq_types_WellKnownMenuItemRole;
-import flighthq.types.WgpuAdapterCapabilities;
 import flighthq.types.WgpuColorLutTextureCache;
 import flighthq.types.WgpuFullscreenPipeline;
 import flighthq.types.WgpuMaterialRenderer;
 import flighthq.types.WgpuMeshMaterialRenderer;
-import flighthq.types.WgpuRenderEffectPipeline;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderOptions;
-import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuBitmapShader;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderState.WgpuScissorRect;
 import flighthq.types.WgpuRenderState.WgpuShapeMeshBuffers;
 import flighthq.types.WgpuRenderState.WgpuTextureEntry;
-import flighthq.types.WgpuRenderStats;
-import flighthq.types.WgpuRenderTarget;
-import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 import flighthq.types.WgpuVelocityWriter;
 import flighthq.types.WgpuVelocityWriter.WgpuVelocityContext;
-import flighthq.types.WhiteBalanceEffect;
 import flighthq.types.WireframeMaterial;
 import flighthq.types._internal._AmbientLightValues as Facade_Sdk_flighthq_types__internal__AmbientLightValues;
 import flighthq.types._internal._AnimatedNormalModifierValues as Facade_Sdk_flighthq_types__internal__AnimatedNormalModifierValues;
@@ -1991,7 +1773,7 @@ class Sdk {
 
   public static final __enum_LogLevel:Dynamic = { None: Facade_Sdk_flighthq_types_Log_LogLevel.None, Error: Facade_Sdk_flighthq_types_Log_LogLevel.Error, Warn: Facade_Sdk_flighthq_types_Log_LogLevel.Warn, Info: Facade_Sdk_flighthq_types_Log_LogLevel.Info, Debug: Facade_Sdk_flighthq_types_Log_LogLevel.Debug, Verbose: Facade_Sdk_flighthq_types_Log_LogLevel.Verbose };
 
-  public static function acquireAsset<T>(library:AssetLibrary, id:String):flighthq._internal._Promise<Dynamic> {
+  public static function acquireAsset<T>(library:Dynamic, id:String):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_assets_AssetLibrary.acquireAsset, cast ([library, id] : Array<Dynamic>));
     return cast null;
   }
@@ -2001,87 +1783,87 @@ class Sdk {
     return cast null;
   }
 
-  public static function acquireClipRegion():ClipRegion {
+  public static function acquireClipRegion():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.acquireClipRegion, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireEmptyRectangle():Rectangle {
+  public static function acquireEmptyRectangle():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_RectanglePool.acquireEmptyRectangle, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireEmptyVector2():Vector2 {
+  public static function acquireEmptyVector2():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector2Pool.acquireEmptyVector2, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireEmptyVector3():Vector3 {
+  public static function acquireEmptyVector3():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector3Pool.acquireEmptyVector3, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireEmptyVector4():Vector4 {
+  public static function acquireEmptyVector4():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector4Pool.acquireEmptyVector4, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireGlRenderTarget(state:GlRenderState, pool:GlRenderTargetPool, descriptor:RenderTargetDescriptor):GlRenderTarget {
+  public static function acquireGlRenderTarget(state:Dynamic, pool:Dynamic, descriptor:RenderTargetDescriptor):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlRenderTargetPool.acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireIdentityMatrix():Matrix {
+  public static function acquireIdentityMatrix():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_MatrixPool.acquireIdentityMatrix, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireIdentityMatrix3():Matrix3 {
+  public static function acquireIdentityMatrix3():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix3Pool.acquireIdentityMatrix3, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireIdentityMatrix4():Matrix4 {
+  public static function acquireIdentityMatrix4():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix4Pool.acquireIdentityMatrix4, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireIdentityQuaternion():Quaternion {
+  public static function acquireIdentityQuaternion():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_QuaternionPool.acquireIdentityQuaternion, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireMatrix():Matrix {
+  public static function acquireMatrix():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_MatrixPool.acquireMatrix, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireMatrix3():Matrix3 {
+  public static function acquireMatrix3():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix3Pool.acquireMatrix3, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireMatrix4():Matrix4 {
+  public static function acquireMatrix4():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix4Pool.acquireMatrix4, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquirePathMesh(path:Path, ?tolerance:Dynamic):PathMesh {
+  public static function acquirePathMesh(path:Dynamic, ?tolerance:Dynamic):PathMesh {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_Path.acquirePathMesh, cast ([path, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquirePathMeshTyped(path:Path, ?tolerance:Dynamic):PathMeshTyped {
+  public static function acquirePathMeshTyped(path:Dynamic, ?tolerance:Dynamic):PathMeshTyped {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_Path.acquirePathMeshTyped, cast ([path, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireQuaternion():Quaternion {
+  public static function acquireQuaternion():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_QuaternionPool.acquireQuaternion, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireRectangle():Rectangle {
+  public static function acquireRectangle():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_RectanglePool.acquireRectangle, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -2091,32 +1873,32 @@ class Sdk {
     return cast null;
   }
 
-  public static function acquireSpritesheetPlayer():SpritesheetPlayer {
+  public static function acquireSpritesheetPlayer():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.acquireSpritesheetPlayer, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireVector2():Vector2 {
+  public static function acquireVector2():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector2Pool.acquireVector2, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireVector3():Vector3 {
+  public static function acquireVector3():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector3Pool.acquireVector3, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireVector4():Vector4 {
+  public static function acquireVector4():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector4Pool.acquireVector4, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireWgpuFrameCaptureTexture(state:WgpuRenderState):Null<Dynamic> {
+  public static function acquireWgpuFrameCaptureTexture(state:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuSurface.acquireWgpuFrameCaptureTexture, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function acquireWgpuRenderTarget(state:WgpuRenderState, pool:WgpuRenderTargetPool, descriptor:{ var width:Float; var height:Float; @:optional var format:Dynamic; }):WgpuRenderTarget {
+  public static function acquireWgpuRenderTarget(state:Dynamic, pool:Dynamic, descriptor:{ var width:Float; var height:Float; @:optional var format:Dynamic; }):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuRenderTargetPool.acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     return cast null;
   }
@@ -2125,15 +1907,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_app_App.addAppRecentDocument, cast ([path] : Array<Dynamic>));
   }
 
-  public static function addAudioBusToMixer(mixer:AudioMixer, bus:AudioBus):Void {
+  public static function addAudioBusToMixer(mixer:Dynamic, bus:AudioBus):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_media_AudioMixer.addAudioBusToMixer, cast ([mixer, bus] : Array<Dynamic>));
   }
 
-  public static function addClockChild(parent:Clock, child:Clock):Void {
+  public static function addClockChild(parent:Dynamic, child:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_clock_AddClockChild.addClockChild, cast ([parent, child] : Array<Dynamic>));
   }
 
-  public static function addDisplayObjectColorAdjustment(source:DisplayObject, adjustment:Adjustment):Void {
+  public static function addDisplayObjectColorAdjustment(source:Dynamic, adjustment:Adjustment):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobject_DisplayObject.addDisplayObjectColorAdjustment, cast ([source, adjustment] : Array<Dynamic>));
   }
 
@@ -2141,11 +1923,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_log_Log.addLogSink, cast ([sink] : Array<Dynamic>));
   }
 
-  public static function addMeshGeometrySubset(geometry:MeshGeometry, subset:MeshSubset):Void {
+  public static function addMeshGeometrySubset(geometry:Dynamic, subset:MeshSubset):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometrySubset.addMeshGeometrySubset, cast ([geometry, subset] : Array<Dynamic>));
   }
 
-  public static function addMovieClipFrameScript(clip:MovieClip, frame:Dynamic, script:FrameScript):Void {
+  public static function addMovieClipFrameScript(clip:Dynamic, frame:Dynamic, script:FrameScript):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.addMovieClipFrameScript, cast ([clip, frame, script] : Array<Dynamic>));
   }
 
@@ -2163,23 +1945,23 @@ class Sdk {
     _Runtime.apply(Facade_Sdk_flighthq_node_Hierarchy.addNodeChildren, _Runtime.concatArrays([[target], _Runtime.toArray(children)]));
   }
 
-  public static function addTextureAtlasRegion(target:TextureAtlas, x:Float, y:Float, width:Float, height:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
+  public static function addTextureAtlasRegion(target:Dynamic, x:Float, y:Float, width:Float, height:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasRegion.addTextureAtlasRegion, cast ([target, x, y, width, height, pivotX, pivotY, name] : Array<Dynamic>));
   }
 
-  public static function addTextureAtlasRegionRectangle(target:TextureAtlas, rect:RectangleLike, ?pivot:Vector2Like, ?name:String):Void {
+  public static function addTextureAtlasRegionRectangle(target:Dynamic, rect:RectangleLike, ?pivot:Vector2Like, ?name:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasRegion.addTextureAtlasRegionRectangle, cast ([target, rect, pivot, name] : Array<Dynamic>));
   }
 
-  public static function addTextureAtlasRegionRectangleXY(target:TextureAtlas, ax:Float, ay:Float, bx:Float, by:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
+  public static function addTextureAtlasRegionRectangleXY(target:Dynamic, ax:Float, ay:Float, bx:Float, by:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasRegion.addTextureAtlasRegionRectangleXY, cast ([target, ax, ay, bx, by, pivotX, pivotY, name] : Array<Dynamic>));
   }
 
-  public static function addTextureAtlasRegionVector2(target:TextureAtlas, a:Vector2Like, b:Vector2Like, ?pivot:Vector2Like, ?name:String):Void {
+  public static function addTextureAtlasRegionVector2(target:Dynamic, a:Vector2Like, b:Vector2Like, ?pivot:Vector2Like, ?name:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasRegion.addTextureAtlasRegionVector2, cast ([target, a, b, pivot, name] : Array<Dynamic>));
   }
 
-  public static function addTimelineFrameScript(timeline:Timeline, frame:Dynamic, script:FrameScript):Void {
+  public static function addTimelineFrameScript(timeline:Dynamic, frame:Dynamic, script:FrameScript):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_timeline_Timeline.addTimelineFrameScript, cast ([timeline, frame, script] : Array<Dynamic>));
   }
 
@@ -2200,11 +1982,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function advanceAnimationPlayer(player:AnimationPlayer, dt:Float):Void {
+  public static function advanceAnimationPlayer(player:Dynamic, dt:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_animation_AnimationPlayer.advanceAnimationPlayer, cast ([player, dt] : Array<Dynamic>));
   }
 
-  public static function advanceClock(clock:Clock, deltaSeconds:Float):Void {
+  public static function advanceClock(clock:Dynamic, deltaSeconds:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_clock_AdvanceClock.advanceClock, cast ([clock, deltaSeconds] : Array<Dynamic>));
   }
 
@@ -2245,74 +2027,74 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix4.appendMatrix4, cast ([out, source, other] : Array<Dynamic>));
   }
 
-  public static function appendParticleEmitter3DParticle(target:ParticleEmitter3D, id:Float, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Float {
+  public static function appendParticleEmitter3DParticle(target:Dynamic, id:Float, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.appendParticleEmitter3DParticle, cast ([target, id, x, y, z, rotation, scale] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function appendParticleEmitterParticle(target:ParticleEmitter, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Float {
+  public static function appendParticleEmitterParticle(target:Dynamic, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter.appendParticleEmitterParticle, cast ([target, id, x, y, rotation, scale] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function appendPathArc(path:Path, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Dynamic, ?connectToCurrent:Dynamic):Void {
+  public static function appendPathArc(path:Dynamic, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Dynamic, ?connectToCurrent:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_Path.appendPathArc, cast ([path, cx, cy, radius, startAngle, endAngle, anticlockwise, connectToCurrent] : Array<Dynamic>));
   }
 
-  public static function appendPathArcTo(path:Path, radiusX:Float, radiusY:Float, xAxisRotation:Float, largeArc:Bool, sweep:Bool, endX:Float, endY:Float):Void {
+  public static function appendPathArcTo(path:Dynamic, radiusX:Float, radiusY:Float, xAxisRotation:Float, largeArc:Bool, sweep:Bool, endX:Float, endY:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_Path.appendPathArcTo, cast ([path, radiusX, radiusY, xAxisRotation, largeArc, sweep, endX, endY] : Array<Dynamic>));
   }
 
-  public static function appendPathCircle(path:Path, cx:Float, cy:Float, radius:Float):Void {
+  public static function appendPathCircle(path:Dynamic, cx:Float, cy:Float, radius:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_Path.appendPathCircle, cast ([path, cx, cy, radius] : Array<Dynamic>));
   }
 
-  public static function appendPathClose(path:Path):Void {
+  public static function appendPathClose(path:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_Path.appendPathClose, cast ([path] : Array<Dynamic>));
   }
 
-  public static function appendPathCubicCurveTo(path:Path, control1X:Float, control1Y:Float, control2X:Float, control2Y:Float, anchorX:Float, anchorY:Float):Void {
+  public static function appendPathCubicCurveTo(path:Dynamic, control1X:Float, control1Y:Float, control2X:Float, control2Y:Float, anchorX:Float, anchorY:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_Path.appendPathCubicCurveTo, cast ([path, control1X, control1Y, control2X, control2Y, anchorX, anchorY] : Array<Dynamic>));
   }
 
-  public static function appendPathCurveTo(path:Path, controlX:Float, controlY:Float, anchorX:Float, anchorY:Float):Void {
+  public static function appendPathCurveTo(path:Dynamic, controlX:Float, controlY:Float, anchorX:Float, anchorY:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_Path.appendPathCurveTo, cast ([path, controlX, controlY, anchorX, anchorY] : Array<Dynamic>));
   }
 
-  public static function appendPathEllipse(path:Path, cx:Float, cy:Float, radiusX:Float, radiusY:Float):Void {
+  public static function appendPathEllipse(path:Dynamic, cx:Float, cy:Float, radiusX:Float, radiusY:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_Path.appendPathEllipse, cast ([path, cx, cy, radiusX, radiusY] : Array<Dynamic>));
   }
 
-  public static function appendPathLineTo(path:Path, x:Float, y:Float):Void {
+  public static function appendPathLineTo(path:Dynamic, x:Float, y:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_Path.appendPathLineTo, cast ([path, x, y] : Array<Dynamic>));
   }
 
-  public static function appendPathMoveTo(path:Path, x:Float, y:Float):Void {
+  public static function appendPathMoveTo(path:Dynamic, x:Float, y:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_Path.appendPathMoveTo, cast ([path, x, y] : Array<Dynamic>));
   }
 
-  public static function appendPathPolygon(path:Path, points:Array<Float>):Void {
+  public static function appendPathPolygon(path:Dynamic, points:Array<Float>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_Path.appendPathPolygon, cast ([path, points] : Array<Dynamic>));
   }
 
-  public static function appendPathPolyline(path:Path, points:Array<Float>):Void {
+  public static function appendPathPolyline(path:Dynamic, points:Array<Float>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_Path.appendPathPolyline, cast ([path, points] : Array<Dynamic>));
   }
 
-  public static function appendPathRectangle(path:Path, x:Float, y:Float, width:Float, height:Float):Void {
+  public static function appendPathRectangle(path:Dynamic, x:Float, y:Float, width:Float, height:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_Path.appendPathRectangle, cast ([path, x, y, width, height] : Array<Dynamic>));
   }
 
-  public static function appendPathRoundRectangle(path:Path, x:Float, y:Float, width:Float, height:Float, radius:Dynamic):Void {
+  public static function appendPathRoundRectangle(path:Dynamic, x:Float, y:Float, width:Float, height:Float, radius:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_Path.appendPathRoundRectangle, cast ([path, x, y, width, height, radius] : Array<Dynamic>));
   }
 
-  public static function appendQuadBatchInstance(target:QuadBatch, id:Float, x:Float, y:Float):Float {
+  public static function appendQuadBatchInstance(target:Dynamic, id:Float, x:Float, y:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.appendQuadBatchInstance, cast ([target, id, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function appendRichTextString(source:RichText, value:String):Void {
+  public static function appendRichTextString(source:Dynamic, value:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.appendRichTextString, cast ([source, value] : Array<Dynamic>));
   }
 
@@ -2324,95 +2106,95 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix4.appendScaleMatrix4, cast ([out, source, xScale, yScale, zScale] : Array<Dynamic>));
   }
 
-  public static function appendShapeArc(shape:Shape, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Dynamic):Void {
+  public static function appendShapeArc(shape:Dynamic, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeArc, cast ([shape, cx, cy, radius, startAngle, endAngle, anticlockwise] : Array<Dynamic>));
   }
 
-  public static function appendShapeArcTo(shape:Shape, x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Void {
+  public static function appendShapeArcTo(shape:Dynamic, x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeArcTo, cast ([shape, x1, y1, x2, y2, radius] : Array<Dynamic>));
   }
 
-  public static function appendShapeBeginBitmapFill(shape:Shape, bitmap:ImageResource, ?matrix:Null<Matrix>, ?repeat:Dynamic, ?smooth:Dynamic):Void {
+  public static function appendShapeBeginBitmapFill(shape:Dynamic, bitmap:Dynamic, ?matrix:Null<Dynamic>, ?repeat:Dynamic, ?smooth:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeBeginBitmapFill, cast ([shape, bitmap, matrix, repeat, smooth] : Array<Dynamic>));
   }
 
-  public static function appendShapeBeginFill(shape:Shape, ?color:Dynamic, ?alpha:Dynamic):Void {
+  public static function appendShapeBeginFill(shape:Dynamic, ?color:Dynamic, ?alpha:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeBeginFill, cast ([shape, color, alpha] : Array<Dynamic>));
   }
 
-  public static function appendShapeBeginGradientFill(shape:Shape, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Matrix>, ?spreadMethod:SpreadMethod, ?interpolationMethod:InterpolationMethod, ?focalPointRatio:Dynamic):Void {
+  public static function appendShapeBeginGradientFill(shape:Dynamic, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Dynamic>, ?spreadMethod:SpreadMethod, ?interpolationMethod:InterpolationMethod, ?focalPointRatio:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeBeginGradientFill, cast ([shape, gradientType, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio] : Array<Dynamic>));
   }
 
-  public static function appendShapeCircle(shape:Shape, x:Float, y:Float, radius:Float):Void {
+  public static function appendShapeCircle(shape:Dynamic, x:Float, y:Float, radius:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeCircle, cast ([shape, x, y, radius] : Array<Dynamic>));
   }
 
-  public static function appendShapeCubicCurveTo(shape:Shape, controlX1:Float, controlY1:Float, controlX2:Float, controlY2:Float, anchorX:Float, anchorY:Float):Void {
+  public static function appendShapeCubicCurveTo(shape:Dynamic, controlX1:Float, controlY1:Float, controlX2:Float, controlY2:Float, anchorX:Float, anchorY:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeCubicCurveTo, cast ([shape, controlX1, controlY1, controlX2, controlY2, anchorX, anchorY] : Array<Dynamic>));
   }
 
-  public static function appendShapeCurveTo(shape:Shape, controlX:Float, controlY:Float, anchorX:Float, anchorY:Float):Void {
+  public static function appendShapeCurveTo(shape:Dynamic, controlX:Float, controlY:Float, anchorX:Float, anchorY:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeCurveTo, cast ([shape, controlX, controlY, anchorX, anchorY] : Array<Dynamic>));
   }
 
-  public static function appendShapeDrawTriangles(shape:Shape, vertices:Array<Float>, ?indices:Null<Array<Float>>, ?uvtData:Null<Array<Float>>, ?culling:TriangleCulling):Void {
+  public static function appendShapeDrawTriangles(shape:Dynamic, vertices:Array<Float>, ?indices:Null<Array<Float>>, ?uvtData:Null<Array<Float>>, ?culling:TriangleCulling):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeDrawTriangles, cast ([shape, vertices, indices, uvtData, culling] : Array<Dynamic>));
   }
 
-  public static function appendShapeEllipse(shape:Shape, x:Float, y:Float, width:Float, height:Float):Void {
+  public static function appendShapeEllipse(shape:Dynamic, x:Float, y:Float, width:Float, height:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeEllipse, cast ([shape, x, y, width, height] : Array<Dynamic>));
   }
 
-  public static function appendShapeEndFill(shape:Shape):Void {
+  public static function appendShapeEndFill(shape:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeEndFill, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeLineBitmapStyle(shape:Shape, bitmap:ImageResource, ?matrix:Null<Matrix>, ?repeat:Dynamic, ?smooth:Dynamic):Void {
+  public static function appendShapeLineBitmapStyle(shape:Dynamic, bitmap:Dynamic, ?matrix:Null<Dynamic>, ?repeat:Dynamic, ?smooth:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeLineBitmapStyle, cast ([shape, bitmap, matrix, repeat, smooth] : Array<Dynamic>));
   }
 
-  public static function appendShapeLineGradientStyle(shape:Shape, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Matrix>, ?spreadMethod:SpreadMethod, ?interpolationMethod:InterpolationMethod, ?focalPointRatio:Dynamic):Void {
+  public static function appendShapeLineGradientStyle(shape:Dynamic, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Dynamic>, ?spreadMethod:SpreadMethod, ?interpolationMethod:InterpolationMethod, ?focalPointRatio:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeLineGradientStyle, cast ([shape, gradientType, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio] : Array<Dynamic>));
   }
 
-  public static function appendShapeLineStyle(shape:Shape, ?thickness:Dynamic, ?color:Dynamic, ?alpha:Dynamic, ?pixelHinting:Dynamic, ?scaleMode:LineScaleMode, ?caps:CapsStyle, ?joints:JointStyle, ?miterLimit:Dynamic):Void {
+  public static function appendShapeLineStyle(shape:Dynamic, ?thickness:Dynamic, ?color:Dynamic, ?alpha:Dynamic, ?pixelHinting:Dynamic, ?scaleMode:LineScaleMode, ?caps:CapsStyle, ?joints:JointStyle, ?miterLimit:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeLineStyle, cast ([shape, thickness, color, alpha, pixelHinting, scaleMode, caps, joints, miterLimit] : Array<Dynamic>));
   }
 
-  public static function appendShapeLineTo(shape:Shape, x:Float, y:Float):Void {
+  public static function appendShapeLineTo(shape:Dynamic, x:Float, y:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeLineTo, cast ([shape, x, y] : Array<Dynamic>));
   }
 
-  public static function appendShapeMoveTo(shape:Shape, x:Float, y:Float):Void {
+  public static function appendShapeMoveTo(shape:Dynamic, x:Float, y:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeMoveTo, cast ([shape, x, y] : Array<Dynamic>));
   }
 
-  public static function appendShapePath(shape:Shape, commands:Array<Float>, pathData:Array<Float>, ?winding:PathWinding):Void {
+  public static function appendShapePath(shape:Dynamic, commands:Array<Float>, pathData:Array<Float>, ?winding:PathWinding):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapePath, cast ([shape, commands, pathData, winding] : Array<Dynamic>));
   }
 
-  public static function appendShapePolygon(shape:Shape, points:Array<Float>):Void {
+  public static function appendShapePolygon(shape:Dynamic, points:Array<Float>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapePolygon, cast ([shape, points] : Array<Dynamic>));
   }
 
-  public static function appendShapePolyline(shape:Shape, points:Array<Float>):Void {
+  public static function appendShapePolyline(shape:Dynamic, points:Array<Float>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapePolyline, cast ([shape, points] : Array<Dynamic>));
   }
 
-  public static function appendShapeRectangle(shape:Shape, x:Float, y:Float, width:Float, height:Float):Void {
+  public static function appendShapeRectangle(shape:Dynamic, x:Float, y:Float, width:Float, height:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeRectangle, cast ([shape, x, y, width, height] : Array<Dynamic>));
   }
 
-  public static function appendShapeRoundRectangle(shape:Shape, x:Float, y:Float, width:Float, height:Float, ellipseWidth:Float, ellipseHeight:Float):Void {
+  public static function appendShapeRoundRectangle(shape:Dynamic, x:Float, y:Float, width:Float, height:Float, ellipseWidth:Float, ellipseHeight:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeRoundRectangle, cast ([shape, x, y, width, height, ellipseWidth, ellipseHeight] : Array<Dynamic>));
   }
 
-  public static function appendShapeRoundRectangleVarying(shape:Shape, x:Float, y:Float, width:Float, height:Float, topLeftRadius:Float, topRightRadius:Float, bottomLeftRadius:Float, bottomRightRadius:Float):Void {
+  public static function appendShapeRoundRectangleVarying(shape:Dynamic, x:Float, y:Float, width:Float, height:Float, topLeftRadius:Float, topRightRadius:Float, bottomLeftRadius:Float, bottomRightRadius:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.appendShapeRoundRectangleVarying, cast ([shape, x, y, width, height, topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius] : Array<Dynamic>));
   }
 
-  public static function appendSvgPathData(path:Path, d:String):Bool {
+  public static function appendSvgPathData(path:Dynamic, d:String):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_pathFormats_SvgPathData.appendSvgPathData, cast ([path, d] : Array<Dynamic>));
     return cast null;
   }
@@ -2422,11 +2204,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function appendTextInput(source:RichText, text:String):Void {
+  public static function appendTextInput(source:Dynamic, text:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.appendTextInput, cast ([source, text] : Array<Dynamic>));
   }
 
-  public static function appendTextLabelString(source:TextLabel, value:String):Void {
+  public static function appendTextLabelString(source:Dynamic, value:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_TextLabel.appendTextLabelString, cast ([source, value] : Array<Dynamic>));
   }
 
@@ -2434,67 +2216,67 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix4.appendTranslationMatrix4, cast ([out, source, x, y, z] : Array<Dynamic>));
   }
 
-  public static function applyAnimationClipToScene(clip:AnimationClip, time:Float):Void {
+  public static function applyAnimationClipToScene(clip:Dynamic, time:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_scene_Scene.applyAnimationClipToScene, cast ([clip, time] : Array<Dynamic>));
   }
 
-  public static function applyBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BevelEffect):Void {
+  public static function applyBevelEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlBevelEffect.applyBevelEffectToGl, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyBevelEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:BevelEffect):Void {
+  public static function applyBevelEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuBevelEffect.applyBevelEffectToWgpu, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyBlendEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:BlendEffect):Void {
+  public static function applyBlendEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlBlendEffect.applyBlendEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyBloomEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:BloomEffect):Void {
+  public static function applyBloomEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasBloomEffect.applyBloomEffectToCanvas, cast ([source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyBloomEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BloomEffect):Void {
+  public static function applyBloomEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlBloomEffect.applyBloomEffectToGl, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyBloomEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:BloomEffect):Void {
+  public static function applyBloomEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuBloomEffect.applyBloomEffectToWgpu, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyBlurEffectToCanvas(source:Dynamic, dest:Dynamic, effect:BlurEffect):Void {
+  public static function applyBlurEffectToCanvas(source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasBlurEffect.applyBlurEffectToCanvas, cast ([source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, effect:BlurEffect):Void {
+  public static function applyBlurEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, temp:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlBlurEffect.applyBlurEffectToGl, cast ([state, source, dest, temp, effect] : Array<Dynamic>));
   }
 
-  public static function applyBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, effect:BlurEffect):Void {
+  public static function applyBlurEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, temp:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuBlurEffect.applyBlurEffectToWgpu, cast ([state, source, dest, temp, effect] : Array<Dynamic>));
   }
 
-  public static function applyBokehDepthOfFieldEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:BokehDepthOfFieldEffect):Void {
+  public static function applyBokehDepthOfFieldEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasBokehDepthOfFieldEffect.applyBokehDepthOfFieldEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyBokehDepthOfFieldEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<Dynamic>, effect:BokehDepthOfFieldEffect):Void {
+  public static function applyBokehDepthOfFieldEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, depthTexture:Null<Dynamic>, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlBokehDepthOfFieldEffect.applyBokehDepthOfFieldEffectToGl, cast ([state, source, dest, depthTexture, effect] : Array<Dynamic>));
   }
 
-  public static function applyBokehDepthOfFieldEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:BokehDepthOfFieldEffect):Void {
+  public static function applyBokehDepthOfFieldEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuBokehDepthOfFieldEffect.applyBokehDepthOfFieldEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyCameraMotionBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:CameraMotionBlurEffect):Void {
+  public static function applyCameraMotionBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasCameraMotionBlurEffect.applyCameraMotionBlurEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyCameraMotionBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CameraMotionBlurEffect):Void {
+  public static function applyCameraMotionBlurEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlCameraMotionBlurEffect.applyCameraMotionBlurEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyCameraMotionBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:CameraMotionBlurEffect):Void {
+  public static function applyCameraMotionBlurEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuCameraMotionBlurEffect.applyCameraMotionBlurEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
@@ -2502,32 +2284,32 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasMaterials.applyCanvasBlendMode, cast ([state, value] : Array<Dynamic>));
   }
 
-  public static function applyCanvasMaterial(state:Dynamic, material:Null<Material>):Bool {
+  public static function applyCanvasMaterial(state:Dynamic, material:Null<Dynamic>):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasMaterialRegistry.applyCanvasMaterial, cast ([state, material] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function applyChromaticAberrationEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:ChromaticAberrationEffect):Void {
+  public static function applyChromaticAberrationEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasChromaticAberrationEffect.applyChromaticAberrationEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyChromaticAberrationEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ChromaticAberrationEffect):Void {
+  public static function applyChromaticAberrationEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlChromaticAberrationEffect.applyChromaticAberrationEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyChromaticAberrationEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ChromaticAberrationEffect):Void {
+  public static function applyChromaticAberrationEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuChromaticAberrationEffect.applyChromaticAberrationEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyColorLutPassToCanvas(source:Dynamic, dest:Dynamic, lut:ColorLut):Void {
+  public static function applyColorLutPassToCanvas(source:Dynamic, dest:Dynamic, lut:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasColorLutPass.applyColorLutPassToCanvas, cast ([source, dest, lut] : Array<Dynamic>));
   }
 
-  public static function applyColorLutPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, lut:ColorLut, cache:GlColorLutTextureCache):Void {
+  public static function applyColorLutPassToGl(state:Dynamic, source:Dynamic, dest:Dynamic, lut:Dynamic, cache:GlColorLutTextureCache):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlColorLutPass.applyColorLutPassToGl, cast ([state, source, dest, lut, cache] : Array<Dynamic>));
   }
 
-  public static function applyColorLutPassToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, lut:ColorLut, cache:WgpuColorLutTextureCache):Void {
+  public static function applyColorLutPassToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, lut:Dynamic, cache:WgpuColorLutTextureCache):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuColorLutPass.applyColorLutPassToWgpu, cast ([state, source, dest, lut, cache] : Array<Dynamic>));
   }
 
@@ -2535,11 +2317,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasColorMatrixPass.applyColorMatrixPassToCanvas, cast ([source, dest, matrix] : Array<Dynamic>));
   }
 
-  public static function applyColorMatrixPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, matrix:Array<Float>):Void {
+  public static function applyColorMatrixPassToGl(state:Dynamic, source:Dynamic, dest:Dynamic, matrix:Array<Float>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlColorMatrixPass.applyColorMatrixPassToGl, cast ([state, source, dest, matrix] : Array<Dynamic>));
   }
 
-  public static function applyColorMatrixPassToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, matrix:Array<Float>):Void {
+  public static function applyColorMatrixPassToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, matrix:Array<Float>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuColorMatrixPass.applyColorMatrixPassToWgpu, cast ([state, source, dest, matrix] : Array<Dynamic>));
   }
 
@@ -2548,71 +2330,71 @@ class Sdk {
     return cast null;
   }
 
-  public static function applyCompositeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CompositeEffect):Void {
+  public static function applyCompositeEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlCompositeEffect.applyCompositeEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyConvolutionEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:ConvolutionEffect):Void {
+  public static function applyConvolutionEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasConvolutionEffect.applyConvolutionEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyConvolutionEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ConvolutionEffect):Void {
+  public static function applyConvolutionEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlConvolutionEffect.applyConvolutionEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyConvolutionEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ConvolutionEffect):Void {
+  public static function applyConvolutionEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuConvolutionEffect.applyConvolutionEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyCrtEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:CrtEffect):Void {
+  public static function applyCrtEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasCrtEffect.applyCrtEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyCrtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CrtEffect):Void {
+  public static function applyCrtEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlCrtEffect.applyCrtEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyCrtEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:CrtEffect):Void {
+  public static function applyCrtEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuCrtEffect.applyCrtEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyCustomShaderEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CustomShaderEffect):Void {
+  public static function applyCustomShaderEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlCustomShaderEffect.applyCustomShaderEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyDirectionalBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:DirectionalBlurEffect):Void {
+  public static function applyDirectionalBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasDirectionalBlurEffect.applyDirectionalBlurEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyDirectionalBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DirectionalBlurEffect):Void {
+  public static function applyDirectionalBlurEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlDirectionalBlurEffect.applyDirectionalBlurEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyDirectionalBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DirectionalBlurEffect):Void {
+  public static function applyDirectionalBlurEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuDirectionalBlurEffect.applyDirectionalBlurEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyDisplacementEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:DisplacementEffect):Void {
+  public static function applyDisplacementEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasDisplacementEffect.applyDisplacementEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyDisplacementEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DisplacementEffect):Void {
+  public static function applyDisplacementEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlDisplacementEffect.applyDisplacementEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyDisplacementEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DisplacementEffect):Void {
+  public static function applyDisplacementEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuDisplacementEffect.applyDisplacementEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyDitherEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:DitherEffect):Void {
+  public static function applyDitherEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasDitherEffect.applyDitherEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyDitherEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DitherEffect):Void {
+  public static function applyDitherEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlDitherEffect.applyDitherEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyDitherEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DitherEffect):Void {
+  public static function applyDitherEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuDitherEffect.applyDitherEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
@@ -2620,47 +2402,47 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomMaterials.applyDomBlendMode, cast ([element, value] : Array<Dynamic>));
   }
 
-  public static function applyDomClipRectangles(state:DomRenderState, data:RenderProxy2D, entries:Array<DomClipEntry>):Void {
+  public static function applyDomClipRectangles(state:Dynamic, data:RenderProxy2D, entries:Array<DomClipEntry>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomClipRectangle.applyDomClipRectangles, cast ([state, data, entries] : Array<Dynamic>));
   }
 
-  public static function applyDomStyle(state:DomRenderState, element:Dynamic, node:RenderProxy2D):Void {
+  public static function applyDomStyle(state:Dynamic, element:Dynamic, node:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomStyle.applyDomStyle, cast ([state, element, node] : Array<Dynamic>));
   }
 
-  public static function applyDropShadowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:DropShadowEffect):Void {
+  public static function applyDropShadowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasDropShadowEffect.applyDropShadowEffectToCanvas, cast ([source, dest, poolOrEffect, maybeEffect] : Array<Dynamic>));
   }
 
-  public static function applyDropShadowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:DropShadowEffect):Void {
+  public static function applyDropShadowEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlDropShadowEffect.applyDropShadowEffectToGl, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyDropShadowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:DropShadowEffect):Void {
+  public static function applyDropShadowEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuDropShadowEffect.applyDropShadowEffectToWgpu, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyFilmGrainEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:FilmGrainEffect):Void {
+  public static function applyFilmGrainEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasFilmGrainEffect.applyFilmGrainEffectToCanvas, cast ([source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyFilmGrainEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:FilmGrainEffect):Void {
+  public static function applyFilmGrainEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlFilmGrainEffect.applyFilmGrainEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyFilmGrainEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:FilmGrainEffect):Void {
+  public static function applyFilmGrainEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuFilmGrainEffect.applyFilmGrainEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyFxaaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:FxaaEffect):Void {
+  public static function applyFxaaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasFxaaEffect.applyFxaaEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyFxaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:FxaaEffect):Void {
+  public static function applyFxaaEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlFxaaEffect.applyFxaaEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyFxaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:FxaaEffect):Void {
+  public static function applyFxaaEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuFxaaEffect.applyFxaaEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
@@ -2673,155 +2455,155 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_input_InputManager.applyGamepadStickDeadZone, cast ([out, x, y, deadZone] : Array<Dynamic>));
   }
 
-  public static function applyGaussianBlurToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
+  public static function applyGaussianBlurToGl(state:Dynamic, source:Dynamic, dest:Dynamic, temp:Dynamic, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlBlurEffect.applyGaussianBlurToGl, cast ([state, source, dest, temp, options] : Array<Dynamic>));
   }
 
-  public static function applyGaussianBlurToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
+  public static function applyGaussianBlurToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, temp:Dynamic, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuBlurEffect.applyGaussianBlurToWgpu, cast ([state, source, dest, temp, options] : Array<Dynamic>));
   }
 
-  public static function applyGlBlendMode(state:GlRenderState, blendMode:Null<BlendMode>):Void {
+  public static function applyGlBlendMode(state:Dynamic, blendMode:Null<BlendMode>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlDraw.applyGlBlendMode, cast ([state, blendMode] : Array<Dynamic>));
   }
 
-  public static function applyGlEffectBlitOffsetPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, dx:Float, dy:Float):Void {
+  public static function applyGlEffectBlitOffsetPass(state:Dynamic, source:Dynamic, dest:Dynamic, dx:Float, dy:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlEffectBlitShader.applyGlEffectBlitOffsetPass, cast ([state, source, dest, dx, dy] : Array<Dynamic>));
   }
 
-  public static function applyGlEffectBlitPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
+  public static function applyGlEffectBlitPass(state:Dynamic, source:Dynamic, dest:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlEffectBlitShader.applyGlEffectBlitPass, cast ([state, source, dest] : Array<Dynamic>));
   }
 
-  public static function applyGlEffectBoxBlur(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; @:optional var passes:Float; @:optional var edgeColor:Array<Float>; }):Void {
+  public static function applyGlEffectBoxBlur(state:Dynamic, source:Dynamic, dest:Dynamic, temp:Dynamic, options:{ @:optional var blurX:Float; @:optional var blurY:Float; @:optional var passes:Float; @:optional var edgeColor:Array<Float>; }):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlEffectBoxBlur.applyGlEffectBoxBlur, cast ([state, source, dest, temp, options] : Array<Dynamic>));
   }
 
-  public static function applyGlEffectErasePass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
+  public static function applyGlEffectErasePass(state:Dynamic, source:Dynamic, dest:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlEffectBlitShader.applyGlEffectErasePass, cast ([state, source, dest] : Array<Dynamic>));
   }
 
-  public static function applyGlEffectInvertTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
+  public static function applyGlEffectInvertTintPass(state:Dynamic, source:Dynamic, dest:Dynamic, color:Float, alpha:Float, strength:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlEffectTintShader.applyGlEffectInvertTintPass, cast ([state, source, dest, color, alpha, strength] : Array<Dynamic>));
   }
 
-  public static function applyGlEffectTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
+  public static function applyGlEffectTintPass(state:Dynamic, source:Dynamic, dest:Dynamic, color:Float, alpha:Float, strength:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlEffectTintShader.applyGlEffectTintPass, cast ([state, source, dest, color, alpha, strength] : Array<Dynamic>));
   }
 
-  public static function applyGlitchEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:GlitchEffect):Void {
+  public static function applyGlitchEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasGlitchEffect.applyGlitchEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyGlitchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GlitchEffect):Void {
+  public static function applyGlitchEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlGlitchEffect.applyGlitchEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyGlitchEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:GlitchEffect):Void {
+  public static function applyGlitchEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuGlitchEffect.applyGlitchEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyGodRaysEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:GodRaysEffect):Void {
+  public static function applyGodRaysEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasGodRaysEffect.applyGodRaysEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyGodRaysEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GodRaysEffect):Void {
+  public static function applyGodRaysEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlGodRaysEffect.applyGodRaysEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyGodRaysEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:GodRaysEffect):Void {
+  public static function applyGodRaysEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuGodRaysEffect.applyGodRaysEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyGradientBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientBevelEffect):Void {
+  public static function applyGradientBevelEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlGradientBevelEffect.applyGradientBevelEffectToGl, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyGradientBevelEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:GradientBevelEffect):Void {
+  public static function applyGradientBevelEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuGradientBevelEffect.applyGradientBevelEffectToWgpu, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyGradientGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientGlowEffect):Void {
+  public static function applyGradientGlowEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlGradientGlowEffect.applyGradientGlowEffectToGl, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyGradientGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:GradientGlowEffect):Void {
+  public static function applyGradientGlowEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuGradientGlowEffect.applyGradientGlowEffectToWgpu, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyHalftoneEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:HalftoneEffect):Void {
+  public static function applyHalftoneEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasHalftoneEffect.applyHalftoneEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyHalftoneEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:HalftoneEffect):Void {
+  public static function applyHalftoneEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlHalftoneEffect.applyHalftoneEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyHalftoneEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:HalftoneEffect):Void {
+  public static function applyHalftoneEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuHalftoneEffect.applyHalftoneEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyInnerGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:InnerGlowEffect):Void {
+  public static function applyInnerGlowEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlInnerGlowEffect.applyInnerGlowEffectToGl, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyInnerGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:InnerGlowEffect):Void {
+  public static function applyInnerGlowEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuInnerGlowEffect.applyInnerGlowEffectToWgpu, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyInnerShadowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:InnerShadowEffect):Void {
+  public static function applyInnerShadowEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlInnerShadowEffect.applyInnerShadowEffectToGl, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyInnerShadowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:InnerShadowEffect):Void {
+  public static function applyInnerShadowEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuInnerShadowEffect.applyInnerShadowEffectToWgpu, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyKuwaharaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:KuwaharaEffect):Void {
+  public static function applyKuwaharaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasKuwaharaEffect.applyKuwaharaEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyKuwaharaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:KuwaharaEffect):Void {
+  public static function applyKuwaharaEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlKuwaharaEffect.applyKuwaharaEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyKuwaharaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:KuwaharaEffect):Void {
+  public static function applyKuwaharaEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuKuwaharaEffect.applyKuwaharaEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyLensDirtEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:LensDirtEffect):Void {
+  public static function applyLensDirtEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasLensDirtEffect.applyLensDirtEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyLensDirtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensDirtEffect):Void {
+  public static function applyLensDirtEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlLensDirtEffect.applyLensDirtEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyLensDirtEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensDirtEffect):Void {
+  public static function applyLensDirtEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuLensDirtEffect.applyLensDirtEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyLensDistortionEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:LensDistortionEffect):Void {
+  public static function applyLensDistortionEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasLensDistortionEffect.applyLensDistortionEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyLensDistortionEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensDistortionEffect):Void {
+  public static function applyLensDistortionEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlLensDistortionEffect.applyLensDistortionEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyLensDistortionEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensDistortionEffect):Void {
+  public static function applyLensDistortionEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuLensDistortionEffect.applyLensDistortionEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyLensFlareEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:LensFlareEffect):Void {
+  public static function applyLensFlareEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasLensFlareEffect.applyLensFlareEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyLensFlareEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensFlareEffect):Void {
+  public static function applyLensFlareEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlLensFlareEffect.applyLensFlareEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyLensFlareEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensFlareEffect):Void {
+  public static function applyLensFlareEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuLensFlareEffect.applyLensFlareEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
@@ -2830,317 +2612,317 @@ class Sdk {
     return cast null;
   }
 
-  public static function applyMedianEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:MedianEffect):Void {
+  public static function applyMedianEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasMedianEffect.applyMedianEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyMedianEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:MedianEffect):Void {
+  public static function applyMedianEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlMedianEffect.applyMedianEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyMedianEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:MedianEffect):Void {
+  public static function applyMedianEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuMedianEffect.applyMedianEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyMotionBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:MotionBlurEffect):Void {
+  public static function applyMotionBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasMotionBlurEffect.applyMotionBlurEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyMotionBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, velocityTexture:Null<Dynamic>, effect:MotionBlurEffect):Void {
+  public static function applyMotionBlurEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, velocityTexture:Null<Dynamic>, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlMotionBlurEffect.applyMotionBlurEffectToGl, cast ([state, source, dest, velocityTexture, effect] : Array<Dynamic>));
   }
 
-  public static function applyMotionBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, velocityTexture:Null<Dynamic>, effect:MotionBlurEffect):Void {
+  public static function applyMotionBlurEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, velocityTexture:Null<Dynamic>, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuMotionBlurEffect.applyMotionBlurEffectToWgpu, cast ([state, source, dest, velocityTexture, effect] : Array<Dynamic>));
   }
 
-  public static function applyOuterGlowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:OuterGlowEffect):Void {
+  public static function applyOuterGlowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasOuterGlowEffect.applyOuterGlowEffectToCanvas, cast ([source, dest, poolOrEffect, maybeEffect] : Array<Dynamic>));
   }
 
-  public static function applyOuterGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:OuterGlowEffect):Void {
+  public static function applyOuterGlowEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlOuterGlowEffect.applyOuterGlowEffectToGl, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyOuterGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:OuterGlowEffect):Void {
+  public static function applyOuterGlowEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuOuterGlowEffect.applyOuterGlowEffectToWgpu, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyOutlineEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:OutlineEffect):Void {
+  public static function applyOutlineEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasOutlineEffect.applyOutlineEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyOutlineEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:OutlineEffect):Void {
+  public static function applyOutlineEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlOutlineEffect.applyOutlineEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyOutlineEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:OutlineEffect):Void {
+  public static function applyOutlineEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuOutlineEffect.applyOutlineEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyParticleCollisions(emitter:ParticleEmitter, state:ParticleEmitterState, colliders:Array<ParticleCollider>):Void {
+  public static function applyParticleCollisions(emitter:Dynamic, state:Dynamic, colliders:Array<ParticleCollider>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particles_ApplyParticleCollisions.applyParticleCollisions, cast ([emitter, state, colliders] : Array<Dynamic>));
   }
 
-  public static function applyParticleForces(emitter:ParticleEmitter, state:ParticleEmitterState, forces:Array<ParticleForce>, deltaTime:Float):Void {
+  public static function applyParticleForces(emitter:Dynamic, state:Dynamic, forces:Array<ParticleForce>, deltaTime:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particles_ApplyParticleForces.applyParticleForces, cast ([emitter, state, forces, deltaTime] : Array<Dynamic>));
   }
 
-  public static function applyParticleObjectCollisions(objects:Array<ParticleObject>, state:ParticleObjectsState, colliders:Array<ParticleCollider>):Void {
+  public static function applyParticleObjectCollisions(objects:Array<ParticleObject>, state:Dynamic, colliders:Array<ParticleCollider>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particles_ApplyParticleCollisions.applyParticleObjectCollisions, cast ([objects, state, colliders] : Array<Dynamic>));
   }
 
-  public static function applyParticleObjectForces(objects:Array<ParticleObject>, state:ParticleObjectsState, forces:Array<ParticleForce>, deltaTime:Float):Void {
+  public static function applyParticleObjectForces(objects:Array<ParticleObject>, state:Dynamic, forces:Array<ParticleForce>, deltaTime:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particles_ApplyParticleForces.applyParticleObjectForces, cast ([objects, state, forces, deltaTime] : Array<Dynamic>));
   }
 
-  public static function applyPixelateEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:PixelateEffect):Void {
+  public static function applyPixelateEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasPixelateEffect.applyPixelateEffectToCanvas, cast ([source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyPixelateEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PixelateEffect):Void {
+  public static function applyPixelateEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlPixelateEffect.applyPixelateEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyPixelateEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:PixelateEffect):Void {
+  public static function applyPixelateEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuPixelateEffect.applyPixelateEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyPosterizeEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:PosterizeEffect):Void {
+  public static function applyPosterizeEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasPosterizeEffect.applyPosterizeEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyPosterizeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PosterizeEffect):Void {
+  public static function applyPosterizeEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlPosterizeEffect.applyPosterizeEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyPosterizeEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:PosterizeEffect):Void {
+  public static function applyPosterizeEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuPosterizeEffect.applyPosterizeEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyRadialBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:RadialBlurEffect):Void {
+  public static function applyRadialBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasRadialBlurEffect.applyRadialBlurEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyRadialBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:RadialBlurEffect):Void {
+  public static function applyRadialBlurEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRadialBlurEffect.applyRadialBlurEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyRadialBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:RadialBlurEffect):Void {
+  public static function applyRadialBlurEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuRadialBlurEffect.applyRadialBlurEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyRenderProxyAdapter(state:RenderState, source:Renderable, data:Dynamic):Void {
+  public static function applyRenderProxyAdapter(state:Dynamic, source:Renderable, data:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_RenderProxyAdapter.applyRenderProxyAdapter, cast ([state, source, data] : Array<Dynamic>));
   }
 
-  public static function applyScanlinesEffectToCanvas(source:Dynamic, dest:Dynamic, effect:ScanlinesEffect):Void {
+  public static function applyScanlinesEffectToCanvas(source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasScanlinesEffect.applyScanlinesEffectToCanvas, cast ([source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyScanlinesEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ScanlinesEffect):Void {
+  public static function applyScanlinesEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlScanlinesEffect.applyScanlinesEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyScanlinesEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ScanlinesEffect):Void {
+  public static function applyScanlinesEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuScanlinesEffect.applyScanlinesEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyScreenSpaceFogEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:ScreenSpaceFogEffect):Void {
+  public static function applyScreenSpaceFogEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasScreenSpaceFogEffect.applyScreenSpaceFogEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyScreenSpaceFogEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<Dynamic>, effect:ScreenSpaceFogEffect):Void {
+  public static function applyScreenSpaceFogEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, depthTexture:Null<Dynamic>, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlScreenSpaceFogEffect.applyScreenSpaceFogEffectToGl, cast ([state, source, dest, depthTexture, effect] : Array<Dynamic>));
   }
 
-  public static function applyScreenSpaceFogEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ScreenSpaceFogEffect):Void {
+  public static function applyScreenSpaceFogEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuScreenSpaceFogEffect.applyScreenSpaceFogEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applySharpenEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SharpenEffect):Void {
+  public static function applySharpenEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasSharpenEffect.applySharpenEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applySharpenEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SharpenEffect):Void {
+  public static function applySharpenEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlSharpenEffect.applySharpenEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applySharpenEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SharpenEffect):Void {
+  public static function applySharpenEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuSharpenEffect.applySharpenEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applySketchEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SketchEffect):Void {
+  public static function applySketchEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasSketchEffect.applySketchEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applySketchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SketchEffect):Void {
+  public static function applySketchEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlSketchEffect.applySketchEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applySketchEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SketchEffect):Void {
+  public static function applySketchEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuSketchEffect.applySketchEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applySmaaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SmaaEffect):Void {
+  public static function applySmaaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasSmaaEffect.applySmaaEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applySmaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SmaaEffect):Void {
+  public static function applySmaaEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlSmaaEffect.applySmaaEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applySmaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SmaaEffect):Void {
+  public static function applySmaaEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuSmaaEffect.applySmaaEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applySsaoEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SsaoEffect):Void {
+  public static function applySsaoEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasSsaoEffect.applySsaoEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applySsaoEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SsaoEffect):Void {
+  public static function applySsaoEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlSsaoEffect.applySsaoEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applySsaoEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SsaoEffect):Void {
+  public static function applySsaoEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuSsaoEffect.applySsaoEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applySsrEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:SsrEffect):Void {
+  public static function applySsrEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasSsrEffect.applySsrEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applySsrEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SsrEffect):Void {
+  public static function applySsrEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlSsrEffect.applySsrEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applySsrEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SsrEffect):Void {
+  public static function applySsrEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuSsrEffect.applySsrEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applySurfaceColorTransform(dest:SurfaceRegion, source:SurfaceRegion, ct:ColorTransformLike):Void {
+  public static function applySurfaceColorTransform(dest:Dynamic, source:Dynamic, ct:ColorTransformLike):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.applySurfaceColorTransform, cast ([dest, source, ct] : Array<Dynamic>));
   }
 
-  public static function applySurfaceCurve(out:SurfaceRegion, source:SurfaceRegion, redLut:Null<Dynamic>, greenLut:Null<Dynamic>, blueLut:Null<Dynamic>, ?alphaLut:Null<Dynamic>):Void {
+  public static function applySurfaceCurve(out:Dynamic, source:Dynamic, redLut:Null<Dynamic>, greenLut:Null<Dynamic>, blueLut:Null<Dynamic>, ?alphaLut:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.applySurfaceCurve, cast ([out, source, redLut, greenLut, blueLut, alphaLut] : Array<Dynamic>));
   }
 
-  public static function applySurfaceLevels(out:SurfaceRegion, source:SurfaceRegion, ?blackPoint:Float, ?whitePoint:Float, ?gamma:Float):Void {
+  public static function applySurfaceLevels(out:Dynamic, source:Dynamic, ?blackPoint:Float, ?whitePoint:Float, ?gamma:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.applySurfaceLevels, cast ([out, source, blackPoint, whitePoint, gamma] : Array<Dynamic>));
   }
 
-  public static function applySurfacePaletteMap(dest:SurfaceRegion, source:SurfaceRegion, redMap:Null<Array<Float>>, greenMap:Null<Array<Float>>, blueMap:Null<Array<Float>>, alphaMap:Null<Array<Float>>):Void {
+  public static function applySurfacePaletteMap(dest:Dynamic, source:Dynamic, redMap:Null<Array<Float>>, greenMap:Null<Array<Float>>, blueMap:Null<Array<Float>>, alphaMap:Null<Array<Float>>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.applySurfacePaletteMap, cast ([dest, source, redMap, greenMap, blueMap, alphaMap] : Array<Dynamic>));
   }
 
-  public static function applySurfaceThreshold(dest:SurfaceRegion, source:SurfaceRegion, operation:ThresholdOperation, thresholdValue:Float, ?color:Float, ?mask:Float, ?copySource:Bool):Float {
+  public static function applySurfaceThreshold(dest:Dynamic, source:Dynamic, operation:ThresholdOperation, thresholdValue:Float, ?color:Float, ?mask:Float, ?copySource:Bool):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.applySurfaceThreshold, cast ([dest, source, operation, thresholdValue, color, mask, copySource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function applyTaaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:TaaEffect):Void {
+  public static function applyTaaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasTaaEffect.applyTaaEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyTaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, _effect:TaaEffect):Void {
+  public static function applyTaaEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlTaaEffect.applyTaaEffectToGl, cast ([state, source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyTaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, _effect:TaaEffect):Void {
+  public static function applyTaaEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuTaaEffect.applyTaaEffectToWgpu, cast ([state, source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyTextInputRestriction(source:RichText, text:String, ?replaceLength:Dynamic):String {
+  public static function applyTextInputRestriction(source:Dynamic, text:String, ?replaceLength:Dynamic):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.applyTextInputRestriction, cast ([source, text, replaceLength] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function applyTiltShiftEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:TiltShiftEffect):Void {
+  public static function applyTiltShiftEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasTiltShiftEffect.applyTiltShiftEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyTiltShiftEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:TiltShiftEffect):Void {
+  public static function applyTiltShiftEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlTiltShiftEffect.applyTiltShiftEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyTiltShiftEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:TiltShiftEffect):Void {
+  public static function applyTiltShiftEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuTiltShiftEffect.applyTiltShiftEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyToneMapEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:ToneMapEffect):Void {
+  public static function applyToneMapEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasToneMapEffect.applyToneMapEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyToneMapEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ToneMapEffect):Void {
+  public static function applyToneMapEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlToneMapEffect.applyToneMapEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyToneMapEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ToneMapEffect):Void {
+  public static function applyToneMapEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuToneMapEffect.applyToneMapEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyTween<T>(manager:TweenManager, target:Dynamic, propertyMap:NumericProps<Dynamic>):Void {
+  public static function applyTween<T>(manager:Dynamic, target:Dynamic, propertyMap:NumericProps<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.applyTween, cast ([manager, target, propertyMap] : Array<Dynamic>));
   }
 
-  public static function applyVignetteEffectToCanvas(source:Dynamic, dest:Dynamic, effect:VignetteEffect):Void {
+  public static function applyVignetteEffectToCanvas(source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasVignetteEffect.applyVignetteEffectToCanvas, cast ([source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyVignetteEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:VignetteEffect):Void {
+  public static function applyVignetteEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlVignetteEffect.applyVignetteEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyVignetteEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:VignetteEffect):Void {
+  public static function applyVignetteEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuVignetteEffect.applyVignetteEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyWgpuBlendMode(state:WgpuRenderState, blendMode:Null<BlendMode>):Void {
+  public static function applyWgpuBlendMode(state:Dynamic, blendMode:Null<BlendMode>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuDraw.applyWgpuBlendMode, cast ([state, blendMode] : Array<Dynamic>));
   }
 
-  public static function applyWgpuEffectBlitOffsetPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, dx:Float, dy:Float):Void {
+  public static function applyWgpuEffectBlitOffsetPass(state:Dynamic, source:Dynamic, dest:Dynamic, dx:Float, dy:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuEffectBlitShader.applyWgpuEffectBlitOffsetPass, cast ([state, source, dest, dx, dy] : Array<Dynamic>));
   }
 
-  public static function applyWgpuEffectBlitPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
+  public static function applyWgpuEffectBlitPass(state:Dynamic, source:Dynamic, dest:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuEffectBlitShader.applyWgpuEffectBlitPass, cast ([state, source, dest] : Array<Dynamic>));
   }
 
-  public static function applyWgpuEffectBoxBlur(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; @:optional var passes:Float; @:optional var edgeColor:Array<Float>; }):Void {
+  public static function applyWgpuEffectBoxBlur(state:Dynamic, source:Dynamic, dest:Dynamic, temp:Dynamic, options:{ @:optional var blurX:Float; @:optional var blurY:Float; @:optional var passes:Float; @:optional var edgeColor:Array<Float>; }):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuEffectBoxBlur.applyWgpuEffectBoxBlur, cast ([state, source, dest, temp, options] : Array<Dynamic>));
   }
 
-  public static function applyWgpuEffectErasePass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
+  public static function applyWgpuEffectErasePass(state:Dynamic, source:Dynamic, dest:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuEffectBlitShader.applyWgpuEffectErasePass, cast ([state, source, dest] : Array<Dynamic>));
   }
 
-  public static function applyWgpuEffectInnerClipPass(state:WgpuRenderState, glow:WgpuRenderTarget, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
+  public static function applyWgpuEffectInnerClipPass(state:Dynamic, glow:Dynamic, source:Dynamic, dest:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuEffectTintShader.applyWgpuEffectInnerClipPass, cast ([state, glow, source, dest] : Array<Dynamic>));
   }
 
-  public static function applyWgpuEffectInvertTintPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, color:Float, alpha:Float, strength:Float):Void {
+  public static function applyWgpuEffectInvertTintPass(state:Dynamic, source:Dynamic, dest:Dynamic, color:Float, alpha:Float, strength:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuEffectTintShader.applyWgpuEffectInvertTintPass, cast ([state, source, dest, color, alpha, strength] : Array<Dynamic>));
   }
 
-  public static function applyWgpuEffectTintPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, color:Float, alpha:Float, strength:Float):Void {
+  public static function applyWgpuEffectTintPass(state:Dynamic, source:Dynamic, dest:Dynamic, color:Float, alpha:Float, strength:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuEffectTintShader.applyWgpuEffectTintPass, cast ([state, source, dest, color, alpha, strength] : Array<Dynamic>));
   }
 
-  public static function applyWgpuScissorRect(state:WgpuRenderState, pass:Dynamic):Void {
+  public static function applyWgpuScissorRect(state:Dynamic, pass:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuScissor.applyWgpuScissorRect, cast ([state, pass] : Array<Dynamic>));
   }
 
-  public static function applyWhiteBalanceEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:WhiteBalanceEffect):Void {
+  public static function applyWhiteBalanceEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasWhiteBalanceEffect.applyWhiteBalanceEffectToCanvas, cast ([source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyWhiteBalanceEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:WhiteBalanceEffect):Void {
+  public static function applyWhiteBalanceEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlWhiteBalanceEffect.applyWhiteBalanceEffectToGl, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyWhiteBalanceEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:WhiteBalanceEffect):Void {
+  public static function applyWhiteBalanceEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuWhiteBalanceEffect.applyWhiteBalanceEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
@@ -3161,7 +2943,7 @@ class Sdk {
 
   public static final AreaLightKind:Dynamic = Facade_Sdk_flighthq_types__internal__AreaLightValues.AreaLightKind;
 
-  public static function areColorAdjustmentGuardsEnabled(state:RenderState):Bool {
+  public static function areColorAdjustmentGuardsEnabled(state:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_EnableColorAdjustmentGuards.areColorAdjustmentGuardsEnabled, cast ([state] : Array<Dynamic>));
     return cast null;
   }
@@ -3171,35 +2953,35 @@ class Sdk {
     return cast null;
   }
 
-  public static function areGlColorAdjustmentGuardsEnabled(state:GlRenderState):Bool {
+  public static function areGlColorAdjustmentGuardsEnabled(state:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_EnableGlColorAdjustmentGuards.areGlColorAdjustmentGuardsEnabled, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function areGlSceneColorSpaceGuardsEnabled(state:GlRenderState):Bool {
+  public static function areGlSceneColorSpaceGuardsEnabled(state:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_EnableGlSceneColorSpaceGuards.areGlSceneColorSpaceGuardsEnabled, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function areGlSceneCustomShaderGuardsEnabled(state:GlRenderState):Bool {
+  public static function areGlSceneCustomShaderGuardsEnabled(state:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_EnableGlSceneCustomShaderGuards.areGlSceneCustomShaderGuardsEnabled, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function areWgpuColorAdjustmentGuardsEnabled(state:WgpuRenderState):Bool {
+  public static function areWgpuColorAdjustmentGuardsEnabled(state:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_EnableWgpuColorAdjustmentGuards.areWgpuColorAdjustmentGuardsEnabled, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function attachApp(app:App):Void {
+  public static function attachApp(app:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_app_App.attachApp, cast ([app] : Array<Dynamic>));
   }
 
-  public static function attachApplicationExit(app:Application):Void {
+  public static function attachApplicationExit(app:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.attachApplicationExit, cast ([app] : Array<Dynamic>));
   }
 
-  public static function attachApplicationLifecycle(app:Application, win:ApplicationWindow):Void {
+  public static function attachApplicationLifecycle(app:Dynamic, win:ApplicationWindow):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.attachApplicationLifecycle, cast ([app, win] : Array<Dynamic>));
   }
 
@@ -3215,27 +2997,27 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_clipboard_Clipboard.attachClipboardWatch, cast ([watch] : Array<Dynamic>));
   }
 
-  public static function attachConnectivity(net:Connectivity):Void {
+  public static function attachConnectivity(net:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_connectivity_Connectivity.attachConnectivity, cast ([net] : Array<Dynamic>));
   }
 
-  public static function attachEntityBinding(entity:Entity, binding:Dynamic):Void {
+  public static function attachEntityBinding(entity:Dynamic, binding:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_entity_Binding.attachEntityBinding, cast ([entity, binding] : Array<Dynamic>));
   }
 
-  public static function attachGamepadInput(manager:InputManager, target:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachGamepadInput(manager:Dynamic, target:Dynamic, ?options:AttachInputOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_input_InputManager.attachGamepadInput, cast ([manager, target, options] : Array<Dynamic>));
   }
 
-  public static function attachKeyboardInput(manager:InputManager, target:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachKeyboardInput(manager:Dynamic, target:Dynamic, ?options:AttachInputOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_input_InputManager.attachKeyboardInput, cast ([manager, target, options] : Array<Dynamic>));
   }
 
-  public static function attachPointerInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachPointerInput(manager:Dynamic, element:Dynamic, ?options:AttachInputOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_input_InputManager.attachPointerInput, cast ([manager, element, options] : Array<Dynamic>));
   }
 
-  public static function attachPower(power:Power, ?idleThresholdSeconds:Dynamic):Void {
+  public static function attachPower(power:Dynamic, ?idleThresholdSeconds:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_power_Power.attachPower, cast ([power, idleThresholdSeconds] : Array<Dynamic>));
   }
 
@@ -3243,7 +3025,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_protocol_Protocol.attachProtocolHandler, cast ([handler] : Array<Dynamic>));
   }
 
-  public static function attachRelativePointerInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachRelativePointerInput(manager:Dynamic, element:Dynamic, ?options:AttachInputOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_input_InputManager.attachRelativePointerInput, cast ([manager, element, options] : Array<Dynamic>));
   }
 
@@ -3251,7 +3033,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_screen_Screen.attachScreenSignals, cast ([signals] : Array<Dynamic>));
   }
 
-  public static function attachSensors(sensors:Sensors):Void {
+  public static function attachSensors(sensors:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sensors_Sensors.attachSensors, cast ([sensors] : Array<Dynamic>));
   }
 
@@ -3259,7 +3041,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_share_Share.attachShareSignals, cast ([signals] : Array<Dynamic>));
   }
 
-  public static function attachSocket(socket:Socket):Void {
+  public static function attachSocket(socket:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_socket_Socket.attachSocket, cast ([socket] : Array<Dynamic>));
   }
 
@@ -3271,11 +3053,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_statusbar_Statusbar.attachStatusBar, cast ([bar] : Array<Dynamic>));
   }
 
-  public static function attachTextInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachTextInput(manager:Dynamic, element:Dynamic, ?options:AttachInputOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_input_InputManager.attachTextInput, cast ([manager, element, options] : Array<Dynamic>));
   }
 
-  public static function attachWheelInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachWheelInput(manager:Dynamic, element:Dynamic, ?options:AttachInputOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_input_InputManager.attachWheelInput, cast ([manager, element, options] : Array<Dynamic>));
   }
 
@@ -3307,7 +3089,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.attachWindowRenderContext, cast ([win, canvas] : Array<Dynamic>));
   }
 
-  public static function attachWindowRenderState(win:ApplicationWindow, state:RenderState, canvas:Dynamic):Void {
+  public static function attachWindowRenderState(win:ApplicationWindow, state:Dynamic, canvas:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.attachWindowRenderState, cast ([win, state, canvas] : Array<Dynamic>));
   }
 
@@ -3321,21 +3103,21 @@ class Sdk {
 
   public static final AttractorForceKind:Dynamic = Facade_Sdk_flighthq_types__internal__AttractorForceValues.AttractorForceKind;
 
-  public static function bakeColorLut(transforms:Array<ColorTransformFunction>, ?size:Float):ColorLut {
+  public static function bakeColorLut(transforms:Array<ColorTransformFunction>, ?size:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_adjustments_ColorLut.bakeColorLut, cast ([transforms, size] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bakeColorLutForRun(cache:ColorLutCache, run:Array<{ var kind:String; }>, ?size:Float):ColorLut {
+  public static function bakeColorLutForRun(cache:Dynamic, run:Array<{ var kind:String; }>, ?size:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_adjustments_ColorLutCache.bakeColorLutForRun, cast ([cache, run, size] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bakeEnvironmentIbl(state:GlRenderState, environment:Environment):Void {
+  public static function bakeEnvironmentIbl(state:Dynamic, environment:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlEnvironmentIblBake.bakeEnvironmentIbl, cast ([state, environment] : Array<Dynamic>));
   }
 
-  public static function bakeWgpuEnvironmentIbl(state:WgpuRenderState, environment:Environment):Void {
+  public static function bakeWgpuEnvironmentIbl(state:Dynamic, environment:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuEnvironmentIblBake.bakeWgpuEnvironmentIbl, cast ([state, environment] : Array<Dynamic>));
   }
 
@@ -3352,15 +3134,15 @@ class Sdk {
     return cast null;
   }
 
-  public static function beginGlMeshDraw(state:GlRenderState, program:GlMeshProgram, doubleSided:Bool):Void {
+  public static function beginGlMeshDraw(state:Dynamic, program:GlMeshProgram, doubleSided:Bool):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl__internal__GlMeshProgramValues.beginGlMeshDraw, cast ([state, program, doubleSided] : Array<Dynamic>));
   }
 
-  public static function beginGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline):Void {
+  public static function beginGlRenderEffectPipeline(state:Dynamic, pipeline:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectPipeline.beginGlRenderEffectPipeline, cast ([state, pipeline] : Array<Dynamic>));
   }
 
-  public static function beginGlRenderPass(state:GlRenderState, target:GlRenderTarget, ?preserve:RenderPassPreserve):Void {
+  public static function beginGlRenderPass(state:Dynamic, target:Dynamic, ?preserve:RenderPassPreserve):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlRenderPass.beginGlRenderPass, cast ([state, target, preserve] : Array<Dynamic>));
   }
 
@@ -3368,71 +3150,71 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_log_Log.beginLogGroup, cast ([label, channel] : Array<Dynamic>));
   }
 
-  public static function beginVelocityFrame(field:VelocityField):Void {
+  public static function beginVelocityFrame(field:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_velocity_VelocityField.beginVelocityFrame, cast ([field] : Array<Dynamic>));
   }
 
-  public static function beginWgpuMeshDraw(state:WgpuRenderState, pipeline:WgpuMeshPipeline):Void {
+  public static function beginWgpuMeshDraw(state:Dynamic, pipeline:WgpuMeshPipeline):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
   }
 
-  public static function beginWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline):Void {
+  public static function beginWgpuRenderEffectPipeline(state:Dynamic, pipeline:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectPipeline.beginWgpuRenderEffectPipeline, cast ([state, pipeline] : Array<Dynamic>));
   }
 
-  public static function beginWgpuRenderPass(state:WgpuRenderState, target:WgpuRenderTarget, ?preserve:RenderPassPreserve):Void {
+  public static function beginWgpuRenderPass(state:Dynamic, target:Dynamic, ?preserve:RenderPassPreserve):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuRenderTarget.beginWgpuRenderPass, cast ([state, target, preserve] : Array<Dynamic>));
   }
 
-  public static function bevelSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceBevelOptions):Void {
+  public static function bevelSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceBevelOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.bevelSurface, cast ([out, scratch, source, options] : Array<Dynamic>));
   }
 
   public static final BillboardKind:Dynamic = Facade_Sdk_flighthq_scene_Scene.BillboardKind;
 
-  public static function bindGlDebugNormalMap(state:GlRenderState, program:GlDebugProgram, normalMap:Null<Texture>, normalScale:Float):Void {
+  public static function bindGlDebugNormalMap(state:Dynamic, program:GlDebugProgram, normalMap:Null<Dynamic>, normalScale:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlDebugPrelude.bindGlDebugNormalMap, cast ([state, program, normalMap, normalScale] : Array<Dynamic>));
   }
 
-  public static function bindGlDebugRange(state:GlRenderState, program:GlDebugProgram, near:Float, far:Float):Void {
+  public static function bindGlDebugRange(state:Dynamic, program:GlDebugProgram, near:Float, far:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlDebugPrelude.bindGlDebugRange, cast ([state, program, near, far] : Array<Dynamic>));
   }
 
-  public static function bindGlImageResourceTexture(state:GlRenderState, image:ImageResource, ?sampler:Null<SamplerLike>):Dynamic {
+  public static function bindGlImageResourceTexture(state:Dynamic, image:Dynamic, ?sampler:Null<SamplerLike>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlDraw.bindGlImageResourceTexture, cast ([state, image, sampler] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bindGlMatcapSurface(state:GlRenderState, program:GlMatcapProgram, tint:LinearColor, matcap:Null<Texture>, alphaCutoff:Float):Void {
+  public static function bindGlMatcapSurface(state:Dynamic, program:GlMatcapProgram, tint:LinearColor, matcap:Null<Dynamic>, alphaCutoff:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlMatcapPrelude.bindGlMatcapSurface, cast ([state, program, tint, matcap, alphaCutoff] : Array<Dynamic>));
   }
 
-  public static function bindGlMeshLightBlock(state:GlRenderState, program:GlLitProgram, lights:SceneLightBlock):Void {
+  public static function bindGlMeshLightBlock(state:Dynamic, program:GlLitProgram, lights:SceneLightBlock):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl__internal__GlLitProgramValues.bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
   }
 
-  public static function bindGlPbrStandardBlock(state:GlRenderState, program:GlPbrProgram, standard:Null<StandardPbrMaterialProperties>):Void {
+  public static function bindGlPbrStandardBlock(state:Dynamic, program:GlPbrProgram, standard:Null<StandardPbrMaterialProperties>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlPbrStandardBlock.bindGlPbrStandardBlock, cast ([state, program, standard] : Array<Dynamic>));
   }
 
-  public static function bindGlPbrStandardTexture(state:GlRenderState, texture:Null<Texture>, location:Null<Dynamic>, unit:Float):Void {
+  public static function bindGlPbrStandardTexture(state:Dynamic, texture:Null<Dynamic>, location:Null<Dynamic>, unit:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlPbrStandardBlock.bindGlPbrStandardTexture, cast ([state, texture, location, unit] : Array<Dynamic>));
   }
 
-  public static function bindGlQuadBatchBaseAttributes(state:GlRenderState, locCorner:Float):Void {
+  public static function bindGlQuadBatchBaseAttributes(state:Dynamic, locCorner:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlSpriteBatch.bindGlQuadBatchBaseAttributes, cast ([state, locCorner] : Array<Dynamic>));
   }
 
-  public static function bindGlTexture(state:GlRenderState, imageSource:Dynamic, ?sampler:Null<SamplerLike>):Dynamic {
+  public static function bindGlTexture(state:Dynamic, imageSource:Dynamic, ?sampler:Null<SamplerLike>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlDraw.bindGlTexture, cast ([state, imageSource, sampler] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bindGlUnlitSurface(state:GlRenderState, program:GlUnlitProgram, color:LinearColor, intensity:Float, colorMap:Null<Texture>, alphaCutoff:Float):Void {
+  public static function bindGlUnlitSurface(state:Dynamic, program:GlUnlitProgram, color:LinearColor, intensity:Float, colorMap:Null<Dynamic>, alphaCutoff:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlUnlitPrelude.bindGlUnlitSurface, cast ([state, program, color, intensity, colorMap, alphaCutoff] : Array<Dynamic>));
   }
 
-  public static function bindGlUnlitVideoSurface(state:GlRenderState, program:GlUnlitProgram, color:LinearColor, intensity:Float, videoMap:VideoTexture, alphaCutoff:Float):Void {
+  public static function bindGlUnlitVideoSurface(state:Dynamic, program:GlUnlitProgram, color:LinearColor, intensity:Float, videoMap:Dynamic, alphaCutoff:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlUnlitPrelude.bindGlUnlitVideoSurface, cast ([state, program, color, intensity, videoMap, alphaCutoff] : Array<Dynamic>));
   }
 
@@ -3440,47 +3222,47 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl__internal__GlMeshProgramValues.bindGlUvTransform, cast ([gl, program, texture] : Array<Dynamic>));
   }
 
-  public static function bindGlVideoTexture(state:GlRenderState, videoTexture:VideoTexture, ?sampler:Null<SamplerLike>):Dynamic {
+  public static function bindGlVideoTexture(state:Dynamic, videoTexture:Dynamic, ?sampler:Null<SamplerLike>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlDraw.bindGlVideoTexture, cast ([state, videoTexture, sampler] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bindWgpuClassicSurface(state:WgpuRenderState, pipeline:WgpuClassicPipeline, materialKey:Dynamic, diffuse:LinearColor, specular:LinearColor, shininess:Float, alphaCutoff:Float, diffuseMap:Null<Texture>, specularMap:Null<Texture>, normalMap:Null<Texture>):Dynamic {
+  public static function bindWgpuClassicSurface(state:Dynamic, pipeline:WgpuClassicPipeline, materialKey:Dynamic, diffuse:LinearColor, specular:LinearColor, shininess:Float, alphaCutoff:Float, diffuseMap:Null<Dynamic>, specularMap:Null<Dynamic>, normalMap:Null<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuClassicPrelude.bindWgpuClassicSurface, cast ([state, pipeline, materialKey, diffuse, specular, shininess, alphaCutoff, diffuseMap, specularMap, normalMap] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bindWgpuDebugSurface(state:WgpuRenderState, pipeline:WgpuDebugPipeline, materialKey:Dynamic, near:Float, far:Float, normalScale:Float):Dynamic {
+  public static function bindWgpuDebugSurface(state:Dynamic, pipeline:WgpuDebugPipeline, materialKey:Dynamic, near:Float, far:Float, normalScale:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuDebugPrelude.bindWgpuDebugSurface, cast ([state, pipeline, materialKey, near, far, normalScale] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bindWgpuImageResourceTexture(state:WgpuRenderState, image:ImageResource, ?generateMips:Dynamic):WgpuTextureEntry {
+  public static function bindWgpuImageResourceTexture(state:Dynamic, image:Dynamic, ?generateMips:Dynamic):WgpuTextureEntry {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuDraw.bindWgpuImageResourceTexture, cast ([state, image, generateMips] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bindWgpuMatcapSurface(state:WgpuRenderState, pipeline:WgpuMatcapPipeline, materialKey:Dynamic, tint:LinearColor, alphaCutoff:Float):Dynamic {
+  public static function bindWgpuMatcapSurface(state:Dynamic, pipeline:WgpuMatcapPipeline, materialKey:Dynamic, tint:LinearColor, alphaCutoff:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuMatcapPrelude.bindWgpuMatcapSurface, cast ([state, pipeline, materialKey, tint, alphaCutoff] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bindWgpuTexture(state:WgpuRenderState, imageSource:Dynamic, ?generateMips:Dynamic):WgpuTextureEntry {
+  public static function bindWgpuTexture(state:Dynamic, imageSource:Dynamic, ?generateMips:Dynamic):WgpuTextureEntry {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuDraw.bindWgpuTexture, cast ([state, imageSource, generateMips] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bindWgpuToonSurface(state:WgpuRenderState, pipeline:WgpuToonPipeline, materialKey:Dynamic, baseColor:Array<Float>, steps:Float, alphaCutoff:Float):Dynamic {
+  public static function bindWgpuToonSurface(state:Dynamic, pipeline:WgpuToonPipeline, materialKey:Dynamic, baseColor:Array<Float>, steps:Float, alphaCutoff:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuToonPrelude.bindWgpuToonSurface, cast ([state, pipeline, materialKey, baseColor, steps, alphaCutoff] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bindWgpuUnlitSurface(state:WgpuRenderState, pipeline:WgpuUnlitPipeline, materialKey:Dynamic, color:LinearColor, intensity:Float, alphaCutoff:Float, colorMap:Null<Texture>):Dynamic {
+  public static function bindWgpuUnlitSurface(state:Dynamic, pipeline:WgpuUnlitPipeline, materialKey:Dynamic, color:LinearColor, intensity:Float, alphaCutoff:Float, colorMap:Null<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuUnlitPrelude.bindWgpuUnlitSurface, cast ([state, pipeline, materialKey, color, intensity, alphaCutoff, colorMap] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bindWgpuWireframeColor(state:WgpuRenderState, pipeline:WgpuWireframePipeline, materialKey:Dynamic, color:LinearColor):Dynamic {
+  public static function bindWgpuWireframeColor(state:Dynamic, pipeline:WgpuWireframePipeline, materialKey:Dynamic, color:LinearColor):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuWireframePrelude.bindWgpuWireframeColor, cast ([state, pipeline, materialKey, color] : Array<Dynamic>));
     return cast null;
   }
@@ -3489,7 +3271,7 @@ class Sdk {
 
   public static final BitmapTextKind:Dynamic = Facade_Sdk_flighthq_types__internal__BitmapTextValues.BitmapTextKind;
 
-  public static function blendMeshGeometryMorph(geometry:MeshGeometry, morph:MeshMorph, bindPose:MeshMorphBindPose):Void {
+  public static function blendMeshGeometryMorph(geometry:Dynamic, morph:MeshMorph, bindPose:MeshMorphBindPose):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MorphMeshGeometry.blendMeshGeometryMorph, cast ([geometry, morph, bindPose] : Array<Dynamic>));
   }
 
@@ -3503,7 +3285,7 @@ class Sdk {
 
   public static final blinnPhongWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = Facade_Sdk_flighthq_sceneWgpu_BlinnPhongWgpuMeshMaterialRenderer.blinnPhongWgpuMeshMaterialRenderer;
 
-  public static function blurSelectableRichText(manager:SelectableRichTextManager):Void {
+  public static function blurSelectableRichText(manager:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_SelectableRichTextManager.blurSelectableRichText, cast ([manager] : Array<Dynamic>));
   }
 
@@ -3523,11 +3305,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.blurSurfacePixelsVerticalWeighted, cast ([out, source, width, height, kernel] : Array<Dynamic>));
   }
 
-  public static function blurTextInput(manager:TextInputManager):Void {
+  public static function blurTextInput(manager:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputManager.blurTextInput, cast ([manager] : Array<Dynamic>));
   }
 
-  public static function booleanPaths(subject:Path, clip:Path, operation:PathBooleanOperation, ?out:Path, ?options:PathBooleanOptions):Path {
+  public static function booleanPaths(subject:Dynamic, clip:Dynamic, operation:PathBooleanOperation, ?out:Dynamic, ?options:PathBooleanOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_pathBoolean_BooleanPaths.booleanPaths, cast ([subject, clip, operation, out, options] : Array<Dynamic>));
     return cast null;
   }
@@ -3537,7 +3319,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function boxBlurSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceBoxBlurOptions):Void {
+  public static function boxBlurSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceBoxBlurOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.boxBlurSurface, cast ([out, scratch, source, options] : Array<Dynamic>));
   }
 
@@ -3601,11 +3383,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function buildRenderQueue(state:RenderState, source:Renderable, out:RenderQueue):Void {
+  public static function buildRenderQueue(state:Dynamic, source:Renderable, out:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_RenderQueue.buildRenderQueue, cast ([state, source, out] : Array<Dynamic>));
   }
 
-  public static function buildRichTextLayoutParams(source:TextLabel, measure:TextMeasureFunction):TextLayoutParams {
+  public static function buildRichTextLayoutParams(source:Dynamic, measure:TextMeasureFunction):TextLayoutParams {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.buildRichTextLayoutParams, cast ([source, measure] : Array<Dynamic>));
     return cast null;
   }
@@ -3656,7 +3438,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function buildTilesetRegions(target:Tileset):Void {
+  public static function buildTilesetRegions(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tileset_Tileset.buildTilesetRegions, cast ([target] : Array<Dynamic>));
   }
 
@@ -3685,12 +3467,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function buildWgpuPbrStandardDefineKey(standard:Null<StandardPbrMaterialProperties>, surface:Null<SurfaceMaterial>):WgpuPbrDefineKey {
+  public static function buildWgpuPbrStandardDefineKey(standard:Null<StandardPbrMaterialProperties>, surface:Null<Dynamic>):WgpuPbrDefineKey {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_StandardPbrWgpuMeshMaterialRenderer.buildWgpuPbrStandardDefineKey, cast ([standard, surface] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function buildWgpuRenderTargetBindGroup(state:WgpuRenderState, view:Dynamic):Dynamic {
+  public static function buildWgpuRenderTargetBindGroup(state:Dynamic, view:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuDraw.buildWgpuRenderTargetBindGroup, cast ([state, view] : Array<Dynamic>));
     return cast null;
   }
@@ -3732,7 +3514,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function cancelResourceLoad(loader:ResourceLoader):Void {
+  public static function cancelResourceLoad(loader:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_loader_ResourceLoader.cancelResourceLoad, cast ([loader] : Array<Dynamic>));
   }
 
@@ -3765,7 +3547,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function canRedoTextInput(source:RichText):Bool {
+  public static function canRedoTextInput(source:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.canRedoTextInput, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -3775,7 +3557,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function canUndoTextInput(source:RichText):Bool {
+  public static function canUndoTextInput(source:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.canUndoTextInput, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -3790,12 +3572,12 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionManager.captureInteractionPointer, cast ([manager, pointerId, target] : Array<Dynamic>));
   }
 
-  public static function captureMeshMorphBindPose(geometry:MeshGeometry):MeshMorphBindPose {
+  public static function captureMeshMorphBindPose(geometry:Dynamic):MeshMorphBindPose {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MorphMeshGeometry.captureMeshMorphBindPose, cast ([geometry] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function captureMeshSkinBindPose(geometry:MeshGeometry):MeshSkinBindPose {
+  public static function captureMeshSkinBindPose(geometry:Dynamic):MeshSkinBindPose {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_skeleton3d_Skeleton3d.captureMeshSkinBindPose, cast ([geometry] : Array<Dynamic>));
     return cast null;
   }
@@ -3815,7 +3597,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function centerMeshGeometry(geometry:MeshGeometry):Void {
+  public static function centerMeshGeometry(geometry:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryTransforms.centerMeshGeometry, cast ([geometry] : Array<Dynamic>));
   }
 
@@ -3860,7 +3642,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function cleanPath(source:Path, tolerance:Float, out:Path, ?flattenTolerance:Dynamic):Void {
+  public static function cleanPath(source:Dynamic, tolerance:Float, out:Dynamic, ?flattenTolerance:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_CleanPath.cleanPath, cast ([source, tolerance, out, flattenTolerance] : Array<Dynamic>));
   }
 
@@ -3903,11 +3685,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geolocation_Geolocation.clearGeolocationWatch, cast ([id] : Array<Dynamic>));
   }
 
-  public static function clearGlRenderTarget(state:GlRenderState, target:GlRenderTarget):Void {
+  public static function clearGlRenderTarget(state:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlFullscreenPass.clearGlRenderTarget, cast ([state, target] : Array<Dynamic>));
   }
 
-  public static function clearGlyphAtlasDirty(atlas:GlyphAtlas):Void {
+  public static function clearGlyphAtlasDirty(atlas:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_glyphatlas_GlyphAtlasDirty.clearGlyphAtlasDirty, cast ([atlas] : Array<Dynamic>));
   }
 
@@ -3967,15 +3749,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_log_Log.clearMemoryLogSink, cast ([handle] : Array<Dynamic>));
   }
 
-  public static function clearParticleEmitter(target:ParticleEmitter):Void {
+  public static function clearParticleEmitter(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter.clearParticleEmitter, cast ([target] : Array<Dynamic>));
   }
 
-  public static function clearParticleEmitter3D(target:ParticleEmitter3D):Void {
+  public static function clearParticleEmitter3D(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.clearParticleEmitter3D, cast ([target] : Array<Dynamic>));
   }
 
-  public static function clearQuadBatch(target:QuadBatch):Void {
+  public static function clearQuadBatch(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.clearQuadBatch, cast ([target] : Array<Dynamic>));
   }
 
@@ -3987,7 +3769,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_RectanglePool.clearRectanglePool, cast ([] : Array<Dynamic>));
   }
 
-  public static function clearRenderQueue(queue:RenderQueue):Void {
+  public static function clearRenderQueue(queue:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_RenderQueue.clearRenderQueue, cast ([queue] : Array<Dynamic>));
   }
 
@@ -3995,11 +3777,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_textlayout_RichTextContent.clearRichTextContent, cast ([runtime] : Array<Dynamic>));
   }
 
-  public static function clearRichTextFormatRanges(source:RichText):Void {
+  public static function clearRichTextFormatRanges(source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.clearRichTextFormatRanges, cast ([source] : Array<Dynamic>));
   }
 
-  public static function clearShapeCommands(shape:Shape):Void {
+  public static function clearShapeCommands(shape:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.clearShapeCommands, cast ([shape] : Array<Dynamic>));
   }
 
@@ -4012,7 +3794,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_signals_Slot.clearSignal, cast ([signal] : Array<Dynamic>));
   }
 
-  public static function clearSpatialIndex(index:SpatialIndex):Void {
+  public static function clearSpatialIndex(index:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spatial_SpatialIndex.clearSpatialIndex, cast ([index] : Array<Dynamic>));
   }
 
@@ -4026,7 +3808,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function clearTextInputHistory(source:RichText):Void {
+  public static function clearTextInputHistory(source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.clearTextInputHistory, cast ([source] : Array<Dynamic>));
   }
 
@@ -4038,7 +3820,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_textshaper__internal__TextShaperCacheValues.clearTextShaperCache, cast ([cache] : Array<Dynamic>));
   }
 
-  public static function clearTilemap(tilemap:Tilemap):Void {
+  public static function clearTilemap(tilemap:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.clearTilemap, cast ([tilemap] : Array<Dynamic>));
   }
 
@@ -4054,7 +3836,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector4Pool.clearVector4Pool, cast ([] : Array<Dynamic>));
   }
 
-  public static function clearWgpuEffectTarget(state:WgpuRenderState, target:WgpuRenderTarget):Void {
+  public static function clearWgpuEffectTarget(state:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuEffectPass.clearWgpuEffectTarget, cast ([state, target] : Array<Dynamic>));
   }
 
@@ -4070,77 +3852,77 @@ class Sdk {
 
   public static final ClipboardFormatUriList:Dynamic = Facade_Sdk_flighthq_types_ClipboardFormat.ClipboardFormatUriList;
 
-  public static function clipRegionContainsPoint(clip:ClipRegion, x:Float, y:Float):Bool {
+  public static function clipRegionContainsPoint(clip:Dynamic, x:Float, y:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.clipRegionContainsPoint, cast ([clip, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function clipRegionContainsRectangle(clip:ClipRegion, rectangle:RectangleLike):Bool {
+  public static function clipRegionContainsRectangle(clip:Dynamic, rectangle:RectangleLike):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.clipRegionContainsRectangle, cast ([clip, rectangle] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function clipRegionIntersectsRectangle(clip:ClipRegion, rectangle:RectangleLike):Bool {
+  public static function clipRegionIntersectsRectangle(clip:Dynamic, rectangle:RectangleLike):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.clipRegionIntersectsRectangle, cast ([clip, rectangle] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneAabb(source:AabbLike):Aabb {
+  public static function cloneAabb(source:AabbLike):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Aabb.cloneAabb, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneAmbientLight(source:AmbientLight):AmbientLight {
+  public static function cloneAmbientLight(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_lighting_AmbientLight.cloneAmbientLight, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneAnimationClip(clip:AnimationClip):AnimationClip {
+  public static function cloneAnimationClip(clip:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_animation_AnimationClip.cloneAnimationClip, cast ([clip] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneAnimationPlayer(player:AnimationPlayer):AnimationPlayer {
+  public static function cloneAnimationPlayer(player:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_animation_AnimationPlayer.cloneAnimationPlayer, cast ([player] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneAnimationTrack(track:AnimationTrack):AnimationTrack {
+  public static function cloneAnimationTrack(track:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_animation_AnimationTrack.cloneAnimationTrack, cast ([track] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneAreaLight(source:AreaLight):AreaLight {
+  public static function cloneAreaLight(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_lighting_AreaLight.cloneAreaLight, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneAudioResource(resource:AudioResource):AudioResource {
+  public static function cloneAudioResource(resource:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_audio_AudioResource.cloneAudioResource, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneBoundingSphere(source:BoundingSphereLike):BoundingSphere {
+  public static function cloneBoundingSphere(source:BoundingSphereLike):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_BoundingSphere.cloneBoundingSphere, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneClipRegion(clip:ClipRegion):ClipRegion {
+  public static function cloneClipRegion(clip:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.cloneClipRegion, cast ([clip] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneColorTransform(source:ColorTransformLike):ColorTransform {
+  public static function cloneColorTransform(source:ColorTransformLike):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_materials_ColorTransform.cloneColorTransform, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneCubeTexture(source:CubeTextureLike):CubeTexture {
+  public static function cloneCubeTexture(source:CubeTextureLike):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_texture_CubeTexture.cloneCubeTexture, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneDirectionalLight(source:DirectionalLight):DirectionalLight {
+  public static function cloneDirectionalLight(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_lighting_DirectionalLight.cloneDirectionalLight, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -4150,37 +3932,37 @@ class Sdk {
     return cast null;
   }
 
-  public static function cloneEnvironment(source:Environment):Environment {
+  public static function cloneEnvironment(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_lighting_Environment.cloneEnvironment, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneHemisphereLight(source:HemisphereLight):HemisphereLight {
+  public static function cloneHemisphereLight(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_lighting_HemisphereLight.cloneHemisphereLight, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneImageResource(resource:ImageResource):ImageResource {
+  public static function cloneImageResource(resource:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResource.cloneImageResource, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneMaterial(source:Material):Material {
+  public static function cloneMaterial(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_materials_Material.cloneMaterial, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneMatrix(source:MatrixLike):Matrix {
+  public static function cloneMatrix(source:MatrixLike):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix.cloneMatrix, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneMatrix3(source:Matrix3Like):Matrix3 {
+  public static function cloneMatrix3(source:Matrix3Like):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix3.cloneMatrix3, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneMatrix4(source:Matrix4Like):Matrix4 {
+  public static function cloneMatrix4(source:Matrix4Like):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix4.cloneMatrix4, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -4190,57 +3972,57 @@ class Sdk {
     return cast null;
   }
 
-  public static function cloneMesh(source:Mesh):Mesh {
+  public static function cloneMesh(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Mesh.cloneMesh, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneMeshGeometry(source:MeshGeometry):MeshGeometry {
+  public static function cloneMeshGeometry(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometry.cloneMeshGeometry, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneParticleEmitter(source:ParticleEmitter):ParticleEmitter {
+  public static function cloneParticleEmitter(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter.cloneParticleEmitter, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneParticleEmitter3D(source:ParticleEmitter3D):ParticleEmitter3D {
+  public static function cloneParticleEmitter3D(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.cloneParticleEmitter3D, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function clonePath(source:Path):Path {
+  public static function clonePath(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_CopyPath.clonePath, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function clonePlane(source:PlaneLike):Plane {
+  public static function clonePlane(source:PlaneLike):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Plane.clonePlane, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function clonePointLight(source:PointLight):PointLight {
+  public static function clonePointLight(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_lighting_PointLight.clonePointLight, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneQuadBatch(source:QuadBatch):QuadBatch {
+  public static function cloneQuadBatch(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.cloneQuadBatch, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneQuaternion(source:QuaternionLike):Quaternion {
+  public static function cloneQuaternion(source:QuaternionLike):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Quaternion.cloneQuaternion, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneRectangle(source:RectangleLike):Rectangle {
+  public static function cloneRectangle(source:RectangleLike):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Rectangle.cloneRectangle, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneSampler(source:SamplerLike):Sampler {
+  public static function cloneSampler(source:SamplerLike):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_texture_Sampler.cloneSampler, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -4250,57 +4032,57 @@ class Sdk {
     return cast null;
   }
 
-  public static function cloneSpotLight(source:SpotLight):SpotLight {
+  public static function cloneSpotLight(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_lighting_SpotLight.cloneSpotLight, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneSprite(source:Sprite):Sprite {
+  public static function cloneSprite(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.cloneSprite, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneSpritesheet(spritesheet:Spritesheet):Spritesheet {
+  public static function cloneSpritesheet(spritesheet:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.cloneSpritesheet, cast ([spritesheet] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneSpritesheetPlayer(player:SpritesheetPlayer):SpritesheetPlayer {
+  public static function cloneSpritesheetPlayer(player:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.cloneSpritesheetPlayer, cast ([player] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneSurface(source:Surface):Surface {
+  public static function cloneSurface(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.cloneSurface, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneTexture(source:TextureLike):Texture {
+  public static function cloneTexture(source:TextureLike):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_texture_Texture.cloneTexture, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneTilemap(source:Tilemap):Tilemap {
+  public static function cloneTilemap(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.cloneTilemap, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneVector2(source:Vector2Like):Vector2 {
+  public static function cloneVector2(source:Vector2Like):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector2.cloneVector2, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneVector3(source:Vector3Like):Vector3 {
+  public static function cloneVector3(source:Vector3Like):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector3.cloneVector3, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneVector4(source:Vector4Like):Vector4 {
+  public static function cloneVector4(source:Vector4Like):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector4.cloneVector4, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneVideoTexture(source:VideoTextureLike):VideoTexture {
+  public static function cloneVideoTexture(source:VideoTextureLike):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_texture_Texture.cloneVideoTexture, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -4313,7 +4095,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_notification_Notification.closeNotification, cast ([id] : Array<Dynamic>));
   }
 
-  public static function closeSocket(socket:Socket, ?code:Float, ?reason:String):Void {
+  public static function closeSocket(socket:Dynamic, ?code:Float, ?reason:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_socket_Socket.closeSocket, cast ([socket, code, reason] : Array<Dynamic>));
   }
 
@@ -4332,19 +4114,19 @@ class Sdk {
 
   public static final COLOR_MATRIX_LENGTH:Dynamic = Facade_Sdk_flighthq_adjustments_ColorMatrixMath.COLOR_MATRIX_LENGTH;
 
-  public static function colorMatrixSurface(out:Dynamic, source:SurfaceRegion, matrix:Array<Float>):Void {
+  public static function colorMatrixSurface(out:Dynamic, source:Dynamic, matrix:Array<Float>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.colorMatrixSurface, cast ([out, source, matrix] : Array<Dynamic>));
   }
 
-  public static function compactParticleEmitter(target:ParticleEmitter):Void {
+  public static function compactParticleEmitter(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter.compactParticleEmitter, cast ([target] : Array<Dynamic>));
   }
 
-  public static function compactParticleEmitter3D(target:ParticleEmitter3D):Void {
+  public static function compactParticleEmitter3D(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.compactParticleEmitter3D, cast ([target] : Array<Dynamic>));
   }
 
-  public static function compactQuadBatch(target:QuadBatch):Void {
+  public static function compactQuadBatch(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.compactQuadBatch, cast ([target] : Array<Dynamic>));
   }
 
@@ -4368,12 +4150,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function compareSurface(source:Surface, other:Surface):Null<Surface> {
+  public static function compareSurface(source:Dynamic, other:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.compareSurface, cast ([source, other] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function compareSurfaceFingerprints(a:SurfaceFingerprint, b:SurfaceFingerprint):Float {
+  public static function compareSurfaceFingerprints(a:Dynamic, b:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.compareSurfaceFingerprints, cast ([a, b] : Array<Dynamic>));
     return cast null;
   }
@@ -4443,37 +4225,37 @@ class Sdk {
     return cast null;
   }
 
-  public static function compileWgpuClassicPipeline(state:WgpuRenderState, key:WgpuClassicDefineKey, format:Dynamic):WgpuClassicPipeline {
+  public static function compileWgpuClassicPipeline(state:Dynamic, key:WgpuClassicDefineKey, format:Dynamic):WgpuClassicPipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuClassicPrelude.compileWgpuClassicPipeline, cast ([state, key, format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function compileWgpuDebugPipeline(state:WgpuRenderState, key:WgpuDebugDefineKey, format:Dynamic):WgpuDebugPipeline {
+  public static function compileWgpuDebugPipeline(state:Dynamic, key:WgpuDebugDefineKey, format:Dynamic):WgpuDebugPipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuDebugPrelude.compileWgpuDebugPipeline, cast ([state, key, format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function compileWgpuMatcapPipeline(state:WgpuRenderState, key:WgpuMatcapDefineKey, format:Dynamic):WgpuMatcapPipeline {
+  public static function compileWgpuMatcapPipeline(state:Dynamic, key:WgpuMatcapDefineKey, format:Dynamic):WgpuMatcapPipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuMatcapPrelude.compileWgpuMatcapPipeline, cast ([state, key, format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function compileWgpuPbrPipeline(state:WgpuRenderState, key:WgpuPbrDefineKey, format:Dynamic):WgpuPbrPipeline {
+  public static function compileWgpuPbrPipeline(state:Dynamic, key:WgpuPbrDefineKey, format:Dynamic):WgpuPbrPipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuPbrPipelineCache.compileWgpuPbrPipeline, cast ([state, key, format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function compileWgpuToonPipeline(state:WgpuRenderState, key:WgpuToonDefineKey, format:Dynamic):WgpuToonPipeline {
+  public static function compileWgpuToonPipeline(state:Dynamic, key:WgpuToonDefineKey, format:Dynamic):WgpuToonPipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuToonPrelude.compileWgpuToonPipeline, cast ([state, key, format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function compileWgpuUnlitPipeline(state:WgpuRenderState, key:WgpuUnlitDefineKey, format:Dynamic):WgpuUnlitPipeline {
+  public static function compileWgpuUnlitPipeline(state:Dynamic, key:WgpuUnlitDefineKey, format:Dynamic):WgpuUnlitPipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuUnlitPrelude.compileWgpuUnlitPipeline, cast ([state, key, format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function compileWgpuWireframePipeline(state:WgpuRenderState, format:Dynamic):WgpuWireframePipeline {
+  public static function compileWgpuWireframePipeline(state:Dynamic, format:Dynamic):WgpuWireframePipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuWireframePrelude.compileWgpuWireframePipeline, cast ([state, format] : Array<Dynamic>));
     return cast null;
   }
@@ -4490,11 +4272,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Transform3d.composeMatrix4FromTransform3D, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function compositeSurfacePixels(dest:SurfaceRegion, pixels:Dynamic, ?mode:SurfaceCompositeMode):Void {
+  public static function compositeSurfacePixels(dest:Dynamic, pixels:Dynamic, ?mode:SurfaceCompositeMode):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.compositeSurfacePixels, cast ([dest, pixels, mode] : Array<Dynamic>));
   }
 
-  public static function compositeSurfaceRegion(dest:SurfaceRegion, source:SurfaceRegion, ?mode:SurfaceCompositeMode):Void {
+  public static function compositeSurfaceRegion(dest:Dynamic, source:Dynamic, ?mode:SurfaceCompositeMode):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.compositeSurfaceRegion, cast ([dest, source, mode] : Array<Dynamic>));
   }
 
@@ -4508,25 +4290,25 @@ class Sdk {
     return cast null;
   }
 
-  public static function computeBitmapLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+  public static function computeBitmapLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobject_Bitmap.computeBitmapLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function computeBitmapTextLocalBoundsRectangle(out:Rectangle, source:BitmapText):Void {
+  public static function computeBitmapTextLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_bitmaptext_BitmapText.computeBitmapTextLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function computeBloomBlurRadius(effect:BloomEffect):Float {
+  public static function computeBloomBlurRadius(effect:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_BloomEffect.computeBloomBlurRadius, cast ([effect] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function computeBloomIntensity(effect:BloomEffect):Float {
+  public static function computeBloomIntensity(effect:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_BloomEffect.computeBloomIntensity, cast ([effect] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function computeBloomThreshold(effect:BloomEffect):Float {
+  public static function computeBloomThreshold(effect:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_BloomEffect.computeBloomThreshold, cast ([effect] : Array<Dynamic>));
     return cast null;
   }
@@ -4554,11 +4336,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function computeDisplayObjectRenderTargetTransform(outRenderTransform:MatrixLike, source:DisplayObject, bounds:RectangleLike, ?contentX:Float, ?contentY:Float):Void {
+  public static function computeDisplayObjectRenderTargetTransform(outRenderTransform:MatrixLike, source:Dynamic, bounds:RectangleLike, ?contentX:Float, ?contentY:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_RenderTarget.computeDisplayObjectRenderTargetTransform, cast ([outRenderTransform, source, bounds, contentX, contentY] : Array<Dynamic>));
   }
 
-  public static function computeDropShadowEffectCss(effect:DropShadowEffect):Null<String> {
+  public static function computeDropShadowEffectCss(effect:Dynamic):Null<String> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasEffectDropShadowCss.computeDropShadowEffectCss, cast ([effect] : Array<Dynamic>));
     return cast null;
   }
@@ -4601,21 +4383,21 @@ class Sdk {
     return cast null;
   }
 
-  public static function computeGodRaysAccumulationScale(effect:GodRaysEffect):Float {
+  public static function computeGodRaysAccumulationScale(effect:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_GodRaysMath.computeGodRaysAccumulationScale, cast ([effect] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function computeGodRaysLightCenter(effect:GodRaysEffect, out:Array<Float>):Void {
+  public static function computeGodRaysLightCenter(effect:Dynamic, out:Array<Float>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effects_GodRaysMath.computeGodRaysLightCenter, cast ([effect, out] : Array<Dynamic>));
   }
 
-  public static function computeGodRaysSampleWeight(effect:GodRaysEffect, sampleIndex:Float):Float {
+  public static function computeGodRaysSampleWeight(effect:Dynamic, sampleIndex:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_GodRaysMath.computeGodRaysSampleWeight, cast ([effect, sampleIndex] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function computeGodRaysStepSize(effect:GodRaysEffect, px:Float, py:Float, out:Array<Float>):Void {
+  public static function computeGodRaysStepSize(effect:Dynamic, px:Float, py:Float, out:Array<Float>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effects_GodRaysMath.computeGodRaysStepSize, cast ([effect, px, py, out] : Array<Dynamic>));
   }
 
@@ -4627,7 +4409,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_effects_StylizeMath.computeHalftoneCellParams, cast ([frequency, angle, out] : Array<Dynamic>));
   }
 
-  public static function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+  public static function computeHtmlViewLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobject_HtmlView.computeHtmlViewLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4640,12 +4422,12 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_effects_KuwaharaMath.computeKuwaharaSectorOffsets, cast ([radius, out] : Array<Dynamic>));
   }
 
-  public static function computeKuwaharaSectorPixelCount(effect:KuwaharaEffect):Float {
+  public static function computeKuwaharaSectorPixelCount(effect:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_KuwaharaMath.computeKuwaharaSectorPixelCount, cast ([effect] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function computeKuwaharaSectorSize(effect:KuwaharaEffect):Float {
+  public static function computeKuwaharaSectorSize(effect:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_KuwaharaMath.computeKuwaharaSectorSize, cast ([effect] : Array<Dynamic>));
     return cast null;
   }
@@ -4660,32 +4442,32 @@ class Sdk {
     return cast null;
   }
 
-  public static function computeMeshGeometryBoundingSphere(out:BoundingSphereLike, geometry:MeshGeometry):Void {
+  public static function computeMeshGeometryBoundingSphere(out:BoundingSphereLike, geometry:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryBoundingSphere, cast ([out, geometry] : Array<Dynamic>));
   }
 
-  public static function computeMeshGeometryBounds(out:AabbLike, geometry:MeshGeometry):Void {
+  public static function computeMeshGeometryBounds(out:AabbLike, geometry:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryBounds, cast ([out, geometry] : Array<Dynamic>));
   }
 
-  public static function computeMeshGeometryFlatNormals(out:MeshGeometry, geometry:MeshGeometry):Void {
+  public static function computeMeshGeometryFlatNormals(out:Dynamic, geometry:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryFlatNormals, cast ([out, geometry] : Array<Dynamic>));
   }
 
-  public static function computeMeshGeometryNormals(out:MeshGeometry, geometry:MeshGeometry):Void {
+  public static function computeMeshGeometryNormals(out:Dynamic, geometry:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryNormals, cast ([out, geometry] : Array<Dynamic>));
   }
 
-  public static function computeMeshGeometryTangents(out:MeshGeometry, geometry:MeshGeometry):Void {
+  public static function computeMeshGeometryTangents(out:Dynamic, geometry:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryTangents, cast ([out, geometry] : Array<Dynamic>));
   }
 
-  public static function computeMeshGeometryWireframeIndices(geometry:MeshGeometry):Dynamic {
+  public static function computeMeshGeometryWireframeIndices(geometry:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryIndex.computeMeshGeometryWireframeIndices, cast ([geometry] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+  public static function computeNativeTextLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_NativeText.computeNativeTextLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4697,29 +4479,29 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.computeNodeWorldTransformRevision, cast ([runtime, parentRuntime] : Array<Dynamic>));
   }
 
-  public static function computeOuterGlowEffectCss(effect:OuterGlowEffect):Null<String> {
+  public static function computeOuterGlowEffectCss(effect:Dynamic):Null<String> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasEffectDropShadowCss.computeOuterGlowEffectCss, cast ([effect] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function computeOutlineEdgeParams(effect:OutlineEffect, out:Array<Float>):Void {
+  public static function computeOutlineEdgeParams(effect:Dynamic, out:Array<Float>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effects_EdgeDetectMath.computeOutlineEdgeParams, cast ([effect, out] : Array<Dynamic>));
   }
 
-  public static function computeOutlineThicknessPx(effect:OutlineEffect):Float {
+  public static function computeOutlineThicknessPx(effect:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_EdgeDetectMath.computeOutlineThicknessPx, cast ([effect] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function computeParticleEmitter3DLocalBoundsAabb(out:AabbLike, source:ParticleEmitter3D):Void {
+  public static function computeParticleEmitter3DLocalBoundsAabb(out:AabbLike, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.computeParticleEmitter3DLocalBoundsAabb, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function computeParticleEmitterLocalBoundsRectangle(out:Rectangle, source:ParticleEmitter):Void {
+  public static function computeParticleEmitterLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter.computeParticleEmitterLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function computeQuadBatchLocalBoundsRectangle(out:Rectangle, source:QuadBatch):Void {
+  public static function computeQuadBatchLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.computeQuadBatchLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4755,7 +4537,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function computeRenderViewLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+  public static function computeRenderViewLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobject_RenderView.computeRenderViewLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4774,7 +4556,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function computeRichTextContent(out:RichTextContent, data:RichTextData, ?passwordCharacter:Null<String>):Void {
+  public static function computeRichTextContent(out:Dynamic, data:RichTextData, ?passwordCharacter:Null<String>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textlayout_RichTextContent.computeRichTextContent, cast ([out, data, passwordCharacter] : Array<Dynamic>));
   }
 
@@ -4788,7 +4570,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function computeRichTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+  public static function computeRichTextLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.computeRichTextLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4829,7 +4611,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function computeShapeLocalBoundsRectangle(out:Rectangle, source:BoundsNodeAny):Void {
+  public static function computeShapeLocalBoundsRectangle(out:Dynamic, source:BoundsNodeAny):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.computeShapeLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4837,11 +4619,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_skeleton3d_Skeleton3d.computeSkeleton3DJointMatrices, cast ([skeleton] : Array<Dynamic>));
   }
 
-  public static function computeSketchEdgeParams(effect:SketchEffect, out:Array<Float>):Void {
+  public static function computeSketchEdgeParams(effect:Dynamic, out:Array<Float>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effects_EdgeDetectMath.computeSketchEdgeParams, cast ([effect, out] : Array<Dynamic>));
   }
 
-  public static function computeSpriteLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+  public static function computeSpriteLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.computeSpriteLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4869,12 +4651,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function computeTextFormatFontString(format:TextFormat):String {
+  public static function computeTextFormatFontString(format:Dynamic):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_TextFormatFont.computeTextFormatFontString, cast ([format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function computeTextLabelLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+  public static function computeTextLabelLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_TextLabel.computeTextLabelLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4882,7 +4664,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_textlayout_TextLayout.computeTextLayout, cast ([out, params] : Array<Dynamic>));
   }
 
-  public static function computeTilemapLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+  public static function computeTilemapLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.computeTilemapLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4891,7 +4673,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function computeVideoLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+  public static function computeVideoLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobject_Video.computeVideoLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -4923,7 +4705,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_effects_ColorTemperatureMath.computeWhiteBalanceMultipliers, cast ([temperature, tint, out] : Array<Dynamic>));
   }
 
-  public static function computeWindowDeviceTransform(win:ApplicationWindow, out:Matrix):Matrix {
+  public static function computeWindowDeviceTransform(win:ApplicationWindow, out:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_application_Application.computeWindowDeviceTransform, cast ([win, out] : Array<Dynamic>));
     return cast null;
   }
@@ -4944,7 +4726,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.concatSurfaceColorMatrix, cast ([out, first, second] : Array<Dynamic>));
   }
 
-  public static function configureDirectionalShadowCamera(camera:Camera, lightDirection:Vector3Like, sceneBounds:AabbLike):Void {
+  public static function configureDirectionalShadowCamera(camera:Dynamic, lightDirection:Vector3Like, sceneBounds:AabbLike):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.configureDirectionalShadowCamera, cast ([camera, lightDirection, sceneBounds] : Array<Dynamic>));
   }
 
@@ -4952,7 +4734,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Quaternion.conjugateQuaternion, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function connectAudioChannelToNode(channel:AudioChannel, destinationNode:Dynamic):Void {
+  public static function connectAudioChannelToNode(channel:Dynamic, destinationNode:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_media_AudioChannel.connectAudioChannelToNode, cast ([channel, destinationNode] : Array<Dynamic>));
   }
 
@@ -4961,7 +4743,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function connectInputStateToInputManager(state:InputState, manager:InputManager):Dynamic {
+  public static function connectInputStateToInputManager(state:InputState, manager:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_input_InputManager.connectInputStateToInputManager, cast ([state, manager] : Array<Dynamic>));
     return cast null;
   }
@@ -4971,7 +4753,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function connectInputToTextInput(input:TextInputSource, manager:TextInputManager):Dynamic {
+  public static function connectInputToTextInput(input:TextInputSource, manager:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputManager.connectInputToTextInput, cast ([input, manager] : Array<Dynamic>));
     return cast null;
   }
@@ -5009,7 +4791,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function containsDisplayObject(outer:DisplayObject, inner:DisplayObject):Bool {
+  public static function containsDisplayObject(outer:Dynamic, inner:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_DisplayObjectOverlap.containsDisplayObject, cast ([outer, inner] : Array<Dynamic>));
     return cast null;
   }
@@ -5019,7 +4801,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function containsPathPoint(path:Path, px:Float, py:Float, ?tolerance:Dynamic):Bool {
+  public static function containsPathPoint(path:Dynamic, px:Float, py:Float, ?tolerance:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_ContainsPathPoint.containsPathPoint, cast ([path, px, py, tolerance] : Array<Dynamic>));
     return cast null;
   }
@@ -5034,11 +4816,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function contributeTransformVelocity<Traits>(field:VelocityField, root:Transform2DNode<Traits>):Void {
+  public static function contributeTransformVelocity<Traits>(field:Dynamic, root:Transform2DNode<Traits>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_velocity_TransformVelocity.contributeTransformVelocity, cast ([field, root] : Array<Dynamic>));
   }
 
-  public static function contributeVelocity(field:VelocityField, source:Dynamic, x:Float, y:Float):Void {
+  public static function contributeVelocity(field:Dynamic, source:Dynamic, x:Float, y:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_velocity_VelocityField.contributeVelocity, cast ([field, source, x, y] : Array<Dynamic>));
   }
 
@@ -5047,7 +4829,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function convertMeshGeometryLayout(source:MeshGeometry, targetLayout:VertexAttributeLayout):MeshGeometry {
+  public static function convertMeshGeometryLayout(source:Dynamic, targetLayout:VertexAttributeLayout):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryLayout.convertMeshGeometryLayout, cast ([source, targetLayout] : Array<Dynamic>));
     return cast null;
   }
@@ -5077,7 +4859,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_materials_PbrMaterials.convertSpecularGlossinessToStandardPbr, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function convertSurfaceAlphaType(out:Surface, target:AlphaType):Void {
+  public static function convertSurfaceAlphaType(out:Dynamic, target:AlphaType):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.convertSurfaceAlphaType, cast ([out, target] : Array<Dynamic>));
   }
 
@@ -5085,7 +4867,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.convertSurfacePixelOrder, cast ([out, source, length, from, to] : Array<Dynamic>));
   }
 
-  public static function convolveSurface(out:Dynamic, source:SurfaceRegion, options:SurfaceConvolutionOptions):Void {
+  public static function convolveSurface(out:Dynamic, source:Dynamic, options:SurfaceConvolutionOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.convolveSurface, cast ([out, source, options] : Array<Dynamic>));
   }
 
@@ -5093,7 +4875,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Aabb.copyAabb, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function copyAllRenderersFromRenderState(target:RenderState, source:RenderState):Void {
+  public static function copyAllRenderersFromRenderState(target:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_Renderer.copyAllRenderersFromRenderState, cast ([target, source] : Array<Dynamic>));
   }
 
@@ -5101,7 +4883,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_BoundingSphere.copyBoundingSphere, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function copyClipRegion(out:ClipRegion, source:ClipRegion):Void {
+  public static function copyClipRegion(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.copyClipRegion, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -5122,7 +4904,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function copyMaterial(out:Material, source:Material):Void {
+  public static function copyMaterial(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_materials_Material.copyMaterial, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -5186,7 +4968,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix.copyMatrixRowToVector3, cast ([out, row, source] : Array<Dynamic>));
   }
 
-  public static function copyPath(source:Path, ?out:Path):Path {
+  public static function copyPath(source:Dynamic, ?out:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_CopyPath.copyPath, cast ([source, out] : Array<Dynamic>));
     return cast null;
   }
@@ -5203,7 +4985,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Rectangle.copyRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function copyRenderersFromRenderState(target:RenderState, source:RenderState):Void {
+  public static function copyRenderersFromRenderState(target:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_Renderer.copyRenderersFromRenderState, cast ([target, source] : Array<Dynamic>));
   }
 
@@ -5211,19 +4993,19 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_texture_Sampler.copySampler, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function copyShapeCommands(out:Shape, source:Shape):Void {
+  public static function copyShapeCommands(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.copyShapeCommands, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function copySurfaceAlpha(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function copySurfaceAlpha(dest:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.copySurfaceAlpha, cast ([dest, source] : Array<Dynamic>));
   }
 
-  public static function copySurfaceChannel(dest:SurfaceRegion, destChannel:ImageChannel, source:SurfaceRegion, sourceChannel:ImageChannel):Void {
+  public static function copySurfaceChannel(dest:Dynamic, destChannel:ImageChannel, source:Dynamic, sourceChannel:ImageChannel):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.copySurfaceChannel, cast ([dest, destChannel, source, sourceChannel] : Array<Dynamic>));
   }
 
-  public static function copySurfacePixels(dest:SurfaceRegion, source:SurfaceRegion, ?composite:Bool):Void {
+  public static function copySurfacePixels(dest:Dynamic, source:Dynamic, ?composite:Bool):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.copySurfacePixels, cast ([dest, source, composite] : Array<Dynamic>));
   }
 
@@ -5252,7 +5034,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_texture_Texture.copyVideoTexture, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function createAabb(?minX:Float, ?minY:Float, ?minZ:Float, ?maxX:Float, ?maxY:Float, ?maxZ:Float):Aabb {
+  public static function createAabb(?minX:Float, ?minY:Float, ?minZ:Float, ?maxX:Float, ?maxY:Float, ?maxZ:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Aabb.createAabb, cast ([minX, minY, minZ, maxX, maxY, maxZ] : Array<Dynamic>));
     return cast null;
   }
@@ -5262,7 +5044,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createAmbientLight(?options:AmbientLightOptions):AmbientLight {
+  public static function createAmbientLight(?options:AmbientLightOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_lighting_AmbientLight.createAmbientLight, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -5277,27 +5059,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function createAnimationChannel(track:AnimationTrack, targetRef:Dynamic):AnimationChannel {
+  public static function createAnimationChannel(track:Dynamic, targetRef:Dynamic):AnimationChannel {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_animation_AnimationClip.createAnimationChannel, cast ([track, targetRef] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float):AnimationClip {
+  public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_animation_AnimationClip.createAnimationClip, cast ([channels, duration] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createAnimationPlayer(clip:AnimationClip, ?opts:{ @:optional var loop:Bool; @:optional var loopMode:AnimationLoopMode; @:optional var playing:Bool; @:optional var repeatCount:Float; @:optional var speed:Float; @:optional var time:Float; }):AnimationPlayer {
+  public static function createAnimationPlayer(clip:Dynamic, ?opts:{ @:optional var loop:Bool; @:optional var loopMode:AnimationLoopMode; @:optional var playing:Bool; @:optional var repeatCount:Float; @:optional var speed:Float; @:optional var time:Float; }):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_animation_AnimationPlayer.createAnimationPlayer, cast ([clip, opts] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createAnimationTrack(opts:{ var times:Dynamic; var values:Dynamic; @:optional var components:Float; @:optional var interpolation:AnimationInterpolation; @:optional var quaternion:Bool; @:optional var easing:Dynamic; }):AnimationTrack {
+  public static function createAnimationTrack(opts:{ var times:Dynamic; var values:Dynamic; @:optional var components:Float; @:optional var interpolation:AnimationInterpolation; @:optional var quaternion:Bool; @:optional var easing:Dynamic; }):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_animation_AnimationTrack.createAnimationTrack, cast ([opts] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createAnisotropicSampler(level:Float):Sampler {
+  public static function createAnisotropicSampler(level:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_texture_Sampler.createAnisotropicSampler, cast ([level] : Array<Dynamic>));
     return cast null;
   }
@@ -5307,12 +5089,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createApp():App {
+  public static function createApp():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_app_App.createApp, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createApplication():Application {
+  public static function createApplication():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_application_Application.createApplication, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -5337,12 +5119,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createAreaLight(?options:AreaLightOptions):AreaLight {
+  public static function createAreaLight(?options:AreaLightOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_lighting_AreaLight.createAreaLight, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createAssetLibrary():AssetLibrary {
+  public static function createAssetLibrary():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_assets_AssetLibrary.createAssetLibrary, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -5352,27 +5134,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function createAudioMixer(context:Dynamic, ?options:AudioMixerOptions):AudioMixer {
+  public static function createAudioMixer(context:Dynamic, ?options:AudioMixerOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_AudioMixer.createAudioMixer, cast ([context, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createAudioResource(?buffer:Dynamic):AudioResource {
+  public static function createAudioResource(?buffer:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_audio_AudioResource.createAudioResource, cast ([buffer] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createAudioResourceFromSamples(channels:Array<flighthq._internal._Float32Array>, sampleRate:Float):AudioResource {
+  public static function createAudioResourceFromSamples(channels:Array<flighthq._internal._Float32Array>, sampleRate:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_audio_AudioResourceFrom.createAudioResourceFromSamples, cast ([channels, sampleRate] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createAutoExposureEffect(?options:Dynamic):AutoExposureEffect {
+  public static function createAutoExposureEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_AutoExposureEffect.createAutoExposureEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createBarrelDistortionEffect(?options:Dynamic):BarrelDistortionEffect {
+  public static function createBarrelDistortionEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_BarrelDistortionEffect.createBarrelDistortionEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -5382,17 +5164,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createBevelEffect(?options:Dynamic):BevelEffect {
+  public static function createBevelEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_BevelEffect.createBevelEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, ?mode:BillboardMode, ?kind:Kind, ?obj:Dynamic):Billboard {
+  public static function createBillboard(geometry:Dynamic, materials:Array<Null<Dynamic>>, ?mode:BillboardMode, ?kind:Kind, ?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Billboard.createBillboard, cast ([geometry, materials, mode, kind, obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createBitmap(?obj:PartialNode<Bitmap>):Bitmap {
+  public static function createBitmap(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_Bitmap.createBitmap, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -5402,12 +5184,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createBitmapFont(data:BitmapFontData):BitmapFont {
+  public static function createBitmapFont(data:BitmapFontData):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_bitmapfont_BitmapFont.createBitmapFont, cast ([data] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createBitmapPattern(context:Dynamic, bitmap:ImageResource, repeat:Bool, ?smooth:Dynamic):Null<Dynamic> {
+  public static function createBitmapPattern(context:Dynamic, bitmap:Dynamic, repeat:Bool, ?smooth:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasFillPattern.createBitmapPattern, cast ([context, bitmap, repeat, smooth] : Array<Dynamic>));
     return cast null;
   }
@@ -5417,7 +5199,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createBitmapText(glyphSource:Null<GlyphSource>, ?options:BitmapTextOptions):BitmapText {
+  public static function createBitmapText(glyphSource:Null<Dynamic>, ?options:BitmapTextOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_bitmaptext_BitmapText.createBitmapText, cast ([glyphSource, options] : Array<Dynamic>));
     return cast null;
   }
@@ -5432,7 +5214,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createBlendEffect(mode:AdvancedBlendMode, ?options:Dynamic):BlendEffect {
+  public static function createBlendEffect(mode:AdvancedBlendMode, ?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_BlendEffect.createBlendEffect, cast ([mode, options] : Array<Dynamic>));
     return cast null;
   }
@@ -5442,27 +5224,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function createBloomEffect(?options:Dynamic):BloomEffect {
+  public static function createBloomEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_BloomEffect.createBloomEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createBlurEffect(?options:Dynamic):BlurEffect {
+  public static function createBlurEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_BlurEffect.createBlurEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createBokehDepthOfFieldEffect(?options:Dynamic):BokehDepthOfFieldEffect {
+  public static function createBokehDepthOfFieldEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_BokehDepthOfFieldEffect.createBokehDepthOfFieldEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createBoundingSphere(?centerX:Float, ?centerY:Float, ?centerZ:Float, ?radius:Float):BoundingSphere {
+  public static function createBoundingSphere(?centerX:Float, ?centerY:Float, ?centerZ:Float, ?radius:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_BoundingSphere.createBoundingSphere, cast ([centerX, centerY, centerZ, radius] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createBoxMeshGeometry(?width:Float, ?height:Float, ?depth:Float):MeshGeometry {
+  public static function createBoxMeshGeometry(?width:Float, ?height:Float, ?depth:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryBuilders.createBoxMeshGeometry, cast ([width, height, depth] : Array<Dynamic>));
     return cast null;
   }
@@ -5472,7 +5254,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createBrightnessContrastAdjustment(?options:Dynamic):BrightnessContrastAdjustment {
+  public static function createBrightnessContrastAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_adjustments_BrightnessContrastAdjustment.createBrightnessContrastAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -5482,7 +5264,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createCamera(opts:CameraOptions):Camera {
+  public static function createCamera(opts:CameraOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.createCamera, cast ([opts] : Array<Dynamic>));
     return cast null;
   }
@@ -5492,7 +5274,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createCameraMotionBlurEffect(?options:Dynamic):CameraMotionBlurEffect {
+  public static function createCameraMotionBlurEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_CameraMotionBlurEffect.createCameraMotionBlurEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -5507,7 +5289,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createCanvasFromImageResource(image:ImageResource):Null<Dynamic> {
+  public static function createCanvasFromImageResource(image:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResourceFrom.createCanvasFromImageResource, cast ([image] : Array<Dynamic>));
     return cast null;
   }
@@ -5547,17 +5329,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Capsule {
+  public static function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Capsule.createCapsule, cast ([startX, startY, startZ, endX, endY, endZ, radius] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createCapsuleMeshGeometry(?radius:Float, ?height:Float, ?radialSegments:Float, ?capSegments:Float):MeshGeometry {
+  public static function createCapsuleMeshGeometry(?radius:Float, ?height:Float, ?radialSegments:Float, ?capSegments:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryBuilders.createCapsuleMeshGeometry, cast ([radius, height, radialSegments, capSegments] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createCaptureBaseline():CaptureBaseline {
+  public static function createCaptureBaseline():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_capture_CaptureBaseline.createCaptureBaseline, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -5567,7 +5349,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createChannelMixerAdjustment(?options:Dynamic):ChannelMixerAdjustment {
+  public static function createChannelMixerAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_adjustments_ChannelMixerAdjustment.createChannelMixerAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -5577,7 +5359,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createChildClock(parent:Clock, ?options:ClockOptions):Clock {
+  public static function createChildClock(parent:Dynamic, ?options:ClockOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clock_CreateClock.createChildClock, cast ([parent, options] : Array<Dynamic>));
     return cast null;
   }
@@ -5587,17 +5369,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createChromaticAberrationEffect(?options:Dynamic):ChromaticAberrationEffect {
+  public static function createChromaticAberrationEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_ChromaticAberrationEffect.createChromaticAberrationEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createCircleMeshGeometry(?radius:Float, ?segments:Float):MeshGeometry {
+  public static function createCircleMeshGeometry(?radius:Float, ?segments:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryBuilders.createCircleMeshGeometry, cast ([radius, segments] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createClampLinearSampler():Sampler {
+  public static function createClampLinearSampler():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_texture_Sampler.createClampLinearSampler, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -5612,37 +5394,37 @@ class Sdk {
     return cast null;
   }
 
-  public static function createClipRegionFromCircle(x:Float, y:Float, radius:Float, ?tolerance:Dynamic):ClipRegion {
+  public static function createClipRegionFromCircle(x:Float, y:Float, radius:Float, ?tolerance:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.createClipRegionFromCircle, cast ([x, y, radius, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createClipRegionFromContours(contours:Array<Array<Float>>, winding:PathWinding):ClipRegion {
+  public static function createClipRegionFromContours(contours:Array<Array<Float>>, winding:PathWinding):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.createClipRegionFromContours, cast ([contours, winding] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createClipRegionFromEllipse(rectangle:RectangleLike, ?tolerance:Dynamic):ClipRegion {
+  public static function createClipRegionFromEllipse(rectangle:RectangleLike, ?tolerance:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.createClipRegionFromEllipse, cast ([rectangle, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createClipRegionFromPath(path:Path, ?tolerance:Dynamic):ClipRegion {
+  public static function createClipRegionFromPath(path:Dynamic, ?tolerance:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.createClipRegionFromPath, cast ([path, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createClipRegionFromRectangle(rectangle:RectangleLike):ClipRegion {
+  public static function createClipRegionFromRectangle(rectangle:RectangleLike):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.createClipRegionFromRectangle, cast ([rectangle] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createClipRegionFromRoundedRectangle(rectangle:RectangleLike, radius:Float, ?tolerance:Dynamic):ClipRegion {
+  public static function createClipRegionFromRoundedRectangle(rectangle:RectangleLike, radius:Float, ?tolerance:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.createClipRegionFromRoundedRectangle, cast ([rectangle, radius, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createClock(?options:ClockOptions):Clock {
+  public static function createClock(?options:ClockOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clock_CreateClock.createClock, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -5657,7 +5439,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createColorBlindSimulationAdjustment(?options:Dynamic):ColorBlindSimulationAdjustment {
+  public static function createColorBlindSimulationAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_adjustments_ColorBlindSimulationAdjustment.createColorBlindSimulationAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -5667,12 +5449,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createColorGradeAdjustment(?options:Dynamic):ColorGradeAdjustment {
+  public static function createColorGradeAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_adjustments_ColorGradeAdjustment.createColorGradeAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createColorLutCache():ColorLutCache {
+  public static function createColorLutCache():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_adjustments_ColorLutCache.createColorLutCache, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -5682,42 +5464,42 @@ class Sdk {
     return cast null;
   }
 
-  public static function createColorTransform(?opts:Dynamic):ColorTransform {
+  public static function createColorTransform(?opts:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_materials_ColorTransform.createColorTransform, cast ([opts] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createColorTransformAdjustment(colorTransform:ColorTransform):ColorTransformAdjustment {
+  public static function createColorTransformAdjustment(colorTransform:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_adjustments_ColorTransformAdjustment.createColorTransformAdjustment, cast ([colorTransform] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createColorTween(manager:TweenManager, target:Dynamic, property:String, duration:Float, toColor:Float, ?options:TweenOptions):Dynamic {
+  public static function createColorTween(manager:Dynamic, target:Dynamic, property:String, duration:Float, toColor:Float, ?options:TweenOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tween_ColorTween.createColorTween, cast ([manager, target, property, duration, toColor, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createCompactBidiClassBackend():BidiClassBackend {
+  public static function createCompactBidiClassBackend():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textbidi_BidiClassBackend.createCompactBidiClassBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createCompositeEffect(operator_:CompositeOperator, ?options:Dynamic):CompositeEffect {
+  public static function createCompositeEffect(operator_:CompositeOperator, ?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_CompositeEffect.createCompositeEffect, cast ([operator_, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createCompressedImageResource(compressed:ImageResourceCompressed):ImageResource {
+  public static function createCompressedImageResource(compressed:ImageResourceCompressed):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResource.createCompressedImageResource, cast ([compressed] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createConeMeshGeometry(?radius:Float, ?height:Float, ?radialSegments:Float, ?capped:Bool):MeshGeometry {
+  public static function createConeMeshGeometry(?radius:Float, ?height:Float, ?radialSegments:Float, ?capped:Bool):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryBuilders.createConeMeshGeometry, cast ([radius, height, radialSegments, capped] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createConnectivity():Connectivity {
+  public static function createConnectivity():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_connectivity_Connectivity.createConnectivity, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -5732,7 +5514,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createContactShadowsEffect(?options:Dynamic):ContactShadowsEffect {
+  public static function createContactShadowsEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_ContactShadowsEffect.createContactShadowsEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -5742,32 +5524,32 @@ class Sdk {
     return cast null;
   }
 
-  public static function createConvolutionEffect(options:Dynamic):ConvolutionEffect {
+  public static function createConvolutionEffect(options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_ConvolutionEffect.createConvolutionEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createCrtEffect(?options:Dynamic):CrtEffect {
+  public static function createCrtEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_CrtEffect.createCrtEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createCubeTexture(?opts:Dynamic):CubeTexture {
+  public static function createCubeTexture(?opts:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_texture_CubeTexture.createCubeTexture, cast ([opts] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createCustomShaderEffect(options:Dynamic):CustomShaderEffect {
+  public static function createCustomShaderEffect(options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_CustomShaderEffect.createCustomShaderEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createCustomShaderMaterial(?opts:Dynamic):CustomShaderMaterial {
+  public static function createCustomShaderMaterial(?opts:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_materials_CustomShaderMaterial.createCustomShaderMaterial, cast ([opts] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createCylinderMeshGeometry(?topRadius:Float, ?bottomRadius:Float, ?height:Float, ?radialSegments:Float, ?capped:Bool):MeshGeometry {
+  public static function createCylinderMeshGeometry(?topRadius:Float, ?bottomRadius:Float, ?height:Float, ?radialSegments:Float, ?capped:Bool):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryBuilders.createCylinderMeshGeometry, cast ([topRadius, bottomRadius, height, radialSegments, capped] : Array<Dynamic>));
     return cast null;
   }
@@ -5797,7 +5579,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createDefaultPathBooleanBackend():PathBooleanBackend {
+  public static function createDefaultPathBooleanBackend():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_pathBoolean_PathBooleanBackend.createDefaultPathBooleanBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -5837,22 +5619,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function createDirectionalBlurEffect(?options:Dynamic):DirectionalBlurEffect {
+  public static function createDirectionalBlurEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_DirectionalBlurEffect.createDirectionalBlurEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createDirectionalLight(?options:DirectionalLightOptions):DirectionalLight {
+  public static function createDirectionalLight(?options:DirectionalLightOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_lighting_DirectionalLight.createDirectionalLight, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createDisplacementEffect(?options:Dynamic):DisplacementEffect {
+  public static function createDisplacementEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_DisplacementEffect.createDisplacementEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createDisplayContainer(?obj:PartialNode<DisplayContainer>):DisplayContainer {
+  public static function createDisplayContainer(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_DisplayContainer.createDisplayContainer, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -5862,12 +5644,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createDisplayObject(?obj:PartialNode<DisplayObject>):DisplayObject {
+  public static function createDisplayObject(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_DisplayObject.createDisplayObject, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createDisplayObjectGeneric<R>(kind:Kind, ?obj:PartialNode<DisplayObject>, ?createData:DisplayObjectDataFactory, ?createDisplayObjectRuntimeFactory:DisplayObjectRuntimeFactory<Dynamic>):DisplayObject {
+  public static function createDisplayObjectGeneric<R>(kind:Kind, ?obj:PartialNode<Dynamic>, ?createData:DisplayObjectDataFactory, ?createDisplayObjectRuntimeFactory:DisplayObjectRuntimeFactory<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_DisplayObject.createDisplayObjectGeneric, cast ([kind, obj, createData, createDisplayObjectRuntimeFactory] : Array<Dynamic>));
     return cast null;
   }
@@ -5882,17 +5664,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createDitherEffect(?options:Dynamic):DitherEffect {
+  public static function createDitherEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_DitherEffect.createDitherEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createDodecahedronMeshGeometry(?radius:Float, ?detail:Float):MeshGeometry {
+  public static function createDodecahedronMeshGeometry(?radius:Float, ?detail:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryBuilders.createDodecahedronMeshGeometry, cast ([radius, detail] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createDomRenderState(element:Dynamic, ?options:Dynamic):DomRenderState {
+  public static function createDomRenderState(element:Dynamic, ?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomRenderState.createDomRenderState, cast ([element, options] : Array<Dynamic>));
     return cast null;
   }
@@ -5902,7 +5684,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createDomScale9ShapeData(_state:RenderState, _source:Renderable):DomScale9ShapeData__domScale9Shape {
+  public static function createDomScale9ShapeData(_state:Dynamic, _source:Renderable):DomScale9ShapeData__domScale9Shape {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomScale9Shape.createDomScale9ShapeData, cast ([_state, _source] : Array<Dynamic>));
     return cast null;
   }
@@ -5912,7 +5694,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createDropShadowEffect(?options:Dynamic):DropShadowEffect {
+  public static function createDropShadowEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_DropShadowEffect.createDropShadowEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -5942,7 +5724,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createEnvironment(?options:EnvironmentOptions):Environment {
+  public static function createEnvironment(?options:EnvironmentOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_lighting_Environment.createEnvironment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -5952,7 +5734,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createExposureAdjustment(?options:Dynamic):ExposureAdjustment {
+  public static function createExposureAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_adjustments_ExposureAdjustment.createExposureAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -5972,12 +5754,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createFilmEmulationEffect(?options:Dynamic):FilmEmulationEffect {
+  public static function createFilmEmulationEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_FilmEmulationEffect.createFilmEmulationEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createFilmGrainEffect(?options:Dynamic):FilmGrainEffect {
+  public static function createFilmGrainEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_FilmGrainEffect.createFilmGrainEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -6002,22 +5784,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function createFont(name:String):Font {
+  public static function createFont(name:String):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_font_Font.createFont, cast ([name] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createFontResource(family:String):FontResource {
+  public static function createFontResource(family:String):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_font_Font.createFontResource, cast ([family] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createFrustum():Frustum {
+  public static function createFrustum():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Frustum.createFrustum, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createFxaaEffect(?options:Dynamic):FxaaEffect {
+  public static function createFxaaEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_FxaaEffect.createFxaaEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -6042,7 +5824,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createGlCacheState(screenState:GlRenderState):GlRenderState {
+  public static function createGlCacheState(screenState:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlCache.createGlCacheState, cast ([screenState] : Array<Dynamic>));
     return cast null;
   }
@@ -6057,7 +5839,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createGlitchEffect(?options:Dynamic):GlitchEffect {
+  public static function createGlitchEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_GlitchEffect.createGlitchEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -6067,12 +5849,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createGlRenderEffectPipeline(_state:GlRenderState, ?options:RenderEffectPipelineOptions):GlRenderEffectPipeline {
+  public static function createGlRenderEffectPipeline(_state:Dynamic, ?options:RenderEffectPipelineOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectPipeline.createGlRenderEffectPipeline, cast ([_state, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGlRenderState(canvas:Dynamic, ?options:GlRenderOptions):GlRenderState {
+  public static function createGlRenderState(canvas:Dynamic, ?options:GlRenderOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlRenderState.createGlRenderState, cast ([canvas, options] : Array<Dynamic>));
     return cast null;
   }
@@ -6082,62 +5864,62 @@ class Sdk {
     return cast null;
   }
 
-  public static function createGlRenderTarget(state:GlRenderState, descriptor:RenderTargetDescriptor):GlRenderTarget {
+  public static function createGlRenderTarget(state:Dynamic, descriptor:RenderTargetDescriptor):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlRenderTarget.createGlRenderTarget, cast ([state, descriptor] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGlRenderTargetPool():GlRenderTargetPool {
+  public static function createGlRenderTargetPool():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlRenderTargetPool.createGlRenderTargetPool, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGlRichTextData(_state:GlRenderState, _source:Renderable):RendererData {
+  public static function createGlRichTextData(_state:Dynamic, _source:Renderable):RendererData {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlRichText.createGlRichTextData, cast ([_state, _source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGlScale9ShapeData(state:GlRenderState, _source:Renderable):Null<RendererData> {
+  public static function createGlScale9ShapeData(state:Dynamic, _source:Renderable):Null<RendererData> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlScale9Shape.createGlScale9ShapeData, cast ([state, _source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGlSkinPaletteTexture(gl:Dynamic):GlSkinPaletteTexture {
+  public static function createGlSkinPaletteTexture(gl:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlSkinPaletteTexture.createGlSkinPaletteTexture, cast ([gl] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGlTexture(state:GlRenderState):Dynamic {
+  public static function createGlTexture(state:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlDraw.createGlTexture, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGlVelocityTarget(state:GlRenderState, width:Float, height:Float):GlRenderTarget {
+  public static function createGlVelocityTarget(state:Dynamic, width:Float, height:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlVelocity.createGlVelocityTarget, cast ([state, width, height] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGlVideoData(_state:GlRenderState, _source:Renderable):RendererData {
+  public static function createGlVideoData(_state:Dynamic, _source:Renderable):RendererData {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlVideo.createGlVideoData, cast ([_state, _source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGlyphAtlas(options:GlyphAtlasOptions):GlyphAtlas {
+  public static function createGlyphAtlas(options:GlyphAtlasOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_glyphatlas_GlyphAtlas.createGlyphAtlas, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGlyphSourceFromBitmapFont(font:BitmapFont):GlyphSource {
+  public static function createGlyphSourceFromBitmapFont(font:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_bitmapfont_GlyphSource.createGlyphSourceFromBitmapFont, cast ([font] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGlyphSourceFromGlyphAtlas(atlas:GlyphAtlas):GlyphSource {
+  public static function createGlyphSourceFromGlyphAtlas(atlas:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_glyphatlas_GlyphSource.createGlyphSourceFromGlyphAtlas, cast ([atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGodRaysEffect(?options:Dynamic):GodRaysEffect {
+  public static function createGodRaysEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_GodRaysEffect.createGodRaysEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -6147,27 +5929,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function createGradientBevelEffect(options:Dynamic):GradientBevelEffect {
+  public static function createGradientBevelEffect(options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_GradientBevelEffect.createGradientBevelEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGradientGlowEffect(options:Dynamic):GradientGlowEffect {
+  public static function createGradientGlowEffect(options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_GradientGlowEffect.createGradientGlowEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGradientPattern(context:Dynamic, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:Null<Matrix>, spreadMethod:SpreadMethod, _interpolationMethod:InterpolationMethod, focalPointRatio:Float):Null<Dynamic> {
+  public static function createGradientPattern(context:Dynamic, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:Null<Dynamic>, spreadMethod:SpreadMethod, _interpolationMethod:InterpolationMethod, focalPointRatio:Float):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasFillPattern.createGradientPattern, cast ([context, gradientType, colors, alphas, ratios, m, spreadMethod, _interpolationMethod, focalPointRatio] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGradientTransformMatrix(width:Float, height:Float, ?rotation:Float, ?tx:Float, ?ty:Float):Matrix {
+  public static function createGradientTransformMatrix(width:Float, height:Float, ?rotation:Float, ?tx:Float, ?ty:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix.createGradientTransformMatrix, cast ([width, height, rotation, tx, ty] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGrayscaleAdjustment(?options:Dynamic):GrayscaleAdjustment {
+  public static function createGrayscaleAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_adjustments_GrayscaleAdjustment.createGrayscaleAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -6187,12 +5969,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createHalftoneEffect(?options:Dynamic):HalftoneEffect {
+  public static function createHalftoneEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_HalftoneEffect.createHalftoneEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createHemisphereLight(?options:HemisphereLightOptions):HemisphereLight {
+  public static function createHemisphereLight(?options:HemisphereLightOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_lighting_HemisphereLight.createHemisphereLight, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -6207,7 +5989,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createHtmlView(?obj:PartialNode<HtmlView>):HtmlView {
+  public static function createHtmlView(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_HtmlView.createHtmlView, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -6227,17 +6009,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createHueSaturationAdjustment(?options:Dynamic):HueSaturationAdjustment {
+  public static function createHueSaturationAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_adjustments_HueSaturationAdjustment.createHueSaturationAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createIcosahedronMeshGeometry(?radius:Float, ?detail:Float):MeshGeometry {
+  public static function createIcosahedronMeshGeometry(?radius:Float, ?detail:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryBuilders.createIcosahedronMeshGeometry, cast ([radius, detail] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createIcosphereMeshGeometry(?radius:Float, ?subdivisions:Float):MeshGeometry {
+  public static function createIcosphereMeshGeometry(?radius:Float, ?subdivisions:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryBuilders.createIcosphereMeshGeometry, cast ([radius, subdivisions] : Array<Dynamic>));
     return cast null;
   }
@@ -6247,37 +6029,37 @@ class Sdk {
     return cast null;
   }
 
-  public static function createImageResource(?image:Dynamic):ImageResource {
+  public static function createImageResource(?image:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResource.createImageResource, cast ([image] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createImageResourceFromCanvas(canvas:Dynamic):ImageResource {
+  public static function createImageResourceFromCanvas(canvas:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResourceFrom.createImageResourceFromCanvas, cast ([canvas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createImageResourceFromImageBitmap(bitmap:Dynamic):ImageResource {
+  public static function createImageResourceFromImageBitmap(bitmap:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResourceFrom.createImageResourceFromImageBitmap, cast ([bitmap] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createImageResourceFromImageElement(img:Dynamic):ImageResource {
+  public static function createImageResourceFromImageElement(img:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResourceFrom.createImageResourceFromImageElement, cast ([img] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createImageResourceFromSurface(surface:Surface):ImageResource {
+  public static function createImageResourceFromSurface(surface:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.createImageResourceFromSurface, cast ([surface] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createInnerGlowEffect(?options:Dynamic):InnerGlowEffect {
+  public static function createInnerGlowEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_InnerGlowEffect.createInnerGlowEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createInnerShadowEffect(?options:Dynamic):InnerShadowEffect {
+  public static function createInnerShadowEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_InnerShadowEffect.createInnerShadowEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -6287,7 +6069,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createInputManager():InputManager {
+  public static function createInputManager():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_input_InputManager.createInputManager, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -6312,7 +6094,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createInvertAdjustment(?options:Dynamic):InvertAdjustment {
+  public static function createInvertAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_adjustments_InvertAdjustment.createInvertAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -6342,7 +6124,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createKuwaharaEffect(?options:Dynamic):KuwaharaEffect {
+  public static function createKuwaharaEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_KuwaharaEffect.createKuwaharaEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -6352,17 +6134,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createLensDirtEffect(?options:Dynamic):LensDirtEffect {
+  public static function createLensDirtEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_LensDirtEffect.createLensDirtEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createLensDistortionEffect(?options:Dynamic):LensDistortionEffect {
+  public static function createLensDistortionEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_LensDistortionEffect.createLensDistortionEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createLensFlareEffect(?options:Dynamic):LensFlareEffect {
+  public static function createLensFlareEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_LensFlareEffect.createLensFlareEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -6372,7 +6154,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createLiftGammaGainAdjustment(?options:Dynamic):LiftGammaGainAdjustment {
+  public static function createLiftGammaGainAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_adjustments_LiftGammaGainAdjustment.createLiftGammaGainAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -6392,7 +6174,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createLookupTableGradeAdjustment(?options:Dynamic):LookupTableGradeAdjustment {
+  public static function createLookupTableGradeAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_adjustments_LookupTableGradeAdjustment.createLookupTableGradeAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -6402,12 +6184,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createMarkupTagRegistry():MarkupTagRegistry {
+  public static function createMarkupTagRegistry():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textMarkup_MarkupTagRegistry.createMarkupTagRegistry, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createMartinezPathBooleanBackend():PathBooleanBackend {
+  public static function createMartinezPathBooleanBackend():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_pathBoolean_MartinezKernel.createMartinezPathBooleanBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -6417,32 +6199,32 @@ class Sdk {
     return cast null;
   }
 
-  public static function createMaterial(kind:Kind):Material {
+  public static function createMaterial(kind:Kind):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_materials_Material.createMaterial, cast ([kind] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createMatrix(?a:Float, ?b:Float, ?c:Float, ?d:Float, ?tx:Float, ?ty:Float):Matrix {
+  public static function createMatrix(?a:Float, ?b:Float, ?c:Float, ?d:Float, ?tx:Float, ?ty:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix.createMatrix, cast ([a, b, c, d, tx, ty] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createMatrix3(?m00:Float, ?m01:Float, ?m02:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m20:Float, ?m21:Float, ?m22:Float):Matrix3 {
+  public static function createMatrix3(?m00:Float, ?m01:Float, ?m02:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m20:Float, ?m21:Float, ?m22:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix3.createMatrix3, cast ([m00, m01, m02, m10, m11, m12, m20, m21, m22] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createMatrix4(?m00:Float, ?m01:Float, ?m02:Float, ?m03:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m13:Float, ?m20:Float, ?m21:Float, ?m22:Float, ?m23:Float, ?m30:Float, ?m31:Float, ?m32:Float, ?m33:Float):Matrix4 {
+  public static function createMatrix4(?m00:Float, ?m01:Float, ?m02:Float, ?m03:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m13:Float, ?m20:Float, ?m21:Float, ?m22:Float, ?m23:Float, ?m30:Float, ?m31:Float, ?m32:Float, ?m33:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix4.createMatrix4, cast ([m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createMatrix4From2D(a:Float, b:Float, c:Float, d:Float, ?tx:Float, ?ty:Float):Matrix4 {
+  public static function createMatrix4From2D(a:Float, b:Float, c:Float, d:Float, ?tx:Float, ?ty:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix4.createMatrix4From2D, cast ([a, b, c, d, tx, ty] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createMedianEffect(?options:Dynamic):MedianEffect {
+  public static function createMedianEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_MedianEffect.createMedianEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -6457,17 +6239,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createMesh(geometry:MeshGeometry, materials:Array<Null<Material>>, ?kind:Kind, ?obj:Dynamic):Mesh {
+  public static function createMesh(geometry:Dynamic, materials:Array<Null<Dynamic>>, ?kind:Kind, ?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Mesh.createMesh, cast ([geometry, materials, kind, obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createMeshGeometry(options:MeshGeometryOptions):MeshGeometry {
+  public static function createMeshGeometry(options:MeshGeometryOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometry.createMeshGeometry, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createMeshGeometryFromAttributes(options:MeshGeometryFromAttributesOptions):MeshGeometry {
+  public static function createMeshGeometryFromAttributes(options:MeshGeometryFromAttributesOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryOperations.createMeshGeometryFromAttributes, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -6477,12 +6259,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createMotionBlurEffect(?options:Dynamic):MotionBlurEffect {
+  public static function createMotionBlurEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_MotionBlurEffect.createMotionBlurEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createMotionPath(path:Path, ?speed:Dynamic, ?loopMode:MotionPathLoopMode, ?tolerance:Float):MotionPath {
+  public static function createMotionPath(path:Dynamic, ?speed:Dynamic, ?loopMode:MotionPathLoopMode, ?tolerance:Float):MotionPath {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_motionpath_CreateMotionPath.createMotionPath, cast ([path, speed, loopMode, tolerance] : Array<Dynamic>));
     return cast null;
   }
@@ -6492,7 +6274,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createMovieClip(?obj:PartialNode<MovieClip>):MovieClip {
+  public static function createMovieClip(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.createMovieClip, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -6507,7 +6289,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createNativeText(?obj:PartialNode<NativeText>):NativeText {
+  public static function createNativeText(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_NativeText.createNativeText, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -6527,7 +6309,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createNodeInteractionState():NodeInteractionState {
+  public static function createNodeInteractionState():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_NodeInteractionState.createNodeInteractionState, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -6551,12 +6333,12 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_notification_Notification.createNotificationChannel, cast ([channel] : Array<Dynamic>));
   }
 
-  public static function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Obb {
+  public static function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Obb.createObb, cast ([centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createOctahedronMeshGeometry(?radius:Float, ?detail:Float):MeshGeometry {
+  public static function createOctahedronMeshGeometry(?radius:Float, ?detail:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryBuilders.createOctahedronMeshGeometry, cast ([radius, detail] : Array<Dynamic>));
     return cast null;
   }
@@ -6571,7 +6353,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createOrthographicMatrix4(left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):Matrix4 {
+  public static function createOrthographicMatrix4(left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix4.createOrthographicMatrix4, cast ([left, right, bottom, top, zNear, zFar] : Array<Dynamic>));
     return cast null;
   }
@@ -6581,17 +6363,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createOuterGlowEffect(?options:Dynamic):OuterGlowEffect {
+  public static function createOuterGlowEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_OuterGlowEffect.createOuterGlowEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createOutlineEffect(?options:Dynamic):OutlineEffect {
+  public static function createOutlineEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_OutlineEffect.createOutlineEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createPanniniProjectionEffect(?options:Dynamic):PanniniProjectionEffect {
+  public static function createPanniniProjectionEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_PanniniProjectionEffect.createPanniniProjectionEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -6601,17 +6383,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createParticleEmitter(?obj:PartialNode<ParticleEmitter>):ParticleEmitter {
+  public static function createParticleEmitter(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter.createParticleEmitter, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createParticleEmitter3D(?obj:PartialNode<ParticleEmitter3D>):ParticleEmitter3D {
+  public static function createParticleEmitter3D(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.createParticleEmitter3D, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createParticleEmitterConfig(?config:Dynamic):ParticleEmitterConfig {
+  public static function createParticleEmitterConfig(?config:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particles_ParticleEmitterConfig.createParticleEmitterConfig, cast ([config] : Array<Dynamic>));
     return cast null;
   }
@@ -6626,27 +6408,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function createParticleEmitterSignals():ParticleEmitterSignals {
+  public static function createParticleEmitterSignals():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particles_ParticleEmitterSignals.createParticleEmitterSignals, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createParticleEmitterState(?random:RandomSource):ParticleEmitterState {
+  public static function createParticleEmitterState(?random:RandomSource):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particles_ParticleEmitterState.createParticleEmitterState, cast ([random] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createParticleObjectsState(capacity:Float, ?random:RandomSource):ParticleObjectsState {
+  public static function createParticleObjectsState(capacity:Float, ?random:RandomSource):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particles_ParticleObjectsState.createParticleObjectsState, cast ([capacity, random] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createPath(?winding:PathWinding):Path {
+  public static function createPath(?winding:PathWinding):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_Path.createPath, cast ([winding] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createPerspectiveMatrix4(fov:Float, aspect:Float, zNear:Float, zFar:Float):Matrix4 {
+  public static function createPerspectiveMatrix4(fov:Float, aspect:Float, zNear:Float, zFar:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix4.createPerspectiveMatrix4, cast ([fov, aspect, zNear, zFar] : Array<Dynamic>));
     return cast null;
   }
@@ -6661,22 +6443,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function createPixelArtSampler():Sampler {
+  public static function createPixelArtSampler():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_texture_Sampler.createPixelArtSampler, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createPixelateEffect(?options:Dynamic):PixelateEffect {
+  public static function createPixelateEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_PixelateEffect.createPixelateEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createPlane(?a:Float, ?b:Float, ?c:Float, ?d:Float):Plane {
+  public static function createPlane(?a:Float, ?b:Float, ?c:Float, ?d:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Plane.createPlane, cast ([a, b, c, d] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createPlaneMeshGeometry(?width:Float, ?depth:Float, ?widthSegments:Float, ?depthSegments:Float):MeshGeometry {
+  public static function createPlaneMeshGeometry(?width:Float, ?depth:Float, ?widthSegments:Float, ?depthSegments:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryBuilders.createPlaneMeshGeometry, cast ([width, depth, widthSegments, depthSegments] : Array<Dynamic>));
     return cast null;
   }
@@ -6691,7 +6473,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createPointLight(?options:PointLightOptions):PointLight {
+  public static function createPointLight(?options:PointLightOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_lighting_PointLight.createPointLight, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -6701,17 +6483,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createPolyhedronMeshGeometry(vertexPositions:Array<Array<Float>>, faceIndices:Array<Array<Float>>, ?radius:Float, ?detail:Float):MeshGeometry {
+  public static function createPolyhedronMeshGeometry(vertexPositions:Array<Array<Float>>, faceIndices:Array<Array<Float>>, ?radius:Float, ?detail:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryBuilders.createPolyhedronMeshGeometry, cast ([vertexPositions, faceIndices, radius, detail] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createPosterizeEffect(?options:Dynamic):PosterizeEffect {
+  public static function createPosterizeEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_PosterizeEffect.createPosterizeEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createPower():Power {
+  public static function createPower():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_power_Power.createPower, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -6746,7 +6528,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createQuadBatch(?obj:PartialNode<QuadBatch>):QuadBatch {
+  public static function createQuadBatch(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.createQuadBatch, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -6766,12 +6548,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createQuadMeshGeometry(?width:Float, ?height:Float):MeshGeometry {
+  public static function createQuadMeshGeometry(?width:Float, ?height:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryBuilders.createQuadMeshGeometry, cast ([width, height] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createQuaternion(?x:Float, ?y:Float, ?z:Float, ?w:Float):Quaternion {
+  public static function createQuaternion(?x:Float, ?y:Float, ?z:Float, ?w:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Quaternion.createQuaternion, cast ([x, y, z, w] : Array<Dynamic>));
     return cast null;
   }
@@ -6781,7 +6563,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createRadialBlurEffect(?options:Dynamic):RadialBlurEffect {
+  public static function createRadialBlurEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_RadialBlurEffect.createRadialBlurEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -6806,37 +6588,37 @@ class Sdk {
     return cast null;
   }
 
-  public static function createRectangle(?x:Float, ?y:Float, ?width:Float, ?height:Float):Rectangle {
+  public static function createRectangle(?x:Float, ?y:Float, ?width:Float, ?height:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Rectangle.createRectangle, cast ([x, y, width, height] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createRenderCache():RenderCache {
+  public static function createRenderCache():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderCache.createRenderCache, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createRenderCacheAdapter(?cache:Null<RenderCache>):RenderCacheAdapter {
+  public static function createRenderCacheAdapter(?cache:Null<Dynamic>):RenderCacheAdapter {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderCache.createRenderCacheAdapter, cast ([cache] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createRenderProxy(state:RenderState, source:Renderable):RenderProxy {
+  public static function createRenderProxy(state:Dynamic, source:Renderable):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderProxy.createRenderProxy, cast ([state, source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createRenderProxy2D(state:RenderState, source:Dynamic):RenderProxy2D {
+  public static function createRenderProxy2D(state:Dynamic, source:Dynamic):RenderProxy2D {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderProxy.createRenderProxy2D, cast ([state, source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createRenderQueue():RenderQueue {
+  public static function createRenderQueue():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderQueue.createRenderQueue, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createRenderState(?obj:Dynamic):RenderState {
+  public static function createRenderState(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderState.createRenderState, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -6846,7 +6628,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createRenderView(?obj:PartialNode<RenderView>):RenderView {
+  public static function createRenderView(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_RenderView.createRenderView, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -6866,17 +6648,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createResourceLoader(?options:ResourceLoaderOptions):ResourceLoader {
+  public static function createResourceLoader(?options:ResourceLoaderOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_loader_ResourceLoader.createResourceLoader, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createRichText(?obj:PartialNode<RichText>):RichText {
+  public static function createRichText(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.createRichText, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createRichTextContent():RichTextContent {
+  public static function createRichTextContent():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textlayout_RichTextContent.createRichTextContent, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -6896,7 +6678,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createRingMeshGeometry(?innerRadius:Float, ?outerRadius:Float, ?segments:Float):MeshGeometry {
+  public static function createRingMeshGeometry(?innerRadius:Float, ?outerRadius:Float, ?segments:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryBuilders.createRingMeshGeometry, cast ([innerRadius, outerRadius, segments] : Array<Dynamic>));
     return cast null;
   }
@@ -6921,7 +6703,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSampler(?opts:Dynamic):Sampler {
+  public static function createSampler(?opts:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_texture_Sampler.createSampler, cast ([opts] : Array<Dynamic>));
     return cast null;
   }
@@ -6931,7 +6713,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createScale9Shape(scale9Grid:RectangleLike, ?obj:PartialNode<Scale9Shape>):Scale9Shape {
+  public static function createScale9Shape(scale9Grid:RectangleLike, ?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_shape_Scale9Shape.createScale9Shape, cast ([scale9Grid, obj] : Array<Dynamic>));
     return cast null;
   }
@@ -6946,47 +6728,47 @@ class Sdk {
     return cast null;
   }
 
-  public static function createScanlinesEffect(?options:Dynamic):ScanlinesEffect {
+  public static function createScanlinesEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_ScanlinesEffect.createScanlinesEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createScene(?obj:Dynamic):Scene {
+  public static function createScene(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Scene.createScene, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSceneFrom3ds(bytes:Dynamic, ?warnings:Array<String>):Scene {
+  public static function createSceneFrom3ds(bytes:Dynamic, ?warnings:Array<String>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_ThreeDsParse.createSceneFrom3ds, cast ([bytes, warnings] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSceneFromAwd(bytes:Dynamic, ?warnings:Array<String>):Scene {
+  public static function createSceneFromAwd(bytes:Dynamic, ?warnings:Array<String>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_AwdParse.createSceneFromAwd, cast ([bytes, warnings] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSceneFromGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Scene {
+  public static function createSceneFromGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_GltfParse.createSceneFromGlb, cast ([bytes, warnings, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSceneFromGltf(source:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Scene {
+  public static function createSceneFromGltf(source:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_GltfParse.createSceneFromGltf, cast ([source, warnings, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSceneFromMd2(bytes:Dynamic, ?warnings:Array<String>):Scene {
+  public static function createSceneFromMd2(bytes:Dynamic, ?warnings:Array<String>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_Md2Parse.createSceneFromMd2, cast ([bytes, warnings] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSceneFromMd5Mesh(source:String, ?warnings:Array<String>):Scene {
+  public static function createSceneFromMd5Mesh(source:String, ?warnings:Array<String>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_Md5Parse.createSceneFromMd5Mesh, cast ([source, warnings] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSceneFromObj(source:String, ?materials:ObjMaterialLibrary, ?warnings:Array<String>):Scene {
+  public static function createSceneFromObj(source:String, ?materials:ObjMaterialLibrary, ?warnings:Array<String>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_ObjParse.createSceneFromObj, cast ([source, materials, warnings] : Array<Dynamic>));
     return cast null;
   }
@@ -6996,7 +6778,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSceneLights(?options:Dynamic):SceneLights {
+  public static function createSceneLights(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_lighting_SceneLights.createSceneLights, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -7006,7 +6788,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSceneNode(?kind:Kind, ?obj:Dynamic):SceneNode {
+  public static function createSceneNode(?kind:Kind, ?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Scene.createSceneNode, cast ([kind, obj] : Array<Dynamic>));
     return cast null;
   }
@@ -7026,12 +6808,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createScenesFromGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Scene> {
+  public static function createScenesFromGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_GltfParse.createScenesFromGlb, cast ([bytes, warnings, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createScenesFromGltf(source:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Scene> {
+  public static function createScenesFromGltf(source:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_GltfParse.createScenesFromGltf, cast ([source, warnings, options] : Array<Dynamic>));
     return cast null;
   }
@@ -7051,22 +6833,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function createScreenSpaceFogEffect(?options:Dynamic):ScreenSpaceFogEffect {
+  public static function createScreenSpaceFogEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_ScreenSpaceFogEffect.createScreenSpaceFogEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSelectableRichTextManager():SelectableRichTextManager {
+  public static function createSelectableRichTextManager():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_SelectableRichTextManager.createSelectableRichTextManager, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSensors():Sensors {
+  public static function createSensors():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sensors_Sensors.createSensors, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSepiaAdjustment(?options:Dynamic):SepiaAdjustment {
+  public static function createSepiaAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_adjustments_SepiaAdjustment.createSepiaAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -7086,7 +6868,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createShape(?obj:PartialNode<Shape>):Shape {
+  public static function createShape(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.createShape, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -7106,7 +6888,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSharpenEffect(?options:Dynamic):SharpenEffect {
+  public static function createSharpenEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_SharpenEffect.createSharpenEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -7126,12 +6908,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSkeleton3D(joints:Array<SceneNode>, ?inverseBindMatrices:flighthq._internal._Float32Array, ?names:Null<Array<String>>):Skeleton3D {
+  public static function createSkeleton3D(joints:Array<Dynamic>, ?inverseBindMatrices:flighthq._internal._Float32Array, ?names:Null<Array<String>>):Skeleton3D {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_skeleton3d_Skeleton3d.createSkeleton3D, cast ([joints, inverseBindMatrices, names] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSketchEffect(?options:Dynamic):SketchEffect {
+  public static function createSketchEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_SketchEffect.createSketchEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -7141,12 +6923,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSmaaEffect(?options:Dynamic):SmaaEffect {
+  public static function createSmaaEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_SmaaEffect.createSmaaEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSocket(options:SocketOptions):Socket {
+  public static function createSocket(options:SocketOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_socket_Socket.createSocket, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -7166,7 +6948,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSpatialIndex(?backend:SpatialIndexBackend):SpatialIndex {
+  public static function createSpatialIndex(?backend:SpatialIndexBackend):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spatial_SpatialIndex.createSpatialIndex, cast ([backend] : Array<Dynamic>));
     return cast null;
   }
@@ -7181,42 +6963,42 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSphereMeshGeometry(?radius:Float, ?widthSegments:Float, ?heightSegments:Float):MeshGeometry {
+  public static function createSphereMeshGeometry(?radius:Float, ?widthSegments:Float, ?heightSegments:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryBuilders.createSphereMeshGeometry, cast ([radius, widthSegments, heightSegments] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpotLight(?options:SpotLightOptions):SpotLight {
+  public static function createSpotLight(?options:SpotLightOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_lighting_SpotLight.createSpotLight, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpring(?value:Float, ?velocity:Float):Spring {
+  public static function createSpring(?value:Float, ?velocity:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spring_CreateSpring.createSpring, cast ([value, velocity] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpring2D(?valueX:Float, ?valueY:Float, ?velocityX:Float, ?velocityY:Float):Spring2D {
+  public static function createSpring2D(?valueX:Float, ?valueY:Float, ?velocityX:Float, ?velocityY:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spring_Spring2D.createSpring2D, cast ([valueX, valueY, velocityX, velocityY] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpring3D(?valueX:Float, ?valueY:Float, ?valueZ:Float, ?velocityX:Float, ?velocityY:Float, ?velocityZ:Float):Spring3D {
+  public static function createSpring3D(?valueX:Float, ?valueY:Float, ?valueZ:Float, ?velocityX:Float, ?velocityY:Float, ?velocityZ:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spring_Spring3D.createSpring3D, cast ([valueX, valueY, valueZ, velocityX, velocityY, velocityZ] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpringConfig(frequency:Float, dampingRatio:Float):SpringConfig {
+  public static function createSpringConfig(frequency:Float, dampingRatio:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spring_SpringConfig.createSpringConfig, cast ([frequency, dampingRatio] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpringConfigFromPhysical(stiffness:Float, damping:Float, mass:Float):SpringConfig {
+  public static function createSpringConfigFromPhysical(stiffness:Float, damping:Float, mass:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spring_SpringConfig.createSpringConfigFromPhysical, cast ([stiffness, damping, mass] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSprite(?obj:PartialNode<Sprite>):Sprite {
+  public static function createSprite(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.createSprite, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -7231,12 +7013,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSpritesheet(?obj:Dynamic):Spritesheet {
+  public static function createSpritesheet(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.createSpritesheet, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpritesheetAnimation(?obj:Dynamic):SpritesheetAnimation {
+  public static function createSpritesheetAnimation(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.createSpritesheetAnimation, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -7246,17 +7028,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSpritesheetAnimationFromFrameNames(spritesheet:Spritesheet, pattern:Dynamic, ?options:Dynamic):Null<SpritesheetAnimation> {
+  public static function createSpritesheetAnimationFromFrameNames(spritesheet:Dynamic, pattern:Dynamic, ?options:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.createSpritesheetAnimationFromFrameNames, cast ([spritesheet, pattern, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpritesheetData(?obj:Dynamic):SpritesheetData {
+  public static function createSpritesheetData(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.createSpritesheetData, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpritesheetFrame(?obj:Dynamic):SpritesheetFrame {
+  public static function createSpritesheetFrame(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.createSpritesheetFrame, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -7266,27 +7048,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSpritesheetFromData(data:SpritesheetData, atlas:TextureAtlas):Spritesheet {
+  public static function createSpritesheetFromData(data:Dynamic, atlas:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.createSpritesheetFromData, cast ([data, atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpritesheetFromGrid(options:GridSliceOptions):Spritesheet {
+  public static function createSpritesheetFromGrid(options:GridSliceOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.createSpritesheetFromGrid, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpritesheetFromTileset(tileset:Tileset):Spritesheet {
+  public static function createSpritesheetFromTileset(tileset:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.createSpritesheetFromTileset, cast ([tileset] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpritesheetPlayer(?obj:Dynamic):SpritesheetPlayer {
+  public static function createSpritesheetPlayer(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.createSpritesheetPlayer, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpritesheetTimelineSource(spritesheet:Spritesheet, animation:SpritesheetAnimation):TimelineSource {
+  public static function createSpritesheetTimelineSource(spritesheet:Dynamic, animation:Dynamic):TimelineSource {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_movieclip_SpritesheetTimelineSource.createSpritesheetTimelineSource, cast ([spritesheet, animation] : Array<Dynamic>));
     return cast null;
   }
@@ -7296,17 +7078,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSsaoEffect(?options:Dynamic):SsaoEffect {
+  public static function createSsaoEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_SsaoEffect.createSsaoEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSsrEffect(?options:Dynamic):SsrEffect {
+  public static function createSsrEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_SsrEffect.createSsrEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createStage(?obj:Dynamic):Stage {
+  public static function createStage(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_Stage.createStage, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -7346,7 +7128,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createStubGlyphRasterizerBackend():GlyphRasterizerBackend {
+  public static function createStubGlyphRasterizerBackend():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_glyphatlas_GlyphRasterizerBackend.createStubGlyphRasterizerBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -7356,47 +7138,47 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSurface(width:Float, height:Float, ?color:Float):Surface {
+  public static function createSurface(width:Float, height:Float, ?color:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.createSurface, cast ([width, height, color] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSurfaceFingerprint(source:Surface, ?gridSize:Float):SurfaceFingerprint {
+  public static function createSurfaceFingerprint(source:Dynamic, ?gridSize:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.createSurfaceFingerprint, cast ([source, gridSize] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSurfaceFromCanvas(canvas:Dynamic, ?x:Float, ?y:Float, ?width:Float, ?height:Float):Surface {
+  public static function createSurfaceFromCanvas(canvas:Dynamic, ?x:Float, ?y:Float, ?width:Float, ?height:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.createSurfaceFromCanvas, cast ([canvas, x, y, width, height] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSurfaceFromImageResource(resource:ImageResource):Surface {
+  public static function createSurfaceFromImageResource(resource:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.createSurfaceFromImageResource, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSurfaceFromImageSource(source:Dynamic, width:Float, height:Float):Surface {
+  public static function createSurfaceFromImageSource(source:Dynamic, width:Float, height:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.createSurfaceFromImageSource, cast ([source, width, height] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSurfaceFromWgpuRenderState(state:WgpuRenderState):flighthq._internal._Promise<Surface> {
+  public static function createSurfaceFromWgpuRenderState(state:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuSurface.createSurfaceFromWgpuRenderState, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSurfaceMaterial(kind:Kind):SurfaceMaterial {
+  public static function createSurfaceMaterial(kind:Kind):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_materials_SurfaceMaterial.createSurfaceMaterial, cast ([kind] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSurfaceRegion(surface:Surface, ?x:Float, ?y:Float, ?width:Float, ?height:Float):SurfaceRegion {
+  public static function createSurfaceRegion(surface:Dynamic, ?x:Float, ?y:Float, ?width:Float, ?height:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.createSurfaceRegion, cast ([surface, x, y, width, height] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTaaEffect(?options:Dynamic):TaaEffect {
+  public static function createTaaEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_TaaEffect.createTaaEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -7406,7 +7188,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTetrahedronMeshGeometry(?radius:Float, ?detail:Float):MeshGeometry {
+  public static function createTetrahedronMeshGeometry(?radius:Float, ?detail:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryBuilders.createTetrahedronMeshGeometry, cast ([radius, detail] : Array<Dynamic>));
     return cast null;
   }
@@ -7416,17 +7198,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTextFormatRange(format:TextFormat, start:Float, end:Float):TextFormatRange {
+  public static function createTextFormatRange(format:Dynamic, start:Float, end:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textlayout_TextFormatRange.createTextFormatRange, cast ([format, start, end] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTextInputManager():TextInputManager {
+  public static function createTextInputManager():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputManager.createTextInputManager, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTextLabel(?obj:PartialNode<TextLabel>):TextLabel {
+  public static function createTextLabel(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_TextLabel.createTextLabel, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -7441,7 +7223,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTextLayoutGroup(format:TextFormat, startIndex:Float, endIndex:Float):TextLayoutGroup {
+  public static function createTextLayoutGroup(format:Dynamic, startIndex:Float, endIndex:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textlayout_TextLayoutGroup.createTextLayoutGroup, cast ([format, startIndex, endIndex] : Array<Dynamic>));
     return cast null;
   }
@@ -7456,7 +7238,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTextMetrics():TextMetrics {
+  public static function createTextMetrics():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textlayout_TextMetrics.createTextMetrics, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -7466,42 +7248,42 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTexture(?opts:Dynamic):Texture {
+  public static function createTexture(?opts:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_texture_Texture.createTexture, cast ([opts] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTextureAtlas(?obj:Dynamic):TextureAtlas {
+  public static function createTextureAtlas(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlas.createTextureAtlas, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTextureAtlasFromCanvas(canvas:Dynamic):TextureAtlas {
+  public static function createTextureAtlasFromCanvas(canvas:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasFrom.createTextureAtlasFromCanvas, cast ([canvas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTextureAtlasFromImageBitmap(bitmap:Dynamic):TextureAtlas {
+  public static function createTextureAtlasFromImageBitmap(bitmap:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasFrom.createTextureAtlasFromImageBitmap, cast ([bitmap] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTextureAtlasFromImageElement(img:Dynamic):TextureAtlas {
+  public static function createTextureAtlasFromImageElement(img:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasFrom.createTextureAtlasFromImageElement, cast ([img] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTextureAtlasFromImageResource(resource:ImageResource):TextureAtlas {
+  public static function createTextureAtlasFromImageResource(resource:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasFrom.createTextureAtlasFromImageResource, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTextureAtlasRegion(?obj:Dynamic):TextureAtlasRegion {
+  public static function createTextureAtlasRegion(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasRegion.createTextureAtlasRegion, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTilemap(?obj:PartialNode<Tilemap>):Tilemap {
+  public static function createTilemap(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.createTilemap, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -7521,32 +7303,32 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTileset(?obj:Dynamic):Tileset {
+  public static function createTileset(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tileset_Tileset.createTileset, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTilesetFromAtlas(atlas:TextureAtlas, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float):Tileset {
+  public static function createTilesetFromAtlas(atlas:Dynamic, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tileset_Tileset.createTilesetFromAtlas, cast ([atlas, tileWidth, tileHeight, margin, spacing] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTilesetFromImageResource(resource:ImageResource, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float):Tileset {
+  public static function createTilesetFromImageResource(resource:Dynamic, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tileset_Tileset.createTilesetFromImageResource, cast ([resource, tileWidth, tileHeight, margin, spacing] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTilingSampler():Sampler {
+  public static function createTilingSampler():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_texture_Sampler.createTilingSampler, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTiltShiftEffect(?options:Dynamic):TiltShiftEffect {
+  public static function createTiltShiftEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_TiltShiftEffect.createTiltShiftEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTimeline(?obj:Dynamic):Timeline {
+  public static function createTimeline(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_timeline_Timeline.createTimeline, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -7556,7 +7338,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createToneMapEffect(?options:Dynamic):ToneMapEffect {
+  public static function createToneMapEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_ToneMapEffect.createToneMapEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -7571,12 +7353,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTorusKnotMeshGeometry(?radius:Float, ?tube:Float, ?tubularSegments:Float, ?radialSegments:Float, ?p:Float, ?q:Float):MeshGeometry {
+  public static function createTorusKnotMeshGeometry(?radius:Float, ?tube:Float, ?tubularSegments:Float, ?radialSegments:Float, ?p:Float, ?q:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryBuilders.createTorusKnotMeshGeometry, cast ([radius, tube, tubularSegments, radialSegments, p, q] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTorusMeshGeometry(?radius:Float, ?tube:Float, ?radialSegments:Float, ?tubularSegments:Float):MeshGeometry {
+  public static function createTorusMeshGeometry(?radius:Float, ?tube:Float, ?radialSegments:Float, ?tubularSegments:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryBuilders.createTorusMeshGeometry, cast ([radius, tube, radialSegments, tubularSegments] : Array<Dynamic>));
     return cast null;
   }
@@ -7591,7 +7373,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTransformMatrix(scaleX:Float, scaleY:Float, ?rotation:Float, ?tx:Float, ?ty:Float):Matrix {
+  public static function createTransformMatrix(scaleX:Float, scaleY:Float, ?rotation:Float, ?tx:Float, ?ty:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix.createTransformMatrix, cast ([scaleX, scaleY, rotation, tx, ty] : Array<Dynamic>));
     return cast null;
   }
@@ -7611,17 +7393,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTweenManager(?options:TweenManagerOptions):TweenManager {
+  public static function createTweenManager(?options:TweenManagerOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.createTweenManager, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTweenStagger<T>(manager:TweenManager, targets:Array<Dynamic>, duration:Float, propertyMap:NumericProps<Dynamic>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<Dynamic> {
+  public static function createTweenStagger<T>(manager:Dynamic, targets:Array<Dynamic>, duration:Float, propertyMap:NumericProps<Dynamic>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.createTweenStagger, cast ([manager, targets, duration, propertyMap, stagger, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTweenTimer(manager:TweenManager, duration:Float, ?options:TweenOptions):Dynamic {
+  public static function createTweenTimer(manager:Dynamic, duration:Float, ?options:TweenOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tween_Timer.createTweenTimer, cast ([manager, duration, options] : Array<Dynamic>));
     return cast null;
   }
@@ -7646,32 +7428,32 @@ class Sdk {
     return cast null;
   }
 
-  public static function createVector2(?x:Float, ?y:Float):Vector2 {
+  public static function createVector2(?x:Float, ?y:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector2.createVector2, cast ([x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createVector2FromPolar(length:Float, angle:Float):Vector2 {
+  public static function createVector2FromPolar(length:Float, angle:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector2.createVector2FromPolar, cast ([length, angle] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createVector3(?x:Float, ?y:Float, ?z:Float):Vector3 {
+  public static function createVector3(?x:Float, ?y:Float, ?z:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector3.createVector3, cast ([x, y, z] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createVector3FromSpherical(radius:Float, theta:Float, phi:Float):Vector3 {
+  public static function createVector3FromSpherical(radius:Float, theta:Float, phi:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector3.createVector3FromSpherical, cast ([radius, theta, phi] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createVector4(?x:Float, ?y:Float, ?z:Float, ?w:Float):Vector4 {
+  public static function createVector4(?x:Float, ?y:Float, ?z:Float, ?w:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector4.createVector4, cast ([x, y, z, w] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createVelocityField():VelocityField {
+  public static function createVelocityField():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_velocity_VelocityField.createVelocityField, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -7686,7 +7468,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createVideo(?obj:PartialNode<Video>):Video {
+  public static function createVideo(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_Video.createVideo, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -7696,12 +7478,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createVideoResource(?element:Dynamic):VideoResource {
+  public static function createVideoResource(?element:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_video_VideoResource.createVideoResource, cast ([element] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createVideoResourceFromMediaStream(stream:Dynamic):VideoResource {
+  public static function createVideoResourceFromMediaStream(stream:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_video_VideoResourceFrom.createVideoResourceFromMediaStream, cast ([stream] : Array<Dynamic>));
     return cast null;
   }
@@ -7711,7 +7493,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createVideoTexture(source:VideoResource, ?opts:Dynamic):VideoTexture {
+  public static function createVideoTexture(source:Dynamic, ?opts:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_texture_Texture.createVideoTexture, cast ([source, opts] : Array<Dynamic>));
     return cast null;
   }
@@ -7721,7 +7503,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createVignetteEffect(?options:Dynamic):VignetteEffect {
+  public static function createVignetteEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_VignetteEffect.createVignetteEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -7731,7 +7513,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createVolumetricLightEffect(?options:Dynamic):VolumetricLightEffect {
+  public static function createVolumetricLightEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_VolumetricLightEffect.createVolumetricLightEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -7746,7 +7528,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWebcamStreamEntity(data:{ var active:Bool; var deviceId:String; var facingMode:Null<WebcamFacingMode>; var frameRate:Float; var height:Float; var id:String; var width:Float; }):WebcamStream {
+  public static function createWebcamStreamEntity(data:{ var active:Bool; var deviceId:String; var facingMode:Null<WebcamFacingMode>; var frameRate:Float; var height:Float; var id:String; var width:Float; }):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_webcam_Webcam.createWebcamStreamEntity, cast ([data] : Array<Dynamic>));
     return cast null;
   }
@@ -7761,7 +7543,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWebCursorBackend(element:Dynamic):CursorBackend {
+  public static function createWebCursorBackend(element:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_CursorBackend.createWebCursorBackend, cast ([element] : Array<Dynamic>));
     return cast null;
   }
@@ -7786,7 +7568,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWebGlyphRasterizerBackend():GlyphRasterizerBackend {
+  public static function createWebGlyphRasterizerBackend():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_glyphatlas_GlyphRasterizerBackend.createWebGlyphRasterizerBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -7906,7 +7688,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWebTextSegmenterBackend():TextSegmenterBackend {
+  public static function createWebTextSegmenterBackend():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textsegment_TextSegmenterBackend.createWebTextSegmenterBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -7936,7 +7718,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWgpuCacheState(screenState:WgpuRenderState):WgpuRenderState {
+  public static function createWgpuCacheState(screenState:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuCache.createWgpuCacheState, cast ([screenState] : Array<Dynamic>));
     return cast null;
   }
@@ -7946,22 +7728,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWgpuDualSourceEffectPipeline(state:WgpuRenderState, fragmentWGSL:String, ?blend:WgpuEffectBlendMode):WgpuDualSourceEffectPipeline {
+  public static function createWgpuDualSourceEffectPipeline(state:Dynamic, fragmentWGSL:String, ?blend:WgpuEffectBlendMode):WgpuDualSourceEffectPipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuEffectPass.createWgpuDualSourceEffectPipeline, cast ([state, fragmentWGSL, blend] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createWgpuEffectPipeline(state:WgpuRenderState, fragmentWGSL:String, ?blend:WgpuEffectBlendMode):WgpuEffectPipeline {
+  public static function createWgpuEffectPipeline(state:Dynamic, fragmentWGSL:String, ?blend:WgpuEffectBlendMode):WgpuEffectPipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuEffectPass.createWgpuEffectPipeline, cast ([state, fragmentWGSL, blend] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createWgpuFullscreenPipeline(state:WgpuRenderState, fragmentWgsl:String, ?textureInputCount:Dynamic, ?format:Dynamic):WgpuFullscreenPipeline {
+  public static function createWgpuFullscreenPipeline(state:Dynamic, fragmentWgsl:String, ?textureInputCount:Dynamic, ?format:Dynamic):WgpuFullscreenPipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuFullscreenPass.createWgpuFullscreenPipeline, cast ([state, fragmentWgsl, textureInputCount, format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createWgpuMeshPipeline(state:WgpuRenderState, options:{ var doubleSided:Bool; var format:Dynamic; @:optional var iblBindGroupLayout:Dynamic; var materialBindGroupLayout:Dynamic; var module:Dynamic; @:optional var pbrSampleBindGroupLayout:Dynamic; @:optional var shadowBindGroupLayout:Dynamic; @:optional var topology:Dynamic; }):WgpuMeshPipeline {
+  public static function createWgpuMeshPipeline(state:Dynamic, options:{ var doubleSided:Bool; var format:Dynamic; @:optional var iblBindGroupLayout:Dynamic; var materialBindGroupLayout:Dynamic; var module:Dynamic; @:optional var pbrSampleBindGroupLayout:Dynamic; @:optional var shadowBindGroupLayout:Dynamic; @:optional var topology:Dynamic; }):WgpuMeshPipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.createWgpuMeshPipeline, cast ([state, options] : Array<Dynamic>));
     return cast null;
   }
@@ -7971,7 +7753,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWgpuRenderEffectPipeline(_state:WgpuRenderState, ?options:RenderEffectPipelineOptions):WgpuRenderEffectPipeline {
+  public static function createWgpuRenderEffectPipeline(_state:Dynamic, ?options:RenderEffectPipelineOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectPipeline.createWgpuRenderEffectPipeline, cast ([_state, options] : Array<Dynamic>));
     return cast null;
   }
@@ -7981,7 +7763,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWgpuRenderState(canvas:Dynamic, ?options:WgpuRenderOptions):flighthq._internal._Promise<WgpuRenderState> {
+  public static function createWgpuRenderState(canvas:Dynamic, ?options:WgpuRenderOptions):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuRenderState.createWgpuRenderState, cast ([canvas, options] : Array<Dynamic>));
     return cast null;
   }
@@ -7991,37 +7773,37 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:Dynamic):WgpuRenderTarget {
+  public static function createWgpuRenderTarget(state:Dynamic, width:Float, height:Float, ?format:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuRenderTarget.createWgpuRenderTarget, cast ([state, width, height, format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createWgpuRenderTargetPool():WgpuRenderTargetPool {
+  public static function createWgpuRenderTargetPool():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuRenderTargetPool.createWgpuRenderTargetPool, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createWgpuRichTextData(_state:RenderState, _source:Renderable):RendererData {
+  public static function createWgpuRichTextData(_state:Dynamic, _source:Renderable):RendererData {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuRichText.createWgpuRichTextData, cast ([_state, _source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createWgpuScale9ShapeData(_state:RenderState, _source:Renderable):RendererData {
+  public static function createWgpuScale9ShapeData(_state:Dynamic, _source:Renderable):RendererData {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuScale9Shape.createWgpuScale9ShapeData, cast ([_state, _source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createWgpuTextureEntry(state:WgpuRenderState, width:Float, height:Float, canvas:Dynamic):WgpuTextureEntry {
+  public static function createWgpuTextureEntry(state:Dynamic, width:Float, height:Float, canvas:Dynamic):WgpuTextureEntry {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuDraw.createWgpuTextureEntry, cast ([state, width, height, canvas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createWgpuVelocityTarget(state:WgpuRenderState, width:Float, height:Float):WgpuRenderTarget {
+  public static function createWgpuVelocityTarget(state:Dynamic, width:Float, height:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuVelocity.createWgpuVelocityTarget, cast ([state, width, height] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createWgpuVideoData(_state:RenderState, _source:Renderable):RendererData {
+  public static function createWgpuVideoData(_state:Dynamic, _source:Renderable):RendererData {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuVideo.createWgpuVideoData, cast ([_state, _source] : Array<Dynamic>));
     return cast null;
   }
@@ -8031,7 +7813,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWhiteBalanceEffect(?options:Dynamic):WhiteBalanceEffect {
+  public static function createWhiteBalanceEffect(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effects_WhiteBalanceEffect.createWhiteBalanceEffect, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -8046,7 +7828,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function cropSurface(source:Surface, rect:RectangleLike):Surface {
+  public static function cropSurface(source:Dynamic, rect:RectangleLike):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.cropSurface, cast ([source, rect] : Array<Dynamic>));
     return cast null;
   }
@@ -8069,7 +7851,7 @@ class Sdk {
 
   public static final CubeTextureKind:Dynamic = Facade_Sdk_flighthq_types_TextureKind.CubeTextureKind;
 
-  public static function cullSceneNodeByFrustum(out:Array<SceneNode>, root:SceneNode, frustum:FrustumLike):Array<SceneNode> {
+  public static function cullSceneNodeByFrustum(out:Array<Dynamic>, root:Dynamic, frustum:FrustumLike):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Scene.cullSceneNodeByFrustum, cast ([out, root, frustum] : Array<Dynamic>));
     return cast null;
   }
@@ -8090,15 +7872,15 @@ class Sdk {
     return cast null;
   }
 
-  public static function dashPath(source:Path, dash:Array<Float>, dashOffset:Float, out:Path, ?tolerance:Dynamic):Void {
+  public static function dashPath(source:Dynamic, dash:Array<Float>, dashOffset:Float, out:Dynamic, ?tolerance:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_DashPath.dashPath, cast ([source, dash, dashOffset, out, tolerance] : Array<Dynamic>));
   }
 
-  public static function decimatePath(source:Path, tolerance:Float, out:Path, ?flattenTolerance:Dynamic):Void {
+  public static function decimatePath(source:Dynamic, tolerance:Float, out:Dynamic, ?flattenTolerance:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_DecimatePath.decimatePath, cast ([source, tolerance, out, flattenTolerance] : Array<Dynamic>));
   }
 
-  public static function declareGlRenderTargetColorSpace(state:GlRenderState, colorSpace:RenderTargetColorSpace):Bool {
+  public static function declareGlRenderTargetColorSpace(state:Dynamic, colorSpace:RenderTargetColorSpace):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlRenderTarget.declareGlRenderTargetColorSpace, cast ([state, colorSpace] : Array<Dynamic>));
     return cast null;
   }
@@ -8123,7 +7905,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function decodeTiledGid(gid:Float):TiledGid {
+  public static function decodeTiledGid(gid:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tilemapFormats_TiledGid.decodeTiledGid, cast ([gid] : Array<Dynamic>));
     return cast null;
   }
@@ -8281,7 +8063,7 @@ class Sdk {
 
   public static final defaultCanvasWhiteBalanceEffectRunner:Dynamic = Facade_Sdk_flighthq_effectsCanvas_CanvasWhiteBalanceEffect.defaultCanvasWhiteBalanceEffectRunner;
 
-  public static function defaultComputeLocalBoundsRectangle(_out:Rectangle, _source:BoundsNodeAny):Void {
+  public static function defaultComputeLocalBoundsRectangle(_out:Dynamic, _source:BoundsNodeAny):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_HasBoundsRectangle.defaultComputeLocalBoundsRectangle, cast ([_out, _source] : Array<Dynamic>));
   }
 
@@ -8471,7 +8253,7 @@ class Sdk {
 
   public static final defaultHtmlViewRenderer:DisplayObjectRenderer = Facade_Sdk_flighthq_displayobjectDom_HtmlView.defaultHtmlViewRenderer;
 
-  public static final defaultManager:TweenManager = Facade_Sdk_flighthq_tween_Tween.defaultManager;
+  public static final defaultManager:Dynamic = Facade_Sdk_flighthq_tween_Tween.defaultManager;
 
   public static final DefaultMaterialKind:Dynamic = Facade_Sdk_flighthq_types__internal__MaterialValues.DefaultMaterialKind;
 
@@ -8689,19 +8471,19 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_notification_Notification.deleteNotificationChannel, cast ([id] : Array<Dynamic>));
   }
 
-  public static function deleteTextInputBackward(source:RichText):Void {
+  public static function deleteTextInputBackward(source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.deleteTextInputBackward, cast ([source] : Array<Dynamic>));
   }
 
-  public static function deleteTextInputForward(source:RichText):Void {
+  public static function deleteTextInputForward(source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.deleteTextInputForward, cast ([source] : Array<Dynamic>));
   }
 
-  public static function deleteTextInputWordBackward(source:RichText):Void {
+  public static function deleteTextInputWordBackward(source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.deleteTextInputWordBackward, cast ([source] : Array<Dynamic>));
   }
 
-  public static function deleteTextInputWordForward(source:RichText):Void {
+  public static function deleteTextInputWordForward(source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.deleteTextInputWordForward, cast ([source] : Array<Dynamic>));
   }
 
@@ -8725,11 +8507,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_HitTests.describeGraphHit, cast ([node, x, y, out] : Array<Dynamic>));
   }
 
-  public static function destroyAudioMixer(mixer:AudioMixer):Void {
+  public static function destroyAudioMixer(mixer:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_media_AudioMixer.destroyAudioMixer, cast ([mixer] : Array<Dynamic>));
   }
 
-  public static function destroyCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache):Void {
+  public static function destroyCanvasRenderCacheTarget(state:Dynamic, cache:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasCache.destroyCanvasRenderCacheTarget, cast ([state, cache] : Array<Dynamic>));
   }
 
@@ -8741,67 +8523,67 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasRenderTarget.destroyCanvasRenderTarget, cast ([target] : Array<Dynamic>));
   }
 
-  public static function destroyGlBakePrograms(state:GlRenderState):Void {
+  public static function destroyGlBakePrograms(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlEnvironmentIblBake.destroyGlBakePrograms, cast ([state] : Array<Dynamic>));
   }
 
-  public static function destroyGlMeshProgram(state:GlRenderState, program:GlMeshProgram):Void {
+  public static function destroyGlMeshProgram(state:Dynamic, program:GlMeshProgram):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl__internal__GlMeshProgramValues.destroyGlMeshProgram, cast ([state, program] : Array<Dynamic>));
   }
 
-  public static function destroyGlMeshUpload(state:GlRenderState, upload:Dynamic):Void {
+  public static function destroyGlMeshUpload(state:Dynamic, upload:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlMeshUpload.destroyGlMeshUpload, cast ([state, upload] : Array<Dynamic>));
   }
 
-  public static function destroyGlParticleEmitter3DShader(state:GlRenderState):Void {
+  public static function destroyGlParticleEmitter3DShader(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlParticleEmitter3D.destroyGlParticleEmitter3DShader, cast ([state] : Array<Dynamic>));
   }
 
-  public static function destroyGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline):Void {
+  public static function destroyGlRenderEffectPipeline(state:Dynamic, pipeline:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectPipeline.destroyGlRenderEffectPipeline, cast ([state, pipeline] : Array<Dynamic>));
   }
 
-  public static function destroyGlRenderState(state:GlRenderState):Void {
+  public static function destroyGlRenderState(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlRenderState.destroyGlRenderState, cast ([state] : Array<Dynamic>));
   }
 
-  public static function destroyGlRenderTarget(state:GlRenderState, target:GlRenderTarget):Void {
+  public static function destroyGlRenderTarget(state:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlRenderTarget.destroyGlRenderTarget, cast ([state, target] : Array<Dynamic>));
   }
 
-  public static function destroyGlRenderTargetPool(state:GlRenderState, pool:GlRenderTargetPool):Void {
+  public static function destroyGlRenderTargetPool(state:Dynamic, pool:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlRenderTargetPool.destroyGlRenderTargetPool, cast ([state, pool] : Array<Dynamic>));
   }
 
-  public static function destroyGlRichTextData(state:GlRenderState, data:RendererData):Void {
+  public static function destroyGlRichTextData(state:Dynamic, data:RendererData):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlRichText.destroyGlRichTextData, cast ([state, data] : Array<Dynamic>));
   }
 
-  public static function destroyGlScale9ShapeData(state:GlRenderState, data:RendererData):Void {
+  public static function destroyGlScale9ShapeData(state:Dynamic, data:RendererData):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlScale9Shape.destroyGlScale9ShapeData, cast ([state, data] : Array<Dynamic>));
   }
 
-  public static function destroyGlSceneRuntime(state:GlRenderState):Void {
+  public static function destroyGlSceneRuntime(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl__internal__GlSceneRuntimeValues.destroyGlSceneRuntime, cast ([state] : Array<Dynamic>));
   }
 
-  public static function destroyGlSkinPaletteTexture(gl:Dynamic, palette:GlSkinPaletteTexture):Void {
+  public static function destroyGlSkinPaletteTexture(gl:Dynamic, palette:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlSkinPaletteTexture.destroyGlSkinPaletteTexture, cast ([gl, palette] : Array<Dynamic>));
   }
 
-  public static function destroyGlVideoData(state:GlRenderState, data:RendererData):Void {
+  public static function destroyGlVideoData(state:Dynamic, data:RendererData):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlVideo.destroyGlVideoData, cast ([state, data] : Array<Dynamic>));
   }
 
-  public static function destroyGlWireframeUpload(state:GlRenderState, upload:GlWireframeUpload):Void {
+  public static function destroyGlWireframeUpload(state:Dynamic, upload:GlWireframeUpload):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl__internal__GlWireframeUploadValues.destroyGlWireframeUpload, cast ([state, upload] : Array<Dynamic>));
   }
 
-  public static function destroyMeshGeometryGlData(geometry:MeshGeometry):Void {
+  public static function destroyMeshGeometryGlData(geometry:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometry.destroyMeshGeometryGlData, cast ([geometry] : Array<Dynamic>));
   }
 
-  public static function destroyMeshGeometryWgpuData(geometry:MeshGeometry):Void {
+  public static function destroyMeshGeometryWgpuData(geometry:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometry.destroyMeshGeometryWgpuData, cast ([geometry] : Array<Dynamic>));
   }
 
@@ -8809,55 +8591,55 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_tray_Tray.destroyTrayIcon, cast ([tray] : Array<Dynamic>));
   }
 
-  public static function destroyWgpuFullscreenPipeline(_state:WgpuRenderState, _pipeline:WgpuFullscreenPipeline):Void {
+  public static function destroyWgpuFullscreenPipeline(_state:Dynamic, _pipeline:WgpuFullscreenPipeline):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuFullscreenPass.destroyWgpuFullscreenPipeline, cast ([_state, _pipeline] : Array<Dynamic>));
   }
 
-  public static function destroyWgpuParticleEmitter3DResources(state:WgpuRenderState):Void {
+  public static function destroyWgpuParticleEmitter3DResources(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuParticleEmitter3D.destroyWgpuParticleEmitter3DResources, cast ([state] : Array<Dynamic>));
   }
 
-  public static function destroyWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline):Void {
+  public static function destroyWgpuRenderEffectPipeline(state:Dynamic, pipeline:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectPipeline.destroyWgpuRenderEffectPipeline, cast ([state, pipeline] : Array<Dynamic>));
   }
 
-  public static function destroyWgpuRenderState(state:WgpuRenderState):Void {
+  public static function destroyWgpuRenderState(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuRenderState.destroyWgpuRenderState, cast ([state] : Array<Dynamic>));
   }
 
-  public static function destroyWgpuRenderTarget(_state:WgpuRenderState, target:WgpuRenderTarget):Void {
+  public static function destroyWgpuRenderTarget(_state:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuRenderTarget.destroyWgpuRenderTarget, cast ([_state, target] : Array<Dynamic>));
   }
 
-  public static function destroyWgpuRenderTargetPool(state:WgpuRenderState, pool:WgpuRenderTargetPool):Void {
+  public static function destroyWgpuRenderTargetPool(state:Dynamic, pool:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuRenderTargetPool.destroyWgpuRenderTargetPool, cast ([state, pool] : Array<Dynamic>));
   }
 
-  public static function destroyWgpuRichTextData(_state:RenderState, data:RendererData):Void {
+  public static function destroyWgpuRichTextData(_state:Dynamic, data:RendererData):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuRichText.destroyWgpuRichTextData, cast ([_state, data] : Array<Dynamic>));
   }
 
-  public static function destroyWgpuScale9ShapeData(_state:RenderState, data:RendererData):Void {
+  public static function destroyWgpuScale9ShapeData(_state:Dynamic, data:RendererData):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuScale9Shape.destroyWgpuScale9ShapeData, cast ([_state, data] : Array<Dynamic>));
   }
 
-  public static function destroyWgpuSceneIbl(state:WgpuRenderState):Void {
+  public static function destroyWgpuSceneIbl(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuEnvironmentIblBake.destroyWgpuSceneIbl, cast ([state] : Array<Dynamic>));
   }
 
-  public static function destroyWgpuSceneShadow(state:WgpuRenderState):Void {
+  public static function destroyWgpuSceneShadow(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuShadowMap.destroyWgpuSceneShadow, cast ([state] : Array<Dynamic>));
   }
 
-  public static function destroyWgpuVideoData(_state:RenderState, data:RendererData):Void {
+  public static function destroyWgpuVideoData(_state:Dynamic, data:RendererData):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuVideo.destroyWgpuVideoData, cast ([_state, data] : Array<Dynamic>));
   }
 
-  public static function detachApp(app:App):Void {
+  public static function detachApp(app:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_app_App.detachApp, cast ([app] : Array<Dynamic>));
   }
 
-  public static function detachApplicationExit(app:Application):Void {
+  public static function detachApplicationExit(app:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.detachApplicationExit, cast ([app] : Array<Dynamic>));
   }
 
@@ -8873,23 +8655,23 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_clipboard_Clipboard.detachClipboardWatch, cast ([watch] : Array<Dynamic>));
   }
 
-  public static function detachConnectivity(net:Connectivity):Void {
+  public static function detachConnectivity(net:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_connectivity_Connectivity.detachConnectivity, cast ([net] : Array<Dynamic>));
   }
 
-  public static function detachGamepadInput(manager:InputManager, target:Dynamic):Void {
+  public static function detachGamepadInput(manager:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_input_InputManager.detachGamepadInput, cast ([manager, target] : Array<Dynamic>));
   }
 
-  public static function detachKeyboardInput(manager:InputManager, target:Dynamic):Void {
+  public static function detachKeyboardInput(manager:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_input_InputManager.detachKeyboardInput, cast ([manager, target] : Array<Dynamic>));
   }
 
-  public static function detachPointerInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachPointerInput(manager:Dynamic, element:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_input_InputManager.detachPointerInput, cast ([manager, element] : Array<Dynamic>));
   }
 
-  public static function detachPower(power:Power):Void {
+  public static function detachPower(power:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_power_Power.detachPower, cast ([power] : Array<Dynamic>));
   }
 
@@ -8897,7 +8679,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_protocol_Protocol.detachProtocolHandler, cast ([handler] : Array<Dynamic>));
   }
 
-  public static function detachRelativePointerInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachRelativePointerInput(manager:Dynamic, element:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_input_InputManager.detachRelativePointerInput, cast ([manager, element] : Array<Dynamic>));
   }
 
@@ -8905,7 +8687,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_screen_Screen.detachScreenSignals, cast ([signals] : Array<Dynamic>));
   }
 
-  public static function detachSensors(sensors:Sensors):Void {
+  public static function detachSensors(sensors:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sensors_Sensors.detachSensors, cast ([sensors] : Array<Dynamic>));
   }
 
@@ -8913,7 +8695,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_share_Share.detachShareSignals, cast ([signals] : Array<Dynamic>));
   }
 
-  public static function detachSocket(socket:Socket):Void {
+  public static function detachSocket(socket:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_socket_Socket.detachSocket, cast ([socket] : Array<Dynamic>));
   }
 
@@ -8925,11 +8707,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_statusbar_Statusbar.detachStatusBar, cast ([bar] : Array<Dynamic>));
   }
 
-  public static function detachTextInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachTextInput(manager:Dynamic, element:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_input_InputManager.detachTextInput, cast ([manager, element] : Array<Dynamic>));
   }
 
-  public static function detachWheelInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachWheelInput(manager:Dynamic, element:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_input_InputManager.detachWheelInput, cast ([manager, element] : Array<Dynamic>));
   }
 
@@ -9047,12 +8829,12 @@ class Sdk {
 
   public static final DeviceFormFactorWatch:Dynamic = Facade_Sdk_flighthq_types__internal__DeviceFormFactorValues.DeviceFormFactorWatch;
 
-  public static function differencePaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
+  public static function differencePaths(a:Dynamic, b:Dynamic, ?out:Dynamic, ?options:PathBooleanOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_pathBoolean_BooleanPaths.differencePaths, cast ([a, b, out, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function dilateSurface(out:Dynamic, source:SurfaceRegion, radius:Float):Void {
+  public static function dilateSurface(out:Dynamic, source:Dynamic, radius:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.dilateSurface, cast ([out, source, radius] : Array<Dynamic>));
   }
 
@@ -9090,7 +8872,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_storage_Storage.disableStorageSignals, cast ([] : Array<Dynamic>));
   }
 
-  public static function disableTextInput(node:RichText):Void {
+  public static function disableTextInput(node:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInput.disableTextInput, cast ([node] : Array<Dynamic>));
   }
 
@@ -9134,55 +8916,55 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionManager.dispatchInteractionWheel, cast ([manager, x, y, deltaX, deltaY, options] : Array<Dynamic>));
   }
 
-  public static function dispatchRichTextLinkAtPoint(source:RichText, x:Float, y:Float):Null<String> {
+  public static function dispatchRichTextLinkAtPoint(source:Dynamic, x:Float, y:Float):Null<String> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.dispatchRichTextLinkAtPoint, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function dispatchRichTextWheel(source:RichText, deltaLines:Float, ?layout:TextLayoutResult):Void {
+  public static function dispatchRichTextWheel(source:Dynamic, deltaLines:Float, ?layout:TextLayoutResult):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.dispatchRichTextWheel, cast ([source, deltaLines, layout] : Array<Dynamic>));
   }
 
-  public static function dispatchSelectableRichTextKeyDown(manager:SelectableRichTextManager, data:InputKeyboardData, ?onCopy:Dynamic):Bool {
+  public static function dispatchSelectableRichTextKeyDown(manager:Dynamic, data:InputKeyboardData, ?onCopy:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_SelectableRichTextManager.dispatchSelectableRichTextKeyDown, cast ([manager, data, onCopy] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function dispatchSelectableRichTextPointerDown(manager:SelectableRichTextManager, target:RichText, x:Float, y:Float, ?extend:Dynamic):Void {
+  public static function dispatchSelectableRichTextPointerDown(manager:Dynamic, target:Dynamic, x:Float, y:Float, ?extend:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_SelectableRichTextManager.dispatchSelectableRichTextPointerDown, cast ([manager, target, x, y, extend] : Array<Dynamic>));
   }
 
-  public static function dispatchSelectableRichTextPointerMove(manager:SelectableRichTextManager, x:Float, y:Float):Void {
+  public static function dispatchSelectableRichTextPointerMove(manager:Dynamic, x:Float, y:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_SelectableRichTextManager.dispatchSelectableRichTextPointerMove, cast ([manager, x, y] : Array<Dynamic>));
   }
 
-  public static function dispatchSelectableRichTextWheel(manager:SelectableRichTextManager, deltaLines:Float):Void {
+  public static function dispatchSelectableRichTextWheel(manager:Dynamic, deltaLines:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_SelectableRichTextManager.dispatchSelectableRichTextWheel, cast ([manager, deltaLines] : Array<Dynamic>));
   }
 
-  public static function dispatchTextInput(manager:TextInputManager, text:String):Bool {
+  public static function dispatchTextInput(manager:Dynamic, text:String):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputManager.dispatchTextInput, cast ([manager, text] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function dispatchTextInputKeyDown(manager:TextInputManager, data:InputKeyboardData, ?clipboardText:String, ?onCopy:Dynamic):Bool {
+  public static function dispatchTextInputKeyDown(manager:Dynamic, data:InputKeyboardData, ?clipboardText:String, ?onCopy:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputManager.dispatchTextInputKeyDown, cast ([manager, data, clipboardText, onCopy] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function dispatchTextInputPointerDown(manager:TextInputManager, target:RichText, x:Float, y:Float, ?extend:Dynamic, ?clickCount:Dynamic):Void {
+  public static function dispatchTextInputPointerDown(manager:Dynamic, target:Dynamic, x:Float, y:Float, ?extend:Dynamic, ?clickCount:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputManager.dispatchTextInputPointerDown, cast ([manager, target, x, y, extend, clickCount] : Array<Dynamic>));
   }
 
-  public static function dispatchTextInputPointerMove(manager:TextInputManager, x:Float, y:Float):Void {
+  public static function dispatchTextInputPointerMove(manager:Dynamic, x:Float, y:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputManager.dispatchTextInputPointerMove, cast ([manager, x, y] : Array<Dynamic>));
   }
 
-  public static function dispatchTextInputWheel(manager:TextInputManager, deltaLines:Float):Void {
+  public static function dispatchTextInputWheel(manager:Dynamic, deltaLines:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputManager.dispatchTextInputWheel, cast ([manager, deltaLines] : Array<Dynamic>));
   }
 
-  public static function displaceSurface(out:Dynamic, source:SurfaceRegion, options:SurfaceDisplacementMapOptions):Void {
+  public static function displaceSurface(out:Dynamic, source:Dynamic, options:SurfaceDisplacementMapOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.displaceSurface, cast ([out, source, options] : Array<Dynamic>));
   }
 
@@ -9194,11 +8976,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_tray_Tray.displayTrayBalloon, cast ([tray, options] : Array<Dynamic>));
   }
 
-  public static function disposeApp(app:App):Void {
+  public static function disposeApp(app:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_app_App.disposeApp, cast ([app] : Array<Dynamic>));
   }
 
-  public static function disposeApplication(app:Application):Void {
+  public static function disposeApplication(app:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.disposeApplication, cast ([app] : Array<Dynamic>));
   }
 
@@ -9214,11 +8996,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_updater_Updater.disposeAppUpdater, cast ([updater] : Array<Dynamic>));
   }
 
-  public static function disposeAssetLibrary(library:AssetLibrary):Void {
+  public static function disposeAssetLibrary(library:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_assets_AssetLibrary.disposeAssetLibrary, cast ([library] : Array<Dynamic>));
   }
 
-  public static function disposeAudioResource(resource:AudioResource):Void {
+  public static function disposeAudioResource(resource:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_audio_AudioResource.disposeAudioResource, cast ([resource] : Array<Dynamic>));
   }
 
@@ -9226,15 +9008,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_clipboard_Clipboard.disposeClipboardWatch, cast ([watch] : Array<Dynamic>));
   }
 
-  public static function disposeClock(clock:Clock):Void {
+  public static function disposeClock(clock:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_clock_DisposeClock.disposeClock, cast ([clock] : Array<Dynamic>));
   }
 
-  public static function disposeConnectivity(net:Connectivity):Void {
+  public static function disposeConnectivity(net:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_connectivity_Connectivity.disposeConnectivity, cast ([net] : Array<Dynamic>));
   }
 
-  public static function disposeDisplayObjectRender(state:RenderState, root:Renderable):Void {
+  public static function disposeDisplayObjectRender(state:Dynamic, root:Renderable):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_RenderProxy.disposeDisplayObjectRender, cast ([state, root] : Array<Dynamic>));
   }
 
@@ -9242,11 +9024,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_log_Log.disposeFileLogSink, cast ([_handle] : Array<Dynamic>));
   }
 
-  public static function disposeGlyphAtlas(atlas:GlyphAtlas):Void {
+  public static function disposeGlyphAtlas(atlas:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_glyphatlas_GlyphAtlas.disposeGlyphAtlas, cast ([atlas] : Array<Dynamic>));
   }
 
-  public static function disposeImageResource(resource:ImageResource):Void {
+  public static function disposeImageResource(resource:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResource.disposeImageResource, cast ([resource] : Array<Dynamic>));
   }
 
@@ -9254,7 +9036,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_log_Log.disposeLogSink, cast ([handle] : Array<Dynamic>));
   }
 
-  public static function disposeMovieClipSignals(clip:MovieClip):Void {
+  public static function disposeMovieClipSignals(clip:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.disposeMovieClipSignals, cast ([clip] : Array<Dynamic>));
   }
 
@@ -9262,7 +9044,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.disposeNode, cast ([target] : Array<Dynamic>));
   }
 
-  public static function disposePower(power:Power):Void {
+  public static function disposePower(power:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_power_Power.disposePower, cast ([power] : Array<Dynamic>));
   }
 
@@ -9270,15 +9052,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_protocol_Protocol.disposeProtocolHandler, cast ([handler] : Array<Dynamic>));
   }
 
-  public static function disposeRenderProxy(state:RenderState, source:Renderable):Void {
+  public static function disposeRenderProxy(state:Dynamic, source:Renderable):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_RenderProxy.disposeRenderProxy, cast ([state, source] : Array<Dynamic>));
   }
 
-  public static function disposeResourceLoader(loader:ResourceLoader):Void {
+  public static function disposeResourceLoader(loader:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_loader_ResourceLoader.disposeResourceLoader, cast ([loader] : Array<Dynamic>));
   }
 
-  public static function disposeSceneNode(node:SceneNode):Void {
+  public static function disposeSceneNode(node:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_scene_Scene.disposeSceneNode, cast ([node] : Array<Dynamic>));
   }
 
@@ -9290,7 +9072,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_screen_Screen.disposeScreenSignals, cast ([signals] : Array<Dynamic>));
   }
 
-  public static function disposeSensors(sensors:Sensors):Void {
+  public static function disposeSensors(sensors:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sensors_Sensors.disposeSensors, cast ([sensors] : Array<Dynamic>));
   }
 
@@ -9302,7 +9084,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_skeleton3d_Skeleton3d.disposeSkeleton3D, cast ([skeleton] : Array<Dynamic>));
   }
 
-  public static function disposeSocket(socket:Socket):Void {
+  public static function disposeSocket(socket:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_socket_Socket.disposeSocket, cast ([socket] : Array<Dynamic>));
   }
 
@@ -9310,7 +9092,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_keyboard_Keyboard.disposeSoftKeyboard, cast ([keyboard] : Array<Dynamic>));
   }
 
-  public static function disposeSpritesheetPlayer(player:SpritesheetPlayer):Void {
+  public static function disposeSpritesheetPlayer(player:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.disposeSpritesheetPlayer, cast ([player] : Array<Dynamic>));
   }
 
@@ -9326,15 +9108,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaperSignals.disposeTextShaperSignals, cast ([] : Array<Dynamic>));
   }
 
-  public static function disposeTileset(tileset:Tileset):Void {
+  public static function disposeTileset(tileset:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tileset_Tileset.disposeTileset, cast ([tileset] : Array<Dynamic>));
   }
 
-  public static function disposeTimelineSignals(timeline:Timeline):Void {
+  public static function disposeTimelineSignals(timeline:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_timeline_Timeline.disposeTimelineSignals, cast ([timeline] : Array<Dynamic>));
   }
 
-  public static function disposeVideoResource(resource:VideoResource):Void {
+  public static function disposeVideoResource(resource:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_video_VideoResource.disposeVideoResource, cast ([resource] : Array<Dynamic>));
   }
 
@@ -9344,7 +9126,7 @@ class Sdk {
 
   public static final DissolveModifierKind:Dynamic = Facade_Sdk_flighthq_types__internal__DissolveModifierValues.DissolveModifierKind;
 
-  public static function dissolveSurfacePixels(dest:SurfaceRegion, source:SurfaceRegion, seed:Float, pixelCount:Float, ?fillColor:Float):Float {
+  public static function dissolveSurfacePixels(dest:Dynamic, source:Dynamic, seed:Float, pixelCount:Float, ?fillColor:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.dissolveSurfacePixels, cast ([dest, source, seed, pixelCount, fillColor] : Array<Dynamic>));
     return cast null;
   }
@@ -9431,139 +9213,139 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasVideo.drawCanvasVideo, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawDomBitmap(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomBitmap(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomBitmap.drawDomBitmap, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawDomDisplayObject(_state:DomRenderState, _renderProxy:RenderProxy2D):Void {
+  public static function drawDomDisplayObject(_state:Dynamic, _renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomDisplayObject.drawDomDisplayObject, cast ([_state, _renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawDomHtmlView(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomHtmlView(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_HtmlView.drawDomHtmlView, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawDomNativeText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomNativeText(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomNativeText.drawDomNativeText, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawDomNativeTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomNativeTextMask(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomNativeText.drawDomNativeTextMask, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawDomRenderView(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomRenderView(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomRenderView.drawDomRenderView, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawDomRichText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomRichText(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomRichText.drawDomRichText, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawDomRichTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomRichTextMask(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomRichText.drawDomRichTextMask, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawDomScale9Shape(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomScale9Shape(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomScale9Shape.drawDomScale9Shape, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawDomShape(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomShape(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomShape.drawDomShape, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawDomTextInputOverlay(_state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomTextInputOverlay(_state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomTextInput.drawDomTextInputOverlay, cast ([_state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawDomTextLabel(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomTextLabel(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomTextLabel.drawDomTextLabel, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawDomVideo(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomVideo(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomVideo.drawDomVideo, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawGlBitmap(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawGlBitmap(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlBitmap.drawGlBitmap, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawGlDisplayObject(_state:GlRenderState, _renderProxy:RenderProxy2D):Void {
+  public static function drawGlDisplayObject(_state:Dynamic, _renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlDisplayObject.drawGlDisplayObject, cast ([_state, _renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawGlEnvironmentSkybox(state:GlRenderState, environment:Environment, camera:Camera, aspect:Float):Void {
+  public static function drawGlEnvironmentSkybox(state:Dynamic, environment:Dynamic, camera:Dynamic, aspect:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlEnvironmentSkybox.drawGlEnvironmentSkybox, cast ([state, environment, camera, aspect] : Array<Dynamic>));
   }
 
-  public static function drawGlFullscreenPass(state:GlRenderState, program:GlFullscreenProgram, inputs:Array<Dynamic>, dest:Null<GlRenderTarget>, setUniforms:Dynamic):Void {
+  public static function drawGlFullscreenPass(state:Dynamic, program:GlFullscreenProgram, inputs:Array<Dynamic>, dest:Null<Dynamic>, setUniforms:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlFullscreenPass.drawGlFullscreenPass, cast ([state, program, inputs, dest, setUniforms] : Array<Dynamic>));
   }
 
-  public static function drawGlLinearToSrgbPass(state:GlRenderState, source:GlRenderTarget, dest:Null<GlRenderTarget>):Void {
+  public static function drawGlLinearToSrgbPass(state:Dynamic, source:Dynamic, dest:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlLinearToSrgbPass.drawGlLinearToSrgbPass, cast ([state, source, dest] : Array<Dynamic>));
   }
 
-  public static function drawGlMeshSubset(state:GlRenderState, program:GlMeshProgram, proxy:SceneRenderProxy, geometry:MeshGeometry):Void {
+  public static function drawGlMeshSubset(state:Dynamic, program:GlMeshProgram, proxy:SceneRenderProxy, geometry:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl__internal__GlMeshProgramValues.drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   }
 
-  public static function drawGlParticleEmitter(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawGlParticleEmitter(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlParticleEmitter.drawGlParticleEmitter, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawGlQuad(state:GlRenderState, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
+  public static function drawGlQuad(state:Dynamic, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlDraw.drawGlQuad, cast ([state, x0, y0, x1, y1, u0, v0, u1, v1] : Array<Dynamic>));
   }
 
-  public static function drawGlRenderTargetResult(state:GlRenderState, renderProxy:RenderProxy2D, target:GlRenderTarget, transform:Matrix):Void {
+  public static function drawGlRenderTargetResult(state:Dynamic, renderProxy:RenderProxy2D, target:Dynamic, transform:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlRenderTarget.drawGlRenderTargetResult, cast ([state, renderProxy, target, transform] : Array<Dynamic>));
   }
 
-  public static function drawGlRichText(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawGlRichText(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlRichText.drawGlRichText, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawGlRichTextWithOverlay(state:GlRenderState, renderProxy:RenderProxy2D, ?overlay:GlRichTextOverlay):Void {
+  public static function drawGlRichTextWithOverlay(state:Dynamic, renderProxy:RenderProxy2D, ?overlay:GlRichTextOverlay):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlRichText.drawGlRichTextWithOverlay, cast ([state, renderProxy, overlay] : Array<Dynamic>));
   }
 
-  public static function drawGlScale9Shape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawGlScale9Shape(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlScale9Shape.drawGlScale9Shape, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawGlScale9ShapeMask(state:GlRenderState, data:RenderProxy2D):Void {
+  public static function drawGlScale9ShapeMask(state:Dynamic, data:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlScale9Shape.drawGlScale9ShapeMask, cast ([state, data] : Array<Dynamic>));
   }
 
-  public static function drawGlScene(state:GlRenderState, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
+  public static function drawGlScene(state:Dynamic, scene:Dynamic, camera:Dynamic, lights:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_DrawGlScene.drawGlScene, cast ([state, scene, camera, lights] : Array<Dynamic>));
   }
 
-  public static function drawGlSceneParticleEmitters(state:GlRenderState, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
+  public static function drawGlSceneParticleEmitters(state:Dynamic, scene:Dynamic, camera:Dynamic, lights:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlParticleEmitter3D.drawGlSceneParticleEmitters, cast ([state, scene, camera, lights] : Array<Dynamic>));
   }
 
-  public static function drawGlSceneShadowMap(state:GlRenderState, scene:SceneNode, shadowCamera:Camera):Void {
+  public static function drawGlSceneShadowMap(state:Dynamic, scene:Dynamic, shadowCamera:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlShadowMap.drawGlSceneShadowMap, cast ([state, scene, shadowCamera] : Array<Dynamic>));
   }
 
-  public static function drawGlShape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawGlShape(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlShape.drawGlShape, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawGlShapeMeshBatch(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<GlShapeMesh>, binding:GlShapeMeshBinding, ?onProgramBound:Dynamic):Void {
+  public static function drawGlShapeMeshBatch(state:Dynamic, renderProxy:RenderProxy2D, meshes:Array<Dynamic>, binding:GlShapeMeshBinding, ?onProgramBound:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlShapeMesh.drawGlShapeMeshBatch, cast ([state, renderProxy, meshes, binding, onProgramBound] : Array<Dynamic>));
   }
 
-  public static function drawGlShapeMeshes(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<GlShapeMesh>):Void {
+  public static function drawGlShapeMeshes(state:Dynamic, renderProxy:RenderProxy2D, meshes:Array<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlShapeMesh.drawGlShapeMeshes, cast ([state, renderProxy, meshes] : Array<Dynamic>));
   }
 
-  public static function drawGlTextInputOverlay(context:Dynamic, source:RichText, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
+  public static function drawGlTextInputOverlay(context:Dynamic, source:Dynamic, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlTextInput.drawGlTextInputOverlay, cast ([context, source, result, fieldW, fieldH, _text] : Array<Dynamic>));
   }
 
-  public static function drawGlTextLabel(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawGlTextLabel(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlTextLabel.drawGlTextLabel, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
@@ -9571,99 +9353,99 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlVelocity.drawGlVelocityQuad, cast ([ctx, x, y, width, height, velocityX, velocityY] : Array<Dynamic>));
   }
 
-  public static function drawGlVideo(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawGlVideo(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlVideo.drawGlVideo, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawSurface(dest:Dynamic, source:SurfaceRegion, x:Float, y:Float):Void {
+  public static function drawSurface(dest:Dynamic, source:Dynamic, x:Float, y:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.drawSurface, cast ([dest, source, x, y] : Array<Dynamic>));
   }
 
-  public static function drawWgpuBitmap(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuBitmap(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuBitmap.drawWgpuBitmap, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawWgpuDisplayObject(_state:WgpuRenderState, _renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuDisplayObject(_state:Dynamic, _renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuDisplayObject.drawWgpuDisplayObject, cast ([_state, _renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawWgpuDualSourceEffectPass(state:WgpuRenderState, source0:WgpuRenderTarget, source1:WgpuRenderTarget, dest:Null<WgpuRenderTarget>, pipeline:WgpuDualSourceEffectPipeline, setUniforms:Dynamic):Void {
+  public static function drawWgpuDualSourceEffectPass(state:Dynamic, source0:Dynamic, source1:Dynamic, dest:Null<Dynamic>, pipeline:WgpuDualSourceEffectPipeline, setUniforms:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuEffectPass.drawWgpuDualSourceEffectPass, cast ([state, source0, source1, dest, pipeline, setUniforms] : Array<Dynamic>));
   }
 
-  public static function drawWgpuEffectPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:Null<WgpuRenderTarget>, pipeline:WgpuEffectPipeline, setUniforms:Dynamic):Void {
+  public static function drawWgpuEffectPass(state:Dynamic, source:Dynamic, dest:Null<Dynamic>, pipeline:WgpuEffectPipeline, setUniforms:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuEffectPass.drawWgpuEffectPass, cast ([state, source, dest, pipeline, setUniforms] : Array<Dynamic>));
   }
 
-  public static function drawWgpuEnvironmentSkybox(state:WgpuRenderState, environment:Environment, camera:Camera, aspect:Float):Void {
+  public static function drawWgpuEnvironmentSkybox(state:Dynamic, environment:Dynamic, camera:Dynamic, aspect:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuEnvironmentSkybox.drawWgpuEnvironmentSkybox, cast ([state, environment, camera, aspect] : Array<Dynamic>));
   }
 
-  public static function drawWgpuFullscreenPass(state:WgpuRenderState, wgpuPipeline:WgpuFullscreenPipeline, inputs:Array<WgpuRenderTarget>, dest:Null<WgpuRenderTarget>, setUniforms:Null<Dynamic>):Void {
+  public static function drawWgpuFullscreenPass(state:Dynamic, wgpuPipeline:WgpuFullscreenPipeline, inputs:Array<Dynamic>, dest:Null<Dynamic>, setUniforms:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuFullscreenPass.drawWgpuFullscreenPass, cast ([state, wgpuPipeline, inputs, dest, setUniforms] : Array<Dynamic>));
   }
 
-  public static function drawWgpuMeshSubset(state:WgpuRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry):Void {
+  public static function drawWgpuMeshSubset(state:Dynamic, proxy:SceneRenderProxy, geometry:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
   }
 
-  public static function drawWgpuParticleEmitter(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuParticleEmitter(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuParticleEmitter.drawWgpuParticleEmitter, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawWgpuQuad(state:WgpuRenderState, renderProxy:RenderProxy2D, textureEntry:WgpuTextureEntry, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
+  public static function drawWgpuQuad(state:Dynamic, renderProxy:RenderProxy2D, textureEntry:WgpuTextureEntry, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuDraw.drawWgpuQuad, cast ([state, renderProxy, textureEntry, x0, y0, x1, y1, u0, v0, u1, v1] : Array<Dynamic>));
   }
 
-  public static function drawWgpuQuadWithTransform(state:WgpuRenderState, renderProxy:RenderProxy, transform:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, textureEntry:WgpuTextureEntry, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
+  public static function drawWgpuQuadWithTransform(state:Dynamic, renderProxy:Dynamic, transform:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, textureEntry:WgpuTextureEntry, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuDraw.drawWgpuQuadWithTransform, cast ([state, renderProxy, transform, textureEntry, x0, y0, x1, y1, u0, v0, u1, v1] : Array<Dynamic>));
   }
 
-  public static function drawWgpuRenderTargetResult(state:WgpuRenderState, renderProxy:{ var alpha:Float; var material:Null<Material>; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }, target:WgpuRenderTarget, transform:Matrix):Void {
+  public static function drawWgpuRenderTargetResult(state:Dynamic, renderProxy:{ var alpha:Float; var material:Null<Dynamic>; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }, target:Dynamic, transform:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuRenderTarget.drawWgpuRenderTargetResult, cast ([state, renderProxy, target, transform] : Array<Dynamic>));
   }
 
-  public static function drawWgpuRichText(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuRichText(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuRichText.drawWgpuRichText, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawWgpuRichTextWithOverlay(state:WgpuRenderState, renderProxy:RenderProxy2D, ?overlay:WgpuRichTextOverlay):Void {
+  public static function drawWgpuRichTextWithOverlay(state:Dynamic, renderProxy:RenderProxy2D, ?overlay:WgpuRichTextOverlay):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuRichText.drawWgpuRichTextWithOverlay, cast ([state, renderProxy, overlay] : Array<Dynamic>));
   }
 
-  public static function drawWgpuScale9Shape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuScale9Shape(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuScale9Shape.drawWgpuScale9Shape, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawWgpuScale9ShapeMask(state:WgpuRenderState, data:RenderProxy2D):Void {
+  public static function drawWgpuScale9ShapeMask(state:Dynamic, data:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuScale9Shape.drawWgpuScale9ShapeMask, cast ([state, data] : Array<Dynamic>));
   }
 
-  public static function drawWgpuScene(state:WgpuRenderState, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
+  public static function drawWgpuScene(state:Dynamic, scene:Dynamic, camera:Dynamic, lights:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_DrawWgpuScene.drawWgpuScene, cast ([state, scene, camera, lights] : Array<Dynamic>));
   }
 
-  public static function drawWgpuSceneParticleEmitters(state:WgpuRenderState, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
+  public static function drawWgpuSceneParticleEmitters(state:Dynamic, scene:Dynamic, camera:Dynamic, lights:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuParticleEmitter3D.drawWgpuSceneParticleEmitters, cast ([state, scene, camera, lights] : Array<Dynamic>));
   }
 
-  public static function drawWgpuSceneShadowMap(state:WgpuRenderState, scene:SceneNode, shadowCamera:Camera):Void {
+  public static function drawWgpuSceneShadowMap(state:Dynamic, scene:Dynamic, shadowCamera:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuShadowMap.drawWgpuSceneShadowMap, cast ([state, scene, shadowCamera] : Array<Dynamic>));
   }
 
-  public static function drawWgpuShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuShape(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuShape.drawWgpuShape, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawWgpuShapeMeshes(state:WgpuRenderState, renderProxy:RenderProxy2D, meshes:Array<WgpuShapeMesh>, buffers:WgpuShapeMeshBuffers):Void {
+  public static function drawWgpuShapeMeshes(state:Dynamic, renderProxy:RenderProxy2D, meshes:Array<WgpuShapeMesh>, buffers:WgpuShapeMeshBuffers):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu__internal__WgpuShapeMeshValues.drawWgpuShapeMeshes, cast ([state, renderProxy, meshes, buffers] : Array<Dynamic>));
   }
 
-  public static function drawWgpuTextInputOverlay(context:Dynamic, source:RichText, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
+  public static function drawWgpuTextInputOverlay(context:Dynamic, source:Dynamic, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuTextInput.drawWgpuTextInputOverlay, cast ([context, source, result, fieldW, fieldH, _text] : Array<Dynamic>));
   }
 
-  public static function drawWgpuTextLabel(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuTextLabel(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuTextLabel.drawWgpuTextLabel, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
@@ -9671,11 +9453,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuVelocity.drawWgpuVelocityQuad, cast ([ctx, x, y, width, height, velocityX, velocityY] : Array<Dynamic>));
   }
 
-  public static function drawWgpuVideo(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuVideo(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuVideo.drawWgpuVideo, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function dropShadowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceDropShadowOptions):Void {
+  public static function dropShadowSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceDropShadowOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.dropShadowSurface, cast ([out, scratch, source, options] : Array<Dynamic>));
   }
 
@@ -9824,12 +9606,12 @@ class Sdk {
 
   public static final emissiveWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = Facade_Sdk_flighthq_sceneWgpu_EmissiveWgpuMeshMaterialRenderer.emissiveWgpuMeshMaterialRenderer;
 
-  public static function emitParticleBurst(emitter:ParticleEmitter, state:ParticleEmitterState, config:ParticleEmitterConfig, count:Float, x:Float, y:Float, ?tint:Float):Float {
+  public static function emitParticleBurst(emitter:Dynamic, state:Dynamic, config:Dynamic, count:Float, x:Float, y:Float, ?tint:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_EmitParticleBurst.emitParticleBurst, cast ([emitter, state, config, count, x, y, tint] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function emitParticleBurst3D(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig, count:Float, x:Float, y:Float, z:Float, ?tint:Float):Float {
+  public static function emitParticleBurst3D(emitter:Dynamic, state:Dynamic, config:Dynamic, count:Float, x:Float, y:Float, z:Float, ?tint:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_EmitParticleBurst3D.emitParticleBurst3D, cast ([emitter, state, config, count, x, y, z, tint] : Array<Dynamic>));
     return cast null;
   }
@@ -9838,15 +9620,15 @@ class Sdk {
     _Runtime.apply(Facade_Sdk_flighthq_signals_Emitter.emitSignal, _Runtime.concatArrays([[signal], _Runtime.toArray(args)]));
   }
 
-  public static function enableAnimationPlayerSignals(player:AnimationPlayer):Void {
+  public static function enableAnimationPlayerSignals(player:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_animation_AnimationPlayer.enableAnimationPlayerSignals, cast ([player] : Array<Dynamic>));
   }
 
-  public static function enableApplicationLifecycleSignals(app:Application):Void {
+  public static function enableApplicationLifecycleSignals(app:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.enableApplicationLifecycleSignals, cast ([app] : Array<Dynamic>));
   }
 
-  public static function enableBillboardSignals(source:Billboard):NodeSignals {
+  public static function enableBillboardSignals(source:Dynamic):NodeSignals {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Billboard.enableBillboardSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -9863,7 +9645,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasCSSFilterBinding.enableCanvasCssFilter, cast ([state] : Array<Dynamic>));
   }
 
-  public static function enableCanvasRenderCache(state:RenderState):Void {
+  public static function enableCanvasRenderCache(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasCache.enableCanvasRenderCache, cast ([state] : Array<Dynamic>));
   }
 
@@ -9871,12 +9653,12 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasTextInput.enableCanvasTextInput, cast ([] : Array<Dynamic>));
   }
 
-  public static function enableClockSignals(clock:Clock):Dynamic {
+  public static function enableClockSignals(clock:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clock_EnableClockSignals.enableClockSignals, cast ([clock] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function enableColorAdjustmentGuards(state:RenderState):Void {
+  public static function enableColorAdjustmentGuards(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_EnableColorAdjustmentGuards.enableColorAdjustmentGuards, cast ([state] : Array<Dynamic>));
   }
 
@@ -9884,19 +9666,19 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_debug_Debug.enableDebug, cast ([options] : Array<Dynamic>));
   }
 
-  public static function enableDomBlendModeSupport(state:DomRenderState):Void {
+  public static function enableDomBlendModeSupport(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomMaterials.enableDomBlendModeSupport, cast ([state] : Array<Dynamic>));
   }
 
-  public static function enableDomClipSupport(state:DomRenderState):Void {
+  public static function enableDomClipSupport(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomClip.enableDomClipSupport, cast ([state] : Array<Dynamic>));
   }
 
-  public static function enableDomCssFilterSupport(state:DomRenderState):Void {
+  public static function enableDomCssFilterSupport(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomCSSFilterBinding.enableDomCssFilterSupport, cast ([state] : Array<Dynamic>));
   }
 
-  public static function enableDomRenderCache(state:RenderState):Void {
+  public static function enableDomRenderCache(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomCache.enableDomRenderCache, cast ([state] : Array<Dynamic>));
   }
 
@@ -9908,19 +9690,19 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_entity_Entity.enableEntityRuntimeGuards, cast ([] : Array<Dynamic>));
   }
 
-  public static function enableGlBlendModeSupport(state:GlRenderState):Void {
+  public static function enableGlBlendModeSupport(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlDraw.enableGlBlendModeSupport, cast ([state] : Array<Dynamic>));
   }
 
-  public static function enableGlClipSupport(state:GlRenderState):Void {
+  public static function enableGlClipSupport(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlClip.enableGlClipSupport, cast ([state] : Array<Dynamic>));
   }
 
-  public static function enableGlColorAdjustment(state:GlRenderState):Void {
+  public static function enableGlColorAdjustment(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlColorAdjustment.enableGlColorAdjustment, cast ([state] : Array<Dynamic>));
   }
 
-  public static function enableGlColorAdjustmentGuards(state:GlRenderState):Void {
+  public static function enableGlColorAdjustmentGuards(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_EnableGlColorAdjustmentGuards.enableGlColorAdjustmentGuards, cast ([state] : Array<Dynamic>));
   }
 
@@ -9934,15 +9716,15 @@ class Sdk {
     return cast null;
   }
 
-  public static function enableGlRenderCache(state:GlRenderState):Void {
+  public static function enableGlRenderCache(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlCache.enableGlRenderCache, cast ([state] : Array<Dynamic>));
   }
 
-  public static function enableGlSceneColorSpaceGuards(state:GlRenderState):Void {
+  public static function enableGlSceneColorSpaceGuards(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_EnableGlSceneColorSpaceGuards.enableGlSceneColorSpaceGuards, cast ([state] : Array<Dynamic>));
   }
 
-  public static function enableGlSceneCustomShaderGuards(state:GlRenderState):Void {
+  public static function enableGlSceneCustomShaderGuards(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_EnableGlSceneCustomShaderGuards.enableGlSceneCustomShaderGuards, cast ([state] : Array<Dynamic>));
   }
 
@@ -9974,17 +9756,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function enableMeshSignals(source:Mesh):NodeSignals {
+  public static function enableMeshSignals(source:Dynamic):NodeSignals {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Mesh.enableMeshSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function enableMovieClipSignals(clip:MovieClip):MovieClipSignals {
+  public static function enableMovieClipSignals(clip:Dynamic):MovieClipSignals {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.enableMovieClipSignals, cast ([clip] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function enableNodeInteractionState(source:NodeAny):NodeInteractionState {
+  public static function enableNodeInteractionState(source:NodeAny):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_NodeInteractionState.enableNodeInteractionState, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -9994,16 +9776,16 @@ class Sdk {
     return cast null;
   }
 
-  public static function enableParticleEmitterSignals(state:Dynamic):ParticleEmitterSignals {
+  public static function enableParticleEmitterSignals(state:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particles_ParticleEmitterSignals.enableParticleEmitterSignals, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function enablePowerSignals(power:Power):Void {
+  public static function enablePowerSignals(power:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_power_Power.enablePowerSignals, cast ([power] : Array<Dynamic>));
   }
 
-  public static function enableQuadBatchSignals(target:QuadBatch):QuadBatchSignals {
+  public static function enableQuadBatchSignals(target:Dynamic):QuadBatchSignals {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.enableQuadBatchSignals, cast ([target] : Array<Dynamic>));
     return cast null;
   }
@@ -10012,12 +9794,12 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_render_RenderCache.enableRenderCacheAdapterSignals, cast ([adapter] : Array<Dynamic>));
   }
 
-  public static function enableResourceLoaderItemSignals(loader:ResourceLoader):ResourceLoaderItemSignals {
+  public static function enableResourceLoaderItemSignals(loader:Dynamic):ResourceLoaderItemSignals {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_loader_ResourceLoader.enableResourceLoaderItemSignals, cast ([loader] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function enableSceneNodeSignals(source:SceneNode):NodeSignals {
+  public static function enableSceneNodeSignals(source:Dynamic):NodeSignals {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Scene.enableSceneNodeSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -10041,17 +9823,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function enableSocketSignals(socket:Socket):SocketSignals {
+  public static function enableSocketSignals(socket:Dynamic):SocketSignals {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_socket_Socket.enableSocketSignals, cast ([socket] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function enableSpriteSignals(target:Sprite):SpriteSignals {
+  public static function enableSpriteSignals(target:Dynamic):SpriteSignals {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.enableSpriteSignals, cast ([target] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function enableStageSignals(source:Stage):StageSignals {
+  public static function enableStageSignals(source:Dynamic):StageSignals {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_Stage.enableStageSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -10061,27 +9843,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function enableTextFieldSignals(source:RichText):TextFieldSignals {
+  public static function enableTextFieldSignals(source:Dynamic):TextFieldSignals {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.enableTextFieldSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function enableTextInput(node:RichText, ?options:TextInputOptions):TextInputState {
+  public static function enableTextInput(node:Dynamic, ?options:TextInputOptions):TextInputState {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInput.enableTextInput, cast ([node, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function enableTextShaperSignals():TextShaperSignals {
+  public static function enableTextShaperSignals():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaperSignals.enableTextShaperSignals, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function enableTilemapSignals(target:Tilemap):TilemapSignals {
+  public static function enableTilemapSignals(target:Dynamic):TilemapSignals {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.enableTilemapSignals, cast ([target] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function enableTimelineSignals(timeline:Timeline):TimelineSignals {
+  public static function enableTimelineSignals(timeline:Dynamic):TimelineSignals {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_timeline_Timeline.enableTimelineSignals, cast ([timeline] : Array<Dynamic>));
     return cast null;
   }
@@ -10091,27 +9873,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function enableWgpuBlendModeSupport(state:WgpuRenderState):Void {
+  public static function enableWgpuBlendModeSupport(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuDraw.enableWgpuBlendModeSupport, cast ([state] : Array<Dynamic>));
   }
 
-  public static function enableWgpuClipSupport(state:WgpuRenderState):Void {
+  public static function enableWgpuClipSupport(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuClip.enableWgpuClipSupport, cast ([state] : Array<Dynamic>));
   }
 
-  public static function enableWgpuColorAdjustment(state:WgpuRenderState):Void {
+  public static function enableWgpuColorAdjustment(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuColorAdjustment.enableWgpuColorAdjustment, cast ([state] : Array<Dynamic>));
   }
 
-  public static function enableWgpuColorAdjustmentGuards(state:WgpuRenderState):Void {
+  public static function enableWgpuColorAdjustmentGuards(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_EnableWgpuColorAdjustmentGuards.enableWgpuColorAdjustmentGuards, cast ([state] : Array<Dynamic>));
   }
 
-  public static function enableWgpuFrameCapture(state:WgpuRenderState):Void {
+  public static function enableWgpuFrameCapture(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuSurface.enableWgpuFrameCapture, cast ([state] : Array<Dynamic>));
   }
 
-  public static function enableWgpuRenderCache(state:WgpuRenderState):Void {
+  public static function enableWgpuRenderCache(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuCache.enableWgpuRenderCache, cast ([state] : Array<Dynamic>));
   }
 
@@ -10129,12 +9911,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function encodeSurface(source:Surface, ?format:ImageFormat, ?quality:Float):Dynamic {
+  public static function encodeSurface(source:Dynamic, ?format:ImageFormat, ?quality:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.encodeSurface, cast ([source, format, quality] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function encodeWgpuFrameCapture(state:WgpuRenderState, encoder:Dynamic):Void {
+  public static function encodeWgpuFrameCapture(state:Dynamic, encoder:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuSurface.encodeWgpuFrameCapture, cast ([state, encoder] : Array<Dynamic>));
   }
 
@@ -10151,11 +9933,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function endGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline, operations:Array<Dynamic>):Void {
+  public static function endGlRenderEffectPipeline(state:Dynamic, pipeline:Dynamic, operations:Array<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectPipeline.endGlRenderEffectPipeline, cast ([state, pipeline, operations] : Array<Dynamic>));
   }
 
-  public static function endGlRenderPass(state:GlRenderState):Void {
+  public static function endGlRenderPass(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlRenderPass.endGlRenderPass, cast ([state] : Array<Dynamic>));
   }
 
@@ -10172,100 +9954,100 @@ class Sdk {
     return cast null;
   }
 
-  public static function endWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline, operations:Array<Dynamic>):Void {
+  public static function endWgpuRenderEffectPipeline(state:Dynamic, pipeline:Dynamic, operations:Array<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectPipeline.endWgpuRenderEffectPipeline, cast ([state, pipeline, operations] : Array<Dynamic>));
   }
 
-  public static function endWgpuRenderPass(state:WgpuRenderState):Void {
+  public static function endWgpuRenderPass(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuRenderTarget.endWgpuRenderPass, cast ([state] : Array<Dynamic>));
   }
 
-  public static function ensureCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache, width:Float, height:Float):Dynamic {
+  public static function ensureCanvasRenderCacheTarget(state:Dynamic, cache:Dynamic, width:Float, height:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasCache.ensureCanvasRenderCacheTarget, cast ([state, cache, width, height] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureDomRenderCacheTarget(state:DomRenderState, cache:RenderCache, width:Float, height:Float):Dynamic {
+  public static function ensureDomRenderCacheTarget(state:Dynamic, cache:Dynamic, width:Float, height:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomCache.ensureDomRenderCacheTarget, cast ([state, cache, width, height] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureGlClassicProgram(state:GlRenderState, key:GlClassicDefineKey):GlClassicProgram {
+  public static function ensureGlClassicProgram(state:Dynamic, key:GlClassicDefineKey):GlClassicProgram {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlClassicPrelude.ensureGlClassicProgram, cast ([state, key] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureGlDebugProgram(state:GlRenderState, key:GlDebugDefineKey):GlDebugProgram {
+  public static function ensureGlDebugProgram(state:Dynamic, key:GlDebugDefineKey):GlDebugProgram {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlDebugPrelude.ensureGlDebugProgram, cast ([state, key] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureGlEnvironmentSourceCube(state:GlRenderState, environment:Environment):Null<Dynamic> {
+  public static function ensureGlEnvironmentSourceCube(state:Dynamic, environment:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlEnvironmentCube.ensureGlEnvironmentSourceCube, cast ([state, environment] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureGlMatcapProgram(state:GlRenderState, key:GlMatcapDefineKey):GlMatcapProgram {
+  public static function ensureGlMatcapProgram(state:Dynamic, key:GlMatcapDefineKey):GlMatcapProgram {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlMatcapPrelude.ensureGlMatcapProgram, cast ([state, key] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureGlMeshUpload(state:GlRenderState, geometry:MeshGeometry, ?gpuSkinned:Dynamic):Dynamic {
+  public static function ensureGlMeshUpload(state:Dynamic, geometry:Dynamic, ?gpuSkinned:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlMeshUpload.ensureGlMeshUpload, cast ([state, geometry, gpuSkinned] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureGlPbrProgram(state:GlRenderState, key:GlPbrDefineKey):GlPbrProgram {
+  public static function ensureGlPbrProgram(state:Dynamic, key:GlPbrDefineKey):GlPbrProgram {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlPbrProgramCache.ensureGlPbrProgram, cast ([state, key] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureGlQuadBatchShader(state:GlRenderState):GlQuadBatchShader {
+  public static function ensureGlQuadBatchShader(state:Dynamic):GlQuadBatchShader {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlSpriteBatch.ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureGlRenderCacheTarget(state:GlRenderState, cache:RenderCache, width:Float, height:Float):GlRenderTarget {
+  public static function ensureGlRenderCacheTarget(state:Dynamic, cache:Dynamic, width:Float, height:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlCache.ensureGlRenderCacheTarget, cast ([state, cache, width, height] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureGlSceneProgram<T>(state:GlRenderState, key:String, compile:Dynamic):Dynamic {
+  public static function ensureGlSceneProgram<T>(state:Dynamic, key:String, compile:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl__internal__GlMeshProgramValues.ensureGlSceneProgram, cast ([state, key, compile] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureGlShadedProgram(state:GlRenderState, key:GlShadedDefineKey, modifiers:Array<Modifier>):GlShadedProgram {
+  public static function ensureGlShadedProgram(state:Dynamic, key:GlShadedDefineKey, modifiers:Array<Modifier>):GlShadedProgram {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlShadedPrelude.ensureGlShadedProgram, cast ([state, key, modifiers] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureGlShapeMeshProgram(state:GlRenderState):GlShapeMeshBinding {
+  public static function ensureGlShapeMeshProgram(state:Dynamic):GlShapeMeshBinding {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlShapeMesh.ensureGlShapeMeshProgram, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureGlSkinPalette(state:GlRenderState):GlSkinPaletteTexture {
+  public static function ensureGlSkinPalette(state:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl__internal__GlSceneRuntimeValues.ensureGlSkinPalette, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureGlToonProgram(state:GlRenderState, key:GlToonDefineKey):GlToonProgram {
+  public static function ensureGlToonProgram(state:Dynamic, key:GlToonDefineKey):GlToonProgram {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlToonPrelude.ensureGlToonProgram, cast ([state, key] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureGlUnlitProgram(state:GlRenderState, key:GlUnlitDefineKey):GlUnlitProgram {
+  public static function ensureGlUnlitProgram(state:Dynamic, key:GlUnlitDefineKey):GlUnlitProgram {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlUnlitPrelude.ensureGlUnlitProgram, cast ([state, key] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureGlWireframeProgram(state:GlRenderState):GlWireframeProgram {
+  public static function ensureGlWireframeProgram(state:Dynamic):GlWireframeProgram {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlWireframePrelude.ensureGlWireframeProgram, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureGlWireframeUpload(state:GlRenderState, geometry:MeshGeometry):GlWireframeUpload {
+  public static function ensureGlWireframeUpload(state:Dynamic, geometry:Dynamic):GlWireframeUpload {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl__internal__GlWireframeUploadValues.ensureGlWireframeUpload, cast ([state, geometry] : Array<Dynamic>));
     return cast null;
   }
@@ -10298,138 +10080,138 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.ensureNodeWorldMatrix4, cast ([target] : Array<Dynamic>));
   }
 
-  public static function ensureParticleEmitterStateCapacity(state:ParticleEmitterState, capacity:Float, hasColorVariance:Bool):Void {
+  public static function ensureParticleEmitterStateCapacity(state:Dynamic, capacity:Float, hasColorVariance:Bool):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particles_ParticleEmitterState.ensureParticleEmitterStateCapacity, cast ([state, capacity, hasColorVariance] : Array<Dynamic>));
   }
 
-  public static function ensureParticleObjectsStateCapacity(state:ParticleObjectsState, capacity:Float):Void {
+  public static function ensureParticleObjectsStateCapacity(state:Dynamic, capacity:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particles_ParticleObjectsState.ensureParticleObjectsStateCapacity, cast ([state, capacity] : Array<Dynamic>));
   }
 
-  public static function ensureSceneNodeWorldAlpha(source:SceneNode):Void {
+  public static function ensureSceneNodeWorldAlpha(source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_scene_Scene.ensureSceneNodeWorldAlpha, cast ([source] : Array<Dynamic>));
   }
 
-  public static function ensureTextLayout(source:TextLabel):Void {
+  public static function ensureTextLayout(source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_TextLabelLayout.ensureTextLayout, cast ([source] : Array<Dynamic>));
   }
 
-  public static function ensureVelocitySample(field:VelocityField, source:Dynamic):VelocitySample {
+  public static function ensureVelocitySample(field:Dynamic, source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_velocity_VelocityField.ensureVelocitySample, cast ([field, source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuClassicPipeline(state:WgpuRenderState, key:WgpuClassicDefineKey, format:Dynamic):WgpuClassicPipeline {
+  public static function ensureWgpuClassicPipeline(state:Dynamic, key:WgpuClassicDefineKey, format:Dynamic):WgpuClassicPipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuClassicPrelude.ensureWgpuClassicPipeline, cast ([state, key, format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuDebugPipeline(state:WgpuRenderState, key:WgpuDebugDefineKey, format:Dynamic):WgpuDebugPipeline {
+  public static function ensureWgpuDebugPipeline(state:Dynamic, key:WgpuDebugDefineKey, format:Dynamic):WgpuDebugPipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuDebugPrelude.ensureWgpuDebugPipeline, cast ([state, key, format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuEnvironmentSourceCube(state:WgpuRenderState, environment:Environment):Null<Dynamic> {
+  public static function ensureWgpuEnvironmentSourceCube(state:Dynamic, environment:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuEnvironmentCube.ensureWgpuEnvironmentSourceCube, cast ([state, environment] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuFrameBindGroup(state:WgpuRenderState):Dynamic {
+  public static function ensureWgpuFrameBindGroup(state:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.ensureWgpuFrameBindGroup, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuIblSampleBindGroup(state:WgpuRenderState):Dynamic {
+  public static function ensureWgpuIblSampleBindGroup(state:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.ensureWgpuIblSampleBindGroup, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuIblSampleLayout(state:WgpuRenderState):Dynamic {
+  public static function ensureWgpuIblSampleLayout(state:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.ensureWgpuIblSampleLayout, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuMatcapPipeline(state:WgpuRenderState, key:WgpuMatcapDefineKey, format:Dynamic):WgpuMatcapPipeline {
+  public static function ensureWgpuMatcapPipeline(state:Dynamic, key:WgpuMatcapDefineKey, format:Dynamic):WgpuMatcapPipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuMatcapPrelude.ensureWgpuMatcapPipeline, cast ([state, key, format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuMeshUpload(state:WgpuRenderState, geometry:MeshGeometry):Null<Dynamic> {
+  public static function ensureWgpuMeshUpload(state:Dynamic, geometry:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuMeshUpload.ensureWgpuMeshUpload, cast ([state, geometry] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuPbrMaterialBindGroup(state:WgpuRenderState, pipeline:WgpuPbrPipeline, key:Dynamic, standard:Null<StandardPbrMaterialProperties>):WgpuMaterialBinding {
+  public static function ensureWgpuPbrMaterialBindGroup(state:Dynamic, pipeline:WgpuPbrPipeline, key:Dynamic, standard:Null<StandardPbrMaterialProperties>):WgpuMaterialBinding {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_StandardPbrWgpuMeshMaterialRenderer.ensureWgpuPbrMaterialBindGroup, cast ([state, pipeline, key, standard] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuPbrPipeline(state:WgpuRenderState, key:WgpuPbrDefineKey, format:Dynamic):WgpuPbrPipeline {
+  public static function ensureWgpuPbrPipeline(state:Dynamic, key:WgpuPbrDefineKey, format:Dynamic):WgpuPbrPipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuPbrPipelineCache.ensureWgpuPbrPipeline, cast ([state, key, format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuPbrSampleBindGroup(state:WgpuRenderState):Dynamic {
+  public static function ensureWgpuPbrSampleBindGroup(state:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.ensureWgpuPbrSampleBindGroup, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuPbrSampleLayout(state:WgpuRenderState):Dynamic {
+  public static function ensureWgpuPbrSampleLayout(state:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.ensureWgpuPbrSampleLayout, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuPlaceholderTextureView(state:WgpuRenderState):Dynamic {
+  public static function ensureWgpuPlaceholderTextureView(state:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.ensureWgpuPlaceholderTextureView, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuQuadBatchResources(state:WgpuRenderState):WgpuQuadBatchResources {
+  public static function ensureWgpuQuadBatchResources(state:Dynamic):WgpuQuadBatchResources {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuSpriteBatch.ensureWgpuQuadBatchResources, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuRenderCacheTarget(state:WgpuRenderState, cache:RenderCache, width:Float, height:Float):WgpuRenderTarget {
+  public static function ensureWgpuRenderCacheTarget(state:Dynamic, cache:Dynamic, width:Float, height:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuCache.ensureWgpuRenderCacheTarget, cast ([state, cache, width, height] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuSceneLayouts(state:WgpuRenderState):WgpuSceneLayouts {
+  public static function ensureWgpuSceneLayouts(state:Dynamic):WgpuSceneLayouts {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.ensureWgpuSceneLayouts, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuScenePipeline<T>(state:WgpuRenderState, key:String, compile:Dynamic):Dynamic {
+  public static function ensureWgpuScenePipeline<T>(state:Dynamic, key:String, compile:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.ensureWgpuScenePipeline, cast ([state, key, compile] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuShadowSampleBindGroup(state:WgpuRenderState):Dynamic {
+  public static function ensureWgpuShadowSampleBindGroup(state:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.ensureWgpuShadowSampleBindGroup, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuShadowSampleLayout(state:WgpuRenderState):Dynamic {
+  public static function ensureWgpuShadowSampleLayout(state:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.ensureWgpuShadowSampleLayout, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuToonPipeline(state:WgpuRenderState, key:WgpuToonDefineKey, format:Dynamic):WgpuToonPipeline {
+  public static function ensureWgpuToonPipeline(state:Dynamic, key:WgpuToonDefineKey, format:Dynamic):WgpuToonPipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuToonPrelude.ensureWgpuToonPipeline, cast ([state, key, format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuUnlitPipeline(state:WgpuRenderState, key:WgpuUnlitDefineKey, format:Dynamic):WgpuUnlitPipeline {
+  public static function ensureWgpuUnlitPipeline(state:Dynamic, key:WgpuUnlitDefineKey, format:Dynamic):WgpuUnlitPipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuUnlitPrelude.ensureWgpuUnlitPipeline, cast ([state, key, format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuWireframePipeline(state:WgpuRenderState, format:Dynamic):WgpuWireframePipeline {
+  public static function ensureWgpuWireframePipeline(state:Dynamic, format:Dynamic):WgpuWireframePipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuWireframePrelude.ensureWgpuWireframePipeline, cast ([state, format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuWireframeUpload(state:WgpuRenderState, geometry:MeshGeometry):Null<WgpuWireframeUpload> {
+  public static function ensureWgpuWireframeUpload(state:Dynamic, geometry:Dynamic):Null<WgpuWireframeUpload> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuWireframeUploadValues.ensureWgpuWireframeUpload, cast ([state, geometry] : Array<Dynamic>));
     return cast null;
   }
@@ -10450,7 +10232,7 @@ class Sdk {
 
   public static final EPSILON:Dynamic = Facade_Sdk_flighthq_math_Constants.EPSILON;
 
-  public static function equalizeSurfaceHistogram(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function equalizeSurfaceHistogram(dest:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.equalizeSurfaceHistogram, cast ([dest, source] : Array<Dynamic>));
   }
 
@@ -10459,7 +10241,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function equalsClipRegion(a:ClipRegion, b:ClipRegion):Bool {
+  public static function equalsClipRegion(a:Dynamic, b:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.equalsClipRegion, cast ([a, b] : Array<Dynamic>));
     return cast null;
   }
@@ -10484,7 +10266,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function equalsMaterial(a:Material, b:Material):Bool {
+  public static function equalsMaterial(a:Dynamic, b:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_materials_Material.equalsMaterial, cast ([a, b] : Array<Dynamic>));
     return cast null;
   }
@@ -10549,7 +10331,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function erodeSurface(out:Dynamic, source:SurfaceRegion, radius:Float):Void {
+  public static function erodeSurface(out:Dynamic, source:Dynamic, radius:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.erodeSurface, cast ([out, source, radius] : Array<Dynamic>));
   }
 
@@ -10599,7 +10381,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Aabb.expandAabbBySphere, cast ([out, aabb, sphere] : Array<Dynamic>));
   }
 
-  public static function expandMeshGeometryIndices(geometry:MeshGeometry):MeshGeometry {
+  public static function expandMeshGeometryIndices(geometry:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryIndex.expandMeshGeometryIndices, cast ([geometry] : Array<Dynamic>));
     return cast null;
   }
@@ -10608,17 +10390,17 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Rectangle.expandRectangleToPoint, cast ([out, sourceRect, sourceVec2] : Array<Dynamic>));
   }
 
-  public static function explainCanvasImageSource(image:ImageResource):Dynamic {
+  public static function explainCanvasImageSource(image:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasImageSource.explainCanvasImageSource, cast ([image] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function explainDisplayObjectRender(state:RenderState, source:Renderable):DisplayObjectRenderExplanation {
+  public static function explainDisplayObjectRender(state:Dynamic, source:Renderable):DisplayObjectRenderExplanation {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_ExplainDisplayObjectRender.explainDisplayObjectRender, cast ([state, source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function explainDomImageSource(image:ImageResource):DomImageSourceKind {
+  public static function explainDomImageSource(image:Dynamic):DomImageSourceKind {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomImageSource.explainDomImageSource, cast ([image] : Array<Dynamic>));
     return cast null;
   }
@@ -10628,16 +10410,16 @@ class Sdk {
     return cast null;
   }
 
-  public static function extendSurface(source:Surface, left:Float, top:Float, right:Float, bottom:Float, ?edgeMode:SurfaceEdgeMode, ?fillColor:Dynamic):Surface {
+  public static function extendSurface(source:Dynamic, left:Float, top:Float, right:Float, bottom:Float, ?edgeMode:SurfaceEdgeMode, ?fillColor:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.extendSurface, cast ([source, left, top, right, bottom, edgeMode, fillColor] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function extractSurfacePixels(out:Dynamic, source:SurfaceRegion):Void {
+  public static function extractSurfacePixels(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.extractSurfacePixels, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function extractSurfacePixels32(out:Dynamic, source:SurfaceRegion):Void {
+  public static function extractSurfacePixels32(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.extractSurfacePixels32, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -10646,11 +10428,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function fadeAudioBusGain(mixer:AudioMixer, bus:AudioBus, targetGain:Float, durationMs:Float):Void {
+  public static function fadeAudioBusGain(mixer:Dynamic, bus:AudioBus, targetGain:Float, durationMs:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_media_AudioMixer.fadeAudioBusGain, cast ([mixer, bus, targetGain, durationMs] : Array<Dynamic>));
   }
 
-  public static function fadeAudioChannelGain(channel:AudioChannel, targetGain:Float, durationMs:Float):Void {
+  public static function fadeAudioChannelGain(channel:Dynamic, targetGain:Float, durationMs:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_media_AudioChannel.fadeAudioChannelGain, cast ([channel, targetGain, durationMs] : Array<Dynamic>));
   }
 
@@ -10659,31 +10441,31 @@ class Sdk {
     return cast null;
   }
 
-  public static function fillSurfaceLinearGradient(dest:SurfaceRegion, ramp:Dynamic, x0:Float, y0:Float, x1:Float, y1:Float, ?spread:GradientSpread):Void {
+  public static function fillSurfaceLinearGradient(dest:Dynamic, ramp:Dynamic, x0:Float, y0:Float, x1:Float, y1:Float, ?spread:GradientSpread):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.fillSurfaceLinearGradient, cast ([dest, ramp, x0, y0, x1, y1, spread] : Array<Dynamic>));
   }
 
-  public static function fillSurfaceNoise(dest:SurfaceRegion, seed:Float, ?low:Float, ?high:Float, ?grayScale:Bool):Void {
+  public static function fillSurfaceNoise(dest:Dynamic, seed:Float, ?low:Float, ?high:Float, ?grayScale:Bool):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.fillSurfaceNoise, cast ([dest, seed, low, high, grayScale] : Array<Dynamic>));
   }
 
-  public static function fillSurfacePerlinNoise(dest:SurfaceRegion, baseX:Float, baseY:Float, octaves:Float, seed:Float, ?grayScale:Bool, ?stitch:Bool, ?channelOptions:Float):Void {
+  public static function fillSurfacePerlinNoise(dest:Dynamic, baseX:Float, baseY:Float, octaves:Float, seed:Float, ?grayScale:Bool, ?stitch:Bool, ?channelOptions:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.fillSurfacePerlinNoise, cast ([dest, baseX, baseY, octaves, seed, grayScale, stitch, channelOptions] : Array<Dynamic>));
   }
 
-  public static function fillSurfaceRadialGradient(dest:SurfaceRegion, ramp:Dynamic, cx:Float, cy:Float, radius:Float, ?focalX:Float, ?focalY:Float, ?spread:GradientSpread):Void {
+  public static function fillSurfaceRadialGradient(dest:Dynamic, ramp:Dynamic, cx:Float, cy:Float, radius:Float, ?focalX:Float, ?focalY:Float, ?spread:GradientSpread):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.fillSurfaceRadialGradient, cast ([dest, ramp, cx, cy, radius, focalX, focalY, spread] : Array<Dynamic>));
   }
 
-  public static function fillSurfaceRectangle(dest:SurfaceRegion, color:Float):Void {
+  public static function fillSurfaceRectangle(dest:Dynamic, color:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.fillSurfaceRectangle, cast ([dest, color] : Array<Dynamic>));
   }
 
-  public static function fillSurfaceTurbulence(dest:SurfaceRegion, baseX:Float, baseY:Float, octaves:Float, seed:Float, ?grayScale:Bool, ?stitch:Bool, ?channelOptions:Float):Void {
+  public static function fillSurfaceTurbulence(dest:Dynamic, baseX:Float, baseY:Float, octaves:Float, seed:Float, ?grayScale:Bool, ?stitch:Bool, ?channelOptions:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.fillSurfaceTurbulence, cast ([dest, baseX, baseY, octaves, seed, grayScale, stitch, channelOptions] : Array<Dynamic>));
   }
 
-  public static function fillTilemapTiles(tilemap:Tilemap, id:Float):Void {
+  public static function fillTilemapTiles(tilemap:Dynamic, id:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.fillTilemapTiles, cast ([tilemap, id] : Array<Dynamic>));
   }
 
@@ -10722,7 +10504,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function findSceneMaterialByName(root:SceneNode, name:String):Null<Material> {
+  public static function findSceneMaterialByName(root:Dynamic, name:String):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Scene.findSceneMaterialByName, cast ([root, name] : Array<Dynamic>));
     return cast null;
   }
@@ -10732,12 +10514,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function findTimelineLabel(timeline:Timeline, name:String):Null<TimelineLabel> {
+  public static function findTimelineLabel(timeline:Dynamic, name:String):Null<TimelineLabel> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_timeline_Timeline.findTimelineLabel, cast ([timeline, name] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function fitPathCurves(source:Path, tolerance:Float, out:Path, ?flattenTolerance:Dynamic):Void {
+  public static function fitPathCurves(source:Dynamic, tolerance:Float, out:Dynamic, ?flattenTolerance:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_FitPathCurves.fitPathCurves, cast ([source, tolerance, out, flattenTolerance] : Array<Dynamic>));
   }
 
@@ -10745,20 +10527,20 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.flashWindowFrame, cast ([win] : Array<Dynamic>));
   }
 
-  public static function flattenPath(path:Path, ?tolerance:Dynamic):Array<Array<Float>> {
+  public static function flattenPath(path:Dynamic, ?tolerance:Dynamic):Array<Array<Float>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_FlattenPath.flattenPath, cast ([path, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function flipSurfaceHorizontal(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function flipSurfaceHorizontal(dest:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.flipSurfaceHorizontal, cast ([dest, source] : Array<Dynamic>));
   }
 
-  public static function flipSurfaceVertical(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function flipSurfaceVertical(dest:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.flipSurfaceVertical, cast ([dest, source] : Array<Dynamic>));
   }
 
-  public static function floodFillSurface(out:Surface, x:Float, y:Float, color:Float):Void {
+  public static function floodFillSurface(out:Dynamic, x:Float, y:Float, color:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.floodFillSurface, cast ([out, x, y, color] : Array<Dynamic>));
   }
 
@@ -10772,7 +10554,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function flushGlSpriteBatch(state:GlRenderState):Void {
+  public static function flushGlSpriteBatch(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlSpriteBatch.flushGlSpriteBatch, cast ([state] : Array<Dynamic>));
   }
 
@@ -10780,7 +10562,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_log_Log.flushLogSink, cast ([handle] : Array<Dynamic>));
   }
 
-  public static function flushWgpuSpriteBatch(state:WgpuRenderState):Void {
+  public static function flushWgpuSpriteBatch(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuSpriteBatch.flushWgpuSpriteBatch, cast ([state] : Array<Dynamic>));
   }
 
@@ -10803,11 +10585,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function focusSelectableRichText(manager:SelectableRichTextManager, target:RichText):Void {
+  public static function focusSelectableRichText(manager:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_SelectableRichTextManager.focusSelectableRichText, cast ([manager, target] : Array<Dynamic>));
   }
 
-  public static function focusTextInput(manager:TextInputManager, target:RichText):Void {
+  public static function focusTextInput(manager:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputManager.focusTextInput, cast ([manager, target] : Array<Dynamic>));
   }
 
@@ -10831,7 +10613,7 @@ class Sdk {
 
   public static final FontVariationWidth:Dynamic = Facade_Sdk_flighthq_types__internal__FontVariationValues.FontVariationWidth;
 
-  public static function forEachApplicationWindow(app:Application, fn:Dynamic):Void {
+  public static function forEachApplicationWindow(app:Dynamic, fn:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.forEachApplicationWindow, cast ([app, fn] : Array<Dynamic>));
   }
 
@@ -10847,7 +10629,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.forEachNodeDescendant, cast ([source, callback] : Array<Dynamic>));
   }
 
-  public static function forEachPathSegment(path:Path, visitor:Dynamic):Void {
+  public static function forEachPathSegment(path:Dynamic, visitor:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_ForEachPathSegment.forEachPathSegment, cast ([path, visitor] : Array<Dynamic>));
   }
 
@@ -10856,12 +10638,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function formatBitmapFontFnt(font:BitmapFont):String {
+  public static function formatBitmapFontFnt(font:Dynamic):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_bitmapfontFormats_BitmapFontFnt.formatBitmapFontFnt, cast ([font] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function formatCaptureBaseline(baseline:CaptureBaseline):String {
+  public static function formatCaptureBaseline(baseline:Dynamic):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_capture_CaptureBaseline.formatCaptureBaseline, cast ([baseline] : Array<Dynamic>));
     return cast null;
   }
@@ -10906,22 +10688,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function formatShapeJson(shape:Shape, ?options:ShapeJsonFormatOptions):String {
+  public static function formatShapeJson(shape:Dynamic, ?options:ShapeJsonFormatOptions):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_shapeFormats_ShapeJson.formatShapeJson, cast ([shape, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function formatSurfaceFingerprint(fingerprint:SurfaceFingerprint):String {
+  public static function formatSurfaceFingerprint(fingerprint:Dynamic):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.formatSurfaceFingerprint, cast ([fingerprint] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function formatSvgPathData(path:Path, ?options:{ @:optional var precision:Float; }):String {
+  public static function formatSvgPathData(path:Dynamic, ?options:{ @:optional var precision:Float; }):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_pathFormats_SvgPathData.formatSvgPathData, cast ([path, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function formatTextMarkup(content:RichTextContent):String {
+  public static function formatTextMarkup(content:Dynamic):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textMarkup_TextMarkup.formatTextMarkup, cast ([content] : Array<Dynamic>));
     return cast null;
   }
@@ -10956,7 +10738,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function gaussianBlurSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, sigmaX:Float, ?sigmaY:Float, ?passes:Float):Void {
+  public static function gaussianBlurSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, sigmaX:Float, ?sigmaY:Float, ?passes:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.gaussianBlurSurface, cast ([out, scratch, source, sigmaX, sigmaY, passes] : Array<Dynamic>));
   }
 
@@ -10965,7 +10747,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function generateWgpuMipmaps(state:WgpuRenderState, texture:Dynamic, width:Float, height:Float, format:Dynamic):Void {
+  public static function generateWgpuMipmaps(state:Dynamic, texture:Dynamic, width:Float, height:Float, format:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuMipmap.generateWgpuMipmaps, cast ([state, texture, width, height, format] : Array<Dynamic>));
   }
 
@@ -11024,12 +10806,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getActiveTweenCount(manager:TweenManager):Float {
+  public static function getActiveTweenCount(manager:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.getActiveTweenCount, cast ([manager] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getActiveWgpuPipeline(state:WgpuRenderState):Dynamic {
+  public static function getActiveWgpuPipeline(state:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuShader.getActiveWgpuPipeline, cast ([state] : Array<Dynamic>));
     return cast null;
   }
@@ -11048,12 +10830,12 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_effects_BlendModeMath.getAdvancedBlendRgb, cast ([mode, cbR, cbG, cbB, csR, csG, csB, out] : Array<Dynamic>));
   }
 
-  public static function getAnimationClipDuration(clip:AnimationClip):Float {
+  public static function getAnimationClipDuration(clip:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_animation_AnimationClip.getAnimationClipDuration, cast ([clip] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getAnimationPlayerNormalizedTime(player:AnimationPlayer):Float {
+  public static function getAnimationPlayerNormalizedTime(player:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_animation_AnimationPlayer.getAnimationPlayerNormalizedTime, cast ([player] : Array<Dynamic>));
     return cast null;
   }
@@ -11088,17 +10870,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function getApplicationFrameRate(app:Application):Float {
+  public static function getApplicationFrameRate(app:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_application_Application.getApplicationFrameRate, cast ([app] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getApplicationMainWindow(app:Application):Null<ApplicationWindow> {
+  public static function getApplicationMainWindow(app:Dynamic):Null<ApplicationWindow> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_application_Application.getApplicationMainWindow, cast ([app] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getApplicationWindows(app:Application):Array<ApplicationWindow> {
+  public static function getApplicationWindows(app:Dynamic):Array<ApplicationWindow> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_application_Application.getApplicationWindows, cast ([app] : Array<Dynamic>));
     return cast null;
   }
@@ -11148,67 +10930,67 @@ class Sdk {
     return cast null;
   }
 
-  public static function getAsset<T>(library:AssetLibrary, id:String):Null<Dynamic> {
+  public static function getAsset<T>(library:Dynamic, id:String):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_assets_AssetLibrary.getAsset, cast ([library, id] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getAssetRefCount(library:AssetLibrary, id:String):Float {
+  public static function getAssetRefCount(library:Dynamic, id:String):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_assets_AssetLibrary.getAssetRefCount, cast ([library, id] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getAudioChannelCurrentTime(channel:AudioChannel):Float {
+  public static function getAudioChannelCurrentTime(channel:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_AudioChannel.getAudioChannelCurrentTime, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getAudioChannelDuration(channel:AudioChannel):Float {
+  public static function getAudioChannelDuration(channel:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_AudioChannel.getAudioChannelDuration, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getAudioChannelInputNode(channel:AudioChannel):Null<Dynamic> {
+  public static function getAudioChannelInputNode(channel:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_AudioChannel.getAudioChannelInputNode, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getAudioChannelOutputNode(channel:AudioChannel):Null<Dynamic> {
+  public static function getAudioChannelOutputNode(channel:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_AudioChannel.getAudioChannelOutputNode, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getAudioMixerActiveChannels(mixer:AudioMixer):Array<AudioChannel> {
+  public static function getAudioMixerActiveChannels(mixer:Dynamic):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_AudioMixer.getAudioMixerActiveChannels, cast ([mixer] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getAudioResourceByteSize(resource:AudioResource):Float {
+  public static function getAudioResourceByteSize(resource:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_audio_AudioResource.getAudioResourceByteSize, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getAudioResourceChannelCount(resource:AudioResource):Float {
+  public static function getAudioResourceChannelCount(resource:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_audio_AudioResource.getAudioResourceChannelCount, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getAudioResourceChannelData(resource:AudioResource, channel:Float):Null<flighthq._internal._Float32Array> {
+  public static function getAudioResourceChannelData(resource:Dynamic, channel:Float):Null<flighthq._internal._Float32Array> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_audio_AudioResource.getAudioResourceChannelData, cast ([resource, channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getAudioResourceDuration(resource:AudioResource):Float {
+  public static function getAudioResourceDuration(resource:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_audio_AudioResource.getAudioResourceDuration, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getAudioResourceSampleRate(resource:AudioResource):Float {
+  public static function getAudioResourceSampleRate(resource:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_audio_AudioResource.getAudioResourceSampleRate, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBidiClassBackend():BidiClassBackend {
+  public static function getBidiClassBackend():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textbidi_BidiClassBackend.getBidiClassBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -11218,52 +11000,52 @@ class Sdk {
     return cast null;
   }
 
-  public static function getBillboardRuntime(source:Billboard):BillboardRuntime {
+  public static function getBillboardRuntime(source:Dynamic):BillboardRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Billboard.getBillboardRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBillboardSignals(source:Billboard):Null<NodeSignals> {
+  public static function getBillboardSignals(source:Dynamic):Null<NodeSignals> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Billboard.getBillboardSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBitmapFontGlyph(font:BitmapFont, codepoint:Float):Null<GlyphEntry> {
+  public static function getBitmapFontGlyph(font:Dynamic, codepoint:Float):Null<GlyphEntry> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_bitmapfont_BitmapFont.getBitmapFontGlyph, cast ([font, codepoint] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBitmapFontKerning(font:BitmapFont, left:Float, right:Float):Float {
+  public static function getBitmapFontKerning(font:Dynamic, left:Float, right:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_bitmapfont_BitmapFont.getBitmapFontKerning, cast ([font, left, right] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBitmapFontMetrics(font:BitmapFont):GlyphMetrics {
+  public static function getBitmapFontMetrics(font:Dynamic):GlyphMetrics {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_bitmapfont_BitmapFont.getBitmapFontMetrics, cast ([font] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBitmapFontPage(font:BitmapFont, ?page:Dynamic):Null<TextureAtlas> {
+  public static function getBitmapFontPage(font:Dynamic, ?page:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_bitmapfont_BitmapFont.getBitmapFontPage, cast ([font, page] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBitmapFontPages(font:BitmapFont):Array<TextureAtlas> {
+  public static function getBitmapFontPages(font:Dynamic):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_bitmapfont_BitmapFont.getBitmapFontPages, cast ([font] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBitmapRuntime(source:Bitmap):BitmapRuntime {
+  public static function getBitmapRuntime(source:Dynamic):BitmapRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_Bitmap.getBitmapRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBitmapTextBounds(source:BitmapText):Rectangle {
+  public static function getBitmapTextBounds(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_bitmaptext_BitmapText.getBitmapTextBounds, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBitmapTextQuadBatches(source:BitmapText):Array<QuadBatch> {
+  public static function getBitmapTextQuadBatches(source:Dynamic):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_bitmaptext_BitmapText.getBitmapTextQuadBatches, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -11295,61 +11077,61 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_camera2d_Camera2d.getCamera2DVisibleBounds, cast ([camera, out] : Array<Dynamic>));
   }
 
-  public static function getCameraForward(out:Vector3Like, camera:Camera):Void {
+  public static function getCameraForward(out:Vector3Like, camera:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_camera_Basis.getCameraForward, cast ([out, camera] : Array<Dynamic>));
   }
 
-  public static function getCameraFrustum(out:FrustumLike, camera:Camera, aspect:Float):Void {
+  public static function getCameraFrustum(out:FrustumLike, camera:Dynamic, aspect:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.getCameraFrustum, cast ([out, camera, aspect] : Array<Dynamic>));
   }
 
-  public static function getCameraFrustumCorners(out:Array<Vector3Like>, camera:Camera, aspect:Float):Bool {
+  public static function getCameraFrustumCorners(out:Array<Vector3Like>, camera:Dynamic, aspect:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.getCameraFrustumCorners, cast ([out, camera, aspect] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getCameraInverseViewProjectionMatrix4(out:Matrix4Like, camera:Camera, aspect:Float):Bool {
+  public static function getCameraInverseViewProjectionMatrix4(out:Matrix4Like, camera:Dynamic, aspect:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.getCameraInverseViewProjectionMatrix4, cast ([out, camera, aspect] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getCameraLinearDepth(camera:Camera, ndcZ:Float):Float {
+  public static function getCameraLinearDepth(camera:Dynamic, ndcZ:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.getCameraLinearDepth, cast ([camera, ndcZ] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getCameraPosition(out:Vector3Like, camera:Camera):Void {
+  public static function getCameraPosition(out:Vector3Like, camera:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_camera_Basis.getCameraPosition, cast ([out, camera] : Array<Dynamic>));
   }
 
-  public static function getCameraRayThroughBoundingSphere(out:Ray3DLike, camera:Camera, sphere:BoundingSphereLike, aspect:Float):Bool {
+  public static function getCameraRayThroughBoundingSphere(out:Ray3DLike, camera:Dynamic, sphere:BoundingSphereLike, aspect:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.getCameraRayThroughBoundingSphere, cast ([out, camera, sphere, aspect] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getCameraRight(out:Vector3Like, camera:Camera):Void {
+  public static function getCameraRight(out:Vector3Like, camera:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_camera_Basis.getCameraRight, cast ([out, camera] : Array<Dynamic>));
   }
 
-  public static function getCameraScreenToWorldRay(out:Ray3DLike, camera:Camera, ndcX:Float, ndcY:Float, aspect:Float):Bool {
+  public static function getCameraScreenToWorldRay(out:Ray3DLike, camera:Dynamic, ndcX:Float, ndcY:Float, aspect:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.getCameraScreenToWorldRay, cast ([out, camera, ndcX, ndcY, aspect] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getCameraUp(out:Vector3Like, camera:Camera):Void {
+  public static function getCameraUp(out:Vector3Like, camera:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_camera_Basis.getCameraUp, cast ([out, camera] : Array<Dynamic>));
   }
 
-  public static function getCameraViewProjectionMatrix4(out:Matrix4Like, camera:Camera, aspect:Float):Void {
+  public static function getCameraViewProjectionMatrix4(out:Matrix4Like, camera:Dynamic, aspect:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.getCameraViewProjectionMatrix4, cast ([out, camera, aspect] : Array<Dynamic>));
   }
 
-  public static function getCameraViewSpaceZ(camera:Camera, ndcZ:Float):Float {
+  public static function getCameraViewSpaceZ(camera:Dynamic, ndcZ:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.getCameraViewSpaceZ, cast ([camera, ndcZ] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getCameraWorldToScreen(out:Vector3Like, camera:Camera, worldPoint:Vector3Like, aspect:Float):Bool {
+  public static function getCameraWorldToScreen(out:Vector3Like, camera:Dynamic, worldPoint:Vector3Like, aspect:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.getCameraWorldToScreen, cast ([out, camera, worldPoint, aspect] : Array<Dynamic>));
     return cast null;
   }
@@ -11364,7 +11146,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache):Null<Dynamic> {
+  public static function getCanvasRenderCacheTarget(state:Dynamic, cache:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasCache.getCanvasRenderCacheTarget, cast ([state, cache] : Array<Dynamic>));
     return cast null;
   }
@@ -11384,7 +11166,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getCaptureBaselineField(baseline:CaptureBaseline, column:String, field:CaptureColumnBaseline):Null<String> {
+  public static function getCaptureBaselineField(baseline:Dynamic, column:String, field:CaptureColumnBaseline):Null<String> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_capture_CaptureBaseline.getCaptureBaselineField, cast ([baseline, column, field] : Array<Dynamic>));
     return cast null;
   }
@@ -11409,16 +11191,16 @@ class Sdk {
     return cast null;
   }
 
-  public static function getClipRegionBounds(out:RectangleLike, clip:ClipRegion):Void {
+  public static function getClipRegionBounds(out:RectangleLike, clip:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.getClipRegionBounds, cast ([out, clip] : Array<Dynamic>));
   }
 
-  public static function getClockEffectiveScale(clock:Clock):Float {
+  public static function getClockEffectiveScale(clock:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clock_GetClockEffectiveScale.getClockEffectiveScale, cast ([clock] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getClockParent(clock:Clock):Null<Clock> {
+  public static function getClockParent(clock:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clock_GetClockParent.getClockParent, cast ([clock] : Array<Dynamic>));
     return cast null;
   }
@@ -11460,7 +11242,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_input_InputManager.getCoalescedInputPointerEvents, cast ([event, callback] : Array<Dynamic>));
   }
 
-  public static function getCodePointForGlyph(glyphId:Float, _format:TextFormat):Float {
+  public static function getCodePointForGlyph(glyphId:Float, _format:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaperRun.getCodePointForGlyph, cast ([glyphId, _format] : Array<Dynamic>));
     return cast null;
   }
@@ -11574,27 +11356,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function getDisplayContainerRuntime(source:DisplayContainer):DisplayContainerRuntime {
+  public static function getDisplayContainerRuntime(source:Dynamic):DisplayContainerRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_DisplayContainer.getDisplayContainerRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getDisplayObjectColorAdjustments(source:DisplayObject):Null<Array<Adjustment>> {
+  public static function getDisplayObjectColorAdjustments(source:Dynamic):Null<Array<Adjustment>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_DisplayObject.getDisplayObjectColorAdjustments, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getDisplayObjectOverlapRectangle(source:DisplayObject, other:DisplayObject, out:Rectangle):Rectangle {
+  public static function getDisplayObjectOverlapRectangle(source:Dynamic, other:Dynamic, out:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_DisplayObjectOverlap.getDisplayObjectOverlapRectangle, cast ([source, other, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getDisplayObjectRuntime(source:DisplayObject):DisplayObjectRuntime {
+  public static function getDisplayObjectRuntime(source:Dynamic):DisplayObjectRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_DisplayObject.getDisplayObjectRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getDisplayObjectStage(source:DisplayObject):Null<Stage> {
+  public static function getDisplayObjectStage(source:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_Stage.getDisplayObjectStage, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -11609,12 +11391,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getDomRenderCacheTarget(state:DomRenderState, cache:RenderCache):Null<Dynamic> {
+  public static function getDomRenderCacheTarget(state:Dynamic, cache:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomCache.getDomRenderCacheTarget, cast ([state, cache] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getDomRenderStateRuntime(state:DomRenderState):DomRenderStateRuntime {
+  public static function getDomRenderStateRuntime(state:Dynamic):DomRenderStateRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomRenderState.getDomRenderStateRuntime, cast ([state] : Array<Dynamic>));
     return cast null;
   }
@@ -11624,12 +11406,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getEntityBinding(source:Entity):Null<Dynamic> {
+  public static function getEntityBinding(source:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_entity_Binding.getEntityBinding, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getEntityRuntime(source:Entity):EntityRuntime {
+  public static function getEntityRuntime(source:Dynamic):EntityRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_entity_Entity.getEntityRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -11693,12 +11475,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getFontMetrics(format:TextFormat):Null<FontMetrics> {
+  public static function getFontMetrics(format:Dynamic):Null<FontMetrics> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaperRun.getFontMetrics, cast ([format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getFontMetricsInto(format:TextFormat, out:FontMetrics):Bool {
+  public static function getFontMetricsInto(format:Dynamic, out:FontMetrics):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaperRun.getFontMetricsInto, cast ([format, out] : Array<Dynamic>));
     return cast null;
   }
@@ -11708,7 +11490,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getFontUnitScale(format:TextFormat):Float {
+  public static function getFontUnitScale(format:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaperRun.getFontUnitScale, cast ([format] : Array<Dynamic>));
     return cast null;
   }
@@ -11742,7 +11524,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getGlBlendEffectBackdrop(state:GlRenderState, backdropKey:Null<String>):Null<Dynamic> {
+  public static function getGlBlendEffectBackdrop(state:Dynamic, backdropKey:Null<String>):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlBlendEffect.getGlBlendEffectBackdrop, cast ([state, backdropKey] : Array<Dynamic>));
     return cast null;
   }
@@ -11777,12 +11559,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getGlCustomMaterialShaderSource(state:GlRenderState, shaderKey:String):Null<GlCustomMaterialShaderSource> {
+  public static function getGlCustomMaterialShaderSource(state:Dynamic, shaderKey:String):Null<GlCustomMaterialShaderSource> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_CustomShaderGlMeshMaterialRenderer.getGlCustomMaterialShaderSource, cast ([state, shaderKey] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlCustomShaderSource(state:GlRenderState, shaderKey:String):Null<String> {
+  public static function getGlCustomShaderSource(state:Dynamic, shaderKey:String):Null<String> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlCustomShaderEffect.getGlCustomShaderSource, cast ([state, shaderKey] : Array<Dynamic>));
     return cast null;
   }
@@ -11797,12 +11579,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getGlEffectProgram(state:GlRenderState, key:String, fragmentSource:String):GlFullscreenProgram {
+  public static function getGlEffectProgram(state:Dynamic, key:String, fragmentSource:String):GlFullscreenProgram {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlEffectProgramCache.getGlEffectProgram, cast ([state, key, fragmentSource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlEffectUniformLocation(state:GlRenderState, program:GlFullscreenProgram, name:String):Null<Dynamic> {
+  public static function getGlEffectUniformLocation(state:Dynamic, program:GlFullscreenProgram, name:String):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlEffectProgramCache.getGlEffectUniformLocation, cast ([state, program, name] : Array<Dynamic>));
     return cast null;
   }
@@ -11817,17 +11599,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function getGlMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMaterialRenderer> {
+  public static function getGlMaterialRenderer(state:Dynamic, kind:Kind):Null<GlMaterialRenderer> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlMaterialRegistry.getGlMaterialRenderer, cast ([state, kind] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlMaterialShader(state:GlRenderState, kind:Kind):Null<GlBitmapShader> {
+  public static function getGlMaterialShader(state:Dynamic, kind:Kind):Null<GlBitmapShader> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlShaderBinding.getGlMaterialShader, cast ([state, kind] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlMeshMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMeshMaterialRenderer> {
+  public static function getGlMeshMaterialRenderer(state:Dynamic, kind:Kind):Null<GlMeshMaterialRenderer> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlMeshMaterialRegistry.getGlMeshMaterialRenderer, cast ([state, kind] : Array<Dynamic>));
     return cast null;
   }
@@ -11852,7 +11634,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getGlRenderCacheTarget(state:GlRenderState, cache:RenderCache):Null<GlRenderTarget> {
+  public static function getGlRenderCacheTarget(state:Dynamic, cache:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlCache.getGlRenderCacheTarget, cast ([state, cache] : Array<Dynamic>));
     return cast null;
   }
@@ -11862,22 +11644,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function getGlRenderEffectRunner(state:GlRenderState, kind:String):Null<GlRenderEffectRunner> {
+  public static function getGlRenderEffectRunner(state:Dynamic, kind:String):Null<GlRenderEffectRunner> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectRegistry.getGlRenderEffectRunner, cast ([state, kind] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlRenderStateRuntime(state:GlRenderState):GlRenderStateRuntime {
+  public static function getGlRenderStateRuntime(state:Dynamic):GlRenderStateRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlRenderState.getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlSceneRuntime(state:GlRenderState):GlSceneRuntime {
+  public static function getGlSceneRuntime(state:Dynamic):GlSceneRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl__internal__GlSceneRuntimeValues.getGlSceneRuntime, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlSceneTime(state:GlRenderState):Float {
+  public static function getGlSceneTime(state:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlSceneTime.getGlSceneTime, cast ([state] : Array<Dynamic>));
     return cast null;
   }
@@ -11907,7 +11689,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getGlVelocityWriter(state:GlRenderState, kind:Kind):Null<GlVelocityWriter> {
+  public static function getGlVelocityWriter(state:Dynamic, kind:Kind):Null<GlVelocityWriter> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlVelocity.getGlVelocityWriter, cast ([state, kind] : Array<Dynamic>));
     return cast null;
   }
@@ -11922,57 +11704,57 @@ class Sdk {
     return cast null;
   }
 
-  public static function getGlyphAtlasDirtyRegion(atlas:GlyphAtlas):Null<Rectangle> {
+  public static function getGlyphAtlasDirtyRegion(atlas:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_glyphatlas_GlyphAtlasDirty.getGlyphAtlasDirtyRegion, cast ([atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphAtlasEntry(atlas:GlyphAtlas, codepoint:Float):Null<GlyphEntry> {
+  public static function getGlyphAtlasEntry(atlas:Dynamic, codepoint:Float):Null<GlyphEntry> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_glyphatlas_GlyphAtlasEntry.getGlyphAtlasEntry, cast ([atlas, codepoint] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphAtlasKerning(_atlas:GlyphAtlas, _left:Float, _right:Float):Float {
+  public static function getGlyphAtlasKerning(_atlas:Dynamic, _left:Float, _right:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_glyphatlas_GlyphAtlasMetrics.getGlyphAtlasKerning, cast ([_atlas, _left, _right] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphAtlasMetrics(atlas:GlyphAtlas):GlyphMetrics {
+  public static function getGlyphAtlasMetrics(atlas:Dynamic):GlyphMetrics {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_glyphatlas_GlyphAtlasMetrics.getGlyphAtlasMetrics, cast ([atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphAtlasSurface(atlas:GlyphAtlas):Surface {
+  public static function getGlyphAtlasSurface(atlas:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_glyphatlas_GlyphAtlas.getGlyphAtlasSurface, cast ([atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphExtents(glyphId:Float, _format:TextFormat):Null<GlyphExtents> {
+  public static function getGlyphExtents(glyphId:Float, _format:Dynamic):Null<GlyphExtents> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaperRun.getGlyphExtents, cast ([glyphId, _format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphExtentsBatch(glyphIds:Array<Float>, _format:TextFormat, out:Array<GlyphExtents>):Float {
+  public static function getGlyphExtentsBatch(glyphIds:Array<Float>, _format:Dynamic, out:Array<GlyphExtents>):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaperRun.getGlyphExtentsBatch, cast ([glyphIds, _format, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphExtentsInto(glyphId:Float, _format:TextFormat, out:GlyphExtents):Bool {
+  public static function getGlyphExtentsInto(glyphId:Float, _format:Dynamic, out:GlyphExtents):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaperRun.getGlyphExtentsInto, cast ([glyphId, _format, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphIndexForCodePoint(codePoint:Float, _format:TextFormat):Float {
+  public static function getGlyphIndexForCodePoint(codePoint:Float, _format:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaperRun.getGlyphIndexForCodePoint, cast ([codePoint, _format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphName(glyphId:Float, _format:TextFormat):String {
+  public static function getGlyphName(glyphId:Float, _format:Dynamic):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaperRun.getGlyphName, cast ([glyphId, _format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphRasterizerBackend():GlyphRasterizerBackend {
+  public static function getGlyphRasterizerBackend():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_glyphatlas_GlyphRasterizerBackend.getGlyphRasterizerBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -11987,7 +11769,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getHtmlViewRuntime(source:HtmlView):HtmlViewRuntime {
+  public static function getHtmlViewRuntime(source:Dynamic):HtmlViewRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_HtmlView.getHtmlViewRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -12002,7 +11784,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getImageResourceByteSize(resource:ImageResource):Float {
+  public static function getImageResourceByteSize(resource:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResource.getImageResourceByteSize, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
@@ -12106,7 +11888,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getMaterialAlphaMode(source:SurfaceMaterial):MaterialAlphaMode {
+  public static function getMaterialAlphaMode(source:Dynamic):MaterialAlphaMode {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_materials_SurfaceMaterial.getMaterialAlphaMode, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -12155,67 +11937,67 @@ class Sdk {
     return cast null;
   }
 
-  public static function getMeshDeformer(source:Mesh):MeshDeformer {
+  public static function getMeshDeformer(source:Dynamic):MeshDeformer {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Mesh.getMeshDeformer, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMeshGeometryIndexCount(geometry:MeshGeometry):Float {
+  public static function getMeshGeometryIndexCount(geometry:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometry.getMeshGeometryIndexCount, cast ([geometry] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMeshGeometryMorphBindPose(geometry:MeshGeometry):Null<MeshMorphBindPose> {
+  public static function getMeshGeometryMorphBindPose(geometry:Dynamic):Null<MeshMorphBindPose> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometry.getMeshGeometryMorphBindPose, cast ([geometry] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMeshGeometrySkinBindPose(geometry:MeshGeometry):Null<MeshSkinBindPose> {
+  public static function getMeshGeometrySkinBindPose(geometry:Dynamic):Null<MeshSkinBindPose> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometry.getMeshGeometrySkinBindPose, cast ([geometry] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMeshGeometrySubsetTriangleCount(geometry:MeshGeometry, subsetIndex:Float):Float {
+  public static function getMeshGeometrySubsetTriangleCount(geometry:Dynamic, subsetIndex:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometrySubset.getMeshGeometrySubsetTriangleCount, cast ([geometry, subsetIndex] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMeshGeometryTriangleCount(geometry:MeshGeometry):Float {
+  public static function getMeshGeometryTriangleCount(geometry:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryOperations.getMeshGeometryTriangleCount, cast ([geometry] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMeshGeometryVertexCount(geometry:MeshGeometry):Float {
+  public static function getMeshGeometryVertexCount(geometry:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometry.getMeshGeometryVertexCount, cast ([geometry] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMeshGeometryVertexNormal(out:{ var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
+  public static function getMeshGeometryVertexNormal(out:{ var x:Float; var y:Float; var z:Float; }, geometry:Dynamic, vertexIndex:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexNormal, cast ([out, geometry, vertexIndex] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMeshGeometryVertexPosition(out:{ var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
+  public static function getMeshGeometryVertexPosition(out:{ var x:Float; var y:Float; var z:Float; }, geometry:Dynamic, vertexIndex:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexPosition, cast ([out, geometry, vertexIndex] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMeshGeometryVertexTangent(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
+  public static function getMeshGeometryVertexTangent(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, geometry:Dynamic, vertexIndex:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexTangent, cast ([out, geometry, vertexIndex] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMeshGeometryVertexUv0(out:{ var x:Float; var y:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
+  public static function getMeshGeometryVertexUv0(out:{ var x:Float; var y:Float; }, geometry:Dynamic, vertexIndex:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryAttributes.getMeshGeometryVertexUv0, cast ([out, geometry, vertexIndex] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMeshRuntime(source:Mesh):MeshRuntime {
+  public static function getMeshRuntime(source:Dynamic):MeshRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Mesh.getMeshRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMeshSignals(source:Mesh):Null<NodeSignals> {
+  public static function getMeshSignals(source:Dynamic):Null<NodeSignals> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Mesh.getMeshSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -12253,32 +12035,32 @@ class Sdk {
     return cast null;
   }
 
-  public static function getMovieClipCurrentFrame(clip:MovieClip):Float {
+  public static function getMovieClipCurrentFrame(clip:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.getMovieClipCurrentFrame, cast ([clip] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMovieClipCurrentLabel(clip:MovieClip):Null<TimelineLabel> {
+  public static function getMovieClipCurrentLabel(clip:Dynamic):Null<TimelineLabel> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.getMovieClipCurrentLabel, cast ([clip] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMovieClipFrameScript(clip:MovieClip, frame:Dynamic):Null<FrameScript> {
+  public static function getMovieClipFrameScript(clip:Dynamic, frame:Dynamic):Null<FrameScript> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.getMovieClipFrameScript, cast ([clip, frame] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMovieClipRuntime(source:MovieClip):MovieClipRuntime {
+  public static function getMovieClipRuntime(source:Dynamic):MovieClipRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.getMovieClipRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMovieClipSignals(clip:MovieClip):Null<MovieClipSignals> {
+  public static function getMovieClipSignals(clip:Dynamic):Null<MovieClipSignals> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.getMovieClipSignals, cast ([clip] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMovieClipTotalFrames(clip:MovieClip):Float {
+  public static function getMovieClipTotalFrames(clip:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.getMovieClipTotalFrames, cast ([clip] : Array<Dynamic>));
     return cast null;
   }
@@ -12303,27 +12085,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function getNativeTextMeasuredHeight(source:NativeText):Float {
+  public static function getNativeTextMeasuredHeight(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_NativeText.getNativeTextMeasuredHeight, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNativeTextMeasuredWidth(source:NativeText):Float {
+  public static function getNativeTextMeasuredWidth(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_NativeText.getNativeTextMeasuredWidth, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNativeTextRuntime(source:NativeText):NativeTextRuntime {
+  public static function getNativeTextRuntime(source:Dynamic):NativeTextRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_NativeText.getNativeTextRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNativeTextString(source:NativeText):String {
+  public static function getNativeTextString(source:Dynamic):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_NativeText.getNativeTextString, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNativeTextStyle(source:NativeText):NativeTextStyle {
+  public static function getNativeTextStyle(source:Dynamic):NativeTextStyle {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_NativeText.getNativeTextStyle, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -12403,12 +12185,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getNodeInteractionState(source:NodeAny):Null<NodeInteractionState> {
+  public static function getNodeInteractionState(source:NodeAny):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_NodeInteractionState.getNodeInteractionState, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNodeLocalBoundsRectangle<Traits>(target:BoundsNode<Traits>):Rectangle {
+  public static function getNodeLocalBoundsRectangle<Traits>(target:BoundsNode<Traits>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_BoundsRectangle.getNodeLocalBoundsRectangle, cast ([target] : Array<Dynamic>));
     return cast null;
   }
@@ -12423,7 +12205,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>):Matrix {
+  public static function getNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.getNodeLocalMatrix, cast ([target] : Array<Dynamic>));
     return cast null;
   }
@@ -12448,7 +12230,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getNodeParentBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Rectangle {
+  public static function getNodeParentBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_BoundsRectangle.getNodeParentBoundsRectangle, cast ([target] : Array<Dynamic>));
     return cast null;
   }
@@ -12491,12 +12273,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getNodeWorldBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Rectangle {
+  public static function getNodeWorldBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_BoundsRectangle.getNodeWorldBoundsRectangle, cast ([target] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNodeWorldMatrix<Traits>(target:Transform2DNode<Traits>):Matrix {
+  public static function getNodeWorldMatrix<Traits>(target:Transform2DNode<Traits>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_node_Node.getNodeWorldMatrix, cast ([target] : Array<Dynamic>));
     return cast null;
   }
@@ -12531,62 +12313,62 @@ class Sdk {
     return cast null;
   }
 
-  public static function getOrCreateRenderProxy2D(state:RenderState, source:Renderable):RenderProxy2D {
+  public static function getOrCreateRenderProxy2D(state:Dynamic, source:Renderable):RenderProxy2D {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderProxy.getOrCreateRenderProxy2D, cast ([state, source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getParticleEmitter3DCapacity(source:ParticleEmitter3D):Float {
+  public static function getParticleEmitter3DCapacity(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.getParticleEmitter3DCapacity, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getParticleEmitter3DParticleAlpha(source:ParticleEmitter3D, index:Float):Float {
+  public static function getParticleEmitter3DParticleAlpha(source:Dynamic, index:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.getParticleEmitter3DParticleAlpha, cast ([source, index] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getParticleEmitter3DParticleId(source:ParticleEmitter3D, index:Float):Float {
+  public static function getParticleEmitter3DParticleId(source:Dynamic, index:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.getParticleEmitter3DParticleId, cast ([source, index] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getParticleEmitter3DParticleVelocity(out:Vector3Like, source:ParticleEmitter3D, index:Float):Bool {
+  public static function getParticleEmitter3DParticleVelocity(out:Vector3Like, source:Dynamic, index:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.getParticleEmitter3DParticleVelocity, cast ([out, source, index] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getParticleEmitter3DRuntime(source:ParticleEmitter3D):ParticleEmitter3DRuntime {
+  public static function getParticleEmitter3DRuntime(source:Dynamic):ParticleEmitter3DRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.getParticleEmitter3DRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getParticleEmitterCapacity(source:ParticleEmitter):Float {
+  public static function getParticleEmitterCapacity(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter.getParticleEmitterCapacity, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getParticleEmitterParticleAlpha(source:ParticleEmitter, index:Float):Float {
+  public static function getParticleEmitterParticleAlpha(source:Dynamic, index:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter.getParticleEmitterParticleAlpha, cast ([source, index] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getParticleEmitterParticleId(source:ParticleEmitter, index:Float):Float {
+  public static function getParticleEmitterParticleId(source:Dynamic, index:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter.getParticleEmitterParticleId, cast ([source, index] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getParticleEmitterParticleVelocity(out:Vector2Like, source:ParticleEmitter, index:Float):Bool {
+  public static function getParticleEmitterParticleVelocity(out:Vector2Like, source:Dynamic, index:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter.getParticleEmitterParticleVelocity, cast ([out, source, index] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getParticleEmitterRuntime(source:ParticleEmitter):ParticleEmitterRuntime {
+  public static function getParticleEmitterRuntime(source:Dynamic):ParticleEmitterRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter.getParticleEmitterRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getParticleEmitterSignals(state:Dynamic):Null<ParticleEmitterSignals> {
+  public static function getParticleEmitterSignals(state:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particles_ParticleEmitterSignals.getParticleEmitterSignals, cast ([state] : Array<Dynamic>));
     return cast null;
   }
@@ -12596,67 +12378,67 @@ class Sdk {
     return cast null;
   }
 
-  public static function getPathBooleanBackend():PathBooleanBackend {
+  public static function getPathBooleanBackend():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_pathBoolean_PathBooleanBackend.getPathBooleanBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getPathBounds(path:Path, out:RectangleLike):Bool {
+  public static function getPathBounds(path:Dynamic, out:RectangleLike):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_GetPathBounds.getPathBounds, cast ([path, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getPathContourLengths(path:Path, ?tolerance:Dynamic):Array<Float> {
+  public static function getPathContourLengths(path:Dynamic, ?tolerance:Dynamic):Array<Float> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_GetPathContourLengths.getPathContourLengths, cast ([path, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getPathContourOrientation(path:Path, ?tolerance:Dynamic):String {
+  public static function getPathContourOrientation(path:Dynamic, ?tolerance:Dynamic):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_GetPathSignedArea.getPathContourOrientation, cast ([path, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getPathLastPoint(path:Path):Null<Array<Float>> {
+  public static function getPathLastPoint(path:Dynamic):Null<Array<Float>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_Path.getPathLastPoint, cast ([path] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getPathLength(path:Path, ?tolerance:Dynamic):Float {
+  public static function getPathLength(path:Dynamic, ?tolerance:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_GetPathLength.getPathLength, cast ([path, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getPathNearestPoint(path:Path, px:Float, py:Float, out:Vector2Like, ?tolerance:Dynamic):Float {
+  public static function getPathNearestPoint(path:Dynamic, px:Float, py:Float, out:Vector2Like, ?tolerance:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_GetPathNearestPoint.getPathNearestPoint, cast ([path, px, py, out, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getPathPointAtDistance(path:Path, distance:Float, out:Vector2Like, ?tolerance:Dynamic):Bool {
+  public static function getPathPointAtDistance(path:Dynamic, distance:Float, out:Vector2Like, ?tolerance:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_GetPathPointAtDistance.getPathPointAtDistance, cast ([path, distance, out, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getPathPositionAtDistance(path:Path, distance:Float, pointOut:Vector2Like, tangentOut:Vector2Like, ?tolerance:Dynamic):Bool {
+  public static function getPathPositionAtDistance(path:Dynamic, distance:Float, pointOut:Vector2Like, tangentOut:Vector2Like, ?tolerance:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_GetPathPointAtDistance.getPathPositionAtDistance, cast ([path, distance, pointOut, tangentOut, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getPathSegmentPointAtParameter(path:Path, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
+  public static function getPathSegmentPointAtParameter(path:Dynamic, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_GetPathSegmentAtParameter.getPathSegmentPointAtParameter, cast ([path, segmentIndex, t, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getPathSegmentTangentAtParameter(path:Path, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
+  public static function getPathSegmentTangentAtParameter(path:Dynamic, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_GetPathSegmentAtParameter.getPathSegmentTangentAtParameter, cast ([path, segmentIndex, t, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getPathSignedArea(path:Path, ?tolerance:Dynamic):Float {
+  public static function getPathSignedArea(path:Dynamic, ?tolerance:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_GetPathSignedArea.getPathSignedArea, cast ([path, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getPathTangentAtDistance(path:Path, distance:Float, out:Vector2Like, ?tolerance:Dynamic):Bool {
+  public static function getPathTangentAtDistance(path:Dynamic, distance:Float, out:Vector2Like, ?tolerance:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_GetPathPointAtDistance.getPathTangentAtDistance, cast ([path, distance, out, tolerance] : Array<Dynamic>));
     return cast null;
   }
@@ -12790,27 +12572,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function getQuadBatchCapacity(source:QuadBatch):Float {
+  public static function getQuadBatchCapacity(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.getQuadBatchCapacity, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getQuadBatchInstanceId(source:QuadBatch, index:Float):Float {
+  public static function getQuadBatchInstanceId(source:Dynamic, index:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.getQuadBatchInstanceId, cast ([source, index] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getQuadBatchInstanceTransform(out:Vector2Like, source:QuadBatch, index:Float):Bool {
+  public static function getQuadBatchInstanceTransform(out:Vector2Like, source:Dynamic, index:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.getQuadBatchInstanceTransform, cast ([out, source, index] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getQuadBatchRuntime(source:QuadBatch):QuadBatchRuntime {
+  public static function getQuadBatchRuntime(source:Dynamic):QuadBatchRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.getQuadBatchRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getQuadBatchSignals(source:QuadBatch):Null<QuadBatchSignals> {
+  public static function getQuadBatchSignals(source:Dynamic):Null<QuadBatchSignals> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.getQuadBatchSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -12946,62 +12728,62 @@ class Sdk {
     return cast null;
   }
 
-  public static function getRenderProxy2D(state:RenderState, source:Renderable):Null<RenderProxy2D> {
+  public static function getRenderProxy2D(state:Dynamic, source:Renderable):Null<RenderProxy2D> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderProxy.getRenderProxy2D, cast ([state, source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRenderProxyAdapter(state:RenderState, source:Renderable):Null<RenderProxyAdapter> {
+  public static function getRenderProxyAdapter(state:Dynamic, source:Renderable):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderProxyAdapter.getRenderProxyAdapter, cast ([state, source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRenderProxyCache(state:RenderState, source:Renderable):Null<RenderCache> {
+  public static function getRenderProxyCache(state:Dynamic, source:Renderable):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderCache.getRenderProxyCache, cast ([state, source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRenderStateRuntime(state:RenderState):RenderStateRuntime {
+  public static function getRenderStateRuntime(state:Dynamic):RenderStateRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderState.getRenderStateRuntime, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRenderViewRuntime(source:RenderView):RenderViewRuntime {
+  public static function getRenderViewRuntime(source:Dynamic):RenderViewRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_RenderView.getRenderViewRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getResourceLoadItemStatus(loader:ResourceLoader, key:String):ResourceLoadItemStatus {
+  public static function getResourceLoadItemStatus(loader:Dynamic, key:String):ResourceLoadItemStatus {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_loader_ResourceLoader.getResourceLoadItemStatus, cast ([loader, key] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getResourceLoadProgress(loader:ResourceLoader, ?group:String):Float {
+  public static function getResourceLoadProgress(loader:Dynamic, ?group:String):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_loader_ResourceLoader.getResourceLoadProgress, cast ([loader, group] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextBottomScrollV(source:RichText):Float {
+  public static function getRichTextBottomScrollV(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.getRichTextBottomScrollV, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextCharBoundaries(out:Rectangle, layout:TextLayoutResult, charIndex:Float):Bool {
+  public static function getRichTextCharBoundaries(out:Dynamic, layout:TextLayoutResult, charIndex:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textlayout_RichTextQuery.getRichTextCharBoundaries, cast ([out, layout, charIndex] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextCharIndexAtPoint(source:RichText, x:Float, y:Float):Float {
+  public static function getRichTextCharIndexAtPoint(source:Dynamic, x:Float, y:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.getRichTextCharIndexAtPoint, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextContent(runtime:RichTextRuntime):RichTextContent {
+  public static function getRichTextContent(runtime:RichTextRuntime):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textlayout_RichTextContent.getRichTextContent, cast ([runtime] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextDefaultTextFormat(source:RichText):TextFormat {
+  public static function getRichTextDefaultTextFormat(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.getRichTextDefaultTextFormat, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -13011,30 +12793,30 @@ class Sdk {
     return cast null;
   }
 
-  public static function getRichTextFormatRangeAt(out:TextFormat, source:RichText, index:Float):Void {
+  public static function getRichTextFormatRangeAt(out:Dynamic, source:Dynamic, index:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.getRichTextFormatRangeAt, cast ([out, source, index] : Array<Dynamic>));
   }
 
-  public static function getRichTextFormatRangeByIndex(out:TextFormatRange, source:RichText, i:Float):Bool {
+  public static function getRichTextFormatRangeByIndex(out:Dynamic, source:Dynamic, i:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.getRichTextFormatRangeByIndex, cast ([out, source, i] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextFormatRangeCount(source:RichText):Float {
+  public static function getRichTextFormatRangeCount(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.getRichTextFormatRangeCount, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextFormatRangesIn(out:Array<TextFormatRange>, source:RichText, beginIndex:Float, endIndex:Float):Void {
+  public static function getRichTextFormatRangesIn(out:Array<Dynamic>, source:Dynamic, beginIndex:Float, endIndex:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.getRichTextFormatRangesIn, cast ([out, source, beginIndex, endIndex] : Array<Dynamic>));
   }
 
-  public static function getRichTextLength(source:RichText):Float {
+  public static function getRichTextLength(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.getRichTextLength, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextLineCount(source:RichText):Float {
+  public static function getRichTextLineCount(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.getRichTextLineCount, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -13054,7 +12836,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getRichTextLineMetrics(source:RichText, lineIndex:Float):Null<TextLineMetrics> {
+  public static function getRichTextLineMetrics(source:Dynamic, lineIndex:Float):Null<TextLineMetrics> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.getRichTextLineMetrics, cast ([source, lineIndex] : Array<Dynamic>));
     return cast null;
   }
@@ -13074,12 +12856,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getRichTextMaxScrollH(source:RichText):Float {
+  public static function getRichTextMaxScrollH(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.getRichTextMaxScrollH, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextMaxScrollV(source:RichText):Float {
+  public static function getRichTextMaxScrollV(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.getRichTextMaxScrollV, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -13089,12 +12871,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getRichTextPasswordCharacter(source:RichText):Null<String> {
+  public static function getRichTextPasswordCharacter(source:Dynamic):Null<String> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.getRichTextPasswordCharacter, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextRuntime(source:RichText):RichTextRuntime {
+  public static function getRichTextRuntime(source:Dynamic):RichTextRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.getRichTextRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -13108,17 +12890,17 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_textlayout_RichTextQuery.getRichTextSelectionRectangles, cast ([out, beginIndex, endIndex, layout] : Array<Dynamic>));
   }
 
-  public static function getRichTextString(source:RichText):String {
+  public static function getRichTextString(source:Dynamic):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.getRichTextString, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextTextHeight(source:RichText):Float {
+  public static function getRichTextTextHeight(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.getRichTextTextHeight, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextTextWidth(source:RichText):Float {
+  public static function getRichTextTextWidth(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.getRichTextTextWidth, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -13128,31 +12910,31 @@ class Sdk {
     return cast null;
   }
 
-  public static function getScale9ShapeRuntime(source:Scale9Shape):Scale9ShapeRuntime {
+  public static function getScale9ShapeRuntime(source:Dynamic):Scale9ShapeRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_shape_Scale9Shape.getScale9ShapeRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSceneMaterialTextures(registry:SceneMaterialTextureRegistry, material:Material, out:Array<Texture>):Void {
+  public static function getSceneMaterialTextures(registry:SceneMaterialTextureRegistry, material:Dynamic, out:Array<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneResources__internal__SceneMaterialTextureRegistryValues.getSceneMaterialTextures, cast ([registry, material, out] : Array<Dynamic>));
   }
 
-  public static function getSceneNodeRuntime(source:SceneNode):SceneNodeRuntime {
+  public static function getSceneNodeRuntime(source:Dynamic):SceneNodeRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Scene.getSceneNodeRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSceneNodeSignals(source:SceneNode):Null<NodeSignals> {
+  public static function getSceneNodeSignals(source:Dynamic):Null<NodeSignals> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Scene.getSceneNodeSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSceneNodeWorldAlpha(source:SceneNode):Float {
+  public static function getSceneNodeWorldAlpha(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Scene.getSceneNodeWorldAlpha, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSceneNodeWorldBounds(out:AabbLike, node:SceneNode):Void {
+  public static function getSceneNodeWorldBounds(out:AabbLike, node:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_scene_Scene.getSceneNodeWorldBounds, cast ([out, node] : Array<Dynamic>));
   }
 
@@ -13161,7 +12943,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getSceneResourceTextures(scene:SceneNode, registry:SceneMaterialTextureRegistry, out:Array<Texture>):Void {
+  public static function getSceneResourceTextures(scene:Dynamic, registry:SceneMaterialTextureRegistry, out:Array<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneResources_GetSceneResourceTextures.getSceneResourceTextures, cast ([scene, registry, out] : Array<Dynamic>));
   }
 
@@ -13230,7 +13012,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getSelectableRichTextSelectionText(manager:SelectableRichTextManager):String {
+  public static function getSelectableRichTextSelectionText(manager:Dynamic):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_SelectableRichTextManager.getSelectableRichTextSelectionText, cast ([manager] : Array<Dynamic>));
     return cast null;
   }
@@ -13250,11 +13032,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function getShapeBounds(out:Rectangle, source:Shape):Void {
+  public static function getShapeBounds(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.getShapeBounds, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function getShapeCommandCount(source:Shape):Float {
+  public static function getShapeCommandCount(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.getShapeCommandCount, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -13264,7 +13046,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getShapeRuntime(source:Shape):ShapeRuntime {
+  public static function getShapeRuntime(source:Dynamic):ShapeRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.getShapeRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -13308,7 +13090,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getSocketReadyState(socket:Socket):SocketReadyState {
+  public static function getSocketReadyState(socket:Dynamic):SocketReadyState {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_socket_Socket.getSocketReadyState, cast ([socket] : Array<Dynamic>));
     return cast null;
   }
@@ -13333,25 +13115,25 @@ class Sdk {
     return cast null;
   }
 
-  public static function getSpotLightConeDegrees(out:SpotLightConeAngles, source:SpotLight):Void {
+  public static function getSpotLightConeDegrees(out:SpotLightConeAngles, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_lighting_SpotLight.getSpotLightConeDegrees, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function getSpriteOrigin(out:Vector2, source:Sprite):Void {
+  public static function getSpriteOrigin(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.getSpriteOrigin, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function getSpriteRegion(source:Sprite):Null<TextureAtlasRegion> {
+  public static function getSpriteRegion(source:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.getSpriteRegion, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSpriteRuntime(source:Sprite):SpriteRuntime {
+  public static function getSpriteRuntime(source:Dynamic):SpriteRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.getSpriteRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSpritesheetAnimation(spritesheet:Spritesheet, label:String):Null<SpritesheetAnimation> {
+  public static function getSpritesheetAnimation(spritesheet:Dynamic, label:String):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.getSpritesheetAnimation, cast ([spritesheet, label] : Array<Dynamic>));
     return cast null;
   }
@@ -13361,27 +13143,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function getSpritesheetPlayerFrame(player:SpritesheetPlayer, spritesheet:Spritesheet):Null<SpritesheetFrame> {
+  public static function getSpritesheetPlayerFrame(player:Dynamic, spritesheet:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.getSpritesheetPlayerFrame, cast ([player, spritesheet] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSpritesheetPlayerFrameAt(player:SpritesheetPlayer, spritesheet:Spritesheet, frameOffset:Float):Null<SpritesheetFrame> {
+  public static function getSpritesheetPlayerFrameAt(player:Dynamic, spritesheet:Dynamic, frameOffset:Float):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.getSpritesheetPlayerFrameAt, cast ([player, spritesheet, frameOffset] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSpriteSignals(source:Sprite):Null<SpriteSignals> {
+  public static function getSpriteSignals(source:Dynamic):Null<SpriteSignals> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.getSpriteSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getStageRuntime(source:Stage):StageRuntime {
+  public static function getStageRuntime(source:Dynamic):StageRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_Stage.getStageRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getStageSignals(source:Stage):Null<StageSignals> {
+  public static function getStageSignals(source:Dynamic):Null<StageSignals> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_Stage.getStageSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -13481,130 +13263,130 @@ class Sdk {
     return cast null;
   }
 
-  public static function getSurfaceColorBoundsRectangle(source:SurfaceRegion, mask:Float, color:Float, ?findColor:Bool):Null<RectangleLike> {
+  public static function getSurfaceColorBoundsRectangle(source:Dynamic, mask:Float, color:Float, ?findColor:Bool):Null<RectangleLike> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.getSurfaceColorBoundsRectangle, cast ([source, mask, color, findColor] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSurfaceCoverage(source:Surface, backgroundColor:Float, ?channelTolerance:Float):Float {
+  public static function getSurfaceCoverage(source:Dynamic, backgroundColor:Float, ?channelTolerance:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.getSurfaceCoverage, cast ([source, backgroundColor, channelTolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSurfaceHistogram(source:SurfaceRegion):SurfaceHistogram {
+  public static function getSurfaceHistogram(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.getSurfaceHistogram, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSurfaceMismatch(source:Surface, other:Surface, ?channelTolerance:Float):SurfaceMismatch {
+  public static function getSurfaceMismatch(source:Dynamic, other:Dynamic, ?channelTolerance:Float):SurfaceMismatch {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.getSurfaceMismatch, cast ([source, other, channelTolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSurfacePixel(source:Surface, x:Float, y:Float):Float {
+  public static function getSurfacePixel(source:Dynamic, x:Float, y:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.getSurfacePixel, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSurfacePixelChannel(source:Surface, x:Float, y:Float, channel:ImageChannel):Float {
+  public static function getSurfacePixelChannel(source:Dynamic, x:Float, y:Float, channel:ImageChannel):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.getSurfacePixelChannel, cast ([source, x, y, channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSurfacePixelLuminance(source:Surface, x:Float, y:Float):Float {
+  public static function getSurfacePixelLuminance(source:Dynamic, x:Float, y:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.getSurfacePixelLuminance, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSurfacePixelRgb(source:Surface, x:Float, y:Float):Float {
+  public static function getSurfacePixelRgb(source:Dynamic, x:Float, y:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.getSurfacePixelRgb, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextFieldSignals(source:RichText):Null<TextFieldSignals> {
+  public static function getTextFieldSignals(source:Dynamic):Null<TextFieldSignals> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.getTextFieldSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextFormatAscent(format:TextFormat):Float {
+  public static function getTextFormatAscent(format:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textlayout_TextFormat.getTextFormatAscent, cast ([format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextFormatDescent(format:TextFormat):Float {
+  public static function getTextFormatDescent(format:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textlayout_TextFormat.getTextFormatDescent, cast ([format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextFormatHeight(format:TextFormat):Float {
+  public static function getTextFormatHeight(format:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textlayout_TextFormat.getTextFormatHeight, cast ([format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextFormatLeading(format:TextFormat):Float {
+  public static function getTextFormatLeading(format:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textlayout_TextFormat.getTextFormatLeading, cast ([format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextInputCaretIndex(source:RichText):Float {
+  public static function getTextInputCaretIndex(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.getTextInputCaretIndex, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextInputCaretRectangle(out:TextSelectionRectangle, source:RichText, layout:TextLayoutResult):Void {
+  public static function getTextInputCaretRectangle(out:TextSelectionRectangle, source:Dynamic, layout:TextLayoutResult):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.getTextInputCaretRectangle, cast ([out, source, layout] : Array<Dynamic>));
   }
 
-  public static function getTextInputCharacterIndexAtPoint(source:RichText, layout:TextLayoutResult, x:Float, y:Float):Float {
+  public static function getTextInputCharacterIndexAtPoint(source:Dynamic, layout:TextLayoutResult, x:Float, y:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.getTextInputCharacterIndexAtPoint, cast ([source, layout, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextInputDisplayText(source:RichText):String {
+  public static function getTextInputDisplayText(source:Dynamic):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.getTextInputDisplayText, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextInputSelectionBeginIndex(source:RichText):Float {
+  public static function getTextInputSelectionBeginIndex(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextInputSelectionEndIndex(source:RichText):Float {
+  public static function getTextInputSelectionEndIndex(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextInputSelectionRectangles(out:Array<TextSelectionRectangle>, source:RichText, layout:TextLayoutResult):Void {
+  public static function getTextInputSelectionRectangles(out:Array<TextSelectionRectangle>, source:Dynamic, layout:TextLayoutResult):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.getTextInputSelectionRectangles, cast ([out, source, layout] : Array<Dynamic>));
   }
 
-  public static function getTextInputSelectionText(source:RichText):String {
+  public static function getTextInputSelectionText(source:Dynamic):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.getTextInputSelectionText, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextInputState(node:RichText):Null<TextInputState> {
+  public static function getTextInputState(node:Dynamic):Null<TextInputState> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInput.getTextInputState, cast ([node] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextLabelFormat(source:TextLabel):TextFormat {
+  public static function getTextLabelFormat(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_TextLabel.getTextLabelFormat, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextLabelRuntime(source:TextLabel):TextLabelRuntime {
+  public static function getTextLabelRuntime(source:Dynamic):TextLabelRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_TextLabel.getTextLabelRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextLabelString(source:TextLabel):String {
+  public static function getTextLabelString(source:Dynamic):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_TextLabel.getTextLabelString, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextLayout(source:TextLabel):Null<TextLayoutResult> {
+  public static function getTextLayout(source:Dynamic):Null<TextLayoutResult> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_text_TextLabelLayout.getTextLayout, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -13614,7 +13396,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getTextLayoutMetrics(out:TextMetrics, source:TextLabel):Void {
+  public static function getTextLayoutMetrics(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_TextLabelLayout.getTextLayoutMetrics, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -13632,11 +13414,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_textlayout_TextLineBreaks.getTextLineBreaks, cast ([out, text] : Array<Dynamic>));
   }
 
-  public static function getTextMetrics(out:TextMetrics, layout:TextLayoutResult):Void {
+  public static function getTextMetrics(out:Dynamic, layout:TextLayoutResult):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textlayout_TextMetrics.getTextMetrics, cast ([out, layout] : Array<Dynamic>));
   }
 
-  public static function getTextSegmenterBackend():TextSegmenterBackend {
+  public static function getTextSegmenterBackend():Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textsegment_TextSegmenterBackend.getTextSegmenterBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -13646,32 +13428,32 @@ class Sdk {
     return cast null;
   }
 
-  public static function getTextShaperSignals():Null<TextShaperSignals> {
+  public static function getTextShaperSignals():Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaperSignals.getTextShaperSignals, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextureAtlasByteSize(atlas:TextureAtlas):Float {
+  public static function getTextureAtlasByteSize(atlas:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlas.getTextureAtlasByteSize, cast ([atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextureAtlasRegionById(atlas:TextureAtlas, id:Float):Null<TextureAtlasRegion> {
+  public static function getTextureAtlasRegionById(atlas:Dynamic, id:Float):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionById, cast ([atlas, id] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextureAtlasRegionByName(atlas:TextureAtlas, name:String):Null<TextureAtlasRegion> {
+  public static function getTextureAtlasRegionByName(atlas:Dynamic, name:String):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionByName, cast ([atlas, name] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextureAtlasRegionSequence(atlas:TextureAtlas, prefix:String):Array<TextureAtlasRegion> {
+  public static function getTextureAtlasRegionSequence(atlas:Dynamic, prefix:String):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionSequence, cast ([atlas, prefix] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextureAtlasRegionUv(region:TextureAtlasRegion, imageWidth:Float, imageHeight:Float, out:RectangleLike):RectangleLike {
+  public static function getTextureAtlasRegionUv(region:Dynamic, imageWidth:Float, imageHeight:Float, out:RectangleLike):RectangleLike {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionUv, cast ([region, imageWidth, imageHeight, out] : Array<Dynamic>));
     return cast null;
   }
@@ -13699,57 +13481,57 @@ class Sdk {
     return cast null;
   }
 
-  public static function getTilemapColumnAtX(source:Tilemap, x:Float):Float {
+  public static function getTilemapColumnAtX(source:Dynamic, x:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.getTilemapColumnAtX, cast ([source, x] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTilemapColumnRowAtPoint(out:Vector2Like, source:Tilemap, x:Float, y:Float):Bool {
+  public static function getTilemapColumnRowAtPoint(out:Vector2Like, source:Dynamic, x:Float, y:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.getTilemapColumnRowAtPoint, cast ([out, source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTilemapRowAtY(source:Tilemap, y:Float):Float {
+  public static function getTilemapRowAtY(source:Dynamic, y:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.getTilemapRowAtY, cast ([source, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTilemapRuntime(source:Tilemap):TilemapRuntime {
+  public static function getTilemapRuntime(source:Dynamic):TilemapRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.getTilemapRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTilemapSignals(source:Tilemap):Null<TilemapSignals> {
+  public static function getTilemapSignals(source:Dynamic):Null<TilemapSignals> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.getTilemapSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTilemapTile(tilemap:Tilemap, column:Float, row:Float):Float {
+  public static function getTilemapTile(tilemap:Dynamic, column:Float, row:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.getTilemapTile, cast ([tilemap, column, row] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTilemapTileAtPoint(source:Tilemap, point:Vector2Like):Float {
+  public static function getTilemapTileAtPoint(source:Dynamic, point:Vector2Like):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.getTilemapTileAtPoint, cast ([source, point] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTilemapTileAtPointXY(source:Tilemap, x:Float, y:Float):Float {
+  public static function getTilemapTileAtPointXY(source:Dynamic, x:Float, y:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.getTilemapTileAtPointXY, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTilemapTileRect(out:Rectangle, source:Tilemap, column:Float, row:Float):Bool {
+  public static function getTilemapTileRect(out:Dynamic, source:Dynamic, column:Float, row:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.getTilemapTileRect, cast ([out, source, column, row] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTimelineCurrentLabel(timeline:Timeline):Null<TimelineLabel> {
+  public static function getTimelineCurrentLabel(timeline:Dynamic):Null<TimelineLabel> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_timeline_Timeline.getTimelineCurrentLabel, cast ([timeline] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTimelineFrameScript(timeline:Timeline, frame:Dynamic):Null<FrameScript> {
+  public static function getTimelineFrameScript(timeline:Dynamic, frame:Dynamic):Null<FrameScript> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_timeline_Timeline.getTimelineFrameScript, cast ([timeline, frame] : Array<Dynamic>));
     return cast null;
   }
@@ -13789,7 +13571,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getTweensOf(manager:TweenManager, target:Dynamic):Array<Dynamic> {
+  public static function getTweensOf(manager:Dynamic, target:Dynamic):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.getTweensOf, cast ([manager, target] : Array<Dynamic>));
     return cast null;
   }
@@ -13908,12 +13690,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getVelocity(field:VelocityField, source:Dynamic, out:Velocity2D):Velocity2D {
+  public static function getVelocity(field:Dynamic, source:Dynamic, out:Velocity2D):Velocity2D {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_velocity_VelocityField.getVelocity, cast ([field, source, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getVelocitySampleAt(sample:VelocitySample, currentWorldTransform:Matrix, pointX:Float, pointY:Float, out:Velocity2D):Velocity2D {
+  public static function getVelocitySampleAt(sample:Dynamic, currentWorldTransform:Dynamic, pointX:Float, pointY:Float, out:Velocity2D):Velocity2D {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_velocity_VelocitySample.getVelocitySampleAt, cast ([sample, currentWorldTransform, pointX, pointY, out] : Array<Dynamic>));
     return cast null;
   }
@@ -13928,42 +13710,42 @@ class Sdk {
     return cast null;
   }
 
-  public static function getVideoChannelCurrentTime(channel:VideoChannel):Float {
+  public static function getVideoChannelCurrentTime(channel:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_VideoChannel.getVideoChannelCurrentTime, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getVideoChannelDuration(channel:VideoChannel):Float {
+  public static function getVideoChannelDuration(channel:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_VideoChannel.getVideoChannelDuration, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getVideoChannelHeight(channel:VideoChannel):Float {
+  public static function getVideoChannelHeight(channel:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_VideoChannel.getVideoChannelHeight, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getVideoChannelWidth(channel:VideoChannel):Float {
+  public static function getVideoChannelWidth(channel:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_VideoChannel.getVideoChannelWidth, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getVideoResourceDuration(resource:VideoResource):Float {
+  public static function getVideoResourceDuration(resource:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_video_VideoResource.getVideoResourceDuration, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getVideoResourceHeight(resource:VideoResource):Float {
+  public static function getVideoResourceHeight(resource:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_video_VideoResource.getVideoResourceHeight, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getVideoResourceWidth(resource:VideoResource):Float {
+  public static function getVideoResourceWidth(resource:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_video_VideoResource.getVideoResourceWidth, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getVideoRuntime(source:Video):VideoRuntime {
+  public static function getVideoRuntime(source:Dynamic):VideoRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobject_Video.getVideoRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -13991,7 +13773,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getWebcamStreamRuntime(stream:WebcamStream):Null<WebcamStreamRuntime> {
+  public static function getWebcamStreamRuntime(stream:Dynamic):Null<WebcamStreamRuntime> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_webcam_Webcam.getWebcamStreamRuntime, cast ([stream] : Array<Dynamic>));
     return cast null;
   }
@@ -14006,7 +13788,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getWgpuAdapterCapabilities(adapter:Dynamic):WgpuAdapterCapabilities {
+  public static function getWgpuAdapterCapabilities(adapter:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuAdapterCapabilities.getWgpuAdapterCapabilities, cast ([adapter] : Array<Dynamic>));
     return cast null;
   }
@@ -14021,17 +13803,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function getWgpuEffectGradientRampTexture(state:WgpuRenderState, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
+  public static function getWgpuEffectGradientRampTexture(state:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuEffectGradientRamp.getWgpuEffectGradientRampTexture, cast ([state, colors, alphas, ratios] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getWgpuEffectPassState(state:WgpuRenderState):{ var uniformBG:Dynamic; var textureBGLayout:Dynamic; var uniformBGLayout:Dynamic; var sampler:Dynamic; var acquireSlot:Dynamic; var writeSlot:Dynamic; var beginPass:Dynamic; } {
+  public static function getWgpuEffectPassState(state:Dynamic):{ var uniformBG:Dynamic; var textureBGLayout:Dynamic; var uniformBGLayout:Dynamic; var sampler:Dynamic; var acquireSlot:Dynamic; var writeSlot:Dynamic; var beginPass:Dynamic; } {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuEffectPass.getWgpuEffectPassState, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getWgpuEffectPipeline(state:WgpuRenderState, key:String, fragmentWGSL:String, ?blend:String):WgpuEffectPipeline {
+  public static function getWgpuEffectPipeline(state:Dynamic, key:String, fragmentWGSL:String, ?blend:String):WgpuEffectPipeline {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuEffectProgramCache.getWgpuEffectPipeline, cast ([state, key, fragmentWGSL, blend] : Array<Dynamic>));
     return cast null;
   }
@@ -14041,17 +13823,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function getWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMaterialRenderer> {
+  public static function getWgpuMaterialRenderer(state:Dynamic, kind:Kind):Null<WgpuMaterialRenderer> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuMaterialRegistry.getWgpuMaterialRenderer, cast ([state, kind] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getWgpuMaterialSampler(state:WgpuRenderState, texture:Null<Texture>):Dynamic {
+  public static function getWgpuMaterialSampler(state:Dynamic, texture:Null<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.getWgpuMaterialSampler, cast ([state, texture] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getWgpuMeshMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMeshMaterialRenderer> {
+  public static function getWgpuMeshMaterialRenderer(state:Dynamic, kind:Kind):Null<WgpuMeshMaterialRenderer> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuMeshMaterialRegistry.getWgpuMeshMaterialRenderer, cast ([state, kind] : Array<Dynamic>));
     return cast null;
   }
@@ -14076,12 +13858,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getWgpuPipeline(state:WgpuRenderState, blendMode:Null<BlendMode>, stencilMode:StencilMode__wgpuShader):Dynamic {
+  public static function getWgpuPipeline(state:Dynamic, blendMode:Null<BlendMode>, stencilMode:StencilMode__wgpuShader):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuShader.getWgpuPipeline, cast ([state, blendMode, stencilMode] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getWgpuQuadBatchPipeline(state:WgpuRenderState, resources:WgpuQuadBatchResources, module:Dynamic, hasMaterialData:Bool, blendMode:Null<BlendMode>):Dynamic {
+  public static function getWgpuQuadBatchPipeline(state:Dynamic, resources:WgpuQuadBatchResources, module:Dynamic, hasMaterialData:Bool, blendMode:Null<BlendMode>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuSpriteBatch.getWgpuQuadBatchPipeline, cast ([state, resources, module, hasMaterialData, blendMode] : Array<Dynamic>));
     return cast null;
   }
@@ -14091,12 +13873,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function getWgpuRenderCacheTarget(state:WgpuRenderState, cache:RenderCache):Null<WgpuRenderTarget> {
+  public static function getWgpuRenderCacheTarget(state:Dynamic, cache:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuCache.getWgpuRenderCacheTarget, cast ([state, cache] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Null<WgpuRenderEffectRunner> {
+  public static function getWgpuRenderEffectRunner(state:Dynamic, kind:String):Null<WgpuRenderEffectRunner> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectRegistry.getWgpuRenderEffectRunner, cast ([state, kind] : Array<Dynamic>));
     return cast null;
   }
@@ -14106,27 +13888,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function getWgpuRenderProxyColorTransform(renderProxy:RenderProxy):Null<ColorTransform> {
+  public static function getWgpuRenderProxyColorTransform(renderProxy:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuDraw.getWgpuRenderProxyColorTransform, cast ([renderProxy] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getWgpuRenderStateRuntime(state:WgpuRenderState):WgpuRenderStateRuntime {
+  public static function getWgpuRenderStateRuntime(state:Dynamic):WgpuRenderStateRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuRenderState.getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getWgpuRenderStats(state:WgpuRenderState):WgpuRenderStats {
+  public static function getWgpuRenderStats(state:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuRenderStats.getWgpuRenderStats, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getWgpuSampler(state:WgpuRenderState, filter:Dynamic, wrapU:TextureWrap, wrapV:TextureWrap, ?mipmapFilter:Dynamic, ?maxAnisotropy:Dynamic):Dynamic {
+  public static function getWgpuSampler(state:Dynamic, filter:Dynamic, wrapU:TextureWrap, wrapV:TextureWrap, ?mipmapFilter:Dynamic, ?maxAnisotropy:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuRenderState.getWgpuSampler, cast ([state, filter, wrapU, wrapV, mipmapFilter, maxAnisotropy] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getWgpuSceneRuntime(state:WgpuRenderState):WgpuSceneRuntime {
+  public static function getWgpuSceneRuntime(state:Dynamic):WgpuSceneRuntime {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuSceneRuntimeValues.getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     return cast null;
   }
@@ -14146,7 +13928,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getWgpuVelocityWriter(state:WgpuRenderState, kind:Kind):Null<WgpuVelocityWriter> {
+  public static function getWgpuVelocityWriter(state:Dynamic, kind:Kind):Null<WgpuVelocityWriter> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuVelocity.getWgpuVelocityWriter, cast ([state, kind] : Array<Dynamic>));
     return cast null;
   }
@@ -14214,31 +13996,31 @@ class Sdk {
 
   public static final GL_UV_TRANSFORM_VERTEX_GLSL:Dynamic = Facade_Sdk_flighthq_sceneGl__internal__GlMeshProgramValues.GL_UV_TRANSFORM_VERTEX_GLSL;
 
-  public static function glowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceGlowOptions):Void {
+  public static function glowSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceGlowOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.glowSurface, cast ([out, scratch, source, options] : Array<Dynamic>));
   }
 
-  public static function gotoAndPlayMovieClip(clip:MovieClip, frame:Dynamic):Void {
+  public static function gotoAndPlayMovieClip(clip:Dynamic, frame:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.gotoAndPlayMovieClip, cast ([clip, frame] : Array<Dynamic>));
   }
 
-  public static function gotoAndPlayTimeline(timeline:Timeline, frame:Dynamic):Void {
+  public static function gotoAndPlayTimeline(timeline:Dynamic, frame:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_timeline_Timeline.gotoAndPlayTimeline, cast ([timeline, frame] : Array<Dynamic>));
   }
 
-  public static function gotoAndStopMovieClip(clip:MovieClip, frame:Dynamic):Void {
+  public static function gotoAndStopMovieClip(clip:Dynamic, frame:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.gotoAndStopMovieClip, cast ([clip, frame] : Array<Dynamic>));
   }
 
-  public static function gotoAndStopTimeline(timeline:Timeline, frame:Dynamic):Void {
+  public static function gotoAndStopTimeline(timeline:Dynamic, frame:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_timeline_Timeline.gotoAndStopTimeline, cast ([timeline, frame] : Array<Dynamic>));
   }
 
-  public static function gradientBevelSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ramp:Dynamic, ?options:SurfaceGradientBevelOptions):Void {
+  public static function gradientBevelSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ramp:Dynamic, ?options:SurfaceGradientBevelOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.gradientBevelSurface, cast ([out, scratch, source, ramp, options] : Array<Dynamic>));
   }
 
-  public static function gradientGlowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ramp:Dynamic, ?options:SurfaceGradientGlowOptions):Void {
+  public static function gradientGlowSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ramp:Dynamic, ?options:SurfaceGradientGlowOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.gradientGlowSurface, cast ([out, scratch, source, ramp, options] : Array<Dynamic>));
   }
 
@@ -14246,7 +14028,7 @@ class Sdk {
 
   public static final HALF_PI:Dynamic = Facade_Sdk_flighthq_math_Constants.HALF_PI;
 
-  public static function handleTextInputKeyboard(source:RichText, data:KeyboardEventData, ?options:HandleTextInputKeyboardOptions):Bool {
+  public static function handleTextInputKeyboard(source:Dynamic, data:KeyboardEventData, ?options:HandleTextInputKeyboardOptions):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.handleTextInputKeyboard, cast ([source, data, options] : Array<Dynamic>));
     return cast null;
   }
@@ -14271,7 +14053,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasAudioResourceBuffer(resource:AudioResource):Bool {
+  public static function hasAudioResourceBuffer(resource:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_audio_AudioResource.hasAudioResourceBuffer, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
@@ -14321,7 +14103,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasEntityRuntime(source:Entity):Bool {
+  public static function hasEntityRuntime(source:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_entity_Entity.hasEntityRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -14331,7 +14113,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasGlMeshGeometryUv1(geometry:MeshGeometry):Bool {
+  public static function hasGlMeshGeometryUv1(geometry:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlMeshUpload.hasGlMeshGeometryUv1, cast ([geometry] : Array<Dynamic>));
     return cast null;
   }
@@ -14341,7 +14123,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasGlRenderEffectRunner(state:GlRenderState, kind:String):Bool {
+  public static function hasGlRenderEffectRunner(state:Dynamic, kind:String):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectRegistry.hasGlRenderEffectRunner, cast ([state, kind] : Array<Dynamic>));
     return cast null;
   }
@@ -14391,17 +14173,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasImageResourceData(resource:ImageResource):Bool {
+  public static function hasImageResourceData(resource:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResource.hasImageResourceData, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hasImageResourcePixels(resource:ImageResource):Bool {
+  public static function hasImageResourcePixels(resource:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResource.hasImageResourcePixels, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hasImageResourceSource(resource:ImageResource):Bool {
+  public static function hasImageResourceSource(resource:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResource.hasImageResourceSource, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
@@ -14431,7 +14213,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasMeshGeometrySkin(geometry:MeshGeometry):Bool {
+  public static function hasMeshGeometrySkin(geometry:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometry.hasMeshGeometrySkin, cast ([geometry] : Array<Dynamic>));
     return cast null;
   }
@@ -14476,7 +14258,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasTextInput(node:RichText):Bool {
+  public static function hasTextInput(node:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInput.hasTextInput, cast ([node] : Array<Dynamic>));
     return cast null;
   }
@@ -14486,22 +14268,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasTweensOf(manager:TweenManager, target:Dynamic):Bool {
+  public static function hasTweensOf(manager:Dynamic, target:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.hasTweensOf, cast ([manager, target] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hasVelocity(field:VelocityField, source:Dynamic):Bool {
+  public static function hasVelocity(field:Dynamic, source:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_velocity_VelocityField.hasVelocity, cast ([field, source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hasVideoResourceElement(resource:VideoResource):Bool {
+  public static function hasVideoResourceElement(resource:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_video_VideoResource.hasVideoResourceElement, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hasWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Bool {
+  public static function hasWgpuRenderEffectRunner(state:Dynamic, kind:String):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectRegistry.hasWgpuRenderEffectRunner, cast ([state, kind] : Array<Dynamic>));
     return cast null;
   }
@@ -14521,22 +14303,22 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.hideWindow, cast ([win] : Array<Dynamic>));
   }
 
-  public static function hitTestAreaQuery(root:DisplayObject, rect:Rectangle, ?out:Array<DisplayObject>):Array<DisplayObject> {
+  public static function hitTestAreaQuery(root:Dynamic, rect:Dynamic, ?out:Array<Dynamic>):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_SpatialQuery.hitTestAreaQuery, cast ([root, rect, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestAreaQueryCircle(root:DisplayObject, cx:Float, cy:Float, radius:Float, ?out:Array<DisplayObject>):Array<DisplayObject> {
+  public static function hitTestAreaQueryCircle(root:Dynamic, cx:Float, cy:Float, radius:Float, ?out:Array<Dynamic>):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_SpatialQuery.hitTestAreaQueryCircle, cast ([root, cx, cy, radius, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestDisplayObjects(source:DisplayObject, other:DisplayObject):Bool {
+  public static function hitTestDisplayObjects(source:Dynamic, other:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_HitTests.hitTestDisplayObjects, cast ([source, other] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestDisplayObjectsShape(source:DisplayObject, other:DisplayObject):Bool {
+  public static function hitTestDisplayObjectsShape(source:Dynamic, other:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_interaction_DisplayObjectOverlap.hitTestDisplayObjectsShape, cast ([source, other] : Array<Dynamic>));
     return cast null;
   }
@@ -14561,22 +14343,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function hitTestQuadBatchPoint(source:QuadBatch, point:Vector2Like):Float {
+  public static function hitTestQuadBatchPoint(source:Dynamic, point:Vector2Like):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.hitTestQuadBatchPoint, cast ([source, point] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestQuadBatchPointExact(source:QuadBatch, point:Vector2Like):Float {
+  public static function hitTestQuadBatchPointExact(source:Dynamic, point:Vector2Like):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.hitTestQuadBatchPointExact, cast ([source, point] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestQuadBatchPointExactXY(source:QuadBatch, x:Float, y:Float):Float {
+  public static function hitTestQuadBatchPointExactXY(source:Dynamic, x:Float, y:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.hitTestQuadBatchPointExactXY, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestQuadBatchPointXY(source:QuadBatch, x:Float, y:Float):Float {
+  public static function hitTestQuadBatchPointXY(source:Dynamic, x:Float, y:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.hitTestQuadBatchPointXY, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
@@ -14620,11 +14402,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Rectangle.inflateRectangle, cast ([out, source, dx, dy] : Array<Dynamic>));
   }
 
-  public static function initAppearanceTrait(target:HasAppearance, ?obj:Dynamic):Void {
+  public static function initAppearanceTrait(target:Dynamic, ?obj:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_HasAppearance.initAppearanceTrait, cast ([target, obj] : Array<Dynamic>));
   }
 
-  public static function initBlendModeTrait(target:HasBlendMode, ?obj:Dynamic):Void {
+  public static function initBlendModeTrait(target:Dynamic, ?obj:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_HasBlendMode.initBlendModeTrait, cast ([target, obj] : Array<Dynamic>));
   }
 
@@ -14632,15 +14414,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_node_HasBoundsRectangle.initBoundsRectangleRuntimeTrait, cast ([target, methods] : Array<Dynamic>));
   }
 
-  public static function initBoundsRectangleTrait(_target:HasBoundsRectangle, ?_obj:Dynamic):Void {
+  public static function initBoundsRectangleTrait(_target:Dynamic, ?_obj:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_HasBoundsRectangle.initBoundsRectangleTrait, cast ([_target, _obj] : Array<Dynamic>));
   }
 
-  public static function initClipTrait(target:HasClip, ?obj:Dynamic):Void {
+  public static function initClipTrait(target:Dynamic, ?obj:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_HasClip.initClipTrait, cast ([target, obj] : Array<Dynamic>));
   }
 
-  public static function initMaterialTrait(target:HasMaterial, ?obj:Dynamic):Void {
+  public static function initMaterialTrait(target:Dynamic, ?obj:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_node_HasMaterial.initMaterialTrait, cast ([target, obj] : Array<Dynamic>));
   }
 
@@ -14660,11 +14442,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_node_HasTransform3d.initTransform3DTrait, cast ([target, obj] : Array<Dynamic>));
   }
 
-  public static function innerGlowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceInnerGlowOptions):Void {
+  public static function innerGlowSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceInnerGlowOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.innerGlowSurface, cast ([out, scratch, source, options] : Array<Dynamic>));
   }
 
-  public static function innerShadowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceInnerShadowOptions):Void {
+  public static function innerShadowSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceInnerShadowOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.innerShadowSurface, cast ([out, scratch, source, options] : Array<Dynamic>));
   }
 
@@ -14673,19 +14455,19 @@ class Sdk {
     return cast null;
   }
 
-  public static function insertRichTextString(source:RichText, index:Float, value:String):Void {
+  public static function insertRichTextString(source:Dynamic, index:Float, value:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.insertRichTextString, cast ([source, index, value] : Array<Dynamic>));
   }
 
-  public static function insertSpatialObject(index:SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Void {
+  public static function insertSpatialObject(index:Dynamic, id:SpatialObjectId, bounds:SpatialAabb):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spatial_SpatialIndex.insertSpatialObject, cast ([index, id, bounds] : Array<Dynamic>));
   }
 
-  public static function insertTextInput(source:RichText, text:String):Void {
+  public static function insertTextInput(source:Dynamic, text:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.insertTextInput, cast ([source, text] : Array<Dynamic>));
   }
 
-  public static function installRenderAdaptHook(state:RenderState, fn:AdaptHook__renderProxy):Void {
+  public static function installRenderAdaptHook(state:Dynamic, fn:AdaptHook__renderProxy):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_RenderProxy.installRenderAdaptHook, cast ([state, fn] : Array<Dynamic>));
   }
 
@@ -14720,11 +14502,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function intersectClipRegions(out:ClipRegion, a:ClipRegion, b:ClipRegion):Void {
+  public static function intersectClipRegions(out:Dynamic, a:Dynamic, b:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.intersectClipRegions, cast ([out, a, b] : Array<Dynamic>));
   }
 
-  public static function intersectPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
+  public static function intersectPaths(a:Dynamic, b:Dynamic, ?out:Dynamic, ?options:PathBooleanOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_pathBoolean_BooleanPaths.intersectPaths, cast ([a, b, out, options] : Array<Dynamic>));
     return cast null;
   }
@@ -14764,7 +14546,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function invalidateClipRegion(clip:ClipRegion):Void {
+  public static function invalidateClipRegion(clip:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.invalidateClipRegion, cast ([clip] : Array<Dynamic>));
   }
 
@@ -14772,15 +14554,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Node.invalidateContent, cast ([target] : Array<Dynamic>));
   }
 
-  public static function invalidateDomFontResource(source:FontResource):Void {
+  public static function invalidateDomFontResource(source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomFontSource.invalidateDomFontResource, cast ([source] : Array<Dynamic>));
   }
 
-  public static function invalidateGlRenderStateCache(state:GlRenderState):Void {
+  public static function invalidateGlRenderStateCache(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlRenderState.invalidateGlRenderStateCache, cast ([state] : Array<Dynamic>));
   }
 
-  public static function invalidateImageResource(resource:ImageResource):Void {
+  public static function invalidateImageResource(resource:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResource.invalidateImageResource, cast ([resource] : Array<Dynamic>));
   }
 
@@ -14930,7 +14712,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function isApplicationRunning(app:Application):Bool {
+  public static function isApplicationRunning(app:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_application_Application.isApplicationRunning, cast ([app] : Array<Dynamic>));
     return cast null;
   }
@@ -14940,22 +14722,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function isAudioChannelPlaying(channel:AudioChannel):Bool {
+  public static function isAudioChannelPlaying(channel:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_AudioChannel.isAudioChannelPlaying, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isAudioResourceEmpty(resource:AudioResource):Bool {
+  public static function isAudioResourceEmpty(resource:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_audio_AudioResource.isAudioResourceEmpty, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isBillboard(source:SceneNode):Bool {
+  public static function isBillboard(source:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_scene_Billboard.isBillboard, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isBlendModeSupported(state:GlRenderState, blendMode:BlendMode):Bool {
+  public static function isBlendModeSupported(state:Dynamic, blendMode:BlendMode):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlDraw.isBlendModeSupported, cast ([state, blendMode] : Array<Dynamic>));
     return cast null;
   }
@@ -14965,7 +14747,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function isBoxInCameraFrustum(camera:Camera, aabb:AabbLike, aspect:Float):Bool {
+  public static function isBoxInCameraFrustum(camera:Dynamic, aabb:AabbLike, aspect:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.isBoxInCameraFrustum, cast ([camera, aabb, aspect] : Array<Dynamic>));
     return cast null;
   }
@@ -14985,17 +14767,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function isClipRegionEmpty(clip:ClipRegion):Bool {
+  public static function isClipRegionEmpty(clip:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.isClipRegionEmpty, cast ([clip] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isClipRegionRectangular(clip:ClipRegion):Bool {
+  public static function isClipRegionRectangular(clip:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.isClipRegionRectangular, cast ([clip] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isClockEffectivelyPaused(clock:Clock):Bool {
+  public static function isClockEffectivelyPaused(clock:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_clock_IsClockEffectivelyPaused.isClockEffectivelyPaused, cast ([clock] : Array<Dynamic>));
     return cast null;
   }
@@ -15090,7 +14872,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function isGlTextureReady(texture:Null<Texture>):Bool {
+  public static function isGlTextureReady(texture:Null<Dynamic>):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlPbrStandardBlock.isGlTextureReady, cast ([texture] : Array<Dynamic>));
     return cast null;
   }
@@ -15105,7 +14887,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function isImageResourceEmpty(resource:ImageResource):Bool {
+  public static function isImageResourceEmpty(resource:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResource.isImageResourceEmpty, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
@@ -15135,17 +14917,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function isMaterialBlended(source:SurfaceMaterial):Bool {
+  public static function isMaterialBlended(source:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_materials_SurfaceMaterial.isMaterialBlended, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isMaterialMasked(source:SurfaceMaterial):Bool {
+  public static function isMaterialMasked(source:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_materials_SurfaceMaterial.isMaterialMasked, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isMaterialOpaque(source:SurfaceMaterial):Bool {
+  public static function isMaterialOpaque(source:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_materials_SurfaceMaterial.isMaterialOpaque, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -15160,7 +14942,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function isMovieClipPlaying(clip:MovieClip):Bool {
+  public static function isMovieClipPlaying(clip:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.isMovieClipPlaying, cast ([clip] : Array<Dynamic>));
     return cast null;
   }
@@ -15215,7 +14997,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function isOrthographicProjection(projection:Projection):Bool {
+  public static function isOrthographicProjection(projection:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.isOrthographicProjection, cast ([projection] : Array<Dynamic>));
     return cast null;
   }
@@ -15225,22 +15007,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function isParticleEmitter3DComplete(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig):Bool {
+  public static function isParticleEmitter3DComplete(emitter:Dynamic, state:Dynamic, config:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_UpdateParticleEmitter3D.isParticleEmitter3DComplete, cast ([emitter, state, config] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isParticleEmitterComplete(emitter:ParticleEmitter, state:ParticleEmitterState, config:ParticleEmitterConfig):Bool {
+  public static function isParticleEmitterComplete(emitter:Dynamic, state:Dynamic, config:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_UpdateParticleEmitter.isParticleEmitterComplete, cast ([emitter, state, config] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isParticleObjectsComplete(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig):Bool {
+  public static function isParticleObjectsComplete(objects:Array<ParticleObject>, state:Dynamic, config:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particles_UpdateParticleObjects.isParticleObjectsComplete, cast ([objects, state, config] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isPerspectiveProjection(projection:Projection):Bool {
+  public static function isPerspectiveProjection(projection:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.isPerspectiveProjection, cast ([projection] : Array<Dynamic>));
     return cast null;
   }
@@ -15275,7 +15057,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function isPointInCameraFrustum(camera:Camera, point:Vector3Like, aspect:Float):Bool {
+  public static function isPointInCameraFrustum(camera:Dynamic, point:Vector3Like, aspect:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.isPointInCameraFrustum, cast ([camera, point, aspect] : Array<Dynamic>));
     return cast null;
   }
@@ -15295,7 +15077,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function isRenderableInViewport(source:Dynamic, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
+  public static function isRenderableInViewport(source:Dynamic, viewport:RenderViewport2D, ?renderTransform2D:Null<Dynamic>):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderViewport.isRenderableInViewport, cast ([source, viewport, renderTransform2D] : Array<Dynamic>));
     return cast null;
   }
@@ -15310,12 +15092,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function isRenderProxyDirty(state:RenderState, source:Renderable, data:RenderProxy, ?parentData:RenderProxy):Bool {
+  public static function isRenderProxyDirty(state:Dynamic, source:Renderable, data:Dynamic, ?parentData:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderProxy.isRenderProxyDirty, cast ([state, source, data, parentData] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isRenderProxyInViewport(proxy:RenderProxy2D, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
+  public static function isRenderProxyInViewport(proxy:RenderProxy2D, viewport:RenderViewport2D, ?renderTransform2D:Null<Dynamic>):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderViewport.isRenderProxyInViewport, cast ([proxy, viewport, renderTransform2D] : Array<Dynamic>));
     return cast null;
   }
@@ -15330,7 +15112,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function isShapeEmpty(source:Shape):Bool {
+  public static function isShapeEmpty(source:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.isShapeEmpty, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -15360,22 +15142,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function isSphereInCameraFrustum(camera:Camera, sphere:BoundingSphereLike, aspect:Float):Bool {
+  public static function isSphereInCameraFrustum(camera:Dynamic, sphere:BoundingSphereLike, aspect:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.isSphereInCameraFrustum, cast ([camera, sphere, aspect] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isSpring2DSettled(spring2D:Spring2D, targetX:Float, targetY:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
+  public static function isSpring2DSettled(spring2D:Dynamic, targetX:Float, targetY:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spring_Spring2D.isSpring2DSettled, cast ([spring2D, targetX, targetY, positionEpsilon, velocityEpsilon] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isSpring3DSettled(spring3D:Spring3D, targetX:Float, targetY:Float, targetZ:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
+  public static function isSpring3DSettled(spring3D:Dynamic, targetX:Float, targetY:Float, targetZ:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spring_Spring3D.isSpring3DSettled, cast ([spring3D, targetX, targetY, targetZ, positionEpsilon, velocityEpsilon] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isSpringSettled(spring:Spring, target:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
+  public static function isSpringSettled(spring:Dynamic, target:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spring_IsSpringSettled.isSpringSettled, cast ([spring, target, positionEpsilon, velocityEpsilon] : Array<Dynamic>));
     return cast null;
   }
@@ -15425,17 +15207,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function isVideoChannelPlaying(channel:VideoChannel):Bool {
+  public static function isVideoChannelPlaying(channel:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_VideoChannel.isVideoChannelPlaying, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isVideoResourceEmpty(resource:VideoResource):Bool {
+  public static function isVideoResourceEmpty(resource:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_video_VideoResource.isVideoResourceEmpty, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isVideoResourceReady(resource:VideoResource):Bool {
+  public static function isVideoResourceReady(resource:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_video_VideoResource.isVideoResourceReady, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
@@ -15450,17 +15232,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function isWgpuTextureReady(texture:Null<Texture>):Bool {
+  public static function isWgpuTextureReady(texture:Null<Dynamic>):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.isWgpuTextureReady, cast ([texture] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function itemizeText(text:String, _format:TextFormat, ?options:TextShaperOptions):Array<TextItem> {
+  public static function itemizeText(text:String, _format:Dynamic, ?options:TextShaperOptions):Array<TextItem> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaperItemize.itemizeText, cast ([text, _format, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function iterateQuadBatchInstances(source:QuadBatch, visitor:Dynamic):Void {
+  public static function iterateQuadBatchInstances(source:Dynamic, visitor:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.iterateQuadBatchInstances, cast ([source, visitor] : Array<Dynamic>));
   }
 
@@ -15469,7 +15251,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function killTweensOfProperty(manager:TweenManager, key:String):Void {
+  public static function killTweensOfProperty(manager:Dynamic, key:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.killTweensOfProperty, cast ([manager, key] : Array<Dynamic>));
   }
 
@@ -15544,196 +15326,196 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlProgram.linkGlProgram, cast ([gl, program, label] : Array<Dynamic>));
   }
 
-  public static function loadAssetGroup(library:AssetLibrary, name:String, ?options:AssetGroupLoadOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
+  public static function loadAssetGroup(library:Dynamic, name:String, ?options:AssetGroupLoadOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_assets_AssetLibrary.loadAssetGroup, cast ([library, name, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadAssetManifest(library:AssetLibrary, manifest:AssetManifest):Void {
+  public static function loadAssetManifest(library:Dynamic, manifest:AssetManifest):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_assets_AssetLibrary.loadAssetManifest, cast ([library, manifest] : Array<Dynamic>));
   }
 
-  public static function loadAudioResourceFromBase64(context:Dynamic, base64:String, mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromBase64(context:Dynamic, base64:String, mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_audio_AudioResourceFrom.loadAudioResourceFromBase64, cast ([context, base64, mimeType, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadAudioResourceFromBlob(context:Dynamic, blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromBlob(context:Dynamic, blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_audio_AudioResourceFrom.loadAudioResourceFromBlob, cast ([context, blob, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadAudioResourceFromBytes(context:Dynamic, bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromBytes(context:Dynamic, bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_audio_AudioResourceFrom.loadAudioResourceFromBytes, cast ([context, bytes, mimeType, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadAudioResourceFromUrl(context:Dynamic, url:String, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromUrl(context:Dynamic, url:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_audio_AudioResourceFrom.loadAudioResourceFromUrl, cast ([context, url, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadAudioResourceFromUrls(context:Dynamic, sources:Array<AudioResourceUrl>, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromUrls(context:Dynamic, sources:Array<AudioResourceUrl>, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_audio_AudioResourceFrom.loadAudioResourceFromUrls, cast ([context, sources, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadFontFromBytes(bytes:Dynamic, family:String):flighthq._internal._Promise<Font> {
+  public static function loadFontFromBytes(bytes:Dynamic, family:String):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_font_Font.loadFontFromBytes, cast ([bytes, family] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadFontFromName(name:String):flighthq._internal._Promise<Font> {
+  public static function loadFontFromName(name:String):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_font_Font.loadFontFromName, cast ([name] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadFontFromUrl(url:String, family:String):flighthq._internal._Promise<Font> {
+  public static function loadFontFromUrl(url:String, family:String):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_font_Font.loadFontFromUrl, cast ([url, family] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadFontFromUrls(sources:Array<FontUrl>, family:String):flighthq._internal._Promise<Font> {
+  public static function loadFontFromUrls(sources:Array<FontUrl>, family:String):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_font_Font.loadFontFromUrls, cast ([sources, family] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadFontResourceFromBytes(out:FontResource, bytes:Dynamic):flighthq._internal._Promise<FontResource> {
+  public static function loadFontResourceFromBytes(out:Dynamic, bytes:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_font_Font.loadFontResourceFromBytes, cast ([out, bytes] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadFontResourceFromName(out:FontResource):flighthq._internal._Promise<FontResource> {
+  public static function loadFontResourceFromName(out:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_font_Font.loadFontResourceFromName, cast ([out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadFontResourceFromUrl(out:FontResource, url:String):flighthq._internal._Promise<FontResource> {
+  public static function loadFontResourceFromUrl(out:Dynamic, url:String):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_font_Font.loadFontResourceFromUrl, cast ([out, url] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadFontResourceFromUrls(out:FontResource, sources:Array<FontUrl>):flighthq._internal._Promise<FontResource> {
+  public static function loadFontResourceFromUrls(out:Dynamic, sources:Array<FontUrl>):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_font_Font.loadFontResourceFromUrls, cast ([out, sources] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadImageResourceFromBase64(base64:String, mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
+  public static function loadImageResourceFromBase64(base64:String, mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResourceFrom.loadImageResourceFromBase64, cast ([base64, mimeType, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadImageResourceFromBlob(blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
+  public static function loadImageResourceFromBlob(blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResourceFrom.loadImageResourceFromBlob, cast ([blob, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadImageResourceFromBytes(bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
+  public static function loadImageResourceFromBytes(bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResourceFrom.loadImageResourceFromBytes, cast ([bytes, mimeType, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadImageResourceFromUrl(url:String, ?crossOrigin:String, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
+  public static function loadImageResourceFromUrl(url:String, ?crossOrigin:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResourceFrom.loadImageResourceFromUrl, cast ([url, crossOrigin, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadSceneFrom3ds(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Scene> {
+  public static function loadSceneFrom3ds(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneResources_Load3ds.loadSceneFrom3ds, cast ([bytes, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadSceneFromAwd(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Scene> {
+  public static function loadSceneFromAwd(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneResources_LoadSceneFromAwd.loadSceneFromAwd, cast ([bytes, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadSceneFromGlb(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Scene> {
+  public static function loadSceneFromGlb(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneResources_LoadGltf.loadSceneFromGlb, cast ([bytes, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadSceneFromGltf(source:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Scene> {
+  public static function loadSceneFromGltf(source:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneResources_LoadGltf.loadSceneFromGltf, cast ([source, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadSceneFromMd2(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Scene> {
+  public static function loadSceneFromMd2(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneResources_LoadMd2.loadSceneFromMd2, cast ([bytes, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadSceneFromMd5Mesh(meshSource:String, ?options:LoadSceneOptions):flighthq._internal._Promise<Scene> {
+  public static function loadSceneFromMd5Mesh(meshSource:String, ?options:LoadSceneOptions):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneResources_LoadMd5.loadSceneFromMd5Mesh, cast ([meshSource, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadSceneFromObj(source:String, ?materials:ObjMaterialLibrary, ?options:LoadSceneOptions):flighthq._internal._Promise<Scene> {
+  public static function loadSceneFromObj(source:String, ?materials:ObjMaterialLibrary, ?options:LoadSceneOptions):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneResources_LoadObj.loadSceneFromObj, cast ([source, materials, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadScenesFromGlb(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Array<Scene>> {
+  public static function loadScenesFromGlb(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Array<Dynamic>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneResources_LoadGltf.loadScenesFromGlb, cast ([bytes, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadScenesFromGltf(source:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Array<Scene>> {
+  public static function loadScenesFromGltf(source:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Array<Dynamic>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneResources_LoadGltf.loadScenesFromGltf, cast ([source, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBase64(base64:String, mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
+  public static function loadTextureAtlasFromBase64(base64:String, mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasFrom.loadTextureAtlasFromBase64, cast ([base64, mimeType, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBlob(blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
+  public static function loadTextureAtlasFromBlob(blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasFrom.loadTextureAtlasFromBlob, cast ([blob, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBytes(bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
+  public static function loadTextureAtlasFromBytes(bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasFrom.loadTextureAtlasFromBytes, cast ([bytes, mimeType, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadTextureAtlasFromUrl(url:String, ?crossOrigin:String, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
+  public static function loadTextureAtlasFromUrl(url:String, ?crossOrigin:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasFrom.loadTextureAtlasFromUrl, cast ([url, crossOrigin, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadTilesetFromBase64(base64:String, mimeType:String, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float, ?signal:Dynamic):flighthq._internal._Promise<Tileset> {
+  public static function loadTilesetFromBase64(base64:String, mimeType:String, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tileset_Tileset.loadTilesetFromBase64, cast ([base64, mimeType, tileWidth, tileHeight, margin, spacing, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadTilesetFromBlob(blob:Dynamic, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float, ?signal:Dynamic):flighthq._internal._Promise<Tileset> {
+  public static function loadTilesetFromBlob(blob:Dynamic, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tileset_Tileset.loadTilesetFromBlob, cast ([blob, tileWidth, tileHeight, margin, spacing, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadTilesetFromBytes(bytes:Dynamic, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Tileset> {
+  public static function loadTilesetFromBytes(bytes:Dynamic, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tileset_Tileset.loadTilesetFromBytes, cast ([bytes, tileWidth, tileHeight, margin, spacing, mimeType, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadTilesetFromUrl(url:String, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float, ?crossOrigin:String, ?signal:Dynamic):flighthq._internal._Promise<Tileset> {
+  public static function loadTilesetFromUrl(url:String, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float, ?crossOrigin:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tileset_Tileset.loadTilesetFromUrl, cast ([url, tileWidth, tileHeight, margin, spacing, crossOrigin, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadVideoResourceFromBlob(blob:Dynamic, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<VideoResource> {
+  public static function loadVideoResourceFromBlob(blob:Dynamic, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_video_VideoResourceFrom.loadVideoResourceFromBlob, cast ([blob, options, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadVideoResourceFromUrl(url:String, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<VideoResource> {
+  public static function loadVideoResourceFromUrl(url:String, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_video_VideoResourceFrom.loadVideoResourceFromUrl, cast ([url, options, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadVideoResourceFromUrls(sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<VideoResource> {
+  public static function loadVideoResourceFromUrls(sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_video_VideoResourceFrom.loadVideoResourceFromUrls, cast ([sources, options, signal] : Array<Dynamic>));
     return cast null;
   }
@@ -15901,7 +15683,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function measureText(text:String, format:TextFormat):Float {
+  public static function measureText(text:String, format:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaper.measureText, cast ([text, format] : Array<Dynamic>));
     return cast null;
   }
@@ -15911,7 +15693,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function medianSurface(out:Dynamic, source:SurfaceRegion, radius:Float):Void {
+  public static function medianSurface(out:Dynamic, source:Dynamic, radius:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.medianSurface, cast ([out, source, radius] : Array<Dynamic>));
   }
 
@@ -15919,7 +15701,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_BoundingSphere.mergeBoundingSphere, cast ([out, a, b] : Array<Dynamic>));
   }
 
-  public static function mergeMeshGeometries(geometries:Array<MeshGeometry>):Null<MeshGeometry> {
+  public static function mergeMeshGeometries(geometries:Array<Dynamic>):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryOperations.mergeMeshGeometries, cast ([geometries] : Array<Dynamic>));
     return cast null;
   }
@@ -15928,15 +15710,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Rectangle.mergeRectangle, cast ([out, source, other] : Array<Dynamic>));
   }
 
-  public static function mergeSurface(dest:SurfaceRegion, source:SurfaceRegion, redMultiplier:Float, greenMultiplier:Float, blueMultiplier:Float, alphaMultiplier:Float):Void {
+  public static function mergeSurface(dest:Dynamic, source:Dynamic, redMultiplier:Float, greenMultiplier:Float, blueMultiplier:Float, alphaMultiplier:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.mergeSurface, cast ([dest, source, redMultiplier, greenMultiplier, blueMultiplier, alphaMultiplier] : Array<Dynamic>));
   }
 
-  public static function mergeSurfaceChannels(out:SurfaceRegion, r:SurfaceRegion, g:SurfaceRegion, b:SurfaceRegion, a:SurfaceRegion):Void {
+  public static function mergeSurfaceChannels(out:Dynamic, r:Dynamic, g:Dynamic, b:Dynamic, a:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.mergeSurfaceChannels, cast ([out, r, g, b, a] : Array<Dynamic>));
   }
 
-  public static function mergeTextFormat(base:TextFormat, override_:TextFormat):TextFormat {
+  public static function mergeTextFormat(base:Dynamic, override_:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textlayout_TextFormat.mergeTextFormat, cast ([base, override_] : Array<Dynamic>));
     return cast null;
   }
@@ -15980,27 +15762,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function moveTextInputCaret(source:RichText, index:Float, ?extendSelection:Dynamic):Void {
+  public static function moveTextInputCaret(source:Dynamic, index:Float, ?extendSelection:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.moveTextInputCaret, cast ([source, index, extendSelection] : Array<Dynamic>));
   }
 
-  public static function moveTextInputCaretByWord(source:RichText, direction:Float, ?extendSelection:Dynamic):Void {
+  public static function moveTextInputCaretByWord(source:Dynamic, direction:Float, ?extendSelection:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.moveTextInputCaretByWord, cast ([source, direction, extendSelection] : Array<Dynamic>));
   }
 
-  public static function moveTextInputCaretDown(source:RichText, layout:Null<TextLayoutResult>, ?extendSelection:Dynamic):Void {
+  public static function moveTextInputCaretDown(source:Dynamic, layout:Null<TextLayoutResult>, ?extendSelection:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.moveTextInputCaretDown, cast ([source, layout, extendSelection] : Array<Dynamic>));
   }
 
-  public static function moveTextInputCaretToLineEnd(source:RichText, layout:Null<TextLayoutResult>, ?extendSelection:Dynamic):Void {
+  public static function moveTextInputCaretToLineEnd(source:Dynamic, layout:Null<TextLayoutResult>, ?extendSelection:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.moveTextInputCaretToLineEnd, cast ([source, layout, extendSelection] : Array<Dynamic>));
   }
 
-  public static function moveTextInputCaretToLineStart(source:RichText, layout:Null<TextLayoutResult>, ?extendSelection:Dynamic):Void {
+  public static function moveTextInputCaretToLineStart(source:Dynamic, layout:Null<TextLayoutResult>, ?extendSelection:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.moveTextInputCaretToLineStart, cast ([source, layout, extendSelection] : Array<Dynamic>));
   }
 
-  public static function moveTextInputCaretUp(source:RichText, layout:Null<TextLayoutResult>, ?extendSelection:Dynamic):Void {
+  public static function moveTextInputCaretUp(source:Dynamic, layout:Null<TextLayoutResult>, ?extendSelection:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.moveTextInputCaretUp, cast ([source, layout, extendSelection] : Array<Dynamic>));
   }
 
@@ -16032,7 +15814,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Quaternion.multiplyQuaternion, cast ([out, a, b] : Array<Dynamic>));
   }
 
-  public static function multiplySurfaceAlpha(out:SurfaceRegion, factor:Float):Void {
+  public static function multiplySurfaceAlpha(out:Dynamic, factor:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.multiplySurfaceAlpha, cast ([out, factor] : Array<Dynamic>));
   }
 
@@ -16077,11 +15859,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector4.negateVector4, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function nextFrameMovieClip(clip:MovieClip):Void {
+  public static function nextFrameMovieClip(clip:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.nextFrameMovieClip, cast ([clip] : Array<Dynamic>));
   }
 
-  public static function nextFrameTimeline(timeline:Timeline):Void {
+  public static function nextFrameTimeline(timeline:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_timeline_Timeline.nextFrameTimeline, cast ([timeline] : Array<Dynamic>));
   }
 
@@ -16097,7 +15879,7 @@ class Sdk {
 
   public static final NodeKind:Dynamic = Facade_Sdk_flighthq_types__internal__NodeValues.NodeKind;
 
-  public static function noopRendererData(_state:RenderState, _source:Renderable):Null<RendererData> {
+  public static function noopRendererData(_state:Dynamic, _source:Renderable):Null<RendererData> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_Renderer.noopRendererData, cast ([_state, _source] : Array<Dynamic>));
     return cast null;
   }
@@ -16114,7 +15896,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function normalizeClipRegion(out:ClipRegion, clip:ClipRegion):Void {
+  public static function normalizeClipRegion(out:Dynamic, clip:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.normalizeClipRegion, cast ([out, clip] : Array<Dynamic>));
   }
 
@@ -16123,7 +15905,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function normalizeParticleEmitterConfig(?config:Dynamic):ParticleEmitterConfig {
+  public static function normalizeParticleEmitterConfig(?config:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particles_ValidateParticleEmitterConfig.normalizeParticleEmitterConfig, cast ([config] : Array<Dynamic>));
     return cast null;
   }
@@ -16176,11 +15958,11 @@ class Sdk {
 
   public static final NullScene:Dynamic = Facade_Sdk_flighthq_types__internal__NodeValues.NullScene;
 
-  public static function offsetMeshGeometryUvs(geometry:MeshGeometry, du:Float, dv:Float):Void {
+  public static function offsetMeshGeometryUvs(geometry:Dynamic, du:Float, dv:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryUvs.offsetMeshGeometryUvs, cast ([geometry, du, dv] : Array<Dynamic>));
   }
 
-  public static function offsetPath(path:Path, delta:Float, ?options:PathOffsetOptions):Path {
+  public static function offsetPath(path:Dynamic, delta:Float, ?options:PathOffsetOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_pathBoolean_OffsetPath.offsetPath, cast ([path, delta, options] : Array<Dynamic>));
     return cast null;
   }
@@ -16314,11 +16096,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function orientBillboardToCamera(billboard:Billboard, camera:Camera):Void {
+  public static function orientBillboardToCamera(billboard:Dynamic, camera:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_scene_BillboardCamera.orientBillboardToCamera, cast ([billboard, camera] : Array<Dynamic>));
   }
 
-  public static function orientSceneBillboardsToCamera(scene:SceneNode, camera:Camera):Void {
+  public static function orientSceneBillboardsToCamera(scene:Dynamic, camera:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_scene_BillboardCamera.orientSceneBillboardsToCamera, cast ([scene, camera] : Array<Dynamic>));
   }
 
@@ -16327,7 +16109,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function packGlSpriteBatchMaterialInstance(state:GlRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
+  public static function packGlSpriteBatchMaterialInstance(state:Dynamic, materialData:Null<MaterialData>, instanceIndex:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlSpriteBatch.packGlSpriteBatchMaterialInstance, cast ([state, materialData, instanceIndex] : Array<Dynamic>));
   }
 
@@ -16351,11 +16133,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function packSceneLightBlock(out:SceneLightBlock, lights:SceneLights):Void {
+  public static function packSceneLightBlock(out:SceneLightBlock, lights:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_SceneRender.packSceneLightBlock, cast ([out, lights] : Array<Dynamic>));
   }
 
-  public static function packWgpuSpriteBatchMaterialInstance(state:WgpuRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
+  public static function packWgpuSpriteBatchMaterialInstance(state:Dynamic, materialData:Null<MaterialData>, instanceIndex:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuSpriteBatch.packWgpuSpriteBatchMaterialInstance, cast ([state, materialData, instanceIndex] : Array<Dynamic>));
   }
 
@@ -16369,7 +16151,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseAsepriteSpritesheet(json:String):SpritesheetData {
+  public static function parseAsepriteSpritesheet(json:String):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheetFormats_AsepriteParse.parseAsepriteSpritesheet, cast ([json] : Array<Dynamic>));
     return cast null;
   }
@@ -16384,7 +16166,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseAwdSkeletonAnimations(bytes:Dynamic, joints:Array<SceneNode>, ?warnings:Array<String>):Dynamic {
+  public static function parseAwdSkeletonAnimations(bytes:Dynamic, joints:Array<Dynamic>, ?warnings:Array<String>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_AwdParse.parseAwdSkeletonAnimations, cast ([bytes, joints, warnings] : Array<Dynamic>));
     return cast null;
   }
@@ -16394,27 +16176,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseBitmapFontFnt(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
+  public static function parseBitmapFontFnt(text:String, ?options:BitmapFontParseOptions):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_bitmapfontFormats_BitmapFontFnt.parseBitmapFontFnt, cast ([text, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseBitmapFontJson(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
+  public static function parseBitmapFontJson(text:String, ?options:BitmapFontParseOptions):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_bitmapfontFormats_BitmapFontJson.parseBitmapFontJson, cast ([text, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseBitmapFontXml(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
+  public static function parseBitmapFontXml(text:String, ?options:BitmapFontParseOptions):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_bitmapfontFormats_BitmapFontXml.parseBitmapFontXml, cast ([text, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseCaptureBaseline(text:String):Null<CaptureBaseline> {
+  public static function parseCaptureBaseline(text:String):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_capture_CaptureBaseline.parseCaptureBaseline, cast ([text] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseCocosPlistSpritesheet(xml:String):SpritesheetData {
+  public static function parseCocosPlistSpritesheet(xml:String):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheetFormats_CocosPlistParse.parseCocosPlistSpritesheet, cast ([xml] : Array<Dynamic>));
     return cast null;
   }
@@ -16434,12 +16216,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseLibgdxAtlasSpritesheet(text:String, ?options:LibgdxAtlasParseOptions):SpritesheetData {
+  public static function parseLibgdxAtlasSpritesheet(text:String, ?options:LibgdxAtlasParseOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheetFormats_LibgdxAtlasParse.parseLibgdxAtlasSpritesheet, cast ([text, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseLibgdxParticle(text:String, ?options:LibgdxParseOptions):ParticleEmitterConfig {
+  public static function parseLibgdxParticle(text:String, ?options:LibgdxParseOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particlesFormats_LibgdxParse.parseLibgdxParticle, cast ([text, options] : Array<Dynamic>));
     return cast null;
   }
@@ -16454,7 +16236,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseMd5Anim(source:String, joints:Array<SceneNode>, ?warnings:Array<String>):Null<AnimationClip> {
+  public static function parseMd5Anim(source:String, joints:Array<Dynamic>, ?warnings:Array<String>):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_Md5AnimParse.parseMd5Anim, cast ([source, joints, warnings] : Array<Dynamic>));
     return cast null;
   }
@@ -16464,7 +16246,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseParticleConfig(text:String, ?options:ParseParticleConfigOptions):ParticleEmitterConfig {
+  public static function parseParticleConfig(text:String, ?options:ParseParticleConfigOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particlesFormats_ParseParticleConfig.parseParticleConfig, cast ([text, options] : Array<Dynamic>));
     return cast null;
   }
@@ -16474,7 +16256,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseParticleDesignerPlist(plistXml:String, ?options:ParticleDesignerParseOptions):ParticleEmitterConfig {
+  public static function parseParticleDesignerPlist(plistXml:String, ?options:ParticleDesignerParseOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particlesFormats_ParticleDesignerParse.parseParticleDesignerPlist, cast ([plistXml, options] : Array<Dynamic>));
     return cast null;
   }
@@ -16484,7 +16266,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function parsePixiParticle(json:String):ParticleEmitterConfig {
+  public static function parsePixiParticle(json:String):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particlesFormats_PixiParse.parsePixiParticle, cast ([json] : Array<Dynamic>));
     return cast null;
   }
@@ -16504,12 +16286,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseShapeJson(text:String, ?options:ShapeJsonParseOptions):Null<Shape> {
+  public static function parseShapeJson(text:String, ?options:ShapeJsonParseOptions):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_shapeFormats_ShapeJson.parseShapeJson, cast ([text, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseSpineParticle(json:String):ParticleEmitterConfig {
+  public static function parseSpineParticle(json:String):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particlesFormats_SpineParse.parseSpineParticle, cast ([json] : Array<Dynamic>));
     return cast null;
   }
@@ -16519,12 +16301,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseSpritesheet(text:String, ?formatKind:SpritesheetFormatKind, ?options:SpritesheetParseOptions):Null<SpritesheetData> {
+  public static function parseSpritesheet(text:String, ?formatKind:SpritesheetFormatKind, ?options:SpritesheetParseOptions):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheetFormats_SpritesheetDetect.parseSpritesheet, cast ([text, formatKind, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseStarlingPex(xml:String, ?options:StarlingPexParseOptions):ParticleEmitterConfig {
+  public static function parseStarlingPex(xml:String, ?options:StarlingPexParseOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particlesFormats_StarlingPexParse.parseStarlingPex, cast ([xml, options] : Array<Dynamic>));
     return cast null;
   }
@@ -16534,7 +16316,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseStarlingSpritesheet(xml:String, ?options:StarlingParseOptions):SpritesheetData {
+  public static function parseStarlingSpritesheet(xml:String, ?options:StarlingParseOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheetFormats_StarlingParse.parseStarlingSpritesheet, cast ([xml, options] : Array<Dynamic>));
     return cast null;
   }
@@ -16544,52 +16326,52 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseSurfaceFingerprint(text:String):Null<SurfaceFingerprint> {
+  public static function parseSurfaceFingerprint(text:String):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.parseSurfaceFingerprint, cast ([text] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseSvgPathData(d:String):Null<Path> {
+  public static function parseSvgPathData(d:String):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_pathFormats_SvgPathData.parseSvgPathData, cast ([d] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseTextMarkup(html:String, ?registry:MarkupTagRegistry):RichTextContent {
+  public static function parseTextMarkup(html:String, ?registry:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textMarkup_TextMarkup.parseTextMarkup, cast ([html, registry] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseTextureAtlasAsepriteDocument(doc:TextureAtlasAsepriteDocument, atlas:TextureAtlas):TextureAtlas {
+  public static function parseTextureAtlasAsepriteDocument(doc:TextureAtlasAsepriteDocument, atlas:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlasFormats_TextureAtlasAsepriteParse.parseTextureAtlasAsepriteDocument, cast ([doc, atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseTextureAtlasAsepriteJson(json:String, atlas:TextureAtlas):TextureAtlas {
+  public static function parseTextureAtlasAsepriteJson(json:String, atlas:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlasFormats_TextureAtlasAsepriteParse.parseTextureAtlasAsepriteJson, cast ([json, atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseTextureAtlasLibgdxAtlas(text:String, atlas:TextureAtlas):TextureAtlas {
+  public static function parseTextureAtlasLibgdxAtlas(text:String, atlas:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlasFormats_TextureAtlasLibgdxParse.parseTextureAtlasLibgdxAtlas, cast ([text, atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseTextureAtlasPackerDocument(doc:TextureAtlasPackerDocument, atlas:TextureAtlas, ?options:TextureAtlasPackerParseOptions):TextureAtlas {
+  public static function parseTextureAtlasPackerDocument(doc:TextureAtlasPackerDocument, atlas:Dynamic, ?options:TextureAtlasPackerParseOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlasFormats_TextureAtlasPackerParse.parseTextureAtlasPackerDocument, cast ([doc, atlas, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseTextureAtlasPackerJson(json:String, atlas:TextureAtlas, ?options:TextureAtlasPackerParseOptions):TextureAtlas {
+  public static function parseTextureAtlasPackerJson(json:String, atlas:Dynamic, ?options:TextureAtlasPackerParseOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlasFormats_TextureAtlasPackerParse.parseTextureAtlasPackerJson, cast ([json, atlas, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseTextureAtlasStarlingXml(xml:String, atlas:TextureAtlas, ?_options:TextureAtlasStarlingParseOptions):TextureAtlas {
+  public static function parseTextureAtlasStarlingXml(xml:String, atlas:Dynamic, ?_options:TextureAtlasStarlingParseOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlasFormats_TextureAtlasStarlingParse.parseTextureAtlasStarlingXml, cast ([xml, atlas, _options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseTexturePackerSpritesheet(json:String):SpritesheetData {
+  public static function parseTexturePackerSpritesheet(json:String):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheetFormats_TexturePackerParse.parseTexturePackerSpritesheet, cast ([json] : Array<Dynamic>));
     return cast null;
   }
@@ -16624,7 +16406,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseUnityParticle(json:String, ?options:UnityParseOptions):ParticleEmitterConfig {
+  public static function parseUnityParticle(json:String, ?options:UnityParseOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particlesFormats_UnityParse.parseUnityParticle, cast ([json, options] : Array<Dynamic>));
     return cast null;
   }
@@ -16735,35 +16517,35 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasEffectCompositing.passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
-  public static function patchNativeTextStyle(source:NativeText, patch:Dynamic):Void {
+  public static function patchNativeTextStyle(source:Dynamic, patch:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_NativeText.patchNativeTextStyle, cast ([source, patch] : Array<Dynamic>));
   }
 
-  public static function pauseAllAudioMixerChannels(mixer:AudioMixer):Void {
+  public static function pauseAllAudioMixerChannels(mixer:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_media_AudioMixer.pauseAllAudioMixerChannels, cast ([mixer] : Array<Dynamic>));
   }
 
-  public static function pauseAllTweens(manager:TweenManager):Void {
+  public static function pauseAllTweens(manager:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.pauseAllTweens, cast ([manager] : Array<Dynamic>));
   }
 
-  public static function pauseApplicationLoop(app:Application):Void {
+  public static function pauseApplicationLoop(app:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.pauseApplicationLoop, cast ([app] : Array<Dynamic>));
   }
 
-  public static function pauseAudioChannel(channel:AudioChannel):Void {
+  public static function pauseAudioChannel(channel:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_media_AudioChannel.pauseAudioChannel, cast ([channel] : Array<Dynamic>));
   }
 
-  public static function pauseClock(clock:Clock):Void {
+  public static function pauseClock(clock:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_clock_PauseClock.pauseClock, cast ([clock] : Array<Dynamic>));
   }
 
-  public static function pauseResourceLoad(loader:ResourceLoader):Void {
+  public static function pauseResourceLoad(loader:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_loader_ResourceLoader.pauseResourceLoad, cast ([loader] : Array<Dynamic>));
   }
 
-  public static function pauseSpritesheetPlayer(player:SpritesheetPlayer):Void {
+  public static function pauseSpritesheetPlayer(player:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.pauseSpritesheetPlayer, cast ([player] : Array<Dynamic>));
   }
 
@@ -16771,11 +16553,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.pauseTween, cast ([tween] : Array<Dynamic>));
   }
 
-  public static function pauseTweens(manager:TweenManager, target:Dynamic):Void {
+  public static function pauseTweens(manager:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.pauseTweens, cast ([manager, target] : Array<Dynamic>));
   }
 
-  public static function pauseVideoChannel(channel:VideoChannel):Void {
+  public static function pauseVideoChannel(channel:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_media_VideoChannel.pauseVideoChannel, cast ([channel] : Array<Dynamic>));
   }
 
@@ -16792,22 +16574,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function pickScene(scene:SceneNode, camera:Camera, screenX:Float, screenY:Float, out:SceneHit, ?options:ScenePickOptions):Null<SceneHit> {
+  public static function pickScene(scene:Dynamic, camera:Dynamic, screenX:Float, screenY:Float, out:SceneHit, ?options:ScenePickOptions):Null<SceneHit> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_picking_PickScene.pickScene, cast ([scene, camera, screenX, screenY, out, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function pickSceneAll(scene:SceneNode, camera:Camera, screenX:Float, screenY:Float, outArray:Array<SceneHit>, ?options:ScenePickOptions):Array<SceneHit> {
+  public static function pickSceneAll(scene:Dynamic, camera:Dynamic, screenX:Float, screenY:Float, outArray:Array<SceneHit>, ?options:ScenePickOptions):Array<SceneHit> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_picking_PickScene.pickSceneAll, cast ([scene, camera, screenX, screenY, outArray, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function pickSceneAllWithRay3D(scene:SceneNode, ray:Ray3D, outArray:Array<SceneHit>, ?options:ScenePickOptions):Array<SceneHit> {
+  public static function pickSceneAllWithRay3D(scene:Dynamic, ray:Ray3D, outArray:Array<SceneHit>, ?options:ScenePickOptions):Array<SceneHit> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_picking_PickScene.pickSceneAllWithRay3D, cast ([scene, ray, outArray, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function pickSceneWithRay3D(scene:SceneNode, ray:Ray3D, out:SceneHit, ?options:ScenePickOptions):Null<SceneHit> {
+  public static function pickSceneWithRay3D(scene:Dynamic, ray:Ray3D, out:SceneHit, ?options:ScenePickOptions):Null<SceneHit> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_picking_PickScene.pickSceneWithRay3D, cast ([scene, ray, out, options] : Array<Dynamic>));
     return cast null;
   }
@@ -16817,7 +16599,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function pixelateSurface(out:Dynamic, source:SurfaceRegion, blockSize:Float):Void {
+  public static function pixelateSurface(out:Dynamic, source:Dynamic, blockSize:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.pixelateSurface, cast ([out, source, blockSize] : Array<Dynamic>));
   }
 
@@ -16825,28 +16607,28 @@ class Sdk {
 
   public static final PlaneColliderKind:Dynamic = Facade_Sdk_flighthq_types__internal__PlaneColliderValues.PlaneColliderKind;
 
-  public static function playAnimationPlayer(player:AnimationPlayer):Void {
+  public static function playAnimationPlayer(player:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_animation_AnimationPlayer.playAnimationPlayer, cast ([player] : Array<Dynamic>));
   }
 
-  public static function playAudioResource(context:Dynamic, source:AudioResource, ?options:AudioPlayOptions):Null<AudioChannel> {
+  public static function playAudioResource(context:Dynamic, source:Dynamic, ?options:AudioPlayOptions):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_AudioChannel.playAudioResource, cast ([context, source, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function playMovieClip(clip:MovieClip):Void {
+  public static function playMovieClip(clip:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.playMovieClip, cast ([clip] : Array<Dynamic>));
   }
 
-  public static function playSpritesheetAnimation(player:SpritesheetPlayer, animation:Null<SpritesheetAnimation>, ?restart:Dynamic):Void {
+  public static function playSpritesheetAnimation(player:Dynamic, animation:Null<Dynamic>, ?restart:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.playSpritesheetAnimation, cast ([player, animation, restart] : Array<Dynamic>));
   }
 
-  public static function playTimeline(timeline:Timeline):Void {
+  public static function playTimeline(timeline:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_timeline_Timeline.playTimeline, cast ([timeline] : Array<Dynamic>));
   }
 
-  public static function playVideoResource(source:VideoResource, ?options:VideoPlayOptions):Null<VideoChannel> {
+  public static function playVideoResource(source:Dynamic, ?options:VideoPlayOptions):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_VideoChannel.playVideoResource, cast ([source, options] : Array<Dynamic>));
     return cast null;
   }
@@ -16855,7 +16637,7 @@ class Sdk {
 
   public static final PointLightKind:Dynamic = Facade_Sdk_flighthq_types__internal__PointLightValues.PointLightKind;
 
-  public static function pollGamepadInput(manager:InputManager):Void {
+  public static function pollGamepadInput(manager:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_input_InputManager.pollGamepadInput, cast ([manager] : Array<Dynamic>));
   }
 
@@ -16868,11 +16650,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function popGlClipContours(state:GlRenderState):Void {
+  public static function popGlClipContours(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlClipContours.popGlClipContours, cast ([state] : Array<Dynamic>));
   }
 
-  public static function popGlClipRectangle(state:GlRenderState):Void {
+  public static function popGlClipRectangle(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlClipRectangle.popGlClipRectangle, cast ([state] : Array<Dynamic>));
   }
 
@@ -16884,15 +16666,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_tray_Tray.popupTrayContextMenu, cast ([tray, position] : Array<Dynamic>));
   }
 
-  public static function popWgpuClipContours(state:WgpuRenderState):Void {
+  public static function popWgpuClipContours(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuClipContours.popWgpuClipContours, cast ([state] : Array<Dynamic>));
   }
 
-  public static function popWgpuClipRectangle(state:WgpuRenderState):Void {
+  public static function popWgpuClipRectangle(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuClipRectangle.popWgpuClipRectangle, cast ([state] : Array<Dynamic>));
   }
 
-  public static function popWgpuScissorRect(state:WgpuRenderState):Void {
+  public static function popWgpuScissorRect(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuScissor.popWgpuScissorRect, cast ([state] : Array<Dynamic>));
   }
 
@@ -16905,7 +16687,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.premultiplySurfacePixels, cast ([out, source, length] : Array<Dynamic>));
   }
 
-  public static function prepareDisplayObjectRender(state:RenderState, source:Renderable):Bool {
+  public static function prepareDisplayObjectRender(state:Dynamic, source:Renderable):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderProxy.prepareDisplayObjectRender, cast ([state, source] : Array<Dynamic>));
     return cast null;
   }
@@ -16918,7 +16700,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.prepareElementForInput, cast ([element] : Array<Dynamic>));
   }
 
-  public static function prepareGlSpriteBatchWrite(state:GlRenderState, texture:ImageResource, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:GlMaterialRenderer, maxInstances:Float):Float {
+  public static function prepareGlSpriteBatchWrite(state:Dynamic, texture:Dynamic, blendMode:Null<BlendMode>, material:Null<Dynamic>, materialRenderer:GlMaterialRenderer, maxInstances:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlSpriteBatch.prepareGlSpriteBatchWrite, cast ([state, texture, blendMode, material, materialRenderer, maxInstances] : Array<Dynamic>));
     return cast null;
   }
@@ -16927,12 +16709,12 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_haptics_Haptics.prepareHaptics, cast ([] : Array<Dynamic>));
   }
 
-  public static function prepareSceneRender(state:RenderState, scene:SceneNode, camera:Camera, lights:SceneLights):SceneRenderList {
+  public static function prepareSceneRender(state:Dynamic, scene:Dynamic, camera:Dynamic, lights:Dynamic):SceneRenderList {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_SceneRender.prepareSceneRender, cast ([state, scene, camera, lights] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function prepareWgpuSpriteBatchWrite(state:WgpuRenderState, texture:ImageResource, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:WgpuMaterialRenderer, maxInstances:Float):Float {
+  public static function prepareWgpuSpriteBatchWrite(state:Dynamic, texture:Dynamic, blendMode:Null<BlendMode>, material:Null<Dynamic>, materialRenderer:WgpuMaterialRenderer, maxInstances:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuSpriteBatch.prepareWgpuSpriteBatchWrite, cast ([state, texture, blendMode, material, materialRenderer, maxInstances] : Array<Dynamic>));
     return cast null;
   }
@@ -16953,19 +16735,19 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix4.prependTranslationMatrix4, cast ([out, source, x, y, z] : Array<Dynamic>));
   }
 
-  public static function presentGlRenderTarget(state:GlRenderState, target:GlRenderTarget, ?dest:Null<GlRenderTarget>):Void {
+  public static function presentGlRenderTarget(state:Dynamic, target:Dynamic, ?dest:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlPresentRenderTarget.presentGlRenderTarget, cast ([state, target, dest] : Array<Dynamic>));
   }
 
-  public static function presentGlScene(state:GlRenderState, target:GlRenderTarget, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
+  public static function presentGlScene(state:Dynamic, target:Dynamic, scene:Dynamic, camera:Dynamic, lights:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_PresentGlScene.presentGlScene, cast ([state, target, scene, camera, lights] : Array<Dynamic>));
   }
 
-  public static function prevFrameMovieClip(clip:MovieClip):Void {
+  public static function prevFrameMovieClip(clip:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.prevFrameMovieClip, cast ([clip] : Array<Dynamic>));
   }
 
-  public static function prevFrameTimeline(timeline:Timeline):Void {
+  public static function prevFrameTimeline(timeline:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_timeline_Timeline.prevFrameTimeline, cast ([timeline] : Array<Dynamic>));
   }
 
@@ -16974,11 +16756,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function prewarmParticleEmitter(emitter:ParticleEmitter, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, ?stepDeltaTime:Dynamic, ?callbacks:ParticleEmitterCallbacks):Void {
+  public static function prewarmParticleEmitter(emitter:Dynamic, state:Dynamic, config:Dynamic, duration:Float, ?stepDeltaTime:Dynamic, ?callbacks:ParticleEmitterCallbacks):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_PrewarmParticleEmitter.prewarmParticleEmitter, cast ([emitter, state, config, duration, stepDeltaTime, callbacks] : Array<Dynamic>));
   }
 
-  public static function prewarmParticleEmitter3D(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, ?stepDeltaTime:Dynamic, ?callbacks:ParticleEmitterCallbacks):Void {
+  public static function prewarmParticleEmitter3D(emitter:Dynamic, state:Dynamic, config:Dynamic, duration:Float, ?stepDeltaTime:Dynamic, ?callbacks:ParticleEmitterCallbacks):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_PrewarmParticleEmitter3D.prewarmParticleEmitter3D, cast ([emitter, state, config, duration, stepDeltaTime, callbacks] : Array<Dynamic>));
   }
 
@@ -16998,11 +16780,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector4.projectVector4, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function pushCanvasClipContours(state:Dynamic, contours:Array<Array<Float>>, winding:PathWinding, transform:Matrix):Void {
+  public static function pushCanvasClipContours(state:Dynamic, contours:Array<Array<Float>>, winding:PathWinding, transform:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasClipRectangle.pushCanvasClipContours, cast ([state, contours, winding, transform] : Array<Dynamic>));
   }
 
-  public static function pushCanvasClipRectangle(state:Dynamic, rect:RectangleLike, transform:Matrix):Void {
+  public static function pushCanvasClipRectangle(state:Dynamic, rect:RectangleLike, transform:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasClipRectangle.pushCanvasClipRectangle, cast ([state, rect, transform] : Array<Dynamic>));
   }
 
@@ -17014,15 +16796,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_flow_PushFlowState.pushFlowState, cast ([stack, state] : Array<Dynamic>));
   }
 
-  public static function pushGlClipContours(state:GlRenderState, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Matrix):Void {
+  public static function pushGlClipContours(state:Dynamic, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlClipContours.pushGlClipContours, cast ([state, contours, winding, worldTransform] : Array<Dynamic>));
   }
 
-  public static function pushGlClipRectangle(state:GlRenderState, rect:RectangleLike, transform:MatrixLike):Void {
+  public static function pushGlClipRectangle(state:Dynamic, rect:RectangleLike, transform:MatrixLike):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlClipRectangle.pushGlClipRectangle, cast ([state, rect, transform] : Array<Dynamic>));
   }
 
-  public static function pushRenderQueueEntry(queue:RenderQueue, proxy:RenderProxy, sortKey:RenderSortKey):Void {
+  public static function pushRenderQueueEntry(queue:Dynamic, proxy:Dynamic, sortKey:RenderSortKey):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_RenderQueue.pushRenderQueueEntry, cast ([queue, proxy, sortKey] : Array<Dynamic>));
   }
 
@@ -17031,15 +16813,15 @@ class Sdk {
     return cast null;
   }
 
-  public static function pushWgpuClipContours(state:WgpuRenderState, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Matrix):Void {
+  public static function pushWgpuClipContours(state:Dynamic, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuClipContours.pushWgpuClipContours, cast ([state, contours, winding, worldTransform] : Array<Dynamic>));
   }
 
-  public static function pushWgpuClipRectangle(state:WgpuRenderState, rect:RectangleLike, transform:MatrixLike):Void {
+  public static function pushWgpuClipRectangle(state:Dynamic, rect:RectangleLike, transform:MatrixLike):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuClipRectangle.pushWgpuClipRectangle, cast ([state, rect, transform] : Array<Dynamic>));
   }
 
-  public static function pushWgpuScissorRect(state:WgpuRenderState, rect:WgpuScissorRect):Void {
+  public static function pushWgpuScissorRect(state:Dynamic, rect:WgpuScissorRect):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuScissor.pushWgpuScissorRect, cast ([state, rect] : Array<Dynamic>));
   }
 
@@ -17054,28 +16836,28 @@ class Sdk {
     return cast null;
   }
 
-  public static function querySpatialPairs(index:SpatialIndex, out:Array<SpatialPair>):Void {
+  public static function querySpatialPairs(index:Dynamic, out:Array<SpatialPair>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spatial_SpatialIndex.querySpatialPairs, cast ([index, out] : Array<Dynamic>));
   }
 
-  public static function querySpatialPoint(index:SpatialIndex, x:Float, y:Float, out:Array<SpatialObjectId>):Void {
+  public static function querySpatialPoint(index:Dynamic, x:Float, y:Float, out:Array<SpatialObjectId>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spatial_SpatialIndex.querySpatialPoint, cast ([index, x, y, out] : Array<Dynamic>));
   }
 
-  public static function querySpatialRay(index:SpatialIndex, x:Float, y:Float, dx:Float, dy:Float, out:Array<SpatialObjectId>):Void {
+  public static function querySpatialRay(index:Dynamic, x:Float, y:Float, dx:Float, dy:Float, out:Array<SpatialObjectId>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spatial_SpatialIndex.querySpatialRay, cast ([index, x, y, dx, dy, out] : Array<Dynamic>));
   }
 
-  public static function querySpatialRegion(index:SpatialIndex, region:SpatialAabb, out:Array<SpatialObjectId>):Void {
+  public static function querySpatialRegion(index:Dynamic, region:SpatialAabb, out:Array<SpatialObjectId>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spatial_SpatialIndex.querySpatialRegion, cast ([index, region, out] : Array<Dynamic>));
   }
 
-  public static function queueResourceLoad<T>(loader:ResourceLoader, item:Dynamic):ResourceLoadHandle<Dynamic> {
+  public static function queueResourceLoad<T>(loader:Dynamic, item:Dynamic):ResourceLoadHandle<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_loader_ResourceLoader.queueResourceLoad, cast ([loader, item] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function queueSpritesheetAnimation(player:SpritesheetPlayer, animation:SpritesheetAnimation):Void {
+  public static function queueSpritesheetAnimation(player:Dynamic, animation:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.queueSpritesheetAnimation, cast ([player, animation] : Array<Dynamic>));
   }
 
@@ -17230,7 +17012,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function readGlRenderTargetPixels(state:GlRenderState, target:GlRenderTarget, x:Float, y:Float, width:Float, height:Float, out:Dynamic):Bool {
+  public static function readGlRenderTargetPixels(state:Dynamic, target:Dynamic, x:Float, y:Float, width:Float, height:Float, out:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlReadback.readGlRenderTargetPixels, cast ([state, target, x, y, width, height, out] : Array<Dynamic>));
     return cast null;
   }
@@ -17245,7 +17027,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function recordGlSpriteBatchColorTransform(state:GlRenderState, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
+  public static function recordGlSpriteBatchColorTransform(state:Dynamic, colorTransform:Null<Dynamic>, instanceIndex:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlSpriteBatch.recordGlSpriteBatchColorTransform, cast ([state, colorTransform, instanceIndex] : Array<Dynamic>));
   }
 
@@ -17254,21 +17036,21 @@ class Sdk {
     return cast null;
   }
 
-  public static function recordWgpuBatchFlush(state:WgpuRenderState, instances:Float):Void {
+  public static function recordWgpuBatchFlush(state:Dynamic, instances:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuRenderStats.recordWgpuBatchFlush, cast ([state, instances] : Array<Dynamic>));
   }
 
-  public static function recordWgpuSpriteBatchColorTransform(state:WgpuRenderState, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
+  public static function recordWgpuSpriteBatchColorTransform(state:Dynamic, colorTransform:Null<Dynamic>, instanceIndex:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuSpriteBatch.recordWgpuSpriteBatchColorTransform, cast ([state, colorTransform, instanceIndex] : Array<Dynamic>));
   }
 
-  public static function recordWgpuTextureUpload(state:WgpuRenderState):Void {
+  public static function recordWgpuTextureUpload(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuRenderStats.recordWgpuTextureUpload, cast ([state] : Array<Dynamic>));
   }
 
   public static final RectangleColliderKind:Dynamic = Facade_Sdk_flighthq_types__internal__RectangleColliderValues.RectangleColliderKind;
 
-  public static function redoTextInput(source:RichText):Void {
+  public static function redoTextInput(source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.redoTextInput, cast ([source] : Array<Dynamic>));
   }
 
@@ -17284,7 +17066,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector4.reflectVector4, cast ([out, incident, normal] : Array<Dynamic>));
   }
 
-  public static function refreshCanvasRenderCache(cacheState:Dynamic, cache:RenderCache, source:DisplayObject, ?options:RenderCacheRefreshOptions):Bool {
+  public static function refreshCanvasRenderCache(cacheState:Dynamic, cache:Dynamic, source:Dynamic, ?options:RenderCacheRefreshOptions):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasCache.refreshCanvasRenderCache, cast ([cacheState, cache, source, options] : Array<Dynamic>));
     return cast null;
   }
@@ -17293,7 +17075,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_device_Device.refreshDeviceInfo, cast ([] : Array<Dynamic>));
   }
 
-  public static function refreshGlRenderCache(cacheState:GlRenderState, cache:RenderCache, source:DisplayObject, ?options:RenderCacheRefreshOptions):Bool {
+  public static function refreshGlRenderCache(cacheState:Dynamic, cache:Dynamic, source:Dynamic, ?options:RenderCacheRefreshOptions):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlCache.refreshGlRenderCache, cast ([cacheState, cache, source, options] : Array<Dynamic>));
     return cast null;
   }
@@ -17306,7 +17088,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_screen_Screen.refreshScreens, cast ([] : Array<Dynamic>));
   }
 
-  public static function refreshWgpuRenderCache(cacheState:WgpuRenderState, cache:RenderCache, source:DisplayObject, ?options:RenderCacheRefreshOptions):Bool {
+  public static function refreshWgpuRenderCache(cacheState:Dynamic, cache:Dynamic, source:Dynamic, ?options:RenderCacheRefreshOptions):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuCache.refreshWgpuRenderCache, cast ([cacheState, cache, source, options] : Array<Dynamic>));
     return cast null;
   }
@@ -17315,27 +17097,27 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasRenderEffectRegistration.registerAllCanvasRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerAnisotropyPbrGlMaterial(state:GlRenderState):Void {
+  public static function registerAnisotropyPbrGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_AnisotropyPbrGlMeshMaterialRenderer.registerAnisotropyPbrGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerAnisotropyPbrWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerAnisotropyPbrWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_AnisotropyPbrWgpuMeshMaterialRenderer.registerAnisotropyPbrWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerAntialiasingGlRenderEffects(state:GlRenderState):Void {
+  public static function registerAntialiasingGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectRegistrar.registerAntialiasingGlRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerAntialiasingWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerAntialiasingWgpuRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerAntialiasingWgpuRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerApplicationWindow(app:Application, win:ApplicationWindow):Void {
+  public static function registerApplicationWindow(app:Dynamic, win:ApplicationWindow):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.registerApplicationWindow, cast ([app, win] : Array<Dynamic>));
   }
 
-  public static function registerAssetLoader<T>(library:AssetLibrary, type:AssetType, adapter:AssetLoaderAdapter<Dynamic>):Void {
+  public static function registerAssetLoader<T>(library:Dynamic, type:AssetType, adapter:AssetLoaderAdapter<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_assets_AssetLibrary.registerAssetLoader, cast ([library, type, adapter] : Array<Dynamic>));
   }
 
@@ -17343,19 +17125,19 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_RegisterBitmapHitTest.registerBitmapHitTest, cast ([alphaThreshold] : Array<Dynamic>));
   }
 
-  public static function registerBlinnPhongGlMaterial(state:GlRenderState):Void {
+  public static function registerBlinnPhongGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_BlinnPhongGlMeshMaterialRenderer.registerBlinnPhongGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerBlinnPhongWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerBlinnPhongWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_BlinnPhongWgpuMeshMaterialRenderer.registerBlinnPhongWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerBloomGlRenderEffects(state:GlRenderState):Void {
+  public static function registerBloomGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectRegistrar.registerBloomGlRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerBloomWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerBloomWgpuRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerBloomWgpuRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
@@ -17363,15 +17145,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasRenderEffectRegistration.registerBlurCanvasRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerBlurGlRenderEffects(state:GlRenderState):Void {
+  public static function registerBlurGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectRegistrar.registerBlurGlRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerBlurWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerBlurWgpuRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerBlurWgpuRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerBuiltInGlModifierSnippets(state:GlRenderState):Void {
+  public static function registerBuiltInGlModifierSnippets(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlShadedBuiltInModifiers.registerBuiltInGlModifierSnippets, cast ([state] : Array<Dynamic>));
   }
 
@@ -17407,15 +17189,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasRichText.registerCanvasTextInputOverlay, cast ([overlay] : Array<Dynamic>));
   }
 
-  public static function registerClearcoatPbrGlMaterial(state:GlRenderState):Void {
+  public static function registerClearcoatPbrGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_ClearcoatPbrGlMeshMaterialRenderer.registerClearcoatPbrGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerClearcoatPbrWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerClearcoatPbrWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_ClearcoatPbrWgpuMeshMaterialRenderer.registerClearcoatPbrWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerColorGlRenderEffects(state:GlRenderState):Void {
+  public static function registerColorGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectRegistrar.registerColorGlRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
@@ -17423,11 +17205,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasRenderEffectRegistration.registerColorGradeCanvasRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerColorGradeGlRenderEffects(state:GlRenderState):Void {
+  public static function registerColorGradeGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectRegistrar.registerColorGradeGlRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerColorWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerColorWgpuRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerColorWgpuRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
@@ -17435,19 +17217,19 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasRenderEffectRegistration.registerCompositeCanvasRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerCompositeGlRenderEffects(state:GlRenderState):Void {
+  public static function registerCompositeGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectRegistrar.registerCompositeGlRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerCompositeWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerCompositeWgpuRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerCompositeWgpuRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerCustomShaderGlMaterial(state:GlRenderState):Void {
+  public static function registerCustomShaderGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_CustomShaderGlMeshMaterialRenderer.registerCustomShaderGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerCustomShaderGlRenderEffect(state:GlRenderState):Void {
+  public static function registerCustomShaderGlRenderEffect(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectRegistrar.registerCustomShaderGlRenderEffect, cast ([state] : Array<Dynamic>));
   }
 
@@ -17455,15 +17237,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_debug_Debug.registerDebugSubsystem, cast ([name, hooks] : Array<Dynamic>));
   }
 
-  public static function registerDefaultGlBlendModes(state:GlRenderState):Void {
+  public static function registerDefaultGlBlendModes(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlDraw.registerDefaultGlBlendModes, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerDefaultGlMaterial(state:GlRenderState):Void {
+  public static function registerDefaultGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlDefaultMaterial.registerDefaultGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerDefaultGlRenderEffects(state:GlRenderState):Void {
+  public static function registerDefaultGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectRegistrar.registerDefaultGlRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
@@ -17471,15 +17253,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_RegisterDefaultHitTests.registerDefaultHitTests, cast ([] : Array<Dynamic>));
   }
 
-  public static function registerDefaultWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerDefaultWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuDefaultMaterial.registerDefaultWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerDepthGlMaterial(state:GlRenderState):Void {
+  public static function registerDepthGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_DepthGlMeshMaterialRenderer.registerDepthGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerDepthWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerDepthWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_DepthWgpuMeshMaterialRenderer.registerDepthWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
@@ -17487,55 +17269,55 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomRichText.registerDomTextInputOverlay, cast ([overlay] : Array<Dynamic>));
   }
 
-  public static function registerEmissiveGlMaterial(state:GlRenderState):Void {
+  public static function registerEmissiveGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_EmissiveGlMeshMaterialRenderer.registerEmissiveGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerEmissiveWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerEmissiveWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_EmissiveWgpuMeshMaterialRenderer.registerEmissiveWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String, texture:Dynamic):Void {
+  public static function registerGlBlendEffectBackdrop(state:Dynamic, backdropKey:String, texture:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlBlendEffect.registerGlBlendEffectBackdrop, cast ([state, backdropKey, texture] : Array<Dynamic>));
   }
 
-  public static function registerGlBlendMode(state:GlRenderState, blendMode:BlendMode, realization:GlBlendRealization):Void {
+  public static function registerGlBlendMode(state:Dynamic, blendMode:BlendMode, realization:GlBlendRealization):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlDraw.registerGlBlendMode, cast ([state, blendMode, realization] : Array<Dynamic>));
   }
 
-  public static function registerGlCompressedTextureDecoder(state:GlRenderState, decode:Null<GlCompressedTextureDecoder>):Void {
+  public static function registerGlCompressedTextureDecoder(state:Dynamic, decode:Null<GlCompressedTextureDecoder>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlCompressedTexture.registerGlCompressedTextureDecoder, cast ([state, decode] : Array<Dynamic>));
   }
 
-  public static function registerGlCompressedTextureUpload(state:GlRenderState, ?uploader:Dynamic):Void {
+  public static function registerGlCompressedTextureUpload(state:Dynamic, ?uploader:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlCompressedTexture.registerGlCompressedTextureUpload, cast ([state, uploader] : Array<Dynamic>));
   }
 
-  public static function registerGlCustomMaterialShader(state:GlRenderState, shaderKey:String, source:GlCustomMaterialShaderSource):Void {
+  public static function registerGlCustomMaterialShader(state:Dynamic, shaderKey:String, source:GlCustomMaterialShaderSource):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_CustomShaderGlMeshMaterialRenderer.registerGlCustomMaterialShader, cast ([state, shaderKey, source] : Array<Dynamic>));
   }
 
-  public static function registerGlCustomShaderSource(state:GlRenderState, shaderKey:String, fragmentSource:String):Void {
+  public static function registerGlCustomShaderSource(state:Dynamic, shaderKey:String, fragmentSource:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlCustomShaderEffect.registerGlCustomShaderSource, cast ([state, shaderKey, fragmentSource] : Array<Dynamic>));
   }
 
-  public static function registerGlDisplayObjectRenderers(state:GlRenderState):Void {
+  public static function registerGlDisplayObjectRenderers(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlDisplayObjectRegistration.registerGlDisplayObjectRenderers, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerGlMaterialRenderer(state:GlRenderState, kind:Kind, renderer:GlMaterialRenderer):Void {
+  public static function registerGlMaterialRenderer(state:Dynamic, kind:Kind, renderer:GlMaterialRenderer):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlMaterialRegistry.registerGlMaterialRenderer, cast ([state, kind, renderer] : Array<Dynamic>));
   }
 
-  public static function registerGlMaterialShader(state:GlRenderState, kind:Kind, shader:GlBitmapShader):Void {
+  public static function registerGlMaterialShader(state:Dynamic, kind:Kind, shader:GlBitmapShader):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlShaderBinding.registerGlMaterialShader, cast ([state, kind, shader] : Array<Dynamic>));
   }
 
-  public static function registerGlMeshMaterialRenderer(state:GlRenderState, kind:Kind, renderer:GlMeshMaterialRenderer):Void {
+  public static function registerGlMeshMaterialRenderer(state:Dynamic, kind:Kind, renderer:GlMeshMaterialRenderer):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlMeshMaterialRegistry.registerGlMeshMaterialRenderer, cast ([state, kind, renderer] : Array<Dynamic>));
   }
 
-  public static function registerGlModifierSnippet(state:GlRenderState, snippet:GlModifierSnippet):Void {
+  public static function registerGlModifierSnippet(state:Dynamic, snippet:GlModifierSnippet):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlShadedModifierSnippet.registerGlModifierSnippet, cast ([state, snippet] : Array<Dynamic>));
   }
 
@@ -17544,7 +17326,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function registerGlRenderEffect(state:GlRenderState, kind:String, runner:GlRenderEffectRunner):Void {
+  public static function registerGlRenderEffect(state:Dynamic, kind:String, runner:GlRenderEffectRunner):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectRegistry.registerGlRenderEffect, cast ([state, kind, runner] : Array<Dynamic>));
   }
 
@@ -17556,7 +17338,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlRichText.registerGlTextInputOverlay, cast ([overlay] : Array<Dynamic>));
   }
 
-  public static function registerGlVelocityWriter(state:GlRenderState, kind:Kind, writer:GlVelocityWriter):Void {
+  public static function registerGlVelocityWriter(state:Dynamic, kind:Kind, writer:GlVelocityWriter):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlVelocity.registerGlVelocityWriter, cast ([state, kind, writer] : Array<Dynamic>));
   }
 
@@ -17576,19 +17358,19 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_imageCodec_ImageEncoderRegistry.registerImageEncoder, cast ([mimeType, encoder] : Array<Dynamic>));
   }
 
-  public static function registerIridescencePbrGlMaterial(state:GlRenderState):Void {
+  public static function registerIridescencePbrGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_IridescencePbrGlMeshMaterialRenderer.registerIridescencePbrGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerIridescencePbrWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerIridescencePbrWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_IridescencePbrWgpuMeshMaterialRenderer.registerIridescencePbrWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerLambertGlMaterial(state:GlRenderState):Void {
+  public static function registerLambertGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_LambertGlMeshMaterialRenderer.registerLambertGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerLambertWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerLambertWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_LambertWgpuMeshMaterialRenderer.registerLambertWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
@@ -17596,23 +17378,23 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_log_Log.registerLogSerializer, cast ([kind, fn] : Array<Dynamic>));
   }
 
-  public static function registerMarkupClassStyles(registry:MarkupTagRegistry, styles:Dynamic):Void {
+  public static function registerMarkupClassStyles(registry:Dynamic, styles:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textMarkup_MarkupClassStyles.registerMarkupClassStyles, cast ([registry, styles] : Array<Dynamic>));
   }
 
-  public static function registerMarkupNamedColors(registry:MarkupTagRegistry):Void {
+  public static function registerMarkupNamedColors(registry:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textMarkup_MarkupNamedColors.registerMarkupNamedColors, cast ([registry] : Array<Dynamic>));
   }
 
-  public static function registerMarkupTag(registry:MarkupTagRegistry, name:String, handler:MarkupTagHandler):Void {
+  public static function registerMarkupTag(registry:Dynamic, name:String, handler:MarkupTagHandler):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textMarkup_MarkupTagRegistry.registerMarkupTag, cast ([registry, name, handler] : Array<Dynamic>));
   }
 
-  public static function registerMatcapGlMaterial(state:GlRenderState):Void {
+  public static function registerMatcapGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_MatcapGlMeshMaterialRenderer.registerMatcapGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerMatcapWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerMatcapWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_MatcapWgpuMeshMaterialRenderer.registerMatcapWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
@@ -17620,11 +17402,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_shading__internal__ModifierRegistryValues.registerModifier, cast ([registry, definition] : Array<Dynamic>));
   }
 
-  public static function registerNormalGlMaterial(state:GlRenderState):Void {
+  public static function registerNormalGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_NormalGlMeshMaterialRenderer.registerNormalGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerNormalWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerNormalWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_NormalWgpuMeshMaterialRenderer.registerNormalWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
@@ -17632,11 +17414,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_particlesFormats_FormatRegistry.registerParticleFormat, cast ([kind, codec] : Array<Dynamic>));
   }
 
-  public static function registerPhongGlMaterial(state:GlRenderState):Void {
+  public static function registerPhongGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_PhongGlMeshMaterialRenderer.registerPhongGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerPhongWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerPhongWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_PhongWgpuMeshMaterialRenderer.registerPhongWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
@@ -17650,11 +17432,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function registerRenderCacheRenderer(state:RenderState, renderer:Renderer):Void {
+  public static function registerRenderCacheRenderer(state:Dynamic, renderer:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_RenderCache.registerRenderCacheRenderer, cast ([state, renderer] : Array<Dynamic>));
   }
 
-  public static function registerRenderer(state:RenderState, kind:Kind, renderer:Renderer):Void {
+  public static function registerRenderer(state:Dynamic, kind:Kind, renderer:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_Renderer.registerRenderer, cast ([state, kind, renderer] : Array<Dynamic>));
   }
 
@@ -17666,15 +17448,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasRenderEffectRegistration.registerScreenSpaceCanvasRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerScreenSpaceGlRenderEffects(state:GlRenderState):Void {
+  public static function registerScreenSpaceGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectRegistrar.registerScreenSpaceGlRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerScreenSpaceWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerScreenSpaceWgpuRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerScreenSpaceWgpuRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerShadedGlMaterial(state:GlRenderState):Void {
+  public static function registerShadedGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_ShadedGlMeshMaterialRenderer.registerShadedGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
@@ -17686,27 +17468,27 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_shape_Shape.registerShapeHitTestCommand, cast ([command] : Array<Dynamic>));
   }
 
-  public static function registerSheenPbrGlMaterial(state:GlRenderState):Void {
+  public static function registerSheenPbrGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_SheenPbrGlMeshMaterialRenderer.registerSheenPbrGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerSheenPbrWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerSheenPbrWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_SheenPbrWgpuMeshMaterialRenderer.registerSheenPbrWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerSpecularGlossinessPbrGlMaterial(state:GlRenderState):Void {
+  public static function registerSpecularGlossinessPbrGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_SpecularGlossinessPbrGlMeshMaterialRenderer.registerSpecularGlossinessPbrGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerSpecularGlossinessPbrWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerSpecularGlossinessPbrWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_SpecularGlossinessPbrWgpuMeshMaterialRenderer.registerSpecularGlossinessPbrWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerSpecularPbrGlMaterial(state:GlRenderState):Void {
+  public static function registerSpecularPbrGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_SpecularPbrGlMeshMaterialRenderer.registerSpecularPbrGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerSpecularPbrWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerSpecularPbrWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_SpecularPbrWgpuMeshMaterialRenderer.registerSpecularPbrWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
@@ -17714,23 +17496,23 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_spritesheetFormats_SpritesheetDetect.registerSpritesheetFormat, cast ([kind, entry] : Array<Dynamic>));
   }
 
-  public static function registerStandardGlRenderEffects(state:GlRenderState):Void {
+  public static function registerStandardGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectRegistrar.registerStandardGlRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerStandardMarkupTags(registry:MarkupTagRegistry):Void {
+  public static function registerStandardMarkupTags(registry:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textMarkup_MarkupTagRegistry.registerStandardMarkupTags, cast ([registry] : Array<Dynamic>));
   }
 
-  public static function registerStandardPbrGlMaterial(state:GlRenderState):Void {
+  public static function registerStandardPbrGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_RegisterStandardPbrGlMaterial.registerStandardPbrGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerStandardPbrWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerStandardPbrWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_RegisterStandardPbrWgpuMaterial.registerStandardPbrWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerStandardWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerStandardWgpuRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerStandardWgpuRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
@@ -17738,19 +17520,19 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasRenderEffectRegistration.registerStylizeCanvasRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerStylizeGlRenderEffects(state:GlRenderState):Void {
+  public static function registerStylizeGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectRegistrar.registerStylizeGlRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerStylizeWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerStylizeWgpuRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerStylizeWgpuRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerSubsurfacePbrGlMaterial(state:GlRenderState):Void {
+  public static function registerSubsurfacePbrGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_SubsurfacePbrGlMeshMaterialRenderer.registerSubsurfacePbrGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerSubsurfacePbrWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerSubsurfacePbrWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_SubsurfacePbrWgpuMeshMaterialRenderer.registerSubsurfacePbrWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
@@ -17758,35 +17540,35 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_RegisterTextHitTest.registerTextHitTest, cast ([] : Array<Dynamic>));
   }
 
-  public static function registerToonGlMaterial(state:GlRenderState):Void {
+  public static function registerToonGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_ToonGlMeshMaterialRenderer.registerToonGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerToonWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerToonWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_ToonWgpuMeshMaterialRenderer.registerToonWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerTransmissionVolumePbrGlMaterial(state:GlRenderState):Void {
+  public static function registerTransmissionVolumePbrGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_TransmissionVolumePbrGlMeshMaterialRenderer.registerTransmissionVolumePbrGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerTransmissionVolumePbrWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerTransmissionVolumePbrWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_TransmissionVolumePbrWgpuMeshMaterialRenderer.registerTransmissionVolumePbrWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerUnlitGlMaterial(state:GlRenderState):Void {
+  public static function registerUnlitGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_UnlitGlMeshMaterialRenderer.registerUnlitGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerUnlitWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerUnlitWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_UnlitWgpuMeshMaterialRenderer.registerUnlitWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerVertexColorGlMaterial(state:GlRenderState):Void {
+  public static function registerVertexColorGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_VertexColorGlMeshMaterialRenderer.registerVertexColorGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerVertexColorWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerVertexColorWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_VertexColorWgpuMeshMaterialRenderer.registerVertexColorWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
@@ -17798,23 +17580,23 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_imageCodec_RegisterWebImageEncoders.registerWebImageEncoders, cast ([] : Array<Dynamic>));
   }
 
-  public static function registerWgpuBitmapShader(state:WgpuRenderState, shader:WgpuBitmapShader):Void {
+  public static function registerWgpuBitmapShader(state:Dynamic, shader:WgpuBitmapShader):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuShaderRegistry.registerWgpuBitmapShader, cast ([state, shader] : Array<Dynamic>));
   }
 
-  public static function registerWgpuDisplayObjectRenderers(state:WgpuRenderState):Void {
+  public static function registerWgpuDisplayObjectRenderers(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuRegistration.registerWgpuDisplayObjectRenderers, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind, renderer:WgpuMaterialRenderer):Void {
+  public static function registerWgpuMaterialRenderer(state:Dynamic, kind:Kind, renderer:WgpuMaterialRenderer):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuMaterialRegistry.registerWgpuMaterialRenderer, cast ([state, kind, renderer] : Array<Dynamic>));
   }
 
-  public static function registerWgpuMeshMaterialRenderer(state:WgpuRenderState, kind:Kind, renderer:WgpuMeshMaterialRenderer):Void {
+  public static function registerWgpuMeshMaterialRenderer(state:Dynamic, kind:Kind, renderer:WgpuMeshMaterialRenderer):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuMeshMaterialRegistry.registerWgpuMeshMaterialRenderer, cast ([state, kind, renderer] : Array<Dynamic>));
   }
 
-  public static function registerWgpuRenderEffect(state:WgpuRenderState, kind:String, runner:WgpuRenderEffectRunner):Void {
+  public static function registerWgpuRenderEffect(state:Dynamic, kind:String, runner:WgpuRenderEffectRunner):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectRegistry.registerWgpuRenderEffect, cast ([state, kind, runner] : Array<Dynamic>));
   }
 
@@ -17822,7 +17604,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasShapeRegistry.registerCanvasShapeCommands, cast ([commands] : Array<Dynamic>));
   }
 
-  public static function registerWgpuSpriteRenderers(state:WgpuRenderState):Void {
+  public static function registerWgpuSpriteRenderers(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuRegistration.registerWgpuSpriteRenderers, cast ([state] : Array<Dynamic>));
   }
 
@@ -17830,15 +17612,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuRichText.registerWgpuTextInputOverlay, cast ([overlay] : Array<Dynamic>));
   }
 
-  public static function registerWgpuVelocityWriter(state:WgpuRenderState, kind:Kind, writer:WgpuVelocityWriter):Void {
+  public static function registerWgpuVelocityWriter(state:Dynamic, kind:Kind, writer:WgpuVelocityWriter):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuVelocity.registerWgpuVelocityWriter, cast ([state, kind, writer] : Array<Dynamic>));
   }
 
-  public static function registerWireframeGlMaterial(state:GlRenderState):Void {
+  public static function registerWireframeGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_WireframeGlMeshMaterialRenderer.registerWireframeGlMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerWireframeWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerWireframeWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WireframeWgpuMeshMaterialRenderer.registerWireframeWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
@@ -17850,15 +17632,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_app_App.releaseAppSingleInstanceLock, cast ([] : Array<Dynamic>));
   }
 
-  public static function releaseAsset(library:AssetLibrary, id:String):Void {
+  public static function releaseAsset(library:Dynamic, id:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_assets_AssetLibrary.releaseAsset, cast ([library, id] : Array<Dynamic>));
   }
 
-  public static function releaseAssetGroup(library:AssetLibrary, name:String):Void {
+  public static function releaseAssetGroup(library:Dynamic, name:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_assets_AssetLibrary.releaseAssetGroup, cast ([library, name] : Array<Dynamic>));
   }
 
-  public static function releaseCanvasRenderCache(state:Dynamic, cache:RenderCache):Void {
+  public static function releaseCanvasRenderCache(state:Dynamic, cache:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasCache.releaseCanvasRenderCache, cast ([state, cache] : Array<Dynamic>));
   }
 
@@ -17866,19 +17648,19 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsCanvas_CanvasRenderEffectPipeline.releaseCanvasRenderTarget, cast ([pool, target] : Array<Dynamic>));
   }
 
-  public static function releaseClipRegion(clip:ClipRegion):Void {
+  public static function releaseClipRegion(clip:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.releaseClipRegion, cast ([clip] : Array<Dynamic>));
   }
 
-  public static function releaseDomRenderCache(state:DomRenderState, cache:RenderCache):Void {
+  public static function releaseDomRenderCache(state:Dynamic, cache:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomCache.releaseDomRenderCache, cast ([state, cache] : Array<Dynamic>));
   }
 
-  public static function releaseGlRenderCache(state:GlRenderState, cache:RenderCache):Void {
+  public static function releaseGlRenderCache(state:Dynamic, cache:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlCache.releaseGlRenderCache, cast ([state, cache] : Array<Dynamic>));
   }
 
-  public static function releaseGlRenderTarget(pool:GlRenderTargetPool, target:GlRenderTarget):Void {
+  public static function releaseGlRenderTarget(pool:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlRenderTargetPool.releaseGlRenderTarget, cast ([pool, target] : Array<Dynamic>));
   }
 
@@ -17890,15 +17672,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_interaction_InteractionManager.releaseInteractionPointer, cast ([manager, pointerId] : Array<Dynamic>));
   }
 
-  public static function releaseMatrix(m:Matrix):Void {
+  public static function releaseMatrix(m:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_MatrixPool.releaseMatrix, cast ([m] : Array<Dynamic>));
   }
 
-  public static function releaseMatrix3(m:Matrix3):Void {
+  public static function releaseMatrix3(m:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix3Pool.releaseMatrix3, cast ([m] : Array<Dynamic>));
   }
 
-  public static function releaseMatrix4(m:Matrix4):Void {
+  public static function releaseMatrix4(m:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix4Pool.releaseMatrix4, cast ([m] : Array<Dynamic>));
   }
 
@@ -17910,11 +17692,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_path_Path.releasePathMeshTyped, cast ([mesh] : Array<Dynamic>));
   }
 
-  public static function releaseQuaternion(q:Quaternion):Void {
+  public static function releaseQuaternion(q:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_QuaternionPool.releaseQuaternion, cast ([q] : Array<Dynamic>));
   }
 
-  public static function releaseRectangle(r:Rectangle):Void {
+  public static function releaseRectangle(r:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_RectanglePool.releaseRectangle, cast ([r] : Array<Dynamic>));
   }
 
@@ -17922,27 +17704,27 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaperPool.releaseShapedRun, cast ([run] : Array<Dynamic>));
   }
 
-  public static function releaseSpritesheetPlayer(player:SpritesheetPlayer):Void {
+  public static function releaseSpritesheetPlayer(player:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.releaseSpritesheetPlayer, cast ([player] : Array<Dynamic>));
   }
 
-  public static function releaseVector2(v:Vector2):Void {
+  public static function releaseVector2(v:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector2Pool.releaseVector2, cast ([v] : Array<Dynamic>));
   }
 
-  public static function releaseVector3(v:Vector3):Void {
+  public static function releaseVector3(v:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector3Pool.releaseVector3, cast ([v] : Array<Dynamic>));
   }
 
-  public static function releaseVector4(v:Vector4):Void {
+  public static function releaseVector4(v:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector4Pool.releaseVector4, cast ([v] : Array<Dynamic>));
   }
 
-  public static function releaseWgpuRenderCache(state:WgpuRenderState, cache:RenderCache):Void {
+  public static function releaseWgpuRenderCache(state:Dynamic, cache:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuCache.releaseWgpuRenderCache, cast ([state, cache] : Array<Dynamic>));
   }
 
-  public static function releaseWgpuRenderTarget(pool:WgpuRenderTargetPool, target:WgpuRenderTarget):Void {
+  public static function releaseWgpuRenderTarget(pool:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuRenderTargetPool.releaseWgpuRenderTarget, cast ([pool, target] : Array<Dynamic>));
   }
 
@@ -17967,7 +17749,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_ipc_Ipc.removeAllIpcListeners, cast ([channel] : Array<Dynamic>));
   }
 
-  public static function removeClockChild(parent:Clock, child:Clock):Void {
+  public static function removeClockChild(parent:Dynamic, child:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_clock_AddClockChild.removeClockChild, cast ([parent, child] : Array<Dynamic>));
   }
 
@@ -17986,7 +17768,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function removeMovieClipFrameScript(clip:MovieClip, frame:Dynamic):Void {
+  public static function removeMovieClipFrameScript(clip:Dynamic, frame:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.removeMovieClipFrameScript, cast ([clip, frame] : Array<Dynamic>));
   }
 
@@ -18009,11 +17791,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.removeNodeChildren, cast ([target, beginIndex, endIndex] : Array<Dynamic>));
   }
 
-  public static function removeParticleEmitter3DParticle(target:ParticleEmitter3D, index:Float):Void {
+  public static function removeParticleEmitter3DParticle(target:Dynamic, index:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.removeParticleEmitter3DParticle, cast ([target, index] : Array<Dynamic>));
   }
 
-  public static function removeParticleEmitterParticle(target:ParticleEmitter, index:Float):Void {
+  public static function removeParticleEmitterParticle(target:Dynamic, index:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter.removeParticleEmitterParticle, cast ([target, index] : Array<Dynamic>));
   }
 
@@ -18022,15 +17804,15 @@ class Sdk {
     return cast null;
   }
 
-  public static function removeQuadBatchInstance(target:QuadBatch, index:Float):Void {
+  public static function removeQuadBatchInstance(target:Dynamic, index:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.removeQuadBatchInstance, cast ([target, index] : Array<Dynamic>));
   }
 
-  public static function removeRichTextFormatRangesIn(source:RichText, begin:Float, end:Float):Void {
+  public static function removeRichTextFormatRangesIn(source:Dynamic, begin:Float, end:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.removeRichTextFormatRangesIn, cast ([source, begin, end] : Array<Dynamic>));
   }
 
-  public static function removeSpatialObject(index:SpatialIndex, id:SpatialObjectId):Void {
+  public static function removeSpatialObject(index:Dynamic, id:SpatialObjectId):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spatial_SpatialIndex.removeSpatialObject, cast ([index, id] : Array<Dynamic>));
   }
 
@@ -18044,7 +17826,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function removeTimelineFrameScript(timeline:Timeline, frame:Dynamic):Void {
+  public static function removeTimelineFrameScript(timeline:Dynamic, frame:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_timeline_Timeline.removeTimelineFrameScript, cast ([timeline, frame] : Array<Dynamic>));
   }
 
@@ -18063,7 +17845,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasBackground.renderCanvasBackground, cast ([state] : Array<Dynamic>));
   }
 
-  public static function renderCanvasDisplayObject(state:Dynamic, source:DisplayObject):Void {
+  public static function renderCanvasDisplayObject(state:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasDisplayObject.renderCanvasDisplayObject, cast ([state, source] : Array<Dynamic>));
   }
 
@@ -18071,49 +17853,49 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasShape.renderCanvasShapeCommands, cast ([context, commands] : Array<Dynamic>));
   }
 
-  public static function renderCanvasSprite(state:Dynamic, source:DisplayObject):Void {
+  public static function renderCanvasSprite(state:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasSprite.renderCanvasSprite, cast ([state, source] : Array<Dynamic>));
   }
 
-  public static function renderDomBackground(state:DomRenderState):Void {
+  public static function renderDomBackground(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomBackground.renderDomBackground, cast ([state] : Array<Dynamic>));
   }
 
-  public static function renderDomDisplayObject(state:DomRenderState, source:DisplayObject):Void {
+  public static function renderDomDisplayObject(state:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomDisplayObject.renderDomDisplayObject, cast ([state, source] : Array<Dynamic>));
   }
 
-  public static function renderGlBackground(state:GlRenderState):Void {
+  public static function renderGlBackground(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlBackground.renderGlBackground, cast ([state] : Array<Dynamic>));
   }
 
-  public static function renderGlDisplayObject(state:GlRenderState, source:DisplayObject):Void {
+  public static function renderGlDisplayObject(state:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlDisplayObject.renderGlDisplayObject, cast ([state, source] : Array<Dynamic>));
   }
 
-  public static function renderGlSprite(state:GlRenderState, source:DisplayObject):Void {
+  public static function renderGlSprite(state:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlSprite.renderGlSprite, cast ([state, source] : Array<Dynamic>));
   }
 
-  public static function renderGlVelocity<Traits>(state:GlRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:GlRenderTarget):Void {
+  public static function renderGlVelocity<Traits>(state:Dynamic, root:Transform2DNode<Traits>, field:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlVelocity.renderGlVelocity, cast ([state, root, field, target] : Array<Dynamic>));
   }
 
   public static final RenderViewKind:Dynamic = Facade_Sdk_flighthq_types__internal__RenderViewValues.RenderViewKind;
 
-  public static function renderWgpuBackground(state:WgpuRenderState):Void {
+  public static function renderWgpuBackground(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuBackground.renderWgpuBackground, cast ([state] : Array<Dynamic>));
   }
 
-  public static function renderWgpuDisplayObject(state:WgpuRenderState, source:DisplayObject):Void {
+  public static function renderWgpuDisplayObject(state:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuDisplayObject.renderWgpuDisplayObject, cast ([state, source] : Array<Dynamic>));
   }
 
-  public static function renderWgpuSprite(state:WgpuRenderState, source:DisplayObject):Void {
+  public static function renderWgpuSprite(state:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuSprite.renderWgpuSprite, cast ([state, source] : Array<Dynamic>));
   }
 
-  public static function renderWgpuVelocity<Traits>(state:WgpuRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:WgpuRenderTarget):Void {
+  public static function renderWgpuVelocity<Traits>(state:Dynamic, root:Transform2DNode<Traits>, field:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuVelocity.renderWgpuVelocity, cast ([state, root, field, target] : Array<Dynamic>));
   }
 
@@ -18139,15 +17921,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_node_Hierarchy.replaceNodeChild, cast ([target, oldChild, newChild] : Array<Dynamic>));
   }
 
-  public static function replaceRichTextString(source:RichText, beginIndex:Float, endIndex:Float, value:String):Void {
+  public static function replaceRichTextString(source:Dynamic, beginIndex:Float, endIndex:Float, value:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.replaceRichTextString, cast ([source, beginIndex, endIndex, value] : Array<Dynamic>));
   }
 
-  public static function replaceSelectedTextInput(source:RichText, text:String, ?options:ReplaceTextInputOptions):Void {
+  public static function replaceSelectedTextInput(source:Dynamic, text:String, ?options:ReplaceTextInputOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.replaceSelectedTextInput, cast ([source, text, options] : Array<Dynamic>));
   }
 
-  public static function replaceTextInput(source:RichText, beginIndex:Float, endIndex:Float, text:String, ?options:ReplaceTextInputOptions):Void {
+  public static function replaceTextInput(source:Dynamic, beginIndex:Float, endIndex:Float, text:String, ?options:ReplaceTextInputOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.replaceTextInput, cast ([source, beginIndex, endIndex, text, options] : Array<Dynamic>));
   }
 
@@ -18215,7 +17997,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function reserveBitmapText(target:BitmapText, glyphCapacity:Float):Void {
+  public static function reserveBitmapText(target:Dynamic, glyphCapacity:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_bitmaptext_BitmapText.reserveBitmapText, cast ([target, glyphCapacity] : Array<Dynamic>));
   }
 
@@ -18229,15 +18011,15 @@ class Sdk {
     return cast null;
   }
 
-  public static function reserveParticleEmitter(target:ParticleEmitter, capacity:Float):Void {
+  public static function reserveParticleEmitter(target:Dynamic, capacity:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter.reserveParticleEmitter, cast ([target, capacity] : Array<Dynamic>));
   }
 
-  public static function reserveParticleEmitter3D(target:ParticleEmitter3D, capacity:Float):Void {
+  public static function reserveParticleEmitter3D(target:Dynamic, capacity:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.reserveParticleEmitter3D, cast ([target, capacity] : Array<Dynamic>));
   }
 
-  public static function reserveQuadBatch(target:QuadBatch, capacity:Float):Void {
+  public static function reserveQuadBatch(target:Dynamic, capacity:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.reserveQuadBatch, cast ([target, capacity] : Array<Dynamic>));
   }
 
@@ -18246,19 +18028,19 @@ class Sdk {
     return cast null;
   }
 
-  public static function resetAllTweens(manager:TweenManager):Void {
+  public static function resetAllTweens(manager:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.resetAllTweens, cast ([manager] : Array<Dynamic>));
   }
 
-  public static function resetClock(clock:Clock):Void {
+  public static function resetClock(clock:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_clock_ResetClock.resetClock, cast ([clock] : Array<Dynamic>));
   }
 
-  public static function resetResourceLoader(loader:ResourceLoader):Void {
+  public static function resetResourceLoader(loader:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_loader_ResourceLoader.resetResourceLoader, cast ([loader] : Array<Dynamic>));
   }
 
-  public static function resetSpring(spring:Spring, value:Float, ?velocity:Float):Void {
+  public static function resetSpring(spring:Dynamic, value:Float, ?velocity:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spring_ResetSpring.resetSpring, cast ([spring, value, velocity] : Array<Dynamic>));
   }
 
@@ -18270,11 +18052,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_texture_Texture.resetVideoTextureFrame, cast ([videoTexture] : Array<Dynamic>));
   }
 
-  public static function resetWgpuRenderStats(state:WgpuRenderState):Void {
+  public static function resetWgpuRenderStats(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuRenderStats.resetWgpuRenderStats, cast ([state] : Array<Dynamic>));
   }
 
-  public static function resetWgpuSpriteBatchBufferPool(state:WgpuRenderState):Void {
+  public static function resetWgpuSpriteBatchBufferPool(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuSpriteBatch.resetWgpuSpriteBatchBufferPool, cast ([state] : Array<Dynamic>));
   }
 
@@ -18282,23 +18064,23 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasRenderTarget.resizeCanvasRenderTarget, cast ([target, width, height] : Array<Dynamic>));
   }
 
-  public static function resizeGlRenderTarget(state:GlRenderState, target:GlRenderTarget, width:Float, height:Float):Void {
+  public static function resizeGlRenderTarget(state:Dynamic, target:Dynamic, width:Float, height:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlRenderTarget.resizeGlRenderTarget, cast ([state, target, width, height] : Array<Dynamic>));
   }
 
-  public static function resizeQuadBatch(target:QuadBatch, instanceCount:Float):Void {
+  public static function resizeQuadBatch(target:Dynamic, instanceCount:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.resizeQuadBatch, cast ([target, instanceCount] : Array<Dynamic>));
   }
 
-  public static function resizeSurface(dest:SurfaceRegion, source:SurfaceRegion, ?options:Dynamic):Void {
+  public static function resizeSurface(dest:Dynamic, source:Dynamic, ?options:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.resizeSurface, cast ([dest, source, options] : Array<Dynamic>));
   }
 
-  public static function resizeTilemap(tilemap:Tilemap, columns:Float, rows:Float):Void {
+  public static function resizeTilemap(tilemap:Dynamic, columns:Float, rows:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.resizeTilemap, cast ([tilemap, columns, rows] : Array<Dynamic>));
   }
 
-  public static function resizeWgpuRenderTarget(state:WgpuRenderState, target:WgpuRenderTarget, width:Float, height:Float):Void {
+  public static function resizeWgpuRenderTarget(state:Dynamic, target:Dynamic, width:Float, height:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuRenderTarget.resizeWgpuRenderTarget, cast ([state, target, width, height] : Array<Dynamic>));
   }
 
@@ -18312,17 +18094,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function resolveCanvasImageSource(state:Dynamic, image:ImageResource):Null<Dynamic> {
+  public static function resolveCanvasImageSource(state:Dynamic, image:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasImageSource.resolveCanvasImageSource, cast ([state, image] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function resolveCanvasMaterialRenderer(state:Dynamic, material:Null<Material>):Null<Dynamic> {
+  public static function resolveCanvasMaterialRenderer(state:Dynamic, material:Null<Dynamic>):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasMaterialRegistry.resolveCanvasMaterialRenderer, cast ([state, material] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function resolveColorAdjustmentsColorTransform(adjustments:Null<Array<Adjustment>>, out:ColorTransform):Float {
+  public static function resolveColorAdjustmentsColorTransform(adjustments:Null<Array<Adjustment>>, out:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_adjustments_ColorAdjustmentResolution.resolveColorAdjustmentsColorTransform, cast ([adjustments, out] : Array<Dynamic>));
     return cast null;
   }
@@ -18332,7 +18114,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function resolveDomImageSource(state:DomRenderState, image:ImageResource):Null<Dynamic> {
+  public static function resolveDomImageSource(state:Dynamic, image:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomImageSource.resolveDomImageSource, cast ([state, image] : Array<Dynamic>));
     return cast null;
   }
@@ -18342,26 +18124,26 @@ class Sdk {
     return cast null;
   }
 
-  public static function resolveGlMaterialRenderer(state:GlRenderState, material:Null<Material>):Null<GlMaterialRenderer> {
+  public static function resolveGlMaterialRenderer(state:Dynamic, material:Null<Dynamic>):Null<GlMaterialRenderer> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlMaterialRegistry.resolveGlMaterialRenderer, cast ([state, material] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function resolveGlMeshMaterialRenderer(state:GlRenderState, material:Null<Material>):Null<GlMeshMaterialRenderer> {
+  public static function resolveGlMeshMaterialRenderer(state:Dynamic, material:Null<Dynamic>):Null<GlMeshMaterialRenderer> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlMeshMaterialRegistry.resolveGlMeshMaterialRenderer, cast ([state, material] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function resolveGlModifierSnippet(state:GlRenderState, kind:ModifierKind):Null<GlModifierSnippet> {
+  public static function resolveGlModifierSnippet(state:Dynamic, kind:ModifierKind):Null<GlModifierSnippet> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlShadedModifierSnippet.resolveGlModifierSnippet, cast ([state, kind] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function resolveGlRenderTarget(state:GlRenderState, target:GlRenderTarget):Void {
+  public static function resolveGlRenderTarget(state:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlRenderTarget.resolveGlRenderTarget, cast ([state, target] : Array<Dynamic>));
   }
 
-  public static function resolveGlShader(state:GlRenderState, renderProxy:RenderProxy2D):GlBitmapShader {
+  public static function resolveGlShader(state:Dynamic, renderProxy:RenderProxy2D):GlBitmapShader {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlShaderBinding.resolveGlShader, cast ([state, renderProxy] : Array<Dynamic>));
     return cast null;
   }
@@ -18376,16 +18158,16 @@ class Sdk {
     return cast null;
   }
 
-  public static function resolveOneSceneResourceTexture(resolver:SceneResourceResolver, ref:SceneResourceRef, signal:Dynamic):flighthq._internal._Promise<Null<ImageResource>> {
+  public static function resolveOneSceneResourceTexture(resolver:SceneResourceResolver, ref:SceneResourceRef, signal:Dynamic):flighthq._internal._Promise<Null<Dynamic>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneResources_ResolveSceneResources.resolveOneSceneResourceTexture, cast ([resolver, ref, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function resolveSceneResources(scene:SceneNode, resolver:SceneResourceResolver, ?options:ResolveSceneResourcesOptions):Void {
+  public static function resolveSceneResources(scene:Dynamic, resolver:SceneResourceResolver, ?options:ResolveSceneResourcesOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneResources_ResolveSceneResources.resolveSceneResources, cast ([scene, resolver, options] : Array<Dynamic>));
   }
 
-  public static function resolveSceneResourcesAndWait(scene:SceneNode, resolver:SceneResourceResolver, ?options:ResolveSceneResourcesOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
+  public static function resolveSceneResourcesAndWait(scene:Dynamic, resolver:SceneResourceResolver, ?options:ResolveSceneResourcesOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneResources_ResolveSceneResourcesAndWait.resolveSceneResourcesAndWait, cast ([scene, resolver, options] : Array<Dynamic>));
     return cast null;
   }
@@ -18395,27 +18177,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function resolveScenesWithOptions(scenes:Array<Scene>, ?options:LoadSceneOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
+  public static function resolveScenesWithOptions(scenes:Array<Dynamic>, ?options:LoadSceneOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneResources__internal__LoadSceneOptionsValues.resolveScenesWithOptions, cast ([scenes, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function resolveWgpuMaterialRenderer(state:WgpuRenderState, material:Null<Material>):Null<WgpuMaterialRenderer> {
+  public static function resolveWgpuMaterialRenderer(state:Dynamic, material:Null<Dynamic>):Null<WgpuMaterialRenderer> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuMaterialRegistry.resolveWgpuMaterialRenderer, cast ([state, material] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function resolveWgpuMaterialTextureView(state:WgpuRenderState, texture:Null<Texture>):Dynamic {
+  public static function resolveWgpuMaterialTextureView(state:Dynamic, texture:Null<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.resolveWgpuMaterialTextureView, cast ([state, texture] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function resolveWgpuMeshMaterialRenderer(state:WgpuRenderState, material:Null<Material>):Null<WgpuMeshMaterialRenderer> {
+  public static function resolveWgpuMeshMaterialRenderer(state:Dynamic, material:Null<Dynamic>):Null<WgpuMeshMaterialRenderer> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuMeshMaterialRegistry.resolveWgpuMeshMaterialRenderer, cast ([state, material] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function resolveWgpuShader(state:WgpuRenderState, renderProxy:RenderProxy2D):Null<WgpuBitmapShader> {
+  public static function resolveWgpuShader(state:Dynamic, renderProxy:RenderProxy2D):Null<WgpuBitmapShader> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuShaderBinding.resolveWgpuShader, cast ([state, renderProxy] : Array<Dynamic>));
     return cast null;
   }
@@ -18432,7 +18214,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.restoreWindow, cast ([win] : Array<Dynamic>));
   }
 
-  public static function resumeAllAudioMixerChannels(mixer:AudioMixer):Void {
+  public static function resumeAllAudioMixerChannels(mixer:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_media_AudioMixer.resumeAllAudioMixerChannels, cast ([mixer] : Array<Dynamic>));
   }
 
@@ -18440,27 +18222,27 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_shortcut_Shortcut.resumeAllGlobalShortcuts, cast ([] : Array<Dynamic>));
   }
 
-  public static function resumeAllTweens(manager:TweenManager):Void {
+  public static function resumeAllTweens(manager:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.resumeAllTweens, cast ([manager] : Array<Dynamic>));
   }
 
-  public static function resumeApplicationLoop(app:Application):Void {
+  public static function resumeApplicationLoop(app:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.resumeApplicationLoop, cast ([app] : Array<Dynamic>));
   }
 
-  public static function resumeAudioChannel(channel:AudioChannel):Void {
+  public static function resumeAudioChannel(channel:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_media_AudioChannel.resumeAudioChannel, cast ([channel] : Array<Dynamic>));
   }
 
-  public static function resumeClock(clock:Clock):Void {
+  public static function resumeClock(clock:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_clock_PauseClock.resumeClock, cast ([clock] : Array<Dynamic>));
   }
 
-  public static function resumeResourceLoad(loader:ResourceLoader):Void {
+  public static function resumeResourceLoad(loader:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_loader_ResourceLoader.resumeResourceLoad, cast ([loader] : Array<Dynamic>));
   }
 
-  public static function resumeSpritesheetPlayer(player:SpritesheetPlayer):Void {
+  public static function resumeSpritesheetPlayer(player:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.resumeSpritesheetPlayer, cast ([player] : Array<Dynamic>));
   }
 
@@ -18468,20 +18250,20 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.resumeTween, cast ([tween] : Array<Dynamic>));
   }
 
-  public static function resumeTweens(manager:TweenManager, target:Dynamic):Void {
+  public static function resumeTweens(manager:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.resumeTweens, cast ([manager, target] : Array<Dynamic>));
   }
 
-  public static function resumeVideoChannel(channel:VideoChannel):Void {
+  public static function resumeVideoChannel(channel:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_media_VideoChannel.resumeVideoChannel, cast ([channel] : Array<Dynamic>));
   }
 
-  public static function revealSceneResourcesOnResolve(resolver:SceneResourceResolver, scene:SceneNode, tweenManager:TweenManager, ?options:SceneResourceRevealOptions):Dynamic {
+  public static function revealSceneResourcesOnResolve(resolver:SceneResourceResolver, scene:Dynamic, tweenManager:Dynamic, ?options:SceneResourceRevealOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneResources_RevealSceneResourcesOnResolve.revealSceneResourcesOnResolve, cast ([resolver, scene, tweenManager, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function reversePath(source:Path, out:Path):Void {
+  public static function reversePath(source:Dynamic, out:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_Path.reversePath, cast ([source, out] : Array<Dynamic>));
   }
 
@@ -18519,19 +18301,19 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix4.rotateMatrix4, cast ([out, source, axis, radians] : Array<Dynamic>));
   }
 
-  public static function rotateSurface(dest:SurfaceRegion, source:SurfaceRegion, angle:Float, ?pivotX:Float, ?pivotY:Float, ?edgeMode:SurfaceEdgeMode, ?sampleMode:SurfaceResizeMode):Void {
+  public static function rotateSurface(dest:Dynamic, source:Dynamic, angle:Float, ?pivotX:Float, ?pivotY:Float, ?edgeMode:SurfaceEdgeMode, ?sampleMode:SurfaceResizeMode):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.rotateSurface, cast ([dest, source, angle, pivotX, pivotY, edgeMode, sampleMode] : Array<Dynamic>));
   }
 
-  public static function rotateSurface180(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function rotateSurface180(dest:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.rotateSurface180, cast ([dest, source] : Array<Dynamic>));
   }
 
-  public static function rotateSurfaceClockwise(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function rotateSurfaceClockwise(dest:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.rotateSurfaceClockwise, cast ([dest, source] : Array<Dynamic>));
   }
 
-  public static function rotateSurfaceCounterClockwise(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function rotateSurfaceCounterClockwise(dest:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.rotateSurfaceCounterClockwise, cast ([dest, source] : Array<Dynamic>));
   }
 
@@ -18544,19 +18326,19 @@ class Sdk {
     return cast null;
   }
 
-  public static function routeAudioChannelToMixerBus(mixer:AudioMixer, channel:AudioChannel, bus:AudioBus):Void {
+  public static function routeAudioChannelToMixerBus(mixer:Dynamic, channel:Dynamic, bus:AudioBus):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_media_AudioMixer.routeAudioChannelToMixerBus, cast ([mixer, channel, bus] : Array<Dynamic>));
   }
 
-  public static function sampleAnimationClip(out:Dynamic, clip:AnimationClip, time:Float, visit:Dynamic):Void {
+  public static function sampleAnimationClip(out:Dynamic, clip:Dynamic, time:Float, visit:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_animation_AnimationClip.sampleAnimationClip, cast ([out, clip, time, visit] : Array<Dynamic>));
   }
 
-  public static function sampleAnimationTrack(out:Dynamic, track:AnimationTrack, t:Float):Void {
+  public static function sampleAnimationTrack(out:Dynamic, track:Dynamic, t:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_animation_AnimationTrack.sampleAnimationTrack, cast ([out, track, t] : Array<Dynamic>));
   }
 
-  public static function sampleColorLut(lut:ColorLut, out:Array<Float>, r:Float, g:Float, b:Float):Void {
+  public static function sampleColorLut(lut:Dynamic, out:Array<Float>, r:Float, g:Float, b:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_adjustments_ColorLut.sampleColorLut, cast ([lut, out, r, g, b] : Array<Dynamic>));
   }
 
@@ -18590,11 +18372,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix4.scaleMatrix4, cast ([out, source, sx, sy, sz] : Array<Dynamic>));
   }
 
-  public static function scaleMeshGeometry(geometry:MeshGeometry, sx:Float, sy:Float, sz:Float):Void {
+  public static function scaleMeshGeometry(geometry:Dynamic, sx:Float, sy:Float, sz:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryTransforms.scaleMeshGeometry, cast ([geometry, sx, sy, sz] : Array<Dynamic>));
   }
 
-  public static function scaleMeshGeometryUvs(geometry:MeshGeometry, su:Float, sv:Float):Void {
+  public static function scaleMeshGeometryUvs(geometry:Dynamic, su:Float, sv:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryUvs.scaleMeshGeometryUvs, cast ([geometry, su, sv] : Array<Dynamic>));
   }
 
@@ -18668,23 +18450,23 @@ class Sdk {
     return cast null;
   }
 
-  public static function scrollSurface(out:Surface, dx:Float, dy:Float):Void {
+  public static function scrollSurface(out:Dynamic, dx:Float, dy:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.scrollSurface, cast ([out, dx, dy] : Array<Dynamic>));
   }
 
-  public static function scrollTextInputCaretIntoView(source:RichText, layout:TextLayoutResult, viewportWidth:Float, viewportHeight:Float):Void {
+  public static function scrollTextInputCaretIntoView(source:Dynamic, layout:TextLayoutResult, viewportWidth:Float, viewportHeight:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.scrollTextInputCaretIntoView, cast ([source, layout, viewportWidth, viewportHeight] : Array<Dynamic>));
   }
 
-  public static function seekAnimationPlayer(player:AnimationPlayer, time:Float):Void {
+  public static function seekAnimationPlayer(player:Dynamic, time:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_animation_AnimationPlayer.seekAnimationPlayer, cast ([player, time] : Array<Dynamic>));
   }
 
-  public static function seekSpritesheetPlayerToFrame(player:SpritesheetPlayer, frameIndex:Float):Void {
+  public static function seekSpritesheetPlayerToFrame(player:Dynamic, frameIndex:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.seekSpritesheetPlayerToFrame, cast ([player, frameIndex] : Array<Dynamic>));
   }
 
-  public static function seekSpritesheetPlayerToTime(player:SpritesheetPlayer, time:Float):Void {
+  public static function seekSpritesheetPlayerToTime(player:Dynamic, time:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.seekSpritesheetPlayerToTime, cast ([player, time] : Array<Dynamic>));
   }
 
@@ -18692,22 +18474,22 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.seekTween, cast ([tween, timeSeconds] : Array<Dynamic>));
   }
 
-  public static function segmentGraphemes(text:String, ?locale:String):Array<TextSegment> {
+  public static function segmentGraphemes(text:String, ?locale:String):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textsegment_TextSegment.segmentGraphemes, cast ([text, locale] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function segmentSentences(text:String, ?locale:String):Array<TextSegment> {
+  public static function segmentSentences(text:String, ?locale:String):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textsegment_TextSegment.segmentSentences, cast ([text, locale] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function segmentWords(text:String, ?locale:String):Array<TextSegment> {
+  public static function segmentWords(text:String, ?locale:String):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textsegment_TextSegment.segmentWords, cast ([text, locale] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function selectAllTextInput(source:RichText):Void {
+  public static function selectAllTextInput(source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.selectAllTextInput, cast ([source] : Array<Dynamic>));
   }
 
@@ -18716,7 +18498,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function selectLineAtTextInputIndex(source:RichText, index:Float):Void {
+  public static function selectLineAtTextInputIndex(source:Dynamic, index:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.selectLineAtTextInputIndex, cast ([source, index] : Array<Dynamic>));
   }
 
@@ -18745,7 +18527,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function selectWordAtTextInputIndex(source:RichText, index:Float):Void {
+  public static function selectWordAtTextInputIndex(source:Dynamic, index:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.selectWordAtTextInputIndex, cast ([source, index] : Array<Dynamic>));
   }
 
@@ -18762,27 +18544,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function sendSocketMessage(socket:Socket, data:Dynamic):Bool {
+  public static function sendSocketMessage(socket:Dynamic, data:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_socket_Socket.sendSocketMessage, cast ([socket, data] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeAsepriteSpritesheet(data:SpritesheetData, ?existing:Dynamic, ?options:AsepriteSerializeOptions):String {
+  public static function serializeAsepriteSpritesheet(data:Dynamic, ?existing:Dynamic, ?options:AsepriteSerializeOptions):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheetFormats_AsepriteSerialize.serializeAsepriteSpritesheet, cast ([data, existing, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeCocosPlistSpritesheet(data:SpritesheetData, ?existing:Dynamic):String {
+  public static function serializeCocosPlistSpritesheet(data:Dynamic, ?existing:Dynamic):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheetFormats_CocosPlistSerialize.serializeCocosPlistSpritesheet, cast ([data, existing] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeLibgdxParticle(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:LibgdxSerializeOptions):String {
+  public static function serializeLibgdxParticle(config:Dynamic, ?existing:Dynamic, ?options:LibgdxSerializeOptions):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particlesFormats_LibgdxSerialize.serializeLibgdxParticle, cast ([config, existing, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeLibgdxParticleDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:LibgdxSerializeOptions):ParticleSerializeResult {
+  public static function serializeLibgdxParticleDocument(config:Dynamic, ?existing:Dynamic, ?options:LibgdxSerializeOptions):ParticleSerializeResult {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particlesFormats_LibgdxSerialize.serializeLibgdxParticleDocument, cast ([config, existing, options] : Array<Dynamic>));
     return cast null;
   }
@@ -18792,52 +18574,52 @@ class Sdk {
     return cast null;
   }
 
-  public static function serializeParticleDesignerPlist(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:ParticleDesignerSerializeOptions):String {
+  public static function serializeParticleDesignerPlist(config:Dynamic, ?existing:Dynamic, ?options:ParticleDesignerSerializeOptions):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particlesFormats_ParticleDesignerSerialize.serializeParticleDesignerPlist, cast ([config, existing, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeParticleDesignerPlistDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:ParticleDesignerSerializeOptions):ParticleSerializeResult {
+  public static function serializeParticleDesignerPlistDocument(config:Dynamic, ?existing:Dynamic, ?options:ParticleDesignerSerializeOptions):ParticleSerializeResult {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particlesFormats_ParticleDesignerSerialize.serializeParticleDesignerPlistDocument, cast ([config, existing, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeSpineParticle(config:ParticleEmitterConfig, ?existing:Dynamic):String {
+  public static function serializeSpineParticle(config:Dynamic, ?existing:Dynamic):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particlesFormats_SpineSerialize.serializeSpineParticle, cast ([config, existing] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeSpineParticleDocument(config:ParticleEmitterConfig, ?existing:Dynamic):ParticleSerializeResult {
+  public static function serializeSpineParticleDocument(config:Dynamic, ?existing:Dynamic):ParticleSerializeResult {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particlesFormats_SpineSerialize.serializeSpineParticleDocument, cast ([config, existing] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeStarlingPex(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):String {
+  public static function serializeStarlingPex(config:Dynamic, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particlesFormats_StarlingPexSerialize.serializeStarlingPex, cast ([config, existing, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeStarlingPexDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):ParticleSerializeResult {
+  public static function serializeStarlingPexDocument(config:Dynamic, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):ParticleSerializeResult {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particlesFormats_StarlingPexSerialize.serializeStarlingPexDocument, cast ([config, existing, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeStarlingSpritesheet(data:SpritesheetData, ?existing:Dynamic):String {
+  public static function serializeStarlingSpritesheet(data:Dynamic, ?existing:Dynamic):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheetFormats_StarlingSerialize.serializeStarlingSpritesheet, cast ([data, existing] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeTexturePackerSpritesheet(data:SpritesheetData, ?existing:Dynamic, ?options:TexturePackerSerializeOptions):String {
+  public static function serializeTexturePackerSpritesheet(data:Dynamic, ?existing:Dynamic, ?options:TexturePackerSerializeOptions):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheetFormats_TexturePackerSerialize.serializeTexturePackerSpritesheet, cast ([data, existing, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeUnityParticle(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:UnitySerializeOptions):String {
+  public static function serializeUnityParticle(config:Dynamic, ?existing:Dynamic, ?options:UnitySerializeOptions):String {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particlesFormats_UnitySerialize.serializeUnityParticle, cast ([config, existing, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeUnityParticleDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:UnitySerializeOptions):ParticleSerializeResult {
+  public static function serializeUnityParticleDocument(config:Dynamic, ?existing:Dynamic, ?options:UnitySerializeOptions):ParticleSerializeResult {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particlesFormats_UnitySerialize.serializeUnityParticleDocument, cast ([config, existing, options] : Array<Dynamic>));
     return cast null;
   }
@@ -18884,7 +18666,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_app_App.setAppDockMenu, cast ([items] : Array<Dynamic>));
   }
 
-  public static function setApplicationMainWindow(app:Application, win:ApplicationWindow):Void {
+  public static function setApplicationMainWindow(app:Dynamic, win:ApplicationWindow):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.setApplicationMainWindow, cast ([app, win] : Array<Dynamic>));
   }
 
@@ -18908,7 +18690,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function setAreaLightOrientation(out:AreaLight, direction:Vector3Like, right:Vector3Like, up:Vector3Like):Void {
+  public static function setAreaLightOrientation(out:Dynamic, direction:Vector3Like, right:Vector3Like, up:Vector3Like):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_lighting_AreaLight.setAreaLightOrientation, cast ([out, direction, right, up] : Array<Dynamic>));
   }
 
@@ -18927,64 +18709,64 @@ class Sdk {
     return cast null;
   }
 
-  public static function setAudioChannelCurrentTime(channel:AudioChannel, value:Float):Float {
+  public static function setAudioChannelCurrentTime(channel:Dynamic, value:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_AudioChannel.setAudioChannelCurrentTime, cast ([channel, value] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setAudioChannelGain(channel:AudioChannel, value:Float):Float {
+  public static function setAudioChannelGain(channel:Dynamic, value:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_AudioChannel.setAudioChannelGain, cast ([channel, value] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setAudioChannelPlaybackRate(channel:AudioChannel, value:Float):Float {
+  public static function setAudioChannelPlaybackRate(channel:Dynamic, value:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_AudioChannel.setAudioChannelPlaybackRate, cast ([channel, value] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setAudioMixerMasterGain(mixer:AudioMixer, value:Float):Float {
+  public static function setAudioMixerMasterGain(mixer:Dynamic, value:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_AudioMixer.setAudioMixerMasterGain, cast ([mixer, value] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setAudioMixerMasterMuted(mixer:AudioMixer, muted:Bool):Bool {
+  public static function setAudioMixerMasterMuted(mixer:Dynamic, muted:Bool):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_AudioMixer.setAudioMixerMasterMuted, cast ([mixer, muted] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setBidiClassBackend(backend:Null<BidiClassBackend>):Void {
+  public static function setBidiClassBackend(backend:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textbidi_BidiClassBackend.setBidiClassBackend, cast ([backend] : Array<Dynamic>));
   }
 
-  public static function setBitmapImage(source:Bitmap, value:Dynamic):Void {
+  public static function setBitmapImage(source:Dynamic, value:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobject_Bitmap.setBitmapImage, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setBitmapTextAlign(target:BitmapText, align:BitmapTextAlign):Void {
+  public static function setBitmapTextAlign(target:Dynamic, align:BitmapTextAlign):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_bitmaptext_BitmapText.setBitmapTextAlign, cast ([target, align] : Array<Dynamic>));
   }
 
-  public static function setBitmapTextColor(target:BitmapText, color:Float):Void {
+  public static function setBitmapTextColor(target:Dynamic, color:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_bitmaptext_BitmapText.setBitmapTextColor, cast ([target, color] : Array<Dynamic>));
   }
 
-  public static function setBitmapTextGlyphSource(target:BitmapText, glyphSource:Null<GlyphSource>):Void {
+  public static function setBitmapTextGlyphSource(target:Dynamic, glyphSource:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_bitmaptext_BitmapText.setBitmapTextGlyphSource, cast ([target, glyphSource] : Array<Dynamic>));
   }
 
-  public static function setBitmapTextLetterSpacing(target:BitmapText, letterSpacing:Float):Void {
+  public static function setBitmapTextLetterSpacing(target:Dynamic, letterSpacing:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_bitmaptext_BitmapText.setBitmapTextLetterSpacing, cast ([target, letterSpacing] : Array<Dynamic>));
   }
 
-  public static function setBitmapTextLineHeight(target:BitmapText, lineHeight:Float):Void {
+  public static function setBitmapTextLineHeight(target:Dynamic, lineHeight:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_bitmaptext_BitmapText.setBitmapTextLineHeight, cast ([target, lineHeight] : Array<Dynamic>));
   }
 
-  public static function setBitmapTextText(target:BitmapText, text:String):Void {
+  public static function setBitmapTextText(target:Dynamic, text:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_bitmaptext_BitmapText.setBitmapTextText, cast ([target, text] : Array<Dynamic>));
   }
 
-  public static function setBitmapTextWrapWidth(target:BitmapText, wrapWidth:Null<Float>):Void {
+  public static function setBitmapTextWrapWidth(target:Dynamic, wrapWidth:Null<Float>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_bitmaptext_BitmapText.setBitmapTextWrapWidth, cast ([target, wrapWidth] : Array<Dynamic>));
   }
 
@@ -18996,27 +18778,27 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_BoundingSphere.setBoundingSphereFromAabb, cast ([out, aabb] : Array<Dynamic>));
   }
 
-  public static function setCameraJitter(camera:Camera, x:Float, y:Float):Void {
+  public static function setCameraJitter(camera:Dynamic, x:Float, y:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.setCameraJitter, cast ([camera, x, y] : Array<Dynamic>));
   }
 
-  public static function setCameraViewMatrix4FromLookAt(camera:Camera, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
+  public static function setCameraViewMatrix4FromLookAt(camera:Dynamic, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.setCameraViewMatrix4FromLookAt, cast ([camera, eye, target, up] : Array<Dynamic>));
   }
 
-  public static function setCameraViewMatrix4FromMatrix4(camera:Camera, view:Matrix4Like):Void {
+  public static function setCameraViewMatrix4FromMatrix4(camera:Dynamic, view:Matrix4Like):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.setCameraViewMatrix4FromMatrix4, cast ([camera, view] : Array<Dynamic>));
   }
 
-  public static function setCanvasCssFilter(state:Dynamic, node:DisplayObject, filter:Null<String>):Void {
+  public static function setCanvasCssFilter(state:Dynamic, node:Dynamic, filter:Null<String>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasCSSFilterBinding.setCanvasCssFilter, cast ([state, node, filter] : Array<Dynamic>));
   }
 
-  public static function setCanvasRenderTransform2D(state:Dynamic, transform:Matrix):Void {
+  public static function setCanvasRenderTransform2D(state:Dynamic, transform:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasRenderTarget.setCanvasRenderTransform2D, cast ([state, transform] : Array<Dynamic>));
   }
 
-  public static function setCanvasTransform(state:Dynamic, context:Dynamic, transform:Matrix):Void {
+  public static function setCanvasTransform(state:Dynamic, context:Dynamic, transform:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectCanvas_CanvasTransform.setCanvasTransform, cast ([state, context, transform] : Array<Dynamic>));
   }
 
@@ -19024,7 +18806,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Capsule.setCapsule, cast ([out, startX, startY, startZ, endX, endY, endZ, radius] : Array<Dynamic>));
   }
 
-  public static function setCaptureBaselineField(baseline:CaptureBaseline, column:String, field:CaptureColumnBaseline, value:String):Void {
+  public static function setCaptureBaselineField(baseline:Dynamic, column:String, field:CaptureColumnBaseline, value:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_capture_CaptureBaseline.setCaptureBaselineField, cast ([baseline, column, field, value] : Array<Dynamic>));
   }
 
@@ -19032,11 +18814,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_clipboard_Clipboard.setClipboardBackend, cast ([backend] : Array<Dynamic>));
   }
 
-  public static function setClipRegionToRectangle(out:ClipRegion, rectangle:RectangleLike):Void {
+  public static function setClipRegionToRectangle(out:Dynamic, rectangle:RectangleLike):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.setClipRegionToRectangle, cast ([out, rectangle] : Array<Dynamic>));
   }
 
-  public static function setClockScale(clock:Clock, scale:Float):Void {
+  public static function setClockScale(clock:Dynamic, scale:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_clock_SetClockScale.setClockScale, cast ([clock, scale] : Array<Dynamic>));
   }
 
@@ -19049,7 +18831,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_materials_ColorTransform.setColorTransform, cast ([out, redMultiplier, greenMultiplier, blueMultiplier, alphaMultiplier, redOffset, greenOffset, blueOffset, alphaOffset] : Array<Dynamic>));
   }
 
-  public static function setColorTransformIdentity(out:ColorTransform):Void {
+  public static function setColorTransformIdentity(out:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_materials_ColorTransform.setColorTransformIdentity, cast ([out] : Array<Dynamic>));
   }
 
@@ -19065,7 +18847,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_connectivity_Connectivity.setConnectivityBackend, cast ([backend] : Array<Dynamic>));
   }
 
-  public static function setCubeTextureFace(cube:CubeTextureLike, faceIndex:Float, image:Null<ImageResource>):Void {
+  public static function setCubeTextureFace(cube:CubeTextureLike, faceIndex:Float, image:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_texture_CubeTexture.setCubeTextureFace, cast ([cube, faceIndex, image] : Array<Dynamic>));
   }
 
@@ -19077,43 +18859,43 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_dialog_Dialog.setDialogBackend, cast ([backend] : Array<Dynamic>));
   }
 
-  public static function setDirectionalLightDirection(out:DirectionalLight, x:Float, y:Float, z:Float):Void {
+  public static function setDirectionalLightDirection(out:Dynamic, x:Float, y:Float, z:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_lighting_DirectionalLight.setDirectionalLightDirection, cast ([out, x, y, z] : Array<Dynamic>));
   }
 
-  public static function setDirectionalLightTarget(out:DirectionalLight, fromX:Float, fromY:Float, fromZ:Float, toX:Float, toY:Float, toZ:Float):Void {
+  public static function setDirectionalLightTarget(out:Dynamic, fromX:Float, fromY:Float, fromZ:Float, toX:Float, toY:Float, toZ:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_lighting_DirectionalLight.setDirectionalLightTarget, cast ([out, fromX, fromY, fromZ, toX, toY, toZ] : Array<Dynamic>));
   }
 
-  public static function setDisplayObjectClip(source:DisplayObject, value:Null<ClipRegion>):Void {
+  public static function setDisplayObjectClip(source:Dynamic, value:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobject_DisplayObject.setDisplayObjectClip, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setDisplayObjectColorAdjustments(source:DisplayObject, value:Null<Array<Adjustment>>):Void {
+  public static function setDisplayObjectColorAdjustments(source:Dynamic, value:Null<Array<Adjustment>>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobject_DisplayObject.setDisplayObjectColorAdjustments, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setDisplayObjectColorTransform(source:DisplayObject, colorTransform:Null<ColorTransform>):Void {
+  public static function setDisplayObjectColorTransform(source:Dynamic, colorTransform:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobject_DisplayObject.setDisplayObjectColorTransform, cast ([source, colorTransform] : Array<Dynamic>));
   }
 
-  public static function setDomClipHooks(state:DomRenderState):Void {
+  public static function setDomClipHooks(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomClipRectangle.setDomClipHooks, cast ([state] : Array<Dynamic>));
   }
 
-  public static function setDomCssFilter(state:DomRenderState, node:DisplayObject, filter:Null<String>):Void {
+  public static function setDomCssFilter(state:Dynamic, node:Dynamic, filter:Null<String>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomCSSFilterBinding.setDomCssFilter, cast ([state, node, filter] : Array<Dynamic>));
   }
 
-  public static function setDomRendererElement(state:DomRenderState, element:Dynamic):Void {
+  public static function setDomRendererElement(state:Dynamic, element:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomStyle.setDomRendererElement, cast ([state, element] : Array<Dynamic>));
   }
 
-  public static function setDomTransform(element:Dynamic, transform:Matrix, roundPixels:Bool):Void {
+  public static function setDomTransform(element:Dynamic, transform:Dynamic, roundPixels:Bool):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomTransform.setDomTransform, cast ([element, transform, roundPixels] : Array<Dynamic>));
   }
 
-  public static function setDomTransformWithOffset(element:Dynamic, transform:Matrix, offsetX:Float, offsetY:Float, roundPixels:Bool):Void {
+  public static function setDomTransformWithOffset(element:Dynamic, transform:Dynamic, offsetX:Float, offsetY:Float, roundPixels:Bool):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectDom_DomTransform.setDomTransformWithOffset, cast ([element, transform, offsetX, offsetY, roundPixels] : Array<Dynamic>));
   }
 
@@ -19147,7 +18929,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlShader.setGlAttributes, cast ([gl, loc] : Array<Dynamic>));
   }
 
-  public static function setGlBaseUniforms(gl:Dynamic, loc:GlShaderLocations, renderProxy:RenderProxy):Void {
+  public static function setGlBaseUniforms(gl:Dynamic, loc:GlShaderLocations, renderProxy:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlShader.setGlBaseUniforms, cast ([gl, loc, renderProxy] : Array<Dynamic>));
   }
 
@@ -19159,39 +18941,39 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlShader.setGlMatrixFromValues, cast ([gl, loc, m, a, b, c, d, tx, ty, viewport] : Array<Dynamic>));
   }
 
-  public static function setGlMeshCameraPosition(gl:Dynamic, locCameraPosition:Null<Dynamic>, camera:Camera):Void {
+  public static function setGlMeshCameraPosition(gl:Dynamic, locCameraPosition:Null<Dynamic>, camera:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl__internal__GlMeshProgramValues.setGlMeshCameraPosition, cast ([gl, locCameraPosition, camera] : Array<Dynamic>));
   }
 
-  public static function setGlMeshViewProjection(gl:Dynamic, locViewProjection:Null<Dynamic>, camera:Camera):Void {
+  public static function setGlMeshViewProjection(gl:Dynamic, locViewProjection:Null<Dynamic>, camera:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl__internal__GlMeshProgramValues.setGlMeshViewProjection, cast ([gl, locViewProjection, camera] : Array<Dynamic>));
   }
 
-  public static function setGlQuadBatchWorldAndTexture(state:GlRenderState, locWorldMatrix:Dynamic, locTexture:Dynamic):Void {
+  public static function setGlQuadBatchWorldAndTexture(state:Dynamic, locWorldMatrix:Dynamic, locTexture:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlSpriteBatch.setGlQuadBatchWorldAndTexture, cast ([state, locWorldMatrix, locTexture] : Array<Dynamic>));
   }
 
-  public static function setGlQuadMatrixFromOffset(state:GlRenderState, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float, dx:Float, dy:Float):Void {
+  public static function setGlQuadMatrixFromOffset(state:Dynamic, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float, dx:Float, dy:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlDraw.setGlQuadMatrixFromOffset, cast ([state, a, b, c, d, tx, ty, dx, dy] : Array<Dynamic>));
   }
 
-  public static function setGlRenderEffectVelocityTexture(pipeline:GlRenderEffectPipeline, texture:Null<Dynamic>):Void {
+  public static function setGlRenderEffectVelocityTexture(pipeline:Dynamic, texture:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlRenderEffectPipeline.setGlRenderEffectVelocityTexture, cast ([pipeline, texture] : Array<Dynamic>));
   }
 
-  public static function setGlRenderTransform2D(state:GlRenderState, transform:Matrix):Void {
+  public static function setGlRenderTransform2D(state:Dynamic, transform:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlRenderPass.setGlRenderTransform2D, cast ([state, transform] : Array<Dynamic>));
   }
 
-  public static function setGlSceneTime(state:GlRenderState, timeSeconds:Float):Void {
+  public static function setGlSceneTime(state:Dynamic, timeSeconds:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlSceneTime.setGlSceneTime, cast ([state, timeSeconds] : Array<Dynamic>));
   }
 
-  public static function setGlShader(state:GlRenderState, node:DisplayObject, shader:Null<GlBitmapShader>):Void {
+  public static function setGlShader(state:Dynamic, node:Dynamic, shader:Null<GlBitmapShader>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlShaderBinding.setGlShader, cast ([state, node, shader] : Array<Dynamic>));
   }
 
-  public static function setGlyphRasterizerBackend(backend:Null<GlyphRasterizerBackend>):Void {
+  public static function setGlyphRasterizerBackend(backend:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_glyphatlas_GlyphRasterizerBackend.setGlyphRasterizerBackend, cast ([backend] : Array<Dynamic>));
   }
 
@@ -19203,11 +18985,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_haptics_Haptics.setHapticsBackend, cast ([backend] : Array<Dynamic>));
   }
 
-  public static function setHtmlViewSize(source:HtmlView, width:Float, height:Float):Void {
+  public static function setHtmlViewSize(source:Dynamic, width:Float, height:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobject_HtmlView.setHtmlViewSize, cast ([source, width, height] : Array<Dynamic>));
   }
 
-  public static function setImageResourceSource(resource:ImageResource, element:Null<Dynamic>):Void {
+  public static function setImageResourceSource(resource:Dynamic, element:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResource.setImageResourceSource, cast ([resource, element] : Array<Dynamic>));
   }
 
@@ -19367,34 +19149,34 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_menu_Menu.setMenuBackend, cast ([backend] : Array<Dynamic>));
   }
 
-  public static function setMeshGeometryMorphBindPose(geometry:MeshGeometry, bindPose:Null<MeshMorphBindPose>):Void {
+  public static function setMeshGeometryMorphBindPose(geometry:Dynamic, bindPose:Null<MeshMorphBindPose>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometry.setMeshGeometryMorphBindPose, cast ([geometry, bindPose] : Array<Dynamic>));
   }
 
-  public static function setMeshGeometrySkinBindPose(geometry:MeshGeometry, bindPose:Null<MeshSkinBindPose>):Void {
+  public static function setMeshGeometrySkinBindPose(geometry:Dynamic, bindPose:Null<MeshSkinBindPose>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometry.setMeshGeometrySkinBindPose, cast ([geometry, bindPose] : Array<Dynamic>));
   }
 
-  public static function setMeshGeometrySubsets(geometry:MeshGeometry, subsets:Array<MeshSubset>):Void {
+  public static function setMeshGeometrySubsets(geometry:Dynamic, subsets:Array<MeshSubset>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometrySubset.setMeshGeometrySubsets, cast ([geometry, subsets] : Array<Dynamic>));
   }
 
-  public static function setMeshGeometryVertexNormal(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float):Bool {
+  public static function setMeshGeometryVertexNormal(geometry:Dynamic, vertexIndex:Float, x:Float, y:Float, z:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexNormal, cast ([geometry, vertexIndex, x, y, z] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setMeshGeometryVertexPosition(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float):Bool {
+  public static function setMeshGeometryVertexPosition(geometry:Dynamic, vertexIndex:Float, x:Float, y:Float, z:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexPosition, cast ([geometry, vertexIndex, x, y, z] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setMeshGeometryVertexTangent(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float, w:Float):Bool {
+  public static function setMeshGeometryVertexTangent(geometry:Dynamic, vertexIndex:Float, x:Float, y:Float, z:Float, w:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexTangent, cast ([geometry, vertexIndex, x, y, z, w] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setMeshGeometryVertexUv0(geometry:MeshGeometry, vertexIndex:Float, u:Float, v:Float):Bool {
+  public static function setMeshGeometryVertexUv0(geometry:Dynamic, vertexIndex:Float, u:Float, v:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryAttributes.setMeshGeometryVertexUv0, cast ([geometry, vertexIndex, u, v] : Array<Dynamic>));
     return cast null;
   }
@@ -19407,7 +19189,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_motionpath_SetMotionPathProgress.setMotionPathProgress, cast ([mp, t] : Array<Dynamic>));
   }
 
-  public static function setMovieClipSource(clip:MovieClip, source:TimelineSource):Void {
+  public static function setMovieClipSource(clip:Dynamic, source:TimelineSource):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.setMovieClipSource, cast ([clip, source] : Array<Dynamic>));
   }
 
@@ -19416,27 +19198,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function setNativeTextAutoSize(source:NativeText, value:TextAutoSize):Void {
+  public static function setNativeTextAutoSize(source:Dynamic, value:TextAutoSize):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_NativeText.setNativeTextAutoSize, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setNativeTextHeight(source:NativeText, value:Float):Void {
+  public static function setNativeTextHeight(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_NativeText.setNativeTextHeight, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setNativeTextString(source:NativeText, value:String):Void {
+  public static function setNativeTextString(source:Dynamic, value:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_NativeText.setNativeTextString, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setNativeTextStyle(source:NativeText, value:NativeTextStyle):Void {
+  public static function setNativeTextStyle(source:Dynamic, value:NativeTextStyle):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_NativeText.setNativeTextStyle, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setNativeTextVerticalAlign(source:NativeText, value:TextVerticalAlign):Void {
+  public static function setNativeTextVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_NativeText.setNativeTextVerticalAlign, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setNativeTextWidth(source:NativeText, value:Float):Void {
+  public static function setNativeTextWidth(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_NativeText.setNativeTextWidth, cast ([source, value] : Array<Dynamic>));
   }
 
@@ -19508,43 +19290,43 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix4.setOrthographicMatrix4, cast ([out, left, right, bottom, top, zNear, zFar] : Array<Dynamic>));
   }
 
-  public static function setParticleEmitter3DParticle(target:ParticleEmitter3D, index:Float, id:Float, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Void {
+  public static function setParticleEmitter3DParticle(target:Dynamic, index:Float, id:Float, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.setParticleEmitter3DParticle, cast ([target, index, id, x, y, z, rotation, scale] : Array<Dynamic>));
   }
 
-  public static function setParticleEmitter3DParticleAlpha(target:ParticleEmitter3D, index:Float, alpha:Float):Void {
+  public static function setParticleEmitter3DParticleAlpha(target:Dynamic, index:Float, alpha:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.setParticleEmitter3DParticleAlpha, cast ([target, index, alpha] : Array<Dynamic>));
   }
 
-  public static function setParticleEmitter3DParticleColor(target:ParticleEmitter3D, index:Float, r:Float, g:Float, b:Float):Void {
+  public static function setParticleEmitter3DParticleColor(target:Dynamic, index:Float, r:Float, g:Float, b:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.setParticleEmitter3DParticleColor, cast ([target, index, r, g, b] : Array<Dynamic>));
   }
 
-  public static function setParticleEmitter3DParticleVelocity(target:ParticleEmitter3D, index:Float, vx:Float, vy:Float, vz:Float):Void {
+  public static function setParticleEmitter3DParticleVelocity(target:Dynamic, index:Float, vx:Float, vy:Float, vz:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.setParticleEmitter3DParticleVelocity, cast ([target, index, vx, vy, vz] : Array<Dynamic>));
   }
 
-  public static function setParticleEmitterLocalBoundsRectangle(target:ParticleEmitter, rect:Rectangle):Void {
+  public static function setParticleEmitterLocalBoundsRectangle(target:Dynamic, rect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter.setParticleEmitterLocalBoundsRectangle, cast ([target, rect] : Array<Dynamic>));
   }
 
-  public static function setParticleEmitterParticle(target:ParticleEmitter, index:Float, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Void {
+  public static function setParticleEmitterParticle(target:Dynamic, index:Float, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter.setParticleEmitterParticle, cast ([target, index, id, x, y, rotation, scale] : Array<Dynamic>));
   }
 
-  public static function setParticleEmitterParticleAlpha(target:ParticleEmitter, index:Float, alpha:Float):Void {
+  public static function setParticleEmitterParticleAlpha(target:Dynamic, index:Float, alpha:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter.setParticleEmitterParticleAlpha, cast ([target, index, alpha] : Array<Dynamic>));
   }
 
-  public static function setParticleEmitterParticleColor(target:ParticleEmitter, index:Float, r:Float, g:Float, b:Float):Void {
+  public static function setParticleEmitterParticleColor(target:Dynamic, index:Float, r:Float, g:Float, b:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter.setParticleEmitterParticleColor, cast ([target, index, r, g, b] : Array<Dynamic>));
   }
 
-  public static function setParticleEmitterParticleVelocity(target:ParticleEmitter, index:Float, vx:Float, vy:Float):Void {
+  public static function setParticleEmitterParticleVelocity(target:Dynamic, index:Float, vx:Float, vy:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_ParticleEmitter.setParticleEmitterParticleVelocity, cast ([target, index, vx, vy] : Array<Dynamic>));
   }
 
-  public static function setPathBooleanBackend(backend:Null<PathBooleanBackend>):Void {
+  public static function setPathBooleanBackend(backend:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_pathBoolean_PathBooleanBackend.setPathBooleanBackend, cast ([backend] : Array<Dynamic>));
   }
 
@@ -19585,7 +19367,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function setProjectionMatrix4(out:Matrix4Like, projection:Projection, aspect:Float, near:Float, far:Float):Void {
+  public static function setProjectionMatrix4(out:Matrix4Like, projection:Dynamic, aspect:Float, near:Float, far:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.setProjectionMatrix4, cast ([out, projection, aspect, near, far] : Array<Dynamic>));
   }
 
@@ -19598,23 +19380,23 @@ class Sdk {
     return cast null;
   }
 
-  public static function setQuadBatchInstance(target:QuadBatch, index:Float, id:Float, x:Float, y:Float):Void {
+  public static function setQuadBatchInstance(target:Dynamic, index:Float, id:Float, x:Float, y:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.setQuadBatchInstance, cast ([target, index, id, x, y] : Array<Dynamic>));
   }
 
-  public static function setQuadBatchInstanceMatrix(target:QuadBatch, index:Float, id:Float, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
+  public static function setQuadBatchInstanceMatrix(target:Dynamic, index:Float, id:Float, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.setQuadBatchInstanceMatrix, cast ([target, index, id, a, b, c, d, tx, ty] : Array<Dynamic>));
   }
 
-  public static function setQuadBatchInstanceRange(target:QuadBatch, startIndex:Float, count:Float, source:flighthq._internal._Float32Array):Void {
+  public static function setQuadBatchInstanceRange(target:Dynamic, startIndex:Float, count:Float, source:flighthq._internal._Float32Array):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.setQuadBatchInstanceRange, cast ([target, startIndex, count, source] : Array<Dynamic>));
   }
 
-  public static function setQuadBatchLocalBoundsRectangle(target:QuadBatch, rect:Rectangle):Void {
+  public static function setQuadBatchLocalBoundsRectangle(target:Dynamic, rect:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.setQuadBatchLocalBoundsRectangle, cast ([target, rect] : Array<Dynamic>));
   }
 
-  public static function setQuadBatchTransformType(target:QuadBatch, newType:QuadTransformType):Void {
+  public static function setQuadBatchTransformType(target:Dynamic, newType:QuadTransformType):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_QuadBatch.setQuadBatchTransformType, cast ([target, newType] : Array<Dynamic>));
   }
 
@@ -19682,111 +19464,111 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Rectangle.setRectangleTopLeft, cast ([out, point] : Array<Dynamic>));
   }
 
-  public static function setRenderProxyAdapter(state:RenderState, source:Renderable, adapter:Null<RenderProxyAdapter>):Void {
+  public static function setRenderProxyAdapter(state:Dynamic, source:Renderable, adapter:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_RenderProxyAdapter.setRenderProxyAdapter, cast ([state, source, adapter] : Array<Dynamic>));
   }
 
-  public static function setRenderStateBackgroundColor(state:RenderState, color:Float):Void {
+  public static function setRenderStateBackgroundColor(state:Dynamic, color:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_RenderColor.setRenderStateBackgroundColor, cast ([state, color] : Array<Dynamic>));
   }
 
-  public static function setRenderViewSize(source:RenderView, width:Float, height:Float):Void {
+  public static function setRenderViewSize(source:Dynamic, width:Float, height:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobject_RenderView.setRenderViewSize, cast ([source, width, height] : Array<Dynamic>));
   }
 
-  public static function setResourceLoaderConcurrency(loader:ResourceLoader, maxConcurrent:Float):Void {
+  public static function setResourceLoaderConcurrency(loader:Dynamic, maxConcurrent:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_loader_ResourceLoader.setResourceLoaderConcurrency, cast ([loader, maxConcurrent] : Array<Dynamic>));
   }
 
-  public static function setResourceLoadPriority(loader:ResourceLoader, key:String, priority:Float):Void {
+  public static function setResourceLoadPriority(loader:Dynamic, key:String, priority:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_loader_ResourceLoader.setResourceLoadPriority, cast ([loader, key, priority] : Array<Dynamic>));
   }
 
-  public static function setRichTextBackground(source:RichText, value:Bool):Void {
+  public static function setRichTextBackground(source:Dynamic, value:Bool):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextBackground, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextBackgroundColor(source:RichText, value:Float):Void {
+  public static function setRichTextBackgroundColor(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextBackgroundColor, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextBorder(source:RichText, value:Bool):Void {
+  public static function setRichTextBorder(source:Dynamic, value:Bool):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextBorder, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextBorderColor(source:RichText, value:Float):Void {
+  public static function setRichTextBorderColor(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextBorderColor, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextCondenseWhite(source:RichText, value:Bool):Void {
+  public static function setRichTextCondenseWhite(source:Dynamic, value:Bool):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextCondenseWhite, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextContent(source:RichText, content:RichTextContent):Void {
+  public static function setRichTextContent(source:Dynamic, content:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextContent, cast ([source, content] : Array<Dynamic>));
   }
 
-  public static function setRichTextDefaultTextFormat(source:RichText, value:TextFormat):Void {
+  public static function setRichTextDefaultTextFormat(source:Dynamic, value:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextDefaultTextFormat, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextFormatRange(source:RichText, format:TextFormat, ?start:Dynamic, ?end:Dynamic):Void {
+  public static function setRichTextFormatRange(source:Dynamic, format:Dynamic, ?start:Dynamic, ?end:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextFormatRange, cast ([source, format, start, end] : Array<Dynamic>));
   }
 
-  public static function setRichTextHeight(source:RichText, value:Float):Void {
+  public static function setRichTextHeight(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextHeight, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextMaxChars(source:RichText, value:Float):Void {
+  public static function setRichTextMaxChars(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextMaxChars, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextMouseWheelEnabled(source:RichText, value:Bool):Void {
+  public static function setRichTextMouseWheelEnabled(source:Dynamic, value:Bool):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextMouseWheelEnabled, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextMultiline(source:RichText, value:Bool):Void {
+  public static function setRichTextMultiline(source:Dynamic, value:Bool):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextMultiline, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextScrollH(source:RichText, value:Float, ?layout:TextLayoutResult):Void {
+  public static function setRichTextScrollH(source:Dynamic, value:Float, ?layout:TextLayoutResult):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextScrollH, cast ([source, value, layout] : Array<Dynamic>));
   }
 
-  public static function setRichTextScrollV(source:RichText, value:Float, ?layout:TextLayoutResult):Void {
+  public static function setRichTextScrollV(source:Dynamic, value:Float, ?layout:TextLayoutResult):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextScrollV, cast ([source, value, layout] : Array<Dynamic>));
   }
 
-  public static function setRichTextSelectable(source:RichText, value:Bool):Void {
+  public static function setRichTextSelectable(source:Dynamic, value:Bool):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextSelectable, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextString(source:RichText, value:String):Void {
+  public static function setRichTextString(source:Dynamic, value:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextString, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextTextColor(source:RichText, value:Float):Void {
+  public static function setRichTextTextColor(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextTextColor, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextVerticalAlign(source:RichText, value:TextVerticalAlign):Void {
+  public static function setRichTextVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextVerticalAlign, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextWidth(source:RichText, value:Float):Void {
+  public static function setRichTextWidth(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextWidth, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setRichTextWordWrap(source:RichText, value:Bool):Void {
+  public static function setRichTextWordWrap(source:Dynamic, value:Bool):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_RichText.setRichTextWordWrap, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setSceneNodeAlpha(source:SceneNode, alpha:Float):Void {
+  public static function setSceneNodeAlpha(source:Dynamic, alpha:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_scene_Scene.setSceneNodeAlpha, cast ([source, alpha] : Array<Dynamic>));
   }
 
-  public static function setSceneNodeLookAt(node:SceneNode, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
+  public static function setSceneNodeLookAt(node:Dynamic, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_scene_Scene.setSceneNodeLookAt, cast ([node, eye, target, up] : Array<Dynamic>));
   }
 
@@ -19842,27 +19624,27 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_keyboard_Keyboard.setSoftKeyboardStyle, cast ([style] : Array<Dynamic>));
   }
 
-  public static function setSpotLightCone(out:SpotLight, innerDegrees:Float, outerDegrees:Float):Void {
+  public static function setSpotLightCone(out:Dynamic, innerDegrees:Float, outerDegrees:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_lighting_SpotLight.setSpotLightCone, cast ([out, innerDegrees, outerDegrees] : Array<Dynamic>));
   }
 
-  public static function setSpotLightDirection(out:SpotLight, x:Float, y:Float, z:Float):Void {
+  public static function setSpotLightDirection(out:Dynamic, x:Float, y:Float, z:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_lighting_SpotLight.setSpotLightDirection, cast ([out, x, y, z] : Array<Dynamic>));
   }
 
-  public static function setSpotLightTarget(out:SpotLight, targetX:Float, targetY:Float, targetZ:Float):Void {
+  public static function setSpotLightTarget(out:Dynamic, targetX:Float, targetY:Float, targetZ:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_lighting_SpotLight.setSpotLightTarget, cast ([out, targetX, targetY, targetZ] : Array<Dynamic>));
   }
 
-  public static function setSpriteFrame(target:Sprite, id:Float):Void {
+  public static function setSpriteFrame(target:Dynamic, id:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.setSpriteFrame, cast ([target, id] : Array<Dynamic>));
   }
 
-  public static function setSpriteFrameRect(target:Sprite, rect:Null<Rectangle>):Void {
+  public static function setSpriteFrameRect(target:Dynamic, rect:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.setSpriteFrameRect, cast ([target, rect] : Array<Dynamic>));
   }
 
-  public static function setStageSize(source:Stage, width:Float, height:Float):Void {
+  public static function setStageSize(source:Dynamic, width:Float, height:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobject_Stage.setStageSize, cast ([source, width, height] : Array<Dynamic>));
   }
 
@@ -19915,7 +19697,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function setSurfaceAlpha(out:SurfaceRegion, alpha:Float):Void {
+  public static function setSurfaceAlpha(out:Dynamic, alpha:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.setSurfaceAlpha, cast ([out, alpha] : Array<Dynamic>));
   }
 
@@ -19923,44 +19705,44 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.setSurfaceColorMatrixIdentity, cast ([out] : Array<Dynamic>));
   }
 
-  public static function setSurfacePixel(out:Surface, x:Float, y:Float, color:Float):Void {
+  public static function setSurfacePixel(out:Dynamic, x:Float, y:Float, color:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.setSurfacePixel, cast ([out, x, y, color] : Array<Dynamic>));
   }
 
-  public static function setSurfacePixelRgb(out:Surface, x:Float, y:Float, color:Float):Void {
+  public static function setSurfacePixelRgb(out:Dynamic, x:Float, y:Float, color:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.setSurfacePixelRgb, cast ([out, x, y, color] : Array<Dynamic>));
   }
 
-  public static function setSurfaceRegion(out:SurfaceRegion, surface:Surface, ?x:Float, ?y:Float, ?width:Float, ?height:Float):SurfaceRegion {
+  public static function setSurfaceRegion(out:Dynamic, surface:Dynamic, ?x:Float, ?y:Float, ?width:Float, ?height:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.setSurfaceRegion, cast ([out, surface, x, y, width, height] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setTextInputSelection(source:RichText, beginIndex:Float, endIndex:Float):Void {
+  public static function setTextInputSelection(source:Dynamic, beginIndex:Float, endIndex:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.setTextInputSelection, cast ([source, beginIndex, endIndex] : Array<Dynamic>));
   }
 
-  public static function setTextLabelAutoSize(source:TextLabel, value:TextAutoSize):Void {
+  public static function setTextLabelAutoSize(source:Dynamic, value:TextAutoSize):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_TextLabel.setTextLabelAutoSize, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setTextLabelFormat(source:TextLabel, value:TextFormat):Void {
+  public static function setTextLabelFormat(source:Dynamic, value:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_TextLabel.setTextLabelFormat, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setTextLabelHeight(source:TextLabel, value:Float):Void {
+  public static function setTextLabelHeight(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_TextLabel.setTextLabelHeight, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setTextLabelString(source:TextLabel, value:String):Void {
+  public static function setTextLabelString(source:Dynamic, value:String):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_TextLabel.setTextLabelString, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setTextLabelVerticalAlign(source:TextLabel, value:TextVerticalAlign):Void {
+  public static function setTextLabelVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_TextLabel.setTextLabelVerticalAlign, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setTextLabelWidth(source:TextLabel, value:Float):Void {
+  public static function setTextLabelWidth(source:Dynamic, value:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_text_TextLabel.setTextLabelWidth, cast ([source, value] : Array<Dynamic>));
   }
 
@@ -19968,7 +19750,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_textlayout_TextLayoutMeasure.setTextLayoutMeasureProvider, cast ([measure] : Array<Dynamic>));
   }
 
-  public static function setTextSegmenterBackend(backend:Null<TextSegmenterBackend>):Void {
+  public static function setTextSegmenterBackend(backend:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textsegment_TextSegmenterBackend.setTextSegmenterBackend, cast ([backend] : Array<Dynamic>));
   }
 
@@ -19976,11 +19758,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaper.setTextShaperBackend, cast ([backend] : Array<Dynamic>));
   }
 
-  public static function setTextureAtlasRegion(out:TextureAtlasRegion, x:Float, ?y:Float, ?width:Float, ?height:Float, ?pivotX:Float, ?pivotY:Float):Void {
+  public static function setTextureAtlasRegion(out:Dynamic, x:Float, ?y:Float, ?width:Float, ?height:Float, ?pivotX:Float, ?pivotY:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasRegion.setTextureAtlasRegion, cast ([out, x, y, width, height, pivotX, pivotY] : Array<Dynamic>));
   }
 
-  public static function setTextureImage(texture:TextureLike, image:Null<ImageResource>):Void {
+  public static function setTextureImage(texture:TextureLike, image:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_texture_Texture.setTextureImage, cast ([texture, image] : Array<Dynamic>));
   }
 
@@ -19996,11 +19778,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_texture_Texture.setTextureUvScale, cast ([texture, x, y] : Array<Dynamic>));
   }
 
-  public static function setTilemapTile(tilemap:Tilemap, column:Float, row:Float, id:Float):Void {
+  public static function setTilemapTile(tilemap:Dynamic, column:Float, row:Float, id:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.setTilemapTile, cast ([tilemap, column, row, id] : Array<Dynamic>));
   }
 
-  public static function setTilemapTiles(tilemap:Tilemap, ids:Dynamic, offsetColumn:Float, offsetRow:Float, width:Float, height:Float):Void {
+  public static function setTilemapTiles(tilemap:Dynamic, ids:Dynamic, offsetColumn:Float, offsetRow:Float, width:Float, height:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sprite_Sprite.setTilemapTiles, cast ([tilemap, ids, offsetColumn, offsetRow, width, height] : Array<Dynamic>));
   }
 
@@ -20108,30 +19890,30 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector4.setVector4FromVector3, cast ([out, source, w] : Array<Dynamic>));
   }
 
-  public static function setVideoChannelCurrentTime(channel:VideoChannel, value:Float):Float {
+  public static function setVideoChannelCurrentTime(channel:Dynamic, value:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_VideoChannel.setVideoChannelCurrentTime, cast ([channel, value] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setVideoChannelGain(channel:VideoChannel, value:Float):Float {
+  public static function setVideoChannelGain(channel:Dynamic, value:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_VideoChannel.setVideoChannelGain, cast ([channel, value] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setVideoChannelPlaybackRate(channel:VideoChannel, value:Float):Float {
+  public static function setVideoChannelPlaybackRate(channel:Dynamic, value:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_media_VideoChannel.setVideoChannelPlaybackRate, cast ([channel, value] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setVideoSmoothing(source:Video, value:Bool):Void {
+  public static function setVideoSmoothing(source:Dynamic, value:Bool):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobject_Video.setVideoSmoothing, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setVideoSource(source:Video, value:Dynamic):Void {
+  public static function setVideoSource(source:Dynamic, value:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobject_Video.setVideoSource, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setVideoTextureSource(videoTexture:VideoTextureLike, source:VideoResource):Void {
+  public static function setVideoTextureSource(videoTexture:VideoTextureLike, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_texture_Texture.setVideoTextureSource, cast ([videoTexture, source] : Array<Dynamic>));
   }
 
@@ -20143,15 +19925,15 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuShader.setWgpuMatrixFromTransform, cast ([matrixArray, t, viewport] : Array<Dynamic>));
   }
 
-  public static function setWgpuRenderEffectVelocityTexture(pipeline:WgpuRenderEffectPipeline, texture:Null<Dynamic>):Void {
+  public static function setWgpuRenderEffectVelocityTexture(pipeline:Dynamic, texture:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectPipeline.setWgpuRenderEffectVelocityTexture, cast ([pipeline, texture] : Array<Dynamic>));
   }
 
-  public static function setWgpuRenderTransform2D(state:WgpuRenderState, transform:Matrix):Void {
+  public static function setWgpuRenderTransform2D(state:Dynamic, transform:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuRenderTarget.setWgpuRenderTransform2D, cast ([state, transform] : Array<Dynamic>));
   }
 
-  public static function setWgpuShader(state:WgpuRenderState, node:DisplayObject, shader:Null<WgpuBitmapShader>):Void {
+  public static function setWgpuShader(state:Dynamic, node:Dynamic, shader:Null<WgpuBitmapShader>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuShaderBinding.setWgpuShader, cast ([state, node, shader] : Array<Dynamic>));
   }
 
@@ -20231,22 +20013,22 @@ class Sdk {
 
   public static final ShapeKind:Dynamic = Facade_Sdk_flighthq_types__internal__ShapeValues.ShapeKind;
 
-  public static function shapeTextRun(text:String, format:TextFormat, ?options:ShapeRunOptions):Null<ShapedRun> {
+  public static function shapeTextRun(text:String, format:Dynamic, ?options:ShapeRunOptions):Null<ShapedRun> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaperRun.shapeTextRun, cast ([text, format, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function shapeTextRunCached(cache:TextShaperCache, text:String, format:TextFormat, ?options:ShapeRunOptions):Null<ShapedRun> {
+  public static function shapeTextRunCached(cache:TextShaperCache, text:String, format:Dynamic, ?options:ShapeRunOptions):Null<ShapedRun> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textshaper__internal__TextShaperCacheValues.shapeTextRunCached, cast ([cache, text, format, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function shapeTextRunInto(text:String, format:TextFormat, out:ShapedRun, ?options:ShapeRunOptions):Bool {
+  public static function shapeTextRunInto(text:String, format:Dynamic, out:ShapedRun, ?options:ShapeRunOptions):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaperRun.shapeTextRunInto, cast ([text, format, out, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function shapeTextRuns(text:String, format:TextFormat, ?options:TextShaperOptions):Array<ShapedRun> {
+  public static function shapeTextRuns(text:String, format:Dynamic, ?options:TextShaperOptions):Array<ShapedRun> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textshaper_TextShaperItemize.shapeTextRuns, cast ([text, format, options] : Array<Dynamic>));
     return cast null;
   }
@@ -20271,7 +20053,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function sharpenSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceSharpenOptions):Void {
+  public static function sharpenSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceSharpenOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.sharpenSurface, cast ([out, scratch, source, options] : Array<Dynamic>));
   }
 
@@ -20377,14 +20159,14 @@ class Sdk {
     return cast null;
   }
 
-  public static function simplifyPath(path:Path, ?options:PathBooleanOptions):Path {
+  public static function simplifyPath(path:Dynamic, ?options:PathBooleanOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_pathBoolean_SimplifyPath.simplifyPath, cast ([path, options] : Array<Dynamic>));
     return cast null;
   }
 
   public static final SKIN_PALETTE_TEXTURE_UNIT:Dynamic = Facade_Sdk_flighthq_sceneGl__internal__GlMeshProgramValues.SKIN_PALETTE_TEXTURE_UNIT;
 
-  public static function skinMeshGeometry(geometry:MeshGeometry, skeleton:Skeleton3D, bindPose:MeshSkinBindPose):Void {
+  public static function skinMeshGeometry(geometry:Dynamic, skeleton:Skeleton3D, bindPose:MeshSkinBindPose):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_skeleton3d_Skeleton3d.skinMeshGeometry, cast ([geometry, skeleton, bindPose] : Array<Dynamic>));
   }
 
@@ -20414,7 +20196,7 @@ class Sdk {
 
   public static final SoftKeyboardStyleDefaultKind:Dynamic = Facade_Sdk_flighthq_types_Keyboard.SoftKeyboardStyleDefaultKind;
 
-  public static function sortRenderQueue(queue:RenderQueue, ?compare:Dynamic):Void {
+  public static function sortRenderQueue(queue:Dynamic, ?compare:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_RenderQueue.sortRenderQueue, cast ([queue, compare] : Array<Dynamic>));
   }
 
@@ -20439,7 +20221,7 @@ class Sdk {
 
   public static final SpineParticleFormatKind:Dynamic = Facade_Sdk_flighthq_types__internal__ParticleFormatKindValues.SpineParticleFormatKind;
 
-  public static function splitSurfaceChannels(source:Surface):Array<Surface> {
+  public static function splitSurfaceChannels(source:Dynamic):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.splitSurfaceChannels, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -20478,7 +20260,7 @@ class Sdk {
 
   public static final StarlingPexFormatKind:Dynamic = Facade_Sdk_flighthq_types__internal__ParticleFormatKindValues.StarlingPexFormatKind;
 
-  public static function startApplicationLoop(app:Application, ?options:ApplicationLoopOptions):Void {
+  public static function startApplicationLoop(app:Dynamic, ?options:ApplicationLoopOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.startApplicationLoop, cast ([app, options] : Array<Dynamic>));
   }
 
@@ -20487,7 +20269,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function startResourceLoad(loader:ResourceLoader):Void {
+  public static function startResourceLoad(loader:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_loader_ResourceLoader.startResourceLoad, cast ([loader] : Array<Dynamic>));
   }
 
@@ -20496,7 +20278,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function stashWgpuUvTransform(state:WgpuRenderState, texture:Null<TextureLike>):Void {
+  public static function stashWgpuUvTransform(state:Dynamic, texture:Null<TextureLike>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.stashWgpuUvTransform, cast ([state, texture] : Array<Dynamic>));
   }
 
@@ -20510,51 +20292,51 @@ class Sdk {
     return cast null;
   }
 
-  public static function stepApplicationLoop(app:Application, deltaTime:Float):Void {
+  public static function stepApplicationLoop(app:Dynamic, deltaTime:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.stepApplicationLoop, cast ([app, deltaTime] : Array<Dynamic>));
   }
 
-  public static function stepParticleEmitter(emitter:ParticleEmitter, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?callbacks:ParticleEmitterCallbacks):Void {
+  public static function stepParticleEmitter(emitter:Dynamic, state:Dynamic, config:Dynamic, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?callbacks:ParticleEmitterCallbacks):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_StepParticleEmitter.stepParticleEmitter, cast ([emitter, state, config, deltaTime, forces, colliders, callbacks] : Array<Dynamic>));
   }
 
-  public static function stepParticleEmitter3D(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?callbacks:ParticleEmitterCallbacks):Void {
+  public static function stepParticleEmitter3D(emitter:Dynamic, state:Dynamic, config:Dynamic, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?callbacks:ParticleEmitterCallbacks):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_StepParticleEmitter3D.stepParticleEmitter3D, cast ([emitter, state, config, deltaTime, forces, colliders, callbacks] : Array<Dynamic>));
   }
 
-  public static function stepParticleObjects(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?updateOptions:ParticleObjectsUpdateOptions):Void {
+  public static function stepParticleObjects(objects:Array<ParticleObject>, state:Dynamic, config:Dynamic, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?updateOptions:ParticleObjectsUpdateOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particles_StepParticleObjects.stepParticleObjects, cast ([objects, state, config, deltaTime, forces, colliders, updateOptions] : Array<Dynamic>));
   }
 
-  public static function stopAllAudioMixerChannels(mixer:AudioMixer):Void {
+  public static function stopAllAudioMixerChannels(mixer:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_media_AudioMixer.stopAllAudioMixerChannels, cast ([mixer] : Array<Dynamic>));
   }
 
-  public static function stopAllTweens(manager:TweenManager, ?options:StopTweenOptions):Void {
+  public static function stopAllTweens(manager:Dynamic, ?options:StopTweenOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.stopAllTweens, cast ([manager, options] : Array<Dynamic>));
   }
 
-  public static function stopAnimationPlayer(player:AnimationPlayer):Void {
+  public static function stopAnimationPlayer(player:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_animation_AnimationPlayer.stopAnimationPlayer, cast ([player] : Array<Dynamic>));
   }
 
-  public static function stopApplicationLoop(app:Application):Void {
+  public static function stopApplicationLoop(app:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.stopApplicationLoop, cast ([app] : Array<Dynamic>));
   }
 
-  public static function stopAudioChannel(channel:AudioChannel):Void {
+  public static function stopAudioChannel(channel:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_media_AudioChannel.stopAudioChannel, cast ([channel] : Array<Dynamic>));
   }
 
-  public static function stopMovieClip(clip:MovieClip):Void {
+  public static function stopMovieClip(clip:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.stopMovieClip, cast ([clip] : Array<Dynamic>));
   }
 
-  public static function stopSpritesheetPlayer(player:SpritesheetPlayer):Void {
+  public static function stopSpritesheetPlayer(player:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.stopSpritesheetPlayer, cast ([player] : Array<Dynamic>));
   }
 
-  public static function stopTimeline(timeline:Timeline):Void {
+  public static function stopTimeline(timeline:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_timeline_Timeline.stopTimeline, cast ([timeline] : Array<Dynamic>));
   }
 
@@ -20562,11 +20344,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.stopTween, cast ([tween, options] : Array<Dynamic>));
   }
 
-  public static function stopTweens(manager:TweenManager, target:Dynamic, ?propertyMap:NumericProps<Dynamic>, ?options:StopTweenOptions):Void {
+  public static function stopTweens(manager:Dynamic, target:Dynamic, ?propertyMap:NumericProps<Dynamic>, ?options:StopTweenOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.stopTweens, cast ([manager, target, propertyMap, options] : Array<Dynamic>));
   }
 
-  public static function stopVideoChannel(channel:VideoChannel):Void {
+  public static function stopVideoChannel(channel:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_media_VideoChannel.stopVideoChannel, cast ([channel] : Array<Dynamic>));
   }
 
@@ -20575,16 +20357,16 @@ class Sdk {
     return cast null;
   }
 
-  public static function strokePath(path:Path, style:StrokeStyle, ?tolerance:Dynamic):Path {
+  public static function strokePath(path:Dynamic, style:StrokeStyle, ?tolerance:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_Path.strokePath, cast ([path, style, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function submitWgpuQuadDraw(state:WgpuRenderState, uniformOffset:Float, textureBindGroup:Dynamic):Void {
+  public static function submitWgpuQuadDraw(state:Dynamic, uniformOffset:Float, textureBindGroup:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuDraw.submitWgpuQuadDraw, cast ([state, uniformOffset, textureBindGroup] : Array<Dynamic>));
   }
 
-  public static function submitWgpuRenderPass(state:WgpuRenderState):Void {
+  public static function submitWgpuRenderPass(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuBackground.submitWgpuRenderPass, cast ([state] : Array<Dynamic>));
   }
 
@@ -20611,7 +20393,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function suppressVelocity(field:VelocityField, source:Dynamic):Void {
+  public static function suppressVelocity(field:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_velocity_VelocityField.suppressVelocity, cast ([field, source] : Array<Dynamic>));
   }
 
@@ -20646,12 +20428,12 @@ class Sdk {
 
   public static final TAU:Dynamic = Facade_Sdk_flighthq_math_Constants.TAU;
 
-  public static function tessellatePath(path:Path, ?tolerance:Dynamic):PathMesh {
+  public static function tessellatePath(path:Dynamic, ?tolerance:Dynamic):PathMesh {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_Path.tessellatePath, cast ([path, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function tessellatePathTyped(path:Path, ?tolerance:Dynamic):PathMeshTyped {
+  public static function tessellatePathTyped(path:Dynamic, ?tolerance:Dynamic):PathMeshTyped {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_path_Path.tessellatePathTyped, cast ([path, tolerance] : Array<Dynamic>));
     return cast null;
   }
@@ -20806,16 +20588,16 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_BoundingSphere.transformBoundingSphereByMatrix4, cast ([out, sphere, m] : Array<Dynamic>));
   }
 
-  public static function transformClipRegion(out:ClipRegion, clip:ClipRegion, matrix:MatrixLike):Void {
+  public static function transformClipRegion(out:Dynamic, clip:Dynamic, matrix:MatrixLike):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.transformClipRegion, cast ([out, clip, matrix] : Array<Dynamic>));
   }
 
-  public static function transformMeshGeometry(geometry:MeshGeometry, matrix:Matrix4Like):Bool {
+  public static function transformMeshGeometry(geometry:Dynamic, matrix:Matrix4Like):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryTransforms.transformMeshGeometry, cast ([geometry, matrix] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function transformMeshGeometryInto(out:MeshGeometry, source:MeshGeometry, matrix:Matrix4Like):Bool {
+  public static function transformMeshGeometryInto(out:Dynamic, source:Dynamic, matrix:Matrix4Like):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryTransforms.transformMeshGeometryInto, cast ([out, source, matrix] : Array<Dynamic>));
     return cast null;
   }
@@ -20824,11 +20606,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Obb.transformObbByMatrix4, cast ([out, obb, m] : Array<Dynamic>));
   }
 
-  public static function transformPath(source:Path, matrix:MatrixLike, out:Path):Void {
+  public static function transformPath(source:Dynamic, matrix:MatrixLike, out:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_Path.transformPath, cast ([source, matrix, out] : Array<Dynamic>));
   }
 
-  public static function transformSurface(dest:SurfaceRegion, source:SurfaceRegion, matrix:Array<Float>, ?edgeMode:SurfaceEdgeMode, ?sampleMode:SurfaceResizeMode):Void {
+  public static function transformSurface(dest:Dynamic, source:Dynamic, matrix:Array<Float>, ?edgeMode:SurfaceEdgeMode, ?sampleMode:SurfaceResizeMode):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.transformSurface, cast ([dest, source, matrix, edgeMode, sampleMode] : Array<Dynamic>));
   }
 
@@ -20860,11 +20642,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Matrix.translateMatrixByVectorXY, cast ([out, source, x, y] : Array<Dynamic>));
   }
 
-  public static function translateMeshGeometry(geometry:MeshGeometry, x:Float, y:Float, z:Float):Void {
+  public static function translateMeshGeometry(geometry:Dynamic, x:Float, y:Float, z:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryTransforms.translateMeshGeometry, cast ([geometry, x, y, z] : Array<Dynamic>));
   }
 
-  public static function translatePath(source:Path, dx:Float, dy:Float, out:Path):Void {
+  public static function translatePath(source:Dynamic, dx:Float, dy:Float, out:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_path_Path.translatePath, cast ([source, dx, dy, out] : Array<Dynamic>));
   }
 
@@ -20897,19 +20679,19 @@ class Sdk {
     return cast null;
   }
 
-  public static function trimAnimationTrack(track:AnimationTrack, startTime:Float, endTime:Float):AnimationTrack {
+  public static function trimAnimationTrack(track:Dynamic, startTime:Float, endTime:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_animation_AnimationTrack.trimAnimationTrack, cast ([track, startTime, endTime] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function trimSurface(source:Surface):Surface {
+  public static function trimSurface(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.trimSurface, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
   public static final TurbulenceForceKind:Dynamic = Facade_Sdk_flighthq_types__internal__TurbulenceForceValues.TurbulenceForceKind;
 
-  public static function undoTextInput(source:RichText):Void {
+  public static function undoTextInput(source:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textinput_TextInputEditing.undoTextInput, cast ([source] : Array<Dynamic>));
   }
 
@@ -20919,16 +20701,16 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Aabb.unionAabb, cast ([out, a, b] : Array<Dynamic>));
   }
 
-  public static function unionAllPaths(paths:Array<Path>, ?out:Path, ?options:PathBooleanOptions):Path {
+  public static function unionAllPaths(paths:Array<Dynamic>, ?out:Dynamic, ?options:PathBooleanOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_pathBoolean_UnionAllPaths.unionAllPaths, cast ([paths, out, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function unionClipRegions(out:ClipRegion, a:ClipRegion, b:ClipRegion):Void {
+  public static function unionClipRegions(out:Dynamic, a:Dynamic, b:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_clip_ClipRegion.unionClipRegions, cast ([out, a, b] : Array<Dynamic>));
   }
 
-  public static function unionPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
+  public static function unionPaths(a:Dynamic, b:Dynamic, ?out:Dynamic, ?options:PathBooleanOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_pathBoolean_BooleanPaths.unionPaths, cast ([a, b, out, options] : Array<Dynamic>));
     return cast null;
   }
@@ -20969,7 +20751,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_shortcut_Shortcut.unregisterAllGlobalShortcuts, cast ([] : Array<Dynamic>));
   }
 
-  public static function unregisterApplicationWindow(app:Application, win:ApplicationWindow):Void {
+  public static function unregisterApplicationWindow(app:Dynamic, win:ApplicationWindow):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_application_Application.unregisterApplicationWindow, cast ([app, win] : Array<Dynamic>));
   }
 
@@ -20978,7 +20760,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function unregisterGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String):Bool {
+  public static function unregisterGlBlendEffectBackdrop(state:Dynamic, backdropKey:String):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_effectsGl_GlBlendEffect.unregisterGlBlendEffectBackdrop, cast ([state, backdropKey] : Array<Dynamic>));
     return cast null;
   }
@@ -21011,11 +20793,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function unrouteAudioChannelFromMixerBus(mixer:AudioMixer, channel:AudioChannel):Void {
+  public static function unrouteAudioChannelFromMixerBus(mixer:Dynamic, channel:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_media_AudioMixer.unrouteAudioChannelFromMixerBus, cast ([mixer, channel] : Array<Dynamic>));
   }
 
-  public static function updateBitmapText(bitmapText:BitmapText):Void {
+  public static function updateBitmapText(bitmapText:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_bitmaptext_UpdateBitmapText.updateBitmapText, cast ([bitmapText] : Array<Dynamic>));
   }
 
@@ -21023,7 +20805,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_camera2d_Camera2d.updateCamera2DFollow, cast ([camera, targetX, targetY, deltaTime, options] : Array<Dynamic>));
   }
 
-  public static function updateCameraInverseViewProjection(camera:Camera, aspect:Float):Bool {
+  public static function updateCameraInverseViewProjection(camera:Dynamic, aspect:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_camera_Camera.updateCameraInverseViewProjection, cast ([camera, aspect] : Array<Dynamic>));
     return cast null;
   }
@@ -21032,20 +20814,20 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_flow_UpdateFlowStack.updateFlowStack, cast ([stack, deltaTime] : Array<Dynamic>));
   }
 
-  public static function updateGlEnvironmentCubeFace(state:GlRenderState, face:Float, image:ImageResource):Bool {
+  public static function updateGlEnvironmentCubeFace(state:Dynamic, face:Float, image:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneGl_GlEnvironmentCube.updateGlEnvironmentCubeFace, cast ([state, face, image] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function updateGlTexture(state:GlRenderState, texture:Dynamic, canvas:Dynamic):Void {
+  public static function updateGlTexture(state:Dynamic, texture:Dynamic, canvas:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlDraw.updateGlTexture, cast ([state, texture, canvas] : Array<Dynamic>));
   }
 
-  public static function updateMeshMorph(mesh:Mesh):Void {
+  public static function updateMeshMorph(mesh:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_scene_Scene.updateMeshMorph, cast ([mesh] : Array<Dynamic>));
   }
 
-  public static function updateMeshSkin(mesh:Mesh):Void {
+  public static function updateMeshSkin(mesh:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_skeleton3d_Skeleton3d.updateMeshSkin, cast ([mesh] : Array<Dynamic>));
   }
 
@@ -21053,11 +20835,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_motionpath_UpdateMotionPath.updateMotionPath, cast ([mp, deltaTime] : Array<Dynamic>));
   }
 
-  public static function updateMovieClip(clip:MovieClip, deltaTime:Float):Void {
+  public static function updateMovieClip(clip:Dynamic, deltaTime:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_movieclip_MovieClip.updateMovieClip, cast ([clip, deltaTime] : Array<Dynamic>));
   }
 
-  public static function updateNodeClip(_state:RenderState, source:Renderable, data:RenderProxy2D, parentData:Null<RenderProxy2D>):Void {
+  public static function updateNodeClip(_state:Dynamic, source:Renderable, data:RenderProxy2D, parentData:Null<RenderProxy2D>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_RenderProxy.updateNodeClip, cast ([_state, source, data, parentData] : Array<Dynamic>));
   }
 
@@ -21066,79 +20848,79 @@ class Sdk {
     return cast null;
   }
 
-  public static function updateParticleEmitter(emitter:ParticleEmitter, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?callbacks:ParticleEmitterCallbacks):Void {
+  public static function updateParticleEmitter(emitter:Dynamic, state:Dynamic, config:Dynamic, deltaTime:Float, ?callbacks:ParticleEmitterCallbacks):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_UpdateParticleEmitter.updateParticleEmitter, cast ([emitter, state, config, deltaTime, callbacks] : Array<Dynamic>));
   }
 
-  public static function updateParticleEmitter3D(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?callbacks:ParticleEmitterCallbacks):Void {
+  public static function updateParticleEmitter3D(emitter:Dynamic, state:Dynamic, config:Dynamic, deltaTime:Float, ?callbacks:ParticleEmitterCallbacks):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particleemitter_UpdateParticleEmitter3D.updateParticleEmitter3D, cast ([emitter, state, config, deltaTime, callbacks] : Array<Dynamic>));
   }
 
-  public static function updateParticleObjects(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, ?options:ParticleObjectsUpdateOptions):Void {
+  public static function updateParticleObjects(objects:Array<ParticleObject>, state:Dynamic, config:Dynamic, deltaTime:Float, ?options:ParticleObjectsUpdateOptions):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_particles_UpdateParticleObjects.updateParticleObjects, cast ([objects, state, config, deltaTime, options] : Array<Dynamic>));
   }
 
-  public static function updateRenderProxy2D(state:RenderState, source:Renderable, data:RenderProxy2D, parentData:Null<RenderProxy2D>):Void {
+  public static function updateRenderProxy2D(state:Dynamic, source:Renderable, data:RenderProxy2D, parentData:Null<RenderProxy2D>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_RenderProxy.updateRenderProxy2D, cast ([state, source, data, parentData] : Array<Dynamic>));
   }
 
-  public static function updateRenderProxy2DTransform(state:RenderState, data:RenderProxy2D, ?parentData:RenderProxy2D):Bool {
+  public static function updateRenderProxy2DTransform(state:Dynamic, data:RenderProxy2D, ?parentData:RenderProxy2D):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderTransform2d.updateRenderProxy2DTransform, cast ([state, data, parentData] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function updateRenderProxyAppearance(state:RenderState, data:RenderProxy, ?parentData:RenderProxy):Bool {
+  public static function updateRenderProxyAppearance(state:Dynamic, data:Dynamic, ?parentData:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderAppearance.updateRenderProxyAppearance, cast ([state, data, parentData] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function updateRenderProxyColorTransform(state:RenderState, data:RenderProxy, ?_parentData:RenderProxy):Void {
+  public static function updateRenderProxyColorTransform(state:Dynamic, data:Dynamic, ?_parentData:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_RenderColorTransform.updateRenderProxyColorTransform, cast ([state, data, _parentData] : Array<Dynamic>));
   }
 
-  public static function updateRenderProxyMaterial(state:RenderState, data:RenderProxy, ?_parentData:RenderProxy):Void {
+  public static function updateRenderProxyMaterial(state:Dynamic, data:Dynamic, ?_parentData:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_RenderMaterial.updateRenderProxyMaterial, cast ([state, data, _parentData] : Array<Dynamic>));
   }
 
-  public static function updateRenderProxyRenderer(state:RenderState, node:RenderProxy):Void {
+  public static function updateRenderProxyRenderer(state:Dynamic, node:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_render_RenderProxy.updateRenderProxyRenderer, cast ([state, node] : Array<Dynamic>));
   }
 
-  public static function updateSpatialObject(index:SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Void {
+  public static function updateSpatialObject(index:Dynamic, id:SpatialObjectId, bounds:SpatialAabb):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spatial_SpatialIndex.updateSpatialObject, cast ([index, id, bounds] : Array<Dynamic>));
   }
 
-  public static function updateSpring(spring:Spring, target:Float, config:SpringConfig, deltaTime:Float):Void {
+  public static function updateSpring(spring:Dynamic, target:Float, config:Dynamic, deltaTime:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spring_UpdateSpring.updateSpring, cast ([spring, target, config, deltaTime] : Array<Dynamic>));
   }
 
-  public static function updateSpring2D(spring2D:Spring2D, targetX:Float, targetY:Float, config:SpringConfig, deltaTime:Float):Void {
+  public static function updateSpring2D(spring2D:Dynamic, targetX:Float, targetY:Float, config:Dynamic, deltaTime:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spring_Spring2D.updateSpring2D, cast ([spring2D, targetX, targetY, config, deltaTime] : Array<Dynamic>));
   }
 
-  public static function updateSpring3D(spring3D:Spring3D, targetX:Float, targetY:Float, targetZ:Float, config:SpringConfig, deltaTime:Float):Void {
+  public static function updateSpring3D(spring3D:Dynamic, targetX:Float, targetY:Float, targetZ:Float, config:Dynamic, deltaTime:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_spring_Spring3D.updateSpring3D, cast ([spring3D, targetX, targetY, targetZ, config, deltaTime] : Array<Dynamic>));
   }
 
-  public static function updateSpritesheetPlayer(player:SpritesheetPlayer, deltaTime:Float):Bool {
+  public static function updateSpritesheetPlayer(player:Dynamic, deltaTime:Float):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.updateSpritesheetPlayer, cast ([player, deltaTime] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function updateTimeline(timeline:Timeline, deltaTime:Float):Void {
+  public static function updateTimeline(timeline:Dynamic, deltaTime:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_timeline_Timeline.updateTimeline, cast ([timeline, deltaTime] : Array<Dynamic>));
   }
 
-  public static function updateTweens(manager:TweenManager, deltaTime:Float):Void {
+  public static function updateTweens(manager:Dynamic, deltaTime:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_tween_Tween.updateTweens, cast ([manager, deltaTime] : Array<Dynamic>));
   }
 
-  public static function updateWgpuEnvironmentCubeFace(state:WgpuRenderState, face:Float, image:ImageResource):Bool {
+  public static function updateWgpuEnvironmentCubeFace(state:Dynamic, face:Float, image:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_WgpuEnvironmentCube.updateWgpuEnvironmentCubeFace, cast ([state, face, image] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function updateWgpuTextureEntry(state:WgpuRenderState, entry:WgpuTextureEntry, canvas:Dynamic):Void {
+  public static function updateWgpuTextureEntry(state:Dynamic, entry:WgpuTextureEntry, canvas:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuDraw.updateWgpuTextureEntry, cast ([state, entry, canvas] : Array<Dynamic>));
   }
 
@@ -21147,7 +20929,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function uploadGlSkinPaletteTexture(gl:Dynamic, palette:GlSkinPaletteTexture, jointMatrices:flighthq._internal._Float32Array, jointCount:Float):Void {
+  public static function uploadGlSkinPaletteTexture(gl:Dynamic, palette:Dynamic, jointMatrices:flighthq._internal._Float32Array, jointCount:Float):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlSkinPaletteTexture.uploadGlSkinPaletteTexture, cast ([gl, palette, jointMatrices, jointCount] : Array<Dynamic>));
   }
 
@@ -21159,11 +20941,11 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlTextureUpload.uploadGlTextureElement, cast ([gl, target, source] : Array<Dynamic>));
   }
 
-  public static function uploadGlTextureImageResource(gl:Dynamic, target:Float, image:ImageResource):Void {
+  public static function uploadGlTextureImageResource(gl:Dynamic, target:Float, image:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlTextureUpload.uploadGlTextureImageResource, cast ([gl, target, image] : Array<Dynamic>));
   }
 
-  public static function uploadGlTextureVideoFrame(gl:Dynamic, videoTexture:VideoTexture, uploadedFrameId:Float):Float {
+  public static function uploadGlTextureVideoFrame(gl:Dynamic, videoTexture:Dynamic, uploadedFrameId:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlTextureVideoUpload.uploadGlTextureVideoFrame, cast ([gl, videoTexture, uploadedFrameId] : Array<Dynamic>));
     return cast null;
   }
@@ -21176,24 +20958,24 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuTextureUpload.uploadWgpuTextureElement, cast ([device, texture, origin, width, height, source] : Array<Dynamic>));
   }
 
-  public static function uploadWgpuTextureImageResource(device:Dynamic, texture:Dynamic, origin:Dynamic, image:ImageResource):Void {
+  public static function uploadWgpuTextureImageResource(device:Dynamic, texture:Dynamic, origin:Dynamic, image:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuTextureUpload.uploadWgpuTextureImageResource, cast ([device, texture, origin, image] : Array<Dynamic>));
   }
 
-  public static function useGlProgram(state:GlRenderState, ?shader:GlBitmapShader):Void {
+  public static function useGlProgram(state:Dynamic, ?shader:GlBitmapShader):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlDraw.useGlProgram, cast ([state, shader] : Array<Dynamic>));
   }
 
-  public static function useGlQuadBatchProgram(state:GlRenderState, program:Dynamic):Void {
+  public static function useGlQuadBatchProgram(state:Dynamic, program:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectGl_GlSpriteBatch.useGlQuadBatchProgram, cast ([state, program] : Array<Dynamic>));
   }
 
-  public static function useRenderCache(state:RenderState, source:Renderable, cache:RenderCache):RenderCacheAdapter {
+  public static function useRenderCache(state:Dynamic, source:Renderable, cache:Dynamic):RenderCacheAdapter {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderCache.useRenderCache, cast ([state, source, cache] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function validateAnimationTrack(track:AnimationTrack):Null<Array<AnimationTrackValidationDiagnostic>> {
+  public static function validateAnimationTrack(track:Dynamic):Null<Array<AnimationTrackValidationDiagnostic>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_animation_AnimationTrack.validateAnimationTrack, cast ([track] : Array<Dynamic>));
     return cast null;
   }
@@ -21203,12 +20985,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function validateMeshGeometry(geometry:MeshGeometry):Bool {
+  public static function validateMeshGeometry(geometry:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryOperations.validateMeshGeometry, cast ([geometry] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function validateParticleEmitterConfig(config:ParticleEmitterConfig):Array<ParticleConfigIssue> {
+  public static function validateParticleEmitterConfig(config:Dynamic):Array<ParticleConfigIssue> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_particles_ValidateParticleEmitterConfig.validateParticleEmitterConfig, cast ([config] : Array<Dynamic>));
     return cast null;
   }
@@ -21223,12 +21005,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function validateSpritesheet(spritesheet:Spritesheet):Null<Array<SpritesheetValidationDiagnostic>> {
+  public static function validateSpritesheet(spritesheet:Dynamic):Null<Array<SpritesheetValidationDiagnostic>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.validateSpritesheet, cast ([spritesheet] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function validateSpritesheetData(data:SpritesheetData):Null<Array<SpritesheetValidationDiagnostic>> {
+  public static function validateSpritesheetData(data:Dynamic):Null<Array<SpritesheetValidationDiagnostic>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_spritesheet_Spritesheet.validateSpritesheetData, cast ([data] : Array<Dynamic>));
     return cast null;
   }
@@ -21238,23 +21020,23 @@ class Sdk {
     return cast null;
   }
 
-  public static final VECTOR2_X_AXIS:Vector2 = Facade_Sdk_flighthq_geometry_Vector2.VECTOR2_X_AXIS;
+  public static final VECTOR2_X_AXIS:Dynamic = Facade_Sdk_flighthq_geometry_Vector2.VECTOR2_X_AXIS;
 
-  public static final VECTOR2_Y_AXIS:Vector2 = Facade_Sdk_flighthq_geometry_Vector2.VECTOR2_Y_AXIS;
+  public static final VECTOR2_Y_AXIS:Dynamic = Facade_Sdk_flighthq_geometry_Vector2.VECTOR2_Y_AXIS;
 
-  public static final VECTOR3_X_AXIS:Vector3 = Facade_Sdk_flighthq_geometry_Vector3.VECTOR3_X_AXIS;
+  public static final VECTOR3_X_AXIS:Dynamic = Facade_Sdk_flighthq_geometry_Vector3.VECTOR3_X_AXIS;
 
-  public static final VECTOR3_Y_AXIS:Vector3 = Facade_Sdk_flighthq_geometry_Vector3.VECTOR3_Y_AXIS;
+  public static final VECTOR3_Y_AXIS:Dynamic = Facade_Sdk_flighthq_geometry_Vector3.VECTOR3_Y_AXIS;
 
-  public static final VECTOR3_Z_AXIS:Vector3 = Facade_Sdk_flighthq_geometry_Vector3.VECTOR3_Z_AXIS;
+  public static final VECTOR3_Z_AXIS:Dynamic = Facade_Sdk_flighthq_geometry_Vector3.VECTOR3_Z_AXIS;
 
-  public static final VECTOR4_W_UNIT:Vector4 = Facade_Sdk_flighthq_geometry_Vector4.VECTOR4_W_UNIT;
+  public static final VECTOR4_W_UNIT:Dynamic = Facade_Sdk_flighthq_geometry_Vector4.VECTOR4_W_UNIT;
 
-  public static final VECTOR4_X_AXIS:Vector4 = Facade_Sdk_flighthq_geometry_Vector4.VECTOR4_X_AXIS;
+  public static final VECTOR4_X_AXIS:Dynamic = Facade_Sdk_flighthq_geometry_Vector4.VECTOR4_X_AXIS;
 
-  public static final VECTOR4_Y_AXIS:Vector4 = Facade_Sdk_flighthq_geometry_Vector4.VECTOR4_Y_AXIS;
+  public static final VECTOR4_Y_AXIS:Dynamic = Facade_Sdk_flighthq_geometry_Vector4.VECTOR4_Y_AXIS;
 
-  public static final VECTOR4_Z_AXIS:Vector4 = Facade_Sdk_flighthq_geometry_Vector4.VECTOR4_Z_AXIS;
+  public static final VECTOR4_Z_AXIS:Dynamic = Facade_Sdk_flighthq_geometry_Vector4.VECTOR4_Z_AXIS;
 
   public static final vertexColorGlMeshMaterialRenderer:GlMeshMaterialRenderer = Facade_Sdk_flighthq_sceneGl_VertexColorGlMeshMaterialRenderer.vertexColorGlMeshMaterialRenderer;
 
@@ -21287,7 +21069,7 @@ class Sdk {
 
   public static final VortexForceKind:Dynamic = Facade_Sdk_flighthq_types__internal__VortexForceValues.VortexForceKind;
 
-  public static function walkNode(state:RenderState, root:Renderable, visit:RenderProxyVisitor):Bool {
+  public static function walkNode(state:Dynamic, root:Renderable, visit:RenderProxyVisitor):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_render_RenderProxy.walkNode, cast ([state, root, visit] : Array<Dynamic>));
     return cast null;
   }
@@ -21297,15 +21079,15 @@ class Sdk {
     return cast null;
   }
 
-  public static function warmWgpuPipelines(state:WgpuRenderState):Void {
+  public static function warmWgpuPipelines(state:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuDraw.warmWgpuPipelines, cast ([state] : Array<Dynamic>));
   }
 
-  public static function warpSurface(dest:SurfaceRegion, source:SurfaceRegion, matrix:Array<Float>, ?edgeMode:SurfaceEdgeMode, ?sampleMode:SurfaceResizeMode):Void {
+  public static function warpSurface(dest:Dynamic, source:Dynamic, matrix:Array<Float>, ?edgeMode:SurfaceEdgeMode, ?sampleMode:SurfaceResizeMode):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.warpSurface, cast ([dest, source, matrix, edgeMode, sampleMode] : Array<Dynamic>));
   }
 
-  public static function warpSurfaceQuad(dest:SurfaceRegion, source:SurfaceRegion, dstQuad:Array<Float>, ?edgeMode:SurfaceEdgeMode, ?sampleMode:SurfaceResizeMode):Void {
+  public static function warpSurfaceQuad(dest:Dynamic, source:Dynamic, dstQuad:Array<Float>, ?edgeMode:SurfaceEdgeMode, ?sampleMode:SurfaceResizeMode):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.warpSurfaceQuad, cast ([dest, source, dstQuad, edgeMode, sampleMode] : Array<Dynamic>));
   }
 
@@ -21363,7 +21145,7 @@ class Sdk {
 
   public static final wireframeWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = Facade_Sdk_flighthq_sceneWgpu_WireframeWgpuMeshMaterialRenderer.wireframeWgpuMeshMaterialRenderer;
 
-  public static function wrapMeshGeometryUvs(geometry:MeshGeometry):Void {
+  public static function wrapMeshGeometryUvs(geometry:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryUvs.wrapMeshGeometryUvs, cast ([geometry] : Array<Dynamic>));
   }
 
@@ -21449,11 +21231,11 @@ class Sdk {
     return cast null;
   }
 
-  public static function writeSurfacePixels(dest:SurfaceRegion, pixels:Dynamic):Void {
+  public static function writeSurfacePixels(dest:Dynamic, pixels:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.writeSurfacePixels, cast ([dest, pixels] : Array<Dynamic>));
   }
 
-  public static function writeSurfacePixels32(dest:SurfaceRegion, pixels:Dynamic):Void {
+  public static function writeSurfacePixels32(dest:Dynamic, pixels:Dynamic):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.writeSurfacePixels32, cast ([dest, pixels] : Array<Dynamic>));
   }
 
@@ -21474,21 +21256,21 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_geometry_Vector4.writeVector4ToFloat32Array, cast ([out, offset, source] : Array<Dynamic>));
   }
 
-  public static function writeWgpuDrawUniform(state:WgpuRenderState, proxy:SceneRenderProxy):Dynamic {
+  public static function writeWgpuDrawUniform(state:Dynamic, proxy:SceneRenderProxy):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.writeWgpuDrawUniform, cast ([state, proxy] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function writeWgpuFrameUniform(state:WgpuRenderState, camera:Camera, lights:SceneLightBlock):Void {
+  public static function writeWgpuFrameUniform(state:Dynamic, camera:Dynamic, lights:SceneLightBlock):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu__internal__WgpuMeshPipelineValues.writeWgpuFrameUniform, cast ([state, camera, lights] : Array<Dynamic>));
   }
 
-  public static function writeWgpuMatrixOnlyUniforms(state:WgpuRenderState, renderProxy:RenderProxy, transform:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Float {
+  public static function writeWgpuMatrixOnlyUniforms(state:Dynamic, renderProxy:Dynamic, transform:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuShader.writeWgpuMatrixOnlyUniforms, cast ([state, renderProxy, transform, x0, y0, x1, y1, u0, v0, u1, v1] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function writeWgpuPbrMaterialUniform(state:WgpuRenderState, binding:WgpuMaterialBinding):Void {
+  public static function writeWgpuPbrMaterialUniform(state:Dynamic, binding:WgpuMaterialBinding):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_StandardPbrWgpuMeshMaterialRenderer.writeWgpuPbrMaterialUniform, cast ([state, binding] : Array<Dynamic>));
   }
 
@@ -21496,12 +21278,12 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_sceneWgpu_StandardPbrWgpuMeshMaterialRenderer.writeWgpuPbrStandardBlock, cast ([out, standard, alphaCutoff] : Array<Dynamic>));
   }
 
-  public static function writeWgpuQuadUniforms(state:WgpuRenderState, renderProxy:{ var alpha:Float; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }, colorTransform:Null<ColorTransform>, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Float {
+  public static function writeWgpuQuadUniforms(state:Dynamic, renderProxy:{ var alpha:Float; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }, colorTransform:Null<Dynamic>, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Float {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuShader.writeWgpuQuadUniforms, cast ([state, renderProxy, colorTransform, x0, y0, x1, y1, u0, v0, u1, v1] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function xorPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
+  public static function xorPaths(a:Dynamic, b:Dynamic, ?out:Dynamic, ?options:PathBooleanOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_pathBoolean_BooleanPaths.xorPaths, cast ([a, b, out, options] : Array<Dynamic>));
     return cast null;
   }

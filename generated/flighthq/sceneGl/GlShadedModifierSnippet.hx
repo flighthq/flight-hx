@@ -8,24 +8,23 @@ import flighthq.shading.ModifierRegistry.ModifierDefinition;
 import flighthq.shading._internal._ModifierRegistryValues.createModifierRegistry;
 import flighthq.shading._internal._ModifierRegistryValues.registerModifier;
 import flighthq.shading._internal._ModifierRegistryValues.resolveModifier;
-import flighthq.types.GlRenderState;
 import flighthq.types.Modifier;
 import flighthq.types.ModifierKind;
 
-typedef GlModifierBindContext = { var acquireModifierTextureUnit:Dynamic; var index:Float; var program:Dynamic; var state:GlRenderState; };
+typedef GlModifierBindContext = { var acquireModifierTextureUnit:Dynamic; var index:Float; var program:Dynamic; var state:Dynamic; };
 
 typedef GlModifierSnippet = Dynamic;
 
 @:expose("flighthq.sceneGl.GlShadedModifierSnippet")
 class GlShadedModifierSnippet {
-  public static function registerGlModifierSnippet(state:GlRenderState, snippet:GlModifierSnippet):Void {
+  public static function registerGlModifierSnippet(state:Dynamic, snippet:GlModifierSnippet):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'modifierSnippetRegistry'), null))) { _Runtime.setField(runtime, 'modifierSnippetRegistry', _Runtime.callValue(createModifierRegistry, cast ([] : Array<Dynamic>))); }
     _Runtime.callValue(registerModifier, cast ([_Runtime.field(runtime, 'modifierSnippetRegistry'), snippet] : Array<Dynamic>));
   }
 
-  public static function resolveGlModifierSnippet(state:GlRenderState, kind:ModifierKind):Null<GlModifierSnippet> {
+  public static function resolveGlModifierSnippet(state:Dynamic, kind:ModifierKind):Null<GlModifierSnippet> {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'modifierSnippetRegistry');
     if (_Runtime.truthy(_Runtime.strictEquals(registry, null))) { return cast null; }

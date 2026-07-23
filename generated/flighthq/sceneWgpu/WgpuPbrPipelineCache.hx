@@ -9,13 +9,12 @@ import flighthq.sceneWgpu.WgpuPbrPrelude.getWgpuPbrModuleSourceForKey;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.createWgpuMeshPipeline;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuPbrSampleLayout;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuScenePipeline;
-import flighthq.types.WgpuRenderState;
 
 typedef WgpuPbrPipeline = Dynamic;
 
 @:expose("flighthq.sceneWgpu.WgpuPbrPipelineCache")
 class WgpuPbrPipelineCache {
-  public static function compileWgpuPbrPipeline(state:WgpuRenderState, key:WgpuPbrDefineKey, format:Dynamic):WgpuPbrPipeline {
+  public static function compileWgpuPbrPipeline(state:Dynamic, key:WgpuPbrDefineKey, format:Dynamic):WgpuPbrPipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     var materialBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
@@ -26,7 +25,7 @@ class WgpuPbrPipelineCache {
     return cast null;
   }
 
-  public static function ensureWgpuPbrPipeline(state:WgpuRenderState, key:WgpuPbrDefineKey, format:Dynamic):WgpuPbrPipeline {
+  public static function ensureWgpuPbrPipeline(state:Dynamic, key:WgpuPbrDefineKey, format:Dynamic):WgpuPbrPipeline {
     return cast _Runtime.callValue(ensureWgpuScenePipeline, cast ([state, 'pbr:' + Std.string(format) + '|' + Std.string(_Runtime.callValue(buildWgpuPbrDefineKey, cast ([key] : Array<Dynamic>))) + '', function() return _Runtime.callValue(compileWgpuPbrPipeline, cast ([state, key, format] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }

@@ -15,35 +15,31 @@ import flighthq.node.Transform3d.getNodeWorldMatrix4;
 import flighthq.node.Transform3d.setNodeLocalMatrix4;
 import flighthq.scene.Billboard.isBillboard;
 import flighthq.scene.SceneNode.getSceneNodeRuntime;
-import flighthq.types.Billboard;
 import flighthq.types.Billboard.BillboardMode;
-import flighthq.types.Camera;
-import flighthq.types.Matrix4;
-import flighthq.types.SceneNode;
 
 @:expose("flighthq.scene.BillboardCamera")
 class BillboardCamera {
-  public static function orientBillboardToCamera(billboard:Billboard, camera:Camera):Void {
+  public static function orientBillboardToCamera(billboard:Dynamic, camera:Dynamic):Void {
     _Runtime.callValue(BillboardCamera.setBillboardCameraBasis__billboardCamera, cast ([camera] : Array<Dynamic>));
     _Runtime.callValue(BillboardCamera.applyBillboardFacing__billboardCamera, cast ([billboard] : Array<Dynamic>));
   }
 
-  public static function orientSceneBillboardsToCamera(scene:SceneNode, camera:Camera):Void {
+  public static function orientSceneBillboardsToCamera(scene:Dynamic, camera:Dynamic):Void {
     _Runtime.callValue(BillboardCamera.setBillboardCameraBasis__billboardCamera, cast ([camera] : Array<Dynamic>));
     _Runtime.callValue(BillboardCamera.orientBillboardSubtree__billboardCamera, cast ([scene] : Array<Dynamic>));
   }
 
-  public static function applyBillboardFacing__billboardCamera(billboard:Billboard):Void {
+  public static function applyBillboardFacing__billboardCamera(billboard:Dynamic):Void {
     var world:Dynamic = cast _Runtime.UNDEFINED;
     var parent:Dynamic = cast _Runtime.UNDEFINED;
-    world = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([billboard] : Array<Dynamic>)) : Matrix4);
+    world = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([billboard] : Array<Dynamic>)) : Dynamic);
     _Runtime.callValue(decomposeMatrix4, cast ([BillboardCamera._position__billboardCamera, BillboardCamera._rotationScratch__billboardCamera, BillboardCamera._scale__billboardCamera, world] : Array<Dynamic>));
     _Runtime.callValue(BillboardCamera.writeBillboardFacingMatrix__billboardCamera, cast ([BillboardCamera._facingWorld__billboardCamera, _Runtime.field(billboard, 'mode')] : Array<Dynamic>));
-    parent = (cast _Runtime.callValue(getNodeParent, cast ([(cast billboard : SceneNode)] : Array<Dynamic>)) : Null<SceneNode>);
+    parent = (cast _Runtime.callValue(getNodeParent, cast ([(cast billboard : Dynamic)] : Array<Dynamic>)) : Null<Dynamic>);
     if (_Runtime.truthy(_Runtime.strictEquals(parent, null))) {
       _Runtime.callValue(copyMatrix4, cast ([BillboardCamera._localScratch__billboardCamera, BillboardCamera._facingWorld__billboardCamera] : Array<Dynamic>));
     } else {
-      var parentWorld:Dynamic = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([parent] : Array<Dynamic>)) : Matrix4);
+      var parentWorld:Dynamic = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([parent] : Array<Dynamic>)) : Dynamic);
       if (_Runtime.truthy(_Runtime.callValue(inverseMatrix4, cast ([BillboardCamera._inverseParentWorld__billboardCamera, parentWorld] : Array<Dynamic>)))) {
         _Runtime.callValue(multiplyMatrix4, cast ([BillboardCamera._localScratch__billboardCamera, BillboardCamera._inverseParentWorld__billboardCamera, BillboardCamera._facingWorld__billboardCamera] : Array<Dynamic>));
       } else {
@@ -53,7 +49,7 @@ class BillboardCamera {
     _Runtime.callValue(setNodeLocalMatrix4, cast ([billboard, BillboardCamera._localScratch__billboardCamera] : Array<Dynamic>));
   }
 
-  public static function orientBillboardSubtree__billboardCamera(node:SceneNode):Void {
+  public static function orientBillboardSubtree__billboardCamera(node:Dynamic):Void {
     var children:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.callValue(isBillboard, cast ([node] : Array<Dynamic>)))) {
       _Runtime.callValue(BillboardCamera.applyBillboardFacing__billboardCamera, cast ([node] : Array<Dynamic>));
@@ -63,14 +59,14 @@ class BillboardCamera {
       {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
-          _Runtime.callValue(BillboardCamera.orientBillboardSubtree__billboardCamera, cast ([(cast _Runtime.getIndex(children, i) : SceneNode)] : Array<Dynamic>));
+          _Runtime.callValue(BillboardCamera.orientBillboardSubtree__billboardCamera, cast ([(cast _Runtime.getIndex(children, i) : Dynamic)] : Array<Dynamic>));
           i++;
         }
       }
     }
   }
 
-  public static function setBillboardCameraBasis__billboardCamera(camera:Camera):Void {
+  public static function setBillboardCameraBasis__billboardCamera(camera:Dynamic):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var rl:Dynamic = cast _Runtime.UNDEFINED;
     var ul:Dynamic = cast _Runtime.UNDEFINED;
@@ -103,7 +99,7 @@ class BillboardCamera {
     (BillboardCamera._cameraBackZ__billboardCamera = cast ((BillboardCamera._cameraBackZ__billboardCamera / bl) : Dynamic));
   }
 
-  public static function writeBillboardFacingMatrix__billboardCamera(out:Matrix4, mode:BillboardMode):Void {
+  public static function writeBillboardFacingMatrix__billboardCamera(out:Dynamic, mode:BillboardMode):Void {
     var px:Dynamic = cast _Runtime.UNDEFINED;
     var py:Dynamic = cast _Runtime.UNDEFINED;
     var pz:Dynamic = cast _Runtime.UNDEFINED;

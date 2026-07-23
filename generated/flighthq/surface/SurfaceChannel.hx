@@ -5,12 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.image.ImageResource.invalidateImageResource;
-import flighthq.types.Surface;
-import flighthq.types.SurfaceRegion;
 
 @:expose("flighthq.surface.SurfaceChannel")
 class SurfaceChannel {
-  public static function mergeSurfaceChannels(out:SurfaceRegion, r:SurfaceRegion, g:SurfaceRegion, b:SurfaceRegion, a:SurfaceRegion):Void {
+  public static function mergeSurfaceChannels(out:Dynamic, r:Dynamic, g:Dynamic, b:Dynamic, a:Dynamic):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var od:Dynamic = cast _Runtime.UNDEFINED;
@@ -57,7 +55,7 @@ class SurfaceChannel {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(out, 'surface')] : Array<Dynamic>));
   }
 
-  public static function splitSurfaceChannels(source:Surface):Array<Surface> {
+  public static function splitSurfaceChannels(source:Dynamic):Array<Dynamic> {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var sd:Dynamic = cast _Runtime.UNDEFINED;
@@ -103,7 +101,7 @@ class SurfaceChannel {
     return cast null;
   }
 
-  public static function makeSurface__surfaceChannel(data:Dynamic, width:Float, height:Float, source:Surface):Surface {
+  public static function makeSurface__surfaceChannel(data:Dynamic, width:Float, height:Float, source:Dynamic):Dynamic {
     return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(source, 'alphaType'), colorSpace: _Runtime.field(source, 'colorSpace'), compressed: null, data: data, format: _Runtime.field(source, 'format'), height: height, source: null, version: 0.0, width: width }] : Array<Dynamic>));
     return cast null;
   }

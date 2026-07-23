@@ -4,10 +4,9 @@ package flighthq.particlesFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
-import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
 
-typedef PixiParseResult = { var config:ParticleEmitterConfig; var warnings:Array<String>; };
+typedef PixiParseResult = { var config:Dynamic; var warnings:Array<String>; };
 
 typedef PixiParsed = PixiParseResult;
 
@@ -15,7 +14,7 @@ typedef PixiRaw__pixiParse = Dynamic;
 
 @:expose("flighthq.particlesFormats.PixiParse")
 class PixiParse {
-  public static function parsePixiParticle(json:String):ParticleEmitterConfig {
+  public static function parsePixiParticle(json:String):Dynamic {
     return cast _Runtime.callValue(PixiParse.rawToConfig__pixiParse, cast ([_Runtime.callValue(PixiParse.parsePixiJson__pixiParse, cast ([json] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
@@ -64,7 +63,7 @@ class PixiParse {
     return cast null;
   }
 
-  public static function rawToConfig__pixiParse(raw:PixiRaw__pixiParse):ParticleEmitterConfig {
+  public static function rawToConfig__pixiParse(raw:PixiRaw__pixiParse):Dynamic {
     var maxParticles:Dynamic = cast _Runtime.UNDEFINED;
     var frequency:Dynamic = cast _Runtime.UNDEFINED;
     var spawnRate:Dynamic = cast _Runtime.UNDEFINED;

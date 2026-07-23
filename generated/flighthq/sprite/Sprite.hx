@@ -11,22 +11,16 @@ import flighthq.sprite.QuadBatch as Facade_Sprite_flighthq_sprite_QuadBatch;
 import flighthq.sprite.Tilemap as Facade_Sprite_flighthq_sprite_Tilemap;
 import flighthq.types.MethodsOf;
 import flighthq.types.PartialNode;
-import flighthq.types.QuadBatch;
 import flighthq.types.QuadBatch.QuadBatchData;
 import flighthq.types.QuadBatch.QuadBatchRuntime;
 import flighthq.types.QuadBatchSignals;
 import flighthq.types.QuadTransformType;
-import flighthq.types.Rectangle;
-import flighthq.types.Sprite;
 import flighthq.types.Sprite.SpriteData;
 import flighthq.types.Sprite.SpriteRuntime;
 import flighthq.types.SpriteSignals;
-import flighthq.types.TextureAtlasRegion;
-import flighthq.types.Tilemap;
 import flighthq.types.Tilemap.TilemapData;
 import flighthq.types.Tilemap.TilemapRuntime;
 import flighthq.types.TilemapSignals;
-import flighthq.types.Vector2;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types._internal._SpriteValues.SpriteKind;
 
@@ -34,47 +28,47 @@ typedef SpriteWithSignals__sprite = { @:optional var __spriteSignalsSlot:SpriteS
 
 @:expose("flighthq.sprite.Sprite")
 class Sprite {
-  public static function appendQuadBatchInstance(target:QuadBatch, id:Float, x:Float, y:Float):Float {
+  public static function appendQuadBatchInstance(target:Dynamic, id:Float, x:Float, y:Float):Float {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.appendQuadBatchInstance, cast ([target, id, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function clearQuadBatch(target:QuadBatch):Void {
+  public static function clearQuadBatch(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.clearQuadBatch, cast ([target] : Array<Dynamic>));
   }
 
-  public static function clearTilemap(tilemap:Tilemap):Void {
+  public static function clearTilemap(tilemap:Dynamic):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.clearTilemap, cast ([tilemap] : Array<Dynamic>));
   }
 
-  public static function cloneQuadBatch(source:QuadBatch):QuadBatch {
+  public static function cloneQuadBatch(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.cloneQuadBatch, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneSprite(source:Sprite):Sprite {
+  public static function cloneSprite(source:Dynamic):Dynamic {
     var src:Dynamic = cast _Runtime.UNDEFINED;
     src = _Runtime.field(source, 'data');
     return cast _Runtime.callValue(createSprite, cast ([{ data: { atlas: _Runtime.field(src, 'atlas'), id: _Runtime.field(src, 'id'), rect: _Runtime.field(src, 'rect') } }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneTilemap(source:Tilemap):Tilemap {
+  public static function cloneTilemap(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.cloneTilemap, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function compactQuadBatch(target:QuadBatch):Void {
+  public static function compactQuadBatch(target:Dynamic):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.compactQuadBatch, cast ([target] : Array<Dynamic>));
   }
 
-  public static function computeQuadBatchLocalBoundsRectangle(out:Rectangle, source:QuadBatch):Void {
+  public static function computeQuadBatchLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.computeQuadBatchLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function computeSpriteLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+  public static function computeSpriteLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
-    data = _Runtime.field((cast source : Sprite), 'data');
+    data = _Runtime.field((cast source : Dynamic), 'data');
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(data, 'rect'), null))) {
       _Runtime.setField(out, 'width', _Runtime.field(_Runtime.field(data, 'rect'), 'width'));
       _Runtime.setField(out, 'height', _Runtime.field(_Runtime.field(data, 'rect'), 'height'));
@@ -93,11 +87,11 @@ class Sprite {
     }
   }
 
-  public static function computeTilemapLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+  public static function computeTilemapLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.computeTilemapLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function createQuadBatch(?obj:PartialNode<QuadBatch>):QuadBatch {
+  public static function createQuadBatch(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.createQuadBatch, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -117,8 +111,8 @@ class Sprite {
     return cast null;
   }
 
-  public static function createSprite(?obj:PartialNode<Sprite>):Sprite {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([SpriteKind, obj, createSpriteData, createSpriteRuntime] : Array<Dynamic>)) : Sprite);
+  public static function createSprite(?obj:PartialNode<Dynamic>):Dynamic {
+    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([SpriteKind, obj, createSpriteData, createSpriteRuntime] : Array<Dynamic>)) : Dynamic);
     return cast null;
   }
 
@@ -137,7 +131,7 @@ class Sprite {
     return cast null;
   }
 
-  public static function createTilemap(?obj:PartialNode<Tilemap>):Tilemap {
+  public static function createTilemap(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.createTilemap, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -159,48 +153,48 @@ class Sprite {
 
   public static final defaultMethods__sprite:Dynamic = { computeLocalBoundsRectangle: computeSpriteLocalBoundsRectangle };
 
-  public static function enableQuadBatchSignals(target:QuadBatch):QuadBatchSignals {
+  public static function enableQuadBatchSignals(target:Dynamic):QuadBatchSignals {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.enableQuadBatchSignals, cast ([target] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function enableSpriteSignals(target:Sprite):SpriteSignals {
+  public static function enableSpriteSignals(target:Dynamic):SpriteSignals {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     s = (cast target : SpriteWithSignals__sprite);
     return cast _Runtime.setIndex(s, Sprite.spriteSignalsSlot__sprite, (_Runtime.getIndex(s, Sprite.spriteSignalsSlot__sprite) ?? _Runtime.callValue(createSpriteSignals, cast ([] : Array<Dynamic>))));
     return cast null;
   }
 
-  public static function enableTilemapSignals(target:Tilemap):TilemapSignals {
+  public static function enableTilemapSignals(target:Dynamic):TilemapSignals {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.enableTilemapSignals, cast ([target] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function fillTilemapTiles(tilemap:Tilemap, id:Float):Void {
+  public static function fillTilemapTiles(tilemap:Dynamic, id:Float):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.fillTilemapTiles, cast ([tilemap, id] : Array<Dynamic>));
   }
 
-  public static function getQuadBatchCapacity(source:QuadBatch):Float {
+  public static function getQuadBatchCapacity(source:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.getQuadBatchCapacity, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getQuadBatchInstanceId(source:QuadBatch, index:Float):Float {
+  public static function getQuadBatchInstanceId(source:Dynamic, index:Float):Float {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.getQuadBatchInstanceId, cast ([source, index] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getQuadBatchInstanceTransform(out:Vector2Like, source:QuadBatch, index:Float):Bool {
+  public static function getQuadBatchInstanceTransform(out:Vector2Like, source:Dynamic, index:Float):Bool {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.getQuadBatchInstanceTransform, cast ([out, source, index] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getQuadBatchRuntime(source:QuadBatch):QuadBatchRuntime {
+  public static function getQuadBatchRuntime(source:Dynamic):QuadBatchRuntime {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.getQuadBatchRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getQuadBatchSignals(source:QuadBatch):Null<QuadBatchSignals> {
+  public static function getQuadBatchSignals(source:Dynamic):Null<QuadBatchSignals> {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.getQuadBatchSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -210,7 +204,7 @@ class Sprite {
     return cast null;
   }
 
-  public static function getSpriteOrigin(out:Vector2, source:Sprite):Void {
+  public static function getSpriteOrigin(out:Dynamic, source:Dynamic):Void {
     var region:Dynamic = cast _Runtime.UNDEFINED;
     var pivotX:Dynamic = cast _Runtime.UNDEFINED;
     var pivotY:Dynamic = cast _Runtime.UNDEFINED;
@@ -221,7 +215,7 @@ class Sprite {
     _Runtime.setField(out, 'y', _Runtime.select(_Runtime.strictEquals(pivotY, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast -pivotY));
   }
 
-  public static function getSpriteRegion(source:Sprite):Null<TextureAtlasRegion> {
+  public static function getSpriteRegion(source:Dynamic):Null<Dynamic> {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var atlas:Dynamic = cast _Runtime.UNDEFINED;
     var id:Dynamic = cast _Runtime.UNDEFINED;
@@ -233,139 +227,139 @@ class Sprite {
     return cast null;
   }
 
-  public static function getSpriteRuntime(source:Sprite):SpriteRuntime {
+  public static function getSpriteRuntime(source:Dynamic):SpriteRuntime {
     return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : SpriteRuntime);
     return cast null;
   }
 
-  public static function getSpriteSignals(source:Sprite):Null<SpriteSignals> {
+  public static function getSpriteSignals(source:Dynamic):Null<SpriteSignals> {
     return cast _Runtime.coalesce(_Runtime.getIndex((cast source : SpriteWithSignals__sprite), Sprite.spriteSignalsSlot__sprite), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function getTilemapColumnAtX(source:Tilemap, x:Float):Float {
+  public static function getTilemapColumnAtX(source:Dynamic, x:Float):Float {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.getTilemapColumnAtX, cast ([source, x] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTilemapColumnRowAtPoint(out:Vector2Like, source:Tilemap, x:Float, y:Float):Bool {
+  public static function getTilemapColumnRowAtPoint(out:Vector2Like, source:Dynamic, x:Float, y:Float):Bool {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.getTilemapColumnRowAtPoint, cast ([out, source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTilemapRowAtY(source:Tilemap, y:Float):Float {
+  public static function getTilemapRowAtY(source:Dynamic, y:Float):Float {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.getTilemapRowAtY, cast ([source, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTilemapRuntime(source:Tilemap):TilemapRuntime {
+  public static function getTilemapRuntime(source:Dynamic):TilemapRuntime {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.getTilemapRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTilemapSignals(source:Tilemap):Null<TilemapSignals> {
+  public static function getTilemapSignals(source:Dynamic):Null<TilemapSignals> {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.getTilemapSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTilemapTile(tilemap:Tilemap, column:Float, row:Float):Float {
+  public static function getTilemapTile(tilemap:Dynamic, column:Float, row:Float):Float {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.getTilemapTile, cast ([tilemap, column, row] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTilemapTileAtPoint(source:Tilemap, point:Vector2Like):Float {
+  public static function getTilemapTileAtPoint(source:Dynamic, point:Vector2Like):Float {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.getTilemapTileAtPoint, cast ([source, point] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTilemapTileAtPointXY(source:Tilemap, x:Float, y:Float):Float {
+  public static function getTilemapTileAtPointXY(source:Dynamic, x:Float, y:Float):Float {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.getTilemapTileAtPointXY, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTilemapTileRect(out:Rectangle, source:Tilemap, column:Float, row:Float):Bool {
+  public static function getTilemapTileRect(out:Dynamic, source:Dynamic, column:Float, row:Float):Bool {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.getTilemapTileRect, cast ([out, source, column, row] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestQuadBatchPoint(source:QuadBatch, point:Vector2Like):Float {
+  public static function hitTestQuadBatchPoint(source:Dynamic, point:Vector2Like):Float {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.hitTestQuadBatchPoint, cast ([source, point] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestQuadBatchPointExact(source:QuadBatch, point:Vector2Like):Float {
+  public static function hitTestQuadBatchPointExact(source:Dynamic, point:Vector2Like):Float {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.hitTestQuadBatchPointExact, cast ([source, point] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestQuadBatchPointExactXY(source:QuadBatch, x:Float, y:Float):Float {
+  public static function hitTestQuadBatchPointExactXY(source:Dynamic, x:Float, y:Float):Float {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.hitTestQuadBatchPointExactXY, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestQuadBatchPointXY(source:QuadBatch, x:Float, y:Float):Float {
+  public static function hitTestQuadBatchPointXY(source:Dynamic, x:Float, y:Float):Float {
     return cast _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.hitTestQuadBatchPointXY, cast ([source, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function iterateQuadBatchInstances(source:QuadBatch, visitor:Dynamic):Void {
+  public static function iterateQuadBatchInstances(source:Dynamic, visitor:Dynamic):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.iterateQuadBatchInstances, cast ([source, visitor] : Array<Dynamic>));
   }
 
   public static final QUAD_BATCH_DELETED_ID:Dynamic = Facade_Sprite_flighthq_sprite_QuadBatch.QUAD_BATCH_DELETED_ID;
 
-  public static function removeQuadBatchInstance(target:QuadBatch, index:Float):Void {
+  public static function removeQuadBatchInstance(target:Dynamic, index:Float):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.removeQuadBatchInstance, cast ([target, index] : Array<Dynamic>));
   }
 
-  public static function reserveQuadBatch(target:QuadBatch, capacity:Float):Void {
+  public static function reserveQuadBatch(target:Dynamic, capacity:Float):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.reserveQuadBatch, cast ([target, capacity] : Array<Dynamic>));
   }
 
-  public static function resizeQuadBatch(target:QuadBatch, instanceCount:Float):Void {
+  public static function resizeQuadBatch(target:Dynamic, instanceCount:Float):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.resizeQuadBatch, cast ([target, instanceCount] : Array<Dynamic>));
   }
 
-  public static function resizeTilemap(tilemap:Tilemap, columns:Float, rows:Float):Void {
+  public static function resizeTilemap(tilemap:Dynamic, columns:Float, rows:Float):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.resizeTilemap, cast ([tilemap, columns, rows] : Array<Dynamic>));
   }
 
-  public static function setQuadBatchInstance(target:QuadBatch, index:Float, id:Float, x:Float, y:Float):Void {
+  public static function setQuadBatchInstance(target:Dynamic, index:Float, id:Float, x:Float, y:Float):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.setQuadBatchInstance, cast ([target, index, id, x, y] : Array<Dynamic>));
   }
 
-  public static function setQuadBatchInstanceMatrix(target:QuadBatch, index:Float, id:Float, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
+  public static function setQuadBatchInstanceMatrix(target:Dynamic, index:Float, id:Float, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.setQuadBatchInstanceMatrix, cast ([target, index, id, a, b, c, d, tx, ty] : Array<Dynamic>));
   }
 
-  public static function setQuadBatchInstanceRange(target:QuadBatch, startIndex:Float, count:Float, source:flighthq._internal._Float32Array):Void {
+  public static function setQuadBatchInstanceRange(target:Dynamic, startIndex:Float, count:Float, source:flighthq._internal._Float32Array):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.setQuadBatchInstanceRange, cast ([target, startIndex, count, source] : Array<Dynamic>));
   }
 
-  public static function setQuadBatchLocalBoundsRectangle(target:QuadBatch, rect:Rectangle):Void {
+  public static function setQuadBatchLocalBoundsRectangle(target:Dynamic, rect:Dynamic):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.setQuadBatchLocalBoundsRectangle, cast ([target, rect] : Array<Dynamic>));
   }
 
-  public static function setQuadBatchTransformType(target:QuadBatch, newType:QuadTransformType):Void {
+  public static function setQuadBatchTransformType(target:Dynamic, newType:QuadTransformType):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_QuadBatch.setQuadBatchTransformType, cast ([target, newType] : Array<Dynamic>));
   }
 
-  public static function setSpriteFrame(target:Sprite, id:Float):Void {
+  public static function setSpriteFrame(target:Dynamic, id:Float):Void {
     var signals:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.setField(_Runtime.field(target, 'data'), 'id', id);
     signals = _Runtime.callValue(getSpriteSignals, cast ([target] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callProperty(_Runtime.field(signals, 'onFrameChanged'), 'emit', cast ([id] : Array<Dynamic>)); }
   }
 
-  public static function setSpriteFrameRect(target:Sprite, rect:Null<Rectangle>):Void {
-    _Runtime.setField(_Runtime.field(target, 'data'), 'rect', (cast rect : Null<Rectangle>));
+  public static function setSpriteFrameRect(target:Dynamic, rect:Null<Dynamic>):Void {
+    _Runtime.setField(_Runtime.field(target, 'data'), 'rect', (cast rect : Null<Dynamic>));
   }
 
-  public static function setTilemapTile(tilemap:Tilemap, column:Float, row:Float, id:Float):Void {
+  public static function setTilemapTile(tilemap:Dynamic, column:Float, row:Float, id:Float):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.setTilemapTile, cast ([tilemap, column, row, id] : Array<Dynamic>));
   }
 
-  public static function setTilemapTiles(tilemap:Tilemap, ids:Dynamic, offsetColumn:Float, offsetRow:Float, width:Float, height:Float):Void {
+  public static function setTilemapTiles(tilemap:Dynamic, ids:Dynamic, offsetColumn:Float, offsetRow:Float, width:Float, height:Float):Void {
     _Runtime.callValue(Facade_Sprite_flighthq_sprite_Tilemap.setTilemapTiles, cast ([tilemap, ids, offsetColumn, offsetRow, width, height] : Array<Dynamic>));
   }
 

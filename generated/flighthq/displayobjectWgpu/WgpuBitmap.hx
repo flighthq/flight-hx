@@ -15,14 +15,12 @@ import flighthq.renderWgpu.WgpuMaterialRegistry.resolveWgpuMaterialRenderer;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.renderWgpu.WgpuShaderBinding.resolveWgpuShader;
 import flighthq.types.BatchFormat;
-import flighthq.types.Bitmap;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.WgpuRenderState;
 
 @:expose("flighthq.displayobjectWgpu.WgpuBitmap")
 class WgpuBitmap {
-  public static function drawWgpuBitmap(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuBitmap(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var imageSource:Dynamic = cast _Runtime.UNDEFINED;
@@ -44,7 +42,7 @@ class WgpuBitmap {
     var t:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) { return; }
-    source = (cast _Runtime.field(renderProxy, 'source') : Bitmap);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     imageSource = _Runtime.field(_Runtime.field(source, 'data'), 'image');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(imageSource, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(hasImageResourcePixels, cast ([imageSource] : Array<Dynamic>)))))) { return; }
     shader = _Runtime.callValue(resolveWgpuShader, cast ([state, renderProxy] : Array<Dynamic>));

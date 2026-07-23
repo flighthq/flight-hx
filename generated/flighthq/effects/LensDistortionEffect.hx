@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.LensDistortionEffect;
 
 @:expose("flighthq.effects.LensDistortionEffect")
 class LensDistortionEffect {
-  public static function createLensDistortionEffect(?options:Dynamic):LensDistortionEffect {
+  public static function createLensDistortionEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'LensDistortionEffect' }, options]);
     return cast null;

@@ -11,24 +11,21 @@ import flighthq.image.ImageResource.hasImageResourcePixels;
 import flighthq.renderGl.GlMaterialRegistry.resolveGlMaterialRenderer;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.BatchFormat;
-import flighthq.types.Bitmap;
 import flighthq.types.DisplayObjectRenderer;
-import flighthq.types.GlRenderState;
-import flighthq.types.ImageResource;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 
-typedef GlBitmapData__glBitmap = { var image:Null<ImageResource>; };
+typedef GlBitmapData__glBitmap = { var image:Null<Dynamic>; };
 
 @:expose("flighthq.displayobjectGl.GlBitmap")
 class GlBitmap {
-  public static function createGlBitmapData__glBitmap(_state:GlRenderState, _source:Renderable):Null<RendererData> {
+  public static function createGlBitmapData__glBitmap(_state:Dynamic, _source:Renderable):Null<RendererData> {
     return cast (cast (cast { image: null } : Dynamic) : RendererData);
     return cast null;
   }
 
-  public static function destroyGlBitmapData__glBitmap(state:GlRenderState, data:RendererData):Void {
+  public static function destroyGlBitmapData__glBitmap(state:Dynamic, data:RendererData):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var image:Dynamic = cast _Runtime.UNDEFINED;
@@ -44,7 +41,7 @@ class GlBitmap {
     }
   }
 
-  public static function drawGlBitmap(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawGlBitmap(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var imageSource:Dynamic = cast _Runtime.UNDEFINED;
@@ -64,7 +61,7 @@ class GlBitmap {
     var d:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : Bitmap);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     imageSource = _Runtime.field(_Runtime.field(source, 'data'), 'image');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(imageSource, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(hasImageResourcePixels, cast ([imageSource] : Array<Dynamic>)))))) { return; }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(renderProxy, 'rendererData'), null))) { return; }

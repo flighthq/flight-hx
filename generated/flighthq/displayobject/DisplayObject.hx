@@ -21,9 +21,6 @@ import flighthq.node.Node.createNodeRuntime;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.node.Revision.invalidateNodeAppearance;
 import flighthq.types.Adjustment;
-import flighthq.types.ClipRegion;
-import flighthq.types.ColorTransform;
-import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObject.DisplayObjectDataFactory;
 import flighthq.types.DisplayObject.DisplayObjectRuntime;
 import flighthq.types.DisplayObject.DisplayObjectRuntimeFactory;
@@ -37,7 +34,7 @@ import flighthq.types._internal._DisplayObjectValues.DisplayObjectTraitsKey;
 
 @:expose("flighthq.displayobject.DisplayObject")
 class DisplayObject {
-  public static function addDisplayObjectColorAdjustment(source:DisplayObject, adjustment:Adjustment):Void {
+  public static function addDisplayObjectColorAdjustment(source:Dynamic, adjustment:Adjustment):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var current:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : DisplayObjectRuntime);
@@ -47,14 +44,14 @@ class DisplayObject {
     _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
 
-  public static function createDisplayObject(?obj:PartialNode<DisplayObject>):DisplayObject {
+  public static function createDisplayObject(?obj:PartialNode<Dynamic>):Dynamic {
     return cast _Runtime.callValue(createDisplayObjectGeneric, cast ([DisplayObjectKind, obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createDisplayObjectGeneric<R>(kind:Kind, ?obj:PartialNode<DisplayObject>, ?createData:DisplayObjectDataFactory, ?createDisplayObjectRuntimeFactory:DisplayObjectRuntimeFactory<Dynamic>):DisplayObject {
+  public static function createDisplayObjectGeneric<R>(kind:Kind, ?obj:PartialNode<Dynamic>, ?createData:DisplayObjectDataFactory, ?createDisplayObjectRuntimeFactory:DisplayObjectRuntimeFactory<Dynamic>):Dynamic {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = (cast _Runtime.callValue(createNode, cast ([kind, obj, createData, _Runtime.coalesce(createDisplayObjectRuntimeFactory, function():Dynamic return cast (cast (cast createDisplayObjectRuntime : Dynamic) : NodeRuntimeFactory<Dynamic>))] : Array<Dynamic>)) : DisplayObject);
+    out = (cast _Runtime.callValue(createNode, cast ([kind, obj, createData, _Runtime.coalesce(createDisplayObjectRuntimeFactory, function():Dynamic return cast (cast (cast createDisplayObjectRuntime : Dynamic) : NodeRuntimeFactory<Dynamic>))] : Array<Dynamic>)) : Dynamic);
     _Runtime.callValue(initTransform2DTrait, cast ([out, obj] : Array<Dynamic>));
     _Runtime.callValue(initBoundsRectangleTrait, cast ([out, obj] : Array<Dynamic>));
     _Runtime.callValue(initAppearanceTrait, cast ([out, obj] : Array<Dynamic>));
@@ -76,12 +73,12 @@ class DisplayObject {
     return cast null;
   }
 
-  public static function getDisplayObjectColorAdjustments(source:DisplayObject):Null<Array<Adjustment>> {
+  public static function getDisplayObjectColorAdjustments(source:Dynamic):Null<Array<Adjustment>> {
     return cast _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'colorAdjustments');
     return cast null;
   }
 
-  public static function getDisplayObjectRuntime(source:DisplayObject):DisplayObjectRuntime {
+  public static function getDisplayObjectRuntime(source:Dynamic):DisplayObjectRuntime {
     return cast (cast _Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : DisplayObjectRuntime);
     return cast null;
   }
@@ -91,12 +88,12 @@ class DisplayObject {
     return cast null;
   }
 
-  public static function setDisplayObjectClip(source:DisplayObject, value:Null<ClipRegion>):Void {
+  public static function setDisplayObjectClip(source:Dynamic, value:Null<Dynamic>):Void {
     _Runtime.setField(source, 'clip', value);
     _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setDisplayObjectColorAdjustments(source:DisplayObject, value:Null<Array<Adjustment>>):Void {
+  public static function setDisplayObjectColorAdjustments(source:Dynamic, value:Null<Array<Adjustment>>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : DisplayObjectRuntime);
     _Runtime.setField(runtime, 'colorAdjustments', value);
@@ -104,7 +101,7 @@ class DisplayObject {
     _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setDisplayObjectColorTransform(source:DisplayObject, colorTransform:Null<ColorTransform>):Void {
+  public static function setDisplayObjectColorTransform(source:Dynamic, colorTransform:Null<Dynamic>):Void {
     _Runtime.callValue(setDisplayObjectColorAdjustments, cast ([source, _Runtime.select(_Runtime.strictEquals(colorTransform, null), function():Dynamic return cast null, function():Dynamic return cast cast ([_Runtime.callValue(createColorTransformAdjustment, cast ([colorTransform] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
   }
 

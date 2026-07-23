@@ -11,15 +11,11 @@ import flighthq.effectsGl.GlEffectTintShader.applyGlEffectTintPass;
 import flighthq.renderGl.GlFullscreenPass.clearGlRenderTarget;
 import flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget;
 import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
-import flighthq.types.DropShadowEffect;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
-import flighthq.types.GlRenderTarget.GlRenderTargetPool;
 
 @:expose("flighthq.effectsGl.GlDropShadowEffect")
 class GlDropShadowEffect {
-  public static function applyDropShadowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:DropShadowEffect):Void {
+  public static function applyDropShadowEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     var descriptor:Dynamic = cast _Runtime.UNDEFINED;
     var s0:Dynamic = cast _Runtime.UNDEFINED;
     var s1:Dynamic = cast _Runtime.UNDEFINED;
@@ -45,8 +41,8 @@ class GlDropShadowEffect {
     s0 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     s1 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     s2 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    src = (cast source : GlRenderTarget);
-    dst = (cast dest : GlRenderTarget);
+    src = (cast source : Dynamic);
+    dst = (cast dest : Dynamic);
     angle = ((_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0) * HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
     dx = (_Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>)) * distance);
@@ -83,6 +79,6 @@ class GlDropShadowEffect {
   }
 
   public static final defaultGlDropShadowEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyDropShadowEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : DropShadowEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyDropShadowEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 }

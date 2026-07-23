@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 
 typedef AudioChannelState = String;
 
-typedef AudioChannel = { var currentTime:Float; var gain:Float; var length:Float; var loops:Float; var playbackRate:Float; var source:AudioResource; var state:AudioChannelState; var onComplete:Dynamic; };
+typedef AudioChannel = { var currentTime:Float; var gain:Float; var length:Float; var loops:Float; var playbackRate:Float; var source:Dynamic; var state:AudioChannelState; var onComplete:Dynamic; };
 
 typedef AudioPlayOptions = { @:optional var currentTime:Float; @:optional var gain:Float; @:optional var loops:Float; @:optional var playbackRate:Float; };
 

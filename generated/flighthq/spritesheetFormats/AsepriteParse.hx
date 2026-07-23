@@ -13,15 +13,13 @@ import flighthq.spritesheetFormats.AsepriteSchema.AsepriteMeta;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.textureatlasFormats.TextureAtlasAsepriteParse.parseTextureAtlasAsepriteDocument;
 import flighthq.types.SpritesheetAnimationData;
-import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
-import flighthq.types.TextureAtlasRegion;
 
-typedef AsepriteParsed = { var data:SpritesheetData; var document:AsepriteDocument; };
+typedef AsepriteParsed = { var data:Dynamic; var document:AsepriteDocument; };
 
 @:expose("flighthq.spritesheetFormats.AsepriteParse")
 class AsepriteParse {
-  public static function frameFromRegion__asepriteParse(region:TextureAtlasRegion):SpritesheetFrameData {
+  public static function frameFromRegion__asepriteParse(region:Dynamic):SpritesheetFrameData {
     return cast _Runtime.callValue(createSpritesheetFrameData, cast ([{ height: _Runtime.field(region, 'height'), name: _Runtime.coalesce(_Runtime.field(region, 'name'), function():Dynamic return cast ''), offsetX: _Runtime.field(region, 'sourceX'), offsetY: _Runtime.field(region, 'sourceY'), pivotX: _Runtime.field(region, 'pivotX'), pivotY: _Runtime.field(region, 'pivotY'), rotated: _Runtime.field(region, 'rotated'), sourceHeight: _Runtime.coalesce(_Runtime.field(region, 'originalHeight'), function():Dynamic return cast _Runtime.field(region, 'height')), sourceWidth: _Runtime.coalesce(_Runtime.field(region, 'originalWidth'), function():Dynamic return cast _Runtime.field(region, 'width')), width: _Runtime.field(region, 'width'), x: _Runtime.field(region, 'x'), y: _Runtime.field(region, 'y') }] : Array<Dynamic>));
     return cast null;
   }
@@ -45,7 +43,7 @@ class AsepriteParse {
     return cast null;
   }
 
-  public static function documentToData__asepriteParse(doc:AsepriteDocument):SpritesheetData {
+  public static function documentToData__asepriteParse(doc:AsepriteDocument):Dynamic {
     var regions:Dynamic = cast _Runtime.UNDEFINED;
     var frames:Array<SpritesheetFrameData> = cast _Runtime.UNDEFINED;
     var frameNames:Array<String> = cast _Runtime.UNDEFINED;
@@ -75,7 +73,7 @@ class AsepriteParse {
     return cast null;
   }
 
-  public static function parseAsepriteSpritesheet(json:String):SpritesheetData {
+  public static function parseAsepriteSpritesheet(json:String):Dynamic {
     return cast _Runtime.callValue(AsepriteParse.documentToData__asepriteParse, cast ([(cast _Runtime.jsonParse(json) : AsepriteDocument)] : Array<Dynamic>));
     return cast null;
   }

@@ -5,12 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasEffectPass;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
-import flighthq.types.CanvasRenderTarget;
-import flighthq.types.VignetteEffect;
 
 @:expose("flighthq.effectsCanvas.CanvasVignetteEffect")
 class CanvasVignetteEffect {
-  public static function applyVignetteEffectToCanvas(source:Dynamic, dest:Dynamic, effect:VignetteEffect):Void {
+  public static function applyVignetteEffectToCanvas(source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var radius:Dynamic = cast _Runtime.UNDEFINED;
     var softness:Dynamic = cast _Runtime.UNDEFINED;
@@ -60,6 +58,6 @@ class CanvasVignetteEffect {
   }
 
   public static final defaultCanvasVignetteEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyVignetteEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : VignetteEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyVignetteEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 }

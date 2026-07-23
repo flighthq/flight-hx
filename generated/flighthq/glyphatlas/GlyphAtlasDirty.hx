@@ -4,16 +4,14 @@ package flighthq.glyphatlas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Rectangle.createRectangle;
-import flighthq.types.GlyphSource.GlyphAtlas;
-import flighthq.types.Rectangle;
 
 @:expose("flighthq.glyphatlas.GlyphAtlasDirty")
 class GlyphAtlasDirty {
-  public static function clearGlyphAtlasDirty(atlas:GlyphAtlas):Void {
+  public static function clearGlyphAtlasDirty(atlas:Dynamic):Void {
     _Runtime.setField(_Runtime.field(atlas, 'runtime'), 'dirty', false);
   }
 
-  public static function getGlyphAtlasDirtyRegion(atlas:GlyphAtlas):Null<Rectangle> {
+  public static function getGlyphAtlasDirtyRegion(atlas:Dynamic):Null<Dynamic> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.field(atlas, 'runtime');
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(runtime, 'dirty')))) { return cast null; }

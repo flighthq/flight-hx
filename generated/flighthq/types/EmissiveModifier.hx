@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 
 typedef EmissiveModifierFacing = Dynamic;
 
-typedef EmissiveModifier = { var kind:ModifierKind; var slot:ModifierSlot; var color:Float; var strength:Float; @:optional var mask:Texture; @:optional var facing:EmissiveModifierFacing; @:optional var facingSoftness:Float; };
+typedef EmissiveModifier = { var kind:ModifierKind; var slot:ModifierSlot; var color:Float; var strength:Float; @:optional var mask:Dynamic; @:optional var facing:EmissiveModifierFacing; @:optional var facingSoftness:Float; };

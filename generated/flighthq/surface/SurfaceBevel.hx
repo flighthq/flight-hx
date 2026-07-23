@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.surface.SurfaceBlur.blurSurfacePixelsHorizontal;
 import flighthq.surface.SurfaceBlur.blurSurfacePixelsVertical;
-import flighthq.types.SurfaceRegion;
 
 typedef SurfaceBevelType = String;
 
@@ -13,7 +12,7 @@ typedef SurfaceBevelOptions = { @:optional var angle:Float; @:optional var dista
 
 @:expose("flighthq.surface.SurfaceBevel")
 class SurfaceBevel {
-  public static function bevelSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceBevelOptions):Void {
+  public static function bevelSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceBevelOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
@@ -111,7 +110,7 @@ class SurfaceBevel {
     if (_Runtime.truthy(!_Runtime.strictEquals(a, field))) { _Runtime.callProperty(field, 'set', cast ([a.subarray(Std.int(0.0), Std.int(((w * h) * 4.0)))] : Array<Dynamic>)); }
   }
 
-  public static function readSourceAlpha__surfaceBevel(source:SurfaceRegion, px:Float, py:Float):Float {
+  public static function readSourceAlpha__surfaceBevel(source:Dynamic, px:Float, py:Float):Float {
     var sx:Dynamic = cast _Runtime.UNDEFINED;
     var sy:Dynamic = cast _Runtime.UNDEFINED;
     sx = (_Runtime.field(source, 'x') + px);

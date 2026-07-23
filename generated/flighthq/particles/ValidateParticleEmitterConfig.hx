@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
 import flighthq.types.ParticleConfigIssue;
-import flighthq.types.ParticleEmitterConfig;
 
 @:expose("flighthq.particles.ValidateParticleEmitterConfig")
 class ValidateParticleEmitterConfig {
@@ -13,7 +12,7 @@ class ValidateParticleEmitterConfig {
 
   public static final NON_NEGATIVE_FIELDS__validateParticleEmitterConfig:Dynamic = cast (['burstCount', 'burstInterval', 'duration', 'emitterConeAngle', 'emitterDepth', 'emitterHeight', 'emitterRadius', 'emitterWidth', 'frameRate', 'lifetimeMin', 'lifetimeMax', 'maxParticles', 'scaleMax', 'scaleMin', 'speedMax', 'speedMin', 'spawnRate'] : Array<Dynamic>);
 
-  public static function normalizeParticleEmitterConfig(?config:Dynamic):ParticleEmitterConfig {
+  public static function normalizeParticleEmitterConfig(?config:Dynamic):Dynamic {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     var defaults:Dynamic = cast _Runtime.UNDEFINED;
     var mutable:Dynamic = cast _Runtime.UNDEFINED;
@@ -29,7 +28,7 @@ class ValidateParticleEmitterConfig {
     return cast null;
   }
 
-  public static function validateParticleEmitterConfig(config:ParticleEmitterConfig):Array<ParticleConfigIssue> {
+  public static function validateParticleEmitterConfig(config:Dynamic):Array<ParticleConfigIssue> {
     var issues:Array<ParticleConfigIssue> = cast _Runtime.UNDEFINED;
     issues = cast ([] : Array<Dynamic>);
     for (field in _Runtime.iterable(ValidateParticleEmitterConfig.NUMERIC_FIELDS__validateParticleEmitterConfig)) {
@@ -79,7 +78,7 @@ class ValidateParticleEmitterConfig {
     return cast null;
   }
 
-  public static function reportCurve__validateParticleEmitterConfig(issues:Array<ParticleConfigIssue>, curve:Null<Array<Float>>, field:ParticleEmitterConfig, stride:Float):Void {
+  public static function reportCurve__validateParticleEmitterConfig(issues:Array<ParticleConfigIssue>, curve:Null<Array<Float>>, field:Dynamic, stride:Float):Void {
     if (_Runtime.truthy(_Runtime.looseEquals(curve, null))) { return; }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(curve, 'length'), 0.0))) {
       _Runtime.callProperty(issues, 'push', cast ([{ field: field, message: '' + Std.string(field) + ' is empty and will be ignored', severity: 'warning' }] : Array<Dynamic>));
@@ -100,7 +99,7 @@ class ValidateParticleEmitterConfig {
     }
   }
 
-  public static function reportInvertedRange__validateParticleEmitterConfig(issues:Array<ParticleConfigIssue>, config:ParticleEmitterConfig, minField:ParticleEmitterConfig, maxField:ParticleEmitterConfig):Void {
+  public static function reportInvertedRange__validateParticleEmitterConfig(issues:Array<ParticleConfigIssue>, config:Dynamic, minField:Dynamic, maxField:Dynamic):Void {
     var min:Dynamic = cast _Runtime.UNDEFINED;
     var max:Dynamic = cast _Runtime.UNDEFINED;
     min = _Runtime.getIndex(config, minField);
@@ -110,7 +109,7 @@ class ValidateParticleEmitterConfig {
     }
   }
 
-  public static function reportUnitRange__validateParticleEmitterConfig(issues:Array<ParticleConfigIssue>, config:ParticleEmitterConfig, field:ParticleEmitterConfig):Void {
+  public static function reportUnitRange__validateParticleEmitterConfig(issues:Array<ParticleConfigIssue>, config:Dynamic, field:Dynamic):Void {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     value = _Runtime.getIndex(config, field);
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([value] : Array<Dynamic>)), function():Dynamic return cast _Runtime.orValue(_Runtime.compare((cast value : Float), 0.0, '<'), function():Dynamic return cast _Runtime.compare((cast value : Float), 1.0, '>'))))) {

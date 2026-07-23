@@ -5,28 +5,25 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
-import flighthq.types.ScanlinesEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
-import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.effectsWgpu.WgpuScanlinesEffect")
 class WgpuScanlinesEffect {
-  public static function applyScanlinesEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ScanlinesEffect):Void {
+  public static function applyScanlinesEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     count = _Runtime.coalesce(_Runtime.field(effect, 'count'), function():Dynamic return cast 240.0);
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.3);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.scanlines', WgpuScanlinesEffect.SCANLINES_FRAGMENT_WGSL__wgpuScanlinesEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : Dynamic), (cast dest : Dynamic), pipeline, function(f32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, count);
       _Runtime.setIndex(f32, 1.0, intensity);
     }] : Array<Dynamic>));
   }
 
   public static final defaultWgpuScanlinesEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyScanlinesEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ScanlinesEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyScanlinesEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static final SCANLINES_FRAGMENT_WGSL__wgpuScanlinesEffect:Dynamic = '\nstruct Uniforms {\n  u_count : f32,\n  u_intensity : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let line = sin(uv.y * uni.u_count * 3.14159265) * 0.5 + 0.5;\n  return vec4f(c.rgb * (1.0 - uni.u_intensity * (1.0 - line)), c.a);\n}';

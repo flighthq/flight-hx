@@ -3,14 +3,13 @@ package flighthq.adjustments;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ColorLut;
 import flighthq.types.ColorTransformFunction;
 
 @:expose("flighthq.adjustments.ColorLut")
 class ColorLut {
   public static final COLOR_LUT_DEFAULT_SIZE:Dynamic = 32.0;
 
-  public static function bakeColorLut(transforms:Array<ColorTransformFunction>, size:Float = 32.0):ColorLut {
+  public static function bakeColorLut(transforms:Array<ColorTransformFunction>, size:Float = 32.0):Dynamic {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var samples:Dynamic = cast _Runtime.UNDEFINED;
     var denom:Dynamic = cast _Runtime.UNDEFINED;
@@ -58,7 +57,7 @@ class ColorLut {
     return cast null;
   }
 
-  public static function sampleColorLut(lut:ColorLut, out:Array<Float>, r:Float, g:Float, b:Float):Void {
+  public static function sampleColorLut(lut:Dynamic, out:Array<Float>, r:Float, g:Float, b:Float):Void {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var s:Dynamic = cast _Runtime.UNDEFINED;
     var max:Dynamic = cast _Runtime.UNDEFINED;

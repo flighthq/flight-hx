@@ -6,14 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.Matrix4.Matrix4Like;
-import flighthq.types.Obb;
 import flighthq.types.Obb.ObbLike;
 import flighthq.types.Ray3D.Ray3DLike;
 import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.geometry.Obb")
 class Obb {
-  public static function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Obb {
+  public static function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Dynamic {
     return cast _Runtime.callValue(createEntity, cast ([{ centerX: centerX, centerY: centerY, centerZ: centerZ, halfExtentX: halfExtentX, halfExtentY: halfExtentY, halfExtentZ: halfExtentZ, orientationW: orientationW, orientationX: orientationX, orientationY: orientationY, orientationZ: orientationZ }] : Array<Dynamic>));
     return cast null;
   }

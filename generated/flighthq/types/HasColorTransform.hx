@@ -8,6 +8,6 @@ import flighthq.types.Node.NodeData;
 import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node.NodeTraits;
 
-typedef HasColorTransform = { var colorTransform:Null<ColorTransform>; };
+typedef HasColorTransform = { var colorTransform:Null<Dynamic>; };
 
-typedef ColorTransformNode<Traits> = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Traits>>; var colorTransform:Null<ColorTransform>; };
+typedef ColorTransformNode<Traits> = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Traits>>; var colorTransform:Null<Dynamic>; };

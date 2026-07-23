@@ -13,20 +13,16 @@ import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.beginWgpuMeshDraw;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.drawWgpuMeshSubset;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.isWgpuTextureReady;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUniform;
-import flighthq.types.Camera;
 import flighthq.types.LinearColor;
-import flighthq.types.Material;
-import flighthq.types.MeshGeometry;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.UnlitMaterial;
 import flighthq.types.WgpuMeshMaterialRenderer;
-import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._UnlitMaterialValues.UnlitMaterialKind;
 
 @:expose("flighthq.sceneWgpu.UnlitWgpuMeshMaterialRenderer")
 class UnlitWgpuMeshMaterialRenderer {
-  public static final unlitWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera) {
+  public static final unlitWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:Dynamic, material:Null<Dynamic>, _lights:SceneLightBlock, camera:Dynamic) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var unlit:Dynamic = cast _Runtime.UNDEFINED;
@@ -48,11 +44,11 @@ class UnlitWgpuMeshMaterialRenderer {
     }
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, group] : Array<Dynamic>));
-  }, draw: function(state:WgpuRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
+  }, draw: function(state:Dynamic, proxy:SceneRenderProxy, geometry:Dynamic) {
     _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
   } };
 
-  public static function registerUnlitWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerUnlitWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(registerWgpuMeshMaterialRenderer, cast ([state, UnlitMaterialKind, unlitWgpuMeshMaterialRenderer] : Array<Dynamic>));
   }
 

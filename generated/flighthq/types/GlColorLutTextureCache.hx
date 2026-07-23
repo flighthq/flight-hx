@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef GlColorLutTextureCache = { var texture:Null<Dynamic>; var lut:Null<ColorLut>; };
+typedef GlColorLutTextureCache = { var texture:Null<Dynamic>; var lut:Null<Dynamic>; };

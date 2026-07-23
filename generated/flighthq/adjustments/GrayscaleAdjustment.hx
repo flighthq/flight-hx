@@ -3,11 +3,10 @@ package flighthq.adjustments;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.GrayscaleAdjustment;
 
 @:expose("flighthq.adjustments.GrayscaleAdjustment")
 class GrayscaleAdjustment {
-  public static function createGrayscaleAdjustment(?options:Dynamic):GrayscaleAdjustment {
+  public static function createGrayscaleAdjustment(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var k:Dynamic = cast _Runtime.UNDEFINED;

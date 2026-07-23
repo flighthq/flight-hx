@@ -16,15 +16,12 @@ import flighthq.sceneGl._internal._GlSceneRuntimeValues.ensureGlSkinPalette;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
 import flighthq.texture.Texture.getTextureUvMatrix;
 import flighthq.texture.Texture.hasTextureUvTransform;
-import flighthq.types.Camera;
-import flighthq.types.GlRenderState;
-import flighthq.types.MeshGeometry;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.Texture.TextureLike;
 
 @:expose("flighthq.sceneGl._internal._GlMeshProgramValues")
 class _GlMeshProgramValues {
-  public static function beginGlMeshDraw(state:GlRenderState, program:GlMeshProgram, doubleSided:Bool):Void {
+  public static function beginGlMeshDraw(state:Dynamic, program:GlMeshProgram, doubleSided:Bool):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     _Runtime.setField(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram', program);
@@ -57,11 +54,11 @@ class _GlMeshProgramValues {
     return cast null;
   }
 
-  public static function destroyGlMeshProgram(state:GlRenderState, program:GlMeshProgram):Void {
+  public static function destroyGlMeshProgram(state:Dynamic, program:GlMeshProgram):Void {
     _Runtime.callProperty(_Runtime.field(state, 'gl'), 'deleteProgram', cast ([_Runtime.field(program, 'program')] : Array<Dynamic>));
   }
 
-  public static function drawGlMeshSubset(state:GlRenderState, program:GlMeshProgram, proxy:SceneRenderProxy, geometry:MeshGeometry):Void {
+  public static function drawGlMeshSubset(state:Dynamic, program:GlMeshProgram, proxy:SceneRenderProxy, geometry:Dynamic):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var locObjectAlpha:Dynamic = cast _Runtime.UNDEFINED;
     var jointMatrices:Dynamic = cast _Runtime.UNDEFINED;
@@ -95,7 +92,7 @@ class _GlMeshProgramValues {
     }
   }
 
-  public static function ensureGlSceneProgram<T>(state:GlRenderState, key:String, compile:Dynamic):Dynamic {
+  public static function ensureGlSceneProgram<T>(state:Dynamic, key:String, compile:Dynamic):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>));
@@ -113,13 +110,13 @@ class _GlMeshProgramValues {
     return cast null;
   }
 
-  public static function setGlMeshCameraPosition(gl:Dynamic, locCameraPosition:Null<Dynamic>, camera:Camera):Void {
+  public static function setGlMeshCameraPosition(gl:Dynamic, locCameraPosition:Null<Dynamic>, camera:Dynamic):Void {
     _Runtime.callValue(inverseMatrix4, cast ([_GlMeshProgramValues.scratchInverseView__glMeshProgram, _Runtime.field(camera, 'view')] : Array<Dynamic>));
     _Runtime.callValue(getMatrix4Position, cast ([_GlMeshProgramValues.scratchCameraPosition__glMeshProgram, _GlMeshProgramValues.scratchInverseView__glMeshProgram] : Array<Dynamic>));
     _Runtime.callProperty(gl, 'uniform3f', cast ([locCameraPosition, _Runtime.field(_GlMeshProgramValues.scratchCameraPosition__glMeshProgram, 'x'), _Runtime.field(_GlMeshProgramValues.scratchCameraPosition__glMeshProgram, 'y'), _Runtime.field(_GlMeshProgramValues.scratchCameraPosition__glMeshProgram, 'z')] : Array<Dynamic>));
   }
 
-  public static function setGlMeshViewProjection(gl:Dynamic, locViewProjection:Null<Dynamic>, camera:Camera):Void {
+  public static function setGlMeshViewProjection(gl:Dynamic, locViewProjection:Null<Dynamic>, camera:Dynamic):Void {
     var aspect:Dynamic = cast _Runtime.UNDEFINED;
     aspect = _Runtime.select(_Runtime.strictEquals(_Runtime.field(_Runtime.field(camera, 'projection'), 'kind'), 'perspective'), function():Dynamic return cast _Runtime.field(_Runtime.field(camera, 'projection'), 'aspect'), function():Dynamic return cast 1.0);
     _Runtime.callValue(getCameraViewProjectionMatrix4, cast ([_GlMeshProgramValues.scratchViewProjection__glMeshProgram, camera, _Runtime.select(!_Runtime.strictEquals(aspect, 0.0), function():Dynamic return cast aspect, function():Dynamic return cast 1.0)] : Array<Dynamic>));

@@ -5,9 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
-import flighthq.types.DisplayObject;
 import flighthq.types.FrameScript;
-import flighthq.types.Timeline;
 import flighthq.types.TimelineFrameEvent;
 import flighthq.types.TimelineLabel;
 import flighthq.types.TimelineSignals;
@@ -15,13 +13,13 @@ import flighthq.types.TimelineSource;
 
 @:expose("flighthq.timeline.Timeline")
 class Timeline {
-  public static function addTimelineFrameScript(timeline:Timeline, frame:Dynamic, script:FrameScript):Void {
+  public static function addTimelineFrameScript(timeline:Dynamic, frame:Dynamic, script:FrameScript):Void {
     var resolved:Dynamic = cast _Runtime.UNDEFINED;
     resolved = _Runtime.callValue(Timeline.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.setField(timeline, 'frameScripts', (_Runtime.field(timeline, 'frameScripts') ?? _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []))), 'set', cast ([resolved, script] : Array<Dynamic>));
   }
 
-  public static function advanceFrame__timeline(timeline:Timeline, deltaTime:Float):Float {
+  public static function advanceFrame__timeline(timeline:Dynamic, deltaTime:Float):Float {
     var frameRate:Dynamic = cast _Runtime.UNDEFINED;
     var totalFrames:Dynamic = cast _Runtime.UNDEFINED;
     var next:Dynamic = cast _Runtime.UNDEFINED;
@@ -62,7 +60,7 @@ class Timeline {
     return cast null;
   }
 
-  public static function createTimeline(?obj:Dynamic):Timeline {
+  public static function createTimeline(?obj:Dynamic):Dynamic {
     return cast { source: _Runtime.coalesce(_Runtime.optionalField(obj, 'source'), function():Dynamic return cast null), target: _Runtime.coalesce(_Runtime.optionalField(obj, 'target'), function():Dynamic return cast null), currentFrame: _Runtime.coalesce(_Runtime.optionalField(obj, 'currentFrame'), function():Dynamic return cast 1.0), frameScripts: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameScripts'), function():Dynamic return cast null), isPlaying: _Runtime.coalesce(_Runtime.optionalField(obj, 'isPlaying'), function():Dynamic return cast false), lastFrameUpdate: -1.0, playMode: _Runtime.coalesce(_Runtime.optionalField(obj, 'playMode'), function():Dynamic return cast 'loop'), signals: _Runtime.coalesce(_Runtime.optionalField(obj, 'signals'), function():Dynamic return cast null), timeElapsed: 0.0 };
     return cast null;
   }
@@ -77,23 +75,23 @@ class Timeline {
     return cast null;
   }
 
-  public static function disposeTimelineSignals(timeline:Timeline):Void {
+  public static function disposeTimelineSignals(timeline:Dynamic):Void {
     _Runtime.setField(timeline, 'signals', null);
   }
 
   public static final EMPTY_LABELS__timeline:Array<TimelineLabel> = cast ([] : Array<Dynamic>);
 
-  public static function enableTimelineSignals(timeline:Timeline):TimelineSignals {
+  public static function enableTimelineSignals(timeline:Dynamic):TimelineSignals {
     return cast _Runtime.setField(timeline, 'signals', (_Runtime.field(timeline, 'signals') ?? _Runtime.callValue(Timeline.createTimelineSignals__timeline, cast ([] : Array<Dynamic>))));
     return cast null;
   }
 
-  public static function findTimelineLabel(timeline:Timeline, name:String):Null<TimelineLabel> {
+  public static function findTimelineLabel(timeline:Dynamic, name:String):Null<TimelineLabel> {
     return cast _Runtime.coalesce(_Runtime.find(_Runtime.callValue(Timeline.getTimelineLabels__timeline, cast ([timeline] : Array<Dynamic>)), function(l:Dynamic) return _Runtime.strictEquals(_Runtime.field(l, 'name'), name)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function fireConstructFrame__timeline(timeline:Timeline):Void {
+  public static function fireConstructFrame__timeline(timeline:Dynamic):Void {
     var previous:Dynamic = cast _Runtime.UNDEFINED;
     var current:Dynamic = cast _Runtime.UNDEFINED;
     var signals:Dynamic = cast _Runtime.UNDEFINED;
@@ -116,7 +114,7 @@ class Timeline {
     if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(signals, 'onFrameConstructed'), frameEvent] : Array<Dynamic>)); }
   }
 
-  public static function getTimelineCurrentLabel(timeline:Timeline):Null<TimelineLabel> {
+  public static function getTimelineCurrentLabel(timeline:Dynamic):Null<TimelineLabel> {
     var labels:Dynamic = cast _Runtime.UNDEFINED;
     var frame:Dynamic = cast _Runtime.UNDEFINED;
     var result:Null<TimelineLabel> = cast _Runtime.UNDEFINED;
@@ -132,12 +130,12 @@ class Timeline {
     return cast null;
   }
 
-  public static function getTimelineFrameRate__timeline(timeline:Timeline):Null<Float> {
+  public static function getTimelineFrameRate__timeline(timeline:Dynamic):Null<Float> {
     return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(timeline, 'source'), 'frameRate'), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function getTimelineFrameScript(timeline:Timeline, frame:Dynamic):Null<FrameScript> {
+  public static function getTimelineFrameScript(timeline:Dynamic, frame:Dynamic):Null<FrameScript> {
     var resolved:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(timeline, 'frameScripts'), null))) { return cast null; }
     resolved = _Runtime.callValue(Timeline.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>));
@@ -145,27 +143,27 @@ class Timeline {
     return cast null;
   }
 
-  public static function getTimelineLabels__timeline(timeline:Timeline):Array<TimelineLabel> {
+  public static function getTimelineLabels__timeline(timeline:Dynamic):Array<TimelineLabel> {
     return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(timeline, 'source'), 'labels'), function():Dynamic return cast Timeline.EMPTY_LABELS__timeline);
     return cast null;
   }
 
-  public static function getTimelineTotalFrames__timeline(timeline:Timeline):Float {
+  public static function getTimelineTotalFrames__timeline(timeline:Dynamic):Float {
     return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(timeline, 'source'), 'totalFrames'), function():Dynamic return cast 1.0);
     return cast null;
   }
 
-  public static function gotoAndPlayTimeline(timeline:Timeline, frame:Dynamic):Void {
+  public static function gotoAndPlayTimeline(timeline:Dynamic, frame:Dynamic):Void {
     _Runtime.callValue(playTimeline, cast ([timeline] : Array<Dynamic>));
     _Runtime.callValue(Timeline.seekTimeline__timeline, cast ([timeline, _Runtime.callValue(Timeline.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  public static function gotoAndStopTimeline(timeline:Timeline, frame:Dynamic):Void {
+  public static function gotoAndStopTimeline(timeline:Dynamic, frame:Dynamic):Void {
     _Runtime.callValue(stopTimeline, cast ([timeline] : Array<Dynamic>));
     _Runtime.callValue(Timeline.seekTimeline__timeline, cast ([timeline, _Runtime.callValue(Timeline.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  public static function nextFrameTimeline(timeline:Timeline):Void {
+  public static function nextFrameTimeline(timeline:Dynamic):Void {
     _Runtime.callValue(stopTimeline, cast ([timeline] : Array<Dynamic>));
     _Runtime.callValue(Timeline.seekTimeline__timeline, cast ([timeline, (_Runtime.field(timeline, 'currentFrame') + 1.0)] : Array<Dynamic>));
   }
@@ -173,18 +171,18 @@ class Timeline {
   public static function noopConstructFrame__timeline():Void {
   }
 
-  public static function playTimeline(timeline:Timeline):Void {
+  public static function playTimeline(timeline:Dynamic):Void {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.field(timeline, 'isPlaying'), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(Timeline.getTimelineTotalFrames__timeline, cast ([timeline] : Array<Dynamic>)), 2.0, '<')))) { return; }
     _Runtime.setField(timeline, 'isPlaying', true);
     _Runtime.setField(timeline, 'timeElapsed', 0.0);
   }
 
-  public static function prevFrameTimeline(timeline:Timeline):Void {
+  public static function prevFrameTimeline(timeline:Dynamic):Void {
     _Runtime.callValue(stopTimeline, cast ([timeline] : Array<Dynamic>));
     _Runtime.callValue(Timeline.seekTimeline__timeline, cast ([timeline, (_Runtime.field(timeline, 'currentFrame') - 1.0)] : Array<Dynamic>));
   }
 
-  public static function removeTimelineFrameScript(timeline:Timeline, frame:Dynamic):Void {
+  public static function removeTimelineFrameScript(timeline:Dynamic, frame:Dynamic):Void {
     var resolved:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(timeline, 'frameScripts'), null))) { return; }
     resolved = _Runtime.callValue(Timeline.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>));
@@ -192,7 +190,7 @@ class Timeline {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(timeline, 'frameScripts'), 'size'), 0.0))) { _Runtime.setField(timeline, 'frameScripts', null); }
   }
 
-  public static function resolveFrame__timeline(timeline:Timeline, frame:Dynamic):Float {
+  public static function resolveFrame__timeline(timeline:Dynamic, frame:Dynamic):Float {
     var label:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(frame), 'number'))) { return cast frame; }
     label = _Runtime.callValue(findTimelineLabel, cast ([timeline, frame] : Array<Dynamic>));
@@ -201,17 +199,17 @@ class Timeline {
     return cast null;
   }
 
-  public static function seekTimeline__timeline(timeline:Timeline, frame:Float):Void {
+  public static function seekTimeline__timeline(timeline:Dynamic, frame:Float):Void {
     _Runtime.setField(timeline, 'currentFrame', _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'min', cast ([frame, _Runtime.callValue(Timeline.getTimelineTotalFrames__timeline, cast ([timeline] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
     _Runtime.setField(timeline, 'lastFrameUpdate', -1.0);
     _Runtime.callValue(Timeline.fireConstructFrame__timeline, cast ([timeline] : Array<Dynamic>));
   }
 
-  public static function stopTimeline(timeline:Timeline):Void {
+  public static function stopTimeline(timeline:Dynamic):Void {
     _Runtime.setField(timeline, 'isPlaying', false);
   }
 
-  public static function updateTimeline(timeline:Timeline, deltaTime:Float):Void {
+  public static function updateTimeline(timeline:Dynamic, deltaTime:Float):Void {
     var frameRate:Dynamic = cast _Runtime.UNDEFINED;
     frameRate = _Runtime.callValue(Timeline.getTimelineFrameRate__timeline, cast ([timeline] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(timeline, 'isPlaying'), function():Dynamic return cast !_Runtime.strictEquals(frameRate, null)))) {

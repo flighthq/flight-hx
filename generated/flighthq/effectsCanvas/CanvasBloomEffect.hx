@@ -7,14 +7,12 @@ import flighthq.effects.BloomEffect.computeBloomBlurRadius;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasEffectPass;
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline.acquireCanvasRenderTarget;
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline.releaseCanvasRenderTarget;
-import flighthq.types.BloomEffect;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
-import flighthq.types.CanvasRenderTarget;
 
 @:expose("flighthq.effectsCanvas.CanvasBloomEffect")
 class CanvasBloomEffect {
-  public static function applyBloomEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:BloomEffect):Void {
+  public static function applyBloomEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     var threshold:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var radius:Dynamic = cast _Runtime.UNDEFINED;
@@ -50,6 +48,6 @@ class CanvasBloomEffect {
   }
 
   public static final defaultCanvasBloomEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyBloomEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BloomEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyBloomEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 }

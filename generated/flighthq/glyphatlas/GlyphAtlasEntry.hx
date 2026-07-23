@@ -6,14 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.glyphatlas.GlyphRasterizerBackend.getGlyphRasterizerBackend;
 import flighthq.surface.SurfaceComposite.writeSurfacePixels;
 import flighthq.surface.SurfaceRegion.createSurfaceRegion;
-import flighthq.types.GlyphSource.GlyphAtlas;
 import flighthq.types.GlyphSource.GlyphAtlasRuntime;
 import flighthq.types.GlyphSource.GlyphEntry;
 import flighthq.types.GlyphSource.GlyphRasterizedBitmap;
 
 @:expose("flighthq.glyphatlas.GlyphAtlasEntry")
 class GlyphAtlasEntry {
-  public static function getGlyphAtlasEntry(atlas:GlyphAtlas, codepoint:Float):Null<GlyphEntry> {
+  public static function getGlyphAtlasEntry(atlas:Dynamic, codepoint:Float):Null<GlyphEntry> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var bitmap:Dynamic = cast _Runtime.UNDEFINED;

@@ -11,13 +11,10 @@ import flighthq.geometry.Rectangle.createRectangle;
 import flighthq.geometry.Typedarray.reserveFloat32Array;
 import flighthq.geometry.Typedarray.reserveUint16Array;
 import flighthq.node.Revision.invalidateNodeLocalBounds;
-import flighthq.types.DisplayObject;
 import flighthq.types.MethodsOf;
 import flighthq.types.PartialNode;
-import flighthq.types.ParticleEmitter;
 import flighthq.types.ParticleEmitter.ParticleEmitterData;
 import flighthq.types.ParticleEmitter.ParticleEmitterRuntime;
-import flighthq.types.Rectangle;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types._internal._ParticleEmitterValues.ParticleEmitterKind;
 
@@ -31,13 +28,13 @@ class ParticleEmitter {
 
   public static final PARTICLE_EMITTER_DELETED_ID:Dynamic = 65535.0;
 
-  public static function copyLocalBoundsRectangle__particleEmitter(out:Rectangle, source:Dynamic):Void {
+  public static function copyLocalBoundsRectangle__particleEmitter(out:Dynamic, source:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([(cast source : DisplayObject)] : Array<Dynamic>)) : ParticleEmitterRuntime);
+    runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([(cast source : Dynamic)] : Array<Dynamic>)) : ParticleEmitterRuntime);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null))) { _Runtime.callValue(copyRectangle, cast ([out, _Runtime.field(runtime, 'localBoundsRectangle')] : Array<Dynamic>)); }
   }
 
-  public static function appendParticleEmitterParticle(target:ParticleEmitter, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Float {
+  public static function appendParticleEmitterParticle(target:Dynamic, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Float {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     var needed:Dynamic = cast _Runtime.UNDEFINED;
     var tt:Dynamic = cast _Runtime.UNDEFINED;
@@ -69,18 +66,18 @@ class ParticleEmitter {
     return cast null;
   }
 
-  public static function clearParticleEmitter(target:ParticleEmitter):Void {
+  public static function clearParticleEmitter(target:Dynamic):Void {
     _Runtime.setField(_Runtime.field(target, 'data'), 'particleCount', 0.0);
   }
 
-  public static function cloneParticleEmitter(source:ParticleEmitter):ParticleEmitter {
+  public static function cloneParticleEmitter(source:Dynamic):Dynamic {
     var src:Dynamic = cast _Runtime.UNDEFINED;
     src = _Runtime.field(source, 'data');
     return cast _Runtime.callValue(createParticleEmitter, cast ([{ data: { alphas: _Runtime.slice(_Runtime.field(src, 'alphas'), 0, null), atlas: _Runtime.field(src, 'atlas'), colors: _Runtime.slice(_Runtime.field(src, 'colors'), 0, null), ids: _Runtime.slice(_Runtime.field(src, 'ids'), 0, null), particleCount: _Runtime.field(src, 'particleCount'), positionsZ: _Runtime.slice(_Runtime.field(src, 'positionsZ'), 0, null), transforms: _Runtime.slice(_Runtime.field(src, 'transforms'), 0, null), velocities: _Runtime.slice(_Runtime.field(src, 'velocities'), 0, null), worldSpace: _Runtime.field(src, 'worldSpace') } }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function compactParticleEmitter(target:ParticleEmitter):Void {
+  public static function compactParticleEmitter(target:Dynamic):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var write:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(target, 'data');
@@ -117,7 +114,7 @@ class ParticleEmitter {
     _Runtime.setField(data, 'particleCount', write);
   }
 
-  public static function computeParticleEmitterLocalBoundsRectangle(out:Rectangle, source:ParticleEmitter):Void {
+  public static function computeParticleEmitterLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var atlas:Dynamic = cast _Runtime.UNDEFINED;
     var ids:Dynamic = cast _Runtime.UNDEFINED;
@@ -195,8 +192,8 @@ class ParticleEmitter {
     }
   }
 
-  public static function createParticleEmitter(?obj:PartialNode<ParticleEmitter>):ParticleEmitter {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([ParticleEmitterKind, obj, createParticleEmitterData, createParticleEmitterRuntime] : Array<Dynamic>)) : ParticleEmitter);
+  public static function createParticleEmitter(?obj:PartialNode<Dynamic>):Dynamic {
+    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([ParticleEmitterKind, obj, createParticleEmitterData, createParticleEmitterRuntime] : Array<Dynamic>)) : Dynamic);
     return cast null;
   }
 
@@ -213,7 +210,7 @@ class ParticleEmitter {
     return cast null;
   }
 
-  public static function getParticleEmitterCapacity(source:ParticleEmitter):Float {
+  public static function getParticleEmitterCapacity(source:Dynamic):Float {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var transformCapacity:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
@@ -222,19 +219,19 @@ class ParticleEmitter {
     return cast null;
   }
 
-  public static function getParticleEmitterParticleAlpha(source:ParticleEmitter, index:Float):Float {
+  public static function getParticleEmitterParticleAlpha(source:Dynamic, index:Float):Float {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(source, 'data'), 'particleCount'), '>=')))) { return cast -1.0; }
     return cast _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'alphas'), index);
     return cast null;
   }
 
-  public static function getParticleEmitterParticleId(source:ParticleEmitter, index:Float):Float {
+  public static function getParticleEmitterParticleId(source:Dynamic, index:Float):Float {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(source, 'data'), 'particleCount'), '>=')))) { return cast -1.0; }
     return cast _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'ids'), index);
     return cast null;
   }
 
-  public static function getParticleEmitterParticleVelocity(out:Vector2Like, source:ParticleEmitter, index:Float):Bool {
+  public static function getParticleEmitterParticleVelocity(out:Vector2Like, source:Dynamic, index:Float):Bool {
     var vt:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(source, 'data'), 'particleCount'), '>=')))) { return cast false; }
     vt = (index * ParticleEmitter.PARTICLE_VELOCITY_STRIDE__particleEmitter);
@@ -244,12 +241,12 @@ class ParticleEmitter {
     return cast null;
   }
 
-  public static function getParticleEmitterRuntime(source:ParticleEmitter):ParticleEmitterRuntime {
+  public static function getParticleEmitterRuntime(source:Dynamic):ParticleEmitterRuntime {
     return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : ParticleEmitterRuntime);
     return cast null;
   }
 
-  public static function removeParticleEmitterParticle(target:ParticleEmitter, index:Float):Void {
+  public static function removeParticleEmitterParticle(target:Dynamic, index:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var last:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(target, 'data');
@@ -278,7 +275,7 @@ class ParticleEmitter {
     _Runtime.setField(data, 'particleCount', last);
   }
 
-  public static function reserveParticleEmitter(target:ParticleEmitter, capacity:Float):Void {
+  public static function reserveParticleEmitter(target:Dynamic, capacity:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(_Runtime.callValue(getParticleEmitterCapacity, cast ([target] : Array<Dynamic>)), capacity, '>='))) { return; }
     data = _Runtime.field(target, 'data');
@@ -290,7 +287,7 @@ class ParticleEmitter {
     _Runtime.setField(data, 'velocities', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(data, 'velocities'), (capacity * 2.0)] : Array<Dynamic>)));
   }
 
-  public static function setParticleEmitterLocalBoundsRectangle(target:ParticleEmitter, rect:Rectangle):Void {
+  public static function setParticleEmitterLocalBoundsRectangle(target:Dynamic, rect:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([target] : Array<Dynamic>)) : ParticleEmitterRuntime);
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null))) { _Runtime.setField(runtime, 'localBoundsRectangle', _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>))); }
@@ -298,7 +295,7 @@ class ParticleEmitter {
     _Runtime.callValue(invalidateNodeLocalBounds, cast ([target] : Array<Dynamic>));
   }
 
-  public static function setParticleEmitterParticle(target:ParticleEmitter, index:Float, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Void {
+  public static function setParticleEmitterParticle(target:Dynamic, index:Float, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var tt:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(target, 'data');
@@ -311,12 +308,12 @@ class ParticleEmitter {
     _Runtime.setIndex(_Runtime.field(data, 'transforms'), (tt + 3.0), scale);
   }
 
-  public static function setParticleEmitterParticleAlpha(target:ParticleEmitter, index:Float, alpha:Float):Void {
+  public static function setParticleEmitterParticleAlpha(target:Dynamic, index:Float, alpha:Float):Void {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(target, 'data'), 'particleCount'), '>=')))) { return; }
     _Runtime.setIndex(_Runtime.field(_Runtime.field(target, 'data'), 'alphas'), index, alpha);
   }
 
-  public static function setParticleEmitterParticleColor(target:ParticleEmitter, index:Float, r:Float, g:Float, b:Float):Void {
+  public static function setParticleEmitterParticleColor(target:Dynamic, index:Float, r:Float, g:Float, b:Float):Void {
     var ct:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(target, 'data'), 'particleCount'), '>=')))) { return; }
     ct = (index * ParticleEmitter.PARTICLE_COLOR_STRIDE__particleEmitter);
@@ -325,7 +322,7 @@ class ParticleEmitter {
     _Runtime.setIndex(_Runtime.field(_Runtime.field(target, 'data'), 'colors'), (ct + 2.0), b);
   }
 
-  public static function setParticleEmitterParticleVelocity(target:ParticleEmitter, index:Float, vx:Float, vy:Float):Void {
+  public static function setParticleEmitterParticleVelocity(target:Dynamic, index:Float, vx:Float, vy:Float):Void {
     var vt:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(target, 'data'), 'particleCount'), '>=')))) { return; }
     vt = (index * ParticleEmitter.PARTICLE_VELOCITY_STRIDE__particleEmitter);

@@ -9,23 +9,21 @@ import flighthq.displayobject.DisplayObject.getDisplayObjectRuntime;
 import flighthq.node.Revision.invalidateNodeLocalBounds;
 import flighthq.types.MethodsOf;
 import flighthq.types.PartialNode;
-import flighthq.types.Rectangle;
-import flighthq.types.RenderView;
 import flighthq.types.RenderView.RenderViewData;
 import flighthq.types.RenderView.RenderViewRuntime;
 import flighthq.types._internal._RenderViewValues.RenderViewKind;
 
 @:expose("flighthq.displayobject.RenderView")
 class RenderView {
-  public static function computeRenderViewLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+  public static function computeRenderViewLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
-    data = _Runtime.field((cast source : RenderView), 'data');
+    data = _Runtime.field((cast source : Dynamic), 'data');
     _Runtime.setField(out, 'width', _Runtime.field(data, 'width'));
     _Runtime.setField(out, 'height', _Runtime.field(data, 'height'));
   }
 
-  public static function createRenderView(?obj:PartialNode<RenderView>):RenderView {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([RenderViewKind, obj, createRenderViewData, createRenderViewRuntime] : Array<Dynamic>)) : RenderView);
+  public static function createRenderView(?obj:PartialNode<Dynamic>):Dynamic {
+    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([RenderViewKind, obj, createRenderViewData, createRenderViewRuntime] : Array<Dynamic>)) : Dynamic);
     return cast null;
   }
 
@@ -39,12 +37,12 @@ class RenderView {
     return cast null;
   }
 
-  public static function getRenderViewRuntime(source:RenderView):RenderViewRuntime {
+  public static function getRenderViewRuntime(source:Dynamic):RenderViewRuntime {
     return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RenderViewRuntime);
     return cast null;
   }
 
-  public static function setRenderViewSize(source:RenderView, width:Float, height:Float):Void {
+  public static function setRenderViewSize(source:Dynamic, width:Float, height:Float):Void {
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'width'), width), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'height'), height)))) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'width', width);
     _Runtime.setField(_Runtime.field(source, 'data'), 'height', height);

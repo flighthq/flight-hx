@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 
-typedef DirectionalLight = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; var castsShadow:Bool; var color:Float; var direction:Vector3; var intensity:Float; var normalBias:Float; var pcfRadius:Float; var shadowBias:Float; };
+typedef DirectionalLight = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; var castsShadow:Bool; var color:Float; var direction:Dynamic; var intensity:Float; var normalBias:Float; var pcfRadius:Float; var shadowBias:Float; };

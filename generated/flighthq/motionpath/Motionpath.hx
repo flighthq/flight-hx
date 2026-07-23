@@ -12,12 +12,11 @@ import flighthq.motionpath.SetMotionPathProgress as Facade_Motionpath_flighthq_m
 import flighthq.motionpath.UpdateMotionPath as Facade_Motionpath_flighthq_motionpath_UpdateMotionPath;
 import flighthq.types.MotionPath;
 import flighthq.types.MotionPath.MotionPathLoopMode;
-import flighthq.types.Path;
 import flighthq.types.Vector2.Vector2Like;
 
 @:expose("flighthq.motionpath.Motionpath")
 class Motionpath {
-  public static function createMotionPath(path:Path, ?speed:Dynamic, ?loopMode:MotionPathLoopMode, ?tolerance:Float):MotionPath {
+  public static function createMotionPath(path:Dynamic, ?speed:Dynamic, ?loopMode:MotionPathLoopMode, ?tolerance:Float):MotionPath {
     return cast _Runtime.callValue(Facade_Motionpath_flighthq_motionpath_CreateMotionPath.createMotionPath, cast ([path, speed, loopMode, tolerance] : Array<Dynamic>));
     return cast null;
   }

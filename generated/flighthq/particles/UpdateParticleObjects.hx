@@ -5,16 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particles.Curve.sampleParticleCurve;
 import flighthq.particles.ParticleObjectsState.ensureParticleObjectsStateCapacity;
-import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleObject;
-import flighthq.types.ParticleObjectsState;
 import flighthq.types.ParticleObjectsUpdateOptions;
 
 @:expose("flighthq.particles.UpdateParticleObjects")
 class UpdateParticleObjects {
   public static final TWO_PI__updateParticleObjects:Dynamic = (HxMath.PI * 2.0);
 
-  public static function isParticleObjectsComplete(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig):Bool {
+  public static function isParticleObjectsComplete(objects:Array<ParticleObject>, state:Dynamic, config:Dynamic):Bool {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(config, 'duration'), 0.0, '<='), function():Dynamic return cast _Runtime.field(config, 'loop')))) { return cast false; }
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(state, 'emitterAge'), _Runtime.field(config, 'duration'), '<'))) { return cast false; }
     {
@@ -28,7 +26,7 @@ class UpdateParticleObjects {
     return cast null;
   }
 
-  public static function updateParticleObjects(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, ?options:ParticleObjectsUpdateOptions):Void {
+  public static function updateParticleObjects(objects:Array<ParticleObject>, state:Dynamic, config:Dynamic, deltaTime:Float, ?options:ParticleObjectsUpdateOptions):Void {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var lifetimes:Dynamic = cast _Runtime.UNDEFINED;

@@ -5,12 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.adjustments.ColorLut.sampleColorLut;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasImageDataPass;
-import flighthq.types.CanvasRenderTarget;
-import flighthq.types.ColorLut;
 
 @:expose("flighthq.effectsCanvas.CanvasColorLutPass")
 class CanvasColorLutPass {
-  public static function applyColorLutPassToCanvas(source:Dynamic, dest:Dynamic, lut:ColorLut):Void {
+  public static function applyColorLutPassToCanvas(source:Dynamic, dest:Dynamic, lut:Dynamic):Void {
     var rgb:Array<Float> = cast _Runtime.UNDEFINED;
     rgb = cast ([0.0, 0.0, 0.0] : Array<Dynamic>);
     _Runtime.callValue(drawCanvasImageDataPass, cast ([dest, source, function(data:Dynamic, pixelCount:Dynamic) {

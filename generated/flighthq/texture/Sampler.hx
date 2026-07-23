@@ -4,12 +4,11 @@ package flighthq.texture;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
-import flighthq.types.Sampler;
 import flighthq.types.Sampler.SamplerLike;
 
 @:expose("flighthq.texture.Sampler")
 class Sampler {
-  public static function cloneSampler(source:SamplerLike):Sampler {
+  public static function cloneSampler(source:SamplerLike):Dynamic {
     return cast _Runtime.callValue(createEntity, cast ([{ anisotropy: _Runtime.field(source, 'anisotropy'), magFilter: _Runtime.field(source, 'magFilter'), minFilter: _Runtime.field(source, 'minFilter'), mipmaps: _Runtime.field(source, 'mipmaps'), wrapU: _Runtime.field(source, 'wrapU'), wrapV: _Runtime.field(source, 'wrapV') }] : Array<Dynamic>));
     return cast null;
   }
@@ -23,27 +22,27 @@ class Sampler {
     _Runtime.setField(out, 'wrapV', _Runtime.field(source, 'wrapV'));
   }
 
-  public static function createAnisotropicSampler(level:Float):Sampler {
+  public static function createAnisotropicSampler(level:Float):Dynamic {
     return cast _Runtime.callValue(createSampler, cast ([{ anisotropy: level }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createClampLinearSampler():Sampler {
+  public static function createClampLinearSampler():Dynamic {
     return cast _Runtime.callValue(createSampler, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createPixelArtSampler():Sampler {
+  public static function createPixelArtSampler():Dynamic {
     return cast _Runtime.callValue(createSampler, cast ([{ magFilter: 'nearest', minFilter: 'nearest', mipmaps: false }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSampler(?opts:Dynamic):Sampler {
+  public static function createSampler(?opts:Dynamic):Dynamic {
     return cast _Runtime.callValue(createEntity, cast ([{ anisotropy: _Runtime.coalesce(_Runtime.optionalField(opts, 'anisotropy'), function():Dynamic return cast 1.0), magFilter: _Runtime.coalesce(_Runtime.optionalField(opts, 'magFilter'), function():Dynamic return cast 'linear'), minFilter: _Runtime.coalesce(_Runtime.optionalField(opts, 'minFilter'), function():Dynamic return cast 'linear-mipmap-linear'), mipmaps: _Runtime.coalesce(_Runtime.optionalField(opts, 'mipmaps'), function():Dynamic return cast true), wrapU: _Runtime.coalesce(_Runtime.optionalField(opts, 'wrapU'), function():Dynamic return cast 'clamp-to-edge'), wrapV: _Runtime.coalesce(_Runtime.optionalField(opts, 'wrapV'), function():Dynamic return cast 'clamp-to-edge') }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTilingSampler():Sampler {
+  public static function createTilingSampler():Dynamic {
     return cast _Runtime.callValue(createSampler, cast ([{ wrapU: 'repeat', wrapV: 'repeat' }] : Array<Dynamic>));
     return cast null;
   }

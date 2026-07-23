@@ -6,18 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.displayobject.Bitmap.createBitmap;
 import flighthq.node.Hierarchy.addNodeChild;
 import flighthq.node.Revision.invalidateNodeLocalTransform;
-import flighthq.types.Bitmap;
-import flighthq.types.DisplayObject;
-import flighthq.types.Spritesheet;
-import flighthq.types.SpritesheetAnimation;
 import flighthq.types.TimelineSource;
 
 @:expose("flighthq.movieclip.SpritesheetTimelineSource")
 class SpritesheetTimelineSource {
-  public static function createSpritesheetTimelineSource(spritesheet:Spritesheet, animation:SpritesheetAnimation):TimelineSource {
+  public static function createSpritesheetTimelineSource(spritesheet:Dynamic, animation:Dynamic):TimelineSource {
     var bitmaps:Dynamic = cast _Runtime.UNDEFINED;
     bitmaps = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
-    return cast { totalFrames: _Runtime.field(_Runtime.field(animation, 'frames'), 'length'), labels: cast ([] : Array<Dynamic>), frameRate: (1000.0 / _Runtime.field(animation, 'frameDuration')), constructFrame: function(target:DisplayObject, frame:Float) {
+    return cast { totalFrames: _Runtime.field(_Runtime.field(animation, 'frames'), 'length'), labels: cast ([] : Array<Dynamic>), frameRate: (1000.0 / _Runtime.field(animation, 'frameDuration')), constructFrame: function(target:Dynamic, frame:Float) {
       var atlas:Dynamic = cast _Runtime.UNDEFINED;
       var bitmap:Dynamic = cast _Runtime.UNDEFINED;
       var sheetFrame:Dynamic = cast _Runtime.UNDEFINED;

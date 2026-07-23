@@ -6,16 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.renderGl.GlFullscreenPass.compileGlFullscreenProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
 
 @:expose("flighthq.renderGl.GlLinearToSrgbPass")
 class GlLinearToSrgbPass {
-  public static function drawGlLinearToSrgbPass(state:GlRenderState, source:GlRenderTarget, dest:Null<GlRenderTarget>):Void {
+  public static function drawGlLinearToSrgbPass(state:Dynamic, source:Dynamic, dest:Null<Dynamic>):Void {
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, _Runtime.callValue(GlLinearToSrgbPass.getGlLinearToSrgbProgram__glLinearToSrgbPass, cast ([state] : Array<Dynamic>)), cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, GlLinearToSrgbPass.NOOP__glLinearToSrgbPass] : Array<Dynamic>));
   }
 
-  public static function getGlLinearToSrgbProgram__glLinearToSrgbPass(state:GlRenderState):GlFullscreenProgram {
+  public static function getGlLinearToSrgbProgram__glLinearToSrgbPass(state:Dynamic):GlFullscreenProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callProperty(GlLinearToSrgbPass._programs__glLinearToSrgbPass, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')))) {

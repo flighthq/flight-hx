@@ -4,17 +4,15 @@ package flighthq.effectsCanvas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.passthroughCanvasEffectPass;
-import flighthq.types.CameraMotionBlurEffect;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
-import flighthq.types.CanvasRenderTarget;
 
 @:expose("flighthq.effectsCanvas.CanvasCameraMotionBlurEffect")
 class CanvasCameraMotionBlurEffect {
-  public static function applyCameraMotionBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:CameraMotionBlurEffect):Void {
+  public static function applyCameraMotionBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
   public static final defaultCanvasCameraMotionBlurEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyCameraMotionBlurEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : CameraMotionBlurEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyCameraMotionBlurEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 }

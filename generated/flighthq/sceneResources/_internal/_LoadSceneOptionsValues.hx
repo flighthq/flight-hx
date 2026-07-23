@@ -8,11 +8,10 @@ import flighthq.sceneResources.ResolveSceneResourcesAndWait.resolveSceneResource
 import flighthq.sceneResources.SceneResourceResolver;
 import flighthq.sceneResources._internal._SceneResourceResolverValues.createSceneResourceResolver;
 import flighthq.sceneResources._internal._SceneResourceResolverValues.disposeSceneResourceResolver;
-import flighthq.types.Scene;
 
 @:expose("flighthq.sceneResources._internal._LoadSceneOptionsValues")
 class _LoadSceneOptionsValues {
-  public static function resolveScenesWithOptions(scenes:Array<Scene>, ?options:LoadSceneOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
+  public static function resolveScenesWithOptions(scenes:Array<Dynamic>, ?options:LoadSceneOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<flighthq._internal._Nothing> {
       var resolver:Dynamic = cast _Runtime.UNDEFINED;
       resolver = _Runtime.coalesce(_Runtime.optionalField(options, 'resolver'), function():Dynamic return cast _Runtime.callValue(createSceneResourceResolver, cast ([] : Array<Dynamic>)));

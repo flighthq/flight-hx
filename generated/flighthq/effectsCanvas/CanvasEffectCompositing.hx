@@ -3,7 +3,6 @@ package flighthq.effectsCanvas;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.CanvasRenderTarget;
 
 @:expose("flighthq.effectsCanvas.CanvasEffectCompositing")
 class CanvasEffectCompositing {

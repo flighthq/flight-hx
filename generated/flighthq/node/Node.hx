@@ -24,22 +24,16 @@ import flighthq.node.Viewport as Facade_Node_flighthq_node_Viewport;
 import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.clearSignal;
 import flighthq.types.Entity.Kind;
-import flighthq.types.HasAppearance;
-import flighthq.types.HasBlendMode;
-import flighthq.types.HasBoundsRectangle;
 import flighthq.types.HasBoundsRectangle.BoundsNode;
 import flighthq.types.HasBoundsRectangle.BoundsNodeAny;
 import flighthq.types.HasBoundsRectangle.HasBoundsRectangleRuntime;
 import flighthq.types.HasBoundsRectangle.Spatial2DNode;
-import flighthq.types.HasClip;
-import flighthq.types.HasMaterial;
 import flighthq.types.HasTransform2D;
 import flighthq.types.HasTransform2D.HasTransform2DRuntime;
 import flighthq.types.HasTransform2D.Transform2DNode;
 import flighthq.types.HasTransform3D;
 import flighthq.types.HasTransform3D.HasTransform3DRuntime;
 import flighthq.types.HasTransform3D.Transform3DNode;
-import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.MethodsOf;
@@ -52,7 +46,6 @@ import flighthq.types.Node.NodeTraits;
 import flighthq.types.NodeDescendantVisitor;
 import flighthq.types.NodeSignals;
 import flighthq.types.PartialNode;
-import flighthq.types.Rectangle;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Transform2D.Transform2DLike;
 import flighthq.types.Transform3D.Transform3DLike;
@@ -179,7 +172,7 @@ class Node {
     return cast null;
   }
 
-  public static function defaultComputeLocalBoundsRectangle(_out:Rectangle, _source:BoundsNodeAny):Void {
+  public static function defaultComputeLocalBoundsRectangle(_out:Dynamic, _source:BoundsNodeAny):Void {
     _Runtime.callValue(Facade_Node_flighthq_node_HasBoundsRectangle.defaultComputeLocalBoundsRectangle, cast ([_out, _source] : Array<Dynamic>));
   }
 
@@ -334,7 +327,7 @@ class Node {
     return cast null;
   }
 
-  public static function getNodeLocalBoundsRectangle<Traits>(target:BoundsNode<Traits>):Rectangle {
+  public static function getNodeLocalBoundsRectangle<Traits>(target:BoundsNode<Traits>):Dynamic {
     return cast _Runtime.callValue(Facade_Node_flighthq_node_BoundsRectangle.getNodeLocalBoundsRectangle, cast ([target] : Array<Dynamic>));
     return cast null;
   }
@@ -349,7 +342,7 @@ class Node {
     return cast null;
   }
 
-  public static function getNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>):Matrix {
+  public static function getNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>):Dynamic {
     return cast _Runtime.callValue(Facade_Node_flighthq_node_Transform2d.getNodeLocalMatrix, cast ([target] : Array<Dynamic>));
     return cast null;
   }
@@ -374,7 +367,7 @@ class Node {
     return cast null;
   }
 
-  public static function getNodeParentBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Rectangle {
+  public static function getNodeParentBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Dynamic {
     return cast _Runtime.callValue(Facade_Node_flighthq_node_BoundsRectangle.getNodeParentBoundsRectangle, cast ([target] : Array<Dynamic>));
     return cast null;
   }
@@ -412,12 +405,12 @@ class Node {
     return cast null;
   }
 
-  public static function getNodeWorldBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Rectangle {
+  public static function getNodeWorldBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Dynamic {
     return cast _Runtime.callValue(Facade_Node_flighthq_node_BoundsRectangle.getNodeWorldBoundsRectangle, cast ([target] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getNodeWorldMatrix<Traits>(target:Transform2DNode<Traits>):Matrix {
+  public static function getNodeWorldMatrix<Traits>(target:Transform2DNode<Traits>):Dynamic {
     return cast _Runtime.callValue(Facade_Node_flighthq_node_Transform2d.getNodeWorldMatrix, cast ([target] : Array<Dynamic>));
     return cast null;
   }
@@ -432,11 +425,11 @@ class Node {
     return cast null;
   }
 
-  public static function initAppearanceTrait(target:HasAppearance, ?obj:Dynamic):Void {
+  public static function initAppearanceTrait(target:Dynamic, ?obj:Dynamic):Void {
     _Runtime.callValue(Facade_Node_flighthq_node_HasAppearance.initAppearanceTrait, cast ([target, obj] : Array<Dynamic>));
   }
 
-  public static function initBlendModeTrait(target:HasBlendMode, ?obj:Dynamic):Void {
+  public static function initBlendModeTrait(target:Dynamic, ?obj:Dynamic):Void {
     _Runtime.callValue(Facade_Node_flighthq_node_HasBlendMode.initBlendModeTrait, cast ([target, obj] : Array<Dynamic>));
   }
 
@@ -444,15 +437,15 @@ class Node {
     _Runtime.callValue(Facade_Node_flighthq_node_HasBoundsRectangle.initBoundsRectangleRuntimeTrait, cast ([target, methods] : Array<Dynamic>));
   }
 
-  public static function initBoundsRectangleTrait(_target:HasBoundsRectangle, ?_obj:Dynamic):Void {
+  public static function initBoundsRectangleTrait(_target:Dynamic, ?_obj:Dynamic):Void {
     _Runtime.callValue(Facade_Node_flighthq_node_HasBoundsRectangle.initBoundsRectangleTrait, cast ([_target, _obj] : Array<Dynamic>));
   }
 
-  public static function initClipTrait(target:HasClip, ?obj:Dynamic):Void {
+  public static function initClipTrait(target:Dynamic, ?obj:Dynamic):Void {
     _Runtime.callValue(Facade_Node_flighthq_node_HasClip.initClipTrait, cast ([target, obj] : Array<Dynamic>));
   }
 
-  public static function initMaterialTrait(target:HasMaterial, ?obj:Dynamic):Void {
+  public static function initMaterialTrait(target:Dynamic, ?obj:Dynamic):Void {
     _Runtime.callValue(Facade_Node_flighthq_node_HasMaterial.initMaterialTrait, cast ([target, obj] : Array<Dynamic>));
   }
 

@@ -4,11 +4,10 @@ package flighthq.surface;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
-import flighthq.types.SurfaceRegion;
 
 @:expose("flighthq.surface.SurfaceNoise")
 class SurfaceNoise {
-  public static function fillSurfaceNoise(dest:SurfaceRegion, seed:Float, low:Float = 0.0, high:Float = 255.0, grayScale:Bool = false):Void {
+  public static function fillSurfaceNoise(dest:Dynamic, seed:Float, low:Float = 0.0, high:Float = 255.0, grayScale:Bool = false):Void {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var lo:Dynamic = cast _Runtime.UNDEFINED;
     var span:Dynamic = cast _Runtime.UNDEFINED;
@@ -52,7 +51,7 @@ class SurfaceNoise {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function fillSurfacePerlinNoise(dest:SurfaceRegion, baseX:Float, baseY:Float, octaves:Float, seed:Float, grayScale:Bool = false, stitch:Bool = false, channelOptions:Float = 7.0):Void {
+  public static function fillSurfacePerlinNoise(dest:Dynamic, baseX:Float, baseY:Float, octaves:Float, seed:Float, grayScale:Bool = false, stitch:Bool = false, channelOptions:Float = 7.0):Void {
     var fx0:Dynamic = cast _Runtime.UNDEFINED;
     var fy0:Dynamic = cast _Runtime.UNDEFINED;
     var passes:Dynamic = cast _Runtime.UNDEFINED;
@@ -111,7 +110,7 @@ class SurfaceNoise {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function fillSurfaceTurbulence(dest:SurfaceRegion, baseX:Float, baseY:Float, octaves:Float, seed:Float, grayScale:Bool = false, stitch:Bool = false, channelOptions:Float = 7.0):Void {
+  public static function fillSurfaceTurbulence(dest:Dynamic, baseX:Float, baseY:Float, octaves:Float, seed:Float, grayScale:Bool = false, stitch:Bool = false, channelOptions:Float = 7.0):Void {
     var fx0:Dynamic = cast _Runtime.UNDEFINED;
     var fy0:Dynamic = cast _Runtime.UNDEFINED;
     var passes:Dynamic = cast _Runtime.UNDEFINED;

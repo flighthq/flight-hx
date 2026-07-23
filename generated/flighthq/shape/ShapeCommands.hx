@@ -4,9 +4,6 @@ package flighthq.shape;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.node.Revision.invalidateContent;
-import flighthq.types.ImageResource;
-import flighthq.types.Matrix;
-import flighthq.types.Shape;
 import flighthq.types.ShapeCommand.CapsStyle;
 import flighthq.types.ShapeCommand.GradientType;
 import flighthq.types.ShapeCommand.InterpolationMethod;
@@ -19,7 +16,7 @@ import flighthq.types.TriangleCulling;
 
 @:expose("flighthq.shape.ShapeCommands")
 class ShapeCommands {
-  public static function appendShapeArc(shape:Shape, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, anticlockwise:Dynamic = false):Void {
+  public static function appendShapeArc(shape:Dynamic, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, anticlockwise:Dynamic = false):Void {
     var cmds:Dynamic = cast _Runtime.UNDEFINED;
     var sweep:Dynamic = cast _Runtime.UNDEFINED;
     var segmentCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -35,7 +32,7 @@ class ShapeCommands {
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeArcTo(shape:Shape, x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Void {
+  public static function appendShapeArcTo(shape:Dynamic, x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Void {
     var cmds:Dynamic = cast _Runtime.UNDEFINED;
     var penX:Dynamic = cast _Runtime.UNDEFINED;
     var penY:Dynamic = cast _Runtime.UNDEFINED;
@@ -144,88 +141,88 @@ class ShapeCommands {
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeBeginBitmapFill(shape:Shape, bitmap:ImageResource, ?matrix:Null<Matrix>, repeat:Dynamic = true, smooth:Dynamic = false):Void {
+  public static function appendShapeBeginBitmapFill(shape:Dynamic, bitmap:Dynamic, ?matrix:Null<Dynamic>, repeat:Dynamic = true, smooth:Dynamic = false):Void {
     if (matrix == null) matrix = cast (null : Dynamic);
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['beginBitmapFill', 4.0, bitmap, matrix, repeat, smooth] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeBeginFill(shape:Shape, color:Dynamic = 0.0, alpha:Dynamic = 1.0):Void {
+  public static function appendShapeBeginFill(shape:Dynamic, color:Dynamic = 0.0, alpha:Dynamic = 1.0):Void {
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['beginFill', 2.0, color, alpha] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeBeginGradientFill(shape:Shape, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Matrix>, spreadMethod:SpreadMethod = 'pad', interpolationMethod:InterpolationMethod = 'rgb', focalPointRatio:Dynamic = 0.0):Void {
+  public static function appendShapeBeginGradientFill(shape:Dynamic, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Dynamic>, spreadMethod:SpreadMethod = 'pad', interpolationMethod:InterpolationMethod = 'rgb', focalPointRatio:Dynamic = 0.0):Void {
     if (matrix == null) matrix = cast (null : Dynamic);
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['beginGradientFill', 8.0, gradientType, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeCircle(shape:Shape, x:Float, y:Float, radius:Float):Void {
+  public static function appendShapeCircle(shape:Dynamic, x:Float, y:Float, radius:Float):Void {
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['drawCircle', 3.0, x, y, radius] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeCubicCurveTo(shape:Shape, controlX1:Float, controlY1:Float, controlX2:Float, controlY2:Float, anchorX:Float, anchorY:Float):Void {
+  public static function appendShapeCubicCurveTo(shape:Dynamic, controlX1:Float, controlY1:Float, controlX2:Float, controlY2:Float, anchorX:Float, anchorY:Float):Void {
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['cubicCurveTo', 6.0, controlX1, controlY1, controlX2, controlY2, anchorX, anchorY] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeCurveTo(shape:Shape, controlX:Float, controlY:Float, anchorX:Float, anchorY:Float):Void {
+  public static function appendShapeCurveTo(shape:Dynamic, controlX:Float, controlY:Float, anchorX:Float, anchorY:Float):Void {
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['curveTo', 4.0, controlX, controlY, anchorX, anchorY] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeDrawTriangles(shape:Shape, vertices:Array<Float>, ?indices:Null<Array<Float>>, ?uvtData:Null<Array<Float>>, culling:TriangleCulling = 'none'):Void {
+  public static function appendShapeDrawTriangles(shape:Dynamic, vertices:Array<Float>, ?indices:Null<Array<Float>>, ?uvtData:Null<Array<Float>>, culling:TriangleCulling = 'none'):Void {
     if (indices == null) indices = cast (null : Dynamic);
     if (uvtData == null) uvtData = cast (null : Dynamic);
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['drawTriangles', 4.0, vertices, indices, uvtData, culling] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeEllipse(shape:Shape, x:Float, y:Float, width:Float, height:Float):Void {
+  public static function appendShapeEllipse(shape:Dynamic, x:Float, y:Float, width:Float, height:Float):Void {
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['drawEllipse', 4.0, x, y, width, height] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeEndFill(shape:Shape):Void {
+  public static function appendShapeEndFill(shape:Dynamic):Void {
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['endFill', 0.0] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeLineBitmapStyle(shape:Shape, bitmap:ImageResource, ?matrix:Null<Matrix>, repeat:Dynamic = true, smooth:Dynamic = false):Void {
+  public static function appendShapeLineBitmapStyle(shape:Dynamic, bitmap:Dynamic, ?matrix:Null<Dynamic>, repeat:Dynamic = true, smooth:Dynamic = false):Void {
     if (matrix == null) matrix = cast (null : Dynamic);
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['lineBitmapStyle', 4.0, bitmap, matrix, repeat, smooth] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeLineGradientStyle(shape:Shape, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Matrix>, spreadMethod:SpreadMethod = 'pad', interpolationMethod:InterpolationMethod = 'rgb', focalPointRatio:Dynamic = 0.0):Void {
+  public static function appendShapeLineGradientStyle(shape:Dynamic, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Dynamic>, spreadMethod:SpreadMethod = 'pad', interpolationMethod:InterpolationMethod = 'rgb', focalPointRatio:Dynamic = 0.0):Void {
     if (matrix == null) matrix = cast (null : Dynamic);
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['lineGradientStyle', 8.0, gradientType, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeLineStyle(shape:Shape, thickness:Dynamic = 1.0, color:Dynamic = 0.0, alpha:Dynamic = 1.0, pixelHinting:Dynamic = false, scaleMode:LineScaleMode = 'normal', caps:CapsStyle = 'none', joints:JointStyle = 'round', miterLimit:Dynamic = 3.0):Void {
+  public static function appendShapeLineStyle(shape:Dynamic, thickness:Dynamic = 1.0, color:Dynamic = 0.0, alpha:Dynamic = 1.0, pixelHinting:Dynamic = false, scaleMode:LineScaleMode = 'normal', caps:CapsStyle = 'none', joints:JointStyle = 'round', miterLimit:Dynamic = 3.0):Void {
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['lineStyle', 8.0, thickness, color, alpha, pixelHinting, scaleMode, caps, joints, miterLimit] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeLineTo(shape:Shape, x:Float, y:Float):Void {
+  public static function appendShapeLineTo(shape:Dynamic, x:Float, y:Float):Void {
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['lineTo', 2.0, x, y] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeMoveTo(shape:Shape, x:Float, y:Float):Void {
+  public static function appendShapeMoveTo(shape:Dynamic, x:Float, y:Float):Void {
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['moveTo', 2.0, x, y] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapePath(shape:Shape, commands:Array<Float>, pathData:Array<Float>, winding:PathWinding = 'evenOdd'):Void {
+  public static function appendShapePath(shape:Dynamic, commands:Array<Float>, pathData:Array<Float>, winding:PathWinding = 'evenOdd'):Void {
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['drawPath', 3.0, commands, pathData, winding] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapePolygon(shape:Shape, points:Array<Float>):Void {
+  public static function appendShapePolygon(shape:Dynamic, points:Array<Float>):Void {
     var cmds:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(points, 'length'), 4.0, '<'))) { return; }
     cmds = _Runtime.field(_Runtime.field(shape, 'data'), 'commands');
@@ -241,7 +238,7 @@ class ShapeCommands {
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapePolyline(shape:Shape, points:Array<Float>):Void {
+  public static function appendShapePolyline(shape:Dynamic, points:Array<Float>):Void {
     var cmds:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(points, 'length'), 4.0, '<'))) { return; }
     cmds = _Runtime.field(_Runtime.field(shape, 'data'), 'commands');
@@ -256,17 +253,17 @@ class ShapeCommands {
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeRectangle(shape:Shape, x:Float, y:Float, width:Float, height:Float):Void {
+  public static function appendShapeRectangle(shape:Dynamic, x:Float, y:Float, width:Float, height:Float):Void {
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['drawRectangle', 4.0, x, y, width, height] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeRoundRectangle(shape:Shape, x:Float, y:Float, width:Float, height:Float, ellipseWidth:Float, ellipseHeight:Float):Void {
+  public static function appendShapeRoundRectangle(shape:Dynamic, x:Float, y:Float, width:Float, height:Float, ellipseWidth:Float, ellipseHeight:Float):Void {
     _Runtime.pushMany(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), cast (['drawRoundRectangle', 6.0, x, y, width, height, ellipseWidth, ellipseHeight] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeRoundRectangleVarying(shape:Shape, x:Float, y:Float, width:Float, height:Float, topLeftRadius:Float, topRightRadius:Float, bottomLeftRadius:Float, bottomRightRadius:Float):Void {
+  public static function appendShapeRoundRectangleVarying(shape:Dynamic, x:Float, y:Float, width:Float, height:Float, topLeftRadius:Float, topRightRadius:Float, bottomLeftRadius:Float, bottomRightRadius:Float):Void {
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var cmds:Dynamic = cast _Runtime.UNDEFINED;

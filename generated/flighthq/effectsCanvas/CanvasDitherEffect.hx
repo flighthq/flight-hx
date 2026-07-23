@@ -5,16 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.passthroughCanvasEffectPass;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
-import flighthq.types.CanvasRenderTarget;
-import flighthq.types.DitherEffect;
 
 @:expose("flighthq.effectsCanvas.CanvasDitherEffect")
 class CanvasDitherEffect {
-  public static function applyDitherEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:DitherEffect):Void {
+  public static function applyDitherEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
   public static final defaultCanvasDitherEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyDitherEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : DitherEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyDitherEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 }

@@ -6,13 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
-import flighthq.types.ScanlinesEffect;
 
 @:expose("flighthq.effectsGl.GlScanlinesEffect")
 class GlScanlinesEffect {
-  public static function applyScanlinesEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ScanlinesEffect):Void {
+  public static function applyScanlinesEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -26,7 +23,7 @@ class GlScanlinesEffect {
   }
 
   public static final defaultGlScanlinesEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyScanlinesEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ScanlinesEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyScanlinesEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static final SCANLINES_FRAGMENT_SRC__glScanlinesEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_count;\nuniform float u_intensity;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float line = sin(v_texCoord.y * u_count * 3.14159265) * 0.5 + 0.5;\n  o_color = vec4(c.rgb * (1.0 - u_intensity * (1.0 - line)), c.a);\n}';

@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ShapeFillRegion = { var path:Path; var color:Float; var alpha:Float; };
+typedef ShapeFillRegion = { var path:Dynamic; var color:Float; var alpha:Float; };

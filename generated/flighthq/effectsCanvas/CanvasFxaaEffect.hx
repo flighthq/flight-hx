@@ -5,16 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.passthroughCanvasEffectPass;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
-import flighthq.types.CanvasRenderTarget;
-import flighthq.types.FxaaEffect;
 
 @:expose("flighthq.effectsCanvas.CanvasFxaaEffect")
 class CanvasFxaaEffect {
-  public static function applyFxaaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:FxaaEffect):Void {
+  public static function applyFxaaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
   public static final defaultCanvasFxaaEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyFxaaEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : FxaaEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyFxaaEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 }

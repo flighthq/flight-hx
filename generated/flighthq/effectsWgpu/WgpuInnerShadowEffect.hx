@@ -11,15 +11,11 @@ import flighthq.effectsWgpu.WgpuEffectTintShader.applyWgpuEffectInnerClipPass;
 import flighthq.effectsWgpu.WgpuEffectTintShader.applyWgpuEffectInvertTintPass;
 import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
-import flighthq.types.InnerShadowEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
-import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget;
-import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
 @:expose("flighthq.effectsWgpu.WgpuInnerShadowEffect")
 class WgpuInnerShadowEffect {
-  public static function applyInnerShadowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:InnerShadowEffect):Void {
+  public static function applyInnerShadowEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     var src:Dynamic = cast _Runtime.UNDEFINED;
     var dst:Dynamic = cast _Runtime.UNDEFINED;
     var descriptor:Dynamic = cast _Runtime.UNDEFINED;
@@ -35,8 +31,8 @@ class WgpuInnerShadowEffect {
     var strength:Dynamic = cast _Runtime.UNDEFINED;
     var quality:Dynamic = cast _Runtime.UNDEFINED;
     var sourceMode:Dynamic = cast _Runtime.UNDEFINED;
-    src = (cast source : WgpuRenderTarget);
-    dst = (cast dest : WgpuRenderTarget);
+    src = (cast source : Dynamic);
+    dst = (cast dest : Dynamic);
     descriptor = { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') };
     s0 = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     s1 = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
@@ -65,7 +61,7 @@ class WgpuInnerShadowEffect {
   }
 
   public static final defaultWgpuInnerShadowEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyInnerShadowEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : InnerShadowEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyInnerShadowEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static function getInvertTintEdgeColor__wgpuInnerShadowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {

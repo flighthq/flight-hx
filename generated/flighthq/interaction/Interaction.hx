@@ -22,8 +22,6 @@ import flighthq.interaction.RegisterTextHitTest as Facade_Interaction_flighthq_i
 import flighthq.interaction.SpatialQuery as Facade_Interaction_flighthq_interaction_SpatialQuery;
 import flighthq.interaction.SpriteHitTests as Facade_Interaction_flighthq_interaction_SpriteHitTests;
 import flighthq.types.Cursor;
-import flighthq.types.Cursor.CursorBackend;
-import flighthq.types.DisplayObject;
 import flighthq.types.Entity.Kind;
 import flighthq.types.FocusManager.FocusDirection;
 import flighthq.types.FocusManager.FocusManagerOptions;
@@ -38,8 +36,6 @@ import flighthq.types.InteractionManager.InteractionPointerOptions;
 import flighthq.types.InteractionSignals;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.NodeInteraction.HitArea;
-import flighthq.types.NodeInteractionState;
-import flighthq.types.Rectangle;
 import flighthq.types.SignalConnectOptions;
 
 @:expose("flighthq.interaction.Interaction")
@@ -66,7 +62,7 @@ class Interaction {
     _Runtime.callValue(Facade_Interaction_flighthq_interaction_InteractionManager.connectInteractionSignal, cast ([manager, target, name, slot, options] : Array<Dynamic>));
   }
 
-  public static function containsDisplayObject(outer:DisplayObject, inner:DisplayObject):Bool {
+  public static function containsDisplayObject(outer:Dynamic, inner:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_DisplayObjectOverlap.containsDisplayObject, cast ([outer, inner] : Array<Dynamic>));
     return cast null;
   }
@@ -86,12 +82,12 @@ class Interaction {
     return cast null;
   }
 
-  public static function createNodeInteractionState():NodeInteractionState {
+  public static function createNodeInteractionState():Dynamic {
     return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_NodeInteractionState.createNodeInteractionState, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createWebCursorBackend(element:Dynamic):CursorBackend {
+  public static function createWebCursorBackend(element:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_CursorBackend.createWebCursorBackend, cast ([element] : Array<Dynamic>));
     return cast null;
   }
@@ -214,7 +210,7 @@ class Interaction {
     return cast null;
   }
 
-  public static function enableNodeInteractionState(source:NodeAny):NodeInteractionState {
+  public static function enableNodeInteractionState(source:NodeAny):Dynamic {
     return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_NodeInteractionState.enableNodeInteractionState, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -264,7 +260,7 @@ class Interaction {
     return cast null;
   }
 
-  public static function getDisplayObjectOverlapRectangle(source:DisplayObject, other:DisplayObject, out:Rectangle):Rectangle {
+  public static function getDisplayObjectOverlapRectangle(source:Dynamic, other:Dynamic, out:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_DisplayObjectOverlap.getDisplayObjectOverlapRectangle, cast ([source, other, out] : Array<Dynamic>));
     return cast null;
   }
@@ -294,7 +290,7 @@ class Interaction {
     return cast null;
   }
 
-  public static function getNodeInteractionState(source:NodeAny):Null<NodeInteractionState> {
+  public static function getNodeInteractionState(source:NodeAny):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_NodeInteractionState.getNodeInteractionState, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -304,22 +300,22 @@ class Interaction {
     return cast null;
   }
 
-  public static function hitTestAreaQuery(root:DisplayObject, rect:Rectangle, ?out:Array<DisplayObject>):Array<DisplayObject> {
+  public static function hitTestAreaQuery(root:Dynamic, rect:Dynamic, ?out:Array<Dynamic>):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_SpatialQuery.hitTestAreaQuery, cast ([root, rect, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestAreaQueryCircle(root:DisplayObject, cx:Float, cy:Float, radius:Float, ?out:Array<DisplayObject>):Array<DisplayObject> {
+  public static function hitTestAreaQueryCircle(root:Dynamic, cx:Float, cy:Float, radius:Float, ?out:Array<Dynamic>):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_SpatialQuery.hitTestAreaQueryCircle, cast ([root, cx, cy, radius, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestDisplayObjects(source:DisplayObject, other:DisplayObject):Bool {
+  public static function hitTestDisplayObjects(source:Dynamic, other:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_HitTests.hitTestDisplayObjects, cast ([source, other] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestDisplayObjectsShape(source:DisplayObject, other:DisplayObject):Bool {
+  public static function hitTestDisplayObjectsShape(source:Dynamic, other:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Interaction_flighthq_interaction_DisplayObjectOverlap.hitTestDisplayObjectsShape, cast ([source, other] : Array<Dynamic>));
     return cast null;
   }

@@ -8,15 +8,14 @@ import flighthq.displayobject.DisplayObject.getDisplayObjectRuntime;
 import flighthq.shape.Shape.createShapeRuntime;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.Scale9Shape;
 import flighthq.types.Scale9Shape.Scale9ShapeData;
 import flighthq.types.Scale9Shape.Scale9ShapeRuntime;
 import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 
 @:expose("flighthq.shape.Scale9Shape")
 class Scale9Shape {
-  public static function createScale9Shape(scale9Grid:RectangleLike, ?obj:PartialNode<Scale9Shape>):Scale9Shape {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([Scale9ShapeKind, (cast obj : PartialNode<Scale9Shape>), function(data:Dynamic) return _Runtime.callValue(createScale9ShapeData, cast ([scale9Grid, data] : Array<Dynamic>)), createScale9ShapeRuntime] : Array<Dynamic>)) : Scale9Shape);
+  public static function createScale9Shape(scale9Grid:RectangleLike, ?obj:PartialNode<Dynamic>):Dynamic {
+    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([Scale9ShapeKind, (cast obj : PartialNode<Dynamic>), function(data:Dynamic) return _Runtime.callValue(createScale9ShapeData, cast ([scale9Grid, data] : Array<Dynamic>)), createScale9ShapeRuntime] : Array<Dynamic>)) : Dynamic);
     return cast null;
   }
 
@@ -30,7 +29,7 @@ class Scale9Shape {
     return cast null;
   }
 
-  public static function getScale9ShapeRuntime(source:Scale9Shape):Scale9ShapeRuntime {
+  public static function getScale9ShapeRuntime(source:Dynamic):Scale9ShapeRuntime {
     return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : Scale9ShapeRuntime);
     return cast null;
   }

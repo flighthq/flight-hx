@@ -66,16 +66,10 @@ import flighthq.sceneFormats.Shared.packSkinInfluences;
 import flighthq.sceneFormats.Shared.reverseTriangleWinding;
 import flighthq.skeleton3d.Skeleton3d.createSkeleton3D;
 import flighthq.texture.Texture.createTexture;
-import flighthq.types.AnimationClip;
-import flighthq.types.Material;
-import flighthq.types.Matrix4;
 import flighthq.types.ResourceResolutionState;
-import flighthq.types.Scene;
-import flighthq.types.SceneNode;
 import flighthq.types.SceneResourceRef.SceneResourceRefKind;
 import flighthq.types.Skeleton3D;
 import flighthq.types.Skin;
-import flighthq.types.Texture;
 import flighthq.types._internal._MeshValues.MeshKind;
 import flighthq.types._internal._SceneAnimationPathValues.SceneAnimationPathRotation;
 import flighthq.types._internal._SceneAnimationPathValues.SceneAnimationPathTranslation;
@@ -100,7 +94,7 @@ typedef ParsedSkeletonPose__awdParse = { var jointTransforms:Array<Null<Dynamic>
 
 @:expose("flighthq.sceneFormats.AwdParse")
 class AwdParse {
-  public static function createSceneFromAwd(bytes:Dynamic, ?warnings:Array<String>):Scene {
+  public static function createSceneFromAwd(bytes:Dynamic, ?warnings:Array<String>):Dynamic {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var view:Dynamic = cast _Runtime.UNDEFINED;
     var compression:Dynamic = cast _Runtime.UNDEFINED;
@@ -210,12 +204,12 @@ class AwdParse {
       var blockId:Dynamic = _Runtime.getIndex(__iteration1, 0.0);
       var meshInst:Dynamic = _Runtime.getIndex(__iteration1, 1.0);
       var geometries:Dynamic = _Runtime.callProperty(geometryBlocks, 'get', cast ([_Runtime.field(meshInst, 'geometryId')] : Array<Dynamic>));
-      var node:SceneNode = cast _Runtime.UNDEFINED;
+      var node:Dynamic = cast _Runtime.UNDEFINED;
       if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(geometries, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(_Runtime.field(geometries, 'length'), 0.0, '>')))) {
         if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometries, 'length'), 1.0))) {
           var mesh:Dynamic = _Runtime.callValue(createMesh, cast ([_Runtime.field(_Runtime.getIndex(geometries, 0.0), 'geometry'), _Runtime.callValue(materialForSubset, cast ([meshInst, 0.0] : Array<Dynamic>)), MeshKind, { name: _Runtime.orValue(_Runtime.field(meshInst, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }] : Array<Dynamic>));
           if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(skin, null), function():Dynamic return cast _Runtime.field(_Runtime.getIndex(geometries, 0.0), 'skinned')))) { _Runtime.setField(mesh, 'skin', skin); }
-          (node = cast ((cast (cast mesh : Dynamic) : SceneNode) : Dynamic));
+          (node = cast ((cast (cast mesh : Dynamic) : Dynamic) : Dynamic));
         } else {
           (node = cast (_Runtime.callValue(createSceneNode, cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { name: _Runtime.orValue(_Runtime.field(meshInst, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }] : Array<Dynamic>)) : Dynamic));
           {
@@ -223,7 +217,7 @@ class AwdParse {
             while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(geometries, 'length'), '<'))) {
               var mesh:Dynamic = _Runtime.callValue(createMesh, cast ([_Runtime.field(_Runtime.getIndex(geometries, i), 'geometry'), _Runtime.callValue(materialForSubset, cast ([meshInst, i] : Array<Dynamic>))] : Array<Dynamic>));
               if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(skin, null), function():Dynamic return cast _Runtime.field(_Runtime.getIndex(geometries, i), 'skinned')))) { _Runtime.setField(mesh, 'skin', skin); }
-              _Runtime.callValue(addNodeChild, cast ([node, (cast (cast mesh : Dynamic) : SceneNode)] : Array<Dynamic>));
+              _Runtime.callValue(addNodeChild, cast ([node, (cast (cast mesh : Dynamic) : Dynamic)] : Array<Dynamic>));
               i++;
             }
           }
@@ -273,7 +267,7 @@ class AwdParse {
     return cast null;
   }
 
-  public static function parseAwdSkeletonAnimations(bytes:Dynamic, joints:Array<SceneNode>, ?warnings:Array<String>):Dynamic {
+  public static function parseAwdSkeletonAnimations(bytes:Dynamic, joints:Array<Dynamic>, ?warnings:Array<String>):Dynamic {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var view:Dynamic = cast _Runtime.UNDEFINED;
     var compression:Dynamic = cast _Runtime.UNDEFINED;
@@ -357,7 +351,7 @@ class AwdParse {
     return cast null;
   }
 
-  public static function buildAwdSkeletonAnimationClip__awdParse(parsedAnimation:ParsedSkeletonAnimation__awdParse, jointCount:Float, poseBlocks:Dynamic, joints:Array<SceneNode>, ?warnings:Array<String>):Null<AnimationClip> {
+  public static function buildAwdSkeletonAnimationClip__awdParse(parsedAnimation:ParsedSkeletonAnimation__awdParse, jointCount:Float, poseBlocks:Dynamic, joints:Array<Dynamic>, ?warnings:Array<String>):Null<Dynamic> {
     var poseCount:Dynamic = cast _Runtime.UNDEFINED;
     var times:Array<Float> = cast _Runtime.UNDEFINED;
     var timeAccumulator:Dynamic = cast _Runtime.UNDEFINED;
@@ -420,13 +414,13 @@ class AwdParse {
     return cast null;
   }
 
-  public static function buildAwdSkeleton__awdParse(parsedSkeleton:ParsedSkeleton__awdParse):{ var jointNodes:Array<SceneNode>; var skeleton:Skeleton3D; var skeletonRoot:SceneNode; } {
+  public static function buildAwdSkeleton__awdParse(parsedSkeleton:ParsedSkeleton__awdParse):{ var jointNodes:Array<Dynamic>; var skeleton:Skeleton3D; var skeletonRoot:Dynamic; } {
     var jointCount:Dynamic = cast _Runtime.UNDEFINED;
     var skeletonRoot:Dynamic = cast _Runtime.UNDEFINED;
-    var jointNodes:Array<SceneNode> = cast _Runtime.UNDEFINED;
+    var jointNodes:Array<Dynamic> = cast _Runtime.UNDEFINED;
     var jointNames:Array<String> = cast _Runtime.UNDEFINED;
     var inverseBindMatrices:Dynamic = cast _Runtime.UNDEFINED;
-    var bindWorld:Array<Matrix4> = cast _Runtime.UNDEFINED;
+    var bindWorld:Array<Dynamic> = cast _Runtime.UNDEFINED;
     var invBind:Dynamic = cast _Runtime.UNDEFINED;
     var invParent:Dynamic = cast _Runtime.UNDEFINED;
     var local:Dynamic = cast _Runtime.UNDEFINED;
@@ -521,14 +515,14 @@ class AwdParse {
     return cast null;
   }
 
-  public static function applyAwdTransform__awdParse(node:SceneNode, transform:Dynamic):Void {
+  public static function applyAwdTransform__awdParse(node:Dynamic, transform:Dynamic):Void {
     _Runtime.callValue(AwdParse.awdTransformToMatrix4__awdParse, cast ([AwdParse._awdTransformScratch__awdParse, transform] : Array<Dynamic>));
     _Runtime.callValue(setNodeLocalMatrix4, cast ([node, AwdParse._awdTransformScratch__awdParse] : Array<Dynamic>));
   }
 
   public static final _awdTransformScratch__awdParse:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 
-  public static function awdTransformToMatrix4__awdParse(out:Matrix4, transform:Dynamic):Void {
+  public static function awdTransformToMatrix4__awdParse(out:Dynamic, transform:Dynamic):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     m = _Runtime.field(out, 'm');
     _Runtime.setIndex(m, 0.0, _Runtime.getIndex(transform, 0.0));
@@ -973,11 +967,11 @@ class AwdParse {
     return cast null;
   }
 
-  public static function resolveAwdMaterial__awdParse(materialId:Float, materialBlocks:Dynamic, textureBlocks:Dynamic, cache:Dynamic, ?warnings:Array<String>):Null<Material> {
+  public static function resolveAwdMaterial__awdParse(materialId:Float, materialBlocks:Dynamic, textureBlocks:Dynamic, cache:Dynamic, ?warnings:Array<String>):Null<Dynamic> {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     var diffuseTexture:Dynamic = cast _Runtime.UNDEFINED;
-    var material:Null<Material> = cast _Runtime.UNDEFINED;
+    var material:Null<Dynamic> = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(materialId, 0.0))) { return cast null; }
     cached = _Runtime.callProperty(cache, 'get', cast ([materialId] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
@@ -990,7 +984,7 @@ class AwdParse {
     diffuseTexture = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(parsed, 'diffuseTextureId'), 0.0), function():Dynamic return cast _Runtime.callValue(AwdParse.resolveAwdTexture__awdParse, cast ([_Runtime.field(parsed, 'diffuseTextureId'), textureBlocks, warnings] : Array<Dynamic>)), function():Dynamic return cast null);
     material = null;
     if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(diffuseTexture, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(parsed, 'color'), null)))) {
-      (material = cast ((cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.select(!_Runtime.strictEquals(_Runtime.field(parsed, 'color'), null), function():Dynamic return cast _Runtime.callValue(AwdParse.awdColorToRgba__awdParse, cast ([_Runtime.field(parsed, 'color')] : Array<Dynamic>)), function():Dynamic return cast 4294967295.0), diffuseMap: diffuseTexture }] : Array<Dynamic>)) : Dynamic) : Material) : Dynamic));
+      (material = cast ((cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.select(!_Runtime.strictEquals(_Runtime.field(parsed, 'color'), null), function():Dynamic return cast _Runtime.callValue(AwdParse.awdColorToRgba__awdParse, cast ([_Runtime.field(parsed, 'color')] : Array<Dynamic>)), function():Dynamic return cast 4294967295.0), diffuseMap: diffuseTexture }] : Array<Dynamic>)) : Dynamic) : Dynamic) : Dynamic));
       _Runtime.setField(material, 'name', _Runtime.select(_Runtime.compare(_Runtime.field(_Runtime.field(parsed, 'name'), 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.field(parsed, 'name'), function():Dynamic return cast null));
     }
     _Runtime.callProperty(cache, 'set', cast ([materialId, material] : Array<Dynamic>));
@@ -998,7 +992,7 @@ class AwdParse {
     return cast null;
   }
 
-  public static function resolveAwdTexture__awdParse(textureId:Float, textureBlocks:Dynamic, ?warnings:Array<String>):Null<Texture> {
+  public static function resolveAwdTexture__awdParse(textureId:Float, textureBlocks:Dynamic, ?warnings:Array<String>):Null<Dynamic> {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     parsed = _Runtime.callProperty(textureBlocks, 'get', cast ([textureId] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')))) {

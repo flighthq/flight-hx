@@ -6,6 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.EntityWithoutRuntime;
 
-typedef BoundingSphere = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var center:Vector3; var radius:Float; };
+typedef BoundingSphere = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var center:Dynamic; var radius:Float; };
 
-typedef BoundingSphereLike = EntityWithoutRuntime<BoundingSphere>;
+typedef BoundingSphereLike = EntityWithoutRuntime<Dynamic>;

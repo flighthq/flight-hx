@@ -18,7 +18,6 @@ import flighthq.types.InputGamepadData.InputGamepadConnectData;
 import flighthq.types.InputKeyRepeatOptions;
 import flighthq.types.InputKeyRepeatTimer;
 import flighthq.types.InputKeyboardData;
-import flighthq.types.InputManager;
 import flighthq.types.InputManager.AttachInputOptions;
 import flighthq.types.InputPointerData;
 import flighthq.types.InputSignals;
@@ -66,7 +65,7 @@ class InputManager {
     _Runtime.setField(out, 'y', (y * scale));
   }
 
-  public static function attachGamepadInput(manager:InputManager, target:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachGamepadInput(manager:Dynamic, target:Dynamic, ?options:AttachInputOptions):Void {
     var onGamepadConnected:Dynamic = cast _Runtime.UNDEFINED;
     var onGamepadDisconnected:Dynamic = cast _Runtime.UNDEFINED;
     var rafId:Dynamic = cast _Runtime.UNDEFINED;
@@ -113,7 +112,7 @@ class InputManager {
     _Runtime.voidValue(options);
   }
 
-  public static function attachKeyboardInput(manager:InputManager, target:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachKeyboardInput(manager:Dynamic, target:Dynamic, ?options:AttachInputOptions):Void {
     var preventDefault:Dynamic = cast _Runtime.UNDEFINED;
     var onKeyDown:Dynamic = cast _Runtime.UNDEFINED;
     var onKeyUp:Dynamic = cast _Runtime.UNDEFINED;
@@ -142,7 +141,7 @@ class InputManager {
     }] : Array<Dynamic>));
   }
 
-  public static function attachPointerInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachPointerInput(manager:Dynamic, element:Dynamic, ?options:AttachInputOptions):Void {
     var preventDefault:Dynamic = cast _Runtime.UNDEFINED;
     var onContextMenu:Dynamic = cast _Runtime.UNDEFINED;
     var onPointerCancel:Dynamic = cast _Runtime.UNDEFINED;
@@ -191,7 +190,7 @@ class InputManager {
     }] : Array<Dynamic>));
   }
 
-  public static function attachRelativePointerInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachRelativePointerInput(manager:Dynamic, element:Dynamic, ?options:AttachInputOptions):Void {
     var preventDefault:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     var handler:Dynamic = cast _Runtime.UNDEFINED;
@@ -209,7 +208,7 @@ class InputManager {
     _Runtime.callValue(InputManager.setInputBinding__inputManager, cast ([manager, element, InputManager.kRelativePointerInput__inputManager, function() return _Runtime.callProperty(target, 'removeEventListener', cast (['mousemove', handler] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  public static function attachTextInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachTextInput(manager:Dynamic, element:Dynamic, ?options:AttachInputOptions):Void {
     var onBeforeInput:Dynamic = cast _Runtime.UNDEFINED;
     var onCompositionUpdate:Dynamic = cast _Runtime.UNDEFINED;
     onBeforeInput = function(e:Dynamic) {
@@ -241,7 +240,7 @@ class InputManager {
     _Runtime.voidValue(options);
   }
 
-  public static function attachWheelInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachWheelInput(manager:Dynamic, element:Dynamic, ?options:AttachInputOptions):Void {
     var preventDefault:Dynamic = cast _Runtime.UNDEFINED;
     var handler:Dynamic = cast _Runtime.UNDEFINED;
     preventDefault = _Runtime.coalesce(_Runtime.optionalField(options, 'preventDefault'), function():Dynamic return cast true);
@@ -258,7 +257,7 @@ class InputManager {
     _Runtime.callValue(InputManager.setInputBinding__inputManager, cast ([manager, element, InputManager.kWheelInput__inputManager, function() return _Runtime.callProperty(element, 'removeEventListener', cast (['wheel', handler] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  public static function connectInputStateToInputManager(state:InputState, manager:InputManager):Dynamic {
+  public static function connectInputStateToInputManager(state:InputState, manager:Dynamic):Dynamic {
     var onKeyDown:Dynamic = cast _Runtime.UNDEFINED;
     var onKeyUp:Dynamic = cast _Runtime.UNDEFINED;
     var onPointerDown:Dynamic = cast _Runtime.UNDEFINED;
@@ -403,7 +402,7 @@ class InputManager {
     return cast null;
   }
 
-  public static function createInputManager():InputManager {
+  public static function createInputManager():Dynamic {
     return cast _Runtime.mergeObjects([_Runtime.callValue(createInputSignals, cast ([] : Array<Dynamic>)), { enabled: true }]);
     return cast null;
   }
@@ -418,27 +417,27 @@ class InputManager {
     return cast null;
   }
 
-  public static function detachGamepadInput(manager:InputManager, target:Dynamic):Void {
+  public static function detachGamepadInput(manager:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(InputManager.clearInputBinding__inputManager, cast ([manager, target, InputManager.kGamepadInput__inputManager] : Array<Dynamic>));
   }
 
-  public static function detachKeyboardInput(manager:InputManager, target:Dynamic):Void {
+  public static function detachKeyboardInput(manager:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(InputManager.clearInputBinding__inputManager, cast ([manager, target, InputManager.kKeyboardInput__inputManager] : Array<Dynamic>));
   }
 
-  public static function detachPointerInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachPointerInput(manager:Dynamic, element:Dynamic):Void {
     _Runtime.callValue(InputManager.clearInputBinding__inputManager, cast ([manager, element, InputManager.kPointerInput__inputManager] : Array<Dynamic>));
   }
 
-  public static function detachRelativePointerInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachRelativePointerInput(manager:Dynamic, element:Dynamic):Void {
     _Runtime.callValue(InputManager.clearInputBinding__inputManager, cast ([manager, element, InputManager.kRelativePointerInput__inputManager] : Array<Dynamic>));
   }
 
-  public static function detachTextInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachTextInput(manager:Dynamic, element:Dynamic):Void {
     _Runtime.callValue(InputManager.clearInputBinding__inputManager, cast ([manager, element, InputManager.kTextInput__inputManager] : Array<Dynamic>));
   }
 
-  public static function detachWheelInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachWheelInput(manager:Dynamic, element:Dynamic):Void {
     _Runtime.callValue(InputManager.clearInputBinding__inputManager, cast ([manager, element, InputManager.kWheelInput__inputManager] : Array<Dynamic>));
   }
 
@@ -536,7 +535,7 @@ class InputManager {
     return cast null;
   }
 
-  public static function pollGamepadInput(manager:InputManager):Void {
+  public static function pollGamepadInput(manager:Dynamic):Void {
     var now:Dynamic = cast _Runtime.UNDEFINED;
     var prev:Dynamic = cast _Runtime.UNDEFINED;
     var gamepads:Dynamic = cast _Runtime.UNDEFINED;
@@ -705,7 +704,7 @@ class InputManager {
 
   public static final _gamepadPollStates__inputManager:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  public static function getOrCreateGamepadPollState__inputManager(manager:InputManager):GamepadPollState__inputManager {
+  public static function getOrCreateGamepadPollState__inputManager(manager:Dynamic):GamepadPollState__inputManager {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callProperty(InputManager._gamepadPollStates__inputManager, 'get', cast ([manager] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -736,7 +735,7 @@ class InputManager {
 
   public static final _inputBindings__inputManager:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  public static function clearInputBinding__inputManager(manager:InputManager, target:Dynamic, kind:Dynamic):Void {
+  public static function clearInputBinding__inputManager(manager:Dynamic, target:Dynamic, kind:Dynamic):Void {
     var byKind:Dynamic = cast _Runtime.UNDEFINED;
     var cleanup:Dynamic = cast _Runtime.UNDEFINED;
     byKind = _Runtime.callOptionalProperty(_Runtime.callProperty(InputManager._inputBindings__inputManager, 'get', cast ([manager] : Array<Dynamic>)), 'get', cast ([target] : Array<Dynamic>));
@@ -746,7 +745,7 @@ class InputManager {
     _Runtime.callProperty(byKind, 'delete', cast ([kind] : Array<Dynamic>));
   }
 
-  public static function setInputBinding__inputManager(manager:InputManager, target:Dynamic, kind:Dynamic, cleanup:Dynamic):Void {
+  public static function setInputBinding__inputManager(manager:Dynamic, target:Dynamic, kind:Dynamic, cleanup:Dynamic):Void {
     var byTarget:Dynamic = cast _Runtime.UNDEFINED;
     var byKind:Dynamic = cast _Runtime.UNDEFINED;
     byTarget = _Runtime.callProperty(InputManager._inputBindings__inputManager, 'get', cast ([manager] : Array<Dynamic>));

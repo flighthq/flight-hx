@@ -10,15 +10,11 @@ import flighthq.effectsWgpu.WgpuEffectPass.clearWgpuEffectTarget;
 import flighthq.effectsWgpu.WgpuEffectTintShader.applyWgpuEffectTintPass;
 import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
-import flighthq.types.OuterGlowEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
-import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget;
-import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
 @:expose("flighthq.effectsWgpu.WgpuOuterGlowEffect")
 class WgpuOuterGlowEffect {
-  public static function applyOuterGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:OuterGlowEffect):Void {
+  public static function applyOuterGlowEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     var src:Dynamic = cast _Runtime.UNDEFINED;
     var dst:Dynamic = cast _Runtime.UNDEFINED;
     var descriptor:Dynamic = cast _Runtime.UNDEFINED;
@@ -32,8 +28,8 @@ class WgpuOuterGlowEffect {
     var sourceMode:Dynamic = cast _Runtime.UNDEFINED;
     var tintStrength:Dynamic = cast _Runtime.UNDEFINED;
     var glowPasses:Dynamic = cast _Runtime.UNDEFINED;
-    src = (cast source : WgpuRenderTarget);
-    dst = (cast dest : WgpuRenderTarget);
+    src = (cast source : Dynamic);
+    dst = (cast dest : Dynamic);
     descriptor = { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') };
     mask = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     blurred = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
@@ -66,6 +62,6 @@ class WgpuOuterGlowEffect {
   }
 
   public static final defaultWgpuOuterGlowEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyOuterGlowEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : OuterGlowEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyOuterGlowEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 }

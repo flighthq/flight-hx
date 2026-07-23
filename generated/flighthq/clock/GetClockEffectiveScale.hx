@@ -3,13 +3,12 @@ package flighthq.clock;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Clock;
 
 @:expose("flighthq.clock.GetClockEffectiveScale")
 class GetClockEffectiveScale {
-  public static function getClockEffectiveScale(clock:Clock):Float {
+  public static function getClockEffectiveScale(clock:Dynamic):Float {
     var scale:Dynamic = cast _Runtime.UNDEFINED;
-    var current:Null<Clock> = cast _Runtime.UNDEFINED;
+    var current:Null<Dynamic> = cast _Runtime.UNDEFINED;
     scale = _Runtime.field(clock, 'scale');
     current = _Runtime.field(clock, 'parent');
     while (_Runtime.truthy(!_Runtime.strictEquals(current, null))) {

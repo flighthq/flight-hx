@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 
-typedef TextureAtlas = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var image:Null<ImageResource>; var regions:Array<TextureAtlasRegion>; };
+typedef TextureAtlas = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var image:Null<Dynamic>; var regions:Array<Dynamic>; };

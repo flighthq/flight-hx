@@ -4,13 +4,12 @@ package flighthq.surface;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SurfaceEdgeMode;
-import flighthq.types.SurfaceRegion;
 
 typedef SurfaceConvolutionOptions = { @:optional var bias:Float; @:optional var edge:SurfaceEdgeMode; @:optional var divisor:Float; var matrix:Array<Float>; var matrixX:Float; var matrixY:Float; @:optional var preserveAlpha:Bool; };
 
 @:expose("flighthq.surface.SurfaceConvolution")
 class SurfaceConvolution {
-  public static function convolveSurface(out:Dynamic, source:SurfaceRegion, options:SurfaceConvolutionOptions):Void {
+  public static function convolveSurface(out:Dynamic, source:Dynamic, options:SurfaceConvolutionOptions):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var matrix:Dynamic = cast _Runtime.UNDEFINED;
     var matrixX:Dynamic = cast _Runtime.UNDEFINED;

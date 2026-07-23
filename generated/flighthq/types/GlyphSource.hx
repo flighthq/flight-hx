@@ -20,6 +20,6 @@ typedef GlyphAtlasOptions = { var fontFamily:String; var fontSize:Float; var hei
 
 typedef GlyphAtlasShelf = { var cursorX:Float; var height:Float; var y:Float; };
 
-typedef GlyphAtlasRuntime = { var bitmaps:Dynamic; var dirty:Bool; var dirtyMaxX:Float; var dirtyMaxY:Float; var dirtyMinX:Float; var dirtyMinY:Float; var entries:Dynamic; var lru:Array<Float>; var maxGlyphs:Float; var metrics:GlyphMetrics; var packBottom:Float; var padding:Float; var rasterizeOptions:GlyphRasterizeOptions; var shelves:Array<GlyphAtlasShelf>; var surface:Surface; };
+typedef GlyphAtlasRuntime = { var bitmaps:Dynamic; var dirty:Bool; var dirtyMaxX:Float; var dirtyMaxY:Float; var dirtyMinX:Float; var dirtyMinY:Float; var entries:Dynamic; var lru:Array<Float>; var maxGlyphs:Float; var metrics:GlyphMetrics; var packBottom:Float; var padding:Float; var rasterizeOptions:GlyphRasterizeOptions; var shelves:Array<GlyphAtlasShelf>; var surface:Dynamic; };
 
 typedef GlyphAtlas = { var runtime:GlyphAtlasRuntime; };

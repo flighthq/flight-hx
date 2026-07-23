@@ -3,15 +3,14 @@ package flighthq.clock;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Clock;
 
 @:expose("flighthq.clock.PauseClock")
 class PauseClock {
-  public static function pauseClock(clock:Clock):Void {
+  public static function pauseClock(clock:Dynamic):Void {
     _Runtime.setField(clock, 'paused', true);
   }
 
-  public static function resumeClock(clock:Clock):Void {
+  public static function resumeClock(clock:Dynamic):Void {
     _Runtime.setField(clock, 'paused', false);
   }
 }

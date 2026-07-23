@@ -11,7 +11,6 @@ import flighthq.particlesFormats.UnitySchema.UnityColor;
 import flighthq.particlesFormats.UnitySchema.UnityGradient;
 import flighthq.particlesFormats.UnitySchema.UnityMinMaxValue;
 import flighthq.particlesFormats.UnitySchema.UnityParticleDocument;
-import flighthq.types.ParticleEmitterConfig;
 
 typedef UnitySerializeOptions = { @:optional var pixelsPerUnit:Float; };
 
@@ -37,7 +36,7 @@ class UnitySerialize {
     return cast null;
   }
 
-  public static function configToDocument__unitySerialize(config:ParticleEmitterConfig, existing:Dynamic, ppu:Float):UnityParticleDocument {
+  public static function configToDocument__unitySerialize(config:Dynamic, existing:Dynamic, ppu:Float):UnityParticleDocument {
     var rotSpeedDegLow:Dynamic = cast _Runtime.UNDEFINED;
     var rotSpeedDegHigh:Dynamic = cast _Runtime.UNDEFINED;
     var hasRotation:Dynamic = cast _Runtime.UNDEFINED;
@@ -71,7 +70,7 @@ class UnitySerialize {
     return cast null;
   }
 
-  public static function buildGradient__unitySerialize(config:ParticleEmitterConfig):UnityGradient {
+  public static function buildGradient__unitySerialize(config:Dynamic):UnityGradient {
     var colorKeys:Dynamic = cast _Runtime.UNDEFINED;
     var alphaKeys:Dynamic = cast _Runtime.UNDEFINED;
     colorKeys = _Runtime.select(_Runtime.field(config, 'colorCurve'), function():Dynamic return cast _Runtime.callProperty(_Runtime.callValue(particleColorCurveToKeyframes, cast ([_Runtime.field(config, 'colorCurve')] : Array<Dynamic>)), 'map', cast ([function(k:Dynamic) return { time: _Runtime.field(k, 'time'), color: { r: _Runtime.field(k, 'r'), g: _Runtime.field(k, 'g'), b: _Runtime.field(k, 'b') } }] : Array<Dynamic>)), function():Dynamic return cast cast ([{ time: 0.0, color: { r: _Runtime.field(config, 'colorStartR'), g: _Runtime.field(config, 'colorStartG'), b: _Runtime.field(config, 'colorStartB') } }, { time: 1.0, color: { r: _Runtime.field(config, 'colorEndR'), g: _Runtime.field(config, 'colorEndG'), b: _Runtime.field(config, 'colorEndB') } }] : Array<Dynamic>));
@@ -85,7 +84,7 @@ class UnitySerialize {
     return cast null;
   }
 
-  public static function serializeUnityParticle(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:UnitySerializeOptions):String {
+  public static function serializeUnityParticle(config:Dynamic, ?existing:Dynamic, ?options:UnitySerializeOptions):String {
     var ppu:Dynamic = cast _Runtime.UNDEFINED;
     var doc:Dynamic = cast _Runtime.UNDEFINED;
     ppu = _Runtime.coalesce(_Runtime.optionalField(options, 'pixelsPerUnit'), function():Dynamic return cast UnitySerialize.DEFAULT_PPU__unitySerialize);
@@ -94,7 +93,7 @@ class UnitySerialize {
     return cast null;
   }
 
-  public static function serializeUnityParticleDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:UnitySerializeOptions):ParticleSerializeResult {
+  public static function serializeUnityParticleDocument(config:Dynamic, ?existing:Dynamic, ?options:UnitySerializeOptions):ParticleSerializeResult {
     var text:Dynamic = cast _Runtime.UNDEFINED;
     var warnings:Dynamic = cast _Runtime.UNDEFINED;
     text = _Runtime.callValue(serializeUnityParticle, cast ([config, existing, options] : Array<Dynamic>));
@@ -103,7 +102,7 @@ class UnitySerialize {
     return cast null;
   }
 
-  public static function collectUnitySerializeWarnings__unitySerialize(config:ParticleEmitterConfig):Array<String> {
+  public static function collectUnitySerializeWarnings__unitySerialize(config:Dynamic):Array<String> {
     var warnings:Array<String> = cast _Runtime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(config, 'colorEndVarianceR'), 0.0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(config, 'colorEndVarianceG'), 0.0)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(config, 'colorEndVarianceB'), 0.0)))) {

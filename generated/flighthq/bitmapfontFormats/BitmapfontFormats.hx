@@ -6,27 +6,26 @@ import flighthq._internal._Runtime;
 import flighthq.bitmapfontFormats.BitmapFontFnt as Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontFnt;
 import flighthq.bitmapfontFormats.BitmapFontJson as Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontJson;
 import flighthq.bitmapfontFormats.BitmapFontXml as Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontXml;
-import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontParseOptions;
 
 @:expose("flighthq.bitmapfontFormats.BitmapfontFormats")
 class BitmapfontFormats {
-  public static function formatBitmapFontFnt(font:BitmapFont):String {
+  public static function formatBitmapFontFnt(font:Dynamic):String {
     return cast _Runtime.callValue(Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontFnt.formatBitmapFontFnt, cast ([font] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseBitmapFontFnt(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
+  public static function parseBitmapFontFnt(text:String, ?options:BitmapFontParseOptions):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontFnt.parseBitmapFontFnt, cast ([text, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseBitmapFontJson(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
+  public static function parseBitmapFontJson(text:String, ?options:BitmapFontParseOptions):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontJson.parseBitmapFontJson, cast ([text, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseBitmapFontXml(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
+  public static function parseBitmapFontXml(text:String, ?options:BitmapFontParseOptions):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontXml.parseBitmapFontXml, cast ([text, options] : Array<Dynamic>));
     return cast null;
   }

@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ScreenSpaceFogEffect;
 
 @:expose("flighthq.effects.ScreenSpaceFogEffect")
 class ScreenSpaceFogEffect {
-  public static function createScreenSpaceFogEffect(?options:Dynamic):ScreenSpaceFogEffect {
+  public static function createScreenSpaceFogEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'ScreenSpaceFogEffect' }, options]);
     return cast null;

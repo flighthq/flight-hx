@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef Skin = { var skeleton:Skeleton3D; @:optional var skeletonRoot:Null<SceneNode>; };
+typedef Skin = { var skeleton:Skeleton3D; @:optional var skeletonRoot:Null<Dynamic>; };

@@ -3,12 +3,11 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.CompositeEffect;
 import flighthq.types.CompositeOperator;
 
 @:expose("flighthq.effects.CompositeEffect")
 class CompositeEffect {
-  public static function createCompositeEffect(operator_:CompositeOperator, ?options:Dynamic):CompositeEffect {
+  public static function createCompositeEffect(operator_:CompositeOperator, ?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'CompositeEffect' }, _Runtime.objectFromPairs([{ key: 'operator', value: operator_ }]), options]);
     return cast null;

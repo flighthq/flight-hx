@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 
 typedef TextInputSource = Dynamic;
 
-typedef TextInputManager = { var enabled:Bool; var focused:Null<RichText>; };
+typedef TextInputManager = { var enabled:Bool; var focused:Null<Dynamic>; };

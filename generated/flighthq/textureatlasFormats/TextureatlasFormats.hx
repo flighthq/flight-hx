@@ -12,7 +12,6 @@ import flighthq.textureatlasFormats.TextureAtlasPackerParse.TextureAtlasPackerPa
 import flighthq.textureatlasFormats.TextureAtlasPackerSchema.TextureAtlasPackerDocument;
 import flighthq.textureatlasFormats.TextureAtlasStarlingParse as Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasStarlingParse;
 import flighthq.textureatlasFormats.TextureAtlasStarlingParse.TextureAtlasStarlingParseOptions;
-import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasFormatKind;
 
 @:expose("flighthq.textureatlasFormats.TextureatlasFormats")
@@ -22,32 +21,32 @@ class TextureatlasFormats {
     return cast null;
   }
 
-  public static function parseTextureAtlasAsepriteDocument(doc:TextureAtlasAsepriteDocument, atlas:TextureAtlas):TextureAtlas {
+  public static function parseTextureAtlasAsepriteDocument(doc:TextureAtlasAsepriteDocument, atlas:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasAsepriteParse.parseTextureAtlasAsepriteDocument, cast ([doc, atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseTextureAtlasAsepriteJson(json:String, atlas:TextureAtlas):TextureAtlas {
+  public static function parseTextureAtlasAsepriteJson(json:String, atlas:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasAsepriteParse.parseTextureAtlasAsepriteJson, cast ([json, atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseTextureAtlasLibgdxAtlas(text:String, atlas:TextureAtlas):TextureAtlas {
+  public static function parseTextureAtlasLibgdxAtlas(text:String, atlas:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasLibgdxParse.parseTextureAtlasLibgdxAtlas, cast ([text, atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseTextureAtlasPackerDocument(doc:TextureAtlasPackerDocument, atlas:TextureAtlas, ?options:TextureAtlasPackerParseOptions):TextureAtlas {
+  public static function parseTextureAtlasPackerDocument(doc:TextureAtlasPackerDocument, atlas:Dynamic, ?options:TextureAtlasPackerParseOptions):Dynamic {
     return cast _Runtime.callValue(Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasPackerParse.parseTextureAtlasPackerDocument, cast ([doc, atlas, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseTextureAtlasPackerJson(json:String, atlas:TextureAtlas, ?options:TextureAtlasPackerParseOptions):TextureAtlas {
+  public static function parseTextureAtlasPackerJson(json:String, atlas:Dynamic, ?options:TextureAtlasPackerParseOptions):Dynamic {
     return cast _Runtime.callValue(Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasPackerParse.parseTextureAtlasPackerJson, cast ([json, atlas, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseTextureAtlasStarlingXml(xml:String, atlas:TextureAtlas, ?_options:TextureAtlasStarlingParseOptions):TextureAtlas {
+  public static function parseTextureAtlasStarlingXml(xml:String, atlas:Dynamic, ?_options:TextureAtlasStarlingParseOptions):Dynamic {
     return cast _Runtime.callValue(Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasStarlingParse.parseTextureAtlasStarlingXml, cast ([xml, atlas, _options] : Array<Dynamic>));
     return cast null;
   }

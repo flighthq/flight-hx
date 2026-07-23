@@ -11,11 +11,10 @@ import flighthq.path.Path.appendPathCurveTo;
 import flighthq.path.Path.appendPathLineTo;
 import flighthq.path.Path.appendPathMoveTo;
 import flighthq.path.Path.createPath;
-import flighthq.types.Path;
 
 @:expose("flighthq.pathFormats.SvgPathData")
 class SvgPathData {
-  public static function appendSvgPathData(path:Path, d:String):Bool {
+  public static function appendSvgPathData(path:Dynamic, d:String):Bool {
     var length:Dynamic = cast _Runtime.UNDEFINED;
     var pos:Dynamic = cast _Runtime.UNDEFINED;
     var currentX:Dynamic = cast _Runtime.UNDEFINED;
@@ -246,7 +245,7 @@ class SvgPathData {
     return cast null;
   }
 
-  public static function formatSvgPathData(path:Path, ?options:{ @:optional var precision:Float; }):String {
+  public static function formatSvgPathData(path:Dynamic, ?options:{ @:optional var precision:Float; }):String {
     var precision:Dynamic = cast _Runtime.UNDEFINED;
     var parts:Array<String> = cast _Runtime.UNDEFINED;
     precision = _Runtime.optionalField(options, 'precision');
@@ -268,7 +267,7 @@ class SvgPathData {
     return cast null;
   }
 
-  public static function parseSvgPathData(d:String):Null<Path> {
+  public static function parseSvgPathData(d:String):Null<Dynamic> {
     var path:Dynamic = cast _Runtime.UNDEFINED;
     path = _Runtime.callValue(createPath, cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(appendSvgPathData, cast ([path, d] : Array<Dynamic>))))) { return cast null; }

@@ -7,11 +7,10 @@ import flighthq.geometry.Aabb.createAabb;
 import flighthq.mesh.MeshGeometryAttributes.getVertexAttributeFloatOffset;
 import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryBounds;
 import flighthq.types.Matrix4.Matrix4Like;
-import flighthq.types.MeshGeometry;
 
 @:expose("flighthq.mesh.MeshGeometryTransforms")
 class MeshGeometryTransforms {
-  public static function centerMeshGeometry(geometry:MeshGeometry):Void {
+  public static function centerMeshGeometry(geometry:Dynamic):Void {
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var cx:Dynamic = cast _Runtime.UNDEFINED;
     var cy:Dynamic = cast _Runtime.UNDEFINED;
@@ -29,16 +28,16 @@ class MeshGeometryTransforms {
     _Runtime.callValue(translateMeshGeometry, cast ([geometry, -cx, -cy, -cz] : Array<Dynamic>));
   }
 
-  public static function scaleMeshGeometry(geometry:MeshGeometry, sx:Float, sy:Float, sz:Float):Void {
+  public static function scaleMeshGeometry(geometry:Dynamic, sx:Float, sy:Float, sz:Float):Void {
     _Runtime.callValue(MeshGeometryTransforms.transformMeshGeometryPositions__meshGeometryTransforms, cast ([geometry, geometry, sx, sy, sz, 0.0, 0.0, 0.0] : Array<Dynamic>));
   }
 
-  public static function transformMeshGeometry(geometry:MeshGeometry, matrix:Matrix4Like):Bool {
+  public static function transformMeshGeometry(geometry:Dynamic, matrix:Matrix4Like):Bool {
     return cast _Runtime.callValue(transformMeshGeometryInto, cast ([geometry, geometry, matrix] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function transformMeshGeometryInto(out:MeshGeometry, source:MeshGeometry, matrix:Matrix4Like):Bool {
+  public static function transformMeshGeometryInto(out:Dynamic, source:Dynamic, matrix:Matrix4Like):Bool {
     var invT:Dynamic = cast _Runtime.UNDEFINED;
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var posFloatOffset:Dynamic = cast _Runtime.UNDEFINED;
@@ -123,7 +122,7 @@ class MeshGeometryTransforms {
     return cast null;
   }
 
-  public static function translateMeshGeometry(geometry:MeshGeometry, x:Float, y:Float, z:Float):Void {
+  public static function translateMeshGeometry(geometry:Dynamic, x:Float, y:Float, z:Float):Void {
     var posFloatOffset:Dynamic = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -213,7 +212,7 @@ class MeshGeometryTransforms {
     return cast null;
   }
 
-  public static function transformMeshGeometryPositions__meshGeometryTransforms(out:MeshGeometry, source:MeshGeometry, sx:Float, sy:Float, sz:Float, tx:Float, ty:Float, tz:Float):Void {
+  public static function transformMeshGeometryPositions__meshGeometryTransforms(out:Dynamic, source:Dynamic, sx:Float, sy:Float, sz:Float, tx:Float, ty:Float, tz:Float):Void {
     var posFloatOffset:Dynamic = cast _Runtime.UNDEFINED;
     var normFloatOffset:Dynamic = cast _Runtime.UNDEFINED;
     var tanFloatOffset:Dynamic = cast _Runtime.UNDEFINED;

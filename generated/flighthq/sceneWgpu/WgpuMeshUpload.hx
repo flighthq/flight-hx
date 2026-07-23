@@ -4,14 +4,12 @@ package flighthq.sceneWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
-import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshGeometryRuntime;
-import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 @:expose("flighthq.sceneWgpu.WgpuMeshUpload")
 class WgpuMeshUpload {
-  public static function ensureWgpuMeshUpload(state:WgpuRenderState, geometry:MeshGeometry):Null<Dynamic> {
+  public static function ensureWgpuMeshUpload(state:Dynamic, geometry:Dynamic):Null<Dynamic> {
     var indices:Dynamic = cast _Runtime.UNDEFINED;
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var upload:Dynamic = cast _Runtime.UNDEFINED;

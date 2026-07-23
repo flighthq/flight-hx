@@ -15,9 +15,7 @@ import flighthq.textinput.TextInputEditing.getTextInputSelectionRectangles;
 import flighthq.textlayout.RichTextMetrics.getRichTextScrollYOffset;
 import flighthq.textlayout.TextBounds.computeTextBoundsHeight;
 import flighthq.textlayout.TextBounds.computeTextBoundsWidth;
-import flighthq.types.CanvasRenderState;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RichText;
 import flighthq.types.TextSelectionRectangle;
 
 @:expose("flighthq.displayobjectCanvas.CanvasTextInput")
@@ -32,7 +30,7 @@ class CanvasTextInput {
     var scrollYOffset:Dynamic = cast _Runtime.UNDEFINED;
     var scrollXOffset:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;
-    source = (cast _Runtime.field(renderProxy, 'source') : RichText);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     input = _Runtime.callValue(getTextInputState, cast ([source] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(input, null))) { return; }
     layout = _Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([source] : Array<Dynamic>)), 'textLayout');

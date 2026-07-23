@@ -6,11 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
 import flighthq.particlesFormats.LibgdxSchema.LibgdxParticleDocument;
 import flighthq.particlesFormats.LibgdxSchema.LibgdxRangeValue;
-import flighthq.types.ParticleEmitterConfig;
 
 typedef LibgdxParseOptions = { @:optional var textureSize:Float; };
 
-typedef LibgdxParseResult = { var config:ParticleEmitterConfig; var document:LibgdxParticleDocument; var warnings:Array<String>; };
+typedef LibgdxParseResult = { var config:Dynamic; var document:LibgdxParticleDocument; var warnings:Array<String>; };
 
 typedef LibgdxParsed = LibgdxParseResult;
 
@@ -18,7 +17,7 @@ typedef LibgdxSection__libgdxParse = Dynamic;
 
 @:expose("flighthq.particlesFormats.LibgdxParse")
 class LibgdxParse {
-  public static function parseLibgdxParticle(text:String, ?options:LibgdxParseOptions):ParticleEmitterConfig {
+  public static function parseLibgdxParticle(text:String, ?options:LibgdxParseOptions):Dynamic {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var sections:Dynamic = cast _Runtime.UNDEFINED;
     var doc:Dynamic = cast _Runtime.UNDEFINED;
@@ -76,7 +75,7 @@ class LibgdxParse {
     return cast null;
   }
 
-  public static function documentToConfig__libgdxParse(doc:LibgdxParticleDocument, textureSize:Float):ParticleEmitterConfig {
+  public static function documentToConfig__libgdxParse(doc:LibgdxParticleDocument, textureSize:Float):Dynamic {
     var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
     var lifeMin:Dynamic = cast _Runtime.UNDEFINED;
     var lifeMax:Dynamic = cast _Runtime.UNDEFINED;

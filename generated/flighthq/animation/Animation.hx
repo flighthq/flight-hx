@@ -7,94 +7,91 @@ import flighthq.animation.AnimationClip as Facade_Animation_flighthq_animation_A
 import flighthq.animation.AnimationPlayer as Facade_Animation_flighthq_animation_AnimationPlayer;
 import flighthq.animation.AnimationTrack as Facade_Animation_flighthq_animation_AnimationTrack;
 import flighthq.types.AnimationChannel;
-import flighthq.types.AnimationClip;
 import flighthq.types.AnimationInterpolation;
 import flighthq.types.AnimationLoopMode;
-import flighthq.types.AnimationPlayer;
-import flighthq.types.AnimationTrack;
 import flighthq.types.AnimationTrackValidationDiagnostic;
 
 @:expose("flighthq.animation.Animation")
 class Animation {
-  public static function advanceAnimationPlayer(player:AnimationPlayer, dt:Float):Void {
+  public static function advanceAnimationPlayer(player:Dynamic, dt:Float):Void {
     _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationPlayer.advanceAnimationPlayer, cast ([player, dt] : Array<Dynamic>));
   }
 
-  public static function cloneAnimationClip(clip:AnimationClip):AnimationClip {
+  public static function cloneAnimationClip(clip:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationClip.cloneAnimationClip, cast ([clip] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneAnimationPlayer(player:AnimationPlayer):AnimationPlayer {
+  public static function cloneAnimationPlayer(player:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationPlayer.cloneAnimationPlayer, cast ([player] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneAnimationTrack(track:AnimationTrack):AnimationTrack {
+  public static function cloneAnimationTrack(track:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationTrack.cloneAnimationTrack, cast ([track] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createAnimationChannel(track:AnimationTrack, targetRef:Dynamic):AnimationChannel {
+  public static function createAnimationChannel(track:Dynamic, targetRef:Dynamic):AnimationChannel {
     return cast _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationClip.createAnimationChannel, cast ([track, targetRef] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float):AnimationClip {
+  public static function createAnimationClip(channels:Array<AnimationChannel>, ?duration:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationClip.createAnimationClip, cast ([channels, duration] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createAnimationPlayer(clip:AnimationClip, ?opts:{ @:optional var loop:Bool; @:optional var loopMode:AnimationLoopMode; @:optional var playing:Bool; @:optional var repeatCount:Float; @:optional var speed:Float; @:optional var time:Float; }):AnimationPlayer {
+  public static function createAnimationPlayer(clip:Dynamic, ?opts:{ @:optional var loop:Bool; @:optional var loopMode:AnimationLoopMode; @:optional var playing:Bool; @:optional var repeatCount:Float; @:optional var speed:Float; @:optional var time:Float; }):Dynamic {
     return cast _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationPlayer.createAnimationPlayer, cast ([clip, opts] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createAnimationTrack(opts:{ var times:Dynamic; var values:Dynamic; @:optional var components:Float; @:optional var interpolation:AnimationInterpolation; @:optional var quaternion:Bool; @:optional var easing:Dynamic; }):AnimationTrack {
+  public static function createAnimationTrack(opts:{ var times:Dynamic; var values:Dynamic; @:optional var components:Float; @:optional var interpolation:AnimationInterpolation; @:optional var quaternion:Bool; @:optional var easing:Dynamic; }):Dynamic {
     return cast _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationTrack.createAnimationTrack, cast ([opts] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function enableAnimationPlayerSignals(player:AnimationPlayer):Void {
+  public static function enableAnimationPlayerSignals(player:Dynamic):Void {
     _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationPlayer.enableAnimationPlayerSignals, cast ([player] : Array<Dynamic>));
   }
 
-  public static function getAnimationClipDuration(clip:AnimationClip):Float {
+  public static function getAnimationClipDuration(clip:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationClip.getAnimationClipDuration, cast ([clip] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getAnimationPlayerNormalizedTime(player:AnimationPlayer):Float {
+  public static function getAnimationPlayerNormalizedTime(player:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationPlayer.getAnimationPlayerNormalizedTime, cast ([player] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function playAnimationPlayer(player:AnimationPlayer):Void {
+  public static function playAnimationPlayer(player:Dynamic):Void {
     _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationPlayer.playAnimationPlayer, cast ([player] : Array<Dynamic>));
   }
 
-  public static function sampleAnimationClip(out:Dynamic, clip:AnimationClip, time:Float, visit:Dynamic):Void {
+  public static function sampleAnimationClip(out:Dynamic, clip:Dynamic, time:Float, visit:Dynamic):Void {
     _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationClip.sampleAnimationClip, cast ([out, clip, time, visit] : Array<Dynamic>));
   }
 
-  public static function sampleAnimationTrack(out:Dynamic, track:AnimationTrack, t:Float):Void {
+  public static function sampleAnimationTrack(out:Dynamic, track:Dynamic, t:Float):Void {
     _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationTrack.sampleAnimationTrack, cast ([out, track, t] : Array<Dynamic>));
   }
 
-  public static function seekAnimationPlayer(player:AnimationPlayer, time:Float):Void {
+  public static function seekAnimationPlayer(player:Dynamic, time:Float):Void {
     _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationPlayer.seekAnimationPlayer, cast ([player, time] : Array<Dynamic>));
   }
 
-  public static function stopAnimationPlayer(player:AnimationPlayer):Void {
+  public static function stopAnimationPlayer(player:Dynamic):Void {
     _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationPlayer.stopAnimationPlayer, cast ([player] : Array<Dynamic>));
   }
 
-  public static function trimAnimationTrack(track:AnimationTrack, startTime:Float, endTime:Float):AnimationTrack {
+  public static function trimAnimationTrack(track:Dynamic, startTime:Float, endTime:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationTrack.trimAnimationTrack, cast ([track, startTime, endTime] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function validateAnimationTrack(track:AnimationTrack):Null<Array<AnimationTrackValidationDiagnostic>> {
+  public static function validateAnimationTrack(track:Dynamic):Null<Array<AnimationTrackValidationDiagnostic>> {
     return cast _Runtime.callValue(Facade_Animation_flighthq_animation_AnimationTrack.validateAnimationTrack, cast ([track] : Array<Dynamic>));
     return cast null;
   }

@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.FxaaEffect;
 
 @:expose("flighthq.effects.FxaaEffect")
 class FxaaEffect {
-  public static function createFxaaEffect(?options:Dynamic):FxaaEffect {
+  public static function createFxaaEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'FxaaEffect' }, options]);
     return cast null;

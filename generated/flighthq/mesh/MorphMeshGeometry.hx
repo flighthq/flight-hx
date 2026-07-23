@@ -4,13 +4,12 @@ package flighthq.mesh;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.mesh.MeshGeometryAttributes.getVertexAttributeFloatOffset;
-import flighthq.types.MeshGeometry;
 import flighthq.types.MeshMorphBindPose;
 import flighthq.types.MorphTarget.MeshMorph;
 
 @:expose("flighthq.mesh.MorphMeshGeometry")
 class MorphMeshGeometry {
-  public static function blendMeshGeometryMorph(geometry:MeshGeometry, morph:MeshMorph, bindPose:MeshMorphBindPose):Void {
+  public static function blendMeshGeometryMorph(geometry:Dynamic, morph:MeshMorph, bindPose:MeshMorphBindPose):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var blendedNormals:Dynamic = cast _Runtime.UNDEFINED;
     var blendedPositions:Dynamic = cast _Runtime.UNDEFINED;
@@ -94,7 +93,7 @@ class MorphMeshGeometry {
     _Runtime.incrementField(geometry, 'version', 1, true);
   }
 
-  public static function captureMeshMorphBindPose(geometry:MeshGeometry):MeshMorphBindPose {
+  public static function captureMeshMorphBindPose(geometry:Dynamic):MeshMorphBindPose {
     var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     var vertices:Dynamic = cast _Runtime.UNDEFINED;

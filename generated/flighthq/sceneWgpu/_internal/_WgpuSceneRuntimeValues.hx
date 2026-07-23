@@ -6,15 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.sceneWgpu.WgpuMeshPipeline;
 import flighthq.sceneWgpu.WgpuSceneRuntime;
 import flighthq.types.Entity.Kind;
-import flighthq.types.Matrix4;
 import flighthq.types.WgpuMeshMaterialRenderer;
-import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 @:expose("flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues")
 class _WgpuSceneRuntimeValues {
-  public static function getWgpuSceneRuntime(state:WgpuRenderState):WgpuSceneRuntime {
+  public static function getWgpuSceneRuntime(state:Dynamic):WgpuSceneRuntime {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     stateRuntime = (cast _Runtime.getIndex(state, EntityRuntimeKey) : WgpuRenderStateRuntime);

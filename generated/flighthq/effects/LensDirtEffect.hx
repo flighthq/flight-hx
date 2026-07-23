@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.LensDirtEffect;
 
 @:expose("flighthq.effects.LensDirtEffect")
 class LensDirtEffect {
-  public static function createLensDirtEffect(?options:Dynamic):LensDirtEffect {
+  public static function createLensDirtEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'LensDirtEffect' }, options]);
     return cast null;

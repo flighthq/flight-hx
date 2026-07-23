@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.displayobjectWgpu.WgpuSpriteBatch.flushWgpuSpriteBatch;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuShapeMeshBuffers;
 import flighthq.types.WgpuRenderState.WgpuShapeMeshPipeline;
 

@@ -4,12 +4,10 @@ package flighthq.renderGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
 
 @:expose("flighthq.renderGl.GlReadback")
 class GlReadback {
-  public static function readGlRenderTargetPixels(state:GlRenderState, target:GlRenderTarget, x:Float, y:Float, width:Float, height:Float, out:Dynamic):Bool {
+  public static function readGlRenderTargetPixels(state:Dynamic, target:Dynamic, x:Float, y:Float, width:Float, height:Float, out:Dynamic):Bool {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var readFbo:Dynamic = cast _Runtime.UNDEFINED;

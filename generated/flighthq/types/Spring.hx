@@ -8,6 +8,6 @@ typedef Spring = { var value:Float; var velocity:Float; };
 
 typedef SpringConfig = { var dampingRatio:Float; var frequency:Float; };
 
-typedef Spring2D = { var x:Spring; var y:Spring; };
+typedef Spring2D = { var x:Dynamic; var y:Dynamic; };
 
-typedef Spring3D = { var x:Spring; var y:Spring; var z:Spring; };
+typedef Spring3D = { var x:Dynamic; var y:Dynamic; var z:Dynamic; };

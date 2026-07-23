@@ -4,26 +4,25 @@ package flighthq.textbidi;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Bidi.BidiClass;
-import flighthq.types.Bidi.BidiClassBackend;
 
 @:expose("flighthq.textbidi.BidiClassBackend")
 class BidiClassBackend {
-  public static function createCompactBidiClassBackend():BidiClassBackend {
+  public static function createCompactBidiClassBackend():Dynamic {
     return cast { getBidiClass: BidiClassBackend.getCompactBidiClass__bidiClassBackend };
     return cast null;
   }
 
-  public static function getBidiClassBackend():BidiClassBackend {
+  public static function getBidiClassBackend():Dynamic {
     if (_Runtime.truthy(_Runtime.strictEquals(BidiClassBackend._backend__bidiClassBackend, null))) { (BidiClassBackend._backend__bidiClassBackend = cast (_Runtime.callValue(createCompactBidiClassBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast BidiClassBackend._backend__bidiClassBackend;
     return cast null;
   }
 
-  public static function setBidiClassBackend(backend:Null<BidiClassBackend>):Void {
+  public static function setBidiClassBackend(backend:Null<Dynamic>):Void {
     (BidiClassBackend._backend__bidiClassBackend = cast (backend : Dynamic));
   }
 
-  public static var _backend__bidiClassBackend:Null<BidiClassBackend> = _Runtime.explicitNull();
+  public static var _backend__bidiClassBackend:Null<Dynamic> = _Runtime.explicitNull();
 
   public static function getCompactBidiClass__bidiClassBackend(codepoint:Float):BidiClass {
     var lo:Dynamic = cast _Runtime.UNDEFINED;

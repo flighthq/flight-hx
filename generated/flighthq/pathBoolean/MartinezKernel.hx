@@ -3,7 +3,6 @@ package flighthq.pathBoolean;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.PathBooleanBackend;
 import flighthq.types.PathBooleanBackend.PathBooleanContour;
 import flighthq.types.PathBooleanFillRule;
 import flighthq.types.PathBooleanOperation;
@@ -167,7 +166,7 @@ class EventHeap__martinezKernel {
 
 @:expose("flighthq.pathBoolean.MartinezKernel")
 class MartinezKernel {
-  public static function createMartinezPathBooleanBackend():PathBooleanBackend {
+  public static function createMartinezPathBooleanBackend():Dynamic {
     return cast { computePathBoolean: function(subject:Array<PathBooleanContour>, clip:Array<PathBooleanContour>, operation:PathBooleanOperation, fillRule:PathBooleanFillRule) {
       return cast _Runtime.callValue(MartinezKernel.computeMartinezBoolean__martinezKernel, cast ([subject, clip, operation, fillRule] : Array<Dynamic>));
     } };

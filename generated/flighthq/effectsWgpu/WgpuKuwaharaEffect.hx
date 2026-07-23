@@ -5,19 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
-import flighthq.types.KuwaharaEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
-import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.effectsWgpu.WgpuKuwaharaEffect")
 class WgpuKuwaharaEffect {
-  public static function applyKuwaharaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:KuwaharaEffect):Void {
+  public static function applyKuwaharaEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     var radius:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     radius = _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 3.0);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.kuwahara', WgpuKuwaharaEffect.KUWAHARA_FRAGMENT_WGSL__wgpuKuwaharaEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : Dynamic), (cast dest : Dynamic), pipeline, function(f32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, _Runtime.callProperty(HxMath, 'max', cast ([1.0, radius] : Array<Dynamic>)));
       _Runtime.setIndex(f32, 2.0, _Runtime.field(source, 'width'));
       _Runtime.setIndex(f32, 3.0, _Runtime.field(source, 'height'));
@@ -25,7 +22,7 @@ class WgpuKuwaharaEffect {
   }
 
   public static final defaultWgpuKuwaharaEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyKuwaharaEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : KuwaharaEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyKuwaharaEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static final KUWAHARA_FRAGMENT_WGSL__wgpuKuwaharaEffect:Dynamic = '\nstruct Uniforms {\n  u_radius : f32,\n  _pad0 : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nconst R : i32 = 4;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = 1.0 / uni.u_resolution;\n  let r = i32(min(f32(R), uni.u_radius));\n  var means : array<vec3f, 4>;\n  var vars : array<f32, 4>;\n  var lo = array<vec2i, 4>(vec2i(-1, -1), vec2i(0, -1), vec2i(-1, 0), vec2i(0, 0));\n  for (var q = 0; q < 4; q++) {\n    var sum = vec3f(0.0);\n    var sumSq = vec3f(0.0);\n    var n = 0.0;\n    for (var y = 0; y <= R; y++) {\n      for (var x = 0; x <= R; x++) {\n        if (x > r || y > r) { continue; }\n        let d = vec2i(x, y) * sign(lo[q] + vec2i(1)) + lo[q] * r;\n        let off = vec2f(f32(d.x), f32(d.y)) * texel;\n        let col = textureSampleLevel(tex, smp, uv + off, 0.0).rgb;\n        sum += col;\n        sumSq += col * col;\n        n += 1.0;\n      }\n    }\n    let mean = sum / n;\n    means[q] = mean;\n    let v = sumSq / n - mean * mean;\n    vars[q] = v.r + v.g + v.b;\n  }\n  var minVar = vars[0];\n  var result = means[0];\n  for (var q = 1; q < 4; q++) {\n    if (vars[q] < minVar) {\n      minVar = vars[q];\n      result = means[q];\n    }\n  }\n  return vec4f(result, textureSampleLevel(tex, smp, uv, 0.0).a);\n}';

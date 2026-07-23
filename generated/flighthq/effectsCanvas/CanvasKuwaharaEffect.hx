@@ -5,16 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.passthroughCanvasEffectPass;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
-import flighthq.types.CanvasRenderTarget;
-import flighthq.types.KuwaharaEffect;
 
 @:expose("flighthq.effectsCanvas.CanvasKuwaharaEffect")
 class CanvasKuwaharaEffect {
-  public static function applyKuwaharaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:KuwaharaEffect):Void {
+  public static function applyKuwaharaEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
   public static final defaultCanvasKuwaharaEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyKuwaharaEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : KuwaharaEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyKuwaharaEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 }

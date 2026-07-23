@@ -5,16 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.passthroughCanvasEffectPass;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
-import flighthq.types.CanvasRenderTarget;
-import flighthq.types.ToneMapEffect;
 
 @:expose("flighthq.effectsCanvas.CanvasToneMapEffect")
 class CanvasToneMapEffect {
-  public static function applyToneMapEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:ToneMapEffect):Void {
+  public static function applyToneMapEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
   public static final defaultCanvasToneMapEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyToneMapEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ToneMapEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyToneMapEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 }

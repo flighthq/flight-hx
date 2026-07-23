@@ -9,7 +9,6 @@ import flighthq.types.GamepadButtonKind;
 import flighthq.types.GamepadMappingKind;
 import flighthq.types.InputKeyRepeatOptions;
 import flighthq.types.InputKeyRepeatTimer;
-import flighthq.types.InputManager;
 import flighthq.types.InputManager.AttachInputOptions;
 import flighthq.types.InputSignals;
 import flighthq.types.InputState;
@@ -26,31 +25,31 @@ class Input {
     _Runtime.callValue(Facade_Input_flighthq_input_InputManager.applyGamepadStickDeadZone, cast ([out, x, y, deadZone] : Array<Dynamic>));
   }
 
-  public static function attachGamepadInput(manager:InputManager, target:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachGamepadInput(manager:Dynamic, target:Dynamic, ?options:AttachInputOptions):Void {
     _Runtime.callValue(Facade_Input_flighthq_input_InputManager.attachGamepadInput, cast ([manager, target, options] : Array<Dynamic>));
   }
 
-  public static function attachKeyboardInput(manager:InputManager, target:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachKeyboardInput(manager:Dynamic, target:Dynamic, ?options:AttachInputOptions):Void {
     _Runtime.callValue(Facade_Input_flighthq_input_InputManager.attachKeyboardInput, cast ([manager, target, options] : Array<Dynamic>));
   }
 
-  public static function attachPointerInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachPointerInput(manager:Dynamic, element:Dynamic, ?options:AttachInputOptions):Void {
     _Runtime.callValue(Facade_Input_flighthq_input_InputManager.attachPointerInput, cast ([manager, element, options] : Array<Dynamic>));
   }
 
-  public static function attachRelativePointerInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachRelativePointerInput(manager:Dynamic, element:Dynamic, ?options:AttachInputOptions):Void {
     _Runtime.callValue(Facade_Input_flighthq_input_InputManager.attachRelativePointerInput, cast ([manager, element, options] : Array<Dynamic>));
   }
 
-  public static function attachTextInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachTextInput(manager:Dynamic, element:Dynamic, ?options:AttachInputOptions):Void {
     _Runtime.callValue(Facade_Input_flighthq_input_InputManager.attachTextInput, cast ([manager, element, options] : Array<Dynamic>));
   }
 
-  public static function attachWheelInput(manager:InputManager, element:Dynamic, ?options:AttachInputOptions):Void {
+  public static function attachWheelInput(manager:Dynamic, element:Dynamic, ?options:AttachInputOptions):Void {
     _Runtime.callValue(Facade_Input_flighthq_input_InputManager.attachWheelInput, cast ([manager, element, options] : Array<Dynamic>));
   }
 
-  public static function connectInputStateToInputManager(state:InputState, manager:InputManager):Dynamic {
+  public static function connectInputStateToInputManager(state:InputState, manager:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.connectInputStateToInputManager, cast ([state, manager] : Array<Dynamic>));
     return cast null;
   }
@@ -60,7 +59,7 @@ class Input {
     return cast null;
   }
 
-  public static function createInputManager():InputManager {
+  public static function createInputManager():Dynamic {
     return cast _Runtime.callValue(Facade_Input_flighthq_input_InputManager.createInputManager, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -75,27 +74,27 @@ class Input {
     return cast null;
   }
 
-  public static function detachGamepadInput(manager:InputManager, target:Dynamic):Void {
+  public static function detachGamepadInput(manager:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_Input_flighthq_input_InputManager.detachGamepadInput, cast ([manager, target] : Array<Dynamic>));
   }
 
-  public static function detachKeyboardInput(manager:InputManager, target:Dynamic):Void {
+  public static function detachKeyboardInput(manager:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_Input_flighthq_input_InputManager.detachKeyboardInput, cast ([manager, target] : Array<Dynamic>));
   }
 
-  public static function detachPointerInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachPointerInput(manager:Dynamic, element:Dynamic):Void {
     _Runtime.callValue(Facade_Input_flighthq_input_InputManager.detachPointerInput, cast ([manager, element] : Array<Dynamic>));
   }
 
-  public static function detachRelativePointerInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachRelativePointerInput(manager:Dynamic, element:Dynamic):Void {
     _Runtime.callValue(Facade_Input_flighthq_input_InputManager.detachRelativePointerInput, cast ([manager, element] : Array<Dynamic>));
   }
 
-  public static function detachTextInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachTextInput(manager:Dynamic, element:Dynamic):Void {
     _Runtime.callValue(Facade_Input_flighthq_input_InputManager.detachTextInput, cast ([manager, element] : Array<Dynamic>));
   }
 
-  public static function detachWheelInput(manager:InputManager, element:Dynamic):Void {
+  public static function detachWheelInput(manager:Dynamic, element:Dynamic):Void {
     _Runtime.callValue(Facade_Input_flighthq_input_InputManager.detachWheelInput, cast ([manager, element] : Array<Dynamic>));
   }
 
@@ -161,7 +160,7 @@ class Input {
     return cast null;
   }
 
-  public static function pollGamepadInput(manager:InputManager):Void {
+  public static function pollGamepadInput(manager:Dynamic):Void {
     _Runtime.callValue(Facade_Input_flighthq_input_InputManager.pollGamepadInput, cast ([manager] : Array<Dynamic>));
   }
 

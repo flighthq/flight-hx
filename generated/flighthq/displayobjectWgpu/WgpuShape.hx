@@ -3,6 +3,7 @@ package flighthq.displayobjectWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.WgpuShapeData;
 import flighthq.displayobjectCanvas.CanvasShape.renderCanvasShapeCommands;
 import flighthq.displayobjectWgpu.WgpuRendererData.createWgpuRendererData;
 import flighthq.displayobjectWgpu.WgpuRendererData.getWgpuRendererData;
@@ -21,20 +22,16 @@ import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.shape.ShapeFill.getShapeFillRegions;
 import flighthq.types.BatchFormat;
 import flighthq.types.DisplayObjectRenderer;
-import flighthq.types.ImageResource;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
-import flighthq.types.Shape;
-import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuShapeMeshBuffers;
 
-typedef WgpuShapeData__wgpuShape = { var canvas:Dynamic; var ctx:Dynamic; var image:ImageResource; var lastContentId:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:Null<Array<WgpuShapeMesh>>; var meshBuffers:WgpuShapeMeshBuffers; };
+typedef WgpuShapeData__wgpuShape = { var canvas:Dynamic; var ctx:Dynamic; var image:Dynamic; var lastContentId:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:Null<Array<WgpuShapeMesh>>; var meshBuffers:WgpuShapeMeshBuffers; };
 
 @:expose("flighthq.displayobjectWgpu.WgpuShape")
 class WgpuShape {
-  public static function createWgpuShapeData__wgpuShape(_state:RenderState, _source:Renderable):RendererData {
+  public static function createWgpuShapeData__wgpuShape(_state:Dynamic, _source:Renderable):RendererData {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     canvas = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -45,7 +42,7 @@ class WgpuShape {
     return cast null;
   }
 
-  public static function destroyWgpuShapeData__wgpuShape(state:WgpuRenderState, data:RendererData):Void {
+  public static function destroyWgpuShapeData__wgpuShape(state:Dynamic, data:RendererData):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var shapeData:Dynamic = cast _Runtime.UNDEFINED;
     var entry:Dynamic = cast _Runtime.UNDEFINED;
@@ -68,7 +65,7 @@ class WgpuShape {
     _Runtime.setField(b, 'bindGroup', null);
   }
 
-  public static function drawWgpuShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuShape(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -89,7 +86,7 @@ class WgpuShape {
     var d:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) { return; }
-    source = (cast _Runtime.field(renderProxy, 'source') : Shape);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     __destructure0 = _Runtime.field(source, 'data');
     commands = _Runtime.field(__destructure0, 'commands');
     version = _Runtime.callValue(getNodeLocalContentRevision, cast ([source] : Array<Dynamic>));

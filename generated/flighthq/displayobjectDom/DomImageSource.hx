@@ -5,21 +5,19 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.displayobjectDom.DomRenderState.getDomRenderStateRuntime;
 import flighthq.image.ImageResourceFrom.createCanvasFromImageResource;
-import flighthq.types.DomRenderState;
-import flighthq.types.ImageResource;
 
 typedef DomImageSourceKind = String;
 
 @:expose("flighthq.displayobjectDom.DomImageSource")
 class DomImageSource {
-  public static function explainDomImageSource(image:ImageResource):DomImageSourceKind {
+  public static function explainDomImageSource(image:Dynamic):DomImageSourceKind {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(image, 'source'), null))) { return cast 'element'; }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(image, 'data'), null))) { return cast 'data'; }
     return cast 'none';
     return cast null;
   }
 
-  public static function resolveDomImageSource(state:DomRenderState, image:ImageResource):Null<Dynamic> {
+  public static function resolveDomImageSource(state:Dynamic, image:Dynamic):Null<Dynamic> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var entry:Dynamic = cast _Runtime.UNDEFINED;

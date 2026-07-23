@@ -35,7 +35,6 @@ import flighthq.particlesFormats.UnityParse.UnityParseOptions;
 import flighthq.particlesFormats.UnityParse.UnityParsed;
 import flighthq.particlesFormats.UnitySerialize as Facade_ParticlesFormats_flighthq_particlesFormats_UnitySerialize;
 import flighthq.particlesFormats.UnitySerialize.UnitySerializeOptions;
-import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleFormatKind;
 
 @:expose("flighthq.particlesFormats.ParticlesFormats")
@@ -60,7 +59,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  public static function parseLibgdxParticle(text:String, ?options:LibgdxParseOptions):ParticleEmitterConfig {
+  public static function parseLibgdxParticle(text:String, ?options:LibgdxParseOptions):Dynamic {
     return cast _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_LibgdxParse.parseLibgdxParticle, cast ([text, options] : Array<Dynamic>));
     return cast null;
   }
@@ -70,7 +69,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  public static function parseParticleConfig(text:String, ?options:ParseParticleConfigOptions):ParticleEmitterConfig {
+  public static function parseParticleConfig(text:String, ?options:ParseParticleConfigOptions):Dynamic {
     return cast _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_ParseParticleConfig.parseParticleConfig, cast ([text, options] : Array<Dynamic>));
     return cast null;
   }
@@ -80,7 +79,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  public static function parseParticleDesignerPlist(plistXml:String, ?options:ParticleDesignerParseOptions):ParticleEmitterConfig {
+  public static function parseParticleDesignerPlist(plistXml:String, ?options:ParticleDesignerParseOptions):Dynamic {
     return cast _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_ParticleDesignerParse.parseParticleDesignerPlist, cast ([plistXml, options] : Array<Dynamic>));
     return cast null;
   }
@@ -90,7 +89,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  public static function parsePixiParticle(json:String):ParticleEmitterConfig {
+  public static function parsePixiParticle(json:String):Dynamic {
     return cast _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_PixiParse.parsePixiParticle, cast ([json] : Array<Dynamic>));
     return cast null;
   }
@@ -105,7 +104,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  public static function parseSpineParticle(json:String):ParticleEmitterConfig {
+  public static function parseSpineParticle(json:String):Dynamic {
     return cast _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_SpineParse.parseSpineParticle, cast ([json] : Array<Dynamic>));
     return cast null;
   }
@@ -115,7 +114,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  public static function parseStarlingPex(xml:String, ?options:StarlingPexParseOptions):ParticleEmitterConfig {
+  public static function parseStarlingPex(xml:String, ?options:StarlingPexParseOptions):Dynamic {
     return cast _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_StarlingPexParse.parseStarlingPex, cast ([xml, options] : Array<Dynamic>));
     return cast null;
   }
@@ -125,7 +124,7 @@ class ParticlesFormats {
     return cast null;
   }
 
-  public static function parseUnityParticle(json:String, ?options:UnityParseOptions):ParticleEmitterConfig {
+  public static function parseUnityParticle(json:String, ?options:UnityParseOptions):Dynamic {
     return cast _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_UnityParse.parseUnityParticle, cast ([json, options] : Array<Dynamic>));
     return cast null;
   }
@@ -139,52 +138,52 @@ class ParticlesFormats {
     _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_FormatRegistry.registerParticleFormat, cast ([kind, codec] : Array<Dynamic>));
   }
 
-  public static function serializeLibgdxParticle(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:LibgdxSerializeOptions):String {
+  public static function serializeLibgdxParticle(config:Dynamic, ?existing:Dynamic, ?options:LibgdxSerializeOptions):String {
     return cast _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_LibgdxSerialize.serializeLibgdxParticle, cast ([config, existing, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeLibgdxParticleDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:LibgdxSerializeOptions):ParticleSerializeResult {
+  public static function serializeLibgdxParticleDocument(config:Dynamic, ?existing:Dynamic, ?options:LibgdxSerializeOptions):ParticleSerializeResult {
     return cast _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_LibgdxSerialize.serializeLibgdxParticleDocument, cast ([config, existing, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeParticleDesignerPlist(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:ParticleDesignerSerializeOptions):String {
+  public static function serializeParticleDesignerPlist(config:Dynamic, ?existing:Dynamic, ?options:ParticleDesignerSerializeOptions):String {
     return cast _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_ParticleDesignerSerialize.serializeParticleDesignerPlist, cast ([config, existing, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeParticleDesignerPlistDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:ParticleDesignerSerializeOptions):ParticleSerializeResult {
+  public static function serializeParticleDesignerPlistDocument(config:Dynamic, ?existing:Dynamic, ?options:ParticleDesignerSerializeOptions):ParticleSerializeResult {
     return cast _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_ParticleDesignerSerialize.serializeParticleDesignerPlistDocument, cast ([config, existing, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeSpineParticle(config:ParticleEmitterConfig, ?existing:Dynamic):String {
+  public static function serializeSpineParticle(config:Dynamic, ?existing:Dynamic):String {
     return cast _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_SpineSerialize.serializeSpineParticle, cast ([config, existing] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeSpineParticleDocument(config:ParticleEmitterConfig, ?existing:Dynamic):ParticleSerializeResult {
+  public static function serializeSpineParticleDocument(config:Dynamic, ?existing:Dynamic):ParticleSerializeResult {
     return cast _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_SpineSerialize.serializeSpineParticleDocument, cast ([config, existing] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeStarlingPex(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):String {
+  public static function serializeStarlingPex(config:Dynamic, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):String {
     return cast _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_StarlingPexSerialize.serializeStarlingPex, cast ([config, existing, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeStarlingPexDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):ParticleSerializeResult {
+  public static function serializeStarlingPexDocument(config:Dynamic, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):ParticleSerializeResult {
     return cast _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_StarlingPexSerialize.serializeStarlingPexDocument, cast ([config, existing, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeUnityParticle(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:UnitySerializeOptions):String {
+  public static function serializeUnityParticle(config:Dynamic, ?existing:Dynamic, ?options:UnitySerializeOptions):String {
     return cast _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_UnitySerialize.serializeUnityParticle, cast ([config, existing, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function serializeUnityParticleDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:UnitySerializeOptions):ParticleSerializeResult {
+  public static function serializeUnityParticleDocument(config:Dynamic, ?existing:Dynamic, ?options:UnitySerializeOptions):ParticleSerializeResult {
     return cast _Runtime.callValue(Facade_ParticlesFormats_flighthq_particlesFormats_UnitySerialize.serializeUnityParticleDocument, cast ([config, existing, options] : Array<Dynamic>));
     return cast null;
   }

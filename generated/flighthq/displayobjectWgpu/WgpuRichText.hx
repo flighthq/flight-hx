@@ -3,6 +3,7 @@ package flighthq.displayobjectWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.WgpuRichTextData;
 import flighthq.color.PackColor.computeRgbHexString;
 import flighthq.displayobjectWgpu.WgpuRendererData.createWgpuRendererData;
 import flighthq.displayobjectWgpu.WgpuRendererData.getWgpuRendererData;
@@ -24,15 +25,11 @@ import flighthq.textlayout.TextLayout.computeTextLayout;
 import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
-import flighthq.types.RichText;
 import flighthq.types.RichText.RichTextRuntime;
-import flighthq.types.TextFormat;
 import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.TextLayout.TextLayoutResult;
-import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 
 typedef WgpuRichTextOverlay = Dynamic;
@@ -47,25 +44,25 @@ class WgpuRichText {
 
   public static var _webgpuTextInputOverlay__wgpuRichText:Null<WgpuRichTextOverlay> = _Runtime.explicitNull();
 
-  public static function createWgpuRichTextData(_state:RenderState, _source:Renderable):RendererData {
+  public static function createWgpuRichTextData(_state:Dynamic, _source:Renderable):RendererData {
     return cast _Runtime.callValue(createWgpuRendererData, cast ([{ entry: null, h: 0.0, w: 0.0 }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function destroyWgpuRichTextData(_state:RenderState, data:RendererData):Void {
+  public static function destroyWgpuRichTextData(_state:Dynamic, data:RendererData):Void {
     var richData:Dynamic = cast _Runtime.UNDEFINED;
     richData = _Runtime.callValue(getWgpuRendererData, cast ([data] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(richData, null))) { return; }
     _Runtime.callOptionalProperty(_Runtime.optionalField(_Runtime.field(richData, 'entry'), 'texture'), 'destroy', cast ([] : Array<Dynamic>));
   }
 
-  public static function drawWgpuRichText(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuRichText(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var overlay:Dynamic = cast _Runtime.UNDEFINED;
-    overlay = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(WgpuRichText._webgpuTextInputOverlay__wgpuRichText, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null)), function():Dynamic return cast WgpuRichText._webgpuTextInputOverlay__wgpuRichText, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
+    overlay = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(WgpuRichText._webgpuTextInputOverlay__wgpuRichText, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : Dynamic)] : Array<Dynamic>)), 'input'), null)), function():Dynamic return cast WgpuRichText._webgpuTextInputOverlay__wgpuRichText, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
     _Runtime.callValue(drawWgpuRichTextWithOverlay, cast ([state, renderProxy, overlay] : Array<Dynamic>));
   }
 
-  public static function drawWgpuRichTextWithOverlay(state:WgpuRenderState, renderProxy:RenderProxy2D, ?overlay:WgpuRichTextOverlay):Void {
+  public static function drawWgpuRichTextWithOverlay(state:Dynamic, renderProxy:RenderProxy2D, ?overlay:WgpuRichTextOverlay):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
@@ -86,7 +83,7 @@ class WgpuRichText {
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) { return; }
     _Runtime.callValue(flushWgpuSpriteBatch, cast ([state] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : RichText);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     data = _Runtime.field(source, 'data');
     richTextRuntime = (cast _Runtime.callValue(getRichTextRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime);
     content = _Runtime.callValue(getRichTextContent, cast ([richTextRuntime] : Array<Dynamic>));
@@ -140,7 +137,7 @@ class WgpuRichText {
 
   public static final defaultWgpuRichTextRenderer:DisplayObjectRenderer = { createData: createWgpuRichTextData, destroyData: destroyWgpuRichTextData, submit: drawWgpuRichText };
 
-  public static function drawRichTextToCanvas__wgpuRichText(context:Dynamic, source:RichText, result:Dynamic, fieldW:Float, fieldH:Float, text:String):Void {
+  public static function drawRichTextToCanvas__wgpuRichText(context:Dynamic, source:Dynamic, result:Dynamic, fieldW:Float, fieldH:Float, text:String):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var firstVisibleLine:Dynamic = cast _Runtime.UNDEFINED;
     var scrollYOffset:Dynamic = cast _Runtime.UNDEFINED;
@@ -191,7 +188,7 @@ class WgpuRichText {
     return cast null;
   }
 
-  public static function layoutRichText__wgpuRichText(source:RichText, richTextRuntime:RichTextRuntime, text:String, formatRanges:Dynamic, state:WgpuRenderState):Dynamic {
+  public static function layoutRichText__wgpuRichText(source:Dynamic, richTextRuntime:RichTextRuntime, text:String, formatRanges:Dynamic, state:Dynamic):Dynamic {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var maxTexDim:Dynamic = cast _Runtime.UNDEFINED;
     var maxLogical:Dynamic = cast _Runtime.UNDEFINED;
@@ -200,7 +197,7 @@ class WgpuRichText {
     data = _Runtime.field(source, 'data');
     maxTexDim = _Runtime.field(_Runtime.field(_Runtime.field(state, 'device'), 'limits'), 'maxTextureDimension2D');
     maxLogical = _Runtime.callProperty(HxMath, 'floor', cast ([(maxTexDim / _Runtime.field(state, 'pixelRatio'))] : Array<Dynamic>));
-    measure = function(value:String, format:TextFormat) {
+    measure = function(value:String, format:Dynamic) {
       var context:Dynamic = cast _Runtime.UNDEFINED;
       context = _Runtime.callValue(WgpuRichText.getOffscreenCanvas__wgpuRichText, cast ([1.0, 1.0] : Array<Dynamic>));
       _Runtime.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));

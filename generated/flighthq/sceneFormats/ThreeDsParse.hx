@@ -32,13 +32,10 @@ import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_UV_COORDS;
 import flighthq.sceneFormats.ThreeDsSchema.THREE_DS_VERTICES;
 import flighthq.sceneFormats.ThreeDsSchema.ThreeDsMaterial;
 import flighthq.sceneFormats.ThreeDsSchema.ThreeDsMesh;
-import flighthq.types.Material;
-import flighthq.types.Scene;
-import flighthq.types.SceneNode;
 
 @:expose("flighthq.sceneFormats.ThreeDsParse")
 class ThreeDsParse {
-  public static function createSceneFrom3ds(bytes:Dynamic, ?warnings:Array<String>):Scene {
+  public static function createSceneFrom3ds(bytes:Dynamic, ?warnings:Array<String>):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var view:Dynamic = cast _Runtime.UNDEFINED;
@@ -283,7 +280,7 @@ class ThreeDsParse {
     return cast null;
   }
 
-  public static function buildMeshNode__threeDsParse(mesh:ThreeDsMesh, materials:Dynamic, resolved:Dynamic):Null<SceneNode> {
+  public static function buildMeshNode__threeDsParse(mesh:ThreeDsMesh, materials:Dynamic, resolved:Dynamic):Null<Dynamic> {
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var faceCount:Dynamic = cast _Runtime.UNDEFINED;
     var positions:Dynamic = cast _Runtime.UNDEFINED;
@@ -291,7 +288,7 @@ class ThreeDsParse {
     var normals:Dynamic = cast _Runtime.UNDEFINED;
     var indices:Dynamic = cast _Runtime.UNDEFINED;
     var geometry:Dynamic = cast _Runtime.UNDEFINED;
-    var meshMaterials:Array<Material> = cast _Runtime.UNDEFINED;
+    var meshMaterials:Array<Dynamic> = cast _Runtime.UNDEFINED;
     var seen:Dynamic = cast _Runtime.UNDEFINED;
     vertexCount = (_Runtime.field(_Runtime.field(mesh, 'vertices'), 'length') / 3.0);
     faceCount = (_Runtime.field(_Runtime.field(mesh, 'faces'), 'length') / 3.0);
@@ -378,13 +375,13 @@ class ThreeDsParse {
       }
       _Runtime.callProperty(meshMaterials, 'push', cast ([material] : Array<Dynamic>));
     }
-    return cast (cast (cast _Runtime.callValue(createMesh, cast ([geometry, meshMaterials, _Runtime.field(_Runtime, 'UNDEFINED'), _Runtime.select(_Runtime.compare(_Runtime.field(_Runtime.field(mesh, 'name'), 'length'), 0.0, '>'), function():Dynamic return cast { name: _Runtime.field(mesh, 'name') }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)) : Dynamic) : SceneNode);
+    return cast (cast (cast _Runtime.callValue(createMesh, cast ([geometry, meshMaterials, _Runtime.field(_Runtime, 'UNDEFINED'), _Runtime.select(_Runtime.compare(_Runtime.field(_Runtime.field(mesh, 'name'), 'length'), 0.0, '>'), function():Dynamic return cast { name: _Runtime.field(mesh, 'name') }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)) : Dynamic) : Dynamic);
     return cast null;
   }
 
-  public static function threeDsMaterialToBlinnPhong__threeDsParse(material:ThreeDsMaterial):Material {
+  public static function threeDsMaterialToBlinnPhong__threeDsParse(material:ThreeDsMaterial):Dynamic {
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    result = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([_Runtime.field(material, 'diffuse')] : Array<Dynamic>)), diffuseMap: _Runtime.select(!_Runtime.strictEquals(_Runtime.field(material, 'textureFilename'), null), function():Dynamic return cast _Runtime.callValue(createExternalTextureRef, cast ([_Runtime.field(material, 'textureFilename')] : Array<Dynamic>)), function():Dynamic return cast null), specular: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([_Runtime.field(material, 'specular')] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Material);
+    result = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuse: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([_Runtime.field(material, 'diffuse')] : Array<Dynamic>)), diffuseMap: _Runtime.select(!_Runtime.strictEquals(_Runtime.field(material, 'textureFilename'), null), function():Dynamic return cast _Runtime.callValue(createExternalTextureRef, cast ([_Runtime.field(material, 'textureFilename')] : Array<Dynamic>)), function():Dynamic return cast null), specular: _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([_Runtime.field(material, 'specular')] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Dynamic);
     _Runtime.setField(result, 'name', _Runtime.select(_Runtime.compare(_Runtime.field(_Runtime.field(material, 'name'), 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.field(material, 'name'), function():Dynamic return cast null));
     return cast result;
     return cast null;

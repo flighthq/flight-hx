@@ -13,17 +13,12 @@ import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.renderGl.GlRenderTarget.createGlRenderTarget;
 import flighthq.types.Entity.Kind;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
 import flighthq.types.GlVelocityWriter;
 import flighthq.types.GlVelocityWriter.GlVelocityContext;
 import flighthq.types.HasBoundsRectangle.Spatial2DNode;
 import flighthq.types.HasTransform2D.Transform2DNode;
-import flighthq.types.ParticleEmitter;
-import flighthq.types.QuadBatch;
 import flighthq.types.QuadBatch.QuadBatchRuntime;
 import flighthq.types.Velocity.Velocity2D;
-import flighthq.types.Velocity.VelocityField;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 import flighthq.velocity.VelocityField.getVelocity;
 
@@ -31,7 +26,7 @@ typedef GlVelocityProgram__glVelocity = { var program:Dynamic; var quadBuffer:Dy
 
 @:expose("flighthq.displayobjectGl.GlVelocity")
 class GlVelocity {
-  public static function createGlVelocityTarget(state:GlRenderState, width:Float, height:Float):GlRenderTarget {
+  public static function createGlVelocityTarget(state:Dynamic, width:Float, height:Float):Dynamic {
     return cast _Runtime.callValue(createGlRenderTarget, cast ([state, { width: width, height: height, format: 'rgba16f' }] : Array<Dynamic>));
     return cast null;
   }
@@ -64,7 +59,7 @@ class GlVelocity {
     var wd:Dynamic = cast _Runtime.UNDEFINED;
     var wtx:Dynamic = cast _Runtime.UNDEFINED;
     var wty:Dynamic = cast _Runtime.UNDEFINED;
-    emitter = (cast (cast node : Dynamic) : ParticleEmitter);
+    emitter = (cast (cast node : Dynamic) : Dynamic);
     __destructure0 = _Runtime.field(emitter, 'data');
     atlas = _Runtime.field(__destructure0, 'atlas');
     ids = _Runtime.field(__destructure0, 'ids');
@@ -149,7 +144,7 @@ class GlVelocity {
     var transformType:Dynamic = cast _Runtime.UNDEFINED;
     var spatial:Dynamic = cast _Runtime.UNDEFINED;
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
-    batch = (cast (cast node : Dynamic) : QuadBatch);
+    batch = (cast (cast node : Dynamic) : Dynamic);
     data = _Runtime.field(batch, 'data');
     runtime = (cast _Runtime.getIndex((cast node : { @:optional var __EntityRuntimeKey:Dynamic; }), EntityRuntimeKey) : QuadBatchRuntime);
     instanceVelocities = _Runtime.field(runtime, 'instanceVelocities');
@@ -257,12 +252,12 @@ class GlVelocity {
     _Runtime.callProperty(gl, 'drawArrays', cast ([_Runtime.field(gl, 'TRIANGLES'), 0.0, 6.0] : Array<Dynamic>));
   }
 
-  public static function getGlVelocityWriter(state:GlRenderState, kind:Kind):Null<GlVelocityWriter> {
+  public static function getGlVelocityWriter(state:Dynamic, kind:Kind):Null<GlVelocityWriter> {
     return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(GlVelocity._velocityWriters__glVelocity, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function registerGlVelocityWriter(state:GlRenderState, kind:Kind, writer:GlVelocityWriter):Void {
+  public static function registerGlVelocityWriter(state:Dynamic, kind:Kind, writer:GlVelocityWriter):Void {
     var writers:Dynamic = cast _Runtime.UNDEFINED;
     writers = _Runtime.callProperty(GlVelocity._velocityWriters__glVelocity, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(writers, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -272,7 +267,7 @@ class GlVelocity {
     _Runtime.callProperty(writers, 'set', cast ([kind, writer] : Array<Dynamic>));
   }
 
-  public static function renderGlVelocity<Traits>(state:GlRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:GlRenderTarget):Void {
+  public static function renderGlVelocity<Traits>(state:Dynamic, root:Transform2DNode<Traits>, field:Dynamic, target:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -295,7 +290,7 @@ class GlVelocity {
     _Runtime.callProperty(gl, 'disableVertexAttribArray', cast ([_Runtime.field(program, 'locCorner')] : Array<Dynamic>));
   }
 
-  public static function ensureGlVelocityProgram__glVelocity(state:GlRenderState):GlVelocityProgram__glVelocity {
+  public static function ensureGlVelocityProgram__glVelocity(state:Dynamic):GlVelocityProgram__glVelocity {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var glProgram:Dynamic = cast _Runtime.UNDEFINED;

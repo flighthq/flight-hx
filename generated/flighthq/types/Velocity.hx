@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 
 typedef Velocity2D = { var x:Float; var y:Float; };
 
-typedef VelocitySample = { var previousWorldTransform:Null<Matrix>; var velocity:Velocity2D; var lastFrameId:Float; var explicitFrameId:Float; };
+typedef VelocitySample = { var previousWorldTransform:Null<Dynamic>; var velocity:Velocity2D; var lastFrameId:Float; var explicitFrameId:Float; };
 
 typedef VelocityField = { var samples:Dynamic; var frameId:Float; };
 

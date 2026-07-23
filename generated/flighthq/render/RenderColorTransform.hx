@@ -5,13 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.render.RenderState.getRenderStateRuntime;
-import flighthq.types.RenderProxy;
-import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 
 @:expose("flighthq.render.RenderColorTransform")
 class RenderColorTransform {
-  public static function updateRenderProxyColorTransform(state:RenderState, data:RenderProxy, ?_parentData:RenderProxy):Void {
+  public static function updateRenderProxyColorTransform(state:Dynamic, data:Dynamic, ?_parentData:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getNodeRuntime, cast ([(cast _Runtime.field(data, 'source') : Dynamic)] : Array<Dynamic>));
     _Runtime.setField(data, 'colorTransform', _Runtime.coalesce(_Runtime.field(runtime, 'resolvedColorTransform'), function():Dynamic return cast null));

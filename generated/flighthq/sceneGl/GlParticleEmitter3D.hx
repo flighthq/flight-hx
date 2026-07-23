@@ -10,15 +10,9 @@ import flighthq.render.SceneRender.prepareSceneRender;
 import flighthq.renderGl.GlDraw.bindGlTexture;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.invalidateGlRenderStateCache;
-import flighthq.types.Camera;
-import flighthq.types.GlRenderState;
-import flighthq.types.Matrix4;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.ParticleEmitter.ParticleEmitterData;
-import flighthq.types.ParticleEmitter3D;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-import flighthq.types.SceneLights;
-import flighthq.types.SceneNode;
 import flighthq.types._internal._ParticleEmitter3DValues.ParticleEmitter3DKind;
 
 typedef GlParticle3DShader__glParticleEmitter3D = { var cornerBuffer:Dynamic; var indexBuffer:Dynamic; var instanceBuffer:Dynamic; var instanceData:flighthq._internal._Float32Array; var locCameraRight:Dynamic; var locCameraUp:Dynamic; var locColor:Float; var locCorner:Float; var locCosScale:Float; var locHasTexture:Dynamic; var locPos:Float; var locSinScale:Float; var locSize:Float; var locTexture:Dynamic; var locUvRect:Float; var locViewProjection:Dynamic; var program:Dynamic; var vao:Dynamic; };
@@ -60,7 +54,7 @@ class GlParticleEmitter3D {
     return cast null;
   }
 
-  public static function ensureParticle3DShader__glParticleEmitter3D(state:GlRenderState):GlParticle3DShader__glParticleEmitter3D {
+  public static function ensureParticle3DShader__glParticleEmitter3D(state:Dynamic):GlParticle3DShader__glParticleEmitter3D {
     var shader:Dynamic = cast _Runtime.UNDEFINED;
     shader = _Runtime.callProperty(GlParticleEmitter3D.shaderCache__glParticleEmitter3D, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(shader, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast shader; }
@@ -81,11 +75,11 @@ class GlParticleEmitter3D {
     _Runtime.callProperty(gl, 'bufferData', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), (newSize * 4.0), _Runtime.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
   }
 
-  public static function collectParticleEmitter3DNodes__glParticleEmitter3D(node:NodeAny, out:Array<ParticleEmitter3D>):Void {
+  public static function collectParticleEmitter3DNodes__glParticleEmitter3D(node:NodeAny, out:Array<Dynamic>):Void {
     var children:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(node, 'enabled')))) { return; }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(node, 'kind'), ParticleEmitter3DKind))) {
-      _Runtime.callProperty(out, 'push', cast ([(cast (cast node : Dynamic) : ParticleEmitter3D)] : Array<Dynamic>));
+      _Runtime.callProperty(out, 'push', cast ([(cast (cast node : Dynamic) : Dynamic)] : Array<Dynamic>));
     }
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([node] : Array<Dynamic>)), 'children');
     if (_Runtime.truthy(!_Runtime.strictEquals(children, null))) {
@@ -117,7 +111,7 @@ class GlParticleEmitter3D {
     }
   }
 
-  public static function drawParticleEmitter3DNode__glParticleEmitter3D(state:GlRenderState, shader:GlParticle3DShader__glParticleEmitter3D, emitter:ParticleEmitter3D):Void {
+  public static function drawParticleEmitter3DNode__glParticleEmitter3D(state:Dynamic, shader:GlParticle3DShader__glParticleEmitter3D, emitter:Dynamic):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var data:ParticleEmitterData = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -156,7 +150,7 @@ class GlParticleEmitter3D {
     numRegions = _Runtime.select(!_Runtime.strictEquals(regions, null), function():Dynamic return cast _Runtime.field(regions, 'length'), function():Dynamic return cast 0.0);
     iw = _Runtime.select(hasAtlas, function():Dynamic return cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'width'), function():Dynamic return cast 1.0)), function():Dynamic return cast 0.0);
     ih = _Runtime.select(hasAtlas, function():Dynamic return cast (1.0 / _Runtime.orValue(_Runtime.field(_Runtime.field(atlas, 'image'), 'height'), function():Dynamic return cast 1.0)), function():Dynamic return cast 0.0);
-    worldMatrix = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([(cast (cast emitter : Dynamic) : SceneNode)] : Array<Dynamic>)) : Matrix4);
+    worldMatrix = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([(cast (cast emitter : Dynamic) : Dynamic)] : Array<Dynamic>)) : Dynamic);
     wm = _Runtime.field(worldMatrix, 'm');
     worldSpace = _Runtime.field(data, 'worldSpace');
     instanceData = _Runtime.field(shader, 'instanceData');
@@ -259,7 +253,7 @@ class GlParticleEmitter3D {
     _Runtime.callProperty(gl, 'bindVertexArray', cast ([null] : Array<Dynamic>));
   }
 
-  public static function destroyGlParticleEmitter3DShader(state:GlRenderState):Void {
+  public static function destroyGlParticleEmitter3DShader(state:Dynamic):Void {
     var shader:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     shader = _Runtime.callProperty(GlParticleEmitter3D.shaderCache__glParticleEmitter3D, 'get', cast ([state] : Array<Dynamic>));
@@ -272,7 +266,7 @@ class GlParticleEmitter3D {
     _Runtime.callProperty(GlParticleEmitter3D.shaderCache__glParticleEmitter3D, 'delete', cast ([state] : Array<Dynamic>));
   }
 
-  public static function drawGlSceneParticleEmitters(state:GlRenderState, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
+  public static function drawGlSceneParticleEmitters(state:Dynamic, scene:Dynamic, camera:Dynamic, lights:Dynamic):Void {
     var list:Dynamic = cast _Runtime.UNDEFINED;
     var shader:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -305,7 +299,7 @@ class GlParticleEmitter3D {
     _Runtime.callValue(invalidateGlRenderStateCache, cast ([state] : Array<Dynamic>));
   }
 
-  public static final emitterScratch__glParticleEmitter3D:Array<ParticleEmitter3D> = cast ([] : Array<Dynamic>);
+  public static final emitterScratch__glParticleEmitter3D:Array<Dynamic> = cast ([] : Array<Dynamic>);
 
   public static final shaderCache__glParticleEmitter3D:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 }

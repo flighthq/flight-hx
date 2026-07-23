@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.PixelateEffect;
 
 @:expose("flighthq.effects.PixelateEffect")
 class PixelateEffect {
-  public static function createPixelateEffect(?options:Dynamic):PixelateEffect {
+  public static function createPixelateEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'PixelateEffect' }, options]);
     return cast null;

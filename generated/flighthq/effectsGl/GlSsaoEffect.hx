@@ -6,13 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
-import flighthq.types.SsaoEffect;
 
 @:expose("flighthq.effectsGl.GlSsaoEffect")
 class GlSsaoEffect {
-  public static function applySsaoEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SsaoEffect):Void {
+  public static function applySsaoEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     var radius:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -27,7 +24,7 @@ class GlSsaoEffect {
   }
 
   public static final defaultGlSsaoEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applySsaoEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : SsaoEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applySsaoEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static final SSAO_FRAGMENT_SRC__glSsaoEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_resolution;\nuniform float u_radius;\nuniform float u_intensity;\nout vec4 o_color;\nfloat luma(vec3 c) {\n  return dot(c, vec3(0.299, 0.587, 0.114));\n}\nvoid main() {\n  vec2 texel = (1.0 / u_resolution) * max(u_radius, 1.0);\n  vec4 center = texture(u_texture0, v_texCoord);\n  float lc = luma(center.rgb);\n  float variation = 0.0;\n  variation += abs(lc - luma(texture(u_texture0, v_texCoord + vec2(-1.0, 0.0) * texel).rgb));\n  variation += abs(lc - luma(texture(u_texture0, v_texCoord + vec2(1.0, 0.0) * texel).rgb));\n  variation += abs(lc - luma(texture(u_texture0, v_texCoord + vec2(0.0, -1.0) * texel).rgb));\n  variation += abs(lc - luma(texture(u_texture0, v_texCoord + vec2(0.0, 1.0) * texel).rgb));\n  variation *= 0.25;\n  float occlusion = clamp(variation * u_intensity, 0.0, 1.0);\n  o_color = vec4(center.rgb * (1.0 - occlusion), center.a);\n}';

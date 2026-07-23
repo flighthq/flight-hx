@@ -11,9 +11,7 @@ import flighthq.scene.SceneNode.getSceneNodeRuntime;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.PartialNode;
 import flighthq.types.ParticleEmitter.ParticleEmitterData;
-import flighthq.types.ParticleEmitter3D;
 import flighthq.types.ParticleEmitter3D.ParticleEmitter3DRuntime;
-import flighthq.types.SceneNode;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._ParticleEmitter3DValues.ParticleEmitter3DKind;
 
@@ -27,7 +25,7 @@ class ParticleEmitter3D {
 
   public static final PARTICLE_EMITTER_3D_DELETED_ID:Dynamic = 65535.0;
 
-  public static function appendParticleEmitter3DParticle(target:ParticleEmitter3D, id:Float, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Float {
+  public static function appendParticleEmitter3DParticle(target:Dynamic, id:Float, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Float {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     var needed:Dynamic = cast _Runtime.UNDEFINED;
     var tt:Dynamic = cast _Runtime.UNDEFINED;
@@ -60,18 +58,18 @@ class ParticleEmitter3D {
     return cast null;
   }
 
-  public static function clearParticleEmitter3D(target:ParticleEmitter3D):Void {
+  public static function clearParticleEmitter3D(target:Dynamic):Void {
     _Runtime.setField(_Runtime.field(target, 'data'), 'particleCount', 0.0);
   }
 
-  public static function cloneParticleEmitter3D(source:ParticleEmitter3D):ParticleEmitter3D {
+  public static function cloneParticleEmitter3D(source:Dynamic):Dynamic {
     var src:Dynamic = cast _Runtime.UNDEFINED;
     src = _Runtime.field(source, 'data');
     return cast _Runtime.callValue(createParticleEmitter3D, cast ([{ blendMode: _Runtime.field(source, 'blendMode'), data: { alphas: _Runtime.slice(_Runtime.field(src, 'alphas'), 0, null), atlas: _Runtime.field(src, 'atlas'), colors: _Runtime.slice(_Runtime.field(src, 'colors'), 0, null), ids: _Runtime.slice(_Runtime.field(src, 'ids'), 0, null), particleCount: _Runtime.field(src, 'particleCount'), positionsZ: _Runtime.slice(_Runtime.field(src, 'positionsZ'), 0, null), transforms: _Runtime.slice(_Runtime.field(src, 'transforms'), 0, null), velocities: _Runtime.slice(_Runtime.field(src, 'velocities'), 0, null), worldSpace: _Runtime.field(src, 'worldSpace') } }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function compactParticleEmitter3D(target:ParticleEmitter3D):Void {
+  public static function compactParticleEmitter3D(target:Dynamic):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var write:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(target, 'data');
@@ -109,7 +107,7 @@ class ParticleEmitter3D {
     _Runtime.setField(data, 'particleCount', write);
   }
 
-  public static function computeParticleEmitter3DLocalBoundsAabb(out:AabbLike, source:ParticleEmitter3D):Void {
+  public static function computeParticleEmitter3DLocalBoundsAabb(out:AabbLike, source:Dynamic):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var particleCount:Dynamic = cast _Runtime.UNDEFINED;
     var positionsZ:Dynamic = cast _Runtime.UNDEFINED;
@@ -165,16 +163,16 @@ class ParticleEmitter3D {
     _Runtime.setField(_Runtime.field(out, 'max'), 'z', maxZ);
   }
 
-  public static function createParticleEmitter3D(?obj:PartialNode<ParticleEmitter3D>):ParticleEmitter3D {
+  public static function createParticleEmitter3D(?obj:PartialNode<Dynamic>):Dynamic {
     var node:Dynamic = cast _Runtime.UNDEFINED;
-    node = (cast (cast _Runtime.callValue(createSceneNode, cast ([ParticleEmitter3DKind, obj] : Array<Dynamic>)) : Dynamic) : ParticleEmitter3D);
+    node = (cast (cast _Runtime.callValue(createSceneNode, cast ([ParticleEmitter3DKind, obj] : Array<Dynamic>)) : Dynamic) : Dynamic);
     _Runtime.setField(node, 'data', _Runtime.callValue(createParticleEmitterData, cast ([(cast _Runtime.optionalField(obj, 'data') : Null<Dynamic>)] : Array<Dynamic>)));
     _Runtime.setField(node, 'blendMode', _Runtime.coalesce(_Runtime.optionalField(obj, 'blendMode'), function():Dynamic return cast 'normal'));
     return cast node;
     return cast null;
   }
 
-  public static function getParticleEmitter3DCapacity(source:ParticleEmitter3D):Float {
+  public static function getParticleEmitter3DCapacity(source:Dynamic):Float {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var transformCapacity:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
@@ -183,19 +181,19 @@ class ParticleEmitter3D {
     return cast null;
   }
 
-  public static function getParticleEmitter3DParticleAlpha(source:ParticleEmitter3D, index:Float):Float {
+  public static function getParticleEmitter3DParticleAlpha(source:Dynamic, index:Float):Float {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(source, 'data'), 'particleCount'), '>=')))) { return cast -1.0; }
     return cast _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'alphas'), index);
     return cast null;
   }
 
-  public static function getParticleEmitter3DParticleId(source:ParticleEmitter3D, index:Float):Float {
+  public static function getParticleEmitter3DParticleId(source:Dynamic, index:Float):Float {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(source, 'data'), 'particleCount'), '>=')))) { return cast -1.0; }
     return cast _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'ids'), index);
     return cast null;
   }
 
-  public static function getParticleEmitter3DParticleVelocity(out:Vector3Like, source:ParticleEmitter3D, index:Float):Bool {
+  public static function getParticleEmitter3DParticleVelocity(out:Vector3Like, source:Dynamic, index:Float):Bool {
     var vt:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(source, 'data'), 'particleCount'), '>=')))) { return cast false; }
     vt = (index * ParticleEmitter3D.PARTICLE_VELOCITY_STRIDE__particleEmitter3D);
@@ -206,8 +204,8 @@ class ParticleEmitter3D {
     return cast null;
   }
 
-  public static function getParticleEmitter3DRuntime(source:ParticleEmitter3D):ParticleEmitter3DRuntime {
-    return cast (cast _Runtime.callValue(getSceneNodeRuntime, cast ([(cast (cast source : Dynamic) : SceneNode)] : Array<Dynamic>)) : ParticleEmitter3DRuntime);
+  public static function getParticleEmitter3DRuntime(source:Dynamic):ParticleEmitter3DRuntime {
+    return cast (cast _Runtime.callValue(getSceneNodeRuntime, cast ([(cast (cast source : Dynamic) : Dynamic)] : Array<Dynamic>)) : ParticleEmitter3DRuntime);
     return cast null;
   }
 
@@ -216,7 +214,7 @@ class ParticleEmitter3D {
     return cast null;
   }
 
-  public static function removeParticleEmitter3DParticle(target:ParticleEmitter3D, index:Float):Void {
+  public static function removeParticleEmitter3DParticle(target:Dynamic, index:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var last:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(target, 'data');
@@ -246,7 +244,7 @@ class ParticleEmitter3D {
     _Runtime.setField(data, 'particleCount', last);
   }
 
-  public static function reserveParticleEmitter3D(target:ParticleEmitter3D, capacity:Float):Void {
+  public static function reserveParticleEmitter3D(target:Dynamic, capacity:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(_Runtime.callValue(getParticleEmitter3DCapacity, cast ([target] : Array<Dynamic>)), capacity, '>='))) { return; }
     data = _Runtime.field(target, 'data');
@@ -258,7 +256,7 @@ class ParticleEmitter3D {
     _Runtime.setField(data, 'velocities', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(data, 'velocities'), (capacity * ParticleEmitter3D.PARTICLE_VELOCITY_STRIDE__particleEmitter3D)] : Array<Dynamic>)));
   }
 
-  public static function setParticleEmitter3DParticle(target:ParticleEmitter3D, index:Float, id:Float, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Void {
+  public static function setParticleEmitter3DParticle(target:Dynamic, index:Float, id:Float, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var tt:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(target, 'data');
@@ -272,12 +270,12 @@ class ParticleEmitter3D {
     _Runtime.setIndex(_Runtime.field(data, 'positionsZ'), index, z);
   }
 
-  public static function setParticleEmitter3DParticleAlpha(target:ParticleEmitter3D, index:Float, alpha:Float):Void {
+  public static function setParticleEmitter3DParticleAlpha(target:Dynamic, index:Float, alpha:Float):Void {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(target, 'data'), 'particleCount'), '>=')))) { return; }
     _Runtime.setIndex(_Runtime.field(_Runtime.field(target, 'data'), 'alphas'), index, alpha);
   }
 
-  public static function setParticleEmitter3DParticleColor(target:ParticleEmitter3D, index:Float, r:Float, g:Float, b:Float):Void {
+  public static function setParticleEmitter3DParticleColor(target:Dynamic, index:Float, r:Float, g:Float, b:Float):Void {
     var ct:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(target, 'data'), 'particleCount'), '>=')))) { return; }
     ct = (index * ParticleEmitter3D.PARTICLE_COLOR_STRIDE__particleEmitter3D);
@@ -286,7 +284,7 @@ class ParticleEmitter3D {
     _Runtime.setIndex(_Runtime.field(_Runtime.field(target, 'data'), 'colors'), (ct + 2.0), b);
   }
 
-  public static function setParticleEmitter3DParticleVelocity(target:ParticleEmitter3D, index:Float, vx:Float, vy:Float, vz:Float):Void {
+  public static function setParticleEmitter3DParticleVelocity(target:Dynamic, index:Float, vx:Float, vy:Float, vz:Float):Void {
     var vt:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(target, 'data'), 'particleCount'), '>=')))) { return; }
     vt = (index * ParticleEmitter3D.PARTICLE_VELOCITY_STRIDE__particleEmitter3D);

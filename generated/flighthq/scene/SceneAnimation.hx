@@ -7,13 +7,11 @@ import flighthq.animation.AnimationTrack.sampleAnimationTrack;
 import flighthq.geometry.Quaternion.setQuaternion;
 import flighthq.geometry.Vector3.setVector3;
 import flighthq.node.Revision.invalidateNodeLocalTransform;
-import flighthq.types.AnimationClip;
-import flighthq.types.Mesh;
 import flighthq.types.SceneAnimationTarget;
 
 @:expose("flighthq.scene.SceneAnimation")
 class SceneAnimation {
-  public static function applyAnimationClipToScene(clip:AnimationClip, time:Float):Void {
+  public static function applyAnimationClipToScene(clip:Dynamic, time:Float):Void {
     var channels:Dynamic = cast _Runtime.UNDEFINED;
     channels = _Runtime.field(clip, 'channels');
     {
@@ -23,7 +21,7 @@ class SceneAnimation {
         var target:Dynamic = (cast _Runtime.field(channel, 'targetRef') : Null<SceneAnimationTarget>);
         if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(target, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(target, 'node'), _Runtime.field(_Runtime, 'UNDEFINED'))))) { i++; continue; }
         if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(target, 'path'), 'Weights'))) {
-          var morph:Dynamic = _Runtime.field((cast _Runtime.field(target, 'node') : Mesh), 'morph');
+          var morph:Dynamic = _Runtime.field((cast _Runtime.field(target, 'node') : Dynamic), 'morph');
           if (_Runtime.truthy(_Runtime.looseEquals(morph, null))) { i++; continue; }
           _Runtime.callValue(sampleAnimationTrack, cast ([_Runtime.field(morph, 'weights'), _Runtime.field(channel, 'track'), time] : Array<Dynamic>));
           i++;

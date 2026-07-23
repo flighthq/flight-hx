@@ -4,8 +4,6 @@ package flighthq.effectsWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget;
 
 typedef WgpuEffectBlendMode = String;
 
@@ -27,7 +25,7 @@ class WgpuEffectPass {
 
   public static final effectPassStates__wgpuEffectPass:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  public static function getOrCreateEffectPassState__wgpuEffectPass(state:WgpuRenderState):WgpuEffectPassState__wgpuEffectPass {
+  public static function getOrCreateEffectPassState__wgpuEffectPass(state:Dynamic):WgpuEffectPassState__wgpuEffectPass {
     var fs:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
@@ -80,7 +78,7 @@ class WgpuEffectPass {
     return cast null;
   }
 
-  public static function writeUniformSlot__wgpuEffectPass(state:WgpuRenderState, fs:WgpuEffectPassState__wgpuEffectPass, slotOffset:Float, setUniforms:Dynamic):Void {
+  public static function writeUniformSlot__wgpuEffectPass(state:Dynamic, fs:WgpuEffectPassState__wgpuEffectPass, slotOffset:Float, setUniforms:Dynamic):Void {
     var f32Start:Dynamic = cast _Runtime.UNDEFINED;
     var slotF32:Dynamic = cast _Runtime.UNDEFINED;
     var slotI32:Dynamic = cast _Runtime.UNDEFINED;
@@ -91,7 +89,7 @@ class WgpuEffectPass {
     _Runtime.callProperty(_Runtime.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(fs, 'uniformBuffer'), slotOffset, _Runtime.field(_Runtime.field(fs, 'uniformData'), 'buffer'), slotOffset, _Runtime.field(fs, 'uniformStride')] : Array<Dynamic>));
   }
 
-  public static function beginEffectPass__wgpuEffectPass(state:WgpuRenderState, dest:Null<WgpuRenderTarget>, loadOp:Dynamic):Dynamic {
+  public static function beginEffectPass__wgpuEffectPass(state:Dynamic, dest:Null<Dynamic>, loadOp:Dynamic):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var view:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
@@ -114,7 +112,7 @@ class WgpuEffectPass {
     return cast null;
   }
 
-  public static function resolveEffectPipeline__wgpuEffectPass(state:WgpuRenderState, pipeline:WgpuEffectPipeline, dest:Null<WgpuRenderTarget>):Dynamic {
+  public static function resolveEffectPipeline__wgpuEffectPass(state:Dynamic, pipeline:WgpuEffectPipeline, dest:Null<Dynamic>):Dynamic {
     var canvasFormat:Dynamic = cast _Runtime.UNDEFINED;
     var targetFormat:Dynamic = cast _Runtime.UNDEFINED;
     var variant:Dynamic = cast _Runtime.UNDEFINED;
@@ -132,13 +130,13 @@ class WgpuEffectPass {
     return cast null;
   }
 
-  public static function clearWgpuEffectTarget(state:WgpuRenderState, target:WgpuRenderTarget):Void {
+  public static function clearWgpuEffectTarget(state:Dynamic, target:Dynamic):Void {
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     pass = _Runtime.callValue(WgpuEffectPass.beginEffectPass__wgpuEffectPass, cast ([state, target, 'clear'] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'end', cast ([] : Array<Dynamic>));
   }
 
-  public static function createWgpuDualSourceEffectPipeline(state:WgpuRenderState, fragmentWGSL:String, blend:WgpuEffectBlendMode = 'premul'):WgpuDualSourceEffectPipeline {
+  public static function createWgpuDualSourceEffectPipeline(state:Dynamic, fragmentWGSL:String, blend:WgpuEffectBlendMode = 'premul'):WgpuDualSourceEffectPipeline {
     var fs:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
@@ -155,7 +153,7 @@ class WgpuEffectPass {
     return cast null;
   }
 
-  public static function createWgpuEffectPipeline(state:WgpuRenderState, fragmentWGSL:String, blend:WgpuEffectBlendMode = 'premul'):WgpuEffectPipeline {
+  public static function createWgpuEffectPipeline(state:Dynamic, fragmentWGSL:String, blend:WgpuEffectBlendMode = 'premul'):WgpuEffectPipeline {
     var fs:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
@@ -179,7 +177,7 @@ class WgpuEffectPass {
     return cast null;
   }
 
-  public static function drawWgpuDualSourceEffectPass(state:WgpuRenderState, source0:WgpuRenderTarget, source1:WgpuRenderTarget, dest:Null<WgpuRenderTarget>, pipeline:WgpuDualSourceEffectPipeline, setUniforms:Dynamic):Void {
+  public static function drawWgpuDualSourceEffectPass(state:Dynamic, source0:Dynamic, source1:Dynamic, dest:Null<Dynamic>, pipeline:WgpuDualSourceEffectPipeline, setUniforms:Dynamic):Void {
     var fs:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure3:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
@@ -203,7 +201,7 @@ class WgpuEffectPass {
     _Runtime.callProperty(pass, 'end', cast ([] : Array<Dynamic>));
   }
 
-  public static function drawWgpuEffectPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:Null<WgpuRenderTarget>, pipeline:WgpuEffectPipeline, setUniforms:Dynamic):Void {
+  public static function drawWgpuEffectPass(state:Dynamic, source:Dynamic, dest:Null<Dynamic>, pipeline:WgpuEffectPipeline, setUniforms:Dynamic):Void {
     var fs:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure4:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
@@ -224,7 +222,7 @@ class WgpuEffectPass {
     _Runtime.callProperty(pass, 'end', cast ([] : Array<Dynamic>));
   }
 
-  public static function getWgpuEffectPassState(state:WgpuRenderState):{ var uniformBG:Dynamic; var textureBGLayout:Dynamic; var uniformBGLayout:Dynamic; var sampler:Dynamic; var acquireSlot:Dynamic; var writeSlot:Dynamic; var beginPass:Dynamic; } {
+  public static function getWgpuEffectPassState(state:Dynamic):{ var uniformBG:Dynamic; var textureBGLayout:Dynamic; var uniformBGLayout:Dynamic; var sampler:Dynamic; var acquireSlot:Dynamic; var writeSlot:Dynamic; var beginPass:Dynamic; } {
     var fs:Dynamic = cast _Runtime.UNDEFINED;
     fs = _Runtime.callValue(WgpuEffectPass.getOrCreateEffectPassState__wgpuEffectPass, cast ([state] : Array<Dynamic>));
     return cast { uniformBG: _Runtime.field(fs, 'uniformBG'), textureBGLayout: _Runtime.field(fs, 'textureBGLayout'), uniformBGLayout: _Runtime.field(fs, 'uniformBGLayout'), sampler: _Runtime.field(fs, 'sampler'), acquireSlot: function() return _Runtime.callValue(WgpuEffectPass.acquireUniformSlot__wgpuEffectPass, cast ([fs] : Array<Dynamic>)), writeSlot: function(offset:Dynamic, fn:Dynamic) return _Runtime.callValue(WgpuEffectPass.writeUniformSlot__wgpuEffectPass, cast ([state, fs, offset, fn] : Array<Dynamic>)), beginPass: function(dest:Dynamic, loadOp:Dynamic) return _Runtime.callValue(WgpuEffectPass.beginEffectPass__wgpuEffectPass, cast ([state, dest, loadOp] : Array<Dynamic>)) };

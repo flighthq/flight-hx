@@ -6,18 +6,17 @@ import flighthq._internal._Runtime;
 import flighthq.node.Revision.getNodeAppearanceRevision;
 import flighthq.node.Revision.invalidateNodeAppearance;
 import flighthq.scene.SceneNode.getSceneNodeRuntime;
-import flighthq.types.SceneNode;
 
 @:expose("flighthq.scene.SceneNodeAppearance")
 class SceneNodeAppearance {
-  public static function ensureSceneNodeWorldAlpha(source:SceneNode):Void {
+  public static function ensureSceneNodeWorldAlpha(source:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var parent:Dynamic = cast _Runtime.UNDEFINED;
     var parentWorldAlpha:Dynamic = cast _Runtime.UNDEFINED;
     var parentWorldAppearanceId:Dynamic = cast _Runtime.UNDEFINED;
     var appearanceId:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getSceneNodeRuntime, cast ([source] : Array<Dynamic>));
-    parent = (cast _Runtime.field(runtime, 'parent') : Null<SceneNode>);
+    parent = (cast _Runtime.field(runtime, 'parent') : Null<Dynamic>);
     parentWorldAlpha = 1.0;
     parentWorldAppearanceId = 0.0;
     if (_Runtime.truthy(!_Runtime.strictEquals(parent, null))) {
@@ -37,13 +36,13 @@ class SceneNodeAppearance {
     }
   }
 
-  public static function getSceneNodeWorldAlpha(source:SceneNode):Float {
+  public static function getSceneNodeWorldAlpha(source:Dynamic):Float {
     _Runtime.callValue(ensureSceneNodeWorldAlpha, cast ([source] : Array<Dynamic>));
     return cast _Runtime.coalesce(_Runtime.field(_Runtime.callValue(getSceneNodeRuntime, cast ([source] : Array<Dynamic>)), 'worldAlpha'), function():Dynamic return cast 1.0);
     return cast null;
   }
 
-  public static function setSceneNodeAlpha(source:SceneNode, alpha:Float):Void {
+  public static function setSceneNodeAlpha(source:Dynamic, alpha:Float):Void {
     _Runtime.setField(source, 'alpha', alpha);
     _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }

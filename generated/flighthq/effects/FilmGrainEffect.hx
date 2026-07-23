@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.FilmGrainEffect;
 
 @:expose("flighthq.effects.FilmGrainEffect")
 class FilmGrainEffect {
-  public static function createFilmGrainEffect(?options:Dynamic):FilmGrainEffect {
+  public static function createFilmGrainEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'FilmGrainEffect' }, options]);
     return cast null;

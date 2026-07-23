@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 
-typedef SpotLight = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; var castsShadow:Bool; var color:Float; var direction:Vector3; var innerConeCos:Float; var intensity:Float; var normalBias:Float; var outerConeCos:Float; var pcfRadius:Float; var position:Vector3; var range:Float; var shadowBias:Float; };
+typedef SpotLight = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; var castsShadow:Bool; var color:Float; var direction:Dynamic; var innerConeCos:Float; var intensity:Float; var normalBias:Float; var outerConeCos:Float; var pcfRadius:Float; var position:Dynamic; var range:Float; var shadowBias:Float; };

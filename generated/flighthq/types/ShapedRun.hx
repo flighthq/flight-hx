@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 
 typedef ShapedGlyph = { var cluster:Float; var glyphId:Float; var xAdvance:Float; var xOffset:Float; var yAdvance:Float; var yOffset:Float; };
 
-typedef ShapedRun = { var advanceWidth:Float; var direction:TextDirection; var font:Null<FontResource>; var glyphCount:Float; var glyphs:Array<ShapedGlyph>; var script:String; };
+typedef ShapedRun = { var advanceWidth:Float; var direction:TextDirection; var font:Null<Dynamic>; var glyphCount:Float; var glyphs:Array<ShapedGlyph>; var script:String; };

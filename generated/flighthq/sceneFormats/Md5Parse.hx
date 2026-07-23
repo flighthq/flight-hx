@@ -30,22 +30,18 @@ import flighthq.sceneFormats.Shared.createExternalTextureRef;
 import flighthq.sceneFormats.Shared.packSkinInfluences;
 import flighthq.sceneFormats.Shared.reverseTriangleWinding;
 import flighthq.skeleton3d.Skeleton3d.createSkeleton3D;
-import flighthq.types.Material;
-import flighthq.types.Mesh;
-import flighthq.types.Scene;
-import flighthq.types.SceneNode;
 import flighthq.types.Skeleton3D;
 
 @:expose("flighthq.sceneFormats.Md5Parse")
 class Md5Parse {
-  public static function createSceneFromMd5Mesh(source:String, ?warnings:Array<String>):Scene {
+  public static function createSceneFromMd5Mesh(source:String, ?warnings:Array<String>):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var joints:Array<Md5Joint> = cast _Runtime.UNDEFINED;
     var meshes:Array<Md5Mesh> = cast _Runtime.UNDEFINED;
     var lines:Dynamic = cast _Runtime.UNDEFINED;
     var i:Dynamic = cast _Runtime.UNDEFINED;
     var skeleton:Null<Skeleton3D> = cast _Runtime.UNDEFINED;
-    var skeletonRoot:Null<SceneNode> = cast _Runtime.UNDEFINED;
+    var skeletonRoot:Null<Dynamic> = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(createScene, cast ([] : Array<Dynamic>));
     joints = cast ([] : Array<Dynamic>);
     meshes = cast ([] : Array<Dynamic>);
@@ -80,7 +76,7 @@ class Md5Parse {
     skeletonRoot = null;
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(joints, 'length'), 0.0, '>'))) {
       (skeletonRoot = cast (_Runtime.callValue(createSceneNode, cast ([_Runtime.field(_Runtime, 'UNDEFINED'), { name: 'skeleton' }] : Array<Dynamic>)) : Dynamic));
-      var jointNodes:Array<SceneNode> = cast ([] : Array<Dynamic>);
+      var jointNodes:Array<Dynamic> = cast ([] : Array<Dynamic>);
       var jointPositions:Array<Float> = cast ([] : Array<Dynamic>);
       var jointOrientations:Array<Float> = cast ([] : Array<Dynamic>);
       for (joint in _Runtime.iterable(joints)) {
@@ -209,15 +205,15 @@ class Md5Parse {
         if (_Runtime.truthy(_Runtime.compare(_Runtime.field(indices, 'length'), 0.0, '>'))) {
           var geometry:Dynamic = _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), 'from', cast ([indices] : Array<Dynamic>)), layout: CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT, vertices: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [vertices]) }] : Array<Dynamic>));
           _Runtime.callValue(computeMeshGeometryNormals, cast ([geometry, geometry] : Array<Dynamic>));
-          var materials:Array<Material> = cast ([] : Array<Dynamic>);
+          var materials:Array<Dynamic> = cast ([] : Array<Dynamic>);
           if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(md5Mesh, 'shader'), 'length'), 0.0, '>'))) {
-            var material:Dynamic = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuseMap: _Runtime.callValue(createExternalTextureRef, cast ([_Runtime.field(md5Mesh, 'shader')] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Material);
+            var material:Dynamic = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuseMap: _Runtime.callValue(createExternalTextureRef, cast ([_Runtime.field(md5Mesh, 'shader')] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Dynamic);
             _Runtime.setField(material, 'name', _Runtime.field(md5Mesh, 'shader'));
             _Runtime.callProperty(materials, 'push', cast ([material] : Array<Dynamic>));
           }
-          var meshNode:Mesh = _Runtime.callValue(createMesh, cast ([geometry, materials] : Array<Dynamic>));
+          var meshNode:Dynamic = _Runtime.callValue(createMesh, cast ([geometry, materials] : Array<Dynamic>));
           if (_Runtime.truthy(!_Runtime.strictEquals(skeleton, null))) { _Runtime.setField(meshNode, 'skin', { skeleton: skeleton, skeletonRoot: skeletonRoot }); }
-          _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), (cast (cast meshNode : Dynamic) : SceneNode)] : Array<Dynamic>));
+          _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), (cast (cast meshNode : Dynamic) : Dynamic)] : Array<Dynamic>));
         }
         m++;
       }

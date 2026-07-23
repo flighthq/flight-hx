@@ -5,10 +5,8 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.picking.PickScene as Facade_Picking_flighthq_picking_PickScene;
 import flighthq.picking.PickScene.ScenePickOptions;
-import flighthq.types.Camera;
 import flighthq.types.Ray3D;
 import flighthq.types.SceneHit;
-import flighthq.types.SceneNode;
 
 @:expose("flighthq.picking.Picking")
 class Picking {
@@ -17,22 +15,22 @@ class Picking {
     return cast null;
   }
 
-  public static function pickScene(scene:SceneNode, camera:Camera, screenX:Float, screenY:Float, out:SceneHit, ?options:ScenePickOptions):Null<SceneHit> {
+  public static function pickScene(scene:Dynamic, camera:Dynamic, screenX:Float, screenY:Float, out:SceneHit, ?options:ScenePickOptions):Null<SceneHit> {
     return cast _Runtime.callValue(Facade_Picking_flighthq_picking_PickScene.pickScene, cast ([scene, camera, screenX, screenY, out, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function pickSceneAll(scene:SceneNode, camera:Camera, screenX:Float, screenY:Float, outArray:Array<SceneHit>, ?options:ScenePickOptions):Array<SceneHit> {
+  public static function pickSceneAll(scene:Dynamic, camera:Dynamic, screenX:Float, screenY:Float, outArray:Array<SceneHit>, ?options:ScenePickOptions):Array<SceneHit> {
     return cast _Runtime.callValue(Facade_Picking_flighthq_picking_PickScene.pickSceneAll, cast ([scene, camera, screenX, screenY, outArray, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function pickSceneAllWithRay3D(scene:SceneNode, ray:Ray3D, outArray:Array<SceneHit>, ?options:ScenePickOptions):Array<SceneHit> {
+  public static function pickSceneAllWithRay3D(scene:Dynamic, ray:Ray3D, outArray:Array<SceneHit>, ?options:ScenePickOptions):Array<SceneHit> {
     return cast _Runtime.callValue(Facade_Picking_flighthq_picking_PickScene.pickSceneAllWithRay3D, cast ([scene, ray, outArray, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function pickSceneWithRay3D(scene:SceneNode, ray:Ray3D, out:SceneHit, ?options:ScenePickOptions):Null<SceneHit> {
+  public static function pickSceneWithRay3D(scene:Dynamic, ray:Ray3D, out:SceneHit, ?options:ScenePickOptions):Null<SceneHit> {
     return cast _Runtime.callValue(Facade_Picking_flighthq_picking_PickScene.pickSceneWithRay3D, cast ([scene, ray, out, options] : Array<Dynamic>));
     return cast null;
   }

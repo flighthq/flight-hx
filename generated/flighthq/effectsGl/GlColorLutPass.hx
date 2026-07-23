@@ -5,14 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
-import flighthq.types.ColorLut;
 import flighthq.types.GlColorLutTextureCache;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
 
 @:expose("flighthq.effectsGl.GlColorLutPass")
 class GlColorLutPass {
-  public static function applyColorLutPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, lut:ColorLut, cache:GlColorLutTextureCache):Void {
+  public static function applyColorLutPassToGl(state:Dynamic, source:Dynamic, dest:Dynamic, lut:Dynamic, cache:GlColorLutTextureCache):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var size:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
@@ -30,7 +27,7 @@ class GlColorLutPass {
     }] : Array<Dynamic>));
   }
 
-  public static function uploadLutTexture__glColorLutPass(gl:Dynamic, lut:ColorLut, cache:GlColorLutTextureCache):Dynamic {
+  public static function uploadLutTexture__glColorLutPass(gl:Dynamic, lut:Dynamic, cache:GlColorLutTextureCache):Dynamic {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var samples:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;

@@ -4,8 +4,6 @@ package flighthq.displayobjectCanvas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.Renderer.noopRendererData;
-import flighthq.types.CanvasRenderState;
-import flighthq.types.ParticleEmitter;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.SpriteRenderer;
 
@@ -25,7 +23,7 @@ class CanvasParticleEmitter {
     var t:Dynamic = cast _Runtime.UNDEFINED;
     var imageSource:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;
-    source = (cast _Runtime.field(renderProxy, 'source') : ParticleEmitter);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     __destructure0 = _Runtime.field(source, 'data');
     atlas = _Runtime.field(__destructure0, 'atlas');
     alphas = _Runtime.field(__destructure0, 'alphas');

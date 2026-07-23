@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.MedianEffect;
 
 @:expose("flighthq.effects.MedianEffect")
 class MedianEffect {
-  public static function createMedianEffect(?options:Dynamic):MedianEffect {
+  public static function createMedianEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'MedianEffect' }, options]);
     return cast null;

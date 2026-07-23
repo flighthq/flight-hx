@@ -22,8 +22,6 @@ import flighthq.shape.ShapeCommands.appendShapeMoveTo;
 import flighthq.shape.ShapeCommands.appendShapePath;
 import flighthq.shape.ShapeCommands.appendShapeRectangle;
 import flighthq.shape.ShapeCommands.appendShapeRoundRectangle;
-import flighthq.types.ImageResource;
-import flighthq.types.Shape;
 
 typedef ShapeBitmapReference = { var index:Float; };
 
@@ -37,7 +35,7 @@ typedef SerializedShapeCommand__shapeJson = { var key:String; var args:Array<Dyn
 
 @:expose("flighthq.shapeFormats.ShapeJson")
 class ShapeJson {
-  public static function formatShapeJson(shape:Shape, ?options:ShapeJsonFormatOptions):String {
+  public static function formatShapeJson(shape:Dynamic, ?options:ShapeJsonFormatOptions):String {
     var commands:Dynamic = cast _Runtime.UNDEFINED;
     var entries:Array<SerializedShapeCommand__shapeJson> = cast _Runtime.UNDEFINED;
     var bitmapOrdinal:Dynamic = cast _Runtime.UNDEFINED;
@@ -74,7 +72,7 @@ class ShapeJson {
     return cast null;
   }
 
-  public static function parseShapeJson(text:String, ?options:ShapeJsonParseOptions):Null<Shape> {
+  public static function parseShapeJson(text:String, ?options:ShapeJsonParseOptions):Null<Dynamic> {
     var root:Dynamic = cast _Runtime.UNDEFINED;
     var rawCommands:Dynamic = cast _Runtime.UNDEFINED;
     var resolveBitmap:Dynamic = cast _Runtime.UNDEFINED;

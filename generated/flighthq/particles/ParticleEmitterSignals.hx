@@ -4,23 +4,22 @@ package flighthq.particles;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Signal.createSignal;
-import flighthq.types.ParticleEmitterSignals;
 
 @:expose("flighthq.particles.ParticleEmitterSignals")
 class ParticleEmitterSignals {
-  public static function createParticleEmitterSignals():ParticleEmitterSignals {
+  public static function createParticleEmitterSignals():Dynamic {
     return cast { onEmitterComplete: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onParticleDeath: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onParticleSpawn: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  public static function enableParticleEmitterSignals(state:Dynamic):ParticleEmitterSignals {
+  public static function enableParticleEmitterSignals(state:Dynamic):Dynamic {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     s = (cast state : Dynamic);
     return cast _Runtime.setIndex(s, ParticleEmitterSignals.signalsSlot__particleEmitterSignals, (_Runtime.getIndex(s, ParticleEmitterSignals.signalsSlot__particleEmitterSignals) ?? _Runtime.callValue(createParticleEmitterSignals, cast ([] : Array<Dynamic>))));
     return cast null;
   }
 
-  public static function getParticleEmitterSignals(state:Dynamic):Null<ParticleEmitterSignals> {
+  public static function getParticleEmitterSignals(state:Dynamic):Null<Dynamic> {
     return cast _Runtime.coalesce(_Runtime.getIndex((cast state : Dynamic), ParticleEmitterSignals.signalsSlot__particleEmitterSignals), function():Dynamic return cast null);
     return cast null;
   }

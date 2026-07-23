@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef Skeleton3D = { var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<SceneNode>; @:optional var names:Null<Array<String>>; };
+typedef Skeleton3D = { var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<Dynamic>; @:optional var names:Null<Array<String>>; };

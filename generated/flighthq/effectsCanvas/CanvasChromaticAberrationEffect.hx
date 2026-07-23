@@ -5,16 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.passthroughCanvasEffectPass;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
-import flighthq.types.CanvasRenderTarget;
-import flighthq.types.ChromaticAberrationEffect;
 
 @:expose("flighthq.effectsCanvas.CanvasChromaticAberrationEffect")
 class CanvasChromaticAberrationEffect {
-  public static function applyChromaticAberrationEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:ChromaticAberrationEffect):Void {
+  public static function applyChromaticAberrationEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
   public static final defaultCanvasChromaticAberrationEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyChromaticAberrationEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ChromaticAberrationEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyChromaticAberrationEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 }

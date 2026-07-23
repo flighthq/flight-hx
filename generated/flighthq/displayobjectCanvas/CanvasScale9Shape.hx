@@ -8,12 +8,10 @@ import flighthq.displayobjectCanvas.CanvasScale9Mapper.buildScale9Mapper;
 import flighthq.displayobjectCanvas.CanvasShape.renderCanvasShapeCommands;
 import flighthq.displayobjectCanvas.CanvasTransform.setCanvasTransform;
 import flighthq.render.Renderer.noopRendererData;
-import flighthq.types.CanvasRenderState;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Scale9Mapper;
-import flighthq.types.Scale9Shape;
 
 @:expose("flighthq.displayobjectCanvas.CanvasScale9Shape")
 class CanvasScale9Shape {
@@ -32,7 +30,7 @@ class CanvasScale9Shape {
     var scaleY:Dynamic = cast _Runtime.UNDEFINED;
     var mapper:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(drawCanvasDisplayObject, cast ([state, renderProxy] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : Scale9Shape);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     __destructure0 = _Runtime.field(source, 'data');
     commands = _Runtime.field(__destructure0, 'commands');
     scale9Grid = _Runtime.field(__destructure0, 'scale9Grid');

@@ -3,11 +3,10 @@ package flighthq.clock;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Clock;
 
 @:expose("flighthq.clock.SetClockScale")
 class SetClockScale {
-  public static function setClockScale(clock:Clock, scale:Float):Void {
+  public static function setClockScale(clock:Dynamic, scale:Float):Void {
     _Runtime.setField(clock, 'scale', scale);
   }
 }

@@ -5,23 +5,20 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
-import flighthq.types.SsrEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
-import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.effectsWgpu.WgpuSsrEffect")
 class WgpuSsrEffect {
-  public static function applySsrEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SsrEffect):Void {
+  public static function applySsrEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'atmospheric.ssr', WgpuSsrEffect.SSR_FRAGMENT_WGSL__wgpuSsrEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function() {
+    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : Dynamic), (cast dest : Dynamic), pipeline, function() {
     
     }] : Array<Dynamic>));
   }
 
   public static final defaultWgpuSsrEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applySsrEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : SsrEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applySsrEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static final SSR_FRAGMENT_WGSL__wgpuSsrEffect:Dynamic = '\nstruct Uniforms {\n  _pad0 : vec4f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  return textureSampleLevel(tex, smp, uv, 0.0);\n}';

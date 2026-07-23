@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.BarrelDistortionEffect;
 
 @:expose("flighthq.effects.BarrelDistortionEffect")
 class BarrelDistortionEffect {
-  public static function createBarrelDistortionEffect(?options:Dynamic):BarrelDistortionEffect {
+  public static function createBarrelDistortionEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'BarrelDistortionEffect' }, options]);
     return cast null;

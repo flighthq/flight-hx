@@ -9,8 +9,6 @@ import flighthq.geometry.Matrix.setMatrixFromFloat32Array;
 import flighthq.geometry.MatrixPool.acquireMatrix;
 import flighthq.geometry.MatrixPool.releaseMatrix;
 import flighthq.render.Renderer.noopRendererData;
-import flighthq.types.CanvasRenderState;
-import flighthq.types.QuadBatch;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.SpriteRenderer;
 
@@ -33,7 +31,7 @@ class CanvasQuadBatch {
     var quadTransform:Dynamic = cast _Runtime.UNDEFINED;
     var stride:Dynamic = cast _Runtime.UNDEFINED;
     var restoreMaterial:Dynamic = cast _Runtime.UNDEFINED;
-    source = (cast _Runtime.field(quadBatch, 'source') : QuadBatch);
+    source = (cast _Runtime.field(quadBatch, 'source') : Dynamic);
     data = _Runtime.field(source, 'data');
     __destructure0 = data;
     atlas = _Runtime.field(__destructure0, 'atlas');

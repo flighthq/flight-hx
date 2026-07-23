@@ -3,13 +3,11 @@ package flighthq.velocity;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Matrix;
 import flighthq.types.Velocity.Velocity2D;
-import flighthq.types.Velocity.VelocitySample;
 
 @:expose("flighthq.velocity.VelocitySample")
 class VelocitySample {
-  public static function getVelocitySampleAt(sample:VelocitySample, currentWorldTransform:Matrix, pointX:Float, pointY:Float, out:Velocity2D):Velocity2D {
+  public static function getVelocitySampleAt(sample:Dynamic, currentWorldTransform:Dynamic, pointX:Float, pointY:Float, out:Velocity2D):Velocity2D {
     var cx:Dynamic = cast _Runtime.UNDEFINED;
     var cy:Dynamic = cast _Runtime.UNDEFINED;
     var px:Dynamic = cast _Runtime.UNDEFINED;

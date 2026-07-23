@@ -8,4 +8,4 @@ import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Vector2 = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var x:Float; var y:Float; };
 
-typedef Vector2Like = EntityWithoutRuntime<Vector2>;
+typedef Vector2Like = EntityWithoutRuntime<Dynamic>;

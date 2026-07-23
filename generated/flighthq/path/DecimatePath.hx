@@ -4,12 +4,11 @@ package flighthq.path;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
-import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 
 @:expose("flighthq.path.DecimatePath")
 class DecimatePath {
-  public static function decimatePath(source:Path, tolerance:Float, out:Path, flattenTolerance:Dynamic = 0.25):Void {
+  public static function decimatePath(source:Dynamic, tolerance:Float, out:Dynamic, flattenTolerance:Dynamic = 0.25):Void {
     var contours:Dynamic = cast _Runtime.UNDEFINED;
     contours = _Runtime.callValue(flattenPath, cast ([source, flattenTolerance] : Array<Dynamic>));
     _Runtime.setLength(_Runtime.field(out, 'commands'), 0.0);

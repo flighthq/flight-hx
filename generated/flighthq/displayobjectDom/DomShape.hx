@@ -10,23 +10,20 @@ import flighthq.displayobjectDom.DomTransform.setDomTransformWithOffset;
 import flighthq.entity.Entity.createEntity;
 import flighthq.node.BoundsRectangle.getNodeLocalBoundsRectangle;
 import flighthq.types.DisplayObjectRenderer;
-import flighthq.types.DomRenderState;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
-import flighthq.types.Shape;
 
 typedef DomShapeData__domShape = Dynamic;
 
 @:expose("flighthq.displayobjectDom.DomShape")
 class DomShape {
-  public static function createDomShapeData__domShape(_state:RenderState, _source:Renderable):DomShapeData__domShape {
+  public static function createDomShapeData__domShape(_state:Dynamic, _source:Renderable):DomShapeData__domShape {
     return cast _Runtime.callValue(createEntity, cast ([{ canvas: null, context: null }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function drawDomShape(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomShape(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -37,7 +34,7 @@ class DomShape {
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     data = (cast _Runtime.field(renderProxy, 'rendererData') : Null<DomShapeData__domShape>);
     if (_Runtime.truthy(_Runtime.strictEquals(data, null))) { return; }
-    source = (cast _Runtime.field(renderProxy, 'source') : Shape);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     __destructure0 = _Runtime.field(source, 'data');
     commands = _Runtime.field(__destructure0, 'commands');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0))) { return; }

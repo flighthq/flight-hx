@@ -4,14 +4,13 @@ package flighthq.skeleton3d;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.skeleton3d.SkinVertices.skinVertices;
-import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
 import flighthq.types.MeshSkinBindPose;
 import flighthq.types.Skeleton3D;
 
 @:expose("flighthq.skeleton3d.SkinMeshGeometry")
 class SkinMeshGeometry {
-  public static function captureMeshSkinBindPose(geometry:MeshGeometry):MeshSkinBindPose {
+  public static function captureMeshSkinBindPose(geometry:Dynamic):MeshSkinBindPose {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     var vertices:Dynamic = cast _Runtime.UNDEFINED;
@@ -73,7 +72,7 @@ class SkinMeshGeometry {
     return cast null;
   }
 
-  public static function skinMeshGeometry(geometry:MeshGeometry, skeleton:Skeleton3D, bindPose:MeshSkinBindPose):Void {
+  public static function skinMeshGeometry(geometry:Dynamic, skeleton:Skeleton3D, bindPose:MeshSkinBindPose):Void {
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     var vertices:Dynamic = cast _Runtime.UNDEFINED;

@@ -3,12 +3,7 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.HasAppearance;
-import flighthq.types.HasBlendMode;
-import flighthq.types.HasBoundsRectangle;
 import flighthq.types.HasBoundsRectangle.HasBoundsRectangleRuntime;
-import flighthq.types.HasClip;
-import flighthq.types.HasMaterial;
 import flighthq.types.HasTransform2D;
 import flighthq.types.HasTransform2D.HasTransform2DRuntime;
 import flighthq.types.Node.NodeData;
@@ -16,7 +11,6 @@ import flighthq.types.Node.NodeDataFactory;
 import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node.NodeRuntimeFactory;
 import flighthq.types.Node.NodeTraits;
-import flighthq.types.Stage;
 
 @:expose("flighthq.types._internal._DisplayObjectValues")
 class _DisplayObjectValues {

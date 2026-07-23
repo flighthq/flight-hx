@@ -6,6 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Vector3.Vector3Like;
 
-typedef Aabb = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var max:Vector3; var min:Vector3; };
+typedef Aabb = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var max:Dynamic; var min:Dynamic; };
 
 typedef AabbLike = { var max:Vector3Like; var min:Vector3Like; };

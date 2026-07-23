@@ -4,20 +4,19 @@ package flighthq.particles;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Typedarray.reserveFloat32Array;
-import flighthq.types.ParticleEmitterState;
 import flighthq.types.RandomSource;
 
 @:expose("flighthq.particles.ParticleEmitterState")
 class ParticleEmitterState {
   public static final PARTICLE_VELOCITY_STRIDE:Dynamic = 3.0;
 
-  public static function createParticleEmitterState(?random:RandomSource):ParticleEmitterState {
+  public static function createParticleEmitterState(?random:RandomSource):Dynamic {
     if (random == null) random = cast (HxMath.random : Dynamic);
     return cast { burstTimer: 0.0, colorBirth: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), []), colorDeath: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), []), emitterAge: 0.0, lifetimes: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), []), prevX: HxMath.NaN, prevY: HxMath.NaN, prevZ: HxMath.NaN, random: random, rotationSpeeds: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), []), scales: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), []), spawnAccumulator: 0.0, velocities: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), []) };
     return cast null;
   }
 
-  public static function ensureParticleEmitterStateCapacity(state:ParticleEmitterState, capacity:Float, hasColorVariance:Bool):Void {
+  public static function ensureParticleEmitterStateCapacity(state:Dynamic, capacity:Float, hasColorVariance:Bool):Void {
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(state, 'lifetimes'), 'length'), (capacity * 2.0), '>='))) {
       if (_Runtime.truthy(_Runtime.andValue(hasColorVariance, function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(state, 'colorBirth'), 'length'), (capacity * 3.0), '<')))) {
         _Runtime.setField(state, 'colorBirth', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(state, 'colorBirth'), (capacity * 3.0)] : Array<Dynamic>)));

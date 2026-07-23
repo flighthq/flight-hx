@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.InnerShadowEffect;
 
 @:expose("flighthq.effects.InnerShadowEffect")
 class InnerShadowEffect {
-  public static function createInnerShadowEffect(?options:Dynamic):InnerShadowEffect {
+  public static function createInnerShadowEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'InnerShadowEffect' }, options]);
     return cast null;

@@ -11,11 +11,7 @@ import flighthq.particles.Curve.sampleParticleCurve;
 import flighthq.particles.ParticleEmitterSignals.getParticleEmitterSignals;
 import flighthq.particles.ParticleEmitterState.PARTICLE_VELOCITY_STRIDE;
 import flighthq.particles.ParticleEmitterState.ensureParticleEmitterStateCapacity;
-import flighthq.types.DisplayObject;
-import flighthq.types.ParticleEmitter;
 import flighthq.types.ParticleEmitterCallbacks;
-import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterState;
 
 @:expose("flighthq.particleemitter.UpdateParticleEmitter")
 class UpdateParticleEmitter {
@@ -23,18 +19,18 @@ class UpdateParticleEmitter {
 
   public static final TWO_PI__updateParticleEmitter:Dynamic = (HxMath.PI * 2.0);
 
-  public static function isParticleEmitterComplete(emitter:ParticleEmitter, state:ParticleEmitterState, config:ParticleEmitterConfig):Bool {
+  public static function isParticleEmitterComplete(emitter:Dynamic, state:Dynamic, config:Dynamic):Bool {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(config, 'duration'), 0.0, '<='), function():Dynamic return cast _Runtime.field(config, 'loop')))) { return cast false; }
     return cast _Runtime.andValue(_Runtime.compare(_Runtime.field(state, 'emitterAge'), _Runtime.field(config, 'duration'), '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(emitter, 'data'), 'particleCount'), 0.0));
     return cast null;
   }
 
-  public static function isEmitting__updateParticleEmitter(config:ParticleEmitterConfig, emitterAge:Float):Bool {
+  public static function isEmitting__updateParticleEmitter(config:Dynamic, emitterAge:Float):Bool {
     return cast _Runtime.orValue(_Runtime.orValue(_Runtime.compare(_Runtime.field(config, 'duration'), 0.0, '<='), function():Dynamic return cast _Runtime.field(config, 'loop')), function():Dynamic return cast _Runtime.compare(emitterAge, _Runtime.field(config, 'duration'), '<'));
     return cast null;
   }
 
-  public static function updateParticleEmitter(emitter:ParticleEmitter, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?callbacks:ParticleEmitterCallbacks):Void {
+  public static function updateParticleEmitter(emitter:Dynamic, state:Dynamic, config:Dynamic, deltaTime:Float, ?callbacks:ParticleEmitterCallbacks):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var worldTransform:Dynamic = cast _Runtime.UNDEFINED;
     var trackX:Dynamic = cast _Runtime.UNDEFINED;
@@ -79,7 +75,7 @@ class UpdateParticleEmitter {
     var maxNew:Dynamic = cast _Runtime.UNDEFINED;
     var liveRenderVelocityCount:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(emitter, 'data');
-    worldTransform = _Runtime.select(_Runtime.field(config, 'worldSpace'), function():Dynamic return cast _Runtime.callValue(getNodeWorldMatrix, cast ([(cast (cast emitter : Dynamic) : DisplayObject)] : Array<Dynamic>)), function():Dynamic return cast null);
+    worldTransform = _Runtime.select(_Runtime.field(config, 'worldSpace'), function():Dynamic return cast _Runtime.callValue(getNodeWorldMatrix, cast ([(cast (cast emitter : Dynamic) : Dynamic)] : Array<Dynamic>)), function():Dynamic return cast null);
     _Runtime.setField(data, 'worldSpace', !_Runtime.strictEquals(worldTransform, null));
     if (_Runtime.truthy(_Runtime.compare(deltaTime, 0.0, '<='))) { return; }
     trackX = _Runtime.select(!_Runtime.strictEquals(worldTransform, null), function():Dynamic return cast _Runtime.field(worldTransform, 'tx'), function():Dynamic return cast _Runtime.field(emitter, 'x'));

@@ -4,11 +4,10 @@ package flighthq.surface;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.SurfaceRegion;
 
 @:expose("flighthq.surface.SurfaceQuery")
 class SurfaceQuery {
-  public static function getSurfaceColorBoundsRectangle(source:SurfaceRegion, mask:Float, color:Float, findColor:Bool = true):Null<RectangleLike> {
+  public static function getSurfaceColorBoundsRectangle(source:Dynamic, mask:Float, color:Float, findColor:Bool = true):Null<RectangleLike> {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var surfaceWidth:Dynamic = cast _Runtime.UNDEFINED;
     var maskedColor:Dynamic = cast _Runtime.UNDEFINED;

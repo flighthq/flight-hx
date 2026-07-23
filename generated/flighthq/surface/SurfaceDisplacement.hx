@@ -4,15 +4,14 @@ package flighthq.surface;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SurfaceEdgeMode;
-import flighthq.types.SurfaceRegion;
 
 typedef SurfaceDisplacementMapMode = String;
 
-typedef SurfaceDisplacementMapOptions = { var map:SurfaceRegion; @:optional var componentX:Float; @:optional var componentY:Float; @:optional var scaleX:Float; @:optional var scaleY:Float; @:optional var mode:SurfaceDisplacementMapMode; @:optional var edgeMode:SurfaceEdgeMode; @:optional var fillColor:Float; };
+typedef SurfaceDisplacementMapOptions = { var map:Dynamic; @:optional var componentX:Float; @:optional var componentY:Float; @:optional var scaleX:Float; @:optional var scaleY:Float; @:optional var mode:SurfaceDisplacementMapMode; @:optional var edgeMode:SurfaceEdgeMode; @:optional var fillColor:Float; };
 
 @:expose("flighthq.surface.SurfaceDisplacement")
 class SurfaceDisplacement {
-  public static function displaceSurface(out:Dynamic, source:SurfaceRegion, options:SurfaceDisplacementMapOptions):Void {
+  public static function displaceSurface(out:Dynamic, source:Dynamic, options:SurfaceDisplacementMapOptions):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var map:Dynamic = cast _Runtime.UNDEFINED;
@@ -149,7 +148,7 @@ class SurfaceDisplacement {
     return cast null;
   }
 
-  public static function sampleMapChannel__surfaceDisplacement(map:SurfaceRegion, px:Float, py:Float, component:Float):Float {
+  public static function sampleMapChannel__surfaceDisplacement(map:Dynamic, px:Float, py:Float, component:Float):Float {
     var mx:Dynamic = cast _Runtime.UNDEFINED;
     var my:Dynamic = cast _Runtime.UNDEFINED;
     mx = (_Runtime.field(map, 'x') + px);

@@ -17,16 +17,13 @@ import flighthq.materials.UnlitMaterials as Facade_Materials_flighthq_materials_
 import flighthq.types.AnisotropyPbrMaterial;
 import flighthq.types.BlinnPhongMaterial;
 import flighthq.types.ClearcoatPbrMaterial;
-import flighthq.types.ColorTransform;
 import flighthq.types.ColorTransform.ColorTransformLike;
-import flighthq.types.CustomShaderMaterial;
 import flighthq.types.DepthMaterial;
 import flighthq.types.EmissiveMaterial;
 import flighthq.types.Entity.Kind;
 import flighthq.types.IridescencePbrMaterial;
 import flighthq.types.LambertMaterial;
 import flighthq.types.MatcapMaterial;
-import flighthq.types.Material;
 import flighthq.types.NormalMaterial;
 import flighthq.types.PhongMaterial;
 import flighthq.types.SheenPbrMaterial;
@@ -35,7 +32,6 @@ import flighthq.types.SpecularPbrMaterial;
 import flighthq.types.StandardPbrMaterial;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 import flighthq.types.SubsurfacePbrMaterial;
-import flighthq.types.SurfaceMaterial;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.ToonMaterial;
 import flighthq.types.TransmissionVolumePbrMaterial;
@@ -50,12 +46,12 @@ class Materials {
     return cast null;
   }
 
-  public static function cloneColorTransform(source:ColorTransformLike):ColorTransform {
+  public static function cloneColorTransform(source:ColorTransformLike):Dynamic {
     return cast _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.cloneColorTransform, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneMaterial(source:Material):Material {
+  public static function cloneMaterial(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Materials_flighthq_materials_Material.cloneMaterial, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -81,7 +77,7 @@ class Materials {
     _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.copyColorTransformToArrays, cast ([outColorMultipliers, outColorOffsets, source] : Array<Dynamic>));
   }
 
-  public static function copyMaterial(out:Material, source:Material):Void {
+  public static function copyMaterial(out:Dynamic, source:Dynamic):Void {
     _Runtime.callValue(Facade_Materials_flighthq_materials_Material.copyMaterial, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -110,12 +106,12 @@ class Materials {
     return cast null;
   }
 
-  public static function createColorTransform(?opts:Dynamic):ColorTransform {
+  public static function createColorTransform(?opts:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.createColorTransform, cast ([opts] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createCustomShaderMaterial(?opts:Dynamic):CustomShaderMaterial {
+  public static function createCustomShaderMaterial(?opts:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Materials_flighthq_materials_CustomShaderMaterial.createCustomShaderMaterial, cast ([opts] : Array<Dynamic>));
     return cast null;
   }
@@ -165,7 +161,7 @@ class Materials {
     return cast null;
   }
 
-  public static function createMaterial(kind:Kind):Material {
+  public static function createMaterial(kind:Kind):Dynamic {
     return cast _Runtime.callValue(Facade_Materials_flighthq_materials_Material.createMaterial, cast ([kind] : Array<Dynamic>));
     return cast null;
   }
@@ -230,7 +226,7 @@ class Materials {
     return cast null;
   }
 
-  public static function createSurfaceMaterial(kind:Kind):SurfaceMaterial {
+  public static function createSurfaceMaterial(kind:Kind):Dynamic {
     return cast _Runtime.callValue(Facade_Materials_flighthq_materials_SurfaceMaterial.createSurfaceMaterial, cast ([kind] : Array<Dynamic>));
     return cast null;
   }
@@ -280,7 +276,7 @@ class Materials {
     return cast null;
   }
 
-  public static function equalsMaterial(a:Material, b:Material):Bool {
+  public static function equalsMaterial(a:Dynamic, b:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Materials_flighthq_materials_Material.equalsMaterial, cast ([a, b] : Array<Dynamic>));
     return cast null;
   }
@@ -295,7 +291,7 @@ class Materials {
     return cast null;
   }
 
-  public static function getMaterialAlphaMode(source:SurfaceMaterial):MaterialAlphaMode {
+  public static function getMaterialAlphaMode(source:Dynamic):MaterialAlphaMode {
     return cast _Runtime.callValue(Facade_Materials_flighthq_materials_SurfaceMaterial.getMaterialAlphaMode, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -324,17 +320,17 @@ class Materials {
     return cast null;
   }
 
-  public static function isMaterialBlended(source:SurfaceMaterial):Bool {
+  public static function isMaterialBlended(source:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Materials_flighthq_materials_SurfaceMaterial.isMaterialBlended, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isMaterialMasked(source:SurfaceMaterial):Bool {
+  public static function isMaterialMasked(source:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Materials_flighthq_materials_SurfaceMaterial.isMaterialMasked, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isMaterialOpaque(source:SurfaceMaterial):Bool {
+  public static function isMaterialOpaque(source:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Materials_flighthq_materials_SurfaceMaterial.isMaterialOpaque, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -363,7 +359,7 @@ class Materials {
     _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.setColorTransform, cast ([out, redMultiplier, greenMultiplier, blueMultiplier, alphaMultiplier, redOffset, greenOffset, blueOffset, alphaOffset] : Array<Dynamic>));
   }
 
-  public static function setColorTransformIdentity(out:ColorTransform):Void {
+  public static function setColorTransformIdentity(out:Dynamic):Void {
     _Runtime.callValue(Facade_Materials_flighthq_materials_ColorTransform.setColorTransformIdentity, cast ([out] : Array<Dynamic>));
   }
 

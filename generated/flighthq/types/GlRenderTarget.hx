@@ -8,4 +8,4 @@ import flighthq.types.RenderTarget.RenderTargetFormat;
 
 typedef GlRenderTarget = { var width:Float; var height:Float; var format:RenderTargetFormat; var colorSpace:RenderTargetColorSpace; var clearColors:Array<Float>; var clearDepth:Float; var sampleCount:Float; var framebuffer:Dynamic; var resolveFramebuffer:Null<Dynamic>; var textures:Array<Dynamic>; var texture:Dynamic; var depthTexture:Null<Dynamic>; var colorRenderbuffers:Array<Dynamic>; var depthStencilRenderbuffer:Null<Dynamic>; };
 
-typedef GlRenderTargetPool = { var free:Array<GlRenderTarget>; };
+typedef GlRenderTargetPool = { var free:Array<Dynamic>; };

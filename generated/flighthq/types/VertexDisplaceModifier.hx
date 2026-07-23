@@ -7,4 +7,4 @@ import flighthq.types.Vector3.Vector3Like;
 
 typedef VertexDisplaceModifierSource = Dynamic;
 
-typedef VertexDisplaceModifier = { var kind:ModifierKind; var slot:ModifierSlot; var source:VertexDisplaceModifierSource; var amplitude:Float; @:optional var axis:Vector3Like; @:optional var map:Texture; @:optional var frequency:Float; @:optional var speed:Float; @:optional var direction:Vector3Like; };
+typedef VertexDisplaceModifier = { var kind:ModifierKind; var slot:ModifierSlot; var source:VertexDisplaceModifierSource; var amplitude:Float; @:optional var axis:Vector3Like; @:optional var map:Dynamic; @:optional var frequency:Float; @:optional var speed:Float; @:optional var direction:Vector3Like; };

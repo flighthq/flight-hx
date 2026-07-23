@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef RichTextContent = { var formatRanges:Array<TextFormatRange>; var text:String; };
+typedef RichTextContent = { var formatRanges:Array<Dynamic>; var text:String; };

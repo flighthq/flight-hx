@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 
-typedef ParticleObject = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; var alpha:Float; var visible:Bool; var colorTransform:Null<ColorTransform>; };
+typedef ParticleObject = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; var alpha:Float; var visible:Bool; var colorTransform:Null<Dynamic>; };

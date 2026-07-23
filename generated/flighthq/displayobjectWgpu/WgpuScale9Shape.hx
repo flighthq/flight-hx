@@ -3,6 +3,7 @@ package flighthq.displayobjectWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.WgpuScale9ShapeData;
 import flighthq.displayobjectCanvas.CanvasScale9Shape.mapCanvasScale9ShapeCommands;
 import flighthq.displayobjectCanvas.CanvasShape.renderCanvasShapeCommands;
 import flighthq.displayobjectWgpu.WgpuRendererData.createWgpuRendererData;
@@ -18,18 +19,15 @@ import flighthq.renderWgpu.WgpuDraw.updateWgpuTextureEntry;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
-import flighthq.types.Scale9Shape;
-import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 
 typedef WgpuScale9ShapeData__wgpuScale9Shape = { var canvas:Dynamic; var ctx:Dynamic; var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastW:Float; var entry:Null<WgpuTextureEntry>; };
 
 @:expose("flighthq.displayobjectWgpu.WgpuScale9Shape")
 class WgpuScale9Shape {
-  public static function createWgpuScale9ShapeData(_state:RenderState, _source:Renderable):RendererData {
+  public static function createWgpuScale9ShapeData(_state:Dynamic, _source:Renderable):RendererData {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     canvas = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -40,14 +38,14 @@ class WgpuScale9Shape {
     return cast null;
   }
 
-  public static function destroyWgpuScale9ShapeData(_state:RenderState, data:RendererData):Void {
+  public static function destroyWgpuScale9ShapeData(_state:Dynamic, data:RendererData):Void {
     var shapeData:Dynamic = cast _Runtime.UNDEFINED;
     shapeData = _Runtime.callValue(getWgpuRendererData, cast ([data] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(shapeData, null))) { return; }
     _Runtime.callOptionalProperty(_Runtime.optionalField(_Runtime.field(shapeData, 'entry'), 'texture'), 'destroy', cast ([] : Array<Dynamic>));
   }
 
-  public static function drawWgpuScale9Shape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuScale9Shape(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -67,7 +65,7 @@ class WgpuScale9Shape {
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) { return; }
     _Runtime.callValue(flushWgpuSpriteBatch, cast ([state] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : Scale9Shape);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     __destructure0 = _Runtime.field(source, 'data');
     commands = _Runtime.field(__destructure0, 'commands');
     scale9Grid = _Runtime.field(__destructure0, 'scale9Grid');
@@ -116,7 +114,7 @@ class WgpuScale9Shape {
     _Runtime.callValue(drawWgpuQuadWithTransform, cast ([state, renderProxy, { a: a, b: b, c: c, d: d, tx: _Runtime.field(t, 'tx'), ty: _Runtime.field(t, 'ty') }, _Runtime.field(shapeData, 'entry'), 0.0, 0.0, w, h, 0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
   }
 
-  public static function drawWgpuScale9ShapeMask(state:WgpuRenderState, data:RenderProxy2D):Void {
+  public static function drawWgpuScale9ShapeMask(state:Dynamic, data:RenderProxy2D):Void {
     _Runtime.callValue(drawWgpuScale9Shape, cast ([state, data] : Array<Dynamic>));
   }
 

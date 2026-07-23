@@ -7,8 +7,6 @@ import flighthq.effects.BoxBlurMath.computeBoxBlurPassRadius;
 import flighthq.renderGl.GlFullscreenPass.compileGlFullscreenProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
 
 typedef BoxBlurEdgeColor__glEffectBoxBlur = Array<Float>;
 
@@ -20,14 +18,14 @@ class GlEffectBoxBlur {
 
   public static final boxBlurShaders__glEffectBoxBlur:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  public static function applyGlEffectBoxBlur(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; @:optional var passes:Float; @:optional var edgeColor:Array<Float>; }):Void {
+  public static function applyGlEffectBoxBlur(state:Dynamic, source:Dynamic, dest:Dynamic, temp:Dynamic, options:{ @:optional var blurX:Float; @:optional var blurY:Float; @:optional var passes:Float; @:optional var edgeColor:Array<Float>; }):Void {
     var passes:Dynamic = cast _Runtime.UNDEFINED;
     var blurX:Dynamic = cast _Runtime.UNDEFINED;
     var blurY:Dynamic = cast _Runtime.UNDEFINED;
     var edgeColor:Dynamic = cast _Runtime.UNDEFINED;
     var loc:Dynamic = cast _Runtime.UNDEFINED;
-    var read:GlRenderTarget = cast _Runtime.UNDEFINED;
-    var write:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var read:Dynamic = cast _Runtime.UNDEFINED;
+    var write:Dynamic = cast _Runtime.UNDEFINED;
     passes = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
     blurX = _Runtime.coalesce(_Runtime.field(options, 'blurX'), function():Dynamic return cast 4.0);
     blurY = _Runtime.coalesce(_Runtime.field(options, 'blurY'), function():Dynamic return cast 4.0);
@@ -58,7 +56,7 @@ class GlEffectBoxBlur {
     }
   }
 
-  public static function applyBlurBlit__glEffectBoxBlur(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
+  public static function applyBlurBlit__glEffectBoxBlur(state:Dynamic, source:Dynamic, dest:Dynamic):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlEffectBoxBlur.getBoxBlurShader__glEffectBoxBlur, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -71,7 +69,7 @@ class GlEffectBoxBlur {
     }] : Array<Dynamic>));
   }
 
-  public static function applyBoxBlurPass__glEffectBoxBlur(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, loc:BoxBlurShaderLocations__glEffectBoxBlur, radius:Float, dirX:Float, dirY:Float, edgeColor:Null<BoxBlurEdgeColor__glEffectBoxBlur>):Void {
+  public static function applyBoxBlurPass__glEffectBoxBlur(state:Dynamic, source:Dynamic, dest:Dynamic, loc:BoxBlurShaderLocations__glEffectBoxBlur, radius:Float, dirX:Float, dirY:Float, edgeColor:Null<BoxBlurEdgeColor__glEffectBoxBlur>):Void {
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
       _Runtime.callProperty(gl, 'uniform2f', cast ([_Runtime.field(loc, 'locTexelSize'), (1.0 / _Runtime.field(source, 'width')), (1.0 / _Runtime.field(source, 'height'))] : Array<Dynamic>));
       _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(loc, 'locRadius'), radius] : Array<Dynamic>));
@@ -87,7 +85,7 @@ class GlEffectBoxBlur {
     }] : Array<Dynamic>));
   }
 
-  public static function getBoxBlurShader__glEffectBoxBlur(state:GlRenderState):BoxBlurShaderLocations__glEffectBoxBlur {
+  public static function getBoxBlurShader__glEffectBoxBlur(state:Dynamic):BoxBlurShaderLocations__glEffectBoxBlur {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callProperty(GlEffectBoxBlur.boxBlurShaders__glEffectBoxBlur, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {

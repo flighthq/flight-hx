@@ -4,7 +4,6 @@ package flighthq.textshaper;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textshaper._TextShaperHooks._textShaperBackendHook;
-import flighthq.types.TextFormat;
 import flighthq.types.TextShaper.TextShaperBackend;
 
 @:expose("flighthq.textshaper.TextShaper")
@@ -14,7 +13,7 @@ class TextShaper {
     return cast null;
   }
 
-  public static function measureText(text:String, format:TextFormat):Float {
+  public static function measureText(text:String, format:Dynamic):Float {
     if (_Runtime.truthy(_Runtime.strictEquals(TextShaper._backend__textShaper, null))) { return cast -1.0; }
     return cast _Runtime.callProperty(TextShaper._backend__textShaper, 'measureText', cast ([text, format] : Array<Dynamic>));
     return cast null;

@@ -4,11 +4,10 @@ package flighthq.surface;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ImageFormat;
-import flighthq.types.Surface;
 
 @:expose("flighthq.surface.SurfaceEncode")
 class SurfaceEncode {
-  public static function encodeSurface(source:Surface, format:ImageFormat = 'png', quality:Float = 0.9):Dynamic {
+  public static function encodeSurface(source:Dynamic, format:ImageFormat = 'png', quality:Float = 0.9):Dynamic {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var domImageData:Dynamic = cast _Runtime.UNDEFINED;
     var mimeType:Dynamic = cast _Runtime.UNDEFINED;

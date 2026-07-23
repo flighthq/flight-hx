@@ -21,15 +21,9 @@ import flighthq.render.RenderTarget.computeRenderCacheTransform;
 import flighthq.render.RenderTarget.computeRenderTargetSize;
 import flighthq.render.Renderer.copyAllRenderersFromRenderState;
 import flighthq.render.Renderer.noopRendererData;
-import flighthq.types.CanvasRenderState;
-import flighthq.types.CanvasRenderTarget;
-import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObjectRenderer;
-import flighthq.types.Matrix;
-import flighthq.types.RenderCache;
 import flighthq.types.RenderCacheRefreshOptions;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderState;
 
 typedef CanvasRenderStateHandles__canvasCache = { var canvas:Dynamic; var context:Dynamic; };
 
@@ -46,7 +40,7 @@ class CanvasCache {
     return cast null;
   }
 
-  public static function destroyCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache):Void {
+  public static function destroyCanvasRenderCacheTarget(state:Dynamic, cache:Dynamic):Void {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callValue(CanvasCache.getTargets__canvasCache, cast ([state] : Array<Dynamic>));
@@ -60,11 +54,11 @@ class CanvasCache {
     }
   }
 
-  public static function enableCanvasRenderCache(state:RenderState):Void {
+  public static function enableCanvasRenderCache(state:Dynamic):Void {
     _Runtime.callValue(registerRenderCacheRenderer, cast ([state, defaultCanvasRenderCacheRenderer] : Array<Dynamic>));
   }
 
-  public static function ensureCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache, width:Float, height:Float):Dynamic {
+  public static function ensureCanvasRenderCacheTarget(state:Dynamic, cache:Dynamic, width:Float, height:Float):Dynamic {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callValue(CanvasCache.getTargets__canvasCache, cast ([state] : Array<Dynamic>));
@@ -79,12 +73,12 @@ class CanvasCache {
     return cast null;
   }
 
-  public static function getCanvasRenderCacheTarget(state:Dynamic, cache:RenderCache):Null<Dynamic> {
+  public static function getCanvasRenderCacheTarget(state:Dynamic, cache:Dynamic):Null<Dynamic> {
     return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.callValue(CanvasCache.getTargets__canvasCache, cast ([state] : Array<Dynamic>)), 'get', cast ([cache] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function refreshCanvasRenderCache(cacheState:Dynamic, cache:RenderCache, source:DisplayObject, ?options:RenderCacheRefreshOptions):Bool {
+  public static function refreshCanvasRenderCache(cacheState:Dynamic, cache:Dynamic, source:Dynamic, ?options:RenderCacheRefreshOptions):Bool {
     var screenState:Dynamic = cast _Runtime.UNDEFINED;
     var padding:Dynamic = cast _Runtime.UNDEFINED;
     var minWidth:Dynamic = cast _Runtime.UNDEFINED;
@@ -127,11 +121,11 @@ class CanvasCache {
     return cast null;
   }
 
-  public static function releaseCanvasRenderCache(state:Dynamic, cache:RenderCache):Void {
+  public static function releaseCanvasRenderCache(state:Dynamic, cache:Dynamic):Void {
     _Runtime.callProperty(_Runtime.callValue(CanvasCache.getTargets__canvasCache, cast ([state] : Array<Dynamic>)), 'delete', cast ([cache] : Array<Dynamic>));
   }
 
-  public static function drawCanvasRenderCache__canvasCache(state:RenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawCanvasRenderCache__canvasCache(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var canvasState:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
@@ -163,5 +157,5 @@ class CanvasCache {
 
   public static final _bounds__canvasCache:Dynamic = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
 
-  public static final _renderTransform__canvasCache:Dynamic = (cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Matrix);
+  public static final _renderTransform__canvasCache:Dynamic = (cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Dynamic);
 }

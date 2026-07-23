@@ -18,12 +18,9 @@ import flighthq.textlayout.TextBounds.computeTextBoundsHeight;
 import flighthq.textlayout.TextBounds.computeTextBoundsWidth;
 import flighthq.textlayout.TextLayout.computeTextLayout;
 import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
-import flighthq.types.CanvasRenderState;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RichText;
 import flighthq.types.RichText.RichTextRuntime;
-import flighthq.types.TextFormat;
 import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.TextSelectionRectangle;
 
@@ -33,7 +30,7 @@ typedef CanvasTextInputOverlay = Dynamic;
 class CanvasRichText {
   public static function drawCanvasRichText(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(CanvasRichText.drawCanvasRichTextField__canvasRichText, cast ([state, renderProxy] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(CanvasRichText._canvasTextInputOverlay__canvasRichText, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null)))) {
+    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(CanvasRichText._canvasTextInputOverlay__canvasRichText, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : Dynamic)] : Array<Dynamic>)), 'input'), null)))) {
       _Runtime.callValue(CanvasRichText._canvasTextInputOverlay__canvasRichText, cast ([state, renderProxy] : Array<Dynamic>));
     }
   }
@@ -59,7 +56,7 @@ class CanvasRichText {
     var scrollXOffset:Dynamic = cast _Runtime.UNDEFINED;
     var bulletLines:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(drawCanvasDisplayObject, cast ([state, renderProxy] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : RichText);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     data = _Runtime.field(source, 'data');
     context = _Runtime.field(state, 'context');
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
@@ -70,7 +67,7 @@ class CanvasRichText {
     _Runtime.callValue(computeRichTextContent, cast ([content, data, _Runtime.callValue(getRichTextPasswordCharacter, cast ([source] : Array<Dynamic>))] : Array<Dynamic>));
     __destructure0 = content;
     text = _Runtime.field(__destructure0, 'text');
-    measure = function(t:String, fmt:TextFormat) {
+    measure = function(t:String, fmt:Dynamic) {
       _Runtime.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([fmt] : Array<Dynamic>)));
       return cast _Runtime.field(_Runtime.callProperty(context, 'measureText', cast ([t] : Array<Dynamic>)), 'width');
     };

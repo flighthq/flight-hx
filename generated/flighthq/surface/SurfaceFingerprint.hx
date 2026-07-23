@@ -3,14 +3,12 @@ package flighthq.surface;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Surface;
-import flighthq.types.SurfaceFingerprint;
 
 @:expose("flighthq.surface.SurfaceFingerprint")
 class SurfaceFingerprint {
   public static final HEX__surfaceFingerprint:Dynamic = '0123456789abcdef';
 
-  public static function compareSurfaceFingerprints(a:SurfaceFingerprint, b:SurfaceFingerprint):Float {
+  public static function compareSurfaceFingerprints(a:Dynamic, b:Dynamic):Float {
     var sum:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(a, 'gridSize'), _Runtime.field(b, 'gridSize')))) {
       throw _Runtime.error('compareSurfaceFingerprints: gridSize mismatch (' + Std.string(_Runtime.field(a, 'gridSize')) + ' vs ' + Std.string(_Runtime.field(b, 'gridSize')) + ')');
@@ -28,7 +26,7 @@ class SurfaceFingerprint {
     return cast null;
   }
 
-  public static function createSurfaceFingerprint(source:Surface, gridSize:Float = 16.0):SurfaceFingerprint {
+  public static function createSurfaceFingerprint(source:Dynamic, gridSize:Float = 16.0):Dynamic {
     var cells:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var width:Dynamic = cast _Runtime.UNDEFINED;
@@ -87,7 +85,7 @@ class SurfaceFingerprint {
     return cast null;
   }
 
-  public static function formatSurfaceFingerprint(fingerprint:SurfaceFingerprint):String {
+  public static function formatSurfaceFingerprint(fingerprint:Dynamic):String {
     var cells:Dynamic = cast _Runtime.UNDEFINED;
     var hex:Dynamic = cast _Runtime.UNDEFINED;
     cells = _Runtime.field(fingerprint, 'cells');
@@ -103,7 +101,7 @@ class SurfaceFingerprint {
     return cast null;
   }
 
-  public static function parseSurfaceFingerprint(text:String):Null<SurfaceFingerprint> {
+  public static function parseSurfaceFingerprint(text:String):Null<Dynamic> {
     var colon:Dynamic = cast _Runtime.UNDEFINED;
     var gridSize:Dynamic = cast _Runtime.UNDEFINED;
     var hex:Dynamic = cast _Runtime.UNDEFINED;

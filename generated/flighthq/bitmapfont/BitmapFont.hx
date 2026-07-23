@@ -3,15 +3,13 @@ package flighthq.bitmapfont;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontData;
 import flighthq.types.GlyphSource.GlyphEntry;
 import flighthq.types.GlyphSource.GlyphMetrics;
-import flighthq.types.TextureAtlas;
 
 @:expose("flighthq.bitmapfont.BitmapFont")
 class BitmapFont {
-  public static function createBitmapFont(data:BitmapFontData):BitmapFont {
+  public static function createBitmapFont(data:BitmapFontData):Dynamic {
     var pageCount:Dynamic = cast _Runtime.UNDEFINED;
     var glyphs:Dynamic = cast _Runtime.UNDEFINED;
     var kerning:Dynamic = cast _Runtime.UNDEFINED;
@@ -31,27 +29,27 @@ class BitmapFont {
     return cast null;
   }
 
-  public static function getBitmapFontGlyph(font:BitmapFont, codepoint:Float):Null<GlyphEntry> {
+  public static function getBitmapFontGlyph(font:Dynamic, codepoint:Float):Null<GlyphEntry> {
     return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(font, 'glyphs'), 'get', cast ([codepoint] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function getBitmapFontKerning(font:BitmapFont, left:Float, right:Float):Float {
+  public static function getBitmapFontKerning(font:Dynamic, left:Float, right:Float):Float {
     return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(font, 'kerning'), 'get', cast ([_Runtime.callValue(BitmapFont.packBitmapFontKerningKey__bitmapFont, cast ([left, right] : Array<Dynamic>))] : Array<Dynamic>)), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  public static function getBitmapFontMetrics(font:BitmapFont):GlyphMetrics {
+  public static function getBitmapFontMetrics(font:Dynamic):GlyphMetrics {
     return cast _Runtime.field(font, 'metrics');
     return cast null;
   }
 
-  public static function getBitmapFontPage(font:BitmapFont, page:Dynamic = 0.0):Null<TextureAtlas> {
+  public static function getBitmapFontPage(font:Dynamic, page:Dynamic = 0.0):Null<Dynamic> {
     return cast _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(font, 'pages'), page), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function getBitmapFontPages(font:BitmapFont):Array<TextureAtlas> {
+  public static function getBitmapFontPages(font:Dynamic):Array<Dynamic> {
     return cast _Runtime.field(font, 'pages');
     return cast null;
   }

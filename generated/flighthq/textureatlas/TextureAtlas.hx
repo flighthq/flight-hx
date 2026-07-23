@@ -5,16 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.image.ImageResource.getImageResourceByteSize;
-import flighthq.types.TextureAtlas;
 
 @:expose("flighthq.textureatlas.TextureAtlas")
 class TextureAtlas {
-  public static function createTextureAtlas(?obj:Dynamic):TextureAtlas {
+  public static function createTextureAtlas(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(createEntity, cast ([{ image: _Runtime.coalesce(_Runtime.optionalField(obj, 'image'), function():Dynamic return cast null), regions: _Runtime.coalesce(_Runtime.optionalField(obj, 'regions'), function():Dynamic return cast cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextureAtlasByteSize(atlas:TextureAtlas):Float {
+  public static function getTextureAtlasByteSize(atlas:Dynamic):Float {
     return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.field(atlas, 'image'), null), function():Dynamic return cast _Runtime.callValue(getImageResourceByteSize, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)), function():Dynamic return cast 0.0);
     return cast null;
   }

@@ -7,17 +7,15 @@ import flighthq.displayobjectDom.DomStyle.setDomRendererElement;
 import flighthq.displayobjectDom.DomTransform.setDomTransform;
 import flighthq.render.Renderer.noopRendererData;
 import flighthq.types.DisplayObjectRenderer;
-import flighthq.types.DomRenderState;
-import flighthq.types.HtmlView;
 import flighthq.types.RenderProxy2D;
 
 @:expose("flighthq.displayobjectDom.HtmlView")
 class HtmlView {
-  public static function drawDomHtmlView(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomHtmlView(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var element:Dynamic = cast _Runtime.UNDEFINED;
-    source = (cast _Runtime.field(renderProxy, 'source') : HtmlView);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     data = _Runtime.field(source, 'data');
     element = _Runtime.field(data, 'element');
     if (_Runtime.truthy(_Runtime.strictEquals(element, null))) { return; }

@@ -6,6 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.EntityWithoutRuntime;
 
-typedef Frustum = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var bottom:Plane; var far:Plane; var left:Plane; var near:Plane; var right:Plane; var top:Plane; };
+typedef Frustum = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var bottom:Dynamic; var far:Dynamic; var left:Dynamic; var near:Dynamic; var right:Dynamic; var top:Dynamic; };
 
-typedef FrustumLike = EntityWithoutRuntime<Frustum>;
+typedef FrustumLike = EntityWithoutRuntime<Dynamic>;

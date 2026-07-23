@@ -11,20 +11,16 @@ import flighthq.displayobjectDom.DomTransform.setDomTransformWithOffset;
 import flighthq.render.RenderCache.getRenderProxyCache;
 import flighthq.render.RenderCache.registerRenderCacheRenderer;
 import flighthq.render.Renderer.noopRendererData;
-import flighthq.types.CanvasRenderTarget;
 import flighthq.types.DisplayObjectRenderer;
-import flighthq.types.DomRenderState;
-import flighthq.types.RenderCache;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderState;
 
 @:expose("flighthq.displayobjectDom.DomCache")
 class DomCache {
-  public static function enableDomRenderCache(state:RenderState):Void {
+  public static function enableDomRenderCache(state:Dynamic):Void {
     _Runtime.callValue(registerRenderCacheRenderer, cast ([state, defaultDomRenderCacheRenderer] : Array<Dynamic>));
   }
 
-  public static function ensureDomRenderCacheTarget(state:DomRenderState, cache:RenderCache, width:Float, height:Float):Dynamic {
+  public static function ensureDomRenderCacheTarget(state:Dynamic, cache:Dynamic, width:Float, height:Float):Dynamic {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callValue(DomCache.getTargets__domCache, cast ([state] : Array<Dynamic>));
@@ -40,23 +36,23 @@ class DomCache {
     return cast null;
   }
 
-  public static function getDomRenderCacheTarget(state:DomRenderState, cache:RenderCache):Null<Dynamic> {
+  public static function getDomRenderCacheTarget(state:Dynamic, cache:Dynamic):Null<Dynamic> {
     return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.callValue(DomCache.getTargets__domCache, cast ([state] : Array<Dynamic>)), 'get', cast ([cache] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function releaseDomRenderCache(state:DomRenderState, cache:RenderCache):Void {
+  public static function releaseDomRenderCache(state:Dynamic, cache:Dynamic):Void {
     _Runtime.callProperty(_Runtime.callValue(DomCache.getTargets__domCache, cast ([state] : Array<Dynamic>)), 'delete', cast ([cache] : Array<Dynamic>));
   }
 
-  public static function drawDomRenderCache__domCache(state:RenderState, data:RenderProxy2D):Void {
+  public static function drawDomRenderCache__domCache(state:Dynamic, data:RenderProxy2D):Void {
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var domState:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     cache = _Runtime.callValue(getRenderProxyCache, cast ([state, _Runtime.field(data, 'source')] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(cache, null))) { return; }
-    domState = (cast state : DomRenderState);
+    domState = (cast state : Dynamic);
     target = _Runtime.callProperty(_Runtime.callValue(DomCache.getTargets__domCache, cast ([domState] : Array<Dynamic>)), 'get', cast ([cache] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     canvas = _Runtime.field(target, 'canvas');
@@ -67,7 +63,7 @@ class DomCache {
     _Runtime.callValue(setDomRendererElement, cast ([domState, canvas] : Array<Dynamic>));
   }
 
-  public static function getTargets__domCache(state:DomRenderState):Dynamic {
+  public static function getTargets__domCache(state:Dynamic):Dynamic {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callProperty(DomCache._renderCacheTargets__domCache, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')))) {

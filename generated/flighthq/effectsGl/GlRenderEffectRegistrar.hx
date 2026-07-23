@@ -51,7 +51,6 @@ import flighthq.effectsGl.GlTiltShiftEffect.defaultGlTiltShiftEffectRunner;
 import flighthq.effectsGl.GlToneMapEffect.defaultGlToneMapEffectRunner;
 import flighthq.effectsGl.GlVignetteEffect.defaultGlVignetteEffectRunner;
 import flighthq.effectsGl.GlWhiteBalanceEffect.defaultGlWhiteBalanceEffectRunner;
-import flighthq.types.GlRenderState;
 
 @:expose("flighthq.effectsGl.GlRenderEffectRegistrar")
 class GlRenderEffectRegistrar {
@@ -60,13 +59,13 @@ class GlRenderEffectRegistrar {
     return cast null;
   }
 
-  public static function registerAntialiasingGlRenderEffects(state:GlRenderState):Void {
+  public static function registerAntialiasingGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'FxaaEffect', defaultGlFxaaEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'SmaaEffect', defaultGlSmaaEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'TaaEffect', defaultGlTaaEffectRunner] : Array<Dynamic>));
   }
 
-  public static function registerBloomGlRenderEffects(state:GlRenderState):Void {
+  public static function registerBloomGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'BloomEffect', defaultGlBloomEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'ChromaticAberrationEffect', defaultGlChromaticAberrationEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'GodRaysEffect', defaultGlGodRaysEffectRunner] : Array<Dynamic>));
@@ -76,7 +75,7 @@ class GlRenderEffectRegistrar {
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'VignetteEffect', defaultGlVignetteEffectRunner] : Array<Dynamic>));
   }
 
-  public static function registerBlurGlRenderEffects(state:GlRenderState):Void {
+  public static function registerBlurGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'BlurEffect', defaultGlBlurEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'BokehDepthOfFieldEffect', defaultGlBokehDepthOfFieldEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'CameraMotionBlurEffect', defaultGlCameraMotionBlurEffectRunner] : Array<Dynamic>));
@@ -86,16 +85,16 @@ class GlRenderEffectRegistrar {
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'TiltShiftEffect', defaultGlTiltShiftEffectRunner] : Array<Dynamic>));
   }
 
-  public static function registerColorGlRenderEffects(state:GlRenderState):Void {
+  public static function registerColorGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'ToneMapEffect', defaultGlToneMapEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'WhiteBalanceEffect', defaultGlWhiteBalanceEffectRunner] : Array<Dynamic>));
   }
 
-  public static function registerColorGradeGlRenderEffects(state:GlRenderState):Void {
+  public static function registerColorGradeGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(registerColorGlRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerCompositeGlRenderEffects(state:GlRenderState):Void {
+  public static function registerCompositeGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'BevelEffect', defaultGlBevelEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'BlendEffect', defaultGlBlendEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'CompositeEffect', defaultGlCompositeEffectRunner] : Array<Dynamic>));
@@ -107,11 +106,11 @@ class GlRenderEffectRegistrar {
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'OuterGlowEffect', defaultGlOuterGlowEffectRunner] : Array<Dynamic>));
   }
 
-  public static function registerCustomShaderGlRenderEffect(state:GlRenderState):Void {
+  public static function registerCustomShaderGlRenderEffect(state:Dynamic):Void {
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'CustomShaderEffect', defaultGlCustomShaderEffectRunner] : Array<Dynamic>));
   }
 
-  public static function registerDefaultGlRenderEffects(state:GlRenderState):Void {
+  public static function registerDefaultGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(registerAntialiasingGlRenderEffects, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(registerBloomGlRenderEffects, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(registerBlurGlRenderEffects, cast ([state] : Array<Dynamic>));
@@ -122,7 +121,7 @@ class GlRenderEffectRegistrar {
     _Runtime.callValue(registerStylizeGlRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerScreenSpaceGlRenderEffects(state:GlRenderState):Void {
+  public static function registerScreenSpaceGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'DisplacementEffect', defaultGlDisplacementEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'ScreenSpaceFogEffect', defaultGlScreenSpaceFogEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'SharpenEffect', defaultGlSharpenEffectRunner] : Array<Dynamic>));
@@ -130,11 +129,11 @@ class GlRenderEffectRegistrar {
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'SsrEffect', defaultGlSsrEffectRunner] : Array<Dynamic>));
   }
 
-  public static function registerStandardGlRenderEffects(state:GlRenderState):Void {
+  public static function registerStandardGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(registerDefaultGlRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerStylizeGlRenderEffects(state:GlRenderState):Void {
+  public static function registerStylizeGlRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'ConvolutionEffect', defaultGlConvolutionEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'CrtEffect', defaultGlCrtEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerGlRenderEffect, cast ([state, 'DitherEffect', defaultGlDitherEffectRunner] : Array<Dynamic>));

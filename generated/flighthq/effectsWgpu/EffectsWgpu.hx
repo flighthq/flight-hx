@@ -61,296 +61,247 @@ import flighthq.effectsWgpu.WgpuTiltShiftEffect as Facade_EffectsWgpu_flighthq_e
 import flighthq.effectsWgpu.WgpuToneMapEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuToneMapEffect;
 import flighthq.effectsWgpu.WgpuVignetteEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuVignetteEffect;
 import flighthq.effectsWgpu.WgpuWhiteBalanceEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuWhiteBalanceEffect;
-import flighthq.types.BevelEffect;
-import flighthq.types.BloomEffect;
-import flighthq.types.BlurEffect;
-import flighthq.types.BokehDepthOfFieldEffect;
-import flighthq.types.CameraMotionBlurEffect;
-import flighthq.types.ChromaticAberrationEffect;
-import flighthq.types.ColorLut;
-import flighthq.types.ConvolutionEffect;
-import flighthq.types.CrtEffect;
-import flighthq.types.DirectionalBlurEffect;
-import flighthq.types.DisplacementEffect;
-import flighthq.types.DitherEffect;
-import flighthq.types.DropShadowEffect;
-import flighthq.types.FilmGrainEffect;
-import flighthq.types.FxaaEffect;
 import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
-import flighthq.types.GlitchEffect;
-import flighthq.types.GodRaysEffect;
-import flighthq.types.GradientBevelEffect;
-import flighthq.types.GradientGlowEffect;
-import flighthq.types.HalftoneEffect;
-import flighthq.types.InnerGlowEffect;
-import flighthq.types.InnerShadowEffect;
-import flighthq.types.KuwaharaEffect;
-import flighthq.types.LensDirtEffect;
-import flighthq.types.LensDistortionEffect;
-import flighthq.types.LensFlareEffect;
-import flighthq.types.MedianEffect;
-import flighthq.types.MotionBlurEffect;
-import flighthq.types.OuterGlowEffect;
-import flighthq.types.OutlineEffect;
-import flighthq.types.PixelateEffect;
-import flighthq.types.PosterizeEffect;
-import flighthq.types.RadialBlurEffect;
-import flighthq.types.ScanlinesEffect;
-import flighthq.types.ScreenSpaceFogEffect;
-import flighthq.types.SharpenEffect;
-import flighthq.types.SketchEffect;
-import flighthq.types.SmaaEffect;
-import flighthq.types.SsaoEffect;
-import flighthq.types.SsrEffect;
-import flighthq.types.TaaEffect;
-import flighthq.types.TiltShiftEffect;
-import flighthq.types.ToneMapEffect;
-import flighthq.types.VignetteEffect;
 import flighthq.types.WgpuColorLutTextureCache;
-import flighthq.types.WgpuRenderEffectPipeline;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
-import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget;
-import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
-import flighthq.types.WhiteBalanceEffect;
 
 @:expose("flighthq.effectsWgpu.EffectsWgpu")
 class EffectsWgpu {
-  public static function applyBevelEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:BevelEffect):Void {
+  public static function applyBevelEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBevelEffect.applyBevelEffectToWgpu, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyBloomEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:BloomEffect):Void {
+  public static function applyBloomEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBloomEffect.applyBloomEffectToWgpu, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, effect:BlurEffect):Void {
+  public static function applyBlurEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, temp:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBlurEffect.applyBlurEffectToWgpu, cast ([state, source, dest, temp, effect] : Array<Dynamic>));
   }
 
-  public static function applyBokehDepthOfFieldEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:BokehDepthOfFieldEffect):Void {
+  public static function applyBokehDepthOfFieldEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBokehDepthOfFieldEffect.applyBokehDepthOfFieldEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyCameraMotionBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:CameraMotionBlurEffect):Void {
+  public static function applyCameraMotionBlurEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuCameraMotionBlurEffect.applyCameraMotionBlurEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyChromaticAberrationEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ChromaticAberrationEffect):Void {
+  public static function applyChromaticAberrationEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuChromaticAberrationEffect.applyChromaticAberrationEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyColorLutPassToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, lut:ColorLut, cache:WgpuColorLutTextureCache):Void {
+  public static function applyColorLutPassToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, lut:Dynamic, cache:WgpuColorLutTextureCache):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuColorLutPass.applyColorLutPassToWgpu, cast ([state, source, dest, lut, cache] : Array<Dynamic>));
   }
 
-  public static function applyColorMatrixPassToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, matrix:Array<Float>):Void {
+  public static function applyColorMatrixPassToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, matrix:Array<Float>):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuColorMatrixPass.applyColorMatrixPassToWgpu, cast ([state, source, dest, matrix] : Array<Dynamic>));
   }
 
-  public static function applyConvolutionEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ConvolutionEffect):Void {
+  public static function applyConvolutionEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuConvolutionEffect.applyConvolutionEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyCrtEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:CrtEffect):Void {
+  public static function applyCrtEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuCrtEffect.applyCrtEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyDirectionalBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DirectionalBlurEffect):Void {
+  public static function applyDirectionalBlurEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuDirectionalBlurEffect.applyDirectionalBlurEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyDisplacementEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DisplacementEffect):Void {
+  public static function applyDisplacementEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuDisplacementEffect.applyDisplacementEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyDitherEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DitherEffect):Void {
+  public static function applyDitherEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuDitherEffect.applyDitherEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyDropShadowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:DropShadowEffect):Void {
+  public static function applyDropShadowEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuDropShadowEffect.applyDropShadowEffectToWgpu, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyFilmGrainEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:FilmGrainEffect):Void {
+  public static function applyFilmGrainEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuFilmGrainEffect.applyFilmGrainEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyFxaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:FxaaEffect):Void {
+  public static function applyFxaaEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuFxaaEffect.applyFxaaEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyGaussianBlurToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
+  public static function applyGaussianBlurToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, temp:Dynamic, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBlurEffect.applyGaussianBlurToWgpu, cast ([state, source, dest, temp, options] : Array<Dynamic>));
   }
 
-  public static function applyGlitchEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:GlitchEffect):Void {
+  public static function applyGlitchEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuGlitchEffect.applyGlitchEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyGodRaysEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:GodRaysEffect):Void {
+  public static function applyGodRaysEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuGodRaysEffect.applyGodRaysEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyGradientBevelEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:GradientBevelEffect):Void {
+  public static function applyGradientBevelEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuGradientBevelEffect.applyGradientBevelEffectToWgpu, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyGradientGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:GradientGlowEffect):Void {
+  public static function applyGradientGlowEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuGradientGlowEffect.applyGradientGlowEffectToWgpu, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyHalftoneEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:HalftoneEffect):Void {
+  public static function applyHalftoneEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuHalftoneEffect.applyHalftoneEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyInnerGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:InnerGlowEffect):Void {
+  public static function applyInnerGlowEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuInnerGlowEffect.applyInnerGlowEffectToWgpu, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyInnerShadowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:InnerShadowEffect):Void {
+  public static function applyInnerShadowEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuInnerShadowEffect.applyInnerShadowEffectToWgpu, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyKuwaharaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:KuwaharaEffect):Void {
+  public static function applyKuwaharaEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuKuwaharaEffect.applyKuwaharaEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyLensDirtEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensDirtEffect):Void {
+  public static function applyLensDirtEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuLensDirtEffect.applyLensDirtEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyLensDistortionEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensDistortionEffect):Void {
+  public static function applyLensDistortionEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuLensDistortionEffect.applyLensDistortionEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyLensFlareEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensFlareEffect):Void {
+  public static function applyLensFlareEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuLensFlareEffect.applyLensFlareEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyMedianEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:MedianEffect):Void {
+  public static function applyMedianEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuMedianEffect.applyMedianEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyMotionBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, velocityTexture:Null<Dynamic>, effect:MotionBlurEffect):Void {
+  public static function applyMotionBlurEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, velocityTexture:Null<Dynamic>, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuMotionBlurEffect.applyMotionBlurEffectToWgpu, cast ([state, source, dest, velocityTexture, effect] : Array<Dynamic>));
   }
 
-  public static function applyOuterGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:OuterGlowEffect):Void {
+  public static function applyOuterGlowEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuOuterGlowEffect.applyOuterGlowEffectToWgpu, cast ([state, source, dest, pool, effect] : Array<Dynamic>));
   }
 
-  public static function applyOutlineEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:OutlineEffect):Void {
+  public static function applyOutlineEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuOutlineEffect.applyOutlineEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyPixelateEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:PixelateEffect):Void {
+  public static function applyPixelateEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuPixelateEffect.applyPixelateEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyPosterizeEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:PosterizeEffect):Void {
+  public static function applyPosterizeEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuPosterizeEffect.applyPosterizeEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyRadialBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:RadialBlurEffect):Void {
+  public static function applyRadialBlurEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRadialBlurEffect.applyRadialBlurEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyScanlinesEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ScanlinesEffect):Void {
+  public static function applyScanlinesEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuScanlinesEffect.applyScanlinesEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyScreenSpaceFogEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ScreenSpaceFogEffect):Void {
+  public static function applyScreenSpaceFogEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuScreenSpaceFogEffect.applyScreenSpaceFogEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applySharpenEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SharpenEffect):Void {
+  public static function applySharpenEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSharpenEffect.applySharpenEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applySketchEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SketchEffect):Void {
+  public static function applySketchEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSketchEffect.applySketchEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applySmaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SmaaEffect):Void {
+  public static function applySmaaEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSmaaEffect.applySmaaEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applySsaoEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SsaoEffect):Void {
+  public static function applySsaoEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSsaoEffect.applySsaoEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applySsrEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SsrEffect):Void {
+  public static function applySsrEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuSsrEffect.applySsrEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyTaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, _effect:TaaEffect):Void {
+  public static function applyTaaEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuTaaEffect.applyTaaEffectToWgpu, cast ([state, source, dest, _effect] : Array<Dynamic>));
   }
 
-  public static function applyTiltShiftEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:TiltShiftEffect):Void {
+  public static function applyTiltShiftEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuTiltShiftEffect.applyTiltShiftEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyToneMapEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ToneMapEffect):Void {
+  public static function applyToneMapEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuToneMapEffect.applyToneMapEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyVignetteEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:VignetteEffect):Void {
+  public static function applyVignetteEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuVignetteEffect.applyVignetteEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function applyWgpuEffectBlitOffsetPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, dx:Float, dy:Float):Void {
+  public static function applyWgpuEffectBlitOffsetPass(state:Dynamic, source:Dynamic, dest:Dynamic, dx:Float, dy:Float):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectBlitShader.applyWgpuEffectBlitOffsetPass, cast ([state, source, dest, dx, dy] : Array<Dynamic>));
   }
 
-  public static function applyWgpuEffectBlitPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
+  public static function applyWgpuEffectBlitPass(state:Dynamic, source:Dynamic, dest:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectBlitShader.applyWgpuEffectBlitPass, cast ([state, source, dest] : Array<Dynamic>));
   }
 
-  public static function applyWgpuEffectBoxBlur(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; @:optional var passes:Float; @:optional var edgeColor:Array<Float>; }):Void {
+  public static function applyWgpuEffectBoxBlur(state:Dynamic, source:Dynamic, dest:Dynamic, temp:Dynamic, options:{ @:optional var blurX:Float; @:optional var blurY:Float; @:optional var passes:Float; @:optional var edgeColor:Array<Float>; }):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectBoxBlur.applyWgpuEffectBoxBlur, cast ([state, source, dest, temp, options] : Array<Dynamic>));
   }
 
-  public static function applyWgpuEffectErasePass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
+  public static function applyWgpuEffectErasePass(state:Dynamic, source:Dynamic, dest:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectBlitShader.applyWgpuEffectErasePass, cast ([state, source, dest] : Array<Dynamic>));
   }
 
-  public static function applyWgpuEffectInnerClipPass(state:WgpuRenderState, glow:WgpuRenderTarget, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
+  public static function applyWgpuEffectInnerClipPass(state:Dynamic, glow:Dynamic, source:Dynamic, dest:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectTintShader.applyWgpuEffectInnerClipPass, cast ([state, glow, source, dest] : Array<Dynamic>));
   }
 
-  public static function applyWgpuEffectInvertTintPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, color:Float, alpha:Float, strength:Float):Void {
+  public static function applyWgpuEffectInvertTintPass(state:Dynamic, source:Dynamic, dest:Dynamic, color:Float, alpha:Float, strength:Float):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectTintShader.applyWgpuEffectInvertTintPass, cast ([state, source, dest, color, alpha, strength] : Array<Dynamic>));
   }
 
-  public static function applyWgpuEffectTintPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, color:Float, alpha:Float, strength:Float):Void {
+  public static function applyWgpuEffectTintPass(state:Dynamic, source:Dynamic, dest:Dynamic, color:Float, alpha:Float, strength:Float):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectTintShader.applyWgpuEffectTintPass, cast ([state, source, dest, color, alpha, strength] : Array<Dynamic>));
   }
 
-  public static function applyWhiteBalanceEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:WhiteBalanceEffect):Void {
+  public static function applyWhiteBalanceEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuWhiteBalanceEffect.applyWhiteBalanceEffectToWgpu, cast ([state, source, dest, effect] : Array<Dynamic>));
   }
 
-  public static function beginWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline):Void {
+  public static function beginWgpuRenderEffectPipeline(state:Dynamic, pipeline:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectPipeline.beginWgpuRenderEffectPipeline, cast ([state, pipeline] : Array<Dynamic>));
   }
 
-  public static function clearWgpuEffectTarget(state:WgpuRenderState, target:WgpuRenderTarget):Void {
+  public static function clearWgpuEffectTarget(state:Dynamic, target:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectPass.clearWgpuEffectTarget, cast ([state, target] : Array<Dynamic>));
   }
 
-  public static function createWgpuDualSourceEffectPipeline(state:WgpuRenderState, fragmentWGSL:String, ?blend:WgpuEffectBlendMode):WgpuDualSourceEffectPipeline {
+  public static function createWgpuDualSourceEffectPipeline(state:Dynamic, fragmentWGSL:String, ?blend:WgpuEffectBlendMode):WgpuDualSourceEffectPipeline {
     return cast _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectPass.createWgpuDualSourceEffectPipeline, cast ([state, fragmentWGSL, blend] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createWgpuEffectPipeline(state:WgpuRenderState, fragmentWGSL:String, ?blend:WgpuEffectBlendMode):WgpuEffectPipeline {
+  public static function createWgpuEffectPipeline(state:Dynamic, fragmentWGSL:String, ?blend:WgpuEffectBlendMode):WgpuEffectPipeline {
     return cast _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectPass.createWgpuEffectPipeline, cast ([state, fragmentWGSL, blend] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createWgpuRenderEffectPipeline(_state:WgpuRenderState, ?options:RenderEffectPipelineOptions):WgpuRenderEffectPipeline {
+  public static function createWgpuRenderEffectPipeline(_state:Dynamic, ?options:RenderEffectPipelineOptions):Dynamic {
     return cast _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectPipeline.createWgpuRenderEffectPipeline, cast ([_state, options] : Array<Dynamic>));
     return cast null;
   }
@@ -443,45 +394,45 @@ class EffectsWgpu {
 
   public static final defaultWgpuWhiteBalanceEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuWhiteBalanceEffect.defaultWgpuWhiteBalanceEffectRunner;
 
-  public static function destroyWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline):Void {
+  public static function destroyWgpuRenderEffectPipeline(state:Dynamic, pipeline:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectPipeline.destroyWgpuRenderEffectPipeline, cast ([state, pipeline] : Array<Dynamic>));
   }
 
-  public static function drawWgpuDualSourceEffectPass(state:WgpuRenderState, source0:WgpuRenderTarget, source1:WgpuRenderTarget, dest:Null<WgpuRenderTarget>, pipeline:WgpuDualSourceEffectPipeline, setUniforms:Dynamic):Void {
+  public static function drawWgpuDualSourceEffectPass(state:Dynamic, source0:Dynamic, source1:Dynamic, dest:Null<Dynamic>, pipeline:WgpuDualSourceEffectPipeline, setUniforms:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectPass.drawWgpuDualSourceEffectPass, cast ([state, source0, source1, dest, pipeline, setUniforms] : Array<Dynamic>));
   }
 
-  public static function drawWgpuEffectPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:Null<WgpuRenderTarget>, pipeline:WgpuEffectPipeline, setUniforms:Dynamic):Void {
+  public static function drawWgpuEffectPass(state:Dynamic, source:Dynamic, dest:Null<Dynamic>, pipeline:WgpuEffectPipeline, setUniforms:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectPass.drawWgpuEffectPass, cast ([state, source, dest, pipeline, setUniforms] : Array<Dynamic>));
   }
 
   public static final EFFECT_VERTEX_WGSL:Dynamic = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectPass.EFFECT_VERTEX_WGSL;
 
-  public static function endWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline, operations:Array<Dynamic>):Void {
+  public static function endWgpuRenderEffectPipeline(state:Dynamic, pipeline:Dynamic, operations:Array<Dynamic>):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectPipeline.endWgpuRenderEffectPipeline, cast ([state, pipeline, operations] : Array<Dynamic>));
   }
 
-  public static function getWgpuEffectGradientRampTexture(state:WgpuRenderState, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
+  public static function getWgpuEffectGradientRampTexture(state:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
     return cast _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectGradientRamp.getWgpuEffectGradientRampTexture, cast ([state, colors, alphas, ratios] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getWgpuEffectPassState(state:WgpuRenderState):{ var uniformBG:Dynamic; var textureBGLayout:Dynamic; var uniformBGLayout:Dynamic; var sampler:Dynamic; var acquireSlot:Dynamic; var writeSlot:Dynamic; var beginPass:Dynamic; } {
+  public static function getWgpuEffectPassState(state:Dynamic):{ var uniformBG:Dynamic; var textureBGLayout:Dynamic; var uniformBGLayout:Dynamic; var sampler:Dynamic; var acquireSlot:Dynamic; var writeSlot:Dynamic; var beginPass:Dynamic; } {
     return cast _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectPass.getWgpuEffectPassState, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getWgpuEffectPipeline(state:WgpuRenderState, key:String, fragmentWGSL:String, ?blend:String):WgpuEffectPipeline {
+  public static function getWgpuEffectPipeline(state:Dynamic, key:String, fragmentWGSL:String, ?blend:String):WgpuEffectPipeline {
     return cast _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuEffectProgramCache.getWgpuEffectPipeline, cast ([state, key, fragmentWGSL, blend] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Null<WgpuRenderEffectRunner> {
+  public static function getWgpuRenderEffectRunner(state:Dynamic, kind:String):Null<WgpuRenderEffectRunner> {
     return cast _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistry.getWgpuRenderEffectRunner, cast ([state, kind] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hasWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Bool {
+  public static function hasWgpuRenderEffectRunner(state:Dynamic, kind:String):Bool {
     return cast _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistry.hasWgpuRenderEffectRunner, cast ([state, kind] : Array<Dynamic>));
     return cast null;
   }
@@ -490,43 +441,43 @@ class EffectsWgpu {
 
   public static final MAX_MEDIAN_EFFECT_WGPU_RADIUS:Dynamic = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuMedianEffect.MAX_MEDIAN_EFFECT_WGPU_RADIUS;
 
-  public static function registerAntialiasingWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerAntialiasingWgpuRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerAntialiasingWgpuRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerBloomWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerBloomWgpuRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerBloomWgpuRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerBlurWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerBlurWgpuRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerBlurWgpuRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerColorWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerColorWgpuRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerColorWgpuRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerCompositeWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerCompositeWgpuRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerCompositeWgpuRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerScreenSpaceWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerScreenSpaceWgpuRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerScreenSpaceWgpuRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerStandardWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerStandardWgpuRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerStandardWgpuRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerStylizeWgpuRenderEffects(state:WgpuRenderState):Void {
+  public static function registerStylizeWgpuRenderEffects(state:Dynamic):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistrants.registerStylizeWgpuRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerWgpuRenderEffect(state:WgpuRenderState, kind:String, runner:WgpuRenderEffectRunner):Void {
+  public static function registerWgpuRenderEffect(state:Dynamic, kind:String, runner:WgpuRenderEffectRunner):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectRegistry.registerWgpuRenderEffect, cast ([state, kind, runner] : Array<Dynamic>));
   }
 
-  public static function setWgpuRenderEffectVelocityTexture(pipeline:WgpuRenderEffectPipeline, texture:Null<Dynamic>):Void {
+  public static function setWgpuRenderEffectVelocityTexture(pipeline:Dynamic, texture:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectPipeline.setWgpuRenderEffectVelocityTexture, cast ([pipeline, texture] : Array<Dynamic>));
   }
 }

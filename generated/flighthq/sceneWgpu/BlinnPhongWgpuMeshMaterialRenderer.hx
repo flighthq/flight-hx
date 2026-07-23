@@ -14,19 +14,15 @@ import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.drawWgpuMeshSubset;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.isWgpuTextureReady;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUniform;
 import flighthq.types.BlinnPhongMaterial;
-import flighthq.types.Camera;
 import flighthq.types.LinearColor;
-import flighthq.types.Material;
-import flighthq.types.MeshGeometry;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.WgpuMeshMaterialRenderer;
-import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._BlinnPhongMaterialValues.BlinnPhongMaterialKind;
 
 @:expose("flighthq.sceneWgpu.BlinnPhongWgpuMeshMaterialRenderer")
 class BlinnPhongWgpuMeshMaterialRenderer {
-  public static final blinnPhongWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
+  public static final blinnPhongWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:Dynamic, material:Null<Dynamic>, lights:SceneLightBlock, camera:Dynamic) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var blinnPhong:Dynamic = cast _Runtime.UNDEFINED;
@@ -49,11 +45,11 @@ class BlinnPhongWgpuMeshMaterialRenderer {
     }
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, group] : Array<Dynamic>));
-  }, draw: function(state:WgpuRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
+  }, draw: function(state:Dynamic, proxy:SceneRenderProxy, geometry:Dynamic) {
     _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
   } };
 
-  public static function registerBlinnPhongWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerBlinnPhongWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(registerWgpuMeshMaterialRenderer, cast ([state, BlinnPhongMaterialKind, blinnPhongWgpuMeshMaterialRenderer] : Array<Dynamic>));
   }
 

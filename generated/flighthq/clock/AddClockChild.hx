@@ -3,18 +3,17 @@ package flighthq.clock;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Clock;
 
 @:expose("flighthq.clock.AddClockChild")
 class AddClockChild {
-  public static function addClockChild(parent:Clock, child:Clock):Void {
+  public static function addClockChild(parent:Dynamic, child:Dynamic):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(child, 'parent'), parent))) { return; }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(child, 'parent'), null))) { _Runtime.callValue(removeClockChild, cast ([_Runtime.field(child, 'parent'), child] : Array<Dynamic>)); }
     _Runtime.setField(child, 'parent', parent);
     _Runtime.callProperty(_Runtime.field(parent, 'children'), 'push', cast ([child] : Array<Dynamic>));
   }
 
-  public static function removeClockChild(parent:Clock, child:Clock):Void {
+  public static function removeClockChild(parent:Dynamic, child:Dynamic):Void {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     index = _Runtime.callProperty(_Runtime.field(parent, 'children'), 'indexOf', cast ([child] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(index, -1.0))) { return; }

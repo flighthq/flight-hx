@@ -3,7 +3,6 @@ package flighthq.shape;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 import flighthq.types.ShapeCommand.PathWinding;
 import flighthq.types.ShapeCommand.ShapeCommandToken;
@@ -13,7 +12,7 @@ import flighthq.types.ShapeFillRegion;
 class ShapeFill {
   public static function getShapeFillRegions(commands:Array<ShapeCommandToken>):Null<Array<ShapeFillRegion>> {
     var regions:Array<ShapeFillRegion> = cast _Runtime.UNDEFINED;
-    var path:Null<Path> = cast _Runtime.UNDEFINED;
+    var path:Null<Dynamic> = cast _Runtime.UNDEFINED;
     var color:Dynamic = cast _Runtime.UNDEFINED;
     var alpha:Dynamic = cast _Runtime.UNDEFINED;
     var winding:PathWinding = cast _Runtime.UNDEFINED;
@@ -139,7 +138,7 @@ class ShapeFill {
 
   public static final KAPPA__shapeFill:Dynamic = 0.5522847498307936;
 
-  public static function appendEllipseToPath__shapeFill(path:Path, cx:Float, cy:Float, rx:Float, ry:Float):Void {
+  public static function appendEllipseToPath__shapeFill(path:Dynamic, cx:Float, cy:Float, rx:Float, ry:Float):Void {
     var kx:Dynamic = cast _Runtime.UNDEFINED;
     var ky:Dynamic = cast _Runtime.UNDEFINED;
     kx = (rx * ShapeFill.KAPPA__shapeFill);
@@ -151,7 +150,7 @@ class ShapeFill {
     _Runtime.callValue(ShapeFill.pushCubic__shapeFill, cast ([path, (cx + kx), (cy - ry), (cx + rx), (cy - ky), (cx + rx), cy] : Array<Dynamic>));
   }
 
-  public static function appendRawPath__shapeFill(path:Path, verbs:Array<Float>, data:Array<Float>):Void {
+  public static function appendRawPath__shapeFill(path:Dynamic, verbs:Array<Float>, data:Array<Float>):Void {
     var d:Dynamic = cast _Runtime.UNDEFINED;
     d = 0.0;
     {
@@ -173,7 +172,7 @@ class ShapeFill {
     }
   }
 
-  public static function appendRectangleToPath__shapeFill(path:Path, x:Float, y:Float, w:Float, h:Float):Void {
+  public static function appendRectangleToPath__shapeFill(path:Dynamic, x:Float, y:Float, w:Float, h:Float):Void {
     _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommand.MOVE_TO, x, y] : Array<Dynamic>));
     _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommand.LINE_TO, (x + w), y] : Array<Dynamic>));
     _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommand.LINE_TO, (x + w), (y + h)] : Array<Dynamic>));
@@ -181,7 +180,7 @@ class ShapeFill {
     _Runtime.callValue(ShapeFill.pushVerb__shapeFill, cast ([path, PathCommand.LINE_TO, x, y] : Array<Dynamic>));
   }
 
-  public static function appendRoundRectangleToPath__shapeFill(path:Path, x:Float, y:Float, w:Float, h:Float, rx:Float, ry:Float):Void {
+  public static function appendRoundRectangleToPath__shapeFill(path:Dynamic, x:Float, y:Float, w:Float, h:Float, rx:Float, ry:Float):Void {
     var right:Dynamic = cast _Runtime.UNDEFINED;
     var bottom:Dynamic = cast _Runtime.UNDEFINED;
     right = (x + w);
@@ -197,17 +196,17 @@ class ShapeFill {
     _Runtime.callValue(ShapeFill.pushQuadratic__shapeFill, cast ([path, x, y, (x + rx), y] : Array<Dynamic>));
   }
 
-  public static function pushCubic__shapeFill(path:Path, c1x:Float, c1y:Float, c2x:Float, c2y:Float, ax:Float, ay:Float):Void {
+  public static function pushCubic__shapeFill(path:Dynamic, c1x:Float, c1y:Float, c2x:Float, c2y:Float, ax:Float, ay:Float):Void {
     _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([PathCommand.CUBIC_CURVE_TO] : Array<Dynamic>));
     _Runtime.pushMany(_Runtime.field(path, 'data'), cast ([c1x, c1y, c2x, c2y, ax, ay] : Array<Dynamic>));
   }
 
-  public static function pushQuadratic__shapeFill(path:Path, cx:Float, cy:Float, ax:Float, ay:Float):Void {
+  public static function pushQuadratic__shapeFill(path:Dynamic, cx:Float, cy:Float, ax:Float, ay:Float):Void {
     _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([PathCommand.CURVE_TO] : Array<Dynamic>));
     _Runtime.pushMany(_Runtime.field(path, 'data'), cast ([cx, cy, ax, ay] : Array<Dynamic>));
   }
 
-  public static function pushVerb__shapeFill(path:Path, verb:Float, x:Float, y:Float):Void {
+  public static function pushVerb__shapeFill(path:Dynamic, verb:Float, x:Float, y:Float):Void {
     _Runtime.callProperty(_Runtime.field(path, 'commands'), 'push', cast ([verb] : Array<Dynamic>));
     _Runtime.pushMany(_Runtime.field(path, 'data'), cast ([x, y] : Array<Dynamic>));
   }

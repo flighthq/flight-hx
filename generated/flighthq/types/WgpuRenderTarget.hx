@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 
 typedef WgpuRenderTarget = { var bindGroup:Dynamic; var depthStencilTexture:Dynamic; var depthStencilView:Dynamic; var format:Dynamic; var height:Float; var clearColors:Array<Float>; var clearDepth:Float; var texture:Dynamic; var view:Dynamic; var width:Float; };
 
-typedef WgpuRenderTargetPool = { var free:Array<WgpuRenderTarget>; };
+typedef WgpuRenderTargetPool = { var free:Array<Dynamic>; };

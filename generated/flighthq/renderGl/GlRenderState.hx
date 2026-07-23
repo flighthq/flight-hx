@@ -10,13 +10,12 @@ import flighthq.render.RenderState.createRenderStateRuntime;
 import flighthq.renderGl.GlShader.compileDefaultGlProgram;
 import flighthq.renderGl.GlShader.createDefaultGlBitmapShader;
 import flighthq.types.GlRenderOptions;
-import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 @:expose("flighthq.renderGl.GlRenderState")
 class GlRenderState {
-  public static function createGlRenderState(canvas:Dynamic, ?options:GlRenderOptions):GlRenderState {
+  public static function createGlRenderState(canvas:Dynamic, ?options:GlRenderOptions):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     var contextAttribs:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -39,7 +38,7 @@ class GlRenderState {
     quadVertexBuffer = _Runtime.callProperty(gl, 'createBuffer', cast ([] : Array<Dynamic>));
     _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), quadVertexBuffer] : Array<Dynamic>));
     _Runtime.callProperty(gl, 'bufferData', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), 64.0, _Runtime.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
-    state = (cast _Runtime.callValue(_createRenderState, cast ([{ allowSmoothing: _Runtime.coalesce(_Runtime.field(options, 'imageSmoothingEnabled'), function():Dynamic return cast true), pixelRatio: _Runtime.coalesce(_Runtime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)), roundPixels: _Runtime.coalesce(_Runtime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.field(options, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : GlRenderState);
+    state = (cast _Runtime.callValue(_createRenderState, cast ([{ allowSmoothing: _Runtime.coalesce(_Runtime.field(options, 'imageSmoothingEnabled'), function():Dynamic return cast true), pixelRatio: _Runtime.coalesce(_Runtime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)), roundPixels: _Runtime.coalesce(_Runtime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.field(options, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : Dynamic);
     _Runtime.setField(state, 'applyBlendMode', null);
     _Runtime.setField((cast state : { var canvas:Dynamic; }), 'canvas', canvas);
     _Runtime.setField((cast state : { var gl:Dynamic; }), 'gl', gl);
@@ -85,7 +84,7 @@ class GlRenderState {
     return cast null;
   }
 
-  public static function destroyGlRenderState(state:GlRenderState):Void {
+  public static function destroyGlRenderState(state:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var programs:Dynamic = cast _Runtime.UNDEFINED;
@@ -111,12 +110,12 @@ class GlRenderState {
     if (_Runtime.truthy(_Runtime.field(runtime, 'spriteBatchColorTransformBuffer'))) { _Runtime.callProperty(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'spriteBatchColorTransformBuffer')] : Array<Dynamic>)); }
   }
 
-  public static function getGlRenderStateRuntime(state:GlRenderState):GlRenderStateRuntime {
+  public static function getGlRenderStateRuntime(state:Dynamic):GlRenderStateRuntime {
     return cast (cast _Runtime.getIndex(state, EntityRuntimeKey) : GlRenderStateRuntime);
     return cast null;
   }
 
-  public static function invalidateGlRenderStateCache(state:GlRenderState):Void {
+  public static function invalidateGlRenderStateCache(state:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.setField(runtime, 'currentBlendMode', null);

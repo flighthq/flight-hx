@@ -5,14 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.displayobjectGl.GlSpriteBatch.flushGlSpriteBatch;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
-import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlScissorRect;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Rectangle.RectangleLike;
 
 @:expose("flighthq.displayobjectGl.GlClipRectangle")
 class GlClipRectangle {
-  public static function popGlClipRectangle(state:GlRenderState):Void {
+  public static function popGlClipRectangle(state:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var stack:Dynamic = cast _Runtime.UNDEFINED;
     var previous:Dynamic = cast _Runtime.UNDEFINED;
@@ -31,7 +30,7 @@ class GlClipRectangle {
     }
   }
 
-  public static function pushGlClipRectangle(state:GlRenderState, rect:RectangleLike, transform:MatrixLike):Void {
+  public static function pushGlClipRectangle(state:Dynamic, rect:RectangleLike, transform:MatrixLike):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var next:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -45,7 +44,7 @@ class GlClipRectangle {
     _Runtime.callProperty(gl, 'scissor', cast ([_Runtime.field(next, 'x'), _Runtime.field(next, 'y'), _Runtime.field(next, 'width'), _Runtime.field(next, 'height')] : Array<Dynamic>));
   }
 
-  public static function computeScissorRect__glClipRectangle(state:GlRenderState, rect:RectangleLike, transform:MatrixLike):GlScissorRect {
+  public static function computeScissorRect__glClipRectangle(state:Dynamic, rect:RectangleLike, transform:MatrixLike):GlScissorRect {
     var x0:Dynamic = cast _Runtime.UNDEFINED;
     var y0:Dynamic = cast _Runtime.UNDEFINED;
     var x1:Dynamic = cast _Runtime.UNDEFINED;
@@ -76,7 +75,7 @@ class GlClipRectangle {
     return cast null;
   }
 
-  public static function getScissorStack__glClipRectangle(state:GlRenderState):Array<GlScissorRect> {
+  public static function getScissorStack__glClipRectangle(state:Dynamic):Array<GlScissorRect> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.setField(runtime, 'scissorStack', (_Runtime.field(runtime, 'scissorStack') ?? cast ([] : Array<Dynamic>)));

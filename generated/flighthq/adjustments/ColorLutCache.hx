@@ -6,13 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.adjustments.ColorLut.COLOR_LUT_DEFAULT_SIZE;
 import flighthq.adjustments.ColorLut.bakeColorLut;
 import flighthq.adjustments.ColorLutAdjustment.getAdjustmentColorTransform;
-import flighthq.types.ColorLut;
-import flighthq.types.ColorLutCache;
 import flighthq.types.ColorTransformFunction;
 
 @:expose("flighthq.adjustments.ColorLutCache")
 class ColorLutCache {
-  public static function bakeColorLutForRun(cache:ColorLutCache, run:Array<{ var kind:String; }>, size:Float = 32.0):ColorLut {
+  public static function bakeColorLutForRun(cache:Dynamic, run:Array<{ var kind:String; }>, size:Float = 32.0):Dynamic {
     var signature:Dynamic = cast _Runtime.UNDEFINED;
     var transforms:Array<ColorTransformFunction> = cast _Runtime.UNDEFINED;
     var lut:Dynamic = cast _Runtime.UNDEFINED;
@@ -30,7 +28,7 @@ class ColorLutCache {
     return cast null;
   }
 
-  public static function createColorLutCache():ColorLutCache {
+  public static function createColorLutCache():Dynamic {
     return cast { signature: null, lut: null };
     return cast null;
   }

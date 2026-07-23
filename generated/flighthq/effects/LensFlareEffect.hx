@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.LensFlareEffect;
 
 @:expose("flighthq.effects.LensFlareEffect")
 class LensFlareEffect {
-  public static function createLensFlareEffect(?options:Dynamic):LensFlareEffect {
+  public static function createLensFlareEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'LensFlareEffect' }, options]);
     return cast null;

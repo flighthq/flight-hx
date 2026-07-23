@@ -6,6 +6,6 @@ import flighthq._internal._Runtime;
 
 typedef RenderSortKey = Float;
 
-typedef RenderQueueEntry = { var proxy:RenderProxy; var sortKey:RenderSortKey; };
+typedef RenderQueueEntry = { var proxy:Dynamic; var sortKey:RenderSortKey; };
 
 typedef RenderQueue = { var entries:Array<RenderQueueEntry>; var entryCount:Float; };

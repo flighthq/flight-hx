@@ -5,12 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
 
 @:expose("flighthq.effectsGl.GlColorMatrixPass")
 class GlColorMatrixPass {
-  public static function applyColorMatrixPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, matrix:Array<Float>):Void {
+  public static function applyColorMatrixPassToGl(state:Dynamic, source:Dynamic, dest:Dynamic, matrix:Array<Float>):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
     m = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [20.0]);

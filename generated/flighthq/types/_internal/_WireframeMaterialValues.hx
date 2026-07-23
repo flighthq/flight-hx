@@ -3,7 +3,6 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.SurfaceMaterial;
 
 @:expose("flighthq.types._internal._WireframeMaterialValues")
 class _WireframeMaterialValues {

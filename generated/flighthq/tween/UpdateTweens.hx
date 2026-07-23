@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.tween._internal._Internal.initializeTween;
-import flighthq.types.TweenManager;
 
 @:expose("flighthq.tween.UpdateTweens")
 class UpdateTweens {
@@ -64,7 +63,7 @@ class UpdateTweens {
     }
   }
 
-  public static function updateTweens(manager:TweenManager, deltaTime:Float):Void {
+  public static function updateTweens(manager:Dynamic, deltaTime:Float):Void {
     for (__iteration0 in _Runtime.iterable(_Runtime.field(manager, 'tweens'))) {
       var target:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
       var list:Dynamic = _Runtime.getIndex(__iteration0, 1.0);

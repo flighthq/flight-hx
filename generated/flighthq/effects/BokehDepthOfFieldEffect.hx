@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.BokehDepthOfFieldEffect;
 
 @:expose("flighthq.effects.BokehDepthOfFieldEffect")
 class BokehDepthOfFieldEffect {
-  public static function createBokehDepthOfFieldEffect(?options:Dynamic):BokehDepthOfFieldEffect {
+  public static function createBokehDepthOfFieldEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'BokehDepthOfFieldEffect' }, options]);
     return cast null;

@@ -5,12 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.WgpuFullscreenPipeline;
-import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.renderWgpu.WgpuFullscreenPass")
 class WgpuFullscreenPass {
-  public static function createWgpuFullscreenPipeline(state:WgpuRenderState, fragmentWgsl:String, textureInputCount:Dynamic = 1.0, ?format:Dynamic):WgpuFullscreenPipeline {
+  public static function createWgpuFullscreenPipeline(state:Dynamic, fragmentWgsl:String, textureInputCount:Dynamic = 1.0, ?format:Dynamic):WgpuFullscreenPipeline {
     if (format == null) format = cast (_Runtime.field(state, 'format') : Dynamic);
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
@@ -39,10 +37,10 @@ class WgpuFullscreenPass {
     return cast null;
   }
 
-  public static function destroyWgpuFullscreenPipeline(_state:WgpuRenderState, _pipeline:WgpuFullscreenPipeline):Void {
+  public static function destroyWgpuFullscreenPipeline(_state:Dynamic, _pipeline:WgpuFullscreenPipeline):Void {
   }
 
-  public static function drawWgpuFullscreenPass(state:WgpuRenderState, wgpuPipeline:WgpuFullscreenPipeline, inputs:Array<WgpuRenderTarget>, dest:Null<WgpuRenderTarget>, setUniforms:Null<Dynamic>):Void {
+  public static function drawWgpuFullscreenPass(state:Dynamic, wgpuPipeline:WgpuFullscreenPipeline, inputs:Array<Dynamic>, dest:Null<Dynamic>, setUniforms:Null<Dynamic>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var runtime2:Dynamic = cast _Runtime.UNDEFINED;

@@ -4,11 +4,10 @@ package flighthq.mesh;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.mesh.MeshGeometry.createMeshGeometry;
-import flighthq.types.MeshGeometry;
 
 @:expose("flighthq.mesh.MeshGeometryIndex")
 class MeshGeometryIndex {
-  public static function computeMeshGeometryWireframeIndices(geometry:MeshGeometry):Dynamic {
+  public static function computeMeshGeometryWireframeIndices(geometry:Dynamic):Dynamic {
     var useUint32:Dynamic = cast _Runtime.UNDEFINED;
     var indices:Dynamic = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
@@ -59,7 +58,7 @@ class MeshGeometryIndex {
     return cast null;
   }
 
-  public static function expandMeshGeometryIndices(geometry:MeshGeometry):MeshGeometry {
+  public static function expandMeshGeometryIndices(geometry:Dynamic):Dynamic {
     var indices:Dynamic = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var sourceVertices:Dynamic = cast _Runtime.UNDEFINED;

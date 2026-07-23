@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
 import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
-import flighthq.types.GlRenderState;
 
 typedef GlWireframeProgram = Dynamic;
 
@@ -18,7 +17,7 @@ class GlWireframePrelude {
     return cast null;
   }
 
-  public static function ensureGlWireframeProgram(state:GlRenderState):GlWireframeProgram {
+  public static function ensureGlWireframeProgram(state:Dynamic):GlWireframeProgram {
     return cast _Runtime.callValue(ensureGlSceneProgram, cast ([state, 'wireframe:', function(gl:Dynamic) return _Runtime.callValue(compileGlWireframeProgram, cast ([gl] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }

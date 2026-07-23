@@ -21,7 +21,6 @@ import flighthq.particlesFormats.StarlingPexParse.parseStarlingPexDocument;
 import flighthq.particlesFormats.UnityParse.UnityParseOptions;
 import flighthq.particlesFormats.UnityParse.parseUnityParticle;
 import flighthq.particlesFormats.UnityParse.parseUnityParticleDocument;
-import flighthq.types.ParticleEmitterConfig;
 import flighthq.types._internal._ParticleFormatKindValues.LibgdxParticleFormatKind;
 import flighthq.types._internal._ParticleFormatKindValues.ParticleDesignerFormatKind;
 import flighthq.types._internal._ParticleFormatKindValues.PixiParticleFormatKind;
@@ -31,11 +30,11 @@ import flighthq.types._internal._ParticleFormatKindValues.UnityParticleFormatKin
 
 typedef ParseParticleConfigOptions = Dynamic;
 
-typedef ParticleConfigParseResult = { var config:ParticleEmitterConfig; var format:Null<String>; var warnings:Array<String>; };
+typedef ParticleConfigParseResult = { var config:Dynamic; var format:Null<String>; var warnings:Array<String>; };
 
 @:expose("flighthq.particlesFormats.ParseParticleConfig")
 class ParseParticleConfig {
-  public static function parseParticleConfig(text:String, ?options:ParseParticleConfigOptions):ParticleEmitterConfig {
+  public static function parseParticleConfig(text:String, ?options:ParseParticleConfigOptions):Dynamic {
     var format:Dynamic = cast _Runtime.UNDEFINED;
     format = _Runtime.callValue(detectParticleFormat, cast ([text] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(format, null))) { return cast _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)); }

@@ -10,12 +10,8 @@ import flighthq.sceneGl._internal._GlMeshProgramValues.beginGlMeshDraw;
 import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
 import flighthq.sceneGl._internal._GlWireframeUploadValues.ensureGlWireframeUpload;
-import flighthq.types.Camera;
 import flighthq.types.GlMeshMaterialRenderer;
-import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
-import flighthq.types.Material;
-import flighthq.types.MeshGeometry;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.WireframeMaterial;
@@ -23,7 +19,7 @@ import flighthq.types._internal._WireframeMaterialValues.WireframeMaterialKind;
 
 @:expose("flighthq.sceneGl.WireframeGlMeshMaterialRenderer")
 class WireframeGlMeshMaterialRenderer {
-  public static final wireframeGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera) {
+  public static final wireframeGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:Dynamic, material:Null<Dynamic>, _lights:SceneLightBlock, camera:Dynamic) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var wireframe:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -38,7 +34,7 @@ class WireframeGlMeshMaterialRenderer {
     }
     _Runtime.callValue(unpackColorToLinear, cast ([WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, _Runtime.field(wireframe, 'color')] : Array<Dynamic>));
     _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(program, 'locColor'), _Runtime.getIndex(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 2.0), _Runtime.getIndex(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 3.0)] : Array<Dynamic>));
-  }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
+  }, draw: function(state:Dynamic, proxy:SceneRenderProxy, geometry:Dynamic) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
     var upload:Dynamic = cast _Runtime.UNDEFINED;
@@ -54,7 +50,7 @@ class WireframeGlMeshMaterialRenderer {
     _Runtime.callProperty(gl, 'drawElements', cast ([_Runtime.field(gl, 'LINES'), (_Runtime.field(subset, 'indexCount') * 2.0), _Runtime.field(upload, 'indexType'), ((_Runtime.field(subset, 'indexOffset') * 2.0) * elementSize)] : Array<Dynamic>));
   } };
 
-  public static function registerWireframeGlMaterial(state:GlRenderState):Void {
+  public static function registerWireframeGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(registerGlMeshMaterialRenderer, cast ([state, WireframeMaterialKind, wireframeGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 

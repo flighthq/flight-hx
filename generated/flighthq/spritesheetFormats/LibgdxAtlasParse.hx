@@ -9,9 +9,7 @@ import flighthq.spritesheet.SpritesheetData.createSpritesheetFrameData;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.textureatlasFormats.TextureAtlasLibgdxParse.parseTextureAtlasLibgdxAtlas;
 import flighthq.types.SpritesheetAnimationData;
-import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
-import flighthq.types.TextureAtlasRegion;
 
 typedef LibgdxAtlasParseOptions = { @:optional var frameDuration:Float; };
 
@@ -146,7 +144,7 @@ class LibgdxAtlasParse {
     return cast null;
   }
 
-  public static function frameFromRegion__libgdxAtlasParse(region:TextureAtlasRegion):SpritesheetFrameData {
+  public static function frameFromRegion__libgdxAtlasParse(region:Dynamic):SpritesheetFrameData {
     return cast _Runtime.callValue(createSpritesheetFrameData, cast ([{ height: _Runtime.field(region, 'height'), name: _Runtime.coalesce(_Runtime.field(region, 'name'), function():Dynamic return cast ''), offsetX: _Runtime.field(region, 'sourceX'), offsetY: _Runtime.field(region, 'sourceY'), pivotX: _Runtime.field(region, 'pivotX'), pivotY: _Runtime.field(region, 'pivotY'), rotated: _Runtime.field(region, 'rotated'), sourceHeight: _Runtime.coalesce(_Runtime.field(region, 'originalHeight'), function():Dynamic return cast _Runtime.field(region, 'height')), sourceWidth: _Runtime.coalesce(_Runtime.field(region, 'originalWidth'), function():Dynamic return cast _Runtime.field(region, 'width')), width: _Runtime.field(region, 'width'), x: _Runtime.field(region, 'x'), y: _Runtime.field(region, 'y') }] : Array<Dynamic>));
     return cast null;
   }
@@ -178,7 +176,7 @@ class LibgdxAtlasParse {
     return cast null;
   }
 
-  public static function parseLibgdxAtlasSpritesheet(text:String, ?options:LibgdxAtlasParseOptions):SpritesheetData {
+  public static function parseLibgdxAtlasSpritesheet(text:String, ?options:LibgdxAtlasParseOptions):Dynamic {
     var frameDuration:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure7:Dynamic = cast _Runtime.UNDEFINED;
     var pages:Dynamic = cast _Runtime.UNDEFINED;
@@ -186,7 +184,7 @@ class LibgdxAtlasParse {
     var imageFile:Dynamic = cast _Runtime.UNDEFINED;
     var imageWidth:Dynamic = cast _Runtime.UNDEFINED;
     var imageHeight:Dynamic = cast _Runtime.UNDEFINED;
-    var regions:Array<TextureAtlasRegion> = cast _Runtime.UNDEFINED;
+    var regions:Array<Dynamic> = cast _Runtime.UNDEFINED;
     var frames:Array<SpritesheetFrameData> = cast _Runtime.UNDEFINED;
     var frameNames:Dynamic = cast _Runtime.UNDEFINED;
     var animations:Dynamic = cast _Runtime.UNDEFINED;

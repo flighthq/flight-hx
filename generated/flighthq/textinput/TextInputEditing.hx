@@ -11,13 +11,10 @@ import flighthq.textlayout.RichTextQuery.getRichTextSelectionRectangles;
 import flighthq.textlayout.TextBounds.TEXT_BOUNDS_GUTTER;
 import flighthq.types.KeyCode;
 import flighthq.types.KeyboardEventData;
-import flighthq.types.RichText;
 import flighthq.types.RichText.RichTextData;
-import flighthq.types.TextFormatRange;
 import flighthq.types.TextInputEditingOptions.HandleTextInputKeyboardOptions;
 import flighthq.types.TextInputEditingOptions.ReplaceTextInputOptions;
 import flighthq.types.TextInputState;
-import flighthq.types.TextLayout.TextLayoutGroup;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextSelectionRectangle;
 
@@ -27,11 +24,11 @@ typedef KeyboardCommand__textInputEditing = String;
 class TextInputEditing {
   public static final DESIRED_CARET_X_UNSET__textInputEditing:Dynamic = -1.0;
 
-  public static function appendTextInput(source:RichText, text:String):Void {
+  public static function appendTextInput(source:Dynamic, text:String):Void {
     _Runtime.callValue(replaceTextInput, cast ([source, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length'), text] : Array<Dynamic>));
   }
 
-  public static function applyTextInputRestriction(source:RichText, text:String, replaceLength:Dynamic = 0.0):String {
+  public static function applyTextInputRestriction(source:Dynamic, text:String, replaceLength:Dynamic = 0.0):String {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var value:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
@@ -47,26 +44,26 @@ class TextInputEditing {
     return cast null;
   }
 
-  public static function canRedoTextInput(source:RichText):Bool {
+  public static function canRedoTextInput(source:Dynamic):Bool {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
     return cast _Runtime.compare(_Runtime.field(state, 'historyIndex'), (_Runtime.field(_Runtime.field(state, 'history'), 'length') - 1.0), '<');
     return cast null;
   }
 
-  public static function canUndoTextInput(source:RichText):Bool {
+  public static function canUndoTextInput(source:Dynamic):Bool {
     return cast _Runtime.compare(_Runtime.field(_Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>)), 'historyIndex'), 0.0, '>=');
     return cast null;
   }
 
-  public static function clearTextInputHistory(source:RichText):Void {
+  public static function clearTextInputHistory(source:Dynamic):Void {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
     _Runtime.setField(state, 'history', cast ([] : Array<Dynamic>));
     _Runtime.setField(state, 'historyIndex', -1.0);
   }
 
-  public static function deleteTextInputBackward(source:RichText):Void {
+  public static function deleteTextInputBackward(source:Dynamic):Void {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var start:Dynamic = cast _Runtime.UNDEFINED;
     var end:Dynamic = cast _Runtime.UNDEFINED;
@@ -81,7 +78,7 @@ class TextInputEditing {
     _Runtime.setField(state, 'selectionIndex', _Runtime.field(state, 'caretIndex'));
   }
 
-  public static function deleteTextInputForward(source:RichText):Void {
+  public static function deleteTextInputForward(source:Dynamic):Void {
     var start:Dynamic = cast _Runtime.UNDEFINED;
     var end:Dynamic = cast _Runtime.UNDEFINED;
     start = _Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>));
@@ -93,7 +90,7 @@ class TextInputEditing {
     } }
   }
 
-  public static function deleteTextInputWordBackward(source:RichText):Void {
+  public static function deleteTextInputWordBackward(source:Dynamic):Void {
     var start:Dynamic = cast _Runtime.UNDEFINED;
     var end:Dynamic = cast _Runtime.UNDEFINED;
     var wordStart:Dynamic = cast _Runtime.UNDEFINED;
@@ -107,7 +104,7 @@ class TextInputEditing {
     if (_Runtime.truthy(_Runtime.compare(wordStart, start, '<'))) { _Runtime.callValue(replaceTextInput, cast ([source, wordStart, start, ''] : Array<Dynamic>)); }
   }
 
-  public static function deleteTextInputWordForward(source:RichText):Void {
+  public static function deleteTextInputWordForward(source:Dynamic):Void {
     var start:Dynamic = cast _Runtime.UNDEFINED;
     var end:Dynamic = cast _Runtime.UNDEFINED;
     var wordEnd:Dynamic = cast _Runtime.UNDEFINED;
@@ -121,12 +118,12 @@ class TextInputEditing {
     if (_Runtime.truthy(_Runtime.compare(wordEnd, start, '>'))) { _Runtime.callValue(replaceTextInput, cast ([source, start, wordEnd, ''] : Array<Dynamic>)); }
   }
 
-  public static function getTextInputCaretIndex(source:RichText):Float {
+  public static function getTextInputCaretIndex(source:Dynamic):Float {
     return cast _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(_Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>)), 'caretIndex'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextInputCaretRectangle(out:TextSelectionRectangle, source:RichText, layout:TextLayoutResult):Void {
+  public static function getTextInputCaretRectangle(out:TextSelectionRectangle, source:Dynamic, layout:TextLayoutResult):Void {
     var caretIndex:Dynamic = cast _Runtime.UNDEFINED;
     var group:Dynamic = cast _Runtime.UNDEFINED;
     caretIndex = _Runtime.callValue(getTextInputCaretIndex, cast ([source] : Array<Dynamic>));
@@ -146,7 +143,7 @@ class TextInputEditing {
     _Runtime.setField(out, 'lineIndex', _Runtime.field(group, 'lineIndex'));
   }
 
-  public static function getTextInputCharacterIndexAtPoint(source:RichText, layout:TextLayoutResult, x:Float, y:Float):Float {
+  public static function getTextInputCharacterIndexAtPoint(source:Dynamic, layout:TextLayoutResult, x:Float, y:Float):Float {
     var closestLineIndex:Dynamic = cast _Runtime.UNDEFINED;
     var closestLineDistance:Dynamic = cast _Runtime.UNDEFINED;
     var lineStart:Dynamic = cast _Runtime.UNDEFINED;
@@ -180,7 +177,7 @@ class TextInputEditing {
     return cast null;
   }
 
-  public static function getTextInputDisplayText(source:RichText):String {
+  public static function getTextInputDisplayText(source:Dynamic):String {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var passwordCharacter:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
@@ -190,30 +187,30 @@ class TextInputEditing {
     return cast null;
   }
 
-  public static function getTextInputSelectionBeginIndex(source:RichText):Float {
+  public static function getTextInputSelectionBeginIndex(source:Dynamic):Float {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
     return cast _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'caretIndex'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>)), _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'selectionIndex'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextInputSelectionEndIndex(source:RichText):Float {
+  public static function getTextInputSelectionEndIndex(source:Dynamic):Float {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
     return cast _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'caretIndex'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>)), _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'selectionIndex'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextInputSelectionRectangles(out:Array<TextSelectionRectangle>, source:RichText, layout:TextLayoutResult):Void {
+  public static function getTextInputSelectionRectangles(out:Array<TextSelectionRectangle>, source:Dynamic, layout:TextLayoutResult):Void {
     _Runtime.callValue(getRichTextSelectionRectangles, cast ([out, _Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>)), _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>)), layout] : Array<Dynamic>));
   }
 
-  public static function getTextInputSelectionText(source:RichText):String {
+  public static function getTextInputSelectionText(source:Dynamic):String {
     return cast _Runtime.slice(_Runtime.field(_Runtime.field(source, 'data'), 'text'), _Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>)), _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>)));
     return cast null;
   }
 
-  public static function handleTextInputKeyboard(source:RichText, data:KeyboardEventData, ?options:HandleTextInputKeyboardOptions):Bool {
+  public static function handleTextInputKeyboard(source:Dynamic, data:KeyboardEventData, ?options:HandleTextInputKeyboardOptions):Bool {
     var command:Dynamic = cast _Runtime.UNDEFINED;
     command = _Runtime.callValue(TextInputEditing.getKeyboardCommand__textInputEditing, cast ([data] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(command, 'none'))) { return cast false; }
@@ -309,11 +306,11 @@ class TextInputEditing {
     return cast null;
   }
 
-  public static function insertTextInput(source:RichText, text:String):Void {
+  public static function insertTextInput(source:Dynamic, text:String):Void {
     _Runtime.callValue(replaceSelectedTextInput, cast ([source, text, { applyInputRules: true }] : Array<Dynamic>));
   }
 
-  public static function moveTextInputCaret(source:RichText, index:Float, extendSelection:Dynamic = false):Void {
+  public static function moveTextInputCaret(source:Dynamic, index:Float, extendSelection:Dynamic = false):Void {
     var caret:Dynamic = cast _Runtime.UNDEFINED;
     var state:Dynamic = cast _Runtime.UNDEFINED;
     caret = _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([index, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
@@ -324,7 +321,7 @@ class TextInputEditing {
     _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
 
-  public static function moveTextInputCaretByWord(source:RichText, direction:Float, extendSelection:Dynamic = false):Void {
+  public static function moveTextInputCaretByWord(source:Dynamic, direction:Float, extendSelection:Dynamic = false):Void {
     var caretIndex:Dynamic = cast _Runtime.UNDEFINED;
     var text:Dynamic = cast _Runtime.UNDEFINED;
     var target:Float = cast _Runtime.UNDEFINED;
@@ -338,7 +335,7 @@ class TextInputEditing {
     _Runtime.callValue(moveTextInputCaret, cast ([source, target, extendSelection] : Array<Dynamic>));
   }
 
-  public static function moveTextInputCaretDown(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
+  public static function moveTextInputCaretDown(source:Dynamic, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var out:Dynamic = cast _Runtime.UNDEFINED;
     var targetLineIndex:Dynamic = cast _Runtime.UNDEFINED;
@@ -366,7 +363,7 @@ class TextInputEditing {
     _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
 
-  public static function moveTextInputCaretToLineEnd(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
+  public static function moveTextInputCaretToLineEnd(source:Dynamic, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
     var lineIndex:Dynamic = cast _Runtime.UNDEFINED;
     var lineEnd:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(layout, null), function():Dynamic return cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
@@ -378,7 +375,7 @@ class TextInputEditing {
     _Runtime.callValue(moveTextInputCaret, cast ([source, lineEnd, extendSelection] : Array<Dynamic>));
   }
 
-  public static function moveTextInputCaretToLineStart(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
+  public static function moveTextInputCaretToLineStart(source:Dynamic, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
     var lineIndex:Dynamic = cast _Runtime.UNDEFINED;
     var lineStart:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(layout, null), function():Dynamic return cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
@@ -390,7 +387,7 @@ class TextInputEditing {
     _Runtime.callValue(moveTextInputCaret, cast ([source, lineStart, extendSelection] : Array<Dynamic>));
   }
 
-  public static function moveTextInputCaretUp(source:RichText, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
+  public static function moveTextInputCaretUp(source:Dynamic, layout:Null<TextLayoutResult>, extendSelection:Dynamic = false):Void {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var out:Dynamic = cast _Runtime.UNDEFINED;
     var targetLineIndex:Dynamic = cast _Runtime.UNDEFINED;
@@ -418,7 +415,7 @@ class TextInputEditing {
     _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
 
-  public static function redoTextInput(source:RichText):Void {
+  public static function redoTextInput(source:Dynamic):Void {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var record:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
@@ -428,11 +425,11 @@ class TextInputEditing {
     _Runtime.callValue(TextInputEditing.applyHistoryRecord__textInputEditing, cast ([source, state, _Runtime.field(record, 'textAfter'), _Runtime.field(record, 'caretIndexAfter'), _Runtime.field(record, 'selectionIndexAfter')] : Array<Dynamic>));
   }
 
-  public static function replaceSelectedTextInput(source:RichText, text:String, ?options:ReplaceTextInputOptions):Void {
+  public static function replaceSelectedTextInput(source:Dynamic, text:String, ?options:ReplaceTextInputOptions):Void {
     _Runtime.callValue(replaceTextInput, cast ([source, _Runtime.callValue(getTextInputSelectionBeginIndex, cast ([source] : Array<Dynamic>)), _Runtime.callValue(getTextInputSelectionEndIndex, cast ([source] : Array<Dynamic>)), text, options] : Array<Dynamic>));
   }
 
-  public static function replaceTextInput(source:RichText, beginIndex:Float, endIndex:Float, text:String, ?options:ReplaceTextInputOptions):Void {
+  public static function replaceTextInput(source:Dynamic, beginIndex:Float, endIndex:Float, text:String, ?options:ReplaceTextInputOptions):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var start:Dynamic = cast _Runtime.UNDEFINED;
     var end:Dynamic = cast _Runtime.UNDEFINED;
@@ -465,7 +462,7 @@ class TextInputEditing {
     _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
 
-  public static function scrollTextInputCaretIntoView(source:RichText, layout:TextLayoutResult, viewportWidth:Float, viewportHeight:Float):Void {
+  public static function scrollTextInputCaretIntoView(source:Dynamic, layout:TextLayoutResult, viewportWidth:Float, viewportHeight:Float):Void {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     var caretTop:Dynamic = cast _Runtime.UNDEFINED;
     var caretBottom:Dynamic = cast _Runtime.UNDEFINED;
@@ -519,11 +516,11 @@ class TextInputEditing {
     } }
   }
 
-  public static function selectAllTextInput(source:RichText):Void {
+  public static function selectAllTextInput(source:Dynamic):Void {
     _Runtime.callValue(setTextInputSelection, cast ([source, 0.0, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>));
   }
 
-  public static function selectLineAtTextInputIndex(source:RichText, index:Float):Void {
+  public static function selectLineAtTextInputIndex(source:Dynamic, index:Float):Void {
     var text:Dynamic = cast _Runtime.UNDEFINED;
     var clamped:Dynamic = cast _Runtime.UNDEFINED;
     var start:Dynamic = cast _Runtime.UNDEFINED;
@@ -537,7 +534,7 @@ class TextInputEditing {
     _Runtime.callValue(setTextInputSelection, cast ([source, start, end] : Array<Dynamic>));
   }
 
-  public static function selectWordAtTextInputIndex(source:RichText, index:Float):Void {
+  public static function selectWordAtTextInputIndex(source:Dynamic, index:Float):Void {
     var text:Dynamic = cast _Runtime.UNDEFINED;
     var clamped:Dynamic = cast _Runtime.UNDEFINED;
     var start:Dynamic = cast _Runtime.UNDEFINED;
@@ -555,7 +552,7 @@ class TextInputEditing {
     _Runtime.callValue(setTextInputSelection, cast ([source, start, end] : Array<Dynamic>));
   }
 
-  public static function setTextInputSelection(source:RichText, beginIndex:Float, endIndex:Float):Void {
+  public static function setTextInputSelection(source:Dynamic, beginIndex:Float, endIndex:Float):Void {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
     _Runtime.setField(state, 'selectionIndex', _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([beginIndex, _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>)));
@@ -563,7 +560,7 @@ class TextInputEditing {
     _Runtime.callValue(invalidateNodeAppearance, cast ([source] : Array<Dynamic>));
   }
 
-  public static function undoTextInput(source:RichText):Void {
+  public static function undoTextInput(source:Dynamic):Void {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var record:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
@@ -573,7 +570,7 @@ class TextInputEditing {
     _Runtime.callValue(TextInputEditing.applyHistoryRecord__textInputEditing, cast ([source, state, _Runtime.field(record, 'textBefore'), _Runtime.field(record, 'caretIndexBefore'), _Runtime.field(record, 'selectionIndexBefore')] : Array<Dynamic>));
   }
 
-  public static function adjustTextFormatRanges__textInputEditing(ranges:Array<TextFormatRange>, defaultFormat:Dynamic, beginIndex:Float, endIndex:Float, insertLength:Float):Void {
+  public static function adjustTextFormatRanges__textInputEditing(ranges:Array<Dynamic>, defaultFormat:Dynamic, beginIndex:Float, endIndex:Float, insertLength:Float):Void {
     var removeLength:Dynamic = cast _Runtime.UNDEFINED;
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     removeLength = (endIndex - beginIndex);
@@ -623,7 +620,7 @@ class TextInputEditing {
     }
   }
 
-  public static function applyHistoryRecord__textInputEditing(source:RichText, state:TextInputState, text:String, caretIndex:Float, selectionIndex:Float):Void {
+  public static function applyHistoryRecord__textInputEditing(source:Dynamic, state:TextInputState, text:String, caretIndex:Float, selectionIndex:Float):Void {
     _Runtime.setField(_Runtime.field(source, 'data'), 'text', text);
     _Runtime.setField(state, 'caretIndex', _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([caretIndex, _Runtime.field(text, 'length')] : Array<Dynamic>)));
     _Runtime.setField(state, 'selectionIndex', _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([selectionIndex, _Runtime.field(text, 'length')] : Array<Dynamic>)));
@@ -637,7 +634,7 @@ class TextInputEditing {
     return cast null;
   }
 
-  public static function getCaretLineIndex__textInputEditing(source:RichText, layout:TextLayoutResult):Float {
+  public static function getCaretLineIndex__textInputEditing(source:Dynamic, layout:TextLayoutResult):Float {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     out = TextInputEditing.scratchRect__textInputEditing;
     _Runtime.callValue(getTextInputCaretRectangle, cast ([out, source, layout] : Array<Dynamic>));
@@ -650,7 +647,7 @@ class TextInputEditing {
     return cast null;
   }
 
-  public static function getInputState__textInputEditing(source:RichText):TextInputState {
+  public static function getInputState__textInputEditing(source:Dynamic):TextInputState {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(getTextInputState, cast ([source] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(state, null))) { throw _Runtime.error('text input is not enabled on this RichText; call enableTextInput first'); }
@@ -729,7 +726,7 @@ class TextInputEditing {
     return cast null;
   }
 
-  public static function getTextLayoutGroupAtIndex__textInputEditing(layout:TextLayoutResult, index:Float):Null<TextLayoutGroup> {
+  public static function getTextLayoutGroupAtIndex__textInputEditing(layout:TextLayoutResult, index:Float):Null<Dynamic> {
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(index, _Runtime.field(group, 'startIndex'), '>='), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(group, 'endIndex'), '<=')))) { return cast group; }
     }
@@ -737,7 +734,7 @@ class TextInputEditing {
     return cast null;
   }
 
-  public static function getTextLayoutGroupCaretX__textInputEditing(group:TextLayoutGroup, index:Float):Float {
+  public static function getTextLayoutGroupCaretX__textInputEditing(group:Dynamic, index:Float):Float {
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var limit:Dynamic = cast _Runtime.UNDEFINED;
     x = _Runtime.field(group, 'offsetX');
@@ -753,7 +750,7 @@ class TextInputEditing {
     return cast null;
   }
 
-  public static function getTextLayoutGroupCharacterIndexAtX__textInputEditing(group:TextLayoutGroup, x:Float):Float {
+  public static function getTextLayoutGroupCharacterIndexAtX__textInputEditing(group:Dynamic, x:Float):Float {
     var currentX:Dynamic = cast _Runtime.UNDEFINED;
     currentX = _Runtime.field(group, 'offsetX');
     {

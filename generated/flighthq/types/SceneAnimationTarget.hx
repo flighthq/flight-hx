@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SceneAnimationTarget = { var node:SceneNode; var path:SceneAnimationPath; };
+typedef SceneAnimationTarget = { var node:Dynamic; var path:SceneAnimationPath; };

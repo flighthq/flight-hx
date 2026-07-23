@@ -6,23 +6,21 @@ import flighthq._internal._Runtime;
 import flighthq.types.MarkupClassResolver;
 import flighthq.types.MarkupColorResolver;
 import flighthq.types.MarkupTagHandler;
-import flighthq.types.MarkupTagRegistry;
-import flighthq.types.TextFormat;
 import flighthq.types.TextFormat.TextFormatAlign;
 import flighthq.types.TextFormat.TextFormatListMarker;
 
 @:expose("flighthq.textMarkup.MarkupTagRegistry")
 class MarkupTagRegistry {
-  public static function createMarkupTagRegistry():MarkupTagRegistry {
+  public static function createMarkupTagRegistry():Dynamic {
     return cast { handlers: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };
     return cast null;
   }
 
-  public static function registerMarkupTag(registry:MarkupTagRegistry, name:String, handler:MarkupTagHandler):Void {
+  public static function registerMarkupTag(registry:Dynamic, name:String, handler:MarkupTagHandler):Void {
     _Runtime.callProperty(_Runtime.field(registry, 'handlers'), 'set', cast ([_Runtime.callProperty(name, 'toLowerCase', cast ([] : Array<Dynamic>)), handler] : Array<Dynamic>));
   }
 
-  public static function registerStandardMarkupTags(registry:MarkupTagRegistry):Void {
+  public static function registerStandardMarkupTags(registry:Dynamic):Void {
     _Runtime.setField(registry, 'colorResolver', resolveMarkupHexColor);
     _Runtime.callValue(registerMarkupTag, cast ([registry, 'a', MarkupTagRegistry.markupAnchorTagHandler__markupTagRegistry] : Array<Dynamic>));
     _Runtime.callValue(registerMarkupTag, cast ([registry, 'b', MarkupTagRegistry.markupBoldTagHandler__markupTagRegistry] : Array<Dynamic>));
@@ -60,11 +58,11 @@ class MarkupTagRegistry {
     return cast null;
   }
 
-  public static function createMarkupSpanTagHandler__markupTagRegistry(registry:MarkupTagRegistry):MarkupTagHandler {
+  public static function createMarkupSpanTagHandler__markupTagRegistry(registry:Dynamic):MarkupTagHandler {
     return cast function(attributes:Dynamic) {
       var resolve:Null<MarkupClassResolver> = cast _Runtime.UNDEFINED;
       var classes:Dynamic = cast _Runtime.UNDEFINED;
-      var format:TextFormat = cast _Runtime.UNDEFINED;
+      var format:Dynamic = cast _Runtime.UNDEFINED;
       resolve = _Runtime.field(registry, 'classResolver');
       classes = _Runtime.field(attributes, 'class');
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(resolve, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(classes, _Runtime.field(_Runtime, 'UNDEFINED'))))) { return cast {  }; }
@@ -79,9 +77,9 @@ class MarkupTagRegistry {
     return cast null;
   }
 
-  public static function createMarkupFontTagHandler__markupTagRegistry(registry:MarkupTagRegistry):MarkupTagHandler {
+  public static function createMarkupFontTagHandler__markupTagRegistry(registry:Dynamic):MarkupTagHandler {
     return cast function(attributes:Dynamic) {
-      var format:TextFormat = cast _Runtime.UNDEFINED;
+      var format:Dynamic = cast _Runtime.UNDEFINED;
       var color:Dynamic = cast _Runtime.UNDEFINED;
       var size:Dynamic = cast _Runtime.UNDEFINED;
       var face:Dynamic = cast _Runtime.UNDEFINED;
@@ -131,7 +129,7 @@ class MarkupTagRegistry {
   }
 
   public static function markupAnchorTagHandler__markupTagRegistry(attributes:Dynamic):Dynamic {
-    var format:TextFormat = cast _Runtime.UNDEFINED;
+    var format:Dynamic = cast _Runtime.UNDEFINED;
     format = {  };
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(attributes, 'href'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(format, 'url', _Runtime.field(attributes, 'href')); }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(attributes, 'target'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(format, 'target', _Runtime.field(attributes, 'target')); }
@@ -155,7 +153,7 @@ class MarkupTagRegistry {
   }
 
   public static function markupListItemTagHandler__markupTagRegistry(attributes:Dynamic):{ var breakBefore:Bool; var format:Dynamic; } {
-    var format:TextFormat = cast _Runtime.UNDEFINED;
+    var format:Dynamic = cast _Runtime.UNDEFINED;
     var marker:Dynamic = cast _Runtime.UNDEFINED;
     format = { bullet: true };
     marker = _Runtime.field(attributes, 'type');
@@ -165,7 +163,7 @@ class MarkupTagRegistry {
   }
 
   public static function markupParagraphTagHandler__markupTagRegistry(attributes:Dynamic):{ var breakBefore:Bool; var format:Dynamic; } {
-    var format:TextFormat = cast _Runtime.UNDEFINED;
+    var format:Dynamic = cast _Runtime.UNDEFINED;
     var align:Dynamic = cast _Runtime.UNDEFINED;
     format = {  };
     align = _Runtime.field(attributes, 'align');
@@ -180,7 +178,7 @@ class MarkupTagRegistry {
   }
 
   public static function markupTextformatTagHandler__markupTagRegistry(attributes:Dynamic):Dynamic {
-    var format:TextFormat = cast _Runtime.UNDEFINED;
+    var format:Dynamic = cast _Runtime.UNDEFINED;
     var blockIndent:Dynamic = cast _Runtime.UNDEFINED;
     var indent:Dynamic = cast _Runtime.UNDEFINED;
     var leading:Dynamic = cast _Runtime.UNDEFINED;

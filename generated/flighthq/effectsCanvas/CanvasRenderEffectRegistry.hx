@@ -4,7 +4,6 @@ package flighthq.effectsCanvas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
-import flighthq.types.CanvasRenderState;
 
 @:expose("flighthq.effectsCanvas.CanvasRenderEffectRegistry")
 class CanvasRenderEffectRegistry {

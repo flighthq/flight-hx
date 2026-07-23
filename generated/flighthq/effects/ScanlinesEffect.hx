@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ScanlinesEffect;
 
 @:expose("flighthq.effects.ScanlinesEffect")
 class ScanlinesEffect {
-  public static function createScanlinesEffect(?options:Dynamic):ScanlinesEffect {
+  public static function createScanlinesEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'ScanlinesEffect' }, options]);
     return cast null;

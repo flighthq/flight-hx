@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef TextFormatRange = { var end:Float; var format:TextFormat; var start:Float; };
+typedef TextFormatRange = { var end:Float; var format:Dynamic; var start:Float; };

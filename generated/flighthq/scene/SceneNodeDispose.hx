@@ -4,11 +4,10 @@ package flighthq.scene;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.node.Node.disposeNode;
-import flighthq.types.SceneNode;
 
 @:expose("flighthq.scene.SceneNodeDispose")
 class SceneNodeDispose {
-  public static function disposeSceneNode(node:SceneNode):Void {
+  public static function disposeSceneNode(node:Dynamic):Void {
     _Runtime.callValue(disposeNode, cast ([node] : Array<Dynamic>));
   }
 }

@@ -6,16 +6,15 @@ import flighthq._internal._Runtime;
 import flighthq.shapeFormats.ShapeJson as Facade_ShapeFormats_flighthq_shapeFormats_ShapeJson;
 import flighthq.shapeFormats.ShapeJson.ShapeJsonFormatOptions;
 import flighthq.shapeFormats.ShapeJson.ShapeJsonParseOptions;
-import flighthq.types.Shape;
 
 @:expose("flighthq.shapeFormats.ShapeFormats")
 class ShapeFormats {
-  public static function formatShapeJson(shape:Shape, ?options:ShapeJsonFormatOptions):String {
+  public static function formatShapeJson(shape:Dynamic, ?options:ShapeJsonFormatOptions):String {
     return cast _Runtime.callValue(Facade_ShapeFormats_flighthq_shapeFormats_ShapeJson.formatShapeJson, cast ([shape, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseShapeJson(text:String, ?options:ShapeJsonParseOptions):Null<Shape> {
+  public static function parseShapeJson(text:String, ?options:ShapeJsonParseOptions):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_ShapeFormats_flighthq_shapeFormats_ShapeJson.parseShapeJson, cast ([text, options] : Array<Dynamic>));
     return cast null;
   }

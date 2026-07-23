@@ -8,4 +8,4 @@ import flighthq.types.Entity.Kind;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 
-typedef ClearcoatPbrMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var alphaType:AlphaType; var blendMode:BlendMode; var doubleSided:Bool; var clearcoat:Float; var clearcoatMap:Null<Texture>; var clearcoatNormalMap:Null<Texture>; var clearcoatRoughness:Float; var clearcoatRoughnessMap:Null<Texture>; var standard:StandardPbrMaterialProperties; };
+typedef ClearcoatPbrMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var alphaType:AlphaType; var blendMode:BlendMode; var doubleSided:Bool; var clearcoat:Float; var clearcoatMap:Null<Dynamic>; var clearcoatNormalMap:Null<Dynamic>; var clearcoatRoughness:Float; var clearcoatRoughnessMap:Null<Dynamic>; var standard:StandardPbrMaterialProperties; };

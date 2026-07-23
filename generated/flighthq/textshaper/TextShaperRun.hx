@@ -7,7 +7,6 @@ import flighthq.textshaper.TextShaper.getTextShaperBackend;
 import flighthq.types.FontMetrics;
 import flighthq.types.GlyphExtents;
 import flighthq.types.ShapedRun;
-import flighthq.types.TextFormat;
 import flighthq.types.TextShaper.ShapeRunOptions;
 
 @:expose("flighthq.textshaper.TextShaperRun")
@@ -28,7 +27,7 @@ class TextShaperRun {
     return cast null;
   }
 
-  public static function getCodePointForGlyph(glyphId:Float, _format:TextFormat):Float {
+  public static function getCodePointForGlyph(glyphId:Float, _format:Dynamic):Float {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(backend, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(backend, 'getCodePointForGlyph'))))) { return cast -1.0; }
@@ -36,7 +35,7 @@ class TextShaperRun {
     return cast null;
   }
 
-  public static function getFontMetrics(format:TextFormat):Null<FontMetrics> {
+  public static function getFontMetrics(format:Dynamic):Null<FontMetrics> {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(backend, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(backend, 'getFontMetrics'))))) { return cast null; }
@@ -44,7 +43,7 @@ class TextShaperRun {
     return cast null;
   }
 
-  public static function getFontMetricsInto(format:TextFormat, out:FontMetrics):Bool {
+  public static function getFontMetricsInto(format:Dynamic, out:FontMetrics):Bool {
     var metrics:Dynamic = cast _Runtime.UNDEFINED;
     metrics = _Runtime.callValue(getFontMetrics, cast ([format] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(metrics, null))) { return cast false; }
@@ -60,7 +59,7 @@ class TextShaperRun {
     return cast null;
   }
 
-  public static function getFontUnitScale(format:TextFormat):Float {
+  public static function getFontUnitScale(format:Dynamic):Float {
     var metrics:Dynamic = cast _Runtime.UNDEFINED;
     var size:Dynamic = cast _Runtime.UNDEFINED;
     metrics = _Runtime.callValue(getFontMetrics, cast ([format] : Array<Dynamic>));
@@ -70,7 +69,7 @@ class TextShaperRun {
     return cast null;
   }
 
-  public static function getGlyphExtents(glyphId:Float, _format:TextFormat):Null<GlyphExtents> {
+  public static function getGlyphExtents(glyphId:Float, _format:Dynamic):Null<GlyphExtents> {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(backend, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(backend, 'getGlyphExtents'))))) { return cast null; }
@@ -78,7 +77,7 @@ class TextShaperRun {
     return cast null;
   }
 
-  public static function getGlyphExtentsBatch(glyphIds:Array<Float>, _format:TextFormat, out:Array<GlyphExtents>):Float {
+  public static function getGlyphExtentsBatch(glyphIds:Array<Float>, _format:Dynamic, out:Array<GlyphExtents>):Float {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     var resolved:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>));
@@ -101,7 +100,7 @@ class TextShaperRun {
     return cast null;
   }
 
-  public static function getGlyphExtentsInto(glyphId:Float, _format:TextFormat, out:GlyphExtents):Bool {
+  public static function getGlyphExtentsInto(glyphId:Float, _format:Dynamic, out:GlyphExtents):Bool {
     var extents:Dynamic = cast _Runtime.UNDEFINED;
     extents = _Runtime.callValue(getGlyphExtents, cast ([glyphId, _format] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(extents, null))) { return cast false; }
@@ -113,7 +112,7 @@ class TextShaperRun {
     return cast null;
   }
 
-  public static function getGlyphIndexForCodePoint(codePoint:Float, _format:TextFormat):Float {
+  public static function getGlyphIndexForCodePoint(codePoint:Float, _format:Dynamic):Float {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(backend, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(backend, 'getGlyphIndexForCodePoint'))))) { return cast -1.0; }
@@ -121,7 +120,7 @@ class TextShaperRun {
     return cast null;
   }
 
-  public static function getGlyphName(glyphId:Float, _format:TextFormat):String {
+  public static function getGlyphName(glyphId:Float, _format:Dynamic):String {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(backend, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(backend, 'getGlyphName'))))) { return cast ''; }
@@ -129,7 +128,7 @@ class TextShaperRun {
     return cast null;
   }
 
-  public static function shapeTextRun(text:String, format:TextFormat, ?options:ShapeRunOptions):Null<ShapedRun> {
+  public static function shapeTextRun(text:String, format:Dynamic, ?options:ShapeRunOptions):Null<ShapedRun> {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(backend, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(backend, 'shapeRun'))))) { return cast null; }
@@ -137,7 +136,7 @@ class TextShaperRun {
     return cast null;
   }
 
-  public static function shapeTextRunInto(text:String, format:TextFormat, out:ShapedRun, ?options:ShapeRunOptions):Bool {
+  public static function shapeTextRunInto(text:String, format:Dynamic, out:ShapedRun, ?options:ShapeRunOptions):Bool {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     var result:Dynamic = cast _Runtime.UNDEFINED;
     var glyphs:Dynamic = cast _Runtime.UNDEFINED;

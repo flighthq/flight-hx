@@ -6,8 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.renderGl.GlFullscreenPass.compileGlFullscreenProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
 
 typedef BlitOffsetShaderLocations__glEffectBlitShader = Dynamic;
 
@@ -25,7 +23,7 @@ class GlEffectBlitShader {
 
   public static final eraseShaders__glEffectBlitShader:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  public static function applyGlEffectBlitOffsetPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, dx:Float, dy:Float):Void {
+  public static function applyGlEffectBlitOffsetPass(state:Dynamic, source:Dynamic, dest:Dynamic, dx:Float, dy:Float):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlEffectBlitShader.getGlBlitOffsetShader__glEffectBlitShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -33,7 +31,7 @@ class GlEffectBlitShader {
     }] : Array<Dynamic>));
   }
 
-  public static function applyGlEffectBlitPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
+  public static function applyGlEffectBlitPass(state:Dynamic, source:Dynamic, dest:Dynamic):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlEffectBlitShader.getGlBlitShader__glEffectBlitShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function() {
@@ -41,7 +39,7 @@ class GlEffectBlitShader {
     }] : Array<Dynamic>));
   }
 
-  public static function applyGlEffectErasePass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
+  public static function applyGlEffectErasePass(state:Dynamic, source:Dynamic, dest:Dynamic):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlEffectBlitShader.getGlEraseShader__glEffectBlitShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -49,7 +47,7 @@ class GlEffectBlitShader {
     }] : Array<Dynamic>));
   }
 
-  public static function getGlBlitOffsetShader__glEffectBlitShader(state:GlRenderState):BlitOffsetShaderLocations__glEffectBlitShader {
+  public static function getGlBlitOffsetShader__glEffectBlitShader(state:Dynamic):BlitOffsetShaderLocations__glEffectBlitShader {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callProperty(GlEffectBlitShader.blitOffsetShaders__glEffectBlitShader, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -62,7 +60,7 @@ class GlEffectBlitShader {
     return cast null;
   }
 
-  public static function getGlBlitShader__glEffectBlitShader(state:GlRenderState):GlFullscreenProgram {
+  public static function getGlBlitShader__glEffectBlitShader(state:Dynamic):GlFullscreenProgram {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callProperty(GlEffectBlitShader.blitShaders__glEffectBlitShader, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -74,7 +72,7 @@ class GlEffectBlitShader {
     return cast null;
   }
 
-  public static function getGlEraseShader__glEffectBlitShader(state:GlRenderState):GlFullscreenProgram {
+  public static function getGlEraseShader__glEffectBlitShader(state:Dynamic):GlFullscreenProgram {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callProperty(GlEffectBlitShader.eraseShaders__glEffectBlitShader, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {

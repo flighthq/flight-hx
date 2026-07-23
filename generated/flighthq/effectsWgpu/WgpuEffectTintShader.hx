@@ -9,8 +9,6 @@ import flighthq.effectsWgpu.WgpuEffectPass.createWgpuDualSourceEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.createWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuDualSourceEffectPass;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
-import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.effectsWgpu.WgpuEffectTintShader")
 class WgpuEffectTintShader {
@@ -18,7 +16,7 @@ class WgpuEffectTintShader {
 
   public static final INVERT_TINT_WGSL__wgpuEffectTintShader:Dynamic = '\nstruct Uniforms {\n  colorAlpha : vec4f,\n  strength : f32,\n  _pad0 : f32, _pad1 : f32, _pad2 : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let a = min(1.0, (1.0 - textureSampleLevel(tex, smp, uv, 0.0).a) * uni.colorAlpha.w * uni.strength);\n  return vec4f(uni.colorAlpha.xyz * a, a);\n}';
 
-  public static function applyWgpuEffectInnerClipPass(state:WgpuRenderState, glow:WgpuRenderTarget, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
+  public static function applyWgpuEffectInnerClipPass(state:Dynamic, glow:Dynamic, source:Dynamic, dest:Dynamic):Void {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(WgpuEffectTintShader.getWgpuInnerClipShader__wgpuEffectTintShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, glow, source, dest, pipeline, function() {
@@ -26,7 +24,7 @@ class WgpuEffectTintShader {
     }] : Array<Dynamic>));
   }
 
-  public static function applyWgpuEffectInvertTintPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, color:Float, alpha:Float, strength:Float):Void {
+  public static function applyWgpuEffectInvertTintPass(state:Dynamic, source:Dynamic, dest:Dynamic, color:Float, alpha:Float, strength:Float):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var g:Dynamic = cast _Runtime.UNDEFINED;
@@ -46,7 +44,7 @@ class WgpuEffectTintShader {
     }] : Array<Dynamic>));
   }
 
-  public static function applyWgpuEffectTintPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, color:Float, alpha:Float, strength:Float):Void {
+  public static function applyWgpuEffectTintPass(state:Dynamic, source:Dynamic, dest:Dynamic, color:Float, alpha:Float, strength:Float):Void {
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var g:Dynamic = cast _Runtime.UNDEFINED;
@@ -66,7 +64,7 @@ class WgpuEffectTintShader {
     }] : Array<Dynamic>));
   }
 
-  public static function getWgpuInnerClipShader__wgpuEffectTintShader(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
+  public static function getWgpuInnerClipShader__wgpuEffectTintShader(state:Dynamic):WgpuDualSourceEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = _Runtime.callProperty(WgpuEffectTintShader.innerClipPipelines__wgpuEffectTintShader, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -77,7 +75,7 @@ class WgpuEffectTintShader {
     return cast null;
   }
 
-  public static function getWgpuInvertTintShader__wgpuEffectTintShader(state:WgpuRenderState):WgpuEffectPipeline {
+  public static function getWgpuInvertTintShader__wgpuEffectTintShader(state:Dynamic):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = _Runtime.callProperty(WgpuEffectTintShader.invertTintPipelines__wgpuEffectTintShader, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -88,7 +86,7 @@ class WgpuEffectTintShader {
     return cast null;
   }
 
-  public static function getWgpuTintShader__wgpuEffectTintShader(state:WgpuRenderState):WgpuEffectPipeline {
+  public static function getWgpuTintShader__wgpuEffectTintShader(state:Dynamic):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = _Runtime.callProperty(WgpuEffectTintShader.tintPipelines__wgpuEffectTintShader, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {

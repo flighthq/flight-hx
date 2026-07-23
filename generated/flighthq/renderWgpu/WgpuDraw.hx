@@ -10,22 +10,18 @@ import flighthq.renderWgpu.WgpuShader.getActiveWgpuPipeline;
 import flighthq.renderWgpu.WgpuShader.getWgpuPipeline;
 import flighthq.renderWgpu.WgpuShader.writeWgpuQuadUniforms;
 import flighthq.types.BlendMode;
-import flighthq.types.ColorTransform;
 import flighthq.types.HasColorTransform;
-import flighthq.types.ImageResource;
-import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuImageResourceTextureEntry;
 import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 
 @:expose("flighthq.renderWgpu.WgpuDraw")
 class WgpuDraw {
-  public static function applyWgpuBlendMode(state:WgpuRenderState, blendMode:Null<BlendMode>):Void {
+  public static function applyWgpuBlendMode(state:Dynamic, blendMode:Null<BlendMode>):Void {
     _Runtime.setField(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentBlendMode', blendMode);
   }
 
-  public static function bindWgpuImageResourceTexture(state:WgpuRenderState, image:ImageResource, generateMips:Dynamic = false):WgpuTextureEntry {
+  public static function bindWgpuImageResourceTexture(state:Dynamic, image:Dynamic, generateMips:Dynamic = false):WgpuTextureEntry {
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var built:Dynamic = cast _Runtime.UNDEFINED;
@@ -48,7 +44,7 @@ class WgpuDraw {
     return cast null;
   }
 
-  public static function bindWgpuTexture(state:WgpuRenderState, imageSource:Dynamic, generateMips:Dynamic = false):WgpuTextureEntry {
+  public static function bindWgpuTexture(state:Dynamic, imageSource:Dynamic, generateMips:Dynamic = false):WgpuTextureEntry {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -101,7 +97,7 @@ class WgpuDraw {
     return cast null;
   }
 
-  public static function buildWgpuRenderTargetBindGroup(state:WgpuRenderState, view:Dynamic):Dynamic {
+  public static function buildWgpuRenderTargetBindGroup(state:Dynamic, view:Dynamic):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var sampler:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -110,7 +106,7 @@ class WgpuDraw {
     return cast null;
   }
 
-  public static function createWgpuTextureEntry(state:WgpuRenderState, width:Float, height:Float, canvas:Dynamic):WgpuTextureEntry {
+  public static function createWgpuTextureEntry(state:Dynamic, width:Float, height:Float, canvas:Dynamic):WgpuTextureEntry {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
@@ -138,7 +134,7 @@ class WgpuDraw {
     return cast null;
   }
 
-  public static function drawWgpuQuad(state:WgpuRenderState, renderProxy:RenderProxy2D, textureEntry:WgpuTextureEntry, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
+  public static function drawWgpuQuad(state:Dynamic, renderProxy:RenderProxy2D, textureEntry:WgpuTextureEntry, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var uniformOffset:Dynamic = cast _Runtime.UNDEFINED;
@@ -149,7 +145,7 @@ class WgpuDraw {
     _Runtime.callValue(submitWgpuQuadDraw, cast ([state, uniformOffset, _Runtime.field(textureEntry, 'bindGroup')] : Array<Dynamic>));
   }
 
-  public static function drawWgpuQuadWithTransform(state:WgpuRenderState, renderProxy:RenderProxy, transform:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, textureEntry:WgpuTextureEntry, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
+  public static function drawWgpuQuadWithTransform(state:Dynamic, renderProxy:Dynamic, transform:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, textureEntry:WgpuTextureEntry, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var uniformOffset:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -158,16 +154,16 @@ class WgpuDraw {
     _Runtime.callValue(submitWgpuQuadDraw, cast ([state, uniformOffset, _Runtime.field(textureEntry, 'bindGroup')] : Array<Dynamic>));
   }
 
-  public static function enableWgpuBlendModeSupport(state:WgpuRenderState):Void {
+  public static function enableWgpuBlendModeSupport(state:Dynamic):Void {
     _Runtime.setField(state, 'applyBlendMode', applyWgpuBlendMode);
   }
 
-  public static function getWgpuRenderProxyColorTransform(renderProxy:RenderProxy):Null<ColorTransform> {
+  public static function getWgpuRenderProxyColorTransform(renderProxy:Dynamic):Null<Dynamic> {
     return cast _Runtime.coalesce(_Runtime.field((cast renderProxy : Dynamic), 'colorTransform'), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function submitWgpuQuadDraw(state:WgpuRenderState, uniformOffset:Float, textureBindGroup:Dynamic):Void {
+  public static function submitWgpuQuadDraw(state:Dynamic, uniformOffset:Float, textureBindGroup:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
@@ -182,7 +178,7 @@ class WgpuDraw {
     _Runtime.callProperty(pass, 'draw', cast ([6.0] : Array<Dynamic>));
   }
 
-  public static function updateWgpuTextureEntry(state:WgpuRenderState, entry:WgpuTextureEntry, canvas:Dynamic):Void {
+  public static function updateWgpuTextureEntry(state:Dynamic, entry:WgpuTextureEntry, canvas:Dynamic):Void {
     var __destructure4:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;
@@ -194,7 +190,7 @@ class WgpuDraw {
     _Runtime.callProperty(_Runtime.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: canvas, flipY: false }, { texture: _Runtime.field(entry, 'texture'), premultipliedAlpha: true }, cast ([w, h] : Array<Dynamic>)] : Array<Dynamic>));
   }
 
-  public static function warmWgpuPipelines(state:WgpuRenderState):Void {
+  public static function warmWgpuPipelines(state:Dynamic):Void {
     _Runtime.callValue(getWgpuPipeline, cast ([state, BlendMode.Normal, 'normal'] : Array<Dynamic>));
     _Runtime.callValue(getWgpuPipeline, cast ([state, BlendMode.Add, 'normal'] : Array<Dynamic>));
   }
@@ -217,7 +213,7 @@ class WgpuDraw {
     return cast null;
   }
 
-  public static function uploadWgpuImageResourceEntry__wgpuDraw(state:WgpuRenderState, image:ImageResource, generateMips:Bool):WgpuTextureEntry {
+  public static function uploadWgpuImageResourceEntry__wgpuDraw(state:Dynamic, image:Dynamic, generateMips:Bool):WgpuTextureEntry {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure5:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;

@@ -5,11 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneResources.ResolveSceneResources.ResolveSceneResourcesOptions;
 import flighthq.sceneResources.ResolveSceneResources.resolveSceneResources;
-import flighthq.types.SceneNode;
 
 @:expose("flighthq.sceneResources.ResolveSceneResourcesAndWait")
 class ResolveSceneResourcesAndWait {
-  public static function resolveSceneResourcesAndWait(scene:SceneNode, resolver:SceneResourceResolver, ?options:ResolveSceneResourcesOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
+  public static function resolveSceneResourcesAndWait(scene:Dynamic, resolver:SceneResourceResolver, ?options:ResolveSceneResourcesOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<flighthq._internal._Nothing> {
       var promises:Array<flighthq._internal._Promise<flighthq._internal._Nothing>> = cast _Runtime.UNDEFINED;
       _Runtime.callValue(resolveSceneResources, cast ([scene, resolver, options] : Array<Dynamic>));

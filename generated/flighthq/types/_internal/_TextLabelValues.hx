@@ -3,11 +3,9 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObject.DisplayObjectData;
 import flighthq.types.DisplayObject.DisplayObjectRuntime;
 import flighthq.types.TextAutoSize;
-import flighthq.types.TextFormat;
 import flighthq.types.TextLayout.TextLayoutParams;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextLayout.TextMeasureFunction;

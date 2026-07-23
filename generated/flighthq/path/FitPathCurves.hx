@@ -4,12 +4,11 @@ package flighthq.path;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
-import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 
 @:expose("flighthq.path.FitPathCurves")
 class FitPathCurves {
-  public static function fitPathCurves(source:Path, tolerance:Float, out:Path, flattenTolerance:Dynamic = 0.25):Void {
+  public static function fitPathCurves(source:Dynamic, tolerance:Float, out:Dynamic, flattenTolerance:Dynamic = 0.25):Void {
     var contours:Dynamic = cast _Runtime.UNDEFINED;
     var toleranceSq:Dynamic = cast _Runtime.UNDEFINED;
     contours = _Runtime.callValue(flattenPath, cast ([source, flattenTolerance] : Array<Dynamic>));
@@ -128,7 +127,7 @@ class FitPathCurves {
     return cast null;
   }
 
-  public static function fitCubic__fitPathCurves(pts:Array<Float>, first:Float, last:Float, tHat1:Array<Float>, tHat2:Array<Float>, toleranceSq:Float, out:Path):Void {
+  public static function fitCubic__fitPathCurves(pts:Array<Float>, first:Float, last:Float, tHat1:Array<Float>, tHat2:Array<Float>, toleranceSq:Float, out:Dynamic):Void {
     var nPts:Dynamic = cast _Runtime.UNDEFINED;
     var u:Dynamic = cast _Runtime.UNDEFINED;
     var MAX_ITERATIONS:Dynamic = cast _Runtime.UNDEFINED;

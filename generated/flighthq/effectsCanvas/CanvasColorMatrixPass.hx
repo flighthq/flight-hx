@@ -4,7 +4,6 @@ package flighthq.effectsCanvas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasImageDataPass;
-import flighthq.types.CanvasRenderTarget;
 
 @:expose("flighthq.effectsCanvas.CanvasColorMatrixPass")
 class CanvasColorMatrixPass {

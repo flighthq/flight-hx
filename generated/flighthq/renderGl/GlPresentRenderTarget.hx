@@ -7,12 +7,10 @@ import flighthq.renderGl.GlFullscreenPass.compileGlFullscreenProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.renderGl.GlLinearToSrgbPass.drawGlLinearToSrgbPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
 
 @:expose("flighthq.renderGl.GlPresentRenderTarget")
 class GlPresentRenderTarget {
-  public static function presentGlRenderTarget(state:GlRenderState, target:GlRenderTarget, ?dest:Null<GlRenderTarget>):Void {
+  public static function presentGlRenderTarget(state:Dynamic, target:Dynamic, ?dest:Null<Dynamic>):Void {
     if (dest == null) dest = cast (null : Dynamic);
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(target, 'colorSpace'), 'linear'))) {
       _Runtime.callValue(drawGlLinearToSrgbPass, cast ([state, target, dest] : Array<Dynamic>));
@@ -21,7 +19,7 @@ class GlPresentRenderTarget {
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, _Runtime.callValue(GlPresentRenderTarget.getGlCopyProgram__glPresentRenderTarget, cast ([state] : Array<Dynamic>)), cast ([_Runtime.field(target, 'texture')] : Array<Dynamic>), dest, GlPresentRenderTarget.NOOP__glPresentRenderTarget] : Array<Dynamic>));
   }
 
-  public static function getGlCopyProgram__glPresentRenderTarget(state:GlRenderState):GlFullscreenProgram {
+  public static function getGlCopyProgram__glPresentRenderTarget(state:Dynamic):GlFullscreenProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callProperty(GlPresentRenderTarget._programs__glPresentRenderTarget, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')))) {

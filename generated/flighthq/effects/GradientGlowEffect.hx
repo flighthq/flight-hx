@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.GradientGlowEffect;
 
 @:expose("flighthq.effects.GradientGlowEffect")
 class GradientGlowEffect {
-  public static function createGradientGlowEffect(options:Dynamic):GradientGlowEffect {
+  public static function createGradientGlowEffect(options:Dynamic):Dynamic {
     return cast _Runtime.mergeObjects([{ kind: 'GradientGlowEffect' }, options]);
     return cast null;
   }

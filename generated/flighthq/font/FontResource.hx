@@ -3,11 +3,10 @@ package flighthq.font;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.FontResource;
 
 @:expose("flighthq.font.FontResource")
 class FontResource {
-  public static function createFontResource(family:String):FontResource {
+  public static function createFontResource(family:String):Dynamic {
     return cast { family: family, face: null };
     return cast null;
   }

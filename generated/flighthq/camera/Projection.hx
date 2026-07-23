@@ -7,7 +7,6 @@ import flighthq.geometry.Matrix4.setOrthographicMatrix4;
 import flighthq.geometry.Matrix4.setPerspectiveMatrix4;
 import flighthq.types.Camera.OrthographicProjection;
 import flighthq.types.Camera.PerspectiveProjection;
-import flighthq.types.Camera.Projection;
 import flighthq.types.Matrix4.Matrix4Like;
 
 typedef OrthographicProjectionOptions = { var halfHeight:Float; var halfWidth:Float; };
@@ -26,17 +25,17 @@ class Projection {
     return cast null;
   }
 
-  public static function isOrthographicProjection(projection:Projection):Bool {
+  public static function isOrthographicProjection(projection:Dynamic):Bool {
     return cast _Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'orthographic');
     return cast null;
   }
 
-  public static function isPerspectiveProjection(projection:Projection):Bool {
+  public static function isPerspectiveProjection(projection:Dynamic):Bool {
     return cast _Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective');
     return cast null;
   }
 
-  public static function setProjectionMatrix4(out:Matrix4Like, projection:Projection, aspect:Float, near:Float, far:Float):Void {
+  public static function setProjectionMatrix4(out:Matrix4Like, projection:Dynamic, aspect:Float, near:Float, far:Float):Void {
     var halfWidth:Dynamic = cast _Runtime.UNDEFINED;
     var halfHeight:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective'))) {

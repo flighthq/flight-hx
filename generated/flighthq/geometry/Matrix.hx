@@ -4,7 +4,6 @@ package flighthq.geometry;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
-import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Matrix3.Matrix3Like;
 import flighthq.types.Matrix4.Matrix4Like;
@@ -14,7 +13,7 @@ import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.geometry.Matrix")
 class Matrix {
-  public static function cloneMatrix(source:MatrixLike):Matrix {
+  public static function cloneMatrix(source:MatrixLike):Dynamic {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     m = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
     _Runtime.callValue(copyMatrix, cast ([m, source] : Array<Dynamic>));
@@ -91,7 +90,7 @@ class Matrix {
     } } }
   }
 
-  public static function createGradientTransformMatrix(width:Float, height:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Matrix {
+  public static function createGradientTransformMatrix(width:Float, height:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Dynamic {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     out = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
     _Runtime.callValue(setGradientTransformMatrix, cast ([out, width, height, rotation, tx, ty] : Array<Dynamic>));
@@ -99,12 +98,12 @@ class Matrix {
     return cast null;
   }
 
-  public static function createMatrix(?a:Float, ?b:Float, ?c:Float, ?d:Float, ?tx:Float, ?ty:Float):Matrix {
+  public static function createMatrix(?a:Float, ?b:Float, ?c:Float, ?d:Float, ?tx:Float, ?ty:Float):Dynamic {
     return cast _Runtime.callValue(createEntity, cast ([{ a: _Runtime.coalesce(a, function():Dynamic return cast 1.0), b: _Runtime.coalesce(b, function():Dynamic return cast 0.0), c: _Runtime.coalesce(c, function():Dynamic return cast 0.0), d: _Runtime.coalesce(d, function():Dynamic return cast 1.0), tx: _Runtime.coalesce(tx, function():Dynamic return cast 0.0), ty: _Runtime.coalesce(ty, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTransformMatrix(scaleX:Float, scaleY:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Matrix {
+  public static function createTransformMatrix(scaleX:Float, scaleY:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Dynamic {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     out = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
     _Runtime.callValue(setTransformMatrix, cast ([out, scaleX, scaleY, rotation, tx, ty] : Array<Dynamic>));

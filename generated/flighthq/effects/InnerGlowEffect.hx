@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.InnerGlowEffect;
 
 @:expose("flighthq.effects.InnerGlowEffect")
 class InnerGlowEffect {
-  public static function createInnerGlowEffect(?options:Dynamic):InnerGlowEffect {
+  public static function createInnerGlowEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'InnerGlowEffect' }, options]);
     return cast null;

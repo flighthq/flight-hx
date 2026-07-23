@@ -4,12 +4,11 @@ package flighthq.tween;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.tween.Tween.createTween;
-import flighthq.types.TweenManager;
 import flighthq.types.TweenOptions;
 
 @:expose("flighthq.tween.Timer")
 class Timer {
-  public static function createTweenTimer(manager:TweenManager, duration:Float, ?options:TweenOptions):Dynamic {
+  public static function createTweenTimer(manager:Dynamic, duration:Float, ?options:TweenOptions):Dynamic {
     return cast _Runtime.callValue(createTween, cast ([manager, {  }, duration, {  }, options] : Array<Dynamic>));
     return cast null;
   }

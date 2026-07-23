@@ -10,19 +10,16 @@ import flighthq.renderGl.GlTextureUpload.uploadGlTextureData;
 import flighthq.renderGl.GlTextureUpload.uploadGlTextureElement;
 import flighthq.renderGl.GlTextureVideoUpload.uploadGlTextureVideoFrame;
 import flighthq.types.BlendMode;
-import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlBlendRealization;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.GlShaderLocations.GlBitmapShader;
-import flighthq.types.ImageResource;
 import flighthq.types.Sampler.SamplerLike;
 import flighthq.types.Sampler.TextureFilter;
 import flighthq.types.Sampler.TextureWrap;
-import flighthq.types.VideoTexture;
 
 @:expose("flighthq.renderGl.GlDraw")
 class GlDraw {
-  public static function applyGlBlendMode(state:GlRenderState, blendMode:Null<BlendMode>):Void {
+  public static function applyGlBlendMode(state:Dynamic, blendMode:Null<BlendMode>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var realization:Dynamic = cast _Runtime.UNDEFINED;
@@ -35,7 +32,7 @@ class GlDraw {
     _Runtime.callProperty(gl, 'blendFunc', cast ([_Runtime.getIndex(gl, _Runtime.field(realization, 'src')), _Runtime.getIndex(gl, _Runtime.field(realization, 'dst'))] : Array<Dynamic>));
   }
 
-  public static function bindGlImageResourceTexture(state:GlRenderState, image:ImageResource, ?sampler:Null<SamplerLike>):Dynamic {
+  public static function bindGlImageResourceTexture(state:Dynamic, image:Dynamic, ?sampler:Null<SamplerLike>):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var cache:Dynamic = cast _Runtime.UNDEFINED;
@@ -59,7 +56,7 @@ class GlDraw {
     return cast null;
   }
 
-  public static function bindGlTexture(state:GlRenderState, imageSource:Dynamic, ?sampler:Null<SamplerLike>):Dynamic {
+  public static function bindGlTexture(state:Dynamic, imageSource:Dynamic, ?sampler:Null<SamplerLike>):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var textureCache:Dynamic = cast _Runtime.UNDEFINED;
@@ -84,7 +81,7 @@ class GlDraw {
     return cast null;
   }
 
-  public static function bindGlVideoTexture(state:GlRenderState, videoTexture:VideoTexture, ?sampler:Null<SamplerLike>):Dynamic {
+  public static function bindGlVideoTexture(state:Dynamic, videoTexture:Dynamic, ?sampler:Null<SamplerLike>):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var cache:Dynamic = cast _Runtime.UNDEFINED;
@@ -106,7 +103,7 @@ class GlDraw {
     return cast null;
   }
 
-  public static function createGlTexture(state:GlRenderState):Dynamic {
+  public static function createGlTexture(state:Dynamic):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var filter:Dynamic = cast _Runtime.UNDEFINED;
@@ -125,7 +122,7 @@ class GlDraw {
     return cast null;
   }
 
-  public static function drawGlQuad(state:GlRenderState, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
+  public static function drawGlQuad(state:Dynamic, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -165,17 +162,17 @@ class GlDraw {
     _Runtime.callProperty(gl, 'drawElements', cast ([_Runtime.field(gl, 'TRIANGLES'), 6.0, _Runtime.field(gl, 'UNSIGNED_SHORT'), 0.0] : Array<Dynamic>));
   }
 
-  public static function enableGlBlendModeSupport(state:GlRenderState):Void {
+  public static function enableGlBlendModeSupport(state:Dynamic):Void {
     _Runtime.callValue(registerDefaultGlBlendModes, cast ([state] : Array<Dynamic>));
     _Runtime.setField(state, 'applyBlendMode', applyGlBlendMode);
   }
 
-  public static function isBlendModeSupported(state:GlRenderState, blendMode:BlendMode):Bool {
+  public static function isBlendModeSupported(state:Dynamic, blendMode:BlendMode):Bool {
     return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glBlendModeRegistry'), 'has', cast ([blendMode] : Array<Dynamic>)), function():Dynamic return cast false);
     return cast null;
   }
 
-  public static function registerDefaultGlBlendModes(state:GlRenderState):Void {
+  public static function registerDefaultGlBlendModes(state:Dynamic):Void {
     for (__iteration1 in _Runtime.iterable(GlDraw.DEFAULT_GL_BLEND_MODES__glDraw)) {
       var mode:Dynamic = _Runtime.getIndex(__iteration1, 0.0);
       var realization:Dynamic = _Runtime.getIndex(__iteration1, 1.0);
@@ -183,19 +180,19 @@ class GlDraw {
     }
   }
 
-  public static function registerGlBlendMode(state:GlRenderState, blendMode:BlendMode, realization:GlBlendRealization):Void {
+  public static function registerGlBlendMode(state:Dynamic, blendMode:BlendMode, realization:GlBlendRealization):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.setField(runtime, 'glBlendModeRegistry', (_Runtime.field(runtime, 'glBlendModeRegistry') ?? _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []))), 'set', cast ([blendMode, realization] : Array<Dynamic>));
   }
 
-  public static function setGlQuadMatrixFromOffset(state:GlRenderState, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float, dx:Float, dy:Float):Void {
+  public static function setGlQuadMatrixFromOffset(state:Dynamic, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float, dx:Float, dy:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(setGlMatrixFromValues, cast ([_Runtime.field(state, 'gl'), _Runtime.field(runtime, 'shaderLoc'), _Runtime.field(runtime, 'matrixArray'), a, b, c, d, ((tx + (a * dx)) + (c * dy)), ((ty + (b * dx)) + (d * dy)), _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'))] : Array<Dynamic>));
   }
 
-  public static function updateGlTexture(state:GlRenderState, texture:Dynamic, canvas:Dynamic):Void {
+  public static function updateGlTexture(state:Dynamic, texture:Dynamic, canvas:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -207,7 +204,7 @@ class GlDraw {
     if (_Runtime.truthy(_Runtime.callOptionalProperty(_Runtime.field(runtime, 'mipmappedTextures'), 'has', cast ([texture] : Array<Dynamic>)))) { _Runtime.callProperty(gl, 'generateMipmap', cast ([_Runtime.field(gl, 'TEXTURE_2D')] : Array<Dynamic>)); }
   }
 
-  public static function useGlProgram(state:GlRenderState, ?shader:GlBitmapShader):Void {
+  public static function useGlProgram(state:Dynamic, ?shader:GlBitmapShader):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var resolved:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -221,7 +218,7 @@ class GlDraw {
     }
   }
 
-  public static function uploadGlDisplayTexture__glDraw(state:GlRenderState, image:ImageResource):Void {
+  public static function uploadGlDisplayTexture__glDraw(state:Dynamic, image:Dynamic):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
@@ -257,7 +254,7 @@ class GlDraw {
     return cast null;
   }
 
-  public static function applyGlSamplerState__glDraw(state:GlRenderState, runtime:GlRenderStateRuntime, texture:Dynamic, sampler:Null<SamplerLike>):Void {
+  public static function applyGlSamplerState__glDraw(state:Dynamic, runtime:GlRenderStateRuntime, texture:Dynamic, sampler:Null<SamplerLike>):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var useMips:Dynamic = cast _Runtime.UNDEFINED;
     var ext:Dynamic = cast _Runtime.UNDEFINED;
@@ -289,7 +286,7 @@ class GlDraw {
     }
   }
 
-  public static function ensureGlAnisotropyExt__glDraw(state:GlRenderState, runtime:GlRenderStateRuntime):Null<Dynamic> {
+  public static function ensureGlAnisotropyExt__glDraw(state:Dynamic, runtime:GlRenderStateRuntime):Null<Dynamic> {
     var ext:Dynamic = cast _Runtime.UNDEFINED;
     ext = _Runtime.field(runtime, 'anisotropyExt');
     if (_Runtime.truthy(_Runtime.strictEquals(ext, _Runtime.field(_Runtime, 'UNDEFINED')))) {

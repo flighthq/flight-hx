@@ -6,6 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.sceneResources.ResolveSceneResourcesAndWait.resolveSceneResourcesAndWait;
 import flighthq.sceneResources._internal._SceneResourceResolverValues.createSceneResourceResolver;
 import flighthq.sceneResources._internal._SceneResourceResolverValues.disposeSceneResourceResolver;
-import flighthq.types.Scene;
 
 typedef LoadSceneOptions = { @:optional var resolver:SceneResourceResolver; };

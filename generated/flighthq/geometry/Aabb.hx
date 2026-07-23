@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Vector3.createVector3;
-import flighthq.types.Aabb;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.Matrix4.Matrix4Like;
@@ -13,7 +12,7 @@ import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.geometry.Aabb")
 class Aabb {
-  public static function cloneAabb(source:AabbLike):Aabb {
+  public static function cloneAabb(source:AabbLike):Dynamic {
     return cast _Runtime.callValue(createAabb, cast ([_Runtime.field(_Runtime.field(source, 'min'), 'x'), _Runtime.field(_Runtime.field(source, 'min'), 'y'), _Runtime.field(_Runtime.field(source, 'min'), 'z'), _Runtime.field(_Runtime.field(source, 'max'), 'x'), _Runtime.field(_Runtime.field(source, 'max'), 'y'), _Runtime.field(_Runtime.field(source, 'max'), 'z')] : Array<Dynamic>));
     return cast null;
   }
@@ -32,7 +31,7 @@ class Aabb {
     _Runtime.setField(_Runtime.field(out, 'max'), 'z', _Runtime.field(_Runtime.field(source, 'max'), 'z'));
   }
 
-  public static function createAabb(?minX:Float, ?minY:Float, ?minZ:Float, ?maxX:Float, ?maxY:Float, ?maxZ:Float):Aabb {
+  public static function createAabb(?minX:Float, ?minY:Float, ?minZ:Float, ?maxX:Float, ?maxY:Float, ?maxZ:Float):Dynamic {
     var min:Dynamic = cast _Runtime.UNDEFINED;
     var max:Dynamic = cast _Runtime.UNDEFINED;
     min = _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(minX, function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY')), _Runtime.coalesce(minY, function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY')), _Runtime.coalesce(minZ, function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'))] : Array<Dynamic>));

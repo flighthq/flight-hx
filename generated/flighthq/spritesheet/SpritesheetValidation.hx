@@ -3,13 +3,11 @@ package flighthq.spritesheet;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Spritesheet;
-import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetValidationDiagnostic;
 
 @:expose("flighthq.spritesheet.SpritesheetValidation")
 class SpritesheetValidation {
-  public static function validateSpritesheet(spritesheet:Spritesheet):Null<Array<SpritesheetValidationDiagnostic>> {
+  public static function validateSpritesheet(spritesheet:Dynamic):Null<Array<SpritesheetValidationDiagnostic>> {
     var diagnostics:Array<SpritesheetValidationDiagnostic> = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var atlas:Dynamic = cast _Runtime.UNDEFINED;
@@ -53,7 +51,7 @@ class SpritesheetValidation {
     return cast null;
   }
 
-  public static function validateSpritesheetData(data:SpritesheetData):Null<Array<SpritesheetValidationDiagnostic>> {
+  public static function validateSpritesheetData(data:Dynamic):Null<Array<SpritesheetValidationDiagnostic>> {
     var diagnostics:Array<SpritesheetValidationDiagnostic> = cast _Runtime.UNDEFINED;
     var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
     var animations:Dynamic = cast _Runtime.UNDEFINED;

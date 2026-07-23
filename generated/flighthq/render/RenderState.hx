@@ -6,15 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.entity.Runtime.createEntityRuntime;
 import flighthq.types.BlendMode;
-import flighthq.types.RenderState;
 import flighthq.types.RenderState.RenderStateRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 @:expose("flighthq.render.RenderState")
 class RenderState {
-  public static function createRenderState(?obj:Dynamic):RenderState {
+  public static function createRenderState(?obj:Dynamic):Dynamic {
     var state:Dynamic = cast _Runtime.UNDEFINED;
-    state = (cast _Runtime.callValue(createEntity, cast ([{ allowSmoothing: _Runtime.coalesce(_Runtime.optionalField(obj, 'allowSmoothing'), function():Dynamic return cast true), backgroundColor: _Runtime.coalesce(_Runtime.optionalField(obj, 'backgroundColor'), function():Dynamic return cast 0.0), backgroundColorRgba: _Runtime.coalesce(_Runtime.optionalField(obj, 'backgroundColorRgba'), function():Dynamic return cast cast ([] : Array<Dynamic>)), backgroundColorString: _Runtime.coalesce(_Runtime.optionalField(obj, 'backgroundColorString'), function():Dynamic return cast ''), currentClipDepth: _Runtime.coalesce(_Runtime.optionalField(obj, 'currentClipDepth'), function():Dynamic return cast 0.0), displayObjectClipHooks: _Runtime.coalesce(_Runtime.optionalField(obj, 'displayObjectClipHooks'), function():Dynamic return cast null), pixelRatio: _Runtime.coalesce(_Runtime.optionalField(obj, 'pixelRatio'), function():Dynamic return cast 1.0), renderAlpha: _Runtime.coalesce(_Runtime.optionalField(obj, 'renderAlpha'), function():Dynamic return cast 1.0), renderBlendMode: _Runtime.coalesce(_Runtime.optionalField(obj, 'renderBlendMode'), function():Dynamic return cast BlendMode.Normal), renderTransform2D: _Runtime.coalesce(_Runtime.optionalField(obj, 'renderTransform2D'), function():Dynamic return cast null), roundPixels: _Runtime.coalesce(_Runtime.optionalField(obj, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.coalesce(_Runtime.optionalField(obj, 'sceneGraphSyncPolicy'), function():Dynamic return cast 'refreshDerivedState') }] : Array<Dynamic>)) : RenderState);
+    state = (cast _Runtime.callValue(createEntity, cast ([{ allowSmoothing: _Runtime.coalesce(_Runtime.optionalField(obj, 'allowSmoothing'), function():Dynamic return cast true), backgroundColor: _Runtime.coalesce(_Runtime.optionalField(obj, 'backgroundColor'), function():Dynamic return cast 0.0), backgroundColorRgba: _Runtime.coalesce(_Runtime.optionalField(obj, 'backgroundColorRgba'), function():Dynamic return cast cast ([] : Array<Dynamic>)), backgroundColorString: _Runtime.coalesce(_Runtime.optionalField(obj, 'backgroundColorString'), function():Dynamic return cast ''), currentClipDepth: _Runtime.coalesce(_Runtime.optionalField(obj, 'currentClipDepth'), function():Dynamic return cast 0.0), displayObjectClipHooks: _Runtime.coalesce(_Runtime.optionalField(obj, 'displayObjectClipHooks'), function():Dynamic return cast null), pixelRatio: _Runtime.coalesce(_Runtime.optionalField(obj, 'pixelRatio'), function():Dynamic return cast 1.0), renderAlpha: _Runtime.coalesce(_Runtime.optionalField(obj, 'renderAlpha'), function():Dynamic return cast 1.0), renderBlendMode: _Runtime.coalesce(_Runtime.optionalField(obj, 'renderBlendMode'), function():Dynamic return cast BlendMode.Normal), renderTransform2D: _Runtime.coalesce(_Runtime.optionalField(obj, 'renderTransform2D'), function():Dynamic return cast null), roundPixels: _Runtime.coalesce(_Runtime.optionalField(obj, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.coalesce(_Runtime.optionalField(obj, 'sceneGraphSyncPolicy'), function():Dynamic return cast 'refreshDerivedState') }] : Array<Dynamic>)) : Dynamic);
     _Runtime.setIndex(state, EntityRuntimeKey, _Runtime.callValue(createRenderStateRuntime, cast ([] : Array<Dynamic>)));
     return cast state;
     return cast null;
@@ -35,7 +34,7 @@ class RenderState {
     return cast null;
   }
 
-  public static function getRenderStateRuntime(state:RenderState):RenderStateRuntime {
+  public static function getRenderStateRuntime(state:Dynamic):RenderStateRuntime {
     return cast (cast _Runtime.getIndex(state, EntityRuntimeKey) : RenderStateRuntime);
     return cast null;
   }

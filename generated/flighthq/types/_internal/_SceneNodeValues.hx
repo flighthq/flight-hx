@@ -3,7 +3,6 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.HasAppearance;
 import flighthq.types.HasAppearance.HasAppearanceRuntime;
 import flighthq.types.HasTransform3D;
 import flighthq.types.HasTransform3D.HasTransform3DRuntime;

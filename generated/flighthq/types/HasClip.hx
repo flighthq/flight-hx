@@ -9,6 +9,6 @@ import flighthq.types.Node.NodeData;
 import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node.NodeTraits;
 
-typedef HasClip = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var clip:Null<ClipRegion>; };
+typedef HasClip = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var clip:Null<Dynamic>; };
 
-typedef ClipNode<Traits> = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Traits>>; var clip:Null<ClipRegion>; };
+typedef ClipNode<Traits> = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Traits>>; var clip:Null<Dynamic>; };

@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textsegment.TextSegment.segmentGraphemes;
 import flighthq.textsegment.TextSegment.segmentWords;
-import flighthq.types.TextSegment;
 import flighthq.types.TextSegment.TextSegmentRange;
 
 @:expose("flighthq.textsegment.TextSegmentBoundary")
@@ -54,7 +53,7 @@ class TextSegmentBoundary {
     return cast null;
   }
 
-  public static function nextSegmentBoundary__textSegmentBoundary(segments:Array<TextSegment>, index:Float, length:Float):Float {
+  public static function nextSegmentBoundary__textSegmentBoundary(segments:Array<Dynamic>, index:Float, length:Float):Float {
     var from:Dynamic = cast _Runtime.UNDEFINED;
     from = _Runtime.callValue(TextSegmentBoundary.clampIndex__textSegmentBoundary, cast ([index, length] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(from, length, '>='))) { return cast length; }
@@ -65,7 +64,7 @@ class TextSegmentBoundary {
     return cast null;
   }
 
-  public static function previousSegmentBoundary__textSegmentBoundary(segments:Array<TextSegment>, index:Float):Float {
+  public static function previousSegmentBoundary__textSegmentBoundary(segments:Array<Dynamic>, index:Float):Float {
     var length:Dynamic = cast _Runtime.UNDEFINED;
     var from:Dynamic = cast _Runtime.UNDEFINED;
     var previous:Dynamic = cast _Runtime.UNDEFINED;

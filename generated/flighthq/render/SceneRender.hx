@@ -16,24 +16,10 @@ import flighthq.geometry.Matrix4.setPerspectiveMatrix4;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.node.Transform3d.getNodeWorldMatrix4;
 import flighthq.skeleton3d.Skeleton3d.computeSkeleton3DJointMatrices;
-import flighthq.types.Aabb;
-import flighthq.types.AmbientLight;
-import flighthq.types.Camera;
-import flighthq.types.DirectionalLight;
-import flighthq.types.Frustum;
-import flighthq.types.HasAppearance;
-import flighthq.types.HemisphereLight;
 import flighthq.types.LinearColor;
-import flighthq.types.Matrix4;
-import flighthq.types.Mesh;
 import flighthq.types.Node.NodeAny;
-import flighthq.types.PointLight;
-import flighthq.types.RenderState;
 import flighthq.types.SceneLightBlock;
-import flighthq.types.SceneLights;
-import flighthq.types.SceneNode;
 import flighthq.types.SceneRenderList;
-import flighthq.types.SpotLight;
 import flighthq.types._internal._SceneLightBlockValues.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET;
 import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_BLOCK_FLOATS;
@@ -46,11 +32,11 @@ import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_POINT_STRIDE;
 import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_SPOT_OFFSET;
 import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_SPOT_STRIDE;
 
-typedef PreparedScene__sceneRender = { var frustum:Frustum; var list:SceneRenderList; var meshes:Array<Mesh>; var viewProjection:Matrix4; var worldBounds:Aabb; };
+typedef PreparedScene__sceneRender = { var frustum:Dynamic; var list:SceneRenderList; var meshes:Array<Dynamic>; var viewProjection:Dynamic; var worldBounds:Dynamic; };
 
 @:expose("flighthq.render.SceneRender")
 class SceneRender {
-  public static function packSceneLightBlock(out:SceneLightBlock, lights:SceneLights):Void {
+  public static function packSceneLightBlock(out:SceneLightBlock, lights:Dynamic):Void {
     var directionalCount:Dynamic = cast _Runtime.UNDEFINED;
     var directional:Dynamic = cast _Runtime.UNDEFINED;
     var ambientCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -122,7 +108,7 @@ class SceneRender {
     _Runtime.incrementField(out, 'version', 1, true);
   }
 
-  public static function prepareSceneRender(state:RenderState, scene:SceneNode, camera:Camera, lights:SceneLights):SceneRenderList {
+  public static function prepareSceneRender(state:Dynamic, scene:Dynamic, camera:Dynamic, lights:Dynamic):SceneRenderList {
     var prepared:Dynamic = cast _Runtime.UNDEFINED;
     var list:Dynamic = cast _Runtime.UNDEFINED;
     prepared = _Runtime.callValue(SceneRender.ensurePreparedScene__sceneRender, cast ([state] : Array<Dynamic>));
@@ -145,13 +131,13 @@ class SceneRender {
     return cast null;
   }
 
-  public static function collectVisibleMeshes__sceneRender(node:NodeAny, frustum:Frustum, worldBounds:Aabb, out:Array<Mesh>):Void {
+  public static function collectVisibleMeshes__sceneRender(node:NodeAny, frustum:Dynamic, worldBounds:Dynamic, out:Array<Dynamic>):Void {
     var mesh:Dynamic = cast _Runtime.UNDEFINED;
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(node, 'enabled')), function():Dynamic return cast !_Runtime.truthy(_Runtime.field((cast (cast node : Dynamic) : HasAppearance), 'visible'))))) {
+    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(node, 'enabled')), function():Dynamic return cast !_Runtime.truthy(_Runtime.field((cast (cast node : Dynamic) : Dynamic), 'visible'))))) {
       return;
     }
-    mesh = (cast (cast node : Dynamic) : Mesh);
+    mesh = (cast (cast node : Dynamic) : Dynamic);
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.looseEquals(_Runtime.field(mesh, 'geometry'), null), function():Dynamic return cast _Runtime.callValue(SceneRender.isMeshVisible__sceneRender, cast ([mesh, frustum, worldBounds] : Array<Dynamic>))))) {
       _Runtime.callProperty(out, 'push', cast ([mesh] : Array<Dynamic>));
     }
@@ -167,12 +153,12 @@ class SceneRender {
     }
   }
 
-  public static function ensurePreparedScene__sceneRender(state:RenderState):PreparedScene__sceneRender {
+  public static function ensurePreparedScene__sceneRender(state:Dynamic):PreparedScene__sceneRender {
     var prepared:Dynamic = cast _Runtime.UNDEFINED;
     prepared = _Runtime.callProperty(SceneRender.preparedScenes__sceneRender, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(prepared, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var viewProjection:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
-      var meshes:Array<Mesh> = cast ([] : Array<Dynamic>);
+      var meshes:Array<Dynamic> = cast ([] : Array<Dynamic>);
       var list:SceneRenderList = { lights: { ambientCount: 0.0, data: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [SCENE_LIGHT_BLOCK_FLOATS]), directionalCount: 0.0, hemisphereCount: 0.0, pointCount: 0.0, spotCount: 0.0, version: 0.0 }, meshCount: 0.0, viewProjection: viewProjection, visibleMeshes: meshes };
       (prepared = cast ({ frustum: _Runtime.callValue(createFrustum, cast ([] : Array<Dynamic>)), list: list, meshes: meshes, viewProjection: viewProjection, worldBounds: _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>)) } : Dynamic));
       _Runtime.callProperty(SceneRender.preparedScenes__sceneRender, 'set', cast ([state, prepared] : Array<Dynamic>));
@@ -194,7 +180,7 @@ class SceneRender {
     return cast null;
   }
 
-  public static function isMeshVisible__sceneRender(mesh:Mesh, frustum:Frustum, worldBounds:Aabb):Bool {
+  public static function isMeshVisible__sceneRender(mesh:Dynamic, frustum:Dynamic, worldBounds:Dynamic):Bool {
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
     bounds = _Runtime.field(_Runtime.field(mesh, 'geometry'), 'bounds');
     if (_Runtime.truthy(_Runtime.strictEquals(bounds, null))) {
@@ -205,7 +191,7 @@ class SceneRender {
     return cast null;
   }
 
-  public static function packAmbientLight__sceneRender(data:flighthq._internal._Float32Array, ambient:AmbientLight):Void {
+  public static function packAmbientLight__sceneRender(data:flighthq._internal._Float32Array, ambient:Dynamic):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(unpackColorToLinear, cast ([SceneRender.scratchColor__sceneRender, _Runtime.field(ambient, 'color')] : Array<Dynamic>));
     intensity = _Runtime.field(ambient, 'intensity');
@@ -214,7 +200,7 @@ class SceneRender {
     _Runtime.setIndex(data, (SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET + 2.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 2.0) * intensity));
   }
 
-  public static function packDirectionalLight__sceneRender(data:flighthq._internal._Float32Array, directional:DirectionalLight):Void {
+  public static function packDirectionalLight__sceneRender(data:flighthq._internal._Float32Array, directional:Dynamic):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.setIndex(data, (SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 0.0), _Runtime.field(_Runtime.field(directional, 'direction'), 'x'));
     _Runtime.setIndex(data, (SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 1.0), _Runtime.field(_Runtime.field(directional, 'direction'), 'y'));
@@ -226,7 +212,7 @@ class SceneRender {
     _Runtime.setIndex(data, (SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET + 2.0), (_Runtime.getIndex(SceneRender.scratchColor__sceneRender, 2.0) * intensity));
   }
 
-  public static function packHemisphereLight__sceneRender(data:flighthq._internal._Float32Array, offset:Float, hemisphere:HemisphereLight):Void {
+  public static function packHemisphereLight__sceneRender(data:flighthq._internal._Float32Array, offset:Float, hemisphere:Dynamic):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     intensity = _Runtime.field(hemisphere, 'intensity');
     _Runtime.callValue(unpackColorToLinear, cast ([SceneRender.scratchColor__sceneRender, _Runtime.field(hemisphere, 'skyColor')] : Array<Dynamic>));
@@ -242,7 +228,7 @@ class SceneRender {
     _Runtime.setIndex(data, (offset + 10.0), 0.0);
   }
 
-  public static function packPointLight__sceneRender(data:flighthq._internal._Float32Array, offset:Float, point:PointLight):Void {
+  public static function packPointLight__sceneRender(data:flighthq._internal._Float32Array, offset:Float, point:Dynamic):Void {
     var range:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     range = _Runtime.field(point, 'range');
@@ -258,7 +244,7 @@ class SceneRender {
     _Runtime.setIndex(data, (offset + 7.0), _Runtime.select(_Runtime.compare(range, 0.0, '>'), function():Dynamic return cast (1.0 / (range * range)), function():Dynamic return cast 0.0));
   }
 
-  public static function packSpotLight__sceneRender(data:flighthq._internal._Float32Array, offset:Float, spot:SpotLight):Void {
+  public static function packSpotLight__sceneRender(data:flighthq._internal._Float32Array, offset:Float, spot:Dynamic):Void {
     var range:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     range = _Runtime.field(spot, 'range');
@@ -279,7 +265,7 @@ class SceneRender {
     _Runtime.setIndex(data, (offset + 13.0), _Runtime.field(spot, 'outerConeCos'));
   }
 
-  public static function setSceneViewProjectionMatrix4__sceneRender(out:Matrix4, camera:Camera, aspect:Float):Void {
+  public static function setSceneViewProjectionMatrix4__sceneRender(out:Dynamic, camera:Dynamic, aspect:Float):Void {
     var projection:Dynamic = cast _Runtime.UNDEFINED;
     projection = _Runtime.field(camera, 'projection');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective'))) {

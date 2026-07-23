@@ -9,21 +9,19 @@ import flighthq.node.Node.getNodeRuntime;
 import flighthq.node.Viewport.createViewport;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
-import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObject.DisplayObjectRuntime;
 import flighthq.types.DisplayObject.DisplayObjectTraits;
-import flighthq.types.Stage;
 import flighthq.types.Stage.StageRuntime;
 import flighthq.types.StageSignals;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 @:expose("flighthq.displayobject.Stage")
 class Stage {
-  public static function createStage(?obj:Dynamic):Stage {
+  public static function createStage(?obj:Dynamic):Dynamic {
     var root:Dynamic = cast _Runtime.UNDEFINED;
     var stage:Dynamic = cast _Runtime.UNDEFINED;
     root = _Runtime.callValue(createDisplayObject, cast ([] : Array<Dynamic>));
-    stage = (cast _Runtime.callValue(createViewport, cast ([{ align: _Runtime.optionalField(obj, 'align'), root: root, scaleMode: _Runtime.optionalField(obj, 'scaleMode') }] : Array<Dynamic>)) : Stage);
+    stage = (cast _Runtime.callValue(createViewport, cast ([{ align: _Runtime.optionalField(obj, 'align'), root: root, scaleMode: _Runtime.optionalField(obj, 'scaleMode') }] : Array<Dynamic>)) : Dynamic);
     _Runtime.setField(stage, 'color', _Runtime.coalesce(_Runtime.optionalField(obj, 'color'), function():Dynamic return cast null));
     _Runtime.setField(stage, 'stageHeight', _Runtime.coalesce(_Runtime.optionalField(obj, 'stageHeight'), function():Dynamic return cast 550.0));
     _Runtime.setField(stage, 'stageWidth', _Runtime.coalesce(_Runtime.optionalField(obj, 'stageWidth'), function():Dynamic return cast 400.0));
@@ -42,33 +40,33 @@ class Stage {
     return cast null;
   }
 
-  public static function enableStageSignals(source:Stage):StageSignals {
+  public static function enableStageSignals(source:Dynamic):StageSignals {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(Stage.ensureStageRuntime__stage, cast ([source] : Array<Dynamic>));
     return cast _Runtime.setField(runtime, 'stageSignals', (_Runtime.field(runtime, 'stageSignals') ?? _Runtime.callValue(createStageSignals, cast ([] : Array<Dynamic>))));
     return cast null;
   }
 
-  public static function getDisplayObjectStage(source:DisplayObject):Null<Stage> {
+  public static function getDisplayObjectStage(source:Dynamic):Null<Dynamic> {
     var root:Dynamic = cast _Runtime.UNDEFINED;
     root = _Runtime.callValue(getNodeRoot, cast ([source] : Array<Dynamic>));
     return cast _Runtime.field((cast _Runtime.callValue(getNodeRuntime, cast ([root] : Array<Dynamic>)) : DisplayObjectRuntime), 'stage');
     return cast null;
   }
 
-  public static function getStageRuntime(source:Stage):StageRuntime {
-    return cast _Runtime.callValue(Stage.ensureStageRuntime__stage, cast ([(cast source : Stage)] : Array<Dynamic>));
+  public static function getStageRuntime(source:Dynamic):StageRuntime {
+    return cast _Runtime.callValue(Stage.ensureStageRuntime__stage, cast ([(cast source : Dynamic)] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getStageSignals(source:Stage):Null<StageSignals> {
+  public static function getStageSignals(source:Dynamic):Null<StageSignals> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(source, EntityRuntimeKey) : Null<StageRuntime>);
     return cast _Runtime.coalesce(_Runtime.optionalField(runtime, 'stageSignals'), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function setStageSize(source:Stage, width:Float, height:Float):Void {
+  public static function setStageSize(source:Dynamic, width:Float, height:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(source, 'stageWidth'), width), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(source, 'stageHeight'), height)))) { return; }
     _Runtime.setField(source, 'stageWidth', width);
@@ -77,7 +75,7 @@ class Stage {
     if (_Runtime.truthy(_Runtime.optionalField(runtime, 'stageSignals'))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(_Runtime.field(runtime, 'stageSignals'), 'onResize')] : Array<Dynamic>)); }
   }
 
-  public static function ensureStageRuntime__stage(source:Stage):StageRuntime {
+  public static function ensureStageRuntime__stage(source:Dynamic):StageRuntime {
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     existing = (cast _Runtime.getIndex(source, EntityRuntimeKey) : Null<StageRuntime>);

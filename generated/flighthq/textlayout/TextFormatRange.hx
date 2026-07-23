@@ -3,12 +3,10 @@ package flighthq.textlayout;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.TextFormat;
-import flighthq.types.TextFormatRange;
 
 @:expose("flighthq.textlayout.TextFormatRange")
 class TextFormatRange {
-  public static function createTextFormatRange(format:TextFormat, start:Float, end:Float):TextFormatRange {
+  public static function createTextFormatRange(format:Dynamic, start:Float, end:Float):Dynamic {
     return cast { end: end, format: format, start: start };
     return cast null;
   }

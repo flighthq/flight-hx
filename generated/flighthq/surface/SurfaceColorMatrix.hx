@@ -3,7 +3,6 @@ package flighthq.surface;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.SurfaceRegion;
 
 @:expose("flighthq.surface.SurfaceColorMatrix")
 class SurfaceColorMatrix {
@@ -51,7 +50,7 @@ class SurfaceColorMatrix {
     _Runtime.callValue(SurfaceColorMatrix.setColorMatrix__surfaceColorMatrix, cast ([out, 0.393, 0.769, 0.189, 0.0, 0.0, 0.349, 0.686, 0.168, 0.0, 0.0, 0.272, 0.534, 0.131, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
   }
 
-  public static function colorMatrixSurface(out:Dynamic, source:SurfaceRegion, matrix:Array<Float>):Void {
+  public static function colorMatrixSurface(out:Dynamic, source:Dynamic, matrix:Array<Float>):Void {
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(matrix, 'length'), 20.0, '<'))) { throw _Runtime.error('Color matrix filter requires 20 values'); }
     {
       var py:Dynamic = 0.0;

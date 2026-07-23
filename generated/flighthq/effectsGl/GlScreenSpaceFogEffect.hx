@@ -6,13 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
-import flighthq.types.ScreenSpaceFogEffect;
 
 @:expose("flighthq.effectsGl.GlScreenSpaceFogEffect")
 class GlScreenSpaceFogEffect {
-  public static function applyScreenSpaceFogEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<Dynamic>, effect:ScreenSpaceFogEffect):Void {
+  public static function applyScreenSpaceFogEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, depthTexture:Null<Dynamic>, effect:Dynamic):Void {
     var packed:Dynamic = cast _Runtime.UNDEFINED;
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var g:Dynamic = cast _Runtime.UNDEFINED;
@@ -41,7 +38,7 @@ class GlScreenSpaceFogEffect {
   }
 
   public static final defaultGlScreenSpaceFogEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyScreenSpaceFogEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'sceneDepthTexture'), (cast effect : ScreenSpaceFogEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyScreenSpaceFogEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'sceneDepthTexture'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static final SCREEN_SPACE_FOG_FRAGMENT_SRC__glScreenSpaceFogEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform vec3 u_fogColor;\nuniform float u_density;\nuniform float u_near;\nuniform float u_far;\nuniform float u_hasDepth;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float fog;\n  if (u_hasDepth > 0.5) {\n    // Real depth path: window-space depth remapped over [near, far], exponential fog by density.\n    float depth = texture(u_texture1, v_texCoord).r;\n    float d = clamp((depth - u_near) / max(u_far - u_near, 1e-4), 0.0, 1.0);\n    fog = clamp(1.0 - exp(-u_density * d), 0.0, 1.0);\n  } else {\n    // Sentinel path: no depth written (flat 2D scene) — screen-Y gradient as a depth proxy.\n    fog = clamp((1.0 - v_texCoord.y) * u_density, 0.0, 1.0);\n  }\n  o_color = vec4(mix(c.rgb, u_fogColor, fog), c.a);\n}';

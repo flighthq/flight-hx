@@ -7,18 +7,16 @@ import flighthq.displayobjectDom.DomStyle.applyDomStyle;
 import flighthq.displayobjectDom.DomStyle.setDomRendererElement;
 import flighthq.render.Renderer.noopRendererData;
 import flighthq.types.DisplayObjectRenderer;
-import flighthq.types.DomRenderState;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderView;
 
 @:expose("flighthq.displayobjectDom.DomRenderView")
 class DomRenderView {
-  public static function drawDomRenderView(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomRenderView(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var renderer:Dynamic = cast _Runtime.UNDEFINED;
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
-    source = (cast _Runtime.field(renderProxy, 'source') : RenderView);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     __destructure0 = _Runtime.field(source, 'data');
     renderer = _Runtime.field(__destructure0, 'renderer');
     if (_Runtime.truthy(_Runtime.strictEquals(renderer, null))) { return; }

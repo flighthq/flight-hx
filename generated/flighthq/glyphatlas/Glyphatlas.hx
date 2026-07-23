@@ -9,37 +9,32 @@ import flighthq.glyphatlas.GlyphAtlasEntry as Facade_Glyphatlas_flighthq_glyphat
 import flighthq.glyphatlas.GlyphAtlasMetrics as Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasMetrics;
 import flighthq.glyphatlas.GlyphRasterizerBackend as Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend;
 import flighthq.glyphatlas.GlyphSource as Facade_Glyphatlas_flighthq_glyphatlas_GlyphSource;
-import flighthq.types.GlyphSource;
-import flighthq.types.GlyphSource.GlyphAtlas;
 import flighthq.types.GlyphSource.GlyphAtlasOptions;
 import flighthq.types.GlyphSource.GlyphEntry;
 import flighthq.types.GlyphSource.GlyphMetrics;
-import flighthq.types.GlyphSource.GlyphRasterizerBackend;
-import flighthq.types.Rectangle;
-import flighthq.types.Surface;
 
 @:expose("flighthq.glyphatlas.Glyphatlas")
 class Glyphatlas {
-  public static function clearGlyphAtlasDirty(atlas:GlyphAtlas):Void {
+  public static function clearGlyphAtlasDirty(atlas:Dynamic):Void {
     _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasDirty.clearGlyphAtlasDirty, cast ([atlas] : Array<Dynamic>));
   }
 
-  public static function createGlyphAtlas(options:GlyphAtlasOptions):GlyphAtlas {
+  public static function createGlyphAtlas(options:GlyphAtlasOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlas.createGlyphAtlas, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGlyphSourceFromGlyphAtlas(atlas:GlyphAtlas):GlyphSource {
+  public static function createGlyphSourceFromGlyphAtlas(atlas:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphSource.createGlyphSourceFromGlyphAtlas, cast ([atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createStubGlyphRasterizerBackend():GlyphRasterizerBackend {
+  public static function createStubGlyphRasterizerBackend():Dynamic {
     return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend.createStubGlyphRasterizerBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createWebGlyphRasterizerBackend():GlyphRasterizerBackend {
+  public static function createWebGlyphRasterizerBackend():Dynamic {
     return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend.createWebGlyphRasterizerBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -49,41 +44,41 @@ class Glyphatlas {
     return cast null;
   }
 
-  public static function disposeGlyphAtlas(atlas:GlyphAtlas):Void {
+  public static function disposeGlyphAtlas(atlas:Dynamic):Void {
     _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlas.disposeGlyphAtlas, cast ([atlas] : Array<Dynamic>));
   }
 
-  public static function getGlyphAtlasDirtyRegion(atlas:GlyphAtlas):Null<Rectangle> {
+  public static function getGlyphAtlasDirtyRegion(atlas:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasDirty.getGlyphAtlasDirtyRegion, cast ([atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphAtlasEntry(atlas:GlyphAtlas, codepoint:Float):Null<GlyphEntry> {
+  public static function getGlyphAtlasEntry(atlas:Dynamic, codepoint:Float):Null<GlyphEntry> {
     return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasEntry.getGlyphAtlasEntry, cast ([atlas, codepoint] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphAtlasKerning(_atlas:GlyphAtlas, _left:Float, _right:Float):Float {
+  public static function getGlyphAtlasKerning(_atlas:Dynamic, _left:Float, _right:Float):Float {
     return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasMetrics.getGlyphAtlasKerning, cast ([_atlas, _left, _right] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphAtlasMetrics(atlas:GlyphAtlas):GlyphMetrics {
+  public static function getGlyphAtlasMetrics(atlas:Dynamic):GlyphMetrics {
     return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasMetrics.getGlyphAtlasMetrics, cast ([atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphAtlasSurface(atlas:GlyphAtlas):Surface {
+  public static function getGlyphAtlasSurface(atlas:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlas.getGlyphAtlasSurface, cast ([atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphRasterizerBackend():GlyphRasterizerBackend {
+  public static function getGlyphRasterizerBackend():Dynamic {
     return cast _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend.getGlyphRasterizerBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setGlyphRasterizerBackend(backend:Null<GlyphRasterizerBackend>):Void {
+  public static function setGlyphRasterizerBackend(backend:Null<Dynamic>):Void {
     _Runtime.callValue(Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend.setGlyphRasterizerBackend, cast ([backend] : Array<Dynamic>));
   }
 }

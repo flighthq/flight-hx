@@ -14,15 +14,11 @@ import flighthq.effectsWgpu.WgpuEffectPass.getWgpuEffectPassState;
 import flighthq.effectsWgpu.WgpuEffectTintShader.applyWgpuEffectTintPass;
 import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
-import flighthq.types.GradientBevelEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
-import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget;
-import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
 @:expose("flighthq.effectsWgpu.WgpuGradientBevelEffect")
 class WgpuGradientBevelEffect {
-  public static function applyGradientBevelEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:GradientBevelEffect):Void {
+  public static function applyGradientBevelEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     var src:Dynamic = cast _Runtime.UNDEFINED;
     var dst:Dynamic = cast _Runtime.UNDEFINED;
     var descriptor:Dynamic = cast _Runtime.UNDEFINED;
@@ -50,8 +46,8 @@ class WgpuGradientBevelEffect {
     var applyPipeline:Dynamic = cast _Runtime.UNDEFINED;
     var applySlot:Dynamic = cast _Runtime.UNDEFINED;
     var applyPass:Dynamic = cast _Runtime.UNDEFINED;
-    src = (cast source : WgpuRenderTarget);
-    dst = (cast dest : WgpuRenderTarget);
+    src = (cast source : Dynamic);
+    dst = (cast dest : Dynamic);
     descriptor = { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') };
     s0 = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     s1 = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
@@ -108,14 +104,14 @@ class WgpuGradientBevelEffect {
   }
 
   public static final defaultWgpuGradientBevelEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyGradientBevelEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : GradientBevelEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyGradientBevelEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static final BEVEL_ENCODE_FRAGMENT_WGSL__wgpuGradientBevelEffect:Dynamic = '\nstruct Uniforms {\n  offset : vec2f,\n  _pad : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let high = textureSampleLevel(tex, smp, uv - uni.offset, 0.0).a;\n  let low  = textureSampleLevel(tex, smp, uv + uni.offset, 0.0).a;\n  let bevelVal = clamp((high - low) * 0.5 + 0.5, 0.0, 1.0);\n  return vec4f(bevelVal, 0.0, 0.0, 1.0);\n}';
 
   public static final BEVEL_APPLY_FRAGMENT_WGSL__wgpuGradientBevelEffect:Dynamic = '\nstruct Uniforms { _u : f32, _pad0 : f32, _pad1 : f32, _pad2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var texEncoded : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n@group(2) @binding(0) var texRamp : texture_2d<f32>;\n@group(2) @binding(1) var smp2 : sampler;\n@group(3) @binding(0) var texSource : texture_2d<f32>;\n@group(3) @binding(1) var smp3 : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let bevelVal = textureSampleLevel(texEncoded, smp, uv, 0.0).r;\n  let color = textureSampleLevel(texRamp, smp2, vec2f(bevelVal, 0.5), 0.0);\n  let srcAlpha = textureSampleLevel(texSource, smp3, uv, 0.0).a;\n  return color * srcAlpha;\n}';
 
-  public static function getApplyPipeline__wgpuGradientBevelEffect(state:WgpuRenderState):WgpuEffectPipeline {
+  public static function getApplyPipeline__wgpuGradientBevelEffect(state:Dynamic):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = _Runtime.callProperty(WgpuGradientBevelEffect.applyPipelines__wgpuGradientBevelEffect, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -133,7 +129,7 @@ class WgpuGradientBevelEffect {
     return cast null;
   }
 
-  public static function getEncodePipeline__wgpuGradientBevelEffect(state:WgpuRenderState):WgpuEffectPipeline {
+  public static function getEncodePipeline__wgpuGradientBevelEffect(state:Dynamic):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = _Runtime.callProperty(WgpuGradientBevelEffect.encodePipelines__wgpuGradientBevelEffect, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {

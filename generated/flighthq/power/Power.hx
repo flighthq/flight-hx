@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.hasSignalSlots;
-import flighthq.types.Power;
 import flighthq.types.Power.PowerBackend;
 import flighthq.types.Power.PowerIdleState;
 import flighthq.types.Power.PowerKeepAwakeMode;
@@ -32,7 +31,7 @@ class Power {
 
   public static var _wakeLockSentinel__power:Null<WebWakeLockSentinel__power> = _Runtime.explicitNull();
 
-  public static function attachPower(power:Power, idleThresholdSeconds:Dynamic = 60.0):Void {
+  public static function attachPower(power:Dynamic, idleThresholdSeconds:Dynamic = 60.0):Void {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     var wasCharging:Dynamic = cast _Runtime.UNDEFINED;
     var unsubscribeChange:Dynamic = cast _Runtime.UNDEFINED;
@@ -99,7 +98,7 @@ class Power {
     }] : Array<Dynamic>));
   }
 
-  public static function createPower():Power {
+  public static function createPower():Dynamic {
     return cast { onChange: null, onCharging: null, onDischarging: null, onIdleStateChange: null, onLockScreen: null, onLowPowerModeChange: null, onResume: null, onSuspend: null, onThermalStateChange: null, onUnlockScreen: null };
     return cast null;
   }
@@ -274,7 +273,7 @@ class Power {
     return cast null;
   }
 
-  public static function detachPower(power:Power):Void {
+  public static function detachPower(power:Dynamic):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
     unsubscribe = _Runtime.callProperty(Power._subscriptions__power, 'get', cast ([power] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -283,11 +282,11 @@ class Power {
     }
   }
 
-  public static function disposePower(power:Power):Void {
+  public static function disposePower(power:Dynamic):Void {
     _Runtime.callValue(detachPower, cast ([power] : Array<Dynamic>));
   }
 
-  public static function enablePowerSignals(power:Power):Void {
+  public static function enablePowerSignals(power:Dynamic):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(power, 'onChange'), null))) { _Runtime.setField(power, 'onChange', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(power, 'onCharging'), null))) { _Runtime.setField(power, 'onCharging', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(power, 'onDischarging'), null))) { _Runtime.setField(power, 'onDischarging', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }

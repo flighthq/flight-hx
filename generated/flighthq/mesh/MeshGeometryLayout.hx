@@ -4,12 +4,11 @@ package flighthq.mesh;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.mesh.MeshGeometry.createMeshGeometry;
-import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
 
 @:expose("flighthq.mesh.MeshGeometryLayout")
 class MeshGeometryLayout {
-  public static function convertMeshGeometryLayout(source:MeshGeometry, targetLayout:VertexAttributeLayout):MeshGeometry {
+  public static function convertMeshGeometryLayout(source:Dynamic, targetLayout:VertexAttributeLayout):Dynamic {
     var srcStride:Dynamic = cast _Runtime.UNDEFINED;
     var dstStride:Dynamic = cast _Runtime.UNDEFINED;
     var srcFloatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;

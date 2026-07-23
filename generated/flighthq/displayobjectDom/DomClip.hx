@@ -7,37 +7,34 @@ import flighthq.displayobjectDom.DomClipContours.pushDomClipContours;
 import flighthq.displayobjectDom.DomClipRectangle.pushDomClipRectangle;
 import flighthq.displayobjectDom.DomClipRectangle.setDomClipHooks;
 import flighthq.displayobjectDom.DomRenderState.getDomRenderStateRuntime;
-import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObjectRenderer.DisplayObjectClipHooks;
-import flighthq.types.DomRenderState;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderState;
 
 @:expose("flighthq.displayobjectDom.DomClip")
 class DomClip {
-  public static function enableDomClipSupport(state:DomRenderState):Void {
+  public static function enableDomClipSupport(state:Dynamic):Void {
     _Runtime.setField(state, 'displayObjectClipHooks', DomClip.domDisplayObjectClipHooks__domClip);
     _Runtime.callValue(setDomClipHooks, cast ([state] : Array<Dynamic>));
   }
 
-  public static final domDisplayObjectClipHooks__domClip:DisplayObjectClipHooks = { finalize: function(state:RenderState) {
+  public static final domDisplayObjectClipHooks__domClip:DisplayObjectClipHooks = { finalize: function(state:Dynamic) {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([(cast state : DomRenderState)] : Array<Dynamic>));
+    runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([(cast state : Dynamic)] : Array<Dynamic>));
     _Runtime.setLength(_Runtime.field(runtime, 'domClipStack'), 0.0);
     _Runtime.setField(state, 'currentClipDepth', 0.0);
-  }, popClip: function(state:RenderState, data:RenderProxy2D, source:DisplayObject) {
+  }, popClip: function(state:Dynamic, data:RenderProxy2D, source:Dynamic) {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([(cast state : DomRenderState)] : Array<Dynamic>));
+    runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([(cast state : Dynamic)] : Array<Dynamic>));
     target = (_Runtime.field(data, 'clipDepth') - _Runtime.select(!_Runtime.looseEquals(_Runtime.field(source, 'clip'), null), function():Dynamic return cast 1.0, function():Dynamic return cast 0.0));
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(runtime, 'domClipStack'), 'length'), target, '>'))) { _Runtime.setLength(_Runtime.field(runtime, 'domClipStack'), target); }
     _Runtime.setField(state, 'currentClipDepth', _Runtime.field(_Runtime.field(runtime, 'domClipStack'), 'length'));
-  }, pushClip: function(state:RenderState, data:RenderProxy2D, source:DisplayObject) {
+  }, pushClip: function(state:Dynamic, data:RenderProxy2D, source:Dynamic) {
     var clip:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     clip = _Runtime.field(source, 'clip');
     if (_Runtime.truthy(_Runtime.strictEquals(clip, null))) { return; }
-    runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([(cast state : DomRenderState)] : Array<Dynamic>));
+    runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([(cast state : Dynamic)] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(clip, 'contours'), null))) {
       _Runtime.callValue(pushDomClipRectangle, cast ([_Runtime.field(runtime, 'domClipStack'), _Runtime.field(clip, 'rect'), _Runtime.field(data, 'transform2D')] : Array<Dynamic>));
     } else {

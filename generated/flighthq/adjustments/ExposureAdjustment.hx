@@ -3,11 +3,10 @@ package flighthq.adjustments;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ExposureAdjustment;
 
 @:expose("flighthq.adjustments.ExposureAdjustment")
 class ExposureAdjustment {
-  public static function createExposureAdjustment(?options:Dynamic):ExposureAdjustment {
+  public static function createExposureAdjustment(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var colorMatrix:Dynamic = cast _Runtime.UNDEFINED;

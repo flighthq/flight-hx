@@ -7,8 +7,6 @@ import flighthq.geometry.Matrix.matrixTransformRectangle;
 import flighthq.geometry.Rectangle.createRectangle;
 import flighthq.node.BoundsRectangle.getNodeWorldBoundsRectangle;
 import flighthq.types.HasBoundsRectangle.Spatial2DNode;
-import flighthq.types.Matrix;
-import flighthq.types.Rectangle;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderViewport2D;
 
@@ -31,7 +29,7 @@ class RenderViewport {
     return cast null;
   }
 
-  public static function isRenderableInViewport(source:Dynamic, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
+  public static function isRenderableInViewport(source:Dynamic, viewport:RenderViewport2D, ?renderTransform2D:Null<Dynamic>):Bool {
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
     var objMinX:Dynamic = cast _Runtime.UNDEFINED;
     var objMinY:Dynamic = cast _Runtime.UNDEFINED;
@@ -59,7 +57,7 @@ class RenderViewport {
     return cast null;
   }
 
-  public static function isRenderProxyInViewport(proxy:RenderProxy2D, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
+  public static function isRenderProxyInViewport(proxy:RenderProxy2D, viewport:RenderViewport2D, ?renderTransform2D:Null<Dynamic>):Bool {
     return cast _Runtime.callValue(isRenderableInViewport, cast ([_Runtime.field(proxy, 'source'), viewport, renderTransform2D] : Array<Dynamic>));
     return cast null;
   }

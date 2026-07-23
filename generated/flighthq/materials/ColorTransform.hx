@@ -4,12 +4,11 @@ package flighthq.materials;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
-import flighthq.types.ColorTransform;
 import flighthq.types.ColorTransform.ColorTransformLike;
 
 @:expose("flighthq.materials.ColorTransform")
 class ColorTransform {
-  public static function cloneColorTransform(source:ColorTransformLike):ColorTransform {
+  public static function cloneColorTransform(source:ColorTransformLike):Dynamic {
     return cast _Runtime.callValue(createColorTransform, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -47,7 +46,7 @@ class ColorTransform {
     _Runtime.setIndex(outColorOffsets, 3.0, _Runtime.field(source, 'alphaOffset'));
   }
 
-  public static function createColorTransform(?opts:Dynamic):ColorTransform {
+  public static function createColorTransform(?opts:Dynamic):Dynamic {
     return cast _Runtime.callValue(createEntity, cast ([{ redMultiplier: _Runtime.coalesce(_Runtime.optionalField(opts, 'redMultiplier'), function():Dynamic return cast 1.0), greenMultiplier: _Runtime.coalesce(_Runtime.optionalField(opts, 'greenMultiplier'), function():Dynamic return cast 1.0), blueMultiplier: _Runtime.coalesce(_Runtime.optionalField(opts, 'blueMultiplier'), function():Dynamic return cast 1.0), alphaMultiplier: _Runtime.coalesce(_Runtime.optionalField(opts, 'alphaMultiplier'), function():Dynamic return cast 1.0), redOffset: _Runtime.coalesce(_Runtime.optionalField(opts, 'redOffset'), function():Dynamic return cast 0.0), greenOffset: _Runtime.coalesce(_Runtime.optionalField(opts, 'greenOffset'), function():Dynamic return cast 0.0), blueOffset: _Runtime.coalesce(_Runtime.optionalField(opts, 'blueOffset'), function():Dynamic return cast 0.0), alphaOffset: _Runtime.coalesce(_Runtime.optionalField(opts, 'alphaOffset'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
@@ -104,7 +103,7 @@ class ColorTransform {
     _Runtime.setField(out, 'alphaOffset', alphaOffset);
   }
 
-  public static function setColorTransformIdentity(out:ColorTransform):Void {
+  public static function setColorTransformIdentity(out:Dynamic):Void {
     _Runtime.callValue(setColorTransform, cast ([out, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
   }
 
@@ -130,5 +129,5 @@ class ColorTransform {
     _Runtime.setField(out, 'alphaMultiplier', 0.0);
   }
 
-  public static final _identity__colorTransform:ColorTransform = _Runtime.callValue(createColorTransform, cast ([] : Array<Dynamic>));
+  public static final _identity__colorTransform:Dynamic = _Runtime.callValue(createColorTransform, cast ([] : Array<Dynamic>));
 }

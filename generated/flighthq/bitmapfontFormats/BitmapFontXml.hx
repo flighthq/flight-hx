@@ -7,7 +7,6 @@ import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontCharRecord;
 import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontKerningRecord;
 import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontPageRecord;
 import flighthq.bitmapfontFormats._internal._BitmapFontRecordValues.buildBitmapFontFromRecord;
-import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontParseOptions;
 import flighthq.xml.XmlParse.XmlElement;
 import flighthq.xml.XmlParse.parseXmlDocument;
@@ -18,7 +17,7 @@ import flighthq.xml.XmlQuery.getXmlElementChildrenByName;
 
 @:expose("flighthq.bitmapfontFormats.BitmapFontXml")
 class BitmapFontXml {
-  public static function parseBitmapFontXml(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
+  public static function parseBitmapFontXml(text:String, ?options:BitmapFontParseOptions):Null<Dynamic> {
     var record:Dynamic = cast _Runtime.UNDEFINED;
     record = _Runtime.callValue(BitmapFontXml.parseBitmapFontXmlRecord__bitmapFontXml, cast ([text] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(record, null))) { return cast null; }

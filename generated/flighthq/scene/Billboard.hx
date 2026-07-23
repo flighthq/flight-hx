@@ -7,22 +7,18 @@ import flighthq.node.Node.enableNodeSignals;
 import flighthq.node.Node.getNodeSignals;
 import flighthq.scene.SceneNode.createSceneNode;
 import flighthq.scene.SceneNode.getSceneNodeRuntime;
-import flighthq.types.Billboard;
 import flighthq.types.Billboard.BillboardMode;
 import flighthq.types.Billboard.BillboardRuntime;
 import flighthq.types.Entity.Kind;
-import flighthq.types.Material;
-import flighthq.types.MeshGeometry;
 import flighthq.types.NodeSignals;
-import flighthq.types.SceneNode;
 import flighthq.types._internal._BillboardValues.BillboardKind;
 
 @:expose("flighthq.scene.Billboard")
 class Billboard {
-  public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, mode:BillboardMode = 'full', ?kind:Kind, ?obj:Dynamic):Billboard {
+  public static function createBillboard(geometry:Dynamic, materials:Array<Null<Dynamic>>, mode:BillboardMode = 'full', ?kind:Kind, ?obj:Dynamic):Dynamic {
     if (kind == null) kind = cast (BillboardKind : Dynamic);
     var billboard:Dynamic = cast _Runtime.UNDEFINED;
-    billboard = (cast _Runtime.callValue(createSceneNode, cast ([kind, obj] : Array<Dynamic>)) : Billboard);
+    billboard = (cast _Runtime.callValue(createSceneNode, cast ([kind, obj] : Array<Dynamic>)) : Dynamic);
     _Runtime.setField(billboard, 'geometry', geometry);
     _Runtime.setField(billboard, 'materials', materials);
     _Runtime.setField(billboard, 'mode', mode);
@@ -30,22 +26,22 @@ class Billboard {
     return cast null;
   }
 
-  public static function enableBillboardSignals(source:Billboard):NodeSignals {
+  public static function enableBillboardSignals(source:Dynamic):NodeSignals {
     return cast _Runtime.callValue(enableNodeSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBillboardRuntime(source:Billboard):BillboardRuntime {
+  public static function getBillboardRuntime(source:Dynamic):BillboardRuntime {
     return cast _Runtime.callValue(getSceneNodeRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBillboardSignals(source:Billboard):Null<NodeSignals> {
+  public static function getBillboardSignals(source:Dynamic):Null<NodeSignals> {
     return cast _Runtime.callValue(getNodeSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isBillboard(source:SceneNode):Bool {
+  public static function isBillboard(source:Dynamic):Bool {
     var candidate:Dynamic = cast _Runtime.UNDEFINED;
     candidate = (cast source : Dynamic);
     return cast _Runtime.andValue(!_Runtime.looseEquals(_Runtime.field(candidate, 'geometry'), null), function():Dynamic return cast !_Runtime.looseEquals(_Runtime.field(candidate, 'mode'), null));

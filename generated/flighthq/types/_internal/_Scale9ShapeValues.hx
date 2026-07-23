@@ -4,7 +4,6 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.Shape;
 import flighthq.types.Shape.ShapeData;
 import flighthq.types.Shape.ShapeRuntime;
 

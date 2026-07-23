@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.Permission.PermissionName;
-import flighthq.types.Sensors;
 import flighthq.types.Sensors.AmbientLightReading;
 import flighthq.types.Sensors.MotionReading;
 import flighthq.types.Sensors.OrientationReading;
@@ -58,7 +57,7 @@ class Sensors {
 
   public static final _subscriptions__sensors:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  public static function attachSensors(sensors:Sensors):Void {
+  public static function attachSensors(sensors:Dynamic):Void {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     var unsubscribeMotion:Dynamic = cast _Runtime.UNDEFINED;
     var unsubscribeLinearAcceleration:Dynamic = cast _Runtime.UNDEFINED;
@@ -340,7 +339,7 @@ class Sensors {
     return cast null;
   }
 
-  public static function createSensors():Sensors {
+  public static function createSensors():Dynamic {
     return cast { onAbsoluteOrientation: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onAccelerometer: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onAmbientLight: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onBarometer: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onGravity: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onGyroscope: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onLinearAcceleration: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onMagnetometer: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onOrientation: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onProximity: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onQuaternion: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
@@ -616,7 +615,7 @@ class Sensors {
     return cast null;
   }
 
-  public static function detachSensors(sensors:Sensors):Void {
+  public static function detachSensors(sensors:Dynamic):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
     unsubscribe = _Runtime.callProperty(Sensors._subscriptions__sensors, 'get', cast ([sensors] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -627,7 +626,7 @@ class Sensors {
 
   public static var DeviceOrientationEvent__sensors:Dynamic;
 
-  public static function disposeSensors(sensors:Sensors):Void {
+  public static function disposeSensors(sensors:Dynamic):Void {
     _Runtime.callValue(detachSensors, cast ([sensors] : Array<Dynamic>));
   }
 

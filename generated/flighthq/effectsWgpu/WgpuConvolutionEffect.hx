@@ -5,16 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
-import flighthq.types.ConvolutionEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
-import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.effectsWgpu.WgpuConvolutionEffect")
 class WgpuConvolutionEffect {
   public static final MAX_CONVOLUTION_EFFECT_WGPU_KERNEL_SIZE:Dynamic = 49.0;
 
-  public static function applyConvolutionEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ConvolutionEffect):Void {
+  public static function applyConvolutionEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var matrix:Dynamic = cast _Runtime.UNDEFINED;
     var matrixX:Dynamic = cast _Runtime.UNDEFINED;
@@ -38,7 +35,7 @@ class WgpuConvolutionEffect {
     edgeColor = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 0.0);
     divisor = _Runtime.coalesce(_Runtime.field(effect, 'divisor'), function():Dynamic return cast _Runtime.callValue(WgpuConvolutionEffect.getAutoDivisor__wgpuConvolutionEffect, cast ([matrix, (matrixX * matrixY)] : Array<Dynamic>)));
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.convolution', WgpuConvolutionEffect.CONVOLUTION_WGSL__wgpuConvolutionEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic, i32:Dynamic) {
+    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : Dynamic), (cast dest : Dynamic), pipeline, function(f32:Dynamic, i32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, (1.0 / _Runtime.field(source, 'width')));
       _Runtime.setIndex(f32, 1.0, (1.0 / _Runtime.field(source, 'height')));
       _Runtime.setIndex(i32, 2.0, matrixX);
@@ -62,7 +59,7 @@ class WgpuConvolutionEffect {
   }
 
   public static final defaultWgpuConvolutionEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyConvolutionEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ConvolutionEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyConvolutionEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static function getAutoDivisor__wgpuConvolutionEffect(matrix:Array<Float>, length:Float):Float {

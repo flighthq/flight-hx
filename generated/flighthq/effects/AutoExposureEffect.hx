@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.AutoExposureEffect;
 
 @:expose("flighthq.effects.AutoExposureEffect")
 class AutoExposureEffect {
-  public static function createAutoExposureEffect(?options:Dynamic):AutoExposureEffect {
+  public static function createAutoExposureEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'AutoExposureEffect' }, options]);
     return cast null;

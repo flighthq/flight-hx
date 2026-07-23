@@ -5,12 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.Surface;
 import flighthq.types.SurfaceEdgeMode;
 
 @:expose("flighthq.surface.SurfaceCrop")
 class SurfaceCrop {
-  public static function cropSurface(source:Surface, rect:RectangleLike):Surface {
+  public static function cropSurface(source:Dynamic, rect:RectangleLike):Dynamic {
     var sw:Dynamic = cast _Runtime.UNDEFINED;
     var sh:Dynamic = cast _Runtime.UNDEFINED;
     var rx:Dynamic = cast _Runtime.UNDEFINED;
@@ -53,7 +52,7 @@ class SurfaceCrop {
     return cast null;
   }
 
-  public static function extendSurface(source:Surface, left:Float, top:Float, right:Float, bottom:Float, edgeMode:SurfaceEdgeMode = 'transparent', fillColor:Dynamic = 0.0):Surface {
+  public static function extendSurface(source:Dynamic, left:Float, top:Float, right:Float, bottom:Float, edgeMode:SurfaceEdgeMode = 'transparent', fillColor:Dynamic = 0.0):Dynamic {
     var sw:Dynamic = cast _Runtime.UNDEFINED;
     var sh:Dynamic = cast _Runtime.UNDEFINED;
     var dw:Dynamic = cast _Runtime.UNDEFINED;
@@ -115,7 +114,7 @@ class SurfaceCrop {
     return cast null;
   }
 
-  public static function trimSurface(source:Surface):Surface {
+  public static function trimSurface(source:Dynamic):Dynamic {
     var sw:Dynamic = cast _Runtime.UNDEFINED;
     var sh:Dynamic = cast _Runtime.UNDEFINED;
     var sd:Dynamic = cast _Runtime.UNDEFINED;

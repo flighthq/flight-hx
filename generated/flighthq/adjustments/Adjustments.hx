@@ -22,22 +22,7 @@ import flighthq.adjustments.LiftGammaGainAdjustment as Facade_Adjustments_flight
 import flighthq.adjustments.LookupTableGradeAdjustment as Facade_Adjustments_flighthq_adjustments_LookupTableGradeAdjustment;
 import flighthq.adjustments.SepiaAdjustment as Facade_Adjustments_flighthq_adjustments_SepiaAdjustment;
 import flighthq.types.Adjustment;
-import flighthq.types.BrightnessContrastAdjustment;
-import flighthq.types.ChannelMixerAdjustment;
-import flighthq.types.ColorBlindSimulationAdjustment;
-import flighthq.types.ColorGradeAdjustment;
-import flighthq.types.ColorLut;
-import flighthq.types.ColorLutCache;
-import flighthq.types.ColorTransform;
-import flighthq.types.ColorTransformAdjustment;
 import flighthq.types.ColorTransformFunction;
-import flighthq.types.ExposureAdjustment;
-import flighthq.types.GrayscaleAdjustment;
-import flighthq.types.HueSaturationAdjustment;
-import flighthq.types.InvertAdjustment;
-import flighthq.types.LiftGammaGainAdjustment;
-import flighthq.types.LookupTableGradeAdjustment;
-import flighthq.types.SepiaAdjustment;
 
 @:expose("flighthq.adjustments.Adjustments")
 class Adjustments {
@@ -46,12 +31,12 @@ class Adjustments {
     return cast null;
   }
 
-  public static function bakeColorLut(transforms:Array<ColorTransformFunction>, ?size:Float):ColorLut {
+  public static function bakeColorLut(transforms:Array<ColorTransformFunction>, ?size:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorLut.bakeColorLut, cast ([transforms, size] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bakeColorLutForRun(cache:ColorLutCache, run:Array<{ var kind:String; }>, ?size:Float):ColorLut {
+  public static function bakeColorLutForRun(cache:Dynamic, run:Array<{ var kind:String; }>, ?size:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorLutCache.bakeColorLutForRun, cast ([cache, run, size] : Array<Dynamic>));
     return cast null;
   }
@@ -75,12 +60,12 @@ class Adjustments {
     return cast null;
   }
 
-  public static function createBrightnessContrastAdjustment(?options:Dynamic):BrightnessContrastAdjustment {
+  public static function createBrightnessContrastAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_BrightnessContrastAdjustment.createBrightnessContrastAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createChannelMixerAdjustment(?options:Dynamic):ChannelMixerAdjustment {
+  public static function createChannelMixerAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ChannelMixerAdjustment.createChannelMixerAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -95,17 +80,17 @@ class Adjustments {
     return cast null;
   }
 
-  public static function createColorBlindSimulationAdjustment(?options:Dynamic):ColorBlindSimulationAdjustment {
+  public static function createColorBlindSimulationAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorBlindSimulationAdjustment.createColorBlindSimulationAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createColorGradeAdjustment(?options:Dynamic):ColorGradeAdjustment {
+  public static function createColorGradeAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorGradeAdjustment.createColorGradeAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createColorLutCache():ColorLutCache {
+  public static function createColorLutCache():Dynamic {
     return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorLutCache.createColorLutCache, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -115,7 +100,7 @@ class Adjustments {
     return cast null;
   }
 
-  public static function createColorTransformAdjustment(colorTransform:ColorTransform):ColorTransformAdjustment {
+  public static function createColorTransformAdjustment(colorTransform:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorTransformAdjustment.createColorTransformAdjustment, cast ([colorTransform] : Array<Dynamic>));
     return cast null;
   }
@@ -130,12 +115,12 @@ class Adjustments {
     return cast null;
   }
 
-  public static function createExposureAdjustment(?options:Dynamic):ExposureAdjustment {
+  public static function createExposureAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ExposureAdjustment.createExposureAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGrayscaleAdjustment(?options:Dynamic):GrayscaleAdjustment {
+  public static function createGrayscaleAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_GrayscaleAdjustment.createGrayscaleAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -150,7 +135,7 @@ class Adjustments {
     return cast null;
   }
 
-  public static function createHueSaturationAdjustment(?options:Dynamic):HueSaturationAdjustment {
+  public static function createHueSaturationAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_HueSaturationAdjustment.createHueSaturationAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -160,7 +145,7 @@ class Adjustments {
     return cast null;
   }
 
-  public static function createInvertAdjustment(?options:Dynamic):InvertAdjustment {
+  public static function createInvertAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_InvertAdjustment.createInvertAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -175,12 +160,12 @@ class Adjustments {
     return cast null;
   }
 
-  public static function createLiftGammaGainAdjustment(?options:Dynamic):LiftGammaGainAdjustment {
+  public static function createLiftGammaGainAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_LiftGammaGainAdjustment.createLiftGammaGainAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createLookupTableGradeAdjustment(?options:Dynamic):LookupTableGradeAdjustment {
+  public static function createLookupTableGradeAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_LookupTableGradeAdjustment.createLookupTableGradeAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -200,7 +185,7 @@ class Adjustments {
     return cast null;
   }
 
-  public static function createSepiaAdjustment(?options:Dynamic):SepiaAdjustment {
+  public static function createSepiaAdjustment(?options:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_SepiaAdjustment.createSepiaAdjustment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -260,12 +245,12 @@ class Adjustments {
     return cast null;
   }
 
-  public static function resolveColorAdjustmentsColorTransform(adjustments:Null<Array<Adjustment>>, out:ColorTransform):Float {
+  public static function resolveColorAdjustmentsColorTransform(adjustments:Null<Array<Adjustment>>, out:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorAdjustmentResolution.resolveColorAdjustmentsColorTransform, cast ([adjustments, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function sampleColorLut(lut:ColorLut, out:Array<Float>, r:Float, g:Float, b:Float):Void {
+  public static function sampleColorLut(lut:Dynamic, out:Array<Float>, r:Float, g:Float, b:Float):Void {
     _Runtime.callValue(Facade_Adjustments_flighthq_adjustments_ColorLut.sampleColorLut, cast ([lut, out, r, g, b] : Array<Dynamic>));
   }
 }

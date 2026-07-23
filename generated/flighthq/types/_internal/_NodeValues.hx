@@ -4,12 +4,9 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Adjustment;
-import flighthq.types.ColorTransform;
-import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.InteractionSignals;
-import flighthq.types.NodeInteractionState;
 import flighthq.types.NodeSignals;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 

@@ -3,6 +3,7 @@ package flighthq.displayobjectWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.WgpuTextLabelData;
 import flighthq.color.PackColor.computeRgbHexString;
 import flighthq.displayobjectWgpu.WgpuRendererData.createWgpuRendererData;
 import flighthq.displayobjectWgpu.WgpuRendererData.getWgpuRendererData;
@@ -22,21 +23,16 @@ import flighthq.textlayout.TextLayout.computeTextLayout;
 import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
 import flighthq.types.BatchFormat;
 import flighthq.types.DisplayObjectRenderer;
-import flighthq.types.ImageResource;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
-import flighthq.types.TextFormat;
-import flighthq.types.TextLabel;
 import flighthq.types.TextLabel.TextLabelRuntime;
-import flighthq.types.WgpuRenderState;
 
-typedef WgpuTextLabelData__wgpuTextLabel = { var canvas:Dynamic; var ctx:Dynamic; var image:ImageResource; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; var lastPW:Float; var lastPH:Float; };
+typedef WgpuTextLabelData__wgpuTextLabel = { var canvas:Dynamic; var ctx:Dynamic; var image:Dynamic; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; var lastPW:Float; var lastPH:Float; };
 
 @:expose("flighthq.displayobjectWgpu.WgpuTextLabel")
 class WgpuTextLabel {
-  public static function createWgpuTextLabelData__wgpuTextLabel(_state:RenderState, _source:Renderable):RendererData {
+  public static function createWgpuTextLabelData__wgpuTextLabel(_state:Dynamic, _source:Renderable):RendererData {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     canvas = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -47,7 +43,7 @@ class WgpuTextLabel {
     return cast null;
   }
 
-  public static function destroyWgpuTextLabelData__wgpuTextLabel(state:WgpuRenderState, data:RendererData):Void {
+  public static function destroyWgpuTextLabelData__wgpuTextLabel(state:Dynamic, data:RendererData):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var textLabelData:Dynamic = cast _Runtime.UNDEFINED;
     var entry:Dynamic = cast _Runtime.UNDEFINED;
@@ -61,7 +57,7 @@ class WgpuTextLabel {
     }
   }
 
-  public static function drawWgpuTextLabel(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuTextLabel(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -81,7 +77,7 @@ class WgpuTextLabel {
     var t:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) { return; }
-    source = (cast _Runtime.field(renderProxy, 'source') : TextLabel);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     __destructure0 = _Runtime.field(source, 'data');
     text = _Runtime.field(__destructure0, 'text');
     textFormat = _Runtime.field(__destructure0, 'textFormat');
@@ -98,7 +94,7 @@ class WgpuTextLabel {
     pixelRatio = _Runtime.field(state, 'pixelRatio');
     version = _Runtime.callValue(getNodeLocalContentRevision, cast ([source] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(version, _Runtime.field(textData, 'lastContentId')), function():Dynamic return cast !_Runtime.strictEquals(pixelRatio, _Runtime.field(textData, 'lastPixelRatio'))))) {
-      var measure:Dynamic = function(t:String, format:TextFormat) {
+      var measure:Dynamic = function(t:String, format:Dynamic) {
         _Runtime.setField(_Runtime.field(textData, 'ctx'), 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
         return cast _Runtime.field(_Runtime.callProperty(_Runtime.field(textData, 'ctx'), 'measureText', cast ([t] : Array<Dynamic>)), 'width');
       };

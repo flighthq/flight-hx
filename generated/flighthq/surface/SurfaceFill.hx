@@ -4,14 +4,12 @@ package flighthq.surface;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
-import flighthq.types.Surface;
-import flighthq.types.SurfaceRegion;
 
 @:expose("flighthq.surface.SurfaceFill")
 class SurfaceFill {
   public static var _floodFillVisited__surfaceFill:Null<Dynamic> = _Runtime.explicitNull();
 
-  public static function fillSurfaceRectangle(dest:SurfaceRegion, color:Float):Void {
+  public static function fillSurfaceRectangle(dest:Dynamic, color:Float):Void {
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
@@ -44,7 +42,7 @@ class SurfaceFill {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function floodFillSurface(out:Surface, x:Float, y:Float, color:Float):Void {
+  public static function floodFillSurface(out:Dynamic, x:Float, y:Float, color:Float):Void {
     var fillR:Dynamic = cast _Runtime.UNDEFINED;
     var fillG:Dynamic = cast _Runtime.UNDEFINED;
     var fillB:Dynamic = cast _Runtime.UNDEFINED;

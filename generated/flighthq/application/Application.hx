@@ -8,15 +8,12 @@ import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.connectSignal;
 import flighthq.signals.Slot.disconnectSignal;
-import flighthq.types.Application;
 import flighthq.types.ApplicationLoopOptions;
 import flighthq.types.ApplicationWindow;
 import flighthq.types.ApplicationWindow.WindowBackend;
 import flighthq.types.ApplicationWindow.WindowBounds;
 import flighthq.types.ApplicationWindow.WindowOptions;
 import flighthq.types.LoopBackend;
-import flighthq.types.Matrix;
-import flighthq.types.RenderState;
 
 typedef LoopState__application = { var fixedAccumulator:Float; var fpsBuffer:Array<Float>; var fpsHead:Float; var frameHandle:Dynamic; var frameRateAccumulated:Float; var lastTime:Float; var maxDeltaTime:Float; };
 
@@ -37,7 +34,7 @@ class Application {
 
   public static final _mainWindows__application:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  public static function attachApplicationExit(app:Application):Void {
+  public static function attachApplicationExit(app:Dynamic):Void {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     var handler:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
@@ -47,7 +44,7 @@ class Application {
     _Runtime.callProperty(observers, 'set', cast ([Application.kExit__application, function() return _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'removeEventListener', cast (['beforeunload', handler] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  public static function attachApplicationLifecycle(app:Application, win:ApplicationWindow):Void {
+  public static function attachApplicationLifecycle(app:Dynamic, win:ApplicationWindow):Void {
     var kLifecycle:Dynamic = cast _Runtime.UNDEFINED;
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     var onDeactivate:Dynamic = cast _Runtime.UNDEFINED;
@@ -103,7 +100,7 @@ class Application {
     _Runtime.callValue(Facade_Application_flighthq_application_Window.attachWindowRenderContext, cast ([win, canvas] : Array<Dynamic>));
   }
 
-  public static function attachWindowRenderState(win:ApplicationWindow, state:RenderState, canvas:Dynamic):Void {
+  public static function attachWindowRenderState(win:ApplicationWindow, state:Dynamic, canvas:Dynamic):Void {
     _Runtime.callValue(Facade_Application_flighthq_application_Window.attachWindowRenderState, cast ([win, state, canvas] : Array<Dynamic>));
   }
 
@@ -124,12 +121,12 @@ class Application {
     return cast null;
   }
 
-  public static function computeWindowDeviceTransform(win:ApplicationWindow, out:Matrix):Matrix {
+  public static function computeWindowDeviceTransform(win:ApplicationWindow, out:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Application_flighthq_application_Window.computeWindowDeviceTransform, cast ([win, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createApplication():Application {
+  public static function createApplication():Dynamic {
     return cast { deltaTime: 0.0, elapsedTime: 0.0, frameCount: 0.0, interpolationAlpha: 1.0, isRunning: false, onActivate: null, onDeactivate: null, onError: null, onExit: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onFixedUpdate: null, onRender: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onUpdate: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), windows: cast ([] : Array<Dynamic>) };
     return cast null;
   }
@@ -163,7 +160,7 @@ class Application {
 
   public static final DEFAULT_MAX_UPDATES_PER_FRAME__application:Dynamic = 5.0;
 
-  public static function detachApplicationExit(app:Application):Void {
+  public static function detachApplicationExit(app:Dynamic):Void {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
     _Runtime.callOptionalValue(_Runtime.callProperty(observers, 'get', cast ([Application.kExit__application] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
@@ -210,7 +207,7 @@ class Application {
     _Runtime.callValue(Facade_Application_flighthq_application_Window.detachWindowVisibility, cast ([win] : Array<Dynamic>));
   }
 
-  public static function disposeApplication(app:Application):Void {
+  public static function disposeApplication(app:Dynamic):Void {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
     for (cleanup in _Runtime.iterable(_Runtime.callProperty(observers, 'values', cast ([] : Array<Dynamic>)))) {
@@ -224,7 +221,7 @@ class Application {
     _Runtime.callValue(Facade_Application_flighthq_application_Window.disposeApplicationWindow, cast ([win] : Array<Dynamic>));
   }
 
-  public static function enableApplicationLifecycleSignals(app:Application):Void {
+  public static function enableApplicationLifecycleSignals(app:Dynamic):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(app, 'onActivate'), null))) { _Runtime.setField(app, 'onActivate', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(app, 'onDeactivate'), null))) { _Runtime.setField(app, 'onDeactivate', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(app, 'onError'), null))) { _Runtime.setField(app, 'onError', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))); }
@@ -249,20 +246,20 @@ class Application {
     _Runtime.callValue(Facade_Application_flighthq_application_Window.focusWindow, cast ([win] : Array<Dynamic>));
   }
 
-  public static function forEachApplicationWindow(app:Application, fn:Dynamic):Void {
+  public static function forEachApplicationWindow(app:Dynamic, fn:Dynamic):Void {
     for (win in _Runtime.iterable(_Runtime.field(app, 'windows'))) {
       _Runtime.callValue(fn, cast ([win] : Array<Dynamic>));
     }
   }
 
-  public static function getApplicationFrameRate(app:Application):Float {
+  public static function getApplicationFrameRate(app:Dynamic):Float {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var buf:Dynamic = cast _Runtime.UNDEFINED;
     var len:Dynamic = cast _Runtime.UNDEFINED;
     var total:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var avgDelta:Dynamic = cast _Runtime.UNDEFINED;
-    state = _Runtime.callProperty(Application._applicationLoopState__application, 'get', cast ([(cast app : Application)] : Array<Dynamic>));
+    state = _Runtime.callProperty(Application._applicationLoopState__application, 'get', cast ([(cast app : Dynamic)] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(state, 'fpsBuffer'), 'length'), 2.0, '<')))) { return cast 0.0; }
     buf = _Runtime.field(state, 'fpsBuffer');
     len = _Runtime.field(buf, 'length');
@@ -284,12 +281,12 @@ class Application {
     return cast null;
   }
 
-  public static function getApplicationMainWindow(app:Application):Null<ApplicationWindow> {
-    return cast _Runtime.coalesce(_Runtime.coalesce(_Runtime.callProperty(Application._mainWindows__application, 'get', cast ([(cast app : Application)] : Array<Dynamic>)), function():Dynamic return cast _Runtime.getIndex(_Runtime.field(app, 'windows'), 0.0)), function():Dynamic return cast null);
+  public static function getApplicationMainWindow(app:Dynamic):Null<ApplicationWindow> {
+    return cast _Runtime.coalesce(_Runtime.coalesce(_Runtime.callProperty(Application._mainWindows__application, 'get', cast ([(cast app : Dynamic)] : Array<Dynamic>)), function():Dynamic return cast _Runtime.getIndex(_Runtime.field(app, 'windows'), 0.0)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function getApplicationObservers__application(app:Application):Dynamic {
+  public static function getApplicationObservers__application(app:Dynamic):Dynamic {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callProperty(Application._applicationObservers__application, 'get', cast ([app] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(observers, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -300,7 +297,7 @@ class Application {
     return cast null;
   }
 
-  public static function getApplicationWindows(app:Application):Array<ApplicationWindow> {
+  public static function getApplicationWindows(app:Dynamic):Array<ApplicationWindow> {
     return cast _Runtime.slice(_Runtime.field(app, 'windows'), 0, null);
     return cast null;
   }
@@ -330,7 +327,7 @@ class Application {
     _Runtime.callValue(Facade_Application_flighthq_application_Window.hideWindow, cast ([win] : Array<Dynamic>));
   }
 
-  public static function isApplicationRunning(app:Application):Bool {
+  public static function isApplicationRunning(app:Dynamic):Bool {
     return cast _Runtime.field(app, 'isRunning');
     return cast null;
   }
@@ -359,7 +356,7 @@ class Application {
     return cast null;
   }
 
-  public static function pauseApplicationLoop(app:Application):Void {
+  public static function pauseApplicationLoop(app:Dynamic):Void {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(app, 'isRunning')), function():Dynamic return cast _Runtime.callProperty(observers, 'has', cast ([Application.kPaused__application] : Array<Dynamic>))))) { return; }
@@ -382,7 +379,7 @@ class Application {
     }
   }
 
-  public static function registerApplicationWindow(app:Application, win:ApplicationWindow):Void {
+  public static function registerApplicationWindow(app:Dynamic, win:ApplicationWindow):Void {
     if (_Runtime.truthy(_Runtime.includes(_Runtime.field(app, 'windows'), win))) { return; }
     _Runtime.callProperty(_Runtime.field(app, 'windows'), 'push', cast ([win] : Array<Dynamic>));
   }
@@ -405,7 +402,7 @@ class Application {
     _Runtime.callValue(Facade_Application_flighthq_application_Window.restoreWindow, cast ([win] : Array<Dynamic>));
   }
 
-  public static function resumeApplicationLoop(app:Application):Void {
+  public static function resumeApplicationLoop(app:Dynamic):Void {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     var loopState:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
@@ -422,7 +419,7 @@ class Application {
 
   public static final ROLLING_FPS_WINDOW__application:Dynamic = 60.0;
 
-  public static function setApplicationMainWindow(app:Application, win:ApplicationWindow):Void {
+  public static function setApplicationMainWindow(app:Dynamic, win:ApplicationWindow):Void {
     _Runtime.callValue(registerApplicationWindow, cast ([app, win] : Array<Dynamic>));
     _Runtime.callProperty(Application._mainWindows__application, 'set', cast ([app, win] : Array<Dynamic>));
   }
@@ -503,7 +500,7 @@ class Application {
     _Runtime.callValue(Facade_Application_flighthq_application_Window.showWindow, cast ([win] : Array<Dynamic>));
   }
 
-  public static function startApplicationLoop(app:Application, ?options:ApplicationLoopOptions):Void {
+  public static function startApplicationLoop(app:Dynamic, ?options:ApplicationLoopOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     var backend:Dynamic = cast _Runtime.UNDEFINED;
@@ -603,7 +600,7 @@ class Application {
     _Runtime.callProperty(observers, 'set', cast ([Application.kLoop__application, function() return _Runtime.callProperty(backend, 'cancelFrame', cast ([_Runtime.field(loopState, 'frameHandle')] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  public static function stepApplicationLoop(app:Application, deltaTime:Float):Void {
+  public static function stepApplicationLoop(app:Dynamic, deltaTime:Float):Void {
     var loopState:Dynamic = cast _Runtime.UNDEFINED;
     var maxDelta:Dynamic = cast _Runtime.UNDEFINED;
     var clamped:Dynamic = cast _Runtime.UNDEFINED;
@@ -632,7 +629,7 @@ class Application {
     }
   }
 
-  public static function stopApplicationLoop(app:Application):Void {
+  public static function stopApplicationLoop(app:Dynamic):Void {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
     _Runtime.callOptionalValue(_Runtime.callProperty(observers, 'get', cast ([Application.kLoop__application] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
@@ -642,7 +639,7 @@ class Application {
     _Runtime.setField(app, 'isRunning', false);
   }
 
-  public static function unregisterApplicationWindow(app:Application, win:ApplicationWindow):Void {
+  public static function unregisterApplicationWindow(app:Dynamic, win:ApplicationWindow):Void {
     var idx:Dynamic = cast _Runtime.UNDEFINED;
     idx = _Runtime.callProperty(_Runtime.field(app, 'windows'), 'indexOf', cast ([win] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(idx, -1.0))) { _Runtime.splice(_Runtime.field(app, 'windows'), Std.int(idx), Std.int(1.0), []); }

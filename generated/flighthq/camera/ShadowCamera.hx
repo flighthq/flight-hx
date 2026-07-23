@@ -6,12 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.camera.Camera.setCameraViewMatrix4FromLookAt;
 import flighthq.camera.Projection.createOrthographicProjection;
 import flighthq.types.Aabb.AabbLike;
-import flighthq.types.Camera;
 import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.camera.ShadowCamera")
 class ShadowCamera {
-  public static function configureDirectionalShadowCamera(camera:Camera, lightDirection:Vector3Like, sceneBounds:AabbLike):Void {
+  public static function configureDirectionalShadowCamera(camera:Dynamic, lightDirection:Vector3Like, sceneBounds:AabbLike):Void {
     var min:Dynamic = cast _Runtime.UNDEFINED;
     var max:Dynamic = cast _Runtime.UNDEFINED;
     var cx:Dynamic = cast _Runtime.UNDEFINED;

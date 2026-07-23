@@ -4,10 +4,9 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
-import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
-typedef WgpuRenderEffectContext = { var state:WgpuRenderState; var source:WgpuRenderTarget; var dest:WgpuRenderTarget; var pool:WgpuRenderTargetPool; var sceneDepthTexture:Null<Dynamic>; var sceneVelocityTexture:Null<Dynamic>; };
+typedef WgpuRenderEffectContext = { var state:Dynamic; var source:Dynamic; var dest:Dynamic; var pool:Dynamic; var sceneDepthTexture:Null<Dynamic>; var sceneVelocityTexture:Null<Dynamic>; };
 
 typedef WgpuRenderEffectRunner = Dynamic;
 
-typedef WgpuRenderEffectPipeline = { var options:RenderEffectPipelineOptions; var sceneTarget:Null<WgpuRenderTarget>; var pool:WgpuRenderTargetPool; var lutCache:ColorLutCache; var lutTexture:WgpuColorLutTextureCache; var velocityTexture:Null<Dynamic>; };
+typedef WgpuRenderEffectPipeline = { var options:RenderEffectPipelineOptions; var sceneTarget:Null<Dynamic>; var pool:Dynamic; var lutCache:Dynamic; var lutTexture:WgpuColorLutTextureCache; var velocityTexture:Null<Dynamic>; };

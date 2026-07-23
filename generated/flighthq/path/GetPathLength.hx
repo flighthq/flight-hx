@@ -4,11 +4,10 @@ package flighthq.path;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
-import flighthq.types.Path;
 
 @:expose("flighthq.path.GetPathLength")
 class GetPathLength {
-  public static function getPathLength(path:Path, tolerance:Dynamic = 0.25):Float {
+  public static function getPathLength(path:Dynamic, tolerance:Dynamic = 0.25):Float {
     var contours:Dynamic = cast _Runtime.UNDEFINED;
     var total:Dynamic = cast _Runtime.UNDEFINED;
     contours = _Runtime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));

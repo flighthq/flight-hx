@@ -6,13 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
-import flighthq.types.LensDirtEffect;
 
 @:expose("flighthq.effectsGl.GlLensDirtEffect")
 class GlLensDirtEffect {
-  public static function applyLensDirtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensDirtEffect):Void {
+  public static function applyLensDirtEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var threshold:Dynamic = cast _Runtime.UNDEFINED;
     var seed:Dynamic = cast _Runtime.UNDEFINED;
@@ -29,7 +26,7 @@ class GlLensDirtEffect {
   }
 
   public static final defaultGlLensDirtEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyLensDirtEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : LensDirtEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyLensDirtEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static final LENS_DIRT_FRAGMENT_SRC__glLensDirtEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_threshold;\nuniform float u_seed;\nout vec4 o_color;\nfloat dirtHash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }\nfloat dirtAmount(vec2 uv, float seed) {\n  float acc = 0.0;\n  for (int i = 0; i < 8; i++) {\n    float fi = float(i);\n    vec2 c = vec2(dirtHash(vec2(fi, seed)), dirtHash(vec2(fi + 9.0, seed)));\n    float r = 0.06 + 0.16 * dirtHash(vec2(fi + 3.0, seed));\n    float d = distance(uv, c) / r;\n    acc += smoothstep(1.0, 0.0, d) * (0.3 + 0.7 * dirtHash(vec2(fi + 5.0, seed)));\n  }\n  return clamp(acc, 0.0, 1.0);\n}\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float lum = dot(c.rgb, vec3(0.299, 0.587, 0.114));\n  float bright = max(0.0, lum - u_threshold);\n  float dirt = dirtAmount(v_texCoord, u_seed + 1.0);\n  o_color = vec4(c.rgb + bright * dirt * u_intensity * 2.0, c.a);\n}';

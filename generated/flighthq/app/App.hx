@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
-import flighthq.types.App;
 import flighthq.types.App.AppActivationPolicy;
 import flighthq.types.App.AppBackend;
 import flighthq.types.App.AppLoginItem;
@@ -23,7 +22,7 @@ class App {
     _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'addRecentDocument', cast ([path] : Array<Dynamic>));
   }
 
-  public static function attachApp(app:App):Void {
+  public static function attachApp(app:Dynamic):Void {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     var unsubscribeActivate:Dynamic = cast _Runtime.UNDEFINED;
     var unsubscribeAllWindowsClosed:Dynamic = cast _Runtime.UNDEFINED;
@@ -73,7 +72,7 @@ class App {
     _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'clearRecentDocuments', cast ([] : Array<Dynamic>));
   }
 
-  public static function createApp():App {
+  public static function createApp():Dynamic {
     return cast { onActivate: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onAllWindowsClosed: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onOpenFile: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onQuitRequest: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onReady: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onSecondInstance: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
@@ -207,7 +206,7 @@ class App {
     return cast null;
   }
 
-  public static function detachApp(app:App):Void {
+  public static function detachApp(app:Dynamic):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
     unsubscribe = _Runtime.callProperty(App._subscriptions__app, 'get', cast ([app] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -216,7 +215,7 @@ class App {
     }
   }
 
-  public static function disposeApp(app:App):Void {
+  public static function disposeApp(app:Dynamic):Void {
     _Runtime.callValue(detachApp, cast ([app] : Array<Dynamic>));
   }
 

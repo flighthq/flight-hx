@@ -5,12 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.surface.Surface.createSurface;
-import flighthq.types.Surface;
-import flighthq.types.WgpuRenderState;
 
 @:expose("flighthq.renderWgpu.WgpuSurface")
 class WgpuSurface {
-  public static function acquireWgpuFrameCaptureTexture(state:WgpuRenderState):Null<Dynamic> {
+  public static function acquireWgpuFrameCaptureTexture(state:Dynamic):Null<Dynamic> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var width:Dynamic = cast _Runtime.UNDEFINED;
     var height:Dynamic = cast _Runtime.UNDEFINED;
@@ -31,8 +29,8 @@ class WgpuSurface {
     return cast null;
   }
 
-  public static function createSurfaceFromWgpuRenderState(state:WgpuRenderState):flighthq._internal._Promise<Surface> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Surface> {
+  public static function createSurfaceFromWgpuRenderState(state:Dynamic):flighthq._internal._Promise<Dynamic> {
+    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
       var runtime:Dynamic = cast _Runtime.UNDEFINED;
       var buffer:Dynamic = cast _Runtime.UNDEFINED;
       var width:Dynamic = cast _Runtime.UNDEFINED;
@@ -81,11 +79,11 @@ class WgpuSurface {
     })();
   }
 
-  public static function enableWgpuFrameCapture(state:WgpuRenderState):Void {
+  public static function enableWgpuFrameCapture(state:Dynamic):Void {
     _Runtime.setField(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'frameCaptureEnabled', true);
   }
 
-  public static function encodeWgpuFrameCapture(state:WgpuRenderState, encoder:Dynamic):Void {
+  public static function encodeWgpuFrameCapture(state:Dynamic, encoder:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var width:Dynamic = cast _Runtime.UNDEFINED;

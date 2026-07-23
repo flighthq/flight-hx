@@ -7,8 +7,6 @@ import flighthq.image.ImageResource.hasImageResourcePixels;
 import flighthq.renderGl.GlDraw.bindGlImageResourceTexture;
 import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
 import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
-import flighthq.types.GlRenderState;
-import flighthq.types.Texture;
 
 typedef GlDebugProgram = Dynamic;
 
@@ -16,7 +14,7 @@ typedef GlDebugDefineKey = { var hasNormalMap:Bool; var mode:String; };
 
 @:expose("flighthq.sceneGl.GlDebugPrelude")
 class GlDebugPrelude {
-  public static function bindGlDebugNormalMap(state:GlRenderState, program:GlDebugProgram, normalMap:Null<Texture>, normalScale:Float):Void {
+  public static function bindGlDebugNormalMap(state:Dynamic, program:GlDebugProgram, normalMap:Null<Dynamic>, normalScale:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locNormalScale'), normalScale] : Array<Dynamic>));
@@ -27,7 +25,7 @@ class GlDebugPrelude {
     }
   }
 
-  public static function bindGlDebugRange(state:GlRenderState, program:GlDebugProgram, near:Float, far:Float):Void {
+  public static function bindGlDebugRange(state:Dynamic, program:GlDebugProgram, near:Float, far:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locNear'), near] : Array<Dynamic>));
@@ -46,7 +44,7 @@ class GlDebugPrelude {
     return cast null;
   }
 
-  public static function ensureGlDebugProgram(state:GlRenderState, key:GlDebugDefineKey):GlDebugProgram {
+  public static function ensureGlDebugProgram(state:Dynamic, key:GlDebugDefineKey):GlDebugProgram {
     return cast _Runtime.callValue(ensureGlSceneProgram, cast ([state, 'debug:' + Std.string(_Runtime.callValue(buildGlDebugDefineKey, cast ([key] : Array<Dynamic>))) + '', function(gl:Dynamic) return _Runtime.callValue(compileGlDebugProgram, cast ([gl, key] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }

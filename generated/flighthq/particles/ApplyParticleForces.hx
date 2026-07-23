@@ -7,11 +7,8 @@ import flighthq.particles.ParticleEmitterState.PARTICLE_VELOCITY_STRIDE;
 import flighthq.types.AttractorForce;
 import flighthq.types.DragForce;
 import flighthq.types.ForceFalloff;
-import flighthq.types.ParticleEmitter;
-import flighthq.types.ParticleEmitterState;
 import flighthq.types.ParticleForce;
 import flighthq.types.ParticleObject;
-import flighthq.types.ParticleObjectsState;
 import flighthq.types.TurbulenceForce;
 import flighthq.types.VortexForce;
 import flighthq.types.WindForce;
@@ -20,7 +17,7 @@ import flighthq.types.WindForce;
 class ApplyParticleForces {
   public static final accel__applyParticleForces:Array<Float> = cast ([0.0, 0.0, 0.0] : Array<Dynamic>);
 
-  public static function applyParticleForces(emitter:ParticleEmitter, state:ParticleEmitterState, forces:Array<ParticleForce>, deltaTime:Float):Void {
+  public static function applyParticleForces(emitter:Dynamic, state:Dynamic, forces:Array<ParticleForce>, deltaTime:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var transforms:Dynamic = cast _Runtime.UNDEFINED;
@@ -50,7 +47,7 @@ class ApplyParticleForces {
     }
   }
 
-  public static function applyParticleObjectForces(objects:Array<ParticleObject>, state:ParticleObjectsState, forces:Array<ParticleForce>, deltaTime:Float):Void {
+  public static function applyParticleObjectForces(objects:Array<ParticleObject>, state:Dynamic, forces:Array<ParticleForce>, deltaTime:Float):Void {
     var velocities:Dynamic = cast _Runtime.UNDEFINED;
     var lifetimes:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(deltaTime, 0.0, '<='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(forces, 'length'), 0.0)))) { return; }

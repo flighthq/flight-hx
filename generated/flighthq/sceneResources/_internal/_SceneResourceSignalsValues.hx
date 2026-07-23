@@ -7,7 +7,6 @@ import flighthq.sceneResources.SceneResourceResolver;
 import flighthq.sceneResources.SceneResourceSignals;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.SceneResourceRef;
-import flighthq.types.Texture;
 
 @:expose("flighthq.sceneResources._internal._SceneResourceSignalsValues")
 class _SceneResourceSignalsValues {

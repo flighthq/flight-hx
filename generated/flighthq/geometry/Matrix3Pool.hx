@@ -5,11 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix3.createMatrix3;
 import flighthq.geometry.Matrix3.setMatrix3Identity;
-import flighthq.types.Matrix3;
 
 @:expose("flighthq.geometry.Matrix3Pool")
 class Matrix3Pool {
-  public static function acquireIdentityMatrix3():Matrix3 {
+  public static function acquireIdentityMatrix3():Dynamic {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     m = _Runtime.callValue(acquireMatrix3, cast ([] : Array<Dynamic>));
     _Runtime.callValue(setMatrix3Identity, cast ([m] : Array<Dynamic>));
@@ -17,10 +16,10 @@ class Matrix3Pool {
     return cast null;
   }
 
-  public static function acquireMatrix3():Matrix3 {
-    var m:Matrix3 = cast _Runtime.UNDEFINED;
+  public static function acquireMatrix3():Dynamic {
+    var m:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(Matrix3Pool.pool__matrix3Pool, 'length'), 0.0, '>'))) {
-      (m = cast ((cast _Runtime.callProperty(Matrix3Pool.pool__matrix3Pool, 'pop', cast ([] : Array<Dynamic>)) : Matrix3) : Dynamic));
+      (m = cast ((cast _Runtime.callProperty(Matrix3Pool.pool__matrix3Pool, 'pop', cast ([] : Array<Dynamic>)) : Dynamic) : Dynamic));
     } else {
       (m = cast (_Runtime.callValue(createMatrix3, cast ([] : Array<Dynamic>)) : Dynamic));
     }
@@ -32,10 +31,10 @@ class Matrix3Pool {
     _Runtime.setLength(Matrix3Pool.pool__matrix3Pool, 0.0);
   }
 
-  public static function releaseMatrix3(m:Matrix3):Void {
+  public static function releaseMatrix3(m:Dynamic):Void {
     if (_Runtime.truthy(!_Runtime.truthy(m))) { return; }
     _Runtime.callProperty(Matrix3Pool.pool__matrix3Pool, 'push', cast ([m] : Array<Dynamic>));
   }
 
-  public static final pool__matrix3Pool:Array<Matrix3> = cast ([] : Array<Dynamic>);
+  public static final pool__matrix3Pool:Array<Dynamic> = cast ([] : Array<Dynamic>);
 }

@@ -4,23 +4,22 @@ package flighthq.animation;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.AnimationInterpolation;
-import flighthq.types.AnimationTrack;
 import flighthq.types.AnimationTrackValidationDiagnostic;
 import flighthq.types._internal._AnimationInterpolationValues.AnimationInterpolationLinear;
 
 @:expose("flighthq.animation.AnimationTrack")
 class AnimationTrack {
-  public static function cloneAnimationTrack(track:AnimationTrack):AnimationTrack {
+  public static function cloneAnimationTrack(track:Dynamic):Dynamic {
     return cast { components: _Runtime.field(track, 'components'), easing: _Runtime.field(track, 'easing'), interpolation: _Runtime.field(track, 'interpolation'), quaternion: _Runtime.field(track, 'quaternion'), times: _Runtime.callValue(AnimationTrack.cloneNumberBuffer__animationTrack, cast ([_Runtime.field(track, 'times')] : Array<Dynamic>)), values: _Runtime.callValue(AnimationTrack.cloneNumberBuffer__animationTrack, cast ([_Runtime.field(track, 'values')] : Array<Dynamic>)) };
     return cast null;
   }
 
-  public static function createAnimationTrack(opts:{ var times:Dynamic; var values:Dynamic; @:optional var components:Float; @:optional var interpolation:AnimationInterpolation; @:optional var quaternion:Bool; @:optional var easing:Dynamic; }):AnimationTrack {
+  public static function createAnimationTrack(opts:{ var times:Dynamic; var values:Dynamic; @:optional var components:Float; @:optional var interpolation:AnimationInterpolation; @:optional var quaternion:Bool; @:optional var easing:Dynamic; }):Dynamic {
     return cast { components: _Runtime.coalesce(_Runtime.field(opts, 'components'), function():Dynamic return cast 1.0), easing: _Runtime.coalesce(_Runtime.field(opts, 'easing'), function():Dynamic return cast null), interpolation: _Runtime.coalesce(_Runtime.field(opts, 'interpolation'), function():Dynamic return cast AnimationInterpolationLinear), quaternion: _Runtime.coalesce(_Runtime.field(opts, 'quaternion'), function():Dynamic return cast false), times: _Runtime.field(opts, 'times'), values: _Runtime.field(opts, 'values') };
     return cast null;
   }
 
-  public static function sampleAnimationTrack(out:Dynamic, track:AnimationTrack, t:Float):Void {
+  public static function sampleAnimationTrack(out:Dynamic, track:Dynamic, t:Float):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var components:Dynamic = cast _Runtime.UNDEFINED;
     var times:Dynamic = cast _Runtime.UNDEFINED;
@@ -92,7 +91,7 @@ class AnimationTrack {
     }
   }
 
-  public static function trimAnimationTrack(track:AnimationTrack, startTime:Float, endTime:Float):AnimationTrack {
+  public static function trimAnimationTrack(track:Dynamic, startTime:Float, endTime:Float):Dynamic {
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
     var components:Dynamic = cast _Runtime.UNDEFINED;
     var times:Dynamic = cast _Runtime.UNDEFINED;
@@ -128,7 +127,7 @@ class AnimationTrack {
     return cast null;
   }
 
-  public static function validateAnimationTrack(track:AnimationTrack):Null<Array<AnimationTrackValidationDiagnostic>> {
+  public static function validateAnimationTrack(track:Dynamic):Null<Array<AnimationTrackValidationDiagnostic>> {
     var diagnostics:Array<AnimationTrackValidationDiagnostic> = cast _Runtime.UNDEFINED;
     var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
     var times:Dynamic = cast _Runtime.UNDEFINED;
@@ -172,7 +171,7 @@ class AnimationTrack {
     return cast null;
   }
 
-  public static function copyKeyframeValue__animationTrack(out:Dynamic, track:AnimationTrack, k:Float):Void {
+  public static function copyKeyframeValue__animationTrack(out:Dynamic, track:Dynamic, k:Float):Void {
     var off:Dynamic = cast _Runtime.UNDEFINED;
     off = _Runtime.callValue(AnimationTrack.keyframeValueOffset__animationTrack, cast ([track, k] : Array<Dynamic>));
     {
@@ -184,12 +183,12 @@ class AnimationTrack {
     }
   }
 
-  public static function keyframeStride__animationTrack(track:AnimationTrack):Float {
+  public static function keyframeStride__animationTrack(track:Dynamic):Float {
     return cast _Runtime.select(_Runtime.strictEquals(_Runtime.field(track, 'interpolation'), 'Cubic'), function():Dynamic return cast (_Runtime.field(track, 'components') * 3.0), function():Dynamic return cast _Runtime.field(track, 'components'));
     return cast null;
   }
 
-  public static function keyframeValueOffset__animationTrack(track:AnimationTrack, k:Float):Float {
+  public static function keyframeValueOffset__animationTrack(track:Dynamic, k:Float):Float {
     var stride:Dynamic = cast _Runtime.UNDEFINED;
     stride = _Runtime.callValue(AnimationTrack.keyframeStride__animationTrack, cast ([track] : Array<Dynamic>));
     return cast _Runtime.select(_Runtime.strictEquals(_Runtime.field(track, 'interpolation'), 'Cubic'), function():Dynamic return cast ((k * stride) + _Runtime.field(track, 'components')), function():Dynamic return cast (k * stride));
@@ -216,7 +215,7 @@ class AnimationTrack {
     }
   }
 
-  public static function sampleCubicSegment__animationTrack(out:Dynamic, track:AnimationTrack, i:Float, alpha:Float, dt:Float):Void {
+  public static function sampleCubicSegment__animationTrack(out:Dynamic, track:Dynamic, i:Float, alpha:Float, dt:Float):Void {
     var __destructure3:Dynamic = cast _Runtime.UNDEFINED;
     var components:Dynamic = cast _Runtime.UNDEFINED;
     var values:Dynamic = cast _Runtime.UNDEFINED;

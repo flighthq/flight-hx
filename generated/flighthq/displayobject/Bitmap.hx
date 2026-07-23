@@ -8,17 +8,15 @@ import flighthq.displayobject.DisplayObject.createDisplayObjectRuntime;
 import flighthq.displayobject.DisplayObject.getDisplayObjectRuntime;
 import flighthq.node.Revision.invalidateNodeLocalBounds;
 import flighthq.node.Revision.invalidateNodeLocalContent;
-import flighthq.types.Bitmap;
 import flighthq.types.Bitmap.BitmapData;
 import flighthq.types.Bitmap.BitmapRuntime;
 import flighthq.types.MethodsOf;
 import flighthq.types.PartialNode;
-import flighthq.types.Rectangle;
 import flighthq.types._internal._BitmapValues.BitmapKind;
 
 @:expose("flighthq.displayobject.Bitmap")
 class Bitmap {
-  public static function computeBitmapLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+  public static function computeBitmapLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     var bitmapData:BitmapData = cast _Runtime.UNDEFINED;
     bitmapData = (cast _Runtime.field(source, 'data') : BitmapData);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(bitmapData, 'sourceRectangle'), null))) {
@@ -30,8 +28,8 @@ class Bitmap {
     } }
   }
 
-  public static function createBitmap(?obj:PartialNode<Bitmap>):Bitmap {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([BitmapKind, obj, createBitmapData, createBitmapRuntime] : Array<Dynamic>)) : Bitmap);
+  public static function createBitmap(?obj:PartialNode<Dynamic>):Dynamic {
+    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([BitmapKind, obj, createBitmapData, createBitmapRuntime] : Array<Dynamic>)) : Dynamic);
     return cast null;
   }
 
@@ -45,12 +43,12 @@ class Bitmap {
     return cast null;
   }
 
-  public static function getBitmapRuntime(source:Bitmap):BitmapRuntime {
+  public static function getBitmapRuntime(source:Dynamic):BitmapRuntime {
     return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : BitmapRuntime);
     return cast null;
   }
 
-  public static function setBitmapImage(source:Bitmap, value:Dynamic):Void {
+  public static function setBitmapImage(source:Dynamic, value:Dynamic):Void {
     _Runtime.setField(_Runtime.field(source, 'data'), 'image', value);
     _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
     _Runtime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));

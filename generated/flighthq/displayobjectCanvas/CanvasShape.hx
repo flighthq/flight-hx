@@ -7,11 +7,9 @@ import flighthq.displayobjectCanvas.CanvasDisplayObject.drawCanvasDisplayObject;
 import flighthq.displayobjectCanvas.CanvasShapeRegistry.getCanvasShapeCommand;
 import flighthq.displayobjectCanvas.CanvasTransform.setCanvasTransform;
 import flighthq.render.Renderer.noopRendererData;
-import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasShapeDrawState;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Shape;
 
 @:expose("flighthq.displayobjectCanvas.CanvasShape")
 class CanvasShape {
@@ -21,7 +19,7 @@ class CanvasShape {
     var commands:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(drawCanvasDisplayObject, cast ([state, renderProxy] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : Shape);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     __destructure0 = _Runtime.field(source, 'data');
     commands = _Runtime.field(__destructure0, 'commands');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0))) { return; }

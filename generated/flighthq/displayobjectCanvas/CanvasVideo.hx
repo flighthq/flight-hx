@@ -6,10 +6,8 @@ import flighthq._internal._Runtime;
 import flighthq.displayobjectCanvas.CanvasDisplayObject.drawCanvasDisplayObject;
 import flighthq.displayobjectCanvas.CanvasTransform.setCanvasTransform;
 import flighthq.render.Renderer.noopRendererData;
-import flighthq.types.CanvasRenderState;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Video;
 
 @:expose("flighthq.displayobjectCanvas.CanvasVideo")
 class CanvasVideo {
@@ -17,7 +15,7 @@ class CanvasVideo {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var element:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(drawCanvasDisplayObject, cast ([state, renderProxy] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : Video);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     element = _Runtime.optionalField(_Runtime.field(_Runtime.field(source, 'data'), 'source'), 'element');
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(element, null)), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'readyState'), 2.0, '>=')))) {
       var context:Dynamic = _Runtime.field(state, 'context');

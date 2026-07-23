@@ -8,16 +8,15 @@ import flighthq.types.Cursor;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.Node.NodeRuntime;
 import flighthq.types.NodeInteraction.HitArea;
-import flighthq.types.NodeInteractionState;
 
 @:expose("flighthq.interaction.NodeInteractionState")
 class NodeInteractionState {
-  public static function createNodeInteractionState():NodeInteractionState {
+  public static function createNodeInteractionState():Dynamic {
     return cast { cursor: null, focusable: false, hitArea: null, hitTestEnabled: false, tabIndex: -1.0 };
     return cast null;
   }
 
-  public static function enableNodeInteractionState(source:NodeAny):NodeInteractionState {
+  public static function enableNodeInteractionState(source:NodeAny):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : NodeRuntime<NodeAny>);
     return cast _Runtime.setField(runtime, 'interactionState', (_Runtime.field(runtime, 'interactionState') ?? _Runtime.callValue(createNodeInteractionState, cast ([] : Array<Dynamic>))));
@@ -34,7 +33,7 @@ class NodeInteractionState {
     return cast null;
   }
 
-  public static function getNodeInteractionState(source:NodeAny):Null<NodeInteractionState> {
+  public static function getNodeInteractionState(source:NodeAny):Null<Dynamic> {
     return cast _Runtime.field((cast _Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : NodeRuntime<NodeAny>), 'interactionState');
     return cast null;
   }

@@ -5,32 +5,31 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity.Kind;
-import flighthq.types.Material;
 
 @:expose("flighthq.materials.Material")
 class Material {
-  public static function cloneMaterial(source:Material):Material {
+  public static function cloneMaterial(source:Dynamic):Dynamic {
     var clone:Dynamic = cast _Runtime.UNDEFINED;
-    clone = (cast _Runtime.callValue(createEntity, cast ([{ kind: _Runtime.field(source, 'kind') }] : Array<Dynamic>)) : Material);
+    clone = (cast _Runtime.callValue(createEntity, cast ([{ kind: _Runtime.field(source, 'kind') }] : Array<Dynamic>)) : Dynamic);
     _Runtime.callValue(Material.copyMaterialFields__material, cast ([clone, source, _Runtime.field(source, 'kind')] : Array<Dynamic>));
     return cast clone;
     return cast null;
   }
 
-  public static function copyMaterial(out:Material, source:Material):Void {
+  public static function copyMaterial(out:Dynamic, source:Dynamic):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(out, source))) { return; }
     _Runtime.callValue(Material.copyMaterialFields__material, cast ([out, source, _Runtime.field(source, 'kind')] : Array<Dynamic>));
   }
 
-  public static function createMaterial(kind:Kind):Material {
+  public static function createMaterial(kind:Kind):Dynamic {
     var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createEntity, cast ([{ kind: kind }] : Array<Dynamic>)) : Material);
+    material = (cast _Runtime.callValue(createEntity, cast ([{ kind: kind }] : Array<Dynamic>)) : Dynamic);
     _Runtime.setField(material, 'name', null);
     return cast material;
     return cast null;
   }
 
-  public static function equalsMaterial(a:Material, b:Material):Bool {
+  public static function equalsMaterial(a:Dynamic, b:Dynamic):Bool {
     var aFields:Dynamic = cast _Runtime.UNDEFINED;
     var bFields:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
@@ -45,7 +44,7 @@ class Material {
     return cast null;
   }
 
-  public static function copyMaterialFields__material(dst:Material, src:Material, kind:Kind):Void {
+  public static function copyMaterialFields__material(dst:Dynamic, src:Dynamic, kind:Kind):Void {
     var dstFields:Dynamic = cast _Runtime.UNDEFINED;
     var srcFields:Dynamic = cast _Runtime.UNDEFINED;
     dstFields = (cast (cast dst : Dynamic) : Dynamic);

@@ -7,18 +7,15 @@ import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
-import flighthq.types.BlurEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
-import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.effectsWgpu.WgpuBlurEffect")
 class WgpuBlurEffect {
-  public static function applyBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, effect:BlurEffect):Void {
+  public static function applyBlurEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, temp:Dynamic, effect:Dynamic):Void {
     _Runtime.callValue(applyGaussianBlurToWgpu, cast ([state, source, dest, temp, { blurX: _Runtime.field(effect, 'blurX'), blurY: _Runtime.field(effect, 'blurY') }] : Array<Dynamic>));
   }
 
-  public static function applyGaussianBlurToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
+  public static function applyGaussianBlurToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, temp:Dynamic, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
     var sigmaX:Dynamic = cast _Runtime.UNDEFINED;
     var sigmaY:Dynamic = cast _Runtime.UNDEFINED;
     var radiusX:Dynamic = cast _Runtime.UNDEFINED;
@@ -36,14 +33,14 @@ class WgpuBlurEffect {
     var temp:Dynamic = cast _Runtime.UNDEFINED;
     descriptor = { width: _Runtime.field(_Runtime.field(ctx, 'source'), 'width'), height: _Runtime.field(_Runtime.field(ctx, 'source'), 'height'), format: _Runtime.field(_Runtime.field(ctx, 'source'), 'format') };
     temp = _Runtime.callValue(acquireWgpuRenderTarget, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'pool'), descriptor] : Array<Dynamic>));
-    _Runtime.callValue(applyBlurEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), temp, (cast effect : BlurEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyBlurEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), temp, (cast effect : Dynamic)] : Array<Dynamic>));
     _Runtime.callValue(releaseWgpuRenderTarget, cast ([_Runtime.field(ctx, 'pool'), temp] : Array<Dynamic>));
   };
 
-  public static function applyWgpuGaussianBlurPass__wgpuBlurEffect(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, sigma:Float, radius:Float, dirX:Float, dirY:Float):Void {
+  public static function applyWgpuGaussianBlurPass__wgpuBlurEffect(state:Dynamic, source:Dynamic, dest:Dynamic, sigma:Float, radius:Float, dirX:Float, dirY:Float):Void {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'blur.gaussian', WgpuBlurEffect.GAUSSIAN_BLUR_WGSL__wgpuBlurEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : Dynamic), (cast dest : Dynamic), pipeline, function(f32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, (1.0 / _Runtime.field(source, 'width')));
       _Runtime.setIndex(f32, 1.0, (1.0 / _Runtime.field(source, 'height')));
       _Runtime.setIndex(f32, 2.0, dirX);

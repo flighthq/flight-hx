@@ -6,10 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.types.EmissiveModifier;
 import flighthq.types.EmissiveModifier.EmissiveModifierFacing;
 import flighthq.types.ModifierSlot;
-import flighthq.types.Texture;
 import flighthq.types._internal._EmissiveModifierValues.EmissiveModifierKind;
 
-typedef EmissiveModifierOptions = { var color:Float; @:optional var strength:Float; @:optional var mask:Texture; @:optional var facing:EmissiveModifierFacing; @:optional var facingSoftness:Float; };
+typedef EmissiveModifierOptions = { var color:Float; @:optional var strength:Float; @:optional var mask:Dynamic; @:optional var facing:EmissiveModifierFacing; @:optional var facingSoftness:Float; };
 
 @:expose("flighthq.shading.CreateEmissiveModifier")
 class CreateEmissiveModifier {

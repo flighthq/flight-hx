@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.KuwaharaEffect;
 
 @:expose("flighthq.effects.KuwaharaEffect")
 class KuwaharaEffect {
-  public static function createKuwaharaEffect(?options:Dynamic):KuwaharaEffect {
+  public static function createKuwaharaEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'KuwaharaEffect' }, options]);
     return cast null;

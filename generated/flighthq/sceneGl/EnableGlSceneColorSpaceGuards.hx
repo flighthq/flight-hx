@@ -5,17 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
-import flighthq.types.GlRenderState;
 import flighthq.types.Log.LogLevel;
 
 @:expose("flighthq.sceneGl.EnableGlSceneColorSpaceGuards")
 class EnableGlSceneColorSpaceGuards {
-  public static function areGlSceneColorSpaceGuardsEnabled(state:GlRenderState):Bool {
+  public static function areGlSceneColorSpaceGuardsEnabled(state:Dynamic):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'colorSpaceGuard'), null);
     return cast null;
   }
 
-  public static function enableGlSceneColorSpaceGuards(state:GlRenderState):Void {
+  public static function enableGlSceneColorSpaceGuards(state:Dynamic):Void {
     _Runtime.setField(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'colorSpaceGuard', EnableGlSceneColorSpaceGuards.warnGlSceneDrawnToCanvas__enableGlSceneColorSpaceGuards);
   }
 

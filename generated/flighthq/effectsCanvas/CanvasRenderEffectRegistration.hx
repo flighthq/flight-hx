@@ -35,7 +35,6 @@ import flighthq.effectsCanvas.CanvasToneMapEffect.defaultCanvasToneMapEffectRunn
 import flighthq.effectsCanvas.CanvasVignetteEffect.defaultCanvasVignetteEffectRunner;
 import flighthq.effectsCanvas.CanvasWhiteBalanceEffect.defaultCanvasWhiteBalanceEffectRunner;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
-import flighthq.types.CanvasRenderState;
 
 @:expose("flighthq.effectsCanvas.CanvasRenderEffectRegistration")
 class CanvasRenderEffectRegistration {

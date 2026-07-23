@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Aabb.createAabb;
-import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshGeometryRuntime;
 import flighthq.types.MeshGeometry.MeshSubset;
 import flighthq.types.MeshGeometry.PrimitiveTopology;
@@ -18,7 +17,7 @@ typedef MeshGeometryOptions = { @:optional var indices:Null<Dynamic>; var layout
 
 @:expose("flighthq.mesh.MeshGeometry")
 class MeshGeometry {
-  public static function cloneMeshGeometry(source:MeshGeometry):MeshGeometry {
+  public static function cloneMeshGeometry(source:Dynamic):Dynamic {
     var vertices:Dynamic = cast _Runtime.UNDEFINED;
     var indices:Null<Dynamic> = cast _Runtime.UNDEFINED;
     var subsets:Array<MeshSubset> = cast _Runtime.UNDEFINED;
@@ -51,7 +50,7 @@ class MeshGeometry {
     return cast null;
   }
 
-  public static function createMeshGeometry(options:MeshGeometryOptions):MeshGeometry {
+  public static function createMeshGeometry(options:MeshGeometryOptions):Dynamic {
     var vertices:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var indices:Null<Dynamic> = cast _Runtime.UNDEFINED;
@@ -71,43 +70,43 @@ class MeshGeometry {
     return cast null;
   }
 
-  public static function destroyMeshGeometryGlData(geometry:MeshGeometry):Void {
+  public static function destroyMeshGeometryGlData(geometry:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     if (_Runtime.truthy(runtime)) { _Runtime.setField(runtime, 'webglData', null); }
   }
 
-  public static function destroyMeshGeometryWgpuData(geometry:MeshGeometry):Void {
+  public static function destroyMeshGeometryWgpuData(geometry:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     if (_Runtime.truthy(runtime)) { _Runtime.setField(runtime, 'webgpuData', null); }
   }
 
-  public static function getMeshGeometryIndexCount(geometry:MeshGeometry):Float {
+  public static function getMeshGeometryIndexCount(geometry:Dynamic):Float {
     return cast _Runtime.select(_Runtime.field(geometry, 'indices'), function():Dynamic return cast _Runtime.field(_Runtime.field(geometry, 'indices'), 'length'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  public static function getMeshGeometryMorphBindPose(geometry:MeshGeometry):Null<MeshMorphBindPose> {
+  public static function getMeshGeometryMorphBindPose(geometry:Dynamic):Null<MeshMorphBindPose> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     return cast _Runtime.select(runtime, function():Dynamic return cast _Runtime.field(runtime, 'morphBindPose'), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function getMeshGeometrySkinBindPose(geometry:MeshGeometry):Null<MeshSkinBindPose> {
+  public static function getMeshGeometrySkinBindPose(geometry:Dynamic):Null<MeshSkinBindPose> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     return cast _Runtime.select(runtime, function():Dynamic return cast _Runtime.field(runtime, 'skinBindPose'), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function getMeshGeometryVertexCount(geometry:MeshGeometry):Float {
+  public static function getMeshGeometryVertexCount(geometry:Dynamic):Float {
     return cast _Runtime.callValue(MeshGeometry.getVertexCountFromLayout__meshGeometry, cast ([_Runtime.field(geometry, 'vertices'), _Runtime.field(geometry, 'layout')] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hasMeshGeometrySkin(geometry:MeshGeometry):Bool {
+  public static function hasMeshGeometrySkin(geometry:Dynamic):Bool {
     var attributes:Dynamic = cast _Runtime.UNDEFINED;
     attributes = _Runtime.field(_Runtime.field(geometry, 'layout'), 'attributes');
     {
@@ -121,22 +120,22 @@ class MeshGeometry {
     return cast null;
   }
 
-  public static function setMeshGeometryMorphBindPose(geometry:MeshGeometry, bindPose:Null<MeshMorphBindPose>):Void {
+  public static function setMeshGeometryMorphBindPose(geometry:Dynamic, bindPose:Null<MeshMorphBindPose>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     if (_Runtime.truthy(runtime)) { _Runtime.setField(runtime, 'morphBindPose', bindPose); }
   }
 
-  public static function setMeshGeometrySkinBindPose(geometry:MeshGeometry, bindPose:Null<MeshSkinBindPose>):Void {
+  public static function setMeshGeometrySkinBindPose(geometry:Dynamic, bindPose:Null<MeshSkinBindPose>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     if (_Runtime.truthy(runtime)) { _Runtime.setField(runtime, 'skinBindPose', bindPose); }
   }
 
-  public static function createMeshGeometryRuntime__meshGeometry(fields:Dynamic):MeshGeometry {
+  public static function createMeshGeometryRuntime__meshGeometry(fields:Dynamic):Dynamic {
     var geometry:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:MeshGeometryRuntime = cast _Runtime.UNDEFINED;
-    geometry = (cast _Runtime.callValue(createEntity, cast ([{ bounds: _Runtime.field(fields, 'bounds'), indices: _Runtime.field(fields, 'indices'), layout: _Runtime.field(fields, 'layout'), subsets: _Runtime.field(fields, 'subsets'), topology: _Runtime.field(fields, 'topology'), version: _Runtime.field(fields, 'version'), vertices: _Runtime.field(fields, 'vertices') }] : Array<Dynamic>)) : MeshGeometry);
+    geometry = (cast _Runtime.callValue(createEntity, cast ([{ bounds: _Runtime.field(fields, 'bounds'), indices: _Runtime.field(fields, 'indices'), layout: _Runtime.field(fields, 'layout'), subsets: _Runtime.field(fields, 'subsets'), topology: _Runtime.field(fields, 'topology'), version: _Runtime.field(fields, 'version'), vertices: _Runtime.field(fields, 'vertices') }] : Array<Dynamic>)) : Dynamic);
     runtime = { binding: null, morphBindPose: null, skinBindPose: null, webglData: null, webgpuData: null };
     _Runtime.setIndex(geometry, EntityRuntimeKey, runtime);
     return cast geometry;

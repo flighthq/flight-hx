@@ -12,9 +12,6 @@ import flighthq.render.Renderer.noopRendererData;
 import flighthq.renderGl.GlMaterialRegistry.resolveGlMaterialRenderer;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.BatchFormat;
-import flighthq.types.ColorTransform;
-import flighthq.types.GlRenderState;
-import flighthq.types.QuadBatch;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.SpriteRenderer;
 
@@ -22,7 +19,7 @@ import flighthq.types.SpriteRenderer;
 class GlQuadBatch {
   public static final INSTANCE_FLOATS__glQuadBatch:Dynamic = 13.0;
 
-  public static function submitGlQuadBatch__glQuadBatch(state:GlRenderState, quadBatch:RenderProxy2D):Void {
+  public static function submitGlQuadBatch__glQuadBatch(state:Dynamic, quadBatch:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
@@ -55,7 +52,7 @@ class GlQuadBatch {
     var writeBase:Dynamic = cast _Runtime.UNDEFINED;
     var drawCount:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    source = (cast _Runtime.field(quadBatch, 'source') : QuadBatch);
+    source = (cast _Runtime.field(quadBatch, 'source') : Dynamic);
     data = _Runtime.field(source, 'data');
     __destructure0 = data;
     atlas = _Runtime.field(__destructure0, 'atlas');
@@ -127,7 +124,7 @@ class GlQuadBatch {
         _Runtime.setIndex(instanceData, (writeBase + 11.0), ((_Runtime.field(region, 'y') + _Runtime.field(region, 'height')) * ih));
         _Runtime.setIndex(instanceData, (writeBase + 12.0), alpha);
         _Runtime.callValue(packGlSpriteBatchMaterialInstance, cast ([state, nodeMaterialData, (startCount + drawCount)] : Array<Dynamic>));
-        var colorTransform:Dynamic = _Runtime.coalesce((cast _Runtime.optionalIndex(perQuadColorTransform, i) : Null<ColorTransform>), function():Dynamic return cast nodeColorTransform);
+        var colorTransform:Dynamic = _Runtime.coalesce((cast _Runtime.optionalIndex(perQuadColorTransform, i) : Null<Dynamic>), function():Dynamic return cast nodeColorTransform);
         _Runtime.callValue(recordGlSpriteBatchColorTransform, cast ([state, colorTransform, (startCount + drawCount)] : Array<Dynamic>));
         (writeBase = cast ((writeBase + GlQuadBatch.INSTANCE_FLOATS__glQuadBatch) : Dynamic));
         drawCount++;

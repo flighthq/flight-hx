@@ -10,6 +10,6 @@ typedef AccessibilityLiveness = String;
 
 typedef AccessibilityState = { @:optional var disabled:Bool; @:optional var checked:Bool; @:optional var expanded:Bool; @:optional var selected:Bool; @:optional var pressed:Bool; @:optional var busy:Bool; @:optional var hidden:Bool; @:optional var readonly:Bool; @:optional var required:Bool; @:optional var level:Float; @:optional var valueMin:Float; @:optional var valueMax:Float; @:optional var valueNow:Float; };
 
-typedef AccessibilityNode = { var id:String; var role:AccessibilityRole; @:optional var label:String; @:optional var description:String; @:optional var value:String; @:optional var parentId:String; @:optional var bounds:Rectangle; @:optional var states:AccessibilityState; };
+typedef AccessibilityNode = { var id:String; var role:AccessibilityRole; @:optional var label:String; @:optional var description:String; @:optional var value:String; @:optional var parentId:String; @:optional var bounds:Dynamic; @:optional var states:AccessibilityState; };
 
 typedef AccessibilityBackend = { var setNode:Dynamic; var removeNode:Dynamic; var clear:Dynamic; var setFocus:Dynamic; var announce:Dynamic; };

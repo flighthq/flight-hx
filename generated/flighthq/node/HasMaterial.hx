@@ -3,11 +3,10 @@ package flighthq.node;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.HasMaterial;
 
 @:expose("flighthq.node.HasMaterial")
 class HasMaterial {
-  public static function initMaterialTrait(target:HasMaterial, ?obj:Dynamic):Void {
+  public static function initMaterialTrait(target:Dynamic, ?obj:Dynamic):Void {
     _Runtime.setField(target, 'material', _Runtime.coalesce(_Runtime.optionalField(obj, 'material'), function():Dynamic return cast null));
     _Runtime.setField(target, 'materialData', _Runtime.coalesce(_Runtime.optionalField(obj, 'materialData'), function():Dynamic return cast null));
   }

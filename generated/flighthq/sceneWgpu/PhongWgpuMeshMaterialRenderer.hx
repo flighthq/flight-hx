@@ -13,20 +13,16 @@ import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.beginWgpuMeshDraw;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.drawWgpuMeshSubset;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.isWgpuTextureReady;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUniform;
-import flighthq.types.Camera;
 import flighthq.types.LinearColor;
-import flighthq.types.Material;
-import flighthq.types.MeshGeometry;
 import flighthq.types.PhongMaterial;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.WgpuMeshMaterialRenderer;
-import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._PhongMaterialValues.PhongMaterialKind;
 
 @:expose("flighthq.sceneWgpu.PhongWgpuMeshMaterialRenderer")
 class PhongWgpuMeshMaterialRenderer {
-  public static final phongWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
+  public static final phongWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:Dynamic, material:Null<Dynamic>, lights:SceneLightBlock, camera:Dynamic) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var phong:Dynamic = cast _Runtime.UNDEFINED;
@@ -49,11 +45,11 @@ class PhongWgpuMeshMaterialRenderer {
     }
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, group] : Array<Dynamic>));
-  }, draw: function(state:WgpuRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
+  }, draw: function(state:Dynamic, proxy:SceneRenderProxy, geometry:Dynamic) {
     _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
   } };
 
-  public static function registerPhongWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerPhongWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(registerWgpuMeshMaterialRenderer, cast ([state, PhongMaterialKind, phongWgpuMeshMaterialRenderer] : Array<Dynamic>));
   }
 

@@ -7,18 +7,14 @@ import flighthq.particleemitter.UpdateParticleEmitter3D.updateParticleEmitter3D;
 import flighthq.particles.ApplyParticleCollisions.applyParticleCollisions;
 import flighthq.particles.ApplyParticleForces.applyParticleForces;
 import flighthq.types.ParticleCollider;
-import flighthq.types.ParticleEmitter;
-import flighthq.types.ParticleEmitter3D;
 import flighthq.types.ParticleEmitterCallbacks;
-import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterState;
 import flighthq.types.ParticleForce;
 
 @:expose("flighthq.particleemitter.StepParticleEmitter3D")
 class StepParticleEmitter3D {
-  public static function stepParticleEmitter3D(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?callbacks:ParticleEmitterCallbacks):Void {
+  public static function stepParticleEmitter3D(emitter:Dynamic, state:Dynamic, config:Dynamic, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?callbacks:ParticleEmitterCallbacks):Void {
     var asEmitter:Dynamic = cast _Runtime.UNDEFINED;
-    asEmitter = (cast (cast emitter : Dynamic) : ParticleEmitter);
+    asEmitter = (cast (cast emitter : Dynamic) : Dynamic);
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.looseEquals(forces, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(forces, 'length'), 0.0, '>')))) {
       _Runtime.callValue(applyParticleForces, cast ([asEmitter, state, forces, deltaTime] : Array<Dynamic>));
     }

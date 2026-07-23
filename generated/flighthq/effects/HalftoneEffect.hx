@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.HalftoneEffect;
 
 @:expose("flighthq.effects.HalftoneEffect")
 class HalftoneEffect {
-  public static function createHalftoneEffect(?options:Dynamic):HalftoneEffect {
+  public static function createHalftoneEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'HalftoneEffect' }, options]);
     return cast null;

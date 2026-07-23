@@ -16,10 +16,7 @@ import flighthq.effectsCanvas.CanvasColorLutPass.applyColorLutPassToCanvas;
 import flighthq.effectsCanvas.CanvasColorMatrixPass.applyColorMatrixPassToCanvas;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry.getCanvasRenderEffectRunner;
 import flighthq.types.Adjustment;
-import flighthq.types.CanvasRenderEffectPipeline;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
-import flighthq.types.CanvasRenderState;
-import flighthq.types.CanvasRenderTarget;
 import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
 import flighthq.types.RenderEffect;
 

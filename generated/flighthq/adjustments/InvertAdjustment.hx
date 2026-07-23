@@ -3,11 +3,10 @@ package flighthq.adjustments;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.InvertAdjustment;
 
 @:expose("flighthq.adjustments.InvertAdjustment")
 class InvertAdjustment {
-  public static function createInvertAdjustment(?options:Dynamic):InvertAdjustment {
+  public static function createInvertAdjustment(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var s:Dynamic = cast _Runtime.UNDEFINED;

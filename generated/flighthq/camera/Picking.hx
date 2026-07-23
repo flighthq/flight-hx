@@ -9,13 +9,12 @@ import flighthq.geometry.Matrix4.inverseMatrix4;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.geometry.Vector3.normalizeVector3;
 import flighthq.geometry.Vector3.subtractVector3;
-import flighthq.types.Camera;
 import flighthq.types.Ray3D.Ray3DLike;
 import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.camera.Picking")
 class Picking {
-  public static function getCameraScreenToWorldRay(out:Ray3DLike, camera:Camera, ndcX:Float, ndcY:Float, aspect:Float):Bool {
+  public static function getCameraScreenToWorldRay(out:Ray3DLike, camera:Dynamic, ndcX:Float, ndcY:Float, aspect:Float):Bool {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var nx:Dynamic = cast _Runtime.UNDEFINED;
     var ny:Dynamic = cast _Runtime.UNDEFINED;
@@ -72,7 +71,7 @@ class Picking {
     return cast null;
   }
 
-  public static function getCameraWorldToScreen(out:Vector3Like, camera:Camera, worldPoint:Vector3Like, aspect:Float):Bool {
+  public static function getCameraWorldToScreen(out:Vector3Like, camera:Dynamic, worldPoint:Vector3Like, aspect:Float):Bool {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var wx:Dynamic = cast _Runtime.UNDEFINED;
     var wy:Dynamic = cast _Runtime.UNDEFINED;

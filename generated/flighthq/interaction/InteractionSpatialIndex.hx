@@ -10,7 +10,6 @@ import flighthq.node.Node.getNodeRuntime;
 import flighthq.spatial.SpatialIndex.clearSpatialIndex;
 import flighthq.spatial.SpatialIndex.insertSpatialObject;
 import flighthq.spatial.SpatialIndex.querySpatialPoint;
-import flighthq.types.DisplayObject;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.Spatial.SpatialAabb;
 import flighthq.types.Spatial.SpatialObjectId;
@@ -58,7 +57,7 @@ class InteractionSpatialIndex {
     {
       var rank:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(rank, _Runtime.field(nodes, 'length'), '<'))) {
-        var bounds:Dynamic = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([(cast _Runtime.getIndex(nodes, rank) : DisplayObject)] : Array<Dynamic>));
+        var bounds:Dynamic = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([(cast _Runtime.getIndex(nodes, rank) : Dynamic)] : Array<Dynamic>));
         _Runtime.setField(InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex, 'minX', _Runtime.field(bounds, 'x'));
         _Runtime.setField(InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex, 'minY', _Runtime.field(bounds, 'y'));
         _Runtime.setField(InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex, 'maxX', (_Runtime.field(bounds, 'x') + _Runtime.field(bounds, 'width')));

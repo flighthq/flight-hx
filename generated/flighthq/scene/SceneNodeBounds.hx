@@ -13,16 +13,15 @@ import flighthq.node.Transform3d.ensureNodeWorldMatrix4;
 import flighthq.node.Transform3d.getNodeWorldMatrix4;
 import flighthq.scene.Mesh.isMesh;
 import flighthq.types.Aabb.AabbLike;
-import flighthq.types.SceneNode;
 
 @:expose("flighthq.scene.SceneNodeBounds")
 class SceneNodeBounds {
-  public static function getSceneNodeWorldBounds(out:AabbLike, node:SceneNode):Void {
+  public static function getSceneNodeWorldBounds(out:AabbLike, node:Dynamic):Void {
     _Runtime.callValue(setAabb, cast ([out, _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY')] : Array<Dynamic>));
     _Runtime.callValue(SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds, cast ([out, node] : Array<Dynamic>));
   }
 
-  public static function _accumulateWorldBounds__sceneNodeBounds(out:AabbLike, node:SceneNode):Void {
+  public static function _accumulateWorldBounds__sceneNodeBounds(out:AabbLike, node:Dynamic):Void {
     var children:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)))) {
       var geom:Dynamic = _Runtime.field(node, 'geometry');
@@ -43,7 +42,7 @@ class SceneNodeBounds {
       {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
-          _Runtime.callValue(SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds, cast ([out, (cast _Runtime.getIndex(children, i) : SceneNode)] : Array<Dynamic>));
+          _Runtime.callValue(SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds, cast ([out, (cast _Runtime.getIndex(children, i) : Dynamic)] : Array<Dynamic>));
           i++;
         }
       }

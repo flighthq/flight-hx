@@ -12,11 +12,8 @@ import flighthq.node.Transform3d.setNodeTransform3D;
 import flighthq.scene.SceneNode.createSceneNode;
 import flighthq.scene.SceneNode.getSceneNodeRuntime;
 import flighthq.types.Entity.Kind;
-import flighthq.types.Material;
-import flighthq.types.Mesh;
 import flighthq.types.Mesh.MeshRuntime;
 import flighthq.types.MeshDeformer;
-import flighthq.types.MeshGeometry;
 import flighthq.types.NodeSignals;
 import flighthq.types._internal._MeshDeformerValues.MeshDeformerMorph;
 import flighthq.types._internal._MeshDeformerValues.MeshDeformerNone;
@@ -25,7 +22,7 @@ import flighthq.types._internal._MeshValues.MeshKind;
 
 @:expose("flighthq.scene.Mesh")
 class Mesh {
-  public static function cloneMesh(source:Mesh):Mesh {
+  public static function cloneMesh(source:Dynamic):Dynamic {
     var clone:Dynamic = cast _Runtime.UNDEFINED;
     clone = _Runtime.callValue(createMesh, cast ([_Runtime.field(source, 'geometry'), _Runtime.slice(_Runtime.field(source, 'materials'), 0, null), _Runtime.field(source, 'kind'), { enabled: _Runtime.field(source, 'enabled'), name: _Runtime.field(source, 'name') }] : Array<Dynamic>));
     _Runtime.setField(clone, 'alpha', _Runtime.field(source, 'alpha'));
@@ -37,34 +34,34 @@ class Mesh {
     return cast null;
   }
 
-  public static function createMesh(geometry:MeshGeometry, materials:Array<Null<Material>>, ?kind:Kind, ?obj:Dynamic):Mesh {
+  public static function createMesh(geometry:Dynamic, materials:Array<Null<Dynamic>>, ?kind:Kind, ?obj:Dynamic):Dynamic {
     if (kind == null) kind = cast (MeshKind : Dynamic);
     var mesh:Dynamic = cast _Runtime.UNDEFINED;
-    mesh = (cast _Runtime.callValue(createSceneNode, cast ([kind, obj] : Array<Dynamic>)) : Mesh);
+    mesh = (cast _Runtime.callValue(createSceneNode, cast ([kind, obj] : Array<Dynamic>)) : Dynamic);
     _Runtime.setField(mesh, 'geometry', geometry);
     _Runtime.setField(mesh, 'materials', materials);
     return cast mesh;
     return cast null;
   }
 
-  public static function enableMeshSignals(source:Mesh):NodeSignals {
+  public static function enableMeshSignals(source:Dynamic):NodeSignals {
     return cast _Runtime.callValue(enableNodeSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMeshDeformer(source:Mesh):MeshDeformer {
+  public static function getMeshDeformer(source:Dynamic):MeshDeformer {
     if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(source, 'skin'), null))) { return cast MeshDeformerSkeletal; }
     if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(source, 'morph'), null))) { return cast MeshDeformerMorph; }
     return cast MeshDeformerNone;
     return cast null;
   }
 
-  public static function getMeshRuntime(source:Mesh):MeshRuntime {
+  public static function getMeshRuntime(source:Dynamic):MeshRuntime {
     return cast _Runtime.callValue(getSceneNodeRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMeshSignals(source:Mesh):Null<NodeSignals> {
+  public static function getMeshSignals(source:Dynamic):Null<NodeSignals> {
     return cast _Runtime.callValue(getNodeSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }

@@ -7,7 +7,6 @@ import flighthq.geometry.Matrix.createMatrix;
 import flighthq.geometry.Matrix.inverseMatrix;
 import flighthq.geometry.Matrix.multiplyMatrix;
 import flighthq.node.Transform2d.getNodeLocalMatrix;
-import flighthq.types.DisplayObject;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Rectangle.RectangleLike;
 
@@ -15,7 +14,7 @@ typedef RenderTargetSizeOptions = { @:optional var minWidth:Float; @:optional va
 
 @:expose("flighthq.render.RenderTarget")
 class RenderTarget {
-  public static function computeDisplayObjectRenderTargetTransform(outRenderTransform:MatrixLike, source:DisplayObject, bounds:RectangleLike, contentX:Float = 0.0, contentY:Float = 0.0):Void {
+  public static function computeDisplayObjectRenderTargetTransform(outRenderTransform:MatrixLike, source:Dynamic, bounds:RectangleLike, contentX:Float = 0.0, contentY:Float = 0.0):Void {
     var localTransform:Dynamic = cast _Runtime.UNDEFINED;
     localTransform = _Runtime.callValue(getNodeLocalMatrix, cast ([source] : Array<Dynamic>));
     _Runtime.callValue(inverseMatrix, cast ([RenderTarget._tempInvLocal__renderTarget, localTransform] : Array<Dynamic>));

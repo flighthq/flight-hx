@@ -3,12 +3,11 @@ package flighthq.path;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 
 @:expose("flighthq.path.ContainsPathPoint")
 class ContainsPathPoint {
-  public static function containsPathPoint(path:Path, px:Float, py:Float, tolerance:Dynamic = 0.25):Bool {
+  public static function containsPathPoint(path:Dynamic, px:Float, py:Float, tolerance:Dynamic = 0.25):Bool {
     var winding:Dynamic = cast _Runtime.UNDEFINED;
     winding = _Runtime.callValue(ContainsPathPoint.computePathWindingNumber__containsPathPoint, cast ([path, px, py, tolerance] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(path, 'winding'), 'evenOdd'))) { return cast !_Runtime.strictEquals((Std.int(winding) & Std.int(1.0)), 0.0); }
@@ -34,7 +33,7 @@ class ContainsPathPoint {
     return cast null;
   }
 
-  public static function computePathWindingNumber__containsPathPoint(path:Path, px:Float, py:Float, tolerance:Float):Float {
+  public static function computePathWindingNumber__containsPathPoint(path:Dynamic, px:Float, py:Float, tolerance:Float):Float {
     var commands:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var toleranceSq:Dynamic = cast _Runtime.UNDEFINED;

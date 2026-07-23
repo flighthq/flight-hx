@@ -5,14 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
-import flighthq.types.GodRaysEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
-import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.effectsWgpu.WgpuGodRaysEffect")
 class WgpuGodRaysEffect {
-  public static function applyGodRaysEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:GodRaysEffect):Void {
+  public static function applyGodRaysEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     var centerX:Dynamic = cast _Runtime.UNDEFINED;
     var centerY:Dynamic = cast _Runtime.UNDEFINED;
     var density:Dynamic = cast _Runtime.UNDEFINED;
@@ -29,7 +26,7 @@ class WgpuGodRaysEffect {
     exposure = _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 0.6);
     samples = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 64.0)] : Array<Dynamic>))] : Array<Dynamic>));
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'atmospheric.godRays.' + Std.string(samples) + '', _Runtime.callValue(WgpuGodRaysEffect.buildGodRaysFragment__wgpuGodRaysEffect, cast ([samples] : Array<Dynamic>)), 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : Dynamic), (cast dest : Dynamic), pipeline, function(f32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, centerX);
       _Runtime.setIndex(f32, 1.0, centerY);
       _Runtime.setIndex(f32, 2.0, density);
@@ -40,7 +37,7 @@ class WgpuGodRaysEffect {
   }
 
   public static final defaultWgpuGodRaysEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyGodRaysEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : GodRaysEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyGodRaysEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static function buildGodRaysFragment__wgpuGodRaysEffect(samples:Float):String {

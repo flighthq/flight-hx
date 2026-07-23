@@ -3,11 +3,10 @@ package flighthq.adjustments;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.SepiaAdjustment;
 
 @:expose("flighthq.adjustments.SepiaAdjustment")
 class SepiaAdjustment {
-  public static function createSepiaAdjustment(?options:Dynamic):SepiaAdjustment {
+  public static function createSepiaAdjustment(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     var k:Dynamic = cast _Runtime.UNDEFINED;
     var j:Dynamic = cast _Runtime.UNDEFINED;

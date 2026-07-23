@@ -3,16 +3,15 @@ package flighthq.video;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.VideoResource;
 
 @:expose("flighthq.video.VideoResource")
 class VideoResource {
-  public static function createVideoResource(?element:Dynamic):VideoResource {
+  public static function createVideoResource(?element:Dynamic):Dynamic {
     return cast { element: _Runtime.coalesce(element, function():Dynamic return cast null) };
     return cast null;
   }
 
-  public static function disposeVideoResource(resource:VideoResource):Void {
+  public static function disposeVideoResource(resource:Dynamic):Void {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.field(resource, 'element');
     if (_Runtime.truthy(!_Runtime.strictEquals(element, null))) {
@@ -22,34 +21,34 @@ class VideoResource {
     _Runtime.setField(resource, 'element', null);
   }
 
-  public static function getVideoResourceDuration(resource:VideoResource):Float {
+  public static function getVideoResourceDuration(resource:Dynamic):Float {
     return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.field(resource, 'element'), null), function():Dynamic return cast _Runtime.field(_Runtime.field(resource, 'element'), 'duration'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  public static function getVideoResourceHeight(resource:VideoResource):Float {
+  public static function getVideoResourceHeight(resource:Dynamic):Float {
     return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.field(resource, 'element'), null), function():Dynamic return cast _Runtime.field(_Runtime.field(resource, 'element'), 'videoHeight'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  public static function getVideoResourceWidth(resource:VideoResource):Float {
+  public static function getVideoResourceWidth(resource:Dynamic):Float {
     return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.field(resource, 'element'), null), function():Dynamic return cast _Runtime.field(_Runtime.field(resource, 'element'), 'videoWidth'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  public static function hasVideoResourceElement(resource:VideoResource):Bool {
+  public static function hasVideoResourceElement(resource:Dynamic):Bool {
     return cast !_Runtime.strictEquals(_Runtime.field(resource, 'element'), null);
     return cast null;
   }
 
-  public static function isVideoResourceEmpty(resource:VideoResource):Bool {
+  public static function isVideoResourceEmpty(resource:Dynamic):Bool {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.field(resource, 'element');
     return cast _Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(element, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'videoWidth'), 0.0, '<=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'videoHeight'), 0.0, '<='));
     return cast null;
   }
 
-  public static function isVideoResourceReady(resource:VideoResource):Bool {
+  public static function isVideoResourceReady(resource:Dynamic):Bool {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.field(resource, 'element');
     return cast _Runtime.andValue(!_Runtime.strictEquals(element, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'readyState'), VideoResource.HAVE_CURRENT_DATA__videoResource, '>='));

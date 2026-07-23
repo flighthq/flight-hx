@@ -5,16 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
-import flighthq.types.ConvolutionEffect;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
 
 @:expose("flighthq.effectsGl.GlConvolutionEffect")
 class GlConvolutionEffect {
   public static final MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE:Dynamic = 49.0;
 
-  public static function applyConvolutionEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ConvolutionEffect):Void {
+  public static function applyConvolutionEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var matrix:Dynamic = cast _Runtime.UNDEFINED;
     var matrixX:Dynamic = cast _Runtime.UNDEFINED;
@@ -61,7 +58,7 @@ class GlConvolutionEffect {
   }
 
   public static final defaultGlConvolutionEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyConvolutionEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ConvolutionEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyConvolutionEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static function getAutoDivisor__glConvolutionEffect(matrix:Array<Float>, length:Float):Float {

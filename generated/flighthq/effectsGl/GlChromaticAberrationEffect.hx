@@ -5,14 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
-import flighthq.types.ChromaticAberrationEffect;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
 
 @:expose("flighthq.effectsGl.GlChromaticAberrationEffect")
 class GlChromaticAberrationEffect {
-  public static function applyChromaticAberrationEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ChromaticAberrationEffect):Void {
+  public static function applyChromaticAberrationEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var radial:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -26,7 +23,7 @@ class GlChromaticAberrationEffect {
   }
 
   public static final defaultGlChromaticAberrationEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyChromaticAberrationEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ChromaticAberrationEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyChromaticAberrationEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static final CHROMATIC_ABERRATION_FRAGMENT_SRC__glChromaticAberrationEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_radial;\nout vec4 o_color;\nvoid main() {\n  vec2 centered = v_texCoord - 0.5;\n  float scale = mix(1.0, length(centered) * 2.0, u_radial);\n  vec2 dir = mix(vec2(1.0, 0.0), normalize(centered + vec2(1e-5)), u_radial);\n  vec2 offset = dir * u_intensity * scale;\n  float r = texture(u_texture0, v_texCoord + offset).r;\n  float g = texture(u_texture0, v_texCoord).g;\n  float b = texture(u_texture0, v_texCoord - offset).b;\n  float a = texture(u_texture0, v_texCoord).a;\n  o_color = vec4(r, g, b, a);\n}';

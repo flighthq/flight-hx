@@ -12,9 +12,6 @@ import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.renderGl.GlShader.setGlAttributes;
 import flighthq.renderGl.GlShader.setGlBaseUniforms;
 import flighthq.renderGl.GlShader.setGlMatrixFromTransform;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
-import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.RenderTarget.RenderTargetDescriptor;
@@ -22,7 +19,7 @@ import flighthq.types.RenderTarget.RenderTargetFormat;
 
 @:expose("flighthq.renderGl.GlRenderTarget")
 class GlRenderTarget {
-  public static function createGlRenderTarget(state:GlRenderState, descriptor:RenderTargetDescriptor):GlRenderTarget {
+  public static function createGlRenderTarget(state:Dynamic, descriptor:RenderTargetDescriptor):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;
@@ -33,7 +30,7 @@ class GlRenderTarget {
     var sampleCount:Dynamic = cast _Runtime.UNDEFINED;
     var depth:Dynamic = cast _Runtime.UNDEFINED;
     var maxSamples:Dynamic = cast _Runtime.UNDEFINED;
-    var target:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var target:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     w = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(descriptor, 'width')] : Array<Dynamic>))] : Array<Dynamic>));
@@ -53,7 +50,7 @@ class GlRenderTarget {
     return cast null;
   }
 
-  public static function declareGlRenderTargetColorSpace(state:GlRenderState, colorSpace:RenderTargetColorSpace):Bool {
+  public static function declareGlRenderTargetColorSpace(state:Dynamic, colorSpace:RenderTargetColorSpace):Bool {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentRenderTarget');
     if (_Runtime.truthy(_Runtime.looseEquals(target, null))) { return cast false; }
@@ -62,7 +59,7 @@ class GlRenderTarget {
     return cast null;
   }
 
-  public static function destroyGlRenderTarget(state:GlRenderState, target:GlRenderTarget):Void {
+  public static function destroyGlRenderTarget(state:Dynamic, target:Dynamic):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     _Runtime.callProperty(gl, 'deleteFramebuffer', cast ([_Runtime.field(target, 'framebuffer')] : Array<Dynamic>));
@@ -77,7 +74,7 @@ class GlRenderTarget {
     if (_Runtime.truthy(_Runtime.field(target, 'depthStencilRenderbuffer'))) { _Runtime.callProperty(gl, 'deleteRenderbuffer', cast ([_Runtime.field(target, 'depthStencilRenderbuffer')] : Array<Dynamic>)); }
   }
 
-  public static function drawGlRenderTargetResult(state:GlRenderState, renderProxy:RenderProxy2D, target:GlRenderTarget, transform:Matrix):Void {
+  public static function drawGlRenderTargetResult(state:Dynamic, renderProxy:RenderProxy2D, target:Dynamic, transform:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -103,7 +100,7 @@ class GlRenderTarget {
     _Runtime.callValue(drawGlQuad, cast ([state, 0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height'), 0.0, 1.0, 1.0, 0.0] : Array<Dynamic>));
   }
 
-  public static function resizeGlRenderTarget(state:GlRenderState, target:GlRenderTarget, width:Float, height:Float):Void {
+  public static function resizeGlRenderTarget(state:Dynamic, target:Dynamic, width:Float, height:Float):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var depth:Dynamic = cast _Runtime.UNDEFINED;
@@ -137,7 +134,7 @@ class GlRenderTarget {
     _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentTexture', null);
   }
 
-  public static function resolveGlRenderTarget(state:GlRenderState, target:GlRenderTarget):Void {
+  public static function resolveGlRenderTarget(state:Dynamic, target:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(target, 'sampleCount'), 1.0, '<='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(target, 'resolveFramebuffer'), null)))) { return; }
@@ -160,7 +157,7 @@ class GlRenderTarget {
     _Runtime.setField(runtime, 'currentTexture', null);
   }
 
-  public static function allocateGlRenderTargetStorage__glRenderTarget(state:GlRenderState, target:GlRenderTarget, colorFormats:Null<Array<RenderTargetFormat>>, attachments:Float, depth:String):Void {
+  public static function allocateGlRenderTargetStorage__glRenderTarget(state:Dynamic, target:Dynamic, colorFormats:Null<Array<RenderTargetFormat>>, attachments:Float, depth:String):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;

@@ -4,8 +4,6 @@ package flighthq.textlayout;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textlayout.TextLayout.TEXT_LAYOUT_GUTTER;
-import flighthq.types.Rectangle;
-import flighthq.types.TextLayout.TextLayoutGroup;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextLineMetrics;
 import flighthq.types.TextSelectionRectangle;
@@ -95,7 +93,7 @@ class RichTextQuery {
     return cast null;
   }
 
-  public static function getRichTextCharBoundaries(out:Rectangle, layout:TextLayoutResult, charIndex:Float):Bool {
+  public static function getRichTextCharBoundaries(out:Dynamic, layout:TextLayoutResult, charIndex:Float):Bool {
     var group:Dynamic = cast _Runtime.UNDEFINED;
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var limit:Dynamic = cast _Runtime.UNDEFINED;
@@ -238,7 +236,7 @@ class RichTextQuery {
     }
   }
 
-  public static function getCaretX__richTextQuery(group:TextLayoutGroup, index:Float):Float {
+  public static function getCaretX__richTextQuery(group:Dynamic, index:Float):Float {
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var limit:Dynamic = cast _Runtime.UNDEFINED;
     x = _Runtime.field(group, 'offsetX');

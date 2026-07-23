@@ -23,16 +23,11 @@ import flighthq.textlayout.TextBounds.computeTextBoundsWidth;
 import flighthq.textlayout.TextLayout.computeTextLayout;
 import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
 import flighthq.types.DisplayObjectRenderer;
-import flighthq.types.DomRenderState;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
-import flighthq.types.RichText;
 import flighthq.types.RichText.RichTextRuntime;
-import flighthq.types.TextFormat;
 import flighthq.types.TextLabel.TextLabelRuntime;
-import flighthq.types.TextMetrics;
 
 typedef DomRichTextData__domRichText = Dynamic;
 
@@ -40,7 +35,7 @@ typedef DomTextInputOverlay = Dynamic;
 
 @:expose("flighthq.displayobjectDom.DomRichText")
 class DomRichText {
-  public static function createDomRichTextData__domRichText(_state:RenderState, _source:Renderable):DomRichTextData__domRichText {
+  public static function createDomRichTextData__domRichText(_state:Dynamic, _source:Renderable):DomRichTextData__domRichText {
     return cast _Runtime.callValue(createEntity, cast ([{ div: null }] : Array<Dynamic>));
     return cast null;
   }
@@ -55,18 +50,18 @@ class DomRichText {
     return cast null;
   }
 
-  public static function drawDomRichText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomRichText(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(DomRichText.drawDomRichTextField__domRichText, cast ([state, renderProxy] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(DomRichText._domTextInputOverlay__domRichText, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null)))) {
+    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(DomRichText._domTextInputOverlay__domRichText, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : Dynamic)] : Array<Dynamic>)), 'input'), null)))) {
       _Runtime.callValue(DomRichText._domTextInputOverlay__domRichText, cast ([state, renderProxy] : Array<Dynamic>));
     }
   }
 
-  public static function drawDomRichTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomRichTextMask(state:Dynamic, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(drawDomRichText, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawDomRichTextField__domRichText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawDomRichTextField__domRichText(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -95,7 +90,7 @@ class DomRichText {
     var bulletLines:Dynamic = cast _Runtime.UNDEFINED;
     data = (cast _Runtime.field(renderProxy, 'rendererData') : Null<DomRichTextData__domRichText>);
     if (_Runtime.truthy(_Runtime.strictEquals(data, null))) { return; }
-    source = (cast _Runtime.field(renderProxy, 'source') : RichText);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     __destructure0 = _Runtime.field(source, 'data');
     background = _Runtime.field(__destructure0, 'background');
     backgroundColor = _Runtime.field(__destructure0, 'backgroundColor');
@@ -117,7 +112,7 @@ class DomRichText {
     text = _Runtime.field(__destructure1, 'text');
     ctx = _Runtime.callValue(DomRichText.getMeasureCtx__domRichText, cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(ctx, null))) { return; }
-    measure = function(t:String, fmt:TextFormat) {
+    measure = function(t:String, fmt:Dynamic) {
       _Runtime.setField(ctx, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([fmt] : Array<Dynamic>)));
       return cast _Runtime.field(_Runtime.callProperty(ctx, 'measureText', cast ([t] : Array<Dynamic>)), 'width');
     };

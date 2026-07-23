@@ -3,11 +3,10 @@ package flighthq.surface;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.SurfaceRegion;
 
 @:expose("flighthq.surface.SurfacePixelate")
 class SurfacePixelate {
-  public static function pixelateSurface(out:Dynamic, source:SurfaceRegion, blockSize:Float):Void {
+  public static function pixelateSurface(out:Dynamic, source:Dynamic, blockSize:Float):Void {
     var block:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;

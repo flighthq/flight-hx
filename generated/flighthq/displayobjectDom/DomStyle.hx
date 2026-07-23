@@ -5,12 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.displayobjectDom.DomRenderState.getDomRenderStateRuntime;
 import flighthq.displayobjectDom.DomTransform.setDomTransform;
-import flighthq.types.DomRenderState;
 import flighthq.types.RenderProxy2D;
 
 @:expose("flighthq.displayobjectDom.DomStyle")
 class DomStyle {
-  public static function applyDomStyle(state:DomRenderState, element:Dynamic, node:RenderProxy2D):Void {
+  public static function applyDomStyle(state:Dynamic, element:Dynamic, node:RenderProxy2D):Void {
     _Runtime.callValue(setDomTransform, cast ([element, _Runtime.field(node, 'transform2D'), _Runtime.field(state, 'roundPixels')] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(element, 'style'), 'opacity', _Runtime.select(_Runtime.compare(_Runtime.field(node, 'alpha'), 1.0, '<'), function():Dynamic return cast Std.string(_Runtime.field(node, 'alpha')), function():Dynamic return cast ''));
     _Runtime.setField(_Runtime.field(element, 'style'), 'imageRendering', _Runtime.select(_Runtime.field(state, 'allowSmoothing'), function():Dynamic return cast '', function():Dynamic return cast 'pixelated'));
@@ -26,7 +25,7 @@ class DomStyle {
     _Runtime.setField(_Runtime.field(element, 'style'), 'pointerEvents', 'none');
   }
 
-  public static function setDomRendererElement(state:DomRenderState, element:Dynamic):Void {
+  public static function setDomRendererElement(state:Dynamic, element:Dynamic):Void {
     _Runtime.setField(_Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'domCurrentElement', element);
   }
 }

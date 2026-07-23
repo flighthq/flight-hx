@@ -3,13 +3,12 @@ package flighthq.tilemapFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.TiledGid;
 import flighthq.types.TiledMap;
 import flighthq.types.TiledTileset.TiledTilesetRef;
 
 @:expose("flighthq.tilemapFormats.TiledGid")
 class TiledGid {
-  public static function decodeTiledGid(gid:Float):TiledGid {
+  public static function decodeTiledGid(gid:Float):Dynamic {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     g = _Runtime.unsignedShiftRight(Std.int(gid), Std.int(0.0));
     return cast { flipDiagonal: !_Runtime.strictEquals((Std.int(g) & Std.int(TiledGid.FLIP_DIAGONAL__tiledGid)), 0.0), flipHorizontal: !_Runtime.strictEquals((Std.int(g) & Std.int(TiledGid.FLIP_HORIZONTAL__tiledGid)), 0.0), flipVertical: !_Runtime.strictEquals((Std.int(g) & Std.int(TiledGid.FLIP_VERTICAL__tiledGid)), 0.0), tileId: (Std.int(g) & Std.int(TiledGid.TILE_ID_MASK__tiledGid)) };

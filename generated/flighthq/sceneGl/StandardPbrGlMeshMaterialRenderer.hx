@@ -12,18 +12,14 @@ import flighthq.sceneGl._internal._GlMeshProgramValues.drawGlMeshSubset;
 import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshCameraPosition;
 import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
-import flighthq.types.Camera;
 import flighthq.types.GlMeshMaterialRenderer;
-import flighthq.types.GlRenderState;
-import flighthq.types.Material;
-import flighthq.types.MeshGeometry;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.StandardPbrMaterial;
 
 @:expose("flighthq.sceneGl.StandardPbrGlMeshMaterialRenderer")
 class StandardPbrGlMeshMaterialRenderer {
-  public static final standardPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
+  public static final standardPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:Dynamic, material:Null<Dynamic>, lights:SceneLightBlock, camera:Dynamic) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var pbr:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -36,7 +32,7 @@ class StandardPbrGlMeshMaterialRenderer {
     _Runtime.callValue(bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
     _Runtime.callValue(bindGlPbrStandardBlock, cast ([state, program, pbr] : Array<Dynamic>));
     _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), _Runtime.select(!_Runtime.strictEquals(pbr, null), function():Dynamic return cast _Runtime.field(pbr, 'alphaCutoff'), function():Dynamic return cast 0.5)] : Array<Dynamic>));
-  }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
+  }, draw: function(state:Dynamic, proxy:SceneRenderProxy, geometry:Dynamic) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
     if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }

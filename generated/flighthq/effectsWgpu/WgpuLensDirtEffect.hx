@@ -5,14 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
-import flighthq.types.LensDirtEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
-import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.effectsWgpu.WgpuLensDirtEffect")
 class WgpuLensDirtEffect {
-  public static function applyLensDirtEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensDirtEffect):Void {
+  public static function applyLensDirtEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var threshold:Dynamic = cast _Runtime.UNDEFINED;
     var seed:Dynamic = cast _Runtime.UNDEFINED;
@@ -21,7 +18,7 @@ class WgpuLensDirtEffect {
     threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.55);
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'lens.lensDirt', WgpuLensDirtEffect.LENS_DIRT_FRAGMENT_WGSL__wgpuLensDirtEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : Dynamic), (cast dest : Dynamic), pipeline, function(f32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, intensity);
       _Runtime.setIndex(f32, 1.0, threshold);
       _Runtime.setIndex(f32, 2.0, seed);
@@ -29,7 +26,7 @@ class WgpuLensDirtEffect {
   }
 
   public static final defaultWgpuLensDirtEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyLensDirtEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : LensDirtEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyLensDirtEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static final LENS_DIRT_FRAGMENT_WGSL__wgpuLensDirtEffect:Dynamic = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_threshold : f32,\n  u_seed : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn dirtHash(p : vec2f) -> f32 { return fract(sin(dot(p, vec2f(127.1, 311.7))) * 43758.5453123); }\n\nfn dirtAmount(uv : vec2f, seed : f32) -> f32 {\n  var acc = 0.0;\n  for (var i = 0; i < 8; i = i + 1) {\n    let fi = f32(i);\n    let c = vec2f(dirtHash(vec2f(fi, seed)), dirtHash(vec2f(fi + 9.0, seed)));\n    let r = 0.06 + 0.16 * dirtHash(vec2f(fi + 3.0, seed));\n    let d = distance(uv, c) / r;\n    acc = acc + smoothstep(1.0, 0.0, d) * (0.3 + 0.7 * dirtHash(vec2f(fi + 5.0, seed)));\n  }\n  return clamp(acc, 0.0, 1.0);\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let lum = dot(c.rgb, vec3f(0.299, 0.587, 0.114));\n  let bright = max(0.0, lum - uni.u_threshold);\n  let dirt = dirtAmount(uv, uni.u_seed + 1.0);\n  return vec4f(c.rgb + bright * dirt * uni.u_intensity * 2.0, c.a);\n}';

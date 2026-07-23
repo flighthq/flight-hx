@@ -8,4 +8,4 @@ import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Plane = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var a:Float; var b:Float; var c:Float; var d:Float; };
 
-typedef PlaneLike = EntityWithoutRuntime<Plane>;
+typedef PlaneLike = EntityWithoutRuntime<Dynamic>;

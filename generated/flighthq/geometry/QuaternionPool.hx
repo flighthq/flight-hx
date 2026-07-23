@@ -4,11 +4,10 @@ package flighthq.geometry;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Quaternion.createQuaternion;
-import flighthq.types.Quaternion;
 
 @:expose("flighthq.geometry.QuaternionPool")
 class QuaternionPool {
-  public static function acquireIdentityQuaternion():Quaternion {
+  public static function acquireIdentityQuaternion():Dynamic {
     var q:Dynamic = cast _Runtime.UNDEFINED;
     q = _Runtime.callValue(acquireQuaternion, cast ([] : Array<Dynamic>));
     _Runtime.setField(q, 'x', 0.0);
@@ -19,10 +18,10 @@ class QuaternionPool {
     return cast null;
   }
 
-  public static function acquireQuaternion():Quaternion {
-    var q:Quaternion = cast _Runtime.UNDEFINED;
+  public static function acquireQuaternion():Dynamic {
+    var q:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(QuaternionPool.pool__quaternionPool, 'length'), 0.0, '>'))) {
-      (q = cast ((cast _Runtime.callProperty(QuaternionPool.pool__quaternionPool, 'pop', cast ([] : Array<Dynamic>)) : Quaternion) : Dynamic));
+      (q = cast ((cast _Runtime.callProperty(QuaternionPool.pool__quaternionPool, 'pop', cast ([] : Array<Dynamic>)) : Dynamic) : Dynamic));
     } else {
       (q = cast (_Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>)) : Dynamic));
     }
@@ -34,10 +33,10 @@ class QuaternionPool {
     _Runtime.setLength(QuaternionPool.pool__quaternionPool, 0.0);
   }
 
-  public static function releaseQuaternion(q:Quaternion):Void {
+  public static function releaseQuaternion(q:Dynamic):Void {
     if (_Runtime.truthy(!_Runtime.truthy(q))) { return; }
     _Runtime.callProperty(QuaternionPool.pool__quaternionPool, 'push', cast ([q] : Array<Dynamic>));
   }
 
-  public static final pool__quaternionPool:Array<Quaternion> = cast ([] : Array<Dynamic>);
+  public static final pool__quaternionPool:Array<Dynamic> = cast ([] : Array<Dynamic>);
 }

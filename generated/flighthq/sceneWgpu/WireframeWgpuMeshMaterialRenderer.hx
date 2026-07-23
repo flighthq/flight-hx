@@ -13,20 +13,16 @@ import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuDrawUniform
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUniform;
 import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
 import flighthq.sceneWgpu._internal._WgpuWireframeUploadValues.ensureWgpuWireframeUpload;
-import flighthq.types.Camera;
 import flighthq.types.LinearColor;
-import flighthq.types.Material;
-import flighthq.types.MeshGeometry;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.WgpuMeshMaterialRenderer;
-import flighthq.types.WgpuRenderState;
 import flighthq.types.WireframeMaterial;
 import flighthq.types._internal._WireframeMaterialValues.WireframeMaterialKind;
 
 @:expose("flighthq.sceneWgpu.WireframeWgpuMeshMaterialRenderer")
 class WireframeWgpuMeshMaterialRenderer {
-  public static final wireframeWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera) {
+  public static final wireframeWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:Dynamic, material:Null<Dynamic>, _lights:SceneLightBlock, camera:Dynamic) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var wireframe:Dynamic = cast _Runtime.UNDEFINED;
@@ -48,7 +44,7 @@ class WireframeWgpuMeshMaterialRenderer {
     }
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, group] : Array<Dynamic>));
-  }, draw: function(state:WgpuRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
+  }, draw: function(state:Dynamic, proxy:SceneRenderProxy, geometry:Dynamic) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var scene:Dynamic = cast _Runtime.UNDEFINED;
@@ -71,7 +67,7 @@ class WireframeWgpuMeshMaterialRenderer {
     _Runtime.callProperty(pass, 'drawIndexed', cast ([(_Runtime.field(subset, 'indexCount') * 2.0), 1.0, (_Runtime.field(subset, 'indexOffset') * 2.0), 0.0, 0.0] : Array<Dynamic>));
   } };
 
-  public static function registerWireframeWgpuMaterial(state:WgpuRenderState):Void {
+  public static function registerWireframeWgpuMaterial(state:Dynamic):Void {
     _Runtime.callValue(registerWgpuMeshMaterialRenderer, cast ([state, WireframeMaterialKind, wireframeWgpuMeshMaterialRenderer] : Array<Dynamic>));
   }
 

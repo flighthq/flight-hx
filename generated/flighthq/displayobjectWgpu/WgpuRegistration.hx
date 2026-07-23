@@ -18,7 +18,6 @@ import flighthq.displayobjectWgpu.WgpuTilemap.defaultWgpuTilemapRenderer;
 import flighthq.displayobjectWgpu.WgpuVideo.defaultWgpuVideoRenderer;
 import flighthq.render.Renderer.registerRenderer;
 import flighthq.types.RenderCache.RenderCacheKind;
-import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._BitmapValues.BitmapKind;
 import flighthq.types._internal._DisplayObjectValues.DisplayObjectKind;
 import flighthq.types._internal._ParticleEmitterValues.ParticleEmitterKind;
@@ -33,7 +32,7 @@ import flighthq.types._internal._VideoValues.VideoKind;
 
 @:expose("flighthq.displayobjectWgpu.WgpuRegistration")
 class WgpuRegistration {
-  public static function registerWgpuDisplayObjectRenderers(state:WgpuRenderState):Void {
+  public static function registerWgpuDisplayObjectRenderers(state:Dynamic):Void {
     _Runtime.callValue(registerDefaultWgpuMaterial, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(registerRenderer, cast ([state, BitmapKind, defaultWgpuBitmapRenderer] : Array<Dynamic>));
     _Runtime.callValue(registerRenderer, cast ([state, DisplayObjectKind, defaultWgpuDisplayObjectRenderer] : Array<Dynamic>));
@@ -49,7 +48,7 @@ class WgpuRegistration {
     _Runtime.callValue(registerRenderer, cast ([state, VideoKind, defaultWgpuVideoRenderer] : Array<Dynamic>));
   }
 
-  public static function registerWgpuSpriteRenderers(state:WgpuRenderState):Void {
+  public static function registerWgpuSpriteRenderers(state:Dynamic):Void {
     _Runtime.callValue(registerDefaultWgpuMaterial, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(registerRenderer, cast ([state, ParticleEmitterKind, defaultWgpuParticleEmitterRenderer] : Array<Dynamic>));
     _Runtime.callValue(registerRenderer, cast ([state, QuadBatchKind, defaultWgpuQuadBatchRenderer] : Array<Dynamic>));

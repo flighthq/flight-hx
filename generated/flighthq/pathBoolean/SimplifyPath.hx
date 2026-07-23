@@ -5,12 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
 import flighthq.pathBoolean.ResolvePathRegions.resolvePathRegions;
-import flighthq.types.Path;
 import flighthq.types.PathBooleanOptions;
 
 @:expose("flighthq.pathBoolean.SimplifyPath")
 class SimplifyPath {
-  public static function simplifyPath(path:Path, ?options:PathBooleanOptions):Path {
+  public static function simplifyPath(path:Dynamic, ?options:PathBooleanOptions):Dynamic {
     var fillRule:Dynamic = cast _Runtime.UNDEFINED;
     var contours:Dynamic = cast _Runtime.UNDEFINED;
     fillRule = _Runtime.coalesce(_Runtime.optionalField(options, 'fillRule'), function():Dynamic return cast 'nonZero');

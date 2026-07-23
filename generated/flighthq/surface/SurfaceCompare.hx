@@ -4,12 +4,11 @@ package flighthq.surface;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.surface.Surface.createSurface;
-import flighthq.types.Surface;
 import flighthq.types.SurfaceMismatch;
 
 @:expose("flighthq.surface.SurfaceCompare")
 class SurfaceCompare {
-  public static function compareSurface(source:Surface, other:Surface):Null<Surface> {
+  public static function compareSurface(source:Dynamic, other:Dynamic):Null<Dynamic> {
     var result:Dynamic = cast _Runtime.UNDEFINED;
     var hasDiff:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(source, 'width'), _Runtime.field(other, 'width')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(source, 'height'), _Runtime.field(other, 'height'))))) {
@@ -38,7 +37,7 @@ class SurfaceCompare {
     return cast null;
   }
 
-  public static function getSurfaceMismatch(source:Surface, other:Surface, channelTolerance:Float = 0.0):SurfaceMismatch {
+  public static function getSurfaceMismatch(source:Dynamic, other:Dynamic, channelTolerance:Float = 0.0):SurfaceMismatch {
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var totalPixels:Dynamic = cast _Runtime.UNDEFINED;

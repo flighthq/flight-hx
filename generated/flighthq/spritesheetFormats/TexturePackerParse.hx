@@ -12,15 +12,13 @@ import flighthq.spritesheetFormats.TexturePackerSchema.TexturePackerMeta;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.textureatlasFormats.TextureAtlasPackerParse.parseTextureAtlasPackerDocument;
 import flighthq.types.SpritesheetAnimationData;
-import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
-import flighthq.types.TextureAtlasRegion;
 
-typedef TexturePackerParsed = { var data:SpritesheetData; var document:TexturePackerDocument; };
+typedef TexturePackerParsed = { var data:Dynamic; var document:TexturePackerDocument; };
 
 @:expose("flighthq.spritesheetFormats.TexturePackerParse")
 class TexturePackerParse {
-  public static function frameFromRegion__texturePackerParse(region:TextureAtlasRegion):SpritesheetFrameData {
+  public static function frameFromRegion__texturePackerParse(region:Dynamic):SpritesheetFrameData {
     return cast _Runtime.callValue(createSpritesheetFrameData, cast ([{ height: _Runtime.field(region, 'height'), name: _Runtime.coalesce(_Runtime.field(region, 'name'), function():Dynamic return cast ''), offsetX: _Runtime.field(region, 'sourceX'), offsetY: _Runtime.field(region, 'sourceY'), pivotX: _Runtime.field(region, 'pivotX'), pivotY: _Runtime.field(region, 'pivotY'), rotated: _Runtime.field(region, 'rotated'), sourceHeight: _Runtime.coalesce(_Runtime.field(region, 'originalHeight'), function():Dynamic return cast _Runtime.field(region, 'height')), sourceWidth: _Runtime.coalesce(_Runtime.field(region, 'originalWidth'), function():Dynamic return cast _Runtime.field(region, 'width')), width: _Runtime.field(region, 'width'), x: _Runtime.field(region, 'x'), y: _Runtime.field(region, 'y') }] : Array<Dynamic>));
     return cast null;
   }
@@ -36,7 +34,7 @@ class TexturePackerParse {
     return cast null;
   }
 
-  public static function documentToData__texturePackerParse(doc:TexturePackerDocument):SpritesheetData {
+  public static function documentToData__texturePackerParse(doc:TexturePackerDocument):Dynamic {
     var regions:Dynamic = cast _Runtime.UNDEFINED;
     var frames:Array<SpritesheetFrameData> = cast _Runtime.UNDEFINED;
     var frameNames:Array<String> = cast _Runtime.UNDEFINED;
@@ -53,7 +51,7 @@ class TexturePackerParse {
     return cast null;
   }
 
-  public static function parseTexturePackerSpritesheet(json:String):SpritesheetData {
+  public static function parseTexturePackerSpritesheet(json:String):Dynamic {
     return cast _Runtime.callValue(TexturePackerParse.documentToData__texturePackerParse, cast ([(cast _Runtime.jsonParse(json) : TexturePackerDocument)] : Array<Dynamic>));
     return cast null;
   }

@@ -6,6 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.EntityWithoutRuntime;
 
-typedef Transform3D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var position:Vector3; var rotation:Quaternion; var scale:Vector3; };
+typedef Transform3D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var position:Dynamic; var rotation:Dynamic; var scale:Dynamic; };
 
 typedef Transform3DLike = EntityWithoutRuntime<Transform3D>;

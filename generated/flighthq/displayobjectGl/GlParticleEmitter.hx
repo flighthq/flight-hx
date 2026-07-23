@@ -9,9 +9,7 @@ import flighthq.render.Renderer.noopRendererData;
 import flighthq.renderGl.GlDraw.bindGlImageResourceTexture;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
-import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlParticleShader;
-import flighthq.types.ParticleEmitter;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.SpriteRenderer;
 
@@ -32,7 +30,7 @@ class GlParticleEmitter {
     return cast null;
   }
 
-  public static function ensureParticleShader__glParticleEmitter(state:GlRenderState):GlParticleShader {
+  public static function ensureParticleShader__glParticleEmitter(state:Dynamic):GlParticleShader {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var cornerData:Dynamic = cast _Runtime.UNDEFINED;
@@ -52,7 +50,7 @@ class GlParticleEmitter {
     return cast null;
   }
 
-  public static function ensureInstanceCapacity__glParticleEmitter(state:GlRenderState, count:Float):Void {
+  public static function ensureInstanceCapacity__glParticleEmitter(state:Dynamic, count:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var needed:Dynamic = cast _Runtime.UNDEFINED;
@@ -67,7 +65,7 @@ class GlParticleEmitter {
     _Runtime.callProperty(gl, 'bufferData', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), (newSize * 4.0), _Runtime.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
   }
 
-  public static function drawGlParticleEmitter(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  public static function drawGlParticleEmitter(state:Dynamic, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -93,7 +91,7 @@ class GlParticleEmitter {
     var clipH:Dynamic = cast _Runtime.UNDEFINED;
     var m:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : ParticleEmitter);
+    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
     __destructure0 = _Runtime.field(source, 'data');
     atlas = _Runtime.field(__destructure0, 'atlas');
     alphas = _Runtime.field(__destructure0, 'alphas');
@@ -221,7 +219,7 @@ class GlParticleEmitter {
     _Runtime.callProperty(gl, 'vertexAttribDivisor', cast ([_Runtime.field(shader, 'locSize'), 0.0] : Array<Dynamic>));
   }
 
-  public static final defaultGlParticleEmitterRenderer:SpriteRenderer = { createData: noopRendererData, submit: function(state:GlRenderState, node:RenderProxy2D) {
+  public static final defaultGlParticleEmitterRenderer:SpriteRenderer = { createData: noopRendererData, submit: function(state:Dynamic, node:RenderProxy2D) {
     _Runtime.callValue(flushGlSpriteBatch, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlParticleEmitter, cast ([state, node] : Array<Dynamic>));
   } };

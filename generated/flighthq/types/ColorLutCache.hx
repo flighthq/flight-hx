@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ColorLutCache = { var signature:Null<String>; var lut:Null<ColorLut>; };
+typedef ColorLutCache = { var signature:Null<String>; var lut:Null<Dynamic>; };

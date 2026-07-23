@@ -4,14 +4,11 @@ package flighthq.particleemitter;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particleemitter.UpdateParticleEmitter.updateParticleEmitter;
-import flighthq.types.ParticleEmitter;
 import flighthq.types.ParticleEmitterCallbacks;
-import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterState;
 
 @:expose("flighthq.particleemitter.PrewarmParticleEmitter")
 class PrewarmParticleEmitter {
-  public static function prewarmParticleEmitter(emitter:ParticleEmitter, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, ?stepDeltaTime:Dynamic, ?callbacks:ParticleEmitterCallbacks):Void {
+  public static function prewarmParticleEmitter(emitter:Dynamic, state:Dynamic, config:Dynamic, duration:Float, ?stepDeltaTime:Dynamic, ?callbacks:ParticleEmitterCallbacks):Void {
     if (stepDeltaTime == null) stepDeltaTime = cast ((1.0 / 60.0) : Dynamic);
     var step:Dynamic = cast _Runtime.UNDEFINED;
     var elapsed:Dynamic = cast _Runtime.UNDEFINED;

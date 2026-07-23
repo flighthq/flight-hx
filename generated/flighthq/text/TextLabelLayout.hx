@@ -9,14 +9,12 @@ import flighthq.textlayout.TextLayout.computeTextLayout;
 import flighthq.textlayout.TextLayoutMeasure.getTextLayoutMeasureProvider;
 import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
 import flighthq.textlayout.TextMetrics.getTextMetrics;
-import flighthq.types.TextLabel;
 import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.TextLayout.TextLayoutResult;
-import flighthq.types.TextMetrics;
 
 @:expose("flighthq.text.TextLabelLayout")
 class TextLabelLayout {
-  public static function ensureTextLayout(source:TextLabel):Void {
+  public static function ensureTextLayout(source:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var contentId:Dynamic = cast _Runtime.UNDEFINED;
     var measure:Dynamic = cast _Runtime.UNDEFINED;
@@ -33,13 +31,13 @@ class TextLabelLayout {
     _Runtime.setField(runtime, 'textLayoutUsingContentId', contentId);
   }
 
-  public static function getTextLayout(source:TextLabel):Null<TextLayoutResult> {
+  public static function getTextLayout(source:Dynamic):Null<TextLayoutResult> {
     _Runtime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
     return cast _Runtime.field((cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime), 'textLayout');
     return cast null;
   }
 
-  public static function getTextLayoutMetrics(out:TextMetrics, source:TextLabel):Void {
+  public static function getTextLayoutMetrics(out:Dynamic, source:Dynamic):Void {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     layout = _Runtime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(layout, null))) {

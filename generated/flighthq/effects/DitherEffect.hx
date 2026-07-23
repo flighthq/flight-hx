@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.DitherEffect;
 
 @:expose("flighthq.effects.DitherEffect")
 class DitherEffect {
-  public static function createDitherEffect(?options:Dynamic):DitherEffect {
+  public static function createDitherEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'DitherEffect' }, options]);
     return cast null;

@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.displayobjectCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.types.AdvancedBlendMode;
 import flighthq.types.BlendMode;
-import flighthq.types.CanvasRenderState;
 
 @:expose("flighthq.displayobjectCanvas.CanvasMaterials")
 class CanvasMaterials {

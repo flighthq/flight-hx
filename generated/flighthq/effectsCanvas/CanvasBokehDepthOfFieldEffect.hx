@@ -4,17 +4,15 @@ package flighthq.effectsCanvas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.passthroughCanvasEffectPass;
-import flighthq.types.BokehDepthOfFieldEffect;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
-import flighthq.types.CanvasRenderTarget;
 
 @:expose("flighthq.effectsCanvas.CanvasBokehDepthOfFieldEffect")
 class CanvasBokehDepthOfFieldEffect {
-  public static function applyBokehDepthOfFieldEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:BokehDepthOfFieldEffect):Void {
+  public static function applyBokehDepthOfFieldEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
   public static final defaultCanvasBokehDepthOfFieldEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyBokehDepthOfFieldEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : BokehDepthOfFieldEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyBokehDepthOfFieldEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 }

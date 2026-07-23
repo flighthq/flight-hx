@@ -15,19 +15,12 @@ import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.SHADOW_DEPTH_FORMAT;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuSceneLayouts;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuDrawUniform;
 import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
-import flighthq.types.Camera;
-import flighthq.types.Material;
-import flighthq.types.Matrix3;
-import flighthq.types.Matrix4;
-import flighthq.types.Mesh;
-import flighthq.types.SceneNode;
 import flighthq.types.SceneNode.SceneNodeTraits;
 import flighthq.types.SceneRenderProxy;
-import flighthq.types.WgpuRenderState;
 
 @:expose("flighthq.sceneWgpu.WgpuShadowMap")
 class WgpuShadowMap {
-  public static function destroyWgpuSceneShadow(state:WgpuRenderState):Void {
+  public static function destroyWgpuSceneShadow(state:Dynamic):Void {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(scene, 'shadow'), null))) {
@@ -52,7 +45,7 @@ class WgpuShadowMap {
     _Runtime.setField(scene, 'pbrSampleShadowView', null);
   }
 
-  public static function drawWgpuSceneShadowMap(state:WgpuRenderState, scene:SceneNode, shadowCamera:Camera):Void {
+  public static function drawWgpuSceneShadowMap(state:Dynamic, scene:Dynamic, shadowCamera:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var encoder:Dynamic = cast _Runtime.UNDEFINED;
     var sceneRuntime:Dynamic = cast _Runtime.UNDEFINED;
@@ -67,7 +60,7 @@ class WgpuShadowMap {
     shadow = _Runtime.field(sceneRuntime, 'shadow');
     if (_Runtime.truthy(_Runtime.strictEquals(shadow, null))) {
       var depthTexture:Dynamic = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([WgpuShadowMap.SHADOW_MAP_SIZE__wgpuShadowMap, WgpuShadowMap.SHADOW_MAP_SIZE__wgpuShadowMap, 1.0] : Array<Dynamic>), format: SHADOW_DEPTH_FORMAT, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'RENDER_ATTACHMENT')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
-      (shadow = cast ({ depthTexture: depthTexture, depthView: _Runtime.callProperty(depthTexture, 'createView', cast ([] : Array<Dynamic>)), matrix: (cast _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) : Matrix4) } : Dynamic));
+      (shadow = cast ({ depthTexture: depthTexture, depthView: _Runtime.callProperty(depthTexture, 'createView', cast ([] : Array<Dynamic>)), matrix: (cast _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) : Dynamic) } : Dynamic));
       _Runtime.setField(sceneRuntime, 'shadow', shadow);
     }
     lightMatrix = _Runtime.field(shadow, 'matrix');
@@ -81,11 +74,11 @@ class WgpuShadowMap {
       var upload:Dynamic = cast _Runtime.UNDEFINED;
       var world:Dynamic = cast _Runtime.UNDEFINED;
       var drawBindGroup:Dynamic = cast _Runtime.UNDEFINED;
-      mesh = (cast (cast node : Dynamic) : Mesh);
+      mesh = (cast (cast node : Dynamic) : Dynamic);
       if (_Runtime.truthy(_Runtime.looseEquals(_Runtime.field(mesh, 'geometry'), null))) { return; }
       upload = _Runtime.callValue(ensureWgpuMeshUpload, cast ([state, _Runtime.field(mesh, 'geometry')] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(upload, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null)))) { return; }
-      world = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)) : Matrix4);
+      world = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)) : Dynamic);
       _Runtime.callValue(multiplyMatrix4, cast ([_Runtime.field(WgpuShadowMap._shadowProxy__wgpuShadowMap, 'worldMatrix'), lightMatrix, world] : Array<Dynamic>));
       drawBindGroup = _Runtime.callValue(writeWgpuDrawUniform, cast ([state, WgpuShadowMap._shadowProxy__wgpuShadowMap] : Array<Dynamic>));
       _Runtime.setIndex(WgpuShadowMap._dynamicOffsets__wgpuShadowMap, 0.0, _Runtime.field(sceneRuntime, 'pendingDrawOffset'));
@@ -97,7 +90,7 @@ class WgpuShadowMap {
     _Runtime.callProperty(pass, 'end', cast ([] : Array<Dynamic>));
   }
 
-  public static function ensureWgpuShadowDepthPipeline__wgpuShadowMap(state:WgpuRenderState):Dynamic {
+  public static function ensureWgpuShadowDepthPipeline__wgpuShadowMap(state:Dynamic):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
@@ -120,7 +113,7 @@ class WgpuShadowMap {
 
   public static final SHADOW_VERTEX_BUFFER_LAYOUTS__wgpuShadowMap:Array<Dynamic> = cast ([{ arrayStride: 48.0, attributes: cast ([{ shaderLocation: 0.0, offset: 0.0, format: 'float32x3' }] : Array<Dynamic>) }] : Array<Dynamic>);
 
-  public static final _shadowProxy__wgpuShadowMap:SceneRenderProxy = { material: (cast {  } : Material), normalMatrix: (cast _Runtime.callValue(createMatrix3, cast ([] : Array<Dynamic>)) : Matrix3), subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: (cast _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) : Matrix4) };
+  public static final _shadowProxy__wgpuShadowMap:SceneRenderProxy = { material: (cast {  } : Dynamic), normalMatrix: (cast _Runtime.callValue(createMatrix3, cast ([] : Array<Dynamic>)) : Dynamic), subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: (cast _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) : Dynamic) };
 
   public static final _dynamicOffsets__wgpuShadowMap:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [1.0]);
 }

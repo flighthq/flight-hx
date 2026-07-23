@@ -4,11 +4,10 @@ package flighthq.surface;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
-import flighthq.types.SurfaceRegion;
 
 @:expose("flighthq.surface.SurfaceTone")
 class SurfaceTone {
-  public static function applySurfaceCurve(out:SurfaceRegion, source:SurfaceRegion, redLut:Null<Dynamic>, greenLut:Null<Dynamic>, blueLut:Null<Dynamic>, ?alphaLut:Null<Dynamic>):Void {
+  public static function applySurfaceCurve(out:Dynamic, source:Dynamic, redLut:Null<Dynamic>, greenLut:Null<Dynamic>, blueLut:Null<Dynamic>, ?alphaLut:Null<Dynamic>):Void {
     if (alphaLut == null) alphaLut = cast (null : Dynamic);
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
@@ -49,7 +48,7 @@ class SurfaceTone {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(out, 'surface')] : Array<Dynamic>));
   }
 
-  public static function applySurfaceLevels(out:SurfaceRegion, source:SurfaceRegion, blackPoint:Float = 0.0, whitePoint:Float = 255.0, gamma:Float = 1.0):Void {
+  public static function applySurfaceLevels(out:Dynamic, source:Dynamic, blackPoint:Float = 0.0, whitePoint:Float = 255.0, gamma:Float = 1.0):Void {
     var bp:Dynamic = cast _Runtime.UNDEFINED;
     var wp:Dynamic = cast _Runtime.UNDEFINED;
     var span:Dynamic = cast _Runtime.UNDEFINED;

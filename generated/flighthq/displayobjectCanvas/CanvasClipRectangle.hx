@@ -4,8 +4,6 @@ package flighthq.displayobjectCanvas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.displayobjectCanvas.CanvasTransform.setCanvasTransform;
-import flighthq.types.CanvasRenderState;
-import flighthq.types.Matrix;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.ShapeCommand.PathWinding;
 
@@ -15,7 +13,7 @@ class CanvasClipRectangle {
     _Runtime.callProperty(_Runtime.field(state, 'context'), 'restore', cast ([] : Array<Dynamic>));
   }
 
-  public static function pushCanvasClipContours(state:Dynamic, contours:Array<Array<Float>>, winding:PathWinding, transform:Matrix):Void {
+  public static function pushCanvasClipContours(state:Dynamic, contours:Array<Array<Float>>, winding:PathWinding, transform:Dynamic):Void {
     _Runtime.callProperty(_Runtime.field(state, 'context'), 'save', cast ([] : Array<Dynamic>));
     _Runtime.callValue(setCanvasTransform, cast ([state, _Runtime.field(state, 'context'), transform] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(state, 'context'), 'beginPath', cast ([] : Array<Dynamic>));
@@ -39,7 +37,7 @@ class CanvasClipRectangle {
     _Runtime.callProperty(_Runtime.field(state, 'context'), 'clip', cast ([_Runtime.select(_Runtime.strictEquals(winding, 'evenOdd'), function():Dynamic return cast 'evenodd', function():Dynamic return cast 'nonzero')] : Array<Dynamic>));
   }
 
-  public static function pushCanvasClipRectangle(state:Dynamic, rect:RectangleLike, transform:Matrix):Void {
+  public static function pushCanvasClipRectangle(state:Dynamic, rect:RectangleLike, transform:Dynamic):Void {
     _Runtime.callProperty(_Runtime.field(state, 'context'), 'save', cast ([] : Array<Dynamic>));
     _Runtime.callValue(setCanvasTransform, cast ([state, _Runtime.field(state, 'context'), transform] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(state, 'context'), 'beginPath', cast ([] : Array<Dynamic>));

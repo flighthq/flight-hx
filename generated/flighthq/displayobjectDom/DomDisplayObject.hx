@@ -12,19 +12,17 @@ import flighthq.displayobjectDom.DomRenderState.getDomRenderStateRuntime;
 import flighthq.render.RenderProxy.getRenderProxy2D;
 import flighthq.render.RenderProxy.isRenderProxyVisible;
 import flighthq.render.Renderer.noopRendererData;
-import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObjectRenderer;
-import flighthq.types.DomRenderState;
 import flighthq.types.RenderProxy2D;
 
 @:expose("flighthq.displayobjectDom.DomDisplayObject")
 class DomDisplayObject {
-  public static function drawDomDisplayObject(_state:DomRenderState, _renderProxy:RenderProxy2D):Void {
+  public static function drawDomDisplayObject(_state:Dynamic, _renderProxy:RenderProxy2D):Void {
   }
 
   public static final defaultDomDisplayObjectRenderer:DisplayObjectRenderer = { createData: noopRendererData, submit: drawDomDisplayObject };
 
-  public static function renderDomDisplayObject(state:DomRenderState, source:DisplayObject):Void {
+  public static function renderDomDisplayObject(state:Dynamic, source:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var container:Dynamic = cast _Runtime.UNDEFINED;
     var clipHooks:Dynamic = cast _Runtime.UNDEFINED;
@@ -45,7 +43,7 @@ class DomDisplayObject {
     newLength = 0.0;
     needsReconcile = false;
     while (_Runtime.truthy(_Runtime.compare(stackLength, 0.0, '>'))) {
-      var current:Dynamic = (cast _Runtime.getIndex(tempStack, --stackLength) : DisplayObject);
+      var current:Dynamic = (cast _Runtime.getIndex(tempStack, --stackLength) : Dynamic);
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(current, 'enabled')))) { continue; }
       var data:Dynamic = _Runtime.callValue(getRenderProxy2D, cast ([state, current] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')))) { continue; }
@@ -64,7 +62,7 @@ class DomDisplayObject {
           {
             var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
             while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
-              _Runtime.setIndex(tempStack, stackLength++, (cast _Runtime.getIndex(children, i) : DisplayObject));
+              _Runtime.setIndex(tempStack, stackLength++, (cast _Runtime.getIndex(children, i) : Dynamic));
               i--;
             }
           }

@@ -12,42 +12,35 @@ import flighthq.spritesheet.SpritesheetFrom as Facade_Spritesheet_flighthq_sprit
 import flighthq.spritesheet.SpritesheetPlayer as Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer;
 import flighthq.spritesheet.SpritesheetValidation as Facade_Spritesheet_flighthq_spritesheet_SpritesheetValidation;
 import flighthq.types.GridSliceOptions;
-import flighthq.types.Spritesheet;
-import flighthq.types.SpritesheetAnimation;
 import flighthq.types.SpritesheetAnimationData;
-import flighthq.types.SpritesheetData;
-import flighthq.types.SpritesheetFrame;
 import flighthq.types.SpritesheetFrameData;
-import flighthq.types.SpritesheetPlayer;
 import flighthq.types.SpritesheetValidationDiagnostic;
-import flighthq.types.TextureAtlas;
-import flighthq.types.Tileset;
 
 @:expose("flighthq.spritesheet.Spritesheet")
 class Spritesheet {
-  public static function acquireSpritesheetPlayer():SpritesheetPlayer {
+  public static function acquireSpritesheetPlayer():Dynamic {
     return cast _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.acquireSpritesheetPlayer, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneSpritesheet(spritesheet:Spritesheet):Spritesheet {
+  public static function cloneSpritesheet(spritesheet:Dynamic):Dynamic {
     var frames:Dynamic = cast _Runtime.UNDEFINED;
     frames = _Runtime.callProperty(_Runtime.field(spritesheet, 'frames'), 'map', cast ([function(f:Dynamic) return _Runtime.callValue(createSpritesheetFrame, cast ([{ id: _Runtime.field(f, 'id'), offsetX: _Runtime.field(f, 'offsetX'), offsetY: _Runtime.field(f, 'offsetY'), pivotX: _Runtime.field(f, 'pivotX'), pivotY: _Runtime.field(f, 'pivotY'), rotated: _Runtime.field(f, 'rotated') }] : Array<Dynamic>))] : Array<Dynamic>));
     return cast _Runtime.callValue(createEntity, cast ([{ atlas: _Runtime.field(spritesheet, 'atlas'), animations: _Runtime.mergeObjects([_Runtime.field(spritesheet, 'animations')]), frames: frames }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneSpritesheetPlayer(player:SpritesheetPlayer):SpritesheetPlayer {
+  public static function cloneSpritesheetPlayer(player:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.cloneSpritesheetPlayer, cast ([player] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpritesheet(?obj:Dynamic):Spritesheet {
+  public static function createSpritesheet(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(createEntity, cast ([{ atlas: _Runtime.coalesce(_Runtime.optionalField(obj, 'atlas'), function():Dynamic return cast null), animations: _Runtime.coalesce(_Runtime.optionalField(obj, 'animations'), function():Dynamic return cast {  }), frames: _Runtime.coalesce(_Runtime.optionalField(obj, 'frames'), function():Dynamic return cast cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpritesheetAnimation(?obj:Dynamic):SpritesheetAnimation {
+  public static function createSpritesheetAnimation(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetAnimation.createSpritesheetAnimation, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -57,17 +50,17 @@ class Spritesheet {
     return cast null;
   }
 
-  public static function createSpritesheetAnimationFromFrameNames(spritesheet:Spritesheet, pattern:Dynamic, ?options:Dynamic):Null<SpritesheetAnimation> {
+  public static function createSpritesheetAnimationFromFrameNames(spritesheet:Dynamic, pattern:Dynamic, ?options:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetAnimation.createSpritesheetAnimationFromFrameNames, cast ([spritesheet, pattern, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpritesheetData(?obj:Dynamic):SpritesheetData {
+  public static function createSpritesheetData(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetData.createSpritesheetData, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpritesheetFrame(?obj:Dynamic):SpritesheetFrame {
+  public static function createSpritesheetFrame(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetFrame.createSpritesheetFrame, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -77,88 +70,88 @@ class Spritesheet {
     return cast null;
   }
 
-  public static function createSpritesheetFromData(data:SpritesheetData, atlas:TextureAtlas):Spritesheet {
+  public static function createSpritesheetFromData(data:Dynamic, atlas:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetFrom.createSpritesheetFromData, cast ([data, atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpritesheetFromGrid(options:GridSliceOptions):Spritesheet {
+  public static function createSpritesheetFromGrid(options:GridSliceOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetFrom.createSpritesheetFromGrid, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpritesheetFromTileset(tileset:Tileset):Spritesheet {
+  public static function createSpritesheetFromTileset(tileset:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetFrom.createSpritesheetFromTileset, cast ([tileset] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpritesheetPlayer(?obj:Dynamic):SpritesheetPlayer {
+  public static function createSpritesheetPlayer(?obj:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.createSpritesheetPlayer, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function disposeSpritesheetPlayer(player:SpritesheetPlayer):Void {
+  public static function disposeSpritesheetPlayer(player:Dynamic):Void {
     _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.disposeSpritesheetPlayer, cast ([player] : Array<Dynamic>));
   }
 
-  public static function getSpritesheetAnimation(spritesheet:Spritesheet, label:String):Null<SpritesheetAnimation> {
+  public static function getSpritesheetAnimation(spritesheet:Dynamic, label:String):Null<Dynamic> {
     return cast _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(spritesheet, 'animations'), label), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function getSpritesheetPlayerFrame(player:SpritesheetPlayer, spritesheet:Spritesheet):Null<SpritesheetFrame> {
+  public static function getSpritesheetPlayerFrame(player:Dynamic, spritesheet:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.getSpritesheetPlayerFrame, cast ([player, spritesheet] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSpritesheetPlayerFrameAt(player:SpritesheetPlayer, spritesheet:Spritesheet, frameOffset:Float):Null<SpritesheetFrame> {
+  public static function getSpritesheetPlayerFrameAt(player:Dynamic, spritesheet:Dynamic, frameOffset:Float):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.getSpritesheetPlayerFrameAt, cast ([player, spritesheet, frameOffset] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function pauseSpritesheetPlayer(player:SpritesheetPlayer):Void {
+  public static function pauseSpritesheetPlayer(player:Dynamic):Void {
     _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.pauseSpritesheetPlayer, cast ([player] : Array<Dynamic>));
   }
 
-  public static function playSpritesheetAnimation(player:SpritesheetPlayer, animation:Null<SpritesheetAnimation>, ?restart:Dynamic):Void {
+  public static function playSpritesheetAnimation(player:Dynamic, animation:Null<Dynamic>, ?restart:Dynamic):Void {
     _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.playSpritesheetAnimation, cast ([player, animation, restart] : Array<Dynamic>));
   }
 
-  public static function queueSpritesheetAnimation(player:SpritesheetPlayer, animation:SpritesheetAnimation):Void {
+  public static function queueSpritesheetAnimation(player:Dynamic, animation:Dynamic):Void {
     _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.queueSpritesheetAnimation, cast ([player, animation] : Array<Dynamic>));
   }
 
-  public static function releaseSpritesheetPlayer(player:SpritesheetPlayer):Void {
+  public static function releaseSpritesheetPlayer(player:Dynamic):Void {
     _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.releaseSpritesheetPlayer, cast ([player] : Array<Dynamic>));
   }
 
-  public static function resumeSpritesheetPlayer(player:SpritesheetPlayer):Void {
+  public static function resumeSpritesheetPlayer(player:Dynamic):Void {
     _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.resumeSpritesheetPlayer, cast ([player] : Array<Dynamic>));
   }
 
-  public static function seekSpritesheetPlayerToFrame(player:SpritesheetPlayer, frameIndex:Float):Void {
+  public static function seekSpritesheetPlayerToFrame(player:Dynamic, frameIndex:Float):Void {
     _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.seekSpritesheetPlayerToFrame, cast ([player, frameIndex] : Array<Dynamic>));
   }
 
-  public static function seekSpritesheetPlayerToTime(player:SpritesheetPlayer, time:Float):Void {
+  public static function seekSpritesheetPlayerToTime(player:Dynamic, time:Float):Void {
     _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.seekSpritesheetPlayerToTime, cast ([player, time] : Array<Dynamic>));
   }
 
-  public static function stopSpritesheetPlayer(player:SpritesheetPlayer):Void {
+  public static function stopSpritesheetPlayer(player:Dynamic):Void {
     _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.stopSpritesheetPlayer, cast ([player] : Array<Dynamic>));
   }
 
-  public static function updateSpritesheetPlayer(player:SpritesheetPlayer, deltaTime:Float):Bool {
+  public static function updateSpritesheetPlayer(player:Dynamic, deltaTime:Float):Bool {
     return cast _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.updateSpritesheetPlayer, cast ([player, deltaTime] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function validateSpritesheet(spritesheet:Spritesheet):Null<Array<SpritesheetValidationDiagnostic>> {
+  public static function validateSpritesheet(spritesheet:Dynamic):Null<Array<SpritesheetValidationDiagnostic>> {
     return cast _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetValidation.validateSpritesheet, cast ([spritesheet] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function validateSpritesheetData(data:SpritesheetData):Null<Array<SpritesheetValidationDiagnostic>> {
+  public static function validateSpritesheetData(data:Dynamic):Null<Array<SpritesheetValidationDiagnostic>> {
     return cast _Runtime.callValue(Facade_Spritesheet_flighthq_spritesheet_SpritesheetValidation.validateSpritesheetData, cast ([data] : Array<Dynamic>));
     return cast null;
   }

@@ -5,14 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
-import flighthq.types.DitherEffect;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
 
 @:expose("flighthq.effectsGl.GlDitherEffect")
 class GlDitherEffect {
-  public static function applyDitherEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DitherEffect):Void {
+  public static function applyDitherEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     var levels:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
     levels = _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 4.0);
@@ -24,7 +21,7 @@ class GlDitherEffect {
   }
 
   public static final defaultGlDitherEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyDitherEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : DitherEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyDitherEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static final DITHER_FRAGMENT_SRC__glDitherEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_levels;\nuniform vec2 u_resolution;\nout vec4 o_color;\nfloat bayer(ivec2 p) {\n  int x = p.x & 3;\n  int y = p.y & 3;\n  int m[16] = int[16](0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5);\n  return float(m[y * 4 + x]) / 16.0;\n}\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  ivec2 px = ivec2(v_texCoord * u_resolution);\n  float t = bayer(px) - 0.5;\n  float steps = u_levels - 1.0;\n  vec3 q = floor(c.rgb * steps + 0.5 + t) / steps;\n  o_color = vec4(clamp(q, 0.0, 1.0), c.a);\n}';

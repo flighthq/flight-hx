@@ -6,9 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.EntityWithoutRuntime;
 
-typedef Camera = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var far:Float; var inverseViewProjection:Matrix4; var jitter:Vector2; var near:Float; var projection:Projection; var view:Matrix4; };
+typedef Camera = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var far:Float; var inverseViewProjection:Dynamic; var jitter:Dynamic; var near:Float; var projection:Dynamic; var view:Dynamic; };
 
-typedef CameraLike = EntityWithoutRuntime<Camera>;
+typedef CameraLike = EntityWithoutRuntime<Dynamic>;
 
 typedef Projection = Dynamic;
 

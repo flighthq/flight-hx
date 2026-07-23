@@ -12,7 +12,6 @@ import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuScenePipel
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuShadowSampleLayout;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.stashWgpuUvTransform;
 import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
-import flighthq.types.WgpuRenderState;
 
 typedef WgpuToonDefineKey = { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasBaseColorMap:Bool; var hasRamp:Bool; };
 
@@ -20,7 +19,7 @@ typedef WgpuToonPipeline = Dynamic;
 
 @:expose("flighthq.sceneWgpu.WgpuToonPrelude")
 class WgpuToonPrelude {
-  public static function bindWgpuToonSurface(state:WgpuRenderState, pipeline:WgpuToonPipeline, materialKey:Dynamic, baseColor:Array<Float>, steps:Float, alphaCutoff:Float):Dynamic {
+  public static function bindWgpuToonSurface(state:Dynamic, pipeline:WgpuToonPipeline, materialKey:Dynamic, baseColor:Array<Float>, steps:Float, alphaCutoff:Float):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
@@ -52,7 +51,7 @@ class WgpuToonPrelude {
     return cast null;
   }
 
-  public static function compileWgpuToonPipeline(state:WgpuRenderState, key:WgpuToonDefineKey, format:Dynamic):WgpuToonPipeline {
+  public static function compileWgpuToonPipeline(state:Dynamic, key:WgpuToonDefineKey, format:Dynamic):WgpuToonPipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     var materialBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
@@ -63,7 +62,7 @@ class WgpuToonPrelude {
     return cast null;
   }
 
-  public static function ensureWgpuToonPipeline(state:WgpuRenderState, key:WgpuToonDefineKey, format:Dynamic):WgpuToonPipeline {
+  public static function ensureWgpuToonPipeline(state:Dynamic, key:WgpuToonDefineKey, format:Dynamic):WgpuToonPipeline {
     return cast _Runtime.callValue(ensureWgpuScenePipeline, cast ([state, 'toon:' + Std.string(format) + '|' + Std.string(_Runtime.callValue(buildWgpuToonDefineKey, cast ([key] : Array<Dynamic>))) + '', function() return _Runtime.callValue(compileWgpuToonPipeline, cast ([state, key, format] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }

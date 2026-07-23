@@ -5,14 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
-import flighthq.types.DisplacementEffect;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
 
 @:expose("flighthq.effectsGl.GlDisplacementEffect")
 class GlDisplacementEffect {
-  public static function applyDisplacementEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DisplacementEffect):Void {
+  public static function applyDisplacementEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var frequency:Dynamic = cast _Runtime.UNDEFINED;
     var seed:Dynamic = cast _Runtime.UNDEFINED;
@@ -30,7 +27,7 @@ class GlDisplacementEffect {
   }
 
   public static final defaultGlDisplacementEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyDisplacementEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : DisplacementEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyDisplacementEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static final DISPLACEMENT_FRAGMENT_SRC__glDisplacementEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_frequency;\nuniform float u_seed;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  float f = u_frequency;\n  vec2 warp = vec2(\n    sin(v_texCoord.y * f + u_seed) + sin(v_texCoord.y * f * 2.3 + u_seed * 1.7) * 0.5,\n    cos(v_texCoord.x * f * 0.8 + u_seed * 1.3)\n  );\n  vec2 displaced = v_texCoord + warp * (u_intensity / u_resolution);\n  o_color = texture(u_texture0, displaced);\n}';

@@ -4,11 +4,10 @@ package flighthq.surface;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
-import flighthq.types.SurfaceRegion;
 
 @:expose("flighthq.surface.SurfaceAlpha")
 class SurfaceAlpha {
-  public static function copySurfaceAlpha(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function copySurfaceAlpha(dest:Dynamic, source:Dynamic):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var sd:Dynamic = cast _Runtime.UNDEFINED;
@@ -42,7 +41,7 @@ class SurfaceAlpha {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function multiplySurfaceAlpha(out:SurfaceRegion, factor:Float):Void {
+  public static function multiplySurfaceAlpha(out:Dynamic, factor:Float):Void {
     var f:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var surfaceWidth:Dynamic = cast _Runtime.UNDEFINED;
@@ -70,7 +69,7 @@ class SurfaceAlpha {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(out, 'surface')] : Array<Dynamic>));
   }
 
-  public static function setSurfaceAlpha(out:SurfaceRegion, alpha:Float):Void {
+  public static function setSurfaceAlpha(out:Dynamic, alpha:Float):Void {
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var surfaceWidth:Dynamic = cast _Runtime.UNDEFINED;

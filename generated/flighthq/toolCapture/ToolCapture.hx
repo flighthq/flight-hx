@@ -29,8 +29,6 @@ import flighthq.toolCapture.FunctionalVerify.FunctionalTestModule;
 import flighthq.toolCapture.ReferenceCapture as Facade_ToolCapture_flighthq_toolCapture_ReferenceCapture;
 import flighthq.toolCapture.ReferenceCapture.ReferenceCaptureOptions;
 import flighthq.toolCapture.ReferenceCapture.ReferenceCaptureResult;
-import flighthq.types.Surface;
-import flighthq.types.WgpuRenderState;
 
 @:expose("flighthq.toolCapture.ToolCapture")
 class ToolCapture {
@@ -135,7 +133,7 @@ class ToolCapture {
     return cast null;
   }
 
-  public static function registerWgpuFunctionalTarget(state:WgpuRenderState, ?scale:Dynamic):Void {
+  public static function registerWgpuFunctionalTarget(state:Dynamic, ?scale:Dynamic):Void {
     _Runtime.callValue(Facade_ToolCapture_flighthq_toolCapture_FunctionalVerify.registerWgpuFunctionalTarget, cast ([state, scale] : Array<Dynamic>));
   }
 
@@ -175,7 +173,7 @@ class ToolCapture {
     _Runtime.callValue(Facade_ToolCapture_flighthq_toolCapture_BaselineStore.setBaselineField, cast ([root, subject, name, column, field, value] : Array<Dynamic>));
   }
 
-  public static function snapshotFunctionalRender():flighthq._internal._Promise<Null<Surface>> {
+  public static function snapshotFunctionalRender():flighthq._internal._Promise<Null<Dynamic>> {
     return cast _Runtime.callValue(Facade_ToolCapture_flighthq_toolCapture_FunctionalVerify.snapshotFunctionalRender, cast ([] : Array<Dynamic>));
     return cast null;
   }

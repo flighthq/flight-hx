@@ -6,14 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.camera.Picking.getCameraScreenToWorldRay;
 import flighthq.camera.Picking.getCameraWorldToScreen;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
-import flighthq.types.Camera;
 import flighthq.types.Plane.PlaneLike;
 import flighthq.types.Ray3D.Ray3DLike;
 import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.camera.Intersection")
 class Intersection {
-  public static function getCameraRayThroughBoundingSphere(out:Ray3DLike, camera:Camera, sphere:BoundingSphereLike, aspect:Float):Bool {
+  public static function getCameraRayThroughBoundingSphere(out:Ray3DLike, camera:Dynamic, sphere:BoundingSphereLike, aspect:Float):Bool {
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(sphere, 'radius'), 0.0, '<'))) {
       return cast false;
     }

@@ -5,19 +5,17 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneGl.GlMeshUpload.ensureGlMeshUpload;
 import flighthq.sceneGl.GlWireframeUpload;
-import flighthq.types.GlRenderState;
-import flighthq.types.MeshGeometry;
 
 @:expose("flighthq.sceneGl._internal._GlWireframeUploadValues")
 class _GlWireframeUploadValues {
-  public static function destroyGlWireframeUpload(state:GlRenderState, upload:GlWireframeUpload):Void {
+  public static function destroyGlWireframeUpload(state:Dynamic, upload:GlWireframeUpload):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     _Runtime.callProperty(gl, 'deleteVertexArray', cast ([_Runtime.field(upload, 'vao')] : Array<Dynamic>));
     _Runtime.callProperty(gl, 'deleteBuffer', cast ([_Runtime.field(upload, 'lineIndexBuffer')] : Array<Dynamic>));
   }
 
-  public static function ensureGlWireframeUpload(state:GlRenderState, geometry:MeshGeometry):GlWireframeUpload {
+  public static function ensureGlWireframeUpload(state:Dynamic, geometry:Dynamic):GlWireframeUpload {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var meshUpload:Dynamic = cast _Runtime.UNDEFINED;
     var perState:Dynamic = cast _Runtime.UNDEFINED;
@@ -34,7 +32,7 @@ class _GlWireframeUploadValues {
       (perState = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []) : Dynamic));
       _Runtime.callProperty(_GlWireframeUploadValues.wireframeUploads__glWireframeUpload, 'set', cast ([state, perState] : Array<Dynamic>));
     }
-    upload = _Runtime.callProperty(perState, 'get', cast ([(cast geometry : MeshGeometry)] : Array<Dynamic>));
+    upload = _Runtime.callProperty(perState, 'get', cast ([(cast geometry : Dynamic)] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(upload, 'version'), _Runtime.field(geometry, 'version'))))) {
       _Runtime.callProperty(gl, 'bindVertexArray', cast ([_Runtime.field(upload, 'vao')] : Array<Dynamic>));
       return cast upload;
@@ -43,7 +41,7 @@ class _GlWireframeUploadValues {
     indexType = _Runtime.select(_Runtime.isInstanceOf(lineIndices, _Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>))), function():Dynamic return cast _Runtime.field(gl, 'UNSIGNED_INT'), function():Dynamic return cast _Runtime.field(gl, 'UNSIGNED_SHORT'));
     if (_Runtime.truthy(_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       (upload = cast ({ indexType: indexType, lineIndexBuffer: _Runtime.callProperty(gl, 'createBuffer', cast ([] : Array<Dynamic>)), vao: _Runtime.callProperty(gl, 'createVertexArray', cast ([] : Array<Dynamic>)), version: -1.0 } : Dynamic));
-      _Runtime.callProperty(perState, 'set', cast ([(cast geometry : MeshGeometry), upload] : Array<Dynamic>));
+      _Runtime.callProperty(perState, 'set', cast ([(cast geometry : Dynamic), upload] : Array<Dynamic>));
     }
     _Runtime.setField(upload, 'indexType', indexType);
     _Runtime.callProperty(gl, 'bindVertexArray', cast ([_Runtime.field(upload, 'vao')] : Array<Dynamic>));
@@ -60,7 +58,7 @@ class _GlWireframeUploadValues {
     return cast null;
   }
 
-  public static function buildLineIndices__glWireframeUpload(geometry:MeshGeometry):Dynamic {
+  public static function buildLineIndices__glWireframeUpload(geometry:Dynamic):Dynamic {
     var triangleIndices:Dynamic = cast _Runtime.UNDEFINED;
     var triangleCount:Dynamic = cast _Runtime.UNDEFINED;
     var lineCount:Dynamic = cast _Runtime.UNDEFINED;

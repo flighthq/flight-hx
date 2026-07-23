@@ -5,9 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.displayobjectWgpu.WgpuSpriteBatch.flushWgpuSpriteBatch;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
-import flighthq.types.Matrix;
 import flighthq.types.ShapeCommand.PathWinding;
-import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuClipContourPipelines;
 
 @:expose("flighthq.displayobjectWgpu.WgpuClipContours")
@@ -16,7 +14,7 @@ class WgpuClipContours {
 
   public static final CLIP_UNIFORM_BYTES__wgpuClipContours:Dynamic = 48.0;
 
-  public static function popWgpuClipContours(state:WgpuRenderState):Void {
+  public static function popWgpuClipContours(state:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
@@ -38,7 +36,7 @@ class WgpuClipContours {
     }
   }
 
-  public static function pushWgpuClipContours(state:WgpuRenderState, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Matrix):Void {
+  public static function pushWgpuClipContours(state:Dynamic, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var depth:Dynamic = cast _Runtime.UNDEFINED;
@@ -72,7 +70,7 @@ class WgpuClipContours {
     _Runtime.setField(runtime, 'currentMaskDepth', (depth + 1.0));
   }
 
-  public static function createClipContourUniformBuffer__wgpuClipContours(state:WgpuRenderState, t:Matrix):Dynamic {
+  public static function createClipContourUniformBuffer__wgpuClipContours(state:Dynamic, t:Dynamic):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var viewport:Dynamic = cast _Runtime.UNDEFINED;
     var iw:Dynamic = cast _Runtime.UNDEFINED;
@@ -99,7 +97,7 @@ class WgpuClipContours {
     return cast null;
   }
 
-  public static function createClipContourVertexBuffer__wgpuClipContours(state:WgpuRenderState, contours:Array<Array<Float>>):{ var vertexBuffer:Dynamic; var vertexCount:Float; } {
+  public static function createClipContourVertexBuffer__wgpuClipContours(state:Dynamic, contours:Array<Array<Float>>):{ var vertexBuffer:Dynamic; var vertexCount:Float; } {
     var tris:Array<Float> = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -129,7 +127,7 @@ class WgpuClipContours {
     return cast null;
   }
 
-  public static function ensureClipContourPipelines__wgpuClipContours(state:WgpuRenderState):WgpuClipContourPipelines {
+  public static function ensureClipContourPipelines__wgpuClipContours(state:Dynamic):WgpuClipContourPipelines {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;
     var cache:Dynamic = cast _Runtime.UNDEFINED;

@@ -27,18 +27,12 @@ import flighthq.textlayout.TextBounds.computeTextBoundsRectangle;
 import flighthq.textlayout.TextFormat.mergeTextFormat;
 import flighthq.types.MethodsOf;
 import flighthq.types.PartialNode;
-import flighthq.types.Rectangle;
-import flighthq.types.RichText;
 import flighthq.types.RichText.RichTextData;
 import flighthq.types.RichText.RichTextRuntime;
-import flighthq.types.RichTextContent;
 import flighthq.types.TextFieldSignals;
 import flighthq.types.TextFieldSignals.TextFieldChangeEvent;
 import flighthq.types.TextFieldSignals.TextFieldLinkEvent;
 import flighthq.types.TextFieldSignals.TextFieldScrollEvent;
-import flighthq.types.TextFormat;
-import flighthq.types.TextFormatRange;
-import flighthq.types.TextLabel;
 import flighthq.types.TextLayout.TextLayoutParams;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextLayout.TextMeasureFunction;
@@ -48,7 +42,7 @@ import flighthq.types._internal._RichTextValues.RichTextKind;
 
 @:expose("flighthq.text.RichText")
 class RichText {
-  public static function appendRichTextString(source:RichText, value:String):Void {
+  public static function appendRichTextString(source:Dynamic, value:String):Void {
     var previousText:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(value, 'length'), 0.0))) { return; }
     previousText = _Runtime.field(_Runtime.field(source, 'data'), 'text');
@@ -57,12 +51,12 @@ class RichText {
     _Runtime.callValue(RichText.emitTextFieldChange__richText, cast ([source, previousText] : Array<Dynamic>));
   }
 
-  public static function buildRichTextLayoutParams(source:TextLabel, measure:TextMeasureFunction):TextLayoutParams {
+  public static function buildRichTextLayoutParams(source:Dynamic, measure:TextMeasureFunction):TextLayoutParams {
     var richText:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var content:Dynamic = cast _Runtime.UNDEFINED;
-    richText = (cast source : RichText);
+    richText = (cast source : Dynamic);
     data = _Runtime.field(richText, 'data');
     runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([richText] : Array<Dynamic>)) : RichTextRuntime);
     content = _Runtime.callValue(getRichTextContent, cast ([runtime] : Array<Dynamic>));
@@ -71,16 +65,16 @@ class RichText {
     return cast null;
   }
 
-  public static function clearRichTextFormatRanges(source:RichText):Void {
+  public static function clearRichTextFormatRanges(source:Dynamic):Void {
     _Runtime.setLength(_Runtime.field(_Runtime.field(source, 'data'), 'textFormatRanges'), 0.0);
     _Runtime.callValue(RichText.invalidateRichTextContent__richText, cast ([source] : Array<Dynamic>));
   }
 
-  public static function computeRichTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+  public static function computeRichTextLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     var richText:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var layout:Dynamic = cast _Runtime.UNDEFINED;
-    richText = (cast source : RichText);
+    richText = (cast source : Dynamic);
     data = _Runtime.field(richText, 'data');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'autoSize'), 'none'))) {
       _Runtime.setField(out, 'x', 0.0);
@@ -101,8 +95,8 @@ class RichText {
     _Runtime.callValue(computeTextBoundsRectangle, cast ([out, data, layout] : Array<Dynamic>));
   }
 
-  public static function createRichText(?obj:PartialNode<RichText>):RichText {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([RichTextKind, obj, createRichTextData, createRichTextRuntime] : Array<Dynamic>)) : RichText);
+  public static function createRichText(?obj:PartialNode<Dynamic>):Dynamic {
+    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([RichTextKind, obj, createRichTextData, createRichTextRuntime] : Array<Dynamic>)) : Dynamic);
     return cast null;
   }
 
@@ -150,7 +144,7 @@ class RichText {
     return cast null;
   }
 
-  public static function dispatchRichTextLinkAtPoint(source:RichText, x:Float, y:Float):Null<String> {
+  public static function dispatchRichTextLinkAtPoint(source:Dynamic, x:Float, y:Float):Null<String> {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     var url:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
@@ -168,18 +162,18 @@ class RichText {
     return cast null;
   }
 
-  public static function dispatchRichTextWheel(source:RichText, deltaLines:Float, ?layout:TextLayoutResult):Void {
+  public static function dispatchRichTextWheel(source:Dynamic, deltaLines:Float, ?layout:TextLayoutResult):Void {
     _Runtime.callValue(setRichTextScrollV, cast ([source, (_Runtime.field(_Runtime.field(source, 'data'), 'scrollV') + _Runtime.callProperty(HxMath, 'round', cast ([deltaLines] : Array<Dynamic>))), layout] : Array<Dynamic>));
   }
 
-  public static function enableTextFieldSignals(source:RichText):TextFieldSignals {
+  public static function enableTextFieldSignals(source:Dynamic):TextFieldSignals {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime);
     return cast _Runtime.setField(runtime, 'textFieldSignals', (_Runtime.field(runtime, 'textFieldSignals') ?? _Runtime.callValue(createTextFieldSignals, cast ([] : Array<Dynamic>))));
     return cast null;
   }
 
-  public static function getRichTextBottomScrollV(source:RichText):Float {
+  public static function getRichTextBottomScrollV(source:Dynamic):Float {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
     layout = _Runtime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
@@ -188,7 +182,7 @@ class RichText {
     return cast null;
   }
 
-  public static function getRichTextCharIndexAtPoint(source:RichText, x:Float, y:Float):Float {
+  public static function getRichTextCharIndexAtPoint(source:Dynamic, x:Float, y:Float):Float {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
     layout = _Runtime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
@@ -197,14 +191,14 @@ class RichText {
     return cast null;
   }
 
-  public static function getRichTextDefaultTextFormat(source:RichText):TextFormat {
+  public static function getRichTextDefaultTextFormat(source:Dynamic):Dynamic {
     return cast _Runtime.field(_Runtime.field(source, 'data'), 'defaultTextFormat');
     return cast null;
   }
 
-  public static function getRichTextFormatRangeAt(out:TextFormat, source:RichText, index:Float):Void {
+  public static function getRichTextFormatRangeAt(out:Dynamic, source:Dynamic, index:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
-    var merged:TextFormat = cast _Runtime.UNDEFINED;
+    var merged:Dynamic = cast _Runtime.UNDEFINED;
     var keys:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
     merged = _Runtime.mergeObjects([_Runtime.field(data, 'defaultTextFormat')]);
@@ -213,13 +207,13 @@ class RichText {
         (merged = cast (_Runtime.callValue(mergeTextFormat, cast ([merged, _Runtime.field(range, 'format')] : Array<Dynamic>)) : Dynamic));
       }
     }
-    keys = (cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([merged] : Array<Dynamic>)) : Array<TextFormat>);
+    keys = (cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([merged] : Array<Dynamic>)) : Array<Dynamic>);
     for (key in _Runtime.iterable(keys)) {
       _Runtime.setIndex((cast out : Dynamic), key, _Runtime.getIndex(merged, key));
     }
   }
 
-  public static function getRichTextFormatRangeByIndex(out:TextFormatRange, source:RichText, i:Float):Bool {
+  public static function getRichTextFormatRangeByIndex(out:Dynamic, source:Dynamic, i:Float):Bool {
     var range:Dynamic = cast _Runtime.UNDEFINED;
     range = _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'textFormatRanges'), i);
     if (_Runtime.truthy(_Runtime.strictEquals(range, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast false; }
@@ -230,24 +224,24 @@ class RichText {
     return cast null;
   }
 
-  public static function getRichTextFormatRangeCount(source:RichText):Float {
+  public static function getRichTextFormatRangeCount(source:Dynamic):Float {
     return cast _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'textFormatRanges'), 'length');
     return cast null;
   }
 
-  public static function getRichTextFormatRangesIn(out:Array<TextFormatRange>, source:RichText, beginIndex:Float, endIndex:Float):Void {
+  public static function getRichTextFormatRangesIn(out:Array<Dynamic>, source:Dynamic, beginIndex:Float, endIndex:Float):Void {
     _Runtime.setLength(out, 0.0);
     for (range in _Runtime.iterable(_Runtime.field(_Runtime.field(source, 'data'), 'textFormatRanges'))) {
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(range, 'start'), endIndex, '<'), function():Dynamic return cast _Runtime.compare(_Runtime.field(range, 'end'), beginIndex, '>')))) { _Runtime.callProperty(out, 'push', cast ([range] : Array<Dynamic>)); }
     }
   }
 
-  public static function getRichTextLength(source:RichText):Float {
+  public static function getRichTextLength(source:Dynamic):Float {
     return cast _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length');
     return cast null;
   }
 
-  public static function getRichTextLineCount(source:RichText):Float {
+  public static function getRichTextLineCount(source:Dynamic):Float {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
     layout = _Runtime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
@@ -256,7 +250,7 @@ class RichText {
     return cast null;
   }
 
-  public static function getRichTextLineMetrics(source:RichText, lineIndex:Float):Null<TextLineMetrics> {
+  public static function getRichTextLineMetrics(source:Dynamic, lineIndex:Float):Null<TextLineMetrics> {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
     layout = _Runtime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
@@ -265,7 +259,7 @@ class RichText {
     return cast null;
   }
 
-  public static function getRichTextMaxScrollH(source:RichText):Float {
+  public static function getRichTextMaxScrollH(source:Dynamic):Float {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
     layout = _Runtime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
@@ -274,7 +268,7 @@ class RichText {
     return cast null;
   }
 
-  public static function getRichTextMaxScrollV(source:RichText):Float {
+  public static function getRichTextMaxScrollV(source:Dynamic):Float {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
     layout = _Runtime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
@@ -283,24 +277,24 @@ class RichText {
     return cast null;
   }
 
-  public static function getRichTextPasswordCharacter(source:RichText):Null<String> {
+  public static function getRichTextPasswordCharacter(source:Dynamic):Null<String> {
     var input:Dynamic = cast _Runtime.UNDEFINED;
     input = _Runtime.field((cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'input');
     return cast _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(input, null), function():Dynamic return cast _Runtime.field(input, 'displayAsPassword')), function():Dynamic return cast _Runtime.field(input, 'passwordCharacter'), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function getRichTextRuntime(source:RichText):RichTextRuntime {
+  public static function getRichTextRuntime(source:Dynamic):RichTextRuntime {
     return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime);
     return cast null;
   }
 
-  public static function getRichTextString(source:RichText):String {
+  public static function getRichTextString(source:Dynamic):String {
     return cast _Runtime.field(_Runtime.field(source, 'data'), 'text');
     return cast null;
   }
 
-  public static function getRichTextTextHeight(source:RichText):Float {
+  public static function getRichTextTextHeight(source:Dynamic):Float {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
     layout = _Runtime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
@@ -309,7 +303,7 @@ class RichText {
     return cast null;
   }
 
-  public static function getRichTextTextWidth(source:RichText):Float {
+  public static function getRichTextTextWidth(source:Dynamic):Float {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(ensureTextLayout, cast ([source] : Array<Dynamic>));
     layout = _Runtime.callValue(getTextLayout, cast ([source] : Array<Dynamic>));
@@ -318,12 +312,12 @@ class RichText {
     return cast null;
   }
 
-  public static function getTextFieldSignals(source:RichText):Null<TextFieldSignals> {
+  public static function getTextFieldSignals(source:Dynamic):Null<TextFieldSignals> {
     return cast _Runtime.field((cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
     return cast null;
   }
 
-  public static function insertRichTextString(source:RichText, index:Float, value:String):Void {
+  public static function insertRichTextString(source:Dynamic, index:Float, value:String):Void {
     var text:Dynamic = cast _Runtime.UNDEFINED;
     var clampedIndex:Dynamic = cast _Runtime.UNDEFINED;
     var previousText:Dynamic = cast _Runtime.UNDEFINED;
@@ -346,7 +340,7 @@ class RichText {
     _Runtime.callValue(RichText.emitTextFieldChange__richText, cast ([source, previousText] : Array<Dynamic>));
   }
 
-  public static function removeRichTextFormatRangesIn(source:RichText, begin:Float, end:Float):Void {
+  public static function removeRichTextFormatRangesIn(source:Dynamic, begin:Float, end:Float):Void {
     var ranges:Dynamic = cast _Runtime.UNDEFINED;
     var changed:Dynamic = cast _Runtime.UNDEFINED;
     ranges = _Runtime.field(_Runtime.field(source, 'data'), 'textFormatRanges');
@@ -365,7 +359,7 @@ class RichText {
     if (_Runtime.truthy(changed)) { _Runtime.callValue(RichText.invalidateRichTextContent__richText, cast ([source] : Array<Dynamic>)); }
   }
 
-  public static function replaceRichTextString(source:RichText, beginIndex:Float, endIndex:Float, value:String):Void {
+  public static function replaceRichTextString(source:Dynamic, beginIndex:Float, endIndex:Float, value:String):Void {
     var text:Dynamic = cast _Runtime.UNDEFINED;
     var start:Dynamic = cast _Runtime.UNDEFINED;
     var end:Dynamic = cast _Runtime.UNDEFINED;
@@ -406,37 +400,37 @@ class RichText {
     if (_Runtime.truthy(!_Runtime.strictEquals(previousText, _Runtime.field(_Runtime.field(source, 'data'), 'text')))) { _Runtime.callValue(RichText.emitTextFieldChange__richText, cast ([source, previousText] : Array<Dynamic>)); }
   }
 
-  public static function setRichTextBackground(source:RichText, value:Bool):Void {
+  public static function setRichTextBackground(source:Dynamic, value:Bool):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'background'), value))) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'background', value);
     _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setRichTextBackgroundColor(source:RichText, value:Float):Void {
+  public static function setRichTextBackgroundColor(source:Dynamic, value:Float):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'backgroundColor'), value))) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'backgroundColor', value);
     _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setRichTextBorder(source:RichText, value:Bool):Void {
+  public static function setRichTextBorder(source:Dynamic, value:Bool):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'border'), value))) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'border', value);
     _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setRichTextBorderColor(source:RichText, value:Float):Void {
+  public static function setRichTextBorderColor(source:Dynamic, value:Float):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'borderColor'), value))) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'borderColor', value);
     _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setRichTextCondenseWhite(source:RichText, value:Bool):Void {
+  public static function setRichTextCondenseWhite(source:Dynamic, value:Bool):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'condenseWhite'), value))) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'condenseWhite', value);
     _Runtime.callValue(RichText.invalidateRichTextContent__richText, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setRichTextContent(source:RichText, content:RichTextContent):Void {
+  public static function setRichTextContent(source:Dynamic, content:Dynamic):Void {
     var previousText:Dynamic = cast _Runtime.UNDEFINED;
     previousText = _Runtime.field(_Runtime.field(source, 'data'), 'text');
     _Runtime.setField(_Runtime.field(source, 'data'), 'text', _Runtime.field(content, 'text'));
@@ -445,44 +439,44 @@ class RichText {
     if (_Runtime.truthy(!_Runtime.strictEquals(previousText, _Runtime.field(content, 'text')))) { _Runtime.callValue(RichText.emitTextFieldChange__richText, cast ([source, previousText] : Array<Dynamic>)); }
   }
 
-  public static function setRichTextDefaultTextFormat(source:RichText, value:TextFormat):Void {
+  public static function setRichTextDefaultTextFormat(source:Dynamic, value:Dynamic):Void {
     _Runtime.setField(_Runtime.field(source, 'data'), 'defaultTextFormat', value);
     _Runtime.callValue(RichText.invalidateRichTextContent__richText, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setRichTextFormatRange(source:RichText, format:TextFormat, start:Dynamic = 0.0, ?end:Dynamic):Void {
+  public static function setRichTextFormatRange(source:Dynamic, format:Dynamic, start:Dynamic = 0.0, ?end:Dynamic):Void {
     if (end == null) end = cast (_Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length') : Dynamic);
     _Runtime.callProperty(_Runtime.field(_Runtime.field(source, 'data'), 'textFormatRanges'), 'push', cast ([{ end: end, format: format, start: start }] : Array<Dynamic>));
     _Runtime.callValue(RichText.invalidateRichTextContent__richText, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setRichTextHeight(source:RichText, value:Float):Void {
+  public static function setRichTextHeight(source:Dynamic, value:Float):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'height'), value))) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'height', value);
     _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
     _Runtime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setRichTextMaxChars(source:RichText, value:Float):Void {
+  public static function setRichTextMaxChars(source:Dynamic, value:Float):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'maxChars'), value))) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'maxChars', value);
     _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setRichTextMouseWheelEnabled(source:RichText, value:Bool):Void {
+  public static function setRichTextMouseWheelEnabled(source:Dynamic, value:Bool):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'mouseWheelEnabled'), value))) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'mouseWheelEnabled', value);
     _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setRichTextMultiline(source:RichText, value:Bool):Void {
+  public static function setRichTextMultiline(source:Dynamic, value:Bool):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'multiline'), value))) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'multiline', value);
     _Runtime.callValue(RichText.invalidateRichTextContent__richText, cast ([source] : Array<Dynamic>));
     _Runtime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setRichTextScrollH(source:RichText, value:Float, ?layout:TextLayoutResult):Void {
+  public static function setRichTextScrollH(source:Dynamic, value:Float, ?layout:TextLayoutResult):Void {
     var max:Dynamic = cast _Runtime.UNDEFINED;
     var clamped:Dynamic = cast _Runtime.UNDEFINED;
     var previousScrollH:Dynamic = cast _Runtime.UNDEFINED;
@@ -497,7 +491,7 @@ class RichText {
     _Runtime.callValue(RichText.emitTextFieldScroll__richText, cast ([source, previousScrollH, previousScrollV] : Array<Dynamic>));
   }
 
-  public static function setRichTextScrollV(source:RichText, value:Float, ?layout:TextLayoutResult):Void {
+  public static function setRichTextScrollV(source:Dynamic, value:Float, ?layout:TextLayoutResult):Void {
     var max:Dynamic = cast _Runtime.UNDEFINED;
     var clamped:Dynamic = cast _Runtime.UNDEFINED;
     var previousScrollH:Dynamic = cast _Runtime.UNDEFINED;
@@ -512,13 +506,13 @@ class RichText {
     _Runtime.callValue(RichText.emitTextFieldScroll__richText, cast ([source, previousScrollH, previousScrollV] : Array<Dynamic>));
   }
 
-  public static function setRichTextSelectable(source:RichText, value:Bool):Void {
+  public static function setRichTextSelectable(source:Dynamic, value:Bool):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'selectable'), value))) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'selectable', value);
     _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setRichTextString(source:RichText, value:String):Void {
+  public static function setRichTextString(source:Dynamic, value:String):Void {
     var previousText:Dynamic = cast _Runtime.UNDEFINED;
     previousText = _Runtime.field(_Runtime.field(source, 'data'), 'text');
     _Runtime.setField(_Runtime.field(source, 'data'), 'text', value);
@@ -526,26 +520,26 @@ class RichText {
     if (_Runtime.truthy(!_Runtime.strictEquals(previousText, value))) { _Runtime.callValue(RichText.emitTextFieldChange__richText, cast ([source, previousText] : Array<Dynamic>)); }
   }
 
-  public static function setRichTextTextColor(source:RichText, value:Float):Void {
+  public static function setRichTextTextColor(source:Dynamic, value:Float):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'textColor'), value))) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'textColor', value);
     _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setRichTextVerticalAlign(source:RichText, value:TextVerticalAlign):Void {
+  public static function setRichTextVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'verticalAlign'), value))) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'verticalAlign', value);
     _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setRichTextWidth(source:RichText, value:Float):Void {
+  public static function setRichTextWidth(source:Dynamic, value:Float):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'width'), value))) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'width', value);
     _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
     _Runtime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setRichTextWordWrap(source:RichText, value:Bool):Void {
+  public static function setRichTextWordWrap(source:Dynamic, value:Bool):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'wordWrap'), value))) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'wordWrap', value);
     _Runtime.callValue(RichText.invalidateRichTextContent__richText, cast ([source] : Array<Dynamic>));
@@ -554,7 +548,7 @@ class RichText {
 
   public static final defaultMethods__richText:Dynamic = { computeLocalBoundsRectangle: computeRichTextLocalBoundsRectangle };
 
-  public static function invalidateRichTextContent__richText(source:RichText):Void {
+  public static function invalidateRichTextContent__richText(source:Dynamic):Void {
     _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'autoSize'), 'none'))) { _Runtime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>)); }
   }
@@ -585,7 +579,7 @@ class RichText {
     return cast null;
   }
 
-  public static function emitTextFieldChange__richText(source:RichText, previousText:String):Void {
+  public static function emitTextFieldChange__richText(source:Dynamic, previousText:String):Void {
     var signals:Dynamic = cast _Runtime.UNDEFINED;
     var event:Dynamic = cast _Runtime.UNDEFINED;
     signals = _Runtime.field((cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');
@@ -594,7 +588,7 @@ class RichText {
     _Runtime.callProperty(_Runtime.field(signals, 'onTextFieldChange'), 'emit', cast ([event] : Array<Dynamic>));
   }
 
-  public static function emitTextFieldScroll__richText(source:RichText, previousScrollH:Float, previousScrollV:Float):Void {
+  public static function emitTextFieldScroll__richText(source:Dynamic, previousScrollH:Float, previousScrollV:Float):Void {
     var signals:Dynamic = cast _Runtime.UNDEFINED;
     var event:Dynamic = cast _Runtime.UNDEFINED;
     signals = _Runtime.field((cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime), 'textFieldSignals');

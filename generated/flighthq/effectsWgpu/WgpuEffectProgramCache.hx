@@ -5,11 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.WgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.createWgpuEffectPipeline;
-import flighthq.types.WgpuRenderState;
 
 @:expose("flighthq.effectsWgpu.WgpuEffectProgramCache")
 class WgpuEffectProgramCache {
-  public static function getWgpuEffectPipeline(state:WgpuRenderState, key:String, fragmentWGSL:String, blend:String = 'replace'):WgpuEffectPipeline {
+  public static function getWgpuEffectPipeline(state:Dynamic, key:String, fragmentWGSL:String, blend:String = 'replace'):WgpuEffectPipeline {
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var compiled:Dynamic = cast _Runtime.UNDEFINED;

@@ -4,15 +4,14 @@ package flighthq.tween;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.easing.EaseExponential.easeOutExponential;
-import flighthq.types.TweenManager;
 import flighthq.types.TweenManagerOptions;
 
 @:expose("flighthq.tween.TweenManager")
 class TweenManager {
-  public static function createTweenManager(?options:TweenManagerOptions):TweenManager {
+  public static function createTweenManager(?options:TweenManagerOptions):Dynamic {
     return cast { __brand: 'TweenManager', defaultEase: _Runtime.coalesce(_Runtime.optionalField(options, 'defaultEase'), function():Dynamic return cast easeOutExponential), tweens: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };
     return cast null;
   }
 
-  public static final defaultManager:TweenManager = _Runtime.callValue(createTweenManager, cast ([] : Array<Dynamic>));
+  public static final defaultManager:Dynamic = _Runtime.callValue(createTweenManager, cast ([] : Array<Dynamic>));
 }

@@ -6,11 +6,8 @@ import flighthq._internal._Runtime;
 import flighthq.displayobjectCanvas.CanvasClipRectangle.popCanvasClipRectangle;
 import flighthq.displayobjectCanvas.CanvasClipRectangle.pushCanvasClipContours;
 import flighthq.displayobjectCanvas.CanvasClipRectangle.pushCanvasClipRectangle;
-import flighthq.types.CanvasRenderState;
-import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObjectRenderer.DisplayObjectClipHooks;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderState;
 
 @:expose("flighthq.displayobjectCanvas.CanvasClip")
 class CanvasClip {
@@ -18,14 +15,14 @@ class CanvasClip {
     _Runtime.setField(state, 'displayObjectClipHooks', CanvasClip.canvasClipHooks__canvasClip);
   }
 
-  public static final canvasClipHooks__canvasClip:DisplayObjectClipHooks = { finalize: function(state:RenderState) {
+  public static final canvasClipHooks__canvasClip:DisplayObjectClipHooks = { finalize: function(state:Dynamic) {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     s = (cast state : Dynamic);
     while (_Runtime.truthy(_Runtime.compare(_Runtime.field(s, 'currentClipDepth'), 0.0, '>'))) {
       _Runtime.callValue(popCanvasClipRectangle, cast ([s] : Array<Dynamic>));
       _Runtime.incrementField(s, 'currentClipDepth', -1, true);
     }
-  }, popClip: function(state:RenderState, data:RenderProxy2D, source:DisplayObject) {
+  }, popClip: function(state:Dynamic, data:RenderProxy2D, source:Dynamic) {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     s = (cast state : Dynamic);
@@ -34,7 +31,7 @@ class CanvasClip {
       _Runtime.callValue(popCanvasClipRectangle, cast ([s] : Array<Dynamic>));
       _Runtime.incrementField(s, 'currentClipDepth', -1, true);
     }
-  }, pushClip: function(state:RenderState, data:RenderProxy2D, source:DisplayObject) {
+  }, pushClip: function(state:Dynamic, data:RenderProxy2D, source:Dynamic) {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     var clip:Dynamic = cast _Runtime.UNDEFINED;
     s = (cast state : Dynamic);

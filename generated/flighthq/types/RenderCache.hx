@@ -5,6 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 
-typedef RenderCache = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:RenderCacheKind; var transform:Matrix; };
+typedef RenderCache = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:RenderCacheKind; var transform:Dynamic; };
 
 typedef RenderCacheKind = Dynamic;

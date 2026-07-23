@@ -18,12 +18,8 @@ import flighthq.sceneGl._internal._GlMeshProgramValues.hasGlUvTransform;
 import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshCameraPosition;
 import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
-import flighthq.types.Camera;
 import flighthq.types.GlMeshMaterialRenderer;
-import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
-import flighthq.types.Material;
-import flighthq.types.MeshGeometry;
 import flighthq.types.PhongMaterial;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
@@ -31,7 +27,7 @@ import flighthq.types._internal._PhongMaterialValues.PhongMaterialKind;
 
 @:expose("flighthq.sceneGl.PhongGlMeshMaterialRenderer")
 class PhongGlMeshMaterialRenderer {
-  public static final phongGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
+  public static final phongGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:Dynamic, material:Null<Dynamic>, lights:SceneLightBlock, camera:Dynamic) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var phong:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -43,18 +39,18 @@ class PhongGlMeshMaterialRenderer {
     _Runtime.callValue(setGlMeshCameraPosition, cast ([gl, _Runtime.field(program, 'locCameraPosition'), camera] : Array<Dynamic>));
     _Runtime.callValue(bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
     _Runtime.callValue(PhongGlMeshMaterialRenderer.bindGlPhongMaterialUniforms__phongGlMeshMaterialRenderer, cast ([state, program, phong] : Array<Dynamic>));
-  }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
+  }, draw: function(state:Dynamic, proxy:SceneRenderProxy, geometry:Dynamic) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
     if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 
-  public static function registerPhongGlMaterial(state:GlRenderState):Void {
+  public static function registerPhongGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(registerGlMeshMaterialRenderer, cast ([state, PhongMaterialKind, phongGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  public static function bindGlPhongMaterialUniforms__phongGlMeshMaterialRenderer(state:GlRenderState, program:GlClassicProgram, material:Null<PhongMaterial>):Void {
+  public static function bindGlPhongMaterialUniforms__phongGlMeshMaterialRenderer(state:Dynamic, program:GlClassicProgram, material:Null<PhongMaterial>):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var diffuseMap:Dynamic = cast _Runtime.UNDEFINED;
     var specularMap:Dynamic = cast _Runtime.UNDEFINED;

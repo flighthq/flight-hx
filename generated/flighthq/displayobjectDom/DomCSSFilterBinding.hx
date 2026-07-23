@@ -4,13 +4,11 @@ package flighthq.displayobjectDom;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.RenderProxy.getOrCreateRenderProxy2D;
-import flighthq.types.DisplayObject;
-import flighthq.types.DomRenderState;
 import flighthq.types.RenderProxy2D;
 
 @:expose("flighthq.displayobjectDom.DomCSSFilterBinding")
 class DomCSSFilterBinding {
-  public static function enableDomCssFilterSupport(state:DomRenderState):Void {
+  public static function enableDomCssFilterSupport(state:Dynamic):Void {
     _Runtime.setField(state, 'domCssFilterResolver', getDomCssFilter);
   }
 
@@ -19,7 +17,7 @@ class DomCSSFilterBinding {
     return cast null;
   }
 
-  public static function setDomCssFilter(state:DomRenderState, node:DisplayObject, filter:Null<String>):Void {
+  public static function setDomCssFilter(state:Dynamic, node:Dynamic, filter:Null<String>):Void {
     var renderProxy:Dynamic = cast _Runtime.UNDEFINED;
     renderProxy = _Runtime.callValue(getOrCreateRenderProxy2D, cast ([state, node] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(filter, null))) {

@@ -3,13 +3,12 @@ package flighthq.path;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 import flighthq.types.Rectangle.RectangleLike;
 
 @:expose("flighthq.path.GetPathBounds")
 class GetPathBounds {
-  public static function getPathBounds(path:Path, out:RectangleLike):Bool {
+  public static function getPathBounds(path:Dynamic, out:RectangleLike):Bool {
     var commands:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var minX:Dynamic = cast _Runtime.UNDEFINED;

@@ -6,14 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.displayobjectCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.geometry.Matrix.copyMatrix;
 import flighthq.geometry.Matrix.createMatrix;
-import flighthq.types.CanvasRenderState;
-import flighthq.types.CanvasRenderTarget;
-import flighthq.types.Matrix;
 import flighthq.types.RenderPassPreserve;
 
 typedef CanvasRenderStateHandles__canvasRenderTarget = { var canvas:Dynamic; var context:Dynamic; };
 
-typedef SavedCanvasState__canvasRenderTarget = { var canvas:Dynamic; var context:Dynamic; var renderTransform2D:Null<Matrix>; };
+typedef SavedCanvasState__canvasRenderTarget = { var canvas:Dynamic; var context:Dynamic; var renderTransform2D:Null<Dynamic>; };
 
 @:expose("flighthq.displayobjectCanvas.CanvasRenderTarget")
 class CanvasRenderTarget {
@@ -78,7 +75,7 @@ class CanvasRenderTarget {
     _Runtime.setField(target, 'height', _Runtime.field(_Runtime.field(target, 'canvas'), 'height'));
   }
 
-  public static function setCanvasRenderTransform2D(state:Dynamic, transform:Matrix):Void {
+  public static function setCanvasRenderTransform2D(state:Dynamic, transform:Dynamic):Void {
     var handles:Dynamic = cast _Runtime.UNDEFINED;
     var next:Dynamic = cast _Runtime.UNDEFINED;
     handles = (cast state : Dynamic);

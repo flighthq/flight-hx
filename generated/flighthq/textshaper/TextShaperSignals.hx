@@ -7,7 +7,6 @@ import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.clearSignal;
 import flighthq.textshaper._TextShaperHooks._setTextShaperBackendHook;
 import flighthq.types.TextShaper.TextShaperBackend;
-import flighthq.types.TextShaperSignals;
 
 @:expose("flighthq.textshaper.TextShaperSignals")
 class TextShaperSignals {
@@ -18,7 +17,7 @@ class TextShaperSignals {
     _Runtime.callValue(_setTextShaperBackendHook, cast ([null] : Array<Dynamic>));
   }
 
-  public static function enableTextShaperSignals():TextShaperSignals {
+  public static function enableTextShaperSignals():Dynamic {
     if (_Runtime.truthy(!_Runtime.strictEquals(TextShaperSignals._signals__textShaperSignals, null))) { return cast TextShaperSignals._signals__textShaperSignals; }
     (TextShaperSignals._signals__textShaperSignals = cast ({ onBackendChanged: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) } : Dynamic));
     _Runtime.callValue(_setTextShaperBackendHook, cast ([function(backend:Dynamic) {
@@ -30,10 +29,10 @@ class TextShaperSignals {
     return cast null;
   }
 
-  public static function getTextShaperSignals():Null<TextShaperSignals> {
+  public static function getTextShaperSignals():Null<Dynamic> {
     return cast TextShaperSignals._signals__textShaperSignals;
     return cast null;
   }
 
-  public static var _signals__textShaperSignals:Null<TextShaperSignals> = _Runtime.explicitNull();
+  public static var _signals__textShaperSignals:Null<Dynamic> = _Runtime.explicitNull();
 }

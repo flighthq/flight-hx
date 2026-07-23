@@ -6,9 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.sceneResources.SceneMaterialTextureRegistry;
 import flighthq.sceneResources.SceneMaterialTextureRegistry.SceneMaterialTextureLister;
 import flighthq.types.Entity.Kind;
-import flighthq.types.Material;
 import flighthq.types.StandardPbrMaterial;
-import flighthq.types.Texture;
 import flighthq.types.UnlitMaterial;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 import flighthq.types._internal._UnlitMaterialValues.UnlitMaterialKind;
@@ -20,7 +18,7 @@ class _SceneMaterialTextureRegistryValues {
     return cast null;
   }
 
-  public static function getSceneMaterialTextures(registry:SceneMaterialTextureRegistry, material:Material, out:Array<Texture>):Void {
+  public static function getSceneMaterialTextures(registry:SceneMaterialTextureRegistry, material:Dynamic, out:Array<Dynamic>):Void {
     var lister:Dynamic = cast _Runtime.UNDEFINED;
     lister = _Runtime.callProperty(_Runtime.field(registry, 'listers'), 'get', cast ([_Runtime.field(material, 'kind')] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(lister, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(lister, cast ([material, out] : Array<Dynamic>)); }
@@ -35,7 +33,7 @@ class _SceneMaterialTextureRegistryValues {
     _Runtime.callProperty(_Runtime.field(registry, 'listers'), 'set', cast ([kind, lister] : Array<Dynamic>));
   }
 
-  public static function listStandardPbrMaterialTextures__sceneMaterialTextureRegistry(material:Material, out:Array<Texture>):Void {
+  public static function listStandardPbrMaterialTextures__sceneMaterialTextureRegistry(material:Dynamic, out:Array<Dynamic>):Void {
     var pbr:Dynamic = cast _Runtime.UNDEFINED;
     pbr = (cast material : StandardPbrMaterial);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(pbr, 'baseColorMap'), null))) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(pbr, 'baseColorMap')] : Array<Dynamic>)); }
@@ -45,7 +43,7 @@ class _SceneMaterialTextureRegistryValues {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(pbr, 'occlusionMap'), null))) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(pbr, 'occlusionMap')] : Array<Dynamic>)); }
   }
 
-  public static function listUnlitMaterialTextures__sceneMaterialTextureRegistry(material:Material, out:Array<Texture>):Void {
+  public static function listUnlitMaterialTextures__sceneMaterialTextureRegistry(material:Dynamic, out:Array<Dynamic>):Void {
     var unlit:Dynamic = cast _Runtime.UNDEFINED;
     unlit = (cast material : UnlitMaterial);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(unlit, 'baseColorMap'), null))) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(unlit, 'baseColorMap')] : Array<Dynamic>)); }

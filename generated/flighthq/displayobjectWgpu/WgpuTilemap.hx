@@ -12,17 +12,14 @@ import flighthq.render.Renderer.noopRendererData;
 import flighthq.renderWgpu.WgpuMaterialRegistry.resolveWgpuMaterialRenderer;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.BatchFormat;
-import flighthq.types.ColorTransform;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.SpriteRenderer;
-import flighthq.types.Tilemap;
-import flighthq.types.WgpuRenderState;
 
 @:expose("flighthq.displayobjectWgpu.WgpuTilemap")
 class WgpuTilemap {
   public static final INSTANCE_STRIDE_FLOATS__wgpuTilemap:Dynamic = 13.0;
 
-  public static function submitWgpuTilemap__wgpuTilemap(state:WgpuRenderState, tilemapNode:RenderProxy2D):Void {
+  public static function submitWgpuTilemap__wgpuTilemap(state:Dynamic, tilemapNode:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -58,7 +55,7 @@ class WgpuTilemap {
     var drawCount:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) { return; }
-    source = (cast _Runtime.field(tilemapNode, 'source') : Tilemap);
+    source = (cast _Runtime.field(tilemapNode, 'source') : Dynamic);
     __destructure0 = _Runtime.field(source, 'data');
     columns = _Runtime.field(__destructure0, 'columns');
     rows = _Runtime.field(__destructure0, 'rows');
@@ -120,7 +117,7 @@ class WgpuTilemap {
             _Runtime.setIndex(instanceData, (writeBase + 11.0), ((_Runtime.field(region, 'y') + _Runtime.field(region, 'height')) * ih));
             _Runtime.setIndex(instanceData, (writeBase + 12.0), alpha);
             _Runtime.callValue(packWgpuSpriteBatchMaterialInstance, cast ([state, nodeMaterialData, (startCount + drawCount)] : Array<Dynamic>));
-            var colorTransform:Dynamic = _Runtime.coalesce((cast _Runtime.optionalIndex(perTileColorTransform, ((row * columns) + col)) : Null<ColorTransform>), function():Dynamic return cast nodeColorTransform);
+            var colorTransform:Dynamic = _Runtime.coalesce((cast _Runtime.optionalIndex(perTileColorTransform, ((row * columns) + col)) : Null<Dynamic>), function():Dynamic return cast nodeColorTransform);
             _Runtime.callValue(recordWgpuSpriteBatchColorTransform, cast ([state, colorTransform, (startCount + drawCount)] : Array<Dynamic>));
             (writeBase = cast ((writeBase + WgpuTilemap.INSTANCE_STRIDE_FLOATS__wgpuTilemap) : Dynamic));
             drawCount++;

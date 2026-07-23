@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Vector3.Vector3Like;
-import flighthq.types.Vector4;
 import flighthq.types.Vector4.Vector4Like;
 
 @:expose("flighthq.geometry.Vector4")
@@ -48,7 +47,7 @@ class Vector4 {
     _Runtime.setField(out, 'w', _Runtime.select(_Runtime.compare(vw, minW, '<'), function():Dynamic return cast minW, function():Dynamic return cast _Runtime.select(_Runtime.compare(vw, maxW, '>'), function():Dynamic return cast maxW, function():Dynamic return cast vw)));
   }
 
-  public static function cloneVector4(source:Vector4Like):Vector4 {
+  public static function cloneVector4(source:Vector4Like):Dynamic {
     return cast _Runtime.callValue(createVector4, cast ([_Runtime.field(source, 'x'), _Runtime.field(source, 'y'), _Runtime.field(source, 'z'), _Runtime.field(source, 'w')] : Array<Dynamic>));
     return cast null;
   }
@@ -60,7 +59,7 @@ class Vector4 {
     _Runtime.setField(out, 'w', _Runtime.field(source, 'w'));
   }
 
-  public static function createVector4(?x:Float, ?y:Float, ?z:Float, ?w:Float):Vector4 {
+  public static function createVector4(?x:Float, ?y:Float, ?z:Float, ?w:Float):Dynamic {
     return cast _Runtime.callValue(createEntity, cast ([{ x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0), w: _Runtime.coalesce(w, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
@@ -299,11 +298,11 @@ class Vector4 {
     _Runtime.setIndex(out, (offset + 3.0), _Runtime.field(source, 'w'));
   }
 
-  public static final VECTOR4_W_UNIT:Vector4 = _Runtime.callValue(createVector4, cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
+  public static final VECTOR4_W_UNIT:Dynamic = _Runtime.callValue(createVector4, cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
 
-  public static final VECTOR4_X_AXIS:Vector4 = _Runtime.callValue(createVector4, cast ([1.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
+  public static final VECTOR4_X_AXIS:Dynamic = _Runtime.callValue(createVector4, cast ([1.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 
-  public static final VECTOR4_Y_AXIS:Vector4 = _Runtime.callValue(createVector4, cast ([0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
+  public static final VECTOR4_Y_AXIS:Dynamic = _Runtime.callValue(createVector4, cast ([0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
 
-  public static final VECTOR4_Z_AXIS:Vector4 = _Runtime.callValue(createVector4, cast ([0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
+  public static final VECTOR4_Z_AXIS:Dynamic = _Runtime.callValue(createVector4, cast ([0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
 }

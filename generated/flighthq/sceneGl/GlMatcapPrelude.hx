@@ -7,9 +7,7 @@ import flighthq.image.ImageResource.hasImageResourcePixels;
 import flighthq.renderGl.GlDraw.bindGlImageResourceTexture;
 import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
 import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
-import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
-import flighthq.types.Texture;
 
 typedef GlMatcapDefineKey = { var alphaMaskEnabled:Bool; var hasMatcap:Bool; };
 
@@ -17,7 +15,7 @@ typedef GlMatcapProgram = Dynamic;
 
 @:expose("flighthq.sceneGl.GlMatcapPrelude")
 class GlMatcapPrelude {
-  public static function bindGlMatcapSurface(state:GlRenderState, program:GlMatcapProgram, tint:LinearColor, matcap:Null<Texture>, alphaCutoff:Float):Void {
+  public static function bindGlMatcapSurface(state:Dynamic, program:GlMatcapProgram, tint:LinearColor, matcap:Null<Dynamic>, alphaCutoff:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(program, 'locTint'), _Runtime.getIndex(tint, 0.0), _Runtime.getIndex(tint, 1.0), _Runtime.getIndex(tint, 2.0), _Runtime.getIndex(tint, 3.0)] : Array<Dynamic>));
@@ -41,7 +39,7 @@ class GlMatcapPrelude {
     return cast null;
   }
 
-  public static function ensureGlMatcapProgram(state:GlRenderState, key:GlMatcapDefineKey):GlMatcapProgram {
+  public static function ensureGlMatcapProgram(state:Dynamic, key:GlMatcapDefineKey):GlMatcapProgram {
     return cast _Runtime.callValue(ensureGlSceneProgram, cast ([state, 'matcap:' + Std.string(_Runtime.callValue(buildGlMatcapDefineKey, cast ([key] : Array<Dynamic>))) + '', function(gl:Dynamic) return _Runtime.callValue(compileGlMatcapProgram, cast ([gl, key] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }

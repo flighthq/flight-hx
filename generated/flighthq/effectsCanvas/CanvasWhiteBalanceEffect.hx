@@ -5,16 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.passthroughCanvasEffectPass;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
-import flighthq.types.CanvasRenderTarget;
-import flighthq.types.WhiteBalanceEffect;
 
 @:expose("flighthq.effectsCanvas.CanvasWhiteBalanceEffect")
 class CanvasWhiteBalanceEffect {
-  public static function applyWhiteBalanceEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:WhiteBalanceEffect):Void {
+  public static function applyWhiteBalanceEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
   public static final defaultCanvasWhiteBalanceEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyWhiteBalanceEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : WhiteBalanceEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyWhiteBalanceEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 }

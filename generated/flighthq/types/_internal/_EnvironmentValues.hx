@@ -3,7 +3,6 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.CubeTexture;
 import flighthq.types.Light;
 
 @:expose("flighthq.types._internal._EnvironmentValues")

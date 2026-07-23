@@ -5,12 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.surface.SurfacePaletteMap.applySurfacePaletteMap;
-import flighthq.types.SurfaceHistogram;
-import flighthq.types.SurfaceRegion;
 
 @:expose("flighthq.surface.SurfaceHistogram")
 class SurfaceHistogram {
-  public static function equalizeSurfaceHistogram(dest:SurfaceRegion, source:SurfaceRegion):Void {
+  public static function equalizeSurfaceHistogram(dest:Dynamic, source:Dynamic):Void {
     var histogram:Dynamic = cast _Runtime.UNDEFINED;
     var total:Dynamic = cast _Runtime.UNDEFINED;
     histogram = _Runtime.callValue(getSurfaceHistogram, cast ([source] : Array<Dynamic>));
@@ -19,7 +17,7 @@ class SurfaceHistogram {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function getSurfaceHistogram(source:SurfaceRegion):SurfaceHistogram {
+  public static function getSurfaceHistogram(source:Dynamic):Dynamic {
     var red:Dynamic = cast _Runtime.UNDEFINED;
     var green:Dynamic = cast _Runtime.UNDEFINED;
     var blue:Dynamic = cast _Runtime.UNDEFINED;

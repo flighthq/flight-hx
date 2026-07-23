@@ -8,12 +8,11 @@ import flighthq.spritesheet.SpritesheetData.createSpritesheetFrameData;
 import flighthq.spritesheetFormats.CocosPlistSchema.CocosPlistDocument;
 import flighthq.spritesheetFormats.CocosPlistSchema.CocosPlistFrame;
 import flighthq.spritesheetFormats.CocosPlistSchema.CocosPlistMetadata;
-import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
 import flighthq.xml.XmlParse.XmlElement;
 import flighthq.xml.XmlParse.parseXmlDocument;
 
-typedef CocosPlistParsed = { var data:SpritesheetData; var document:CocosPlistDocument; };
+typedef CocosPlistParsed = { var data:Dynamic; var document:CocosPlistDocument; };
 
 @:expose("flighthq.spritesheetFormats.CocosPlistParse")
 class CocosPlistParse {
@@ -144,7 +143,7 @@ class CocosPlistParse {
     return cast null;
   }
 
-  public static function documentToData__cocosPlistParse(doc:CocosPlistDocument):SpritesheetData {
+  public static function documentToData__cocosPlistParse(doc:CocosPlistDocument):Dynamic {
     var frames:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure4:Dynamic = cast _Runtime.UNDEFINED;
     var imageWidth:Dynamic = cast _Runtime.UNDEFINED;
@@ -163,7 +162,7 @@ class CocosPlistParse {
     return cast null;
   }
 
-  public static function parseCocosPlistSpritesheet(xml:String):SpritesheetData {
+  public static function parseCocosPlistSpritesheet(xml:String):Dynamic {
     return cast _Runtime.callValue(CocosPlistParse.documentToData__cocosPlistParse, cast ([_Runtime.callValue(CocosPlistParse.parseCocosPlistXml__cocosPlistParse, cast ([xml] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }

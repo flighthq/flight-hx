@@ -9,8 +9,6 @@ import flighthq.displayobject.DisplayObject.getDisplayObjectRuntime;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.MethodsOf;
 import flighthq.types.PartialNode;
-import flighthq.types.Rectangle;
-import flighthq.types.Tilemap;
 import flighthq.types.Tilemap.TilemapData;
 import flighthq.types.Tilemap.TilemapRuntime;
 import flighthq.types.TilemapSignals;
@@ -21,27 +19,27 @@ typedef TilemapWithSignals__tilemap = { @:optional var __tilemapSignalsSlot:Tile
 
 @:expose("flighthq.sprite.Tilemap")
 class Tilemap {
-  public static function clearTilemap(tilemap:Tilemap):Void {
+  public static function clearTilemap(tilemap:Dynamic):Void {
     var signals:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.fill(_Runtime.field(_Runtime.field(tilemap, 'data'), 'tiles'), -1.0, 0, null, 1);
     signals = _Runtime.callValue(getTilemapSignals, cast ([tilemap] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callProperty(_Runtime.field(signals, 'onCleared'), 'emit', cast ([] : Array<Dynamic>)); }
   }
 
-  public static function cloneTilemap(source:Tilemap):Tilemap {
+  public static function cloneTilemap(source:Dynamic):Dynamic {
     var src:Dynamic = cast _Runtime.UNDEFINED;
     src = _Runtime.field(source, 'data');
     return cast _Runtime.callValue(createTilemap, cast ([{ data: { columns: _Runtime.field(src, 'columns'), materialData: _Runtime.select(!_Runtime.strictEquals(_Runtime.field(src, 'materialData'), null), function():Dynamic return cast _Runtime.slice(_Runtime.field(src, 'materialData'), 0, null), function():Dynamic return cast null), rows: _Runtime.field(src, 'rows'), tiles: _Runtime.slice(_Runtime.field(src, 'tiles'), 0, null), tileset: _Runtime.field(src, 'tileset') } }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function computeTilemapLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+  public static function computeTilemapLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
     var tilemap:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var tileset:Dynamic = cast _Runtime.UNDEFINED;
     var columns:Dynamic = cast _Runtime.UNDEFINED;
     var rows:Dynamic = cast _Runtime.UNDEFINED;
-    tilemap = (cast source : Tilemap);
+    tilemap = (cast source : Dynamic);
     __destructure0 = _Runtime.field(tilemap, 'data');
     tileset = _Runtime.field(__destructure0, 'tileset');
     columns = _Runtime.field(__destructure0, 'columns');
@@ -52,8 +50,8 @@ class Tilemap {
     _Runtime.setField(out, 'height', _Runtime.select(!_Runtime.strictEquals(tileset, null), function():Dynamic return cast (rows * _Runtime.field(tileset, 'tileHeight')), function():Dynamic return cast 0.0));
   }
 
-  public static function createTilemap(?obj:PartialNode<Tilemap>):Tilemap {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([TilemapKind, obj, createTilemapData, createTilemapRuntime] : Array<Dynamic>)) : Tilemap);
+  public static function createTilemap(?obj:PartialNode<Dynamic>):Dynamic {
+    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([TilemapKind, obj, createTilemapData, createTilemapRuntime] : Array<Dynamic>)) : Dynamic);
     return cast null;
   }
 
@@ -76,18 +74,18 @@ class Tilemap {
     return cast null;
   }
 
-  public static function enableTilemapSignals(target:Tilemap):TilemapSignals {
+  public static function enableTilemapSignals(target:Dynamic):TilemapSignals {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     s = (cast target : TilemapWithSignals__tilemap);
     return cast _Runtime.setIndex(s, Tilemap.tilemapSignalsSlot__tilemap, (_Runtime.getIndex(s, Tilemap.tilemapSignalsSlot__tilemap) ?? _Runtime.callValue(createTilemapSignals, cast ([] : Array<Dynamic>))));
     return cast null;
   }
 
-  public static function fillTilemapTiles(tilemap:Tilemap, id:Float):Void {
+  public static function fillTilemapTiles(tilemap:Dynamic, id:Float):Void {
     _Runtime.fill(_Runtime.field(_Runtime.field(tilemap, 'data'), 'tiles'), id, 0, null, 1);
   }
 
-  public static function getTilemapColumnAtX(source:Tilemap, x:Float):Float {
+  public static function getTilemapColumnAtX(source:Dynamic, x:Float):Float {
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
     var tileset:Dynamic = cast _Runtime.UNDEFINED;
     var columns:Dynamic = cast _Runtime.UNDEFINED;
@@ -102,7 +100,7 @@ class Tilemap {
     return cast null;
   }
 
-  public static function getTilemapColumnRowAtPoint(out:Vector2Like, source:Tilemap, x:Float, y:Float):Bool {
+  public static function getTilemapColumnRowAtPoint(out:Vector2Like, source:Dynamic, x:Float, y:Float):Bool {
     var col:Dynamic = cast _Runtime.UNDEFINED;
     var row:Dynamic = cast _Runtime.UNDEFINED;
     col = _Runtime.callValue(getTilemapColumnAtX, cast ([source, x] : Array<Dynamic>));
@@ -114,7 +112,7 @@ class Tilemap {
     return cast null;
   }
 
-  public static function getTilemapRowAtY(source:Tilemap, y:Float):Float {
+  public static function getTilemapRowAtY(source:Dynamic, y:Float):Float {
     var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
     var tileset:Dynamic = cast _Runtime.UNDEFINED;
     var rows:Dynamic = cast _Runtime.UNDEFINED;
@@ -129,17 +127,17 @@ class Tilemap {
     return cast null;
   }
 
-  public static function getTilemapRuntime(source:Tilemap):TilemapRuntime {
+  public static function getTilemapRuntime(source:Dynamic):TilemapRuntime {
     return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : TilemapRuntime);
     return cast null;
   }
 
-  public static function getTilemapSignals(source:Tilemap):Null<TilemapSignals> {
+  public static function getTilemapSignals(source:Dynamic):Null<TilemapSignals> {
     return cast _Runtime.coalesce(_Runtime.getIndex((cast source : TilemapWithSignals__tilemap), Tilemap.tilemapSignalsSlot__tilemap), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function getTilemapTile(tilemap:Tilemap, column:Float, row:Float):Float {
+  public static function getTilemapTile(tilemap:Dynamic, column:Float, row:Float):Float {
     var __destructure3:Dynamic = cast _Runtime.UNDEFINED;
     var columns:Dynamic = cast _Runtime.UNDEFINED;
     var rows:Dynamic = cast _Runtime.UNDEFINED;
@@ -153,12 +151,12 @@ class Tilemap {
     return cast null;
   }
 
-  public static function getTilemapTileAtPoint(source:Tilemap, point:Vector2Like):Float {
+  public static function getTilemapTileAtPoint(source:Dynamic, point:Vector2Like):Float {
     return cast _Runtime.callValue(getTilemapTileAtPointXY, cast ([source, _Runtime.field(point, 'x'), _Runtime.field(point, 'y')] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTilemapTileAtPointXY(source:Tilemap, x:Float, y:Float):Float {
+  public static function getTilemapTileAtPointXY(source:Dynamic, x:Float, y:Float):Float {
     var col:Dynamic = cast _Runtime.UNDEFINED;
     var row:Dynamic = cast _Runtime.UNDEFINED;
     col = _Runtime.callValue(getTilemapColumnAtX, cast ([source, x] : Array<Dynamic>));
@@ -168,7 +166,7 @@ class Tilemap {
     return cast null;
   }
 
-  public static function getTilemapTileRect(out:Rectangle, source:Tilemap, column:Float, row:Float):Bool {
+  public static function getTilemapTileRect(out:Dynamic, source:Dynamic, column:Float, row:Float):Bool {
     var __destructure4:Dynamic = cast _Runtime.UNDEFINED;
     var tileset:Dynamic = cast _Runtime.UNDEFINED;
     var columns:Dynamic = cast _Runtime.UNDEFINED;
@@ -186,7 +184,7 @@ class Tilemap {
     return cast null;
   }
 
-  public static function resizeTilemap(tilemap:Tilemap, columns:Float, rows:Float):Void {
+  public static function resizeTilemap(tilemap:Dynamic, columns:Float, rows:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var newTiles:Dynamic = cast _Runtime.UNDEFINED;
     var copyColumns:Dynamic = cast _Runtime.UNDEFINED;
@@ -213,7 +211,7 @@ class Tilemap {
     _Runtime.setField(data, 'tiles', newTiles);
   }
 
-  public static function setTilemapTile(tilemap:Tilemap, column:Float, row:Float, id:Float):Void {
+  public static function setTilemapTile(tilemap:Dynamic, column:Float, row:Float, id:Float):Void {
     var __destructure5:Dynamic = cast _Runtime.UNDEFINED;
     var columns:Dynamic = cast _Runtime.UNDEFINED;
     var rows:Dynamic = cast _Runtime.UNDEFINED;
@@ -229,7 +227,7 @@ class Tilemap {
     if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callProperty(_Runtime.field(signals, 'onTileChanged'), 'emit', cast ([column, row, id] : Array<Dynamic>)); }
   }
 
-  public static function setTilemapTiles(tilemap:Tilemap, ids:Dynamic, offsetColumn:Float, offsetRow:Float, width:Float, height:Float):Void {
+  public static function setTilemapTiles(tilemap:Dynamic, ids:Dynamic, offsetColumn:Float, offsetRow:Float, width:Float, height:Float):Void {
     var __destructure6:Dynamic = cast _Runtime.UNDEFINED;
     var columns:Dynamic = cast _Runtime.UNDEFINED;
     var rows:Dynamic = cast _Runtime.UNDEFINED;

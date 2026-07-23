@@ -3,8 +3,7 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Velocity.VelocityField;
 
-typedef WgpuVelocityContext = { var state:WgpuRenderState; var field:VelocityField; var width:Float; var height:Float; var pixelRatio:Float; };
+typedef WgpuVelocityContext = { var state:Dynamic; var field:Dynamic; var width:Float; var height:Float; var pixelRatio:Float; };
 
 typedef WgpuVelocityWriter = Dynamic;

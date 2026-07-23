@@ -9,7 +9,6 @@ import flighthq.node.Node.getNodeRuntime;
 import flighthq.types.HasBoundsRectangle.HasBoundsRectangleRuntime;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Node.NodeTraits;
-import flighthq.types.Rectangle;
 import flighthq.types.ViewportAlign;
 
 @:expose("flighthq.node.Viewport")
@@ -88,5 +87,5 @@ class Viewport {
     return cast null;
   }
 
-  public static final _tempRectangle__viewport:Rectangle = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
+  public static final _tempRectangle__viewport:Dynamic = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
 }

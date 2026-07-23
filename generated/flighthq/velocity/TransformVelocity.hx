@@ -10,16 +10,15 @@ import flighthq.node.Hierarchy.getNodeChildCount;
 import flighthq.node.Transform2d.ensureNodeWorldMatrix;
 import flighthq.node.Transform2d.getNodeWorldMatrix;
 import flighthq.types.HasTransform2D.Transform2DNode;
-import flighthq.types.Velocity.VelocityField;
 import flighthq.velocity.VelocityField.ensureVelocitySample;
 
 @:expose("flighthq.velocity.TransformVelocity")
 class TransformVelocity {
-  public static function contributeTransformVelocity<Traits>(field:VelocityField, root:Transform2DNode<Traits>):Void {
+  public static function contributeTransformVelocity<Traits>(field:Dynamic, root:Transform2DNode<Traits>):Void {
     _Runtime.callValue(TransformVelocity.visitTransformVelocity__transformVelocity, cast ([field, root] : Array<Dynamic>));
   }
 
-  public static function visitTransformVelocity__transformVelocity<Traits>(field:VelocityField, node:Transform2DNode<Traits>):Void {
+  public static function visitTransformVelocity__transformVelocity<Traits>(field:Dynamic, node:Transform2DNode<Traits>):Void {
     var mutableNode:Dynamic = cast _Runtime.UNDEFINED;
     var world:Dynamic = cast _Runtime.UNDEFINED;
     var sample:Dynamic = cast _Runtime.UNDEFINED;

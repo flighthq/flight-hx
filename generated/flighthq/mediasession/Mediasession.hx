@@ -3,6 +3,7 @@ package flighthq.mediasession;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.MediaSession;
 import flighthq.types.MediaSession.MediaSessionAction;
 import flighthq.types.MediaSession.MediaSessionActionDetails;
 import flighthq.types.MediaSession.MediaSessionBackend;

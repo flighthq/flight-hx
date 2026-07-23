@@ -5,11 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix.createMatrix;
 import flighthq.geometry.Matrix.setMatrixIdentity;
-import flighthq.types.Matrix;
 
 @:expose("flighthq.geometry.MatrixPool")
 class MatrixPool {
-  public static function acquireIdentityMatrix():Matrix {
+  public static function acquireIdentityMatrix():Dynamic {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     m = _Runtime.callValue(acquireMatrix, cast ([] : Array<Dynamic>));
     _Runtime.callValue(setMatrixIdentity, cast ([m] : Array<Dynamic>));
@@ -17,10 +16,10 @@ class MatrixPool {
     return cast null;
   }
 
-  public static function acquireMatrix():Matrix {
-    var m:Matrix = cast _Runtime.UNDEFINED;
+  public static function acquireMatrix():Dynamic {
+    var m:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(MatrixPool.pool__matrixPool, 'length'), 0.0, '>'))) {
-      (m = cast ((cast _Runtime.callProperty(MatrixPool.pool__matrixPool, 'pop', cast ([] : Array<Dynamic>)) : Matrix) : Dynamic));
+      (m = cast ((cast _Runtime.callProperty(MatrixPool.pool__matrixPool, 'pop', cast ([] : Array<Dynamic>)) : Dynamic) : Dynamic));
     } else {
       (m = cast (_Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Dynamic));
     }
@@ -32,10 +31,10 @@ class MatrixPool {
     _Runtime.setLength(MatrixPool.pool__matrixPool, 0.0);
   }
 
-  public static function releaseMatrix(m:Matrix):Void {
+  public static function releaseMatrix(m:Dynamic):Void {
     if (_Runtime.truthy(!_Runtime.truthy(m))) { return; }
     _Runtime.callProperty(MatrixPool.pool__matrixPool, 'push', cast ([m] : Array<Dynamic>));
   }
 
-  public static final pool__matrixPool:Array<Matrix> = cast ([] : Array<Dynamic>);
+  public static final pool__matrixPool:Array<Dynamic> = cast ([] : Array<Dynamic>);
 }

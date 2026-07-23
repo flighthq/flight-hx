@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.OuterGlowEffect;
 
 @:expose("flighthq.effects.OuterGlowEffect")
 class OuterGlowEffect {
-  public static function createOuterGlowEffect(?options:Dynamic):OuterGlowEffect {
+  public static function createOuterGlowEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'OuterGlowEffect' }, options]);
     return cast null;

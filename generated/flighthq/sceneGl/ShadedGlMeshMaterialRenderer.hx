@@ -24,12 +24,8 @@ import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
 import flighthq.shading.ModifierRegistry;
 import flighthq.shading.OrderModifierStack.orderModifierStack;
 import flighthq.shading._internal._ModifierRegistryValues.resolveModifier;
-import flighthq.types.Camera;
 import flighthq.types.GlMeshMaterialRenderer;
-import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
-import flighthq.types.Material;
-import flighthq.types.MeshGeometry;
 import flighthq.types.Modifier;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
@@ -38,7 +34,7 @@ import flighthq.types._internal._ShadedMaterialValues.ShadedMaterialKind;
 
 @:expose("flighthq.sceneGl.ShadedGlMeshMaterialRenderer")
 class ShadedGlMeshMaterialRenderer {
-  public static final shadedGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
+  public static final shadedGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:Dynamic, material:Null<Dynamic>, lights:SceneLightBlock, camera:Dynamic) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var shaded:Dynamic = cast _Runtime.UNDEFINED;
     var modifiers:Dynamic = cast _Runtime.UNDEFINED;
@@ -54,18 +50,18 @@ class ShadedGlMeshMaterialRenderer {
     _Runtime.callValue(ShadedGlMeshMaterialRenderer.bindGlShadedMaterialUniforms__shadedGlMeshMaterialRenderer, cast ([state, program, shaded] : Array<Dynamic>));
     _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locTime'), _Runtime.callValue(getGlSceneTime, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(modifiers, 'length'), 0.0, '>'))) { _Runtime.callValue(ShadedGlMeshMaterialRenderer.bindGlShadedModifiers__shadedGlMeshMaterialRenderer, cast ([state, program, modifiers] : Array<Dynamic>)); }
-  }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
+  }, draw: function(state:Dynamic, proxy:SceneRenderProxy, geometry:Dynamic) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
     if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 
-  public static function registerShadedGlMaterial(state:GlRenderState):Void {
+  public static function registerShadedGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(registerGlMeshMaterialRenderer, cast ([state, ShadedMaterialKind, shadedGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
-  public static function bindGlShadedModifiers__shadedGlMeshMaterialRenderer(state:GlRenderState, program:GlShadedProgram, modifiers:Array<Modifier>):Void {
+  public static function bindGlShadedModifiers__shadedGlMeshMaterialRenderer(state:Dynamic, program:GlShadedProgram, modifiers:Array<Modifier>):Void {
     var registry:Null<ModifierRegistry> = cast _Runtime.UNDEFINED;
     var ordered:Dynamic = cast _Runtime.UNDEFINED;
     var nextTextureUnit:Dynamic = cast _Runtime.UNDEFINED;
@@ -88,7 +84,7 @@ class ShadedGlMeshMaterialRenderer {
     }
   }
 
-  public static function bindGlShadedMaterialUniforms__shadedGlMeshMaterialRenderer(state:GlRenderState, program:GlShadedProgram, material:Null<ShadedMaterial>):Void {
+  public static function bindGlShadedMaterialUniforms__shadedGlMeshMaterialRenderer(state:Dynamic, program:GlShadedProgram, material:Null<ShadedMaterial>):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var diffuseMap:Dynamic = cast _Runtime.UNDEFINED;
     var specularMap:Dynamic = cast _Runtime.UNDEFINED;

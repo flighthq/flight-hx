@@ -6,22 +6,20 @@ import flighthq._internal._Runtime;
 import flighthq.spring.CreateSpring.createSpring;
 import flighthq.spring.IsSpringSettled.isSpringSettled;
 import flighthq.spring.UpdateSpring.updateSpring;
-import flighthq.types.Spring.Spring2D;
-import flighthq.types.Spring.SpringConfig;
 
 @:expose("flighthq.spring.Spring2D")
 class Spring2D {
-  public static function createSpring2D(valueX:Float = 0.0, valueY:Float = 0.0, velocityX:Float = 0.0, velocityY:Float = 0.0):Spring2D {
+  public static function createSpring2D(valueX:Float = 0.0, valueY:Float = 0.0, velocityX:Float = 0.0, velocityY:Float = 0.0):Dynamic {
     return cast { x: _Runtime.callValue(createSpring, cast ([valueX, velocityX] : Array<Dynamic>)), y: _Runtime.callValue(createSpring, cast ([valueY, velocityY] : Array<Dynamic>)) };
     return cast null;
   }
 
-  public static function isSpring2DSettled(spring2D:Spring2D, targetX:Float, targetY:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
+  public static function isSpring2DSettled(spring2D:Dynamic, targetX:Float, targetY:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
     return cast _Runtime.andValue(_Runtime.callValue(isSpringSettled, cast ([_Runtime.field(spring2D, 'x'), targetX, positionEpsilon, velocityEpsilon] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(isSpringSettled, cast ([_Runtime.field(spring2D, 'y'), targetY, positionEpsilon, velocityEpsilon] : Array<Dynamic>)));
     return cast null;
   }
 
-  public static function updateSpring2D(spring2D:Spring2D, targetX:Float, targetY:Float, config:SpringConfig, deltaTime:Float):Void {
+  public static function updateSpring2D(spring2D:Dynamic, targetX:Float, targetY:Float, config:Dynamic, deltaTime:Float):Void {
     _Runtime.callValue(updateSpring, cast ([_Runtime.field(spring2D, 'x'), targetX, config, deltaTime] : Array<Dynamic>));
     _Runtime.callValue(updateSpring, cast ([_Runtime.field(spring2D, 'y'), targetY, config, deltaTime] : Array<Dynamic>));
   }

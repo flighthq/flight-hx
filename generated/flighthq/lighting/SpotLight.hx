@@ -7,7 +7,6 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Vector3.cloneVector3;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.geometry.Vector3.setVector3;
-import flighthq.types.SpotLight;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._SpotLightValues.SpotLightKind;
 
@@ -17,15 +16,15 @@ typedef SpotLightOptions = { @:optional var castsShadow:Bool; @:optional var col
 
 @:expose("flighthq.lighting.SpotLight")
 class SpotLight {
-  public static function cloneSpotLight(source:SpotLight):SpotLight {
+  public static function cloneSpotLight(source:Dynamic):Dynamic {
     return cast _Runtime.callValue(createEntity, cast ([{ castsShadow: _Runtime.field(source, 'castsShadow'), color: _Runtime.field(source, 'color'), direction: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'direction')] : Array<Dynamic>)), innerConeCos: _Runtime.field(source, 'innerConeCos'), intensity: _Runtime.field(source, 'intensity'), kind: SpotLightKind, normalBias: _Runtime.field(source, 'normalBias'), outerConeCos: _Runtime.field(source, 'outerConeCos'), pcfRadius: _Runtime.field(source, 'pcfRadius'), position: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'position')] : Array<Dynamic>)), range: _Runtime.field(source, 'range'), shadowBias: _Runtime.field(source, 'shadowBias') }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpotLight(?options:SpotLightOptions):SpotLight {
+  public static function createSpotLight(?options:SpotLightOptions):Dynamic {
     var position:Dynamic = cast _Runtime.UNDEFINED;
     var direction:Dynamic = cast _Runtime.UNDEFINED;
-    var light:SpotLight = cast _Runtime.UNDEFINED;
+    var light:Dynamic = cast _Runtime.UNDEFINED;
     position = _Runtime.optionalField(options, 'position');
     direction = _Runtime.optionalField(options, 'direction');
     light = _Runtime.callValue(createEntity, cast ([{ castsShadow: _Runtime.coalesce(_Runtime.optionalField(options, 'castsShadow'), function():Dynamic return cast false), color: _Runtime.coalesce(_Runtime.optionalField(options, 'color'), function():Dynamic return cast 4294967295.0), direction: _Runtime.select(direction, function():Dynamic return cast _Runtime.callValue(cloneVector3, cast ([direction] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector3, cast ([0.0, -1.0, 0.0] : Array<Dynamic>))), innerConeCos: 1.0, intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: SpotLightKind, normalBias: _Runtime.coalesce(_Runtime.optionalField(options, 'normalBias'), function():Dynamic return cast 0.0), outerConeCos: 1.0, pcfRadius: _Runtime.coalesce(_Runtime.optionalField(options, 'pcfRadius'), function():Dynamic return cast 0.0), position: _Runtime.select(position, function():Dynamic return cast _Runtime.callValue(cloneVector3, cast ([position] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector3, cast ([0.0, 0.0, 0.0] : Array<Dynamic>))), range: _Runtime.coalesce(_Runtime.optionalField(options, 'range'), function():Dynamic return cast -1.0), shadowBias: _Runtime.coalesce(_Runtime.optionalField(options, 'shadowBias'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
@@ -34,17 +33,17 @@ class SpotLight {
     return cast null;
   }
 
-  public static function getSpotLightConeDegrees(out:SpotLightConeAngles, source:SpotLight):Void {
+  public static function getSpotLightConeDegrees(out:SpotLightConeAngles, source:Dynamic):Void {
     _Runtime.setField(out, 'innerDegrees', ((_Runtime.callProperty(HxMath, 'acos', cast ([_Runtime.field(source, 'innerConeCos')] : Array<Dynamic>)) * 180.0) / HxMath.PI));
     _Runtime.setField(out, 'outerDegrees', ((_Runtime.callProperty(HxMath, 'acos', cast ([_Runtime.field(source, 'outerConeCos')] : Array<Dynamic>)) * 180.0) / HxMath.PI));
   }
 
-  public static function setSpotLightCone(out:SpotLight, innerDegrees:Float, outerDegrees:Float):Void {
+  public static function setSpotLightCone(out:Dynamic, innerDegrees:Float, outerDegrees:Float):Void {
     _Runtime.setField(out, 'innerConeCos', _Runtime.callProperty(HxMath, 'cos', cast ([((innerDegrees * HxMath.PI) / 180.0)] : Array<Dynamic>)));
     _Runtime.setField(out, 'outerConeCos', _Runtime.callProperty(HxMath, 'cos', cast ([((outerDegrees * HxMath.PI) / 180.0)] : Array<Dynamic>)));
   }
 
-  public static function setSpotLightDirection(out:SpotLight, x:Float, y:Float, z:Float):Void {
+  public static function setSpotLightDirection(out:Dynamic, x:Float, y:Float, z:Float):Void {
     var lx:Dynamic = cast _Runtime.UNDEFINED;
     var ly:Dynamic = cast _Runtime.UNDEFINED;
     var lz:Dynamic = cast _Runtime.UNDEFINED;
@@ -58,7 +57,7 @@ class SpotLight {
     }
   }
 
-  public static function setSpotLightTarget(out:SpotLight, targetX:Float, targetY:Float, targetZ:Float):Void {
+  public static function setSpotLightTarget(out:Dynamic, targetX:Float, targetY:Float, targetZ:Float):Void {
     var px:Dynamic = cast _Runtime.UNDEFINED;
     var py:Dynamic = cast _Runtime.UNDEFINED;
     var pz:Dynamic = cast _Runtime.UNDEFINED;

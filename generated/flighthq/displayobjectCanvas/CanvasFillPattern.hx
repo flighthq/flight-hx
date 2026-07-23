@@ -4,8 +4,6 @@ package flighthq.displayobjectCanvas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix.createMatrix;
-import flighthq.types.ImageResource;
-import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.ShapeCommand.GradientType;
 import flighthq.types.ShapeCommand.InterpolationMethod;
@@ -15,14 +13,14 @@ import flighthq.types.ShapeCommand.SpreadMethod;
 class CanvasFillPattern {
   public static final GRADIENT_HALF__canvasFillPattern:Dynamic = 819.2;
 
-  public static function createBitmapPattern(context:Dynamic, bitmap:ImageResource, repeat:Bool, smooth:Dynamic = false):Null<Dynamic> {
+  public static function createBitmapPattern(context:Dynamic, bitmap:Dynamic, repeat:Bool, smooth:Dynamic = false):Null<Dynamic> {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(bitmap, 'source'), null))) { return cast null; }
     _Runtime.callValue(CanvasFillPattern.setSmoothing__canvasFillPattern, cast ([context, smooth] : Array<Dynamic>));
     return cast _Runtime.callProperty(context, 'createPattern', cast ([_Runtime.field(bitmap, 'source'), _Runtime.select(repeat, function():Dynamic return cast 'repeat', function():Dynamic return cast 'no-repeat')] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGradientPattern(context:Dynamic, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:Null<Matrix>, spreadMethod:SpreadMethod, _interpolationMethod:InterpolationMethod, focalPointRatio:Float):Null<Dynamic> {
+  public static function createGradientPattern(context:Dynamic, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:Null<Dynamic>, spreadMethod:SpreadMethod, _interpolationMethod:InterpolationMethod, focalPointRatio:Float):Null<Dynamic> {
     var mat:Dynamic = cast _Runtime.UNDEFINED;
     mat = _Runtime.coalesce(m, function():Dynamic return cast CanvasFillPattern.IDENTITY__canvasFillPattern);
     if (_Runtime.truthy(_Runtime.strictEquals(gradientType, 'radial'))) {

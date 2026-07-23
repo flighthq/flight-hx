@@ -8,11 +8,10 @@ import flighthq.mesh.MeshGeometry.setMeshGeometrySkinBindPose;
 import flighthq.skeleton3d.Skeleton3d.computeSkeleton3DJointMatrices;
 import flighthq.skeleton3d.SkinMeshGeometry.captureMeshSkinBindPose;
 import flighthq.skeleton3d.SkinMeshGeometry.skinMeshGeometry;
-import flighthq.types.Mesh;
 
 @:expose("flighthq.skeleton3d.UpdateMeshSkin")
 class UpdateMeshSkin {
-  public static function updateMeshSkin(mesh:Mesh):Void {
+  public static function updateMeshSkin(mesh:Dynamic):Void {
     var skin:Dynamic = cast _Runtime.UNDEFINED;
     var geometry:Dynamic = cast _Runtime.UNDEFINED;
     var bindPose:Dynamic = cast _Runtime.UNDEFINED;

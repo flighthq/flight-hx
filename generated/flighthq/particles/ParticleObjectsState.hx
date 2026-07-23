@@ -4,18 +4,17 @@ package flighthq.particles;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Typedarray.reserveFloat32Array;
-import flighthq.types.ParticleObjectsState;
 import flighthq.types.RandomSource;
 
 @:expose("flighthq.particles.ParticleObjectsState")
 class ParticleObjectsState {
-  public static function createParticleObjectsState(capacity:Float, ?random:RandomSource):ParticleObjectsState {
+  public static function createParticleObjectsState(capacity:Float, ?random:RandomSource):Dynamic {
     if (random == null) random = cast (HxMath.random : Dynamic);
     return cast { burstTimer: 0.0, emitterAge: 0.0, lifetimes: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(capacity * 2.0)]), prevX: HxMath.NaN, prevY: HxMath.NaN, random: random, rotationSpeeds: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [capacity]), scales: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [capacity]), spawnAccumulator: 0.0, velocities: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(capacity * 2.0)]) };
     return cast null;
   }
 
-  public static function ensureParticleObjectsStateCapacity(state:ParticleObjectsState, capacity:Float):Void {
+  public static function ensureParticleObjectsStateCapacity(state:Dynamic, capacity:Float):Void {
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(state, 'lifetimes'), 'length'), (capacity * 2.0), '>='))) { return; }
     _Runtime.setField(state, 'lifetimes', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(state, 'lifetimes'), (capacity * 2.0)] : Array<Dynamic>)));
     _Runtime.setField(state, 'velocities', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(state, 'velocities'), (capacity * 2.0)] : Array<Dynamic>)));

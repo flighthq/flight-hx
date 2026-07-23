@@ -3,10 +3,7 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Material;
-import flighthq.types.MeshGeometry;
 import flighthq.types.MorphTarget.MeshMorph;
-import flighthq.types.SceneNode;
 import flighthq.types.SceneNode.SceneNodeRuntime;
 import flighthq.types.Skin;
 

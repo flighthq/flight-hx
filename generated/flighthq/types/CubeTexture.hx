@@ -7,6 +7,6 @@ import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.EntityWithoutRuntime;
 import flighthq.types.Texture.TextureColorSpace;
 
-typedef CubeTexture = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var colorSpace:TextureColorSpace; var faces:Array<Null<ImageResource>>; var sampler:Sampler; };
+typedef CubeTexture = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var colorSpace:TextureColorSpace; var faces:Array<Null<Dynamic>>; var sampler:Dynamic; };
 
-typedef CubeTextureLike = EntityWithoutRuntime<CubeTexture>;
+typedef CubeTextureLike = EntityWithoutRuntime<Dynamic>;

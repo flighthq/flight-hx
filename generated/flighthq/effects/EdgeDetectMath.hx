@@ -3,12 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.OutlineEffect;
-import flighthq.types.SketchEffect;
 
 @:expose("flighthq.effects.EdgeDetectMath")
 class EdgeDetectMath {
-  public static function computeOutlineEdgeParams(effect:OutlineEffect, out:Array<Float>):Void {
+  public static function computeOutlineEdgeParams(effect:Dynamic, out:Array<Float>):Void {
     var threshold:Dynamic = cast _Runtime.UNDEFINED;
     var feather:Dynamic = cast _Runtime.UNDEFINED;
     var color:Dynamic = cast _Runtime.UNDEFINED;
@@ -31,12 +29,12 @@ class EdgeDetectMath {
     _Runtime.setIndex(out, 5.0, a);
   }
 
-  public static function computeOutlineThicknessPx(effect:OutlineEffect):Float {
+  public static function computeOutlineThicknessPx(effect:Dynamic):Float {
     return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'thickness'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function computeSketchEdgeParams(effect:SketchEffect, out:Array<Float>):Void {
+  public static function computeSketchEdgeParams(effect:Dynamic, out:Array<Float>):Void {
     var strength:Dynamic = cast _Runtime.UNDEFINED;
     var threshold:Dynamic = cast _Runtime.UNDEFINED;
     strength = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));

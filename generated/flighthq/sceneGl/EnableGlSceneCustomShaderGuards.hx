@@ -5,17 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
-import flighthq.types.GlRenderState;
 import flighthq.types.Log.LogLevel;
 
 @:expose("flighthq.sceneGl.EnableGlSceneCustomShaderGuards")
 class EnableGlSceneCustomShaderGuards {
-  public static function areGlSceneCustomShaderGuardsEnabled(state:GlRenderState):Bool {
+  public static function areGlSceneCustomShaderGuardsEnabled(state:Dynamic):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'customShaderGuard'), null);
     return cast null;
   }
 
-  public static function enableGlSceneCustomShaderGuards(state:GlRenderState):Void {
+  public static function enableGlSceneCustomShaderGuards(state:Dynamic):Void {
     _Runtime.setField(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'customShaderGuard', EnableGlSceneCustomShaderGuards.warnGlCustomShaderUniformTypes__enableGlSceneCustomShaderGuards);
   }
 
@@ -50,7 +49,7 @@ class EnableGlSceneCustomShaderGuards {
     return cast null;
   }
 
-  public static function warnGlCustomShaderUniformTypes__enableGlSceneCustomShaderGuards(state:GlRenderState, program:Dynamic, shaderKey:String):Void {
+  public static function warnGlCustomShaderUniformTypes__enableGlSceneCustomShaderGuards(state:Dynamic, program:Dynamic, shaderKey:String):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var expected:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;

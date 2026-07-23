@@ -12,14 +12,12 @@ import flighthq.render.Renderer.noopRendererData;
 import flighthq.renderGl.GlMaterialRegistry.resolveGlMaterialRenderer;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.BatchFormat;
-import flighthq.types.GlRenderState;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Sprite;
 import flighthq.types.SpriteRenderer;
 
 @:expose("flighthq.displayobjectGl.GlSpriteRenderer")
 class GlSpriteRenderer {
-  public static function submitGlSpriteNode__glSpriteRenderer(state:GlRenderState, spriteNode:RenderProxy2D):Void {
+  public static function submitGlSpriteNode__glSpriteRenderer(state:Dynamic, spriteNode:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -36,7 +34,7 @@ class GlSpriteRenderer {
     var instanceIndex:Dynamic = cast _Runtime.UNDEFINED;
     var d:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    source = (cast _Runtime.field(spriteNode, 'source') : Sprite);
+    source = (cast _Runtime.field(spriteNode, 'source') : Dynamic);
     __destructure0 = _Runtime.field(source, 'data');
     atlas = _Runtime.field(__destructure0, 'atlas');
     id = _Runtime.field(__destructure0, 'id');

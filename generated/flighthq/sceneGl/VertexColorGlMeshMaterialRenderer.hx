@@ -12,12 +12,8 @@ import flighthq.sceneGl._internal._GlMeshProgramValues.beginGlMeshDraw;
 import flighthq.sceneGl._internal._GlMeshProgramValues.drawGlMeshSubset;
 import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
-import flighthq.types.Camera;
 import flighthq.types.GlMeshMaterialRenderer;
-import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
-import flighthq.types.Material;
-import flighthq.types.MeshGeometry;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.VertexColorMaterial;
@@ -25,7 +21,7 @@ import flighthq.types._internal._VertexColorMaterialValues.VertexColorMaterialKi
 
 @:expose("flighthq.sceneGl.VertexColorGlMeshMaterialRenderer")
 class VertexColorGlMeshMaterialRenderer {
-  public static final vertexColorGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera) {
+  public static final vertexColorGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:Dynamic, material:Null<Dynamic>, _lights:SceneLightBlock, camera:Dynamic) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var vertexColor:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -41,14 +37,14 @@ class VertexColorGlMeshMaterialRenderer {
     }
     _Runtime.callValue(unpackColorToLinear, cast ([VertexColorGlMeshMaterialRenderer.scratchRgba__vertexColorGlMeshMaterialRenderer, _Runtime.field(vertexColor, 'tint')] : Array<Dynamic>));
     _Runtime.callValue(bindGlUnlitSurface, cast ([state, program, VertexColorGlMeshMaterialRenderer.scratchRgba__vertexColorGlMeshMaterialRenderer, 1.0, null, _Runtime.field(vertexColor, 'alphaCutoff')] : Array<Dynamic>));
-  }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
+  }, draw: function(state:Dynamic, proxy:SceneRenderProxy, geometry:Dynamic) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
     if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 
-  public static function registerVertexColorGlMaterial(state:GlRenderState):Void {
+  public static function registerVertexColorGlMaterial(state:Dynamic):Void {
     _Runtime.callValue(registerGlMeshMaterialRenderer, cast ([state, VertexColorMaterialKind, vertexColorGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 

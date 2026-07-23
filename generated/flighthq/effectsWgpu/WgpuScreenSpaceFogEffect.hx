@@ -5,14 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
-import flighthq.types.ScreenSpaceFogEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
-import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.effectsWgpu.WgpuScreenSpaceFogEffect")
 class WgpuScreenSpaceFogEffect {
-  public static function applyScreenSpaceFogEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ScreenSpaceFogEffect):Void {
+  public static function applyScreenSpaceFogEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     var packed:Dynamic = cast _Runtime.UNDEFINED;
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var g:Dynamic = cast _Runtime.UNDEFINED;
@@ -25,7 +22,7 @@ class WgpuScreenSpaceFogEffect {
     b = ((Std.int(_Runtime.unsignedShiftRight(Std.int(packed), Std.int(8.0))) & Std.int(255.0)) / 255.0);
     density = _Runtime.coalesce(_Runtime.field(effect, 'density'), function():Dynamic return cast 1.0);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'atmospheric.screenSpaceFog', WgpuScreenSpaceFogEffect.SCREEN_SPACE_FOG_FRAGMENT_WGSL__wgpuScreenSpaceFogEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : Dynamic), (cast dest : Dynamic), pipeline, function(f32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, density);
       _Runtime.setIndex(f32, 4.0, r);
       _Runtime.setIndex(f32, 5.0, g);
@@ -34,7 +31,7 @@ class WgpuScreenSpaceFogEffect {
   }
 
   public static final defaultWgpuScreenSpaceFogEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyScreenSpaceFogEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ScreenSpaceFogEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyScreenSpaceFogEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static final SCREEN_SPACE_FOG_FRAGMENT_WGSL__wgpuScreenSpaceFogEffect:Dynamic = '\nstruct Uniforms {\n  u_density : f32,\n  _pad0 : f32,\n  _pad1 : f32,\n  _pad2 : f32,\n  u_fogColor : vec3f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  // Color-only fallback: no depth G-buffer in Wgpu yet — screen-Y gradient as a depth proxy.\n  // The real version reads depth and computes fog = 1 - exp(-density * remap(depth, near, far)).\n  let fog = clamp((1.0 - uv.y) * uni.u_density, 0.0, 1.0);\n  return vec4f(mix(c.rgb, uni.u_fogColor, fog), c.a);\n}';

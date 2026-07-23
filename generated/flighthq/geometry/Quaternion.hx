@@ -6,13 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.EulerOrder;
 import flighthq.types.Matrix4.Matrix4Like;
-import flighthq.types.Quaternion;
 import flighthq.types.Quaternion.QuaternionLike;
 import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.geometry.Quaternion")
 class Quaternion {
-  public static function cloneQuaternion(source:QuaternionLike):Quaternion {
+  public static function cloneQuaternion(source:QuaternionLike):Dynamic {
     return cast _Runtime.callValue(createQuaternion, cast ([_Runtime.field(source, 'x'), _Runtime.field(source, 'y'), _Runtime.field(source, 'z'), _Runtime.field(source, 'w')] : Array<Dynamic>));
     return cast null;
   }
@@ -31,7 +30,7 @@ class Quaternion {
     _Runtime.setField(out, 'w', _Runtime.field(source, 'w'));
   }
 
-  public static function createQuaternion(?x:Float, ?y:Float, ?z:Float, ?w:Float):Quaternion {
+  public static function createQuaternion(?x:Float, ?y:Float, ?z:Float, ?w:Float):Dynamic {
     return cast _Runtime.callValue(createEntity, cast ([{ x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0), w: _Runtime.coalesce(w, function():Dynamic return cast 1.0) }] : Array<Dynamic>));
     return cast null;
   }

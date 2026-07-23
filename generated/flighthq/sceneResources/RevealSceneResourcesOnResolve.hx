@@ -11,16 +11,12 @@ import flighthq.signals.Slot.connectSignal;
 import flighthq.signals.Slot.disconnectSignal;
 import flighthq.tween.Tween.createTween;
 import flighthq.types.EasingFunction;
-import flighthq.types.Material;
-import flighthq.types.SceneNode;
-import flighthq.types.Texture;
-import flighthq.types.TweenManager;
 
 typedef SceneResourceRevealOptions = { @:optional var ease:EasingFunction; @:optional var fadeSeconds:Float; @:optional var from:Float; };
 
 @:expose("flighthq.sceneResources.RevealSceneResourcesOnResolve")
 class RevealSceneResourcesOnResolve {
-  public static function revealSceneResourcesOnResolve(resolver:SceneResourceResolver, scene:SceneNode, tweenManager:TweenManager, ?options:SceneResourceRevealOptions):Dynamic {
+  public static function revealSceneResourcesOnResolve(resolver:SceneResourceResolver, scene:Dynamic, tweenManager:Dynamic, ?options:SceneResourceRevealOptions):Dynamic {
     var fadeSeconds:Dynamic = cast _Runtime.UNDEFINED;
     var from:Dynamic = cast _Runtime.UNDEFINED;
     var tweenOptions:Dynamic = cast _Runtime.UNDEFINED;
@@ -38,7 +34,7 @@ class RevealSceneResourcesOnResolve {
       }
     }
     signals = _Runtime.callValue(enableSceneResourceSignals, cast ([resolver] : Array<Dynamic>));
-    slot = function(event:{ var texture:Texture; }) {
+    slot = function(event:{ var texture:Dynamic; }) {
       var nodes:Dynamic = cast _Runtime.UNDEFINED;
       nodes = _Runtime.callProperty(owners, 'get', cast ([_Runtime.field(event, 'texture')] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(nodes, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
@@ -51,20 +47,20 @@ class RevealSceneResourcesOnResolve {
     return cast null;
   }
 
-  public static function collectPendingTextureOwners__revealSceneResourcesOnResolve(scene:SceneNode, resolver:SceneResourceResolver, out:Dynamic):Void {
-    var slots:Array<Texture> = cast _Runtime.UNDEFINED;
+  public static function collectPendingTextureOwners__revealSceneResourcesOnResolve(scene:Dynamic, resolver:SceneResourceResolver, out:Dynamic):Void {
+    var slots:Array<Dynamic> = cast _Runtime.UNDEFINED;
     var visit:Dynamic = cast _Runtime.UNDEFINED;
     slots = cast ([] : Array<Dynamic>);
-    visit = function(node:SceneNode) {
+    visit = function(node:Dynamic) {
       var owner:Dynamic = cast _Runtime.UNDEFINED;
       var materials:Dynamic = cast _Runtime.UNDEFINED;
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>))))) { return; }
-      owner = (cast node : SceneNode);
+      owner = (cast node : Dynamic);
       materials = _Runtime.field(node, 'materials');
       {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(materials, 'length'), '<'))) {
-          var material:Dynamic = (cast _Runtime.getIndex(materials, i) : Null<Material>);
+          var material:Dynamic = (cast _Runtime.getIndex(materials, i) : Null<Dynamic>);
           if (_Runtime.truthy(_Runtime.strictEquals(material, null))) { i++; continue; }
           _Runtime.setLength(slots, 0.0);
           _Runtime.callValue(getSceneMaterialTextures, cast ([_Runtime.field(resolver, 'registry'), material, slots] : Array<Dynamic>));
@@ -87,6 +83,6 @@ class RevealSceneResourcesOnResolve {
       }
     };
     _Runtime.callValue(visit, cast ([scene] : Array<Dynamic>));
-    _Runtime.callValue(forEachNodeDescendant, cast ([scene, function(node:Dynamic) return _Runtime.callValue(visit, cast ([(cast node : SceneNode)] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callValue(forEachNodeDescendant, cast ([scene, function(node:Dynamic) return _Runtime.callValue(visit, cast ([(cast node : Dynamic)] : Array<Dynamic>))] : Array<Dynamic>));
   }
 }

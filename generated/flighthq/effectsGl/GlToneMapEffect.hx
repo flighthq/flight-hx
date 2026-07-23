@@ -6,13 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
-import flighthq.types.ToneMapEffect;
 
 @:expose("flighthq.effectsGl.GlToneMapEffect")
 class GlToneMapEffect {
-  public static function applyToneMapEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ToneMapEffect):Void {
+  public static function applyToneMapEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
     var operator_:Dynamic = cast _Runtime.UNDEFINED;
     var exposure:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -26,7 +23,7 @@ class GlToneMapEffect {
   }
 
   public static final defaultGlToneMapEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyToneMapEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ToneMapEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyToneMapEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
   public static function buildToneMapFragment__glToneMapEffect(operator_:String):String {

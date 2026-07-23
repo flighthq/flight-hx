@@ -6,8 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.renderGl.GlFullscreenPass.compileGlFullscreenProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
 
 typedef TintShaderLocations__glEffectTintShader = Dynamic;
 
@@ -21,7 +19,7 @@ class GlEffectTintShader {
 
   public static final invertTintShaders__glEffectTintShader:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  public static function applyGlEffectInvertTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
+  public static function applyGlEffectInvertTintPass(state:Dynamic, source:Dynamic, dest:Dynamic, color:Float, alpha:Float, strength:Float):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlEffectTintShader.getGlInvertTintShader__glEffectTintShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -32,7 +30,7 @@ class GlEffectTintShader {
     }] : Array<Dynamic>));
   }
 
-  public static function applyGlEffectTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
+  public static function applyGlEffectTintPass(state:Dynamic, source:Dynamic, dest:Dynamic, color:Float, alpha:Float, strength:Float):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlEffectTintShader.getGlTintShader__glEffectTintShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -43,7 +41,7 @@ class GlEffectTintShader {
     }] : Array<Dynamic>));
   }
 
-  public static function getGlInvertTintShader__glEffectTintShader(state:GlRenderState):TintShaderLocations__glEffectTintShader {
+  public static function getGlInvertTintShader__glEffectTintShader(state:Dynamic):TintShaderLocations__glEffectTintShader {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callProperty(GlEffectTintShader.invertTintShaders__glEffectTintShader, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -56,7 +54,7 @@ class GlEffectTintShader {
     return cast null;
   }
 
-  public static function getGlTintShader__glEffectTintShader(state:GlRenderState):TintShaderLocations__glEffectTintShader {
+  public static function getGlTintShader__glEffectTintShader(state:Dynamic):TintShaderLocations__glEffectTintShader {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callProperty(GlEffectTintShader.tintShaders__glEffectTintShader, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {

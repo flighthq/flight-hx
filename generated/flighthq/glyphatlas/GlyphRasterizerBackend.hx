@@ -5,11 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.GlyphSource.GlyphRasterizeOptions;
 import flighthq.types.GlyphSource.GlyphRasterizedBitmap;
-import flighthq.types.GlyphSource.GlyphRasterizerBackend;
 
 @:expose("flighthq.glyphatlas.GlyphRasterizerBackend")
 class GlyphRasterizerBackend {
-  public static function createStubGlyphRasterizerBackend():GlyphRasterizerBackend {
+  public static function createStubGlyphRasterizerBackend():Dynamic {
     return cast { rasterize: function(_codepoint:Dynamic, options:Dynamic) {
       var size:Dynamic = cast _Runtime.UNDEFINED;
       var width:Dynamic = cast _Runtime.UNDEFINED;
@@ -25,7 +24,7 @@ class GlyphRasterizerBackend {
     return cast null;
   }
 
-  public static function createWebGlyphRasterizerBackend():GlyphRasterizerBackend {
+  public static function createWebGlyphRasterizerBackend():Dynamic {
     return cast { rasterize: function(codepoint:Dynamic, options:Dynamic) {
       var context:Dynamic = cast _Runtime.UNDEFINED;
       context = _Runtime.callValue(GlyphRasterizerBackend._acquireGlyphRasterContext__glyphRasterizerBackend, cast ([] : Array<Dynamic>));
@@ -35,17 +34,17 @@ class GlyphRasterizerBackend {
     return cast null;
   }
 
-  public static function getGlyphRasterizerBackend():GlyphRasterizerBackend {
+  public static function getGlyphRasterizerBackend():Dynamic {
     if (_Runtime.truthy(_Runtime.strictEquals(GlyphRasterizerBackend._backend__glyphRasterizerBackend, null))) { (GlyphRasterizerBackend._backend__glyphRasterizerBackend = cast (_Runtime.callValue(createWebGlyphRasterizerBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast GlyphRasterizerBackend._backend__glyphRasterizerBackend;
     return cast null;
   }
 
-  public static function setGlyphRasterizerBackend(backend:Null<GlyphRasterizerBackend>):Void {
+  public static function setGlyphRasterizerBackend(backend:Null<Dynamic>):Void {
     (GlyphRasterizerBackend._backend__glyphRasterizerBackend = cast (backend : Dynamic));
   }
 
-  public static var _backend__glyphRasterizerBackend:Null<GlyphRasterizerBackend> = _Runtime.explicitNull();
+  public static var _backend__glyphRasterizerBackend:Null<Dynamic> = _Runtime.explicitNull();
 
   public static function _acquireGlyphRasterContext__glyphRasterizerBackend():Null<Dynamic> {
     try {

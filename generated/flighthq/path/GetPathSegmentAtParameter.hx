@@ -3,7 +3,6 @@ package flighthq.path;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 import flighthq.types.Vector2.Vector2Like;
 
@@ -39,12 +38,12 @@ class GetPathSegmentAtParameter {
     return cast null;
   }
 
-  public static function getPathSegmentPointAtParameter(path:Path, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
+  public static function getPathSegmentPointAtParameter(path:Dynamic, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
     return cast _Runtime.callValue(GetPathSegmentAtParameter.walkPathSegment__getPathSegmentAtParameter, cast ([path, segmentIndex, t, out, false] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getPathSegmentTangentAtParameter(path:Path, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
+  public static function getPathSegmentTangentAtParameter(path:Dynamic, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
     return cast _Runtime.callValue(GetPathSegmentAtParameter.walkPathSegment__getPathSegmentAtParameter, cast ([path, segmentIndex, t, out, true] : Array<Dynamic>));
     return cast null;
   }
@@ -67,7 +66,7 @@ class GetPathSegmentAtParameter {
     return cast null;
   }
 
-  public static function walkPathSegment__getPathSegmentAtParameter(path:Path, segmentIndex:Float, t:Float, out:Vector2Like, wantTangent:Bool):Bool {
+  public static function walkPathSegment__getPathSegmentAtParameter(path:Dynamic, segmentIndex:Float, t:Float, out:Vector2Like, wantTangent:Bool):Bool {
     var commands:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var currentSegment:Dynamic = cast _Runtime.UNDEFINED;

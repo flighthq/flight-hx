@@ -7,7 +7,6 @@ import flighthq.entity.Binding as Facade_Entity_flighthq_entity_Binding;
 import flighthq.entity.Clone as Facade_Entity_flighthq_entity_Clone;
 import flighthq.entity.Guards as Facade_Entity_flighthq_entity_Guards;
 import flighthq.entity.Runtime as Facade_Entity_flighthq_entity_Runtime;
-import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.EntityWithoutRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
@@ -19,7 +18,7 @@ class Entity {
     return cast null;
   }
 
-  public static function attachEntityBinding(entity:Entity, binding:Dynamic):Void {
+  public static function attachEntityBinding(entity:Dynamic, binding:Dynamic):Void {
     _Runtime.callValue(Facade_Entity_flighthq_entity_Binding.attachEntityBinding, cast ([entity, binding] : Array<Dynamic>));
   }
 
@@ -55,17 +54,17 @@ class Entity {
     _Runtime.callValue(Facade_Entity_flighthq_entity_Guards.enableEntityRuntimeGuards, cast ([] : Array<Dynamic>));
   }
 
-  public static function getEntityBinding(source:Entity):Null<Dynamic> {
+  public static function getEntityBinding(source:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Entity_flighthq_entity_Binding.getEntityBinding, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getEntityRuntime(source:Entity):EntityRuntime {
+  public static function getEntityRuntime(source:Dynamic):EntityRuntime {
     return cast _Runtime.callValue(Facade_Entity_flighthq_entity_Runtime.getEntityRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hasEntityRuntime(source:Entity):Bool {
+  public static function hasEntityRuntime(source:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Entity_flighthq_entity_Runtime.hasEntityRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }

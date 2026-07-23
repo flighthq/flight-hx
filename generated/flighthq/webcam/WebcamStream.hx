@@ -6,14 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.WebcamFacingMode;
-import flighthq.types.WebcamStream;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 typedef WebcamStreamRuntime = Dynamic;
 
 @:expose("flighthq.webcam.WebcamStream")
 class WebcamStream {
-  public static function createWebcamStreamEntity(data:{ var active:Bool; var deviceId:String; var facingMode:Null<WebcamFacingMode>; var frameRate:Float; var height:Float; var id:String; var width:Float; }):WebcamStream {
+  public static function createWebcamStreamEntity(data:{ var active:Bool; var deviceId:String; var facingMode:Null<WebcamFacingMode>; var frameRate:Float; var height:Float; var id:String; var width:Float; }):Dynamic {
     var stream:Dynamic = cast _Runtime.UNDEFINED;
     var rt:WebcamStreamRuntime = cast _Runtime.UNDEFINED;
     stream = _Runtime.callValue(createEntity, cast ([{ active: _Runtime.field(data, 'active'), deviceId: _Runtime.field(data, 'deviceId'), facingMode: _Runtime.field(data, 'facingMode'), frameRate: _Runtime.field(data, 'frameRate'), height: _Runtime.field(data, 'height'), id: _Runtime.field(data, 'id'), width: _Runtime.field(data, 'width') }] : Array<Dynamic>));
@@ -23,7 +22,7 @@ class WebcamStream {
     return cast null;
   }
 
-  public static function getWebcamStreamRuntime(stream:WebcamStream):Null<WebcamStreamRuntime> {
+  public static function getWebcamStreamRuntime(stream:Dynamic):Null<WebcamStreamRuntime> {
     var rt:Dynamic = cast _Runtime.UNDEFINED;
     rt = _Runtime.getIndex(stream, EntityRuntimeKey);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(rt, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(rt, null)))) { return cast null; }

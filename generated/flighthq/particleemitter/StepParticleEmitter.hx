@@ -7,15 +7,12 @@ import flighthq.particleemitter.UpdateParticleEmitter.updateParticleEmitter;
 import flighthq.particles.ApplyParticleCollisions.applyParticleCollisions;
 import flighthq.particles.ApplyParticleForces.applyParticleForces;
 import flighthq.types.ParticleCollider;
-import flighthq.types.ParticleEmitter;
 import flighthq.types.ParticleEmitterCallbacks;
-import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterState;
 import flighthq.types.ParticleForce;
 
 @:expose("flighthq.particleemitter.StepParticleEmitter")
 class StepParticleEmitter {
-  public static function stepParticleEmitter(emitter:ParticleEmitter, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?callbacks:ParticleEmitterCallbacks):Void {
+  public static function stepParticleEmitter(emitter:Dynamic, state:Dynamic, config:Dynamic, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?callbacks:ParticleEmitterCallbacks):Void {
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.looseEquals(forces, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(forces, 'length'), 0.0, '>')))) {
       _Runtime.callValue(applyParticleForces, cast ([emitter, state, forces, deltaTime] : Array<Dynamic>));
     }

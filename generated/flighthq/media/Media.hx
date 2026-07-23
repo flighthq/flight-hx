@@ -8,22 +8,17 @@ import flighthq.media.AudioMixer as Facade_Media_flighthq_media_AudioMixer;
 import flighthq.media.VideoChannel as Facade_Media_flighthq_media_VideoChannel;
 import flighthq.types.AudioBus;
 import flighthq.types.AudioBus.AudioBusOptions;
-import flighthq.types.AudioBus.AudioMixer;
 import flighthq.types.AudioBus.AudioMixerOptions;
-import flighthq.types.AudioResource;
-import flighthq.types.AudioResource.AudioChannel;
 import flighthq.types.AudioResource.AudioPlayOptions;
-import flighthq.types.VideoResource;
-import flighthq.types.VideoResource.VideoChannel;
 import flighthq.types.VideoResource.VideoPlayOptions;
 
 @:expose("flighthq.media.Media")
 class Media {
-  public static function addAudioBusToMixer(mixer:AudioMixer, bus:AudioBus):Void {
+  public static function addAudioBusToMixer(mixer:Dynamic, bus:AudioBus):Void {
     _Runtime.callValue(Facade_Media_flighthq_media_AudioMixer.addAudioBusToMixer, cast ([mixer, bus] : Array<Dynamic>));
   }
 
-  public static function connectAudioChannelToNode(channel:AudioChannel, destinationNode:Dynamic):Void {
+  public static function connectAudioChannelToNode(channel:Dynamic, destinationNode:Dynamic):Void {
     _Runtime.callValue(Facade_Media_flighthq_media_AudioChannel.connectAudioChannelToNode, cast ([channel, destinationNode] : Array<Dynamic>));
   }
 
@@ -32,113 +27,113 @@ class Media {
     return cast null;
   }
 
-  public static function createAudioMixer(context:Dynamic, ?options:AudioMixerOptions):AudioMixer {
+  public static function createAudioMixer(context:Dynamic, ?options:AudioMixerOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_AudioMixer.createAudioMixer, cast ([context, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function destroyAudioMixer(mixer:AudioMixer):Void {
+  public static function destroyAudioMixer(mixer:Dynamic):Void {
     _Runtime.callValue(Facade_Media_flighthq_media_AudioMixer.destroyAudioMixer, cast ([mixer] : Array<Dynamic>));
   }
 
-  public static function fadeAudioBusGain(mixer:AudioMixer, bus:AudioBus, targetGain:Float, durationMs:Float):Void {
+  public static function fadeAudioBusGain(mixer:Dynamic, bus:AudioBus, targetGain:Float, durationMs:Float):Void {
     _Runtime.callValue(Facade_Media_flighthq_media_AudioMixer.fadeAudioBusGain, cast ([mixer, bus, targetGain, durationMs] : Array<Dynamic>));
   }
 
-  public static function fadeAudioChannelGain(channel:AudioChannel, targetGain:Float, durationMs:Float):Void {
+  public static function fadeAudioChannelGain(channel:Dynamic, targetGain:Float, durationMs:Float):Void {
     _Runtime.callValue(Facade_Media_flighthq_media_AudioChannel.fadeAudioChannelGain, cast ([channel, targetGain, durationMs] : Array<Dynamic>));
   }
 
-  public static function getAudioChannelCurrentTime(channel:AudioChannel):Float {
+  public static function getAudioChannelCurrentTime(channel:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_AudioChannel.getAudioChannelCurrentTime, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getAudioChannelDuration(channel:AudioChannel):Float {
+  public static function getAudioChannelDuration(channel:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_AudioChannel.getAudioChannelDuration, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getAudioChannelInputNode(channel:AudioChannel):Null<Dynamic> {
+  public static function getAudioChannelInputNode(channel:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_AudioChannel.getAudioChannelInputNode, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getAudioChannelOutputNode(channel:AudioChannel):Null<Dynamic> {
+  public static function getAudioChannelOutputNode(channel:Dynamic):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_AudioChannel.getAudioChannelOutputNode, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getAudioMixerActiveChannels(mixer:AudioMixer):Array<AudioChannel> {
+  public static function getAudioMixerActiveChannels(mixer:Dynamic):Array<Dynamic> {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_AudioMixer.getAudioMixerActiveChannels, cast ([mixer] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getVideoChannelCurrentTime(channel:VideoChannel):Float {
+  public static function getVideoChannelCurrentTime(channel:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_VideoChannel.getVideoChannelCurrentTime, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getVideoChannelDuration(channel:VideoChannel):Float {
+  public static function getVideoChannelDuration(channel:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_VideoChannel.getVideoChannelDuration, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getVideoChannelHeight(channel:VideoChannel):Float {
+  public static function getVideoChannelHeight(channel:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_VideoChannel.getVideoChannelHeight, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getVideoChannelWidth(channel:VideoChannel):Float {
+  public static function getVideoChannelWidth(channel:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_VideoChannel.getVideoChannelWidth, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isAudioChannelPlaying(channel:AudioChannel):Bool {
+  public static function isAudioChannelPlaying(channel:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_AudioChannel.isAudioChannelPlaying, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isVideoChannelPlaying(channel:VideoChannel):Bool {
+  public static function isVideoChannelPlaying(channel:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_VideoChannel.isVideoChannelPlaying, cast ([channel] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function pauseAllAudioMixerChannels(mixer:AudioMixer):Void {
+  public static function pauseAllAudioMixerChannels(mixer:Dynamic):Void {
     _Runtime.callValue(Facade_Media_flighthq_media_AudioMixer.pauseAllAudioMixerChannels, cast ([mixer] : Array<Dynamic>));
   }
 
-  public static function pauseAudioChannel(channel:AudioChannel):Void {
+  public static function pauseAudioChannel(channel:Dynamic):Void {
     _Runtime.callValue(Facade_Media_flighthq_media_AudioChannel.pauseAudioChannel, cast ([channel] : Array<Dynamic>));
   }
 
-  public static function pauseVideoChannel(channel:VideoChannel):Void {
+  public static function pauseVideoChannel(channel:Dynamic):Void {
     _Runtime.callValue(Facade_Media_flighthq_media_VideoChannel.pauseVideoChannel, cast ([channel] : Array<Dynamic>));
   }
 
-  public static function playAudioResource(context:Dynamic, source:AudioResource, ?options:AudioPlayOptions):Null<AudioChannel> {
+  public static function playAudioResource(context:Dynamic, source:Dynamic, ?options:AudioPlayOptions):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_AudioChannel.playAudioResource, cast ([context, source, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function playVideoResource(source:VideoResource, ?options:VideoPlayOptions):Null<VideoChannel> {
+  public static function playVideoResource(source:Dynamic, ?options:VideoPlayOptions):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_VideoChannel.playVideoResource, cast ([source, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function resumeAllAudioMixerChannels(mixer:AudioMixer):Void {
+  public static function resumeAllAudioMixerChannels(mixer:Dynamic):Void {
     _Runtime.callValue(Facade_Media_flighthq_media_AudioMixer.resumeAllAudioMixerChannels, cast ([mixer] : Array<Dynamic>));
   }
 
-  public static function resumeAudioChannel(channel:AudioChannel):Void {
+  public static function resumeAudioChannel(channel:Dynamic):Void {
     _Runtime.callValue(Facade_Media_flighthq_media_AudioChannel.resumeAudioChannel, cast ([channel] : Array<Dynamic>));
   }
 
-  public static function resumeVideoChannel(channel:VideoChannel):Void {
+  public static function resumeVideoChannel(channel:Dynamic):Void {
     _Runtime.callValue(Facade_Media_flighthq_media_VideoChannel.resumeVideoChannel, cast ([channel] : Array<Dynamic>));
   }
 
-  public static function routeAudioChannelToMixerBus(mixer:AudioMixer, channel:AudioChannel, bus:AudioBus):Void {
+  public static function routeAudioChannelToMixerBus(mixer:Dynamic, channel:Dynamic, bus:AudioBus):Void {
     _Runtime.callValue(Facade_Media_flighthq_media_AudioMixer.routeAudioChannelToMixerBus, cast ([mixer, channel, bus] : Array<Dynamic>));
   }
 
@@ -157,59 +152,59 @@ class Media {
     return cast null;
   }
 
-  public static function setAudioChannelCurrentTime(channel:AudioChannel, value:Float):Float {
+  public static function setAudioChannelCurrentTime(channel:Dynamic, value:Float):Float {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_AudioChannel.setAudioChannelCurrentTime, cast ([channel, value] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setAudioChannelGain(channel:AudioChannel, value:Float):Float {
+  public static function setAudioChannelGain(channel:Dynamic, value:Float):Float {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_AudioChannel.setAudioChannelGain, cast ([channel, value] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setAudioChannelPlaybackRate(channel:AudioChannel, value:Float):Float {
+  public static function setAudioChannelPlaybackRate(channel:Dynamic, value:Float):Float {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_AudioChannel.setAudioChannelPlaybackRate, cast ([channel, value] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setAudioMixerMasterGain(mixer:AudioMixer, value:Float):Float {
+  public static function setAudioMixerMasterGain(mixer:Dynamic, value:Float):Float {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_AudioMixer.setAudioMixerMasterGain, cast ([mixer, value] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setAudioMixerMasterMuted(mixer:AudioMixer, muted:Bool):Bool {
+  public static function setAudioMixerMasterMuted(mixer:Dynamic, muted:Bool):Bool {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_AudioMixer.setAudioMixerMasterMuted, cast ([mixer, muted] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setVideoChannelCurrentTime(channel:VideoChannel, value:Float):Float {
+  public static function setVideoChannelCurrentTime(channel:Dynamic, value:Float):Float {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_VideoChannel.setVideoChannelCurrentTime, cast ([channel, value] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setVideoChannelGain(channel:VideoChannel, value:Float):Float {
+  public static function setVideoChannelGain(channel:Dynamic, value:Float):Float {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_VideoChannel.setVideoChannelGain, cast ([channel, value] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setVideoChannelPlaybackRate(channel:VideoChannel, value:Float):Float {
+  public static function setVideoChannelPlaybackRate(channel:Dynamic, value:Float):Float {
     return cast _Runtime.callValue(Facade_Media_flighthq_media_VideoChannel.setVideoChannelPlaybackRate, cast ([channel, value] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function stopAllAudioMixerChannels(mixer:AudioMixer):Void {
+  public static function stopAllAudioMixerChannels(mixer:Dynamic):Void {
     _Runtime.callValue(Facade_Media_flighthq_media_AudioMixer.stopAllAudioMixerChannels, cast ([mixer] : Array<Dynamic>));
   }
 
-  public static function stopAudioChannel(channel:AudioChannel):Void {
+  public static function stopAudioChannel(channel:Dynamic):Void {
     _Runtime.callValue(Facade_Media_flighthq_media_AudioChannel.stopAudioChannel, cast ([channel] : Array<Dynamic>));
   }
 
-  public static function stopVideoChannel(channel:VideoChannel):Void {
+  public static function stopVideoChannel(channel:Dynamic):Void {
     _Runtime.callValue(Facade_Media_flighthq_media_VideoChannel.stopVideoChannel, cast ([channel] : Array<Dynamic>));
   }
 
-  public static function unrouteAudioChannelFromMixerBus(mixer:AudioMixer, channel:AudioChannel):Void {
+  public static function unrouteAudioChannelFromMixerBus(mixer:Dynamic, channel:Dynamic):Void {
     _Runtime.callValue(Facade_Media_flighthq_media_AudioMixer.unrouteAudioChannelFromMixerBus, cast ([mixer, channel] : Array<Dynamic>));
   }
 }

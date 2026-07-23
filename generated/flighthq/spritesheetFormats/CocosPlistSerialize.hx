@@ -5,12 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.spritesheetFormats.CocosPlistSchema.CocosPlistDocument;
 import flighthq.spritesheetFormats.CocosPlistSchema.CocosPlistFrame;
-import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
 
 @:expose("flighthq.spritesheetFormats.CocosPlistSerialize")
 class CocosPlistSerialize {
-  public static function serializeCocosPlistSpritesheet(data:SpritesheetData, ?existing:Dynamic):String {
+  public static function serializeCocosPlistSpritesheet(data:Dynamic, ?existing:Dynamic):String {
     var frames:Dynamic = cast _Runtime.UNDEFINED;
     var doc:CocosPlistDocument = cast _Runtime.UNDEFINED;
     frames = {  };

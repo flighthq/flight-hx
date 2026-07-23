@@ -18,15 +18,11 @@ import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
 import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.ensureGlSkinPalette;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
-import flighthq.types.Camera;
-import flighthq.types.GlRenderState;
-import flighthq.types.Mesh;
-import flighthq.types.SceneNode;
 import flighthq.types.SceneNode.SceneNodeTraits;
 
 @:expose("flighthq.sceneGl.GlShadowMap")
 class GlShadowMap {
-  public static function drawGlSceneShadowMap(state:GlRenderState, scene:SceneNode, shadowCamera:Camera):Void {
+  public static function drawGlSceneShadowMap(state:Dynamic, scene:Dynamic, shadowCamera:Dynamic):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
@@ -62,7 +58,7 @@ class GlShadowMap {
       var skinned:Dynamic = cast _Runtime.UNDEFINED;
       var program:Dynamic = cast _Runtime.UNDEFINED;
       var upload:Dynamic = cast _Runtime.UNDEFINED;
-      mesh = (cast (cast node : Dynamic) : Mesh);
+      mesh = (cast (cast node : Dynamic) : Dynamic);
       if (_Runtime.truthy(_Runtime.looseEquals(_Runtime.field(mesh, 'geometry'), null))) { return; }
       if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(mesh, 'morph'), null))) { _Runtime.callValue(updateMeshMorph, cast ([mesh] : Array<Dynamic>)); }
       skinned = _Runtime.andValue(!_Runtime.looseEquals(_Runtime.field(mesh, 'skin'), null), function():Dynamic return cast _Runtime.callValue(hasMeshGeometrySkin, cast ([_Runtime.field(mesh, 'geometry')] : Array<Dynamic>)));

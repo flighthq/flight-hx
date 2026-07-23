@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.displayobjectCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.types.BlendMode;
-import flighthq.types.CanvasRenderState;
 
 @:expose("flighthq.displayobjectCanvas.CanvasBackground")
 class CanvasBackground {

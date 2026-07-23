@@ -3,11 +3,10 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ToneMapEffect;
 
 @:expose("flighthq.effects.ToneMapEffect")
 class ToneMapEffect {
-  public static function createToneMapEffect(?options:Dynamic):ToneMapEffect {
+  public static function createToneMapEffect(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'ToneMapEffect' }, options]);
     return cast null;

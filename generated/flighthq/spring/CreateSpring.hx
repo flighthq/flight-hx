@@ -3,11 +3,10 @@ package flighthq.spring;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Spring;
 
 @:expose("flighthq.spring.CreateSpring")
 class CreateSpring {
-  public static function createSpring(value:Float = 0.0, velocity:Float = 0.0):Spring {
+  public static function createSpring(value:Float = 0.0, velocity:Float = 0.0):Dynamic {
     return cast { value: value, velocity: velocity };
     return cast null;
   }

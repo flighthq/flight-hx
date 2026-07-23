@@ -9,10 +9,7 @@ import flighthq.displayobjectCanvas.CanvasRenderState.getCanvasRenderStateRuntim
 import flighthq.render.RenderProxy.getRenderProxy2D;
 import flighthq.render.RenderProxy.isRenderProxyVisible;
 import flighthq.render.Renderer.noopRendererData;
-import flighthq.types.CanvasRenderState;
-import flighthq.types.DisplayObject;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Sprite;
 import flighthq.types.SpriteRenderer;
 
 @:expose("flighthq.displayobjectCanvas.CanvasSprite")
@@ -27,7 +24,7 @@ class CanvasSprite {
     var context:Dynamic = cast _Runtime.UNDEFINED;
     var transform:Dynamic = cast _Runtime.UNDEFINED;
     var restoreMaterial:Dynamic = cast _Runtime.UNDEFINED;
-    source = (cast _Runtime.field(spriteNode, 'source') : Sprite);
+    source = (cast _Runtime.field(spriteNode, 'source') : Dynamic);
     __destructure0 = _Runtime.field(source, 'data');
     atlas = _Runtime.field(__destructure0, 'atlas');
     id = _Runtime.field(__destructure0, 'id');
@@ -54,14 +51,14 @@ class CanvasSprite {
 
   public static final defaultCanvasSpriteRenderer:SpriteRenderer = { createData: noopRendererData, submit: drawCanvasSprite };
 
-  public static function renderCanvasSprite(state:Dynamic, source:DisplayObject):Void {
+  public static function renderCanvasSprite(state:Dynamic, source:Dynamic):Void {
     var tempStack:Dynamic = cast _Runtime.UNDEFINED;
     var stackLength:Dynamic = cast _Runtime.UNDEFINED;
     tempStack = _Runtime.field(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'tempStack');
     stackLength = 1.0;
     _Runtime.setIndex(tempStack, 0.0, source);
     while (_Runtime.truthy(_Runtime.compare(stackLength, 0.0, '>'))) {
-      var current:Dynamic = (cast _Runtime.getIndex(tempStack, --stackLength) : DisplayObject);
+      var current:Dynamic = (cast _Runtime.getIndex(tempStack, --stackLength) : Dynamic);
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(current, 'enabled')))) { continue; }
       var data:Dynamic = _Runtime.callValue(getRenderProxy2D, cast ([state, current] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(isRenderProxyVisible, cast ([data] : Array<Dynamic>)))))) { continue; }
@@ -72,7 +69,7 @@ class CanvasSprite {
           {
             var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
             while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
-              _Runtime.setIndex(tempStack, stackLength++, (cast _Runtime.getIndex(children, i) : DisplayObject));
+              _Runtime.setIndex(tempStack, stackLength++, (cast _Runtime.getIndex(children, i) : Dynamic));
               i--;
             }
           }

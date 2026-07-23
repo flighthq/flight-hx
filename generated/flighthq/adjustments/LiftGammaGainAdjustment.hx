@@ -4,11 +4,10 @@ package flighthq.adjustments;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ColorTransformFunction;
-import flighthq.types.LiftGammaGainAdjustment;
 
 @:expose("flighthq.adjustments.LiftGammaGainAdjustment")
 class LiftGammaGainAdjustment {
-  public static function createLiftGammaGainAdjustment(?options:Dynamic):LiftGammaGainAdjustment {
+  public static function createLiftGammaGainAdjustment(?options:Dynamic):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     var lift:Dynamic = cast _Runtime.UNDEFINED;
     var gammaRaw:Dynamic = cast _Runtime.UNDEFINED;

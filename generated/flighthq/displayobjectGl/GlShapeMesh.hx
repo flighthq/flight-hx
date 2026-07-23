@@ -6,15 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.displayobjectGl.GlSpriteBatch.flushGlSpriteBatch;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlShapeMesh;
 import flighthq.types.RenderProxy2D;
 
 typedef GlShapeMeshBinding = { var program:Dynamic; var vertexBuffer:Dynamic; var indexBuffer:Dynamic; var positionLocation:Float; var matrixLocation:Null<Dynamic>; var colorLocation:Null<Dynamic>; };
 
 @:expose("flighthq.displayobjectGl.GlShapeMesh")
 class GlShapeMesh {
-  public static function drawGlShapeMeshBatch(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<GlShapeMesh>, binding:GlShapeMeshBinding, ?onProgramBound:Dynamic):Void {
+  public static function drawGlShapeMeshBatch(state:Dynamic, renderProxy:RenderProxy2D, meshes:Array<Dynamic>, binding:GlShapeMeshBinding, ?onProgramBound:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var nodeAlpha:Dynamic = cast _Runtime.UNDEFINED;
@@ -52,7 +50,7 @@ class GlShapeMesh {
     _Runtime.callProperty(gl, 'disableVertexAttribArray', cast ([_Runtime.field(binding, 'positionLocation')] : Array<Dynamic>));
   }
 
-  public static function drawGlShapeMeshes(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<GlShapeMesh>):Void {
+  public static function drawGlShapeMeshes(state:Dynamic, renderProxy:RenderProxy2D, meshes:Array<Dynamic>):Void {
     var fold:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(meshes, 'length'), 0.0))) { return; }
     fold = _Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glColorAdjustmentFold');
@@ -63,7 +61,7 @@ class GlShapeMesh {
     _Runtime.callValue(drawGlShapeMeshBatch, cast ([state, renderProxy, meshes, _Runtime.callValue(ensureGlShapeMeshProgram, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  public static function ensureGlShapeMeshProgram(state:GlRenderState):GlShapeMeshBinding {
+  public static function ensureGlShapeMeshProgram(state:Dynamic):GlShapeMeshBinding {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -89,7 +87,7 @@ class GlShapeMesh {
     return cast null;
   }
 
-  public static function shapeMeshMatrix__glShapeMesh(state:GlRenderState, renderProxy:RenderProxy2D):flighthq._internal._Float32Array {
+  public static function shapeMeshMatrix__glShapeMesh(state:Dynamic, renderProxy:RenderProxy2D):flighthq._internal._Float32Array {
     var viewport:Dynamic = cast _Runtime.UNDEFINED;
     var iw:Dynamic = cast _Runtime.UNDEFINED;
     var ih:Dynamic = cast _Runtime.UNDEFINED;

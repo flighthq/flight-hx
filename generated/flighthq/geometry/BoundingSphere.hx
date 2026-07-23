@@ -6,14 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.types.Aabb.AabbLike;
-import flighthq.types.BoundingSphere;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.geometry.BoundingSphere")
 class BoundingSphere {
-  public static function cloneBoundingSphere(source:BoundingSphereLike):BoundingSphere {
+  public static function cloneBoundingSphere(source:BoundingSphereLike):Dynamic {
     return cast _Runtime.callValue(createBoundingSphere, cast ([_Runtime.field(_Runtime.field(source, 'center'), 'x'), _Runtime.field(_Runtime.field(source, 'center'), 'y'), _Runtime.field(_Runtime.field(source, 'center'), 'z'), _Runtime.field(source, 'radius')] : Array<Dynamic>));
     return cast null;
   }
@@ -37,7 +36,7 @@ class BoundingSphere {
     _Runtime.setField(out, 'radius', _Runtime.field(source, 'radius'));
   }
 
-  public static function createBoundingSphere(?centerX:Float, ?centerY:Float, ?centerZ:Float, ?radius:Float):BoundingSphere {
+  public static function createBoundingSphere(?centerX:Float, ?centerY:Float, ?centerZ:Float, ?radius:Float):Dynamic {
     var center:Dynamic = cast _Runtime.UNDEFINED;
     center = _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(centerX, function():Dynamic return cast 0.0), _Runtime.coalesce(centerY, function():Dynamic return cast 0.0), _Runtime.coalesce(centerZ, function():Dynamic return cast 0.0)] : Array<Dynamic>));
     return cast _Runtime.callValue(createEntity, cast ([{ center: center, radius: _Runtime.coalesce(radius, function():Dynamic return cast -1.0) }] : Array<Dynamic>));

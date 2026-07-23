@@ -9,13 +9,12 @@ import flighthq.spritesheetFormats.AsepriteSchema.AsepriteBaseFrame;
 import flighthq.spritesheetFormats.AsepriteSchema.AsepriteDocument;
 import flighthq.spritesheetFormats.AsepriteSchema.AsepriteHashDocument;
 import flighthq.spritesheetFormats.AsepriteSchema.AsepriteMeta;
-import flighthq.types.SpritesheetData;
 
 typedef AsepriteSerializeOptions = { @:optional var variant:String; };
 
 @:expose("flighthq.spritesheetFormats.AsepriteSerialize")
 class AsepriteSerialize {
-  public static function dataToMeta__asepriteSerialize(data:SpritesheetData, existing:Dynamic):AsepriteMeta {
+  public static function dataToMeta__asepriteSerialize(data:Dynamic, existing:Dynamic):AsepriteMeta {
     var tags:Dynamic = cast _Runtime.UNDEFINED;
     tags = _Runtime.callProperty(_Runtime.field(data, 'animations'), 'map', cast ([function(anim:Dynamic, i:Dynamic) {
       var firstIdx:Dynamic = cast _Runtime.UNDEFINED;
@@ -35,7 +34,7 @@ class AsepriteSerialize {
     return cast null;
   }
 
-  public static function resolveFrameDuration__asepriteSerialize(data:SpritesheetData, frameName:String):Float {
+  public static function resolveFrameDuration__asepriteSerialize(data:Dynamic, frameName:String):Float {
     for (anim in _Runtime.iterable(_Runtime.field(data, 'animations'))) {
       var idx:Dynamic = _Runtime.callProperty(_Runtime.field(anim, 'frameNames'), 'indexOf', cast ([frameName] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(idx, -1.0))) { continue; }
@@ -46,7 +45,7 @@ class AsepriteSerialize {
     return cast null;
   }
 
-  public static function dataToHashDocument__asepriteSerialize(data:SpritesheetData, existing:Dynamic):AsepriteHashDocument {
+  public static function dataToHashDocument__asepriteSerialize(data:Dynamic, existing:Dynamic):AsepriteHashDocument {
     var frames:Dynamic = cast _Runtime.UNDEFINED;
     frames = {  };
     for (frame in _Runtime.iterable(_Runtime.field(data, 'frames'))) {
@@ -56,14 +55,14 @@ class AsepriteSerialize {
     return cast null;
   }
 
-  public static function dataToArrayDocument__asepriteSerialize(data:SpritesheetData, existing:Dynamic):AsepriteArrayDocument {
+  public static function dataToArrayDocument__asepriteSerialize(data:Dynamic, existing:Dynamic):AsepriteArrayDocument {
     var frames:Array<AsepriteArrayFrame> = cast _Runtime.UNDEFINED;
     frames = _Runtime.callProperty(_Runtime.field(data, 'frames'), 'map', cast ([function(frame:Dynamic) return _Runtime.mergeObjects([{ filename: _Runtime.field(frame, 'name') }, _Runtime.callValue(AsepriteSerialize.frameToEntry__asepriteSerialize, cast ([frame, _Runtime.callValue(AsepriteSerialize.resolveFrameDuration__asepriteSerialize, cast ([data, _Runtime.field(frame, 'name')] : Array<Dynamic>))] : Array<Dynamic>))])] : Array<Dynamic>));
     return cast { frames: frames, meta: _Runtime.callValue(AsepriteSerialize.dataToMeta__asepriteSerialize, cast ([data, _Runtime.coalesce(_Runtime.field(existing, 'meta'), function():Dynamic return cast {  })] : Array<Dynamic>)) };
     return cast null;
   }
 
-  public static function serializeAsepriteSpritesheet(data:SpritesheetData, ?existing:Dynamic, ?options:AsepriteSerializeOptions):String {
+  public static function serializeAsepriteSpritesheet(data:Dynamic, ?existing:Dynamic, ?options:AsepriteSerializeOptions):String {
     var existingIsArray:Dynamic = cast _Runtime.UNDEFINED;
     var variant:Dynamic = cast _Runtime.UNDEFINED;
     var doc:Dynamic = cast _Runtime.UNDEFINED;

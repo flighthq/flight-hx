@@ -6,14 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget;
 
 @:expose("flighthq.renderGl.GlFullscreenPass")
 class GlFullscreenPass {
   public static final FULLSCREEN_VERTEX_SRC__glFullscreenPass:Dynamic = '#version 300 es\nin vec2 a_position;\nin vec2 a_texCoord;\nout vec2 v_texCoord;\nvoid main() {\n  gl_Position = vec4(a_position, 0.0, 1.0);\n  v_texCoord = a_texCoord;\n}';
 
-  public static function clearGlRenderTarget(state:GlRenderState, target:GlRenderTarget):Void {
+  public static function clearGlRenderTarget(state:Dynamic, target:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -50,7 +48,7 @@ class GlFullscreenPass {
     return cast null;
   }
 
-  public static function drawGlFullscreenPass(state:GlRenderState, program:GlFullscreenProgram, inputs:Array<Dynamic>, dest:Null<GlRenderTarget>, setUniforms:Dynamic):Void {
+  public static function drawGlFullscreenPass(state:Dynamic, program:GlFullscreenProgram, inputs:Array<Dynamic>, dest:Null<Dynamic>, setUniforms:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var destFramebuffer:Dynamic = cast _Runtime.UNDEFINED;
@@ -101,7 +99,7 @@ class GlFullscreenPass {
     _Runtime.callProperty(gl, 'activeTexture', cast ([_Runtime.field(gl, 'TEXTURE0')] : Array<Dynamic>));
   }
 
-  public static function drawGlFullscreenQuad__glFullscreenPass(state:GlRenderState, program:GlFullscreenProgram):Void {
+  public static function drawGlFullscreenQuad__glFullscreenPass(state:Dynamic, program:GlFullscreenProgram):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var quadVao:Dynamic = cast _Runtime.UNDEFINED;

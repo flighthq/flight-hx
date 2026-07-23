@@ -14,15 +14,11 @@ import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
-import flighthq.types.BloomEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
-import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget;
-import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
 @:expose("flighthq.effectsWgpu.WgpuBloomEffect")
 class WgpuBloomEffect {
-  public static function applyBloomEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:BloomEffect):Void {
+  public static function applyBloomEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
     var threshold:Dynamic = cast _Runtime.UNDEFINED;
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var radius:Dynamic = cast _Runtime.UNDEFINED;
@@ -40,12 +36,12 @@ class WgpuBloomEffect {
     blurred = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     temp = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     brightPipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'bloom.bright', WgpuBloomEffect.BLOOM_BRIGHT_FRAGMENT_WGSL__wgpuBloomEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), bright, brightPipeline, function(f32:Dynamic) {
+    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : Dynamic), bright, brightPipeline, function(f32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, threshold);
     }] : Array<Dynamic>));
     _Runtime.callValue(applyGaussianBlurToWgpu, cast ([state, bright, blurred, temp, { blurX: radius, blurY: radius }] : Array<Dynamic>));
     compositePipeline = _Runtime.callValue(WgpuBloomEffect.getBloomCompositePipeline__wgpuBloomEffect, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, (cast source : WgpuRenderTarget), blurred, (cast dest : WgpuRenderTarget), compositePipeline, function(f32:Dynamic) {
+    _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, (cast source : Dynamic), blurred, (cast dest : Dynamic), compositePipeline, function(f32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, intensity);
     }] : Array<Dynamic>));
     _Runtime.callValue(releaseWgpuRenderTarget, cast ([pool, bright] : Array<Dynamic>));
@@ -54,10 +50,10 @@ class WgpuBloomEffect {
   }
 
   public static final defaultWgpuBloomEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyBloomEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BloomEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyBloomEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
-  public static function getBloomCompositePipeline__wgpuBloomEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
+  public static function getBloomCompositePipeline__wgpuBloomEffect(state:Dynamic):WgpuDualSourceEffectPipeline {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callProperty(WgpuBloomEffect._compositePipelines__wgpuBloomEffect, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')))) {

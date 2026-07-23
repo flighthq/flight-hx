@@ -6,14 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.WgpuDualSourceEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.createWgpuDualSourceEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuDualSourceEffectPass;
-import flighthq.types.MotionBlurEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
-import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.effectsWgpu.WgpuMotionBlurEffect")
 class WgpuMotionBlurEffect {
-  public static function applyMotionBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, velocityTexture:Null<Dynamic>, effect:MotionBlurEffect):Void {
+  public static function applyMotionBlurEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, velocityTexture:Null<Dynamic>, effect:Dynamic):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var samples:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
@@ -22,7 +19,7 @@ class WgpuMotionBlurEffect {
     samples = _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0);
     pipeline = _Runtime.callValue(WgpuMotionBlurEffect.getMotionBlurPipeline__wgpuMotionBlurEffect, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(velocityTexture, null))) {
-      _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+      _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, (cast source : Dynamic), (cast source : Dynamic), (cast dest : Dynamic), pipeline, function(f32:Dynamic) {
         _Runtime.setIndex(f32, 0.0, intensity);
         _Runtime.setIndex(f32, 1.0, samples);
         _Runtime.setIndex(f32, 2.0, _Runtime.field(source, 'width'));
@@ -31,8 +28,8 @@ class WgpuMotionBlurEffect {
       }] : Array<Dynamic>));
       return;
     }
-    velocitySource = (cast { view: _Runtime.callProperty(velocityTexture, 'createView', cast ([] : Array<Dynamic>)) } : WgpuRenderTarget);
-    _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, (cast source : WgpuRenderTarget), velocitySource, (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
+    velocitySource = (cast { view: _Runtime.callProperty(velocityTexture, 'createView', cast ([] : Array<Dynamic>)) } : Dynamic);
+    _Runtime.callValue(drawWgpuDualSourceEffectPass, cast ([state, (cast source : Dynamic), velocitySource, (cast dest : Dynamic), pipeline, function(f32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, intensity);
       _Runtime.setIndex(f32, 1.0, samples);
       _Runtime.setIndex(f32, 2.0, _Runtime.field(source, 'width'));
@@ -42,10 +39,10 @@ class WgpuMotionBlurEffect {
   }
 
   public static final defaultWgpuMotionBlurEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyMotionBlurEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'sceneVelocityTexture'), (cast effect : MotionBlurEffect)] : Array<Dynamic>));
+    _Runtime.callValue(applyMotionBlurEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'sceneVelocityTexture'), (cast effect : Dynamic)] : Array<Dynamic>));
   };
 
-  public static function getMotionBlurPipeline__wgpuMotionBlurEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
+  public static function getMotionBlurPipeline__wgpuMotionBlurEffect(state:Dynamic):WgpuDualSourceEffectPipeline {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callProperty(WgpuMotionBlurEffect._motionBlurPipelines__wgpuMotionBlurEffect, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')))) {

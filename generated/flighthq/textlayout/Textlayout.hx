@@ -16,20 +16,14 @@ import flighthq.textlayout.TextLayoutMeasure as Facade_Textlayout_flighthq_textl
 import flighthq.textlayout.TextLayoutRuntime as Facade_Textlayout_flighthq_textlayout_TextLayoutRuntime;
 import flighthq.textlayout.TextLineBreaks as Facade_Textlayout_flighthq_textlayout_TextLineBreaks;
 import flighthq.textlayout.TextMetrics as Facade_Textlayout_flighthq_textlayout_TextMetrics;
-import flighthq.types.Rectangle;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.RichText.RichTextData;
 import flighthq.types.RichText.RichTextRuntime;
-import flighthq.types.RichTextContent;
-import flighthq.types.TextFormat;
-import flighthq.types.TextFormatRange;
 import flighthq.types.TextLabel.TextLabelRuntime;
-import flighthq.types.TextLayout.TextLayoutGroup;
 import flighthq.types.TextLayout.TextLayoutParams;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextLayout.TextMeasureFunction;
 import flighthq.types.TextLineMetrics;
-import flighthq.types.TextMetrics;
 import flighthq.types.TextSelectionRectangle;
 
 @:expose("flighthq.textlayout.Textlayout")
@@ -52,7 +46,7 @@ class Textlayout {
     return cast null;
   }
 
-  public static function computeRichTextContent(out:RichTextContent, data:RichTextData, ?passwordCharacter:Null<String>):Void {
+  public static function computeRichTextContent(out:Dynamic, data:RichTextData, ?passwordCharacter:Null<String>):Void {
     _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextContent.computeRichTextContent, cast ([out, data, passwordCharacter] : Array<Dynamic>));
   }
 
@@ -109,17 +103,17 @@ class Textlayout {
     _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextLayout.computeTextLayout, cast ([out, params] : Array<Dynamic>));
   }
 
-  public static function createRichTextContent():RichTextContent {
+  public static function createRichTextContent():Dynamic {
     return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextContent.createRichTextContent, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTextFormatRange(format:TextFormat, start:Float, end:Float):TextFormatRange {
+  public static function createTextFormatRange(format:Dynamic, start:Float, end:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextFormatRange.createTextFormatRange, cast ([format, start, end] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTextLayoutGroup(format:TextFormat, startIndex:Float, endIndex:Float):TextLayoutGroup {
+  public static function createTextLayoutGroup(format:Dynamic, startIndex:Float, endIndex:Float):Dynamic {
     return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextLayoutGroup.createTextLayoutGroup, cast ([format, startIndex, endIndex] : Array<Dynamic>));
     return cast null;
   }
@@ -129,17 +123,17 @@ class Textlayout {
     return cast null;
   }
 
-  public static function createTextMetrics():TextMetrics {
+  public static function createTextMetrics():Dynamic {
     return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextMetrics.createTextMetrics, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextCharBoundaries(out:Rectangle, layout:TextLayoutResult, charIndex:Float):Bool {
+  public static function getRichTextCharBoundaries(out:Dynamic, layout:TextLayoutResult, charIndex:Float):Bool {
     return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextCharBoundaries, cast ([out, layout, charIndex] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRichTextContent(runtime:RichTextRuntime):RichTextContent {
+  public static function getRichTextContent(runtime:RichTextRuntime):Dynamic {
     return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextContent.getRichTextContent, cast ([runtime] : Array<Dynamic>));
     return cast null;
   }
@@ -193,22 +187,22 @@ class Textlayout {
     _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_RichTextQuery.getRichTextSelectionRectangles, cast ([out, beginIndex, endIndex, layout] : Array<Dynamic>));
   }
 
-  public static function getTextFormatAscent(format:TextFormat):Float {
+  public static function getTextFormatAscent(format:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextFormat.getTextFormatAscent, cast ([format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextFormatDescent(format:TextFormat):Float {
+  public static function getTextFormatDescent(format:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextFormat.getTextFormatDescent, cast ([format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextFormatHeight(format:TextFormat):Float {
+  public static function getTextFormatHeight(format:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextFormat.getTextFormatHeight, cast ([format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextFormatLeading(format:TextFormat):Float {
+  public static function getTextFormatLeading(format:Dynamic):Float {
     return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextFormat.getTextFormatLeading, cast ([format] : Array<Dynamic>));
     return cast null;
   }
@@ -232,7 +226,7 @@ class Textlayout {
     _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextLineBreaks.getTextLineBreaks, cast ([out, text] : Array<Dynamic>));
   }
 
-  public static function getTextMetrics(out:TextMetrics, layout:TextLayoutResult):Void {
+  public static function getTextMetrics(out:Dynamic, layout:TextLayoutResult):Void {
     _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextMetrics.getTextMetrics, cast ([out, layout] : Array<Dynamic>));
   }
 
@@ -241,7 +235,7 @@ class Textlayout {
     return cast null;
   }
 
-  public static function mergeTextFormat(base:TextFormat, override_:TextFormat):TextFormat {
+  public static function mergeTextFormat(base:Dynamic, override_:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Textlayout_flighthq_textlayout_TextFormat.mergeTextFormat, cast ([base, override_] : Array<Dynamic>));
     return cast null;
   }

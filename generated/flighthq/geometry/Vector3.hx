@@ -5,7 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Vector2.Vector2Like;
-import flighthq.types.Vector3;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types.Vector4.Vector4Like;
 
@@ -41,7 +40,7 @@ class Vector3 {
     _Runtime.setField(out, 'z', _Runtime.select(_Runtime.compare(vz, minZ, '<'), function():Dynamic return cast minZ, function():Dynamic return cast _Runtime.select(_Runtime.compare(vz, maxZ, '>'), function():Dynamic return cast maxZ, function():Dynamic return cast vz)));
   }
 
-  public static function cloneVector3(source:Vector3Like):Vector3 {
+  public static function cloneVector3(source:Vector3Like):Dynamic {
     return cast _Runtime.callValue(createVector3, cast ([_Runtime.field(source, 'x'), _Runtime.field(source, 'y'), _Runtime.field(source, 'z')] : Array<Dynamic>));
     return cast null;
   }
@@ -52,12 +51,12 @@ class Vector3 {
     _Runtime.setField(out, 'z', _Runtime.field(source, 'z'));
   }
 
-  public static function createVector3(?x:Float, ?y:Float, ?z:Float):Vector3 {
+  public static function createVector3(?x:Float, ?y:Float, ?z:Float):Dynamic {
     return cast _Runtime.callValue(createEntity, cast ([{ x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createVector3FromSpherical(radius:Float, theta:Float, phi:Float):Vector3 {
+  public static function createVector3FromSpherical(radius:Float, theta:Float, phi:Float):Dynamic {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     out = _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>));
     _Runtime.callValue(setVector3FromSpherical, cast ([out, radius, theta, phi] : Array<Dynamic>));
@@ -322,9 +321,9 @@ class Vector3 {
     _Runtime.setIndex(out, (offset + 2.0), _Runtime.field(source, 'z'));
   }
 
-  public static final VECTOR3_X_AXIS:Vector3 = _Runtime.callValue(createVector3, cast ([1.0, 0.0, 0.0] : Array<Dynamic>));
+  public static final VECTOR3_X_AXIS:Dynamic = _Runtime.callValue(createVector3, cast ([1.0, 0.0, 0.0] : Array<Dynamic>));
 
-  public static final VECTOR3_Y_AXIS:Vector3 = _Runtime.callValue(createVector3, cast ([0.0, 1.0, 0.0] : Array<Dynamic>));
+  public static final VECTOR3_Y_AXIS:Dynamic = _Runtime.callValue(createVector3, cast ([0.0, 1.0, 0.0] : Array<Dynamic>));
 
-  public static final VECTOR3_Z_AXIS:Vector3 = _Runtime.callValue(createVector3, cast ([0.0, 0.0, 1.0] : Array<Dynamic>));
+  public static final VECTOR3_Z_AXIS:Dynamic = _Runtime.callValue(createVector3, cast ([0.0, 0.0, 1.0] : Array<Dynamic>));
 }

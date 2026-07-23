@@ -3,11 +3,10 @@ package flighthq.clock;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Clock;
 
 @:expose("flighthq.clock.ResetClock")
 class ResetClock {
-  public static function resetClock(clock:Clock):Void {
+  public static function resetClock(clock:Dynamic):Void {
     _Runtime.setField(clock, 'elapsed', 0.0);
     _Runtime.setField(clock, 'deltaTime', 0.0);
   }

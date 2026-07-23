@@ -11,7 +11,6 @@ import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuPlaceholde
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuScenePipeline;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.stashWgpuUvTransform;
 import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
-import flighthq.types.WgpuRenderState;
 
 typedef WgpuDebugDefineKey = { var hasNormalMap:Bool; var mode:String; };
 
@@ -19,7 +18,7 @@ typedef WgpuDebugPipeline = Dynamic;
 
 @:expose("flighthq.sceneWgpu.WgpuDebugPrelude")
 class WgpuDebugPrelude {
-  public static function bindWgpuDebugSurface(state:WgpuRenderState, pipeline:WgpuDebugPipeline, materialKey:Dynamic, near:Float, far:Float, normalScale:Float):Dynamic {
+  public static function bindWgpuDebugSurface(state:Dynamic, pipeline:WgpuDebugPipeline, materialKey:Dynamic, near:Float, far:Float, normalScale:Float):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
@@ -46,7 +45,7 @@ class WgpuDebugPrelude {
     return cast null;
   }
 
-  public static function compileWgpuDebugPipeline(state:WgpuRenderState, key:WgpuDebugDefineKey, format:Dynamic):WgpuDebugPipeline {
+  public static function compileWgpuDebugPipeline(state:Dynamic, key:WgpuDebugDefineKey, format:Dynamic):WgpuDebugPipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     var materialBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
@@ -57,7 +56,7 @@ class WgpuDebugPrelude {
     return cast null;
   }
 
-  public static function ensureWgpuDebugPipeline(state:WgpuRenderState, key:WgpuDebugDefineKey, format:Dynamic):WgpuDebugPipeline {
+  public static function ensureWgpuDebugPipeline(state:Dynamic, key:WgpuDebugDefineKey, format:Dynamic):WgpuDebugPipeline {
     return cast _Runtime.callValue(ensureWgpuScenePipeline, cast ([state, 'debug:' + Std.string(format) + '|' + Std.string(_Runtime.callValue(buildWgpuDebugDefineKey, cast ([key] : Array<Dynamic>))) + '', function() return _Runtime.callValue(compileWgpuDebugPipeline, cast ([state, key, format] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }

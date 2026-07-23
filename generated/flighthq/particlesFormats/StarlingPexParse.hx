@@ -6,12 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
 import flighthq.particlesFormats.StarlingPexSchema.StarlingPexColor;
 import flighthq.particlesFormats.StarlingPexSchema.StarlingPexDocument;
-import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
 
 typedef StarlingPexParseOptions = { @:optional var textureSize:Float; };
 
-typedef StarlingPexParseResult = { var config:ParticleEmitterConfig; var document:StarlingPexDocument; var warnings:Array<String>; };
+typedef StarlingPexParseResult = { var config:Dynamic; var document:StarlingPexDocument; var warnings:Array<String>; };
 
 typedef StarlingPexParsed = StarlingPexParseResult;
 
@@ -19,7 +18,7 @@ typedef PexDict__starlingPexParse = Dynamic;
 
 @:expose("flighthq.particlesFormats.StarlingPexParse")
 class StarlingPexParse {
-  public static function parseStarlingPex(xml:String, ?options:StarlingPexParseOptions):ParticleEmitterConfig {
+  public static function parseStarlingPex(xml:String, ?options:StarlingPexParseOptions):Dynamic {
     var d:Dynamic = cast _Runtime.UNDEFINED;
     var doc:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.typeofValue(xml), 'string'), function():Dynamic return cast !_Runtime.truthy(StringTools.startsWith(StringTools.trim(Std.string(xml)), '<'))))) {
@@ -72,7 +71,7 @@ class StarlingPexParse {
     return cast null;
   }
 
-  public static function documentToConfig__starlingPexParse(doc:StarlingPexDocument, textureSize:Float):ParticleEmitterConfig {
+  public static function documentToConfig__starlingPexParse(doc:StarlingPexDocument, textureSize:Float):Dynamic {
     var angleRad:Dynamic = cast _Runtime.UNDEFINED;
     var lifespan:Dynamic = cast _Runtime.UNDEFINED;
     var lifespanVar:Dynamic = cast _Runtime.UNDEFINED;

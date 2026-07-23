@@ -4,16 +4,15 @@ package flighthq.textlayout;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.TextLayout.TextLayoutResult;
-import flighthq.types.TextMetrics;
 
 @:expose("flighthq.textlayout.TextMetrics")
 class TextMetrics {
-  public static function createTextMetrics():TextMetrics {
+  public static function createTextMetrics():Dynamic {
     return cast { height: 0.0, numLines: 0.0, width: 0.0 };
     return cast null;
   }
 
-  public static function getTextMetrics(out:TextMetrics, layout:TextLayoutResult):Void {
+  public static function getTextMetrics(out:Dynamic, layout:TextLayoutResult):Void {
     _Runtime.setField(out, 'width', _Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(layout, 'textWidth')] : Array<Dynamic>)));
     _Runtime.setField(out, 'height', _Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(layout, 'textHeight')] : Array<Dynamic>)));
     _Runtime.setField(out, 'numLines', _Runtime.field(layout, 'numLines'));

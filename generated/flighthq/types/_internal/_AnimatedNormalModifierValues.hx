@@ -4,7 +4,6 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Modifier;
-import flighthq.types.Texture;
 import flighthq.types.Vector2.Vector2Like;
 
 @:expose("flighthq.types._internal._AnimatedNormalModifierValues")

@@ -6,14 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.tween.Tween.createTween;
 import flighthq.types.EasingFunction;
 import flighthq.types.Tween.NumericProps;
-import flighthq.types.TweenManager;
 import flighthq.types.TweenOptions;
 
 typedef TweenStaggerOptions = { @:optional var each:Float; @:optional var from:Dynamic; @:optional var staggerEase:EasingFunction; };
 
 @:expose("flighthq.tween.TweenStagger")
 class TweenStagger {
-  public static function createTweenStagger<T>(manager:TweenManager, targets:Array<Dynamic>, duration:Float, propertyMap:NumericProps<Dynamic>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<Dynamic> {
+  public static function createTweenStagger<T>(manager:Dynamic, targets:Array<Dynamic>, duration:Float, propertyMap:NumericProps<Dynamic>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<Dynamic> {
     var each:Dynamic = cast _Runtime.UNDEFINED;
     var from:Dynamic = cast _Runtime.UNDEFINED;
     var staggerEase:Dynamic = cast _Runtime.UNDEFINED;
