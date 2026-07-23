@@ -3,7 +3,8 @@
   <meta title="Flight Camera2d" package="hq.flight.examples.camera2d" version="0.0.1" />
   <app main="Main" file="FlightCamera2d" />
   <window width="800" height="600" fps="60" hardware="true" vsync="true" />
-  <haxelib name="flight" path="../../" />
+  <!-- <haxelib name="flight" path="../../" /> -->
+  <include path="../../" />
   <classpath name="../common" />
   <classpath name="." />
   <haxelib name="lime" />

@@ -3,7 +3,8 @@
   <meta title="Flight Tween" package="hq.flight.examples.tween" version="0.0.1" />
   <app main="Main" file="FlightTween" />
   <window width="800" height="600" fps="60" hardware="true" vsync="true" />
-  <haxelib name="flight" path="../../" />
+  <!-- <haxelib name="flight" path="../../" /> -->
+  <include path="../../" />
   <classpath name="../common" />
   <classpath name="." />
   <haxelib name="lime" />

@@ -3,7 +3,8 @@
   <meta title="Flight Flowstates" package="hq.flight.examples.flowstates" version="0.0.1" />
   <app main="Main" file="FlightFlowstates" />
   <window width="600" height="400" fps="60" hardware="true" vsync="true" />
-  <haxelib name="flight" path="../../" />
+  <!-- <haxelib name="flight" path="../../" /> -->
+  <include path="../../" />
   <classpath name="../common" />
   <classpath name="." />
   <haxelib name="lime" />

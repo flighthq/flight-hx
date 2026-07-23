@@ -1,1 +1,3 @@
 -cp generated
+-cp src
+-D flight
