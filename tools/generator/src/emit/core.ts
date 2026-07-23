@@ -27,6 +27,7 @@ import { emitHaxeModule, setSelfShadowTypeModules, setShadowedTypeNames } from '
 import { stableJson, writeOrCheck } from './reports.ts';
 
 export interface CoreGenerationReport {
+  excludedPackages: Array<{ packageName: string; reason: string }>;
   modules: Array<{
     declarations: number;
     diagnostics: LoweringDiagnostic[];
@@ -54,6 +55,8 @@ export function generateCoreModules(workspaceDirectory: string, check: boolean):
   const packagesDirectory = path.join(workspaceDirectory, 'upstream', 'packages');
   const loweredPackages = readdirSync(packagesDirectory, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
+    // Skip deliberately excluded packages (recorded, with reasons, in port.config.ts).
+    .filter((entry) => !(entry.name in portConfig.excludedPackages))
     .map((entry) => {
       const packageName = `@flighthq/${entry.name}`;
       const publicSourceNames = new Set(
@@ -225,6 +228,9 @@ export function generateCoreModules(workspaceDirectory: string, check: boolean):
     }
   }
   const report: CoreGenerationReport = {
+    excludedPackages: Object.entries(portConfig.excludedPackages)
+      .map(([directoryName, reason]) => ({ packageName: `@flighthq/${directoryName}`, reason }))
+      .sort((left, right) => left.packageName.localeCompare(right.packageName)),
     modules: modules
       .map((module) => ({
         declarations: module.declarations.length,
@@ -788,8 +794,10 @@ function buildPublicFacades(
   };
 
   // Match granular package barrels before building the broad SDK facade.
+  const excludedPackageNames = new Set(Object.keys(portConfig.excludedPackages).map((dir) => `@flighthq/${dir}`));
   for (const packageInventory of inventoryByName.values()) {
     if (packageInventory.name === '@flighthq/sdk') continue;
+    if (excludedPackageNames.has(packageInventory.name)) continue;
     const target = facadeForPackage(packageInventory.name);
     if (!target) throw new Error(`Expected facade module for ${packageInventory.name}`);
     for (const record of packageInventory.exports) {

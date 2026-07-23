@@ -12,7 +12,7 @@ The latest complete local `npm run ci` finished successfully on 2026-07-22. Its 
 
 ## Stable Decisions
 
-- Input: all 131 Flight packages under the read-only `upstream` submodule, including `tool-capture`.
+- Input: all 131 Flight packages under the read-only `upstream` submodule are inventoried; `tool-capture` (Node/Playwright dev tooling, not in the `@flighthq/sdk` barrel, no dependents) is explicitly excluded from translation with a recorded reason in `tools/generator/port.config.ts`.
 - Output: generated Haxe implementations, never extern-only declarations or handwritten generated edits.
 - API: unchanged globally searchable free-function names such as `createVector2` and `getVector2Length`.
 - Namespace: generated APIs mechanically map to `flighthq.<lowerCamelPackage>.<PascalCaseFile>`; package barrels map to facades such as `flighthq.geometry.Geometry` and `flighthq.renderGl.RenderGl`.

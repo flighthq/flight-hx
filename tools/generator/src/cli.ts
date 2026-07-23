@@ -24,7 +24,10 @@ try {
   } else {
     mkdirSync(reportsDirectory, { recursive: true });
     if (!apiOnly) {
-      generateCoreModules(workspaceDirectory, check);
+      const core = generateCoreModules(workspaceDirectory, check);
+      for (const excluded of core.excludedPackages) {
+        process.stderr.write(`Excluded (not translated): ${excluded.packageName} — ${excluded.reason}\n`);
+      }
       writeOrCheck(path.join(reportsDirectory, 'inventory.json'), stableJson(inventory), check);
       writeOrCheck(path.join(reportsDirectory, 'inventory.md'), inventorySummary(inventory), check);
       if (!lowering) throw new Error('Expected lowering audit');

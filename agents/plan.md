@@ -10,7 +10,7 @@ All phases reached their exit criteria on 2026-07-22 for upstream revision `5d24
 4. **Public modules and types:** source-derived `flighthq.<package>.<file>` modules, canonical type ownership, granular package-barrel facades, renamed cross-package re-exports, and the broad `flighthq.sdk.Sdk` facade.
 5. **Runtime semantics:** maintained Haxe sources for JavaScript-compatible numeric, nullish, reflection, collection, typed-array, callback, and async behavior with explicit portability seams.
 6. **Semantic patches:** typed target matching, AST fingerprints, deterministic ordering, conflict/staleness validation, fragment loading, audit output, and drift tests.
-7. **Package translation:** all 131 packages, including host integrations and `tool-capture`, with complete export accounting and no placeholder bodies.
+7. **Package translation:** all runtime and SDK packages, including host integrations, with complete export accounting and no placeholder bodies. `tool-capture` (Node/Playwright dev tooling, outside the `@flighthq/sdk` barrel) is explicitly excluded from translation with a recorded reason in `tools/generator/port.config.ts` and the generation report; it remains inventoried, never silently dropped.
 8. **Upstream Vitest harness:** compiled Haxe JavaScript, package and per-source ESM bridges, exact mock seams, focused package commands, and a canonical 131/131 parity report covering all 1,166 test files.
 9. **Portability matrix:** Eval, JavaScript, Python, and C++/hxcpp compile-and-run gates, including full namespace reachability through `flighthq.sdk.Sdk`.
 10. **Packaging and CI:** reproducible Haxelib zip with provenance/reports, isolated install and clean consumer execution, plus the complete local and GitHub Actions `npm run ci` surface.
