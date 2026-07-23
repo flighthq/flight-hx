@@ -37,6 +37,7 @@ export const isVideoTextureFrameReady = compiled.flighthq.texture.Texture.isVide
 export const resetTextureUvTransform = compiled.flighthq.texture.Texture.resetTextureUvTransform;
 export const resetVideoTextureFrame = compiled.flighthq.texture.Texture.resetVideoTextureFrame;
 export const setCubeTextureFace = compiled.flighthq.texture.Texture.setCubeTextureFace;
+export const setTextureFlip = compiled.flighthq.texture.Texture.setTextureFlip;
 export const setTextureImage = compiled.flighthq.texture.Texture.setTextureImage;
 export const setTextureUvOffset = compiled.flighthq.texture.Texture.setTextureUvOffset;
 export const setTextureUvRotation = compiled.flighthq.texture.Texture.setTextureUvRotation;

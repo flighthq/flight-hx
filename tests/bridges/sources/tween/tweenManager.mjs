@@ -7,4 +7,3 @@ __syncDependencies();
 
 export const createTweenManager = api.createTweenManager;
 export const defaultManager = api.defaultManager;
-export { TweenManagerOptions } from '@flighthq/types';

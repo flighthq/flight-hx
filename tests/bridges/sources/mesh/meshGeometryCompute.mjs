@@ -10,3 +10,4 @@ export const computeMeshGeometryBounds = api.computeMeshGeometryBounds;
 export const computeMeshGeometryFlatNormals = api.computeMeshGeometryFlatNormals;
 export const computeMeshGeometryNormals = api.computeMeshGeometryNormals;
 export const computeMeshGeometryTangents = api.computeMeshGeometryTangents;
+export const refreshMeshGeometryBounds = api.refreshMeshGeometryBounds;

@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createSceneFromObj = api.createSceneFromObj;
+export const parseObj = api.parseObj;

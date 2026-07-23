@@ -7,7 +7,7 @@ __syncDependencies();
 
 export const createWgpuVelocityTarget = api.createWgpuVelocityTarget;
 export const defaultWgpuDisplayObjectVelocityWriter = api.defaultWgpuDisplayObjectVelocityWriter;
-export const defaultWgpuParticleEmitterVelocityWriter = api.defaultWgpuParticleEmitterVelocityWriter;
+export const defaultWgpuParticleEmitter2DVelocityWriter = api.defaultWgpuParticleEmitter2DVelocityWriter;
 export const defaultWgpuQuadBatchVelocityWriter = api.defaultWgpuQuadBatchVelocityWriter;
 export const drawWgpuVelocityQuad = api.drawWgpuVelocityQuad;
 export const getWgpuVelocityWriter = api.getWgpuVelocityWriter;

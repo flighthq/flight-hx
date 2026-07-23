@@ -6,4 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const destroyWgpuParticleEmitter3DResources = api.destroyWgpuParticleEmitter3DResources;
-export const drawWgpuSceneParticleEmitters = api.drawWgpuSceneParticleEmitters;
+export const drawWgpuSceneParticleEmitter2Ds = api.drawWgpuSceneParticleEmitter2Ds;

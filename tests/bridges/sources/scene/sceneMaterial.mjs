@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const findSceneMaterialByName = api.findSceneMaterialByName;
+export const getSceneMaterials = api.getSceneMaterials;

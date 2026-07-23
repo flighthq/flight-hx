@@ -5,4 +5,4 @@ const api = compiled.flighthq.camera.FrustumCorners;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const getCameraFrustumCorners = api.getCameraFrustumCorners;
+export const getCamera3DFrustumCorners = api.getCamera3DFrustumCorners;

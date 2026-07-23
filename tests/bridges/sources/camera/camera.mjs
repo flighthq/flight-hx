@@ -5,10 +5,11 @@ const api = compiled.flighthq.camera.Camera;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createCamera = api.createCamera;
-export const getCameraInverseViewProjectionMatrix4 = api.getCameraInverseViewProjectionMatrix4;
-export const getCameraViewProjectionMatrix4 = api.getCameraViewProjectionMatrix4;
-export const setCameraJitter = api.setCameraJitter;
-export const setCameraViewMatrix4FromLookAt = api.setCameraViewMatrix4FromLookAt;
-export const setCameraViewMatrix4FromMatrix4 = api.setCameraViewMatrix4FromMatrix4;
-export const updateCameraInverseViewProjection = api.updateCameraInverseViewProjection;
+export const createCamera3D = api.createCamera3D;
+export const getCamera3DInverseViewProjectionMatrix4 = api.getCamera3DInverseViewProjectionMatrix4;
+export const getCamera3DViewProjectionMatrix4 = api.getCamera3DViewProjectionMatrix4;
+export const setCamera3DAspect = api.setCamera3DAspect;
+export const setCamera3DJitter = api.setCamera3DJitter;
+export const setCamera3DViewMatrix4FromLookAt = api.setCamera3DViewMatrix4FromLookAt;
+export const setCamera3DViewMatrix4FromMatrix4 = api.setCamera3DViewMatrix4FromMatrix4;
+export const updateCamera3DInverseViewProjection = api.updateCamera3DInverseViewProjection;

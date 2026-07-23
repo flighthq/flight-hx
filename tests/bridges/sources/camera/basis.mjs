@@ -5,7 +5,7 @@ const api = compiled.flighthq.camera.Basis;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const getCameraForward = api.getCameraForward;
-export const getCameraPosition = api.getCameraPosition;
-export const getCameraRight = api.getCameraRight;
-export const getCameraUp = api.getCameraUp;
+export const getCamera3DForward = api.getCamera3DForward;
+export const getCamera3DPosition = api.getCamera3DPosition;
+export const getCamera3DRight = api.getCamera3DRight;
+export const getCamera3DUp = api.getCamera3DUp;

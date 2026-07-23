@@ -6,4 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const destroyGlParticleEmitter3DShader = api.destroyGlParticleEmitter3DShader;
-export const drawGlSceneParticleEmitters = api.drawGlSceneParticleEmitters;
+export const drawGlSceneParticleEmitter2Ds = api.drawGlSceneParticleEmitter2Ds;

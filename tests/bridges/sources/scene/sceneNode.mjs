@@ -10,7 +10,4 @@ export const createSceneNodeRuntime = api.createSceneNodeRuntime;
 export const enableSceneNodeSignals = api.enableSceneNodeSignals;
 export const getSceneNodeRuntime = api.getSceneNodeRuntime;
 export const getSceneNodeSignals = api.getSceneNodeSignals;
-export { SceneNode } from '@flighthq/types';
 export { SceneNodeKind } from '@flighthq/types';
-export { SceneNodeRuntime } from '@flighthq/types';
-export { SceneNodeTraits } from '@flighthq/types';

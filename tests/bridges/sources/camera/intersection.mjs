@@ -5,5 +5,5 @@ const api = compiled.flighthq.camera.Intersection;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const getCameraRayThroughBoundingSphere = api.getCameraRayThroughBoundingSphere;
-export const intersectCameraRayWithPlane = api.intersectCameraRayWithPlane;
+export const getCamera3DRayThroughBoundingSphere = api.getCamera3DRayThroughBoundingSphere;
+export const intersectCamera3DRayWithPlane = api.intersectCamera3DRayWithPlane;

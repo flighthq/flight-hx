@@ -10,7 +10,4 @@ export const enableBillboardSignals = api.enableBillboardSignals;
 export const getBillboardRuntime = api.getBillboardRuntime;
 export const getBillboardSignals = api.getBillboardSignals;
 export const isBillboard = api.isBillboard;
-export { Billboard } from '@flighthq/types';
 export { BillboardKind } from '@flighthq/types';
-export { BillboardMode } from '@flighthq/types';
-export { BillboardRuntime } from '@flighthq/types';

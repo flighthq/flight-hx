@@ -24,3 +24,4 @@ export const setParticleEmitter3DParticle = api.setParticleEmitter3DParticle;
 export const setParticleEmitter3DParticleAlpha = api.setParticleEmitter3DParticleAlpha;
 export const setParticleEmitter3DParticleColor = api.setParticleEmitter3DParticleColor;
 export const setParticleEmitter3DParticleVelocity = api.setParticleEmitter3DParticleVelocity;
+export const sortParticleEmitter3DIndicesByViewDepth = api.sortParticleEmitter3DIndicesByViewDepth;

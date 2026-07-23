@@ -5,13 +5,21 @@ const api = compiled.flighthq.mesh.MeshGeometryAttributes;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const getMeshGeometryVertexColor0 = api.getMeshGeometryVertexColor0;
+export const getMeshGeometryVertexJoints0 = api.getMeshGeometryVertexJoints0;
 export const getMeshGeometryVertexNormal = api.getMeshGeometryVertexNormal;
 export const getMeshGeometryVertexPosition = api.getMeshGeometryVertexPosition;
 export const getMeshGeometryVertexTangent = api.getMeshGeometryVertexTangent;
 export const getMeshGeometryVertexUv0 = api.getMeshGeometryVertexUv0;
+export const getMeshGeometryVertexUv1 = api.getMeshGeometryVertexUv1;
+export const getMeshGeometryVertexWeights0 = api.getMeshGeometryVertexWeights0;
 export const getVertexAttribute = api.getVertexAttribute;
 export const getVertexAttributeFloatOffset = api.getVertexAttributeFloatOffset;
+export const setMeshGeometryVertexColor0 = api.setMeshGeometryVertexColor0;
+export const setMeshGeometryVertexJoints0 = api.setMeshGeometryVertexJoints0;
 export const setMeshGeometryVertexNormal = api.setMeshGeometryVertexNormal;
 export const setMeshGeometryVertexPosition = api.setMeshGeometryVertexPosition;
 export const setMeshGeometryVertexTangent = api.setMeshGeometryVertexTangent;
 export const setMeshGeometryVertexUv0 = api.setMeshGeometryVertexUv0;
+export const setMeshGeometryVertexUv1 = api.setMeshGeometryVertexUv1;
+export const setMeshGeometryVertexWeights0 = api.setMeshGeometryVertexWeights0;

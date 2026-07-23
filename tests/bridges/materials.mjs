@@ -53,6 +53,7 @@ export const equalsMaterial = compiled.flighthq.materials.Materials.equalsMateri
 export const getColorTransformOffsetRgb = compiled.flighthq.materials.Materials.getColorTransformOffsetRgb;
 export const getColorTransformOffsetRgba = compiled.flighthq.materials.Materials.getColorTransformOffsetRgba;
 export const getMaterialAlphaMode = compiled.flighthq.materials.Materials.getMaterialAlphaMode;
+export const getMaterialOfKind = compiled.flighthq.materials.Materials.getMaterialOfKind;
 export const getPbrMetallicFromPhongSpecular = compiled.flighthq.materials.Materials.getPbrMetallicFromPhongSpecular;
 export const getPbrRoughnessFromPhongShininess = compiled.flighthq.materials.Materials.getPbrRoughnessFromPhongShininess;
 export const getPhongToPbrLightExposure = compiled.flighthq.materials.Materials.getPhongToPbrLightExposure;

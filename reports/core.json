@@ -1,4 +1,10 @@
 {
+  "excludedPackages": [
+    {
+      "packageName": "@flighthq/tool-capture",
+      "reason": "Node/Playwright browser-automation dev tooling (@playwright/test); not portable Flight runtime, excluded from the @flighthq/sdk barrel, and depended on by no other package."
+    }
+  ],
   "modules": [
     {
       "declarations": 20,
@@ -101,9 +107,14 @@
       "module": "flighthq.adjustments.SepiaAdjustment"
     },
     {
-      "declarations": 18,
+      "declarations": 24,
       "diagnostics": [],
       "module": "flighthq.animation.Animation"
+    },
+    {
+      "declarations": 11,
+      "diagnostics": [],
+      "module": "flighthq.animation.AnimationBlend"
     },
     {
       "declarations": 6,
@@ -136,12 +147,12 @@
       "module": "flighthq.application.Window"
     },
     {
-      "declarations": 11,
+      "declarations": 15,
       "diagnostics": [],
       "module": "flighthq.assets.AssetLibrary"
     },
     {
-      "declarations": 10,
+      "declarations": 11,
       "diagnostics": [],
       "module": "flighthq.assets.Assets"
     },
@@ -188,12 +199,7 @@
     {
       "declarations": 1,
       "diagnostics": [],
-      "module": "flighthq.bitmapfont.GlyphSource"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.bitmapfontFormats._internal._BitmapFontRecordValues"
+      "module": "flighthq.bitmapfont.BitmapFontGlyphSource"
     },
     {
       "declarations": 7,
@@ -211,7 +217,7 @@
       "module": "flighthq.bitmapfontFormats.BitmapFontJson"
     },
     {
-      "declarations": 4,
+      "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.bitmapfontFormats.BitmapFontRecord"
     },
@@ -241,9 +247,14 @@
       "module": "flighthq.camera.Basis"
     },
     {
-      "declarations": 32,
+      "declarations": 39,
       "diagnostics": [],
       "module": "flighthq.camera.Camera"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.camera.Camera2d"
     },
     {
       "declarations": 6,
@@ -266,14 +277,24 @@
       "module": "flighthq.camera.Intersection"
     },
     {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.camera.Parallax"
+    },
+    {
       "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.camera.Picking"
     },
     {
-      "declarations": 7,
+      "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.camera.Projection"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.camera.Projection2d"
     },
     {
       "declarations": 5,
@@ -281,39 +302,44 @@
       "module": "flighthq.camera.ShadowCamera"
     },
     {
-      "declarations": 8,
-      "diagnostics": [],
-      "module": "flighthq.camera2d.Camera2d"
-    },
-    {
-      "declarations": 2,
-      "diagnostics": [],
-      "module": "flighthq.camera2d.Follow"
-    },
-    {
-      "declarations": 2,
-      "diagnostics": [],
-      "module": "flighthq.camera2d.Parallax"
-    },
-    {
-      "declarations": 3,
-      "diagnostics": [],
-      "module": "flighthq.camera2d.Projection"
-    },
-    {
       "declarations": 1,
       "diagnostics": [],
-      "module": "flighthq.camera2d.ViewMatrix"
+      "module": "flighthq.camera.ViewMatrix"
     },
     {
       "declarations": 3,
       "diagnostics": [],
-      "module": "flighthq.camera2d.VisibleBounds"
+      "module": "flighthq.camera.VisibleBounds"
     },
     {
       "declarations": 3,
       "diagnostics": [],
-      "module": "flighthq.camera2d.Zoom"
+      "module": "flighthq.camera.Zoom"
+    },
+    {
+      "declarations": 22,
+      "diagnostics": [],
+      "module": "flighthq.cameraControls.CameraControls"
+    },
+    {
+      "declarations": 12,
+      "diagnostics": [],
+      "module": "flighthq.cameraControls.FlyCameraController"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.cameraControls.Follow"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.cameraControls.Framing"
+    },
+    {
+      "declarations": 15,
+      "diagnostics": [],
+      "module": "flighthq.cameraControls.OrbitCameraController"
     },
     {
       "declarations": 10,
@@ -346,64 +372,14 @@
       "module": "flighthq.clipboard.Clipboard"
     },
     {
-      "declarations": 2,
-      "diagnostics": [],
-      "module": "flighthq.clock.AddClockChild"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.clock.AdvanceClock"
-    },
-    {
       "declarations": 14,
       "diagnostics": [],
       "module": "flighthq.clock.Clock"
     },
     {
-      "declarations": 2,
-      "diagnostics": [],
-      "module": "flighthq.clock.CreateClock"
-    },
-    {
       "declarations": 1,
       "diagnostics": [],
-      "module": "flighthq.clock.DisposeClock"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.clock.EnableClockSignals"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.clock.GetClockEffectiveScale"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.clock.GetClockParent"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.clock.IsClockEffectivelyPaused"
-    },
-    {
-      "declarations": 2,
-      "diagnostics": [],
-      "module": "flighthq.clock.PauseClock"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.clock.ResetClock"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.clock.SetClockScale"
+      "module": "flighthq.clock.ClockSignals"
     },
     {
       "declarations": 19,
@@ -436,16 +412,6 @@
       "module": "flighthq.collision.TestCollision"
     },
     {
-      "declarations": 4,
-      "diagnostics": [],
-      "module": "flighthq.color._internal._HslColorValues"
-    },
-    {
-      "declarations": 3,
-      "diagnostics": [],
-      "module": "flighthq.color._internal._HsvColorValues"
-    },
-    {
       "declarations": 29,
       "diagnostics": [],
       "module": "flighthq.color.Color"
@@ -456,12 +422,12 @@
       "module": "flighthq.color.ColorFromKelvin"
     },
     {
-      "declarations": 1,
+      "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.color.HslColor"
     },
     {
-      "declarations": 1,
+      "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.color.HsvColor"
     },
@@ -606,7 +572,7 @@
       "module": "flighthq.displayobjectCanvas.CanvasFillPattern"
     },
     {
-      "declarations": 3,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.displayobjectCanvas.CanvasImageSource"
     },
@@ -623,7 +589,7 @@
     {
       "declarations": 2,
       "diagnostics": [],
-      "module": "flighthq.displayobjectCanvas.CanvasParticleEmitter"
+      "module": "flighthq.displayobjectCanvas.CanvasParticleEmitter2D"
     },
     {
       "declarations": 2,
@@ -646,7 +612,7 @@
       "module": "flighthq.displayobjectCanvas.CanvasRenderTarget"
     },
     {
-      "declarations": 12,
+      "declarations": 11,
       "diagnostics": [],
       "module": "flighthq.displayobjectCanvas.CanvasRichText"
     },
@@ -766,7 +732,12 @@
       "module": "flighthq.displayobjectDom.DomFontSource"
     },
     {
-      "declarations": 3,
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.displayobjectDom.DomHtmlView"
+    },
+    {
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.displayobjectDom.DomImageSource"
     },
@@ -796,7 +767,7 @@
       "module": "flighthq.displayobjectDom.DomRenderView"
     },
     {
-      "declarations": 18,
+      "declarations": 17,
       "diagnostics": [],
       "module": "flighthq.displayobjectDom.DomRichText"
     },
@@ -844,11 +815,6 @@
       "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.displayobjectDom.DomVideo"
-    },
-    {
-      "declarations": 2,
-      "diagnostics": [],
-      "module": "flighthq.displayobjectDom.HtmlView"
     },
     {
       "declarations": 87,
@@ -908,7 +874,7 @@
     {
       "declarations": 9,
       "diagnostics": [],
-      "module": "flighthq.displayobjectGl.GlParticleEmitter"
+      "module": "flighthq.displayobjectGl.GlParticleEmitter2D"
     },
     {
       "declarations": 3,
@@ -916,7 +882,7 @@
       "module": "flighthq.displayobjectGl.GlQuadBatch"
     },
     {
-      "declarations": 14,
+      "declarations": 13,
       "diagnostics": [],
       "module": "flighthq.displayobjectGl.GlRichText"
     },
@@ -936,7 +902,7 @@
       "module": "flighthq.displayobjectGl.GlShape"
     },
     {
-      "declarations": 9,
+      "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.displayobjectGl.GlShapeMesh"
     },
@@ -979,11 +945,6 @@
       "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.displayobjectGl.GlVideo"
-    },
-    {
-      "declarations": 12,
-      "diagnostics": [],
-      "module": "flighthq.displayobjectWgpu._internal._WgpuShapeMeshValues"
     },
     {
       "declarations": 92,
@@ -1038,7 +999,7 @@
     {
       "declarations": 10,
       "diagnostics": [],
-      "module": "flighthq.displayobjectWgpu.WgpuParticleEmitter"
+      "module": "flighthq.displayobjectWgpu.WgpuParticleEmitter2D"
     },
     {
       "declarations": 3,
@@ -1061,7 +1022,7 @@
       "module": "flighthq.displayobjectWgpu.WgpuRenderStats"
     },
     {
-      "declarations": 14,
+      "declarations": 13,
       "diagnostics": [],
       "module": "flighthq.displayobjectWgpu.WgpuRichText"
     },
@@ -1081,7 +1042,7 @@
       "module": "flighthq.displayobjectWgpu.WgpuShape"
     },
     {
-      "declarations": 1,
+      "declarations": 12,
       "diagnostics": [],
       "module": "flighthq.displayobjectWgpu.WgpuShapeMesh"
     },
@@ -1091,7 +1052,7 @@
       "module": "flighthq.displayobjectWgpu.WgpuSprite"
     },
     {
-      "declarations": 19,
+      "declarations": 18,
       "diagnostics": [],
       "module": "flighthq.displayobjectWgpu.WgpuSpriteBatch"
     },
@@ -1781,7 +1742,7 @@
       "module": "flighthq.effectsCanvas.CanvasSmaaEffect"
     },
     {
-      "declarations": 6,
+      "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.effectsCanvas.CanvasSourceModeCompositing"
     },
@@ -2206,7 +2167,7 @@
       "module": "flighthq.effectsWgpu.WgpuEffectGradientRamp"
     },
     {
-      "declarations": 22,
+      "declarations": 19,
       "diagnostics": [],
       "module": "flighthq.effectsWgpu.WgpuEffectPass"
     },
@@ -2426,54 +2387,9 @@
       "module": "flighthq.filesystem.Filesystem"
     },
     {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.flow.ClearFlowStack"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.flow.CreateFlowStack"
-    },
-    {
       "declarations": 9,
       "diagnostics": [],
       "module": "flighthq.flow.Flow"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.flow.GetActiveFlowState"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.flow.GetFlowStackDepth"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.flow.GetFlowStackVisibleStates"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.flow.PopFlowState"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.flow.PushFlowState"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.flow.ReplaceFlowState"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.flow.UpdateFlowStack"
     },
     {
       "declarations": 15,
@@ -2736,11 +2652,6 @@
       "module": "flighthq.hostCapacitor.CapacitorKeyboard"
     },
     {
-      "declarations": 50,
-      "diagnostics": [],
-      "module": "flighthq.hostCapacitor.CapacitorModule"
-    },
-    {
       "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.hostCapacitor.CapacitorNotification"
@@ -2791,11 +2702,6 @@
       "module": "flighthq.hostElectron.ElectronMenu"
     },
     {
-      "declarations": 36,
-      "diagnostics": [],
-      "module": "flighthq.hostElectron.ElectronModule"
-    },
-    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.hostElectron.ElectronNotification"
@@ -2816,7 +2722,7 @@
       "module": "flighthq.hostElectron.ElectronProtocol"
     },
     {
-      "declarations": 2,
+      "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.hostElectron.ElectronRegister"
     },
@@ -2884,11 +2790,6 @@
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.hostTauri.TauriMenu"
-    },
-    {
-      "declarations": 40,
-      "diagnostics": [],
-      "module": "flighthq.hostTauri.TauriModule"
     },
     {
       "declarations": 1,
@@ -3006,7 +2907,7 @@
       "module": "flighthq.interaction.DisplayObjectOverlap"
     },
     {
-      "declarations": 7,
+      "declarations": 6,
       "diagnostics": [],
       "module": "flighthq.interaction.EnableInteractionGuards"
     },
@@ -3026,7 +2927,7 @@
       "module": "flighthq.interaction.Interaction"
     },
     {
-      "declarations": 57,
+      "declarations": 56,
       "diagnostics": [],
       "module": "flighthq.interaction.InteractionManager"
     },
@@ -3126,32 +3027,32 @@
       "module": "flighthq.lifecycle.Lifecycle"
     },
     {
-      "declarations": 3,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.lighting.AmbientLight"
     },
     {
-      "declarations": 4,
+      "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.lighting.AreaLight"
     },
     {
-      "declarations": 5,
+      "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.lighting.DirectionalLight"
     },
     {
-      "declarations": 3,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.lighting.Environment"
     },
     {
-      "declarations": 3,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.lighting.HemisphereLight"
     },
     {
-      "declarations": 5,
+      "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.lighting.LightAnalysis"
     },
@@ -3166,7 +3067,7 @@
       "module": "flighthq.lighting.LightIntensity"
     },
     {
-      "declarations": 3,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.lighting.PointLight"
     },
@@ -3176,7 +3077,7 @@
       "module": "flighthq.lighting.SceneLights"
     },
     {
-      "declarations": 8,
+      "declarations": 6,
       "diagnostics": [],
       "module": "flighthq.lighting.SpotLight"
     },
@@ -3191,7 +3092,7 @@
       "module": "flighthq.loader.ResourceLoader"
     },
     {
-      "declarations": 93,
+      "declarations": 89,
       "diagnostics": [],
       "module": "flighthq.log.Log"
     },
@@ -3211,7 +3112,7 @@
       "module": "flighthq.materials.CustomShaderMaterial"
     },
     {
-      "declarations": 5,
+      "declarations": 6,
       "diagnostics": [],
       "module": "flighthq.materials.Material"
     },
@@ -3221,7 +3122,7 @@
       "module": "flighthq.materials.MaterialPresets"
     },
     {
-      "declarations": 68,
+      "declarations": 69,
       "diagnostics": [],
       "module": "flighthq.materials.Materials"
     },
@@ -3371,17 +3272,17 @@
       "module": "flighthq.menu.MenuTemplates"
     },
     {
-      "declarations": 65,
+      "declarations": 80,
       "diagnostics": [],
       "module": "flighthq.mesh.Mesh"
     },
     {
-      "declarations": 16,
+      "declarations": 15,
       "diagnostics": [],
       "module": "flighthq.mesh.MeshGeometry"
     },
     {
-      "declarations": 12,
+      "declarations": 30,
       "diagnostics": [],
       "module": "flighthq.mesh.MeshGeometryAttributes"
     },
@@ -3391,17 +3292,22 @@
       "module": "flighthq.mesh.MeshGeometryBuilders"
     },
     {
-      "declarations": 9,
+      "declarations": 10,
       "diagnostics": [],
       "module": "flighthq.mesh.MeshGeometryCompute"
     },
     {
-      "declarations": 2,
+      "declarations": 4,
+      "diagnostics": [],
+      "module": "flighthq.mesh.MeshGeometryDeformationClone"
+    },
+    {
+      "declarations": 9,
       "diagnostics": [],
       "module": "flighthq.mesh.MeshGeometryIndex"
     },
     {
-      "declarations": 4,
+      "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.mesh.MeshGeometryLayout"
     },
@@ -3411,7 +3317,7 @@
       "module": "flighthq.mesh.MeshGeometryOperations"
     },
     {
-      "declarations": 3,
+      "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.mesh.MeshGeometrySubset"
     },
@@ -3431,44 +3337,14 @@
       "module": "flighthq.mesh.MorphMeshGeometry"
     },
     {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.motionpath.CreateMotionPath"
-    },
-    {
-      "declarations": 2,
-      "diagnostics": [],
-      "module": "flighthq.motionpath.GetMotionPathHeading"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.motionpath.GetMotionPathPosition"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.motionpath.GetMotionPathProgress"
-    },
-    {
       "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.motionpath.Motionpath"
     },
     {
-      "declarations": 1,
+      "declarations": 9,
       "diagnostics": [],
-      "module": "flighthq.motionpath.SetMotionPathDistance"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.motionpath.SetMotionPathProgress"
-    },
-    {
-      "declarations": 2,
-      "diagnostics": [],
-      "module": "flighthq.motionpath.UpdateMotionPath"
+      "module": "flighthq.motionpath.MotionPath"
     },
     {
       "declarations": 23,
@@ -3536,9 +3412,19 @@
       "module": "flighthq.node.Hierarchy"
     },
     {
-      "declarations": 103,
+      "declarations": 104,
       "diagnostics": [],
       "module": "flighthq.node.Node"
+    },
+    {
+      "declarations": 12,
+      "diagnostics": [],
+      "module": "flighthq.node.NodeTransform2d"
+    },
+    {
+      "declarations": 13,
+      "diagnostics": [],
+      "module": "flighthq.node.NodeTransform3d"
     },
     {
       "declarations": 16,
@@ -3546,14 +3432,9 @@
       "module": "flighthq.node.Revision"
     },
     {
-      "declarations": 12,
+      "declarations": 6,
       "diagnostics": [],
-      "module": "flighthq.node.Transform2d"
-    },
-    {
-      "declarations": 13,
-      "diagnostics": [],
-      "module": "flighthq.node.Transform3d"
+      "module": "flighthq.node.StageFit"
     },
     {
       "declarations": 10,
@@ -3561,7 +3442,7 @@
       "module": "flighthq.node.Traversal"
     },
     {
-      "declarations": 7,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.node.Viewport"
     },
@@ -3573,7 +3454,7 @@
     {
       "declarations": 4,
       "diagnostics": [],
-      "module": "flighthq.particleemitter.EmitParticleBurst"
+      "module": "flighthq.particleemitter.EmitParticleBurst2D"
     },
     {
       "declarations": 6,
@@ -3581,7 +3462,7 @@
       "module": "flighthq.particleemitter.EmitParticleBurst3D"
     },
     {
-      "declarations": 50,
+      "declarations": 51,
       "diagnostics": [],
       "module": "flighthq.particleemitter.Particleemitter"
     },
@@ -3591,14 +3472,14 @@
       "module": "flighthq.particleemitter.ParticleEmitter"
     },
     {
-      "declarations": 22,
+      "declarations": 25,
       "diagnostics": [],
       "module": "flighthq.particleemitter.ParticleEmitter3D"
     },
     {
       "declarations": 1,
       "diagnostics": [],
-      "module": "flighthq.particleemitter.PrewarmParticleEmitter"
+      "module": "flighthq.particleemitter.PrewarmParticleEmitter2D"
     },
     {
       "declarations": 1,
@@ -3608,7 +3489,7 @@
     {
       "declarations": 1,
       "diagnostics": [],
-      "module": "flighthq.particleemitter.StepParticleEmitter"
+      "module": "flighthq.particleemitter.StepParticleEmitter2D"
     },
     {
       "declarations": 1,
@@ -3618,7 +3499,7 @@
     {
       "declarations": 8,
       "diagnostics": [],
-      "module": "flighthq.particleemitter.UpdateParticleEmitter"
+      "module": "flighthq.particleemitter.UpdateParticleEmitter2D"
     },
     {
       "declarations": 8,
@@ -3686,42 +3567,32 @@
       "module": "flighthq.particlesFormats.Detect"
     },
     {
-      "declarations": 8,
+      "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.particlesFormats.FormatRegistry"
     },
     {
-      "declarations": 17,
+      "declarations": 14,
       "diagnostics": [],
       "module": "flighthq.particlesFormats.LibgdxParse"
     },
     {
-      "declarations": 2,
-      "diagnostics": [],
-      "module": "flighthq.particlesFormats.LibgdxSchema"
-    },
-    {
-      "declarations": 10,
+      "declarations": 9,
       "diagnostics": [],
       "module": "flighthq.particlesFormats.LibgdxSerialize"
     },
     {
-      "declarations": 4,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.particlesFormats.ParseParticleConfig"
     },
     {
-      "declarations": 12,
+      "declarations": 10,
       "diagnostics": [],
       "module": "flighthq.particlesFormats.ParticleDesignerParse"
     },
     {
-      "declarations": 3,
-      "diagnostics": [],
-      "module": "flighthq.particlesFormats.ParticleDesignerSchema"
-    },
-    {
-      "declarations": 10,
+      "declarations": 9,
       "diagnostics": [],
       "module": "flighthq.particlesFormats.ParticleDesignerSerialize"
     },
@@ -3731,24 +3602,14 @@
       "module": "flighthq.particlesFormats.ParticlesFormats"
     },
     {
-      "declarations": 13,
+      "declarations": 11,
       "diagnostics": [],
       "module": "flighthq.particlesFormats.PixiParse"
     },
     {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.particlesFormats.SerializeResult"
-    },
-    {
-      "declarations": 19,
+      "declarations": 18,
       "diagnostics": [],
       "module": "flighthq.particlesFormats.SpineParse"
-    },
-    {
-      "declarations": 5,
-      "diagnostics": [],
-      "module": "flighthq.particlesFormats.SpineSchema"
     },
     {
       "declarations": 7,
@@ -3756,32 +3617,22 @@
       "module": "flighthq.particlesFormats.SpineSerialize"
     },
     {
-      "declarations": 16,
+      "declarations": 13,
       "diagnostics": [],
       "module": "flighthq.particlesFormats.StarlingPexParse"
     },
     {
-      "declarations": 2,
-      "diagnostics": [],
-      "module": "flighthq.particlesFormats.StarlingPexSchema"
-    },
-    {
-      "declarations": 10,
+      "declarations": 9,
       "diagnostics": [],
       "module": "flighthq.particlesFormats.StarlingPexSerialize"
     },
     {
-      "declarations": 28,
+      "declarations": 26,
       "diagnostics": [],
       "module": "flighthq.particlesFormats.UnityParse"
     },
     {
-      "declarations": 15,
-      "diagnostics": [],
-      "module": "flighthq.particlesFormats.UnitySchema"
-    },
-    {
-      "declarations": 12,
+      "declarations": 11,
       "diagnostics": [],
       "module": "flighthq.particlesFormats.UnitySerialize"
     },
@@ -3956,7 +3807,7 @@
       "module": "flighthq.permissions.Permissions"
     },
     {
-      "declarations": 5,
+      "declarations": 11,
       "diagnostics": [],
       "module": "flighthq.picking.Picking"
     },
@@ -3964,6 +3815,11 @@
       "declarations": 30,
       "diagnostics": [],
       "module": "flighthq.picking.PickScene"
+    },
+    {
+      "declarations": 19,
+      "diagnostics": [],
+      "module": "flighthq.picking.SceneHitAttributes"
     },
     {
       "declarations": 19,
@@ -3986,7 +3842,7 @@
       "module": "flighthq.render.EnableColorAdjustmentGuards"
     },
     {
-      "declarations": 3,
+      "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.render.ExplainDisplayObjectRender"
     },
@@ -4026,7 +3882,7 @@
       "module": "flighthq.render.RenderMaterial"
     },
     {
-      "declarations": 17,
+      "declarations": 16,
       "diagnostics": [],
       "module": "flighthq.render.RenderProxy"
     },
@@ -4046,7 +3902,7 @@
       "module": "flighthq.render.RenderState"
     },
     {
-      "declarations": 6,
+      "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.render.RenderTarget"
     },
@@ -4066,17 +3922,12 @@
       "module": "flighthq.render.SceneRender"
     },
     {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.renderGl._internal._Internal"
-    },
-    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.renderGl.GlBackground"
     },
     {
-      "declarations": 8,
+      "declarations": 9,
       "diagnostics": [],
       "module": "flighthq.renderGl.GlCompressedTexture"
     },
@@ -4154,11 +4005,6 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.renderGl.GlShaderRegistry"
-    },
-    {
-      "declarations": 0,
-      "diagnostics": [],
-      "module": "flighthq.renderGl.GlShaderTypes"
     },
     {
       "declarations": 3,
@@ -4286,7 +4132,7 @@
       "module": "flighthq.scene.Mesh"
     },
     {
-      "declarations": 34,
+      "declarations": 37,
       "diagnostics": [],
       "module": "flighthq.scene.Scene"
     },
@@ -4296,7 +4142,12 @@
       "module": "flighthq.scene.SceneAnimation"
     },
     {
-      "declarations": 2,
+      "declarations": 7,
+      "diagnostics": [],
+      "module": "flighthq.scene.SceneDocument"
+    },
+    {
+      "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.scene.SceneMaterial"
     },
@@ -4336,7 +4187,7 @@
       "module": "flighthq.scene.UpdateMeshMorph"
     },
     {
-      "declarations": 34,
+      "declarations": 38,
       "diagnostics": [],
       "module": "flighthq.sceneFormats.AwdParse"
     },
@@ -4346,17 +4197,17 @@
       "module": "flighthq.sceneFormats.AwdSchema"
     },
     {
-      "declarations": 47,
+      "declarations": 55,
       "diagnostics": [],
       "module": "flighthq.sceneFormats.GltfParse"
     },
     {
-      "declarations": 25,
+      "declarations": 2,
       "diagnostics": [],
-      "module": "flighthq.sceneFormats.GltfSchema"
+      "module": "flighthq.sceneFormats.GltfPunctualLights"
     },
     {
-      "declarations": 7,
+      "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.sceneFormats.Md2Parse"
     },
@@ -4371,14 +4222,9 @@
       "module": "flighthq.sceneFormats.Md5AnimParse"
     },
     {
-      "declarations": 10,
+      "declarations": 13,
       "diagnostics": [],
       "module": "flighthq.sceneFormats.Md5Parse"
-    },
-    {
-      "declarations": 4,
-      "diagnostics": [],
-      "module": "flighthq.sceneFormats.Md5Schema"
     },
     {
       "declarations": 4,
@@ -4386,54 +4232,24 @@
       "module": "flighthq.sceneFormats.MtlParse"
     },
     {
-      "declarations": 10,
+      "declarations": 11,
       "diagnostics": [],
       "module": "flighthq.sceneFormats.ObjParse"
     },
     {
-      "declarations": 2,
-      "diagnostics": [],
-      "module": "flighthq.sceneFormats.ObjSchema"
-    },
-    {
-      "declarations": 12,
+      "declarations": 20,
       "diagnostics": [],
       "module": "flighthq.sceneFormats.SceneFormats"
     },
     {
-      "declarations": 14,
+      "declarations": 15,
       "diagnostics": [],
       "module": "flighthq.sceneFormats.Shared"
     },
     {
-      "declarations": 15,
-      "diagnostics": [],
-      "module": "flighthq.sceneFormats.ThreeDsParse"
-    },
-    {
-      "declarations": 22,
-      "diagnostics": [],
-      "module": "flighthq.sceneFormats.ThreeDsSchema"
-    },
-    {
-      "declarations": 10,
-      "diagnostics": [],
-      "module": "flighthq.sceneGl._internal._GlLitProgramValues"
-    },
-    {
       "declarations": 16,
       "diagnostics": [],
-      "module": "flighthq.sceneGl._internal._GlMeshProgramValues"
-    },
-    {
-      "declarations": 4,
-      "diagnostics": [],
-      "module": "flighthq.sceneGl._internal._GlSceneRuntimeValues"
-    },
-    {
-      "declarations": 4,
-      "diagnostics": [],
-      "module": "flighthq.sceneGl._internal._GlWireframeUploadValues"
+      "module": "flighthq.sceneFormats.ThreeDsParse"
     },
     {
       "declarations": 2,
@@ -4451,7 +4267,7 @@
       "module": "flighthq.sceneGl.ClearcoatPbrGlMeshMaterialRenderer"
     },
     {
-      "declarations": 11,
+      "declarations": 10,
       "diagnostics": [],
       "module": "flighthq.sceneGl.CustomShaderGlMeshMaterialRenderer"
     },
@@ -4481,12 +4297,12 @@
       "module": "flighthq.sceneGl.EnableGlSceneCustomShaderGuards"
     },
     {
-      "declarations": 13,
+      "declarations": 10,
       "diagnostics": [],
       "module": "flighthq.sceneGl.GlClassicPrelude"
     },
     {
-      "declarations": 12,
+      "declarations": 10,
       "diagnostics": [],
       "module": "flighthq.sceneGl.GlDebugPrelude"
     },
@@ -4506,12 +4322,12 @@
       "module": "flighthq.sceneGl.GlEnvironmentSkybox"
     },
     {
-      "declarations": 2,
+      "declarations": 11,
       "diagnostics": [],
       "module": "flighthq.sceneGl.GlLitProgram"
     },
     {
-      "declarations": 11,
+      "declarations": 9,
       "diagnostics": [],
       "module": "flighthq.sceneGl.GlMatcapPrelude"
     },
@@ -4521,7 +4337,7 @@
       "module": "flighthq.sceneGl.GlMeshMaterialRegistry"
     },
     {
-      "declarations": 1,
+      "declarations": 16,
       "diagnostics": [],
       "module": "flighthq.sceneGl.GlMeshProgram"
     },
@@ -4536,12 +4352,12 @@
       "module": "flighthq.sceneGl.GlParticleEmitter3D"
     },
     {
-      "declarations": 9,
+      "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.sceneGl.GlPbrPrelude"
     },
     {
-      "declarations": 3,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.sceneGl.GlPbrProgramCache"
     },
@@ -4551,7 +4367,7 @@
       "module": "flighthq.sceneGl.GlPbrStandardBlock"
     },
     {
-      "declarations": 5,
+      "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.sceneGl.GlSceneRuntime"
     },
@@ -4566,12 +4382,12 @@
       "module": "flighthq.sceneGl.GlShadedBuiltInModifiers"
     },
     {
-      "declarations": 4,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.sceneGl.GlShadedModifierSnippet"
     },
     {
-      "declarations": 12,
+      "declarations": 10,
       "diagnostics": [],
       "module": "flighthq.sceneGl.GlShadedPrelude"
     },
@@ -4581,22 +4397,22 @@
       "module": "flighthq.sceneGl.GlShadowMap"
     },
     {
-      "declarations": 10,
+      "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.sceneGl.GlToonPrelude"
     },
     {
-      "declarations": 12,
+      "declarations": 10,
       "diagnostics": [],
       "module": "flighthq.sceneGl.GlUnlitPrelude"
     },
     {
-      "declarations": 7,
+      "declarations": 6,
       "diagnostics": [],
       "module": "flighthq.sceneGl.GlWireframePrelude"
     },
     {
-      "declarations": 1,
+      "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.sceneGl.GlWireframeUpload"
     },
@@ -4636,7 +4452,7 @@
       "module": "flighthq.sceneGl.RegisterStandardPbrGlMaterial"
     },
     {
-      "declarations": 157,
+      "declarations": 156,
       "diagnostics": [],
       "module": "flighthq.sceneGl.SceneGl"
     },
@@ -4698,27 +4514,12 @@
     {
       "declarations": 1,
       "diagnostics": [],
-      "module": "flighthq.sceneResources._internal._LoadSceneOptionsValues"
+      "module": "flighthq.sceneResources.AwdLoad"
     },
     {
       "declarations": 6,
       "diagnostics": [],
-      "module": "flighthq.sceneResources._internal._SceneMaterialTextureRegistryValues"
-    },
-    {
-      "declarations": 3,
-      "diagnostics": [],
-      "module": "flighthq.sceneResources._internal._SceneResourceFetchValues"
-    },
-    {
-      "declarations": 2,
-      "diagnostics": [],
-      "module": "flighthq.sceneResources._internal._SceneResourceResolverValues"
-    },
-    {
-      "declarations": 3,
-      "diagnostics": [],
-      "module": "flighthq.sceneResources._internal._SceneResourceSignalsValues"
+      "module": "flighthq.sceneResources.EnableSceneResourceFailureGuards"
     },
     {
       "declarations": 2,
@@ -4726,47 +4527,37 @@
       "module": "flighthq.sceneResources.GetSceneResourceTextures"
     },
     {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.sceneResources.Load3ds"
-    },
-    {
       "declarations": 4,
       "diagnostics": [],
-      "module": "flighthq.sceneResources.LoadGltf"
+      "module": "flighthq.sceneResources.GltfLoad"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.sceneResources.ImageResourceFetch"
     },
     {
       "declarations": 1,
       "diagnostics": [],
-      "module": "flighthq.sceneResources.LoadMd2"
+      "module": "flighthq.sceneResources.Md2Load"
     },
     {
       "declarations": 1,
       "diagnostics": [],
-      "module": "flighthq.sceneResources.LoadMd5"
+      "module": "flighthq.sceneResources.Md5Load"
     },
     {
       "declarations": 1,
       "diagnostics": [],
-      "module": "flighthq.sceneResources.LoadObj"
+      "module": "flighthq.sceneResources.ObjLoad"
     },
     {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.sceneResources.LoadSceneFromAwd"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.sceneResources.LoadSceneOptions"
-    },
-    {
-      "declarations": 9,
+      "declarations": 10,
       "diagnostics": [],
       "module": "flighthq.sceneResources.ResolveSceneResources"
     },
     {
-      "declarations": 1,
+      "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.sceneResources.ResolveSceneResourcesAndWait"
     },
@@ -4776,14 +4567,19 @@
       "module": "flighthq.sceneResources.RevealSceneResourcesOnResolve"
     },
     {
-      "declarations": 2,
+      "declarations": 5,
+      "diagnostics": [],
+      "module": "flighthq.sceneResources.SceneDocumentSource"
+    },
+    {
+      "declarations": 6,
       "diagnostics": [],
       "module": "flighthq.sceneResources.SceneMaterialTextureRegistry"
     },
     {
-      "declarations": 1,
+      "declarations": 3,
       "diagnostics": [],
-      "module": "flighthq.sceneResources.SceneResourceFetch"
+      "module": "flighthq.sceneResources.SceneResourceRecovery"
     },
     {
       "declarations": 3,
@@ -4791,29 +4587,19 @@
       "module": "flighthq.sceneResources.SceneResourceResolver"
     },
     {
-      "declarations": 26,
+      "declarations": 35,
       "diagnostics": [],
       "module": "flighthq.sceneResources.SceneResources"
     },
     {
-      "declarations": 2,
+      "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.sceneResources.SceneResourceSignals"
     },
     {
-      "declarations": 42,
+      "declarations": 1,
       "diagnostics": [],
-      "module": "flighthq.sceneWgpu._internal._WgpuMeshPipelineValues"
-    },
-    {
-      "declarations": 2,
-      "diagnostics": [],
-      "module": "flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues"
-    },
-    {
-      "declarations": 4,
-      "diagnostics": [],
-      "module": "flighthq.sceneWgpu._internal._WgpuWireframeUploadValues"
+      "module": "flighthq.sceneResources.ThreeDsLoad"
     },
     {
       "declarations": 3,
@@ -4926,12 +4712,12 @@
       "module": "flighthq.sceneWgpu.VertexColorWgpuMeshMaterialRenderer"
     },
     {
-      "declarations": 11,
+      "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.sceneWgpu.WgpuClassicPrelude"
     },
     {
-      "declarations": 11,
+      "declarations": 9,
       "diagnostics": [],
       "module": "flighthq.sceneWgpu.WgpuDebugPrelude"
     },
@@ -4951,7 +4737,7 @@
       "module": "flighthq.sceneWgpu.WgpuEnvironmentSkybox"
     },
     {
-      "declarations": 10,
+      "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.sceneWgpu.WgpuMatcapPrelude"
     },
@@ -4961,7 +4747,7 @@
       "module": "flighthq.sceneWgpu.WgpuMeshMaterialRegistry"
     },
     {
-      "declarations": 2,
+      "declarations": 42,
       "diagnostics": [],
       "module": "flighthq.sceneWgpu.WgpuMeshPipeline"
     },
@@ -4976,17 +4762,17 @@
       "module": "flighthq.sceneWgpu.WgpuParticleEmitter3D"
     },
     {
-      "declarations": 3,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.sceneWgpu.WgpuPbrPipelineCache"
     },
     {
-      "declarations": 6,
+      "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.sceneWgpu.WgpuPbrPrelude"
     },
     {
-      "declarations": 5,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.sceneWgpu.WgpuSceneRuntime"
     },
@@ -4996,22 +4782,22 @@
       "module": "flighthq.sceneWgpu.WgpuShadowMap"
     },
     {
-      "declarations": 10,
+      "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.sceneWgpu.WgpuToonPrelude"
     },
     {
-      "declarations": 10,
+      "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.sceneWgpu.WgpuUnlitPrelude"
     },
     {
-      "declarations": 8,
+      "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.sceneWgpu.WgpuWireframePrelude"
     },
     {
-      "declarations": 1,
+      "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.sceneWgpu.WgpuWireframeUpload"
     },
@@ -5086,7 +4872,7 @@
       "module": "flighthq.sdk.Scene"
     },
     {
-      "declarations": 4584,
+      "declarations": 4683,
       "diagnostics": [],
       "module": "flighthq.sdk.Sdk"
     },
@@ -5101,52 +4887,47 @@
       "module": "flighthq.sensors.Sensors"
     },
     {
-      "declarations": 3,
-      "diagnostics": [],
-      "module": "flighthq.shading._internal._ModifierRegistryValues"
-    },
-    {
-      "declarations": 2,
+      "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.shading.CreateAnimatedNormalModifier"
     },
     {
-      "declarations": 2,
+      "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.shading.CreateDissolveModifier"
     },
     {
-      "declarations": 2,
+      "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.shading.CreateEmissiveModifier"
     },
     {
-      "declarations": 2,
+      "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.shading.CreateEnvReflectModifier"
     },
     {
-      "declarations": 2,
+      "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.shading.CreateFogModifier"
     },
     {
-      "declarations": 2,
+      "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.shading.CreateRimModifier"
     },
     {
-      "declarations": 2,
+      "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.shading.CreateShadedMaterial"
     },
     {
-      "declarations": 2,
+      "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.shading.CreateToonModifier"
     },
     {
-      "declarations": 3,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.shading.CreateVertexDisplaceModifier"
     },
@@ -5171,7 +4952,7 @@
       "module": "flighthq.shading.IsModifierStackValid"
     },
     {
-      "declarations": 2,
+      "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.shading.ModifierRegistry"
     },
@@ -5226,7 +5007,7 @@
       "module": "flighthq.shapeFormats.ShapeFormats"
     },
     {
-      "declarations": 15,
+      "declarations": 12,
       "diagnostics": [],
       "module": "flighthq.shapeFormats.ShapeJson"
     },
@@ -5271,7 +5052,7 @@
       "module": "flighthq.signals.Slot"
     },
     {
-      "declarations": 4,
+      "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.signals.Throttle"
     },
@@ -5281,12 +5062,12 @@
       "module": "flighthq.skeleton3d.GetMeshSkinBounds"
     },
     {
-      "declarations": 18,
+      "declarations": 21,
       "diagnostics": [],
       "module": "flighthq.skeleton3d.Skeleton3d"
     },
     {
-      "declarations": 3,
+      "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.skeleton3d.SkinMeshGeometry"
     },
@@ -5294,6 +5075,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.skeleton3d.SkinVertices"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.skeleton3d.UpdateMeshDeformation"
     },
     {
       "declarations": 1,
@@ -5346,22 +5132,7 @@
       "module": "flighthq.spatial.UniformGrid"
     },
     {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.spring.CreateSpring"
-    },
-    {
-      "declarations": 2,
-      "diagnostics": [],
-      "module": "flighthq.spring.IsSpringSettled"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.spring.ResetSpring"
-    },
-    {
-      "declarations": 12,
+      "declarations": 14,
       "diagnostics": [],
       "module": "flighthq.spring.Spring"
     },
@@ -5379,11 +5150,6 @@
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.spring.SpringConfig"
-    },
-    {
-      "declarations": 2,
-      "diagnostics": [],
-      "module": "flighthq.spring.UpdateSpring"
     },
     {
       "declarations": 38,
@@ -5436,29 +5202,19 @@
       "module": "flighthq.spritesheet.SpritesheetValidation"
     },
     {
-      "declarations": 7,
+      "declarations": 6,
       "diagnostics": [],
       "module": "flighthq.spritesheetFormats.AsepriteParse"
     },
     {
-      "declarations": 11,
-      "diagnostics": [],
-      "module": "flighthq.spritesheetFormats.AsepriteSchema"
-    },
-    {
-      "declarations": 7,
+      "declarations": 6,
       "diagnostics": [],
       "module": "flighthq.spritesheetFormats.AsepriteSerialize"
     },
     {
-      "declarations": 12,
+      "declarations": 11,
       "diagnostics": [],
       "module": "flighthq.spritesheetFormats.CocosPlistParse"
-    },
-    {
-      "declarations": 3,
-      "diagnostics": [],
-      "module": "flighthq.spritesheetFormats.CocosPlistSchema"
     },
     {
       "declarations": 5,
@@ -5466,17 +5222,12 @@
       "module": "flighthq.spritesheetFormats.CocosPlistSerialize"
     },
     {
-      "declarations": 9,
+      "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.spritesheetFormats.LibgdxAtlasParse"
     },
     {
-      "declarations": 3,
-      "diagnostics": [],
-      "module": "flighthq.spritesheetFormats.LibgdxAtlasSchema"
-    },
-    {
-      "declarations": 14,
+      "declarations": 13,
       "diagnostics": [],
       "module": "flighthq.spritesheetFormats.SpritesheetDetect"
     },
@@ -5486,14 +5237,9 @@
       "module": "flighthq.spritesheetFormats.SpritesheetFormats"
     },
     {
-      "declarations": 10,
+      "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.spritesheetFormats.StarlingParse"
-    },
-    {
-      "declarations": 2,
-      "diagnostics": [],
-      "module": "flighthq.spritesheetFormats.StarlingSchema"
     },
     {
       "declarations": 4,
@@ -5501,17 +5247,12 @@
       "module": "flighthq.spritesheetFormats.StarlingSerialize"
     },
     {
-      "declarations": 7,
+      "declarations": 6,
       "diagnostics": [],
       "module": "flighthq.spritesheetFormats.TexturePackerParse"
     },
     {
-      "declarations": 10,
-      "diagnostics": [],
-      "module": "flighthq.spritesheetFormats.TexturePackerSchema"
-    },
-    {
-      "declarations": 6,
+      "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.spritesheetFormats.TexturePackerSerialize"
     },
@@ -5541,12 +5282,12 @@
       "module": "flighthq.surface.SurfaceAlpha"
     },
     {
-      "declarations": 6,
+      "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.surface.SurfaceBevel"
     },
     {
-      "declarations": 8,
+      "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.surface.SurfaceBlur"
     },
@@ -5571,7 +5312,7 @@
       "module": "flighthq.surface.SurfaceComposite"
     },
     {
-      "declarations": 5,
+      "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.surface.SurfaceConvolution"
     },
@@ -5591,7 +5332,7 @@
       "module": "flighthq.surface.SurfaceCrop"
     },
     {
-      "declarations": 5,
+      "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.surface.SurfaceDisplacement"
     },
@@ -5636,7 +5377,7 @@
       "module": "flighthq.surface.SurfaceFrom"
     },
     {
-      "declarations": 9,
+      "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.surface.SurfaceGradient"
     },
@@ -5696,7 +5437,7 @@
       "module": "flighthq.surface.SurfaceRegion"
     },
     {
-      "declarations": 4,
+      "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.surface.SurfaceResize"
     },
@@ -5706,12 +5447,12 @@
       "module": "flighthq.surface.SurfaceRotate"
     },
     {
-      "declarations": 13,
+      "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.surface.SurfaceShadow"
     },
     {
-      "declarations": 2,
+      "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.surface.SurfaceSharpen"
     },
@@ -5826,7 +5567,7 @@
       "module": "flighthq.textlayout.RichTextQuery"
     },
     {
-      "declarations": 6,
+      "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.textlayout.TextBounds"
     },
@@ -5916,11 +5657,6 @@
       "module": "flighthq.textsegment.TextSegmenterBackend"
     },
     {
-      "declarations": 5,
-      "diagnostics": [],
-      "module": "flighthq.textshaper._internal._TextShaperCacheValues"
-    },
-    {
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.textshaper._TextShaperHooks"
@@ -5936,7 +5672,7 @@
       "module": "flighthq.textshaper.TextShaper"
     },
     {
-      "declarations": 1,
+      "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.textshaper.TextShaperCache"
     },
@@ -5966,7 +5702,7 @@
       "module": "flighthq.textshaper.TextShaperSignals"
     },
     {
-      "declarations": 6,
+      "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.textshaperCanvas.CanvasTextShaper"
     },
@@ -5986,7 +5722,7 @@
       "module": "flighthq.texture.Sampler"
     },
     {
-      "declarations": 42,
+      "declarations": 43,
       "diagnostics": [],
       "module": "flighthq.texture.Texture"
     },
@@ -6021,11 +5757,6 @@
       "module": "flighthq.textureatlasFormats.TextureAtlasAsepriteParse"
     },
     {
-      "declarations": 10,
-      "diagnostics": [],
-      "module": "flighthq.textureatlasFormats.TextureAtlasAsepriteSchema"
-    },
-    {
       "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.textureatlasFormats.TextureAtlasDetect"
@@ -6041,27 +5772,17 @@
       "module": "flighthq.textureatlasFormats.TextureAtlasLibgdxParse"
     },
     {
-      "declarations": 6,
+      "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.textureatlasFormats.TextureAtlasPackerParse"
     },
     {
-      "declarations": 10,
-      "diagnostics": [],
-      "module": "flighthq.textureatlasFormats.TextureAtlasPackerSchema"
-    },
-    {
-      "declarations": 2,
+      "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.textureatlasFormats.TextureAtlasStarlingParse"
     },
     {
-      "declarations": 9,
-      "diagnostics": [],
-      "module": "flighthq.textureFormats._internal._ByteReaderValues"
-    },
-    {
-      "declarations": 1,
+      "declarations": 10,
       "diagnostics": [],
       "module": "flighthq.textureFormats.ByteReader"
     },
@@ -6076,7 +5797,7 @@
       "module": "flighthq.textureFormats.ParseAtf"
     },
     {
-      "declarations": 8,
+      "declarations": 15,
       "diagnostics": [],
       "module": "flighthq.textureFormats.ParseBasis"
     },
@@ -6096,7 +5817,7 @@
       "module": "flighthq.textureFormats.SelectTextureContainer"
     },
     {
-      "declarations": 6,
+      "declarations": 8,
       "diagnostics": [],
       "module": "flighthq.textureFormats.TextureFormats"
     },
@@ -6124,11 +5845,6 @@
       "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.tilemapFormats.TiledLayerData"
-    },
-    {
-      "declarations": 4,
-      "diagnostics": [],
-      "module": "flighthq.tilemapFormats.TiledOptions"
     },
     {
       "declarations": 2,
@@ -6166,66 +5882,6 @@
       "module": "flighthq.timeline.Timeline"
     },
     {
-      "declarations": 9,
-      "diagnostics": [],
-      "module": "flighthq.toolCapture.BaselineStore"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.toolCapture.CaptureBrowser"
-    },
-    {
-      "declarations": 7,
-      "diagnostics": [],
-      "module": "flighthq.toolCapture.CaptureEntries"
-    },
-    {
-      "declarations": 14,
-      "diagnostics": [],
-      "module": "flighthq.toolCapture.CaptureEntry"
-    },
-    {
-      "declarations": 7,
-      "diagnostics": [],
-      "module": "flighthq.toolCapture.CaptureFormat"
-    },
-    {
-      "declarations": 4,
-      "diagnostics": [],
-      "module": "flighthq.toolCapture.CaptureInterrupt"
-    },
-    {
-      "declarations": 3,
-      "diagnostics": [],
-      "module": "flighthq.toolCapture.CaptureRenderTarget"
-    },
-    {
-      "declarations": 4,
-      "diagnostics": [],
-      "module": "flighthq.toolCapture.CaptureServer"
-    },
-    {
-      "declarations": 7,
-      "diagnostics": [],
-      "module": "flighthq.toolCapture.FunctionalScenes"
-    },
-    {
-      "declarations": 23,
-      "diagnostics": [],
-      "module": "flighthq.toolCapture.FunctionalVerify"
-    },
-    {
-      "declarations": 5,
-      "diagnostics": [],
-      "module": "flighthq.toolCapture.ReferenceCapture"
-    },
-    {
-      "declarations": 33,
-      "diagnostics": [],
-      "module": "flighthq.toolCapture.ToolCapture"
-    },
-    {
       "declarations": 25,
       "diagnostics": [],
       "module": "flighthq.tray.Tray"
@@ -6261,7 +5917,7 @@
       "module": "flighthq.tween.TweenProgress"
     },
     {
-      "declarations": 3,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.tween.TweenStagger"
     },
@@ -6461,6 +6117,11 @@
       "module": "flighthq.types._internal._ImageChannelValues"
     },
     {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types._internal._ImageResourceReferenceValues"
+    },
+    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types._internal._InstancedMeshValues"
@@ -6548,12 +6209,12 @@
     {
       "declarations": 1,
       "diagnostics": [],
-      "module": "flighthq.types._internal._ParticleEmitter3DValues"
+      "module": "flighthq.types._internal._ParticleEmitter2DValues"
     },
     {
       "declarations": 1,
       "diagnostics": [],
-      "module": "flighthq.types._internal._ParticleEmitterValues"
+      "module": "flighthq.types._internal._ParticleEmitter3DValues"
     },
     {
       "declarations": 7,
@@ -6639,11 +6300,6 @@
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types._internal._SceneNodeValues"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flighthq.types._internal._SceneResourceRefValues"
     },
     {
       "declarations": 1,
@@ -6843,7 +6499,17 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.AmbientLightOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.AnimatedNormalModifier"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.AnimatedNormalModifierOptions"
     },
     {
       "declarations": 1,
@@ -6869,6 +6535,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.AnimationPlayer"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.AnimationSampleAccumulator"
     },
     {
       "declarations": 1,
@@ -6914,6 +6585,16 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.AreaLight"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.AreaLightOptions"
+    },
+    {
+      "declarations": 13,
+      "diagnostics": [],
+      "module": "flighthq.types.AsepriteSchema"
     },
     {
       "declarations": 9,
@@ -6986,6 +6667,11 @@
       "module": "flighthq.types.BitmapFont"
     },
     {
+      "declarations": 4,
+      "diagnostics": [],
+      "module": "flighthq.types.BitmapFontRecord"
+    },
+    {
       "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.types.BitmapText"
@@ -7031,9 +6717,14 @@
       "module": "flighthq.types.BrightnessContrastAdjustment"
     },
     {
-      "declarations": 5,
+      "declarations": 1,
       "diagnostics": [],
-      "module": "flighthq.types.Camera"
+      "module": "flighthq.types.BufferedLogSink"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.ByteReader"
     },
     {
       "declarations": 3,
@@ -7041,9 +6732,29 @@
       "module": "flighthq.types.Camera2D"
     },
     {
+      "declarations": 5,
+      "diagnostics": [],
+      "module": "flighthq.types.Camera3D"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.Camera3DOptions"
+    },
+    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.CameraMotionBlurEffect"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.CanvasEffectSourceMode"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.CanvasImageSourceKind"
     },
     {
       "declarations": 1,
@@ -7089,6 +6800,21 @@
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types.CanvasShapeRegistry"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.CanvasTextInputOverlay"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.CanvasTextShaperBackend"
+    },
+    {
+      "declarations": 50,
+      "diagnostics": [],
+      "module": "flighthq.types.CapacitorApi"
     },
     {
       "declarations": 2,
@@ -7169,6 +6895,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.ClockOptions"
+    },
+    {
+      "declarations": 4,
+      "diagnostics": [],
+      "module": "flighthq.types.CocosPlistSchema"
     },
     {
       "declarations": 9,
@@ -7333,6 +7064,11 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.DirectionalLightOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.DisplacementEffect"
     },
     {
@@ -7351,6 +7087,11 @@
       "module": "flighthq.types.DisplayObjectInteractionSignals"
     },
     {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.DisplayObjectRenderBlankReason"
+    },
+    {
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types.DisplayObjectRenderer"
@@ -7358,7 +7099,17 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.DisplayObjectRenderExplanation"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.DissolveModifier"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.DissolveModifierOptions"
     },
     {
       "declarations": 1,
@@ -7369,6 +7120,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.DomBlendModeFidelity"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.DomImageSourceKind"
     },
     {
       "declarations": 1,
@@ -7384,6 +7140,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.DomStageRectangle"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.DomTextInputOverlay"
     },
     {
       "declarations": 1,
@@ -7411,6 +7172,16 @@
       "module": "flighthq.types.EffectSourceMode"
     },
     {
+      "declarations": 36,
+      "diagnostics": [],
+      "module": "flighthq.types.ElectronApi"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.ElectronBackendOptions"
+    },
+    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.EmissiveMaterial"
@@ -7419,6 +7190,11 @@
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types.EmissiveModifier"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.EmissiveModifierOptions"
     },
     {
       "declarations": 4,
@@ -7433,7 +7209,17 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.EnvironmentOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.EnvReflectModifier"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.EnvReflectModifierOptions"
     },
     {
       "declarations": 1,
@@ -7444,6 +7230,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.ExposureAdjustment"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.FileLogSink"
     },
     {
       "declarations": 9,
@@ -7471,6 +7262,11 @@
       "module": "flighthq.types.Flow"
     },
     {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.FlyCameraController"
+    },
+    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.FocusEventData"
@@ -7484,6 +7280,11 @@
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types.FogModifier"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.FogModifierOptions"
     },
     {
       "declarations": 2,
@@ -7556,6 +7357,11 @@
       "module": "flighthq.types.GlCapabilities"
     },
     {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.types.GlClassicProgram"
+    },
+    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.GlColorLutTextureCache"
@@ -7588,6 +7394,16 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.GlCustomMaterialShaderSource"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.GlDebugProgram"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.GlDepthFuncKind"
     },
     {
@@ -7608,12 +7424,37 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.GlLitProgram"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.GlMatcapProgram"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.GlMaterialRenderer"
     },
     {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.GlMeshMaterialRenderer"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.GlMeshProgram"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.GlModifierSnippet"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.GlPbrProgram"
     },
     {
       "declarations": 4,
@@ -7643,6 +7484,21 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.GlRichTextOverlay"
+    },
+    {
+      "declarations": 5,
+      "diagnostics": [],
+      "module": "flighthq.types.GlSceneRuntime"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.GlShadedProgram"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.GlShader"
     },
     {
@@ -7654,6 +7510,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.GlShapeMesh"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.GlShapeMeshBinding"
     },
     {
       "declarations": 1,
@@ -7676,9 +7537,34 @@
       "module": "flighthq.types.GlTextureWrapKind"
     },
     {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.types.GltfExtension"
+    },
+    {
+      "declarations": 27,
+      "diagnostics": [],
+      "module": "flighthq.types.GltfSchema"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.GlToonProgram"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.GlUnlitProgram"
+    },
+    {
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types.GlVelocityWriter"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.GlWireframeProgram"
     },
     {
       "declarations": 1,
@@ -7781,6 +7667,11 @@
       "module": "flighthq.types.HemisphereLight"
     },
     {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.HemisphereLightOptions"
+    },
+    {
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types.HitTestFunction"
@@ -7789,6 +7680,16 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.HitTestResult"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.HslColor"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.HsvColor"
     },
     {
       "declarations": 3,
@@ -7839,6 +7740,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.ImageResourceCompressed"
+    },
+    {
+      "declarations": 8,
+      "diagnostics": [],
+      "module": "flighthq.types.ImageResourceReference"
     },
     {
       "declarations": 1,
@@ -7899,6 +7805,16 @@
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types.InstancedMesh"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.InteractionConnectGuard"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.InteractionHitEligibility"
     },
     {
       "declarations": 7,
@@ -7984,6 +7900,16 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.LensFlareEffect"
+    },
+    {
+      "declarations": 4,
+      "diagnostics": [],
+      "module": "flighthq.types.LibgdxAtlasSchema"
+    },
+    {
+      "declarations": 6,
+      "diagnostics": [],
+      "module": "flighthq.types.LibgdxParticleSchema"
     },
     {
       "declarations": 5,
@@ -8086,6 +8012,11 @@
       "module": "flighthq.types.Matrix4"
     },
     {
+      "declarations": 4,
+      "diagnostics": [],
+      "module": "flighthq.types.Md5Schema"
+    },
+    {
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types.MediaChannelSignals"
@@ -8099,6 +8030,11 @@
       "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.types.MediaSession"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.MemoryLogSink"
     },
     {
       "declarations": 4,
@@ -8128,12 +8064,27 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.MeshGeometryFromAttributesOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.MeshGeometryOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.MeshMorphBindPose"
     },
     {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.MeshSkinBindPose"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.MeshTriangleVertexIndices"
     },
     {
       "declarations": 1,
@@ -8148,7 +8099,17 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.ModifierDefinition"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.ModifierKind"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.ModifierRegistry"
     },
     {
       "declarations": 1,
@@ -8241,6 +8202,21 @@
       "module": "flighthq.types.Obb"
     },
     {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.ObjSchema"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.OrbitCameraController"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.OrthographicProjectionOptions"
+    },
+    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.OuterGlowEffect"
@@ -8281,14 +8257,24 @@
       "module": "flighthq.types.ParticleConfigIssue"
     },
     {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.ParticleConfigParse"
+    },
+    {
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.types.ParticleCurve"
     },
     {
+      "declarations": 6,
+      "diagnostics": [],
+      "module": "flighthq.types.ParticleDesignerSchema"
+    },
+    {
       "declarations": 3,
       "diagnostics": [],
-      "module": "flighthq.types.ParticleEmitter"
+      "module": "flighthq.types.ParticleEmitter2D"
     },
     {
       "declarations": 2,
@@ -8323,6 +8309,11 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.ParticleFormatCodec"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.ParticleFormatKind"
     },
     {
@@ -8344,6 +8335,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.ParticleObjectsUpdateOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.ParticleSerializeResult"
     },
     {
       "declarations": 2,
@@ -8408,6 +8404,11 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.PerspectiveProjectionOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.PhongMaterial"
     },
     {
@@ -8424,6 +8425,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.PixelOrder"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.PixiParseResult"
     },
     {
       "declarations": 2,
@@ -8459,6 +8465,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.PointLight"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.PointLightOptions"
     },
     {
       "declarations": 1,
@@ -8509,6 +8520,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.RandomSource"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.RateLimitedLogSink"
     },
     {
       "declarations": 2,
@@ -8606,6 +8622,11 @@
       "module": "flighthq.types.RenderProxyResolver"
     },
     {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.RenderProxyVisitor"
+    },
+    {
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.types.RenderQueue"
@@ -8624,6 +8645,11 @@
       "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.types.RenderTarget"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.RenderTargetSizeOptions"
     },
     {
       "declarations": 4,
@@ -8691,6 +8717,11 @@
       "module": "flighthq.types.RimModifier"
     },
     {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.RimModifierOptions"
+    },
+    {
       "declarations": 4,
       "diagnostics": [],
       "module": "flighthq.types.Sampler"
@@ -8731,6 +8762,11 @@
       "module": "flighthq.types.SceneAnimationTarget"
     },
     {
+      "declarations": 9,
+      "diagnostics": [],
+      "module": "flighthq.types.SceneDocument"
+    },
+    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.SceneHit"
@@ -8741,7 +8777,7 @@
       "module": "flighthq.types.SceneLightBlock"
     },
     {
-      "declarations": 1,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types.SceneLights"
     },
@@ -8763,6 +8799,11 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.ScenePickOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.SceneRenderList"
     },
     {
@@ -8771,9 +8812,9 @@
       "module": "flighthq.types.SceneRenderProxy"
     },
     {
-      "declarations": 5,
+      "declarations": 17,
       "diagnostics": [],
-      "module": "flighthq.types.SceneResourceRef"
+      "module": "flighthq.types.SceneResources"
     },
     {
       "declarations": 2,
@@ -8831,6 +8872,11 @@
       "module": "flighthq.types.ShadedMaterial"
     },
     {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.ShadedMaterialOptions"
+    },
+    {
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.types.Shape"
@@ -8849,6 +8895,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.ShapeFillRegion"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.types.ShapeJson"
     },
     {
       "declarations": 4,
@@ -8923,6 +8974,11 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.SignalThrottleOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.Skeleton3D"
     },
     {
@@ -8939,6 +8995,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.Skin"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.SkinInfluence"
     },
     {
       "declarations": 1,
@@ -8981,9 +9042,24 @@
       "module": "flighthq.types.SphereCollider"
     },
     {
+      "declarations": 6,
+      "diagnostics": [],
+      "module": "flighthq.types.SpineParticleSchema"
+    },
+    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.SpotLight"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.SpotLightConeAngles"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.SpotLightOptions"
     },
     {
       "declarations": 4,
@@ -9048,6 +9124,11 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.SpritesheetParseOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.SpritesheetPlayer"
     },
     {
@@ -9088,6 +9169,11 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.StageFitContext"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.StageQuality"
     },
     {
@@ -9104,6 +9190,16 @@
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types.StandardPbrMaterial"
+    },
+    {
+      "declarations": 6,
+      "diagnostics": [],
+      "module": "flighthq.types.StarlingPexSchema"
+    },
+    {
+      "declarations": 4,
+      "diagnostics": [],
+      "module": "flighthq.types.StarlingSchema"
     },
     {
       "declarations": 7,
@@ -9143,7 +9239,42 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.SurfaceBevelOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.SurfaceBevelType"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.SurfaceBoxBlurOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.SurfaceCompositeMode"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.SurfaceConvolutionOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.SurfaceDisplacementMapMode"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.SurfaceDisplacementMapOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.SurfaceDropShadowOptions"
     },
     {
       "declarations": 1,
@@ -9158,7 +9289,32 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.SurfaceGlowOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.SurfaceGradientBevelOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.SurfaceGradientGlowOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.SurfaceHistogram"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.SurfaceInnerGlowOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.SurfaceInnerShadowOptions"
     },
     {
       "declarations": 2,
@@ -9183,12 +9339,37 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.SurfaceResizeOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.SurfaceShadowBlurOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.SurfaceSharpenOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.TaaEffect"
+    },
+    {
+      "declarations": 40,
+      "diagnostics": [],
+      "module": "flighthq.types.TauriApi"
     },
     {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.TextAutoSize"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.TextBoundsSpec"
     },
     {
       "declarations": 1,
@@ -9293,6 +9474,11 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flighthq.types.TextShaperCache"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flighthq.types.TextShaperOptions"
     },
     {
@@ -9311,14 +9497,34 @@
       "module": "flighthq.types.TextureAtlas"
     },
     {
+      "declarations": 10,
+      "diagnostics": [],
+      "module": "flighthq.types.TextureAtlasAsepriteSchema"
+    },
+    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.TextureAtlasFormatKind"
     },
     {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.TextureAtlasPackerParseOptions"
+    },
+    {
+      "declarations": 10,
+      "diagnostics": [],
+      "module": "flighthq.types.TextureAtlasPackerSchema"
+    },
+    {
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types.TextureAtlasRegion"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.TextureAtlasStarlingParseOptions"
     },
     {
       "declarations": 1,
@@ -9346,6 +9552,11 @@
       "module": "flighthq.types.TextureKind"
     },
     {
+      "declarations": 12,
+      "diagnostics": [],
+      "module": "flighthq.types.TexturePackerSchema"
+    },
+    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.TextureUvTransform"
@@ -9354,6 +9565,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.TextVerticalAlign"
+    },
+    {
+      "declarations": 22,
+      "diagnostics": [],
+      "module": "flighthq.types.ThreeDsSchema"
     },
     {
       "declarations": 1,
@@ -9379,6 +9595,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.TiledObject"
+    },
+    {
+      "declarations": 4,
+      "diagnostics": [],
+      "module": "flighthq.types.TiledParseOptions"
     },
     {
       "declarations": 2,
@@ -9456,6 +9677,11 @@
       "module": "flighthq.types.ToonModifier"
     },
     {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.ToonModifierOptions"
+    },
+    {
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types.Transform2D"
@@ -9511,9 +9737,19 @@
       "module": "flighthq.types.TweenPropertyDetail"
     },
     {
-      "declarations": 172,
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.TweenStaggerOptions"
+    },
+    {
+      "declarations": 193,
       "diagnostics": [],
       "module": "flighthq.types.Types"
+    },
+    {
+      "declarations": 18,
+      "diagnostics": [],
+      "module": "flighthq.types.UnitySchema"
     },
     {
       "declarations": 1,
@@ -9556,6 +9792,11 @@
       "module": "flighthq.types.VertexDisplaceModifier"
     },
     {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.VertexDisplaceModifierOptions"
+    },
+    {
       "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.types.Video"
@@ -9571,7 +9812,7 @@
       "module": "flighthq.types.VideoTexture"
     },
     {
-      "declarations": 1,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types.Viewport"
     },
@@ -9656,6 +9897,11 @@
       "module": "flighthq.types.WebcamStreamOptions"
     },
     {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.WebcamStreamRuntime"
+    },
+    {
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types.WellKnownMenuItemRole"
@@ -9666,14 +9912,44 @@
       "module": "flighthq.types.WgpuAdapterCapabilities"
     },
     {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.types.WgpuClassicPipeline"
+    },
+    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.WgpuColorLutTextureCache"
     },
     {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.WgpuDebugPipeline"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.WgpuDualSourceEffectPipeline"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.WgpuEffectBlendMode"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.WgpuEffectPipeline"
+    },
+    {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.WgpuFullscreenPipeline"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.WgpuMatcapPipeline"
     },
     {
       "declarations": 1,
@@ -9684,6 +9960,21 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.WgpuMeshMaterialRenderer"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.WgpuMeshPipeline"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.WgpuPbrPipeline"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.WgpuQuadBatchResources"
     },
     {
       "declarations": 3,
@@ -9716,9 +10007,39 @@
       "module": "flighthq.types.WgpuRenderTarget"
     },
     {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.WgpuRichTextOverlay"
+    },
+    {
+      "declarations": 5,
+      "diagnostics": [],
+      "module": "flighthq.types.WgpuSceneRuntime"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.WgpuShapeMesh"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.WgpuToonPipeline"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.WgpuUnlitPipeline"
+    },
+    {
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.types.WgpuVelocityWriter"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flighthq.types.WgpuWireframePipeline"
     },
     {
       "declarations": 1,
@@ -9734,6 +10055,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.types.WireframeMaterial"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.types.XmlElement"
     },
     {
       "declarations": 27,
@@ -9801,7 +10127,7 @@
       "module": "flighthq.webcam.Webcam"
     },
     {
-      "declarations": 3,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.webcam.WebcamStream"
     },
@@ -9811,7 +10137,7 @@
       "module": "flighthq.xml.Xml"
     },
     {
-      "declarations": 10,
+      "declarations": 9,
       "diagnostics": [],
       "module": "flighthq.xml.XmlParse"
     },

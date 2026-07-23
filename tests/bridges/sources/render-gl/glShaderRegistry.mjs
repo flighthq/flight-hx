@@ -6,5 +6,3 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const registerGlBitmapShader = api.registerGlBitmapShader;
-export { GlBitmapShader } from './glShaderTypes.mjs';
-export { GlShaderLocations } from './glShaderTypes.mjs';

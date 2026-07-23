@@ -5,6 +5,8 @@ const api = compiled.flighthq.sceneFormats.Shared;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const buildEmbeddedImageResourceReference = api.buildEmbeddedImageResourceReference;
+export const buildExternalImageResourceReference = api.buildExternalImageResourceReference;
 export const CANONICAL_FLOATS_PER_VERTEX = api.CANONICAL_FLOATS_PER_VERTEX;
 export const CANONICAL_LAYOUT = api.CANONICAL_LAYOUT;
 export const convertPositionsZUpToYUp = api.convertPositionsZUpToYUp;

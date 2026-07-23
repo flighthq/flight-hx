@@ -9,6 +9,3 @@ export const computeTextLayout = api.computeTextLayout;
 export const createTextLayoutResult = api.createTextLayoutResult;
 export const isTextLayoutTruncated = api.isTextLayoutTruncated;
 export const TEXT_LAYOUT_GUTTER = api.TEXT_LAYOUT_GUTTER;
-export { TextLayoutParams } from '@flighthq/types';
-export { TextLayoutResult } from '@flighthq/types';
-export { TextMeasureFunction } from '@flighthq/types';

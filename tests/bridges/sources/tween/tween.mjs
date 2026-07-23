@@ -21,8 +21,3 @@ export const resumeTweens = api.resumeTweens;
 export const stopAllTweens = api.stopAllTweens;
 export const stopTween = api.stopTween;
 export const stopTweens = api.stopTweens;
-export { NumericProps } from '@flighthq/types';
-export { StopTweenOptions } from '@flighthq/types';
-export { Tween } from '@flighthq/types';
-export { TweenManager } from '@flighthq/types';
-export { TweenOptions } from '@flighthq/types';

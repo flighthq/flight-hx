@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const addMeshGeometrySubset = api.addMeshGeometrySubset;
 export const getMeshGeometrySubsetTriangleCount = api.getMeshGeometrySubsetTriangleCount;
+export const getMeshGeometryTriangleSubsetIndex = api.getMeshGeometryTriangleSubsetIndex;
 export const setMeshGeometrySubsets = api.setMeshGeometrySubsets;

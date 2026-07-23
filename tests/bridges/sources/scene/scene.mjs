@@ -6,4 +6,3 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createScene = api.createScene;
-export { Scene } from '@flighthq/types';

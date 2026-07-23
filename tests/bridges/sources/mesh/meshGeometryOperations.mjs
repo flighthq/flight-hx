@@ -7,5 +7,6 @@ __syncDependencies();
 
 export const createMeshGeometryFromAttributes = api.createMeshGeometryFromAttributes;
 export const getMeshGeometryTriangleCount = api.getMeshGeometryTriangleCount;
+export const getMeshGeometryTriangleVertexIndices = api.getMeshGeometryTriangleVertexIndices;
 export const mergeMeshGeometries = api.mergeMeshGeometries;
 export const validateMeshGeometry = api.validateMeshGeometry;

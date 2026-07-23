@@ -2,6 +2,12 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const createSceneHit = compiled.flighthq.picking.Picking.createSceneHit;
+export const getSceneHitMaterial = compiled.flighthq.picking.Picking.getSceneHitMaterial;
+export const getSceneHitSubsetIndex = compiled.flighthq.picking.Picking.getSceneHitSubsetIndex;
+export const getSceneHitUv0 = compiled.flighthq.picking.Picking.getSceneHitUv0;
+export const getSceneHitVertexNormal = compiled.flighthq.picking.Picking.getSceneHitVertexNormal;
+export const getSceneHitVertexTangent = compiled.flighthq.picking.Picking.getSceneHitVertexTangent;
+export const isSceneHitFrontFacing = compiled.flighthq.picking.Picking.isSceneHitFrontFacing;
 export const pickScene = compiled.flighthq.picking.Picking.pickScene;
 export const pickSceneAll = compiled.flighthq.picking.Picking.pickSceneAll;
 export const pickSceneAllWithRay3D = compiled.flighthq.picking.Picking.pickSceneAllWithRay3D;

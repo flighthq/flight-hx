@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const captureMeshSkinBindPose = api.captureMeshSkinBindPose;
 export const skinMeshGeometry = api.skinMeshGeometry;
+export const updateMeshSkinBindPoseDeformInput = api.updateMeshSkinBindPoseDeformInput;

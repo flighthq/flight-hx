@@ -7,7 +7,7 @@ __syncDependencies();
 
 export const createGlVelocityTarget = api.createGlVelocityTarget;
 export const defaultGlDisplayObjectVelocityWriter = api.defaultGlDisplayObjectVelocityWriter;
-export const defaultGlParticleEmitterVelocityWriter = api.defaultGlParticleEmitterVelocityWriter;
+export const defaultGlParticleEmitter2DVelocityWriter = api.defaultGlParticleEmitter2DVelocityWriter;
 export const defaultGlQuadBatchVelocityWriter = api.defaultGlQuadBatchVelocityWriter;
 export const drawGlVelocityQuad = api.drawGlVelocityQuad;
 export const getGlVelocityWriter = api.getGlVelocityWriter;

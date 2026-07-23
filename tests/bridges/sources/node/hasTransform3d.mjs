@@ -7,5 +7,3 @@ __syncDependencies();
 
 export const initTransform3DRuntimeTrait = api.initTransform3DRuntimeTrait;
 export const initTransform3DTrait = api.initTransform3DTrait;
-export { HasTransform3D } from '@flighthq/types';
-export { HasTransform3DRuntime } from '@flighthq/types';

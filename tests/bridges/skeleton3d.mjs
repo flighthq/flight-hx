@@ -3,6 +3,7 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const captureMeshSkinBindPose = compiled.flighthq.skeleton3d.Skeleton3d.captureMeshSkinBindPose;
 export const cloneSkeleton3D = compiled.flighthq.skeleton3d.Skeleton3d.cloneSkeleton3D;
+export const cloneSkeleton3DJointHierarchy = compiled.flighthq.skeleton3d.Skeleton3d.cloneSkeleton3DJointHierarchy;
 export const computeSkeleton3DJointMatrices = compiled.flighthq.skeleton3d.Skeleton3d.computeSkeleton3DJointMatrices;
 export const createSkeleton3D = compiled.flighthq.skeleton3d.Skeleton3d.createSkeleton3D;
 export const disposeSkeleton3D = compiled.flighthq.skeleton3d.Skeleton3d.disposeSkeleton3D;
@@ -15,5 +16,7 @@ export const getSkeleton3DJointWorldMatrixByName = compiled.flighthq.skeleton3d.
 export const setSkeleton3DBindPose = compiled.flighthq.skeleton3d.Skeleton3d.setSkeleton3DBindPose;
 export const skinMeshGeometry = compiled.flighthq.skeleton3d.Skeleton3d.skinMeshGeometry;
 export const skinVertices = compiled.flighthq.skeleton3d.Skeleton3d.skinVertices;
+export const updateMeshDeformation = compiled.flighthq.skeleton3d.Skeleton3d.updateMeshDeformation;
 export const updateMeshSkin = compiled.flighthq.skeleton3d.Skeleton3d.updateMeshSkin;
+export const updateMeshSkinBindPoseDeformInput = compiled.flighthq.skeleton3d.Skeleton3d.updateMeshSkinBindPoseDeformInput;
 export const validateSkeleton3D = compiled.flighthq.skeleton3d.Skeleton3d.validateSkeleton3D;

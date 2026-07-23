@@ -6,6 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const cloneSkeleton3D = api.cloneSkeleton3D;
+export const cloneSkeleton3DJointHierarchy = api.cloneSkeleton3DJointHierarchy;
 export const computeSkeleton3DJointMatrices = api.computeSkeleton3DJointMatrices;
 export const createSkeleton3D = api.createSkeleton3D;
 export const disposeSkeleton3D = api.disposeSkeleton3D;
