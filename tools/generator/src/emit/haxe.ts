@@ -125,7 +125,7 @@ function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' 
   }
   if (declaration.haxeBody !== undefined) {
     bodyLines.push(...emitParameterInitializers(declaration.parameters));
-    bodyLines.push(...declaration.haxeBody.replace(/\r\n/gu, '\n').split('\n'));
+    bodyLines.push(...splitLines(declaration.haxeBody));
   } else {
     bodyLines.push(
       ...emitFunctionBody(declaration.body, declaration.parameters, declaration.returns, declaration.async),
@@ -236,11 +236,13 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
       const mutable = field.mutable ? 'var' : 'final';
       const initializer =
         field.initializer && (!declaration.extends || field.static) ? ` = ${emitExpression(field.initializer)}` : '';
-      lines.push(`  ${fieldAccess}${static_}${mutable} ${safeName(field.name)}:${emitType(field.type)}${initializer};`);
+      lines.push(
+        ...indent([`${fieldAccess}${static_}${mutable} ${safeName(field.name)}:${emitType(field.type)}${initializer};`]),
+      );
     }
     lines.push(`  public function new(${emitParameters(declaration.constructorParameters)}):Void {`);
     for (const initializer of emitParameterInitializers(declaration.constructorParameters)) {
-      lines.push(`    ${initializer}`);
+      lines.push(...indent(indent([initializer])));
     }
     const deferredInitializers = declaration.extends
       ? declaration.fields.filter((field) => !field.static && field.initializer)
@@ -250,14 +252,14 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
       lines.push(...indent(indent(emitStatement(statement))));
       if (!initialized && isSuperCall(statement)) {
         for (const field of deferredInitializers) {
-          lines.push(`    this.${safeName(field.name)} = ${emitExpression(field.initializer!)};`);
+          lines.push(...indent(indent([`this.${safeName(field.name)} = ${emitExpression(field.initializer!)};`])));
         }
         initialized = true;
       }
     }
     if (!initialized) {
       for (const field of deferredInitializers) {
-        lines.push(`    this.${safeName(field.name)} = ${emitExpression(field.initializer!)};`);
+        lines.push(...indent(indent([`this.${safeName(field.name)} = ${emitExpression(field.initializer!)};`])));
       }
     }
     lines.push('  }');
@@ -300,7 +302,11 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
           : member.initializer
             ? emitExpression(member.initializer)
             : String(nextValue);
-      lines.push(`  public static inline var ${safeName(member.name)}:${safeName(declaration.name)} = ${initializer};`);
+      lines.push(
+        ...indent([
+          `public static inline var ${safeName(member.name)}:${safeName(declaration.name)} = ${initializer};`,
+        ]),
+      );
       if (member.initializer?.kind === 'literal' && typeof member.initializer.value === 'number') {
         nextValue = member.initializer.value + 1;
       } else {
@@ -344,7 +350,7 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
   }
   if (declaration.haxeBody !== undefined) {
     bodyLines.push(...emitParameterInitializers(declaration.parameters));
-    bodyLines.push(...declaration.haxeBody.replace(/\r\n/gu, '\n').split('\n'));
+    bodyLines.push(...splitLines(declaration.haxeBody));
   } else {
     bodyLines.push(
       ...emitFunctionBody(declaration.body, declaration.parameters, declaration.returns, declaration.async),
@@ -474,12 +480,14 @@ function emitStatement(statement: IrStatement): string[] {
     case 'for': {
       const lines = ['{'];
       if (Array.isArray(statement.initializer)) {
-        for (const item of statement.initializer) lines.push(`  ${emitVariable(item, false)};`);
+        for (const item of statement.initializer) lines.push(...indent([`${emitVariable(item, false)};`]));
       } else if (statement.initializer) {
-        lines.push(`  ${emitExpression(statement.initializer)};`);
+        lines.push(...indent([`${emitExpression(statement.initializer)};`]));
       }
       lines.push(
-        `  while (${statement.condition ? `_Runtime.truthy(${emitExpression(statement.condition)})` : 'true'}) {`,
+        ...indent([
+          `while (${statement.condition ? `_Runtime.truthy(${emitExpression(statement.condition)})` : 'true'}) {`,
+        ]),
       );
       const bodyStatements = statement.body.kind === 'block' ? statement.body.statements : [statement.body];
       const previousContinueIncrement = currentContinueIncrement;
@@ -489,7 +497,7 @@ function emitStatement(statement: IrStatement): string[] {
       } finally {
         currentContinueIncrement = previousContinueIncrement;
       }
-      if (statement.increment) lines.push(`    ${emitExpression(statement.increment)};`);
+      if (statement.increment) lines.push(...indent(indent([`${emitExpression(statement.increment)};`])));
       lines.push('  }', '}');
       return lines;
     }
@@ -499,20 +507,29 @@ function emitStatement(statement: IrStatement): string[] {
       const lines = statement.async
         ? [
             '{',
-            `  var ${iterator}:Dynamic = _Runtime.asyncIterator(${emitExpression(statement.iterable)});`,
-            '  while (true) {',
-            `    var ${step}:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(${iterator}, 'next', cast ([] : Array<Dynamic>)));`,
-            `    if (_Runtime.truthy(_Runtime.field(${step}, 'done'))) break;`,
-            `    var ${safeName(statement.variable)}:Dynamic = _Runtime.field(${step}, 'value');`,
+            ...indent([`var ${iterator}:Dynamic = _Runtime.asyncIterator(${emitExpression(statement.iterable)});`]),
+            ...indent(['while (true) {']),
+            ...indent(
+              indent([
+                `var ${step}:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(${iterator}, 'next', cast ([] : Array<Dynamic>)));`,
+                `if (_Runtime.truthy(_Runtime.field(${step}, 'done'))) break;`,
+                `var ${safeName(statement.variable)}:Dynamic = _Runtime.field(${step}, 'value');`,
+              ]),
+            ),
           ]
         : [`for (${safeName(statement.variable)} in _Runtime.iterable(${emitExpression(statement.iterable)})) {`];
-      const bodyIndent = statement.async ? '  ' : '';
-      for (const binding of statement.bindings) lines.push(`${bodyIndent}  ${emitVariable(binding, false)};`);
+      for (const binding of statement.bindings) {
+        const bindingLines = indent([`${emitVariable(binding, false)};`]);
+        lines.push(...(statement.async ? indent(bindingLines) : bindingLines));
+      }
       const body = statement.body.kind === 'block' ? statement.body.statements : [statement.body];
       const previousContinueIncrement = currentContinueIncrement;
       currentContinueIncrement = undefined;
       try {
-        for (const item of body) lines.push(...indent(emitStatement(item)).map((line) => `${bodyIndent}${line}`));
+        for (const item of body) {
+          const bodyLines = indent(emitStatement(item));
+          lines.push(...(statement.async ? indent(bodyLines) : bodyLines));
+        }
       } finally {
         currentContinueIncrement = previousContinueIncrement;
       }
@@ -543,7 +560,7 @@ function emitStatement(statement: IrStatement): string[] {
       ];
     }
     case 'switch': {
-      const lines = ['{', `  var __switchValue = ${emitExpression(statement.expression)};`];
+      const lines = ['{', ...indent([`var __switchValue = ${emitExpression(statement.expression)};`])];
       const grouped: Array<{ expressions: IrExpression[]; statements: IrStatement[] }> = [];
       let pending: IrExpression[] = [];
       for (const case_ of statement.cases) {
@@ -559,7 +576,7 @@ function emitStatement(statement: IrStatement): string[] {
           case_.expressions.length > 0
             ? `if (${case_.expressions.map((expression) => `__switchValue == ${emitExpression(expression)}`).join(' || ')})`
             : '';
-        lines.push(`  ${prefix}${condition} {`);
+        lines.push(...indent([`${prefix}${condition} {`]));
         for (const item of case_.statements) lines.push(...indent(indent(emitStatement(item))));
         lines.push('  }');
       });
@@ -1265,7 +1282,11 @@ function quote(value: string): string {
 }
 
 function indent(lines: string[]): string[] {
-  return lines.map((line) => `  ${line}`);
+  return lines.flatMap((line) => splitLines(line).map((physicalLine) => `  ${physicalLine}`));
+}
+
+function splitLines(value: string): string[] {
+  return value.split(/\r\n?|\n/gu);
 }
 
 function safeName(name: string): string {
