@@ -8,9 +8,12 @@ import flighthq.loader.ResourceLoader.queueResourceLoad;
 import flighthq.sceneResources.GetSceneResourceTextures.getSceneResourceTextures;
 import flighthq.sceneResources.SceneResourceResolver.SceneResourceInFlight;
 import flighthq.signals.Emitter.emitSignal;
+import flighthq.types.ImageResource;
 import flighthq.types.ResourceResolutionState;
+import flighthq.types.SceneNode;
 import flighthq.types.SceneResourceRef;
 import flighthq.types.SceneResourceRef.SceneResourceRefKind;
+import flighthq.types.Texture;
 import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
 import flighthq.types._internal._SceneResourceRefValues.SceneResourceRefKindValue;
 
@@ -18,7 +21,7 @@ typedef ResolveSceneResourcesOptions = { @:optional var priority:Dynamic; @:opti
 
 @:expose("flighthq.sceneResources.ResolveSceneResources")
 class ResolveSceneResources {
-  public static function resolveOneSceneResourceTexture(resolver:SceneResourceResolver, ref:SceneResourceRef, signal:Dynamic):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function resolveOneSceneResourceTexture(resolver:SceneResourceResolver, ref:SceneResourceRef, signal:Dynamic):flighthq._internal._Promise<Null<ImageResource>> {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(ref, 'kind'), SceneResourceRefKindValue.Embedded))) {
       return cast _Runtime.callValue(loadImageResourceFromBytes, cast ([_Runtime.field(ref, 'bytes'), _Runtime.coalesce(_Runtime.field(ref, 'mimeType'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), signal] : Array<Dynamic>));
     }
@@ -26,8 +29,8 @@ class ResolveSceneResources {
     return cast null;
   }
 
-  public static function resolveSceneResources(scene:Dynamic, resolver:SceneResourceResolver, ?options:ResolveSceneResourcesOptions):Void {
-    var pending:Array<Dynamic> = cast _Runtime.UNDEFINED;
+  public static function resolveSceneResources(scene:SceneNode, resolver:SceneResourceResolver, ?options:ResolveSceneResourcesOptions):Void {
+    var pending:Array<Texture> = cast _Runtime.UNDEFINED;
     var working:Dynamic = cast _Runtime.UNDEFINED;
     pending = cast ([] : Array<Dynamic>);
     _Runtime.callValue(getSceneResourceTextures, cast ([scene, _Runtime.field(resolver, 'registry'), pending] : Array<Dynamic>));
@@ -60,7 +63,7 @@ class ResolveSceneResources {
     }
   }
 
-  public static function finishSceneResourceResolution__resolveSceneResources(resolver:SceneResourceResolver, texture:Dynamic, ref:SceneResourceRef, entry:SceneResourceInFlight, image:Null<Dynamic>):Void {
+  public static function finishSceneResourceResolution__resolveSceneResources(resolver:SceneResourceResolver, texture:Texture, ref:SceneResourceRef, entry:SceneResourceInFlight, image:Null<ImageResource>):Void {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(resolver, 'inFlight'), 'get', cast ([texture] : Array<Dynamic>)), entry))) { return; }
     _Runtime.callProperty(_Runtime.field(resolver, 'inFlight'), 'delete', cast ([texture] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(image, null))) {
@@ -73,7 +76,7 @@ class ResolveSceneResources {
     _Runtime.callValue(ResolveSceneResources.emitSceneResourceEvent__resolveSceneResources, cast ([resolver, texture, ref, true] : Array<Dynamic>));
   }
 
-  public static function failSceneResourceResolution__resolveSceneResources(resolver:SceneResourceResolver, texture:Dynamic, ref:SceneResourceRef, entry:SceneResourceInFlight):Void {
+  public static function failSceneResourceResolution__resolveSceneResources(resolver:SceneResourceResolver, texture:Texture, ref:SceneResourceRef, entry:SceneResourceInFlight):Void {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(resolver, 'inFlight'), 'get', cast ([texture] : Array<Dynamic>)), entry))) { return; }
     _Runtime.callProperty(_Runtime.field(resolver, 'inFlight'), 'delete', cast ([texture] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.field(_Runtime.field(_Runtime.field(entry, 'controller'), 'signal'), 'aborted'))) { return; }
@@ -81,7 +84,7 @@ class ResolveSceneResources {
     _Runtime.callValue(ResolveSceneResources.emitSceneResourceEvent__resolveSceneResources, cast ([resolver, texture, ref, false] : Array<Dynamic>));
   }
 
-  public static function emitSceneResourceEvent__resolveSceneResources(resolver:SceneResourceResolver, texture:Dynamic, ref:SceneResourceRef, resolved:Bool):Void {
+  public static function emitSceneResourceEvent__resolveSceneResources(resolver:SceneResourceResolver, texture:Texture, ref:SceneResourceRef, resolved:Bool):Void {
     var signals:Dynamic = cast _Runtime.UNDEFINED;
     var event:Dynamic = cast _Runtime.UNDEFINED;
     signals = _Runtime.field(resolver, 'signals');

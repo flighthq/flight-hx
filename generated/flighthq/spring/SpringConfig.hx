@@ -4,15 +4,16 @@ package flighthq.spring;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.math.Constants.TAU;
+import flighthq.types.Spring.SpringConfig;
 
 @:expose("flighthq.spring.SpringConfig")
 class SpringConfig {
-  public static function createSpringConfig(frequency:Float, dampingRatio:Float):Dynamic {
+  public static function createSpringConfig(frequency:Float, dampingRatio:Float):flighthq.types.Spring.SpringConfig {
     return cast { dampingRatio: dampingRatio, frequency: frequency };
     return cast null;
   }
 
-  public static function createSpringConfigFromPhysical(stiffness:Float, damping:Float, mass:Float):Dynamic {
+  public static function createSpringConfigFromPhysical(stiffness:Float, damping:Float, mass:Float):flighthq.types.Spring.SpringConfig {
     return cast { dampingRatio: (damping / (2.0 * _Runtime.callProperty(HxMath, 'sqrt', cast ([(stiffness * mass)] : Array<Dynamic>)))), frequency: (_Runtime.callProperty(HxMath, 'sqrt', cast ([(stiffness / mass)] : Array<Dynamic>)) / TAU) };
     return cast null;
   }

@@ -3,10 +3,11 @@ package flighthq.clock;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Clock;
 
 @:expose("flighthq.clock.GetClockParent")
 class GetClockParent {
-  public static function getClockParent(clock:Dynamic):Null<Dynamic> {
+  public static function getClockParent(clock:Clock):Null<Clock> {
     return cast _Runtime.field(clock, 'parent');
     return cast null;
   }

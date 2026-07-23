@@ -14,6 +14,10 @@ import flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget;
 import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
 import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderTarget;
+import flighthq.types.GlRenderTarget.GlRenderTargetPool;
+import flighthq.types.InnerShadowEffect;
 
 typedef InnerClipLocations__glInnerShadowEffect = GlFullscreenProgram;
 
@@ -23,7 +27,7 @@ class GlInnerShadowEffect {
 
   public static final clipShaders__glInnerShadowEffect:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  public static function applyInnerShadowEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
+  public static function applyInnerShadowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:InnerShadowEffect):Void {
     var descriptor:Dynamic = cast _Runtime.UNDEFINED;
     var s0:Dynamic = cast _Runtime.UNDEFINED;
     var s1:Dynamic = cast _Runtime.UNDEFINED;
@@ -43,8 +47,8 @@ class GlInnerShadowEffect {
     s0 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     s1 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     s2 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    src = (cast source : Dynamic);
-    dst = (cast dest : Dynamic);
+    src = (cast source : GlRenderTarget);
+    dst = (cast dest : GlRenderTarget);
     angle = ((_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0) * HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
     dx = (_Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>)) * distance);
@@ -71,10 +75,10 @@ class GlInnerShadowEffect {
   }
 
   public static final defaultGlInnerShadowEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyInnerShadowEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(applyInnerShadowEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : InnerShadowEffect)] : Array<Dynamic>));
   };
 
-  public static function applyGlInnerClipPass__glInnerShadowEffect(state:Dynamic, shadow:Dynamic, source:Dynamic, dest:Dynamic):Void {
+  public static function applyGlInnerClipPass__glInnerShadowEffect(state:GlRenderState, shadow:GlRenderTarget, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlInnerShadowEffect.getClipShader__glInnerShadowEffect, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(shadow, 'texture'), _Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -82,7 +86,7 @@ class GlInnerShadowEffect {
     }] : Array<Dynamic>));
   }
 
-  public static function getClipShader__glInnerShadowEffect(state:Dynamic):InnerClipLocations__glInnerShadowEffect {
+  public static function getClipShader__glInnerShadowEffect(state:GlRenderState):InnerClipLocations__glInnerShadowEffect {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callProperty(GlInnerShadowEffect.clipShaders__glInnerShadowEffect, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {

@@ -4,12 +4,13 @@ package flighthq.path;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
+import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
 @:expose("flighthq.path.DashPath")
 class DashPath {
-  public static function dashPath(source:Dynamic, dash:Array<Float>, dashOffset:Float, out:Dynamic, tolerance:Dynamic = 0.25):Void {
+  public static function dashPath(source:Path, dash:Array<Float>, dashOffset:Float, out:Path, tolerance:Dynamic = 0.25):Void {
     var totalDashLength:Dynamic = cast _Runtime.UNDEFINED;
     var contours:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.setLength(_Runtime.field(out, 'commands'), 0.0);
@@ -26,7 +27,7 @@ class DashPath {
     }
   }
 
-  public static function applyDashToContour__dashPath(pts:Array<Float>, dash:Array<Float>, dashOffset:Float, totalDashLength:Float, out:Dynamic):Void {
+  public static function applyDashToContour__dashPath(pts:Array<Float>, dash:Array<Float>, dashOffset:Float, totalDashLength:Float, out:Path):Void {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     var dashIndex:Dynamic = cast _Runtime.UNDEFINED;
@@ -109,7 +110,7 @@ class DashPath {
     }
   }
 
-  public static function copyCommands__dashPath(source:Dynamic, out:Dynamic):Void {
+  public static function copyCommands__dashPath(source:Path, out:Path):Void {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(source, 'commands'), 'length'), '<'))) {

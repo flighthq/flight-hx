@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SceneHit = { var node:Dynamic; var distance:Float; var triangleIndex:Float; var u:Float; var v:Float; var w:Float; var pointX:Float; var pointY:Float; var pointZ:Float; var normalX:Float; var normalY:Float; var normalZ:Float; };
+typedef SceneHit = { var node:Mesh; var distance:Float; var triangleIndex:Float; var u:Float; var v:Float; var w:Float; var pointX:Float; var pointY:Float; var pointZ:Float; var normalX:Float; var normalY:Float; var normalZ:Float; };

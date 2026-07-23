@@ -3,10 +3,12 @@ package flighthq.displayobjectCanvas;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.CanvasRenderState;
+import flighthq.types.Matrix;
 
 @:expose("flighthq.displayobjectCanvas.CanvasTransform")
 class CanvasTransform {
-  public static function setCanvasTransform(state:Dynamic, context:Dynamic, transform:Dynamic):Void {
+  public static function setCanvasTransform(state:Dynamic, context:Dynamic, transform:Matrix):Void {
     if (_Runtime.truthy(_Runtime.field(state, 'roundPixels'))) {
       _Runtime.callProperty(context, 'setTransform', cast ([_Runtime.field(transform, 'a'), _Runtime.field(transform, 'b'), _Runtime.field(transform, 'c'), _Runtime.field(transform, 'd'), _Runtime.callProperty(HxMath, 'fround', cast ([_Runtime.field(transform, 'tx')] : Array<Dynamic>)), _Runtime.callProperty(HxMath, 'fround', cast ([_Runtime.field(transform, 'ty')] : Array<Dynamic>))] : Array<Dynamic>));
     } else {

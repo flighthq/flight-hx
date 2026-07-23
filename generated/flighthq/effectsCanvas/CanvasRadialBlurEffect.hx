@@ -5,14 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.passthroughCanvasEffectPass;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
+import flighthq.types.CanvasRenderTarget;
+import flighthq.types.RadialBlurEffect;
 
 @:expose("flighthq.effectsCanvas.CanvasRadialBlurEffect")
 class CanvasRadialBlurEffect {
-  public static function applyRadialBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
+  public static function applyRadialBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:RadialBlurEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
   public static final defaultCanvasRadialBlurEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyRadialBlurEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(applyRadialBlurEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : RadialBlurEffect)] : Array<Dynamic>));
   };
 }

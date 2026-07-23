@@ -12,9 +12,10 @@ import flighthq.particlesFormats.SpineSchema.SpineTintKeyframe;
 import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleCurve.ColorKeyframe;
 import flighthq.types.ParticleCurve.CurveKeyframe;
+import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
 
-typedef SpineParsed = { var config:Dynamic; var document:SpineParticleDocument; var warnings:Array<String>; };
+typedef SpineParsed = { var config:ParticleEmitterConfig; var document:SpineParticleDocument; var warnings:Array<String>; };
 
 @:expose("flighthq.particlesFormats.SpineParse")
 class SpineParse {
@@ -98,7 +99,7 @@ class SpineParse {
     return cast null;
   }
 
-  public static function rawToConfig__spineParse(raw:Dynamic):Dynamic {
+  public static function rawToConfig__spineParse(raw:Dynamic):ParticleEmitterConfig {
     var lifeLow:Dynamic = cast _Runtime.UNDEFINED;
     var lifeHigh:Dynamic = cast _Runtime.UNDEFINED;
     var angleLow:Dynamic = cast _Runtime.UNDEFINED;
@@ -221,7 +222,7 @@ class SpineParse {
     return cast null;
   }
 
-  public static function parseSpineParticle(json:String):Dynamic {
+  public static function parseSpineParticle(json:String):ParticleEmitterConfig {
     return cast _Runtime.callValue(SpineParse.rawToConfig__spineParse, cast ([_Runtime.callValue(SpineParse.parseSpineJson__spineParse, cast ([json] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }

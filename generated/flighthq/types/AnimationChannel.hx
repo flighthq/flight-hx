@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef AnimationChannel = { var track:Dynamic; var targetRef:Dynamic; };
+typedef AnimationChannel = { var track:AnimationTrack; var targetRef:Dynamic; };

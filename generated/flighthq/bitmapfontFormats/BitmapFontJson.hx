@@ -7,12 +7,13 @@ import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontCharRecord;
 import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontKerningRecord;
 import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontPageRecord;
 import flighthq.bitmapfontFormats._internal._BitmapFontRecordValues.buildBitmapFontFromRecord;
+import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontEncoding;
 import flighthq.types.BitmapFont.BitmapFontParseOptions;
 
 @:expose("flighthq.bitmapfontFormats.BitmapFontJson")
 class BitmapFontJson {
-  public static function parseBitmapFontJson(text:String, ?options:BitmapFontParseOptions):Null<Dynamic> {
+  public static function parseBitmapFontJson(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
     var record:Dynamic = cast _Runtime.UNDEFINED;
     record = _Runtime.callValue(BitmapFontJson.parseBitmapFontJsonRecord__bitmapFontJson, cast ([text] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(record, null))) { return cast null; }

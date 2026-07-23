@@ -14,4 +14,4 @@ typedef StorageNamespace = { var prefix:String; };
 
 typedef StorageQuota = { var available:Float; var used:Float; };
 
-typedef StorageSignals = { var onChange:Dynamic; };
+typedef StorageSignals = { var onChange:Signal<Dynamic>; };

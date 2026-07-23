@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.adjustments.ColorMatrixAdjustment.getAdjustmentColorMatrix;
 import flighthq.adjustments.ColorMatrixMath.fuseColorMatrices;
 import flighthq.types.Adjustment;
+import flighthq.types.ColorTransform;
 
 @:expose("flighthq.adjustments.ColorAdjustmentResolution")
 class ColorAdjustmentResolution {
@@ -20,7 +21,7 @@ class ColorAdjustmentResolution {
     return cast null;
   }
 
-  public static function resolveColorAdjustmentsColorTransform(adjustments:Null<Array<Adjustment>>, out:Dynamic):Float {
+  public static function resolveColorAdjustmentsColorTransform(adjustments:Null<Array<Adjustment>>, out:ColorTransform):Float {
     var matrices:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var inlineable:Dynamic = cast _Runtime.UNDEFINED;
     var fused:Dynamic = cast _Runtime.UNDEFINED;

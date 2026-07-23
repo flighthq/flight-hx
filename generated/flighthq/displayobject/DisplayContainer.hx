@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.displayobject.DisplayObject.createDisplayObjectGeneric;
 import flighthq.displayobject.DisplayObject.createDisplayObjectRuntime;
 import flighthq.displayobject.DisplayObject.getDisplayObjectRuntime;
+import flighthq.types.DisplayContainer;
 import flighthq.types.DisplayContainer.DisplayContainerRuntime;
 import flighthq.types.PartialNode;
 import flighthq.types.Types.DisplayObjectKind;
@@ -13,8 +14,8 @@ import flighthq.types._internal._DisplayObjectValues.DisplayObjectKind;
 
 @:expose("flighthq.displayobject.DisplayContainer")
 class DisplayContainer {
-  public static function createDisplayContainer(?obj:PartialNode<Dynamic>):Dynamic {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([DisplayObjectKind, obj, _Runtime.field(_Runtime, 'UNDEFINED'), createDisplayContainerRuntime] : Array<Dynamic>)) : Dynamic);
+  public static function createDisplayContainer(?obj:PartialNode<flighthq.types.DisplayContainer>):flighthq.types.DisplayContainer {
+    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([DisplayObjectKind, obj, _Runtime.field(_Runtime, 'UNDEFINED'), createDisplayContainerRuntime] : Array<Dynamic>)) : flighthq.types.DisplayContainer);
     return cast null;
   }
 
@@ -23,7 +24,7 @@ class DisplayContainer {
     return cast null;
   }
 
-  public static function getDisplayContainerRuntime(source:Dynamic):DisplayContainerRuntime {
+  public static function getDisplayContainerRuntime(source:flighthq.types.DisplayContainer):DisplayContainerRuntime {
     return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : DisplayContainerRuntime);
     return cast null;
   }

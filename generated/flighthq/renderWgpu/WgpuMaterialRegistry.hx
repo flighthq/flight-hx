@@ -5,26 +5,28 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.Entity.Kind;
+import flighthq.types.Material;
 import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types.WgpuMaterialRenderer;
+import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
 @:expose("flighthq.renderWgpu.WgpuMaterialRegistry")
 class WgpuMaterialRegistry {
-  public static function getWgpuMaterialRenderer(state:Dynamic, kind:Kind):Null<WgpuMaterialRenderer> {
+  public static function getWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMaterialRenderer> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.field(runtime, 'materialRendererMap'), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function registerWgpuMaterialRenderer(state:Dynamic, kind:Kind, renderer:WgpuMaterialRenderer):Void {
+  public static function registerWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind, renderer:WgpuMaterialRenderer):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.setField(runtime, 'materialRendererMap', (_Runtime.field(runtime, 'materialRendererMap') ?? _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []))), 'set', cast ([kind, renderer] : Array<Dynamic>));
   }
 
-  public static function resolveWgpuMaterialRenderer(state:Dynamic, material:Null<Dynamic>):Null<WgpuMaterialRenderer> {
+  public static function resolveWgpuMaterialRenderer(state:WgpuRenderState, material:Null<Material>):Null<WgpuMaterialRenderer> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var map:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));

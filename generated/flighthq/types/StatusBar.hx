@@ -16,4 +16,4 @@ typedef StatusBarStyleEntry = { @:optional var animation:StatusBarAnimation; @:o
 
 typedef StatusBarBackend = { var getInfo:Dynamic; var setBackgroundColor:Dynamic; var setOverlaysContent:Dynamic; var setStyle:Dynamic; var setVisible:Dynamic; var subscribe:Dynamic; };
 
-typedef StatusBar = { var onChange:Dynamic; };
+typedef StatusBar = { var onChange:Signal<Dynamic>; };

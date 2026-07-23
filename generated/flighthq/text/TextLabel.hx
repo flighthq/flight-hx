@@ -13,8 +13,12 @@ import flighthq.text.TextLabelLayout.getTextLayout;
 import flighthq.textlayout.TextBounds.computeTextBoundsRectangle;
 import flighthq.textlayout.TextFormatRange.createTextFormatRange;
 import flighthq.types.MethodsOf;
+import flighthq.types.Node;
 import flighthq.types.PartialNode;
+import flighthq.types.Rectangle;
 import flighthq.types.TextAutoSize;
+import flighthq.types.TextFormat;
+import flighthq.types.TextLabel;
 import flighthq.types.TextLabel.TextLabelData;
 import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.TextLayout.TextLayoutParams;
@@ -25,24 +29,24 @@ import flighthq.types._internal._TextLabelValues.TextLabelKind;
 
 @:expose("flighthq.text.TextLabel")
 class TextLabel {
-  public static function buildTextLabelLayoutParams__textLabel(source:Dynamic, measure:TextMeasureFunction):TextLayoutParams {
+  public static function buildTextLabelLayoutParams__textLabel(source:flighthq.types.TextLabel, measure:TextMeasureFunction):TextLayoutParams {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
     return cast { formatRanges: cast ([_Runtime.callValue(createTextFormatRange, cast ([_Runtime.field(data, 'textFormat'), 0.0, _Runtime.field(_Runtime.field(data, 'text'), 'length')] : Array<Dynamic>))] : Array<Dynamic>), height: _Runtime.field(data, 'height'), measure: measure, text: _Runtime.field(data, 'text'), verticalAlign: _Runtime.select(_Runtime.strictEquals(_Runtime.field(data, 'autoSize'), 'none'), function():Dynamic return cast _Runtime.field(data, 'verticalAlign'), function():Dynamic return cast 'top'), width: _Runtime.field(data, 'width') };
     return cast null;
   }
 
-  public static function appendTextLabelString(source:Dynamic, value:String):Void {
+  public static function appendTextLabelString(source:flighthq.types.TextLabel, value:String):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(value, 'length'), 0.0))) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'text', (_Runtime.field(_Runtime.field(source, 'data'), 'text') + value));
     _Runtime.callValue(TextLabel.invalidateTextLabelContent__textLabel, cast ([source] : Array<Dynamic>));
   }
 
-  public static function computeTextLabelLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
+  public static function computeTextLabelLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     var label:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var layout:Dynamic = cast _Runtime.UNDEFINED;
-    label = (cast source : Dynamic);
+    label = (cast source : flighthq.types.TextLabel);
     data = _Runtime.field(label, 'data');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'autoSize'), 'none'))) {
       _Runtime.setField(out, 'x', 0.0);
@@ -63,8 +67,8 @@ class TextLabel {
     _Runtime.callValue(computeTextBoundsRectangle, cast ([out, data, layout] : Array<Dynamic>));
   }
 
-  public static function createTextLabel(?obj:PartialNode<Dynamic>):Dynamic {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([TextLabelKind, obj, createTextLabelData, createTextLabelRuntime] : Array<Dynamic>)) : Dynamic);
+  public static function createTextLabel(?obj:PartialNode<flighthq.types.TextLabel>):flighthq.types.TextLabel {
+    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([TextLabelKind, obj, createTextLabelData, createTextLabelRuntime] : Array<Dynamic>)) : flighthq.types.TextLabel);
     return cast null;
   }
 
@@ -83,22 +87,22 @@ class TextLabel {
     return cast null;
   }
 
-  public static function getTextLabelFormat(source:Dynamic):Dynamic {
+  public static function getTextLabelFormat(source:flighthq.types.TextLabel):TextFormat {
     return cast _Runtime.field(_Runtime.field(source, 'data'), 'textFormat');
     return cast null;
   }
 
-  public static function getTextLabelRuntime(source:Dynamic):TextLabelRuntime {
+  public static function getTextLabelRuntime(source:flighthq.types.TextLabel):TextLabelRuntime {
     return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime);
     return cast null;
   }
 
-  public static function getTextLabelString(source:Dynamic):String {
+  public static function getTextLabelString(source:flighthq.types.TextLabel):String {
     return cast _Runtime.field(_Runtime.field(source, 'data'), 'text');
     return cast null;
   }
 
-  public static function setTextLabelAutoSize(source:Dynamic, value:TextAutoSize):Void {
+  public static function setTextLabelAutoSize(source:flighthq.types.TextLabel, value:TextAutoSize):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'autoSize'), value))) { return; }
@@ -107,12 +111,12 @@ class TextLabel {
     _Runtime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setTextLabelFormat(source:Dynamic, value:Dynamic):Void {
+  public static function setTextLabelFormat(source:flighthq.types.TextLabel, value:TextFormat):Void {
     _Runtime.setField(_Runtime.field(source, 'data'), 'textFormat', value);
     _Runtime.callValue(TextLabel.invalidateTextLabelContent__textLabel, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setTextLabelHeight(source:Dynamic, value:Float):Void {
+  public static function setTextLabelHeight(source:flighthq.types.TextLabel, value:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'height'), value))) { return; }
@@ -121,7 +125,7 @@ class TextLabel {
     _Runtime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setTextLabelString(source:Dynamic, value:String):Void {
+  public static function setTextLabelString(source:flighthq.types.TextLabel, value:String):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'text'), value))) { return; }
@@ -129,7 +133,7 @@ class TextLabel {
     _Runtime.callValue(TextLabel.invalidateTextLabelContent__textLabel, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setTextLabelVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
+  public static function setTextLabelVerticalAlign(source:flighthq.types.TextLabel, value:TextVerticalAlign):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'verticalAlign'), value))) { return; }
@@ -137,7 +141,7 @@ class TextLabel {
     _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setTextLabelWidth(source:Dynamic, value:Float):Void {
+  public static function setTextLabelWidth(source:flighthq.types.TextLabel, value:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'width'), value))) { return; }
@@ -146,7 +150,7 @@ class TextLabel {
     _Runtime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));
   }
 
-  public static function invalidateTextLabelContent__textLabel(source:Dynamic):Void {
+  public static function invalidateTextLabelContent__textLabel(source:flighthq.types.TextLabel):Void {
     _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'autoSize'), 'none'))) { _Runtime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>)); }
   }

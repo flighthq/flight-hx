@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SelectableRichTextManager = { var focused:Null<Dynamic>; };
+typedef SelectableRichTextManager = { var focused:Null<RichText>; };

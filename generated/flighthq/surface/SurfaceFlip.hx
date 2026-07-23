@@ -4,10 +4,11 @@ package flighthq.surface;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
+import flighthq.types.SurfaceRegion;
 
 @:expose("flighthq.surface.SurfaceFlip")
 class SurfaceFlip {
-  public static function flipSurfaceHorizontal(dest:Dynamic, source:Dynamic):Void {
+  public static function flipSurfaceHorizontal(dest:SurfaceRegion, source:SurfaceRegion):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
@@ -42,7 +43,7 @@ class SurfaceFlip {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function flipSurfaceVertical(dest:Dynamic, source:Dynamic):Void {
+  public static function flipSurfaceVertical(dest:SurfaceRegion, source:SurfaceRegion):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
@@ -77,7 +78,7 @@ class SurfaceFlip {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function copyMirrored__surfaceFlip(dest:Dynamic, source:Dynamic, w:Float, h:Float, mirrorX:Bool, mirrorY:Bool):Void {
+  public static function copyMirrored__surfaceFlip(dest:SurfaceRegion, source:SurfaceRegion, w:Float, h:Float, mirrorX:Bool, mirrorY:Bool):Void {
     var sd:Dynamic = cast _Runtime.UNDEFINED;
     var dd:Dynamic = cast _Runtime.UNDEFINED;
     var sStride:Dynamic = cast _Runtime.UNDEFINED;
@@ -112,7 +113,7 @@ class SurfaceFlip {
     }
   }
 
-  public static function isSameRegion__surfaceFlip(a:Dynamic, b:Dynamic):Bool {
+  public static function isSameRegion__surfaceFlip(a:SurfaceRegion, b:SurfaceRegion):Bool {
     return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'surface'), _Runtime.field(b, 'surface')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'x'), _Runtime.field(b, 'x'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'width'), _Runtime.field(b, 'width'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'height'), _Runtime.field(b, 'height')));
     return cast null;
   }

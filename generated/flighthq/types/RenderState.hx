@@ -9,6 +9,6 @@ import flighthq.types.Entity.Kind;
 
 typedef SceneGraphSyncPolicy = String;
 
-typedef RenderState = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<DisplayObjectClipHooks>; var pixelRatio:Float; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Dynamic>; var sceneGraphSyncPolicy:SceneGraphSyncPolicy; var roundPixels:Bool; };
+typedef RenderState = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<DisplayObjectClipHooks>; var pixelRatio:Float; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:SceneGraphSyncPolicy; var roundPixels:Bool; };
 
 typedef RenderStateRuntime = { var binding:Null<Dynamic>; var colorAdjustmentChannelMixingGuard:Null<Dynamic>; var currentFrameId:Float; var renderAdaptHook:Null<Dynamic>; var renderProxyAdapterMap:Dynamic; var renderProxyMap:Dynamic; var rendererMap:Dynamic; var rendererMapId:Float; var tempStack:Array<Renderable>; };

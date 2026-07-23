@@ -5,20 +5,22 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.tween.Tween.createTween;
 import flighthq.types.EasingFunction;
+import flighthq.types.Tween;
 import flighthq.types.Tween.NumericProps;
+import flighthq.types.TweenManager;
 import flighthq.types.TweenOptions;
 
 typedef TweenStaggerOptions = { @:optional var each:Float; @:optional var from:Dynamic; @:optional var staggerEase:EasingFunction; };
 
 @:expose("flighthq.tween.TweenStagger")
 class TweenStagger {
-  public static function createTweenStagger<T>(manager:Dynamic, targets:Array<Dynamic>, duration:Float, propertyMap:NumericProps<Dynamic>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<Dynamic> {
+  public static function createTweenStagger<T>(manager:TweenManager, targets:Array<Dynamic>, duration:Float, propertyMap:NumericProps<Dynamic>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<Tween<Dynamic>> {
     var each:Dynamic = cast _Runtime.UNDEFINED;
     var from:Dynamic = cast _Runtime.UNDEFINED;
     var staggerEase:Dynamic = cast _Runtime.UNDEFINED;
     var baseDelay:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
-    var tweens:Array<Dynamic> = cast _Runtime.UNDEFINED;
+    var tweens:Array<Tween<Dynamic>> = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(targets, 'length'), 0.0))) { return cast cast ([] : Array<Dynamic>); }
     each = _Runtime.coalesce(_Runtime.optionalField(stagger, 'each'), function():Dynamic return cast 0.1);
     from = _Runtime.coalesce(_Runtime.optionalField(stagger, 'from'), function():Dynamic return cast 'start');

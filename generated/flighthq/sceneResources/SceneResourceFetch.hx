@@ -4,6 +4,7 @@ package flighthq.sceneResources;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResourceFrom.loadImageResourceFromUrl;
+import flighthq.types.ImageResource;
 import flighthq.types.SceneResourceRef.ExternalSceneResourceRef;
 
 typedef SceneResourceFetch = Dynamic;

@@ -7,24 +7,27 @@ import flighthq.displayobject.DisplayObject.createDisplayObjectGeneric;
 import flighthq.displayobject.DisplayObject.createDisplayObjectRuntime;
 import flighthq.displayobject.DisplayObject.getDisplayObjectRuntime;
 import flighthq.node.Revision.invalidateNodeLocalBounds;
+import flighthq.types.HtmlView;
 import flighthq.types.HtmlView.HtmlViewData;
 import flighthq.types.HtmlView.HtmlViewRuntime;
 import flighthq.types.MethodsOf;
+import flighthq.types.Node;
 import flighthq.types.PartialNode;
+import flighthq.types.Rectangle;
 import flighthq.types.Types.HtmlViewKind;
 import flighthq.types._internal._HtmlViewValues.HtmlViewKind;
 
 @:expose("flighthq.displayobject.HtmlView")
 class HtmlView {
-  public static function computeHtmlViewLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
+  public static function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
-    data = _Runtime.field((cast source : Dynamic), 'data');
+    data = _Runtime.field((cast source : flighthq.types.HtmlView), 'data');
     _Runtime.setField(out, 'width', _Runtime.field(data, 'width'));
     _Runtime.setField(out, 'height', _Runtime.field(data, 'height'));
   }
 
-  public static function createHtmlView(?obj:PartialNode<Dynamic>):Dynamic {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([HtmlViewKind, obj, createHtmlViewData, createHtmlViewRuntime] : Array<Dynamic>)) : Dynamic);
+  public static function createHtmlView(?obj:PartialNode<flighthq.types.HtmlView>):flighthq.types.HtmlView {
+    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([HtmlViewKind, obj, createHtmlViewData, createHtmlViewRuntime] : Array<Dynamic>)) : flighthq.types.HtmlView);
     return cast null;
   }
 
@@ -38,12 +41,12 @@ class HtmlView {
     return cast null;
   }
 
-  public static function getHtmlViewRuntime(source:Dynamic):HtmlViewRuntime {
+  public static function getHtmlViewRuntime(source:flighthq.types.HtmlView):HtmlViewRuntime {
     return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : HtmlViewRuntime);
     return cast null;
   }
 
-  public static function setHtmlViewSize(source:Dynamic, width:Float, height:Float):Void {
+  public static function setHtmlViewSize(source:flighthq.types.HtmlView, width:Float, height:Float):Void {
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'width'), width), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'height'), height)))) { return; }
     _Runtime.setField(_Runtime.field(source, 'data'), 'width', width);
     _Runtime.setField(_Runtime.field(source, 'data'), 'height', height);

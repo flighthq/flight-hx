@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.geometry.BoundingSphere.createBoundingSphere;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.Light;
+import flighthq.types.PointLight;
 import flighthq.types.Types.AmbientLightKind;
 import flighthq.types.Types.AreaLightKind;
 import flighthq.types.Types.DirectionalLightKind;
@@ -34,7 +35,7 @@ class LightAnalysis {
       return;
     }
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(kind, PointLightKind), function():Dynamic return cast _Runtime.strictEquals(kind, SpotLightKind)), function():Dynamic return cast _Runtime.strictEquals(kind, AreaLightKind)))) {
-      var spatial:Dynamic = (cast light : Dynamic);
+      var spatial:Dynamic = (cast light : PointLight);
       var range:Dynamic = _Runtime.field(spatial, 'range');
       if (_Runtime.truthy(_Runtime.compare(range, 0.0, '<'))) {
         _Runtime.setField(_Runtime.field(out, 'center'), 'x', 0.0);

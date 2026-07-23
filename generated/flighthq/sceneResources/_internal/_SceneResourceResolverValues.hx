@@ -15,6 +15,8 @@ import flighthq.sceneResources.SceneResourceSignals;
 import flighthq.sceneResources._internal._SceneMaterialTextureRegistryValues.createSceneMaterialTextureRegistry;
 import flighthq.sceneResources._internal._SceneMaterialTextureRegistryValues.registerBuiltInSceneMaterialTextures;
 import flighthq.sceneResources._internal._SceneResourceFetchValues.createWebSceneResourceFetch;
+import flighthq.types.ResourceLoader;
+import flighthq.types.Texture;
 
 @:expose("flighthq.sceneResources._internal._SceneResourceResolverValues")
 class _SceneResourceResolverValues {

@@ -4,10 +4,11 @@ package flighthq.surface;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
+import flighthq.types.SurfaceRegion;
 
 @:expose("flighthq.surface.SurfaceDissolve")
 class SurfaceDissolve {
-  public static function dissolveSurfacePixels(dest:Dynamic, source:Dynamic, seed:Float, pixelCount:Float, fillColor:Float = 0.0):Float {
+  public static function dissolveSurfacePixels(dest:SurfaceRegion, source:SurfaceRegion, seed:Float, pixelCount:Float, fillColor:Float = 0.0):Float {
     var width:Dynamic = cast _Runtime.UNDEFINED;
     var height:Dynamic = cast _Runtime.UNDEFINED;
     var total:Dynamic = cast _Runtime.UNDEFINED;

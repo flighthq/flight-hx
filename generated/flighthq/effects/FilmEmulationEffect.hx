@@ -3,10 +3,11 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.FilmEmulationEffect;
 
 @:expose("flighthq.effects.FilmEmulationEffect")
 class FilmEmulationEffect {
-  public static function createFilmEmulationEffect(?options:Dynamic):Dynamic {
+  public static function createFilmEmulationEffect(?options:Dynamic):flighthq.types.FilmEmulationEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'FilmEmulationEffect' }, options]);
     return cast null;

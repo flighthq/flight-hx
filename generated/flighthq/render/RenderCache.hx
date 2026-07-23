@@ -10,19 +10,22 @@ import flighthq.render.RenderProxyAdapter.getRenderProxyAdapter;
 import flighthq.render.RenderProxyAdapter.setRenderProxyAdapter;
 import flighthq.render.Renderer.registerRenderer;
 import flighthq.signals.Signal.createSignal;
+import flighthq.types.RenderCache;
 import flighthq.types.RenderCache.RenderCacheKind;
 import flighthq.types.RenderCacheAdapter;
+import flighthq.types.RenderState;
 import flighthq.types.Renderable;
+import flighthq.types.Renderer;
 import flighthq.types._internal._RenderCacheValues.RenderCacheKindValue;
 
 @:expose("flighthq.render.RenderCache")
 class RenderCache {
-  public static function createRenderCache():Dynamic {
+  public static function createRenderCache():flighthq.types.RenderCache {
     return cast _Runtime.callValue(createEntity, cast ([{ kind: RenderCacheKindValue, transform: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createRenderCacheAdapter(?cache:Null<Dynamic>):RenderCacheAdapter {
+  public static function createRenderCacheAdapter(?cache:Null<flighthq.types.RenderCache>):RenderCacheAdapter {
     if (cache == null) cache = cast (null : Dynamic);
     var adapter:RenderCacheAdapter = cast _Runtime.UNDEFINED;
     adapter = { cache: cache, signals: null, adapt: function(_state:Dynamic, _source:Dynamic, node:Dynamic) {
@@ -42,7 +45,7 @@ class RenderCache {
     _Runtime.setField(adapter, 'signals', (_Runtime.field(adapter, 'signals') ?? { onPrepare: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) }));
   }
 
-  public static function getRenderProxyCache(state:Dynamic, source:Renderable):Null<Dynamic> {
+  public static function getRenderProxyCache(state:RenderState, source:Renderable):Null<flighthq.types.RenderCache> {
     var adapter:Dynamic = cast _Runtime.UNDEFINED;
     adapter = _Runtime.callValue(getRenderProxyAdapter, cast ([state, source] : Array<Dynamic>));
     return cast _Runtime.select(_Runtime.callValue(isRenderCacheAdapter, cast ([adapter] : Array<Dynamic>)), function():Dynamic return cast _Runtime.coalesce(_Runtime.field(adapter, 'cache'), function():Dynamic return cast null), function():Dynamic return cast null);
@@ -50,7 +53,7 @@ class RenderCache {
   }
 
   public static function isRenderCache(source:Dynamic):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(source), 'object'), function():Dynamic return cast !_Runtime.strictEquals(source, null)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field((cast source : Dynamic), 'kind'), RenderCacheKindValue));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(source), 'object'), function():Dynamic return cast !_Runtime.strictEquals(source, null)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field((cast source : flighthq.types.RenderCache), 'kind'), RenderCacheKindValue));
     return cast null;
   }
 
@@ -59,11 +62,11 @@ class RenderCache {
     return cast null;
   }
 
-  public static function registerRenderCacheRenderer(state:Dynamic, renderer:Dynamic):Void {
+  public static function registerRenderCacheRenderer(state:RenderState, renderer:Renderer):Void {
     _Runtime.callValue(registerRenderer, cast ([state, RenderCacheKindValue, renderer] : Array<Dynamic>));
   }
 
-  public static function useRenderCache(state:Dynamic, source:Renderable, cache:Dynamic):RenderCacheAdapter {
+  public static function useRenderCache(state:RenderState, source:Renderable, cache:flighthq.types.RenderCache):RenderCacheAdapter {
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var adapter:Dynamic = cast _Runtime.UNDEFINED;
     existing = _Runtime.callValue(getRenderProxyAdapter, cast ([state, source] : Array<Dynamic>));

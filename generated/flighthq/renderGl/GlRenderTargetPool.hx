@@ -6,11 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.renderGl.GlFullscreenPass.clearGlRenderTarget;
 import flighthq.renderGl.GlRenderTarget.createGlRenderTarget;
 import flighthq.renderGl.GlRenderTarget.destroyGlRenderTarget;
+import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderTarget;
+import flighthq.types.GlRenderTarget.GlRenderTargetPool;
 import flighthq.types.RenderTarget.RenderTargetDescriptor;
 
 @:expose("flighthq.renderGl.GlRenderTargetPool")
 class GlRenderTargetPool {
-  public static function acquireGlRenderTarget(state:Dynamic, pool:Dynamic, descriptor:RenderTargetDescriptor):Dynamic {
+  public static function acquireGlRenderTarget(state:GlRenderState, pool:flighthq.types.GlRenderTarget.GlRenderTargetPool, descriptor:RenderTargetDescriptor):GlRenderTarget {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;
@@ -36,19 +39,19 @@ class GlRenderTargetPool {
     return cast null;
   }
 
-  public static function createGlRenderTargetPool():Dynamic {
+  public static function createGlRenderTargetPool():flighthq.types.GlRenderTarget.GlRenderTargetPool {
     return cast { free: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
-  public static function destroyGlRenderTargetPool(state:Dynamic, pool:Dynamic):Void {
+  public static function destroyGlRenderTargetPool(state:GlRenderState, pool:flighthq.types.GlRenderTarget.GlRenderTargetPool):Void {
     for (target in _Runtime.iterable(_Runtime.field(pool, 'free'))) {
       _Runtime.callValue(destroyGlRenderTarget, cast ([state, target] : Array<Dynamic>));
     }
     _Runtime.setLength(_Runtime.field(pool, 'free'), 0.0);
   }
 
-  public static function releaseGlRenderTarget(pool:Dynamic, target:Dynamic):Void {
+  public static function releaseGlRenderTarget(pool:flighthq.types.GlRenderTarget.GlRenderTargetPool, target:GlRenderTarget):Void {
     _Runtime.callProperty(_Runtime.field(pool, 'free'), 'push', cast ([target] : Array<Dynamic>));
   }
 }

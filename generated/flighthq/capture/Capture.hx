@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.capture.CaptureBaseline as Facade_Capture_flighthq_capture_CaptureBaseline;
 import flighthq.capture.CaptureComparison as Facade_Capture_flighthq_capture_CaptureComparison;
+import flighthq.types.CaptureBaseline;
 import flighthq.types.CaptureCheckResult;
 import flighthq.types.CaptureColumnBaseline;
 
@@ -19,7 +20,7 @@ class Capture {
     return cast null;
   }
 
-  public static function createCaptureBaseline():Dynamic {
+  public static function createCaptureBaseline():CaptureBaseline {
     return cast _Runtime.callValue(Facade_Capture_flighthq_capture_CaptureBaseline.createCaptureBaseline, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -34,22 +35,22 @@ class Capture {
     return cast null;
   }
 
-  public static function formatCaptureBaseline(baseline:Dynamic):String {
+  public static function formatCaptureBaseline(baseline:CaptureBaseline):String {
     return cast _Runtime.callValue(Facade_Capture_flighthq_capture_CaptureBaseline.formatCaptureBaseline, cast ([baseline] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getCaptureBaselineField(baseline:Dynamic, column:String, field:CaptureColumnBaseline):Null<String> {
+  public static function getCaptureBaselineField(baseline:CaptureBaseline, column:String, field:CaptureColumnBaseline):Null<String> {
     return cast _Runtime.callValue(Facade_Capture_flighthq_capture_CaptureBaseline.getCaptureBaselineField, cast ([baseline, column, field] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseCaptureBaseline(text:String):Null<Dynamic> {
+  public static function parseCaptureBaseline(text:String):Null<CaptureBaseline> {
     return cast _Runtime.callValue(Facade_Capture_flighthq_capture_CaptureBaseline.parseCaptureBaseline, cast ([text] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setCaptureBaselineField(baseline:Dynamic, column:String, field:CaptureColumnBaseline, value:String):Void {
+  public static function setCaptureBaselineField(baseline:CaptureBaseline, column:String, field:CaptureColumnBaseline, value:String):Void {
     _Runtime.callValue(Facade_Capture_flighthq_capture_CaptureBaseline.setCaptureBaselineField, cast ([baseline, column, field, value] : Array<Dynamic>));
   }
 }

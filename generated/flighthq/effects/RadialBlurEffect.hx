@@ -3,10 +3,11 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.RadialBlurEffect;
 
 @:expose("flighthq.effects.RadialBlurEffect")
 class RadialBlurEffect {
-  public static function createRadialBlurEffect(?options:Dynamic):Dynamic {
+  public static function createRadialBlurEffect(?options:Dynamic):flighthq.types.RadialBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'RadialBlurEffect' }, options]);
     return cast null;

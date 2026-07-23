@@ -5,10 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.tween._internal._Internal.initializeTween;
+import flighthq.types.Tween;
 
 @:expose("flighthq.tween.TweenProgress")
 class TweenProgress {
-  public static function getTweenProgress(tween:Dynamic):Float {
+  public static function getTweenProgress(tween:Tween<Dynamic>):Float {
     var activeElapsed:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.field(tween, 'complete'))) { return cast 1.0; }
     activeElapsed = (_Runtime.field(tween, 'elapsed') - _Runtime.field(tween, 'delay'));
@@ -17,19 +18,19 @@ class TweenProgress {
     return cast null;
   }
 
-  public static function invalidateTween(tween:Dynamic):Void {
+  public static function invalidateTween(tween:Tween<Dynamic>):Void {
     _Runtime.setField(tween, 'initialized', false);
     _Runtime.setField(tween, 'complete', false);
     _Runtime.setField(tween, 'elapsed', 0.0);
   }
 
-  public static function restartTween(tween:Dynamic, includeDelay:Dynamic = true):Void {
+  public static function restartTween(tween:Tween<Dynamic>, includeDelay:Dynamic = true):Void {
     _Runtime.setField(tween, 'initialized', false);
     _Runtime.setField(tween, 'complete', false);
     _Runtime.setField(tween, 'elapsed', _Runtime.select(includeDelay, function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.field(tween, 'delay')));
   }
 
-  public static function seekTween(tween:Dynamic, timeSeconds:Float):Void {
+  public static function seekTween(tween:Tween<Dynamic>, timeSeconds:Float):Void {
     var maxElapsed:Dynamic = cast _Runtime.UNDEFINED;
     var clampedElapsed:Dynamic = cast _Runtime.UNDEFINED;
     var activeElapsed:Dynamic = cast _Runtime.UNDEFINED;
@@ -66,7 +67,7 @@ class TweenProgress {
     }
   }
 
-  public static function setTweenProgress(tween:Dynamic, progress:Float):Void {
+  public static function setTweenProgress(tween:Tween<Dynamic>, progress:Float):Void {
     var clamped:Dynamic = cast _Runtime.UNDEFINED;
     var targetElapsed:Dynamic = cast _Runtime.UNDEFINED;
     clamped = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([progress, 1.0] : Array<Dynamic>))] : Array<Dynamic>));

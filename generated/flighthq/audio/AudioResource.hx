@@ -3,36 +3,37 @@ package flighthq.audio;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.AudioResource;
 
 @:expose("flighthq.audio.AudioResource")
 class AudioResource {
-  public static function cloneAudioResource(resource:Dynamic):Dynamic {
+  public static function cloneAudioResource(resource:flighthq.types.AudioResource):flighthq.types.AudioResource {
     return cast { buffer: _Runtime.field(resource, 'buffer') };
     return cast null;
   }
 
-  public static function createAudioResource(?buffer:Dynamic):Dynamic {
+  public static function createAudioResource(?buffer:Dynamic):flighthq.types.AudioResource {
     return cast { buffer: _Runtime.coalesce(buffer, function():Dynamic return cast null) };
     return cast null;
   }
 
-  public static function disposeAudioResource(resource:Dynamic):Void {
+  public static function disposeAudioResource(resource:flighthq.types.AudioResource):Void {
     _Runtime.setField(resource, 'buffer', null);
   }
 
-  public static function getAudioResourceByteSize(resource:Dynamic):Float {
+  public static function getAudioResourceByteSize(resource:flighthq.types.AudioResource):Float {
     var buffer:Dynamic = cast _Runtime.UNDEFINED;
     buffer = _Runtime.field(resource, 'buffer');
     return cast _Runtime.select(!_Runtime.strictEquals(buffer, null), function():Dynamic return cast ((_Runtime.field(buffer, 'numberOfChannels') * _Runtime.field(buffer, 'length')) * 4.0), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  public static function getAudioResourceChannelCount(resource:Dynamic):Float {
+  public static function getAudioResourceChannelCount(resource:flighthq.types.AudioResource):Float {
     return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.field(resource, 'buffer'), null), function():Dynamic return cast _Runtime.field(_Runtime.field(resource, 'buffer'), 'numberOfChannels'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  public static function getAudioResourceChannelData(resource:Dynamic, channel:Float):Null<flighthq._internal._Float32Array> {
+  public static function getAudioResourceChannelData(resource:flighthq.types.AudioResource, channel:Float):Null<flighthq._internal._Float32Array> {
     var buffer:Dynamic = cast _Runtime.UNDEFINED;
     buffer = _Runtime.field(resource, 'buffer');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(buffer, null), function():Dynamic return cast _Runtime.compare(channel, 0.0, '<')), function():Dynamic return cast _Runtime.compare(channel, _Runtime.field(buffer, 'numberOfChannels'), '>=')))) { return cast null; }
@@ -40,22 +41,22 @@ class AudioResource {
     return cast null;
   }
 
-  public static function getAudioResourceDuration(resource:Dynamic):Float {
+  public static function getAudioResourceDuration(resource:flighthq.types.AudioResource):Float {
     return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.field(resource, 'buffer'), null), function():Dynamic return cast _Runtime.field(_Runtime.field(resource, 'buffer'), 'duration'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  public static function getAudioResourceSampleRate(resource:Dynamic):Float {
+  public static function getAudioResourceSampleRate(resource:flighthq.types.AudioResource):Float {
     return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.field(resource, 'buffer'), null), function():Dynamic return cast _Runtime.field(_Runtime.field(resource, 'buffer'), 'sampleRate'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  public static function hasAudioResourceBuffer(resource:Dynamic):Bool {
+  public static function hasAudioResourceBuffer(resource:flighthq.types.AudioResource):Bool {
     return cast !_Runtime.strictEquals(_Runtime.field(resource, 'buffer'), null);
     return cast null;
   }
 
-  public static function isAudioResourceEmpty(resource:Dynamic):Bool {
+  public static function isAudioResourceEmpty(resource:flighthq.types.AudioResource):Bool {
     return cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.field(resource, 'buffer'), null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(resource, 'buffer'), 'length'), 0.0));
     return cast null;
   }

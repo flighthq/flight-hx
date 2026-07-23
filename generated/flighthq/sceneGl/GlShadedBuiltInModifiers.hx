@@ -24,9 +24,11 @@ import flighthq.types.EmissiveModifier.EmissiveModifierFacing;
 import flighthq.types.EnvReflectModifier;
 import flighthq.types.FogModifier;
 import flighthq.types.FogModifier.FogModifierMode;
+import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
 import flighthq.types.Modifier;
 import flighthq.types.RimModifier;
+import flighthq.types.Texture;
 import flighthq.types.ToonModifier;
 import flighthq.types.VertexDisplaceModifier;
 import flighthq.types.VertexDisplaceModifier.VertexDisplaceModifierSource;
@@ -295,7 +297,7 @@ class GlShadedBuiltInModifiers {
     return cast source;
   } }]);
 
-  public static function registerBuiltInGlModifierSnippets(state:Dynamic):Void {
+  public static function registerBuiltInGlModifierSnippets(state:GlRenderState):Void {
     _Runtime.callValue(registerGlModifierSnippet, cast ([state, animatedNormalGlModifierSnippet] : Array<Dynamic>));
     _Runtime.callValue(registerGlModifierSnippet, cast ([state, dissolveGlModifierSnippet] : Array<Dynamic>));
     _Runtime.callValue(registerGlModifierSnippet, cast ([state, emissiveGlModifierSnippet] : Array<Dynamic>));
@@ -306,8 +308,8 @@ class GlShadedBuiltInModifiers {
     _Runtime.callValue(registerGlModifierSnippet, cast ([state, vertexDisplaceGlModifierSnippet] : Array<Dynamic>));
   }
 
-  public static function bindGlModifierTexture__glShadedBuiltInModifiers(context:GlModifierBindContext, texture:Dynamic, uniformName:String):Void {
-    var state:Dynamic = cast _Runtime.UNDEFINED;
+  public static function bindGlModifierTexture__glShadedBuiltInModifiers(context:GlModifierBindContext, texture:Texture, uniformName:String):Void {
+    var state:GlRenderState = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var unit:Dynamic = cast _Runtime.UNDEFINED;
     var image:Dynamic = cast _Runtime.UNDEFINED;

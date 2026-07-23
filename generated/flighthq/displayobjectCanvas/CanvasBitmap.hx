@@ -7,6 +7,8 @@ import flighthq.displayobjectCanvas.CanvasDisplayObject.drawCanvasDisplayObject;
 import flighthq.displayobjectCanvas.CanvasImageSource.resolveCanvasImageSource;
 import flighthq.displayobjectCanvas.CanvasTransform.setCanvasTransform;
 import flighthq.render.Renderer.noopRendererData;
+import flighthq.types.Bitmap;
+import flighthq.types.CanvasRenderState;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.RenderProxy2D;
 
@@ -17,7 +19,7 @@ class CanvasBitmap {
     var imageSource:Dynamic = cast _Runtime.UNDEFINED;
     var drawable:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(drawCanvasDisplayObject, cast ([state, bitmap] : Array<Dynamic>));
-    source = (cast _Runtime.field(bitmap, 'source') : Dynamic);
+    source = (cast _Runtime.field(bitmap, 'source') : Bitmap);
     imageSource = _Runtime.field(_Runtime.field(source, 'data'), 'image');
     drawable = _Runtime.select(!_Runtime.strictEquals(imageSource, null), function():Dynamic return cast _Runtime.callValue(resolveCanvasImageSource, cast ([state, imageSource] : Array<Dynamic>)), function():Dynamic return cast null);
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(imageSource, null), function():Dynamic return cast !_Runtime.strictEquals(drawable, null)))) {

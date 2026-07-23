@@ -4,10 +4,11 @@ package flighthq.adjustments;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ColorTransformFunction;
+import flighthq.types.HueSaturationAdjustment;
 
 @:expose("flighthq.adjustments.HueSaturationAdjustment")
 class HueSaturationAdjustment {
-  public static function createHueSaturationAdjustment(?options:Dynamic):Dynamic {
+  public static function createHueSaturationAdjustment(?options:Dynamic):flighthq.types.HueSaturationAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var hue:Dynamic = cast _Runtime.UNDEFINED;
     var saturation:Dynamic = cast _Runtime.UNDEFINED;

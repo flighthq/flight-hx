@@ -4,5 +4,7 @@ package flighthq.sceneWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneWgpu.WgpuMeshUpload.ensureWgpuMeshUpload;
+import flighthq.types.MeshGeometry;
+import flighthq.types.WgpuRenderState;
 
 typedef WgpuWireframeUpload = { var indexFormat:Dynamic; var lineIndexBuffer:Dynamic; var version:Float; var vertexBuffer:Dynamic; };

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
+import flighthq.types.Socket;
 import flighthq.types.Socket.SocketBackend;
 import flighthq.types.Socket.SocketCloseInfo;
 import flighthq.types.Socket.SocketConnection;
@@ -19,11 +20,11 @@ import flighthq.types.Socket.SocketSignals;
 class Socket {
   public static var _backend__socket:Null<SocketBackend> = _Runtime.explicitNull();
 
-  public static function attachSocket(socket:Dynamic):Void {
+  public static function attachSocket(socket:flighthq.types.Socket):Void {
     _Runtime.setField(_Runtime.field(socket, 'runtime'), 'delivering', true);
   }
 
-  public static function closeSocket(socket:Dynamic, ?code:Float, ?reason:String):Void {
+  public static function closeSocket(socket:flighthq.types.Socket, ?code:Float, ?reason:String):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.field(socket, 'runtime');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(runtime, 'readyState'), 'closing'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(runtime, 'readyState'), 'closed')))) { return; }
@@ -31,9 +32,9 @@ class Socket {
     _Runtime.callOptionalProperty(_Runtime.field(runtime, 'connection'), 'closeSocketConnection', cast ([code, reason] : Array<Dynamic>));
   }
 
-  public static function createSocket(options:SocketOptions):Dynamic {
+  public static function createSocket(options:SocketOptions):flighthq.types.Socket {
     var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
-    var socket:Dynamic = cast _Runtime.UNDEFINED;
+    var socket:flighthq.types.Socket = cast _Runtime.UNDEFINED;
     runtime = { connection: null, signals: null, readyState: 'connecting', delivering: true };
     socket = { url: _Runtime.field(options, 'url'), runtime: runtime };
     _Runtime.setField(runtime, 'connection', _Runtime.callProperty(_Runtime.callValue(getSocketBackend, cast ([] : Array<Dynamic>)), 'openSocket', cast ([options, _Runtime.callValue(Socket.makeSocketEventSink__socket, cast ([runtime] : Array<Dynamic>))] : Array<Dynamic>)));
@@ -62,17 +63,17 @@ class Socket {
     return cast null;
   }
 
-  public static function detachSocket(socket:Dynamic):Void {
+  public static function detachSocket(socket:flighthq.types.Socket):Void {
     _Runtime.setField(_Runtime.field(socket, 'runtime'), 'delivering', false);
   }
 
-  public static function disposeSocket(socket:Dynamic):Void {
+  public static function disposeSocket(socket:flighthq.types.Socket):Void {
     _Runtime.callValue(closeSocket, cast ([socket] : Array<Dynamic>));
     _Runtime.callValue(detachSocket, cast ([socket] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(socket, 'runtime'), 'signals', null);
   }
 
-  public static function enableSocketSignals(socket:Dynamic):SocketSignals {
+  public static function enableSocketSignals(socket:flighthq.types.Socket):SocketSignals {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.field(socket, 'runtime');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'signals'), null))) {
@@ -88,7 +89,7 @@ class Socket {
     return cast null;
   }
 
-  public static function getSocketReadyState(socket:Dynamic):SocketReadyState {
+  public static function getSocketReadyState(socket:flighthq.types.Socket):SocketReadyState {
     return cast _Runtime.field(_Runtime.field(socket, 'runtime'), 'readyState');
     return cast null;
   }
@@ -112,7 +113,7 @@ class Socket {
     return cast null;
   }
 
-  public static function sendSocketMessage(socket:Dynamic, data:Dynamic):Bool {
+  public static function sendSocketMessage(socket:flighthq.types.Socket, data:Dynamic):Bool {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.field(socket, 'runtime');
     if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(runtime, 'readyState'), 'open'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(runtime, 'connection'), null)))) { return cast false; }

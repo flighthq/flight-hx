@@ -3,16 +3,17 @@ package flighthq.glyphatlas;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.GlyphSource.GlyphAtlas;
 import flighthq.types.GlyphSource.GlyphMetrics;
 
 @:expose("flighthq.glyphatlas.GlyphAtlasMetrics")
 class GlyphAtlasMetrics {
-  public static function getGlyphAtlasKerning(_atlas:Dynamic, _left:Float, _right:Float):Float {
+  public static function getGlyphAtlasKerning(_atlas:GlyphAtlas, _left:Float, _right:Float):Float {
     return cast 0.0;
     return cast null;
   }
 
-  public static function getGlyphAtlasMetrics(atlas:Dynamic):GlyphMetrics {
+  public static function getGlyphAtlasMetrics(atlas:GlyphAtlas):GlyphMetrics {
     return cast _Runtime.field(_Runtime.field(atlas, 'runtime'), 'metrics');
     return cast null;
   }

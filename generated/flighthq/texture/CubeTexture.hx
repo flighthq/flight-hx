@@ -8,11 +8,13 @@ import flighthq.texture.Sampler.cloneSampler;
 import flighthq.texture.Sampler.copySampler;
 import flighthq.texture.Sampler.createSampler;
 import flighthq.texture.Sampler.equalsSampler;
+import flighthq.types.CubeTexture;
 import flighthq.types.CubeTexture.CubeTextureLike;
+import flighthq.types.ImageResource;
 
 @:expose("flighthq.texture.CubeTexture")
 class CubeTexture {
-  public static function cloneCubeTexture(source:CubeTextureLike):Dynamic {
+  public static function cloneCubeTexture(source:CubeTextureLike):flighthq.types.CubeTexture {
     return cast _Runtime.callValue(createEntity, cast ([{ colorSpace: _Runtime.field(source, 'colorSpace'), faces: _Runtime.slice(_Runtime.field(source, 'faces'), 0, null), sampler: _Runtime.callValue(cloneSampler, cast ([_Runtime.field(source, 'sampler')] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
@@ -35,7 +37,7 @@ class CubeTexture {
     f5 = _Runtime.getIndex(_Runtime.field(source, 'faces'), 5.0);
     _Runtime.callValue(copySampler, cast ([_Runtime.field(out, 'sampler'), _Runtime.field(source, 'sampler')] : Array<Dynamic>));
     _Runtime.setField(out, 'colorSpace', colorSpace);
-    faces = (cast _Runtime.field(out, 'faces') : Array<Null<Dynamic>>);
+    faces = (cast _Runtime.field(out, 'faces') : Array<Null<ImageResource>>);
     _Runtime.setIndex(faces, 0.0, f0);
     _Runtime.setIndex(faces, 1.0, f1);
     _Runtime.setIndex(faces, 2.0, f2);
@@ -44,7 +46,7 @@ class CubeTexture {
     _Runtime.setIndex(faces, 5.0, f5);
   }
 
-  public static function createCubeTexture(?opts:Dynamic):Dynamic {
+  public static function createCubeTexture(?opts:Dynamic):flighthq.types.CubeTexture {
     return cast _Runtime.callValue(createEntity, cast ([{ colorSpace: _Runtime.coalesce(_Runtime.optionalField(opts, 'colorSpace'), function():Dynamic return cast 'srgb'), faces: _Runtime.select(_Runtime.optionalField(opts, 'faces'), function():Dynamic return cast _Runtime.slice(_Runtime.field(opts, 'faces'), 0, null), function():Dynamic return cast cast ([null, null, null, null, null, null] : Array<Dynamic>)), sampler: _Runtime.select(_Runtime.optionalField(opts, 'sampler'), function():Dynamic return cast _Runtime.callValue(cloneSampler, cast ([_Runtime.field(opts, 'sampler')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createSampler, cast ([] : Array<Dynamic>))) }] : Array<Dynamic>));
     return cast null;
   }
@@ -83,7 +85,7 @@ class CubeTexture {
     return cast null;
   }
 
-  public static function setCubeTextureFace(cube:CubeTextureLike, faceIndex:Float, image:Null<Dynamic>):Void {
-    _Runtime.setIndex((cast _Runtime.field(cube, 'faces') : Array<Null<Dynamic>>), faceIndex, image);
+  public static function setCubeTextureFace(cube:CubeTextureLike, faceIndex:Float, image:Null<ImageResource>):Void {
+    _Runtime.setIndex((cast _Runtime.field(cube, 'faces') : Array<Null<ImageResource>>), faceIndex, image);
   }
 }

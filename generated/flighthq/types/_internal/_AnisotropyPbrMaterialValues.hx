@@ -4,6 +4,8 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
+import flighthq.types.SurfaceMaterial;
+import flighthq.types.Texture;
 
 @:expose("flighthq.types._internal._AnisotropyPbrMaterialValues")
 class _AnisotropyPbrMaterialValues {

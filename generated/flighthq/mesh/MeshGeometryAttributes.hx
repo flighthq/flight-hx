@@ -3,23 +3,24 @@ package flighthq.mesh;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.VertexAttribute;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
 import flighthq.types.MeshGeometry.VertexSemantic;
 
 @:expose("flighthq.mesh.MeshGeometryAttributes")
 class MeshGeometryAttributes {
-  public static function getMeshGeometryVertexNormal(out:{ var x:Float; var y:Float; var z:Float; }, geometry:Dynamic, vertexIndex:Float):Bool {
+  public static function getMeshGeometryVertexNormal(out:{ var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
     return cast _Runtime.callValue(MeshGeometryAttributes.getFloat3Attribute__meshGeometryAttributes, cast ([out, geometry, vertexIndex, 'normal'] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMeshGeometryVertexPosition(out:{ var x:Float; var y:Float; var z:Float; }, geometry:Dynamic, vertexIndex:Float):Bool {
+  public static function getMeshGeometryVertexPosition(out:{ var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
     return cast _Runtime.callValue(MeshGeometryAttributes.getFloat3Attribute__meshGeometryAttributes, cast ([out, geometry, vertexIndex, 'position'] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getMeshGeometryVertexTangent(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, geometry:Dynamic, vertexIndex:Float):Bool {
+  public static function getMeshGeometryVertexTangent(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
     var floatOffset:Dynamic = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -38,7 +39,7 @@ class MeshGeometryAttributes {
     return cast null;
   }
 
-  public static function getMeshGeometryVertexUv0(out:{ var x:Float; var y:Float; }, geometry:Dynamic, vertexIndex:Float):Bool {
+  public static function getMeshGeometryVertexUv0(out:{ var x:Float; var y:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
     var floatOffset:Dynamic = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -87,17 +88,17 @@ class MeshGeometryAttributes {
     return cast null;
   }
 
-  public static function setMeshGeometryVertexNormal(geometry:Dynamic, vertexIndex:Float, x:Float, y:Float, z:Float):Bool {
+  public static function setMeshGeometryVertexNormal(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float):Bool {
     return cast _Runtime.callValue(MeshGeometryAttributes.setFloat3Attribute__meshGeometryAttributes, cast ([geometry, vertexIndex, 'normal', x, y, z] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setMeshGeometryVertexPosition(geometry:Dynamic, vertexIndex:Float, x:Float, y:Float, z:Float):Bool {
+  public static function setMeshGeometryVertexPosition(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float):Bool {
     return cast _Runtime.callValue(MeshGeometryAttributes.setFloat3Attribute__meshGeometryAttributes, cast ([geometry, vertexIndex, 'position', x, y, z] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setMeshGeometryVertexTangent(geometry:Dynamic, vertexIndex:Float, x:Float, y:Float, z:Float, w:Float):Bool {
+  public static function setMeshGeometryVertexTangent(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float, w:Float):Bool {
     var floatOffset:Dynamic = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -117,7 +118,7 @@ class MeshGeometryAttributes {
     return cast null;
   }
 
-  public static function setMeshGeometryVertexUv0(geometry:Dynamic, vertexIndex:Float, u:Float, v:Float):Bool {
+  public static function setMeshGeometryVertexUv0(geometry:MeshGeometry, vertexIndex:Float, u:Float, v:Float):Bool {
     var floatOffset:Dynamic = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -135,7 +136,7 @@ class MeshGeometryAttributes {
     return cast null;
   }
 
-  public static function getFloat3Attribute__meshGeometryAttributes(out:{ var x:Float; var y:Float; var z:Float; }, geometry:Dynamic, vertexIndex:Float, semantic:VertexSemantic):Bool {
+  public static function getFloat3Attribute__meshGeometryAttributes(out:{ var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float, semantic:VertexSemantic):Bool {
     var floatOffset:Dynamic = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -153,7 +154,7 @@ class MeshGeometryAttributes {
     return cast null;
   }
 
-  public static function setFloat3Attribute__meshGeometryAttributes(geometry:Dynamic, vertexIndex:Float, semantic:VertexSemantic, x:Float, y:Float, z:Float):Bool {
+  public static function setFloat3Attribute__meshGeometryAttributes(geometry:MeshGeometry, vertexIndex:Float, semantic:VertexSemantic, x:Float, y:Float, z:Float):Bool {
     var floatOffset:Dynamic = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;

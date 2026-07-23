@@ -13,6 +13,8 @@ import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.resolveWgpuMaterialT
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.stashWgpuUvTransform;
 import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
 import flighthq.types.LinearColor;
+import flighthq.types.Texture;
+import flighthq.types.WgpuRenderState;
 
 typedef WgpuClassicLightingModel = String;
 
@@ -22,7 +24,7 @@ typedef WgpuClassicDefineKey = { var alphaMaskEnabled:Bool; var doubleSided:Bool
 
 @:expose("flighthq.sceneWgpu.WgpuClassicPrelude")
 class WgpuClassicPrelude {
-  public static function bindWgpuClassicSurface(state:Dynamic, pipeline:WgpuClassicPipeline, materialKey:Dynamic, diffuse:LinearColor, specular:LinearColor, shininess:Float, alphaCutoff:Float, diffuseMap:Null<Dynamic>, specularMap:Null<Dynamic>, normalMap:Null<Dynamic>):Dynamic {
+  public static function bindWgpuClassicSurface(state:WgpuRenderState, pipeline:WgpuClassicPipeline, materialKey:Dynamic, diffuse:LinearColor, specular:LinearColor, shininess:Float, alphaCutoff:Float, diffuseMap:Null<Texture>, specularMap:Null<Texture>, normalMap:Null<Texture>):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
@@ -58,7 +60,7 @@ class WgpuClassicPrelude {
     return cast null;
   }
 
-  public static function compileWgpuClassicPipeline(state:Dynamic, key:WgpuClassicDefineKey, format:Dynamic):WgpuClassicPipeline {
+  public static function compileWgpuClassicPipeline(state:WgpuRenderState, key:WgpuClassicDefineKey, format:Dynamic):WgpuClassicPipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     var materialBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
@@ -69,7 +71,7 @@ class WgpuClassicPrelude {
     return cast null;
   }
 
-  public static function ensureWgpuClassicPipeline(state:Dynamic, key:WgpuClassicDefineKey, format:Dynamic):WgpuClassicPipeline {
+  public static function ensureWgpuClassicPipeline(state:WgpuRenderState, key:WgpuClassicDefineKey, format:Dynamic):WgpuClassicPipeline {
     return cast _Runtime.callValue(ensureWgpuScenePipeline, cast ([state, 'classic:' + Std.string(format) + '|' + Std.string(_Runtime.callValue(buildWgpuClassicDefineKey, cast ([key] : Array<Dynamic>))) + '', function() return _Runtime.callValue(compileWgpuClassicPipeline, cast ([state, key, format] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }

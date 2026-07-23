@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.surface.SurfaceBlur.blurSurfacePixelsHorizontal;
 import flighthq.surface.SurfaceBlur.blurSurfacePixelsVertical;
+import flighthq.types.SurfaceRegion;
 
 typedef SurfaceShadowBlurOptions = { @:optional var radiusX:Float; @:optional var radiusY:Float; @:optional var passes:Float; };
 
@@ -18,24 +19,24 @@ typedef SurfaceInnerShadowOptions = Dynamic;
 
 @:expose("flighthq.surface.SurfaceShadow")
 class SurfaceShadow {
-  public static function dropShadowSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceDropShadowOptions):Void {
+  public static function dropShadowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceDropShadowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     _Runtime.callValue(SurfaceShadow.tintSurfaceAlphaMask__surfaceShadow, cast ([out, source, _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 255.0), _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0)] : Array<Dynamic>));
     _Runtime.callValue(SurfaceShadow.applyBlurPasses__surfaceShadow, cast ([out, scratch, _Runtime.field(source, 'width'), _Runtime.field(source, 'height'), options] : Array<Dynamic>));
   }
 
-  public static function glowSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceGlowOptions):Void {
+  public static function glowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceGlowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     _Runtime.callValue(SurfaceShadow.tintSurfaceAlphaMask__surfaceShadow, cast ([out, source, _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 4278190335.0), _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0)] : Array<Dynamic>));
     _Runtime.callValue(SurfaceShadow.applyBlurPasses__surfaceShadow, cast ([out, scratch, _Runtime.field(source, 'width'), _Runtime.field(source, 'height'), options] : Array<Dynamic>));
   }
 
-  public static function innerGlowSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceInnerGlowOptions):Void {
+  public static function innerGlowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceInnerGlowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     _Runtime.callValue(SurfaceShadow.applyInnerEffect__surfaceShadow, cast ([out, scratch, source, _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 4278190335.0), options, 0.0, 0.0] : Array<Dynamic>));
   }
 
-  public static function innerShadowSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceInnerShadowOptions):Void {
+  public static function innerShadowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceInnerShadowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     _Runtime.callValue(SurfaceShadow.applyInnerEffect__surfaceShadow, cast ([out, scratch, source, _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 255.0), options, _Runtime.coalesce(_Runtime.field(options, 'offsetX'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.field(options, 'offsetY'), function():Dynamic return cast 0.0)] : Array<Dynamic>));
   }
@@ -74,7 +75,7 @@ class SurfaceShadow {
     }
   }
 
-  public static function applyInnerEffect__surfaceShadow(out:Dynamic, scratch:Dynamic, source:Dynamic, color:Float, options:Dynamic, offsetX:Float, offsetY:Float):Void {
+  public static function applyInnerEffect__surfaceShadow(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, color:Float, options:Dynamic, offsetX:Float, offsetY:Float):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var cr:Dynamic = cast _Runtime.UNDEFINED;
@@ -128,7 +129,7 @@ class SurfaceShadow {
     }
   }
 
-  public static function readSourceAlpha__surfaceShadow(source:Dynamic, px:Float, py:Float):Float {
+  public static function readSourceAlpha__surfaceShadow(source:SurfaceRegion, px:Float, py:Float):Float {
     var sx:Dynamic = cast _Runtime.UNDEFINED;
     var sy:Dynamic = cast _Runtime.UNDEFINED;
     sx = (_Runtime.field(source, 'x') + px);
@@ -138,7 +139,7 @@ class SurfaceShadow {
     return cast null;
   }
 
-  public static function tintSurfaceAlphaMask__surfaceShadow(out:Dynamic, source:Dynamic, color:Float, intensity:Float):Void {
+  public static function tintSurfaceAlphaMask__surfaceShadow(out:Dynamic, source:SurfaceRegion, color:Float, intensity:Float):Void {
     var cr:Dynamic = cast _Runtime.UNDEFINED;
     var cg:Dynamic = cast _Runtime.UNDEFINED;
     var cb:Dynamic = cast _Runtime.UNDEFINED;

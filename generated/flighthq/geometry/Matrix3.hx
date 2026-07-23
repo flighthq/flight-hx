@@ -7,13 +7,14 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Matrix3Pool.acquireMatrix3;
 import flighthq.geometry.Matrix3Pool.releaseMatrix3;
 import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.Matrix3;
 import flighthq.types.Matrix3.Matrix3Like;
 import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.geometry.Matrix3")
 class Matrix3 {
-  public static function cloneMatrix3(source:Matrix3Like):Dynamic {
+  public static function cloneMatrix3(source:Matrix3Like):flighthq.types.Matrix3 {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     m = _Runtime.callValue(createMatrix3, cast ([] : Array<Dynamic>));
     _Runtime.callValue(copyMatrix3, cast ([m, source] : Array<Dynamic>));
@@ -65,9 +66,9 @@ class Matrix3 {
     _Runtime.setField(out, 'z', _Runtime.getIndex(_Runtime.field(source, 'm'), (row + 6.0)));
   }
 
-  public static function createMatrix3(?m00:Float, ?m01:Float, ?m02:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m20:Float, ?m21:Float, ?m22:Float):Dynamic {
+  public static function createMatrix3(?m00:Float, ?m01:Float, ?m02:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m20:Float, ?m21:Float, ?m22:Float):flighthq.types.Matrix3 {
     var m:Dynamic = cast _Runtime.UNDEFINED;
-    var out:Dynamic = cast _Runtime.UNDEFINED;
+    var out:flighthq.types.Matrix3 = cast _Runtime.UNDEFINED;
     m = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [Matrix3.__identity__matrix3]);
     out = _Runtime.callValue(createEntity, cast ([{ m: m }] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(m00, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 0.0, m00); }

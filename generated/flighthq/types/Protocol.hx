@@ -6,6 +6,6 @@ import flighthq._internal._Runtime;
 
 typedef ParsedProtocolUrl = { var scheme:String; var host:String; var path:String; var query:Dynamic; };
 
-typedef ProtocolHandler = { var onOpenUrl:Dynamic; };
+typedef ProtocolHandler = { var onOpenUrl:Signal<Dynamic>; };
 
 typedef ProtocolBackend = { var register:Dynamic; var unregister:Dynamic; var isRegistered:Dynamic; var getRegisteredSchemes:Dynamic; var setAsDefault:Dynamic; var isDefault:Dynamic; var removeAsDefault:Dynamic; var getLaunchUrl:Dynamic; var drainPendingUrls:Dynamic; var subscribe:Dynamic; };

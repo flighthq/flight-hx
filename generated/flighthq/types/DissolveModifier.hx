@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef DissolveModifier = { var kind:ModifierKind; var slot:ModifierSlot; var threshold:Float; var edgeColor:Float; @:optional var edgeWidth:Float; @:optional var map:Dynamic; @:optional var scale:Float; };
+typedef DissolveModifier = { var kind:ModifierKind; var slot:ModifierSlot; var threshold:Float; var edgeColor:Float; @:optional var edgeWidth:Float; @:optional var map:Texture; @:optional var scale:Float; };

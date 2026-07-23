@@ -4,11 +4,12 @@ package flighthq.renderGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
+import flighthq.types.GlRenderState;
 import flighthq.types.GlShaderLocations.GlBitmapShader;
 
 @:expose("flighthq.renderGl.GlShaderRegistry")
 class GlShaderRegistry {
-  public static function registerGlBitmapShader(state:Dynamic, shader:GlBitmapShader):Void {
+  public static function registerGlBitmapShader(state:GlRenderState, shader:GlBitmapShader):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.setField(runtime, 'defaultBitmapShader', shader);

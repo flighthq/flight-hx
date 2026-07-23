@@ -6,11 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.sceneWgpu.StandardPbrWgpuMeshMaterialRenderer.standardPbrWgpuMeshMaterialRenderer;
 import flighthq.sceneWgpu.WgpuMeshMaterialRegistry.registerWgpuMeshMaterialRenderer;
 import flighthq.types.Types.StandardPbrMaterialKind;
+import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
 @:expose("flighthq.sceneWgpu.RegisterStandardPbrWgpuMaterial")
 class RegisterStandardPbrWgpuMaterial {
-  public static function registerStandardPbrWgpuMaterial(state:Dynamic):Void {
+  public static function registerStandardPbrWgpuMaterial(state:WgpuRenderState):Void {
     _Runtime.callValue(registerWgpuMeshMaterialRenderer, cast ([state, StandardPbrMaterialKind, standardPbrWgpuMeshMaterialRenderer] : Array<Dynamic>));
   }
 }

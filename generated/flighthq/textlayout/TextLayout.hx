@@ -10,7 +10,10 @@ import flighthq.textlayout.TextFormat.mergeTextFormat;
 import flighthq.textlayout.TextLayoutGroup.createTextLayoutGroup;
 import flighthq.textlayout.TextLineBreaks.getTextLineBreaks;
 import flighthq.types.TextDirection;
+import flighthq.types.TextFormat;
+import flighthq.types.TextFormatRange;
 import flighthq.types.TextJustification;
+import flighthq.types.TextLayout.TextLayoutGroup;
 import flighthq.types.TextLayout.TextLayoutParams;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextLayout.TextMeasureFunction;
@@ -77,7 +80,7 @@ class TextLayout {
     _Runtime.voidValue(border);
   }
 
-  public static function charAdvances__textLayout(out:Array<Float>, text:String, format:Dynamic, start:Float, end:Float, measure:TextMeasureFunction, startX:Dynamic = 0.0):Void {
+  public static function charAdvances__textLayout(out:Array<Float>, text:String, format:TextFormat, start:Float, end:Float, measure:TextMeasureFunction, startX:Dynamic = 0.0):Void {
     var letterSpacing:Dynamic = cast _Runtime.UNDEFINED;
     var tabStops:Dynamic = cast _Runtime.UNDEFINED;
     var kerningEnabled:Dynamic = cast _Runtime.UNDEFINED;
@@ -128,7 +131,7 @@ class TextLayout {
     return cast null;
   }
 
-  public static function getTabAdvance__textLayout(currentX:Float, tabStops:Null<Array<Float>>, measure:TextMeasureFunction, format:Dynamic):Float {
+  public static function getTabAdvance__textLayout(currentX:Float, tabStops:Null<Array<Float>>, measure:TextMeasureFunction, format:TextFormat):Float {
     var spaceW:Dynamic = cast _Runtime.UNDEFINED;
     var tabW:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.looseEquals(tabStops, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(tabStops, 'length'), 0.0, '>')))) {
@@ -142,11 +145,11 @@ class TextLayout {
     return cast null;
   }
 
-  public static function buildGroups__textLayout(out:Array<Dynamic>, paragraphLastLines:Dynamic, text:String, formatRanges:Array<Dynamic>, lineBreaks:Array<Float>, containerWidth:Float, measure:TextMeasureFunction, wordWrap:Bool, multiline:Bool, maxLines:Float, truncationCharacter:String):Void {
+  public static function buildGroups__textLayout(out:Array<TextLayoutGroup>, paragraphLastLines:Dynamic, text:String, formatRanges:Array<TextFormatRange>, lineBreaks:Array<Float>, containerWidth:Float, measure:TextMeasureFunction, wordWrap:Bool, multiline:Bool, maxLines:Float, truncationCharacter:String):Void {
     var groups:Dynamic = cast _Runtime.UNDEFINED;
     var rangeIndex:Dynamic = cast _Runtime.UNDEFINED;
     var formatRange:Dynamic = cast _Runtime.UNDEFINED;
-    var currentFormat:Dynamic = cast _Runtime.UNDEFINED;
+    var currentFormat:TextFormat = cast _Runtime.UNDEFINED;
     var leftMargin:Dynamic = cast _Runtime.UNDEFINED;
     var rightMargin:Dynamic = cast _Runtime.UNDEFINED;
     var blockIndent:Dynamic = cast _Runtime.UNDEFINED;
@@ -168,7 +171,7 @@ class TextLayout {
     var breakCount:Dynamic = cast _Runtime.UNDEFINED;
     var breakIndex:Dynamic = cast _Runtime.UNDEFINED;
     var spaceIndex:Dynamic = cast _Runtime.UNDEFINED;
-    var activeGroup:Null<Dynamic> = cast _Runtime.UNDEFINED;
+    var activeGroup:Null<TextLayoutGroup> = cast _Runtime.UNDEFINED;
     var baseX:Void->Float = cast _Runtime.UNDEFINED;
     var wrapWidth:Void->Float = cast _Runtime.UNDEFINED;
     var updateLineMetrics:Void->Void = cast _Runtime.UNDEFINED;
@@ -263,7 +266,7 @@ class TextLayout {
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(maxLines, 0.0, '<'), function():Dynamic return cast _Runtime.compare(lineIndex, maxLines, '<')))) { return cast false; }
       lastLineIndex = (lineIndex - 1.0);
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(truncationCharacter, 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.compare(_Runtime.field(groups, 'length'), 0.0, '>')))) {
-        var lastGroup:Null<Dynamic> = null;
+        var lastGroup:Null<TextLayoutGroup> = null;
         {
           var i:Dynamic = (_Runtime.field(groups, 'length') - 1.0);
           while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
@@ -496,7 +499,7 @@ class TextLayout {
     _Runtime.callProperty(paragraphLastLines, 'add', cast ([lineIndex] : Array<Dynamic>));
   }
 
-  public static function applyAlignment__textLayout(groups:Array<Dynamic>, containerWidth:Float, lineWidths:Array<Float>, direction:TextDirection, justification:TextJustification, paragraphLastLines:Dynamic, text:String):Void {
+  public static function applyAlignment__textLayout(groups:Array<TextLayoutGroup>, containerWidth:Float, lineWidths:Array<Float>, direction:TextDirection, justification:TextJustification, paragraphLastLines:Dynamic, text:String):Void {
     for (g in _Runtime.iterable(groups)) {
       var lineW:Dynamic = _Runtime.getIndex(lineWidths, _Runtime.field(g, 'lineIndex'));
       var align:Dynamic = _Runtime.coalesce(_Runtime.field(_Runtime.field(g, 'format'), 'align'), function():Dynamic return cast 'left');
@@ -513,7 +516,7 @@ class TextLayout {
     _Runtime.callValue(TextLayout.justifyLines__textLayout, cast ([groups, containerWidth, lineWidths, justification, paragraphLastLines, text] : Array<Dynamic>));
   }
 
-  public static function applyVerticalAlignment__textLayout(groups:Array<Dynamic>, containerHeight:Float, contentHeight:Float, verticalAlign:TextVerticalAlign):Void {
+  public static function applyVerticalAlignment__textLayout(groups:Array<TextLayoutGroup>, containerHeight:Float, contentHeight:Float, verticalAlign:TextVerticalAlign):Void {
     var slack:Dynamic = cast _Runtime.UNDEFINED;
     var shift:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(verticalAlign, 'top'))) { return; }
@@ -525,7 +528,7 @@ class TextLayout {
     }
   }
 
-  public static function justifyLines__textLayout(groups:Array<Dynamic>, containerWidth:Float, lineWidths:Array<Float>, justification:TextJustification, paragraphLastLines:Dynamic, text:String):Void {
+  public static function justifyLines__textLayout(groups:Array<TextLayoutGroup>, containerWidth:Float, lineWidths:Array<Float>, justification:TextJustification, paragraphLastLines:Dynamic, text:String):Void {
     var lineCount:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(justification, 'none'))) { return; }
     lineCount = _Runtime.field(lineWidths, 'length');
@@ -533,7 +536,7 @@ class TextLayout {
       var li:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(li, lineCount, '<'))) {
         if (_Runtime.truthy(_Runtime.callProperty(paragraphLastLines, 'has', cast ([li] : Array<Dynamic>)))) { li++; continue; }
-        var lineGroups:Array<Dynamic> = cast ([] : Array<Dynamic>);
+        var lineGroups:Array<TextLayoutGroup> = cast ([] : Array<Dynamic>);
         for (g in _Runtime.iterable(groups)) {
           if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(g, 'lineIndex'), li), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(g, 'format'), 'align'), 'justify')))) { _Runtime.callProperty(lineGroups, 'push', cast ([g] : Array<Dynamic>)); }
         }
@@ -603,7 +606,7 @@ class TextLayout {
     }
   }
 
-  public static function writeLineMetrics__textLayout(out:TextLayoutResult, groups:Array<Dynamic>):Void {
+  public static function writeLineMetrics__textLayout(out:TextLayoutResult, groups:Array<TextLayoutGroup>):Void {
     _Runtime.setLength(_Runtime.field(out, 'lineAscents'), 0.0);
     _Runtime.setLength(_Runtime.field(out, 'lineDescents'), 0.0);
     _Runtime.setLength(_Runtime.field(out, 'lineHeights'), 0.0);

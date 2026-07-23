@@ -3,14 +3,15 @@ package flighthq.snapshot;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Snapshot;
 
 @:expose("flighthq.snapshot.CaptureSnapshot")
 class CaptureSnapshot {
-  public static function captureSnapshot<T>(source:Dynamic):Dynamic {
+  public static function captureSnapshot<T>(source:Dynamic):Snapshot<Dynamic> {
     var clone:Dynamic = cast _Runtime.UNDEFINED;
     clone = (cast _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['structuredClone'] : Array<Dynamic>)), cast ([source] : Array<Dynamic>)) : Dynamic);
     _Runtime.callValue(CaptureSnapshot.freezeSnapshotDeep__captureSnapshot, cast ([clone] : Array<Dynamic>));
-    return cast (cast clone : Dynamic);
+    return cast (cast clone : Snapshot<Dynamic>);
     return cast null;
   }
 

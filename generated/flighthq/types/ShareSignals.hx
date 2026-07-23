@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Share.ShareResult;
 
-typedef ShareSignals = { var onShareResult:Dynamic; };
+typedef ShareSignals = { var onShareResult:Signal<Dynamic>; };

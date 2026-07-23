@@ -5,10 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.GradientSpread;
+import flighthq.types.SurfaceRegion;
 
 @:expose("flighthq.surface.SurfaceGradientFill")
 class SurfaceGradientFill {
-  public static function fillSurfaceLinearGradient(dest:Dynamic, ramp:Dynamic, x0:Float, y0:Float, x1:Float, y1:Float, spread:GradientSpread = 'pad'):Void {
+  public static function fillSurfaceLinearGradient(dest:SurfaceRegion, ramp:Dynamic, x0:Float, y0:Float, x1:Float, y1:Float, spread:GradientSpread = 'pad'):Void {
     var dw:Dynamic = cast _Runtime.UNDEFINED;
     var dh:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
@@ -54,7 +55,7 @@ class SurfaceGradientFill {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function fillSurfaceRadialGradient(dest:Dynamic, ramp:Dynamic, cx:Float, cy:Float, radius:Float, ?focalX:Float, ?focalY:Float, spread:GradientSpread = 'pad'):Void {
+  public static function fillSurfaceRadialGradient(dest:SurfaceRegion, ramp:Dynamic, cx:Float, cy:Float, radius:Float, ?focalX:Float, ?focalY:Float, spread:GradientSpread = 'pad'):Void {
     if (focalX == null) focalX = cast (cx : Dynamic);
     if (focalY == null) focalY = cast (cy : Dynamic);
     var dw:Dynamic = cast _Runtime.UNDEFINED;

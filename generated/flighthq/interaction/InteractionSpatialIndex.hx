@@ -10,13 +10,15 @@ import flighthq.node.Node.getNodeRuntime;
 import flighthq.spatial.SpatialIndex.clearSpatialIndex;
 import flighthq.spatial.SpatialIndex.insertSpatialObject;
 import flighthq.spatial.SpatialIndex.querySpatialPoint;
+import flighthq.types.DisplayObject;
+import flighthq.types.InteractionManager;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.Spatial.SpatialAabb;
 import flighthq.types.Spatial.SpatialObjectId;
 
 @:expose("flighthq.interaction.InteractionSpatialIndex")
 class InteractionSpatialIndex {
-  public static function findSpatialInteractionTarget<N>(manager:Dynamic, x:Float, y:Float, precise:Bool = false):Null<Dynamic> {
+  public static function findSpatialInteractionTarget<N>(manager:InteractionManager<Dynamic>, x:Float, y:Float, precise:Bool = false):Null<Dynamic> {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     var nodes:Dynamic = cast _Runtime.UNDEFINED;
     var best:Null<Dynamic> = cast _Runtime.UNDEFINED;
@@ -45,7 +47,7 @@ class InteractionSpatialIndex {
     return cast null;
   }
 
-  public static function refreshInteractionSpatialIndex<N>(manager:Dynamic):Void {
+  public static function refreshInteractionSpatialIndex<N>(manager:InteractionManager<Dynamic>):Void {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     var nodes:Array<NodeAny> = cast _Runtime.UNDEFINED;
     index = _Runtime.field(manager, 'spatialIndex');
@@ -57,7 +59,7 @@ class InteractionSpatialIndex {
     {
       var rank:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(rank, _Runtime.field(nodes, 'length'), '<'))) {
-        var bounds:Dynamic = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([(cast _Runtime.getIndex(nodes, rank) : Dynamic)] : Array<Dynamic>));
+        var bounds:Dynamic = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([(cast _Runtime.getIndex(nodes, rank) : DisplayObject)] : Array<Dynamic>));
         _Runtime.setField(InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex, 'minX', _Runtime.field(bounds, 'x'));
         _Runtime.setField(InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex, 'minY', _Runtime.field(bounds, 'y'));
         _Runtime.setField(InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex, 'maxX', (_Runtime.field(bounds, 'x') + _Runtime.field(bounds, 'width')));

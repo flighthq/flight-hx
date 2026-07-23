@@ -3,25 +3,26 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.BloomEffect;
 
 @:expose("flighthq.effects.BloomEffect")
 class BloomEffect {
-  public static function computeBloomBlurRadius(effect:Dynamic):Float {
+  public static function computeBloomBlurRadius(effect:flighthq.types.BloomEffect):Float {
     return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 8.0)] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function computeBloomIntensity(effect:Dynamic):Float {
+  public static function computeBloomIntensity(effect:flighthq.types.BloomEffect):Float {
     return cast _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     return cast null;
   }
 
-  public static function computeBloomThreshold(effect:Dynamic):Float {
+  public static function computeBloomThreshold(effect:flighthq.types.BloomEffect):Float {
     return cast _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.8);
     return cast null;
   }
 
-  public static function createBloomEffect(?options:Dynamic):Dynamic {
+  public static function createBloomEffect(?options:Dynamic):flighthq.types.BloomEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'BloomEffect' }, options]);
     return cast null;

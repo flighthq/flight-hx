@@ -4,6 +4,7 @@ package flighthq.displayobjectCanvas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.text.TextFormatFont.computeTextFormatFontString;
+import flighthq.types.TextFormat;
 import flighthq.types.TextLayout.TextMeasureFunction;
 
 @:expose("flighthq.displayobjectCanvas.CanvasTextMeasure")
@@ -13,7 +14,7 @@ class CanvasTextMeasure {
     var context:Dynamic = cast _Runtime.UNDEFINED;
     canvas = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
     context = _Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
-    return cast function(text:String, format:Dynamic) {
+    return cast function(text:String, format:TextFormat) {
       _Runtime.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
       return cast _Runtime.field(_Runtime.callProperty(context, 'measureText', cast ([text] : Array<Dynamic>)), 'width');
     };

@@ -4,6 +4,7 @@ package flighthq.surface;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.surface.SurfaceComposite.extractSurfacePixels;
+import flighthq.types.SurfaceRegion;
 
 typedef SurfaceBoxBlurOptions = { @:optional var radiusX:Float; @:optional var radiusY:Float; @:optional var passes:Float; };
 
@@ -200,7 +201,7 @@ class SurfaceBlur {
     }
   }
 
-  public static function boxBlurSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceBoxBlurOptions):Void {
+  public static function boxBlurSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceBoxBlurOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var radiusX:Dynamic = cast _Runtime.UNDEFINED;
     var radiusY:Dynamic = cast _Runtime.UNDEFINED;
@@ -266,7 +267,7 @@ class SurfaceBlur {
     }
   }
 
-  public static function gaussianBlurSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, sigmaX:Float, ?sigmaY:Float, passes:Float = 1.0):Void {
+  public static function gaussianBlurSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, sigmaX:Float, ?sigmaY:Float, passes:Float = 1.0):Void {
     if (sigmaY == null) sigmaY = cast (sigmaX : Dynamic);
     var passCount:Dynamic = cast _Runtime.UNDEFINED;
     var radiusX:Dynamic = cast _Runtime.UNDEFINED;

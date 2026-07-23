@@ -5,11 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.types.GlitchEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.effectsWgpu.WgpuGlitchEffect")
 class WgpuGlitchEffect {
-  public static function applyGlitchEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
+  public static function applyGlitchEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:GlitchEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var blockSize:Dynamic = cast _Runtime.UNDEFINED;
     var colorShift:Dynamic = cast _Runtime.UNDEFINED;
@@ -20,7 +23,7 @@ class WgpuGlitchEffect {
     colorShift = _Runtime.coalesce(_Runtime.field(effect, 'colorShift'), function():Dynamic return cast 8.0);
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.glitch', WgpuGlitchEffect.GLITCH_FRAGMENT_WGSL__wgpuGlitchEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : Dynamic), (cast dest : Dynamic), pipeline, function(f32:Dynamic) {
+    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, intensity);
       _Runtime.setIndex(f32, 1.0, blockSize);
       _Runtime.setIndex(f32, 2.0, colorShift);
@@ -31,7 +34,7 @@ class WgpuGlitchEffect {
   }
 
   public static final defaultWgpuGlitchEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyGlitchEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(applyGlitchEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : GlitchEffect)] : Array<Dynamic>));
   };
 
   public static final GLITCH_FRAGMENT_WGSL__wgpuGlitchEffect:Dynamic = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_blockSize : f32,\n  u_colorShift : f32,\n  u_seed : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn glitchHash(n : f32) -> f32 { return fract(sin(n) * 43758.5453123); }\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let blockSize = max(2.0, uni.u_blockSize);\n  let block = floor(uv.y * uni.u_resolution.y / blockSize);\n  let r = glitchHash(block + uni.u_seed * 7.0);\n  // Higher intensity activates more blocks; a torn block tears horizontally.\n  let tear = step(1.0 - uni.u_intensity * 0.6, r);\n  let shiftPx = (glitchHash(block * 1.7 + uni.u_seed) - 0.5) * 2.0 * tear * uni.u_intensity * 40.0;\n  let baseUv = vec2f(uv.x + shiftPx / uni.u_resolution.x, uv.y);\n  // RGB channel separation, wider on torn blocks.\n  let cs = (uni.u_colorShift * (0.4 + tear)) / uni.u_resolution.x;\n  let rC = textureSampleLevel(tex, smp, vec2f(baseUv.x + cs, baseUv.y), 0.0).r;\n  let gC = textureSampleLevel(tex, smp, baseUv, 0.0).g;\n  let bC = textureSampleLevel(tex, smp, vec2f(baseUv.x - cs, baseUv.y), 0.0).b;\n  let a = textureSampleLevel(tex, smp, baseUv, 0.0).a;\n  var col = vec3f(rC, gC, bC);\n  // Occasional bright block corruption.\n  let corrupt = step(0.985 - uni.u_intensity * 0.04, glitchHash(block * 3.3 + uni.u_seed * 2.0));\n  col = mix(col, vec3f(1.0), corrupt * 0.6);\n  return vec4f(col, a);\n}';

@@ -10,15 +10,20 @@ import flighthq.sceneGl.GlEnvironmentIblBake.destroyGlBakePrograms;
 import flighthq.shading.ModifierRegistry;
 import flighthq.types.Entity.Kind;
 import flighthq.types.GlMeshMaterialRenderer;
+import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderTarget;
+import flighthq.types.GlSkinPaletteTexture;
+import flighthq.types.Matrix4;
+import flighthq.types.MeshGeometry;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-typedef GlSceneShadow = { var matrix:Dynamic; var texture:Dynamic; };
+typedef GlSceneShadow = { var matrix:Matrix4; var texture:Dynamic; };
 
 typedef GlSceneIbl = { var brdfLut:Dynamic; var intensity:Float; var irradianceCube:Dynamic; var prefilteredCube:Dynamic; var prefilteredMipCount:Float; };
 
 typedef GlSceneDrawEntry = { var alpha:Float; var clipW:Float; var material:Dynamic; var mesh:Dynamic; var normalMatrix:Dynamic; var renderer:Dynamic; var subset:Dynamic; var worldMatrix:Dynamic; };
 
-typedef GlSceneRuntime = { var activeMeshProgram:Null<GlMeshProgram>; var activeSkinnedRun:Bool; var blendedDrawList:Array<GlSceneDrawEntry>; var blendedPool:Array<GlSceneDrawEntry>; @:optional var colorSpaceGuard:Null<Dynamic>; @:optional var customShaderGuard:Null<Dynamic>; var environmentSourceCube:Null<Dynamic>; var ibl:Null<GlSceneIbl>; var iblBakeFramebuffer:Null<Dynamic>; var materialRegistry:Dynamic; var modifierSnippetRegistry:Null<ModifierRegistry>; var opaqueDrawList:Array<GlSceneDrawEntry>; var opaquePool:Array<GlSceneDrawEntry>; var programCache:Dynamic; var shadow:Null<GlSceneShadow>; var shadowTarget:Null<Dynamic>; var skinPalette:Null<Dynamic>; var time:Float; var uploadCache:Dynamic; };
+typedef GlSceneRuntime = { var activeMeshProgram:Null<GlMeshProgram>; var activeSkinnedRun:Bool; var blendedDrawList:Array<GlSceneDrawEntry>; var blendedPool:Array<GlSceneDrawEntry>; @:optional var colorSpaceGuard:Null<Dynamic>; @:optional var customShaderGuard:Null<Dynamic>; var environmentSourceCube:Null<Dynamic>; var ibl:Null<GlSceneIbl>; var iblBakeFramebuffer:Null<Dynamic>; var materialRegistry:Dynamic; var modifierSnippetRegistry:Null<ModifierRegistry>; var opaqueDrawList:Array<GlSceneDrawEntry>; var opaquePool:Array<GlSceneDrawEntry>; var programCache:Dynamic; var shadow:Null<GlSceneShadow>; var shadowTarget:Null<GlRenderTarget>; var skinPalette:Null<GlSkinPaletteTexture>; var time:Float; var uploadCache:Dynamic; };
 
 private typedef GlMeshUpload = { var indexBuffer:Null<Dynamic>; var indexCount:Float; var indexType:Float; @:optional var skinBindUploaded:Bool; var vao:Dynamic; var version:Float; var vertexBuffer:Dynamic; };

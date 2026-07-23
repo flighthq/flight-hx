@@ -3,10 +3,11 @@ package flighthq.snapshot;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Snapshot;
 
 @:expose("flighthq.snapshot.EqualsSnapshot")
 class EqualsSnapshot {
-  public static function equalsSnapshot<T>(a:Dynamic, b:Dynamic):Bool {
+  public static function equalsSnapshot<T>(a:Snapshot<Dynamic>, b:Snapshot<Dynamic>):Bool {
     return cast _Runtime.callValue(EqualsSnapshot.snapshotValuesEqual__equalsSnapshot, cast ([a, b] : Array<Dynamic>));
     return cast null;
   }

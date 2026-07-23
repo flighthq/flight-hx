@@ -4,12 +4,13 @@ package flighthq.geometry;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Plane;
 import flighthq.types.Plane.PlaneLike;
 import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.geometry.Plane")
 class Plane {
-  public static function clonePlane(source:PlaneLike):Dynamic {
+  public static function clonePlane(source:PlaneLike):flighthq.types.Plane {
     return cast _Runtime.callValue(createPlane, cast ([_Runtime.field(source, 'a'), _Runtime.field(source, 'b'), _Runtime.field(source, 'c'), _Runtime.field(source, 'd')] : Array<Dynamic>));
     return cast null;
   }
@@ -21,7 +22,7 @@ class Plane {
     _Runtime.setField(out, 'd', _Runtime.field(source, 'd'));
   }
 
-  public static function createPlane(?a:Float, ?b:Float, ?c:Float, ?d:Float):Dynamic {
+  public static function createPlane(?a:Float, ?b:Float, ?c:Float, ?d:Float):flighthq.types.Plane {
     return cast _Runtime.callValue(createEntity, cast ([{ a: _Runtime.coalesce(a, function():Dynamic return cast 0.0), b: _Runtime.coalesce(b, function():Dynamic return cast 0.0), c: _Runtime.coalesce(c, function():Dynamic return cast 0.0), d: _Runtime.coalesce(d, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }

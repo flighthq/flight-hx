@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.surface.SurfaceBevel.SurfaceBevelType;
 import flighthq.surface.SurfaceBlur.blurSurfacePixelsHorizontal;
 import flighthq.surface.SurfaceBlur.blurSurfacePixelsVertical;
+import flighthq.types.SurfaceRegion;
 
 typedef SurfaceGradientBevelOptions = { @:optional var angle:Float; @:optional var distance:Float; @:optional var radiusX:Float; @:optional var radiusY:Float; @:optional var passes:Float; @:optional var intensity:Float; @:optional var type:SurfaceBevelType; };
 
@@ -57,7 +58,7 @@ class SurfaceGradient {
     }
   }
 
-  public static function gradientBevelSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ramp:Dynamic, ?options:SurfaceGradientBevelOptions):Void {
+  public static function gradientBevelSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ramp:Dynamic, ?options:SurfaceGradientBevelOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
@@ -118,7 +119,7 @@ class SurfaceGradient {
     }
   }
 
-  public static function gradientGlowSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ramp:Dynamic, ?options:SurfaceGradientGlowOptions):Void {
+  public static function gradientGlowSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ramp:Dynamic, ?options:SurfaceGradientGlowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
@@ -201,7 +202,7 @@ class SurfaceGradient {
     return cast null;
   }
 
-  public static function readSourceAlpha__surfaceGradient(source:Dynamic, px:Float, py:Float):Float {
+  public static function readSourceAlpha__surfaceGradient(source:SurfaceRegion, px:Float, py:Float):Float {
     var sx:Dynamic = cast _Runtime.UNDEFINED;
     var sy:Dynamic = cast _Runtime.UNDEFINED;
     sx = (_Runtime.field(source, 'x') + px);

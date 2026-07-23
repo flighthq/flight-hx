@@ -18,10 +18,12 @@ import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.renderGl.GlShader.setGlBaseUniforms;
 import flighthq.renderGl.GlShader.setGlMatrixFromValues;
 import flighthq.types.DisplayObjectRenderer;
+import flighthq.types.GlRenderState;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
+import flighthq.types.Scale9Shape;
 
 typedef GlScale9ShapeData__glScale9Shape = { var canvas:Dynamic; var ctx:Dynamic; var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastW:Float; var texture:Dynamic; };
 
@@ -31,7 +33,7 @@ class GlScale9Shape {
 
   public static final _remappedPathData__glScale9Shape:Array<Float> = cast ([] : Array<Dynamic>);
 
-  public static function createGlScale9ShapeData(state:Dynamic, _source:Renderable):Null<RendererData> {
+  public static function createGlScale9ShapeData(state:GlRenderState, _source:Renderable):Null<RendererData> {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
@@ -44,7 +46,7 @@ class GlScale9Shape {
     return cast null;
   }
 
-  public static function destroyGlScale9ShapeData(state:Dynamic, data:RendererData):Void {
+  public static function destroyGlScale9ShapeData(state:GlRenderState, data:RendererData):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     __destructure0 = (cast (cast data : Dynamic) : GlScale9ShapeData__glScale9Shape);
@@ -52,7 +54,7 @@ class GlScale9Shape {
     _Runtime.callProperty(_Runtime.field(state, 'gl'), 'deleteTexture', cast ([texture] : Array<Dynamic>));
   }
 
-  public static function drawGlScale9Shape(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawGlScale9Shape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
@@ -71,7 +73,7 @@ class GlScale9Shape {
     var t:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(flushGlSpriteBatch, cast ([state] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
+    source = (cast _Runtime.field(renderProxy, 'source') : Scale9Shape);
     __destructure1 = _Runtime.field(source, 'data');
     commands = _Runtime.field(__destructure1, 'commands');
     scale9Grid = _Runtime.field(__destructure1, 'scale9Grid');
@@ -120,7 +122,7 @@ class GlScale9Shape {
     _Runtime.callValue(drawGlQuad, cast ([state, 0.0, 0.0, w, h, 0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
   }
 
-  public static function drawGlScale9ShapeMask(state:Dynamic, data:RenderProxy2D):Void {
+  public static function drawGlScale9ShapeMask(state:GlRenderState, data:RenderProxy2D):Void {
     _Runtime.callValue(drawGlScale9Shape, cast ([state, data] : Array<Dynamic>));
   }
 

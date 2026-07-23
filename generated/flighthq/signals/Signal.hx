@@ -4,10 +4,11 @@ package flighthq.signals;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals._internal._Internal.nullSignalEmit;
+import flighthq.types.Signal;
 
 @:expose("flighthq.signals.Signal")
 class Signal {
-  public static function createSignal<T>():Dynamic {
+  public static function createSignal<T>():flighthq.types.Signal<Dynamic> {
     return cast { emit: (cast (cast nullSignalEmit : Dynamic) : Dynamic), data: null };
     return cast null;
   }

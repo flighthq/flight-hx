@@ -3,10 +3,11 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.DisplacementEffect;
 
 @:expose("flighthq.effects.DisplacementEffect")
 class DisplacementEffect {
-  public static function createDisplacementEffect(?options:Dynamic):Dynamic {
+  public static function createDisplacementEffect(?options:Dynamic):flighthq.types.DisplacementEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'DisplacementEffect' }, options]);
     return cast null;

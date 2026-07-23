@@ -6,11 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.surface.SurfaceAffine.transformSurface;
 import flighthq.types.SurfaceEdgeMode;
+import flighthq.types.SurfaceRegion;
 import flighthq.types.SurfaceResizeMode;
 
 @:expose("flighthq.surface.SurfaceRotate")
 class SurfaceRotate {
-  public static function rotateSurface(dest:Dynamic, source:Dynamic, angle:Float, ?pivotX:Float, ?pivotY:Float, edgeMode:SurfaceEdgeMode = 'clamp', sampleMode:SurfaceResizeMode = 'bilinear'):Void {
+  public static function rotateSurface(dest:SurfaceRegion, source:SurfaceRegion, angle:Float, ?pivotX:Float, ?pivotY:Float, edgeMode:SurfaceEdgeMode = 'clamp', sampleMode:SurfaceResizeMode = 'bilinear'):Void {
     if (pivotX == null) pivotX = cast (((_Runtime.field(source, 'width') - 1.0) / 2.0) : Dynamic);
     if (pivotY == null) pivotY = cast (((_Runtime.field(source, 'height') - 1.0) / 2.0) : Dynamic);
     var cosA:Dynamic = cast _Runtime.UNDEFINED;
@@ -28,7 +29,7 @@ class SurfaceRotate {
     _Runtime.callValue(transformSurface, cast ([dest, source, cast ([cosA, sinA, -sinA, cosA, e, f] : Array<Dynamic>), edgeMode, sampleMode] : Array<Dynamic>));
   }
 
-  public static function rotateSurface180(dest:Dynamic, source:Dynamic):Void {
+  public static function rotateSurface180(dest:SurfaceRegion, source:SurfaceRegion):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var sd:Dynamic = cast _Runtime.UNDEFINED;
@@ -82,7 +83,7 @@ class SurfaceRotate {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function rotateSurfaceClockwise(dest:Dynamic, source:Dynamic):Void {
+  public static function rotateSurfaceClockwise(dest:SurfaceRegion, source:SurfaceRegion):Void {
     var sw:Dynamic = cast _Runtime.UNDEFINED;
     var sh:Dynamic = cast _Runtime.UNDEFINED;
     var sd:Dynamic = cast _Runtime.UNDEFINED;
@@ -118,7 +119,7 @@ class SurfaceRotate {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function rotateSurfaceCounterClockwise(dest:Dynamic, source:Dynamic):Void {
+  public static function rotateSurfaceCounterClockwise(dest:SurfaceRegion, source:SurfaceRegion):Void {
     var sw:Dynamic = cast _Runtime.UNDEFINED;
     var sh:Dynamic = cast _Runtime.UNDEFINED;
     var sd:Dynamic = cast _Runtime.UNDEFINED;
@@ -166,7 +167,7 @@ class SurfaceRotate {
     return cast null;
   }
 
-  public static function isSameRegion__surfaceRotate(a:Dynamic, b:Dynamic):Bool {
+  public static function isSameRegion__surfaceRotate(a:SurfaceRegion, b:SurfaceRegion):Bool {
     return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'surface'), _Runtime.field(b, 'surface')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'x'), _Runtime.field(b, 'x'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'width'), _Runtime.field(b, 'width'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'height'), _Runtime.field(b, 'height')));
     return cast null;
   }

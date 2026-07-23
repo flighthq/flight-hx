@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef CanvasShapeDrawState = { var hasFill:Bool; var fillStyle:Dynamic; var fillMatrix:Null<Dynamic>; var fillMatrixInverse:Null<Dynamic>; var hasStroke:Bool; var strokeStyle:Dynamic; var strokeWidth:Float; var hasPendingPath:Bool; var hasCurrentPoint:Bool; var windingRule:Dynamic; var bitmapSrc:Null<Dynamic>; var bitmapW:Float; var bitmapH:Float; var flush:Dynamic; };
+typedef CanvasShapeDrawState = { var hasFill:Bool; var fillStyle:Dynamic; var fillMatrix:Null<Matrix>; var fillMatrixInverse:Null<Matrix>; var hasStroke:Bool; var strokeStyle:Dynamic; var strokeWidth:Float; var hasPendingPath:Bool; var hasCurrentPoint:Bool; var windingRule:Dynamic; var bitmapSrc:Null<Dynamic>; var bitmapW:Float; var bitmapH:Float; var flush:Dynamic; };

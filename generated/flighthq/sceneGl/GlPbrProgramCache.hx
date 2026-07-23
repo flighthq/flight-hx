@@ -11,6 +11,7 @@ import flighthq.sceneGl._internal._GlLitProgramValues.resolveGlLitLocations;
 import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
 import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.types.GlRenderState;
 
 typedef GlPbrProgram = Dynamic;
 
@@ -27,7 +28,7 @@ class GlPbrProgramCache {
     return cast null;
   }
 
-  public static function ensureGlPbrProgram(state:Dynamic, key:GlPbrDefineKey):GlPbrProgram {
+  public static function ensureGlPbrProgram(state:GlRenderState, key:GlPbrDefineKey):GlPbrProgram {
     var fullKey:GlPbrDefineKey = cast _Runtime.UNDEFINED;
     fullKey = _Runtime.mergeObjects([key, { hasSkin: _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeSkinnedRun') }]);
     return cast _Runtime.callValue(ensureGlSceneProgram, cast ([state, 'pbr:' + Std.string(_Runtime.callValue(buildGlPbrDefineKey, cast ([fullKey] : Array<Dynamic>))) + '', function(gl:Dynamic) return _Runtime.callValue(compileGlPbrProgram, cast ([gl, fullKey] : Array<Dynamic>))] : Array<Dynamic>));

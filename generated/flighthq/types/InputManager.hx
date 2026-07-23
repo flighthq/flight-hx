@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 
 typedef AttachInputOptions = { @:optional var preventDefault:Bool; };
 
-typedef InputManager = { var onGamepadAxisMove:Dynamic; var onGamepadButtonDown:Dynamic; var onGamepadButtonUp:Dynamic; var onGamepadConnect:Dynamic; var onGamepadDisconnect:Dynamic; var onKeyDown:Dynamic; var onKeyUp:Dynamic; var onPointerCancel:Dynamic; var onPointerDown:Dynamic; var onPointerMove:Dynamic; var onPointerMoveRelative:Dynamic; var onPointerUp:Dynamic; var onTextEdit:Dynamic; var onTextInput:Dynamic; var onWheel:Dynamic; var enabled:Bool; };
+typedef InputManager = { var onGamepadAxisMove:Signal<Dynamic>; var onGamepadButtonDown:Signal<Dynamic>; var onGamepadButtonUp:Signal<Dynamic>; var onGamepadConnect:Signal<Dynamic>; var onGamepadDisconnect:Signal<Dynamic>; var onKeyDown:Signal<Dynamic>; var onKeyUp:Signal<Dynamic>; var onPointerCancel:Signal<Dynamic>; var onPointerDown:Signal<Dynamic>; var onPointerMove:Signal<Dynamic>; var onPointerMoveRelative:Signal<Dynamic>; var onPointerUp:Signal<Dynamic>; var onTextEdit:Signal<Dynamic>; var onTextInput:Signal<Dynamic>; var onWheel:Signal<Dynamic>; var enabled:Bool; };

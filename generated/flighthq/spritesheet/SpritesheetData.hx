@@ -4,6 +4,7 @@ package flighthq.spritesheet;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SpritesheetAnimationData;
+import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
 
 @:expose("flighthq.spritesheet.SpritesheetData")
@@ -13,7 +14,7 @@ class SpritesheetData {
     return cast null;
   }
 
-  public static function createSpritesheetData(?obj:Dynamic):Dynamic {
+  public static function createSpritesheetData(?obj:Dynamic):flighthq.types.SpritesheetData {
     return cast { animations: _Runtime.coalesce(_Runtime.optionalField(obj, 'animations'), function():Dynamic return cast cast ([] : Array<Dynamic>)), frames: _Runtime.coalesce(_Runtime.optionalField(obj, 'frames'), function():Dynamic return cast cast ([] : Array<Dynamic>)), imageFile: _Runtime.coalesce(_Runtime.optionalField(obj, 'imageFile'), function():Dynamic return cast ''), imageHeight: _Runtime.coalesce(_Runtime.optionalField(obj, 'imageHeight'), function():Dynamic return cast 0.0), imageWidth: _Runtime.coalesce(_Runtime.optionalField(obj, 'imageWidth'), function():Dynamic return cast 0.0), scale: _Runtime.coalesce(_Runtime.optionalField(obj, 'scale'), function():Dynamic return cast 1.0) };
     return cast null;
   }

@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 
-typedef AreaLight = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; var castsShadow:Bool; var color:Float; var direction:Dynamic; var intensity:Float; var normalBias:Float; var pcfRadius:Float; var position:Dynamic; var range:Float; var right:Dynamic; var shadowBias:Float; var up:Dynamic; };
+typedef AreaLight = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; var castsShadow:Bool; var color:Float; var direction:Vector3; var intensity:Float; var normalBias:Float; var pcfRadius:Float; var position:Vector3; var range:Float; var right:Vector3; var shadowBias:Float; var up:Vector3; };

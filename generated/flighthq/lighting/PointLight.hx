@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Vector3.cloneVector3;
 import flighthq.geometry.Vector3.createVector3;
+import flighthq.types.PointLight;
 import flighthq.types.Types.PointLightKind;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._PointLightValues.PointLightKind;
@@ -14,12 +15,12 @@ typedef PointLightOptions = { @:optional var castsShadow:Bool; @:optional var co
 
 @:expose("flighthq.lighting.PointLight")
 class PointLight {
-  public static function clonePointLight(source:Dynamic):Dynamic {
+  public static function clonePointLight(source:flighthq.types.PointLight):flighthq.types.PointLight {
     return cast _Runtime.callValue(createEntity, cast ([{ castsShadow: _Runtime.field(source, 'castsShadow'), color: _Runtime.field(source, 'color'), intensity: _Runtime.field(source, 'intensity'), kind: PointLightKind, normalBias: _Runtime.field(source, 'normalBias'), pcfRadius: _Runtime.field(source, 'pcfRadius'), position: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'position')] : Array<Dynamic>)), range: _Runtime.field(source, 'range'), shadowBias: _Runtime.field(source, 'shadowBias') }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createPointLight(?options:PointLightOptions):Dynamic {
+  public static function createPointLight(?options:PointLightOptions):flighthq.types.PointLight {
     var position:Dynamic = cast _Runtime.UNDEFINED;
     position = _Runtime.optionalField(options, 'position');
     return cast _Runtime.callValue(createEntity, cast ([{ castsShadow: _Runtime.coalesce(_Runtime.optionalField(options, 'castsShadow'), function():Dynamic return cast false), color: _Runtime.coalesce(_Runtime.optionalField(options, 'color'), function():Dynamic return cast 4294967295.0), intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: PointLightKind, normalBias: _Runtime.coalesce(_Runtime.optionalField(options, 'normalBias'), function():Dynamic return cast 0.0), pcfRadius: _Runtime.coalesce(_Runtime.optionalField(options, 'pcfRadius'), function():Dynamic return cast 0.0), position: _Runtime.select(position, function():Dynamic return cast _Runtime.callValue(cloneVector3, cast ([position] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector3, cast ([0.0, 0.0, 0.0] : Array<Dynamic>))), range: _Runtime.coalesce(_Runtime.optionalField(options, 'range'), function():Dynamic return cast -1.0), shadowBias: _Runtime.coalesce(_Runtime.optionalField(options, 'shadowBias'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));

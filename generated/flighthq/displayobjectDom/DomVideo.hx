@@ -8,26 +8,29 @@ import flighthq.displayobjectDom.DomStyle.prepareDomElement;
 import flighthq.displayobjectDom.DomStyle.setDomRendererElement;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.DisplayObjectRenderer;
+import flighthq.types.DomRenderState;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
+import flighthq.types.Video;
 
 typedef DomVideoData__domVideo = Dynamic;
 
 @:expose("flighthq.displayobjectDom.DomVideo")
 class DomVideo {
-  public static function createDomVideoData__domVideo(_state:Dynamic, _source:Renderable):DomVideoData__domVideo {
+  public static function createDomVideoData__domVideo(_state:RenderState, _source:Renderable):DomVideoData__domVideo {
     return cast _Runtime.callValue(createEntity, cast ([{ element: null }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function drawDomVideo(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawDomVideo(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var element:Dynamic = cast _Runtime.UNDEFINED;
     data = (cast _Runtime.field(renderProxy, 'rendererData') : Null<DomVideoData__domVideo>);
     if (_Runtime.truthy(_Runtime.strictEquals(data, null))) { return; }
-    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
+    source = (cast _Runtime.field(renderProxy, 'source') : Video);
     element = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(_Runtime.field(source, 'data'), 'source'), 'element'), function():Dynamic return cast null);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(element, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(element, 'videoWidth'), 0.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(element, 'videoHeight'), 0.0)))) { return; }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(data, 'element'), element))) {

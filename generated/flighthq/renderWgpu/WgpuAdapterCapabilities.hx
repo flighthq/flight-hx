@@ -3,10 +3,11 @@ package flighthq.renderWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.WgpuAdapterCapabilities;
 
 @:expose("flighthq.renderWgpu.WgpuAdapterCapabilities")
 class WgpuAdapterCapabilities {
-  public static function getWgpuAdapterCapabilities(adapter:Dynamic):Dynamic {
+  public static function getWgpuAdapterCapabilities(adapter:Dynamic):flighthq.types.WgpuAdapterCapabilities {
     var features:Dynamic = cast _Runtime.UNDEFINED;
     var limits:Dynamic = cast _Runtime.UNDEFINED;
     var supportsFloat32Filterable:Dynamic = cast _Runtime.UNDEFINED;

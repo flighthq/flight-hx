@@ -11,7 +11,10 @@ import flighthq.sceneGl._internal._GlMeshProgramValues.GL_UV_TRANSFORM_VERTEX_GL
 import flighthq.sceneGl._internal._GlMeshProgramValues.compileGlProgram;
 import flighthq.sceneGl._internal._GlMeshProgramValues.ensureGlSceneProgram;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
+import flighthq.types.Texture;
+import flighthq.types.VideoTexture;
 
 typedef GlUnlitDefineKey = { var alphaMaskEnabled:Bool; var hasColorMap:Bool; @:optional var hasSkin:Bool; var hasUvTransform:Bool; var vertexColor:Bool; };
 
@@ -19,7 +22,7 @@ typedef GlUnlitProgram = Dynamic;
 
 @:expose("flighthq.sceneGl.GlUnlitPrelude")
 class GlUnlitPrelude {
-  public static function bindGlUnlitSurface(state:Dynamic, program:GlUnlitProgram, color:LinearColor, intensity:Float, colorMap:Null<Dynamic>, alphaCutoff:Float):Void {
+  public static function bindGlUnlitSurface(state:GlRenderState, program:GlUnlitProgram, color:LinearColor, intensity:Float, colorMap:Null<Texture>, alphaCutoff:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(program, 'locColor'), _Runtime.getIndex(color, 0.0), _Runtime.getIndex(color, 1.0), _Runtime.getIndex(color, 2.0), _Runtime.getIndex(color, 3.0)] : Array<Dynamic>));
@@ -32,7 +35,7 @@ class GlUnlitPrelude {
     }
   }
 
-  public static function bindGlUnlitVideoSurface(state:Dynamic, program:GlUnlitProgram, color:LinearColor, intensity:Float, videoMap:Dynamic, alphaCutoff:Float):Void {
+  public static function bindGlUnlitVideoSurface(state:GlRenderState, program:GlUnlitProgram, color:LinearColor, intensity:Float, videoMap:VideoTexture, alphaCutoff:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(program, 'locColor'), _Runtime.getIndex(color, 0.0), _Runtime.getIndex(color, 1.0), _Runtime.getIndex(color, 2.0), _Runtime.getIndex(color, 3.0)] : Array<Dynamic>));
@@ -55,7 +58,7 @@ class GlUnlitPrelude {
     return cast null;
   }
 
-  public static function ensureGlUnlitProgram(state:Dynamic, key:GlUnlitDefineKey):GlUnlitProgram {
+  public static function ensureGlUnlitProgram(state:GlRenderState, key:GlUnlitDefineKey):GlUnlitProgram {
     var fullKey:GlUnlitDefineKey = cast _Runtime.UNDEFINED;
     fullKey = _Runtime.mergeObjects([key, { hasSkin: _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeSkinnedRun') }]);
     return cast _Runtime.callValue(ensureGlSceneProgram, cast ([state, 'unlit:' + Std.string(_Runtime.callValue(buildGlUnlitDefineKey, cast ([fullKey] : Array<Dynamic>))) + '', function(gl:Dynamic) return _Runtime.callValue(compileGlUnlitProgram, cast ([gl, fullKey] : Array<Dynamic>))] : Array<Dynamic>));

@@ -6,12 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.particlesFormats.SerializeResult.ParticleSerializeResult;
 import flighthq.particlesFormats.StarlingPexSchema.StarlingPexColor;
 import flighthq.particlesFormats.StarlingPexSchema.StarlingPexDocument;
+import flighthq.types.ParticleEmitterConfig;
 
 typedef StarlingPexSerializeOptions = { @:optional var textureSize:Float; };
 
 @:expose("flighthq.particlesFormats.StarlingPexSerialize")
 class StarlingPexSerialize {
-  public static function serializeStarlingPex(config:Dynamic, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):String {
+  public static function serializeStarlingPex(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):String {
     var textureSize:Dynamic = cast _Runtime.UNDEFINED;
     var doc:Dynamic = cast _Runtime.UNDEFINED;
     textureSize = _Runtime.coalesce(_Runtime.optionalField(options, 'textureSize'), function():Dynamic return cast 1.0);
@@ -20,7 +21,7 @@ class StarlingPexSerialize {
     return cast null;
   }
 
-  public static function serializeStarlingPexDocument(config:Dynamic, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):ParticleSerializeResult {
+  public static function serializeStarlingPexDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:StarlingPexSerializeOptions):ParticleSerializeResult {
     var text:Dynamic = cast _Runtime.UNDEFINED;
     var warnings:Dynamic = cast _Runtime.UNDEFINED;
     text = _Runtime.callValue(serializeStarlingPex, cast ([config, existing, options] : Array<Dynamic>));
@@ -31,7 +32,7 @@ class StarlingPexSerialize {
 
   public static final RAD2DEG__starlingPexSerialize:Dynamic = (180.0 / HxMath.PI);
 
-  public static function collectStarlingPexSerializeWarnings__starlingPexSerialize(config:Dynamic):Array<String> {
+  public static function collectStarlingPexSerializeWarnings__starlingPexSerialize(config:ParticleEmitterConfig):Array<String> {
     var warnings:Array<String> = cast _Runtime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(config, 'blendMode'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(config, 'blendMode'), 'add')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(config, 'blendMode'), 'normal')))) {
@@ -61,7 +62,7 @@ class StarlingPexSerialize {
     return cast null;
   }
 
-  public static function configToDocument__starlingPexSerialize(config:Dynamic, existing:Dynamic, textureSize:Float):StarlingPexDocument {
+  public static function configToDocument__starlingPexSerialize(config:ParticleEmitterConfig, existing:Dynamic, textureSize:Float):StarlingPexDocument {
     var angleDeg:Dynamic = cast _Runtime.UNDEFINED;
     var startSize:Dynamic = cast _Runtime.UNDEFINED;
     var startVar:Dynamic = cast _Runtime.UNDEFINED;

@@ -3,11 +3,12 @@ package flighthq.adjustments;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.ColorBlindSimulationAdjustment;
 import flighthq.types.ColorBlindSimulationAdjustment.ColorBlindType;
 
 @:expose("flighthq.adjustments.ColorBlindSimulationAdjustment")
 class ColorBlindSimulationAdjustment {
-  public static function createColorBlindSimulationAdjustment(?options:Dynamic):Dynamic {
+  public static function createColorBlindSimulationAdjustment(?options:Dynamic):flighthq.types.ColorBlindSimulationAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var type:ColorBlindType = cast _Runtime.UNDEFINED;
     var m:Dynamic = cast _Runtime.UNDEFINED;

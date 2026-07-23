@@ -6,11 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.textsegment.TextSegment as Facade_Textsegment_flighthq_textsegment_TextSegment;
 import flighthq.textsegment.TextSegmentBoundary as Facade_Textsegment_flighthq_textsegment_TextSegmentBoundary;
 import flighthq.textsegment.TextSegmenterBackend as Facade_Textsegment_flighthq_textsegment_TextSegmenterBackend;
+import flighthq.types.TextSegment;
 import flighthq.types.TextSegment.TextSegmentRange;
+import flighthq.types.TextSegment.TextSegmenterBackend;
 
 @:expose("flighthq.textsegment.Textsegment")
 class Textsegment {
-  public static function createWebTextSegmenterBackend():Dynamic {
+  public static function createWebTextSegmenterBackend():TextSegmenterBackend {
     return cast _Runtime.callValue(Facade_Textsegment_flighthq_textsegment_TextSegmenterBackend.createWebTextSegmenterBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -35,7 +37,7 @@ class Textsegment {
     return cast null;
   }
 
-  public static function getTextSegmenterBackend():Dynamic {
+  public static function getTextSegmenterBackend():TextSegmenterBackend {
     return cast _Runtime.callValue(Facade_Textsegment_flighthq_textsegment_TextSegmenterBackend.getTextSegmenterBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -45,22 +47,22 @@ class Textsegment {
     return cast null;
   }
 
-  public static function segmentGraphemes(text:String, ?locale:String):Array<Dynamic> {
+  public static function segmentGraphemes(text:String, ?locale:String):Array<TextSegment> {
     return cast _Runtime.callValue(Facade_Textsegment_flighthq_textsegment_TextSegment.segmentGraphemes, cast ([text, locale] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function segmentSentences(text:String, ?locale:String):Array<Dynamic> {
+  public static function segmentSentences(text:String, ?locale:String):Array<TextSegment> {
     return cast _Runtime.callValue(Facade_Textsegment_flighthq_textsegment_TextSegment.segmentSentences, cast ([text, locale] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function segmentWords(text:String, ?locale:String):Array<Dynamic> {
+  public static function segmentWords(text:String, ?locale:String):Array<TextSegment> {
     return cast _Runtime.callValue(Facade_Textsegment_flighthq_textsegment_TextSegment.segmentWords, cast ([text, locale] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setTextSegmenterBackend(backend:Null<Dynamic>):Void {
+  public static function setTextSegmenterBackend(backend:Null<TextSegmenterBackend>):Void {
     _Runtime.callValue(Facade_Textsegment_flighthq_textsegment_TextSegmenterBackend.setTextSegmenterBackend, cast ([backend] : Array<Dynamic>));
   }
 }

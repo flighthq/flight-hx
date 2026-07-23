@@ -4,7 +4,10 @@ package flighthq.velocity;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.HasTransform2D.Transform2DNode;
+import flighthq.types.Matrix;
 import flighthq.types.Velocity.Velocity2D;
+import flighthq.types.Velocity.VelocityField;
+import flighthq.types.Velocity.VelocitySample;
 import flighthq.velocity.TransformVelocity as Facade_Velocity_flighthq_velocity_TransformVelocity;
 import flighthq.velocity.VelocityField as Facade_Velocity_flighthq_velocity_VelocityField;
 import flighthq.velocity.VelocitySample as Facade_Velocity_flighthq_velocity_VelocitySample;
@@ -16,7 +19,7 @@ class Velocity {
     return cast null;
   }
 
-  public static function beginVelocityFrame(field:Dynamic):Void {
+  public static function beginVelocityFrame(field:VelocityField):Void {
     _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.beginVelocityFrame, cast ([field] : Array<Dynamic>));
   }
 
@@ -25,11 +28,11 @@ class Velocity {
     return cast null;
   }
 
-  public static function contributeTransformVelocity<Traits>(field:Dynamic, root:Transform2DNode<Traits>):Void {
+  public static function contributeTransformVelocity<Traits>(field:VelocityField, root:Transform2DNode<Traits>):Void {
     _Runtime.callValue(Facade_Velocity_flighthq_velocity_TransformVelocity.contributeTransformVelocity, cast ([field, root] : Array<Dynamic>));
   }
 
-  public static function contributeVelocity(field:Dynamic, source:Dynamic, x:Float, y:Float):Void {
+  public static function contributeVelocity(field:VelocityField, source:Dynamic, x:Float, y:Float):Void {
     _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.contributeVelocity, cast ([field, source, x, y] : Array<Dynamic>));
   }
 
@@ -38,7 +41,7 @@ class Velocity {
     return cast null;
   }
 
-  public static function createVelocityField():Dynamic {
+  public static function createVelocityField():VelocityField {
     return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.createVelocityField, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -48,22 +51,22 @@ class Velocity {
     return cast null;
   }
 
-  public static function ensureVelocitySample(field:Dynamic, source:Dynamic):Dynamic {
+  public static function ensureVelocitySample(field:VelocityField, source:Dynamic):VelocitySample {
     return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.ensureVelocitySample, cast ([field, source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getVelocity(field:Dynamic, source:Dynamic, out:Velocity2D):Velocity2D {
+  public static function getVelocity(field:VelocityField, source:Dynamic, out:Velocity2D):Velocity2D {
     return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.getVelocity, cast ([field, source, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getVelocitySampleAt(sample:Dynamic, currentWorldTransform:Dynamic, pointX:Float, pointY:Float, out:Velocity2D):Velocity2D {
+  public static function getVelocitySampleAt(sample:VelocitySample, currentWorldTransform:Matrix, pointX:Float, pointY:Float, out:Velocity2D):Velocity2D {
     return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocitySample.getVelocitySampleAt, cast ([sample, currentWorldTransform, pointX, pointY, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hasVelocity(field:Dynamic, source:Dynamic):Bool {
+  public static function hasVelocity(field:VelocityField, source:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.hasVelocity, cast ([field, source] : Array<Dynamic>));
     return cast null;
   }
@@ -98,7 +101,7 @@ class Velocity {
     return cast null;
   }
 
-  public static function suppressVelocity(field:Dynamic, source:Dynamic):Void {
+  public static function suppressVelocity(field:VelocityField, source:Dynamic):Void {
     _Runtime.callValue(Facade_Velocity_flighthq_velocity_VelocityField.suppressVelocity, cast ([field, source] : Array<Dynamic>));
   }
 

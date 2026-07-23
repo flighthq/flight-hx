@@ -3,17 +3,18 @@ package flighthq.capture;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.CaptureBaseline;
 import flighthq.types.CaptureColumnBaseline;
 
 @:expose("flighthq.capture.CaptureBaseline")
 class CaptureBaseline {
-  public static function createCaptureBaseline():Dynamic {
+  public static function createCaptureBaseline():flighthq.types.CaptureBaseline {
     return cast {  };
     return cast null;
   }
 
-  public static function formatCaptureBaseline(baseline:Dynamic):String {
-    var sorted:Dynamic = cast _Runtime.UNDEFINED;
+  public static function formatCaptureBaseline(baseline:flighthq.types.CaptureBaseline):String {
+    var sorted:flighthq.types.CaptureBaseline = cast _Runtime.UNDEFINED;
     sorted = {  };
     for (column in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([baseline] : Array<Dynamic>)), 'sort', cast ([] : Array<Dynamic>)))) {
       var entry:Dynamic = _Runtime.getIndex(baseline, column);
@@ -26,12 +27,12 @@ class CaptureBaseline {
     return cast null;
   }
 
-  public static function getCaptureBaselineField(baseline:Dynamic, column:String, field:CaptureColumnBaseline):Null<String> {
+  public static function getCaptureBaselineField(baseline:flighthq.types.CaptureBaseline, column:String, field:CaptureColumnBaseline):Null<String> {
     return cast _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.getIndex(baseline, column), field), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function parseCaptureBaseline(text:String):Null<Dynamic> {
+  public static function parseCaptureBaseline(text:String):Null<flighthq.types.CaptureBaseline> {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     try {
       (parsed = cast (_Runtime.jsonParse(text) : Dynamic));
@@ -39,11 +40,11 @@ class CaptureBaseline {
       return cast null;
     }
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.typeofValue(parsed), 'object'), function():Dynamic return cast _Runtime.strictEquals(parsed, null)), function():Dynamic return cast _Runtime.isArray(parsed)))) { return cast null; }
-    return cast (cast parsed : Dynamic);
+    return cast (cast parsed : flighthq.types.CaptureBaseline);
     return cast null;
   }
 
-  public static function setCaptureBaselineField(baseline:Dynamic, column:String, field:CaptureColumnBaseline, value:String):Void {
+  public static function setCaptureBaselineField(baseline:flighthq.types.CaptureBaseline, column:String, field:CaptureColumnBaseline, value:String):Void {
     _Runtime.setIndex(_Runtime.setIndex(baseline, column, (_Runtime.getIndex(baseline, column) ?? {  })), field, value);
   }
 }

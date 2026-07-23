@@ -9,12 +9,13 @@ import flighthq.spritesheetFormats.TexturePackerSchema.TexturePackerDocument;
 import flighthq.spritesheetFormats.TexturePackerSchema.TexturePackerHashDocument;
 import flighthq.spritesheetFormats.TexturePackerSchema.TexturePackerHashFrame;
 import flighthq.spritesheetFormats.TexturePackerSchema.TexturePackerMeta;
+import flighthq.types.SpritesheetData;
 
 typedef TexturePackerSerializeOptions = { @:optional var variant:String; };
 
 @:expose("flighthq.spritesheetFormats.TexturePackerSerialize")
 class TexturePackerSerialize {
-  public static function dataToMeta__texturePackerSerialize(data:Dynamic, existing:Dynamic):TexturePackerMeta {
+  public static function dataToMeta__texturePackerSerialize(data:SpritesheetData, existing:Dynamic):TexturePackerMeta {
     return cast { app: _Runtime.coalesce(_Runtime.field(existing, 'app'), function():Dynamic return cast 'https://www.codeandweb.com/texturepacker'), format: _Runtime.coalesce(_Runtime.field(existing, 'format'), function():Dynamic return cast 'RGBA8888'), frameTags: _Runtime.select(_Runtime.field(_Runtime.field(data, 'animations'), 'length'), function():Dynamic return cast _Runtime.callProperty(_Runtime.field(data, 'animations'), 'map', cast ([function(anim:Dynamic) {
       var firstIdx:Dynamic = cast _Runtime.UNDEFINED;
       var lastIdx:Dynamic = cast _Runtime.UNDEFINED;
@@ -32,7 +33,7 @@ class TexturePackerSerialize {
     return cast null;
   }
 
-  public static function dataToHashDocument__texturePackerSerialize(data:Dynamic, existing:Dynamic):TexturePackerHashDocument {
+  public static function dataToHashDocument__texturePackerSerialize(data:SpritesheetData, existing:Dynamic):TexturePackerHashDocument {
     var frames:Dynamic = cast _Runtime.UNDEFINED;
     frames = {  };
     for (frame in _Runtime.iterable(_Runtime.field(data, 'frames'))) {
@@ -42,14 +43,14 @@ class TexturePackerSerialize {
     return cast null;
   }
 
-  public static function dataToArrayDocument__texturePackerSerialize(data:Dynamic, existing:Dynamic):TexturePackerArrayDocument {
+  public static function dataToArrayDocument__texturePackerSerialize(data:SpritesheetData, existing:Dynamic):TexturePackerArrayDocument {
     var frames:Array<TexturePackerArrayFrame> = cast _Runtime.UNDEFINED;
     frames = _Runtime.callProperty(_Runtime.field(data, 'frames'), 'map', cast ([function(frame:Dynamic) return _Runtime.mergeObjects([{ filename: _Runtime.field(frame, 'name') }, _Runtime.callValue(TexturePackerSerialize.frameToEntry__texturePackerSerialize, cast ([frame] : Array<Dynamic>))])] : Array<Dynamic>));
     return cast { frames: frames, meta: _Runtime.callValue(TexturePackerSerialize.dataToMeta__texturePackerSerialize, cast ([data, _Runtime.coalesce(_Runtime.field(existing, 'meta'), function():Dynamic return cast {  })] : Array<Dynamic>)) };
     return cast null;
   }
 
-  public static function serializeTexturePackerSpritesheet(data:Dynamic, ?existing:Dynamic, ?options:TexturePackerSerializeOptions):String {
+  public static function serializeTexturePackerSpritesheet(data:SpritesheetData, ?existing:Dynamic, ?options:TexturePackerSerializeOptions):String {
     var existingIsArray:Dynamic = cast _Runtime.UNDEFINED;
     var variant:Dynamic = cast _Runtime.UNDEFINED;
     var doc:Dynamic = cast _Runtime.UNDEFINED;

@@ -4,10 +4,12 @@ package flighthq.spring;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.math.Constants.TAU;
+import flighthq.types.Spring;
+import flighthq.types.Spring.SpringConfig;
 
 @:expose("flighthq.spring.UpdateSpring")
 class UpdateSpring {
-  public static function updateSpring(spring:Dynamic, target:Float, config:Dynamic, deltaTime:Float):Void {
+  public static function updateSpring(spring:Spring, target:Float, config:SpringConfig, deltaTime:Float):Void {
     var frequency:Dynamic = cast _Runtime.UNDEFINED;
     var value:Dynamic = cast _Runtime.UNDEFINED;
     var velocity:Dynamic = cast _Runtime.UNDEFINED;

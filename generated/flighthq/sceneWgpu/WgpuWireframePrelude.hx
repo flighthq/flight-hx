@@ -10,12 +10,13 @@ import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuScenePipel
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.stashWgpuUvTransform;
 import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
 import flighthq.types.LinearColor;
+import flighthq.types.WgpuRenderState;
 
 typedef WgpuWireframePipeline = Dynamic;
 
 @:expose("flighthq.sceneWgpu.WgpuWireframePrelude")
 class WgpuWireframePrelude {
-  public static function bindWgpuWireframeColor(state:Dynamic, pipeline:WgpuWireframePipeline, materialKey:Dynamic, color:LinearColor):Dynamic {
+  public static function bindWgpuWireframeColor(state:WgpuRenderState, pipeline:WgpuWireframePipeline, materialKey:Dynamic, color:LinearColor):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
@@ -36,7 +37,7 @@ class WgpuWireframePrelude {
     return cast null;
   }
 
-  public static function compileWgpuWireframePipeline(state:Dynamic, format:Dynamic):WgpuWireframePipeline {
+  public static function compileWgpuWireframePipeline(state:WgpuRenderState, format:Dynamic):WgpuWireframePipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     var materialBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
@@ -47,7 +48,7 @@ class WgpuWireframePrelude {
     return cast null;
   }
 
-  public static function ensureWgpuWireframePipeline(state:Dynamic, format:Dynamic):WgpuWireframePipeline {
+  public static function ensureWgpuWireframePipeline(state:WgpuRenderState, format:Dynamic):WgpuWireframePipeline {
     return cast _Runtime.callValue(ensureWgpuScenePipeline, cast ([state, 'wireframe:' + Std.string(format) + '', function() return _Runtime.callValue(compileWgpuWireframePipeline, cast ([state, format] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }

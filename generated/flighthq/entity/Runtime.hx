@@ -3,6 +3,7 @@ package flighthq.entity;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
@@ -13,12 +14,12 @@ class Runtime {
     return cast null;
   }
 
-  public static function getEntityRuntime(source:Dynamic):EntityRuntime {
+  public static function getEntityRuntime(source:Entity):EntityRuntime {
     return cast _Runtime.getIndex(source, EntityRuntimeKey);
     return cast null;
   }
 
-  public static function hasEntityRuntime(source:Dynamic):Bool {
+  public static function hasEntityRuntime(source:Entity):Bool {
     return cast !_Runtime.strictEquals(_Runtime.getIndex(source, EntityRuntimeKey), _Runtime.field(_Runtime, 'UNDEFINED'));
     return cast null;
   }

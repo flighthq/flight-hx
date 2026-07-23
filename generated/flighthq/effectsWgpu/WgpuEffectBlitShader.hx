@@ -6,6 +6,8 @@ import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.WgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.createWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
+import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.effectsWgpu.WgpuEffectBlitShader")
 class WgpuEffectBlitShader {
@@ -15,7 +17,7 @@ class WgpuEffectBlitShader {
 
   public static final ERASE_WGSL__wgpuEffectBlitShader:Dynamic = '\nstruct Uniforms { _u : f32, _pad0 : f32, _pad1 : f32, _pad2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let a = textureSampleLevel(tex, smp, uv, 0.0).a;\n  return vec4f(0.0, 0.0, 0.0, a);\n}';
 
-  public static function applyWgpuEffectBlitOffsetPass(state:Dynamic, source:Dynamic, dest:Dynamic, dx:Float, dy:Float):Void {
+  public static function applyWgpuEffectBlitOffsetPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, dx:Float, dy:Float):Void {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(WgpuEffectBlitShader.getWgpuBlitOffsetShader__wgpuEffectBlitShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, source, dest, pipeline, function(f32:Dynamic) {
@@ -24,7 +26,7 @@ class WgpuEffectBlitShader {
     }] : Array<Dynamic>));
   }
 
-  public static function applyWgpuEffectBlitPass(state:Dynamic, source:Dynamic, dest:Dynamic):Void {
+  public static function applyWgpuEffectBlitPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(WgpuEffectBlitShader.getWgpuBlitShader__wgpuEffectBlitShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, source, dest, pipeline, function() {
@@ -32,7 +34,7 @@ class WgpuEffectBlitShader {
     }] : Array<Dynamic>));
   }
 
-  public static function applyWgpuEffectErasePass(state:Dynamic, source:Dynamic, dest:Dynamic):Void {
+  public static function applyWgpuEffectErasePass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(WgpuEffectBlitShader.getWgpuEraseShader__wgpuEffectBlitShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, source, dest, pipeline, function() {
@@ -40,7 +42,7 @@ class WgpuEffectBlitShader {
     }] : Array<Dynamic>));
   }
 
-  public static function getWgpuBlitOffsetShader__wgpuEffectBlitShader(state:Dynamic):WgpuEffectPipeline {
+  public static function getWgpuBlitOffsetShader__wgpuEffectBlitShader(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = _Runtime.callProperty(WgpuEffectBlitShader.blitOffsetPipelines__wgpuEffectBlitShader, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -51,7 +53,7 @@ class WgpuEffectBlitShader {
     return cast null;
   }
 
-  public static function getWgpuBlitShader__wgpuEffectBlitShader(state:Dynamic):WgpuEffectPipeline {
+  public static function getWgpuBlitShader__wgpuEffectBlitShader(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = _Runtime.callProperty(WgpuEffectBlitShader.blitPipelines__wgpuEffectBlitShader, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -62,7 +64,7 @@ class WgpuEffectBlitShader {
     return cast null;
   }
 
-  public static function getWgpuEraseShader__wgpuEffectBlitShader(state:Dynamic):WgpuEffectPipeline {
+  public static function getWgpuEraseShader__wgpuEffectBlitShader(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = _Runtime.callProperty(WgpuEffectBlitShader.erasePipelines__wgpuEffectBlitShader, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {

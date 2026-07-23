@@ -7,12 +7,15 @@ import flighthq.node.Revision.invalidateNodeAppearance;
 import flighthq.render.RenderProxy.installRenderAdaptHook;
 import flighthq.render.RenderProxy.updateRenderProxyRenderer;
 import flighthq.render.RenderState.getRenderStateRuntime;
+import flighthq.types.Node;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderProxyAdapter;
+import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 
 @:expose("flighthq.render.RenderProxyAdapter")
 class RenderProxyAdapter {
-  public static function applyRenderProxyAdapter(state:Dynamic, source:Renderable, data:Dynamic):Void {
+  public static function applyRenderProxyAdapter(state:RenderState, source:Renderable, data:Dynamic):Void {
     var renderAdapter:Dynamic = cast _Runtime.UNDEFINED;
     var traverseChildren:Dynamic = cast _Runtime.UNDEFINED;
     renderAdapter = _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderProxyAdapterMap'), 'get', cast ([source] : Array<Dynamic>)), function():Dynamic return cast null);
@@ -27,12 +30,12 @@ class RenderProxyAdapter {
     _Runtime.setField(data, 'traverseChildren', traverseChildren);
   }
 
-  public static function getRenderProxyAdapter(state:Dynamic, source:Renderable):Null<Dynamic> {
+  public static function getRenderProxyAdapter(state:RenderState, source:Renderable):Null<flighthq.types.RenderProxyAdapter> {
     return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderProxyAdapterMap'), 'get', cast ([source] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function setRenderProxyAdapter(state:Dynamic, source:Renderable, adapter:Null<Dynamic>):Void {
+  public static function setRenderProxyAdapter(state:RenderState, source:Renderable, adapter:Null<flighthq.types.RenderProxyAdapter>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderAdaptHook'), applyRenderProxyAdapter))) {
       _Runtime.callValue(installRenderAdaptHook, cast ([state, applyRenderProxyAdapter] : Array<Dynamic>));
@@ -43,6 +46,6 @@ class RenderProxyAdapter {
     } else {
       _Runtime.callProperty(_Runtime.field(runtime, 'renderProxyAdapterMap'), 'set', cast ([source, adapter] : Array<Dynamic>));
     }
-    _Runtime.callValue(invalidateNodeAppearance, cast ([(cast source : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(invalidateNodeAppearance, cast ([(cast source : Node<Dynamic>)] : Array<Dynamic>));
   }
 }

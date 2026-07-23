@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Node.NodeTraits;
 
-typedef Viewport<Traits> = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var align:ViewportAlign; var root:Null<Dynamic>; var scaleMode:ViewportScaleMode; };
+typedef Viewport<Traits> = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var align:ViewportAlign; var root:Null<Node<Traits>>; var scaleMode:ViewportScaleMode; };

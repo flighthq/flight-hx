@@ -18,26 +18,31 @@ import flighthq.types.ParticleConfigIssue;
 import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleCurve.ColorKeyframe;
 import flighthq.types.ParticleCurve.CurveKeyframe;
+import flighthq.types.ParticleEmitter;
+import flighthq.types.ParticleEmitterConfig;
+import flighthq.types.ParticleEmitterSignals;
+import flighthq.types.ParticleEmitterState;
 import flighthq.types.ParticleForce;
 import flighthq.types.ParticleObject;
+import flighthq.types.ParticleObjectsState;
 import flighthq.types.ParticleObjectsUpdateOptions;
 import flighthq.types.RandomSource;
 
 @:expose("flighthq.particles.Particles")
 class Particles {
-  public static function applyParticleCollisions(emitter:Dynamic, state:Dynamic, colliders:Array<ParticleCollider>):Void {
+  public static function applyParticleCollisions(emitter:ParticleEmitter, state:ParticleEmitterState, colliders:Array<ParticleCollider>):Void {
     _Runtime.callValue(Facade_Particles_flighthq_particles_ApplyParticleCollisions.applyParticleCollisions, cast ([emitter, state, colliders] : Array<Dynamic>));
   }
 
-  public static function applyParticleForces(emitter:Dynamic, state:Dynamic, forces:Array<ParticleForce>, deltaTime:Float):Void {
+  public static function applyParticleForces(emitter:ParticleEmitter, state:ParticleEmitterState, forces:Array<ParticleForce>, deltaTime:Float):Void {
     _Runtime.callValue(Facade_Particles_flighthq_particles_ApplyParticleForces.applyParticleForces, cast ([emitter, state, forces, deltaTime] : Array<Dynamic>));
   }
 
-  public static function applyParticleObjectCollisions(objects:Array<ParticleObject>, state:Dynamic, colliders:Array<ParticleCollider>):Void {
+  public static function applyParticleObjectCollisions(objects:Array<ParticleObject>, state:ParticleObjectsState, colliders:Array<ParticleCollider>):Void {
     _Runtime.callValue(Facade_Particles_flighthq_particles_ApplyParticleCollisions.applyParticleObjectCollisions, cast ([objects, state, colliders] : Array<Dynamic>));
   }
 
-  public static function applyParticleObjectForces(objects:Array<ParticleObject>, state:Dynamic, forces:Array<ParticleForce>, deltaTime:Float):Void {
+  public static function applyParticleObjectForces(objects:Array<ParticleObject>, state:ParticleObjectsState, forces:Array<ParticleForce>, deltaTime:Float):Void {
     _Runtime.callValue(Facade_Particles_flighthq_particles_ApplyParticleForces.applyParticleObjectForces, cast ([objects, state, forces, deltaTime] : Array<Dynamic>));
   }
 
@@ -51,45 +56,45 @@ class Particles {
     return cast null;
   }
 
-  public static function createParticleEmitterConfig(?config:Dynamic):Dynamic {
+  public static function createParticleEmitterConfig(?config:Dynamic):ParticleEmitterConfig {
     return cast _Runtime.callValue(Facade_Particles_flighthq_particles_ParticleEmitterConfig.createParticleEmitterConfig, cast ([config] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createParticleEmitterSignals():Dynamic {
+  public static function createParticleEmitterSignals():ParticleEmitterSignals {
     return cast _Runtime.callValue(Facade_Particles_flighthq_particles_ParticleEmitterSignals.createParticleEmitterSignals, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createParticleEmitterState(?random:RandomSource):Dynamic {
+  public static function createParticleEmitterState(?random:RandomSource):ParticleEmitterState {
     return cast _Runtime.callValue(Facade_Particles_flighthq_particles_ParticleEmitterState.createParticleEmitterState, cast ([random] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createParticleObjectsState(capacity:Float, ?random:RandomSource):Dynamic {
+  public static function createParticleObjectsState(capacity:Float, ?random:RandomSource):ParticleObjectsState {
     return cast _Runtime.callValue(Facade_Particles_flighthq_particles_ParticleObjectsState.createParticleObjectsState, cast ([capacity, random] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function enableParticleEmitterSignals(state:Dynamic):Dynamic {
+  public static function enableParticleEmitterSignals(state:Dynamic):ParticleEmitterSignals {
     return cast _Runtime.callValue(Facade_Particles_flighthq_particles_ParticleEmitterSignals.enableParticleEmitterSignals, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureParticleEmitterStateCapacity(state:Dynamic, capacity:Float, hasColorVariance:Bool):Void {
+  public static function ensureParticleEmitterStateCapacity(state:ParticleEmitterState, capacity:Float, hasColorVariance:Bool):Void {
     _Runtime.callValue(Facade_Particles_flighthq_particles_ParticleEmitterState.ensureParticleEmitterStateCapacity, cast ([state, capacity, hasColorVariance] : Array<Dynamic>));
   }
 
-  public static function ensureParticleObjectsStateCapacity(state:Dynamic, capacity:Float):Void {
+  public static function ensureParticleObjectsStateCapacity(state:ParticleObjectsState, capacity:Float):Void {
     _Runtime.callValue(Facade_Particles_flighthq_particles_ParticleObjectsState.ensureParticleObjectsStateCapacity, cast ([state, capacity] : Array<Dynamic>));
   }
 
-  public static function getParticleEmitterSignals(state:Dynamic):Null<Dynamic> {
+  public static function getParticleEmitterSignals(state:Dynamic):Null<ParticleEmitterSignals> {
     return cast _Runtime.callValue(Facade_Particles_flighthq_particles_ParticleEmitterSignals.getParticleEmitterSignals, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isParticleObjectsComplete(objects:Array<ParticleObject>, state:Dynamic, config:Dynamic):Bool {
+  public static function isParticleObjectsComplete(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig):Bool {
     return cast _Runtime.callValue(Facade_Particles_flighthq_particles_UpdateParticleObjects.isParticleObjectsComplete, cast ([objects, state, config] : Array<Dynamic>));
     return cast null;
   }
@@ -102,7 +107,7 @@ class Particles {
     _Runtime.callValue(Facade_Particles_flighthq_particles_Curve.lerpHsvInPlace, cast ([colorsOut, offset, birth, death, t] : Array<Dynamic>));
   }
 
-  public static function normalizeParticleEmitterConfig(?config:Dynamic):Dynamic {
+  public static function normalizeParticleEmitterConfig(?config:Dynamic):ParticleEmitterConfig {
     return cast _Runtime.callValue(Facade_Particles_flighthq_particles_ValidateParticleEmitterConfig.normalizeParticleEmitterConfig, cast ([config] : Array<Dynamic>));
     return cast null;
   }
@@ -138,15 +143,15 @@ class Particles {
     return cast null;
   }
 
-  public static function stepParticleObjects(objects:Array<ParticleObject>, state:Dynamic, config:Dynamic, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?updateOptions:ParticleObjectsUpdateOptions):Void {
+  public static function stepParticleObjects(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?updateOptions:ParticleObjectsUpdateOptions):Void {
     _Runtime.callValue(Facade_Particles_flighthq_particles_StepParticleObjects.stepParticleObjects, cast ([objects, state, config, deltaTime, forces, colliders, updateOptions] : Array<Dynamic>));
   }
 
-  public static function updateParticleObjects(objects:Array<ParticleObject>, state:Dynamic, config:Dynamic, deltaTime:Float, ?options:ParticleObjectsUpdateOptions):Void {
+  public static function updateParticleObjects(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, ?options:ParticleObjectsUpdateOptions):Void {
     _Runtime.callValue(Facade_Particles_flighthq_particles_UpdateParticleObjects.updateParticleObjects, cast ([objects, state, config, deltaTime, options] : Array<Dynamic>));
   }
 
-  public static function validateParticleEmitterConfig(config:Dynamic):Array<ParticleConfigIssue> {
+  public static function validateParticleEmitterConfig(config:ParticleEmitterConfig):Array<ParticleConfigIssue> {
     return cast _Runtime.callValue(Facade_Particles_flighthq_particles_ValidateParticleEmitterConfig.validateParticleEmitterConfig, cast ([config] : Array<Dynamic>));
     return cast null;
   }

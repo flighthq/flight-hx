@@ -8,4 +8,4 @@ import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef ColorTransform = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var alphaMultiplier:Float; var alphaOffset:Float; var blueMultiplier:Float; var blueOffset:Float; var greenMultiplier:Float; var greenOffset:Float; var redMultiplier:Float; var redOffset:Float; };
 
-typedef ColorTransformLike = EntityWithoutRuntime<Dynamic>;
+typedef ColorTransformLike = EntityWithoutRuntime<flighthq.types.ColorTransform>;

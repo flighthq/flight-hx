@@ -5,13 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.SurfaceEdgeMode;
+import flighthq.types.SurfaceRegion;
 import flighthq.types.SurfaceResizeMode;
 
 typedef SurfaceResizeOptions = { @:optional var mode:SurfaceResizeMode; @:optional var edgeMode:SurfaceEdgeMode; @:optional var premultiplied:Bool; };
 
 @:expose("flighthq.surface.SurfaceResize")
 class SurfaceResize {
-  public static function resizeSurface(dest:Dynamic, source:Dynamic, options:Dynamic = 'bilinear'):Void {
+  public static function resizeSurface(dest:SurfaceRegion, source:SurfaceRegion, options:Dynamic = 'bilinear'):Void {
     var opts:SurfaceResizeOptions = cast _Runtime.UNDEFINED;
     var mode:Dynamic = cast _Runtime.UNDEFINED;
     var edgeMode:Dynamic = cast _Runtime.UNDEFINED;

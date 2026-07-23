@@ -3,6 +3,7 @@ package flighthq.displayobjectDom;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.FontResource;
 
 @:expose("flighthq.displayobjectDom.DomFontSource")
 class DomFontSource {
@@ -13,7 +14,7 @@ class DomFontSource {
     return cast null;
   }
 
-  public static function invalidateDomFontResource(source:Dynamic):Void {
+  public static function invalidateDomFontResource(source:FontResource):Void {
     var family:Dynamic = cast _Runtime.UNDEFINED;
     family = _Runtime.field(source, 'family');
     for (key in _Runtime.iterable(_Runtime.callProperty(DomFontSource._domFontAscentCache__domFontSource, 'keys', cast ([] : Array<Dynamic>)))) {

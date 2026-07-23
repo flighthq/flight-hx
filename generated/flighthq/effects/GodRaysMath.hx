@@ -3,10 +3,11 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.GodRaysEffect;
 
 @:expose("flighthq.effects.GodRaysMath")
 class GodRaysMath {
-  public static function computeGodRaysAccumulationScale(effect:Dynamic):Float {
+  public static function computeGodRaysAccumulationScale(effect:GodRaysEffect):Float {
     var samples:Dynamic = cast _Runtime.UNDEFINED;
     var weight:Dynamic = cast _Runtime.UNDEFINED;
     var exposure:Dynamic = cast _Runtime.UNDEFINED;
@@ -17,12 +18,12 @@ class GodRaysMath {
     return cast null;
   }
 
-  public static function computeGodRaysLightCenter(effect:Dynamic, out:Array<Float>):Void {
+  public static function computeGodRaysLightCenter(effect:GodRaysEffect, out:Array<Float>):Void {
     _Runtime.setIndex(out, 0.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.coalesce(_Runtime.field(effect, 'centerX'), function():Dynamic return cast 0.5)] : Array<Dynamic>))] : Array<Dynamic>)));
     _Runtime.setIndex(out, 1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.coalesce(_Runtime.field(effect, 'centerY'), function():Dynamic return cast 0.5)] : Array<Dynamic>))] : Array<Dynamic>)));
   }
 
-  public static function computeGodRaysSampleWeight(effect:Dynamic, sampleIndex:Float):Float {
+  public static function computeGodRaysSampleWeight(effect:GodRaysEffect, sampleIndex:Float):Float {
     var decay:Dynamic = cast _Runtime.UNDEFINED;
     var weight:Dynamic = cast _Runtime.UNDEFINED;
     var exposure:Dynamic = cast _Runtime.UNDEFINED;
@@ -33,7 +34,7 @@ class GodRaysMath {
     return cast null;
   }
 
-  public static function computeGodRaysStepSize(effect:Dynamic, px:Float, py:Float, out:Array<Float>):Void {
+  public static function computeGodRaysStepSize(effect:GodRaysEffect, px:Float, py:Float, out:Array<Float>):Void {
     var cx:Dynamic = cast _Runtime.UNDEFINED;
     var cy:Dynamic = cast _Runtime.UNDEFINED;
     var density:Dynamic = cast _Runtime.UNDEFINED;

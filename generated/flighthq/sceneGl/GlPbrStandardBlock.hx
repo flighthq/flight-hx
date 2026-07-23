@@ -10,8 +10,10 @@ import flighthq.sceneGl.GlPbrPrelude.GlPbrDefineKey;
 import flighthq.sceneGl.GlPbrProgramCache.GlPbrProgram;
 import flighthq.sceneGl._internal._GlMeshProgramValues.bindGlUvTransform;
 import flighthq.texture.Texture.hasTextureUvTransform;
+import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
+import flighthq.types.Texture;
 
 @:expose("flighthq.sceneGl.GlPbrStandardBlock")
 class GlPbrStandardBlock {
@@ -27,7 +29,7 @@ class GlPbrStandardBlock {
 
   public static final GL_PBR_EXTENSION_TEXTURE_UNIT:Dynamic = 5.0;
 
-  public static function bindGlPbrStandardBlock(state:Dynamic, program:GlPbrProgram, standard:Null<StandardPbrMaterialProperties>):Void {
+  public static function bindGlPbrStandardBlock(state:GlRenderState, program:GlPbrProgram, standard:Null<StandardPbrMaterialProperties>):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     if (_Runtime.truthy(_Runtime.strictEquals(standard, null))) {
@@ -57,7 +59,7 @@ class GlPbrStandardBlock {
     _Runtime.callValue(bindGlUvTransform, cast ([gl, program, _Runtime.field(standard, 'baseColorMap')] : Array<Dynamic>));
   }
 
-  public static function bindGlPbrStandardTexture(state:Dynamic, texture:Null<Dynamic>, location:Null<Dynamic>, unit:Float):Void {
+  public static function bindGlPbrStandardTexture(state:GlRenderState, texture:Null<Texture>, location:Null<Dynamic>, unit:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(isGlTextureReady, cast ([texture] : Array<Dynamic>))))) { return; }
     gl = _Runtime.field(state, 'gl');
@@ -73,7 +75,7 @@ class GlPbrStandardBlock {
     return cast null;
   }
 
-  public static function isGlTextureReady(texture:Null<Dynamic>):Bool {
+  public static function isGlTextureReady(texture:Null<Texture>):Bool {
     return cast _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(texture, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(texture, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(texture, 'image')] : Array<Dynamic>)));
     return cast null;
   }

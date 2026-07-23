@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef Application = { var deltaTime:Float; var elapsedTime:Float; var frameCount:Float; var interpolationAlpha:Float; var isRunning:Bool; var onActivate:Null<Dynamic>; var onDeactivate:Null<Dynamic>; var onError:Null<Dynamic>; var onExit:Dynamic; var onFixedUpdate:Null<Dynamic>; var onRender:Dynamic; var onUpdate:Dynamic; var windows:Array<ApplicationWindow>; };
+typedef Application = { var deltaTime:Float; var elapsedTime:Float; var frameCount:Float; var interpolationAlpha:Float; var isRunning:Bool; var onActivate:Null<Signal<Dynamic>>; var onDeactivate:Null<Signal<Dynamic>>; var onError:Null<Signal<Dynamic>>; var onExit:Signal<Dynamic>; var onFixedUpdate:Null<Signal<Dynamic>>; var onRender:Signal<Dynamic>; var onUpdate:Signal<Dynamic>; var windows:Array<ApplicationWindow>; };

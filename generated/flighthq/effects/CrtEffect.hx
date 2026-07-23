@@ -3,10 +3,11 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.CrtEffect;
 
 @:expose("flighthq.effects.CrtEffect")
 class CrtEffect {
-  public static function createCrtEffect(?options:Dynamic):Dynamic {
+  public static function createCrtEffect(?options:Dynamic):flighthq.types.CrtEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'CrtEffect' }, options]);
     return cast null;

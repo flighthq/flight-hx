@@ -7,18 +7,19 @@ import flighthq.textureatlas.TextureAtlasRegion.createTextureAtlasRegion;
 import flighthq.textureatlasFormats.TextureAtlasPackerSchema.TextureAtlasPackerArrayFrame;
 import flighthq.textureatlasFormats.TextureAtlasPackerSchema.TextureAtlasPackerDocument;
 import flighthq.textureatlasFormats.TextureAtlasPackerSchema.TextureAtlasPackerHashFrame;
+import flighthq.types.TextureAtlas;
 
 typedef TextureAtlasPackerParseOptions = { @:optional var stripPathPrefix:Bool; };
 
 @:expose("flighthq.textureatlasFormats.TextureAtlasPackerParse")
 class TextureAtlasPackerParse {
-  public static function parseTextureAtlasPackerDocument(doc:TextureAtlasPackerDocument, atlas:Dynamic, ?options:TextureAtlasPackerParseOptions):Dynamic {
+  public static function parseTextureAtlasPackerDocument(doc:TextureAtlasPackerDocument, atlas:TextureAtlas, ?options:TextureAtlasPackerParseOptions):TextureAtlas {
     _Runtime.callValue(TextureAtlasPackerParse.applyDocument__textureAtlasPackerParse, cast ([atlas, doc, _Runtime.coalesce(options, function():Dynamic return cast {  })] : Array<Dynamic>));
     return cast atlas;
     return cast null;
   }
 
-  public static function parseTextureAtlasPackerJson(json:String, atlas:Dynamic, ?options:TextureAtlasPackerParseOptions):Dynamic {
+  public static function parseTextureAtlasPackerJson(json:String, atlas:TextureAtlas, ?options:TextureAtlasPackerParseOptions):TextureAtlas {
     var doc:Dynamic = cast _Runtime.UNDEFINED;
     doc = (cast _Runtime.jsonParse(json) : TextureAtlasPackerDocument);
     _Runtime.callValue(TextureAtlasPackerParse.applyDocument__textureAtlasPackerParse, cast ([atlas, doc, _Runtime.coalesce(options, function():Dynamic return cast {  })] : Array<Dynamic>));
@@ -26,7 +27,7 @@ class TextureAtlasPackerParse {
     return cast null;
   }
 
-  public static function applyDocument__textureAtlasPackerParse(atlas:Dynamic, doc:TextureAtlasPackerDocument, options:TextureAtlasPackerParseOptions):Void {
+  public static function applyDocument__textureAtlasPackerParse(atlas:TextureAtlas, doc:TextureAtlasPackerDocument, options:TextureAtlasPackerParseOptions):Void {
     _Runtime.setLength(_Runtime.field(atlas, 'regions'), 0.0);
     if (_Runtime.truthy(_Runtime.isArray(_Runtime.field(doc, 'frames')))) {
       for (entry in _Runtime.iterable(_Runtime.field(doc, 'frames'))) {
@@ -41,7 +42,7 @@ class TextureAtlasPackerParse {
     }
   }
 
-  public static function applyFrame__textureAtlasPackerParse(atlas:Dynamic, name:String, entry:Dynamic, options:TextureAtlasPackerParseOptions):Void {
+  public static function applyFrame__textureAtlasPackerParse(atlas:TextureAtlas, name:String, entry:Dynamic, options:TextureAtlasPackerParseOptions):Void {
     var normalized:Dynamic = cast _Runtime.UNDEFINED;
     var region:Dynamic = cast _Runtime.UNDEFINED;
     normalized = _Runtime.callValue(TextureAtlasPackerParse.normalizeFrameName__textureAtlasPackerParse, cast ([name, _Runtime.coalesce(_Runtime.field(options, 'stripPathPrefix'), function():Dynamic return cast false)] : Array<Dynamic>));

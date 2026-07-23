@@ -6,12 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.particlesFormats.LibgdxSchema.LibgdxParticleDocument;
 import flighthq.particlesFormats.LibgdxSchema.LibgdxRangeValue;
 import flighthq.particlesFormats.SerializeResult.ParticleSerializeResult;
+import flighthq.types.ParticleEmitterConfig;
 
 typedef LibgdxSerializeOptions = { @:optional var textureSize:Float; };
 
 @:expose("flighthq.particlesFormats.LibgdxSerialize")
 class LibgdxSerialize {
-  public static function serializeLibgdxParticle(config:Dynamic, ?existing:Dynamic, ?options:LibgdxSerializeOptions):String {
+  public static function serializeLibgdxParticle(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:LibgdxSerializeOptions):String {
     var textureSize:Dynamic = cast _Runtime.UNDEFINED;
     var doc:Dynamic = cast _Runtime.UNDEFINED;
     textureSize = _Runtime.coalesce(_Runtime.optionalField(options, 'textureSize'), function():Dynamic return cast 1.0);
@@ -20,7 +21,7 @@ class LibgdxSerialize {
     return cast null;
   }
 
-  public static function serializeLibgdxParticleDocument(config:Dynamic, ?existing:Dynamic, ?options:LibgdxSerializeOptions):ParticleSerializeResult {
+  public static function serializeLibgdxParticleDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:LibgdxSerializeOptions):ParticleSerializeResult {
     var text:Dynamic = cast _Runtime.UNDEFINED;
     var warnings:Dynamic = cast _Runtime.UNDEFINED;
     text = _Runtime.callValue(serializeLibgdxParticle, cast ([config, existing, options] : Array<Dynamic>));
@@ -31,7 +32,7 @@ class LibgdxSerialize {
 
   public static final RAD2DEG__libgdxSerialize:Dynamic = (180.0 / HxMath.PI);
 
-  public static function collectLibgdxSerializeWarnings__libgdxSerialize(config:Dynamic):Array<String> {
+  public static function collectLibgdxSerializeWarnings__libgdxSerialize(config:ParticleEmitterConfig):Array<String> {
     var warnings:Array<String> = cast _Runtime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(config, 'blendMode'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(config, 'blendMode'), 'add')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(config, 'blendMode'), 'normal')))) {
@@ -59,7 +60,7 @@ class LibgdxSerialize {
     return cast null;
   }
 
-  public static function configToDocument__libgdxSerialize(config:Dynamic, existing:Dynamic, textureSize:Float):LibgdxParticleDocument {
+  public static function configToDocument__libgdxSerialize(config:ParticleEmitterConfig, existing:Dynamic, textureSize:Float):LibgdxParticleDocument {
     var angleMid:Dynamic = cast _Runtime.UNDEFINED;
     var spreadDeg:Dynamic = cast _Runtime.UNDEFINED;
     var angleMin:Dynamic = cast _Runtime.UNDEFINED;

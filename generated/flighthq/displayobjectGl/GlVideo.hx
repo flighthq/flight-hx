@@ -12,20 +12,24 @@ import flighthq.renderGl.GlShaderBinding.resolveGlShader;
 import flighthq.texture.VideoTexture.advanceVideoTexture;
 import flighthq.texture.VideoTexture.createVideoTexture;
 import flighthq.types.DisplayObjectRenderer;
+import flighthq.types.GlRenderState;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
+import flighthq.types.Video;
+import flighthq.types.VideoResource;
+import flighthq.types.VideoTexture;
 
-typedef GlVideoData__glVideo = { var source:Null<Dynamic>; var videoTexture:Null<Dynamic>; };
+typedef GlVideoData__glVideo = { var source:Null<VideoResource>; var videoTexture:Null<VideoTexture>; };
 
 @:expose("flighthq.displayobjectGl.GlVideo")
 class GlVideo {
-  public static function createGlVideoData(_state:Dynamic, _source:Renderable):RendererData {
+  public static function createGlVideoData(_state:GlRenderState, _source:Renderable):RendererData {
     return cast (cast (cast { source: null, videoTexture: null } : Dynamic) : RendererData);
     return cast null;
   }
 
-  public static function destroyGlVideoData(state:Dynamic, data:RendererData):Void {
+  public static function destroyGlVideoData(state:GlRenderState, data:RendererData):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var videoTexture:Dynamic = cast _Runtime.UNDEFINED;
@@ -43,17 +47,17 @@ class GlVideo {
     }
   }
 
-  public static function drawGlVideo(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawGlVideo(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var resource:Dynamic = cast _Runtime.UNDEFINED;
     var element:Dynamic = cast _Runtime.UNDEFINED;
     var vw:Dynamic = cast _Runtime.UNDEFINED;
     var vh:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
-    var videoTexture:Dynamic = cast _Runtime.UNDEFINED;
+    var videoTexture:VideoTexture = cast _Runtime.UNDEFINED;
     var shader:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(flushGlSpriteBatch, cast ([state] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
+    source = (cast _Runtime.field(renderProxy, 'source') : Video);
     resource = _Runtime.coalesce(_Runtime.field(_Runtime.field(source, 'data'), 'source'), function():Dynamic return cast null);
     element = _Runtime.coalesce(_Runtime.optionalField(resource, 'element'), function():Dynamic return cast null);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(resource, null), function():Dynamic return cast _Runtime.strictEquals(element, null)), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'readyState'), 2.0, '<')))) { return; }

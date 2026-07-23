@@ -5,18 +5,21 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.types.TaaEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.effectsWgpu.WgpuTaaEffect")
 class WgpuTaaEffect {
-  public static function applyTaaEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
+  public static function applyTaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, _effect:TaaEffect):Void {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'antialiasing.taa', WgpuTaaEffect.TAA_FRAGMENT_WGSL__wgpuTaaEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : Dynamic), (cast dest : Dynamic), pipeline, WgpuTaaEffect._noopSetUniforms__wgpuTaaEffect] : Array<Dynamic>));
+    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, WgpuTaaEffect._noopSetUniforms__wgpuTaaEffect] : Array<Dynamic>));
   }
 
   public static final defaultWgpuTaaEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyTaaEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(applyTaaEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : TaaEffect)] : Array<Dynamic>));
   };
 
   public static function _noopSetUniforms__wgpuTaaEffect():Void {

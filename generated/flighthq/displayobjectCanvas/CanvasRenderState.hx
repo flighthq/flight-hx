@@ -8,6 +8,7 @@ import flighthq.render.RenderColor.setRenderStateBackgroundColor;
 import flighthq.render.RenderState.createRenderState as _createRenderState;
 import flighthq.render.RenderState.createRenderStateRuntime;
 import flighthq.types.CanvasRenderOptions;
+import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderState.CanvasRenderStateRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 

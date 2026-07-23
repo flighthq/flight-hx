@@ -7,4 +7,4 @@ import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 
-typedef BlinnPhongMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var alphaType:AlphaType; var blendMode:BlendMode; var doubleSided:Bool; var diffuse:Float; var diffuseMap:Null<Dynamic>; var normalMap:Null<Dynamic>; var normalScale:Float; var shininess:Float; var specular:Float; var specularMap:Null<Dynamic>; };
+typedef BlinnPhongMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var alphaType:AlphaType; var blendMode:BlendMode; var doubleSided:Bool; var diffuse:Float; var diffuseMap:Null<Texture>; var normalMap:Null<Texture>; var normalScale:Float; var shininess:Float; var specular:Float; var specularMap:Null<Texture>; };

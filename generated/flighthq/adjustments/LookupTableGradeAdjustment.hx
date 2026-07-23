@@ -5,10 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.adjustments.ColorLut.sampleColorLut;
 import flighthq.types.ColorTransformFunction;
+import flighthq.types.LookupTableGradeAdjustment;
 
 @:expose("flighthq.adjustments.LookupTableGradeAdjustment")
 class LookupTableGradeAdjustment {
-  public static function createLookupTableGradeAdjustment(?options:Dynamic):Dynamic {
+  public static function createLookupTableGradeAdjustment(?options:Dynamic):flighthq.types.LookupTableGradeAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var lut:Dynamic = cast _Runtime.UNDEFINED;
     var strength:Dynamic = cast _Runtime.UNDEFINED;

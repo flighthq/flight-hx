@@ -9,15 +9,17 @@ import flighthq.node.Revision.getNodeLocalTransformRevision;
 import flighthq.node.Transform2d.getNodeLocalMatrix;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.HasTransform2D;
+import flighthq.types.Node;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderState;
 
 @:expose("flighthq.render.RenderTransform2d")
 class RenderTransform2d {
-  public static function updateRenderProxy2DTransform(state:Dynamic, data:RenderProxy2D, ?parentData:RenderProxy2D):Bool {
+  public static function updateRenderProxy2DTransform(state:RenderState, data:RenderProxy2D, ?parentData:RenderProxy2D):Bool {
     var localTransformId:Dynamic = cast _Runtime.UNDEFINED;
     var parentDirty:Dynamic = cast _Runtime.UNDEFINED;
     var localDirty:Dynamic = cast _Runtime.UNDEFINED;
-    localTransformId = _Runtime.callValue(getNodeLocalTransformRevision, cast ([(cast _Runtime.field(data, 'source') : Dynamic)] : Array<Dynamic>));
+    localTransformId = _Runtime.callValue(getNodeLocalTransformRevision, cast ([(cast _Runtime.field(data, 'source') : Node<Dynamic>)] : Array<Dynamic>));
     parentDirty = _Runtime.andValue(!_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(parentData, 'transformFrameId'), _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentFrameId')));
     localDirty = !_Runtime.strictEquals(_Runtime.field(data, 'lastLocalTransformId'), localTransformId);
     if (_Runtime.truthy(_Runtime.orValue(parentDirty, function():Dynamic return cast localDirty))) {
@@ -29,7 +31,7 @@ class RenderTransform2d {
     return cast null;
   }
 
-  public static function recalculateRenderTransform2D__renderTransform2d(state:Dynamic, data:RenderProxy2D, ?parentData:RenderProxy2D):Void {
+  public static function recalculateRenderTransform2D__renderTransform2d(state:RenderState, data:RenderProxy2D, ?parentData:RenderProxy2D):Void {
     var transform2D:Dynamic = cast _Runtime.UNDEFINED;
     var parentTransform2D:Dynamic = cast _Runtime.UNDEFINED;
     transform2D = _Runtime.callValue(getNodeLocalMatrix, cast ([(cast _Runtime.field(data, 'source') : Dynamic)] : Array<Dynamic>));

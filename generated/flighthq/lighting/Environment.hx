@@ -4,19 +4,21 @@ package flighthq.lighting;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.CubeTexture;
+import flighthq.types.Environment;
 import flighthq.types.Types.EnvironmentKind;
 import flighthq.types._internal._EnvironmentValues.EnvironmentKind;
 
-typedef EnvironmentOptions = { @:optional var environment:Null<Dynamic>; @:optional var intensity:Float; };
+typedef EnvironmentOptions = { @:optional var environment:Null<CubeTexture>; @:optional var intensity:Float; };
 
 @:expose("flighthq.lighting.Environment")
 class Environment {
-  public static function cloneEnvironment(source:Dynamic):Dynamic {
+  public static function cloneEnvironment(source:flighthq.types.Environment):flighthq.types.Environment {
     return cast _Runtime.callValue(createEnvironment, cast ([{ environment: _Runtime.field(source, 'environment'), intensity: _Runtime.field(source, 'intensity') }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createEnvironment(?options:EnvironmentOptions):Dynamic {
+  public static function createEnvironment(?options:EnvironmentOptions):flighthq.types.Environment {
     return cast _Runtime.callValue(createEntity, cast ([{ environment: _Runtime.coalesce(_Runtime.optionalField(options, 'environment'), function():Dynamic return cast null), intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: EnvironmentKind }] : Array<Dynamic>));
     return cast null;
   }

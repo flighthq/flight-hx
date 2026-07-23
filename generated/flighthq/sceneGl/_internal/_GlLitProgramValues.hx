@@ -7,6 +7,7 @@ import flighthq.sceneGl.GlLitProgram;
 import flighthq.sceneGl.GlLitProgram.GlIblPlaceholders__glLitProgram;
 import flighthq.sceneGl.GlMeshProgram;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.types.GlRenderState;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types.Types.SCENE_LIGHT_HEMISPHERE_OFFSET;
@@ -37,7 +38,7 @@ class _GlLitProgramValues {
 
   public static final _uploadedLightVersion__glLitProgram:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  public static function bindGlMeshLightBlock(state:Dynamic, program:GlLitProgram, lights:SceneLightBlock):Void {
+  public static function bindGlMeshLightBlock(state:GlRenderState, program:GlLitProgram, lights:SceneLightBlock):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var shadow:Dynamic = cast _Runtime.UNDEFINED;
@@ -100,7 +101,7 @@ class _GlLitProgramValues {
     }
   }
 
-  public static function ensureGlIblPlaceholders__glLitProgram(state:Dynamic):GlIblPlaceholders__glLitProgram {
+  public static function ensureGlIblPlaceholders__glLitProgram(state:GlRenderState):GlIblPlaceholders__glLitProgram {
     var placeholders:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var black:Dynamic = cast _Runtime.UNDEFINED;

@@ -4,6 +4,7 @@ package flighthq.renderWgpu._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.createWgpuRenderState;
+import flighthq.types.WgpuRenderState;
 
 @:expose("flighthq.renderWgpu._internal._WgpuTestHelper")
 class _WgpuTestHelper {
@@ -113,8 +114,8 @@ class _WgpuTestHelper {
     return cast null;
   }
 
-  public static function createWgpuRenderStateForTest():flighthq._internal._Promise<Dynamic> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
+  public static function createWgpuRenderStateForTest():flighthq._internal._Promise<WgpuRenderState> {
+    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<WgpuRenderState> {
       var canvas:Dynamic = cast _Runtime.UNDEFINED;
       canvas = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
       _Runtime.setField(canvas, 'width', 800.0);

@@ -4,10 +4,11 @@ package flighthq.surface;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.surface.SurfaceComposite.extractSurfacePixels;
+import flighthq.types.SurfaceRegion;
 
 @:expose("flighthq.surface.SurfaceDraw")
 class SurfaceDraw {
-  public static function drawSurface(dest:Dynamic, source:Dynamic, x:Float, y:Float):Void {
+  public static function drawSurface(dest:Dynamic, source:SurfaceRegion, x:Float, y:Float):Void {
     var domImageData:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(source, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(source, 'height'), 0.0, '<=')))) { return; }
     domImageData = _Runtime.construct(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['globalThis'] : Array<Dynamic>)), 'ImageData'), [_Runtime.field(source, 'width'), _Runtime.field(source, 'height')]);

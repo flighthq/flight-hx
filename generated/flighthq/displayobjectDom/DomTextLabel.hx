@@ -15,16 +15,20 @@ import flighthq.textlayout.TextFormatRange.createTextFormatRange;
 import flighthq.textlayout.TextLayout.computeTextLayout;
 import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
 import flighthq.types.DisplayObjectRenderer;
+import flighthq.types.DomRenderState;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
+import flighthq.types.TextFormat;
+import flighthq.types.TextLabel;
 import flighthq.types.TextLabel.TextLabelRuntime;
 
 typedef DomTextData__domTextLabel = Dynamic;
 
 @:expose("flighthq.displayobjectDom.DomTextLabel")
 class DomTextLabel {
-  public static function createDomTextData__domTextLabel(_state:Dynamic, _source:Renderable):DomTextData__domTextLabel {
+  public static function createDomTextData__domTextLabel(_state:RenderState, _source:Renderable):DomTextData__domTextLabel {
     return cast _Runtime.callValue(createEntity, cast ([{ div: null }] : Array<Dynamic>));
     return cast null;
   }
@@ -39,7 +43,7 @@ class DomTextLabel {
     return cast null;
   }
 
-  public static function drawDomTextLabel(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawDomTextLabel(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -52,7 +56,7 @@ class DomTextLabel {
     var html:Dynamic = cast _Runtime.UNDEFINED;
     data = (cast _Runtime.field(renderProxy, 'rendererData') : Null<DomTextData__domTextLabel>);
     if (_Runtime.truthy(_Runtime.strictEquals(data, null))) { return; }
-    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
+    source = (cast _Runtime.field(renderProxy, 'source') : TextLabel);
     __destructure0 = _Runtime.field(source, 'data');
     text = _Runtime.field(__destructure0, 'text');
     textFormat = _Runtime.field(__destructure0, 'textFormat');
@@ -64,7 +68,7 @@ class DomTextLabel {
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'div')] : Array<Dynamic>));
       _Runtime.setField(_Runtime.field(_Runtime.field(data, 'div'), 'style'), 'overflow', 'hidden');
     }
-    measure = function(t:String, format:Dynamic) {
+    measure = function(t:String, format:TextFormat) {
       _Runtime.setField(ctx, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
       return cast _Runtime.field(_Runtime.callProperty(ctx, 'measureText', cast ([t] : Array<Dynamic>)), 'width');
     };

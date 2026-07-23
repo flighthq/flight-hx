@@ -9,12 +9,13 @@ import flighthq.path.Path.appendPathLineTo;
 import flighthq.path.Path.appendPathMoveTo;
 import flighthq.path.Path.createPath;
 import flighthq.pathBoolean.PathBooleanBackend.getPathBooleanBackend;
+import flighthq.types.Path;
 import flighthq.types.PathBooleanOperation;
 import flighthq.types.PathBooleanOptions;
 
 @:expose("flighthq.pathBoolean.BooleanPaths")
 class BooleanPaths {
-  public static function booleanPaths(subject:Dynamic, clip:Dynamic, operation:PathBooleanOperation, ?out:Dynamic, ?options:PathBooleanOptions):Dynamic {
+  public static function booleanPaths(subject:Path, clip:Path, operation:PathBooleanOperation, ?out:Path, ?options:PathBooleanOptions):Path {
     var fillRule:Dynamic = cast _Runtime.UNDEFINED;
     var subjectContours:Dynamic = cast _Runtime.UNDEFINED;
     var clipContours:Dynamic = cast _Runtime.UNDEFINED;
@@ -27,27 +28,27 @@ class BooleanPaths {
     return cast null;
   }
 
-  public static function differencePaths(a:Dynamic, b:Dynamic, ?out:Dynamic, ?options:PathBooleanOptions):Dynamic {
+  public static function differencePaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
     return cast _Runtime.callValue(booleanPaths, cast ([a, b, 'difference', out, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function intersectPaths(a:Dynamic, b:Dynamic, ?out:Dynamic, ?options:PathBooleanOptions):Dynamic {
+  public static function intersectPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
     return cast _Runtime.callValue(booleanPaths, cast ([a, b, 'intersection', out, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function unionPaths(a:Dynamic, b:Dynamic, ?out:Dynamic, ?options:PathBooleanOptions):Dynamic {
+  public static function unionPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
     return cast _Runtime.callValue(booleanPaths, cast ([a, b, 'union', out, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function xorPaths(a:Dynamic, b:Dynamic, ?out:Dynamic, ?options:PathBooleanOptions):Dynamic {
+  public static function xorPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
     return cast _Runtime.callValue(booleanPaths, cast ([a, b, 'xor', out, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function writeContours__booleanPaths(contours:Array<Array<Float>>, ?out:Dynamic):Dynamic {
+  public static function writeContours__booleanPaths(contours:Array<Array<Float>>, ?out:Path):Path {
     var path:Dynamic = cast _Runtime.UNDEFINED;
     path = _Runtime.coalesce(out, function():Dynamic return cast _Runtime.callValue(createPath, cast (['nonZero'] : Array<Dynamic>)));
     _Runtime.setLength(_Runtime.field(path, 'commands'), 0.0);

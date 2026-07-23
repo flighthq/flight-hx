@@ -13,17 +13,21 @@ import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.beginWgpuMeshDraw;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.drawWgpuMeshSubset;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.isWgpuTextureReady;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUniform;
+import flighthq.types.Camera;
 import flighthq.types.EmissiveMaterial;
 import flighthq.types.LinearColor;
+import flighthq.types.Material;
+import flighthq.types.MeshGeometry;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.Types.EmissiveMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
+import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._EmissiveMaterialValues.EmissiveMaterialKind;
 
 @:expose("flighthq.sceneWgpu.EmissiveWgpuMeshMaterialRenderer")
 class EmissiveWgpuMeshMaterialRenderer {
-  public static final emissiveWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:Dynamic, material:Null<Dynamic>, _lights:SceneLightBlock, camera:Dynamic) {
+  public static final emissiveWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var emissive:Dynamic = cast _Runtime.UNDEFINED;
@@ -45,11 +49,11 @@ class EmissiveWgpuMeshMaterialRenderer {
     }
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, group] : Array<Dynamic>));
-  }, draw: function(state:Dynamic, proxy:SceneRenderProxy, geometry:Dynamic) {
+  }, draw: function(state:WgpuRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
   } };
 
-  public static function registerEmissiveWgpuMaterial(state:Dynamic):Void {
+  public static function registerEmissiveWgpuMaterial(state:WgpuRenderState):Void {
     _Runtime.callValue(registerWgpuMeshMaterialRenderer, cast ([state, EmissiveMaterialKind, emissiveWgpuMeshMaterialRenderer] : Array<Dynamic>));
   }
 

@@ -8,16 +8,17 @@ import flighthq.render.RenderColor.setRenderStateBackgroundColor;
 import flighthq.render.RenderState.createRenderState as _createRenderState;
 import flighthq.render.RenderState.createRenderStateRuntime;
 import flighthq.types.DomRenderOptions;
+import flighthq.types.DomRenderState;
 import flighthq.types.DomRenderState.DomRenderStateRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 @:expose("flighthq.displayobjectDom.DomRenderState")
 class DomRenderState {
-  public static function createDomRenderState(element:Dynamic, ?options:Dynamic):Dynamic {
+  public static function createDomRenderState(element:Dynamic, ?options:Dynamic):flighthq.types.DomRenderState {
     if (options == null) options = cast ({  } : Dynamic);
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    state = (cast _Runtime.callValue(_createRenderState, cast ([{ pixelRatio: _Runtime.coalesce(_Runtime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)), roundPixels: _Runtime.coalesce(_Runtime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.field(options, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : Dynamic);
+    state = (cast _Runtime.callValue(_createRenderState, cast ([{ pixelRatio: _Runtime.coalesce(_Runtime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)), roundPixels: _Runtime.coalesce(_Runtime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.field(options, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : flighthq.types.DomRenderState);
     if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(options, 'backgroundColor'), null))) { _Runtime.callValue(setRenderStateBackgroundColor, cast ([state, _Runtime.field(options, 'backgroundColor')] : Array<Dynamic>)); }
     _Runtime.setField(state, 'applyBlendMode', null);
     _Runtime.setField(state, 'domCssFilterResolver', null);
@@ -44,7 +45,7 @@ class DomRenderState {
     return cast null;
   }
 
-  public static function getDomRenderStateRuntime(state:Dynamic):DomRenderStateRuntime {
+  public static function getDomRenderStateRuntime(state:flighthq.types.DomRenderState):DomRenderStateRuntime {
     return cast (cast _Runtime.getIndex(state, EntityRuntimeKey) : DomRenderStateRuntime);
     return cast null;
   }

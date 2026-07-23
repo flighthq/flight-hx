@@ -3,17 +3,19 @@ package flighthq.surface;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Surface;
+import flighthq.types.SurfaceRegion;
 
 @:expose("flighthq.surface.SurfaceRegion")
 class SurfaceRegion {
-  public static function createSurfaceRegion(surface:Dynamic, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):Dynamic {
+  public static function createSurfaceRegion(surface:Surface, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):flighthq.types.SurfaceRegion {
     if (width == null) width = cast (_Runtime.field(surface, 'width') : Dynamic);
     if (height == null) height = cast (_Runtime.field(surface, 'height') : Dynamic);
     return cast { surface: surface, x: x, y: y, width: width, height: height };
     return cast null;
   }
 
-  public static function setSurfaceRegion(out:Dynamic, surface:Dynamic, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):Dynamic {
+  public static function setSurfaceRegion(out:flighthq.types.SurfaceRegion, surface:Surface, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):flighthq.types.SurfaceRegion {
     if (width == null) width = cast (_Runtime.field(surface, 'width') : Dynamic);
     if (height == null) height = cast (_Runtime.field(surface, 'height') : Dynamic);
     _Runtime.setField(out, 'surface', surface);

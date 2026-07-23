@@ -8,4 +8,4 @@ import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Obb = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var centerX:Float; var centerY:Float; var centerZ:Float; var halfExtentX:Float; var halfExtentY:Float; var halfExtentZ:Float; var orientationW:Float; var orientationX:Float; var orientationY:Float; var orientationZ:Float; };
 
-typedef ObbLike = EntityWithoutRuntime<Dynamic>;
+typedef ObbLike = EntityWithoutRuntime<flighthq.types.Obb>;

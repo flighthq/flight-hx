@@ -8,6 +8,7 @@ import flighthq.geometry.Vector3.cloneVector3;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.geometry.Vector3.normalizeVector3;
 import flighthq.geometry.Vector3.setVector3;
+import flighthq.types.AreaLight;
 import flighthq.types.Types.AreaLightKind;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._AreaLightValues.AreaLightKind;
@@ -16,12 +17,12 @@ typedef AreaLightOptions = { @:optional var castsShadow:Bool; @:optional var col
 
 @:expose("flighthq.lighting.AreaLight")
 class AreaLight {
-  public static function cloneAreaLight(source:Dynamic):Dynamic {
+  public static function cloneAreaLight(source:flighthq.types.AreaLight):flighthq.types.AreaLight {
     return cast _Runtime.callValue(createEntity, cast ([{ castsShadow: _Runtime.field(source, 'castsShadow'), color: _Runtime.field(source, 'color'), direction: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'direction')] : Array<Dynamic>)), intensity: _Runtime.field(source, 'intensity'), kind: AreaLightKind, normalBias: _Runtime.field(source, 'normalBias'), pcfRadius: _Runtime.field(source, 'pcfRadius'), position: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'position')] : Array<Dynamic>)), range: _Runtime.field(source, 'range'), right: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'right')] : Array<Dynamic>)), shadowBias: _Runtime.field(source, 'shadowBias'), up: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'up')] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createAreaLight(?options:AreaLightOptions):Dynamic {
+  public static function createAreaLight(?options:AreaLightOptions):flighthq.types.AreaLight {
     var position:Dynamic = cast _Runtime.UNDEFINED;
     var direction:Dynamic = cast _Runtime.UNDEFINED;
     var right:Dynamic = cast _Runtime.UNDEFINED;
@@ -34,7 +35,7 @@ class AreaLight {
     return cast null;
   }
 
-  public static function setAreaLightOrientation(out:Dynamic, direction:Vector3Like, right:Vector3Like, up:Vector3Like):Void {
+  public static function setAreaLightOrientation(out:flighthq.types.AreaLight, direction:Vector3Like, right:Vector3Like, up:Vector3Like):Void {
     var rightLen:Dynamic = cast _Runtime.UNDEFINED;
     var upLen:Dynamic = cast _Runtime.UNDEFINED;
     var dirLen:Dynamic = cast _Runtime.UNDEFINED;

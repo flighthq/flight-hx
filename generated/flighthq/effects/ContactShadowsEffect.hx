@@ -3,10 +3,11 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.ContactShadowsEffect;
 
 @:expose("flighthq.effects.ContactShadowsEffect")
 class ContactShadowsEffect {
-  public static function createContactShadowsEffect(?options:Dynamic):Dynamic {
+  public static function createContactShadowsEffect(?options:Dynamic):flighthq.types.ContactShadowsEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'ContactShadowsEffect' }, options]);
     return cast null;

@@ -4,12 +4,13 @@ package flighthq.geometry;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Rectangle;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Vector2.Vector2Like;
 
 @:expose("flighthq.geometry.Rectangle")
 class Rectangle {
-  public static function cloneRectangle(source:RectangleLike):Dynamic {
+  public static function cloneRectangle(source:RectangleLike):flighthq.types.Rectangle {
     return cast _Runtime.callValue(createRectangle, cast ([_Runtime.field(source, 'x'), _Runtime.field(source, 'y'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
     return cast null;
   }
@@ -60,7 +61,7 @@ class Rectangle {
     }
   }
 
-  public static function createRectangle(?x:Float, ?y:Float, ?width:Float, ?height:Float):Dynamic {
+  public static function createRectangle(?x:Float, ?y:Float, ?width:Float, ?height:Float):flighthq.types.Rectangle {
     return cast _Runtime.callValue(createEntity, cast ([{ x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), width: _Runtime.coalesce(width, function():Dynamic return cast 0.0), height: _Runtime.coalesce(height, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }

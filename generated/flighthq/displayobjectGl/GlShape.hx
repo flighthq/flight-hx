@@ -19,11 +19,15 @@ import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.shape.ShapeFill.getShapeFillRegions;
 import flighthq.types.BatchFormat;
 import flighthq.types.DisplayObjectRenderer;
+import flighthq.types.GlRenderState;
+import flighthq.types.GlShapeMesh;
+import flighthq.types.ImageResource;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
+import flighthq.types.Shape;
 
-typedef GlShapeData__glShape = { var canvas:Dynamic; var ctx:Dynamic; var image:Dynamic; var lastContentId:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:Null<Array<Dynamic>>; };
+typedef GlShapeData__glShape = { var canvas:Dynamic; var ctx:Dynamic; var image:ImageResource; var lastContentId:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:Null<Array<GlShapeMesh>>; };
 
 @:expose("flighthq.displayobjectGl.GlShape")
 class GlShape {
@@ -37,7 +41,7 @@ class GlShape {
     return cast null;
   }
 
-  public static function createGlShapeData__glShape(_state:Dynamic, _source:Renderable):Null<RendererData> {
+  public static function createGlShapeData__glShape(_state:GlRenderState, _source:Renderable):Null<RendererData> {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     canvas = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -48,7 +52,7 @@ class GlShape {
     return cast null;
   }
 
-  public static function destroyGlShapeData__glShape(state:Dynamic, data:RendererData):Void {
+  public static function destroyGlShapeData__glShape(state:GlRenderState, data:RendererData):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var image:Dynamic = cast _Runtime.UNDEFINED;
@@ -63,7 +67,7 @@ class GlShape {
     }
   }
 
-  public static function drawGlShape(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawGlShape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
@@ -83,7 +87,7 @@ class GlShape {
     var base:Dynamic = cast _Runtime.UNDEFINED;
     var d:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
+    source = (cast _Runtime.field(renderProxy, 'source') : Shape);
     __destructure1 = _Runtime.field(source, 'data');
     commands = _Runtime.field(__destructure1, 'commands');
     version = _Runtime.callValue(getNodeLocalContentRevision, cast ([source] : Array<Dynamic>));

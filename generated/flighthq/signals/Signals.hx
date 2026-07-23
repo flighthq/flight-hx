@@ -8,56 +8,57 @@ import flighthq.signals.Signal as Facade_Signals_flighthq_signals_Signal;
 import flighthq.signals.Slot as Facade_Signals_flighthq_signals_Slot;
 import flighthq.signals.Throttle as Facade_Signals_flighthq_signals_Throttle;
 import flighthq.signals.Throttle.SignalThrottleOptions;
+import flighthq.types.Signal;
 import flighthq.types.SignalConnectOptions;
 
 @:expose("flighthq.signals.Signals")
 class Signals {
-  public static function cancelSignal<T>(signal:Dynamic):Void {
+  public static function cancelSignal<T>(signal:Signal<Dynamic>):Void {
     _Runtime.callValue(Facade_Signals_flighthq_signals_Emitter.cancelSignal, cast ([signal] : Array<Dynamic>));
   }
 
-  public static function clearSignal<T>(signal:Dynamic):Void {
+  public static function clearSignal<T>(signal:Signal<Dynamic>):Void {
     _Runtime.callValue(Facade_Signals_flighthq_signals_Slot.clearSignal, cast ([signal] : Array<Dynamic>));
   }
 
-  public static function connectSignal<T>(signal:Dynamic, slot:Dynamic, ?options:SignalConnectOptions):Void {
+  public static function connectSignal<T>(signal:Signal<Dynamic>, slot:Dynamic, ?options:SignalConnectOptions):Void {
     _Runtime.callValue(Facade_Signals_flighthq_signals_Slot.connectSignal, cast ([signal, slot, options] : Array<Dynamic>));
   }
 
-  public static function connectSignalAtFrameRate(source:Dynamic, fps:Float, slot:Dynamic):Dynamic {
+  public static function connectSignalAtFrameRate(source:Signal<Dynamic>, fps:Float, slot:Dynamic):Dynamic {
     return cast _Runtime.callValue(Facade_Signals_flighthq_signals_Throttle.connectSignalAtFrameRate, cast ([source, fps, slot] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function connectSignalDebounced<T>(source:Dynamic, delayMs:Float, slot:Dynamic, ?options:SignalThrottleOptions):Dynamic {
+  public static function connectSignalDebounced<T>(source:Signal<Dynamic>, delayMs:Float, slot:Dynamic, ?options:SignalThrottleOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Signals_flighthq_signals_Throttle.connectSignalDebounced, cast ([source, delayMs, slot, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function connectSignalThrottled<T>(source:Dynamic, intervalMs:Float, slot:Dynamic, ?options:SignalThrottleOptions):Dynamic {
+  public static function connectSignalThrottled<T>(source:Signal<Dynamic>, intervalMs:Float, slot:Dynamic, ?options:SignalThrottleOptions):Dynamic {
     return cast _Runtime.callValue(Facade_Signals_flighthq_signals_Throttle.connectSignalThrottled, cast ([source, intervalMs, slot, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSignal<T>():Dynamic {
+  public static function createSignal<T>():Signal<Dynamic> {
     return cast _Runtime.callValue(Facade_Signals_flighthq_signals_Signal.createSignal, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function disconnectSignal<T>(signal:Dynamic, slot:Dynamic):Void {
+  public static function disconnectSignal<T>(signal:Signal<Dynamic>, slot:Dynamic):Void {
     _Runtime.callValue(Facade_Signals_flighthq_signals_Slot.disconnectSignal, cast ([signal, slot] : Array<Dynamic>));
   }
 
-  public static function emitSignal<T>(signal:Dynamic, ...args:Dynamic):Void {
+  public static function emitSignal<T>(signal:Signal<Dynamic>, ...args:Dynamic):Void {
     _Runtime.apply(Facade_Signals_flighthq_signals_Emitter.emitSignal, _Runtime.concatArrays([[signal], _Runtime.toArray(args)]));
   }
 
-  public static function hasSignalSlots<T>(signal:Dynamic):Bool {
+  public static function hasSignalSlots<T>(signal:Signal<Dynamic>):Bool {
     return cast _Runtime.callValue(Facade_Signals_flighthq_signals_Slot.hasSignalSlots, cast ([signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isSlotConnected<T>(signal:Dynamic, slot:Dynamic):Bool {
+  public static function isSlotConnected<T>(signal:Signal<Dynamic>, slot:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_Signals_flighthq_signals_Slot.isSlotConnected, cast ([signal, slot] : Array<Dynamic>));
     return cast null;
   }

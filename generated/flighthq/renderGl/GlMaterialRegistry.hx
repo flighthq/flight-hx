@@ -6,23 +6,25 @@ import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.GlMaterialRenderer;
+import flighthq.types.GlRenderState;
+import flighthq.types.Material;
 import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
 @:expose("flighthq.renderGl.GlMaterialRegistry")
 class GlMaterialRegistry {
-  public static function getGlMaterialRenderer(state:Dynamic, kind:Kind):Null<GlMaterialRenderer> {
+  public static function getGlMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMaterialRenderer> {
     return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'materialRendererMap'), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function registerGlMaterialRenderer(state:Dynamic, kind:Kind, renderer:GlMaterialRenderer):Void {
+  public static function registerGlMaterialRenderer(state:GlRenderState, kind:Kind, renderer:GlMaterialRenderer):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.setField(runtime, 'materialRendererMap', (_Runtime.field(runtime, 'materialRendererMap') ?? _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []))), 'set', cast ([kind, renderer] : Array<Dynamic>));
   }
 
-  public static function resolveGlMaterialRenderer(state:Dynamic, material:Null<Dynamic>):Null<GlMaterialRenderer> {
+  public static function resolveGlMaterialRenderer(state:GlRenderState, material:Null<Material>):Null<GlMaterialRenderer> {
     var map:Dynamic = cast _Runtime.UNDEFINED;
     map = _Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'materialRendererMap');
     if (_Runtime.truthy(_Runtime.strictEquals(map, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast null; }

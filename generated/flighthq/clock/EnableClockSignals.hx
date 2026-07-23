@@ -4,10 +4,12 @@ package flighthq.clock;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Signal.createSignal;
+import flighthq.types.Clock;
+import flighthq.types.Signal;
 
 @:expose("flighthq.clock.EnableClockSignals")
 class EnableClockSignals {
-  public static function enableClockSignals(clock:Dynamic):Dynamic {
+  public static function enableClockSignals(clock:Clock):Signal<Dynamic> {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(clock, 'onTick'), null))) {
       _Runtime.setField(clock, 'onTick', _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)));
     }

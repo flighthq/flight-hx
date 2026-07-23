@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particlesFormats.ParticleDesignerSchema.ParticleDesignerDocument;
 import flighthq.particlesFormats.SerializeResult.ParticleSerializeResult;
+import flighthq.types.ParticleEmitterConfig;
 
 typedef ParticleDesignerSerializeOptions = { @:optional var textureSize:Float; };
 
@@ -12,7 +13,7 @@ typedef ParticleDesignerSerializeOptions = { @:optional var textureSize:Float; }
 class ParticleDesignerSerialize {
   public static final RAD2DEG__particleDesignerSerialize:Dynamic = (180.0 / HxMath.PI);
 
-  public static function configToDocument__particleDesignerSerialize(config:Dynamic, existing:Dynamic, textureSize:Float):ParticleDesignerDocument {
+  public static function configToDocument__particleDesignerSerialize(config:ParticleEmitterConfig, existing:Dynamic, textureSize:Float):ParticleDesignerDocument {
     var angleDeg:Dynamic = cast _Runtime.UNDEFINED;
     var startSize:Dynamic = cast _Runtime.UNDEFINED;
     var startVar:Dynamic = cast _Runtime.UNDEFINED;
@@ -131,7 +132,7 @@ class ParticleDesignerSerialize {
     return cast null;
   }
 
-  public static function serializeParticleDesignerPlist(config:Dynamic, ?existing:Dynamic, ?options:ParticleDesignerSerializeOptions):String {
+  public static function serializeParticleDesignerPlist(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:ParticleDesignerSerializeOptions):String {
     var textureSize:Dynamic = cast _Runtime.UNDEFINED;
     var doc:Dynamic = cast _Runtime.UNDEFINED;
     textureSize = _Runtime.coalesce(_Runtime.optionalField(options, 'textureSize'), function():Dynamic return cast 1.0);
@@ -140,7 +141,7 @@ class ParticleDesignerSerialize {
     return cast null;
   }
 
-  public static function serializeParticleDesignerPlistDocument(config:Dynamic, ?existing:Dynamic, ?options:ParticleDesignerSerializeOptions):ParticleSerializeResult {
+  public static function serializeParticleDesignerPlistDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:ParticleDesignerSerializeOptions):ParticleSerializeResult {
     var text:Dynamic = cast _Runtime.UNDEFINED;
     var warnings:Dynamic = cast _Runtime.UNDEFINED;
     text = _Runtime.callValue(serializeParticleDesignerPlist, cast ([config, existing, options] : Array<Dynamic>));
@@ -149,7 +150,7 @@ class ParticleDesignerSerialize {
     return cast null;
   }
 
-  public static function collectParticleDesignerSerializeWarnings__particleDesignerSerialize(config:Dynamic):Array<String> {
+  public static function collectParticleDesignerSerializeWarnings__particleDesignerSerialize(config:ParticleEmitterConfig):Array<String> {
     var warnings:Array<String> = cast _Runtime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(config, 'blendMode'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(config, 'blendMode'), 'add')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(config, 'blendMode'), 'normal')))) {

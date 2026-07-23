@@ -26,19 +26,24 @@ import flighthq.renderGl.GlRenderTarget.createGlRenderTarget;
 import flighthq.renderGl.GlRenderTarget.destroyGlRenderTarget;
 import flighthq.renderGl.GlRenderTarget.drawGlRenderTargetResult;
 import flighthq.renderGl.GlRenderTarget.resizeGlRenderTarget;
+import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObjectRenderer;
+import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderTarget;
+import flighthq.types.Matrix;
+import flighthq.types.RenderCache;
 import flighthq.types.RenderCacheRefreshOptions;
 import flighthq.types.RenderProxy2D;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 @:expose("flighthq.displayobjectGl.GlCache")
 class GlCache {
-  public static function createGlCacheState(screenState:Dynamic):Dynamic {
+  public static function createGlCacheState(screenState:GlRenderState):GlRenderState {
     var screenRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var cacheState:Dynamic = cast _Runtime.UNDEFINED;
     var cacheRuntime:Dynamic = cast _Runtime.UNDEFINED;
     screenRuntime = _Runtime.callValue(getGlRenderStateRuntime, cast ([screenState] : Array<Dynamic>));
-    cacheState = (cast _Runtime.callValue(createRenderState, cast ([{ allowSmoothing: _Runtime.field(screenState, 'allowSmoothing'), pixelRatio: _Runtime.field(screenState, 'pixelRatio'), renderTransform2D: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)), roundPixels: _Runtime.field(screenState, 'roundPixels'), sceneGraphSyncPolicy: _Runtime.field(screenState, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : Dynamic);
+    cacheState = (cast _Runtime.callValue(createRenderState, cast ([{ allowSmoothing: _Runtime.field(screenState, 'allowSmoothing'), pixelRatio: _Runtime.field(screenState, 'pixelRatio'), renderTransform2D: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)), roundPixels: _Runtime.field(screenState, 'roundPixels'), sceneGraphSyncPolicy: _Runtime.field(screenState, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : GlRenderState);
     cacheRuntime = _Runtime.callValue(createGlRenderStateRuntime, cast ([] : Array<Dynamic>));
     _Runtime.setIndex(cacheState, EntityRuntimeKey, cacheRuntime);
     _Runtime.callValue(copyAllRenderersFromRenderState, cast ([cacheState, screenState] : Array<Dynamic>));
@@ -87,11 +92,11 @@ class GlCache {
     return cast null;
   }
 
-  public static function enableGlRenderCache(state:Dynamic):Void {
+  public static function enableGlRenderCache(state:GlRenderState):Void {
     _Runtime.callValue(registerRenderCacheRenderer, cast ([state, defaultGlRenderCacheRenderer] : Array<Dynamic>));
   }
 
-  public static function ensureGlRenderCacheTarget(state:Dynamic, cache:Dynamic, width:Float, height:Float):Dynamic {
+  public static function ensureGlRenderCacheTarget(state:GlRenderState, cache:RenderCache, width:Float, height:Float):GlRenderTarget {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callValue(GlCache.getTargets__glCache, cast ([state] : Array<Dynamic>));
@@ -106,12 +111,12 @@ class GlCache {
     return cast null;
   }
 
-  public static function getGlRenderCacheTarget(state:Dynamic, cache:Dynamic):Null<Dynamic> {
+  public static function getGlRenderCacheTarget(state:GlRenderState, cache:RenderCache):Null<GlRenderTarget> {
     return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.callValue(GlCache.getTargets__glCache, cast ([state] : Array<Dynamic>)), 'get', cast ([cache] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function refreshGlRenderCache(cacheState:Dynamic, cache:Dynamic, source:Dynamic, ?options:RenderCacheRefreshOptions):Bool {
+  public static function refreshGlRenderCache(cacheState:GlRenderState, cache:RenderCache, source:DisplayObject, ?options:RenderCacheRefreshOptions):Bool {
     var screenState:Dynamic = cast _Runtime.UNDEFINED;
     var padding:Dynamic = cast _Runtime.UNDEFINED;
     var minWidth:Dynamic = cast _Runtime.UNDEFINED;
@@ -160,7 +165,7 @@ class GlCache {
     return cast null;
   }
 
-  public static function releaseGlRenderCache(state:Dynamic, cache:Dynamic):Void {
+  public static function releaseGlRenderCache(state:GlRenderState, cache:RenderCache):Void {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callValue(GlCache.getTargets__glCache, cast ([state] : Array<Dynamic>));
@@ -170,7 +175,7 @@ class GlCache {
     _Runtime.callProperty(targets, 'delete', cast ([cache] : Array<Dynamic>));
   }
 
-  public static function drawGlRenderCache__glCache(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawGlRenderCache__glCache(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     cache = _Runtime.callValue(getRenderProxyCache, cast ([state, _Runtime.field(renderProxy, 'source')] : Array<Dynamic>));
@@ -181,7 +186,7 @@ class GlCache {
     _Runtime.callValue(drawGlRenderTargetResult, cast ([state, renderProxy, target, GlCache._identity__glCache] : Array<Dynamic>));
   }
 
-  public static function getTargets__glCache(state:Dynamic):Dynamic {
+  public static function getTargets__glCache(state:GlRenderState):Dynamic {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callProperty(GlCache._renderCacheTargets__glCache, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -200,7 +205,7 @@ class GlCache {
 
   public static final _bounds__glCache:Dynamic = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
 
-  public static final _renderTransform__glCache:Dynamic = (cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Dynamic);
+  public static final _renderTransform__glCache:Dynamic = (cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Matrix);
 
-  public static final _identity__glCache:Dynamic = (cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Dynamic);
+  public static final _identity__glCache:Dynamic = (cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Matrix);
 }

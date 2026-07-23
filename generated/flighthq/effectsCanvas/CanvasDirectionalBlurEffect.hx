@@ -5,14 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.passthroughCanvasEffectPass;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
+import flighthq.types.CanvasRenderTarget;
+import flighthq.types.DirectionalBlurEffect;
 
 @:expose("flighthq.effectsCanvas.CanvasDirectionalBlurEffect")
 class CanvasDirectionalBlurEffect {
-  public static function applyDirectionalBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
+  public static function applyDirectionalBlurEffectToCanvas(source:Dynamic, dest:Dynamic, _effect:DirectionalBlurEffect):Void {
     _Runtime.callValue(passthroughCanvasEffectPass, cast ([dest, source] : Array<Dynamic>));
   }
 
   public static final defaultCanvasDirectionalBlurEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyDirectionalBlurEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(applyDirectionalBlurEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : DirectionalBlurEffect)] : Array<Dynamic>));
   };
 }

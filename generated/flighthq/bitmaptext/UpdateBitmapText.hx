@@ -15,13 +15,18 @@ import flighthq.sprite.QuadBatch.clearQuadBatch;
 import flighthq.sprite.QuadBatch.createQuadBatch;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.textureatlas.TextureAtlasRegion.addTextureAtlasRegion;
+import flighthq.types.BitmapText;
 import flighthq.types.BitmapText.BitmapTextData;
 import flighthq.types.BitmapText.BitmapTextRuntime;
+import flighthq.types.GlyphSource;
 import flighthq.types.GlyphSource.GlyphEntry;
+import flighthq.types.QuadBatch;
+import flighthq.types.Rectangle;
+import flighthq.types.TextureAtlas;
 
 typedef BitmapTextGlyph__updateBitmapText = { var codepoint:Float; var entry:GlyphEntry; var penWithinWord:Float; };
 
-typedef BitmapTextPageBatch__updateBitmapText = { var atlas:Dynamic; var quadBatch:Dynamic; var regionByCodepoint:Dynamic; };
+typedef BitmapTextPageBatch__updateBitmapText = { var atlas:TextureAtlas; var quadBatch:QuadBatch; var regionByCodepoint:Dynamic; };
 
 typedef BitmapTextLine__updateBitmapText = { var gaps:Array<Float>; var paragraphEnd:Bool; var width:Float; var words:Array<BitmapTextWord__updateBitmapText>; };
 
@@ -37,7 +42,7 @@ class UpdateBitmapText {
 
   public static final SPACE__updateBitmapText:Dynamic = 32.0;
 
-  public static function updateBitmapText(bitmapText:Dynamic):Void {
+  public static function updateBitmapText(bitmapText:BitmapText):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
@@ -126,7 +131,7 @@ class UpdateBitmapText {
     _Runtime.callValue(invalidateNodeLocalBounds, cast ([bitmapText] : Array<Dynamic>));
   }
 
-  public static function applyBitmapTextColor__updateBitmapText(quadBatch:Dynamic, color:Float):Void {
+  public static function applyBitmapTextColor__updateBitmapText(quadBatch:QuadBatch, color:Float):Void {
     var colorTransform:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(color, UpdateBitmapText.BITMAP_TEXT_DEFAULT_COLOR__updateBitmapText))) {
       _Runtime.callValue(setDisplayObjectColorAdjustments, cast ([quadBatch, null] : Array<Dynamic>));
@@ -136,7 +141,7 @@ class UpdateBitmapText {
     _Runtime.callValue(setDisplayObjectColorAdjustments, cast ([quadBatch, cast ([_Runtime.callValue(createColorTransformAdjustment, cast ([colorTransform] : Array<Dynamic>))] : Array<Dynamic>)] : Array<Dynamic>));
   }
 
-  public static function buildBitmapTextWords__updateBitmapText(glyphSource:Dynamic, paragraph:String, letterSpacing:Float):Array<BitmapTextToken__updateBitmapText> {
+  public static function buildBitmapTextWords__updateBitmapText(glyphSource:GlyphSource, paragraph:String, letterSpacing:Float):Array<BitmapTextToken__updateBitmapText> {
     var tokens:Array<BitmapTextToken__updateBitmapText> = cast _Runtime.UNDEFINED;
     var pendingGap:Dynamic = cast _Runtime.UNDEFINED;
     var glyphs:Array<BitmapTextGlyph__updateBitmapText> = cast _Runtime.UNDEFINED;
@@ -181,7 +186,7 @@ class UpdateBitmapText {
     return cast null;
   }
 
-  public static function ensureBitmapTextPageBatch__updateBitmapText(bitmapText:Dynamic, runtime:BitmapTextRuntime, glyphSource:Dynamic, color:Float, pages:Dynamic, page:Float):Null<BitmapTextPageBatch__updateBitmapText> {
+  public static function ensureBitmapTextPageBatch__updateBitmapText(bitmapText:BitmapText, runtime:BitmapTextRuntime, glyphSource:GlyphSource, color:Float, pages:Dynamic, page:Float):Null<BitmapTextPageBatch__updateBitmapText> {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var image:Dynamic = cast _Runtime.UNDEFINED;
     var quadBatch:Dynamic = cast _Runtime.UNDEFINED;
@@ -206,13 +211,13 @@ class UpdateBitmapText {
     return cast null;
   }
 
-  public static function ensureBoundsRectangle__updateBitmapText(runtime:BitmapTextRuntime):Dynamic {
+  public static function ensureBoundsRectangle__updateBitmapText(runtime:BitmapTextRuntime):Rectangle {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null))) { _Runtime.setField(runtime, 'localBoundsRectangle', _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>))); }
     return cast _Runtime.field(runtime, 'localBoundsRectangle');
     return cast null;
   }
 
-  public static function layoutBitmapTextLines__updateBitmapText(glyphSource:Dynamic, data:BitmapTextData):Array<BitmapTextLine__updateBitmapText> {
+  public static function layoutBitmapTextLines__updateBitmapText(glyphSource:GlyphSource, data:BitmapTextData):Array<BitmapTextLine__updateBitmapText> {
     var lines:Array<BitmapTextLine__updateBitmapText> = cast _Runtime.UNDEFINED;
     var paragraphs:Dynamic = cast _Runtime.UNDEFINED;
     lines = cast ([] : Array<Dynamic>);
@@ -255,7 +260,7 @@ class UpdateBitmapText {
     return cast null;
   }
 
-  public static function setEmptyRectangle__updateBitmapText(out:Dynamic):Void {
+  public static function setEmptyRectangle__updateBitmapText(out:Rectangle):Void {
     _Runtime.setField(out, 'x', 0.0);
     _Runtime.setField(out, 'y', 0.0);
     _Runtime.setField(out, 'width', 0.0);

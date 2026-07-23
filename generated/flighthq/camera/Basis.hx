@@ -3,11 +3,12 @@ package flighthq.camera;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Camera;
 import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.camera.Basis")
 class Basis {
-  public static function getCameraForward(out:Vector3Like, camera:Dynamic):Void {
+  public static function getCameraForward(out:Vector3Like, camera:Camera):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     m = _Runtime.field(_Runtime.field(camera, 'view'), 'm');
     _Runtime.setField(out, 'x', -_Runtime.getIndex(m, 2.0));
@@ -15,7 +16,7 @@ class Basis {
     _Runtime.setField(out, 'z', -_Runtime.getIndex(m, 10.0));
   }
 
-  public static function getCameraPosition(out:Vector3Like, camera:Dynamic):Void {
+  public static function getCameraPosition(out:Vector3Like, camera:Camera):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var m00:Dynamic = cast _Runtime.UNDEFINED;
     var m01:Dynamic = cast _Runtime.UNDEFINED;
@@ -47,7 +48,7 @@ class Basis {
     _Runtime.setField(out, 'z', -(((m20 * tx) + (m21 * ty)) + (m22 * tz)));
   }
 
-  public static function getCameraRight(out:Vector3Like, camera:Dynamic):Void {
+  public static function getCameraRight(out:Vector3Like, camera:Camera):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     m = _Runtime.field(_Runtime.field(camera, 'view'), 'm');
     _Runtime.setField(out, 'x', _Runtime.getIndex(m, 0.0));
@@ -55,7 +56,7 @@ class Basis {
     _Runtime.setField(out, 'z', _Runtime.getIndex(m, 8.0));
   }
 
-  public static function getCameraUp(out:Vector3Like, camera:Dynamic):Void {
+  public static function getCameraUp(out:Vector3Like, camera:Camera):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     m = _Runtime.field(_Runtime.field(camera, 'view'), 'm');
     _Runtime.setField(out, 'x', _Runtime.getIndex(m, 1.0));

@@ -5,13 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.effectsWgpu.WgpuColorMatrixPass")
 class WgpuColorMatrixPass {
-  public static function applyColorMatrixPassToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, matrix:Array<Float>):Void {
+  public static function applyColorMatrixPassToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, matrix:Array<Float>):Void {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'adjustment.colorMatrix', WgpuColorMatrixPass.COLOR_MATRIX_FRAGMENT_WGSL__wgpuColorMatrixPass, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : Dynamic), (cast dest : Dynamic), pipeline, function(f32:Dynamic) {
+    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 0.0), function():Dynamic return cast 0.0));
       _Runtime.setIndex(f32, 1.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 1.0), function():Dynamic return cast 0.0));
       _Runtime.setIndex(f32, 2.0, _Runtime.coalesce(_Runtime.getIndex(matrix, 2.0), function():Dynamic return cast 0.0));

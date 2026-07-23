@@ -3,10 +3,11 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.MotionBlurEffect;
 
 @:expose("flighthq.effects.MotionBlurEffect")
 class MotionBlurEffect {
-  public static function createMotionBlurEffect(?options:Dynamic):Dynamic {
+  public static function createMotionBlurEffect(?options:Dynamic):flighthq.types.MotionBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'MotionBlurEffect' }, options]);
     return cast null;

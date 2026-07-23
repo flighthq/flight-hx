@@ -6,10 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.renderWgpu.WgpuSurface.acquireWgpuFrameCaptureTexture;
 import flighthq.renderWgpu.WgpuSurface.encodeWgpuFrameCapture;
+import flighthq.types.WgpuRenderState;
 
 @:expose("flighthq.renderWgpu.WgpuBackground")
 class WgpuBackground {
-  public static function ensureWgpuDepthStencil__wgpuBackground(state:Dynamic, width:Float, height:Float):Void {
+  public static function ensureWgpuDepthStencil__wgpuBackground(state:WgpuRenderState, width:Float, height:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -24,7 +25,7 @@ class WgpuBackground {
     _Runtime.setField(runtime, 'depthStencilHeight', height);
   }
 
-  public static function renderWgpuBackground(state:Dynamic):Void {
+  public static function renderWgpuBackground(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
@@ -70,7 +71,7 @@ class WgpuBackground {
     _Runtime.setField(runtime, 'renderPass', renderPass);
   }
 
-  public static function submitWgpuRenderPass(state:Dynamic):Void {
+  public static function submitWgpuRenderPass(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var renderPass:Dynamic = cast _Runtime.UNDEFINED;

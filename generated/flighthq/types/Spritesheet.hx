@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 
-typedef Spritesheet = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var atlas:Null<Dynamic>; var animations:Dynamic; var frames:Array<Dynamic>; };
+typedef Spritesheet = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var atlas:Null<TextureAtlas>; var animations:Dynamic; var frames:Array<SpritesheetFrame>; };

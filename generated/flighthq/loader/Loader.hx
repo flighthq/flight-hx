@@ -6,65 +6,66 @@ import flighthq._internal._Runtime;
 import flighthq.loader.ResourceLoader as Facade_Loader_flighthq_loader_ResourceLoader;
 import flighthq.types.ResourceLoadHandle;
 import flighthq.types.ResourceLoadItemStatus;
+import flighthq.types.ResourceLoader;
 import flighthq.types.ResourceLoaderItemSignals;
 import flighthq.types.ResourceLoaderOptions;
 
 @:expose("flighthq.loader.Loader")
 class Loader {
-  public static function cancelResourceLoad(loader:Dynamic):Void {
+  public static function cancelResourceLoad(loader:ResourceLoader):Void {
     _Runtime.callValue(Facade_Loader_flighthq_loader_ResourceLoader.cancelResourceLoad, cast ([loader] : Array<Dynamic>));
   }
 
-  public static function createResourceLoader(?options:ResourceLoaderOptions):Dynamic {
+  public static function createResourceLoader(?options:ResourceLoaderOptions):ResourceLoader {
     return cast _Runtime.callValue(Facade_Loader_flighthq_loader_ResourceLoader.createResourceLoader, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function disposeResourceLoader(loader:Dynamic):Void {
+  public static function disposeResourceLoader(loader:ResourceLoader):Void {
     _Runtime.callValue(Facade_Loader_flighthq_loader_ResourceLoader.disposeResourceLoader, cast ([loader] : Array<Dynamic>));
   }
 
-  public static function enableResourceLoaderItemSignals(loader:Dynamic):ResourceLoaderItemSignals {
+  public static function enableResourceLoaderItemSignals(loader:ResourceLoader):ResourceLoaderItemSignals {
     return cast _Runtime.callValue(Facade_Loader_flighthq_loader_ResourceLoader.enableResourceLoaderItemSignals, cast ([loader] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getResourceLoadItemStatus(loader:Dynamic, key:String):ResourceLoadItemStatus {
+  public static function getResourceLoadItemStatus(loader:ResourceLoader, key:String):ResourceLoadItemStatus {
     return cast _Runtime.callValue(Facade_Loader_flighthq_loader_ResourceLoader.getResourceLoadItemStatus, cast ([loader, key] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getResourceLoadProgress(loader:Dynamic, ?group:String):Float {
+  public static function getResourceLoadProgress(loader:ResourceLoader, ?group:String):Float {
     return cast _Runtime.callValue(Facade_Loader_flighthq_loader_ResourceLoader.getResourceLoadProgress, cast ([loader, group] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function pauseResourceLoad(loader:Dynamic):Void {
+  public static function pauseResourceLoad(loader:ResourceLoader):Void {
     _Runtime.callValue(Facade_Loader_flighthq_loader_ResourceLoader.pauseResourceLoad, cast ([loader] : Array<Dynamic>));
   }
 
-  public static function queueResourceLoad<T>(loader:Dynamic, item:Dynamic):ResourceLoadHandle<Dynamic> {
+  public static function queueResourceLoad<T>(loader:ResourceLoader, item:Dynamic):ResourceLoadHandle<Dynamic> {
     return cast _Runtime.callValue(Facade_Loader_flighthq_loader_ResourceLoader.queueResourceLoad, cast ([loader, item] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function resetResourceLoader(loader:Dynamic):Void {
+  public static function resetResourceLoader(loader:ResourceLoader):Void {
     _Runtime.callValue(Facade_Loader_flighthq_loader_ResourceLoader.resetResourceLoader, cast ([loader] : Array<Dynamic>));
   }
 
-  public static function resumeResourceLoad(loader:Dynamic):Void {
+  public static function resumeResourceLoad(loader:ResourceLoader):Void {
     _Runtime.callValue(Facade_Loader_flighthq_loader_ResourceLoader.resumeResourceLoad, cast ([loader] : Array<Dynamic>));
   }
 
-  public static function setResourceLoaderConcurrency(loader:Dynamic, maxConcurrent:Float):Void {
+  public static function setResourceLoaderConcurrency(loader:ResourceLoader, maxConcurrent:Float):Void {
     _Runtime.callValue(Facade_Loader_flighthq_loader_ResourceLoader.setResourceLoaderConcurrency, cast ([loader, maxConcurrent] : Array<Dynamic>));
   }
 
-  public static function setResourceLoadPriority(loader:Dynamic, key:String, priority:Float):Void {
+  public static function setResourceLoadPriority(loader:ResourceLoader, key:String, priority:Float):Void {
     _Runtime.callValue(Facade_Loader_flighthq_loader_ResourceLoader.setResourceLoadPriority, cast ([loader, key, priority] : Array<Dynamic>));
   }
 
-  public static function startResourceLoad(loader:Dynamic):Void {
+  public static function startResourceLoad(loader:ResourceLoader):Void {
     _Runtime.callValue(Facade_Loader_flighthq_loader_ResourceLoader.startResourceLoad, cast ([loader] : Array<Dynamic>));
   }
 }

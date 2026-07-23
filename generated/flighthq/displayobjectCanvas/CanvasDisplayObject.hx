@@ -9,6 +9,8 @@ import flighthq.displayobjectCanvas.CanvasRenderState.getCanvasRenderStateRuntim
 import flighthq.render.RenderProxy.getRenderProxy2D;
 import flighthq.render.RenderProxy.isRenderProxyVisible;
 import flighthq.render.Renderer.noopRendererData;
+import flighthq.types.CanvasRenderState;
+import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.RenderProxy2D;
 
@@ -19,7 +21,7 @@ class CanvasDisplayObject {
 
   public static final defaultCanvasDisplayObjectRenderer:DisplayObjectRenderer = { createData: noopRendererData, submit: drawCanvasDisplayObject };
 
-  public static function renderCanvasDisplayObject(state:Dynamic, source:Dynamic):Void {
+  public static function renderCanvasDisplayObject(state:Dynamic, source:DisplayObject):Void {
     var tempStack:Dynamic = cast _Runtime.UNDEFINED;
     var clipHooks:Dynamic = cast _Runtime.UNDEFINED;
     var stackLength:Dynamic = cast _Runtime.UNDEFINED;
@@ -28,7 +30,7 @@ class CanvasDisplayObject {
     stackLength = 1.0;
     _Runtime.setIndex(tempStack, 0.0, source);
     while (_Runtime.truthy(_Runtime.compare(stackLength, 0.0, '>'))) {
-      var current:Dynamic = (cast _Runtime.getIndex(tempStack, --stackLength) : Dynamic);
+      var current:Dynamic = (cast _Runtime.getIndex(tempStack, --stackLength) : DisplayObject);
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(current, 'enabled')))) { continue; }
       var data:Dynamic = _Runtime.callValue(getRenderProxy2D, cast ([state, current] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')))) { continue; }
@@ -45,7 +47,7 @@ class CanvasDisplayObject {
           {
             var i:Dynamic = (_Runtime.field(children, 'length') - 1.0);
             while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
-              _Runtime.setIndex(tempStack, stackLength++, (cast _Runtime.getIndex(children, i) : Dynamic));
+              _Runtime.setIndex(tempStack, stackLength++, (cast _Runtime.getIndex(children, i) : DisplayObject));
               i--;
             }
           }

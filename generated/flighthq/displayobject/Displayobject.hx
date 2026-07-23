@@ -11,47 +11,58 @@ import flighthq.displayobject.RenderView as Facade_Displayobject_flighthq_displa
 import flighthq.displayobject.Stage as Facade_Displayobject_flighthq_displayobject_Stage;
 import flighthq.displayobject.Video as Facade_Displayobject_flighthq_displayobject_Video;
 import flighthq.types.Adjustment;
+import flighthq.types.Bitmap;
 import flighthq.types.Bitmap.BitmapData;
 import flighthq.types.Bitmap.BitmapRuntime;
+import flighthq.types.ClipRegion;
+import flighthq.types.ColorTransform;
+import flighthq.types.DisplayContainer;
 import flighthq.types.DisplayContainer.DisplayContainerRuntime;
+import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObject.DisplayObjectDataFactory;
 import flighthq.types.DisplayObject.DisplayObjectRuntime;
 import flighthq.types.DisplayObject.DisplayObjectRuntimeFactory;
 import flighthq.types.Entity.Kind;
+import flighthq.types.HtmlView;
 import flighthq.types.HtmlView.HtmlViewData;
 import flighthq.types.HtmlView.HtmlViewRuntime;
+import flighthq.types.Node;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.PartialNode;
+import flighthq.types.Rectangle;
+import flighthq.types.RenderView;
 import flighthq.types.RenderView.RenderViewData;
 import flighthq.types.RenderView.RenderViewRuntime;
+import flighthq.types.Stage;
 import flighthq.types.Stage.StageRuntime;
 import flighthq.types.StageSignals;
+import flighthq.types.Video;
 import flighthq.types.Video.VideoData;
 import flighthq.types.Video.VideoRuntime;
 
 @:expose("flighthq.displayobject.Displayobject")
 class Displayobject {
-  public static function addDisplayObjectColorAdjustment(source:Dynamic, adjustment:Adjustment):Void {
+  public static function addDisplayObjectColorAdjustment(source:DisplayObject, adjustment:Adjustment):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_DisplayObject.addDisplayObjectColorAdjustment, cast ([source, adjustment] : Array<Dynamic>));
   }
 
-  public static function computeBitmapLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
+  public static function computeBitmapLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_Bitmap.computeBitmapLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function computeHtmlViewLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
+  public static function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_HtmlView.computeHtmlViewLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function computeRenderViewLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
+  public static function computeRenderViewLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_RenderView.computeRenderViewLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function computeVideoLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
+  public static function computeVideoLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_Video.computeVideoLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function createBitmap(?obj:PartialNode<Dynamic>):Dynamic {
+  public static function createBitmap(?obj:PartialNode<Bitmap>):Bitmap {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_Bitmap.createBitmap, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -66,7 +77,7 @@ class Displayobject {
     return cast null;
   }
 
-  public static function createDisplayContainer(?obj:PartialNode<Dynamic>):Dynamic {
+  public static function createDisplayContainer(?obj:PartialNode<DisplayContainer>):DisplayContainer {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_DisplayContainer.createDisplayContainer, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -76,12 +87,12 @@ class Displayobject {
     return cast null;
   }
 
-  public static function createDisplayObject(?obj:PartialNode<Dynamic>):Dynamic {
+  public static function createDisplayObject(?obj:PartialNode<DisplayObject>):DisplayObject {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_DisplayObject.createDisplayObject, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createDisplayObjectGeneric<R>(kind:Kind, ?obj:PartialNode<Dynamic>, ?createData:DisplayObjectDataFactory, ?createDisplayObjectRuntimeFactory:DisplayObjectRuntimeFactory<Dynamic>):Dynamic {
+  public static function createDisplayObjectGeneric<R>(kind:Kind, ?obj:PartialNode<DisplayObject>, ?createData:DisplayObjectDataFactory, ?createDisplayObjectRuntimeFactory:DisplayObjectRuntimeFactory<Dynamic>):DisplayObject {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_DisplayObject.createDisplayObjectGeneric, cast ([kind, obj, createData, createDisplayObjectRuntimeFactory] : Array<Dynamic>));
     return cast null;
   }
@@ -91,7 +102,7 @@ class Displayobject {
     return cast null;
   }
 
-  public static function createHtmlView(?obj:PartialNode<Dynamic>):Dynamic {
+  public static function createHtmlView(?obj:PartialNode<HtmlView>):HtmlView {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_HtmlView.createHtmlView, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -106,7 +117,7 @@ class Displayobject {
     return cast null;
   }
 
-  public static function createRenderView(?obj:PartialNode<Dynamic>):Dynamic {
+  public static function createRenderView(?obj:PartialNode<RenderView>):RenderView {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_RenderView.createRenderView, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -121,7 +132,7 @@ class Displayobject {
     return cast null;
   }
 
-  public static function createStage(?obj:Dynamic):Dynamic {
+  public static function createStage(?obj:Dynamic):Stage {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_Stage.createStage, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -136,7 +147,7 @@ class Displayobject {
     return cast null;
   }
 
-  public static function createVideo(?obj:PartialNode<Dynamic>):Dynamic {
+  public static function createVideo(?obj:PartialNode<Video>):Video {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_Video.createVideo, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
@@ -151,57 +162,57 @@ class Displayobject {
     return cast null;
   }
 
-  public static function enableStageSignals(source:Dynamic):StageSignals {
+  public static function enableStageSignals(source:Stage):StageSignals {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_Stage.enableStageSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBitmapRuntime(source:Dynamic):BitmapRuntime {
+  public static function getBitmapRuntime(source:Bitmap):BitmapRuntime {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_Bitmap.getBitmapRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getDisplayContainerRuntime(source:Dynamic):DisplayContainerRuntime {
+  public static function getDisplayContainerRuntime(source:DisplayContainer):DisplayContainerRuntime {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_DisplayContainer.getDisplayContainerRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getDisplayObjectColorAdjustments(source:Dynamic):Null<Array<Adjustment>> {
+  public static function getDisplayObjectColorAdjustments(source:DisplayObject):Null<Array<Adjustment>> {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_DisplayObject.getDisplayObjectColorAdjustments, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getDisplayObjectRuntime(source:Dynamic):DisplayObjectRuntime {
+  public static function getDisplayObjectRuntime(source:DisplayObject):DisplayObjectRuntime {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_DisplayObject.getDisplayObjectRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getDisplayObjectStage(source:Dynamic):Null<Dynamic> {
+  public static function getDisplayObjectStage(source:DisplayObject):Null<Stage> {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_Stage.getDisplayObjectStage, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getHtmlViewRuntime(source:Dynamic):HtmlViewRuntime {
+  public static function getHtmlViewRuntime(source:HtmlView):HtmlViewRuntime {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_HtmlView.getHtmlViewRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getRenderViewRuntime(source:Dynamic):RenderViewRuntime {
+  public static function getRenderViewRuntime(source:RenderView):RenderViewRuntime {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_RenderView.getRenderViewRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getStageRuntime(source:Dynamic):StageRuntime {
+  public static function getStageRuntime(source:Stage):StageRuntime {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_Stage.getStageRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getStageSignals(source:Dynamic):Null<StageSignals> {
+  public static function getStageSignals(source:Stage):Null<StageSignals> {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_Stage.getStageSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getVideoRuntime(source:Dynamic):VideoRuntime {
+  public static function getVideoRuntime(source:Video):VideoRuntime {
     return cast _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_Video.getVideoRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -211,39 +222,39 @@ class Displayobject {
     return cast null;
   }
 
-  public static function setBitmapImage(source:Dynamic, value:Dynamic):Void {
+  public static function setBitmapImage(source:Bitmap, value:Dynamic):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_Bitmap.setBitmapImage, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setDisplayObjectClip(source:Dynamic, value:Null<Dynamic>):Void {
+  public static function setDisplayObjectClip(source:DisplayObject, value:Null<ClipRegion>):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_DisplayObject.setDisplayObjectClip, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setDisplayObjectColorAdjustments(source:Dynamic, value:Null<Array<Adjustment>>):Void {
+  public static function setDisplayObjectColorAdjustments(source:DisplayObject, value:Null<Array<Adjustment>>):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_DisplayObject.setDisplayObjectColorAdjustments, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setDisplayObjectColorTransform(source:Dynamic, colorTransform:Null<Dynamic>):Void {
+  public static function setDisplayObjectColorTransform(source:DisplayObject, colorTransform:Null<ColorTransform>):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_DisplayObject.setDisplayObjectColorTransform, cast ([source, colorTransform] : Array<Dynamic>));
   }
 
-  public static function setHtmlViewSize(source:Dynamic, width:Float, height:Float):Void {
+  public static function setHtmlViewSize(source:HtmlView, width:Float, height:Float):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_HtmlView.setHtmlViewSize, cast ([source, width, height] : Array<Dynamic>));
   }
 
-  public static function setRenderViewSize(source:Dynamic, width:Float, height:Float):Void {
+  public static function setRenderViewSize(source:RenderView, width:Float, height:Float):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_RenderView.setRenderViewSize, cast ([source, width, height] : Array<Dynamic>));
   }
 
-  public static function setStageSize(source:Dynamic, width:Float, height:Float):Void {
+  public static function setStageSize(source:Stage, width:Float, height:Float):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_Stage.setStageSize, cast ([source, width, height] : Array<Dynamic>));
   }
 
-  public static function setVideoSmoothing(source:Dynamic, value:Bool):Void {
+  public static function setVideoSmoothing(source:Video, value:Bool):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_Video.setVideoSmoothing, cast ([source, value] : Array<Dynamic>));
   }
 
-  public static function setVideoSource(source:Dynamic, value:Dynamic):Void {
+  public static function setVideoSource(source:Video, value:Dynamic):Void {
     _Runtime.callValue(Facade_Displayobject_flighthq_displayobject_Video.setVideoSource, cast ([source, value] : Array<Dynamic>));
   }
 }

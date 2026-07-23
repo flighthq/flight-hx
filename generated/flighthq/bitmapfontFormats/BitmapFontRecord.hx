@@ -4,11 +4,13 @@ package flighthq.bitmapfontFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmapfont.BitmapFont.createBitmapFont;
+import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontData;
 import flighthq.types.BitmapFont.BitmapFontEncoding;
 import flighthq.types.BitmapFont.BitmapFontGlyphData;
 import flighthq.types.BitmapFont.BitmapFontKerningData;
 import flighthq.types.BitmapFont.BitmapFontParseOptions;
+import flighthq.types.TextureAtlas;
 
 typedef BitmapFontCharRecord = { var height:Float; var id:Float; var page:Float; var width:Float; var x:Float; var xadvance:Float; var xoffset:Float; var y:Float; var yoffset:Float; };
 

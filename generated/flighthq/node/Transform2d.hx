@@ -14,6 +14,7 @@ import flighthq.node.Revision.computeNodeWorldTransformRevision;
 import flighthq.node.Revision.invalidateNodeLocalTransform;
 import flighthq.types.HasTransform2D.HasTransform2DRuntime;
 import flighthq.types.HasTransform2D.Transform2DNode;
+import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Transform2D.Transform2DLike;
@@ -55,7 +56,7 @@ class Transform2d {
     }
   }
 
-  public static function getNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>):Dynamic {
+  public static function getNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>):Matrix {
     _Runtime.callValue(ensureNodeLocalMatrix, cast ([target] : Array<Dynamic>));
     return cast _Runtime.field((cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic), 'localMatrix');
     return cast null;
@@ -73,7 +74,7 @@ class Transform2d {
     _Runtime.setField(out, 'y', _Runtime.field(source, 'y'));
   }
 
-  public static function getNodeWorldMatrix<Traits>(target:Transform2DNode<Traits>):Dynamic {
+  public static function getNodeWorldMatrix<Traits>(target:Transform2DNode<Traits>):Matrix {
     _Runtime.callValue(ensureNodeWorldMatrix, cast ([target] : Array<Dynamic>));
     return cast _Runtime.field((cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : Dynamic), 'worldMatrix');
     return cast null;

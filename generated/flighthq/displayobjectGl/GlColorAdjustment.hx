@@ -12,16 +12,19 @@ import flighthq.displayobjectGl.GlSpriteBatch.setGlQuadBatchWorldAndTexture;
 import flighthq.displayobjectGl.GlSpriteBatch.useGlQuadBatchProgram;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
+import flighthq.types.ColorTransform;
+import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlColorAdjustmentFold;
 import flighthq.types.GlRenderState.GlColorTransformInstancedShader;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.GlRenderState.GlShapeMeshColorTransformShader;
 import flighthq.types.GlRenderState.GlUniformColorTransformShader;
+import flighthq.types.GlShapeMesh;
 import flighthq.types.RenderProxy2D;
 
 @:expose("flighthq.displayobjectGl.GlColorAdjustment")
 class GlColorAdjustment {
-  public static function enableGlColorAdjustment(state:Dynamic):Void {
+  public static function enableGlColorAdjustment(state:GlRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.setField(runtime, 'glColorAdjustmentFold', GlColorAdjustment.glColorAdjustmentFold__glColorAdjustment);
@@ -47,7 +50,7 @@ class GlColorAdjustment {
 
   public static final UNIFORM_CT_FS__glColorAdjustment:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nin float v_alpha;\nuniform sampler2D u_texture;\nuniform vec4 u_ctMult;\nuniform vec4 u_ctOff;\nout vec4 fragColor;\nvoid main() {\n  vec4 color = texture(u_texture, v_texCoord) * clamp(v_alpha, 0.0, 1.0);\n  if (color.a <= 0.0) discard;\n  color = vec4(color.rgb / color.a, color.a);\n  color = clamp(color * u_ctMult + u_ctOff, vec4(0.0), vec4(1.0));\n  fragColor = vec4(color.rgb * color.a, color.a);\n}';
 
-  public static function bindGlSpriteBatchUniformColorTransform__glColorAdjustment(state:Dynamic, colorTransform:Dynamic):Void {
+  public static function bindGlSpriteBatchUniformColorTransform__glColorAdjustment(state:GlRenderState, colorTransform:ColorTransform):Void {
     var shader:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     shader = _Runtime.callValue(GlColorAdjustment.ensureGlUniformColorTransformShader__glColorAdjustment, cast ([state] : Array<Dynamic>));
@@ -59,7 +62,7 @@ class GlColorAdjustment {
     _Runtime.callValue(bindGlQuadBatchBaseAttributes, cast ([state, _Runtime.field(shader, 'locCorner')] : Array<Dynamic>));
   }
 
-  public static function bindGlSpriteBatchInstancedColorTransform__glColorAdjustment(state:Dynamic):Void {
+  public static function bindGlSpriteBatchInstancedColorTransform__glColorAdjustment(state:GlRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var shader:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
@@ -78,7 +81,7 @@ class GlColorAdjustment {
     _Runtime.callProperty(gl, 'vertexAttribDivisor', cast ([8.0, 1.0] : Array<Dynamic>));
   }
 
-  public static function ensureGlColorTransformInstancedShader__glColorAdjustment(state:Dynamic):GlColorTransformInstancedShader {
+  public static function ensureGlColorTransformInstancedShader__glColorAdjustment(state:GlRenderState):GlColorTransformInstancedShader {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -91,7 +94,7 @@ class GlColorAdjustment {
     return cast null;
   }
 
-  public static function ensureGlUniformColorTransformShader__glColorAdjustment(state:Dynamic):GlUniformColorTransformShader {
+  public static function ensureGlUniformColorTransformShader__glColorAdjustment(state:GlRenderState):GlUniformColorTransformShader {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -104,14 +107,14 @@ class GlColorAdjustment {
     return cast null;
   }
 
-  public static function equalsRecordedColorTransform__glColorAdjustment(a:Null<Dynamic>, b:Null<Dynamic>):Bool {
+  public static function equalsRecordedColorTransform__glColorAdjustment(a:Null<ColorTransform>, b:Null<ColorTransform>):Bool {
     if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(a, null), function():Dynamic return cast _Runtime.strictEquals(b, null)))) { return cast false; }
     return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'redMultiplier'), _Runtime.field(b, 'redMultiplier')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'greenMultiplier'), _Runtime.field(b, 'greenMultiplier'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'blueMultiplier'), _Runtime.field(b, 'blueMultiplier'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'alphaMultiplier'), _Runtime.field(b, 'alphaMultiplier'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'redOffset'), _Runtime.field(b, 'redOffset'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'greenOffset'), _Runtime.field(b, 'greenOffset'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'blueOffset'), _Runtime.field(b, 'blueOffset'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'alphaOffset'), _Runtime.field(b, 'alphaOffset')));
     return cast null;
   }
 
-  public static function flushGlColorAdjustmentFold__glColorAdjustment(state:Dynamic, count:Float):Bool {
+  public static function flushGlColorAdjustmentFold__glColorAdjustment(state:GlRenderState, count:Float):Bool {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var ctMode:Dynamic = cast _Runtime.UNDEFINED;
     var uniformColorTransform:Dynamic = cast _Runtime.UNDEFINED;
@@ -136,7 +139,7 @@ class GlColorAdjustment {
     return cast null;
   }
 
-  public static function promoteGlSpriteBatchColorTransformToPerInstance__glColorAdjustment(runtime:GlRenderStateRuntime, instanceCount:Float, fill:Null<Dynamic>):Void {
+  public static function promoteGlSpriteBatchColorTransformToPerInstance__glColorAdjustment(runtime:GlRenderStateRuntime, instanceCount:Float, fill:Null<ColorTransform>):Void {
     _Runtime.setField(runtime, 'spriteBatchColorTransformMode', GlColorAdjustment.CT_MODE_PER_INSTANCE__glColorAdjustment);
     {
       var i:Dynamic = 0.0;
@@ -147,7 +150,7 @@ class GlColorAdjustment {
     }
   }
 
-  public static function recordGlColorAdjustment__glColorAdjustment(runtime:GlRenderStateRuntime, colorTransform:Null<Dynamic>, instanceIndex:Float):Void {
+  public static function recordGlColorAdjustment__glColorAdjustment(runtime:GlRenderStateRuntime, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
     var mode:Dynamic = cast _Runtime.UNDEFINED;
     var tint:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformData'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -176,7 +179,7 @@ class GlColorAdjustment {
     _Runtime.callValue(GlColorAdjustment.writeGlColorTransformInstance__glColorAdjustment, cast ([runtime, tint, instanceIndex] : Array<Dynamic>));
   }
 
-  public static function writeGlColorTransformInstance__glColorAdjustment(runtime:GlRenderStateRuntime, colorTransform:Null<Dynamic>, instanceIndex:Float):Void {
+  public static function writeGlColorTransformInstance__glColorAdjustment(runtime:GlRenderStateRuntime, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     offset = (instanceIndex * GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment);
@@ -209,7 +212,7 @@ class GlColorAdjustment {
     }
   }
 
-  public static function drawGlShapeMeshesColorTransform__glColorAdjustment(state:Dynamic, renderProxy:RenderProxy2D, meshes:Array<Dynamic>):Void {
+  public static function drawGlShapeMeshesColorTransform__glColorAdjustment(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<GlShapeMesh>):Void {
     var colorTransform:Dynamic = cast _Runtime.UNDEFINED;
     var base:Dynamic = cast _Runtime.UNDEFINED;
     var shader:Dynamic = cast _Runtime.UNDEFINED;
@@ -230,7 +233,7 @@ class GlColorAdjustment {
     }] : Array<Dynamic>));
   }
 
-  public static function ensureGlShapeMeshColorTransformShader__glColorAdjustment(state:Dynamic):GlShapeMeshColorTransformShader {
+  public static function ensureGlShapeMeshColorTransformShader__glColorAdjustment(state:GlRenderState):GlShapeMeshColorTransformShader {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;

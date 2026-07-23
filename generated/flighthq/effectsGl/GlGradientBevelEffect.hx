@@ -15,6 +15,10 @@ import flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget;
 import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
 import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderTarget;
+import flighthq.types.GlRenderTarget.GlRenderTargetPool;
+import flighthq.types.GradientBevelEffect;
 
 typedef BevelEncodeLocations__glGradientBevelEffect = Dynamic;
 
@@ -30,7 +34,7 @@ class GlGradientBevelEffect {
 
   public static final applyShaders__glGradientBevelEffect:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  public static function applyGradientBevelEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
+  public static function applyGradientBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientBevelEffect):Void {
     var descriptor:Dynamic = cast _Runtime.UNDEFINED;
     var s0:Dynamic = cast _Runtime.UNDEFINED;
     var s1:Dynamic = cast _Runtime.UNDEFINED;
@@ -50,8 +54,8 @@ class GlGradientBevelEffect {
     s0 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     s1 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     s2 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    src = (cast source : Dynamic);
-    dst = (cast dest : Dynamic);
+    src = (cast source : GlRenderTarget);
+    dst = (cast dest : GlRenderTarget);
     angle = ((_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0) * HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
     quality = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
@@ -80,10 +84,10 @@ class GlGradientBevelEffect {
   }
 
   public static final defaultGlGradientBevelEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyGradientBevelEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(applyGradientBevelEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : GradientBevelEffect)] : Array<Dynamic>));
   };
 
-  public static function applyBevelApplyPass__glGradientBevelEffect(state:Dynamic, encoded:Dynamic, ramp:Dynamic, source:Dynamic, dest:Dynamic):Void {
+  public static function applyBevelApplyPass__glGradientBevelEffect(state:GlRenderState, encoded:GlRenderTarget, ramp:Dynamic, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlGradientBevelEffect.getApplyShader__glGradientBevelEffect, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(encoded, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -98,7 +102,7 @@ class GlGradientBevelEffect {
     }] : Array<Dynamic>));
   }
 
-  public static function applyBevelEncodePass__glGradientBevelEffect(state:Dynamic, blurred:Dynamic, dest:Dynamic, dx:Float, dy:Float):Void {
+  public static function applyBevelEncodePass__glGradientBevelEffect(state:GlRenderState, blurred:GlRenderTarget, dest:GlRenderTarget, dx:Float, dy:Float):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlGradientBevelEffect.getEncodeShader__glGradientBevelEffect, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(blurred, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
@@ -107,7 +111,7 @@ class GlGradientBevelEffect {
     }] : Array<Dynamic>));
   }
 
-  public static function getApplyShader__glGradientBevelEffect(state:Dynamic):BevelApplyLocations__glGradientBevelEffect {
+  public static function getApplyShader__glGradientBevelEffect(state:GlRenderState):BevelApplyLocations__glGradientBevelEffect {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callProperty(GlGradientBevelEffect.applyShaders__glGradientBevelEffect, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -120,7 +124,7 @@ class GlGradientBevelEffect {
     return cast null;
   }
 
-  public static function getEncodeShader__glGradientBevelEffect(state:Dynamic):BevelEncodeLocations__glGradientBevelEffect {
+  public static function getEncodeShader__glGradientBevelEffect(state:GlRenderState):BevelEncodeLocations__glGradientBevelEffect {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callProperty(GlGradientBevelEffect.encodeShaders__glGradientBevelEffect, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {

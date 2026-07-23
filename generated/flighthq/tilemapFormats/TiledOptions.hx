@@ -4,6 +4,7 @@ package flighthq.tilemapFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.TiledTileset.TiledTilesetRef;
+import flighthq.types.Tileset;
 
 typedef TiledCompression = String;
 

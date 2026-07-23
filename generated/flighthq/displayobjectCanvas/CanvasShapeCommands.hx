@@ -8,10 +8,12 @@ import flighthq.displayobjectCanvas.CanvasFillPattern.createGradientPattern;
 import flighthq.geometry.Matrix.createMatrix;
 import flighthq.geometry.Matrix.inverseMatrix;
 import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
+import flighthq.types.ImageResource;
+import flighthq.types.Matrix;
 
 @:expose("flighthq.displayobjectCanvas.CanvasShapeCommands")
 class CanvasShapeCommands {
-  public static final _fillMatrixInverse__canvasShapeCommands:Dynamic = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
+  public static final _fillMatrixInverse__canvasShapeCommands:Matrix = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
 
   public static final defaultCanvasBeginBitmapFill:Dynamic = { key: 'beginBitmapFill', draw: function(context:Dynamic, state:Dynamic, buf:Dynamic, i:Dynamic) {
     var bitmap:Dynamic = cast _Runtime.UNDEFINED;
@@ -19,8 +21,8 @@ class CanvasShapeCommands {
     var repeat:Dynamic = cast _Runtime.UNDEFINED;
     var smooth:Dynamic = cast _Runtime.UNDEFINED;
     var pattern:Dynamic = cast _Runtime.UNDEFINED;
-    bitmap = (cast _Runtime.getIndex(buf, i) : Dynamic);
-    matrix = (cast _Runtime.getIndex(buf, (i + 1.0)) : Null<Dynamic>);
+    bitmap = (cast _Runtime.getIndex(buf, i) : ImageResource);
+    matrix = (cast _Runtime.getIndex(buf, (i + 1.0)) : Null<Matrix>);
     repeat = (cast _Runtime.getIndex(buf, (i + 2.0)) : Bool);
     smooth = (cast _Runtime.getIndex(buf, (i + 3.0)) : Bool);
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.field(state, 'hasPendingPath'), function():Dynamic return cast _Runtime.orValue(_Runtime.field(state, 'hasFill'), function():Dynamic return cast _Runtime.field(state, 'hasStroke'))))) { _Runtime.callProperty(state, 'flush', cast ([] : Array<Dynamic>)); }
@@ -66,7 +68,7 @@ class CanvasShapeCommands {
     colors = (cast _Runtime.getIndex(buf, (i + 1.0)) : Array<Float>);
     alphas = (cast _Runtime.getIndex(buf, (i + 2.0)) : Array<Float>);
     ratios = (cast _Runtime.getIndex(buf, (i + 3.0)) : Array<Float>);
-    matrix = (cast _Runtime.getIndex(buf, (i + 4.0)) : Null<Dynamic>);
+    matrix = (cast _Runtime.getIndex(buf, (i + 4.0)) : Null<Matrix>);
     spreadMethod = (cast _Runtime.getIndex(buf, (i + 5.0)) : Dynamic);
     interpolationMethod = (cast _Runtime.getIndex(buf, (i + 6.0)) : Dynamic);
     focalPointRatio = (cast _Runtime.getIndex(buf, (i + 7.0)) : Float);
@@ -292,7 +294,7 @@ class CanvasShapeCommands {
     var repeat:Dynamic = cast _Runtime.UNDEFINED;
     var smooth:Dynamic = cast _Runtime.UNDEFINED;
     var pattern:Dynamic = cast _Runtime.UNDEFINED;
-    bitmap = (cast _Runtime.getIndex(buf, i) : Dynamic);
+    bitmap = (cast _Runtime.getIndex(buf, i) : ImageResource);
     repeat = (cast _Runtime.getIndex(buf, (i + 2.0)) : Bool);
     smooth = (cast _Runtime.getIndex(buf, (i + 3.0)) : Bool);
     pattern = _Runtime.callValue(createBitmapPattern, cast ([context, bitmap, repeat, smooth] : Array<Dynamic>));
@@ -316,7 +318,7 @@ class CanvasShapeCommands {
     colors = (cast _Runtime.getIndex(buf, (i + 1.0)) : Array<Float>);
     alphas = (cast _Runtime.getIndex(buf, (i + 2.0)) : Array<Float>);
     ratios = (cast _Runtime.getIndex(buf, (i + 3.0)) : Array<Float>);
-    matrix = (cast _Runtime.getIndex(buf, (i + 4.0)) : Null<Dynamic>);
+    matrix = (cast _Runtime.getIndex(buf, (i + 4.0)) : Null<Matrix>);
     spreadMethod = (cast _Runtime.getIndex(buf, (i + 5.0)) : Dynamic);
     interpolationMethod = (cast _Runtime.getIndex(buf, (i + 6.0)) : Dynamic);
     focalPointRatio = (cast _Runtime.getIndex(buf, (i + 7.0)) : Float);

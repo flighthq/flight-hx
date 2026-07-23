@@ -7,14 +7,15 @@ import flighthq.materials.Material.createMaterial;
 import flighthq.types.AlphaType;
 import flighthq.types.BlendMode;
 import flighthq.types.Entity.Kind;
+import flighthq.types.SurfaceMaterial;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
 @:expose("flighthq.materials.SurfaceMaterial")
 class SurfaceMaterial {
-  public static function createSurfaceMaterial(kind:Kind):Dynamic {
+  public static function createSurfaceMaterial(kind:Kind):flighthq.types.SurfaceMaterial {
     var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createMaterial, cast ([kind] : Array<Dynamic>)) : Dynamic);
+    material = (cast _Runtime.callValue(createMaterial, cast ([kind] : Array<Dynamic>)) : flighthq.types.SurfaceMaterial);
     _Runtime.setField(material, 'alphaCutoff', SurfaceMaterial.DEFAULT_ALPHA_CUTOFF__surfaceMaterial);
     _Runtime.setField(material, 'alphaMode', SurfaceMaterial.DEFAULT_ALPHA_MODE__surfaceMaterial);
     _Runtime.setField(material, 'alphaType', SurfaceMaterial.DEFAULT_ALPHA_TYPE__surfaceMaterial);
@@ -24,22 +25,22 @@ class SurfaceMaterial {
     return cast null;
   }
 
-  public static function getMaterialAlphaMode(source:Dynamic):MaterialAlphaMode {
+  public static function getMaterialAlphaMode(source:flighthq.types.SurfaceMaterial):MaterialAlphaMode {
     return cast _Runtime.field(source, 'alphaMode');
     return cast null;
   }
 
-  public static function isMaterialBlended(source:Dynamic):Bool {
+  public static function isMaterialBlended(source:flighthq.types.SurfaceMaterial):Bool {
     return cast _Runtime.strictEquals(_Runtime.field(source, 'alphaMode'), 'blend');
     return cast null;
   }
 
-  public static function isMaterialMasked(source:Dynamic):Bool {
+  public static function isMaterialMasked(source:flighthq.types.SurfaceMaterial):Bool {
     return cast _Runtime.strictEquals(_Runtime.field(source, 'alphaMode'), 'mask');
     return cast null;
   }
 
-  public static function isMaterialOpaque(source:Dynamic):Bool {
+  public static function isMaterialOpaque(source:flighthq.types.SurfaceMaterial):Bool {
     return cast _Runtime.strictEquals(_Runtime.field(source, 'alphaMode'), 'opaque');
     return cast null;
   }

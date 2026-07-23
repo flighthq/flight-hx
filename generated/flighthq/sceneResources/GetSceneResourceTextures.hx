@@ -6,27 +6,30 @@ import flighthq._internal._Runtime;
 import flighthq.node.Traversal.forEachNodeDescendant;
 import flighthq.scene.Mesh.isMesh;
 import flighthq.sceneResources._internal._SceneMaterialTextureRegistryValues.getSceneMaterialTextures;
+import flighthq.types.Material;
+import flighthq.types.SceneNode;
+import flighthq.types.Texture;
 
 @:expose("flighthq.sceneResources.GetSceneResourceTextures")
 class GetSceneResourceTextures {
-  public static function getSceneResourceTextures(scene:Dynamic, registry:SceneMaterialTextureRegistry, out:Array<Dynamic>):Void {
+  public static function getSceneResourceTextures(scene:SceneNode, registry:SceneMaterialTextureRegistry, out:Array<Texture>):Void {
     var seen:Dynamic = cast _Runtime.UNDEFINED;
-    var slots:Array<Dynamic> = cast _Runtime.UNDEFINED;
+    var slots:Array<Texture> = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out, 0.0);
     seen = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
     slots = cast ([] : Array<Dynamic>);
     _Runtime.callValue(GetSceneResourceTextures.collectNodeResourceTextures__getSceneResourceTextures, cast ([scene, registry, out, seen, slots] : Array<Dynamic>));
-    _Runtime.callValue(forEachNodeDescendant, cast ([scene, function(node:Dynamic) return _Runtime.callValue(GetSceneResourceTextures.collectNodeResourceTextures__getSceneResourceTextures, cast ([(cast node : Dynamic), registry, out, seen, slots] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callValue(forEachNodeDescendant, cast ([scene, function(node:Dynamic) return _Runtime.callValue(GetSceneResourceTextures.collectNodeResourceTextures__getSceneResourceTextures, cast ([(cast node : SceneNode), registry, out, seen, slots] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  public static function collectNodeResourceTextures__getSceneResourceTextures(node:Dynamic, registry:SceneMaterialTextureRegistry, out:Array<Dynamic>, seen:Dynamic, slots:Array<Dynamic>):Void {
+  public static function collectNodeResourceTextures__getSceneResourceTextures(node:SceneNode, registry:SceneMaterialTextureRegistry, out:Array<Texture>, seen:Dynamic, slots:Array<Texture>):Void {
     var materials:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>))))) { return; }
     materials = _Runtime.field(node, 'materials');
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(materials, 'length'), '<'))) {
-        var material:Dynamic = (cast _Runtime.getIndex(materials, i) : Null<Dynamic>);
+        var material:Dynamic = (cast _Runtime.getIndex(materials, i) : Null<Material>);
         if (_Runtime.truthy(_Runtime.strictEquals(material, null))) { i++; continue; }
         _Runtime.setLength(slots, 0.0);
         _Runtime.callValue(getSceneMaterialTextures, cast ([registry, material, slots] : Array<Dynamic>));

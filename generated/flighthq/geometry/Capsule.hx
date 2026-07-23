@@ -5,13 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.Capsule;
 import flighthq.types.Capsule.CapsuleLike;
 import flighthq.types.Ray3D.Ray3DLike;
 import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.geometry.Capsule")
 class Capsule {
-  public static function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Dynamic {
+  public static function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):flighthq.types.Capsule {
     return cast _Runtime.callValue(createEntity, cast ([{ endX: endX, endY: endY, endZ: endZ, radius: radius, startX: startX, startY: startY, startZ: startZ }] : Array<Dynamic>));
     return cast null;
   }

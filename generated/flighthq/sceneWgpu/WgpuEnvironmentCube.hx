@@ -5,10 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuTextureUpload.uploadWgpuTextureImageResource;
 import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
+import flighthq.types.CubeTexture;
+import flighthq.types.Environment;
+import flighthq.types.ImageResource;
+import flighthq.types.WgpuRenderState;
 
 @:expose("flighthq.sceneWgpu.WgpuEnvironmentCube")
 class WgpuEnvironmentCube {
-  public static function ensureWgpuEnvironmentSourceCube(state:Dynamic, environment:Dynamic):Null<Dynamic> {
+  public static function ensureWgpuEnvironmentSourceCube(state:WgpuRenderState, environment:Environment):Null<Dynamic> {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var cube:Dynamic = cast _Runtime.UNDEFINED;
     var size:Dynamic = cast _Runtime.UNDEFINED;
@@ -36,7 +40,7 @@ class WgpuEnvironmentCube {
     return cast null;
   }
 
-  public static function updateWgpuEnvironmentCubeFace(state:Dynamic, face:Float, image:Dynamic):Bool {
+  public static function updateWgpuEnvironmentCubeFace(state:WgpuRenderState, face:Float, image:ImageResource):Bool {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     texture = _Runtime.field(_Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>)), 'environmentSourceCube');
     if (_Runtime.truthy(_Runtime.strictEquals(texture, null))) { return cast false; }
@@ -45,7 +49,7 @@ class WgpuEnvironmentCube {
     return cast null;
   }
 
-  public static function hasWgpuCubeFacePixels__wgpuEnvironmentCube(cube:Dynamic):Bool {
+  public static function hasWgpuCubeFacePixels__wgpuEnvironmentCube(cube:CubeTexture):Bool {
     {
       var face:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(face, 6.0, '<'))) {

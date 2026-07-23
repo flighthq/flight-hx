@@ -3,19 +3,20 @@ package flighthq.renderGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.GlSkinPaletteTexture;
 
 @:expose("flighthq.renderGl.GlSkinPaletteTexture")
 class GlSkinPaletteTexture {
-  public static function createGlSkinPaletteTexture(gl:Dynamic):Dynamic {
+  public static function createGlSkinPaletteTexture(gl:Dynamic):flighthq.types.GlSkinPaletteTexture {
     return cast { jointCapacity: 0.0, texture: _Runtime.callProperty(gl, 'createTexture', cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  public static function destroyGlSkinPaletteTexture(gl:Dynamic, palette:Dynamic):Void {
+  public static function destroyGlSkinPaletteTexture(gl:Dynamic, palette:flighthq.types.GlSkinPaletteTexture):Void {
     _Runtime.callProperty(gl, 'deleteTexture', cast ([_Runtime.field(palette, 'texture')] : Array<Dynamic>));
   }
 
-  public static function uploadGlSkinPaletteTexture(gl:Dynamic, palette:Dynamic, jointMatrices:flighthq._internal._Float32Array, jointCount:Float):Void {
+  public static function uploadGlSkinPaletteTexture(gl:Dynamic, palette:flighthq.types.GlSkinPaletteTexture, jointMatrices:flighthq._internal._Float32Array, jointCount:Float):Void {
     var width:Dynamic = cast _Runtime.UNDEFINED;
     width = (jointCount * 4.0);
     _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(palette, 'texture')] : Array<Dynamic>));

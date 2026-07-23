@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
+import flighthq.types.Connectivity;
 import flighthq.types.Connectivity.ConnectivityBackend;
 import flighthq.types.Connectivity.ConnectivityConnectionType;
 import flighthq.types.Connectivity.ConnectivityReachability;
@@ -41,7 +42,7 @@ class Connectivity {
     return cast null;
   }
 
-  public static function attachConnectivity(net:Dynamic):Void {
+  public static function attachConnectivity(net:flighthq.types.Connectivity):Void {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
     var initial:Dynamic = cast _Runtime.UNDEFINED;
     var wasOnline:Dynamic = cast _Runtime.UNDEFINED;
@@ -74,7 +75,7 @@ class Connectivity {
     _Runtime.callProperty(Connectivity._subscriptions__connectivity, 'set', cast ([net, unsubscribe] : Array<Dynamic>));
   }
 
-  public static function createConnectivity():Dynamic {
+  public static function createConnectivity():flighthq.types.Connectivity {
     return cast { onChange: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onConnectionTypeChange: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onMeteredChange: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onOffline: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onOnline: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     return cast null;
   }
@@ -145,7 +146,7 @@ class Connectivity {
     return cast null;
   }
 
-  public static function detachConnectivity(net:Dynamic):Void {
+  public static function detachConnectivity(net:flighthq.types.Connectivity):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
     unsubscribe = _Runtime.callProperty(Connectivity._subscriptions__connectivity, 'get', cast ([net] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -174,7 +175,7 @@ class Connectivity {
     })();
   }
 
-  public static function disposeConnectivity(net:Dynamic):Void {
+  public static function disposeConnectivity(net:flighthq.types.Connectivity):Void {
     _Runtime.callValue(detachConnectivity, cast ([net] : Array<Dynamic>));
   }
 

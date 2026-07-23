@@ -4,6 +4,7 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Light;
+import flighthq.types.Vector3;
 
 @:expose("flighthq.types._internal._DirectionalLightValues")
 class _DirectionalLightValues {

@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef TextureUvTransform = { var uvOffset:Dynamic; var uvRotation:Float; var uvScale:Dynamic; };
+typedef TextureUvTransform = { var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; };

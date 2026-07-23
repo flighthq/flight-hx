@@ -3,8 +3,10 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObject.DisplayObjectData;
 import flighthq.types.DisplayObject.DisplayObjectRuntime;
+import flighthq.types.VideoResource;
 
 @:expose("flighthq.types._internal._VideoValues")
 class _VideoValues {

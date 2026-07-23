@@ -14,6 +14,7 @@ import flighthq.node.Transform3d.getNodeWorldMatrix4;
 import flighthq.scene.Mesh.isMesh;
 import flighthq.types.Frustum.FrustumLike;
 import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.SceneNode;
 
 @:expose("flighthq.scene.SceneNodeCulling")
 class SceneNodeCulling {
@@ -21,13 +22,13 @@ class SceneNodeCulling {
     _Runtime.callValue(setFrustumFromMatrix4, cast ([out, viewProjection] : Array<Dynamic>));
   }
 
-  public static function cullSceneNodeByFrustum(out:Array<Dynamic>, root:Dynamic, frustum:FrustumLike):Array<Dynamic> {
+  public static function cullSceneNodeByFrustum(out:Array<SceneNode>, root:SceneNode, frustum:FrustumLike):Array<SceneNode> {
     _Runtime.callValue(SceneNodeCulling._cullNode__sceneNodeCulling, cast ([out, root, frustum] : Array<Dynamic>));
     return cast out;
     return cast null;
   }
 
-  public static function _cullNode__sceneNodeCulling(out:Array<Dynamic>, node:Dynamic, frustum:FrustumLike):Void {
+  public static function _cullNode__sceneNodeCulling(out:Array<SceneNode>, node:SceneNode, frustum:FrustumLike):Void {
     var children:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(node, 'enabled')))) { return; }
     if (_Runtime.truthy(_Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)))) {
@@ -42,7 +43,7 @@ class SceneNodeCulling {
         var worldMatrix:Dynamic = _Runtime.callValue(getNodeWorldMatrix4, cast ([node] : Array<Dynamic>));
         _Runtime.callValue(transformAabbByMatrix4, cast ([SceneNodeCulling._scratchWorldAabb__sceneNodeCulling, localBounds, worldMatrix] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.callValue(isFrustumIntersectingAabb, cast ([frustum, SceneNodeCulling._scratchWorldAabb__sceneNodeCulling] : Array<Dynamic>)))) {
-          _Runtime.callProperty(out, 'push', cast ([(cast node : Dynamic)] : Array<Dynamic>));
+          _Runtime.callProperty(out, 'push', cast ([(cast node : SceneNode)] : Array<Dynamic>));
         }
       }
     }
@@ -51,7 +52,7 @@ class SceneNodeCulling {
       {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
-          _Runtime.callValue(SceneNodeCulling._cullNode__sceneNodeCulling, cast ([out, (cast _Runtime.getIndex(children, i) : Dynamic), frustum] : Array<Dynamic>));
+          _Runtime.callValue(SceneNodeCulling._cullNode__sceneNodeCulling, cast ([out, (cast _Runtime.getIndex(children, i) : SceneNode), frustum] : Array<Dynamic>));
           i++;
         }
       }

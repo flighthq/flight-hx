@@ -4,6 +4,8 @@ package flighthq.velocity;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Velocity.Velocity2D;
+import flighthq.types.Velocity.VelocityField;
+import flighthq.types.Velocity.VelocitySample;
 
 @:expose("flighthq.velocity.VelocityField")
 class VelocityField {
@@ -18,7 +20,7 @@ class VelocityField {
     return cast null;
   }
 
-  public static function beginVelocityFrame(field:Dynamic):Void {
+  public static function beginVelocityFrame(field:flighthq.types.Velocity.VelocityField):Void {
     _Runtime.incrementField(field, 'frameId', 1, true);
   }
 
@@ -43,7 +45,7 @@ class VelocityField {
     return cast null;
   }
 
-  public static function contributeVelocity(field:Dynamic, source:Dynamic, x:Float, y:Float):Void {
+  public static function contributeVelocity(field:flighthq.types.Velocity.VelocityField, source:Dynamic, x:Float, y:Float):Void {
     var sample:Dynamic = cast _Runtime.UNDEFINED;
     sample = _Runtime.callValue(ensureVelocitySample, cast ([field, source] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(sample, 'velocity'), 'x', x);
@@ -63,7 +65,7 @@ class VelocityField {
     return cast null;
   }
 
-  public static function createVelocityField():Dynamic {
+  public static function createVelocityField():flighthq.types.Velocity.VelocityField {
     return cast { samples: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []), frameId: 0.0 };
     return cast null;
   }
@@ -83,7 +85,7 @@ class VelocityField {
     return cast null;
   }
 
-  public static function ensureVelocitySample(field:Dynamic, source:Dynamic):Dynamic {
+  public static function ensureVelocitySample(field:flighthq.types.Velocity.VelocityField, source:Dynamic):VelocitySample {
     var sample:Dynamic = cast _Runtime.UNDEFINED;
     sample = _Runtime.callProperty(_Runtime.field(field, 'samples'), 'get', cast ([source] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -94,7 +96,7 @@ class VelocityField {
     return cast null;
   }
 
-  public static function getVelocity(field:Dynamic, source:Dynamic, out:Velocity2D):Velocity2D {
+  public static function getVelocity(field:flighthq.types.Velocity.VelocityField, source:Dynamic, out:Velocity2D):Velocity2D {
     var sample:Dynamic = cast _Runtime.UNDEFINED;
     sample = _Runtime.callProperty(_Runtime.field(field, 'samples'), 'get', cast ([source] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(sample, 'lastFrameId'), _Runtime.field(field, 'frameId'))))) {
@@ -108,7 +110,7 @@ class VelocityField {
     return cast null;
   }
 
-  public static function hasVelocity(field:Dynamic, source:Dynamic):Bool {
+  public static function hasVelocity(field:flighthq.types.Velocity.VelocityField, source:Dynamic):Bool {
     var sample:Dynamic = cast _Runtime.UNDEFINED;
     sample = _Runtime.callProperty(_Runtime.field(field, 'samples'), 'get', cast ([source] : Array<Dynamic>));
     return cast _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(sample, 'lastFrameId'), _Runtime.field(field, 'frameId'))), function():Dynamic return cast _Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(sample, 'velocity'), 'x'), 0.0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(sample, 'velocity'), 'y'), 0.0)));
@@ -179,7 +181,7 @@ class VelocityField {
     return cast null;
   }
 
-  public static function suppressVelocity(field:Dynamic, source:Dynamic):Void {
+  public static function suppressVelocity(field:flighthq.types.Velocity.VelocityField, source:Dynamic):Void {
     _Runtime.callValue(contributeVelocity, cast ([field, source, 0.0, 0.0] : Array<Dynamic>));
   }
 

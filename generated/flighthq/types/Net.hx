@@ -22,6 +22,6 @@ typedef NetResponse = { var status:Float; var statusText:String; var ok:Bool; va
 
 typedef NetProgress = { var phase:String; var loaded:Float; var total:Float; };
 
-typedef NetRequestOptions = { @:optional var progress:Dynamic; @:optional var signal:Dynamic; };
+typedef NetRequestOptions = { @:optional var progress:Signal<Dynamic>; @:optional var signal:Dynamic; };
 
 typedef NetBackend = { var sendNetRequest:Dynamic; };

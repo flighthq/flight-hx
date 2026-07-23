@@ -8,4 +8,4 @@ import flighthq.types.Entity.Kind;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 
-typedef SheenPbrMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var alphaType:AlphaType; var blendMode:BlendMode; var doubleSided:Bool; var sheenColor:Float; var sheenColorMap:Null<Dynamic>; var sheenRoughness:Float; var sheenRoughnessMap:Null<Dynamic>; var standard:StandardPbrMaterialProperties; };
+typedef SheenPbrMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var alphaType:AlphaType; var blendMode:BlendMode; var doubleSided:Bool; var sheenColor:Float; var sheenColorMap:Null<Texture>; var sheenRoughness:Float; var sheenRoughnessMap:Null<Texture>; var standard:StandardPbrMaterialProperties; };

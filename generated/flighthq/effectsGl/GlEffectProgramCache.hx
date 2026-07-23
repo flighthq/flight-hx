@@ -5,10 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlFullscreenPass.compileGlFullscreenProgram;
 import flighthq.types.GlFullscreenProgram;
+import flighthq.types.GlRenderState;
 
 @:expose("flighthq.effectsGl.GlEffectProgramCache")
 class GlEffectProgramCache {
-  public static function getGlEffectProgram(state:Dynamic, key:String, fragmentSource:String):GlFullscreenProgram {
+  public static function getGlEffectProgram(state:GlRenderState, key:String, fragmentSource:String):GlFullscreenProgram {
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var compiled:Dynamic = cast _Runtime.UNDEFINED;
@@ -25,7 +26,7 @@ class GlEffectProgramCache {
     return cast null;
   }
 
-  public static function getGlEffectUniformLocation(state:Dynamic, program:GlFullscreenProgram, name:String):Null<Dynamic> {
+  public static function getGlEffectUniformLocation(state:GlRenderState, program:GlFullscreenProgram, name:String):Null<Dynamic> {
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var loc:Dynamic = cast _Runtime.UNDEFINED;

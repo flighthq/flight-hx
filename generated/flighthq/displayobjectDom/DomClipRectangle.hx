@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.displayobjectDom.DomClipContours.buildDomContourClipPath;
 import flighthq.displayobjectDom.DomRenderState.getDomRenderStateRuntime;
+import flighthq.types.DomRenderState;
 import flighthq.types.DomRenderState.DomClipContourEntry;
 import flighthq.types.DomRenderState.DomClipEntry;
 import flighthq.types.DomRenderState.DomClipHooks;
@@ -15,7 +16,7 @@ import flighthq.types.RenderProxy2D;
 
 @:expose("flighthq.displayobjectDom.DomClipRectangle")
 class DomClipRectangle {
-  public static function applyDomClipRectangles(state:Dynamic, data:RenderProxy2D, entries:Array<DomClipEntry>):Void {
+  public static function applyDomClipRectangles(state:DomRenderState, data:RenderProxy2D, entries:Array<DomClipEntry>):Void {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     var contour:Null<DomClipContourEntry> = cast _Runtime.UNDEFINED;
     var rect:Dynamic = cast _Runtime.UNDEFINED;
@@ -84,7 +85,7 @@ class DomClipRectangle {
     _Runtime.callProperty(stack, 'push', cast ([_Runtime.callValue(createDomStageRectangle, cast ([rect, transform] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  public static function setDomClipHooks(state:Dynamic):Void {
+  public static function setDomClipHooks(state:DomRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'domClipHooks'), null))) { _Runtime.setField(runtime, 'domClipHooks', DomClipRectangle.domClipHooksImpl__domClipRectangle); }

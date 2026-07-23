@@ -3,10 +3,11 @@ package flighthq.effectsWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.WgpuRenderState;
 
 @:expose("flighthq.effectsWgpu.WgpuEffectGradientRamp")
 class WgpuEffectGradientRamp {
-  public static function getWgpuEffectGradientRampTexture(state:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
+  public static function getWgpuEffectGradientRampTexture(state:WgpuRenderState, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var key:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
@@ -80,7 +81,7 @@ class WgpuEffectGradientRamp {
     return cast null;
   }
 
-  public static function createWgpuEffectGradientRampTexture__wgpuEffectGradientRamp(state:Dynamic, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
+  public static function createWgpuEffectGradientRampTexture__wgpuEffectGradientRamp(state:WgpuRenderState, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;

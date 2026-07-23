@@ -5,11 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.types.VignetteEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.effectsWgpu.WgpuVignetteEffect")
 class WgpuVignetteEffect {
-  public static function applyVignetteEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
+  public static function applyVignetteEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:VignetteEffect):Void {
     var intensity:Dynamic = cast _Runtime.UNDEFINED;
     var radius:Dynamic = cast _Runtime.UNDEFINED;
     var softness:Dynamic = cast _Runtime.UNDEFINED;
@@ -28,7 +31,7 @@ class WgpuVignetteEffect {
     b = ((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(255.0)) / 255.0);
     a = ((Std.int(color) & Std.int(255.0)) / 255.0);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'lens.vignette', WgpuVignetteEffect.VIGNETTE_FRAGMENT_WGSL__wgpuVignetteEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : Dynamic), (cast dest : Dynamic), pipeline, function(f32:Dynamic) {
+    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, intensity);
       _Runtime.setIndex(f32, 1.0, radius);
       _Runtime.setIndex(f32, 2.0, softness);
@@ -40,7 +43,7 @@ class WgpuVignetteEffect {
   }
 
   public static final defaultWgpuVignetteEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyVignetteEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(applyVignetteEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : VignetteEffect)] : Array<Dynamic>));
   };
 
   public static final VIGNETTE_FRAGMENT_WGSL__wgpuVignetteEffect:Dynamic = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_radius : f32,\n  u_softness : f32,\n  _pad0 : f32,\n  u_color : vec4f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let centered = uv - vec2f(0.5);\n  let dist = length(centered) * 1.41421356;\n  let vig = smoothstep(uni.u_radius, uni.u_radius - uni.u_softness, dist);\n  let darken = (1.0 - vig) * uni.u_intensity * uni.u_color.a;\n  return vec4f(mix(c.rgb, uni.u_color.rgb, darken), c.a);\n}';

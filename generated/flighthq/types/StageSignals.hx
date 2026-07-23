@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef StageSignals = { var onFullscreenChanged:Dynamic; var onOrientationChanged:Dynamic; var onResize:Dynamic; };
+typedef StageSignals = { var onFullscreenChanged:Signal<Dynamic>; var onOrientationChanged:Signal<Dynamic>; var onResize:Signal<Dynamic>; };

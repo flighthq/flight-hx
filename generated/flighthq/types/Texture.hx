@@ -8,6 +8,6 @@ import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef TextureColorSpace = String;
 
-typedef Texture = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var uvOffset:Dynamic; var uvRotation:Float; var uvScale:Dynamic; var colorSpace:TextureColorSpace; var image:Null<Dynamic>; @:optional var resource:Null<SceneResourceRef>; var sampler:Dynamic; };
+typedef Texture = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var colorSpace:TextureColorSpace; var image:Null<ImageResource>; @:optional var resource:Null<SceneResourceRef>; var sampler:Sampler; };
 
-typedef TextureLike = EntityWithoutRuntime<Dynamic>;
+typedef TextureLike = EntityWithoutRuntime<flighthq.types.Texture>;

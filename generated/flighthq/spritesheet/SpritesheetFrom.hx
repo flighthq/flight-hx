@@ -9,10 +9,15 @@ import flighthq.spritesheet.SpritesheetFrame.createSpritesheetFrame;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.textureatlas.TextureAtlasRegion.createTextureAtlasRegion;
 import flighthq.types.GridSliceOptions;
+import flighthq.types.Spritesheet;
+import flighthq.types.SpritesheetAnimation;
+import flighthq.types.SpritesheetData;
+import flighthq.types.TextureAtlas;
+import flighthq.types.Tileset;
 
 @:expose("flighthq.spritesheet.SpritesheetFrom")
 class SpritesheetFrom {
-  public static function createSpritesheetFromData(data:Dynamic, atlas:Dynamic):Dynamic {
+  public static function createSpritesheetFromData(data:SpritesheetData, atlas:TextureAtlas):Spritesheet {
     var nameToRegionId:Dynamic = cast _Runtime.UNDEFINED;
     var frames:Dynamic = cast _Runtime.UNDEFINED;
     var frameNameToIndex:Dynamic = cast _Runtime.UNDEFINED;
@@ -48,7 +53,7 @@ class SpritesheetFrom {
     return cast null;
   }
 
-  public static function createSpritesheetFromGrid(options:GridSliceOptions):Dynamic {
+  public static function createSpritesheetFromGrid(options:GridSliceOptions):Spritesheet {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var columns:Dynamic = cast _Runtime.UNDEFINED;
     var rows:Dynamic = cast _Runtime.UNDEFINED;
@@ -101,7 +106,7 @@ class SpritesheetFrom {
     return cast null;
   }
 
-  public static function createSpritesheetFromTileset(tileset:Dynamic):Dynamic {
+  public static function createSpritesheetFromTileset(tileset:Tileset):Spritesheet {
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
     var atlas:Dynamic = cast _Runtime.UNDEFINED;
     var frames:Dynamic = cast _Runtime.UNDEFINED;

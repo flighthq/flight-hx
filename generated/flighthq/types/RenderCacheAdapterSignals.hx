@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef RenderCacheAdapterSignals = { var onPrepare:Dynamic; };
+typedef RenderCacheAdapterSignals = { var onPrepare:Signal<Dynamic>; };

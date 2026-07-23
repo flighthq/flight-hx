@@ -9,6 +9,8 @@ import flighthq.animation.AnimationTrack.createAnimationTrack;
 import flighthq.sceneFormats.Shared.convertPositionsZUpToYUp;
 import flighthq.sceneFormats.Shared.convertQuaternionsZUpToYUp;
 import flighthq.types.AnimationChannel;
+import flighthq.types.AnimationClip;
+import flighthq.types.SceneNode;
 import flighthq.types.Types.SceneAnimationPathRotation;
 import flighthq.types.Types.SceneAnimationPathTranslation;
 import flighthq.types._internal._SceneAnimationPathValues.SceneAnimationPathRotation;
@@ -20,7 +22,7 @@ typedef Md5AnimBaseframePose__md5AnimParse = { var orientationX:Float; var orien
 
 @:expose("flighthq.sceneFormats.Md5AnimParse")
 class Md5AnimParse {
-  public static function parseMd5Anim(source:String, joints:Array<Dynamic>, ?warnings:Array<String>):Null<Dynamic> {
+  public static function parseMd5Anim(source:String, joints:Array<SceneNode>, ?warnings:Array<String>):Null<AnimationClip> {
     var lines:Dynamic = cast _Runtime.UNDEFINED;
     var i:Dynamic = cast _Runtime.UNDEFINED;
     var frameRate:Dynamic = cast _Runtime.UNDEFINED;
@@ -111,7 +113,7 @@ class Md5AnimParse {
     return cast null;
   }
 
-  public static function buildAnimationClip__md5AnimParse(joints:Array<Dynamic>, hierarchy:Array<Md5AnimHierarchyEntry__md5AnimParse>, baseframe:Array<Md5AnimBaseframePose__md5AnimParse>, frames:Array<Array<Float>>, frameRate:Float):Dynamic {
+  public static function buildAnimationClip__md5AnimParse(joints:Array<SceneNode>, hierarchy:Array<Md5AnimHierarchyEntry__md5AnimParse>, baseframe:Array<Md5AnimBaseframePose__md5AnimParse>, frames:Array<Array<Float>>, frameRate:Float):AnimationClip {
     var frameCount:Dynamic = cast _Runtime.UNDEFINED;
     var jointCount:Dynamic = cast _Runtime.UNDEFINED;
     var channels:Array<AnimationChannel> = cast _Runtime.UNDEFINED;

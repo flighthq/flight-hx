@@ -11,9 +11,11 @@ import flighthq.spritesheetFormats.StarlingSchema.StarlingSubTexture;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.textureatlasFormats.TextureAtlasStarlingParse.parseTextureAtlasStarlingXml;
 import flighthq.types.SpritesheetAnimationData;
+import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
+import flighthq.types.TextureAtlasRegion;
 
-typedef StarlingParsed = { var data:Dynamic; var document:StarlingDocument; };
+typedef StarlingParsed = { var data:SpritesheetData; var document:StarlingDocument; };
 
 typedef StarlingParseOptions = { @:optional var frameDuration:Float; };
 
@@ -63,7 +65,7 @@ class StarlingParse {
     return cast null;
   }
 
-  public static function frameFromRegion__starlingParse(region:Dynamic):SpritesheetFrameData {
+  public static function frameFromRegion__starlingParse(region:TextureAtlasRegion):SpritesheetFrameData {
     var sourceWidth:Dynamic = cast _Runtime.UNDEFINED;
     var sourceHeight:Dynamic = cast _Runtime.UNDEFINED;
     sourceWidth = _Runtime.coalesce(_Runtime.field(region, 'originalWidth'), function():Dynamic return cast _Runtime.field(region, 'width'));
@@ -99,7 +101,7 @@ class StarlingParse {
     return cast null;
   }
 
-  public static function documentToData__starlingParse(doc:StarlingDocument, regions:Array<Dynamic>, frameDuration:Float):Dynamic {
+  public static function documentToData__starlingParse(doc:StarlingDocument, regions:Array<TextureAtlasRegion>, frameDuration:Float):SpritesheetData {
     var frames:Dynamic = cast _Runtime.UNDEFINED;
     var frameNames:Dynamic = cast _Runtime.UNDEFINED;
     var animations:Dynamic = cast _Runtime.UNDEFINED;
@@ -110,12 +112,12 @@ class StarlingParse {
     return cast null;
   }
 
-  public static function regionsFromXml__starlingParse(xml:String):Array<Dynamic> {
+  public static function regionsFromXml__starlingParse(xml:String):Array<TextureAtlasRegion> {
     return cast _Runtime.field(_Runtime.callValue(parseTextureAtlasStarlingXml, cast ([xml, _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>))] : Array<Dynamic>)), 'regions');
     return cast null;
   }
 
-  public static function parseStarlingSpritesheet(xml:String, ?options:StarlingParseOptions):Dynamic {
+  public static function parseStarlingSpritesheet(xml:String, ?options:StarlingParseOptions):SpritesheetData {
     return cast _Runtime.callValue(StarlingParse.documentToData__starlingParse, cast ([_Runtime.callValue(StarlingParse.parseStarlingXml__starlingParse, cast ([xml] : Array<Dynamic>)), _Runtime.callValue(StarlingParse.regionsFromXml__starlingParse, cast ([xml] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.optionalField(options, 'frameDuration'), function():Dynamic return cast 100.0)] : Array<Dynamic>));
     return cast null;
   }

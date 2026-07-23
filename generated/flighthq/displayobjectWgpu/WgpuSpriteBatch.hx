@@ -6,8 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuDraw.bindWgpuImageResourceTexture;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.BlendMode;
+import flighthq.types.ColorTransform;
+import flighthq.types.ImageResource;
+import flighthq.types.Material;
 import flighthq.types.Material.MaterialData;
 import flighthq.types.WgpuMaterialRenderer;
+import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuSpriteBatchBufferSlot;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
@@ -21,7 +25,7 @@ class WgpuSpriteBatch {
 
   public static final QUAD_BATCH_PRELUDE_WGSL__wgpuSpriteBatch:Dynamic = '\nstruct Uniforms {\n  matrix : mat3x3f,\n}\n\nstruct InstanceData {\n  a : f32, b : f32, c : f32, d : f32,\n  tx : f32, ty : f32,\n  width : f32, height : f32,\n  u0 : f32, v0 : f32, u1 : f32, v1 : f32,\n  alpha : f32,\n}\n\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n@group(2) @binding(0) var<storage, read> instances : array<InstanceData>;\n\nstruct BaseVertex {\n  position : vec4f,\n  uv : vec2f,\n  alpha : f32,\n}\n\nfn quadBaseVertex(vi : u32, ii : u32) -> BaseVertex {\n  let inst = instances[ii];\n  let xi = (vi == 1u || vi == 2u || vi == 4u);\n  let yi = (vi == 2u || vi == 4u || vi == 5u);\n  let lx = select(0.0, inst.width, xi);\n  let ly = select(0.0, inst.height, yi);\n  let wx = inst.a * lx + inst.c * ly + inst.tx;\n  let wy = inst.b * lx + inst.d * ly + inst.ty;\n  let p = uni.matrix * vec3f(wx, wy, 1.0);\n  var bv : BaseVertex;\n  bv.position = vec4f(p.x, p.y, 0.0, 1.0);\n  bv.uv = vec2f(select(inst.u0, inst.u1, xi), select(inst.v0, inst.v1, yi));\n  bv.alpha = inst.alpha;\n  return bv;\n}\n';
 
-  public static function ensureWgpuQuadBatchResources(state:Dynamic):WgpuQuadBatchResources {
+  public static function ensureWgpuQuadBatchResources(state:WgpuRenderState):WgpuQuadBatchResources {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -58,7 +62,7 @@ class WgpuSpriteBatch {
 
   public static final ADD_BLEND__wgpuSpriteBatch:Dynamic = { color: { srcFactor: 'one', dstFactor: 'one', operation: 'add' }, alpha: { srcFactor: 'one', dstFactor: 'one', operation: 'add' } };
 
-  public static function flushWgpuSpriteBatch(state:Dynamic):Void {
+  public static function flushWgpuSpriteBatch(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
@@ -126,7 +130,7 @@ class WgpuSpriteBatch {
     _Runtime.callProperty(pass, 'draw', cast ([6.0, count, 0.0, 0.0] : Array<Dynamic>));
   }
 
-  public static function getWgpuQuadBatchPipeline(state:Dynamic, resources:WgpuQuadBatchResources, module:Dynamic, hasMaterialData:Bool, blendMode:Null<BlendMode>):Dynamic {
+  public static function getWgpuQuadBatchPipeline(state:WgpuRenderState, resources:WgpuQuadBatchResources, module:Dynamic, hasMaterialData:Bool, blendMode:Null<BlendMode>):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var perModule:Dynamic = cast _Runtime.UNDEFINED;
     var stencilMode:Dynamic = cast _Runtime.UNDEFINED;
@@ -172,7 +176,7 @@ class WgpuSpriteBatch {
     return cast null;
   }
 
-  public static function packWgpuSpriteBatchMaterialInstance(state:Dynamic, materialData:Null<MaterialData>, instanceIndex:Float):Void {
+  public static function packWgpuSpriteBatchMaterialInstance(state:WgpuRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var floats:Dynamic = cast _Runtime.UNDEFINED;
     var renderer:Dynamic = cast _Runtime.UNDEFINED;
@@ -184,7 +188,7 @@ class WgpuSpriteBatch {
     _Runtime.callProperty(renderer, 'packInstance', cast ([state, _Runtime.field(runtime, 'spriteBatchMaterial'), materialData, _Runtime.field(runtime, 'spriteBatchMaterialData'), (instanceIndex * floats)] : Array<Dynamic>));
   }
 
-  public static function prepareWgpuSpriteBatchWrite(state:Dynamic, texture:Dynamic, blendMode:Null<BlendMode>, material:Null<Dynamic>, materialRenderer:WgpuMaterialRenderer, maxInstances:Float):Float {
+  public static function prepareWgpuSpriteBatchWrite(state:WgpuRenderState, texture:ImageResource, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:WgpuMaterialRenderer, maxInstances:Float):Float {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var floats:Dynamic = cast _Runtime.UNDEFINED;
     var needed:Dynamic = cast _Runtime.UNDEFINED;
@@ -214,7 +218,7 @@ class WgpuSpriteBatch {
     return cast null;
   }
 
-  public static function recordWgpuSpriteBatchColorTransform(state:Dynamic, colorTransform:Null<Dynamic>, instanceIndex:Float):Void {
+  public static function recordWgpuSpriteBatchColorTransform(state:WgpuRenderState, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var fold:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -226,11 +230,11 @@ class WgpuSpriteBatch {
     if (_Runtime.truthy(!_Runtime.looseEquals(colorTransform, null))) { _Runtime.callOptionalProperty(runtime, 'wgpuColorAdjustmentGuard', cast ([state, colorTransform] : Array<Dynamic>)); }
   }
 
-  public static function resetWgpuSpriteBatchBufferPool(state:Dynamic):Void {
+  public static function resetWgpuSpriteBatchBufferPool(state:WgpuRenderState):Void {
     _Runtime.setField(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'spriteBatchBufferCursor', 0.0);
   }
 
-  public static function acquireWgpuSpriteBatchBufferSlot__wgpuSpriteBatch(state:Dynamic):WgpuSpriteBatchBufferSlot {
+  public static function acquireWgpuSpriteBatchBufferSlot__wgpuSpriteBatch(state:WgpuRenderState):WgpuSpriteBatchBufferSlot {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var pool:Dynamic = cast _Runtime.UNDEFINED;
     var slot:Dynamic = cast _Runtime.UNDEFINED;
@@ -246,12 +250,12 @@ class WgpuSpriteBatch {
     return cast null;
   }
 
-  public static function createWgpuSpriteBatchBuffer__wgpuSpriteBatch(state:Dynamic, size:Float):Dynamic {
+  public static function createWgpuSpriteBatchBuffer__wgpuSpriteBatch(state:WgpuRenderState, size:Float):Dynamic {
     return cast _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: size, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'STORAGE')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function resetWgpuSpriteBatch__wgpuSpriteBatch(state:Dynamic):Void {
+  public static function resetWgpuSpriteBatch__wgpuSpriteBatch(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.setField(runtime, 'spriteBatchCount', 0.0);
@@ -262,7 +266,7 @@ class WgpuSpriteBatch {
     _Runtime.setField(runtime, 'spriteBatchMaterialFloats', 0.0);
   }
 
-  public static function writeWgpuSpriteBatchUniforms__wgpuSpriteBatch(state:Dynamic):Float {
+  public static function writeWgpuSpriteBatchUniforms__wgpuSpriteBatch(state:WgpuRenderState):Float {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var uniformOffset:Dynamic = cast _Runtime.UNDEFINED;
     var floatBase:Dynamic = cast _Runtime.UNDEFINED;

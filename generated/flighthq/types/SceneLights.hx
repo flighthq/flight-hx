@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SceneLights = { var ambient:Null<Dynamic>; var directional:Null<Dynamic>; @:optional var hemisphere:Array<Dynamic>; @:optional var point:Array<Dynamic>; @:optional var spot:Array<Dynamic>; };
+typedef SceneLights = { var ambient:Null<AmbientLight>; var directional:Null<DirectionalLight>; @:optional var hemisphere:Array<HemisphereLight>; @:optional var point:Array<PointLight>; @:optional var spot:Array<SpotLight>; };

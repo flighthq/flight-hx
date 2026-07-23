@@ -3,10 +3,13 @@ package flighthq.render;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.HasMaterial;
+import flighthq.types.RenderProxy;
+import flighthq.types.RenderState;
 
 @:expose("flighthq.render.RenderMaterial")
 class RenderMaterial {
-  public static function updateRenderProxyMaterial(state:Dynamic, data:Dynamic, ?_parentData:Dynamic):Void {
+  public static function updateRenderProxyMaterial(state:RenderState, data:RenderProxy, ?_parentData:RenderProxy):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     source = (cast _Runtime.field(data, 'source') : Dynamic);
     _Runtime.setField(data, 'material', _Runtime.coalesce(_Runtime.field(source, 'material'), function():Dynamic return cast null));

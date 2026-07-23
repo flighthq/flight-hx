@@ -3,6 +3,9 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.SurfaceMaterial;
+import flighthq.types.Texture;
+import flighthq.types.VideoTexture;
 
 @:expose("flighthq.types._internal._UnlitMaterialValues")
 class _UnlitMaterialValues {

@@ -5,19 +5,21 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.displayobjectCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.image.ImageResourceFrom.createCanvasFromImageResource;
+import flighthq.types.CanvasRenderState;
+import flighthq.types.ImageResource;
 
 typedef CanvasImageSourceKind = String;
 
 @:expose("flighthq.displayobjectCanvas.CanvasImageSource")
 class CanvasImageSource {
-  public static function explainCanvasImageSource(image:Dynamic):Dynamic {
+  public static function explainCanvasImageSource(image:ImageResource):Dynamic {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(image, 'source'), null))) { return cast 'element'; }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(image, 'data'), null))) { return cast 'data'; }
     return cast 'none';
     return cast null;
   }
 
-  public static function resolveCanvasImageSource(state:Dynamic, image:Dynamic):Null<Dynamic> {
+  public static function resolveCanvasImageSource(state:Dynamic, image:ImageResource):Null<Dynamic> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var entry:Dynamic = cast _Runtime.UNDEFINED;

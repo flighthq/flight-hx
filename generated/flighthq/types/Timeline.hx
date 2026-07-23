@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef Timeline = { var source:Null<TimelineSource>; var target:Null<Dynamic>; var currentFrame:Float; var frameScripts:Null<Dynamic>; var isPlaying:Bool; var timeElapsed:Float; var lastFrameUpdate:Float; var playMode:TimelinePlayMode; var signals:Null<TimelineSignals>; };
+typedef Timeline = { var source:Null<TimelineSource>; var target:Null<DisplayObject>; var currentFrame:Float; var frameScripts:Null<Dynamic>; var isPlaying:Bool; var timeElapsed:Float; var lastFrameUpdate:Float; var playMode:TimelinePlayMode; var signals:Null<TimelineSignals>; };

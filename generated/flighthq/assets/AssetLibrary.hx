@@ -11,6 +11,7 @@ import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Slot.connectSignal;
 import flighthq.types.Assets.AssetEntry;
 import flighthq.types.Assets.AssetGroupLoadOptions;
+import flighthq.types.Assets.AssetLibrary;
 import flighthq.types.Assets.AssetLibraryRuntime;
 import flighthq.types.Assets.AssetLoaderAdapter;
 import flighthq.types.Assets.AssetManifest;
@@ -18,7 +19,7 @@ import flighthq.types.Assets.AssetType;
 
 @:expose("flighthq.assets.AssetLibrary")
 class AssetLibrary {
-  public static function acquireAsset<T>(library:Dynamic, id:String):flighthq._internal._Promise<Dynamic> {
+  public static function acquireAsset<T>(library:flighthq.types.Assets.AssetLibrary, id:String):flighthq._internal._Promise<Dynamic> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var descriptor:Dynamic = cast _Runtime.UNDEFINED;
     var adapter:Dynamic = cast _Runtime.UNDEFINED;
@@ -57,14 +58,14 @@ class AssetLibrary {
     return cast null;
   }
 
-  public static function createAssetLibrary():Dynamic {
+  public static function createAssetLibrary():flighthq.types.Assets.AssetLibrary {
     var runtime:AssetLibraryRuntime = cast _Runtime.UNDEFINED;
     runtime = { adapters: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), descriptors: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), entries: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), groups: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };
     return cast { runtime: runtime };
     return cast null;
   }
 
-  public static function disposeAssetLibrary(library:Dynamic):Void {
+  public static function disposeAssetLibrary(library:flighthq.types.Assets.AssetLibrary):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.field(library, 'runtime');
     for (__iteration0 in _Runtime.iterable(_Runtime.field(runtime, 'entries'))) {
@@ -81,21 +82,21 @@ class AssetLibrary {
     _Runtime.callProperty(_Runtime.field(runtime, 'groups'), 'clear', cast ([] : Array<Dynamic>));
   }
 
-  public static function getAsset<T>(library:Dynamic, id:String):Null<Dynamic> {
+  public static function getAsset<T>(library:flighthq.types.Assets.AssetLibrary, id:String):Null<Dynamic> {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = _Runtime.callProperty(_Runtime.field(_Runtime.field(library, 'runtime'), 'entries'), 'get', cast ([id] : Array<Dynamic>));
     return cast _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(entry, 'resident')), function():Dynamic return cast (cast _Runtime.field(entry, 'value') : Dynamic), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function getAssetRefCount(library:Dynamic, id:String):Float {
+  public static function getAssetRefCount(library:flighthq.types.Assets.AssetLibrary, id:String):Float {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = _Runtime.callProperty(_Runtime.field(_Runtime.field(library, 'runtime'), 'entries'), 'get', cast ([id] : Array<Dynamic>));
     return cast _Runtime.select(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(entry, 'refcount'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  public static function loadAssetGroup(library:Dynamic, name:String, ?options:AssetGroupLoadOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
+  public static function loadAssetGroup(library:flighthq.types.Assets.AssetLibrary, name:String, ?options:AssetGroupLoadOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<flighthq._internal._Nothing> {
       var runtime:Dynamic = cast _Runtime.UNDEFINED;
       var ids:Dynamic = cast _Runtime.UNDEFINED;
@@ -132,7 +133,7 @@ class AssetLibrary {
     })();
   }
 
-  public static function loadAssetManifest(library:Dynamic, manifest:AssetManifest):Void {
+  public static function loadAssetManifest(library:flighthq.types.Assets.AssetLibrary, manifest:AssetManifest):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.field(library, 'runtime');
     for (descriptor in _Runtime.iterable(manifest)) {
@@ -147,11 +148,11 @@ class AssetLibrary {
     }
   }
 
-  public static function registerAssetLoader<T>(library:Dynamic, type:AssetType, adapter:AssetLoaderAdapter<Dynamic>):Void {
+  public static function registerAssetLoader<T>(library:flighthq.types.Assets.AssetLibrary, type:AssetType, adapter:AssetLoaderAdapter<Dynamic>):Void {
     _Runtime.callProperty(_Runtime.field(_Runtime.field(library, 'runtime'), 'adapters'), 'set', cast ([type, (cast adapter : AssetLoaderAdapter<Dynamic>)] : Array<Dynamic>));
   }
 
-  public static function releaseAsset(library:Dynamic, id:String):Void {
+  public static function releaseAsset(library:flighthq.types.Assets.AssetLibrary, id:String):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.field(library, 'runtime');
@@ -162,7 +163,7 @@ class AssetLibrary {
     _Runtime.callValue(AssetLibrary.disposeAssetEntry__assetLibrary, cast ([runtime, id, entry] : Array<Dynamic>));
   }
 
-  public static function releaseAssetGroup(library:Dynamic, name:String):Void {
+  public static function releaseAssetGroup(library:flighthq.types.Assets.AssetLibrary, name:String):Void {
     var ids:Dynamic = cast _Runtime.UNDEFINED;
     ids = _Runtime.callProperty(_Runtime.field(_Runtime.field(library, 'runtime'), 'groups'), 'get', cast ([name] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(ids, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }

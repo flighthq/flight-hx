@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SpriteSignals = { var onFrameChanged:Dynamic; };
+typedef SpriteSignals = { var onFrameChanged:Signal<Dynamic>; };

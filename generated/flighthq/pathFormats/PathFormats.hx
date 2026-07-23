@@ -4,20 +4,21 @@ package flighthq.pathFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.pathFormats.SvgPathData as Facade_PathFormats_flighthq_pathFormats_SvgPathData;
+import flighthq.types.Path;
 
 @:expose("flighthq.pathFormats.PathFormats")
 class PathFormats {
-  public static function appendSvgPathData(path:Dynamic, d:String):Bool {
+  public static function appendSvgPathData(path:Path, d:String):Bool {
     return cast _Runtime.callValue(Facade_PathFormats_flighthq_pathFormats_SvgPathData.appendSvgPathData, cast ([path, d] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function formatSvgPathData(path:Dynamic, ?options:{ @:optional var precision:Float; }):String {
+  public static function formatSvgPathData(path:Path, ?options:{ @:optional var precision:Float; }):String {
     return cast _Runtime.callValue(Facade_PathFormats_flighthq_pathFormats_SvgPathData.formatSvgPathData, cast ([path, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseSvgPathData(d:String):Null<Dynamic> {
+  public static function parseSvgPathData(d:String):Null<Path> {
     return cast _Runtime.callValue(Facade_PathFormats_flighthq_pathFormats_SvgPathData.parseSvgPathData, cast ([d] : Array<Dynamic>));
     return cast null;
   }

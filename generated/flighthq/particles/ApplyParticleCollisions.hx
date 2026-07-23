@@ -6,7 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterState.PARTICLE_VELOCITY_STRIDE;
 import flighthq.types.CircleCollider;
 import flighthq.types.ParticleCollider;
+import flighthq.types.ParticleEmitter;
+import flighthq.types.ParticleEmitterState;
 import flighthq.types.ParticleObject;
+import flighthq.types.ParticleObjectsState;
 import flighthq.types.PlaneCollider;
 import flighthq.types.RectangleCollider;
 import flighthq.types.SphereCollider;
@@ -15,7 +18,7 @@ import flighthq.types.SphereCollider;
 class ApplyParticleCollisions {
   public static final s__applyParticleCollisions:Array<Float> = cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
 
-  public static function applyParticleCollisions(emitter:Dynamic, state:Dynamic, colliders:Array<ParticleCollider>):Void {
+  public static function applyParticleCollisions(emitter:ParticleEmitter, state:ParticleEmitterState, colliders:Array<ParticleCollider>):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var transforms:Dynamic = cast _Runtime.UNDEFINED;
@@ -51,7 +54,7 @@ class ApplyParticleCollisions {
     }
   }
 
-  public static function applyParticleObjectCollisions(objects:Array<ParticleObject>, state:Dynamic, colliders:Array<ParticleCollider>):Void {
+  public static function applyParticleObjectCollisions(objects:Array<ParticleObject>, state:ParticleObjectsState, colliders:Array<ParticleCollider>):Void {
     var velocities:Dynamic = cast _Runtime.UNDEFINED;
     var lifetimes:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(colliders, 'length'), 0.0))) { return; }

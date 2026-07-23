@@ -3,13 +3,15 @@ package flighthq.node;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.HasBoundsRectangle;
 import flighthq.types.HasBoundsRectangle.BoundsNodeAny;
 import flighthq.types.HasBoundsRectangle.HasBoundsRectangleRuntime;
 import flighthq.types.MethodsOf;
+import flighthq.types.Rectangle;
 
 @:expose("flighthq.node.HasBoundsRectangle")
 class HasBoundsRectangle {
-  public static function defaultComputeLocalBoundsRectangle(_out:Dynamic, _source:BoundsNodeAny):Void {
+  public static function defaultComputeLocalBoundsRectangle(_out:Rectangle, _source:BoundsNodeAny):Void {
   }
 
   public static function initBoundsRectangleRuntimeTrait(target:HasBoundsRectangleRuntime, ?methods:Dynamic):Void {
@@ -19,6 +21,6 @@ class HasBoundsRectangle {
     _Runtime.setField(target, 'computeLocalBoundsRectangle', _Runtime.coalesce(_Runtime.optionalField(methods, 'computeLocalBoundsRectangle'), function():Dynamic return cast defaultComputeLocalBoundsRectangle));
   }
 
-  public static function initBoundsRectangleTrait(_target:Dynamic, ?_obj:Dynamic):Void {
+  public static function initBoundsRectangleTrait(_target:flighthq.types.HasBoundsRectangle, ?_obj:Dynamic):Void {
   }
 }

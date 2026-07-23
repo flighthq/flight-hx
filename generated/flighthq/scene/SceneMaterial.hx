@@ -4,18 +4,21 @@ package flighthq.scene;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.node.Traversal.findNode;
+import flighthq.types.Material;
+import flighthq.types.Mesh;
+import flighthq.types.SceneNode;
 
 @:expose("flighthq.scene.SceneMaterial")
 class SceneMaterial {
-  public static function findSceneMaterialByName(root:Dynamic, name:String):Null<Dynamic> {
+  public static function findSceneMaterialByName(root:SceneNode, name:String):Null<Material> {
     var rootMatch:Dynamic = cast _Runtime.UNDEFINED;
-    var found:Null<Dynamic> = cast _Runtime.UNDEFINED;
+    var found:Null<Material> = cast _Runtime.UNDEFINED;
     rootMatch = _Runtime.callValue(SceneMaterial.getNamedNodeMaterial__sceneMaterial, cast ([root, name] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(rootMatch, null))) { return cast rootMatch; }
     found = null;
     _Runtime.callValue(findNode, cast ([root, function(node:Dynamic) {
       var match:Dynamic = cast _Runtime.UNDEFINED;
-      match = _Runtime.callValue(SceneMaterial.getNamedNodeMaterial__sceneMaterial, cast ([(cast node : Dynamic), name] : Array<Dynamic>));
+      match = _Runtime.callValue(SceneMaterial.getNamedNodeMaterial__sceneMaterial, cast ([(cast node : SceneNode), name] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(match, null))) { return cast false; }
       (found = cast (match : Dynamic));
       return cast true;
@@ -24,7 +27,7 @@ class SceneMaterial {
     return cast null;
   }
 
-  public static function getNamedNodeMaterial__sceneMaterial(node:Dynamic, name:String):Null<Dynamic> {
+  public static function getNamedNodeMaterial__sceneMaterial(node:SceneNode, name:String):Null<Material> {
     var materials:Dynamic = cast _Runtime.UNDEFINED;
     materials = _Runtime.field((cast node : Dynamic), 'materials');
     if (_Runtime.truthy(_Runtime.looseEquals(materials, null))) { return cast null; }

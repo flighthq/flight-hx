@@ -5,54 +5,55 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.assets.AssetLibrary as Facade_Assets_flighthq_assets_AssetLibrary;
 import flighthq.types.Assets.AssetGroupLoadOptions;
+import flighthq.types.Assets.AssetLibrary;
 import flighthq.types.Assets.AssetLoaderAdapter;
 import flighthq.types.Assets.AssetManifest;
 import flighthq.types.Assets.AssetType;
 
 @:expose("flighthq.assets.Assets")
 class Assets {
-  public static function acquireAsset<T>(library:Dynamic, id:String):flighthq._internal._Promise<Dynamic> {
+  public static function acquireAsset<T>(library:AssetLibrary, id:String):flighthq._internal._Promise<Dynamic> {
     return cast _Runtime.callValue(Facade_Assets_flighthq_assets_AssetLibrary.acquireAsset, cast ([library, id] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createAssetLibrary():Dynamic {
+  public static function createAssetLibrary():AssetLibrary {
     return cast _Runtime.callValue(Facade_Assets_flighthq_assets_AssetLibrary.createAssetLibrary, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function disposeAssetLibrary(library:Dynamic):Void {
+  public static function disposeAssetLibrary(library:AssetLibrary):Void {
     _Runtime.callValue(Facade_Assets_flighthq_assets_AssetLibrary.disposeAssetLibrary, cast ([library] : Array<Dynamic>));
   }
 
-  public static function getAsset<T>(library:Dynamic, id:String):Null<Dynamic> {
+  public static function getAsset<T>(library:AssetLibrary, id:String):Null<Dynamic> {
     return cast _Runtime.callValue(Facade_Assets_flighthq_assets_AssetLibrary.getAsset, cast ([library, id] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getAssetRefCount(library:Dynamic, id:String):Float {
+  public static function getAssetRefCount(library:AssetLibrary, id:String):Float {
     return cast _Runtime.callValue(Facade_Assets_flighthq_assets_AssetLibrary.getAssetRefCount, cast ([library, id] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadAssetGroup(library:Dynamic, name:String, ?options:AssetGroupLoadOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
+  public static function loadAssetGroup(library:AssetLibrary, name:String, ?options:AssetGroupLoadOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast _Runtime.callValue(Facade_Assets_flighthq_assets_AssetLibrary.loadAssetGroup, cast ([library, name, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadAssetManifest(library:Dynamic, manifest:AssetManifest):Void {
+  public static function loadAssetManifest(library:AssetLibrary, manifest:AssetManifest):Void {
     _Runtime.callValue(Facade_Assets_flighthq_assets_AssetLibrary.loadAssetManifest, cast ([library, manifest] : Array<Dynamic>));
   }
 
-  public static function registerAssetLoader<T>(library:Dynamic, type:AssetType, adapter:AssetLoaderAdapter<Dynamic>):Void {
+  public static function registerAssetLoader<T>(library:AssetLibrary, type:AssetType, adapter:AssetLoaderAdapter<Dynamic>):Void {
     _Runtime.callValue(Facade_Assets_flighthq_assets_AssetLibrary.registerAssetLoader, cast ([library, type, adapter] : Array<Dynamic>));
   }
 
-  public static function releaseAsset(library:Dynamic, id:String):Void {
+  public static function releaseAsset(library:AssetLibrary, id:String):Void {
     _Runtime.callValue(Facade_Assets_flighthq_assets_AssetLibrary.releaseAsset, cast ([library, id] : Array<Dynamic>));
   }
 
-  public static function releaseAssetGroup(library:Dynamic, name:String):Void {
+  public static function releaseAssetGroup(library:AssetLibrary, name:String):Void {
     _Runtime.callValue(Facade_Assets_flighthq_assets_AssetLibrary.releaseAssetGroup, cast ([library, name] : Array<Dynamic>));
   }
 }

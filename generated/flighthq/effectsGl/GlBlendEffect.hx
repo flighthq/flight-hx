@@ -7,12 +7,15 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectUniformLocation;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.AdvancedBlendMode;
-import flighthq.types.AdvancedBlendMode as AdvancedBlendModeValues;
+import flighthq.types.BlendEffect;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderTarget;
+import flighthq.types._internal._AdvancedBlendModeValues.AdvancedBlendModeValue as AdvancedBlendModeValues;
 
 @:expose("flighthq.effectsGl.GlBlendEffect")
 class GlBlendEffect {
-  public static function applyBlendEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
+  public static function applyBlendEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:BlendEffect):Void {
     var backdrop:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
     var modeIndex:Dynamic = cast _Runtime.UNDEFINED;
@@ -39,7 +42,7 @@ class GlBlendEffect {
   }
 
   public static final defaultGlBlendEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyBlendEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(applyBlendEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : BlendEffect)] : Array<Dynamic>));
   };
 
   public static function getBlendEffectModeIndex(mode:AdvancedBlendMode):Float {
@@ -47,13 +50,13 @@ class GlBlendEffect {
     return cast null;
   }
 
-  public static function getGlBlendEffectBackdrop(state:Dynamic, backdropKey:Null<String>):Null<Dynamic> {
+  public static function getGlBlendEffectBackdrop(state:GlRenderState, backdropKey:Null<String>):Null<Dynamic> {
     if (_Runtime.truthy(_Runtime.strictEquals(backdropKey, null))) { return cast null; }
     return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(GlBlendEffect._backdrops__glBlendEffect, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([backdropKey] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function registerGlBlendEffectBackdrop(state:Dynamic, backdropKey:String, texture:Dynamic):Void {
+  public static function registerGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String, texture:Dynamic):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = _Runtime.callProperty(GlBlendEffect._backdrops__glBlendEffect, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -63,7 +66,7 @@ class GlBlendEffect {
     _Runtime.callProperty(registry, 'set', cast ([backdropKey, texture] : Array<Dynamic>));
   }
 
-  public static function unregisterGlBlendEffectBackdrop(state:Dynamic, backdropKey:String):Bool {
+  public static function unregisterGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String):Bool {
     return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(GlBlendEffect._backdrops__glBlendEffect, 'get', cast ([state] : Array<Dynamic>)), 'delete', cast ([backdropKey] : Array<Dynamic>)), function():Dynamic return cast false);
     return cast null;
   }

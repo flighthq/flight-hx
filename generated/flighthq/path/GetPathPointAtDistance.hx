@@ -4,18 +4,19 @@ package flighthq.path;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
+import flighthq.types.Path;
 import flighthq.types.Vector2.Vector2Like;
 
 @:expose("flighthq.path.GetPathPointAtDistance")
 class GetPathPointAtDistance {
-  public static function getPathPointAtDistance(path:Dynamic, distance:Float, out:Vector2Like, tolerance:Dynamic = 0.25):Bool {
+  public static function getPathPointAtDistance(path:Path, distance:Float, out:Vector2Like, tolerance:Dynamic = 0.25):Bool {
     var contours:Dynamic = cast _Runtime.UNDEFINED;
     contours = _Runtime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
     return cast _Runtime.callValue(GetPathPointAtDistance.samplePathPoint__getPathPointAtDistance, cast ([contours, distance, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getPathPositionAtDistance(path:Dynamic, distance:Float, pointOut:Vector2Like, tangentOut:Vector2Like, tolerance:Dynamic = 0.25):Bool {
+  public static function getPathPositionAtDistance(path:Path, distance:Float, pointOut:Vector2Like, tangentOut:Vector2Like, tolerance:Dynamic = 0.25):Bool {
     var contours:Dynamic = cast _Runtime.UNDEFINED;
     var hasPoint:Dynamic = cast _Runtime.UNDEFINED;
     contours = _Runtime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
@@ -25,7 +26,7 @@ class GetPathPointAtDistance {
     return cast null;
   }
 
-  public static function getPathTangentAtDistance(path:Dynamic, distance:Float, out:Vector2Like, tolerance:Dynamic = 0.25):Bool {
+  public static function getPathTangentAtDistance(path:Path, distance:Float, out:Vector2Like, tolerance:Dynamic = 0.25):Bool {
     var contours:Dynamic = cast _Runtime.UNDEFINED;
     contours = _Runtime.callValue(flattenPath, cast ([path, tolerance] : Array<Dynamic>));
     return cast _Runtime.callValue(GetPathPointAtDistance.samplePathTangent__getPathPointAtDistance, cast ([contours, distance, out] : Array<Dynamic>));

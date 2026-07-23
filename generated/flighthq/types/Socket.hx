@@ -12,7 +12,7 @@ typedef SocketOptions = { var url:String; @:optional var protocols:Array<String>
 
 typedef SocketCloseInfo = { var code:Float; var reason:String; var wasClean:Bool; };
 
-typedef SocketSignals = { var onSocketOpen:Dynamic; var onSocketMessage:Dynamic; var onSocketClose:Dynamic; var onSocketError:Dynamic; };
+typedef SocketSignals = { var onSocketOpen:Signal<Dynamic>; var onSocketMessage:Signal<Dynamic>; var onSocketClose:Signal<Dynamic>; var onSocketError:Signal<Dynamic>; };
 
 typedef SocketEventSink = { var handleSocketOpen:Dynamic; var handleSocketMessage:Dynamic; var handleSocketClose:Dynamic; var handleSocketError:Dynamic; };
 

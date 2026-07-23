@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.spritesheetFormats.StarlingSchema.StarlingDocument;
 import flighthq.spritesheetFormats.StarlingSchema.StarlingSubTexture;
+import flighthq.types.SpritesheetData;
 
 @:expose("flighthq.spritesheetFormats.StarlingSerialize")
 class StarlingSerialize {
@@ -52,7 +53,7 @@ class StarlingSerialize {
     return cast null;
   }
 
-  public static function serializeStarlingSpritesheet(data:Dynamic, ?existing:Dynamic):String {
+  public static function serializeStarlingSpritesheet(data:SpritesheetData, ?existing:Dynamic):String {
     var doc:StarlingDocument = cast _Runtime.UNDEFINED;
     doc = { imagePath: _Runtime.orValue(_Runtime.orValue(_Runtime.field(data, 'imageFile'), function():Dynamic return cast _Runtime.optionalField(existing, 'imagePath')), function():Dynamic return cast ''), subTextures: _Runtime.callProperty(_Runtime.field(data, 'frames'), 'map', cast ([StarlingSerialize.frameToSubTexture__starlingSerialize] : Array<Dynamic>)) };
     return cast _Runtime.callValue(StarlingSerialize.documentToXml__starlingSerialize, cast ([doc] : Array<Dynamic>));

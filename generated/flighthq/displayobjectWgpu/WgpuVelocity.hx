@@ -14,8 +14,13 @@ import flighthq.renderWgpu.WgpuRenderTarget.createWgpuRenderTarget;
 import flighthq.types.Entity.Kind;
 import flighthq.types.HasBoundsRectangle.Spatial2DNode;
 import flighthq.types.HasTransform2D.Transform2DNode;
+import flighthq.types.ParticleEmitter;
+import flighthq.types.QuadBatch;
 import flighthq.types.QuadBatch.QuadBatchRuntime;
 import flighthq.types.Velocity.Velocity2D;
+import flighthq.types.Velocity.VelocityField;
+import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderTarget;
 import flighthq.types.WgpuVelocityWriter;
 import flighthq.types.WgpuVelocityWriter.WgpuVelocityContext;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
@@ -25,7 +30,7 @@ typedef WgpuVelocityPipeline__wgpuVelocity = { var pipeline:Dynamic; var uniform
 
 @:expose("flighthq.displayobjectWgpu.WgpuVelocity")
 class WgpuVelocity {
-  public static function createWgpuVelocityTarget(state:Dynamic, width:Float, height:Float):Dynamic {
+  public static function createWgpuVelocityTarget(state:WgpuRenderState, width:Float, height:Float):WgpuRenderTarget {
     return cast _Runtime.callValue(createWgpuRenderTarget, cast ([state, width, height, 'rgba16float'] : Array<Dynamic>));
     return cast null;
   }
@@ -58,7 +63,7 @@ class WgpuVelocity {
     var wd:Dynamic = cast _Runtime.UNDEFINED;
     var wtx:Dynamic = cast _Runtime.UNDEFINED;
     var wty:Dynamic = cast _Runtime.UNDEFINED;
-    emitter = (cast (cast node : Dynamic) : Dynamic);
+    emitter = (cast (cast node : Dynamic) : ParticleEmitter);
     __destructure0 = _Runtime.field(emitter, 'data');
     atlas = _Runtime.field(__destructure0, 'atlas');
     ids = _Runtime.field(__destructure0, 'ids');
@@ -143,7 +148,7 @@ class WgpuVelocity {
     var transformType:Dynamic = cast _Runtime.UNDEFINED;
     var spatial:Dynamic = cast _Runtime.UNDEFINED;
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
-    batch = (cast (cast node : Dynamic) : Dynamic);
+    batch = (cast (cast node : Dynamic) : QuadBatch);
     data = _Runtime.field(batch, 'data');
     runtime = (cast _Runtime.getIndex((cast node : { @:optional var __EntityRuntimeKey:Dynamic; }), EntityRuntimeKey) : QuadBatchRuntime);
     instanceVelocities = _Runtime.field(runtime, 'instanceVelocities');
@@ -263,12 +268,12 @@ class WgpuVelocity {
     _Runtime.callProperty(_Runtime.field(active, 'pass'), 'draw', cast ([6.0] : Array<Dynamic>));
   }
 
-  public static function getWgpuVelocityWriter(state:Dynamic, kind:Kind):Null<WgpuVelocityWriter> {
+  public static function getWgpuVelocityWriter(state:WgpuRenderState, kind:Kind):Null<WgpuVelocityWriter> {
     return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(WgpuVelocity._velocityWriters__wgpuVelocity, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function registerWgpuVelocityWriter(state:Dynamic, kind:Kind, writer:WgpuVelocityWriter):Void {
+  public static function registerWgpuVelocityWriter(state:WgpuRenderState, kind:Kind, writer:WgpuVelocityWriter):Void {
     var writers:Dynamic = cast _Runtime.UNDEFINED;
     writers = _Runtime.callProperty(WgpuVelocity._velocityWriters__wgpuVelocity, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(writers, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -278,7 +283,7 @@ class WgpuVelocity {
     _Runtime.callProperty(writers, 'set', cast ([kind, writer] : Array<Dynamic>));
   }
 
-  public static function renderWgpuVelocity<Traits>(state:Dynamic, root:Transform2DNode<Traits>, field:Dynamic, target:Dynamic):Void {
+  public static function renderWgpuVelocity<Traits>(state:WgpuRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:WgpuRenderTarget):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
@@ -303,7 +308,7 @@ class WgpuVelocity {
     _Runtime.callProperty(WgpuVelocity._activeVelocityPasses__wgpuVelocity, 'delete', cast ([state] : Array<Dynamic>));
   }
 
-  public static function ensureWgpuVelocityPipeline__wgpuVelocity(state:Dynamic):WgpuVelocityPipeline__wgpuVelocity {
+  public static function ensureWgpuVelocityPipeline__wgpuVelocity(state:WgpuRenderState):WgpuVelocityPipeline__wgpuVelocity {
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;

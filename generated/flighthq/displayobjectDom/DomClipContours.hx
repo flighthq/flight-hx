@@ -4,6 +4,7 @@ package flighthq.displayobjectDom;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.DomRenderState.DomClipContourEntry;
+import flighthq.types.Matrix;
 import flighthq.types.ShapeCommand.PathWinding;
 
 @:expose("flighthq.displayobjectDom.DomClipContours")
@@ -50,7 +51,7 @@ class DomClipContours {
     return cast null;
   }
 
-  public static function pushDomClipContours(stack:{ var push:Dynamic; }, contours:Array<Array<Float>>, winding:PathWinding, transform:Dynamic):Void {
+  public static function pushDomClipContours(stack:{ var push:Dynamic; }, contours:Array<Array<Float>>, winding:PathWinding, transform:Matrix):Void {
     var staged:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     staged = cast ([] : Array<Dynamic>);
     {

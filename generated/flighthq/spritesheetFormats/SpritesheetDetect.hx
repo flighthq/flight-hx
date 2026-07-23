@@ -8,6 +8,7 @@ import flighthq.spritesheetFormats.CocosPlistParse.parseCocosPlistSpritesheet;
 import flighthq.spritesheetFormats.LibgdxAtlasParse.parseLibgdxAtlasSpritesheet;
 import flighthq.spritesheetFormats.StarlingParse.parseStarlingSpritesheet;
 import flighthq.spritesheetFormats.TexturePackerParse.parseTexturePackerSpritesheet;
+import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFormat.SpritesheetFormatKind;
 import flighthq.types.SpritesheetFormat.SpritesheetFormatKindAseprite as ASEPRITE;
 import flighthq.types.SpritesheetFormat.SpritesheetFormatKindCocosPlist as COCOS_PLIST;
@@ -84,7 +85,7 @@ class SpritesheetDetect {
     return cast null;
   }
 
-  public static function parseSpritesheet(text:String, ?formatKind:SpritesheetFormatKind, ?options:SpritesheetParseOptions):Null<Dynamic> {
+  public static function parseSpritesheet(text:String, ?formatKind:SpritesheetFormatKind, ?options:SpritesheetParseOptions):Null<SpritesheetData> {
     var opts:SpritesheetParseOptions = cast _Runtime.UNDEFINED;
     var kind:Dynamic = cast _Runtime.UNDEFINED;
     var entry:Dynamic = cast _Runtime.UNDEFINED;

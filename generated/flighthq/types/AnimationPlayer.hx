@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef AnimationPlayer = { var clip:Dynamic; var loop:Bool; @:optional var loopMode:AnimationLoopMode; @:optional var onFinished:Null<Dynamic>; @:optional var onLooped:Null<Dynamic>; var playing:Bool; @:optional var repeatCount:Float; var speed:Float; var time:Float; };
+typedef AnimationPlayer = { var clip:AnimationClip; var loop:Bool; @:optional var loopMode:AnimationLoopMode; @:optional var onFinished:Null<Signal<Dynamic>>; @:optional var onLooped:Null<Signal<Dynamic>>; var playing:Bool; @:optional var repeatCount:Float; var speed:Float; var time:Float; };

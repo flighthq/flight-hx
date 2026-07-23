@@ -14,9 +14,13 @@ import flighthq.sceneGl._internal._GlMeshProgramValues.drawGlMeshSubset;
 import flighthq.sceneGl._internal._GlMeshProgramValues.hasGlUvTransform;
 import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.types.Camera;
 import flighthq.types.EmissiveMaterial;
 import flighthq.types.GlMeshMaterialRenderer;
+import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
+import flighthq.types.Material;
+import flighthq.types.MeshGeometry;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.Types.EmissiveMaterialKind;
@@ -24,7 +28,7 @@ import flighthq.types._internal._EmissiveMaterialValues.EmissiveMaterialKind;
 
 @:expose("flighthq.sceneGl.EmissiveGlMeshMaterialRenderer")
 class EmissiveGlMeshMaterialRenderer {
-  public static final emissiveGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:Dynamic, material:Null<Dynamic>, _lights:SceneLightBlock, camera:Dynamic) {
+  public static final emissiveGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:SceneLightBlock, camera:Camera) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var emissive:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -40,14 +44,14 @@ class EmissiveGlMeshMaterialRenderer {
     _Runtime.callValue(unpackColorToLinear, cast ([EmissiveGlMeshMaterialRenderer.scratchRgba__emissiveGlMeshMaterialRenderer, _Runtime.field(emissive, 'emissive')] : Array<Dynamic>));
     _Runtime.callValue(bindGlUnlitSurface, cast ([state, program, EmissiveGlMeshMaterialRenderer.scratchRgba__emissiveGlMeshMaterialRenderer, _Runtime.field(emissive, 'emissiveStrength'), _Runtime.field(emissive, 'emissiveMap'), _Runtime.field(emissive, 'alphaCutoff')] : Array<Dynamic>));
     _Runtime.callValue(bindGlUvTransform, cast ([gl, program, _Runtime.field(emissive, 'emissiveMap')] : Array<Dynamic>));
-  }, draw: function(state:Dynamic, proxy:SceneRenderProxy, geometry:Dynamic) {
+  }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
     if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 
-  public static function registerEmissiveGlMaterial(state:Dynamic):Void {
+  public static function registerEmissiveGlMaterial(state:GlRenderState):Void {
     _Runtime.callValue(registerGlMeshMaterialRenderer, cast ([state, EmissiveMaterialKind, emissiveGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 

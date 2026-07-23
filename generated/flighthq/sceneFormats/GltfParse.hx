@@ -41,13 +41,20 @@ import flighthq.sceneFormats.Shared.createEmbeddedTextureRef;
 import flighthq.sceneFormats.Shared.createExternalTextureRef;
 import flighthq.skeleton3d.Skeleton3d.createSkeleton3D;
 import flighthq.types.AnimationChannel;
+import flighthq.types.AnimationClip;
 import flighthq.types.AnimationInterpolation;
+import flighthq.types.Material;
+import flighthq.types.Mesh;
+import flighthq.types.MeshGeometry;
 import flighthq.types.MorphTarget;
 import flighthq.types.MorphTarget.MeshMorph;
 import flighthq.types.Sampler.TextureFilter;
 import flighthq.types.Sampler.TextureWrap;
+import flighthq.types.Scene;
 import flighthq.types.SceneAnimationPath;
+import flighthq.types.SceneNode;
 import flighthq.types.Skin;
+import flighthq.types.Texture;
 import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.Types.SceneAnimationPathRotation;
 import flighthq.types.Types.SceneAnimationPathScale;
@@ -62,7 +69,7 @@ typedef ComponentArray__gltfParse = Dynamic;
 
 @:expose("flighthq.sceneFormats.GltfParse")
 class GltfParse {
-  public static function createSceneFromGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Dynamic {
+  public static function createSceneFromGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Scene {
     var container:Dynamic = cast _Runtime.UNDEFINED;
     container = _Runtime.callValue(GltfParse.readGlbContainer__gltfParse, cast ([bytes, warnings] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(container, null))) { return cast _Runtime.callValue(createScene, cast ([] : Array<Dynamic>)); }
@@ -70,7 +77,7 @@ class GltfParse {
     return cast null;
   }
 
-  public static function createSceneFromGltf(source:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Dynamic {
+  public static function createSceneFromGltf(source:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Scene {
     var doc:GltfDocument = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(source), 'string'))) {
       try {
@@ -86,7 +93,7 @@ class GltfParse {
     return cast null;
   }
 
-  public static function createScenesFromGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Dynamic> {
+  public static function createScenesFromGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Scene> {
     var container:Dynamic = cast _Runtime.UNDEFINED;
     container = _Runtime.callValue(GltfParse.readGlbContainer__gltfParse, cast ([bytes, warnings] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(container, null))) { return cast cast ([] : Array<Dynamic>); }
@@ -94,7 +101,7 @@ class GltfParse {
     return cast null;
   }
 
-  public static function createScenesFromGltf(source:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Dynamic> {
+  public static function createScenesFromGltf(source:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Scene> {
     var doc:GltfDocument = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(source), 'string'))) {
       try {
@@ -110,7 +117,7 @@ class GltfParse {
     return cast null;
   }
 
-  public static function applyNodeTransform__gltfParse(node:Dynamic, gltfNode:GltfNode):Void {
+  public static function applyNodeTransform__gltfParse(node:SceneNode, gltfNode:GltfNode):Void {
     var t:Dynamic = cast _Runtime.UNDEFINED;
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var s:Dynamic = cast _Runtime.UNDEFINED;
@@ -128,7 +135,7 @@ class GltfParse {
     _Runtime.callValue(invalidateNodeLocalTransform, cast ([node] : Array<Dynamic>));
   }
 
-  public static function buildSceneFromGltfDocument__gltfParse(doc:GltfDocument, binary:Null<Dynamic>, options:Null<GltfImportOptions>, ?warnings:Array<String>):Dynamic {
+  public static function buildSceneFromGltfDocument__gltfParse(doc:GltfDocument, binary:Null<Dynamic>, options:Null<GltfImportOptions>, ?warnings:Array<String>):Scene {
     var pool:Dynamic = cast _Runtime.UNDEFINED;
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     pool = _Runtime.callValue(GltfParse.buildGltfNodePool__gltfParse, cast ([doc, binary, options, warnings] : Array<Dynamic>));
@@ -139,10 +146,10 @@ class GltfParse {
     return cast null;
   }
 
-  public static function buildScenesFromGltfDocument__gltfParse(doc:GltfDocument, binary:Null<Dynamic>, options:Null<GltfImportOptions>, ?warnings:Array<String>):Array<Dynamic> {
+  public static function buildScenesFromGltfDocument__gltfParse(doc:GltfDocument, binary:Null<Dynamic>, options:Null<GltfImportOptions>, ?warnings:Array<String>):Array<Scene> {
     var pool:Dynamic = cast _Runtime.UNDEFINED;
     var sceneCount:Dynamic = cast _Runtime.UNDEFINED;
-    var scenes:Array<Dynamic> = cast _Runtime.UNDEFINED;
+    var scenes:Array<Scene> = cast _Runtime.UNDEFINED;
     var defaultIndex:Dynamic = cast _Runtime.UNDEFINED;
     var primary:Dynamic = cast _Runtime.UNDEFINED;
     pool = _Runtime.callValue(GltfParse.buildGltfNodePool__gltfParse, cast ([doc, binary, options, warnings] : Array<Dynamic>));
@@ -164,7 +171,7 @@ class GltfParse {
     return cast null;
   }
 
-  public static function attachGltfAnimations__gltfParse(scene:Dynamic, doc:GltfDocument, buffers:Array<Dynamic>, sceneNodes:Array<Dynamic>, ?warnings:Array<String>):Void {
+  public static function attachGltfAnimations__gltfParse(scene:Scene, doc:GltfDocument, buffers:Array<Dynamic>, sceneNodes:Array<SceneNode>, ?warnings:Array<String>):Void {
     var gltfAnimations:Dynamic = cast _Runtime.UNDEFINED;
     gltfAnimations = _Runtime.coalesce(_Runtime.field(doc, 'animations'), function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
@@ -177,7 +184,7 @@ class GltfParse {
     }
   }
 
-  public static function buildGltfNodePool__gltfParse(doc:GltfDocument, binary:Null<Dynamic>, options:Null<GltfImportOptions>, ?warnings:Array<String>):Null<{ var buffers:Array<Dynamic>; var sceneNodes:Array<Dynamic>; }> {
+  public static function buildGltfNodePool__gltfParse(doc:GltfDocument, binary:Null<Dynamic>, options:Null<GltfImportOptions>, ?warnings:Array<String>):Null<{ var buffers:Array<Dynamic>; var sceneNodes:Array<SceneNode>; }> {
     var version:Dynamic = cast _Runtime.UNDEFINED;
     var buffers:Dynamic = cast _Runtime.UNDEFINED;
     var meshGeometries:Dynamic = cast _Runtime.UNDEFINED;
@@ -185,7 +192,7 @@ class GltfParse {
     var resolvedMaterials:Dynamic = cast _Runtime.UNDEFINED;
     var meshMaterials:Dynamic = cast _Runtime.UNDEFINED;
     var gltfNodes:Dynamic = cast _Runtime.UNDEFINED;
-    var sceneNodes:Array<Dynamic> = cast _Runtime.UNDEFINED;
+    var sceneNodes:Array<SceneNode> = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(doc, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(doc), 'object')))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromGltf: document is not an object; returning empty scene'] : Array<Dynamic>));
       return cast null;
@@ -237,7 +244,7 @@ class GltfParse {
     return cast null;
   }
 
-  public static function assembleGltfScene__gltfParse(doc:GltfDocument, sceneNodes:Array<Dynamic>, sceneIndex:Float):Dynamic {
+  public static function assembleGltfScene__gltfParse(doc:GltfDocument, sceneNodes:Array<SceneNode>, sceneIndex:Float):Scene {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var roots:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(createScene, cast ([] : Array<Dynamic>));
@@ -254,7 +261,7 @@ class GltfParse {
     return cast null;
   }
 
-  public static function buildGltfAnimationClip__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, sceneNodes:Array<Dynamic>, animation:GltfAnimation, ?warnings:Array<String>):Null<Dynamic> {
+  public static function buildGltfAnimationClip__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, sceneNodes:Array<SceneNode>, animation:GltfAnimation, ?warnings:Array<String>):Null<AnimationClip> {
     var channels:Array<AnimationChannel> = cast _Runtime.UNDEFINED;
     channels = cast ([] : Array<Dynamic>);
     for (channel in _Runtime.iterable(_Runtime.field(animation, 'channels'))) {
@@ -285,10 +292,10 @@ class GltfParse {
     return cast null;
   }
 
-  public static function appendGltfWeightsChannels__gltfParse(channels:Array<AnimationChannel>, node:Dynamic, times:Dynamic, values:Dynamic, interpolation:Null<String>, ?warnings:Array<String>):Void {
+  public static function appendGltfWeightsChannels__gltfParse(channels:Array<AnimationChannel>, node:SceneNode, times:Dynamic, values:Dynamic, interpolation:Null<String>, ?warnings:Array<String>):Void {
     var meshes:Dynamic = cast _Runtime.UNDEFINED;
     var bound:Dynamic = cast _Runtime.UNDEFINED;
-    meshes = _Runtime.select(_Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)), function():Dynamic return cast cast ([(cast (cast node : Dynamic) : Dynamic)] : Array<Dynamic>), function():Dynamic return cast _Runtime.callValue(GltfParse.collectMorphableChildMeshes__gltfParse, cast ([node] : Array<Dynamic>)));
+    meshes = _Runtime.select(_Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)), function():Dynamic return cast cast ([(cast (cast node : Dynamic) : Mesh)] : Array<Dynamic>), function():Dynamic return cast _Runtime.callValue(GltfParse.collectMorphableChildMeshes__gltfParse, cast ([node] : Array<Dynamic>)));
     bound = 0.0;
     {
       var i:Dynamic = 0.0;
@@ -306,16 +313,16 @@ class GltfParse {
     }
   }
 
-  public static function collectMorphableChildMeshes__gltfParse(node:Dynamic):Array<Dynamic> {
-    var out:Array<Dynamic> = cast _Runtime.UNDEFINED;
+  public static function collectMorphableChildMeshes__gltfParse(node:SceneNode):Array<Mesh> {
+    var out:Array<Mesh> = cast _Runtime.UNDEFINED;
     var children:Dynamic = cast _Runtime.UNDEFINED;
     out = cast ([] : Array<Dynamic>);
     children = _Runtime.callValue(getNodeChildren, cast ([node] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
-        var child:Dynamic = (cast (cast _Runtime.getIndex(children, i) : Dynamic) : Dynamic);
-        if (_Runtime.truthy(_Runtime.callValue(isMesh, cast ([child] : Array<Dynamic>)))) { _Runtime.callProperty(out, 'push', cast ([(cast (cast child : Dynamic) : Dynamic)] : Array<Dynamic>)); }
+        var child:Dynamic = (cast (cast _Runtime.getIndex(children, i) : Dynamic) : SceneNode);
+        if (_Runtime.truthy(_Runtime.callValue(isMesh, cast ([child] : Array<Dynamic>)))) { _Runtime.callProperty(out, 'push', cast ([(cast (cast child : Dynamic) : Mesh)] : Array<Dynamic>)); }
         i++;
       }
     }
@@ -323,26 +330,26 @@ class GltfParse {
     return cast null;
   }
 
-  public static function applySkinToMeshNodes__gltfParse(node:Dynamic, skin:Skin):Void {
+  public static function applySkinToMeshNodes__gltfParse(node:SceneNode, skin:Skin):Void {
     var children:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)))) {
-      _Runtime.setField((cast node : Dynamic), 'skin', skin);
+      _Runtime.setField((cast node : Mesh), 'skin', skin);
       return;
     }
     children = _Runtime.callValue(getNodeChildren, cast ([node] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
-        var child:Dynamic = (cast (cast _Runtime.getIndex(children, i) : Dynamic) : Dynamic);
-        if (_Runtime.truthy(_Runtime.callValue(isMesh, cast ([child] : Array<Dynamic>)))) { _Runtime.setField((cast (cast child : Dynamic) : Dynamic), 'skin', skin); }
+        var child:Dynamic = (cast (cast _Runtime.getIndex(children, i) : Dynamic) : SceneNode);
+        if (_Runtime.truthy(_Runtime.callValue(isMesh, cast ([child] : Array<Dynamic>)))) { _Runtime.setField((cast (cast child : Dynamic) : Mesh), 'skin', skin); }
         i++;
       }
     }
   }
 
-  public static function buildGltfSkin__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, skinIndex:Float, sceneNodes:Array<Dynamic>, ?warnings:Array<String>):Null<Skin> {
+  public static function buildGltfSkin__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, skinIndex:Float, sceneNodes:Array<SceneNode>, ?warnings:Array<String>):Null<Skin> {
     var gltfSkin:Dynamic = cast _Runtime.UNDEFINED;
-    var joints:Array<Dynamic> = cast _Runtime.UNDEFINED;
+    var joints:Array<SceneNode> = cast _Runtime.UNDEFINED;
     var names:Array<String> = cast _Runtime.UNDEFINED;
     var jointCount:Dynamic = cast _Runtime.UNDEFINED;
     var inverseBindMatrices:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
@@ -395,7 +402,7 @@ class GltfParse {
     return cast null;
   }
 
-  public static function buildMeshSceneNode__gltfParse(geometries:Null<Array<Dynamic>>, materials:Null<Array<Null<Dynamic>>>, morphs:Null<Array<Null<MeshMorph>>>):Dynamic {
+  public static function buildMeshSceneNode__gltfParse(geometries:Null<Array<MeshGeometry>>, materials:Null<Array<Null<Material>>>, morphs:Null<Array<Null<MeshMorph>>>):SceneNode {
     var materialsFor:Dynamic = cast _Runtime.UNDEFINED;
     var buildMesh:Dynamic = cast _Runtime.UNDEFINED;
     var group:Dynamic = cast _Runtime.UNDEFINED;
@@ -413,12 +420,12 @@ class GltfParse {
       if (_Runtime.truthy(!_Runtime.strictEquals(morph, null))) { _Runtime.setField(mesh, 'morph', morph); }
       return cast mesh;
     };
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometries, 'length'), 1.0))) { return cast (cast (cast _Runtime.callValue(buildMesh, cast ([0.0] : Array<Dynamic>)) : Dynamic) : Dynamic); }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometries, 'length'), 1.0))) { return cast (cast (cast _Runtime.callValue(buildMesh, cast ([0.0] : Array<Dynamic>)) : Dynamic) : SceneNode); }
     group = _Runtime.callValue(createSceneNode, cast ([] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(geometries, 'length'), '<'))) {
-        _Runtime.callValue(addNodeChild, cast ([group, (cast (cast _Runtime.callValue(buildMesh, cast ([i] : Array<Dynamic>)) : Dynamic) : Dynamic)] : Array<Dynamic>));
+        _Runtime.callValue(addNodeChild, cast ([group, (cast (cast _Runtime.callValue(buildMesh, cast ([i] : Array<Dynamic>)) : Dynamic) : SceneNode)] : Array<Dynamic>));
         i++;
       }
     }
@@ -426,7 +433,7 @@ class GltfParse {
     return cast null;
   }
 
-  public static function gltfMaterialToPbr__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, material:GltfMaterial, options:Null<GltfImportOptions>):Dynamic {
+  public static function gltfMaterialToPbr__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, material:GltfMaterial, options:Null<GltfImportOptions>):Material {
     var pbr:Dynamic = cast _Runtime.UNDEFINED;
     var result:Dynamic = cast _Runtime.UNDEFINED;
     pbr = _Runtime.coalesce(_Runtime.field(material, 'pbrMetallicRoughness'), function():Dynamic return cast {  });
@@ -435,11 +442,11 @@ class GltfParse {
     _Runtime.setField(result, 'alphaCutoff', _Runtime.coalesce(_Runtime.field(material, 'alphaCutoff'), function():Dynamic return cast 0.5));
     _Runtime.setField(result, 'doubleSided', _Runtime.coalesce(_Runtime.field(material, 'doubleSided'), function():Dynamic return cast false));
     _Runtime.setField(result, 'name', _Runtime.coalesce(_Runtime.field(material, 'name'), function():Dynamic return cast null));
-    return cast (cast (cast result : Dynamic) : Dynamic);
+    return cast (cast (cast result : Dynamic) : Material);
     return cast null;
   }
 
-  public static function resolveGltfTexture__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, info:Null<GltfTextureInfo>, colorSpace:TextureColorSpace, options:Null<GltfImportOptions>):Null<Dynamic> {
+  public static function resolveGltfTexture__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, info:Null<GltfTextureInfo>, colorSpace:TextureColorSpace, options:Null<GltfImportOptions>):Null<Texture> {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var image:Dynamic = cast _Runtime.UNDEFINED;
     var result:Dynamic = cast _Runtime.UNDEFINED;
@@ -457,7 +464,7 @@ class GltfParse {
     return cast null;
   }
 
-  public static function applyGltfSampler__gltfParse(texture:Dynamic, sampler:Null<GltfSampler>):Void {
+  public static function applyGltfSampler__gltfParse(texture:Texture, sampler:Null<GltfSampler>):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(sampler, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(sampler, 'wrapS'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(_Runtime.field(texture, 'sampler'), 'wrapU', _Runtime.getIndex(GltfParse.GLTF_TEXTURE_WRAP__gltfParse, _Runtime.field(sampler, 'wrapS'))); }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(sampler, 'wrapT'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(_Runtime.field(texture, 'sampler'), 'wrapV', _Runtime.getIndex(GltfParse.GLTF_TEXTURE_WRAP__gltfParse, _Runtime.field(sampler, 'wrapT'))); }
@@ -468,7 +475,7 @@ class GltfParse {
     }
   }
 
-  public static function applyGltfTextureTransform__gltfParse(texture:Dynamic, transform:Null<Dynamic>):Void {
+  public static function applyGltfTextureTransform__gltfParse(texture:Texture, transform:Null<Dynamic>):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(transform, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     _Runtime.setField(_Runtime.field(texture, 'uvOffset'), 'x', _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'offset'), 0.0), function():Dynamic return cast 0.0));
     _Runtime.setField(_Runtime.field(texture, 'uvOffset'), 'y', _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'offset'), 1.0), function():Dynamic return cast 0.0));
@@ -477,7 +484,7 @@ class GltfParse {
     _Runtime.setField(_Runtime.field(texture, 'uvScale'), 'y', _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(transform, 'scale'), 1.0), function():Dynamic return cast 1.0));
   }
 
-  public static function gltfImageToTexture__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, image:GltfImage, options:Null<GltfImportOptions>):Null<Dynamic> {
+  public static function gltfImageToTexture__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, image:GltfImage, options:Null<GltfImportOptions>):Null<Texture> {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(image, 'uri'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
       if (_Runtime.truthy(StringTools.startsWith(_Runtime.field(image, 'uri'), 'data:'))) {
         var comma:Dynamic = _Runtime.callProperty(_Runtime.field(image, 'uri'), 'indexOf', cast ([','] : Array<Dynamic>));
@@ -584,7 +591,7 @@ class GltfParse {
     return cast null;
   }
 
-  public static function primitiveToGeometry__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, primitive:GltfPrimitive, ?warnings:Array<String>):Dynamic {
+  public static function primitiveToGeometry__gltfParse(doc:GltfDocument, buffers:Array<Dynamic>, primitive:GltfPrimitive, ?warnings:Array<String>):MeshGeometry {
     var positionIndex:Dynamic = cast _Runtime.UNDEFINED;
     var position:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;

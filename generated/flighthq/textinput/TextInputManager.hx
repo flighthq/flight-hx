@@ -16,18 +16,20 @@ import flighthq.textinput.TextInputEditing.selectLineAtTextInputIndex;
 import flighthq.textinput.TextInputEditing.selectWordAtTextInputIndex;
 import flighthq.types.InputKeyboardData;
 import flighthq.types.InputTextData;
+import flighthq.types.RichText;
+import flighthq.types.TextInputManager;
 import flighthq.types.TextInputManager.TextInputSource;
 
 @:expose("flighthq.textinput.TextInputManager")
 class TextInputManager {
-  public static function blurTextInput(manager:Dynamic):Void {
+  public static function blurTextInput(manager:flighthq.types.TextInputManager):Void {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.field(manager, 'focused');
     if (_Runtime.truthy(!_Runtime.strictEquals(target, null))) { _Runtime.callValue(TextInputManager.setTextInputFocused__textInputManager, cast ([target, false] : Array<Dynamic>)); }
     _Runtime.setField(manager, 'focused', null);
   }
 
-  public static function connectInputToTextInput(input:TextInputSource, manager:Dynamic):Dynamic {
+  public static function connectInputToTextInput(input:TextInputSource, manager:flighthq.types.TextInputManager):Dynamic {
     var onKeyDown:Dynamic = cast _Runtime.UNDEFINED;
     var onTextInput:Dynamic = cast _Runtime.UNDEFINED;
     onKeyDown = function(data:InputKeyboardData) return _Runtime.callValue(dispatchTextInputKeyDown, cast ([manager, data] : Array<Dynamic>));
@@ -41,12 +43,12 @@ class TextInputManager {
     return cast null;
   }
 
-  public static function createTextInputManager():Dynamic {
+  public static function createTextInputManager():flighthq.types.TextInputManager {
     return cast { enabled: true, focused: null };
     return cast null;
   }
 
-  public static function dispatchTextInput(manager:Dynamic, text:String):Bool {
+  public static function dispatchTextInput(manager:flighthq.types.TextInputManager, text:String):Bool {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.callValue(TextInputManager.getTextInputFocusTarget__textInputManager, cast ([manager] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(target, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0)))) { return cast false; }
@@ -55,7 +57,7 @@ class TextInputManager {
     return cast null;
   }
 
-  public static function dispatchTextInputKeyDown(manager:Dynamic, data:InputKeyboardData, ?clipboardText:String, ?onCopy:Dynamic):Bool {
+  public static function dispatchTextInputKeyDown(manager:flighthq.types.TextInputManager, data:InputKeyboardData, ?clipboardText:String, ?onCopy:Dynamic):Bool {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.callValue(TextInputManager.getTextInputFocusTarget__textInputManager, cast ([manager] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(target, null))) { return cast false; }
@@ -63,7 +65,7 @@ class TextInputManager {
     return cast null;
   }
 
-  public static function dispatchTextInputPointerDown(manager:Dynamic, target:Dynamic, x:Float, y:Float, extend:Dynamic = false, clickCount:Dynamic = 1.0):Void {
+  public static function dispatchTextInputPointerDown(manager:flighthq.types.TextInputManager, target:RichText, x:Float, y:Float, extend:Dynamic = false, clickCount:Dynamic = 1.0):Void {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     var index:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(focusTextInput, cast ([manager, target] : Array<Dynamic>));
@@ -79,7 +81,7 @@ class TextInputManager {
     } }
   }
 
-  public static function dispatchTextInputPointerMove(manager:Dynamic, x:Float, y:Float):Void {
+  public static function dispatchTextInputPointerMove(manager:flighthq.types.TextInputManager, x:Float, y:Float):Void {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     var index:Dynamic = cast _Runtime.UNDEFINED;
@@ -91,14 +93,14 @@ class TextInputManager {
     _Runtime.callValue(moveTextInputCaret, cast ([target, index, true] : Array<Dynamic>));
   }
 
-  public static function dispatchTextInputWheel(manager:Dynamic, deltaLines:Float):Void {
+  public static function dispatchTextInputWheel(manager:flighthq.types.TextInputManager, deltaLines:Float):Void {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.field(manager, 'focused');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(target, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(target, 'enabled'))))) { return; }
     _Runtime.callValue(setRichTextScrollV, cast ([target, (_Runtime.field(_Runtime.field(target, 'data'), 'scrollV') + _Runtime.callProperty(HxMath, 'round', cast ([deltaLines] : Array<Dynamic>)))] : Array<Dynamic>));
   }
 
-  public static function focusTextInput(manager:Dynamic, target:Dynamic):Void {
+  public static function focusTextInput(manager:flighthq.types.TextInputManager, target:RichText):Void {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(manager, 'focused'), target))) {
       var previous:Dynamic = _Runtime.field(manager, 'focused');
       if (_Runtime.truthy(!_Runtime.strictEquals(previous, null))) { _Runtime.callValue(TextInputManager.setTextInputFocused__textInputManager, cast ([previous, false] : Array<Dynamic>)); }
@@ -107,7 +109,7 @@ class TextInputManager {
     _Runtime.callValue(TextInputManager.setTextInputFocused__textInputManager, cast ([target, true] : Array<Dynamic>));
   }
 
-  public static function getTextInputFocusTarget__textInputManager(manager:Dynamic):Null<Dynamic> {
+  public static function getTextInputFocusTarget__textInputManager(manager:flighthq.types.TextInputManager):Null<RichText> {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(manager, 'enabled')))) { return cast null; }
     target = _Runtime.field(manager, 'focused');
@@ -116,7 +118,7 @@ class TextInputManager {
     return cast null;
   }
 
-  public static function setTextInputFocused__textInputManager(target:Dynamic, focused:Bool):Void {
+  public static function setTextInputFocused__textInputManager(target:RichText, focused:Bool):Void {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(getTextInputState, cast ([target] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(state, null))) { _Runtime.setField(state, 'focused', focused); }

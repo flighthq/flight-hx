@@ -8,4 +8,4 @@ import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Matrix3 = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var m:flighthq._internal._Float32Array; };
 
-typedef Matrix3Like = EntityWithoutRuntime<Dynamic>;
+typedef Matrix3Like = EntityWithoutRuntime<flighthq.types.Matrix3>;

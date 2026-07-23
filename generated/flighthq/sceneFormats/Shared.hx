@@ -7,9 +7,12 @@ import flighthq.mesh.MeshGeometryLayout.CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT;
 import flighthq.node.Traversal.getNodeChildren;
 import flighthq.scene.Mesh.isMesh;
 import flighthq.texture.Texture.createTexture;
+import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
 import flighthq.types.ResourceResolutionState;
+import flighthq.types.SceneNode;
 import flighthq.types.SceneResourceRef.SceneResourceRefKind;
+import flighthq.types.Texture;
 import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
 import flighthq.types._internal._SceneResourceRefValues.SceneResourceRefKindValue;
 
@@ -57,24 +60,24 @@ class Shared {
     _Runtime.setIndex(transform, 11.0, _Runtime.normalizeZero(-_Runtime.getIndex(transform, 11.0)));
   }
 
-  public static function createEmbeddedTextureRef(bytes:Dynamic, mimeType:Null<String>):Dynamic {
+  public static function createEmbeddedTextureRef(bytes:Dynamic, mimeType:Null<String>):Texture {
     return cast _Runtime.callValue(createTexture, cast ([{ resource: { bytes: bytes, kind: SceneResourceRefKindValue.Embedded, mimeType: mimeType, state: ResourceResolutionStateValue.Unresolved } }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createExternalTextureRef(uri:String, ?basePath:Null<String>):Dynamic {
+  public static function createExternalTextureRef(uri:String, ?basePath:Null<String>):Texture {
     if (basePath == null) basePath = cast (null : Dynamic);
     return cast _Runtime.callValue(createTexture, cast ([{ resource: { basePath: basePath, kind: SceneResourceRefKindValue.External, mimeType: null, state: ResourceResolutionStateValue.Unresolved, uri: uri } }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function findSceneSkeletonJoints(root:Dynamic):Null<Array<Dynamic>> {
-    var stack:Array<Dynamic> = cast _Runtime.UNDEFINED;
+  public static function findSceneSkeletonJoints(root:SceneNode):Null<Array<SceneNode>> {
+    var stack:Array<SceneNode> = cast _Runtime.UNDEFINED;
     stack = _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(getNodeChildren, cast ([root] : Array<Dynamic>)))]);
     while (_Runtime.truthy(_Runtime.compare(_Runtime.field(stack, 'length'), 0.0, '>'))) {
       var node:Dynamic = _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.callValue(isMesh, cast ([node] : Array<Dynamic>)))) {
-        var skin:Dynamic = _Runtime.field((cast (cast node : Dynamic) : Dynamic), 'skin');
+        var skin:Dynamic = _Runtime.field((cast (cast node : Dynamic) : Mesh), 'skin');
         if (_Runtime.truthy(!_Runtime.looseEquals(skin, null))) { return cast _Runtime.field(_Runtime.field(skin, 'skeleton'), 'joints'); }
       }
       _Runtime.callProperty(stack, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.callValue(getNodeChildren, cast ([node] : Array<Dynamic>)))]));

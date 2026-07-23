@@ -5,10 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.ImageChannel;
+import flighthq.types.SurfaceRegion;
 
 @:expose("flighthq.surface.SurfaceCopy")
 class SurfaceCopy {
-  public static function copySurfaceChannel(dest:Dynamic, destChannel:ImageChannel, source:Dynamic, sourceChannel:ImageChannel):Void {
+  public static function copySurfaceChannel(dest:SurfaceRegion, destChannel:ImageChannel, source:SurfaceRegion, sourceChannel:ImageChannel):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     w = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'width'), _Runtime.field(source, 'width')] : Array<Dynamic>));
@@ -37,7 +38,7 @@ class SurfaceCopy {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function copySurfacePixels(dest:Dynamic, source:Dynamic, composite:Bool = false):Void {
+  public static function copySurfacePixels(dest:SurfaceRegion, source:SurfaceRegion, composite:Bool = false):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var sd:Dynamic = cast _Runtime.UNDEFINED;

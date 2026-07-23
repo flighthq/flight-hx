@@ -3,10 +3,11 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.GradientBevelEffect;
 
 @:expose("flighthq.effects.GradientBevelEffect")
 class GradientBevelEffect {
-  public static function createGradientBevelEffect(options:Dynamic):Dynamic {
+  public static function createGradientBevelEffect(options:Dynamic):flighthq.types.GradientBevelEffect {
     return cast _Runtime.mergeObjects([{ kind: 'GradientBevelEffect' }, options]);
     return cast null;
   }

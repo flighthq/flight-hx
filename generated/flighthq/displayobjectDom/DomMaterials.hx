@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.AdvancedBlendMode;
 import flighthq.types.BlendMode;
 import flighthq.types.DomBlendModeFidelity;
+import flighthq.types.DomRenderState;
 import flighthq.types._internal._AdvancedBlendModeValues.AdvancedBlendModeValue;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
@@ -19,7 +20,7 @@ class DomMaterials {
     _Runtime.setField(_Runtime.field(element, 'style'), 'mixBlendMode', _Runtime.coalesce(_Runtime.select(!_Runtime.strictEquals(value, null), function():Dynamic return cast _Runtime.getIndex(DomMaterials.DOM_BLEND_MODE__domMaterials, value), function():Dynamic return cast null), function():Dynamic return cast ''));
   }
 
-  public static function enableDomBlendModeSupport(state:Dynamic):Void {
+  public static function enableDomBlendModeSupport(state:DomRenderState):Void {
     _Runtime.setField(state, 'applyBlendMode', applyDomBlendMode);
   }
 

@@ -5,43 +5,46 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmapfont.BitmapFont as Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont;
 import flighthq.bitmapfont.GlyphSource as Facade_Bitmapfont_flighthq_bitmapfont_GlyphSource;
+import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontData;
+import flighthq.types.GlyphSource;
 import flighthq.types.GlyphSource.GlyphEntry;
 import flighthq.types.GlyphSource.GlyphMetrics;
+import flighthq.types.TextureAtlas;
 
 @:expose("flighthq.bitmapfont.Bitmapfont")
 class Bitmapfont {
-  public static function createBitmapFont(data:BitmapFontData):Dynamic {
+  public static function createBitmapFont(data:BitmapFontData):BitmapFont {
     return cast _Runtime.callValue(Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.createBitmapFont, cast ([data] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGlyphSourceFromBitmapFont(font:Dynamic):Dynamic {
+  public static function createGlyphSourceFromBitmapFont(font:BitmapFont):GlyphSource {
     return cast _Runtime.callValue(Facade_Bitmapfont_flighthq_bitmapfont_GlyphSource.createGlyphSourceFromBitmapFont, cast ([font] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBitmapFontGlyph(font:Dynamic, codepoint:Float):Null<GlyphEntry> {
+  public static function getBitmapFontGlyph(font:BitmapFont, codepoint:Float):Null<GlyphEntry> {
     return cast _Runtime.callValue(Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.getBitmapFontGlyph, cast ([font, codepoint] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBitmapFontKerning(font:Dynamic, left:Float, right:Float):Float {
+  public static function getBitmapFontKerning(font:BitmapFont, left:Float, right:Float):Float {
     return cast _Runtime.callValue(Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.getBitmapFontKerning, cast ([font, left, right] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBitmapFontMetrics(font:Dynamic):GlyphMetrics {
+  public static function getBitmapFontMetrics(font:BitmapFont):GlyphMetrics {
     return cast _Runtime.callValue(Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.getBitmapFontMetrics, cast ([font] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBitmapFontPage(font:Dynamic, ?page:Dynamic):Null<Dynamic> {
+  public static function getBitmapFontPage(font:BitmapFont, ?page:Dynamic):Null<TextureAtlas> {
     return cast _Runtime.callValue(Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.getBitmapFontPage, cast ([font, page] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBitmapFontPages(font:Dynamic):Array<Dynamic> {
+  public static function getBitmapFontPages(font:BitmapFont):Array<TextureAtlas> {
     return cast _Runtime.callValue(Facade_Bitmapfont_flighthq_bitmapfont_BitmapFont.getBitmapFontPages, cast ([font] : Array<Dynamic>));
     return cast null;
   }

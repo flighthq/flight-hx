@@ -6,15 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.Log.LogLevel;
+import flighthq.types.RenderState;
 
 @:expose("flighthq.render.EnableColorAdjustmentGuards")
 class EnableColorAdjustmentGuards {
-  public static function areColorAdjustmentGuardsEnabled(state:Dynamic):Bool {
+  public static function areColorAdjustmentGuardsEnabled(state:RenderState):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'colorAdjustmentChannelMixingGuard'), null);
     return cast null;
   }
 
-  public static function enableColorAdjustmentGuards(state:Dynamic):Void {
+  public static function enableColorAdjustmentGuards(state:RenderState):Void {
     _Runtime.setField(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'colorAdjustmentChannelMixingGuard', EnableColorAdjustmentGuards.warnColorAdjustmentChannelMixingNotInlineable__enableColorAdjustmentGuards);
   }
 

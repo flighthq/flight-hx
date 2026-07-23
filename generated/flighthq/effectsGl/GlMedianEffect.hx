@@ -6,6 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderTarget;
+import flighthq.types.MedianEffect;
 
 @:expose("flighthq.effectsGl.GlMedianEffect")
 class GlMedianEffect {
@@ -13,7 +16,7 @@ class GlMedianEffect {
 
   public static final MAX_SAMPLES__glMedianEffect:Dynamic = (((MAX_MEDIAN_EFFECT_GL_RADIUS * 2.0) + 1.0) * ((MAX_MEDIAN_EFFECT_GL_RADIUS * 2.0) + 1.0));
 
-  public static function applyMedianEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
+  public static function applyMedianEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:MedianEffect):Void {
     var radius:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
     radius = _Runtime.callProperty(HxMath, 'min', cast ([MAX_MEDIAN_EFFECT_GL_RADIUS, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
@@ -25,7 +28,7 @@ class GlMedianEffect {
   }
 
   public static final defaultGlMedianEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyMedianEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(applyMedianEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : MedianEffect)] : Array<Dynamic>));
   };
 
   public static final MEDIAN_FRAGMENT_SRC__glMedianEffect:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_texelSize;\nuniform int u_radius;\nout vec4 fragColor;\n\nconst int MAX_S = ' + Std.string(GlMedianEffect.MAX_SAMPLES__glMedianEffect) + ';\n\nvoid sortFloat(inout float arr[MAX_S], int n) {\n  for (int i = 1; i < n; i++) {\n    float key = arr[i];\n    int j = i - 1;\n    while (j >= 0 && arr[j] > key) {\n      arr[j + 1] = arr[j];\n      j--;\n    }\n    arr[j + 1] = key;\n  }\n}\n\nvoid main() {\n  int r = clamp(u_radius, 0, ' + Std.string(MAX_MEDIAN_EFFECT_GL_RADIUS) + ');\n  if (r == 0) {\n    fragColor = texture(u_texture0, v_texCoord);\n    return;\n  }\n  int n = (2 * r + 1) * (2 * r + 1);\n  float rv[MAX_S];\n  float gv[MAX_S];\n  float bv[MAX_S];\n  float av[MAX_S];\n  int count = 0;\n  for (int dy = -' + Std.string(MAX_MEDIAN_EFFECT_GL_RADIUS) + '; dy <= ' + Std.string(MAX_MEDIAN_EFFECT_GL_RADIUS) + '; dy++) {\n    for (int dx = -' + Std.string(MAX_MEDIAN_EFFECT_GL_RADIUS) + '; dx <= ' + Std.string(MAX_MEDIAN_EFFECT_GL_RADIUS) + '; dx++) {\n      if (abs(dy) <= r && abs(dx) <= r) {\n        vec4 s = texture(u_texture0, v_texCoord + vec2(float(dx), float(dy)) * u_texelSize);\n        rv[count] = s.r;\n        gv[count] = s.g;\n        bv[count] = s.b;\n        av[count] = s.a;\n        count++;\n      }\n    }\n  }\n  sortFloat(rv, n);\n  sortFloat(gv, n);\n  sortFloat(bv, n);\n  sortFloat(av, n);\n  int mid = n / 2;\n  fragColor = vec4(rv[mid], gv[mid], bv[mid], av[mid]);\n}';

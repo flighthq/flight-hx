@@ -6,6 +6,8 @@ import flighthq._internal._Runtime;
 import flighthq.render.RenderProxy.getRenderProxy2D;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.Entity.Kind;
+import flighthq.types.HasAppearance;
+import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 
 typedef DisplayObjectRenderExplanation = { var kind:Kind; var hasRenderer:Bool; var prepared:Bool; var visible:Bool; var effectiveAlpha:Float; var reason:DisplayObjectRenderBlankReason; };
@@ -14,7 +16,7 @@ typedef DisplayObjectRenderBlankReason = String;
 
 @:expose("flighthq.render.ExplainDisplayObjectRender")
 class ExplainDisplayObjectRender {
-  public static function explainDisplayObjectRender(state:Dynamic, source:Renderable):DisplayObjectRenderExplanation {
+  public static function explainDisplayObjectRender(state:RenderState, source:Renderable):DisplayObjectRenderExplanation {
     var kind:Dynamic = cast _Runtime.UNDEFINED;
     var hasRenderer:Dynamic = cast _Runtime.UNDEFINED;
     var proxy:Dynamic = cast _Runtime.UNDEFINED;
@@ -27,7 +29,7 @@ class ExplainDisplayObjectRender {
     hasRenderer = !_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'rendererMap'), 'get', cast ([kind] : Array<Dynamic>)), _Runtime.field(_Runtime, 'UNDEFINED'));
     proxy = _Runtime.callValue(getRenderProxy2D, cast ([state, source] : Array<Dynamic>));
     prepared = !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED'));
-    appearance = (cast (cast source : Dynamic) : Dynamic);
+    appearance = (cast (cast source : Dynamic) : HasAppearance);
     visible = _Runtime.select(!_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(proxy, 'visible'), function():Dynamic return cast _Runtime.field(appearance, 'visible'));
     effectiveAlpha = _Runtime.select(!_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(proxy, 'alpha'), function():Dynamic return cast _Runtime.field(appearance, 'alpha'));
     if (_Runtime.truthy(!_Runtime.truthy(hasRenderer))) { (reason = cast ('no-renderer' : Dynamic)); } else { if (_Runtime.truthy(!_Runtime.truthy(prepared))) { (reason = cast ('not-prepared' : Dynamic)); } else { if (_Runtime.truthy(!_Runtime.truthy(visible))) { (reason = cast ('not-visible' : Dynamic)); } else { if (_Runtime.truthy(_Runtime.compare(effectiveAlpha, 0.0, '<='))) { (reason = cast ('zero-alpha' : Dynamic)); } else { (reason = cast ('ok' : Dynamic)); } } } }

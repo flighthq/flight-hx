@@ -3,15 +3,16 @@ package flighthq.path;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Path;
 
 @:expose("flighthq.path.CopyPath")
 class CopyPath {
-  public static function clonePath(source:Dynamic):Dynamic {
+  public static function clonePath(source:Path):Path {
     return cast _Runtime.callValue(copyPath, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function copyPath(source:Dynamic, ?out:Dynamic):Dynamic {
+  public static function copyPath(source:Path, ?out:Path):Path {
     if (_Runtime.truthy(_Runtime.strictEquals(out, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       return cast { commands: _Runtime.slice(_Runtime.field(source, 'commands'), 0, null), data: _Runtime.slice(_Runtime.field(source, 'data'), 0, null), winding: _Runtime.field(source, 'winding') };
     }

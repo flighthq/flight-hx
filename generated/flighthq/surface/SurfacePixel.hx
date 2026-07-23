@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.ImageChannel;
+import flighthq.types.Surface;
 
 @:expose("flighthq.surface.SurfacePixel")
 class SurfacePixel {
@@ -14,33 +15,33 @@ class SurfacePixel {
 
   public static final LUMA_B__surfacePixel:Dynamic = 0.0722;
 
-  public static function getSurfacePixel(source:Dynamic, x:Float, y:Float):Float {
+  public static function getSurfacePixel(source:Surface, x:Float, y:Float):Float {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = (((y * _Runtime.field(source, 'width')) + x) * 4.0);
     return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(_Runtime.getIndex(_Runtime.field(source, 'data'), i)) << Std.int(24.0))) | Std.int((Std.int(_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 1.0))) << Std.int(16.0))))) | Std.int((Std.int(_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 2.0))) << Std.int(8.0))))) | Std.int(_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 3.0))))), Std.int(0.0));
     return cast null;
   }
 
-  public static function getSurfacePixelChannel(source:Dynamic, x:Float, y:Float, channel:ImageChannel):Float {
+  public static function getSurfacePixelChannel(source:Surface, x:Float, y:Float, channel:ImageChannel):Float {
     return cast _Runtime.getIndex(_Runtime.field(source, 'data'), ((((y * _Runtime.field(source, 'width')) + x) * 4.0) + channel));
     return cast null;
   }
 
-  public static function getSurfacePixelLuminance(source:Dynamic, x:Float, y:Float):Float {
+  public static function getSurfacePixelLuminance(source:Surface, x:Float, y:Float):Float {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = (((y * _Runtime.field(source, 'width')) + x) * 4.0);
     return cast _Runtime.callProperty(HxMath, 'round', cast ([(((_Runtime.getIndex(_Runtime.field(source, 'data'), i) * SurfacePixel.LUMA_R__surfacePixel) + (_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 1.0)) * SurfacePixel.LUMA_G__surfacePixel)) + (_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 2.0)) * SurfacePixel.LUMA_B__surfacePixel))] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSurfacePixelRgb(source:Dynamic, x:Float, y:Float):Float {
+  public static function getSurfacePixelRgb(source:Surface, x:Float, y:Float):Float {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = (((y * _Runtime.field(source, 'width')) + x) * 4.0);
     return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int(_Runtime.getIndex(_Runtime.field(source, 'data'), i)) << Std.int(16.0))) | Std.int((Std.int(_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 1.0))) << Std.int(8.0))))) | Std.int(_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 2.0))))), Std.int(0.0));
     return cast null;
   }
 
-  public static function setSurfacePixel(out:Dynamic, x:Float, y:Float, color:Float):Void {
+  public static function setSurfacePixel(out:Surface, x:Float, y:Float, color:Float):Void {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = (((y * _Runtime.field(out, 'width')) + x) * 4.0);
     _Runtime.setIndex(_Runtime.field(out, 'data'), i, (Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)));
@@ -50,7 +51,7 @@ class SurfacePixel {
     _Runtime.callValue(invalidateImageResource, cast ([out] : Array<Dynamic>));
   }
 
-  public static function setSurfacePixelRgb(out:Dynamic, x:Float, y:Float, color:Float):Void {
+  public static function setSurfacePixelRgb(out:Surface, x:Float, y:Float, color:Float):Void {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = (((y * _Runtime.field(out, 'width')) + x) * 4.0);
     _Runtime.setIndex(_Runtime.field(out, 'data'), i, (Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0)));

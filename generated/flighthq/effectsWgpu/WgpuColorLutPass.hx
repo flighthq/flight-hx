@@ -6,11 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.EFFECT_VERTEX_WGSL;
 import flighthq.effectsWgpu.WgpuEffectPass.WgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.getWgpuEffectPassState;
+import flighthq.types.ColorLut;
 import flighthq.types.WgpuColorLutTextureCache;
+import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.effectsWgpu.WgpuColorLutPass")
 class WgpuColorLutPass {
-  public static function applyColorLutPassToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, lut:Dynamic, cache:WgpuColorLutTextureCache):Void {
+  public static function applyColorLutPassToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, lut:ColorLut, cache:WgpuColorLutTextureCache):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var fs:Dynamic = cast _Runtime.UNDEFINED;
@@ -24,14 +27,14 @@ class WgpuColorLutPass {
     device = _Runtime.field(__destructure0, 'device');
     fs = _Runtime.callValue(getWgpuEffectPassState, cast ([state] : Array<Dynamic>));
     texture = _Runtime.callValue(WgpuColorLutPass.uploadLutTexture__wgpuColorLutPass, cast ([state, lut, cache] : Array<Dynamic>));
-    sourceBG = _Runtime.callProperty(device, 'createBindGroup', cast ([{ layout: _Runtime.field(fs, 'textureBGLayout'), entries: cast ([{ binding: 0.0, resource: _Runtime.field((cast source : Dynamic), 'view') }, { binding: 1.0, resource: _Runtime.field(fs, 'sampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
+    sourceBG = _Runtime.callProperty(device, 'createBindGroup', cast ([{ layout: _Runtime.field(fs, 'textureBGLayout'), entries: cast ([{ binding: 0.0, resource: _Runtime.field((cast source : WgpuRenderTarget), 'view') }, { binding: 1.0, resource: _Runtime.field(fs, 'sampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
     lutBG = _Runtime.callProperty(device, 'createBindGroup', cast ([{ layout: _Runtime.callValue(WgpuColorLutPass.getLutBindGroupLayout__wgpuColorLutPass, cast ([state] : Array<Dynamic>)), entries: cast ([{ binding: 0.0, resource: _Runtime.callProperty(texture, 'createView', cast ([{ dimension: '3d' }] : Array<Dynamic>)) }, { binding: 1.0, resource: _Runtime.field(fs, 'sampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
-    pipeline = _Runtime.callValue(WgpuColorLutPass.getLutPipeline__wgpuColorLutPass, cast ([state, _Runtime.field((cast dest : Dynamic), 'format')] : Array<Dynamic>));
+    pipeline = _Runtime.callValue(WgpuColorLutPass.getLutPipeline__wgpuColorLutPass, cast ([state, _Runtime.field((cast dest : WgpuRenderTarget), 'format')] : Array<Dynamic>));
     slotOffset = _Runtime.callProperty(fs, 'acquireSlot', cast ([] : Array<Dynamic>));
     _Runtime.callProperty(fs, 'writeSlot', cast ([slotOffset, function(f32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, _Runtime.field(lut, 'size'));
     }] : Array<Dynamic>));
-    pass = _Runtime.callProperty(fs, 'beginPass', cast ([(cast dest : Dynamic), 'load'] : Array<Dynamic>));
+    pass = _Runtime.callProperty(fs, 'beginPass', cast ([(cast dest : WgpuRenderTarget), 'load'] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(pipeline, 'pipeline')] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, _Runtime.field(fs, 'uniformBG'), cast ([slotOffset] : Array<Dynamic>)] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, sourceBG] : Array<Dynamic>));
@@ -40,7 +43,7 @@ class WgpuColorLutPass {
     _Runtime.callProperty(pass, 'end', cast ([] : Array<Dynamic>));
   }
 
-  public static function getLutBindGroupLayout__wgpuColorLutPass(state:Dynamic):Dynamic {
+  public static function getLutBindGroupLayout__wgpuColorLutPass(state:WgpuRenderState):Dynamic {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     layout = _Runtime.callProperty(WgpuColorLutPass.lutBindGroupLayouts__wgpuColorLutPass, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -51,7 +54,7 @@ class WgpuColorLutPass {
     return cast null;
   }
 
-  public static function getLutPipeline__wgpuColorLutPass(state:Dynamic, format:Dynamic):WgpuEffectPipeline {
+  public static function getLutPipeline__wgpuColorLutPass(state:WgpuRenderState, format:Dynamic):WgpuEffectPipeline {
     var byFormat:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     byFormat = _Runtime.callProperty(WgpuColorLutPass.lutPipelines__wgpuColorLutPass, 'get', cast ([state] : Array<Dynamic>));
@@ -74,7 +77,7 @@ class WgpuColorLutPass {
     return cast null;
   }
 
-  public static function uploadLutTexture__wgpuColorLutPass(state:Dynamic, lut:Dynamic, cache:WgpuColorLutTextureCache):Dynamic {
+  public static function uploadLutTexture__wgpuColorLutPass(state:WgpuRenderState, lut:ColorLut, cache:WgpuColorLutTextureCache):Dynamic {
     var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var n:Dynamic = cast _Runtime.UNDEFINED;

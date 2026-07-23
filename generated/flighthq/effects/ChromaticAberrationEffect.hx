@@ -3,10 +3,11 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.ChromaticAberrationEffect;
 
 @:expose("flighthq.effects.ChromaticAberrationEffect")
 class ChromaticAberrationEffect {
-  public static function createChromaticAberrationEffect(?options:Dynamic):Dynamic {
+  public static function createChromaticAberrationEffect(?options:Dynamic):flighthq.types.ChromaticAberrationEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'ChromaticAberrationEffect' }, options]);
     return cast null;

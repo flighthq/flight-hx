@@ -14,4 +14,4 @@ typedef ConnectivityReachabilityOptions = { var url:String; @:optional var timeo
 
 typedef ConnectivityBackend = { var getStatus:Dynamic; @:optional var detectReachability:Dynamic; var subscribe:Dynamic; };
 
-typedef Connectivity = { var onChange:Dynamic; var onConnectionTypeChange:Dynamic; var onMeteredChange:Dynamic; var onOnline:Dynamic; var onOffline:Dynamic; };
+typedef Connectivity = { var onChange:Signal<Dynamic>; var onConnectionTypeChange:Signal<Dynamic>; var onMeteredChange:Signal<Dynamic>; var onOnline:Signal<Dynamic>; var onOffline:Signal<Dynamic>; };

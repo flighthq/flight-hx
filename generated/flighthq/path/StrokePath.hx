@@ -4,6 +4,7 @@ package flighthq.path;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.Path.appendPathClose;
+import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 import flighthq.types.StrokeStyle;
 import flighthq.types._internal._PathValues.PathCommandValue;
@@ -14,13 +15,13 @@ typedef StrokeSubpath__strokePath = { var closed:Bool; var points:Array<Float>; 
 
 @:expose("flighthq.path.StrokePath")
 class StrokePath {
-  public static function strokePath(path:Dynamic, style:StrokeStyle, tolerance:Dynamic = 0.25):Dynamic {
+  public static function strokePath(path:Path, style:StrokeStyle, tolerance:Dynamic = 0.25):Path {
     var width:Dynamic = cast _Runtime.UNDEFINED;
     var join:Dynamic = cast _Runtime.UNDEFINED;
     var cap:Dynamic = cast _Runtime.UNDEFINED;
     var miterLimit:Dynamic = cast _Runtime.UNDEFINED;
     var halfWidth:Dynamic = cast _Runtime.UNDEFINED;
-    var result:Dynamic = cast _Runtime.UNDEFINED;
+    var result:Path = cast _Runtime.UNDEFINED;
     var subpaths:Dynamic = cast _Runtime.UNDEFINED;
     var dash:Dynamic = cast _Runtime.UNDEFINED;
     var dashOffset:Dynamic = cast _Runtime.UNDEFINED;
@@ -250,7 +251,7 @@ class StrokePath {
     return cast null;
   }
 
-  public static function decodeSubpaths__strokePath(path:Dynamic, tolerance:Float):Array<StrokeSubpath__strokePath> {
+  public static function decodeSubpaths__strokePath(path:Path, tolerance:Float):Array<StrokeSubpath__strokePath> {
     var commands:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var toleranceSq:Dynamic = cast _Runtime.UNDEFINED;
@@ -431,7 +432,7 @@ class StrokePath {
     _Runtime.callValue(StrokePath.flattenQuadratic__strokePath, cast ([out, xm, ym, x12, y12, x1, y1, toleranceSq, (depth + 1.0)] : Array<Dynamic>));
   }
 
-  public static function strokeSubpath__strokePath(pts:Array<Float>, closed:Bool, halfWidth:Float, join:String, cap:String, miterLimit:Float, out:Dynamic, tolerance:Float):Void {
+  public static function strokeSubpath__strokePath(pts:Array<Float>, closed:Bool, halfWidth:Float, join:String, cap:String, miterLimit:Float, out:Path, tolerance:Float):Void {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var left:Array<Float> = cast _Runtime.UNDEFINED;
     var right:Array<Float> = cast _Runtime.UNDEFINED;

@@ -4,10 +4,11 @@ package flighthq.mesh;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.mesh.MeshGeometryAttributes.getVertexAttributeFloatOffset;
+import flighthq.types.MeshGeometry;
 
 @:expose("flighthq.mesh.MeshGeometryUvs")
 class MeshGeometryUvs {
-  public static function offsetMeshGeometryUvs(geometry:Dynamic, du:Float, dv:Float):Void {
+  public static function offsetMeshGeometryUvs(geometry:MeshGeometry, du:Float, dv:Float):Void {
     var floatOffset:Dynamic = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -29,7 +30,7 @@ class MeshGeometryUvs {
     if (_Runtime.truthy(_Runtime.compare(vertexCount, 0.0, '>'))) { _Runtime.incrementField(geometry, 'version', 1, true); }
   }
 
-  public static function scaleMeshGeometryUvs(geometry:Dynamic, su:Float, sv:Float):Void {
+  public static function scaleMeshGeometryUvs(geometry:MeshGeometry, su:Float, sv:Float):Void {
     var floatOffset:Dynamic = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -51,7 +52,7 @@ class MeshGeometryUvs {
     if (_Runtime.truthy(_Runtime.compare(vertexCount, 0.0, '>'))) { _Runtime.incrementField(geometry, 'version', 1, true); }
   }
 
-  public static function wrapMeshGeometryUvs(geometry:Dynamic):Void {
+  public static function wrapMeshGeometryUvs(geometry:MeshGeometry):Void {
     var floatOffset:Dynamic = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;

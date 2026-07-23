@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textshaper.TextShaperRun.shapeTextRun;
 import flighthq.types.ShapedRun;
+import flighthq.types.TextFormat;
 import flighthq.types.TextShaper.ShapeRunOptions;
 
 typedef TextShaperCache = { var _entries:Dynamic; };

@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 
-typedef Tileset = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var atlas:Null<Dynamic>; var columns:Float; var margin:Float; var rows:Float; var spacing:Float; var tileHeight:Float; var tileWidth:Float; };
+typedef Tileset = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var atlas:Null<TextureAtlas>; var columns:Float; var margin:Float; var rows:Float; var spacing:Float; var tileHeight:Float; var tileWidth:Float; };

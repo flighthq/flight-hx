@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 
 typedef VideoChannelState = String;
 
-typedef VideoChannel = { var currentTime:Float; var gain:Float; var length:Float; var loops:Float; var playbackRate:Float; var source:Dynamic; var state:VideoChannelState; var onComplete:Dynamic; };
+typedef VideoChannel = { var currentTime:Float; var gain:Float; var length:Float; var loops:Float; var playbackRate:Float; var source:flighthq.types.VideoResource; var state:VideoChannelState; var onComplete:Signal<Dynamic>; };
 
 typedef VideoPlayOptions = { @:optional var currentTime:Float; @:optional var gain:Float; @:optional var loops:Float; @:optional var playbackRate:Float; };
 

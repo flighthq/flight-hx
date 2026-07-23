@@ -22,10 +22,13 @@ import flighthq.textlayout.TextBounds.computeTextBoundsWidth;
 import flighthq.textlayout.TextLayout.computeTextLayout;
 import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
 import flighthq.types.DisplayObjectRenderer;
+import flighthq.types.GlRenderState;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
+import flighthq.types.RichText;
 import flighthq.types.RichText.RichTextRuntime;
+import flighthq.types.TextFormat;
 import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.TextLayout.TextLayoutResult;
 
@@ -41,12 +44,12 @@ class GlRichText {
 
   public static var _webglTextInputOverlay__glRichText:Null<GlRichTextOverlay> = _Runtime.explicitNull();
 
-  public static function createGlRichTextData(_state:Dynamic, _source:Renderable):RendererData {
+  public static function createGlRichTextData(_state:GlRenderState, _source:Renderable):RendererData {
     return cast (cast (cast { texture: null } : Dynamic) : RendererData);
     return cast null;
   }
 
-  public static function destroyGlRichTextData(state:Dynamic, data:RendererData):Void {
+  public static function destroyGlRichTextData(state:GlRenderState, data:RendererData):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     __destructure0 = (cast (cast data : Dynamic) : GlRichTextData__glRichText);
@@ -54,13 +57,13 @@ class GlRichText {
     if (_Runtime.truthy(!_Runtime.strictEquals(texture, null))) { _Runtime.callProperty(_Runtime.field(state, 'gl'), 'deleteTexture', cast ([texture] : Array<Dynamic>)); }
   }
 
-  public static function drawGlRichText(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawGlRichText(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var overlay:Dynamic = cast _Runtime.UNDEFINED;
-    overlay = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(GlRichText._webglTextInputOverlay__glRichText, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : Dynamic)] : Array<Dynamic>)), 'input'), null)), function():Dynamic return cast GlRichText._webglTextInputOverlay__glRichText, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
+    overlay = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(GlRichText._webglTextInputOverlay__glRichText, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([(cast _Runtime.field(renderProxy, 'source') : RichText)] : Array<Dynamic>)), 'input'), null)), function():Dynamic return cast GlRichText._webglTextInputOverlay__glRichText, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
     _Runtime.callValue(drawGlRichTextWithOverlay, cast ([state, renderProxy, overlay] : Array<Dynamic>));
   }
 
-  public static function drawGlRichTextWithOverlay(state:Dynamic, renderProxy:RenderProxy2D, ?overlay:GlRichTextOverlay):Void {
+  public static function drawGlRichTextWithOverlay(state:GlRenderState, renderProxy:RenderProxy2D, ?overlay:GlRichTextOverlay):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var richTextRuntime:Dynamic = cast _Runtime.UNDEFINED;
@@ -75,7 +78,7 @@ class GlRichText {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var offsetX:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(flushGlSpriteBatch, cast ([state] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
+    source = (cast _Runtime.field(renderProxy, 'source') : RichText);
     data = _Runtime.field(source, 'data');
     richTextRuntime = (cast _Runtime.callValue(getRichTextRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime);
     content = _Runtime.callValue(getRichTextContent, cast ([richTextRuntime] : Array<Dynamic>));
@@ -123,7 +126,7 @@ class GlRichText {
 
   public static final defaultGlRichTextRenderer:DisplayObjectRenderer = { createData: createGlRichTextData, destroyData: destroyGlRichTextData, submit: drawGlRichText };
 
-  public static function drawRichTextToCanvas__glRichText(context:Dynamic, source:Dynamic, result:Dynamic, fieldW:Float, fieldH:Float, text:String):Void {
+  public static function drawRichTextToCanvas__glRichText(context:Dynamic, source:RichText, result:Dynamic, fieldW:Float, fieldH:Float, text:String):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var firstVisibleLine:Dynamic = cast _Runtime.UNDEFINED;
     var scrollYOffset:Dynamic = cast _Runtime.UNDEFINED;
@@ -159,12 +162,12 @@ class GlRichText {
     _Runtime.callProperty(context, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  public static function layoutRichText__glRichText(source:Dynamic, richTextRuntime:RichTextRuntime, text:String, formatRanges:Dynamic):Dynamic {
+  public static function layoutRichText__glRichText(source:RichText, richTextRuntime:RichTextRuntime, text:String, formatRanges:Dynamic):Dynamic {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var measure:Dynamic = cast _Runtime.UNDEFINED;
     var result:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
-    measure = function(value:String, format:Dynamic) {
+    measure = function(value:String, format:TextFormat) {
       var context:Dynamic = cast _Runtime.UNDEFINED;
       context = _Runtime.callValue(GlRichText.getOffscreenCanvas__glRichText, cast ([1.0, 1.0] : Array<Dynamic>));
       _Runtime.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));

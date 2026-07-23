@@ -4,13 +4,14 @@ package flighthq.textureatlasFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textureatlas.TextureAtlasRegion.createTextureAtlasRegion;
+import flighthq.types.TextureAtlas;
 import flighthq.xml.XmlParse.parseXmlDocument;
 
 typedef TextureAtlasStarlingParseOptions = { @:optional var imageWidth:Float; @:optional var imageHeight:Float; };
 
 @:expose("flighthq.textureatlasFormats.TextureAtlasStarlingParse")
 class TextureAtlasStarlingParse {
-  public static function parseTextureAtlasStarlingXml(xml:String, atlas:Dynamic, ?_options:TextureAtlasStarlingParseOptions):Dynamic {
+  public static function parseTextureAtlasStarlingXml(xml:String, atlas:TextureAtlas, ?_options:TextureAtlasStarlingParseOptions):TextureAtlas {
     var root:Dynamic = cast _Runtime.UNDEFINED;
     var atlasEl:Dynamic = cast _Runtime.UNDEFINED;
     var id:Dynamic = cast _Runtime.UNDEFINED;

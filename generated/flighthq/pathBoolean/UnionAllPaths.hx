@@ -9,12 +9,13 @@ import flighthq.path.Path.appendPathLineTo;
 import flighthq.path.Path.appendPathMoveTo;
 import flighthq.path.Path.createPath;
 import flighthq.pathBoolean.PathBooleanBackend.getPathBooleanBackend;
+import flighthq.types.Path;
 import flighthq.types.PathBooleanBackend.PathBooleanContour;
 import flighthq.types.PathBooleanOptions;
 
 @:expose("flighthq.pathBoolean.UnionAllPaths")
 class UnionAllPaths {
-  public static function unionAllPaths(paths:Array<Dynamic>, ?out:Dynamic, ?options:PathBooleanOptions):Dynamic {
+  public static function unionAllPaths(paths:Array<Path>, ?out:Path, ?options:PathBooleanOptions):Path {
     var fillRule:Dynamic = cast _Runtime.UNDEFINED;
     var contours:Array<PathBooleanContour> = cast _Runtime.UNDEFINED;
     var result:Dynamic = cast _Runtime.UNDEFINED;

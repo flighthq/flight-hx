@@ -15,7 +15,9 @@ import flighthq.displayobjectCanvas.CanvasTextLabel.defaultCanvasTextLabelRender
 import flighthq.displayobjectCanvas.CanvasTilemap.defaultCanvasTilemapRenderer;
 import flighthq.displayobjectCanvas.CanvasVideo.defaultCanvasVideoRenderer;
 import flighthq.render.Renderer.registerRenderer;
+import flighthq.types.CanvasRenderState;
 import flighthq.types.Entity.Kind;
+import flighthq.types.Renderer;
 import flighthq.types.Types.BitmapKind;
 import flighthq.types.Types.DisplayObjectKind;
 import flighthq.types.Types.ParticleEmitterKind;

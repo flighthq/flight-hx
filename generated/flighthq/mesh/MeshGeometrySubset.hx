@@ -3,11 +3,12 @@ package flighthq.mesh;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshSubset;
 
 @:expose("flighthq.mesh.MeshGeometrySubset")
 class MeshGeometrySubset {
-  public static function addMeshGeometrySubset(geometry:Dynamic, subset:MeshSubset):Void {
+  public static function addMeshGeometrySubset(geometry:MeshGeometry, subset:MeshSubset):Void {
     var next:Array<MeshSubset> = cast _Runtime.UNDEFINED;
     next = cast ([] : Array<Dynamic>);
     {
@@ -21,7 +22,7 @@ class MeshGeometrySubset {
     _Runtime.setField(geometry, 'subsets', next);
   }
 
-  public static function getMeshGeometrySubsetTriangleCount(geometry:Dynamic, subsetIndex:Float):Float {
+  public static function getMeshGeometrySubsetTriangleCount(geometry:MeshGeometry, subsetIndex:Float):Float {
     var indexCount:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(subsetIndex, 0.0, '<'), function():Dynamic return cast _Runtime.compare(subsetIndex, _Runtime.field(_Runtime.field(geometry, 'subsets'), 'length'), '>=')))) { return cast 0.0; }
     indexCount = _Runtime.field(_Runtime.getIndex(_Runtime.field(geometry, 'subsets'), subsetIndex), 'indexCount');
@@ -31,7 +32,7 @@ class MeshGeometrySubset {
     return cast null;
   }
 
-  public static function setMeshGeometrySubsets(geometry:Dynamic, subsets:Array<MeshSubset>):Void {
+  public static function setMeshGeometrySubsets(geometry:MeshGeometry, subsets:Array<MeshSubset>):Void {
     var next:Array<MeshSubset> = cast _Runtime.UNDEFINED;
     next = cast ([] : Array<Dynamic>);
     {

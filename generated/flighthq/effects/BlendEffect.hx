@@ -4,10 +4,11 @@ package flighthq.effects;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.AdvancedBlendMode;
+import flighthq.types.BlendEffect;
 
 @:expose("flighthq.effects.BlendEffect")
 class BlendEffect {
-  public static function createBlendEffect(mode:AdvancedBlendMode, ?options:Dynamic):Dynamic {
+  public static function createBlendEffect(mode:AdvancedBlendMode, ?options:Dynamic):flighthq.types.BlendEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'BlendEffect' }, { mode: mode }, options]);
     return cast null;

@@ -6,11 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectUniformLocation;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
+import flighthq.types.CustomShaderEffect;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderTarget;
 
 @:expose("flighthq.effectsGl.GlCustomShaderEffect")
 class GlCustomShaderEffect {
-  public static function applyCustomShaderEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
+  public static function applyCustomShaderEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CustomShaderEffect):Void {
     var fragmentSource:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
     var uniforms:Dynamic = cast _Runtime.UNDEFINED;
@@ -55,15 +58,15 @@ class GlCustomShaderEffect {
   }
 
   public static final defaultGlCustomShaderEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyCustomShaderEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(applyCustomShaderEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : CustomShaderEffect)] : Array<Dynamic>));
   };
 
-  public static function getGlCustomShaderSource(state:Dynamic, shaderKey:String):Null<String> {
+  public static function getGlCustomShaderSource(state:GlRenderState, shaderKey:String):Null<String> {
     return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(GlCustomShaderEffect._customShaders__glCustomShaderEffect, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([shaderKey] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function registerGlCustomShaderSource(state:Dynamic, shaderKey:String, fragmentSource:String):Void {
+  public static function registerGlCustomShaderSource(state:GlRenderState, shaderKey:String, fragmentSource:String):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = _Runtime.callProperty(GlCustomShaderEffect._customShaders__glCustomShaderEffect, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')))) {

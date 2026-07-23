@@ -8,4 +8,4 @@ import flighthq.types.Entity.Kind;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 
-typedef AnisotropyPbrMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var alphaType:AlphaType; var blendMode:BlendMode; var doubleSided:Bool; var anisotropyMap:Null<Dynamic>; var anisotropyRotation:Float; var anisotropyStrength:Float; var standard:StandardPbrMaterialProperties; };
+typedef AnisotropyPbrMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var alphaType:AlphaType; var blendMode:BlendMode; var doubleSided:Bool; var anisotropyMap:Null<Texture>; var anisotropyRotation:Float; var anisotropyStrength:Float; var standard:StandardPbrMaterialProperties; };

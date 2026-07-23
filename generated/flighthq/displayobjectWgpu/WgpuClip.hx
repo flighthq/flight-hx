@@ -8,16 +8,18 @@ import flighthq.displayobjectWgpu.WgpuClipContours.pushWgpuClipContours;
 import flighthq.displayobjectWgpu.WgpuClipRectangle.popWgpuClipRectangle;
 import flighthq.displayobjectWgpu.WgpuClipRectangle.pushWgpuClipRectangle;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
+import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObjectRenderer.DisplayObjectClipHooks;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.WgpuRenderState;
 
 @:expose("flighthq.displayobjectWgpu.WgpuClip")
 class WgpuClip {
-  public static function enableWgpuClipSupport(state:Dynamic):Void {
+  public static function enableWgpuClipSupport(state:WgpuRenderState):Void {
     _Runtime.setField(state, 'displayObjectClipHooks', WgpuClip.webgpuClipHooks__wgpuClip);
   }
 
-  public static function popOneWgpuClip__wgpuClip(state:Dynamic):Void {
+  public static function popOneWgpuClip__wgpuClip(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var form:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -25,17 +27,17 @@ class WgpuClip {
     if (_Runtime.truthy(_Runtime.strictEquals(form, 'contour'))) { _Runtime.callValue(popWgpuClipContours, cast ([state] : Array<Dynamic>)); } else { _Runtime.callValue(popWgpuClipRectangle, cast ([state] : Array<Dynamic>)); }
   }
 
-  public static final webgpuClipHooks__wgpuClip:DisplayObjectClipHooks = { finalize: function(state:Dynamic) {
+  public static final webgpuClipHooks__wgpuClip:DisplayObjectClipHooks = { finalize: function(state:WgpuRenderState) {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     while (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(runtime, 'clipForms'), 'length'), 0.0, '>'))) { _Runtime.callValue(WgpuClip.popOneWgpuClip__wgpuClip, cast ([state] : Array<Dynamic>)); }
-  }, popClip: function(state:Dynamic, data:RenderProxy2D, source:Dynamic) {
+  }, popClip: function(state:WgpuRenderState, data:RenderProxy2D, source:DisplayObject) {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     target = (_Runtime.field(data, 'clipDepth') - _Runtime.select(!_Runtime.looseEquals(_Runtime.field(source, 'clip'), null), function():Dynamic return cast 1.0, function():Dynamic return cast 0.0));
     while (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(runtime, 'clipForms'), 'length'), target, '>'))) { _Runtime.callValue(WgpuClip.popOneWgpuClip__wgpuClip, cast ([state] : Array<Dynamic>)); }
-  }, pushClip: function(state:Dynamic, data:RenderProxy2D, source:Dynamic) {
+  }, pushClip: function(state:WgpuRenderState, data:RenderProxy2D, source:DisplayObject) {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var clip:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));

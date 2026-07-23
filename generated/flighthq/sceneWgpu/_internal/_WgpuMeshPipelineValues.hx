@@ -18,8 +18,11 @@ import flighthq.sceneWgpu.WgpuMeshUpload.ensureWgpuMeshUpload;
 import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
 import flighthq.texture.Texture.getTextureUvMatrix;
 import flighthq.texture.Texture.hasTextureUvTransform;
+import flighthq.types.Camera;
+import flighthq.types.MeshGeometry;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.Texture;
 import flighthq.types.Texture.TextureLike;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types.Types.SCENE_LIGHT_HEMISPHERE_OFFSET;
@@ -28,6 +31,7 @@ import flighthq.types.Types.SCENE_LIGHT_POINT_OFFSET;
 import flighthq.types.Types.SCENE_LIGHT_POINT_STRIDE;
 import flighthq.types.Types.SCENE_LIGHT_SPOT_OFFSET;
 import flighthq.types.Types.SCENE_LIGHT_SPOT_STRIDE;
+import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._SceneLightBlockValues.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_HEMISPHERE_OFFSET;
 import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_HEMISPHERE_STRIDE;
@@ -38,7 +42,7 @@ import flighthq.types._internal._SceneLightBlockValues.SCENE_LIGHT_SPOT_STRIDE;
 
 @:expose("flighthq.sceneWgpu._internal._WgpuMeshPipelineValues")
 class _WgpuMeshPipelineValues {
-  public static function beginWgpuMeshDraw(state:Dynamic, pipeline:WgpuMeshPipeline):Void {
+  public static function beginWgpuMeshDraw(state:WgpuRenderState, pipeline:WgpuMeshPipeline):Void {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var scene:Dynamic = cast _Runtime.UNDEFINED;
@@ -59,7 +63,7 @@ class _WgpuMeshPipelineValues {
     }
   }
 
-  public static function createWgpuMeshPipeline(state:Dynamic, options:{ var doubleSided:Bool; var format:Dynamic; @:optional var iblBindGroupLayout:Dynamic; var materialBindGroupLayout:Dynamic; var module:Dynamic; @:optional var pbrSampleBindGroupLayout:Dynamic; @:optional var shadowBindGroupLayout:Dynamic; @:optional var topology:Dynamic; }):WgpuMeshPipeline {
+  public static function createWgpuMeshPipeline(state:WgpuRenderState, options:{ var doubleSided:Bool; var format:Dynamic; @:optional var iblBindGroupLayout:Dynamic; var materialBindGroupLayout:Dynamic; var module:Dynamic; @:optional var pbrSampleBindGroupLayout:Dynamic; @:optional var shadowBindGroupLayout:Dynamic; @:optional var topology:Dynamic; }):WgpuMeshPipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var layouts:Dynamic = cast _Runtime.UNDEFINED;
     var bindGroupLayouts:Array<Dynamic> = cast _Runtime.UNDEFINED;
@@ -80,7 +84,7 @@ class _WgpuMeshPipelineValues {
     return cast null;
   }
 
-  public static function drawWgpuMeshSubset(state:Dynamic, proxy:SceneRenderProxy, geometry:Dynamic):Void {
+  public static function drawWgpuMeshSubset(state:WgpuRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry):Void {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var scene:Dynamic = cast _Runtime.UNDEFINED;
@@ -103,7 +107,7 @@ class _WgpuMeshPipelineValues {
     _Runtime.callProperty(pass, 'drawIndexed', cast ([_Runtime.field(subset, 'indexCount'), 1.0, _Runtime.field(subset, 'indexOffset'), 0.0, 0.0] : Array<Dynamic>));
   }
 
-  public static function ensureWgpuFrameBindGroup(state:Dynamic):Dynamic {
+  public static function ensureWgpuFrameBindGroup(state:WgpuRenderState):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'frameBuffer'), null))) {
@@ -116,7 +120,7 @@ class _WgpuMeshPipelineValues {
     return cast null;
   }
 
-  public static function ensureWgpuIblSampleBindGroup(state:Dynamic):Dynamic {
+  public static function ensureWgpuIblSampleBindGroup(state:WgpuRenderState):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var ibl:Dynamic = cast _Runtime.UNDEFINED;
@@ -162,7 +166,7 @@ class _WgpuMeshPipelineValues {
     return cast null;
   }
 
-  public static function ensureWgpuIblSampleLayout(state:Dynamic):Dynamic {
+  public static function ensureWgpuIblSampleLayout(state:WgpuRenderState):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'iblSampleLayout'), null))) {
@@ -172,7 +176,7 @@ class _WgpuMeshPipelineValues {
     return cast null;
   }
 
-  public static function ensureWgpuPbrSampleBindGroup(state:Dynamic):Dynamic {
+  public static function ensureWgpuPbrSampleBindGroup(state:WgpuRenderState):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var shadow:Dynamic = cast _Runtime.UNDEFINED;
@@ -263,7 +267,7 @@ class _WgpuMeshPipelineValues {
     return cast null;
   }
 
-  public static function ensureWgpuPbrSampleLayout(state:Dynamic):Dynamic {
+  public static function ensureWgpuPbrSampleLayout(state:WgpuRenderState):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'pbrSampleLayout'), null))) {
@@ -273,7 +277,7 @@ class _WgpuMeshPipelineValues {
     return cast null;
   }
 
-  public static function ensureWgpuPlaceholderTextureView(state:Dynamic):Dynamic {
+  public static function ensureWgpuPlaceholderTextureView(state:WgpuRenderState):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var view:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
@@ -288,7 +292,7 @@ class _WgpuMeshPipelineValues {
     return cast null;
   }
 
-  public static function ensureWgpuSceneLayouts(state:Dynamic):WgpuSceneLayouts {
+  public static function ensureWgpuSceneLayouts(state:WgpuRenderState):WgpuSceneLayouts {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(scene, 'frameBindGroupLayout'), null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(scene, 'drawBindGroupLayout'), null)))) {
@@ -300,7 +304,7 @@ class _WgpuMeshPipelineValues {
     return cast null;
   }
 
-  public static function ensureWgpuScenePipeline<T>(state:Dynamic, key:String, compile:Dynamic):Dynamic {
+  public static function ensureWgpuScenePipeline<T>(state:WgpuRenderState, key:String, compile:Dynamic):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
@@ -313,7 +317,7 @@ class _WgpuMeshPipelineValues {
     return cast null;
   }
 
-  public static function ensureWgpuShadowSampleBindGroup(state:Dynamic):Dynamic {
+  public static function ensureWgpuShadowSampleBindGroup(state:WgpuRenderState):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var shadow:Dynamic = cast _Runtime.UNDEFINED;
@@ -370,7 +374,7 @@ class _WgpuMeshPipelineValues {
     return cast null;
   }
 
-  public static function ensureWgpuShadowSampleLayout(state:Dynamic):Dynamic {
+  public static function ensureWgpuShadowSampleLayout(state:WgpuRenderState):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(scene, 'shadowSampleLayout'), null))) {
@@ -380,7 +384,7 @@ class _WgpuMeshPipelineValues {
     return cast null;
   }
 
-  public static function getWgpuMaterialSampler(state:Dynamic, texture:Null<Dynamic>):Dynamic {
+  public static function getWgpuMaterialSampler(state:WgpuRenderState, texture:Null<Texture>):Dynamic {
     var sampler:Dynamic = cast _Runtime.UNDEFINED;
     var filter:Dynamic = cast _Runtime.UNDEFINED;
     var useMips:Dynamic = cast _Runtime.UNDEFINED;
@@ -394,12 +398,12 @@ class _WgpuMeshPipelineValues {
     return cast null;
   }
 
-  public static function isWgpuTextureReady(texture:Null<Dynamic>):Bool {
+  public static function isWgpuTextureReady(texture:Null<Texture>):Bool {
     return cast _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(texture, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(texture, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(texture, 'image')] : Array<Dynamic>)));
     return cast null;
   }
 
-  public static function resolveWgpuMaterialTextureView(state:Dynamic, texture:Null<Dynamic>):Dynamic {
+  public static function resolveWgpuMaterialTextureView(state:WgpuRenderState, texture:Null<Texture>):Dynamic {
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(texture, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(texture, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(texture, 'image')] : Array<Dynamic>))))) {
       return cast _Runtime.field(_Runtime.callValue(bindWgpuImageResourceTexture, cast ([state, _Runtime.field(texture, 'image'), _Runtime.field(_Runtime.field(texture, 'sampler'), 'mipmaps')] : Array<Dynamic>)), 'view');
     }
@@ -407,7 +411,7 @@ class _WgpuMeshPipelineValues {
     return cast null;
   }
 
-  public static function stashWgpuUvTransform(state:Dynamic, texture:Null<TextureLike>):Void {
+  public static function stashWgpuUvTransform(state:WgpuRenderState, texture:Null<TextureLike>):Void {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     var m:Dynamic = cast _Runtime.UNDEFINED;
     out = _Runtime.field(_Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>)), 'pendingUvTransform');
@@ -426,7 +430,7 @@ class _WgpuMeshPipelineValues {
     }
   }
 
-  public static function writeWgpuDrawUniform(state:Dynamic, proxy:SceneRenderProxy):Dynamic {
+  public static function writeWgpuDrawUniform(state:WgpuRenderState, proxy:SceneRenderProxy):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var offset:Dynamic = cast _Runtime.UNDEFINED;
@@ -483,7 +487,7 @@ class _WgpuMeshPipelineValues {
     return cast null;
   }
 
-  public static function writeWgpuFrameUniform(state:Dynamic, camera:Dynamic, lights:SceneLightBlock):Void {
+  public static function writeWgpuFrameUniform(state:WgpuRenderState, camera:Camera, lights:SceneLightBlock):Void {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var f:Dynamic = cast _Runtime.UNDEFINED;
     var aspect:Dynamic = cast _Runtime.UNDEFINED;

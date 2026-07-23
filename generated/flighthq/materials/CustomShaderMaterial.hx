@@ -4,14 +4,15 @@ package flighthq.materials;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.materials.SurfaceMaterial.createSurfaceMaterial;
+import flighthq.types.CustomShaderMaterial;
 import flighthq.types.Types.CustomShaderMaterialKind;
 import flighthq.types._internal._CustomShaderMaterialValues.CustomShaderMaterialKind;
 
 @:expose("flighthq.materials.CustomShaderMaterial")
 class CustomShaderMaterial {
-  public static function createCustomShaderMaterial(?opts:Dynamic):Dynamic {
+  public static function createCustomShaderMaterial(?opts:Dynamic):flighthq.types.CustomShaderMaterial {
     var material:Dynamic = cast _Runtime.UNDEFINED;
-    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([CustomShaderMaterialKind] : Array<Dynamic>)) : Dynamic);
+    material = (cast _Runtime.callValue(createSurfaceMaterial, cast ([CustomShaderMaterialKind] : Array<Dynamic>)) : flighthq.types.CustomShaderMaterial);
     _Runtime.setField(material, 'shaderKey', _Runtime.coalesce(_Runtime.optionalField(opts, 'shaderKey'), function():Dynamic return cast ''));
     _Runtime.setField(material, 'textures', _Runtime.coalesce(_Runtime.optionalField(opts, 'textures'), function():Dynamic return cast null));
     _Runtime.setField(material, 'uniforms', _Runtime.coalesce(_Runtime.optionalField(opts, 'uniforms'), function():Dynamic return cast null));

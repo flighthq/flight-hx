@@ -14,8 +14,12 @@ import flighthq.sceneGl._internal._GlMeshProgramValues.drawGlMeshSubset;
 import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshCameraPosition;
 import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.types.Camera;
 import flighthq.types.GlMeshMaterialRenderer;
+import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
+import flighthq.types.Material;
+import flighthq.types.MeshGeometry;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.SpecularPbrMaterial;
@@ -24,7 +28,7 @@ import flighthq.types._internal._SpecularPbrMaterialValues.SpecularPbrMaterialKi
 
 @:expose("flighthq.sceneGl.SpecularPbrGlMeshMaterialRenderer")
 class SpecularPbrGlMeshMaterialRenderer {
-  public static final specularPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:Dynamic, material:Null<Dynamic>, lights:SceneLightBlock, camera:Dynamic) {
+  public static final specularPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var specular:Dynamic = cast _Runtime.UNDEFINED;
     var standard:Dynamic = cast _Runtime.UNDEFINED;
@@ -50,14 +54,14 @@ class SpecularPbrGlMeshMaterialRenderer {
       _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locSpecular'), 1.0] : Array<Dynamic>));
       _Runtime.callProperty(gl, 'uniform3f', cast ([_Runtime.field(program, 'locSpecularColor'), 1.0, 1.0, 1.0] : Array<Dynamic>));
     }
-  }, draw: function(state:Dynamic, proxy:SceneRenderProxy, geometry:Dynamic) {
+  }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
     if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 
-  public static function registerSpecularPbrGlMaterial(state:Dynamic):Void {
+  public static function registerSpecularPbrGlMaterial(state:GlRenderState):Void {
     _Runtime.callValue(registerGlMeshMaterialRenderer, cast ([state, SpecularPbrMaterialKind, specularPbrGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 

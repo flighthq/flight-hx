@@ -5,11 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.SurfaceCompositeMode;
+import flighthq.types.SurfaceRegion;
 import flighthq.types._internal._SurfaceCompositeModeValues.SurfaceCompositeModeValue;
 
 @:expose("flighthq.surface.SurfaceComposite")
 class SurfaceComposite {
-  public static function compositeSurfacePixels(dest:Dynamic, pixels:Dynamic, ?mode:SurfaceCompositeMode):Void {
+  public static function compositeSurfacePixels(dest:SurfaceRegion, pixels:Dynamic, ?mode:SurfaceCompositeMode):Void {
     if (mode == null) mode = cast (SurfaceCompositeModeValue.Normal : Dynamic);
     {
       var py:Dynamic = 0.0;
@@ -32,7 +33,7 @@ class SurfaceComposite {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function compositeSurfaceRegion(dest:Dynamic, source:Dynamic, ?mode:SurfaceCompositeMode):Void {
+  public static function compositeSurfaceRegion(dest:SurfaceRegion, source:SurfaceRegion, ?mode:SurfaceCompositeMode):Void {
     if (mode == null) mode = cast (SurfaceCompositeModeValue.Normal : Dynamic);
     var sw:Dynamic = cast _Runtime.UNDEFINED;
     var sh:Dynamic = cast _Runtime.UNDEFINED;
@@ -61,7 +62,7 @@ class SurfaceComposite {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function extractSurfacePixels(out:Dynamic, source:Dynamic):Void {
+  public static function extractSurfacePixels(out:Dynamic, source:SurfaceRegion):Void {
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(source, 'height'), '<'))) {
@@ -86,7 +87,7 @@ class SurfaceComposite {
     }
   }
 
-  public static function extractSurfacePixels32(out:Dynamic, source:Dynamic):Void {
+  public static function extractSurfacePixels32(out:Dynamic, source:SurfaceRegion):Void {
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(source, 'height'), '<'))) {
@@ -107,7 +108,7 @@ class SurfaceComposite {
     }
   }
 
-  public static function writeSurfacePixels(dest:Dynamic, pixels:Dynamic):Void {
+  public static function writeSurfacePixels(dest:SurfaceRegion, pixels:Dynamic):Void {
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(dest, 'height'), '<'))) {
@@ -133,7 +134,7 @@ class SurfaceComposite {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function writeSurfacePixels32(dest:Dynamic, pixels:Dynamic):Void {
+  public static function writeSurfacePixels32(dest:SurfaceRegion, pixels:Dynamic):Void {
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(dest, 'height'), '<'))) {

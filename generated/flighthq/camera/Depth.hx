@@ -3,10 +3,11 @@ package flighthq.camera;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Camera;
 
 @:expose("flighthq.camera.Depth")
 class Depth {
-  public static function getCameraLinearDepth(camera:Dynamic, ndcZ:Float):Float {
+  public static function getCameraLinearDepth(camera:Camera, ndcZ:Float):Float {
     var near:Dynamic = cast _Runtime.UNDEFINED;
     var far:Dynamic = cast _Runtime.UNDEFINED;
     var range:Dynamic = cast _Runtime.UNDEFINED;
@@ -25,7 +26,7 @@ class Depth {
     return cast null;
   }
 
-  public static function getCameraViewSpaceZ(camera:Dynamic, ndcZ:Float):Float {
+  public static function getCameraViewSpaceZ(camera:Camera, ndcZ:Float):Float {
     return cast -_Runtime.callValue(getCameraLinearDepth, cast ([camera, ndcZ] : Array<Dynamic>));
     return cast null;
   }

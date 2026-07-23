@@ -9,8 +9,8 @@ import flighthq.types.Node.NodeRuntime;
 import flighthq.types.SceneNode.SceneNodeRuntime;
 import flighthq.types.SceneNode.SceneNodeTraits;
 
-typedef LodLevel = { var mesh:Dynamic; var minDistance:Float; };
+typedef LodLevel = { var mesh:Mesh; var minDistance:Float; };
 
-typedef LodMesh = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<SceneNodeTraits>>; var alpha:Float; var visible:Bool; var position:Dynamic; var rotation:Dynamic; var scale:Dynamic; var activeLevelIndex:Float; var levels:Array<LodLevel>; };
+typedef LodMesh = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<SceneNodeTraits>>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; var activeLevelIndex:Float; var levels:Array<LodLevel>; };
 
 typedef LodMeshRuntime = SceneNodeRuntime;

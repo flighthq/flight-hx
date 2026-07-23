@@ -5,18 +5,19 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Runtime.createEntityRuntime;
 import flighthq.entity.Runtime.getEntityRuntime;
+import flighthq.types.Entity;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 @:expose("flighthq.entity.Binding")
 class Binding {
-  public static function attachEntityBinding(entity:Dynamic, binding:Dynamic):Void {
+  public static function attachEntityBinding(entity:Entity, binding:Dynamic):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.getIndex(entity, EntityRuntimeKey), _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.setIndex(entity, EntityRuntimeKey, _Runtime.callValue(createEntityRuntime, cast ([] : Array<Dynamic>)));
     }
     _Runtime.setField(_Runtime.getIndex(entity, EntityRuntimeKey), 'binding', binding);
   }
 
-  public static function getEntityBinding(source:Dynamic):Null<Dynamic> {
+  public static function getEntityBinding(source:Entity):Null<Dynamic> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getEntityRuntime, cast ([source] : Array<Dynamic>));
     return cast _Runtime.coalesce(_Runtime.optionalField(runtime, 'binding'), function():Dynamic return cast null);

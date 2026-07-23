@@ -4,5 +4,7 @@ package flighthq.sceneGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneGl.GlMeshUpload.ensureGlMeshUpload;
+import flighthq.types.GlRenderState;
+import flighthq.types.MeshGeometry;
 
 typedef GlWireframeUpload = { var indexType:Float; var lineIndexBuffer:Dynamic; var vao:Dynamic; var version:Float; };

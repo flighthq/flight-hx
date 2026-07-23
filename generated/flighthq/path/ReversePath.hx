@@ -4,6 +4,7 @@ package flighthq.path;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.ForEachPathSegment.forEachPathSegment;
+import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
@@ -13,7 +14,7 @@ typedef SubpathPoint__reversePath = Dynamic;
 
 @:expose("flighthq.path.ReversePath")
 class ReversePath {
-  public static function reversePath(source:Dynamic, out:Dynamic):Void {
+  public static function reversePath(source:Path, out:Path):Void {
     var subpaths:Dynamic = cast _Runtime.UNDEFINED;
     subpaths = _Runtime.callValue(ReversePath.decodeSubpaths__reversePath, cast ([source] : Array<Dynamic>));
     _Runtime.setLength(_Runtime.field(out, 'commands'), 0.0);
@@ -24,7 +25,7 @@ class ReversePath {
     }
   }
 
-  public static function decodeSubpaths__reversePath(path:Dynamic):Array<Subpath__reversePath> {
+  public static function decodeSubpaths__reversePath(path:Path):Array<Subpath__reversePath> {
     var subpaths:Array<Subpath__reversePath> = cast _Runtime.UNDEFINED;
     var current:Null<Subpath__reversePath> = cast _Runtime.UNDEFINED;
     var ensureCurrent:Dynamic = cast _Runtime.UNDEFINED;
@@ -55,7 +56,7 @@ class ReversePath {
     return cast null;
   }
 
-  public static function encodeReversedSubpath__reversePath(subpath:Subpath__reversePath, out:Dynamic):Void {
+  public static function encodeReversedSubpath__reversePath(subpath:Subpath__reversePath, out:Path):Void {
     var pts:Dynamic = cast _Runtime.UNDEFINED;
     var last:Dynamic = cast _Runtime.UNDEFINED;
     pts = _Runtime.field(subpath, 'points');

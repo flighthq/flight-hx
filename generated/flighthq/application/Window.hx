@@ -11,6 +11,8 @@ import flighthq.types.ApplicationWindow;
 import flighthq.types.ApplicationWindow.WindowBackend;
 import flighthq.types.ApplicationWindow.WindowBounds;
 import flighthq.types.ApplicationWindow.WindowOptions;
+import flighthq.types.Matrix;
+import flighthq.types.RenderState;
 
 @:expose("flighthq.application.Window")
 class Window {
@@ -155,7 +157,7 @@ class Window {
     }] : Array<Dynamic>));
   }
 
-  public static function attachWindowRenderState(win:ApplicationWindow, state:Dynamic, canvas:Dynamic):Void {
+  public static function attachWindowRenderState(win:ApplicationWindow, state:RenderState, canvas:Dynamic):Void {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     var apply:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Window.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
@@ -215,7 +217,7 @@ class Window {
     return cast null;
   }
 
-  public static function computeWindowDeviceTransform(win:ApplicationWindow, out:Dynamic):Dynamic {
+  public static function computeWindowDeviceTransform(win:ApplicationWindow, out:Matrix):Matrix {
     var scale:Dynamic = cast _Runtime.UNDEFINED;
     scale = _Runtime.field(win, 'devicePixelRatio');
     _Runtime.setField(out, 'a', scale);

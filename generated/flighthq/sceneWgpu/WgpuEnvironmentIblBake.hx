@@ -6,6 +6,8 @@ import flighthq._internal._Runtime;
 import flighthq.sceneWgpu.WgpuEnvironmentCube.ensureWgpuEnvironmentSourceCube;
 import flighthq.sceneWgpu.WgpuSceneRuntime.WgpuSceneIbl;
 import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
+import flighthq.types.Environment;
+import flighthq.types.WgpuRenderState;
 
 typedef WgpuBakedCube__wgpuEnvironmentIblBake = { var texture:Dynamic; var view:Dynamic; };
 
@@ -13,7 +15,7 @@ typedef WgpuBakePrograms__wgpuEnvironmentIblBake = { var brdfPipeline:Dynamic; v
 
 @:expose("flighthq.sceneWgpu.WgpuEnvironmentIblBake")
 class WgpuEnvironmentIblBake {
-  public static function bakeWgpuEnvironmentIbl(state:Dynamic, environment:Dynamic):Void {
+  public static function bakeWgpuEnvironmentIbl(state:WgpuRenderState, environment:Environment):Void {
     var sourceCubeView:Dynamic = cast _Runtime.UNDEFINED;
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var programs:Dynamic = cast _Runtime.UNDEFINED;
@@ -36,7 +38,7 @@ class WgpuEnvironmentIblBake {
     _Runtime.setField(scene, 'ibl', ibl);
   }
 
-  public static function destroyWgpuSceneIbl(state:Dynamic):Void {
+  public static function destroyWgpuSceneIbl(state:WgpuRenderState):Void {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(scene, 'ibl'), null))) {
@@ -73,7 +75,7 @@ class WgpuEnvironmentIblBake {
     _Runtime.callProperty(WgpuEnvironmentIblBake._bakePrograms__wgpuEnvironmentIblBake, 'delete', cast ([state] : Array<Dynamic>));
   }
 
-  public static function bakeWgpuIrradiance__wgpuEnvironmentIblBake(state:Dynamic, programs:WgpuBakePrograms__wgpuEnvironmentIblBake, sourceBindGroup:Dynamic):WgpuBakedCube__wgpuEnvironmentIblBake {
+  public static function bakeWgpuIrradiance__wgpuEnvironmentIblBake(state:WgpuRenderState, programs:WgpuBakePrograms__wgpuEnvironmentIblBake, sourceBindGroup:Dynamic):WgpuBakedCube__wgpuEnvironmentIblBake {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     texture = _Runtime.callValue(WgpuEnvironmentIblBake.createWgpuBakeCube__wgpuEnvironmentIblBake, cast ([state, WgpuEnvironmentIblBake.IRRADIANCE_SIZE__wgpuEnvironmentIblBake, 1.0] : Array<Dynamic>));
     _Runtime.callValue(WgpuEnvironmentIblBake.renderWgpuBakeCubeFaces__wgpuEnvironmentIblBake, cast ([state, _Runtime.field(programs, 'irradiancePipeline'), programs, texture, WgpuEnvironmentIblBake.IRRADIANCE_SIZE__wgpuEnvironmentIblBake, 0.0, 0.0, sourceBindGroup] : Array<Dynamic>));
@@ -81,7 +83,7 @@ class WgpuEnvironmentIblBake {
     return cast null;
   }
 
-  public static function bakeWgpuPrefiltered__wgpuEnvironmentIblBake(state:Dynamic, programs:WgpuBakePrograms__wgpuEnvironmentIblBake, sourceBindGroup:Dynamic):WgpuBakedCube__wgpuEnvironmentIblBake {
+  public static function bakeWgpuPrefiltered__wgpuEnvironmentIblBake(state:WgpuRenderState, programs:WgpuBakePrograms__wgpuEnvironmentIblBake, sourceBindGroup:Dynamic):WgpuBakedCube__wgpuEnvironmentIblBake {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     texture = _Runtime.callValue(WgpuEnvironmentIblBake.createWgpuBakeCube__wgpuEnvironmentIblBake, cast ([state, WgpuEnvironmentIblBake.PREFILTERED_SIZE__wgpuEnvironmentIblBake, WgpuEnvironmentIblBake.PREFILTERED_MIPS__wgpuEnvironmentIblBake] : Array<Dynamic>));
     {
@@ -97,7 +99,7 @@ class WgpuEnvironmentIblBake {
     return cast null;
   }
 
-  public static function bakeWgpuBrdfLut__wgpuEnvironmentIblBake(state:Dynamic, programs:WgpuBakePrograms__wgpuEnvironmentIblBake):Dynamic {
+  public static function bakeWgpuBrdfLut__wgpuEnvironmentIblBake(state:WgpuRenderState, programs:WgpuBakePrograms__wgpuEnvironmentIblBake):Dynamic {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var encoder:Dynamic = cast _Runtime.UNDEFINED;
@@ -114,7 +116,7 @@ class WgpuEnvironmentIblBake {
     return cast null;
   }
 
-  public static function renderWgpuBakeCubeFaces__wgpuEnvironmentIblBake(state:Dynamic, pipeline:Dynamic, programs:WgpuBakePrograms__wgpuEnvironmentIblBake, cube:Dynamic, size:Float, mipLevel:Float, roughness:Float, sourceBindGroup:Dynamic):Void {
+  public static function renderWgpuBakeCubeFaces__wgpuEnvironmentIblBake(state:WgpuRenderState, pipeline:Dynamic, programs:WgpuBakePrograms__wgpuEnvironmentIblBake, cube:Dynamic, size:Float, mipLevel:Float, roughness:Float, sourceBindGroup:Dynamic):Void {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     device = _Runtime.field(state, 'device');
     {
@@ -154,12 +156,12 @@ class WgpuEnvironmentIblBake {
     }
   }
 
-  public static function createWgpuBakeCube__wgpuEnvironmentIblBake(state:Dynamic, size:Float, mips:Float):Dynamic {
+  public static function createWgpuBakeCube__wgpuEnvironmentIblBake(state:WgpuRenderState, size:Float, mips:Float):Dynamic {
     return cast _Runtime.callProperty(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([size, size, 6.0] : Array<Dynamic>), format: WgpuEnvironmentIblBake.IBL_BAKE_FORMAT__wgpuEnvironmentIblBake, mipLevelCount: mips, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'RENDER_ATTACHMENT')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuBakePrograms__wgpuEnvironmentIblBake(state:Dynamic):WgpuBakePrograms__wgpuEnvironmentIblBake {
+  public static function ensureWgpuBakePrograms__wgpuEnvironmentIblBake(state:WgpuRenderState):WgpuBakePrograms__wgpuEnvironmentIblBake {
     var programs:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var uniformBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;

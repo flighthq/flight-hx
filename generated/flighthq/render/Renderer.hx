@@ -5,28 +5,30 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.Entity.Kind;
+import flighthq.types.RenderState;
 import flighthq.types.Renderable;
+import flighthq.types.Renderer;
 import flighthq.types.RendererData;
 
 @:expose("flighthq.render.Renderer")
 class Renderer {
-  public static function copyAllRenderersFromRenderState(target:Dynamic, source:Dynamic):Void {
+  public static function copyAllRenderersFromRenderState(target:RenderState, source:RenderState):Void {
     _Runtime.callValue(copyRenderersFromRenderState, cast ([target, source] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(source, 'displayObjectClipHooks'), null))) { _Runtime.setField(target, 'displayObjectClipHooks', _Runtime.field(source, 'displayObjectClipHooks')); }
   }
 
-  public static function copyRenderersFromRenderState(target:Dynamic, source:Dynamic):Void {
+  public static function copyRenderersFromRenderState(target:RenderState, source:RenderState):Void {
     _Runtime.callProperty(_Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([source] : Array<Dynamic>)), 'rendererMap'), 'forEach', cast ([function(renderer:Dynamic, kind:Dynamic) {
       _Runtime.callValue(registerRenderer, cast ([target, kind, renderer] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 
-  public static function noopRendererData(_state:Dynamic, _source:Renderable):Null<RendererData> {
+  public static function noopRendererData(_state:RenderState, _source:Renderable):Null<RendererData> {
     return cast null;
     return cast null;
   }
 
-  public static function registerRenderer(state:Dynamic, kind:Kind, renderer:Dynamic):Void {
+  public static function registerRenderer(state:RenderState, kind:Kind, renderer:flighthq.types.Renderer):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(runtime, 'rendererMap'), 'get', cast ([kind] : Array<Dynamic>)), renderer))) { return; }

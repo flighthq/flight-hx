@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 
-typedef Environment = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; var environment:Null<Dynamic>; var intensity:Float; };
+typedef Environment = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; var environment:Null<CubeTexture>; var intensity:Float; };

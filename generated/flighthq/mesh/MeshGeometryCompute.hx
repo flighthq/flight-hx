@@ -5,10 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.MeshGeometry;
 
 @:expose("flighthq.mesh.MeshGeometryCompute")
 class MeshGeometryCompute {
-  public static function computeMeshGeometryBoundingSphere(out:BoundingSphereLike, geometry:Dynamic):Void {
+  public static function computeMeshGeometryBoundingSphere(out:BoundingSphereLike, geometry:MeshGeometry):Void {
     var vertices:Dynamic = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -76,7 +77,7 @@ class MeshGeometryCompute {
     _Runtime.setField(out, 'radius', _Runtime.callProperty(HxMath, 'sqrt', cast ([radiusSq] : Array<Dynamic>)));
   }
 
-  public static function computeMeshGeometryBounds(out:AabbLike, geometry:Dynamic):Void {
+  public static function computeMeshGeometryBounds(out:AabbLike, geometry:MeshGeometry):Void {
     var vertices:Dynamic = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -119,7 +120,7 @@ class MeshGeometryCompute {
     _Runtime.setField(_Runtime.field(out, 'max'), 'z', maxZ);
   }
 
-  public static function computeMeshGeometryFlatNormals(out:Dynamic, geometry:Dynamic):Void {
+  public static function computeMeshGeometryFlatNormals(out:MeshGeometry, geometry:MeshGeometry):Void {
     var srcVerts:Dynamic = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var indices:Dynamic = cast _Runtime.UNDEFINED;
@@ -181,7 +182,7 @@ class MeshGeometryCompute {
     _Runtime.incrementField(out, 'version', 1, true);
   }
 
-  public static function computeMeshGeometryNormals(out:Dynamic, geometry:Dynamic):Void {
+  public static function computeMeshGeometryNormals(out:MeshGeometry, geometry:MeshGeometry):Void {
     var vertices:Dynamic = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -247,7 +248,7 @@ class MeshGeometryCompute {
     }
   }
 
-  public static function computeMeshGeometryTangents(out:Dynamic, geometry:Dynamic):Void {
+  public static function computeMeshGeometryTangents(out:MeshGeometry, geometry:MeshGeometry):Void {
     var vertices:Dynamic = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;

@@ -5,18 +5,22 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmaptext.BitmapText as Facade_Bitmaptext_flighthq_bitmaptext_BitmapText;
 import flighthq.bitmaptext.UpdateBitmapText as Facade_Bitmaptext_flighthq_bitmaptext_UpdateBitmapText;
+import flighthq.types.BitmapText;
 import flighthq.types.BitmapText.BitmapTextAlign;
 import flighthq.types.BitmapText.BitmapTextData;
 import flighthq.types.BitmapText.BitmapTextOptions;
 import flighthq.types.BitmapText.BitmapTextRuntime;
+import flighthq.types.GlyphSource;
+import flighthq.types.QuadBatch;
+import flighthq.types.Rectangle;
 
 @:expose("flighthq.bitmaptext.Bitmaptext")
 class Bitmaptext {
-  public static function computeBitmapTextLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
+  public static function computeBitmapTextLocalBoundsRectangle(out:Rectangle, source:BitmapText):Void {
     _Runtime.callValue(Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.computeBitmapTextLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function createBitmapText(glyphSource:Null<Dynamic>, ?options:BitmapTextOptions):Dynamic {
+  public static function createBitmapText(glyphSource:Null<GlyphSource>, ?options:BitmapTextOptions):BitmapText {
     return cast _Runtime.callValue(Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.createBitmapText, cast ([glyphSource, options] : Array<Dynamic>));
     return cast null;
   }
@@ -31,49 +35,49 @@ class Bitmaptext {
     return cast null;
   }
 
-  public static function getBitmapTextBounds(source:Dynamic):Dynamic {
+  public static function getBitmapTextBounds(source:BitmapText):Rectangle {
     return cast _Runtime.callValue(Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.getBitmapTextBounds, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBitmapTextQuadBatches(source:Dynamic):Array<Dynamic> {
+  public static function getBitmapTextQuadBatches(source:BitmapText):Array<QuadBatch> {
     return cast _Runtime.callValue(Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.getBitmapTextQuadBatches, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function reserveBitmapText(target:Dynamic, glyphCapacity:Float):Void {
+  public static function reserveBitmapText(target:BitmapText, glyphCapacity:Float):Void {
     _Runtime.callValue(Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.reserveBitmapText, cast ([target, glyphCapacity] : Array<Dynamic>));
   }
 
-  public static function setBitmapTextAlign(target:Dynamic, align:BitmapTextAlign):Void {
+  public static function setBitmapTextAlign(target:BitmapText, align:BitmapTextAlign):Void {
     _Runtime.callValue(Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.setBitmapTextAlign, cast ([target, align] : Array<Dynamic>));
   }
 
-  public static function setBitmapTextColor(target:Dynamic, color:Float):Void {
+  public static function setBitmapTextColor(target:BitmapText, color:Float):Void {
     _Runtime.callValue(Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.setBitmapTextColor, cast ([target, color] : Array<Dynamic>));
   }
 
-  public static function setBitmapTextGlyphSource(target:Dynamic, glyphSource:Null<Dynamic>):Void {
+  public static function setBitmapTextGlyphSource(target:BitmapText, glyphSource:Null<GlyphSource>):Void {
     _Runtime.callValue(Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.setBitmapTextGlyphSource, cast ([target, glyphSource] : Array<Dynamic>));
   }
 
-  public static function setBitmapTextLetterSpacing(target:Dynamic, letterSpacing:Float):Void {
+  public static function setBitmapTextLetterSpacing(target:BitmapText, letterSpacing:Float):Void {
     _Runtime.callValue(Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.setBitmapTextLetterSpacing, cast ([target, letterSpacing] : Array<Dynamic>));
   }
 
-  public static function setBitmapTextLineHeight(target:Dynamic, lineHeight:Float):Void {
+  public static function setBitmapTextLineHeight(target:BitmapText, lineHeight:Float):Void {
     _Runtime.callValue(Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.setBitmapTextLineHeight, cast ([target, lineHeight] : Array<Dynamic>));
   }
 
-  public static function setBitmapTextText(target:Dynamic, text:String):Void {
+  public static function setBitmapTextText(target:BitmapText, text:String):Void {
     _Runtime.callValue(Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.setBitmapTextText, cast ([target, text] : Array<Dynamic>));
   }
 
-  public static function setBitmapTextWrapWidth(target:Dynamic, wrapWidth:Null<Float>):Void {
+  public static function setBitmapTextWrapWidth(target:BitmapText, wrapWidth:Null<Float>):Void {
     _Runtime.callValue(Facade_Bitmaptext_flighthq_bitmaptext_BitmapText.setBitmapTextWrapWidth, cast ([target, wrapWidth] : Array<Dynamic>));
   }
 
-  public static function updateBitmapText(bitmapText:Dynamic):Void {
+  public static function updateBitmapText(bitmapText:BitmapText):Void {
     _Runtime.callValue(Facade_Bitmaptext_flighthq_bitmaptext_UpdateBitmapText.updateBitmapText, cast ([bitmapText] : Array<Dynamic>));
   }
 }

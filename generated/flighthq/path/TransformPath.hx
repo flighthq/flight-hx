@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.CopyPath.copyPath;
 import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
 @:expose("flighthq.path.TransformPath")
 class TransformPath {
-  public static function transformPath(source:Dynamic, matrix:MatrixLike, out:Dynamic):Void {
+  public static function transformPath(source:Path, matrix:MatrixLike, out:Path):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
@@ -78,7 +79,7 @@ class TransformPath {
     }
   }
 
-  public static function translatePath(source:Dynamic, dx:Float, dy:Float, out:Dynamic):Void {
+  public static function translatePath(source:Path, dx:Float, dy:Float, out:Path):Void {
     _Runtime.callValue(transformPath, cast ([source, { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: dx, ty: dy }, out] : Array<Dynamic>));
   }
 }

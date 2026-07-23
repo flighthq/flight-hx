@@ -3,10 +3,11 @@ package flighthq.displayobjectDom;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Matrix;
 
 @:expose("flighthq.displayobjectDom.DomTransform")
 class DomTransform {
-  public static function setDomTransform(element:Dynamic, transform:Dynamic, roundPixels:Bool):Void {
+  public static function setDomTransform(element:Dynamic, transform:Matrix, roundPixels:Bool):Void {
     var tx:Dynamic = cast _Runtime.UNDEFINED;
     var ty:Dynamic = cast _Runtime.UNDEFINED;
     tx = _Runtime.select(roundPixels, function():Dynamic return cast _Runtime.callProperty(HxMath, 'fround', cast ([_Runtime.field(transform, 'tx')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(transform, 'tx'));
@@ -14,7 +15,7 @@ class DomTransform {
     _Runtime.setField(_Runtime.field(element, 'style'), 'transform', 'matrix(' + Std.string(_Runtime.field(transform, 'a')) + ',' + Std.string(_Runtime.field(transform, 'b')) + ',' + Std.string(_Runtime.field(transform, 'c')) + ',' + Std.string(_Runtime.field(transform, 'd')) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
   }
 
-  public static function setDomTransformWithOffset(element:Dynamic, transform:Dynamic, offsetX:Float, offsetY:Float, roundPixels:Bool):Void {
+  public static function setDomTransformWithOffset(element:Dynamic, transform:Matrix, offsetX:Float, offsetY:Float, roundPixels:Bool):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;

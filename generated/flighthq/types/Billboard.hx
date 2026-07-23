@@ -11,6 +11,6 @@ import flighthq.types.SceneNode.SceneNodeTraits;
 
 typedef BillboardMode = String;
 
-typedef Billboard = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<SceneNodeTraits>>; var alpha:Float; var visible:Bool; var position:Dynamic; var rotation:Dynamic; var scale:Dynamic; var geometry:Dynamic; var materials:Array<Null<Dynamic>>; var mode:BillboardMode; };
+typedef Billboard = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<SceneNodeTraits>>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; var geometry:MeshGeometry; var materials:Array<Null<Material>>; var mode:BillboardMode; };
 
 typedef BillboardRuntime = SceneNodeRuntime;

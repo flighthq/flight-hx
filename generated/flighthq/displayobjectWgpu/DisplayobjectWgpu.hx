@@ -35,28 +35,40 @@ import flighthq.displayobjectWgpu.WgpuVelocity as Facade_DisplayobjectWgpu_fligh
 import flighthq.displayobjectWgpu.WgpuVideo as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuVideo;
 import flighthq.displayobjectWgpu._internal._WgpuShapeMeshValues as Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu__internal__WgpuShapeMeshValues;
 import flighthq.types.BlendMode;
+import flighthq.types.ColorTransform;
+import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.Entity.Kind;
 import flighthq.types.HasTransform2D.Transform2DNode;
+import flighthq.types.ImageResource;
+import flighthq.types.Material;
 import flighthq.types.Material.MaterialData;
+import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RenderCache;
 import flighthq.types.RenderCacheRefreshOptions;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
+import flighthq.types.RichText;
 import flighthq.types.Scale9Mapper;
 import flighthq.types.ShapeCommand.PathWinding;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.Velocity.VelocityField;
 import flighthq.types.WgpuMaterialRenderer;
+import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuShapeMeshBuffers;
+import flighthq.types.WgpuRenderStats;
+import flighthq.types.WgpuRenderTarget;
 import flighthq.types.WgpuVelocityWriter;
 import flighthq.types.WgpuVelocityWriter.WgpuVelocityContext;
 
 @:expose("flighthq.displayobjectWgpu.DisplayobjectWgpu")
 class DisplayobjectWgpu {
-  public static function areWgpuColorAdjustmentGuardsEnabled(state:Dynamic):Bool {
+  public static function areWgpuColorAdjustmentGuardsEnabled(state:WgpuRenderState):Bool {
     return cast _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_EnableWgpuColorAdjustmentGuards.areWgpuColorAdjustmentGuardsEnabled, cast ([state] : Array<Dynamic>));
     return cast null;
   }
@@ -66,7 +78,7 @@ class DisplayobjectWgpu {
     return cast null;
   }
 
-  public static function createWgpuCacheState(screenState:Dynamic):Dynamic {
+  public static function createWgpuCacheState(screenState:WgpuRenderState):WgpuRenderState {
     return cast _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuCache.createWgpuCacheState, cast ([screenState] : Array<Dynamic>));
     return cast null;
   }
@@ -76,22 +88,22 @@ class DisplayobjectWgpu {
     return cast null;
   }
 
-  public static function createWgpuRichTextData(_state:Dynamic, _source:Renderable):RendererData {
+  public static function createWgpuRichTextData(_state:RenderState, _source:Renderable):RendererData {
     return cast _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuRichText.createWgpuRichTextData, cast ([_state, _source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createWgpuScale9ShapeData(_state:Dynamic, _source:Renderable):RendererData {
+  public static function createWgpuScale9ShapeData(_state:RenderState, _source:Renderable):RendererData {
     return cast _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuScale9Shape.createWgpuScale9ShapeData, cast ([_state, _source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createWgpuVelocityTarget(state:Dynamic, width:Float, height:Float):Dynamic {
+  public static function createWgpuVelocityTarget(state:WgpuRenderState, width:Float, height:Float):WgpuRenderTarget {
     return cast _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuVelocity.createWgpuVelocityTarget, cast ([state, width, height] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createWgpuVideoData(_state:Dynamic, _source:Renderable):RendererData {
+  public static function createWgpuVideoData(_state:RenderState, _source:Renderable):RendererData {
     return cast _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuVideo.createWgpuVideoData, cast ([_state, _source] : Array<Dynamic>));
     return cast null;
   }
@@ -156,59 +168,59 @@ class DisplayobjectWgpu {
 
   public static final defaultWgpuVideoRenderer:DisplayObjectRenderer = Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuVideo.defaultWgpuVideoRenderer;
 
-  public static function destroyWgpuRichTextData(_state:Dynamic, data:RendererData):Void {
+  public static function destroyWgpuRichTextData(_state:RenderState, data:RendererData):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuRichText.destroyWgpuRichTextData, cast ([_state, data] : Array<Dynamic>));
   }
 
-  public static function destroyWgpuScale9ShapeData(_state:Dynamic, data:RendererData):Void {
+  public static function destroyWgpuScale9ShapeData(_state:RenderState, data:RendererData):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuScale9Shape.destroyWgpuScale9ShapeData, cast ([_state, data] : Array<Dynamic>));
   }
 
-  public static function destroyWgpuVideoData(_state:Dynamic, data:RendererData):Void {
+  public static function destroyWgpuVideoData(_state:RenderState, data:RendererData):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuVideo.destroyWgpuVideoData, cast ([_state, data] : Array<Dynamic>));
   }
 
-  public static function drawWgpuBitmap(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuBitmap(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuBitmap.drawWgpuBitmap, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawWgpuDisplayObject(_state:Dynamic, _renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuDisplayObject(_state:WgpuRenderState, _renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuDisplayObject.drawWgpuDisplayObject, cast ([_state, _renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawWgpuParticleEmitter(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuParticleEmitter(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuParticleEmitter.drawWgpuParticleEmitter, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawWgpuRichText(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuRichText(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuRichText.drawWgpuRichText, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawWgpuRichTextWithOverlay(state:Dynamic, renderProxy:RenderProxy2D, ?overlay:WgpuRichTextOverlay):Void {
+  public static function drawWgpuRichTextWithOverlay(state:WgpuRenderState, renderProxy:RenderProxy2D, ?overlay:WgpuRichTextOverlay):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuRichText.drawWgpuRichTextWithOverlay, cast ([state, renderProxy, overlay] : Array<Dynamic>));
   }
 
-  public static function drawWgpuScale9Shape(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuScale9Shape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuScale9Shape.drawWgpuScale9Shape, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawWgpuScale9ShapeMask(state:Dynamic, data:RenderProxy2D):Void {
+  public static function drawWgpuScale9ShapeMask(state:WgpuRenderState, data:RenderProxy2D):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuScale9Shape.drawWgpuScale9ShapeMask, cast ([state, data] : Array<Dynamic>));
   }
 
-  public static function drawWgpuShape(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuShape.drawWgpuShape, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function drawWgpuShapeMeshes(state:Dynamic, renderProxy:RenderProxy2D, meshes:Array<WgpuShapeMesh>, buffers:WgpuShapeMeshBuffers):Void {
+  public static function drawWgpuShapeMeshes(state:WgpuRenderState, renderProxy:RenderProxy2D, meshes:Array<WgpuShapeMesh>, buffers:WgpuShapeMeshBuffers):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu__internal__WgpuShapeMeshValues.drawWgpuShapeMeshes, cast ([state, renderProxy, meshes, buffers] : Array<Dynamic>));
   }
 
-  public static function drawWgpuTextInputOverlay(context:Dynamic, source:Dynamic, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
+  public static function drawWgpuTextInputOverlay(context:Dynamic, source:RichText, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuTextInput.drawWgpuTextInputOverlay, cast ([context, source, result, fieldW, fieldH, _text] : Array<Dynamic>));
   }
 
-  public static function drawWgpuTextLabel(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuTextLabel(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuTextLabel.drawWgpuTextLabel, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
@@ -216,23 +228,23 @@ class DisplayobjectWgpu {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuVelocity.drawWgpuVelocityQuad, cast ([ctx, x, y, width, height, velocityX, velocityY] : Array<Dynamic>));
   }
 
-  public static function drawWgpuVideo(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuVideo(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuVideo.drawWgpuVideo, cast ([state, renderProxy] : Array<Dynamic>));
   }
 
-  public static function enableWgpuClipSupport(state:Dynamic):Void {
+  public static function enableWgpuClipSupport(state:WgpuRenderState):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuClip.enableWgpuClipSupport, cast ([state] : Array<Dynamic>));
   }
 
-  public static function enableWgpuColorAdjustment(state:Dynamic):Void {
+  public static function enableWgpuColorAdjustment(state:WgpuRenderState):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuColorAdjustment.enableWgpuColorAdjustment, cast ([state] : Array<Dynamic>));
   }
 
-  public static function enableWgpuColorAdjustmentGuards(state:Dynamic):Void {
+  public static function enableWgpuColorAdjustmentGuards(state:WgpuRenderState):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_EnableWgpuColorAdjustmentGuards.enableWgpuColorAdjustmentGuards, cast ([state] : Array<Dynamic>));
   }
 
-  public static function enableWgpuRenderCache(state:Dynamic):Void {
+  public static function enableWgpuRenderCache(state:WgpuRenderState):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuCache.enableWgpuRenderCache, cast ([state] : Array<Dynamic>));
   }
 
@@ -240,21 +252,21 @@ class DisplayobjectWgpu {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuTextInput.enableWgpuTextInput, cast ([] : Array<Dynamic>));
   }
 
-  public static function ensureWgpuQuadBatchResources(state:Dynamic):WgpuQuadBatchResources {
+  public static function ensureWgpuQuadBatchResources(state:WgpuRenderState):WgpuQuadBatchResources {
     return cast _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuSpriteBatch.ensureWgpuQuadBatchResources, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureWgpuRenderCacheTarget(state:Dynamic, cache:Dynamic, width:Float, height:Float):Dynamic {
+  public static function ensureWgpuRenderCacheTarget(state:WgpuRenderState, cache:RenderCache, width:Float, height:Float):WgpuRenderTarget {
     return cast _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuCache.ensureWgpuRenderCacheTarget, cast ([state, cache, width, height] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function flushWgpuSpriteBatch(state:Dynamic):Void {
+  public static function flushWgpuSpriteBatch(state:WgpuRenderState):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuSpriteBatch.flushWgpuSpriteBatch, cast ([state] : Array<Dynamic>));
   }
 
-  public static function getWgpuQuadBatchPipeline(state:Dynamic, resources:WgpuQuadBatchResources, module:Dynamic, hasMaterialData:Bool, blendMode:Null<BlendMode>):Dynamic {
+  public static function getWgpuQuadBatchPipeline(state:WgpuRenderState, resources:WgpuQuadBatchResources, module:Dynamic, hasMaterialData:Bool, blendMode:Null<BlendMode>):Dynamic {
     return cast _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuSpriteBatch.getWgpuQuadBatchPipeline, cast ([state, resources, module, hasMaterialData, blendMode] : Array<Dynamic>));
     return cast null;
   }
@@ -264,7 +276,7 @@ class DisplayobjectWgpu {
     return cast null;
   }
 
-  public static function getWgpuRenderCacheTarget(state:Dynamic, cache:Dynamic):Null<Dynamic> {
+  public static function getWgpuRenderCacheTarget(state:WgpuRenderState, cache:RenderCache):Null<WgpuRenderTarget> {
     return cast _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuCache.getWgpuRenderCacheTarget, cast ([state, cache] : Array<Dynamic>));
     return cast null;
   }
@@ -274,63 +286,63 @@ class DisplayobjectWgpu {
     return cast null;
   }
 
-  public static function getWgpuRenderStats(state:Dynamic):Dynamic {
+  public static function getWgpuRenderStats(state:WgpuRenderState):WgpuRenderStats {
     return cast _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuRenderStats.getWgpuRenderStats, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getWgpuVelocityWriter(state:Dynamic, kind:Kind):Null<WgpuVelocityWriter> {
+  public static function getWgpuVelocityWriter(state:WgpuRenderState, kind:Kind):Null<WgpuVelocityWriter> {
     return cast _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuVelocity.getWgpuVelocityWriter, cast ([state, kind] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function packWgpuSpriteBatchMaterialInstance(state:Dynamic, materialData:Null<MaterialData>, instanceIndex:Float):Void {
+  public static function packWgpuSpriteBatchMaterialInstance(state:WgpuRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuSpriteBatch.packWgpuSpriteBatchMaterialInstance, cast ([state, materialData, instanceIndex] : Array<Dynamic>));
   }
 
-  public static function popWgpuClipContours(state:Dynamic):Void {
+  public static function popWgpuClipContours(state:WgpuRenderState):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuClipContours.popWgpuClipContours, cast ([state] : Array<Dynamic>));
   }
 
-  public static function popWgpuClipRectangle(state:Dynamic):Void {
+  public static function popWgpuClipRectangle(state:WgpuRenderState):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuClipRectangle.popWgpuClipRectangle, cast ([state] : Array<Dynamic>));
   }
 
-  public static function prepareWgpuSpriteBatchWrite(state:Dynamic, texture:Dynamic, blendMode:Null<BlendMode>, material:Null<Dynamic>, materialRenderer:WgpuMaterialRenderer, maxInstances:Float):Float {
+  public static function prepareWgpuSpriteBatchWrite(state:WgpuRenderState, texture:ImageResource, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:WgpuMaterialRenderer, maxInstances:Float):Float {
     return cast _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuSpriteBatch.prepareWgpuSpriteBatchWrite, cast ([state, texture, blendMode, material, materialRenderer, maxInstances] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function pushWgpuClipContours(state:Dynamic, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Dynamic):Void {
+  public static function pushWgpuClipContours(state:WgpuRenderState, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Matrix):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuClipContours.pushWgpuClipContours, cast ([state, contours, winding, worldTransform] : Array<Dynamic>));
   }
 
-  public static function pushWgpuClipRectangle(state:Dynamic, rect:RectangleLike, transform:MatrixLike):Void {
+  public static function pushWgpuClipRectangle(state:WgpuRenderState, rect:RectangleLike, transform:MatrixLike):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuClipRectangle.pushWgpuClipRectangle, cast ([state, rect, transform] : Array<Dynamic>));
   }
 
-  public static function recordWgpuBatchFlush(state:Dynamic, instances:Float):Void {
+  public static function recordWgpuBatchFlush(state:WgpuRenderState, instances:Float):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuRenderStats.recordWgpuBatchFlush, cast ([state, instances] : Array<Dynamic>));
   }
 
-  public static function recordWgpuSpriteBatchColorTransform(state:Dynamic, colorTransform:Null<Dynamic>, instanceIndex:Float):Void {
+  public static function recordWgpuSpriteBatchColorTransform(state:WgpuRenderState, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuSpriteBatch.recordWgpuSpriteBatchColorTransform, cast ([state, colorTransform, instanceIndex] : Array<Dynamic>));
   }
 
-  public static function recordWgpuTextureUpload(state:Dynamic):Void {
+  public static function recordWgpuTextureUpload(state:WgpuRenderState):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuRenderStats.recordWgpuTextureUpload, cast ([state] : Array<Dynamic>));
   }
 
-  public static function refreshWgpuRenderCache(cacheState:Dynamic, cache:Dynamic, source:Dynamic, ?options:RenderCacheRefreshOptions):Bool {
+  public static function refreshWgpuRenderCache(cacheState:WgpuRenderState, cache:RenderCache, source:DisplayObject, ?options:RenderCacheRefreshOptions):Bool {
     return cast _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuCache.refreshWgpuRenderCache, cast ([cacheState, cache, source, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function registerDefaultWgpuMaterial(state:Dynamic):Void {
+  public static function registerDefaultWgpuMaterial(state:WgpuRenderState):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuDefaultMaterial.registerDefaultWgpuMaterial, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerWgpuDisplayObjectRenderers(state:Dynamic):Void {
+  public static function registerWgpuDisplayObjectRenderers(state:WgpuRenderState):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuRegistration.registerWgpuDisplayObjectRenderers, cast ([state] : Array<Dynamic>));
   }
 
@@ -338,7 +350,7 @@ class DisplayobjectWgpu {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectCanvas_CanvasShapeRegistry.registerCanvasShapeCommands, cast ([commands] : Array<Dynamic>));
   }
 
-  public static function registerWgpuSpriteRenderers(state:Dynamic):Void {
+  public static function registerWgpuSpriteRenderers(state:WgpuRenderState):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuRegistration.registerWgpuSpriteRenderers, cast ([state] : Array<Dynamic>));
   }
 
@@ -346,11 +358,11 @@ class DisplayobjectWgpu {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuRichText.registerWgpuTextInputOverlay, cast ([overlay] : Array<Dynamic>));
   }
 
-  public static function registerWgpuVelocityWriter(state:Dynamic, kind:Kind, writer:WgpuVelocityWriter):Void {
+  public static function registerWgpuVelocityWriter(state:WgpuRenderState, kind:Kind, writer:WgpuVelocityWriter):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuVelocity.registerWgpuVelocityWriter, cast ([state, kind, writer] : Array<Dynamic>));
   }
 
-  public static function releaseWgpuRenderCache(state:Dynamic, cache:Dynamic):Void {
+  public static function releaseWgpuRenderCache(state:WgpuRenderState, cache:RenderCache):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuCache.releaseWgpuRenderCache, cast ([state, cache] : Array<Dynamic>));
   }
 
@@ -358,23 +370,23 @@ class DisplayobjectWgpu {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuScale9Shape.remapWgpuScale9Commands, cast ([out, source, mapper] : Array<Dynamic>));
   }
 
-  public static function renderWgpuDisplayObject(state:Dynamic, source:Dynamic):Void {
+  public static function renderWgpuDisplayObject(state:WgpuRenderState, source:DisplayObject):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuDisplayObject.renderWgpuDisplayObject, cast ([state, source] : Array<Dynamic>));
   }
 
-  public static function renderWgpuSprite(state:Dynamic, source:Dynamic):Void {
+  public static function renderWgpuSprite(state:WgpuRenderState, source:DisplayObject):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuSprite.renderWgpuSprite, cast ([state, source] : Array<Dynamic>));
   }
 
-  public static function renderWgpuVelocity<Traits>(state:Dynamic, root:Transform2DNode<Traits>, field:Dynamic, target:Dynamic):Void {
+  public static function renderWgpuVelocity<Traits>(state:WgpuRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:WgpuRenderTarget):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuVelocity.renderWgpuVelocity, cast ([state, root, field, target] : Array<Dynamic>));
   }
 
-  public static function resetWgpuRenderStats(state:Dynamic):Void {
+  public static function resetWgpuRenderStats(state:WgpuRenderState):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuRenderStats.resetWgpuRenderStats, cast ([state] : Array<Dynamic>));
   }
 
-  public static function resetWgpuSpriteBatchBufferPool(state:Dynamic):Void {
+  public static function resetWgpuSpriteBatchBufferPool(state:WgpuRenderState):Void {
     _Runtime.callValue(Facade_DisplayobjectWgpu_flighthq_displayobjectWgpu_WgpuSpriteBatch.resetWgpuSpriteBatchBufferPool, cast ([state] : Array<Dynamic>));
   }
 

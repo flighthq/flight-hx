@@ -3,10 +3,11 @@ package flighthq.spring;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Spring;
 
 @:expose("flighthq.spring.ResetSpring")
 class ResetSpring {
-  public static function resetSpring(spring:Dynamic, value:Float, velocity:Float = 0.0):Void {
+  public static function resetSpring(spring:Spring, value:Float, velocity:Float = 0.0):Void {
     _Runtime.setField(spring, 'value', value);
     _Runtime.setField(spring, 'velocity', velocity);
   }

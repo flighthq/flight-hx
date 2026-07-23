@@ -4,6 +4,7 @@ package flighthq.lighting;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.HemisphereLight;
 import flighthq.types.Types.HemisphereLightKind;
 import flighthq.types._internal._HemisphereLightValues.HemisphereLightKind;
 
@@ -11,12 +12,12 @@ typedef HemisphereLightOptions = { @:optional var groundColor:Float; @:optional 
 
 @:expose("flighthq.lighting.HemisphereLight")
 class HemisphereLight {
-  public static function cloneHemisphereLight(source:Dynamic):Dynamic {
+  public static function cloneHemisphereLight(source:flighthq.types.HemisphereLight):flighthq.types.HemisphereLight {
     return cast _Runtime.callValue(createHemisphereLight, cast ([{ groundColor: _Runtime.field(source, 'groundColor'), intensity: _Runtime.field(source, 'intensity'), skyColor: _Runtime.field(source, 'skyColor') }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createHemisphereLight(?options:HemisphereLightOptions):Dynamic {
+  public static function createHemisphereLight(?options:HemisphereLightOptions):flighthq.types.HemisphereLight {
     return cast _Runtime.callValue(createEntity, cast ([{ groundColor: _Runtime.coalesce(_Runtime.optionalField(options, 'groundColor'), function():Dynamic return cast 4294967295.0), intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: HemisphereLightKind, skyColor: _Runtime.coalesce(_Runtime.optionalField(options, 'skyColor'), function():Dynamic return cast 4294967295.0) }] : Array<Dynamic>));
     return cast null;
   }

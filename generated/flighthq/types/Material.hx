@@ -9,6 +9,6 @@ import flighthq.types.Entity.Kind;
 
 typedef Material = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; };
 
-typedef MaterialLike = EntityWithoutRuntime<Dynamic>;
+typedef MaterialLike = EntityWithoutRuntime<flighthq.types.Material>;
 
 typedef MaterialData = Dynamic;

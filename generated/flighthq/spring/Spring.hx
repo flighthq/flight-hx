@@ -10,62 +10,66 @@ import flighthq.spring.Spring2D as Facade_Spring_flighthq_spring_Spring2D;
 import flighthq.spring.Spring3D as Facade_Spring_flighthq_spring_Spring3D;
 import flighthq.spring.SpringConfig as Facade_Spring_flighthq_spring_SpringConfig;
 import flighthq.spring.UpdateSpring as Facade_Spring_flighthq_spring_UpdateSpring;
+import flighthq.types.Spring;
+import flighthq.types.Spring.Spring2D;
+import flighthq.types.Spring.Spring3D;
+import flighthq.types.Spring.SpringConfig;
 
 @:expose("flighthq.spring.Spring")
 class Spring {
-  public static function createSpring(?value:Float, ?velocity:Float):Dynamic {
+  public static function createSpring(?value:Float, ?velocity:Float):flighthq.types.Spring {
     return cast _Runtime.callValue(Facade_Spring_flighthq_spring_CreateSpring.createSpring, cast ([value, velocity] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpring2D(?valueX:Float, ?valueY:Float, ?velocityX:Float, ?velocityY:Float):Dynamic {
+  public static function createSpring2D(?valueX:Float, ?valueY:Float, ?velocityX:Float, ?velocityY:Float):Spring2D {
     return cast _Runtime.callValue(Facade_Spring_flighthq_spring_Spring2D.createSpring2D, cast ([valueX, valueY, velocityX, velocityY] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpring3D(?valueX:Float, ?valueY:Float, ?valueZ:Float, ?velocityX:Float, ?velocityY:Float, ?velocityZ:Float):Dynamic {
+  public static function createSpring3D(?valueX:Float, ?valueY:Float, ?valueZ:Float, ?velocityX:Float, ?velocityY:Float, ?velocityZ:Float):Spring3D {
     return cast _Runtime.callValue(Facade_Spring_flighthq_spring_Spring3D.createSpring3D, cast ([valueX, valueY, valueZ, velocityX, velocityY, velocityZ] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpringConfig(frequency:Float, dampingRatio:Float):Dynamic {
+  public static function createSpringConfig(frequency:Float, dampingRatio:Float):SpringConfig {
     return cast _Runtime.callValue(Facade_Spring_flighthq_spring_SpringConfig.createSpringConfig, cast ([frequency, dampingRatio] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpringConfigFromPhysical(stiffness:Float, damping:Float, mass:Float):Dynamic {
+  public static function createSpringConfigFromPhysical(stiffness:Float, damping:Float, mass:Float):SpringConfig {
     return cast _Runtime.callValue(Facade_Spring_flighthq_spring_SpringConfig.createSpringConfigFromPhysical, cast ([stiffness, damping, mass] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isSpring2DSettled(spring2D:Dynamic, targetX:Float, targetY:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
+  public static function isSpring2DSettled(spring2D:Spring2D, targetX:Float, targetY:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
     return cast _Runtime.callValue(Facade_Spring_flighthq_spring_Spring2D.isSpring2DSettled, cast ([spring2D, targetX, targetY, positionEpsilon, velocityEpsilon] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isSpring3DSettled(spring3D:Dynamic, targetX:Float, targetY:Float, targetZ:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
+  public static function isSpring3DSettled(spring3D:Spring3D, targetX:Float, targetY:Float, targetZ:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
     return cast _Runtime.callValue(Facade_Spring_flighthq_spring_Spring3D.isSpring3DSettled, cast ([spring3D, targetX, targetY, targetZ, positionEpsilon, velocityEpsilon] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isSpringSettled(spring:Dynamic, target:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
+  public static function isSpringSettled(spring:flighthq.types.Spring, target:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
     return cast _Runtime.callValue(Facade_Spring_flighthq_spring_IsSpringSettled.isSpringSettled, cast ([spring, target, positionEpsilon, velocityEpsilon] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function resetSpring(spring:Dynamic, value:Float, ?velocity:Float):Void {
+  public static function resetSpring(spring:flighthq.types.Spring, value:Float, ?velocity:Float):Void {
     _Runtime.callValue(Facade_Spring_flighthq_spring_ResetSpring.resetSpring, cast ([spring, value, velocity] : Array<Dynamic>));
   }
 
-  public static function updateSpring(spring:Dynamic, target:Float, config:Dynamic, deltaTime:Float):Void {
+  public static function updateSpring(spring:flighthq.types.Spring, target:Float, config:SpringConfig, deltaTime:Float):Void {
     _Runtime.callValue(Facade_Spring_flighthq_spring_UpdateSpring.updateSpring, cast ([spring, target, config, deltaTime] : Array<Dynamic>));
   }
 
-  public static function updateSpring2D(spring2D:Dynamic, targetX:Float, targetY:Float, config:Dynamic, deltaTime:Float):Void {
+  public static function updateSpring2D(spring2D:Spring2D, targetX:Float, targetY:Float, config:SpringConfig, deltaTime:Float):Void {
     _Runtime.callValue(Facade_Spring_flighthq_spring_Spring2D.updateSpring2D, cast ([spring2D, targetX, targetY, config, deltaTime] : Array<Dynamic>));
   }
 
-  public static function updateSpring3D(spring3D:Dynamic, targetX:Float, targetY:Float, targetZ:Float, config:Dynamic, deltaTime:Float):Void {
+  public static function updateSpring3D(spring3D:Spring3D, targetX:Float, targetY:Float, targetZ:Float, config:SpringConfig, deltaTime:Float):Void {
     _Runtime.callValue(Facade_Spring_flighthq_spring_Spring3D.updateSpring3D, cast ([spring3D, targetX, targetY, targetZ, config, deltaTime] : Array<Dynamic>));
   }
 }

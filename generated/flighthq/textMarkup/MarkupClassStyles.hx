@@ -4,10 +4,12 @@ package flighthq.textMarkup;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.MarkupClassResolver;
+import flighthq.types.MarkupTagRegistry;
+import flighthq.types.TextFormat;
 
 @:expose("flighthq.textMarkup.MarkupClassStyles")
 class MarkupClassStyles {
-  public static function registerMarkupClassStyles(registry:Dynamic, styles:Dynamic):Void {
+  public static function registerMarkupClassStyles(registry:MarkupTagRegistry, styles:Dynamic):Void {
     var resolver:MarkupClassResolver = cast _Runtime.UNDEFINED;
     resolver = function(className:String) return _Runtime.coalesce(_Runtime.getIndex(styles, className), function():Dynamic return cast null);
     _Runtime.setField(registry, 'classResolver', resolver);

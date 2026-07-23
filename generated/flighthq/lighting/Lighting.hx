@@ -21,9 +21,17 @@ import flighthq.lighting.SceneLights as Facade_Lighting_flighthq_lighting_SceneL
 import flighthq.lighting.SpotLight as Facade_Lighting_flighthq_lighting_SpotLight;
 import flighthq.lighting.SpotLight.SpotLightConeAngles;
 import flighthq.lighting.SpotLight.SpotLightOptions;
+import flighthq.types.AmbientLight;
+import flighthq.types.AreaLight;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.DirectionalLight;
+import flighthq.types.Environment;
+import flighthq.types.HemisphereLight;
 import flighthq.types.Light;
 import flighthq.types.LightUnit;
+import flighthq.types.PointLight;
+import flighthq.types.SceneLights;
+import flighthq.types.SpotLight;
 import flighthq.types.Vector3.Vector3Like;
 
 @:expose("flighthq.lighting.Lighting")
@@ -33,37 +41,37 @@ class Lighting {
     return cast null;
   }
 
-  public static function cloneAmbientLight(source:Dynamic):Dynamic {
+  public static function cloneAmbientLight(source:AmbientLight):AmbientLight {
     return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_AmbientLight.cloneAmbientLight, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneAreaLight(source:Dynamic):Dynamic {
+  public static function cloneAreaLight(source:AreaLight):AreaLight {
     return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_AreaLight.cloneAreaLight, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneDirectionalLight(source:Dynamic):Dynamic {
+  public static function cloneDirectionalLight(source:DirectionalLight):DirectionalLight {
     return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_DirectionalLight.cloneDirectionalLight, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneEnvironment(source:Dynamic):Dynamic {
+  public static function cloneEnvironment(source:Environment):Environment {
     return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_Environment.cloneEnvironment, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneHemisphereLight(source:Dynamic):Dynamic {
+  public static function cloneHemisphereLight(source:HemisphereLight):HemisphereLight {
     return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_HemisphereLight.cloneHemisphereLight, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function clonePointLight(source:Dynamic):Dynamic {
+  public static function clonePointLight(source:PointLight):PointLight {
     return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_PointLight.clonePointLight, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneSpotLight(source:Dynamic):Dynamic {
+  public static function cloneSpotLight(source:SpotLight):SpotLight {
     return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_SpotLight.cloneSpotLight, cast ([source] : Array<Dynamic>));
     return cast null;
   }
@@ -73,42 +81,42 @@ class Lighting {
     return cast null;
   }
 
-  public static function createAmbientLight(?options:AmbientLightOptions):Dynamic {
+  public static function createAmbientLight(?options:AmbientLightOptions):AmbientLight {
     return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_AmbientLight.createAmbientLight, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createAreaLight(?options:AreaLightOptions):Dynamic {
+  public static function createAreaLight(?options:AreaLightOptions):AreaLight {
     return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_AreaLight.createAreaLight, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createDirectionalLight(?options:DirectionalLightOptions):Dynamic {
+  public static function createDirectionalLight(?options:DirectionalLightOptions):DirectionalLight {
     return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_DirectionalLight.createDirectionalLight, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createEnvironment(?options:EnvironmentOptions):Dynamic {
+  public static function createEnvironment(?options:EnvironmentOptions):Environment {
     return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_Environment.createEnvironment, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createHemisphereLight(?options:HemisphereLightOptions):Dynamic {
+  public static function createHemisphereLight(?options:HemisphereLightOptions):HemisphereLight {
     return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_HemisphereLight.createHemisphereLight, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createPointLight(?options:PointLightOptions):Dynamic {
+  public static function createPointLight(?options:PointLightOptions):PointLight {
     return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_PointLight.createPointLight, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSceneLights(?options:Dynamic):Dynamic {
+  public static function createSceneLights(?options:Dynamic):SceneLights {
     return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_SceneLights.createSceneLights, cast ([options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSpotLight(?options:SpotLightOptions):Dynamic {
+  public static function createSpotLight(?options:SpotLightOptions):SpotLight {
     return cast _Runtime.callValue(Facade_Lighting_flighthq_lighting_SpotLight.createSpotLight, cast ([options] : Array<Dynamic>));
     return cast null;
   }
@@ -127,7 +135,7 @@ class Lighting {
     return cast null;
   }
 
-  public static function getSpotLightConeDegrees(out:SpotLightConeAngles, source:Dynamic):Void {
+  public static function getSpotLightConeDegrees(out:SpotLightConeAngles, source:SpotLight):Void {
     _Runtime.callValue(Facade_Lighting_flighthq_lighting_SpotLight.getSpotLightConeDegrees, cast ([out, source] : Array<Dynamic>));
   }
 
@@ -141,27 +149,27 @@ class Lighting {
     return cast null;
   }
 
-  public static function setAreaLightOrientation(out:Dynamic, direction:Vector3Like, right:Vector3Like, up:Vector3Like):Void {
+  public static function setAreaLightOrientation(out:AreaLight, direction:Vector3Like, right:Vector3Like, up:Vector3Like):Void {
     _Runtime.callValue(Facade_Lighting_flighthq_lighting_AreaLight.setAreaLightOrientation, cast ([out, direction, right, up] : Array<Dynamic>));
   }
 
-  public static function setDirectionalLightDirection(out:Dynamic, x:Float, y:Float, z:Float):Void {
+  public static function setDirectionalLightDirection(out:DirectionalLight, x:Float, y:Float, z:Float):Void {
     _Runtime.callValue(Facade_Lighting_flighthq_lighting_DirectionalLight.setDirectionalLightDirection, cast ([out, x, y, z] : Array<Dynamic>));
   }
 
-  public static function setDirectionalLightTarget(out:Dynamic, fromX:Float, fromY:Float, fromZ:Float, toX:Float, toY:Float, toZ:Float):Void {
+  public static function setDirectionalLightTarget(out:DirectionalLight, fromX:Float, fromY:Float, fromZ:Float, toX:Float, toY:Float, toZ:Float):Void {
     _Runtime.callValue(Facade_Lighting_flighthq_lighting_DirectionalLight.setDirectionalLightTarget, cast ([out, fromX, fromY, fromZ, toX, toY, toZ] : Array<Dynamic>));
   }
 
-  public static function setSpotLightCone(out:Dynamic, innerDegrees:Float, outerDegrees:Float):Void {
+  public static function setSpotLightCone(out:SpotLight, innerDegrees:Float, outerDegrees:Float):Void {
     _Runtime.callValue(Facade_Lighting_flighthq_lighting_SpotLight.setSpotLightCone, cast ([out, innerDegrees, outerDegrees] : Array<Dynamic>));
   }
 
-  public static function setSpotLightDirection(out:Dynamic, x:Float, y:Float, z:Float):Void {
+  public static function setSpotLightDirection(out:SpotLight, x:Float, y:Float, z:Float):Void {
     _Runtime.callValue(Facade_Lighting_flighthq_lighting_SpotLight.setSpotLightDirection, cast ([out, x, y, z] : Array<Dynamic>));
   }
 
-  public static function setSpotLightTarget(out:Dynamic, targetX:Float, targetY:Float, targetZ:Float):Void {
+  public static function setSpotLightTarget(out:SpotLight, targetX:Float, targetY:Float, targetZ:Float):Void {
     _Runtime.callValue(Facade_Lighting_flighthq_lighting_SpotLight.setSpotLightTarget, cast ([out, targetX, targetY, targetZ] : Array<Dynamic>));
   }
 }

@@ -15,17 +15,21 @@ import flighthq.sceneWgpu.WgpuPbrPipelineCache.ensureWgpuPbrPipeline;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.beginWgpuMeshDraw;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.drawWgpuMeshSubset;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUniform;
+import flighthq.types.Camera;
 import flighthq.types.LinearColor;
+import flighthq.types.Material;
+import flighthq.types.MeshGeometry;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.SpecularPbrMaterial;
 import flighthq.types.Types.SpecularPbrMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
+import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._SpecularPbrMaterialValues.SpecularPbrMaterialKind;
 
 @:expose("flighthq.sceneWgpu.SpecularPbrWgpuMeshMaterialRenderer")
 class SpecularPbrWgpuMeshMaterialRenderer {
-  public static final specularPbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:Dynamic, material:Null<Dynamic>, lights:SceneLightBlock, camera:Dynamic) {
+  public static final specularPbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var specular:Dynamic = cast _Runtime.UNDEFINED;
@@ -64,11 +68,11 @@ class SpecularPbrWgpuMeshMaterialRenderer {
     _Runtime.callValue(writeWgpuPbrMaterialUniform, cast ([state, binding] : Array<Dynamic>));
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, _Runtime.field(binding, 'bindGroup')] : Array<Dynamic>));
-  }, draw: function(state:Dynamic, proxy:SceneRenderProxy, geometry:Dynamic) {
+  }, draw: function(state:WgpuRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
   } };
 
-  public static function registerSpecularPbrWgpuMaterial(state:Dynamic):Void {
+  public static function registerSpecularPbrWgpuMaterial(state:WgpuRenderState):Void {
     _Runtime.callValue(registerWgpuMeshMaterialRenderer, cast ([state, SpecularPbrMaterialKind, specularPbrWgpuMeshMaterialRenderer] : Array<Dynamic>));
   }
 

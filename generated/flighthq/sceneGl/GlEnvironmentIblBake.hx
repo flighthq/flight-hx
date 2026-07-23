@@ -7,12 +7,14 @@ import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.sceneGl.GlEnvironmentCube.ensureGlEnvironmentSourceCube;
 import flighthq.sceneGl.GlEnvironmentCube.getGlCubeFaceTarget;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.types.Environment;
+import flighthq.types.GlRenderState;
 
 typedef GlBakeProgram__glEnvironmentIblBake = { var buffer:Dynamic; var locEnvCube:Null<Dynamic>; var locFaceForward:Null<Dynamic>; var locFaceRight:Null<Dynamic>; var locFaceUp:Null<Dynamic>; var locRoughness:Null<Dynamic>; var program:Dynamic; var vao:Dynamic; };
 
 @:expose("flighthq.sceneGl.GlEnvironmentIblBake")
 class GlEnvironmentIblBake {
-  public static function bakeEnvironmentIbl(state:Dynamic, environment:Dynamic):Void {
+  public static function bakeEnvironmentIbl(state:GlRenderState, environment:Environment):Void {
     var sourceCube:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
@@ -48,7 +50,7 @@ class GlEnvironmentIblBake {
     _Runtime.setField(runtime, 'ibl', { brdfLut: brdfLut, intensity: _Runtime.field(environment, 'intensity'), irradianceCube: irradianceCube, prefilteredCube: prefilteredCube, prefilteredMipCount: prefilteredMipCount });
   }
 
-  public static function destroyGlBakePrograms(state:Dynamic):Void {
+  public static function destroyGlBakePrograms(state:GlRenderState):Void {
     var byState:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     byState = _Runtime.callProperty(GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake, 'get', cast ([state] : Array<Dynamic>));
@@ -62,7 +64,7 @@ class GlEnvironmentIblBake {
     _Runtime.callProperty(GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake, 'delete', cast ([state] : Array<Dynamic>));
   }
 
-  public static function bakeGlIrradiance__glEnvironmentIblBake(state:Dynamic, fbo:Dynamic, sourceCube:Dynamic):Dynamic {
+  public static function bakeGlIrradiance__glEnvironmentIblBake(state:GlRenderState, fbo:Dynamic, sourceCube:Dynamic):Dynamic {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var cube:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -77,7 +79,7 @@ class GlEnvironmentIblBake {
     return cast null;
   }
 
-  public static function bakeGlPrefiltered__glEnvironmentIblBake(state:Dynamic, fbo:Dynamic, sourceCube:Dynamic):{ var prefilteredCube:Dynamic; var prefilteredMipCount:Float; } {
+  public static function bakeGlPrefiltered__glEnvironmentIblBake(state:GlRenderState, fbo:Dynamic, sourceCube:Dynamic):{ var prefilteredCube:Dynamic; var prefilteredMipCount:Float; } {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var cube:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -103,7 +105,7 @@ class GlEnvironmentIblBake {
     return cast null;
   }
 
-  public static function bakeGlBrdfLut__glEnvironmentIblBake(state:Dynamic, fbo:Dynamic):Dynamic {
+  public static function bakeGlBrdfLut__glEnvironmentIblBake(state:GlRenderState, fbo:Dynamic):Dynamic {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -125,7 +127,7 @@ class GlEnvironmentIblBake {
     return cast null;
   }
 
-  public static function renderGlBakeCubeFaces__glEnvironmentIblBake(state:Dynamic, fbo:Dynamic, program:GlBakeProgram__glEnvironmentIblBake, cube:Dynamic, size:Float, mipLevel:Float):Void {
+  public static function renderGlBakeCubeFaces__glEnvironmentIblBake(state:GlRenderState, fbo:Dynamic, program:GlBakeProgram__glEnvironmentIblBake, cube:Dynamic, size:Float, mipLevel:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     _Runtime.callProperty(gl, 'viewport', cast ([0.0, 0.0, size, size] : Array<Dynamic>));
@@ -182,7 +184,7 @@ class GlEnvironmentIblBake {
     _Runtime.callProperty(gl, 'uniform1i', cast ([_Runtime.field(program, 'locEnvCube'), 0.0] : Array<Dynamic>));
   }
 
-  public static function ensureGlBakeProgram__glEnvironmentIblBake(state:Dynamic, key:String, fragment:String):GlBakeProgram__glEnvironmentIblBake {
+  public static function ensureGlBakeProgram__glEnvironmentIblBake(state:GlRenderState, key:String, fragment:String):GlBakeProgram__glEnvironmentIblBake {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var byState:Dynamic = cast _Runtime.UNDEFINED;
     var baked:Dynamic = cast _Runtime.UNDEFINED;
@@ -212,7 +214,7 @@ class GlEnvironmentIblBake {
     return cast null;
   }
 
-  public static function drawGlBakeQuad__glEnvironmentIblBake(state:Dynamic, program:GlBakeProgram__glEnvironmentIblBake):Void {
+  public static function drawGlBakeQuad__glEnvironmentIblBake(state:GlRenderState, program:GlBakeProgram__glEnvironmentIblBake):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     _Runtime.callProperty(gl, 'bindVertexArray', cast ([_Runtime.field(program, 'vao')] : Array<Dynamic>));

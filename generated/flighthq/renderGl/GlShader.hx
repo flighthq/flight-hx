@@ -5,8 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
+import flighthq.types.GlRenderState;
 import flighthq.types.GlShaderLocations;
 import flighthq.types.GlShaderLocations.GlBitmapShader;
+import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
 
 @:expose("flighthq.renderGl.GlShader")
@@ -28,7 +30,7 @@ class GlShader {
   }
 
   public static function createDefaultGlBitmapShader(shaderLoc:GlShaderLocations, matrixArray:flighthq._internal._Float32Array):GlBitmapShader {
-    return cast { locations: shaderLoc, program: _Runtime.field(shaderLoc, 'program'), bind: function(gl:Dynamic, state:Dynamic, renderProxy:RenderProxy2D) {
+    return cast { locations: shaderLoc, program: _Runtime.field(shaderLoc, 'program'), bind: function(gl:Dynamic, state:GlRenderState, renderProxy:RenderProxy2D) {
       var runtime:Dynamic = cast _Runtime.UNDEFINED;
       runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
       _Runtime.callValue(setGlAttributes, cast ([gl, shaderLoc] : Array<Dynamic>));
@@ -41,7 +43,7 @@ class GlShader {
   public static function createGlBitmapShader(gl:Dynamic, fragmentSrc:String, ?onBind:Dynamic):GlBitmapShader {
     var locations:Dynamic = cast _Runtime.UNDEFINED;
     locations = _Runtime.callValue(compileGlBitmapProgram, cast ([gl, fragmentSrc] : Array<Dynamic>));
-    return cast { locations: locations, program: _Runtime.field(locations, 'program'), bind: function(gl:Dynamic, state:Dynamic, renderProxy:RenderProxy2D) {
+    return cast { locations: locations, program: _Runtime.field(locations, 'program'), bind: function(gl:Dynamic, state:GlRenderState, renderProxy:RenderProxy2D) {
       var runtime:Dynamic = cast _Runtime.UNDEFINED;
       runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
       _Runtime.callValue(setGlAttributes, cast ([gl, locations] : Array<Dynamic>));
@@ -59,7 +61,7 @@ class GlShader {
     _Runtime.callProperty(gl, 'vertexAttribPointer', cast ([_Runtime.field(loc, 'locTexCoord'), 2.0, _Runtime.field(gl, 'FLOAT'), false, 16.0, 8.0] : Array<Dynamic>));
   }
 
-  public static function setGlBaseUniforms(gl:Dynamic, loc:GlShaderLocations, renderProxy:Dynamic):Void {
+  public static function setGlBaseUniforms(gl:Dynamic, loc:GlShaderLocations, renderProxy:RenderProxy):Void {
     _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(loc, 'locAlpha'), _Runtime.field(renderProxy, 'alpha')] : Array<Dynamic>));
     _Runtime.callProperty(gl, 'uniform1i', cast ([_Runtime.field(loc, 'locTexture'), 0.0] : Array<Dynamic>));
   }

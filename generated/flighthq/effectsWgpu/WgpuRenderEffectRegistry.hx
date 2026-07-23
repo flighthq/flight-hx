@@ -4,20 +4,21 @@ package flighthq.effectsWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderState;
 
 @:expose("flighthq.effectsWgpu.WgpuRenderEffectRegistry")
 class WgpuRenderEffectRegistry {
-  public static function getWgpuRenderEffectRunner(state:Dynamic, kind:String):Null<WgpuRenderEffectRunner> {
+  public static function getWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Null<WgpuRenderEffectRunner> {
     return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(WgpuRenderEffectRegistry._registries__wgpuRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>)), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function hasWgpuRenderEffectRunner(state:Dynamic, kind:String):Bool {
+  public static function hasWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Bool {
     return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(WgpuRenderEffectRegistry._registries__wgpuRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>)), 'has', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast false);
     return cast null;
   }
 
-  public static function registerWgpuRenderEffect(state:Dynamic, kind:String, runner:WgpuRenderEffectRunner):Void {
+  public static function registerWgpuRenderEffect(state:WgpuRenderState, kind:String, runner:WgpuRenderEffectRunner):Void {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = _Runtime.callProperty(WgpuRenderEffectRegistry._registries__wgpuRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')))) {

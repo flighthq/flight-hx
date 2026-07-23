@@ -3,10 +3,11 @@ package flighthq.surface;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Surface;
 
 @:expose("flighthq.surface.SurfaceCoverage")
 class SurfaceCoverage {
-  public static function getSurfaceCoverage(source:Dynamic, backgroundColor:Float, channelTolerance:Float = 0.0):Float {
+  public static function getSurfaceCoverage(source:Surface, backgroundColor:Float, channelTolerance:Float = 0.0):Float {
     var br:Dynamic = cast _Runtime.UNDEFINED;
     var bg:Dynamic = cast _Runtime.UNDEFINED;
     var bb:Dynamic = cast _Runtime.UNDEFINED;

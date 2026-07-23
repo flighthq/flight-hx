@@ -7,6 +7,7 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Vector3.cloneVector3;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.geometry.Vector3.setVector3;
+import flighthq.types.DirectionalLight;
 import flighthq.types.Types.DirectionalLightKind;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types._internal._DirectionalLightValues.DirectionalLightKind;
@@ -15,19 +16,19 @@ typedef DirectionalLightOptions = { @:optional var castsShadow:Bool; @:optional 
 
 @:expose("flighthq.lighting.DirectionalLight")
 class DirectionalLight {
-  public static function cloneDirectionalLight(source:Dynamic):Dynamic {
+  public static function cloneDirectionalLight(source:flighthq.types.DirectionalLight):flighthq.types.DirectionalLight {
     return cast _Runtime.callValue(createEntity, cast ([{ castsShadow: _Runtime.field(source, 'castsShadow'), color: _Runtime.field(source, 'color'), direction: _Runtime.callValue(cloneVector3, cast ([_Runtime.field(source, 'direction')] : Array<Dynamic>)), intensity: _Runtime.field(source, 'intensity'), kind: DirectionalLightKind, normalBias: _Runtime.field(source, 'normalBias'), pcfRadius: _Runtime.field(source, 'pcfRadius'), shadowBias: _Runtime.field(source, 'shadowBias') }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createDirectionalLight(?options:DirectionalLightOptions):Dynamic {
+  public static function createDirectionalLight(?options:DirectionalLightOptions):flighthq.types.DirectionalLight {
     var direction:Dynamic = cast _Runtime.UNDEFINED;
     direction = _Runtime.optionalField(options, 'direction');
     return cast _Runtime.callValue(createEntity, cast ([{ castsShadow: _Runtime.coalesce(_Runtime.optionalField(options, 'castsShadow'), function():Dynamic return cast false), color: _Runtime.coalesce(_Runtime.optionalField(options, 'color'), function():Dynamic return cast 4294967295.0), direction: _Runtime.select(direction, function():Dynamic return cast _Runtime.callValue(cloneVector3, cast ([direction] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector3, cast ([0.0, -1.0, 0.0] : Array<Dynamic>))), intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: DirectionalLightKind, normalBias: _Runtime.coalesce(_Runtime.optionalField(options, 'normalBias'), function():Dynamic return cast 0.0), pcfRadius: _Runtime.coalesce(_Runtime.optionalField(options, 'pcfRadius'), function():Dynamic return cast 0.0), shadowBias: _Runtime.coalesce(_Runtime.optionalField(options, 'shadowBias'), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setDirectionalLightDirection(out:Dynamic, x:Float, y:Float, z:Float):Void {
+  public static function setDirectionalLightDirection(out:flighthq.types.DirectionalLight, x:Float, y:Float, z:Float):Void {
     var lx:Dynamic = cast _Runtime.UNDEFINED;
     var ly:Dynamic = cast _Runtime.UNDEFINED;
     var lz:Dynamic = cast _Runtime.UNDEFINED;
@@ -41,7 +42,7 @@ class DirectionalLight {
     }
   }
 
-  public static function setDirectionalLightTarget(out:Dynamic, fromX:Float, fromY:Float, fromZ:Float, toX:Float, toY:Float, toZ:Float):Void {
+  public static function setDirectionalLightTarget(out:flighthq.types.DirectionalLight, fromX:Float, fromY:Float, fromZ:Float, toX:Float, toY:Float, toZ:Float):Void {
     var dx:Dynamic = cast _Runtime.UNDEFINED;
     var dy:Dynamic = cast _Runtime.UNDEFINED;
     var dz:Dynamic = cast _Runtime.UNDEFINED;

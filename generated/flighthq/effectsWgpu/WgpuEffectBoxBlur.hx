@@ -7,6 +7,8 @@ import flighthq.effects.BoxBlurMath.computeBoxBlurPassRadius;
 import flighthq.effectsWgpu.WgpuEffectPass.WgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.createWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
+import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderTarget;
 
 typedef BoxBlurEdgeColor__wgpuEffectBoxBlur = Array<Float>;
 
@@ -14,13 +16,13 @@ typedef BoxBlurEdgeColor__wgpuEffectBoxBlur = Array<Float>;
 class WgpuEffectBoxBlur {
   public static final BOX_BLUR_WGSL__wgpuEffectBoxBlur:Dynamic = '\nstruct Uniforms {\n  texelSize : vec2f,\n  direction : vec2f,\n  edgeColor : vec4f,\n  radius : f32,\n  useEdgeColor : f32,\n  _pad0 : f32, _pad1 : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn sampleBlur(uv : vec2f) -> vec4f {\n  if (uni.useEdgeColor > 0.5 && (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0)) {\n    return uni.edgeColor;\n  }\n  return textureSampleLevel(tex, smp, uv, 0.0);\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let r = i32(uni.radius);\n  if (r == 0) { return sampleBlur(uv); }\n  var sum = vec4f(0.0);\n  let count = f32(2 * r + 1);\n  for (var i = -r; i <= r; i++) {\n    sum += sampleBlur(uv + f32(i) * uni.texelSize * uni.direction);\n  }\n  return sum / count;\n}';
 
-  public static function applyWgpuEffectBoxBlur(state:Dynamic, source:Dynamic, dest:Dynamic, temp:Dynamic, options:{ @:optional var blurX:Float; @:optional var blurY:Float; @:optional var passes:Float; @:optional var edgeColor:Array<Float>; }):Void {
+  public static function applyWgpuEffectBoxBlur(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; @:optional var passes:Float; @:optional var edgeColor:Array<Float>; }):Void {
     var passes:Dynamic = cast _Runtime.UNDEFINED;
     var blurX:Dynamic = cast _Runtime.UNDEFINED;
     var blurY:Dynamic = cast _Runtime.UNDEFINED;
     var edgeColor:Dynamic = cast _Runtime.UNDEFINED;
-    var read:Dynamic = cast _Runtime.UNDEFINED;
-    var write:Dynamic = cast _Runtime.UNDEFINED;
+    var read:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var write:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     passes = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
     blurX = _Runtime.coalesce(_Runtime.field(options, 'blurX'), function():Dynamic return cast 4.0);
     blurY = _Runtime.coalesce(_Runtime.field(options, 'blurY'), function():Dynamic return cast 4.0);
@@ -50,7 +52,7 @@ class WgpuEffectBoxBlur {
     }
   }
 
-  public static function applyBoxBlurPass__wgpuEffectBoxBlur(state:Dynamic, source:Dynamic, dest:Dynamic, radius:Float, dirX:Float, dirY:Float, edgeColor:Null<BoxBlurEdgeColor__wgpuEffectBoxBlur>):Void {
+  public static function applyBoxBlurPass__wgpuEffectBoxBlur(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, radius:Float, dirX:Float, dirY:Float, edgeColor:Null<BoxBlurEdgeColor__wgpuEffectBoxBlur>):Void {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     pipeline = _Runtime.callValue(WgpuEffectBoxBlur.getBoxBlurPipeline__wgpuEffectBoxBlur, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, source, dest, pipeline, function(f32:Dynamic) {
@@ -75,7 +77,7 @@ class WgpuEffectBoxBlur {
     }] : Array<Dynamic>));
   }
 
-  public static function getBoxBlurPipeline__wgpuEffectBoxBlur(state:Dynamic):WgpuEffectPipeline {
+  public static function getBoxBlurPipeline__wgpuEffectBoxBlur(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     p = _Runtime.callProperty(WgpuEffectBoxBlur.boxBlurPipelines__wgpuEffectBoxBlur, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')))) {

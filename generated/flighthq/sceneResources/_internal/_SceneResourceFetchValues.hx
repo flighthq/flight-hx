@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResourceFrom.loadImageResourceFromUrl;
 import flighthq.sceneResources.SceneResourceFetch;
+import flighthq.types.ImageResource;
 import flighthq.types.SceneResourceRef.ExternalSceneResourceRef;
 
 @:expose("flighthq.sceneResources._internal._SceneResourceFetchValues")

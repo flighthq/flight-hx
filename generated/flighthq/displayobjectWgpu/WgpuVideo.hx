@@ -11,27 +11,30 @@ import flighthq.renderWgpu.WgpuDraw.drawWgpuQuad;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
+import flighthq.types.Video;
+import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 
 typedef WgpuVideoData__wgpuVideo = { var entry:Null<WgpuTextureEntry>; var w:Float; var h:Float; };
 
 @:expose("flighthq.displayobjectWgpu.WgpuVideo")
 class WgpuVideo {
-  public static function createWgpuVideoData(_state:Dynamic, _source:Renderable):RendererData {
+  public static function createWgpuVideoData(_state:RenderState, _source:Renderable):RendererData {
     return cast _Runtime.callValue(createWgpuRendererData, cast ([{ entry: null, h: 0.0, w: 0.0 }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function destroyWgpuVideoData(_state:Dynamic, data:RendererData):Void {
+  public static function destroyWgpuVideoData(_state:RenderState, data:RendererData):Void {
     var videoData:Dynamic = cast _Runtime.UNDEFINED;
     videoData = _Runtime.callValue(getWgpuRendererData, cast ([data] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(videoData, null))) { return; }
     _Runtime.callOptionalProperty(_Runtime.optionalField(_Runtime.field(videoData, 'entry'), 'texture'), 'destroy', cast ([] : Array<Dynamic>));
   }
 
-  public static function drawWgpuVideo(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuVideo(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var element:Dynamic = cast _Runtime.UNDEFINED;
@@ -42,7 +45,7 @@ class WgpuVideo {
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) { return; }
     _Runtime.callValue(flushWgpuSpriteBatch, cast ([state] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
+    source = (cast _Runtime.field(renderProxy, 'source') : Video);
     element = _Runtime.optionalField(_Runtime.field(_Runtime.field(source, 'data'), 'source'), 'element');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(element, null)), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'readyState'), 2.0, '<')))) { return; }
     vw = _Runtime.field(element, 'videoWidth');

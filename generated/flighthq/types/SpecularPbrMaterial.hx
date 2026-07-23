@@ -8,4 +8,4 @@ import flighthq.types.Entity.Kind;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 
-typedef SpecularPbrMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var alphaType:AlphaType; var blendMode:BlendMode; var doubleSided:Bool; var specular:Float; var specularColor:Float; var specularColorMap:Null<Dynamic>; var specularMap:Null<Dynamic>; var standard:StandardPbrMaterialProperties; };
+typedef SpecularPbrMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var alphaType:AlphaType; var blendMode:BlendMode; var doubleSided:Bool; var specular:Float; var specularColor:Float; var specularColorMap:Null<Texture>; var specularMap:Null<Texture>; var standard:StandardPbrMaterialProperties; };

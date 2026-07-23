@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ParticleEmitter.ParticleEmitterData;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
+import flighthq.types.SceneNode;
 import flighthq.types.SceneNode.SceneNodeRuntime;
 
 @:expose("flighthq.types._internal._ParticleEmitter3DValues")

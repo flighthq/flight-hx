@@ -5,8 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.displayobjectCanvas.CanvasMaterialRegistry.applyCanvasMaterial;
 import flighthq.render.Renderer.noopRendererData;
+import flighthq.types.CanvasRenderState;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.SpriteRenderer;
+import flighthq.types.Tilemap;
 
 @:expose("flighthq.displayobjectCanvas.CanvasTilemap")
 class CanvasTilemap {
@@ -28,7 +30,7 @@ class CanvasTilemap {
     var tileWidth:Dynamic = cast _Runtime.UNDEFINED;
     var tileHeight:Dynamic = cast _Runtime.UNDEFINED;
     var restoreMaterial:Dynamic = cast _Runtime.UNDEFINED;
-    source = (cast _Runtime.field(tilemapNode, 'source') : Dynamic);
+    source = (cast _Runtime.field(tilemapNode, 'source') : Tilemap);
     __destructure0 = _Runtime.field(source, 'data');
     tileset = _Runtime.field(__destructure0, 'tileset');
     columns = _Runtime.field(__destructure0, 'columns');

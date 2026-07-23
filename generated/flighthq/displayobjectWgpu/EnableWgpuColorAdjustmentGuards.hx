@@ -6,15 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.Log.LogLevel;
+import flighthq.types.WgpuRenderState;
 
 @:expose("flighthq.displayobjectWgpu.EnableWgpuColorAdjustmentGuards")
 class EnableWgpuColorAdjustmentGuards {
-  public static function areWgpuColorAdjustmentGuardsEnabled(state:Dynamic):Bool {
+  public static function areWgpuColorAdjustmentGuardsEnabled(state:WgpuRenderState):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'wgpuColorAdjustmentGuard'), null);
     return cast null;
   }
 
-  public static function enableWgpuColorAdjustmentGuards(state:Dynamic):Void {
+  public static function enableWgpuColorAdjustmentGuards(state:WgpuRenderState):Void {
     _Runtime.setField(_Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'wgpuColorAdjustmentGuard', EnableWgpuColorAdjustmentGuards.warnWgpuColorAdjustmentNotEnabled__enableWgpuColorAdjustmentGuards);
   }
 

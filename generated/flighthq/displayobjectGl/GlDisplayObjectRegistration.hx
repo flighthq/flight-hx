@@ -16,6 +16,7 @@ import flighthq.displayobjectGl.GlTextLabel.defaultGlTextLabelRenderer;
 import flighthq.displayobjectGl.GlTilemap.defaultGlTilemapRenderer;
 import flighthq.displayobjectGl.GlVideo.defaultGlVideoRenderer;
 import flighthq.render.Renderer.registerRenderer;
+import flighthq.types.GlRenderState;
 import flighthq.types.RenderCache.RenderCacheKind;
 import flighthq.types.Types.BitmapKind;
 import flighthq.types.Types.DisplayObjectKind;
@@ -43,7 +44,7 @@ import flighthq.types._internal._VideoValues.VideoKind;
 
 @:expose("flighthq.displayobjectGl.GlDisplayObjectRegistration")
 class GlDisplayObjectRegistration {
-  public static function registerGlDisplayObjectRenderers(state:Dynamic):Void {
+  public static function registerGlDisplayObjectRenderers(state:GlRenderState):Void {
     _Runtime.callValue(registerRenderer, cast ([state, BitmapKind, defaultGlBitmapRenderer] : Array<Dynamic>));
     _Runtime.callValue(registerRenderer, cast ([state, DisplayObjectKind, defaultGlDisplayObjectRenderer] : Array<Dynamic>));
     _Runtime.callValue(registerRenderer, cast ([state, ParticleEmitterKind, defaultGlParticleEmitterRenderer] : Array<Dynamic>));

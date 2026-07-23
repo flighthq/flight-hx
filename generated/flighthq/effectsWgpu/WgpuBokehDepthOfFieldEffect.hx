@@ -5,11 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.types.BokehDepthOfFieldEffect;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.effectsWgpu.WgpuBokehDepthOfFieldEffect")
 class WgpuBokehDepthOfFieldEffect {
-  public static function applyBokehDepthOfFieldEffectToWgpu(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
+  public static function applyBokehDepthOfFieldEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:BokehDepthOfFieldEffect):Void {
     var maxBlur:Dynamic = cast _Runtime.UNDEFINED;
     var width:Dynamic = cast _Runtime.UNDEFINED;
     var height:Dynamic = cast _Runtime.UNDEFINED;
@@ -18,7 +21,7 @@ class WgpuBokehDepthOfFieldEffect {
     width = _Runtime.field(source, 'width');
     height = _Runtime.field(source, 'height');
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'lens.bokehDoF', WgpuBokehDepthOfFieldEffect.BOKEH_DOF_FRAGMENT_WGSL__wgpuBokehDepthOfFieldEffect, 'replace'] : Array<Dynamic>));
-    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : Dynamic), (cast dest : Dynamic), pipeline, function(f32:Dynamic) {
+    _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, maxBlur);
       _Runtime.setIndex(f32, 2.0, width);
       _Runtime.setIndex(f32, 3.0, height);
@@ -26,7 +29,7 @@ class WgpuBokehDepthOfFieldEffect {
   }
 
   public static final defaultWgpuBokehDepthOfFieldEffectRunner:WgpuRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyBokehDepthOfFieldEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(applyBokehDepthOfFieldEffectToWgpu, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : BokehDepthOfFieldEffect)] : Array<Dynamic>));
   };
 
   public static final BOKEH_DOF_FRAGMENT_WGSL__wgpuBokehDepthOfFieldEffect:Dynamic = '\nstruct Uniforms {\n  u_maxBlur : f32,\n  _pad0 : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = vec2f(1.0) / uni.u_resolution;\n  // No depth texture in WebGPU yet: circle of confusion is fixed, so the disc uses the full radius.\n  let blur = uni.u_maxBlur;\n  var sum = vec4f(0.0);\n  var total = 0.0;\n  for (var i = 0; i < 16; i = i + 1) {\n    let ang = f32(i) * 0.39269908; // golden-ish angular step over the disc\n    let rad = (f32(i % 4) + 1.0) * 0.25;\n    let offset = vec2f(cos(ang), sin(ang)) * rad * blur * texel;\n    sum = sum + textureSampleLevel(tex, smp, uv + offset, 0.0);\n    total = total + 1.0;\n  }\n  return sum / total;\n}';

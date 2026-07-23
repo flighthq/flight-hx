@@ -13,6 +13,7 @@ import flighthq.node.Node.getNodeRuntime;
 import flighthq.node.Node.getNodeSignals;
 import flighthq.types.Entity.Kind;
 import flighthq.types.NodeSignals;
+import flighthq.types.SceneNode;
 import flighthq.types.SceneNode.SceneNodeRuntime;
 import flighthq.types.SceneNode.SceneNodeTraits;
 import flighthq.types.Types.SceneNodeKind;
@@ -21,13 +22,13 @@ import flighthq.types._internal._SceneNodeValues.SceneNodeTraitsKey;
 
 @:expose("flighthq.scene.SceneNode")
 class SceneNode {
-  public static function createSceneNode(?kind:Kind, ?obj:Dynamic):Dynamic {
+  public static function createSceneNode(?kind:Kind, ?obj:Dynamic):flighthq.types.SceneNode {
     if (kind == null) kind = cast (SceneNodeKind : Dynamic);
     var node:Dynamic = cast _Runtime.UNDEFINED;
     node = _Runtime.callValue(createNode, cast ([kind, obj, _Runtime.field(_Runtime, 'UNDEFINED'), createSceneNodeRuntime] : Array<Dynamic>));
     _Runtime.callValue(initAppearanceTrait, cast ([node, obj] : Array<Dynamic>));
     _Runtime.callValue(initTransform3DTrait, cast ([node] : Array<Dynamic>));
-    return cast (cast node : Dynamic);
+    return cast (cast node : flighthq.types.SceneNode);
     return cast null;
   }
 
@@ -44,17 +45,17 @@ class SceneNode {
     return cast null;
   }
 
-  public static function enableSceneNodeSignals(source:Dynamic):NodeSignals {
+  public static function enableSceneNodeSignals(source:flighthq.types.SceneNode):NodeSignals {
     return cast _Runtime.callValue(enableNodeSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getSceneNodeRuntime(source:Dynamic):SceneNodeRuntime {
+  public static function getSceneNodeRuntime(source:flighthq.types.SceneNode):SceneNodeRuntime {
     return cast (cast _Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)) : SceneNodeRuntime);
     return cast null;
   }
 
-  public static function getSceneNodeSignals(source:Dynamic):Null<NodeSignals> {
+  public static function getSceneNodeSignals(source:flighthq.types.SceneNode):Null<NodeSignals> {
     return cast _Runtime.callValue(getNodeSignals, cast ([source] : Array<Dynamic>));
     return cast null;
   }

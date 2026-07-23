@@ -13,6 +13,7 @@ import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Slot.connectSignal;
 import flighthq.signals.Slot.disconnectSignal;
 import flighthq.types.FocusEventData;
+import flighthq.types.FocusManager;
 import flighthq.types.FocusManager.FocusDirection;
 import flighthq.types.FocusManager.FocusManagerOptions;
 import flighthq.types.FocusManager.FocusNavigationInput;
@@ -20,16 +21,17 @@ import flighthq.types.FocusManager.FocusNavigationOptions;
 import flighthq.types.HasBoundsRectangle.Spatial2DNode;
 import flighthq.types.InputKeyboardData;
 import flighthq.types.Node.NodeAny;
+import flighthq.types.Signal;
 
 typedef FocusSignalName__focusManager = String;
 
 @:expose("flighthq.interaction.FocusManager")
 class FocusManager {
-  public static function clearFocus<N>(manager:Dynamic):Void {
+  public static function clearFocus<N>(manager:flighthq.types.FocusManager<Dynamic>):Void {
     _Runtime.callValue(setFocusedNode, cast ([manager, null] : Array<Dynamic>));
   }
 
-  public static function connectFocusNavigation<N>(input:FocusNavigationInput, manager:Dynamic, ?options:FocusNavigationOptions):Dynamic {
+  public static function connectFocusNavigation<N>(input:FocusNavigationInput, manager:flighthq.types.FocusManager<Dynamic>, ?options:FocusNavigationOptions):Dynamic {
     if (options == null) options = cast ({  } : Dynamic);
     var arrowKeys:Dynamic = cast _Runtime.UNDEFINED;
     var onKeyDown:Dynamic = cast _Runtime.UNDEFINED;
@@ -49,18 +51,18 @@ class FocusManager {
     return cast null;
   }
 
-  public static function createFocusManager<N>(root:Dynamic, ?options:FocusManagerOptions):Dynamic {
+  public static function createFocusManager<N>(root:Dynamic, ?options:FocusManagerOptions):flighthq.types.FocusManager<Dynamic> {
     if (options == null) options = cast ({  } : Dynamic);
     return cast { focused: null, root: root, wrap: _Runtime.coalesce(_Runtime.field(options, 'wrap'), function():Dynamic return cast true) };
     return cast null;
   }
 
-  public static function focusNextNode<N>(manager:Dynamic):Null<Dynamic> {
+  public static function focusNextNode<N>(manager:flighthq.types.FocusManager<Dynamic>):Null<Dynamic> {
     return cast _Runtime.callValue(FocusManager.stepFocus__focusManager, cast ([manager, 1.0] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function focusNodeInDirection<N>(manager:Dynamic, direction:FocusDirection):Null<Dynamic> {
+  public static function focusNodeInDirection<N>(manager:flighthq.types.FocusManager<Dynamic>, direction:FocusDirection):Null<Dynamic> {
     var current:Dynamic = cast _Runtime.UNDEFINED;
     var order:Dynamic = cast _Runtime.UNDEFINED;
     var origin:Dynamic = cast _Runtime.UNDEFINED;
@@ -90,17 +92,17 @@ class FocusManager {
     return cast null;
   }
 
-  public static function focusPreviousNode<N>(manager:Dynamic):Null<Dynamic> {
+  public static function focusPreviousNode<N>(manager:flighthq.types.FocusManager<Dynamic>):Null<Dynamic> {
     return cast _Runtime.callValue(FocusManager.stepFocus__focusManager, cast ([manager, -1.0] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getFocusedNode<N>(manager:Dynamic):Null<Dynamic> {
+  public static function getFocusedNode<N>(manager:flighthq.types.FocusManager<Dynamic>):Null<Dynamic> {
     return cast _Runtime.field(manager, 'focused');
     return cast null;
   }
 
-  public static function getFocusOrder<N>(manager:Dynamic, ?out:Array<Dynamic>):Array<Dynamic> {
+  public static function getFocusOrder<N>(manager:flighthq.types.FocusManager<Dynamic>, ?out:Array<Dynamic>):Array<Dynamic> {
     if (out == null) out = cast (cast ([] : Array<Dynamic>) : Dynamic);
     _Runtime.setLength(out, 0.0);
     _Runtime.callValue(FocusManager.collectFocusStops__focusManager, cast ([_Runtime.field(manager, 'root'), (cast out : Array<NodeAny>)] : Array<Dynamic>));
@@ -109,12 +111,12 @@ class FocusManager {
     return cast null;
   }
 
-  public static function isNodeFocused<N>(manager:Dynamic, node:Dynamic):Bool {
+  public static function isNodeFocused<N>(manager:flighthq.types.FocusManager<Dynamic>, node:Dynamic):Bool {
     return cast _Runtime.strictEquals(_Runtime.field(manager, 'focused'), node);
     return cast null;
   }
 
-  public static function setFocusedNode<N>(manager:Dynamic, node:Null<Dynamic>):Bool {
+  public static function setFocusedNode<N>(manager:flighthq.types.FocusManager<Dynamic>, node:Null<Dynamic>):Bool {
     var previous:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(node, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(isNodeFocusable, cast ([node] : Array<Dynamic>)))))) { return cast false; }
     previous = _Runtime.field(manager, 'focused');
@@ -214,7 +216,7 @@ class FocusManager {
       _Runtime.setField(FocusManager._focusData__focusManager, 'currentTarget', current);
       var signals:Dynamic = _Runtime.callValue(getInteractionSignals, cast ([current] : Array<Dynamic>));
       var signal:Dynamic = _Runtime.select(!_Runtime.strictEquals(signals, null), function():Dynamic return cast _Runtime.getIndex(signals, name), function():Dynamic return cast null);
-      if (_Runtime.truthy(!_Runtime.strictEquals(signal, null))) { _Runtime.callValue(emitSignal, cast ([(cast signal : Dynamic), FocusManager._focusData__focusManager] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(signal, null))) { _Runtime.callValue(emitSignal, cast ([(cast signal : Signal<Dynamic>), FocusManager._focusData__focusManager] : Array<Dynamic>)); }
       if (_Runtime.truthy(_Runtime.strictEquals(current, root))) { break; }
       (current = cast ((cast _Runtime.callValue(getNodeParent, cast ([current] : Array<Dynamic>)) : Null<NodeAny>) : Dynamic));
     }
@@ -227,7 +229,7 @@ class FocusManager {
     return cast null;
   }
 
-  public static function stepFocus__focusManager<N>(manager:Dynamic, delta:Float):Null<Dynamic> {
+  public static function stepFocus__focusManager<N>(manager:flighthq.types.FocusManager<Dynamic>, delta:Float):Null<Dynamic> {
     var order:Dynamic = cast _Runtime.UNDEFINED;
     var current:Dynamic = cast _Runtime.UNDEFINED;
     var from:Dynamic = cast _Runtime.UNDEFINED;

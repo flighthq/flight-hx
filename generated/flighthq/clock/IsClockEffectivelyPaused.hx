@@ -3,11 +3,12 @@ package flighthq.clock;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Clock;
 
 @:expose("flighthq.clock.IsClockEffectivelyPaused")
 class IsClockEffectivelyPaused {
-  public static function isClockEffectivelyPaused(clock:Dynamic):Bool {
-    var current:Null<Dynamic> = cast _Runtime.UNDEFINED;
+  public static function isClockEffectivelyPaused(clock:Clock):Bool {
+    var current:Null<Clock> = cast _Runtime.UNDEFINED;
     current = clock;
     while (_Runtime.truthy(!_Runtime.strictEquals(current, null))) {
       if (_Runtime.truthy(_Runtime.field(current, 'paused'))) { return cast true; }

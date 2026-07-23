@@ -7,10 +7,11 @@ import flighthq.textureatlas.TextureAtlasRegion.createTextureAtlasRegion;
 import flighthq.textureatlasFormats.TextureAtlasAsepriteSchema.TextureAtlasAsepriteArrayFrame;
 import flighthq.textureatlasFormats.TextureAtlasAsepriteSchema.TextureAtlasAsepriteBaseFrame;
 import flighthq.textureatlasFormats.TextureAtlasAsepriteSchema.TextureAtlasAsepriteDocument;
+import flighthq.types.TextureAtlas;
 
 @:expose("flighthq.textureatlasFormats.TextureAtlasAsepriteParse")
 class TextureAtlasAsepriteParse {
-  public static function parseTextureAtlasAsepriteDocument(doc:TextureAtlasAsepriteDocument, atlas:Dynamic):Dynamic {
+  public static function parseTextureAtlasAsepriteDocument(doc:TextureAtlasAsepriteDocument, atlas:TextureAtlas):TextureAtlas {
     _Runtime.setLength(_Runtime.field(atlas, 'regions'), 0.0);
     if (_Runtime.truthy(_Runtime.isArray(_Runtime.field(doc, 'frames')))) {
       for (entry in _Runtime.iterable(_Runtime.field(doc, 'frames'))) {
@@ -27,14 +28,14 @@ class TextureAtlasAsepriteParse {
     return cast null;
   }
 
-  public static function parseTextureAtlasAsepriteJson(json:String, atlas:Dynamic):Dynamic {
+  public static function parseTextureAtlasAsepriteJson(json:String, atlas:TextureAtlas):TextureAtlas {
     var doc:Dynamic = cast _Runtime.UNDEFINED;
     doc = (cast _Runtime.jsonParse(json) : TextureAtlasAsepriteDocument);
     return cast _Runtime.callValue(parseTextureAtlasAsepriteDocument, cast ([doc, atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function applyAsepriteFrame__textureAtlasAsepriteParse(atlas:Dynamic, name:String, entry:Dynamic):Void {
+  public static function applyAsepriteFrame__textureAtlasAsepriteParse(atlas:TextureAtlas, name:String, entry:Dynamic):Void {
     _Runtime.callProperty(_Runtime.field(atlas, 'regions'), 'push', cast ([_Runtime.callValue(createTextureAtlasRegion, cast ([{ height: _Runtime.field(_Runtime.field(entry, 'frame'), 'h'), id: _Runtime.field(_Runtime.field(atlas, 'regions'), 'length'), name: name, originalHeight: _Runtime.select(_Runtime.field(entry, 'trimmed'), function():Dynamic return cast _Runtime.field(_Runtime.field(entry, 'sourceSize'), 'h'), function():Dynamic return cast null), originalWidth: _Runtime.select(_Runtime.field(entry, 'trimmed'), function():Dynamic return cast _Runtime.field(_Runtime.field(entry, 'sourceSize'), 'w'), function():Dynamic return cast null), pivotX: null, pivotY: null, rotated: _Runtime.field(entry, 'rotated'), sourceX: _Runtime.field(_Runtime.field(entry, 'spriteSourceSize'), 'x'), sourceY: _Runtime.field(_Runtime.field(entry, 'spriteSourceSize'), 'y'), trimmed: _Runtime.field(entry, 'trimmed'), width: _Runtime.field(_Runtime.field(entry, 'frame'), 'w'), x: _Runtime.field(_Runtime.field(entry, 'frame'), 'x'), y: _Runtime.field(_Runtime.field(entry, 'frame'), 'y') }] : Array<Dynamic>))] : Array<Dynamic>));
   }
 }

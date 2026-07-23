@@ -4,6 +4,7 @@ package flighthq.adjustments;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.adjustments.ColorMatrixMath.COLOR_MATRIX_LENGTH;
+import flighthq.types.ColorMatrixAdjustment;
 
 @:expose("flighthq.adjustments.ColorMatrixAdjustment")
 class ColorMatrixAdjustment {

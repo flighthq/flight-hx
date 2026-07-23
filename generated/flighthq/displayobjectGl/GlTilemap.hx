@@ -12,14 +12,17 @@ import flighthq.render.Renderer.noopRendererData;
 import flighthq.renderGl.GlMaterialRegistry.resolveGlMaterialRenderer;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.BatchFormat;
+import flighthq.types.ColorTransform;
+import flighthq.types.GlRenderState;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.SpriteRenderer;
+import flighthq.types.Tilemap;
 
 @:expose("flighthq.displayobjectGl.GlTilemap")
 class GlTilemap {
   public static final INSTANCE_FLOATS__glTilemap:Dynamic = 13.0;
 
-  public static function submitGlTilemap__glTilemap(state:Dynamic, tilemapNode:RenderProxy2D):Void {
+  public static function submitGlTilemap__glTilemap(state:GlRenderState, tilemapNode:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -54,7 +57,7 @@ class GlTilemap {
     var writeBase:Dynamic = cast _Runtime.UNDEFINED;
     var drawCount:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    source = (cast _Runtime.field(tilemapNode, 'source') : Dynamic);
+    source = (cast _Runtime.field(tilemapNode, 'source') : Tilemap);
     __destructure0 = _Runtime.field(source, 'data');
     tileset = _Runtime.field(__destructure0, 'tileset');
     columns = _Runtime.field(__destructure0, 'columns');
@@ -117,7 +120,7 @@ class GlTilemap {
             _Runtime.setIndex(instanceData, (writeBase + 11.0), ((_Runtime.field(region, 'y') + _Runtime.field(region, 'height')) * ih));
             _Runtime.setIndex(instanceData, (writeBase + 12.0), alpha);
             _Runtime.callValue(packGlSpriteBatchMaterialInstance, cast ([state, nodeMaterialData, (startCount + drawCount)] : Array<Dynamic>));
-            var colorTransform:Dynamic = _Runtime.coalesce((cast _Runtime.optionalIndex(perTileColorTransform, ((row * columns) + col)) : Null<Dynamic>), function():Dynamic return cast nodeColorTransform);
+            var colorTransform:Dynamic = _Runtime.coalesce((cast _Runtime.optionalIndex(perTileColorTransform, ((row * columns) + col)) : Null<ColorTransform>), function():Dynamic return cast nodeColorTransform);
             _Runtime.callValue(recordGlSpriteBatchColorTransform, cast ([state, colorTransform, (startCount + drawCount)] : Array<Dynamic>));
             (writeBase = cast ((writeBase + GlTilemap.INSTANCE_FLOATS__glTilemap) : Dynamic));
             drawCount++;

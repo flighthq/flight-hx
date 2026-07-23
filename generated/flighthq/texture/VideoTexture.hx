@@ -12,6 +12,8 @@ import flighthq.texture.Sampler.cloneSampler;
 import flighthq.texture.Sampler.copySampler;
 import flighthq.texture.Sampler.createSampler;
 import flighthq.types.Matrix3.Matrix3Like;
+import flighthq.types.VideoResource;
+import flighthq.types.VideoTexture;
 import flighthq.types.VideoTexture.VideoTextureLike;
 
 @:expose("flighthq.texture.VideoTexture")
@@ -22,7 +24,7 @@ class VideoTexture {
     return cast null;
   }
 
-  public static function cloneVideoTexture(source:VideoTextureLike):Dynamic {
+  public static function cloneVideoTexture(source:VideoTextureLike):flighthq.types.VideoTexture {
     return cast _Runtime.callValue(createEntity, cast ([{ colorSpace: _Runtime.field(source, 'colorSpace'), frameId: -1.0, sampler: _Runtime.callValue(cloneSampler, cast ([_Runtime.field(source, 'sampler')] : Array<Dynamic>)), source: _Runtime.field(source, 'source'), uvOffset: _Runtime.callValue(cloneVector2, cast ([_Runtime.field(source, 'uvOffset')] : Array<Dynamic>)), uvRotation: _Runtime.field(source, 'uvRotation'), uvScale: _Runtime.callValue(cloneVector2, cast ([_Runtime.field(source, 'uvScale')] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
@@ -45,7 +47,7 @@ class VideoTexture {
     _Runtime.setField(out, 'uvRotation', uvRotation);
   }
 
-  public static function createVideoTexture(source:Dynamic, ?opts:Dynamic):Dynamic {
+  public static function createVideoTexture(source:VideoResource, ?opts:Dynamic):flighthq.types.VideoTexture {
     return cast _Runtime.callValue(createEntity, cast ([{ colorSpace: _Runtime.coalesce(_Runtime.optionalField(opts, 'colorSpace'), function():Dynamic return cast 'srgb'), frameId: _Runtime.coalesce(_Runtime.optionalField(opts, 'frameId'), function():Dynamic return cast -1.0), sampler: _Runtime.select(_Runtime.optionalField(opts, 'sampler'), function():Dynamic return cast _Runtime.callValue(cloneSampler, cast ([_Runtime.field(opts, 'sampler')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createSampler, cast ([] : Array<Dynamic>))), source: _Runtime.coalesce(_Runtime.optionalField(opts, 'source'), function():Dynamic return cast source), uvOffset: _Runtime.select(_Runtime.optionalField(opts, 'uvOffset'), function():Dynamic return cast _Runtime.callValue(cloneVector2, cast ([_Runtime.field(opts, 'uvOffset')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector2, cast ([0.0, 0.0] : Array<Dynamic>))), uvRotation: _Runtime.coalesce(_Runtime.optionalField(opts, 'uvRotation'), function():Dynamic return cast 0.0), uvScale: _Runtime.select(_Runtime.optionalField(opts, 'uvScale'), function():Dynamic return cast _Runtime.callValue(cloneVector2, cast ([_Runtime.field(opts, 'uvScale')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createVector2, cast ([1.0, 1.0] : Array<Dynamic>))) }] : Array<Dynamic>));
     return cast null;
   }
@@ -108,7 +110,7 @@ class VideoTexture {
     _Runtime.setField(videoTexture, 'frameId', -1.0);
   }
 
-  public static function setVideoTextureSource(videoTexture:VideoTextureLike, source:Dynamic):Void {
+  public static function setVideoTextureSource(videoTexture:VideoTextureLike, source:VideoResource):Void {
     _Runtime.setField(videoTexture, 'source', source);
     _Runtime.setField(videoTexture, 'frameId', -1.0);
   }

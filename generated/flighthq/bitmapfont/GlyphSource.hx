@@ -6,10 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.bitmapfont.BitmapFont.getBitmapFontGlyph;
 import flighthq.bitmapfont.BitmapFont.getBitmapFontKerning;
 import flighthq.bitmapfont.BitmapFont.getBitmapFontMetrics;
+import flighthq.types.BitmapFont;
+import flighthq.types.GlyphSource;
 
 @:expose("flighthq.bitmapfont.GlyphSource")
 class GlyphSource {
-  public static function createGlyphSourceFromBitmapFont(font:Dynamic):Dynamic {
+  public static function createGlyphSourceFromBitmapFont(font:BitmapFont):flighthq.types.GlyphSource {
     return cast { getGlyphAtlasImage: function(page:Dynamic = 0.0) {
       return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.getIndex(_Runtime.field(font, 'pages'), page), 'image'), function():Dynamic return cast null);
     }, getGlyphEntry: function(codepoint:Dynamic) {

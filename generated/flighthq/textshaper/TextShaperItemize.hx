@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textshaper.TextShaperRun.shapeTextRun;
 import flighthq.types.ShapedRun;
+import flighthq.types.TextFormat;
 import flighthq.types.TextItem;
 import flighthq.types.TextShaperOptions;
 
 @:expose("flighthq.textshaper.TextShaperItemize")
 class TextShaperItemize {
-  public static function itemizeText(text:String, _format:Dynamic, ?options:TextShaperOptions):Array<TextItem> {
+  public static function itemizeText(text:String, _format:TextFormat, ?options:TextShaperOptions):Array<TextItem> {
     var baseDirection:Dynamic = cast _Runtime.UNDEFINED;
     var items:Array<TextItem> = cast _Runtime.UNDEFINED;
     var runStart:Dynamic = cast _Runtime.UNDEFINED;
@@ -59,7 +60,7 @@ class TextShaperItemize {
     return cast null;
   }
 
-  public static function shapeTextRuns(text:String, format:Dynamic, ?options:TextShaperOptions):Array<ShapedRun> {
+  public static function shapeTextRuns(text:String, format:TextFormat, ?options:TextShaperOptions):Array<ShapedRun> {
     var items:Dynamic = cast _Runtime.UNDEFINED;
     var result:Array<ShapedRun> = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0))) { return cast cast ([] : Array<Dynamic>); }

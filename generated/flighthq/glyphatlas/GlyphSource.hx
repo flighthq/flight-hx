@@ -7,10 +7,12 @@ import flighthq.glyphatlas.GlyphAtlas.getGlyphAtlasSurface;
 import flighthq.glyphatlas.GlyphAtlasEntry.getGlyphAtlasEntry;
 import flighthq.glyphatlas.GlyphAtlasMetrics.getGlyphAtlasKerning;
 import flighthq.glyphatlas.GlyphAtlasMetrics.getGlyphAtlasMetrics;
+import flighthq.types.GlyphSource;
+import flighthq.types.GlyphSource.GlyphAtlas;
 
 @:expose("flighthq.glyphatlas.GlyphSource")
 class GlyphSource {
-  public static function createGlyphSourceFromGlyphAtlas(atlas:Dynamic):Dynamic {
+  public static function createGlyphSourceFromGlyphAtlas(atlas:GlyphAtlas):flighthq.types.GlyphSource {
     return cast { getGlyphAtlasImage: function(page:Dynamic = 0.0) {
       return cast _Runtime.select(_Runtime.strictEquals(page, 0.0), function():Dynamic return cast _Runtime.callValue(getGlyphAtlasSurface, cast ([atlas] : Array<Dynamic>)), function():Dynamic return cast null);
     }, getGlyphEntry: function(codepoint:Dynamic) {

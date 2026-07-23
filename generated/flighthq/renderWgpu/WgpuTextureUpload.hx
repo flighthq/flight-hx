@@ -3,6 +3,7 @@ package flighthq.renderWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.ImageResource;
 
 @:expose("flighthq.renderWgpu.WgpuTextureUpload")
 class WgpuTextureUpload {
@@ -14,7 +15,7 @@ class WgpuTextureUpload {
     _Runtime.callProperty(_Runtime.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: source }, { texture: texture, origin: origin }, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
   }
 
-  public static function uploadWgpuTextureImageResource(device:Dynamic, texture:Dynamic, origin:Dynamic, image:Dynamic):Void {
+  public static function uploadWgpuTextureImageResource(device:Dynamic, texture:Dynamic, origin:Dynamic, image:ImageResource):Void {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(image, 'source'), null))) {
       _Runtime.callValue(uploadWgpuTextureElement, cast ([device, texture, origin, _Runtime.field(image, 'width'), _Runtime.field(image, 'height'), (cast _Runtime.field(image, 'source') : Dynamic)] : Array<Dynamic>));
     } else {

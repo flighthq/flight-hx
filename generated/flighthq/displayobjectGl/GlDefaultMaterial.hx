@@ -9,16 +9,17 @@ import flighthq.displayobjectGl.GlSpriteBatch.setGlQuadBatchWorldAndTexture;
 import flighthq.displayobjectGl.GlSpriteBatch.useGlQuadBatchProgram;
 import flighthq.renderGl.GlMaterialRegistry.registerGlMaterialRenderer;
 import flighthq.types.GlMaterialRenderer;
+import flighthq.types.GlRenderState;
 import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
 @:expose("flighthq.displayobjectGl.GlDefaultMaterial")
 class GlDefaultMaterial {
-  public static function registerDefaultGlMaterial(state:Dynamic):Void {
+  public static function registerDefaultGlMaterial(state:GlRenderState):Void {
     _Runtime.callValue(registerGlMaterialRenderer, cast ([state, DefaultMaterialKind, defaultGlMaterialRenderer] : Array<Dynamic>));
   }
 
-  public static final defaultGlMaterialRenderer:GlMaterialRenderer = { instanceFloatCount: 0.0, bind: function(state:Dynamic) {
+  public static final defaultGlMaterialRenderer:GlMaterialRenderer = { instanceFloatCount: 0.0, bind: function(state:GlRenderState) {
     var shader:Dynamic = cast _Runtime.UNDEFINED;
     shader = _Runtime.callValue(ensureGlQuadBatchShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(useGlQuadBatchProgram, cast ([state, _Runtime.field(shader, 'program')] : Array<Dynamic>));

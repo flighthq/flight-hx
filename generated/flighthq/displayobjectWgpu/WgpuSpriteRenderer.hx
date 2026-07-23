@@ -12,11 +12,13 @@ import flighthq.renderWgpu.WgpuMaterialRegistry.resolveWgpuMaterialRenderer;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.BatchFormat;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.Sprite;
 import flighthq.types.SpriteRenderer;
+import flighthq.types.WgpuRenderState;
 
 @:expose("flighthq.displayobjectWgpu.WgpuSpriteRenderer")
 class WgpuSpriteRenderer {
-  public static function submitWgpuSpriteNode__wgpuSpriteRenderer(state:Dynamic, spriteNode:RenderProxy2D):Void {
+  public static function submitWgpuSpriteNode__wgpuSpriteRenderer(state:WgpuRenderState, spriteNode:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -34,7 +36,7 @@ class WgpuSpriteRenderer {
     var d:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) { return; }
-    source = (cast _Runtime.field(spriteNode, 'source') : Dynamic);
+    source = (cast _Runtime.field(spriteNode, 'source') : Sprite);
     __destructure0 = _Runtime.field(source, 'data');
     atlas = _Runtime.field(__destructure0, 'atlas');
     id = _Runtime.field(__destructure0, 'id');

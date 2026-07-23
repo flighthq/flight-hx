@@ -4,71 +4,72 @@ package flighthq.image;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.ImageResource;
 import flighthq.types.ImageResourceCompressed;
 
 @:expose("flighthq.image.ImageResource")
 class ImageResource {
-  public static function cloneImageResource(resource:Dynamic):Dynamic {
+  public static function cloneImageResource(resource:flighthq.types.ImageResource):flighthq.types.ImageResource {
     return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(resource, 'alphaType'), compressed: _Runtime.field(resource, 'compressed'), data: _Runtime.field(resource, 'data'), format: _Runtime.field(resource, 'format'), height: _Runtime.field(resource, 'height'), source: _Runtime.field(resource, 'source'), version: _Runtime.field(resource, 'version'), width: _Runtime.field(resource, 'width') }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createCompressedImageResource(compressed:ImageResourceCompressed):Dynamic {
+  public static function createCompressedImageResource(compressed:ImageResourceCompressed):flighthq.types.ImageResource {
     return cast _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', compressed: compressed, data: null, format: 'rgba8unorm', height: _Runtime.field(_Runtime.field(compressed, 'container'), 'height'), source: null, version: 0.0, width: _Runtime.field(_Runtime.field(compressed, 'container'), 'width') }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createImageResource(?image:Dynamic):Dynamic {
-    var resource:Dynamic = cast _Runtime.UNDEFINED;
+  public static function createImageResource(?image:Dynamic):flighthq.types.ImageResource {
+    var resource:flighthq.types.ImageResource = cast _Runtime.UNDEFINED;
     resource = _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', compressed: null, data: null, format: 'rgba8unorm', height: 0.0, source: _Runtime.coalesce(image, function():Dynamic return cast null), version: 0.0, width: 0.0 }] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(resource, 'source'), null))) { _Runtime.callValue(ImageResource.updateImageResourceSize__imageResource, cast ([resource] : Array<Dynamic>)); }
     return cast resource;
     return cast null;
   }
 
-  public static function disposeImageResource(resource:Dynamic):Void {
+  public static function disposeImageResource(resource:flighthq.types.ImageResource):Void {
     _Runtime.setField(resource, 'compressed', null);
     _Runtime.setField(resource, 'data', null);
     _Runtime.setField(resource, 'source', null);
     _Runtime.callValue(invalidateImageResource, cast ([resource] : Array<Dynamic>));
   }
 
-  public static function getImageResourceByteSize(resource:Dynamic):Float {
+  public static function getImageResourceByteSize(resource:flighthq.types.ImageResource):Float {
     return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.field(resource, 'data'), null), function():Dynamic return cast _Runtime.field(_Runtime.field(resource, 'data'), 'byteLength'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  public static function hasImageResourceData(resource:Dynamic):Bool {
+  public static function hasImageResourceData(resource:flighthq.types.ImageResource):Bool {
     return cast !_Runtime.strictEquals(_Runtime.field(resource, 'data'), null);
     return cast null;
   }
 
-  public static function hasImageResourcePixels(resource:Dynamic):Bool {
+  public static function hasImageResourcePixels(resource:flighthq.types.ImageResource):Bool {
     return cast _Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(resource, 'source'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(resource, 'data'), null)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(resource, 'compressed'), null));
     return cast null;
   }
 
-  public static function hasImageResourceSource(resource:Dynamic):Bool {
+  public static function hasImageResourceSource(resource:flighthq.types.ImageResource):Bool {
     return cast !_Runtime.strictEquals(_Runtime.field(resource, 'source'), null);
     return cast null;
   }
 
-  public static function invalidateImageResource(resource:Dynamic):Void {
+  public static function invalidateImageResource(resource:flighthq.types.ImageResource):Void {
     _Runtime.setField(resource, 'version', _Runtime.unsignedShiftRight(Std.int((_Runtime.field(resource, 'version') + 1.0)), Std.int(0.0)));
   }
 
-  public static function isImageResourceEmpty(resource:Dynamic):Bool {
+  public static function isImageResourceEmpty(resource:flighthq.types.ImageResource):Bool {
     return cast _Runtime.orValue(_Runtime.compare(_Runtime.field(resource, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(resource, 'height'), 0.0, '<='));
     return cast null;
   }
 
-  public static function setImageResourceSource(resource:Dynamic, element:Null<Dynamic>):Void {
+  public static function setImageResourceSource(resource:flighthq.types.ImageResource, element:Null<Dynamic>):Void {
     _Runtime.setField(resource, 'source', element);
     if (_Runtime.truthy(!_Runtime.strictEquals(element, null))) { _Runtime.callValue(ImageResource.updateImageResourceSize__imageResource, cast ([resource] : Array<Dynamic>)); }
     _Runtime.callValue(invalidateImageResource, cast ([resource] : Array<Dynamic>));
   }
 
-  public static function updateImageResourceSize__imageResource(resource:Dynamic):Void {
+  public static function updateImageResourceSize__imageResource(resource:flighthq.types.ImageResource):Void {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.field(resource, 'source');
     if (_Runtime.truthy(_Runtime.isInstanceOf(element, _Runtime.callProperty(_Runtime, 'globalValue', cast (['HTMLVideoElement'] : Array<Dynamic>))))) {

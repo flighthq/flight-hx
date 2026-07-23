@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.displayobjectCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.types.AdvancedBlendMode;
 import flighthq.types.BlendMode;
+import flighthq.types.CanvasRenderState;
 import flighthq.types._internal._AdvancedBlendModeValues.AdvancedBlendModeValue;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 

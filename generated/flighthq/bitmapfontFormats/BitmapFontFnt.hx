@@ -8,12 +8,13 @@ import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontCharRecord;
 import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontKerningRecord;
 import flighthq.bitmapfontFormats.BitmapFontRecord.BitmapFontPageRecord;
 import flighthq.bitmapfontFormats._internal._BitmapFontRecordValues.buildBitmapFontFromRecord;
+import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontParseOptions;
 import flighthq.types.GlyphSource.GlyphEntry;
 
 @:expose("flighthq.bitmapfontFormats.BitmapFontFnt")
 class BitmapFontFnt {
-  public static function formatBitmapFontFnt(font:Dynamic):String {
+  public static function formatBitmapFontFnt(font:BitmapFont):String {
     var metrics:Dynamic = cast _Runtime.UNDEFINED;
     var lineHeight:Dynamic = cast _Runtime.UNDEFINED;
     var base:Dynamic = cast _Runtime.UNDEFINED;
@@ -59,7 +60,7 @@ class BitmapFontFnt {
     return cast null;
   }
 
-  public static function parseBitmapFontFnt(text:String, ?options:BitmapFontParseOptions):Null<Dynamic> {
+  public static function parseBitmapFontFnt(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
     var record:Dynamic = cast _Runtime.UNDEFINED;
     record = _Runtime.callValue(BitmapFontFnt.parseBitmapFontFntRecord__bitmapFontFnt, cast ([text] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(record, null))) { return cast null; }

@@ -9,11 +9,12 @@ import flighthq.sceneFormats.GltfParse.createScenesFromGlb;
 import flighthq.sceneFormats.GltfParse.createScenesFromGltf;
 import flighthq.sceneFormats.GltfSchema.GltfDocument;
 import flighthq.sceneResources._internal._LoadSceneOptionsValues.resolveScenesWithOptions;
+import flighthq.types.Scene;
 
 @:expose("flighthq.sceneResources.LoadGltf")
 class LoadGltf {
-  public static function loadSceneFromGlb(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Dynamic> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
+  public static function loadSceneFromGlb(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Scene> {
+    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Scene> {
       var scene:Dynamic = cast _Runtime.UNDEFINED;
       scene = _Runtime.callValue(createSceneFromGlb, cast ([bytes] : Array<Dynamic>));
       flighthq._internal._Async.awaitValue(_Runtime.callValue(resolveScenesWithOptions, cast ([cast ([scene] : Array<Dynamic>), options] : Array<Dynamic>)));
@@ -22,8 +23,8 @@ class LoadGltf {
     })();
   }
 
-  public static function loadSceneFromGltf(source:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Dynamic> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
+  public static function loadSceneFromGltf(source:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Scene> {
+    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Scene> {
       var scene:Dynamic = cast _Runtime.UNDEFINED;
       scene = _Runtime.callValue(createSceneFromGltf, cast ([source] : Array<Dynamic>));
       flighthq._internal._Async.awaitValue(_Runtime.callValue(resolveScenesWithOptions, cast ([cast ([scene] : Array<Dynamic>), options] : Array<Dynamic>)));
@@ -32,8 +33,8 @@ class LoadGltf {
     })();
   }
 
-  public static function loadScenesFromGlb(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Array<Dynamic>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Array<Dynamic>> {
+  public static function loadScenesFromGlb(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Array<Scene>> {
+    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Array<Scene>> {
       var scenes:Dynamic = cast _Runtime.UNDEFINED;
       scenes = _Runtime.callValue(createScenesFromGlb, cast ([bytes] : Array<Dynamic>));
       flighthq._internal._Async.awaitValue(_Runtime.callValue(resolveScenesWithOptions, cast ([scenes, options] : Array<Dynamic>)));
@@ -42,8 +43,8 @@ class LoadGltf {
     })();
   }
 
-  public static function loadScenesFromGltf(source:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Array<Dynamic>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Array<Dynamic>> {
+  public static function loadScenesFromGltf(source:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Array<Scene>> {
+    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Array<Scene>> {
       var scenes:Dynamic = cast _Runtime.UNDEFINED;
       scenes = _Runtime.callValue(createScenesFromGltf, cast ([source] : Array<Dynamic>));
       flighthq._internal._Async.awaitValue(_Runtime.callValue(resolveScenesWithOptions, cast ([scenes, options] : Array<Dynamic>)));

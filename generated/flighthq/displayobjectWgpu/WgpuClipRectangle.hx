@@ -7,11 +7,12 @@ import flighthq.displayobjectWgpu.WgpuSpriteBatch.flushWgpuSpriteBatch;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuScissorRect;
 
 @:expose("flighthq.displayobjectWgpu.WgpuClipRectangle")
 class WgpuClipRectangle {
-  public static function popWgpuClipRectangle(state:Dynamic):Void {
+  public static function popWgpuClipRectangle(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var stack:Dynamic = cast _Runtime.UNDEFINED;
     var previous:Dynamic = cast _Runtime.UNDEFINED;
@@ -34,7 +35,7 @@ class WgpuClipRectangle {
     } }
   }
 
-  public static function pushWgpuClipRectangle(state:Dynamic, rect:RectangleLike, transform:MatrixLike):Void {
+  public static function pushWgpuClipRectangle(state:WgpuRenderState, rect:RectangleLike, transform:MatrixLike):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var next:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
@@ -52,7 +53,7 @@ class WgpuClipRectangle {
     }
   }
 
-  public static function computeWgpuScissorRect__wgpuClipRectangle(state:Dynamic, rect:RectangleLike, transform:MatrixLike):WgpuScissorRect {
+  public static function computeWgpuScissorRect__wgpuClipRectangle(state:WgpuRenderState, rect:RectangleLike, transform:MatrixLike):WgpuScissorRect {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var x0:Dynamic = cast _Runtime.UNDEFINED;
     var y0:Dynamic = cast _Runtime.UNDEFINED;

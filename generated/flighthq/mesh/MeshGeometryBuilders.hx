@@ -7,11 +7,12 @@ import flighthq.geometry.Aabb.createAabb;
 import flighthq.mesh.MeshGeometry.createMeshGeometry;
 import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryBounds;
 import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryTangents;
+import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
 
 @:expose("flighthq.mesh.MeshGeometryBuilders")
 class MeshGeometryBuilders {
-  public static function createBoxMeshGeometry(width:Float = 1.0, height:Float = 1.0, depth:Float = 1.0):Dynamic {
+  public static function createBoxMeshGeometry(width:Float = 1.0, height:Float = 1.0, depth:Float = 1.0):MeshGeometry {
     var hx:Dynamic = cast _Runtime.UNDEFINED;
     var hy:Dynamic = cast _Runtime.UNDEFINED;
     var hz:Dynamic = cast _Runtime.UNDEFINED;
@@ -57,7 +58,7 @@ class MeshGeometryBuilders {
     return cast null;
   }
 
-  public static function createCapsuleMeshGeometry(radius:Float = 0.5, height:Float = 1.0, radialSegments:Float = 16.0, capSegments:Float = 8.0):Dynamic {
+  public static function createCapsuleMeshGeometry(radius:Float = 0.5, height:Float = 1.0, radialSegments:Float = 16.0, capSegments:Float = 8.0):MeshGeometry {
     var rSeg:Dynamic = cast _Runtime.UNDEFINED;
     var cSeg:Dynamic = cast _Runtime.UNDEFINED;
     var halfH:Dynamic = cast _Runtime.UNDEFINED;
@@ -151,7 +152,7 @@ class MeshGeometryBuilders {
     return cast null;
   }
 
-  public static function createCircleMeshGeometry(radius:Float = 0.5, segments:Float = 32.0):Dynamic {
+  public static function createCircleMeshGeometry(radius:Float = 0.5, segments:Float = 32.0):MeshGeometry {
     var segs:Dynamic = cast _Runtime.UNDEFINED;
     var positions:Array<Float> = cast _Runtime.UNDEFINED;
     var normals:Array<Float> = cast _Runtime.UNDEFINED;
@@ -167,12 +168,12 @@ class MeshGeometryBuilders {
     return cast null;
   }
 
-  public static function createConeMeshGeometry(radius:Float = 0.5, height:Float = 1.0, radialSegments:Float = 32.0, capped:Bool = true):Dynamic {
+  public static function createConeMeshGeometry(radius:Float = 0.5, height:Float = 1.0, radialSegments:Float = 32.0, capped:Bool = true):MeshGeometry {
     return cast _Runtime.callValue(createCylinderMeshGeometry, cast ([0.0, radius, height, radialSegments, capped] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createCylinderMeshGeometry(topRadius:Float = 0.5, bottomRadius:Float = 0.5, height:Float = 1.0, radialSegments:Float = 32.0, capped:Bool = true):Dynamic {
+  public static function createCylinderMeshGeometry(topRadius:Float = 0.5, bottomRadius:Float = 0.5, height:Float = 1.0, radialSegments:Float = 32.0, capped:Bool = true):MeshGeometry {
     var segments:Dynamic = cast _Runtime.UNDEFINED;
     var halfHeight:Dynamic = cast _Runtime.UNDEFINED;
     var positions:Array<Float> = cast _Runtime.UNDEFINED;
@@ -239,17 +240,17 @@ class MeshGeometryBuilders {
     return cast null;
   }
 
-  public static function createDodecahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):Dynamic {
+  public static function createDodecahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
     return cast _Runtime.callValue(createPolyhedronMeshGeometry, cast ([MeshGeometryBuilders.DODECAHEDRON_VERTS__meshGeometryBuilders, MeshGeometryBuilders.DODECAHEDRON_FACES__meshGeometryBuilders, radius, detail] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createIcosahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):Dynamic {
+  public static function createIcosahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
     return cast _Runtime.callValue(createPolyhedronMeshGeometry, cast ([MeshGeometryBuilders.ICOSAHEDRON_VERTS__meshGeometryBuilders, MeshGeometryBuilders.ICOSAHEDRON_FACES__meshGeometryBuilders, radius, detail] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createIcosphereMeshGeometry(radius:Float = 0.5, subdivisions:Float = 2.0):Dynamic {
+  public static function createIcosphereMeshGeometry(radius:Float = 0.5, subdivisions:Float = 2.0):MeshGeometry {
     var subs:Dynamic = cast _Runtime.UNDEFINED;
     var phi:Dynamic = cast _Runtime.UNDEFINED;
     var scale:Dynamic = cast _Runtime.UNDEFINED;
@@ -353,12 +354,12 @@ class MeshGeometryBuilders {
     return cast null;
   }
 
-  public static function createOctahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):Dynamic {
+  public static function createOctahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
     return cast _Runtime.callValue(createPolyhedronMeshGeometry, cast ([MeshGeometryBuilders.OCTAHEDRON_VERTS__meshGeometryBuilders, MeshGeometryBuilders.OCTAHEDRON_FACES__meshGeometryBuilders, radius, detail] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createPlaneMeshGeometry(width:Float = 1.0, depth:Float = 1.0, widthSegments:Float = 1.0, depthSegments:Float = 1.0):Dynamic {
+  public static function createPlaneMeshGeometry(width:Float = 1.0, depth:Float = 1.0, widthSegments:Float = 1.0, depthSegments:Float = 1.0):MeshGeometry {
     var wSeg:Dynamic = cast _Runtime.UNDEFINED;
     var dSeg:Dynamic = cast _Runtime.UNDEFINED;
     var hw:Dynamic = cast _Runtime.UNDEFINED;
@@ -417,7 +418,7 @@ class MeshGeometryBuilders {
     return cast null;
   }
 
-  public static function createPolyhedronMeshGeometry(vertexPositions:Array<Array<Float>>, faceIndices:Array<Array<Float>>, radius:Float = 0.5, detail:Float = 0.0):Dynamic {
+  public static function createPolyhedronMeshGeometry(vertexPositions:Array<Array<Float>>, faceIndices:Array<Array<Float>>, radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
     var subs:Dynamic = cast _Runtime.UNDEFINED;
     var verts:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var faces:Array<Array<Float>> = cast _Runtime.UNDEFINED;
@@ -517,7 +518,7 @@ class MeshGeometryBuilders {
     return cast null;
   }
 
-  public static function createQuadMeshGeometry(width:Float = 1.0, height:Float = 1.0):Dynamic {
+  public static function createQuadMeshGeometry(width:Float = 1.0, height:Float = 1.0):MeshGeometry {
     var hw:Dynamic = cast _Runtime.UNDEFINED;
     var hh:Dynamic = cast _Runtime.UNDEFINED;
     var positions:Dynamic = cast _Runtime.UNDEFINED;
@@ -534,7 +535,7 @@ class MeshGeometryBuilders {
     return cast null;
   }
 
-  public static function createRingMeshGeometry(innerRadius:Float = 0.25, outerRadius:Float = 0.5, segments:Float = 32.0):Dynamic {
+  public static function createRingMeshGeometry(innerRadius:Float = 0.25, outerRadius:Float = 0.5, segments:Float = 32.0):MeshGeometry {
     var segs:Dynamic = cast _Runtime.UNDEFINED;
     var positions:Array<Float> = cast _Runtime.UNDEFINED;
     var normals:Array<Float> = cast _Runtime.UNDEFINED;
@@ -575,7 +576,7 @@ class MeshGeometryBuilders {
     return cast null;
   }
 
-  public static function createSphereMeshGeometry(radius:Float = 0.5, widthSegments:Float = 32.0, heightSegments:Float = 16.0):Dynamic {
+  public static function createSphereMeshGeometry(radius:Float = 0.5, widthSegments:Float = 32.0, heightSegments:Float = 16.0):MeshGeometry {
     var wSeg:Dynamic = cast _Runtime.UNDEFINED;
     var hSeg:Dynamic = cast _Runtime.UNDEFINED;
     var positions:Array<Float> = cast _Runtime.UNDEFINED;
@@ -637,12 +638,12 @@ class MeshGeometryBuilders {
     return cast null;
   }
 
-  public static function createTetrahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):Dynamic {
+  public static function createTetrahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
     return cast _Runtime.callValue(createPolyhedronMeshGeometry, cast ([MeshGeometryBuilders.TETRAHEDRON_VERTS__meshGeometryBuilders, MeshGeometryBuilders.TETRAHEDRON_FACES__meshGeometryBuilders, radius, detail] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTorusKnotMeshGeometry(radius:Float = 0.5, tube:Float = 0.15, tubularSegments:Float = 64.0, radialSegments:Float = 8.0, p:Float = 2.0, q:Float = 3.0):Dynamic {
+  public static function createTorusKnotMeshGeometry(radius:Float = 0.5, tube:Float = 0.15, tubularSegments:Float = 64.0, radialSegments:Float = 8.0, p:Float = 2.0, q:Float = 3.0):MeshGeometry {
     var tSeg:Dynamic = cast _Runtime.UNDEFINED;
     var rSeg:Dynamic = cast _Runtime.UNDEFINED;
     var positions:Array<Float> = cast _Runtime.UNDEFINED;
@@ -749,7 +750,7 @@ class MeshGeometryBuilders {
     return cast null;
   }
 
-  public static function createTorusMeshGeometry(radius:Float = 0.5, tube:Float = 0.2, radialSegments:Float = 24.0, tubularSegments:Float = 48.0):Dynamic {
+  public static function createTorusMeshGeometry(radius:Float = 0.5, tube:Float = 0.2, radialSegments:Float = 24.0, tubularSegments:Float = 48.0):MeshGeometry {
     var rSeg:Dynamic = cast _Runtime.UNDEFINED;
     var tSeg:Dynamic = cast _Runtime.UNDEFINED;
     var positions:Array<Float> = cast _Runtime.UNDEFINED;
@@ -853,7 +854,7 @@ class MeshGeometryBuilders {
     }
   }
 
-  public static function buildCanonicalMeshGeometry__meshGeometryBuilders(positions:Array<Float>, normals:Array<Float>, uvs:Array<Float>, indices:Array<Float>):Dynamic {
+  public static function buildCanonicalMeshGeometry__meshGeometryBuilders(positions:Array<Float>, normals:Array<Float>, uvs:Array<Float>, indices:Array<Float>):MeshGeometry {
     var vertexCount:Dynamic = cast _Runtime.UNDEFINED;
     var vertices:Dynamic = cast _Runtime.UNDEFINED;
     var indexArray:Dynamic = cast _Runtime.UNDEFINED;

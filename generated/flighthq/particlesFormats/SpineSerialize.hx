@@ -9,6 +9,7 @@ import flighthq.particlesFormats.SerializeResult.ParticleSerializeResult;
 import flighthq.particlesFormats.SpineSchema.SpineAlphaKeyframe;
 import flighthq.particlesFormats.SpineSchema.SpineParticleDocument;
 import flighthq.particlesFormats.SpineSchema.SpineTintKeyframe;
+import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
 
 @:expose("flighthq.particlesFormats.SpineSerialize")
@@ -22,7 +23,7 @@ class SpineSerialize {
     return cast null;
   }
 
-  public static function configToDocument__spineSerialize(config:Dynamic, existing:Dynamic):SpineParticleDocument {
+  public static function configToDocument__spineSerialize(config:ParticleEmitterConfig, existing:Dynamic):SpineParticleDocument {
     var angleMid:Dynamic = cast _Runtime.UNDEFINED;
     var spreadDeg:Dynamic = cast _Runtime.UNDEFINED;
     angleMid = (_Runtime.callProperty(HxMath, 'atan2', cast ([-_Runtime.field(config, 'directionY'), _Runtime.field(config, 'directionX')] : Array<Dynamic>)) * SpineSerialize.RAD2DEG__spineSerialize);
@@ -40,14 +41,14 @@ class SpineSerialize {
     return cast null;
   }
 
-  public static function serializeSpineParticle(config:Dynamic, ?existing:Dynamic):String {
+  public static function serializeSpineParticle(config:ParticleEmitterConfig, ?existing:Dynamic):String {
     var doc:Dynamic = cast _Runtime.UNDEFINED;
     doc = _Runtime.callValue(SpineSerialize.configToDocument__spineSerialize, cast ([config, _Runtime.coalesce(existing, function():Dynamic return cast {  })] : Array<Dynamic>));
     return cast _Runtime.jsonStringify(doc, null, 2.0);
     return cast null;
   }
 
-  public static function serializeSpineParticleDocument(config:Dynamic, ?existing:Dynamic):ParticleSerializeResult {
+  public static function serializeSpineParticleDocument(config:ParticleEmitterConfig, ?existing:Dynamic):ParticleSerializeResult {
     var text:Dynamic = cast _Runtime.UNDEFINED;
     var warnings:Dynamic = cast _Runtime.UNDEFINED;
     text = _Runtime.callValue(serializeSpineParticle, cast ([config, existing] : Array<Dynamic>));
@@ -56,7 +57,7 @@ class SpineSerialize {
     return cast null;
   }
 
-  public static function collectSpineSerializeWarnings__spineSerialize(config:Dynamic):Array<String> {
+  public static function collectSpineSerializeWarnings__spineSerialize(config:ParticleEmitterConfig):Array<String> {
     var warnings:Array<String> = cast _Runtime.UNDEFINED;
     warnings = cast ([] : Array<Dynamic>);
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(config, 'burstCount'), 0.0, '>'))) {

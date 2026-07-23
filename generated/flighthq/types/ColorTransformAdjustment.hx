@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ColorTransformAdjustment = { var kind:AdjustmentKind; var colorMatrix:Array<Float>; var colorTransform:Dynamic; };
+typedef ColorTransformAdjustment = { var kind:AdjustmentKind; var colorMatrix:Array<Float>; var colorTransform:ColorTransform; };

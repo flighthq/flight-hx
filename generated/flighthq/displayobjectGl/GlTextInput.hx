@@ -11,12 +11,13 @@ import flighthq.textinput.TextInputEditing.getTextInputSelectionBeginIndex;
 import flighthq.textinput.TextInputEditing.getTextInputSelectionEndIndex;
 import flighthq.textinput.TextInputEditing.getTextInputSelectionRectangles;
 import flighthq.textlayout.RichTextMetrics.getRichTextScrollYOffset;
+import flighthq.types.RichText;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextSelectionRectangle;
 
 @:expose("flighthq.displayobjectGl.GlTextInput")
 class GlTextInput {
-  public static function drawGlTextInputOverlay(context:Dynamic, source:Dynamic, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
+  public static function drawGlTextInputOverlay(context:Dynamic, source:RichText, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
     var input:Dynamic = cast _Runtime.UNDEFINED;
     var firstVisibleLine:Dynamic = cast _Runtime.UNDEFINED;
     var scrollYOffset:Dynamic = cast _Runtime.UNDEFINED;

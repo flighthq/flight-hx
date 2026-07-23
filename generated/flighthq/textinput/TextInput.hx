@@ -4,17 +4,18 @@ package flighthq.textinput;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.text.RichText.getRichTextRuntime;
+import flighthq.types.RichText;
 import flighthq.types.RichText.RichTextRuntime;
 import flighthq.types.TextInputState;
 import flighthq.types.TextInputState.TextInputOptions;
 
 @:expose("flighthq.textinput.TextInput")
 class TextInput {
-  public static function disableTextInput(node:Dynamic):Void {
+  public static function disableTextInput(node:RichText):Void {
     _Runtime.setField((cast _Runtime.callValue(getRichTextRuntime, cast ([node] : Array<Dynamic>)) : RichTextRuntime), 'input', null);
   }
 
-  public static function enableTextInput(node:Dynamic, ?options:TextInputOptions):TextInputState {
+  public static function enableTextInput(node:RichText, ?options:TextInputOptions):TextInputState {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var state:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getRichTextRuntime, cast ([node] : Array<Dynamic>)) : RichTextRuntime);
@@ -29,12 +30,12 @@ class TextInput {
     return cast null;
   }
 
-  public static function getTextInputState(node:Dynamic):Null<TextInputState> {
+  public static function getTextInputState(node:RichText):Null<TextInputState> {
     return cast _Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([node] : Array<Dynamic>)), 'input');
     return cast null;
   }
 
-  public static function hasTextInput(node:Dynamic):Bool {
+  public static function hasTextInput(node:RichText):Bool {
     return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callValue(getRichTextRuntime, cast ([node] : Array<Dynamic>)), 'input'), null);
     return cast null;
   }

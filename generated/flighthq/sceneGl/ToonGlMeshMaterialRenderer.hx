@@ -18,8 +18,12 @@ import flighthq.sceneGl._internal._GlMeshProgramValues.hasGlUvTransform;
 import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshCameraPosition;
 import flighthq.sceneGl._internal._GlMeshProgramValues.setGlMeshViewProjection;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.types.Camera;
 import flighthq.types.GlMeshMaterialRenderer;
+import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
+import flighthq.types.Material;
+import flighthq.types.MeshGeometry;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.ToonMaterial;
@@ -28,7 +32,7 @@ import flighthq.types._internal._ToonMaterialValues.ToonMaterialKind;
 
 @:expose("flighthq.sceneGl.ToonGlMeshMaterialRenderer")
 class ToonGlMeshMaterialRenderer {
-  public static final toonGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:Dynamic, material:Null<Dynamic>, lights:SceneLightBlock, camera:Dynamic) {
+  public static final toonGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var toon:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -40,14 +44,14 @@ class ToonGlMeshMaterialRenderer {
     _Runtime.callValue(setGlMeshCameraPosition, cast ([gl, _Runtime.field(program, 'locCameraPosition'), camera] : Array<Dynamic>));
     _Runtime.callValue(bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
     _Runtime.callValue(ToonGlMeshMaterialRenderer.bindGlToonMaterialUniforms__toonGlMeshMaterialRenderer, cast ([state, program, toon] : Array<Dynamic>));
-  }, draw: function(state:Dynamic, proxy:SceneRenderProxy, geometry:Dynamic) {
+  }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
     if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
     _Runtime.callValue(drawGlMeshSubset, cast ([state, program, proxy, geometry] : Array<Dynamic>));
   } };
 
-  public static function registerToonGlMaterial(state:Dynamic):Void {
+  public static function registerToonGlMaterial(state:GlRenderState):Void {
     _Runtime.callValue(registerGlMeshMaterialRenderer, cast ([state, ToonMaterialKind, toonGlMeshMaterialRenderer] : Array<Dynamic>));
   }
 
@@ -56,7 +60,7 @@ class ToonGlMeshMaterialRenderer {
     return cast null;
   }
 
-  public static function bindGlToonMaterialUniforms__toonGlMeshMaterialRenderer(state:Dynamic, program:GlToonProgram, material:Null<ToonMaterial>):Void {
+  public static function bindGlToonMaterialUniforms__toonGlMeshMaterialRenderer(state:GlRenderState, program:GlToonProgram, material:Null<ToonMaterial>):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var baseColorMap:Dynamic = cast _Runtime.UNDEFINED;
     var ramp:Dynamic = cast _Runtime.UNDEFINED;

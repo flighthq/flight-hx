@@ -3,10 +3,11 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.OutlineEffect;
 
 @:expose("flighthq.effects.OutlineEffect")
 class OutlineEffect {
-  public static function createOutlineEffect(?options:Dynamic):Dynamic {
+  public static function createOutlineEffect(?options:Dynamic):flighthq.types.OutlineEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'OutlineEffect' }, options]);
     return cast null;

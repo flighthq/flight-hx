@@ -8,8 +8,10 @@ import flighthq.image.ImageResource.hasImageResourcePixels;
 import flighthq.render.Renderer.noopRendererData;
 import flighthq.renderWgpu.WgpuDraw.bindWgpuImageResourceTexture;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
+import flighthq.types.ParticleEmitter;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.SpriteRenderer;
+import flighthq.types.WgpuRenderState;
 
 typedef WgpuParticleResources__wgpuParticleEmitter = { var pipelines:Dynamic; var pipelineLayout:Dynamic; var module:Dynamic; var instanceBindGroupLayout:Dynamic; };
 
@@ -23,7 +25,7 @@ class WgpuParticleEmitter {
 
   public static final _particleResources__wgpuParticleEmitter:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  public static function ensureParticleResources__wgpuParticleEmitter(state:Dynamic):WgpuParticleResources__wgpuParticleEmitter {
+  public static function ensureParticleResources__wgpuParticleEmitter(state:WgpuRenderState):WgpuParticleResources__wgpuParticleEmitter {
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -52,7 +54,7 @@ class WgpuParticleEmitter {
     return cast null;
   }
 
-  public static function getParticlePipeline__wgpuParticleEmitter(state:Dynamic, resources:WgpuParticleResources__wgpuParticleEmitter):Dynamic {
+  public static function getParticlePipeline__wgpuParticleEmitter(state:WgpuRenderState, resources:WgpuParticleResources__wgpuParticleEmitter):Dynamic {
     var format:Dynamic = cast _Runtime.UNDEFINED;
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
@@ -65,7 +67,7 @@ class WgpuParticleEmitter {
     return cast null;
   }
 
-  public static function ensureParticleInstanceBuffer__wgpuParticleEmitter(state:Dynamic, count:Float):Void {
+  public static function ensureParticleInstanceBuffer__wgpuParticleEmitter(state:WgpuRenderState, count:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var needed:Dynamic = cast _Runtime.UNDEFINED;
     var newCapacity:Dynamic = cast _Runtime.UNDEFINED;
@@ -81,7 +83,7 @@ class WgpuParticleEmitter {
     _Runtime.setField(runtime, 'particleInstanceData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(newCapacity / 4.0)]));
   }
 
-  public static function drawWgpuParticleEmitter(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuParticleEmitter(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
@@ -117,7 +119,7 @@ class WgpuParticleEmitter {
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'renderPass'), null))) { return; }
-    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
+    source = (cast _Runtime.field(renderProxy, 'source') : ParticleEmitter);
     __destructure2 = _Runtime.field(source, 'data');
     atlas = _Runtime.field(__destructure2, 'atlas');
     alphas = _Runtime.field(__destructure2, 'alphas');
@@ -241,7 +243,7 @@ class WgpuParticleEmitter {
     _Runtime.callProperty(pass, 'draw', cast ([6.0, drawCount, 0.0, 0.0] : Array<Dynamic>));
   }
 
-  public static final defaultWgpuParticleEmitterRenderer:SpriteRenderer = { createData: noopRendererData, submit: function(state:Dynamic, node:RenderProxy2D) {
+  public static final defaultWgpuParticleEmitterRenderer:SpriteRenderer = { createData: noopRendererData, submit: function(state:WgpuRenderState, node:RenderProxy2D) {
     _Runtime.callValue(flushWgpuSpriteBatch, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuParticleEmitter, cast ([state, node] : Array<Dynamic>));
   } };

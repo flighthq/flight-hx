@@ -25,12 +25,15 @@ import flighthq.renderGl.GlRenderTargetPool.createGlRenderTargetPool;
 import flighthq.renderGl.GlRenderTargetPool.destroyGlRenderTargetPool;
 import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
 import flighthq.types.Adjustment;
+import flighthq.types.GlRenderEffectPipeline;
 import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
+import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 
 @:expose("flighthq.effectsGl.GlRenderEffectPipeline")
 class GlRenderEffectPipeline {
-  public static function beginGlRenderEffectPipeline(state:Dynamic, pipeline:Dynamic):Void {
+  public static function beginGlRenderEffectPipeline(state:GlRenderState, pipeline:flighthq.types.GlRenderEffectPipeline):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -52,13 +55,13 @@ class GlRenderEffectPipeline {
     _Runtime.callValue(beginGlRenderPass, cast ([state, _Runtime.field(pipeline, 'sceneTarget'), { preserveColor: true, preserveDepth: true }] : Array<Dynamic>));
   }
 
-  public static function createGlRenderEffectPipeline(_state:Dynamic, ?options:RenderEffectPipelineOptions):Dynamic {
+  public static function createGlRenderEffectPipeline(_state:GlRenderState, ?options:RenderEffectPipelineOptions):flighthq.types.GlRenderEffectPipeline {
     if (options == null) options = cast ({  } : Dynamic);
     return cast { options: _Runtime.mergeObjects([options]), sceneTarget: null, pool: _Runtime.callValue(createGlRenderTargetPool, cast ([] : Array<Dynamic>)), lutCache: _Runtime.callValue(createColorLutCache, cast ([] : Array<Dynamic>)), lutTexture: { texture: null, lut: null }, velocityTexture: null };
     return cast null;
   }
 
-  public static function destroyGlRenderEffectPipeline(state:Dynamic, pipeline:Dynamic):Void {
+  public static function destroyGlRenderEffectPipeline(state:GlRenderState, pipeline:flighthq.types.GlRenderEffectPipeline):Void {
     if (_Runtime.truthy(_Runtime.field(pipeline, 'sceneTarget'))) {
       _Runtime.callValue(destroyGlRenderTarget, cast ([state, _Runtime.field(pipeline, 'sceneTarget')] : Array<Dynamic>));
       _Runtime.setField(pipeline, 'sceneTarget', null);
@@ -73,13 +76,13 @@ class GlRenderEffectPipeline {
     _Runtime.setField(_Runtime.field(pipeline, 'lutCache'), 'lut', null);
   }
 
-  public static function endGlRenderEffectPipeline(state:Dynamic, pipeline:Dynamic, operations:Array<Dynamic>):Void {
+  public static function endGlRenderEffectPipeline(state:GlRenderState, pipeline:flighthq.types.GlRenderEffectPipeline, operations:Array<Dynamic>):Void {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;
     var descriptor:Dynamic = cast _Runtime.UNDEFINED;
-    var source:Dynamic = cast _Runtime.UNDEFINED;
-    var scratchA:Null<Dynamic> = cast _Runtime.UNDEFINED;
-    var scratchB:Null<Dynamic> = cast _Runtime.UNDEFINED;
+    var source:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var scratchA:Null<GlRenderTarget> = cast _Runtime.UNDEFINED;
+    var scratchB:Null<GlRenderTarget> = cast _Runtime.UNDEFINED;
     var pending:Array<Adjustment> = cast _Runtime.UNDEFINED;
     var ensureScratch:Dynamic = cast _Runtime.UNDEFINED;
     var flushAdjustments:Dynamic = cast _Runtime.UNDEFINED;
@@ -135,11 +138,11 @@ class GlRenderEffectPipeline {
     if (_Runtime.truthy(!_Runtime.strictEquals(scratchB, null))) { _Runtime.callValue(releaseGlRenderTarget, cast ([_Runtime.field(pipeline, 'pool'), scratchB] : Array<Dynamic>)); }
   }
 
-  public static function setGlRenderEffectVelocityTexture(pipeline:Dynamic, texture:Null<Dynamic>):Void {
+  public static function setGlRenderEffectVelocityTexture(pipeline:flighthq.types.GlRenderEffectPipeline, texture:Null<Dynamic>):Void {
     _Runtime.setField(pipeline, 'velocityTexture', texture);
   }
 
-  public static function presentGlRenderEffectResult__glRenderEffectPipeline(state:Dynamic, source:Dynamic):Void {
+  public static function presentGlRenderEffectResult__glRenderEffectPipeline(state:GlRenderState, source:GlRenderTarget):Void {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(source, 'colorSpace'), 'linear'))) {
       _Runtime.callValue(drawGlLinearToSrgbPass, cast ([state, source, null] : Array<Dynamic>));

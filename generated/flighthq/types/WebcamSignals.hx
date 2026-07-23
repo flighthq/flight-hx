@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef WebcamSignals = { var onWebcamDeviceChange:Dynamic; var onWebcamPermissionChange:Dynamic; var onWebcamStreamEnded:Dynamic; };
+typedef WebcamSignals = { var onWebcamDeviceChange:Signal<Dynamic>; var onWebcamPermissionChange:Signal<Dynamic>; var onWebcamStreamEnded:Signal<Dynamic>; };

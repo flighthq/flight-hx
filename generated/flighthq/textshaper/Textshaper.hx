@@ -13,10 +13,12 @@ import flighthq.textshaper._internal._TextShaperCacheValues as Facade_Textshaper
 import flighthq.types.FontMetrics;
 import flighthq.types.GlyphExtents;
 import flighthq.types.ShapedRun;
+import flighthq.types.TextFormat;
 import flighthq.types.TextItem;
 import flighthq.types.TextShaper.ShapeRunOptions;
 import flighthq.types.TextShaper.TextShaperBackend;
 import flighthq.types.TextShaperOptions;
+import flighthq.types.TextShaperSignals;
 
 @:expose("flighthq.textshaper.Textshaper")
 class Textshaper {
@@ -52,7 +54,7 @@ class Textshaper {
     _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaperSignals.disposeTextShaperSignals, cast ([] : Array<Dynamic>));
   }
 
-  public static function enableTextShaperSignals():Dynamic {
+  public static function enableTextShaperSignals():TextShaperSignals {
     return cast _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaperSignals.enableTextShaperSignals, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -67,47 +69,47 @@ class Textshaper {
     return cast null;
   }
 
-  public static function getCodePointForGlyph(glyphId:Float, _format:Dynamic):Float {
+  public static function getCodePointForGlyph(glyphId:Float, _format:TextFormat):Float {
     return cast _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaperRun.getCodePointForGlyph, cast ([glyphId, _format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getFontMetrics(format:Dynamic):Null<FontMetrics> {
+  public static function getFontMetrics(format:TextFormat):Null<FontMetrics> {
     return cast _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaperRun.getFontMetrics, cast ([format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getFontMetricsInto(format:Dynamic, out:FontMetrics):Bool {
+  public static function getFontMetricsInto(format:TextFormat, out:FontMetrics):Bool {
     return cast _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaperRun.getFontMetricsInto, cast ([format, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getFontUnitScale(format:Dynamic):Float {
+  public static function getFontUnitScale(format:TextFormat):Float {
     return cast _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaperRun.getFontUnitScale, cast ([format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphExtents(glyphId:Float, _format:Dynamic):Null<GlyphExtents> {
+  public static function getGlyphExtents(glyphId:Float, _format:TextFormat):Null<GlyphExtents> {
     return cast _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaperRun.getGlyphExtents, cast ([glyphId, _format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphExtentsBatch(glyphIds:Array<Float>, _format:Dynamic, out:Array<GlyphExtents>):Float {
+  public static function getGlyphExtentsBatch(glyphIds:Array<Float>, _format:TextFormat, out:Array<GlyphExtents>):Float {
     return cast _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaperRun.getGlyphExtentsBatch, cast ([glyphIds, _format, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphExtentsInto(glyphId:Float, _format:Dynamic, out:GlyphExtents):Bool {
+  public static function getGlyphExtentsInto(glyphId:Float, _format:TextFormat, out:GlyphExtents):Bool {
     return cast _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaperRun.getGlyphExtentsInto, cast ([glyphId, _format, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphIndexForCodePoint(codePoint:Float, _format:Dynamic):Float {
+  public static function getGlyphIndexForCodePoint(codePoint:Float, _format:TextFormat):Float {
     return cast _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaperRun.getGlyphIndexForCodePoint, cast ([codePoint, _format] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlyphName(glyphId:Float, _format:Dynamic):String {
+  public static function getGlyphName(glyphId:Float, _format:TextFormat):String {
     return cast _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaperRun.getGlyphName, cast ([glyphId, _format] : Array<Dynamic>));
     return cast null;
   }
@@ -122,17 +124,17 @@ class Textshaper {
     return cast null;
   }
 
-  public static function getTextShaperSignals():Null<Dynamic> {
+  public static function getTextShaperSignals():Null<TextShaperSignals> {
     return cast _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaperSignals.getTextShaperSignals, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function itemizeText(text:String, _format:Dynamic, ?options:TextShaperOptions):Array<TextItem> {
+  public static function itemizeText(text:String, _format:TextFormat, ?options:TextShaperOptions):Array<TextItem> {
     return cast _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaperItemize.itemizeText, cast ([text, _format, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function measureText(text:String, format:Dynamic):Float {
+  public static function measureText(text:String, format:TextFormat):Float {
     return cast _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaper.measureText, cast ([text, format] : Array<Dynamic>));
     return cast null;
   }
@@ -145,22 +147,22 @@ class Textshaper {
     _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaper.setTextShaperBackend, cast ([backend] : Array<Dynamic>));
   }
 
-  public static function shapeTextRun(text:String, format:Dynamic, ?options:ShapeRunOptions):Null<ShapedRun> {
+  public static function shapeTextRun(text:String, format:TextFormat, ?options:ShapeRunOptions):Null<ShapedRun> {
     return cast _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaperRun.shapeTextRun, cast ([text, format, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function shapeTextRunCached(cache:TextShaperCache, text:String, format:Dynamic, ?options:ShapeRunOptions):Null<ShapedRun> {
+  public static function shapeTextRunCached(cache:TextShaperCache, text:String, format:TextFormat, ?options:ShapeRunOptions):Null<ShapedRun> {
     return cast _Runtime.callValue(Facade_Textshaper_flighthq_textshaper__internal__TextShaperCacheValues.shapeTextRunCached, cast ([cache, text, format, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function shapeTextRunInto(text:String, format:Dynamic, out:ShapedRun, ?options:ShapeRunOptions):Bool {
+  public static function shapeTextRunInto(text:String, format:TextFormat, out:ShapedRun, ?options:ShapeRunOptions):Bool {
     return cast _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaperRun.shapeTextRunInto, cast ([text, format, out, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function shapeTextRuns(text:String, format:Dynamic, ?options:TextShaperOptions):Array<ShapedRun> {
+  public static function shapeTextRuns(text:String, format:TextFormat, ?options:TextShaperOptions):Array<ShapedRun> {
     return cast _Runtime.callValue(Facade_Textshaper_flighthq_textshaper_TextShaperItemize.shapeTextRuns, cast ([text, format, options] : Array<Dynamic>));
     return cast null;
   }

@@ -11,4 +11,4 @@ typedef CanvasRenderEffectRunner = Dynamic;
 
 typedef CanvasRenderTargetPool = { var free:Array<Dynamic>; var inUse:Array<Dynamic>; };
 
-typedef CanvasRenderEffectPipeline = { var options:RenderEffectPipelineOptions; var sceneTarget:Null<Dynamic>; var pool:Dynamic; var lutCache:Dynamic; };
+typedef CanvasRenderEffectPipeline = { var options:RenderEffectPipelineOptions; var sceneTarget:Null<Dynamic>; var pool:Dynamic; var lutCache:ColorLutCache; };

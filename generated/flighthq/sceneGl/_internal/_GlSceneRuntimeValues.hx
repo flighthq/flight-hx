@@ -12,12 +12,17 @@ import flighthq.sceneGl.GlSceneRuntime;
 import flighthq.shading.ModifierRegistry;
 import flighthq.types.Entity.Kind;
 import flighthq.types.GlMeshMaterialRenderer;
+import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderTarget;
+import flighthq.types.GlSkinPaletteTexture;
+import flighthq.types.Matrix4;
+import flighthq.types.MeshGeometry;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 @:expose("flighthq.sceneGl._internal._GlSceneRuntimeValues")
 class _GlSceneRuntimeValues {
-  public static function destroyGlSceneRuntime(state:Dynamic):Void {
+  public static function destroyGlSceneRuntime(state:GlRenderState):Void {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callProperty(_GlSceneRuntimeValues.sceneRuntimes__glSceneRuntime, 'get', cast ([state] : Array<Dynamic>));
@@ -58,7 +63,7 @@ class _GlSceneRuntimeValues {
     _Runtime.setLength(_Runtime.field(scene, 'opaquePool'), 0.0);
   }
 
-  public static function ensureGlSkinPalette(state:Dynamic):Dynamic {
+  public static function ensureGlSkinPalette(state:GlRenderState):GlSkinPaletteTexture {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var palette:Dynamic = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>));
@@ -71,7 +76,7 @@ class _GlSceneRuntimeValues {
     return cast null;
   }
 
-  public static function getGlSceneRuntime(state:Dynamic):GlSceneRuntime {
+  public static function getGlSceneRuntime(state:GlRenderState):GlSceneRuntime {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     stateRuntime = (cast _Runtime.getIndex(state, EntityRuntimeKey) : GlRenderStateRuntime);

@@ -6,13 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.Node.NodeAny;
+import flighthq.types.RenderProxy;
+import flighthq.types.RenderQueue;
 import flighthq.types.RenderQueue.RenderQueueEntry;
 import flighthq.types.RenderQueue.RenderSortKey;
+import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 
 @:expose("flighthq.render.RenderQueue")
 class RenderQueue {
-  public static function buildRenderQueue(state:Dynamic, source:Renderable, out:Dynamic):Void {
+  public static function buildRenderQueue(state:RenderState, source:Renderable, out:flighthq.types.RenderQueue):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var renderProxyMap:Dynamic = cast _Runtime.UNDEFINED;
     var stack:Dynamic = cast _Runtime.UNDEFINED;
@@ -47,7 +50,7 @@ class RenderQueue {
     }
   }
 
-  public static function clearRenderQueue(queue:Dynamic):Void {
+  public static function clearRenderQueue(queue:flighthq.types.RenderQueue):Void {
     _Runtime.setField(queue, 'entryCount', 0.0);
   }
 
@@ -56,7 +59,7 @@ class RenderQueue {
     return cast null;
   }
 
-  public static function createRenderQueue():Dynamic {
+  public static function createRenderQueue():flighthq.types.RenderQueue {
     return cast { entries: cast ([] : Array<Dynamic>), entryCount: 0.0 };
     return cast null;
   }
@@ -72,7 +75,7 @@ class RenderQueue {
     return cast null;
   }
 
-  public static function pushRenderQueueEntry(queue:Dynamic, proxy:Dynamic, sortKey:RenderSortKey):Void {
+  public static function pushRenderQueueEntry(queue:flighthq.types.RenderQueue, proxy:RenderProxy, sortKey:RenderSortKey):Void {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     entry = { proxy: proxy, sortKey: sortKey };
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(queue, 'entryCount'), _Runtime.field(_Runtime.field(queue, 'entries'), 'length'), '<'))) {
@@ -83,7 +86,7 @@ class RenderQueue {
     _Runtime.incrementField(queue, 'entryCount', 1, true);
   }
 
-  public static function sortRenderQueue(queue:Dynamic, ?compare:Dynamic):Void {
+  public static function sortRenderQueue(queue:flighthq.types.RenderQueue, ?compare:Dynamic):Void {
     var slice:Dynamic = cast _Runtime.UNDEFINED;
     slice = _Runtime.slice(_Runtime.field(queue, 'entries'), 0.0, _Runtime.field(queue, 'entryCount'));
     _Runtime.callProperty(slice, 'sort', cast ([_Runtime.coalesce(compare, function():Dynamic return cast RenderQueue.compareRenderQueueEntriesByKey__renderQueue)] : Array<Dynamic>));

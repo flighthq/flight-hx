@@ -6,17 +6,20 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderTarget;
+import flighthq.types.TaaEffect;
 
 @:expose("flighthq.effectsGl.GlTaaEffect")
 class GlTaaEffect {
-  public static function applyTaaEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, _effect:Dynamic):Void {
+  public static function applyTaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, _effect:TaaEffect):Void {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'antialiasing.taa', GlTaaEffect.TAA_FRAGMENT_SRC__glTaaEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, GlTaaEffect._noopSetUniforms__glTaaEffect] : Array<Dynamic>));
   }
 
   public static final defaultGlTaaEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyTaaEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(applyTaaEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : TaaEffect)] : Array<Dynamic>));
   };
 
   public static function _noopSetUniforms__glTaaEffect():Void {

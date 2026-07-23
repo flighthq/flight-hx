@@ -5,11 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneFormats.AwdParse.createSceneFromAwd;
 import flighthq.sceneResources._internal._LoadSceneOptionsValues.resolveScenesWithOptions;
+import flighthq.types.Scene;
 
 @:expose("flighthq.sceneResources.LoadSceneFromAwd")
 class LoadSceneFromAwd {
-  public static function loadSceneFromAwd(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Dynamic> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
+  public static function loadSceneFromAwd(bytes:Dynamic, ?options:LoadSceneOptions):flighthq._internal._Promise<Scene> {
+    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Scene> {
       var scene:Dynamic = cast _Runtime.UNDEFINED;
       scene = _Runtime.callValue(createSceneFromAwd, cast ([bytes] : Array<Dynamic>));
       flighthq._internal._Async.awaitValue(_Runtime.callValue(resolveScenesWithOptions, cast ([cast ([scene] : Array<Dynamic>), options] : Array<Dynamic>)));

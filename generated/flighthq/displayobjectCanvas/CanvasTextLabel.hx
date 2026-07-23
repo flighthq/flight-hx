@@ -12,8 +12,11 @@ import flighthq.text.TextLabel.getTextLabelRuntime;
 import flighthq.textlayout.TextFormatRange.createTextFormatRange;
 import flighthq.textlayout.TextLayout.computeTextLayout;
 import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
+import flighthq.types.CanvasRenderState;
 import flighthq.types.DisplayObjectRenderer;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.TextFormat;
+import flighthq.types.TextLabel;
 import flighthq.types.TextLabel.TextLabelRuntime;
 
 @:expose("flighthq.displayobjectCanvas.CanvasTextLabel")
@@ -27,7 +30,7 @@ class CanvasTextLabel {
     var measure:Dynamic = cast _Runtime.UNDEFINED;
     var result:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.callValue(drawCanvasDisplayObject, cast ([state, renderProxy] : Array<Dynamic>));
-    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
+    source = (cast _Runtime.field(renderProxy, 'source') : TextLabel);
     __destructure0 = _Runtime.field(source, 'data');
     text = _Runtime.field(__destructure0, 'text');
     textFormat = _Runtime.field(__destructure0, 'textFormat');
@@ -36,7 +39,7 @@ class CanvasTextLabel {
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
     _Runtime.setField(context, 'globalAlpha', _Runtime.field(renderProxy, 'alpha'));
     _Runtime.callValue(setCanvasTransform, cast ([state, context, _Runtime.field(renderProxy, 'transform2D')] : Array<Dynamic>));
-    measure = function(t:String, format:Dynamic) {
+    measure = function(t:String, format:TextFormat) {
       _Runtime.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
       return cast _Runtime.field(_Runtime.callProperty(context, 'measureText', cast ([t] : Array<Dynamic>)), 'width');
     };

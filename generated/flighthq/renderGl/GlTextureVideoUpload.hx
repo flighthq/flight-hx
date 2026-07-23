@@ -4,10 +4,11 @@ package flighthq.renderGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlTextureUpload.uploadGlTextureElement;
+import flighthq.types.VideoTexture;
 
 @:expose("flighthq.renderGl.GlTextureVideoUpload")
 class GlTextureVideoUpload {
-  public static function uploadGlTextureVideoFrame(gl:Dynamic, videoTexture:Dynamic, uploadedFrameId:Float):Float {
+  public static function uploadGlTextureVideoFrame(gl:Dynamic, videoTexture:VideoTexture, uploadedFrameId:Float):Float {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(videoTexture, 'frameId'), uploadedFrameId))) { return cast uploadedFrameId; }
     element = _Runtime.field(_Runtime.field(videoTexture, 'source'), 'element');

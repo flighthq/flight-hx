@@ -3,10 +3,11 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.ConvolutionEffect;
 
 @:expose("flighthq.effects.ConvolutionEffect")
 class ConvolutionEffect {
-  public static function createConvolutionEffect(options:Dynamic):Dynamic {
+  public static function createConvolutionEffect(options:Dynamic):flighthq.types.ConvolutionEffect {
     return cast _Runtime.mergeObjects([{ kind: 'ConvolutionEffect' }, options]);
     return cast null;
   }

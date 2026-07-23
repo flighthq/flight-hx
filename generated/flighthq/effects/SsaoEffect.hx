@@ -3,10 +3,11 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.SsaoEffect;
 
 @:expose("flighthq.effects.SsaoEffect")
 class SsaoEffect {
-  public static function createSsaoEffect(?options:Dynamic):Dynamic {
+  public static function createSsaoEffect(?options:Dynamic):flighthq.types.SsaoEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'SsaoEffect' }, options]);
     return cast null;

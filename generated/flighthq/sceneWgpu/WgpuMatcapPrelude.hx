@@ -12,6 +12,7 @@ import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.ensureWgpuScenePipel
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.stashWgpuUvTransform;
 import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
 import flighthq.types.LinearColor;
+import flighthq.types.WgpuRenderState;
 
 typedef WgpuMatcapDefineKey = { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasMatcap:Bool; };
 
@@ -19,7 +20,7 @@ typedef WgpuMatcapPipeline = Dynamic;
 
 @:expose("flighthq.sceneWgpu.WgpuMatcapPrelude")
 class WgpuMatcapPrelude {
-  public static function bindWgpuMatcapSurface(state:Dynamic, pipeline:WgpuMatcapPipeline, materialKey:Dynamic, tint:LinearColor, alphaCutoff:Float):Dynamic {
+  public static function bindWgpuMatcapSurface(state:WgpuRenderState, pipeline:WgpuMatcapPipeline, materialKey:Dynamic, tint:LinearColor, alphaCutoff:Float):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
@@ -50,7 +51,7 @@ class WgpuMatcapPrelude {
     return cast null;
   }
 
-  public static function compileWgpuMatcapPipeline(state:Dynamic, key:WgpuMatcapDefineKey, format:Dynamic):WgpuMatcapPipeline {
+  public static function compileWgpuMatcapPipeline(state:WgpuRenderState, key:WgpuMatcapDefineKey, format:Dynamic):WgpuMatcapPipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     var materialBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
@@ -61,7 +62,7 @@ class WgpuMatcapPrelude {
     return cast null;
   }
 
-  public static function ensureWgpuMatcapPipeline(state:Dynamic, key:WgpuMatcapDefineKey, format:Dynamic):WgpuMatcapPipeline {
+  public static function ensureWgpuMatcapPipeline(state:WgpuRenderState, key:WgpuMatcapDefineKey, format:Dynamic):WgpuMatcapPipeline {
     return cast _Runtime.callValue(ensureWgpuScenePipeline, cast ([state, 'matcap:' + Std.string(format) + '|' + Std.string(_Runtime.callValue(buildWgpuMatcapDefineKey, cast ([key] : Array<Dynamic>))) + '', function() return _Runtime.callValue(compileWgpuMatcapPipeline, cast ([state, key, format] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }

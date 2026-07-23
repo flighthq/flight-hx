@@ -3,6 +3,7 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.KuwaharaEffect;
 
 @:expose("flighthq.effects.KuwaharaMath")
 class KuwaharaMath {
@@ -76,14 +77,14 @@ class KuwaharaMath {
     _Runtime.setIndex(out, 7.0, v7);
   }
 
-  public static function computeKuwaharaSectorPixelCount(effect:Dynamic):Float {
+  public static function computeKuwaharaSectorPixelCount(effect:KuwaharaEffect):Float {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     s = _Runtime.callValue(computeKuwaharaSectorSize, cast ([effect] : Array<Dynamic>));
     return cast (s * s);
     return cast null;
   }
 
-  public static function computeKuwaharaSectorSize(effect:Dynamic):Float {
+  public static function computeKuwaharaSectorSize(effect:KuwaharaEffect):Float {
     return cast (_Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'floor', cast ([_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 3.0)] : Array<Dynamic>))] : Array<Dynamic>)) + 1.0);
     return cast null;
   }

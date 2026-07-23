@@ -14,14 +14,16 @@ import flighthq.effectsCanvas.CanvasSourceModeCompositing.compositeCanvasSourceM
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.drawCanvasTintedAlphaMask;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
+import flighthq.types.CanvasRenderTarget;
+import flighthq.types.OuterGlowEffect;
 
 @:expose("flighthq.effectsCanvas.CanvasOuterGlowEffect")
 class CanvasOuterGlowEffect {
-  public static function applyOuterGlowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:Dynamic):Void {
+  public static function applyOuterGlowEffectToCanvas(source:Dynamic, dest:Dynamic, poolOrEffect:Dynamic, ?maybeEffect:OuterGlowEffect):Void {
     var effect:Dynamic = cast _Runtime.UNDEFINED;
     var css:Dynamic = cast _Runtime.UNDEFINED;
     var pool:Dynamic = cast _Runtime.UNDEFINED;
-    effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : Dynamic));
+    effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : OuterGlowEffect));
     css = _Runtime.callValue(computeOuterGlowEffectCss, cast ([effect] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(css, null))) {
       _Runtime.callValue(drawCanvasEffectPass, cast ([dest, source, css] : Array<Dynamic>));
@@ -32,10 +34,10 @@ class CanvasOuterGlowEffect {
   }
 
   public static final defaultCanvasOuterGlowEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyOuterGlowEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(applyOuterGlowEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : OuterGlowEffect)] : Array<Dynamic>));
   };
 
-  public static function applyOuterGlowEffectToCanvasWithPool__canvasOuterGlowEffect(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
+  public static function applyOuterGlowEffectToCanvasWithPool__canvasOuterGlowEffect(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:OuterGlowEffect):Void {
     var mask:Dynamic = cast _Runtime.UNDEFINED;
     var blurred:Dynamic = cast _Runtime.UNDEFINED;
     var strength:Dynamic = cast _Runtime.UNDEFINED;

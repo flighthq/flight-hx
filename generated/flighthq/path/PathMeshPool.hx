@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.TessellatePath.tessellatePath;
 import flighthq.path.TessellatePathTyped.tessellatePathTyped;
+import flighthq.types.Path;
 import flighthq.types.PathMesh;
 import flighthq.types.PathMeshTyped;
 
 @:expose("flighthq.path.PathMeshPool")
 class PathMeshPool {
-  public static function acquirePathMesh(path:Dynamic, tolerance:Dynamic = 0.25):PathMesh {
+  public static function acquirePathMesh(path:Path, tolerance:Dynamic = 0.25):PathMesh {
     var mesh:Dynamic = cast _Runtime.UNDEFINED;
     var fresh:Dynamic = cast _Runtime.UNDEFINED;
     mesh = _Runtime.select(_Runtime.compare(_Runtime.field(PathMeshPool.pathMeshPool__pathMeshPool, 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(PathMeshPool.pathMeshPool__pathMeshPool, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast { vertices: cast ([] : Array<Dynamic>), indices: cast ([] : Array<Dynamic>) });
@@ -37,7 +38,7 @@ class PathMeshPool {
     return cast null;
   }
 
-  public static function acquirePathMeshTyped(path:Dynamic, tolerance:Dynamic = 0.25):PathMeshTyped {
+  public static function acquirePathMeshTyped(path:Path, tolerance:Dynamic = 0.25):PathMeshTyped {
     var fresh:Dynamic = cast _Runtime.UNDEFINED;
     var mesh:Dynamic = cast _Runtime.UNDEFINED;
     fresh = _Runtime.callValue(tessellatePathTyped, cast ([path, tolerance] : Array<Dynamic>));

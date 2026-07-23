@@ -3,10 +3,11 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.GodRaysEffect;
 
 @:expose("flighthq.effects.GodRaysEffect")
 class GodRaysEffect {
-  public static function createGodRaysEffect(?options:Dynamic):Dynamic {
+  public static function createGodRaysEffect(?options:Dynamic):flighthq.types.GodRaysEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'GodRaysEffect' }, options]);
     return cast null;

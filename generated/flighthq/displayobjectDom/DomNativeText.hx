@@ -9,27 +9,30 @@ import flighthq.displayobjectDom.DomStyle.prepareDomElement;
 import flighthq.displayobjectDom.DomStyle.setDomRendererElement;
 import flighthq.text.NativeText.getNativeTextRuntime;
 import flighthq.types.DisplayObjectRenderer;
+import flighthq.types.DomRenderState;
+import flighthq.types.NativeText;
 import flighthq.types.NativeText.NativeTextRuntime;
 import flighthq.types.NativeText.NativeTextStyle;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.TextVerticalAlign;
 
 @:expose("flighthq.displayobjectDom.DomNativeText")
 class DomNativeText {
-  public static function createDomNativeTextData__domNativeText(_state:Dynamic, _source:Renderable):Null<RendererData> {
+  public static function createDomNativeTextData__domNativeText(_state:RenderState, _source:Renderable):Null<RendererData> {
     return cast null;
     return cast null;
   }
 
-  public static function drawDomNativeText(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawDomNativeText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var element:Dynamic = cast _Runtime.UNDEFINED;
     var rect:Dynamic = cast _Runtime.UNDEFINED;
-    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
+    source = (cast _Runtime.field(renderProxy, 'source') : NativeText);
     runtime = (cast _Runtime.callValue(getNativeTextRuntime, cast ([source] : Array<Dynamic>)) : NativeTextRuntime);
     data = _Runtime.field(source, 'data');
     element = _Runtime.field(runtime, 'element');
@@ -64,7 +67,7 @@ class DomNativeText {
     _Runtime.callValue(setDomRendererElement, cast ([state, element] : Array<Dynamic>));
   }
 
-  public static function drawDomNativeTextMask(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawDomNativeTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     _Runtime.callValue(drawDomNativeText, cast ([state, renderProxy] : Array<Dynamic>));
   }
 

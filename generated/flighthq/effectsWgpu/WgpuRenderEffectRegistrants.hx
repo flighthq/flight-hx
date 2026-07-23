@@ -48,16 +48,17 @@ import flighthq.effectsWgpu.WgpuTiltShiftEffect.defaultWgpuTiltShiftEffectRunner
 import flighthq.effectsWgpu.WgpuToneMapEffect.defaultWgpuToneMapEffectRunner;
 import flighthq.effectsWgpu.WgpuVignetteEffect.defaultWgpuVignetteEffectRunner;
 import flighthq.effectsWgpu.WgpuWhiteBalanceEffect.defaultWgpuWhiteBalanceEffectRunner;
+import flighthq.types.WgpuRenderState;
 
 @:expose("flighthq.effectsWgpu.WgpuRenderEffectRegistrants")
 class WgpuRenderEffectRegistrants {
-  public static function registerAntialiasingWgpuRenderEffects(state:Dynamic):Void {
+  public static function registerAntialiasingWgpuRenderEffects(state:WgpuRenderState):Void {
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'FxaaEffect', defaultWgpuFxaaEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'SmaaEffect', defaultWgpuSmaaEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'TaaEffect', defaultWgpuTaaEffectRunner] : Array<Dynamic>));
   }
 
-  public static function registerBloomWgpuRenderEffects(state:Dynamic):Void {
+  public static function registerBloomWgpuRenderEffects(state:WgpuRenderState):Void {
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'BloomEffect', defaultWgpuBloomEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'ChromaticAberrationEffect', defaultWgpuChromaticAberrationEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'GodRaysEffect', defaultWgpuGodRaysEffectRunner] : Array<Dynamic>));
@@ -67,7 +68,7 @@ class WgpuRenderEffectRegistrants {
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'VignetteEffect', defaultWgpuVignetteEffectRunner] : Array<Dynamic>));
   }
 
-  public static function registerBlurWgpuRenderEffects(state:Dynamic):Void {
+  public static function registerBlurWgpuRenderEffects(state:WgpuRenderState):Void {
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'BlurEffect', defaultWgpuBlurEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'BokehDepthOfFieldEffect', defaultWgpuBokehDepthOfFieldEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'CameraMotionBlurEffect', defaultWgpuCameraMotionBlurEffectRunner] : Array<Dynamic>));
@@ -77,12 +78,12 @@ class WgpuRenderEffectRegistrants {
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'TiltShiftEffect', defaultWgpuTiltShiftEffectRunner] : Array<Dynamic>));
   }
 
-  public static function registerColorWgpuRenderEffects(state:Dynamic):Void {
+  public static function registerColorWgpuRenderEffects(state:WgpuRenderState):Void {
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'ToneMapEffect', defaultWgpuToneMapEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'WhiteBalanceEffect', defaultWgpuWhiteBalanceEffectRunner] : Array<Dynamic>));
   }
 
-  public static function registerCompositeWgpuRenderEffects(state:Dynamic):Void {
+  public static function registerCompositeWgpuRenderEffects(state:WgpuRenderState):Void {
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'BevelEffect', defaultWgpuBevelEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'DropShadowEffect', defaultWgpuDropShadowEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'GradientBevelEffect', defaultWgpuGradientBevelEffectRunner] : Array<Dynamic>));
@@ -92,7 +93,7 @@ class WgpuRenderEffectRegistrants {
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'OuterGlowEffect', defaultWgpuOuterGlowEffectRunner] : Array<Dynamic>));
   }
 
-  public static function registerScreenSpaceWgpuRenderEffects(state:Dynamic):Void {
+  public static function registerScreenSpaceWgpuRenderEffects(state:WgpuRenderState):Void {
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'DisplacementEffect', defaultWgpuDisplacementEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'ScreenSpaceFogEffect', defaultWgpuScreenSpaceFogEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'SharpenEffect', defaultWgpuSharpenEffectRunner] : Array<Dynamic>));
@@ -100,7 +101,7 @@ class WgpuRenderEffectRegistrants {
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'SsrEffect', defaultWgpuSsrEffectRunner] : Array<Dynamic>));
   }
 
-  public static function registerStandardWgpuRenderEffects(state:Dynamic):Void {
+  public static function registerStandardWgpuRenderEffects(state:WgpuRenderState):Void {
     _Runtime.callValue(registerAntialiasingWgpuRenderEffects, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(registerBloomWgpuRenderEffects, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(registerBlurWgpuRenderEffects, cast ([state] : Array<Dynamic>));
@@ -110,7 +111,7 @@ class WgpuRenderEffectRegistrants {
     _Runtime.callValue(registerStylizeWgpuRenderEffects, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerStylizeWgpuRenderEffects(state:Dynamic):Void {
+  public static function registerStylizeWgpuRenderEffects(state:WgpuRenderState):Void {
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'ConvolutionEffect', defaultWgpuConvolutionEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'CrtEffect', defaultWgpuCrtEffectRunner] : Array<Dynamic>));
     _Runtime.callValue(registerWgpuRenderEffect, cast ([state, 'DitherEffect', defaultWgpuDitherEffectRunner] : Array<Dynamic>));

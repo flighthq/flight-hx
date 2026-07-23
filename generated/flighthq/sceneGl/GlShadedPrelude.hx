@@ -16,6 +16,7 @@ import flighthq.shading.ModifierRegistry;
 import flighthq.shading.OrderModifierStack.orderModifierStack;
 import flighthq.shading._internal._ModifierRegistryValues.createModifierRegistry;
 import flighthq.shading._internal._ModifierRegistryValues.resolveModifier;
+import flighthq.types.GlRenderState;
 import flighthq.types.Modifier;
 import flighthq.types.ModifierSlot;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
@@ -48,7 +49,7 @@ class GlShadedPrelude {
     return cast null;
   }
 
-  public static function ensureGlShadedProgram(state:Dynamic, key:GlShadedDefineKey, modifiers:Array<Modifier>):GlShadedProgram {
+  public static function ensureGlShadedProgram(state:GlRenderState, key:GlShadedDefineKey, modifiers:Array<Modifier>):GlShadedProgram {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     var ordered:Dynamic = cast _Runtime.UNDEFINED;
     var fullKey:GlShadedDefineKey = cast _Runtime.UNDEFINED;

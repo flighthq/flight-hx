@@ -4,10 +4,11 @@ package flighthq.textMarkup;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textMarkup.MarkupTagRegistry.resolveMarkupHexColor;
+import flighthq.types.MarkupTagRegistry;
 
 @:expose("flighthq.textMarkup.MarkupNamedColors")
 class MarkupNamedColors {
-  public static function registerMarkupNamedColors(registry:Dynamic):Void {
+  public static function registerMarkupNamedColors(registry:MarkupTagRegistry):Void {
     _Runtime.setField(registry, 'colorResolver', MarkupNamedColors.resolveMarkupNamedColor__markupNamedColors);
   }
 

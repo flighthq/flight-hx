@@ -8,12 +8,14 @@ import flighthq.text.RichText.setRichTextScrollV;
 import flighthq.textlayout.RichTextQuery.computeRichTextCharIndexAtPoint;
 import flighthq.types.InputKeyboardData;
 import flighthq.types.KeyCode;
+import flighthq.types.RichText;
 import flighthq.types.RichText.RichTextRuntime;
+import flighthq.types.SelectableRichTextManager;
 import flighthq.types._internal._KeyCodeValues.KeyCodeValue;
 
 @:expose("flighthq.textinput.SelectableRichTextManager")
 class SelectableRichTextManager {
-  public static function blurSelectableRichText(manager:Dynamic):Void {
+  public static function blurSelectableRichText(manager:flighthq.types.SelectableRichTextManager):Void {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(manager, 'focused'), null))) {
       var runtime:Dynamic = _Runtime.callValue(SelectableRichTextManager.getMutableRuntime__selectableRichTextManager, cast ([_Runtime.field(manager, 'focused')] : Array<Dynamic>));
       _Runtime.setField(runtime, 'selectionBeginIndex', 0.0);
@@ -22,12 +24,12 @@ class SelectableRichTextManager {
     _Runtime.setField(manager, 'focused', null);
   }
 
-  public static function createSelectableRichTextManager():Dynamic {
+  public static function createSelectableRichTextManager():flighthq.types.SelectableRichTextManager {
     return cast { focused: null };
     return cast null;
   }
 
-  public static function dispatchSelectableRichTextKeyDown(manager:Dynamic, data:InputKeyboardData, ?onCopy:Dynamic):Bool {
+  public static function dispatchSelectableRichTextKeyDown(manager:flighthq.types.SelectableRichTextManager, data:InputKeyboardData, ?onCopy:Dynamic):Bool {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.field(manager, 'focused');
     if (_Runtime.truthy(_Runtime.strictEquals(target, null))) { return cast false; }
@@ -49,7 +51,7 @@ class SelectableRichTextManager {
     return cast null;
   }
 
-  public static function dispatchSelectableRichTextPointerDown(manager:Dynamic, target:Dynamic, x:Float, y:Float, extend:Dynamic = false):Void {
+  public static function dispatchSelectableRichTextPointerDown(manager:flighthq.types.SelectableRichTextManager, target:RichText, x:Float, y:Float, extend:Dynamic = false):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     var index:Dynamic = cast _Runtime.UNDEFINED;
@@ -72,7 +74,7 @@ class SelectableRichTextManager {
     }
   }
 
-  public static function dispatchSelectableRichTextPointerMove(manager:Dynamic, x:Float, y:Float):Void {
+  public static function dispatchSelectableRichTextPointerMove(manager:flighthq.types.SelectableRichTextManager, x:Float, y:Float):Void {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var layout:Dynamic = cast _Runtime.UNDEFINED;
@@ -84,18 +86,18 @@ class SelectableRichTextManager {
     _Runtime.setField(runtime, 'selectionEndIndex', _Runtime.callValue(computeRichTextCharIndexAtPoint, cast ([layout, x, y] : Array<Dynamic>)));
   }
 
-  public static function dispatchSelectableRichTextWheel(manager:Dynamic, deltaLines:Float):Void {
+  public static function dispatchSelectableRichTextWheel(manager:flighthq.types.SelectableRichTextManager, deltaLines:Float):Void {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.field(manager, 'focused');
     if (_Runtime.truthy(_Runtime.strictEquals(target, null))) { return; }
     _Runtime.callValue(setRichTextScrollV, cast ([target, (_Runtime.field(_Runtime.field(target, 'data'), 'scrollV') + _Runtime.callProperty(HxMath, 'round', cast ([deltaLines] : Array<Dynamic>)))] : Array<Dynamic>));
   }
 
-  public static function focusSelectableRichText(manager:Dynamic, target:Dynamic):Void {
+  public static function focusSelectableRichText(manager:flighthq.types.SelectableRichTextManager, target:RichText):Void {
     _Runtime.setField(manager, 'focused', target);
   }
 
-  public static function getSelectableRichTextSelectionText(manager:Dynamic):String {
+  public static function getSelectableRichTextSelectionText(manager:flighthq.types.SelectableRichTextManager):String {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var start:Dynamic = cast _Runtime.UNDEFINED;
@@ -109,7 +111,7 @@ class SelectableRichTextManager {
     return cast null;
   }
 
-  public static function getMutableRuntime__selectableRichTextManager(source:Dynamic):RichTextRuntime {
+  public static function getMutableRuntime__selectableRichTextManager(source:RichText):RichTextRuntime {
     return cast (cast _Runtime.callValue(getRichTextRuntime, cast ([source] : Array<Dynamic>)) : RichTextRuntime);
     return cast null;
   }

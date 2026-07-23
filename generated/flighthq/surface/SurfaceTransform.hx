@@ -5,13 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.ColorTransform.ColorTransformLike;
+import flighthq.types.Surface;
+import flighthq.types.SurfaceRegion;
 import flighthq.types.ThresholdOperation;
 
 @:expose("flighthq.surface.SurfaceTransform")
 class SurfaceTransform {
   public static var _scrollScratch__surfaceTransform:Null<Dynamic> = _Runtime.explicitNull();
 
-  public static function applySurfaceColorTransform(dest:Dynamic, source:Dynamic, ct:ColorTransformLike):Void {
+  public static function applySurfaceColorTransform(dest:SurfaceRegion, source:SurfaceRegion, ct:ColorTransformLike):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     w = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'width'), _Runtime.field(source, 'width')] : Array<Dynamic>));
@@ -47,7 +49,7 @@ class SurfaceTransform {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function applySurfaceThreshold(dest:Dynamic, source:Dynamic, operation:ThresholdOperation, thresholdValue:Float, color:Float = 0.0, mask:Float = 4294967295.0, copySource:Bool = false):Float {
+  public static function applySurfaceThreshold(dest:SurfaceRegion, source:SurfaceRegion, operation:ThresholdOperation, thresholdValue:Float, color:Float = 0.0, mask:Float = 4294967295.0, copySource:Bool = false):Float {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var sd:Dynamic = cast _Runtime.UNDEFINED;
@@ -97,7 +99,7 @@ class SurfaceTransform {
     return cast null;
   }
 
-  public static function mergeSurface(dest:Dynamic, source:Dynamic, redMultiplier:Float, greenMultiplier:Float, blueMultiplier:Float, alphaMultiplier:Float):Void {
+  public static function mergeSurface(dest:SurfaceRegion, source:SurfaceRegion, redMultiplier:Float, greenMultiplier:Float, blueMultiplier:Float, alphaMultiplier:Float):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var sd:Dynamic = cast _Runtime.UNDEFINED;
@@ -133,7 +135,7 @@ class SurfaceTransform {
     _Runtime.callValue(invalidateImageResource, cast ([_Runtime.field(dest, 'surface')] : Array<Dynamic>));
   }
 
-  public static function scrollSurface(out:Dynamic, dx:Float, dy:Float):Void {
+  public static function scrollSurface(out:Surface, dx:Float, dy:Float):Void {
     var needed:Dynamic = cast _Runtime.UNDEFINED;
     needed = _Runtime.field(_Runtime.field(out, 'data'), 'length');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(SurfaceTransform._scrollScratch__surfaceTransform, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(SurfaceTransform._scrollScratch__surfaceTransform, 'length'), needed, '<')))) {

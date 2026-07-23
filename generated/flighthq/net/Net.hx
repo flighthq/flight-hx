@@ -11,6 +11,7 @@ import flighthq.types.Net.NetRequestOptions;
 import flighthq.types.Net.NetResponse;
 import flighthq.types.Net.NetResponseBody;
 import flighthq.types.Net.NetResponseType;
+import flighthq.types.Signal;
 
 @:expose("flighthq.net.Net")
 class Net {
@@ -56,7 +57,7 @@ class Net {
     return cast null;
   }
 
-  public static function _readNetResponseBody__net(response:Dynamic, responseType:NetResponseType, progress:Null<Dynamic>):flighthq._internal._Promise<NetResponseBody> {
+  public static function _readNetResponseBody__net(response:Dynamic, responseType:NetResponseType, progress:Null<Signal<Dynamic>>):flighthq._internal._Promise<NetResponseBody> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<NetResponseBody> {
       if (_Runtime.truthy(!_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')))) {
         var buffer:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(Net._readNetResponseWithProgress__net, cast ([response, progress] : Array<Dynamic>)));
@@ -86,7 +87,7 @@ class Net {
     return cast null;
   }
 
-  public static function _readNetResponseWithProgress__net(response:Dynamic, progress:Dynamic):flighthq._internal._Promise<haxe.io.Bytes> {
+  public static function _readNetResponseWithProgress__net(response:Dynamic, progress:Signal<Dynamic>):flighthq._internal._Promise<haxe.io.Bytes> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<haxe.io.Bytes> {
       var total:Dynamic = cast _Runtime.UNDEFINED;
       var stream:Dynamic = cast _Runtime.UNDEFINED;

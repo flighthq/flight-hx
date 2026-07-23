@@ -6,11 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
 import flighthq.particlesFormats.ParticleDesignerSchema.ParticleDesignerDocument;
 import flighthq.particlesFormats.ParticleDesignerSchema.ParticleDesignerRawDict;
+import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
 
 typedef ParticleDesignerParseOptions = { @:optional var textureSize:Float; };
 
-typedef ParticleDesignerParsed = { var config:Dynamic; var document:ParticleDesignerDocument; var warnings:Array<String>; };
+typedef ParticleDesignerParsed = { var config:ParticleEmitterConfig; var document:ParticleDesignerDocument; var warnings:Array<String>; };
 
 @:expose("flighthq.particlesFormats.ParticleDesignerParse")
 class ParticleDesignerParse {
@@ -80,7 +81,7 @@ class ParticleDesignerParse {
     return cast null;
   }
 
-  public static function rawDictToConfig__particleDesignerParse(d:ParticleDesignerRawDict, textureSize:Float):Dynamic {
+  public static function rawDictToConfig__particleDesignerParse(d:ParticleDesignerRawDict, textureSize:Float):ParticleEmitterConfig {
     var angleRad:Dynamic = cast _Runtime.UNDEFINED;
     var lifespan:Dynamic = cast _Runtime.UNDEFINED;
     var lifespanVar:Dynamic = cast _Runtime.UNDEFINED;
@@ -131,7 +132,7 @@ class ParticleDesignerParse {
     return cast null;
   }
 
-  public static function parseParticleDesignerPlist(plistXml:String, ?options:ParticleDesignerParseOptions):Dynamic {
+  public static function parseParticleDesignerPlist(plistXml:String, ?options:ParticleDesignerParseOptions):ParticleEmitterConfig {
     return cast _Runtime.callValue(ParticleDesignerParse.rawDictToConfig__particleDesignerParse, cast ([_Runtime.callValue(ParticleDesignerParse.parsePlistRawDict__particleDesignerParse, cast ([plistXml] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.optionalField(options, 'textureSize'), function():Dynamic return cast 1.0)] : Array<Dynamic>));
     return cast null;
   }

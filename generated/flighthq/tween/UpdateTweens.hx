@@ -5,10 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.tween._internal._Internal.initializeTween;
+import flighthq.types.Tween;
+import flighthq.types.TweenManager;
 
 @:expose("flighthq.tween.UpdateTweens")
 class UpdateTweens {
-  public static function completeTween<T>(tween:Dynamic):Void {
+  public static function completeTween<T>(tween:Tween<Dynamic>):Void {
     var effectiveT:Dynamic = cast _Runtime.UNDEFINED;
     var easedT:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
@@ -26,7 +28,7 @@ class UpdateTweens {
     _Runtime.callValue(emitSignal, cast ([_Runtime.field(tween, 'onComplete')] : Array<Dynamic>));
   }
 
-  public static function updateTween__updateTweens<T>(tween:Dynamic, deltaTime:Float):Void {
+  public static function updateTween__updateTweens<T>(tween:Tween<Dynamic>, deltaTime:Float):Void {
     var activeElapsed:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
     var effectiveT:Dynamic = cast _Runtime.UNDEFINED;
@@ -63,7 +65,7 @@ class UpdateTweens {
     }
   }
 
-  public static function updateTweens(manager:Dynamic, deltaTime:Float):Void {
+  public static function updateTweens(manager:TweenManager, deltaTime:Float):Void {
     for (__iteration0 in _Runtime.iterable(_Runtime.field(manager, 'tweens'))) {
       var target:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
       var list:Dynamic = _Runtime.getIndex(__iteration0, 1.0);

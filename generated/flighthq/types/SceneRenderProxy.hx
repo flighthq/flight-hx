@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.MeshGeometry.MeshSubset;
 
-typedef SceneRenderProxy = { @:optional var alpha:Float; @:optional var jointMatrices:Null<flighthq._internal._Float32Array>; var material:Dynamic; var normalMatrix:Dynamic; var subset:MeshSubset; var worldMatrix:Dynamic; };
+typedef SceneRenderProxy = { @:optional var alpha:Float; @:optional var jointMatrices:Null<flighthq._internal._Float32Array>; var material:Material; var normalMatrix:Matrix3; var subset:MeshSubset; var worldMatrix:Matrix4; };

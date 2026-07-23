@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef QuadBatchSignals = { var onCleared:Dynamic; var onInstanceAppended:Dynamic; var onInstanceRemoved:Dynamic; };
+typedef QuadBatchSignals = { var onCleared:Signal<Dynamic>; var onInstanceAppended:Signal<Dynamic>; var onInstanceRemoved:Signal<Dynamic>; };

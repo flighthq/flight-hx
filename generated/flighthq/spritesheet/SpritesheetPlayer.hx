@@ -6,10 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.clearSignal;
+import flighthq.types.Spritesheet;
+import flighthq.types.SpritesheetAnimation;
+import flighthq.types.SpritesheetFrame;
+import flighthq.types.SpritesheetPlayer;
 
 @:expose("flighthq.spritesheet.SpritesheetPlayer")
 class SpritesheetPlayer {
-  public static function acquireSpritesheetPlayer():Dynamic {
+  public static function acquireSpritesheetPlayer():flighthq.types.SpritesheetPlayer {
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(SpritesheetPlayer.playerPool__spritesheetPlayer, 'length'), 0.0, '>'))) {
       var p:Dynamic = _Runtime.callProperty(SpritesheetPlayer.playerPool__spritesheetPlayer, 'pop', cast ([] : Array<Dynamic>));
       _Runtime.setField(p, 'animation', null);
@@ -25,17 +29,17 @@ class SpritesheetPlayer {
     return cast null;
   }
 
-  public static function cloneSpritesheetPlayer(player:Dynamic):Dynamic {
+  public static function cloneSpritesheetPlayer(player:flighthq.types.SpritesheetPlayer):flighthq.types.SpritesheetPlayer {
     return cast { animation: _Runtime.field(player, 'animation'), complete: _Runtime.field(player, 'complete'), elapsed: _Runtime.field(player, 'elapsed'), frameIndex: _Runtime.field(player, 'frameIndex'), onComplete: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onLoop: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), paused: _Runtime.field(player, 'paused'), queue: _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(player, 'queue'))]), speed: _Runtime.field(player, 'speed') };
     return cast null;
   }
 
-  public static function createSpritesheetPlayer(?obj:Dynamic):Dynamic {
+  public static function createSpritesheetPlayer(?obj:Dynamic):flighthq.types.SpritesheetPlayer {
     return cast { animation: _Runtime.coalesce(_Runtime.optionalField(obj, 'animation'), function():Dynamic return cast null), complete: _Runtime.coalesce(_Runtime.optionalField(obj, 'complete'), function():Dynamic return cast true), elapsed: _Runtime.coalesce(_Runtime.optionalField(obj, 'elapsed'), function():Dynamic return cast 0.0), frameIndex: _Runtime.coalesce(_Runtime.optionalField(obj, 'frameIndex'), function():Dynamic return cast 0.0), onComplete: _Runtime.coalesce(_Runtime.optionalField(obj, 'onComplete'), function():Dynamic return cast _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))), onLoop: _Runtime.coalesce(_Runtime.optionalField(obj, 'onLoop'), function():Dynamic return cast _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>))), paused: _Runtime.coalesce(_Runtime.optionalField(obj, 'paused'), function():Dynamic return cast false), queue: _Runtime.coalesce(_Runtime.optionalField(obj, 'queue'), function():Dynamic return cast cast ([] : Array<Dynamic>)), speed: _Runtime.coalesce(_Runtime.optionalField(obj, 'speed'), function():Dynamic return cast 1.0) };
     return cast null;
   }
 
-  public static function disposeSpritesheetPlayer(player:Dynamic):Void {
+  public static function disposeSpritesheetPlayer(player:flighthq.types.SpritesheetPlayer):Void {
     _Runtime.callValue(clearSignal, cast ([_Runtime.field(player, 'onComplete')] : Array<Dynamic>));
     _Runtime.callValue(clearSignal, cast ([_Runtime.field(player, 'onLoop')] : Array<Dynamic>));
     _Runtime.setField(player, 'animation', null);
@@ -43,7 +47,7 @@ class SpritesheetPlayer {
     _Runtime.setLength(_Runtime.field(player, 'queue'), 0.0);
   }
 
-  public static function getSpritesheetPlayerFrame(player:Dynamic, spritesheet:Dynamic):Null<Dynamic> {
+  public static function getSpritesheetPlayerFrame(player:flighthq.types.SpritesheetPlayer, spritesheet:Spritesheet):Null<SpritesheetFrame> {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var animation:Dynamic = cast _Runtime.UNDEFINED;
     var frameIndex:Dynamic = cast _Runtime.UNDEFINED;
@@ -57,7 +61,7 @@ class SpritesheetPlayer {
     return cast null;
   }
 
-  public static function getSpritesheetPlayerFrameAt(player:Dynamic, spritesheet:Dynamic, frameOffset:Float):Null<Dynamic> {
+  public static function getSpritesheetPlayerFrameAt(player:flighthq.types.SpritesheetPlayer, spritesheet:Spritesheet, frameOffset:Float):Null<SpritesheetFrame> {
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
     var animation:Dynamic = cast _Runtime.UNDEFINED;
     var frameIndex:Dynamic = cast _Runtime.UNDEFINED;
@@ -75,11 +79,11 @@ class SpritesheetPlayer {
     return cast null;
   }
 
-  public static function pauseSpritesheetPlayer(player:Dynamic):Void {
+  public static function pauseSpritesheetPlayer(player:flighthq.types.SpritesheetPlayer):Void {
     _Runtime.setField(player, 'paused', true);
   }
 
-  public static function playSpritesheetAnimation(player:Dynamic, animation:Null<Dynamic>, restart:Dynamic = true):Void {
+  public static function playSpritesheetAnimation(player:flighthq.types.SpritesheetPlayer, animation:Null<SpritesheetAnimation>, restart:Dynamic = true):Void {
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(restart), function():Dynamic return cast _Runtime.strictEquals(animation, _Runtime.field(player, 'animation'))))) { return; }
     _Runtime.setField(player, 'animation', animation);
     _Runtime.setField(player, 'complete', _Runtime.strictEquals(animation, null));
@@ -88,11 +92,11 @@ class SpritesheetPlayer {
     _Runtime.setLength(_Runtime.field(player, 'queue'), 0.0);
   }
 
-  public static function queueSpritesheetAnimation(player:Dynamic, animation:Dynamic):Void {
+  public static function queueSpritesheetAnimation(player:flighthq.types.SpritesheetPlayer, animation:SpritesheetAnimation):Void {
     _Runtime.callProperty(_Runtime.field(player, 'queue'), 'push', cast ([animation] : Array<Dynamic>));
   }
 
-  public static function releaseSpritesheetPlayer(player:Dynamic):Void {
+  public static function releaseSpritesheetPlayer(player:flighthq.types.SpritesheetPlayer):Void {
     _Runtime.callValue(clearSignal, cast ([_Runtime.field(player, 'onComplete')] : Array<Dynamic>));
     _Runtime.callValue(clearSignal, cast ([_Runtime.field(player, 'onLoop')] : Array<Dynamic>));
     _Runtime.setField(player, 'animation', null);
@@ -105,11 +109,11 @@ class SpritesheetPlayer {
     _Runtime.callProperty(SpritesheetPlayer.playerPool__spritesheetPlayer, 'push', cast ([player] : Array<Dynamic>));
   }
 
-  public static function resumeSpritesheetPlayer(player:Dynamic):Void {
+  public static function resumeSpritesheetPlayer(player:flighthq.types.SpritesheetPlayer):Void {
     _Runtime.setField(player, 'paused', false);
   }
 
-  public static function seekSpritesheetPlayerToFrame(player:Dynamic, frameIndex:Float):Void {
+  public static function seekSpritesheetPlayerToFrame(player:flighthq.types.SpritesheetPlayer, frameIndex:Float):Void {
     var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
     var animation:Dynamic = cast _Runtime.UNDEFINED;
     var clamped:Dynamic = cast _Runtime.UNDEFINED;
@@ -121,7 +125,7 @@ class SpritesheetPlayer {
     _Runtime.setField(player, 'elapsed', _Runtime.callValue(SpritesheetPlayer.resolveVirtualIndexStartTime__spritesheetPlayer, cast ([animation, clamped] : Array<Dynamic>)));
   }
 
-  public static function seekSpritesheetPlayerToTime(player:Dynamic, time:Float):Void {
+  public static function seekSpritesheetPlayerToTime(player:flighthq.types.SpritesheetPlayer, time:Float):Void {
     var __destructure3:Dynamic = cast _Runtime.UNDEFINED;
     var animation:Dynamic = cast _Runtime.UNDEFINED;
     var totalTime:Dynamic = cast _Runtime.UNDEFINED;
@@ -133,14 +137,14 @@ class SpritesheetPlayer {
     _Runtime.setField(player, 'frameIndex', _Runtime.callValue(SpritesheetPlayer.resolveFrameIndexFromElapsed__spritesheetPlayer, cast ([animation, _Runtime.field(player, 'elapsed')] : Array<Dynamic>)));
   }
 
-  public static function stopSpritesheetPlayer(player:Dynamic):Void {
+  public static function stopSpritesheetPlayer(player:flighthq.types.SpritesheetPlayer):Void {
     _Runtime.setField(player, 'elapsed', 0.0);
     _Runtime.setField(player, 'frameIndex', 0.0);
     _Runtime.setField(player, 'complete', true);
     _Runtime.setLength(_Runtime.field(player, 'queue'), 0.0);
   }
 
-  public static function updateSpritesheetPlayer(player:Dynamic, deltaTime:Float):Bool {
+  public static function updateSpritesheetPlayer(player:flighthq.types.SpritesheetPlayer, deltaTime:Float):Bool {
     var __destructure4:Dynamic = cast _Runtime.UNDEFINED;
     var animation:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure5:Dynamic = cast _Runtime.UNDEFINED;
@@ -180,7 +184,7 @@ class SpritesheetPlayer {
     return cast null;
   }
 
-  public static function getCumulativeDurations__spritesheetPlayer(animation:Dynamic):Dynamic {
+  public static function getCumulativeDurations__spritesheetPlayer(animation:SpritesheetAnimation):Dynamic {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure6:Dynamic = cast _Runtime.UNDEFINED;
     var frames:Dynamic = cast _Runtime.UNDEFINED;
@@ -215,7 +219,7 @@ class SpritesheetPlayer {
     return cast null;
   }
 
-  public static function resolveAnimationTotalTime__spritesheetPlayer(animation:Dynamic):Float {
+  public static function resolveAnimationTotalTime__spritesheetPlayer(animation:SpritesheetAnimation):Float {
     var __destructure7:Dynamic = cast _Runtime.UNDEFINED;
     var frameDuration:Dynamic = cast _Runtime.UNDEFINED;
     var frameDurations:Dynamic = cast _Runtime.UNDEFINED;
@@ -232,7 +236,7 @@ class SpritesheetPlayer {
     return cast null;
   }
 
-  public static function resolveFrameIndexFromElapsed__spritesheetPlayer(animation:Dynamic, elapsed:Float):Float {
+  public static function resolveFrameIndexFromElapsed__spritesheetPlayer(animation:SpritesheetAnimation, elapsed:Float):Float {
     var totalTime:Dynamic = cast _Runtime.UNDEFINED;
     var timeInLoop:Dynamic = cast _Runtime.UNDEFINED;
     var vi:Dynamic = cast _Runtime.UNDEFINED;
@@ -243,7 +247,7 @@ class SpritesheetPlayer {
     return cast null;
   }
 
-  public static function resolveVirtualFrameCount__spritesheetPlayer(animation:Dynamic):Float {
+  public static function resolveVirtualFrameCount__spritesheetPlayer(animation:SpritesheetAnimation):Float {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var isPingpong:Dynamic = cast _Runtime.UNDEFINED;
     n = _Runtime.field(_Runtime.field(animation, 'frames'), 'length');
@@ -253,7 +257,7 @@ class SpritesheetPlayer {
     return cast null;
   }
 
-  public static function resolveVirtualIndexFromTime__spritesheetPlayer(animation:Dynamic, timeInLoop:Float):Float {
+  public static function resolveVirtualIndexFromTime__spritesheetPlayer(animation:SpritesheetAnimation, timeInLoop:Float):Float {
     var __destructure8:Dynamic = cast _Runtime.UNDEFINED;
     var frameDuration:Dynamic = cast _Runtime.UNDEFINED;
     var frameDurations:Dynamic = cast _Runtime.UNDEFINED;
@@ -280,7 +284,7 @@ class SpritesheetPlayer {
     return cast null;
   }
 
-  public static function resolveVirtualIndexStartTime__spritesheetPlayer(animation:Dynamic, virtualIndex:Float):Float {
+  public static function resolveVirtualIndexStartTime__spritesheetPlayer(animation:SpritesheetAnimation, virtualIndex:Float):Float {
     var __destructure9:Dynamic = cast _Runtime.UNDEFINED;
     var frameDuration:Dynamic = cast _Runtime.UNDEFINED;
     var frameDurations:Dynamic = cast _Runtime.UNDEFINED;
@@ -295,7 +299,7 @@ class SpritesheetPlayer {
     return cast null;
   }
 
-  public static function resolveVirtualIndexToDisplayIndex__spritesheetPlayer(animation:Dynamic, virtualIndex:Float):Float {
+  public static function resolveVirtualIndexToDisplayIndex__spritesheetPlayer(animation:SpritesheetAnimation, virtualIndex:Float):Float {
     var __destructure10:Dynamic = cast _Runtime.UNDEFINED;
     var direction:Dynamic = cast _Runtime.UNDEFINED;
     var frames:Dynamic = cast _Runtime.UNDEFINED;
@@ -325,7 +329,7 @@ class SpritesheetPlayer {
     return cast null;
   }
 
-  public static final playerPool__spritesheetPlayer:Array<Dynamic> = cast ([] : Array<Dynamic>);
+  public static final playerPool__spritesheetPlayer:Array<flighthq.types.SpritesheetPlayer> = cast ([] : Array<Dynamic>);
 
   public static final cumulativeDurationsCache__spritesheetPlayer:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 }

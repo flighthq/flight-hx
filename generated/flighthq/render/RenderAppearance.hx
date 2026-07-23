@@ -5,12 +5,17 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.node.Revision.getNodeAppearanceRevision;
 import flighthq.render.RenderState.getRenderStateRuntime;
+import flighthq.types.HasAppearance;
+import flighthq.types.HasBlendMode;
+import flighthq.types.Node;
+import flighthq.types.RenderProxy;
+import flighthq.types.RenderState;
 
 @:expose("flighthq.render.RenderAppearance")
 class RenderAppearance {
-  public static function updateRenderProxyAppearance(state:Dynamic, data:Dynamic, ?parentData:Dynamic):Bool {
+  public static function updateRenderProxyAppearance(state:RenderState, data:RenderProxy, ?parentData:RenderProxy):Bool {
     var appearanceId:Dynamic = cast _Runtime.UNDEFINED;
-    appearanceId = _Runtime.callValue(getNodeAppearanceRevision, cast ([(cast _Runtime.field(data, 'source') : Dynamic)] : Array<Dynamic>));
+    appearanceId = _Runtime.callValue(getNodeAppearanceRevision, cast ([(cast _Runtime.field(data, 'source') : Node<Dynamic>)] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.andValue(!_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(parentData, 'appearanceFrameId'), _Runtime.field(_Runtime.callValue(getRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentFrameId'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(data, 'lastAppearanceId'), appearanceId)))) {
       _Runtime.callValue(RenderAppearance.recalculateAppearance__renderAppearance, cast ([state, data, parentData] : Array<Dynamic>));
       _Runtime.setField(data, 'lastAppearanceId', appearanceId);
@@ -20,7 +25,7 @@ class RenderAppearance {
     return cast null;
   }
 
-  public static function recalculateAppearance__renderAppearance(state:Dynamic, data:Dynamic, ?parentData:Dynamic):Void {
+  public static function recalculateAppearance__renderAppearance(state:RenderState, data:RenderProxy, ?parentData:RenderProxy):Void {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     source = (cast (cast _Runtime.field(data, 'source') : Dynamic) : Dynamic);
     if (_Runtime.truthy(!_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')))) {

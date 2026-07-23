@@ -7,4 +7,4 @@ import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 
-typedef ToonMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var alphaType:AlphaType; var blendMode:BlendMode; var doubleSided:Bool; var baseColor:Float; var baseColorMap:Null<Dynamic>; var ramp:Null<Dynamic>; var steps:Float; };
+typedef ToonMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var alphaType:AlphaType; var blendMode:BlendMode; var doubleSided:Bool; var baseColor:Float; var baseColorMap:Null<Texture>; var ramp:Null<Texture>; var steps:Float; };

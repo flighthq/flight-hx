@@ -27,19 +27,24 @@ import flighthq.renderWgpu.WgpuRenderTarget.drawWgpuRenderTargetResult;
 import flighthq.renderWgpu.WgpuRenderTarget.endWgpuRenderPass;
 import flighthq.renderWgpu.WgpuRenderTarget.resizeWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTarget.setWgpuRenderTransform2D;
+import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObjectRenderer;
+import flighthq.types.Matrix;
+import flighthq.types.RenderCache;
 import flighthq.types.RenderCacheRefreshOptions;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderTarget;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 @:expose("flighthq.displayobjectWgpu.WgpuCache")
 class WgpuCache {
-  public static function createWgpuCacheState(screenState:Dynamic):Dynamic {
+  public static function createWgpuCacheState(screenState:WgpuRenderState):WgpuRenderState {
     var screenRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var cacheState:Dynamic = cast _Runtime.UNDEFINED;
     var cacheRuntime:Dynamic = cast _Runtime.UNDEFINED;
     screenRuntime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([screenState] : Array<Dynamic>));
-    cacheState = (cast _Runtime.callValue(createRenderState, cast ([{ allowSmoothing: _Runtime.field(screenState, 'allowSmoothing'), pixelRatio: _Runtime.field(screenState, 'pixelRatio'), renderTransform2D: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)), roundPixels: _Runtime.field(screenState, 'roundPixels'), sceneGraphSyncPolicy: _Runtime.field(screenState, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : Dynamic);
+    cacheState = (cast _Runtime.callValue(createRenderState, cast ([{ allowSmoothing: _Runtime.field(screenState, 'allowSmoothing'), pixelRatio: _Runtime.field(screenState, 'pixelRatio'), renderTransform2D: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)), roundPixels: _Runtime.field(screenState, 'roundPixels'), sceneGraphSyncPolicy: _Runtime.field(screenState, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : WgpuRenderState);
     cacheRuntime = _Runtime.callValue(createWgpuRenderStateRuntime, cast ([] : Array<Dynamic>));
     _Runtime.setIndex(cacheState, EntityRuntimeKey, cacheRuntime);
     _Runtime.callValue(copyAllRenderersFromRenderState, cast ([cacheState, screenState] : Array<Dynamic>));
@@ -102,11 +107,11 @@ class WgpuCache {
     return cast null;
   }
 
-  public static function enableWgpuRenderCache(state:Dynamic):Void {
+  public static function enableWgpuRenderCache(state:WgpuRenderState):Void {
     _Runtime.callValue(registerRenderCacheRenderer, cast ([state, defaultWgpuRenderCacheRenderer] : Array<Dynamic>));
   }
 
-  public static function ensureWgpuRenderCacheTarget(state:Dynamic, cache:Dynamic, width:Float, height:Float):Dynamic {
+  public static function ensureWgpuRenderCacheTarget(state:WgpuRenderState, cache:RenderCache, width:Float, height:Float):WgpuRenderTarget {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callValue(WgpuCache.getTargets__wgpuCache, cast ([state] : Array<Dynamic>));
@@ -121,12 +126,12 @@ class WgpuCache {
     return cast null;
   }
 
-  public static function getWgpuRenderCacheTarget(state:Dynamic, cache:Dynamic):Null<Dynamic> {
+  public static function getWgpuRenderCacheTarget(state:WgpuRenderState, cache:RenderCache):Null<WgpuRenderTarget> {
     return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.callValue(WgpuCache.getTargets__wgpuCache, cast ([state] : Array<Dynamic>)), 'get', cast ([cache] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function refreshWgpuRenderCache(cacheState:Dynamic, cache:Dynamic, source:Dynamic, ?options:RenderCacheRefreshOptions):Bool {
+  public static function refreshWgpuRenderCache(cacheState:WgpuRenderState, cache:RenderCache, source:DisplayObject, ?options:RenderCacheRefreshOptions):Bool {
     var screenState:Dynamic = cast _Runtime.UNDEFINED;
     var cacheRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var screenRuntime:Dynamic = cast _Runtime.UNDEFINED;
@@ -185,7 +190,7 @@ class WgpuCache {
     return cast null;
   }
 
-  public static function releaseWgpuRenderCache(state:Dynamic, cache:Dynamic):Void {
+  public static function releaseWgpuRenderCache(state:WgpuRenderState, cache:RenderCache):Void {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callValue(WgpuCache.getTargets__wgpuCache, cast ([state] : Array<Dynamic>));
@@ -195,7 +200,7 @@ class WgpuCache {
     _Runtime.callProperty(targets, 'delete', cast ([cache] : Array<Dynamic>));
   }
 
-  public static function drawWgpuRenderCache__wgpuCache(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawWgpuRenderCache__wgpuCache(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var cache:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
     cache = _Runtime.callValue(getRenderProxyCache, cast ([state, _Runtime.field(renderProxy, 'source')] : Array<Dynamic>));
@@ -206,7 +211,7 @@ class WgpuCache {
     _Runtime.callValue(drawWgpuRenderTargetResult, cast ([state, renderProxy, target, WgpuCache._identity__wgpuCache] : Array<Dynamic>));
   }
 
-  public static function getTargets__wgpuCache(state:Dynamic):Dynamic {
+  public static function getTargets__wgpuCache(state:WgpuRenderState):Dynamic {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callProperty(WgpuCache._renderCacheTargets__wgpuCache, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -225,11 +230,11 @@ class WgpuCache {
 
   public static final _bounds__wgpuCache:Dynamic = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
 
-  public static final _renderTransform__wgpuCache:Dynamic = (cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Dynamic);
+  public static final _renderTransform__wgpuCache:Dynamic = (cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Matrix);
 
-  public static final _bakeTransform__wgpuCache:Dynamic = (cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Dynamic);
+  public static final _bakeTransform__wgpuCache:Dynamic = (cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Matrix);
 
-  public static final _yInvert__wgpuCache:Dynamic = (cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Dynamic);
+  public static final _yInvert__wgpuCache:Dynamic = (cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Matrix);
 
-  public static final _identity__wgpuCache:Dynamic = (cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Dynamic);
+  public static final _identity__wgpuCache:Dynamic = (cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) : Matrix);
 }

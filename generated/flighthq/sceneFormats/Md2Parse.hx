@@ -27,8 +27,12 @@ import flighthq.sceneFormats.Shared.CANONICAL_FLOATS_PER_VERTEX;
 import flighthq.sceneFormats.Shared.CANONICAL_LAYOUT;
 import flighthq.sceneFormats.Shared.createExternalTextureRef;
 import flighthq.types.AnimationChannel;
+import flighthq.types.Material;
+import flighthq.types.Mesh;
 import flighthq.types.MorphTarget;
 import flighthq.types.MorphTarget.MeshMorph;
+import flighthq.types.Scene;
+import flighthq.types.SceneNode;
 import flighthq.types.Types.SceneAnimationPathWeights;
 import flighthq.types._internal._SceneAnimationPathValues.SceneAnimationPathWeights;
 
@@ -36,7 +40,7 @@ typedef Md2Frame__md2Parse = { var normals:flighthq._internal._Float32Array; var
 
 @:expose("flighthq.sceneFormats.Md2Parse")
 class Md2Parse {
-  public static function createSceneFromMd2(bytes:Dynamic, ?warnings:Array<String>):Dynamic {
+  public static function createSceneFromMd2(bytes:Dynamic, ?warnings:Array<String>):Scene {
     var view:Dynamic = cast _Runtime.UNDEFINED;
     var magic:Dynamic = cast _Runtime.UNDEFINED;
     var version:Dynamic = cast _Runtime.UNDEFINED;
@@ -65,7 +69,7 @@ class Md2Parse {
     var interleavedVertices:Array<Float> = cast _Runtime.UNDEFINED;
     var sourceVertexIndices:Array<Float> = cast _Runtime.UNDEFINED;
     var indices:Array<Float> = cast _Runtime.UNDEFINED;
-    var materials:Array<Dynamic> = cast _Runtime.UNDEFINED;
+    var materials:Array<Material> = cast _Runtime.UNDEFINED;
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var vertices:Dynamic = cast _Runtime.UNDEFINED;
     var indexArray:Dynamic = cast _Runtime.UNDEFINED;
@@ -180,7 +184,7 @@ class Md2Parse {
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(numSkins, 1.0, '>='), function():Dynamic return cast _Runtime.compare((offSkins + MD2_SKIN_SIZE), _Runtime.field(bytes, 'length'), '<=')))) {
       var skinName:Dynamic = _Runtime.callValue(Md2Parse.readMd2SkinName__md2Parse, cast ([bytes, offSkins] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.compare(_Runtime.field(skinName, 'length'), 0.0, '>'))) {
-        var material:Dynamic = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuseMap: _Runtime.callValue(createExternalTextureRef, cast ([skinName] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Dynamic);
+        var material:Dynamic = (cast (cast _Runtime.callValue(createBlinnPhongMaterial, cast ([{ diffuseMap: _Runtime.callValue(createExternalTextureRef, cast ([skinName] : Array<Dynamic>)) }] : Array<Dynamic>)) : Dynamic) : Material);
         _Runtime.setField(material, 'name', skinName);
         _Runtime.callProperty(materials, 'push', cast ([material] : Array<Dynamic>));
       }
@@ -192,7 +196,7 @@ class Md2Parse {
     mesh = _Runtime.callValue(createMesh, cast ([geometry, materials] : Array<Dynamic>));
     morph = _Runtime.callValue(Md2Parse.buildMd2Morph__md2Parse, cast ([frames, sourceVertexIndices] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(morph, null))) { _Runtime.setField(mesh, 'morph', morph); }
-    _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), (cast (cast mesh : Dynamic) : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(addNodeChild, cast ([_Runtime.field(scene, 'root'), (cast (cast mesh : Dynamic) : SceneNode)] : Array<Dynamic>));
     clip = _Runtime.callValue(Md2Parse.buildMd2MorphClip__md2Parse, cast ([_Runtime.field(scene, 'root')] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(clip, null))) { _Runtime.setField(_Runtime.field(scene, 'animations'), 'default', clip); }
     return cast scene;
@@ -280,7 +284,7 @@ class Md2Parse {
     return cast null;
   }
 
-  public static function buildMd2MorphClip__md2Parse(root:Dynamic):Null<Dynamic> {
+  public static function buildMd2MorphClip__md2Parse(root:SceneNode):Null<Dynamic> {
     var mesh:Dynamic = cast _Runtime.UNDEFINED;
     var targetCount:Dynamic = cast _Runtime.UNDEFINED;
     var frameCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -309,14 +313,14 @@ class Md2Parse {
     return cast null;
   }
 
-  public static function findMd2Mesh__md2Parse(root:Dynamic):Null<Dynamic> {
+  public static function findMd2Mesh__md2Parse(root:SceneNode):Null<Mesh> {
     var children:Dynamic = cast _Runtime.UNDEFINED;
     children = _Runtime.callValue(getNodeChildren, cast ([root] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
-        var child:Dynamic = (cast (cast _Runtime.getIndex(children, i) : Dynamic) : Dynamic);
-        if (_Runtime.truthy(_Runtime.callValue(isMesh, cast ([child] : Array<Dynamic>)))) { return cast (cast (cast child : Dynamic) : Dynamic); }
+        var child:Dynamic = (cast (cast _Runtime.getIndex(children, i) : Dynamic) : SceneNode);
+        if (_Runtime.truthy(_Runtime.callValue(isMesh, cast ([child] : Array<Dynamic>)))) { return cast (cast (cast child : Dynamic) : Mesh); }
         i++;
       }
     }

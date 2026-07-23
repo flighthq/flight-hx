@@ -4,6 +4,8 @@ package flighthq.displayobjectCanvas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.RenderProxy.getOrCreateRenderProxy2D;
+import flighthq.types.CanvasRenderState;
+import flighthq.types.DisplayObject;
 import flighthq.types.RenderProxy2D;
 
 @:expose("flighthq.displayobjectCanvas.CanvasCSSFilterBinding")
@@ -24,7 +26,7 @@ class CanvasCSSFilterBinding {
     return cast null;
   }
 
-  public static function setCanvasCssFilter(state:Dynamic, node:Dynamic, filter:Null<String>):Void {
+  public static function setCanvasCssFilter(state:Dynamic, node:DisplayObject, filter:Null<String>):Void {
     var renderProxy:Dynamic = cast _Runtime.UNDEFINED;
     renderProxy = _Runtime.callValue(getOrCreateRenderProxy2D, cast ([state, node] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(filter, null))) {

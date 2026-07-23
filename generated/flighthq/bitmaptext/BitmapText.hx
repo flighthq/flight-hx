@@ -12,11 +12,16 @@ import flighthq.node.Hierarchy.addNodeChild;
 import flighthq.sprite.QuadBatch.createQuadBatch;
 import flighthq.sprite.QuadBatch.reserveQuadBatch;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
+import flighthq.types.BitmapText;
 import flighthq.types.BitmapText.BitmapTextAlign;
 import flighthq.types.BitmapText.BitmapTextData;
 import flighthq.types.BitmapText.BitmapTextOptions;
 import flighthq.types.BitmapText.BitmapTextRuntime;
+import flighthq.types.GlyphSource;
 import flighthq.types.MethodsOf;
+import flighthq.types.Node;
+import flighthq.types.QuadBatch;
+import flighthq.types.Rectangle;
 import flighthq.types.Types.BitmapTextKind;
 import flighthq.types._internal._BitmapTextValues.BitmapTextKind;
 
@@ -24,7 +29,7 @@ import flighthq.types._internal._BitmapTextValues.BitmapTextKind;
 class BitmapText {
   public static final BITMAP_TEXT_DEFAULT_COLOR__bitmapText:Dynamic = 4294967295.0;
 
-  public static function computeBitmapTextLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
+  public static function computeBitmapTextLocalBoundsRectangle(out:Rectangle, source:flighthq.types.BitmapText):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : BitmapTextRuntime);
@@ -39,12 +44,12 @@ class BitmapText {
     _Runtime.callValue(copyRectangle, cast ([out, bounds] : Array<Dynamic>));
   }
 
-  public static function createBitmapText(glyphSource:Null<Dynamic>, ?options:BitmapTextOptions):Dynamic {
+  public static function createBitmapText(glyphSource:Null<GlyphSource>, ?options:BitmapTextOptions):flighthq.types.BitmapText {
     var bitmapText:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var quadBatch:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    bitmapText = (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([BitmapTextKind, _Runtime.field(_Runtime, 'UNDEFINED'), createBitmapTextData, createBitmapTextRuntime] : Array<Dynamic>)) : Dynamic);
+    bitmapText = (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([BitmapTextKind, _Runtime.field(_Runtime, 'UNDEFINED'), createBitmapTextData, createBitmapTextRuntime] : Array<Dynamic>)) : flighthq.types.BitmapText);
     data = _Runtime.field(bitmapText, 'data');
     _Runtime.setField(data, 'glyphSource', glyphSource);
     if (_Runtime.truthy(!_Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(BitmapText.applyBitmapTextOptions__bitmapText, cast ([data, options] : Array<Dynamic>)); }
@@ -70,7 +75,7 @@ class BitmapText {
     return cast null;
   }
 
-  public static function getBitmapTextBounds(source:Dynamic):Dynamic {
+  public static function getBitmapTextBounds(source:flighthq.types.BitmapText):Rectangle {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     out = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
     _Runtime.callValue(computeBitmapTextLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
@@ -78,12 +83,12 @@ class BitmapText {
     return cast null;
   }
 
-  public static function getBitmapTextQuadBatches(source:Dynamic):Array<Dynamic> {
+  public static function getBitmapTextQuadBatches(source:flighthq.types.BitmapText):Array<QuadBatch> {
     return cast _Runtime.field((cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : BitmapTextRuntime), 'quadBatches');
     return cast null;
   }
 
-  public static function reserveBitmapText(target:Dynamic, glyphCapacity:Float):Void {
+  public static function reserveBitmapText(target:flighthq.types.BitmapText, glyphCapacity:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([target] : Array<Dynamic>)) : BitmapTextRuntime);
     for (quadBatch in _Runtime.iterable(_Runtime.field(runtime, 'quadBatches'))) {
@@ -91,31 +96,31 @@ class BitmapText {
     }
   }
 
-  public static function setBitmapTextAlign(target:Dynamic, align:BitmapTextAlign):Void {
+  public static function setBitmapTextAlign(target:flighthq.types.BitmapText, align:BitmapTextAlign):Void {
     _Runtime.setField(_Runtime.field(target, 'data'), 'align', align);
   }
 
-  public static function setBitmapTextColor(target:Dynamic, color:Float):Void {
+  public static function setBitmapTextColor(target:flighthq.types.BitmapText, color:Float):Void {
     _Runtime.setField(_Runtime.field(target, 'data'), 'color', color);
   }
 
-  public static function setBitmapTextGlyphSource(target:Dynamic, glyphSource:Null<Dynamic>):Void {
+  public static function setBitmapTextGlyphSource(target:flighthq.types.BitmapText, glyphSource:Null<GlyphSource>):Void {
     _Runtime.setField(_Runtime.field(target, 'data'), 'glyphSource', glyphSource);
   }
 
-  public static function setBitmapTextLetterSpacing(target:Dynamic, letterSpacing:Float):Void {
+  public static function setBitmapTextLetterSpacing(target:flighthq.types.BitmapText, letterSpacing:Float):Void {
     _Runtime.setField(_Runtime.field(target, 'data'), 'letterSpacing', letterSpacing);
   }
 
-  public static function setBitmapTextLineHeight(target:Dynamic, lineHeight:Float):Void {
+  public static function setBitmapTextLineHeight(target:flighthq.types.BitmapText, lineHeight:Float):Void {
     _Runtime.setField(_Runtime.field(target, 'data'), 'lineHeight', lineHeight);
   }
 
-  public static function setBitmapTextText(target:Dynamic, text:String):Void {
+  public static function setBitmapTextText(target:flighthq.types.BitmapText, text:String):Void {
     _Runtime.setField(_Runtime.field(target, 'data'), 'text', text);
   }
 
-  public static function setBitmapTextWrapWidth(target:Dynamic, wrapWidth:Null<Float>):Void {
+  public static function setBitmapTextWrapWidth(target:flighthq.types.BitmapText, wrapWidth:Null<Float>):Void {
     _Runtime.setField(_Runtime.field(target, 'data'), 'wrapWidth', wrapWidth);
   }
 
@@ -128,9 +133,9 @@ class BitmapText {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(options, 'wrapWidth'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(data, 'wrapWidth', _Runtime.field(options, 'wrapWidth')); }
   }
 
-  public static function copyLocalBoundsRectangle__bitmapText(out:Dynamic, source:Dynamic):Void {
+  public static function copyLocalBoundsRectangle__bitmapText(out:Rectangle, source:Node<Dynamic>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([(cast source : Dynamic)] : Array<Dynamic>)) : BitmapTextRuntime);
+    runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([(cast source : flighthq.types.BitmapText)] : Array<Dynamic>)) : BitmapTextRuntime);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null))) { _Runtime.callValue(copyRectangle, cast ([out, _Runtime.field(runtime, 'localBoundsRectangle')] : Array<Dynamic>)); }
   }
 

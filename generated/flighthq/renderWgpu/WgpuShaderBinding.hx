@@ -5,7 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.RenderProxy.getOrCreateRenderProxy2D;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
+import flighthq.types.DisplayObject;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuBitmapShader;
 
 @:expose("flighthq.renderWgpu.WgpuShaderBinding")
@@ -17,7 +19,7 @@ class WgpuShaderBinding {
     return cast null;
   }
 
-  public static function resolveWgpuShader(state:Dynamic, renderProxy:RenderProxy2D):Null<WgpuBitmapShader> {
+  public static function resolveWgpuShader(state:WgpuRenderState, renderProxy:RenderProxy2D):Null<WgpuBitmapShader> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var resolver:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -30,7 +32,7 @@ class WgpuShaderBinding {
     return cast null;
   }
 
-  public static function setWgpuShader(state:Dynamic, node:Dynamic, shader:Null<WgpuBitmapShader>):Void {
+  public static function setWgpuShader(state:WgpuRenderState, node:DisplayObject, shader:Null<WgpuBitmapShader>):Void {
     var renderProxy:Dynamic = cast _Runtime.UNDEFINED;
     renderProxy = _Runtime.callValue(getOrCreateRenderProxy2D, cast ([state, node] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(shader, null))) {

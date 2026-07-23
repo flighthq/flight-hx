@@ -12,7 +12,7 @@ import flighthq.types.Node.NodeTraits;
 
 typedef HasBoundsRectangle = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; };
 
-typedef HasBoundsRectangleRuntime = { var binding:Null<Dynamic>; var boundsRectangle:Null<Dynamic>; var computeLocalBoundsRectangle:Dynamic; var localBoundsRectangle:Null<Dynamic>; var worldBoundsRectangle:Null<Dynamic>; };
+typedef HasBoundsRectangleRuntime = { var binding:Null<Dynamic>; var boundsRectangle:Null<Rectangle>; var computeLocalBoundsRectangle:Dynamic; var localBoundsRectangle:Null<Rectangle>; var worldBoundsRectangle:Null<Rectangle>; };
 
 typedef BoundsNode<Traits> = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Traits>>; };
 

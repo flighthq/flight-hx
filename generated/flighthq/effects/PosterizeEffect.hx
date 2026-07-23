@@ -3,10 +3,11 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.PosterizeEffect;
 
 @:expose("flighthq.effects.PosterizeEffect")
 class PosterizeEffect {
-  public static function createPosterizeEffect(?options:Dynamic):Dynamic {
+  public static function createPosterizeEffect(?options:Dynamic):flighthq.types.PosterizeEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'PosterizeEffect' }, options]);
     return cast null;

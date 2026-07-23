@@ -8,6 +8,9 @@ import flighthq.particles.Curve.sampleParticleColorCurve;
 import flighthq.particles.Curve.sampleParticleCurve;
 import flighthq.particles.ParticleEmitterState.PARTICLE_VELOCITY_STRIDE;
 import flighthq.particles.ParticleEmitterState.ensureParticleEmitterStateCapacity;
+import flighthq.types.ParticleEmitter3D;
+import flighthq.types.ParticleEmitterConfig;
+import flighthq.types.ParticleEmitterState;
 
 @:expose("flighthq.particleemitter.EmitParticleBurst3D")
 class EmitParticleBurst3D {
@@ -15,7 +18,7 @@ class EmitParticleBurst3D {
 
   public static final TWO_PI__emitParticleBurst3D:Dynamic = (HxMath.PI * 2.0);
 
-  public static function emitParticleBurst3D(emitter:Dynamic, state:Dynamic, config:Dynamic, count:Float, x:Float, y:Float, z:Float, ?tint:Float):Float {
+  public static function emitParticleBurst3D(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig, count:Float, x:Float, y:Float, z:Float, ?tint:Float):Float {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var liveCount:Dynamic = cast _Runtime.UNDEFINED;
     var toSpawn:Dynamic = cast _Runtime.UNDEFINED;

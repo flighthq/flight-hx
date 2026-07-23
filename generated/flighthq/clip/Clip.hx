@@ -4,115 +4,117 @@ package flighthq.clip;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.clip.ClipRegion as Facade_Clip_flighthq_clip_ClipRegion;
+import flighthq.types.ClipRegion;
 import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.Path;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.ShapeCommand.PathWinding;
 
 @:expose("flighthq.clip.Clip")
 class Clip {
-  public static function acquireClipRegion():Dynamic {
+  public static function acquireClipRegion():ClipRegion {
     return cast _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.acquireClipRegion, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function clipRegionContainsPoint(clip:Dynamic, x:Float, y:Float):Bool {
+  public static function clipRegionContainsPoint(clip:ClipRegion, x:Float, y:Float):Bool {
     return cast _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.clipRegionContainsPoint, cast ([clip, x, y] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function clipRegionContainsRectangle(clip:Dynamic, rectangle:RectangleLike):Bool {
+  public static function clipRegionContainsRectangle(clip:ClipRegion, rectangle:RectangleLike):Bool {
     return cast _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.clipRegionContainsRectangle, cast ([clip, rectangle] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function clipRegionIntersectsRectangle(clip:Dynamic, rectangle:RectangleLike):Bool {
+  public static function clipRegionIntersectsRectangle(clip:ClipRegion, rectangle:RectangleLike):Bool {
     return cast _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.clipRegionIntersectsRectangle, cast ([clip, rectangle] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function cloneClipRegion(clip:Dynamic):Dynamic {
+  public static function cloneClipRegion(clip:ClipRegion):ClipRegion {
     return cast _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.cloneClipRegion, cast ([clip] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function copyClipRegion(out:Dynamic, source:Dynamic):Void {
+  public static function copyClipRegion(out:ClipRegion, source:ClipRegion):Void {
     _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.copyClipRegion, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function createClipRegionFromCircle(x:Float, y:Float, radius:Float, ?tolerance:Dynamic):Dynamic {
+  public static function createClipRegionFromCircle(x:Float, y:Float, radius:Float, ?tolerance:Dynamic):ClipRegion {
     return cast _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.createClipRegionFromCircle, cast ([x, y, radius, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createClipRegionFromContours(contours:Array<Array<Float>>, winding:PathWinding):Dynamic {
+  public static function createClipRegionFromContours(contours:Array<Array<Float>>, winding:PathWinding):ClipRegion {
     return cast _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.createClipRegionFromContours, cast ([contours, winding] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createClipRegionFromEllipse(rectangle:RectangleLike, ?tolerance:Dynamic):Dynamic {
+  public static function createClipRegionFromEllipse(rectangle:RectangleLike, ?tolerance:Dynamic):ClipRegion {
     return cast _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.createClipRegionFromEllipse, cast ([rectangle, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createClipRegionFromPath(path:Dynamic, ?tolerance:Dynamic):Dynamic {
+  public static function createClipRegionFromPath(path:Path, ?tolerance:Dynamic):ClipRegion {
     return cast _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.createClipRegionFromPath, cast ([path, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createClipRegionFromRectangle(rectangle:RectangleLike):Dynamic {
+  public static function createClipRegionFromRectangle(rectangle:RectangleLike):ClipRegion {
     return cast _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.createClipRegionFromRectangle, cast ([rectangle] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createClipRegionFromRoundedRectangle(rectangle:RectangleLike, radius:Float, ?tolerance:Dynamic):Dynamic {
+  public static function createClipRegionFromRoundedRectangle(rectangle:RectangleLike, radius:Float, ?tolerance:Dynamic):ClipRegion {
     return cast _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.createClipRegionFromRoundedRectangle, cast ([rectangle, radius, tolerance] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function equalsClipRegion(a:Dynamic, b:Dynamic):Bool {
+  public static function equalsClipRegion(a:ClipRegion, b:ClipRegion):Bool {
     return cast _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.equalsClipRegion, cast ([a, b] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getClipRegionBounds(out:RectangleLike, clip:Dynamic):Void {
+  public static function getClipRegionBounds(out:RectangleLike, clip:ClipRegion):Void {
     _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.getClipRegionBounds, cast ([out, clip] : Array<Dynamic>));
   }
 
-  public static function intersectClipRegions(out:Dynamic, a:Dynamic, b:Dynamic):Void {
+  public static function intersectClipRegions(out:ClipRegion, a:ClipRegion, b:ClipRegion):Void {
     _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.intersectClipRegions, cast ([out, a, b] : Array<Dynamic>));
   }
 
-  public static function invalidateClipRegion(clip:Dynamic):Void {
+  public static function invalidateClipRegion(clip:ClipRegion):Void {
     _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.invalidateClipRegion, cast ([clip] : Array<Dynamic>));
   }
 
-  public static function isClipRegionEmpty(clip:Dynamic):Bool {
+  public static function isClipRegionEmpty(clip:ClipRegion):Bool {
     return cast _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.isClipRegionEmpty, cast ([clip] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isClipRegionRectangular(clip:Dynamic):Bool {
+  public static function isClipRegionRectangular(clip:ClipRegion):Bool {
     return cast _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.isClipRegionRectangular, cast ([clip] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function normalizeClipRegion(out:Dynamic, clip:Dynamic):Void {
+  public static function normalizeClipRegion(out:ClipRegion, clip:ClipRegion):Void {
     _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.normalizeClipRegion, cast ([out, clip] : Array<Dynamic>));
   }
 
-  public static function releaseClipRegion(clip:Dynamic):Void {
+  public static function releaseClipRegion(clip:ClipRegion):Void {
     _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.releaseClipRegion, cast ([clip] : Array<Dynamic>));
   }
 
-  public static function setClipRegionToRectangle(out:Dynamic, rectangle:RectangleLike):Void {
+  public static function setClipRegionToRectangle(out:ClipRegion, rectangle:RectangleLike):Void {
     _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.setClipRegionToRectangle, cast ([out, rectangle] : Array<Dynamic>));
   }
 
-  public static function transformClipRegion(out:Dynamic, clip:Dynamic, matrix:MatrixLike):Void {
+  public static function transformClipRegion(out:ClipRegion, clip:ClipRegion, matrix:MatrixLike):Void {
     _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.transformClipRegion, cast ([out, clip, matrix] : Array<Dynamic>));
   }
 
-  public static function unionClipRegions(out:Dynamic, a:Dynamic, b:Dynamic):Void {
+  public static function unionClipRegions(out:ClipRegion, a:ClipRegion, b:ClipRegion):Void {
     _Runtime.callValue(Facade_Clip_flighthq_clip_ClipRegion.unionClipRegions, cast ([out, a, b] : Array<Dynamic>));
   }
 }

@@ -8,9 +8,9 @@ import flighthq.types.GlyphSource.GlyphMetrics;
 
 typedef BitmapFontEncoding = String;
 
-typedef BitmapFont = { var encoding:BitmapFontEncoding; var glyphs:Dynamic; var kerning:Dynamic; var metrics:GlyphMetrics; var pages:Array<Dynamic>; };
+typedef BitmapFont = { var encoding:BitmapFontEncoding; var glyphs:Dynamic; var kerning:Dynamic; var metrics:GlyphMetrics; var pages:Array<TextureAtlas>; };
 
-typedef BitmapFontData = { @:optional var encoding:BitmapFontEncoding; var glyphs:Array<BitmapFontGlyphData>; @:optional var kerning:Array<BitmapFontKerningData>; var metrics:GlyphMetrics; var pages:Array<Dynamic>; };
+typedef BitmapFontData = { @:optional var encoding:BitmapFontEncoding; var glyphs:Array<BitmapFontGlyphData>; @:optional var kerning:Array<BitmapFontKerningData>; var metrics:GlyphMetrics; var pages:Array<TextureAtlas>; };
 
 typedef BitmapFontGlyphData = { var advance:Float; var bearingX:Float; var bearingY:Float; var codepoint:Float; var height:Float; @:optional var page:Float; var width:Float; var x:Float; var y:Float; };
 

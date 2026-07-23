@@ -5,13 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.displayobjectWgpu.WgpuSpriteBatch.getWgpuQuadBatchPreludeWGSL;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
+import flighthq.types.ColorTransform;
+import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuColorAdjustmentFlush;
 import flighthq.types.WgpuRenderState.WgpuColorAdjustmentFold;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 
 @:expose("flighthq.displayobjectWgpu.WgpuColorAdjustment")
 class WgpuColorAdjustment {
-  public static function enableWgpuColorAdjustment(state:Dynamic):Void {
+  public static function enableWgpuColorAdjustment(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.setField(runtime, 'wgpuColorAdjustmentFold', WgpuColorAdjustment.wgpuColorAdjustmentFold__wgpuColorAdjustment);
@@ -29,7 +31,7 @@ class WgpuColorAdjustment {
 
   public static final CT_MODE_PER_INSTANCE__wgpuColorAdjustment:Dynamic = 2.0;
 
-  public static function recordWgpuColorAdjustment__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, colorTransform:Null<Dynamic>, instanceIndex:Float):Void {
+  public static function recordWgpuColorAdjustment__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
     var mode:Dynamic = cast _Runtime.UNDEFINED;
     var tint:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformData'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -58,7 +60,7 @@ class WgpuColorAdjustment {
     _Runtime.callValue(WgpuColorAdjustment.writeWgpuColorTransformInstance__wgpuColorAdjustment, cast ([runtime, tint, instanceIndex] : Array<Dynamic>));
   }
 
-  public static function resolveWgpuColorAdjustmentFlush__wgpuColorAdjustment(state:Dynamic, count:Float):Null<WgpuColorAdjustmentFlush> {
+  public static function resolveWgpuColorAdjustmentFlush__wgpuColorAdjustment(state:WgpuRenderState, count:Float):Null<WgpuColorAdjustmentFlush> {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var ctMode:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -73,7 +75,7 @@ class WgpuColorAdjustment {
     return cast null;
   }
 
-  public static function equalsRecordedColorTransform__wgpuColorAdjustment(a:Null<Dynamic>, b:Null<Dynamic>):Bool {
+  public static function equalsRecordedColorTransform__wgpuColorAdjustment(a:Null<ColorTransform>, b:Null<ColorTransform>):Bool {
     if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast true; }
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(a, null), function():Dynamic return cast _Runtime.strictEquals(b, null)))) { return cast false; }
     return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(a, 'redMultiplier'), _Runtime.field(b, 'redMultiplier')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'greenMultiplier'), _Runtime.field(b, 'greenMultiplier'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'blueMultiplier'), _Runtime.field(b, 'blueMultiplier'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'alphaMultiplier'), _Runtime.field(b, 'alphaMultiplier'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'redOffset'), _Runtime.field(b, 'redOffset'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'greenOffset'), _Runtime.field(b, 'greenOffset'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'blueOffset'), _Runtime.field(b, 'blueOffset'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(a, 'alphaOffset'), _Runtime.field(b, 'alphaOffset')));
@@ -92,7 +94,7 @@ class WgpuColorAdjustment {
     _Runtime.setField(runtime, 'spriteBatchColorTransformData', grown);
   }
 
-  public static function fillWgpuSpriteBatchUniformColorTransform__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, colorTransform:Dynamic, count:Float):Void {
+  public static function fillWgpuSpriteBatchUniformColorTransform__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, colorTransform:ColorTransform, count:Float):Void {
     _Runtime.callValue(WgpuColorAdjustment.ensureWgpuColorTransformCapacity__wgpuColorAdjustment, cast ([runtime, (count * WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment)] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
@@ -103,7 +105,7 @@ class WgpuColorAdjustment {
     }
   }
 
-  public static function getWgpuSpriteBatchColorTransformModule__wgpuColorAdjustment(state:Dynamic):Dynamic {
+  public static function getWgpuSpriteBatchColorTransformModule__wgpuColorAdjustment(state:WgpuRenderState):Dynamic {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     cached = _Runtime.callProperty(WgpuColorAdjustment._colorTransformModules__wgpuColorAdjustment, 'get', cast ([_Runtime.field(state, 'device')] : Array<Dynamic>));
@@ -114,7 +116,7 @@ class WgpuColorAdjustment {
     return cast null;
   }
 
-  public static function promoteWgpuSpriteBatchColorTransformToPerInstance__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, instanceCount:Float, fill:Null<Dynamic>):Void {
+  public static function promoteWgpuSpriteBatchColorTransformToPerInstance__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, instanceCount:Float, fill:Null<ColorTransform>):Void {
     _Runtime.setField(runtime, 'spriteBatchColorTransformMode', WgpuColorAdjustment.CT_MODE_PER_INSTANCE__wgpuColorAdjustment);
     {
       var i:Dynamic = 0.0;
@@ -125,7 +127,7 @@ class WgpuColorAdjustment {
     }
   }
 
-  public static function writeWgpuColorTransformInstance__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, colorTransform:Null<Dynamic>, instanceIndex:Float):Void {
+  public static function writeWgpuColorTransformInstance__wgpuColorAdjustment(runtime:WgpuRenderStateRuntime, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     var out:Dynamic = cast _Runtime.UNDEFINED;
     offset = (instanceIndex * WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment);

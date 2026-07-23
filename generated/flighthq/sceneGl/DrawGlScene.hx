@@ -17,29 +17,38 @@ import flighthq.sceneGl.GlMeshMaterialRegistry.resolveGlMeshMaterialRenderer;
 import flighthq.sceneGl.GlParticleEmitter3D.drawGlSceneParticleEmitters;
 import flighthq.sceneGl.GlSceneRuntime.GlSceneDrawEntry;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
+import flighthq.types.Camera;
 import flighthq.types.GlMeshMaterialRenderer;
+import flighthq.types.GlRenderState;
+import flighthq.types.Material;
+import flighthq.types.Matrix3;
+import flighthq.types.Matrix4;
+import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry.MeshSubset;
+import flighthq.types.SceneLights;
+import flighthq.types.SceneNode;
 import flighthq.types.SceneRenderProxy;
+import flighthq.types.SurfaceMaterial;
 import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
-typedef DrawEntry__drawGlScene = { var alpha:Float; var clipW:Float; var material:Dynamic; var mesh:Dynamic; var normalMatrix:Dynamic; var renderer:GlMeshMaterialRenderer; var subset:MeshSubset; var worldMatrix:Dynamic; };
+typedef DrawEntry__drawGlScene = { var alpha:Float; var clipW:Float; var material:Material; var mesh:Mesh; var normalMatrix:Matrix4; var renderer:GlMeshMaterialRenderer; var subset:MeshSubset; var worldMatrix:Matrix4; };
 
 @:expose("flighthq.sceneGl.DrawGlScene")
 class DrawGlScene {
-  public static function isGpuSkinnedDraw__drawGlScene(mesh:Dynamic):Bool {
+  public static function isGpuSkinnedDraw__drawGlScene(mesh:Mesh):Bool {
     return cast _Runtime.andValue(!_Runtime.looseEquals(_Runtime.field(mesh, 'skin'), null), function():Dynamic return cast _Runtime.callValue(hasMeshGeometrySkin, cast ([_Runtime.field(mesh, 'geometry')] : Array<Dynamic>)));
     return cast null;
   }
 
-  public static function drawGlScene(state:Dynamic, scene:Dynamic, camera:Dynamic, lights:Dynamic):Void {
+  public static function drawGlScene(state:GlRenderState, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
     var list:Dynamic = cast _Runtime.UNDEFINED;
     var lightBlock:Dynamic = cast _Runtime.UNDEFINED;
     var viewProjection:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var opaqueDrawList:Dynamic = cast _Runtime.UNDEFINED;
     var blendedDrawList:Dynamic = cast _Runtime.UNDEFINED;
-    var boundMaterial:Null<Dynamic> = cast _Runtime.UNDEFINED;
+    var boundMaterial:Null<Material> = cast _Runtime.UNDEFINED;
     var boundRenderer:Null<GlMeshMaterialRenderer> = cast _Runtime.UNDEFINED;
     var boundSkinned:Null<Bool> = cast _Runtime.UNDEFINED;
     list = _Runtime.callValue(prepareSceneRender, cast ([state, scene, camera, lights] : Array<Dynamic>));
@@ -64,7 +73,7 @@ class DrawGlScene {
       while (_Runtime.truthy(_Runtime.compare(m, _Runtime.field(list, 'meshCount'), '<'))) {
         var mesh:Dynamic = _Runtime.getIndex(_Runtime.field(list, 'visibleMeshes'), m);
         var subsets:Dynamic = _Runtime.field(_Runtime.field(mesh, 'geometry'), 'subsets');
-        var worldMatrix:Dynamic = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)) : Dynamic);
+        var worldMatrix:Dynamic = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)) : Matrix4);
         var wx:Dynamic = _Runtime.getIndex(_Runtime.field(worldMatrix, 'm'), 12.0);
         var wy:Dynamic = _Runtime.getIndex(_Runtime.field(worldMatrix, 'm'), 13.0);
         var wz:Dynamic = _Runtime.getIndex(_Runtime.field(worldMatrix, 'm'), 14.0);
@@ -106,7 +115,7 @@ class DrawGlScene {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(opaqueDrawList, 'length'), '<'))) {
         var entry:Dynamic = (cast _Runtime.getIndex(opaqueDrawList, i) : DrawEntry__drawGlScene);
-        var worldMatrix:Dynamic = (cast _Runtime.field(entry, 'worldMatrix') : Dynamic);
+        var worldMatrix:Dynamic = (cast _Runtime.field(entry, 'worldMatrix') : Matrix4);
         _Runtime.callValue(setMatrix3NormalFromMatrix4, cast ([DrawGlScene.scratchNormalMatrix__drawGlScene, worldMatrix] : Array<Dynamic>));
         var skinned:Dynamic = _Runtime.callValue(DrawGlScene.isGpuSkinnedDraw__drawGlScene, cast ([_Runtime.field(entry, 'mesh')] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(entry, 'renderer'), boundRenderer), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(entry, 'material'), boundMaterial)), function():Dynamic return cast !_Runtime.strictEquals(skinned, boundSkinned)))) {
@@ -138,7 +147,7 @@ class DrawGlScene {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(blendedDrawList, 'length'), '<'))) {
           var entry:Dynamic = (cast _Runtime.getIndex(blendedDrawList, i) : DrawEntry__drawGlScene);
-          var worldMatrix:Dynamic = (cast _Runtime.field(entry, 'worldMatrix') : Dynamic);
+          var worldMatrix:Dynamic = (cast _Runtime.field(entry, 'worldMatrix') : Matrix4);
           _Runtime.callValue(setMatrix3NormalFromMatrix4, cast ([DrawGlScene.scratchNormalMatrix__drawGlScene, worldMatrix] : Array<Dynamic>));
           var skinned:Dynamic = _Runtime.callValue(DrawGlScene.isGpuSkinnedDraw__drawGlScene, cast ([_Runtime.field(entry, 'mesh')] : Array<Dynamic>));
           if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(entry, 'renderer'), boundRenderer), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(entry, 'material'), boundMaterial)), function():Dynamic return cast !_Runtime.strictEquals(skinned, boundSkinned)))) {
@@ -164,12 +173,12 @@ class DrawGlScene {
     _Runtime.callValue(invalidateGlRenderStateCache, cast ([state] : Array<Dynamic>));
   }
 
-  public static function isBlendedMaterial__drawGlScene(material:Dynamic):Bool {
-    return cast _Runtime.strictEquals(_Runtime.field((cast material : Dynamic), 'alphaMode'), 'blend');
+  public static function isBlendedMaterial__drawGlScene(material:Material):Bool {
+    return cast _Runtime.strictEquals(_Runtime.field((cast material : SurfaceMaterial), 'alphaMode'), 'blend');
     return cast null;
   }
 
-  public static function resolveSubsetMaterial__drawGlScene(mesh:Dynamic, subsetIndex:Float):Null<Dynamic> {
+  public static function resolveSubsetMaterial__drawGlScene(mesh:Mesh, subsetIndex:Float):Null<Material> {
     var materials:Dynamic = cast _Runtime.UNDEFINED;
     materials = _Runtime.field(mesh, 'materials');
     return cast _Runtime.select(_Runtime.compare(subsetIndex, _Runtime.field(materials, 'length'), '<'), function():Dynamic return cast _Runtime.getIndex(materials, subsetIndex), function():Dynamic return cast null);
@@ -198,9 +207,9 @@ class DrawGlScene {
     return cast null;
   }
 
-  public static final proxy__drawGlScene:SceneRenderProxy = { jointMatrices: null, material: (cast { kind: DefaultMaterialKind } : Dynamic), normalMatrix: (cast _Runtime.callValue(createMatrix3, cast ([] : Array<Dynamic>)) : Dynamic), subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: (cast _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) : Dynamic) };
+  public static final proxy__drawGlScene:SceneRenderProxy = { jointMatrices: null, material: (cast { kind: DefaultMaterialKind } : Material), normalMatrix: (cast _Runtime.callValue(createMatrix3, cast ([] : Array<Dynamic>)) : Matrix3), subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: (cast _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) : Matrix4) };
 
-  public static final DEFAULT_MATERIAL__drawGlScene:Dynamic = (cast { kind: DefaultMaterialKind } : Dynamic);
+  public static final DEFAULT_MATERIAL__drawGlScene:Dynamic = (cast { kind: DefaultMaterialKind } : Material);
 
-  public static final scratchNormalMatrix__drawGlScene:Dynamic = (cast _Runtime.callValue(createMatrix3, cast ([] : Array<Dynamic>)) : Dynamic);
+  public static final scratchNormalMatrix__drawGlScene:Dynamic = (cast _Runtime.callValue(createMatrix3, cast ([] : Array<Dynamic>)) : Matrix3);
 }

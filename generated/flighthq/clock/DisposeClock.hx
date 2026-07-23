@@ -5,10 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.clock.AddClockChild.removeClockChild;
 import flighthq.signals.Slot.clearSignal;
+import flighthq.types.Clock;
 
 @:expose("flighthq.clock.DisposeClock")
 class DisposeClock {
-  public static function disposeClock(clock:Dynamic):Void {
+  public static function disposeClock(clock:Clock):Void {
     var children:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(clock, 'parent'), null))) { _Runtime.callValue(removeClockChild, cast ([_Runtime.field(clock, 'parent'), clock] : Array<Dynamic>)); }
     children = _Runtime.field(clock, 'children');

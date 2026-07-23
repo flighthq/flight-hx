@@ -17,11 +17,12 @@ import flighthq.particlesFormats.UnitySchema.UnitySizeOverLifetime;
 import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleCurve.ColorKeyframe;
 import flighthq.types.ParticleCurve.CurveKeyframe;
+import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
 
 typedef UnityParseOptions = { @:optional var pixelsPerUnit:Float; };
 
-typedef UnityParsed = { var config:Dynamic; var document:UnityParticleDocument; var warnings:Array<String>; };
+typedef UnityParsed = { var config:ParticleEmitterConfig; var document:UnityParticleDocument; var warnings:Array<String>; };
 
 @:expose("flighthq.particlesFormats.UnityParse")
 class UnityParse {
@@ -93,7 +94,7 @@ class UnityParse {
     return cast null;
   }
 
-  public static function rawToConfig__unityParse(raw:Dynamic, ppu:Float):Dynamic {
+  public static function rawToConfig__unityParse(raw:Dynamic, ppu:Float):ParticleEmitterConfig {
     var physicsGravity:Dynamic = cast _Runtime.UNDEFINED;
     var gravPixels:Dynamic = cast _Runtime.UNDEFINED;
     var emRaw:Dynamic = cast _Runtime.UNDEFINED;
@@ -339,7 +340,7 @@ class UnityParse {
     return cast null;
   }
 
-  public static function parseUnityParticle(json:String, ?options:UnityParseOptions):Dynamic {
+  public static function parseUnityParticle(json:String, ?options:UnityParseOptions):ParticleEmitterConfig {
     return cast _Runtime.callValue(UnityParse.rawToConfig__unityParse, cast ([_Runtime.callValue(UnityParse.parseUnityJson__unityParse, cast ([json] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.optionalField(options, 'pixelsPerUnit'), function():Dynamic return cast UnityParse.DEFAULT_PPU__unityParse)] : Array<Dynamic>));
     return cast null;
   }

@@ -5,19 +5,21 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmapfont.BitmapFont.createBitmapFont;
 import flighthq.bitmapfontFormats.BitmapFontRecord;
+import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontData;
 import flighthq.types.BitmapFont.BitmapFontEncoding;
 import flighthq.types.BitmapFont.BitmapFontGlyphData;
 import flighthq.types.BitmapFont.BitmapFontKerningData;
 import flighthq.types.BitmapFont.BitmapFontParseOptions;
+import flighthq.types.TextureAtlas;
 
 @:expose("flighthq.bitmapfontFormats._internal._BitmapFontRecordValues")
 class _BitmapFontRecordValues {
-  public static function buildBitmapFontFromRecord(record:BitmapFontRecord, ?options:BitmapFontParseOptions):Null<Dynamic> {
+  public static function buildBitmapFontFromRecord(record:BitmapFontRecord, ?options:BitmapFontParseOptions):Null<BitmapFont> {
     var resolvePage:Dynamic = cast _Runtime.UNDEFINED;
     var resolved:Dynamic = cast _Runtime.UNDEFINED;
     var maxPageId:Dynamic = cast _Runtime.UNDEFINED;
-    var pages:Array<Dynamic> = cast _Runtime.UNDEFINED;
+    var pages:Array<TextureAtlas> = cast _Runtime.UNDEFINED;
     var glyphs:Array<BitmapFontGlyphData> = cast _Runtime.UNDEFINED;
     var kerning:Array<BitmapFontKerningData> = cast _Runtime.UNDEFINED;
     var data:BitmapFontData = cast _Runtime.UNDEFINED;

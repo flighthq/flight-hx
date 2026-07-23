@@ -4,12 +4,13 @@ package flighthq.surface;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.surface.SurfaceBlur.boxBlurSurface;
+import flighthq.types.SurfaceRegion;
 
 typedef SurfaceSharpenOptions = { @:optional var amount:Float; @:optional var radiusX:Float; @:optional var radiusY:Float; @:optional var passes:Float; };
 
 @:expose("flighthq.surface.SurfaceSharpen")
 class SurfaceSharpen {
-  public static function sharpenSurface(out:Dynamic, scratch:Dynamic, source:Dynamic, ?options:SurfaceSharpenOptions):Void {
+  public static function sharpenSurface(out:Dynamic, scratch:Dynamic, source:SurfaceRegion, ?options:SurfaceSharpenOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var amount:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;

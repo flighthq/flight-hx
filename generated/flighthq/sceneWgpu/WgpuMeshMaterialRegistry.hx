@@ -5,22 +5,24 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
 import flighthq.types.Entity.Kind;
+import flighthq.types.Material;
 import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
+import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
 @:expose("flighthq.sceneWgpu.WgpuMeshMaterialRegistry")
 class WgpuMeshMaterialRegistry {
-  public static function getWgpuMeshMaterialRenderer(state:Dynamic, kind:Kind):Null<WgpuMeshMaterialRenderer> {
+  public static function getWgpuMeshMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMeshMaterialRenderer> {
     return cast _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(_Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry'), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function registerWgpuMeshMaterialRenderer(state:Dynamic, kind:Kind, renderer:WgpuMeshMaterialRenderer):Void {
+  public static function registerWgpuMeshMaterialRenderer(state:WgpuRenderState, kind:Kind, renderer:WgpuMeshMaterialRenderer):Void {
     _Runtime.callProperty(_Runtime.field(_Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry'), 'set', cast ([kind, renderer] : Array<Dynamic>));
   }
 
-  public static function resolveWgpuMeshMaterialRenderer(state:Dynamic, material:Null<Dynamic>):Null<WgpuMeshMaterialRenderer> {
+  public static function resolveWgpuMeshMaterialRenderer(state:WgpuRenderState, material:Null<Material>):Null<WgpuMeshMaterialRenderer> {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = _Runtime.field(_Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>)), 'materialRegistry');
     if (_Runtime.truthy(!_Runtime.strictEquals(material, null))) {

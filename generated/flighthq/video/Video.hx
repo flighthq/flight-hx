@@ -3,6 +3,7 @@ package flighthq.video;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.VideoResource;
 import flighthq.types.VideoResource.VideoResourceLoadOptions;
 import flighthq.types.VideoResource.VideoResourceUrl;
 import flighthq.video.VideoFormat as Facade_Video_flighthq_video_VideoFormat;
@@ -16,12 +17,12 @@ class Video {
     return cast null;
   }
 
-  public static function createVideoResource(?element:Dynamic):Dynamic {
+  public static function createVideoResource(?element:Dynamic):VideoResource {
     return cast _Runtime.callValue(Facade_Video_flighthq_video_VideoResource.createVideoResource, cast ([element] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createVideoResourceFromMediaStream(stream:Dynamic):Dynamic {
+  public static function createVideoResourceFromMediaStream(stream:Dynamic):VideoResource {
     return cast _Runtime.callValue(Facade_Video_flighthq_video_VideoResourceFrom.createVideoResourceFromMediaStream, cast ([stream] : Array<Dynamic>));
     return cast null;
   }
@@ -31,26 +32,26 @@ class Video {
     return cast null;
   }
 
-  public static function disposeVideoResource(resource:Dynamic):Void {
+  public static function disposeVideoResource(resource:VideoResource):Void {
     _Runtime.callValue(Facade_Video_flighthq_video_VideoResource.disposeVideoResource, cast ([resource] : Array<Dynamic>));
   }
 
-  public static function getVideoResourceDuration(resource:Dynamic):Float {
+  public static function getVideoResourceDuration(resource:VideoResource):Float {
     return cast _Runtime.callValue(Facade_Video_flighthq_video_VideoResource.getVideoResourceDuration, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getVideoResourceHeight(resource:Dynamic):Float {
+  public static function getVideoResourceHeight(resource:VideoResource):Float {
     return cast _Runtime.callValue(Facade_Video_flighthq_video_VideoResource.getVideoResourceHeight, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getVideoResourceWidth(resource:Dynamic):Float {
+  public static function getVideoResourceWidth(resource:VideoResource):Float {
     return cast _Runtime.callValue(Facade_Video_flighthq_video_VideoResource.getVideoResourceWidth, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hasVideoResourceElement(resource:Dynamic):Bool {
+  public static function hasVideoResourceElement(resource:VideoResource):Bool {
     return cast _Runtime.callValue(Facade_Video_flighthq_video_VideoResource.hasVideoResourceElement, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
@@ -60,27 +61,27 @@ class Video {
     return cast null;
   }
 
-  public static function isVideoResourceEmpty(resource:Dynamic):Bool {
+  public static function isVideoResourceEmpty(resource:VideoResource):Bool {
     return cast _Runtime.callValue(Facade_Video_flighthq_video_VideoResource.isVideoResourceEmpty, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function isVideoResourceReady(resource:Dynamic):Bool {
+  public static function isVideoResourceReady(resource:VideoResource):Bool {
     return cast _Runtime.callValue(Facade_Video_flighthq_video_VideoResource.isVideoResourceReady, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadVideoResourceFromBlob(blob:Dynamic, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
+  public static function loadVideoResourceFromBlob(blob:Dynamic, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<VideoResource> {
     return cast _Runtime.callValue(Facade_Video_flighthq_video_VideoResourceFrom.loadVideoResourceFromBlob, cast ([blob, options, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadVideoResourceFromUrl(url:String, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
+  public static function loadVideoResourceFromUrl(url:String, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<VideoResource> {
     return cast _Runtime.callValue(Facade_Video_flighthq_video_VideoResourceFrom.loadVideoResourceFromUrl, cast ([url, options, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadVideoResourceFromUrls(sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
+  public static function loadVideoResourceFromUrls(sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<VideoResource> {
     return cast _Runtime.callValue(Facade_Video_flighthq_video_VideoResourceFrom.loadVideoResourceFromUrls, cast ([sources, options, signal] : Array<Dynamic>));
     return cast null;
   }

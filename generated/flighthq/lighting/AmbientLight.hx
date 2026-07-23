@@ -4,6 +4,7 @@ package flighthq.lighting;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.AmbientLight;
 import flighthq.types.Types.AmbientLightKind;
 import flighthq.types._internal._AmbientLightValues.AmbientLightKind;
 
@@ -11,12 +12,12 @@ typedef AmbientLightOptions = { @:optional var color:Float; @:optional var inten
 
 @:expose("flighthq.lighting.AmbientLight")
 class AmbientLight {
-  public static function cloneAmbientLight(source:Dynamic):Dynamic {
+  public static function cloneAmbientLight(source:flighthq.types.AmbientLight):flighthq.types.AmbientLight {
     return cast _Runtime.callValue(createAmbientLight, cast ([{ color: _Runtime.field(source, 'color'), intensity: _Runtime.field(source, 'intensity') }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createAmbientLight(?options:AmbientLightOptions):Dynamic {
+  public static function createAmbientLight(?options:AmbientLightOptions):flighthq.types.AmbientLight {
     return cast _Runtime.callValue(createEntity, cast ([{ color: _Runtime.coalesce(_Runtime.optionalField(options, 'color'), function():Dynamic return cast 4294967295.0), intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: AmbientLightKind }] : Array<Dynamic>));
     return cast null;
   }

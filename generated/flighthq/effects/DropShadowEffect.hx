@@ -3,10 +3,11 @@ package flighthq.effects;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.DropShadowEffect;
 
 @:expose("flighthq.effects.DropShadowEffect")
 class DropShadowEffect {
-  public static function createDropShadowEffect(?options:Dynamic):Dynamic {
+  public static function createDropShadowEffect(?options:Dynamic):flighthq.types.DropShadowEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'DropShadowEffect' }, options]);
     return cast null;

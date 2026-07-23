@@ -5,7 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.SceneResourceRef;
+import flighthq.types.Signal;
+import flighthq.types.Texture;
 
-typedef SceneResourceEvent = { var ref:SceneResourceRef; var texture:Dynamic; };
+typedef SceneResourceEvent = { var ref:SceneResourceRef; var texture:Texture; };
 
-typedef SceneResourceSignals = { var onResourceFailed:Dynamic; var onResourceResolved:Dynamic; };
+typedef SceneResourceSignals = { var onResourceFailed:Signal<Dynamic>; var onResourceResolved:Signal<Dynamic>; };

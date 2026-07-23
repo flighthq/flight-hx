@@ -8,12 +8,16 @@ import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.sceneWgpu.WgpuEnvironmentCube.ensureWgpuEnvironmentSourceCube;
 import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
+import flighthq.types.Camera;
+import flighthq.types.Environment;
+import flighthq.types.Matrix4;
+import flighthq.types.WgpuRenderState;
 
 typedef WgpuSkybox__wgpuEnvironmentSkybox = { var cubeBindGroup:Null<Dynamic>; var cubeBindGroupLayout:Dynamic; var cubeView:Null<Dynamic>; var pipeline:Dynamic; var uniformBindGroup:Dynamic; var uniformBuffer:Dynamic; };
 
 @:expose("flighthq.sceneWgpu.WgpuEnvironmentSkybox")
 class WgpuEnvironmentSkybox {
-  public static function drawWgpuEnvironmentSkybox(state:Dynamic, environment:Dynamic, camera:Dynamic, aspect:Float):Void {
+  public static function drawWgpuEnvironmentSkybox(state:WgpuRenderState, environment:Environment, camera:Camera, aspect:Float):Void {
     var cubeView:Dynamic = cast _Runtime.UNDEFINED;
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
@@ -56,7 +60,7 @@ class WgpuEnvironmentSkybox {
     _Runtime.voidValue(scene);
   }
 
-  public static function ensureWgpuSkyboxPipeline__wgpuEnvironmentSkybox(state:Dynamic, format:Dynamic):WgpuSkybox__wgpuEnvironmentSkybox {
+  public static function ensureWgpuSkyboxPipeline__wgpuEnvironmentSkybox(state:WgpuRenderState, format:Dynamic):WgpuSkybox__wgpuEnvironmentSkybox {
     var byState:Dynamic = cast _Runtime.UNDEFINED;
     var sky:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
@@ -88,7 +92,7 @@ class WgpuEnvironmentSkybox {
     return cast null;
   }
 
-  public static function getWgpuSkyboxSampler__wgpuEnvironmentSkybox(state:Dynamic):Dynamic {
+  public static function getWgpuSkyboxSampler__wgpuEnvironmentSkybox(state:WgpuRenderState):Dynamic {
     var sampler:Dynamic = cast _Runtime.UNDEFINED;
     sampler = _Runtime.callProperty(WgpuEnvironmentSkybox._skyboxSamplers__wgpuEnvironmentSkybox, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(sampler, _Runtime.field(_Runtime, 'UNDEFINED')))) {
@@ -103,7 +107,7 @@ class WgpuEnvironmentSkybox {
 
   public static final SKYBOX_UNIFORM_BYTES__wgpuEnvironmentSkybox:Dynamic = 80.0;
 
-  public static final _inverseViewProjection__wgpuEnvironmentSkybox:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
+  public static final _inverseViewProjection__wgpuEnvironmentSkybox:Matrix4 = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 
   public static final _skyScratch__wgpuEnvironmentSkybox:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(WgpuEnvironmentSkybox.SKYBOX_UNIFORM_BYTES__wgpuEnvironmentSkybox / 4.0)]);
 

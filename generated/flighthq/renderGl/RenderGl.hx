@@ -23,55 +23,65 @@ import flighthq.renderGl.GlSkinPaletteTexture as Facade_RenderGl_flighthq_render
 import flighthq.renderGl.GlTextureUpload as Facade_RenderGl_flighthq_renderGl_GlTextureUpload;
 import flighthq.renderGl.GlTextureVideoUpload as Facade_RenderGl_flighthq_renderGl_GlTextureVideoUpload;
 import flighthq.types.BlendMode;
+import flighthq.types.DisplayObject;
 import flighthq.types.Entity.Kind;
 import flighthq.types.GlCompressedTextureDecoder;
 import flighthq.types.GlCompressedTextureSupport;
 import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlMaterialRenderer;
 import flighthq.types.GlRenderOptions;
+import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlBlendRealization;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderTarget;
+import flighthq.types.GlRenderTarget.GlRenderTargetPool;
 import flighthq.types.GlShaderLocations;
 import flighthq.types.GlShaderLocations.GlBitmapShader;
+import flighthq.types.GlSkinPaletteTexture;
+import flighthq.types.ImageResource;
+import flighthq.types.Material;
+import flighthq.types.Matrix;
 import flighthq.types.RenderPassPreserve;
+import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.RenderTarget.RenderTargetDescriptor;
 import flighthq.types.Sampler.SamplerLike;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
+import flighthq.types.VideoTexture;
 
 @:expose("flighthq.renderGl.RenderGl")
 class RenderGl {
-  public static function acquireGlRenderTarget(state:Dynamic, pool:Dynamic, descriptor:RenderTargetDescriptor):Dynamic {
+  public static function acquireGlRenderTarget(state:GlRenderState, pool:GlRenderTargetPool, descriptor:RenderTargetDescriptor):GlRenderTarget {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlRenderTargetPool.acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function applyGlBlendMode(state:Dynamic, blendMode:Null<BlendMode>):Void {
+  public static function applyGlBlendMode(state:GlRenderState, blendMode:Null<BlendMode>):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlDraw.applyGlBlendMode, cast ([state, blendMode] : Array<Dynamic>));
   }
 
-  public static function beginGlRenderPass(state:Dynamic, target:Dynamic, ?preserve:RenderPassPreserve):Void {
+  public static function beginGlRenderPass(state:GlRenderState, target:GlRenderTarget, ?preserve:RenderPassPreserve):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlRenderPass.beginGlRenderPass, cast ([state, target, preserve] : Array<Dynamic>));
   }
 
-  public static function bindGlImageResourceTexture(state:Dynamic, image:Dynamic, ?sampler:Null<SamplerLike>):Dynamic {
+  public static function bindGlImageResourceTexture(state:GlRenderState, image:ImageResource, ?sampler:Null<SamplerLike>):Dynamic {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlDraw.bindGlImageResourceTexture, cast ([state, image, sampler] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bindGlTexture(state:Dynamic, imageSource:Dynamic, ?sampler:Null<SamplerLike>):Dynamic {
+  public static function bindGlTexture(state:GlRenderState, imageSource:Dynamic, ?sampler:Null<SamplerLike>):Dynamic {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlDraw.bindGlTexture, cast ([state, imageSource, sampler] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function bindGlVideoTexture(state:Dynamic, videoTexture:Dynamic, ?sampler:Null<SamplerLike>):Dynamic {
+  public static function bindGlVideoTexture(state:GlRenderState, videoTexture:VideoTexture, ?sampler:Null<SamplerLike>):Dynamic {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlDraw.bindGlVideoTexture, cast ([state, videoTexture, sampler] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function clearGlRenderTarget(state:Dynamic, target:Dynamic):Void {
+  public static function clearGlRenderTarget(state:GlRenderState, target:GlRenderTarget):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlFullscreenPass.clearGlRenderTarget, cast ([state, target] : Array<Dynamic>));
   }
 
@@ -115,7 +125,7 @@ class RenderGl {
     return cast null;
   }
 
-  public static function createGlRenderState(canvas:Dynamic, ?options:GlRenderOptions):Dynamic {
+  public static function createGlRenderState(canvas:Dynamic, ?options:GlRenderOptions):GlRenderState {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlRenderState.createGlRenderState, cast ([canvas, options] : Array<Dynamic>));
     return cast null;
   }
@@ -125,44 +135,44 @@ class RenderGl {
     return cast null;
   }
 
-  public static function createGlRenderTarget(state:Dynamic, descriptor:RenderTargetDescriptor):Dynamic {
+  public static function createGlRenderTarget(state:GlRenderState, descriptor:RenderTargetDescriptor):GlRenderTarget {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlRenderTarget.createGlRenderTarget, cast ([state, descriptor] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGlRenderTargetPool():Dynamic {
+  public static function createGlRenderTargetPool():GlRenderTargetPool {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlRenderTargetPool.createGlRenderTargetPool, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGlSkinPaletteTexture(gl:Dynamic):Dynamic {
+  public static function createGlSkinPaletteTexture(gl:Dynamic):GlSkinPaletteTexture {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlSkinPaletteTexture.createGlSkinPaletteTexture, cast ([gl] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createGlTexture(state:Dynamic):Dynamic {
+  public static function createGlTexture(state:GlRenderState):Dynamic {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlDraw.createGlTexture, cast ([state] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function declareGlRenderTargetColorSpace(state:Dynamic, colorSpace:RenderTargetColorSpace):Bool {
+  public static function declareGlRenderTargetColorSpace(state:GlRenderState, colorSpace:RenderTargetColorSpace):Bool {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlRenderTarget.declareGlRenderTargetColorSpace, cast ([state, colorSpace] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function destroyGlRenderState(state:Dynamic):Void {
+  public static function destroyGlRenderState(state:GlRenderState):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlRenderState.destroyGlRenderState, cast ([state] : Array<Dynamic>));
   }
 
-  public static function destroyGlRenderTarget(state:Dynamic, target:Dynamic):Void {
+  public static function destroyGlRenderTarget(state:GlRenderState, target:GlRenderTarget):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlRenderTarget.destroyGlRenderTarget, cast ([state, target] : Array<Dynamic>));
   }
 
-  public static function destroyGlRenderTargetPool(state:Dynamic, pool:Dynamic):Void {
+  public static function destroyGlRenderTargetPool(state:GlRenderState, pool:GlRenderTargetPool):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlRenderTargetPool.destroyGlRenderTargetPool, cast ([state, pool] : Array<Dynamic>));
   }
 
-  public static function destroyGlSkinPaletteTexture(gl:Dynamic, palette:Dynamic):Void {
+  public static function destroyGlSkinPaletteTexture(gl:Dynamic, palette:GlSkinPaletteTexture):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlSkinPaletteTexture.destroyGlSkinPaletteTexture, cast ([gl, palette] : Array<Dynamic>));
   }
 
@@ -171,27 +181,27 @@ class RenderGl {
     return cast null;
   }
 
-  public static function drawGlFullscreenPass(state:Dynamic, program:GlFullscreenProgram, inputs:Array<Dynamic>, dest:Null<Dynamic>, setUniforms:Dynamic):Void {
+  public static function drawGlFullscreenPass(state:GlRenderState, program:GlFullscreenProgram, inputs:Array<Dynamic>, dest:Null<GlRenderTarget>, setUniforms:Dynamic):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlFullscreenPass.drawGlFullscreenPass, cast ([state, program, inputs, dest, setUniforms] : Array<Dynamic>));
   }
 
-  public static function drawGlLinearToSrgbPass(state:Dynamic, source:Dynamic, dest:Null<Dynamic>):Void {
+  public static function drawGlLinearToSrgbPass(state:GlRenderState, source:GlRenderTarget, dest:Null<GlRenderTarget>):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlLinearToSrgbPass.drawGlLinearToSrgbPass, cast ([state, source, dest] : Array<Dynamic>));
   }
 
-  public static function drawGlQuad(state:Dynamic, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
+  public static function drawGlQuad(state:GlRenderState, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlDraw.drawGlQuad, cast ([state, x0, y0, x1, y1, u0, v0, u1, v1] : Array<Dynamic>));
   }
 
-  public static function drawGlRenderTargetResult(state:Dynamic, renderProxy:RenderProxy2D, target:Dynamic, transform:Dynamic):Void {
+  public static function drawGlRenderTargetResult(state:GlRenderState, renderProxy:RenderProxy2D, target:GlRenderTarget, transform:Matrix):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlRenderTarget.drawGlRenderTargetResult, cast ([state, renderProxy, target, transform] : Array<Dynamic>));
   }
 
-  public static function enableGlBlendModeSupport(state:Dynamic):Void {
+  public static function enableGlBlendModeSupport(state:GlRenderState):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlDraw.enableGlBlendModeSupport, cast ([state] : Array<Dynamic>));
   }
 
-  public static function endGlRenderPass(state:Dynamic):Void {
+  public static function endGlRenderPass(state:GlRenderState):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlRenderPass.endGlRenderPass, cast ([state] : Array<Dynamic>));
   }
 
@@ -200,17 +210,17 @@ class RenderGl {
     return cast null;
   }
 
-  public static function getGlMaterialRenderer(state:Dynamic, kind:Kind):Null<GlMaterialRenderer> {
+  public static function getGlMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMaterialRenderer> {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlMaterialRegistry.getGlMaterialRenderer, cast ([state, kind] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlMaterialShader(state:Dynamic, kind:Kind):Null<GlBitmapShader> {
+  public static function getGlMaterialShader(state:GlRenderState, kind:Kind):Null<GlBitmapShader> {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlShaderBinding.getGlMaterialShader, cast ([state, kind] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getGlRenderStateRuntime(state:Dynamic):GlRenderStateRuntime {
+  public static function getGlRenderStateRuntime(state:GlRenderState):GlRenderStateRuntime {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlRenderState.getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     return cast null;
   }
@@ -225,11 +235,11 @@ class RenderGl {
     return cast null;
   }
 
-  public static function invalidateGlRenderStateCache(state:Dynamic):Void {
+  public static function invalidateGlRenderStateCache(state:GlRenderState):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlRenderState.invalidateGlRenderStateCache, cast ([state] : Array<Dynamic>));
   }
 
-  public static function isBlendModeSupported(state:Dynamic, blendMode:BlendMode):Bool {
+  public static function isBlendModeSupported(state:GlRenderState, blendMode:BlendMode):Bool {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlDraw.isBlendModeSupported, cast ([state, blendMode] : Array<Dynamic>));
     return cast null;
   }
@@ -240,61 +250,61 @@ class RenderGl {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlProgram.linkGlProgram, cast ([gl, program, label] : Array<Dynamic>));
   }
 
-  public static function presentGlRenderTarget(state:Dynamic, target:Dynamic, ?dest:Null<Dynamic>):Void {
+  public static function presentGlRenderTarget(state:GlRenderState, target:GlRenderTarget, ?dest:Null<GlRenderTarget>):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlPresentRenderTarget.presentGlRenderTarget, cast ([state, target, dest] : Array<Dynamic>));
   }
 
-  public static function readGlRenderTargetPixels(state:Dynamic, target:Dynamic, x:Float, y:Float, width:Float, height:Float, out:Dynamic):Bool {
+  public static function readGlRenderTargetPixels(state:GlRenderState, target:GlRenderTarget, x:Float, y:Float, width:Float, height:Float, out:Dynamic):Bool {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlReadback.readGlRenderTargetPixels, cast ([state, target, x, y, width, height, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function registerDefaultGlBlendModes(state:Dynamic):Void {
+  public static function registerDefaultGlBlendModes(state:GlRenderState):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlDraw.registerDefaultGlBlendModes, cast ([state] : Array<Dynamic>));
   }
 
-  public static function registerGlBlendMode(state:Dynamic, blendMode:BlendMode, realization:GlBlendRealization):Void {
+  public static function registerGlBlendMode(state:GlRenderState, blendMode:BlendMode, realization:GlBlendRealization):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlDraw.registerGlBlendMode, cast ([state, blendMode, realization] : Array<Dynamic>));
   }
 
-  public static function registerGlCompressedTextureDecoder(state:Dynamic, decode:Null<GlCompressedTextureDecoder>):Void {
+  public static function registerGlCompressedTextureDecoder(state:GlRenderState, decode:Null<GlCompressedTextureDecoder>):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlCompressedTexture.registerGlCompressedTextureDecoder, cast ([state, decode] : Array<Dynamic>));
   }
 
-  public static function registerGlCompressedTextureUpload(state:Dynamic, ?uploader:Dynamic):Void {
+  public static function registerGlCompressedTextureUpload(state:GlRenderState, ?uploader:Dynamic):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlCompressedTexture.registerGlCompressedTextureUpload, cast ([state, uploader] : Array<Dynamic>));
   }
 
-  public static function registerGlMaterialRenderer(state:Dynamic, kind:Kind, renderer:GlMaterialRenderer):Void {
+  public static function registerGlMaterialRenderer(state:GlRenderState, kind:Kind, renderer:GlMaterialRenderer):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlMaterialRegistry.registerGlMaterialRenderer, cast ([state, kind, renderer] : Array<Dynamic>));
   }
 
-  public static function registerGlMaterialShader(state:Dynamic, kind:Kind, shader:GlBitmapShader):Void {
+  public static function registerGlMaterialShader(state:GlRenderState, kind:Kind, shader:GlBitmapShader):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlShaderBinding.registerGlMaterialShader, cast ([state, kind, shader] : Array<Dynamic>));
   }
 
-  public static function releaseGlRenderTarget(pool:Dynamic, target:Dynamic):Void {
+  public static function releaseGlRenderTarget(pool:GlRenderTargetPool, target:GlRenderTarget):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlRenderTargetPool.releaseGlRenderTarget, cast ([pool, target] : Array<Dynamic>));
   }
 
-  public static function renderGlBackground(state:Dynamic):Void {
+  public static function renderGlBackground(state:GlRenderState):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlBackground.renderGlBackground, cast ([state] : Array<Dynamic>));
   }
 
-  public static function resizeGlRenderTarget(state:Dynamic, target:Dynamic, width:Float, height:Float):Void {
+  public static function resizeGlRenderTarget(state:GlRenderState, target:GlRenderTarget, width:Float, height:Float):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlRenderTarget.resizeGlRenderTarget, cast ([state, target, width, height] : Array<Dynamic>));
   }
 
-  public static function resolveGlMaterialRenderer(state:Dynamic, material:Null<Dynamic>):Null<GlMaterialRenderer> {
+  public static function resolveGlMaterialRenderer(state:GlRenderState, material:Null<Material>):Null<GlMaterialRenderer> {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlMaterialRegistry.resolveGlMaterialRenderer, cast ([state, material] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function resolveGlRenderTarget(state:Dynamic, target:Dynamic):Void {
+  public static function resolveGlRenderTarget(state:GlRenderState, target:GlRenderTarget):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlRenderTarget.resolveGlRenderTarget, cast ([state, target] : Array<Dynamic>));
   }
 
-  public static function resolveGlShader(state:Dynamic, renderProxy:RenderProxy2D):GlBitmapShader {
+  public static function resolveGlShader(state:GlRenderState, renderProxy:RenderProxy2D):GlBitmapShader {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlShaderBinding.resolveGlShader, cast ([state, renderProxy] : Array<Dynamic>));
     return cast null;
   }
@@ -303,7 +313,7 @@ class RenderGl {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlShader.setGlAttributes, cast ([gl, loc] : Array<Dynamic>));
   }
 
-  public static function setGlBaseUniforms(gl:Dynamic, loc:GlShaderLocations, renderProxy:Dynamic):Void {
+  public static function setGlBaseUniforms(gl:Dynamic, loc:GlShaderLocations, renderProxy:RenderProxy):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlShader.setGlBaseUniforms, cast ([gl, loc, renderProxy] : Array<Dynamic>));
   }
 
@@ -315,19 +325,19 @@ class RenderGl {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlShader.setGlMatrixFromValues, cast ([gl, loc, m, a, b, c, d, tx, ty, viewport] : Array<Dynamic>));
   }
 
-  public static function setGlQuadMatrixFromOffset(state:Dynamic, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float, dx:Float, dy:Float):Void {
+  public static function setGlQuadMatrixFromOffset(state:GlRenderState, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float, dx:Float, dy:Float):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlDraw.setGlQuadMatrixFromOffset, cast ([state, a, b, c, d, tx, ty, dx, dy] : Array<Dynamic>));
   }
 
-  public static function setGlRenderTransform2D(state:Dynamic, transform:Dynamic):Void {
+  public static function setGlRenderTransform2D(state:GlRenderState, transform:Matrix):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlRenderPass.setGlRenderTransform2D, cast ([state, transform] : Array<Dynamic>));
   }
 
-  public static function setGlShader(state:Dynamic, node:Dynamic, shader:Null<GlBitmapShader>):Void {
+  public static function setGlShader(state:GlRenderState, node:DisplayObject, shader:Null<GlBitmapShader>):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlShaderBinding.setGlShader, cast ([state, node, shader] : Array<Dynamic>));
   }
 
-  public static function updateGlTexture(state:Dynamic, texture:Dynamic, canvas:Dynamic):Void {
+  public static function updateGlTexture(state:GlRenderState, texture:Dynamic, canvas:Dynamic):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlDraw.updateGlTexture, cast ([state, texture, canvas] : Array<Dynamic>));
   }
 
@@ -336,7 +346,7 @@ class RenderGl {
     return cast null;
   }
 
-  public static function uploadGlSkinPaletteTexture(gl:Dynamic, palette:Dynamic, jointMatrices:flighthq._internal._Float32Array, jointCount:Float):Void {
+  public static function uploadGlSkinPaletteTexture(gl:Dynamic, palette:GlSkinPaletteTexture, jointMatrices:flighthq._internal._Float32Array, jointCount:Float):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlSkinPaletteTexture.uploadGlSkinPaletteTexture, cast ([gl, palette, jointMatrices, jointCount] : Array<Dynamic>));
   }
 
@@ -348,16 +358,16 @@ class RenderGl {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlTextureUpload.uploadGlTextureElement, cast ([gl, target, source] : Array<Dynamic>));
   }
 
-  public static function uploadGlTextureImageResource(gl:Dynamic, target:Float, image:Dynamic):Void {
+  public static function uploadGlTextureImageResource(gl:Dynamic, target:Float, image:ImageResource):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlTextureUpload.uploadGlTextureImageResource, cast ([gl, target, image] : Array<Dynamic>));
   }
 
-  public static function uploadGlTextureVideoFrame(gl:Dynamic, videoTexture:Dynamic, uploadedFrameId:Float):Float {
+  public static function uploadGlTextureVideoFrame(gl:Dynamic, videoTexture:VideoTexture, uploadedFrameId:Float):Float {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlTextureVideoUpload.uploadGlTextureVideoFrame, cast ([gl, videoTexture, uploadedFrameId] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function useGlProgram(state:Dynamic, ?shader:GlBitmapShader):Void {
+  public static function useGlProgram(state:GlRenderState, ?shader:GlBitmapShader):Void {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlDraw.useGlProgram, cast ([state, shader] : Array<Dynamic>));
   }
 }

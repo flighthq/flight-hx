@@ -15,6 +15,9 @@ import flighthq.sceneGl._internal._GlSceneRuntimeValues.ensureGlSkinPalette;
 import flighthq.sceneGl._internal._GlSceneRuntimeValues.getGlSceneRuntime;
 import flighthq.texture.Texture.getTextureUvMatrix;
 import flighthq.texture.Texture.hasTextureUvTransform;
+import flighthq.types.Camera;
+import flighthq.types.GlRenderState;
+import flighthq.types.MeshGeometry;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.Texture.TextureLike;
 

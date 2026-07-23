@@ -13,11 +13,14 @@ import flighthq.geometry.Typedarray.reserveUint16Array;
 import flighthq.node.Revision.invalidateNodeLocalBounds;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.MethodsOf;
+import flighthq.types.Node;
 import flighthq.types.PartialNode;
+import flighthq.types.QuadBatch;
 import flighthq.types.QuadBatch.QuadBatchData;
 import flighthq.types.QuadBatch.QuadBatchRuntime;
 import flighthq.types.QuadBatchSignals;
 import flighthq.types.QuadTransformType;
+import flighthq.types.Rectangle;
 import flighthq.types.Types.QuadBatchKind;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types._internal._QuadBatchValues.QuadBatchKind;
@@ -32,7 +35,7 @@ class QuadBatch {
 
   public static final QUAD_BATCH_DELETED_ID:Dynamic = 65535.0;
 
-  public static function appendQuadBatchInstance(target:Dynamic, id:Float, x:Float, y:Float):Float {
+  public static function appendQuadBatchInstance(target:flighthq.types.QuadBatch, id:Float, x:Float, y:Float):Float {
     var index:Dynamic = cast _Runtime.UNDEFINED;
     var o:Dynamic = cast _Runtime.UNDEFINED;
     var signals:Dynamic = cast _Runtime.UNDEFINED;
@@ -48,27 +51,27 @@ class QuadBatch {
     return cast null;
   }
 
-  public static function clearQuadBatch(target:Dynamic):Void {
+  public static function clearQuadBatch(target:flighthq.types.QuadBatch):Void {
     var signals:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.setField(_Runtime.field(target, 'data'), 'instanceCount', 0.0);
     signals = _Runtime.callValue(getQuadBatchSignals, cast ([target] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callProperty(_Runtime.field(signals, 'onCleared'), 'emit', cast ([] : Array<Dynamic>)); }
   }
 
-  public static function cloneQuadBatch(source:Dynamic):Dynamic {
+  public static function cloneQuadBatch(source:flighthq.types.QuadBatch):flighthq.types.QuadBatch {
     var src:Dynamic = cast _Runtime.UNDEFINED;
     src = _Runtime.field(source, 'data');
     return cast _Runtime.callValue(createQuadBatch, cast ([{ data: { atlas: _Runtime.field(src, 'atlas'), ids: _Runtime.slice(_Runtime.field(src, 'ids'), 0, null), instanceCount: _Runtime.field(src, 'instanceCount'), materialData: _Runtime.select(!_Runtime.strictEquals(_Runtime.field(src, 'materialData'), null), function():Dynamic return cast _Runtime.slice(_Runtime.field(src, 'materialData'), 0, null), function():Dynamic return cast null), transforms: _Runtime.slice(_Runtime.field(src, 'transforms'), 0, null), transformType: _Runtime.field(src, 'transformType') } }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function copyLocalBoundsRectangle__quadBatch(out:Dynamic, source:Dynamic):Void {
+  public static function copyLocalBoundsRectangle__quadBatch(out:Rectangle, source:Node<Dynamic>):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([(cast source : Dynamic)] : Array<Dynamic>)) : QuadBatchRuntime);
+    runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([(cast source : flighthq.types.QuadBatch)] : Array<Dynamic>)) : QuadBatchRuntime);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null))) { _Runtime.callValue(copyRectangle, cast ([out, _Runtime.field(runtime, 'localBoundsRectangle')] : Array<Dynamic>)); }
   }
 
-  public static function compactQuadBatch(target:Dynamic):Void {
+  public static function compactQuadBatch(target:flighthq.types.QuadBatch):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var stride:Dynamic = cast _Runtime.UNDEFINED;
     var write:Dynamic = cast _Runtime.UNDEFINED;
@@ -100,7 +103,7 @@ class QuadBatch {
     _Runtime.setField(data, 'instanceCount', write);
   }
 
-  public static function computeQuadBatchLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
+  public static function computeQuadBatchLocalBoundsRectangle(out:Rectangle, source:flighthq.types.QuadBatch):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var atlas:Dynamic = cast _Runtime.UNDEFINED;
     var ids:Dynamic = cast _Runtime.UNDEFINED;
@@ -201,8 +204,8 @@ class QuadBatch {
     }
   }
 
-  public static function createQuadBatch(?obj:PartialNode<Dynamic>):Dynamic {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([QuadBatchKind, obj, createQuadBatchData, createQuadBatchRuntime] : Array<Dynamic>)) : Dynamic);
+  public static function createQuadBatch(?obj:PartialNode<flighthq.types.QuadBatch>):flighthq.types.QuadBatch {
+    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([QuadBatchKind, obj, createQuadBatchData, createQuadBatchRuntime] : Array<Dynamic>)) : flighthq.types.QuadBatch);
     return cast null;
   }
 
@@ -225,14 +228,14 @@ class QuadBatch {
     return cast null;
   }
 
-  public static function enableQuadBatchSignals(target:Dynamic):QuadBatchSignals {
+  public static function enableQuadBatchSignals(target:flighthq.types.QuadBatch):QuadBatchSignals {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     s = (cast target : QuadBatchWithSignals__quadBatch);
     return cast _Runtime.setIndex(s, QuadBatch.quadBatchSignalsSlot__quadBatch, (_Runtime.getIndex(s, QuadBatch.quadBatchSignalsSlot__quadBatch) ?? _Runtime.callValue(createQuadBatchSignals, cast ([] : Array<Dynamic>))));
     return cast null;
   }
 
-  public static function getQuadBatchCapacity(source:Dynamic):Float {
+  public static function getQuadBatchCapacity(source:flighthq.types.QuadBatch):Float {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var stride:Dynamic = cast _Runtime.UNDEFINED;
     var transformCapacity:Dynamic = cast _Runtime.UNDEFINED;
@@ -243,13 +246,13 @@ class QuadBatch {
     return cast null;
   }
 
-  public static function getQuadBatchInstanceId(source:Dynamic, index:Float):Float {
+  public static function getQuadBatchInstanceId(source:flighthq.types.QuadBatch, index:Float):Float {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(index, 0.0, '<'), function():Dynamic return cast _Runtime.compare(index, _Runtime.field(_Runtime.field(source, 'data'), 'instanceCount'), '>=')))) { return cast -1.0; }
     return cast _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'data'), 'ids'), index);
     return cast null;
   }
 
-  public static function getQuadBatchInstanceTransform(out:Vector2Like, source:Dynamic, index:Float):Bool {
+  public static function getQuadBatchInstanceTransform(out:Vector2Like, source:flighthq.types.QuadBatch, index:Float):Bool {
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
     var instanceCount:Dynamic = cast _Runtime.UNDEFINED;
     var transforms:Dynamic = cast _Runtime.UNDEFINED;
@@ -272,12 +275,12 @@ class QuadBatch {
     return cast null;
   }
 
-  public static function getQuadBatchRuntime(source:Dynamic):QuadBatchRuntime {
+  public static function getQuadBatchRuntime(source:flighthq.types.QuadBatch):QuadBatchRuntime {
     return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : QuadBatchRuntime);
     return cast null;
   }
 
-  public static function getQuadBatchSignals(source:Dynamic):Null<QuadBatchSignals> {
+  public static function getQuadBatchSignals(source:flighthq.types.QuadBatch):Null<QuadBatchSignals> {
     return cast _Runtime.coalesce(_Runtime.getIndex((cast source : QuadBatchWithSignals__quadBatch), QuadBatch.quadBatchSignalsSlot__quadBatch), function():Dynamic return cast null);
     return cast null;
   }
@@ -287,17 +290,17 @@ class QuadBatch {
     return cast null;
   }
 
-  public static function hitTestQuadBatchPoint(source:Dynamic, point:Vector2Like):Float {
+  public static function hitTestQuadBatchPoint(source:flighthq.types.QuadBatch, point:Vector2Like):Float {
     return cast _Runtime.callValue(hitTestQuadBatchPointXY, cast ([source, _Runtime.field(point, 'x'), _Runtime.field(point, 'y')] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestQuadBatchPointExact(source:Dynamic, point:Vector2Like):Float {
+  public static function hitTestQuadBatchPointExact(source:flighthq.types.QuadBatch, point:Vector2Like):Float {
     return cast _Runtime.callValue(hitTestQuadBatchPointExactXY, cast ([source, _Runtime.field(point, 'x'), _Runtime.field(point, 'y')] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function hitTestQuadBatchPointExactXY(source:Dynamic, x:Float, y:Float):Float {
+  public static function hitTestQuadBatchPointExactXY(source:flighthq.types.QuadBatch, x:Float, y:Float):Float {
     var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
     var atlas:Dynamic = cast _Runtime.UNDEFINED;
     var ids:Dynamic = cast _Runtime.UNDEFINED;
@@ -362,7 +365,7 @@ class QuadBatch {
     return cast null;
   }
 
-  public static function hitTestQuadBatchPointXY(source:Dynamic, x:Float, y:Float):Float {
+  public static function hitTestQuadBatchPointXY(source:flighthq.types.QuadBatch, x:Float, y:Float):Float {
     var __destructure3:Dynamic = cast _Runtime.UNDEFINED;
     var atlas:Dynamic = cast _Runtime.UNDEFINED;
     var ids:Dynamic = cast _Runtime.UNDEFINED;
@@ -431,7 +434,7 @@ class QuadBatch {
     return cast null;
   }
 
-  public static function iterateQuadBatchInstances(source:Dynamic, visitor:Dynamic):Void {
+  public static function iterateQuadBatchInstances(source:flighthq.types.QuadBatch, visitor:Dynamic):Void {
     var __destructure4:Dynamic = cast _Runtime.UNDEFINED;
     var ids:Dynamic = cast _Runtime.UNDEFINED;
     var instanceCount:Dynamic = cast _Runtime.UNDEFINED;
@@ -453,7 +456,7 @@ class QuadBatch {
     }
   }
 
-  public static function removeQuadBatchInstance(target:Dynamic, index:Float):Void {
+  public static function removeQuadBatchInstance(target:flighthq.types.QuadBatch, index:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var last:Dynamic = cast _Runtime.UNDEFINED;
     var swapSource:Dynamic = cast _Runtime.UNDEFINED;
@@ -489,7 +492,7 @@ class QuadBatch {
     if (_Runtime.truthy(!_Runtime.strictEquals(signals, null))) { _Runtime.callProperty(_Runtime.field(signals, 'onInstanceRemoved'), 'emit', cast ([index, swapSource] : Array<Dynamic>)); }
   }
 
-  public static function reserveQuadBatch(target:Dynamic, capacity:Float):Void {
+  public static function reserveQuadBatch(target:flighthq.types.QuadBatch, capacity:Float):Void {
     var currentCapacity:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     currentCapacity = _Runtime.callValue(getQuadBatchCapacity, cast ([target] : Array<Dynamic>));
@@ -499,7 +502,7 @@ class QuadBatch {
     _Runtime.setField(data, 'transforms', _Runtime.callValue(reserveFloat32Array, cast ([_Runtime.field(data, 'transforms'), (capacity * _Runtime.callValue(getQuadBatchTransformStride, cast ([_Runtime.field(data, 'transformType')] : Array<Dynamic>)))] : Array<Dynamic>)));
   }
 
-  public static function resizeQuadBatch(target:Dynamic, instanceCount:Float):Void {
+  public static function resizeQuadBatch(target:flighthq.types.QuadBatch, instanceCount:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var oldInstanceCount:Dynamic = cast _Runtime.UNDEFINED;
     var capacity:Dynamic = cast _Runtime.UNDEFINED;
@@ -514,7 +517,7 @@ class QuadBatch {
     }
   }
 
-  public static function setQuadBatchInstance(target:Dynamic, index:Float, id:Float, x:Float, y:Float):Void {
+  public static function setQuadBatchInstance(target:flighthq.types.QuadBatch, index:Float, id:Float, x:Float, y:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var o:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(target, 'data');
@@ -525,7 +528,7 @@ class QuadBatch {
     _Runtime.setIndex(_Runtime.field(data, 'transforms'), (o + 1.0), y);
   }
 
-  public static function setQuadBatchInstanceMatrix(target:Dynamic, index:Float, id:Float, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
+  public static function setQuadBatchInstanceMatrix(target:flighthq.types.QuadBatch, index:Float, id:Float, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var o:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(target, 'data');
@@ -540,7 +543,7 @@ class QuadBatch {
     _Runtime.setIndex(_Runtime.field(data, 'transforms'), (o + 5.0), ty);
   }
 
-  public static function setQuadBatchInstanceRange(target:Dynamic, startIndex:Float, count:Float, source:flighthq._internal._Float32Array):Void {
+  public static function setQuadBatchInstanceRange(target:flighthq.types.QuadBatch, startIndex:Float, count:Float, source:flighthq._internal._Float32Array):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var stride:Dynamic = cast _Runtime.UNDEFINED;
     var dst:Dynamic = cast _Runtime.UNDEFINED;
@@ -559,7 +562,7 @@ class QuadBatch {
     }
   }
 
-  public static function setQuadBatchLocalBoundsRectangle(target:Dynamic, rect:Dynamic):Void {
+  public static function setQuadBatchLocalBoundsRectangle(target:flighthq.types.QuadBatch, rect:Rectangle):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([target] : Array<Dynamic>)) : QuadBatchRuntime);
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'localBoundsRectangle'), null))) { _Runtime.setField(runtime, 'localBoundsRectangle', _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>))); }
@@ -567,7 +570,7 @@ class QuadBatch {
     _Runtime.callValue(invalidateNodeLocalBounds, cast ([target] : Array<Dynamic>));
   }
 
-  public static function setQuadBatchTransformType(target:Dynamic, newType:QuadTransformType):Void {
+  public static function setQuadBatchTransformType(target:flighthq.types.QuadBatch, newType:QuadTransformType):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(target, 'data');

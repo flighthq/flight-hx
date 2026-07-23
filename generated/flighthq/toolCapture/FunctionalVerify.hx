@@ -11,20 +11,26 @@ import flighthq.surface.SurfaceFingerprint.createSurfaceFingerprint;
 import flighthq.surface.SurfaceFingerprint.formatSurfaceFingerprint;
 import flighthq.surface.SurfaceFrom.createSurfaceFromImageSource;
 import flighthq.surface.SurfacePixel.getSurfacePixel;
+import flighthq.types.CanvasRenderState;
+import flighthq.types.DisplayObject;
+import flighthq.types.DomRenderState;
+import flighthq.types.GlRenderState;
+import flighthq.types.Surface;
+import flighthq.types.WgpuRenderState;
 
 typedef FunctionalRenderOracle = Dynamic;
 
 typedef FunctionalCanvasTarget = { var kind:String; var state:Dynamic; var width:Float; var height:Float; var scale:Float; var render:Dynamic; };
 
-typedef FunctionalDomTarget = { var kind:String; var state:Dynamic; var width:Float; var height:Float; var scale:Float; var render:Dynamic; };
+typedef FunctionalDomTarget = { var kind:String; var state:DomRenderState; var width:Float; var height:Float; var scale:Float; var render:Dynamic; };
 
-typedef FunctionalGlTarget = { var kind:String; var state:Dynamic; var width:Float; var height:Float; var scale:Float; var render:Dynamic; };
+typedef FunctionalGlTarget = { var kind:String; var state:GlRenderState; var width:Float; var height:Float; var scale:Float; var render:Dynamic; };
 
 typedef FunctionalTestModule = { @:optional var assertRender:FunctionalRenderOracle; @:optional var minCoverage:Float; };
 
 typedef FunctionalVerification = { var render:String; var coverage:Null<Float>; var fingerprint:Null<String>; };
 
-typedef FunctionalWgpuTarget = { var kind:String; var state:Dynamic; var width:Float; var height:Float; var scale:Float; var render:Dynamic; };
+typedef FunctionalWgpuTarget = { var kind:String; var state:WgpuRenderState; var width:Float; var height:Float; var scale:Float; var render:Dynamic; };
 
 typedef FunctionalTarget = Dynamic;
 
@@ -64,7 +70,7 @@ class FunctionalVerify {
     return cast null;
   }
 
-  public static function registerWgpuFunctionalTarget(state:Dynamic, scale:Dynamic = 1.0):Void {
+  public static function registerWgpuFunctionalTarget(state:WgpuRenderState, scale:Dynamic = 1.0):Void {
     _Runtime.callValue(enableWgpuFrameCapture, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(registerFunctionalTarget, cast ([{ kind: 'webgpu', state: state, width: _Runtime.field(_Runtime.field(state, 'canvas'), 'width'), height: _Runtime.field(_Runtime.field(state, 'canvas'), 'height'), scale: scale, render: function() {
     
@@ -114,8 +120,8 @@ class FunctionalVerify {
     })();
   }
 
-  public static function snapshotFunctionalRender():flighthq._internal._Promise<Null<Dynamic>> {
-    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<Dynamic>> {
+  public static function snapshotFunctionalRender():flighthq._internal._Promise<Null<Surface>> {
+    return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<Surface>> {
       var target:Dynamic = cast _Runtime.UNDEFINED;
       var canvas:Dynamic = cast _Runtime.UNDEFINED;
       target = _Runtime.field((cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftTarget');
@@ -129,7 +135,7 @@ class FunctionalVerify {
     })();
   }
 
-  public static function getFunctionalRenderImageSurface__functionalVerify():Null<Dynamic> {
+  public static function getFunctionalRenderImageSurface__functionalVerify():Null<Surface> {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.field((cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : VerificationWindow__functionalVerify), '__ftTarget');
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.optionalField(target, 'kind'), 'webgl'))) { return cast null; }
@@ -137,7 +143,7 @@ class FunctionalVerify {
     return cast null;
   }
 
-  public static function createSurfaceFromGlRenderState__functionalVerify(state:Dynamic):Null<Dynamic> {
+  public static function createSurfaceFromGlRenderState__functionalVerify(state:GlRenderState):Null<Surface> {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var width:Dynamic = cast _Runtime.UNDEFINED;
     var height:Dynamic = cast _Runtime.UNDEFINED;
@@ -171,7 +177,7 @@ class FunctionalVerify {
     return cast null;
   }
 
-  public static function encodeSurfaceToDataUrl__functionalVerify(surface:Dynamic):String {
+  public static function encodeSurfaceToDataUrl__functionalVerify(surface:Surface):String {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     canvas = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));

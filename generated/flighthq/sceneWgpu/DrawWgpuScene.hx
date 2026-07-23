@@ -10,16 +10,24 @@ import flighthq.node.Transform3d.getNodeWorldMatrix4;
 import flighthq.render.SceneRender.prepareSceneRender;
 import flighthq.sceneWgpu.WgpuMeshMaterialRegistry.resolveWgpuMeshMaterialRenderer;
 import flighthq.sceneWgpu.WgpuParticleEmitter3D.drawWgpuSceneParticleEmitters;
+import flighthq.types.Camera;
+import flighthq.types.Material;
+import flighthq.types.Matrix3;
+import flighthq.types.Matrix4;
+import flighthq.types.Mesh;
+import flighthq.types.SceneLights;
+import flighthq.types.SceneNode;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.Types.DefaultMaterialKind;
+import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
 @:expose("flighthq.sceneWgpu.DrawWgpuScene")
 class DrawWgpuScene {
-  public static function drawWgpuScene(state:Dynamic, scene:Dynamic, camera:Dynamic, lights:Dynamic):Void {
+  public static function drawWgpuScene(state:WgpuRenderState, scene:SceneNode, camera:Camera, lights:SceneLights):Void {
     var list:Dynamic = cast _Runtime.UNDEFINED;
     var lightBlock:Dynamic = cast _Runtime.UNDEFINED;
-    var boundMaterial:Null<Dynamic> = cast _Runtime.UNDEFINED;
+    var boundMaterial:Null<Material> = cast _Runtime.UNDEFINED;
     var boundRenderer:Dynamic = cast _Runtime.UNDEFINED;
     list = _Runtime.callValue(prepareSceneRender, cast ([state, scene, camera, lights] : Array<Dynamic>));
     lightBlock = _Runtime.field(list, 'lights');
@@ -30,7 +38,7 @@ class DrawWgpuScene {
       while (_Runtime.truthy(_Runtime.compare(m, _Runtime.field(list, 'meshCount'), '<'))) {
         var mesh:Dynamic = _Runtime.getIndex(_Runtime.field(list, 'visibleMeshes'), m);
         var subsets:Dynamic = _Runtime.field(_Runtime.field(mesh, 'geometry'), 'subsets');
-        var worldMatrix:Dynamic = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)) : Dynamic);
+        var worldMatrix:Dynamic = (cast _Runtime.callValue(getNodeWorldMatrix4, cast ([mesh] : Array<Dynamic>)) : Matrix4);
         _Runtime.callValue(setMatrix3NormalFromMatrix4, cast ([DrawWgpuScene.scratchNormalMatrix__drawWgpuScene, worldMatrix] : Array<Dynamic>));
         {
           var s:Dynamic = 0.0;
@@ -57,16 +65,16 @@ class DrawWgpuScene {
     _Runtime.callValue(drawWgpuSceneParticleEmitters, cast ([state, scene, camera, lights] : Array<Dynamic>));
   }
 
-  public static function resolveSubsetMaterial__drawWgpuScene(mesh:Dynamic, subsetIndex:Float):Null<Dynamic> {
+  public static function resolveSubsetMaterial__drawWgpuScene(mesh:Mesh, subsetIndex:Float):Null<Material> {
     var materials:Dynamic = cast _Runtime.UNDEFINED;
     materials = _Runtime.field(mesh, 'materials');
     return cast _Runtime.select(_Runtime.compare(subsetIndex, _Runtime.field(materials, 'length'), '<'), function():Dynamic return cast _Runtime.getIndex(materials, subsetIndex), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static final proxy__drawWgpuScene:SceneRenderProxy = { material: (cast { kind: DefaultMaterialKind } : Dynamic), normalMatrix: (cast _Runtime.callValue(createMatrix3, cast ([] : Array<Dynamic>)) : Dynamic), subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: (cast _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) : Dynamic) };
+  public static final proxy__drawWgpuScene:SceneRenderProxy = { material: (cast { kind: DefaultMaterialKind } : Material), normalMatrix: (cast _Runtime.callValue(createMatrix3, cast ([] : Array<Dynamic>)) : Matrix3), subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: (cast _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) : Matrix4) };
 
-  public static final DEFAULT_MATERIAL__drawWgpuScene:Dynamic = (cast { kind: DefaultMaterialKind } : Dynamic);
+  public static final DEFAULT_MATERIAL__drawWgpuScene:Dynamic = (cast { kind: DefaultMaterialKind } : Material);
 
-  public static final scratchNormalMatrix__drawWgpuScene:Dynamic = (cast _Runtime.callValue(createMatrix3, cast ([] : Array<Dynamic>)) : Dynamic);
+  public static final scratchNormalMatrix__drawWgpuScene:Dynamic = (cast _Runtime.callValue(createMatrix3, cast ([] : Array<Dynamic>)) : Matrix3);
 }

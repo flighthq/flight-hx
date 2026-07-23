@@ -12,6 +12,8 @@ import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.resolveWgpuMaterialT
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.stashWgpuUvTransform;
 import flighthq.sceneWgpu._internal._WgpuSceneRuntimeValues.getWgpuSceneRuntime;
 import flighthq.types.LinearColor;
+import flighthq.types.Texture;
+import flighthq.types.WgpuRenderState;
 
 typedef WgpuUnlitDefineKey = { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasColorMap:Bool; };
 
@@ -19,7 +21,7 @@ typedef WgpuUnlitPipeline = Dynamic;
 
 @:expose("flighthq.sceneWgpu.WgpuUnlitPrelude")
 class WgpuUnlitPrelude {
-  public static function bindWgpuUnlitSurface(state:Dynamic, pipeline:WgpuUnlitPipeline, materialKey:Dynamic, color:LinearColor, intensity:Float, alphaCutoff:Float, colorMap:Null<Dynamic>):Dynamic {
+  public static function bindWgpuUnlitSurface(state:WgpuRenderState, pipeline:WgpuUnlitPipeline, materialKey:Dynamic, color:LinearColor, intensity:Float, alphaCutoff:Float, colorMap:Null<Texture>):Dynamic {
     var scene:Dynamic = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
@@ -49,7 +51,7 @@ class WgpuUnlitPrelude {
     return cast null;
   }
 
-  public static function compileWgpuUnlitPipeline(state:Dynamic, key:WgpuUnlitDefineKey, format:Dynamic):WgpuUnlitPipeline {
+  public static function compileWgpuUnlitPipeline(state:WgpuRenderState, key:WgpuUnlitDefineKey, format:Dynamic):WgpuUnlitPipeline {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var module:Dynamic = cast _Runtime.UNDEFINED;
     var materialBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
@@ -60,7 +62,7 @@ class WgpuUnlitPrelude {
     return cast null;
   }
 
-  public static function ensureWgpuUnlitPipeline(state:Dynamic, key:WgpuUnlitDefineKey, format:Dynamic):WgpuUnlitPipeline {
+  public static function ensureWgpuUnlitPipeline(state:WgpuRenderState, key:WgpuUnlitDefineKey, format:Dynamic):WgpuUnlitPipeline {
     return cast _Runtime.callValue(ensureWgpuScenePipeline, cast ([state, 'unlit:' + Std.string(format) + '|' + Std.string(_Runtime.callValue(buildWgpuUnlitDefineKey, cast ([key] : Array<Dynamic>))) + '', function() return _Runtime.callValue(compileWgpuUnlitPipeline, cast ([state, key, format] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }

@@ -5,6 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.BlendMode;
+import flighthq.types.ColorTransform;
+import flighthq.types.RenderProxy;
+import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
 typedef StencilMode__wgpuShader = String;
@@ -46,7 +49,7 @@ class WgpuShader {
     return cast null;
   }
 
-  public static function getActiveWgpuPipeline(state:Dynamic):Dynamic {
+  public static function getActiveWgpuPipeline(state:WgpuRenderState):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var stencilMode:StencilMode__wgpuShader = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -55,7 +58,7 @@ class WgpuShader {
     return cast null;
   }
 
-  public static function getWgpuPipeline(state:Dynamic, blendMode:Null<BlendMode>, stencilMode:StencilMode__wgpuShader):Dynamic {
+  public static function getWgpuPipeline(state:WgpuRenderState, blendMode:Null<BlendMode>, stencilMode:StencilMode__wgpuShader):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;
     var key:Dynamic = cast _Runtime.UNDEFINED;
@@ -104,12 +107,12 @@ class WgpuShader {
     _Runtime.setIndex(matrixArray, 8.0, 1.0);
   }
 
-  public static function writeWgpuMatrixOnlyUniforms(state:Dynamic, renderProxy:Dynamic, transform:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Float {
+  public static function writeWgpuMatrixOnlyUniforms(state:WgpuRenderState, renderProxy:RenderProxy, transform:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Float {
     return cast _Runtime.callValue(writeWgpuQuadUniforms, cast ([state, { alpha: _Runtime.field(renderProxy, 'alpha'), transform2D: transform }, null, x0, y0, x1, y1, u0, v0, u1, v1] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function writeWgpuQuadUniforms(state:Dynamic, renderProxy:{ var alpha:Float; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }, colorTransform:Null<Dynamic>, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Float {
+  public static function writeWgpuQuadUniforms(state:WgpuRenderState, renderProxy:{ var alpha:Float; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }, colorTransform:Null<ColorTransform>, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Float {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var byteOffset:Dynamic = cast _Runtime.UNDEFINED;
     var floatBase:Dynamic = cast _Runtime.UNDEFINED;

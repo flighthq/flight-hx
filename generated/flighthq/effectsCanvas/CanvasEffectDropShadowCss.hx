@@ -3,10 +3,12 @@ package flighthq.effectsCanvas;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.DropShadowEffect;
+import flighthq.types.OuterGlowEffect;
 
 @:expose("flighthq.effectsCanvas.CanvasEffectDropShadowCss")
 class CanvasEffectDropShadowCss {
-  public static function computeDropShadowEffectCss(effect:Dynamic):Null<String> {
+  public static function computeDropShadowEffectCss(effect:DropShadowEffect):Null<String> {
     var blurX:Dynamic = cast _Runtime.UNDEFINED;
     var blurY:Dynamic = cast _Runtime.UNDEFINED;
     var angle:Dynamic = cast _Runtime.UNDEFINED;
@@ -27,7 +29,7 @@ class CanvasEffectDropShadowCss {
     return cast null;
   }
 
-  public static function computeOuterGlowEffectCss(effect:Dynamic):Null<String> {
+  public static function computeOuterGlowEffectCss(effect:OuterGlowEffect):Null<String> {
     var blurX:Dynamic = cast _Runtime.UNDEFINED;
     var blurY:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw'), 'draw'))) { return cast null; }

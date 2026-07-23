@@ -20,4 +20,4 @@ typedef AssetLibrary = { var runtime:AssetLibraryRuntime; };
 
 typedef AssetLoadProgress = { var loaded:Float; var total:Float; };
 
-typedef AssetGroupLoadOptions = { @:optional var progress:Dynamic; };
+typedef AssetGroupLoadOptions = { @:optional var progress:Signal<Dynamic>; };

@@ -17,7 +17,7 @@ typedef VertexAttributeLayout = { var attributes:Array<VertexAttribute>; var str
 
 typedef MeshSubset = { var indexCount:Float; var indexOffset:Float; };
 
-typedef MeshGeometry = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var bounds:Null<Dynamic>; var indices:Null<Dynamic>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; var version:Float; var vertices:flighthq._internal._Float32Array; };
+typedef MeshGeometry = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var bounds:Null<Aabb>; var indices:Null<Dynamic>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; var version:Float; var vertices:flighthq._internal._Float32Array; };
 
 typedef MeshGeometryGlData = { var __meshGeometryGlData:Dynamic; };
 

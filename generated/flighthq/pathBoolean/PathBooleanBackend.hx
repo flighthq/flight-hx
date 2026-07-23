@@ -4,23 +4,24 @@ package flighthq.pathBoolean;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.pathBoolean.MartinezKernel.createMartinezPathBooleanBackend;
+import flighthq.types.PathBooleanBackend;
 
 @:expose("flighthq.pathBoolean.PathBooleanBackend")
 class PathBooleanBackend {
-  public static function createDefaultPathBooleanBackend():Dynamic {
+  public static function createDefaultPathBooleanBackend():flighthq.types.PathBooleanBackend {
     return cast _Runtime.callValue(createMartinezPathBooleanBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getPathBooleanBackend():Dynamic {
+  public static function getPathBooleanBackend():flighthq.types.PathBooleanBackend {
     if (_Runtime.truthy(_Runtime.strictEquals(PathBooleanBackend._backend__pathBooleanBackend, null))) { (PathBooleanBackend._backend__pathBooleanBackend = cast (_Runtime.callValue(createDefaultPathBooleanBackend, cast ([] : Array<Dynamic>)) : Dynamic)); }
     return cast PathBooleanBackend._backend__pathBooleanBackend;
     return cast null;
   }
 
-  public static function setPathBooleanBackend(backend:Null<Dynamic>):Void {
+  public static function setPathBooleanBackend(backend:Null<flighthq.types.PathBooleanBackend>):Void {
     (PathBooleanBackend._backend__pathBooleanBackend = cast (backend : Dynamic));
   }
 
-  public static var _backend__pathBooleanBackend:Null<Dynamic> = _Runtime.explicitNull();
+  public static var _backend__pathBooleanBackend:Null<flighthq.types.PathBooleanBackend> = _Runtime.explicitNull();
 }

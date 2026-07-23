@@ -5,13 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.displayobjectCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.types.CanvasMaterialRenderer;
+import flighthq.types.CanvasRenderState;
 import flighthq.types.Entity.Kind;
+import flighthq.types.Material;
 import flighthq.types.Types.DefaultMaterialKind;
 import flighthq.types._internal._MaterialValues.DefaultMaterialKind;
 
 @:expose("flighthq.displayobjectCanvas.CanvasMaterialRegistry")
 class CanvasMaterialRegistry {
-  public static function applyCanvasMaterial(state:Dynamic, material:Null<Dynamic>):Bool {
+  public static function applyCanvasMaterial(state:Dynamic, material:Null<Material>):Bool {
     var renderer:Dynamic = cast _Runtime.UNDEFINED;
     var drawState:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;
@@ -38,7 +40,7 @@ class CanvasMaterialRegistry {
     _Runtime.callProperty(_Runtime.setField(runtime, 'materialRendererMap', (_Runtime.field(runtime, 'materialRendererMap') ?? _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []))), 'set', cast ([kind, renderer] : Array<Dynamic>));
   }
 
-  public static function resolveCanvasMaterialRenderer(state:Dynamic, material:Null<Dynamic>):Null<Dynamic> {
+  public static function resolveCanvasMaterialRenderer(state:Dynamic, material:Null<Material>):Null<Dynamic> {
     var map:Dynamic = cast _Runtime.UNDEFINED;
     map = _Runtime.field(_Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'materialRendererMap');
     if (_Runtime.truthy(_Runtime.strictEquals(map, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast null; }

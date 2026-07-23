@@ -4,12 +4,14 @@ package flighthq.glyphatlas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.surface.Surface.createSurface;
+import flighthq.types.GlyphSource.GlyphAtlas;
 import flighthq.types.GlyphSource.GlyphAtlasOptions;
 import flighthq.types.GlyphSource.GlyphMetrics;
+import flighthq.types.Surface;
 
 @:expose("flighthq.glyphatlas.GlyphAtlas")
 class GlyphAtlas {
-  public static function createGlyphAtlas(options:GlyphAtlasOptions):Dynamic {
+  public static function createGlyphAtlas(options:GlyphAtlasOptions):flighthq.types.GlyphSource.GlyphAtlas {
     var padding:Dynamic = cast _Runtime.UNDEFINED;
     padding = _Runtime.coalesce(_Runtime.field(options, 'padding'), function():Dynamic return cast 1.0);
     return cast { runtime: { bitmaps: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), dirty: false, dirtyMaxX: 0.0, dirtyMaxY: 0.0, dirtyMinX: 0.0, dirtyMinY: 0.0, entries: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), lru: cast ([] : Array<Dynamic>), maxGlyphs: _Runtime.coalesce(_Runtime.field(options, 'maxGlyphs'), function():Dynamic return cast 0.0), metrics: _Runtime.callValue(deriveGlyphMetricsFromFontSize, cast ([_Runtime.field(options, 'fontSize')] : Array<Dynamic>)), packBottom: padding, padding: padding, rasterizeOptions: { fontFamily: _Runtime.field(options, 'fontFamily'), fontSize: _Runtime.field(options, 'fontSize') }, shelves: cast ([] : Array<Dynamic>), surface: _Runtime.callValue(createSurface, cast ([_Runtime.field(options, 'width'), _Runtime.field(options, 'height')] : Array<Dynamic>)) } };
@@ -21,7 +23,7 @@ class GlyphAtlas {
     return cast null;
   }
 
-  public static function disposeGlyphAtlas(atlas:Dynamic):Void {
+  public static function disposeGlyphAtlas(atlas:flighthq.types.GlyphSource.GlyphAtlas):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.field(atlas, 'runtime');
     _Runtime.callProperty(_Runtime.field(runtime, 'entries'), 'clear', cast ([] : Array<Dynamic>));
@@ -32,7 +34,7 @@ class GlyphAtlas {
     _Runtime.setField(runtime, 'dirty', false);
   }
 
-  public static function getGlyphAtlasSurface(atlas:Dynamic):Dynamic {
+  public static function getGlyphAtlasSurface(atlas:flighthq.types.GlyphSource.GlyphAtlas):Surface {
     return cast _Runtime.field(_Runtime.field(atlas, 'runtime'), 'surface');
     return cast null;
   }

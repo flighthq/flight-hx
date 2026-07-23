@@ -3,13 +3,14 @@ package flighthq.path;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 import flighthq.types.PathSegment;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
 @:expose("flighthq.path.ForEachPathSegment")
 class ForEachPathSegment {
-  public static function forEachPathSegment(path:Dynamic, visitor:Dynamic):Void {
+  public static function forEachPathSegment(path:Path, visitor:Dynamic):Void {
     var commands:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var di:Dynamic = cast _Runtime.UNDEFINED;

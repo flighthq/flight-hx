@@ -4,6 +4,7 @@ package flighthq.geometry;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Vector2;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types.Vector3.Vector3Like;
 
@@ -31,7 +32,7 @@ class Vector2 {
     _Runtime.setField(out, 'y', _Runtime.select(_Runtime.compare(vy, minY, '<'), function():Dynamic return cast minY, function():Dynamic return cast _Runtime.select(_Runtime.compare(vy, maxY, '>'), function():Dynamic return cast maxY, function():Dynamic return cast vy)));
   }
 
-  public static function cloneVector2(source:Vector2Like):Dynamic {
+  public static function cloneVector2(source:Vector2Like):flighthq.types.Vector2 {
     return cast _Runtime.callValue(createVector2, cast ([_Runtime.field(source, 'x'), _Runtime.field(source, 'y')] : Array<Dynamic>));
     return cast null;
   }
@@ -41,12 +42,12 @@ class Vector2 {
     _Runtime.setField(out, 'y', _Runtime.field(source, 'y'));
   }
 
-  public static function createVector2(?x:Float, ?y:Float):Dynamic {
+  public static function createVector2(?x:Float, ?y:Float):flighthq.types.Vector2 {
     return cast _Runtime.callValue(createEntity, cast ([{ x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createVector2FromPolar(length:Float, angle:Float):Dynamic {
+  public static function createVector2FromPolar(length:Float, angle:Float):flighthq.types.Vector2 {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     out = _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>));
     _Runtime.callValue(setVector2FromPolar, cast ([out, length, angle] : Array<Dynamic>));
@@ -230,7 +231,7 @@ class Vector2 {
     _Runtime.setIndex(out, (offset + 1.0), _Runtime.field(source, 'y'));
   }
 
-  public static final VECTOR2_X_AXIS:Dynamic = _Runtime.callValue(createVector2, cast ([1.0, 0.0] : Array<Dynamic>));
+  public static final VECTOR2_X_AXIS:flighthq.types.Vector2 = _Runtime.callValue(createVector2, cast ([1.0, 0.0] : Array<Dynamic>));
 
-  public static final VECTOR2_Y_AXIS:Dynamic = _Runtime.callValue(createVector2, cast ([0.0, 1.0] : Array<Dynamic>));
+  public static final VECTOR2_Y_AXIS:flighthq.types.Vector2 = _Runtime.callValue(createVector2, cast ([0.0, 1.0] : Array<Dynamic>));
 }

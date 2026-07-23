@@ -4,17 +4,18 @@ package flighthq.signals;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals._internal._Internal.nullSignalEmit;
+import flighthq.types.Signal;
 import flighthq.types.Signal.SignalData;
 import flighthq.types.SignalConnectOptions;
 
 @:expose("flighthq.signals.Slot")
 class Slot {
-  public static function clearSignal<T>(signal:Dynamic):Void {
+  public static function clearSignal<T>(signal:Signal<Dynamic>):Void {
     _Runtime.setField(signal, 'emit', (cast (cast nullSignalEmit : Dynamic) : Dynamic));
     _Runtime.setField(signal, 'data', null);
   }
 
-  public static function connectSignal<T>(signal:Dynamic, slot:Dynamic, ?options:SignalConnectOptions):Void {
+  public static function connectSignal<T>(signal:Signal<Dynamic>, slot:Dynamic, ?options:SignalConnectOptions):Void {
     var priority:Dynamic = cast _Runtime.UNDEFINED;
     var repeat:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
@@ -39,7 +40,7 @@ class Slot {
     _Runtime.callProperty(_Runtime.field(data, 'repeat'), 'push', cast ([repeat] : Array<Dynamic>));
   }
 
-  public static function disconnectSignal<T>(signal:Dynamic, slot:Dynamic):Void {
+  public static function disconnectSignal<T>(signal:Signal<Dynamic>, slot:Dynamic):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var i:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(signal, 'data');
@@ -58,12 +59,12 @@ class Slot {
     }
   }
 
-  public static function hasSignalSlots<T>(signal:Dynamic):Bool {
+  public static function hasSignalSlots<T>(signal:Signal<Dynamic>):Bool {
     return cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(signal, 'data'), null), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.field(_Runtime.field(signal, 'data'), 'slots'), 'length'), 0.0, '>'));
     return cast null;
   }
 
-  public static function initSignal__slot<T>(signal:Dynamic):Void {
+  public static function initSignal__slot<T>(signal:Signal<Dynamic>):Void {
     var data:SignalData<Dynamic> = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(signal, 'data'), null))) { return; }
     data = { slots: cast ([] : Array<Dynamic>), priorities: cast ([] : Array<Dynamic>), repeat: cast ([] : Array<Dynamic>), cancelled: false };
@@ -71,7 +72,7 @@ class Slot {
     _Runtime.setField(signal, 'emit', _Runtime.callValue(Slot.makeDispatch__slot, cast ([data] : Array<Dynamic>)));
   }
 
-  public static function isSlotConnected<T>(signal:Dynamic, slot:Dynamic):Bool {
+  public static function isSlotConnected<T>(signal:Signal<Dynamic>, slot:Dynamic):Bool {
     return cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(signal, 'data'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(_Runtime.field(signal, 'data'), 'slots'), 'indexOf', cast ([slot] : Array<Dynamic>)), -1.0));
     return cast null;
   }

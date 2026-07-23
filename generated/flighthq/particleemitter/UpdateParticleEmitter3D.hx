@@ -11,7 +11,11 @@ import flighthq.particles.Curve.sampleParticleCurve;
 import flighthq.particles.ParticleEmitterSignals.getParticleEmitterSignals;
 import flighthq.particles.ParticleEmitterState.PARTICLE_VELOCITY_STRIDE;
 import flighthq.particles.ParticleEmitterState.ensureParticleEmitterStateCapacity;
+import flighthq.types.ParticleEmitter3D;
 import flighthq.types.ParticleEmitterCallbacks;
+import flighthq.types.ParticleEmitterConfig;
+import flighthq.types.ParticleEmitterState;
+import flighthq.types.SceneNode;
 
 @:expose("flighthq.particleemitter.UpdateParticleEmitter3D")
 class UpdateParticleEmitter3D {
@@ -19,18 +23,18 @@ class UpdateParticleEmitter3D {
 
   public static final TWO_PI__updateParticleEmitter3D:Dynamic = (HxMath.PI * 2.0);
 
-  public static function isParticleEmitter3DComplete(emitter:Dynamic, state:Dynamic, config:Dynamic):Bool {
+  public static function isParticleEmitter3DComplete(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig):Bool {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(config, 'duration'), 0.0, '<='), function():Dynamic return cast _Runtime.field(config, 'loop')))) { return cast false; }
     return cast _Runtime.andValue(_Runtime.compare(_Runtime.field(state, 'emitterAge'), _Runtime.field(config, 'duration'), '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(emitter, 'data'), 'particleCount'), 0.0));
     return cast null;
   }
 
-  public static function isEmitting__updateParticleEmitter3D(config:Dynamic, emitterAge:Float):Bool {
+  public static function isEmitting__updateParticleEmitter3D(config:ParticleEmitterConfig, emitterAge:Float):Bool {
     return cast _Runtime.orValue(_Runtime.orValue(_Runtime.compare(_Runtime.field(config, 'duration'), 0.0, '<='), function():Dynamic return cast _Runtime.field(config, 'loop')), function():Dynamic return cast _Runtime.compare(emitterAge, _Runtime.field(config, 'duration'), '<'));
     return cast null;
   }
 
-  public static function updateParticleEmitter3D(emitter:Dynamic, state:Dynamic, config:Dynamic, deltaTime:Float, ?callbacks:ParticleEmitterCallbacks):Void {
+  public static function updateParticleEmitter3D(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?callbacks:ParticleEmitterCallbacks):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var worldM:Dynamic = cast _Runtime.UNDEFINED;
     var originM:Dynamic = cast _Runtime.UNDEFINED;
@@ -78,10 +82,10 @@ class UpdateParticleEmitter3D {
     var maxNew:Dynamic = cast _Runtime.UNDEFINED;
     var liveVelocityCount:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(emitter, 'data');
-    worldM = _Runtime.select(_Runtime.field(config, 'worldSpace'), function():Dynamic return cast _Runtime.field(_Runtime.callValue(getNodeWorldMatrix4, cast ([(cast (cast emitter : Dynamic) : Dynamic)] : Array<Dynamic>)), 'm'), function():Dynamic return cast null);
+    worldM = _Runtime.select(_Runtime.field(config, 'worldSpace'), function():Dynamic return cast _Runtime.field(_Runtime.callValue(getNodeWorldMatrix4, cast ([(cast (cast emitter : Dynamic) : SceneNode)] : Array<Dynamic>)), 'm'), function():Dynamic return cast null);
     _Runtime.setField(data, 'worldSpace', !_Runtime.strictEquals(worldM, null));
     if (_Runtime.truthy(_Runtime.compare(deltaTime, 0.0, '<='))) { return; }
-    originM = _Runtime.select(!_Runtime.strictEquals(worldM, null), function():Dynamic return cast worldM, function():Dynamic return cast _Runtime.field(_Runtime.callValue(getNodeLocalMatrix4, cast ([(cast (cast emitter : Dynamic) : Dynamic)] : Array<Dynamic>)), 'm'));
+    originM = _Runtime.select(!_Runtime.strictEquals(worldM, null), function():Dynamic return cast worldM, function():Dynamic return cast _Runtime.field(_Runtime.callValue(getNodeLocalMatrix4, cast ([(cast (cast emitter : Dynamic) : SceneNode)] : Array<Dynamic>)), 'm'));
     trackX = _Runtime.getIndex(originM, 12.0);
     trackY = _Runtime.getIndex(originM, 13.0);
     trackZ = _Runtime.getIndex(originM, 14.0);

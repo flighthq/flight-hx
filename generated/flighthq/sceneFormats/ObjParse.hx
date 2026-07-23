@@ -14,7 +14,10 @@ import flighthq.sceneFormats.Shared.CANONICAL_FLOATS_PER_VERTEX;
 import flighthq.sceneFormats.Shared.CANONICAL_LAYOUT;
 import flighthq.sceneFormats.Shared.createExternalTextureRef;
 import flighthq.types.BlinnPhongMaterial;
+import flighthq.types.Material;
 import flighthq.types.MeshGeometry.MeshSubset;
+import flighthq.types.Scene;
+import flighthq.types.Texture;
 import flighthq.types.Types.MeshKind;
 import flighthq.types._internal._MeshValues.MeshKind;
 
@@ -22,7 +25,7 @@ typedef MaterialBucket__objParse = { var dedup:Dynamic; var indices:Array<Float>
 
 @:expose("flighthq.sceneFormats.ObjParse")
 class ObjParse {
-  public static function createSceneFromObj(source:String, ?materials:ObjMaterialLibrary, ?warnings:Array<String>):Dynamic {
+  public static function createSceneFromObj(source:String, ?materials:ObjMaterialLibrary, ?warnings:Array<String>):Scene {
     var positions:Array<Float> = cast _Runtime.UNDEFINED;
     var normals:Array<Float> = cast _Runtime.UNDEFINED;
     var uvs:Array<Float> = cast _Runtime.UNDEFINED;
@@ -237,11 +240,11 @@ class ObjParse {
     return cast null;
   }
 
-  public static function flushGroup__objParse(buckets:Dynamic, name:Null<String>, scene:Dynamic, library:Null<ObjMaterialLibrary>, resolvedMaterials:Dynamic):Void {
+  public static function flushGroup__objParse(buckets:Dynamic, name:Null<String>, scene:Scene, library:Null<ObjMaterialLibrary>, resolvedMaterials:Dynamic):Void {
     var vertices:Array<Float> = cast _Runtime.UNDEFINED;
     var indices:Array<Float> = cast _Runtime.UNDEFINED;
     var subsets:Array<MeshSubset> = cast _Runtime.UNDEFINED;
-    var materials:Array<Null<Dynamic>> = cast _Runtime.UNDEFINED;
+    var materials:Array<Null<Material>> = cast _Runtime.UNDEFINED;
     var geometry:Dynamic = cast _Runtime.UNDEFINED;
     vertices = cast ([] : Array<Dynamic>);
     indices = cast ([] : Array<Dynamic>);
@@ -283,7 +286,7 @@ class ObjParse {
     return cast null;
   }
 
-  public static function externalObjTexture__objParse(uri:Null<String>):Null<Dynamic> {
+  public static function externalObjTexture__objParse(uri:Null<String>):Null<Texture> {
     return cast _Runtime.select(_Runtime.strictEquals(uri, null), function():Dynamic return cast null, function():Dynamic return cast _Runtime.callValue(createExternalTextureRef, cast ([uri] : Array<Dynamic>)));
     return cast null;
   }
@@ -306,7 +309,7 @@ class ObjParse {
     return cast null;
   }
 
-  public static function resolveObjMaterial__objParse(name:String, library:Null<ObjMaterialLibrary>, cache:Dynamic):Null<Dynamic> {
+  public static function resolveObjMaterial__objParse(name:String, library:Null<ObjMaterialLibrary>, cache:Dynamic):Null<Material> {
     var cached:Dynamic = cast _Runtime.UNDEFINED;
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     var material:Dynamic = cast _Runtime.UNDEFINED;
@@ -314,7 +317,7 @@ class ObjParse {
     cached = _Runtime.callProperty(cache, 'get', cast ([name] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
     parsed = _Runtime.callOptionalProperty(_Runtime.optionalField(library, 'materials'), 'get', cast ([name] : Array<Dynamic>));
-    material = _Runtime.select(!_Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast (cast (cast _Runtime.callValue(ObjParse.objMaterialToBlinnPhong__objParse, cast ([parsed] : Array<Dynamic>)) : Dynamic) : Dynamic), function():Dynamic return cast null);
+    material = _Runtime.select(!_Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast (cast (cast _Runtime.callValue(ObjParse.objMaterialToBlinnPhong__objParse, cast ([parsed] : Array<Dynamic>)) : Dynamic) : Material), function():Dynamic return cast null);
     if (_Runtime.truthy(!_Runtime.strictEquals(material, null))) { _Runtime.setField(material, 'name', name); }
     _Runtime.callProperty(cache, 'set', cast ([name, material] : Array<Dynamic>));
     return cast material;

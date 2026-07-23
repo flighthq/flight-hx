@@ -8,4 +8,4 @@ import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Rectangle = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var height:Float; var width:Float; var x:Float; var y:Float; };
 
-typedef RectangleLike = EntityWithoutRuntime<Dynamic>;
+typedef RectangleLike = EntityWithoutRuntime<flighthq.types.Rectangle>;

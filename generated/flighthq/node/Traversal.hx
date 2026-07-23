@@ -5,20 +5,21 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.node.Hierarchy.getNodeParent;
 import flighthq.node.Node.getNodeRuntime;
+import flighthq.types.Node;
 import flighthq.types.Node.NodeOf;
 import flighthq.types.Node.NodeTraits;
 import flighthq.types.NodeDescendantVisitor;
 
 @:expose("flighthq.node.Traversal")
 class Traversal {
-  public static function findNode<Traits>(source:Dynamic, predicate:Dynamic):Null<NodeOf<Traits>> {
+  public static function findNode<Traits>(source:Node<Traits>, predicate:Dynamic):Null<NodeOf<Traits>> {
     var children:Dynamic = cast _Runtime.UNDEFINED;
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
     if (_Runtime.truthy(_Runtime.strictEquals(children, null))) { return cast null; }
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
-        var child:Dynamic = (cast _Runtime.getIndex(children, i) : Dynamic);
+        var child:Dynamic = (cast _Runtime.getIndex(children, i) : Node<Traits>);
         if (_Runtime.truthy(_Runtime.callValue(predicate, cast ([child] : Array<Dynamic>)))) { return cast (cast child : NodeOf<Traits>); }
         var found:Dynamic = _Runtime.callValue(findNode, cast ([child, predicate] : Array<Dynamic>));
         if (_Runtime.truthy(!_Runtime.strictEquals(found, null))) { return cast found; }
@@ -29,35 +30,35 @@ class Traversal {
     return cast null;
   }
 
-  public static function findNodeByName<Traits>(source:Dynamic, name:String):Null<NodeOf<Traits>> {
+  public static function findNodeByName<Traits>(source:Node<Traits>, name:String):Null<NodeOf<Traits>> {
     return cast _Runtime.callValue(findNode, cast ([source, function(node:Dynamic) return _Runtime.strictEquals(_Runtime.field(node, 'name'), name)] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function forEachNodeAncestor<Traits>(source:Dynamic, callback:Dynamic):Void {
+  public static function forEachNodeAncestor<Traits>(source:Node<Traits>, callback:Dynamic):Void {
     var current:Dynamic = cast _Runtime.UNDEFINED;
-    current = _Runtime.callValue(getNodeParent, cast ([(cast source : Dynamic)] : Array<Dynamic>));
+    current = _Runtime.callValue(getNodeParent, cast ([(cast source : Node<Traits>)] : Array<Dynamic>));
     while (_Runtime.truthy(!_Runtime.strictEquals(current, null))) {
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(callback, cast ([current] : Array<Dynamic>))))) { return; }
       (current = cast (_Runtime.callValue(getNodeParent, cast ([current] : Array<Dynamic>)) : Dynamic));
     }
   }
 
-  public static function forEachNodeDescendant<Traits>(source:Dynamic, callback:Dynamic):Void {
+  public static function forEachNodeDescendant<Traits>(source:Node<Traits>, callback:Dynamic):Void {
     var children:Dynamic = cast _Runtime.UNDEFINED;
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
     if (_Runtime.truthy(_Runtime.strictEquals(children, null))) { return; }
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
-        _Runtime.callValue(callback, cast ([(cast _Runtime.getIndex(children, i) : Dynamic)] : Array<Dynamic>));
-        _Runtime.callValue(forEachNodeDescendant, cast ([(cast _Runtime.getIndex(children, i) : Dynamic), callback] : Array<Dynamic>));
+        _Runtime.callValue(callback, cast ([(cast _Runtime.getIndex(children, i) : Node<Traits>)] : Array<Dynamic>));
+        _Runtime.callValue(forEachNodeDescendant, cast ([(cast _Runtime.getIndex(children, i) : Node<Traits>), callback] : Array<Dynamic>));
         i++;
       }
     }
   }
 
-  public static function getNodeChildren<Traits>(source:Dynamic):Array<NodeOf<Traits>> {
+  public static function getNodeChildren<Traits>(source:Node<Traits>):Array<NodeOf<Traits>> {
     var children:Dynamic = cast _Runtime.UNDEFINED;
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
     if (_Runtime.truthy(_Runtime.strictEquals(children, null))) { return cast (cast Traversal._emptyChildren__traversal : Array<NodeOf<Traits>>); }
@@ -65,11 +66,11 @@ class Traversal {
     return cast null;
   }
 
-  public static function getNodeDepth<Traits>(source:Dynamic):Float {
+  public static function getNodeDepth<Traits>(source:Node<Traits>):Float {
     var depth:Dynamic = cast _Runtime.UNDEFINED;
     var current:Dynamic = cast _Runtime.UNDEFINED;
     depth = 0.0;
-    current = _Runtime.callValue(getNodeParent, cast ([(cast source : Dynamic)] : Array<Dynamic>));
+    current = _Runtime.callValue(getNodeParent, cast ([(cast source : Node<Traits>)] : Array<Dynamic>));
     while (_Runtime.truthy(!_Runtime.strictEquals(current, null))) {
       depth++;
       (current = cast (_Runtime.callValue(getNodeParent, cast ([current] : Array<Dynamic>)) : Dynamic));
@@ -78,42 +79,42 @@ class Traversal {
     return cast null;
   }
 
-  public static function getNodeNextSibling<Traits>(source:Dynamic):Null<NodeOf<Traits>> {
+  public static function getNodeNextSibling<Traits>(source:Node<Traits>):Null<NodeOf<Traits>> {
     var parent:Dynamic = cast _Runtime.UNDEFINED;
     var siblings:Dynamic = cast _Runtime.UNDEFINED;
     var idx:Dynamic = cast _Runtime.UNDEFINED;
-    parent = _Runtime.callValue(getNodeParent, cast ([(cast source : Dynamic)] : Array<Dynamic>));
+    parent = _Runtime.callValue(getNodeParent, cast ([(cast source : Node<Traits>)] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(parent, null))) { return cast null; }
     siblings = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([parent] : Array<Dynamic>)), 'children');
     if (_Runtime.truthy(_Runtime.strictEquals(siblings, null))) { return cast null; }
-    idx = _Runtime.callProperty(siblings, 'indexOf', cast ([(cast source : Dynamic)] : Array<Dynamic>));
+    idx = _Runtime.callProperty(siblings, 'indexOf', cast ([(cast source : Node<Traits>)] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(idx, -1.0), function():Dynamic return cast _Runtime.strictEquals(idx, (_Runtime.field(siblings, 'length') - 1.0))))) { return cast null; }
     return cast (cast _Runtime.getIndex(siblings, (idx + 1.0)) : NodeOf<Traits>);
     return cast null;
   }
 
-  public static function getNodePreviousSibling<Traits>(source:Dynamic):Null<NodeOf<Traits>> {
+  public static function getNodePreviousSibling<Traits>(source:Node<Traits>):Null<NodeOf<Traits>> {
     var parent:Dynamic = cast _Runtime.UNDEFINED;
     var siblings:Dynamic = cast _Runtime.UNDEFINED;
     var idx:Dynamic = cast _Runtime.UNDEFINED;
-    parent = _Runtime.callValue(getNodeParent, cast ([(cast source : Dynamic)] : Array<Dynamic>));
+    parent = _Runtime.callValue(getNodeParent, cast ([(cast source : Node<Traits>)] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(parent, null))) { return cast null; }
     siblings = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([parent] : Array<Dynamic>)), 'children');
     if (_Runtime.truthy(_Runtime.strictEquals(siblings, null))) { return cast null; }
-    idx = _Runtime.callProperty(siblings, 'indexOf', cast ([(cast source : Dynamic)] : Array<Dynamic>));
+    idx = _Runtime.callProperty(siblings, 'indexOf', cast ([(cast source : Node<Traits>)] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(idx, 0.0, '<='))) { return cast null; }
     return cast (cast _Runtime.getIndex(siblings, (idx - 1.0)) : NodeOf<Traits>);
     return cast null;
   }
 
-  public static function walkNodeDescendants<Traits>(source:Dynamic, visit:NodeDescendantVisitor<Traits>):Bool {
+  public static function walkNodeDescendants<Traits>(source:Node<Traits>, visit:NodeDescendantVisitor<Traits>):Bool {
     var children:Dynamic = cast _Runtime.UNDEFINED;
     children = _Runtime.field(_Runtime.callValue(getNodeRuntime, cast ([source] : Array<Dynamic>)), 'children');
     if (_Runtime.truthy(_Runtime.strictEquals(children, null))) { return cast true; }
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(children, 'length'), '<'))) {
-        var child:Dynamic = (cast _Runtime.getIndex(children, i) : Dynamic);
+        var child:Dynamic = (cast _Runtime.getIndex(children, i) : Node<Traits>);
         if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(visit, cast ([child] : Array<Dynamic>))))) { return cast false; }
         if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(walkNodeDescendants, cast ([child, visit] : Array<Dynamic>))))) { return cast false; }
         i++;

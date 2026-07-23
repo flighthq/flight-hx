@@ -5,11 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
+import flighthq.types.CrtEffect;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderTarget;
 
 @:expose("flighthq.effectsGl.GlCrtEffect")
 class GlCrtEffect {
-  public static function applyCrtEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
+  public static function applyCrtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CrtEffect):Void {
     var curvature:Dynamic = cast _Runtime.UNDEFINED;
     var scanlineIntensity:Dynamic = cast _Runtime.UNDEFINED;
     var vignette:Dynamic = cast _Runtime.UNDEFINED;
@@ -30,7 +33,7 @@ class GlCrtEffect {
   }
 
   public static final defaultGlCrtEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyCrtEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(applyCrtEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : CrtEffect)] : Array<Dynamic>));
   };
 
   public static final CRT_FRAGMENT_SRC__glCrtEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_curvature;\nuniform float u_scanlineIntensity;\nuniform float u_vignette;\nuniform float u_aberration;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvec2 barrel(vec2 uv) {\n  vec2 c = uv * 2.0 - 1.0;\n  c += c * u_curvature * dot(c, c);\n  return c * 0.5 + 0.5;\n}\nvoid main() {\n  vec2 uv = barrel(v_texCoord);\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {\n    o_color = vec4(0.0, 0.0, 0.0, 1.0);\n    return;\n  }\n  vec2 off = vec2(u_aberration, 0.0);\n  float r = texture(u_texture0, uv + off).r;\n  float g = texture(u_texture0, uv).g;\n  float b = texture(u_texture0, uv - off).b;\n  float a = texture(u_texture0, uv).a;\n  vec3 col = vec3(r, g, b);\n  float line = sin(uv.y * u_resolution.y * 3.14159265) * 0.5 + 0.5;\n  col *= 1.0 - u_scanlineIntensity * (1.0 - line);\n  vec2 vc = uv * 2.0 - 1.0;\n  col *= 1.0 - u_vignette * dot(vc, vc);\n  o_color = vec4(col, a);\n}';

@@ -3,35 +3,36 @@ package flighthq.textlayout;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.TextFormat;
 
 @:expose("flighthq.textlayout.TextFormat")
 class TextFormat {
   public static final DEFAULT_SIZE__textFormat:Dynamic = 12.0;
 
-  public static function getTextFormatAscent(format:Dynamic):Float {
+  public static function getTextFormatAscent(format:flighthq.types.TextFormat):Float {
     return cast _Runtime.coalesce(_Runtime.field(format, 'size'), function():Dynamic return cast TextFormat.DEFAULT_SIZE__textFormat);
     return cast null;
   }
 
-  public static function getTextFormatDescent(format:Dynamic):Float {
+  public static function getTextFormatDescent(format:flighthq.types.TextFormat):Float {
     return cast (_Runtime.coalesce(_Runtime.field(format, 'size'), function():Dynamic return cast TextFormat.DEFAULT_SIZE__textFormat) * 0.185);
     return cast null;
   }
 
-  public static function getTextFormatHeight(format:Dynamic):Float {
+  public static function getTextFormatHeight(format:flighthq.types.TextFormat):Float {
     return cast ((_Runtime.callValue(getTextFormatAscent, cast ([format] : Array<Dynamic>)) + _Runtime.callValue(getTextFormatDescent, cast ([format] : Array<Dynamic>))) + _Runtime.callValue(getTextFormatLeading, cast ([format] : Array<Dynamic>)));
     return cast null;
   }
 
-  public static function getTextFormatLeading(format:Dynamic):Float {
+  public static function getTextFormatLeading(format:flighthq.types.TextFormat):Float {
     return cast _Runtime.coalesce(_Runtime.field(format, 'leading'), function():Dynamic return cast 0.0);
     return cast null;
   }
 
-  public static function mergeTextFormat(base:Dynamic, override_:Dynamic):Dynamic {
-    var result:Dynamic = cast _Runtime.UNDEFINED;
+  public static function mergeTextFormat(base:flighthq.types.TextFormat, override_:flighthq.types.TextFormat):flighthq.types.TextFormat {
+    var result:flighthq.types.TextFormat = cast _Runtime.UNDEFINED;
     result = _Runtime.mergeObjects([base]);
-    for (key in _Runtime.iterable((cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([override_] : Array<Dynamic>)) : Array<Dynamic>))) {
+    for (key in _Runtime.iterable((cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([override_] : Array<Dynamic>)) : Array<flighthq.types.TextFormat>))) {
       var value:Dynamic = _Runtime.getIndex(override_, key);
       if (_Runtime.truthy(!_Runtime.looseEquals(value, null))) {
         _Runtime.setIndex((cast result : Dynamic), key, value);

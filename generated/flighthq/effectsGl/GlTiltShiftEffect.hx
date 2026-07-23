@@ -6,10 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderTarget;
+import flighthq.types.TiltShiftEffect;
 
 @:expose("flighthq.effectsGl.GlTiltShiftEffect")
 class GlTiltShiftEffect {
-  public static function applyTiltShiftEffectToGl(state:Dynamic, source:Dynamic, dest:Dynamic, effect:Dynamic):Void {
+  public static function applyTiltShiftEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:TiltShiftEffect):Void {
     var center:Dynamic = cast _Runtime.UNDEFINED;
     var width:Dynamic = cast _Runtime.UNDEFINED;
     var blur:Dynamic = cast _Runtime.UNDEFINED;
@@ -27,7 +30,7 @@ class GlTiltShiftEffect {
   }
 
   public static final defaultGlTiltShiftEffectRunner:GlRenderEffectRunner = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyTiltShiftEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(applyTiltShiftEffectToGl, cast ([_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : TiltShiftEffect)] : Array<Dynamic>));
   };
 
   public static final TILT_SHIFT_FRAGMENT_SRC__glTiltShiftEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_center;\nuniform float u_width;\nuniform float u_blur;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  float dist = abs(v_texCoord.y - u_center);\n  float edge = u_width * 0.5;\n  float amount = smoothstep(edge, edge + u_width, dist);\n  float radius = amount * u_blur;\n  vec4 sum = vec4(0.0);\n  float total = 0.0;\n  for (int i = -3; i <= 3; i++) {\n    vec2 offset = vec2(0.0, float(i)) * radius * texel;\n    sum += texture(u_texture0, v_texCoord + offset);\n    total += 1.0;\n  }\n  o_color = sum / total;\n}';

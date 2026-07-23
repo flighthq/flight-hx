@@ -3,17 +3,19 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Cursor.CursorBackend;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.Node.NodeTraits;
 import flighthq.types.PointerEventData.PointerType;
+import flighthq.types.Spatial.SpatialIndex;
 
 typedef InteractionSignalName = InteractionSignals;
 
 typedef AnyInteractionSignalSlot = Dynamic;
 
-typedef InteractionManager<N> = { var cursorBackend:Null<Dynamic>; var doubleClickDelay:Float; var enabled:Bool; var pointerCaptures:Dynamic; var pointerStates:Dynamic; var precise:Bool; var root:Dynamic; var spatialIndex:Null<Dynamic>; var signalSubscriberCounts:Dynamic; var trackedSignalSlots:Dynamic; var trackedSubscribersOnly:Bool; };
+typedef InteractionManager<N> = { var cursorBackend:Null<CursorBackend>; var doubleClickDelay:Float; var enabled:Bool; var pointerCaptures:Dynamic; var pointerStates:Dynamic; var precise:Bool; var root:Dynamic; var spatialIndex:Null<SpatialIndex>; var signalSubscriberCounts:Dynamic; var trackedSignalSlots:Dynamic; var trackedSubscribersOnly:Bool; };
 
-typedef InteractionManagerOptions = { @:optional var cursorBackend:Null<Dynamic>; @:optional var enabled:Bool; @:optional var precise:Bool; @:optional var spatialIndex:Null<Dynamic>; @:optional var trackedSubscribersOnly:Bool; };
+typedef InteractionManagerOptions = { @:optional var cursorBackend:Null<CursorBackend>; @:optional var enabled:Bool; @:optional var precise:Bool; @:optional var spatialIndex:Null<SpatialIndex>; @:optional var trackedSubscribersOnly:Bool; };
 
 typedef InteractionInputSource = Dynamic;
 

@@ -3,10 +3,11 @@ package flighthq.displayobjectDom;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.DomRenderState;
 
 @:expose("flighthq.displayobjectDom.DomBackground")
 class DomBackground {
-  public static function renderDomBackground(state:Dynamic):Void {
+  public static function renderDomBackground(state:DomRenderState):Void {
     if (_Runtime.truthy(!_Runtime.strictEquals((Std.int(_Runtime.field(state, 'backgroundColor')) & Std.int(255.0)), 0.0))) {
       _Runtime.setField(_Runtime.field(_Runtime.field(state, 'element'), 'style'), 'backgroundColor', _Runtime.field(state, 'backgroundColorString'));
     } else {

@@ -8,8 +8,11 @@ import flighthq.displayobjectDom.DomStyle.applyDomStyle;
 import flighthq.displayobjectDom.DomStyle.prepareDomElement;
 import flighthq.displayobjectDom.DomStyle.setDomRendererElement;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Bitmap;
 import flighthq.types.DisplayObjectRenderer;
+import flighthq.types.DomRenderState;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 
@@ -17,12 +20,12 @@ typedef DomBitmapData__domBitmap = Dynamic;
 
 @:expose("flighthq.displayobjectDom.DomBitmap")
 class DomBitmap {
-  public static function createDomBitmapData__domBitmap(_state:Dynamic, _source:Renderable):DomBitmapData__domBitmap {
+  public static function createDomBitmapData__domBitmap(_state:RenderState, _source:Renderable):DomBitmapData__domBitmap {
     return cast _Runtime.callValue(createEntity, cast ([{ canvas: null, context: null, image: null }] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function drawDomBitmap(state:Dynamic, renderProxy:RenderProxy2D):Void {
+  public static function drawDomBitmap(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var imageSource:Dynamic = cast _Runtime.UNDEFINED;
@@ -30,7 +33,7 @@ class DomBitmap {
     var sr:Dynamic = cast _Runtime.UNDEFINED;
     data = (cast _Runtime.field(renderProxy, 'rendererData') : Null<DomBitmapData__domBitmap>);
     if (_Runtime.truthy(_Runtime.strictEquals(data, null))) { return; }
-    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
+    source = (cast _Runtime.field(renderProxy, 'source') : Bitmap);
     imageSource = _Runtime.field(_Runtime.field(source, 'data'), 'image');
     if (_Runtime.truthy(_Runtime.strictEquals(imageSource, null))) { return; }
     src = _Runtime.callValue(resolveDomImageSource, cast ([state, imageSource] : Array<Dynamic>));
@@ -43,7 +46,7 @@ class DomBitmap {
     }
   }
 
-  public static function renderBitmapAsImage__domBitmap(state:Dynamic, renderProxy:RenderProxy2D, data:DomBitmapData__domBitmap, src:Dynamic):Void {
+  public static function renderBitmapAsImage__domBitmap(state:DomRenderState, renderProxy:RenderProxy2D, data:DomBitmapData__domBitmap, src:Dynamic):Void {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(data, 'canvas'), null))) {
       _Runtime.setField(data, 'canvas', null);
       _Runtime.setField(data, 'context', null);
@@ -60,7 +63,7 @@ class DomBitmap {
     _Runtime.callValue(setDomRendererElement, cast ([state, _Runtime.field(data, 'image')] : Array<Dynamic>));
   }
 
-  public static function renderBitmapAsCanvas__domBitmap(state:Dynamic, renderProxy:RenderProxy2D, data:DomBitmapData__domBitmap, width:Float, height:Float, src:Dynamic, ?sourceRectangle:Null<{ var x:Float; var y:Float; var width:Float; var height:Float; }>):Void {
+  public static function renderBitmapAsCanvas__domBitmap(state:DomRenderState, renderProxy:RenderProxy2D, data:DomBitmapData__domBitmap, width:Float, height:Float, src:Dynamic, ?sourceRectangle:Null<{ var x:Float; var y:Float; var width:Float; var height:Float; }>):Void {
     if (sourceRectangle == null) sourceRectangle = cast (null : Dynamic);
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var smoothing:Dynamic = cast _Runtime.UNDEFINED;
@@ -76,7 +79,7 @@ class DomBitmap {
       _Runtime.setField(data, 'context', _Runtime.callProperty(_Runtime.field(data, 'canvas'), 'getContext', cast (['2d'] : Array<Dynamic>)));
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'canvas')] : Array<Dynamic>));
     }
-    source = (cast _Runtime.field(renderProxy, 'source') : Dynamic);
+    source = (cast _Runtime.field(renderProxy, 'source') : Bitmap);
     smoothing = _Runtime.andValue(_Runtime.field(_Runtime.field(source, 'data'), 'smoothing'), function():Dynamic return cast _Runtime.field(state, 'allowSmoothing'));
     drawWidth = _Runtime.select(!_Runtime.strictEquals(sourceRectangle, null), function():Dynamic return cast _Runtime.field(sourceRectangle, 'width'), function():Dynamic return cast width);
     drawHeight = _Runtime.select(!_Runtime.strictEquals(sourceRectangle, null), function():Dynamic return cast _Runtime.field(sourceRectangle, 'height'), function():Dynamic return cast height);

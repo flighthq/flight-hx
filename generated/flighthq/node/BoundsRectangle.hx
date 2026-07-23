@@ -23,6 +23,7 @@ import flighthq.types.HasBoundsRectangle.HasBoundsRectangleRuntime;
 import flighthq.types.HasBoundsRectangle.Spatial2DNode;
 import flighthq.types.HasTransform2D.HasTransform2DRuntime;
 import flighthq.types.Node.NodeRuntime;
+import flighthq.types.Rectangle;
 import flighthq.types.Rectangle.RectangleLike;
 
 @:expose("flighthq.node.BoundsRectangle")
@@ -91,13 +92,13 @@ class BoundsRectangle {
     return cast null;
   }
 
-  public static function getNodeLocalBoundsRectangle<Traits>(target:BoundsNode<Traits>):Dynamic {
+  public static function getNodeLocalBoundsRectangle<Traits>(target:BoundsNode<Traits>):Rectangle {
     _Runtime.callValue(ensureNodeLocalBoundsRectangle, cast ([target] : Array<Dynamic>));
     return cast _Runtime.field((cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : HasBoundsRectangleRuntime), 'localBoundsRectangle');
     return cast null;
   }
 
-  public static function getNodeParentBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Dynamic {
+  public static function getNodeParentBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Rectangle {
     _Runtime.callValue(ensureNodeParentBoundsRectangle, cast ([target] : Array<Dynamic>));
     return cast _Runtime.field((cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : HasBoundsRectangleRuntime), 'boundsRectangle');
     return cast null;
@@ -109,7 +110,7 @@ class BoundsRectangle {
     return cast null;
   }
 
-  public static function getNodeWorldBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Dynamic {
+  public static function getNodeWorldBoundsRectangle<Traits>(target:Spatial2DNode<Traits>):Rectangle {
     _Runtime.callValue(ensureNodeWorldBoundsRectangle, cast ([target] : Array<Dynamic>));
     return cast _Runtime.field((cast _Runtime.callValue(getEntityRuntime, cast ([target] : Array<Dynamic>)) : HasBoundsRectangleRuntime), 'worldBoundsRectangle');
     return cast null;

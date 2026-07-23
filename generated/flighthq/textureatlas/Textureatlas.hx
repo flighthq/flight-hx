@@ -6,103 +6,106 @@ import flighthq._internal._Runtime;
 import flighthq.textureatlas.TextureAtlas as Facade_Textureatlas_flighthq_textureatlas_TextureAtlas;
 import flighthq.textureatlas.TextureAtlasFrom as Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom;
 import flighthq.textureatlas.TextureAtlasRegion as Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion;
+import flighthq.types.ImageResource;
 import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.TextureAtlas;
+import flighthq.types.TextureAtlasRegion;
 import flighthq.types.Vector2.Vector2Like;
 
 @:expose("flighthq.textureatlas.Textureatlas")
 class Textureatlas {
-  public static function addTextureAtlasRegion(target:Dynamic, x:Float, y:Float, width:Float, height:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
+  public static function addTextureAtlasRegion(target:TextureAtlas, x:Float, y:Float, width:Float, height:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
     _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.addTextureAtlasRegion, cast ([target, x, y, width, height, pivotX, pivotY, name] : Array<Dynamic>));
   }
 
-  public static function addTextureAtlasRegionRectangle(target:Dynamic, rect:RectangleLike, ?pivot:Vector2Like, ?name:String):Void {
+  public static function addTextureAtlasRegionRectangle(target:TextureAtlas, rect:RectangleLike, ?pivot:Vector2Like, ?name:String):Void {
     _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.addTextureAtlasRegionRectangle, cast ([target, rect, pivot, name] : Array<Dynamic>));
   }
 
-  public static function addTextureAtlasRegionRectangleXY(target:Dynamic, ax:Float, ay:Float, bx:Float, by:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
+  public static function addTextureAtlasRegionRectangleXY(target:TextureAtlas, ax:Float, ay:Float, bx:Float, by:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
     _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.addTextureAtlasRegionRectangleXY, cast ([target, ax, ay, bx, by, pivotX, pivotY, name] : Array<Dynamic>));
   }
 
-  public static function addTextureAtlasRegionVector2(target:Dynamic, a:Vector2Like, b:Vector2Like, ?pivot:Vector2Like, ?name:String):Void {
+  public static function addTextureAtlasRegionVector2(target:TextureAtlas, a:Vector2Like, b:Vector2Like, ?pivot:Vector2Like, ?name:String):Void {
     _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.addTextureAtlasRegionVector2, cast ([target, a, b, pivot, name] : Array<Dynamic>));
   }
 
-  public static function createTextureAtlas(?obj:Dynamic):Dynamic {
+  public static function createTextureAtlas(?obj:Dynamic):TextureAtlas {
     return cast _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlas.createTextureAtlas, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTextureAtlasFromCanvas(canvas:Dynamic):Dynamic {
+  public static function createTextureAtlasFromCanvas(canvas:Dynamic):TextureAtlas {
     return cast _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.createTextureAtlasFromCanvas, cast ([canvas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTextureAtlasFromImageBitmap(bitmap:Dynamic):Dynamic {
+  public static function createTextureAtlasFromImageBitmap(bitmap:Dynamic):TextureAtlas {
     return cast _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.createTextureAtlasFromImageBitmap, cast ([bitmap] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTextureAtlasFromImageElement(img:Dynamic):Dynamic {
+  public static function createTextureAtlasFromImageElement(img:Dynamic):TextureAtlas {
     return cast _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.createTextureAtlasFromImageElement, cast ([img] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTextureAtlasFromImageResource(resource:Dynamic):Dynamic {
+  public static function createTextureAtlasFromImageResource(resource:ImageResource):TextureAtlas {
     return cast _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.createTextureAtlasFromImageResource, cast ([resource] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createTextureAtlasRegion(?obj:Dynamic):Dynamic {
+  public static function createTextureAtlasRegion(?obj:Dynamic):TextureAtlasRegion {
     return cast _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.createTextureAtlasRegion, cast ([obj] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextureAtlasByteSize(atlas:Dynamic):Float {
+  public static function getTextureAtlasByteSize(atlas:TextureAtlas):Float {
     return cast _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlas.getTextureAtlasByteSize, cast ([atlas] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextureAtlasRegionById(atlas:Dynamic, id:Float):Null<Dynamic> {
+  public static function getTextureAtlasRegionById(atlas:TextureAtlas, id:Float):Null<TextureAtlasRegion> {
     return cast _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionById, cast ([atlas, id] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextureAtlasRegionByName(atlas:Dynamic, name:String):Null<Dynamic> {
+  public static function getTextureAtlasRegionByName(atlas:TextureAtlas, name:String):Null<TextureAtlasRegion> {
     return cast _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionByName, cast ([atlas, name] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextureAtlasRegionSequence(atlas:Dynamic, prefix:String):Array<Dynamic> {
+  public static function getTextureAtlasRegionSequence(atlas:TextureAtlas, prefix:String):Array<TextureAtlasRegion> {
     return cast _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionSequence, cast ([atlas, prefix] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getTextureAtlasRegionUv(region:Dynamic, imageWidth:Float, imageHeight:Float, out:RectangleLike):RectangleLike {
+  public static function getTextureAtlasRegionUv(region:TextureAtlasRegion, imageWidth:Float, imageHeight:Float, out:RectangleLike):RectangleLike {
     return cast _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.getTextureAtlasRegionUv, cast ([region, imageWidth, imageHeight, out] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBase64(base64:String, mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
+  public static function loadTextureAtlasFromBase64(base64:String, mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
     return cast _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.loadTextureAtlasFromBase64, cast ([base64, mimeType, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBlob(blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
+  public static function loadTextureAtlasFromBlob(blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
     return cast _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.loadTextureAtlasFromBlob, cast ([blob, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBytes(bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
+  public static function loadTextureAtlasFromBytes(bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
     return cast _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.loadTextureAtlasFromBytes, cast ([bytes, mimeType, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadTextureAtlasFromUrl(url:String, ?crossOrigin:String, ?signal:Dynamic):flighthq._internal._Promise<Dynamic> {
+  public static function loadTextureAtlasFromUrl(url:String, ?crossOrigin:String, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
     return cast _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.loadTextureAtlasFromUrl, cast ([url, crossOrigin, signal] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function setTextureAtlasRegion(out:Dynamic, x:Float, ?y:Float, ?width:Float, ?height:Float, ?pivotX:Float, ?pivotY:Float):Void {
+  public static function setTextureAtlasRegion(out:TextureAtlasRegion, x:Float, ?y:Float, ?width:Float, ?height:Float, ?pivotX:Float, ?pivotY:Float):Void {
     _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.setTextureAtlasRegion, cast ([out, x, y, width, height, pivotX, pivotY] : Array<Dynamic>));
   }
 }

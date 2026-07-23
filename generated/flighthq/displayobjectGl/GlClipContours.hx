@@ -6,6 +6,8 @@ import flighthq._internal._Runtime;
 import flighthq.displayobjectGl.GlSpriteBatch.flushGlSpriteBatch;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
+import flighthq.types.GlRenderState;
+import flighthq.types.Matrix;
 import flighthq.types.ShapeCommand.PathWinding;
 
 typedef ClipProgram__glClipContours = { var program:Dynamic; var buffer:Dynamic; var positionLocation:Float; var worldMatrixLocation:Null<Dynamic>; var projectionLocation:Null<Dynamic>; };
@@ -16,7 +18,7 @@ class GlClipContours {
 
   public static final FRAGMENT_SOURCE__glClipContours:Dynamic = '\nprecision mediump float;\nvoid main() { gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0); }\n';
 
-  public static function popGlClipContours(state:Dynamic):Void {
+  public static function popGlClipContours(state:GlRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var nextDepth:Dynamic = cast _Runtime.UNDEFINED;
@@ -31,7 +33,7 @@ class GlClipContours {
     }
   }
 
-  public static function pushGlClipContours(state:Dynamic, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Dynamic):Void {
+  public static function pushGlClipContours(state:GlRenderState, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Matrix):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var depth:Dynamic = cast _Runtime.UNDEFINED;
@@ -75,12 +77,12 @@ class GlClipContours {
 
   public static final clipPrograms__glClipContours:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
 
-  public static function clipProgramFor__glClipContours(state:Dynamic):ClipProgram__glClipContours {
+  public static function clipProgramFor__glClipContours(state:GlRenderState):ClipProgram__glClipContours {
     return cast _Runtime.callProperty(GlClipContours.clipPrograms__glClipContours, 'get', cast ([_Runtime.field(state, 'gl')] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function ensureClipProgram__glClipContours(state:Dynamic):Void {
+  public static function ensureClipProgram__glClipContours(state:GlRenderState):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
@@ -94,14 +96,14 @@ class GlClipContours {
     return cast null;
   }
 
-  public static function uploadClipUniforms__glClipContours(state:Dynamic, program:ClipProgram__glClipContours, m:Dynamic):Void {
+  public static function uploadClipUniforms__glClipContours(state:GlRenderState, program:ClipProgram__glClipContours, m:Matrix):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     _Runtime.callProperty(gl, 'uniformMatrix3fv', cast ([_Runtime.field(program, 'worldMatrixLocation'), false, cast ([_Runtime.field(m, 'a'), _Runtime.field(m, 'b'), 0.0, _Runtime.field(m, 'c'), _Runtime.field(m, 'd'), 0.0, _Runtime.field(m, 'tx'), _Runtime.field(m, 'ty'), 1.0] : Array<Dynamic>)] : Array<Dynamic>));
     _Runtime.callProperty(gl, 'uniformMatrix3fv', cast ([_Runtime.field(program, 'projectionLocation'), false, _Runtime.callValue(GlClipContours.getProjectionMat3__glClipContours, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
-  public static function drawClipContours__glClipContours(state:Dynamic, program:ClipProgram__glClipContours, contours:Array<Array<Float>>):Void {
+  public static function drawClipContours__glClipContours(state:GlRenderState, program:ClipProgram__glClipContours, contours:Array<Array<Float>>):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(program, 'buffer')] : Array<Dynamic>));
@@ -119,7 +121,7 @@ class GlClipContours {
     }
   }
 
-  public static function getProjectionMat3__glClipContours(state:Dynamic):flighthq._internal._Float32Array {
+  public static function getProjectionMat3__glClipContours(state:GlRenderState):flighthq._internal._Float32Array {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;

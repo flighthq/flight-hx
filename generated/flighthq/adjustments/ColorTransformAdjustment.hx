@@ -3,13 +3,15 @@ package flighthq.adjustments;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.ColorTransform;
+import flighthq.types.ColorTransformAdjustment;
 
 @:expose("flighthq.adjustments.ColorTransformAdjustment")
 class ColorTransformAdjustment {
-  public static function createColorTransformAdjustment(colorTransform:Dynamic):Dynamic {
+  public static function createColorTransformAdjustment(colorTransform:ColorTransform):flighthq.types.ColorTransformAdjustment {
     var colorMatrix:Dynamic = cast _Runtime.UNDEFINED;
     colorMatrix = cast ([_Runtime.field(colorTransform, 'redMultiplier'), 0.0, 0.0, 0.0, _Runtime.field(colorTransform, 'redOffset'), 0.0, _Runtime.field(colorTransform, 'greenMultiplier'), 0.0, 0.0, _Runtime.field(colorTransform, 'greenOffset'), 0.0, 0.0, _Runtime.field(colorTransform, 'blueMultiplier'), 0.0, _Runtime.field(colorTransform, 'blueOffset'), 0.0, 0.0, 0.0, _Runtime.field(colorTransform, 'alphaMultiplier'), _Runtime.field(colorTransform, 'alphaOffset')] : Array<Dynamic>);
-    return cast { kind: 'ColorTransformAdjustment', colorTransform: (cast colorTransform : Dynamic), colorMatrix: colorMatrix };
+    return cast { kind: 'ColorTransformAdjustment', colorTransform: (cast colorTransform : ColorTransform), colorMatrix: colorMatrix };
     return cast null;
   }
 }

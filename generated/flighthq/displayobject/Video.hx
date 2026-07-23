@@ -9,15 +9,18 @@ import flighthq.displayobject.DisplayObject.getDisplayObjectRuntime;
 import flighthq.node.Revision.invalidateNodeLocalBounds;
 import flighthq.node.Revision.invalidateNodeLocalContent;
 import flighthq.types.MethodsOf;
+import flighthq.types.Node;
 import flighthq.types.PartialNode;
+import flighthq.types.Rectangle;
 import flighthq.types.Types.VideoKind;
+import flighthq.types.Video;
 import flighthq.types.Video.VideoData;
 import flighthq.types.Video.VideoRuntime;
 import flighthq.types._internal._VideoValues.VideoKind;
 
 @:expose("flighthq.displayobject.Video")
 class Video {
-  public static function computeVideoLocalBoundsRectangle(out:Dynamic, source:Dynamic):Void {
+  public static function computeVideoLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.optionalField(_Runtime.field((cast _Runtime.field(source, 'data') : VideoData), 'source'), 'element');
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(element, null)))) {
@@ -26,8 +29,8 @@ class Video {
     }
   }
 
-  public static function createVideo(?obj:PartialNode<Dynamic>):Dynamic {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([VideoKind, obj, createVideoData, createVideoRuntime] : Array<Dynamic>)) : Dynamic);
+  public static function createVideo(?obj:PartialNode<flighthq.types.Video>):flighthq.types.Video {
+    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([VideoKind, obj, createVideoData, createVideoRuntime] : Array<Dynamic>)) : flighthq.types.Video);
     return cast null;
   }
 
@@ -41,17 +44,17 @@ class Video {
     return cast null;
   }
 
-  public static function getVideoRuntime(source:Dynamic):VideoRuntime {
+  public static function getVideoRuntime(source:flighthq.types.Video):VideoRuntime {
     return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : VideoRuntime);
     return cast null;
   }
 
-  public static function setVideoSmoothing(source:Dynamic, value:Bool):Void {
+  public static function setVideoSmoothing(source:flighthq.types.Video, value:Bool):Void {
     _Runtime.setField(_Runtime.field(source, 'data'), 'smoothing', value);
     _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
   }
 
-  public static function setVideoSource(source:Dynamic, value:Dynamic):Void {
+  public static function setVideoSource(source:flighthq.types.Video, value:Dynamic):Void {
     _Runtime.setField(_Runtime.field(source, 'data'), 'source', value);
     _Runtime.callValue(invalidateNodeLocalContent, cast ([source] : Array<Dynamic>));
     _Runtime.callValue(invalidateNodeLocalBounds, cast ([source] : Array<Dynamic>));

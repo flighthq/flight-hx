@@ -5,11 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.types.SurfaceEdgeMode;
+import flighthq.types.SurfaceRegion;
 import flighthq.types.SurfaceResizeMode;
 
 @:expose("flighthq.surface.SurfaceAffine")
 class SurfaceAffine {
-  public static function transformSurface(dest:Dynamic, source:Dynamic, matrix:Array<Float>, edgeMode:SurfaceEdgeMode = 'transparent', sampleMode:SurfaceResizeMode = 'bilinear'):Void {
+  public static function transformSurface(dest:SurfaceRegion, source:SurfaceRegion, matrix:Array<Float>, edgeMode:SurfaceEdgeMode = 'transparent', sampleMode:SurfaceResizeMode = 'bilinear'):Void {
     var dw:Dynamic = cast _Runtime.UNDEFINED;
     var dh:Dynamic = cast _Runtime.UNDEFINED;
     var sw:Dynamic = cast _Runtime.UNDEFINED;

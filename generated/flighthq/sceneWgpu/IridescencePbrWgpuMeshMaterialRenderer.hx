@@ -14,16 +14,20 @@ import flighthq.sceneWgpu.WgpuPbrPipelineCache.ensureWgpuPbrPipeline;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.beginWgpuMeshDraw;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.drawWgpuMeshSubset;
 import flighthq.sceneWgpu._internal._WgpuMeshPipelineValues.writeWgpuFrameUniform;
+import flighthq.types.Camera;
 import flighthq.types.IridescencePbrMaterial;
+import flighthq.types.Material;
+import flighthq.types.MeshGeometry;
 import flighthq.types.SceneLightBlock;
 import flighthq.types.SceneRenderProxy;
 import flighthq.types.Types.IridescencePbrMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
+import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._IridescencePbrMaterialValues.IridescencePbrMaterialKind;
 
 @:expose("flighthq.sceneWgpu.IridescencePbrWgpuMeshMaterialRenderer")
 class IridescencePbrWgpuMeshMaterialRenderer {
-  public static final iridescencePbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:Dynamic, material:Null<Dynamic>, lights:SceneLightBlock, camera:Dynamic) {
+  public static final iridescencePbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:SceneLightBlock, camera:Camera) {
     var stateRuntime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
     var iridescence:Dynamic = cast _Runtime.UNDEFINED;
@@ -59,11 +63,11 @@ class IridescencePbrWgpuMeshMaterialRenderer {
     _Runtime.callValue(writeWgpuPbrMaterialUniform, cast ([state, binding] : Array<Dynamic>));
     _Runtime.callValue(beginWgpuMeshDraw, cast ([state, pipeline] : Array<Dynamic>));
     _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, _Runtime.field(binding, 'bindGroup')] : Array<Dynamic>));
-  }, draw: function(state:Dynamic, proxy:SceneRenderProxy, geometry:Dynamic) {
+  }, draw: function(state:WgpuRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     _Runtime.callValue(drawWgpuMeshSubset, cast ([state, proxy, geometry] : Array<Dynamic>));
   } };
 
-  public static function registerIridescencePbrWgpuMaterial(state:Dynamic):Void {
+  public static function registerIridescencePbrWgpuMaterial(state:WgpuRenderState):Void {
     _Runtime.callValue(registerWgpuMeshMaterialRenderer, cast ([state, IridescencePbrMaterialKind, iridescencePbrWgpuMeshMaterialRenderer] : Array<Dynamic>));
   }
 

@@ -5,10 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.image.ImageResourceFrom.createImageResourceFromCanvas;
+import flighthq.types.ImageResource;
+import flighthq.types.Surface;
 
 @:expose("flighthq.surface.SurfaceFrom")
 class SurfaceFrom {
-  public static function createImageResourceFromSurface(surface:Dynamic):Dynamic {
+  public static function createImageResourceFromSurface(surface:Surface):ImageResource {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var domImageData:Dynamic = cast _Runtime.UNDEFINED;
     canvas = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -21,7 +23,7 @@ class SurfaceFrom {
     return cast null;
   }
 
-  public static function createSurfaceFromCanvas(canvas:Dynamic, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):Dynamic {
+  public static function createSurfaceFromCanvas(canvas:Dynamic, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):Surface {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
@@ -34,7 +36,7 @@ class SurfaceFrom {
     return cast null;
   }
 
-  public static function createSurfaceFromImageResource(resource:Dynamic):Dynamic {
+  public static function createSurfaceFromImageResource(resource:ImageResource):Surface {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     var raw:Dynamic = cast _Runtime.UNDEFINED;
@@ -51,7 +53,7 @@ class SurfaceFrom {
     return cast null;
   }
 
-  public static function createSurfaceFromImageSource(source:Dynamic, width:Float, height:Float):Dynamic {
+  public static function createSurfaceFromImageSource(source:Dynamic, width:Float, height:Float):Surface {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     var raw:Dynamic = cast _Runtime.UNDEFINED;

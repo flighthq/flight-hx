@@ -4,11 +4,12 @@ package flighthq.renderWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuScissorRect;
 
 @:expose("flighthq.renderWgpu.WgpuScissor")
 class WgpuScissor {
-  public static function applyWgpuScissorRect(state:Dynamic, pass:Dynamic):Void {
+  public static function applyWgpuScissorRect(state:WgpuRenderState, pass:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var rect:Dynamic = cast _Runtime.UNDEFINED;
     var x:Dynamic = cast _Runtime.UNDEFINED;
@@ -25,7 +26,7 @@ class WgpuScissor {
     _Runtime.callProperty(pass, 'setScissorRect', cast ([x, y, w, h] : Array<Dynamic>));
   }
 
-  public static function popWgpuScissorRect(state:Dynamic):Void {
+  public static function popWgpuScissorRect(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var prev:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -33,7 +34,7 @@ class WgpuScissor {
     _Runtime.setField(runtime, 'currentScissorRect', _Runtime.coalesce(prev, function():Dynamic return cast null));
   }
 
-  public static function pushWgpuScissorRect(state:Dynamic, rect:WgpuScissorRect):Void {
+  public static function pushWgpuScissorRect(state:WgpuRenderState, rect:WgpuScissorRect):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'currentScissorRect'), null))) {

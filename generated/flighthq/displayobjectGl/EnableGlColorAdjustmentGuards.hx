@@ -5,16 +5,17 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
+import flighthq.types.GlRenderState;
 import flighthq.types.Log.LogLevel;
 
 @:expose("flighthq.displayobjectGl.EnableGlColorAdjustmentGuards")
 class EnableGlColorAdjustmentGuards {
-  public static function areGlColorAdjustmentGuardsEnabled(state:Dynamic):Bool {
+  public static function areGlColorAdjustmentGuardsEnabled(state:GlRenderState):Bool {
     return cast !_Runtime.looseEquals(_Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glColorAdjustmentGuard'), null);
     return cast null;
   }
 
-  public static function enableGlColorAdjustmentGuards(state:Dynamic):Void {
+  public static function enableGlColorAdjustmentGuards(state:GlRenderState):Void {
     _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'glColorAdjustmentGuard', EnableGlColorAdjustmentGuards.warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards);
   }
 

@@ -6,6 +6,8 @@ import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlCompressedTextureDecoder;
 import flighthq.types.GlCompressedTextureSupport;
+import flighthq.types.GlRenderState;
+import flighthq.types.ImageResource;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 
@@ -193,11 +195,11 @@ class GlCompressedTexture {
     return cast null;
   }
 
-  public static function registerGlCompressedTextureDecoder(state:Dynamic, decode:Null<GlCompressedTextureDecoder>):Void {
+  public static function registerGlCompressedTextureDecoder(state:GlRenderState, decode:Null<GlCompressedTextureDecoder>):Void {
     _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'compressedTextureDecoder', decode);
   }
 
-  public static function registerGlCompressedTextureUpload(state:Dynamic, ?uploader:Dynamic):Void {
+  public static function registerGlCompressedTextureUpload(state:GlRenderState, ?uploader:Dynamic):Void {
     _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'compressedTextureUpload', _Runtime.select(_Runtime.strictEquals(uploader, null), function():Dynamic return cast null, function():Dynamic return cast GlCompressedTexture.uploadGlCompressedImageResource__glCompressedTexture));
   }
 
@@ -256,7 +258,7 @@ class GlCompressedTexture {
     return cast null;
   }
 
-  public static function uploadGlCompressedImageResource__glCompressedTexture(gl:Dynamic, image:Dynamic, decode:Null<GlCompressedTextureDecoder>):Bool {
+  public static function uploadGlCompressedImageResource__glCompressedTexture(gl:Dynamic, image:ImageResource, decode:Null<GlCompressedTextureDecoder>):Bool {
     var compressed:Dynamic = cast _Runtime.UNDEFINED;
     compressed = _Runtime.field(image, 'compressed');
     if (_Runtime.truthy(_Runtime.strictEquals(compressed, null))) { return cast false; }

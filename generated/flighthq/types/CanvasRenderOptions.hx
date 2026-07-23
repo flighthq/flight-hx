@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.RenderState.SceneGraphSyncPolicy;
 
-typedef CanvasRenderOptions = { @:optional var backgroundColor:Null<Float>; @:optional var contextAttributes:Dynamic; @:optional var imageSmoothingEnabled:Bool; @:optional var imageSmoothingQuality:Dynamic; @:optional var pixelRatio:Float; @:optional var renderTransform:Dynamic; @:optional var roundPixels:Bool; @:optional var sceneGraphSyncPolicy:SceneGraphSyncPolicy; };
+typedef CanvasRenderOptions = { @:optional var backgroundColor:Null<Float>; @:optional var contextAttributes:Dynamic; @:optional var imageSmoothingEnabled:Bool; @:optional var imageSmoothingQuality:Dynamic; @:optional var pixelRatio:Float; @:optional var renderTransform:Matrix; @:optional var roundPixels:Bool; @:optional var sceneGraphSyncPolicy:SceneGraphSyncPolicy; };

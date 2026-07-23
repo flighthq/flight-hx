@@ -8,11 +8,15 @@ import flighthq.geometry.Matrix.createMatrix;
 import flighthq.renderWgpu.WgpuDraw.buildWgpuRenderTargetBindGroup;
 import flighthq.renderWgpu.WgpuDraw.drawWgpuQuadWithTransform;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
+import flighthq.types.Material;
+import flighthq.types.Matrix;
 import flighthq.types.RenderPassPreserve;
+import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderTarget;
 
 @:expose("flighthq.renderWgpu.WgpuRenderTarget")
 class WgpuRenderTarget {
-  public static function beginWgpuRenderPassEncoder__wgpuRenderTarget(state:Dynamic, colorView:Dynamic, depthStencilView:Dynamic, width:Float, height:Float, loadOp:Dynamic, ?clearColor:Dynamic, depthLoadOp:Dynamic = 'clear', depthClearValue:Dynamic = 1.0):Dynamic {
+  public static function beginWgpuRenderPassEncoder__wgpuRenderTarget(state:WgpuRenderState, colorView:Dynamic, depthStencilView:Dynamic, width:Float, height:Float, loadOp:Dynamic, ?clearColor:Dynamic, depthLoadOp:Dynamic = 'clear', depthClearValue:Dynamic = 1.0):Dynamic {
     if (clearColor == null) clearColor = cast ({ r: 0.0, g: 0.0, b: 0.0, a: 0.0 } : Dynamic);
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var pass:Dynamic = cast _Runtime.UNDEFINED;
@@ -23,7 +27,7 @@ class WgpuRenderTarget {
     return cast null;
   }
 
-  public static function beginWgpuRenderPass(state:Dynamic, target:Dynamic, ?preserve:RenderPassPreserve):Void {
+  public static function beginWgpuRenderPass(state:WgpuRenderState, target:flighthq.types.WgpuRenderTarget, ?preserve:RenderPassPreserve):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var colorLoadOp:Dynamic = cast _Runtime.UNDEFINED;
     var depthLoadOp:Dynamic = cast _Runtime.UNDEFINED;
@@ -44,7 +48,7 @@ class WgpuRenderTarget {
     _Runtime.setField(runtime, 'renderPass', _Runtime.callValue(WgpuRenderTarget.beginWgpuRenderPassEncoder__wgpuRenderTarget, cast ([state, _Runtime.field(target, 'view'), _Runtime.field(target, 'depthStencilView'), _Runtime.field(target, 'width'), _Runtime.field(target, 'height'), colorLoadOp, _Runtime.callValue(WgpuRenderTarget.resolveWgpuClearColor__wgpuRenderTarget, cast ([target] : Array<Dynamic>)), depthLoadOp, _Runtime.field(target, 'clearDepth')] : Array<Dynamic>)));
   }
 
-  public static function createWgpuRenderTarget(state:Dynamic, width:Float, height:Float, ?format:Dynamic):Dynamic {
+  public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:Dynamic):flighthq.types.WgpuRenderTarget {
     if (format == null) format = cast (_Runtime.field(state, 'format') : Dynamic);
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;
@@ -66,12 +70,12 @@ class WgpuRenderTarget {
     return cast null;
   }
 
-  public static function destroyWgpuRenderTarget(_state:Dynamic, target:Dynamic):Void {
+  public static function destroyWgpuRenderTarget(_state:WgpuRenderState, target:flighthq.types.WgpuRenderTarget):Void {
     _Runtime.callProperty(_Runtime.field(target, 'texture'), 'destroy', cast ([] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(target, 'depthStencilTexture'), 'destroy', cast ([] : Array<Dynamic>));
   }
 
-  public static function drawWgpuRenderTargetResult(state:Dynamic, renderProxy:{ var alpha:Float; var material:Null<Dynamic>; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }, target:Dynamic, transform:Dynamic):Void {
+  public static function drawWgpuRenderTargetResult(state:WgpuRenderState, renderProxy:{ var alpha:Float; var material:Null<Material>; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }, target:flighthq.types.WgpuRenderTarget, transform:Matrix):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
@@ -109,7 +113,7 @@ class WgpuRenderTarget {
     _Runtime.callValue(drawWgpuQuadWithTransform, cast ([state, (cast renderProxy : Dynamic), composedTransform, { texture: _Runtime.field(target, 'texture'), view: _Runtime.field(target, 'view'), bindGroup: _Runtime.field(target, 'bindGroup') }, 0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height'), 0.0, 1.0, 1.0, 0.0] : Array<Dynamic>));
   }
 
-  public static function endWgpuRenderPass(state:Dynamic):Void {
+  public static function endWgpuRenderPass(state:WgpuRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var saved:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -133,7 +137,7 @@ class WgpuRenderTarget {
     }
   }
 
-  public static function resizeWgpuRenderTarget(state:Dynamic, target:Dynamic, width:Float, height:Float):Void {
+  public static function resizeWgpuRenderTarget(state:WgpuRenderState, target:flighthq.types.WgpuRenderTarget, width:Float, height:Float):Void {
     var device:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;
     var w:Dynamic = cast _Runtime.UNDEFINED;
@@ -163,7 +167,7 @@ class WgpuRenderTarget {
     return cast null;
   }
 
-  public static function resolveWgpuClearColor__wgpuRenderTarget(target:Dynamic):Dynamic {
+  public static function resolveWgpuClearColor__wgpuRenderTarget(target:flighthq.types.WgpuRenderTarget):Dynamic {
     var packed:Dynamic = cast _Runtime.UNDEFINED;
     packed = _Runtime.getIndex(_Runtime.field(target, 'clearColors'), 0.0);
     if (_Runtime.truthy(_Runtime.strictEquals(packed, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast { r: 0.0, g: 0.0, b: 0.0, a: 0.0 }; }
@@ -171,7 +175,7 @@ class WgpuRenderTarget {
     return cast null;
   }
 
-  public static function setWgpuRenderTransform2D(state:Dynamic, transform:Dynamic):Void {
+  public static function setWgpuRenderTransform2D(state:WgpuRenderState, transform:Matrix):Void {
     var next:Dynamic = cast _Runtime.UNDEFINED;
     next = _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>));
     _Runtime.callValue(copyMatrix, cast ([next, transform] : Array<Dynamic>));

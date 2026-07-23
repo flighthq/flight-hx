@@ -13,10 +13,15 @@ import flighthq.shape.ShapeFill as Facade_Shape_flighthq_shape_ShapeFill;
 import flighthq.shape.ShapeHitTestBuiltins as Facade_Shape_flighthq_shape_ShapeHitTestBuiltins;
 import flighthq.shape.ShapeHitTestRegistry as Facade_Shape_flighthq_shape_ShapeHitTestRegistry;
 import flighthq.types.HasBoundsRectangle.BoundsNodeAny;
+import flighthq.types.ImageResource;
+import flighthq.types.Matrix;
 import flighthq.types.PartialNode;
+import flighthq.types.Rectangle;
 import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.Scale9Shape;
 import flighthq.types.Scale9Shape.Scale9ShapeData;
 import flighthq.types.Scale9Shape.Scale9ShapeRuntime;
+import flighthq.types.Shape;
 import flighthq.types.Shape.ShapeData;
 import flighthq.types.Shape.ShapeRuntime;
 import flighthq.types.ShapeCommand.CapsStyle;
@@ -35,100 +40,100 @@ import flighthq.types._internal._ShapeValues.ShapeKind;
 
 @:expose("flighthq.shape.Shape")
 class Shape {
-  public static function appendShapeArc(shape:Dynamic, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Dynamic):Void {
+  public static function appendShapeArc(shape:flighthq.types.Shape, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Dynamic):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeArc, cast ([shape, cx, cy, radius, startAngle, endAngle, anticlockwise] : Array<Dynamic>));
   }
 
-  public static function appendShapeArcTo(shape:Dynamic, x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Void {
+  public static function appendShapeArcTo(shape:flighthq.types.Shape, x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeArcTo, cast ([shape, x1, y1, x2, y2, radius] : Array<Dynamic>));
   }
 
-  public static function appendShapeBeginBitmapFill(shape:Dynamic, bitmap:Dynamic, ?matrix:Null<Dynamic>, ?repeat:Dynamic, ?smooth:Dynamic):Void {
+  public static function appendShapeBeginBitmapFill(shape:flighthq.types.Shape, bitmap:ImageResource, ?matrix:Null<Matrix>, ?repeat:Dynamic, ?smooth:Dynamic):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeBeginBitmapFill, cast ([shape, bitmap, matrix, repeat, smooth] : Array<Dynamic>));
   }
 
-  public static function appendShapeBeginFill(shape:Dynamic, ?color:Dynamic, ?alpha:Dynamic):Void {
+  public static function appendShapeBeginFill(shape:flighthq.types.Shape, ?color:Dynamic, ?alpha:Dynamic):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeBeginFill, cast ([shape, color, alpha] : Array<Dynamic>));
   }
 
-  public static function appendShapeBeginGradientFill(shape:Dynamic, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Dynamic>, ?spreadMethod:SpreadMethod, ?interpolationMethod:InterpolationMethod, ?focalPointRatio:Dynamic):Void {
+  public static function appendShapeBeginGradientFill(shape:flighthq.types.Shape, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Matrix>, ?spreadMethod:SpreadMethod, ?interpolationMethod:InterpolationMethod, ?focalPointRatio:Dynamic):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeBeginGradientFill, cast ([shape, gradientType, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio] : Array<Dynamic>));
   }
 
-  public static function appendShapeCircle(shape:Dynamic, x:Float, y:Float, radius:Float):Void {
+  public static function appendShapeCircle(shape:flighthq.types.Shape, x:Float, y:Float, radius:Float):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeCircle, cast ([shape, x, y, radius] : Array<Dynamic>));
   }
 
-  public static function appendShapeCubicCurveTo(shape:Dynamic, controlX1:Float, controlY1:Float, controlX2:Float, controlY2:Float, anchorX:Float, anchorY:Float):Void {
+  public static function appendShapeCubicCurveTo(shape:flighthq.types.Shape, controlX1:Float, controlY1:Float, controlX2:Float, controlY2:Float, anchorX:Float, anchorY:Float):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeCubicCurveTo, cast ([shape, controlX1, controlY1, controlX2, controlY2, anchorX, anchorY] : Array<Dynamic>));
   }
 
-  public static function appendShapeCurveTo(shape:Dynamic, controlX:Float, controlY:Float, anchorX:Float, anchorY:Float):Void {
+  public static function appendShapeCurveTo(shape:flighthq.types.Shape, controlX:Float, controlY:Float, anchorX:Float, anchorY:Float):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeCurveTo, cast ([shape, controlX, controlY, anchorX, anchorY] : Array<Dynamic>));
   }
 
-  public static function appendShapeDrawTriangles(shape:Dynamic, vertices:Array<Float>, ?indices:Null<Array<Float>>, ?uvtData:Null<Array<Float>>, ?culling:TriangleCulling):Void {
+  public static function appendShapeDrawTriangles(shape:flighthq.types.Shape, vertices:Array<Float>, ?indices:Null<Array<Float>>, ?uvtData:Null<Array<Float>>, ?culling:TriangleCulling):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeDrawTriangles, cast ([shape, vertices, indices, uvtData, culling] : Array<Dynamic>));
   }
 
-  public static function appendShapeEllipse(shape:Dynamic, x:Float, y:Float, width:Float, height:Float):Void {
+  public static function appendShapeEllipse(shape:flighthq.types.Shape, x:Float, y:Float, width:Float, height:Float):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeEllipse, cast ([shape, x, y, width, height] : Array<Dynamic>));
   }
 
-  public static function appendShapeEndFill(shape:Dynamic):Void {
+  public static function appendShapeEndFill(shape:flighthq.types.Shape):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeEndFill, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function appendShapeLineBitmapStyle(shape:Dynamic, bitmap:Dynamic, ?matrix:Null<Dynamic>, ?repeat:Dynamic, ?smooth:Dynamic):Void {
+  public static function appendShapeLineBitmapStyle(shape:flighthq.types.Shape, bitmap:ImageResource, ?matrix:Null<Matrix>, ?repeat:Dynamic, ?smooth:Dynamic):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeLineBitmapStyle, cast ([shape, bitmap, matrix, repeat, smooth] : Array<Dynamic>));
   }
 
-  public static function appendShapeLineGradientStyle(shape:Dynamic, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Dynamic>, ?spreadMethod:SpreadMethod, ?interpolationMethod:InterpolationMethod, ?focalPointRatio:Dynamic):Void {
+  public static function appendShapeLineGradientStyle(shape:flighthq.types.Shape, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<Matrix>, ?spreadMethod:SpreadMethod, ?interpolationMethod:InterpolationMethod, ?focalPointRatio:Dynamic):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeLineGradientStyle, cast ([shape, gradientType, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio] : Array<Dynamic>));
   }
 
-  public static function appendShapeLineStyle(shape:Dynamic, ?thickness:Dynamic, ?color:Dynamic, ?alpha:Dynamic, ?pixelHinting:Dynamic, ?scaleMode:LineScaleMode, ?caps:CapsStyle, ?joints:JointStyle, ?miterLimit:Dynamic):Void {
+  public static function appendShapeLineStyle(shape:flighthq.types.Shape, ?thickness:Dynamic, ?color:Dynamic, ?alpha:Dynamic, ?pixelHinting:Dynamic, ?scaleMode:LineScaleMode, ?caps:CapsStyle, ?joints:JointStyle, ?miterLimit:Dynamic):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeLineStyle, cast ([shape, thickness, color, alpha, pixelHinting, scaleMode, caps, joints, miterLimit] : Array<Dynamic>));
   }
 
-  public static function appendShapeLineTo(shape:Dynamic, x:Float, y:Float):Void {
+  public static function appendShapeLineTo(shape:flighthq.types.Shape, x:Float, y:Float):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeLineTo, cast ([shape, x, y] : Array<Dynamic>));
   }
 
-  public static function appendShapeMoveTo(shape:Dynamic, x:Float, y:Float):Void {
+  public static function appendShapeMoveTo(shape:flighthq.types.Shape, x:Float, y:Float):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeMoveTo, cast ([shape, x, y] : Array<Dynamic>));
   }
 
-  public static function appendShapePath(shape:Dynamic, commands:Array<Float>, pathData:Array<Float>, ?winding:PathWinding):Void {
+  public static function appendShapePath(shape:flighthq.types.Shape, commands:Array<Float>, pathData:Array<Float>, ?winding:PathWinding):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapePath, cast ([shape, commands, pathData, winding] : Array<Dynamic>));
   }
 
-  public static function appendShapePolygon(shape:Dynamic, points:Array<Float>):Void {
+  public static function appendShapePolygon(shape:flighthq.types.Shape, points:Array<Float>):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapePolygon, cast ([shape, points] : Array<Dynamic>));
   }
 
-  public static function appendShapePolyline(shape:Dynamic, points:Array<Float>):Void {
+  public static function appendShapePolyline(shape:flighthq.types.Shape, points:Array<Float>):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapePolyline, cast ([shape, points] : Array<Dynamic>));
   }
 
-  public static function appendShapeRectangle(shape:Dynamic, x:Float, y:Float, width:Float, height:Float):Void {
+  public static function appendShapeRectangle(shape:flighthq.types.Shape, x:Float, y:Float, width:Float, height:Float):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeRectangle, cast ([shape, x, y, width, height] : Array<Dynamic>));
   }
 
-  public static function appendShapeRoundRectangle(shape:Dynamic, x:Float, y:Float, width:Float, height:Float, ellipseWidth:Float, ellipseHeight:Float):Void {
+  public static function appendShapeRoundRectangle(shape:flighthq.types.Shape, x:Float, y:Float, width:Float, height:Float, ellipseWidth:Float, ellipseHeight:Float):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeRoundRectangle, cast ([shape, x, y, width, height, ellipseWidth, ellipseHeight] : Array<Dynamic>));
   }
 
-  public static function appendShapeRoundRectangleVarying(shape:Dynamic, x:Float, y:Float, width:Float, height:Float, topLeftRadius:Float, topRightRadius:Float, bottomLeftRadius:Float, bottomRightRadius:Float):Void {
+  public static function appendShapeRoundRectangleVarying(shape:flighthq.types.Shape, x:Float, y:Float, width:Float, height:Float, topLeftRadius:Float, topRightRadius:Float, bottomLeftRadius:Float, bottomRightRadius:Float):Void {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeCommands.appendShapeRoundRectangleVarying, cast ([shape, x, y, width, height, topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius] : Array<Dynamic>));
   }
 
-  public static function clearShapeCommands(shape:Dynamic):Void {
+  public static function clearShapeCommands(shape:flighthq.types.Shape):Void {
     _Runtime.setLength(_Runtime.field(_Runtime.field(shape, 'data'), 'commands'), 0.0);
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
 
-  public static function computeShapeLocalBoundsRectangle(out:Dynamic, source:BoundsNodeAny):Void {
+  public static function computeShapeLocalBoundsRectangle(out:Rectangle, source:BoundsNodeAny):Void {
     var shape:Dynamic = cast _Runtime.UNDEFINED;
     var commands:Dynamic = cast _Runtime.UNDEFINED;
     var minX:Dynamic = cast _Runtime.UNDEFINED;
@@ -144,7 +149,7 @@ class Shape {
     var expandCubicExtrema:Float->Float->Float->Float->Float->Float->Float->Float->Void = cast _Runtime.UNDEFINED;
     var expandCubicAxis:Float->Float->Float->Float->Float->Float->Float->Float->Void = cast _Runtime.UNDEFINED;
     var i:Dynamic = cast _Runtime.UNDEFINED;
-    shape = (cast (cast source : Dynamic) : Dynamic);
+    shape = (cast (cast source : Dynamic) : flighthq.types.Shape);
     commands = _Runtime.field(_Runtime.field(shape, 'data'), 'commands');
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
@@ -400,13 +405,13 @@ class Shape {
     }
   }
 
-  public static function copyShapeCommands(out:Dynamic, source:Dynamic):Void {
+  public static function copyShapeCommands(out:flighthq.types.Shape, source:flighthq.types.Shape):Void {
     _Runtime.setLength(_Runtime.field(_Runtime.field(out, 'data'), 'commands'), 0.0);
     _Runtime.callProperty(_Runtime.field(_Runtime.field(out, 'data'), 'commands'), 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(_Runtime.field(source, 'data'), 'commands'))]));
     _Runtime.callValue(invalidateContent, cast ([out] : Array<Dynamic>));
   }
 
-  public static function createScale9Shape(scale9Grid:RectangleLike, ?obj:PartialNode<Dynamic>):Dynamic {
+  public static function createScale9Shape(scale9Grid:RectangleLike, ?obj:PartialNode<Scale9Shape>):Scale9Shape {
     return cast _Runtime.callValue(Facade_Shape_flighthq_shape_Scale9Shape.createScale9Shape, cast ([scale9Grid, obj] : Array<Dynamic>));
     return cast null;
   }
@@ -421,8 +426,8 @@ class Shape {
     return cast null;
   }
 
-  public static function createShape(?obj:PartialNode<Dynamic>):Dynamic {
-    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([ShapeKind, obj, createShapeData, createShapeRuntime] : Array<Dynamic>)) : Dynamic);
+  public static function createShape(?obj:PartialNode<flighthq.types.Shape>):flighthq.types.Shape {
+    return cast (cast _Runtime.callValue(createDisplayObjectGeneric, cast ([ShapeKind, obj, createShapeData, createShapeRuntime] : Array<Dynamic>)) : flighthq.types.Shape);
     return cast null;
   }
 
@@ -440,16 +445,16 @@ class Shape {
     _Runtime.callValue(Facade_Shape_flighthq_shape_ShapeHitTestBuiltins.enableShapeHitTesting, cast ([] : Array<Dynamic>));
   }
 
-  public static function getScale9ShapeRuntime(source:Dynamic):Scale9ShapeRuntime {
+  public static function getScale9ShapeRuntime(source:Scale9Shape):Scale9ShapeRuntime {
     return cast _Runtime.callValue(Facade_Shape_flighthq_shape_Scale9Shape.getScale9ShapeRuntime, cast ([source] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getShapeBounds(out:Dynamic, source:Dynamic):Void {
+  public static function getShapeBounds(out:Rectangle, source:flighthq.types.Shape):Void {
     _Runtime.callValue(computeShapeLocalBoundsRectangle, cast ([out, source] : Array<Dynamic>));
   }
 
-  public static function getShapeCommandCount(source:Dynamic):Float {
+  public static function getShapeCommandCount(source:flighthq.types.Shape):Float {
     var commands:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var i:Dynamic = cast _Runtime.UNDEFINED;
@@ -470,7 +475,7 @@ class Shape {
     return cast null;
   }
 
-  public static function getShapeRuntime(source:Dynamic):ShapeRuntime {
+  public static function getShapeRuntime(source:flighthq.types.Shape):ShapeRuntime {
     return cast (cast _Runtime.callValue(getDisplayObjectRuntime, cast ([source] : Array<Dynamic>)) : ShapeRuntime);
     return cast null;
   }
@@ -485,7 +490,7 @@ class Shape {
     return cast null;
   }
 
-  public static function isShapeEmpty(source:Dynamic):Bool {
+  public static function isShapeEmpty(source:flighthq.types.Shape):Bool {
     return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'commands'), 'length'), 0.0);
     return cast null;
   }

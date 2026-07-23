@@ -4,11 +4,13 @@ package flighthq.sceneWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.Kind;
+import flighthq.types.Matrix4;
 import flighthq.types.WgpuMeshMaterialRenderer;
+import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-typedef WgpuSceneShadow = { var depthTexture:Dynamic; var depthView:Dynamic; var matrix:Dynamic; };
+typedef WgpuSceneShadow = { var depthTexture:Dynamic; var depthView:Dynamic; var matrix:Matrix4; };
 
 typedef WgpuSceneIbl = { var brdfLut:Dynamic; var brdfLutView:Dynamic; var intensity:Float; var irradianceCube:Dynamic; var irradianceCubeView:Dynamic; var prefilteredCube:Dynamic; var prefilteredCubeView:Dynamic; var prefilteredMipCount:Float; };
 

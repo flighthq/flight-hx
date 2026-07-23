@@ -4,10 +4,11 @@ package flighthq.geometry;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Rectangle.createRectangle;
+import flighthq.types.Rectangle;
 
 @:expose("flighthq.geometry.RectanglePool")
 class RectanglePool {
-  public static function acquireEmptyRectangle():Dynamic {
+  public static function acquireEmptyRectangle():Rectangle {
     var r:Dynamic = cast _Runtime.UNDEFINED;
     r = _Runtime.callValue(acquireRectangle, cast ([] : Array<Dynamic>));
     _Runtime.setField(r, 'x', 0.0);
@@ -18,10 +19,10 @@ class RectanglePool {
     return cast null;
   }
 
-  public static function acquireRectangle():Dynamic {
-    var r:Dynamic = cast _Runtime.UNDEFINED;
+  public static function acquireRectangle():Rectangle {
+    var r:Rectangle = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(RectanglePool.pool__rectanglePool, 'length'), 0.0, '>'))) {
-      (r = cast ((cast _Runtime.callProperty(RectanglePool.pool__rectanglePool, 'pop', cast ([] : Array<Dynamic>)) : Dynamic) : Dynamic));
+      (r = cast ((cast _Runtime.callProperty(RectanglePool.pool__rectanglePool, 'pop', cast ([] : Array<Dynamic>)) : Rectangle) : Dynamic));
     } else {
       (r = cast (_Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) : Dynamic));
     }
@@ -33,10 +34,10 @@ class RectanglePool {
     _Runtime.setLength(RectanglePool.pool__rectanglePool, 0.0);
   }
 
-  public static function releaseRectangle(r:Dynamic):Void {
+  public static function releaseRectangle(r:Rectangle):Void {
     if (_Runtime.truthy(!_Runtime.truthy(r))) { return; }
     _Runtime.callProperty(RectanglePool.pool__rectanglePool, 'push', cast ([r] : Array<Dynamic>));
   }
 
-  public static final pool__rectanglePool:Array<Dynamic> = cast ([] : Array<Dynamic>);
+  public static final pool__rectanglePool:Array<Rectangle> = cast ([] : Array<Dynamic>);
 }

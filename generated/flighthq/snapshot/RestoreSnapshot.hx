@@ -3,10 +3,11 @@ package flighthq.snapshot;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Snapshot;
 
 @:expose("flighthq.snapshot.RestoreSnapshot")
 class RestoreSnapshot {
-  public static function restoreSnapshot<T>(snapshot:Dynamic, target:Dynamic):Void {
+  public static function restoreSnapshot<T>(snapshot:Snapshot<Dynamic>, target:Dynamic):Void {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(snapshot, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(snapshot), 'object')), function():Dynamic return cast _Runtime.strictEquals(target, null)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object')))) {
       return;
     }

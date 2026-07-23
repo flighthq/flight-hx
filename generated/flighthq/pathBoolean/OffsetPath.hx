@@ -5,13 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
 import flighthq.pathBoolean.ResolvePathRegions.resolvePathRegions;
+import flighthq.types.Path;
 import flighthq.types.PathOffsetEnd;
 import flighthq.types.PathOffsetJoin;
 import flighthq.types.PathOffsetOptions;
 
 @:expose("flighthq.pathBoolean.OffsetPath")
 class OffsetPath {
-  public static function offsetPath(path:Dynamic, delta:Float, ?options:PathOffsetOptions):Dynamic {
+  public static function offsetPath(path:Path, delta:Float, ?options:PathOffsetOptions):Path {
     var join:Dynamic = cast _Runtime.UNDEFINED;
     var end:Dynamic = cast _Runtime.UNDEFINED;
     var miterLimit:Dynamic = cast _Runtime.UNDEFINED;

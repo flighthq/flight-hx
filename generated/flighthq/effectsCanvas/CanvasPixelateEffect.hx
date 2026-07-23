@@ -7,10 +7,12 @@ import flighthq.effectsCanvas.CanvasRenderEffectPipeline.acquireCanvasRenderTarg
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline.releaseCanvasRenderTarget;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
+import flighthq.types.CanvasRenderTarget;
+import flighthq.types.PixelateEffect;
 
 @:expose("flighthq.effectsCanvas.CanvasPixelateEffect")
 class CanvasPixelateEffect {
-  public static function applyPixelateEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:Dynamic):Void {
+  public static function applyPixelateEffectToCanvas(source:Dynamic, dest:Dynamic, pool:Dynamic, effect:PixelateEffect):Void {
     var size:Dynamic = cast _Runtime.UNDEFINED;
     var smallW:Dynamic = cast _Runtime.UNDEFINED;
     var smallH:Dynamic = cast _Runtime.UNDEFINED;
@@ -46,6 +48,6 @@ class CanvasPixelateEffect {
   }
 
   public static final defaultCanvasPixelateEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {
-    _Runtime.callValue(applyPixelateEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(applyPixelateEffectToCanvas, cast ([_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : PixelateEffect)] : Array<Dynamic>));
   };
 }

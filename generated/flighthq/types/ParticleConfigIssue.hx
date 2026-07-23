@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ParticleConfigIssue = { var field:Dynamic; var message:String; var severity:String; };
+typedef ParticleConfigIssue = { var field:ParticleEmitterConfig; var message:String; var severity:String; };

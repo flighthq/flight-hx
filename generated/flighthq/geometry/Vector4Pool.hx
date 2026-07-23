@@ -4,10 +4,11 @@ package flighthq.geometry;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Vector4.createVector4;
+import flighthq.types.Vector4;
 
 @:expose("flighthq.geometry.Vector4Pool")
 class Vector4Pool {
-  public static function acquireEmptyVector4():Dynamic {
+  public static function acquireEmptyVector4():Vector4 {
     var v:Dynamic = cast _Runtime.UNDEFINED;
     v = _Runtime.callValue(acquireVector4, cast ([] : Array<Dynamic>));
     _Runtime.setField(v, 'x', 0.0);
@@ -18,10 +19,10 @@ class Vector4Pool {
     return cast null;
   }
 
-  public static function acquireVector4():Dynamic {
-    var v:Dynamic = cast _Runtime.UNDEFINED;
+  public static function acquireVector4():Vector4 {
+    var v:Vector4 = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(Vector4Pool.pool__vector4Pool, 'length'), 0.0, '>'))) {
-      (v = cast ((cast _Runtime.callProperty(Vector4Pool.pool__vector4Pool, 'pop', cast ([] : Array<Dynamic>)) : Dynamic) : Dynamic));
+      (v = cast ((cast _Runtime.callProperty(Vector4Pool.pool__vector4Pool, 'pop', cast ([] : Array<Dynamic>)) : Vector4) : Dynamic));
     } else {
       (v = cast (_Runtime.callValue(createVector4, cast ([] : Array<Dynamic>)) : Dynamic));
     }
@@ -33,10 +34,10 @@ class Vector4Pool {
     _Runtime.setLength(Vector4Pool.pool__vector4Pool, 0.0);
   }
 
-  public static function releaseVector4(v:Dynamic):Void {
+  public static function releaseVector4(v:Vector4):Void {
     if (_Runtime.truthy(!_Runtime.truthy(v))) { return; }
     _Runtime.callProperty(Vector4Pool.pool__vector4Pool, 'push', cast ([v] : Array<Dynamic>));
   }
 
-  public static final pool__vector4Pool:Array<Dynamic> = cast ([] : Array<Dynamic>);
+  public static final pool__vector4Pool:Array<Vector4> = cast ([] : Array<Dynamic>);
 }

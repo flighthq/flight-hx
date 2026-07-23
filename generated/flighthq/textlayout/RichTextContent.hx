@@ -6,6 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.textlayout.TextFormat.mergeTextFormat;
 import flighthq.types.RichText.RichTextData;
 import flighthq.types.RichText.RichTextRuntime;
+import flighthq.types.RichTextContent;
+import flighthq.types.TextFormat;
+import flighthq.types.TextFormatRange;
 
 @:expose("flighthq.textlayout.RichTextContent")
 class RichTextContent {
@@ -13,7 +16,7 @@ class RichTextContent {
     _Runtime.setField(runtime, 'richTextContent', null);
   }
 
-  public static function computeRichTextContent(out:Dynamic, data:RichTextData, ?passwordCharacter:Null<String>):Void {
+  public static function computeRichTextContent(out:flighthq.types.RichTextContent, data:RichTextData, ?passwordCharacter:Null<String>):Void {
     if (passwordCharacter == null) passwordCharacter = cast (null : Dynamic);
     var baseFormat:Dynamic = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
@@ -27,12 +30,12 @@ class RichTextContent {
     _Runtime.callValue(RichTextContent.applyTextFormatRanges__richTextContent, cast ([out, _Runtime.field(data, 'textFormatRanges')] : Array<Dynamic>));
   }
 
-  public static function createRichTextContent():Dynamic {
+  public static function createRichTextContent():flighthq.types.RichTextContent {
     return cast { formatRanges: cast ([] : Array<Dynamic>), text: '' };
     return cast null;
   }
 
-  public static function getRichTextContent(runtime:RichTextRuntime):Dynamic {
+  public static function getRichTextContent(runtime:RichTextRuntime):flighthq.types.RichTextContent {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'richTextContent'), null))) {
       _Runtime.setField(runtime, 'richTextContent', _Runtime.callValue(createRichTextContent, cast ([] : Array<Dynamic>)));
     }
@@ -40,7 +43,7 @@ class RichTextContent {
     return cast null;
   }
 
-  public static function appendText__richTextContent(out:Dynamic, text:String, format:Dynamic, condenseWhite:Bool, maxChars:Float):Void {
+  public static function appendText__richTextContent(out:flighthq.types.RichTextContent, text:String, format:TextFormat, condenseWhite:Bool, maxChars:Float):Void {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     var remaining:Dynamic = cast _Runtime.UNDEFINED;
     var start:Dynamic = cast _Runtime.UNDEFINED;
@@ -59,7 +62,7 @@ class RichTextContent {
     _Runtime.callValue(RichTextContent.writeFormatRange__richTextContent, cast ([_Runtime.field(out, 'formatRanges'), format, start, _Runtime.field(_Runtime.field(out, 'text'), 'length')] : Array<Dynamic>));
   }
 
-  public static function applyTextFormatRanges__richTextContent(out:Dynamic, overrides:Array<Dynamic>):Void {
+  public static function applyTextFormatRanges__richTextContent(out:flighthq.types.RichTextContent, overrides:Array<TextFormatRange>):Void {
     var ranges:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(overrides, 'length'), 0.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(out, 'text'), 'length'), 0.0)))) { return; }
     ranges = _Runtime.field(out, 'formatRanges');
@@ -67,7 +70,7 @@ class RichTextContent {
       var start:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(_Runtime.field(out, 'text'), 'length'), _Runtime.field(override_, 'start')] : Array<Dynamic>))] : Array<Dynamic>));
       var end:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([start, _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(_Runtime.field(out, 'text'), 'length'), _Runtime.field(override_, 'end')] : Array<Dynamic>))] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(start, end))) { continue; }
-      var next:Array<Dynamic> = cast ([] : Array<Dynamic>);
+      var next:Array<TextFormatRange> = cast ([] : Array<Dynamic>);
       for (range in _Runtime.iterable(ranges)) {
         if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(range, 'end'), start, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(range, 'start'), end, '>=')))) {
           _Runtime.callValue(RichTextContent.writeFormatRange__richTextContent, cast ([next, _Runtime.field(range, 'format'), _Runtime.field(range, 'start'), _Runtime.field(range, 'end')] : Array<Dynamic>));
@@ -85,7 +88,7 @@ class RichTextContent {
     }
   }
 
-  public static function clampRanges__richTextContent(ranges:Array<Dynamic>, length:Float):Void {
+  public static function clampRanges__richTextContent(ranges:Array<TextFormatRange>, length:Float):Void {
     {
       var i:Dynamic = (_Runtime.field(ranges, 'length') - 1.0);
       while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
@@ -100,7 +103,7 @@ class RichTextContent {
     }
   }
 
-  public static function createBaseFormat__richTextContent(data:RichTextData):Dynamic {
+  public static function createBaseFormat__richTextContent(data:RichTextData):TextFormat {
     var format:Dynamic = cast _Runtime.UNDEFINED;
     format = _Runtime.callValue(mergeTextFormat, cast ([_Runtime.field(data, 'defaultTextFormat'), _Runtime.field(data, 'textFormat')] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(format, 'color'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(format, 'color', _Runtime.field(data, 'textColor')); }
@@ -127,7 +130,7 @@ class RichTextContent {
     return cast null;
   }
 
-  public static function writeFormatRange__richTextContent(ranges:Array<Dynamic>, format:Dynamic, start:Float, end:Float):Void {
+  public static function writeFormatRange__richTextContent(ranges:Array<TextFormatRange>, format:TextFormat, start:Float, end:Float):Void {
     var previous:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(start, end))) { return; }
     previous = _Runtime.getIndex(ranges, (_Runtime.field(ranges, 'length') - 1.0));
@@ -138,11 +141,11 @@ class RichTextContent {
     }
   }
 
-  public static function textFormatEquals__richTextContent(a:Dynamic, b:Dynamic):Bool {
+  public static function textFormatEquals__richTextContent(a:TextFormat, b:TextFormat):Bool {
     var aKeys:Dynamic = cast _Runtime.UNDEFINED;
     var bKeys:Dynamic = cast _Runtime.UNDEFINED;
-    aKeys = (cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([a] : Array<Dynamic>)) : Array<Dynamic>);
-    bKeys = (cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([b] : Array<Dynamic>)) : Array<Dynamic>);
+    aKeys = (cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([a] : Array<Dynamic>)) : Array<TextFormat>);
+    bKeys = (cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([b] : Array<Dynamic>)) : Array<TextFormat>);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(aKeys, 'length'), _Runtime.field(bKeys, 'length')))) { return cast false; }
     for (key in _Runtime.iterable(aKeys)) {
       var aValue:Dynamic = _Runtime.getIndex(a, key);

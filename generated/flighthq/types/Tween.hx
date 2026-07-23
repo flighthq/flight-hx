@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 
 typedef NumericProps<T> = Dynamic;
 
-typedef Tween<T> = { var complete:Bool; var delay:Float; var duration:Float; var ease:EasingFunction; var elapsed:Float; var initialized:Bool; var onComplete:Dynamic; var onRepeat:Dynamic; var onUpdate:Dynamic; var onYoyo:Dynamic; var paused:Bool; var properties:Array<TweenPropertyDetail>; var propertyMap:NumericProps<Dynamic>; var reflect:Bool; var repeat:Float; var reverse:Bool; var smartRotation:Bool; var snapping:Bool; var target:Dynamic; };
+typedef Tween<T> = { var complete:Bool; var delay:Float; var duration:Float; var ease:EasingFunction; var elapsed:Float; var initialized:Bool; var onComplete:Signal<Dynamic>; var onRepeat:Signal<Dynamic>; var onUpdate:Signal<Dynamic>; var onYoyo:Signal<Dynamic>; var paused:Bool; var properties:Array<TweenPropertyDetail>; var propertyMap:NumericProps<Dynamic>; var reflect:Bool; var repeat:Float; var reverse:Bool; var smartRotation:Bool; var snapping:Bool; var target:Dynamic; };

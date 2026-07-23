@@ -5,10 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderTarget.createWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTarget.destroyWgpuRenderTarget;
+import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderTarget;
+import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
 @:expose("flighthq.renderWgpu.WgpuRenderTargetPool")
 class WgpuRenderTargetPool {
-  public static function acquireWgpuRenderTarget(state:Dynamic, pool:Dynamic, descriptor:{ var width:Float; var height:Float; @:optional var format:Dynamic; }):Dynamic {
+  public static function acquireWgpuRenderTarget(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool, descriptor:{ var width:Float; var height:Float; @:optional var format:Dynamic; }):WgpuRenderTarget {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;
@@ -30,19 +33,19 @@ class WgpuRenderTargetPool {
     return cast null;
   }
 
-  public static function createWgpuRenderTargetPool():Dynamic {
+  public static function createWgpuRenderTargetPool():flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool {
     return cast { free: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
-  public static function destroyWgpuRenderTargetPool(state:Dynamic, pool:Dynamic):Void {
+  public static function destroyWgpuRenderTargetPool(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool):Void {
     for (target in _Runtime.iterable(_Runtime.field(pool, 'free'))) {
       _Runtime.callValue(destroyWgpuRenderTarget, cast ([state, target] : Array<Dynamic>));
     }
     _Runtime.setLength(_Runtime.field(pool, 'free'), 0.0);
   }
 
-  public static function releaseWgpuRenderTarget(pool:Dynamic, target:Dynamic):Void {
+  public static function releaseWgpuRenderTarget(pool:flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool, target:WgpuRenderTarget):Void {
     _Runtime.callProperty(_Runtime.field(pool, 'free'), 'push', cast ([target] : Array<Dynamic>));
   }
 }

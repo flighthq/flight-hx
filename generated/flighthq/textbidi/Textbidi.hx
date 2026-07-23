@@ -7,17 +7,18 @@ import flighthq.textbidi.BidiClassBackend as Facade_Textbidi_flighthq_textbidi_B
 import flighthq.textbidi.GetBidiRuns as Facade_Textbidi_flighthq_textbidi_GetBidiRuns;
 import flighthq.textbidi.ReorderBidiLine as Facade_Textbidi_flighthq_textbidi_ReorderBidiLine;
 import flighthq.textbidi.ResolveBidiLevels as Facade_Textbidi_flighthq_textbidi_ResolveBidiLevels;
+import flighthq.types.Bidi.BidiClassBackend;
 import flighthq.types.Bidi.BidiDirection;
 import flighthq.types.Bidi.BidiRun;
 
 @:expose("flighthq.textbidi.Textbidi")
 class Textbidi {
-  public static function createCompactBidiClassBackend():Dynamic {
+  public static function createCompactBidiClassBackend():BidiClassBackend {
     return cast _Runtime.callValue(Facade_Textbidi_flighthq_textbidi_BidiClassBackend.createCompactBidiClassBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function getBidiClassBackend():Dynamic {
+  public static function getBidiClassBackend():BidiClassBackend {
     return cast _Runtime.callValue(Facade_Textbidi_flighthq_textbidi_BidiClassBackend.getBidiClassBackend, cast ([] : Array<Dynamic>));
     return cast null;
   }
@@ -36,7 +37,7 @@ class Textbidi {
     return cast null;
   }
 
-  public static function setBidiClassBackend(backend:Null<Dynamic>):Void {
+  public static function setBidiClassBackend(backend:Null<BidiClassBackend>):Void {
     _Runtime.callValue(Facade_Textbidi_flighthq_textbidi_BidiClassBackend.setBidiClassBackend, cast ([backend] : Array<Dynamic>));
   }
 }

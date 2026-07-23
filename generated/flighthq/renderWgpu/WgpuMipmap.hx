@@ -4,10 +4,11 @@ package flighthq.renderWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderState;
 
 @:expose("flighthq.renderWgpu.WgpuMipmap")
 class WgpuMipmap {
-  public static function generateWgpuMipmaps(state:Dynamic, texture:Dynamic, width:Float, height:Float, format:Dynamic):Void {
+  public static function generateWgpuMipmaps(state:WgpuRenderState, texture:Dynamic, width:Float, height:Float, format:Dynamic):Void {
     var levelCount:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;
@@ -45,7 +46,7 @@ class WgpuMipmap {
     return cast null;
   }
 
-  public static function ensureWgpuMipmapPipeline__wgpuMipmap(state:Dynamic, format:Dynamic):Dynamic {
+  public static function ensureWgpuMipmapPipeline__wgpuMipmap(state:WgpuRenderState, format:Dynamic):Dynamic {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
     var device:Dynamic = cast _Runtime.UNDEFINED;

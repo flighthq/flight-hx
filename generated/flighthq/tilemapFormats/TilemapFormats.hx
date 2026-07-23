@@ -14,6 +14,7 @@ import flighthq.tilemapFormats.TiledOptions.TiledTilesetResolver;
 import flighthq.tilemapFormats.TiledProject as Facade_TilemapFormats_flighthq_tilemapFormats_TiledProject;
 import flighthq.tilemapFormats.TiledTmxFormat as Facade_TilemapFormats_flighthq_tilemapFormats_TiledTmxFormat;
 import flighthq.tilemapFormats.TiledXmlParse as Facade_TilemapFormats_flighthq_tilemapFormats_TiledXmlParse;
+import flighthq.types.TiledGid;
 import flighthq.types.TiledMap;
 import flighthq.types.TiledTileset;
 import flighthq.types.TiledTileset.TiledTilesetRef;
@@ -36,7 +37,7 @@ class TilemapFormats {
     return cast null;
   }
 
-  public static function decodeTiledGid(gid:Float):Dynamic {
+  public static function decodeTiledGid(gid:Float):TiledGid {
     return cast _Runtime.callValue(Facade_TilemapFormats_flighthq_tilemapFormats_TiledGid.decodeTiledGid, cast ([gid] : Array<Dynamic>));
     return cast null;
   }

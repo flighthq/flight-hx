@@ -4,10 +4,11 @@ package flighthq.adjustments;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.adjustments.ColorMatrixMath.createChannelMixerColorMatrix;
+import flighthq.types.ChannelMixerAdjustment;
 
 @:expose("flighthq.adjustments.ChannelMixerAdjustment")
 class ChannelMixerAdjustment {
-  public static function createChannelMixerAdjustment(?options:Dynamic):Dynamic {
+  public static function createChannelMixerAdjustment(?options:Dynamic):flighthq.types.ChannelMixerAdjustment {
     if (options == null) options = cast ({ matrix: ChannelMixerAdjustment.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment } : Dynamic);
     var matrix:Dynamic = cast _Runtime.UNDEFINED;
     var m:Dynamic = cast _Runtime.UNDEFINED;

@@ -7,8 +7,12 @@ import flighthq.renderGl.GlDraw.bindGlImageResourceTexture;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.BlendMode;
+import flighthq.types.ColorTransform;
 import flighthq.types.GlMaterialRenderer;
+import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlQuadBatchShader;
+import flighthq.types.ImageResource;
+import flighthq.types.Material;
 import flighthq.types.Material.MaterialData;
 
 @:expose("flighthq.displayobjectGl.GlSpriteBatch")
@@ -30,7 +34,7 @@ class GlSpriteBatch {
     return cast null;
   }
 
-  public static function bindGlQuadBatchBaseAttributes(state:Dynamic, locCorner:Float):Void {
+  public static function bindGlQuadBatchBaseAttributes(state:GlRenderState, locCorner:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var stride:Dynamic = cast _Runtime.UNDEFINED;
@@ -62,7 +66,7 @@ class GlSpriteBatch {
     _Runtime.callProperty(gl, 'vertexAttribDivisor', cast ([6.0, 1.0] : Array<Dynamic>));
   }
 
-  public static function ensureGlQuadBatchShader(state:Dynamic):GlQuadBatchShader {
+  public static function ensureGlQuadBatchShader(state:GlRenderState):GlQuadBatchShader {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var cornerData:Dynamic = cast _Runtime.UNDEFINED;
@@ -80,7 +84,7 @@ class GlSpriteBatch {
     return cast null;
   }
 
-  public static function flushGlSpriteBatch(state:Dynamic):Void {
+  public static function flushGlSpriteBatch(state:GlRenderState):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
@@ -140,7 +144,7 @@ class GlSpriteBatch {
     }
   }
 
-  public static function packGlSpriteBatchMaterialInstance(state:Dynamic, materialData:Null<MaterialData>, instanceIndex:Float):Void {
+  public static function packGlSpriteBatchMaterialInstance(state:GlRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var renderer:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -149,7 +153,7 @@ class GlSpriteBatch {
     _Runtime.callProperty(renderer, 'packInstance', cast ([state, materialData, _Runtime.field(runtime, 'spriteBatchMaterialData'), (instanceIndex * _Runtime.field(runtime, 'spriteBatchMaterialFloats'))] : Array<Dynamic>));
   }
 
-  public static function prepareGlSpriteBatchWrite(state:Dynamic, texture:Dynamic, blendMode:Null<BlendMode>, material:Null<Dynamic>, materialRenderer:GlMaterialRenderer, maxInstances:Float):Float {
+  public static function prepareGlSpriteBatchWrite(state:GlRenderState, texture:ImageResource, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:GlMaterialRenderer, maxInstances:Float):Float {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var floats:Dynamic = cast _Runtime.UNDEFINED;
     var needed:Dynamic = cast _Runtime.UNDEFINED;
@@ -189,7 +193,7 @@ class GlSpriteBatch {
     return cast null;
   }
 
-  public static function recordGlSpriteBatchColorTransform(state:Dynamic, colorTransform:Null<Dynamic>, instanceIndex:Float):Void {
+  public static function recordGlSpriteBatchColorTransform(state:GlRenderState, colorTransform:Null<ColorTransform>, instanceIndex:Float):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var fold:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
@@ -201,7 +205,7 @@ class GlSpriteBatch {
     if (_Runtime.truthy(!_Runtime.looseEquals(colorTransform, null))) { _Runtime.callOptionalProperty(runtime, 'glColorAdjustmentGuard', cast ([state, colorTransform] : Array<Dynamic>)); }
   }
 
-  public static function setGlQuadBatchWorldAndTexture(state:Dynamic, locWorldMatrix:Dynamic, locTexture:Dynamic):Void {
+  public static function setGlQuadBatchWorldAndTexture(state:GlRenderState, locWorldMatrix:Dynamic, locTexture:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var viewport:Dynamic = cast _Runtime.UNDEFINED;
@@ -227,7 +231,7 @@ class GlSpriteBatch {
     _Runtime.callProperty(gl, 'uniform1i', cast ([locTexture, 0.0] : Array<Dynamic>));
   }
 
-  public static function useGlQuadBatchProgram(state:Dynamic, program:Dynamic):Void {
+  public static function useGlQuadBatchProgram(state:GlRenderState, program:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'currentProgram'), program))) {

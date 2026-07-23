@@ -5,10 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sceneWgpu.WgpuMeshUpload.ensureWgpuMeshUpload;
 import flighthq.sceneWgpu.WgpuWireframeUpload;
+import flighthq.types.MeshGeometry;
+import flighthq.types.WgpuRenderState;
 
 @:expose("flighthq.sceneWgpu._internal._WgpuWireframeUploadValues")
 class _WgpuWireframeUploadValues {
-  public static function ensureWgpuWireframeUpload(state:Dynamic, geometry:Dynamic):Null<WgpuWireframeUpload> {
+  public static function ensureWgpuWireframeUpload(state:WgpuRenderState, geometry:MeshGeometry):Null<WgpuWireframeUpload> {
     var meshUpload:Dynamic = cast _Runtime.UNDEFINED;
     var perState:Dynamic = cast _Runtime.UNDEFINED;
     var upload:Dynamic = cast _Runtime.UNDEFINED;
@@ -22,7 +24,7 @@ class _WgpuWireframeUploadValues {
       (perState = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []) : Dynamic));
       _Runtime.callProperty(_WgpuWireframeUploadValues.wireframeUploads__wgpuWireframeUpload, 'set', cast ([state, perState] : Array<Dynamic>));
     }
-    upload = _Runtime.callProperty(perState, 'get', cast ([(cast geometry : Dynamic)] : Array<Dynamic>));
+    upload = _Runtime.callProperty(perState, 'get', cast ([(cast geometry : MeshGeometry)] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(upload, 'version'), _Runtime.field(geometry, 'version'))))) {
       return cast upload;
     }
@@ -32,12 +34,12 @@ class _WgpuWireframeUploadValues {
     lineIndexBuffer = _Runtime.callProperty(device, 'createBuffer', cast ([{ size: _Runtime.callProperty(HxMath, 'max', cast ([4.0, _Runtime.callValue(_WgpuWireframeUploadValues.alignTo4__wgpuWireframeUpload, cast ([_Runtime.field(lines, 'byteLength')] : Array<Dynamic>))] : Array<Dynamic>)), usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'INDEX')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(device, 'queue'), 'writeBuffer', cast ([lineIndexBuffer, 0.0, _Runtime.field(lines, 'buffer'), _Runtime.field(lines, 'byteOffset'), _Runtime.field(lines, 'byteLength')] : Array<Dynamic>));
     (upload = cast ({ indexFormat: _Runtime.select(_Runtime.isInstanceOf(lines, _Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>))), function():Dynamic return cast 'uint32', function():Dynamic return cast 'uint16'), lineIndexBuffer: lineIndexBuffer, version: _Runtime.field(geometry, 'version'), vertexBuffer: _Runtime.field(meshUpload, 'vertexBuffer') } : Dynamic));
-    _Runtime.callProperty(perState, 'set', cast ([(cast geometry : Dynamic), upload] : Array<Dynamic>));
+    _Runtime.callProperty(perState, 'set', cast ([(cast geometry : MeshGeometry), upload] : Array<Dynamic>));
     return cast upload;
     return cast null;
   }
 
-  public static function buildLineIndices__wgpuWireframeUpload(geometry:Dynamic):Dynamic {
+  public static function buildLineIndices__wgpuWireframeUpload(geometry:MeshGeometry):Dynamic {
     var triangleIndices:Dynamic = cast _Runtime.UNDEFINED;
     var triangleCount:Dynamic = cast _Runtime.UNDEFINED;
     var lineCount:Dynamic = cast _Runtime.UNDEFINED;

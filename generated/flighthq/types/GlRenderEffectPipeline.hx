@@ -3,13 +3,14 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.GlRenderTarget.GlRenderTargetPool;
 import flighthq.types.RenderTarget.RenderTargetDepth;
 import flighthq.types.RenderTarget.RenderTargetFormat;
 
-typedef GlRenderEffectContext = { var state:Dynamic; var source:Dynamic; var dest:Dynamic; var pool:Dynamic; var sceneDepthTexture:Null<Dynamic>; var sceneVelocityTexture:Null<Dynamic>; };
+typedef GlRenderEffectContext = { var state:GlRenderState; var source:GlRenderTarget; var dest:GlRenderTarget; var pool:GlRenderTargetPool; var sceneDepthTexture:Null<Dynamic>; var sceneVelocityTexture:Null<Dynamic>; };
 
 typedef GlRenderEffectRunner = Dynamic;
 
 typedef RenderEffectPipelineOptions = { @:optional var sampleCount:Float; @:optional var format:RenderTargetFormat; @:optional var depth:RenderTargetDepth; };
 
-typedef GlRenderEffectPipeline = { var options:RenderEffectPipelineOptions; var sceneTarget:Null<Dynamic>; var pool:Dynamic; var lutCache:Dynamic; var lutTexture:GlColorLutTextureCache; var velocityTexture:Null<Dynamic>; };
+typedef GlRenderEffectPipeline = { var options:RenderEffectPipelineOptions; var sceneTarget:Null<GlRenderTarget>; var pool:GlRenderTargetPool; var lutCache:ColorLutCache; var lutTexture:GlColorLutTextureCache; var velocityTexture:Null<Dynamic>; };
