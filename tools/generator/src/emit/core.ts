@@ -300,7 +300,12 @@ function populateSourceImports(
     throw new Error(`Cannot resolve Haxe owner for ${record.source}`);
   };
   const resolvePackageImport = (packageName: string, importedName: string) => {
-    const record = inventoryByName.get(packageName)?.exports.find((candidate) => candidate.name === importedName);
+    // A subpath specifier (`@flighthq/surface/surfaceFingerprint`) resolves the same export as
+    // its base package (`@flighthq/surface`); fall back to the base package's export inventory.
+    const basePackage = /^(@flighthq\/[^/]+)/u.exec(packageName)?.[1] ?? packageName;
+    const record =
+      inventoryByName.get(packageName)?.exports.find((candidate) => candidate.name === importedName) ??
+      inventoryByName.get(basePackage)?.exports.find((candidate) => candidate.name === importedName);
     if (!record) throw new Error(`Cannot resolve imported export ${packageName}.${importedName}`);
     return resolveRecord(record);
   };

@@ -423,11 +423,14 @@ function resolveModule(
   specifier: string,
   packageByName: Map<string, PackageDescriptor>,
 ): string {
+  // Strip the ESM `.js`/`.mjs` extension that TypeScript module specifiers carry; the on-disk
+  // source is `.ts`/`.tsx` (matches the relative-import resolver in emit/core.ts).
+  const withoutJs = specifier.replace(/\.m?js$/u, '');
   let candidate: string;
-  if (specifier.startsWith('.')) {
-    candidate = path.resolve(path.dirname(containingFile), specifier);
+  if (withoutJs.startsWith('.')) {
+    candidate = path.resolve(path.dirname(containingFile), withoutJs);
   } else {
-    const match = /^(@flighthq\/[^/]+)(?:\/(.+))?$/u.exec(specifier);
+    const match = /^(@flighthq\/[^/]+)(?:\/(.+))?$/u.exec(withoutJs);
     if (!match?.[1]) throw new Error(`Unsupported export module '${specifier}' in ${containingFile}`);
     const descriptor = packageByName.get(match[1]);
     if (!descriptor) throw new Error(`Unknown Flight package '${match[1]}' in ${containingFile}`);
