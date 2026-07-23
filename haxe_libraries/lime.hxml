@@ -1,0 +1,8 @@
+# @install: lix --silent download "gh://github.com/openfl/lime#ed28c736142fcd25ae99d21e1e47f1a918088406" into lime/8.4.0/github/ed28c736142fcd25ae99d21e1e47f1a918088406
+# @run: haxelib run-dir lime "${HAXE_LIBCACHE}/lime/8.4.0/github/ed28c736142fcd25ae99d21e1e47f1a918088406"
+-cp ${HAXE_LIBCACHE}/lime/8.4.0/github/ed28c736142fcd25ae99d21e1e47f1a918088406/src
+-D lime=8.4.0
+--macro lime._internal.macros.DefineMacro.run()
+--macro haxe.macro.Compiler.addMetadata("@:autoBuild(lime._internal.macros.AssetsMacro.embedBytes())", "haxe.io.Bytes")
+
+-lib ndll:${HAXE_LIBCACHE}/lime/8.4.0/github/ed28c736142fcd25ae99d21e1e47f1a918088406/ndll/
