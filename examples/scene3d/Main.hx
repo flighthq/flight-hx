@@ -1,4 +1,4 @@
-import flighthq.Sdk;import flighthq.SceneGl;import lime.graphics.RenderContext;
+import flighthq.sdk.Sdk;import flighthq.sceneGl.SceneGl;import lime.graphics.RenderContext;
 class Main extends ExampleHost {
   var scene:Dynamic;var camera:Dynamic;var lights:Dynamic;var meshes:Array<Dynamic>=[];
   override public function flightReady():Void {

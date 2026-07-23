@@ -41,48 +41,26 @@ The analyzer resolves packages, source modules, exports, re-exports, type-only i
 
 ## Public Haxe Surface
 
-The public namespace is the flat Haxe package `flight`. The Haxelib project name is also `flight`.
-
-Each upstream npm package maps to a PascalCase Haxe module directly under `flight`:
+The Haxelib project is `flight`; its Haxe namespace is `flighthq`. Generated ownership follows a mechanical two-part rule:
 
 ```text
-@flighthq/sdk       → flight.Sdk
-@flighthq/types     → flight.Types
-@flighthq/geometry  → flight.Geometry
-@flighthq/render-gl → flight.RenderGl
-@flighthq/host-tauri → flight.HostTauri
+@flighthq/<npm-package>/<defining-file>.ts
+→ flighthq.<lowerCamelPackage>.<PascalCaseFile>
 ```
 
-Kebab-case conversion is deterministic. Acronym or collision exceptions belong in configuration and appear in the generated name map.
+Examples:
 
-Broad consumers use:
-
-```haxe
-import flight.Sdk.*;
-import flight.Types.Vector2;
-
-final value:Vector2 = createVector2(10, 20);
-normalizeVector2(value, value);
+```text
+@flighthq/geometry/src/vector2.ts   → flighthq.geometry.Vector2
+@flighthq/render-gl/src/glShader.ts → flighthq.renderGl.GlShader
+@flighthq/types/src/Vector2.ts      → flighthq.types.Vector2
 ```
 
-Package-oriented consumers use:
+The original defining file remains canonical through re-exports. Package `index.ts` files do not produce `Index`; each package instead has a PascalCase facade such as `flighthq.geometry.Geometry`, `flighthq.renderGl.RenderGl`, or `flighthq.sdk.Sdk`. Files named `internal.ts` and test helpers are absent from the public namespace and compile under an underscore-hidden implementation package when the parity harness needs them.
 
-```haxe
-import flight.Geometry.*;
-import flight.Types.Vector2;
+Broad consumers use `import flighthq.sdk.Sdk.*`. Package consumers may use `import flighthq.geometry.Geometry.*`, while more focused consumers import the defining module directly, such as `import flighthq.geometry.Vector2.*`.
 
-final value:Vector2 = createVector2();
-```
-
-Haxe wildcard imports on a class expose its static fields, which makes the free-function facade work. They do not import secondary typedefs from the module. Types therefore use explicit module-qualified imports such as `import flight.Types.Vector2`, or remain inferred at call sites. This is a compiler-enforced Haxe constraint rather than an additional public ownership layer.
-
-Qualified module access remains available where Haxe permits it:
-
-```haxe
-final value = Sdk.createVector2();
-```
-
-There is no public second-level package such as `flight.geometry.Geometry`, and there is no public per-type ownership layer. Internal emitter modules may be deeper when required for compiler scalability or cyclic initialization, but they are not documented import paths.
+The mapping has no semantic bucket list. Invalid module names, duplicate mapped paths, and Haxe package-level type collisions fail generation with every conflicting upstream source. Fix those collisions by reorganizing upstream TypeScript; do not add Haxe-only naming exceptions.
 
 ## Functions and Data
 
@@ -99,41 +77,15 @@ Haxe classes may represent nominal entities or target-specific storage, but they
 
 ## Type Placement
 
-Canonical shared type declarations follow upstream ownership:
+Canonical shared declarations remain in their defining `@flighthq/types` file. A main type uses the module path directly (`flighthq.types.Vector2`); additional declarations use ordinary Haxe secondary-type paths (`flighthq.types.Vector2.Vector2Like`). Re-exporting packages reference that canonical declaration and do not duplicate it.
 
-```text
-@flighthq/types → flight.Types
-```
-
-Haxe secondary types occupy the package-level type namespace even though their import path includes the declaring module. Consequently, `flight.Types.Vector2` and a proposed `flight.Geometry.Vector2` alias both define `flight.Vector2` and collide. Package and SDK modules therefore cannot redeclare type aliases in the same flat `flight` package.
-
-Conceptually:
-
-```haxe
-// flight/Types.hx
-typedef Vector2 = {
-  var x:Float;
-  var y:Float;
-}
-
-// flight/Geometry.hx
-function createVector2(?x:Float, ?y:Float):Vector2 {
-  // generated implementation
-}
-
-// generated static field on flight.Sdk
-function createVector2(?x:Float, ?y:Float):Vector2 {
-  return forwardedGeometryCreateVector2(x, y);
-}
-```
-
-Package signatures import and reference the canonical declaration. Consumers explicitly import types from their canonical module (`import flight.Types.Vector2`) or rely on type inference. The API manifest still records package and SDK type re-exports, but Haxe emission does not create colliding duplicate declarations. Do not infer a new canonical home from `create<Type>` or redistribute upstream types by hand.
+When a source file contains a same-named structural type and runtime values, the public type module remains canonical and values compile in an underscore-hidden companion used by the package facade. Haxe also makes every secondary type occupy its package-level type namespace, so a file module named `ElectronApp` cannot coexist with an `ElectronApp` secondary type declared by another file in that npm package. The generator diagnoses this as upstream organization work.
 
 ## Package and SDK Facades
 
-Package modules are the granular public surface. `flight.Sdk` mirrors the upstream `@flighthq/sdk` policy rather than blindly aggregating every package. Host and tooling packages excluded upstream remain excluded from `flight.Sdk`.
+Defining-file modules are the granular public surface. Package facades and `flighthq.sdk.Sdk` mirror upstream barrels rather than blindly aggregating every package. Host and tooling packages excluded upstream remain excluded from the SDK facade.
 
-The generator emits forwarding functions and value aliases for package-barrel and SDK value re-exports. It resolves renamed cross-package exports before building `flight.Sdk`, so names such as `defaultGlBeginBitmapFill` exist in both the granular public module and the SDK when upstream exports them. Forwarders reuse canonical implementations; they do not create maintained duplicate bodies. Type re-exports remain manifest-only where Haxe's flat secondary-type namespace would collide.
+The generator emits forwarding functions and value aliases for package-barrel and SDK value re-exports. It resolves renamed cross-package exports before building `flighthq.sdk.Sdk`, so names such as `defaultGlBeginBitmapFill` exist in both the granular public module and the SDK when upstream exports them. Forwarders reuse canonical implementations; they do not create maintained duplicate bodies. Type re-exports retain their original defining-module identity.
 
 Facade parameters retain the public signature but do not repeat source default initializers. A forwarded `null`/omitted value reaches the canonical function, which applies the generated default once in its owning module.
 
@@ -164,7 +116,7 @@ Platform adapters follow these rules:
 Behavioral parity is tested by compiling Haxe to JavaScript and generating ESM modules that match upstream npm package identities:
 
 ```text
-@flighthq/geometry → generated bridge → compiled flight.Geometry
+@flighthq/geometry → generated bridge → compiled flighthq.geometry.Geometry
 @flighthq/sdk      → generated SDK bridge → granular package bridges
 ```
 

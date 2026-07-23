@@ -1,4 +1,4 @@
-import flighthq.Sdk;import lime.ui.KeyCode;import lime.ui.KeyModifier;
+import flighthq.sdk.Sdk;import lime.ui.KeyCode;import lime.ui.KeyModifier;
 class Main extends ExampleHost {
   var state:Dynamic={player:{x:400.0,y:250.0,score:0.0},time:0.0};var saved:Dynamic;var player:Dynamic;var label:Dynamic;
   override public function flightReady():Void {final stage=createStage("Snapshot");player=addCircle(stage,state.player.x,state.player.y,18,0x44aaff);label=addLabel(stage,"S save   R restore",20,450);}

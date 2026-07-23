@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 class Main extends ExampleHost {
   var clip:Dynamic; var content:Dynamic; var frameLabel:Dynamic;
   override public function flightReady():Void {

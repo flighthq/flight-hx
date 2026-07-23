@@ -4,7 +4,14 @@ import ts from 'typescript';
 
 import patches from '../../patches/manifest.ts';
 import { portConfig } from '../../port.config.ts';
-import { analyzeUpstream, packageNameToModule } from '../analyze/inventory.ts';
+import {
+  analyzeUpstream,
+  packageNameToHaxePackage,
+  packageNameToModule,
+  sourcePathToHaxePackage,
+  sourcePathToImplementationModule,
+  sourcePathToModule,
+} from '../analyze/inventory.ts';
 import { lowerTypeScriptSource } from '../lower/typescript.ts';
 import type {
   IrDeclaration,
@@ -26,6 +33,19 @@ export interface CoreGenerationReport {
     module: string;
   }>;
   schemaVersion: 1;
+}
+
+interface LoweredSource {
+  declarations: IrDeclaration[];
+  diagnostics: LoweringDiagnostic[];
+  file: string;
+}
+
+interface LoweredPackageEntry {
+  directoryName: string;
+  lowered: ReturnType<typeof lowerPackage>;
+  moduleName: string;
+  packageName: string;
 }
 
 export function generateCoreModules(workspaceDirectory: string, check: boolean): CoreGenerationReport {
@@ -56,9 +76,6 @@ export function generateCoreModules(workspaceDirectory: string, check: boolean):
       )
       .map((declaration) => declaration.name),
   );
-  const canonicalImportNames = new Set(
-    types.lowered.declarations.filter((declaration) => declaration.exported).map((declaration) => declaration.name),
-  );
   const canonicalValueAliases = new Map<string, string>();
   for (const declaration of types.lowered.declarations) {
     if (
@@ -79,76 +96,61 @@ export function generateCoreModules(workspaceDirectory: string, check: boolean):
       declaration.name = canonicalValueAliases.get(declaration.name) ?? declaration.name;
     }
   }
-  for (const item of loweredPackages) {
-    const referencedCanonicalTypes = new Set<string>();
-    collectReferencedNamedTypes(item.lowered.declarations, canonicalTypeNames, referencedCanonicalTypes);
-    item.lowered.imports = [
-      ...new Set([
-        ...item.lowered.imports.map((importPath) => {
-          const match = /^flighthq\.[^.]+\.([^ ]+)(.*)$/u.exec(importPath);
-          const localAlias = / as ([^ ]+)$/u.exec(match?.[2] ?? '')?.[1];
-          const valueAlias = match?.[1] ? canonicalValueAliases.get(match[1]) : undefined;
-          if (
-            match?.[1] &&
-            valueAlias &&
-            localAlias &&
-            (localAlias.endsWith('Values') || /^[A-Z][A-Z0-9_]*$/u.test(localAlias))
-          ) {
-            return `flighthq.Types.${valueAlias} as ${localAlias}`;
-          }
-          return match?.[1] && canonicalImportNames.has(match[1])
-            ? `flighthq.Types.${match[1]}${match[2] ?? ''}`
-            : importPath;
-        }),
-        ...(item.packageName === '@flighthq/types'
-          ? []
-          : [...referencedCanonicalTypes].map((name) => `flighthq.Types.${name}`)),
-      ]),
-    ].sort();
-    if (item.packageName !== '@flighthq/types') {
-      rewriteCanonicalValueReferences(item.lowered.declarations, canonicalValueAliases, true);
-      item.lowered.imports = item.lowered.imports.filter((importPath) => {
-        const match = /^flighthq\.Types\.([^ ]+)/u.exec(importPath);
-        return (
-          !match?.[1] ||
-          !canonicalValueAliases.has(match[1]) ||
-          canonicalTypeNames.has(match[1]) ||
-          importPath.includes(' as ')
-        );
-      });
-    }
-  }
   fillGenericArguments(loweredPackages.flatMap((item) => item.lowered.declarations));
   flattenStructuralTypes(types.lowered.declarations);
   for (const item of loweredPackages) inlineDefaultConstants(item.lowered.declarations);
-  const modules: IrModule[] = loweredPackages.map((item) => ({
-    declarations: item.lowered.declarations,
-    imports: item.lowered.imports,
-    name: item.moduleName,
-    packageName: item.packageName,
-  }));
-  const declarationsBeforePatches = modules.flatMap((module) => module.declarations);
+  const declarationsBeforePatches = loweredPackages.flatMap((item) => item.lowered.declarations);
   const patchAudit = applySemanticPatches(declarationsBeforePatches, patches, workspaceDirectory);
   const retainedDeclarations = new Set(declarationsBeforePatches);
-  for (const module of modules)
-    module.declarations = module.declarations.filter((item) => retainedDeclarations.has(item));
+  for (const item of loweredPackages) {
+    item.lowered.declarations = item.lowered.declarations.filter((declaration) =>
+      retainedDeclarations.has(declaration),
+    );
+    for (const source of item.lowered.sources) {
+      source.declarations = source.declarations.filter((declaration) => retainedDeclarations.has(declaration));
+    }
+  }
+  const modules = loweredPackages.flatMap((item) =>
+    item.lowered.sources.flatMap((source) => buildSourceModules(item.packageName, source, workspaceDirectory)),
+  );
+  for (const item of loweredPackages) {
+    const haxePackage = packageNameToHaxePackage(item.packageName);
+    const existing = modules.find((module) => module.haxePackage === haxePackage && module.name === item.moduleName);
+    if (!existing) {
+      modules.push({
+        declarations: [],
+        haxePackage,
+        imports: [],
+        name: item.moduleName,
+        packageName: item.packageName,
+      });
+    }
+  }
+  populateSourceImports(modules, loweredPackages, inventoryByName, canonicalValueAliases, workspaceDirectory);
   buildPublicFacades(modules, inventoryByName, canonicalValueAliases);
-  const maintainedDirectory = path.join(workspaceDirectory, 'src', 'flighthq');
-  const conflicts = modules
-    .map((module) => `${module.name}.hx`)
-    .filter((file) => existsSync(path.join(maintainedDirectory, file)));
+  validateHaxeModuleIdentities(modules);
+  const maintainedDirectory = path.join(workspaceDirectory, 'src');
+  const conflicts = modules.map(moduleRelativePath).filter((file) => existsSync(path.join(maintainedDirectory, file)));
   if (conflicts.length > 0) {
     throw new Error(`Maintained and generated Haxe modules overlap: ${conflicts.join(', ')}`);
   }
-  const generatedDirectory = path.join(workspaceDirectory, portConfig.generatedDirectory, 'flighthq');
+  const generatedDirectory = path.join(workspaceDirectory, portConfig.generatedDirectory);
   mkdirSync(generatedDirectory, { recursive: true });
-  removeStaleGeneratedModules(generatedDirectory, new Set(modules.map((module) => `${module.name}.hx`)), check);
+  removeStaleGeneratedModules(generatedDirectory, new Set(modules.map(moduleRelativePath)), check);
   for (const module of modules) {
-    writeOrCheck(path.join(generatedDirectory, `${module.name}.hx`), emitHaxeModule(module), check);
+    const output = path.join(generatedDirectory, moduleRelativePath(module));
+    mkdirSync(path.dirname(output), { recursive: true });
+    writeOrCheck(output, emitHaxeModule(module), check);
   }
   mkdirSync(path.join(workspaceDirectory, 'tests', 'bridges'), { recursive: true });
   for (const item of loweredPackages) {
     const packageInventory = inventoryByName.get(item.packageName);
+    const facade = modules.find(
+      (module) =>
+        module.haxePackage === packageNameToHaxePackage(item.packageName) &&
+        module.name === packageNameToModule(item.packageName),
+    );
+    if (!facade) throw new Error(`Expected generated facade for ${item.packageName}`);
     const externalExports = (packageInventory?.exports ?? []).flatMap((record) => {
       const sourcePackage = /^upstream\/packages\/([^/]+)\//u.exec(record.source)?.[1];
       if (!sourcePackage || sourcePackage === item.directoryName) return [];
@@ -167,8 +169,10 @@ export function generateCoreModules(workspaceDirectory: string, check: boolean):
     writeOrCheck(
       path.join(workspaceDirectory, 'tests', 'bridges', `${item.directoryName}.mjs`),
       emitJavaScriptBridge(
-        item.moduleName,
+        modulePath(facade),
         item.lowered.declarations,
+        packageInventory?.exports ?? [],
+        modules,
         item.packageName === '@flighthq/types' ? canonicalValueAliases : undefined,
         externalExports,
       ),
@@ -186,7 +190,8 @@ export function generateCoreModules(workspaceDirectory: string, check: boolean):
         path.join(packageSourceBridgesDirectory, `${sourceName}.mjs`),
         emitJavaScriptSourceBridge(
           workspaceDirectory,
-          item.moduleName,
+          modules,
+          item.packageName,
           item.lowered.declarations,
           file,
           canonicalValueAliases,
@@ -196,11 +201,19 @@ export function generateCoreModules(workspaceDirectory: string, check: boolean):
     }
   }
   const report: CoreGenerationReport = {
-    modules: loweredPackages.map((item) => ({
-      declarations: item.lowered.declarations.length,
-      diagnostics: item.lowered.diagnostics,
-      module: `flighthq.${item.moduleName}`,
-    })),
+    modules: modules
+      .map((module) => ({
+        declarations: module.declarations.length,
+        diagnostics: module.source
+          ? (loweredPackages
+              .find((item) => item.packageName === module.packageName)
+              ?.lowered.sources.find(
+                (source) => path.relative(workspaceDirectory, source.file).split(path.sep).join('/') === module.source,
+              )?.diagnostics ?? [])
+          : [],
+        module: modulePath(module),
+      }))
+      .sort((left, right) => left.module.localeCompare(right.module)),
     schemaVersion: 1,
   };
   writeOrCheck(path.join(workspaceDirectory, 'reports', 'core.json'), stableJson(report), check);
@@ -208,18 +221,192 @@ export function generateCoreModules(workspaceDirectory: string, check: boolean):
   return report;
 }
 
+function buildSourceModules(packageName: string, source: LoweredSource, workspaceDirectory: string): IrModule[] {
+  const relativeSource = path.relative(workspaceDirectory, source.file).split(path.sep).join('/');
+  const haxePackage = sourcePathToHaxePackage(packageName, relativeSource);
+  const name = sourcePathToImplementationModule(relativeSource);
+  const typeDeclarations = source.declarations.filter(
+    (declaration) => declaration.kind === 'class' || declaration.kind === 'enum' || declaration.kind === 'type',
+  );
+  const valueDeclarations = source.declarations.filter(
+    (declaration) => declaration.kind === 'function' || declaration.kind === 'variable',
+  );
+  const mainType = typeDeclarations.some((declaration) => declaration.name === name);
+  if (!mainType || valueDeclarations.length === 0) {
+    return [{ declarations: source.declarations, haxePackage, imports: [], name, packageName, source: relativeSource }];
+  }
+  if (!sourcePathToModule(relativeSource)) {
+    throw new Error(`Hidden implementation module has a conflicting main type: ${relativeSource}`);
+  }
+  return [
+    { declarations: typeDeclarations, haxePackage, imports: [], name, packageName, source: relativeSource },
+    {
+      declarations: valueDeclarations,
+      haxePackage: `${packageNameToHaxePackage(packageName)}._internal`,
+      imports: [],
+      name: `_${name}Values`,
+      packageName,
+      source: relativeSource,
+    },
+  ];
+}
+
+function populateSourceImports(
+  modules: IrModule[],
+  loweredPackages: LoweredPackageEntry[],
+  inventoryByName: ReadonlyMap<string, ReturnType<typeof analyzeUpstream>['packages'][number]>,
+  canonicalValueAliases: ReadonlyMap<string, string>,
+  workspaceDirectory: string,
+): void {
+  const modulesBySource = new Map<string, IrModule[]>();
+  for (const module of modules) {
+    if (!module.source) continue;
+    const owners = modulesBySource.get(module.source) ?? [];
+    owners.push(module);
+    modulesBySource.set(module.source, owners);
+  }
+  const resolveRecord = (record: { fingerprint: string; source: string }) => {
+    for (const module of modulesBySource.get(record.source) ?? []) {
+      const declaration = module.declarations.find(
+        (candidate) => candidate.origin.fingerprint === record.fingerprint && candidate.origin.source === record.source,
+      );
+      if (declaration) return { declaration, module };
+    }
+    throw new Error(`Cannot resolve Haxe owner for ${record.source}`);
+  };
+  const resolvePackageImport = (packageName: string, importedName: string) => {
+    const record = inventoryByName.get(packageName)?.exports.find((candidate) => candidate.name === importedName);
+    if (!record) throw new Error(`Cannot resolve imported export ${packageName}.${importedName}`);
+    return resolveRecord(record);
+  };
+  const resolveRelativeImport = (file: string, packageName: string, specifier: string, importedName: string) => {
+    const unresolved = path.resolve(path.dirname(file), specifier.replace(/\.m?js$/u, ''));
+    const candidates = [unresolved, `${unresolved}.ts`, `${unresolved}.tsx`, path.join(unresolved, 'index.ts')];
+    const target = candidates.find((candidate) => existsSync(candidate));
+    if (!target)
+      throw new Error(`Cannot resolve source import ${specifier} from ${path.relative(workspaceDirectory, file)}`);
+    if (path.basename(target) === 'index.ts') return resolvePackageImport(packageName, importedName);
+    const relativeTarget = path.relative(workspaceDirectory, target).split(path.sep).join('/');
+    const generatedName = canonicalValueAliases.get(importedName) ?? importedName;
+    for (const module of modulesBySource.get(relativeTarget) ?? []) {
+      const declaration = module.declarations.find(
+        (candidate) => candidate.name === generatedName || candidate.name === importedName,
+      );
+      if (declaration) return { declaration, module };
+    }
+    const reexport = inventoryByName
+      .get(packageName)
+      ?.exports.find((candidate) => candidate.name === importedName && candidate.source !== relativeTarget);
+    if (reexport) return resolveRecord(reexport);
+    throw new Error(`Cannot resolve imported declaration ${importedName} from ${relativeTarget}`);
+  };
+  for (const item of loweredPackages) {
+    for (const loweredSource of item.lowered.sources) {
+      const relativeSource = path.relative(workspaceDirectory, loweredSource.file).split(path.sep).join('/');
+      const owners = modulesBySource.get(relativeSource) ?? [];
+      const source = ts.createSourceFile(
+        loweredSource.file,
+        readFileSync(loweredSource.file, 'utf8'),
+        ts.ScriptTarget.Latest,
+        true,
+        ts.ScriptKind.TS,
+      );
+      for (const statement of source.statements) {
+        if (!ts.isImportDeclaration(statement) || !ts.isStringLiteral(statement.moduleSpecifier)) continue;
+        const bindings = statement.importClause?.namedBindings;
+        if (!bindings || !ts.isNamedImports(bindings)) continue;
+        for (const element of bindings.elements) {
+          const importedName = element.propertyName?.text ?? element.name.text;
+          const resolved = statement.moduleSpecifier.text.startsWith('.')
+            ? resolveRelativeImport(loweredSource.file, item.packageName, statement.moduleSpecifier.text, importedName)
+            : statement.moduleSpecifier.text.startsWith('@flighthq/')
+              ? resolvePackageImport(statement.moduleSpecifier.text, importedName)
+              : undefined;
+          if (!resolved) continue;
+          const alias = element.name.text === resolved.declaration.name ? '' : ` as ${element.name.text}`;
+          const importPath = `${declarationImportPath(resolved.module, resolved.declaration)}${alias}`;
+          for (const owner of owners) {
+            if (owner !== resolved.module) owner.imports.push(importPath);
+          }
+        }
+      }
+    }
+  }
+  for (const module of modules) module.imports = [...new Set(module.imports)].sort();
+}
+
+function modulePath(module: IrModule): string {
+  return `${module.haxePackage ?? 'flighthq'}.${module.name}`;
+}
+
+function declarationImportPath(module: IrModule, declaration: IrDeclaration): string {
+  const isMainType =
+    declaration.name === module.name &&
+    (declaration.kind === 'class' || declaration.kind === 'enum' || declaration.kind === 'type');
+  return isMainType ? modulePath(module) : `${modulePath(module)}.${declaration.name}`;
+}
+
+function moduleRelativePath(module: IrModule): string {
+  return `${(module.haxePackage ?? 'flighthq').split('.').join(path.sep)}${path.sep}${module.name}.hx`;
+}
+
+export function validateHaxeModuleIdentities(modules: IrModule[]): void {
+  const ownersByIdentity = new Map<string, string[]>();
+  const ownersByModulePath = new Map<string, string[]>();
+  const addOwner = (identity: string, owner: string): void => {
+    const owners = ownersByIdentity.get(identity) ?? [];
+    owners.push(owner);
+    ownersByIdentity.set(identity, owners);
+  };
+  for (const module of modules) {
+    const moduleIdentity = modulePath(module);
+    const moduleOwners = ownersByModulePath.get(moduleIdentity) ?? [];
+    moduleOwners.push(module.source ?? `${module.packageName} barrel`);
+    ownersByModulePath.set(moduleIdentity, moduleOwners);
+    if (!/^_*[A-Z][A-Za-z0-9_]*$/u.test(module.name)) {
+      throw new Error(`Invalid Haxe module name ${module.name} from ${module.source ?? module.packageName}`);
+    }
+    if (module.declarations.some((declaration) => declaration.kind === 'function' || declaration.kind === 'variable')) {
+      addOwner(moduleIdentity, `${module.source ?? `${module.packageName} barrel`} namespace`);
+    }
+    for (const declaration of module.declarations) {
+      if (declaration.kind === 'class' || declaration.kind === 'enum' || declaration.kind === 'type') {
+        addOwner(
+          `${module.haxePackage ?? 'flighthq'}.${declaration.name}`,
+          `${module.source ?? `${module.packageName} barrel`} declaration ${declaration.name}`,
+        );
+      }
+    }
+  }
+  const collisions = [...ownersByIdentity]
+    .filter(([, owners]) => owners.length > 1)
+    .sort(([left], [right]) => left.localeCompare(right));
+  const moduleCollisions = [...ownersByModulePath]
+    .filter(([, owners]) => owners.length > 1)
+    .sort(([left], [right]) => left.localeCompare(right));
+  if (collisions.length === 0 && moduleCollisions.length === 0) return;
+  throw new Error(
+    `Haxe module/type identity collisions require upstream source reorganization:\n${[
+      ...moduleCollisions.map(([identity, owners]) => `- duplicate module ${identity}: ${owners.join('; ')}`),
+      ...collisions.map(([identity, owners]) => `- ${identity}: ${owners.join('; ')}`),
+    ].join('\n')}`,
+  );
+}
+
 /** Haxe classes cannot re-export another class's static fields. */
 function buildPublicFacades(
   modules: IrModule[],
   inventoryByName: ReadonlyMap<string, ReturnType<typeof analyzeUpstream>['packages'][number]>,
-  canonicalValueAliases: ReadonlyMap<string, string>,
+  _canonicalValueAliases: ReadonlyMap<string, string>,
 ): void {
-  const sdk = modules.find((module) => module.packageName === '@flighthq/sdk');
+  const facadeForPackage = (packageName: string): IrModule | undefined => {
+    const haxePackage = packageNameToHaxePackage(packageName);
+    const name = packageNameToModule(packageName);
+    return modules.find((module) => module.haxePackage === haxePackage && module.name === name);
+  };
+  const sdk = facadeForPackage('@flighthq/sdk');
   const sdkInventory = inventoryByName.get('@flighthq/sdk');
   if (!sdk || !sdkInventory) throw new Error('Expected @flighthq/sdk module and inventory');
-  const modulesByDirectory = new Map(
-    modules.map((module) => [module.packageName.replace('@flighthq/', ''), module] as const),
-  );
   const typeOwnerByName = new Map<string, IrModule>();
   for (const module of modules) {
     for (const declaration of module.declarations) {
@@ -229,20 +416,24 @@ function buildPublicFacades(
     }
   }
 
-  const resolveDirectDeclaration = (
+  const resolveDeclaration = (
     record: (typeof sdkInventory.exports)[number],
-  ): { declaration: Extract<IrDeclaration, { kind: 'function' | 'variable' }>; module: IrModule } | undefined => {
-    const sourceDirectory = /^upstream\/packages\/([^/]+)\//u.exec(record.source)?.[1];
-    const originModule = sourceDirectory ? modulesByDirectory.get(sourceDirectory) : undefined;
-    if (!originModule || originModule === sdk) return undefined;
-    const declaration = originModule.declarations.find(
-      (candidate) =>
-        candidate.kind === record.kind &&
-        candidate.origin.fingerprint === record.fingerprint &&
-        candidate.origin.source === record.source,
-    );
-    return declaration && (declaration.kind === 'function' || declaration.kind === 'variable')
-      ? { declaration, module: originModule }
+  ): { declaration: IrDeclaration; module: IrModule } | undefined => {
+    for (const module of modules) {
+      const declaration = module.declarations.find(
+        (candidate) => candidate.origin.fingerprint === record.fingerprint && candidate.origin.source === record.source,
+      );
+      if (declaration) return { declaration, module };
+    }
+    return undefined;
+  };
+  const resolveDirectDeclaration = (record: (typeof sdkInventory.exports)[number]) => {
+    const resolved = resolveDeclaration(record);
+    return resolved && (resolved.declaration.kind === 'function' || resolved.declaration.kind === 'variable')
+      ? {
+          declaration: resolved.declaration as Extract<IrDeclaration, { kind: 'function' | 'variable' }>,
+          module: resolved.module,
+        }
       : undefined;
   };
 
@@ -252,8 +443,11 @@ function buildPublicFacades(
     originModule: IrModule,
     origin: Extract<IrDeclaration, { kind: 'function' | 'variable' }>,
   ): void => {
-    const alias = `facade${target.name}${originModule.name}${origin.name[0]?.toUpperCase() ?? ''}${origin.name.slice(1)}`;
-    target.imports.push(`flighthq.${originModule.name}.${origin.name} as ${alias}`);
+    if (target === originModule && origin.name === publicName) return;
+    const ownerToken = modulePath(originModule).replace(/[^A-Za-z0-9]/gu, '_');
+    const ownerAlias = `Facade_${target.name}_${ownerToken}`;
+    const alias = `${ownerAlias}.${origin.name}`;
+    target.imports.push(`${modulePath(originModule)} as ${ownerAlias}`);
     if (origin.kind === 'variable') {
       target.declarations.push({
         ...origin,
@@ -293,16 +487,52 @@ function buildPublicFacades(
     });
   };
 
+  const addEnumFacade = (
+    target: IrModule,
+    publicName: string,
+    originModule: IrModule,
+    origin: Extract<IrDeclaration, { kind: 'enum' }>,
+  ): void => {
+    if (target.declarations.some((declaration) => declaration.name === `__enum_${publicName}`)) return;
+    const ownerAlias = `Facade_${target.name}_${modulePath(originModule).replace(/[^A-Za-z0-9]/gu, '_')}_${origin.name}`;
+    target.imports.push(`${declarationImportPath(originModule, origin)} as ${ownerAlias}`);
+    target.declarations.push({
+      exported: false,
+      initializer: {
+        kind: 'object',
+        properties: origin.members.map((member) => ({
+          kind: 'property',
+          name: member.name,
+          value: { kind: 'identifier', name: `${ownerAlias}.${member.name}` },
+        })),
+      },
+      kind: 'variable',
+      mutable: false,
+      name: `__enum_${publicName}`,
+      origin: origin.origin,
+      type: { kind: 'dynamic' },
+    });
+  };
+
   // Match granular package barrels before building the broad SDK facade.
-  for (const target of modules.filter((module) => module !== sdk)) {
-    const packageInventory = inventoryByName.get(target.packageName);
-    if (!packageInventory || target.packageName === '@flighthq/types') continue;
+  for (const packageInventory of inventoryByName.values()) {
+    if (packageInventory.name === '@flighthq/sdk') continue;
+    const target = facadeForPackage(packageInventory.name);
+    if (!target) throw new Error(`Expected facade module for ${packageInventory.name}`);
     for (const record of packageInventory.exports) {
-      if (record.kind !== 'function' && record.kind !== 'variable') continue;
-      if (target.declarations.some((candidate) => candidate.kind === record.kind && candidate.name === record.name))
+      if (!sourcePathToModule(record.source)) continue;
+      const resolvedDeclaration = resolveDeclaration(record);
+      if (resolvedDeclaration?.declaration.kind === 'enum') {
+        const resolved = resolvedDeclaration as {
+          declaration: Extract<IrDeclaration, { kind: 'enum' }>;
+          module: IrModule;
+        };
+        addEnumFacade(target, record.name, resolved.module, resolved.declaration);
         continue;
+      }
+      if (record.kind !== 'function' && record.kind !== 'variable') continue;
       const resolved = resolveDirectDeclaration(record);
-      if (!resolved || resolved.module === target) {
+      if (!resolved) {
         throw new Error(`Cannot resolve package facade export ${target.packageName}.${record.name}`);
       }
       addFacade(target, record.name, resolved.module, resolved.declaration);
@@ -315,30 +545,18 @@ function buildPublicFacades(
   sdk.declarations = [];
   sdk.imports = [];
   for (const record of sdkInventory.exports) {
+    if (!sourcePathToModule(record.source)) continue;
+    const resolvedDeclaration = resolveDeclaration(record);
+    if (resolvedDeclaration?.declaration.kind === 'enum') {
+      const resolved = resolvedDeclaration as {
+        declaration: Extract<IrDeclaration, { kind: 'enum' }>;
+        module: IrModule;
+      };
+      addEnumFacade(sdk, record.name, resolved.module, resolved.declaration);
+      continue;
+    }
     if (record.kind !== 'function' && record.kind !== 'variable') continue;
-    const packageMatch = [...inventoryByName.values()]
-      .filter((candidate) => candidate.name !== '@flighthq/sdk' && candidate.sdkIncluded)
-      .find((candidate) =>
-        candidate.exports.some(
-          (candidateRecord) =>
-            candidateRecord.kind === record.kind &&
-            candidateRecord.name === record.name &&
-            candidateRecord.fingerprint === record.fingerprint &&
-            candidateRecord.source === record.source,
-        ),
-      );
-    const originModule = packageMatch ? modules.find((module) => module.packageName === packageMatch.name) : undefined;
-    const generatedName =
-      originModule?.packageName === '@flighthq/types'
-        ? (canonicalValueAliases.get(record.name) ?? record.name)
-        : record.name;
-    const origin = originModule?.declarations.find(
-      (candidate) => candidate.kind === record.kind && candidate.name === generatedName,
-    );
-    const resolved =
-      origin && (origin.kind === 'function' || origin.kind === 'variable')
-        ? { declaration: origin, module: originModule! }
-        : resolveDirectDeclaration(record);
+    const resolved = resolveDirectDeclaration(record);
     if (!resolved) throw new Error(`Cannot resolve SDK facade export ${record.name} from ${record.source}`);
     addFacade(sdk, record.name, resolved.module, resolved.declaration);
   }
@@ -348,24 +566,33 @@ function buildPublicFacades(
     collectReferencedNamedTypes(target.declarations, new Set(typeOwnerByName.keys()), referencedTypes);
     for (const typeName of referencedTypes) {
       const owner = typeOwnerByName.get(typeName);
-      if (owner && owner !== target) target.imports.push(`flighthq.${owner.name}.${typeName}`);
+      const declaration = owner?.declarations.find(
+        (candidate) =>
+          candidate.name === typeName &&
+          (candidate.kind === 'class' || candidate.kind === 'enum' || candidate.kind === 'type'),
+      );
+      if (owner && owner !== target && declaration) target.imports.push(declarationImportPath(owner, declaration));
     }
     target.imports = [...new Set(target.imports)].sort();
   }
 }
 
-function rewriteCanonicalValueReferences(value: unknown, aliases: ReadonlyMap<string, string>, qualify: boolean): void {
+function rewriteCanonicalValueReferences(
+  value: unknown,
+  aliases: ReadonlyMap<string, string>,
+  _qualify: boolean,
+): void {
   if (Array.isArray(value)) {
-    value.forEach((item) => rewriteCanonicalValueReferences(item, aliases, qualify));
+    value.forEach((item) => rewriteCanonicalValueReferences(item, aliases, false));
     return;
   }
   if (!value || typeof value !== 'object') return;
   const record = value as Record<string, unknown>;
   if (record.kind === 'identifier' && typeof record.name === 'string') {
     const alias = aliases.get(record.name);
-    if (alias) record.name = qualify ? `Types.${alias}` : alias;
+    if (alias) record.name = alias;
   }
-  Object.values(record).forEach((item) => rewriteCanonicalValueReferences(item, aliases, qualify));
+  Object.values(record).forEach((item) => rewriteCanonicalValueReferences(item, aliases, false));
 }
 
 function collectReferencedNamedTypes(value: unknown, canonicalNames: ReadonlySet<string>, output: Set<string>): void {
@@ -382,7 +609,12 @@ function collectReferencedNamedTypes(value: unknown, canonicalNames: ReadonlySet
 }
 
 function removeStaleGeneratedModules(directory: string, expected: ReadonlySet<string>, check: boolean): void {
-  const stale = readdirSync(directory)
+  const generatedFiles = (current: string): string[] =>
+    readdirSync(current, { withFileTypes: true }).flatMap((entry) => {
+      const file = path.join(current, entry.name);
+      return entry.isDirectory() ? generatedFiles(file) : [path.relative(directory, file)];
+    });
+  const stale = generatedFiles(directory)
     .filter((file) => file.endsWith('.hx') && !expected.has(file))
     .filter((file) => readFileSync(path.join(directory, file), 'utf8').startsWith('// Generated by flight-hx.'));
   if (stale.length > 0 && check) throw new Error(`Stale generated modules: ${stale.join(', ')}`);
@@ -585,8 +817,10 @@ function fillGenericArguments(declarations: IrDeclaration[]): void {
 }
 
 function emitJavaScriptBridge(
-  moduleName: string,
+  apiPath: string,
   declarations: IrDeclaration[],
+  publicExports: Array<{ fingerprint: string; source: string }>,
+  modules: IrModule[],
   publicAliases?: ReadonlyMap<string, string>,
   externalExports: Array<{ originDirectory: string; originName: string; publicName: string }> = [],
 ): string {
@@ -598,37 +832,57 @@ function emitJavaScriptBridge(
       .filter((declaration) => declaration.kind === 'variable' && declaration.mutable && declaration.exported)
       .map((declaration) => declaration.name),
   );
+  const publicIdentities = new Set(publicExports.map((record) => `${record.source}\0${record.fingerprint}`));
   const exports = declarations
-    .filter((declaration) => declaration.exported && declaration.kind !== 'type')
-    .map((declaration) => ({
-      generatedName: declaration.name,
-      kind: declaration.kind,
-      mutable: declaration.kind === 'variable' && declaration.mutable,
-      publicName: reverseAliases.get(declaration.name) ?? declaration.name,
-      syncMutable: declaration.kind === 'function' && mutatesAnyName(declaration.body, mutableNames),
-    }))
+    .filter(
+      (declaration) =>
+        declaration.exported &&
+        declaration.kind !== 'type' &&
+        publicIdentities.has(`${declaration.origin.source}\0${declaration.origin.fingerprint}`),
+    )
+    .map((declaration) => {
+      const publicName = reverseAliases.get(declaration.name) ?? declaration.name;
+      const owner = modules.find((module) => module.declarations.includes(declaration));
+      return {
+        kind: declaration.kind,
+        mutable: declaration.kind === 'variable' && declaration.mutable,
+        publicName,
+        runtimeName: sourcePathToModule(declaration.origin.source) ? publicName : declaration.name,
+        runtimePath:
+          declaration.kind === 'class' && owner
+            ? `${owner.haxePackage ?? 'flighthq'}.${declaration.name}`
+            : declaration.kind === 'enum' || sourcePathToModule(declaration.origin.source)
+              ? apiPath
+              : owner
+                ? modulePath(owner)
+                : apiPath,
+        syncMutable: declaration.kind === 'function' && mutatesAnyName(declaration.body, mutableNames),
+      };
+    })
     .sort((a, b) => a.publicName.localeCompare(b.publicName));
   return [
     '// Generated by flight-hx. Do not edit.',
     "import compiled from '../../build/haxe-js/flight.cjs';",
     '',
-    ...(exports.length > 0 ? [`const api = compiled.flighthq.${moduleName};`] : ['void compiled;']),
-    ...exports.map(({ generatedName, kind, mutable, publicName }) =>
+    ...(exports.length === 0 ? ['void compiled;'] : []),
+    ...exports.map(({ kind, mutable, publicName, runtimeName, runtimePath }) =>
       kind === 'class'
-        ? `export const ${publicName} = compiled.flighthq.${generatedName};`
+        ? `export const ${publicName} = compiled.${runtimePath};`
         : kind === 'enum'
-          ? `export const ${publicName} = api.__enum_${generatedName};`
+          ? `export const ${publicName} = compiled.${runtimePath}.__enum_${publicName};`
           : kind === 'variable' && mutable
-            ? `export let ${publicName} = api.${generatedName};`
+            ? `export let ${publicName} = compiled.${runtimePath}.${runtimeName};`
             : kind === 'function' && exports.find((item) => item.publicName === publicName)?.syncMutable
-              ? `export function ${publicName}(...args) { const result = api.${generatedName}(...args); __syncMutableExports(); return result; }`
-              : `export const ${publicName} = api.${generatedName};`,
+              ? `export function ${publicName}(...args) { const result = compiled.${runtimePath}.${runtimeName}(...args); __syncMutableExports(); return result; }`
+              : `export const ${publicName} = compiled.${runtimePath}.${runtimeName};`,
     ),
     ...(exports.some((item) => item.mutable)
       ? [
           '',
           'function __syncMutableExports() {',
-          ...exports.filter((item) => item.mutable).map((item) => `  ${item.publicName} = api.${item.generatedName};`),
+          ...exports
+            .filter((item) => item.mutable)
+            .map((item) => `  ${item.publicName} = compiled.${item.runtimePath}.${item.runtimeName};`),
           '}',
         ]
       : []),
@@ -644,12 +898,15 @@ function emitJavaScriptBridge(
 
 function emitJavaScriptSourceBridge(
   workspaceDirectory: string,
-  moduleName: string,
+  modules: IrModule[],
+  packageName: string,
   declarations: IrDeclaration[],
   file: string,
   canonicalValueAliases: ReadonlyMap<string, string>,
 ): string {
   const source = ts.createSourceFile(file, readFileSync(file, 'utf8'), ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+  const relativeSource = path.relative(workspaceDirectory, file).split(path.sep).join('/');
+  const sourceModules = modules.filter((module) => module.source === relativeSource);
   const mockedSpecifiers = collectAdjacentTestMocks(file);
   const dependencies: Array<{
     generatedName: string;
@@ -677,16 +934,25 @@ function emitJavaScriptSourceBridge(
       continue;
     const sourceSpecifier = statement.moduleSpecifier.text;
     let bridgeSpecifier: string;
-    let dependencyModuleName: string;
+    let dependencyModuleName: string | undefined;
+    let dependencySource: string | undefined;
     if (sourceSpecifier.startsWith('.')) {
       const target = path.resolve(path.dirname(file), sourceSpecifier.replace(/\.m?js$/u, ''));
       bridgeSpecifier = `./${path.basename(target)}.mjs`;
-      dependencyModuleName = moduleName;
+      const targetFile = [target, `${target}.ts`, `${target}.tsx`, path.join(target, 'index.ts')].find((candidate) =>
+        existsSync(candidate),
+      );
+      dependencySource = targetFile
+        ? path.relative(workspaceDirectory, targetFile).split(path.sep).join('/')
+        : undefined;
+      if (targetFile && path.basename(targetFile) === 'index.ts') {
+        dependencyModuleName = `${packageNameToHaxePackage(packageName)}.${packageNameToModule(packageName)}`;
+      }
     } else {
       const packageMatch = /^@flighthq\/([^/]+)$/u.exec(sourceSpecifier);
       if (!packageMatch) continue;
       bridgeSpecifier = sourceSpecifier;
-      dependencyModuleName = packageNameToModule(sourceSpecifier);
+      dependencyModuleName = `${packageNameToHaxePackage(sourceSpecifier)}.${packageNameToModule(sourceSpecifier)}`;
     }
     const bindings = statement.importClause.namedBindings;
     if (bindings && ts.isNamedImports(bindings)) {
@@ -696,13 +962,20 @@ function emitJavaScriptSourceBridge(
         importedBindings.set(element.name.text, { importedName, specifier: bridgeSpecifier });
         if (!mockedSpecifiers.has(sourceSpecifier)) continue;
         const alias = dependencyAlias(bridgeSpecifier);
+        const generatedName = canonicalValueAliases.get(importedName) ?? importedName;
+        const dependencyModule = dependencySource
+          ? modules.find(
+              (module) =>
+                module.source === dependencySource &&
+                module.declarations.some(
+                  (declaration) => declaration.name === generatedName || declaration.name === importedName,
+                ),
+            )
+          : undefined;
         dependencies.push({
-          generatedName:
-            dependencyModuleName === packageNameToModule('@flighthq/types')
-              ? (canonicalValueAliases.get(importedName) ?? importedName)
-              : importedName,
+          generatedName: dependencySource ? generatedName : importedName,
           importedName,
-          moduleName: dependencyModuleName,
+          moduleName: dependencyModule ? modulePath(dependencyModule) : dependencyModuleName!,
           specifier: alias,
         });
       }
@@ -733,7 +1006,6 @@ function emitJavaScriptSourceBridge(
       );
     }
   }
-  const relativeSource = path.relative(workspaceDirectory, file).split(path.sep).join('/');
   const reverseAliases = new Map(
     [...canonicalValueAliases].map(([publicName, generatedName]) => [generatedName, publicName]),
   );
@@ -749,10 +1021,18 @@ function emitJavaScriptSourceBridge(
       .map((declaration) => declaration.name),
   );
   const publicName = (declaration: IrDeclaration): string =>
-    moduleName === packageNameToModule('@flighthq/types')
-      ? (reverseAliases.get(declaration.name) ?? declaration.name)
-      : declaration.name;
+    packageName === '@flighthq/types' ? (reverseAliases.get(declaration.name) ?? declaration.name) : declaration.name;
   const needsApi = sourceDeclarations.some((declaration) => declaration.kind !== 'class');
+  const valueModule = sourceModules.find((module) =>
+    module.declarations.some((declaration) => declaration.kind === 'function' || declaration.kind === 'variable'),
+  );
+  const apiModule =
+    valueModule ??
+    modules.find(
+      (module) =>
+        module.haxePackage === packageNameToHaxePackage(packageName) &&
+        module.name === packageNameToModule(packageName),
+    );
   const needsCompiled =
     needsApi || dependencies.length > 0 || sourceDeclarations.some((declaration) => declaration.kind === 'class');
   return [
@@ -760,13 +1040,13 @@ function emitJavaScriptSourceBridge(
     ...(needsCompiled ? ["import compiled from '../../../../build/haxe-js/flight.cjs';"] : []),
     ...[...dependencySpecifiers].map(([specifier, alias]) => `import * as ${alias} from '${specifier}';`),
     '',
-    ...(needsApi ? [`const api = compiled.flighthq.${moduleName};`] : []),
+    ...(needsApi && apiModule ? [`const api = compiled.${modulePath(apiModule)};`] : []),
     ...(dependencies.length > 0
       ? [
           'function __syncDependencies() {',
           ...dependencies.map(
             (dependency) =>
-              `  compiled.flighthq.${dependency.moduleName}.${dependency.generatedName} = ${dependency.specifier}.${dependency.importedName};`,
+              `  compiled.${dependency.moduleName}.${dependency.generatedName} = ${dependency.specifier}.${dependency.importedName};`,
           ),
           '}',
         ]
@@ -784,7 +1064,10 @@ function emitJavaScriptSourceBridge(
     '',
     ...sourceDeclarations.map((declaration) => {
       const exportedName = publicName(declaration);
-      if (declaration.kind === 'class') return `export const ${exportedName} = compiled.flighthq.${declaration.name};`;
+      if (declaration.kind === 'class') {
+        const owner = sourceModules.find((module) => module.declarations.includes(declaration));
+        return `export const ${exportedName} = compiled.${owner?.haxePackage ?? 'flighthq'}.${declaration.name};`;
+      }
       if (declaration.kind === 'enum') return `export const ${exportedName} = api.__enum_${declaration.name};`;
       if (declaration.kind === 'function') {
         return mutatesAnyName(declaration.body, mutableNames)
@@ -881,7 +1164,7 @@ function inlineDefaultConstants(declarations: IrDeclaration[]): void {
 function lowerFiles(workspaceDirectory: string, packageName: string, files: string[]) {
   const declarations: IrDeclaration[] = [];
   const diagnostics: LoweringDiagnostic[] = [];
-  const imports = new Set<string>();
+  const sources: LoweredSource[] = [];
   for (const file of files) {
     const source = ts.createSourceFile(
       file,
@@ -894,9 +1177,9 @@ function lowerFiles(workspaceDirectory: string, packageName: string, files: stri
     namespacePrivateDeclarations(result.declarations);
     declarations.push(...result.declarations);
     diagnostics.push(...result.diagnostics);
-    collectHaxeImports(source, imports, packageName);
+    sources.push({ declarations: result.declarations, diagnostics: result.diagnostics, file });
   }
-  return { declarations, diagnostics, imports: [...imports].sort() };
+  return { declarations, diagnostics, sources };
 }
 
 function namespacePrivateDeclarations(declarations: IrDeclaration[]): void {
@@ -1188,24 +1471,4 @@ function lowerPackage(
     .map((file) => path.join(directory, file))
     .sort();
   return { ...lowerFiles(workspaceDirectory, packageName, files), files };
-}
-
-function collectHaxeImports(source: ts.SourceFile, imports: Set<string>, packageName: string): void {
-  for (const statement of source.statements) {
-    if (!ts.isImportDeclaration(statement) || !ts.isStringLiteral(statement.moduleSpecifier)) continue;
-    const specifier = statement.moduleSpecifier.text;
-    if (!specifier.startsWith('@flighthq/') || !statement.importClause) continue;
-    if (specifier === packageName) continue;
-    const moduleName = packageNameToModule(specifier);
-    if (statement.importClause.name) {
-      imports.add(`flighthq.${moduleName}.default as ${statement.importClause.name.text}`);
-    }
-    const bindings = statement.importClause.namedBindings;
-    if (!bindings || !ts.isNamedImports(bindings)) continue;
-    for (const element of bindings.elements) {
-      const importedName = element.propertyName?.text ?? element.name.text;
-      const alias = element.name.text === importedName ? '' : ` as ${element.name.text}`;
-      imports.add(`flighthq.${moduleName}.${importedName}${alias}`);
-    }
-  }
 }

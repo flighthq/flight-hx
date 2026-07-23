@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 class Main extends ExampleHost {
   var quads:Array<Dynamic> = [];
   var batch:Dynamic;

@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 class Main extends ExampleHost {
   var sparks:Array<Dynamic>=[];var flakes:Array<Dynamic>=[];var time=0.0;
   var fire:Dynamic; var snow:Dynamic; var fireState:Dynamic; var snowState:Dynamic; var fireConfig:Dynamic; var snowConfig:Dynamic;

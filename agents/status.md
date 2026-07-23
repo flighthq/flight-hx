@@ -4,7 +4,7 @@ Last updated: 2026-07-22
 
 ## Current State
 
-The initial full port is implemented through Phase 9 for upstream revision `5d24729f7360475e28a105ae0caeeaa2e1328260`. The repository generates executable Haxe source for every in-scope package, exposes granular flat modules and a broad `flight.Sdk` facade, verifies upstream behavior through compiled Haxe JavaScript, smoke-runs the portable core on four targets, and builds an installable Haxelib artifact.
+The initial full port was completed through Phase 9 for upstream revision `5d24729f7360475e28a105ae0caeeaa2e1328260`. A source-derived namespace realignment is now implemented in the generator but cannot complete regeneration against that pinned upstream revision until its 12 Haxe identity collisions are reorganized upstream.
 
 All 28 packages under `upstream/examples/packages` now have matching Lime projects under `examples/`. Each port has a `project.xml` and `Main.hx`, uses the shared Lime host adapter, and replaces the upstream Vite/browser lifecycle with Lime callbacks. The adapter registers the standard 2D GL renderers and exposes a specialized render hook for the effects and 3D examples. Source/API coverage was checked locally, but the Lime projects remain compile-unverified because this workspace has neither the repository-local Haxe compiler nor a Lime/Haxelib installation.
 
@@ -15,9 +15,9 @@ The latest complete local `npm run ci` finished successfully on 2026-07-22. Its 
 - Input: all 131 Flight packages under the read-only `upstream` submodule, including `tool-capture`.
 - Output: generated Haxe implementations, never extern-only declarations or handwritten generated edits.
 - API: unchanged globally searchable free-function names such as `createVector2` and `getVector2Length`.
-- Namespace: flat `flight.*`; npm package barrels map to PascalCase modules such as `flight.Geometry`, `flight.RenderGl`, and `flight.HostTauri`.
-- SDK: `flight.Sdk` is a generated facade over the actual upstream SDK export graph, including renamed cross-package re-exports.
-- Types: canonical declarations live under their owning module, principally `flight.Types`; type re-exports stay in the API manifest when Haxe's package-level secondary-type namespace prevents duplicate aliases.
+- Namespace: generated APIs mechanically map to `flighthq.<lowerCamelPackage>.<PascalCaseFile>`; package barrels map to facades such as `flighthq.geometry.Geometry` and `flighthq.renderGl.RenderGl`.
+- SDK: `flighthq.sdk.Sdk` is a generated facade over the actual upstream SDK export graph, including renamed cross-package re-exports.
+- Types: canonical declarations live in their defining modules under `flighthq.types`; additional declarations use Haxe secondary-type imports such as `flighthq.types.Vector2.Vector2Like`.
 - Distribution: Haxelib name `flight`, currently at pre-release version `0.0.0`.
 - Sources: maintained Haxe lives under `src/`, generated Haxe under `generated/`, and Haxelib adds the latter through `extraParams.hxml`.
 - Internals: maintained runtime types live under `flighthq._internal` and use underscore-prefixed names such as `_Runtime` and `_Promise`.
@@ -58,11 +58,10 @@ The latest complete local `npm run ci` finished successfully on 2026-07-22. Its 
 
 The implementation has no known correctness blocker. Before a public non-zero release, choose the release/versioning policy, Haxelib publication credentials, and generated API-documentation presentation. Those are release-management decisions rather than gaps in the port.
 
-## Planned API Realignment
+## API Realignment In Progress
 
-- Replace the flat generated API with a mechanical source-derived namespace: `@flighthq/<npm-package>` maps to `flighthq.<lowerCamelPackage>`, and each defining TypeScript filename maps to a PascalCase Haxe module beneath it.
-- Do not emit source-derived modules for `index.ts`, `internal.ts`, or test helpers. Preserve defining-file identity through re-exports, and fail generation when an omitted file has public exports or two source files map to the same Haxe module.
-- Refactor ambiguous source organization upstream rather than adding semantic Haxe-only buckets or naming exceptions.
-- Fix generated Haxe indentation in the emitter. Nested blocks, multiline anonymous functions, and patched Haxe bodies must be canonically indented in raw generator output; do not add a formatter repair pass after emission. Add focused emitter assertions and keep formatting deterministic.
+- The generator now builds source-derived modules, nested output paths, package/SDK facades, canonical imports, hidden implementation modules for `internal.ts` and test helpers, and nested JavaScript bridge paths. Raw generated Haxe indentation is canonical and covered by focused emitter tests.
+- Generation now reports all Haxe package-level identity collisions together. The pinned upstream revision currently has 12 collisions requiring source reorganization: eight `host-electron` interface/module pairs, two `host-tauri` pairs, `scene-gl`'s `GlMeshUpload`, and `scene-wgpu`'s `WgpuMeshUpload`.
+- Do not add Haxe-only renames for these collisions. Refactor the defining TypeScript files upstream, update the submodule revision, regenerate, and then complete the Haxe/parity/portability verification matrix.
 
 For an upstream update, run setup, regenerate, review manifest and patch drift, then run `npm run ci`. Update this file whenever the upstream revision, support matrix, release policy, or verified counts change.

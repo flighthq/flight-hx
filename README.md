@@ -1,6 +1,6 @@
 # flight-hx
 
-`flight-hx` is a mechanically generated Haxe source port of the Flight SDK. It preserves Flight's deliberately searchable free-function API in a flat `flight.*` namespace and uses `flight` as the Haxelib name.
+`flight-hx` is a mechanically generated Haxe source port of the Flight SDK. It preserves Flight's deliberately searchable free-function API under source-derived `flighthq.*` packages and uses `flight` as the Haxelib name.
 
 The current generation accounts for all 131 upstream packages, 1,898 source files, 9,122 candidate declarations, 12,149 public exports, and 1,166 upstream test files. Lowering has zero diagnostics, and all 131 package suites pass through compiled Haxe JavaScript bridges.
 
@@ -9,8 +9,8 @@ The current generation accounts for all 131 upstream packages, 1,898 source file
 Use a granular package module when you know the Flight domain:
 
 ```haxe
-import flight.Geometry.*;
-import flight.Types.Vector2Like;
+import flighthq.geometry.Vector2.*;
+import flighthq.types.Vector2.Vector2Like;
 
 final point:Vector2Like = createVector2(3, 4);
 trace(getVector2Length(point));
@@ -19,16 +19,16 @@ trace(getVector2Length(point));
 Use the generated SDK facade for broad discoverability:
 
 ```haxe
-import flight.Sdk.*;
+import flighthq.sdk.Sdk.*;
 
 final point = createVector2(3, 4);
 ```
 
-Qualified calls such as `flight.Geometry.createVector2()` and `flight.Sdk.createVector2()` work as well. Function names remain unchanged; `createVector2` does not become a constructor, and `getVector2Length` does not become an instance method. Canonical shared types live in `flight.Types`, because Haxe secondary types cannot be duplicated across flat package modules.
+Qualified calls such as `flighthq.geometry.Vector2.createVector2()` and `flighthq.geometry.Geometry.createVector2()` work as well. Function names remain unchanged; `createVector2` does not become a constructor, and `getVector2Length` does not become an instance method. Canonical shared types remain in their defining modules under `flighthq.types`.
 
 ## Lime host
 
-`flighthq.hostLime.LimeApp` provides the optional Lime application backend. A Lime application explicitly installs it with `AppApi.setAppBackend(LimeApp.createLimeAppBackend(this))`, matching the factory-based Capacitor, Tauri, and Electron hosts. The adapter does not own the Lime application lifecycle or renderer. It is compiled only when Lime's `lime` define is active, so the base Flight library does not require Lime. The adapter still needs verification against an installed Lime toolchain.
+`flighthq.hostLime.LimeApp` provides the optional Lime application backend. A Lime application explicitly installs it with `flighthq.app.App.setAppBackend(LimeApp.createLimeAppBackend(this))`, matching the factory-based Capacitor, Tauri, and Electron hosts. The adapter does not own the Lime application lifecycle or renderer. It is compiled only when Lime's `lime` define is active, so the base Flight library does not require Lime. The adapter still needs verification against an installed Lime toolchain.
 
 ## Repository setup
 

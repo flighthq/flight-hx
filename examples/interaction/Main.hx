@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 class Main extends ExampleHost {
   var selected:Dynamic; var shapes:Array<Dynamic>=[];
   var manager:Dynamic;

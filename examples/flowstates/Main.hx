@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 class Main extends ExampleHost {
   var stack:Dynamic; var label:Dynamic; var timer=0.0; var menu:Dynamic; var play:Dynamic;
   override public function flightReady():Void {

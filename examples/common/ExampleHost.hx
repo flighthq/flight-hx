@@ -1,10 +1,10 @@
 package;
 
-import flighthq.AppApi;
-import flighthq.Sdk;
-import flighthq.Types.DisplayObject;
-import flighthq.Types.Shape;
+import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
+import flighthq.sdk.Sdk;
+import flighthq.types.DisplayObject;
+import flighthq.types.Shape;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.Window;
@@ -22,7 +22,7 @@ class ExampleHost extends Application {
   }
 
   override public function onWindowCreate():Void {
-    AppApi.setAppBackend(LimeApp.createLimeAppBackend(this));
+    App.setAppBackend(LimeApp.createLimeAppBackend(this));
     switch (window.context.type) {
       case OPENGL, OPENGLES, WEBGL:
         setupFlight();

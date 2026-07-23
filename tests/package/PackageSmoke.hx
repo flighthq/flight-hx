@@ -1,7 +1,7 @@
 package;
 
-import flighthq.Sdk.*;
-import flighthq.Types.Vector2Like;
+import flighthq.sdk.Sdk.*;
+import flighthq.types.Vector2.Vector2Like;
 
 class PackageSmoke {
   static function main():Void {

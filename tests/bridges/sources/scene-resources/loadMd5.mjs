@@ -2,9 +2,9 @@
 import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from '@flighthq/scene-formats';
 
-const api = compiled.flighthq.SceneResources;
+const api = compiled.flighthq.sceneResources.LoadMd5;
 function __syncDependencies() {
-  compiled.flighthq.SceneFormats.createSceneFromMd5Mesh = __dependency0.createSceneFromMd5Mesh;
+  compiled.flighthq.sceneFormats.SceneFormats.createSceneFromMd5Mesh = __dependency0.createSceneFromMd5Mesh;
 }
 __syncDependencies();
 

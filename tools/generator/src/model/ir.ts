@@ -188,9 +188,11 @@ export type IrDeclaration =
 
 export interface IrModule {
   declarations: IrDeclaration[];
+  haxePackage?: string;
   imports: string[];
   name: string;
   packageName: string;
+  source?: string | undefined;
 }
 
 export interface LoweringDiagnostic {

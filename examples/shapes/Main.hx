@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 class Main extends ExampleHost {
   override public function flightReady():Void {
     final stage=createStage("Shapes");final shape=Sdk.createShape();Sdk.appendShapeBeginFill(shape,0x44aaff);Sdk.appendShapeRoundRectangle(shape,60,100,180,120,24,24);Sdk.appendShapeEndFill(shape);

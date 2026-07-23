@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 class Main extends ExampleHost {
   var time = 0.0; var swatches:Array<Dynamic> = [];
   override public function flightReady():Void {

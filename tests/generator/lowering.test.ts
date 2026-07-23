@@ -106,10 +106,14 @@ describe('TypeScript lowering and Haxe emission', () => {
 
     expect(lowered.diagnostics).toEqual([]);
     expect(() =>
-      execFileSync('node', ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '-cp', 'generated', '--main', 'Main', '--interp'], {
-        cwd: path.resolve('.'),
-        stdio: 'pipe',
-      }),
+      execFileSync(
+        'node',
+        ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '-cp', 'generated', '--main', 'Main', '--interp'],
+        {
+          cwd: path.resolve('.'),
+          stdio: 'pipe',
+        },
+      ),
     ).not.toThrow();
   });
 
@@ -157,10 +161,14 @@ describe('TypeScript lowering and Haxe emission', () => {
 
     expect(lowered.diagnostics).toEqual([]);
     expect(() =>
-      execFileSync('node', ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '-cp', 'generated', '--main', 'Main', '--interp'], {
-        cwd: path.resolve('.'),
-        stdio: 'pipe',
-      }),
+      execFileSync(
+        'node',
+        ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '-cp', 'generated', '--main', 'Main', '--interp'],
+        {
+          cwd: path.resolve('.'),
+          stdio: 'pipe',
+        },
+      ),
     ).not.toThrow();
   });
 

@@ -41,7 +41,7 @@ Flight is intentionally optimized for globally searchable, free-function APIs. T
 - Preserve explicit `out` parameters, aliasing guarantees, sentinel returns, allocation vocabulary, and side-effect boundaries.
 - Prefer a boring, grepable one-to-one mapping over a clever transformation.
 
-The current public-module direction is flat under `flight`: `flight.Sdk` mirrors `@flighthq/sdk`, `flight.Geometry` mirrors `@flighthq/geometry`, and `flight.Types` mirrors `@flighthq/types`. See [`agents/architecture.md`](agents/architecture.md) for the compiler-enforced canonical type import rule and module details. Do not introduce public per-source or per-type ownership without a deliberate architecture change.
+The public namespace follows upstream source ownership mechanically: an npm package such as `@flighthq/render-gl` maps to `flighthq.renderGl`, and a defining file such as `glShader.ts` maps to `flighthq.renderGl.GlShader`. Package barrels remain generated facades such as `flighthq.geometry.Geometry` and `flighthq.sdk.Sdk`. See [`agents/architecture.md`](agents/architecture.md) for omitted implementation files, secondary types, and collision validation.
 
 ## Translation Discipline
 

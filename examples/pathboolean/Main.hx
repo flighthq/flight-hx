@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 class Main extends ExampleHost {
   override public function flightReady():Void {
     final stage=createStage("Path boolean");final a=Sdk.createPath();Sdk.appendPathCircle(a,170,150,90);final b=Sdk.createPath();Sdk.appendPathRoundRectangle(b,180,70,150,160,20);

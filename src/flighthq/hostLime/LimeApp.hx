@@ -1,8 +1,8 @@
 package flighthq.hostLime;
 
 #if lime
-import flighthq.AppApi;
-import flighthq.Types.AppBackend;
+import flighthq.app.App;
+import flighthq.types.App.AppBackend;
 import lime.app.Application;
 
 /** Maps Flight's AppBackend onto a Lime application. */
@@ -15,7 +15,7 @@ class LimeApp {
    * such as dock menus, login items, and recent documents.
    */
   public static function createLimeAppBackend(application:Application):AppBackend {
-    final backend = AppApi.createWebAppBackend();
+    final backend = App.createWebAppBackend();
     backend.focus = function():Void {
       if (application.window != null) application.window.focus();
     };

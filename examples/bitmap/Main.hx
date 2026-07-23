@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 class Main extends ExampleHost {
   override public function flightReady():Void {
     final stage = createStage("Bitmap");

@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 class Main extends ExampleHost {
   var index:Dynamic;var objects:Array<Dynamic>=[];var pairs:Array<Dynamic>=[];var time=0.0;var label:Dynamic;
   override public function flightReady():Void {final stage=createStage("Spatial index");index=Sdk.createSpatialIndex(Sdk.createUniformGridSpatialBackend(100));for(i in 0...20){final o={id:i+1,x:30+(i*97)%730,y:80+(i*61)%380,w:42.0,h:32.0,shape:null};o.shape=addRectangle(stage,o.x,o.y,o.w,o.h,0x4488cc);objects.push(o);Sdk.insertSpatialObject(index,o.id,{minX:o.x,minY:o.y,maxX:o.x+o.w,maxY:o.y+o.h});}label=addLabel(stage,"",20,550);}

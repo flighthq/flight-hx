@@ -4,16 +4,16 @@ import * as __dependency0 from './canvasEffectCompositing.mjs';
 import * as __dependency1 from './canvasRenderEffectPipeline.mjs';
 import * as __dependency2 from './canvasSourceModeCompositing.mjs';
 
-const api = compiled.flighthq.EffectsCanvas;
+const api = compiled.flighthq.effectsCanvas.CanvasOuterGlowEffect;
 function __syncDependencies() {
-  compiled.flighthq.EffectsCanvas.drawCanvasEffectPass = __dependency0.drawCanvasEffectPass;
-  compiled.flighthq.EffectsCanvas.acquireCanvasRenderTarget = __dependency1.acquireCanvasRenderTarget;
-  compiled.flighthq.EffectsCanvas.createCanvasRenderTargetPool = __dependency1.createCanvasRenderTargetPool;
-  compiled.flighthq.EffectsCanvas.releaseCanvasRenderTarget = __dependency1.releaseCanvasRenderTarget;
-  compiled.flighthq.EffectsCanvas.clearCanvasTarget = __dependency2.clearCanvasTarget;
-  compiled.flighthq.EffectsCanvas.compositeCanvasImage = __dependency2.compositeCanvasImage;
-  compiled.flighthq.EffectsCanvas.compositeCanvasSourceMode = __dependency2.compositeCanvasSourceMode;
-  compiled.flighthq.EffectsCanvas.drawCanvasTintedAlphaMask = __dependency2.drawCanvasTintedAlphaMask;
+  compiled.flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasEffectPass = __dependency0.drawCanvasEffectPass;
+  compiled.flighthq.effectsCanvas.CanvasRenderEffectPipeline.acquireCanvasRenderTarget = __dependency1.acquireCanvasRenderTarget;
+  compiled.flighthq.effectsCanvas.CanvasRenderEffectPipeline.createCanvasRenderTargetPool = __dependency1.createCanvasRenderTargetPool;
+  compiled.flighthq.effectsCanvas.CanvasRenderEffectPipeline.releaseCanvasRenderTarget = __dependency1.releaseCanvasRenderTarget;
+  compiled.flighthq.effectsCanvas.CanvasSourceModeCompositing.clearCanvasTarget = __dependency2.clearCanvasTarget;
+  compiled.flighthq.effectsCanvas.CanvasSourceModeCompositing.compositeCanvasImage = __dependency2.compositeCanvasImage;
+  compiled.flighthq.effectsCanvas.CanvasSourceModeCompositing.compositeCanvasSourceMode = __dependency2.compositeCanvasSourceMode;
+  compiled.flighthq.effectsCanvas.CanvasSourceModeCompositing.drawCanvasTintedAlphaMask = __dependency2.drawCanvasTintedAlphaMask;
 }
 __syncDependencies();
 

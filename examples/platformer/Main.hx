@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 import lime.ui.KeyCode;import lime.ui.KeyModifier;
 class Main extends ExampleHost {
   var player:Dynamic;var vx=0.0;var vy=0.0;var grounded=false;

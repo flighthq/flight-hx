@@ -2,10 +2,10 @@
 import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from '@flighthq/node';
 
-const api = compiled.flighthq.DisplayObjectWgpu;
+const api = compiled.flighthq.displayobjectWgpu.WgpuShape;
 function __syncDependencies() {
-  compiled.flighthq.NodeApi.getNodeLocalBoundsRectangle = __dependency0.getNodeLocalBoundsRectangle;
-  compiled.flighthq.NodeApi.getNodeLocalContentRevision = __dependency0.getNodeLocalContentRevision;
+  compiled.flighthq.node.Node.getNodeLocalBoundsRectangle = __dependency0.getNodeLocalBoundsRectangle;
+  compiled.flighthq.node.Node.getNodeLocalContentRevision = __dependency0.getNodeLocalContentRevision;
 }
 __syncDependencies();
 

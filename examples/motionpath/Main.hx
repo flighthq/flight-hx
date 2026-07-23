@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 class Main extends ExampleHost {
   var motion:Dynamic; var arrow:Dynamic; final point={x:0.0,y:0.0}; final tangent={x:0.0,y:0.0};
   override public function flightReady():Void {

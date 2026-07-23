@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 class Main extends ExampleHost {
   var particles:Array<Dynamic>=[]; var time=0.0;
   var emitter:Dynamic; var state:Dynamic; var config:Dynamic;

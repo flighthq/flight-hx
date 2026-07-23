@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 import lime.graphics.RenderContext;
 class Main extends ExampleHost {
   var effects:Array<Dynamic>; var pipeline:Dynamic;

@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 class Main extends ExampleHost {
   var a:Dynamic={centerX:300.0,centerY:280.0,radius:70.0}; var b:Dynamic={centerX:500.0,centerY:280.0,radius:90.0};
   var shapeA:Dynamic; var shapeB:Dynamic; var time=0.0; var manifold:Dynamic;

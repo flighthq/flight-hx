@@ -23,10 +23,12 @@ flight-hx/
 │           └── LimeApp.hx
 ├── generated/                   # disposable generated Haxe classpath
 │   └── flighthq/
-│       ├── Sdk.hx
-│       ├── Types.hx
-│       ├── Geometry.hx
-│       └── ...
+│       ├── geometry/
+│       │   ├── Geometry.hx      # package facade
+│       │   └── Vector2.hx       # defining-file module
+│       ├── renderGl/
+│       ├── sdk/Sdk.hx
+│       └── types/
 ├── tools/
 │   ├── generator/
 │   │   ├── src/                 # analyzer, IR, lowering, patching, emitter

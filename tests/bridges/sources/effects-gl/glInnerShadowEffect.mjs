@@ -5,17 +5,17 @@ import * as __dependency1 from './glEffectBlitShader.mjs';
 import * as __dependency2 from './glEffectBoxBlur.mjs';
 import * as __dependency3 from './glEffectTintShader.mjs';
 
-const api = compiled.flighthq.EffectsGl;
+const api = compiled.flighthq.effectsGl.GlInnerShadowEffect;
 function __syncDependencies() {
-  compiled.flighthq.RenderGl.acquireGlRenderTarget = __dependency0.acquireGlRenderTarget;
-  compiled.flighthq.RenderGl.clearGlRenderTarget = __dependency0.clearGlRenderTarget;
-  compiled.flighthq.RenderGl.compileGlFullscreenProgram = __dependency0.compileGlFullscreenProgram;
-  compiled.flighthq.RenderGl.drawGlFullscreenPass = __dependency0.drawGlFullscreenPass;
-  compiled.flighthq.RenderGl.releaseGlRenderTarget = __dependency0.releaseGlRenderTarget;
-  compiled.flighthq.EffectsGl.applyGlEffectBlitOffsetPass = __dependency1.applyGlEffectBlitOffsetPass;
-  compiled.flighthq.EffectsGl.applyGlEffectBlitPass = __dependency1.applyGlEffectBlitPass;
-  compiled.flighthq.EffectsGl.applyGlEffectBoxBlur = __dependency2.applyGlEffectBoxBlur;
-  compiled.flighthq.EffectsGl.applyGlEffectInvertTintPass = __dependency3.applyGlEffectInvertTintPass;
+  compiled.flighthq.renderGl.RenderGl.acquireGlRenderTarget = __dependency0.acquireGlRenderTarget;
+  compiled.flighthq.renderGl.RenderGl.clearGlRenderTarget = __dependency0.clearGlRenderTarget;
+  compiled.flighthq.renderGl.RenderGl.compileGlFullscreenProgram = __dependency0.compileGlFullscreenProgram;
+  compiled.flighthq.renderGl.RenderGl.drawGlFullscreenPass = __dependency0.drawGlFullscreenPass;
+  compiled.flighthq.renderGl.RenderGl.releaseGlRenderTarget = __dependency0.releaseGlRenderTarget;
+  compiled.flighthq.effectsGl.GlEffectBlitShader.applyGlEffectBlitOffsetPass = __dependency1.applyGlEffectBlitOffsetPass;
+  compiled.flighthq.effectsGl.GlEffectBlitShader.applyGlEffectBlitPass = __dependency1.applyGlEffectBlitPass;
+  compiled.flighthq.effectsGl.GlEffectBoxBlur.applyGlEffectBoxBlur = __dependency2.applyGlEffectBoxBlur;
+  compiled.flighthq.effectsGl.GlEffectTintShader.applyGlEffectInvertTintPass = __dependency3.applyGlEffectInvertTintPass;
 }
 __syncDependencies();
 

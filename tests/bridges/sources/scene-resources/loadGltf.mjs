@@ -2,12 +2,12 @@
 import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from '@flighthq/scene-formats';
 
-const api = compiled.flighthq.SceneResources;
+const api = compiled.flighthq.sceneResources.LoadGltf;
 function __syncDependencies() {
-  compiled.flighthq.SceneFormats.createSceneFromGlb = __dependency0.createSceneFromGlb;
-  compiled.flighthq.SceneFormats.createSceneFromGltf = __dependency0.createSceneFromGltf;
-  compiled.flighthq.SceneFormats.createScenesFromGlb = __dependency0.createScenesFromGlb;
-  compiled.flighthq.SceneFormats.createScenesFromGltf = __dependency0.createScenesFromGltf;
+  compiled.flighthq.sceneFormats.SceneFormats.createSceneFromGlb = __dependency0.createSceneFromGlb;
+  compiled.flighthq.sceneFormats.SceneFormats.createSceneFromGltf = __dependency0.createSceneFromGltf;
+  compiled.flighthq.sceneFormats.SceneFormats.createScenesFromGlb = __dependency0.createScenesFromGlb;
+  compiled.flighthq.sceneFormats.SceneFormats.createScenesFromGltf = __dependency0.createScenesFromGltf;
 }
 __syncDependencies();
 

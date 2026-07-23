@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 class Main extends ExampleHost {
   var sprites:Array<Dynamic>=[];var frame=0.0;
   var players:Array<Dynamic>=[];

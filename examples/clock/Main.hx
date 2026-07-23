@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 class Main extends ExampleHost {
   var clock:Dynamic; var a:Dynamic; var b:Dynamic; var rootShape:Dynamic; var shapeA:Dynamic; var shapeB:Dynamic; var info:Dynamic;
   override public function flightReady():Void {

@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 class Main extends ExampleHost {
   var spring:Dynamic;var config:Dynamic;var springShape:Dynamic;var dampShape:Dynamic;var targetX=300.0;var targetY=200.0;var dampX=300.0;var dampY=200.0;
   override public function flightReady():Void {final stage=createStage("Spring");config=Sdk.createSpringConfig(3,.3);spring=Sdk.createSpring2D(300,200);springShape=addCircle(stage,300,200,18,0x44aaff);dampShape=addCircle(stage,300,200,14,0xffaa33);addLabel(stage,"Click to retarget: blue spring, orange exponential damp.",65,360);}

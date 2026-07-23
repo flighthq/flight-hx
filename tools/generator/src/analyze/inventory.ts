@@ -4,7 +4,6 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import ts from 'typescript';
 
-import { portConfig } from '../../port.config.ts';
 import type {
   ExportConflict,
   ExportKind,
@@ -28,18 +27,54 @@ interface ParsedSource {
 
 const printer = ts.createPrinter({ removeComments: true });
 
-export function packageNameToModule(
-  packageName: string,
-  overrides: Readonly<Record<string, string>> = portConfig.packageModuleOverrides,
-): string {
-  const override = overrides[packageName];
-  if (override) return override;
-  const bareName = packageName.replace(/^@flighthq\//, '');
-  return bareName
+export function packageNameToModule(packageName: string): string {
+  const packageSegment = packageNameToHaxePackage(packageName).split('.').at(-1)!;
+  return `${packageSegment.slice(0, 1).toUpperCase()}${packageSegment.slice(1)}`;
+}
+
+export function packageNameToHaxePackage(packageName: string): string {
+  const bareName = packageName.replace(/^@flighthq\//u, '');
+  const parts = bareName.split(/[-_]/u).filter(Boolean);
+  if (parts.length === 0) throw new Error(`Cannot map empty npm package name: ${packageName}`);
+  const segment = parts
+    .map((part, index) =>
+      index === 0 ? part.toLowerCase() : `${part.slice(0, 1).toUpperCase()}${part.slice(1).toLowerCase()}`,
+    )
+    .join('');
+  return `flighthq.${segment}`;
+}
+
+export function sourcePathToModule(sourcePath: string): string | undefined {
+  const filename = path.basename(sourcePath).replace(/\.tsx?$/u, '');
+  if (filename.toLowerCase() === 'index' || isInternalSource(filename)) return undefined;
+  return pascalCaseFilename(filename);
+}
+
+export function sourcePathToImplementationModule(sourcePath: string): string {
+  const publicModule = sourcePathToModule(sourcePath);
+  if (publicModule) return publicModule;
+  const filename = path.basename(sourcePath).replace(/\.tsx?$/u, '');
+  return `_${pascalCaseFilename(filename)}`;
+}
+
+export function sourcePathToHaxePackage(packageName: string, sourcePath: string): string {
+  const packagePath = packageNameToHaxePackage(packageName);
+  return sourcePathToModule(sourcePath) ? packagePath : `${packagePath}._internal`;
+}
+
+function isInternalSource(filename: string): boolean {
+  return filename.toLowerCase() === 'internal' || /test(?:helper|util)/iu.test(filename);
+}
+
+function pascalCaseFilename(filename: string): string {
+  const match = /^(?<prefix>_*)(?<name>.*)$/u.exec(filename);
+  const prefix = match?.groups?.prefix ?? '';
+  const name = match?.groups?.name ?? filename;
+  return `${prefix}${name
     .split(/[-_]/u)
     .filter(Boolean)
-    .map((part) => `${part.slice(0, 1).toUpperCase()}${part.slice(1).toLowerCase()}`)
-    .join('');
+    .map((part) => `${part.slice(0, 1).toUpperCase()}${part.slice(1)}`)
+    .join('')}`;
 }
 
 export function analyzeUpstream(workspaceDirectory: string): UpstreamInventory {
@@ -67,7 +102,7 @@ export function analyzeUpstream(workspaceDirectory: string): UpstreamInventory {
       directory: path.relative(workspaceDirectory, descriptor.directory),
       exportConflicts: conflicts,
       exports: uniqueExports.sort(compareExports),
-      haxeModule: `flight.${packageNameToModule(descriptor.name)}`,
+      haxeModule: `${packageNameToHaxePackage(descriptor.name)}.${packageNameToModule(descriptor.name)}`,
       name: descriptor.name,
       sdkIncluded: sdkPackages.has(descriptor.name),
       sourceFiles: sourceFiles.length,

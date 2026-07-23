@@ -56,7 +56,7 @@
           "source": "upstream/packages/accessibility/src/accessibility.ts"
         }
       ],
-      "haxeModule": "flight.Accessibility",
+      "haxeModule": "flighthq.accessibility.Accessibility",
       "name": "@flighthq/accessibility",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -365,7 +365,7 @@
           "source": "upstream/packages/adjustments/src/colorLut.ts"
         }
       ],
-      "haxeModule": "flight.Adjustments",
+      "haxeModule": "flighthq.adjustments.Adjustments",
       "name": "@flighthq/adjustments",
       "sdkIncluded": true,
       "sourceFiles": 19,
@@ -489,7 +489,7 @@
           "source": "upstream/packages/animation/src/animationTrack.ts"
         }
       ],
-      "haxeModule": "flight.Animation",
+      "haxeModule": "flighthq.animation.Animation",
       "name": "@flighthq/animation",
       "sdkIncluded": true,
       "sourceFiles": 4,
@@ -757,7 +757,7 @@
           "source": "upstream/packages/app/src/app.ts"
         }
       ],
-      "haxeModule": "flight.AppApi",
+      "haxeModule": "flighthq.app.App",
       "name": "@flighthq/app",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -1271,7 +1271,7 @@
           "source": "upstream/packages/application/src/application.ts"
         }
       ],
-      "haxeModule": "flight.ApplicationApi",
+      "haxeModule": "flighthq.application.Application",
       "name": "@flighthq/application",
       "sdkIncluded": true,
       "sourceFiles": 3,
@@ -1348,7 +1348,7 @@
           "source": "upstream/packages/assets/src/assetLibrary.ts"
         }
       ],
-      "haxeModule": "flight.Assets",
+      "haxeModule": "flighthq.assets.Assets",
       "name": "@flighthq/assets",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -1483,7 +1483,7 @@
           "source": "upstream/packages/audio/src/audioResourceFrom.ts"
         }
       ],
-      "haxeModule": "flight.Audio",
+      "haxeModule": "flighthq.audio.Audio",
       "name": "@flighthq/audio",
       "sdkIncluded": true,
       "sourceFiles": 4,
@@ -1505,7 +1505,7 @@
           "source": "upstream/packages/binpack/src/packRectangles.ts"
         }
       ],
-      "haxeModule": "flight.Binpack",
+      "haxeModule": "flighthq.binpack.Binpack",
       "name": "@flighthq/binpack",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -1563,7 +1563,7 @@
           "source": "upstream/packages/bitmapfont/src/bitmapFont.ts"
         }
       ],
-      "haxeModule": "flight.BitmapFontApi",
+      "haxeModule": "flighthq.bitmapfont.Bitmapfont",
       "name": "@flighthq/bitmapfont",
       "sdkIncluded": true,
       "sourceFiles": 3,
@@ -1604,7 +1604,7 @@
           "source": "upstream/packages/bitmapfont-formats/src/bitmapFontXml.ts"
         }
       ],
-      "haxeModule": "flight.BitmapFontFormats",
+      "haxeModule": "flighthq.bitmapfontFormats.BitmapfontFormats",
       "name": "@flighthq/bitmapfont-formats",
       "sdkIncluded": true,
       "sourceFiles": 5,
@@ -1716,7 +1716,7 @@
           "source": "upstream/packages/bitmaptext/src/updateBitmapText.ts"
         }
       ],
-      "haxeModule": "flight.BitmapTextApi",
+      "haxeModule": "flighthq.bitmaptext.Bitmaptext",
       "name": "@flighthq/bitmaptext",
       "sdkIncluded": true,
       "sourceFiles": 3,
@@ -1919,7 +1919,7 @@
           "source": "upstream/packages/camera/src/camera.ts"
         }
       ],
-      "haxeModule": "flight.CameraApi",
+      "haxeModule": "flighthq.camera.Camera",
       "name": "@flighthq/camera",
       "sdkIncluded": true,
       "sourceFiles": 10,
@@ -1984,7 +1984,7 @@
           "source": "upstream/packages/camera2d/src/zoom.ts"
         }
       ],
-      "haxeModule": "flight.Camera2DApi",
+      "haxeModule": "flighthq.camera2d.Camera2d",
       "name": "@flighthq/camera2d",
       "sdkIncluded": true,
       "sourceFiles": 8,
@@ -2060,7 +2060,7 @@
           "source": "upstream/packages/capture/src/captureBaseline.ts"
         }
       ],
-      "haxeModule": "flight.Capture",
+      "haxeModule": "flighthq.capture.Capture",
       "name": "@flighthq/capture",
       "sdkIncluded": true,
       "sourceFiles": 3,
@@ -2215,7 +2215,7 @@
           "source": "upstream/packages/clip/src/clipRegion.ts"
         }
       ],
-      "haxeModule": "flight.Clip",
+      "haxeModule": "flighthq.clip.Clip",
       "name": "@flighthq/clip",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -2423,7 +2423,7 @@
           "source": "upstream/packages/clipboard/src/clipboard.ts"
         }
       ],
-      "haxeModule": "flight.Clipboard",
+      "haxeModule": "flighthq.clipboard.Clipboard",
       "name": "@flighthq/clipboard",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -2523,7 +2523,7 @@
           "source": "upstream/packages/clock/src/setClockScale.ts"
         }
       ],
-      "haxeModule": "flight.ClockApi",
+      "haxeModule": "flighthq.clock.Clock",
       "name": "@flighthq/clock",
       "sdkIncluded": true,
       "sourceFiles": 12,
@@ -2653,7 +2653,7 @@
           "source": "upstream/packages/collision/src/segmentCollision.ts"
         }
       ],
-      "haxeModule": "flight.Collision",
+      "haxeModule": "flighthq.collision.Collision",
       "name": "@flighthq/collision",
       "sdkIncluded": true,
       "sourceFiles": 6,
@@ -2860,7 +2860,7 @@
           "source": "upstream/packages/color/src/premultiplyColorAlpha.ts"
         }
       ],
-      "haxeModule": "flight.Color",
+      "haxeModule": "flighthq.color.Color",
       "name": "@flighthq/color",
       "sdkIncluded": true,
       "sourceFiles": 10,
@@ -2960,7 +2960,7 @@
           "source": "upstream/packages/connectivity/src/connectivity.ts"
         }
       ],
-      "haxeModule": "flight.ConnectivityApi",
+      "haxeModule": "flighthq.connectivity.Connectivity",
       "name": "@flighthq/connectivity",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -3030,7 +3030,7 @@
           "source": "upstream/packages/debug/src/debug.ts"
         }
       ],
-      "haxeModule": "flight.Debug",
+      "haxeModule": "flighthq.debug.Debug",
       "name": "@flighthq/debug",
       "sdkIncluded": true,
       "sourceFiles": 3,
@@ -3130,7 +3130,7 @@
           "source": "upstream/packages/device/src/device.ts"
         }
       ],
-      "haxeModule": "flight.Device",
+      "haxeModule": "flighthq.device.Device",
       "name": "@flighthq/device",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -3235,7 +3235,7 @@
           "source": "upstream/packages/dialog/src/dialog.ts"
         }
       ],
-      "haxeModule": "flight.Dialog",
+      "haxeModule": "flighthq.dialog.Dialog",
       "name": "@flighthq/dialog",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -3531,7 +3531,7 @@
           "source": "upstream/packages/displayobject/src/video.ts"
         }
       ],
-      "haxeModule": "flight.DisplayObjectApi",
+      "haxeModule": "flighthq.displayobject.Displayobject",
       "name": "@flighthq/displayobject",
       "sdkIncluded": true,
       "sourceFiles": 8,
@@ -4122,7 +4122,7 @@
           "source": "upstream/packages/displayobject-canvas/src/canvasTransform.ts"
         }
       ],
-      "haxeModule": "flight.DisplayObjectCanvas",
+      "haxeModule": "flighthq.displayobjectCanvas.DisplayobjectCanvas",
       "name": "@flighthq/displayobject-canvas",
       "sdkIncluded": true,
       "sourceFiles": 31,
@@ -4497,7 +4497,7 @@
           "source": "upstream/packages/displayobject-dom/src/domTransform.ts"
         }
       ],
-      "haxeModule": "flight.DisplayObjectDom",
+      "haxeModule": "flighthq.displayobjectDom.DisplayobjectDom",
       "name": "@flighthq/displayobject-dom",
       "sdkIncluded": true,
       "sourceFiles": 27,
@@ -5062,7 +5062,7 @@
           "source": "upstream/packages/displayobject-gl/src/glSpriteBatch.ts"
         }
       ],
-      "haxeModule": "flight.DisplayObjectGl",
+      "haxeModule": "flighthq.displayobjectGl.DisplayobjectGl",
       "name": "@flighthq/displayobject-gl",
       "sdkIncluded": true,
       "sourceFiles": 28,
@@ -5662,7 +5662,7 @@
           "source": "upstream/packages/displayobject-wgpu/src/wgpuShapeMesh.ts"
         }
       ],
-      "haxeModule": "flight.DisplayObjectWgpu",
+      "haxeModule": "flighthq.displayobjectWgpu.DisplayobjectWgpu",
       "name": "@flighthq/displayobject-wgpu",
       "sdkIncluded": true,
       "sourceFiles": 29,
@@ -5965,7 +5965,7 @@
           "source": "upstream/packages/easing/src/getEasingDerivative.ts"
         }
       ],
-      "haxeModule": "flight.Easing",
+      "haxeModule": "flighthq.easing.Easing",
       "name": "@flighthq/easing",
       "sdkIncluded": true,
       "sourceFiles": 20,
@@ -6652,7 +6652,7 @@
           "source": "upstream/packages/effects/src/renderEffectValidation.ts"
         }
       ],
-      "haxeModule": "flight.Effects",
+      "haxeModule": "flighthq.effects.Effects",
       "name": "@flighthq/effects",
       "sdkIncluded": true,
       "sourceFiles": 72,
@@ -7283,7 +7283,7 @@
           "source": "upstream/packages/effects-canvas/src/canvasRenderEffectPipeline.ts"
         }
       ],
-      "haxeModule": "flight.EffectsCanvas",
+      "haxeModule": "flighthq.effectsCanvas.EffectsCanvas",
       "name": "@flighthq/effects-canvas",
       "sdkIncluded": true,
       "sourceFiles": 48,
@@ -8112,7 +8112,7 @@
           "source": "upstream/packages/effects-gl/src/glBlendEffect.ts"
         }
       ],
-      "haxeModule": "flight.EffectsGl",
+      "haxeModule": "flighthq.effectsGl.EffectsGl",
       "name": "@flighthq/effects-gl",
       "sdkIncluded": true,
       "sourceFiles": 58,
@@ -8899,7 +8899,7 @@
           "source": "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts"
         }
       ],
-      "haxeModule": "flight.EffectsWgpu",
+      "haxeModule": "flighthq.effectsWgpu.EffectsWgpu",
       "name": "@flighthq/effects-wgpu",
       "sdkIncluded": true,
       "sourceFiles": 56,
@@ -8986,7 +8986,7 @@
           "source": "upstream/packages/entity/src/clone.ts"
         }
       ],
-      "haxeModule": "flight.EntityApi",
+      "haxeModule": "flighthq.entity.Entity",
       "name": "@flighthq/entity",
       "sdkIncluded": true,
       "sourceFiles": 6,
@@ -9260,7 +9260,7 @@
           "source": "upstream/packages/filesystem/src/filesystem.ts"
         }
       ],
-      "haxeModule": "flight.Filesystem",
+      "haxeModule": "flighthq.filesystem.Filesystem",
       "name": "@flighthq/filesystem",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -9329,7 +9329,7 @@
           "source": "upstream/packages/flow/src/updateFlowStack.ts"
         }
       ],
-      "haxeModule": "flight.Flow",
+      "haxeModule": "flighthq.flow.Flow",
       "name": "@flighthq/flow",
       "sdkIncluded": true,
       "sourceFiles": 10,
@@ -9435,7 +9435,7 @@
           "source": "upstream/packages/font/src/fontStatus.ts"
         }
       ],
-      "haxeModule": "flight.FontApi",
+      "haxeModule": "flighthq.font.Font",
       "name": "@flighthq/font",
       "sdkIncluded": true,
       "sourceFiles": 8,
@@ -9522,7 +9522,7 @@
           "source": "upstream/packages/geolocation/src/geolocation.ts"
         }
       ],
-      "haxeModule": "flight.Geolocation",
+      "haxeModule": "flighthq.geolocation.Geolocation",
       "name": "@flighthq/geolocation",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -11800,7 +11800,7 @@
           "source": "upstream/packages/geometry/src/vector4.ts"
         }
       ],
-      "haxeModule": "flight.Geometry",
+      "haxeModule": "flighthq.geometry.Geometry",
       "name": "@flighthq/geometry",
       "sdkIncluded": true,
       "sourceFiles": 27,
@@ -11901,7 +11901,7 @@
           "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
         }
       ],
-      "haxeModule": "flight.Glyphatlas",
+      "haxeModule": "flighthq.glyphatlas.Glyphatlas",
       "name": "@flighthq/glyphatlas",
       "sdkIncluded": true,
       "sourceFiles": 7,
@@ -11994,7 +11994,7 @@
           "source": "upstream/packages/haptics/src/haptics.ts"
         }
       ],
-      "haxeModule": "flight.Haptics",
+      "haxeModule": "flighthq.haptics.Haptics",
       "name": "@flighthq/haptics",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -12399,7 +12399,7 @@
           "source": "upstream/packages/host-capacitor/src/capacitorRegister.ts"
         }
       ],
-      "haxeModule": "flight.HostCapacitor",
+      "haxeModule": "flighthq.hostCapacitor.HostCapacitor",
       "name": "@flighthq/host-capacitor",
       "sdkIncluded": false,
       "sourceFiles": 15,
@@ -12773,7 +12773,7 @@
           "source": "upstream/packages/host-electron/src/electronRegister.ts"
         }
       ],
-      "haxeModule": "flight.HostElectron",
+      "haxeModule": "flighthq.hostElectron.HostElectron",
       "name": "@flighthq/host-electron",
       "sdkIncluded": false,
       "sourceFiles": 19,
@@ -13105,7 +13105,7 @@
           "source": "upstream/packages/host-tauri/src/tauriModule.ts"
         }
       ],
-      "haxeModule": "flight.HostTauri",
+      "haxeModule": "flighthq.hostTauri.HostTauri",
       "name": "@flighthq/host-tauri",
       "sdkIncluded": false,
       "sourceFiles": 13,
@@ -13242,7 +13242,7 @@
           "source": "upstream/packages/image/src/imageResource.ts"
         }
       ],
-      "haxeModule": "flight.Image",
+      "haxeModule": "flighthq.image.Image",
       "name": "@flighthq/image",
       "sdkIncluded": true,
       "sourceFiles": 3,
@@ -13353,7 +13353,7 @@
           "source": "upstream/packages/image-codec/src/imageEncoderRegistry.ts"
         }
       ],
-      "haxeModule": "flight.ImageCodec",
+      "haxeModule": "flighthq.imageCodec.ImageCodec",
       "name": "@flighthq/image-codec",
       "sdkIncluded": true,
       "sourceFiles": 8,
@@ -13609,7 +13609,7 @@
           "source": "upstream/packages/input/src/inputManager.ts"
         }
       ],
-      "haxeModule": "flight.Input",
+      "haxeModule": "flighthq.input.Input",
       "name": "@flighthq/input",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -14133,7 +14133,7 @@
           "source": "upstream/packages/interaction/src/nodeInteractionState.ts"
         }
       ],
-      "haxeModule": "flight.Interaction",
+      "haxeModule": "flighthq.interaction.Interaction",
       "name": "@flighthq/interaction",
       "sdkIncluded": true,
       "sourceFiles": 16,
@@ -14232,7 +14232,7 @@
           "source": "upstream/packages/intl/src/collator.ts"
         }
       ],
-      "haxeModule": "flight.Intl",
+      "haxeModule": "flighthq.intl.Intl",
       "name": "@flighthq/intl",
       "sdkIncluded": true,
       "sourceFiles": 8,
@@ -14350,7 +14350,7 @@
           "source": "upstream/packages/ipc/src/ipc.ts"
         }
       ],
-      "haxeModule": "flight.Ipc",
+      "haxeModule": "flighthq.ipc.Ipc",
       "name": "@flighthq/ipc",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -14486,7 +14486,7 @@
           "source": "upstream/packages/keyboard/src/keyboard.ts"
         }
       ],
-      "haxeModule": "flight.Keyboard",
+      "haxeModule": "flighthq.keyboard.Keyboard",
       "name": "@flighthq/keyboard",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -14580,7 +14580,7 @@
           "source": "upstream/packages/lifecycle/src/lifecycle.ts"
         }
       ],
-      "haxeModule": "flight.Lifecycle",
+      "haxeModule": "flighthq.lifecycle.Lifecycle",
       "name": "@flighthq/lifecycle",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -14819,7 +14819,7 @@
           "source": "upstream/packages/lighting/src/spotLight.ts"
         }
       ],
-      "haxeModule": "flight.Lighting",
+      "haxeModule": "flighthq.lighting.Lighting",
       "name": "@flighthq/lighting",
       "sdkIncluded": true,
       "sourceFiles": 11,
@@ -14913,7 +14913,7 @@
           "source": "upstream/packages/loader/src/resourceLoader.ts"
         }
       ],
-      "haxeModule": "flight.Loader",
+      "haxeModule": "flighthq.loader.Loader",
       "name": "@flighthq/loader",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -15319,7 +15319,7 @@
           "source": "upstream/packages/log/src/log.ts"
         }
       ],
-      "haxeModule": "flight.Log",
+      "haxeModule": "flighthq.log.Log",
       "name": "@flighthq/log",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -15744,7 +15744,7 @@
           "source": "upstream/packages/materials/src/colorTransform.ts"
         }
       ],
-      "haxeModule": "flight.Materials",
+      "haxeModule": "flighthq.materials.Materials",
       "name": "@flighthq/materials",
       "sdkIncluded": true,
       "sourceFiles": 12,
@@ -16197,7 +16197,7 @@
           "source": "upstream/packages/math/src/statistics.ts"
         }
       ],
-      "haxeModule": "flight.Math",
+      "haxeModule": "flighthq.math.Math",
       "name": "@flighthq/math",
       "sdkIncluded": true,
       "sourceFiles": 16,
@@ -16467,7 +16467,7 @@
           "source": "upstream/packages/media/src/audioMixer.ts"
         }
       ],
-      "haxeModule": "flight.Media",
+      "haxeModule": "flighthq.media.Media",
       "name": "@flighthq/media",
       "sdkIncluded": true,
       "sourceFiles": 4,
@@ -16542,7 +16542,7 @@
           "source": "upstream/packages/mediasession/src/mediasession.ts"
         }
       ],
-      "haxeModule": "flight.MediaSession",
+      "haxeModule": "flighthq.mediasession.Mediasession",
       "name": "@flighthq/mediasession",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -16660,7 +16660,7 @@
           "source": "upstream/packages/menu/src/menu.ts"
         }
       ],
-      "haxeModule": "flight.Menu",
+      "haxeModule": "flighthq.menu.Menu",
       "name": "@flighthq/menu",
       "sdkIncluded": true,
       "sourceFiles": 3,
@@ -17079,7 +17079,7 @@
           "source": "upstream/packages/mesh/src/meshGeometryUvs.ts"
         }
       ],
-      "haxeModule": "flight.MeshApi",
+      "haxeModule": "flighthq.mesh.Mesh",
       "name": "@flighthq/mesh",
       "sdkIncluded": true,
       "sourceFiles": 12,
@@ -17138,7 +17138,7 @@
           "source": "upstream/packages/motionpath/src/updateMotionPath.ts"
         }
       ],
-      "haxeModule": "flight.Motionpath",
+      "haxeModule": "flighthq.motionpath.Motionpath",
       "name": "@flighthq/motionpath",
       "sdkIncluded": true,
       "sourceFiles": 8,
@@ -17294,7 +17294,7 @@
           "source": "upstream/packages/movieclip/src/movieClip.ts"
         }
       ],
-      "haxeModule": "flight.Movieclip",
+      "haxeModule": "flighthq.movieclip.Movieclip",
       "name": "@flighthq/movieclip",
       "sdkIncluded": true,
       "sourceFiles": 3,
@@ -17334,7 +17334,7 @@
           "source": "upstream/packages/net/src/net.ts"
         }
       ],
-      "haxeModule": "flight.Net",
+      "haxeModule": "flighthq.net.Net",
       "name": "@flighthq/net",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -17982,7 +17982,7 @@
           "source": "upstream/packages/node/src/traversal.ts"
         }
       ],
-      "haxeModule": "flight.NodeApi",
+      "haxeModule": "flighthq.node.Node",
       "name": "@flighthq/node",
       "sdkIncluded": true,
       "sourceFiles": 16,
@@ -18153,7 +18153,7 @@
           "source": "upstream/packages/notification/src/notification.ts"
         }
       ],
-      "haxeModule": "flight.Notification",
+      "haxeModule": "flighthq.notification.Notification",
       "name": "@flighthq/notification",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -18479,7 +18479,7 @@
           "source": "upstream/packages/particleemitter/src/updateParticleEmitter3D.ts"
         }
       ],
-      "haxeModule": "flight.ParticleEmitterApi",
+      "haxeModule": "flighthq.particleemitter.Particleemitter",
       "name": "@flighthq/particleemitter",
       "sdkIncluded": true,
       "sourceFiles": 11,
@@ -18796,7 +18796,7 @@
           "source": "upstream/packages/types/src/WindForce.ts"
         }
       ],
-      "haxeModule": "flight.Particles",
+      "haxeModule": "flighthq.particles.Particles",
       "name": "@flighthq/particles",
       "sdkIncluded": true,
       "sourceFiles": 11,
@@ -19286,7 +19286,7 @@
           "source": "upstream/packages/particles-formats/src/formatRegistry.ts"
         }
       ],
-      "haxeModule": "flight.ParticlesFormats",
+      "haxeModule": "flighthq.particlesFormats.ParticlesFormats",
       "name": "@flighthq/particles-formats",
       "sdkIncluded": true,
       "sourceFiles": 21,
@@ -19601,7 +19601,7 @@
           "source": "upstream/packages/path/src/transformPath.ts"
         }
       ],
-      "haxeModule": "flight.PathApi",
+      "haxeModule": "flighthq.path.Path",
       "name": "@flighthq/path",
       "sdkIncluded": true,
       "sourceFiles": 23,
@@ -19689,7 +19689,7 @@
           "source": "upstream/packages/path-boolean/src/booleanPaths.ts"
         }
       ],
-      "haxeModule": "flight.PathBoolean",
+      "haxeModule": "flighthq.pathBoolean.PathBoolean",
       "name": "@flighthq/path-boolean",
       "sdkIncluded": true,
       "sourceFiles": 8,
@@ -19723,7 +19723,7 @@
           "source": "upstream/packages/path-formats/src/svgPathData.ts"
         }
       ],
-      "haxeModule": "flight.PathFormats",
+      "haxeModule": "flighthq.pathFormats.PathFormats",
       "name": "@flighthq/path-formats",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -19768,7 +19768,7 @@
           "source": "upstream/packages/permissions/src/permission.ts"
         }
       ],
-      "haxeModule": "flight.Permissions",
+      "haxeModule": "flighthq.permissions.Permissions",
       "name": "@flighthq/permissions",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -19824,7 +19824,7 @@
           "source": "upstream/packages/picking/src/pickScene.ts"
         }
       ],
-      "haxeModule": "flight.Picking",
+      "haxeModule": "flighthq.picking.Picking",
       "name": "@flighthq/picking",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -19936,7 +19936,7 @@
           "source": "upstream/packages/platform/src/platform.ts"
         }
       ],
-      "haxeModule": "flight.Platform",
+      "haxeModule": "flighthq.platform.Platform",
       "name": "@flighthq/platform",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -20066,7 +20066,7 @@
           "source": "upstream/packages/power/src/power.ts"
         }
       ],
-      "haxeModule": "flight.PowerApi",
+      "haxeModule": "flighthq.power.Power",
       "name": "@flighthq/power",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -20202,7 +20202,7 @@
           "source": "upstream/packages/protocol/src/protocol.ts"
         }
       ],
-      "haxeModule": "flight.Protocol",
+      "haxeModule": "flighthq.protocol.Protocol",
       "name": "@flighthq/protocol",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -20603,7 +20603,7 @@
           "source": "upstream/packages/render/src/renderProxy.ts"
         }
       ],
-      "haxeModule": "flight.Render",
+      "haxeModule": "flighthq.render.Render",
       "name": "@flighthq/render",
       "sdkIncluded": true,
       "sourceFiles": 17,
@@ -21071,7 +21071,7 @@
           "source": "upstream/packages/render-gl/src/glDraw.ts"
         }
       ],
-      "haxeModule": "flight.RenderGl",
+      "haxeModule": "flighthq.renderGl.RenderGl",
       "name": "@flighthq/render-gl",
       "sdkIncluded": true,
       "sourceFiles": 24,
@@ -21498,7 +21498,7 @@
           "source": "upstream/packages/render-wgpu/src/wgpuShader.ts"
         }
       ],
-      "haxeModule": "flight.RenderWgpu",
+      "haxeModule": "flighthq.renderWgpu.RenderWgpu",
       "name": "@flighthq/render-wgpu",
       "sdkIncluded": true,
       "sourceFiles": 18,
@@ -21776,7 +21776,7 @@
           "source": "upstream/packages/scene/src/updateMeshMorph.ts"
         }
       ],
-      "haxeModule": "flight.SceneApi",
+      "haxeModule": "flighthq.scene.Scene",
       "name": "@flighthq/scene",
       "sdkIncluded": true,
       "sourceFiles": 14,
@@ -21891,7 +21891,7 @@
           "source": "upstream/packages/scene-formats/src/mtlParse.ts"
         }
       ],
-      "haxeModule": "flight.SceneFormats",
+      "haxeModule": "flighthq.sceneFormats.SceneFormats",
       "name": "@flighthq/scene-formats",
       "sdkIncluded": true,
       "sourceFiles": 16,
@@ -23023,7 +23023,7 @@
           "source": "upstream/packages/scene-gl/src/wireframeGlMeshMaterialRenderer.ts"
         }
       ],
-      "haxeModule": "flight.SceneGl",
+      "haxeModule": "flighthq.sceneGl.SceneGl",
       "name": "@flighthq/scene-gl",
       "sdkIncluded": true,
       "sourceFiles": 53,
@@ -23267,7 +23267,7 @@
           "source": "upstream/packages/scene-resources/src/sceneResourceSignals.ts"
         }
       ],
-      "haxeModule": "flight.SceneResources",
+      "haxeModule": "flighthq.sceneResources.SceneResources",
       "name": "@flighthq/scene-resources",
       "sdkIncluded": true,
       "sourceFiles": 16,
@@ -24131,7 +24131,7 @@
           "source": "upstream/packages/scene-wgpu/src/standardPbrWgpuMeshMaterialRenderer.ts"
         }
       ],
-      "haxeModule": "flight.SceneWgpu",
+      "haxeModule": "flighthq.sceneWgpu.SceneWgpu",
       "name": "@flighthq/scene-wgpu",
       "sdkIncluded": true,
       "sourceFiles": 42,
@@ -24333,7 +24333,7 @@
           "source": "upstream/packages/screen/src/screen.ts"
         }
       ],
-      "haxeModule": "flight.Screen",
+      "haxeModule": "flighthq.screen.Screen",
       "name": "@flighthq/screen",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -60011,7 +60011,7 @@
           "source": "upstream/packages/camera2d/src/zoom.ts"
         }
       ],
-      "haxeModule": "flight.Sdk",
+      "haxeModule": "flighthq.sdk.Sdk",
       "name": "@flighthq/sdk",
       "sdkIncluded": false,
       "sourceFiles": 14,
@@ -60219,7 +60219,7 @@
           "source": "upstream/packages/sensors/src/sensors.ts"
         }
       ],
-      "haxeModule": "flight.SensorsApi",
+      "haxeModule": "flighthq.sensors.Sensors",
       "name": "@flighthq/sensors",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -60457,7 +60457,7 @@
           "source": "upstream/packages/shading/src/createVertexDisplaceModifier.ts"
         }
       ],
-      "haxeModule": "flight.Shading",
+      "haxeModule": "flighthq.shading.Shading",
       "name": "@flighthq/shading",
       "sdkIncluded": true,
       "sourceFiles": 17,
@@ -60727,7 +60727,7 @@
           "source": "upstream/packages/shape/src/shapeHitTestRegistry.ts"
         }
       ],
-      "haxeModule": "flight.ShapeApi",
+      "haxeModule": "flighthq.shape.Shape",
       "name": "@flighthq/shape",
       "sdkIncluded": true,
       "sourceFiles": 7,
@@ -60774,7 +60774,7 @@
           "source": "upstream/packages/shape-formats/src/shapeJson.ts"
         }
       ],
-      "haxeModule": "flight.ShapeFormats",
+      "haxeModule": "flighthq.shapeFormats.ShapeFormats",
       "name": "@flighthq/shape-formats",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -60874,7 +60874,7 @@
           "source": "upstream/packages/share/src/share.ts"
         }
       ],
-      "haxeModule": "flight.Share",
+      "haxeModule": "flighthq.share.Share",
       "name": "@flighthq/share",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -60973,7 +60973,7 @@
           "source": "upstream/packages/shell/src/shell.ts"
         }
       ],
-      "haxeModule": "flight.Shell",
+      "haxeModule": "flighthq.shell.Shell",
       "name": "@flighthq/shell",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -61145,7 +61145,7 @@
           "source": "upstream/packages/shortcut/src/shortcut.ts"
         }
       ],
-      "haxeModule": "flight.Shortcut",
+      "haxeModule": "flighthq.shortcut.Shortcut",
       "name": "@flighthq/shortcut",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -61244,7 +61244,7 @@
           "source": "upstream/packages/signals/src/throttle.ts"
         }
       ],
-      "haxeModule": "flight.Signals",
+      "haxeModule": "flighthq.signals.Signals",
       "name": "@flighthq/signals",
       "sdkIncluded": true,
       "sourceFiles": 6,
@@ -61358,7 +61358,7 @@
           "source": "upstream/packages/skeleton3d/src/skeleton3d.ts"
         }
       ],
-      "haxeModule": "flight.Skeleton3DApi",
+      "haxeModule": "flighthq.skeleton3d.Skeleton3d",
       "name": "@flighthq/skeleton3d",
       "sdkIncluded": true,
       "sourceFiles": 6,
@@ -61398,7 +61398,7 @@
           "source": "upstream/packages/snapshot/src/restoreSnapshot.ts"
         }
       ],
-      "haxeModule": "flight.SnapshotApi",
+      "haxeModule": "flighthq.snapshot.Snapshot",
       "name": "@flighthq/snapshot",
       "sdkIncluded": true,
       "sourceFiles": 5,
@@ -61480,7 +61480,7 @@
           "source": "upstream/packages/socket/src/socket.ts"
         }
       ],
-      "haxeModule": "flight.SocketApi",
+      "haxeModule": "flighthq.socket.Socket",
       "name": "@flighthq/socket",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -61556,7 +61556,7 @@
           "source": "upstream/packages/spatial/src/spatialIndex.ts"
         }
       ],
-      "haxeModule": "flight.Spatial",
+      "haxeModule": "flighthq.spatial.Spatial",
       "name": "@flighthq/spatial",
       "sdkIncluded": true,
       "sourceFiles": 3,
@@ -61644,7 +61644,7 @@
           "source": "upstream/packages/spring/src/spring3D.ts"
         }
       ],
-      "haxeModule": "flight.SpringApi",
+      "haxeModule": "flighthq.spring.Spring",
       "name": "@flighthq/spring",
       "sdkIncluded": true,
       "sourceFiles": 8,
@@ -62047,7 +62047,7 @@
           "source": "upstream/packages/sprite/src/tilemap.ts"
         }
       ],
-      "haxeModule": "flight.SpriteApi",
+      "haxeModule": "flighthq.sprite.Sprite",
       "name": "@flighthq/sprite",
       "sdkIncluded": true,
       "sourceFiles": 4,
@@ -62258,7 +62258,7 @@
           "source": "upstream/packages/spritesheet/src/spritesheetValidation.ts"
         }
       ],
-      "haxeModule": "flight.SpritesheetApi",
+      "haxeModule": "flighthq.spritesheet.Spritesheet",
       "name": "@flighthq/spritesheet",
       "sdkIncluded": true,
       "sourceFiles": 8,
@@ -62607,7 +62607,7 @@
           "source": "upstream/packages/spritesheet-formats/src/texturePackerSchema.ts"
         }
       ],
-      "haxeModule": "flight.SpritesheetFormats",
+      "haxeModule": "flighthq.spritesheetFormats.SpritesheetFormats",
       "name": "@flighthq/spritesheet-formats",
       "sdkIncluded": true,
       "sourceFiles": 16,
@@ -62719,7 +62719,7 @@
           "source": "upstream/packages/statusbar/src/statusbar.ts"
         }
       ],
-      "haxeModule": "flight.StatusBarApi",
+      "haxeModule": "flighthq.statusbar.Statusbar",
       "name": "@flighthq/statusbar",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -62969,7 +62969,7 @@
           "source": "upstream/packages/storage/src/storage.ts"
         }
       ],
-      "haxeModule": "flight.Storage",
+      "haxeModule": "flighthq.storage.Storage",
       "name": "@flighthq/storage",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -63802,7 +63802,7 @@
           "source": "upstream/packages/surface/src/surfaceComposite.ts"
         }
       ],
-      "haxeModule": "flight.SurfaceApi",
+      "haxeModule": "flighthq.surface.Surface",
       "name": "@flighthq/surface",
       "sdkIncluded": true,
       "sourceFiles": 42,
@@ -64339,7 +64339,7 @@
           "source": "upstream/packages/text/src/textLabel.ts"
         }
       ],
-      "haxeModule": "flight.Text",
+      "haxeModule": "flighthq.text.Text",
       "name": "@flighthq/text",
       "sdkIncluded": true,
       "sourceFiles": 6,
@@ -64403,7 +64403,7 @@
           "source": "upstream/packages/text-markup/src/markupTagRegistry.ts"
         }
       ],
-      "haxeModule": "flight.TextMarkup",
+      "haxeModule": "flighthq.textMarkup.TextMarkup",
       "name": "@flighthq/text-markup",
       "sdkIncluded": true,
       "sourceFiles": 5,
@@ -64454,7 +64454,7 @@
           "source": "upstream/packages/textbidi/src/bidiClassBackend.ts"
         }
       ],
-      "haxeModule": "flight.TextBidi",
+      "haxeModule": "flighthq.textbidi.Textbidi",
       "name": "@flighthq/textbidi",
       "sdkIncluded": true,
       "sourceFiles": 5,
@@ -64803,7 +64803,7 @@
           "source": "upstream/packages/textinput/src/textInputEditing.ts"
         }
       ],
-      "haxeModule": "flight.TextInput",
+      "haxeModule": "flighthq.textinput.Textinput",
       "name": "@flighthq/textinput",
       "sdkIncluded": true,
       "sourceFiles": 5,
@@ -65101,7 +65101,7 @@
           "source": "upstream/packages/textlayout/src/textLayout.ts"
         }
       ],
-      "haxeModule": "flight.TextLayout",
+      "haxeModule": "flighthq.textlayout.Textlayout",
       "name": "@flighthq/textlayout",
       "sdkIncluded": true,
       "sourceFiles": 13,
@@ -65182,7 +65182,7 @@
           "source": "upstream/packages/textsegment/src/textSegmenterBackend.ts"
         }
       ],
-      "haxeModule": "flight.TextSegmentApi",
+      "haxeModule": "flighthq.textsegment.Textsegment",
       "name": "@flighthq/textsegment",
       "sdkIncluded": true,
       "sourceFiles": 4,
@@ -65384,7 +65384,7 @@
           "source": "upstream/packages/textshaper/src/textShaperCache.ts"
         }
       ],
-      "haxeModule": "flight.TextShaper",
+      "haxeModule": "flighthq.textshaper.Textshaper",
       "name": "@flighthq/textshaper",
       "sdkIncluded": true,
       "sourceFiles": 9,
@@ -65419,7 +65419,7 @@
           "source": "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts"
         }
       ],
-      "haxeModule": "flight.TextShaperCanvas",
+      "haxeModule": "flighthq.textshaperCanvas.TextshaperCanvas",
       "name": "@flighthq/textshaper-canvas",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -65688,7 +65688,7 @@
           "source": "upstream/packages/texture/src/texture.ts"
         }
       ],
-      "haxeModule": "flight.TextureApi",
+      "haxeModule": "flighthq.texture.Texture",
       "name": "@flighthq/texture",
       "sdkIncluded": true,
       "sourceFiles": 5,
@@ -65739,7 +65739,7 @@
           "source": "upstream/packages/texture-formats/src/selectTextureContainer.ts"
         }
       ],
-      "haxeModule": "flight.TextureFormats",
+      "haxeModule": "flighthq.textureFormats.TextureFormats",
       "name": "@flighthq/texture-formats",
       "sdkIncluded": true,
       "sourceFiles": 9,
@@ -65877,7 +65877,7 @@
           "source": "upstream/packages/textureatlas/src/textureAtlasRegion.ts"
         }
       ],
-      "haxeModule": "flight.TextureAtlasApi",
+      "haxeModule": "flighthq.textureatlas.Textureatlas",
       "name": "@flighthq/textureatlas",
       "sdkIncluded": true,
       "sourceFiles": 4,
@@ -66068,7 +66068,7 @@
           "source": "upstream/packages/textureatlas-formats/src/textureAtlasStarlingParse.ts"
         }
       ],
-      "haxeModule": "flight.TextureAtlasFormats",
+      "haxeModule": "flighthq.textureatlasFormats.TextureatlasFormats",
       "name": "@flighthq/textureatlas-formats",
       "sdkIncluded": true,
       "sourceFiles": 8,
@@ -66181,7 +66181,7 @@
           "source": "upstream/packages/tilemap-formats/src/tiledOptions.ts"
         }
       ],
-      "haxeModule": "flight.TilemapFormats",
+      "haxeModule": "flighthq.tilemapFormats.TilemapFormats",
       "name": "@flighthq/tilemap-formats",
       "sdkIncluded": true,
       "sourceFiles": 9,
@@ -66253,7 +66253,7 @@
           "source": "upstream/packages/tileset/src/tilesetFrom.ts"
         }
       ],
-      "haxeModule": "flight.TilesetApi",
+      "haxeModule": "flighthq.tileset.Tileset",
       "name": "@flighthq/tileset",
       "sdkIncluded": true,
       "sourceFiles": 3,
@@ -66365,7 +66365,7 @@
           "source": "upstream/packages/timeline/src/timeline.ts"
         }
       ],
-      "haxeModule": "flight.TimelineApi",
+      "haxeModule": "flighthq.timeline.Timeline",
       "name": "@flighthq/timeline",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -66726,7 +66726,7 @@
           "source": "upstream/packages/tool-capture/src/captureEntries.ts"
         }
       ],
-      "haxeModule": "flight.ToolCapture",
+      "haxeModule": "flighthq.toolCapture.ToolCapture",
       "name": "@flighthq/tool-capture",
       "sdkIncluded": false,
       "sourceFiles": 12,
@@ -66879,7 +66879,7 @@
           "source": "upstream/packages/tray/src/tray.ts"
         }
       ],
-      "haxeModule": "flight.Tray",
+      "haxeModule": "flighthq.tray.Tray",
       "name": "@flighthq/tray",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -67106,7 +67106,7 @@
           "source": "upstream/packages/tween/src/updateTweens.ts"
         }
       ],
-      "haxeModule": "flight.TweenApi",
+      "haxeModule": "flighthq.tween.Tween",
       "name": "@flighthq/tween",
       "sdkIncluded": true,
       "sourceFiles": 9,
@@ -74685,7 +74685,7 @@
           "source": "upstream/packages/types/src/WireframeMaterial.ts"
         }
       ],
-      "haxeModule": "flight.Types",
+      "haxeModule": "flighthq.types.Types",
       "name": "@flighthq/types",
       "sdkIncluded": true,
       "sourceFiles": 590,
@@ -74839,7 +74839,7 @@
           "source": "upstream/packages/updater/src/updater.ts"
         }
       ],
-      "haxeModule": "flight.Updater",
+      "haxeModule": "flighthq.updater.Updater",
       "name": "@flighthq/updater",
       "sdkIncluded": true,
       "sourceFiles": 2,
@@ -74926,7 +74926,7 @@
           "source": "upstream/packages/useragent/src/userAgent.ts"
         }
       ],
-      "haxeModule": "flight.UserAgent",
+      "haxeModule": "flighthq.useragent.Useragent",
       "name": "@flighthq/useragent",
       "sdkIncluded": true,
       "sourceFiles": 3,
@@ -75063,7 +75063,7 @@
           "source": "upstream/packages/velocity/src/velocityField.ts"
         }
       ],
-      "haxeModule": "flight.Velocity",
+      "haxeModule": "flighthq.velocity.Velocity",
       "name": "@flighthq/velocity",
       "sdkIncluded": true,
       "sourceFiles": 4,
@@ -75174,7 +75174,7 @@
           "source": "upstream/packages/video/src/videoFormat.ts"
         }
       ],
-      "haxeModule": "flight.VideoApi",
+      "haxeModule": "flighthq.video.Video",
       "name": "@flighthq/video",
       "sdkIncluded": true,
       "sourceFiles": 4,
@@ -75250,7 +75250,7 @@
           "source": "upstream/packages/webcam/src/webcamStream.ts"
         }
       ],
-      "haxeModule": "flight.Webcam",
+      "haxeModule": "flighthq.webcam.Webcam",
       "name": "@flighthq/webcam",
       "sdkIncluded": true,
       "sourceFiles": 3,
@@ -75305,7 +75305,7 @@
           "source": "upstream/packages/xml/src/xmlParse.ts"
         }
       ],
-      "haxeModule": "flight.Xml",
+      "haxeModule": "flighthq.xml.Xml",
       "name": "@flighthq/xml",
       "sdkIncluded": true,
       "sourceFiles": 3,

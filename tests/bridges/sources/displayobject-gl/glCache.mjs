@@ -4,19 +4,19 @@ import * as __dependency0 from '@flighthq/render-gl';
 import * as __dependency1 from './glDisplayObject.mjs';
 import * as __dependency2 from './glSpriteBatch.mjs';
 
-const api = compiled.flighthq.DisplayObjectGl;
+const api = compiled.flighthq.displayobjectGl.GlCache;
 function __syncDependencies() {
-  compiled.flighthq.RenderGl.createGlRenderStateRuntime = __dependency0.createGlRenderStateRuntime;
-  compiled.flighthq.RenderGl.getGlRenderStateRuntime = __dependency0.getGlRenderStateRuntime;
-  compiled.flighthq.RenderGl.beginGlRenderPass = __dependency0.beginGlRenderPass;
-  compiled.flighthq.RenderGl.createGlRenderTarget = __dependency0.createGlRenderTarget;
-  compiled.flighthq.RenderGl.destroyGlRenderTarget = __dependency0.destroyGlRenderTarget;
-  compiled.flighthq.RenderGl.drawGlRenderTargetResult = __dependency0.drawGlRenderTargetResult;
-  compiled.flighthq.RenderGl.endGlRenderPass = __dependency0.endGlRenderPass;
-  compiled.flighthq.RenderGl.resizeGlRenderTarget = __dependency0.resizeGlRenderTarget;
-  compiled.flighthq.RenderGl.setGlRenderTransform2D = __dependency0.setGlRenderTransform2D;
-  compiled.flighthq.DisplayObjectGl.renderGlDisplayObject = __dependency1.renderGlDisplayObject;
-  compiled.flighthq.DisplayObjectGl.flushGlSpriteBatch = __dependency2.flushGlSpriteBatch;
+  compiled.flighthq.renderGl.RenderGl.createGlRenderStateRuntime = __dependency0.createGlRenderStateRuntime;
+  compiled.flighthq.renderGl.RenderGl.getGlRenderStateRuntime = __dependency0.getGlRenderStateRuntime;
+  compiled.flighthq.renderGl.RenderGl.beginGlRenderPass = __dependency0.beginGlRenderPass;
+  compiled.flighthq.renderGl.RenderGl.createGlRenderTarget = __dependency0.createGlRenderTarget;
+  compiled.flighthq.renderGl.RenderGl.destroyGlRenderTarget = __dependency0.destroyGlRenderTarget;
+  compiled.flighthq.renderGl.RenderGl.drawGlRenderTargetResult = __dependency0.drawGlRenderTargetResult;
+  compiled.flighthq.renderGl.RenderGl.endGlRenderPass = __dependency0.endGlRenderPass;
+  compiled.flighthq.renderGl.RenderGl.resizeGlRenderTarget = __dependency0.resizeGlRenderTarget;
+  compiled.flighthq.renderGl.RenderGl.setGlRenderTransform2D = __dependency0.setGlRenderTransform2D;
+  compiled.flighthq.displayobjectGl.GlDisplayObject.renderGlDisplayObject = __dependency1.renderGlDisplayObject;
+  compiled.flighthq.displayobjectGl.GlSpriteBatch.flushGlSpriteBatch = __dependency2.flushGlSpriteBatch;
 }
 __syncDependencies();
 

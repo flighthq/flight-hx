@@ -1,4 +1,4 @@
-import flighthq.Sdk;
+import flighthq.sdk.Sdk;
 class Main extends ExampleHost {
   var bars:Array<Dynamic>=[];var time=0.0;
   var sfxBus:Dynamic; var musicBus:Dynamic;
