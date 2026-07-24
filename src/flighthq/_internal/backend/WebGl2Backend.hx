@@ -425,6 +425,233 @@ class WebGl2Backend {
     return Reflect.deleteField(context, name);
   }
 }
+#elseif (js && html5)
+
+/**
+ * Browser (html5) WebGL2 binding. The context erases to the real
+ * `WebGL2RenderingContext`, so calls and constants are issued as statically
+ * named direct JS (compile-time literal member names + argument spread) instead
+ * of reflection. This keeps every GL call on the hot path a plain method call
+ * and lets DCE drop unused bindings.
+ */
+class WebGl2Backend {
+  public static function call(context:Dynamic, name:String, arguments:Array<Dynamic>):Dynamic {
+    switch (name) {
+      case 'activeTexture': return js.Syntax.code('{0}.activeTexture(...{1})', context, arguments);
+      case 'attachShader': return js.Syntax.code('{0}.attachShader(...{1})', context, arguments);
+      case 'bindBuffer': return js.Syntax.code('{0}.bindBuffer(...{1})', context, arguments);
+      case 'bindFramebuffer': return js.Syntax.code('{0}.bindFramebuffer(...{1})', context, arguments);
+      case 'bindRenderbuffer': return js.Syntax.code('{0}.bindRenderbuffer(...{1})', context, arguments);
+      case 'bindTexture': return js.Syntax.code('{0}.bindTexture(...{1})', context, arguments);
+      case 'bindVertexArray': return js.Syntax.code('{0}.bindVertexArray(...{1})', context, arguments);
+      case 'blendEquation': return js.Syntax.code('{0}.blendEquation(...{1})', context, arguments);
+      case 'blendFunc': return js.Syntax.code('{0}.blendFunc(...{1})', context, arguments);
+      case 'blitFramebuffer': return js.Syntax.code('{0}.blitFramebuffer(...{1})', context, arguments);
+      case 'bufferData': return js.Syntax.code('{0}.bufferData(...{1})', context, arguments);
+      case 'bufferSubData': return js.Syntax.code('{0}.bufferSubData(...{1})', context, arguments);
+      case 'checkFramebufferStatus': return js.Syntax.code('{0}.checkFramebufferStatus(...{1})', context, arguments);
+      case 'clear': return js.Syntax.code('{0}.clear(...{1})', context, arguments);
+      case 'clearBufferfi': return js.Syntax.code('{0}.clearBufferfi(...{1})', context, arguments);
+      case 'clearBufferfv': return js.Syntax.code('{0}.clearBufferfv(...{1})', context, arguments);
+      case 'clearColor': return js.Syntax.code('{0}.clearColor(...{1})', context, arguments);
+      case 'colorMask': return js.Syntax.code('{0}.colorMask(...{1})', context, arguments);
+      case 'compileShader': return js.Syntax.code('{0}.compileShader(...{1})', context, arguments);
+      case 'compressedTexImage2D': return js.Syntax.code('{0}.compressedTexImage2D(...{1})', context, arguments);
+      case 'compressedTexSubImage3D': return js.Syntax.code('{0}.compressedTexSubImage3D(...{1})', context, arguments);
+      case 'createBuffer': return js.Syntax.code('{0}.createBuffer(...{1})', context, arguments);
+      case 'createFramebuffer': return js.Syntax.code('{0}.createFramebuffer(...{1})', context, arguments);
+      case 'createProgram': return js.Syntax.code('{0}.createProgram(...{1})', context, arguments);
+      case 'createRenderbuffer': return js.Syntax.code('{0}.createRenderbuffer(...{1})', context, arguments);
+      case 'createShader': return js.Syntax.code('{0}.createShader(...{1})', context, arguments);
+      case 'createTexture': return js.Syntax.code('{0}.createTexture(...{1})', context, arguments);
+      case 'createVertexArray': return js.Syntax.code('{0}.createVertexArray(...{1})', context, arguments);
+      case 'cullFace': return js.Syntax.code('{0}.cullFace(...{1})', context, arguments);
+      case 'deleteBuffer': return js.Syntax.code('{0}.deleteBuffer(...{1})', context, arguments);
+      case 'deleteFramebuffer': return js.Syntax.code('{0}.deleteFramebuffer(...{1})', context, arguments);
+      case 'deleteProgram': return js.Syntax.code('{0}.deleteProgram(...{1})', context, arguments);
+      case 'deleteRenderbuffer': return js.Syntax.code('{0}.deleteRenderbuffer(...{1})', context, arguments);
+      case 'deleteShader': return js.Syntax.code('{0}.deleteShader(...{1})', context, arguments);
+      case 'deleteTexture': return js.Syntax.code('{0}.deleteTexture(...{1})', context, arguments);
+      case 'deleteVertexArray': return js.Syntax.code('{0}.deleteVertexArray(...{1})', context, arguments);
+      case 'depthFunc': return js.Syntax.code('{0}.depthFunc(...{1})', context, arguments);
+      case 'depthMask': return js.Syntax.code('{0}.depthMask(...{1})', context, arguments);
+      case 'disable': return js.Syntax.code('{0}.disable(...{1})', context, arguments);
+      case 'disableVertexAttribArray': return js.Syntax.code('{0}.disableVertexAttribArray(...{1})', context, arguments);
+      case 'drawArrays': return js.Syntax.code('{0}.drawArrays(...{1})', context, arguments);
+      case 'drawBuffers': return js.Syntax.code('{0}.drawBuffers(...{1})', context, arguments);
+      case 'drawElements': return js.Syntax.code('{0}.drawElements(...{1})', context, arguments);
+      case 'drawElementsInstanced': return js.Syntax.code('{0}.drawElementsInstanced(...{1})', context, arguments);
+      case 'enable': return js.Syntax.code('{0}.enable(...{1})', context, arguments);
+      case 'enableVertexAttribArray': return js.Syntax.code('{0}.enableVertexAttribArray(...{1})', context, arguments);
+      case 'flush': return js.Syntax.code('{0}.flush(...{1})', context, arguments);
+      case 'framebufferRenderbuffer': return js.Syntax.code('{0}.framebufferRenderbuffer(...{1})', context, arguments);
+      case 'framebufferTexture2D': return js.Syntax.code('{0}.framebufferTexture2D(...{1})', context, arguments);
+      case 'generateMipmap': return js.Syntax.code('{0}.generateMipmap(...{1})', context, arguments);
+      case 'getActiveUniform': return js.Syntax.code('{0}.getActiveUniform(...{1})', context, arguments);
+      case 'getAttribLocation': return js.Syntax.code('{0}.getAttribLocation(...{1})', context, arguments);
+      case 'getExtension': return js.Syntax.code('{0}.getExtension(...{1})', context, arguments);
+      case 'getParameter': return js.Syntax.code('{0}.getParameter(...{1})', context, arguments);
+      case 'getProgramInfoLog': return js.Syntax.code('{0}.getProgramInfoLog(...{1})', context, arguments);
+      case 'getProgramParameter': return js.Syntax.code('{0}.getProgramParameter(...{1})', context, arguments);
+      case 'getShaderInfoLog': return js.Syntax.code('{0}.getShaderInfoLog(...{1})', context, arguments);
+      case 'getShaderParameter': return js.Syntax.code('{0}.getShaderParameter(...{1})', context, arguments);
+      case 'getUniformLocation': return js.Syntax.code('{0}.getUniformLocation(...{1})', context, arguments);
+      case 'linkProgram': return js.Syntax.code('{0}.linkProgram(...{1})', context, arguments);
+      case 'pixelStorei': return js.Syntax.code('{0}.pixelStorei(...{1})', context, arguments);
+      case 'readBuffer': return js.Syntax.code('{0}.readBuffer(...{1})', context, arguments);
+      case 'readPixels': return js.Syntax.code('{0}.readPixels(...{1})', context, arguments);
+      case 'renderbufferStorage': return js.Syntax.code('{0}.renderbufferStorage(...{1})', context, arguments);
+      case 'renderbufferStorageMultisample': return js.Syntax.code('{0}.renderbufferStorageMultisample(...{1})', context, arguments);
+      case 'scissor': return js.Syntax.code('{0}.scissor(...{1})', context, arguments);
+      case 'shaderSource': return js.Syntax.code('{0}.shaderSource(...{1})', context, arguments);
+      case 'stencilFunc': return js.Syntax.code('{0}.stencilFunc(...{1})', context, arguments);
+      case 'stencilMask': return js.Syntax.code('{0}.stencilMask(...{1})', context, arguments);
+      case 'stencilOp': return js.Syntax.code('{0}.stencilOp(...{1})', context, arguments);
+      case 'stencilOpSeparate': return js.Syntax.code('{0}.stencilOpSeparate(...{1})', context, arguments);
+      case 'texImage2D': return js.Syntax.code('{0}.texImage2D(...{1})', context, arguments);
+      case 'texImage3D': return js.Syntax.code('{0}.texImage3D(...{1})', context, arguments);
+      case 'texParameterf': return js.Syntax.code('{0}.texParameterf(...{1})', context, arguments);
+      case 'texParameteri': return js.Syntax.code('{0}.texParameteri(...{1})', context, arguments);
+      case 'texStorage3D': return js.Syntax.code('{0}.texStorage3D(...{1})', context, arguments);
+      case 'texSubImage2D': return js.Syntax.code('{0}.texSubImage2D(...{1})', context, arguments);
+      case 'uniform1f': return js.Syntax.code('{0}.uniform1f(...{1})', context, arguments);
+      case 'uniform1fv': return js.Syntax.code('{0}.uniform1fv(...{1})', context, arguments);
+      case 'uniform1i': return js.Syntax.code('{0}.uniform1i(...{1})', context, arguments);
+      case 'uniform2f': return js.Syntax.code('{0}.uniform2f(...{1})', context, arguments);
+      case 'uniform2fv': return js.Syntax.code('{0}.uniform2fv(...{1})', context, arguments);
+      case 'uniform3f': return js.Syntax.code('{0}.uniform3f(...{1})', context, arguments);
+      case 'uniform3fv': return js.Syntax.code('{0}.uniform3fv(...{1})', context, arguments);
+      case 'uniform4f': return js.Syntax.code('{0}.uniform4f(...{1})', context, arguments);
+      case 'uniform4fv': return js.Syntax.code('{0}.uniform4fv(...{1})', context, arguments);
+      case 'uniformMatrix3fv': return js.Syntax.code('{0}.uniformMatrix3fv(...{1})', context, arguments);
+      case 'uniformMatrix4fv': return js.Syntax.code('{0}.uniformMatrix4fv(...{1})', context, arguments);
+      case 'useProgram': return js.Syntax.code('{0}.useProgram(...{1})', context, arguments);
+      case 'vertexAttrib4f': return js.Syntax.code('{0}.vertexAttrib4f(...{1})', context, arguments);
+      case 'vertexAttribDivisor': return js.Syntax.code('{0}.vertexAttribDivisor(...{1})', context, arguments);
+      case 'vertexAttribPointer': return js.Syntax.code('{0}.vertexAttribPointer(...{1})', context, arguments);
+      case 'viewport': return js.Syntax.code('{0}.viewport(...{1})', context, arguments);
+      default:
+        throw 'WebGl2Backend: unmapped GL method ' + name;
+    }
+  }
+
+  public static function callOptional(context:Dynamic, name:String, arguments:Array<Dynamic>):Dynamic {
+    if (context == null) return _Runtime.UNDEFINED;
+    return call(context, name, arguments);
+  }
+
+  public static function field(context:Dynamic, name:String):Dynamic {
+    switch (name) {
+      case 'ACTIVE_UNIFORMS': return js.Syntax.code('{0}.ACTIVE_UNIFORMS', context);
+      case 'ALWAYS': return js.Syntax.code('{0}.ALWAYS', context);
+      case 'ARRAY_BUFFER': return js.Syntax.code('{0}.ARRAY_BUFFER', context);
+      case 'BACK': return js.Syntax.code('{0}.BACK', context);
+      case 'BLEND': return js.Syntax.code('{0}.BLEND', context);
+      case 'CLAMP_TO_EDGE': return js.Syntax.code('{0}.CLAMP_TO_EDGE', context);
+      case 'COLOR': return js.Syntax.code('{0}.COLOR', context);
+      case 'COLOR_ATTACHMENT0': return js.Syntax.code('{0}.COLOR_ATTACHMENT0', context);
+      case 'COLOR_BUFFER_BIT': return js.Syntax.code('{0}.COLOR_BUFFER_BIT', context);
+      case 'COMPILE_STATUS': return js.Syntax.code('{0}.COMPILE_STATUS', context);
+      case 'CULL_FACE': return js.Syntax.code('{0}.CULL_FACE', context);
+      case 'DECR_WRAP': return js.Syntax.code('{0}.DECR_WRAP', context);
+      case 'DEPTH24_STENCIL8': return js.Syntax.code('{0}.DEPTH24_STENCIL8', context);
+      case 'DEPTH_BUFFER_BIT': return js.Syntax.code('{0}.DEPTH_BUFFER_BIT', context);
+      case 'DEPTH_STENCIL': return js.Syntax.code('{0}.DEPTH_STENCIL', context);
+      case 'DEPTH_STENCIL_ATTACHMENT': return js.Syntax.code('{0}.DEPTH_STENCIL_ATTACHMENT', context);
+      case 'DEPTH_TEST': return js.Syntax.code('{0}.DEPTH_TEST', context);
+      case 'DRAW_FRAMEBUFFER': return js.Syntax.code('{0}.DRAW_FRAMEBUFFER', context);
+      case 'DST_COLOR': return js.Syntax.code('{0}.DST_COLOR', context);
+      case 'DYNAMIC_DRAW': return js.Syntax.code('{0}.DYNAMIC_DRAW', context);
+      case 'ELEMENT_ARRAY_BUFFER': return js.Syntax.code('{0}.ELEMENT_ARRAY_BUFFER', context);
+      case 'EQUAL': return js.Syntax.code('{0}.EQUAL', context);
+      case 'FLOAT': return js.Syntax.code('{0}.FLOAT', context);
+      case 'FLOAT_MAT2': return js.Syntax.code('{0}.FLOAT_MAT2', context);
+      case 'FLOAT_MAT3': return js.Syntax.code('{0}.FLOAT_MAT3', context);
+      case 'FLOAT_MAT4': return js.Syntax.code('{0}.FLOAT_MAT4', context);
+      case 'FLOAT_VEC2': return js.Syntax.code('{0}.FLOAT_VEC2', context);
+      case 'FLOAT_VEC3': return js.Syntax.code('{0}.FLOAT_VEC3', context);
+      case 'FLOAT_VEC4': return js.Syntax.code('{0}.FLOAT_VEC4', context);
+      case 'FRAGMENT_SHADER': return js.Syntax.code('{0}.FRAGMENT_SHADER', context);
+      case 'FRAMEBUFFER': return js.Syntax.code('{0}.FRAMEBUFFER', context);
+      case 'FRAMEBUFFER_BINDING': return js.Syntax.code('{0}.FRAMEBUFFER_BINDING', context);
+      case 'FRAMEBUFFER_COMPLETE': return js.Syntax.code('{0}.FRAMEBUFFER_COMPLETE', context);
+      case 'FRONT': return js.Syntax.code('{0}.FRONT', context);
+      case 'FUNC_ADD': return js.Syntax.code('{0}.FUNC_ADD', context);
+      case 'HALF_FLOAT': return js.Syntax.code('{0}.HALF_FLOAT', context);
+      case 'INCR_WRAP': return js.Syntax.code('{0}.INCR_WRAP', context);
+      case 'INVERT': return js.Syntax.code('{0}.INVERT', context);
+      case 'KEEP': return js.Syntax.code('{0}.KEEP', context);
+      case 'LESS': return js.Syntax.code('{0}.LESS', context);
+      case 'LINEAR': return js.Syntax.code('{0}.LINEAR', context);
+      case 'LINEAR_MIPMAP_LINEAR': return js.Syntax.code('{0}.LINEAR_MIPMAP_LINEAR', context);
+      case 'LINEAR_MIPMAP_NEAREST': return js.Syntax.code('{0}.LINEAR_MIPMAP_NEAREST', context);
+      case 'LINES': return js.Syntax.code('{0}.LINES', context);
+      case 'LINE_STRIP': return js.Syntax.code('{0}.LINE_STRIP', context);
+      case 'LINK_STATUS': return js.Syntax.code('{0}.LINK_STATUS', context);
+      case 'MAX_SAMPLES': return js.Syntax.code('{0}.MAX_SAMPLES', context);
+      case 'MIRRORED_REPEAT': return js.Syntax.code('{0}.MIRRORED_REPEAT', context);
+      case 'NEAREST': return js.Syntax.code('{0}.NEAREST', context);
+      case 'NEAREST_MIPMAP_LINEAR': return js.Syntax.code('{0}.NEAREST_MIPMAP_LINEAR', context);
+      case 'NEAREST_MIPMAP_NEAREST': return js.Syntax.code('{0}.NEAREST_MIPMAP_NEAREST', context);
+      case 'NONE': return js.Syntax.code('{0}.NONE', context);
+      case 'NOTEQUAL': return js.Syntax.code('{0}.NOTEQUAL', context);
+      case 'ONE': return js.Syntax.code('{0}.ONE', context);
+      case 'ONE_MINUS_SRC_ALPHA': return js.Syntax.code('{0}.ONE_MINUS_SRC_ALPHA', context);
+      case 'ONE_MINUS_SRC_COLOR': return js.Syntax.code('{0}.ONE_MINUS_SRC_COLOR', context);
+      case 'POINTS': return js.Syntax.code('{0}.POINTS', context);
+      case 'READ_FRAMEBUFFER': return js.Syntax.code('{0}.READ_FRAMEBUFFER', context);
+      case 'RENDERBUFFER': return js.Syntax.code('{0}.RENDERBUFFER', context);
+      case 'REPEAT': return js.Syntax.code('{0}.REPEAT', context);
+      case 'RGBA': return js.Syntax.code('{0}.RGBA', context);
+      case 'RGBA16F': return js.Syntax.code('{0}.RGBA16F', context);
+      case 'RGBA32F': return js.Syntax.code('{0}.RGBA32F', context);
+      case 'RGBA8': return js.Syntax.code('{0}.RGBA8', context);
+      case 'SCISSOR_TEST': return js.Syntax.code('{0}.SCISSOR_TEST', context);
+      case 'SRC_ALPHA': return js.Syntax.code('{0}.SRC_ALPHA', context);
+      case 'STATIC_DRAW': return js.Syntax.code('{0}.STATIC_DRAW', context);
+      case 'STENCIL_BUFFER_BIT': return js.Syntax.code('{0}.STENCIL_BUFFER_BIT', context);
+      case 'STENCIL_TEST': return js.Syntax.code('{0}.STENCIL_TEST', context);
+      case 'STREAM_DRAW': return js.Syntax.code('{0}.STREAM_DRAW', context);
+      case 'TEXTURE0': return js.Syntax.code('{0}.TEXTURE0', context);
+      case 'TEXTURE1': return js.Syntax.code('{0}.TEXTURE1', context);
+      case 'TEXTURE2': return js.Syntax.code('{0}.TEXTURE2', context);
+      case 'TEXTURE_2D': return js.Syntax.code('{0}.TEXTURE_2D', context);
+      case 'TEXTURE_2D_ARRAY': return js.Syntax.code('{0}.TEXTURE_2D_ARRAY', context);
+      case 'TEXTURE_3D': return js.Syntax.code('{0}.TEXTURE_3D', context);
+      case 'TEXTURE_CUBE_MAP': return js.Syntax.code('{0}.TEXTURE_CUBE_MAP', context);
+      case 'TEXTURE_CUBE_MAP_POSITIVE_X': return js.Syntax.code('{0}.TEXTURE_CUBE_MAP_POSITIVE_X', context);
+      case 'TEXTURE_MAG_FILTER': return js.Syntax.code('{0}.TEXTURE_MAG_FILTER', context);
+      case 'TEXTURE_MAX_LEVEL': return js.Syntax.code('{0}.TEXTURE_MAX_LEVEL', context);
+      case 'TEXTURE_MIN_FILTER': return js.Syntax.code('{0}.TEXTURE_MIN_FILTER', context);
+      case 'TEXTURE_WRAP_R': return js.Syntax.code('{0}.TEXTURE_WRAP_R', context);
+      case 'TEXTURE_WRAP_S': return js.Syntax.code('{0}.TEXTURE_WRAP_S', context);
+      case 'TEXTURE_WRAP_T': return js.Syntax.code('{0}.TEXTURE_WRAP_T', context);
+      case 'TRIANGLES': return js.Syntax.code('{0}.TRIANGLES', context);
+      case 'TRIANGLE_FAN': return js.Syntax.code('{0}.TRIANGLE_FAN', context);
+      case 'TRIANGLE_STRIP': return js.Syntax.code('{0}.TRIANGLE_STRIP', context);
+      case 'UNPACK_PREMULTIPLY_ALPHA_WEBGL': return js.Syntax.code('{0}.UNPACK_PREMULTIPLY_ALPHA_WEBGL', context);
+      case 'UNSIGNED_BYTE': return js.Syntax.code('{0}.UNSIGNED_BYTE', context);
+      case 'UNSIGNED_INT': return js.Syntax.code('{0}.UNSIGNED_INT', context);
+      case 'UNSIGNED_INT_24_8': return js.Syntax.code('{0}.UNSIGNED_INT_24_8', context);
+      case 'UNSIGNED_SHORT': return js.Syntax.code('{0}.UNSIGNED_SHORT', context);
+      case 'VERTEX_SHADER': return js.Syntax.code('{0}.VERTEX_SHADER', context);
+      case 'VIEWPORT': return js.Syntax.code('{0}.VIEWPORT', context);
+      case 'ZERO': return js.Syntax.code('{0}.ZERO', context);
+      default:
+        throw 'WebGl2Backend: unmapped GL constant ' + name;
+    }
+  }
+
+  public static function setField(context:Dynamic, name:String, value:Dynamic):Dynamic {
+    Reflect.setField(context, name, value);
+    return value;
+  }
+
+  public static function deleteField(context:Dynamic, name:String):Bool {
+    return Reflect.deleteField(context, name);
+  }
+}
+
 #else
 
 /**
