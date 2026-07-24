@@ -119,9 +119,9 @@ class CanvasFillPattern {
     dx = (x2 - x1);
     dy = (y2 - y1);
     offscreen = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
-    _Runtime.setField(offscreen, 'width', _Runtime.field(flighthq._internal.backend.Canvas2dBackend.field(context, 'canvas'), 'width'));
-    _Runtime.setField(offscreen, 'height', _Runtime.field(flighthq._internal.backend.Canvas2dBackend.field(context, 'canvas'), 'height'));
-    octx = _Runtime.callProperty(offscreen, 'getContext', cast (['2d'] : Array<Dynamic>));
+    flighthq._internal.backend.CanvasElementBackend.setField(offscreen, 'width', flighthq._internal.backend.CanvasElementBackend.field(flighthq._internal.backend.Canvas2dBackend.field(context, 'canvas'), 'width'));
+    flighthq._internal.backend.CanvasElementBackend.setField(offscreen, 'height', flighthq._internal.backend.CanvasElementBackend.field(flighthq._internal.backend.Canvas2dBackend.field(context, 'canvas'), 'height'));
+    octx = flighthq._internal.backend.CanvasElementBackend.call(offscreen, 'getContext', cast (['2d'] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(octx, null))) { return cast null; }
     tiledGradient = flighthq._internal.backend.Canvas2dBackend.call(octx, 'createLinearGradient', cast ([(x1 - (dx * ((STEPS - 1.0) / 2.0))), (y1 - (dy * ((STEPS - 1.0) / 2.0))), (x2 + (dx * ((STEPS - 1.0) / 2.0))), (y2 + (dy * ((STEPS - 1.0) / 2.0)))] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(spreadMethod, 'reflect'))) {
@@ -164,7 +164,7 @@ class CanvasFillPattern {
       }
     }
     flighthq._internal.backend.Canvas2dBackend.setField(octx, 'fillStyle', tiledGradient);
-    flighthq._internal.backend.Canvas2dBackend.call(octx, 'fillRect', cast ([0.0, 0.0, _Runtime.field(offscreen, 'width'), _Runtime.field(offscreen, 'height')] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(octx, 'fillRect', cast ([0.0, 0.0, flighthq._internal.backend.CanvasElementBackend.field(offscreen, 'width'), flighthq._internal.backend.CanvasElementBackend.field(offscreen, 'height')] : Array<Dynamic>));
     return cast flighthq._internal.backend.Canvas2dBackend.call(context, 'createPattern', cast ([offscreen, 'no-repeat'] : Array<Dynamic>));
     return cast null;
   }

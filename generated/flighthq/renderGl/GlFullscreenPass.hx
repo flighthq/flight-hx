@@ -66,8 +66,8 @@ class GlFullscreenPass {
       flighthq._internal.backend.WebGl2Backend.call(gl, 'bindFramebuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'FRAMEBUFFER'), destFramebuffer] : Array<Dynamic>));
       _Runtime.setField(runtime, 'currentFramebuffer', destFramebuffer);
     }
-    destWidth = _Runtime.coalesce(_Runtime.optionalField(dest, 'width'), function():Dynamic return cast _Runtime.field(_Runtime.field(state, 'canvas'), 'width'));
-    destHeight = _Runtime.coalesce(_Runtime.optionalField(dest, 'height'), function():Dynamic return cast _Runtime.field(_Runtime.field(state, 'canvas'), 'height'));
+    destWidth = _Runtime.coalesce(_Runtime.optionalField(dest, 'width'), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width'));
+    destHeight = _Runtime.coalesce(_Runtime.optionalField(dest, 'height'), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height'));
     flighthq._internal.backend.WebGl2Backend.call(gl, 'viewport', cast ([0.0, 0.0, destWidth, destHeight] : Array<Dynamic>));
     _Runtime.setField(runtime, 'renderTargetViewport', _Runtime.select(dest, function():Dynamic return cast { width: destWidth, height: destHeight }, function():Dynamic return cast null));
     {

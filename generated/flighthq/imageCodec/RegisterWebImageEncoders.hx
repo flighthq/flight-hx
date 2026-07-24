@@ -22,10 +22,10 @@ class RegisterWebImageEncoders {
       var pixels:Dynamic = cast _Runtime.UNDEFINED;
       var blob:Dynamic = cast _Runtime.UNDEFINED;
       canvas = _Runtime.construct(_Runtime.globalValue('OffscreenCanvas'), [_Runtime.field(image, 'width'), _Runtime.field(image, 'height')]);
-      context = (cast _Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic);
+      context = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic);
       pixels = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [_Runtime.field(image, 'data')]);
       flighthq._internal.backend.Canvas2dBackend.call(context, 'putImageData', cast ([_Runtime.construct(_Runtime.globalValue('ImageData'), [pixels, _Runtime.field(image, 'width'), _Runtime.field(image, 'height')]), 0.0, 0.0] : Array<Dynamic>));
-      blob = flighthq._internal._Async.awaitValue(_Runtime.callProperty(canvas, 'convertToBlob', cast ([{ type: mimeType, quality: _Runtime.optionalField(options, 'quality') }] : Array<Dynamic>)));
+      blob = flighthq._internal._Async.awaitValue(flighthq._internal.backend.CanvasElementBackend.call(canvas, 'convertToBlob', cast ([{ type: mimeType, quality: _Runtime.optionalField(options, 'quality') }] : Array<Dynamic>)));
       return cast _Runtime.construct(_Runtime.globalValue('Uint8Array'), [flighthq._internal._Async.awaitValue(_Runtime.callProperty(blob, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
       return cast null;
     });

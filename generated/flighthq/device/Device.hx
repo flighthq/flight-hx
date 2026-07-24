@@ -210,7 +210,7 @@ class Device {
     try {
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return cast { renderer: '', vendor: '' }; }
       var canvas:Dynamic = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
-      var gl:Dynamic = _Runtime.coalesce((cast _Runtime.callProperty(canvas, 'getContext', cast (['webgl'] : Array<Dynamic>)) : Null<Dynamic>), function():Dynamic return cast (cast _Runtime.callProperty(canvas, 'getContext', cast (['experimental-webgl'] : Array<Dynamic>)) : Null<Dynamic>));
+      var gl:Dynamic = _Runtime.coalesce((cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['webgl'] : Array<Dynamic>)) : Null<Dynamic>), function():Dynamic return cast (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['experimental-webgl'] : Array<Dynamic>)) : Null<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(gl, null))) { return cast { renderer: '', vendor: '' }; }
       var ext:Dynamic = flighthq._internal.backend.WebGl2Backend.call(gl, 'getExtension', cast (['WEBGL_debug_renderer_info'] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(ext, null))) { return cast { renderer: '', vendor: '' }; }

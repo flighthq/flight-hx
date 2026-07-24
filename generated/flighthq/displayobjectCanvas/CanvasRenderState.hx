@@ -18,7 +18,7 @@ class CanvasRenderState {
     var context:Dynamic = cast _Runtime.UNDEFINED;
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
-    context = _Runtime.callProperty(canvas, 'getContext', cast (['2d', _Runtime.orValue(_Runtime.field(options, 'contextAttributes'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>));
+    context = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d', _Runtime.orValue(_Runtime.field(options, 'contextAttributes'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.truthy(context))) { throw _Runtime.error('Failed to get context for canvas.'); }
     state = (cast _Runtime.callValue(_createRenderState, cast ([{ pixelRatio: _Runtime.coalesce(_Runtime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: _Runtime.coalesce(_Runtime.field(options, 'renderTransform'), function():Dynamic return cast _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>))), roundPixels: _Runtime.coalesce(_Runtime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.field(options, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : Dynamic);
     if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(options, 'backgroundColor'), null))) { _Runtime.callValue(setRenderStateBackgroundColor, cast ([state, _Runtime.field(options, 'backgroundColor')] : Array<Dynamic>)); }

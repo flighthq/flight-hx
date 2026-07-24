@@ -26,7 +26,7 @@ class RegisterWebImageDecoders {
     width = _Runtime.field(bitmap, 'width');
     height = _Runtime.field(bitmap, 'height');
     canvas = _Runtime.construct(_Runtime.globalValue('OffscreenCanvas'), [width, height]);
-    context = (cast _Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic);
+    context = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic);
     flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([bitmap, 0.0, 0.0] : Array<Dynamic>));
     _Runtime.callProperty(bitmap, 'close', cast ([] : Array<Dynamic>));
     data = _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(context, 'getImageData', cast ([0.0, 0.0, width, height] : Array<Dynamic>)), 'data');

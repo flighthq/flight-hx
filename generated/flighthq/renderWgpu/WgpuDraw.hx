@@ -189,8 +189,8 @@ class WgpuDraw {
     var h:Dynamic = cast _Runtime.UNDEFINED;
     __destructure4 = state;
     device = _Runtime.field(__destructure4, 'device');
-    w = HxMath.max(1.0, _Runtime.field(canvas, 'width'));
-    h = HxMath.max(1.0, _Runtime.field(canvas, 'height'));
+    w = HxMath.max(1.0, flighthq._internal.backend.CanvasElementBackend.field(canvas, 'width'));
+    h = HxMath.max(1.0, flighthq._internal.backend.CanvasElementBackend.field(canvas, 'height'));
     _Runtime.callProperty(_Runtime.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: canvas, flipY: false }, { texture: _Runtime.field(entry, 'texture'), premultipliedAlpha: true }, cast ([w, h] : Array<Dynamic>)] : Array<Dynamic>));
   }
 

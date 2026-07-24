@@ -75,7 +75,7 @@ class DomBitmap {
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'canvas'), null))) {
       _Runtime.setField(data, 'canvas', _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)));
-      _Runtime.setField(data, 'context', _Runtime.callProperty(_Runtime.field(data, 'canvas'), 'getContext', cast (['2d'] : Array<Dynamic>)));
+      _Runtime.setField(data, 'context', flighthq._internal.backend.CanvasElementBackend.call(_Runtime.field(data, 'canvas'), 'getContext', cast (['2d'] : Array<Dynamic>)));
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'canvas')] : Array<Dynamic>));
     }
     source = (cast _Runtime.field(renderProxy, 'source') : Bitmap);
@@ -83,8 +83,8 @@ class DomBitmap {
     drawWidth = _Runtime.select(!_Runtime.strictEquals(sourceRectangle, null), function():Dynamic return cast _Runtime.field(sourceRectangle, 'width'), function():Dynamic return cast width);
     drawHeight = _Runtime.select(!_Runtime.strictEquals(sourceRectangle, null), function():Dynamic return cast _Runtime.field(sourceRectangle, 'height'), function():Dynamic return cast height);
     pixelRatio = _Runtime.field(state, 'pixelRatio');
-    _Runtime.setField(_Runtime.field(data, 'canvas'), 'width', (drawWidth * pixelRatio));
-    _Runtime.setField(_Runtime.field(data, 'canvas'), 'height', (drawHeight * pixelRatio));
+    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'width', (drawWidth * pixelRatio));
+    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'height', (drawHeight * pixelRatio));
     _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'width', '' + Std.string(drawWidth) + 'px');
     _Runtime.setField(_Runtime.field(_Runtime.field(data, 'canvas'), 'style'), 'height', '' + Std.string(drawHeight) + 'px');
     ctx = _Runtime.field(data, 'context');

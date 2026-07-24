@@ -36,7 +36,7 @@ class DomTextLabel {
 
   public static function getMeasureCtx__domTextLabel():Null<Dynamic> {
     if (_Runtime.truthy(_Runtime.strictEquals(DomTextLabel._measureCtx__domTextLabel, null))) {
-      (DomTextLabel._measureCtx__domTextLabel = cast (_Runtime.callProperty(_Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
+      (DomTextLabel._measureCtx__domTextLabel = cast (flighthq._internal.backend.CanvasElementBackend.call(_Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
     }
     return cast DomTextLabel._measureCtx__domTextLabel;
     return cast null;

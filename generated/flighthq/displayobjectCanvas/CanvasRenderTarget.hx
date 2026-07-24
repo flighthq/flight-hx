@@ -45,16 +45,16 @@ class CanvasRenderTarget {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;
     canvas = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
-    _Runtime.setField(canvas, 'width', HxMath.max(1.0, HxMath.ceil(width)));
-    _Runtime.setField(canvas, 'height', HxMath.max(1.0, HxMath.ceil(height)));
-    context = _Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
-    return cast { canvas: canvas, context: context, width: _Runtime.field(canvas, 'width'), height: _Runtime.field(canvas, 'height') };
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', HxMath.max(1.0, HxMath.ceil(width)));
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', HxMath.max(1.0, HxMath.ceil(height)));
+    context = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
+    return cast { canvas: canvas, context: context, width: flighthq._internal.backend.CanvasElementBackend.field(canvas, 'width'), height: flighthq._internal.backend.CanvasElementBackend.field(canvas, 'height') };
     return cast null;
   }
 
   public static function destroyCanvasRenderTarget(target:Dynamic):Void {
-    _Runtime.setField(_Runtime.field(target, 'canvas'), 'width', 0.0);
-    _Runtime.setField(_Runtime.field(target, 'canvas'), 'height', 0.0);
+    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(target, 'canvas'), 'width', 0.0);
+    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(target, 'canvas'), 'height', 0.0);
     _Runtime.setField(target, 'width', 0.0);
     _Runtime.setField(target, 'height', 0.0);
   }
@@ -71,10 +71,10 @@ class CanvasRenderTarget {
   }
 
   public static function resizeCanvasRenderTarget(target:Dynamic, width:Float, height:Float):Void {
-    _Runtime.setField(_Runtime.field(target, 'canvas'), 'width', HxMath.max(1.0, HxMath.ceil(width)));
-    _Runtime.setField(_Runtime.field(target, 'canvas'), 'height', HxMath.max(1.0, HxMath.ceil(height)));
-    _Runtime.setField(target, 'width', _Runtime.field(_Runtime.field(target, 'canvas'), 'width'));
-    _Runtime.setField(target, 'height', _Runtime.field(_Runtime.field(target, 'canvas'), 'height'));
+    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(target, 'canvas'), 'width', HxMath.max(1.0, HxMath.ceil(width)));
+    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(target, 'canvas'), 'height', HxMath.max(1.0, HxMath.ceil(height)));
+    _Runtime.setField(target, 'width', flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(target, 'canvas'), 'width'));
+    _Runtime.setField(target, 'height', flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(target, 'canvas'), 'height'));
   }
 
   public static function setCanvasRenderTransform2D(state:Dynamic, transform:Matrix):Void {

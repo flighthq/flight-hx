@@ -52,8 +52,8 @@ class WgpuBackground {
     device = _Runtime.field(state, 'device');
     canvas = _Runtime.field(state, 'canvas');
     context = _Runtime.field(state, 'context');
-    width = _Runtime.field(canvas, 'width');
-    height = _Runtime.field(canvas, 'height');
+    width = flighthq._internal.backend.CanvasElementBackend.field(canvas, 'width');
+    height = flighthq._internal.backend.CanvasElementBackend.field(canvas, 'height');
     _Runtime.callValue(WgpuBackground.ensureWgpuDepthStencil__wgpuBackground, cast ([state, width, height] : Array<Dynamic>));
     canvasTexture = _Runtime.coalesce(_Runtime.callValue(acquireWgpuFrameCaptureTexture, cast ([state] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callProperty(context, 'getCurrentTexture', cast ([] : Array<Dynamic>)));
     canvasView = _Runtime.callProperty(canvasTexture, 'createView', cast ([] : Array<Dynamic>));

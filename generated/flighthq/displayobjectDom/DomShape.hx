@@ -42,14 +42,14 @@ class DomShape {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0))) { return; }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'canvas'), null))) {
       _Runtime.setField(data, 'canvas', _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)));
-      _Runtime.setField(data, 'context', _Runtime.callProperty(_Runtime.field(data, 'canvas'), 'getContext', cast (['2d'] : Array<Dynamic>)));
+      _Runtime.setField(data, 'context', flighthq._internal.backend.CanvasElementBackend.call(_Runtime.field(data, 'canvas'), 'getContext', cast (['2d'] : Array<Dynamic>)));
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'canvas')] : Array<Dynamic>));
     }
     bounds = _Runtime.callValue(getNodeLocalBoundsRectangle, cast ([source] : Array<Dynamic>));
     w = HxMath.max(1.0, HxMath.ceil(_Runtime.field(bounds, 'width')));
     h = HxMath.max(1.0, HxMath.ceil(_Runtime.field(bounds, 'height')));
-    _Runtime.setField(_Runtime.field(data, 'canvas'), 'width', w);
-    _Runtime.setField(_Runtime.field(data, 'canvas'), 'height', h);
+    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'width', w);
+    flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(data, 'canvas'), 'height', h);
     ctx = _Runtime.field(data, 'context');
     if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(bounds, 'x'), 0.0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(bounds, 'y'), 0.0)))) {
       _Runtime.callProperty(ctx, 'translate', cast ([-_Runtime.field(bounds, 'x'), -_Runtime.field(bounds, 'y')] : Array<Dynamic>));

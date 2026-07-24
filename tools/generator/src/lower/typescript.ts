@@ -206,6 +206,17 @@ const webGpuConstantNamespaces = new Set([
   'GPUTextureUsage',
 ]);
 
+const canvasElementMembers = new Set([
+  'addEventListener',
+  'convertToBlob',
+  'getBoundingClientRect',
+  'getContext',
+  'height',
+  'removeEventListener',
+  'toDataURL',
+  'width',
+]);
+
 export function lowerTypeScriptSource(
   sourceFile: ts.SourceFile,
   packageName: string,
@@ -252,9 +263,14 @@ export function lowerTypeScriptSource(
       node.name.text === 'context'
     );
   });
+  const canvasElementBindingNames = new Set([
+    ...collectPlatformBindingNames(sourceFile, 'HTMLCanvasElement', isCanvasElementValueExpression),
+    ...collectPlatformBindingNames(sourceFile, 'OffscreenCanvas', isCanvasElementValueExpression),
+  ]);
   const webGlBindingNames = collectPlatformBindingNames(sourceFile, 'WebGL2RenderingContext', isWebGlValueExpression);
   const context: LoweringContext = {
     canvasBindingNames,
+    canvasElementBindingNames,
     classThis: false,
     diagnostics,
     externalTypes,
@@ -419,6 +435,39 @@ function isCanvasValueExpression(node: ts.Expression, names: ReadonlySet<string>
   );
 }
 
+function isCanvasElementValueExpression(node: ts.Expression, names: ReadonlySet<string>): boolean {
+  if (ts.isParenthesizedExpression(node) || ts.isAsExpression(node) || ts.isNonNullExpression(node)) {
+    return isCanvasElementValueExpression(node.expression, names);
+  }
+  if (ts.isIdentifier(node)) return names.has(node.text);
+  if (ts.isPropertyAccessExpression(node)) return node.name.text === 'canvas';
+  if (ts.isNewExpression(node) && ts.isIdentifier(node.expression)) {
+    return node.expression.text === 'OffscreenCanvas';
+  }
+  return (
+    ts.isCallExpression(node) &&
+    ts.isPropertyAccessExpression(node.expression) &&
+    node.expression.name.text === 'createElement' &&
+    node.arguments[0] !== undefined &&
+    ts.isStringLiteral(node.arguments[0]) &&
+    node.arguments[0].text === 'canvas'
+  );
+}
+
+function isBoundCanvasElementExpression(node: ts.Expression, context: LoweringContext): boolean {
+  if (ts.isParenthesizedExpression(node) || ts.isAsExpression(node) || ts.isNonNullExpression(node)) {
+    return isBoundCanvasElementExpression(node.expression, context);
+  }
+  if (ts.isIdentifier(node)) {
+    const parameter = findEnclosingParameter(node);
+    if (parameter?.type) {
+      const type = parameter.type.getText(context.sourceFile);
+      if (type.includes('HTMLCanvasElement') || type.includes('OffscreenCanvas')) return true;
+    }
+  }
+  return isCanvasElementValueExpression(node, context.canvasElementBindingNames);
+}
+
 function isBoundPlatformExpression(
   node: ts.Expression,
   context: LoweringContext,
@@ -462,6 +511,7 @@ function findEnclosingParameter(identifier: ts.Identifier): ts.ParameterDeclarat
 
 interface LoweringContext {
   canvasBindingNames: ReadonlySet<string>;
+  canvasElementBindingNames: ReadonlySet<string>;
   classThis: boolean;
   diagnostics: LoweringDiagnostic[];
   externalTypes: ReadonlySet<string>;
@@ -1187,16 +1237,20 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
       ts.isIdentifier(node.expression) &&
       node.expression.text === 'Object' &&
       !isLexicallyBound(node.expression, context);
+    const objectIsCanvasElement =
+      canvasElementMembers.has(node.name.text) && isBoundCanvasElementExpression(node.expression, context);
     return {
       binding: webGpuConstantNamespace
         ? 'WebGpuConstantsBackend'
-        : objectIsGlobalObject
-          ? 'DynamicObject'
-          : isBoundPlatformExpression(node.expression, context, 'CanvasRenderingContext2D')
-            ? 'Canvas2dBackend'
-            : isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
-              ? 'WebGl2Backend'
-              : undefined,
+        : objectIsCanvasElement
+          ? 'CanvasElementBackend'
+          : objectIsGlobalObject
+            ? 'DynamicObject'
+            : isBoundPlatformExpression(node.expression, context, 'CanvasRenderingContext2D')
+              ? 'Canvas2dBackend'
+              : isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
+                ? 'WebGl2Backend'
+                : undefined,
       kind: 'property',
       name: node.name.text,
       object: webGpuConstantNamespace

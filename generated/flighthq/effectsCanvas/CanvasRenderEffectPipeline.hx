@@ -40,8 +40,8 @@ class CanvasRenderEffectPipeline {
   public static function beginCanvasRenderEffectPipeline(state:Dynamic, pipeline:Dynamic):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
-    w = _Runtime.field(_Runtime.field(state, 'canvas'), 'width');
-    h = _Runtime.field(_Runtime.field(state, 'canvas'), 'height');
+    w = flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width');
+    h = flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(pipeline, 'sceneTarget'), null))) {
       _Runtime.setField(pipeline, 'sceneTarget', _Runtime.callValue(createCanvasRenderTarget, cast ([w, h] : Array<Dynamic>)));
     } else {
@@ -142,7 +142,7 @@ class CanvasRenderEffectPipeline {
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalCompositeOperation', 'source-over');
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', 1.0);
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'filter', 'none');
-    flighthq._internal.backend.Canvas2dBackend.call(context, 'clearRect', cast ([0.0, 0.0, _Runtime.field(_Runtime.field(state, 'canvas'), 'width'), _Runtime.field(_Runtime.field(state, 'canvas'), 'height')] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'clearRect', cast ([0.0, 0.0, flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width'), flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height')] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([_Runtime.field(source, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>));
   }

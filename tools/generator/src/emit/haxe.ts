@@ -696,7 +696,11 @@ function emitExpression(expression: IrExpression): string {
       }
       if (expression.kind === 'assignment' && expression.left.kind === 'property') {
         const object = emitExpression(expression.left.object);
-        if (expression.left.binding === 'Canvas2dBackend' || expression.left.binding === 'WebGl2Backend') {
+        if (
+          expression.left.binding === 'Canvas2dBackend' ||
+          expression.left.binding === 'CanvasElementBackend' ||
+          expression.left.binding === 'WebGl2Backend'
+        ) {
           const binding = `flighthq._internal.backend.${expression.left.binding}`;
           const current = `${binding}.field(${object}, ${quote(expression.left.name)})`;
           const value =
@@ -923,7 +927,11 @@ function emitExpression(expression: IrExpression): string {
       if (expression.binding === 'WebGpuConstantsBackend') {
         return `flighthq._internal.backend.WebGpuConstantsBackend.value(${emitExpression(expression.object)}, ${quote(expression.name)})`;
       }
-      if (expression.binding === 'Canvas2dBackend' || expression.binding === 'WebGl2Backend') {
+      if (
+        expression.binding === 'Canvas2dBackend' ||
+        expression.binding === 'CanvasElementBackend' ||
+        expression.binding === 'WebGl2Backend'
+      ) {
         return `flighthq._internal.backend.${expression.binding}.field(${emitExpression(expression.object)}, ${quote(expression.name)})`;
       }
       if (
@@ -961,7 +969,9 @@ function emitExpression(expression: IrExpression): string {
         }
         if (
           expression.operand.kind === 'property' &&
-          (expression.operand.binding === 'Canvas2dBackend' || expression.operand.binding === 'WebGl2Backend')
+          (expression.operand.binding === 'Canvas2dBackend' ||
+            expression.operand.binding === 'CanvasElementBackend' ||
+            expression.operand.binding === 'WebGl2Backend')
         ) {
           return `flighthq._internal.backend.${expression.operand.binding}.deleteField(${emitExpression(expression.operand.object)}, ${quote(expression.operand.name)})`;
         }
@@ -1088,7 +1098,11 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
         : `[${emitExpression(argument)}]`,
     );
     if (expression.callee.kind === 'property') {
-      if (expression.callee.binding === 'Canvas2dBackend' || expression.callee.binding === 'WebGl2Backend') {
+      if (
+        expression.callee.binding === 'Canvas2dBackend' ||
+        expression.callee.binding === 'CanvasElementBackend' ||
+        expression.callee.binding === 'WebGl2Backend'
+      ) {
         return `flighthq._internal.backend.${expression.callee.binding}.call(${emitExpression(expression.callee.object)}, ${quote(expression.callee.name)}, _Runtime.concatArrays([${chunks.join(', ')}]))`;
       }
       const method = expression.optional || expression.callee.optional ? 'callOptionalProperty' : 'callProperty';
@@ -1103,7 +1117,11 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     if (expression.callee.binding === 'DynamicObject') {
       return `flighthq._internal.DynamicObject.${safeName(name)}(${expression.arguments.map(emitExpression).join(', ')})`;
     }
-    if (expression.callee.binding === 'Canvas2dBackend' || expression.callee.binding === 'WebGl2Backend') {
+    if (
+      expression.callee.binding === 'Canvas2dBackend' ||
+      expression.callee.binding === 'CanvasElementBackend' ||
+      expression.callee.binding === 'WebGl2Backend'
+    ) {
       const method = expression.optional || expression.callee.optional ? 'callOptional' : 'call';
       return `flighthq._internal.backend.${expression.callee.binding}.${method}(${owner}, ${quote(name)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
     }

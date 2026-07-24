@@ -47,7 +47,7 @@ class DomRichText {
 
   public static function getMeasureCtx__domRichText():Null<Dynamic> {
     if (_Runtime.truthy(_Runtime.strictEquals(DomRichText._measureCtx__domRichText, null))) {
-      (DomRichText._measureCtx__domRichText = cast (_Runtime.callProperty(_Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
+      (DomRichText._measureCtx__domRichText = cast (flighthq._internal.backend.CanvasElementBackend.call(_Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
     }
     return cast DomRichText._measureCtx__domRichText;
     return cast null;

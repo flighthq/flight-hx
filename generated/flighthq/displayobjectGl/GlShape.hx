@@ -44,9 +44,9 @@ class GlShape {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     canvas = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
-    _Runtime.setField(canvas, 'width', 1.0);
-    _Runtime.setField(canvas, 'height', 1.0);
-    ctx = _Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 1.0);
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 1.0);
+    ctx = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
     return cast _Runtime.callValue(GlShape.toGlShapeRendererData__glShape, cast ([{ canvas: canvas, ctx: ctx, image: _Runtime.callValue(createImageResource, cast ([canvas] : Array<Dynamic>)), lastContentId: -1.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null }] : Array<Dynamic>));
     return cast null;
   }
@@ -115,8 +115,8 @@ class GlShape {
     h = HxMath.ceil(_Runtime.field(bounds, 'height'));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(w, 0.0, '<='), function():Dynamic return cast _Runtime.compare(h, 0.0, '<=')))) { return; }
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(version, _Runtime.field(shapeData, 'lastContentId')), function():Dynamic return cast !_Runtime.strictEquals(w, _Runtime.field(shapeData, 'lastW'))), function():Dynamic return cast !_Runtime.strictEquals(h, _Runtime.field(shapeData, 'lastH'))))) {
-      _Runtime.setField(_Runtime.field(shapeData, 'canvas'), 'width', w);
-      _Runtime.setField(_Runtime.field(shapeData, 'canvas'), 'height', h);
+      flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(shapeData, 'canvas'), 'width', w);
+      flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(shapeData, 'canvas'), 'height', h);
       var ctx:Dynamic = _Runtime.field(shapeData, 'ctx');
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));

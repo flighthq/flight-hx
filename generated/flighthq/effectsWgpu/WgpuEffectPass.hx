@@ -102,8 +102,8 @@ class WgpuEffectPass {
     if (_Runtime.truthy(!_Runtime.strictEquals(dest, null))) {
       _Runtime.callProperty(pass, 'setViewport', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height'), 0.0, 1.0] : Array<Dynamic>));
     } else {
-      var w:Dynamic = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'renderTargetViewport'), 'width'), function():Dynamic return cast _Runtime.field(_Runtime.field(state, 'canvas'), 'width'));
-      var h:Dynamic = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'renderTargetViewport'), 'height'), function():Dynamic return cast _Runtime.field(_Runtime.field(state, 'canvas'), 'height'));
+      var w:Dynamic = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'renderTargetViewport'), 'width'), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width'));
+      var h:Dynamic = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'renderTargetViewport'), 'height'), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height'));
       _Runtime.callProperty(pass, 'setViewport', cast ([0.0, 0.0, w, h, 0.0, 1.0] : Array<Dynamic>));
     }
     return cast pass;

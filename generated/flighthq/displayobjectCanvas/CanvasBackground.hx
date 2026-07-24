@@ -16,9 +16,9 @@ class CanvasBackground {
     _Runtime.setField(_Runtime.field(state, 'context'), 'globalAlpha', 1.0);
     if (_Runtime.truthy(!_Runtime.strictEquals((Std.int(_Runtime.field(state, 'backgroundColor')) & Std.int(255.0)), 0.0))) {
       _Runtime.setField(_Runtime.field(state, 'context'), 'fillStyle', _Runtime.field(state, 'backgroundColorString'));
-      _Runtime.callProperty(_Runtime.field(state, 'context'), 'fillRect', cast ([0.0, 0.0, _Runtime.field(_Runtime.field(state, 'canvas'), 'width'), _Runtime.field(_Runtime.field(state, 'canvas'), 'height')] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(state, 'context'), 'fillRect', cast ([0.0, 0.0, flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width'), flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height')] : Array<Dynamic>));
     } else {
-      _Runtime.callProperty(_Runtime.field(state, 'context'), 'clearRect', cast ([0.0, 0.0, _Runtime.field(_Runtime.field(state, 'canvas'), 'width'), _Runtime.field(_Runtime.field(state, 'canvas'), 'height')] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(state, 'context'), 'clearRect', cast ([0.0, 0.0, flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width'), flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height')] : Array<Dynamic>));
     }
   }
 }

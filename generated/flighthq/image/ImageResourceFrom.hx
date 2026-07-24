@@ -13,17 +13,17 @@ class ImageResourceFrom {
     var imageData:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(image, 'data'), null))) { return cast null; }
     canvas = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
-    _Runtime.setField(canvas, 'width', _Runtime.field(image, 'width'));
-    _Runtime.setField(canvas, 'height', _Runtime.field(image, 'height'));
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', _Runtime.field(image, 'width'));
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', _Runtime.field(image, 'height'));
     imageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [_Runtime.field(image, 'width'), _Runtime.field(image, 'height')]);
     _Runtime.callProperty(_Runtime.field(imageData, 'data'), 'set', cast ([_Runtime.field(image, 'data')] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.call(_Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([imageData, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([imageData, 0.0, 0.0] : Array<Dynamic>));
     return cast canvas;
     return cast null;
   }
 
   public static function createImageResourceFromCanvas(canvas:Dynamic):ImageResource {
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', compressed: null, data: null, format: 'rgba8unorm', height: _Runtime.field(canvas, 'height'), source: canvas, version: 0.0, width: _Runtime.field(canvas, 'width') }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: 'straight', compressed: null, data: null, format: 'rgba8unorm', height: flighthq._internal.backend.CanvasElementBackend.field(canvas, 'height'), source: canvas, version: 0.0, width: flighthq._internal.backend.CanvasElementBackend.field(canvas, 'width') }] : Array<Dynamic>));
     return cast null;
   }
 

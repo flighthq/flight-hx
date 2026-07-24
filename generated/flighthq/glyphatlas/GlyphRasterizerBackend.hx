@@ -49,11 +49,11 @@ class GlyphRasterizerBackend {
   public static function _acquireGlyphRasterContext__glyphRasterizerBackend():Null<Dynamic> {
     try {
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofGlobal('OffscreenCanvas'), 'undefined'))) {
-        var context:Dynamic = _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('OffscreenCanvas'), [1.0, 1.0]), 'getContext', cast (['2d'] : Array<Dynamic>));
+        var context:Dynamic = flighthq._internal.backend.CanvasElementBackend.call(_Runtime.construct(_Runtime.globalValue('OffscreenCanvas'), [1.0, 1.0]), 'getContext', cast (['2d'] : Array<Dynamic>));
         if (_Runtime.truthy(!_Runtime.strictEquals(context, null))) { return cast context; }
       }
       if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('document'), 'createElement')), 'function')))) {
-        var context:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>));
+        var context:Dynamic = flighthq._internal.backend.CanvasElementBackend.call(_Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>));
         if (_Runtime.truthy(!_Runtime.strictEquals(context, null))) { return cast context; }
       }
     } catch (__error:Dynamic) {
@@ -95,8 +95,8 @@ class GlyphRasterizerBackend {
     height = (HxMath.max(0.0, HxMath.ceil((ascent + descent))) + (guard * 2.0));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(width, (guard * 2.0), '<='), function():Dynamic return cast _Runtime.compare(height, (guard * 2.0), '<=')))) { return cast null; }
     canvas = flighthq._internal.backend.Canvas2dBackend.field(context, 'canvas');
-    _Runtime.setField(canvas, 'width', width);
-    _Runtime.setField(canvas, 'height', height);
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', width);
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', height);
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', '' + Std.string(fontStyle) + ' ' + Std.string(fontWeight) + ' ' + Std.string(_Runtime.field(options, 'fontSize')) + 'px ' + Std.string(_Runtime.field(options, 'fontFamily')) + '');
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'left');

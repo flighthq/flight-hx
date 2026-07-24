@@ -181,12 +181,12 @@ class GlRichText {
     var ph:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.truthy(GlRichText._offscreenCanvas__glRichText))) {
       (GlRichText._offscreenCanvas__glRichText = cast (_Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)) : Dynamic));
-      (GlRichText._offscreenCtx__glRichText = cast (_Runtime.callProperty(GlRichText._offscreenCanvas__glRichText, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
+      (GlRichText._offscreenCtx__glRichText = cast (flighthq._internal.backend.CanvasElementBackend.call(GlRichText._offscreenCanvas__glRichText, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
     }
     pw = HxMath.ceil((width * pixelRatio));
     ph = HxMath.ceil((height * pixelRatio));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(GlRichText._offscreenCanvas__glRichText, 'width'), pw))) { _Runtime.setField(GlRichText._offscreenCanvas__glRichText, 'width', pw); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(GlRichText._offscreenCanvas__glRichText, 'height'), ph))) { _Runtime.setField(GlRichText._offscreenCanvas__glRichText, 'height', ph); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(flighthq._internal.backend.CanvasElementBackend.field(GlRichText._offscreenCanvas__glRichText, 'width'), pw))) { flighthq._internal.backend.CanvasElementBackend.setField(GlRichText._offscreenCanvas__glRichText, 'width', pw); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(flighthq._internal.backend.CanvasElementBackend.field(GlRichText._offscreenCanvas__glRichText, 'height'), ph))) { flighthq._internal.backend.CanvasElementBackend.setField(GlRichText._offscreenCanvas__glRichText, 'height', ph); }
     return cast GlRichText._offscreenCtx__glRichText;
     return cast null;
   }

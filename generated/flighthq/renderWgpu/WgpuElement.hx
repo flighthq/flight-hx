@@ -10,8 +10,8 @@ class WgpuElement {
     canvas = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(canvas, 'style'), 'width', '' + Std.string(width) + 'px');
     _Runtime.setField(_Runtime.field(canvas, 'style'), 'height', '' + Std.string(height) + 'px');
-    _Runtime.setField(canvas, 'width', (width * pixelRatio));
-    _Runtime.setField(canvas, 'height', (height * pixelRatio));
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', (width * pixelRatio));
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', (height * pixelRatio));
     return cast canvas;
     return cast null;
   }

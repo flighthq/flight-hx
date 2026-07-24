@@ -116,8 +116,8 @@ class WgpuRichText {
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
     richData = _Runtime.callValue(getWgpuRendererData, cast ([_Runtime.field(renderProxy, 'rendererData')] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(richData, null))) { return; }
-    pw = _Runtime.field(WgpuRichText._offscreenCanvas__wgpuRichText, 'width');
-    ph = _Runtime.field(WgpuRichText._offscreenCanvas__wgpuRichText, 'height');
+    pw = flighthq._internal.backend.CanvasElementBackend.field(WgpuRichText._offscreenCanvas__wgpuRichText, 'width');
+    ph = flighthq._internal.backend.CanvasElementBackend.field(WgpuRichText._offscreenCanvas__wgpuRichText, 'height');
     entry = _Runtime.field(richData, 'entry');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(entry, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(richData, 'w'), pw)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(richData, 'h'), ph)))) {
       _Runtime.callOptionalProperty(_Runtime.optionalField(entry, 'texture'), 'destroy', cast ([] : Array<Dynamic>));
@@ -179,12 +179,12 @@ class WgpuRichText {
     var ph:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.truthy(WgpuRichText._offscreenCanvas__wgpuRichText))) {
       (WgpuRichText._offscreenCanvas__wgpuRichText = cast (_Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)) : Dynamic));
-      (WgpuRichText._offscreenCtx__wgpuRichText = cast (_Runtime.callProperty(WgpuRichText._offscreenCanvas__wgpuRichText, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
+      (WgpuRichText._offscreenCtx__wgpuRichText = cast (flighthq._internal.backend.CanvasElementBackend.call(WgpuRichText._offscreenCanvas__wgpuRichText, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
     }
     pw = HxMath.ceil((width * pixelRatio));
     ph = HxMath.ceil((height * pixelRatio));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(WgpuRichText._offscreenCanvas__wgpuRichText, 'width'), pw))) { _Runtime.setField(WgpuRichText._offscreenCanvas__wgpuRichText, 'width', pw); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(WgpuRichText._offscreenCanvas__wgpuRichText, 'height'), ph))) { _Runtime.setField(WgpuRichText._offscreenCanvas__wgpuRichText, 'height', ph); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(flighthq._internal.backend.CanvasElementBackend.field(WgpuRichText._offscreenCanvas__wgpuRichText, 'width'), pw))) { flighthq._internal.backend.CanvasElementBackend.setField(WgpuRichText._offscreenCanvas__wgpuRichText, 'width', pw); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(flighthq._internal.backend.CanvasElementBackend.field(WgpuRichText._offscreenCanvas__wgpuRichText, 'height'), ph))) { flighthq._internal.backend.CanvasElementBackend.setField(WgpuRichText._offscreenCanvas__wgpuRichText, 'height', ph); }
     return cast WgpuRichText._offscreenCtx__wgpuRichText;
     return cast null;
   }

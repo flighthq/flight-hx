@@ -148,11 +148,11 @@ class Window {
       _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onRenderContextLost')] : Array<Dynamic>));
     };
     onContextRestored = function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onRenderContextRestored')] : Array<Dynamic>));
-    _Runtime.callProperty(canvas, 'addEventListener', cast (['webglcontextlost', onContextLost] : Array<Dynamic>));
-    _Runtime.callProperty(canvas, 'addEventListener', cast (['webglcontextrestored', onContextRestored] : Array<Dynamic>));
+    flighthq._internal.backend.CanvasElementBackend.call(canvas, 'addEventListener', cast (['webglcontextlost', onContextLost] : Array<Dynamic>));
+    flighthq._internal.backend.CanvasElementBackend.call(canvas, 'addEventListener', cast (['webglcontextrestored', onContextRestored] : Array<Dynamic>));
     _Runtime.callProperty(observers, 'set', cast ([Window.kRenderContext__window, function() {
-      _Runtime.callProperty(canvas, 'removeEventListener', cast (['webglcontextlost', onContextLost] : Array<Dynamic>));
-      _Runtime.callProperty(canvas, 'removeEventListener', cast (['webglcontextrestored', onContextRestored] : Array<Dynamic>));
+      flighthq._internal.backend.CanvasElementBackend.call(canvas, 'removeEventListener', cast (['webglcontextlost', onContextLost] : Array<Dynamic>));
+      flighthq._internal.backend.CanvasElementBackend.call(canvas, 'removeEventListener', cast (['webglcontextrestored', onContextRestored] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 
@@ -162,8 +162,8 @@ class Window {
     observers = _Runtime.callValue(Window.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     _Runtime.callOptionalValue(_Runtime.callProperty(observers, 'get', cast ([Window.kRenderState__window] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
     apply = function() {
-      _Runtime.setField(canvas, 'width', HxMath.round((_Runtime.field(win, 'width') * _Runtime.field(win, 'devicePixelRatio'))));
-      _Runtime.setField(canvas, 'height', HxMath.round((_Runtime.field(win, 'height') * _Runtime.field(win, 'devicePixelRatio'))));
+      flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', HxMath.round((_Runtime.field(win, 'width') * _Runtime.field(win, 'devicePixelRatio'))));
+      flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', HxMath.round((_Runtime.field(win, 'height') * _Runtime.field(win, 'devicePixelRatio'))));
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(state, 'renderTransform2D'), null))) { _Runtime.callValue(computeWindowDeviceTransform, cast ([win, _Runtime.field(state, 'renderTransform2D')] : Array<Dynamic>)); }
     };
     _Runtime.callValue(apply, cast ([] : Array<Dynamic>));

@@ -47,7 +47,7 @@ class WgpuRenderState {
       if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(adapter, 'limits'), 'maxBindGroups'), 5.0, '>='))) { _Runtime.setField(requiredLimits, 'maxBindGroups', 5.0); }
       device = flighthq._internal._Async.awaitValue(_Runtime.callProperty(adapter, 'requestDevice', cast ([_Runtime.select(_Runtime.compare(_Runtime.field(flighthq._internal.DynamicObject.keys(requiredLimits), 'length'), 0.0, '>'), function():Dynamic return cast { requiredLimits: requiredLimits }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)));
       format = _Runtime.coalesce(_Runtime.field(options, 'format'), function():Dynamic return cast _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('navigator'), 'gpu'), 'getPreferredCanvasFormat', cast ([] : Array<Dynamic>)));
-      context = (cast _Runtime.callProperty(canvas, 'getContext', cast (['webgpu'] : Array<Dynamic>)) : Null<Dynamic>);
+      context = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['webgpu'] : Array<Dynamic>)) : Null<Dynamic>);
       if (_Runtime.truthy(!_Runtime.truthy(context))) { throw _Runtime.error('Failed to get WebGPU canvas context.'); }
       _Runtime.callProperty(context, 'configure', cast ([{ device: device, format: format, alphaMode: 'premultiplied', usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_SRC'))) }] : Array<Dynamic>));
       uniformStride = HxMath.max(HxMath.max(256.0, _Runtime.field(_Runtime.field(device, 'limits'), 'minUniformBufferOffsetAlignment')), UNIFORM_BYTE_SIZE);

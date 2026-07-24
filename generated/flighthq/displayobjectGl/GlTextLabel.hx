@@ -46,9 +46,9 @@ class GlTextLabel {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     canvas = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
-    _Runtime.setField(canvas, 'width', 1.0);
-    _Runtime.setField(canvas, 'height', 1.0);
-    ctx = _Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 1.0);
+    flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 1.0);
+    ctx = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
     return cast _Runtime.callValue(GlTextLabel.toGlTextLabelRendererData__glTextLabel, cast ([{ canvas: canvas, ctx: ctx, image: _Runtime.callValue(createImageResource, cast ([canvas] : Array<Dynamic>)), lastContentId: -1.0, lastPixelRatio: 0.0, logW: 0.0, logH: 0.0 }] : Array<Dynamic>));
     return cast null;
   }
@@ -125,8 +125,8 @@ class GlTextLabel {
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(w, 0.0, '<='), function():Dynamic return cast _Runtime.compare(h, 0.0, '<=')))) { return; }
       var pw:Dynamic = HxMath.ceil((w * pixelRatio));
       var ph:Dynamic = HxMath.ceil((h * pixelRatio));
-      _Runtime.setField(_Runtime.field(textData, 'canvas'), 'width', pw);
-      _Runtime.setField(_Runtime.field(textData, 'canvas'), 'height', ph);
+      flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(textData, 'canvas'), 'width', pw);
+      flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(textData, 'canvas'), 'height', ph);
       var ctx:Dynamic = _Runtime.field(textData, 'ctx');
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, 0.0, 0.0] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([0.0, 0.0, w, h] : Array<Dynamic>));

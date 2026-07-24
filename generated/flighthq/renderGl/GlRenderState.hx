@@ -27,7 +27,7 @@ class GlRenderState {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     contextAttribs = _Runtime.mergeObjects([{ alpha: true }, { antialias: _Runtime.coalesce(_Runtime.field(options, 'antialias'), function():Dynamic return cast true) }, { powerPreference: _Runtime.coalesce(_Runtime.field(options, 'powerPreference'), function():Dynamic return cast 'default') }, { stencil: true }, _Runtime.field(options, 'contextAttributes')]);
-    gl = (cast _Runtime.callProperty(canvas, 'getContext', cast (['webgl2', contextAttribs] : Array<Dynamic>)) : Null<Dynamic>);
+    gl = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['webgl2', contextAttribs] : Array<Dynamic>)) : Null<Dynamic>);
     if (_Runtime.truthy(!_Runtime.truthy(gl))) { throw _Runtime.error('Failed to get WebGL2 context.'); }
     shaderLoc = _Runtime.callValue(compileDefaultGlProgram, cast ([gl] : Array<Dynamic>));
     matrixArray = _Runtime.construct(_Runtime.globalValue('Float32Array'), [9.0]);

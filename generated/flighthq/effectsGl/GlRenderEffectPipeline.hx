@@ -39,8 +39,8 @@ class GlRenderEffectPipeline {
     var sampleCount:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;
     var depth:Dynamic = cast _Runtime.UNDEFINED;
-    w = _Runtime.field(_Runtime.field(state, 'canvas'), 'width');
-    h = _Runtime.field(_Runtime.field(state, 'canvas'), 'height');
+    w = flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width');
+    h = flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height');
     __destructure0 = _Runtime.field(pipeline, 'options');
     sampleCount = _Runtime.field(__destructure0, 'sampleCount');
     format = _Runtime.field(__destructure0, 'format');

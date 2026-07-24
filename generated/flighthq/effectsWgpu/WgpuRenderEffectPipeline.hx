@@ -36,8 +36,8 @@ class WgpuRenderEffectPipeline {
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;
     var rgba:Dynamic = cast _Runtime.UNDEFINED;
-    w = _Runtime.field(_Runtime.field(state, 'canvas'), 'width');
-    h = _Runtime.field(_Runtime.field(state, 'canvas'), 'height');
+    w = flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width');
+    h = flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height');
     format = _Runtime.select(_Runtime.strictEquals(_Runtime.field(_Runtime.field(pipeline, 'options'), 'format'), 'rgba16f'), function():Dynamic return cast 'rgba16float', function():Dynamic return cast _Runtime.field(state, 'format'));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(pipeline, 'sceneTarget'), null))) {
       _Runtime.setField(pipeline, 'sceneTarget', _Runtime.callValue(createWgpuRenderTarget, cast ([state, w, h, format] : Array<Dynamic>)));

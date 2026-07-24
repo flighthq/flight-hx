@@ -17,8 +17,8 @@ class WgpuSurface {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(runtime, 'frameCaptureEnabled')))) { return cast null; }
-    width = HxMath.max(1.0, _Runtime.field(_Runtime.field(state, 'canvas'), 'width'));
-    height = HxMath.max(1.0, _Runtime.field(_Runtime.field(state, 'canvas'), 'height'));
+    width = HxMath.max(1.0, flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width'));
+    height = HxMath.max(1.0, flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height'));
     existing = _Runtime.field(runtime, 'frameCaptureTexture');
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(existing, null), function():Dynamic return cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(existing, 'width'), width)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(existing, 'height'), height)))) {
       return cast existing;

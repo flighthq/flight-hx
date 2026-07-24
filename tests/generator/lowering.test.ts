@@ -377,6 +377,50 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain("Canvas2dBackend.field(ctx, 'source')");
   });
 
+  it('routes typed canvas-element operations separately from the Canvas 2D context', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/render-gl/src/sample.ts',
+      `
+        export function attach(canvas: HTMLCanvasElement, listener: EventListener) {
+          const gl = canvas.getContext('webgl2', { alpha: true });
+          canvas.width = canvas.width + 1;
+          canvas.height = 480;
+          canvas.addEventListener('click', listener);
+          canvas.removeEventListener('click', listener);
+          canvas.getBoundingClientRect();
+          canvas.toDataURL('image/png');
+          return gl;
+        }
+        export function encode(offscreen: OffscreenCanvas) {
+          return offscreen.convertToBlob({ type: 'image/png' });
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/render-gl', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'CanvasElementFixture',
+      packageName: '@flighthq/render-gl',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain("CanvasElementBackend.call(canvas, 'getContext'");
+    expect(output).toContain("CanvasElementBackend.field(canvas, 'width')");
+    expect(output).toContain("CanvasElementBackend.setField(canvas, 'width'");
+    expect(output).toContain("CanvasElementBackend.setField(canvas, 'height'");
+    expect(output).toContain("CanvasElementBackend.call(canvas, 'addEventListener'");
+    expect(output).toContain("CanvasElementBackend.call(canvas, 'removeEventListener'");
+    expect(output).toContain("CanvasElementBackend.call(canvas, 'getBoundingClientRect'");
+    expect(output).toContain("CanvasElementBackend.call(canvas, 'toDataURL'");
+    expect(output).toContain("CanvasElementBackend.call(offscreen, 'convertToBlob'");
+    expect(output).not.toContain("Canvas2dBackend.call(canvas, 'getContext'");
+    expect(output).not.toContain("_Runtime.callProperty(canvas, 'getContext'");
+  });
+
   it('routes global Object operations through named portable bindings', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/example/src/sample.ts',

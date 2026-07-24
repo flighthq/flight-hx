@@ -51,8 +51,8 @@ class CanvasCache {
     targets = _Runtime.callValue(CanvasCache.getTargets__canvasCache, cast ([state] : Array<Dynamic>));
     target = _Runtime.callProperty(targets, 'get', cast ([cache] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      _Runtime.setField(_Runtime.field(target, 'canvas'), 'width', 0.0);
-      _Runtime.setField(_Runtime.field(target, 'canvas'), 'height', 0.0);
+      flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(target, 'canvas'), 'width', 0.0);
+      flighthq._internal.backend.CanvasElementBackend.setField(_Runtime.field(target, 'canvas'), 'height', 0.0);
       _Runtime.setField(target, 'width', 0.0);
       _Runtime.setField(target, 'height', 0.0);
       _Runtime.callProperty(targets, 'delete', cast ([cache] : Array<Dynamic>));
@@ -119,7 +119,7 @@ class CanvasCache {
     _Runtime.callValue(setCanvasRenderTransform2D, cast ([cacheState, CanvasCache._renderTransform__canvasCache] : Array<Dynamic>));
     dirty = _Runtime.callValue(prepareDisplayObjectRender, cast ([cacheState, source] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(dirty, function():Dynamic return cast resized))) {
-      _Runtime.callProperty(_Runtime.field(handles, 'context'), 'clearRect', cast ([0.0, 0.0, _Runtime.field(_Runtime.field(target, 'canvas'), 'width'), _Runtime.field(_Runtime.field(target, 'canvas'), 'height')] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(handles, 'context'), 'clearRect', cast ([0.0, 0.0, flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(target, 'canvas'), 'width'), flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(target, 'canvas'), 'height')] : Array<Dynamic>));
       _Runtime.callValue(renderCanvasDisplayObject, cast ([cacheState, source] : Array<Dynamic>));
     }
     return cast _Runtime.orValue(dirty, function():Dynamic return cast resized);
