@@ -421,6 +421,54 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain("_Runtime.callProperty(canvas, 'getContext'");
   });
 
+  it('routes DOM roots and their aliases through bounded typed backends', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/application/src/sample.ts',
+      `
+        export function roots() {
+          const win = window as Window & { getScreenDetails(): Promise<unknown> };
+          const nav = navigator as Navigator & { getBattery(): Promise<unknown> };
+          window.addEventListener('resize', () => {});
+          const media = window.matchMedia('(dark)');
+          const details = win.getScreenDetails();
+          document.title = 'Flight';
+          const canvas = document.createElement('canvas');
+          const focused = document.hasFocus();
+          const pads = navigator.getGamepads();
+          const language = navigator.language;
+          const battery = nav.getBattery();
+          return { media, details, canvas, focused, pads, language, battery };
+        }
+        export function local(document: { title: string }) {
+          return document.title;
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/application', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'DomRootsFixture',
+      packageName: '@flighthq/application',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain("DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener'");
+    expect(output).toContain("DomWindowBackend.call(_Runtime.globalValue('window'), 'matchMedia'");
+    expect(output).toContain("DomWindowBackend.call(win, 'getScreenDetails'");
+    expect(output).toContain("DomDocumentBackend.setField(_Runtime.globalValue('document'), 'title', 'Flight')");
+    expect(output).toContain("DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement'");
+    expect(output).toContain("DomDocumentBackend.call(_Runtime.globalValue('document'), 'hasFocus'");
+    expect(output).toContain("DomNavigatorBackend.call(_Runtime.globalValue('navigator'), 'getGamepads'");
+    expect(output).toContain("DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'language')");
+    expect(output).toContain("DomNavigatorBackend.call(nav, 'getBattery'");
+    expect(output).toContain("return cast _Runtime.field(document, 'title')");
+    expect(output).not.toContain("DomDocumentBackend.field(document, 'title')");
+  });
+
   it('routes global Object operations through named portable bindings', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/example/src/sample.ts',

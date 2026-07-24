@@ -7,7 +7,7 @@ import flighthq._internal._Runtime;
 class WgpuElement {
   public static function createWgpuCanvasElement(width:Float, height:Float, pixelRatio:Float = 1.0):Dynamic {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
-    canvas = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
+    canvas = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(canvas, 'style'), 'width', '' + Std.string(width) + 'px');
     _Runtime.setField(_Runtime.field(canvas, 'style'), 'height', '' + Std.string(height) + 'px');
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', (width * pixelRatio));

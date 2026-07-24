@@ -40,13 +40,13 @@ class WgpuRenderState {
       var nearestSampler:Dynamic = cast _Runtime.UNDEFINED;
       var state:Dynamic = cast _Runtime.UNDEFINED;
       var runtime:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(_Runtime.globalValue('navigator'), 'gpu')))) { throw _Runtime.error('WebGPU is not supported in this browser.'); }
-      adapter = flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.field(_Runtime.globalValue('navigator'), 'gpu'), 'requestAdapter', cast ([_Runtime.select(!_Runtime.looseEquals(_Runtime.field(options, 'powerPreference'), null), function():Dynamic return cast { powerPreference: _Runtime.field(options, 'powerPreference') }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)));
+      if (_Runtime.truthy(!_Runtime.truthy(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'gpu')))) { throw _Runtime.error('WebGPU is not supported in this browser.'); }
+      adapter = flighthq._internal._Async.awaitValue(_Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'gpu'), 'requestAdapter', cast ([_Runtime.select(!_Runtime.looseEquals(_Runtime.field(options, 'powerPreference'), null), function():Dynamic return cast { powerPreference: _Runtime.field(options, 'powerPreference') }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)));
       if (_Runtime.truthy(!_Runtime.truthy(adapter))) { throw _Runtime.error('Failed to get WebGPU adapter.'); }
       requiredLimits = {  };
       if (_Runtime.truthy(_Runtime.compare(flighthq._internal.backend.WebGpuLimitsBackend.field(_Runtime.field(adapter, 'limits'), 'maxBindGroups'), 5.0, '>='))) { _Runtime.setField(requiredLimits, 'maxBindGroups', 5.0); }
       device = flighthq._internal._Async.awaitValue(_Runtime.callProperty(adapter, 'requestDevice', cast ([_Runtime.select(_Runtime.compare(_Runtime.field(flighthq._internal.DynamicObject.keys(requiredLimits), 'length'), 0.0, '>'), function():Dynamic return cast { requiredLimits: requiredLimits }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)));
-      format = _Runtime.coalesce(_Runtime.field(options, 'format'), function():Dynamic return cast _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('navigator'), 'gpu'), 'getPreferredCanvasFormat', cast ([] : Array<Dynamic>)));
+      format = _Runtime.coalesce(_Runtime.field(options, 'format'), function():Dynamic return cast _Runtime.callProperty(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'gpu'), 'getPreferredCanvasFormat', cast ([] : Array<Dynamic>)));
       context = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['webgpu'] : Array<Dynamic>)) : Null<Dynamic>);
       if (_Runtime.truthy(!_Runtime.truthy(context))) { throw _Runtime.error('Failed to get WebGPU canvas context.'); }
       flighthq._internal.backend.WebGpuCanvasContextBackend.call(context, 'configure', cast ([{ device: device, format: format, alphaMode: 'premultiplied', usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_SRC'))) }] : Array<Dynamic>));
@@ -171,7 +171,7 @@ class WgpuRenderState {
   }
 
   public static function isWgpuSupported():Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'gpu')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('navigator'), 'gpu'), null));
+    return cast _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'gpu')), function():Dynamic return cast !_Runtime.strictEquals(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'gpu'), null));
     return cast null;
   }
 }

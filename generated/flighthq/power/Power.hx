@@ -154,7 +154,7 @@ class Power {
       resolvedMode = _Runtime.coalesce(mode, function():Dynamic return cast 'PreventDisplaySleep');
       if (_Runtime.truthy(_Runtime.strictEquals(resolvedMode, 'PreventAppSuspension'))) { return cast false; }
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast false; }
-      wakeLock = _Runtime.field((cast _Runtime.globalValue('navigator') : { @:optional var wakeLock:WebWakeLock__power; }), 'wakeLock');
+      wakeLock = flighthq._internal.backend.DomNavigatorBackend.field((cast _Runtime.globalValue('navigator') : { @:optional var wakeLock:WebWakeLock__power; }), 'wakeLock');
       if (_Runtime.truthy(_Runtime.strictEquals(wakeLock, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast false; }
       try {
         if (_Runtime.truthy(!_Runtime.truthy(enabled))) {
@@ -167,7 +167,7 @@ class Power {
         _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(wakeLock, 'request', cast (['screen'] : Array<Dynamic>)), 'then', cast ([function(sentinel:Dynamic) {
           (Power._wakeLockSentinel__power = cast (sentinel : Dynamic));
           _Runtime.callOptionalProperty(sentinel, 'addEventListener', cast (['release', function() {
-            if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(_Runtime.globalValue('document'), 'hidden'))))) {
+            if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel), function():Dynamic return cast !_Runtime.truthy(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'hidden'))))) {
               _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(wakeLock, 'request', cast (['screen'] : Array<Dynamic>)), 'then', cast ([function(newSentinel:Dynamic) {
                 if (_Runtime.truthy(_Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel))) { (Power._wakeLockSentinel__power = cast (newSentinel : Dynamic)); }
               }] : Array<Dynamic>)), 'catch', cast ([function() {
@@ -253,14 +253,14 @@ class Power {
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return cast function() {
       
       }; }
-      _Runtime.callProperty(_Runtime.globalValue('document'), 'addEventListener', cast (['resume', listener] : Array<Dynamic>));
-      return cast function() return _Runtime.callProperty(_Runtime.globalValue('document'), 'removeEventListener', cast (['resume', listener] : Array<Dynamic>));
+      flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'addEventListener', cast (['resume', listener] : Array<Dynamic>));
+      return cast function() return flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'removeEventListener', cast (['resume', listener] : Array<Dynamic>));
     }, subscribeSuspend: function(listener:Dynamic) {
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return cast function() {
       
       }; }
-      _Runtime.callProperty(_Runtime.globalValue('document'), 'addEventListener', cast (['freeze', listener] : Array<Dynamic>));
-      return cast function() return _Runtime.callProperty(_Runtime.globalValue('document'), 'removeEventListener', cast (['freeze', listener] : Array<Dynamic>));
+      flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'addEventListener', cast (['freeze', listener] : Array<Dynamic>));
+      return cast function() return flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'removeEventListener', cast (['freeze', listener] : Array<Dynamic>));
     }, subscribeThermalStateChange: function() {
       return cast function() {
       
@@ -339,9 +339,9 @@ class Power {
     var nav:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
     nav = (cast _Runtime.globalValue('navigator') : { @:optional var getBattery:Dynamic; });
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(nav, 'getBattery')), 'function'))) { return cast null; }
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(nav, 'getBattery')), 'function'))) { return cast null; }
     try {
-      return cast _Runtime.callProperty(nav, 'getBattery', cast ([] : Array<Dynamic>));
+      return cast flighthq._internal.backend.DomNavigatorBackend.call(nav, 'getBattery', cast ([] : Array<Dynamic>));
     } catch (__error:Dynamic) {
       return cast null;
     }

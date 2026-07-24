@@ -38,24 +38,24 @@ class Share {
         return cast false;
       }
     }, share: flighthq._internal._Async.make(function(content:Dynamic, ?_options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.globalValue('navigator'), 'share'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('navigator'), 'share')), 'function')))) {
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.globalValue('navigator'), 'share'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'share')), 'function')))) {
         return cast false;
       }
       try {
         var data:Dynamic = _Runtime.callValue(Share.shareContentToNavigatorData__share, cast ([content] : Array<Dynamic>));
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.globalValue('navigator'), 'share', cast ([data] : Array<Dynamic>)));
+        flighthq._internal._Async.awaitValue(flighthq._internal.backend.DomNavigatorBackend.call(_Runtime.globalValue('navigator'), 'share', cast ([data] : Array<Dynamic>)));
         return cast true;
       } catch (__error:Dynamic) {
         return cast false;
       }
       return cast null;
     }), shareWithResult: flighthq._internal._Async.make(function(content:Dynamic, ?_options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.globalValue('navigator'), 'share'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('navigator'), 'share')), 'function')))) {
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.globalValue('navigator'), 'share'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'share')), 'function')))) {
         return cast { completed: false, activityType: null, dismissed: false };
       }
       try {
         var data:Dynamic = _Runtime.callValue(Share.shareContentToNavigatorData__share, cast ([content] : Array<Dynamic>));
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.globalValue('navigator'), 'share', cast ([data] : Array<Dynamic>)));
+        flighthq._internal._Async.awaitValue(flighthq._internal.backend.DomNavigatorBackend.call(_Runtime.globalValue('navigator'), 'share', cast ([data] : Array<Dynamic>)));
         return cast { completed: true, activityType: null, dismissed: false };
       } catch (err:Dynamic) {
         var dismissed:Dynamic = _Runtime.andValue(_Runtime.isError(err), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(err, 'name'), 'AbortError'));

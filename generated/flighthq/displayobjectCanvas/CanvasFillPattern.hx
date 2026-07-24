@@ -118,7 +118,7 @@ class CanvasFillPattern {
     y2 = _Runtime.getIndex(__destructure6, 1.0);
     dx = (x2 - x1);
     dy = (y2 - y1);
-    offscreen = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
+    offscreen = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
     flighthq._internal.backend.CanvasElementBackend.setField(offscreen, 'width', flighthq._internal.backend.CanvasElementBackend.field(flighthq._internal.backend.Canvas2dBackend.field(context, 'canvas'), 'width'));
     flighthq._internal.backend.CanvasElementBackend.setField(offscreen, 'height', flighthq._internal.backend.CanvasElementBackend.field(flighthq._internal.backend.Canvas2dBackend.field(context, 'canvas'), 'height'));
     octx = flighthq._internal.backend.CanvasElementBackend.call(offscreen, 'getContext', cast (['2d'] : Array<Dynamic>));

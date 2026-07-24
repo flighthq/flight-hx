@@ -127,8 +127,8 @@ class Storage {
       handler = function(event:Dynamic) {
         _Runtime.callValue(listener, cast ([{ key: _Runtime.field(event, 'key'), oldValue: _Runtime.field(event, 'oldValue'), newValue: _Runtime.field(event, 'newValue') }] : Array<Dynamic>));
       };
-      _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['storage', handler] : Array<Dynamic>));
-      return cast function() return _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast (['storage', handler] : Array<Dynamic>));
+      flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast (['storage', handler] : Array<Dynamic>));
+      return cast function() return flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'removeEventListener', cast (['storage', handler] : Array<Dynamic>));
     } };
     return cast null;
   }
@@ -350,7 +350,7 @@ class Storage {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<StorageQuota>> {
       var storage:Dynamic = cast _Runtime.UNDEFINED;
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
-      storage = _Runtime.field((cast _Runtime.globalValue('navigator') : { @:optional var storage:{ @:optional var estimate:Dynamic; }; }), 'storage');
+      storage = flighthq._internal.backend.DomNavigatorBackend.field((cast _Runtime.globalValue('navigator') : { @:optional var storage:{ @:optional var estimate:Dynamic; }; }), 'storage');
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(storage, 'estimate'), _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast null; }
       try {
         var estimate:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(storage, 'estimate', cast ([] : Array<Dynamic>)));
@@ -372,7 +372,7 @@ class Storage {
   public static function getWebStorage__storage():Null<Storage> {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast null; }
     try {
-      return cast _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('window'), 'localStorage'), function():Dynamic return cast null);
+      return cast _Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'localStorage'), function():Dynamic return cast null);
     } catch (__error:Dynamic) {
       return cast null;
     }

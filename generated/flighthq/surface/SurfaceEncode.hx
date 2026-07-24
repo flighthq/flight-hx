@@ -15,7 +15,7 @@ class SurfaceEncode {
     var base64:Dynamic = cast _Runtime.UNDEFINED;
     var binary:Dynamic = cast _Runtime.UNDEFINED;
     var bytes:Dynamic = cast _Runtime.UNDEFINED;
-    canvas = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
+    canvas = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', _Runtime.field(source, 'width'));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', _Runtime.field(source, 'height'));
     domImageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [_Runtime.field(source, 'width'), _Runtime.field(source, 'height')]);

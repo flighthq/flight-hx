@@ -132,13 +132,13 @@ class Connectivity {
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast function() {
       
       }; }
-      _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['online', listener] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['offline', listener] : Array<Dynamic>));
+      flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast (['online', listener] : Array<Dynamic>));
+      flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast (['offline', listener] : Array<Dynamic>));
       conn = _Runtime.callValue(Connectivity.getWebConnection__connectivity, cast ([] : Array<Dynamic>));
       _Runtime.callOptionalProperty(conn, 'addEventListener', cast (['change', listener] : Array<Dynamic>));
       return cast function() {
-        _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast (['online', listener] : Array<Dynamic>));
-        _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast (['offline', listener] : Array<Dynamic>));
+        flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'removeEventListener', cast (['online', listener] : Array<Dynamic>));
+        flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'removeEventListener', cast (['offline', listener] : Array<Dynamic>));
         _Runtime.callOptionalProperty(conn, 'removeEventListener', cast (['change', listener] : Array<Dynamic>));
       };
     } };
@@ -193,7 +193,7 @@ class Connectivity {
     var nav:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
     nav = (cast _Runtime.globalValue('navigator') : { @:optional var connection:WebConnectivityConnection__connectivity; });
-    return cast _Runtime.coalesce(_Runtime.field(nav, 'connection'), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(nav, 'connection'), function():Dynamic return cast null);
     return cast null;
   }
 

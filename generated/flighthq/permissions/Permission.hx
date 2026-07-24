@@ -151,13 +151,13 @@ class Permission {
 
   public static function getWebGeolocation__permission():Null<Geolocation> {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
-    return cast _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('navigator'), 'geolocation'), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'geolocation'), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getWebMediaDevices__permission():Null<Dynamic> {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
-    return cast _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('navigator'), 'mediaDevices'), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'mediaDevices'), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -177,7 +177,7 @@ class Permission {
   public static function getWebPermissions__permission():Null<Dynamic> {
     var permissions:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
-    permissions = _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('navigator'), 'permissions'), function():Dynamic return cast null);
+    permissions = _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions'), function():Dynamic return cast null);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(permissions, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(permissions, 'query')), 'function')))) { return cast null; }
     return cast permissions;
     return cast null;
@@ -185,7 +185,7 @@ class Permission {
 
   public static function getWebStorageManager__permission():Null<Dynamic> {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
-    return cast _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('navigator'), 'storage'), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'storage'), function():Dynamic return cast null);
     return cast null;
   }
 

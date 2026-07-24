@@ -24,9 +24,9 @@ class Shell {
       return cast false;
       return cast null;
     }), openExternal: flighthq._internal._Async.make(function(url:Dynamic):flighthq._internal._Promise<Dynamic> {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('window'), 'open')), 'function')))) { return cast false; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'open')), 'function')))) { return cast false; }
       try {
-        return cast !_Runtime.strictEquals(_Runtime.callProperty(_Runtime.globalValue('window'), 'open', cast ([url, '_blank', 'noopener'] : Array<Dynamic>)), null);
+        return cast !_Runtime.strictEquals(flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'open', cast ([url, '_blank', 'noopener'] : Array<Dynamic>)), null);
       } catch (__error:Dynamic) {
         return cast false;
       }

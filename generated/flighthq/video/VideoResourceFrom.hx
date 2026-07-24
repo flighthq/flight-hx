@@ -12,7 +12,7 @@ import flighthq.video.VideoResource.createVideoResource;
 class VideoResourceFrom {
   public static function createVideoResourceFromMediaStream(stream:Dynamic):VideoResource {
     var element:Dynamic = cast _Runtime.UNDEFINED;
-    element = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['video'] : Array<Dynamic>));
+    element = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['video'] : Array<Dynamic>));
     _Runtime.setField(element, 'srcObject', stream);
     return cast _Runtime.callValue(createVideoResource, cast ([element] : Array<Dynamic>));
     return cast null;
@@ -52,7 +52,7 @@ class VideoResourceFrom {
       var onError:Dynamic = cast _Runtime.UNDEFINED;
       var onAbort:Dynamic = cast _Runtime.UNDEFINED;
       var cleanup:Dynamic = cast _Runtime.UNDEFINED;
-      element = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['video'] : Array<Dynamic>));
+      element = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['video'] : Array<Dynamic>));
       _Runtime.setField(element, 'preload', (cast _Runtime.coalesce(_Runtime.optionalField(options, 'preload'), function():Dynamic return cast 'auto') : Dynamic));
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.optionalField(options, 'crossOrigin'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(element, 'crossOrigin', _Runtime.field(options, 'crossOrigin')); }
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.optionalField(options, 'muted'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(element, 'muted', _Runtime.field(options, 'muted')); }

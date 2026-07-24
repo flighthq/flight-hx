@@ -451,8 +451,8 @@ class InputManager {
   }
 
   public static function exitInputPointerLock():Void {
-    if (_Runtime.truthy(_Runtime.field(_Runtime.globalValue('document'), 'exitPointerLock'))) {
-      _Runtime.callProperty(_Runtime.globalValue('document'), 'exitPointerLock', cast ([] : Array<Dynamic>));
+    if (_Runtime.truthy(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'exitPointerLock'))) {
+      flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'exitPointerLock', cast ([] : Array<Dynamic>));
     }
   }
 
@@ -518,7 +518,7 @@ class InputManager {
   }
 
   public static function hasInputPointerLock():Bool {
-    return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('document'), 'pointerLockElement'), null);
+    return cast !_Runtime.strictEquals(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'pointerLockElement'), null);
     return cast null;
   }
 
@@ -541,10 +541,10 @@ class InputManager {
     var now:Dynamic = cast _Runtime.UNDEFINED;
     var prev:Dynamic = cast _Runtime.UNDEFINED;
     var gamepads:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(manager, 'enabled')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('navigator'), 'getGamepads')), 'function')))) { return; }
+    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(manager, 'enabled')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'getGamepads')), 'function')))) { return; }
     now = _Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>));
     prev = _Runtime.callValue(InputManager.getOrCreateGamepadPollState__inputManager, cast ([manager] : Array<Dynamic>));
-    gamepads = _Runtime.callProperty(_Runtime.globalValue('navigator'), 'getGamepads', cast ([] : Array<Dynamic>));
+    gamepads = flighthq._internal.backend.DomNavigatorBackend.call(_Runtime.globalValue('navigator'), 'getGamepads', cast ([] : Array<Dynamic>));
     for (pad in _Runtime.iterable(gamepads)) {
       if (_Runtime.truthy(_Runtime.strictEquals(pad, null))) { continue; }
       var prevAxes:Dynamic = _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(prev, 'axes'), 'get', cast ([_Runtime.field(pad, 'index')] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>));

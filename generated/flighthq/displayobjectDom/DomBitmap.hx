@@ -51,7 +51,7 @@ class DomBitmap {
       _Runtime.setField(data, 'context', null);
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'image'), null))) {
-      _Runtime.setField(data, 'image', _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['img'] : Array<Dynamic>)));
+      _Runtime.setField(data, 'image', flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['img'] : Array<Dynamic>)));
       _Runtime.setField(_Runtime.field(data, 'image'), 'crossOrigin', 'anonymous');
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'image')] : Array<Dynamic>));
     }
@@ -74,7 +74,7 @@ class DomBitmap {
       _Runtime.setField(data, 'image', null);
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'canvas'), null))) {
-      _Runtime.setField(data, 'canvas', _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)));
+      _Runtime.setField(data, 'canvas', flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)));
       _Runtime.setField(data, 'context', flighthq._internal.backend.CanvasElementBackend.call(_Runtime.field(data, 'canvas'), 'getContext', cast (['2d'] : Array<Dynamic>)));
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'canvas')] : Array<Dynamic>));
     }

@@ -67,7 +67,7 @@ class Mediasession {
 
   public static function getWebMediaSession__mediasession():Null<MediaSession> {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.globalValue('navigator'), 'mediaSession'))))) { return cast null; }
-    return cast _Runtime.field(_Runtime.globalValue('navigator'), 'mediaSession');
+    return cast flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'mediaSession');
     return cast null;
   }
 

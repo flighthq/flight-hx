@@ -156,9 +156,9 @@ class Device {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return cast function() {
     
     }; }
-    el = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['div'] : Array<Dynamic>));
+    el = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['div'] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(el, 'style'), 'cssText', (('position:fixed;top:env(safe-area-inset-top,0px);right:env(safe-area-inset-right,0px);' + 'bottom:env(safe-area-inset-bottom,0px);left:env(safe-area-inset-left,0px);') + 'pointer-events:none;visibility:hidden;'));
-    _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('document'), 'body'), 'appendChild', cast ([el] : Array<Dynamic>));
+    _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'body'), 'appendChild', cast ([el] : Array<Dynamic>));
     readInsets = function readInsets():Void {
       var style:Dynamic = cast _Runtime.UNDEFINED;
       style = _Runtime.callValue(_Runtime.globalValue('getComputedStyle'), cast ([el] : Array<Dynamic>));
@@ -166,7 +166,7 @@ class Device {
     };
     _Runtime.callValue(readInsets, cast ([] : Array<Dynamic>));
     observer = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('ResizeObserver'), 'undefined'), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('ResizeObserver'), [readInsets]), function():Dynamic return cast null);
-    if (_Runtime.truthy(!_Runtime.strictEquals(observer, null))) { _Runtime.callProperty(observer, 'observe', cast ([_Runtime.field(_Runtime.globalValue('document'), 'documentElement')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(observer, null))) { _Runtime.callProperty(observer, 'observe', cast ([flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'documentElement')] : Array<Dynamic>)); }
     return cast function() {
       if (_Runtime.truthy(!_Runtime.strictEquals(observer, null))) { _Runtime.callProperty(observer, 'disconnect', cast ([] : Array<Dynamic>)); }
       _Runtime.callOptionalProperty(_Runtime.field(el, 'parentNode'), 'removeChild', cast ([el] : Array<Dynamic>));
@@ -209,7 +209,7 @@ class Device {
   public static function readWebGpuInfo__device():{ var vendor:String; var renderer:String; } {
     try {
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return cast { renderer: '', vendor: '' }; }
-      var canvas:Dynamic = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
+      var canvas:Dynamic = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
       var gl:Dynamic = _Runtime.coalesce((cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['webgl'] : Array<Dynamic>)) : Null<Dynamic>), function():Dynamic return cast (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['experimental-webgl'] : Array<Dynamic>)) : Null<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(gl, null))) { return cast { renderer: '', vendor: '' }; }
       var ext:Dynamic = flighthq._internal.backend.WebGl2Backend.call(gl, 'getExtension', cast (['WEBGL_debug_renderer_info'] : Array<Dynamic>));

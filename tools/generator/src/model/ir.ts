@@ -55,6 +55,9 @@ export type IrExpression =
       binding?:
         | 'Canvas2dBackend'
         | 'CanvasElementBackend'
+        | 'DomDocumentBackend'
+        | 'DomNavigatorBackend'
+        | 'DomWindowBackend'
         | 'DynamicObject'
         | 'WebGl2Backend'
         | 'WebGpuCanvasContextBackend'

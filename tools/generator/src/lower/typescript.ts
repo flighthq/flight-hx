@@ -234,6 +234,70 @@ const webGpuDeviceMembers = new Set([
 const webGpuQueueMembers = new Set(['copyExternalImageToTexture', 'submit', 'writeBuffer', 'writeTexture']);
 const webGpuCanvasContextMembers = new Set(['configure', 'getCurrentTexture']);
 const webGpuLimitsMembers = new Set(['maxBindGroups', 'maxTextureDimension2D', 'minUniformBufferOffsetAlignment']);
+const domWindowMembers = new Set([
+  'addEventListener',
+  'alert',
+  'close',
+  'confirm',
+  'devicePixelRatio',
+  'focus',
+  'getScreenDetails',
+  'innerHeight',
+  'innerWidth',
+  'isSecureContext',
+  'localStorage',
+  'matchMedia',
+  'moveTo',
+  'open',
+  'prompt',
+  'removeEventListener',
+  'resizeTo',
+  'screen',
+  'screenX',
+  'screenY',
+  'showDirectoryPicker',
+  'showOpenFilePicker',
+  'showSaveFilePicker',
+  'visualViewport',
+]);
+const domDocumentMembers = new Set([
+  'addEventListener',
+  'body',
+  'createElement',
+  'createTextNode',
+  'documentElement',
+  'exitFullscreen',
+  'exitPointerLock',
+  'fonts',
+  'getElementById',
+  'hasFocus',
+  'head',
+  'hidden',
+  'pointerLockElement',
+  'querySelector',
+  'removeEventListener',
+  'title',
+]);
+const domNavigatorMembers = new Set([
+  'clipboard',
+  'connection',
+  'geolocation',
+  'getBattery',
+  'getGamepads',
+  'gpu',
+  'language',
+  'languages',
+  'maxTouchPoints',
+  'mediaDevices',
+  'mediaSession',
+  'permissions',
+  'platform',
+  'share',
+  'storage',
+  'vibrate',
+  'virtualKeyboard',
+  'wakeLock',
+]);
 
 export function lowerTypeScriptSource(
   sourceFile: ts.SourceFile,
@@ -298,11 +362,17 @@ export function lowerTypeScriptSource(
     isNamedPlatformValueExpression(node, names, 'limits'),
   );
   const webGlBindingNames = collectPlatformBindingNames(sourceFile, 'WebGL2RenderingContext', isWebGlValueExpression);
+  const domWindowBindingNames = collectGlobalRootNames(sourceFile, 'window');
+  const domDocumentBindingNames = collectGlobalRootNames(sourceFile, 'document');
+  const domNavigatorBindingNames = collectGlobalRootNames(sourceFile, 'navigator');
   const context: LoweringContext = {
     canvasBindingNames,
     canvasElementBindingNames,
     classThis: false,
     diagnostics,
+    domDocumentBindingNames,
+    domNavigatorBindingNames,
+    domWindowBindingNames,
     externalTypes,
     externalValues,
     erasedLocalTypes,
@@ -445,6 +515,43 @@ function collectPlatformBindingNames(
   return names;
 }
 
+function collectGlobalRootNames(sourceFile: ts.SourceFile, root: string): ReadonlySet<string> {
+  const names = new Set([root]);
+  const isRootValue = (node: ts.Expression): boolean => {
+    if (ts.isParenthesizedExpression(node) || ts.isAsExpression(node) || ts.isNonNullExpression(node)) {
+      return isRootValue(node.expression);
+    }
+    return ts.isIdentifier(node) && names.has(node.text);
+  };
+  const visit = (node: ts.Node): void => {
+    if (
+      ts.isVariableDeclaration(node) &&
+      ts.isIdentifier(node.name) &&
+      node.initializer &&
+      isRootValue(node.initializer)
+    ) {
+      names.add(node.name.text);
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(sourceFile);
+  visit(sourceFile);
+  return names;
+}
+
+function isBoundGlobalRootExpression(
+  node: ts.Expression,
+  context: LoweringContext,
+  root: string,
+  names: ReadonlySet<string>,
+): boolean {
+  if (ts.isParenthesizedExpression(node) || ts.isAsExpression(node) || ts.isNonNullExpression(node)) {
+    return isBoundGlobalRootExpression(node.expression, context, root, names);
+  }
+  if (!ts.isIdentifier(node) || !names.has(node.text)) return false;
+  return node.text !== root || !isLexicallyBound(node, context);
+}
+
 function isWebGlValueExpression(node: ts.Expression, names: ReadonlySet<string>): boolean {
   if (ts.isParenthesizedExpression(node) || ts.isAsExpression(node) || ts.isNonNullExpression(node)) {
     return isWebGlValueExpression(node.expression, names);
@@ -578,6 +685,9 @@ interface LoweringContext {
   canvasElementBindingNames: ReadonlySet<string>;
   classThis: boolean;
   diagnostics: LoweringDiagnostic[];
+  domDocumentBindingNames: ReadonlySet<string>;
+  domNavigatorBindingNames: ReadonlySet<string>;
+  domWindowBindingNames: ReadonlySet<string>;
   externalTypes: ReadonlySet<string>;
   externalValues: ReadonlyMap<string, { imported: string; specifier: string }>;
   erasedLocalTypes: ReadonlySet<string>;
@@ -1331,6 +1441,15 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
         context.webGpuLimitsBindingNames,
         'limits',
       );
+    const objectIsDomWindow =
+      domWindowMembers.has(node.name.text) &&
+      isBoundGlobalRootExpression(node.expression, context, 'window', context.domWindowBindingNames);
+    const objectIsDomDocument =
+      domDocumentMembers.has(node.name.text) &&
+      isBoundGlobalRootExpression(node.expression, context, 'document', context.domDocumentBindingNames);
+    const objectIsDomNavigator =
+      domNavigatorMembers.has(node.name.text) &&
+      isBoundGlobalRootExpression(node.expression, context, 'navigator', context.domNavigatorBindingNames);
     return {
       binding: webGpuConstantNamespace
         ? 'WebGpuConstantsBackend'
@@ -1344,13 +1463,19 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
                 ? 'WebGpuCanvasContextBackend'
                 : objectIsWebGpuLimits
                   ? 'WebGpuLimitsBackend'
-                  : objectIsGlobalObject
-                    ? 'DynamicObject'
-                    : isBoundPlatformExpression(node.expression, context, 'CanvasRenderingContext2D')
-                      ? 'Canvas2dBackend'
-                      : isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
-                        ? 'WebGl2Backend'
-                        : undefined,
+                  : objectIsDomWindow
+                    ? 'DomWindowBackend'
+                    : objectIsDomDocument
+                      ? 'DomDocumentBackend'
+                      : objectIsDomNavigator
+                        ? 'DomNavigatorBackend'
+                        : objectIsGlobalObject
+                          ? 'DynamicObject'
+                          : isBoundPlatformExpression(node.expression, context, 'CanvasRenderingContext2D')
+                            ? 'Canvas2dBackend'
+                            : isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
+                              ? 'WebGl2Backend'
+                              : undefined,
       kind: 'property',
       name: node.name.text,
       object: webGpuConstantNamespace

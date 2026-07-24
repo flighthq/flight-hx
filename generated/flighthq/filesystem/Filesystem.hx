@@ -300,7 +300,7 @@ class Filesystem {
     }), getFileSystemUsage: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
       var storage:Dynamic = cast _Runtime.UNDEFINED;
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
-      storage = _Runtime.field(_Runtime.globalValue('navigator'), 'storage');
+      storage = flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'storage');
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(storage, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(storage, 'estimate')), 'function')))) { return cast null; }
       try {
         var estimate:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(storage, 'estimate', cast ([] : Array<Dynamic>)));
@@ -431,7 +431,7 @@ class Filesystem {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<Dynamic>> {
       var storage:Dynamic = cast _Runtime.UNDEFINED;
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
-      storage = _Runtime.field(_Runtime.globalValue('navigator'), 'storage');
+      storage = flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'storage');
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(storage, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(storage, 'getDirectory')), 'function')))) { return cast null; }
       try {
         return cast flighthq._internal._Async.awaitValue(_Runtime.callProperty(storage, 'getDirectory', cast ([] : Array<Dynamic>)));

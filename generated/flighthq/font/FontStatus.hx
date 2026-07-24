@@ -7,13 +7,13 @@ import flighthq.font.FontShorthand.getFontShorthand;
 
 class FontStatus {
   public static function isFontLoaded(family:String, ?style:String):Bool {
-    return cast _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('document'), 'fonts'), 'check', cast ([_Runtime.callValue(getFontShorthand, cast ([family, style] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'fonts'), 'check', cast ([_Runtime.callValue(getFontShorthand, cast ([family, style] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
   public static function whenFontsReady():flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<flighthq._internal._Nothing> {
-      flighthq._internal._Async.awaitValue(_Runtime.field(_Runtime.field(_Runtime.globalValue('document'), 'fonts'), 'ready'));
+      flighthq._internal._Async.awaitValue(_Runtime.field(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'fonts'), 'ready'));
       #if js
       return;
       #else

@@ -36,7 +36,7 @@ class DomNativeText {
     data = _Runtime.field(source, 'data');
     element = _Runtime.field(runtime, 'element');
     if (_Runtime.truthy(_Runtime.strictEquals(element, null))) {
-      (element = cast (_Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['div'] : Array<Dynamic>)) : Dynamic));
+      (element = cast (flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['div'] : Array<Dynamic>)) : Dynamic));
       _Runtime.callValue(prepareDomElement, cast ([element] : Array<Dynamic>));
       _Runtime.setField(runtime, 'element', element);
     }

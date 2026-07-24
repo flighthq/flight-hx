@@ -8,7 +8,7 @@ import flighthq.types.VideoResource.VideoResourceUrl;
 class VideoFormat {
   public static function canPlayVideoType(mimeType:String):Bool {
     var probe:Dynamic = cast _Runtime.UNDEFINED;
-    probe = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['video'] : Array<Dynamic>));
+    probe = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['video'] : Array<Dynamic>));
     return cast !_Runtime.strictEquals(_Runtime.callProperty(probe, 'canPlayType', cast ([mimeType] : Array<Dynamic>)), '');
     return cast null;
   }

@@ -180,7 +180,7 @@ class GlRichText {
     var pw:Dynamic = cast _Runtime.UNDEFINED;
     var ph:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.truthy(GlRichText._offscreenCanvas__glRichText))) {
-      (GlRichText._offscreenCanvas__glRichText = cast (_Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)) : Dynamic));
+      (GlRichText._offscreenCanvas__glRichText = cast (flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)) : Dynamic));
       (GlRichText._offscreenCtx__glRichText = cast (flighthq._internal.backend.CanvasElementBackend.call(GlRichText._offscreenCanvas__glRichText, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
     }
     pw = HxMath.ceil((width * pixelRatio));

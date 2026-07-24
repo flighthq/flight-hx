@@ -699,6 +699,7 @@ function emitExpression(expression: IrExpression): string {
         if (
           expression.left.binding === 'Canvas2dBackend' ||
           expression.left.binding === 'CanvasElementBackend' ||
+          expression.left.binding === 'DomDocumentBackend' ||
           expression.left.binding === 'WebGl2Backend' ||
           expression.left.binding === 'WebGpuCanvasContextBackend' ||
           expression.left.binding === 'WebGpuDeviceBackend' ||
@@ -933,6 +934,9 @@ function emitExpression(expression: IrExpression): string {
       if (
         expression.binding === 'Canvas2dBackend' ||
         expression.binding === 'CanvasElementBackend' ||
+        expression.binding === 'DomDocumentBackend' ||
+        expression.binding === 'DomNavigatorBackend' ||
+        expression.binding === 'DomWindowBackend' ||
         expression.binding === 'WebGl2Backend' ||
         expression.binding === 'WebGpuCanvasContextBackend' ||
         expression.binding === 'WebGpuDeviceBackend' ||
@@ -1111,6 +1115,9 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       if (
         expression.callee.binding === 'Canvas2dBackend' ||
         expression.callee.binding === 'CanvasElementBackend' ||
+        expression.callee.binding === 'DomDocumentBackend' ||
+        expression.callee.binding === 'DomNavigatorBackend' ||
+        expression.callee.binding === 'DomWindowBackend' ||
         expression.callee.binding === 'WebGl2Backend' ||
         expression.callee.binding === 'WebGpuCanvasContextBackend' ||
         expression.callee.binding === 'WebGpuDeviceBackend' ||
@@ -1133,6 +1140,9 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     if (
       expression.callee.binding === 'Canvas2dBackend' ||
       expression.callee.binding === 'CanvasElementBackend' ||
+      expression.callee.binding === 'DomDocumentBackend' ||
+      expression.callee.binding === 'DomNavigatorBackend' ||
+      expression.callee.binding === 'DomWindowBackend' ||
       expression.callee.binding === 'WebGl2Backend' ||
       expression.callee.binding === 'WebGpuCanvasContextBackend' ||
       expression.callee.binding === 'WebGpuDeviceBackend' ||

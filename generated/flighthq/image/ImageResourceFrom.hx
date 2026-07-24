@@ -12,7 +12,7 @@ class ImageResourceFrom {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var imageData:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(image, 'data'), null))) { return cast null; }
-    canvas = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
+    canvas = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', _Runtime.field(image, 'width'));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', _Runtime.field(image, 'height'));
     imageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [_Runtime.field(image, 'width'), _Runtime.field(image, 'height')]);

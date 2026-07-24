@@ -146,12 +146,12 @@ class Accessibility {
     getRoot = function getRoot():Null<Dynamic> {
       if (_Runtime.truthy(rootResolved)) { return cast root; }
       (rootResolved = cast (true : Dynamic));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('document'), 'body'), null)))) {
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'body'), null)))) {
         (root = cast (null : Dynamic));
         return cast null;
       }
       (root = cast (_Runtime.callValue(Accessibility._createHiddenAccessibilityContainer__accessibility, cast ([_Runtime.globalValue('document')] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('document'), 'body'), 'appendChild', cast ([root] : Array<Dynamic>));
+      _Runtime.callProperty(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'body'), 'appendChild', cast ([root] : Array<Dynamic>));
       return cast root;
     };
     return cast { setNode: function(node:Dynamic) {

@@ -106,7 +106,7 @@ class Keyboard {
         _Runtime.callProperty(virtualKeyboard, 'addEventListener', cast (['geometrychange', fire] : Array<Dynamic>));
         return cast function() return _Runtime.callProperty(virtualKeyboard, 'removeEventListener', cast (['geometrychange', fire] : Array<Dynamic>));
       }
-      viewport = _Runtime.field(_Runtime.globalValue('window'), 'visualViewport');
+      viewport = flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'visualViewport');
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(viewport, null)))) { return cast function() {
       
       }; }
@@ -172,7 +172,7 @@ class Keyboard {
     var nav:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
     nav = (cast _Runtime.globalValue('navigator') : { @:optional var virtualKeyboard:VirtualKeyboard__keyboard; });
-    return cast _Runtime.coalesce(_Runtime.field(nav, 'virtualKeyboard'), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(nav, 'virtualKeyboard'), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -189,11 +189,11 @@ class Keyboard {
       var rect:Dynamic = _Runtime.field(vk, 'boundingRect');
       return cast { height: _Runtime.field(rect, 'height'), width: _Runtime.field(rect, 'width'), x: _Runtime.field(rect, 'x'), y: _Runtime.field(rect, 'y') };
     }
-    viewport = _Runtime.field(_Runtime.globalValue('window'), 'visualViewport');
+    viewport = flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'visualViewport');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(viewport, null)))) { return cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 }; }
-    shrink = (_Runtime.field(_Runtime.globalValue('window'), 'innerHeight') - _Runtime.field(viewport, 'height'));
+    shrink = (flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'innerHeight') - _Runtime.field(viewport, 'height'));
     height = _Runtime.select(_Runtime.compare(shrink, 0.0, '>'), function():Dynamic return cast shrink, function():Dynamic return cast 0.0);
-    width = _Runtime.select(_Runtime.compare(height, 0.0, '>'), function():Dynamic return cast _Runtime.field(_Runtime.globalValue('window'), 'innerWidth'), function():Dynamic return cast 0.0);
+    width = _Runtime.select(_Runtime.compare(height, 0.0, '>'), function():Dynamic return cast flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'innerWidth'), function():Dynamic return cast 0.0);
     y = _Runtime.select(_Runtime.compare(height, 0.0, '>'), function():Dynamic return cast _Runtime.field(viewport, 'height'), function():Dynamic return cast 0.0);
     return cast { height: height, width: width, x: 0.0, y: y };
     return cast null;

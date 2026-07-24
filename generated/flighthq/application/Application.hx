@@ -26,7 +26,7 @@ class Application {
   public static final _applicationObservers__application:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function _isApplicationVisible__application():Bool {
-    return cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(_Runtime.globalValue('document'), 'hidden')));
+    return cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'hidden')));
     return cast null;
   }
 
@@ -42,8 +42,8 @@ class Application {
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
     _Runtime.callOptionalValue(_Runtime.callProperty(observers, 'get', cast ([Application.kExit__application] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
     handler = function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onExit')] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['beforeunload', handler] : Array<Dynamic>));
-    _Runtime.callProperty(observers, 'set', cast ([Application.kExit__application, function() return _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast (['beforeunload', handler] : Array<Dynamic>))] : Array<Dynamic>));
+    flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast (['beforeunload', handler] : Array<Dynamic>));
+    _Runtime.callProperty(observers, 'set', cast ([Application.kExit__application, function() return flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'removeEventListener', cast (['beforeunload', handler] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function attachApplicationLifecycle(app:flighthq.types.Application, win:ApplicationWindow):Void {

@@ -44,7 +44,7 @@ class CanvasRenderTarget {
   public static function createCanvasRenderTarget(width:Float, height:Float):Dynamic {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;
-    canvas = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
+    canvas = flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', HxMath.max(1.0, HxMath.ceil(width)));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', HxMath.max(1.0, HxMath.ceil(height)));
     context = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));

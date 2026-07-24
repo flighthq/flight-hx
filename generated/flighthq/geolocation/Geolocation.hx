@@ -69,7 +69,7 @@ class Geolocation {
       }]);
     }, getPermission: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
       var permissions:Dynamic = cast _Runtime.UNDEFINED;
-      permissions = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('navigator'), 'permissions'), function():Dynamic return cast null), function():Dynamic return cast null);
+      permissions = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions'), function():Dynamic return cast null), function():Dynamic return cast null);
       if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(permissions, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(permissions, 'query')), 'function')))) {
         try {
           var status:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(permissions, 'query', cast ([{ name: 'geolocation' }] : Array<Dynamic>)));
@@ -81,7 +81,7 @@ class Geolocation {
       return cast null;
     }), requestPermission: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
       var permissions:Dynamic = cast _Runtime.UNDEFINED;
-      permissions = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('navigator'), 'permissions'), function():Dynamic return cast null), function():Dynamic return cast null);
+      permissions = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions'), function():Dynamic return cast null), function():Dynamic return cast null);
       if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(permissions, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(permissions, 'query')), 'function')))) {
         try {
           var status:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(permissions, 'query', cast ([{ name: 'geolocation' }] : Array<Dynamic>)));
@@ -95,7 +95,7 @@ class Geolocation {
       var permissions:Dynamic = cast _Runtime.UNDEFINED;
       var status:Null<Dynamic> = cast _Runtime.UNDEFINED;
       var handler:Null<Dynamic> = cast _Runtime.UNDEFINED;
-      permissions = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('navigator'), 'permissions'), function():Dynamic return cast null), function():Dynamic return cast null);
+      permissions = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'permissions'), function():Dynamic return cast null), function():Dynamic return cast null);
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(permissions, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(permissions, 'query')), 'function')))) { return cast Geolocation._noopUnsubscribe__geolocation; }
       status = null;
       handler = null;
@@ -151,14 +151,14 @@ class Geolocation {
 
   public static function getWebGeolocation__geolocation():Null<Geolocation> {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
-    return cast _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('navigator'), 'geolocation'), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'geolocation'), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function isGeolocationAvailable():Bool {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast false; }
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('window'), 'isSecureContext'), false)))) { return cast false; }
-    return cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('navigator'), 'geolocation')), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('navigator'), 'geolocation'), null));
+    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(flighthq._internal.backend.DomWindowBackend.field(_Runtime.globalValue('window'), 'isSecureContext'), false)))) { return cast false; }
+    return cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'geolocation')), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'geolocation'), null));
     return cast null;
   }
 

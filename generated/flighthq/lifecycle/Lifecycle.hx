@@ -67,7 +67,7 @@ class Lifecycle {
     _windowFocused = !_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined');
     return cast { getState: function() {
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return cast 'active'; }
-      if (_Runtime.truthy(_Runtime.field(_Runtime.globalValue('document'), 'hidden'))) { return cast 'background'; }
+      if (_Runtime.truthy(flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'hidden'))) { return cast 'background'; }
       return cast _Runtime.select(_windowFocused, function():Dynamic return cast 'active', function():Dynamic return cast 'inactive');
     }, subscribe: function(listener:Dynamic) {
       var onFocus:Dynamic = cast _Runtime.UNDEFINED;
@@ -75,7 +75,7 @@ class Lifecycle {
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined')))) { return cast function() {
       
       }; }
-      (_windowFocused = cast (_Runtime.callProperty(_Runtime.globalValue('document'), 'hasFocus', cast ([] : Array<Dynamic>)) : Dynamic));
+      (_windowFocused = cast (flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'hasFocus', cast ([] : Array<Dynamic>)) : Dynamic));
       onFocus = function() {
         (_windowFocused = cast (true : Dynamic));
         _Runtime.callValue(listener, cast ([] : Array<Dynamic>));
@@ -84,17 +84,17 @@ class Lifecycle {
         (_windowFocused = cast (false : Dynamic));
         _Runtime.callValue(listener, cast ([] : Array<Dynamic>));
       };
-      _Runtime.callProperty(_Runtime.globalValue('document'), 'addEventListener', cast (['visibilitychange', listener] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['pagehide', listener] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['pageshow', listener] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['focus', onFocus] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['blur', onBlur] : Array<Dynamic>));
+      flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'addEventListener', cast (['visibilitychange', listener] : Array<Dynamic>));
+      flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast (['pagehide', listener] : Array<Dynamic>));
+      flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast (['pageshow', listener] : Array<Dynamic>));
+      flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast (['focus', onFocus] : Array<Dynamic>));
+      flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast (['blur', onBlur] : Array<Dynamic>));
       return cast function() {
-        _Runtime.callProperty(_Runtime.globalValue('document'), 'removeEventListener', cast (['visibilitychange', listener] : Array<Dynamic>));
-        _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast (['pagehide', listener] : Array<Dynamic>));
-        _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast (['pageshow', listener] : Array<Dynamic>));
-        _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast (['focus', onFocus] : Array<Dynamic>));
-        _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast (['blur', onBlur] : Array<Dynamic>));
+        flighthq._internal.backend.DomDocumentBackend.call(_Runtime.globalValue('document'), 'removeEventListener', cast (['visibilitychange', listener] : Array<Dynamic>));
+        flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'removeEventListener', cast (['pagehide', listener] : Array<Dynamic>));
+        flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'removeEventListener', cast (['pageshow', listener] : Array<Dynamic>));
+        flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'removeEventListener', cast (['focus', onFocus] : Array<Dynamic>));
+        flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'removeEventListener', cast (['blur', onBlur] : Array<Dynamic>));
       };
     }, getLaunchKind: function() {
       var entries:Dynamic = cast _Runtime.UNDEFINED;
@@ -124,11 +124,11 @@ class Lifecycle {
       onPressureRelieved = function() {
         _Runtime.callValue(listener, cast (['normal'] : Array<Dynamic>));
       };
-      _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['memory-pressure', onPressure] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['memory-pressure-relieved', onPressureRelieved] : Array<Dynamic>));
+      flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast (['memory-pressure', onPressure] : Array<Dynamic>));
+      flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'addEventListener', cast (['memory-pressure-relieved', onPressureRelieved] : Array<Dynamic>));
       return cast function() {
-        _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast (['memory-pressure', onPressure] : Array<Dynamic>));
-        _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast (['memory-pressure-relieved', onPressureRelieved] : Array<Dynamic>));
+        flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'removeEventListener', cast (['memory-pressure', onPressure] : Array<Dynamic>));
+        flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'removeEventListener', cast (['memory-pressure-relieved', onPressureRelieved] : Array<Dynamic>));
       };
     } };
     return cast null;

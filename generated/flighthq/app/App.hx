@@ -96,7 +96,7 @@ class App {
     }, focus: function() {
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) {
         try {
-          _Runtime.callProperty(_Runtime.globalValue('window'), 'focus', cast ([] : Array<Dynamic>));
+          flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'focus', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
         }
       }
@@ -109,10 +109,10 @@ class App {
     }, getExecutablePath: function() {
       return cast '';
     }, getLocale: function() {
-      return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('navigator'), 'language'), function():Dynamic return cast ''), function():Dynamic return cast '');
+      return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'language'), function():Dynamic return cast ''), function():Dynamic return cast '');
     }, getPreferredSystemLanguages: function() {
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.isArray(_Runtime.field(_Runtime.globalValue('navigator'), 'languages'))))) {
-        return cast (cast _Runtime.field(_Runtime.globalValue('navigator'), 'languages') : Array<String>);
+      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.isArray(flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'languages'))))) {
+        return cast (cast flighthq._internal.backend.DomNavigatorBackend.field(_Runtime.globalValue('navigator'), 'languages') : Array<String>);
       }
       return cast cast ([] : Array<Dynamic>);
     }, getSystemLocale: function() {
@@ -124,7 +124,7 @@ class App {
     }, getLoginItem: function() {
       return cast { args: cast ([] : Array<Dynamic>), openAsHidden: false, openAtLogin: false, path: '' };
     }, getName: function() {
-      return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast _Runtime.field(_Runtime.globalValue('document'), 'title'), function():Dynamic return cast '');
+      return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast flighthq._internal.backend.DomDocumentBackend.field(_Runtime.globalValue('document'), 'title'), function():Dynamic return cast '');
     }, getVersion: function() {
       return cast '';
     }, hasSingleInstanceLock: function() {
@@ -136,7 +136,7 @@ class App {
     }, quit: function() {
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) {
         try {
-          _Runtime.callProperty(_Runtime.globalValue('window'), 'close', cast ([] : Array<Dynamic>));
+          flighthq._internal.backend.DomWindowBackend.call(_Runtime.globalValue('window'), 'close', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
         }
       }
