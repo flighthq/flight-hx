@@ -25,6 +25,11 @@ let currentAsyncFunction = false;
 let currentAsyncReturnsNothing = false;
 let currentFinallyStack: IrStatement[] = [];
 
+interface ExtractedAwait {
+  expression: IrExpression;
+  name: string;
+}
+
 export function emitHaxeModule(module: IrModule): string {
   temporaryIndex = 0;
   currentHaxePackage = module.haxePackage ?? 'flighthq';
@@ -64,8 +69,8 @@ export function emitHaxeModule(module: IrModule): string {
   for (const declaration of typeDeclarations) lines.push(...emitDeclaration(declaration), '');
   // Barrel free functions live as public static members of a constructorless class
   // that acts purely as their module namespace (Flight allocates via `create<Type>`,
-  // never `new`). Async is applied per function through the `_Async.make` expression
-  // macro, so no class-level `@:build(jsasync.JSAsync.build())` is needed.
+  // never `new`). Async lowering is applied per function, so the namespace class
+  // requires no class-level build macro.
   //
   // Do not expose namespace classes to JavaScript here. Exposure is an output policy
   // that prevents consumer DCE; the parity harness adds it only to its dedicated JS
@@ -91,9 +96,8 @@ export function emitHaxeModule(module: IrModule): string {
 
 /**
  * Emit a barrel value (free function or variable) as a public static member of the
- * module's namespace class. Async functions are made asynchronous per function via
- * the `_Async.make` expression macro rather than a class-level
- * `@:build(jsasync.JSAsync.build())` macro, keeping the class free of the build.
+ * module's namespace class. Async functions are lowered per function rather than
+ * through class-level build metadata.
  */
 function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' | 'variable' }>): string[] {
   if (declaration.kind === 'variable') {
@@ -143,6 +147,12 @@ function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' 
   }
 
   if (declaration.async) {
+    if (!declaration.haxeBody && canFlatMapStatements(declaration.body)) {
+      return [`${signature} {`, ...indent(emitFlatMapFunctionBody(declaration.body, declaration.parameters)), '}'];
+    }
+    if (!declaration.haxeBody && !statementsContainAwait(declaration.body)) {
+      return [`${signature} {`, ...indent(emitPromiseProtectedBody(bodyLines)), '}'];
+    }
     return [
       `${signature} {`,
       `  return cast flighthq._internal._Async.make(function():${emitType(declaration.returns)} {`,
@@ -282,12 +292,16 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
       lines.push(
         `  ${methodAccess}${static_}function ${safeName(method.name)}${methodGenerics}(${emitParameters(method.parameters)}):${emitType(method.returns)} {`,
       );
-      // Async is applied per method via the `_Async.make` expression macro, so
-      // the class needs no `@:build(jsasync.JSAsync.build())`.
       if (method.async) {
-        lines.push(`    return cast flighthq._internal._Async.make(function():${emitType(method.returns)} {`);
-        lines.push(...indent(indent(indent(bodyLines))));
-        lines.push('    })();');
+        if (canFlatMapStatements(method.body)) {
+          lines.push(...indent(indent(emitFlatMapFunctionBody(method.body, method.parameters))));
+        } else if (!statementsContainAwait(method.body)) {
+          lines.push(...indent(indent(emitPromiseProtectedBody(bodyLines))));
+        } else {
+          lines.push(`    return cast flighthq._internal._Async.make(function():${emitType(method.returns)} {`);
+          lines.push(...indent(indent(indent(bodyLines))));
+          lines.push('    })();');
+        }
       } else {
         lines.push(...indent(indent(bodyLines)));
       }
@@ -371,6 +385,12 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
     }
   }
   if (declaration.async) {
+    if (!declaration.haxeBody && canFlatMapStatements(declaration.body)) {
+      return [`${signature} {`, ...indent(emitFlatMapFunctionBody(declaration.body, declaration.parameters)), '}'];
+    }
+    if (!declaration.haxeBody && !statementsContainAwait(declaration.body)) {
+      return [`${signature} {`, ...indent(emitPromiseProtectedBody(bodyLines)), '}'];
+    }
     return [
       `${signature} {`,
       `  return cast flighthq._internal._Async.make(function():${emitType(declaration.returns)} {`,
@@ -405,6 +425,375 @@ function emitParameters(parameters: IrParameter[]): string {
       return `${prefix}${safeName(parameter.name)}:${emitType(type)}${initializer}`;
     })
     .join(', ');
+}
+
+function emitPromiseProtectedBody(bodyLines: string[]): string[] {
+  return ['return cast flighthq._internal._Async.protect(function():Dynamic {', ...indent(bodyLines), '});'];
+}
+
+function emitFlatMapFunctionBody(statements: IrStatement[], parameters: IrParameter[]): string[] {
+  const previousReturnRequiresValue = currentReturnRequiresValue;
+  const previousContinueIncrement = currentContinueIncrement;
+  const previousAsyncFunction = currentAsyncFunction;
+  const previousAsyncReturnsNothing = currentAsyncReturnsNothing;
+  const previousFinallyStack = currentFinallyStack;
+  currentReturnRequiresValue = true;
+  currentContinueIncrement = undefined;
+  currentAsyncFunction = true;
+  currentAsyncReturnsNothing = false;
+  currentFinallyStack = [];
+  try {
+    const body = emitParameterInitializers(parameters);
+    const variables = statements.flatMap((statement) => (statement.kind === 'variable' ? statement.declarations : []));
+    for (const variable of variables) {
+      body.push(
+        `var ${safeName(variable.name)}:${variable.type ? emitType(variable.type) : 'Dynamic'} = cast _Runtime.UNDEFINED;`,
+      );
+    }
+    body.push(...emitFlatMapStatements(statements));
+    return emitPromiseProtectedBody(body);
+  } finally {
+    currentReturnRequiresValue = previousReturnRequiresValue;
+    currentContinueIncrement = previousContinueIncrement;
+    currentAsyncFunction = previousAsyncFunction;
+    currentAsyncReturnsNothing = previousAsyncReturnsNothing;
+    currentFinallyStack = previousFinallyStack;
+  }
+}
+
+function emitFlatMapStatements(statements: IrStatement[], index = 0): string[] {
+  if (index >= statements.length) {
+    return ['return flighthq._internal._Async.resolve(_Runtime.UNDEFINED);'];
+  }
+  const statement = statements[index]!;
+  const continuation = () => emitFlatMapStatements(statements, index + 1);
+  switch (statement.kind) {
+    case 'variable':
+      return emitFlatMapVariableInitializers(statement.declarations, 0, continuation);
+    case 'expression':
+      return emitAwaitedExpression(statement.expression, (value) => [`${value};`, ...continuation()]);
+    case 'return':
+      return statement.expression
+        ? emitAwaitedExpression(statement.expression, (value) => [
+            `return flighthq._internal._Async.resolve(${value});`,
+          ])
+        : ['return flighthq._internal._Async.resolve(_Runtime.UNDEFINED);'];
+    case 'throw':
+      return emitAwaitedExpression(statement.expression, (value) => [
+        `return flighthq._internal._Async.reject(${value});`,
+      ]);
+    default:
+      throw new Error(`Flat-map lowering does not support statement ${statement.kind}`);
+  }
+}
+
+function emitFlatMapVariableInitializers(
+  declarations: IrVariable[],
+  index: number,
+  continuation: () => string[],
+): string[] {
+  if (index >= declarations.length) return continuation();
+  const declaration = declarations[index]!;
+  const next = () => emitFlatMapVariableInitializers(declarations, index + 1, continuation);
+  if (!declaration.initializer) return next();
+  return emitAwaitedExpression(declaration.initializer, (value) => [
+    `${safeName(declaration.name)} = ${value};`,
+    ...next(),
+  ]);
+}
+
+function emitAwaitedExpression(expression: IrExpression, continuation: (value: string) => string[]): string[] {
+  const awaits: ExtractedAwait[] = [];
+  const normalized = extractAwaits(expression, awaits);
+  let lines = continuation(emitExpression(normalized));
+  for (let index = awaits.length - 1; index >= 0; index -= 1) {
+    const awaited = awaits[index]!;
+    lines = [
+      `return flighthq._internal._Async.flatMap(${emitExpression(awaited.expression)}, function(${awaited.name}:Dynamic):Dynamic {`,
+      ...indent(lines),
+      '});',
+    ];
+  }
+  return lines;
+}
+
+function extractAwaits(expression: IrExpression, awaits: ExtractedAwait[]): IrExpression {
+  if (expression.kind === 'await') {
+    const awaitedExpression = extractAwaits(expression.expression, awaits);
+    const name = `__awaitValue${String(temporaryIndex++)}`;
+    awaits.push({ expression: awaitedExpression, name });
+    return { kind: 'identifier', name };
+  }
+  switch (expression.kind) {
+    case 'array':
+      return { ...expression, elements: expression.elements.map((item) => extractAwaits(item, awaits)) };
+    case 'assignment':
+    case 'binary':
+      return {
+        ...expression,
+        left: extractAwaits(expression.left, awaits),
+        right: extractAwaits(expression.right, awaits),
+      };
+    case 'call':
+      return {
+        ...expression,
+        arguments: expression.arguments.map((item) => extractAwaits(item, awaits)),
+        callee: extractAwaits(expression.callee, awaits),
+      };
+    case 'cast':
+      return { ...expression, expression: extractAwaits(expression.expression, awaits) };
+    case 'conditional':
+      return {
+        ...expression,
+        condition: extractAwaits(expression.condition, awaits),
+        whenFalse: extractAwaits(expression.whenFalse, awaits),
+        whenTrue: extractAwaits(expression.whenTrue, awaits),
+      };
+    case 'element':
+      return {
+        ...expression,
+        index: extractAwaits(expression.index, awaits),
+        object: extractAwaits(expression.object, awaits),
+      };
+    case 'function':
+      return expression;
+    case 'identifier':
+    case 'literal':
+    case 'regexp':
+      return expression;
+    case 'new':
+      return {
+        ...expression,
+        arguments: expression.arguments.map((item) => extractAwaits(item, awaits)),
+        callee: extractAwaits(expression.callee, awaits),
+      };
+    case 'object':
+      return {
+        ...expression,
+        properties: expression.properties.map((property) => {
+          if (property.kind === 'spread') {
+            return { ...property, expression: extractAwaits(property.expression, awaits) };
+          }
+          if (property.kind === 'computedProperty') {
+            return {
+              ...property,
+              key: extractAwaits(property.key, awaits),
+              value: extractAwaits(property.value, awaits),
+            };
+          }
+          return { ...property, value: extractAwaits(property.value, awaits) };
+        }),
+      };
+    case 'property':
+      return { ...expression, object: extractAwaits(expression.object, awaits) };
+    case 'spread':
+      return { ...expression, expression: extractAwaits(expression.expression, awaits) };
+    case 'template':
+      return {
+        ...expression,
+        parts: expression.parts.map((part) => (typeof part === 'string' ? part : extractAwaits(part, awaits))),
+      };
+    case 'unary':
+      return { ...expression, operand: extractAwaits(expression.operand, awaits) };
+  }
+}
+
+function canFlatMapStatements(statements: IrStatement[]): boolean {
+  return statements.every((statement) => {
+    switch (statement.kind) {
+      case 'expression':
+      case 'return':
+      case 'throw':
+        return !statement.expression || expressionSupportsFlatMapExtraction(statement.expression);
+      case 'variable':
+        return statement.declarations.every(
+          (variable) => !variable.initializer || expressionSupportsFlatMapExtraction(variable.initializer),
+        );
+      default:
+        return false;
+    }
+  });
+}
+
+function expressionSupportsFlatMapExtraction(expression: IrExpression): boolean {
+  switch (expression.kind) {
+    case 'await':
+      return expressionSupportsFlatMapExtraction(expression.expression);
+    case 'array':
+      return expression.elements.every(expressionSupportsFlatMapExtraction);
+    case 'assignment':
+      return (
+        (!expressionContainsAwait(expression) || expression.left.kind === 'identifier') &&
+        expressionSupportsFlatMapExtraction(expression.left) &&
+        expressionSupportsFlatMapExtraction(expression.right)
+      );
+    case 'binary':
+      return (
+        (!['&&', '??', '??undefined', '||'].includes(expression.operator) ||
+          !expressionContainsAwait(expression.right)) &&
+        expressionSupportsFlatMapExtraction(expression.left) &&
+        expressionSupportsFlatMapExtraction(expression.right)
+      );
+    case 'call':
+      return (
+        (!(expression.optional || (expression.callee.kind === 'property' && expression.callee.optional)) ||
+          !expression.arguments.some(expressionContainsAwait)) &&
+        expressionSupportsFlatMapExtraction(expression.callee) &&
+        expression.arguments.every(expressionSupportsFlatMapExtraction)
+      );
+    case 'cast':
+    case 'spread':
+      return expressionSupportsFlatMapExtraction(expression.expression);
+    case 'conditional':
+      return (
+        !expressionContainsAwait(expression.whenTrue) &&
+        !expressionContainsAwait(expression.whenFalse) &&
+        expressionSupportsFlatMapExtraction(expression.condition) &&
+        expressionSupportsFlatMapExtraction(expression.whenTrue) &&
+        expressionSupportsFlatMapExtraction(expression.whenFalse)
+      );
+    case 'element':
+      return (
+        expressionSupportsFlatMapExtraction(expression.object) && expressionSupportsFlatMapExtraction(expression.index)
+      );
+    case 'function':
+    case 'identifier':
+    case 'literal':
+    case 'regexp':
+      return true;
+    case 'new':
+      return (
+        expressionSupportsFlatMapExtraction(expression.callee) &&
+        expression.arguments.every(expressionSupportsFlatMapExtraction)
+      );
+    case 'object':
+      return expression.properties.every((property) => {
+        if (property.kind === 'spread') return expressionSupportsFlatMapExtraction(property.expression);
+        if (property.kind === 'computedProperty') {
+          return (
+            expressionSupportsFlatMapExtraction(property.key) && expressionSupportsFlatMapExtraction(property.value)
+          );
+        }
+        return expressionSupportsFlatMapExtraction(property.value);
+      });
+    case 'property':
+      return expressionSupportsFlatMapExtraction(expression.object);
+    case 'template':
+      return expression.parts.every((part) => typeof part === 'string' || expressionSupportsFlatMapExtraction(part));
+    case 'unary':
+      return expressionSupportsFlatMapExtraction(expression.operand);
+  }
+}
+
+function statementsContainAwait(statements: IrStatement[]): boolean {
+  return statements.some(statementContainsAwait);
+}
+
+function statementContainsAwait(statement: IrStatement): boolean {
+  switch (statement.kind) {
+    case 'block':
+      return statementsContainAwait(statement.statements);
+    case 'break':
+    case 'continue':
+      return false;
+    case 'do':
+    case 'while':
+      return expressionContainsAwait(statement.condition) || statementContainsAwait(statement.body);
+    case 'expression':
+    case 'return':
+    case 'throw':
+      return statement.expression ? expressionContainsAwait(statement.expression) : false;
+    case 'for':
+      return (
+        (Array.isArray(statement.initializer)
+          ? statement.initializer.some(
+              (variable) => variable.initializer && expressionContainsAwait(variable.initializer),
+            )
+          : statement.initializer
+            ? expressionContainsAwait(statement.initializer)
+            : false) ||
+        (statement.condition ? expressionContainsAwait(statement.condition) : false) ||
+        (statement.increment ? expressionContainsAwait(statement.increment) : false) ||
+        statementContainsAwait(statement.body)
+      );
+    case 'forOf':
+      return (
+        statement.async ||
+        expressionContainsAwait(statement.iterable) ||
+        statement.bindings.some((variable) => variable.initializer && expressionContainsAwait(variable.initializer)) ||
+        statementContainsAwait(statement.body)
+      );
+    case 'if':
+      return (
+        expressionContainsAwait(statement.condition) ||
+        statementContainsAwait(statement.consequent) ||
+        Boolean(statement.otherwise && statementContainsAwait(statement.otherwise))
+      );
+    case 'switch':
+      return (
+        expressionContainsAwait(statement.expression) ||
+        statement.cases.some(
+          (case_) =>
+            Boolean(case_.expression && expressionContainsAwait(case_.expression)) ||
+            statementsContainAwait(case_.statements),
+        )
+      );
+    case 'try':
+      return (
+        statementContainsAwait(statement.tryBody) ||
+        Boolean(statement.catchBody && statementContainsAwait(statement.catchBody)) ||
+        Boolean(statement.finallyBody && statementContainsAwait(statement.finallyBody))
+      );
+    case 'variable':
+      return statement.declarations.some(
+        (variable) => variable.initializer && expressionContainsAwait(variable.initializer),
+      );
+  }
+}
+
+function expressionContainsAwait(expression: IrExpression): boolean {
+  switch (expression.kind) {
+    case 'await':
+      return true;
+    case 'array':
+      return expression.elements.some(expressionContainsAwait);
+    case 'assignment':
+    case 'binary':
+      return expressionContainsAwait(expression.left) || expressionContainsAwait(expression.right);
+    case 'call':
+    case 'new':
+      return expressionContainsAwait(expression.callee) || expression.arguments.some(expressionContainsAwait);
+    case 'cast':
+    case 'spread':
+      return expressionContainsAwait(expression.expression);
+    case 'conditional':
+      return (
+        expressionContainsAwait(expression.condition) ||
+        expressionContainsAwait(expression.whenTrue) ||
+        expressionContainsAwait(expression.whenFalse)
+      );
+    case 'element':
+      return expressionContainsAwait(expression.object) || expressionContainsAwait(expression.index);
+    case 'function':
+    case 'identifier':
+    case 'literal':
+    case 'regexp':
+      return false;
+    case 'object':
+      return expression.properties.some((property) => {
+        if (property.kind === 'spread') return expressionContainsAwait(property.expression);
+        if (property.kind === 'computedProperty') {
+          return expressionContainsAwait(property.key) || expressionContainsAwait(property.value);
+        }
+        return expressionContainsAwait(property.value);
+      });
+    case 'property':
+      return expressionContainsAwait(expression.object);
+    case 'template':
+      return expression.parts.some((part) => typeof part !== 'string' && expressionContainsAwait(part));
+    case 'unary':
+      return expressionContainsAwait(expression.operand);
+  }
 }
 
 function emitFunctionBody(
@@ -814,11 +1203,24 @@ function emitExpression(expression: IrExpression): string {
     case 'element':
       return `_Runtime.${expression.optional ? 'optionalIndex' : 'getIndex'}(${emitExpression(expression.object)}, ${emitExpression(expression.index)})`;
     case 'function': {
-      // jsasync accepts anonymous function expressions; the surrounding Haxe
-      // variable still provides the binding (including for recursive calls).
       const name = expression.name && !expression.async ? ` ${safeName(expression.name)}` : '';
       const parameters = emitParameters(expression.parameters);
       const returns = expression.returns ? `:${emitType(expression.returns)}` : '';
+      if (expression.async) {
+        const statements: IrStatement[] = expression.expression
+          ? [{ expression: expression.expression, kind: 'return' }]
+          : expression.body;
+        if (canFlatMapStatements(statements)) {
+          const body = indent(emitFlatMapFunctionBody(statements, expression.parameters)).join('\n');
+          return `function${name}(${parameters})${returns} {\n${body}\n}`;
+        }
+        if (!statementsContainAwait(statements)) {
+          const bodyLines = emitFunctionBody(statements, expression.parameters, expression.returns, false);
+          if (expression.returns && !isVoidType(expression.returns)) bodyLines.push('return cast null;');
+          const body = indent(emitPromiseProtectedBody(bodyLines)).join('\n');
+          return `function${name}(${parameters})${returns} {\n${body}\n}`;
+        }
+      }
       if (expression.expression) {
         if (expression.async) {
           const output = `function${name}(${parameters})${returns} {\n#if js\n  return cast ${emitExpression(expression.expression)};\n#else\n  return cast null;\n#end\n}`;

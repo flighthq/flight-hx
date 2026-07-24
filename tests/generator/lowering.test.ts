@@ -245,8 +245,98 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain('_Runtime.voidValue(_Runtime.callValue(task');
     expect(output).toContain('_Runtime.typeofValue(value)');
-    expect(output).toContain('_Async.make(function():flighthq._internal._Promise<String>');
+    expect(output).toContain('function():flighthq._internal._Promise<String>');
+    expect(output).toContain('_Async.protect(function():Dynamic');
     expect(output).toContain('_Runtime.asyncIterator(values)');
+  });
+
+  it('lowers straight-line awaits to ordered flatMap continuations', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        export async function combine(first: Promise<number>, second: Promise<number>): Promise<number> {
+          const left = await first;
+          const right = await second;
+          return left + right;
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'ExampleFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).not.toContain('_Async.make');
+    expect(output).not.toContain('_Async.awaitValue');
+    expect(output).toContain('_Async.protect(function():Dynamic');
+    expect(output).toContain('_Async.flatMap(first, function(__awaitValue');
+    expect(output).toContain('_Async.flatMap(second, function(__awaitValue');
+    expect(output).toContain('_Async.resolve((left + right))');
+
+    const fixtureDirectory = path.resolve('build/haxe-async-fixture');
+    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    rmSync(fixtureDirectory, { force: true, recursive: true });
+    mkdirSync(packageDirectory, { recursive: true });
+    writeFileSync(path.join(packageDirectory, 'ExampleFixture.hx'), output);
+    writeFileSync(
+      path.join(fixtureDirectory, 'Main.hx'),
+      `
+        import flighthq.ExampleFixture.combine;
+        import flighthq._internal._Async;
+        class Main {
+          static function main() {
+            var result = 0;
+            combine(_Async.resolve(4), _Async.resolve(5)).then(function(value) {
+              result = Std.int(value);
+              return value;
+            });
+            if (result != 9) throw 'flatMap await lowering failed';
+          }
+        }
+      `,
+    );
+    expect(() =>
+      execFileSync(
+        'node',
+        ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '-cp', 'generated', '--main', 'Main', '--interp'],
+        {
+          cwd: path.resolve('.'),
+          stdio: 'pipe',
+        },
+      ),
+    ).not.toThrow();
+  });
+
+  it('wraps async functions without awaits as rejected-or-resolved promises', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        export async function constant(): Promise<number> {
+          return 7;
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'ExampleFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(output).not.toContain('_Async.make');
+    expect(output).toContain('_Async.protect(function():Dynamic');
+    expect(output).toContain('_Async.resolve(7.0)');
   });
 
   it('preserves computed object keys as runtime values', () => {
