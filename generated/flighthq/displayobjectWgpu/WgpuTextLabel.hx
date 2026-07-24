@@ -94,7 +94,7 @@ class WgpuTextLabel {
     if (_Runtime.truthy(_Runtime.strictEquals(materialRenderer, null))) { return; }
     textData = _Runtime.callValue(getWgpuRendererData, cast ([_Runtime.field(renderProxy, 'rendererData')] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(textData, null))) { return; }
-    maxTexDim = _Runtime.field(_Runtime.field(_Runtime.field(state, 'device'), 'limits'), 'maxTextureDimension2D');
+    maxTexDim = flighthq._internal.backend.WebGpuLimitsBackend.field(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'limits'), 'maxTextureDimension2D');
     pixelRatio = _Runtime.field(state, 'pixelRatio');
     version = _Runtime.callValue(getNodeLocalContentRevision, cast ([source] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(version, _Runtime.field(textData, 'lastContentId')), function():Dynamic return cast !_Runtime.strictEquals(pixelRatio, _Runtime.field(textData, 'lastPixelRatio'))))) {

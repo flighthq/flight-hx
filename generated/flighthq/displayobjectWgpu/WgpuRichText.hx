@@ -91,7 +91,7 @@ class WgpuRichText {
     _Runtime.callValue(computeRichTextContent, cast ([content, data, _Runtime.callValue(getRichTextPasswordCharacter, cast ([source] : Array<Dynamic>))] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(_Runtime.field(content, 'text'), 'length'), 0.0), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(data, 'background'))), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(data, 'border'))))) { return; }
     result = _Runtime.callValue(WgpuRichText.layoutRichText__wgpuRichText, cast ([source, richTextRuntime, _Runtime.field(content, 'text'), _Runtime.field(content, 'formatRanges'), state] : Array<Dynamic>));
-    maxTexDim = _Runtime.field(_Runtime.field(_Runtime.field(state, 'device'), 'limits'), 'maxTextureDimension2D');
+    maxTexDim = flighthq._internal.backend.WebGpuLimitsBackend.field(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'limits'), 'maxTextureDimension2D');
     pixelRatio = _Runtime.field(state, 'pixelRatio');
     maxLogical = HxMath.floor((maxTexDim / pixelRatio));
     fieldW = HxMath.min(HxMath.ceil(_Runtime.callValue(computeTextBoundsWidth, cast ([data, result] : Array<Dynamic>))), maxLogical);
@@ -196,7 +196,7 @@ class WgpuRichText {
     var measure:Dynamic = cast _Runtime.UNDEFINED;
     var result:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
-    maxTexDim = _Runtime.field(_Runtime.field(_Runtime.field(state, 'device'), 'limits'), 'maxTextureDimension2D');
+    maxTexDim = flighthq._internal.backend.WebGpuLimitsBackend.field(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'limits'), 'maxTextureDimension2D');
     maxLogical = HxMath.floor((maxTexDim / _Runtime.field(state, 'pixelRatio')));
     measure = function(value:String, format:TextFormat) {
       var context:Dynamic = cast _Runtime.UNDEFINED;

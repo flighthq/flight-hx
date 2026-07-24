@@ -23,8 +23,8 @@ class WgpuDebugPrelude {
     binding = _Runtime.callProperty(_Runtime.field(scene, 'materialBindGroups'), 'get', cast ([materialKey] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var stateRuntime:Dynamic = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-      var buffer:Dynamic = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: WgpuDebugPrelude.DEBUG_UNIFORM_BYTES__wgpuDebugPrelude, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
-      var bindGroup:Dynamic = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(pipeline, 'materialBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: buffer } }, { binding: 1.0, resource: _Runtime.field(stateRuntime, 'linearSampler') }, { binding: 2.0, resource: _Runtime.callValue(ensureWgpuPlaceholderTextureView, cast ([state] : Array<Dynamic>)) }] : Array<Dynamic>) }] : Array<Dynamic>));
+      var buffer:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: WgpuDebugPrelude.DEBUG_UNIFORM_BYTES__wgpuDebugPrelude, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
+      var bindGroup:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(pipeline, 'materialBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: buffer } }, { binding: 1.0, resource: _Runtime.field(stateRuntime, 'linearSampler') }, { binding: 2.0, resource: _Runtime.callValue(ensureWgpuPlaceholderTextureView, cast ([state] : Array<Dynamic>)) }] : Array<Dynamic>) }] : Array<Dynamic>));
       (binding = cast ({ bindGroup: bindGroup, buffer: buffer } : Dynamic));
       _Runtime.callProperty(_Runtime.field(scene, 'materialBindGroups'), 'set', cast ([materialKey, binding] : Array<Dynamic>));
     }
@@ -32,7 +32,7 @@ class WgpuDebugPrelude {
     _Runtime.setIndex(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 1.0, far);
     _Runtime.setIndex(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 2.0, normalScale);
     _Runtime.setIndex(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 3.0, 0.0);
-    _Runtime.callProperty(_Runtime.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 'buffer'), 0.0, WgpuDebugPrelude.DEBUG_UNIFORM_BYTES__wgpuDebugPrelude] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 'buffer'), 0.0, WgpuDebugPrelude.DEBUG_UNIFORM_BYTES__wgpuDebugPrelude] : Array<Dynamic>));
     _Runtime.callValue(stashWgpuUvTransform, cast ([state, null] : Array<Dynamic>));
     return cast _Runtime.field(binding, 'bindGroup');
     return cast null;
@@ -48,8 +48,8 @@ class WgpuDebugPrelude {
     var module:Dynamic = cast _Runtime.UNDEFINED;
     var materialBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
     device = _Runtime.field(state, 'device');
-    module = _Runtime.callProperty(device, 'createShaderModule', cast ([{ code: _Runtime.callValue(getWgpuDebugModuleSourceForKey, cast ([key] : Array<Dynamic>)) }] : Array<Dynamic>));
-    materialBindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), buffer: { type: 'uniform' } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), sampler: { type: 'filtering' } }, { binding: 2.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float' } }] : Array<Dynamic>) }] : Array<Dynamic>));
+    module = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: _Runtime.callValue(getWgpuDebugModuleSourceForKey, cast ([key] : Array<Dynamic>)) }] : Array<Dynamic>));
+    materialBindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), buffer: { type: 'uniform' } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), sampler: { type: 'filtering' } }, { binding: 2.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float' } }] : Array<Dynamic>) }] : Array<Dynamic>));
     return cast _Runtime.callValue(createWgpuMeshPipeline, cast ([state, { doubleSided: false, format: format, materialBindGroupLayout: materialBindGroupLayout, module: module }] : Array<Dynamic>));
     return cast null;
   }

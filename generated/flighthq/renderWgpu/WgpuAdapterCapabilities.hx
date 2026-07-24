@@ -17,7 +17,7 @@ class WgpuAdapterCapabilities {
     limits = _Runtime.field(adapter, 'limits');
     supportsFloat32Filterable = _Runtime.callProperty(features, 'has', cast (['float32-filterable'] : Array<Dynamic>));
     supportsTimestampQuery = _Runtime.callProperty(features, 'has', cast (['timestamp-query'] : Array<Dynamic>));
-    maxTextureDimension2D = _Runtime.coalesce(_Runtime.field(limits, 'maxTextureDimension2D'), function():Dynamic return cast 8192.0);
+    maxTextureDimension2D = _Runtime.coalesce(flighthq._internal.backend.WebGpuLimitsBackend.field(limits, 'maxTextureDimension2D'), function():Dynamic return cast 8192.0);
     maxSampleCount = 4.0;
     return cast { maxSampleCount: maxSampleCount, maxTextureDimension2D: maxTextureDimension2D, supportsFloat32Filterable: supportsFloat32Filterable, supportsTimestampQuery: supportsTimestampQuery };
     return cast null;

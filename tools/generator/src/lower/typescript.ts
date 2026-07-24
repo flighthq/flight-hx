@@ -233,6 +233,7 @@ const webGpuDeviceMembers = new Set([
 
 const webGpuQueueMembers = new Set(['copyExternalImageToTexture', 'submit', 'writeBuffer', 'writeTexture']);
 const webGpuCanvasContextMembers = new Set(['configure', 'getCurrentTexture']);
+const webGpuLimitsMembers = new Set(['maxBindGroups', 'maxTextureDimension2D', 'minUniformBufferOffsetAlignment']);
 
 export function lowerTypeScriptSource(
   sourceFile: ts.SourceFile,
@@ -293,6 +294,9 @@ export function lowerTypeScriptSource(
   const webGpuCanvasContextBindingNames = collectPlatformBindingNames(sourceFile, 'GPUCanvasContext', (node, names) =>
     isNamedPlatformValueExpression(node, names, 'context'),
   );
+  const webGpuLimitsBindingNames = collectPlatformBindingNames(sourceFile, 'GPUSupportedLimits', (node, names) =>
+    isNamedPlatformValueExpression(node, names, 'limits'),
+  );
   const webGlBindingNames = collectPlatformBindingNames(sourceFile, 'WebGL2RenderingContext', isWebGlValueExpression);
   const context: LoweringContext = {
     canvasBindingNames,
@@ -308,6 +312,7 @@ export function lowerTypeScriptSource(
     temporaryIndex: 0,
     webGpuCanvasContextBindingNames,
     webGpuDeviceBindingNames,
+    webGpuLimitsBindingNames,
     webGpuQueueBindingNames,
     webGlBindingNames,
     workspaceDirectory,
@@ -522,6 +527,7 @@ function isBoundNamedPlatformExpression(
   if (ts.isIdentifier(node)) {
     const parameter = findEnclosingParameter(node);
     if (parameter?.type?.getText(context.sourceFile).includes(typeName)) return true;
+    if (context.packageName.toLowerCase().includes('wgpu') && node.text === propertyName) return true;
   }
   return isNamedPlatformValueExpression(node, names, propertyName);
 }
@@ -581,6 +587,7 @@ interface LoweringContext {
   temporaryIndex: number;
   webGpuCanvasContextBindingNames: ReadonlySet<string>;
   webGpuDeviceBindingNames: ReadonlySet<string>;
+  webGpuLimitsBindingNames: ReadonlySet<string>;
   webGpuQueueBindingNames: ReadonlySet<string>;
   webGlBindingNames: ReadonlySet<string>;
   workspaceDirectory: string;
@@ -1315,6 +1322,15 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
         context.webGpuCanvasContextBindingNames,
         'context',
       );
+    const objectIsWebGpuLimits =
+      webGpuLimitsMembers.has(node.name.text) &&
+      isBoundNamedPlatformExpression(
+        node.expression,
+        context,
+        'GPUSupportedLimits',
+        context.webGpuLimitsBindingNames,
+        'limits',
+      );
     return {
       binding: webGpuConstantNamespace
         ? 'WebGpuConstantsBackend'
@@ -1326,13 +1342,15 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
               ? 'WebGpuQueueBackend'
               : objectIsWebGpuCanvasContext
                 ? 'WebGpuCanvasContextBackend'
-                : objectIsGlobalObject
-                  ? 'DynamicObject'
-                  : isBoundPlatformExpression(node.expression, context, 'CanvasRenderingContext2D')
-                    ? 'Canvas2dBackend'
-                    : isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
-                      ? 'WebGl2Backend'
-                      : undefined,
+                : objectIsWebGpuLimits
+                  ? 'WebGpuLimitsBackend'
+                  : objectIsGlobalObject
+                    ? 'DynamicObject'
+                    : isBoundPlatformExpression(node.expression, context, 'CanvasRenderingContext2D')
+                      ? 'Canvas2dBackend'
+                      : isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
+                        ? 'WebGl2Backend'
+                        : undefined,
       kind: 'property',
       name: node.name.text,
       object: webGpuConstantNamespace

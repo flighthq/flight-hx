@@ -488,14 +488,20 @@ describe('TypeScript lowering and Haxe emission', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/render-wgpu/src/sample.ts',
       `
-        export function render(device: GPUDevice, context: GPUCanvasContext) {
+        export function render(device: GPUDevice, context: GPUCanvasContext, adapter: GPUAdapter) {
           const queue = device.queue;
           const buffer = device.createBuffer({ size: 4, usage: GPUBufferUsage.COPY_DST });
           queue.writeBuffer(buffer, 0, new Uint8Array([1, 2, 3, 4]));
           context.configure({ device, format: 'rgba8unorm' });
           const texture = context.getCurrentTexture();
           device.queue.submit([]);
-          return { buffer, texture, limits: device.limits };
+          return {
+            buffer,
+            texture,
+            alignment: device.limits.minUniformBufferOffsetAlignment,
+            textureSize: device.limits.maxTextureDimension2D,
+            groups: adapter.limits.maxBindGroups,
+          };
         }
       `,
       ts.ScriptTarget.Latest,
@@ -520,6 +526,13 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("WebGpuCanvasContextBackend.call(context, 'configure'");
     expect(output).toContain("WebGpuCanvasContextBackend.call(context, 'getCurrentTexture'");
     expect(output).toContain("WebGpuDeviceBackend.field(device, 'limits')");
+    expect(output).toContain(
+      "WebGpuLimitsBackend.field(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'limits'), 'minUniformBufferOffsetAlignment')",
+    );
+    expect(output).toContain(
+      "WebGpuLimitsBackend.field(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'limits'), 'maxTextureDimension2D')",
+    );
+    expect(output).toContain("WebGpuLimitsBackend.field(_Runtime.field(adapter, 'limits'), 'maxBindGroups')");
     expect(output).not.toContain("_Runtime.callProperty(device, 'createBuffer'");
     expect(output).not.toContain("_Runtime.callProperty(queue, 'writeBuffer'");
   });

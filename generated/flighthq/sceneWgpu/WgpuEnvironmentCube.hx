@@ -24,7 +24,7 @@ class WgpuEnvironmentCube {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(cube, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(WgpuEnvironmentCube.hasWgpuCubeFacePixels__wgpuEnvironmentCube, cast ([cube] : Array<Dynamic>)))))) { return cast null; }
     size = _Runtime.field(_Runtime.getIndex(_Runtime.field(cube, 'faces'), 0.0), 'width');
     device = _Runtime.field(state, 'device');
-    texture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([size, size, 6.0] : Array<Dynamic>), format: WgpuEnvironmentCube.ENVIRONMENT_CUBE_FORMAT__wgpuEnvironmentCube, usage: (Std.int((Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
+    texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([size, size, 6.0] : Array<Dynamic>), format: WgpuEnvironmentCube.ENVIRONMENT_CUBE_FORMAT__wgpuEnvironmentCube, usage: (Std.int((Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
     {
       var face:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(face, 6.0, '<'))) {

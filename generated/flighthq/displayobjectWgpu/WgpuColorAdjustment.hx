@@ -109,7 +109,7 @@ class WgpuColorAdjustment {
     var module:Dynamic = cast _Runtime.UNDEFINED;
     cached = _Runtime.callProperty(WgpuColorAdjustment._colorTransformModules__wgpuColorAdjustment, 'get', cast ([_Runtime.field(state, 'device')] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast cached; }
-    module = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createShaderModule', cast ([{ code: (_Runtime.callValue(getWgpuQuadBatchPreludeWGSL, cast ([] : Array<Dynamic>)) + WgpuColorAdjustment.COLOR_TRANSFORM_WGSL__wgpuColorAdjustment) }] : Array<Dynamic>));
+    module = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createShaderModule', cast ([{ code: (_Runtime.callValue(getWgpuQuadBatchPreludeWGSL, cast ([] : Array<Dynamic>)) + WgpuColorAdjustment.COLOR_TRANSFORM_WGSL__wgpuColorAdjustment) }] : Array<Dynamic>));
     _Runtime.callProperty(WgpuColorAdjustment._colorTransformModules__wgpuColorAdjustment, 'set', cast ([_Runtime.field(state, 'device'), module] : Array<Dynamic>));
     return cast module;
     return cast null;

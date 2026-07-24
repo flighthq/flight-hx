@@ -60,15 +60,15 @@ class WgpuVideo {
       var __destructure0:Dynamic = runtime;
       var textureBindGroupLayout:Dynamic = _Runtime.field(__destructure0, 'textureBindGroupLayout');
       var linearSampler:Dynamic = _Runtime.field(__destructure0, 'linearSampler');
-      var texture:Dynamic = _Runtime.callProperty(device, 'createTexture', cast ([{ format: 'rgba8unorm', size: cast ([vw, vh, 1.0] : Array<Dynamic>), usage: (Std.int((Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')))) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
+      var texture:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ format: 'rgba8unorm', size: cast ([vw, vh, 1.0] : Array<Dynamic>), usage: (Std.int((Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')))) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
       var view:Dynamic = _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>));
-      var bindGroup:Dynamic = _Runtime.callProperty(device, 'createBindGroup', cast ([{ entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: linearSampler }] : Array<Dynamic>), layout: textureBindGroupLayout }] : Array<Dynamic>));
+      var bindGroup:Dynamic = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: linearSampler }] : Array<Dynamic>), layout: textureBindGroupLayout }] : Array<Dynamic>));
       (entry = cast ({ bindGroup: bindGroup, texture: texture, view: view } : Dynamic));
       _Runtime.setField(videoData, 'entry', entry);
       _Runtime.setField(videoData, 'w', vw);
       _Runtime.setField(videoData, 'h', vh);
     }
-    _Runtime.callProperty(_Runtime.field(_Runtime.field(state, 'device'), 'queue'), 'copyExternalImageToTexture', cast ([{ source: element, flipY: false }, { premultipliedAlpha: false, texture: _Runtime.field(entry, 'texture') }, cast ([vw, vh] : Array<Dynamic>)] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'queue'), 'copyExternalImageToTexture', cast ([{ source: element, flipY: false }, { premultipliedAlpha: false, texture: _Runtime.field(entry, 'texture') }, cast ([vw, vh] : Array<Dynamic>)] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuQuad, cast ([state, renderProxy, entry, 0.0, 0.0, vw, vh, 0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
   }
 

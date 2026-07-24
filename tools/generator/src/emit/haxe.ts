@@ -936,6 +936,7 @@ function emitExpression(expression: IrExpression): string {
         expression.binding === 'WebGl2Backend' ||
         expression.binding === 'WebGpuCanvasContextBackend' ||
         expression.binding === 'WebGpuDeviceBackend' ||
+        expression.binding === 'WebGpuLimitsBackend' ||
         expression.binding === 'WebGpuQueueBackend'
       ) {
         return `flighthq._internal.backend.${expression.binding}.field(${emitExpression(expression.object)}, ${quote(expression.name)})`;

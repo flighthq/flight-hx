@@ -60,6 +60,7 @@ export type IrExpression =
         | 'WebGpuCanvasContextBackend'
         | 'WebGpuConstantsBackend'
         | 'WebGpuDeviceBackend'
+        | 'WebGpuLimitsBackend'
         | 'WebGpuQueueBackend'
         | undefined;
       kind: 'property';
