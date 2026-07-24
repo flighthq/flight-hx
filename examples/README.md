@@ -14,6 +14,16 @@ Each `Main.hx` is a standalone `lime.app.Application`. Every statement of the up
 
 The full scene graph, materials, meshes, labels, and per-frame logic are otherwise a direct port. 3D examples (`scene3d`, `skeleton`) inline the upstream WebGL scene path (`createGlRenderEffectPipeline` → `prepareSceneRender` → `drawGlScene`).
 
+## Prerequisites
+
+Running an example needs a Haxe compiler and the Lime command-line tool on the host. `npm run setup` provisions the repository-local Haxe and the pinned Haxe libraries (including the `lime` classpath used at compile time), but the Lime _command_ that turns a `project.xml` into a build is a separate Haxelib install:
+
+```sh
+haxelib install lime      # provides the `lime` command plus its native ndll
+```
+
+Haxe itself can come from the repo-local toolchain (`npm run setup`), a system package (`apt install haxe`), or npm. The `html5` target compiles to JavaScript and needs no native `lime.ndll`; the desktop targets (`linux`/`windows`/`mac`) additionally require Lime's native library — the prebuilt one from a Lime Haxelib release, or `lime rebuild cpp`.
+
 ## Running
 
 From an example directory, use Lime normally:
