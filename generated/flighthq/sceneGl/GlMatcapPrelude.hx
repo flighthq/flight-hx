@@ -17,12 +17,12 @@ class GlMatcapPrelude {
   public static function bindGlMatcapSurface(state:GlRenderState, program:GlMatcapProgram, tint:LinearColor, matcap:Null<Texture>, alphaCutoff:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(program, 'locTint'), _Runtime.getIndex(tint, 0.0), _Runtime.getIndex(tint, 1.0), _Runtime.getIndex(tint, 2.0), _Runtime.getIndex(tint, 3.0)] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), alphaCutoff] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform4f', cast ([_Runtime.field(program, 'locTint'), _Runtime.getIndex(tint, 0.0), _Runtime.getIndex(tint, 1.0), _Runtime.getIndex(tint, 2.0), _Runtime.getIndex(tint, 3.0)] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), alphaCutoff] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(matcap, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(matcap, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(matcap, 'image')] : Array<Dynamic>))))) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE0')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE0')] : Array<Dynamic>));
       _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(matcap, 'image'), _Runtime.field(matcap, 'sampler')] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locMatcap'), 0.0] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locMatcap'), 0.0] : Array<Dynamic>));
     }
   }
 
@@ -34,7 +34,7 @@ class GlMatcapPrelude {
   public static function compileGlMatcapProgram(gl:Dynamic, key:GlMatcapDefineKey):GlMatcapProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.callValue(getGlMatcapVertexSourceForKey, cast ([key] : Array<Dynamic>)), _Runtime.callValue(getGlMatcapFragmentSourceForKey, cast ([key] : Array<Dynamic>))] : Array<Dynamic>));
-    return cast { locAlphaCutoff: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_alphaCutoff'] : Array<Dynamic>)), locMatcap: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_matcap'] : Array<Dynamic>)), locModel: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_model'] : Array<Dynamic>)), locNormalMatrix: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_normalMatrix'] : Array<Dynamic>)), locTint: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_tint'] : Array<Dynamic>)), locView: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_view'] : Array<Dynamic>)), locViewProjection: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_viewProjection'] : Array<Dynamic>)), program: program };
+    return cast { locAlphaCutoff: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_alphaCutoff'] : Array<Dynamic>)), locMatcap: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_matcap'] : Array<Dynamic>)), locModel: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_model'] : Array<Dynamic>)), locNormalMatrix: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_normalMatrix'] : Array<Dynamic>)), locTint: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_tint'] : Array<Dynamic>)), locView: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_view'] : Array<Dynamic>)), locViewProjection: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_viewProjection'] : Array<Dynamic>)), program: program };
     return cast null;
   }
 

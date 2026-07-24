@@ -21,9 +21,9 @@ class GlFilmGrainEffect {
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'stylization.filmGrain', GlFilmGrainEffect.FILM_GRAIN_FRAGMENT_SRC__glFilmGrainEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_intensity'] : Array<Dynamic>)), intensity] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_size'] : Array<Dynamic>)), HxMath.max(0.0001, size)] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_seed'] : Array<Dynamic>)), seed] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_intensity'] : Array<Dynamic>)), intensity] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_size'] : Array<Dynamic>)), HxMath.max(0.0001, size)] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_seed'] : Array<Dynamic>)), seed] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

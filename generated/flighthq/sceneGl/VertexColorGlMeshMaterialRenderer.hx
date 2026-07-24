@@ -34,7 +34,7 @@ class VertexColorGlMeshMaterialRenderer {
     program = _Runtime.callValue(ensureGlUnlitProgram, cast ([state, _Runtime.callValue(VertexColorGlMeshMaterialRenderer.defineKeyForMaterial__vertexColorGlMeshMaterialRenderer, cast ([vertexColor] : Array<Dynamic>))] : Array<Dynamic>));
     _Runtime.callValue(beginGlMeshDraw, cast ([state, program, _Runtime.andValue(!_Runtime.strictEquals(vertexColor, null), function():Dynamic return cast _Runtime.field(vertexColor, 'doubleSided'))] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshViewProjection, cast ([gl, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttrib4f', cast ([4.0, 1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'vertexAttrib4f', cast ([4.0, 1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(vertexColor, null))) {
       _Runtime.callValue(bindGlUnlitSurface, cast ([state, program, VertexColorGlMeshMaterialRenderer.WHITE__vertexColorGlMeshMaterialRenderer, 1.0, null, 0.5] : Array<Dynamic>));
       return;

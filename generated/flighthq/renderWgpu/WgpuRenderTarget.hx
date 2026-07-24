@@ -60,10 +60,10 @@ class WgpuRenderTarget {
     device = _Runtime.field(state, 'device');
     w = HxMath.max(1.0, HxMath.ceil(width));
     h = HxMath.max(1.0, HxMath.ceil(height));
-    texture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: format, usage: (Std.int((Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'RENDER_ATTACHMENT')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'TEXTURE_BINDING')))) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'COPY_SRC'))) }] : Array<Dynamic>));
+    texture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: format, usage: (Std.int((Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')))) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_SRC'))) }] : Array<Dynamic>));
     view = _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>));
     bindGroup = _Runtime.callValue(buildWgpuRenderTargetBindGroup, cast ([state, view] : Array<Dynamic>));
-    depthStencilTexture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: 'depth24plus-stencil8', usage: _Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'RENDER_ATTACHMENT') }] : Array<Dynamic>));
+    depthStencilTexture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: 'depth24plus-stencil8', usage: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT') }] : Array<Dynamic>));
     depthStencilView = _Runtime.callProperty(depthStencilTexture, 'createView', cast ([] : Array<Dynamic>));
     return cast { bindGroup: bindGroup, texture: texture, view: view, depthStencilTexture: depthStencilTexture, depthStencilView: depthStencilView, format: format, clearColors: cast ([] : Array<Dynamic>), clearDepth: 1.0, width: w, height: h };
     return cast null;
@@ -151,11 +151,11 @@ class WgpuRenderTarget {
     _Runtime.setField(target, 'height', h);
     _Runtime.callProperty(_Runtime.field(target, 'texture'), 'destroy', cast ([] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(target, 'depthStencilTexture'), 'destroy', cast ([] : Array<Dynamic>));
-    newTexture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: format, usage: (Std.int((Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'RENDER_ATTACHMENT')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'TEXTURE_BINDING')))) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'COPY_SRC'))) }] : Array<Dynamic>));
+    newTexture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: format, usage: (Std.int((Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')))) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_SRC'))) }] : Array<Dynamic>));
     _Runtime.setField(target, 'texture', newTexture);
     _Runtime.setField(target, 'view', _Runtime.callProperty(newTexture, 'createView', cast ([] : Array<Dynamic>)));
     _Runtime.setField(target, 'bindGroup', _Runtime.callValue(buildWgpuRenderTargetBindGroup, cast ([state, _Runtime.field(target, 'view')] : Array<Dynamic>)));
-    newDepth = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: 'depth24plus-stencil8', usage: _Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'RENDER_ATTACHMENT') }] : Array<Dynamic>));
+    newDepth = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: 'depth24plus-stencil8', usage: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT') }] : Array<Dynamic>));
     _Runtime.setField(target, 'depthStencilTexture', newDepth);
     _Runtime.setField(target, 'depthStencilView', _Runtime.callProperty(newDepth, 'createView', cast ([] : Array<Dynamic>)));
   }

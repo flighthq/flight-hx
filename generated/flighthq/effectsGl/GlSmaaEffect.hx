@@ -17,8 +17,8 @@ class GlSmaaEffect {
     threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.1);
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'antialiasing.smaa', GlSmaaEffect.SMAA_FRAGMENT_SRC__glSmaaEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_resolution'] : Array<Dynamic>)), _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_threshold'] : Array<Dynamic>)), threshold] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform2f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_resolution'] : Array<Dynamic>)), _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_threshold'] : Array<Dynamic>)), threshold] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

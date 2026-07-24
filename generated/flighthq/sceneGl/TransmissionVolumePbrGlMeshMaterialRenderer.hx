@@ -44,14 +44,14 @@ class TransmissionVolumePbrGlMeshMaterialRenderer {
     _Runtime.callValue(setGlMeshCameraPosition, cast ([gl, _Runtime.field(program, 'locCameraPosition'), camera] : Array<Dynamic>));
     _Runtime.callValue(bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
     _Runtime.callValue(bindGlPbrStandardBlock, cast ([state, program, standard] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), _Runtime.select(!_Runtime.strictEquals(transmission, null), function():Dynamic return cast _Runtime.field(transmission, 'alphaCutoff'), function():Dynamic return cast 0.5)] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), _Runtime.select(!_Runtime.strictEquals(transmission, null), function():Dynamic return cast _Runtime.field(transmission, 'alphaCutoff'), function():Dynamic return cast 0.5)] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(transmission, null))) {
       _Runtime.callValue(unpackColorToLinear, cast ([TransmissionVolumePbrGlMeshMaterialRenderer.scratchRgba__transmissionVolumePbrGlMeshMaterialRenderer, _Runtime.field(transmission, 'attenuationColor')] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locTransmission'), _Runtime.field(transmission, 'transmission')] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform3f', cast ([_Runtime.field(program, 'locAttenuationColor'), _Runtime.getIndex(TransmissionVolumePbrGlMeshMaterialRenderer.scratchRgba__transmissionVolumePbrGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(TransmissionVolumePbrGlMeshMaterialRenderer.scratchRgba__transmissionVolumePbrGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(TransmissionVolumePbrGlMeshMaterialRenderer.scratchRgba__transmissionVolumePbrGlMeshMaterialRenderer, 2.0)] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locTransmission'), _Runtime.field(transmission, 'transmission')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform3f', cast ([_Runtime.field(program, 'locAttenuationColor'), _Runtime.getIndex(TransmissionVolumePbrGlMeshMaterialRenderer.scratchRgba__transmissionVolumePbrGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(TransmissionVolumePbrGlMeshMaterialRenderer.scratchRgba__transmissionVolumePbrGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(TransmissionVolumePbrGlMeshMaterialRenderer.scratchRgba__transmissionVolumePbrGlMeshMaterialRenderer, 2.0)] : Array<Dynamic>));
     } else {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locTransmission'), 0.0] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform3f', cast ([_Runtime.field(program, 'locAttenuationColor'), 1.0, 1.0, 1.0] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locTransmission'), 0.0] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform3f', cast ([_Runtime.field(program, 'locAttenuationColor'), 1.0, 1.0, 1.0] : Array<Dynamic>));
     }
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;

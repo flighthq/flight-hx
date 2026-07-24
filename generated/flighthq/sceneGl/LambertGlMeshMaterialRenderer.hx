@@ -57,18 +57,18 @@ class LambertGlMeshMaterialRenderer {
     var diffuseMap:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     if (_Runtime.truthy(_Runtime.strictEquals(material, null))) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(program, 'locDiffuse'), 1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), 0.5] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform4f', cast ([_Runtime.field(program, 'locDiffuse'), 1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), 0.5] : Array<Dynamic>));
       return;
     }
     _Runtime.callValue(unpackColorToLinear, cast ([LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer, _Runtime.field(material, 'diffuse')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(program, 'locDiffuse'), _Runtime.getIndex(LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer, 2.0), _Runtime.getIndex(LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer, 3.0)] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), _Runtime.field(material, 'alphaCutoff')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform4f', cast ([_Runtime.field(program, 'locDiffuse'), _Runtime.getIndex(LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer, 2.0), _Runtime.getIndex(LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer, 3.0)] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), _Runtime.field(material, 'alphaCutoff')] : Array<Dynamic>));
     diffuseMap = _Runtime.field(material, 'diffuseMap');
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(diffuseMap, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(diffuseMap, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(diffuseMap, 'image')] : Array<Dynamic>))))) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE0')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE0')] : Array<Dynamic>));
       _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(diffuseMap, 'image'), _Runtime.field(diffuseMap, 'sampler')] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locDiffuseMap'), 0.0] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locDiffuseMap'), 0.0] : Array<Dynamic>));
     }
     _Runtime.callValue(bindGlUvTransform, cast ([gl, program, diffuseMap] : Array<Dynamic>));
   }

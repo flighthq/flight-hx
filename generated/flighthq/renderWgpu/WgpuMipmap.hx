@@ -56,7 +56,7 @@ class WgpuMipmap {
     if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(runtime, 'mipmapPipeline'), null))) { return cast _Runtime.field(runtime, 'mipmapPipeline'); }
     __destructure1 = state;
     device = _Runtime.field(__destructure1, 'device');
-    bindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'FRAGMENT'), texture: { sampleType: 'float' } }, { binding: 1.0, visibility: _Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'FRAGMENT'), sampler: { type: 'filtering' } }] : Array<Dynamic>) }] : Array<Dynamic>));
+    bindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float' } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), sampler: { type: 'filtering' } }] : Array<Dynamic>) }] : Array<Dynamic>));
     module = _Runtime.callProperty(device, 'createShaderModule', cast ([{ code: WgpuMipmap.MIPMAP_WGSL__wgpuMipmap }] : Array<Dynamic>));
     pipeline = _Runtime.callProperty(device, 'createRenderPipeline', cast ([{ layout: _Runtime.callProperty(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([bindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>)), vertex: { module: module, entryPoint: 'vs_main' }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
     _Runtime.setField(runtime, 'mipmapBindGroupLayout', bindGroupLayout);

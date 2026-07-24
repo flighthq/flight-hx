@@ -44,7 +44,7 @@ class WgpuParticleEmitter2D {
     __destructure1 = runtime;
     uniformBindGroupLayout = _Runtime.field(__destructure1, 'uniformBindGroupLayout');
     textureBindGroupLayout = _Runtime.field(__destructure1, 'textureBindGroupLayout');
-    instanceBindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'VERTEX'), buffer: { type: 'read-only-storage' } }] : Array<Dynamic>) }] : Array<Dynamic>));
+    instanceBindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX'), buffer: { type: 'read-only-storage' } }] : Array<Dynamic>) }] : Array<Dynamic>));
     pipelineLayout = _Runtime.callProperty(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([uniformBindGroupLayout, textureBindGroupLayout, instanceBindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
     module = _Runtime.callProperty(device, 'createShaderModule', cast ([{ code: WgpuParticleEmitter2D.PARTICLE_SHADER_SRC__wgpuParticleEmitter2D }] : Array<Dynamic>));
     resources = { pipelines: _Runtime.construct(_Runtime.globalValue('Map'), []), pipelineLayout: pipelineLayout, module: module, instanceBindGroupLayout: instanceBindGroupLayout };
@@ -77,7 +77,7 @@ class WgpuParticleEmitter2D {
       _Runtime.callProperty(_Runtime.coalesce(_Runtime.field(runtime, 'retiredBuffers'), function():Dynamic return cast _Runtime.setField(runtime, 'retiredBuffers', cast ([] : Array<Dynamic>))), 'push', cast ([_Runtime.field(runtime, 'particleInstanceBuffer')] : Array<Dynamic>));
     }
     newCapacity = HxMath.max(needed, (_Runtime.orValue(_Runtime.field(runtime, 'particleInstanceCapacity'), function():Dynamic return cast 0.0) * 2.0));
-    _Runtime.setField(runtime, 'particleInstanceBuffer', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: HxMath.max(newCapacity, WgpuParticleEmitter2D.INSTANCE_STRIDE__wgpuParticleEmitter2D), usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'STORAGE')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST'))) }] : Array<Dynamic>)));
+    _Runtime.setField(runtime, 'particleInstanceBuffer', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: HxMath.max(newCapacity, WgpuParticleEmitter2D.INSTANCE_STRIDE__wgpuParticleEmitter2D), usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'STORAGE')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
     _Runtime.setField(runtime, 'particleInstanceCapacity', newCapacity);
     _Runtime.setField(runtime, 'particleInstanceData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [(newCapacity / 4.0)]));
   }

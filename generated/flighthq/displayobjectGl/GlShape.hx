@@ -61,7 +61,7 @@ class GlShape {
     image = _Runtime.field(__destructure0, 'image');
     entry = _Runtime.callProperty(_Runtime.field(runtime, 'imageResourceTextureCache'), 'get', cast ([image] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      flighthq._internal.WebGl2RenderingContext.call(_Runtime.field(state, 'gl'), 'deleteTexture', cast ([_Runtime.field(entry, 'texture')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(_Runtime.field(state, 'gl'), 'deleteTexture', cast ([_Runtime.field(entry, 'texture')] : Array<Dynamic>));
       _Runtime.callProperty(_Runtime.field(runtime, 'imageResourceTextureCache'), 'delete', cast ([image] : Array<Dynamic>));
     }
   }
@@ -118,11 +118,11 @@ class GlShape {
       _Runtime.setField(_Runtime.field(shapeData, 'canvas'), 'width', w);
       _Runtime.setField(_Runtime.field(shapeData, 'canvas'), 'height', h);
       var ctx:Dynamic = _Runtime.field(shapeData, 'ctx');
-      flighthq._internal.CanvasRenderingContext2D.call(ctx, 'clearRect', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
-      flighthq._internal.CanvasRenderingContext2D.call(ctx, 'save', cast ([] : Array<Dynamic>));
-      flighthq._internal.CanvasRenderingContext2D.call(ctx, 'translate', cast ([-_Runtime.field(bounds, 'x'), -_Runtime.field(bounds, 'y')] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'translate', cast ([-_Runtime.field(bounds, 'x'), -_Runtime.field(bounds, 'y')] : Array<Dynamic>));
       _Runtime.callValue(renderCanvasShapeCommands, cast ([ctx, commands] : Array<Dynamic>));
-      flighthq._internal.CanvasRenderingContext2D.call(ctx, 'restore', cast ([] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
       _Runtime.callValue(setImageResourceSource, cast ([_Runtime.field(shapeData, 'image'), _Runtime.field(shapeData, 'canvas')] : Array<Dynamic>));
       _Runtime.setField(shapeData, 'lastContentId', version);
       _Runtime.setField(shapeData, 'lastW', w);

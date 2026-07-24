@@ -19,8 +19,8 @@ class GlWhiteBalanceEffect {
     tint = _Runtime.coalesce(_Runtime.field(effect, 'tint'), function():Dynamic return cast 0.0);
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'colorGrade.whiteBalance', GlWhiteBalanceEffect.WHITE_BALANCE_FRAGMENT_SRC__glWhiteBalanceEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_temperature'] : Array<Dynamic>)), temperature] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_tint'] : Array<Dynamic>)), tint] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_temperature'] : Array<Dynamic>)), temperature] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_tint'] : Array<Dynamic>)), tint] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

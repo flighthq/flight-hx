@@ -137,13 +137,13 @@ class CanvasRenderEffectPipeline {
   public static function presentCanvasRenderEffectResult__canvasRenderEffectPipeline(state:Dynamic, source:Dynamic):Void {
     var context:Dynamic = cast _Runtime.UNDEFINED;
     context = _Runtime.field(state, 'context');
-    flighthq._internal.CanvasRenderingContext2D.call(context, 'save', cast ([] : Array<Dynamic>));
-    flighthq._internal.CanvasRenderingContext2D.call(context, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    flighthq._internal.CanvasRenderingContext2D.setField(context, 'globalCompositeOperation', 'source-over');
-    flighthq._internal.CanvasRenderingContext2D.setField(context, 'globalAlpha', 1.0);
-    flighthq._internal.CanvasRenderingContext2D.setField(context, 'filter', 'none');
-    flighthq._internal.CanvasRenderingContext2D.call(context, 'clearRect', cast ([0.0, 0.0, _Runtime.field(_Runtime.field(state, 'canvas'), 'width'), _Runtime.field(_Runtime.field(state, 'canvas'), 'height')] : Array<Dynamic>));
-    flighthq._internal.CanvasRenderingContext2D.call(context, 'drawImage', cast ([_Runtime.field(source, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
-    flighthq._internal.CanvasRenderingContext2D.call(context, 'restore', cast ([] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'save', cast ([] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalCompositeOperation', 'source-over');
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', 1.0);
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'filter', 'none');
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'clearRect', cast ([0.0, 0.0, _Runtime.field(_Runtime.field(state, 'canvas'), 'width'), _Runtime.field(_Runtime.field(state, 'canvas'), 'height')] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([_Runtime.field(source, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>));
   }
 }

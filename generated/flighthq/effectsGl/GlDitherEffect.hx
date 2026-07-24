@@ -17,8 +17,8 @@ class GlDitherEffect {
     levels = _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 4.0);
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'stylization.dither', GlDitherEffect.DITHER_FRAGMENT_SRC__glDitherEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_levels'] : Array<Dynamic>)), HxMath.max(2.0, levels)] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_resolution'] : Array<Dynamic>)), _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_levels'] : Array<Dynamic>)), HxMath.max(2.0, levels)] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform2f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_resolution'] : Array<Dynamic>)), _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

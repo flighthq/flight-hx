@@ -44,14 +44,14 @@ class SheenPbrGlMeshMaterialRenderer {
     _Runtime.callValue(setGlMeshCameraPosition, cast ([gl, _Runtime.field(program, 'locCameraPosition'), camera] : Array<Dynamic>));
     _Runtime.callValue(bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
     _Runtime.callValue(bindGlPbrStandardBlock, cast ([state, program, standard] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), _Runtime.select(!_Runtime.strictEquals(sheen, null), function():Dynamic return cast _Runtime.field(sheen, 'alphaCutoff'), function():Dynamic return cast 0.5)] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), _Runtime.select(!_Runtime.strictEquals(sheen, null), function():Dynamic return cast _Runtime.field(sheen, 'alphaCutoff'), function():Dynamic return cast 0.5)] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(sheen, null))) {
       _Runtime.callValue(unpackColorToLinear, cast ([SheenPbrGlMeshMaterialRenderer.scratchRgba__sheenPbrGlMeshMaterialRenderer, _Runtime.field(sheen, 'sheenColor')] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform3f', cast ([_Runtime.field(program, 'locSheenColor'), _Runtime.getIndex(SheenPbrGlMeshMaterialRenderer.scratchRgba__sheenPbrGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(SheenPbrGlMeshMaterialRenderer.scratchRgba__sheenPbrGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(SheenPbrGlMeshMaterialRenderer.scratchRgba__sheenPbrGlMeshMaterialRenderer, 2.0)] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locSheenRoughness'), _Runtime.field(sheen, 'sheenRoughness')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform3f', cast ([_Runtime.field(program, 'locSheenColor'), _Runtime.getIndex(SheenPbrGlMeshMaterialRenderer.scratchRgba__sheenPbrGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(SheenPbrGlMeshMaterialRenderer.scratchRgba__sheenPbrGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(SheenPbrGlMeshMaterialRenderer.scratchRgba__sheenPbrGlMeshMaterialRenderer, 2.0)] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locSheenRoughness'), _Runtime.field(sheen, 'sheenRoughness')] : Array<Dynamic>));
     } else {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform3f', cast ([_Runtime.field(program, 'locSheenColor'), 0.0, 0.0, 0.0] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locSheenRoughness'), 0.0] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform3f', cast ([_Runtime.field(program, 'locSheenColor'), 0.0, 0.0, 0.0] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locSheenRoughness'), 0.0] : Array<Dynamic>));
     }
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;

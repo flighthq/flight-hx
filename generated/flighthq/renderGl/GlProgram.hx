@@ -7,11 +7,11 @@ import flighthq._internal._Runtime;
 class GlProgram {
   public static function compileGlShader(gl:Dynamic, type:Float, source:String, label:Dynamic = 'GL'):Dynamic {
     var shader:Dynamic = cast _Runtime.UNDEFINED;
-    shader = flighthq._internal.WebGl2RenderingContext.call(gl, 'createShader', cast ([type] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'shaderSource', cast ([shader, source] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'compileShader', cast ([shader] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(flighthq._internal.WebGl2RenderingContext.call(gl, 'getShaderParameter', cast ([shader, flighthq._internal.WebGl2RenderingContext.field(gl, 'COMPILE_STATUS')] : Array<Dynamic>))))) {
-      throw _Runtime.error('' + Std.string(label) + ' shader compile error: ' + Std.string(flighthq._internal.WebGl2RenderingContext.call(gl, 'getShaderInfoLog', cast ([shader] : Array<Dynamic>))) + '');
+    shader = flighthq._internal.backend.WebGl2Backend.call(gl, 'createShader', cast ([type] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'shaderSource', cast ([shader, source] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'compileShader', cast ([shader] : Array<Dynamic>));
+    if (_Runtime.truthy(!_Runtime.truthy(flighthq._internal.backend.WebGl2Backend.call(gl, 'getShaderParameter', cast ([shader, flighthq._internal.backend.WebGl2Backend.field(gl, 'COMPILE_STATUS')] : Array<Dynamic>))))) {
+      throw _Runtime.error('' + Std.string(label) + ' shader compile error: ' + Std.string(flighthq._internal.backend.WebGl2Backend.call(gl, 'getShaderInfoLog', cast ([shader] : Array<Dynamic>))) + '');
     }
     return cast shader;
     return cast null;
@@ -21,22 +21,22 @@ class GlProgram {
     var vertexShader:Dynamic = cast _Runtime.UNDEFINED;
     var fragmentShader:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
-    vertexShader = _Runtime.callValue(compileGlShader, cast ([gl, flighthq._internal.WebGl2RenderingContext.field(gl, 'VERTEX_SHADER'), vertexSource, label] : Array<Dynamic>));
-    fragmentShader = _Runtime.callValue(compileGlShader, cast ([gl, flighthq._internal.WebGl2RenderingContext.field(gl, 'FRAGMENT_SHADER'), fragmentSource, label] : Array<Dynamic>));
-    program = flighthq._internal.WebGl2RenderingContext.call(gl, 'createProgram', cast ([] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'attachShader', cast ([program, vertexShader] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'attachShader', cast ([program, fragmentShader] : Array<Dynamic>));
+    vertexShader = _Runtime.callValue(compileGlShader, cast ([gl, flighthq._internal.backend.WebGl2Backend.field(gl, 'VERTEX_SHADER'), vertexSource, label] : Array<Dynamic>));
+    fragmentShader = _Runtime.callValue(compileGlShader, cast ([gl, flighthq._internal.backend.WebGl2Backend.field(gl, 'FRAGMENT_SHADER'), fragmentSource, label] : Array<Dynamic>));
+    program = flighthq._internal.backend.WebGl2Backend.call(gl, 'createProgram', cast ([] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'attachShader', cast ([program, vertexShader] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'attachShader', cast ([program, fragmentShader] : Array<Dynamic>));
     _Runtime.callValue(linkGlProgram, cast ([gl, program, label] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteShader', cast ([vertexShader] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteShader', cast ([fragmentShader] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteShader', cast ([vertexShader] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteShader', cast ([fragmentShader] : Array<Dynamic>));
     return cast program;
     return cast null;
   }
 
   public static function linkGlProgram(gl:Dynamic, program:Dynamic, label:Dynamic = 'GL'):Void {
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'linkProgram', cast ([program] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(flighthq._internal.WebGl2RenderingContext.call(gl, 'getProgramParameter', cast ([program, flighthq._internal.WebGl2RenderingContext.field(gl, 'LINK_STATUS')] : Array<Dynamic>))))) {
-      throw _Runtime.error('' + Std.string(label) + ' program link error: ' + Std.string(flighthq._internal.WebGl2RenderingContext.call(gl, 'getProgramInfoLog', cast ([program] : Array<Dynamic>))) + '');
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'linkProgram', cast ([program] : Array<Dynamic>));
+    if (_Runtime.truthy(!_Runtime.truthy(flighthq._internal.backend.WebGl2Backend.call(gl, 'getProgramParameter', cast ([program, flighthq._internal.backend.WebGl2Backend.field(gl, 'LINK_STATUS')] : Array<Dynamic>))))) {
+      throw _Runtime.error('' + Std.string(label) + ' program link error: ' + Std.string(flighthq._internal.backend.WebGl2Backend.call(gl, 'getProgramInfoLog', cast ([program] : Array<Dynamic>))) + '');
     }
   }
 }

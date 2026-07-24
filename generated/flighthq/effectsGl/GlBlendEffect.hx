@@ -34,9 +34,9 @@ class GlBlendEffect {
       modeLoc = _Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_mode'] : Array<Dynamic>));
       opacityLoc = _Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_opacity'] : Array<Dynamic>));
       hasBackdropLoc = _Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_hasBackdrop'] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(modeLoc, null))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([modeLoc, modeIndex] : Array<Dynamic>)); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(opacityLoc, null))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([opacityLoc, opacity] : Array<Dynamic>)); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(hasBackdropLoc, null))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([hasBackdropLoc, _Runtime.select(hasBackdrop, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(modeLoc, null))) { flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([modeLoc, modeIndex] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(opacityLoc, null))) { flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([opacityLoc, opacity] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(hasBackdropLoc, null))) { flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([hasBackdropLoc, _Runtime.select(hasBackdrop, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)] : Array<Dynamic>)); }
     }] : Array<Dynamic>));
   }
 

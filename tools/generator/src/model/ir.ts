@@ -52,7 +52,7 @@ export type IrExpression =
   | { kind: 'new'; arguments: IrExpression[]; callee: IrExpression }
   | { kind: 'object'; properties: IrObjectMember[] }
   | {
-      binding?: 'Canvas2dBackend' | 'DynamicObject' | 'WebGl2Backend' | undefined;
+      binding?: 'Canvas2dBackend' | 'DynamicObject' | 'WebGl2Backend' | 'WebGpuConstantsBackend' | undefined;
       kind: 'property';
       name: string;
       object: IrExpression;

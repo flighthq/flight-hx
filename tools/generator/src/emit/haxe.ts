@@ -920,6 +920,9 @@ function emitExpression(expression: IrExpression): string {
       if (expression.binding === 'DynamicObject') {
         return `flighthq._internal.DynamicObject.field(${quote(expression.name)})`;
       }
+      if (expression.binding === 'WebGpuConstantsBackend') {
+        return `flighthq._internal.backend.WebGpuConstantsBackend.value(${emitExpression(expression.object)}, ${quote(expression.name)})`;
+      }
       if (expression.binding === 'Canvas2dBackend' || expression.binding === 'WebGl2Backend') {
         return `flighthq._internal.backend.${expression.binding}.field(${emitExpression(expression.object)}, ${quote(expression.name)})`;
       }

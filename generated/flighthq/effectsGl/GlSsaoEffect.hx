@@ -19,9 +19,9 @@ class GlSsaoEffect {
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'atmospheric.ssao', GlSsaoEffect.SSAO_FRAGMENT_SRC__glSsaoEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_resolution'] : Array<Dynamic>)), _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_radius'] : Array<Dynamic>)), radius] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_intensity'] : Array<Dynamic>)), intensity] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform2f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_resolution'] : Array<Dynamic>)), _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_radius'] : Array<Dynamic>)), radius] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_intensity'] : Array<Dynamic>)), intensity] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

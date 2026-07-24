@@ -12,8 +12,8 @@ class GlWireframeUpload {
   public static function destroyGlWireframeUpload(state:GlRenderState, upload:flighthq.types.GlWireframeProgram.GlWireframeUpload):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteVertexArray', cast ([_Runtime.field(upload, 'vao')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(upload, 'lineIndexBuffer')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteVertexArray', cast ([_Runtime.field(upload, 'vao')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteBuffer', cast ([_Runtime.field(upload, 'lineIndexBuffer')] : Array<Dynamic>));
   }
 
   public static function ensureGlWireframeUpload(state:GlRenderState, geometry:MeshGeometry):flighthq.types.GlWireframeProgram.GlWireframeUpload {
@@ -35,25 +35,25 @@ class GlWireframeUpload {
     }
     upload = _Runtime.callProperty(perState, 'get', cast ([(cast geometry : MeshGeometry)] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(upload, 'version'), _Runtime.field(geometry, 'version'))))) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'bindVertexArray', cast ([_Runtime.field(upload, 'vao')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'bindVertexArray', cast ([_Runtime.field(upload, 'vao')] : Array<Dynamic>));
       return cast upload;
     }
     lineIndices = _Runtime.callValue(GlWireframeUpload.buildLineIndices__glWireframeUpload, cast ([geometry] : Array<Dynamic>));
-    indexType = _Runtime.select(_Runtime.isInstanceOf(lineIndices, _Runtime.globalValue('Uint32Array')), function():Dynamic return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'UNSIGNED_INT'), function():Dynamic return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'UNSIGNED_SHORT'));
+    indexType = _Runtime.select(_Runtime.isInstanceOf(lineIndices, _Runtime.globalValue('Uint32Array')), function():Dynamic return cast flighthq._internal.backend.WebGl2Backend.field(gl, 'UNSIGNED_INT'), function():Dynamic return cast flighthq._internal.backend.WebGl2Backend.field(gl, 'UNSIGNED_SHORT'));
     if (_Runtime.truthy(_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (upload = cast ({ indexType: indexType, lineIndexBuffer: flighthq._internal.WebGl2RenderingContext.call(gl, 'createBuffer', cast ([] : Array<Dynamic>)), vao: flighthq._internal.WebGl2RenderingContext.call(gl, 'createVertexArray', cast ([] : Array<Dynamic>)), version: -1.0 } : Dynamic));
+      (upload = cast ({ indexType: indexType, lineIndexBuffer: flighthq._internal.backend.WebGl2Backend.call(gl, 'createBuffer', cast ([] : Array<Dynamic>)), vao: flighthq._internal.backend.WebGl2Backend.call(gl, 'createVertexArray', cast ([] : Array<Dynamic>)), version: -1.0 } : Dynamic));
       _Runtime.callProperty(perState, 'set', cast ([(cast geometry : MeshGeometry), upload] : Array<Dynamic>));
     }
     _Runtime.setField(upload, 'indexType', indexType);
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindVertexArray', cast ([_Runtime.field(upload, 'vao')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(meshUpload, 'vertexBuffer')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindVertexArray', cast ([_Runtime.field(upload, 'vao')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), _Runtime.field(meshUpload, 'vertexBuffer')] : Array<Dynamic>));
     stride = _Runtime.field(_Runtime.field(geometry, 'layout'), 'stride');
     position = _Runtime.find(_Runtime.field(_Runtime.field(geometry, 'layout'), 'attributes'), function(a:Dynamic) return _Runtime.strictEquals(_Runtime.field(a, 'semantic'), 'position'));
     byteOffset = _Runtime.select(!_Runtime.strictEquals(position, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(position, 'byteOffset'), function():Dynamic return cast 0.0);
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([0.0] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([0.0, 3.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, stride, byteOffset] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ELEMENT_ARRAY_BUFFER'), _Runtime.field(upload, 'lineIndexBuffer')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ELEMENT_ARRAY_BUFFER'), lineIndices, flighthq._internal.WebGl2RenderingContext.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'enableVertexAttribArray', cast ([0.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'vertexAttribPointer', cast ([0.0, 3.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'FLOAT'), false, stride, byteOffset] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ELEMENT_ARRAY_BUFFER'), _Runtime.field(upload, 'lineIndexBuffer')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bufferData', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ELEMENT_ARRAY_BUFFER'), lineIndices, flighthq._internal.backend.WebGl2Backend.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
     _Runtime.setField(upload, 'version', _Runtime.field(geometry, 'version'));
     return cast upload;
     return cast null;

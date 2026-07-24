@@ -32,12 +32,12 @@ class GlRenderState {
     shaderLoc = _Runtime.callValue(compileDefaultGlProgram, cast ([gl] : Array<Dynamic>));
     matrixArray = _Runtime.construct(_Runtime.globalValue('Float32Array'), [9.0]);
     defaultBitmapShader = _Runtime.callValue(createDefaultGlBitmapShader, cast ([shaderLoc, matrixArray] : Array<Dynamic>));
-    quadIndexBuffer = flighthq._internal.WebGl2RenderingContext.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ELEMENT_ARRAY_BUFFER'), quadIndexBuffer] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ELEMENT_ARRAY_BUFFER'), new flighthq._internal._UInt16Array(cast ([0.0, 1.0, 2.0, 0.0, 2.0, 3.0] : Array<Dynamic>)), flighthq._internal.WebGl2RenderingContext.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
-    quadVertexBuffer = flighthq._internal.WebGl2RenderingContext.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), quadVertexBuffer] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), 64.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
+    quadIndexBuffer = flighthq._internal.backend.WebGl2Backend.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ELEMENT_ARRAY_BUFFER'), quadIndexBuffer] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bufferData', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ELEMENT_ARRAY_BUFFER'), new flighthq._internal._UInt16Array(cast ([0.0, 1.0, 2.0, 0.0, 2.0, 3.0] : Array<Dynamic>)), flighthq._internal.backend.WebGl2Backend.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
+    quadVertexBuffer = flighthq._internal.backend.WebGl2Backend.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), quadVertexBuffer] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bufferData', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), 64.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
     state = (cast _Runtime.callValue(_createRenderState, cast ([{ allowSmoothing: _Runtime.coalesce(_Runtime.field(options, 'imageSmoothingEnabled'), function():Dynamic return cast true), pixelRatio: _Runtime.coalesce(_Runtime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)), roundPixels: _Runtime.coalesce(_Runtime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.field(options, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : flighthq.types.GlRenderState);
     _Runtime.setField(state, 'applyBlendMode', null);
     _Runtime.setField((cast state : { var canvas:Dynamic; }), 'canvas', canvas);
@@ -72,9 +72,9 @@ class GlRenderState {
     _Runtime.setField(runtime, 'matrixArray', matrixArray);
     _Runtime.setField(runtime, 'scissorStack', cast ([] : Array<Dynamic>));
     _Runtime.setField(runtime, 'clipForms', cast ([] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'enable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'BLEND')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'blendFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE'), flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE_MINUS_SRC_ALPHA')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'disable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'DEPTH_TEST')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'enable', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'BLEND')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'blendFunc', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ONE'), flighthq._internal.backend.WebGl2Backend.field(gl, 'ONE_MINUS_SRC_ALPHA')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'disable', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'DEPTH_TEST')] : Array<Dynamic>));
     return cast state;
     return cast null;
   }
@@ -98,16 +98,16 @@ class GlRenderState {
     if (_Runtime.truthy(_Runtime.field(runtime, 'colorTransformInstancedShader'))) { _Runtime.callProperty(programs, 'add', cast ([_Runtime.field(_Runtime.field(runtime, 'colorTransformInstancedShader'), 'program')] : Array<Dynamic>)); }
     if (_Runtime.truthy(_Runtime.field(runtime, 'uniformColorTransformShader'))) { _Runtime.callProperty(programs, 'add', cast ([_Runtime.field(_Runtime.field(runtime, 'uniformColorTransformShader'), 'program')] : Array<Dynamic>)); }
     for (program in _Runtime.iterable(programs)) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteProgram', cast ([program] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteProgram', cast ([program] : Array<Dynamic>));
     }
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'quadVertexBuffer')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'quadIndexBuffer')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.field(runtime, 'particleCornerBuffer'))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'particleCornerBuffer')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.field(runtime, 'particleInstanceBuffer'))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'particleInstanceBuffer')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.field(runtime, 'quadBatchCornerBuffer'))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'quadBatchCornerBuffer')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.field(runtime, 'spriteBatchInstanceBuffer'))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'spriteBatchInstanceBuffer')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.field(runtime, 'spriteBatchMaterialBuffer'))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'spriteBatchMaterialBuffer')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.field(runtime, 'spriteBatchColorTransformBuffer'))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'spriteBatchColorTransformBuffer')] : Array<Dynamic>)); }
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'quadVertexBuffer')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'quadIndexBuffer')] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.field(runtime, 'particleCornerBuffer'))) { flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'particleCornerBuffer')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.field(runtime, 'particleInstanceBuffer'))) { flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'particleInstanceBuffer')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.field(runtime, 'quadBatchCornerBuffer'))) { flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'quadBatchCornerBuffer')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.field(runtime, 'spriteBatchInstanceBuffer'))) { flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'spriteBatchInstanceBuffer')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.field(runtime, 'spriteBatchMaterialBuffer'))) { flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'spriteBatchMaterialBuffer')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.field(runtime, 'spriteBatchColorTransformBuffer'))) { flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'spriteBatchColorTransformBuffer')] : Array<Dynamic>)); }
   }
 
   public static function getGlRenderStateRuntime(state:flighthq.types.GlRenderState):GlRenderStateRuntime {

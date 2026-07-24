@@ -16,19 +16,19 @@ class GlDebugPrelude {
   public static function bindGlDebugNormalMap(state:GlRenderState, program:GlDebugProgram, normalMap:Null<Texture>, normalScale:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locNormalScale'), normalScale] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locNormalScale'), normalScale] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(normalMap, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(normalMap, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(normalMap, 'image')] : Array<Dynamic>))))) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE0')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE0')] : Array<Dynamic>));
       _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(normalMap, 'image'), _Runtime.field(normalMap, 'sampler')] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locNormalMap'), 0.0] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locNormalMap'), 0.0] : Array<Dynamic>));
     }
   }
 
   public static function bindGlDebugRange(state:GlRenderState, program:GlDebugProgram, near:Float, far:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locNear'), near] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locFar'), far] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locNear'), near] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locFar'), far] : Array<Dynamic>));
   }
 
   public static function buildGlDebugDefineKey(key:GlDebugDefineKey):String {
@@ -39,7 +39,7 @@ class GlDebugPrelude {
   public static function compileGlDebugProgram(gl:Dynamic, key:GlDebugDefineKey):GlDebugProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.callValue(getGlDebugVertexSourceForKey, cast ([key] : Array<Dynamic>)), _Runtime.callValue(getGlDebugFragmentSourceForKey, cast ([key] : Array<Dynamic>))] : Array<Dynamic>));
-    return cast { locFar: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_far'] : Array<Dynamic>)), locModel: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_model'] : Array<Dynamic>)), locNear: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_near'] : Array<Dynamic>)), locNormalMap: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_normalMap'] : Array<Dynamic>)), locNormalMatrix: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_normalMatrix'] : Array<Dynamic>)), locNormalScale: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_normalScale'] : Array<Dynamic>)), locViewProjection: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_viewProjection'] : Array<Dynamic>)), program: program };
+    return cast { locFar: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_far'] : Array<Dynamic>)), locModel: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_model'] : Array<Dynamic>)), locNear: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_near'] : Array<Dynamic>)), locNormalMap: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_normalMap'] : Array<Dynamic>)), locNormalMatrix: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_normalMatrix'] : Array<Dynamic>)), locNormalScale: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_normalScale'] : Array<Dynamic>)), locViewProjection: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_viewProjection'] : Array<Dynamic>)), program: program };
     return cast null;
   }
 

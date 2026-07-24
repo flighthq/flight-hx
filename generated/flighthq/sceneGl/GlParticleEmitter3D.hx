@@ -44,19 +44,19 @@ class GlParticleEmitter3D {
     var indexBuffer:Dynamic = cast _Runtime.UNDEFINED;
     var instanceBuffer:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(createGlProgram, cast ([gl, GlParticleEmitter3D.PARTICLE_3D_VS__glParticleEmitter3D, GlParticleEmitter3D.PARTICLE_3D_FS__glParticleEmitter3D, 'ParticleEmitter3D'] : Array<Dynamic>));
-    vao = flighthq._internal.WebGl2RenderingContext.call(gl, 'createVertexArray', cast ([] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindVertexArray', cast ([vao] : Array<Dynamic>));
+    vao = flighthq._internal.backend.WebGl2Backend.call(gl, 'createVertexArray', cast ([] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindVertexArray', cast ([vao] : Array<Dynamic>));
     cornerData = _Runtime.construct(_Runtime.globalValue('Float32Array'), [cast ([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0] : Array<Dynamic>)]);
-    cornerBuffer = flighthq._internal.WebGl2RenderingContext.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), cornerBuffer] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), cornerData, flighthq._internal.WebGl2RenderingContext.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
+    cornerBuffer = flighthq._internal.backend.WebGl2Backend.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), cornerBuffer] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bufferData', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), cornerData, flighthq._internal.backend.WebGl2Backend.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
     indexData = new flighthq._internal._UInt16Array(cast ([0.0, 1.0, 2.0, 0.0, 2.0, 3.0] : Array<Dynamic>));
-    indexBuffer = flighthq._internal.WebGl2RenderingContext.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ELEMENT_ARRAY_BUFFER'), indexBuffer] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ELEMENT_ARRAY_BUFFER'), indexData, flighthq._internal.WebGl2RenderingContext.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
-    instanceBuffer = flighthq._internal.WebGl2RenderingContext.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindVertexArray', cast ([null] : Array<Dynamic>));
-    return cast { cornerBuffer: cornerBuffer, indexBuffer: indexBuffer, instanceBuffer: instanceBuffer, instanceData: _Runtime.construct(_Runtime.globalValue('Float32Array'), [0.0]), locCameraRight: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_cameraRight'] : Array<Dynamic>)), locCameraUp: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_cameraUp'] : Array<Dynamic>)), locColor: 4.0, locCorner: flighthq._internal.WebGl2RenderingContext.call(gl, 'getAttribLocation', cast ([program, 'a_corner'] : Array<Dynamic>)), locCosScale: 2.0, locHasTexture: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_hasTexture'] : Array<Dynamic>)), locPos: 1.0, locSinScale: 3.0, locSize: 6.0, locTexture: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_texture'] : Array<Dynamic>)), locUvRect: 5.0, locViewProjection: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_viewProjection'] : Array<Dynamic>)), program: program, vao: vao };
+    indexBuffer = flighthq._internal.backend.WebGl2Backend.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ELEMENT_ARRAY_BUFFER'), indexBuffer] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bufferData', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ELEMENT_ARRAY_BUFFER'), indexData, flighthq._internal.backend.WebGl2Backend.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
+    instanceBuffer = flighthq._internal.backend.WebGl2Backend.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindVertexArray', cast ([null] : Array<Dynamic>));
+    return cast { cornerBuffer: cornerBuffer, indexBuffer: indexBuffer, instanceBuffer: instanceBuffer, instanceData: _Runtime.construct(_Runtime.globalValue('Float32Array'), [0.0]), locCameraRight: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_cameraRight'] : Array<Dynamic>)), locCameraUp: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_cameraUp'] : Array<Dynamic>)), locColor: 4.0, locCorner: flighthq._internal.backend.WebGl2Backend.call(gl, 'getAttribLocation', cast ([program, 'a_corner'] : Array<Dynamic>)), locCosScale: 2.0, locHasTexture: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_hasTexture'] : Array<Dynamic>)), locPos: 1.0, locSinScale: 3.0, locSize: 6.0, locTexture: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_texture'] : Array<Dynamic>)), locUvRect: 5.0, locViewProjection: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, 'u_viewProjection'] : Array<Dynamic>)), program: program, vao: vao };
     return cast null;
   }
 
@@ -77,8 +77,8 @@ class GlParticleEmitter3D {
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(shader, 'instanceData'), 'length'), needed, '>='))) { return; }
     newSize = HxMath.max(needed, (_Runtime.field(_Runtime.field(shader, 'instanceData'), 'length') * 2.0));
     _Runtime.setField(shader, 'instanceData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [newSize]));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(shader, 'instanceBuffer')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), (newSize * 4.0), flighthq._internal.WebGl2RenderingContext.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), _Runtime.field(shader, 'instanceBuffer')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bufferData', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), (newSize * 4.0), flighthq._internal.backend.WebGl2Backend.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
   }
 
   public static function collectParticleEmitter3DNodes__glParticleEmitter3D(node:NodeAny, out:Array<ParticleEmitter3D>):Void {
@@ -103,16 +103,16 @@ class GlParticleEmitter3D {
     {
       var __switchValue = mode;
       if (__switchValue == 'add') {
-        flighthq._internal.WebGl2RenderingContext.call(gl, 'blendFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE'), flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE')] : Array<Dynamic>));
+        flighthq._internal.backend.WebGl2Backend.call(gl, 'blendFunc', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ONE'), flighthq._internal.backend.WebGl2Backend.field(gl, 'ONE')] : Array<Dynamic>));
       }
       else if (__switchValue == 'multiply') {
-        flighthq._internal.WebGl2RenderingContext.call(gl, 'blendFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'DST_COLOR'), flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE_MINUS_SRC_ALPHA')] : Array<Dynamic>));
+        flighthq._internal.backend.WebGl2Backend.call(gl, 'blendFunc', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'DST_COLOR'), flighthq._internal.backend.WebGl2Backend.field(gl, 'ONE_MINUS_SRC_ALPHA')] : Array<Dynamic>));
       }
       else if (__switchValue == 'screen') {
-        flighthq._internal.WebGl2RenderingContext.call(gl, 'blendFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE'), flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE_MINUS_SRC_COLOR')] : Array<Dynamic>));
+        flighthq._internal.backend.WebGl2Backend.call(gl, 'blendFunc', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ONE'), flighthq._internal.backend.WebGl2Backend.field(gl, 'ONE_MINUS_SRC_COLOR')] : Array<Dynamic>));
       }
       else  {
-        flighthq._internal.WebGl2RenderingContext.call(gl, 'blendFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE'), flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE_MINUS_SRC_ALPHA')] : Array<Dynamic>));
+        flighthq._internal.backend.WebGl2Backend.call(gl, 'blendFunc', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ONE'), flighthq._internal.backend.WebGl2Backend.field(gl, 'ONE_MINUS_SRC_ALPHA')] : Array<Dynamic>));
       }
     }
   }
@@ -222,41 +222,41 @@ class GlParticleEmitter3D {
       }
     }
     if (_Runtime.truthy(_Runtime.strictEquals(drawCount, 0.0))) { return; }
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindVertexArray', cast ([_Runtime.field(shader, 'vao')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(shader, 'instanceBuffer')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferSubData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), 0.0, instanceData, 0.0, (drawCount * GlParticleEmitter3D.INSTANCE_FLOATS__glParticleEmitter3D)] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([_Runtime.field(shader, 'locHasTexture'), _Runtime.select(hasAtlas, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindVertexArray', cast ([_Runtime.field(shader, 'vao')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), _Runtime.field(shader, 'instanceBuffer')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bufferSubData', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), 0.0, instanceData, 0.0, (drawCount * GlParticleEmitter3D.INSTANCE_FLOATS__glParticleEmitter3D)] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([_Runtime.field(shader, 'locHasTexture'), _Runtime.select(hasAtlas, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)] : Array<Dynamic>));
     if (_Runtime.truthy(hasAtlas)) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE0')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE0')] : Array<Dynamic>));
       _Runtime.callValue(bindGlTexture, cast ([state, _Runtime.field(_Runtime.field(atlas, 'image'), 'source')] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([_Runtime.field(shader, 'locTexture'), 0.0] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([_Runtime.field(shader, 'locTexture'), 0.0] : Array<Dynamic>));
     }
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(shader, 'cornerBuffer')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(shader, 'locCorner')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(shader, 'locCorner'), 2.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, 8.0, 0.0] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribDivisor', cast ([_Runtime.field(shader, 'locCorner'), 0.0] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(shader, 'instanceBuffer')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(shader, 'locPos')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(shader, 'locPos'), 3.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, GlParticleEmitter3D.INSTANCE_STRIDE__glParticleEmitter3D, 0.0] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribDivisor', cast ([_Runtime.field(shader, 'locPos'), 1.0] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(shader, 'locCosScale')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(shader, 'locCosScale'), 1.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, GlParticleEmitter3D.INSTANCE_STRIDE__glParticleEmitter3D, 12.0] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribDivisor', cast ([_Runtime.field(shader, 'locCosScale'), 1.0] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(shader, 'locSinScale')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(shader, 'locSinScale'), 1.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, GlParticleEmitter3D.INSTANCE_STRIDE__glParticleEmitter3D, 16.0] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribDivisor', cast ([_Runtime.field(shader, 'locSinScale'), 1.0] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(shader, 'locColor')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(shader, 'locColor'), 4.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, GlParticleEmitter3D.INSTANCE_STRIDE__glParticleEmitter3D, 20.0] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribDivisor', cast ([_Runtime.field(shader, 'locColor'), 1.0] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(shader, 'locUvRect')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(shader, 'locUvRect'), 4.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, GlParticleEmitter3D.INSTANCE_STRIDE__glParticleEmitter3D, 36.0] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribDivisor', cast ([_Runtime.field(shader, 'locUvRect'), 1.0] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(shader, 'locSize')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(shader, 'locSize'), 2.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, GlParticleEmitter3D.INSTANCE_STRIDE__glParticleEmitter3D, 52.0] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribDivisor', cast ([_Runtime.field(shader, 'locSize'), 1.0] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ELEMENT_ARRAY_BUFFER'), _Runtime.field(shader, 'indexBuffer')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'drawElementsInstanced', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TRIANGLES'), 6.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'UNSIGNED_SHORT'), 0.0, drawCount] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindVertexArray', cast ([null] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), _Runtime.field(shader, 'cornerBuffer')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(shader, 'locCorner')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(shader, 'locCorner'), 2.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'FLOAT'), false, 8.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'vertexAttribDivisor', cast ([_Runtime.field(shader, 'locCorner'), 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), _Runtime.field(shader, 'instanceBuffer')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(shader, 'locPos')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(shader, 'locPos'), 3.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'FLOAT'), false, GlParticleEmitter3D.INSTANCE_STRIDE__glParticleEmitter3D, 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'vertexAttribDivisor', cast ([_Runtime.field(shader, 'locPos'), 1.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(shader, 'locCosScale')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(shader, 'locCosScale'), 1.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'FLOAT'), false, GlParticleEmitter3D.INSTANCE_STRIDE__glParticleEmitter3D, 12.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'vertexAttribDivisor', cast ([_Runtime.field(shader, 'locCosScale'), 1.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(shader, 'locSinScale')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(shader, 'locSinScale'), 1.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'FLOAT'), false, GlParticleEmitter3D.INSTANCE_STRIDE__glParticleEmitter3D, 16.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'vertexAttribDivisor', cast ([_Runtime.field(shader, 'locSinScale'), 1.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(shader, 'locColor')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(shader, 'locColor'), 4.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'FLOAT'), false, GlParticleEmitter3D.INSTANCE_STRIDE__glParticleEmitter3D, 20.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'vertexAttribDivisor', cast ([_Runtime.field(shader, 'locColor'), 1.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(shader, 'locUvRect')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(shader, 'locUvRect'), 4.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'FLOAT'), false, GlParticleEmitter3D.INSTANCE_STRIDE__glParticleEmitter3D, 36.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'vertexAttribDivisor', cast ([_Runtime.field(shader, 'locUvRect'), 1.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(shader, 'locSize')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(shader, 'locSize'), 2.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'FLOAT'), false, GlParticleEmitter3D.INSTANCE_STRIDE__glParticleEmitter3D, 52.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'vertexAttribDivisor', cast ([_Runtime.field(shader, 'locSize'), 1.0] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ELEMENT_ARRAY_BUFFER'), _Runtime.field(shader, 'indexBuffer')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'drawElementsInstanced', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TRIANGLES'), 6.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'UNSIGNED_SHORT'), 0.0, drawCount] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindVertexArray', cast ([null] : Array<Dynamic>));
   }
 
   public static function destroyGlParticleEmitter3DShader(state:GlRenderState):Void {
@@ -265,10 +265,10 @@ class GlParticleEmitter3D {
     shader = _Runtime.callProperty(GlParticleEmitter3D.shaderCache__glParticleEmitter3D, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(shader, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteProgram', cast ([_Runtime.field(shader, 'program')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(shader, 'cornerBuffer')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(shader, 'indexBuffer')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(shader, 'instanceBuffer')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteProgram', cast ([_Runtime.field(shader, 'program')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteBuffer', cast ([_Runtime.field(shader, 'cornerBuffer')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteBuffer', cast ([_Runtime.field(shader, 'indexBuffer')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteBuffer', cast ([_Runtime.field(shader, 'instanceBuffer')] : Array<Dynamic>));
     _Runtime.callProperty(GlParticleEmitter3D.shaderCache__glParticleEmitter3D, 'delete', cast ([state] : Array<Dynamic>));
   }
 
@@ -283,14 +283,14 @@ class GlParticleEmitter3D {
     list = _Runtime.callValue(prepareSceneRender, cast ([state, scene, camera, lights] : Array<Dynamic>));
     shader = _Runtime.callValue(GlParticleEmitter3D.ensureParticle3DShader__glParticleEmitter3D, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'useProgram', cast ([_Runtime.field(shader, 'program')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniformMatrix4fv', cast ([_Runtime.field(shader, 'locViewProjection'), false, _Runtime.field(_Runtime.field(list, 'viewProjection'), 'm')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'useProgram', cast ([_Runtime.field(shader, 'program')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'uniformMatrix4fv', cast ([_Runtime.field(shader, 'locViewProjection'), false, _Runtime.field(_Runtime.field(list, 'viewProjection'), 'm')] : Array<Dynamic>));
     vm = _Runtime.field(_Runtime.field(camera, 'view'), 'm');
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform3f', cast ([_Runtime.field(shader, 'locCameraRight'), _Runtime.getIndex(vm, 0.0), _Runtime.getIndex(vm, 4.0), _Runtime.getIndex(vm, 8.0)] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform3f', cast ([_Runtime.field(shader, 'locCameraUp'), _Runtime.getIndex(vm, 1.0), _Runtime.getIndex(vm, 5.0), _Runtime.getIndex(vm, 9.0)] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'enable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'DEPTH_TEST')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'depthMask', cast ([false] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'enable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'BLEND')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform3f', cast ([_Runtime.field(shader, 'locCameraRight'), _Runtime.getIndex(vm, 0.0), _Runtime.getIndex(vm, 4.0), _Runtime.getIndex(vm, 8.0)] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform3f', cast ([_Runtime.field(shader, 'locCameraUp'), _Runtime.getIndex(vm, 1.0), _Runtime.getIndex(vm, 5.0), _Runtime.getIndex(vm, 9.0)] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'enable', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'DEPTH_TEST')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'depthMask', cast ([false] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'enable', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'BLEND')] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(GlParticleEmitter3D.emitterScratch__glParticleEmitter3D, 'length'), '<'))) {
@@ -300,8 +300,8 @@ class GlParticleEmitter3D {
         i++;
       }
     }
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'depthMask', cast ([true] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'disable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'BLEND')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'depthMask', cast ([true] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'disable', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'BLEND')] : Array<Dynamic>));
     _Runtime.callValue(invalidateGlRenderStateCache, cast ([state] : Array<Dynamic>));
   }
 

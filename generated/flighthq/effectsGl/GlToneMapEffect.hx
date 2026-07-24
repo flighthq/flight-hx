@@ -19,8 +19,8 @@ class GlToneMapEffect {
     exposure = _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 1.0);
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'toneMap.' + Std.string(operator_) + '', _Runtime.callValue(GlToneMapEffect.buildToneMapFragment__glToneMapEffect, cast ([operator_] : Array<Dynamic>))] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_exposure'] : Array<Dynamic>)), exposure] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_white'] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.field(effect, 'white'), function():Dynamic return cast 1.0)] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_exposure'] : Array<Dynamic>)), exposure] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_white'] : Array<Dynamic>)), _Runtime.coalesce(_Runtime.field(effect, 'white'), function():Dynamic return cast 1.0)] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

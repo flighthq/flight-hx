@@ -36,31 +36,31 @@ class CanvasTextLabel {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0))) { return; }
     context = _Runtime.field(state, 'context');
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
-    flighthq._internal.CanvasRenderingContext2D.setField(context, 'globalAlpha', _Runtime.field(renderProxy, 'alpha'));
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', _Runtime.field(renderProxy, 'alpha'));
     _Runtime.callValue(setCanvasTransform, cast ([state, context, _Runtime.field(renderProxy, 'transform2D')] : Array<Dynamic>));
     measure = function(t:String, format:TextFormat) {
-      flighthq._internal.CanvasRenderingContext2D.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
-      return cast _Runtime.field(flighthq._internal.CanvasRenderingContext2D.call(context, 'measureText', cast ([t] : Array<Dynamic>)), 'width');
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
+      return cast _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([t] : Array<Dynamic>)), 'width');
     };
     result = _Runtime.callValue(getTextLayoutResult, cast ([(cast _Runtime.callValue(getTextLabelRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime)] : Array<Dynamic>));
     _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: cast ([_Runtime.callValue(createTextFormatRange, cast ([textFormat, 0.0, _Runtime.field(text, 'length')] : Array<Dynamic>))] : Array<Dynamic>), width: _Runtime.field(_Runtime.field(source, 'data'), 'width'), height: _Runtime.field(_Runtime.field(source, 'data'), 'height'), measure: measure, verticalAlign: _Runtime.select(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'autoSize'), 'none'), function():Dynamic return cast _Runtime.field(_Runtime.field(source, 'data'), 'verticalAlign'), function():Dynamic return cast 'top') }] : Array<Dynamic>));
-    flighthq._internal.CanvasRenderingContext2D.setField(context, 'textBaseline', 'alphabetic');
-    flighthq._internal.CanvasRenderingContext2D.setField(context, 'textAlign', 'start');
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'start');
     for (group in _Runtime.iterable(_Runtime.field(result, 'groups'))) {
-      flighthq._internal.CanvasRenderingContext2D.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([_Runtime.field(group, 'format')] : Array<Dynamic>)));
-      flighthq._internal.CanvasRenderingContext2D.setField(context, 'fillStyle', _Runtime.callValue(computeRgbHexString, cast ([_Runtime.coalesce(_Runtime.field(_Runtime.field(group, 'format'), 'color'), function():Dynamic return cast 0.0)] : Array<Dynamic>)));
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([_Runtime.field(group, 'format')] : Array<Dynamic>)));
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', _Runtime.callValue(computeRgbHexString, cast ([_Runtime.coalesce(_Runtime.field(_Runtime.field(group, 'format'), 'color'), function():Dynamic return cast 0.0)] : Array<Dynamic>)));
       var slice:Dynamic = _Runtime.substring(text, _Runtime.field(group, 'startIndex'), _Runtime.field(group, 'endIndex'));
       var x:Dynamic = _Runtime.field(group, 'offsetX');
       var y:Dynamic = (_Runtime.field(group, 'offsetY') + (_Runtime.field(group, 'ascent') * 0.815));
-      flighthq._internal.CanvasRenderingContext2D.call(context, 'fillText', cast ([slice, x, y] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(context, 'fillText', cast ([slice, x, y] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.field(_Runtime.field(group, 'format'), 'underline'))) {
         var lineY:Dynamic = (y + _Runtime.field(group, 'descent'));
-        flighthq._internal.CanvasRenderingContext2D.setField(context, 'strokeStyle', _Runtime.callValue(computeRgbHexString, cast ([_Runtime.coalesce(_Runtime.field(_Runtime.field(group, 'format'), 'color'), function():Dynamic return cast 0.0)] : Array<Dynamic>)));
-        flighthq._internal.CanvasRenderingContext2D.setField(context, 'lineWidth', HxMath.max(1.0, (_Runtime.coalesce(_Runtime.field(_Runtime.field(group, 'format'), 'size'), function():Dynamic return cast 12.0) / 16.0)));
-        flighthq._internal.CanvasRenderingContext2D.call(context, 'beginPath', cast ([] : Array<Dynamic>));
-        flighthq._internal.CanvasRenderingContext2D.call(context, 'moveTo', cast ([x, lineY] : Array<Dynamic>));
-        flighthq._internal.CanvasRenderingContext2D.call(context, 'lineTo', cast ([(x + _Runtime.field(group, 'width')), lineY] : Array<Dynamic>));
-        flighthq._internal.CanvasRenderingContext2D.call(context, 'stroke', cast ([] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.setField(context, 'strokeStyle', _Runtime.callValue(computeRgbHexString, cast ([_Runtime.coalesce(_Runtime.field(_Runtime.field(group, 'format'), 'color'), function():Dynamic return cast 0.0)] : Array<Dynamic>)));
+        flighthq._internal.backend.Canvas2dBackend.setField(context, 'lineWidth', HxMath.max(1.0, (_Runtime.coalesce(_Runtime.field(_Runtime.field(group, 'format'), 'size'), function():Dynamic return cast 12.0) / 16.0)));
+        flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([x, lineY] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.call(context, 'lineTo', cast ([(x + _Runtime.field(group, 'width')), lineY] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.call(context, 'stroke', cast ([] : Array<Dynamic>));
       }
     }
   }

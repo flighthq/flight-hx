@@ -44,10 +44,10 @@ class GlBlurEffect {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'blur.gaussian', GlBlurEffect.GAUSSIAN_BLUR_FRAGMENT_SRC__glBlurEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2f', cast ([_Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_texelSize'] : Array<Dynamic>)), (1.0 / _Runtime.field(source, 'width')), (1.0 / _Runtime.field(source, 'height'))] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_sigma'] : Array<Dynamic>)), sigma] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_radius'] : Array<Dynamic>)), radius] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2f', cast ([_Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_direction'] : Array<Dynamic>)), dirX, dirY] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform2f', cast ([_Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_texelSize'] : Array<Dynamic>)), (1.0 / _Runtime.field(source, 'width')), (1.0 / _Runtime.field(source, 'height'))] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_sigma'] : Array<Dynamic>)), sigma] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([_Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_radius'] : Array<Dynamic>)), radius] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform2f', cast ([_Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_direction'] : Array<Dynamic>)), dirX, dirY] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

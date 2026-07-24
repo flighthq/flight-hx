@@ -116,8 +116,8 @@ class DomRichText {
     ctx = _Runtime.callValue(DomRichText.getMeasureCtx__domRichText, cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(ctx, null))) { return; }
     measure = function(t:String, fmt:TextFormat) {
-      flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([fmt] : Array<Dynamic>)));
-      return cast _Runtime.field(flighthq._internal.CanvasRenderingContext2D.call(ctx, 'measureText', cast ([t] : Array<Dynamic>)), 'width');
+      flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([fmt] : Array<Dynamic>)));
+      return cast _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(ctx, 'measureText', cast ([t] : Array<Dynamic>)), 'width');
     };
     result = _Runtime.callValue(getTextLayoutResult, cast ([(cast richTextRuntime : TextLabelRuntime)] : Array<Dynamic>));
     _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: _Runtime.field(content, 'formatRanges'), width: _Runtime.select(wordWrap, function():Dynamic return cast _Runtime.field(_Runtime.field(source, 'data'), 'width'), function():Dynamic return cast 10000.0), height: _Runtime.field(_Runtime.field(source, 'data'), 'height'), measure: measure, multiline: multiline, verticalAlign: _Runtime.select(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'autoSize'), 'none'), function():Dynamic return cast _Runtime.field(_Runtime.field(source, 'data'), 'verticalAlign'), function():Dynamic return cast 'top'), wordWrap: wordWrap }] : Array<Dynamic>));
@@ -226,8 +226,8 @@ class DomRichText {
     var metrics:Dynamic = cast _Runtime.UNDEFINED;
     var sizeMatch:Dynamic = cast _Runtime.UNDEFINED;
     var size:Dynamic = cast _Runtime.UNDEFINED;
-    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'font', font);
-    metrics = (cast flighthq._internal.CanvasRenderingContext2D.call(ctx, 'measureText', cast (['H'] : Array<Dynamic>)) : Dynamic);
+    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'font', font);
+    metrics = (cast flighthq._internal.backend.Canvas2dBackend.call(ctx, 'measureText', cast (['H'] : Array<Dynamic>)) : Dynamic);
     sizeMatch = _Runtime.callProperty(_Runtime.regexp('(\\d+(?:\\.\\d+)?)px', ''), 'exec', cast ([font] : Array<Dynamic>));
     size = _Runtime.select(sizeMatch, function():Dynamic return cast _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(sizeMatch, 1.0)] : Array<Dynamic>)), function():Dynamic return cast 12.0);
     return cast _Runtime.coalesce(_Runtime.field(metrics, 'fontBoundingBoxAscent'), function():Dynamic return cast (size * 0.85));

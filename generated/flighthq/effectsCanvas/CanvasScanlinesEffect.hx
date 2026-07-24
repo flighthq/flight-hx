@@ -27,21 +27,21 @@ class CanvasScanlinesEffect {
     h = _Runtime.field(dest, 'height');
     spacing = (h / count);
     lineHeight = HxMath.max(1.0, (spacing * 0.5));
-    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'save', cast ([] : Array<Dynamic>));
-    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'globalCompositeOperation', 'multiply');
-    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'filter', 'none');
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', 'multiply');
+    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'filter', 'none');
     dark = (1.0 - intensity);
     channel = HxMath.round((dark * 255.0));
-    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'fillStyle', 'rgb(' + Std.string(channel) + ',' + Std.string(channel) + ',' + Std.string(channel) + ')');
+    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle', 'rgb(' + Std.string(channel) + ',' + Std.string(channel) + ',' + Std.string(channel) + ')');
     {
       var y:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(y, h, '<'))) {
-        flighthq._internal.CanvasRenderingContext2D.call(ctx, 'fillRect', cast ([0.0, HxMath.round(y), w, lineHeight] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillRect', cast ([0.0, HxMath.round(y), w, lineHeight] : Array<Dynamic>));
         (y = cast ((y + spacing) : Dynamic));
       }
     }
-    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'restore', cast ([] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
   public static final defaultCanvasScanlinesEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {

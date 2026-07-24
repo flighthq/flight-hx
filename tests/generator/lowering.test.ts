@@ -406,6 +406,40 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain('Reflect.fields');
   });
 
+  it('routes WebGPU constants through their target-independent backend without capturing locals', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/render-wgpu/src/sample.ts',
+      `
+        export const usage = GPUBufferUsage.COPY_DST | GPUTextureUsage.RENDER_ATTACHMENT;
+        export const visibility = GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT;
+        export const color = GPUColorWrite.ALL;
+        export const mode = GPUMapMode.READ;
+        export function local(GPUBufferUsage: { COPY_DST: number }) {
+          return GPUBufferUsage.COPY_DST;
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/render-wgpu', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'WebGpuConstantsFixture',
+      packageName: '@flighthq/render-wgpu',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain("WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST')");
+    expect(output).toContain("WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')");
+    expect(output).toContain("WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')");
+    expect(output).toContain("WebGpuConstantsBackend.value('GPUColorWrite', 'ALL')");
+    expect(output).toContain("WebGpuConstantsBackend.value('GPUMapMode', 'READ')");
+    expect(output).toContain('return cast GPUBufferUsage.COPY_DST');
+    expect(output.match(/WebGpuConstantsBackend\.value\('GPUBufferUsage', 'COPY_DST'\)/gu)).toHaveLength(1);
+  });
+
   it('propagates optional chains through properties and element access', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/example/src/sample.ts',

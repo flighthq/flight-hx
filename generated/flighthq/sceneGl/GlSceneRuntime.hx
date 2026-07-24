@@ -21,22 +21,22 @@ class GlSceneRuntime {
     if (_Runtime.truthy(_Runtime.strictEquals(scene, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     gl = _Runtime.field(state, 'gl');
     for (program in _Runtime.iterable(_Runtime.callProperty(_Runtime.field(scene, 'programCache'), 'values', cast ([] : Array<Dynamic>)))) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteProgram', cast ([_Runtime.field(program, 'program')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteProgram', cast ([_Runtime.field(program, 'program')] : Array<Dynamic>));
     }
     _Runtime.callProperty(_Runtime.field(scene, 'programCache'), 'clear', cast ([] : Array<Dynamic>));
     _Runtime.setField(scene, 'activeMeshProgram', null);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(scene, 'ibl'), null))) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteTexture', cast ([_Runtime.field(_Runtime.field(scene, 'ibl'), 'brdfLut')] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteTexture', cast ([_Runtime.field(_Runtime.field(scene, 'ibl'), 'irradianceCube')] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteTexture', cast ([_Runtime.field(_Runtime.field(scene, 'ibl'), 'prefilteredCube')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteTexture', cast ([_Runtime.field(_Runtime.field(scene, 'ibl'), 'brdfLut')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteTexture', cast ([_Runtime.field(_Runtime.field(scene, 'ibl'), 'irradianceCube')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteTexture', cast ([_Runtime.field(_Runtime.field(scene, 'ibl'), 'prefilteredCube')] : Array<Dynamic>));
       _Runtime.setField(scene, 'ibl', null);
     }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(scene, 'iblBakeFramebuffer'), null))) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteFramebuffer', cast ([_Runtime.field(scene, 'iblBakeFramebuffer')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteFramebuffer', cast ([_Runtime.field(scene, 'iblBakeFramebuffer')] : Array<Dynamic>));
       _Runtime.setField(scene, 'iblBakeFramebuffer', null);
     }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(scene, 'environmentSourceCube'), null))) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteTexture', cast ([_Runtime.field(scene, 'environmentSourceCube')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteTexture', cast ([_Runtime.field(scene, 'environmentSourceCube')] : Array<Dynamic>));
       _Runtime.setField(scene, 'environmentSourceCube', null);
     }
     _Runtime.callValue(destroyGlBakePrograms, cast ([state] : Array<Dynamic>));

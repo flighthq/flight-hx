@@ -14,8 +14,8 @@ class CanvasTextMeasure {
     canvas = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
     context = _Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
     return cast function(text:String, format:TextFormat) {
-      flighthq._internal.CanvasRenderingContext2D.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
-      return cast _Runtime.field(flighthq._internal.CanvasRenderingContext2D.call(context, 'measureText', cast ([text] : Array<Dynamic>)), 'width');
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
+      return cast _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([text] : Array<Dynamic>)), 'width');
     };
     return cast null;
   }

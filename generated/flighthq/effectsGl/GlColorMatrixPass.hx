@@ -22,7 +22,7 @@ class GlColorMatrixPass {
     }
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'adjustment.colorMatrix', GlColorMatrixPass.COLOR_MATRIX_FRAGMENT_SRC__glColorMatrixPass] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1fv', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_colorMatrix'] : Array<Dynamic>)), m] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1fv', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_colorMatrix'] : Array<Dynamic>)), m] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

@@ -19,8 +19,8 @@ class GlChromaticAberrationEffect {
     radial = _Runtime.coalesce(_Runtime.field(effect, 'radial'), function():Dynamic return cast true);
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'lens.chromaticAberration', GlChromaticAberrationEffect.CHROMATIC_ABERRATION_FRAGMENT_SRC__glChromaticAberrationEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_intensity'] : Array<Dynamic>)), intensity] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_radial'] : Array<Dynamic>)), _Runtime.select(radial, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_intensity'] : Array<Dynamic>)), intensity] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_radial'] : Array<Dynamic>)), _Runtime.select(radial, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

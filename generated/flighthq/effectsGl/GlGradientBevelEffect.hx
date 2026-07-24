@@ -68,7 +68,7 @@ class GlGradientBevelEffect {
     _Runtime.callValue(GlGradientBevelEffect.applyBevelEncodePass__glGradientBevelEffect, cast ([state, s1, s0, (dx / _Runtime.field(s1, 'width')), (-dy / _Runtime.field(s1, 'height'))] : Array<Dynamic>));
     ramp = _Runtime.callValue(createGlEffectGradientRampTexture, cast ([gl, _Runtime.field(effect, 'colors'), _Runtime.field(effect, 'alphas'), _Runtime.field(effect, 'ratios')] : Array<Dynamic>));
     _Runtime.callValue(GlGradientBevelEffect.applyBevelApplyPass__glGradientBevelEffect, cast ([state, s0, ramp, src, s1] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteTexture', cast ([ramp] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'deleteTexture', cast ([ramp] : Array<Dynamic>));
     _Runtime.callValue(clearGlRenderTarget, cast ([state, dst] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(sourceMode, 'draw'))) {
       _Runtime.callValue(applyGlEffectBlitPass, cast ([state, src, dst] : Array<Dynamic>));
@@ -90,14 +90,14 @@ class GlGradientBevelEffect {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlGradientBevelEffect.getApplyShader__glGradientBevelEffect, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(encoded, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE1')] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), ramp] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([_Runtime.field(loc, 'locRamp'), 1.0] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE2')] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), _Runtime.field(source, 'texture')] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([_Runtime.field(loc, 'locSource'), 2.0] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE0')] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'blendFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE'), flighthq._internal.WebGl2RenderingContext.field(gl, 'ZERO')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE1')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), ramp] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([_Runtime.field(loc, 'locRamp'), 1.0] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE2')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), _Runtime.field(source, 'texture')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([_Runtime.field(loc, 'locSource'), 2.0] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE0')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'blendFunc', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ONE'), flighthq._internal.backend.WebGl2Backend.field(gl, 'ZERO')] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 
@@ -105,8 +105,8 @@ class GlGradientBevelEffect {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlGradientBevelEffect.getEncodeShader__glGradientBevelEffect, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(blurred, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2f', cast ([_Runtime.field(loc, 'locOffset'), dx, dy] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'blendFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE'), flighthq._internal.WebGl2RenderingContext.field(gl, 'ZERO')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform2f', cast ([_Runtime.field(loc, 'locOffset'), dx, dy] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'blendFunc', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ONE'), flighthq._internal.backend.WebGl2Backend.field(gl, 'ZERO')] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 
@@ -116,7 +116,7 @@ class GlGradientBevelEffect {
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlGradientBevelEffect.BEVEL_APPLY_FRAGMENT_SRC__glGradientBevelEffect] : Array<Dynamic>));
-      (loc = cast (_Runtime.mergeObjects([base, { locRamp: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_ramp'] : Array<Dynamic>)) }, { locSource: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_source'] : Array<Dynamic>)) }]) : Dynamic));
+      (loc = cast (_Runtime.mergeObjects([base, { locRamp: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_ramp'] : Array<Dynamic>)) }, { locSource: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_source'] : Array<Dynamic>)) }]) : Dynamic));
       _Runtime.callProperty(GlGradientBevelEffect.applyShaders__glGradientBevelEffect, 'set', cast ([state, loc] : Array<Dynamic>));
     }
     return cast loc;
@@ -129,7 +129,7 @@ class GlGradientBevelEffect {
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlGradientBevelEffect.BEVEL_ENCODE_FRAGMENT_SRC__glGradientBevelEffect] : Array<Dynamic>));
-      (loc = cast (_Runtime.mergeObjects([base, { locOffset: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_offset'] : Array<Dynamic>)) }]) : Dynamic));
+      (loc = cast (_Runtime.mergeObjects([base, { locOffset: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_offset'] : Array<Dynamic>)) }]) : Dynamic));
       _Runtime.callProperty(GlGradientBevelEffect.encodeShaders__glGradientBevelEffect, 'set', cast ([state, loc] : Array<Dynamic>));
     }
     return cast loc;

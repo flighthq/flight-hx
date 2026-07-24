@@ -21,14 +21,14 @@ class CanvasVideo {
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(element, null)), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'readyState'), 2.0, '>=')))) {
       var context:Dynamic = _Runtime.field(state, 'context');
       _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
-      flighthq._internal.CanvasRenderingContext2D.setField(context, 'globalAlpha', _Runtime.field(renderProxy, 'alpha'));
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', _Runtime.field(renderProxy, 'alpha'));
       _Runtime.callValue(setCanvasTransform, cast ([state, context, _Runtime.field(renderProxy, 'transform2D')] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(state, 'allowSmoothing')), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(_Runtime.field(source, 'data'), 'smoothing'))))) {
-        flighthq._internal.CanvasRenderingContext2D.setField(context, 'imageSmoothingEnabled', false);
+        flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false);
       }
-      flighthq._internal.CanvasRenderingContext2D.call(context, 'drawImage', cast ([element, 0.0, 0.0, _Runtime.field(element, 'videoWidth'), _Runtime.field(element, 'videoHeight')] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([element, 0.0, 0.0, _Runtime.field(element, 'videoWidth'), _Runtime.field(element, 'videoHeight')] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(state, 'allowSmoothing')), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(_Runtime.field(source, 'data'), 'smoothing'))))) {
-        flighthq._internal.CanvasRenderingContext2D.setField(context, 'imageSmoothingEnabled', true);
+        flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true);
       }
     }
   }

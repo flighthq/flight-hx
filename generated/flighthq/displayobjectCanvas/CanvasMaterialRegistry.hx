@@ -21,9 +21,9 @@ class CanvasMaterialRegistry {
     if (_Runtime.truthy(_Runtime.strictEquals(renderer, null))) { return cast false; }
     drawState = _Runtime.callProperty(renderer, 'getState', cast ([material] : Array<Dynamic>));
     context = _Runtime.field(state, 'context');
-    flighthq._internal.CanvasRenderingContext2D.call(context, 'save', cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(drawState, 'composite'), _Runtime.field(_Runtime, 'UNDEFINED')))) { flighthq._internal.CanvasRenderingContext2D.setField(context, 'globalCompositeOperation', _Runtime.field(drawState, 'composite')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(drawState, 'filter'), _Runtime.field(_Runtime, 'UNDEFINED')))) { flighthq._internal.CanvasRenderingContext2D.setField(context, 'filter', _Runtime.field(drawState, 'filter')); }
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'save', cast ([] : Array<Dynamic>));
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(drawState, 'composite'), _Runtime.field(_Runtime, 'UNDEFINED')))) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalCompositeOperation', _Runtime.field(drawState, 'composite')); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(drawState, 'filter'), _Runtime.field(_Runtime, 'UNDEFINED')))) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'filter', _Runtime.field(drawState, 'filter')); }
     return cast true;
     return cast null;
   }

@@ -81,10 +81,10 @@ class GlyphRasterizerBackend {
     text = _Runtime.fromCodePoint(codepoint);
     fontStyle = _Runtime.coalesce(_Runtime.field(options, 'fontStyle'), function():Dynamic return cast 'normal');
     fontWeight = _Runtime.coalesce(_Runtime.field(options, 'fontWeight'), function():Dynamic return cast 'normal');
-    flighthq._internal.CanvasRenderingContext2D.setField(context, 'font', '' + Std.string(fontStyle) + ' ' + Std.string(fontWeight) + ' ' + Std.string(_Runtime.field(options, 'fontSize')) + 'px ' + Std.string(_Runtime.field(options, 'fontFamily')) + '');
-    flighthq._internal.CanvasRenderingContext2D.setField(context, 'textBaseline', 'alphabetic');
-    flighthq._internal.CanvasRenderingContext2D.setField(context, 'textAlign', 'left');
-    metrics = flighthq._internal.CanvasRenderingContext2D.call(context, 'measureText', cast ([text] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', '' + Std.string(fontStyle) + ' ' + Std.string(fontWeight) + ' ' + Std.string(_Runtime.field(options, 'fontSize')) + 'px ' + Std.string(_Runtime.field(options, 'fontFamily')) + '');
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'left');
+    metrics = flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([text] : Array<Dynamic>));
     advance = _Runtime.field(metrics, 'width');
     left = _Runtime.coalesce(_Runtime.field(metrics, 'actualBoundingBoxLeft'), function():Dynamic return cast 0.0);
     right = _Runtime.coalesce(_Runtime.field(metrics, 'actualBoundingBoxRight'), function():Dynamic return cast advance);
@@ -94,16 +94,16 @@ class GlyphRasterizerBackend {
     width = (HxMath.max(0.0, HxMath.ceil((left + right))) + (guard * 2.0));
     height = (HxMath.max(0.0, HxMath.ceil((ascent + descent))) + (guard * 2.0));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(width, (guard * 2.0), '<='), function():Dynamic return cast _Runtime.compare(height, (guard * 2.0), '<=')))) { return cast null; }
-    canvas = flighthq._internal.CanvasRenderingContext2D.field(context, 'canvas');
+    canvas = flighthq._internal.backend.Canvas2dBackend.field(context, 'canvas');
     _Runtime.setField(canvas, 'width', width);
     _Runtime.setField(canvas, 'height', height);
-    flighthq._internal.CanvasRenderingContext2D.setField(context, 'font', '' + Std.string(fontStyle) + ' ' + Std.string(fontWeight) + ' ' + Std.string(_Runtime.field(options, 'fontSize')) + 'px ' + Std.string(_Runtime.field(options, 'fontFamily')) + '');
-    flighthq._internal.CanvasRenderingContext2D.setField(context, 'textBaseline', 'alphabetic');
-    flighthq._internal.CanvasRenderingContext2D.setField(context, 'textAlign', 'left');
-    flighthq._internal.CanvasRenderingContext2D.call(context, 'clearRect', cast ([0.0, 0.0, width, height] : Array<Dynamic>));
-    flighthq._internal.CanvasRenderingContext2D.setField(context, 'fillStyle', '#ffffff');
-    flighthq._internal.CanvasRenderingContext2D.call(context, 'fillText', cast ([text, (guard + left), (guard + ascent)] : Array<Dynamic>));
-    image = flighthq._internal.CanvasRenderingContext2D.call(context, 'getImageData', cast ([0.0, 0.0, width, height] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', '' + Std.string(fontStyle) + ' ' + Std.string(fontWeight) + ' ' + Std.string(_Runtime.field(options, 'fontSize')) + 'px ' + Std.string(_Runtime.field(options, 'fontFamily')) + '');
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'left');
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'clearRect', cast ([0.0, 0.0, width, height] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', '#ffffff');
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'fillText', cast ([text, (guard + left), (guard + ascent)] : Array<Dynamic>));
+    image = flighthq._internal.backend.Canvas2dBackend.call(context, 'getImageData', cast ([0.0, 0.0, width, height] : Array<Dynamic>));
     return cast { advance: advance, bearingX: -left, bearingY: ascent, height: height, pixels: _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [_Runtime.field(image, 'data')]), width: width };
     return cast null;
   }

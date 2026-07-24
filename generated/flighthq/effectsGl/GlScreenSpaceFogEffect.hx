@@ -31,11 +31,11 @@ class GlScreenSpaceFogEffect {
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'atmospheric.screenSpaceFog', GlScreenSpaceFogEffect.SCREEN_SPACE_FOG_FRAGMENT_SRC__glScreenSpaceFogEffect] : Array<Dynamic>));
     inputs = _Runtime.select(depthTexture, function():Dynamic return cast cast ([_Runtime.field(source, 'texture'), depthTexture] : Array<Dynamic>), function():Dynamic return cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, inputs, dest, function(gl:Dynamic, p:Dynamic) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform3f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_fogColor'] : Array<Dynamic>)), r, g, b] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_density'] : Array<Dynamic>)), density] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_near'] : Array<Dynamic>)), near] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_far'] : Array<Dynamic>)), far] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_hasDepth'] : Array<Dynamic>)), _Runtime.select(depthTexture, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform3f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_fogColor'] : Array<Dynamic>)), r, g, b] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_density'] : Array<Dynamic>)), density] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_near'] : Array<Dynamic>)), near] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_far'] : Array<Dynamic>)), far] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_hasDepth'] : Array<Dynamic>)), _Runtime.select(depthTexture, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

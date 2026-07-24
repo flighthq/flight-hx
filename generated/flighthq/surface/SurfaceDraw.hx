@@ -12,6 +12,6 @@ class SurfaceDraw {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.field(source, 'width'), 0.0, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.field(source, 'height'), 0.0, '<=')))) { return; }
     domImageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [_Runtime.field(source, 'width'), _Runtime.field(source, 'height')]);
     _Runtime.callValue(extractSurfacePixels, cast ([_Runtime.field(domImageData, 'data'), source] : Array<Dynamic>));
-    flighthq._internal.CanvasRenderingContext2D.call(_Runtime.callProperty(dest, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, x, y] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(_Runtime.callProperty(dest, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, x, y] : Array<Dynamic>));
   }
 }

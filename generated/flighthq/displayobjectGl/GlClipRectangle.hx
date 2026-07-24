@@ -24,9 +24,9 @@ class GlClipRectangle {
     _Runtime.callValue(flushGlSpriteBatch, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     if (_Runtime.truthy(_Runtime.strictEquals(previous, null))) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'disable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'SCISSOR_TEST')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'disable', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'SCISSOR_TEST')] : Array<Dynamic>));
     } else {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'scissor', cast ([_Runtime.field(previous, 'x'), _Runtime.field(previous, 'y'), _Runtime.field(previous, 'width'), _Runtime.field(previous, 'height')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'scissor', cast ([_Runtime.field(previous, 'x'), _Runtime.field(previous, 'y'), _Runtime.field(previous, 'width'), _Runtime.field(previous, 'height')] : Array<Dynamic>));
     }
   }
 
@@ -40,8 +40,8 @@ class GlClipRectangle {
     _Runtime.callProperty(_Runtime.callValue(GlClipRectangle.getScissorStack__glClipRectangle, cast ([state] : Array<Dynamic>)), 'push', cast ([next] : Array<Dynamic>));
     _Runtime.callValue(flushGlSpriteBatch, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'enable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'SCISSOR_TEST')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'scissor', cast ([_Runtime.field(next, 'x'), _Runtime.field(next, 'y'), _Runtime.field(next, 'width'), _Runtime.field(next, 'height')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'enable', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'SCISSOR_TEST')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'scissor', cast ([_Runtime.field(next, 'x'), _Runtime.field(next, 'y'), _Runtime.field(next, 'width'), _Runtime.field(next, 'height')] : Array<Dynamic>));
   }
 
   public static function computeScissorRect__glClipRectangle(state:GlRenderState, rect:RectangleLike, transform:MatrixLike):GlScissorRect {

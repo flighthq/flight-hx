@@ -212,10 +212,10 @@ class Device {
       var canvas:Dynamic = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
       var gl:Dynamic = _Runtime.coalesce((cast _Runtime.callProperty(canvas, 'getContext', cast (['webgl'] : Array<Dynamic>)) : Null<Dynamic>), function():Dynamic return cast (cast _Runtime.callProperty(canvas, 'getContext', cast (['experimental-webgl'] : Array<Dynamic>)) : Null<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(gl, null))) { return cast { renderer: '', vendor: '' }; }
-      var ext:Dynamic = flighthq._internal.WebGl2RenderingContext.call(gl, 'getExtension', cast (['WEBGL_debug_renderer_info'] : Array<Dynamic>));
+      var ext:Dynamic = flighthq._internal.backend.WebGl2Backend.call(gl, 'getExtension', cast (['WEBGL_debug_renderer_info'] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(ext, null))) { return cast { renderer: '', vendor: '' }; }
-      var vendor:Dynamic = _Runtime.coalesce((cast flighthq._internal.WebGl2RenderingContext.call(gl, 'getParameter', cast ([_Runtime.field(ext, 'UNMASKED_VENDOR_WEBGL')] : Array<Dynamic>)) : String), function():Dynamic return cast '');
-      var renderer:Dynamic = _Runtime.coalesce((cast flighthq._internal.WebGl2RenderingContext.call(gl, 'getParameter', cast ([_Runtime.field(ext, 'UNMASKED_RENDERER_WEBGL')] : Array<Dynamic>)) : String), function():Dynamic return cast '');
+      var vendor:Dynamic = _Runtime.coalesce((cast flighthq._internal.backend.WebGl2Backend.call(gl, 'getParameter', cast ([_Runtime.field(ext, 'UNMASKED_VENDOR_WEBGL')] : Array<Dynamic>)) : String), function():Dynamic return cast '');
+      var renderer:Dynamic = _Runtime.coalesce((cast flighthq._internal.backend.WebGl2Backend.call(gl, 'getParameter', cast ([_Runtime.field(ext, 'UNMASKED_RENDERER_WEBGL')] : Array<Dynamic>)) : String), function():Dynamic return cast '');
       return cast { renderer: renderer, vendor: vendor };
     } catch (__error:Dynamic) {
       return cast { renderer: '', vendor: '' };

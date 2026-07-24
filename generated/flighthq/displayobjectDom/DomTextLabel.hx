@@ -68,8 +68,8 @@ class DomTextLabel {
       _Runtime.setField(_Runtime.field(_Runtime.field(data, 'div'), 'style'), 'overflow', 'hidden');
     }
     measure = function(t:String, format:TextFormat) {
-      flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
-      return cast _Runtime.field(flighthq._internal.CanvasRenderingContext2D.call(ctx, 'measureText', cast ([t] : Array<Dynamic>)), 'width');
+      flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
+      return cast _Runtime.field(flighthq._internal.backend.Canvas2dBackend.call(ctx, 'measureText', cast ([t] : Array<Dynamic>)), 'width');
     };
     result = _Runtime.callValue(getTextLayoutResult, cast ([(cast _Runtime.callValue(getTextLabelRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime)] : Array<Dynamic>));
     _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: cast ([_Runtime.callValue(createTextFormatRange, cast ([textFormat, 0.0, _Runtime.field(text, 'length')] : Array<Dynamic>))] : Array<Dynamic>), width: _Runtime.field(_Runtime.field(source, 'data'), 'width'), height: _Runtime.field(_Runtime.field(source, 'data'), 'height'), measure: measure, verticalAlign: _Runtime.select(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'autoSize'), 'none'), function():Dynamic return cast _Runtime.field(_Runtime.field(source, 'data'), 'verticalAlign'), function():Dynamic return cast 'top') }] : Array<Dynamic>));

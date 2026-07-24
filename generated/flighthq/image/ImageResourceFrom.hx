@@ -17,7 +17,7 @@ class ImageResourceFrom {
     _Runtime.setField(canvas, 'height', _Runtime.field(image, 'height'));
     imageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [_Runtime.field(image, 'width'), _Runtime.field(image, 'height')]);
     _Runtime.callProperty(_Runtime.field(imageData, 'data'), 'set', cast ([_Runtime.field(image, 'data')] : Array<Dynamic>));
-    flighthq._internal.CanvasRenderingContext2D.call(_Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([imageData, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(_Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([imageData, 0.0, 0.0] : Array<Dynamic>));
     return cast canvas;
     return cast null;
   }

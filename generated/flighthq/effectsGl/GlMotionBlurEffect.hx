@@ -21,10 +21,10 @@ class GlMotionBlurEffect {
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'motionBlur', GlMotionBlurEffect.MOTION_BLUR_FRAGMENT_SRC__glMotionBlurEffect] : Array<Dynamic>));
     inputs = _Runtime.select(velocityTexture, function():Dynamic return cast cast ([_Runtime.field(source, 'texture'), velocityTexture] : Array<Dynamic>), function():Dynamic return cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, inputs, dest, function(gl:Dynamic, p:Dynamic) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_intensity'] : Array<Dynamic>)), intensity] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_samples'] : Array<Dynamic>)), samples] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_resolution'] : Array<Dynamic>)), _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_hasVelocity'] : Array<Dynamic>)), _Runtime.select(velocityTexture, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_intensity'] : Array<Dynamic>)), intensity] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_samples'] : Array<Dynamic>)), samples] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform2f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_resolution'] : Array<Dynamic>)), _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_hasVelocity'] : Array<Dynamic>)), _Runtime.select(velocityTexture, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

@@ -85,7 +85,7 @@ class CustomShaderGlMeshMaterialRenderer {
   public static function compileGlCustomShaderProgram__customShaderGlMeshMaterialRenderer(gl:Dynamic, source:GlCustomMaterialShaderSource):GlCustomShaderProgram__customShaderGlMeshMaterialRenderer {
     var linked:Dynamic = cast _Runtime.UNDEFINED;
     linked = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.field(source, 'vertex'), _Runtime.field(source, 'fragment')] : Array<Dynamic>));
-    return cast { locCameraPosition: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([linked, 'u_cameraPosition'] : Array<Dynamic>)), locModel: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([linked, 'u_model'] : Array<Dynamic>)), locNormalMatrix: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([linked, 'u_normalMatrix'] : Array<Dynamic>)), locViewProjection: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([linked, 'u_viewProjection'] : Array<Dynamic>)), program: linked };
+    return cast { locCameraPosition: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([linked, 'u_cameraPosition'] : Array<Dynamic>)), locModel: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([linked, 'u_model'] : Array<Dynamic>)), locNormalMatrix: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([linked, 'u_normalMatrix'] : Array<Dynamic>)), locViewProjection: flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([linked, 'u_viewProjection'] : Array<Dynamic>)), program: linked };
     return cast null;
   }
 
@@ -94,29 +94,29 @@ class CustomShaderGlMeshMaterialRenderer {
     uniforms = _Runtime.field(material, 'uniforms');
     if (_Runtime.truthy(_Runtime.strictEquals(uniforms, null))) { return; }
     for (name in _Runtime.iterable(flighthq._internal.DynamicObject.keys(uniforms))) {
-      var location:Dynamic = flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, name] : Array<Dynamic>));
+      var location:Dynamic = flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, name] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(location, null))) { continue; }
       var value:Dynamic = _Runtime.getIndex(uniforms, name);
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(value), 'number'))) {
-        flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([location, value] : Array<Dynamic>));
+        flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([location, value] : Array<Dynamic>));
         continue;
       }
       {
         var __switchValue = _Runtime.field(value, 'length');
         if (__switchValue == 1.0) {
-          flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([location, _Runtime.getIndex(value, 0.0)] : Array<Dynamic>));
+          flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([location, _Runtime.getIndex(value, 0.0)] : Array<Dynamic>));
         }
         else if (__switchValue == 2.0) {
-          flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2fv', cast ([location, value] : Array<Dynamic>));
+          flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform2fv', cast ([location, value] : Array<Dynamic>));
         }
         else if (__switchValue == 3.0) {
-          flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform3fv', cast ([location, value] : Array<Dynamic>));
+          flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform3fv', cast ([location, value] : Array<Dynamic>));
         }
         else if (__switchValue == 4.0) {
-          flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4fv', cast ([location, value] : Array<Dynamic>));
+          flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform4fv', cast ([location, value] : Array<Dynamic>));
         }
         else  {
-          flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1fv', cast ([location, value] : Array<Dynamic>));
+          flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1fv', cast ([location, value] : Array<Dynamic>));
         }
       }
     }
@@ -133,11 +133,11 @@ class CustomShaderGlMeshMaterialRenderer {
     for (name in _Runtime.iterable(flighthq._internal.DynamicObject.keys(textures))) {
       var texture:Texture = _Runtime.getIndex(textures, name);
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(texture, 'image'), null), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(texture, 'image')] : Array<Dynamic>)))))) { continue; }
-      var location:Dynamic = flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, name] : Array<Dynamic>));
+      var location:Dynamic = flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([program, name] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(location, null))) { continue; }
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([(flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE0') + unit)] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([(flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE0') + unit)] : Array<Dynamic>));
       _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(texture, 'image'), _Runtime.field(texture, 'sampler')] : Array<Dynamic>));
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([location, unit] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1i', cast ([location, unit] : Array<Dynamic>));
       unit++;
     }
   }

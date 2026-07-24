@@ -20,7 +20,7 @@ class SurfaceEncode {
     _Runtime.setField(canvas, 'height', _Runtime.field(source, 'height'));
     domImageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [_Runtime.field(source, 'width'), _Runtime.field(source, 'height')]);
     _Runtime.callProperty(_Runtime.field(domImageData, 'data'), 'set', cast ([_Runtime.field(source, 'data')] : Array<Dynamic>));
-    flighthq._internal.CanvasRenderingContext2D.call(_Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(_Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, 0.0, 0.0] : Array<Dynamic>));
     mimeType = _Runtime.select(_Runtime.strictEquals(format, 'jpeg'), function():Dynamic return cast 'image/jpeg', function():Dynamic return cast 'image/png');
     dataUrl = _Runtime.callProperty(canvas, 'toDataURL', cast ([mimeType, quality] : Array<Dynamic>));
     base64 = _Runtime.slice(dataUrl, (_Runtime.callProperty(dataUrl, 'indexOf', cast ([','] : Array<Dynamic>)) + 1.0), null);

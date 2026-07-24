@@ -9,14 +9,14 @@ class GlEffectGradientRamp {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.callValue(GlEffectGradientRamp.buildRampData__glEffectGradientRamp, cast ([colors, alphas, ratios] : Array<Dynamic>));
-    texture = flighthq._internal.WebGl2RenderingContext.call(gl, 'createTexture', cast ([] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), texture] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'texImage2D', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), 0.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'RGBA8'), 256.0, 1.0, 0.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'RGBA'), flighthq._internal.WebGl2RenderingContext.field(gl, 'UNSIGNED_BYTE'), data] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_MIN_FILTER'), flighthq._internal.WebGl2RenderingContext.field(gl, 'LINEAR')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_MAG_FILTER'), flighthq._internal.WebGl2RenderingContext.field(gl, 'LINEAR')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_WRAP_S'), flighthq._internal.WebGl2RenderingContext.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_WRAP_T'), flighthq._internal.WebGl2RenderingContext.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
-    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), null] : Array<Dynamic>));
+    texture = flighthq._internal.backend.WebGl2Backend.call(gl, 'createTexture', cast ([] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), texture] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'texImage2D', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), 0.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'RGBA8'), 256.0, 1.0, 0.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'RGBA'), flighthq._internal.backend.WebGl2Backend.field(gl, 'UNSIGNED_BYTE'), data] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'texParameteri', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_MIN_FILTER'), flighthq._internal.backend.WebGl2Backend.field(gl, 'LINEAR')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'texParameteri', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_MAG_FILTER'), flighthq._internal.backend.WebGl2Backend.field(gl, 'LINEAR')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'texParameteri', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_WRAP_S'), flighthq._internal.backend.WebGl2Backend.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'texParameteri', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_WRAP_T'), flighthq._internal.backend.WebGl2Backend.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
+    flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), null] : Array<Dynamic>));
     return cast texture;
     return cast null;
   }

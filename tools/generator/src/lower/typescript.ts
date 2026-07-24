@@ -198,6 +198,14 @@ const platformGlobalValues = new Set([
   'window',
 ]);
 
+const webGpuConstantNamespaces = new Set([
+  'GPUBufferUsage',
+  'GPUColorWrite',
+  'GPUMapMode',
+  'GPUShaderStage',
+  'GPUTextureUsage',
+]);
+
 export function lowerTypeScriptSource(
   sourceFile: ts.SourceFile,
   packageName: string,
@@ -1169,21 +1177,31 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
     };
   }
   if (ts.isPropertyAccessExpression(node)) {
+    const webGpuConstantNamespace =
+      ts.isIdentifier(node.expression) &&
+      webGpuConstantNamespaces.has(node.expression.text) &&
+      !isLexicallyBound(node.expression, context)
+        ? node.expression.text
+        : undefined;
     const objectIsGlobalObject =
       ts.isIdentifier(node.expression) &&
       node.expression.text === 'Object' &&
       !isLexicallyBound(node.expression, context);
     return {
-      binding: objectIsGlobalObject
-        ? 'DynamicObject'
-        : isBoundPlatformExpression(node.expression, context, 'CanvasRenderingContext2D')
-          ? 'Canvas2dBackend'
-          : isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
-            ? 'WebGl2Backend'
-            : undefined,
+      binding: webGpuConstantNamespace
+        ? 'WebGpuConstantsBackend'
+        : objectIsGlobalObject
+          ? 'DynamicObject'
+          : isBoundPlatformExpression(node.expression, context, 'CanvasRenderingContext2D')
+            ? 'Canvas2dBackend'
+            : isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
+              ? 'WebGl2Backend'
+              : undefined,
       kind: 'property',
       name: node.name.text,
-      object: lowerExpression(node.expression, context),
+      object: webGpuConstantNamespace
+        ? { kind: 'literal', value: webGpuConstantNamespace }
+        : lowerExpression(node.expression, context),
       optional: ts.isOptionalChain(node),
     };
   }

@@ -17,7 +17,7 @@ class GlPosterizeEffect {
     levels = HxMath.max(2.0, _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 8.0));
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'colorGrade.posterize', GlPosterizeEffect.POSTERIZE_FRAGMENT_SRC__glPosterizeEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_levels'] : Array<Dynamic>)), levels] : Array<Dynamic>));
+      flighthq._internal.backend.WebGl2Backend.call(gl, 'uniform1f', cast ([flighthq._internal.backend.WebGl2Backend.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_levels'] : Array<Dynamic>)), levels] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

@@ -65,7 +65,7 @@ class WgpuShadowMap {
     sceneRuntime = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     shadow = _Runtime.field(sceneRuntime, 'shadow');
     if (_Runtime.truthy(_Runtime.strictEquals(shadow, null))) {
-      var depthTexture:Dynamic = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([WgpuShadowMap.SHADOW_MAP_SIZE__wgpuShadowMap, WgpuShadowMap.SHADOW_MAP_SIZE__wgpuShadowMap, 1.0] : Array<Dynamic>), format: SHADOW_DEPTH_FORMAT, usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'RENDER_ATTACHMENT')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
+      var depthTexture:Dynamic = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([WgpuShadowMap.SHADOW_MAP_SIZE__wgpuShadowMap, WgpuShadowMap.SHADOW_MAP_SIZE__wgpuShadowMap, 1.0] : Array<Dynamic>), format: SHADOW_DEPTH_FORMAT, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
       (shadow = cast ({ depthTexture: depthTexture, depthView: _Runtime.callProperty(depthTexture, 'createView', cast ([] : Array<Dynamic>)), matrix: (cast _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) : Matrix4) } : Dynamic));
       _Runtime.setField(sceneRuntime, 'shadow', shadow);
     }

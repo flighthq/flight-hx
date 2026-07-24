@@ -89,7 +89,7 @@ class WgpuDraw {
       (height = cast (_Runtime.orValue(_Runtime.field(imageSource, 'height'), function():Dynamic return cast 1.0) : Dynamic));
     } } } } }
     mipLevelCount = _Runtime.select(generateMips, function():Dynamic return cast _Runtime.callValue(getWgpuMipLevelCount, cast ([width, height] : Array<Dynamic>)), function():Dynamic return cast 1.0);
-    texture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: 'rgba8unorm', mipLevelCount: mipLevelCount, usage: (Std.int((Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'COPY_DST')))) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
+    texture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: 'rgba8unorm', mipLevelCount: mipLevelCount, usage: (Std.int((Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: (cast imageSource : Dynamic), flipY: false }, { texture: texture, premultipliedAlpha: true }, cast ([width, height] : Array<Dynamic>)] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(mipLevelCount, 1.0, '>'))) { _Runtime.callValue(generateWgpuMipmaps, cast ([state, texture, width, height, 'rgba8unorm'] : Array<Dynamic>)); }
     view = _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>));
@@ -129,7 +129,7 @@ class WgpuDraw {
     textureBindGroupLayout = _Runtime.field(__destructure3, 'textureBindGroupLayout');
     w = HxMath.max(1.0, width);
     h = HxMath.max(1.0, height);
-    texture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (Std.int((Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'COPY_DST')))) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
+    texture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (Std.int((Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: (cast canvas : Dynamic), flipY: false }, { texture: texture, premultipliedAlpha: true }, cast ([w, h] : Array<Dynamic>)] : Array<Dynamic>));
     view = _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>));
     sampler = _Runtime.select(_Runtime.field(state, 'allowSmoothing'), function():Dynamic return cast _Runtime.field(runtime, 'linearSampler'), function():Dynamic return cast _Runtime.field(runtime, 'nearestSampler'));
@@ -234,7 +234,7 @@ class WgpuDraw {
     width = _Runtime.orValue(_Runtime.field(image, 'width'), function():Dynamic return cast 1.0);
     height = _Runtime.orValue(_Runtime.field(image, 'height'), function():Dynamic return cast 1.0);
     mipLevelCount = _Runtime.select(generateMips, function():Dynamic return cast _Runtime.callValue(getWgpuMipLevelCount, cast ([width, height] : Array<Dynamic>)), function():Dynamic return cast 1.0);
-    texture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: 'rgba8unorm', mipLevelCount: mipLevelCount, usage: (Std.int((Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'COPY_DST')))) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
+    texture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: 'rgba8unorm', mipLevelCount: mipLevelCount, usage: (Std.int((Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(image, 'source'), null))) {
       _Runtime.callProperty(_Runtime.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: (cast _Runtime.field(image, 'source') : Dynamic), flipY: false }, { texture: texture, premultipliedAlpha: true }, cast ([width, height] : Array<Dynamic>)] : Array<Dynamic>));
     } else {

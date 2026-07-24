@@ -89,12 +89,12 @@ class WgpuScale9Shape {
       _Runtime.setField(_Runtime.field(shapeData, 'canvas'), 'width', w);
       _Runtime.setField(_Runtime.field(shapeData, 'canvas'), 'height', h);
       var ctx:Dynamic = _Runtime.field(shapeData, 'ctx');
-      flighthq._internal.CanvasRenderingContext2D.call(ctx, 'clearRect', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
-      flighthq._internal.CanvasRenderingContext2D.call(ctx, 'save', cast ([] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
       _Runtime.callValue(remapWgpuScale9Commands, cast ([WgpuScale9Shape._remappedCommands__wgpuScale9Shape, commands, mapper] : Array<Dynamic>));
-      flighthq._internal.CanvasRenderingContext2D.call(ctx, 'translate', cast ([-_Runtime.field(bounds, 'x'), -_Runtime.field(bounds, 'y')] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'translate', cast ([-_Runtime.field(bounds, 'x'), -_Runtime.field(bounds, 'y')] : Array<Dynamic>));
       _Runtime.callValue(renderCanvasShapeCommands, cast ([ctx, WgpuScale9Shape._remappedCommands__wgpuScale9Shape] : Array<Dynamic>));
-      flighthq._internal.CanvasRenderingContext2D.call(ctx, 'restore', cast ([] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(shapeData, 'entry'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(shapeData, 'lastW'), w)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(shapeData, 'lastH'), h)))) {
         _Runtime.callOptionalProperty(_Runtime.optionalField(_Runtime.field(shapeData, 'entry'), 'texture'), 'destroy', cast ([] : Array<Dynamic>));
         _Runtime.setField(shapeData, 'entry', _Runtime.callValue(createWgpuTextureEntry, cast ([state, w, h, _Runtime.field(shapeData, 'canvas')] : Array<Dynamic>)));

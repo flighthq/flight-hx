@@ -49,10 +49,10 @@ class WgpuRenderState {
       format = _Runtime.coalesce(_Runtime.field(options, 'format'), function():Dynamic return cast _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('navigator'), 'gpu'), 'getPreferredCanvasFormat', cast ([] : Array<Dynamic>)));
       context = (cast _Runtime.callProperty(canvas, 'getContext', cast (['webgpu'] : Array<Dynamic>)) : Null<Dynamic>);
       if (_Runtime.truthy(!_Runtime.truthy(context))) { throw _Runtime.error('Failed to get WebGPU canvas context.'); }
-      _Runtime.callProperty(context, 'configure', cast ([{ device: device, format: format, alphaMode: 'premultiplied', usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'RENDER_ATTACHMENT')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'COPY_SRC'))) }] : Array<Dynamic>));
+      _Runtime.callProperty(context, 'configure', cast ([{ device: device, format: format, alphaMode: 'premultiplied', usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_SRC'))) }] : Array<Dynamic>));
       uniformStride = HxMath.max(HxMath.max(256.0, _Runtime.field(_Runtime.field(device, 'limits'), 'minUniformBufferOffsetAlignment')), UNIFORM_BYTE_SIZE);
       ringByteSize = (uniformStride * WgpuRenderState.RING_SLOT_COUNT__wgpuRenderState);
-      uniformBuffer = _Runtime.callProperty(device, 'createBuffer', cast ([{ size: ringByteSize, usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST'))) }] : Array<Dynamic>));
+      uniformBuffer = _Runtime.callProperty(device, 'createBuffer', cast ([{ size: ringByteSize, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
       uniformData = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(ringByteSize / 4.0)]);
       uniformDataU32 = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [_Runtime.field(uniformData, 'buffer')]);
       __destructure0 = _Runtime.callValue(createWgpuBindGroupLayouts, cast ([device] : Array<Dynamic>));

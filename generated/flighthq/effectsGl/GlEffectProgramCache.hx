@@ -36,7 +36,7 @@ class GlEffectProgramCache {
     }
     existing = _Runtime.callProperty(cache, 'get', cast ([name] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
-    loc = flighthq._internal.WebGl2RenderingContext.call(_Runtime.field(state, 'gl'), 'getUniformLocation', cast ([_Runtime.field(program, 'program'), name] : Array<Dynamic>));
+    loc = flighthq._internal.backend.WebGl2Backend.call(_Runtime.field(state, 'gl'), 'getUniformLocation', cast ([_Runtime.field(program, 'program'), name] : Array<Dynamic>));
     _Runtime.callProperty(cache, 'set', cast ([name, loc] : Array<Dynamic>));
     return cast loc;
     return cast null;
