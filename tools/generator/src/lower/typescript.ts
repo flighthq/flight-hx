@@ -1177,9 +1177,9 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
       binding: objectIsGlobalObject
         ? 'DynamicObject'
         : isBoundPlatformExpression(node.expression, context, 'CanvasRenderingContext2D')
-          ? 'CanvasRenderingContext2D'
+          ? 'Canvas2dBackend'
           : isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
-            ? 'WebGl2RenderingContext'
+            ? 'WebGl2Backend'
             : undefined,
       kind: 'property',
       name: node.name.text,

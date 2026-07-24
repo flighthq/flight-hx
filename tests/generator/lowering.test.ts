@@ -340,10 +340,10 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain("flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer'");
-    expect(output).toContain("flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER')");
-    expect(output).toContain("flighthq._internal.WebGl2RenderingContext.call(alias, 'drawArrays'");
-    expect(output).toContain("flighthq._internal.WebGl2RenderingContext.call(gl, 'clear'");
+    expect(output).toContain("flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer'");
+    expect(output).toContain("flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER')");
+    expect(output).toContain("flighthq._internal.backend.WebGl2Backend.call(alias, 'drawArrays'");
+    expect(output).toContain("flighthq._internal.backend.WebGl2Backend.call(gl, 'clear'");
     expect(output).not.toContain("_Runtime.callProperty(gl, 'bindBuffer'");
   });
 
@@ -370,11 +370,11 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain("flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'fillStyle'");
-    expect(output).toContain("flighthq._internal.CanvasRenderingContext2D.call(ctx, 'fillRect'");
+    expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle'");
+    expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillRect'");
     expect(output).not.toContain("_Runtime.callProperty(ctx, 'fillRect'");
     expect(output).toContain("_Runtime.field(ctx, 'source')");
-    expect(output).not.toContain("CanvasRenderingContext2D.field(ctx, 'source')");
+    expect(output).not.toContain("Canvas2dBackend.field(ctx, 'source')");
   });
 
   it('routes global Object operations through named portable bindings', () => {
