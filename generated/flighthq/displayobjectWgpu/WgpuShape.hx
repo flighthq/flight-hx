@@ -104,7 +104,7 @@ class WgpuShape {
         _Runtime.setField(meshData, 'meshes', _Runtime.callProperty(regions, 'map', cast ([function(region:Dynamic) {
           var mesh:Dynamic = cast _Runtime.UNDEFINED;
           mesh = _Runtime.callValue(tessellatePath, cast ([_Runtime.field(region, 'path')] : Array<Dynamic>));
-          return cast { vertices: _Runtime.construct(_Runtime.globalValue('Float32Array'), [_Runtime.field(mesh, 'vertices')]), indices: new flighthq._internal._UInt16Array(_Runtime.field(mesh, 'indices')), color: _Runtime.field(region, 'color'), alpha: _Runtime.field(region, 'alpha') };
+          return cast { vertices: new flighthq._internal._Float32Array(_Runtime.field(mesh, 'vertices')), indices: new flighthq._internal._UInt16Array(_Runtime.field(mesh, 'indices')), color: _Runtime.field(region, 'color'), alpha: _Runtime.field(region, 'alpha') };
         }] : Array<Dynamic>)));
         _Runtime.setField(meshData, 'meshVersion', version);
       }

@@ -20,7 +20,7 @@ class MeshGeometry {
     var indices:Null<Dynamic> = cast _Runtime.UNDEFINED;
     var subsets:Array<MeshSubset> = cast _Runtime.UNDEFINED;
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
-    vertices = _Runtime.construct(_Runtime.globalValue('Float32Array'), [_Runtime.field(_Runtime.field(source, 'vertices'), 'length')]);
+    vertices = new flighthq._internal._Float32Array(_Runtime.field(_Runtime.field(source, 'vertices'), 'length'));
     _Runtime.callProperty(vertices, 'set', cast ([_Runtime.field(source, 'vertices')] : Array<Dynamic>));
     indices = null;
     if (_Runtime.truthy(_Runtime.field(source, 'indices'))) {

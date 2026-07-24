@@ -132,5 +132,5 @@ class StandardPbrWgpuMeshMaterialRenderer {
 
   public static final _colorScratch__standardPbrWgpuMeshMaterialRenderer:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
 
-  public static final _materialScratch__standardPbrWgpuMeshMaterialRenderer:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [WGPU_PBR_MATERIAL_UNIFORM_FLOATS]);
+  public static final _materialScratch__standardPbrWgpuMeshMaterialRenderer:Dynamic = new flighthq._internal._Float32Array(WGPU_PBR_MATERIAL_UNIFORM_FLOATS);
 }

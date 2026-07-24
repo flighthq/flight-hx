@@ -1611,6 +1611,10 @@ function emitExpression(expression: IrExpression): string {
         return `${String(expression.value)}.0`;
       return String(expression.value);
     case 'new':
+      const typedArray = typedArrayConstructor(expression.callee);
+      if (typedArray) {
+        return `new ${typedArray}(${expression.arguments.map(emitExpression).join(', ')})`;
+      }
       if (
         (expression.callee.kind === 'identifier' && expression.callee.name === 'Promise') ||
         emitExpression(expression.callee) === "_Runtime.globalValue('Promise')"
@@ -1649,7 +1653,7 @@ function emitExpression(expression: IrExpression): string {
       if (expression.callee.kind !== 'identifier' || /^[a-z_]/u.test(expression.callee.name)) {
         return `_Runtime.construct(${emitExpression(expression.callee)}, [${expression.arguments.map(emitExpression).join(', ')}])`;
       }
-      return `new ${typedArrayConstructor(expression.callee) ?? emitExpression(expression.callee)}(${expression.arguments.map(emitExpression).join(', ')})`;
+      return `new ${emitExpression(expression.callee)}(${expression.arguments.map(emitExpression).join(', ')})`;
     case 'object':
       if (expression.properties.some((property) => property.kind === 'spread')) {
         return `_Runtime.mergeObjects([${expression.properties
@@ -2104,12 +2108,24 @@ function stripTrailingSwitchBreak(statements: IrStatement[]): IrStatement[] {
 }
 
 function typedArrayConstructor(expression: IrExpression): string | undefined {
-  if (expression.kind !== 'identifier') return undefined;
+  const name =
+    expression.kind === 'identifier'
+      ? expression.name
+      : expression.kind === 'call' &&
+          expression.callee.kind === 'property' &&
+          expression.callee.object.kind === 'identifier' &&
+          expression.callee.object.name === '_Runtime' &&
+          expression.callee.name === 'globalValue' &&
+          expression.arguments[0]?.kind === 'literal' &&
+          typeof expression.arguments[0].value === 'string'
+        ? expression.arguments[0].value
+        : undefined;
+  if (!name) return undefined;
   return {
     Float32Array: 'flighthq._internal._Float32Array',
     Int16Array: 'flighthq._internal._Int16Array',
     Uint16Array: 'flighthq._internal._UInt16Array',
-  }[expression.name];
+  }[name];
 }
 
 export function emitType(type: IrType): string {

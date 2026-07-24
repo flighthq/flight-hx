@@ -174,7 +174,7 @@ class WgpuShapeMesh {
     flighthq._internal.backend.WebGpuQueueBackend.call(queue, 'writeBuffer', cast ([indexBuffer, 0.0, _Runtime.field(WgpuShapeMesh._shapeMeshIndexScratch__wgpuShapeMesh, 'buffer'), 0.0, paddedBytes] : Array<Dynamic>));
   }
 
-  public static final _shapeMeshUniformScratch__wgpuShapeMesh:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [WgpuShapeMesh.SHAPE_MESH_UNIFORM_FLOATS__wgpuShapeMesh]);
+  public static final _shapeMeshUniformScratch__wgpuShapeMesh:Dynamic = new flighthq._internal._Float32Array(WgpuShapeMesh.SHAPE_MESH_UNIFORM_FLOATS__wgpuShapeMesh);
 
   public static var _shapeMeshIndexScratch__wgpuShapeMesh:Dynamic = new flighthq._internal._UInt16Array(0.0);
 }

@@ -12,7 +12,7 @@ class GlColorMatrixPass {
   public static function applyColorMatrixPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, matrix:Array<Float>):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.construct(_Runtime.globalValue('Float32Array'), [20.0]);
+    m = new flighthq._internal._Float32Array(20.0);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, 20.0, '<'))) {

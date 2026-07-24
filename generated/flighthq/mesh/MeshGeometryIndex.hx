@@ -61,7 +61,7 @@ class MeshGeometryIndex {
       }
     }
     out = _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>));
-    _Runtime.setField(out, 'vertices', _Runtime.construct(_Runtime.globalValue('Float32Array'), [compactBuffer]));
+    _Runtime.setField(out, 'vertices', new flighthq._internal._Float32Array(compactBuffer));
     _Runtime.setField(out, 'indices', indices);
     return cast out;
     return cast null;
@@ -128,7 +128,7 @@ class MeshGeometryIndex {
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
     sourceVertices = _Runtime.field(geometry, 'vertices');
     if (_Runtime.truthy(!_Runtime.truthy(indices))) { return cast _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>)); }
-    vertices = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(_Runtime.field(indices, 'length') * floatsPerVertex)]);
+    vertices = new flighthq._internal._Float32Array((_Runtime.field(indices, 'length') * floatsPerVertex));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(indices, 'length'), '<'))) {
@@ -235,7 +235,7 @@ class MeshGeometryIndex {
     }
     weldedBuffer = _Runtime.slice(_Runtime.field(uniqueBytes, 'buffer'), 0.0, (uniqueCount * stride));
     out = _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>));
-    _Runtime.setField(out, 'vertices', _Runtime.construct(_Runtime.globalValue('Float32Array'), [weldedBuffer]));
+    _Runtime.setField(out, 'vertices', new flighthq._internal._Float32Array(weldedBuffer));
     _Runtime.setField(out, 'indices', indices);
     return cast out;
     return cast null;

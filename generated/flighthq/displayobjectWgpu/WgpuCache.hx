@@ -89,8 +89,8 @@ class WgpuCache {
     _Runtime.setField(cacheRuntime, 'spriteBatchMaterialRenderer', null);
     _Runtime.setField(cacheRuntime, 'spriteBatchMaterialFloats', 0.0);
     _Runtime.setField(cacheRuntime, 'spriteBatchCount', 0.0);
-    _Runtime.setField(cacheRuntime, 'spriteBatchInstanceData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [0.0]));
-    _Runtime.setField(cacheRuntime, 'spriteBatchMaterialData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [0.0]));
+    _Runtime.setField(cacheRuntime, 'spriteBatchInstanceData', new flighthq._internal._Float32Array(0.0));
+    _Runtime.setField(cacheRuntime, 'spriteBatchMaterialData', new flighthq._internal._Float32Array(0.0));
     _Runtime.setField(cacheRuntime, 'spriteBatchTexture', null);
     _Runtime.setField(cacheRuntime, 'wgpuColorAdjustmentFold', _Runtime.field(screenRuntime, 'wgpuColorAdjustmentFold'));
     _Runtime.setField(cacheRuntime, 'wgpuColorAdjustmentGuard', _Runtime.field(screenRuntime, 'wgpuColorAdjustmentGuard'));

@@ -113,7 +113,7 @@ class GlClipContours {
       while (_Runtime.truthy(_Runtime.compare(c, _Runtime.field(contours, 'length'), '<'))) {
         var contour:Dynamic = _Runtime.getIndex(contours, c);
         if (_Runtime.truthy(_Runtime.compare(_Runtime.field(contour, 'length'), 6.0, '<'))) { c++; continue; }
-        flighthq._internal.backend.WebGl2Backend.call(gl, 'bufferData', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), _Runtime.construct(_Runtime.globalValue('Float32Array'), [contour]), flighthq._internal.backend.WebGl2Backend.field(gl, 'STREAM_DRAW')] : Array<Dynamic>));
+        flighthq._internal.backend.WebGl2Backend.call(gl, 'bufferData', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), new flighthq._internal._Float32Array(contour), flighthq._internal.backend.WebGl2Backend.field(gl, 'STREAM_DRAW')] : Array<Dynamic>));
         flighthq._internal.backend.WebGl2Backend.call(gl, 'drawArrays', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TRIANGLE_FAN'), 0.0, (Std.int(_Runtime.field(contour, 'length')) >> Std.int(1.0))] : Array<Dynamic>));
         c++;
       }
@@ -127,7 +127,7 @@ class GlClipContours {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     w = _Runtime.orValue(_Runtime.field(_Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas')), 'width'), function():Dynamic return cast 1.0);
     h = _Runtime.orValue(_Runtime.field(_Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas')), 'height'), function():Dynamic return cast 1.0);
-    return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [cast ([(2.0 / w), 0.0, 0.0, 0.0, (-2.0 / h), 0.0, -1.0, 1.0, 1.0] : Array<Dynamic>)]);
+    return cast new flighthq._internal._Float32Array(cast ([(2.0 / w), 0.0, 0.0, 0.0, (-2.0 / h), 0.0, -1.0, 1.0, 1.0] : Array<Dynamic>));
     return cast null;
   }
 }

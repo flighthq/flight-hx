@@ -40,13 +40,13 @@ class GlParticleEmitter2D {
     if (_Runtime.truthy(_Runtime.field(runtime, 'particleShader'))) { return cast _Runtime.field(runtime, 'particleShader'); }
     gl = _Runtime.field(state, 'gl');
     _Runtime.setField(runtime, 'particleShader', _Runtime.callValue(GlParticleEmitter2D.compileParticleShader__glParticleEmitter2D, cast ([gl] : Array<Dynamic>)));
-    cornerData = _Runtime.construct(_Runtime.globalValue('Float32Array'), [cast ([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0] : Array<Dynamic>)]);
+    cornerData = new flighthq._internal._Float32Array(cast ([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0] : Array<Dynamic>));
     cornerBuf = flighthq._internal.backend.WebGl2Backend.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), cornerBuf] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.call(gl, 'bufferData', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), cornerData, flighthq._internal.backend.WebGl2Backend.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
     _Runtime.setField(runtime, 'particleCornerBuffer', cornerBuf);
     _Runtime.setField(runtime, 'particleInstanceBuffer', flighthq._internal.backend.WebGl2Backend.call(gl, 'createBuffer', cast ([] : Array<Dynamic>)));
-    _Runtime.setField(runtime, 'particleInstanceData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [0.0]));
+    _Runtime.setField(runtime, 'particleInstanceData', new flighthq._internal._Float32Array(0.0));
     return cast _Runtime.field(runtime, 'particleShader');
     return cast null;
   }
@@ -61,7 +61,7 @@ class GlParticleEmitter2D {
     needed = (count * GlParticleEmitter2D.INSTANCE_FLOATS__glParticleEmitter2D);
     if (_Runtime.truthy(_Runtime.compare(_Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'particleInstanceData'), 'length'), function():Dynamic return cast 0.0), needed, '>='))) { return; }
     newSize = HxMath.max(needed, (_Runtime.coalesce(_Runtime.optionalField(_Runtime.field(runtime, 'particleInstanceData'), 'length'), function():Dynamic return cast 0.0) * 2.0));
-    _Runtime.setField(runtime, 'particleInstanceData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [newSize]));
+    _Runtime.setField(runtime, 'particleInstanceData', new flighthq._internal._Float32Array(newSize));
     flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'particleInstanceBuffer')] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.call(gl, 'bufferData', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), (newSize * 4.0), flighthq._internal.backend.WebGl2Backend.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
   }

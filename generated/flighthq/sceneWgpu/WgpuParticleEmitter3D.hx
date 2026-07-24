@@ -98,7 +98,7 @@ class WgpuParticleEmitter3D {
     if (_Runtime.truthy(!_Runtime.strictEquals(resources, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast resources; }
     device = _Runtime.field(state, 'device');
     cornerBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: (8.0 * 4.0), usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'VERTEX')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
-    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([cornerBuffer, 0.0, _Runtime.construct(_Runtime.globalValue('Float32Array'), [cast ([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0] : Array<Dynamic>)])] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([cornerBuffer, 0.0, new flighthq._internal._Float32Array(cast ([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0] : Array<Dynamic>))] : Array<Dynamic>));
     indexBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: (6.0 * 2.0), usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'INDEX')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([indexBuffer, 0.0, new flighthq._internal._UInt16Array(cast ([0.0, 1.0, 2.0, 0.0, 2.0, 3.0] : Array<Dynamic>))] : Array<Dynamic>));
     frameLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX'), buffer: { type: 'uniform' } }] : Array<Dynamic>) }] : Array<Dynamic>));
@@ -106,7 +106,7 @@ class WgpuParticleEmitter3D {
     pipelineLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([frameLayout, textureLayout] : Array<Dynamic>) }] : Array<Dynamic>));
     frameBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: WgpuParticleEmitter3D.FRAME_UNIFORM_BYTES__wgpuParticleEmitter3D, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     frameBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: frameLayout, entries: cast ([{ binding: 0.0, resource: { buffer: frameBuffer } }] : Array<Dynamic>) }] : Array<Dynamic>));
-    (resources = cast ({ cornerBuffer: cornerBuffer, frameBindGroup: frameBindGroup, frameBuffer: frameBuffer, frameLayout: frameLayout, indexBuffer: indexBuffer, instanceBuffers: _Runtime.construct(_Runtime.globalValue('WeakMap'), []), instanceData: _Runtime.construct(_Runtime.globalValue('Float32Array'), [0.0]), module: flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: WgpuParticleEmitter3D.PARTICLE_3D_WGSL__wgpuParticleEmitter3D }] : Array<Dynamic>)), pipelineLayout: pipelineLayout, pipelines: _Runtime.construct(_Runtime.globalValue('Map'), []), textureLayout: textureLayout } : Dynamic));
+    (resources = cast ({ cornerBuffer: cornerBuffer, frameBindGroup: frameBindGroup, frameBuffer: frameBuffer, frameLayout: frameLayout, indexBuffer: indexBuffer, instanceBuffers: _Runtime.construct(_Runtime.globalValue('WeakMap'), []), instanceData: new flighthq._internal._Float32Array(0.0), module: flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: WgpuParticleEmitter3D.PARTICLE_3D_WGSL__wgpuParticleEmitter3D }] : Array<Dynamic>)), pipelineLayout: pipelineLayout, pipelines: _Runtime.construct(_Runtime.globalValue('Map'), []), textureLayout: textureLayout } : Dynamic));
     _Runtime.callProperty(WgpuParticleEmitter3D.resourceCache__wgpuParticleEmitter3D, 'set', cast ([state, resources] : Array<Dynamic>));
     return cast resources;
     return cast null;
@@ -179,7 +179,7 @@ class WgpuParticleEmitter3D {
     if (_Runtime.truthy(_Runtime.strictEquals(particleCount, 0.0))) { return; }
     needed = (particleCount * WgpuParticleEmitter3D.INSTANCE_FLOATS__wgpuParticleEmitter3D);
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(resources, 'instanceData'), 'length'), needed, '<'))) {
-      _Runtime.setField(resources, 'instanceData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [HxMath.max(needed, (_Runtime.field(_Runtime.field(resources, 'instanceData'), 'length') * 2.0))]));
+      _Runtime.setField(resources, 'instanceData', new flighthq._internal._Float32Array(HxMath.max(needed, (_Runtime.field(_Runtime.field(resources, 'instanceData'), 'length') * 2.0))));
     }
     hasAtlas = _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(atlas, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(atlas, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)));
     regions = _Runtime.select(hasAtlas, function():Dynamic return cast _Runtime.field(atlas, 'regions'), function():Dynamic return cast null);
@@ -339,7 +339,7 @@ class WgpuParticleEmitter3D {
 
   public static final emitterScratch__wgpuParticleEmitter3D:Array<ParticleEmitter3D> = cast ([] : Array<Dynamic>);
 
-  public static final frameScratch__wgpuParticleEmitter3D:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(WgpuParticleEmitter3D.FRAME_UNIFORM_BYTES__wgpuParticleEmitter3D / 4.0)]);
+  public static final frameScratch__wgpuParticleEmitter3D:Dynamic = new flighthq._internal._Float32Array((WgpuParticleEmitter3D.FRAME_UNIFORM_BYTES__wgpuParticleEmitter3D / 4.0));
 
   public static final resourceCache__wgpuParticleEmitter3D:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 

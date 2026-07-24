@@ -1120,6 +1120,35 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('_Runtime.fill(value, 2.0, 3.0, null, 2)');
   });
 
+  it('constructs portable typed-array wrappers directly', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `export function createArrays() {
+        return {
+          floats: new Float32Array(4),
+          signed: new Int16Array([1, -2]),
+          unsigned: new Uint16Array([1, 2]),
+        };
+      }`,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'TypedArrayFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('new flighthq._internal._Float32Array(4.0)');
+    expect(output).toContain('new flighthq._internal._Int16Array(');
+    expect(output).toContain('new flighthq._internal._UInt16Array(');
+    expect(output).not.toContain("_Runtime.construct(_Runtime.globalValue('Float32Array')");
+  });
+
   it('preserves negative-zero normalization and fractional sort comparators', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/example/src/sample.ts',

@@ -878,7 +878,7 @@ class AwdParse {
         }
         var skinned:Dynamic = _Runtime.compare(jointsPerVertex, 0.0, '>');
         var floatsPerVertex:Dynamic = _Runtime.select(skinned, function():Dynamic return cast SKINNED_FLOATS_PER_VERTEX, function():Dynamic return cast CANONICAL_FLOATS_PER_VERTEX);
-        var vertices:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * floatsPerVertex)]);
+        var vertices:Dynamic = new flighthq._internal._Float32Array((vertexCount * floatsPerVertex));
         var jointScratch:Dynamic = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
         var weightScratch:Dynamic = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
         {

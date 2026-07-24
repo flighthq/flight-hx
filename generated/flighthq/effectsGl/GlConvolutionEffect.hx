@@ -37,7 +37,7 @@ class GlConvolutionEffect {
     preserveAlpha = _Runtime.coalesce(_Runtime.field(effect, 'preserveAlpha'), function():Dynamic return cast true);
     edgeColor = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 0.0);
     divisor = _Runtime.coalesce(_Runtime.field(effect, 'divisor'), function():Dynamic return cast _Runtime.callValue(GlConvolutionEffect.getAutoDivisor__glConvolutionEffect, cast ([matrix, (matrixX * matrixY)] : Array<Dynamic>)));
-    matrixData = _Runtime.construct(_Runtime.globalValue('Float32Array'), [MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE]);
+    matrixData = new flighthq._internal._Float32Array(MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, (matrixX * matrixY), '<'))) {

@@ -74,7 +74,7 @@ class AnimationBlend {
   public static function createAnimationSampleAccumulator(components:Float, quaternion:Dynamic = false):AnimationSampleAccumulator {
     var width:Dynamic = cast _Runtime.UNDEFINED;
     width = HxMath.max(0.0, (Std.int(components) | Std.int(0.0)));
-    return cast _Runtime.callValue(createEntity, cast ([{ components: width, quaternion: quaternion, values: _Runtime.construct(_Runtime.globalValue('Float32Array'), [width]), weight: 0.0 }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ components: width, quaternion: quaternion, values: new flighthq._internal._Float32Array(width), weight: 0.0 }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -167,7 +167,7 @@ class AnimationBlend {
     _Runtime.callValue(AnimationBlend.slerpQuaternion__animationBlend, cast ([out, AnimationBlend.IDENTITY_QUATERNION__animationBlend, delta, weight] : Array<Dynamic>));
   }
 
-  public static final IDENTITY_QUATERNION__animationBlend:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>)]);
+  public static final IDENTITY_QUATERNION__animationBlend:Dynamic = new flighthq._internal._Float32Array(cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
 
-  public static final _quaternion__animationBlend:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [4.0]);
+  public static final _quaternion__animationBlend:Dynamic = new flighthq._internal._Float32Array(4.0);
 }

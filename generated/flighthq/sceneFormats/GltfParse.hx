@@ -543,7 +543,7 @@ class GltfParse {
     var s:Dynamic = cast _Runtime.UNDEFINED;
     transform = _Runtime.callValue(createTransform3D, cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(gltfNode, 'matrix'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      _Runtime.callValue(decomposeMatrix4ToTransform3D, cast ([transform, { m: _Runtime.construct(_Runtime.globalValue('Float32Array'), [_Runtime.field(gltfNode, 'matrix')]) }] : Array<Dynamic>));
+      _Runtime.callValue(decomposeMatrix4ToTransform3D, cast ([transform, { m: new flighthq._internal._Float32Array(_Runtime.field(gltfNode, 'matrix')) }] : Array<Dynamic>));
       return cast transform;
     }
     t = _Runtime.field(gltfNode, 'translation');
@@ -571,7 +571,7 @@ class GltfParse {
 
   public static function identityMatrix16__gltfParse():flighthq._internal._Float32Array {
     var m:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.construct(_Runtime.globalValue('Float32Array'), [16.0]);
+    m = new flighthq._internal._Float32Array(16.0);
     _Runtime.setIndex(m, 0.0, 1.0);
     _Runtime.setIndex(m, 5.0, 1.0);
     _Runtime.setIndex(m, 10.0, 1.0);
@@ -759,7 +759,7 @@ class GltfParse {
     positionIndex = _Runtime.field(_Runtime.field(primitive, 'attributes'), 'POSITION');
     if (_Runtime.truthy(_Runtime.strictEquals(positionIndex, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['primitiveToGeometry: primitive has no POSITION attribute; returning empty geometry'] : Array<Dynamic>));
-      return cast _Runtime.callValue(createMeshGeometry, cast ([{ layout: CANONICAL_LAYOUT, vertices: _Runtime.construct(_Runtime.globalValue('Float32Array'), [0.0]) }] : Array<Dynamic>));
+      return cast _Runtime.callValue(createMeshGeometry, cast ([{ layout: CANONICAL_LAYOUT, vertices: new flighthq._internal._Float32Array(0.0) }] : Array<Dynamic>));
     }
     position = _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, positionIndex, warnings] : Array<Dynamic>));
     vertexCount = _Runtime.field(position, 'count');
@@ -770,7 +770,7 @@ class GltfParse {
     weights = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(primitive, 'attributes'), 'WEIGHTS_0'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(GltfParse.readAccessor__gltfParse, cast ([doc, buffers, _Runtime.field(_Runtime.field(primitive, 'attributes'), 'WEIGHTS_0'), warnings] : Array<Dynamic>)), function():Dynamic return cast null);
     skinned = _Runtime.andValue(!_Runtime.strictEquals(joints, null), function():Dynamic return cast !_Runtime.strictEquals(weights, null));
     floatsPerVertex = _Runtime.select(skinned, function():Dynamic return cast SKINNED_FLOATS_PER_VERTEX, function():Dynamic return cast CANONICAL_FLOATS_PER_VERTEX);
-    vertices = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * floatsPerVertex)]);
+    vertices = new flighthq._internal._Float32Array((vertexCount * floatsPerVertex));
     {
       var v:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {
@@ -914,7 +914,7 @@ class GltfParse {
       }
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(targets, 'length'), 0.0))) { return cast null; }
-    weights = _Runtime.construct(_Runtime.globalValue('Float32Array'), [_Runtime.field(targets, 'length')]);
+    weights = new flighthq._internal._Float32Array(_Runtime.field(targets, 'length'));
     if (_Runtime.truthy(!_Runtime.strictEquals(meshWeights, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       {
         var i:Dynamic = 0.0;
@@ -940,20 +940,20 @@ class GltfParse {
     accessor = _Runtime.optionalIndex(_Runtime.field(doc, 'accessors'), accessorIndex);
     if (_Runtime.truthy(_Runtime.strictEquals(accessor, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['readAccessor: accessor ' + Std.string(accessorIndex) + ' not found in document'] : Array<Dynamic>));
-      return cast { count: 0.0, data: _Runtime.construct(_Runtime.globalValue('Float32Array'), [0.0]) };
+      return cast { count: 0.0, data: new flighthq._internal._Float32Array(0.0) };
     }
     componentCount = _Runtime.getIndex(GltfParse.TYPE_COMPONENTS__gltfParse, _Runtime.field(accessor, 'type'));
     componentByteSize = _Runtime.getIndex(GltfParse.COMPONENT_BYTE_SIZE__gltfParse, _Runtime.field(accessor, 'componentType'));
     normalize = _Runtime.andValue(_Runtime.strictEquals(_Runtime.field(accessor, 'normalized'), true), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(accessor, 'componentType'), 5126.0));
     total = (_Runtime.field(accessor, 'count') * componentCount);
-    out = _Runtime.select(normalize, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [total]), function():Dynamic return cast _Runtime.callValue(GltfParse.createComponentArray__gltfParse, cast ([_Runtime.field(accessor, 'componentType'), total] : Array<Dynamic>)));
+    out = _Runtime.select(normalize, function():Dynamic return cast new flighthq._internal._Float32Array(total), function():Dynamic return cast _Runtime.callValue(GltfParse.createComponentArray__gltfParse, cast ([_Runtime.field(accessor, 'componentType'), total] : Array<Dynamic>)));
     bufferViewIndex = _Runtime.coalesce(_Runtime.field(accessor, 'bufferView'), function():Dynamic return cast -1.0);
     view = _Runtime.select(_Runtime.compare(bufferViewIndex, 0.0, '>='), function():Dynamic return cast _Runtime.optionalIndex(_Runtime.field(doc, 'bufferViews'), bufferViewIndex), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
     if (_Runtime.truthy(!_Runtime.strictEquals(view, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var bytes:Dynamic = _Runtime.getIndex(buffers, _Runtime.field(view, 'buffer'));
       if (_Runtime.truthy(_Runtime.strictEquals(bytes, _Runtime.field(_Runtime, 'UNDEFINED')))) {
         _Runtime.callOptionalProperty(warnings, 'push', cast (['readAccessor: buffer ' + Std.string(_Runtime.field(view, 'buffer')) + ' not found for accessor ' + Std.string(accessorIndex) + ''] : Array<Dynamic>));
-        return cast { count: 0.0, data: _Runtime.construct(_Runtime.globalValue('Float32Array'), [0.0]) };
+        return cast { count: 0.0, data: new flighthq._internal._Float32Array(0.0) };
       }
       var elementByteSize:Dynamic = (componentCount * componentByteSize);
       var stride:Dynamic = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(view, 'byteStride'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(_Runtime.field(view, 'byteStride'), 0.0, '>')), function():Dynamic return cast _Runtime.field(view, 'byteStride'), function():Dynamic return cast elementByteSize);
@@ -961,7 +961,7 @@ class GltfParse {
       var lastByteEnd:Dynamic = _Runtime.select(_Runtime.compare(_Runtime.field(accessor, 'count'), 0.0, '>'), function():Dynamic return cast ((baseOffset + ((_Runtime.field(accessor, 'count') - 1.0) * stride)) + elementByteSize), function():Dynamic return cast baseOffset);
       if (_Runtime.truthy(_Runtime.compare(lastByteEnd, (_Runtime.field(bytes, 'byteOffset') + _Runtime.field(bytes, 'byteLength')), '>'))) {
         _Runtime.callOptionalProperty(warnings, 'push', cast (['readAccessor: accessor ' + Std.string(accessorIndex) + ' runs past its buffer; returning empty'] : Array<Dynamic>));
-        return cast { count: 0.0, data: _Runtime.construct(_Runtime.globalValue('Float32Array'), [0.0]) };
+        return cast { count: 0.0, data: new flighthq._internal._Float32Array(0.0) };
       }
       var dataView:Dynamic = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(bytes, 'buffer')]);
       {
@@ -981,7 +981,7 @@ class GltfParse {
       }
     } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(accessor, 'sparse'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['readAccessor: bufferView ' + Std.string(bufferViewIndex) + ' not found for accessor ' + Std.string(accessorIndex) + ''] : Array<Dynamic>));
-      return cast { count: 0.0, data: _Runtime.construct(_Runtime.globalValue('Float32Array'), [0.0]) };
+      return cast { count: 0.0, data: new flighthq._internal._Float32Array(0.0) };
     } }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(accessor, 'sparse'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callValue(GltfParse.applyAccessorSparse__gltfParse, cast ([doc, buffers, _Runtime.field(accessor, 'sparse'), _Runtime.field(accessor, 'componentType'), componentCount, normalize, out, warnings] : Array<Dynamic>));
@@ -1158,7 +1158,7 @@ class GltfParse {
         return cast _Runtime.construct(_Runtime.globalValue('Uint32Array'), [length]);
       }
       else  {
-        return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [length]);
+        return cast new flighthq._internal._Float32Array(length);
       }
     }
     return cast null;

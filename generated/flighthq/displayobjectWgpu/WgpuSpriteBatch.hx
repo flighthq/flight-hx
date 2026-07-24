@@ -203,13 +203,13 @@ class WgpuSpriteBatch {
     needed = ((_Runtime.field(runtime, 'spriteBatchCount') + maxInstances) * SPRITE_INSTANCE_FLOATS);
     if (_Runtime.truthy(_Runtime.compare(needed, _Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'length'), '>'))) {
       var newSize:Dynamic = HxMath.max(HxMath.max(needed, (_Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'length') * 2.0)), (SPRITE_INSTANCE_FLOATS * 256.0));
-      _Runtime.setField(runtime, 'spriteBatchInstanceData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [newSize]));
+      _Runtime.setField(runtime, 'spriteBatchInstanceData', new flighthq._internal._Float32Array(newSize));
     }
     if (_Runtime.truthy(_Runtime.compare(floats, 0.0, '>'))) {
       var materialNeeded:Dynamic = ((_Runtime.field(runtime, 'spriteBatchCount') + maxInstances) * floats);
       if (_Runtime.truthy(_Runtime.compare(materialNeeded, _Runtime.field(_Runtime.field(runtime, 'spriteBatchMaterialData'), 'length'), '>'))) {
         var newSize:Dynamic = HxMath.max(HxMath.max(materialNeeded, (_Runtime.field(_Runtime.field(runtime, 'spriteBatchMaterialData'), 'length') * 2.0)), (floats * 256.0));
-        _Runtime.setField(runtime, 'spriteBatchMaterialData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [newSize]));
+        _Runtime.setField(runtime, 'spriteBatchMaterialData', new flighthq._internal._Float32Array(newSize));
       }
     }
     return cast (_Runtime.field(runtime, 'spriteBatchCount') * SPRITE_INSTANCE_FLOATS);

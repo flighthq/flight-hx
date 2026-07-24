@@ -30,7 +30,7 @@ class GlRenderState {
     gl = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['webgl2', contextAttribs] : Array<Dynamic>)) : Null<Dynamic>);
     if (_Runtime.truthy(!_Runtime.truthy(gl))) { throw _Runtime.error('Failed to get WebGL2 context.'); }
     shaderLoc = _Runtime.callValue(compileDefaultGlProgram, cast ([gl] : Array<Dynamic>));
-    matrixArray = _Runtime.construct(_Runtime.globalValue('Float32Array'), [9.0]);
+    matrixArray = new flighthq._internal._Float32Array(9.0);
     defaultBitmapShader = _Runtime.callValue(createDefaultGlBitmapShader, cast ([shaderLoc, matrixArray] : Array<Dynamic>));
     quadIndexBuffer = flighthq._internal.backend.WebGl2Backend.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ELEMENT_ARRAY_BUFFER'), quadIndexBuffer] : Array<Dynamic>));
@@ -58,17 +58,17 @@ class GlRenderState {
     _Runtime.setField(runtime, 'spriteBatchMaterial', null);
     _Runtime.setField(runtime, 'spriteBatchMaterialRenderer', null);
     _Runtime.setField(runtime, 'spriteBatchMaterialFloats', 0.0);
-    _Runtime.setField(runtime, 'spriteBatchMaterialData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [(8.0 * 256.0)]));
+    _Runtime.setField(runtime, 'spriteBatchMaterialData', new flighthq._internal._Float32Array((8.0 * 256.0)));
     _Runtime.setField(runtime, 'spriteBatchMaterialBuffer', null);
     _Runtime.setField(runtime, 'spriteBatchCount', 0.0);
     _Runtime.setField(runtime, 'spriteBatchInstanceBuffer', null);
-    _Runtime.setField(runtime, 'spriteBatchInstanceData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [(13.0 * 256.0)]));
+    _Runtime.setField(runtime, 'spriteBatchInstanceData', new flighthq._internal._Float32Array((13.0 * 256.0)));
     _Runtime.setField(runtime, 'spriteBatchTexture', null);
     _Runtime.setField(runtime, 'textureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
     _Runtime.setField(runtime, 'imageResourceTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
     _Runtime.setField(runtime, 'quadVertexBuffer', quadVertexBuffer);
     _Runtime.setField(runtime, 'quadIndexBuffer', quadIndexBuffer);
-    _Runtime.setField(runtime, 'quadVertexData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [16.0]));
+    _Runtime.setField(runtime, 'quadVertexData', new flighthq._internal._Float32Array(16.0));
     _Runtime.setField(runtime, 'matrixArray', matrixArray);
     _Runtime.setField(runtime, 'scissorStack', cast ([] : Array<Dynamic>));
     _Runtime.setField(runtime, 'clipForms', cast ([] : Array<Dynamic>));

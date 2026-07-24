@@ -73,7 +73,7 @@ class GlEnvironmentSkybox {
 
   public static final _inverseViewProjection__glEnvironmentSkybox:Matrix4 = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 
-  public static final _quad__glEnvironmentSkybox:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [cast ([-1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, 1.0] : Array<Dynamic>)]);
+  public static final _quad__glEnvironmentSkybox:Dynamic = new flighthq._internal._Float32Array(cast ([-1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
 
   public static final _skyboxes__glEnvironmentSkybox:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 

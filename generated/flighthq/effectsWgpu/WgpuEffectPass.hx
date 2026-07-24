@@ -45,7 +45,7 @@ class WgpuEffectPass {
     SLOTS = 512.0;
     STRIDE = 256.0;
     uniformBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: (SLOTS * STRIDE), usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
-    uniformData = _Runtime.construct(_Runtime.globalValue('Float32Array'), [((SLOTS * STRIDE) / 4.0)]);
+    uniformData = new flighthq._internal._Float32Array(((SLOTS * STRIDE) / 4.0));
     uniformDataI32 = _Runtime.construct(_Runtime.globalValue('Int32Array'), [_Runtime.field(uniformData, 'buffer')]);
     uniformBGLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), buffer: { type: 'uniform', hasDynamicOffset: true } }] : Array<Dynamic>) }] : Array<Dynamic>));
     uniformBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: uniformBGLayout, entries: cast ([{ binding: 0.0, resource: { buffer: uniformBuffer, size: STRIDE } }] : Array<Dynamic>) }] : Array<Dynamic>));

@@ -89,7 +89,7 @@ class WgpuRenderState {
                     uniformStride = HxMath.max(HxMath.max(256.0, flighthq._internal.backend.WebGpuLimitsBackend.field(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'limits'), 'minUniformBufferOffsetAlignment')), UNIFORM_BYTE_SIZE);
                     ringByteSize = (uniformStride * WgpuRenderState.RING_SLOT_COUNT__wgpuRenderState);
                     uniformBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: ringByteSize, usage: (Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | Std.int(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
-                    uniformData = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(ringByteSize / 4.0)]);
+                    uniformData = new flighthq._internal._Float32Array((ringByteSize / 4.0));
                     uniformDataU32 = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [_Runtime.field(uniformData, 'buffer')]);
                     __destructure0 = _Runtime.callValue(createWgpuBindGroupLayouts, cast ([device] : Array<Dynamic>));
                     uniformBindGroupLayout = _Runtime.field(__destructure0, 'uniformBindGroupLayout');
@@ -124,7 +124,7 @@ class WgpuRenderState {
                       _Runtime.setField(runtime, 'uniformOffset', 0.0);
                       _Runtime.setField(runtime, 'uniformStride', uniformStride);
                       _Runtime.setField(runtime, 'uniformBindGroup', uniformBindGroup);
-                      _Runtime.setField(runtime, 'matrixArray', _Runtime.construct(_Runtime.globalValue('Float32Array'), [9.0]));
+                      _Runtime.setField(runtime, 'matrixArray', new flighthq._internal._Float32Array(9.0));
                       _Runtime.setField(runtime, 'pipelineCache', _Runtime.construct(_Runtime.globalValue('Map'), []));
                       _Runtime.setField(runtime, 'linearSampler', linearSampler);
                       _Runtime.setField(runtime, 'nearestSampler', nearestSampler);
@@ -140,8 +140,8 @@ class WgpuRenderState {
                       _Runtime.setField(runtime, 'spriteBatchMaterialRenderer', null);
                       _Runtime.setField(runtime, 'spriteBatchMaterialFloats', 0.0);
                       _Runtime.setField(runtime, 'spriteBatchCount', 0.0);
-                      _Runtime.setField(runtime, 'spriteBatchInstanceData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [(13.0 * 256.0)]));
-                      _Runtime.setField(runtime, 'spriteBatchMaterialData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [(8.0 * 256.0)]));
+                      _Runtime.setField(runtime, 'spriteBatchInstanceData', new flighthq._internal._Float32Array((13.0 * 256.0)));
+                      _Runtime.setField(runtime, 'spriteBatchMaterialData', new flighthq._internal._Float32Array((8.0 * 256.0)));
                       _Runtime.setField(runtime, 'spriteBatchTexture', null);
                       _Runtime.setField(runtime, 'spriteBatchBufferPool', cast ([] : Array<Dynamic>));
                       _Runtime.setField(runtime, 'spriteBatchBufferCursor', 0.0);

@@ -272,7 +272,7 @@ class Matrix4 {
   public static function createMatrix4(?m00:Float, ?m01:Float, ?m02:Float, ?m03:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m13:Float, ?m20:Float, ?m21:Float, ?m22:Float, ?m23:Float, ?m30:Float, ?m31:Float, ?m32:Float, ?m33:Float):flighthq.types.Matrix4 {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var out:flighthq.types.Matrix4 = cast _Runtime.UNDEFINED;
-    m = _Runtime.construct(_Runtime.globalValue('Float32Array'), [Matrix4.__identity__matrix4]);
+    m = new flighthq._internal._Float32Array(Matrix4.__identity__matrix4);
     out = _Runtime.callValue(createEntity, cast ([{ m: m }] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(m00, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 0.0, m00); }
     if (_Runtime.truthy(!_Runtime.strictEquals(m01, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 1.0, m01); }
@@ -1071,5 +1071,5 @@ class Matrix4 {
     _Runtime.setIndex(_Runtime.field(out, 'm'), b, temp);
   }
 
-  public static final __identity__matrix4:flighthq._internal._Float32Array = _Runtime.construct(_Runtime.globalValue('Float32Array'), [cast ([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>)]);
+  public static final __identity__matrix4:flighthq._internal._Float32Array = new flighthq._internal._Float32Array(cast ([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
 }

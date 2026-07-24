@@ -60,5 +60,5 @@ class WgpuWireframePrelude {
 
   public static final WIREFRAME_WGSL_BODY__wgpuWireframePrelude:Dynamic = '\nstruct WireframeMaterial {\n  color : vec4f,  // linear rgba\n};\n\n@group(2) @binding(0) var<uniform> material : WireframeMaterial;\n\n@fragment fn fs_main(in : VertexOutput) -> @location(0) vec4f {\n  return material.color;\n}\n';
 
-  public static final _scratch__wgpuWireframePrelude:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(WgpuWireframePrelude.WIREFRAME_UNIFORM_BYTES__wgpuWireframePrelude / 4.0)]);
+  public static final _scratch__wgpuWireframePrelude:Dynamic = new flighthq._internal._Float32Array((WgpuWireframePrelude.WIREFRAME_UNIFORM_BYTES__wgpuWireframePrelude / 4.0));
 }

@@ -26,9 +26,9 @@ The typed Lime context route is wired, but desktop OpenGL/OpenGL ES rendering is
 - typed-array upload/readback operations, including `clearBufferfv`, `readPixels`, `texImage2D`, `texImage3D`, `texSubImage2D`, compressed texture uploads, vector uniforms, and matrix uniforms;
 - six-argument `texImage2D` calls whose source is an HTML image, video, or canvas, because native Lime needs a decoded pixel buffer and explicit dimensions.
 
-The maintained `_Float32Array`, `_Int16Array`, and `_UInt16Array` abstractions currently use ordinary Haxe arrays outside JavaScript. Those arrays are sufficient for portable computation but are not native Lime `DataPointer` storage. Passing the current WebGL argument forms through an untyped native context call may get past Haxe typing, but it is not a supported native renderer and may fail during hxcpp compilation or at the graphics boundary.
+The maintained `_Float32Array`, `_Int16Array`, and `_UInt16Array` abstractions now keep their JavaScript implementations on JS, own Lime-native typed-array storage on non-JS Lime targets, and retain ordinary Haxe arrays as the generic portable fallback. Generated `Float32Array` constructors use the maintained wrapper directly, and the native GL boundary unwraps the wrapper to its Lime view before dispatch. Runtime index, fill, iteration, `set`, and `subarray` operations preserve the wrapper while it owns that native storage.
 
-The next native-rendering step is therefore target-specific buffer ownership and method adapters in maintained `_internal` code, not changes to generated source.
+The typed-array branch and GL unwrapping have an Eval regression test against an API-shaped Lime shim. A real Lime/Haxelib installation is still required to validate every native GL method signature and desktop driver call. The next native-rendering step is therefore the target-specific method adapters listed above, especially explicit byte-count/`DataPointer` buffer calls and image-source texture decoding, not changes to generated source.
 
 ## Browser-Only Runtime Areas
 

@@ -277,8 +277,8 @@ class SurfaceBlur {
     passCount = HxMath.max(1.0, HxMath.round(passes));
     radiusX = HxMath.max(0.0, HxMath.ceil((sigmaX * 3.0)));
     radiusY = HxMath.max(0.0, HxMath.ceil((sigmaY * 3.0)));
-    kernelX = _Runtime.select(_Runtime.compare(radiusX, 0.0, '>'), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [((2.0 * radiusX) + 1.0)]), function():Dynamic return cast null);
-    kernelY = _Runtime.select(_Runtime.compare(radiusY, 0.0, '>'), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [((2.0 * radiusY) + 1.0)]), function():Dynamic return cast null);
+    kernelX = _Runtime.select(_Runtime.compare(radiusX, 0.0, '>'), function():Dynamic return cast new flighthq._internal._Float32Array(((2.0 * radiusX) + 1.0)), function():Dynamic return cast null);
+    kernelY = _Runtime.select(_Runtime.compare(radiusY, 0.0, '>'), function():Dynamic return cast new flighthq._internal._Float32Array(((2.0 * radiusY) + 1.0)), function():Dynamic return cast null);
     if (_Runtime.truthy(kernelX)) { _Runtime.callValue(computeGaussianKernel, cast ([kernelX, radiusX, sigmaX] : Array<Dynamic>)); }
     if (_Runtime.truthy(kernelY)) { _Runtime.callValue(computeGaussianKernel, cast ([kernelY, radiusY, sigmaY] : Array<Dynamic>)); }
     _Runtime.callValue(extractSurfacePixels, cast ([out, source] : Array<Dynamic>));

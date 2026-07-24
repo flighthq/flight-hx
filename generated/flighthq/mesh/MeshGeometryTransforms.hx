@@ -198,7 +198,7 @@ class MeshGeometryTransforms {
     det = (((a00 * c00) + (a01 * c01)) + (a02 * c02));
     if (_Runtime.truthy(_Runtime.compare(HxMath.abs(det), 1e-10, '<'))) { return cast null; }
     invDet = (1.0 / det);
-    out = _Runtime.construct(_Runtime.globalValue('Float32Array'), [9.0]);
+    out = new flighthq._internal._Float32Array(9.0);
     _Runtime.setIndex(out, 0.0, (c00 * invDet));
     _Runtime.setIndex(out, 1.0, (c10 * invDet));
     _Runtime.setIndex(out, 2.0, (c20 * invDet));

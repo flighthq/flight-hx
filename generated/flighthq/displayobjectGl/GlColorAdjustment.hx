@@ -29,7 +29,7 @@ class GlColorAdjustment {
     _Runtime.setField(runtime, 'glColorAdjustmentFold', GlColorAdjustment.glColorAdjustmentFold__glColorAdjustment);
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformMode'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(runtime, 'spriteBatchColorTransformMode', GlColorAdjustment.CT_MODE_NONE__glColorAdjustment); }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformData'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      _Runtime.setField(runtime, 'spriteBatchColorTransformData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [(GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment * 256.0)]));
+      _Runtime.setField(runtime, 'spriteBatchColorTransformData', new flighthq._internal._Float32Array((GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment * 256.0)));
     }
   }
 
@@ -153,7 +153,7 @@ class GlColorAdjustment {
     var mode:Dynamic = cast _Runtime.UNDEFINED;
     var tint:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformData'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      _Runtime.setField(runtime, 'spriteBatchColorTransformData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [(GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment * 256.0)]));
+      _Runtime.setField(runtime, 'spriteBatchColorTransformData', new flighthq._internal._Float32Array((GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment * 256.0)));
     }
     mode = _Runtime.coalesce(_Runtime.field(runtime, 'spriteBatchColorTransformMode'), function():Dynamic return cast GlColorAdjustment.CT_MODE_NONE__glColorAdjustment);
     tint = _Runtime.coalesce(colorTransform, function():Dynamic return cast null);
@@ -185,7 +185,7 @@ class GlColorAdjustment {
     data = _Runtime.field(runtime, 'spriteBatchColorTransformData');
     if (_Runtime.truthy(_Runtime.compare((offset + GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment), _Runtime.field(data, 'length'), '>'))) {
       var newSize:Dynamic = HxMath.max((offset + GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment), (_Runtime.field(data, 'length') * 2.0));
-      var grown:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [newSize]);
+      var grown:Dynamic = new flighthq._internal._Float32Array(newSize);
       _Runtime.callProperty(grown, 'set', cast ([data] : Array<Dynamic>));
       _Runtime.setField(runtime, 'spriteBatchColorTransformData', grown);
       (data = cast (grown : Dynamic));

@@ -187,7 +187,7 @@ class SceneRender {
     if (_Runtime.truthy(_Runtime.strictEquals(prepared, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var viewProjection:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
       var meshes:Array<Mesh> = cast ([] : Array<Dynamic>);
-      var list:SceneRenderList = { lights: { ambientCount: 0.0, data: _Runtime.construct(_Runtime.globalValue('Float32Array'), [SCENE_LIGHT_BLOCK_FLOATS]), directionalCount: 0.0, hemisphereCount: 0.0, pointCount: 0.0, spotCount: 0.0, version: 0.0 }, meshCount: 0.0, viewProjection: viewProjection, visibleMeshes: meshes };
+      var list:SceneRenderList = { lights: { ambientCount: 0.0, data: new flighthq._internal._Float32Array(SCENE_LIGHT_BLOCK_FLOATS), directionalCount: 0.0, hemisphereCount: 0.0, pointCount: 0.0, spotCount: 0.0, version: 0.0 }, meshCount: 0.0, viewProjection: viewProjection, visibleMeshes: meshes };
       (prepared = cast ({ frustum: _Runtime.callValue(createFrustum, cast ([] : Array<Dynamic>)), list: list, meshes: meshes, viewProjection: viewProjection, worldBounds: _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>)) } : Dynamic));
       _Runtime.callProperty(SceneRender.preparedScenes__sceneRender, 'set', cast ([state, prepared] : Array<Dynamic>));
     }
@@ -312,5 +312,5 @@ class SceneRender {
 
   public static final scratchProjection__sceneRender:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 
-  public static final scratchLightData__sceneRender:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [SCENE_LIGHT_BLOCK_FLOATS]);
+  public static final scratchLightData__sceneRender:Dynamic = new flighthq._internal._Float32Array(SCENE_LIGHT_BLOCK_FLOATS);
 }

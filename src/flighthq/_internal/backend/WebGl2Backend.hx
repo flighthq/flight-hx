@@ -3,6 +3,7 @@ package flighthq._internal.backend;
 import flighthq._internal._Runtime;
 
 #if (lime && !js)
+import flighthq._internal._LimeTypedArray;
 import lime.graphics.WebGL2RenderContext;
 
 /**
@@ -21,9 +22,10 @@ import lime.graphics.WebGL2RenderContext;
  * DOM-only call overloads remain available.
  */
 class WebGl2Backend {
-  public static function call(context:Dynamic, name:String, arguments:Array<Dynamic>):Dynamic {
+  public static function call(context:Dynamic, name:String, inputArguments:Array<Dynamic>):Dynamic {
     if (context == null) return null;
     final gl:WebGL2RenderContext = context;
+    final arguments = inputArguments.map(_LimeTypedArray.unwrap);
     switch (name) {
       case 'activeTexture':
         gl.activeTexture(arguments[0]);

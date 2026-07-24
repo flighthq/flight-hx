@@ -113,9 +113,9 @@ class MorphMeshGeometry {
     positionOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'position'] : Array<Dynamic>));
     normalOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'normal'] : Array<Dynamic>));
     tangentOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'tangent'] : Array<Dynamic>));
-    positions = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]);
-    normals = _Runtime.select(_Runtime.compare(normalOffset, 0.0, '>='), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]), function():Dynamic return cast null);
-    tangents = _Runtime.select(_Runtime.compare(tangentOffset, 0.0, '>='), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]), function():Dynamic return cast null);
+    positions = new flighthq._internal._Float32Array((vertexCount * 3.0));
+    normals = _Runtime.select(_Runtime.compare(normalOffset, 0.0, '>='), function():Dynamic return cast new flighthq._internal._Float32Array((vertexCount * 3.0)), function():Dynamic return cast null);
+    tangents = _Runtime.select(_Runtime.compare(tangentOffset, 0.0, '>='), function():Dynamic return cast new flighthq._internal._Float32Array((vertexCount * 3.0)), function():Dynamic return cast null);
     {
       var v:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {
@@ -139,7 +139,7 @@ class MorphMeshGeometry {
         v++;
       }
     }
-    return cast { blendedNormals: _Runtime.select(!_Runtime.strictEquals(normals, null), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]), function():Dynamic return cast null), blendedPositions: _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]), blendedTangents: _Runtime.select(!_Runtime.strictEquals(tangents, null), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]), function():Dynamic return cast null), normals: normals, positions: positions, tangents: tangents };
+    return cast { blendedNormals: _Runtime.select(!_Runtime.strictEquals(normals, null), function():Dynamic return cast new flighthq._internal._Float32Array((vertexCount * 3.0)), function():Dynamic return cast null), blendedPositions: new flighthq._internal._Float32Array((vertexCount * 3.0)), blendedTangents: _Runtime.select(!_Runtime.strictEquals(tangents, null), function():Dynamic return cast new flighthq._internal._Float32Array((vertexCount * 3.0)), function():Dynamic return cast null), normals: normals, positions: positions, tangents: tangents };
     return cast null;
   }
 

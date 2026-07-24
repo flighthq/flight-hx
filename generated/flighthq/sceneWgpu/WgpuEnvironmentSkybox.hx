@@ -108,7 +108,7 @@ class WgpuEnvironmentSkybox {
 
   public static final _inverseViewProjection__wgpuEnvironmentSkybox:Matrix4 = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 
-  public static final _skyScratch__wgpuEnvironmentSkybox:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(WgpuEnvironmentSkybox.SKYBOX_UNIFORM_BYTES__wgpuEnvironmentSkybox / 4.0)]);
+  public static final _skyScratch__wgpuEnvironmentSkybox:Dynamic = new flighthq._internal._Float32Array((WgpuEnvironmentSkybox.SKYBOX_UNIFORM_BYTES__wgpuEnvironmentSkybox / 4.0));
 
   public static final _skyboxes__wgpuEnvironmentSkybox:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 

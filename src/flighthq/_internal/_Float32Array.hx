@@ -7,6 +7,8 @@ abstract _Float32Array(Dynamic) {
   public function new(source:Dynamic = 0) {
     #if js
     this = js.Syntax.code('new Float32Array({0})', source);
+    #elseif lime
+    this = new _LimeTypedArray('float32', source);
     #else
     if (Std.isOfType(source, Int) || Std.isOfType(source, Float)) {
       this = [for (_ in 0...Std.int(source)) 0.0];
@@ -18,27 +20,51 @@ abstract _Float32Array(Dynamic) {
   }
 
   @:arrayAccess public inline function arrayRead(index:Int):Float {
+    #if (lime && !js)
+    return (cast this : _LimeTypedArray).get(index);
+    #else
     return this[index];
+    #end
   }
 
   @:arrayAccess public inline function arrayWrite(index:Int, value:Float):Float {
+    #if (lime && !js)
+    return (cast this : _LimeTypedArray).setValue(index, value);
+    #else
     return this[index] = value;
+    #end
   }
 
   public function fill(value:Float, start = 0, ?end:Int):_Float32Array {
+    #if (lime && !js)
+    (cast this : _LimeTypedArray).fill(value, start, end);
+    #else
     final stop = end == null ? length : end;
     for (index in start...stop) this[index] = value;
+    #end
     return cast this;
   }
 
   private inline function get_length():Int {
+    #if (lime && !js)
+    return (cast this : _LimeTypedArray).length;
+    #else
     return this.length;
+    #end
   }
 
   public function set(source:Dynamic, offset:Float = 0):Void {
     final start = Std.int(offset);
+    #if (lime && !js)
+    final target:_LimeTypedArray = cast this;
+    final sourceArray = Std.isOfType(source, _LimeTypedArray) ? (cast source : _LimeTypedArray) : null;
+    if (sourceArray != null) {
+      for (index in 0...sourceArray.length) target.setValue(start + index, sourceArray.get(index));
+      return;
+    }
+    #end
     final values:Array<Dynamic> = _Runtime.iterable(source);
-    for (index in 0...values.length) this[start + index] = values[index];
+    for (index in 0...values.length) arrayWrite(start + index, values[index]);
   }
 
   public function subarray(?begin:Int, ?end:Int):_Float32Array {
@@ -46,6 +72,8 @@ abstract _Float32Array(Dynamic) {
     final stop = end == null ? length : end;
     #if js
     return cast js.Syntax.code('{0}.subarray({1}, {2})', this, start, stop);
+    #elseif lime
+    return cast (cast this : _LimeTypedArray).subarray(start, stop);
     #else
     return new _Float32Array((cast this : Array<Float>).slice(start, stop));
     #end

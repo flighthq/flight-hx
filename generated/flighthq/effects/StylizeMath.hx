@@ -37,7 +37,7 @@ class StylizeMath {
     var invSizeSq:Dynamic = cast _Runtime.UNDEFINED;
     size = HxMath.pow(2.0, HxMath.max(1.0, HxMath.round(order)));
     sizeSq = (size * size);
-    raw = _Runtime.construct(_Runtime.globalValue('Float32Array'), [sizeSq]);
+    raw = new flighthq._internal._Float32Array(sizeSq);
     _Runtime.setIndex(raw, 0.0, 0.0);
     _Runtime.setIndex(raw, 1.0, 2.0);
     _Runtime.setIndex(raw, 2.0, 3.0);
@@ -46,7 +46,7 @@ class StylizeMath {
     while (_Runtime.truthy(_Runtime.compare(currentSize, size, '<'))) {
       var next:Dynamic = (currentSize * 2.0);
       var nextSq:Dynamic = (next * next);
-      var tmp:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [nextSq]);
+      var tmp:Dynamic = new flighthq._internal._Float32Array(nextSq);
       {
         var y:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(y, currentSize, '<'))) {

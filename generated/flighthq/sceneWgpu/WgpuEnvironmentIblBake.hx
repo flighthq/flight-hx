@@ -204,7 +204,7 @@ class WgpuEnvironmentIblBake {
 
   public static final CUBE_FACE_BASIS__wgpuEnvironmentIblBake:Array<Array<Float>> = cast ([cast ([1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, -1.0, 0.0] : Array<Dynamic>), cast ([-1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, -1.0, 0.0] : Array<Dynamic>), cast ([0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>), cast ([0.0, -1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0] : Array<Dynamic>), cast ([0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, -1.0, 0.0] : Array<Dynamic>), cast ([0.0, 0.0, -1.0, -1.0, 0.0, 0.0, 0.0, -1.0, 0.0] : Array<Dynamic>)] : Array<Dynamic>);
 
-  public static final _bakeScratch__wgpuEnvironmentIblBake:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(WgpuEnvironmentIblBake.BAKE_UNIFORM_BYTES__wgpuEnvironmentIblBake / 4.0)]);
+  public static final _bakeScratch__wgpuEnvironmentIblBake:Dynamic = new flighthq._internal._Float32Array((WgpuEnvironmentIblBake.BAKE_UNIFORM_BYTES__wgpuEnvironmentIblBake / 4.0));
 
   public static final _bakePrograms__wgpuEnvironmentIblBake:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 

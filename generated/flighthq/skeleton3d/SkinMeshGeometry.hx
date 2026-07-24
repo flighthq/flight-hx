@@ -33,10 +33,10 @@ class SkinMeshGeometry {
     vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast (Std.int((_Runtime.field(vertices, 'length') / floatsPerVertex)) | Std.int(0.0)), function():Dynamic return cast 0.0);
     positionOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'position'] : Array<Dynamic>));
     normalOffset = _Runtime.callValue(SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry, cast ([layout, 'normal'] : Array<Dynamic>));
-    positions = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]);
-    normals = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]);
-    joints = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 4.0)]);
-    weights = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 4.0)]);
+    positions = new flighthq._internal._Float32Array((vertexCount * 3.0));
+    normals = new flighthq._internal._Float32Array((vertexCount * 3.0));
+    joints = new flighthq._internal._Float32Array((vertexCount * 4.0));
+    weights = new flighthq._internal._Float32Array((vertexCount * 4.0));
     joint = { w: 0.0, x: 0.0, y: 0.0, z: 0.0 };
     weight = { w: 0.0, x: 0.0, y: 0.0, z: 0.0 };
     {
@@ -70,7 +70,7 @@ class SkinMeshGeometry {
         v++;
       }
     }
-    return cast { joints: joints, normals: normals, positions: positions, skinnedNormals: _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]), skinnedPositions: _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]), weights: weights };
+    return cast { joints: joints, normals: normals, positions: positions, skinnedNormals: new flighthq._internal._Float32Array((vertexCount * 3.0)), skinnedPositions: new flighthq._internal._Float32Array((vertexCount * 3.0)), weights: weights };
     return cast null;
   }
 

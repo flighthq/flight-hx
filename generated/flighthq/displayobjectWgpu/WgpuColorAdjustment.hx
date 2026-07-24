@@ -18,7 +18,7 @@ class WgpuColorAdjustment {
     _Runtime.setField(runtime, 'wgpuColorAdjustmentFold', WgpuColorAdjustment.wgpuColorAdjustmentFold__wgpuColorAdjustment);
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformMode'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(runtime, 'spriteBatchColorTransformMode', WgpuColorAdjustment.CT_MODE_NONE__wgpuColorAdjustment); }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformData'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      _Runtime.setField(runtime, 'spriteBatchColorTransformData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [(WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment * 256.0)]));
+      _Runtime.setField(runtime, 'spriteBatchColorTransformData', new flighthq._internal._Float32Array((WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment * 256.0)));
     }
   }
 
@@ -34,7 +34,7 @@ class WgpuColorAdjustment {
     var mode:Dynamic = cast _Runtime.UNDEFINED;
     var tint:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformData'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      _Runtime.setField(runtime, 'spriteBatchColorTransformData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [(WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment * 256.0)]));
+      _Runtime.setField(runtime, 'spriteBatchColorTransformData', new flighthq._internal._Float32Array((WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment * 256.0)));
     }
     mode = _Runtime.coalesce(_Runtime.field(runtime, 'spriteBatchColorTransformMode'), function():Dynamic return cast WgpuColorAdjustment.CT_MODE_NONE__wgpuColorAdjustment);
     tint = _Runtime.coalesce(colorTransform, function():Dynamic return cast null);
@@ -88,7 +88,7 @@ class WgpuColorAdjustment {
     existing = _Runtime.field(runtime, 'spriteBatchColorTransformData');
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(floatsNeeded, _Runtime.field(existing, 'length'), '<=')))) { return; }
     newSize = HxMath.max(HxMath.max(floatsNeeded, (_Runtime.coalesce(_Runtime.optionalField(existing, 'length'), function():Dynamic return cast 0.0) * 2.0)), (WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment * 256.0));
-    grown = _Runtime.construct(_Runtime.globalValue('Float32Array'), [newSize]);
+    grown = new flighthq._internal._Float32Array(newSize);
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(grown, 'set', cast ([existing] : Array<Dynamic>)); }
     _Runtime.setField(runtime, 'spriteBatchColorTransformData', grown);
   }

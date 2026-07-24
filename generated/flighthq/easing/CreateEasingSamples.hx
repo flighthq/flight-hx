@@ -14,7 +14,7 @@ class CreateEasingSamples {
       throw _Runtime.error('createEasingSamples: count must be a finite integer >= 1');
     }
     n = HxMath.floor(count);
-    result = _Runtime.coalesce(out, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [n]));
+    result = _Runtime.coalesce(out, function():Dynamic return cast new flighthq._internal._Float32Array(n));
     if (_Runtime.truthy(_Runtime.strictEquals(n, 1.0))) {
       _Runtime.setIndex(result, 0.0, _Runtime.callValue(ease, cast ([0.5] : Array<Dynamic>)));
       return cast result;

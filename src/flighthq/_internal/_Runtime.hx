@@ -189,6 +189,9 @@ class _Runtime {
     #else
     if (Std.isOfType(source, String)) return (cast source : String).charAt(Std.int(key));
     if (Std.isOfType(source, Array)) return (cast source : Array<Dynamic>)[Std.int(key)];
+    #if (lime && !js)
+    if (Std.isOfType(source, _LimeTypedArray)) return (cast source : _LimeTypedArray).get(Std.int(key));
+    #end
     return Reflect.field(source, Std.string(key));
     #end
   }
@@ -206,6 +209,11 @@ class _Runtime {
   }
 
   public static inline function field(source:Dynamic, name:String):Dynamic {
+    #if (lime && !js)
+    if (source != null && name == 'length' && Std.isOfType(source, _LimeTypedArray)) {
+      return (cast source : _LimeTypedArray).length;
+    }
+    #end
     return source == null ? null : Reflect.field(source, name);
   }
 
@@ -483,6 +491,10 @@ class _Runtime {
     #else
     if (Std.isOfType(target, Array)) {
       (cast target : Array<Dynamic>)[Std.int(key)] = value;
+    #if (lime && !js)
+    } else if (Std.isOfType(target, _LimeTypedArray)) {
+      (cast target : _LimeTypedArray).setValue(Std.int(key), value);
+    #end
     } else {
       Reflect.setField(target, Std.string(key), value);
     }
@@ -619,6 +631,11 @@ class _Runtime {
       default: js.Syntax.code('{0}.fill({1}, {2}, {3} ?? undefined)', value, item, Std.int(start), end == null ? null : Std.int(end));
     };
     #else
+    #if (lime && !js)
+    if (Std.isOfType(value, _LimeTypedArray)) {
+      return (cast value : _LimeTypedArray).fill(item, Std.int(start), end == null ? null : Std.int(end));
+    }
+    #end
     final values:Array<Dynamic> = cast value;
     final until = end == null ? values.length : Std.int(end);
     for (index in Std.int(start)...until) values[index] = item;
@@ -758,6 +775,9 @@ class _Runtime {
     #else
     if (value == null) return [];
     if (Std.isOfType(value, Array)) return cast value;
+    #if (lime && !js)
+    if (Std.isOfType(value, _LimeTypedArray)) return (cast value : _LimeTypedArray).toArray();
+    #end
     try {
       return (cast value : Array<Dynamic>).copy();
     } catch (_:Dynamic) {}

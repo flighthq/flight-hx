@@ -860,7 +860,7 @@ class MeshGeometryBuilders {
     var geometry:Dynamic = cast _Runtime.UNDEFINED;
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
     vertexCount = (_Runtime.field(positions, 'length') / 3.0);
-    vertices = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * MeshGeometryBuilders.CANONICAL_FLOATS_PER_VERTEX__meshGeometryBuilders)]);
+    vertices = new flighthq._internal._Float32Array((vertexCount * MeshGeometryBuilders.CANONICAL_FLOATS_PER_VERTEX__meshGeometryBuilders));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {

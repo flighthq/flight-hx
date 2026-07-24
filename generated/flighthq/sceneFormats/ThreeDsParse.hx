@@ -216,7 +216,7 @@ class ThreeDsParse {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: vertex sub-chunk declares ' + Std.string(count) + ' vertices but data is truncated'] : Array<Dynamic>));
       return cast null;
     }
-    vertices = _Runtime.construct(_Runtime.globalValue('Float32Array'), [floatsNeeded]);
+    vertices = new flighthq._internal._Float32Array(floatsNeeded);
     offset = (dataStart + 2.0);
     {
       var i:Dynamic = 0.0;
@@ -294,7 +294,7 @@ class ThreeDsParse {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: UV sub-chunk declares ' + Std.string(count) + ' entries but data is truncated'] : Array<Dynamic>));
       return cast null;
     }
-    uvCoords = _Runtime.construct(_Runtime.globalValue('Float32Array'), [floatsNeeded]);
+    uvCoords = new flighthq._internal._Float32Array(floatsNeeded);
     offset = (dataStart + 2.0);
     {
       var i:Dynamic = 0.0;
@@ -327,8 +327,8 @@ class ThreeDsParse {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(vertexCount, 0.0), function():Dynamic return cast _Runtime.strictEquals(faceCount, 0.0)))) { return; }
     positions = _Runtime.toArray(_Runtime.field(mesh, 'vertices'));
     _Runtime.callValue(convertPositionsZUpToYUp, cast ([positions] : Array<Dynamic>));
-    vertices = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * CANONICAL_FLOATS_PER_VERTEX)]);
-    normals = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]);
+    vertices = new flighthq._internal._Float32Array((vertexCount * CANONICAL_FLOATS_PER_VERTEX));
+    normals = new flighthq._internal._Float32Array((vertexCount * 3.0));
     {
       var f:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(f, faceCount, '<'))) {

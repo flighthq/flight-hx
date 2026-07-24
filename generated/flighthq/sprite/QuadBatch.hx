@@ -209,7 +209,7 @@ class QuadBatch {
   }
 
   public static function createQuadBatchData(?data:Dynamic):QuadBatchData {
-    return cast { atlas: _Runtime.coalesce(_Runtime.optionalField(data, 'atlas'), function():Dynamic return cast null), ids: _Runtime.coalesce(_Runtime.optionalField(data, 'ids'), function():Dynamic return cast new flighthq._internal._UInt16Array()), instanceCount: _Runtime.coalesce(_Runtime.optionalField(data, 'instanceCount'), function():Dynamic return cast 0.0), materialData: _Runtime.coalesce(_Runtime.optionalField(data, 'materialData'), function():Dynamic return cast null), transforms: _Runtime.coalesce(_Runtime.optionalField(data, 'transforms'), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [])), transformType: _Runtime.coalesce(_Runtime.optionalField(data, 'transformType'), function():Dynamic return cast 'vector2') };
+    return cast { atlas: _Runtime.coalesce(_Runtime.optionalField(data, 'atlas'), function():Dynamic return cast null), ids: _Runtime.coalesce(_Runtime.optionalField(data, 'ids'), function():Dynamic return cast new flighthq._internal._UInt16Array()), instanceCount: _Runtime.coalesce(_Runtime.optionalField(data, 'instanceCount'), function():Dynamic return cast 0.0), materialData: _Runtime.coalesce(_Runtime.optionalField(data, 'materialData'), function():Dynamic return cast null), transforms: _Runtime.coalesce(_Runtime.optionalField(data, 'transforms'), function():Dynamic return cast new flighthq._internal._Float32Array()), transformType: _Runtime.coalesce(_Runtime.optionalField(data, 'transformType'), function():Dynamic return cast 'vector2') };
     return cast null;
   }
 
@@ -576,7 +576,7 @@ class QuadBatch {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'transformType'), newType))) { return; }
     count = _Runtime.field(data, 'instanceCount');
     if (_Runtime.truthy(_Runtime.strictEquals(newType, 'matrix3x2'))) {
-      var newTransforms:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(HxMath.max((_Runtime.field(_Runtime.field(data, 'transforms'), 'length') / QuadBatch.QUAD_VECTOR2_STRIDE__quadBatch), count) * QuadBatch.QUAD_MATRIX3X2_STRIDE__quadBatch)]);
+      var newTransforms:Dynamic = new flighthq._internal._Float32Array((HxMath.max((_Runtime.field(_Runtime.field(data, 'transforms'), 'length') / QuadBatch.QUAD_VECTOR2_STRIDE__quadBatch), count) * QuadBatch.QUAD_MATRIX3X2_STRIDE__quadBatch));
       {
         var i:Dynamic = (count - 1.0);
         while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {

@@ -285,7 +285,7 @@ class ObjParse {
       _Runtime.callProperty(materials, 'push', cast ([_Runtime.callValue(ObjParse.resolveObjMaterial__objParse, cast ([materialName, library, resolvedMaterials, document] : Array<Dynamic>))] : Array<Dynamic>));
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(subsets, 'length'), 0.0))) { return; }
-    geometry = _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([indices] : Array<Dynamic>)), layout: CANONICAL_LAYOUT, subsets: subsets, vertices: _Runtime.construct(_Runtime.globalValue('Float32Array'), [vertices]) }] : Array<Dynamic>));
+    geometry = _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([indices] : Array<Dynamic>)), layout: CANONICAL_LAYOUT, subsets: subsets, vertices: new flighthq._internal._Float32Array(vertices) }] : Array<Dynamic>));
     meshIndex = _Runtime.field(_Runtime.field(document, 'meshes'), 'length');
     mesh = { geometry: geometry, materials: materials };
     _Runtime.callProperty(_Runtime.field(document, 'meshes'), 'push', cast ([mesh] : Array<Dynamic>));

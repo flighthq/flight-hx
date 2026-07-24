@@ -149,7 +149,7 @@ class Md5Parse {
         }
         _Runtime.callValue(reverseTriangleWinding, cast ([indices] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.compare(_Runtime.field(indices, 'length'), 0.0, '>'))) {
-          var geometry:Dynamic = _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([indices] : Array<Dynamic>)), layout: CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT, vertices: _Runtime.construct(_Runtime.globalValue('Float32Array'), [vertices]) }] : Array<Dynamic>));
+          var geometry:Dynamic = _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([indices] : Array<Dynamic>)), layout: CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT, vertices: new flighthq._internal._Float32Array(vertices) }] : Array<Dynamic>));
           _Runtime.callValue(computeMeshGeometryNormals, cast ([geometry, geometry] : Array<Dynamic>));
           var meshMaterials:Array<Float> = cast ([] : Array<Dynamic>);
           if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(md5Mesh, 'shader'), 'length'), 0.0, '>'))) {

@@ -32,7 +32,7 @@ class MeshGeometryOperations {
     vertexCount = (_Runtime.field(positions, 'length') / 3.0);
     normals = _Runtime.coalesce(_Runtime.field(options, 'normals'), function():Dynamic return cast null);
     uvs = _Runtime.coalesce(_Runtime.field(options, 'uvs'), function():Dynamic return cast null);
-    vertices = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * MeshGeometryOperations.CANONICAL_FLOATS_PER_VERTEX__meshGeometryOperations)]);
+    vertices = new flighthq._internal._Float32Array((vertexCount * MeshGeometryOperations.CANONICAL_FLOATS_PER_VERTEX__meshGeometryOperations));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
@@ -172,7 +172,7 @@ class MeshGeometryOperations {
         (totalIndexCount = cast ((totalIndexCount + vc) : Dynamic));
       }
     }
-    mergedVertices = _Runtime.construct(_Runtime.globalValue('Float32Array'), [totalVertexFloats]);
+    mergedVertices = new flighthq._internal._Float32Array(totalVertexFloats);
     needsUint32 = _Runtime.compare((totalVertexFloats / floatsPerVertex), MeshGeometryOperations.UINT16_INDEX_CEILING__meshGeometryOperations, '>');
     mergedIndices = _Runtime.select(_Runtime.orValue(allIndexed, function():Dynamic return cast _Runtime.compare(totalIndexCount, 0.0, '>')), function():Dynamic return cast _Runtime.select(needsUint32, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Uint32Array'), [totalIndexCount]), function():Dynamic return cast new flighthq._internal._UInt16Array(totalIndexCount)), function():Dynamic return cast null);
     mergedSubsets = cast ([] : Array<Dynamic>);

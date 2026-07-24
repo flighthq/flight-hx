@@ -615,11 +615,11 @@ class WgpuMeshPipeline {
 
   public static final scratchCameraPosition__wgpuMeshPipeline:Dynamic = { x: 0.0, y: 0.0, z: 0.0 };
 
-  public static final _frameScratch__wgpuMeshPipeline:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(WgpuMeshPipeline.FRAME_UNIFORM_BYTES__wgpuMeshPipeline / 4.0)]);
+  public static final _frameScratch__wgpuMeshPipeline:Dynamic = new flighthq._internal._Float32Array((WgpuMeshPipeline.FRAME_UNIFORM_BYTES__wgpuMeshPipeline / 4.0));
 
   public static final _dynamicOffsets__wgpuMeshPipeline:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [1.0]);
 
-  public static final _shadowSampleScratch__wgpuMeshPipeline:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(WgpuMeshPipeline.SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline / 4.0)]);
+  public static final _shadowSampleScratch__wgpuMeshPipeline:Dynamic = new flighthq._internal._Float32Array((WgpuMeshPipeline.SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline / 4.0));
 
-  public static final _iblSampleScratch__wgpuMeshPipeline:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(WgpuMeshPipeline.IBL_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline / 4.0)]);
+  public static final _iblSampleScratch__wgpuMeshPipeline:Dynamic = new flighthq._internal._Float32Array((WgpuMeshPipeline.IBL_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline / 4.0));
 }

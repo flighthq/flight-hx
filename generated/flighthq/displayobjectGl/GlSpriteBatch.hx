@@ -74,7 +74,7 @@ class GlSpriteBatch {
     if (_Runtime.truthy(_Runtime.field(runtime, 'quadBatchShader'))) { return cast _Runtime.field(runtime, 'quadBatchShader'); }
     gl = _Runtime.field(state, 'gl');
     _Runtime.setField(runtime, 'quadBatchShader', _Runtime.callValue(GlSpriteBatch.compileSpriteBatchShader__glSpriteBatch, cast ([gl] : Array<Dynamic>)));
-    cornerData = _Runtime.construct(_Runtime.globalValue('Float32Array'), [cast ([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0] : Array<Dynamic>)]);
+    cornerData = new flighthq._internal._Float32Array(cast ([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0] : Array<Dynamic>));
     cornerBuf = flighthq._internal.backend.WebGl2Backend.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), cornerBuf] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.call(gl, 'bufferData', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), cornerData, flighthq._internal.backend.WebGl2Backend.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
@@ -169,7 +169,7 @@ class GlSpriteBatch {
     needed = ((_Runtime.field(runtime, 'spriteBatchCount') + maxInstances) * GlSpriteBatch.SPRITE_INSTANCE_FLOATS__glSpriteBatch);
     if (_Runtime.truthy(_Runtime.compare(needed, _Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'length'), '>'))) {
       var newSize:Dynamic = HxMath.max(needed, (_Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'length') * 2.0));
-      _Runtime.setField(runtime, 'spriteBatchInstanceData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [newSize]));
+      _Runtime.setField(runtime, 'spriteBatchInstanceData', new flighthq._internal._Float32Array(newSize));
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchInstanceBuffer'), null))) {
         var gl:Dynamic = _Runtime.field(state, 'gl');
         flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchInstanceBuffer')] : Array<Dynamic>));
@@ -180,7 +180,7 @@ class GlSpriteBatch {
       var materialNeeded:Dynamic = ((_Runtime.field(runtime, 'spriteBatchCount') + maxInstances) * floats);
       if (_Runtime.truthy(_Runtime.compare(materialNeeded, _Runtime.field(_Runtime.field(runtime, 'spriteBatchMaterialData'), 'length'), '>'))) {
         var newSize:Dynamic = HxMath.max(materialNeeded, (_Runtime.field(_Runtime.field(runtime, 'spriteBatchMaterialData'), 'length') * 2.0));
-        _Runtime.setField(runtime, 'spriteBatchMaterialData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [newSize]));
+        _Runtime.setField(runtime, 'spriteBatchMaterialData', new flighthq._internal._Float32Array(newSize));
         if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchMaterialBuffer'), null))) {
           var gl:Dynamic = _Runtime.field(state, 'gl');
           flighthq._internal.backend.WebGl2Backend.call(gl, 'bindBuffer', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchMaterialBuffer')] : Array<Dynamic>));

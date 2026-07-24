@@ -123,8 +123,8 @@ class Md2Parse {
     }
     uvScaleS = _Runtime.select(_Runtime.compare(skinWidth, 0.0, '>'), function():Dynamic return cast (1.0 / skinWidth), function():Dynamic return cast 0.0);
     uvScaleT = _Runtime.select(_Runtime.compare(skinHeight, 0.0, '>'), function():Dynamic return cast (1.0 / skinHeight), function():Dynamic return cast 0.0);
-    texS = _Runtime.construct(_Runtime.globalValue('Float32Array'), [numTexCoords]);
-    texT = _Runtime.construct(_Runtime.globalValue('Float32Array'), [numTexCoords]);
+    texS = new flighthq._internal._Float32Array(numTexCoords);
+    texT = new flighthq._internal._Float32Array(numTexCoords);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, numTexCoords, '<'))) {
@@ -193,7 +193,7 @@ class Md2Parse {
         _Runtime.callProperty(meshMaterials, 'push', cast ([0.0] : Array<Dynamic>));
       }
     }
-    vertices = _Runtime.construct(_Runtime.globalValue('Float32Array'), [interleavedVertices]);
+    vertices = new flighthq._internal._Float32Array(interleavedVertices);
     indexArray = _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([indices] : Array<Dynamic>));
     geometry = _Runtime.callValue(createMeshGeometry, cast ([{ indices: indexArray, layout: CANONICAL_LAYOUT, vertices: vertices }] : Array<Dynamic>));
     morph = _Runtime.callValue(Md2Parse.buildMd2Morph__md2Parse, cast ([frames, sourceVertexIndices] : Array<Dynamic>));
@@ -222,8 +222,8 @@ class Md2Parse {
         var translateY:Dynamic = _Runtime.callProperty(view, 'getFloat32', cast ([(frameBase + 16.0), true] : Array<Dynamic>));
         var translateZ:Dynamic = _Runtime.callProperty(view, 'getFloat32', cast ([(frameBase + 20.0), true] : Array<Dynamic>));
         var verticesBase:Dynamic = (frameBase + MD2_FRAME_HEADER_SIZE);
-        var positions:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(numVertices * 3.0)]);
-        var normals:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(numVertices * 3.0)]);
+        var positions:Dynamic = new flighthq._internal._Float32Array((numVertices * 3.0));
+        var normals:Dynamic = new flighthq._internal._Float32Array((numVertices * 3.0));
         {
           var i:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(i, numVertices, '<'))) {
@@ -265,8 +265,8 @@ class Md2Parse {
       var f:Dynamic = 1.0;
       while (_Runtime.truthy(_Runtime.compare(f, _Runtime.field(frames, 'length'), '<'))) {
         var frame:Dynamic = _Runtime.getIndex(frames, f);
-        var positionDeltas:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]);
-        var normalDeltas:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]);
+        var positionDeltas:Dynamic = new flighthq._internal._Float32Array((vertexCount * 3.0));
+        var normalDeltas:Dynamic = new flighthq._internal._Float32Array((vertexCount * 3.0));
         {
           var v:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {
@@ -285,7 +285,7 @@ class Md2Parse {
         f++;
       }
     }
-    return cast { targets: targets, weights: _Runtime.construct(_Runtime.globalValue('Float32Array'), [_Runtime.field(targets, 'length')]) };
+    return cast { targets: targets, weights: new flighthq._internal._Float32Array(_Runtime.field(targets, 'length')) };
     return cast null;
   }
 
@@ -299,8 +299,8 @@ class Md2Parse {
     targetCount = _Runtime.field(_Runtime.field(morph, 'targets'), 'length');
     if (_Runtime.truthy(_Runtime.strictEquals(targetCount, 0.0))) { return cast null; }
     frameCount = (targetCount + 1.0);
-    times = _Runtime.construct(_Runtime.globalValue('Float32Array'), [frameCount]);
-    values = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(frameCount * targetCount)]);
+    times = new flighthq._internal._Float32Array(frameCount);
+    values = new flighthq._internal._Float32Array((frameCount * targetCount));
     {
       var k:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(k, frameCount, '<'))) {

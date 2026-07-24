@@ -23,7 +23,7 @@ class MeshGeometryLayout {
     srcStride = _Runtime.field(_Runtime.field(source, 'layout'), 'stride');
     dstStride = _Runtime.field(targetLayout, 'stride');
     vertexCount = _Runtime.select(_Runtime.compare(srcStride, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(source, 'vertices'), 'byteLength') / srcStride)), function():Dynamic return cast 0.0);
-    dstVertices = _Runtime.construct(_Runtime.globalValue('Float32Array'), [((vertexCount * dstStride) / 4.0)]);
+    dstVertices = new flighthq._internal._Float32Array(((vertexCount * dstStride) / 4.0));
     sourceBytes = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.field(_Runtime.field(source, 'vertices'), 'buffer'), _Runtime.field(_Runtime.field(source, 'vertices'), 'byteOffset'), _Runtime.field(_Runtime.field(source, 'vertices'), 'byteLength')]);
     destinationBytes = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.field(dstVertices, 'buffer')]);
     sourceView = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(sourceBytes, 'buffer'), _Runtime.field(sourceBytes, 'byteOffset'), _Runtime.field(sourceBytes, 'byteLength')]);
