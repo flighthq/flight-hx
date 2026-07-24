@@ -1,6 +1,6 @@
 # Project Status
 
-Last updated: 2026-07-22
+Last updated: 2026-07-24
 
 ## Current State
 
@@ -35,6 +35,7 @@ The latest complete local `npm run ci` finished successfully on 2026-07-22. Its 
 - Generator tests: 24 passing, including deterministic output, patch drift, executable Haxe, facade export, and hxcpp high-arity regression coverage.
 - Maintained TypeScript coverage: 77.03% statements, 70.79% branches, 86.69% functions, and 78.23% lines. This is intentionally distinct from complete upstream accounting.
 - Portability: `CoreSmoke` compiles and runs on Eval, JavaScript, Python, and C++/hxcpp. Eval and the full JavaScript build also compile the complete generated `flight` namespace.
+- Non-HTML5 audit: the complete namespace type-checks and runs its smoke test on Eval and Python. The reflection-free WebGL2 target binding and remaining native Lime renderer gaps are recorded in [`non-html5.md`](non-html5.md). C++ was not rerun in the current workspace because no C++ compiler is installed.
 - Packaging: `build/package/flight-0.0.0.zip` installs into an isolated Haxelib repository and a clean JavaScript consumer passes using `import flight.Sdk.*`.
 
 ## Host Prerequisites

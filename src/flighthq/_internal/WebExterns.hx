@@ -13,7 +13,7 @@ package flighthq._internal;
 // Add an entry here whenever generation reports (via a Haxe "Type not found") a new referenced-but-
 // undeclared name; a missing entry fails loudly at compile time rather than silently.
 
-#if js
+#if (js && html5)
 typedef Clipboard = js.html.Clipboard;
 typedef Geolocation = js.html.Geolocation;
 typedef Screen = js.html.Screen;

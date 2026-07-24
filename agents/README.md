@@ -6,6 +6,7 @@ This directory records the durable design and execution context for the Flight H
 - [`layout.md`](layout.md): current repository boundaries and generated artifact structure.
 - [`patches.md`](patches.md): semantic patch model, operations, validation, and audit requirements.
 - [`quality.md`](quality.md): implemented npm scripts, checks, test layers, and completion gates.
+- [`non-html5.md`](non-html5.md): verified cross-target compile status and remaining native Lime renderer boundaries.
 - [`plan.md`](plan.md): completed implementation phases and the upstream-update workflow.
 - [`status.md`](status.md): current decisions, verified state, prerequisites, and release decisions.
 - [`flight-port-core.md`](flight-port-core.md): plan to extract the language-neutral kernel into a shared core with Haxe and Rust emitters over one oracle.
