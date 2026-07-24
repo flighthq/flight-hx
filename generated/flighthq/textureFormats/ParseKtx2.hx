@@ -14,7 +14,7 @@ import flighthq.types.TextureContainerLevel;
 import flighthq.types.TextureContainerSupercompression;
 
 class ParseKtx2 {
-  public static function parseKtx2(bytes:Dynamic):Null<TextureContainer> {
+  public static function parseKtx2(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
     var reader:Dynamic = cast _Runtime.UNDEFINED;
     var vkFormat:Dynamic = cast _Runtime.UNDEFINED;
     var pixelWidth:Dynamic = cast _Runtime.UNDEFINED;
@@ -90,7 +90,7 @@ class ParseKtx2 {
     return cast null;
   }
 
-  public static function hasKtx2Identifier__parseKtx2(bytes:Dynamic):Bool {
+  public static function hasKtx2Identifier__parseKtx2(bytes:flighthq._internal._UInt8Array):Bool {
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(bytes, 'byteLength'), 12.0, '<'))) { return cast false; }
     {
       var i:Dynamic = 0.0;

@@ -5,7 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class DetectTextureContainer {
-  public static function detectTextureContainer(bytes:Dynamic):Null<String> {
+  public static function detectTextureContainer(bytes:flighthq._internal._UInt8Array):Null<String> {
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(bytes, 'byteLength'), 12.0, '>='), function():Dynamic return cast _Runtime.callValue(DetectTextureContainer.isKtx2Magic__detectTextureContainer, cast ([bytes] : Array<Dynamic>))))) { return cast 'ktx2'; }
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.field(bytes, 'byteLength'), 4.0, '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 0.0), 68.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 1.0), 68.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 2.0), 83.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 3.0), 32.0)))) {
       return cast 'dds';
@@ -16,7 +16,7 @@ class DetectTextureContainer {
     return cast null;
   }
 
-  public static function isKtx2Magic__detectTextureContainer(bytes:Dynamic):Bool {
+  public static function isKtx2Magic__detectTextureContainer(bytes:flighthq._internal._UInt8Array):Bool {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, 12.0, '<'))) {

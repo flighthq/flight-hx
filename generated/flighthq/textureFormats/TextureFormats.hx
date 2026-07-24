@@ -20,7 +20,7 @@ class TextureFormats {
     return cast null;
   }
 
-  public static function detectTextureContainer(bytes:Dynamic):Null<String> {
+  public static function detectTextureContainer(bytes:flighthq._internal._UInt8Array):Null<String> {
     return cast _Runtime.callValue(Facade_TextureFormats_flighthq_textureFormats_DetectTextureContainer.detectTextureContainer, cast ([bytes] : Array<Dynamic>));
     return cast null;
   }
@@ -30,22 +30,22 @@ class TextureFormats {
     return cast null;
   }
 
-  public static function parseAtf(bytes:Dynamic):Null<Array<TextureContainer>> {
+  public static function parseAtf(bytes:flighthq._internal._UInt8Array):Null<Array<TextureContainer>> {
     return cast _Runtime.callValue(Facade_TextureFormats_flighthq_textureFormats_ParseAtf.parseAtf, cast ([bytes] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseBasis(bytes:Dynamic):Null<TextureContainer> {
+  public static function parseBasis(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
     return cast _Runtime.callValue(Facade_TextureFormats_flighthq_textureFormats_ParseBasis.parseBasis, cast ([bytes] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseDds(bytes:Dynamic):Null<TextureContainer> {
+  public static function parseDds(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
     return cast _Runtime.callValue(Facade_TextureFormats_flighthq_textureFormats_ParseDds.parseDds, cast ([bytes] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseKtx2(bytes:Dynamic):Null<TextureContainer> {
+  public static function parseKtx2(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
     return cast _Runtime.callValue(Facade_TextureFormats_flighthq_textureFormats_ParseKtx2.parseKtx2, cast ([bytes] : Array<Dynamic>));
     return cast null;
   }

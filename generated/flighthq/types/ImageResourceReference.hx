@@ -12,7 +12,7 @@ typedef ImageResourceFailure = { var kind:ImageResourceFailureKind; var message:
 
 typedef ImageResourceReferenceBase__ImageResourceReference = { var failure:Null<ImageResourceFailure>; var mimeType:Null<String>; var state:ResourceResolutionState; };
 
-typedef EmbeddedImageResourceReference = { var failure:Null<ImageResourceFailure>; var mimeType:Null<String>; var state:ResourceResolutionState; var kind:String; var bytes:Dynamic; };
+typedef EmbeddedImageResourceReference = { var failure:Null<ImageResourceFailure>; var mimeType:Null<String>; var state:ResourceResolutionState; var kind:String; var bytes:flighthq._internal._UInt8Array; };
 
 typedef ExternalImageResourceReference = { var failure:Null<ImageResourceFailure>; var mimeType:Null<String>; var state:ResourceResolutionState; var kind:String; var uri:String; var basePath:Null<String>; };
 

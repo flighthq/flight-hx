@@ -111,7 +111,7 @@ class GlLitProgram {
     if (_Runtime.truthy(!_Runtime.strictEquals(placeholders, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast placeholders; }
     gl = _Runtime.field(state, 'gl');
     flighthq._internal.backend.WebGl2Backend.call(gl, 'activeTexture', cast ([(flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE0') + GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram)] : Array<Dynamic>));
-    black = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [cast ([0.0, 0.0, 0.0, 255.0] : Array<Dynamic>)]);
+    black = new flighthq._internal._UInt8Array(cast ([0.0, 0.0, 0.0, 255.0] : Array<Dynamic>));
     cube = flighthq._internal.backend.WebGl2Backend.call(gl, 'createTexture', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.call(gl, 'bindTexture', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_CUBE_MAP'), cube] : Array<Dynamic>));
     {

@@ -15,7 +15,7 @@ class RegisterWebImageDecoders {
     }
   }
 
-  public static final decodeImageWithCanvas__registerWebImageDecoders:ImageDecoder = function(bytes:Dynamic, ?options:ImageDecodeOptions):flighthq._internal._Promise<DecodedImage> {
+  public static final decodeImageWithCanvas__registerWebImageDecoders:ImageDecoder = function(bytes:flighthq._internal._UInt8Array, ?options:ImageDecodeOptions):flighthq._internal._Promise<DecodedImage> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         var bitmap:Dynamic = cast _Runtime.UNDEFINED;

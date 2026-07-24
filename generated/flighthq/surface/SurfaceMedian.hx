@@ -26,15 +26,15 @@ class SurfaceMedian {
     data = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
     area = (((2.0 * r) + 1.0) * ((2.0 * r) + 1.0));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(SurfaceMedian._windowRed__surfaceMedian, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(SurfaceMedian._windowRed__surfaceMedian, 'length'), area, '<')))) {
-      (SurfaceMedian._windowRed__surfaceMedian = cast (_Runtime.construct(_Runtime.globalValue('Uint8Array'), [area]) : Dynamic));
-      (SurfaceMedian._windowGreen__surfaceMedian = cast (_Runtime.construct(_Runtime.globalValue('Uint8Array'), [area]) : Dynamic));
-      (SurfaceMedian._windowBlue__surfaceMedian = cast (_Runtime.construct(_Runtime.globalValue('Uint8Array'), [area]) : Dynamic));
-      (SurfaceMedian._windowAlpha__surfaceMedian = cast (_Runtime.construct(_Runtime.globalValue('Uint8Array'), [area]) : Dynamic));
+      (SurfaceMedian._windowRed__surfaceMedian = cast (new flighthq._internal._UInt8Array(area) : Dynamic));
+      (SurfaceMedian._windowGreen__surfaceMedian = cast (new flighthq._internal._UInt8Array(area) : Dynamic));
+      (SurfaceMedian._windowBlue__surfaceMedian = cast (new flighthq._internal._UInt8Array(area) : Dynamic));
+      (SurfaceMedian._windowAlpha__surfaceMedian = cast (new flighthq._internal._UInt8Array(area) : Dynamic));
     }
     rs = SurfaceMedian._windowRed__surfaceMedian;
-    gs = (cast SurfaceMedian._windowGreen__surfaceMedian : Dynamic);
-    bs = (cast SurfaceMedian._windowBlue__surfaceMedian : Dynamic);
-    as = (cast SurfaceMedian._windowAlpha__surfaceMedian : Dynamic);
+    gs = (cast SurfaceMedian._windowGreen__surfaceMedian : flighthq._internal._UInt8Array);
+    bs = (cast SurfaceMedian._windowBlue__surfaceMedian : flighthq._internal._UInt8Array);
+    as = (cast SurfaceMedian._windowAlpha__surfaceMedian : flighthq._internal._UInt8Array);
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, h, '<'))) {
@@ -76,7 +76,7 @@ class SurfaceMedian {
     }
   }
 
-  public static function medianOf__surfaceMedian(values:Dynamic, n:Float, mid:Float):Float {
+  public static function medianOf__surfaceMedian(values:flighthq._internal._UInt8Array, n:Float, mid:Float):Float {
     {
       var i:Dynamic = 1.0;
       while (_Runtime.truthy(_Runtime.compare(i, n, '<'))) {
@@ -94,11 +94,11 @@ class SurfaceMedian {
     return cast null;
   }
 
-  public static var _windowRed__surfaceMedian:Null<Dynamic> = _Runtime.explicitNull();
+  public static var _windowRed__surfaceMedian:Null<flighthq._internal._UInt8Array> = _Runtime.explicitNull();
 
-  public static var _windowGreen__surfaceMedian:Null<Dynamic> = _Runtime.explicitNull();
+  public static var _windowGreen__surfaceMedian:Null<flighthq._internal._UInt8Array> = _Runtime.explicitNull();
 
-  public static var _windowBlue__surfaceMedian:Null<Dynamic> = _Runtime.explicitNull();
+  public static var _windowBlue__surfaceMedian:Null<flighthq._internal._UInt8Array> = _Runtime.explicitNull();
 
-  public static var _windowAlpha__surfaceMedian:Null<Dynamic> = _Runtime.explicitNull();
+  public static var _windowAlpha__surfaceMedian:Null<flighthq._internal._UInt8Array> = _Runtime.explicitNull();
 }

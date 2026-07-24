@@ -24,12 +24,12 @@ class ImageCodec {
     _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_ImageEncoderRegistry.clearImageEncoders, cast ([] : Array<Dynamic>));
   }
 
-  public static function decodeImage(bytes:Dynamic, ?mimeType:String):flighthq._internal._Promise<Null<DecodedImage>> {
+  public static function decodeImage(bytes:flighthq._internal._UInt8Array, ?mimeType:String):flighthq._internal._Promise<Null<DecodedImage>> {
     return cast _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_DecodeImage.decodeImage, cast ([bytes, mimeType] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function decodeImagePremultiplied(bytes:Dynamic, ?mimeType:String):flighthq._internal._Promise<Null<DecodedImage>> {
+  public static function decodeImagePremultiplied(bytes:flighthq._internal._UInt8Array, ?mimeType:String):flighthq._internal._Promise<Null<DecodedImage>> {
     return cast _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_DecodeImage.decodeImagePremultiplied, cast ([bytes, mimeType] : Array<Dynamic>));
     return cast null;
   }
@@ -39,7 +39,7 @@ class ImageCodec {
     return cast null;
   }
 
-  public static function encodeImage(image:DecodedImage, mimeType:String, ?options:ImageEncodeOptions):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function encodeImage(image:DecodedImage, mimeType:String, ?options:ImageEncodeOptions):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
     return cast _Runtime.callValue(Facade_ImageCodec_flighthq_imageCodec_EncodeImage.encodeImage, cast ([image, mimeType, options] : Array<Dynamic>));
     return cast null;
   }

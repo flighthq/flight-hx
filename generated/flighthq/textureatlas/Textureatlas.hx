@@ -94,7 +94,7 @@ class Textureatlas {
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBytes(bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
+  public static function loadTextureAtlasFromBytes(bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
     return cast _Runtime.callValue(Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom.loadTextureAtlasFromBytes, cast ([bytes, mimeType, signal] : Array<Dynamic>));
     return cast null;
   }

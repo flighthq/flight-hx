@@ -20,7 +20,7 @@ describe('maintained runtime bindings', () => {
   });
 
   it('keeps Lime typed arrays native through runtime and GL boundaries', () => {
-    for (const name of ['_Float32Array', '_Int16Array', '_UInt16Array']) {
+    for (const name of ['_Float32Array', '_Int16Array', '_UInt16Array', '_UInt8Array']) {
       const source = readFileSync(path.join(workspace, 'src', 'flighthq', '_internal', `${name}.hx`), 'utf8');
       expect(source).toContain('#if js');
       expect(source).toContain('#elseif lime');
@@ -31,6 +31,7 @@ describe('maintained runtime bindings', () => {
     expect(storage).toContain('new lime.utils.Float32Array(length)');
     expect(storage).toContain('new lime.utils.Int16Array(length)');
     expect(storage).toContain('new lime.utils.UInt16Array(length)');
+    expect(storage).toContain('new lime.utils.UInt8Array(length)');
 
     const gl = readFileSync(
       path.join(workspace, 'src', 'flighthq', '_internal', 'backend', 'WebGl2Backend.hx'),

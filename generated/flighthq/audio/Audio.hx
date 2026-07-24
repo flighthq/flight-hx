@@ -89,7 +89,7 @@ class Audio {
     return cast null;
   }
 
-  public static function loadAudioResourceFromBytes(context:Dynamic, bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromBytes(context:Dynamic, bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
     return cast _Runtime.callValue(Facade_Audio_flighthq_audio_AudioResourceFrom.loadAudioResourceFromBytes, cast ([context, bytes, mimeType, signal] : Array<Dynamic>));
     return cast null;
   }

@@ -23,6 +23,7 @@ const portableTypeReferenceMap: Readonly<Record<string, string>> = {
   Float32Array: 'flighthq._internal._Float32Array',
   Int16Array: 'flighthq._internal._Int16Array',
   Uint16Array: 'flighthq._internal._UInt16Array',
+  Uint8Array: 'flighthq._internal._UInt8Array',
 };
 
 const platformDynamicTypes = new Set([
@@ -158,6 +159,7 @@ const platformGlobalValues = new Set([
   'Intl',
   'File',
   'Float32Array',
+  'Uint8Array',
   'FontFace',
   'Number',
   'Object',

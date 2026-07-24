@@ -10,7 +10,7 @@ import flighthq.types.Font;
 import flighthq.types.Font.FontUrl;
 
 class FontFrom {
-  public static function loadFontFromBytes(bytes:Dynamic, family:String):flighthq._internal._Promise<Font> {
+  public static function loadFontFromBytes(bytes:flighthq._internal._UInt8Array, family:String):flighthq._internal._Promise<Font> {
     return cast flighthq._internal._Async.protect(function():Dynamic {
       var face:Dynamic = cast _Runtime.UNDEFINED;
       face = _Runtime.construct(_Runtime.globalValue('FontFace'), [family, _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), (_Runtime.field(bytes, 'byteOffset') + _Runtime.field(bytes, 'byteLength')))]);

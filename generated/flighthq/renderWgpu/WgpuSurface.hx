@@ -58,7 +58,7 @@ class WgpuSurface {
           bytesPerRow = _Runtime.field(runtime, 'frameCaptureBytesPerRow');
           return flighthq._internal._Async.flatMap(_Runtime.callProperty(buffer, 'mapAsync', cast ([flighthq._internal.backend.WebGpuConstantsBackend.value('GPUMapMode', 'READ')] : Array<Dynamic>)), function(__awaitValue1:Dynamic):Dynamic {
             __awaitValue1;
-            mapped = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.callProperty(buffer, 'getMappedRange', cast ([] : Array<Dynamic>))]);
+            mapped = new flighthq._internal._UInt8Array(_Runtime.callProperty(buffer, 'getMappedRange', cast ([] : Array<Dynamic>)));
             surface = _Runtime.callValue(createSurface, cast ([width, height] : Array<Dynamic>));
             out = _Runtime.field(surface, 'data');
             swizzleBGRA = _Runtime.orValue(_Runtime.strictEquals(_Runtime.field(state, 'format'), 'bgra8unorm'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(state, 'format'), 'bgra8unorm-srgb'));

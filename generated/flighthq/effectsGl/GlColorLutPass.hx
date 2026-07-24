@@ -37,7 +37,7 @@ class GlColorLutPass {
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(cache, 'texture'), null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(cache, 'lut'), lut)))) { return cast _Runtime.field(cache, 'texture'); }
     n = _Runtime.field(lut, 'size');
     samples = _Runtime.field(lut, 'samples');
-    data = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [(((n * n) * n) * 4.0)]);
+    data = new flighthq._internal._UInt8Array((((n * n) * n) * 4.0));
     {
       var i:Dynamic = 0.0;
       var j:Dynamic = 0.0;

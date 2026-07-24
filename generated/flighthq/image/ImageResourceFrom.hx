@@ -72,7 +72,7 @@ class ImageResourceFrom {
     );
   }
 
-  public static function loadImageResourceFromBytes(bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
+  public static function loadImageResourceFromBytes(bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
     return cast flighthq._internal._Async.protect(function():Dynamic {
       var type:Dynamic = cast _Runtime.UNDEFINED;
       var buf:Dynamic = cast _Runtime.UNDEFINED;

@@ -113,7 +113,7 @@ class SceneResources {
     _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_GetSceneResourceTextures.getSceneResourceTextures, cast ([scene, registry, out] : Array<Dynamic>));
   }
 
-  public static function loadSceneDocumentBytesFromUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function loadSceneDocumentBytesFromUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
     return cast _Runtime.callValue(Facade_SceneResources_flighthq_sceneResources_SceneDocumentSource.loadSceneDocumentBytesFromUrl, cast ([url, options] : Array<Dynamic>));
     return cast null;
   }

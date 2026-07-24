@@ -51,7 +51,7 @@ class TextureAtlasFrom {
     });
   }
 
-  public static function loadTextureAtlasFromBytes(bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
+  public static function loadTextureAtlasFromBytes(bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
     return cast flighthq._internal._Async.protect(function():Dynamic {
       return flighthq._internal._Async.flatMap(_Runtime.callValue(loadImageResourceFromBytes, cast ([bytes, mimeType, signal] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
         return flighthq._internal._Async.resolve(_Runtime.callValue(createTextureAtlasFromImageResource, cast ([__awaitValue2] : Array<Dynamic>)));

@@ -16,7 +16,7 @@ class RegisterWebImageEncoders {
   }
 
   public static function createCanvasImageEncoder__registerWebImageEncoders(mimeType:String):ImageEncoder {
-    return cast function(image:DecodedImage, ?options:ImageEncodeOptions):flighthq._internal._Promise<Dynamic> {
+    return cast function(image:DecodedImage, ?options:ImageEncodeOptions):flighthq._internal._Promise<flighthq._internal._UInt8Array> {
       return cast flighthq._internal._Async.protect(function():Dynamic {
         var canvas:Dynamic = cast _Runtime.UNDEFINED;
         var context:Dynamic = cast _Runtime.UNDEFINED;
@@ -29,7 +29,7 @@ class RegisterWebImageEncoders {
         return flighthq._internal._Async.flatMap(flighthq._internal.backend.CanvasElementBackend.call(canvas, 'convertToBlob', cast ([{ type: mimeType, quality: _Runtime.optionalField(options, 'quality') }] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
           blob = __awaitValue2;
           return flighthq._internal._Async.flatMap(_Runtime.callProperty(blob, 'arrayBuffer', cast ([] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
-            return flighthq._internal._Async.resolve(_Runtime.construct(_Runtime.globalValue('Uint8Array'), [__awaitValue3]));
+            return flighthq._internal._Async.resolve(new flighthq._internal._UInt8Array(__awaitValue3));
           });
         });
       });

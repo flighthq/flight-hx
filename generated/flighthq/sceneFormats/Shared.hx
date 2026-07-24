@@ -29,7 +29,7 @@ class Shared {
 
   public static final MAX_SKIN_INFLUENCES:Dynamic = 4.0;
 
-  public static function buildEmbeddedImageResourceReference(bytes:Dynamic, mimeType:Null<String>):EmbeddedImageResourceReference {
+  public static function buildEmbeddedImageResourceReference(bytes:flighthq._internal._UInt8Array, mimeType:Null<String>):EmbeddedImageResourceReference {
     return cast { bytes: bytes, failure: null, kind: ImageResourceReferenceKindValue.Embedded, mimeType: mimeType, state: ResourceResolutionStateValue.Unresolved };
     return cast null;
   }
@@ -72,7 +72,7 @@ class Shared {
     _Runtime.setIndex(transform, 11.0, _Runtime.normalizeZero(-_Runtime.getIndex(transform, 11.0)));
   }
 
-  public static function createEmbeddedTextureRef(bytes:Dynamic, mimeType:Null<String>, ?resources:Array<ImageResourceReference>):Texture {
+  public static function createEmbeddedTextureRef(bytes:flighthq._internal._UInt8Array, mimeType:Null<String>, ?resources:Array<ImageResourceReference>):Texture {
     var resource:Dynamic = cast _Runtime.UNDEFINED;
     resource = _Runtime.callOptionalProperty(resources, 'find', cast ([function(candidate:Dynamic) return _Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(candidate, 'kind'), ImageResourceReferenceKindValue.Embedded), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(candidate, 'bytes'), bytes)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(candidate, 'mimeType'), mimeType))] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(resource, _Runtime.field(_Runtime, 'UNDEFINED')))) {

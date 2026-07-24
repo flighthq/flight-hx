@@ -45,7 +45,7 @@ class Font {
     return cast null;
   }
 
-  public static function loadFontFromBytes(bytes:Dynamic, family:String):flighthq._internal._Promise<flighthq.types.Font> {
+  public static function loadFontFromBytes(bytes:flighthq._internal._UInt8Array, family:String):flighthq._internal._Promise<flighthq.types.Font> {
     return cast _Runtime.callValue(Facade_Font_flighthq_font_FontFrom.loadFontFromBytes, cast ([bytes, family] : Array<Dynamic>));
     return cast null;
   }
@@ -65,7 +65,7 @@ class Font {
     return cast null;
   }
 
-  public static function loadFontResourceFromBytes(out:FontResource, bytes:Dynamic):flighthq._internal._Promise<FontResource> {
+  public static function loadFontResourceFromBytes(out:FontResource, bytes:flighthq._internal._UInt8Array):flighthq._internal._Promise<FontResource> {
     return cast _Runtime.callValue(Facade_Font_flighthq_font_FontResourceFrom.loadFontResourceFromBytes, cast ([out, bytes] : Array<Dynamic>));
     return cast null;
   }

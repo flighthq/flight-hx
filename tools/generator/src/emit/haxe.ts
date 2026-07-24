@@ -2125,6 +2125,7 @@ function typedArrayConstructor(expression: IrExpression): string | undefined {
     Float32Array: 'flighthq._internal._Float32Array',
     Int16Array: 'flighthq._internal._Int16Array',
     Uint16Array: 'flighthq._internal._UInt16Array',
+    Uint8Array: 'flighthq._internal._UInt8Array',
   }[name];
 }
 

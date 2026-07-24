@@ -12,7 +12,7 @@ import flighthq.types.TextureContainerFormat;
 import flighthq.types.TextureContainerLevel;
 
 class ParseAtf {
-  public static function parseAtf(bytes:Dynamic):Null<Array<TextureContainer>> {
+  public static function parseAtf(bytes:flighthq._internal._UInt8Array):Null<Array<TextureContainer>> {
     var versioned:Dynamic = cast _Runtime.UNDEFINED;
     var headerOffset:Dynamic = cast _Runtime.UNDEFINED;
     var version:Dynamic = cast _Runtime.UNDEFINED;
@@ -107,7 +107,7 @@ class ParseAtf {
     return cast null;
   }
 
-  public static function hasAtfSignature__parseAtf(bytes:Dynamic):Bool {
+  public static function hasAtfSignature__parseAtf(bytes:flighthq._internal._UInt8Array):Bool {
     return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.field(bytes, 'byteLength'), 7.0, '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 0.0), 65.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 1.0), 84.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 2.0), 70.0));
     return cast null;
   }

@@ -90,7 +90,7 @@ class Tileset {
     return cast null;
   }
 
-  public static function loadTilesetFromBytes(bytes:Dynamic, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<flighthq.types.Tileset> {
+  public static function loadTilesetFromBytes(bytes:flighthq._internal._UInt8Array, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<flighthq.types.Tileset> {
     return cast _Runtime.callValue(Facade_Tileset_flighthq_tileset_TilesetFrom.loadTilesetFromBytes, cast ([bytes, tileWidth, tileHeight, margin, spacing, mimeType, signal] : Array<Dynamic>));
     return cast null;
   }

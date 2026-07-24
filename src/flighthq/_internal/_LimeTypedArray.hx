@@ -12,9 +12,14 @@ class _LimeTypedArray {
 
   final kind:String;
 
-  public function new(kind:String, source:Dynamic = 0) {
+  public function new(kind:String, source:Dynamic = 0, ?byteOffset:Int, ?viewLength:Int) {
     this.kind = kind;
     final sourceArray = Std.isOfType(source, _LimeTypedArray) ? (cast source : _LimeTypedArray) : null;
+    if (Std.isOfType(source, haxe.io.Bytes)) {
+      nativeView = createBufferView(kind, cast source, byteOffset == null ? 0 : byteOffset, viewLength);
+      length = arrayBufferView(nativeView).length;
+      return;
+    }
     length = Std.isOfType(source, Int) || Std.isOfType(source, Float)
       ? Std.int(source)
       : sourceArray == null
@@ -46,6 +51,9 @@ class _LimeTypedArray {
       case 'uint16':
         final values:lime.utils.UInt16Array = cast nativeView;
         values[index];
+      case 'uint8':
+        final values:lime.utils.UInt8Array = cast nativeView;
+        values[index];
       default:
         throw 'Unsupported Lime typed-array kind: ' + kind;
     };
@@ -73,6 +81,9 @@ class _LimeTypedArray {
       case 'uint16':
         final values:lime.utils.UInt16Array = cast nativeView;
         values[index] = Std.int(value) & 0xffff;
+      case 'uint8':
+        final values:lime.utils.UInt8Array = cast nativeView;
+        values[index] = Std.int(value) & 0xff;
       default:
         throw 'Unsupported Lime typed-array kind: ' + kind;
     };
@@ -99,8 +110,23 @@ class _LimeTypedArray {
       case 'float32': new lime.utils.Float32Array(length);
       case 'int16': new lime.utils.Int16Array(length);
       case 'uint16': new lime.utils.UInt16Array(length);
+      case 'uint8': new lime.utils.UInt8Array(length);
       default: throw 'Unsupported Lime typed-array kind: ' + kind;
     };
+  }
+
+  static function createBufferView(kind:String, buffer:lime.utils.ArrayBuffer, byteOffset:Int, length:Null<Int>):Dynamic {
+    return switch (kind) {
+      case 'float32': new lime.utils.Float32Array(null, buffer, null, null, byteOffset, length);
+      case 'int16': new lime.utils.Int16Array(null, buffer, null, null, byteOffset, length);
+      case 'uint16': new lime.utils.UInt16Array(null, buffer, null, null, byteOffset, length);
+      case 'uint8': new lime.utils.UInt8Array(null, buffer, null, null, byteOffset, length);
+      default: throw 'Unsupported Lime typed-array kind: ' + kind;
+    };
+  }
+
+  static inline function arrayBufferView(value:Dynamic):lime.utils.ArrayBufferView {
+    return cast value;
   }
 }
 #end

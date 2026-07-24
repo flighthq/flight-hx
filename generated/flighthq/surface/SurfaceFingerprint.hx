@@ -34,7 +34,7 @@ class SurfaceFingerprint {
     var height:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(gridSize, 1.0, '<'))) { throw _Runtime.error('createSurfaceFingerprint: gridSize must be >= 1 (got ' + Std.string(gridSize) + ')'); }
-    cells = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [((gridSize * gridSize) * 3.0)]);
+    cells = new flighthq._internal._UInt8Array(((gridSize * gridSize) * 3.0));
     __destructure0 = source;
     width = _Runtime.field(__destructure0, 'width');
     height = _Runtime.field(__destructure0, 'height');
@@ -113,7 +113,7 @@ class SurfaceFingerprint {
     if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([gridSize] : Array<Dynamic>))), function():Dynamic return cast _Runtime.compare(gridSize, 1.0, '<')))) { return cast null; }
     hex = _Runtime.slice(text, (colon + 1.0), null);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(hex, 'length'), (((gridSize * gridSize) * 3.0) * 2.0)))) { return cast null; }
-    cells = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [(_Runtime.field(hex, 'length') / 2.0)]);
+    cells = new flighthq._internal._UInt8Array((_Runtime.field(hex, 'length') / 2.0));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(cells, 'length'), '<'))) {

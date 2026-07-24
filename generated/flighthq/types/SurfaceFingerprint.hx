@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SurfaceFingerprint = { var gridSize:Float; var cells:Dynamic; };
+typedef SurfaceFingerprint = { var gridSize:Float; var cells:flighthq._internal._UInt8Array; };

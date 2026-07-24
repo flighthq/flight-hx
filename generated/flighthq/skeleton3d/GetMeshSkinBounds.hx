@@ -151,10 +151,10 @@ class GetMeshSkinBounds {
     _Runtime.setField(_Runtime.field(out, 'max'), 'z', maxZ);
   }
 
-  public static function getReferencedJoints__getMeshSkinBounds(joints:flighthq._internal._Float32Array, weights:flighthq._internal._Float32Array, jointCount:Float):Dynamic {
+  public static function getReferencedJoints__getMeshSkinBounds(joints:flighthq._internal._Float32Array, weights:flighthq._internal._Float32Array, jointCount:Float):flighthq._internal._UInt8Array {
     var referenced:Dynamic = cast _Runtime.UNDEFINED;
     var influenceCount:Dynamic = cast _Runtime.UNDEFINED;
-    referenced = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [jointCount]);
+    referenced = new flighthq._internal._UInt8Array(jointCount);
     influenceCount = _Runtime.field(joints, 'length');
     {
       var k:Dynamic = 0.0;

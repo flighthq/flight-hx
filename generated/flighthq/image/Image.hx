@@ -92,7 +92,7 @@ class Image {
     return cast null;
   }
 
-  public static function loadImageResourceFromBytes(bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
+  public static function loadImageResourceFromBytes(bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
     return cast _Runtime.callValue(Facade_Image_flighthq_image_ImageResourceFrom.loadImageResourceFromBytes, cast ([bytes, mimeType, signal] : Array<Dynamic>));
     return cast null;
   }

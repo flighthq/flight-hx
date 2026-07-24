@@ -8,7 +8,7 @@ import flighthq.types.Surface;
 import flighthq.types.SurfaceRegion;
 
 class SurfaceFill {
-  public static var _floodFillVisited__surfaceFill:Null<Dynamic> = _Runtime.explicitNull();
+  public static var _floodFillVisited__surfaceFill:Null<flighthq._internal._UInt8Array> = _Runtime.explicitNull();
 
   public static function fillSurfaceRectangle(dest:SurfaceRegion, color:Float):Void {
     var r:Dynamic = cast _Runtime.UNDEFINED;
@@ -69,7 +69,7 @@ class SurfaceFill {
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(targetR, fillR), function():Dynamic return cast _Runtime.strictEquals(targetG, fillG)), function():Dynamic return cast _Runtime.strictEquals(targetB, fillB)), function():Dynamic return cast _Runtime.strictEquals(targetA, fillA)))) { return; }
     needed = (_Runtime.field(out, 'width') * _Runtime.field(out, 'height'));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(SurfaceFill._floodFillVisited__surfaceFill, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(SurfaceFill._floodFillVisited__surfaceFill, 'length'), needed, '<')))) {
-      (SurfaceFill._floodFillVisited__surfaceFill = cast (_Runtime.construct(_Runtime.globalValue('Uint8Array'), [needed]) : Dynamic));
+      (SurfaceFill._floodFillVisited__surfaceFill = cast (new flighthq._internal._UInt8Array(needed) : Dynamic));
     } else {
       _Runtime.fill(SurfaceFill._floodFillVisited__surfaceFill, 0.0, 0.0, needed, 3);
     }

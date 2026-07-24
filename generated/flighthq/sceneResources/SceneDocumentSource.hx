@@ -26,7 +26,7 @@ class SceneDocumentSource {
     return cast null;
   }
 
-  public static function loadSceneDocumentBytesFromUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function loadSceneDocumentBytesFromUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         var response:Dynamic = cast _Runtime.UNDEFINED;
@@ -41,7 +41,7 @@ class SceneDocumentSource {
             __flowBranch1 = flighthq._internal._Async.flowNormal();
           }
           return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
-            return flighthq._internal._Async.flowReturn(_Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.field(response, 'body')]));
+            return flighthq._internal._Async.flowReturn(new flighthq._internal._UInt8Array(_Runtime.field(response, 'body')));
           });
         });
       })

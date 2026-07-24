@@ -39,9 +39,9 @@ class MeshGeometryIndex {
         element++;
       }
     }
-    sourceBytes = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.field(_Runtime.field(geometry, 'vertices'), 'buffer'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteOffset'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength')]);
+    sourceBytes = new flighthq._internal._UInt8Array(_Runtime.field(_Runtime.field(geometry, 'vertices'), 'buffer'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteOffset'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength'));
     compactBuffer = _Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [(compactCount * stride)]);
-    compactBytes = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [compactBuffer]);
+    compactBytes = new flighthq._internal._UInt8Array(compactBuffer);
     {
       var sourceIndex:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(sourceIndex, vertexCount, '<'))) {
@@ -188,8 +188,8 @@ class MeshGeometryIndex {
     sourceByteLength = _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(stride, 0.0, '<='), function():Dynamic return cast !_Runtime.strictEquals((stride % 4.0), 0.0)), function():Dynamic return cast !_Runtime.strictEquals((sourceByteLength % stride), 0.0)))) { return cast _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>)); }
     vertexCount = (sourceByteLength / stride);
-    sourceBytes = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.field(_Runtime.field(geometry, 'vertices'), 'buffer'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteOffset'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength')]);
-    uniqueBytes = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [sourceByteLength]);
+    sourceBytes = new flighthq._internal._UInt8Array(_Runtime.field(_Runtime.field(geometry, 'vertices'), 'buffer'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteOffset'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength'));
+    uniqueBytes = new flighthq._internal._UInt8Array(sourceByteLength);
     sourceToUnique = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [vertexCount]);
     candidatesByHash = _Runtime.construct(_Runtime.globalValue('Map'), []);
     uniqueCount = 0.0;
@@ -241,7 +241,7 @@ class MeshGeometryIndex {
     return cast null;
   }
 
-  public static function equalVertexRecord__meshGeometryIndex(a:Dynamic, aOffset:Float, b:Dynamic, bOffset:Float, byteLength:Float):Bool {
+  public static function equalVertexRecord__meshGeometryIndex(a:flighthq._internal._UInt8Array, aOffset:Float, b:flighthq._internal._UInt8Array, bOffset:Float, byteLength:Float):Bool {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, byteLength, '<'))) {
@@ -253,7 +253,7 @@ class MeshGeometryIndex {
     return cast null;
   }
 
-  public static function hashVertexRecord__meshGeometryIndex(bytes:Dynamic, offset:Float, byteLength:Float):Float {
+  public static function hashVertexRecord__meshGeometryIndex(bytes:flighthq._internal._UInt8Array, offset:Float, byteLength:Float):Float {
     var hash:Dynamic = cast _Runtime.UNDEFINED;
     hash = 2166136261.0;
     {

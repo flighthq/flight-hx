@@ -45,7 +45,7 @@ class TiledLayerData {
     return cast null;
   }
 
-  public static function decodeBase64__tiledLayerData(s:String):Dynamic {
+  public static function decodeBase64__tiledLayerData(s:String):flighthq._internal._UInt8Array {
     var stripped:Dynamic = cast _Runtime.UNDEFINED;
     var out:Array<Float> = cast _Runtime.UNDEFINED;
     stripped = _Runtime.replace(s, _Runtime.regexp('[^A-Za-z0-9+/]', 'g'), '', false);
@@ -64,7 +64,7 @@ class TiledLayerData {
         (i = cast ((i + 4.0) : Dynamic));
       }
     }
-    return cast _Runtime.construct(_Runtime.globalValue('Uint8Array'), [out]);
+    return cast new flighthq._internal._UInt8Array(out);
     return cast null;
   }
 

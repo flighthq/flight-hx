@@ -34,7 +34,7 @@ class AudioResourceFrom {
       var binary:Dynamic = cast _Runtime.UNDEFINED;
       var bytes:Dynamic = cast _Runtime.UNDEFINED;
       binary = _Runtime.callValue(_Runtime.globalValue('atob'), cast ([base64] : Array<Dynamic>));
-      bytes = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.field(binary, 'length')]);
+      bytes = new flighthq._internal._UInt8Array(_Runtime.field(binary, 'length'));
       {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(binary, 'length'), '<'))) {
@@ -52,12 +52,12 @@ class AudioResourceFrom {
       var arrayBuffer:Dynamic = cast _Runtime.UNDEFINED;
       return flighthq._internal._Async.flatMap(_Runtime.callProperty(blob, 'arrayBuffer', cast ([] : Array<Dynamic>)), function(__awaitValue0:Dynamic):Dynamic {
         arrayBuffer = __awaitValue0;
-        return flighthq._internal._Async.resolve(_Runtime.callValue(loadAudioResourceFromBytes, cast ([context, _Runtime.construct(_Runtime.globalValue('Uint8Array'), [arrayBuffer]), _Runtime.orValue(_Runtime.field(blob, 'type'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), signal] : Array<Dynamic>)));
+        return flighthq._internal._Async.resolve(_Runtime.callValue(loadAudioResourceFromBytes, cast ([context, new flighthq._internal._UInt8Array(arrayBuffer), _Runtime.orValue(_Runtime.field(blob, 'type'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), signal] : Array<Dynamic>)));
       });
     });
   }
 
-  public static function loadAudioResourceFromBytes(context:Dynamic, bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromBytes(context:Dynamic, bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
     return cast flighthq._internal._Async.protect(function():Dynamic {
       var buffer:Dynamic = cast _Runtime.UNDEFINED;
       var audioBuffer:Dynamic = cast _Runtime.UNDEFINED;
@@ -78,7 +78,7 @@ class AudioResourceFrom {
         response = __awaitValue2;
         return flighthq._internal._Async.flatMap(_Runtime.callProperty(response, 'arrayBuffer', cast ([] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
           arrayBuffer = __awaitValue3;
-          return flighthq._internal._Async.resolve(_Runtime.callValue(loadAudioResourceFromBytes, cast ([context, _Runtime.construct(_Runtime.globalValue('Uint8Array'), [arrayBuffer]), _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(response, 'headers'), 'get', cast (['content-type'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), signal] : Array<Dynamic>)));
+          return flighthq._internal._Async.resolve(_Runtime.callValue(loadAudioResourceFromBytes, cast ([context, new flighthq._internal._UInt8Array(arrayBuffer), _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(response, 'headers'), 'get', cast (['content-type'] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), signal] : Array<Dynamic>)));
         });
       });
     });

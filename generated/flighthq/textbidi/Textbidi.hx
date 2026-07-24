@@ -27,11 +27,11 @@ class Textbidi {
     return cast null;
   }
 
-  public static function reorderBidiLine(levels:Dynamic, start:Float, end:Float, out:Array<Float>):Void {
+  public static function reorderBidiLine(levels:flighthq._internal._UInt8Array, start:Float, end:Float, out:Array<Float>):Void {
     _Runtime.callValue(Facade_Textbidi_flighthq_textbidi_ReorderBidiLine.reorderBidiLine, cast ([levels, start, end, out] : Array<Dynamic>));
   }
 
-  public static function resolveBidiLevels(text:String, baseDirection:BidiDirection):Dynamic {
+  public static function resolveBidiLevels(text:String, baseDirection:BidiDirection):flighthq._internal._UInt8Array {
     return cast _Runtime.callValue(Facade_Textbidi_flighthq_textbidi_ResolveBidiLevels.resolveBidiLevels, cast ([text, baseDirection] : Array<Dynamic>));
     return cast null;
   }

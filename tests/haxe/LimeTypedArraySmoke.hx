@@ -5,6 +5,7 @@ import flighthq._internal._Int16Array;
 import flighthq._internal._LimeTypedArray;
 import flighthq._internal._Runtime;
 import flighthq._internal._UInt16Array;
+import flighthq._internal._UInt8Array;
 import flighthq._internal.backend.WebGl2Backend;
 
 class LimeTypedArraySmoke {
@@ -24,6 +25,9 @@ class LimeTypedArraySmoke {
     final unsigned = new _UInt16Array([-1, 0x10000]);
     _Runtime.fill(unsigned, 7, 0, 1, 4);
     if (unsigned[0] != 7 || unsigned[1] != 0) throw 'unsigned conversion';
+
+    final bytes = new _UInt8Array([-1, 256, 257]);
+    if (bytes[0] != 255 || bytes[1] != 0 || bytes[2] != 1) throw 'byte conversion';
 
     final storage:_LimeTypedArray = cast floats;
     if (!Std.isOfType(_LimeTypedArray.unwrap(storage), Array)) throw 'native unwrap';

@@ -15,7 +15,7 @@ class VideoFormat {
 
   public static function detectVideoMimeType(data:Dynamic):Null<String> {
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    b = _Runtime.select(_Runtime.isInstanceOf(data, _Runtime.globalValue('Uint8Array')), function():Dynamic return cast data, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Uint8Array'), [data]));
+    b = _Runtime.select(_Runtime.isInstanceOf(data, _Runtime.globalValue('Uint8Array')), function():Dynamic return cast data, function():Dynamic return cast new flighthq._internal._UInt8Array(data));
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(b, 'byteLength'), 4.0, '<'))) { return cast null; }
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.field(b, 'byteLength'), 8.0, '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 4.0), 102.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 5.0), 116.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 6.0), 121.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 7.0), 112.0)))) { return cast 'video/mp4'; }
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.getIndex(b, 0.0), 26.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 1.0), 69.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 2.0), 223.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 3.0), 163.0)))) { return cast 'video/webm'; }

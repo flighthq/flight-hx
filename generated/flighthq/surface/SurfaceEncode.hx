@@ -7,7 +7,7 @@ import flighthq.types.ImageFormat;
 import flighthq.types.Surface;
 
 class SurfaceEncode {
-  public static function encodeSurface(source:Surface, format:ImageFormat = 'png', quality:Float = 0.9):Dynamic {
+  public static function encodeSurface(source:Surface, format:ImageFormat = 'png', quality:Float = 0.9):flighthq._internal._UInt8Array {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var domImageData:Dynamic = cast _Runtime.UNDEFINED;
     var mimeType:Dynamic = cast _Runtime.UNDEFINED;
@@ -25,7 +25,7 @@ class SurfaceEncode {
     dataUrl = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'toDataURL', cast ([mimeType, quality] : Array<Dynamic>));
     base64 = _Runtime.slice(dataUrl, (_Runtime.callProperty(dataUrl, 'indexOf', cast ([','] : Array<Dynamic>)) + 1.0), null);
     binary = _Runtime.callValue(_Runtime.globalValue('atob'), cast ([base64] : Array<Dynamic>));
-    bytes = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.field(binary, 'length')]);
+    bytes = new flighthq._internal._UInt8Array(_Runtime.field(binary, 'length'));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(binary, 'length'), '<'))) {

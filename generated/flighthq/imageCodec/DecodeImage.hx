@@ -9,7 +9,7 @@ import flighthq.types.DecodedImage;
 import flighthq.types.ImageDecoder;
 
 class DecodeImage {
-  public static function decodeImage(bytes:Dynamic, ?mimeType:String):flighthq._internal._Promise<Null<DecodedImage>> {
+  public static function decodeImage(bytes:flighthq._internal._UInt8Array, ?mimeType:String):flighthq._internal._Promise<Null<DecodedImage>> {
     return cast flighthq._internal._Async.protect(function():Dynamic {
       var decoder:Dynamic = cast _Runtime.UNDEFINED;
       decoder = _Runtime.callValue(DecodeImage.resolveImageDecoder__decodeImage, cast ([bytes, mimeType] : Array<Dynamic>));
@@ -19,7 +19,7 @@ class DecodeImage {
     });
   }
 
-  public static function decodeImagePremultiplied(bytes:Dynamic, ?mimeType:String):flighthq._internal._Promise<Null<DecodedImage>> {
+  public static function decodeImagePremultiplied(bytes:flighthq._internal._UInt8Array, ?mimeType:String):flighthq._internal._Promise<Null<DecodedImage>> {
     return cast flighthq._internal._Async.protect(function():Dynamic {
       var decoder:Dynamic = cast _Runtime.UNDEFINED;
       decoder = _Runtime.callValue(DecodeImage.resolveImageDecoder__decodeImage, cast ([bytes, mimeType] : Array<Dynamic>));
@@ -29,7 +29,7 @@ class DecodeImage {
     });
   }
 
-  public static function resolveImageDecoder__decodeImage(bytes:Dynamic, ?mimeType:String):Null<ImageDecoder> {
+  public static function resolveImageDecoder__decodeImage(bytes:flighthq._internal._UInt8Array, ?mimeType:String):Null<ImageDecoder> {
     var type:Dynamic = cast _Runtime.UNDEFINED;
     type = _Runtime.coalesce(mimeType, function():Dynamic return cast _Runtime.callValue(detectImageMimeType, cast ([bytes] : Array<Dynamic>)));
     if (_Runtime.truthy(_Runtime.strictEquals(type, null))) { return cast null; }

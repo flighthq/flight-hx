@@ -199,14 +199,14 @@ class Share {
     var header:Dynamic = cast _Runtime.UNDEFINED;
     var body:Dynamic = cast _Runtime.UNDEFINED;
     var isBase64:Dynamic = cast _Runtime.UNDEFINED;
-    var bytes:Dynamic = cast _Runtime.UNDEFINED;
+    var bytes:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     comma = _Runtime.callProperty(_Runtime.field(file, 'dataUrl'), 'indexOf', cast ([','] : Array<Dynamic>));
     header = _Runtime.substring(_Runtime.field(file, 'dataUrl'), 0.0, comma);
     body = _Runtime.substring(_Runtime.field(file, 'dataUrl'), (comma + 1.0), null);
     isBase64 = _Runtime.includes(header, ';base64');
     if (_Runtime.truthy(isBase64)) {
       var binary:Dynamic = _Runtime.callValue(_Runtime.globalValue('atob'), cast ([body] : Array<Dynamic>));
-      (bytes = cast (_Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [_Runtime.field(binary, 'length')])]) : Dynamic));
+      (bytes = cast (new flighthq._internal._UInt8Array(_Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [_Runtime.field(binary, 'length')])) : Dynamic));
       {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(binary, 'length'), '<'))) {
@@ -217,7 +217,7 @@ class Share {
     } else {
       var decoded:Dynamic = _Runtime.callValue(_Runtime.globalValue('decodeURIComponent'), cast ([body] : Array<Dynamic>));
       var encoded:Dynamic = _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('TextEncoder'), []), 'encode', cast ([decoded] : Array<Dynamic>));
-      (bytes = cast (_Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [_Runtime.field(encoded, 'length')])]) : Dynamic));
+      (bytes = cast (new flighthq._internal._UInt8Array(_Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [_Runtime.field(encoded, 'length')])) : Dynamic));
       _Runtime.callProperty(bytes, 'set', cast ([encoded] : Array<Dynamic>));
     }
     return cast _Runtime.construct(_Runtime.globalValue('File'), [cast ([bytes] : Array<Dynamic>), _Runtime.field(file, 'name'), { type: _Runtime.field(file, 'mimeType') }]);

@@ -14,7 +14,7 @@ import flighthq.types.TextureContainerFormat;
 import flighthq.types.TextureContainerLevel;
 
 class ParseBasis {
-  public static function parseBasis(bytes:Dynamic):Null<TextureContainer> {
+  public static function parseBasis(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
     var header:Dynamic = cast _Runtime.UNDEFINED;
     var totalSlices:Dynamic = cast _Runtime.UNDEFINED;
     var totalImages:Dynamic = cast _Runtime.UNDEFINED;
@@ -97,7 +97,7 @@ class ParseBasis {
     return cast null;
   }
 
-  public static function hasBasisSignature__parseBasis(bytes:Dynamic):Bool {
+  public static function hasBasisSignature__parseBasis(bytes:flighthq._internal._UInt8Array):Bool {
     return cast _Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.field(bytes, 'byteLength'), 2.0, '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 0.0), 115.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(bytes, 1.0), 66.0));
     return cast null;
   }

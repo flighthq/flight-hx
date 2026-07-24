@@ -8,7 +8,7 @@ import flighthq.types.Bidi.BidiClass;
 import flighthq.types.Bidi.BidiDirection;
 
 class ResolveBidiLevels {
-  public static function resolveBidiLevels(text:String, baseDirection:BidiDirection):Dynamic {
+  public static function resolveBidiLevels(text:String, baseDirection:BidiDirection):flighthq._internal._UInt8Array {
     var length:Dynamic = cast _Runtime.UNDEFINED;
     var levels:Dynamic = cast _Runtime.UNDEFINED;
     var backend:Dynamic = cast _Runtime.UNDEFINED;
@@ -19,7 +19,7 @@ class ResolveBidiLevels {
     var working:Dynamic = cast _Runtime.UNDEFINED;
     var levelArray:Dynamic = cast _Runtime.UNDEFINED;
     length = _Runtime.field(text, 'length');
-    levels = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [length]);
+    levels = new flighthq._internal._UInt8Array(length);
     if (_Runtime.truthy(_Runtime.strictEquals(length, 0.0))) { return cast levels; }
     backend = _Runtime.callValue(getBidiClassBackend, cast ([] : Array<Dynamic>));
     original = _Runtime.createArray(length);

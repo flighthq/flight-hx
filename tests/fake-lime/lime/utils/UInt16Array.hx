@@ -3,8 +3,9 @@ package lime.utils;
 abstract UInt16Array(Array<Int>) {
   public var length(get, never):Int;
 
-  public function new(length:Int) {
-    this = [for (_ in 0...length) 0];
+  public function new(?length:Int, ?buffer:ArrayBuffer, ?array:Array<Dynamic>, ?view:ArrayBufferView, ?byteOffset:Int, ?viewLength:Int) {
+    final size = length == null ? (viewLength == null ? 0 : viewLength) : length;
+    this = [for (_ in 0...size) 0];
   }
 
   inline function get_length():Int return this.length;

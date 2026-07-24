@@ -14,7 +14,7 @@ class UserAgent {
     try {
       var buf:Dynamic = _Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [2.0]);
       _Runtime.setIndex(new flighthq._internal._UInt16Array(buf), 0.0, 258.0);
-      var bytes:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [buf]);
+      var bytes:Dynamic = new flighthq._internal._UInt8Array(buf);
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.getIndex(bytes, 0.0), 1.0))) { return cast 'big'; }
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.getIndex(bytes, 0.0), 2.0))) { return cast 'little'; }
     } catch (__error:Dynamic) {

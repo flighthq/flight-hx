@@ -141,7 +141,7 @@ class Net {
         var total:Dynamic = cast _Runtime.UNDEFINED;
         var stream:Dynamic = cast _Runtime.UNDEFINED;
         var reader:Dynamic = cast _Runtime.UNDEFINED;
-        var chunks:Array<Dynamic> = cast _Runtime.UNDEFINED;
+        var chunks:Array<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
         var loaded:Dynamic = cast _Runtime.UNDEFINED;
         var out:Dynamic = cast _Runtime.UNDEFINED;
         var offset:Dynamic = cast _Runtime.UNDEFINED;
@@ -205,7 +205,7 @@ class Net {
               });
             });
           }), function():Dynamic {
-            out = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [loaded]);
+            out = new flighthq._internal._UInt8Array(loaded);
             offset = 0.0;
             for (chunk in _Runtime.iterable(chunks)) {
               _Runtime.callProperty(out, 'set', cast ([chunk, offset] : Array<Dynamic>));

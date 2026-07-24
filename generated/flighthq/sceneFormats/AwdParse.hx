@@ -95,7 +95,7 @@ typedef ParsedMeshInstance__awdParse = { var geometryId:Float; var materialIds:A
 
 typedef ParsedMaterial__awdParse = { var color:Null<Float>; var diffuseTextureId:Float; var name:String; };
 
-typedef ParsedTexture__awdParse = { var bytes:Null<Dynamic>; var mimeType:Null<String>; var name:String; var url:Null<String>; };
+typedef ParsedTexture__awdParse = { var bytes:Null<flighthq._internal._UInt8Array>; var mimeType:Null<String>; var name:String; var url:Null<String>; };
 
 typedef ParsedJoint__awdParse = { var name:String; var parentIndex:Float; var transform:Dynamic; };
 
@@ -106,12 +106,12 @@ typedef ParsedSkeletonAnimation__awdParse = { var name:String; var poses:Array<{
 typedef ParsedSkeletonPose__awdParse = { var jointTransforms:Array<Null<Dynamic>>; var name:String; };
 
 class AwdParse {
-  public static function createSceneFromAwd(bytes:Dynamic, ?warnings:Array<String>):Scene {
+  public static function createSceneFromAwd(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):Scene {
     return cast _Runtime.callValue(createSceneFromDocument, cast ([_Runtime.callValue(parseAwd, cast ([bytes, warnings] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseAwd(bytes:Dynamic, ?warnings:Array<String>):SceneDocument {
+  public static function parseAwd(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):SceneDocument {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var view:Dynamic = cast _Runtime.UNDEFINED;
     var compression:Dynamic = cast _Runtime.UNDEFINED;
@@ -131,7 +131,7 @@ class AwdParse {
     var resolvedMaterials:Dynamic = cast _Runtime.UNDEFINED;
     var materialForSubset:Dynamic = cast _Runtime.UNDEFINED;
     var parented:Dynamic = cast _Runtime.UNDEFINED;
-    source = (cast bytes : Dynamic);
+    source = (cast bytes : flighthq._internal._UInt8Array);
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(source, 'byteLength'), AWD_HEADER_BYTES, '<'))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromAwd: byte length is smaller than the 12-byte AWD header'] : Array<Dynamic>));
       return cast _Runtime.callValue(AwdParse.emptyAwdDocument__awdParse, cast ([] : Array<Dynamic>));
@@ -293,7 +293,7 @@ class AwdParse {
     return cast null;
   }
 
-  public static function parseAwdSkeletonAnimations(bytes:Dynamic, joints:Array<SceneNode>, ?warnings:Array<String>):Dynamic {
+  public static function parseAwdSkeletonAnimations(bytes:flighthq._internal._UInt8Array, joints:Array<SceneNode>, ?warnings:Array<String>):Dynamic {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var view:Dynamic = cast _Runtime.UNDEFINED;
     var compression:Dynamic = cast _Runtime.UNDEFINED;
@@ -306,7 +306,7 @@ class AwdParse {
     var parsedSkeleton:Dynamic = cast _Runtime.UNDEFINED;
     var out:Dynamic = cast _Runtime.UNDEFINED;
     var index:Dynamic = cast _Runtime.UNDEFINED;
-    source = (cast bytes : Dynamic);
+    source = (cast bytes : flighthq._internal._UInt8Array);
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(source, 'byteLength'), AWD_HEADER_BYTES, '<'))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseAwdSkeletonAnimations: byte length is smaller than the 12-byte AWD header'] : Array<Dynamic>));
       return cast {  };
@@ -440,7 +440,7 @@ class AwdParse {
     return cast null;
   }
 
-  public static function buildAwdDocumentAnimations__awdParse(bytes:Dynamic, jointNodeIndices:Array<Float>, ?warnings:Array<String>):Array<SceneDocumentAnimation> {
+  public static function buildAwdDocumentAnimations__awdParse(bytes:flighthq._internal._UInt8Array, jointNodeIndices:Array<Float>, ?warnings:Array<String>):Array<SceneDocumentAnimation> {
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var view:Dynamic = cast _Runtime.UNDEFINED;
     var bodyLength:Dynamic = cast _Runtime.UNDEFINED;
@@ -453,7 +453,7 @@ class AwdParse {
     var jointCount:Dynamic = cast _Runtime.UNDEFINED;
     var animations:Array<SceneDocumentAnimation> = cast _Runtime.UNDEFINED;
     var index:Dynamic = cast _Runtime.UNDEFINED;
-    source = (cast bytes : Dynamic);
+    source = (cast bytes : flighthq._internal._UInt8Array);
     view = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
     bodyLength = _Runtime.callProperty(view, 'getUint32', cast ([8.0, true] : Array<Dynamic>));
     bodyEnd = HxMath.min((AWD_HEADER_BYTES + bodyLength), _Runtime.field(source, 'byteLength'));
@@ -638,12 +638,12 @@ class AwdParse {
     return cast null;
   }
 
-  public static function readAwdString__awdParse(view:Dynamic, source:Dynamic, offset:Float):{ var end:Float; var value:String; } {
+  public static function readAwdString__awdParse(view:Dynamic, source:flighthq._internal._UInt8Array, offset:Float):{ var end:Float; var value:String; } {
     var length:Dynamic = cast _Runtime.UNDEFINED;
     var stringBytes:Dynamic = cast _Runtime.UNDEFINED;
     var value:Dynamic = cast _Runtime.UNDEFINED;
     length = _Runtime.callProperty((cast view : Dynamic), 'getUint16', cast ([offset, true] : Array<Dynamic>));
-    stringBytes = (cast source : Dynamic).subarray(Std.int((offset + 2.0)), Std.int(((offset + 2.0) + length)));
+    stringBytes = (cast source : flighthq._internal._UInt8Array).subarray(Std.int((offset + 2.0)), Std.int(((offset + 2.0) + length)));
     value = _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('TextDecoder'), []), 'decode', cast ([stringBytes] : Array<Dynamic>));
     return cast { end: ((offset + 2.0) + length), value: value };
     return cast null;
@@ -766,7 +766,7 @@ class AwdParse {
     return cast null;
   }
 
-  public static function parseTriangleGeometryBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, geometryWide:Bool, ?warnings:Array<String>):Array<ParsedGeometry__awdParse> {
+  public static function parseTriangleGeometryBlock__awdParse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, geometryWide:Bool, ?warnings:Array<String>):Array<ParsedGeometry__awdParse> {
     var dv:Dynamic = cast _Runtime.UNDEFINED;
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     var nameResult:Dynamic = cast _Runtime.UNDEFINED;
@@ -936,7 +936,7 @@ class AwdParse {
     return cast null;
   }
 
-  public static function parseContainerBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, matrixWide:Bool, ?warnings:Array<String>):Null<ParsedContainer__awdParse> {
+  public static function parseContainerBlock__awdParse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, matrixWide:Bool, ?warnings:Array<String>):Null<ParsedContainer__awdParse> {
     var dv:Dynamic = cast _Runtime.UNDEFINED;
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     var parentId:Dynamic = cast _Runtime.UNDEFINED;
@@ -970,7 +970,7 @@ class AwdParse {
     return cast null;
   }
 
-  public static function parseMeshInstanceBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, matrixWide:Bool, ?warnings:Array<String>):Null<ParsedMeshInstance__awdParse> {
+  public static function parseMeshInstanceBlock__awdParse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, matrixWide:Bool, ?warnings:Array<String>):Null<ParsedMeshInstance__awdParse> {
     var dv:Dynamic = cast _Runtime.UNDEFINED;
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     var parentId:Dynamic = cast _Runtime.UNDEFINED;
@@ -1025,7 +1025,7 @@ class AwdParse {
     return cast null;
   }
 
-  public static function parseMaterialBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, ?warnings:Array<String>):Null<ParsedMaterial__awdParse> {
+  public static function parseMaterialBlock__awdParse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, ?warnings:Array<String>):Null<ParsedMaterial__awdParse> {
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     var nameResult:Dynamic = cast _Runtime.UNDEFINED;
     var props:Dynamic = cast _Runtime.UNDEFINED;
@@ -1051,7 +1051,7 @@ class AwdParse {
     return cast null;
   }
 
-  public static function parseTextureBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, ?warnings:Array<String>):Null<ParsedTexture__awdParse> {
+  public static function parseTextureBlock__awdParse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, ?warnings:Array<String>):Null<ParsedTexture__awdParse> {
     var dv:Dynamic = cast _Runtime.UNDEFINED;
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     var nameResult:Dynamic = cast _Runtime.UNDEFINED;
@@ -1071,7 +1071,7 @@ class AwdParse {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromAwd: texture \'' + Std.string(_Runtime.field(nameResult, 'value')) + '\' truncated before payload'] : Array<Dynamic>));
       return cast null;
     }
-    texType = _Runtime.getIndex((cast source : Dynamic), offset);
+    texType = _Runtime.getIndex((cast source : flighthq._internal._UInt8Array), offset);
     (offset = cast ((offset + 1.0) : Dynamic));
     dataLen = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
     (offset = cast ((offset + 4.0) : Dynamic));
@@ -1082,7 +1082,7 @@ class AwdParse {
     if (_Runtime.truthy(!_Runtime.strictEquals(texType, AWD_TEXTURE_TYPE_EMBEDDED))) {
       return cast { bytes: null, mimeType: null, name: _Runtime.field(nameResult, 'value'), url: _Runtime.field(nameResult, 'value') };
     }
-    bytes = _Runtime.slice((cast source : Dynamic), offset, (offset + dataLen));
+    bytes = _Runtime.slice((cast source : flighthq._internal._UInt8Array), offset, (offset + dataLen));
     mimeType = _Runtime.callValue(detectImageMimeType, cast ([bytes] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(mimeType, null))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromAwd: texture \'' + Std.string(_Runtime.field(nameResult, 'value')) + '\' payload is not a recognized image format'] : Array<Dynamic>));
@@ -1175,7 +1175,7 @@ class AwdParse {
     return cast null;
   }
 
-  public static function parseSkeletonBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, matrixWide:Bool, ?warnings:Array<String>):Null<ParsedSkeleton__awdParse> {
+  public static function parseSkeletonBlock__awdParse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, matrixWide:Bool, ?warnings:Array<String>):Null<ParsedSkeleton__awdParse> {
     var dv:Dynamic = cast _Runtime.UNDEFINED;
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     var nameResult:Dynamic = cast _Runtime.UNDEFINED;
@@ -1230,7 +1230,7 @@ class AwdParse {
     return cast null;
   }
 
-  public static function parseSkeletonPoseBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, matrixWide:Bool, ?warnings:Array<String>):Null<ParsedSkeletonPose__awdParse> {
+  public static function parseSkeletonPoseBlock__awdParse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, matrixWide:Bool, ?warnings:Array<String>):Null<ParsedSkeletonPose__awdParse> {
     var dv:Dynamic = cast _Runtime.UNDEFINED;
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     var nameResult:Dynamic = cast _Runtime.UNDEFINED;
@@ -1280,7 +1280,7 @@ class AwdParse {
     return cast null;
   }
 
-  public static function parseSkeletonAnimationBlock__awdParse(view:Dynamic, source:Dynamic, start:Float, end:Float, ?warnings:Array<String>):Null<ParsedSkeletonAnimation__awdParse> {
+  public static function parseSkeletonAnimationBlock__awdParse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, ?warnings:Array<String>):Null<ParsedSkeletonAnimation__awdParse> {
     var dv:Dynamic = cast _Runtime.UNDEFINED;
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     var nameResult:Dynamic = cast _Runtime.UNDEFINED;

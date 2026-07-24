@@ -605,7 +605,7 @@ class WgpuMeshPipeline {
 
   public static final IBL_DUMMY_FORMAT__wgpuMeshPipeline:Dynamic = 'rgba8unorm';
 
-  public static final WHITE_PIXEL__wgpuMeshPipeline:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [cast ([255.0, 255.0, 255.0, 255.0] : Array<Dynamic>)]);
+  public static final WHITE_PIXEL__wgpuMeshPipeline:Dynamic = new flighthq._internal._UInt8Array(cast ([255.0, 255.0, 255.0, 255.0] : Array<Dynamic>));
 
   public static final VERTEX_BUFFER_LAYOUTS__wgpuMeshPipeline:Array<Dynamic> = cast ([{ arrayStride: 48.0, attributes: cast ([{ shaderLocation: 0.0, offset: 0.0, format: 'float32x3' }, { shaderLocation: 1.0, offset: 12.0, format: 'float32x3' }, { shaderLocation: 2.0, offset: 24.0, format: 'float32x4' }, { shaderLocation: 3.0, offset: 40.0, format: 'float32x2' }] : Array<Dynamic>) }] : Array<Dynamic>);
 

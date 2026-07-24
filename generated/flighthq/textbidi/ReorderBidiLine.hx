@@ -5,7 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class ReorderBidiLine {
-  public static function reorderBidiLine(levels:Dynamic, start:Float, end:Float, out:Array<Float>):Void {
+  public static function reorderBidiLine(levels:flighthq._internal._UInt8Array, start:Float, end:Float, out:Array<Float>):Void {
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var highest:Dynamic = cast _Runtime.UNDEFINED;
     var lowestOdd:Dynamic = cast _Runtime.UNDEFINED;

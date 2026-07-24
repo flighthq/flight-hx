@@ -325,7 +325,7 @@ class Surface {
     _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceShadow.dropShadowSurface, cast ([out, scratch, source, options] : Array<Dynamic>));
   }
 
-  public static function encodeSurface(source:flighthq.types.Surface, ?format:ImageFormat, ?quality:Float):Dynamic {
+  public static function encodeSurface(source:flighthq.types.Surface, ?format:ImageFormat, ?quality:Float):flighthq._internal._UInt8Array {
     return cast _Runtime.callValue(Facade_Surface_flighthq_surface_SurfaceEncode.encodeSurface, cast ([source, format, quality] : Array<Dynamic>));
     return cast null;
   }

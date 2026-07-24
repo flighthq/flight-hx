@@ -340,7 +340,7 @@ class RenderGl {
     _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlDraw.updateGlTexture, cast ([state, texture, canvas] : Array<Dynamic>));
   }
 
-  public static function uploadGlCompressedTextureContainer(gl:Dynamic, container:TextureContainer, payload:Dynamic, ?decode:GlCompressedTextureDecoder):Bool {
+  public static function uploadGlCompressedTextureContainer(gl:Dynamic, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:GlCompressedTextureDecoder):Bool {
     return cast _Runtime.callValue(Facade_RenderGl_flighthq_renderGl_GlCompressedTexture.uploadGlCompressedTextureContainer, cast ([gl, container, payload, decode] : Array<Dynamic>));
     return cast null;
   }

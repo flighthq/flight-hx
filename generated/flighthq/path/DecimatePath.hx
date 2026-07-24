@@ -20,7 +20,7 @@ class DecimatePath {
       if (_Runtime.truthy(_Runtime.compare(n, 2.0, '<'))) { continue; }
       var closed:Dynamic = _Runtime.andValue(_Runtime.andValue(_Runtime.compare(n, 3.0, '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, (_Runtime.field(contour, 'length') - 2.0)))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, (_Runtime.field(contour, 'length') - 1.0))));
       var last:Dynamic = _Runtime.select(closed, function():Dynamic return cast (n - 1.0), function():Dynamic return cast n);
-      var keep:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [last]);
+      var keep:Dynamic = new flighthq._internal._UInt8Array(last);
       _Runtime.setIndex(keep, 0.0, 1.0);
       _Runtime.setIndex(keep, (last - 1.0), 1.0);
       _Runtime.callValue(DecimatePath.douglasPeucker__decimatePath, cast ([contour, 0.0, (last - 1.0), (tolerance * tolerance), keep] : Array<Dynamic>));
@@ -45,7 +45,7 @@ class DecimatePath {
     }
   }
 
-  public static function douglasPeucker__decimatePath(pts:Array<Float>, first:Float, last:Float, toleranceSq:Float, keep:Dynamic):Void {
+  public static function douglasPeucker__decimatePath(pts:Array<Float>, first:Float, last:Float, toleranceSq:Float, keep:flighthq._internal._UInt8Array):Void {
     var x0:Dynamic = cast _Runtime.UNDEFINED;
     var y0:Dynamic = cast _Runtime.UNDEFINED;
     var x1:Dynamic = cast _Runtime.UNDEFINED;

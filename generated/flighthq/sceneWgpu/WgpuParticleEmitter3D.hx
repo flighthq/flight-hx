@@ -335,7 +335,7 @@ class WgpuParticleEmitter3D {
 
   public static final VERTEX_BUFFER_LAYOUTS__wgpuParticleEmitter3D:Array<Dynamic> = cast ([{ arrayStride: 8.0, stepMode: 'vertex', attributes: cast ([{ shaderLocation: 0.0, offset: 0.0, format: 'float32x2' }] : Array<Dynamic>) }, { arrayStride: WgpuParticleEmitter3D.INSTANCE_STRIDE__wgpuParticleEmitter3D, stepMode: 'instance', attributes: cast ([{ shaderLocation: 1.0, offset: 0.0, format: 'float32x3' }, { shaderLocation: 2.0, offset: 12.0, format: 'float32' }, { shaderLocation: 3.0, offset: 16.0, format: 'float32' }, { shaderLocation: 4.0, offset: 20.0, format: 'float32x4' }, { shaderLocation: 5.0, offset: 36.0, format: 'float32x4' }, { shaderLocation: 6.0, offset: 52.0, format: 'float32x2' }] : Array<Dynamic>) }] : Array<Dynamic>);
 
-  public static final WHITE_PIXEL__wgpuParticleEmitter3D:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [cast ([255.0, 255.0, 255.0, 255.0] : Array<Dynamic>)]);
+  public static final WHITE_PIXEL__wgpuParticleEmitter3D:Dynamic = new flighthq._internal._UInt8Array(cast ([255.0, 255.0, 255.0, 255.0] : Array<Dynamic>));
 
   public static final emitterScratch__wgpuParticleEmitter3D:Array<ParticleEmitter3D> = cast ([] : Array<Dynamic>);
 

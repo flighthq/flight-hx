@@ -21,17 +21,17 @@ import flighthq.types.SceneDocument;
 import flighthq.types.SceneNode;
 
 class SceneFormats {
-  public static function createSceneFrom3ds(bytes:Dynamic, ?warnings:Array<String>):Scene {
+  public static function createSceneFrom3ds(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):Scene {
     return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_ThreeDsParse.createSceneFrom3ds, cast ([bytes, warnings] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSceneFromAwd(bytes:Dynamic, ?warnings:Array<String>):Scene {
+  public static function createSceneFromAwd(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):Scene {
     return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_AwdParse.createSceneFromAwd, cast ([bytes, warnings] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSceneFromGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Scene {
+  public static function createSceneFromGlb(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>, ?options:GltfImportOptions):Scene {
     return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_GltfParse.createSceneFromGlb, cast ([bytes, warnings, options] : Array<Dynamic>));
     return cast null;
   }
@@ -41,7 +41,7 @@ class SceneFormats {
     return cast null;
   }
 
-  public static function createSceneFromMd2(bytes:Dynamic, ?warnings:Array<String>):Scene {
+  public static function createSceneFromMd2(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):Scene {
     return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_Md2Parse.createSceneFromMd2, cast ([bytes, warnings] : Array<Dynamic>));
     return cast null;
   }
@@ -56,7 +56,7 @@ class SceneFormats {
     return cast null;
   }
 
-  public static function createScenesFromGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Scene> {
+  public static function createScenesFromGlb(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Scene> {
     return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_GltfParse.createScenesFromGlb, cast ([bytes, warnings, options] : Array<Dynamic>));
     return cast null;
   }
@@ -68,22 +68,22 @@ class SceneFormats {
 
   public static final GltfPunctualLightsExtensionHandler:GltfExtensionHandler = Facade_SceneFormats_flighthq_sceneFormats_GltfPunctualLights.GltfPunctualLightsExtensionHandler;
 
-  public static function parse3ds(bytes:Dynamic, ?warnings:Array<String>):SceneDocument {
+  public static function parse3ds(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):SceneDocument {
     return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_ThreeDsParse.parse3ds, cast ([bytes, warnings] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseAwd(bytes:Dynamic, ?warnings:Array<String>):SceneDocument {
+  public static function parseAwd(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):SceneDocument {
     return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_AwdParse.parseAwd, cast ([bytes, warnings] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseAwdSkeletonAnimations(bytes:Dynamic, joints:Array<SceneNode>, ?warnings:Array<String>):Dynamic {
+  public static function parseAwdSkeletonAnimations(bytes:flighthq._internal._UInt8Array, joints:Array<SceneNode>, ?warnings:Array<String>):Dynamic {
     return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_AwdParse.parseAwdSkeletonAnimations, cast ([bytes, joints, warnings] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):SceneDocument {
+  public static function parseGlb(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>, ?options:GltfImportOptions):SceneDocument {
     return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_GltfParse.parseGlb, cast ([bytes, warnings, options] : Array<Dynamic>));
     return cast null;
   }
@@ -93,7 +93,7 @@ class SceneFormats {
     return cast null;
   }
 
-  public static function parseMd2(bytes:Dynamic, ?warnings:Array<String>):SceneDocument {
+  public static function parseMd2(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):SceneDocument {
     return cast _Runtime.callValue(Facade_SceneFormats_flighthq_sceneFormats_Md2Parse.parseMd2, cast ([bytes, warnings] : Array<Dynamic>));
     return cast null;
   }

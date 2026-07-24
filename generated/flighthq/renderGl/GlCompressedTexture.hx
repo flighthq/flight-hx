@@ -202,7 +202,7 @@ class GlCompressedTexture {
     _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'compressedTextureUpload', _Runtime.select(_Runtime.strictEquals(uploader, null), function():Dynamic return cast null, function():Dynamic return cast GlCompressedTexture.uploadGlCompressedImageResource__glCompressedTexture));
   }
 
-  public static function uploadGlCompressedTextureContainer(gl:Dynamic, container:TextureContainer, payload:Dynamic, ?decode:GlCompressedTextureDecoder):Bool {
+  public static function uploadGlCompressedTextureContainer(gl:Dynamic, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:GlCompressedTextureDecoder):Bool {
     var nativeFormat:Dynamic = cast _Runtime.UNDEFINED;
     var faces:Dynamic = cast _Runtime.UNDEFINED;
     var layers:Dynamic = cast _Runtime.UNDEFINED;
@@ -221,7 +221,7 @@ class GlCompressedTexture {
         var index:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(index, _Runtime.field(_Runtime.field(container, 'levels'), 'length'), '<'))) {
           var entry:Dynamic = _Runtime.getIndex(_Runtime.field(container, 'levels'), index);
-          var view:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.field(payload, 'buffer'), (_Runtime.field(payload, 'byteOffset') + _Runtime.field(entry, 'byteOffset')), _Runtime.field(entry, 'byteLength')]);
+          var view:Dynamic = new flighthq._internal._UInt8Array(_Runtime.field(payload, 'buffer'), (_Runtime.field(payload, 'byteOffset') + _Runtime.field(entry, 'byteOffset')), _Runtime.field(entry, 'byteLength'));
           var mip:Dynamic = (index % mipLevels);
           var faceLayer:Dynamic = ((index - mip) / mipLevels);
           var face:Dynamic = (faceLayer % faces);
@@ -242,7 +242,7 @@ class GlCompressedTexture {
       var mip:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(mip, _Runtime.field(_Runtime.field(container, 'levels'), 'length'), '<'))) {
         var entry:Dynamic = _Runtime.getIndex(_Runtime.field(container, 'levels'), mip);
-        var view:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.field(payload, 'buffer'), (_Runtime.field(payload, 'byteOffset') + _Runtime.field(entry, 'byteOffset')), _Runtime.field(entry, 'byteLength')]);
+        var view:Dynamic = new flighthq._internal._UInt8Array(_Runtime.field(payload, 'buffer'), (_Runtime.field(payload, 'byteOffset') + _Runtime.field(entry, 'byteOffset')), _Runtime.field(entry, 'byteLength'));
         var rgba:Dynamic = _Runtime.callValue(decode, cast ([_Runtime.field(container, 'format'), _Runtime.field(entry, 'width'), _Runtime.field(entry, 'height'), view] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.strictEquals(rgba, null))) { return cast false; }
         flighthq._internal.backend.WebGl2Backend.call(gl, 'texImage2D', cast ([flighthq._internal.backend.WebGl2Backend.field(gl, 'TEXTURE_2D'), mip, flighthq._internal.backend.WebGl2Backend.field(gl, 'RGBA'), _Runtime.field(entry, 'width'), _Runtime.field(entry, 'height'), 0.0, flighthq._internal.backend.WebGl2Backend.field(gl, 'RGBA'), flighthq._internal.backend.WebGl2Backend.field(gl, 'UNSIGNED_BYTE'), rgba] : Array<Dynamic>));

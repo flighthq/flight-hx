@@ -37,12 +37,12 @@ import flighthq.types._internal._SceneAnimationPathValues.SceneAnimationPathWeig
 typedef Md2Frame__md2Parse = { var normals:flighthq._internal._Float32Array; var positions:flighthq._internal._Float32Array; };
 
 class Md2Parse {
-  public static function createSceneFromMd2(bytes:Dynamic, ?warnings:Array<String>):Scene {
+  public static function createSceneFromMd2(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):Scene {
     return cast _Runtime.callValue(createSceneFromDocument, cast ([_Runtime.callValue(parseMd2, cast ([bytes, warnings] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseMd2(bytes:Dynamic, ?warnings:Array<String>):SceneDocument {
+  public static function parseMd2(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):SceneDocument {
     var view:Dynamic = cast _Runtime.UNDEFINED;
     var magic:Dynamic = cast _Runtime.UNDEFINED;
     var version:Dynamic = cast _Runtime.UNDEFINED;
@@ -208,7 +208,7 @@ class Md2Parse {
     return cast null;
   }
 
-  public static function readMd2Frames__md2Parse(bytes:Dynamic, view:Dynamic, offFrames:Float, numFrames:Float, numVertices:Float, frameStride:Float):Array<Md2Frame__md2Parse> {
+  public static function readMd2Frames__md2Parse(bytes:flighthq._internal._UInt8Array, view:Dynamic, offFrames:Float, numFrames:Float, numVertices:Float, frameStride:Float):Array<Md2Frame__md2Parse> {
     var frames:Array<Md2Frame__md2Parse> = cast _Runtime.UNDEFINED;
     frames = cast ([] : Array<Dynamic>);
     {
@@ -319,7 +319,7 @@ class Md2Parse {
     return cast null;
   }
 
-  public static function readMd2SkinName__md2Parse(bytes:Dynamic, offset:Float):String {
+  public static function readMd2SkinName__md2Parse(bytes:flighthq._internal._UInt8Array, offset:Float):String {
     var limit:Dynamic = cast _Runtime.UNDEFINED;
     var end:Dynamic = cast _Runtime.UNDEFINED;
     var name:Dynamic = cast _Runtime.UNDEFINED;

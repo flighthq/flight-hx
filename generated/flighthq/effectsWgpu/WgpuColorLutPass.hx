@@ -92,7 +92,7 @@ class WgpuColorLutPass {
       _Runtime.setField(cache, 'size', n);
     }
     samples = _Runtime.field(lut, 'samples');
-    data = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [(((n * n) * n) * 4.0)]);
+    data = new flighthq._internal._UInt8Array((((n * n) * n) * 4.0));
     {
       var i:Dynamic = 0.0;
       var j:Dynamic = 0.0;

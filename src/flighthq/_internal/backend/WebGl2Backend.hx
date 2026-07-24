@@ -5,6 +5,9 @@ import flighthq._internal._Runtime;
 #if (lime && !js)
 import flighthq._internal._LimeTypedArray;
 import lime.graphics.WebGL2RenderContext;
+import lime.utils.ArrayBufferView;
+import lime.utils.Float32Array;
+import lime.utils.UInt8Array;
 
 /**
  * Stable target boundary for generated WebGL2 context access.
@@ -58,15 +61,22 @@ class WebGl2Backend {
         gl.blitFramebuffer(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7], arguments[8], arguments[9]);
         return null;
       case 'bufferData':
-        gl.bufferData(arguments[0], arguments[1], arguments[2]);
+        if (Std.isOfType(arguments[1], Int) || Std.isOfType(arguments[1], Float)) {
+          gl.bufferData(arguments[0], new UInt8Array(Std.int(arguments[1])), arguments[2]);
+        } else {
+          gl.bufferData(arguments[0], arrayBufferView(arguments[1]), arguments[2]);
+        }
         return null;
       case 'bufferSubData':
         switch (arguments.length) {
           case 3:
-            gl.bufferSubData(arguments[0], arguments[1], arguments[2]);
+            gl.bufferSubData(arguments[0], arguments[1], arrayBufferView(arguments[2]));
             return null;
           case 5:
-            gl.bufferSubData(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4]);
+            final data = arrayBufferView(arguments[2]);
+            final bytesPerElement = Std.int(data.byteLength / data.length);
+            final byteLength = Std.int(arguments[4]) * bytesPerElement;
+            gl.bufferSubData(arguments[0], arguments[1], data, Std.int(arguments[3]) * bytesPerElement, byteLength);
             return null;
           default:
             throw 'WebGl2RenderingContext: unexpected arity for bufferSubData';
@@ -80,22 +90,22 @@ class WebGl2Backend {
         gl.clearBufferfi(arguments[0], arguments[1], arguments[2], arguments[3]);
         return null;
       case 'clearBufferfv':
-        gl.clearBufferfv(arguments[0], arguments[1], arguments[2]);
+        gl.clearBufferfv(arguments[0], arguments[1], arrayBufferView(arguments[2]));
         return null;
       case 'clearColor':
         gl.clearColor(arguments[0], arguments[1], arguments[2], arguments[3]);
         return null;
       case 'colorMask':
-        gl.colorMask(arguments[0], arguments[1], arguments[2], arguments[3]);
+        gl.colorMask(asBool(arguments[0]), asBool(arguments[1]), asBool(arguments[2]), asBool(arguments[3]));
         return null;
       case 'compileShader':
         gl.compileShader(arguments[0]);
         return null;
       case 'compressedTexImage2D':
-        gl.compressedTexImage2D(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6]);
+        gl.compressedTexImage2D(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arrayBufferView(arguments[6]));
         return null;
       case 'compressedTexSubImage3D':
-        gl.compressedTexSubImage3D(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7], arguments[8], arguments[9]);
+        gl.compressedTexSubImage3D(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7], arguments[8], arrayBufferView(arguments[9]));
         return null;
       case 'createBuffer':
         return gl.createBuffer();
@@ -139,7 +149,7 @@ class WebGl2Backend {
         gl.depthFunc(arguments[0]);
         return null;
       case 'depthMask':
-        gl.depthMask(arguments[0]);
+        gl.depthMask(asBool(arguments[0]));
         return null;
       case 'disable':
         gl.disable(arguments[0]);
@@ -151,7 +161,7 @@ class WebGl2Backend {
         gl.drawArrays(arguments[0], arguments[1], arguments[2]);
         return null;
       case 'drawBuffers':
-        gl.drawBuffers(arguments[0]);
+        gl.drawBuffers(cast arguments[0]);
         return null;
       case 'drawElements':
         gl.drawElements(arguments[0], arguments[1], arguments[2], arguments[3]);
@@ -180,9 +190,9 @@ class WebGl2Backend {
       case 'getActiveUniform':
         return gl.getActiveUniform(arguments[0], arguments[1]);
       case 'getAttribLocation':
-        return gl.getAttribLocation(arguments[0], arguments[1]);
+        return gl.getAttribLocation(arguments[0], cast arguments[1]);
       case 'getExtension':
-        return gl.getExtension(arguments[0]);
+        return gl.getExtension(cast arguments[0]);
       case 'getParameter':
         return gl.getParameter(arguments[0]);
       case 'getProgramInfoLog':
@@ -194,7 +204,7 @@ class WebGl2Backend {
       case 'getShaderParameter':
         return gl.getShaderParameter(arguments[0], arguments[1]);
       case 'getUniformLocation':
-        return gl.getUniformLocation(arguments[0], arguments[1]);
+        return gl.getUniformLocation(arguments[0], cast arguments[1]);
       case 'linkProgram':
         gl.linkProgram(arguments[0]);
         return null;
@@ -205,7 +215,7 @@ class WebGl2Backend {
         gl.readBuffer(arguments[0]);
         return null;
       case 'readPixels':
-        gl.readPixels(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6]);
+        gl.readPixels(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arrayBufferView(arguments[6]));
         return null;
       case 'renderbufferStorage':
         gl.renderbufferStorage(arguments[0], arguments[1], arguments[2], arguments[3]);
@@ -217,7 +227,7 @@ class WebGl2Backend {
         gl.scissor(arguments[0], arguments[1], arguments[2], arguments[3]);
         return null;
       case 'shaderSource':
-        gl.shaderSource(arguments[0], arguments[1]);
+        gl.shaderSource(arguments[0], cast arguments[1]);
         return null;
       case 'stencilFunc':
         gl.stencilFunc(arguments[0], arguments[1], arguments[2]);
@@ -236,13 +246,13 @@ class WebGl2Backend {
           case 6:
             throw 'texImage2D/6 is not supported on native GL targets';
           case 9:
-            gl.texImage2D(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7], arguments[8]);
+            gl.texImage2D(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7], arrayBufferView(arguments[8]));
             return null;
           default:
             throw 'WebGl2RenderingContext: unexpected arity for texImage2D';
         }
       case 'texImage3D':
-        gl.texImage3D(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7], arguments[8], arguments[9]);
+        gl.texImage3D(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7], arguments[8], arrayBufferView(arguments[9]));
         return null;
       case 'texParameterf':
         gl.texParameterf(arguments[0], arguments[1], arguments[2]);
@@ -254,13 +264,13 @@ class WebGl2Backend {
         gl.texStorage3D(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]);
         return null;
       case 'texSubImage2D':
-        gl.texSubImage2D(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7], arguments[8]);
+        gl.texSubImage2D(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7], arrayBufferView(arguments[8]));
         return null;
       case 'uniform1f':
         gl.uniform1f(arguments[0], arguments[1]);
         return null;
       case 'uniform1fv':
-        gl.uniform1fv(arguments[0], arguments[1]);
+        gl.uniform1fv(arguments[0], float32Array(arguments[1]));
         return null;
       case 'uniform1i':
         gl.uniform1i(arguments[0], arguments[1]);
@@ -269,25 +279,25 @@ class WebGl2Backend {
         gl.uniform2f(arguments[0], arguments[1], arguments[2]);
         return null;
       case 'uniform2fv':
-        gl.uniform2fv(arguments[0], arguments[1]);
+        gl.uniform2fv(arguments[0], float32Array(arguments[1]));
         return null;
       case 'uniform3f':
         gl.uniform3f(arguments[0], arguments[1], arguments[2], arguments[3]);
         return null;
       case 'uniform3fv':
-        gl.uniform3fv(arguments[0], arguments[1]);
+        gl.uniform3fv(arguments[0], float32Array(arguments[1]));
         return null;
       case 'uniform4f':
         gl.uniform4f(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4]);
         return null;
       case 'uniform4fv':
-        gl.uniform4fv(arguments[0], arguments[1]);
+        gl.uniform4fv(arguments[0], float32Array(arguments[1]));
         return null;
       case 'uniformMatrix3fv':
-        gl.uniformMatrix3fv(arguments[0], arguments[1], arguments[2]);
+        gl.uniformMatrix3fv(arguments[0], asBool(arguments[1]), float32Array(arguments[2]));
         return null;
       case 'uniformMatrix4fv':
-        gl.uniformMatrix4fv(arguments[0], arguments[1], arguments[2]);
+        gl.uniformMatrix4fv(arguments[0], asBool(arguments[1]), float32Array(arguments[2]));
         return null;
       case 'useProgram':
         gl.useProgram(arguments[0]);
@@ -299,7 +309,7 @@ class WebGl2Backend {
         gl.vertexAttribDivisor(arguments[0], arguments[1]);
         return null;
       case 'vertexAttribPointer':
-        gl.vertexAttribPointer(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]);
+        gl.vertexAttribPointer(arguments[0], arguments[1], arguments[2], asBool(arguments[3]), arguments[4], cast arguments[5]);
         return null;
       case 'viewport':
         gl.viewport(arguments[0], arguments[1], arguments[2], arguments[3]);
@@ -307,6 +317,20 @@ class WebGl2Backend {
       default:
         throw 'WebGl2RenderingContext: unmapped GL method ' + name;
     }
+  }
+
+  static inline function arrayBufferView(value:Dynamic):ArrayBufferView {
+    if (Std.isOfType(value, Array)) return new Float32Array(null, null, cast value);
+    return cast value;
+  }
+
+  static inline function float32Array(value:Dynamic):Float32Array {
+    if (Std.isOfType(value, Array)) return new Float32Array(null, null, cast value);
+    return cast value;
+  }
+
+  static inline function asBool(value:Dynamic):Bool {
+    return value == true || value == 1;
   }
 
   public static function callOptional(context:Dynamic, name:String, arguments:Array<Dynamic>):Dynamic {

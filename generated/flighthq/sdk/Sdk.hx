@@ -7036,12 +7036,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSceneFrom3ds(bytes:Dynamic, ?warnings:Array<String>):Scene {
+  public static function createSceneFrom3ds(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):Scene {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_ThreeDsParse.createSceneFrom3ds, cast ([bytes, warnings] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function createSceneFromAwd(bytes:Dynamic, ?warnings:Array<String>):Scene {
+  public static function createSceneFromAwd(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):Scene {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_AwdParse.createSceneFromAwd, cast ([bytes, warnings] : Array<Dynamic>));
     return cast null;
   }
@@ -7051,7 +7051,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSceneFromGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Scene {
+  public static function createSceneFromGlb(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>, ?options:GltfImportOptions):Scene {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_GltfParse.createSceneFromGlb, cast ([bytes, warnings, options] : Array<Dynamic>));
     return cast null;
   }
@@ -7061,7 +7061,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSceneFromMd2(bytes:Dynamic, ?warnings:Array<String>):Scene {
+  public static function createSceneFromMd2(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):Scene {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_Md2Parse.createSceneFromMd2, cast ([bytes, warnings] : Array<Dynamic>));
     return cast null;
   }
@@ -7116,7 +7116,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createScenesFromGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Scene> {
+  public static function createScenesFromGlb(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>, ?options:GltfImportOptions):Array<Scene> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_GltfParse.createScenesFromGlb, cast ([bytes, warnings, options] : Array<Dynamic>));
     return cast null;
   }
@@ -8188,12 +8188,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function decodeImage(bytes:Dynamic, ?mimeType:String):flighthq._internal._Promise<Null<DecodedImage>> {
+  public static function decodeImage(bytes:flighthq._internal._UInt8Array, ?mimeType:String):flighthq._internal._Promise<Null<DecodedImage>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_imageCodec_DecodeImage.decodeImage, cast ([bytes, mimeType] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function decodeImagePremultiplied(bytes:Dynamic, ?mimeType:String):flighthq._internal._Promise<Null<DecodedImage>> {
+  public static function decodeImagePremultiplied(bytes:flighthq._internal._UInt8Array, ?mimeType:String):flighthq._internal._Promise<Null<DecodedImage>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_imageCodec_DecodeImage.decodeImagePremultiplied, cast ([bytes, mimeType] : Array<Dynamic>));
     return cast null;
   }
@@ -9108,7 +9108,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function detectTextureContainer(bytes:Dynamic):Null<String> {
+  public static function detectTextureContainer(bytes:flighthq._internal._UInt8Array):Null<String> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureFormats_DetectTextureContainer.detectTextureContainer, cast ([bytes] : Array<Dynamic>));
     return cast null;
   }
@@ -10222,12 +10222,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function encodeImage(image:DecodedImage, mimeType:String, ?options:ImageEncodeOptions):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function encodeImage(image:DecodedImage, mimeType:String, ?options:ImageEncodeOptions):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_imageCodec_EncodeImage.encodeImage, cast ([image, mimeType, options] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function encodeSurface(source:Surface, ?format:ImageFormat, ?quality:Float):Dynamic {
+  public static function encodeSurface(source:Surface, ?format:ImageFormat, ?quality:Float):flighthq._internal._UInt8Array {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_surface_Surface.encodeSurface, cast ([source, format, quality] : Array<Dynamic>));
     return cast null;
   }
@@ -15768,7 +15768,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function loadAudioResourceFromBytes(context:Dynamic, bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromBytes(context:Dynamic, bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<AudioResource> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_audio_AudioResourceFrom.loadAudioResourceFromBytes, cast ([context, bytes, mimeType, signal] : Array<Dynamic>));
     return cast null;
   }
@@ -15783,7 +15783,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function loadFontFromBytes(bytes:Dynamic, family:String):flighthq._internal._Promise<Font> {
+  public static function loadFontFromBytes(bytes:flighthq._internal._UInt8Array, family:String):flighthq._internal._Promise<Font> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_font_Font.loadFontFromBytes, cast ([bytes, family] : Array<Dynamic>));
     return cast null;
   }
@@ -15803,7 +15803,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function loadFontResourceFromBytes(out:FontResource, bytes:Dynamic):flighthq._internal._Promise<FontResource> {
+  public static function loadFontResourceFromBytes(out:FontResource, bytes:flighthq._internal._UInt8Array):flighthq._internal._Promise<FontResource> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_font_Font.loadFontResourceFromBytes, cast ([out, bytes] : Array<Dynamic>));
     return cast null;
   }
@@ -15833,7 +15833,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function loadImageResourceFromBytes(bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
+  public static function loadImageResourceFromBytes(bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_image_ImageResourceFrom.loadImageResourceFromBytes, cast ([bytes, mimeType, signal] : Array<Dynamic>));
     return cast null;
   }
@@ -15843,7 +15843,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function loadSceneDocumentBytesFromUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function loadSceneDocumentBytesFromUrl(url:String, ?options:SceneDocumentLoadOptions):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneResources_SceneDocumentSource.loadSceneDocumentBytesFromUrl, cast ([url, options] : Array<Dynamic>));
     return cast null;
   }
@@ -15903,7 +15903,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBytes(bytes:Dynamic, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
+  public static function loadTextureAtlasFromBytes(bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<TextureAtlas> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureatlas_TextureAtlasFrom.loadTextureAtlasFromBytes, cast ([bytes, mimeType, signal] : Array<Dynamic>));
     return cast null;
   }
@@ -15923,7 +15923,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function loadTilesetFromBytes(bytes:Dynamic, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Tileset> {
+  public static function loadTilesetFromBytes(bytes:flighthq._internal._UInt8Array, tileWidth:Float, tileHeight:Float, ?margin:Float, ?spacing:Float, ?mimeType:String, ?signal:Dynamic):flighthq._internal._Promise<Tileset> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_tileset_Tileset.loadTilesetFromBytes, cast ([bytes, tileWidth, tileHeight, margin, spacing, mimeType, signal] : Array<Dynamic>));
     return cast null;
   }
@@ -16589,7 +16589,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_cameraControls_OrbitCameraController.panOrbitCameraControllerInViewPlane, cast ([controller, deltaRight, deltaUp] : Array<Dynamic>));
   }
 
-  public static function parse3ds(bytes:Dynamic, ?warnings:Array<String>):SceneDocument {
+  public static function parse3ds(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):SceneDocument {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_ThreeDsParse.parse3ds, cast ([bytes, warnings] : Array<Dynamic>));
     return cast null;
   }
@@ -16614,22 +16614,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseAtf(bytes:Dynamic):Null<Array<TextureContainer>> {
+  public static function parseAtf(bytes:flighthq._internal._UInt8Array):Null<Array<TextureContainer>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureFormats_ParseAtf.parseAtf, cast ([bytes] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseAwd(bytes:Dynamic, ?warnings:Array<String>):SceneDocument {
+  public static function parseAwd(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):SceneDocument {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_AwdParse.parseAwd, cast ([bytes, warnings] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseAwdSkeletonAnimations(bytes:Dynamic, joints:Array<SceneNode>, ?warnings:Array<String>):Dynamic {
+  public static function parseAwdSkeletonAnimations(bytes:flighthq._internal._UInt8Array, joints:Array<SceneNode>, ?warnings:Array<String>):Dynamic {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_AwdParse.parseAwdSkeletonAnimations, cast ([bytes, joints, warnings] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseBasis(bytes:Dynamic):Null<TextureContainer> {
+  public static function parseBasis(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureFormats_ParseBasis.parseBasis, cast ([bytes] : Array<Dynamic>));
     return cast null;
   }
@@ -16664,12 +16664,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseDds(bytes:Dynamic):Null<TextureContainer> {
+  public static function parseDds(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureFormats_ParseDds.parseDds, cast ([bytes] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parseGlb(bytes:Dynamic, ?warnings:Array<String>, ?options:GltfImportOptions):SceneDocument {
+  public static function parseGlb(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>, ?options:GltfImportOptions):SceneDocument {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_GltfParse.parseGlb, cast ([bytes, warnings, options] : Array<Dynamic>));
     return cast null;
   }
@@ -16679,7 +16679,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseKtx2(bytes:Dynamic):Null<TextureContainer> {
+  public static function parseKtx2(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textureFormats_ParseKtx2.parseKtx2, cast ([bytes] : Array<Dynamic>));
     return cast null;
   }
@@ -16704,7 +16704,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseMd2(bytes:Dynamic, ?warnings:Array<String>):SceneDocument {
+  public static function parseMd2(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):SceneDocument {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_sceneFormats_Md2Parse.parseMd2, cast ([bytes, warnings] : Array<Dynamic>));
     return cast null;
   }
@@ -17420,12 +17420,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function readBinaryFile(path:String):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function readBinaryFile(path:String):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_filesystem_Filesystem.readBinaryFile, cast ([path] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function readBinaryFileRange(path:String, offset:Float, length:Float):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function readBinaryFileRange(path:String, offset:Float, length:Float):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_filesystem_Filesystem.readBinaryFileRange, cast ([path, offset, length] : Array<Dynamic>));
     return cast null;
   }
@@ -17470,7 +17470,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function readDialogHandleBinaryFile(handle:FileDialogHandle):flighthq._internal._Promise<Null<Dynamic>> {
+  public static function readDialogHandleBinaryFile(handle:FileDialogHandle):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_filesystem_Filesystem.readDialogHandleBinaryFile, cast ([handle] : Array<Dynamic>));
     return cast null;
   }
@@ -18394,7 +18394,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_displayobjectWgpu_WgpuVelocity.renderWgpuVelocity, cast ([state, root, field, target] : Array<Dynamic>));
   }
 
-  public static function reorderBidiLine(levels:Dynamic, start:Float, end:Float, out:Array<Float>):Void {
+  public static function reorderBidiLine(levels:flighthq._internal._UInt8Array, start:Float, end:Float, out:Array<Float>):Void {
     _Runtime.callValue(Facade_Sdk_flighthq_textbidi_ReorderBidiLine.reorderBidiLine, cast ([levels, start, end, out] : Array<Dynamic>));
   }
 
@@ -18596,7 +18596,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuRenderTarget.resizeWgpuRenderTarget, cast ([state, target, width, height] : Array<Dynamic>));
   }
 
-  public static function resolveBidiLevels(text:String, baseDirection:BidiDirection):Dynamic {
+  public static function resolveBidiLevels(text:String, baseDirection:BidiDirection):flighthq._internal._UInt8Array {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_textbidi_ResolveBidiLevels.resolveBidiLevels, cast ([text, baseDirection] : Array<Dynamic>));
     return cast null;
   }
@@ -21538,7 +21538,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_renderWgpu_WgpuDraw.updateWgpuTextureEntry, cast ([state, entry, canvas] : Array<Dynamic>));
   }
 
-  public static function uploadGlCompressedTextureContainer(gl:Dynamic, container:TextureContainer, payload:Dynamic, ?decode:GlCompressedTextureDecoder):Bool {
+  public static function uploadGlCompressedTextureContainer(gl:Dynamic, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:GlCompressedTextureDecoder):Bool {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_renderGl_GlCompressedTexture.uploadGlCompressedTextureContainer, cast ([gl, container, payload, decode] : Array<Dynamic>));
     return cast null;
   }
@@ -21773,7 +21773,7 @@ class Sdk {
     _Runtime.callValue(Facade_Sdk_flighthq_mesh_MeshGeometryUvs.wrapMeshGeometryUvs, cast ([geometry] : Array<Dynamic>));
   }
 
-  public static function writeBinaryFile(path:String, data:Dynamic):flighthq._internal._Promise<Bool> {
+  public static function writeBinaryFile(path:String, data:flighthq._internal._UInt8Array):flighthq._internal._Promise<Bool> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_filesystem_Filesystem.writeBinaryFile, cast ([path, data] : Array<Dynamic>));
     return cast null;
   }
@@ -21823,7 +21823,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function writeDialogHandleBinaryFile(handle:FileDialogHandle, data:Dynamic):flighthq._internal._Promise<Bool> {
+  public static function writeDialogHandleBinaryFile(handle:FileDialogHandle, data:flighthq._internal._UInt8Array):flighthq._internal._Promise<Bool> {
     return cast _Runtime.callValue(Facade_Sdk_flighthq_filesystem_Filesystem.writeDialogHandleBinaryFile, cast ([handle, data] : Array<Dynamic>));
     return cast null;
   }

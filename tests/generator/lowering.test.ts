@@ -1128,6 +1128,7 @@ describe('TypeScript lowering and Haxe emission', () => {
           floats: new Float32Array(4),
           signed: new Int16Array([1, -2]),
           unsigned: new Uint16Array([1, 2]),
+          bytes: new Uint8Array([255, 256]),
         };
       }`,
       ts.ScriptTarget.Latest,
@@ -1146,6 +1147,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('new flighthq._internal._Float32Array(4.0)');
     expect(output).toContain('new flighthq._internal._Int16Array(');
     expect(output).toContain('new flighthq._internal._UInt16Array(');
+    expect(output).toContain('new flighthq._internal._UInt8Array(');
     expect(output).not.toContain("_Runtime.construct(_Runtime.globalValue('Float32Array')");
   });
 

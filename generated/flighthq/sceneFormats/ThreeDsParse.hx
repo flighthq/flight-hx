@@ -59,12 +59,12 @@ import flighthq.types.Types.THREE_DS_VERTICES;
 import flighthq.types._internal._MeshValues.MeshKind;
 
 class ThreeDsParse {
-  public static function createSceneFrom3ds(bytes:Dynamic, ?warnings:Array<String>):Scene {
+  public static function createSceneFrom3ds(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):Scene {
     return cast _Runtime.callValue(createSceneFromDocument, cast ([_Runtime.callValue(parse3ds, cast ([bytes, warnings] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function parse3ds(bytes:Dynamic, ?warnings:Array<String>):SceneDocument {
+  public static function parse3ds(bytes:flighthq._internal._UInt8Array, ?warnings:Array<String>):SceneDocument {
     var document:SceneDocument = cast _Runtime.UNDEFINED;
     var source:Dynamic = cast _Runtime.UNDEFINED;
     var view:Dynamic = cast _Runtime.UNDEFINED;
@@ -77,7 +77,7 @@ class ThreeDsParse {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: input is smaller than the minimum chunk header (6 bytes)'] : Array<Dynamic>));
       return cast document;
     }
-    source = (cast bytes : Dynamic);
+    source = (cast bytes : flighthq._internal._UInt8Array);
     view = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
     mainId = _Runtime.callProperty(view, 'getUint16', cast ([0.0, true] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(mainId, THREE_DS_MAIN))) {
