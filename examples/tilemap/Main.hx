@@ -160,6 +160,9 @@ class Main extends Application {
 }
 
 // Minimal GL canvas adapter over the Lime window, matching the shape `createGlRenderState` expects.
+// @:keep — Flight reaches this adapter only reflectively (getContext/width/height via Reflect),
+// so full DCE would strip those members and reflective access would crash. Retain the whole adapter.
+@:keep
 private class _GlCanvas {
   // Flight's GL renderer reads `canvas.width`/`canvas.height` reflectively (`Reflect.field`) to build
   // both the GL viewport and the pixel->clip projection. A Haxe `(get, never)` property compiles to
