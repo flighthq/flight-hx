@@ -49,12 +49,12 @@ class CanvasQuadBatch {
     roundPixels = _Runtime.field(state, 'roundPixels');
     quadTransform = _Runtime.callValue(acquireMatrix, cast ([] : Array<Dynamic>));
     stride = _Runtime.select(_Runtime.strictEquals(_Runtime.field(data, 'transformType'), 'vector2'), function():Dynamic return cast 2.0, function():Dynamic return cast 6.0);
-    _Runtime.setField(context, 'globalAlpha', _Runtime.field(quadBatch, 'alpha'));
+    flighthq._internal.CanvasRenderingContext2D.setField(context, 'globalAlpha', _Runtime.field(quadBatch, 'alpha'));
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'allowSmoothing')))) {
-      _Runtime.setField(context, 'imageSmoothingEnabled', false);
+      flighthq._internal.CanvasRenderingContext2D.setField(context, 'imageSmoothingEnabled', false);
     }
     restoreMaterial = _Runtime.callValue(applyCanvasMaterial, cast ([state, _Runtime.field(quadBatch, 'material')] : Array<Dynamic>));
-    _Runtime.callProperty(context, 'setTransform', cast ([_Runtime.field(transform, 'a'), _Runtime.field(transform, 'b'), _Runtime.field(transform, 'c'), _Runtime.field(transform, 'd'), _Runtime.field(transform, 'tx'), _Runtime.field(transform, 'ty')] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(context, 'setTransform', cast ([_Runtime.field(transform, 'a'), _Runtime.field(transform, 'b'), _Runtime.field(transform, 'c'), _Runtime.field(transform, 'd'), _Runtime.field(transform, 'tx'), _Runtime.field(transform, 'ty')] : Array<Dynamic>));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, instanceCount, '<'))) {
@@ -69,25 +69,25 @@ class CanvasQuadBatch {
         if (_Runtime.truthy(_Runtime.strictEquals(stride, 2.0))) {
           var dx:Dynamic = _Runtime.getIndex(transforms, offset);
           var dy:Dynamic = _Runtime.getIndex(transforms, (offset + 1.0));
-          _Runtime.callProperty(context, 'drawImage', cast ([image, _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), _Runtime.select(roundPixels, function():Dynamic return cast (Std.int(dx) | Std.int(0.0)), function():Dynamic return cast dx), _Runtime.select(roundPixels, function():Dynamic return cast (Std.int(dy) | Std.int(0.0)), function():Dynamic return cast dy), _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
+          flighthq._internal.CanvasRenderingContext2D.call(context, 'drawImage', cast ([image, _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), _Runtime.select(roundPixels, function():Dynamic return cast (Std.int(dx) | Std.int(0.0)), function():Dynamic return cast dx), _Runtime.select(roundPixels, function():Dynamic return cast (Std.int(dy) | Std.int(0.0)), function():Dynamic return cast dy), _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
         } else {
           _Runtime.callValue(setMatrixFromFloat32Array, cast ([quadTransform, offset, transforms] : Array<Dynamic>));
           _Runtime.callValue(multiplyMatrix, cast ([quadTransform, transform, quadTransform] : Array<Dynamic>));
           if (_Runtime.truthy(roundPixels)) {
-            _Runtime.setField(quadTransform, 'tx', _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.field(quadTransform, 'tx')] : Array<Dynamic>)));
-            _Runtime.setField(quadTransform, 'ty', _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.field(quadTransform, 'ty')] : Array<Dynamic>)));
+            _Runtime.setField(quadTransform, 'tx', HxMath.round(_Runtime.field(quadTransform, 'tx')));
+            _Runtime.setField(quadTransform, 'ty', HxMath.round(_Runtime.field(quadTransform, 'ty')));
           }
-          _Runtime.callProperty(context, 'setTransform', cast ([_Runtime.field(quadTransform, 'a'), _Runtime.field(quadTransform, 'b'), _Runtime.field(quadTransform, 'c'), _Runtime.field(quadTransform, 'd'), _Runtime.field(quadTransform, 'tx'), _Runtime.field(quadTransform, 'ty')] : Array<Dynamic>));
-          _Runtime.callProperty(context, 'drawImage', cast ([image, _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), 0.0, 0.0, _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
+          flighthq._internal.CanvasRenderingContext2D.call(context, 'setTransform', cast ([_Runtime.field(quadTransform, 'a'), _Runtime.field(quadTransform, 'b'), _Runtime.field(quadTransform, 'c'), _Runtime.field(quadTransform, 'd'), _Runtime.field(quadTransform, 'tx'), _Runtime.field(quadTransform, 'ty')] : Array<Dynamic>));
+          flighthq._internal.CanvasRenderingContext2D.call(context, 'drawImage', cast ([image, _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), 0.0, 0.0, _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
         }
         i++;
       }
     }
-    if (_Runtime.truthy(restoreMaterial)) { _Runtime.callProperty(context, 'restore', cast ([] : Array<Dynamic>)); }
-    _Runtime.callProperty(context, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
+    if (_Runtime.truthy(restoreMaterial)) { flighthq._internal.CanvasRenderingContext2D.call(context, 'restore', cast ([] : Array<Dynamic>)); }
+    flighthq._internal.CanvasRenderingContext2D.call(context, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
     _Runtime.callValue(releaseMatrix, cast ([quadTransform] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'allowSmoothing')))) {
-      _Runtime.setField(context, 'imageSmoothingEnabled', true);
+      flighthq._internal.CanvasRenderingContext2D.setField(context, 'imageSmoothingEnabled', true);
     }
   }
 

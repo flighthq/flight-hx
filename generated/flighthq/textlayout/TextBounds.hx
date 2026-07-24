@@ -13,7 +13,7 @@ class TextBounds {
 
   public static function computeTextBoundsHeight(spec:TextBoundsSpec, layout:TextLayoutResult):Float {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'none'))) { return cast _Runtime.field(spec, 'height'); }
-    return cast _Runtime.callProperty(HxMath, 'ceil', cast ([(_Runtime.field(layout, 'textHeight') + (TEXT_LAYOUT_GUTTER * 2.0))] : Array<Dynamic>));
+    return cast HxMath.ceil((_Runtime.field(layout, 'textHeight') + (TEXT_LAYOUT_GUTTER * 2.0)));
     return cast null;
   }
 
@@ -39,7 +39,7 @@ class TextBounds {
 
   public static function computeTextBoundsWidth(spec:TextBoundsSpec, layout:TextLayoutResult):Float {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(spec, 'autoSize'), 'none'), function():Dynamic return cast _Runtime.field(spec, 'wordWrap')))) { return cast _Runtime.field(spec, 'width'); }
-    return cast _Runtime.callProperty(HxMath, 'ceil', cast ([(_Runtime.field(layout, 'textWidth') + (TEXT_LAYOUT_GUTTER * 2.0))] : Array<Dynamic>));
+    return cast HxMath.ceil((_Runtime.field(layout, 'textWidth') + (TEXT_LAYOUT_GUTTER * 2.0)));
     return cast null;
   }
 }

@@ -15,7 +15,7 @@ class ColorLut {
     var denom:Dynamic = cast _Runtime.UNDEFINED;
     var cell:Array<Float> = cast _Runtime.UNDEFINED;
     var i:Dynamic = cast _Runtime.UNDEFINED;
-    n = _Runtime.callProperty(HxMath, 'max', cast ([2.0, _Runtime.callProperty(HxMath, 'floor', cast ([size] : Array<Dynamic>))] : Array<Dynamic>));
+    n = HxMath.max(2.0, HxMath.floor(size));
     samples = _Runtime.createArray((((n * n) * n) * 3.0));
     denom = (n - 1.0);
     cell = cast ([0.0, 0.0, 0.0] : Array<Dynamic>);
@@ -79,12 +79,12 @@ class ColorLut {
     fr = (_Runtime.callValue(ColorLut.clamp01__colorLut, cast ([r] : Array<Dynamic>)) * max);
     fg = (_Runtime.callValue(ColorLut.clamp01__colorLut, cast ([g] : Array<Dynamic>)) * max);
     fb = (_Runtime.callValue(ColorLut.clamp01__colorLut, cast ([b] : Array<Dynamic>)) * max);
-    r0 = _Runtime.callProperty(HxMath, 'floor', cast ([fr] : Array<Dynamic>));
-    g0 = _Runtime.callProperty(HxMath, 'floor', cast ([fg] : Array<Dynamic>));
-    b0 = _Runtime.callProperty(HxMath, 'floor', cast ([fb] : Array<Dynamic>));
-    r1 = _Runtime.callProperty(HxMath, 'min', cast ([(r0 + 1.0), max] : Array<Dynamic>));
-    g1 = _Runtime.callProperty(HxMath, 'min', cast ([(g0 + 1.0), max] : Array<Dynamic>));
-    b1 = _Runtime.callProperty(HxMath, 'min', cast ([(b0 + 1.0), max] : Array<Dynamic>));
+    r0 = HxMath.floor(fr);
+    g0 = HxMath.floor(fg);
+    b0 = HxMath.floor(fb);
+    r1 = HxMath.min((r0 + 1.0), max);
+    g1 = HxMath.min((g0 + 1.0), max);
+    b1 = HxMath.min((b0 + 1.0), max);
     dr = (fr - r0);
     dg = (fg - g0);
     db = (fb - b0);

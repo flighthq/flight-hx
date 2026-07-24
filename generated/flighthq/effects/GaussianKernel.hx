@@ -24,7 +24,7 @@ class GaussianKernel {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, size, '<'))) {
         var x:Dynamic = (i - radius);
-        var weight:Dynamic = _Runtime.callProperty(HxMath, 'exp', cast ([(-(x * x) / twoSigmaSquared)] : Array<Dynamic>));
+        var weight:Dynamic = HxMath.exp((-(x * x) / twoSigmaSquared));
         _Runtime.setIndex(out, i, weight);
         (sum = cast ((sum + weight) : Dynamic));
         i++;
@@ -45,7 +45,7 @@ class GaussianKernel {
   public static function getGaussianKernelSize(sigma:Float):Float {
     var radius:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(sigma, 0.0, '<='))) { return cast 1.0; }
-    radius = _Runtime.callProperty(HxMath, 'ceil', cast ([(3.0 * sigma)] : Array<Dynamic>));
+    radius = HxMath.ceil((3.0 * sigma));
     return cast ((radius * 2.0) + 1.0);
     return cast null;
   }

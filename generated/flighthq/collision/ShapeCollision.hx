@@ -104,7 +104,7 @@ class ShapeCollision {
       _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
       return cast false;
     }
-    dist = _Runtime.callProperty(HxMath, 'sqrt', cast ([distSquared] : Array<Dynamic>));
+    dist = HxMath.sqrt(distSquared);
     if (_Runtime.truthy(_Runtime.compare(dist, ShapeCollision.EPS__shapeCollision, '>'))) {
       var inv:Dynamic = (1.0 / dist);
       _Runtime.setField(out, 'normalX', (dx * inv));
@@ -139,8 +139,8 @@ class ShapeCollision {
     radius = _Runtime.field(a, 'radius');
     halfW = _Runtime.field(b, 'halfW');
     halfH = _Runtime.field(b, 'halfH');
-    cos = _Runtime.callProperty(HxMath, 'cos', cast ([_Runtime.field(b, 'rotation')] : Array<Dynamic>));
-    sin = _Runtime.callProperty(HxMath, 'sin', cast ([_Runtime.field(b, 'rotation')] : Array<Dynamic>));
+    cos = HxMath.cos(_Runtime.field(b, 'rotation'));
+    sin = HxMath.sin(_Runtime.field(b, 'rotation'));
     dx = (cx - _Runtime.field(b, 'x'));
     dy = (cy - _Runtime.field(b, 'y'));
     localX = ((dx * cos) + (dy * sin));
@@ -206,7 +206,7 @@ class ShapeCollision {
     dy = (cy - closestY);
     distSquared = ((dx * dx) + (dy * dy));
     if (_Runtime.truthy(_Runtime.compare(distSquared, (ShapeCollision.EPS__shapeCollision * ShapeCollision.EPS__shapeCollision), '>'))) {
-      var dist:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([distSquared] : Array<Dynamic>));
+      var dist:Dynamic = HxMath.sqrt(distSquared);
       if (_Runtime.truthy(_Runtime.compare(dist, radius, '>='))) {
         _Runtime.callValue(clearCollisionManifold, cast ([out] : Array<Dynamic>));
         return cast false;
@@ -535,8 +535,8 @@ class ShapeCollision {
     cy = _Runtime.field(obb, 'y');
     halfW = _Runtime.field(obb, 'halfW');
     halfH = _Runtime.field(obb, 'halfH');
-    cos = _Runtime.callProperty(HxMath, 'cos', cast ([_Runtime.field(obb, 'rotation')] : Array<Dynamic>));
-    sin = _Runtime.callProperty(HxMath, 'sin', cast ([_Runtime.field(obb, 'rotation')] : Array<Dynamic>));
+    cos = HxMath.cos(_Runtime.field(obb, 'rotation'));
+    sin = HxMath.sin(_Runtime.field(obb, 'rotation'));
     wx = (cos * halfW);
     wy = (sin * halfW);
     hx = (-sin * halfH);
@@ -551,9 +551,9 @@ class ShapeCollision {
     _Runtime.setIndex(out, 7.0, ((cy - wy) + hy));
   }
 
-  public static final scratchA__shapeCollision:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float64Array'] : Array<Dynamic>)), [8.0]);
+  public static final scratchA__shapeCollision:Dynamic = _Runtime.construct(_Runtime.globalValue('Float64Array'), [8.0]);
 
-  public static final scratchB__shapeCollision:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float64Array'] : Array<Dynamic>)), [8.0]);
+  public static final scratchB__shapeCollision:Dynamic = _Runtime.construct(_Runtime.globalValue('Float64Array'), [8.0]);
 
   public static final scratchAxis__shapeCollision:Dynamic = _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>));
 

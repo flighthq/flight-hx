@@ -38,7 +38,7 @@ class WgpuInnerGlowEffect {
     color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16711680.0);
     alpha = _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0);
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
-    quality = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)));
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
     _Runtime.callValue(applyWgpuEffectInvertTintPass, cast ([state, src, s0, color, alpha, strength] : Array<Dynamic>));
     _Runtime.callValue(applyWgpuEffectBoxBlur, cast ([state, s0, s1, s2, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), edgeColor: _Runtime.callValue(WgpuInnerGlowEffect.getInvertTintEdgeColor__wgpuInnerGlowEffect, cast ([color, alpha, strength] : Array<Dynamic>)), passes: quality }] : Array<Dynamic>));
@@ -59,7 +59,7 @@ class WgpuInnerGlowEffect {
 
   public static function getInvertTintEdgeColor__wgpuInnerGlowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
     var edgeAlpha:Dynamic = cast _Runtime.UNDEFINED;
-    edgeAlpha = _Runtime.callProperty(HxMath, 'min', cast ([1.0, (alpha * strength)] : Array<Dynamic>));
+    edgeAlpha = HxMath.min(1.0, (alpha * strength));
     return cast cast ([(((Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0)) / 255.0) * edgeAlpha), (((Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0)) / 255.0) * edgeAlpha), (((Std.int(color) & Std.int(255.0)) / 255.0) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
     return cast null;
   }

@@ -39,11 +39,11 @@ class AreaLight {
     var dirLen:Dynamic = cast _Runtime.UNDEFINED;
     var existingRightLen:Dynamic = cast _Runtime.UNDEFINED;
     var existingUpLen:Dynamic = cast _Runtime.UNDEFINED;
-    rightLen = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((_Runtime.field(right, 'x') * _Runtime.field(right, 'x')) + (_Runtime.field(right, 'y') * _Runtime.field(right, 'y'))) + (_Runtime.field(right, 'z') * _Runtime.field(right, 'z')))] : Array<Dynamic>));
-    upLen = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((_Runtime.field(up, 'x') * _Runtime.field(up, 'x')) + (_Runtime.field(up, 'y') * _Runtime.field(up, 'y'))) + (_Runtime.field(up, 'z') * _Runtime.field(up, 'z')))] : Array<Dynamic>));
-    dirLen = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((_Runtime.field(direction, 'x') * _Runtime.field(direction, 'x')) + (_Runtime.field(direction, 'y') * _Runtime.field(direction, 'y'))) + (_Runtime.field(direction, 'z') * _Runtime.field(direction, 'z')))] : Array<Dynamic>));
-    existingRightLen = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((_Runtime.field(_Runtime.field(out, 'right'), 'x') * _Runtime.field(_Runtime.field(out, 'right'), 'x')) + (_Runtime.field(_Runtime.field(out, 'right'), 'y') * _Runtime.field(_Runtime.field(out, 'right'), 'y'))) + (_Runtime.field(_Runtime.field(out, 'right'), 'z') * _Runtime.field(_Runtime.field(out, 'right'), 'z')))] : Array<Dynamic>));
-    existingUpLen = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((_Runtime.field(_Runtime.field(out, 'up'), 'x') * _Runtime.field(_Runtime.field(out, 'up'), 'x')) + (_Runtime.field(_Runtime.field(out, 'up'), 'y') * _Runtime.field(_Runtime.field(out, 'up'), 'y'))) + (_Runtime.field(_Runtime.field(out, 'up'), 'z') * _Runtime.field(_Runtime.field(out, 'up'), 'z')))] : Array<Dynamic>));
+    rightLen = HxMath.sqrt((((_Runtime.field(right, 'x') * _Runtime.field(right, 'x')) + (_Runtime.field(right, 'y') * _Runtime.field(right, 'y'))) + (_Runtime.field(right, 'z') * _Runtime.field(right, 'z'))));
+    upLen = HxMath.sqrt((((_Runtime.field(up, 'x') * _Runtime.field(up, 'x')) + (_Runtime.field(up, 'y') * _Runtime.field(up, 'y'))) + (_Runtime.field(up, 'z') * _Runtime.field(up, 'z'))));
+    dirLen = HxMath.sqrt((((_Runtime.field(direction, 'x') * _Runtime.field(direction, 'x')) + (_Runtime.field(direction, 'y') * _Runtime.field(direction, 'y'))) + (_Runtime.field(direction, 'z') * _Runtime.field(direction, 'z'))));
+    existingRightLen = HxMath.sqrt((((_Runtime.field(_Runtime.field(out, 'right'), 'x') * _Runtime.field(_Runtime.field(out, 'right'), 'x')) + (_Runtime.field(_Runtime.field(out, 'right'), 'y') * _Runtime.field(_Runtime.field(out, 'right'), 'y'))) + (_Runtime.field(_Runtime.field(out, 'right'), 'z') * _Runtime.field(_Runtime.field(out, 'right'), 'z'))));
+    existingUpLen = HxMath.sqrt((((_Runtime.field(_Runtime.field(out, 'up'), 'x') * _Runtime.field(_Runtime.field(out, 'up'), 'x')) + (_Runtime.field(_Runtime.field(out, 'up'), 'y') * _Runtime.field(_Runtime.field(out, 'up'), 'y'))) + (_Runtime.field(_Runtime.field(out, 'up'), 'z') * _Runtime.field(_Runtime.field(out, 'up'), 'z'))));
     if (_Runtime.truthy(_Runtime.compare(dirLen, 0.0, '>'))) {
       _Runtime.callValue(normalizeVector3, cast ([_Runtime.field(out, 'direction'), direction] : Array<Dynamic>));
     }

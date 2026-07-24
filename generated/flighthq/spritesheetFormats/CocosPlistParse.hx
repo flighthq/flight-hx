@@ -18,21 +18,21 @@ class CocosPlistParse {
   public static function parsePlistPair__cocosPlistParse(s:String):Array<Float> {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     m = _Runtime.match(s, _Runtime.regexp('{?\\s*([-\\d.]+)\\s*,\\s*([-\\d.]+)\\s*}?', ''));
-    return cast cast ([_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.optionalIndex(m, 1.0), function():Dynamic return cast '0')] : Array<Dynamic>)), _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.optionalIndex(m, 2.0), function():Dynamic return cast '0')] : Array<Dynamic>))] : Array<Dynamic>);
+    return cast cast ([_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.optionalIndex(m, 1.0), function():Dynamic return cast '0')] : Array<Dynamic>)), _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.optionalIndex(m, 2.0), function():Dynamic return cast '0')] : Array<Dynamic>))] : Array<Dynamic>);
     return cast null;
   }
 
   public static function parsePlistRect__cocosPlistParse(s:String):{ var x:Float; var y:Float; var w:Float; var h:Float; } {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     m = _Runtime.match(s, _Runtime.regexp('\\{\\s*\\{\\s*([-\\d.]+)\\s*,\\s*([-\\d.]+)\\s*\\}\\s*,\\s*\\{\\s*([-\\d.]+)\\s*,\\s*([-\\d.]+)\\s*\\}\\s*\\}', ''));
-    return cast { h: _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.optionalIndex(m, 4.0), function():Dynamic return cast '0')] : Array<Dynamic>)), w: _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.optionalIndex(m, 3.0), function():Dynamic return cast '0')] : Array<Dynamic>)), x: _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.optionalIndex(m, 1.0), function():Dynamic return cast '0')] : Array<Dynamic>)), y: _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.optionalIndex(m, 2.0), function():Dynamic return cast '0')] : Array<Dynamic>)) };
+    return cast { h: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.optionalIndex(m, 4.0), function():Dynamic return cast '0')] : Array<Dynamic>)), w: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.optionalIndex(m, 3.0), function():Dynamic return cast '0')] : Array<Dynamic>)), x: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.optionalIndex(m, 1.0), function():Dynamic return cast '0')] : Array<Dynamic>)), y: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.optionalIndex(m, 2.0), function():Dynamic return cast '0')] : Array<Dynamic>)) };
     return cast null;
   }
 
   public static function dictToMap__cocosPlistParse(el:XmlElement):Dynamic {
     var map:Dynamic = cast _Runtime.UNDEFINED;
     var children:Dynamic = cast _Runtime.UNDEFINED;
-    map = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    map = _Runtime.construct(_Runtime.globalValue('Map'), []);
     children = _Runtime.field(el, 'children');
     {
       var i:Dynamic = 0.0;
@@ -60,7 +60,7 @@ class CocosPlistParse {
   }
 
   public static function getIntValue__cocosPlistParse(el:Null<XmlElement>):Float {
-    return cast _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.optionalField(el, 'text'), function():Dynamic return cast '0'), 10.0] : Array<Dynamic>));
+    return cast _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.coalesce(_Runtime.optionalField(el, 'text'), function():Dynamic return cast '0'), 10.0] : Array<Dynamic>));
     return cast null;
   }
 
@@ -147,7 +147,7 @@ class CocosPlistParse {
     var __destructure4:Dynamic = cast _Runtime.UNDEFINED;
     var imageWidth:Dynamic = cast _Runtime.UNDEFINED;
     var imageHeight:Dynamic = cast _Runtime.UNDEFINED;
-    frames = _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'entries', cast ([_Runtime.field(doc, 'frames')] : Array<Dynamic>)), 'map', cast ([function(__parameter3:Dynamic) {
+    frames = _Runtime.callProperty(flighthq._internal.DynamicObject.entries(_Runtime.field(doc, 'frames')), 'map', cast ([function(__parameter3:Dynamic) {
       var name:Dynamic = cast _Runtime.UNDEFINED;
       var pf:Dynamic = cast _Runtime.UNDEFINED;
       name = _Runtime.getIndex(__parameter3, 0.0);

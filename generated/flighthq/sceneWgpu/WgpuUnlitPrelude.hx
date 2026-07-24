@@ -24,7 +24,7 @@ class WgpuUnlitPrelude {
     scene = _Runtime.callValue(getWgpuSceneRuntime, cast ([state] : Array<Dynamic>));
     binding = _Runtime.callProperty(_Runtime.field(scene, 'materialBindGroups'), 'get', cast ([materialKey] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      var buffer:Dynamic = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: WgpuUnlitPrelude.UNLIT_UNIFORM_BYTES__wgpuUnlitPrelude, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
+      var buffer:Dynamic = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: WgpuUnlitPrelude.UNLIT_UNIFORM_BYTES__wgpuUnlitPrelude, usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST'))) }] : Array<Dynamic>));
       var bindGroup:Dynamic = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(pipeline, 'materialBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: buffer } }, { binding: 1.0, resource: _Runtime.callValue(getWgpuMaterialSampler, cast ([state, colorMap] : Array<Dynamic>)) }, { binding: 2.0, resource: _Runtime.callValue(resolveWgpuMaterialTextureView, cast ([state, colorMap] : Array<Dynamic>)) }] : Array<Dynamic>) }] : Array<Dynamic>));
       (binding = cast ({ bindGroup: bindGroup, buffer: buffer } : Dynamic));
       _Runtime.callProperty(_Runtime.field(scene, 'materialBindGroups'), 'set', cast ([materialKey, binding] : Array<Dynamic>));
@@ -54,7 +54,7 @@ class WgpuUnlitPrelude {
     var materialBindGroupLayout:Dynamic = cast _Runtime.UNDEFINED;
     device = _Runtime.field(state, 'device');
     module = _Runtime.callProperty(device, 'createShaderModule', cast ([{ code: _Runtime.callValue(getWgpuUnlitModuleSourceForKey, cast ([key] : Array<Dynamic>)) }] : Array<Dynamic>));
-    materialBindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), buffer: { type: 'uniform' } }, { binding: 1.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), sampler: { type: 'filtering' } }, { binding: 2.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), texture: { sampleType: 'float' } }] : Array<Dynamic>) }] : Array<Dynamic>));
+    materialBindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'FRAGMENT'), buffer: { type: 'uniform' } }, { binding: 1.0, visibility: _Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'FRAGMENT'), sampler: { type: 'filtering' } }, { binding: 2.0, visibility: _Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'FRAGMENT'), texture: { sampleType: 'float' } }] : Array<Dynamic>) }] : Array<Dynamic>));
     return cast _Runtime.callValue(createWgpuMeshPipeline, cast ([state, { doubleSided: _Runtime.field(key, 'doubleSided'), format: format, materialBindGroupLayout: materialBindGroupLayout, module: module }] : Array<Dynamic>));
     return cast null;
   }
@@ -73,5 +73,5 @@ class WgpuUnlitPrelude {
 
   public static final UNLIT_WGSL_BODY__wgpuUnlitPrelude:Dynamic = '\nstruct UnlitMaterial {\n  color : vec4f,   // linear rgba\n  params : vec4f,  // x = intensity, y = alphaCutoff\n};\n\n@group(2) @binding(0) var<uniform> material : UnlitMaterial;\n@group(2) @binding(1) var materialSampler : sampler;\n@group(2) @binding(2) var colorTexture : texture_2d<f32>;\n\n@fragment fn fs_main(in : VertexOutput) -> @location(0) vec4f {\n  var color = material.color;\n  if (HAS_COLOR_MAP) {\n    let sampled = textureSample(colorTexture, materialSampler, in.uv);\n    color = vec4f(color.rgb * srgbToLinear(sampled.rgb), color.a * sampled.a);\n  }\n  if (ALPHA_MASK && color.a < material.params.y) {\n    discard;\n  }\n  return vec4f(color.rgb * material.params.x, color.a);\n}\n';
 
-  public static final _scratch__wgpuUnlitPrelude:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(WgpuUnlitPrelude.UNLIT_UNIFORM_BYTES__wgpuUnlitPrelude / 4.0)]);
+  public static final _scratch__wgpuUnlitPrelude:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(WgpuUnlitPrelude.UNLIT_UNIFORM_BYTES__wgpuUnlitPrelude / 4.0)]);
 }

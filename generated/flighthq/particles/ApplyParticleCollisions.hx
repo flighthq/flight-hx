@@ -132,7 +132,7 @@ class ApplyParticleCollisions {
     var ny:Dynamic = cast _Runtime.UNDEFINED;
     dx = (_Runtime.getIndex(p, 0.0) - _Runtime.field(c, 'x'));
     dy = (_Runtime.getIndex(p, 1.0) - _Runtime.field(c, 'y'));
-    dist = _Runtime.callProperty(HxMath, 'sqrt', cast ([((dx * dx) + (dy * dy))] : Array<Dynamic>));
+    dist = HxMath.sqrt(((dx * dx) + (dy * dy)));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(c, 'mode'), 'exclude'))) {
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(dist, _Runtime.field(c, 'radius'), '>='), function():Dynamic return cast _Runtime.compare(dist, 0.000001, '<=')))) { return cast false; }
       var nx:Dynamic = (dx / dist);
@@ -230,7 +230,7 @@ class ApplyParticleCollisions {
     dx = (_Runtime.getIndex(p, 0.0) - _Runtime.field(c, 'x'));
     dy = (_Runtime.getIndex(p, 1.0) - _Runtime.field(c, 'y'));
     dz = (_Runtime.getIndex(p, 2.0) - _Runtime.field(c, 'z'));
-    dist = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((dx * dx) + (dy * dy)) + (dz * dz))] : Array<Dynamic>));
+    dist = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(c, 'mode'), 'exclude'))) {
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(dist, _Runtime.field(c, 'radius'), '>='), function():Dynamic return cast _Runtime.compare(dist, 0.000001, '<=')))) { return cast false; }
       var nx:Dynamic = (dx / dist);

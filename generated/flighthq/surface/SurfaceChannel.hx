@@ -67,10 +67,10 @@ class SurfaceChannel {
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
     sd = _Runtime.field(source, 'data');
-    rData = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [((w * h) * 4.0)]);
-    gData = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [((w * h) * 4.0)]);
-    bData = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [((w * h) * 4.0)]);
-    aData = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [((w * h) * 4.0)]);
+    rData = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [((w * h) * 4.0)]);
+    gData = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [((w * h) * 4.0)]);
+    bData = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [((w * h) * 4.0)]);
+    aData = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [((w * h) * 4.0)]);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, (w * h), '<'))) {

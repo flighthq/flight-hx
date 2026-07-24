@@ -80,11 +80,11 @@ class GlCache {
     _Runtime.setField(cacheRuntime, 'spriteBatchMaterial', null);
     _Runtime.setField(cacheRuntime, 'spriteBatchMaterialRenderer', null);
     _Runtime.setField(cacheRuntime, 'spriteBatchMaterialFloats', 0.0);
-    _Runtime.setField(cacheRuntime, 'spriteBatchMaterialData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [0.0]));
+    _Runtime.setField(cacheRuntime, 'spriteBatchMaterialData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [0.0]));
     _Runtime.setField(cacheRuntime, 'spriteBatchMaterialBuffer', null);
     _Runtime.setField(cacheRuntime, 'spriteBatchCount', 0.0);
     _Runtime.setField(cacheRuntime, 'spriteBatchInstanceBuffer', null);
-    _Runtime.setField(cacheRuntime, 'spriteBatchInstanceData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [0.0]));
+    _Runtime.setField(cacheRuntime, 'spriteBatchInstanceData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [0.0]));
     _Runtime.setField(cacheRuntime, 'spriteBatchTexture', null);
     _Runtime.callProperty(GlCache._cacheStateScreen__glCache, 'set', cast ([cacheState, screenState] : Array<Dynamic>));
     return cast cacheState;
@@ -150,8 +150,8 @@ class GlCache {
       _Runtime.setField(cacheRuntime, 'currentTexture', null);
       _Runtime.setField(cacheRuntime, 'currentBlendMode', null);
       _Runtime.setField(cacheRuntime, 'currentScissorRect', null);
-      _Runtime.callProperty(_Runtime.field(cacheState, 'gl'), 'clearColor', cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.field(cacheState, 'gl'), 'clear', cast ([_Runtime.field(_Runtime.field(cacheState, 'gl'), 'COLOR_BUFFER_BIT')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(_Runtime.field(cacheState, 'gl'), 'clearColor', cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(_Runtime.field(cacheState, 'gl'), 'clear', cast ([flighthq._internal.WebGl2RenderingContext.field(_Runtime.field(cacheState, 'gl'), 'COLOR_BUFFER_BIT')] : Array<Dynamic>));
       _Runtime.callValue(renderGlDisplayObject, cast ([cacheState, source] : Array<Dynamic>));
     }
     _Runtime.callValue(endGlRenderPass, cast ([cacheState] : Array<Dynamic>));
@@ -189,7 +189,7 @@ class GlCache {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callProperty(GlCache._renderCacheTargets__glCache, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (targets = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []) : Dynamic));
+      (targets = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
       _Runtime.callProperty(GlCache._renderCacheTargets__glCache, 'set', cast ([state, targets] : Array<Dynamic>));
     }
     return cast targets;
@@ -198,9 +198,9 @@ class GlCache {
 
   public static final defaultGlRenderCacheRenderer:DisplayObjectRenderer = { createData: noopRendererData, submit: GlCache.drawGlRenderCache__glCache };
 
-  public static final _renderCacheTargets__glCache:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _renderCacheTargets__glCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static final _cacheStateScreen__glCache:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _cacheStateScreen__glCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static final _bounds__glCache:Dynamic = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
 

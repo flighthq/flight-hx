@@ -57,8 +57,8 @@ class SegmentCollision {
     var localY0:Dynamic = cast _Runtime.UNDEFINED;
     var localX1:Dynamic = cast _Runtime.UNDEFINED;
     var localY1:Dynamic = cast _Runtime.UNDEFINED;
-    cos = _Runtime.callProperty(HxMath, 'cos', cast ([_Runtime.field(b, 'rotation')] : Array<Dynamic>));
-    sin = _Runtime.callProperty(HxMath, 'sin', cast ([_Runtime.field(b, 'rotation')] : Array<Dynamic>));
+    cos = HxMath.cos(_Runtime.field(b, 'rotation'));
+    sin = HxMath.sin(_Runtime.field(b, 'rotation'));
     d0x = (_Runtime.field(a, 'x0') - _Runtime.field(b, 'x'));
     d0y = (_Runtime.field(a, 'y0') - _Runtime.field(b, 'y'));
     d1x = (_Runtime.field(a, 'x1') - _Runtime.field(b, 'x'));
@@ -137,13 +137,13 @@ class SegmentCollision {
     denom = ((d1x * d2y) - (d1y * d2x));
     ex = (bx0 - ax0);
     ey = (by0 - ay0);
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([denom] : Array<Dynamic>)), SegmentCollision.EPS__segmentCollision, '<'))) {
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([((ex * d1y) - (ey * d1x))] : Array<Dynamic>)), SegmentCollision.EPS__segmentCollision, '>'))) { return cast false; }
+    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(denom), SegmentCollision.EPS__segmentCollision, '<'))) {
+      if (_Runtime.truthy(_Runtime.compare(HxMath.abs(((ex * d1y) - (ey * d1x))), SegmentCollision.EPS__segmentCollision, '>'))) { return cast false; }
       var lengthSquared:Dynamic = ((d1x * d1x) + (d1y * d1y));
       if (_Runtime.truthy(_Runtime.compare(lengthSquared, SegmentCollision.EPS__segmentCollision, '<'))) {
         var bLengthSquared:Dynamic = ((d2x * d2x) + (d2y * d2y));
         if (_Runtime.truthy(_Runtime.compare(bLengthSquared, SegmentCollision.EPS__segmentCollision, '<'))) {
-          return cast _Runtime.andValue(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([ex] : Array<Dynamic>)), SegmentCollision.EPS__segmentCollision, '<'), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([ey] : Array<Dynamic>)), SegmentCollision.EPS__segmentCollision, '<'));
+          return cast _Runtime.andValue(_Runtime.compare(HxMath.abs(ex), SegmentCollision.EPS__segmentCollision, '<'), function():Dynamic return cast _Runtime.compare(HxMath.abs(ey), SegmentCollision.EPS__segmentCollision, '<'));
         }
         var tb:Dynamic = ((((ax0 - bx0) * d2x) + ((ay0 - by0) * d2y)) / bLengthSquared);
         (tb = cast (_Runtime.select(_Runtime.compare(tb, 0.0, '<'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.compare(tb, 1.0, '>'), function():Dynamic return cast 1.0, function():Dynamic return cast tb)) : Dynamic));
@@ -180,7 +180,7 @@ class SegmentCollision {
 
   public static function clipSegmentSlab__segmentCollision(p:Float, q:Float):Bool {
     var r:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([p] : Array<Dynamic>)), SegmentCollision.EPS__segmentCollision, '<'))) {
+    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(p), SegmentCollision.EPS__segmentCollision, '<'))) {
       return cast _Runtime.compare(q, 0.0, '>=');
     }
     r = (q / p);

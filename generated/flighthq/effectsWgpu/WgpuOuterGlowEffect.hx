@@ -40,10 +40,10 @@ class WgpuOuterGlowEffect {
     color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16711680.0);
     alpha = _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0);
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
-    quality = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)));
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
-    tintStrength = _Runtime.callProperty(HxMath, 'min', cast ([1.0, strength] : Array<Dynamic>));
-    glowPasses = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'floor', cast ([strength] : Array<Dynamic>))] : Array<Dynamic>));
+    tintStrength = HxMath.min(1.0, strength);
+    glowPasses = HxMath.max(1.0, HxMath.floor(strength));
     _Runtime.callValue(applyWgpuEffectTintPass, cast ([state, src, mask, color, alpha, tintStrength] : Array<Dynamic>));
     _Runtime.callValue(applyWgpuEffectBoxBlur, cast ([state, mask, blurred, blurTemp, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), passes: quality }] : Array<Dynamic>));
     _Runtime.callValue(clearWgpuEffectTarget, cast ([state, dst] : Array<Dynamic>));

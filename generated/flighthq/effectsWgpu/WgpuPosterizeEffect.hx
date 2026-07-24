@@ -14,7 +14,7 @@ class WgpuPosterizeEffect {
   public static function applyPosterizeEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:PosterizeEffect):Void {
     var levels:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
-    levels = _Runtime.callProperty(HxMath, 'max', cast ([2.0, _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 8.0)] : Array<Dynamic>));
+    levels = HxMath.max(2.0, _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 8.0));
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'colorGrade.posterize', WgpuPosterizeEffect.POSTERIZE_FRAGMENT_WGSL__wgpuPosterizeEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, levels);

@@ -26,9 +26,9 @@ class RenderState {
     _Runtime.setField(runtime, 'colorAdjustmentChannelMixingGuard', null);
     _Runtime.setField(runtime, 'currentFrameId', 0.0);
     _Runtime.setField(runtime, 'renderAdaptHook', null);
-    _Runtime.setField(runtime, 'renderProxyAdapterMap', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []));
-    _Runtime.setField(runtime, 'renderProxyMap', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []));
-    _Runtime.setField(runtime, 'rendererMap', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []));
+    _Runtime.setField(runtime, 'renderProxyAdapterMap', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
+    _Runtime.setField(runtime, 'renderProxyMap', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
+    _Runtime.setField(runtime, 'rendererMap', _Runtime.construct(_Runtime.globalValue('Map'), []));
     _Runtime.setField(runtime, 'rendererMapId', 0.0);
     _Runtime.setField(runtime, 'tempStack', cast ([] : Array<Dynamic>));
     return cast runtime;

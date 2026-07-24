@@ -29,7 +29,7 @@ class GlLinearToSrgbPass {
   
   };
 
-  public static final _programs__glLinearToSrgbPass:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _programs__glLinearToSrgbPass:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static final LINEAR_TO_SRGB_FRAGMENT_SRC:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nout vec4 fragColor;\nvec3 linearToSrgb(vec3 c) {\n  c = max(c, vec3(0.0));\n  vec3 low = c * 12.92;\n  vec3 high = 1.055 * pow(c, vec3(1.0 / 2.4)) - 0.055;\n  return mix(low, high, step(vec3(0.0031308), c));\n}\nvoid main() {\n  vec4 linear = texture(u_texture0, v_texCoord);\n  fragColor = vec4(linearToSrgb(linear.rgb), linear.a);\n}';
 }

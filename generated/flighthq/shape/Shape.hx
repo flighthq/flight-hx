@@ -196,8 +196,8 @@ class Shape {
       a = (((-p0 + (3.0 * p1)) - (3.0 * p2)) + p3);
       b = (2.0 * ((p0 - (2.0 * p1)) + p2));
       c = (-p0 + p1);
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([a] : Array<Dynamic>)), 1e-12, '<'))) {
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([b] : Array<Dynamic>)), 1e-12, '>'))) {
+      if (_Runtime.truthy(_Runtime.compare(HxMath.abs(a), 1e-12, '<'))) {
+        if (_Runtime.truthy(_Runtime.compare(HxMath.abs(b), 1e-12, '>'))) {
           var t:Dynamic = (-c / b);
           if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(t, 0.0, '>'), function():Dynamic return cast _Runtime.compare(t, 1.0, '<')))) { _Runtime.callValue(expand, cast ([_Runtime.callValue(cubicPoint, cast ([t, p0, p1, p2, p3] : Array<Dynamic>)), _Runtime.callValue(cubicPoint, cast ([t, q0, q1, q2, q3] : Array<Dynamic>))] : Array<Dynamic>)); }
         }
@@ -205,7 +205,7 @@ class Shape {
       }
       disc = ((b * b) - ((4.0 * a) * c));
       if (_Runtime.truthy(_Runtime.compare(disc, 0.0, '<'))) { return; }
-      sqrtDisc = _Runtime.callProperty(HxMath, 'sqrt', cast ([disc] : Array<Dynamic>));
+      sqrtDisc = HxMath.sqrt(disc);
       t1 = ((-b + sqrtDisc) / (2.0 * a));
       t2 = ((-b - sqrtDisc) / (2.0 * a));
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(t1, 0.0, '>'), function():Dynamic return cast _Runtime.compare(t1, 1.0, '<')))) { _Runtime.callValue(expand, cast ([_Runtime.callValue(cubicPoint, cast ([t1, p0, p1, p2, p3] : Array<Dynamic>)), _Runtime.callValue(cubicPoint, cast ([t1, q0, q1, q2, q3] : Array<Dynamic>))] : Array<Dynamic>)); }

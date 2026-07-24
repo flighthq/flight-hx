@@ -7,7 +7,7 @@ import flighthq._internal._Runtime;
 class NumberTheory {
   public static function factorial(n:Float):Float {
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isInteger', cast ([n] : Array<Dynamic>))), function():Dynamic return cast _Runtime.compare(n, 0.0, '<')))) { throw _Runtime.rangeError('factorial: n must be a non-negative integer'); }
+    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([n] : Array<Dynamic>))), function():Dynamic return cast _Runtime.compare(n, 0.0, '<')))) { throw _Runtime.rangeError('factorial: n must be a non-negative integer'); }
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(n, 0.0), function():Dynamic return cast _Runtime.strictEquals(n, 1.0)))) { return cast 1.0; }
     result = 1.0;
     {
@@ -22,8 +22,8 @@ class NumberTheory {
   }
 
   public static function gcd(a:Float, b:Float):Float {
-    (a = cast (_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.trunc(a)] : Array<Dynamic>)) : Dynamic));
-    (b = cast (_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.trunc(b)] : Array<Dynamic>)) : Dynamic));
+    (a = cast (HxMath.abs(_Runtime.trunc(a)) : Dynamic));
+    (b = cast (HxMath.abs(_Runtime.trunc(b)) : Dynamic));
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(a, 0.0), function():Dynamic return cast _Runtime.strictEquals(b, 0.0)))) { throw _Runtime.rangeError('gcd: both arguments must not be 0'); }
     while (_Runtime.truthy(!_Runtime.strictEquals(b, 0.0))) {
       var t:Dynamic = b;
@@ -52,7 +52,7 @@ class NumberTheory {
   public static function lcm(a:Float, b:Float):Float {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     g = _Runtime.callValue(gcd, cast ([a, b] : Array<Dynamic>));
-    return cast ((_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.trunc(a)] : Array<Dynamic>)) / g) * _Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.trunc(b)] : Array<Dynamic>)));
+    return cast ((HxMath.abs(_Runtime.trunc(a)) / g) * HxMath.abs(_Runtime.trunc(b)));
     return cast null;
   }
 }

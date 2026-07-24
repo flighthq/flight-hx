@@ -28,7 +28,7 @@ class Screen {
 
   public static final _scratchPoint__screen:Dynamic = { x: 0.0, y: 0.0 };
 
-  public static final _signalSubscriptions__screen:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _signalSubscriptions__screen:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function attachScreenSignals(signals:ScreenSignals):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
@@ -105,9 +105,9 @@ class Screen {
     _cachedScreens = null;
     _screenDetails = null;
     ensureCursorTracking = function ensureCursorTracking():Void {
-      if (_Runtime.truthy(_Runtime.orValue(_cursorTracking, function():Dynamic return cast _Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined')))) { return; }
+      if (_Runtime.truthy(_Runtime.orValue(_cursorTracking, function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined')))) { return; }
       (_cursorTracking = cast (true : Dynamic));
-      _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'addEventListener', cast (['pointermove', function(e:Dynamic) {
+      _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['pointermove', function(e:Dynamic) {
         (_cursorX = cast (_Runtime.field(e, 'screenX') : Dynamic));
         (_cursorY = cast (_Runtime.field(e, 'screenY') : Dynamic));
       }] : Array<Dynamic>));
@@ -131,8 +131,8 @@ class Screen {
       _Runtime.setField(out, 'refreshRate', _Runtime.select(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(sd, 'refreshRate')), 'number'), function():Dynamic return cast _Runtime.compare(_Runtime.field(sd, 'refreshRate'), 0.0, '>')), function():Dynamic return cast _Runtime.field(sd, 'refreshRate'), function():Dynamic return cast -1.0));
       _Runtime.setField(out, 'colorDepth', _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(sd, 'colorDepth')), 'number'), function():Dynamic return cast _Runtime.field(sd, 'colorDepth'), function():Dynamic return cast -1.0));
       _Runtime.setField(out, 'pixelDepth', _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(sd, 'pixelDepth')), 'number'), function():Dynamic return cast _Runtime.field(sd, 'pixelDepth'), function():Dynamic return cast -1.0));
-      _Runtime.setField(out, 'physicalWidth', _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.field(out, 'width') * _Runtime.field(out, 'scaleFactor'))] : Array<Dynamic>)));
-      _Runtime.setField(out, 'physicalHeight', _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.field(out, 'height') * _Runtime.field(out, 'scaleFactor'))] : Array<Dynamic>)));
+      _Runtime.setField(out, 'physicalWidth', HxMath.round((_Runtime.field(out, 'width') * _Runtime.field(out, 'scaleFactor'))));
+      _Runtime.setField(out, 'physicalHeight', HxMath.round((_Runtime.field(out, 'height') * _Runtime.field(out, 'scaleFactor'))));
       _Runtime.setField(out, 'isHdr', _Runtime.callValue(Screen.getWebIsHdr__screen, cast ([] : Array<Dynamic>)));
       _Runtime.setField(out, 'colorSpace', _Runtime.callValue(Screen.getWebColorSpace__screen, cast ([] : Array<Dynamic>)));
       _Runtime.setField(out, 'maxLuminance', -1.0);
@@ -145,7 +145,7 @@ class Screen {
     };
     buildCurrentScreenInfo = function buildCurrentScreenInfo(out:ScreenInfo):Void {
       var s:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'screen')), 'undefined')))) {
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('window'), 'screen')), 'undefined')))) {
         _Runtime.callValue(Screen.fillDefaultScreenInfo__screen, cast ([out] : Array<Dynamic>));
         return;
       }
@@ -157,7 +157,7 @@ class Screen {
         _Runtime.callValue(buildScreenInfoFromDetailed, cast ([current, _Runtime.select(_Runtime.compare(currentIndex, 0.0, '>='), function():Dynamic return cast currentIndex, function():Dynamic return cast 0.0), primaryIndex, out] : Array<Dynamic>));
         return;
       }
-      s = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'screen');
+      s = _Runtime.field(_Runtime.globalValue('window'), 'screen');
       _Runtime.setField(out, 'id', 0.0);
       _Runtime.setField(out, 'x', 0.0);
       _Runtime.setField(out, 'y', 0.0);
@@ -165,15 +165,15 @@ class Screen {
       _Runtime.setField(out, 'height', _Runtime.field(s, 'height'));
       _Runtime.setField(out, 'workWidth', _Runtime.field(s, 'availWidth'));
       _Runtime.setField(out, 'workHeight', _Runtime.field(s, 'availHeight'));
-      _Runtime.setField(out, 'scaleFactor', _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'devicePixelRatio')), 'number'), function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'devicePixelRatio'), function():Dynamic return cast 1.0));
+      _Runtime.setField(out, 'scaleFactor', _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('window'), 'devicePixelRatio')), 'number'), function():Dynamic return cast _Runtime.field(_Runtime.globalValue('window'), 'devicePixelRatio'), function():Dynamic return cast 1.0));
       _Runtime.setField(out, 'isPrimary', true);
       _Runtime.setField(out, 'rotation', _Runtime.callValue(Screen.getWebRotation__screen, cast ([] : Array<Dynamic>)));
       _Runtime.setField(out, 'orientation', _Runtime.callValue(Screen.getWebOrientation__screen, cast ([] : Array<Dynamic>)));
       _Runtime.setField(out, 'refreshRate', -1.0);
       _Runtime.setField(out, 'colorDepth', _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(s, 'colorDepth')), 'number'), function():Dynamic return cast _Runtime.field(s, 'colorDepth'), function():Dynamic return cast -1.0));
       _Runtime.setField(out, 'pixelDepth', _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(s, 'pixelDepth')), 'number'), function():Dynamic return cast _Runtime.field(s, 'pixelDepth'), function():Dynamic return cast -1.0));
-      _Runtime.setField(out, 'physicalWidth', _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.field(out, 'width') * _Runtime.field(out, 'scaleFactor'))] : Array<Dynamic>)));
-      _Runtime.setField(out, 'physicalHeight', _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.field(out, 'height') * _Runtime.field(out, 'scaleFactor'))] : Array<Dynamic>)));
+      _Runtime.setField(out, 'physicalWidth', HxMath.round((_Runtime.field(out, 'width') * _Runtime.field(out, 'scaleFactor'))));
+      _Runtime.setField(out, 'physicalHeight', HxMath.round((_Runtime.field(out, 'height') * _Runtime.field(out, 'scaleFactor'))));
       _Runtime.setField(out, 'isHdr', _Runtime.callValue(Screen.getWebIsHdr__screen, cast ([] : Array<Dynamic>)));
       _Runtime.setField(out, 'colorSpace', _Runtime.callValue(Screen.getWebColorSpace__screen, cast ([] : Array<Dynamic>)));
       _Runtime.setField(out, 'maxLuminance', -1.0);
@@ -185,7 +185,7 @@ class Screen {
       _Runtime.setField(out, 'monochrome', false);
     };
     backend = { _upgrade: upgradeToScreenDetails, getScreens: function(out:Dynamic) {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'screen')), 'undefined')))) {
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('window'), 'screen')), 'undefined')))) {
         _Runtime.setLength(out, 0.0);
         return cast out;
       }
@@ -210,7 +210,7 @@ class Screen {
       (_cachedScreens = cast (cast ([_Runtime.mergeObjects([_Runtime.getIndex(out, 0.0)])] : Array<Dynamic>) : Dynamic));
       return cast out;
     }, getPrimaryScreen: function(out:Dynamic) {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'screen')), 'undefined')))) {
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('window'), 'screen')), 'undefined')))) {
         _Runtime.callValue(Screen.fillDefaultScreenInfo__screen, cast ([out] : Array<Dynamic>));
         return cast out;
       }
@@ -229,7 +229,7 @@ class Screen {
       var handleChange:Dynamic = cast _Runtime.UNDEFINED;
       var orientation:Dynamic = cast _Runtime.UNDEFINED;
       var detailsRef:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'))) { return cast function() {
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast function() {
       
       }; }
       if (_Runtime.truthy(_Runtime.strictEquals(_cachedScreens, null))) {
@@ -282,17 +282,17 @@ class Screen {
         }
         changed = _Runtime.callValue(Screen.diffScreenInfo__screen, cast ([prev, scratch] : Array<Dynamic>));
         if (_Runtime.truthy(!_Runtime.strictEquals(changed, null))) {
-          _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'assign', cast ([prev, scratch] : Array<Dynamic>));
+          flighthq._internal.DynamicObject.assign(prev, scratch);
           _Runtime.callValue(listener, cast ([{ kind: 'ScreenMetricsChanged', screen: scratch, changedMetrics: changed }] : Array<Dynamic>));
         }
       };
-      _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'addEventListener', cast (['resize', handleChange] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['resize', handleChange] : Array<Dynamic>));
       orientation = _Runtime.callValue(Screen.getWebScreenOrientationObject__screen, cast ([] : Array<Dynamic>));
       _Runtime.callOptionalProperty(orientation, 'addEventListener', cast (['change', handleChange] : Array<Dynamic>));
       detailsRef = _screenDetails;
       _Runtime.callOptionalProperty(detailsRef, 'addEventListener', cast (['screenschange', handleChange] : Array<Dynamic>));
       return cast function() {
-        _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'removeEventListener', cast (['resize', handleChange] : Array<Dynamic>));
+        _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast (['resize', handleChange] : Array<Dynamic>));
         _Runtime.callOptionalProperty(orientation, 'removeEventListener', cast (['change', handleChange] : Array<Dynamic>));
         _Runtime.callOptionalProperty(detailsRef, 'removeEventListener', cast (['screenschange', handleChange] : Array<Dynamic>));
       };
@@ -452,8 +452,8 @@ class Screen {
     bestScreen = _Runtime.getIndex(screens, 0.0);
     bestOverlap = -1.0;
     for (screen in _Runtime.iterable(screens)) {
-      var ox:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([0.0, (_Runtime.callProperty(HxMath, 'min', cast ([(_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width')), (_Runtime.field(screen, 'x') + _Runtime.field(screen, 'width'))] : Array<Dynamic>)) - _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(rect, 'x'), _Runtime.field(screen, 'x')] : Array<Dynamic>)))] : Array<Dynamic>));
-      var oy:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([0.0, (_Runtime.callProperty(HxMath, 'min', cast ([(_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')), (_Runtime.field(screen, 'y') + _Runtime.field(screen, 'height'))] : Array<Dynamic>)) - _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(rect, 'y'), _Runtime.field(screen, 'y')] : Array<Dynamic>)))] : Array<Dynamic>));
+      var ox:Dynamic = HxMath.max(0.0, (HxMath.min((_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width')), (_Runtime.field(screen, 'x') + _Runtime.field(screen, 'width'))) - HxMath.max(_Runtime.field(rect, 'x'), _Runtime.field(screen, 'x'))));
+      var oy:Dynamic = HxMath.max(0.0, (HxMath.min((_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')), (_Runtime.field(screen, 'y') + _Runtime.field(screen, 'height'))) - HxMath.max(_Runtime.field(rect, 'y'), _Runtime.field(screen, 'y'))));
       var overlap:Dynamic = (ox * oy);
       if (_Runtime.truthy(_Runtime.compare(overlap, bestOverlap, '>'))) {
         (bestOverlap = cast (overlap : Dynamic));
@@ -506,9 +506,9 @@ class Screen {
 
   public static function getScreenDetailPermission():flighthq._internal._Promise<String> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<String> {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'permissions'))))) { return cast 'prompt'; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.globalValue('navigator'), 'permissions'))))) { return cast 'prompt'; }
       try {
-        var status:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'permissions'), 'query', cast ([{ name: (cast 'window-management' : PermissionName) }] : Array<Dynamic>)));
+        var status:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.field(_Runtime.globalValue('navigator'), 'permissions'), 'query', cast ([{ name: (cast 'window-management' : PermissionName) }] : Array<Dynamic>)));
         return cast (cast _Runtime.field(status, 'state') : String);
       } catch (__error:Dynamic) {
         return cast 'prompt';
@@ -617,16 +617,16 @@ class Screen {
   }
 
   public static function getWebColorSpace__screen():ScreenColorSpace {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'matchMedia')), 'function')))) { return cast 'srgb'; }
-    if (_Runtime.truthy(_Runtime.field(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'matchMedia', cast (['(color-gamut: rec2020)'] : Array<Dynamic>)), 'matches'))) { return cast 'rec2020'; }
-    if (_Runtime.truthy(_Runtime.field(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'matchMedia', cast (['(color-gamut: p3)'] : Array<Dynamic>)), 'matches'))) { return cast 'display-p3'; }
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('window'), 'matchMedia')), 'function')))) { return cast 'srgb'; }
+    if (_Runtime.truthy(_Runtime.field(_Runtime.callProperty(_Runtime.globalValue('window'), 'matchMedia', cast (['(color-gamut: rec2020)'] : Array<Dynamic>)), 'matches'))) { return cast 'rec2020'; }
+    if (_Runtime.truthy(_Runtime.field(_Runtime.callProperty(_Runtime.globalValue('window'), 'matchMedia', cast (['(color-gamut: p3)'] : Array<Dynamic>)), 'matches'))) { return cast 'display-p3'; }
     return cast 'srgb';
     return cast null;
   }
 
   public static function getWebIsHdr__screen():Bool {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'matchMedia')), 'function')))) { return cast false; }
-    return cast _Runtime.field(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'matchMedia', cast (['(dynamic-range: high)'] : Array<Dynamic>)), 'matches');
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('window'), 'matchMedia')), 'function')))) { return cast false; }
+    return cast _Runtime.field(_Runtime.callProperty(_Runtime.globalValue('window'), 'matchMedia', cast (['(dynamic-range: high)'] : Array<Dynamic>)), 'matches');
     return cast null;
   }
 
@@ -654,8 +654,8 @@ class Screen {
 
   public static function getWebScreenOrientationObject__screen():Null<WebScreenOrientationObject__screen> {
     var s:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'screen')), 'undefined')))) { return cast null; }
-    s = (cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'screen') : Dynamic);
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('window'), 'screen')), 'undefined')))) { return cast null; }
+    s = (cast _Runtime.field(_Runtime.globalValue('window'), 'screen') : Dynamic);
     return cast _Runtime.coalesce(_Runtime.field(s, 'orientation'), function():Dynamic return cast null);
     return cast null;
   }
@@ -669,7 +669,7 @@ class Screen {
     var status:Null<Dynamic> = cast _Runtime.UNDEFINED;
     var cancelled:Dynamic = cast _Runtime.UNDEFINED;
     var handleChange:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'permissions'))))) { return cast function() {
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.globalValue('navigator'), 'permissions'))))) { return cast function() {
     
     }; }
     status = null;
@@ -677,7 +677,7 @@ class Screen {
     handleChange = function() {
       if (_Runtime.truthy(!_Runtime.strictEquals(status, null))) { _Runtime.callValue(listener, cast ([(cast _Runtime.field(status, 'state') : String)] : Array<Dynamic>)); }
     };
-    _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'permissions'), 'query', cast ([{ name: (cast 'window-management' : PermissionName) }] : Array<Dynamic>)), 'then', cast ([function(s:Dynamic) {
+    _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(_Runtime.field(_Runtime.globalValue('navigator'), 'permissions'), 'query', cast ([{ name: (cast 'window-management' : PermissionName) }] : Array<Dynamic>)), 'then', cast ([function(s:Dynamic) {
       if (_Runtime.truthy(cancelled)) { return; }
       (status = cast (s : Dynamic));
       _Runtime.callProperty(s, 'addEventListener', cast (['change', handleChange] : Array<Dynamic>));
@@ -697,8 +697,8 @@ class Screen {
   public static function requestScreenDetails():flighthq._internal._Promise<Bool> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Bool> {
       var win:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'))) { return cast false; }
-      win = (cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : { @:optional var getScreenDetails:Dynamic; });
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast false; }
+      win = (cast _Runtime.globalValue('window') : { @:optional var getScreenDetails:Dynamic; });
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(win, 'getScreenDetails')), 'function'))) { return cast false; }
       try {
         var details:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(win, 'getScreenDetails', cast ([] : Array<Dynamic>)));

@@ -19,8 +19,8 @@ class SurfaceRotate {
     var destPivotY:Dynamic = cast _Runtime.UNDEFINED;
     var e:Dynamic = cast _Runtime.UNDEFINED;
     var f:Dynamic = cast _Runtime.UNDEFINED;
-    cosA = _Runtime.callProperty(HxMath, 'cos', cast ([-angle] : Array<Dynamic>));
-    sinA = _Runtime.callProperty(HxMath, 'sin', cast ([-angle] : Array<Dynamic>));
+    cosA = HxMath.cos(-angle);
+    sinA = HxMath.sin(-angle);
     destPivotX = ((_Runtime.field(dest, 'width') - 1.0) / 2.0);
     destPivotY = ((_Runtime.field(dest, 'height') - 1.0) / 2.0);
     e = ((pivotX - (cosA * destPivotX)) + (sinA * destPivotY));
@@ -35,8 +35,8 @@ class SurfaceRotate {
     var dd:Dynamic = cast _Runtime.UNDEFINED;
     var sStride:Dynamic = cast _Runtime.UNDEFINED;
     var dStride:Dynamic = cast _Runtime.UNDEFINED;
-    w = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'width'), _Runtime.field(source, 'width')] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'height'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+    w = HxMath.min(_Runtime.field(dest, 'width'), _Runtime.field(source, 'width'));
+    h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
     if (_Runtime.truthy(_Runtime.callValue(SurfaceRotate.isSameRegion__surfaceRotate, cast ([dest, source] : Array<Dynamic>)))) {
       var data:Dynamic = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
       var stride:Dynamic = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
@@ -46,9 +46,9 @@ class SurfaceRotate {
         var k:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(k, half, '<'))) {
           var ax:Dynamic = (_Runtime.field(dest, 'x') + (k % w));
-          var ay:Dynamic = (_Runtime.field(dest, 'y') + _Runtime.callProperty(HxMath, 'floor', cast ([(k / w)] : Array<Dynamic>)));
+          var ay:Dynamic = (_Runtime.field(dest, 'y') + HxMath.floor((k / w)));
           var bx:Dynamic = (_Runtime.field(dest, 'x') + ((w - 1.0) - (k % w)));
-          var by:Dynamic = (_Runtime.field(dest, 'y') + ((h - 1.0) - _Runtime.callProperty(HxMath, 'floor', cast ([(k / w)] : Array<Dynamic>))));
+          var by:Dynamic = (_Runtime.field(dest, 'y') + ((h - 1.0) - HxMath.floor((k / w))));
           if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.callValue(SurfaceRotate.inBounds__surfaceRotate, cast ([ax, ay, stride, _Runtime.field(_Runtime.field(dest, 'surface'), 'height')] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(SurfaceRotate.inBounds__surfaceRotate, cast ([bx, by, stride, _Runtime.field(_Runtime.field(dest, 'surface'), 'height')] : Array<Dynamic>)))))) { k++; continue; }
           _Runtime.callValue(SurfaceRotate.swapPixels__surfaceRotate, cast ([data, (((ay * stride) + ax) * 4.0), (((by * stride) + bx) * 4.0)] : Array<Dynamic>));
           k++;

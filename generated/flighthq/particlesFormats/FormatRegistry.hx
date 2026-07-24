@@ -56,5 +56,5 @@ class FormatRegistry {
     return cast null;
   }
 
-  public static final _registry__formatRegistry:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+  public static final _registry__formatRegistry:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
 }

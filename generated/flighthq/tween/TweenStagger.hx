@@ -49,11 +49,11 @@ class TweenStagger {
       (normalizedPosition = cast ((((count - 1.0) - index) / (count - 1.0)) : Dynamic));
     } else { if (_Runtime.truthy(_Runtime.strictEquals(from, 'center'))) {
       var center:Dynamic = ((count - 1.0) / 2.0);
-      (normalizedPosition = cast ((_Runtime.callProperty(HxMath, 'abs', cast ([(index - center)] : Array<Dynamic>)) / center) : Dynamic));
+      (normalizedPosition = cast ((HxMath.abs((index - center)) / center) : Dynamic));
     } else {
-      var origin:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([from, (count - 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
-      var maxDistance:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([origin, ((count - 1.0) - origin)] : Array<Dynamic>));
-      (normalizedPosition = cast (_Runtime.select(_Runtime.compare(maxDistance, 0.0, '>'), function():Dynamic return cast (_Runtime.callProperty(HxMath, 'abs', cast ([(index - origin)] : Array<Dynamic>)) / maxDistance), function():Dynamic return cast 0.0) : Dynamic));
+      var origin:Dynamic = HxMath.max(0.0, HxMath.min(from, (count - 1.0)));
+      var maxDistance:Dynamic = HxMath.max(origin, ((count - 1.0) - origin));
+      (normalizedPosition = cast (_Runtime.select(_Runtime.compare(maxDistance, 0.0, '>'), function():Dynamic return cast (HxMath.abs((index - origin)) / maxDistance), function():Dynamic return cast 0.0) : Dynamic));
     } } }
     eased = _Runtime.select(!_Runtime.strictEquals(staggerEase, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callValue(staggerEase, cast ([normalizedPosition] : Array<Dynamic>)), function():Dynamic return cast normalizedPosition);
     return cast ((eased * each) * (count - 1.0));

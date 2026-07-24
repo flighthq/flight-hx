@@ -62,7 +62,7 @@ class Plane {
     b = _Runtime.field(source, 'b');
     c = _Runtime.field(source, 'c');
     d = _Runtime.field(source, 'd');
-    len = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((a * a) + (b * b)) + (c * c))] : Array<Dynamic>));
+    len = HxMath.sqrt((((a * a) + (b * b)) + (c * c)));
     if (_Runtime.truthy(_Runtime.strictEquals(len, 0.0))) {
       _Runtime.setField(out, 'a', a);
       _Runtime.setField(out, 'b', b);
@@ -126,7 +126,7 @@ class Plane {
     nx = ((e1y * e2z) - (e1z * e2y));
     ny = ((e1z * e2x) - (e1x * e2z));
     nz = ((e1x * e2y) - (e1y * e2x));
-    len = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((nx * nx) + (ny * ny)) + (nz * nz))] : Array<Dynamic>));
+    len = HxMath.sqrt((((nx * nx) + (ny * ny)) + (nz * nz)));
     if (_Runtime.truthy(_Runtime.strictEquals(len, 0.0))) {
       _Runtime.setField(out, 'a', nx);
       _Runtime.setField(out, 'b', ny);

@@ -48,22 +48,22 @@ class Statusbar {
 
   public static final _styleStack__statusbar:Array<{ var handle:StatusBarStyleEntryHandle; var entry:StatusBarStyleEntry; }> = cast ([] : Array<Dynamic>);
 
-  public static final _subscriptions__statusbar:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _subscriptions__statusbar:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function _webReadThemeColor__statusbar():Float {
     var meta:Dynamic = cast _Runtime.UNDEFINED;
     var content:Dynamic = cast _Runtime.UNDEFINED;
     var hex:Dynamic = cast _Runtime.UNDEFINED;
     var rgb:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'))) { return cast 0.0; }
-    meta = _Runtime.callOptionalProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'head'), 'querySelector', cast (['meta[name="theme-color"]'] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return cast 0.0; }
+    meta = _Runtime.callOptionalProperty(_Runtime.field(_Runtime.globalValue('document'), 'head'), 'querySelector', cast (['meta[name="theme-color"]'] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(meta, null), function():Dynamic return cast _Runtime.strictEquals(meta, _Runtime.field(_Runtime, 'UNDEFINED'))))) { return cast 0.0; }
     content = _Runtime.callProperty(meta, 'getAttribute', cast (['content'] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(content, null), function():Dynamic return cast !_Runtime.truthy(StringTools.startsWith(content, '#'))))) { return cast 0.0; }
     hex = _Runtime.slice(content, 1.0, null);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(hex, 'length'), 6.0))) { return cast 0.0; }
-    rgb = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([hex, 16.0] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['isNaN'] : Array<Dynamic>)), cast ([rgb] : Array<Dynamic>)))) { return cast 0.0; }
+    rgb = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([hex, 16.0] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([rgb] : Array<Dynamic>)))) { return cast 0.0; }
     return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int(rgb) << Std.int(8.0))) | Std.int(255.0))), Std.int(0.0));
     return cast null;
   }
@@ -102,12 +102,12 @@ class Statusbar {
     }, setBackgroundColor: function(color:Float, ?_animated:Bool) {
       var head:Dynamic = cast _Runtime.UNDEFINED;
       var meta:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'))) { return; }
-      head = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'head');
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return; }
+      head = _Runtime.field(_Runtime.globalValue('document'), 'head');
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(head, null), function():Dynamic return cast _Runtime.strictEquals(head, _Runtime.field(_Runtime, 'UNDEFINED'))))) { return; }
       meta = _Runtime.callProperty(head, 'querySelector', cast (['meta[name="theme-color"]'] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(meta, null))) {
-        (meta = cast (_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['meta'] : Array<Dynamic>)) : Dynamic));
+        (meta = cast (_Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['meta'] : Array<Dynamic>)) : Dynamic));
         _Runtime.callProperty(meta, 'setAttribute', cast (['name', 'theme-color'] : Array<Dynamic>));
         _Runtime.callProperty(head, 'appendChild', cast ([meta] : Array<Dynamic>));
       }

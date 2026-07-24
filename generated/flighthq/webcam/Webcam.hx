@@ -23,13 +23,13 @@ class Webcam {
 
   public static function createWebWebcamBackend():WebcamBackend {
     return cast { capture: function(options:Dynamic) {
-      return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(resolve:Dynamic) {
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement')), 'function')))) {
+      return cast _Runtime.construct(_Runtime.globalValue('Promise'), [function(resolve:Dynamic) {
+        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('document'), 'createElement')), 'function')))) {
           _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
           return;
         }
         try {
-          var input:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['input'] : Array<Dynamic>));
+          var input:Dynamic = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['input'] : Array<Dynamic>));
           _Runtime.setField(input, 'type', 'file');
           _Runtime.setField(input, 'accept', 'image/*');
           if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(options, 'source'), 'camera'))) { _Runtime.setField(input, 'capture', 'environment'); }
@@ -41,7 +41,7 @@ class Webcam {
               _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
               return;
             }
-            reader = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['FileReader'] : Array<Dynamic>)), []);
+            reader = _Runtime.construct(_Runtime.globalValue('FileReader'), []);
             _Runtime.setField(reader, 'onload', function() {
               _Runtime.callValue(resolve, cast ([{ dataUrl: _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(reader, 'result')), 'string'), function():Dynamic return cast _Runtime.field(reader, 'result'), function():Dynamic return cast ''), width: 0.0, height: 0.0, format: _Runtime.field(file, 'type') }] : Array<Dynamic>));
             });
@@ -54,13 +54,13 @@ class Webcam {
         }
       }]);
     }, captureVideo: function(options:Dynamic) {
-      return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(resolve:Dynamic) {
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement')), 'function')))) {
+      return cast _Runtime.construct(_Runtime.globalValue('Promise'), [function(resolve:Dynamic) {
+        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('document'), 'createElement')), 'function')))) {
           _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
           return;
         }
         try {
-          var input:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['input'] : Array<Dynamic>));
+          var input:Dynamic = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['input'] : Array<Dynamic>));
           _Runtime.setField(input, 'type', 'file');
           _Runtime.setField(input, 'accept', 'video/*');
           if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(options, 'source'), 'camera'))) { _Runtime.setField(input, 'capture', 'environment'); }
@@ -72,7 +72,7 @@ class Webcam {
               _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
               return;
             }
-            reader = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['FileReader'] : Array<Dynamic>)), []);
+            reader = _Runtime.construct(_Runtime.globalValue('FileReader'), []);
             _Runtime.setField(reader, 'onload', function() {
               _Runtime.callValue(resolve, cast ([{ dataUrl: _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(reader, 'result')), 'string'), function():Dynamic return cast _Runtime.field(reader, 'result'), function():Dynamic return cast ''), duration: 0.0, format: _Runtime.field(file, 'type') }] : Array<Dynamic>));
             });
@@ -85,9 +85,9 @@ class Webcam {
         }
       }]);
     }, requestPermission: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast false; }
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast false; }
       try {
-        var permissions:Dynamic = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'permissions');
+        var permissions:Dynamic = _Runtime.field(_Runtime.globalValue('navigator'), 'permissions');
         if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(permissions, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(permissions, 'query')), 'function')))) { return cast false; }
         var status:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(permissions, 'query', cast ([{ name: (cast 'camera' : PermissionName) }] : Array<Dynamic>)));
         return cast _Runtime.strictEquals(_Runtime.field(status, 'state'), 'granted');

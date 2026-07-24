@@ -21,22 +21,22 @@ class GlSceneRuntime {
     if (_Runtime.truthy(_Runtime.strictEquals(scene, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
     gl = _Runtime.field(state, 'gl');
     for (program in _Runtime.iterable(_Runtime.callProperty(_Runtime.field(scene, 'programCache'), 'values', cast ([] : Array<Dynamic>)))) {
-      _Runtime.callProperty(gl, 'deleteProgram', cast ([_Runtime.field(program, 'program')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteProgram', cast ([_Runtime.field(program, 'program')] : Array<Dynamic>));
     }
     _Runtime.callProperty(_Runtime.field(scene, 'programCache'), 'clear', cast ([] : Array<Dynamic>));
     _Runtime.setField(scene, 'activeMeshProgram', null);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(scene, 'ibl'), null))) {
-      _Runtime.callProperty(gl, 'deleteTexture', cast ([_Runtime.field(_Runtime.field(scene, 'ibl'), 'brdfLut')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'deleteTexture', cast ([_Runtime.field(_Runtime.field(scene, 'ibl'), 'irradianceCube')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'deleteTexture', cast ([_Runtime.field(_Runtime.field(scene, 'ibl'), 'prefilteredCube')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteTexture', cast ([_Runtime.field(_Runtime.field(scene, 'ibl'), 'brdfLut')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteTexture', cast ([_Runtime.field(_Runtime.field(scene, 'ibl'), 'irradianceCube')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteTexture', cast ([_Runtime.field(_Runtime.field(scene, 'ibl'), 'prefilteredCube')] : Array<Dynamic>));
       _Runtime.setField(scene, 'ibl', null);
     }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(scene, 'iblBakeFramebuffer'), null))) {
-      _Runtime.callProperty(gl, 'deleteFramebuffer', cast ([_Runtime.field(scene, 'iblBakeFramebuffer')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteFramebuffer', cast ([_Runtime.field(scene, 'iblBakeFramebuffer')] : Array<Dynamic>));
       _Runtime.setField(scene, 'iblBakeFramebuffer', null);
     }
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(scene, 'environmentSourceCube'), null))) {
-      _Runtime.callProperty(gl, 'deleteTexture', cast ([_Runtime.field(scene, 'environmentSourceCube')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteTexture', cast ([_Runtime.field(scene, 'environmentSourceCube')] : Array<Dynamic>));
       _Runtime.setField(scene, 'environmentSourceCube', null);
     }
     _Runtime.callValue(destroyGlBakePrograms, cast ([state] : Array<Dynamic>));
@@ -74,7 +74,7 @@ class GlSceneRuntime {
     stateRuntime = (cast _Runtime.getIndex(state, EntityRuntimeKey) : GlRenderStateRuntime);
     scene = _Runtime.callProperty(GlSceneRuntime.sceneRuntimes__glSceneRuntime, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(scene, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (scene = cast ({ activeMeshProgram: null, activeSkinnedRun: false, blendedDrawList: cast ([] : Array<Dynamic>), blendedPool: cast ([] : Array<Dynamic>), environmentSourceCube: null, ibl: null, iblBakeFramebuffer: null, materialRegistry: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), modifierSnippetRegistry: null, opaqueDrawList: cast ([] : Array<Dynamic>), opaquePool: cast ([] : Array<Dynamic>), programCache: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), shadow: null, shadowTarget: null, skinPalette: null, time: 0.0, uploadCache: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []) } : Dynamic));
+      (scene = cast ({ activeMeshProgram: null, activeSkinnedRun: false, blendedDrawList: cast ([] : Array<Dynamic>), blendedPool: cast ([] : Array<Dynamic>), environmentSourceCube: null, ibl: null, iblBakeFramebuffer: null, materialRegistry: _Runtime.construct(_Runtime.globalValue('Map'), []), modifierSnippetRegistry: null, opaqueDrawList: cast ([] : Array<Dynamic>), opaquePool: cast ([] : Array<Dynamic>), programCache: _Runtime.construct(_Runtime.globalValue('Map'), []), shadow: null, shadowTarget: null, skinPalette: null, time: 0.0, uploadCache: _Runtime.construct(_Runtime.globalValue('WeakMap'), []) } : Dynamic));
       _Runtime.callProperty(GlSceneRuntime.sceneRuntimes__glSceneRuntime, 'set', cast ([state, scene] : Array<Dynamic>));
       _Runtime.setField(stateRuntime, 'sceneMeshMaterialRegistry', _Runtime.field(scene, 'materialRegistry'));
       _Runtime.setField(stateRuntime, 'sceneMeshUploadCache', (cast (cast _Runtime.field(scene, 'uploadCache') : Dynamic) : Dynamic));
@@ -83,5 +83,5 @@ class GlSceneRuntime {
     return cast null;
   }
 
-  public static final sceneRuntimes__glSceneRuntime:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final sceneRuntimes__glSceneRuntime:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

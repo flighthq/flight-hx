@@ -55,7 +55,7 @@ class MeshGeometryTransforms {
     tanFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(source, 'layout'), 'tangent'] : Array<Dynamic>));
     srcVerts = _Runtime.field(source, 'vertices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(source, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(srcVerts, 'length') / floatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(srcVerts, 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
     dstVerts = _Runtime.select(_Runtime.strictEquals(out, source), function():Dynamic return cast srcVerts, function():Dynamic return cast _Runtime.field(out, 'vertices'));
     if (_Runtime.truthy(!_Runtime.strictEquals(out, source))) {
       _Runtime.callProperty(dstVerts, 'set', cast ([srcVerts] : Array<Dynamic>));
@@ -81,7 +81,7 @@ class MeshGeometryTransforms {
           var tnx:Dynamic = (((_Runtime.getIndex(invT, 0.0) * nx) + (_Runtime.getIndex(invT, 3.0) * ny)) + (_Runtime.getIndex(invT, 6.0) * nz));
           var tny:Dynamic = (((_Runtime.getIndex(invT, 1.0) * nx) + (_Runtime.getIndex(invT, 4.0) * ny)) + (_Runtime.getIndex(invT, 7.0) * nz));
           var tnz:Dynamic = (((_Runtime.getIndex(invT, 2.0) * nx) + (_Runtime.getIndex(invT, 5.0) * ny)) + (_Runtime.getIndex(invT, 8.0) * nz));
-          var len:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((tnx * tnx) + (tny * tny)) + (tnz * tnz))] : Array<Dynamic>));
+          var len:Dynamic = HxMath.sqrt((((tnx * tnx) + (tny * tny)) + (tnz * tnz)));
           if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
             (tnx = cast ((tnx / len) : Dynamic));
             (tny = cast ((tny / len) : Dynamic));
@@ -100,7 +100,7 @@ class MeshGeometryTransforms {
           var ttx:Dynamic = (((_Runtime.getIndex(invT, 0.0) * tx) + (_Runtime.getIndex(invT, 3.0) * ty)) + (_Runtime.getIndex(invT, 6.0) * tz));
           var tty:Dynamic = (((_Runtime.getIndex(invT, 1.0) * tx) + (_Runtime.getIndex(invT, 4.0) * ty)) + (_Runtime.getIndex(invT, 7.0) * tz));
           var ttz:Dynamic = (((_Runtime.getIndex(invT, 2.0) * tx) + (_Runtime.getIndex(invT, 5.0) * ty)) + (_Runtime.getIndex(invT, 8.0) * tz));
-          var len:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((ttx * ttx) + (tty * tty)) + (ttz * ttz))] : Array<Dynamic>));
+          var len:Dynamic = HxMath.sqrt((((ttx * ttx) + (tty * tty)) + (ttz * ttz)));
           if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
             (ttx = cast ((ttx / len) : Dynamic));
             (tty = cast ((tty / len) : Dynamic));
@@ -130,7 +130,7 @@ class MeshGeometryTransforms {
     posFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(geometry, 'layout'), 'position'] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(posFloatOffset, 0.0, '<'))) { return; }
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
     verts = _Runtime.field(geometry, 'vertices');
     {
       var i:Dynamic = 0.0;
@@ -196,9 +196,9 @@ class MeshGeometryTransforms {
     c21 = -((a00 * a12) - (a02 * a10));
     c22 = ((a00 * a11) - (a01 * a10));
     det = (((a00 * c00) + (a01 * c01)) + (a02 * c02));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([det] : Array<Dynamic>)), 1e-10, '<'))) { return cast null; }
+    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(det), 1e-10, '<'))) { return cast null; }
     invDet = (1.0 / det);
-    out = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [9.0]);
+    out = _Runtime.construct(_Runtime.globalValue('Float32Array'), [9.0]);
     _Runtime.setIndex(out, 0.0, (c00 * invDet));
     _Runtime.setIndex(out, 1.0, (c10 * invDet));
     _Runtime.setIndex(out, 2.0, (c20 * invDet));
@@ -228,7 +228,7 @@ class MeshGeometryTransforms {
     tanFloatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(source, 'layout'), 'tangent'] : Array<Dynamic>));
     srcVerts = _Runtime.field(source, 'vertices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(source, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(srcVerts, 'length') / floatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(srcVerts, 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
     dstVerts = _Runtime.field(out, 'vertices');
     if (_Runtime.truthy(!_Runtime.strictEquals(out, source))) {
       _Runtime.callProperty(dstVerts, 'set', cast ([srcVerts] : Array<Dynamic>));
@@ -257,7 +257,7 @@ class MeshGeometryTransforms {
           var nnx:Dynamic = (nx * invSx);
           var nny:Dynamic = (ny * invSy);
           var nnz:Dynamic = (nz * invSz);
-          var len:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((nnx * nnx) + (nny * nny)) + (nnz * nnz))] : Array<Dynamic>));
+          var len:Dynamic = HxMath.sqrt((((nnx * nnx) + (nny * nny)) + (nnz * nnz)));
           if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
             (nnx = cast ((nnx / len) : Dynamic));
             (nny = cast ((nny / len) : Dynamic));
@@ -276,7 +276,7 @@ class MeshGeometryTransforms {
           var ntx:Dynamic = (ttx * invSx);
           var nty:Dynamic = (tty * invSy);
           var ntz:Dynamic = (ttz * invSz);
-          var len:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((ntx * ntx) + (nty * nty)) + (ntz * ntz))] : Array<Dynamic>));
+          var len:Dynamic = HxMath.sqrt((((ntx * ntx) + (nty * nty)) + (ntz * ntz)));
           if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
             (ntx = cast ((ntx / len) : Dynamic));
             (nty = cast ((nty / len) : Dynamic));

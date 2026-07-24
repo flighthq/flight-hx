@@ -44,16 +44,16 @@ class SubsurfacePbrGlMeshMaterialRenderer {
     _Runtime.callValue(setGlMeshCameraPosition, cast ([gl, _Runtime.field(program, 'locCameraPosition'), camera] : Array<Dynamic>));
     _Runtime.callValue(bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
     _Runtime.callValue(bindGlPbrStandardBlock, cast ([state, program, standard] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), _Runtime.select(!_Runtime.strictEquals(subsurface, null), function():Dynamic return cast _Runtime.field(subsurface, 'alphaCutoff'), function():Dynamic return cast 0.5)] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), _Runtime.select(!_Runtime.strictEquals(subsurface, null), function():Dynamic return cast _Runtime.field(subsurface, 'alphaCutoff'), function():Dynamic return cast 0.5)] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(subsurface, null))) {
       _Runtime.callValue(unpackColorToLinear, cast ([SubsurfacePbrGlMeshMaterialRenderer.scratchRgba__subsurfacePbrGlMeshMaterialRenderer, _Runtime.field(subsurface, 'subsurfaceColor')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locSubsurface'), _Runtime.field(subsurface, 'subsurface')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform3f', cast ([_Runtime.field(program, 'locSubsurfaceColor'), _Runtime.getIndex(SubsurfacePbrGlMeshMaterialRenderer.scratchRgba__subsurfacePbrGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(SubsurfacePbrGlMeshMaterialRenderer.scratchRgba__subsurfacePbrGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(SubsurfacePbrGlMeshMaterialRenderer.scratchRgba__subsurfacePbrGlMeshMaterialRenderer, 2.0)] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locThickness'), _Runtime.field(subsurface, 'thickness')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locSubsurface'), _Runtime.field(subsurface, 'subsurface')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform3f', cast ([_Runtime.field(program, 'locSubsurfaceColor'), _Runtime.getIndex(SubsurfacePbrGlMeshMaterialRenderer.scratchRgba__subsurfacePbrGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(SubsurfacePbrGlMeshMaterialRenderer.scratchRgba__subsurfacePbrGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(SubsurfacePbrGlMeshMaterialRenderer.scratchRgba__subsurfacePbrGlMeshMaterialRenderer, 2.0)] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locThickness'), _Runtime.field(subsurface, 'thickness')] : Array<Dynamic>));
     } else {
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locSubsurface'), 0.0] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform3f', cast ([_Runtime.field(program, 'locSubsurfaceColor'), 1.0, 1.0, 1.0] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locThickness'), 0.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locSubsurface'), 0.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform3f', cast ([_Runtime.field(program, 'locSubsurfaceColor'), 1.0, 1.0, 1.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locThickness'), 0.0] : Array<Dynamic>));
     }
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;

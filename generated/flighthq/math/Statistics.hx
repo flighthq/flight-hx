@@ -25,13 +25,13 @@ class Statistics {
     var mid:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0))) { return cast HxMath.NaN; }
     sorted = _Runtime.sortAndReturn(_Runtime.slice(values, 0, null), function(a:Dynamic, b:Dynamic) return (a - b));
-    mid = _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(sorted, 'length') / 2.0)] : Array<Dynamic>));
+    mid = HxMath.floor((_Runtime.field(sorted, 'length') / 2.0));
     return cast _Runtime.select(!_Runtime.strictEquals((_Runtime.field(sorted, 'length') % 2.0), 0.0), function():Dynamic return cast _Runtime.getIndex(sorted, mid), function():Dynamic return cast ((_Runtime.getIndex(sorted, (mid - 1.0)) + _Runtime.getIndex(sorted, mid)) / 2.0));
     return cast null;
   }
 
   public static function standardDeviation(values:Array<Float>):Float {
-    return cast _Runtime.callProperty(HxMath, 'sqrt', cast ([_Runtime.callValue(variance, cast ([values] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast HxMath.sqrt(_Runtime.callValue(variance, cast ([values] : Array<Dynamic>)));
     return cast null;
   }
 

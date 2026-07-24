@@ -44,8 +44,8 @@ class Quaternion {
 
   public static function getQuaternionAngleBetween(a:QuaternionLike, b:QuaternionLike):Float {
     var dot:Dynamic = cast _Runtime.UNDEFINED;
-    dot = _Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.callValue(getQuaternionDot, cast ([a, b] : Array<Dynamic>))] : Array<Dynamic>));
-    return cast (2.0 * _Runtime.callProperty(HxMath, 'acos', cast ([_Runtime.callProperty(HxMath, 'min', cast ([1.0, dot] : Array<Dynamic>))] : Array<Dynamic>)));
+    dot = HxMath.abs(_Runtime.callValue(getQuaternionDot, cast ([a, b] : Array<Dynamic>)));
+    return cast (2.0 * HxMath.acos(HxMath.min(1.0, dot)));
     return cast null;
   }
 
@@ -103,73 +103,73 @@ class Quaternion {
       var __switchValue = order;
       if (__switchValue == 'XYZ') {
         {
-          _Runtime.setField(out, 'y', _Runtime.callProperty(HxMath, 'asin', cast ([_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([-1.0, m02] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
-          if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([m02] : Array<Dynamic>)), 0.9999999, '<'))) {
-            _Runtime.setField(out, 'x', _Runtime.callProperty(HxMath, 'atan2', cast ([-m12, m22] : Array<Dynamic>)));
-            _Runtime.setField(out, 'z', _Runtime.callProperty(HxMath, 'atan2', cast ([-m01, m00] : Array<Dynamic>)));
+          _Runtime.setField(out, 'y', HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, m02))));
+          if (_Runtime.truthy(_Runtime.compare(HxMath.abs(m02), 0.9999999, '<'))) {
+            _Runtime.setField(out, 'x', HxMath.atan2(-m12, m22));
+            _Runtime.setField(out, 'z', HxMath.atan2(-m01, m00));
           } else {
-            _Runtime.setField(out, 'x', _Runtime.callProperty(HxMath, 'atan2', cast ([m21, m11] : Array<Dynamic>)));
+            _Runtime.setField(out, 'x', HxMath.atan2(m21, m11));
             _Runtime.setField(out, 'z', 0.0);
           }
         }
       }
       else if (__switchValue == 'XZY') {
         {
-          _Runtime.setField(out, 'z', _Runtime.callProperty(HxMath, 'asin', cast ([_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([-1.0, -m01] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
-          if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([m01] : Array<Dynamic>)), 0.9999999, '<'))) {
-            _Runtime.setField(out, 'x', _Runtime.callProperty(HxMath, 'atan2', cast ([m21, m11] : Array<Dynamic>)));
-            _Runtime.setField(out, 'y', _Runtime.callProperty(HxMath, 'atan2', cast ([m02, m00] : Array<Dynamic>)));
+          _Runtime.setField(out, 'z', HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, -m01))));
+          if (_Runtime.truthy(_Runtime.compare(HxMath.abs(m01), 0.9999999, '<'))) {
+            _Runtime.setField(out, 'x', HxMath.atan2(m21, m11));
+            _Runtime.setField(out, 'y', HxMath.atan2(m02, m00));
           } else {
-            _Runtime.setField(out, 'x', _Runtime.callProperty(HxMath, 'atan2', cast ([-m12, m22] : Array<Dynamic>)));
+            _Runtime.setField(out, 'x', HxMath.atan2(-m12, m22));
             _Runtime.setField(out, 'y', 0.0);
           }
         }
       }
       else if (__switchValue == 'YXZ') {
         {
-          _Runtime.setField(out, 'x', _Runtime.callProperty(HxMath, 'asin', cast ([_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([-1.0, -m12] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
-          if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([m12] : Array<Dynamic>)), 0.9999999, '<'))) {
-            _Runtime.setField(out, 'y', _Runtime.callProperty(HxMath, 'atan2', cast ([m02, m22] : Array<Dynamic>)));
-            _Runtime.setField(out, 'z', _Runtime.callProperty(HxMath, 'atan2', cast ([m10, m11] : Array<Dynamic>)));
+          _Runtime.setField(out, 'x', HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, -m12))));
+          if (_Runtime.truthy(_Runtime.compare(HxMath.abs(m12), 0.9999999, '<'))) {
+            _Runtime.setField(out, 'y', HxMath.atan2(m02, m22));
+            _Runtime.setField(out, 'z', HxMath.atan2(m10, m11));
           } else {
-            _Runtime.setField(out, 'y', _Runtime.callProperty(HxMath, 'atan2', cast ([-m20, m00] : Array<Dynamic>)));
+            _Runtime.setField(out, 'y', HxMath.atan2(-m20, m00));
             _Runtime.setField(out, 'z', 0.0);
           }
         }
       }
       else if (__switchValue == 'YZX') {
         {
-          _Runtime.setField(out, 'z', _Runtime.callProperty(HxMath, 'asin', cast ([_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([-1.0, m10] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
-          if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([m10] : Array<Dynamic>)), 0.9999999, '<'))) {
-            _Runtime.setField(out, 'x', _Runtime.callProperty(HxMath, 'atan2', cast ([-m12, m11] : Array<Dynamic>)));
-            _Runtime.setField(out, 'y', _Runtime.callProperty(HxMath, 'atan2', cast ([-m20, m00] : Array<Dynamic>)));
+          _Runtime.setField(out, 'z', HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, m10))));
+          if (_Runtime.truthy(_Runtime.compare(HxMath.abs(m10), 0.9999999, '<'))) {
+            _Runtime.setField(out, 'x', HxMath.atan2(-m12, m11));
+            _Runtime.setField(out, 'y', HxMath.atan2(-m20, m00));
           } else {
             _Runtime.setField(out, 'x', 0.0);
-            _Runtime.setField(out, 'y', _Runtime.callProperty(HxMath, 'atan2', cast ([m02, m22] : Array<Dynamic>)));
+            _Runtime.setField(out, 'y', HxMath.atan2(m02, m22));
           }
         }
       }
       else if (__switchValue == 'ZXY') {
         {
-          _Runtime.setField(out, 'x', _Runtime.callProperty(HxMath, 'asin', cast ([_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([-1.0, m21] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
-          if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([m21] : Array<Dynamic>)), 0.9999999, '<'))) {
-            _Runtime.setField(out, 'y', _Runtime.callProperty(HxMath, 'atan2', cast ([-m20, m22] : Array<Dynamic>)));
-            _Runtime.setField(out, 'z', _Runtime.callProperty(HxMath, 'atan2', cast ([-m01, m11] : Array<Dynamic>)));
+          _Runtime.setField(out, 'x', HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, m21))));
+          if (_Runtime.truthy(_Runtime.compare(HxMath.abs(m21), 0.9999999, '<'))) {
+            _Runtime.setField(out, 'y', HxMath.atan2(-m20, m22));
+            _Runtime.setField(out, 'z', HxMath.atan2(-m01, m11));
           } else {
             _Runtime.setField(out, 'y', 0.0);
-            _Runtime.setField(out, 'z', _Runtime.callProperty(HxMath, 'atan2', cast ([m10, m00] : Array<Dynamic>)));
+            _Runtime.setField(out, 'z', HxMath.atan2(m10, m00));
           }
         }
       }
       else if (__switchValue == 'ZYX') {
         {
-          _Runtime.setField(out, 'y', _Runtime.callProperty(HxMath, 'asin', cast ([_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([-1.0, -m20] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
-          if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([m20] : Array<Dynamic>)), 0.9999999, '<'))) {
-            _Runtime.setField(out, 'x', _Runtime.callProperty(HxMath, 'atan2', cast ([m21, m22] : Array<Dynamic>)));
-            _Runtime.setField(out, 'z', _Runtime.callProperty(HxMath, 'atan2', cast ([m10, m00] : Array<Dynamic>)));
+          _Runtime.setField(out, 'y', HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, -m20))));
+          if (_Runtime.truthy(_Runtime.compare(HxMath.abs(m20), 0.9999999, '<'))) {
+            _Runtime.setField(out, 'x', HxMath.atan2(m21, m22));
+            _Runtime.setField(out, 'z', HxMath.atan2(m10, m00));
           } else {
             _Runtime.setField(out, 'x', 0.0);
-            _Runtime.setField(out, 'z', _Runtime.callProperty(HxMath, 'atan2', cast ([-m01, m11] : Array<Dynamic>)));
+            _Runtime.setField(out, 'z', HxMath.atan2(-m01, m11));
           }
         }
       }
@@ -235,7 +235,7 @@ class Quaternion {
     y = _Runtime.field(source, 'y');
     z = _Runtime.field(source, 'z');
     w = _Runtime.field(source, 'w');
-    l = _Runtime.callProperty(HxMath, 'sqrt', cast ([((((x * x) + (y * y)) + (z * z)) + (w * w))] : Array<Dynamic>));
+    l = HxMath.sqrt(((((x * x) + (y * y)) + (z * z)) + (w * w)));
     if (_Runtime.truthy(!_Runtime.strictEquals(l, 0.0))) {
       var inv:Dynamic = (1.0 / l);
       _Runtime.setField(out, 'x', (x * inv));
@@ -289,11 +289,11 @@ class Quaternion {
     var half:Dynamic = cast _Runtime.UNDEFINED;
     var s:Dynamic = cast _Runtime.UNDEFINED;
     half = (angle * 0.5);
-    s = _Runtime.callProperty(HxMath, 'sin', cast ([half] : Array<Dynamic>));
+    s = HxMath.sin(half);
     _Runtime.setField(out, 'x', (_Runtime.field(axis, 'x') * s));
     _Runtime.setField(out, 'y', (_Runtime.field(axis, 'y') * s));
     _Runtime.setField(out, 'z', (_Runtime.field(axis, 'z') * s));
-    _Runtime.setField(out, 'w', _Runtime.callProperty(HxMath, 'cos', cast ([half] : Array<Dynamic>)));
+    _Runtime.setField(out, 'w', HxMath.cos(half));
   }
 
   public static function setQuaternionFromEuler(out:QuaternionLike, x:Float, y:Float, z:Float, order:EulerOrder = 'XYZ'):Void {
@@ -303,12 +303,12 @@ class Quaternion {
     var s2:Dynamic = cast _Runtime.UNDEFINED;
     var c3:Dynamic = cast _Runtime.UNDEFINED;
     var s3:Dynamic = cast _Runtime.UNDEFINED;
-    c1 = _Runtime.callProperty(HxMath, 'cos', cast ([(x / 2.0)] : Array<Dynamic>));
-    s1 = _Runtime.callProperty(HxMath, 'sin', cast ([(x / 2.0)] : Array<Dynamic>));
-    c2 = _Runtime.callProperty(HxMath, 'cos', cast ([(y / 2.0)] : Array<Dynamic>));
-    s2 = _Runtime.callProperty(HxMath, 'sin', cast ([(y / 2.0)] : Array<Dynamic>));
-    c3 = _Runtime.callProperty(HxMath, 'cos', cast ([(z / 2.0)] : Array<Dynamic>));
-    s3 = _Runtime.callProperty(HxMath, 'sin', cast ([(z / 2.0)] : Array<Dynamic>));
+    c1 = HxMath.cos((x / 2.0));
+    s1 = HxMath.sin((x / 2.0));
+    c2 = HxMath.cos((y / 2.0));
+    s2 = HxMath.sin((y / 2.0));
+    c3 = HxMath.cos((z / 2.0));
+    s3 = HxMath.sin((z / 2.0));
     {
       var __switchValue = order;
       if (__switchValue == 'XYZ') {
@@ -374,25 +374,25 @@ class Quaternion {
     m22 = _Runtime.getIndex(m, 10.0);
     trace = ((m00 + m11) + m22);
     if (_Runtime.truthy(_Runtime.compare(trace, 0.0, '>'))) {
-      var s:Dynamic = (0.5 / _Runtime.callProperty(HxMath, 'sqrt', cast ([(trace + 1.0)] : Array<Dynamic>)));
+      var s:Dynamic = (0.5 / HxMath.sqrt((trace + 1.0)));
       _Runtime.setField(out, 'w', (0.25 / s));
       _Runtime.setField(out, 'x', ((m12 - m21) * s));
       _Runtime.setField(out, 'y', ((m20 - m02) * s));
       _Runtime.setField(out, 'z', ((m01 - m10) * s));
     } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(m00, m11, '>'), function():Dynamic return cast _Runtime.compare(m00, m22, '>')))) {
-      var s:Dynamic = (2.0 * _Runtime.callProperty(HxMath, 'sqrt', cast ([(((1.0 + m00) - m11) - m22)] : Array<Dynamic>)));
+      var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + m00) - m11) - m22)));
       _Runtime.setField(out, 'w', ((m12 - m21) / s));
       _Runtime.setField(out, 'x', (0.25 * s));
       _Runtime.setField(out, 'y', ((m10 + m01) / s));
       _Runtime.setField(out, 'z', ((m20 + m02) / s));
     } else { if (_Runtime.truthy(_Runtime.compare(m11, m22, '>'))) {
-      var s:Dynamic = (2.0 * _Runtime.callProperty(HxMath, 'sqrt', cast ([(((1.0 + m11) - m00) - m22)] : Array<Dynamic>)));
+      var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + m11) - m00) - m22)));
       _Runtime.setField(out, 'w', ((m20 - m02) / s));
       _Runtime.setField(out, 'x', ((m10 + m01) / s));
       _Runtime.setField(out, 'y', (0.25 * s));
       _Runtime.setField(out, 'z', ((m21 + m12) / s));
     } else {
-      var s:Dynamic = (2.0 * _Runtime.callProperty(HxMath, 'sqrt', cast ([(((1.0 + m22) - m00) - m11)] : Array<Dynamic>)));
+      var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + m22) - m00) - m11)));
       _Runtime.setField(out, 'w', ((m01 - m10) / s));
       _Runtime.setField(out, 'x', ((m20 + m02) / s));
       _Runtime.setField(out, 'y', ((m21 + m12) / s));
@@ -427,7 +427,7 @@ class Quaternion {
       var ax:Dynamic = 1.0;
       var ay:Dynamic = 0.0;
       var az:Dynamic = 0.0;
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([fx] : Array<Dynamic>)), 0.9, '>'))) {
+      if (_Runtime.truthy(_Runtime.compare(HxMath.abs(fx), 0.9, '>'))) {
         (ax = cast (0.0 : Dynamic));
         (ay = cast (1.0 : Dynamic));
         (az = cast (0.0 : Dynamic));
@@ -435,7 +435,7 @@ class Quaternion {
       var px:Dynamic = ((fy * az) - (fz * ay));
       var py:Dynamic = ((fz * ax) - (fx * az));
       var pz:Dynamic = ((fx * ay) - (fy * ax));
-      var pLen:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((px * px) + (py * py)) + (pz * pz))] : Array<Dynamic>));
+      var pLen:Dynamic = HxMath.sqrt((((px * px) + (py * py)) + (pz * pz)));
       (px = cast ((px / pLen) : Dynamic));
       (py = cast ((py / pLen) : Dynamic));
       (pz = cast ((pz / pLen) : Dynamic));
@@ -452,7 +452,7 @@ class Quaternion {
     _Runtime.setField(out, 'y', cy);
     _Runtime.setField(out, 'z', cz);
     _Runtime.setField(out, 'w', (1.0 + dot));
-    len = _Runtime.callProperty(HxMath, 'sqrt', cast ([((((_Runtime.field(out, 'x') * _Runtime.field(out, 'x')) + (_Runtime.field(out, 'y') * _Runtime.field(out, 'y'))) + (_Runtime.field(out, 'z') * _Runtime.field(out, 'z'))) + (_Runtime.field(out, 'w') * _Runtime.field(out, 'w')))] : Array<Dynamic>));
+    len = HxMath.sqrt(((((_Runtime.field(out, 'x') * _Runtime.field(out, 'x')) + (_Runtime.field(out, 'y') * _Runtime.field(out, 'y'))) + (_Runtime.field(out, 'z') * _Runtime.field(out, 'z'))) + (_Runtime.field(out, 'w') * _Runtime.field(out, 'w'))));
     if (_Runtime.truthy(!_Runtime.strictEquals(len, 0.0))) {
       var inv:Dynamic = (1.0 / len);
       _Runtime.setField(out, 'x', (_Runtime.field(out, 'x') * inv));
@@ -503,7 +503,7 @@ class Quaternion {
     rx = ((uy * fz) - (uz * fy));
     ry = ((uz * fx) - (ux * fz));
     rz = ((ux * fy) - (uy * fx));
-    rLen = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((rx * rx) + (ry * ry)) + (rz * rz))] : Array<Dynamic>));
+    rLen = HxMath.sqrt((((rx * rx) + (ry * ry)) + (rz * rz)));
     if (_Runtime.truthy(_Runtime.strictEquals(rLen, 0.0))) {
       _Runtime.callValue(setQuaternionIdentity, cast ([out] : Array<Dynamic>));
       return;
@@ -526,25 +526,25 @@ class Quaternion {
     m22 = fz;
     trace = ((m00 + m11) + m22);
     if (_Runtime.truthy(_Runtime.compare(trace, 0.0, '>'))) {
-      var s:Dynamic = (0.5 / _Runtime.callProperty(HxMath, 'sqrt', cast ([(trace + 1.0)] : Array<Dynamic>)));
+      var s:Dynamic = (0.5 / HxMath.sqrt((trace + 1.0)));
       _Runtime.setField(out, 'w', (0.25 / s));
       _Runtime.setField(out, 'x', ((m12 - m21) * s));
       _Runtime.setField(out, 'y', ((m20 - m02) * s));
       _Runtime.setField(out, 'z', ((m01 - m10) * s));
     } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(m00, m11, '>'), function():Dynamic return cast _Runtime.compare(m00, m22, '>')))) {
-      var s:Dynamic = (2.0 * _Runtime.callProperty(HxMath, 'sqrt', cast ([(((1.0 + m00) - m11) - m22)] : Array<Dynamic>)));
+      var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + m00) - m11) - m22)));
       _Runtime.setField(out, 'w', ((m12 - m21) / s));
       _Runtime.setField(out, 'x', (0.25 * s));
       _Runtime.setField(out, 'y', ((m10 + m01) / s));
       _Runtime.setField(out, 'z', ((m20 + m02) / s));
     } else { if (_Runtime.truthy(_Runtime.compare(m11, m22, '>'))) {
-      var s:Dynamic = (2.0 * _Runtime.callProperty(HxMath, 'sqrt', cast ([(((1.0 + m11) - m00) - m22)] : Array<Dynamic>)));
+      var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + m11) - m00) - m22)));
       _Runtime.setField(out, 'w', ((m20 - m02) / s));
       _Runtime.setField(out, 'x', ((m10 + m01) / s));
       _Runtime.setField(out, 'y', (0.25 * s));
       _Runtime.setField(out, 'z', ((m21 + m12) / s));
     } else {
-      var s:Dynamic = (2.0 * _Runtime.callProperty(HxMath, 'sqrt', cast ([(((1.0 + m22) - m00) - m11)] : Array<Dynamic>)));
+      var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + m22) - m00) - m11)));
       _Runtime.setField(out, 'w', ((m01 - m10) / s));
       _Runtime.setField(out, 'x', ((m20 + m02) / s));
       _Runtime.setField(out, 'y', ((m21 + m12) / s));
@@ -581,10 +581,10 @@ class Quaternion {
       (bw = cast (-bw : Dynamic));
     }
     if (_Runtime.truthy(_Runtime.compare(cosHalfTheta, 0.999999, '<'))) {
-      var halfTheta:Dynamic = _Runtime.callProperty(HxMath, 'acos', cast ([cosHalfTheta] : Array<Dynamic>));
-      var sinHalfTheta:Dynamic = _Runtime.callProperty(HxMath, 'sin', cast ([halfTheta] : Array<Dynamic>));
-      (scaleA = cast ((_Runtime.callProperty(HxMath, 'sin', cast ([((1.0 - t) * halfTheta)] : Array<Dynamic>)) / sinHalfTheta) : Dynamic));
-      (scaleB = cast ((_Runtime.callProperty(HxMath, 'sin', cast ([(t * halfTheta)] : Array<Dynamic>)) / sinHalfTheta) : Dynamic));
+      var halfTheta:Dynamic = HxMath.acos(cosHalfTheta);
+      var sinHalfTheta:Dynamic = HxMath.sin(halfTheta);
+      (scaleA = cast ((HxMath.sin(((1.0 - t) * halfTheta)) / sinHalfTheta) : Dynamic));
+      (scaleB = cast ((HxMath.sin((t * halfTheta)) / sinHalfTheta) : Dynamic));
     } else {
       (scaleA = cast ((1.0 - t) : Dynamic));
       (scaleB = cast (t : Dynamic));

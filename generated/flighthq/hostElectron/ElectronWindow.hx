@@ -318,7 +318,7 @@ class ElectronWindow {
     return cast null;
   }
 
-  public static final _windows__electronWindow:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _windows__electronWindow:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static final _windowsById__electronWindow:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+  public static final _windowsById__electronWindow:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
 }

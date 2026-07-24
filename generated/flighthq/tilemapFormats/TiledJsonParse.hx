@@ -86,11 +86,11 @@ class TiledJsonParse {
     var grid:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var decoded:Null<Dynamic> = cast _Runtime.UNDEFINED;
-    grid = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [(width * height)]);
+    grid = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [(width * height)]);
     data = _Runtime.field(obj, 'data');
     decoded = null;
     if (_Runtime.truthy(_Runtime.isArray(data))) {
-      (decoded = cast (_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), 'from', cast ([data, function(v:Dynamic) return _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(v), 'number'), function():Dynamic return cast _Runtime.unsignedShiftRight(Std.int(v), Std.int(0.0)), function():Dynamic return cast 0.0)] : Array<Dynamic>)) : Dynamic));
+      (decoded = cast (_Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([data, function(v:Dynamic) return _Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(v), 'number'), function():Dynamic return cast _Runtime.unsignedShiftRight(Std.int(v), Std.int(0.0)), function():Dynamic return cast 0.0)] : Array<Dynamic>)) : Dynamic));
     } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(data), 'string'))) {
       (decoded = cast (_Runtime.select(_Runtime.strictEquals(_Runtime.callValue(TiledJsonParse.strField__tiledJsonParse, cast ([obj, 'encoding'] : Array<Dynamic>)), 'csv'), function():Dynamic return cast _Runtime.callValue(decodeTiledCsvLayer, cast ([data] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(decodeTiledBase64Layer, cast ([data, _Runtime.callValue(TiledJsonParse.asCompression__tiledJsonParse, cast ([_Runtime.callValue(TiledJsonParse.strField__tiledJsonParse, cast ([obj, 'compression'] : Array<Dynamic>))] : Array<Dynamic>)), _Runtime.optionalField(options, 'inflate')] : Array<Dynamic>))) : Dynamic));
     } }
@@ -179,7 +179,7 @@ class TiledJsonParse {
   public static function numField__tiledJsonParse(obj:JsonObject__tiledJsonParse, key:String, fallback:Float):Float {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     value = _Runtime.getIndex(obj, key);
-    return cast _Runtime.select(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(value), 'number'), function():Dynamic return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([value] : Array<Dynamic>))), function():Dynamic return cast value, function():Dynamic return cast fallback);
+    return cast _Runtime.select(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(value), 'number'), function():Dynamic return cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>))), function():Dynamic return cast value, function():Dynamic return cast fallback);
     return cast null;
   }
 

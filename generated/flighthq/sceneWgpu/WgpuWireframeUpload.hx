@@ -20,7 +20,7 @@ class WgpuWireframeUpload {
     if (_Runtime.truthy(_Runtime.strictEquals(meshUpload, null))) { return cast null; }
     perState = _Runtime.callProperty(WgpuWireframeUpload.wireframeUploads__wgpuWireframeUpload, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(perState, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (perState = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []) : Dynamic));
+      (perState = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
       _Runtime.callProperty(WgpuWireframeUpload.wireframeUploads__wgpuWireframeUpload, 'set', cast ([state, perState] : Array<Dynamic>));
     }
     upload = _Runtime.callProperty(perState, 'get', cast ([(cast geometry : MeshGeometry)] : Array<Dynamic>));
@@ -30,9 +30,9 @@ class WgpuWireframeUpload {
     device = _Runtime.field(state, 'device');
     if (_Runtime.truthy(!_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(_Runtime.field(upload, 'lineIndexBuffer'), 'destroy', cast ([] : Array<Dynamic>)); }
     lines = _Runtime.callValue(WgpuWireframeUpload.buildLineIndices__wgpuWireframeUpload, cast ([geometry] : Array<Dynamic>));
-    lineIndexBuffer = _Runtime.callProperty(device, 'createBuffer', cast ([{ size: _Runtime.callProperty(HxMath, 'max', cast ([4.0, _Runtime.callValue(WgpuWireframeUpload.alignTo4__wgpuWireframeUpload, cast ([_Runtime.field(lines, 'byteLength')] : Array<Dynamic>))] : Array<Dynamic>)), usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'INDEX')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
+    lineIndexBuffer = _Runtime.callProperty(device, 'createBuffer', cast ([{ size: HxMath.max(4.0, _Runtime.callValue(WgpuWireframeUpload.alignTo4__wgpuWireframeUpload, cast ([_Runtime.field(lines, 'byteLength')] : Array<Dynamic>))), usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'INDEX')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST'))) }] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(device, 'queue'), 'writeBuffer', cast ([lineIndexBuffer, 0.0, _Runtime.field(lines, 'buffer'), _Runtime.field(lines, 'byteOffset'), _Runtime.field(lines, 'byteLength')] : Array<Dynamic>));
-    (upload = cast ({ indexFormat: _Runtime.select(_Runtime.isInstanceOf(lines, _Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>))), function():Dynamic return cast 'uint32', function():Dynamic return cast 'uint16'), lineIndexBuffer: lineIndexBuffer, version: _Runtime.field(geometry, 'version'), vertexBuffer: _Runtime.field(meshUpload, 'vertexBuffer') } : Dynamic));
+    (upload = cast ({ indexFormat: _Runtime.select(_Runtime.isInstanceOf(lines, _Runtime.globalValue('Uint32Array')), function():Dynamic return cast 'uint32', function():Dynamic return cast 'uint16'), lineIndexBuffer: lineIndexBuffer, version: _Runtime.field(geometry, 'version'), vertexBuffer: _Runtime.field(meshUpload, 'vertexBuffer') } : Dynamic));
     _Runtime.callProperty(perState, 'set', cast ([(cast geometry : MeshGeometry), upload] : Array<Dynamic>));
     return cast upload;
     return cast null;
@@ -45,10 +45,10 @@ class WgpuWireframeUpload {
     var useUint32:Dynamic = cast _Runtime.UNDEFINED;
     var lines:Dynamic = cast _Runtime.UNDEFINED;
     triangleIndices = _Runtime.field(geometry, 'indices');
-    triangleCount = _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(triangleIndices, 'length') / 3.0)] : Array<Dynamic>));
+    triangleCount = HxMath.floor((_Runtime.field(triangleIndices, 'length') / 3.0));
     lineCount = (triangleCount * 6.0);
-    useUint32 = _Runtime.orValue(_Runtime.isInstanceOf(triangleIndices, _Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>))), function():Dynamic return cast _Runtime.compare(lineCount, 65535.0, '>'));
-    lines = _Runtime.select(useUint32, function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [lineCount]), function():Dynamic return cast new flighthq._internal._UInt16Array(lineCount));
+    useUint32 = _Runtime.orValue(_Runtime.isInstanceOf(triangleIndices, _Runtime.globalValue('Uint32Array')), function():Dynamic return cast _Runtime.compare(lineCount, 65535.0, '>'));
+    lines = _Runtime.select(useUint32, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Uint32Array'), [lineCount]), function():Dynamic return cast new flighthq._internal._UInt16Array(lineCount));
     {
       var t:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(t, triangleCount, '<'))) {
@@ -75,5 +75,5 @@ class WgpuWireframeUpload {
     return cast null;
   }
 
-  public static final wireframeUploads__wgpuWireframeUpload:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final wireframeUploads__wgpuWireframeUpload:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

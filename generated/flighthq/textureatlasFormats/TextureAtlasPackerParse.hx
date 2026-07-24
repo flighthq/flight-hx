@@ -32,7 +32,7 @@ class TextureAtlasPackerParse {
         _Runtime.callValue(TextureAtlasPackerParse.applyFrame__textureAtlasPackerParse, cast ([atlas, _Runtime.field(entry, 'filename'), entry, options] : Array<Dynamic>));
       }
     } else {
-      for (__iteration0 in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'entries', cast ([_Runtime.field(doc, 'frames')] : Array<Dynamic>)))) {
+      for (__iteration0 in _Runtime.iterable(flighthq._internal.DynamicObject.entries(_Runtime.field(doc, 'frames')))) {
         var frameName:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
         var entry:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
         _Runtime.callValue(TextureAtlasPackerParse.applyFrame__textureAtlasPackerParse, cast ([atlas, frameName, entry, options] : Array<Dynamic>));
@@ -51,7 +51,7 @@ class TextureAtlasPackerParse {
   public static function normalizeFrameName__textureAtlasPackerParse(name:String, strip:Bool):String {
     var slash:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.truthy(strip))) { return cast name; }
-    slash = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.callProperty(name, 'lastIndexOf', cast (['/'] : Array<Dynamic>)), _Runtime.callProperty(name, 'lastIndexOf', cast (['\\'] : Array<Dynamic>))] : Array<Dynamic>));
+    slash = HxMath.max(_Runtime.callProperty(name, 'lastIndexOf', cast (['/'] : Array<Dynamic>)), _Runtime.callProperty(name, 'lastIndexOf', cast (['\\'] : Array<Dynamic>)));
     return cast _Runtime.select(_Runtime.compare(slash, 0.0, '>='), function():Dynamic return cast _Runtime.slice(name, (slash + 1.0), null), function():Dynamic return cast name);
     return cast null;
   }

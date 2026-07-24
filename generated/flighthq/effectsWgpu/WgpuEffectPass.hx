@@ -21,7 +21,7 @@ class WgpuEffectPass {
 
   public static final ERASE_BLEND__wgpuEffectPass:Dynamic = { color: { srcFactor: 'zero', dstFactor: 'one-minus-src-alpha', operation: 'add' }, alpha: { srcFactor: 'zero', dstFactor: 'one-minus-src-alpha', operation: 'add' } };
 
-  public static final effectPassStates__wgpuEffectPass:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final effectPassStates__wgpuEffectPass:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function getOrCreateEffectPassState__wgpuEffectPass(state:WgpuRenderState):WgpuEffectPassState__wgpuEffectPass {
     var fs:Dynamic = cast _Runtime.UNDEFINED;
@@ -44,14 +44,14 @@ class WgpuEffectPass {
     format = _Runtime.field(__destructure0, 'format');
     SLOTS = 512.0;
     STRIDE = 256.0;
-    uniformBuffer = _Runtime.callProperty(device, 'createBuffer', cast ([{ size: (SLOTS * STRIDE), usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
-    uniformData = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [((SLOTS * STRIDE) / 4.0)]);
-    uniformDataI32 = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Int32Array'] : Array<Dynamic>)), [_Runtime.field(uniformData, 'buffer')]);
-    uniformBGLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), buffer: { type: 'uniform', hasDynamicOffset: true } }] : Array<Dynamic>) }] : Array<Dynamic>));
+    uniformBuffer = _Runtime.callProperty(device, 'createBuffer', cast ([{ size: (SLOTS * STRIDE), usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST'))) }] : Array<Dynamic>));
+    uniformData = _Runtime.construct(_Runtime.globalValue('Float32Array'), [((SLOTS * STRIDE) / 4.0)]);
+    uniformDataI32 = _Runtime.construct(_Runtime.globalValue('Int32Array'), [_Runtime.field(uniformData, 'buffer')]);
+    uniformBGLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'FRAGMENT'), buffer: { type: 'uniform', hasDynamicOffset: true } }] : Array<Dynamic>) }] : Array<Dynamic>));
     uniformBG = _Runtime.callProperty(device, 'createBindGroup', cast ([{ layout: uniformBGLayout, entries: cast ([{ binding: 0.0, resource: { buffer: uniformBuffer, size: STRIDE } }] : Array<Dynamic>) }] : Array<Dynamic>));
-    textureBGLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), texture: {  } }, { binding: 1.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), sampler: {  } }] : Array<Dynamic>) }] : Array<Dynamic>));
+    textureBGLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'FRAGMENT'), texture: {  } }, { binding: 1.0, visibility: _Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'FRAGMENT'), sampler: {  } }] : Array<Dynamic>) }] : Array<Dynamic>));
     sampler = _Runtime.callProperty(device, 'createSampler', cast ([{ minFilter: 'linear', magFilter: 'linear', addressModeU: 'clamp-to-edge', addressModeV: 'clamp-to-edge' }] : Array<Dynamic>));
-    (fs = cast ({ uniformBuffer: uniformBuffer, uniformData: uniformData, uniformDataI32: uniformDataI32, uniformOffset: 0.0, uniformStride: STRIDE, uniformSlots: SLOTS, uniformBGLayout: uniformBGLayout, uniformBG: uniformBG, textureBGLayout: textureBGLayout, textureBGs: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []), sampler: sampler, format: format } : Dynamic));
+    (fs = cast ({ uniformBuffer: uniformBuffer, uniformData: uniformData, uniformDataI32: uniformDataI32, uniformOffset: 0.0, uniformStride: STRIDE, uniformSlots: SLOTS, uniformBGLayout: uniformBGLayout, uniformBG: uniformBG, textureBGLayout: textureBGLayout, textureBGs: _Runtime.construct(_Runtime.globalValue('WeakMap'), []), sampler: sampler, format: format } : Dynamic));
     _Runtime.callProperty(WgpuEffectPass.effectPassStates__wgpuEffectPass, 'set', cast ([state, fs] : Array<Dynamic>));
     return cast fs;
     return cast null;
@@ -147,7 +147,7 @@ class WgpuEffectPass {
     shaderModule = _Runtime.callProperty(device, 'createShaderModule', cast ([{ code: (EFFECT_VERTEX_WGSL + fragmentWGSL) }] : Array<Dynamic>));
     pipelineLayout = _Runtime.callProperty(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([_Runtime.field(fs, 'uniformBGLayout'), _Runtime.field(fs, 'textureBGLayout'), _Runtime.field(fs, 'textureBGLayout')] : Array<Dynamic>) }] : Array<Dynamic>));
     compileForFormat = function(format:Dynamic) return _Runtime.callProperty(device, 'createRenderPipeline', cast ([{ layout: pipelineLayout, vertex: { module: shaderModule, entryPoint: 'vs_main' }, fragment: { module: shaderModule, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: _Runtime.callValue(WgpuEffectPass.getBlendState__wgpuEffectPass, cast ([blend] : Array<Dynamic>)) }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
-    return cast { pipeline: _Runtime.callValue(compileForFormat, cast ([_Runtime.field(fs, 'format')] : Array<Dynamic>)), blendMode: blend, compileForFormat: compileForFormat, variants: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };
+    return cast { pipeline: _Runtime.callValue(compileForFormat, cast ([_Runtime.field(fs, 'format')] : Array<Dynamic>)), blendMode: blend, compileForFormat: compileForFormat, variants: _Runtime.construct(_Runtime.globalValue('Map'), []) };
     return cast null;
   }
 
@@ -164,7 +164,7 @@ class WgpuEffectPass {
     shaderModule = _Runtime.callProperty(device, 'createShaderModule', cast ([{ code: (EFFECT_VERTEX_WGSL + fragmentWGSL) }] : Array<Dynamic>));
     pipelineLayout = _Runtime.callProperty(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([_Runtime.field(fs, 'uniformBGLayout'), _Runtime.field(fs, 'textureBGLayout')] : Array<Dynamic>) }] : Array<Dynamic>));
     compileForFormat = function(format:Dynamic) return _Runtime.callProperty(device, 'createRenderPipeline', cast ([{ layout: pipelineLayout, vertex: { module: shaderModule, entryPoint: 'vs_main' }, fragment: { module: shaderModule, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: _Runtime.callValue(WgpuEffectPass.getBlendState__wgpuEffectPass, cast ([blend] : Array<Dynamic>)) }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
-    return cast { pipeline: _Runtime.callValue(compileForFormat, cast ([_Runtime.field(fs, 'format')] : Array<Dynamic>)), blendMode: blend, compileForFormat: compileForFormat, variants: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };
+    return cast { pipeline: _Runtime.callValue(compileForFormat, cast ([_Runtime.field(fs, 'format')] : Array<Dynamic>)), blendMode: blend, compileForFormat: compileForFormat, variants: _Runtime.construct(_Runtime.globalValue('Map'), []) };
     return cast null;
   }
 

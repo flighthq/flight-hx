@@ -27,8 +27,8 @@ class GlRenderPass {
       _Runtime.callProperty(GlRenderPass._passStack__glRenderPass, 'set', cast ([state, stack] : Array<Dynamic>));
     }
     _Runtime.callProperty(stack, 'push', cast ([{ framebuffer: _Runtime.field(runtime, 'currentFramebuffer'), renderTarget: _Runtime.coalesce(_Runtime.field(runtime, 'currentRenderTarget'), function():Dynamic return cast null), renderTargetViewport: _Runtime.field(runtime, 'renderTargetViewport'), renderTransform2D: _Runtime.field(state, 'renderTransform2D') }] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindFramebuffer', cast ([_Runtime.field(gl, 'FRAMEBUFFER'), _Runtime.field(target, 'framebuffer')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'viewport', cast ([0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindFramebuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'FRAMEBUFFER'), _Runtime.field(target, 'framebuffer')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'viewport', cast ([0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height')] : Array<Dynamic>));
     _Runtime.setField(runtime, 'currentFramebuffer', _Runtime.field(target, 'framebuffer'));
     _Runtime.setField(runtime, 'currentRenderTarget', target);
     _Runtime.setField(runtime, 'renderTargetViewport', { width: _Runtime.field(target, 'width'), height: _Runtime.field(target, 'height') });
@@ -47,9 +47,9 @@ class GlRenderPass {
     ended = _Runtime.coalesce(_Runtime.field(runtime, 'currentRenderTarget'), function():Dynamic return cast null);
     saved = _Runtime.callOptionalProperty(_Runtime.callProperty(GlRenderPass._passStack__glRenderPass, 'get', cast ([state] : Array<Dynamic>)), 'pop', cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(saved, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      _Runtime.callProperty(gl, 'bindFramebuffer', cast ([_Runtime.field(gl, 'FRAMEBUFFER'), _Runtime.field(saved, 'framebuffer')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'bindFramebuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'FRAMEBUFFER'), _Runtime.field(saved, 'framebuffer')] : Array<Dynamic>));
       var viewport:Dynamic = _Runtime.coalesce(_Runtime.field(saved, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
-      _Runtime.callProperty(gl, 'viewport', cast ([0.0, 0.0, _Runtime.field(viewport, 'width'), _Runtime.field(viewport, 'height')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'viewport', cast ([0.0, 0.0, _Runtime.field(viewport, 'width'), _Runtime.field(viewport, 'height')] : Array<Dynamic>));
       _Runtime.setField(runtime, 'currentFramebuffer', _Runtime.field(saved, 'framebuffer'));
       _Runtime.setField(runtime, 'currentRenderTarget', _Runtime.field(saved, 'renderTarget'));
       _Runtime.setField(runtime, 'renderTargetViewport', _Runtime.field(saved, 'renderTargetViewport'));
@@ -78,14 +78,14 @@ class GlRenderPass {
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(target, 'textures'), 'length'), '<'))) {
         if (_Runtime.truthy(_Runtime.callValue(GlRenderPass.isGlColorAttachmentPreserved__glRenderPass, cast ([preserveColor, i] : Array<Dynamic>)))) { i++; continue; }
         _Runtime.callValue(GlRenderPass.resolveGlClearColor__glRenderPass, cast ([state, target, i, GlRenderPass._clearRgba__glRenderPass] : Array<Dynamic>));
-        _Runtime.callProperty(gl, 'clearBufferfv', cast ([_Runtime.field(gl, 'COLOR'), i, GlRenderPass._clearRgba__glRenderPass] : Array<Dynamic>));
+        flighthq._internal.WebGl2RenderingContext.call(gl, 'clearBufferfv', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'COLOR'), i, GlRenderPass._clearRgba__glRenderPass] : Array<Dynamic>));
         i++;
       }
     }
     hasDepth = _Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(target, 'depthStencilRenderbuffer'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(target, 'depthTexture'), null));
     if (_Runtime.truthy(_Runtime.andValue(hasDepth, function():Dynamic return cast !_Runtime.strictEquals(_Runtime.optionalField(preserve, 'preserveDepth'), true)))) {
-      _Runtime.callProperty(gl, 'depthMask', cast ([true] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'clearBufferfi', cast ([_Runtime.field(gl, 'DEPTH_STENCIL'), 0.0, _Runtime.field(target, 'clearDepth'), 0.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'depthMask', cast ([true] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'clearBufferfi', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'DEPTH_STENCIL'), 0.0, _Runtime.field(target, 'clearDepth'), 0.0] : Array<Dynamic>));
     }
     _Runtime.setField(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'currentBlendMode', null);
   }
@@ -114,7 +114,7 @@ class GlRenderPass {
     _Runtime.setIndex(out, 3.0, _Runtime.select(_Runtime.compare(_Runtime.field(bg, 'length'), 4.0, '>='), function():Dynamic return cast _Runtime.getIndex(bg, 3.0), function():Dynamic return cast 0.0));
   }
 
-  public static final _passStack__glRenderPass:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _passStack__glRenderPass:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static final _clearRgba__glRenderPass:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [4.0]);
+  public static final _clearRgba__glRenderPass:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [4.0]);
 }

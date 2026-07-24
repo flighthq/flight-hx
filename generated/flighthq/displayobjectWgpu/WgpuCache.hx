@@ -89,8 +89,8 @@ class WgpuCache {
     _Runtime.setField(cacheRuntime, 'spriteBatchMaterialRenderer', null);
     _Runtime.setField(cacheRuntime, 'spriteBatchMaterialFloats', 0.0);
     _Runtime.setField(cacheRuntime, 'spriteBatchCount', 0.0);
-    _Runtime.setField(cacheRuntime, 'spriteBatchInstanceData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [0.0]));
-    _Runtime.setField(cacheRuntime, 'spriteBatchMaterialData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [0.0]));
+    _Runtime.setField(cacheRuntime, 'spriteBatchInstanceData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [0.0]));
+    _Runtime.setField(cacheRuntime, 'spriteBatchMaterialData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [0.0]));
     _Runtime.setField(cacheRuntime, 'spriteBatchTexture', null);
     _Runtime.setField(cacheRuntime, 'wgpuColorAdjustmentFold', _Runtime.field(screenRuntime, 'wgpuColorAdjustmentFold'));
     _Runtime.setField(cacheRuntime, 'wgpuColorAdjustmentGuard', _Runtime.field(screenRuntime, 'wgpuColorAdjustmentGuard'));
@@ -214,7 +214,7 @@ class WgpuCache {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callProperty(WgpuCache._renderCacheTargets__wgpuCache, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (targets = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []) : Dynamic));
+      (targets = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
       _Runtime.callProperty(WgpuCache._renderCacheTargets__wgpuCache, 'set', cast ([state, targets] : Array<Dynamic>));
     }
     return cast targets;
@@ -223,9 +223,9 @@ class WgpuCache {
 
   public static final defaultWgpuRenderCacheRenderer:DisplayObjectRenderer = { createData: noopRendererData, submit: WgpuCache.drawWgpuRenderCache__wgpuCache };
 
-  public static final _renderCacheTargets__wgpuCache:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _renderCacheTargets__wgpuCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static final _cacheStateScreen__wgpuCache:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _cacheStateScreen__wgpuCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static final _bounds__wgpuCache:Dynamic = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
 

@@ -46,7 +46,7 @@ class ElectronDialog {
       return cast _Runtime.strictEquals(_Runtime.field(r, 'response'), 0.0);
       return cast null;
     }), prompt: function() {
-      return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([null] : Array<Dynamic>));
+      return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([null] : Array<Dynamic>));
     } };
     return cast null;
   }
@@ -60,7 +60,7 @@ class ElectronDialog {
     var normalized:Dynamic = cast _Runtime.UNDEFINED;
     var index:Dynamic = cast _Runtime.UNDEFINED;
     normalized = _Runtime.replace(path, _Runtime.regexp('[/\\\\]+$$', ''), '', false);
-    index = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.callProperty(normalized, 'lastIndexOf', cast (['/'] : Array<Dynamic>)), _Runtime.callProperty(normalized, 'lastIndexOf', cast (['\\'] : Array<Dynamic>))] : Array<Dynamic>));
+    index = HxMath.max(_Runtime.callProperty(normalized, 'lastIndexOf', cast (['/'] : Array<Dynamic>)), _Runtime.callProperty(normalized, 'lastIndexOf', cast (['\\'] : Array<Dynamic>)));
     return cast _Runtime.select(_Runtime.compare(index, 0.0, '>='), function():Dynamic return cast _Runtime.slice(normalized, (index + 1.0), null), function():Dynamic return cast normalized);
     return cast null;
   }

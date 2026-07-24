@@ -26,10 +26,10 @@ class ShapeCommands {
     var alpha:Dynamic = cast _Runtime.UNDEFINED;
     cmds = _Runtime.field(_Runtime.field(shape, 'data'), 'commands');
     sweep = _Runtime.callValue(ShapeCommands.normalizeArcSweep__shapeCommands, cast ([startAngle, endAngle, anticlockwise] : Array<Dynamic>));
-    segmentCount = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([(_Runtime.callProperty(HxMath, 'abs', cast ([sweep] : Array<Dynamic>)) / (HxMath.PI / 2.0))] : Array<Dynamic>))] : Array<Dynamic>));
+    segmentCount = HxMath.max(1.0, HxMath.ceil((HxMath.abs(sweep) / (HxMath.PI / 2.0))));
     segmentAngle = (sweep / segmentCount);
-    alpha = ((4.0 / 3.0) * _Runtime.callProperty(HxMath, 'tan', cast ([(segmentAngle / 4.0)] : Array<Dynamic>)));
-    _Runtime.pushMany(cmds, cast (['moveTo', 2.0, (cx + (radius * _Runtime.callProperty(HxMath, 'cos', cast ([startAngle] : Array<Dynamic>)))), (cy + (radius * _Runtime.callProperty(HxMath, 'sin', cast ([startAngle] : Array<Dynamic>))))] : Array<Dynamic>));
+    alpha = ((4.0 / 3.0) * HxMath.tan((segmentAngle / 4.0)));
+    _Runtime.pushMany(cmds, cast (['moveTo', 2.0, (cx + (radius * HxMath.cos(startAngle))), (cy + (radius * HxMath.sin(startAngle)))] : Array<Dynamic>));
     _Runtime.callValue(ShapeCommands.pushArcCubics__shapeCommands, cast ([cmds, cx, cy, radius, startAngle, segmentCount, segmentAngle, alpha] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
@@ -100,22 +100,22 @@ class ShapeCommands {
     d1y = (penY - y1);
     d2x = (x2 - x1);
     d2y = (y2 - y1);
-    len1 = _Runtime.callProperty(HxMath, 'sqrt', cast ([((d1x * d1x) + (d1y * d1y))] : Array<Dynamic>));
-    len2 = _Runtime.callProperty(HxMath, 'sqrt', cast ([((d2x * d2x) + (d2y * d2y))] : Array<Dynamic>));
+    len1 = HxMath.sqrt(((d1x * d1x) + (d1y * d1y)));
+    len2 = HxMath.sqrt(((d2x * d2x) + (d2y * d2y)));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(len1, 1e-10, '<'), function():Dynamic return cast _Runtime.compare(len2, 1e-10, '<')))) {
       _Runtime.pushMany(cmds, cast (['lineTo', 2.0, x1, y1] : Array<Dynamic>));
       _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
       return;
     }
     cosHalf = (((d1x * d2x) + (d1y * d2y)) / (len1 * len2));
-    clampedCos = _Runtime.callProperty(HxMath, 'max', cast ([-1.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, cosHalf] : Array<Dynamic>))] : Array<Dynamic>));
-    halfAngle = (_Runtime.callProperty(HxMath, 'acos', cast ([clampedCos] : Array<Dynamic>)) / 2.0);
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.callProperty(HxMath, 'sin', cast ([halfAngle] : Array<Dynamic>))] : Array<Dynamic>)), 1e-10, '<'))) {
+    clampedCos = HxMath.max(-1.0, HxMath.min(1.0, cosHalf));
+    halfAngle = (HxMath.acos(clampedCos) / 2.0);
+    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(HxMath.sin(halfAngle)), 1e-10, '<'))) {
       _Runtime.pushMany(cmds, cast (['lineTo', 2.0, x1, y1] : Array<Dynamic>));
       _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
       return;
     }
-    d = (radius / _Runtime.callProperty(HxMath, 'tan', cast ([halfAngle] : Array<Dynamic>)));
+    d = (radius / HxMath.tan(halfAngle));
     n1x = (d1x / len1);
     n1y = (d1y / len1);
     tx1 = (x1 + (n1x * d));
@@ -127,18 +127,18 @@ class ShapeCommands {
     _Runtime.pushMany(cmds, cast (['lineTo', 2.0, tx1, ty1] : Array<Dynamic>));
     bx = ((n1x + n2x) / 2.0);
     by = ((n1y + n2y) / 2.0);
-    blen = _Runtime.callProperty(HxMath, 'sqrt', cast ([((bx * bx) + (by * by))] : Array<Dynamic>));
-    distToCenter = (radius / _Runtime.callProperty(HxMath, 'sin', cast ([halfAngle] : Array<Dynamic>)));
+    blen = HxMath.sqrt(((bx * bx) + (by * by)));
+    distToCenter = (radius / HxMath.sin(halfAngle));
     ocx = (x1 + ((bx / blen) * distToCenter));
     ocy = (y1 + ((by / blen) * distToCenter));
-    startA = _Runtime.callProperty(HxMath, 'atan2', cast ([(ty1 - ocy), (tx1 - ocx)] : Array<Dynamic>));
-    endA = _Runtime.callProperty(HxMath, 'atan2', cast ([(ty2 - ocy), (tx2 - ocx)] : Array<Dynamic>));
+    startA = HxMath.atan2((ty1 - ocy), (tx1 - ocx));
+    endA = HxMath.atan2((ty2 - ocy), (tx2 - ocx));
     cross = ((d1x * d2y) - (d1y * d2x));
     isAnticlockwise = _Runtime.compare(cross, 0.0, '<');
     sweep = _Runtime.callValue(ShapeCommands.normalizeArcSweep__shapeCommands, cast ([startA, endA, isAnticlockwise] : Array<Dynamic>));
-    segmentCount = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([(_Runtime.callProperty(HxMath, 'abs', cast ([sweep] : Array<Dynamic>)) / (HxMath.PI / 2.0))] : Array<Dynamic>))] : Array<Dynamic>));
+    segmentCount = HxMath.max(1.0, HxMath.ceil((HxMath.abs(sweep) / (HxMath.PI / 2.0))));
     segmentAngle = (sweep / segmentCount);
-    alpha = ((4.0 / 3.0) * _Runtime.callProperty(HxMath, 'tan', cast ([(segmentAngle / 4.0)] : Array<Dynamic>)));
+    alpha = ((4.0 / 3.0) * HxMath.tan((segmentAngle / 4.0)));
     _Runtime.callValue(ShapeCommands.pushArcCubics__shapeCommands, cast ([cmds, ocx, ocy, radius, startA, segmentCount, segmentAngle, alpha] : Array<Dynamic>));
     _Runtime.callValue(invalidateContent, cast ([shape] : Array<Dynamic>));
   }
@@ -303,10 +303,10 @@ class ShapeCommands {
       var s:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(s, segmentCount, '<'))) {
         var nextAngle:Dynamic = (angle + segmentAngle);
-        var cosA:Dynamic = _Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>));
-        var sinA:Dynamic = _Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>));
-        var cosB:Dynamic = _Runtime.callProperty(HxMath, 'cos', cast ([nextAngle] : Array<Dynamic>));
-        var sinB:Dynamic = _Runtime.callProperty(HxMath, 'sin', cast ([nextAngle] : Array<Dynamic>));
+        var cosA:Dynamic = HxMath.cos(angle);
+        var sinA:Dynamic = HxMath.sin(angle);
+        var cosB:Dynamic = HxMath.cos(nextAngle);
+        var sinB:Dynamic = HxMath.sin(nextAngle);
         _Runtime.pushMany(cmds, cast (['cubicCurveTo', 6.0, (cx + (radius * (cosA - (alpha * sinA)))), (cy + (radius * (sinA + (alpha * cosA)))), (cx + (radius * (cosB + (alpha * sinB)))), (cy + (radius * (sinB - (alpha * cosB)))), (cx + (radius * cosB)), (cy + (radius * sinB))] : Array<Dynamic>));
         (angle = cast (nextAngle : Dynamic));
         s++;

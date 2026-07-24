@@ -89,10 +89,10 @@ class GlyphAtlasEntry {
       _Runtime.setField(runtime, 'dirtyMaxY', maxY);
       return;
     }
-    _Runtime.setField(runtime, 'dirtyMinX', _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(runtime, 'dirtyMinX'), x] : Array<Dynamic>)));
-    _Runtime.setField(runtime, 'dirtyMinY', _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(runtime, 'dirtyMinY'), y] : Array<Dynamic>)));
-    _Runtime.setField(runtime, 'dirtyMaxX', _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(runtime, 'dirtyMaxX'), maxX] : Array<Dynamic>)));
-    _Runtime.setField(runtime, 'dirtyMaxY', _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(runtime, 'dirtyMaxY'), maxY] : Array<Dynamic>)));
+    _Runtime.setField(runtime, 'dirtyMinX', HxMath.min(_Runtime.field(runtime, 'dirtyMinX'), x));
+    _Runtime.setField(runtime, 'dirtyMinY', HxMath.min(_Runtime.field(runtime, 'dirtyMinY'), y));
+    _Runtime.setField(runtime, 'dirtyMaxX', HxMath.max(_Runtime.field(runtime, 'dirtyMaxX'), maxX));
+    _Runtime.setField(runtime, 'dirtyMaxY', HxMath.max(_Runtime.field(runtime, 'dirtyMaxY'), maxY));
   }
 
   public static function _placeGlyphOnShelf__glyphAtlasEntry(runtime:GlyphAtlasRuntime, width:Float, height:Float):Null<{ var x:Float; var y:Float; }> {
@@ -106,7 +106,7 @@ class GlyphAtlasEntry {
     surface = _Runtime.field(runtime, 'surface');
     rightLimit = (_Runtime.field(surface, 'width') - padding);
     best = null;
-    bestSlack = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
+    bestSlack = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
     for (shelf in _Runtime.iterable(_Runtime.field(runtime, 'shelves'))) {
       if (_Runtime.truthy(_Runtime.compare(_Runtime.field(shelf, 'height'), height, '<'))) { continue; }
       if (_Runtime.truthy(_Runtime.compare((_Runtime.field(shelf, 'cursorX') + width), rightLimit, '>'))) { continue; }

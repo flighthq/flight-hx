@@ -66,8 +66,8 @@ class SurfaceAffine {
 
   public static function sampleSurface__surfaceAffine(dd:Dynamic, di:Float, sd:Dynamic, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, sHeight:Float, sx:Float, sy:Float, sampleMode:SurfaceResizeMode, edgeMode:SurfaceEdgeMode):Void {
     if (_Runtime.truthy(_Runtime.strictEquals(sampleMode, 'nearest'))) {
-      var ix:Dynamic = _Runtime.callProperty(HxMath, 'round', cast ([sx] : Array<Dynamic>));
-      var iy:Dynamic = _Runtime.callProperty(HxMath, 'round', cast ([sy] : Array<Dynamic>));
+      var ix:Dynamic = HxMath.round(sx);
+      var iy:Dynamic = HxMath.round(sy);
       var cx:Dynamic = _Runtime.callValue(SurfaceAffine.resolveEdge__surfaceAffine, cast ([ix, sw, edgeMode] : Array<Dynamic>));
       var cy:Dynamic = _Runtime.callValue(SurfaceAffine.resolveEdge__surfaceAffine, cast ([iy, sh, edgeMode] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(cx, null), function():Dynamic return cast _Runtime.strictEquals(cy, null)))) {
@@ -97,8 +97,8 @@ class SurfaceAffine {
     var cx10:Dynamic = cast _Runtime.UNDEFINED;
     var cy00:Dynamic = cast _Runtime.UNDEFINED;
     var cy10:Dynamic = cast _Runtime.UNDEFINED;
-    x0 = _Runtime.callProperty(HxMath, 'floor', cast ([sx] : Array<Dynamic>));
-    y0 = _Runtime.callProperty(HxMath, 'floor', cast ([sy] : Array<Dynamic>));
+    x0 = HxMath.floor(sx);
+    y0 = HxMath.floor(sy);
     tx = (sx - x0);
     ty = (sy - y0);
     cx00 = _Runtime.callValue(SurfaceAffine.resolveEdge__surfaceAffine, cast ([x0, sw, edgeMode] : Array<Dynamic>));
@@ -114,7 +114,7 @@ class SurfaceAffine {
         var v11:Dynamic = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(cx10, null), function():Dynamic return cast !_Runtime.strictEquals(cy10, null)), function():Dynamic return cast _Runtime.getIndex(sd, ((((((originY + cy10) * sStride) + originX) + cx10) * 4.0) + c)), function():Dynamic return cast 0.0);
         var top:Dynamic = ((v00 * (1.0 - tx)) + (v10 * tx));
         var bottom:Dynamic = ((v01 * (1.0 - tx)) + (v11 * tx));
-        _Runtime.setIndex(dd, (di + c), _Runtime.callProperty(HxMath, 'round', cast ([((top * (1.0 - ty)) + (bottom * ty))] : Array<Dynamic>)));
+        _Runtime.setIndex(dd, (di + c), HxMath.round(((top * (1.0 - ty)) + (bottom * ty))));
         c++;
       }
     }
@@ -125,8 +125,8 @@ class SurfaceAffine {
     var y1:Dynamic = cast _Runtime.UNDEFINED;
     var tx:Dynamic = cast _Runtime.UNDEFINED;
     var ty:Dynamic = cast _Runtime.UNDEFINED;
-    x1 = _Runtime.callProperty(HxMath, 'floor', cast ([sx] : Array<Dynamic>));
-    y1 = _Runtime.callProperty(HxMath, 'floor', cast ([sy] : Array<Dynamic>));
+    x1 = HxMath.floor(sx);
+    y1 = HxMath.floor(sy);
     tx = (sx - x1);
     ty = (sy - y1);
     {
@@ -151,7 +151,7 @@ class SurfaceAffine {
             m++;
           }
         }
-        _Runtime.setIndex(dd, (di + c), _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([sum] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
+        _Runtime.setIndex(dd, (di + c), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(sum))));
         c++;
       }
     }
@@ -162,7 +162,7 @@ class SurfaceAffine {
     {
       var __switchValue = mode;
       if (__switchValue == 'clamp') {
-        return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([(size - 1.0), v] : Array<Dynamic>))] : Array<Dynamic>));
+        return cast HxMath.max(0.0, HxMath.min((size - 1.0), v));
       }
       else if (__switchValue == 'wrap') {
         return cast (((v % size) + size) % size);
@@ -183,7 +183,7 @@ class SurfaceAffine {
 
   public static function catmullRomWeight__surfaceAffine(t:Float):Float {
     var a:Dynamic = cast _Runtime.UNDEFINED;
-    a = _Runtime.callProperty(HxMath, 'abs', cast ([t] : Array<Dynamic>));
+    a = HxMath.abs(t);
     if (_Runtime.truthy(_Runtime.compare(a, 2.0, '>='))) { return cast 0.0; }
     if (_Runtime.truthy(_Runtime.compare(a, 1.0, '>='))) { return cast ((((((-0.5 * a) * a) * a) + ((2.5 * a) * a)) - (4.0 * a)) + 2.0); }
     return cast (((((1.5 * a) * a) * a) - ((2.5 * a) * a)) + 1.0);

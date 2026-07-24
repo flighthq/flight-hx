@@ -18,7 +18,7 @@ class CapacitorNotification {
     var cachedPermission:Dynamic = cast _Runtime.UNDEFINED;
     notifications = _Runtime.field(capacitor, 'localNotifications');
     nextNumericId = 1.0;
-    idByNumber = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    idByNumber = _Runtime.construct(_Runtime.globalValue('Map'), []);
     cachedPermission = 'default';
     _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(notifications, 'checkPermissions', cast ([] : Array<Dynamic>)), 'then', cast ([function(status:Dynamic) {
       (cachedPermission = cast (_Runtime.callValue(CapacitorNotification.toNotificationPermission__capacitorNotification, cast ([_Runtime.field(status, 'display')] : Array<Dynamic>)) : Dynamic));
@@ -74,7 +74,7 @@ class CapacitorNotification {
       numericId = nextNumericId++;
       stringId = _Runtime.coalesce(_Runtime.field(request, 'id'), function():Dynamic return cast 'notification-' + Std.string(numericId) + '');
       _Runtime.callProperty(idByNumber, 'set', cast ([numericId, stringId] : Array<Dynamic>));
-      schema = { id: numericId, title: _Runtime.field(request, 'title'), body: _Runtime.field(request, 'body'), schedule: { at: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Date'] : Array<Dynamic>)), [_Runtime.field(schedule, 'at')]) } };
+      schema = { id: numericId, title: _Runtime.field(request, 'title'), body: _Runtime.field(request, 'body'), schedule: { at: _Runtime.construct(_Runtime.globalValue('Date'), [_Runtime.field(schedule, 'at')]) } };
       try {
         flighthq._internal._Async.awaitValue(_Runtime.callProperty(notifications, 'schedule', cast ([{ notifications: cast ([schema] : Array<Dynamic>) }] : Array<Dynamic>)));
         return cast stringId;
@@ -125,8 +125,8 @@ class CapacitorNotification {
       var mapped:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
       if (_Runtime.truthy(_Runtime.strictEquals(mapped, stringId))) { return cast numericId; }
     }
-    parsed = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), cast ([stringId] : Array<Dynamic>));
-    return cast _Runtime.select(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isNaN', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast null, function():Dynamic return cast parsed);
+    parsed = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([stringId] : Array<Dynamic>));
+    return cast _Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast null, function():Dynamic return cast parsed);
     return cast null;
   }
 

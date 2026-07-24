@@ -9,7 +9,7 @@ import flighthq.types.ModifierRegistry;
 
 class ModifierRegistry {
   public static function createModifierRegistry():flighthq.types.ModifierRegistry {
-    return cast { definitions: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };
+    return cast { definitions: _Runtime.construct(_Runtime.globalValue('Map'), []) };
     return cast null;
   }
 

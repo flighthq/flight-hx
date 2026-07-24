@@ -18,7 +18,7 @@ class ToneMapMath {
     c = 2.43;
     d = 0.59;
     e = 0.14;
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, ((x * ((a * x) + b)) / ((x * ((c * x) + d)) + e))] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast HxMath.max(0.0, HxMath.min(1.0, ((x * ((a * x) + b)) / ((x * ((c * x) + d)) + e))));
     return cast null;
   }
 
@@ -30,15 +30,15 @@ class ToneMapMath {
     var normalized:Dynamic = cast _Runtime.UNDEFINED;
     min_ev = _Runtime.coalesce(_Runtime.optionalField(options, 'minEv'), function():Dynamic return cast -12.47393);
     max_ev = _Runtime.coalesce(_Runtime.optionalField(options, 'maxEv'), function():Dynamic return cast 4.026069);
-    val = _Runtime.callProperty(HxMath, 'max', cast ([1e-10, x] : Array<Dynamic>));
-    log = _Runtime.callProperty(HxMath, 'max', cast ([min_ev, _Runtime.callProperty(HxMath, 'min', cast ([max_ev, _Runtime.log2(val)] : Array<Dynamic>))] : Array<Dynamic>));
+    val = HxMath.max(1e-10, x);
+    log = HxMath.max(min_ev, HxMath.min(max_ev, _Runtime.log2(val)));
     normalized = ((log - min_ev) / (max_ev - min_ev));
     return cast _Runtime.callValue(ToneMapMath.agxDefaultContrastApprox__toneMapMath, cast ([normalized] : Array<Dynamic>));
     return cast null;
   }
 
   public static function computeExposureScale(exposure:Float):Float {
-    return cast _Runtime.callProperty(HxMath, 'pow', cast ([2.0, exposure] : Array<Dynamic>));
+    return cast HxMath.pow(2.0, exposure);
     return cast null;
   }
 
@@ -72,12 +72,12 @@ class ToneMapMath {
     S0 = (linearStart + l0);
     S1 = (linearStart + (contrast * l0));
     C2 = (contrast / (maxBrightness - S1));
-    CP = (-C2 / _Runtime.callProperty(HxMath, 'log', cast ([2.0] : Array<Dynamic>)));
+    CP = (-C2 / HxMath.log(2.0));
     w0 = (1.0 - _Runtime.callValue(ToneMapMath.smoothstep01__toneMapMath, cast ([linearStart, S0, x] : Array<Dynamic>)));
-    T = ((linearStart * _Runtime.callProperty(HxMath, 'pow', cast ([(x / linearStart), blackTighten] : Array<Dynamic>))) + pedestal);
+    T = ((linearStart * HxMath.pow((x / linearStart), blackTighten)) + pedestal);
     L = (linearStart + (contrast * (x - linearStart)));
-    S = (maxBrightness - ((maxBrightness - S1) * _Runtime.callProperty(HxMath, 'exp', cast ([(CP * (x - S0))] : Array<Dynamic>))));
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, ((((w0 * (1.0 - _Runtime.callValue(ToneMapMath.smoothstep01__toneMapMath, cast ([L0, L1, x] : Array<Dynamic>)))) * T) + (_Runtime.callValue(ToneMapMath.smoothstep01__toneMapMath, cast ([L0, L1, x] : Array<Dynamic>)) * L)) + ((1.0 - w0) * S))] : Array<Dynamic>));
+    S = (maxBrightness - ((maxBrightness - S1) * HxMath.exp((CP * (x - S0)))));
+    return cast HxMath.max(0.0, ((((w0 * (1.0 - _Runtime.callValue(ToneMapMath.smoothstep01__toneMapMath, cast ([L0, L1, x] : Array<Dynamic>)))) * T) + (_Runtime.callValue(ToneMapMath.smoothstep01__toneMapMath, cast ([L0, L1, x] : Array<Dynamic>)) * L)) + ((1.0 - w0) * S)));
     return cast null;
   }
 
@@ -145,7 +145,7 @@ class ToneMapMath {
 
   public static function smoothstep01__toneMapMath(edge0:Float, edge1:Float, x:Float):Float {
     var t:Dynamic = cast _Runtime.UNDEFINED;
-    t = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, ((x - edge0) / (edge1 - edge0))] : Array<Dynamic>))] : Array<Dynamic>));
+    t = HxMath.max(0.0, HxMath.min(1.0, ((x - edge0) / (edge1 - edge0))));
     return cast ((t * t) * (3.0 - (2.0 * t)));
     return cast null;
   }

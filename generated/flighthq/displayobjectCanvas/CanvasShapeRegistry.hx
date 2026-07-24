@@ -7,7 +7,7 @@ import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
 import flighthq.types.ShapeCommand.ShapeCommandKey;
 
 class CanvasShapeRegistry {
-  public static final registry__canvasShapeRegistry:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+  public static final registry__canvasShapeRegistry:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
 
   public static function getCanvasShapeCommand(key:String):Null<Dynamic> {
     return cast _Runtime.callProperty(CanvasShapeRegistry.registry__canvasShapeRegistry, 'get', cast ([key] : Array<Dynamic>));

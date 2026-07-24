@@ -86,7 +86,7 @@ class UpdateParticleEmitter2D {
     hasVelInherit = !_Runtime.strictEquals(_Runtime.field(config, 'velocityInheritance'), 0.0);
     emitterVelX = 0.0;
     emitterVelY = 0.0;
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['isNaN'] : Array<Dynamic>)), cast ([_Runtime.field(state, 'prevX')] : Array<Dynamic>))))) {
+    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([_Runtime.field(state, 'prevX')] : Array<Dynamic>))))) {
       (emitterVelX = cast (((trackX - _Runtime.field(state, 'prevX')) / deltaTime) : Dynamic));
       (emitterVelY = cast (((trackY - _Runtime.field(state, 'prevY')) / deltaTime) : Dynamic));
     }
@@ -202,7 +202,7 @@ class UpdateParticleEmitter2D {
         _Runtime.setIndex(_Runtime.field(data, 'transforms'), (tt + 2.0), (_Runtime.getIndex(_Runtime.field(data, 'transforms'), (tt + 2.0)) + (_Runtime.getIndex(rotationSpeeds, i) * deltaTime)));
       }
       if (_Runtime.truthy(hasFlipbook)) {
-        var frame:Dynamic = (_Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.getIndex(lifetimes, lt) * _Runtime.field(config, 'frameRate'))] : Array<Dynamic>)) % _Runtime.field(config, 'frameCount'));
+        var frame:Dynamic = (HxMath.floor((_Runtime.getIndex(lifetimes, lt) * _Runtime.field(config, 'frameRate'))) % _Runtime.field(config, 'frameCount'));
         _Runtime.setIndex(_Runtime.field(data, 'ids'), i, (_Runtime.field(config, 'regionIdMin') + frame));
       }
       i++;
@@ -211,7 +211,7 @@ class UpdateParticleEmitter2D {
     emitting = _Runtime.callValue(UpdateParticleEmitter2D.isEmitting__updateParticleEmitter2D, cast ([config, _Runtime.field(state, 'emitterAge')] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(config, 'duration'), 0.0, '>'), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(config, 'loop'))))) { _Runtime.setField(state, 'emitterAge', (_Runtime.field(state, 'emitterAge') + deltaTime)); }
     _Runtime.setField(state, 'spawnAccumulator', (_Runtime.field(state, 'spawnAccumulator') + _Runtime.select(emitting, function():Dynamic return cast (_Runtime.field(config, 'spawnRate') * deltaTime), function():Dynamic return cast 0.0)));
-    toSpawn = _Runtime.callProperty(HxMath, 'floor', cast ([_Runtime.field(state, 'spawnAccumulator')] : Array<Dynamic>));
+    toSpawn = HxMath.floor(_Runtime.field(state, 'spawnAccumulator'));
     _Runtime.setField(state, 'spawnAccumulator', (_Runtime.field(state, 'spawnAccumulator') - toSpawn));
     if (_Runtime.truthy(_Runtime.andValue(emitting, function():Dynamic return cast _Runtime.compare(_Runtime.field(config, 'burstCount'), 0.0, '>')))) {
       _Runtime.setField(state, 'burstTimer', (_Runtime.field(state, 'burstTimer') - deltaTime));
@@ -226,15 +226,15 @@ class UpdateParticleEmitter2D {
       var newCount:Dynamic = (liveCount + toSpawn);
       _Runtime.callValue(reserveParticleEmitter2D, cast ([emitter, newCount] : Array<Dynamic>));
       _Runtime.callValue(ensureParticleEmitterStateCapacity, cast ([state, newCount, hasColorVariance] : Array<Dynamic>));
-      var baseAngle:Dynamic = _Runtime.callProperty(HxMath, 'atan2', cast ([_Runtime.field(config, 'directionY'), _Runtime.field(config, 'directionX')] : Array<Dynamic>));
+      var baseAngle:Dynamic = HxMath.atan2(_Runtime.field(config, 'directionY'), _Runtime.field(config, 'directionX'));
       var regionRange:Dynamic = (_Runtime.field(config, 'regionIdMax') - _Runtime.field(config, 'regionIdMin'));
       var regionIdMin:Dynamic = _Runtime.field(config, 'regionIdMin');
       var rotSpeedRange:Dynamic = (_Runtime.field(config, 'rotationSpeedMax') - _Runtime.field(config, 'rotationSpeedMin'));
       var hasRotSpeed:Dynamic = _Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(config, 'rotationSpeedMin'), 0.0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(config, 'rotationSpeedMax'), 0.0));
-      var doTrail:Dynamic = _Runtime.andValue(!_Runtime.strictEquals(worldTransform, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['isNaN'] : Array<Dynamic>)), cast ([_Runtime.field(state, 'prevX')] : Array<Dynamic>))));
+      var doTrail:Dynamic = _Runtime.andValue(!_Runtime.strictEquals(worldTransform, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([_Runtime.field(state, 'prevX')] : Array<Dynamic>))));
       var prevPathX:Dynamic = _Runtime.select(doTrail, function():Dynamic return cast _Runtime.field(state, 'prevX'), function():Dynamic return cast trackX);
       var prevPathY:Dynamic = _Runtime.select(doTrail, function():Dynamic return cast _Runtime.field(state, 'prevY'), function():Dynamic return cast trackY);
-      var dirLen:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((_Runtime.field(config, 'directionX') * _Runtime.field(config, 'directionX')) + (_Runtime.field(config, 'directionY') * _Runtime.field(config, 'directionY'))) + (_Runtime.field(config, 'directionZ') * _Runtime.field(config, 'directionZ')))] : Array<Dynamic>));
+      var dirLen:Dynamic = HxMath.sqrt((((_Runtime.field(config, 'directionX') * _Runtime.field(config, 'directionX')) + (_Runtime.field(config, 'directionY') * _Runtime.field(config, 'directionY'))) + (_Runtime.field(config, 'directionZ') * _Runtime.field(config, 'directionZ'))));
       var dirNx:Dynamic = _Runtime.select(_Runtime.compare(dirLen, 0.000001, '>'), function():Dynamic return cast (_Runtime.field(config, 'directionX') / dirLen), function():Dynamic return cast 0.0);
       var dirNy:Dynamic = _Runtime.select(_Runtime.compare(dirLen, 0.000001, '>'), function():Dynamic return cast (_Runtime.field(config, 'directionY') / dirLen), function():Dynamic return cast -1.0);
       var dirNz:Dynamic = _Runtime.select(_Runtime.compare(dirLen, 0.000001, '>'), function():Dynamic return cast (_Runtime.field(config, 'directionZ') / dirLen), function():Dynamic return cast 0.0);
@@ -260,11 +260,11 @@ class UpdateParticleEmitter2D {
             var sz:Float = cast _Runtime.UNDEFINED;
             if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(shape, 'cone3d'), function():Dynamic return cast _Runtime.compare(_Runtime.field(config, 'emitterConeAngle'), 0.0, '>')))) {
               var coneHalf:Dynamic = (_Runtime.field(config, 'emitterConeAngle') / 2.0);
-              var cosTheta:Dynamic = (1.0 - (_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) * (1.0 - _Runtime.callProperty(HxMath, 'cos', cast ([coneHalf] : Array<Dynamic>)))));
-              var sinTheta:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([(1.0 - (cosTheta * cosTheta))] : Array<Dynamic>));
+              var cosTheta:Dynamic = (1.0 - (_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) * (1.0 - HxMath.cos(coneHalf))));
+              var sinTheta:Dynamic = HxMath.sqrt((1.0 - (cosTheta * cosTheta)));
               var phi:Dynamic = (_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) * UpdateParticleEmitter2D.TWO_PI__updateParticleEmitter2D);
-              var lx:Dynamic = (sinTheta * _Runtime.callProperty(HxMath, 'cos', cast ([phi] : Array<Dynamic>)));
-              var ly:Dynamic = (sinTheta * _Runtime.callProperty(HxMath, 'sin', cast ([phi] : Array<Dynamic>)));
+              var lx:Dynamic = (sinTheta * HxMath.cos(phi));
+              var ly:Dynamic = (sinTheta * HxMath.sin(phi));
               var lz:Dynamic = cosTheta;
               var rDir:Dynamic = _Runtime.callValue(UpdateParticleEmitter2D.rotateToDirection__updateParticleEmitter2D, cast ([lx, ly, lz, dirNx, dirNy, dirNz] : Array<Dynamic>));
               (sx = cast (_Runtime.getIndex(rDir, 0.0) : Dynamic));
@@ -279,7 +279,7 @@ class UpdateParticleEmitter2D {
                 (v = cast (((_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
                 (s2 = cast (((u * u) + (v * v)) : Dynamic));
               } while (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(s2, 1.0, '>='), function():Dynamic return cast _Runtime.strictEquals(s2, 0.0))));
-              var f:Dynamic = (2.0 * _Runtime.callProperty(HxMath, 'sqrt', cast ([(1.0 - s2)] : Array<Dynamic>)));
+              var f:Dynamic = (2.0 * HxMath.sqrt((1.0 - s2)));
               (sx = cast ((u * f) : Dynamic));
               (sy = cast ((v * f) : Dynamic));
               (sz = cast ((1.0 - (2.0 * s2)) : Dynamic));
@@ -297,29 +297,29 @@ class UpdateParticleEmitter2D {
                 (pv = cast (((_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
                 (ps2 = cast (((pu * pu) + (pv * pv)) : Dynamic));
               } while (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(ps2, 1.0, '>='), function():Dynamic return cast _Runtime.strictEquals(ps2, 0.0))));
-              var pf:Dynamic = (2.0 * _Runtime.callProperty(HxMath, 'sqrt', cast ([(1.0 - ps2)] : Array<Dynamic>)));
+              var pf:Dynamic = (2.0 * HxMath.sqrt((1.0 - ps2)));
               (spawnX = cast (((pu * pf) * r) : Dynamic));
               (spawnY = cast (((pv * pf) * r) : Dynamic));
               (spawnZ = cast (((1.0 - (2.0 * ps2)) * r) : Dynamic));
             }
           } else { if (_Runtime.truthy(_Runtime.strictEquals(shape, 'box'))) {
             var angle:Dynamic = (baseAngle + (((_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) - 0.5) * 2.0) * _Runtime.field(config, 'spread')));
-            (vx = cast ((_Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>)) * speed) : Dynamic));
-            (vy = cast ((_Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>)) * speed) : Dynamic));
+            (vx = cast ((HxMath.cos(angle) * speed) : Dynamic));
+            (vy = cast ((HxMath.sin(angle) * speed) : Dynamic));
             (vz = cast (((_Runtime.field(config, 'directionZ') * speed) / _Runtime.select(_Runtime.compare(dirLen, 0.000001, '>'), function():Dynamic return cast dirLen, function():Dynamic return cast 1.0)) : Dynamic));
             (spawnX = cast (((_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) - 0.5) * _Runtime.field(config, 'emitterWidth')) : Dynamic));
             (spawnY = cast (((_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) - 0.5) * _Runtime.field(config, 'emitterHeight')) : Dynamic));
             (spawnZ = cast (((_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) - 0.5) * _Runtime.field(config, 'emitterDepth')) : Dynamic));
           } else {
             var angle:Dynamic = (baseAngle + (((_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) - 0.5) * 2.0) * _Runtime.field(config, 'spread')));
-            (vx = cast ((_Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>)) * speed) : Dynamic));
-            (vy = cast ((_Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>)) * speed) : Dynamic));
+            (vx = cast ((HxMath.cos(angle) * speed) : Dynamic));
+            (vy = cast ((HxMath.sin(angle) * speed) : Dynamic));
             (vz = cast (0.0 : Dynamic));
             if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(shape, 'circle'), function():Dynamic return cast _Runtime.compare(_Runtime.field(config, 'emitterRadius'), 0.0, '>')))) {
-              var r:Dynamic = (_Runtime.callProperty(HxMath, 'sqrt', cast ([_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>))] : Array<Dynamic>)) * _Runtime.field(config, 'emitterRadius'));
+              var r:Dynamic = (HxMath.sqrt(_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>))) * _Runtime.field(config, 'emitterRadius'));
               var a:Dynamic = (_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) * UpdateParticleEmitter2D.TWO_PI__updateParticleEmitter2D);
-              (spawnX = cast ((_Runtime.callProperty(HxMath, 'cos', cast ([a] : Array<Dynamic>)) * r) : Dynamic));
-              (spawnY = cast ((_Runtime.callProperty(HxMath, 'sin', cast ([a] : Array<Dynamic>)) * r) : Dynamic));
+              (spawnX = cast ((HxMath.cos(a) * r) : Dynamic));
+              (spawnY = cast ((HxMath.sin(a) * r) : Dynamic));
             } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(shape, 'rect'), function():Dynamic return cast _Runtime.orValue(_Runtime.compare(_Runtime.field(config, 'emitterWidth'), 0.0, '>'), function():Dynamic return cast _Runtime.compare(_Runtime.field(config, 'emitterHeight'), 0.0, '>'))))) {
               (spawnX = cast (((_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) - 0.5) * _Runtime.field(config, 'emitterWidth')) : Dynamic));
               (spawnY = cast (((_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) - 0.5) * _Runtime.field(config, 'emitterHeight')) : Dynamic));
@@ -339,7 +339,7 @@ class UpdateParticleEmitter2D {
             (vx = cast (wvx : Dynamic));
             (vy = cast (wvy : Dynamic));
           }
-          if (_Runtime.truthy(_Runtime.andValue(hasVelInherit, function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['isNaN'] : Array<Dynamic>)), cast ([_Runtime.field(state, 'prevX')] : Array<Dynamic>)))))) {
+          if (_Runtime.truthy(_Runtime.andValue(hasVelInherit, function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([_Runtime.field(state, 'prevX')] : Array<Dynamic>)))))) {
             (vx = cast ((vx + (emitterVelX * _Runtime.field(config, 'velocityInheritance'))) : Dynamic));
             (vy = cast ((vy + (emitterVelY * _Runtime.field(config, 'velocityInheritance'))) : Dynamic));
           }
@@ -353,7 +353,7 @@ class UpdateParticleEmitter2D {
           _Runtime.setIndex(_Runtime.field(data, 'transforms'), tt, spawnX);
           _Runtime.setIndex(_Runtime.field(data, 'transforms'), (tt + 1.0), spawnY);
           var spawnAngle:Dynamic = _Runtime.select(_Runtime.orValue(_Runtime.strictEquals(shape, 'sphere'), function():Dynamic return cast _Runtime.strictEquals(shape, 'cone3d')), function():Dynamic return cast baseAngle, function():Dynamic return cast (baseAngle + (((_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) - 0.5) * 2.0) * _Runtime.field(config, 'spread'))));
-          _Runtime.setIndex(_Runtime.field(data, 'transforms'), (tt + 2.0), _Runtime.select(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(shape, 'sphere'), function():Dynamic return cast _Runtime.strictEquals(shape, 'cone3d')), function():Dynamic return cast _Runtime.strictEquals(shape, 'box')), function():Dynamic return cast _Runtime.callProperty(HxMath, 'atan2', cast ([vy, vx] : Array<Dynamic>)), function():Dynamic return cast spawnAngle));
+          _Runtime.setIndex(_Runtime.field(data, 'transforms'), (tt + 2.0), _Runtime.select(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(shape, 'sphere'), function():Dynamic return cast _Runtime.strictEquals(shape, 'cone3d')), function():Dynamic return cast _Runtime.strictEquals(shape, 'box')), function():Dynamic return cast HxMath.atan2(vy, vx), function():Dynamic return cast spawnAngle));
           _Runtime.setIndex(_Runtime.field(data, 'transforms'), (tt + 3.0), _Runtime.select(hasScaleCurve, function():Dynamic return cast (spawnScale * _Runtime.callValue(sampleParticleCurve, cast ([scaleCurve, 0.0] : Array<Dynamic>))), function():Dynamic return cast spawnScale));
           _Runtime.setIndex(_Runtime.field(data, 'positionsZ'), idx, spawnZ);
           _Runtime.setIndex(_Runtime.field(data, 'alphas'), idx, _Runtime.select(hasAlphaCurve, function():Dynamic return cast _Runtime.callValue(sampleParticleCurve, cast ([alphaCurve, 0.0] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(config, 'alphaStart')));
@@ -434,7 +434,7 @@ class UpdateParticleEmitter2D {
     var crossZ:Dynamic = cast _Runtime.UNDEFINED;
     kx = -dy;
     ky = dx;
-    sinAngle = _Runtime.callProperty(HxMath, 'sqrt', cast ([((kx * kx) + (ky * ky))] : Array<Dynamic>));
+    sinAngle = HxMath.sqrt(((kx * kx) + (ky * ky)));
     cosAngle = dz;
     if (_Runtime.truthy(_Runtime.compare(sinAngle, 0.000001, '<'))) {
       if (_Runtime.truthy(_Runtime.compare(cosAngle, 0.0, '>'))) {

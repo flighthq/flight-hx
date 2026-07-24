@@ -20,7 +20,7 @@ class DecimatePath {
       if (_Runtime.truthy(_Runtime.compare(n, 2.0, '<'))) { continue; }
       var closed:Dynamic = _Runtime.andValue(_Runtime.andValue(_Runtime.compare(n, 3.0, '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(contour, 0.0), _Runtime.getIndex(contour, (_Runtime.field(contour, 'length') - 2.0)))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(contour, 1.0), _Runtime.getIndex(contour, (_Runtime.field(contour, 'length') - 1.0))));
       var last:Dynamic = _Runtime.select(closed, function():Dynamic return cast (n - 1.0), function():Dynamic return cast n);
-      var keep:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [last]);
+      var keep:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [last]);
       _Runtime.setIndex(keep, 0.0, 1.0);
       _Runtime.setIndex(keep, (last - 1.0), 1.0);
       _Runtime.callValue(DecimatePath.douglasPeucker__decimatePath, cast ([contour, 0.0, (last - 1.0), (tolerance * tolerance), keep] : Array<Dynamic>));

@@ -23,9 +23,9 @@ class Updater {
     _Runtime.callProperty(Updater._states__updater, 'set', cast ([updater, next] : Array<Dynamic>));
   }
 
-  public static final _states__updater:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _states__updater:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static final _subscriptions__updater:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _subscriptions__updater:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function attachAppUpdater(updater:AppUpdater):Void {
     var backend:Dynamic = cast _Runtime.UNDEFINED;

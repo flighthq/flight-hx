@@ -10,7 +10,7 @@ import flighthq.types.Vector3.Vector3Like;
 class RandomDistributions {
   public static function pick<T>(random:RandomSource, items:Array<Dynamic>):Null<Dynamic> {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(items, 'length'), 0.0))) { return cast _Runtime.field(_Runtime, 'UNDEFINED'); }
-    return cast _Runtime.getIndex(items, _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * _Runtime.field(items, 'length'))] : Array<Dynamic>)));
+    return cast _Runtime.getIndex(items, HxMath.floor((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * _Runtime.field(items, 'length'))));
     return cast null;
   }
 
@@ -18,7 +18,7 @@ class RandomDistributions {
     var u:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(rate, 0.0, '<='))) { throw _Runtime.rangeError('randomExponential: rate must be > 0'); }
     u = _Runtime.callValue(random, cast ([] : Array<Dynamic>));
-    return cast (-_Runtime.callProperty(HxMath, 'log', cast ([_Runtime.select(_Runtime.strictEquals(u, 0.0), function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'EPSILON'), function():Dynamic return cast u)] : Array<Dynamic>)) / rate);
+    return cast (-HxMath.log(_Runtime.select(_Runtime.strictEquals(u, 0.0), function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'EPSILON'), function():Dynamic return cast u)) / rate);
     return cast null;
   }
 
@@ -28,7 +28,7 @@ class RandomDistributions {
     var z:Dynamic = cast _Runtime.UNDEFINED;
     u1 = _Runtime.callValue(random, cast ([] : Array<Dynamic>));
     u2 = _Runtime.callValue(random, cast ([] : Array<Dynamic>));
-    z = (_Runtime.callProperty(HxMath, 'sqrt', cast ([(-2.0 * _Runtime.callProperty(HxMath, 'log', cast ([_Runtime.select(_Runtime.strictEquals(u1, 0.0), function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'EPSILON'), function():Dynamic return cast u1)] : Array<Dynamic>)))] : Array<Dynamic>)) * _Runtime.callProperty(HxMath, 'cos', cast ([((HxMath.PI * 2.0) * u2)] : Array<Dynamic>)));
+    z = (HxMath.sqrt((-2.0 * HxMath.log(_Runtime.select(_Runtime.strictEquals(u1, 0.0), function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'EPSILON'), function():Dynamic return cast u1)))) * HxMath.cos(((HxMath.PI * 2.0) * u2)));
     return cast (mean + (z * standardDeviation));
     return cast null;
   }
@@ -42,10 +42,10 @@ class RandomDistributions {
     var z1:Dynamic = cast _Runtime.UNDEFINED;
     u1 = _Runtime.callValue(random, cast ([] : Array<Dynamic>));
     u2 = _Runtime.callValue(random, cast ([] : Array<Dynamic>));
-    mag = _Runtime.callProperty(HxMath, 'sqrt', cast ([(-2.0 * _Runtime.callProperty(HxMath, 'log', cast ([_Runtime.select(_Runtime.strictEquals(u1, 0.0), function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'EPSILON'), function():Dynamic return cast u1)] : Array<Dynamic>)))] : Array<Dynamic>));
+    mag = HxMath.sqrt((-2.0 * HxMath.log(_Runtime.select(_Runtime.strictEquals(u1, 0.0), function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'EPSILON'), function():Dynamic return cast u1))));
     angle = ((HxMath.PI * 2.0) * u2);
-    z0 = (mean + ((mag * _Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>))) * standardDeviation));
-    z1 = (mean + ((mag * _Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>))) * standardDeviation));
+    z0 = (mean + ((mag * HxMath.cos(angle)) * standardDeviation));
+    z1 = (mean + ((mag * HxMath.sin(angle)) * standardDeviation));
     return cast cast ([z0, z1] : Array<Dynamic>);
     return cast null;
   }
@@ -80,8 +80,8 @@ class RandomDistributions {
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var y:Dynamic = cast _Runtime.UNDEFINED;
     angle = ((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * HxMath.PI) * 2.0);
-    x = _Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>));
-    y = _Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>));
+    x = HxMath.cos(angle);
+    y = HxMath.sin(angle);
     _Runtime.setField(out, 'x', x);
     _Runtime.setField(out, 'y', y);
   }
@@ -99,7 +99,7 @@ class RandomDistributions {
       (y = cast (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
       (s = cast (((x * x) + (y * y)) : Dynamic));
     } while (_Runtime.truthy(_Runtime.compare(s, 1.0, '>=')));
-    f = (2.0 * _Runtime.callProperty(HxMath, 'sqrt', cast ([(1.0 - s)] : Array<Dynamic>)));
+    f = (2.0 * HxMath.sqrt((1.0 - s)));
     rx = (x * f);
     ry = (y * f);
     rz = (1.0 - (2.0 * s));
@@ -113,7 +113,7 @@ class RandomDistributions {
     var k:Dynamic = cast _Runtime.UNDEFINED;
     var product:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(lambda, 0.0, '<='))) { throw _Runtime.rangeError('randomPoisson: lambda must be > 0'); }
-    limit = _Runtime.callProperty(HxMath, 'exp', cast ([-lambda] : Array<Dynamic>));
+    limit = HxMath.exp(-lambda);
     k = 0.0;
     product = _Runtime.callValue(random, cast ([] : Array<Dynamic>));
     while (_Runtime.truthy(_Runtime.compare(product, limit, '>'))) {
@@ -161,7 +161,7 @@ class RandomDistributions {
     {
       var i:Dynamic = (_Runtime.field(items, 'length') - 1.0);
       while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>'))) {
-        var j:Dynamic = _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * (i + 1.0))] : Array<Dynamic>));
+        var j:Dynamic = HxMath.floor((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * (i + 1.0)));
         var tmp:Dynamic = _Runtime.getIndex(items, i);
         _Runtime.setIndex(items, i, _Runtime.getIndex(items, j));
         _Runtime.setIndex(items, j, tmp);

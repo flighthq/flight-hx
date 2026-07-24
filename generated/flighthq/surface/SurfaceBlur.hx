@@ -18,7 +18,7 @@ class SurfaceBlur {
         var b:Dynamic = 0.0;
         var a:Dynamic = 0.0;
         var count:Dynamic = 0.0;
-        var initEnd:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([(radius + 1.0), width] : Array<Dynamic>));
+        var initEnd:Dynamic = HxMath.min((radius + 1.0), width);
         {
           var x:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(x, initEnd, '<'))) {
@@ -35,10 +35,10 @@ class SurfaceBlur {
           var x:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(x, width, '<'))) {
             var di:Dynamic = ((rowOffset + x) * 4.0);
-            _Runtime.setIndex(out, di, _Runtime.callProperty(HxMath, 'round', cast ([(r / count)] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 1.0), _Runtime.callProperty(HxMath, 'round', cast ([(g / count)] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 2.0), _Runtime.callProperty(HxMath, 'round', cast ([(b / count)] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 3.0), _Runtime.callProperty(HxMath, 'round', cast ([(a / count)] : Array<Dynamic>)));
+            _Runtime.setIndex(out, di, HxMath.round((r / count)));
+            _Runtime.setIndex(out, (di + 1.0), HxMath.round((g / count)));
+            _Runtime.setIndex(out, (di + 2.0), HxMath.round((b / count)));
+            _Runtime.setIndex(out, (di + 3.0), HxMath.round((a / count)));
             var leaving:Dynamic = (x - radius);
             if (_Runtime.truthy(_Runtime.compare(leaving, 0.0, '>='))) {
               var li:Dynamic = ((rowOffset + leaving) * 4.0);
@@ -81,7 +81,7 @@ class SurfaceBlur {
             {
               var k:Dynamic = 0.0;
               while (_Runtime.truthy(_Runtime.compare(k, _Runtime.field(kernel, 'length'), '<'))) {
-                var px:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([(width - 1.0), ((x + k) - radius)] : Array<Dynamic>))] : Array<Dynamic>));
+                var px:Dynamic = HxMath.max(0.0, HxMath.min((width - 1.0), ((x + k) - radius)));
                 var i:Dynamic = (((y * width) + px) * 4.0);
                 var w:Dynamic = _Runtime.getIndex(kernel, k);
                 (r = cast ((r + (_Runtime.getIndex(source, i) * w)) : Dynamic));
@@ -92,10 +92,10 @@ class SurfaceBlur {
               }
             }
             var di:Dynamic = (((y * width) + x) * 4.0);
-            _Runtime.setIndex(out, di, _Runtime.callProperty(HxMath, 'round', cast ([r] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 1.0), _Runtime.callProperty(HxMath, 'round', cast ([g] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 2.0), _Runtime.callProperty(HxMath, 'round', cast ([b] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 3.0), _Runtime.callProperty(HxMath, 'round', cast ([a] : Array<Dynamic>)));
+            _Runtime.setIndex(out, di, HxMath.round(r));
+            _Runtime.setIndex(out, (di + 1.0), HxMath.round(g));
+            _Runtime.setIndex(out, (di + 2.0), HxMath.round(b));
+            _Runtime.setIndex(out, (di + 3.0), HxMath.round(a));
             x++;
           }
         }
@@ -113,7 +113,7 @@ class SurfaceBlur {
         var b:Dynamic = 0.0;
         var a:Dynamic = 0.0;
         var count:Dynamic = 0.0;
-        var initEnd:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([(radius + 1.0), height] : Array<Dynamic>));
+        var initEnd:Dynamic = HxMath.min((radius + 1.0), height);
         {
           var y:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(y, initEnd, '<'))) {
@@ -130,10 +130,10 @@ class SurfaceBlur {
           var y:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(y, height, '<'))) {
             var di:Dynamic = (((y * width) + x) * 4.0);
-            _Runtime.setIndex(out, di, _Runtime.callProperty(HxMath, 'round', cast ([(r / count)] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 1.0), _Runtime.callProperty(HxMath, 'round', cast ([(g / count)] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 2.0), _Runtime.callProperty(HxMath, 'round', cast ([(b / count)] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 3.0), _Runtime.callProperty(HxMath, 'round', cast ([(a / count)] : Array<Dynamic>)));
+            _Runtime.setIndex(out, di, HxMath.round((r / count)));
+            _Runtime.setIndex(out, (di + 1.0), HxMath.round((g / count)));
+            _Runtime.setIndex(out, (di + 2.0), HxMath.round((b / count)));
+            _Runtime.setIndex(out, (di + 3.0), HxMath.round((a / count)));
             var leaving:Dynamic = (y - radius);
             if (_Runtime.truthy(_Runtime.compare(leaving, 0.0, '>='))) {
               var li:Dynamic = (((leaving * width) + x) * 4.0);
@@ -176,7 +176,7 @@ class SurfaceBlur {
             {
               var k:Dynamic = 0.0;
               while (_Runtime.truthy(_Runtime.compare(k, _Runtime.field(kernel, 'length'), '<'))) {
-                var py:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([(height - 1.0), ((y + k) - radius)] : Array<Dynamic>))] : Array<Dynamic>));
+                var py:Dynamic = HxMath.max(0.0, HxMath.min((height - 1.0), ((y + k) - radius)));
                 var i:Dynamic = (((py * width) + x) * 4.0);
                 var w:Dynamic = _Runtime.getIndex(kernel, k);
                 (r = cast ((r + (_Runtime.getIndex(source, i) * w)) : Dynamic));
@@ -187,10 +187,10 @@ class SurfaceBlur {
               }
             }
             var di:Dynamic = (((y * width) + x) * 4.0);
-            _Runtime.setIndex(out, di, _Runtime.callProperty(HxMath, 'round', cast ([r] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 1.0), _Runtime.callProperty(HxMath, 'round', cast ([g] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 2.0), _Runtime.callProperty(HxMath, 'round', cast ([b] : Array<Dynamic>)));
-            _Runtime.setIndex(out, (di + 3.0), _Runtime.callProperty(HxMath, 'round', cast ([a] : Array<Dynamic>)));
+            _Runtime.setIndex(out, di, HxMath.round(r));
+            _Runtime.setIndex(out, (di + 1.0), HxMath.round(g));
+            _Runtime.setIndex(out, (di + 2.0), HxMath.round(b));
+            _Runtime.setIndex(out, (di + 3.0), HxMath.round(a));
             x++;
           }
         }
@@ -206,9 +206,9 @@ class SurfaceBlur {
     var passes:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    radiusX = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(options, 'radiusX'), function():Dynamic return cast 2.0)] : Array<Dynamic>))] : Array<Dynamic>));
-    radiusY = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(options, 'radiusY'), function():Dynamic return cast 2.0)] : Array<Dynamic>))] : Array<Dynamic>));
-    passes = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    radiusX = HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(options, 'radiusX'), function():Dynamic return cast 2.0)));
+    radiusY = HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(options, 'radiusY'), function():Dynamic return cast 2.0)));
+    passes = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0)));
     _Runtime.callValue(extractSurfacePixels, cast ([out, source] : Array<Dynamic>));
     a = out;
     b = scratch;
@@ -251,7 +251,7 @@ class SurfaceBlur {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, len, '<'))) {
         var x:Dynamic = (i - radius);
-        _Runtime.setIndex(out, i, _Runtime.callProperty(HxMath, 'exp', cast ([(-(x * x) / twoSigmaSq)] : Array<Dynamic>)));
+        _Runtime.setIndex(out, i, HxMath.exp((-(x * x) / twoSigmaSq)));
         (sum = cast ((sum + _Runtime.getIndex(out, i)) : Dynamic));
         i++;
       }
@@ -274,11 +274,11 @@ class SurfaceBlur {
     var kernelY:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    passCount = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([passes] : Array<Dynamic>))] : Array<Dynamic>));
-    radiusX = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'ceil', cast ([(sigmaX * 3.0)] : Array<Dynamic>))] : Array<Dynamic>));
-    radiusY = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'ceil', cast ([(sigmaY * 3.0)] : Array<Dynamic>))] : Array<Dynamic>));
-    kernelX = _Runtime.select(_Runtime.compare(radiusX, 0.0, '>'), function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [((2.0 * radiusX) + 1.0)]), function():Dynamic return cast null);
-    kernelY = _Runtime.select(_Runtime.compare(radiusY, 0.0, '>'), function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [((2.0 * radiusY) + 1.0)]), function():Dynamic return cast null);
+    passCount = HxMath.max(1.0, HxMath.round(passes));
+    radiusX = HxMath.max(0.0, HxMath.ceil((sigmaX * 3.0)));
+    radiusY = HxMath.max(0.0, HxMath.ceil((sigmaY * 3.0)));
+    kernelX = _Runtime.select(_Runtime.compare(radiusX, 0.0, '>'), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [((2.0 * radiusX) + 1.0)]), function():Dynamic return cast null);
+    kernelY = _Runtime.select(_Runtime.compare(radiusY, 0.0, '>'), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [((2.0 * radiusY) + 1.0)]), function():Dynamic return cast null);
     if (_Runtime.truthy(kernelX)) { _Runtime.callValue(computeGaussianKernel, cast ([kernelX, radiusX, sigmaX] : Array<Dynamic>)); }
     if (_Runtime.truthy(kernelY)) { _Runtime.callValue(computeGaussianKernel, cast ([kernelY, radiusY, sigmaY] : Array<Dynamic>)); }
     _Runtime.callValue(extractSurfacePixels, cast ([out, source] : Array<Dynamic>));

@@ -17,8 +17,8 @@ class GlSketchEffect {
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'stylization.sketch', GlSketchEffect.SKETCH_FRAGMENT_SRC__glSketchEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_strength'] : Array<Dynamic>)), strength] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform2f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_resolution'] : Array<Dynamic>)), _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_strength'] : Array<Dynamic>)), strength] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_resolution'] : Array<Dynamic>)), _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

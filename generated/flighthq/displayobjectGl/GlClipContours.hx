@@ -24,11 +24,11 @@ class GlClipContours {
     _Runtime.callValue(flushGlSpriteBatch, cast ([state] : Array<Dynamic>));
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    nextDepth = _Runtime.callProperty(HxMath, 'max', cast ([0.0, (_Runtime.coalesce(_Runtime.field(runtime, 'currentMaskDepth'), function():Dynamic return cast 0.0) - 1.0)] : Array<Dynamic>));
+    nextDepth = HxMath.max(0.0, (_Runtime.coalesce(_Runtime.field(runtime, 'currentMaskDepth'), function():Dynamic return cast 0.0) - 1.0));
     _Runtime.setField(runtime, 'currentMaskDepth', nextDepth);
     if (_Runtime.truthy(_Runtime.strictEquals(nextDepth, 0.0))) {
-      _Runtime.callProperty(gl, 'disable', cast ([_Runtime.field(gl, 'STENCIL_TEST')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'stencilMask', cast ([255.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'disable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'STENCIL_TEST')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'stencilMask', cast ([255.0] : Array<Dynamic>));
     }
   }
 
@@ -42,39 +42,39 @@ class GlClipContours {
     gl = _Runtime.field(state, 'gl');
     depth = _Runtime.coalesce(_Runtime.field(runtime, 'currentMaskDepth'), function():Dynamic return cast 0.0);
     if (_Runtime.truthy(_Runtime.strictEquals(depth, 0.0))) {
-      _Runtime.callProperty(gl, 'enable', cast ([_Runtime.field(gl, 'STENCIL_TEST')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'stencilMask', cast ([255.0] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'clear', cast ([_Runtime.field(gl, 'STENCIL_BUFFER_BIT')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'enable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'STENCIL_TEST')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'stencilMask', cast ([255.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'clear', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'STENCIL_BUFFER_BIT')] : Array<Dynamic>));
     }
     _Runtime.callValue(GlClipContours.ensureClipProgram__glClipContours, cast ([state] : Array<Dynamic>));
     program = _Runtime.callValue(GlClipContours.clipProgramFor__glClipContours, cast ([state] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'useProgram', cast ([_Runtime.field(program, 'program')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'useProgram', cast ([_Runtime.field(program, 'program')] : Array<Dynamic>));
     _Runtime.setField(runtime, 'currentProgram', _Runtime.field(program, 'program'));
     _Runtime.callValue(GlClipContours.uploadClipUniforms__glClipContours, cast ([state, program, worldTransform] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'colorMask', cast ([false, false, false, false] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'stencilMask', cast ([255.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'disable', cast ([_Runtime.field(gl, 'CULL_FACE')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'colorMask', cast ([false, false, false, false] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'stencilMask', cast ([255.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'disable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'CULL_FACE')] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(winding, 'evenOdd'))) {
-      _Runtime.callProperty(gl, 'stencilFunc', cast ([_Runtime.field(gl, 'ALWAYS'), 0.0, 255.0] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'stencilOp', cast ([_Runtime.field(gl, 'KEEP'), _Runtime.field(gl, 'KEEP'), _Runtime.field(gl, 'INVERT')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'stencilFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ALWAYS'), 0.0, 255.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'stencilOp', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'KEEP'), flighthq._internal.WebGl2RenderingContext.field(gl, 'KEEP'), flighthq._internal.WebGl2RenderingContext.field(gl, 'INVERT')] : Array<Dynamic>));
     } else {
-      _Runtime.callProperty(gl, 'stencilFunc', cast ([_Runtime.field(gl, 'ALWAYS'), 0.0, 255.0] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'stencilOpSeparate', cast ([_Runtime.field(gl, 'FRONT'), _Runtime.field(gl, 'KEEP'), _Runtime.field(gl, 'KEEP'), _Runtime.field(gl, 'INCR_WRAP')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'stencilOpSeparate', cast ([_Runtime.field(gl, 'BACK'), _Runtime.field(gl, 'KEEP'), _Runtime.field(gl, 'KEEP'), _Runtime.field(gl, 'DECR_WRAP')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'stencilFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ALWAYS'), 0.0, 255.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'stencilOpSeparate', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'FRONT'), flighthq._internal.WebGl2RenderingContext.field(gl, 'KEEP'), flighthq._internal.WebGl2RenderingContext.field(gl, 'KEEP'), flighthq._internal.WebGl2RenderingContext.field(gl, 'INCR_WRAP')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'stencilOpSeparate', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'BACK'), flighthq._internal.WebGl2RenderingContext.field(gl, 'KEEP'), flighthq._internal.WebGl2RenderingContext.field(gl, 'KEEP'), flighthq._internal.WebGl2RenderingContext.field(gl, 'DECR_WRAP')] : Array<Dynamic>));
     }
     _Runtime.callValue(GlClipContours.drawClipContours__glClipContours, cast ([state, program, contours] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'colorMask', cast ([true, true, true, true] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'stencilMask', cast ([0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'colorMask', cast ([true, true, true, true] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'stencilMask', cast ([0.0] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(winding, 'evenOdd'))) {
-      _Runtime.callProperty(gl, 'stencilFunc', cast ([_Runtime.field(gl, 'EQUAL'), 1.0, 1.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'stencilFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'EQUAL'), 1.0, 1.0] : Array<Dynamic>));
     } else {
-      _Runtime.callProperty(gl, 'stencilFunc', cast ([_Runtime.field(gl, 'NOTEQUAL'), 0.0, 255.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'stencilFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'NOTEQUAL'), 0.0, 255.0] : Array<Dynamic>));
     }
-    _Runtime.callProperty(gl, 'stencilOp', cast ([_Runtime.field(gl, 'KEEP'), _Runtime.field(gl, 'KEEP'), _Runtime.field(gl, 'KEEP')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'stencilOp', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'KEEP'), flighthq._internal.WebGl2RenderingContext.field(gl, 'KEEP'), flighthq._internal.WebGl2RenderingContext.field(gl, 'KEEP')] : Array<Dynamic>));
     _Runtime.setField(runtime, 'currentMaskDepth', (depth + 1.0));
   }
 
-  public static final clipPrograms__glClipContours:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final clipPrograms__glClipContours:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function clipProgramFor__glClipContours(state:GlRenderState):ClipProgram__glClipContours {
     return cast _Runtime.callProperty(GlClipContours.clipPrograms__glClipContours, 'get', cast ([_Runtime.field(state, 'gl')] : Array<Dynamic>));
@@ -87,7 +87,7 @@ class GlClipContours {
     gl = _Runtime.field(state, 'gl');
     if (_Runtime.truthy(_Runtime.callProperty(GlClipContours.clipPrograms__glClipContours, 'has', cast ([gl] : Array<Dynamic>)))) { return; }
     program = _Runtime.callValue(GlClipContours.compileProgram__glClipContours, cast ([gl, GlClipContours.VERTEX_SOURCE__glClipContours, GlClipContours.FRAGMENT_SOURCE__glClipContours] : Array<Dynamic>));
-    _Runtime.callProperty(GlClipContours.clipPrograms__glClipContours, 'set', cast ([gl, { program: program, buffer: _Runtime.callProperty(gl, 'createBuffer', cast ([] : Array<Dynamic>)), positionLocation: _Runtime.callProperty(gl, 'getAttribLocation', cast ([program, 'a_position'] : Array<Dynamic>)), worldMatrixLocation: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_worldMatrix'] : Array<Dynamic>)), projectionLocation: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_projection'] : Array<Dynamic>)) }] : Array<Dynamic>));
+    _Runtime.callProperty(GlClipContours.clipPrograms__glClipContours, 'set', cast ([gl, { program: program, buffer: flighthq._internal.WebGl2RenderingContext.call(gl, 'createBuffer', cast ([] : Array<Dynamic>)), positionLocation: flighthq._internal.WebGl2RenderingContext.call(gl, 'getAttribLocation', cast ([program, 'a_position'] : Array<Dynamic>)), worldMatrixLocation: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_worldMatrix'] : Array<Dynamic>)), projectionLocation: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_projection'] : Array<Dynamic>)) }] : Array<Dynamic>));
   }
 
   public static function compileProgram__glClipContours(gl:Dynamic, vertex:String, fragment:String):Dynamic {
@@ -98,23 +98,23 @@ class GlClipContours {
   public static function uploadClipUniforms__glClipContours(state:GlRenderState, program:ClipProgram__glClipContours, m:Matrix):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    _Runtime.callProperty(gl, 'uniformMatrix3fv', cast ([_Runtime.field(program, 'worldMatrixLocation'), false, cast ([_Runtime.field(m, 'a'), _Runtime.field(m, 'b'), 0.0, _Runtime.field(m, 'c'), _Runtime.field(m, 'd'), 0.0, _Runtime.field(m, 'tx'), _Runtime.field(m, 'ty'), 1.0] : Array<Dynamic>)] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniformMatrix3fv', cast ([_Runtime.field(program, 'projectionLocation'), false, _Runtime.callValue(GlClipContours.getProjectionMat3__glClipContours, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniformMatrix3fv', cast ([_Runtime.field(program, 'worldMatrixLocation'), false, cast ([_Runtime.field(m, 'a'), _Runtime.field(m, 'b'), 0.0, _Runtime.field(m, 'c'), _Runtime.field(m, 'd'), 0.0, _Runtime.field(m, 'tx'), _Runtime.field(m, 'ty'), 1.0] : Array<Dynamic>)] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniformMatrix3fv', cast ([_Runtime.field(program, 'projectionLocation'), false, _Runtime.callValue(GlClipContours.getProjectionMat3__glClipContours, cast ([state] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function drawClipContours__glClipContours(state:GlRenderState, program:ClipProgram__glClipContours, contours:Array<Array<Float>>):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(program, 'buffer')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'enableVertexAttribArray', cast ([_Runtime.field(program, 'positionLocation')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribPointer', cast ([_Runtime.field(program, 'positionLocation'), 2.0, _Runtime.field(gl, 'FLOAT'), false, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(program, 'buffer')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(program, 'positionLocation')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(program, 'positionLocation'), 2.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, 0.0, 0.0] : Array<Dynamic>));
     {
       var c:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(c, _Runtime.field(contours, 'length'), '<'))) {
         var contour:Dynamic = _Runtime.getIndex(contours, c);
         if (_Runtime.truthy(_Runtime.compare(_Runtime.field(contour, 'length'), 6.0, '<'))) { c++; continue; }
-        _Runtime.callProperty(gl, 'bufferData', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [contour]), _Runtime.field(gl, 'STREAM_DRAW')] : Array<Dynamic>));
-        _Runtime.callProperty(gl, 'drawArrays', cast ([_Runtime.field(gl, 'TRIANGLE_FAN'), 0.0, (Std.int(_Runtime.field(contour, 'length')) >> Std.int(1.0))] : Array<Dynamic>));
+        flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.construct(_Runtime.globalValue('Float32Array'), [contour]), flighthq._internal.WebGl2RenderingContext.field(gl, 'STREAM_DRAW')] : Array<Dynamic>));
+        flighthq._internal.WebGl2RenderingContext.call(gl, 'drawArrays', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TRIANGLE_FAN'), 0.0, (Std.int(_Runtime.field(contour, 'length')) >> Std.int(1.0))] : Array<Dynamic>));
         c++;
       }
     }
@@ -127,7 +127,7 @@ class GlClipContours {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     w = _Runtime.orValue(_Runtime.field(_Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas')), 'width'), function():Dynamic return cast 1.0);
     h = _Runtime.orValue(_Runtime.field(_Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas')), 'height'), function():Dynamic return cast 1.0);
-    return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [cast ([(2.0 / w), 0.0, 0.0, 0.0, (-2.0 / h), 0.0, -1.0, 1.0, 1.0] : Array<Dynamic>)]);
+    return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [cast ([(2.0 / w), 0.0, 0.0, 0.0, (-2.0 / h), 0.0, -1.0, 1.0, 1.0] : Array<Dynamic>)]);
     return cast null;
   }
 }

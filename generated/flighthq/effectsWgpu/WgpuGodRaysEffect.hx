@@ -26,7 +26,7 @@ class WgpuGodRaysEffect {
     decay = _Runtime.coalesce(_Runtime.field(effect, 'decay'), function():Dynamic return cast 0.93);
     weight = _Runtime.coalesce(_Runtime.field(effect, 'weight'), function():Dynamic return cast 0.4);
     exposure = _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 0.6);
-    samples = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 64.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    samples = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 64.0)));
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'atmospheric.godRays.' + Std.string(samples) + '', _Runtime.callValue(WgpuGodRaysEffect.buildGodRaysFragment__wgpuGodRaysEffect, cast ([samples] : Array<Dynamic>)), 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, centerX);

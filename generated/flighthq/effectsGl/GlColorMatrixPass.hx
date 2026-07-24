@@ -12,7 +12,7 @@ class GlColorMatrixPass {
   public static function applyColorMatrixPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, matrix:Array<Float>):Void {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [20.0]);
+    m = _Runtime.construct(_Runtime.globalValue('Float32Array'), [20.0]);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, 20.0, '<'))) {
@@ -22,7 +22,7 @@ class GlColorMatrixPass {
     }
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'adjustment.colorMatrix', GlColorMatrixPass.COLOR_MATRIX_FRAGMENT_SRC__glColorMatrixPass] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      _Runtime.callProperty(gl, 'uniform1fv', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_colorMatrix'] : Array<Dynamic>)), m] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1fv', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_colorMatrix'] : Array<Dynamic>)), m] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

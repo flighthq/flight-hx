@@ -25,8 +25,8 @@ class SurfaceColorMatrix {
     var c:Dynamic = cast _Runtime.UNDEFINED;
     var s:Dynamic = cast _Runtime.UNDEFINED;
     radians = ((degrees * HxMath.PI) / 180.0);
-    c = _Runtime.callProperty(HxMath, 'cos', cast ([radians] : Array<Dynamic>));
-    s = _Runtime.callProperty(HxMath, 'sin', cast ([radians] : Array<Dynamic>));
+    c = HxMath.cos(radians);
+    s = HxMath.sin(radians);
     _Runtime.callValue(SurfaceColorMatrix.setColorMatrix__surfaceColorMatrix, cast ([out, ((0.213 + (c * 0.787)) - (s * 0.213)), ((0.715 - (c * 0.715)) - (s * 0.715)), ((0.072 - (c * 0.072)) + (s * 0.928)), 0.0, 0.0, ((0.213 - (c * 0.213)) + (s * 0.143)), ((0.715 + (c * 0.285)) + (s * 0.14)), ((0.072 - (c * 0.072)) - (s * 0.283)), 0.0, 0.0, ((0.213 - (c * 0.213)) - (s * 0.787)), ((0.715 - (c * 0.715)) + (s * 0.715)), ((0.072 + (c * 0.928)) + (s * 0.072)), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
   }
 
@@ -115,7 +115,7 @@ class SurfaceColorMatrix {
   public static final LUMA_B__surfaceColorMatrix:Dynamic = 0.072;
 
   public static function clampByte__surfaceColorMatrix(value:Float):Float {
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([value] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast HxMath.max(0.0, HxMath.min(255.0, HxMath.round(value)));
     return cast null;
   }
 

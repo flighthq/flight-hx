@@ -6,17 +6,17 @@ import flighthq._internal._Runtime;
 
 class GaussianMath {
   public static function computeGaussianRadiusFromSigma(sigma:Float):Float {
-    return cast _Runtime.callProperty(HxMath, 'ceil', cast ([(3.0 * _Runtime.callProperty(HxMath, 'max', cast ([0.0, sigma] : Array<Dynamic>)))] : Array<Dynamic>));
+    return cast HxMath.ceil((3.0 * HxMath.max(0.0, sigma)));
     return cast null;
   }
 
   public static function computeGaussianSigmaFromRadius(radius:Float):Float {
-    return cast (_Runtime.callProperty(HxMath, 'max', cast ([0.0, radius] : Array<Dynamic>)) / 3.0);
+    return cast (HxMath.max(0.0, radius) / 3.0);
     return cast null;
   }
 
   public static function computeSeparableBlurPassCount(samples:Null<Float>):Float {
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(samples, function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast HxMath.max(1.0, HxMath.round(_Runtime.coalesce(samples, function():Dynamic return cast 1.0)));
     return cast null;
   }
 
@@ -26,14 +26,14 @@ class GaussianMath {
     var twoSigmaSq:Dynamic = cast _Runtime.UNDEFINED;
     var sum:Dynamic = cast _Runtime.UNDEFINED;
     var invSum:Dynamic = cast _Runtime.UNDEFINED;
-    r = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'ceil', cast ([radius] : Array<Dynamic>))] : Array<Dynamic>));
-    s = _Runtime.callProperty(HxMath, 'max', cast ([0.000001, sigma] : Array<Dynamic>));
+    r = HxMath.max(0.0, HxMath.ceil(radius));
+    s = HxMath.max(0.000001, sigma);
     twoSigmaSq = ((2.0 * s) * s);
     sum = 0.0;
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, r, '<='))) {
-        var w:Dynamic = _Runtime.callProperty(HxMath, 'exp', cast ([(-(i * i) / twoSigmaSq)] : Array<Dynamic>));
+        var w:Dynamic = HxMath.exp((-(i * i) / twoSigmaSq));
         _Runtime.setIndex(out, i, w);
         (sum = cast ((sum + _Runtime.select(_Runtime.strictEquals(i, 0.0), function():Dynamic return cast w, function():Dynamic return cast (2.0 * w))) : Dynamic));
         i++;

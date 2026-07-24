@@ -89,7 +89,7 @@ class ApplyParticleForces {
               var dx:Dynamic = (_Runtime.field(force, 'x') - px);
               var dy:Dynamic = (_Runtime.field(force, 'y') - py);
               var dz:Dynamic = (fz - pz);
-              var dist:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((dx * dx) + (dy * dy)) + (dz * dz))] : Array<Dynamic>));
+              var dist:Dynamic = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
               if (_Runtime.truthy(_Runtime.compare(dist, 0.000001, '<='))) { break; }
               var mag:Dynamic = (_Runtime.field(force, 'strength') * _Runtime.callValue(ApplyParticleForces.falloffFactor__applyParticleForces, cast ([_Runtime.field(force, 'falloff'), dist, _Runtime.field(force, 'radius')] : Array<Dynamic>)));
               if (_Runtime.truthy(_Runtime.strictEquals(mag, 0.0))) { break; }
@@ -104,7 +104,7 @@ class ApplyParticleForces {
               var dx:Dynamic = (px - _Runtime.field(force, 'x'));
               var dy:Dynamic = (py - _Runtime.field(force, 'y'));
               var dz:Dynamic = (pz - fz);
-              var dist:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((dx * dx) + (dy * dy)) + (dz * dz))] : Array<Dynamic>));
+              var dist:Dynamic = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
               if (_Runtime.truthy(_Runtime.compare(dist, 0.000001, '<='))) { break; }
               var mag:Dynamic = (_Runtime.field(force, 'strength') * _Runtime.callValue(ApplyParticleForces.falloffFactor__applyParticleForces, cast ([_Runtime.field(force, 'falloff'), dist, _Runtime.field(force, 'radius')] : Array<Dynamic>)));
               if (_Runtime.truthy(_Runtime.strictEquals(mag, 0.0))) { break; }
@@ -139,7 +139,7 @@ class ApplyParticleForces {
     {
       var __switchValue = falloff;
       if (__switchValue == 'linear') {
-        return cast _Runtime.select(_Runtime.andValue(!_Runtime.looseEquals(radius, null), function():Dynamic return cast _Runtime.compare(radius, 0.0, '>')), function():Dynamic return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, (1.0 - (dist / radius))] : Array<Dynamic>)), function():Dynamic return cast 1.0);
+        return cast _Runtime.select(_Runtime.andValue(!_Runtime.looseEquals(radius, null), function():Dynamic return cast _Runtime.compare(radius, 0.0, '>')), function():Dynamic return cast HxMath.max(0.0, (1.0 - (dist / radius))), function():Dynamic return cast 1.0);
       }
       else if (__switchValue == 'inverseSquare') {
         {
@@ -167,8 +167,8 @@ class ApplyParticleForces {
     var n11:Dynamic = cast _Runtime.UNDEFINED;
     var nx0:Dynamic = cast _Runtime.UNDEFINED;
     var nx1:Dynamic = cast _Runtime.UNDEFINED;
-    x0 = _Runtime.callProperty(HxMath, 'floor', cast ([x] : Array<Dynamic>));
-    y0 = _Runtime.callProperty(HxMath, 'floor', cast ([y] : Array<Dynamic>));
+    x0 = HxMath.floor(x);
+    y0 = HxMath.floor(y);
     fx = (x - x0);
     fy = (y - y0);
     ux = ((fx * fx) * (3.0 - (2.0 * fx)));

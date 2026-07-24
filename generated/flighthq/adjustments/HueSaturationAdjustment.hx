@@ -62,7 +62,7 @@ class HueSaturationAdjustment {
   }
 
   public static function fract__hueSaturationAdjustment(v:Float):Float {
-    return cast (v - _Runtime.callProperty(HxMath, 'floor', cast ([v] : Array<Dynamic>)));
+    return cast (v - HxMath.floor(v));
     return cast null;
   }
 

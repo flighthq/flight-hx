@@ -20,13 +20,13 @@ class RenderEffectInterpolation {
     var bRec:Dynamic = cast _Runtime.UNDEFINED;
     var outRecord:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(a, 'kind'), _Runtime.field(b, 'kind')))) { return cast false; }
-    tc = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, t] : Array<Dynamic>))] : Array<Dynamic>));
-    numericKeys = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
-    booleanKeys = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
-    stringKeys = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
+    tc = HxMath.max(0.0, HxMath.min(1.0, t));
+    numericKeys = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    booleanKeys = _Runtime.construct(_Runtime.globalValue('Set'), []);
+    stringKeys = _Runtime.construct(_Runtime.globalValue('Set'), []);
     aRec = (cast a : Dynamic);
     bRec = (cast b : Dynamic);
-    for (key in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([aRec] : Array<Dynamic>)))) {
+    for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(aRec))) {
       if (_Runtime.truthy(_Runtime.strictEquals(key, 'kind'))) { continue; }
       var va:Dynamic = _Runtime.getIndex(aRec, key);
       var vb:Dynamic = _Runtime.getIndex(bRec, key);
@@ -38,7 +38,7 @@ class RenderEffectInterpolation {
         _Runtime.callProperty(stringKeys, 'add', cast ([key] : Array<Dynamic>));
       } } }
     }
-    for (key in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([bRec] : Array<Dynamic>)))) {
+    for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(bRec))) {
       if (_Runtime.truthy(_Runtime.strictEquals(key, 'kind'))) { continue; }
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.truthy(_Runtime.callProperty(numericKeys, 'has', cast ([key] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(booleanKeys, 'has', cast ([key] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(stringKeys, 'has', cast ([key] : Array<Dynamic>)))))) {
         var vb:Dynamic = _Runtime.getIndex(bRec, key);

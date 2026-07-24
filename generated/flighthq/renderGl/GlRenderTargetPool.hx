@@ -17,10 +17,10 @@ class GlRenderTargetPool {
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;
     var sampleCount:Dynamic = cast _Runtime.UNDEFINED;
-    w = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(descriptor, 'width')] : Array<Dynamic>))] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(descriptor, 'height')] : Array<Dynamic>))] : Array<Dynamic>));
+    w = HxMath.max(1.0, HxMath.ceil(_Runtime.field(descriptor, 'width')));
+    h = HxMath.max(1.0, HxMath.ceil(_Runtime.field(descriptor, 'height')));
     format = _Runtime.coalesce(_Runtime.field(descriptor, 'format'), function():Dynamic return cast 'rgba8');
-    sampleCount = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.coalesce(_Runtime.field(descriptor, 'sampleCount'), function():Dynamic return cast 1.0)] : Array<Dynamic>));
+    sampleCount = HxMath.max(1.0, _Runtime.coalesce(_Runtime.field(descriptor, 'sampleCount'), function():Dynamic return cast 1.0));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(pool, 'free'), 'length'), '<'))) {

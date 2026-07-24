@@ -21,8 +21,8 @@ class GlEnvironmentCube {
     cube = _Runtime.field(environment, 'environment');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(cube, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(GlEnvironmentCube.hasGlCubeFacePixels__glEnvironmentCube, cast ([cube] : Array<Dynamic>)))))) { return cast null; }
     gl = _Runtime.field(state, 'gl');
-    texture = _Runtime.callProperty(gl, 'createTexture', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_CUBE_MAP'), texture] : Array<Dynamic>));
+    texture = flighthq._internal.WebGl2RenderingContext.call(gl, 'createTexture', cast ([] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_CUBE_MAP'), texture] : Array<Dynamic>));
     {
       var face:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(face, 6.0, '<'))) {
@@ -30,19 +30,19 @@ class GlEnvironmentCube {
         face++;
       }
     }
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_CUBE_MAP'), _Runtime.field(gl, 'TEXTURE_MIN_FILTER'), _Runtime.field(gl, 'LINEAR')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_CUBE_MAP'), _Runtime.field(gl, 'TEXTURE_MAG_FILTER'), _Runtime.field(gl, 'LINEAR')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_CUBE_MAP'), _Runtime.field(gl, 'TEXTURE_WRAP_S'), _Runtime.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_CUBE_MAP'), _Runtime.field(gl, 'TEXTURE_WRAP_T'), _Runtime.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_CUBE_MAP'), _Runtime.field(gl, 'TEXTURE_WRAP_R'), _Runtime.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_CUBE_MAP'), null] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_CUBE_MAP'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_MIN_FILTER'), flighthq._internal.WebGl2RenderingContext.field(gl, 'LINEAR')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_CUBE_MAP'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_MAG_FILTER'), flighthq._internal.WebGl2RenderingContext.field(gl, 'LINEAR')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_CUBE_MAP'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_WRAP_S'), flighthq._internal.WebGl2RenderingContext.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_CUBE_MAP'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_WRAP_T'), flighthq._internal.WebGl2RenderingContext.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_CUBE_MAP'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_WRAP_R'), flighthq._internal.WebGl2RenderingContext.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_CUBE_MAP'), null] : Array<Dynamic>));
     _Runtime.setField(runtime, 'environmentSourceCube', texture);
     return cast texture;
     return cast null;
   }
 
   public static function getGlCubeFaceTarget(gl:Dynamic, face:Float):Float {
-    return cast (_Runtime.field(gl, 'TEXTURE_CUBE_MAP_POSITIVE_X') + face);
+    return cast (flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_CUBE_MAP_POSITIVE_X') + face);
     return cast null;
   }
 
@@ -52,9 +52,9 @@ class GlEnvironmentCube {
     texture = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'environmentSourceCube');
     if (_Runtime.truthy(_Runtime.strictEquals(texture, null))) { return cast false; }
     gl = _Runtime.field(state, 'gl');
-    _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_CUBE_MAP'), texture] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_CUBE_MAP'), texture] : Array<Dynamic>));
     _Runtime.callValue(uploadGlTextureImageResource, cast ([gl, _Runtime.callValue(getGlCubeFaceTarget, cast ([gl, face] : Array<Dynamic>)), image] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_CUBE_MAP'), null] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_CUBE_MAP'), null] : Array<Dynamic>));
     return cast true;
     return cast null;
   }

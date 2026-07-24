@@ -33,7 +33,7 @@ class VelocityField {
     lenSq = ((vx * vx) + (vy * vy));
     maxSq = (maxLength * maxLength);
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(lenSq, maxSq, '>'), function():Dynamic return cast _Runtime.compare(lenSq, 0.0, '>')))) {
-      var scale:Dynamic = (maxLength / _Runtime.callProperty(HxMath, 'sqrt', cast ([lenSq] : Array<Dynamic>)));
+      var scale:Dynamic = (maxLength / HxMath.sqrt(lenSq));
       _Runtime.setField(out, 'x', (vx * scale));
       _Runtime.setField(out, 'y', (vy * scale));
     } else {
@@ -65,7 +65,7 @@ class VelocityField {
   }
 
   public static function createVelocityField():flighthq.types.Velocity.VelocityField {
-    return cast { samples: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []), frameId: 0.0 };
+    return cast { samples: _Runtime.construct(_Runtime.globalValue('WeakMap'), []), frameId: 0.0 };
     return cast null;
   }
 
@@ -119,12 +119,12 @@ class VelocityField {
   public static function isVelocityZero(velocity:Velocity2D, ?epsilon:Float):Bool {
     var e:Dynamic = cast _Runtime.UNDEFINED;
     e = _Runtime.coalesce(epsilon, function():Dynamic return cast 0.0);
-    return cast _Runtime.andValue(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.field(velocity, 'x')] : Array<Dynamic>)), e, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.field(velocity, 'y')] : Array<Dynamic>)), e, '<='));
+    return cast _Runtime.andValue(_Runtime.compare(HxMath.abs(_Runtime.field(velocity, 'x')), e, '<='), function():Dynamic return cast _Runtime.compare(HxMath.abs(_Runtime.field(velocity, 'y')), e, '<='));
     return cast null;
   }
 
   public static function lengthOfVelocity(velocity:Velocity2D):Float {
-    return cast _Runtime.callProperty(HxMath, 'sqrt', cast ([((_Runtime.field(velocity, 'x') * _Runtime.field(velocity, 'x')) + (_Runtime.field(velocity, 'y') * _Runtime.field(velocity, 'y')))] : Array<Dynamic>));
+    return cast HxMath.sqrt(((_Runtime.field(velocity, 'x') * _Runtime.field(velocity, 'x')) + (_Runtime.field(velocity, 'y') * _Runtime.field(velocity, 'y'))));
     return cast null;
   }
 
@@ -145,7 +145,7 @@ class VelocityField {
     var len:Dynamic = cast _Runtime.UNDEFINED;
     sx = _Runtime.field(source, 'x');
     sy = _Runtime.field(source, 'y');
-    len = _Runtime.callProperty(HxMath, 'sqrt', cast ([((sx * sx) + (sy * sy))] : Array<Dynamic>));
+    len = HxMath.sqrt(((sx * sx) + (sy * sy)));
     if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
       var inv:Dynamic = (1.0 / len);
       _Runtime.setField(out, 'x', (sx * inv));

@@ -310,8 +310,8 @@ class Matrix {
     var a1:Dynamic = cast _Runtime.UNDEFINED;
     var c1:Dynamic = cast _Runtime.UNDEFINED;
     var tx1:Dynamic = cast _Runtime.UNDEFINED;
-    cos = _Runtime.callProperty(HxMath, 'cos', cast ([theta] : Array<Dynamic>));
-    sin = _Runtime.callProperty(HxMath, 'sin', cast ([theta] : Array<Dynamic>));
+    cos = HxMath.cos(theta);
+    sin = HxMath.sin(theta);
     a1 = ((_Runtime.field(source, 'a') * cos) - (_Runtime.field(source, 'b') * sin));
     _Runtime.setField(out, 'b', ((_Runtime.field(source, 'a') * sin) + (_Runtime.field(source, 'b') * cos)));
     _Runtime.setField(out, 'a', a1);
@@ -336,8 +336,8 @@ class Matrix {
     _Runtime.setField(out, 'a', (width / 1638.4));
     _Runtime.setField(out, 'd', (height / 1638.4));
     if (_Runtime.truthy(!_Runtime.strictEquals(rotation, 0.0))) {
-      var cos:Dynamic = _Runtime.callProperty(HxMath, 'cos', cast ([rotation] : Array<Dynamic>));
-      var sin:Dynamic = _Runtime.callProperty(HxMath, 'sin', cast ([rotation] : Array<Dynamic>));
+      var cos:Dynamic = HxMath.cos(rotation);
+      var sin:Dynamic = HxMath.sin(rotation);
       _Runtime.setField(out, 'b', (sin * _Runtime.field(out, 'd')));
       _Runtime.setField(out, 'c', (-sin * _Runtime.field(out, 'a')));
       _Runtime.setField(out, 'a', (_Runtime.field(out, 'a') * cos));
@@ -391,8 +391,8 @@ class Matrix {
 
   public static function setTransformMatrix(out:MatrixLike, scaleX:Float, scaleY:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Void {
     if (_Runtime.truthy(!_Runtime.strictEquals(rotation, 0.0))) {
-      var cos:Dynamic = _Runtime.callProperty(HxMath, 'cos', cast ([rotation] : Array<Dynamic>));
-      var sin:Dynamic = _Runtime.callProperty(HxMath, 'sin', cast ([rotation] : Array<Dynamic>));
+      var cos:Dynamic = HxMath.cos(rotation);
+      var sin:Dynamic = HxMath.sin(rotation);
       _Runtime.setField(out, 'a', (cos * scaleX));
       _Runtime.setField(out, 'b', (sin * scaleY));
       _Runtime.setField(out, 'c', (-sin * scaleX));

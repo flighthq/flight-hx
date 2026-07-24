@@ -68,7 +68,7 @@ class ParseDds {
       var arraySize:Dynamic = _Runtime.callValue(readByteReaderU32, cast ([dx10] : Array<Dynamic>));
       (format = cast (_Runtime.coalesce(_Runtime.getIndex(ParseDds.ddsDxgiFormat__parseDds, dxgiFormat), function():Dynamic return cast null) : Dynamic));
       (cube = cast (_Runtime.orValue(cube, function():Dynamic return cast !_Runtime.strictEquals((Std.int(miscFlag) & Std.int(ParseDds.ddsDx10MiscCube__parseDds)), 0.0)) : Dynamic));
-      (layers = cast (_Runtime.callProperty(HxMath, 'max', cast ([1.0, arraySize] : Array<Dynamic>)) : Dynamic));
+      (layers = cast (HxMath.max(1.0, arraySize) : Dynamic));
       (dataOffset = cast ((ParseDds.ddsDataOffset__parseDds + 20.0) : Dynamic));
     } else { if (_Runtime.truthy(!_Runtime.strictEquals((Std.int(pfFlags) & Std.int(ParseDds.ddsPfFourCC__parseDds)), 0.0))) {
       (format = cast (_Runtime.coalesce(_Runtime.getIndex(ParseDds.ddsFourCcFormat__parseDds, fourCC), function():Dynamic return cast null) : Dynamic));
@@ -78,10 +78,10 @@ class ParseDds {
       (format = cast (null : Dynamic));
     } } }
     if (_Runtime.truthy(_Runtime.strictEquals(format, null))) { return cast null; }
-    width = _Runtime.callProperty(HxMath, 'max', cast ([1.0, dwWidth] : Array<Dynamic>));
-    height = _Runtime.callProperty(HxMath, 'max', cast ([1.0, dwHeight] : Array<Dynamic>));
+    width = HxMath.max(1.0, dwWidth);
+    height = HxMath.max(1.0, dwHeight);
     faces = _Runtime.select(cube, function():Dynamic return cast 6.0, function():Dynamic return cast 1.0);
-    mipLevels = _Runtime.callProperty(HxMath, 'max', cast ([1.0, dwMipMapCount] : Array<Dynamic>));
+    mipLevels = HxMath.max(1.0, dwMipMapCount);
     layout = _Runtime.callValue(computeTextureContainerLevels, cast ([format, width, height, mipLevels, layers, faces, dataOffset] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(layout, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(layout, 'endOffset'), _Runtime.field(bytes, 'byteLength'), '>')))) { return cast null; }
     return cast { depth: 1.0, faces: faces, format: format, height: height, layers: layers, levels: _Runtime.field(layout, 'levels'), mipLevels: mipLevels, supercompression: 'None', width: width };

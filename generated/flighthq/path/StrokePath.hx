@@ -51,22 +51,22 @@ class StrokePath {
     var delta:Dynamic = cast _Runtime.UNDEFINED;
     var steps:Dynamic = cast _Runtime.UNDEFINED;
     var stepAngle:Dynamic = cast _Runtime.UNDEFINED;
-    ratio = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, (tolerance / r)] : Array<Dynamic>))] : Array<Dynamic>));
-    n = _Runtime.callProperty(HxMath, 'max', cast ([4.0, _Runtime.callProperty(HxMath, 'ceil', cast ([(HxMath.PI / _Runtime.callProperty(HxMath, 'acos', cast ([(1.0 - ratio)] : Array<Dynamic>)))] : Array<Dynamic>))] : Array<Dynamic>));
+    ratio = HxMath.max(0.0, HxMath.min(1.0, (tolerance / r)));
+    n = HxMath.max(4.0, HxMath.ceil((HxMath.PI / HxMath.acos((1.0 - ratio)))));
     delta = (endAngle - startAngle);
     if (_Runtime.truthy(ccw)) {
       if (_Runtime.truthy(_Runtime.compare(delta, 0.0, '>'))) { (delta = cast ((delta - (HxMath.PI * 2.0)) : Dynamic)); }
     } else {
       if (_Runtime.truthy(_Runtime.compare(delta, 0.0, '<'))) { (delta = cast ((delta + (HxMath.PI * 2.0)) : Dynamic)); }
     }
-    steps = _Runtime.callProperty(HxMath, 'ceil', cast ([(_Runtime.callProperty(HxMath, 'abs', cast ([delta] : Array<Dynamic>)) / ((HxMath.PI * 2.0) / n))] : Array<Dynamic>));
+    steps = HxMath.ceil((HxMath.abs(delta) / ((HxMath.PI * 2.0) / n)));
     if (_Runtime.truthy(_Runtime.compare(steps, 1.0, '<='))) { return; }
     stepAngle = (delta / steps);
     {
       var i:Dynamic = 1.0;
       while (_Runtime.truthy(_Runtime.compare(i, steps, '<'))) {
         var angle:Dynamic = (startAngle + (i * stepAngle));
-        _Runtime.pushMany(out, cast ([(cx + (_Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>)) * r)), (cy + (_Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>)) * r))] : Array<Dynamic>));
+        _Runtime.pushMany(out, cast ([(cx + (HxMath.cos(angle) * r)), (cy + (HxMath.sin(angle) * r))] : Array<Dynamic>));
         i++;
       }
     }
@@ -91,12 +91,12 @@ class StrokePath {
       if (_Runtime.truthy(isStart)) {
         _Runtime.pushMany(left, cast ([lx, ly] : Array<Dynamic>));
         _Runtime.pushMany(right, cast ([rx, ry] : Array<Dynamic>));
-        var startAngle:Dynamic = _Runtime.callProperty(HxMath, 'atan2', cast ([-ny, -nx] : Array<Dynamic>));
-        var endAngle:Dynamic = _Runtime.callProperty(HxMath, 'atan2', cast ([ny, nx] : Array<Dynamic>));
+        var startAngle:Dynamic = HxMath.atan2(-ny, -nx);
+        var endAngle:Dynamic = HxMath.atan2(ny, nx);
         _Runtime.callValue(StrokePath.addArcPoints__strokePath, cast ([px, py, halfWidth, startAngle, endAngle, false, tolerance, right] : Array<Dynamic>));
       } else {
         _Runtime.pushMany(left, cast ([lx, ly] : Array<Dynamic>));
-        _Runtime.callValue(StrokePath.addArcPoints__strokePath, cast ([px, py, halfWidth, _Runtime.callProperty(HxMath, 'atan2', cast ([ny, nx] : Array<Dynamic>)), _Runtime.callProperty(HxMath, 'atan2', cast ([-ny, -nx] : Array<Dynamic>)), true, tolerance, left] : Array<Dynamic>));
+        _Runtime.callValue(StrokePath.addArcPoints__strokePath, cast ([px, py, halfWidth, HxMath.atan2(ny, nx), HxMath.atan2(-ny, -nx), true, tolerance, left] : Array<Dynamic>));
         _Runtime.pushMany(right, cast ([rx, ry] : Array<Dynamic>));
       }
     } }
@@ -121,7 +121,7 @@ class StrokePath {
     ry1 = (py - (ny1 * halfWidth));
     if (_Runtime.truthy(_Runtime.strictEquals(join, 'miter'))) {
       var cross:Dynamic = ((nx0 * ny1) - (ny0 * nx1));
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([cross] : Array<Dynamic>)), 1e-8, '<'))) {
+      if (_Runtime.truthy(_Runtime.compare(HxMath.abs(cross), 1e-8, '<'))) {
         _Runtime.pushMany(left, cast ([lx0, ly0] : Array<Dynamic>));
         _Runtime.pushMany(right, cast ([rx0, ry0] : Array<Dynamic>));
       } else {
@@ -130,7 +130,7 @@ class StrokePath {
         var t:Dynamic = (((dx * ny1) - (dy * nx1)) / cross);
         var mx:Dynamic = (lx0 + (t * nx0));
         var my:Dynamic = (ly0 + (t * ny0));
-        var miterLen:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((mx - px) * (mx - px)) + ((my - py) * (my - py)))] : Array<Dynamic>));
+        var miterLen:Dynamic = HxMath.sqrt((((mx - px) * (mx - px)) + ((my - py) * (my - py))));
         if (_Runtime.truthy(_Runtime.compare(miterLen, (halfWidth * miterLimit), '<='))) {
           _Runtime.pushMany(left, cast ([mx, my] : Array<Dynamic>));
           var rmx:Dynamic = ((px * 2.0) - mx);
@@ -143,10 +143,10 @@ class StrokePath {
       }
     } else { if (_Runtime.truthy(_Runtime.strictEquals(join, 'round'))) {
       _Runtime.pushMany(left, cast ([lx0, ly0] : Array<Dynamic>));
-      _Runtime.callValue(StrokePath.addArcPoints__strokePath, cast ([px, py, halfWidth, _Runtime.callProperty(HxMath, 'atan2', cast ([ny0, nx0] : Array<Dynamic>)), _Runtime.callProperty(HxMath, 'atan2', cast ([ny1, nx1] : Array<Dynamic>)), true, tolerance, left] : Array<Dynamic>));
+      _Runtime.callValue(StrokePath.addArcPoints__strokePath, cast ([px, py, halfWidth, HxMath.atan2(ny0, nx0), HxMath.atan2(ny1, nx1), true, tolerance, left] : Array<Dynamic>));
       _Runtime.pushMany(left, cast ([lx1, ly1] : Array<Dynamic>));
       _Runtime.pushMany(right, cast ([rx0, ry0] : Array<Dynamic>));
-      _Runtime.callValue(StrokePath.addArcPoints__strokePath, cast ([px, py, halfWidth, _Runtime.callProperty(HxMath, 'atan2', cast ([-ny0, -nx0] : Array<Dynamic>)), _Runtime.callProperty(HxMath, 'atan2', cast ([-ny1, -nx1] : Array<Dynamic>)), false, tolerance, right] : Array<Dynamic>));
+      _Runtime.callValue(StrokePath.addArcPoints__strokePath, cast ([px, py, halfWidth, HxMath.atan2(-ny0, -nx0), HxMath.atan2(-ny1, -nx1), false, tolerance, right] : Array<Dynamic>));
       _Runtime.pushMany(right, cast ([rx1, ry1] : Array<Dynamic>));
     } else {
       _Runtime.pushMany(left, cast ([lx0, ly0, lx1, ly1] : Array<Dynamic>));
@@ -204,13 +204,13 @@ class StrokePath {
         var y1:Dynamic = _Runtime.getIndex(pts, (((i + 1.0) * 2.0) + 1.0));
         var dx:Dynamic = (x1 - x0);
         var dy:Dynamic = (y1 - y0);
-        var segLen:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([((dx * dx) + (dy * dy))] : Array<Dynamic>));
+        var segLen:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
         if (_Runtime.truthy(_Runtime.andValue(isOn, function():Dynamic return cast _Runtime.strictEquals(current, null)))) {
           (current = cast (cast ([x0, y0] : Array<Dynamic>) : Dynamic));
         }
         var consumed:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(consumed, segLen, '<'))) {
-          var step:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([remaining, (segLen - consumed)] : Array<Dynamic>));
+          var step:Dynamic = HxMath.min(remaining, (segLen - consumed));
           var t:Dynamic = ((consumed + step) / segLen);
           var ix:Dynamic = (x0 + (t * dx));
           var iy:Dynamic = (y0 + (t * dy));
@@ -446,7 +446,7 @@ class StrokePath {
       while (_Runtime.truthy(_Runtime.compare(i, (n - 1.0), '<'))) {
         var dx:Dynamic = (_Runtime.getIndex(pts, ((i + 1.0) * 2.0)) - _Runtime.getIndex(pts, (i * 2.0)));
         var dy:Dynamic = (_Runtime.getIndex(pts, (((i + 1.0) * 2.0) + 1.0)) - _Runtime.getIndex(pts, ((i * 2.0) + 1.0)));
-        var len:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([((dx * dx) + (dy * dy))] : Array<Dynamic>));
+        var len:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
         if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
           _Runtime.setIndex(normals, (i * 2.0), (-dy / len));
           _Runtime.setIndex(normals, ((i * 2.0) + 1.0), (dx / len));

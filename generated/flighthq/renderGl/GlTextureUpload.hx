@@ -7,11 +7,11 @@ import flighthq.types.ImageResource;
 
 class GlTextureUpload {
   public static function uploadGlTextureData(gl:Dynamic, target:Float, width:Float, height:Float, data:Dynamic):Void {
-    _Runtime.callProperty(gl, 'texImage2D', cast ([target, 0.0, _Runtime.field(gl, 'RGBA'), width, height, 0.0, _Runtime.field(gl, 'RGBA'), _Runtime.field(gl, 'UNSIGNED_BYTE'), (cast data : Dynamic)] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texImage2D', cast ([target, 0.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'RGBA'), width, height, 0.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'RGBA'), flighthq._internal.WebGl2RenderingContext.field(gl, 'UNSIGNED_BYTE'), (cast data : Dynamic)] : Array<Dynamic>));
   }
 
   public static function uploadGlTextureElement(gl:Dynamic, target:Float, source:Dynamic):Void {
-    _Runtime.callProperty(gl, 'texImage2D', cast ([target, 0.0, _Runtime.field(gl, 'RGBA'), _Runtime.field(gl, 'RGBA'), _Runtime.field(gl, 'UNSIGNED_BYTE'), source] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texImage2D', cast ([target, 0.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'RGBA'), flighthq._internal.WebGl2RenderingContext.field(gl, 'RGBA'), flighthq._internal.WebGl2RenderingContext.field(gl, 'UNSIGNED_BYTE'), source] : Array<Dynamic>));
   }
 
   public static function uploadGlTextureImageResource(gl:Dynamic, target:Float, image:ImageResource):Void {

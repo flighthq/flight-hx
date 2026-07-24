@@ -14,12 +14,12 @@ class GlyphRasterizerBackend {
       var width:Dynamic = cast _Runtime.UNDEFINED;
       var height:Dynamic = cast _Runtime.UNDEFINED;
       var pixels:Dynamic = cast _Runtime.UNDEFINED;
-      size = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.field(options, 'fontSize')] : Array<Dynamic>))] : Array<Dynamic>));
-      width = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([(size * 0.6)] : Array<Dynamic>))] : Array<Dynamic>));
-      height = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([(size * 0.7)] : Array<Dynamic>))] : Array<Dynamic>));
-      pixels = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [((width * height) * 4.0)]);
+      size = HxMath.max(1.0, HxMath.round(_Runtime.field(options, 'fontSize')));
+      width = HxMath.max(1.0, HxMath.round((size * 0.6)));
+      height = HxMath.max(1.0, HxMath.round((size * 0.7)));
+      pixels = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [((width * height) * 4.0)]);
       _Runtime.fill(pixels, 255.0, 0, null, 1);
-      return cast { advance: (width + _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([(size * 0.1)] : Array<Dynamic>))] : Array<Dynamic>))), bearingX: 0.0, bearingY: height, height: height, pixels: pixels, width: width };
+      return cast { advance: (width + HxMath.max(1.0, HxMath.round((size * 0.1)))), bearingX: 0.0, bearingY: height, height: height, pixels: pixels, width: width };
     } };
     return cast null;
   }
@@ -48,12 +48,12 @@ class GlyphRasterizerBackend {
 
   public static function _acquireGlyphRasterContext__glyphRasterizerBackend():Null<Dynamic> {
     try {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['OffscreenCanvas'] : Array<Dynamic>)), 'undefined'))) {
-        var context:Dynamic = _Runtime.callProperty(_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['OffscreenCanvas'] : Array<Dynamic>)), [1.0, 1.0]), 'getContext', cast (['2d'] : Array<Dynamic>));
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofGlobal('OffscreenCanvas'), 'undefined'))) {
+        var context:Dynamic = _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('OffscreenCanvas'), [1.0, 1.0]), 'getContext', cast (['2d'] : Array<Dynamic>));
         if (_Runtime.truthy(!_Runtime.strictEquals(context, null))) { return cast context; }
       }
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement')), 'function')))) {
-        var context:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>));
+      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('document'), 'createElement')), 'function')))) {
+        var context:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>));
         if (_Runtime.truthy(!_Runtime.strictEquals(context, null))) { return cast context; }
       }
     } catch (__error:Dynamic) {
@@ -81,30 +81,30 @@ class GlyphRasterizerBackend {
     text = _Runtime.fromCodePoint(codepoint);
     fontStyle = _Runtime.coalesce(_Runtime.field(options, 'fontStyle'), function():Dynamic return cast 'normal');
     fontWeight = _Runtime.coalesce(_Runtime.field(options, 'fontWeight'), function():Dynamic return cast 'normal');
-    _Runtime.setField(context, 'font', '' + Std.string(fontStyle) + ' ' + Std.string(fontWeight) + ' ' + Std.string(_Runtime.field(options, 'fontSize')) + 'px ' + Std.string(_Runtime.field(options, 'fontFamily')) + '');
-    _Runtime.setField(context, 'textBaseline', 'alphabetic');
-    _Runtime.setField(context, 'textAlign', 'left');
-    metrics = _Runtime.callProperty(context, 'measureText', cast ([text] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.setField(context, 'font', '' + Std.string(fontStyle) + ' ' + Std.string(fontWeight) + ' ' + Std.string(_Runtime.field(options, 'fontSize')) + 'px ' + Std.string(_Runtime.field(options, 'fontFamily')) + '');
+    flighthq._internal.CanvasRenderingContext2D.setField(context, 'textBaseline', 'alphabetic');
+    flighthq._internal.CanvasRenderingContext2D.setField(context, 'textAlign', 'left');
+    metrics = flighthq._internal.CanvasRenderingContext2D.call(context, 'measureText', cast ([text] : Array<Dynamic>));
     advance = _Runtime.field(metrics, 'width');
     left = _Runtime.coalesce(_Runtime.field(metrics, 'actualBoundingBoxLeft'), function():Dynamic return cast 0.0);
     right = _Runtime.coalesce(_Runtime.field(metrics, 'actualBoundingBoxRight'), function():Dynamic return cast advance);
     ascent = _Runtime.coalesce(_Runtime.field(metrics, 'actualBoundingBoxAscent'), function():Dynamic return cast _Runtime.field(options, 'fontSize'));
     descent = _Runtime.coalesce(_Runtime.field(metrics, 'actualBoundingBoxDescent'), function():Dynamic return cast 0.0);
     guard = 1.0;
-    width = (_Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'ceil', cast ([(left + right)] : Array<Dynamic>))] : Array<Dynamic>)) + (guard * 2.0));
-    height = (_Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'ceil', cast ([(ascent + descent)] : Array<Dynamic>))] : Array<Dynamic>)) + (guard * 2.0));
+    width = (HxMath.max(0.0, HxMath.ceil((left + right))) + (guard * 2.0));
+    height = (HxMath.max(0.0, HxMath.ceil((ascent + descent))) + (guard * 2.0));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(width, (guard * 2.0), '<='), function():Dynamic return cast _Runtime.compare(height, (guard * 2.0), '<=')))) { return cast null; }
-    canvas = _Runtime.field(context, 'canvas');
+    canvas = flighthq._internal.CanvasRenderingContext2D.field(context, 'canvas');
     _Runtime.setField(canvas, 'width', width);
     _Runtime.setField(canvas, 'height', height);
-    _Runtime.setField(context, 'font', '' + Std.string(fontStyle) + ' ' + Std.string(fontWeight) + ' ' + Std.string(_Runtime.field(options, 'fontSize')) + 'px ' + Std.string(_Runtime.field(options, 'fontFamily')) + '');
-    _Runtime.setField(context, 'textBaseline', 'alphabetic');
-    _Runtime.setField(context, 'textAlign', 'left');
-    _Runtime.callProperty(context, 'clearRect', cast ([0.0, 0.0, width, height] : Array<Dynamic>));
-    _Runtime.setField(context, 'fillStyle', '#ffffff');
-    _Runtime.callProperty(context, 'fillText', cast ([text, (guard + left), (guard + ascent)] : Array<Dynamic>));
-    image = _Runtime.callProperty(context, 'getImageData', cast ([0.0, 0.0, width, height] : Array<Dynamic>));
-    return cast { advance: advance, bearingX: -left, bearingY: ascent, height: height, pixels: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [_Runtime.field(image, 'data')]), width: width };
+    flighthq._internal.CanvasRenderingContext2D.setField(context, 'font', '' + Std.string(fontStyle) + ' ' + Std.string(fontWeight) + ' ' + Std.string(_Runtime.field(options, 'fontSize')) + 'px ' + Std.string(_Runtime.field(options, 'fontFamily')) + '');
+    flighthq._internal.CanvasRenderingContext2D.setField(context, 'textBaseline', 'alphabetic');
+    flighthq._internal.CanvasRenderingContext2D.setField(context, 'textAlign', 'left');
+    flighthq._internal.CanvasRenderingContext2D.call(context, 'clearRect', cast ([0.0, 0.0, width, height] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.setField(context, 'fillStyle', '#ffffff');
+    flighthq._internal.CanvasRenderingContext2D.call(context, 'fillText', cast ([text, (guard + left), (guard + ascent)] : Array<Dynamic>));
+    image = flighthq._internal.CanvasRenderingContext2D.call(context, 'getImageData', cast ([0.0, 0.0, width, height] : Array<Dynamic>));
+    return cast { advance: advance, bearingX: -left, bearingY: ascent, height: height, pixels: _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [_Runtime.field(image, 'data')]), width: width };
     return cast null;
   }
 }

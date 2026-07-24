@@ -40,21 +40,21 @@ class WgpuRenderState {
       var nearestSampler:Dynamic = cast _Runtime.UNDEFINED;
       var state:Dynamic = cast _Runtime.UNDEFINED;
       var runtime:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'gpu')))) { throw _Runtime.error('WebGPU is not supported in this browser.'); }
-      adapter = flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'gpu'), 'requestAdapter', cast ([_Runtime.select(!_Runtime.looseEquals(_Runtime.field(options, 'powerPreference'), null), function():Dynamic return cast { powerPreference: _Runtime.field(options, 'powerPreference') }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)));
+      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(_Runtime.globalValue('navigator'), 'gpu')))) { throw _Runtime.error('WebGPU is not supported in this browser.'); }
+      adapter = flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.field(_Runtime.globalValue('navigator'), 'gpu'), 'requestAdapter', cast ([_Runtime.select(!_Runtime.looseEquals(_Runtime.field(options, 'powerPreference'), null), function():Dynamic return cast { powerPreference: _Runtime.field(options, 'powerPreference') }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)));
       if (_Runtime.truthy(!_Runtime.truthy(adapter))) { throw _Runtime.error('Failed to get WebGPU adapter.'); }
       requiredLimits = {  };
       if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(adapter, 'limits'), 'maxBindGroups'), 5.0, '>='))) { _Runtime.setField(requiredLimits, 'maxBindGroups', 5.0); }
-      device = flighthq._internal._Async.awaitValue(_Runtime.callProperty(adapter, 'requestDevice', cast ([_Runtime.select(_Runtime.compare(_Runtime.field(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([requiredLimits] : Array<Dynamic>)), 'length'), 0.0, '>'), function():Dynamic return cast { requiredLimits: requiredLimits }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)));
-      format = _Runtime.coalesce(_Runtime.field(options, 'format'), function():Dynamic return cast _Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'gpu'), 'getPreferredCanvasFormat', cast ([] : Array<Dynamic>)));
+      device = flighthq._internal._Async.awaitValue(_Runtime.callProperty(adapter, 'requestDevice', cast ([_Runtime.select(_Runtime.compare(_Runtime.field(flighthq._internal.DynamicObject.keys(requiredLimits), 'length'), 0.0, '>'), function():Dynamic return cast { requiredLimits: requiredLimits }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>)));
+      format = _Runtime.coalesce(_Runtime.field(options, 'format'), function():Dynamic return cast _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('navigator'), 'gpu'), 'getPreferredCanvasFormat', cast ([] : Array<Dynamic>)));
       context = (cast _Runtime.callProperty(canvas, 'getContext', cast (['webgpu'] : Array<Dynamic>)) : Null<Dynamic>);
       if (_Runtime.truthy(!_Runtime.truthy(context))) { throw _Runtime.error('Failed to get WebGPU canvas context.'); }
-      _Runtime.callProperty(context, 'configure', cast ([{ device: device, format: format, alphaMode: 'premultiplied', usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'RENDER_ATTACHMENT')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'COPY_SRC'))) }] : Array<Dynamic>));
+      _Runtime.callProperty(context, 'configure', cast ([{ device: device, format: format, alphaMode: 'premultiplied', usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'RENDER_ATTACHMENT')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'COPY_SRC'))) }] : Array<Dynamic>));
       uniformStride = HxMath.max(HxMath.max(256.0, _Runtime.field(_Runtime.field(device, 'limits'), 'minUniformBufferOffsetAlignment')), UNIFORM_BYTE_SIZE);
       ringByteSize = (uniformStride * WgpuRenderState.RING_SLOT_COUNT__wgpuRenderState);
-      uniformBuffer = _Runtime.callProperty(device, 'createBuffer', cast ([{ size: ringByteSize, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
-      uniformData = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(ringByteSize / 4.0)]);
-      uniformDataU32 = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [_Runtime.field(uniformData, 'buffer')]);
+      uniformBuffer = _Runtime.callProperty(device, 'createBuffer', cast ([{ size: ringByteSize, usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST'))) }] : Array<Dynamic>));
+      uniformData = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(ringByteSize / 4.0)]);
+      uniformDataU32 = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [_Runtime.field(uniformData, 'buffer')]);
       __destructure0 = _Runtime.callValue(createWgpuBindGroupLayouts, cast ([device] : Array<Dynamic>));
       uniformBindGroupLayout = _Runtime.field(__destructure0, 'uniformBindGroupLayout');
       textureBindGroupLayout = _Runtime.field(__destructure0, 'textureBindGroupLayout');
@@ -79,13 +79,13 @@ class WgpuRenderState {
       _Runtime.setField(runtime, 'uniformOffset', 0.0);
       _Runtime.setField(runtime, 'uniformStride', uniformStride);
       _Runtime.setField(runtime, 'uniformBindGroup', uniformBindGroup);
-      _Runtime.setField(runtime, 'matrixArray', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [9.0]));
-      _Runtime.setField(runtime, 'pipelineCache', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []));
+      _Runtime.setField(runtime, 'matrixArray', _Runtime.construct(_Runtime.globalValue('Float32Array'), [9.0]));
+      _Runtime.setField(runtime, 'pipelineCache', _Runtime.construct(_Runtime.globalValue('Map'), []));
       _Runtime.setField(runtime, 'linearSampler', linearSampler);
       _Runtime.setField(runtime, 'nearestSampler', nearestSampler);
-      _Runtime.setField(runtime, 'samplerCache', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []));
-      _Runtime.setField(runtime, 'textureCache', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []));
-      _Runtime.setField(runtime, 'imageResourceTextureCache', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []));
+      _Runtime.setField(runtime, 'samplerCache', _Runtime.construct(_Runtime.globalValue('Map'), []));
+      _Runtime.setField(runtime, 'textureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
+      _Runtime.setField(runtime, 'imageResourceTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
       _Runtime.setField(runtime, 'defaultBitmapShader', null);
       _Runtime.setField(runtime, 'particleInstanceBuffer', null);
       _Runtime.setField(runtime, 'particleInstanceData', null);
@@ -95,8 +95,8 @@ class WgpuRenderState {
       _Runtime.setField(runtime, 'spriteBatchMaterialRenderer', null);
       _Runtime.setField(runtime, 'spriteBatchMaterialFloats', 0.0);
       _Runtime.setField(runtime, 'spriteBatchCount', 0.0);
-      _Runtime.setField(runtime, 'spriteBatchInstanceData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(13.0 * 256.0)]));
-      _Runtime.setField(runtime, 'spriteBatchMaterialData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(8.0 * 256.0)]));
+      _Runtime.setField(runtime, 'spriteBatchInstanceData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [(13.0 * 256.0)]));
+      _Runtime.setField(runtime, 'spriteBatchMaterialData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [(8.0 * 256.0)]));
       _Runtime.setField(runtime, 'spriteBatchTexture', null);
       _Runtime.setField(runtime, 'spriteBatchBufferPool', cast ([] : Array<Dynamic>));
       _Runtime.setField(runtime, 'spriteBatchBufferCursor', 0.0);
@@ -154,7 +154,7 @@ class WgpuRenderState {
     var key:Dynamic = cast _Runtime.UNDEFINED;
     var sampler:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    anisotropy = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'floor', cast ([maxAnisotropy] : Array<Dynamic>))] : Array<Dynamic>));
+    anisotropy = HxMath.max(1.0, HxMath.floor(maxAnisotropy));
     effectiveFilter = _Runtime.select(_Runtime.compare(anisotropy, 1.0, '>'), function():Dynamic return cast 'linear', function():Dynamic return cast filter);
     effectiveMipmapFilter = _Runtime.select(_Runtime.compare(anisotropy, 1.0, '>'), function():Dynamic return cast 'linear', function():Dynamic return cast mipmapFilter);
     key = '' + Std.string(effectiveFilter) + '|' + Std.string(wrapU) + '|' + Std.string(wrapV) + '|' + Std.string(_Runtime.coalesce(effectiveMipmapFilter, function():Dynamic return cast 'none')) + '|' + Std.string(anisotropy) + '';
@@ -171,7 +171,7 @@ class WgpuRenderState {
   }
 
   public static function isWgpuSupported():Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.hasField(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'gpu')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'gpu'), null));
+    return cast _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'gpu')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('navigator'), 'gpu'), null));
     return cast null;
   }
 }

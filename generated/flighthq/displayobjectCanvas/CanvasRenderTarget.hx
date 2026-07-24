@@ -16,7 +16,7 @@ typedef CanvasRenderStateHandles__canvasRenderTarget = { var canvas:Dynamic; var
 typedef SavedCanvasState__canvasRenderTarget = { var canvas:Dynamic; var context:Dynamic; var renderTransform2D:Null<Matrix>; };
 
 class CanvasRenderTarget {
-  public static final _targetStack__canvasRenderTarget:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _targetStack__canvasRenderTarget:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function beginCanvasRenderPass(state:Dynamic, target:Dynamic, ?preserve:RenderPassPreserve):Void {
     var handles:Dynamic = cast _Runtime.UNDEFINED;
@@ -44,9 +44,9 @@ class CanvasRenderTarget {
   public static function createCanvasRenderTarget(width:Float, height:Float):Dynamic {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;
-    canvas = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
-    _Runtime.setField(canvas, 'width', _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([width] : Array<Dynamic>))] : Array<Dynamic>)));
-    _Runtime.setField(canvas, 'height', _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([height] : Array<Dynamic>))] : Array<Dynamic>)));
+    canvas = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
+    _Runtime.setField(canvas, 'width', HxMath.max(1.0, HxMath.ceil(width)));
+    _Runtime.setField(canvas, 'height', HxMath.max(1.0, HxMath.ceil(height)));
     context = _Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
     return cast { canvas: canvas, context: context, width: _Runtime.field(canvas, 'width'), height: _Runtime.field(canvas, 'height') };
     return cast null;
@@ -71,8 +71,8 @@ class CanvasRenderTarget {
   }
 
   public static function resizeCanvasRenderTarget(target:Dynamic, width:Float, height:Float):Void {
-    _Runtime.setField(_Runtime.field(target, 'canvas'), 'width', _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([width] : Array<Dynamic>))] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(target, 'canvas'), 'height', _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([height] : Array<Dynamic>))] : Array<Dynamic>)));
+    _Runtime.setField(_Runtime.field(target, 'canvas'), 'width', HxMath.max(1.0, HxMath.ceil(width)));
+    _Runtime.setField(_Runtime.field(target, 'canvas'), 'height', HxMath.max(1.0, HxMath.ceil(height)));
     _Runtime.setField(target, 'width', _Runtime.field(_Runtime.field(target, 'canvas'), 'width'));
     _Runtime.setField(target, 'height', _Runtime.field(_Runtime.field(target, 'canvas'), 'height'));
   }

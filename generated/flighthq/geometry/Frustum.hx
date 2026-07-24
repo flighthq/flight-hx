@@ -25,7 +25,7 @@ class Frustum {
     var len:Dynamic = cast _Runtime.UNDEFINED;
     m = _Runtime.field(inverseViewProjection, 'm');
     ndcCorners = cast ([cast ([-1.0, -1.0, -1.0] : Array<Dynamic>), cast ([1.0, -1.0, -1.0] : Array<Dynamic>), cast ([1.0, 1.0, -1.0] : Array<Dynamic>), cast ([-1.0, 1.0, -1.0] : Array<Dynamic>), cast ([-1.0, -1.0, 1.0] : Array<Dynamic>), cast ([1.0, -1.0, 1.0] : Array<Dynamic>), cast ([1.0, 1.0, 1.0] : Array<Dynamic>), cast ([-1.0, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>);
-    len = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(out, 'length'), _Runtime.field(ndcCorners, 'length')] : Array<Dynamic>));
+    len = HxMath.min(_Runtime.field(out, 'length'), _Runtime.field(ndcCorners, 'length'));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, len, '<'))) {
@@ -126,7 +126,7 @@ class Frustum {
 
   public static function __setPlane__frustum(out:PlaneLike, a:Float, b:Float, c:Float, d:Float):Void {
     var l:Dynamic = cast _Runtime.UNDEFINED;
-    l = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((a * a) + (b * b)) + (c * c))] : Array<Dynamic>));
+    l = HxMath.sqrt((((a * a) + (b * b)) + (c * c)));
     if (_Runtime.truthy(!_Runtime.strictEquals(l, 0.0))) {
       var inv:Dynamic = (1.0 / l);
       _Runtime.setField(out, 'a', (a * inv));

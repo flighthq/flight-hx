@@ -32,24 +32,24 @@ class GlPbrStandardBlock {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     if (_Runtime.truthy(_Runtime.strictEquals(standard, null))) {
-      _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(program, 'locBaseColor'), 1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locMetallic'), 0.0] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locRoughness'), 1.0] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locNormalScale'), 1.0] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform3f', cast ([_Runtime.field(program, 'locEmissive'), 0.0, 0.0, 0.0] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locEmissiveStrength'), 1.0] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locOcclusionStrength'), 1.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(program, 'locBaseColor'), 1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locMetallic'), 0.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locRoughness'), 1.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locNormalScale'), 1.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform3f', cast ([_Runtime.field(program, 'locEmissive'), 0.0, 0.0, 0.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locEmissiveStrength'), 1.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locOcclusionStrength'), 1.0] : Array<Dynamic>));
       return;
     }
     _Runtime.callValue(unpackColorToLinear, cast ([GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, _Runtime.field(standard, 'baseColor')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(program, 'locBaseColor'), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 0.0), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 1.0), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 2.0), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 3.0)] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locMetallic'), _Runtime.field(standard, 'metallic')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locRoughness'), _Runtime.field(standard, 'roughness')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locNormalScale'), _Runtime.field(standard, 'normalScale')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locOcclusionStrength'), _Runtime.field(standard, 'occlusionStrength')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(program, 'locBaseColor'), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 0.0), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 1.0), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 2.0), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 3.0)] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locMetallic'), _Runtime.field(standard, 'metallic')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locRoughness'), _Runtime.field(standard, 'roughness')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locNormalScale'), _Runtime.field(standard, 'normalScale')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locOcclusionStrength'), _Runtime.field(standard, 'occlusionStrength')] : Array<Dynamic>));
     _Runtime.callValue(unpackColorToLinear, cast ([GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, _Runtime.field(standard, 'emissive')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform3f', cast ([_Runtime.field(program, 'locEmissive'), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 0.0), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 1.0), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 2.0)] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locEmissiveStrength'), _Runtime.field(standard, 'emissiveStrength')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform3f', cast ([_Runtime.field(program, 'locEmissive'), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 0.0), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 1.0), _Runtime.getIndex(GlPbrStandardBlock.scratchRgba__glPbrStandardBlock, 2.0)] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locEmissiveStrength'), _Runtime.field(standard, 'emissiveStrength')] : Array<Dynamic>));
     _Runtime.callValue(bindGlPbrStandardTexture, cast ([state, _Runtime.field(standard, 'baseColorMap'), _Runtime.field(program, 'locBaseColorMap'), GL_PBR_BASE_COLOR_TEXTURE_UNIT] : Array<Dynamic>));
     _Runtime.callValue(bindGlPbrStandardTexture, cast ([state, _Runtime.field(standard, 'normalMap'), _Runtime.field(program, 'locNormalMap'), GL_PBR_NORMAL_TEXTURE_UNIT] : Array<Dynamic>));
     _Runtime.callValue(bindGlPbrStandardTexture, cast ([state, _Runtime.field(standard, 'metallicRoughnessMap'), _Runtime.field(program, 'locMetallicRoughnessMap'), GL_PBR_METALLIC_ROUGHNESS_TEXTURE_UNIT] : Array<Dynamic>));
@@ -62,9 +62,9 @@ class GlPbrStandardBlock {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(isGlTextureReady, cast ([texture] : Array<Dynamic>))))) { return; }
     gl = _Runtime.field(state, 'gl');
-    _Runtime.callProperty(gl, 'activeTexture', cast ([(_Runtime.field(gl, 'TEXTURE0') + unit)] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([(flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE0') + unit)] : Array<Dynamic>));
     _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(texture, 'image'), _Runtime.field(texture, 'sampler')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1i', cast ([location, unit] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([location, unit] : Array<Dynamic>));
   }
 
   public static function buildGlPbrStandardDefineKey(standard:Null<StandardPbrMaterialProperties>, alphaMaskEnabled:Bool):GlPbrDefineKey {

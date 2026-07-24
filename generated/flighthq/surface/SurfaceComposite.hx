@@ -36,8 +36,8 @@ class SurfaceComposite {
     if (mode == null) mode = cast (SurfaceCompositeModeValue.Normal : Dynamic);
     var sw:Dynamic = cast _Runtime.UNDEFINED;
     var sh:Dynamic = cast _Runtime.UNDEFINED;
-    sw = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'width'), _Runtime.field(source, 'width')] : Array<Dynamic>));
-    sh = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'height'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+    sw = HxMath.min(_Runtime.field(dest, 'width'), _Runtime.field(source, 'width'));
+    sh = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, sh, '<'))) {
@@ -209,19 +209,19 @@ class SurfaceComposite {
         return cast ((cb + cs) - ((cb * cs) / 255.0));
       }
       else if (__switchValue == SurfaceCompositeModeValue.Add) {
-        return cast _Runtime.callProperty(HxMath, 'min', cast ([255.0, (cb + cs)] : Array<Dynamic>));
+        return cast HxMath.min(255.0, (cb + cs));
       }
       else if (__switchValue == SurfaceCompositeModeValue.Subtract) {
-        return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, (cb - cs)] : Array<Dynamic>));
+        return cast HxMath.max(0.0, (cb - cs));
       }
       else if (__switchValue == SurfaceCompositeModeValue.Darken) {
-        return cast _Runtime.callProperty(HxMath, 'min', cast ([cb, cs] : Array<Dynamic>));
+        return cast HxMath.min(cb, cs);
       }
       else if (__switchValue == SurfaceCompositeModeValue.Lighten) {
-        return cast _Runtime.callProperty(HxMath, 'max', cast ([cb, cs] : Array<Dynamic>));
+        return cast HxMath.max(cb, cs);
       }
       else if (__switchValue == SurfaceCompositeModeValue.Difference) {
-        return cast _Runtime.callProperty(HxMath, 'abs', cast ([(cb - cs)] : Array<Dynamic>));
+        return cast HxMath.abs((cb - cs));
       }
       else if (__switchValue == SurfaceCompositeModeValue.Exclusion) {
         return cast ((cb + cs) - (((2.0 * cb) * cs) / 255.0));
@@ -236,10 +236,10 @@ class SurfaceComposite {
         return cast _Runtime.callValue(SurfaceComposite.softLightChannel__surfaceComposite, cast ([cb, cs] : Array<Dynamic>));
       }
       else if (__switchValue == SurfaceCompositeModeValue.ColorDodge) {
-        return cast _Runtime.select(_Runtime.compare(cs, 255.0, '>='), function():Dynamic return cast 255.0, function():Dynamic return cast _Runtime.callProperty(HxMath, 'min', cast ([255.0, ((cb * 255.0) / (255.0 - cs))] : Array<Dynamic>)));
+        return cast _Runtime.select(_Runtime.compare(cs, 255.0, '>='), function():Dynamic return cast 255.0, function():Dynamic return cast HxMath.min(255.0, ((cb * 255.0) / (255.0 - cs))));
       }
       else if (__switchValue == SurfaceCompositeModeValue.ColorBurn) {
-        return cast _Runtime.select(_Runtime.compare(cs, 0.0, '<='), function():Dynamic return cast 0.0, function():Dynamic return cast (255.0 - _Runtime.callProperty(HxMath, 'min', cast ([255.0, (((255.0 - cb) * 255.0) / cs)] : Array<Dynamic>))));
+        return cast _Runtime.select(_Runtime.compare(cs, 0.0, '<='), function():Dynamic return cast 0.0, function():Dynamic return cast (255.0 - HxMath.min(255.0, (((255.0 - cb) * 255.0) / cs))));
       }
       else if (__switchValue == SurfaceCompositeModeValue.Invert) {
         return cast (255.0 - cb);
@@ -258,7 +258,7 @@ class SurfaceComposite {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     b = (cb / 255.0);
     s = (cs / 255.0);
-    d = _Runtime.select(_Runtime.compare(b, 0.25, '<='), function():Dynamic return cast (((((16.0 * b) - 12.0) * b) + 4.0) * b), function():Dynamic return cast _Runtime.callProperty(HxMath, 'sqrt', cast ([b] : Array<Dynamic>)));
+    d = _Runtime.select(_Runtime.compare(b, 0.25, '<='), function():Dynamic return cast (((((16.0 * b) - 12.0) * b) + 4.0) * b), function():Dynamic return cast HxMath.sqrt(b));
     out = _Runtime.select(_Runtime.compare(s, 0.5, '<='), function():Dynamic return cast (b - (((1.0 - (2.0 * s)) * b) * (1.0 - b))), function():Dynamic return cast (b + (((2.0 * s) - 1.0) * (d - b))));
     return cast (out * 255.0);
     return cast null;
@@ -296,9 +296,9 @@ class SurfaceComposite {
     csR = (((1.0 - dstA) * r) + (dstA * _Runtime.callValue(SurfaceComposite.blendChannel__surfaceComposite, cast ([mode, cbR, r] : Array<Dynamic>))));
     csG = (((1.0 - dstA) * g) + (dstA * _Runtime.callValue(SurfaceComposite.blendChannel__surfaceComposite, cast ([mode, cbG, g] : Array<Dynamic>))));
     csB = (((1.0 - dstA) * b) + (dstA * _Runtime.callValue(SurfaceComposite.blendChannel__surfaceComposite, cast ([mode, cbB, b] : Array<Dynamic>))));
-    _Runtime.setIndex(dest, di, _Runtime.callProperty(HxMath, 'round', cast ([((((fa * srcA) * csR) + ((fb * dstA) * cbR)) / outA)] : Array<Dynamic>)));
-    _Runtime.setIndex(dest, (di + 1.0), _Runtime.callProperty(HxMath, 'round', cast ([((((fa * srcA) * csG) + ((fb * dstA) * cbG)) / outA)] : Array<Dynamic>)));
-    _Runtime.setIndex(dest, (di + 2.0), _Runtime.callProperty(HxMath, 'round', cast ([((((fa * srcA) * csB) + ((fb * dstA) * cbB)) / outA)] : Array<Dynamic>)));
-    _Runtime.setIndex(dest, (di + 3.0), _Runtime.callProperty(HxMath, 'round', cast ([(outA * 255.0)] : Array<Dynamic>)));
+    _Runtime.setIndex(dest, di, HxMath.round(((((fa * srcA) * csR) + ((fb * dstA) * cbR)) / outA)));
+    _Runtime.setIndex(dest, (di + 1.0), HxMath.round(((((fa * srcA) * csG) + ((fb * dstA) * cbG)) / outA)));
+    _Runtime.setIndex(dest, (di + 2.0), HxMath.round(((((fa * srcA) * csB) + ((fb * dstA) * cbB)) / outA)));
+    _Runtime.setIndex(dest, (di + 3.0), HxMath.round((outA * 255.0)));
   }
 }

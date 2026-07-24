@@ -21,7 +21,7 @@ class SpritesheetFrom {
     var frames:Dynamic = cast _Runtime.UNDEFINED;
     var frameNameToIndex:Dynamic = cast _Runtime.UNDEFINED;
     var animations:Dynamic = cast _Runtime.UNDEFINED;
-    nameToRegionId = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    nameToRegionId = _Runtime.construct(_Runtime.globalValue('Map'), []);
     for (region in _Runtime.iterable(_Runtime.field(atlas, 'regions'))) {
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(region, 'name'), null))) {
         _Runtime.callProperty(nameToRegionId, 'set', cast ([_Runtime.field(region, 'name'), _Runtime.field(region, 'id')] : Array<Dynamic>));
@@ -32,7 +32,7 @@ class SpritesheetFrom {
       regionId = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(fd, 'name'), ''), function():Dynamic return cast _Runtime.coalesce(_Runtime.callProperty(nameToRegionId, 'get', cast ([_Runtime.field(fd, 'name')] : Array<Dynamic>)), function():Dynamic return cast index), function():Dynamic return cast index);
       return cast _Runtime.callValue(createSpritesheetFrame, cast ([{ id: regionId, offsetX: _Runtime.field(fd, 'offsetX'), offsetY: _Runtime.field(fd, 'offsetY'), pivotX: _Runtime.field(fd, 'pivotX'), pivotY: _Runtime.field(fd, 'pivotY'), rotated: _Runtime.field(fd, 'rotated') }] : Array<Dynamic>));
     }] : Array<Dynamic>));
-    frameNameToIndex = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    frameNameToIndex = _Runtime.construct(_Runtime.globalValue('Map'), []);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(data, 'frames'), 'length'), '<'))) {
@@ -78,8 +78,8 @@ class SpritesheetFrom {
     spacingX = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'spacingX'), function():Dynamic return cast 0.0);
     spacingY = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'spacingY'), function():Dynamic return cast 0.0);
     namePrefix = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'namePrefix'), function():Dynamic return cast 'frame_');
-    frameWidth = _Runtime.coalesce(_Runtime.field(options, 'frameWidth'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(((imageWidth - (2.0 * marginX)) - (spacingX * (columns - 1.0))) / columns)] : Array<Dynamic>)));
-    frameHeight = _Runtime.coalesce(_Runtime.field(options, 'frameHeight'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(((imageHeight - (2.0 * marginY)) - (spacingY * (rows - 1.0))) / rows)] : Array<Dynamic>)));
+    frameWidth = _Runtime.coalesce(_Runtime.field(options, 'frameWidth'), function():Dynamic return cast HxMath.floor((((imageWidth - (2.0 * marginX)) - (spacingX * (columns - 1.0))) / columns)));
+    frameHeight = _Runtime.coalesce(_Runtime.field(options, 'frameHeight'), function():Dynamic return cast HxMath.floor((((imageHeight - (2.0 * marginY)) - (spacingY * (rows - 1.0))) / rows)));
     atlas = _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>));
     frames = cast ([] : Array<Dynamic>);
     id = 0.0;

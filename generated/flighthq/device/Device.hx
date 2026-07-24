@@ -45,7 +45,7 @@ class Device {
       var nav:Dynamic = cast _Runtime.UNDEFINED;
       var maxTouch:Dynamic = cast _Runtime.UNDEFINED;
       var ua:Dynamic = cast _Runtime.UNDEFINED;
-      nav = _Runtime.select(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), function():Dynamic return cast null);
+      nav = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.globalValue('navigator'), function():Dynamic return cast null);
       maxTouch = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(nav, null), function():Dynamic return cast _Runtime.hasField(nav, 'maxTouchPoints')), function():Dynamic return cast _Runtime.field(nav, 'maxTouchPoints'), function():Dynamic return cast -1.0);
       _Runtime.setField(out, 'hasMouse', _Runtime.strictEquals(maxTouch, 0.0));
       ua = _Runtime.coalesce(_Runtime.optionalField(nav, 'userAgent'), function():Dynamic return cast '');
@@ -56,25 +56,25 @@ class Device {
       var win:Dynamic = cast _Runtime.UNDEFINED;
       var scr:Dynamic = cast _Runtime.UNDEFINED;
       var pixelRatio:Dynamic = cast _Runtime.UNDEFINED;
-      win = _Runtime.select(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), function():Dynamic return cast null);
-      scr = _Runtime.select(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['screen'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['screen'] : Array<Dynamic>)), function():Dynamic return cast null);
+      win = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast _Runtime.globalValue('window'), function():Dynamic return cast null);
+      scr = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('screen'), 'undefined'), function():Dynamic return cast _Runtime.globalValue('screen'), function():Dynamic return cast null);
       _Runtime.setField(out, 'colorDepth', _Runtime.select(!_Runtime.strictEquals(scr, null), function():Dynamic return cast _Runtime.field(scr, 'colorDepth'), function():Dynamic return cast -1.0));
       _Runtime.setField(out, 'densityDpi', -1.0);
       _Runtime.setField(out, 'logicalHeight', _Runtime.select(!_Runtime.strictEquals(scr, null), function():Dynamic return cast _Runtime.field(scr, 'height'), function():Dynamic return cast -1.0));
       _Runtime.setField(out, 'logicalWidth', _Runtime.select(!_Runtime.strictEquals(scr, null), function():Dynamic return cast _Runtime.field(scr, 'width'), function():Dynamic return cast -1.0));
       pixelRatio = _Runtime.select(!_Runtime.strictEquals(win, null), function():Dynamic return cast _Runtime.field(win, 'devicePixelRatio'), function():Dynamic return cast -1.0);
       _Runtime.setField(out, 'pixelRatio', pixelRatio);
-      _Runtime.setField(out, 'physicalWidth', _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(scr, null), function():Dynamic return cast _Runtime.compare(pixelRatio, 0.0, '>')), function():Dynamic return cast _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.field(scr, 'width') * pixelRatio)] : Array<Dynamic>)), function():Dynamic return cast -1.0));
-      _Runtime.setField(out, 'physicalHeight', _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(scr, null), function():Dynamic return cast _Runtime.compare(pixelRatio, 0.0, '>')), function():Dynamic return cast _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.field(scr, 'height') * pixelRatio)] : Array<Dynamic>)), function():Dynamic return cast -1.0));
+      _Runtime.setField(out, 'physicalWidth', _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(scr, null), function():Dynamic return cast _Runtime.compare(pixelRatio, 0.0, '>')), function():Dynamic return cast HxMath.round((_Runtime.field(scr, 'width') * pixelRatio)), function():Dynamic return cast -1.0));
+      _Runtime.setField(out, 'physicalHeight', _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(scr, null), function():Dynamic return cast _Runtime.compare(pixelRatio, 0.0, '>')), function():Dynamic return cast HxMath.round((_Runtime.field(scr, 'height') * pixelRatio)), function():Dynamic return cast -1.0));
       return cast out;
     }, getId: function() {
       try {
         var key:Dynamic = '__flighthq_device_id';
-        var existing:Dynamic = _Runtime.select(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['localStorage'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['localStorage'] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>)), function():Dynamic return cast null);
+        var existing:Dynamic = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('localStorage'), 'undefined'), function():Dynamic return cast _Runtime.callProperty(_Runtime.globalValue('localStorage'), 'getItem', cast ([key] : Array<Dynamic>)), function():Dynamic return cast null);
         if (_Runtime.truthy(!_Runtime.strictEquals(existing, null))) { return cast existing; }
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['crypto'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['crypto'] : Array<Dynamic>)), 'randomUUID')), 'function')))) { return cast ''; }
-        var id:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['crypto'] : Array<Dynamic>)), 'randomUUID', cast ([] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['localStorage'] : Array<Dynamic>)), 'undefined'))) { _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['localStorage'] : Array<Dynamic>)), 'setItem', cast ([key, id] : Array<Dynamic>)); }
+        if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('crypto'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('crypto'), 'randomUUID')), 'function')))) { return cast ''; }
+        var id:Dynamic = _Runtime.callProperty(_Runtime.globalValue('crypto'), 'randomUUID', cast ([] : Array<Dynamic>));
+        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofGlobal('localStorage'), 'undefined'))) { _Runtime.callProperty(_Runtime.globalValue('localStorage'), 'setItem', cast ([key, id] : Array<Dynamic>)); }
         return cast id;
       } catch (__error:Dynamic) {
         return cast '';
@@ -86,7 +86,7 @@ class Device {
       var cores:Dynamic = cast _Runtime.UNDEFINED;
       var gpuInfo:Dynamic = cast _Runtime.UNDEFINED;
       var devMem:Dynamic = cast _Runtime.UNDEFINED;
-      nav = _Runtime.select(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), function():Dynamic return cast null);
+      nav = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.globalValue('navigator'), function():Dynamic return cast null);
       ua = _Runtime.coalesce(_Runtime.optionalField(nav, 'userAgent'), function():Dynamic return cast '');
       uadPlatform = _Runtime.optionalField(_Runtime.optionalField((cast nav : Null<{ @:optional var userAgentData:{ @:optional var platform:String; }; }>), 'userAgentData'), 'platform');
       _Runtime.setField(out, 'arch', _Runtime.callValue(parseUserAgentArch, cast ([ua, uadPlatform] : Array<Dynamic>)));
@@ -153,20 +153,20 @@ class Device {
     var el:Dynamic = cast _Runtime.UNDEFINED;
     var readInsets:Void->Void = cast _Runtime.UNDEFINED;
     var observer:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'))) { return cast function() {
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return cast function() {
     
     }; }
-    el = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['div'] : Array<Dynamic>));
+    el = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['div'] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(el, 'style'), 'cssText', (('position:fixed;top:env(safe-area-inset-top,0px);right:env(safe-area-inset-right,0px);' + 'bottom:env(safe-area-inset-bottom,0px);left:env(safe-area-inset-left,0px);') + 'pointer-events:none;visibility:hidden;'));
-    _Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'body'), 'appendChild', cast ([el] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('document'), 'body'), 'appendChild', cast ([el] : Array<Dynamic>));
     readInsets = function readInsets():Void {
       var style:Dynamic = cast _Runtime.UNDEFINED;
-      style = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['getComputedStyle'] : Array<Dynamic>)), cast ([el] : Array<Dynamic>));
-      (Device._safeAreaInsets__device = cast ({ bottom: _Runtime.orValue(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.field(style, 'bottom')] : Array<Dynamic>)), function():Dynamic return cast 0.0), left: _Runtime.orValue(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.field(style, 'left')] : Array<Dynamic>)), function():Dynamic return cast 0.0), right: _Runtime.orValue(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.field(style, 'right')] : Array<Dynamic>)), function():Dynamic return cast 0.0), top: _Runtime.orValue(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.field(style, 'top')] : Array<Dynamic>)), function():Dynamic return cast 0.0) } : Dynamic));
+      style = _Runtime.callValue(_Runtime.globalValue('getComputedStyle'), cast ([el] : Array<Dynamic>));
+      (Device._safeAreaInsets__device = cast ({ bottom: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.field(style, 'bottom')] : Array<Dynamic>)), function():Dynamic return cast 0.0), left: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.field(style, 'left')] : Array<Dynamic>)), function():Dynamic return cast 0.0), right: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.field(style, 'right')] : Array<Dynamic>)), function():Dynamic return cast 0.0), top: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.field(style, 'top')] : Array<Dynamic>)), function():Dynamic return cast 0.0) } : Dynamic));
     };
     _Runtime.callValue(readInsets, cast ([] : Array<Dynamic>));
-    observer = _Runtime.select(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['ResizeObserver'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['ResizeObserver'] : Array<Dynamic>)), [readInsets]), function():Dynamic return cast null);
-    if (_Runtime.truthy(!_Runtime.strictEquals(observer, null))) { _Runtime.callProperty(observer, 'observe', cast ([_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'documentElement')] : Array<Dynamic>)); }
+    observer = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('ResizeObserver'), 'undefined'), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('ResizeObserver'), [readInsets]), function():Dynamic return cast null);
+    if (_Runtime.truthy(!_Runtime.strictEquals(observer, null))) { _Runtime.callProperty(observer, 'observe', cast ([_Runtime.field(_Runtime.globalValue('document'), 'documentElement')] : Array<Dynamic>)); }
     return cast function() {
       if (_Runtime.truthy(!_Runtime.strictEquals(observer, null))) { _Runtime.callProperty(observer, 'disconnect', cast ([] : Array<Dynamic>)); }
       _Runtime.callOptionalProperty(_Runtime.field(el, 'parentNode'), 'removeChild', cast ([el] : Array<Dynamic>));
@@ -208,14 +208,14 @@ class Device {
 
   public static function readWebGpuInfo__device():{ var vendor:String; var renderer:String; } {
     try {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'))) { return cast { renderer: '', vendor: '' }; }
-      var canvas:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return cast { renderer: '', vendor: '' }; }
+      var canvas:Dynamic = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
       var gl:Dynamic = _Runtime.coalesce((cast _Runtime.callProperty(canvas, 'getContext', cast (['webgl'] : Array<Dynamic>)) : Null<Dynamic>), function():Dynamic return cast (cast _Runtime.callProperty(canvas, 'getContext', cast (['experimental-webgl'] : Array<Dynamic>)) : Null<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(gl, null))) { return cast { renderer: '', vendor: '' }; }
-      var ext:Dynamic = _Runtime.callProperty(gl, 'getExtension', cast (['WEBGL_debug_renderer_info'] : Array<Dynamic>));
+      var ext:Dynamic = flighthq._internal.WebGl2RenderingContext.call(gl, 'getExtension', cast (['WEBGL_debug_renderer_info'] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(ext, null))) { return cast { renderer: '', vendor: '' }; }
-      var vendor:Dynamic = _Runtime.coalesce((cast _Runtime.callProperty(gl, 'getParameter', cast ([_Runtime.field(ext, 'UNMASKED_VENDOR_WEBGL')] : Array<Dynamic>)) : String), function():Dynamic return cast '');
-      var renderer:Dynamic = _Runtime.coalesce((cast _Runtime.callProperty(gl, 'getParameter', cast ([_Runtime.field(ext, 'UNMASKED_RENDERER_WEBGL')] : Array<Dynamic>)) : String), function():Dynamic return cast '');
+      var vendor:Dynamic = _Runtime.coalesce((cast flighthq._internal.WebGl2RenderingContext.call(gl, 'getParameter', cast ([_Runtime.field(ext, 'UNMASKED_VENDOR_WEBGL')] : Array<Dynamic>)) : String), function():Dynamic return cast '');
+      var renderer:Dynamic = _Runtime.coalesce((cast flighthq._internal.WebGl2RenderingContext.call(gl, 'getParameter', cast ([_Runtime.field(ext, 'UNMASKED_RENDERER_WEBGL')] : Array<Dynamic>)) : String), function():Dynamic return cast '');
       return cast { renderer: renderer, vendor: vendor };
     } catch (__error:Dynamic) {
       return cast { renderer: '', vendor: '' };

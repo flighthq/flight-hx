@@ -20,11 +20,11 @@ class SurfaceCrop {
     var sd:Dynamic = cast _Runtime.UNDEFINED;
     sw = _Runtime.field(source, 'width');
     sh = _Runtime.field(source, 'height');
-    rx = _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.field(rect, 'x')] : Array<Dynamic>));
-    ry = _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.field(rect, 'y')] : Array<Dynamic>));
-    rw = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.field(rect, 'width')] : Array<Dynamic>))] : Array<Dynamic>));
-    rh = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.field(rect, 'height')] : Array<Dynamic>))] : Array<Dynamic>));
-    data = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [((rw * rh) * 4.0)]);
+    rx = HxMath.round(_Runtime.field(rect, 'x'));
+    ry = HxMath.round(_Runtime.field(rect, 'y'));
+    rw = HxMath.max(0.0, HxMath.round(_Runtime.field(rect, 'width')));
+    rh = HxMath.max(0.0, HxMath.round(_Runtime.field(rect, 'height')));
+    data = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [((rw * rh) * 4.0)]);
     sd = _Runtime.field(source, 'data');
     {
       var py:Dynamic = 0.0;
@@ -67,7 +67,7 @@ class SurfaceCrop {
     sh = _Runtime.field(source, 'height');
     dw = ((sw + left) + right);
     dh = ((sh + top) + bottom);
-    data = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [((dw * dh) * 4.0)]);
+    data = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [((dw * dh) * 4.0)]);
     sd = _Runtime.field(source, 'data');
     fr = (Std.int(_Runtime.unsignedShiftRight(Std.int(fillColor), Std.int(24.0))) & Std.int(255.0));
     fg = (Std.int((Std.int(fillColor) >> Std.int(16.0))) & Std.int(255.0));
@@ -149,7 +149,7 @@ class SurfaceCrop {
       }
     }
     if (_Runtime.truthy(_Runtime.compare(maxX, 0.0, '<'))) {
-      return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(source, 'alphaType'), colorSpace: _Runtime.field(source, 'colorSpace'), compressed: null, data: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [4.0]), format: _Runtime.field(source, 'format'), height: 1.0, source: null, version: 0.0, width: 1.0 }] : Array<Dynamic>));
+      return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(source, 'alphaType'), colorSpace: _Runtime.field(source, 'colorSpace'), compressed: null, data: _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [4.0]), format: _Runtime.field(source, 'format'), height: 1.0, source: null, version: 0.0, width: 1.0 }] : Array<Dynamic>));
     }
     return cast _Runtime.callValue(cropSurface, cast ([source, { x: minX, y: minY, width: ((maxX - minX) + 1.0), height: ((maxY - minY) + 1.0) }] : Array<Dynamic>));
     return cast null;
@@ -160,7 +160,7 @@ class SurfaceCrop {
     {
       var __switchValue = mode;
       if (__switchValue == 'clamp') {
-        return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([(size - 1.0), v] : Array<Dynamic>))] : Array<Dynamic>));
+        return cast HxMath.max(0.0, HxMath.min((size - 1.0), v));
       }
       else if (__switchValue == 'wrap') {
         return cast (((v % size) + size) % size);

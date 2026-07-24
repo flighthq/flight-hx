@@ -24,7 +24,7 @@ class CocosPlistSerialize {
   public static function documentToXml__cocosPlistSerialize(doc:CocosPlistDocument):String {
     var lines:Dynamic = cast _Runtime.UNDEFINED;
     lines = cast (['<?xml version="1.0" encoding="UTF-8"?>', '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">', '<plist version="1.0">', '<dict>', '	<key>frames</key>', '	<dict>'] : Array<Dynamic>);
-    for (__iteration0 in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'entries', cast ([_Runtime.field(doc, 'frames')] : Array<Dynamic>)))) {
+    for (__iteration0 in _Runtime.iterable(flighthq._internal.DynamicObject.entries(_Runtime.field(doc, 'frames')))) {
       var name:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
       var frame:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
       _Runtime.callProperty(lines, 'push', cast (['		<key>' + Std.string(_Runtime.callValue(CocosPlistSerialize.escapeXml__cocosPlistSerialize, cast ([name] : Array<Dynamic>))) + '</key>'] : Array<Dynamic>));

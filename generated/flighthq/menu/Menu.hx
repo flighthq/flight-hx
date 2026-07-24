@@ -48,10 +48,10 @@ class Menu {
 
   public static function buildWebMenuElement__menu(items:Array<MenuItemTemplate>, onSelect:Dynamic):Dynamic {
     var menu:Dynamic = cast _Runtime.UNDEFINED;
-    menu = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['ul'] : Array<Dynamic>));
+    menu = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['ul'] : Array<Dynamic>));
     _Runtime.setField(_Runtime.field(menu, 'style'), 'cssText', _Runtime.join(cast (['position:fixed', 'z-index:2147483647', 'margin:0', 'padding:4px 0', 'list-style:none', 'background:#fff', 'border:1px solid #ccc', 'border-radius:4px', 'box-shadow:0 4px 12px rgba(0,0,0,.15)', 'min-width:160px', 'font:13px/1.4 system-ui,sans-serif', 'color:#111', 'user-select:none'] : Array<Dynamic>), ';'));
     for (item in _Runtime.iterable(items)) {
-      var li:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['li'] : Array<Dynamic>));
+      var li:Dynamic = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['li'] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(item, 'type'), 'separator'))) {
         _Runtime.setField(_Runtime.field(li, 'style'), 'cssText', 'height:1px;margin:4px 8px;background:#e0e0e0;');
         _Runtime.callProperty(menu, 'appendChild', cast ([li] : Array<Dynamic>));
@@ -63,22 +63,22 @@ class Menu {
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(item, 'id'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(_Runtime.field(li, 'dataset'), 'itemId', _Runtime.field(item, 'id')); }
       _Runtime.setField(_Runtime.field(li, 'style'), 'cssText', _Runtime.join(cast (['display:flex', 'align-items:center', 'padding:5px 12px 5px 28px', ('cursor:' + _Runtime.select(enabled, function():Dynamic return cast 'default', function():Dynamic return cast 'not-allowed')), ('color:' + _Runtime.select(enabled, function():Dynamic return cast '#111', function():Dynamic return cast '#999')), 'position:relative'] : Array<Dynamic>), ';'));
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(item, 'checked'), true))) {
-        var mark:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['span'] : Array<Dynamic>));
+        var mark:Dynamic = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['span'] : Array<Dynamic>));
         _Runtime.setField(mark, 'textContent', _Runtime.select(_Runtime.strictEquals(_Runtime.field(item, 'type'), 'radio'), function():Dynamic return cast '●', function():Dynamic return cast '✓'));
         _Runtime.setField(_Runtime.field(mark, 'style'), 'cssText', 'position:absolute;left:8px;font-size:11px;');
         _Runtime.callProperty(li, 'appendChild', cast ([mark] : Array<Dynamic>));
       }
-      var labelEl:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['span'] : Array<Dynamic>));
+      var labelEl:Dynamic = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['span'] : Array<Dynamic>));
       _Runtime.setField(labelEl, 'textContent', _Runtime.coalesce(_Runtime.field(item, 'label'), function():Dynamic return cast ''));
       _Runtime.setField(_Runtime.field(labelEl, 'style'), 'cssText', 'flex:1;');
       _Runtime.callProperty(li, 'appendChild', cast ([labelEl] : Array<Dynamic>));
       if (_Runtime.truthy(hasSubmenu)) {
-        var arrow:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['span'] : Array<Dynamic>));
+        var arrow:Dynamic = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['span'] : Array<Dynamic>));
         _Runtime.setField(arrow, 'textContent', '▶');
         _Runtime.setField(_Runtime.field(arrow, 'style'), 'cssText', 'margin-left:8px;font-size:9px;color:#888;');
         _Runtime.callProperty(li, 'appendChild', cast ([arrow] : Array<Dynamic>));
       } else { if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(item, 'accelerator'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
-        var accel:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['span'] : Array<Dynamic>));
+        var accel:Dynamic = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['span'] : Array<Dynamic>));
         _Runtime.setField(accel, 'textContent', _Runtime.field(item, 'accelerator'));
         _Runtime.setField(_Runtime.field(accel, 'style'), 'cssText', 'margin-left:24px;color:#888;font-size:11px;');
         _Runtime.callProperty(li, 'appendChild', cast ([accel] : Array<Dynamic>));
@@ -240,7 +240,7 @@ class Menu {
   }
 
   public static function showWebContextMenu__menu(items:Array<MenuItemTemplate>, x:Float, y:Float):flighthq._internal._Promise<Null<String>> {
-    return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(resolve:Dynamic) {
+    return cast _Runtime.construct(_Runtime.globalValue('Promise'), [function(resolve:Dynamic) {
       var overlay:Dynamic = cast _Runtime.UNDEFINED;
       var menu:Dynamic = cast _Runtime.UNDEFINED;
       var clampMenu:Dynamic->Float->Float->Void = cast _Runtime.UNDEFINED;
@@ -249,11 +249,11 @@ class Menu {
       var focusIndex:Dynamic = cast _Runtime.UNDEFINED;
       var moveFocus:Float->Void = cast _Runtime.UNDEFINED;
       var onKeyDown:Dynamic->Void = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'))) {
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) {
         _Runtime.callValue(resolve, cast ([null] : Array<Dynamic>));
         return;
       }
-      overlay = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['div'] : Array<Dynamic>));
+      overlay = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['div'] : Array<Dynamic>));
       _Runtime.setField(_Runtime.field(overlay, 'style'), 'cssText', 'position:fixed;inset:0;z-index:2147483646;');
       menu = _Runtime.callValue(Menu.buildWebMenuElement__menu, cast ([items, function(id:Dynamic) return _Runtime.callValue(close, cast ([id] : Array<Dynamic>))] : Array<Dynamic>));
       clampMenu = function clampMenu(el:Dynamic, anchorX:Float, anchorY:Float):Void {
@@ -263,13 +263,13 @@ class Menu {
         _Runtime.setField(_Runtime.field(el, 'style'), 'left', '' + Std.string(anchorX) + 'px');
         _Runtime.setField(_Runtime.field(el, 'style'), 'top', '' + Std.string(anchorY) + 'px');
         rect = _Runtime.callProperty(el, 'getBoundingClientRect', cast ([] : Array<Dynamic>));
-        vw = _Runtime.select(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'innerWidth'), function():Dynamic return cast 0.0);
-        vh = _Runtime.select(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'innerHeight'), function():Dynamic return cast 0.0);
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(rect, 'right'), vw, '>'))) { _Runtime.setField(_Runtime.field(el, 'style'), 'left', '' + Std.string(_Runtime.callProperty(HxMath, 'max', cast ([0.0, (anchorX - _Runtime.field(rect, 'width'))] : Array<Dynamic>))) + 'px'); }
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(rect, 'bottom'), vh, '>'))) { _Runtime.setField(_Runtime.field(el, 'style'), 'top', '' + Std.string(_Runtime.callProperty(HxMath, 'max', cast ([0.0, (anchorY - _Runtime.field(rect, 'height'))] : Array<Dynamic>))) + 'px'); }
+        vw = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast _Runtime.field(_Runtime.globalValue('window'), 'innerWidth'), function():Dynamic return cast 0.0);
+        vh = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast _Runtime.field(_Runtime.globalValue('window'), 'innerHeight'), function():Dynamic return cast 0.0);
+        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(rect, 'right'), vw, '>'))) { _Runtime.setField(_Runtime.field(el, 'style'), 'left', '' + Std.string(HxMath.max(0.0, (anchorX - _Runtime.field(rect, 'width')))) + 'px'); }
+        if (_Runtime.truthy(_Runtime.compare(_Runtime.field(rect, 'bottom'), vh, '>'))) { _Runtime.setField(_Runtime.field(el, 'style'), 'top', '' + Std.string(HxMath.max(0.0, (anchorY - _Runtime.field(rect, 'height')))) + 'px'); }
       };
       close = function close(selectedId:Null<String>):Void {
-        _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'removeEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>));
+        _Runtime.callProperty(_Runtime.globalValue('document'), 'removeEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>));
         _Runtime.callProperty(overlay, 'remove', cast ([] : Array<Dynamic>));
         _Runtime.callProperty(menu, 'remove', cast ([] : Array<Dynamic>));
         _Runtime.callValue(resolve, cast ([selectedId] : Array<Dynamic>));
@@ -318,16 +318,16 @@ class Menu {
         } } } }
       };
       _Runtime.callProperty(overlay, 'addEventListener', cast (['click', function() return _Runtime.callValue(close, cast ([null] : Array<Dynamic>))] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'addEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'body'), 'appendChild', cast ([overlay] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'body'), 'appendChild', cast ([menu] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.globalValue('document'), 'addEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('document'), 'body'), 'appendChild', cast ([overlay] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('document'), 'body'), 'appendChild', cast ([menu] : Array<Dynamic>));
       _Runtime.callValue(clampMenu, cast ([menu, x, y] : Array<Dynamic>));
     }]);
     return cast null;
   }
 
   public static function validateMenuItemTemplate(template:MenuItemTemplate):Null<String> {
-    return cast _Runtime.callValue(Menu._validateItem__menu, cast ([template, _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), [])] : Array<Dynamic>));
+    return cast _Runtime.callValue(Menu._validateItem__menu, cast ([template, _Runtime.construct(_Runtime.globalValue('Set'), [])] : Array<Dynamic>));
     return cast null;
   }
 }

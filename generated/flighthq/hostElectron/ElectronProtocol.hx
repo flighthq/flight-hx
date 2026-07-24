@@ -11,7 +11,7 @@ class ElectronProtocol {
     var app:Dynamic = cast _Runtime.UNDEFINED;
     var registered:Dynamic = cast _Runtime.UNDEFINED;
     app = _Runtime.field(electron, 'app');
-    registered = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
+    registered = _Runtime.construct(_Runtime.globalValue('Set'), []);
     return cast { register: function(scheme:Dynamic) {
       var ok:Dynamic = cast _Runtime.UNDEFINED;
       ok = _Runtime.callProperty(app, 'setAsDefaultProtocolClient', cast ([scheme] : Array<Dynamic>));

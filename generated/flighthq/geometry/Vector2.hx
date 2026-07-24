@@ -81,7 +81,7 @@ class Vector2 {
     lb = _Runtime.callValue(getVector2Length, cast ([b] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(la, 0.0), function():Dynamic return cast _Runtime.strictEquals(lb, 0.0)))) { return cast HxMath.NaN; }
     _dot = (_Runtime.callValue(getVector2Dot, cast ([a, b] : Array<Dynamic>)) / (la * lb));
-    return cast _Runtime.callProperty(HxMath, 'acos', cast ([_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([-1.0, _dot] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, _dot)));
     return cast null;
   }
 
@@ -90,7 +90,7 @@ class Vector2 {
     var dy:Dynamic = cast _Runtime.UNDEFINED;
     dx = (_Runtime.field(a, 'x') - _Runtime.field(b, 'x'));
     dy = (_Runtime.field(a, 'y') - _Runtime.field(b, 'y'));
-    return cast _Runtime.callProperty(HxMath, 'sqrt', cast ([((dx * dx) + (dy * dy))] : Array<Dynamic>));
+    return cast HxMath.sqrt(((dx * dx) + (dy * dy)));
     return cast null;
   }
 
@@ -109,7 +109,7 @@ class Vector2 {
   }
 
   public static function getVector2Length(source:Vector2Like):Float {
-    return cast _Runtime.callProperty(HxMath, 'sqrt', cast ([(HxMath.pow(_Runtime.field(source, 'x'), 2.0) + HxMath.pow(_Runtime.field(source, 'y'), 2.0))] : Array<Dynamic>));
+    return cast HxMath.sqrt((HxMath.pow(_Runtime.field(source, 'x'), 2.0) + HxMath.pow(_Runtime.field(source, 'y'), 2.0)));
     return cast null;
   }
 
@@ -139,7 +139,7 @@ class Vector2 {
   }
 
   public static function nearEqualsVector2(a:Vector2Like, b:Vector2Like, tolerance:Float = 0.000001):Bool {
-    return cast _Runtime.andValue(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.field(a, 'x') - _Runtime.field(b, 'x'))] : Array<Dynamic>)), tolerance, '<'), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.field(a, 'y') - _Runtime.field(b, 'y'))] : Array<Dynamic>)), tolerance, '<'));
+    return cast _Runtime.andValue(_Runtime.compare(HxMath.abs((_Runtime.field(a, 'x') - _Runtime.field(b, 'x'))), tolerance, '<'), function():Dynamic return cast _Runtime.compare(HxMath.abs((_Runtime.field(a, 'y') - _Runtime.field(b, 'y'))), tolerance, '<'));
     return cast null;
   }
 
@@ -211,8 +211,8 @@ class Vector2 {
   }
 
   public static function setVector2FromPolar(out:Vector2Like, length:Float, angle:Float):Void {
-    _Runtime.setField(out, 'x', (length * _Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>))));
-    _Runtime.setField(out, 'y', (length * _Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>))));
+    _Runtime.setField(out, 'x', (length * HxMath.cos(angle)));
+    _Runtime.setField(out, 'y', (length * HxMath.sin(angle)));
   }
 
   public static function setVector2FromVector3(out:Vector2Like, source:Vector3Like):Void {

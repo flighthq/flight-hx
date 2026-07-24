@@ -7,27 +7,27 @@ import flighthq.types.GlSkinPaletteTexture;
 
 class GlSkinPaletteTexture {
   public static function createGlSkinPaletteTexture(gl:Dynamic):flighthq.types.GlSkinPaletteTexture {
-    return cast { jointCapacity: 0.0, texture: _Runtime.callProperty(gl, 'createTexture', cast ([] : Array<Dynamic>)) };
+    return cast { jointCapacity: 0.0, texture: flighthq._internal.WebGl2RenderingContext.call(gl, 'createTexture', cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
   public static function destroyGlSkinPaletteTexture(gl:Dynamic, palette:flighthq.types.GlSkinPaletteTexture):Void {
-    _Runtime.callProperty(gl, 'deleteTexture', cast ([_Runtime.field(palette, 'texture')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteTexture', cast ([_Runtime.field(palette, 'texture')] : Array<Dynamic>));
   }
 
   public static function uploadGlSkinPaletteTexture(gl:Dynamic, palette:flighthq.types.GlSkinPaletteTexture, jointMatrices:flighthq._internal._Float32Array, jointCount:Float):Void {
     var width:Dynamic = cast _Runtime.UNDEFINED;
     width = (jointCount * 4.0);
-    _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(palette, 'texture')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), _Runtime.field(palette, 'texture')] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(jointCount, _Runtime.field(palette, 'jointCapacity'), '>'))) {
-      _Runtime.callProperty(gl, 'texImage2D', cast ([_Runtime.field(gl, 'TEXTURE_2D'), 0.0, _Runtime.field(gl, 'RGBA32F'), width, 1.0, 0.0, _Runtime.field(gl, 'RGBA'), _Runtime.field(gl, 'FLOAT'), (cast jointMatrices : flighthq._internal._Float32Array)] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_MIN_FILTER'), _Runtime.field(gl, 'NEAREST')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_MAG_FILTER'), _Runtime.field(gl, 'NEAREST')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_WRAP_S'), _Runtime.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_WRAP_T'), _Runtime.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'texImage2D', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), 0.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'RGBA32F'), width, 1.0, 0.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'RGBA'), flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), (cast jointMatrices : flighthq._internal._Float32Array)] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_MIN_FILTER'), flighthq._internal.WebGl2RenderingContext.field(gl, 'NEAREST')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_MAG_FILTER'), flighthq._internal.WebGl2RenderingContext.field(gl, 'NEAREST')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_WRAP_S'), flighthq._internal.WebGl2RenderingContext.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_WRAP_T'), flighthq._internal.WebGl2RenderingContext.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
       _Runtime.setField(palette, 'jointCapacity', jointCount);
     } else {
-      _Runtime.callProperty(gl, 'texSubImage2D', cast ([_Runtime.field(gl, 'TEXTURE_2D'), 0.0, 0.0, 0.0, width, 1.0, _Runtime.field(gl, 'RGBA'), _Runtime.field(gl, 'FLOAT'), (cast jointMatrices : flighthq._internal._Float32Array)] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'texSubImage2D', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), 0.0, 0.0, 0.0, width, 1.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'RGBA'), flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), (cast jointMatrices : flighthq._internal._Float32Array)] : Array<Dynamic>));
     }
   }
 }

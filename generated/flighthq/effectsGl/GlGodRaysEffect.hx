@@ -26,15 +26,15 @@ class GlGodRaysEffect {
     decay = _Runtime.coalesce(_Runtime.field(effect, 'decay'), function():Dynamic return cast 0.93);
     weight = _Runtime.coalesce(_Runtime.field(effect, 'weight'), function():Dynamic return cast 0.4);
     exposure = _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 0.6);
-    samples = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 64.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    samples = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 64.0)));
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'atmospheric.godRays.' + Std.string(samples) + '', _Runtime.callValue(GlGodRaysEffect.buildGodRaysFragment__glGodRaysEffect, cast ([samples] : Array<Dynamic>))] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      _Runtime.callProperty(gl, 'uniform2f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_resolution'] : Array<Dynamic>)), _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform2f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_lightPosition'] : Array<Dynamic>)), centerX, centerY] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_density'] : Array<Dynamic>)), density] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_decay'] : Array<Dynamic>)), decay] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_weight'] : Array<Dynamic>)), weight] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_exposure'] : Array<Dynamic>)), exposure] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_resolution'] : Array<Dynamic>)), _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_lightPosition'] : Array<Dynamic>)), centerX, centerY] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_density'] : Array<Dynamic>)), density] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_decay'] : Array<Dynamic>)), decay] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_weight'] : Array<Dynamic>)), weight] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_exposure'] : Array<Dynamic>)), exposure] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

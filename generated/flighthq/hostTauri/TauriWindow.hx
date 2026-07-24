@@ -15,7 +15,7 @@ class TauriWindow {
     var windows:Dynamic = cast _Runtime.UNDEFINED;
     var run:Dynamic = cast _Runtime.UNDEFINED;
     windowModule = _Runtime.field(tauri, 'window');
-    windows = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+    windows = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
     run = function(win:ApplicationWindow, fn:Dynamic) {
       var w:Dynamic = cast _Runtime.UNDEFINED;
       w = _Runtime.callProperty(windows, 'get', cast ([win] : Array<Dynamic>));

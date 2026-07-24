@@ -160,7 +160,7 @@ class AnimationTrack {
 
   public static function cloneNumberBuffer__animationTrack(src:Dynamic):Dynamic {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.isInstanceOf(src, _Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>))))) { return cast _Runtime.slice(src, 0, null); }
+    if (_Runtime.truthy(_Runtime.isInstanceOf(src, _Runtime.globalValue('Float32Array')))) { return cast _Runtime.slice(src, 0, null); }
     out = _Runtime.createArray(_Runtime.field(src, 'length'));
     {
       var i:Dynamic = 0.0;
@@ -285,10 +285,10 @@ class AnimationTrack {
       (bw = cast (-bw : Dynamic));
     }
     if (_Runtime.truthy(_Runtime.compare((1.0 - cosom), 0.000001, '>'))) {
-      var omega:Dynamic = _Runtime.callProperty(HxMath, 'acos', cast ([cosom] : Array<Dynamic>));
-      var sinom:Dynamic = _Runtime.callProperty(HxMath, 'sin', cast ([omega] : Array<Dynamic>));
-      (scale0 = cast ((_Runtime.callProperty(HxMath, 'sin', cast ([((1.0 - alpha) * omega)] : Array<Dynamic>)) / sinom) : Dynamic));
-      (scale1 = cast ((_Runtime.callProperty(HxMath, 'sin', cast ([(alpha * omega)] : Array<Dynamic>)) / sinom) : Dynamic));
+      var omega:Dynamic = HxMath.acos(cosom);
+      var sinom:Dynamic = HxMath.sin(omega);
+      (scale0 = cast ((HxMath.sin(((1.0 - alpha) * omega)) / sinom) : Dynamic));
+      (scale1 = cast ((HxMath.sin((alpha * omega)) / sinom) : Dynamic));
     } else {
       (scale0 = cast ((1.0 - alpha) : Dynamic));
       (scale1 = cast (alpha : Dynamic));

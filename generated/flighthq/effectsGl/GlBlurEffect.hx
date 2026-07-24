@@ -25,8 +25,8 @@ class GlBlurEffect {
     var radiusY:Dynamic = cast _Runtime.UNDEFINED;
     sigmaX = _Runtime.coalesce(_Runtime.field(options, 'blurX'), function():Dynamic return cast 4.0);
     sigmaY = _Runtime.coalesce(_Runtime.field(options, 'blurY'), function():Dynamic return cast 4.0);
-    radiusX = _Runtime.select(_Runtime.compare(sigmaX, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'ceil', cast ([(sigmaX * 3.0)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
-    radiusY = _Runtime.select(_Runtime.compare(sigmaY, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'ceil', cast ([(sigmaY * 3.0)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    radiusX = _Runtime.select(_Runtime.compare(sigmaX, 0.0, '>'), function():Dynamic return cast HxMath.ceil((sigmaX * 3.0)), function():Dynamic return cast 0.0);
+    radiusY = _Runtime.select(_Runtime.compare(sigmaY, 0.0, '>'), function():Dynamic return cast HxMath.ceil((sigmaY * 3.0)), function():Dynamic return cast 0.0);
     _Runtime.callValue(GlBlurEffect.applyGlGaussianBlurPass__glBlurEffect, cast ([state, source, temp, sigmaX, radiusX, 1.0, 0.0] : Array<Dynamic>));
     _Runtime.callValue(GlBlurEffect.applyGlGaussianBlurPass__glBlurEffect, cast ([state, temp, dest, sigmaY, radiusY, 0.0, 1.0] : Array<Dynamic>));
   }
@@ -44,10 +44,10 @@ class GlBlurEffect {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'blur.gaussian', GlBlurEffect.GAUSSIAN_BLUR_FRAGMENT_SRC__glBlurEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      _Runtime.callProperty(gl, 'uniform2f', cast ([_Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_texelSize'] : Array<Dynamic>)), (1.0 / _Runtime.field(source, 'width')), (1.0 / _Runtime.field(source, 'height'))] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_sigma'] : Array<Dynamic>)), sigma] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_radius'] : Array<Dynamic>)), radius] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform2f', cast ([_Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_direction'] : Array<Dynamic>)), dirX, dirY] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2f', cast ([_Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_texelSize'] : Array<Dynamic>)), (1.0 / _Runtime.field(source, 'width')), (1.0 / _Runtime.field(source, 'height'))] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_sigma'] : Array<Dynamic>)), sigma] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_radius'] : Array<Dynamic>)), radius] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2f', cast ([_Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_direction'] : Array<Dynamic>)), dirX, dirY] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

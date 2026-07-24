@@ -58,7 +58,7 @@ class SpritesheetDetect {
 
   public static function getRegistry__spritesheetDetect():FormatRegistry__spritesheetDetect {
     if (_Runtime.truthy(!_Runtime.strictEquals(SpritesheetDetect._registry__spritesheetDetect, null))) { return cast SpritesheetDetect._registry__spritesheetDetect; }
-    (SpritesheetDetect._registry__spritesheetDetect = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) : Dynamic));
+    (SpritesheetDetect._registry__spritesheetDetect = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
     _Runtime.callProperty(SpritesheetDetect._registry__spritesheetDetect, 'set', cast ([ASEPRITE, { detect: SpritesheetDetect.detectAseprite__spritesheetDetect, parse: function(text:Dynamic) return _Runtime.callValue(parseAsepriteSpritesheet, cast ([text] : Array<Dynamic>)) }] : Array<Dynamic>));
     _Runtime.callProperty(SpritesheetDetect._registry__spritesheetDetect, 'set', cast ([COCOS_PLIST, { detect: SpritesheetDetect.detectCocosPlist__spritesheetDetect, parse: function(text:Dynamic) return _Runtime.callValue(parseCocosPlistSpritesheet, cast ([text] : Array<Dynamic>)) }] : Array<Dynamic>));
     _Runtime.callProperty(SpritesheetDetect._registry__spritesheetDetect, 'set', cast ([TEXTURE_PACKER, { detect: SpritesheetDetect.detectTexturePacker__spritesheetDetect, parse: function(text:Dynamic) return _Runtime.callValue(parseTexturePackerSpritesheet, cast ([text] : Array<Dynamic>)) }] : Array<Dynamic>));

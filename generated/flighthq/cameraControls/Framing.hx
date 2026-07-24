@@ -15,7 +15,7 @@ class Framing {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.compare(_Runtime.field(sphere, 'radius'), 0.0, '>=')), function():Dynamic return cast !_Runtime.truthy(_Runtime.compare(aspect, 0.0, '>'))), function():Dynamic return cast !_Runtime.truthy(_Runtime.compare(padding, 0.0, '>'))))) { return cast false; }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective'))) {
       var distance:Dynamic = _Runtime.callValue(getPerspectiveFrameDistanceToSphere, cast ([projection, _Runtime.field(sphere, 'radius'), aspect, padding] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([distance] : Array<Dynamic>))))) { return cast false; }
+      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([distance] : Array<Dynamic>))))) { return cast false; }
       _Runtime.setField(controller, 'goalDistance', _Runtime.callValue(clamp, cast ([distance, _Runtime.field(controller, 'minDistance'), _Runtime.field(controller, 'maxDistance')] : Array<Dynamic>)));
     } else {
       _Runtime.callValue(setOrthographicProjectionFrameToSphere, cast ([projection, _Runtime.field(sphere, 'radius'), aspect, padding] : Array<Dynamic>));
@@ -33,8 +33,8 @@ class Framing {
     var horizontalHalfFov:Dynamic = cast _Runtime.UNDEFINED;
     paddedRadius = (radius * padding);
     verticalHalfFov = (_Runtime.field(projection, 'fovY') * 0.5);
-    horizontalHalfFov = _Runtime.callProperty(HxMath, 'atan', cast ([(_Runtime.callProperty(HxMath, 'tan', cast ([verticalHalfFov] : Array<Dynamic>)) * aspect)] : Array<Dynamic>));
-    return cast (paddedRadius / _Runtime.callProperty(HxMath, 'sin', cast ([_Runtime.callProperty(HxMath, 'min', cast ([verticalHalfFov, horizontalHalfFov] : Array<Dynamic>))] : Array<Dynamic>)));
+    horizontalHalfFov = HxMath.atan((HxMath.tan(verticalHalfFov) * aspect));
+    return cast (paddedRadius / HxMath.sin(HxMath.min(verticalHalfFov, horizontalHalfFov)));
     return cast null;
   }
 

@@ -12,8 +12,8 @@ class SurfaceAlpha {
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var sd:Dynamic = cast _Runtime.UNDEFINED;
     var dd:Dynamic = cast _Runtime.UNDEFINED;
-    w = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'width'), _Runtime.field(source, 'width')] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'height'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+    w = HxMath.min(_Runtime.field(dest, 'width'), _Runtime.field(source, 'width'));
+    h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
     sd = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
     dd = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     {
@@ -45,7 +45,7 @@ class SurfaceAlpha {
     var f:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var surfaceWidth:Dynamic = cast _Runtime.UNDEFINED;
-    f = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, factor] : Array<Dynamic>))] : Array<Dynamic>));
+    f = HxMath.max(0.0, HxMath.min(1.0, factor));
     data = _Runtime.field(_Runtime.field(out, 'surface'), 'data');
     surfaceWidth = _Runtime.field(_Runtime.field(out, 'surface'), 'width');
     {
@@ -59,7 +59,7 @@ class SurfaceAlpha {
             var x:Dynamic = (_Runtime.field(out, 'x') + px);
             if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, surfaceWidth, '>=')))) { px++; continue; }
             var i:Dynamic = ((((y * surfaceWidth) + x) * 4.0) + 3.0);
-            _Runtime.setIndex(data, i, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(data, i) * f)] : Array<Dynamic>)));
+            _Runtime.setIndex(data, i, HxMath.round((_Runtime.getIndex(data, i) * f)));
             px++;
           }
         }
@@ -73,7 +73,7 @@ class SurfaceAlpha {
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var surfaceWidth:Dynamic = cast _Runtime.UNDEFINED;
-    a = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([alpha] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+    a = HxMath.max(0.0, HxMath.min(255.0, HxMath.round(alpha)));
     data = _Runtime.field(_Runtime.field(out, 'surface'), 'data');
     surfaceWidth = _Runtime.field(_Runtime.field(out, 'surface'), 'width');
     {

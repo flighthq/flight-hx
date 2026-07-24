@@ -16,7 +16,7 @@ import flighthq.types.Menu.MenuItemTemplate;
 class App {
   public static var _backend__app:Null<AppBackend> = _Runtime.explicitNull();
 
-  public static final _subscriptions__app:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _subscriptions__app:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function addAppRecentDocument(path:String):Void {
     _Runtime.callProperty(_Runtime.callValue(getAppBackend, cast ([] : Array<Dynamic>)), 'addRecentDocument', cast ([path] : Array<Dynamic>));
@@ -94,9 +94,9 @@ class App {
     }, clearRecentDocuments: function() {
     
     }, focus: function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'))) {
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) {
         try {
-          _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'focus', cast ([] : Array<Dynamic>));
+          _Runtime.callProperty(_Runtime.globalValue('window'), 'focus', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
         }
       }
@@ -109,22 +109,22 @@ class App {
     }, getExecutablePath: function() {
       return cast '';
     }, getLocale: function() {
-      return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.coalesce(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'language'), function():Dynamic return cast ''), function():Dynamic return cast '');
+      return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('navigator'), 'language'), function():Dynamic return cast ''), function():Dynamic return cast '');
     }, getPreferredSystemLanguages: function() {
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.isArray(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'languages'))))) {
-        return cast (cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'languages') : Array<String>);
+      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.isArray(_Runtime.field(_Runtime.globalValue('navigator'), 'languages'))))) {
+        return cast (cast _Runtime.field(_Runtime.globalValue('navigator'), 'languages') : Array<String>);
       }
       return cast cast ([] : Array<Dynamic>);
     }, getSystemLocale: function() {
       try {
-        return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['Intl'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime.construct(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Intl'] : Array<Dynamic>)), 'DateTimeFormat'), []), 'resolvedOptions', cast ([] : Array<Dynamic>)), 'locale'), function():Dynamic return cast '');
+        return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('Intl'), 'undefined'), function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime.construct(_Runtime.field(_Runtime.globalValue('Intl'), 'DateTimeFormat'), []), 'resolvedOptions', cast ([] : Array<Dynamic>)), 'locale'), function():Dynamic return cast '');
       } catch (__error:Dynamic) {
         return cast '';
       }
     }, getLoginItem: function() {
       return cast { args: cast ([] : Array<Dynamic>), openAsHidden: false, openAtLogin: false, path: '' };
     }, getName: function() {
-      return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'title'), function():Dynamic return cast '');
+      return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast _Runtime.field(_Runtime.globalValue('document'), 'title'), function():Dynamic return cast '');
     }, getVersion: function() {
       return cast '';
     }, hasSingleInstanceLock: function() {
@@ -134,16 +134,16 @@ class App {
     }, isAppHidden: function() {
       return cast false;
     }, quit: function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'))) {
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) {
         try {
-          _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'close', cast ([] : Array<Dynamic>));
+          _Runtime.callProperty(_Runtime.globalValue('window'), 'close', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
         }
       }
     }, relaunch: function() {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['location'] : Array<Dynamic>)), 'undefined'))) {
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofGlobal('location'), 'undefined'))) {
         try {
-          _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['location'] : Array<Dynamic>)), 'reload', cast ([] : Array<Dynamic>));
+          _Runtime.callProperty(_Runtime.globalValue('location'), 'reload', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
         }
       }
@@ -156,9 +156,9 @@ class App {
     }, setActivationPolicy: function() {
     
     }, setBadgeCount: function(count:Dynamic) {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'setAppBadge'))))) { return cast false; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.globalValue('navigator'), 'setAppBadge'))))) { return cast false; }
       try {
-        _Runtime.callProperty((cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)) : { var setAppBadge:Dynamic; }), 'setAppBadge', cast ([count] : Array<Dynamic>));
+        _Runtime.callProperty((cast _Runtime.globalValue('navigator') : { var setAppBadge:Dynamic; }), 'setAppBadge', cast ([count] : Array<Dynamic>));
         return cast true;
       } catch (__error:Dynamic) {
         return cast false;
@@ -193,7 +193,7 @@ class App {
       };
     }, subscribeReady: function(listener:Dynamic) {
       var id:Dynamic = cast _Runtime.UNDEFINED;
-      id = _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([] : Array<Dynamic>)), 'then', cast ([function() return _Runtime.callValue(listener, cast ([] : Array<Dynamic>))] : Array<Dynamic>));
+      id = _Runtime.callProperty(_Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([] : Array<Dynamic>)), 'then', cast ([function() return _Runtime.callValue(listener, cast ([] : Array<Dynamic>))] : Array<Dynamic>));
       _Runtime.voidValue(id);
       return cast function() {
       

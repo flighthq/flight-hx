@@ -10,7 +10,7 @@ class ExposureAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var colorMatrix:Dynamic = cast _Runtime.UNDEFINED;
-    m = _Runtime.callProperty(HxMath, 'pow', cast ([2.0, _Runtime.coalesce(_Runtime.field(options, 'exposure'), function():Dynamic return cast 0.0)] : Array<Dynamic>));
+    m = HxMath.pow(2.0, _Runtime.coalesce(_Runtime.field(options, 'exposure'), function():Dynamic return cast 0.0));
     colorMatrix = cast ([m, 0.0, 0.0, 0.0, 0.0, 0.0, m, 0.0, 0.0, 0.0, 0.0, 0.0, m, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast _Runtime.mergeObjects([{ kind: 'ExposureAdjustment' }, options, { colorMatrix: colorMatrix }]);
     return cast null;

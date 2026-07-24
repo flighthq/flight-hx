@@ -84,12 +84,12 @@ class Spring {
     omega = (TAU * frequency);
     c0 = (value - target);
     if (_Runtime.truthy(_Runtime.compare(dampingRatio, (1.0 + Spring.CRITICAL_BAND__spring), '>'))) {
-      var zb:Dynamic = (omega * _Runtime.callProperty(HxMath, 'sqrt', cast ([((dampingRatio * dampingRatio) - 1.0)] : Array<Dynamic>)));
+      var zb:Dynamic = (omega * HxMath.sqrt(((dampingRatio * dampingRatio) - 1.0)));
       var za:Dynamic = (-omega * dampingRatio);
       var z1:Dynamic = (za - zb);
       var z2:Dynamic = (za + zb);
-      var e1:Dynamic = _Runtime.callProperty(HxMath, 'exp', cast ([(z1 * deltaTime)] : Array<Dynamic>));
-      var e2:Dynamic = _Runtime.callProperty(HxMath, 'exp', cast ([(z2 * deltaTime)] : Array<Dynamic>));
+      var e1:Dynamic = HxMath.exp((z1 * deltaTime));
+      var e2:Dynamic = HxMath.exp((z2 * deltaTime));
       var invDenominator:Dynamic = (1.0 / (z2 - z1));
       (posPosCoef = cast ((((z2 * e1) - (z1 * e2)) * invDenominator) : Dynamic));
       (posVelCoef = cast (((e2 - e1) * invDenominator) : Dynamic));
@@ -97,17 +97,17 @@ class Spring {
       (velVelCoef = cast ((((z2 * e2) - (z1 * e1)) * invDenominator) : Dynamic));
     } else { if (_Runtime.truthy(_Runtime.compare(dampingRatio, (1.0 - Spring.CRITICAL_BAND__spring), '<'))) {
       var alpha:Dynamic = (dampingRatio * omega);
-      var beta:Dynamic = (omega * _Runtime.callProperty(HxMath, 'sqrt', cast ([(1.0 - (dampingRatio * dampingRatio))] : Array<Dynamic>)));
-      var envelope:Dynamic = _Runtime.callProperty(HxMath, 'exp', cast ([(-alpha * deltaTime)] : Array<Dynamic>));
-      var cosine:Dynamic = _Runtime.callProperty(HxMath, 'cos', cast ([(beta * deltaTime)] : Array<Dynamic>));
-      var sine:Dynamic = _Runtime.callProperty(HxMath, 'sin', cast ([(beta * deltaTime)] : Array<Dynamic>));
+      var beta:Dynamic = (omega * HxMath.sqrt((1.0 - (dampingRatio * dampingRatio))));
+      var envelope:Dynamic = HxMath.exp((-alpha * deltaTime));
+      var cosine:Dynamic = HxMath.cos((beta * deltaTime));
+      var sine:Dynamic = HxMath.sin((beta * deltaTime));
       var invBeta:Dynamic = (1.0 / beta);
       (posPosCoef = cast ((envelope * (cosine + ((alpha * invBeta) * sine))) : Dynamic));
       (posVelCoef = cast (((envelope * invBeta) * sine) : Dynamic));
       (velPosCoef = cast (((((-envelope * omega) * omega) * invBeta) * sine) : Dynamic));
       (velVelCoef = cast ((envelope * (cosine - ((alpha * invBeta) * sine))) : Dynamic));
     } else {
-      var envelope:Dynamic = _Runtime.callProperty(HxMath, 'exp', cast ([(-omega * deltaTime)] : Array<Dynamic>));
+      var envelope:Dynamic = HxMath.exp((-omega * deltaTime));
       var omegaDt:Dynamic = (omega * deltaTime);
       (posPosCoef = cast ((envelope * (1.0 + omegaDt)) : Dynamic));
       (posVelCoef = cast ((envelope * deltaTime) : Dynamic));

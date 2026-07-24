@@ -71,7 +71,7 @@ class ImageResource {
   public static function updateImageResourceSize__imageResource(resource:flighthq.types.ImageResource):Void {
     var element:Dynamic = cast _Runtime.UNDEFINED;
     element = _Runtime.field(resource, 'source');
-    if (_Runtime.truthy(_Runtime.isInstanceOf(element, _Runtime.callProperty(_Runtime, 'globalValue', cast (['HTMLVideoElement'] : Array<Dynamic>))))) {
+    if (_Runtime.truthy(_Runtime.isInstanceOf(element, _Runtime.globalValue('HTMLVideoElement')))) {
       _Runtime.setField(resource, 'width', _Runtime.field(element, 'videoWidth'));
       _Runtime.setField(resource, 'height', _Runtime.field(element, 'videoHeight'));
     } else {

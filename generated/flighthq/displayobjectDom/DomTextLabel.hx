@@ -36,7 +36,7 @@ class DomTextLabel {
 
   public static function getMeasureCtx__domTextLabel():Null<Dynamic> {
     if (_Runtime.truthy(_Runtime.strictEquals(DomTextLabel._measureCtx__domTextLabel, null))) {
-      (DomTextLabel._measureCtx__domTextLabel = cast (_Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
+      (DomTextLabel._measureCtx__domTextLabel = cast (_Runtime.callProperty(_Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)), 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic));
     }
     return cast DomTextLabel._measureCtx__domTextLabel;
     return cast null;
@@ -63,13 +63,13 @@ class DomTextLabel {
     ctx = _Runtime.callValue(DomTextLabel.getMeasureCtx__domTextLabel, cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(ctx, null))) { return; }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'div'), null))) {
-      _Runtime.setField(data, 'div', _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['div'] : Array<Dynamic>)));
+      _Runtime.setField(data, 'div', _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['div'] : Array<Dynamic>)));
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'div')] : Array<Dynamic>));
       _Runtime.setField(_Runtime.field(_Runtime.field(data, 'div'), 'style'), 'overflow', 'hidden');
     }
     measure = function(t:String, format:TextFormat) {
-      _Runtime.setField(ctx, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
-      return cast _Runtime.field(_Runtime.callProperty(ctx, 'measureText', cast ([t] : Array<Dynamic>)), 'width');
+      flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'font', _Runtime.callValue(computeTextFormatFontString, cast ([format] : Array<Dynamic>)));
+      return cast _Runtime.field(flighthq._internal.CanvasRenderingContext2D.call(ctx, 'measureText', cast ([t] : Array<Dynamic>)), 'width');
     };
     result = _Runtime.callValue(getTextLayoutResult, cast ([(cast _Runtime.callValue(getTextLabelRuntime, cast ([source] : Array<Dynamic>)) : TextLabelRuntime)] : Array<Dynamic>));
     _Runtime.callValue(computeTextLayout, cast ([result, { text: text, formatRanges: cast ([_Runtime.callValue(createTextFormatRange, cast ([textFormat, 0.0, _Runtime.field(text, 'length')] : Array<Dynamic>))] : Array<Dynamic>), width: _Runtime.field(_Runtime.field(source, 'data'), 'width'), height: _Runtime.field(_Runtime.field(source, 'data'), 'height'), measure: measure, verticalAlign: _Runtime.select(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'autoSize'), 'none'), function():Dynamic return cast _Runtime.field(_Runtime.field(source, 'data'), 'verticalAlign'), function():Dynamic return cast 'top') }] : Array<Dynamic>));

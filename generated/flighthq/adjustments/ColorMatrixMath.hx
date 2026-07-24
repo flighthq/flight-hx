@@ -99,8 +99,8 @@ class ColorMatrixMath {
     var lumG:Dynamic = cast _Runtime.UNDEFINED;
     var lumB:Dynamic = cast _Runtime.UNDEFINED;
     rad = ((degrees * HxMath.PI) / 180.0);
-    cos = _Runtime.callProperty(HxMath, 'cos', cast ([rad] : Array<Dynamic>));
-    sin = _Runtime.callProperty(HxMath, 'sin', cast ([rad] : Array<Dynamic>));
+    cos = HxMath.cos(rad);
+    sin = HxMath.sin(rad);
     lumR = 0.213;
     lumG = 0.715;
     lumB = 0.072;
@@ -125,7 +125,7 @@ class ColorMatrixMath {
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     inRange = (inWhite - inBlack);
     scale = _Runtime.select(_Runtime.strictEquals(inRange, 0.0), function():Dynamic return cast 1.0, function():Dynamic return cast ((outWhite - outBlack) / inRange));
-    gammaCorrectedScale = (scale * _Runtime.select(_Runtime.strictEquals(gamma, 1.0), function():Dynamic return cast 1.0, function():Dynamic return cast _Runtime.callProperty(HxMath, 'pow', cast ([0.5, ((1.0 / gamma) - 1.0)] : Array<Dynamic>))));
+    gammaCorrectedScale = (scale * _Runtime.select(_Runtime.strictEquals(gamma, 1.0), function():Dynamic return cast 1.0, function():Dynamic return cast HxMath.pow(0.5, ((1.0 / gamma) - 1.0))));
     offset = (outBlack - (inBlack * gammaCorrectedScale));
     return cast cast ([gammaCorrectedScale, 0.0, 0.0, 0.0, offset, 0.0, gammaCorrectedScale, 0.0, 0.0, offset, 0.0, 0.0, gammaCorrectedScale, 0.0, offset, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
@@ -305,7 +305,7 @@ class ColorMatrixMath {
   }
 
   public static function clampByte__colorMatrixMath(v:Float):Float {
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([v] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast HxMath.max(0.0, HxMath.min(255.0, HxMath.round(v)));
     return cast null;
   }
 }

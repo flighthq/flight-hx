@@ -19,7 +19,7 @@ import flighthq.types.Types.ClipboardFormatRtf;
 class Clipboard {
   public static var _backend__clipboard:Null<ClipboardBackend> = _Runtime.explicitNull();
 
-  public static final _watchSubscriptions__clipboard:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _watchSubscriptions__clipboard:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function attachClipboardWatch(watch:ClipboardWatch):Void {
     var unsubscribe:Dynamic = cast _Runtime.UNDEFINED;
@@ -33,10 +33,10 @@ class Clipboard {
   public static function blobFromFormatData__clipboard(format:String, data:String):flighthq._internal._Promise<Dynamic> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
       if (_Runtime.truthy(_Runtime.andValue(StringTools.startsWith(format, 'image/'), function():Dynamic return cast StringTools.startsWith(data, 'data:')))) {
-        var response:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['fetch'] : Array<Dynamic>)), cast ([data] : Array<Dynamic>)));
+        var response:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(_Runtime.globalValue('fetch'), cast ([data] : Array<Dynamic>)));
         return cast _Runtime.callProperty(response, 'blob', cast ([] : Array<Dynamic>));
       }
-      return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Blob'] : Array<Dynamic>)), [cast ([data] : Array<Dynamic>), { type: format }]);
+      return cast _Runtime.construct(_Runtime.globalValue('Blob'), [cast ([data] : Array<Dynamic>), { type: format }]);
       return cast null;
     })();
   }
@@ -76,7 +76,7 @@ class Clipboard {
       if (_Runtime.truthy(_Runtime.strictEquals(cb, null))) { return cast false; }
       try {
         var blob:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(Clipboard.blobFromFormatData__clipboard, cast ([format, data] : Array<Dynamic>)));
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(cb, 'write', cast ([cast ([_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['ClipboardItem'] : Array<Dynamic>)), [_Runtime.objectFromPairs([{ key: format, value: blob }])])] : Array<Dynamic>)] : Array<Dynamic>)));
+        flighthq._internal._Async.awaitValue(_Runtime.callProperty(cb, 'write', cast ([cast ([_Runtime.construct(_Runtime.globalValue('ClipboardItem'), [_Runtime.objectFromPairs([{ key: format, value: blob }])])] : Array<Dynamic>)] : Array<Dynamic>)));
         return cast true;
       } catch (__error:Dynamic) {
         return cast false;
@@ -113,7 +113,7 @@ class Clipboard {
         for (item in _Runtime.iterable(items)) {
           _Runtime.setIndex(entry, _Runtime.field(item, 'format'), flighthq._internal._Async.awaitValue(_Runtime.callValue(Clipboard.blobFromFormatData__clipboard, cast ([_Runtime.field(item, 'format'), _Runtime.field(item, 'data')] : Array<Dynamic>))));
         }
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(cb, 'write', cast ([cast ([_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['ClipboardItem'] : Array<Dynamic>)), [entry])] : Array<Dynamic>)] : Array<Dynamic>)));
+        flighthq._internal._Async.awaitValue(_Runtime.callProperty(cb, 'write', cast ([cast ([_Runtime.construct(_Runtime.globalValue('ClipboardItem'), [entry])] : Array<Dynamic>)] : Array<Dynamic>)));
         return cast true;
       } catch (__error:Dynamic) {
         return cast false;
@@ -192,9 +192,9 @@ class Clipboard {
       cb = _Runtime.callValue(Clipboard.getWritableWebClipboard__clipboard, cast ([] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(cb, null))) { return cast false; }
       try {
-        var response:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['fetch'] : Array<Dynamic>)), cast ([dataUrl] : Array<Dynamic>)));
+        var response:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(_Runtime.globalValue('fetch'), cast ([dataUrl] : Array<Dynamic>)));
         var blob:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(response, 'blob', cast ([] : Array<Dynamic>)));
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(cb, 'write', cast ([cast ([_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['ClipboardItem'] : Array<Dynamic>)), [_Runtime.objectFromPairs([{ key: _Runtime.field(blob, 'type'), value: blob }])])] : Array<Dynamic>)] : Array<Dynamic>)));
+        flighthq._internal._Async.awaitValue(_Runtime.callProperty(cb, 'write', cast ([cast ([_Runtime.construct(_Runtime.globalValue('ClipboardItem'), [_Runtime.objectFromPairs([{ key: _Runtime.field(blob, 'type'), value: blob }])])] : Array<Dynamic>)] : Array<Dynamic>)));
         return cast true;
       } catch (__error:Dynamic) {
         return cast false;
@@ -228,14 +228,14 @@ class Clipboard {
       return cast -1.0;
     }, subscribeClipboardChange: function(listener:Dynamic) {
       var target:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'))) { return cast function() {
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast function() {
       
       }; }
-      target = (cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : { @:optional var onclipboardchange:Dynamic; });
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.hasField(target, 'onclipboardchange'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex((cast (cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : Dynamic) : Dynamic), 'clipboardchange')), 'undefined')))) {
+      target = (cast _Runtime.globalValue('window') : { @:optional var onclipboardchange:Dynamic; });
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.hasField(target, 'onclipboardchange'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex((cast (cast _Runtime.globalValue('window') : Dynamic) : Dynamic), 'clipboardchange')), 'undefined')))) {
         var handler:Dynamic = function() return _Runtime.callValue(listener, cast ([] : Array<Dynamic>));
-        _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'addEventListener', cast ([(cast 'clipboardchange' : Dynamic), (cast handler : Dynamic)] : Array<Dynamic>));
-        return cast function() return _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'removeEventListener', cast ([(cast 'clipboardchange' : Dynamic), (cast handler : Dynamic)] : Array<Dynamic>));
+        _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast ([(cast 'clipboardchange' : Dynamic), (cast handler : Dynamic)] : Array<Dynamic>));
+        return cast function() return _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast ([(cast 'clipboardchange' : Dynamic), (cast handler : Dynamic)] : Array<Dynamic>));
       }
       return cast function() {
       
@@ -274,15 +274,15 @@ class Clipboard {
   }
 
   public static function getWebClipboard__clipboard():Null<Clipboard> {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
-    return cast _Runtime.coalesce(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'clipboard'), function():Dynamic return cast null);
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
+    return cast _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('navigator'), 'clipboard'), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getWritableWebClipboard__clipboard():Null<Clipboard> {
     var cb:Dynamic = cast _Runtime.UNDEFINED;
     cb = _Runtime.callValue(Clipboard.getWebClipboard__clipboard, cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(cb, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(cb, 'write')), 'function')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['ClipboardItem'] : Array<Dynamic>)), 'undefined')))) { return cast null; }
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(cb, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(cb, 'write')), 'function')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofGlobal('ClipboardItem'), 'undefined')))) { return cast null; }
     return cast cb;
     return cast null;
   }
@@ -318,13 +318,13 @@ class Clipboard {
   }
 
   public static function readBlobAsDataUrl__clipboard(blob:Dynamic):flighthq._internal._Promise<String> {
-    return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(resolve:Dynamic) {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['FileReader'] : Array<Dynamic>)), 'undefined'))) {
+    return cast _Runtime.construct(_Runtime.globalValue('Promise'), [function(resolve:Dynamic) {
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('FileReader'), 'undefined'))) {
         _Runtime.callValue(resolve, cast ([''] : Array<Dynamic>));
         return;
       }
       try {
-        var reader:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['FileReader'] : Array<Dynamic>)), []);
+        var reader:Dynamic = _Runtime.construct(_Runtime.globalValue('FileReader'), []);
         _Runtime.setField(reader, 'onloadend', function() return _Runtime.callValue(resolve, cast ([_Runtime.select(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(reader, 'result')), 'string'), function():Dynamic return cast _Runtime.field(reader, 'result'), function():Dynamic return cast '')] : Array<Dynamic>)));
         _Runtime.setField(reader, 'onerror', function() return _Runtime.callValue(resolve, cast ([''] : Array<Dynamic>)));
         _Runtime.callProperty(reader, 'readAsDataURL', cast ([blob] : Array<Dynamic>));

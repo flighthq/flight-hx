@@ -68,7 +68,7 @@ class Matrix3 {
   public static function createMatrix3(?m00:Float, ?m01:Float, ?m02:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m20:Float, ?m21:Float, ?m22:Float):flighthq.types.Matrix3 {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var out:flighthq.types.Matrix3 = cast _Runtime.UNDEFINED;
-    m = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [Matrix3.__identity__matrix3]);
+    m = _Runtime.construct(_Runtime.globalValue('Float32Array'), [Matrix3.__identity__matrix3]);
     out = _Runtime.callValue(createEntity, cast ([{ m: m }] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(m00, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 0.0, m00); }
     if (_Runtime.truthy(!_Runtime.strictEquals(m01, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 3.0, m01); }
@@ -260,8 +260,8 @@ class Matrix3 {
     var a6:Dynamic = cast _Runtime.UNDEFINED;
     var a7:Dynamic = cast _Runtime.UNDEFINED;
     var a8:Dynamic = cast _Runtime.UNDEFINED;
-    c = _Runtime.callProperty(HxMath, 'cos', cast ([theta] : Array<Dynamic>));
-    s = _Runtime.callProperty(HxMath, 'sin', cast ([theta] : Array<Dynamic>));
+    c = HxMath.cos(theta);
+    s = HxMath.sin(theta);
     a = _Runtime.field(source, 'm');
     o = _Runtime.field(out, 'm');
     a0 = _Runtime.getIndex(a, 0.0);
@@ -429,5 +429,5 @@ class Matrix3 {
     }
   }
 
-  public static final __identity__matrix3:flighthq._internal._Float32Array = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [cast ([1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>)]);
+  public static final __identity__matrix3:flighthq._internal._Float32Array = _Runtime.construct(_Runtime.globalValue('Float32Array'), [cast ([1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>)]);
 }

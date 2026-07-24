@@ -10,7 +10,7 @@ import flighthq.types.RandomSource;
 class ParticleObjectsState {
   public static function createParticleObjectsState(capacity:Float, ?random:RandomSource):flighthq.types.ParticleObjectsState {
     if (random == null) random = cast (HxMath.random : Dynamic);
-    return cast { burstTimer: 0.0, emitterAge: 0.0, lifetimes: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(capacity * 2.0)]), prevX: HxMath.NaN, prevY: HxMath.NaN, random: random, rotationSpeeds: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [capacity]), scales: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [capacity]), spawnAccumulator: 0.0, velocities: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(capacity * 2.0)]) };
+    return cast { burstTimer: 0.0, emitterAge: 0.0, lifetimes: _Runtime.construct(_Runtime.globalValue('Float32Array'), [(capacity * 2.0)]), prevX: HxMath.NaN, prevY: HxMath.NaN, random: random, rotationSpeeds: _Runtime.construct(_Runtime.globalValue('Float32Array'), [capacity]), scales: _Runtime.construct(_Runtime.globalValue('Float32Array'), [capacity]), spawnAccumulator: 0.0, velocities: _Runtime.construct(_Runtime.globalValue('Float32Array'), [(capacity * 2.0)]) };
     return cast null;
   }
 

@@ -69,7 +69,7 @@ class SurfaceFill {
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(targetR, fillR), function():Dynamic return cast _Runtime.strictEquals(targetG, fillG)), function():Dynamic return cast _Runtime.strictEquals(targetB, fillB)), function():Dynamic return cast _Runtime.strictEquals(targetA, fillA)))) { return; }
     needed = (_Runtime.field(out, 'width') * _Runtime.field(out, 'height'));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(SurfaceFill._floodFillVisited__surfaceFill, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(SurfaceFill._floodFillVisited__surfaceFill, 'length'), needed, '<')))) {
-      (SurfaceFill._floodFillVisited__surfaceFill = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [needed]) : Dynamic));
+      (SurfaceFill._floodFillVisited__surfaceFill = cast (_Runtime.construct(_Runtime.globalValue('Uint8Array'), [needed]) : Dynamic));
     } else {
       _Runtime.fill(SurfaceFill._floodFillVisited__surfaceFill, 0.0, 0.0, needed, 3);
     }
@@ -80,7 +80,7 @@ class SurfaceFill {
       if (_Runtime.truthy(_Runtime.getIndex(visited, idx))) { continue; }
       _Runtime.setIndex(visited, idx, 1.0);
       var px:Dynamic = (idx % _Runtime.field(out, 'width'));
-      var py:Dynamic = _Runtime.callProperty(HxMath, 'floor', cast ([(idx / _Runtime.field(out, 'width'))] : Array<Dynamic>));
+      var py:Dynamic = HxMath.floor((idx / _Runtime.field(out, 'width')));
       var i:Dynamic = (idx * 4.0);
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(out, 'data'), i), targetR), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(out, 'data'), (i + 1.0)), targetG)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(out, 'data'), (i + 2.0)), targetB)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.field(out, 'data'), (i + 3.0)), targetA)))) {
         continue;

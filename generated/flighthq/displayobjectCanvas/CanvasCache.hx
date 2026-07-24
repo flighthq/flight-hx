@@ -38,7 +38,7 @@ class CanvasCache {
     var screen:Dynamic = cast _Runtime.UNDEFINED;
     var cacheState:Dynamic = cast _Runtime.UNDEFINED;
     screen = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([screenState] : Array<Dynamic>));
-    cacheState = _Runtime.callValue(createCanvasRenderState, cast ([_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>)), { imageSmoothingEnabled: _Runtime.field(screen, 'imageSmoothingEnabled'), imageSmoothingQuality: _Runtime.field(screen, 'imageSmoothingQuality'), pixelRatio: _Runtime.field(screenState, 'pixelRatio'), roundPixels: _Runtime.field(screenState, 'roundPixels'), sceneGraphSyncPolicy: _Runtime.field(screenState, 'sceneGraphSyncPolicy') }] : Array<Dynamic>));
+    cacheState = _Runtime.callValue(createCanvasRenderState, cast ([_Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)), { imageSmoothingEnabled: _Runtime.field(screen, 'imageSmoothingEnabled'), imageSmoothingQuality: _Runtime.field(screen, 'imageSmoothingQuality'), pixelRatio: _Runtime.field(screenState, 'pixelRatio'), roundPixels: _Runtime.field(screenState, 'roundPixels'), sceneGraphSyncPolicy: _Runtime.field(screenState, 'sceneGraphSyncPolicy') }] : Array<Dynamic>));
     _Runtime.callValue(copyAllRenderersFromRenderState, cast ([cacheState, screenState] : Array<Dynamic>));
     _Runtime.callProperty(CanvasCache._cacheStateScreen__canvasCache, 'set', cast ([cacheState, screenState] : Array<Dynamic>));
     return cast cacheState;
@@ -147,7 +147,7 @@ class CanvasCache {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callProperty(CanvasCache._renderCacheTargets__canvasCache, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (targets = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []) : Dynamic));
+      (targets = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
       _Runtime.callProperty(CanvasCache._renderCacheTargets__canvasCache, 'set', cast ([state, targets] : Array<Dynamic>));
     }
     return cast targets;
@@ -156,9 +156,9 @@ class CanvasCache {
 
   public static final defaultCanvasRenderCacheRenderer:DisplayObjectRenderer = { createData: noopRendererData, submit: CanvasCache.drawCanvasRenderCache__canvasCache };
 
-  public static final _renderCacheTargets__canvasCache:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _renderCacheTargets__canvasCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static final _cacheStateScreen__canvasCache:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _cacheStateScreen__canvasCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static final _bounds__canvasCache:Dynamic = _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>));
 

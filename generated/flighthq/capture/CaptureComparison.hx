@@ -17,7 +17,7 @@ class CaptureComparison {
     var fb:Dynamic = cast _Runtime.UNDEFINED;
     fa = _Runtime.callValue(parseSurfaceFingerprint, cast ([a] : Array<Dynamic>));
     fb = _Runtime.callValue(parseSurfaceFingerprint, cast ([b] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(fa, null), function():Dynamic return cast _Runtime.strictEquals(fb, null)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(fa, 'gridSize'), _Runtime.field(fb, 'gridSize'))))) { return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'); }
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(fa, null), function():Dynamic return cast _Runtime.strictEquals(fb, null)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(fa, 'gridSize'), _Runtime.field(fb, 'gridSize'))))) { return cast _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY'); }
     return cast _Runtime.callValue(compareSurfaceFingerprints, cast ([fa, fb] : Array<Dynamic>));
     return cast null;
   }

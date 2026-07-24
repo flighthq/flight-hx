@@ -33,7 +33,7 @@ class SceneResourceRecovery {
     var reset:Dynamic = cast _Runtime.UNDEFINED;
     textures = cast ([] : Array<Dynamic>);
     _Runtime.callValue(getSceneResourceTextures, cast ([scene, _Runtime.field(resolver, 'registry'), textures] : Array<Dynamic>));
-    reset = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
+    reset = _Runtime.construct(_Runtime.globalValue('Set'), []);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(textures, 'length'), '<'))) {

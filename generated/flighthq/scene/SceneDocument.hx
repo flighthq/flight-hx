@@ -106,7 +106,7 @@ class SceneDocument {
           j++;
         }
       }
-      inverseBindMatrices = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(_Runtime.field(joints, 'length') * 16.0)]);
+      inverseBindMatrices = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(_Runtime.field(joints, 'length') * 16.0)]);
       {
         var j:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(j, _Runtime.field(_Runtime.field(skin, 'inverseBind'), 'length'), '<'), function():Dynamic return cast _Runtime.compare(j, _Runtime.field(joints, 'length'), '<')))) {
@@ -114,7 +114,7 @@ class SceneDocument {
           j++;
         }
       }
-      skeleton = _Runtime.callValue(createEntity, cast ([{ inverseBindMatrices: inverseBindMatrices, jointMatrices: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(_Runtime.field(joints, 'length') * 16.0)]), joints: joints, names: _Runtime.select(_Runtime.callProperty(names, 'some', cast ([function(name:Dynamic) return _Runtime.compare(_Runtime.field(name, 'length'), 0.0, '>')] : Array<Dynamic>)), function():Dynamic return cast names, function():Dynamic return cast null) }] : Array<Dynamic>));
+      skeleton = _Runtime.callValue(createEntity, cast ([{ inverseBindMatrices: inverseBindMatrices, jointMatrices: _Runtime.construct(_Runtime.globalValue('Float32Array'), [(_Runtime.field(joints, 'length') * 16.0)]), joints: joints, names: _Runtime.select(_Runtime.callProperty(names, 'some', cast ([function(name:Dynamic) return _Runtime.compare(_Runtime.field(name, 'length'), 0.0, '>')] : Array<Dynamic>)), function():Dynamic return cast names, function():Dynamic return cast null) }] : Array<Dynamic>));
       return cast { skeleton: skeleton, skeletonRoot: null };
     }] : Array<Dynamic>));
     {

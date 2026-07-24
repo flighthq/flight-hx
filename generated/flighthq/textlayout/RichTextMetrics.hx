@@ -11,7 +11,7 @@ import flighthq.types.TextLayout.TextLayoutResult;
 
 class RichTextMetrics {
   public static function computeRichTextBottomScrollV(data:RichTextData, layout:TextLayoutResult):Float {
-    return cast _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(layout, 'numLines'), ((_Runtime.field(data, 'scrollV') + _Runtime.callValue(RichTextMetrics.getVisibleLineCount__richTextMetrics, cast ([data, layout] : Array<Dynamic>))) - 1.0)] : Array<Dynamic>));
+    return cast HxMath.min(_Runtime.field(layout, 'numLines'), ((_Runtime.field(data, 'scrollV') + _Runtime.callValue(RichTextMetrics.getVisibleLineCount__richTextMetrics, cast ([data, layout] : Array<Dynamic>))) - 1.0));
     return cast null;
   }
 
@@ -22,24 +22,24 @@ class RichTextMetrics {
 
   public static function computeRichTextMaxScrollH(data:RichTextData, layout:TextLayoutResult):Float {
     var visibleWidth:Dynamic = cast _Runtime.UNDEFINED;
-    visibleWidth = _Runtime.callProperty(HxMath, 'max', cast ([0.0, (_Runtime.callValue(computeTextBoundsWidth, cast ([data, layout] : Array<Dynamic>)) - (TEXT_BOUNDS_GUTTER * 2.0))] : Array<Dynamic>));
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'ceil', cast ([(_Runtime.field(layout, 'textWidth') - visibleWidth)] : Array<Dynamic>))] : Array<Dynamic>));
+    visibleWidth = HxMath.max(0.0, (_Runtime.callValue(computeTextBoundsWidth, cast ([data, layout] : Array<Dynamic>)) - (TEXT_BOUNDS_GUTTER * 2.0)));
+    return cast HxMath.max(0.0, HxMath.ceil((_Runtime.field(layout, 'textWidth') - visibleWidth)));
     return cast null;
   }
 
   public static function computeRichTextMaxScrollV(data:RichTextData, layout:TextLayoutResult):Float {
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(layout, 'numLines'), 1.0, '<='))) { return cast 1.0; }
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([1.0, ((_Runtime.field(layout, 'numLines') - _Runtime.callValue(RichTextMetrics.getVisibleLineCount__richTextMetrics, cast ([data, layout] : Array<Dynamic>))) + 1.0)] : Array<Dynamic>));
+    return cast HxMath.max(1.0, ((_Runtime.field(layout, 'numLines') - _Runtime.callValue(RichTextMetrics.getVisibleLineCount__richTextMetrics, cast ([data, layout] : Array<Dynamic>))) + 1.0));
     return cast null;
   }
 
   public static function computeRichTextTextHeight(layout:TextLayoutResult):Float {
-    return cast _Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(layout, 'textHeight')] : Array<Dynamic>));
+    return cast HxMath.ceil(_Runtime.field(layout, 'textHeight'));
     return cast null;
   }
 
   public static function computeRichTextTextWidth(layout:TextLayoutResult):Float {
-    return cast _Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(layout, 'textWidth')] : Array<Dynamic>));
+    return cast HxMath.ceil(_Runtime.field(layout, 'textWidth'));
     return cast null;
   }
 
@@ -47,7 +47,7 @@ class RichTextMetrics {
     var offset:Dynamic = cast _Runtime.UNDEFINED;
     var limit:Dynamic = cast _Runtime.UNDEFINED;
     offset = 0.0;
-    limit = _Runtime.callProperty(HxMath, 'min', cast ([firstVisibleLine, _Runtime.field(lineHeights, 'length')] : Array<Dynamic>));
+    limit = HxMath.min(firstVisibleLine, _Runtime.field(lineHeights, 'length'));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, limit, '<'))) {
@@ -63,7 +63,7 @@ class RichTextMetrics {
     var visibleHeight:Dynamic = cast _Runtime.UNDEFINED;
     var total:Dynamic = cast _Runtime.UNDEFINED;
     var count:Dynamic = cast _Runtime.UNDEFINED;
-    visibleHeight = _Runtime.callProperty(HxMath, 'max', cast ([0.0, (_Runtime.callValue(computeTextBoundsHeight, cast ([data, layout] : Array<Dynamic>)) - (TEXT_BOUNDS_GUTTER * 2.0))] : Array<Dynamic>));
+    visibleHeight = HxMath.max(0.0, (_Runtime.callValue(computeTextBoundsHeight, cast ([data, layout] : Array<Dynamic>)) - (TEXT_BOUNDS_GUTTER * 2.0)));
     if (_Runtime.truthy(_Runtime.strictEquals(visibleHeight, 0.0))) { return cast 1.0; }
     total = 0.0;
     count = 0.0;
@@ -72,7 +72,7 @@ class RichTextMetrics {
       (total = cast ((total + height) : Dynamic));
       count++;
     }
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([1.0, count] : Array<Dynamic>));
+    return cast HxMath.max(1.0, count);
     return cast null;
   }
 }

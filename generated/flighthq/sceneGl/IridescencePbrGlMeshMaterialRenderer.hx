@@ -42,16 +42,16 @@ class IridescencePbrGlMeshMaterialRenderer {
     _Runtime.callValue(setGlMeshCameraPosition, cast ([gl, _Runtime.field(program, 'locCameraPosition'), camera] : Array<Dynamic>));
     _Runtime.callValue(bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
     _Runtime.callValue(bindGlPbrStandardBlock, cast ([state, program, standard] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), _Runtime.select(!_Runtime.strictEquals(iridescence, null), function():Dynamic return cast _Runtime.field(iridescence, 'alphaCutoff'), function():Dynamic return cast 0.5)] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), _Runtime.select(!_Runtime.strictEquals(iridescence, null), function():Dynamic return cast _Runtime.field(iridescence, 'alphaCutoff'), function():Dynamic return cast 0.5)] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(iridescence, null))) {
       var thickness:Dynamic = ((_Runtime.field(iridescence, 'iridescenceThicknessMin') + _Runtime.field(iridescence, 'iridescenceThicknessMax')) * 0.5);
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIridescence'), _Runtime.field(iridescence, 'iridescence')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIridescenceIor'), _Runtime.field(iridescence, 'iridescenceIor')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIridescenceThickness'), thickness] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIridescence'), _Runtime.field(iridescence, 'iridescence')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIridescenceIor'), _Runtime.field(iridescence, 'iridescenceIor')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIridescenceThickness'), thickness] : Array<Dynamic>));
     } else {
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIridescence'), 0.0] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIridescenceIor'), 1.3] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIridescenceThickness'), 250.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIridescence'), 0.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIridescenceIor'), 1.3] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIridescenceThickness'), 250.0] : Array<Dynamic>));
     }
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;

@@ -17,7 +17,7 @@ class Timeline {
   public static function addTimelineFrameScript(timeline:flighthq.types.Timeline, frame:Dynamic, script:FrameScript):Void {
     var resolved:Dynamic = cast _Runtime.UNDEFINED;
     resolved = _Runtime.callValue(Timeline.resolveFrame__timeline, cast ([timeline, frame] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.setField(timeline, 'frameScripts', (_Runtime.field(timeline, 'frameScripts') ?? _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []))), 'set', cast ([resolved, script] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.setField(timeline, 'frameScripts', (_Runtime.field(timeline, 'frameScripts') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))), 'set', cast ([resolved, script] : Array<Dynamic>));
   }
 
   public static function advanceFrame__timeline(timeline:flighthq.types.Timeline, deltaTime:Float):Float {
@@ -29,7 +29,7 @@ class Timeline {
     if (_Runtime.truthy(!_Runtime.strictEquals(frameRate, null))) {
       var frameTime:Dynamic = (1000.0 / frameRate);
       _Runtime.setField(timeline, 'timeElapsed', (_Runtime.field(timeline, 'timeElapsed') + deltaTime));
-      var next:Dynamic = (_Runtime.field(timeline, 'currentFrame') + _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(timeline, 'timeElapsed') / frameTime)] : Array<Dynamic>)));
+      var next:Dynamic = (_Runtime.field(timeline, 'currentFrame') + HxMath.floor((_Runtime.field(timeline, 'timeElapsed') / frameTime)));
       _Runtime.setField(timeline, 'timeElapsed', (_Runtime.field(timeline, 'timeElapsed') % frameTime));
       if (_Runtime.truthy(_Runtime.compare(next, totalFrames, '>'))) {
         if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(timeline, 'playMode'), 'once'))) {
@@ -201,7 +201,7 @@ class Timeline {
   }
 
   public static function seekTimeline__timeline(timeline:flighthq.types.Timeline, frame:Float):Void {
-    _Runtime.setField(timeline, 'currentFrame', _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'min', cast ([frame, _Runtime.callValue(Timeline.getTimelineTotalFrames__timeline, cast ([timeline] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
+    _Runtime.setField(timeline, 'currentFrame', HxMath.max(1.0, HxMath.min(frame, _Runtime.callValue(Timeline.getTimelineTotalFrames__timeline, cast ([timeline] : Array<Dynamic>)))));
     _Runtime.setField(timeline, 'lastFrameUpdate', -1.0);
     _Runtime.callValue(Timeline.fireConstructFrame__timeline, cast ([timeline] : Array<Dynamic>));
   }

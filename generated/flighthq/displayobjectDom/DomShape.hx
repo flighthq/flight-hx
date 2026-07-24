@@ -41,13 +41,13 @@ class DomShape {
     commands = _Runtime.field(__destructure0, 'commands');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0))) { return; }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'canvas'), null))) {
-      _Runtime.setField(data, 'canvas', _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>)));
+      _Runtime.setField(data, 'canvas', _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)));
       _Runtime.setField(data, 'context', _Runtime.callProperty(_Runtime.field(data, 'canvas'), 'getContext', cast (['2d'] : Array<Dynamic>)));
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'canvas')] : Array<Dynamic>));
     }
     bounds = _Runtime.callValue(getNodeLocalBoundsRectangle, cast ([source] : Array<Dynamic>));
-    w = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(bounds, 'width')] : Array<Dynamic>))] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(bounds, 'height')] : Array<Dynamic>))] : Array<Dynamic>));
+    w = HxMath.max(1.0, HxMath.ceil(_Runtime.field(bounds, 'width')));
+    h = HxMath.max(1.0, HxMath.ceil(_Runtime.field(bounds, 'height')));
     _Runtime.setField(_Runtime.field(data, 'canvas'), 'width', w);
     _Runtime.setField(_Runtime.field(data, 'canvas'), 'height', h);
     ctx = _Runtime.field(data, 'context');

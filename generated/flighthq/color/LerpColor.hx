@@ -22,7 +22,7 @@ class LerpColor {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
-    tc = _Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, t] : Array<Dynamic>))] : Array<Dynamic>));
+    tc = HxMath.min(1.0, HxMath.max(0.0, t));
     sr = _Runtime.callValue(srgbChannelToLinear, cast ([((Std.int(_Runtime.unsignedShiftRight(Std.int(start), Std.int(24.0))) & Std.int(255.0)) / 255.0)] : Array<Dynamic>));
     sg = _Runtime.callValue(srgbChannelToLinear, cast ([((Std.int(_Runtime.unsignedShiftRight(Std.int(start), Std.int(16.0))) & Std.int(255.0)) / 255.0)] : Array<Dynamic>));
     sb = _Runtime.callValue(srgbChannelToLinear, cast ([((Std.int(_Runtime.unsignedShiftRight(Std.int(start), Std.int(8.0))) & Std.int(255.0)) / 255.0)] : Array<Dynamic>));
@@ -49,7 +49,7 @@ class LerpColor {
     var g1:Dynamic = cast _Runtime.UNDEFINED;
     var b1:Dynamic = cast _Runtime.UNDEFINED;
     var a1:Dynamic = cast _Runtime.UNDEFINED;
-    tc = _Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, t] : Array<Dynamic>))] : Array<Dynamic>));
+    tc = HxMath.min(1.0, HxMath.max(0.0, t));
     r0 = _Runtime.getIndex(start, 0.0);
     g0 = _Runtime.getIndex(start, 1.0);
     b0 = _Runtime.getIndex(start, 2.0);

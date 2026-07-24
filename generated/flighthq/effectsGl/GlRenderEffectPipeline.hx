@@ -67,7 +67,7 @@ class GlRenderEffectPipeline {
     }
     _Runtime.callValue(destroyGlRenderTargetPool, cast ([state, _Runtime.field(pipeline, 'pool')] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(_Runtime.field(pipeline, 'lutTexture'), 'texture'), null))) {
-      _Runtime.callProperty(_Runtime.field(state, 'gl'), 'deleteTexture', cast ([_Runtime.field(_Runtime.field(pipeline, 'lutTexture'), 'texture')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(_Runtime.field(state, 'gl'), 'deleteTexture', cast ([_Runtime.field(_Runtime.field(pipeline, 'lutTexture'), 'texture')] : Array<Dynamic>));
       _Runtime.setField(_Runtime.field(pipeline, 'lutTexture'), 'texture', null);
     }
     _Runtime.setField(_Runtime.field(pipeline, 'lutTexture'), 'lut', null);

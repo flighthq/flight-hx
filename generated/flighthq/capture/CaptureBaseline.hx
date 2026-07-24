@@ -15,7 +15,7 @@ class CaptureBaseline {
   public static function formatCaptureBaseline(baseline:flighthq.types.CaptureBaseline):String {
     var sorted:flighthq.types.CaptureBaseline = cast _Runtime.UNDEFINED;
     sorted = {  };
-    for (column in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([baseline] : Array<Dynamic>)), 'sort', cast ([] : Array<Dynamic>)))) {
+    for (column in _Runtime.iterable(_Runtime.callProperty(flighthq._internal.DynamicObject.keys(baseline), 'sort', cast ([] : Array<Dynamic>)))) {
       var entry:Dynamic = _Runtime.getIndex(baseline, column);
       var out:CaptureColumnBaseline = {  };
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(entry, 'fingerprint'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(out, 'fingerprint', _Runtime.field(entry, 'fingerprint')); }

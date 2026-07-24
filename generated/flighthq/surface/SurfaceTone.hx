@@ -13,8 +13,8 @@ class SurfaceTone {
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var od:Dynamic = cast _Runtime.UNDEFINED;
     var sd:Dynamic = cast _Runtime.UNDEFINED;
-    w = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(out, 'width'), _Runtime.field(source, 'width')] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(out, 'height'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+    w = HxMath.min(_Runtime.field(out, 'width'), _Runtime.field(source, 'width'));
+    h = HxMath.min(_Runtime.field(out, 'height'), _Runtime.field(source, 'height'));
     od = _Runtime.field(_Runtime.field(out, 'surface'), 'data');
     sd = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
     {
@@ -54,16 +54,16 @@ class SurfaceTone {
     var span:Dynamic = cast _Runtime.UNDEFINED;
     var invGamma:Dynamic = cast _Runtime.UNDEFINED;
     var lut:Dynamic = cast _Runtime.UNDEFINED;
-    bp = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([254.0, blackPoint] : Array<Dynamic>))] : Array<Dynamic>));
-    wp = _Runtime.callProperty(HxMath, 'max', cast ([(bp + 1.0), _Runtime.callProperty(HxMath, 'min', cast ([255.0, whitePoint] : Array<Dynamic>))] : Array<Dynamic>));
+    bp = HxMath.max(0.0, HxMath.min(254.0, blackPoint));
+    wp = HxMath.max((bp + 1.0), HxMath.min(255.0, whitePoint));
     span = (wp - bp);
     invGamma = _Runtime.select(_Runtime.compare(gamma, 0.0, '>'), function():Dynamic return cast (1.0 / gamma), function():Dynamic return cast 1.0);
-    lut = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [256.0]);
+    lut = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [256.0]);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, 256.0, '<'))) {
-        var normalized:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, ((i - bp) / span)] : Array<Dynamic>))] : Array<Dynamic>));
-        _Runtime.setIndex(lut, i, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'pow', cast ([normalized, invGamma] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>)));
+        var normalized:Dynamic = HxMath.max(0.0, HxMath.min(1.0, ((i - bp) / span)));
+        _Runtime.setIndex(lut, i, HxMath.round((HxMath.pow(normalized, invGamma) * 255.0)));
         i++;
       }
     }

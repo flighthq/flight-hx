@@ -12,7 +12,7 @@ class List {
     var key:Dynamic = cast _Runtime.UNDEFINED;
     var formatter:Dynamic = cast _Runtime.UNDEFINED;
     key = _Runtime.callValue(getCacheKey, cast (['list', locale, options] : Array<Dynamic>));
-    formatter = _Runtime.callValue(getCached, cast ([key, function() return _Runtime.construct(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Intl'] : Array<Dynamic>)), 'ListFormat'), [(cast locale : Dynamic), options])] : Array<Dynamic>));
+    formatter = _Runtime.callValue(getCached, cast ([key, function() return _Runtime.construct(_Runtime.field(_Runtime.globalValue('Intl'), 'ListFormat'), [(cast locale : Dynamic), options])] : Array<Dynamic>));
     return cast _Runtime.callProperty(formatter, 'format', cast ([(cast items : Array<String>)] : Array<Dynamic>));
     return cast null;
   }

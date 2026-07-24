@@ -20,7 +20,7 @@ class GlMaterialRegistry {
   public static function registerGlMaterialRenderer(state:GlRenderState, kind:Kind, renderer:GlMaterialRenderer):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.setField(runtime, 'materialRendererMap', (_Runtime.field(runtime, 'materialRendererMap') ?? _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []))), 'set', cast ([kind, renderer] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.setField(runtime, 'materialRendererMap', (_Runtime.field(runtime, 'materialRendererMap') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))), 'set', cast ([kind, renderer] : Array<Dynamic>));
   }
 
   public static function resolveGlMaterialRenderer(state:GlRenderState, material:Null<Material>):Null<GlMaterialRenderer> {

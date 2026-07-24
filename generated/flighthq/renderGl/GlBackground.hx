@@ -15,14 +15,14 @@ class GlBackground {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
-    _Runtime.callProperty(gl, 'viewport', cast ([0.0, 0.0, _Runtime.field(viewport, 'width'), _Runtime.field(viewport, 'height')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'viewport', cast ([0.0, 0.0, _Runtime.field(viewport, 'width'), _Runtime.field(viewport, 'height')] : Array<Dynamic>));
     rgba = _Runtime.field(state, 'backgroundColorRgba');
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(rgba, 'length'), 4.0, '>='), function():Dynamic return cast _Runtime.compare(_Runtime.getIndex(rgba, 3.0), 0.0, '>')))) {
-      _Runtime.callProperty(gl, 'clearColor', cast ([_Runtime.getIndex(rgba, 0.0), _Runtime.getIndex(rgba, 1.0), _Runtime.getIndex(rgba, 2.0), _Runtime.getIndex(rgba, 3.0)] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'clearColor', cast ([_Runtime.getIndex(rgba, 0.0), _Runtime.getIndex(rgba, 1.0), _Runtime.getIndex(rgba, 2.0), _Runtime.getIndex(rgba, 3.0)] : Array<Dynamic>));
     } else {
-      _Runtime.callProperty(gl, 'clearColor', cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'clearColor', cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
     }
-    _Runtime.callProperty(gl, 'clear', cast ([_Runtime.field(gl, 'COLOR_BUFFER_BIT')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'clear', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'COLOR_BUFFER_BIT')] : Array<Dynamic>));
     _Runtime.setField(runtime, 'currentBlendMode', null);
   }
 }

@@ -41,7 +41,7 @@ class Mesh {
     if (_Runtime.truthy(_Runtime.callValue(isNodeLocalMatrix4Detached, cast ([source] : Array<Dynamic>)))) { _Runtime.callValue(setNodeLocalMatrix4, cast ([clone, _Runtime.callValue(getNodeLocalMatrix4, cast ([source] : Array<Dynamic>))] : Array<Dynamic>)); }
     if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(source, 'skin'), null))) { _Runtime.setField(clone, 'skin', _Runtime.field(source, 'skin')); }
     if (_Runtime.truthy(!_Runtime.looseEquals(_Runtime.field(source, 'morph'), null))) {
-      _Runtime.setField(clone, 'morph', { targets: _Runtime.field(_Runtime.field(source, 'morph'), 'targets'), weights: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [_Runtime.field(_Runtime.field(source, 'morph'), 'weights')]) });
+      _Runtime.setField(clone, 'morph', { targets: _Runtime.field(_Runtime.field(source, 'morph'), 'targets'), weights: _Runtime.construct(_Runtime.globalValue('Float32Array'), [_Runtime.field(_Runtime.field(source, 'morph'), 'weights')]) });
     }
     return cast clone;
     return cast null;

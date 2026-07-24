@@ -31,8 +31,8 @@ class GlCompositeEffect {
       var hasBackdropLoc:Dynamic = cast _Runtime.UNDEFINED;
       operatorLoc = _Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_operator'] : Array<Dynamic>));
       hasBackdropLoc = _Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, 'u_hasBackdrop'] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.strictEquals(operatorLoc, null))) { _Runtime.callProperty(gl, 'uniform1i', cast ([operatorLoc, operatorIndex] : Array<Dynamic>)); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(hasBackdropLoc, null))) { _Runtime.callProperty(gl, 'uniform1i', cast ([hasBackdropLoc, _Runtime.select(hasBackdrop, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(operatorLoc, null))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([operatorLoc, operatorIndex] : Array<Dynamic>)); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(hasBackdropLoc, null))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([hasBackdropLoc, _Runtime.select(hasBackdrop, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)] : Array<Dynamic>)); }
     }] : Array<Dynamic>));
   }
 

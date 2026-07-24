@@ -47,7 +47,7 @@ class TextureAtlasDetect {
   public static function firstFrame__textureAtlasDetect(frames:Dynamic):Dynamic {
     if (_Runtime.truthy(_Runtime.isArray(frames))) { return cast _Runtime.getIndex(frames, 0.0); }
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(frames, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(frames), 'object')))) {
-      for (value in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'values', cast ([(cast frames : Dynamic)] : Array<Dynamic>)))) {
+      for (value in _Runtime.iterable(flighthq._internal.DynamicObject.values((cast frames : Dynamic)))) {
         return cast value;
       }
     }

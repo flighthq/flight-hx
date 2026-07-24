@@ -36,7 +36,7 @@ class Material {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(a, 'kind'), _Runtime.field(b, 'kind')))) { return cast false; }
     aFields = (cast (cast a : Dynamic) : Dynamic);
     bFields = (cast (cast b : Dynamic) : Dynamic);
-    for (key in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([aFields] : Array<Dynamic>)))) {
+    for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(aFields))) {
       if (_Runtime.truthy(_Runtime.strictEquals(key, 'kind'))) { continue; }
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(aFields, key), _Runtime.getIndex(bFields, key)))) { return cast false; }
     }
@@ -54,7 +54,7 @@ class Material {
     var srcFields:Dynamic = cast _Runtime.UNDEFINED;
     dstFields = (cast (cast dst : Dynamic) : Dynamic);
     srcFields = (cast (cast src : Dynamic) : Dynamic);
-    for (key in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([srcFields] : Array<Dynamic>)))) {
+    for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(srcFields))) {
       if (_Runtime.truthy(_Runtime.strictEquals(key, 'kind'))) { continue; }
       var value:Dynamic = _Runtime.getIndex(srcFields, key);
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(key, 'standard'), function():Dynamic return cast !_Runtime.looseEquals(value, null)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'object')))) {

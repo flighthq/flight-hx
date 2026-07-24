@@ -12,12 +12,12 @@ class ImageResourceFrom {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var imageData:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(image, 'data'), null))) { return cast null; }
-    canvas = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
+    canvas = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
     _Runtime.setField(canvas, 'width', _Runtime.field(image, 'width'));
     _Runtime.setField(canvas, 'height', _Runtime.field(image, 'height'));
-    imageData = _Runtime.construct(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['globalThis'] : Array<Dynamic>)), 'ImageData'), [_Runtime.field(image, 'width'), _Runtime.field(image, 'height')]);
+    imageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [_Runtime.field(image, 'width'), _Runtime.field(image, 'height')]);
     _Runtime.callProperty(_Runtime.field(imageData, 'data'), 'set', cast ([_Runtime.field(image, 'data')] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([imageData, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(_Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([imageData, 0.0, 0.0] : Array<Dynamic>));
     return cast canvas;
     return cast null;
   }
@@ -40,7 +40,7 @@ class ImageResourceFrom {
   public static function isImageResourceSameOrigin(url:String):Bool {
     if (_Runtime.truthy(_Runtime.orValue(StringTools.startsWith(url, 'data:'), function():Dynamic return cast StringTools.startsWith(url, 'blob:')))) { return cast true; }
     try {
-      return cast _Runtime.strictEquals(_Runtime.field(_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['URL'] : Array<Dynamic>)), [url, _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['location'] : Array<Dynamic>)), 'href')]), 'origin'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['location'] : Array<Dynamic>)), 'origin'));
+      return cast _Runtime.strictEquals(_Runtime.field(_Runtime.construct(_Runtime.globalValue('URL'), [url, _Runtime.field(_Runtime.globalValue('location'), 'href')]), 'origin'), _Runtime.field(_Runtime.globalValue('location'), 'origin'));
     } catch (__error:Dynamic) {
       return cast true;
     }
@@ -57,23 +57,23 @@ class ImageResourceFrom {
   public static function loadImageResourceFromBlob(blob:Dynamic, ?signal:Dynamic):flighthq._internal._Promise<ImageResource> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<ImageResource> {
       var url:Dynamic = cast _Runtime.UNDEFINED;
-      url = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['URL'] : Array<Dynamic>)), 'createObjectURL', cast ([blob] : Array<Dynamic>));
+      url = _Runtime.callProperty(_Runtime.globalValue('URL'), 'createObjectURL', cast ([blob] : Array<Dynamic>));
       try {
         try {
           var __returnValue0:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(loadImageResourceFromUrl, cast ([url, _Runtime.field(_Runtime, 'UNDEFINED'), signal] : Array<Dynamic>)));
           {
-            _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['URL'] : Array<Dynamic>)), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
+            _Runtime.callProperty(_Runtime.globalValue('URL'), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
           }
           return cast __returnValue0;
         } catch (__error:Dynamic) { throw __error; }
       } catch (__finallyError1:Dynamic) {
         {
-          _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['URL'] : Array<Dynamic>)), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
+          _Runtime.callProperty(_Runtime.globalValue('URL'), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
         }
         throw __finallyError1;
       }
       {
-        _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['URL'] : Array<Dynamic>)), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
+        _Runtime.callProperty(_Runtime.globalValue('URL'), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
       }
       return cast null;
     })();
@@ -88,7 +88,7 @@ class ImageResourceFrom {
         throw _Runtime.error('Unable to determine image type from bytes');
       }
       buf = _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), (_Runtime.field(bytes, 'byteOffset') + _Runtime.field(bytes, 'byteLength')));
-      return cast _Runtime.callValue(loadImageResourceFromBlob, cast ([_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Blob'] : Array<Dynamic>)), [cast ([buf] : Array<Dynamic>), { type: type }]), signal] : Array<Dynamic>));
+      return cast _Runtime.callValue(loadImageResourceFromBlob, cast ([_Runtime.construct(_Runtime.globalValue('Blob'), [cast ([buf] : Array<Dynamic>), { type: type }]), signal] : Array<Dynamic>));
       return cast null;
     })();
   }
@@ -97,11 +97,11 @@ class ImageResourceFrom {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<ImageResource> {
       var img:Dynamic = cast _Runtime.UNDEFINED;
       _Runtime.callOptionalProperty(signal, 'throwIfAborted', cast ([] : Array<Dynamic>));
-      img = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Image'] : Array<Dynamic>)), []);
+      img = _Runtime.construct(_Runtime.globalValue('Image'), []);
       if (_Runtime.truthy(!_Runtime.strictEquals(crossOrigin, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(img, 'crossOrigin', crossOrigin); }
       _Runtime.setField(img, 'src', url);
       if (_Runtime.truthy(!_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'race', cast ([cast ([_Runtime.callProperty(img, 'decode', cast ([] : Array<Dynamic>)), _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(_:Dynamic, reject:Dynamic) return _Runtime.callProperty(signal, 'addEventListener', cast (['abort', function() return _Runtime.callValue(reject, cast ([_Runtime.field(signal, 'reason')] : Array<Dynamic>)), { once: true }] : Array<Dynamic>))])] : Array<Dynamic>)] : Array<Dynamic>)));
+        flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.globalValue('Promise'), 'race', cast ([cast ([_Runtime.callProperty(img, 'decode', cast ([] : Array<Dynamic>)), _Runtime.construct(_Runtime.globalValue('Promise'), [function(_:Dynamic, reject:Dynamic) return _Runtime.callProperty(signal, 'addEventListener', cast (['abort', function() return _Runtime.callValue(reject, cast ([_Runtime.field(signal, 'reason')] : Array<Dynamic>)), { once: true }] : Array<Dynamic>))])] : Array<Dynamic>)] : Array<Dynamic>)));
       } else {
         flighthq._internal._Async.awaitValue(_Runtime.callProperty(img, 'decode', cast ([] : Array<Dynamic>)));
       }

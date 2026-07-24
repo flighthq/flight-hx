@@ -35,7 +35,7 @@ class GlPresentRenderTarget {
   
   };
 
-  public static final _programs__glPresentRenderTarget:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _programs__glPresentRenderTarget:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static final COPY_FRAGMENT_SRC__glPresentRenderTarget:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nout vec4 fragColor;\nvoid main() {\n  fragColor = texture(u_texture0, v_texCoord);\n}';
 }

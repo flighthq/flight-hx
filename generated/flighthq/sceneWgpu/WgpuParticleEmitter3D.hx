@@ -97,16 +97,16 @@ class WgpuParticleEmitter3D {
     resources = _Runtime.callProperty(WgpuParticleEmitter3D.resourceCache__wgpuParticleEmitter3D, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(resources, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast resources; }
     device = _Runtime.field(state, 'device');
-    cornerBuffer = _Runtime.callProperty(device, 'createBuffer', cast ([{ size: (8.0 * 4.0), usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'VERTEX')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(device, 'queue'), 'writeBuffer', cast ([cornerBuffer, 0.0, _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [cast ([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0] : Array<Dynamic>)])] : Array<Dynamic>));
-    indexBuffer = _Runtime.callProperty(device, 'createBuffer', cast ([{ size: (6.0 * 2.0), usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'INDEX')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
+    cornerBuffer = _Runtime.callProperty(device, 'createBuffer', cast ([{ size: (8.0 * 4.0), usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'VERTEX')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST'))) }] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(device, 'queue'), 'writeBuffer', cast ([cornerBuffer, 0.0, _Runtime.construct(_Runtime.globalValue('Float32Array'), [cast ([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0] : Array<Dynamic>)])] : Array<Dynamic>));
+    indexBuffer = _Runtime.callProperty(device, 'createBuffer', cast ([{ size: (6.0 * 2.0), usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'INDEX')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST'))) }] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(device, 'queue'), 'writeBuffer', cast ([indexBuffer, 0.0, new flighthq._internal._UInt16Array(cast ([0.0, 1.0, 2.0, 0.0, 2.0, 3.0] : Array<Dynamic>))] : Array<Dynamic>));
-    frameLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'VERTEX'), buffer: { type: 'uniform' } }] : Array<Dynamic>) }] : Array<Dynamic>));
-    textureLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), texture: { sampleType: 'float' } }, { binding: 1.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), sampler: { type: 'filtering' } }] : Array<Dynamic>) }] : Array<Dynamic>));
+    frameLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'VERTEX'), buffer: { type: 'uniform' } }] : Array<Dynamic>) }] : Array<Dynamic>));
+    textureLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'FRAGMENT'), texture: { sampleType: 'float' } }, { binding: 1.0, visibility: _Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'FRAGMENT'), sampler: { type: 'filtering' } }] : Array<Dynamic>) }] : Array<Dynamic>));
     pipelineLayout = _Runtime.callProperty(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([frameLayout, textureLayout] : Array<Dynamic>) }] : Array<Dynamic>));
-    frameBuffer = _Runtime.callProperty(device, 'createBuffer', cast ([{ size: WgpuParticleEmitter3D.FRAME_UNIFORM_BYTES__wgpuParticleEmitter3D, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
+    frameBuffer = _Runtime.callProperty(device, 'createBuffer', cast ([{ size: WgpuParticleEmitter3D.FRAME_UNIFORM_BYTES__wgpuParticleEmitter3D, usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST'))) }] : Array<Dynamic>));
     frameBindGroup = _Runtime.callProperty(device, 'createBindGroup', cast ([{ layout: frameLayout, entries: cast ([{ binding: 0.0, resource: { buffer: frameBuffer } }] : Array<Dynamic>) }] : Array<Dynamic>));
-    (resources = cast ({ cornerBuffer: cornerBuffer, frameBindGroup: frameBindGroup, frameBuffer: frameBuffer, frameLayout: frameLayout, indexBuffer: indexBuffer, instanceBuffers: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []), instanceData: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [0.0]), module: _Runtime.callProperty(device, 'createShaderModule', cast ([{ code: WgpuParticleEmitter3D.PARTICLE_3D_WGSL__wgpuParticleEmitter3D }] : Array<Dynamic>)), pipelineLayout: pipelineLayout, pipelines: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), textureLayout: textureLayout } : Dynamic));
+    (resources = cast ({ cornerBuffer: cornerBuffer, frameBindGroup: frameBindGroup, frameBuffer: frameBuffer, frameLayout: frameLayout, indexBuffer: indexBuffer, instanceBuffers: _Runtime.construct(_Runtime.globalValue('WeakMap'), []), instanceData: _Runtime.construct(_Runtime.globalValue('Float32Array'), [0.0]), module: _Runtime.callProperty(device, 'createShaderModule', cast ([{ code: WgpuParticleEmitter3D.PARTICLE_3D_WGSL__wgpuParticleEmitter3D }] : Array<Dynamic>)), pipelineLayout: pipelineLayout, pipelines: _Runtime.construct(_Runtime.globalValue('Map'), []), textureLayout: textureLayout } : Dynamic));
     _Runtime.callProperty(WgpuParticleEmitter3D.resourceCache__wgpuParticleEmitter3D, 'set', cast ([state, resources] : Array<Dynamic>));
     return cast resources;
     return cast null;
@@ -133,8 +133,8 @@ class WgpuParticleEmitter3D {
     entry = _Runtime.callProperty(_Runtime.field(resources, 'instanceBuffers'), 'get', cast ([emitter] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(_Runtime.field(entry, 'capacity'), count, '>=')))) { return cast _Runtime.field(entry, 'buffer'); }
     if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(_Runtime.field(entry, 'buffer'), 'destroy', cast ([] : Array<Dynamic>)); }
-    capacity = _Runtime.callProperty(HxMath, 'max', cast ([count, _Runtime.select(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast (_Runtime.field(entry, 'capacity') * 2.0), function():Dynamic return cast 8.0)] : Array<Dynamic>));
-    buffer = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: (capacity * WgpuParticleEmitter3D.INSTANCE_STRIDE__wgpuParticleEmitter3D), usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'VERTEX')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
+    capacity = HxMath.max(count, _Runtime.select(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast (_Runtime.field(entry, 'capacity') * 2.0), function():Dynamic return cast 8.0));
+    buffer = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: (capacity * WgpuParticleEmitter3D.INSTANCE_STRIDE__wgpuParticleEmitter3D), usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'VERTEX')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST'))) }] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(resources, 'instanceBuffers'), 'set', cast ([emitter, { buffer: buffer, capacity: capacity }] : Array<Dynamic>));
     return cast buffer;
     return cast null;
@@ -179,7 +179,7 @@ class WgpuParticleEmitter3D {
     if (_Runtime.truthy(_Runtime.strictEquals(particleCount, 0.0))) { return; }
     needed = (particleCount * WgpuParticleEmitter3D.INSTANCE_FLOATS__wgpuParticleEmitter3D);
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(resources, 'instanceData'), 'length'), needed, '<'))) {
-      _Runtime.setField(resources, 'instanceData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [_Runtime.callProperty(HxMath, 'max', cast ([needed, (_Runtime.field(_Runtime.field(resources, 'instanceData'), 'length') * 2.0)] : Array<Dynamic>))]));
+      _Runtime.setField(resources, 'instanceData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [HxMath.max(needed, (_Runtime.field(_Runtime.field(resources, 'instanceData'), 'length') * 2.0))]));
     }
     hasAtlas = _Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(atlas, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(atlas, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(atlas, 'image')] : Array<Dynamic>)));
     regions = _Runtime.select(hasAtlas, function():Dynamic return cast _Runtime.field(atlas, 'regions'), function():Dynamic return cast null);
@@ -204,8 +204,8 @@ class WgpuParticleEmitter3D {
         var wx:Dynamic = _Runtime.select(worldSpace, function():Dynamic return cast lx, function():Dynamic return cast ((((_Runtime.getIndex(wm, 0.0) * lx) + (_Runtime.getIndex(wm, 4.0) * ly)) + (_Runtime.getIndex(wm, 8.0) * lz)) + _Runtime.getIndex(wm, 12.0)));
         var wy:Dynamic = _Runtime.select(worldSpace, function():Dynamic return cast ly, function():Dynamic return cast ((((_Runtime.getIndex(wm, 1.0) * lx) + (_Runtime.getIndex(wm, 5.0) * ly)) + (_Runtime.getIndex(wm, 9.0) * lz)) + _Runtime.getIndex(wm, 13.0)));
         var wz:Dynamic = _Runtime.select(worldSpace, function():Dynamic return cast lz, function():Dynamic return cast ((((_Runtime.getIndex(wm, 2.0) * lx) + (_Runtime.getIndex(wm, 6.0) * ly)) + (_Runtime.getIndex(wm, 10.0) * lz)) + _Runtime.getIndex(wm, 14.0)));
-        var cosR:Dynamic = (_Runtime.callProperty(HxMath, 'cos', cast ([rotation] : Array<Dynamic>)) * scale);
-        var sinR:Dynamic = (_Runtime.callProperty(HxMath, 'sin', cast ([rotation] : Array<Dynamic>)) * scale);
+        var cosR:Dynamic = (HxMath.cos(rotation) * scale);
+        var sinR:Dynamic = (HxMath.sin(rotation) * scale);
         var ct:Dynamic = (i * 3.0);
         var hasColors:Dynamic = _Runtime.andValue(!_Runtime.looseEquals(colors, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(colors, 'length'), (ct + 2.0), '>'));
         var r:Dynamic = _Runtime.select(hasColors, function():Dynamic return cast _Runtime.getIndex(colors, ct), function():Dynamic return cast 1.0);
@@ -272,7 +272,7 @@ class WgpuParticleEmitter3D {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     view = _Runtime.callProperty(WgpuParticleEmitter3D.dummyTextureCache__wgpuParticleEmitter3D, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(view, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast view; }
-    texture = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
+    texture = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([1.0, 1.0, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'COPY_DST'))) }] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(_Runtime.field(state, 'device'), 'queue'), 'writeTexture', cast ([{ texture: texture }, WgpuParticleEmitter3D.WHITE_PIXEL__wgpuParticleEmitter3D, { bytesPerRow: 4.0 }, cast ([1.0, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
     (view = cast (_Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>)) : Dynamic));
     _Runtime.callProperty(WgpuParticleEmitter3D.dummyTextureCache__wgpuParticleEmitter3D, 'set', cast ([state, view] : Array<Dynamic>));
@@ -335,13 +335,13 @@ class WgpuParticleEmitter3D {
 
   public static final VERTEX_BUFFER_LAYOUTS__wgpuParticleEmitter3D:Array<Dynamic> = cast ([{ arrayStride: 8.0, stepMode: 'vertex', attributes: cast ([{ shaderLocation: 0.0, offset: 0.0, format: 'float32x2' }] : Array<Dynamic>) }, { arrayStride: WgpuParticleEmitter3D.INSTANCE_STRIDE__wgpuParticleEmitter3D, stepMode: 'instance', attributes: cast ([{ shaderLocation: 1.0, offset: 0.0, format: 'float32x3' }, { shaderLocation: 2.0, offset: 12.0, format: 'float32' }, { shaderLocation: 3.0, offset: 16.0, format: 'float32' }, { shaderLocation: 4.0, offset: 20.0, format: 'float32x4' }, { shaderLocation: 5.0, offset: 36.0, format: 'float32x4' }, { shaderLocation: 6.0, offset: 52.0, format: 'float32x2' }] : Array<Dynamic>) }] : Array<Dynamic>);
 
-  public static final WHITE_PIXEL__wgpuParticleEmitter3D:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [cast ([255.0, 255.0, 255.0, 255.0] : Array<Dynamic>)]);
+  public static final WHITE_PIXEL__wgpuParticleEmitter3D:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [cast ([255.0, 255.0, 255.0, 255.0] : Array<Dynamic>)]);
 
   public static final emitterScratch__wgpuParticleEmitter3D:Array<ParticleEmitter3D> = cast ([] : Array<Dynamic>);
 
-  public static final frameScratch__wgpuParticleEmitter3D:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(WgpuParticleEmitter3D.FRAME_UNIFORM_BYTES__wgpuParticleEmitter3D / 4.0)]);
+  public static final frameScratch__wgpuParticleEmitter3D:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(WgpuParticleEmitter3D.FRAME_UNIFORM_BYTES__wgpuParticleEmitter3D / 4.0)]);
 
-  public static final resourceCache__wgpuParticleEmitter3D:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final resourceCache__wgpuParticleEmitter3D:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static final dummyTextureCache__wgpuParticleEmitter3D:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final dummyTextureCache__wgpuParticleEmitter3D:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

@@ -50,5 +50,5 @@ class WgpuRenderStats {
     return cast null;
   }
 
-  public static final _stats__wgpuRenderStats:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _stats__wgpuRenderStats:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

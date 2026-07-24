@@ -31,7 +31,7 @@ class Tween {
     _Runtime.callValue(stopTweens, cast ([manager, target, propertyMap] : Array<Dynamic>));
     t = (cast target : Dynamic);
     p = (cast propertyMap : Dynamic);
-    for (key in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([p] : Array<Dynamic>)))) {
+    for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(p))) {
       var val:Dynamic = _Runtime.getIndex(p, key);
       if (_Runtime.truthy(!_Runtime.strictEquals(val, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(t, key, val); }
     }
@@ -137,7 +137,7 @@ class Tween {
   public static function makeTween__tween<T>(target:Dynamic, duration:Float, propertyMap:NumericProps<Dynamic>, options:Null<TweenOptions>, defaultEase:EasingFunction):flighthq.types.Tween<Dynamic> {
     var keys:Dynamic = cast _Runtime.UNDEFINED;
     var properties:Array<TweenPropertyDetail> = cast _Runtime.UNDEFINED;
-    keys = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([propertyMap] : Array<Dynamic>));
+    keys = flighthq._internal.DynamicObject.keys(propertyMap);
     properties = _Runtime.callProperty(keys, 'map', cast ([function(key:Dynamic) return { change: 0.0, key: key, start: 0.0 }] : Array<Dynamic>));
     return cast { complete: false, delay: _Runtime.coalesce(_Runtime.optionalField(options, 'delay'), function():Dynamic return cast 0.0), duration: duration, ease: _Runtime.coalesce(_Runtime.optionalField(options, 'ease'), function():Dynamic return cast defaultEase), elapsed: 0.0, initialized: false, onComplete: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onRepeat: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onUpdate: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), onYoyo: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)), paused: false, properties: properties, propertyMap: propertyMap, reflect: _Runtime.coalesce(_Runtime.optionalField(options, 'reflect'), function():Dynamic return cast false), repeat: _Runtime.coalesce(_Runtime.optionalField(options, 'repeat'), function():Dynamic return cast 0.0), reverse: _Runtime.coalesce(_Runtime.optionalField(options, 'reverse'), function():Dynamic return cast false), smartRotation: _Runtime.coalesce(_Runtime.optionalField(options, 'smartRotation'), function():Dynamic return cast false), snapping: _Runtime.coalesce(_Runtime.optionalField(options, 'snapping'), function():Dynamic return cast false), target: target };
     return cast null;
@@ -249,7 +249,7 @@ class Tween {
       var t:Dynamic = (cast _Runtime.field(tween, 'target') : Dynamic);
       for (detail in _Runtime.iterable(_Runtime.field(tween, 'properties'))) {
         var value:Dynamic = (_Runtime.field(detail, 'start') + (_Runtime.field(detail, 'change') * easedT));
-        if (_Runtime.truthy(_Runtime.field(tween, 'snapping'))) { (value = cast (_Runtime.callProperty(HxMath, 'round', cast ([value] : Array<Dynamic>)) : Dynamic)); }
+        if (_Runtime.truthy(_Runtime.field(tween, 'snapping'))) { (value = cast (HxMath.round(value) : Dynamic)); }
         _Runtime.setIndex(t, _Runtime.field(detail, 'key'), value);
       }
       if (_Runtime.truthy(doSendEvent)) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(tween, 'onComplete')] : Array<Dynamic>)); }
@@ -266,7 +266,7 @@ class Tween {
         var p:Dynamic = (cast propertyMap : Dynamic);
         var tweenMap:Dynamic = (cast _Runtime.field(tween, 'propertyMap') : Dynamic);
         var overlaps:Dynamic = false;
-        for (key in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([p] : Array<Dynamic>)))) {
+        for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(p))) {
           if (_Runtime.truthy(_Runtime.hasField(tweenMap, key))) {
             (overlaps = cast (true : Dynamic));
             break;

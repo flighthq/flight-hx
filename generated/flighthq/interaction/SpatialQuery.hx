@@ -39,8 +39,8 @@ class SpatialQuery {
     var children:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(root, 'enabled')))) { return cast out; }
     b = _Runtime.callValue(getNodeWorldBoundsRectangle, cast ([root] : Array<Dynamic>));
-    nearX = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(b, 'x'), _Runtime.callProperty(HxMath, 'min', cast ([cx, (_Runtime.field(b, 'x') + _Runtime.field(b, 'width'))] : Array<Dynamic>))] : Array<Dynamic>));
-    nearY = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(b, 'y'), _Runtime.callProperty(HxMath, 'min', cast ([cy, (_Runtime.field(b, 'y') + _Runtime.field(b, 'height'))] : Array<Dynamic>))] : Array<Dynamic>));
+    nearX = HxMath.max(_Runtime.field(b, 'x'), HxMath.min(cx, (_Runtime.field(b, 'x') + _Runtime.field(b, 'width'))));
+    nearY = HxMath.max(_Runtime.field(b, 'y'), HxMath.min(cy, (_Runtime.field(b, 'y') + _Runtime.field(b, 'height'))));
     dx = (cx - nearX);
     dy = (cy - nearY);
     if (_Runtime.truthy(_Runtime.compare(((dx * dx) + (dy * dy)), (radius * radius), '<='))) {

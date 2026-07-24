@@ -26,7 +26,7 @@ class DomImageSource {
     runtime = _Runtime.callValue(getDomRenderStateRuntime, cast ([state] : Array<Dynamic>));
     cache = _Runtime.field(runtime, 'imageResourceElementCache');
     if (_Runtime.truthy(_Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (cache = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []) : Dynamic));
+      (cache = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
       _Runtime.setField(runtime, 'imageResourceElementCache', cache);
     }
     entry = _Runtime.callProperty(cache, 'get', cast ([image] : Array<Dynamic>));

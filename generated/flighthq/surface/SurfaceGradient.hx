@@ -45,10 +45,10 @@ class SurfaceGradient {
           (a = cast (_Runtime.callValue(SurfaceGradient.lerp__surfaceGradient, cast ([_Runtime.getIndex(alphas, j), _Runtime.getIndex(alphas, (j + 1.0)), t] : Array<Dynamic>)) : Dynamic));
         } }
         var oi:Dynamic = (i * 4.0);
-        _Runtime.setIndex(out, oi, _Runtime.callProperty(HxMath, 'round', cast ([r] : Array<Dynamic>)));
-        _Runtime.setIndex(out, (oi + 1.0), _Runtime.callProperty(HxMath, 'round', cast ([g] : Array<Dynamic>)));
-        _Runtime.setIndex(out, (oi + 2.0), _Runtime.callProperty(HxMath, 'round', cast ([b] : Array<Dynamic>)));
-        _Runtime.setIndex(out, (oi + 3.0), _Runtime.callProperty(HxMath, 'round', cast ([(a * 255.0)] : Array<Dynamic>)));
+        _Runtime.setIndex(out, oi, HxMath.round(r));
+        _Runtime.setIndex(out, (oi + 1.0), HxMath.round(g));
+        _Runtime.setIndex(out, (oi + 2.0), HxMath.round(b));
+        _Runtime.setIndex(out, (oi + 3.0), HxMath.round((a * 255.0)));
         i++;
       }
     }
@@ -68,8 +68,8 @@ class SurfaceGradient {
     h = _Runtime.field(source, 'height');
     angle = _Runtime.coalesce(_Runtime.field(options, 'angle'), function():Dynamic return cast (HxMath.PI / 4.0));
     distance = _Runtime.coalesce(_Runtime.field(options, 'distance'), function():Dynamic return cast 4.0);
-    offsetX = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>)) * distance)] : Array<Dynamic>));
-    offsetY = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>)) * distance)] : Array<Dynamic>));
+    offsetX = HxMath.round((HxMath.cos(angle) * distance));
+    offsetY = HxMath.round((HxMath.sin(angle) * distance));
     type = _Runtime.coalesce(_Runtime.field(options, 'type'), function():Dynamic return cast 'inner');
     intensity = _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0);
     {
@@ -100,13 +100,13 @@ class SurfaceGradient {
             var lit:Dynamic = _Runtime.callValue(SurfaceGradient.sampleField__surfaceGradient, cast ([scratch, w, h, (px - offsetX), (py - offsetY)] : Array<Dynamic>));
             var shade:Dynamic = _Runtime.callValue(SurfaceGradient.sampleField__surfaceGradient, cast ([scratch, w, h, (px + offsetX), (py + offsetY)] : Array<Dynamic>));
             var gradient:Dynamic = (lit - shade);
-            var idx:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([(((gradient * 0.5) + 0.5) * 255.0)] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+            var idx:Dynamic = HxMath.max(0.0, HxMath.min(255.0, HxMath.round((((gradient * 0.5) + 0.5) * 255.0))));
             var ri:Dynamic = (idx * 4.0);
             var clip:Dynamic = _Runtime.select(_Runtime.strictEquals(type, 'inner'), function():Dynamic return cast (_Runtime.callValue(SurfaceGradient.readSourceAlpha__surfaceGradient, cast ([source, px, py] : Array<Dynamic>)) / 255.0), function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(type, 'outer'), function():Dynamic return cast (1.0 - (_Runtime.callValue(SurfaceGradient.readSourceAlpha__surfaceGradient, cast ([source, px, py] : Array<Dynamic>)) / 255.0)), function():Dynamic return cast 1.0));
             _Runtime.setIndex(out, di, _Runtime.getIndex(ramp, ri));
             _Runtime.setIndex(out, (di + 1.0), _Runtime.getIndex(ramp, (ri + 1.0)));
             _Runtime.setIndex(out, (di + 2.0), _Runtime.getIndex(ramp, (ri + 2.0)));
-            _Runtime.setIndex(out, (di + 3.0), _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([((_Runtime.getIndex(ramp, (ri + 3.0)) * intensity) * clip)] : Array<Dynamic>))] : Array<Dynamic>)));
+            _Runtime.setIndex(out, (di + 3.0), HxMath.min(255.0, HxMath.round(((_Runtime.getIndex(ramp, (ri + 3.0)) * intensity) * clip))));
             px++;
           }
         }
@@ -152,7 +152,7 @@ class SurfaceGradient {
             _Runtime.setIndex(out, di, _Runtime.getIndex(ramp, ri));
             _Runtime.setIndex(out, (di + 1.0), _Runtime.getIndex(ramp, (ri + 1.0)));
             _Runtime.setIndex(out, (di + 2.0), _Runtime.getIndex(ramp, (ri + 2.0)));
-            _Runtime.setIndex(out, (di + 3.0), _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(ramp, (ri + 3.0)) * intensity)] : Array<Dynamic>))] : Array<Dynamic>)));
+            _Runtime.setIndex(out, (di + 3.0), HxMath.min(255.0, HxMath.round((_Runtime.getIndex(ramp, (ri + 3.0)) * intensity))));
             px++;
           }
         }
@@ -167,9 +167,9 @@ class SurfaceGradient {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    rx = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(radiusX, function():Dynamic return cast 2.0)] : Array<Dynamic>))] : Array<Dynamic>));
-    ry = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(radiusY, function():Dynamic return cast 2.0)] : Array<Dynamic>))] : Array<Dynamic>));
-    p = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(passes, function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    rx = HxMath.max(0.0, HxMath.round(_Runtime.coalesce(radiusX, function():Dynamic return cast 2.0)));
+    ry = HxMath.max(0.0, HxMath.round(_Runtime.coalesce(radiusY, function():Dynamic return cast 2.0)));
+    p = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(passes, function():Dynamic return cast 1.0)));
     a = field;
     b = scratch;
     {

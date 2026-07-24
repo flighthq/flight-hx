@@ -31,7 +31,7 @@ class SceneNodeTransform {
     zx = (eyeX - _Runtime.field(target, 'x'));
     zy = (eyeY - _Runtime.field(target, 'y'));
     zz = (eyeZ - _Runtime.field(target, 'z'));
-    zl = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((zx * zx) + (zy * zy)) + (zz * zz))] : Array<Dynamic>));
+    zl = HxMath.sqrt((((zx * zx) + (zy * zy)) + (zz * zz)));
     if (_Runtime.truthy(_Runtime.strictEquals(zl, 0.0))) {
       (zz = cast (1.0 : Dynamic));
       (zl = cast (1.0 : Dynamic));
@@ -42,7 +42,7 @@ class SceneNodeTransform {
     xx = ((_Runtime.field(up, 'y') * zz) - (_Runtime.field(up, 'z') * zy));
     xy = ((_Runtime.field(up, 'z') * zx) - (_Runtime.field(up, 'x') * zz));
     xz = ((_Runtime.field(up, 'x') * zy) - (_Runtime.field(up, 'y') * zx));
-    xl = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((xx * xx) + (xy * xy)) + (xz * xz))] : Array<Dynamic>));
+    xl = HxMath.sqrt((((xx * xx) + (xy * xy)) + (xz * xz)));
     if (_Runtime.truthy(!_Runtime.strictEquals(xl, 0.0))) {
       (xx = cast ((xx / xl) : Dynamic));
       (xy = cast ((xy / xl) : Dynamic));

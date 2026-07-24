@@ -25,7 +25,7 @@ class MeshGeometryCompute {
     var radiusSq:Dynamic = cast _Runtime.UNDEFINED;
     vertices = _Runtime.field(geometry, 'vertices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(vertices, 'length') / floatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
     if (_Runtime.truthy(_Runtime.strictEquals(vertexCount, 0.0))) {
       _Runtime.setField(_Runtime.field(out, 'center'), 'x', 0.0);
       _Runtime.setField(_Runtime.field(out, 'center'), 'y', 0.0);
@@ -33,12 +33,12 @@ class MeshGeometryCompute {
       _Runtime.setField(out, 'radius', -1.0);
       return;
     }
-    minX = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    minY = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    minZ = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    maxX = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY');
-    maxY = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY');
-    maxZ = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY');
+    minX = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    minY = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    minZ = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    maxX = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
+    maxY = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
+    maxZ = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
@@ -74,7 +74,7 @@ class MeshGeometryCompute {
     _Runtime.setField(_Runtime.field(out, 'center'), 'x', cx);
     _Runtime.setField(_Runtime.field(out, 'center'), 'y', cy);
     _Runtime.setField(_Runtime.field(out, 'center'), 'z', cz);
-    _Runtime.setField(out, 'radius', _Runtime.callProperty(HxMath, 'sqrt', cast ([radiusSq] : Array<Dynamic>)));
+    _Runtime.setField(out, 'radius', HxMath.sqrt(radiusSq));
   }
 
   public static function computeMeshGeometryBounds(out:AabbLike, geometry:MeshGeometry):Void {
@@ -89,13 +89,13 @@ class MeshGeometryCompute {
     var maxZ:Dynamic = cast _Runtime.UNDEFINED;
     vertices = _Runtime.field(geometry, 'vertices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(vertices, 'length') / floatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
-    minX = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    minY = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    minZ = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    maxX = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY');
-    maxY = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY');
-    maxZ = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY');
+    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
+    minX = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    minY = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    minZ = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    maxX = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
+    maxY = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
+    maxZ = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
@@ -129,7 +129,7 @@ class MeshGeometryCompute {
     srcVerts = _Runtime.field(geometry, 'vertices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
     indices = _Runtime.field(geometry, 'indices');
-    indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(srcVerts, 'length') / floatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0));
+    indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(srcVerts, 'length') / floatsPerVertex)), function():Dynamic return cast 0.0));
     dstVerts = _Runtime.field(out, 'vertices');
     {
       var t:Dynamic = 0.0;
@@ -158,7 +158,7 @@ class MeshGeometryCompute {
         var nx:Dynamic = ((ey1 * ez2) - (ez1 * ey2));
         var ny:Dynamic = ((ez1 * ex2) - (ex1 * ez2));
         var nz:Dynamic = ((ex1 * ey2) - (ey1 * ex2));
-        var len:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((nx * nx) + (ny * ny)) + (nz * nz))] : Array<Dynamic>));
+        var len:Dynamic = HxMath.sqrt((((nx * nx) + (ny * ny)) + (nz * nz)));
         if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
           (nx = cast ((nx / len) : Dynamic));
           (ny = cast ((ny / len) : Dynamic));
@@ -192,10 +192,10 @@ class MeshGeometryCompute {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     vertices = _Runtime.field(geometry, 'vertices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(vertices, 'length') / floatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
     indices = _Runtime.field(geometry, 'indices');
     indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast vertexCount);
-    accum = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float64Array'] : Array<Dynamic>)), [(vertexCount * 3.0)]);
+    accum = _Runtime.construct(_Runtime.globalValue('Float64Array'), [(vertexCount * 3.0)]);
     {
       var t:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare((t + 2.0), indexCount, '<'))) {
@@ -233,7 +233,7 @@ class MeshGeometryCompute {
         var nx:Dynamic = _Runtime.getIndex(accum, (i * 3.0));
         var ny:Dynamic = _Runtime.getIndex(accum, ((i * 3.0) + 1.0));
         var nz:Dynamic = _Runtime.getIndex(accum, ((i * 3.0) + 2.0));
-        var len:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((nx * nx) + (ny * ny)) + (nz * nz))] : Array<Dynamic>));
+        var len:Dynamic = HxMath.sqrt((((nx * nx) + (ny * ny)) + (nz * nz)));
         if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
           (nx = cast ((nx / len) : Dynamic));
           (ny = cast ((ny / len) : Dynamic));
@@ -259,11 +259,11 @@ class MeshGeometryCompute {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     vertices = _Runtime.field(geometry, 'vertices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(vertices, 'length') / floatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
     indices = _Runtime.field(geometry, 'indices');
     indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast vertexCount);
-    tan = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float64Array'] : Array<Dynamic>)), [(vertexCount * 3.0)]);
-    bitan = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float64Array'] : Array<Dynamic>)), [(vertexCount * 3.0)]);
+    tan = _Runtime.construct(_Runtime.globalValue('Float64Array'), [(vertexCount * 3.0)]);
+    bitan = _Runtime.construct(_Runtime.globalValue('Float64Array'), [(vertexCount * 3.0)]);
     {
       var t:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare((t + 2.0), indexCount, '<'))) {
@@ -330,7 +330,7 @@ class MeshGeometryCompute {
         (tx = cast ((tx - (nx * ndt)) : Dynamic));
         (ty = cast ((ty - (ny * ndt)) : Dynamic));
         (tz = cast ((tz - (nz * ndt)) : Dynamic));
-        var len:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((tx * tx) + (ty * ty)) + (tz * tz))] : Array<Dynamic>));
+        var len:Dynamic = HxMath.sqrt((((tx * tx) + (ty * ty)) + (tz * tz)));
         if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
           (tx = cast ((tx / len) : Dynamic));
           (ty = cast ((ty / len) : Dynamic));

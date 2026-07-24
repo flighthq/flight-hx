@@ -53,7 +53,7 @@ class EmitParticleBurst3D {
     var dirNz:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(emitter, 'data');
     liveCount = _Runtime.field(data, 'particleCount');
-    toSpawn = _Runtime.callProperty(HxMath, 'floor', cast ([count] : Array<Dynamic>));
+    toSpawn = HxMath.floor(count);
     maxNew = (_Runtime.field(config, 'maxParticles') - liveCount);
     if (_Runtime.truthy(_Runtime.compare(toSpawn, maxNew, '>'))) { (toSpawn = cast (maxNew : Dynamic)); }
     if (_Runtime.truthy(_Runtime.compare(toSpawn, 0.0, '<='))) { return cast 0.0; }
@@ -84,7 +84,7 @@ class EmitParticleBurst3D {
     tintG = _Runtime.select(hasTint, function():Dynamic return cast ((Std.int(_Runtime.unsignedShiftRight(Std.int(tint), Std.int(16.0))) & Std.int(255.0)) / 255.0), function():Dynamic return cast 1.0);
     tintB = _Runtime.select(hasTint, function():Dynamic return cast ((Std.int(_Runtime.unsignedShiftRight(Std.int(tint), Std.int(8.0))) & Std.int(255.0)) / 255.0), function():Dynamic return cast 1.0);
     tintA = _Runtime.select(hasTint, function():Dynamic return cast ((Std.int(tint) & Std.int(255.0)) / 255.0), function():Dynamic return cast 1.0);
-    dirLen = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((_Runtime.field(config, 'directionX') * _Runtime.field(config, 'directionX')) + (_Runtime.field(config, 'directionY') * _Runtime.field(config, 'directionY'))) + (_Runtime.field(config, 'directionZ') * _Runtime.field(config, 'directionZ')))] : Array<Dynamic>));
+    dirLen = HxMath.sqrt((((_Runtime.field(config, 'directionX') * _Runtime.field(config, 'directionX')) + (_Runtime.field(config, 'directionY') * _Runtime.field(config, 'directionY'))) + (_Runtime.field(config, 'directionZ') * _Runtime.field(config, 'directionZ'))));
     dirNx = _Runtime.select(_Runtime.compare(dirLen, 0.000001, '>'), function():Dynamic return cast (_Runtime.field(config, 'directionX') / dirLen), function():Dynamic return cast 0.0);
     dirNy = _Runtime.select(_Runtime.compare(dirLen, 0.000001, '>'), function():Dynamic return cast (_Runtime.field(config, 'directionY') / dirLen), function():Dynamic return cast -1.0);
     dirNz = _Runtime.select(_Runtime.compare(dirLen, 0.000001, '>'), function():Dynamic return cast (_Runtime.field(config, 'directionZ') / dirLen), function():Dynamic return cast 0.0);
@@ -110,11 +110,11 @@ class EmitParticleBurst3D {
           var sz:Float = cast _Runtime.UNDEFINED;
           if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(shape, 'cone3d'), function():Dynamic return cast _Runtime.compare(_Runtime.field(config, 'emitterConeAngle'), 0.0, '>')))) {
             var coneHalf:Dynamic = (_Runtime.field(config, 'emitterConeAngle') / 2.0);
-            var cosTheta:Dynamic = (1.0 - (_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * (1.0 - _Runtime.callProperty(HxMath, 'cos', cast ([coneHalf] : Array<Dynamic>)))));
-            var sinTheta:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([(1.0 - (cosTheta * cosTheta))] : Array<Dynamic>));
+            var cosTheta:Dynamic = (1.0 - (_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * (1.0 - HxMath.cos(coneHalf))));
+            var sinTheta:Dynamic = HxMath.sqrt((1.0 - (cosTheta * cosTheta)));
             var phi:Dynamic = (_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * EmitParticleBurst3D.TWO_PI__emitParticleBurst3D);
-            var lx:Dynamic = (sinTheta * _Runtime.callProperty(HxMath, 'cos', cast ([phi] : Array<Dynamic>)));
-            var ly:Dynamic = (sinTheta * _Runtime.callProperty(HxMath, 'sin', cast ([phi] : Array<Dynamic>)));
+            var lx:Dynamic = (sinTheta * HxMath.cos(phi));
+            var ly:Dynamic = (sinTheta * HxMath.sin(phi));
             var lz:Dynamic = cosTheta;
             var rDir:Dynamic = _Runtime.callValue(EmitParticleBurst3D.rotateToDirection__emitParticleBurst3D, cast ([lx, ly, lz, dirNx, dirNy, dirNz] : Array<Dynamic>));
             (sx = cast (_Runtime.getIndex(rDir, 0.0) : Dynamic));
@@ -129,7 +129,7 @@ class EmitParticleBurst3D {
               (v = cast (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
               (s2 = cast (((u * u) + (v * v)) : Dynamic));
             } while (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(s2, 1.0, '>='), function():Dynamic return cast _Runtime.strictEquals(s2, 0.0))));
-            var f:Dynamic = (2.0 * _Runtime.callProperty(HxMath, 'sqrt', cast ([(1.0 - s2)] : Array<Dynamic>)));
+            var f:Dynamic = (2.0 * HxMath.sqrt((1.0 - s2)));
             (sx = cast ((u * f) : Dynamic));
             (sy = cast ((v * f) : Dynamic));
             (sz = cast ((1.0 - (2.0 * s2)) : Dynamic));
@@ -147,26 +147,26 @@ class EmitParticleBurst3D {
               (pv = cast (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * 2.0) - 1.0) : Dynamic));
               (ps2 = cast (((pu * pu) + (pv * pv)) : Dynamic));
             } while (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(ps2, 1.0, '>='), function():Dynamic return cast _Runtime.strictEquals(ps2, 0.0))));
-            var pf:Dynamic = (2.0 * _Runtime.callProperty(HxMath, 'sqrt', cast ([(1.0 - ps2)] : Array<Dynamic>)));
+            var pf:Dynamic = (2.0 * HxMath.sqrt((1.0 - ps2)));
             (spawnX = cast ((spawnX + ((pu * pf) * r)) : Dynamic));
             (spawnY = cast ((spawnY + ((pv * pf) * r)) : Dynamic));
             (spawnZ = cast ((spawnZ + ((1.0 - (2.0 * ps2)) * r)) : Dynamic));
           }
         } else {
-          var baseAngle:Dynamic = _Runtime.callProperty(HxMath, 'atan2', cast ([_Runtime.field(config, 'directionY'), _Runtime.field(config, 'directionX')] : Array<Dynamic>));
+          var baseAngle:Dynamic = HxMath.atan2(_Runtime.field(config, 'directionY'), _Runtime.field(config, 'directionX'));
           var angle:Dynamic = (baseAngle + (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * 2.0) * _Runtime.field(config, 'spread')));
-          (vx = cast ((_Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>)) * speed) : Dynamic));
-          (vy = cast ((_Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>)) * speed) : Dynamic));
+          (vx = cast ((HxMath.cos(angle) * speed) : Dynamic));
+          (vy = cast ((HxMath.sin(angle) * speed) : Dynamic));
           (vz = cast (((_Runtime.field(config, 'directionZ') * speed) / _Runtime.select(_Runtime.compare(dirLen, 0.000001, '>'), function():Dynamic return cast dirLen, function():Dynamic return cast 1.0)) : Dynamic));
           if (_Runtime.truthy(_Runtime.strictEquals(shape, 'box'))) {
             (spawnX = cast ((spawnX + ((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * _Runtime.field(config, 'emitterWidth'))) : Dynamic));
             (spawnY = cast ((spawnY + ((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * _Runtime.field(config, 'emitterHeight'))) : Dynamic));
             (spawnZ = cast ((spawnZ + ((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * _Runtime.field(config, 'emitterDepth'))) : Dynamic));
           } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(shape, 'circle'), function():Dynamic return cast _Runtime.compare(_Runtime.field(config, 'emitterRadius'), 0.0, '>')))) {
-            var r:Dynamic = (_Runtime.callProperty(HxMath, 'sqrt', cast ([_Runtime.callValue(random, cast ([] : Array<Dynamic>))] : Array<Dynamic>)) * _Runtime.field(config, 'emitterRadius'));
+            var r:Dynamic = (HxMath.sqrt(_Runtime.callValue(random, cast ([] : Array<Dynamic>))) * _Runtime.field(config, 'emitterRadius'));
             var a:Dynamic = (_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * EmitParticleBurst3D.TWO_PI__emitParticleBurst3D);
-            (spawnX = cast ((spawnX + (_Runtime.callProperty(HxMath, 'cos', cast ([a] : Array<Dynamic>)) * r)) : Dynamic));
-            (spawnY = cast ((spawnY + (_Runtime.callProperty(HxMath, 'sin', cast ([a] : Array<Dynamic>)) * r)) : Dynamic));
+            (spawnX = cast ((spawnX + (HxMath.cos(a) * r)) : Dynamic));
+            (spawnY = cast ((spawnY + (HxMath.sin(a) * r)) : Dynamic));
           } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(shape, 'rect'), function():Dynamic return cast _Runtime.orValue(_Runtime.compare(_Runtime.field(config, 'emitterWidth'), 0.0, '>'), function():Dynamic return cast _Runtime.compare(_Runtime.field(config, 'emitterHeight'), 0.0, '>'))))) {
             (spawnX = cast ((spawnX + ((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * _Runtime.field(config, 'emitterWidth'))) : Dynamic));
             (spawnY = cast ((spawnY + ((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * _Runtime.field(config, 'emitterHeight'))) : Dynamic));
@@ -181,7 +181,7 @@ class EmitParticleBurst3D {
         var tt:Dynamic = (idx * EmitParticleBurst3D.PARTICLE_TRANSFORM_STRIDE__emitParticleBurst3D);
         _Runtime.setIndex(_Runtime.field(data, 'transforms'), tt, spawnX);
         _Runtime.setIndex(_Runtime.field(data, 'transforms'), (tt + 1.0), spawnY);
-        _Runtime.setIndex(_Runtime.field(data, 'transforms'), (tt + 2.0), _Runtime.callProperty(HxMath, 'atan2', cast ([vy, vx] : Array<Dynamic>)));
+        _Runtime.setIndex(_Runtime.field(data, 'transforms'), (tt + 2.0), HxMath.atan2(vy, vx));
         _Runtime.setIndex(_Runtime.field(data, 'transforms'), (tt + 3.0), _Runtime.select(hasScaleCurve, function():Dynamic return cast (spawnScale * _Runtime.callValue(sampleParticleCurve, cast ([scaleCurve, 0.0] : Array<Dynamic>))), function():Dynamic return cast spawnScale));
         _Runtime.setIndex(_Runtime.field(data, 'positionsZ'), idx, spawnZ);
         _Runtime.setIndex(_Runtime.field(data, 'alphas'), idx, _Runtime.select(hasAlphaCurve, function():Dynamic return cast _Runtime.callValue(sampleParticleCurve, cast ([alphaCurve, 0.0] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(config, 'alphaStart')));
@@ -254,7 +254,7 @@ class EmitParticleBurst3D {
     var crossZ:Dynamic = cast _Runtime.UNDEFINED;
     kx = -dy;
     ky = dx;
-    sinAngle = _Runtime.callProperty(HxMath, 'sqrt', cast ([((kx * kx) + (ky * ky))] : Array<Dynamic>));
+    sinAngle = HxMath.sqrt(((kx * kx) + (ky * ky)));
     cosAngle = dz;
     if (_Runtime.truthy(_Runtime.compare(sinAngle, 0.000001, '<'))) {
       if (_Runtime.truthy(_Runtime.compare(cosAngle, 0.0, '>'))) {

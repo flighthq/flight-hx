@@ -10,7 +10,7 @@ import flighthq.types.ShapeCommand.ShapeHitTestCommand;
 typedef AnyHitTestFn__shapeHitTestRegistry = Dynamic;
 
 class ShapeHitTestRegistry {
-  public static final hitTests__shapeHitTestRegistry:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+  public static final hitTests__shapeHitTestRegistry:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
 
   public static function hitTestShapeCommandPoint(buf:Array<ShapeCommandToken>, i:Float, x:Float, y:Float):Null<Bool> {
     var key:Dynamic = cast _Runtime.UNDEFINED;

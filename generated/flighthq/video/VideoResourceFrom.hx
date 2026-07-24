@@ -12,7 +12,7 @@ import flighthq.video.VideoResource.createVideoResource;
 class VideoResourceFrom {
   public static function createVideoResourceFromMediaStream(stream:Dynamic):VideoResource {
     var element:Dynamic = cast _Runtime.UNDEFINED;
-    element = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['video'] : Array<Dynamic>));
+    element = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['video'] : Array<Dynamic>));
     _Runtime.setField(element, 'srcObject', stream);
     return cast _Runtime.callValue(createVideoResource, cast ([element] : Array<Dynamic>));
     return cast null;
@@ -21,38 +21,38 @@ class VideoResourceFrom {
   public static function loadVideoResourceFromBlob(blob:Dynamic, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<VideoResource> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<VideoResource> {
       var url:Dynamic = cast _Runtime.UNDEFINED;
-      url = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['URL'] : Array<Dynamic>)), 'createObjectURL', cast ([blob] : Array<Dynamic>));
+      url = _Runtime.callProperty(_Runtime.globalValue('URL'), 'createObjectURL', cast ([blob] : Array<Dynamic>));
       try {
         try {
           var __returnValue0:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(loadVideoResourceFromUrl, cast ([url, options, signal] : Array<Dynamic>)));
           {
-            _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['URL'] : Array<Dynamic>)), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
+            _Runtime.callProperty(_Runtime.globalValue('URL'), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
           }
           return cast __returnValue0;
         } catch (__error:Dynamic) { throw __error; }
       } catch (__finallyError1:Dynamic) {
         {
-          _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['URL'] : Array<Dynamic>)), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
+          _Runtime.callProperty(_Runtime.globalValue('URL'), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
         }
         throw __finallyError1;
       }
       {
-        _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['URL'] : Array<Dynamic>)), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
+        _Runtime.callProperty(_Runtime.globalValue('URL'), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
       }
       return cast null;
     })();
   }
 
   public static function loadVideoResourceFromUrl(url:String, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<VideoResource> {
-    if (_Runtime.truthy(_Runtime.optionalField(signal, 'aborted'))) { return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'reject', cast ([_Runtime.field(signal, 'reason')] : Array<Dynamic>)); }
-    return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(resolve:Dynamic, reject:Dynamic) {
+    if (_Runtime.truthy(_Runtime.optionalField(signal, 'aborted'))) { return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'reject', cast ([_Runtime.field(signal, 'reason')] : Array<Dynamic>)); }
+    return cast _Runtime.construct(_Runtime.globalValue('Promise'), [function(resolve:Dynamic, reject:Dynamic) {
       var element:Dynamic = cast _Runtime.UNDEFINED;
       var readyEvent:Dynamic = cast _Runtime.UNDEFINED;
       var onReady:Dynamic = cast _Runtime.UNDEFINED;
       var onError:Dynamic = cast _Runtime.UNDEFINED;
       var onAbort:Dynamic = cast _Runtime.UNDEFINED;
       var cleanup:Dynamic = cast _Runtime.UNDEFINED;
-      element = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['video'] : Array<Dynamic>));
+      element = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['video'] : Array<Dynamic>));
       _Runtime.setField(element, 'preload', (cast _Runtime.coalesce(_Runtime.optionalField(options, 'preload'), function():Dynamic return cast 'auto') : Dynamic));
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.optionalField(options, 'crossOrigin'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(element, 'crossOrigin', _Runtime.field(options, 'crossOrigin')); }
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.optionalField(options, 'muted'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(element, 'muted', _Runtime.field(options, 'muted')); }
@@ -87,7 +87,7 @@ class VideoResourceFrom {
   public static function loadVideoResourceFromUrls(sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:Dynamic):flighthq._internal._Promise<VideoResource> {
     var selected:Dynamic = cast _Runtime.UNDEFINED;
     selected = _Runtime.callValue(selectVideoResourceUrl, cast ([sources] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(selected, null))) { return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([_Runtime.callValue(createVideoResource, cast ([] : Array<Dynamic>))] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.strictEquals(selected, null))) { return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([_Runtime.callValue(createVideoResource, cast ([] : Array<Dynamic>))] : Array<Dynamic>)); }
     return cast _Runtime.callValue(loadVideoResourceFromUrl, cast ([_Runtime.field(selected, 'url'), options, signal] : Array<Dynamic>));
     return cast null;
   }

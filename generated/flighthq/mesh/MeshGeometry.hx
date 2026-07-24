@@ -20,12 +20,12 @@ class MeshGeometry {
     var indices:Null<Dynamic> = cast _Runtime.UNDEFINED;
     var subsets:Array<MeshSubset> = cast _Runtime.UNDEFINED;
     var bounds:Dynamic = cast _Runtime.UNDEFINED;
-    vertices = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [_Runtime.field(_Runtime.field(source, 'vertices'), 'length')]);
+    vertices = _Runtime.construct(_Runtime.globalValue('Float32Array'), [_Runtime.field(_Runtime.field(source, 'vertices'), 'length')]);
     _Runtime.callProperty(vertices, 'set', cast ([_Runtime.field(source, 'vertices')] : Array<Dynamic>));
     indices = null;
     if (_Runtime.truthy(_Runtime.field(source, 'indices'))) {
-      if (_Runtime.truthy(_Runtime.isInstanceOf(_Runtime.field(source, 'indices'), _Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>))))) {
-        (indices = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [_Runtime.field(_Runtime.field(source, 'indices'), 'length')]) : Dynamic));
+      if (_Runtime.truthy(_Runtime.isInstanceOf(_Runtime.field(source, 'indices'), _Runtime.globalValue('Uint32Array')))) {
+        (indices = cast (_Runtime.construct(_Runtime.globalValue('Uint32Array'), [_Runtime.field(_Runtime.field(source, 'indices'), 'length')]) : Dynamic));
       } else {
         (indices = cast (new flighthq._internal._UInt16Array(_Runtime.field(_Runtime.field(source, 'indices'), 'length')) : Dynamic));
       }
@@ -144,14 +144,14 @@ class MeshGeometry {
     var floatsPerVertex:Dynamic = cast _Runtime.UNDEFINED;
     floatsPerVertex = (_Runtime.field(layout, 'stride') / 4.0);
     if (_Runtime.truthy(_Runtime.compare(floatsPerVertex, 0.0, '<='))) { return cast 0.0; }
-    return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(vertices, 'length') / floatsPerVertex)] : Array<Dynamic>));
+    return cast HxMath.floor((_Runtime.field(vertices, 'length') / floatsPerVertex));
     return cast null;
   }
 
   public static function promoteIndices__meshGeometry(source:Dynamic, vertexCount:Float):Dynamic {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(vertexCount, MeshGeometry.UINT16_INDEX_CEILING__meshGeometry, '>'), function():Dynamic return cast _Runtime.isInstanceOf(source, _Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)))))) {
-      var out:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [_Runtime.field(source, 'length')]);
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(vertexCount, MeshGeometry.UINT16_INDEX_CEILING__meshGeometry, '>'), function():Dynamic return cast _Runtime.isInstanceOf(source, _Runtime.globalValue('Uint32Array'))))) {
+      var out:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [_Runtime.field(source, 'length')]);
       _Runtime.callProperty(out, 'set', cast ([source] : Array<Dynamic>));
       return cast out;
     }

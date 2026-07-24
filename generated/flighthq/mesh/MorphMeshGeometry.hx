@@ -43,7 +43,7 @@ class MorphMeshGeometry {
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(blendedTangents, null), function():Dynamic return cast !_Runtime.strictEquals(tangents, null)))) { _Runtime.callProperty(blendedTangents, 'set', cast ([tangents.subarray(Std.int(0.0), Std.int(floats))] : Array<Dynamic>)); }
     targets = _Runtime.field(morph, 'targets');
     weights = _Runtime.field(morph, 'weights');
-    targetCount = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(targets, 'length'), _Runtime.field(weights, 'length')] : Array<Dynamic>));
+    targetCount = HxMath.min(_Runtime.field(targets, 'length'), _Runtime.field(weights, 'length'));
     {
       var t:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(t, targetCount, '<'))) {
@@ -113,9 +113,9 @@ class MorphMeshGeometry {
     positionOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'position'] : Array<Dynamic>));
     normalOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'normal'] : Array<Dynamic>));
     tangentOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([layout, 'tangent'] : Array<Dynamic>));
-    positions = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(vertexCount * 3.0)]);
-    normals = _Runtime.select(_Runtime.compare(normalOffset, 0.0, '>='), function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(vertexCount * 3.0)]), function():Dynamic return cast null);
-    tangents = _Runtime.select(_Runtime.compare(tangentOffset, 0.0, '>='), function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(vertexCount * 3.0)]), function():Dynamic return cast null);
+    positions = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]);
+    normals = _Runtime.select(_Runtime.compare(normalOffset, 0.0, '>='), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]), function():Dynamic return cast null);
+    tangents = _Runtime.select(_Runtime.compare(tangentOffset, 0.0, '>='), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]), function():Dynamic return cast null);
     {
       var v:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {
@@ -139,13 +139,13 @@ class MorphMeshGeometry {
         v++;
       }
     }
-    return cast { blendedNormals: _Runtime.select(!_Runtime.strictEquals(normals, null), function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(vertexCount * 3.0)]), function():Dynamic return cast null), blendedPositions: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(vertexCount * 3.0)]), blendedTangents: _Runtime.select(!_Runtime.strictEquals(tangents, null), function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(vertexCount * 3.0)]), function():Dynamic return cast null), normals: normals, positions: positions, tangents: tangents };
+    return cast { blendedNormals: _Runtime.select(!_Runtime.strictEquals(normals, null), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]), function():Dynamic return cast null), blendedPositions: _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]), blendedTangents: _Runtime.select(!_Runtime.strictEquals(tangents, null), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]), function():Dynamic return cast null), normals: normals, positions: positions, tangents: tangents };
     return cast null;
   }
 
   public static function accumulateDeltas__morphMeshGeometry(accumulator:flighthq._internal._Float32Array, deltas:flighthq._internal._Float32Array, weight:Float, count:Float):Void {
     var n:Dynamic = cast _Runtime.UNDEFINED;
-    n = _Runtime.callProperty(HxMath, 'min', cast ([count, _Runtime.field(deltas, 'length')] : Array<Dynamic>));
+    n = HxMath.min(count, _Runtime.field(deltas, 'length'));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, n, '<'))) {

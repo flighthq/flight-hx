@@ -23,11 +23,11 @@ class GlBokehDepthOfFieldEffect {
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'lens.bokehDoF', GlBokehDepthOfFieldEffect.BOKEH_DOF_FRAGMENT_SRC__glBokehDepthOfFieldEffect] : Array<Dynamic>));
     inputs = _Runtime.select(depthTexture, function():Dynamic return cast cast ([_Runtime.field(source, 'texture'), depthTexture] : Array<Dynamic>), function():Dynamic return cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, inputs, dest, function(gl:Dynamic, p:Dynamic) {
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_maxBlur'] : Array<Dynamic>)), maxBlur] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform2f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_resolution'] : Array<Dynamic>)), _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_focusDistance'] : Array<Dynamic>)), focusDistance] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_focusRange'] : Array<Dynamic>)), focusRange] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_hasDepth'] : Array<Dynamic>)), _Runtime.select(depthTexture, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_maxBlur'] : Array<Dynamic>)), maxBlur] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_resolution'] : Array<Dynamic>)), _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_focusDistance'] : Array<Dynamic>)), focusDistance] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_focusRange'] : Array<Dynamic>)), focusRange] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_hasDepth'] : Array<Dynamic>)), _Runtime.select(depthTexture, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

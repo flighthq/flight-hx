@@ -106,8 +106,8 @@ class WgpuVelocity {
         var py:Dynamic = _Runtime.getIndex(transforms, (tt + 1.0));
         var rotation:Dynamic = _Runtime.getIndex(transforms, (tt + 2.0));
         var scale:Dynamic = _Runtime.getIndex(transforms, (tt + 3.0));
-        var cosScale:Dynamic = (_Runtime.callProperty(HxMath, 'cos', cast ([rotation] : Array<Dynamic>)) * scale);
-        var sinScale:Dynamic = (_Runtime.callProperty(HxMath, 'sin', cast ([rotation] : Array<Dynamic>)) * scale);
+        var cosScale:Dynamic = (HxMath.cos(rotation) * scale);
+        var sinScale:Dynamic = (HxMath.sin(rotation) * scale);
         var minX:Dynamic = HxMath.POSITIVE_INFINITY;
         var minY:Dynamic = HxMath.POSITIVE_INFINITY;
         var maxX:Dynamic = -HxMath.POSITIVE_INFINITY;
@@ -276,7 +276,7 @@ class WgpuVelocity {
     var writers:Dynamic = cast _Runtime.UNDEFINED;
     writers = _Runtime.callProperty(WgpuVelocity._velocityWriters__wgpuVelocity, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(writers, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (writers = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) : Dynamic));
+      (writers = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       _Runtime.callProperty(WgpuVelocity._velocityWriters__wgpuVelocity, 'set', cast ([state, writers] : Array<Dynamic>));
     }
     _Runtime.callProperty(writers, 'set', cast ([kind, writer] : Array<Dynamic>));
@@ -321,12 +321,12 @@ class WgpuVelocity {
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
     device = _Runtime.field(state, 'device');
     module = _Runtime.callProperty(device, 'createShaderModule', cast ([{ code: WgpuVelocity.VELOCITY_WGSL__wgpuVelocity }] : Array<Dynamic>));
-    bindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'VERTEX')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'))), buffer: { type: 'uniform', hasDynamicOffset: true } }] : Array<Dynamic>) }] : Array<Dynamic>));
+    bindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: (Std.int(_Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'VERTEX')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'FRAGMENT'))), buffer: { type: 'uniform', hasDynamicOffset: true } }] : Array<Dynamic>) }] : Array<Dynamic>));
     layout = _Runtime.callProperty(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([bindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
     pipeline = _Runtime.callProperty(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: module, entryPoint: 'vs_main' }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: 'rgba16float' }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
-    uniformBuffer = _Runtime.callProperty(device, 'createBuffer', cast ([{ size: (WgpuVelocity.UNIFORM_SLOTS__wgpuVelocity * WgpuVelocity.UNIFORM_STRIDE__wgpuVelocity), usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
+    uniformBuffer = _Runtime.callProperty(device, 'createBuffer', cast ([{ size: (WgpuVelocity.UNIFORM_SLOTS__wgpuVelocity * WgpuVelocity.UNIFORM_STRIDE__wgpuVelocity), usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST'))) }] : Array<Dynamic>));
     bindGroup = _Runtime.callProperty(device, 'createBindGroup', cast ([{ layout: bindGroupLayout, entries: cast ([{ binding: 0.0, resource: { buffer: uniformBuffer, size: WgpuVelocity.UNIFORM_BYTES__wgpuVelocity } }] : Array<Dynamic>) }] : Array<Dynamic>));
-    entry = { pipeline: pipeline, uniformBuffer: uniformBuffer, bindGroup: bindGroup, cursor: 0.0, scratch: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(WgpuVelocity.UNIFORM_BYTES__wgpuVelocity / 4.0)]) };
+    entry = { pipeline: pipeline, uniformBuffer: uniformBuffer, bindGroup: bindGroup, cursor: 0.0, scratch: _Runtime.construct(_Runtime.globalValue('Float32Array'), [(WgpuVelocity.UNIFORM_BYTES__wgpuVelocity / 4.0)]) };
     _Runtime.callProperty(WgpuVelocity._velocityPipelines__wgpuVelocity, 'set', cast ([state, entry] : Array<Dynamic>));
     return cast entry;
     return cast null;
@@ -358,9 +358,9 @@ class WgpuVelocity {
 
   public static final _scratchVelocity__wgpuVelocity:Velocity2D = { x: 0.0, y: 0.0 };
 
-  public static final _velocityPipelines__wgpuVelocity:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _velocityPipelines__wgpuVelocity:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static final _velocityWriters__wgpuVelocity:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _velocityWriters__wgpuVelocity:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static final _activeVelocityPasses__wgpuVelocity:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _activeVelocityPasses__wgpuVelocity:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

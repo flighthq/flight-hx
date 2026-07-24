@@ -33,8 +33,8 @@ class SurfaceConvolution {
     bias = _Runtime.coalesce(_Runtime.field(options, 'bias'), function():Dynamic return cast 0.0);
     edge = _Runtime.coalesce(_Runtime.field(options, 'edge'), function():Dynamic return cast 'clamp');
     preserveAlpha = _Runtime.coalesce(_Runtime.field(options, 'preserveAlpha'), function():Dynamic return cast true);
-    offsetX = _Runtime.callProperty(HxMath, 'floor', cast ([(matrixX / 2.0)] : Array<Dynamic>));
-    offsetY = _Runtime.callProperty(HxMath, 'floor', cast ([(matrixY / 2.0)] : Array<Dynamic>));
+    offsetX = HxMath.floor((matrixX / 2.0));
+    offsetY = HxMath.floor((matrixY / 2.0));
     surfaceWidth = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
     surfaceHeight = _Runtime.field(_Runtime.field(source, 'surface'), 'height');
     data = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
@@ -94,8 +94,8 @@ class SurfaceConvolution {
             _Runtime.setIndex(out, (di + 1.0), _Runtime.callValue(SurfaceConvolution.clampByte__surfaceConvolution, cast ([((g / divisor) + bias)] : Array<Dynamic>)));
             _Runtime.setIndex(out, (di + 2.0), _Runtime.callValue(SurfaceConvolution.clampByte__surfaceConvolution, cast ([((b / divisor) + bias)] : Array<Dynamic>)));
             if (_Runtime.truthy(preserveAlpha)) {
-              var cy:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([(surfaceHeight - 1.0), (_Runtime.field(source, 'y') + py)] : Array<Dynamic>))] : Array<Dynamic>));
-              var cx:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([(surfaceWidth - 1.0), (_Runtime.field(source, 'x') + px)] : Array<Dynamic>))] : Array<Dynamic>));
+              var cy:Dynamic = HxMath.max(0.0, HxMath.min((surfaceHeight - 1.0), (_Runtime.field(source, 'y') + py)));
+              var cx:Dynamic = HxMath.max(0.0, HxMath.min((surfaceWidth - 1.0), (_Runtime.field(source, 'x') + px)));
               _Runtime.setIndex(out, (di + 3.0), _Runtime.getIndex(data, ((((cy * surfaceWidth) + cx) * 4.0) + 3.0)));
             } else {
               _Runtime.setIndex(out, (di + 3.0), _Runtime.callValue(SurfaceConvolution.clampByte__surfaceConvolution, cast ([((a / divisor) + bias)] : Array<Dynamic>)));
@@ -109,7 +109,7 @@ class SurfaceConvolution {
   }
 
   public static function clampByte__surfaceConvolution(value:Float):Float {
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([value] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast HxMath.max(0.0, HxMath.min(255.0, HxMath.round(value)));
     return cast null;
   }
 

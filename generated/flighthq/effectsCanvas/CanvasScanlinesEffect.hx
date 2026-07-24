@@ -19,29 +19,29 @@ class CanvasScanlinesEffect {
     var lineHeight:Dynamic = cast _Runtime.UNDEFINED;
     var dark:Dynamic = cast _Runtime.UNDEFINED;
     var channel:Dynamic = cast _Runtime.UNDEFINED;
-    count = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'count'), function():Dynamic return cast 240.0)] : Array<Dynamic>))] : Array<Dynamic>));
-    intensity = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.3)] : Array<Dynamic>))] : Array<Dynamic>));
+    count = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'count'), function():Dynamic return cast 240.0)));
+    intensity = HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.3)));
     _Runtime.callValue(drawCanvasEffectPass, cast ([dest, source, 'none'] : Array<Dynamic>));
     ctx = _Runtime.field(dest, 'context');
     w = _Runtime.field(dest, 'width');
     h = _Runtime.field(dest, 'height');
     spacing = (h / count);
-    lineHeight = _Runtime.callProperty(HxMath, 'max', cast ([1.0, (spacing * 0.5)] : Array<Dynamic>));
-    _Runtime.callProperty(ctx, 'save', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.setField(ctx, 'globalCompositeOperation', 'multiply');
-    _Runtime.setField(ctx, 'filter', 'none');
+    lineHeight = HxMath.max(1.0, (spacing * 0.5));
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'save', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'globalCompositeOperation', 'multiply');
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'filter', 'none');
     dark = (1.0 - intensity);
-    channel = _Runtime.callProperty(HxMath, 'round', cast ([(dark * 255.0)] : Array<Dynamic>));
-    _Runtime.setField(ctx, 'fillStyle', 'rgb(' + Std.string(channel) + ',' + Std.string(channel) + ',' + Std.string(channel) + ')');
+    channel = HxMath.round((dark * 255.0));
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'fillStyle', 'rgb(' + Std.string(channel) + ',' + Std.string(channel) + ',' + Std.string(channel) + ')');
     {
       var y:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(y, h, '<'))) {
-        _Runtime.callProperty(ctx, 'fillRect', cast ([0.0, _Runtime.callProperty(HxMath, 'round', cast ([y] : Array<Dynamic>)), w, lineHeight] : Array<Dynamic>));
+        flighthq._internal.CanvasRenderingContext2D.call(ctx, 'fillRect', cast ([0.0, HxMath.round(y), w, lineHeight] : Array<Dynamic>));
         (y = cast ((y + spacing) : Dynamic));
       }
     }
-    _Runtime.callProperty(ctx, 'restore', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
   public static final defaultCanvasScanlinesEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {

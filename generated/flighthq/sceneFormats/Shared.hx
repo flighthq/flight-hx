@@ -132,7 +132,7 @@ class Shared {
       }
     }
     _Runtime.sortAndReturn(influences, function(a:Dynamic, b:Dynamic) return (_Runtime.field(b, 'weight') - _Runtime.field(a, 'weight')));
-    kept = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(influences, 'length'), MAX_SKIN_INFLUENCES] : Array<Dynamic>));
+    kept = HxMath.min(_Runtime.field(influences, 'length'), MAX_SKIN_INFLUENCES);
     sum = 0.0;
     {
       var i:Dynamic = 0.0;

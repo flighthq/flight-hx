@@ -39,8 +39,8 @@ class RegisterBitmapHitTest {
     if (_Runtime.truthy(_Runtime.strictEquals(surface, null))) { return cast 0.0; }
     _Runtime.callValue(inverseMatrixTransformPointXY, cast ([RegisterBitmapHitTest.bitmapAlphaLocalPoint__registerBitmapHitTest, _Runtime.callValue(getNodeWorldMatrix, cast ([(cast source : DisplayObject)] : Array<Dynamic>)), x, y] : Array<Dynamic>));
     rect = _Runtime.field(_Runtime.field(bitmap, 'data'), 'sourceRectangle');
-    px = _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(RegisterBitmapHitTest.bitmapAlphaLocalPoint__registerBitmapHitTest, 'x') + _Runtime.select(!_Runtime.strictEquals(rect, null), function():Dynamic return cast _Runtime.field(rect, 'x'), function():Dynamic return cast 0.0))] : Array<Dynamic>));
-    py = _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(RegisterBitmapHitTest.bitmapAlphaLocalPoint__registerBitmapHitTest, 'y') + _Runtime.select(!_Runtime.strictEquals(rect, null), function():Dynamic return cast _Runtime.field(rect, 'y'), function():Dynamic return cast 0.0))] : Array<Dynamic>));
+    px = HxMath.floor((_Runtime.field(RegisterBitmapHitTest.bitmapAlphaLocalPoint__registerBitmapHitTest, 'x') + _Runtime.select(!_Runtime.strictEquals(rect, null), function():Dynamic return cast _Runtime.field(rect, 'x'), function():Dynamic return cast 0.0)));
+    py = HxMath.floor((_Runtime.field(RegisterBitmapHitTest.bitmapAlphaLocalPoint__registerBitmapHitTest, 'y') + _Runtime.select(!_Runtime.strictEquals(rect, null), function():Dynamic return cast _Runtime.field(rect, 'y'), function():Dynamic return cast 0.0)));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(px, 0.0, '<'), function():Dynamic return cast _Runtime.compare(py, 0.0, '<')), function():Dynamic return cast _Runtime.compare(px, _Runtime.field(surface, 'width'), '>=')), function():Dynamic return cast _Runtime.compare(py, _Runtime.field(surface, 'height'), '>=')))) { return cast -1.0; }
     return cast _Runtime.select(_Runtime.compare(_Runtime.callValue(getSurfacePixelChannel, cast ([surface, px, py, ImageChannelValue.Alpha] : Array<Dynamic>)), alphaThreshold, '>='), function():Dynamic return cast 0.0, function():Dynamic return cast -1.0);
     return cast null;
@@ -64,5 +64,5 @@ class RegisterBitmapHitTest {
 
   public static final bitmapAlphaLocalPoint__registerBitmapHitTest:Dynamic = { x: 0.0, y: 0.0 };
 
-  public static final surfaceCache__registerBitmapHitTest:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final surfaceCache__registerBitmapHitTest:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

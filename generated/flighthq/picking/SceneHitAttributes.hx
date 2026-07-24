@@ -100,7 +100,7 @@ class SceneHitAttributes {
     (wz = cast ((wz - (projection * _Runtime.field(SceneHitAttributes._worldNormal__sceneHitAttributes, 'z'))) : Dynamic));
     lengthSquared = (((wx * wx) + (wy * wy)) + (wz * wz));
     if (_Runtime.truthy(_Runtime.strictEquals(lengthSquared, 0.0))) { return cast false; }
-    inverseLength = (1.0 / _Runtime.callProperty(HxMath, 'sqrt', cast ([lengthSquared] : Array<Dynamic>)));
+    inverseLength = (1.0 / HxMath.sqrt(lengthSquared));
     determinant = (((_Runtime.getIndex(m, 0.0) * ((_Runtime.getIndex(m, 5.0) * _Runtime.getIndex(m, 10.0)) - (_Runtime.getIndex(m, 9.0) * _Runtime.getIndex(m, 6.0)))) - (_Runtime.getIndex(m, 4.0) * ((_Runtime.getIndex(m, 1.0) * _Runtime.getIndex(m, 10.0)) - (_Runtime.getIndex(m, 9.0) * _Runtime.getIndex(m, 2.0))))) + (_Runtime.getIndex(m, 8.0) * ((_Runtime.getIndex(m, 1.0) * _Runtime.getIndex(m, 6.0)) - (_Runtime.getIndex(m, 5.0) * _Runtime.getIndex(m, 2.0)))));
     _Runtime.setField(out, 'x', (wx * inverseLength));
     _Runtime.setField(out, 'y', (wy * inverseLength));
@@ -120,7 +120,7 @@ class SceneHitAttributes {
     var inverseLength:Dynamic = cast _Runtime.UNDEFINED;
     lengthSquared = (((x * x) + (y * y)) + (z * z));
     if (_Runtime.truthy(_Runtime.strictEquals(lengthSquared, 0.0))) { return cast false; }
-    inverseLength = (1.0 / _Runtime.callProperty(HxMath, 'sqrt', cast ([lengthSquared] : Array<Dynamic>)));
+    inverseLength = (1.0 / HxMath.sqrt(lengthSquared));
     _Runtime.setField(out, 'x', (x * inverseLength));
     _Runtime.setField(out, 'y', (y * inverseLength));
     _Runtime.setField(out, 'z', (z * inverseLength));

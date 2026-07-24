@@ -35,7 +35,7 @@ class RenderTarget {
   }
 
   public static function computeRenderTargetSize(bounds:RectangleLike, padding:Float = 0.0, minWidth:Float = 1.0, minHeight:Float = 1.0):{ var width:Float; var height:Float; } {
-    return cast { width: _Runtime.callProperty(HxMath, 'max', cast ([minWidth, (_Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(bounds, 'width')] : Array<Dynamic>)) + (padding * 2.0))] : Array<Dynamic>)), height: _Runtime.callProperty(HxMath, 'max', cast ([minHeight, (_Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(bounds, 'height')] : Array<Dynamic>)) + (padding * 2.0))] : Array<Dynamic>)) };
+    return cast { width: HxMath.max(minWidth, (HxMath.ceil(_Runtime.field(bounds, 'width')) + (padding * 2.0))), height: HxMath.max(minHeight, (HxMath.ceil(_Runtime.field(bounds, 'height')) + (padding * 2.0))) };
     return cast null;
   }
 

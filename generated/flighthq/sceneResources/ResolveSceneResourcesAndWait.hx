@@ -45,7 +45,7 @@ class ResolveSceneResourcesAndWait {
         }] : Array<Dynamic>))] : Array<Dynamic>));
       }
       if (_Runtime.truthy(!_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(emitSignal, cast ([progress, { loaded: loaded, total: total }] : Array<Dynamic>)); }
-      flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'allSettled', cast ([pending] : Array<Dynamic>)));
+      flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.globalValue('Promise'), 'allSettled', cast ([pending] : Array<Dynamic>)));
       #if js
       return;
       #else
@@ -63,7 +63,7 @@ class ResolveSceneResourcesAndWait {
       for (entry in _Runtime.iterable(_Runtime.callProperty(_Runtime.field(runtime, 'inFlight'), 'values', cast ([] : Array<Dynamic>)))) {
         _Runtime.callProperty(promises, 'push', cast ([_Runtime.field(entry, 'promise')] : Array<Dynamic>));
       }
-      flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'allSettled', cast ([promises] : Array<Dynamic>)));
+      flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.globalValue('Promise'), 'allSettled', cast ([promises] : Array<Dynamic>)));
       #if js
       return;
       #else
@@ -76,7 +76,7 @@ class ResolveSceneResourcesAndWait {
     var textures:Array<Texture> = cast _Runtime.UNDEFINED;
     var refs:Dynamic = cast _Runtime.UNDEFINED;
     textures = cast ([] : Array<Dynamic>);
-    refs = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
+    refs = _Runtime.construct(_Runtime.globalValue('Set'), []);
     _Runtime.callValue(getSceneResourceTextures, cast ([scene, _Runtime.field(resolver, 'registry'), textures] : Array<Dynamic>));
     for (texture in _Runtime.iterable(textures)) {
       var ref:Dynamic = _Runtime.field(texture, 'resource');

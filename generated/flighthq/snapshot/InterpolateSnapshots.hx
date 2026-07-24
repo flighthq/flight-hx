@@ -26,7 +26,7 @@ class InterpolateSnapshots {
     if (_Runtime.truthy(_Runtime.isArray(b))) {
       _Runtime.setLength((cast out : Array<Dynamic>), _Runtime.field((cast b : Array<Dynamic>), 'length'));
     }
-    for (key in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([bRecord] : Array<Dynamic>)))) {
+    for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(bRecord))) {
       var path:Dynamic = _Runtime.select(_Runtime.strictEquals(prefix, ''), function():Dynamic return cast key, function():Dynamic return cast '' + Std.string(prefix) + '.' + Std.string(key) + '');
       var aValue:Dynamic = _Runtime.getIndex(aRecord, key);
       var bValue:Dynamic = _Runtime.getIndex(bRecord, key);
@@ -61,7 +61,7 @@ class InterpolateSnapshots {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(value, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(value), 'object')))) {
       return cast value;
     }
-    return cast _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['structuredClone'] : Array<Dynamic>)), cast ([value] : Array<Dynamic>));
+    return cast _Runtime.callValue(_Runtime.globalValue('structuredClone'), cast ([value] : Array<Dynamic>));
     return cast null;
   }
 }

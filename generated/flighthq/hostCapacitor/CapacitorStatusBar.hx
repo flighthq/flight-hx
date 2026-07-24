@@ -79,8 +79,8 @@ class CapacitorStatusBar {
   public static function hexToRgba__capacitorStatusBar(hex:String):Float {
     var digits:Dynamic = cast _Runtime.UNDEFINED;
     digits = _Runtime.replace(hex, _Runtime.regexp('^#', ''), '', false);
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(digits, 'length'), 8.0))) { return cast _Runtime.unsignedShiftRight(Std.int(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))), Std.int(0.0)); }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(digits, 'length'), 6.0))) { return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))) << Std.int(8.0))) | Std.int(255.0))), Std.int(0.0)); }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(digits, 'length'), 8.0))) { return cast _Runtime.unsignedShiftRight(Std.int(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))), Std.int(0.0)); }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(digits, 'length'), 6.0))) { return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([digits, 16.0] : Array<Dynamic>))) << Std.int(8.0))) | Std.int(255.0))), Std.int(0.0)); }
     return cast 0.0;
     return cast null;
   }

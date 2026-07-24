@@ -12,7 +12,7 @@ class WgpuEffectGradientRamp {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     cache = _Runtime.callProperty(WgpuEffectGradientRamp.rampCaches__wgpuEffectGradientRamp, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (cache = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) : Dynamic));
+      (cache = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       _Runtime.callProperty(WgpuEffectGradientRamp.rampCaches__wgpuEffectGradientRamp, 'set', cast ([state, cache] : Array<Dynamic>));
     }
     key = '' + Std.string(_Runtime.join(colors, ',')) + '|' + Std.string(_Runtime.join(alphas, ',')) + '|' + Std.string(_Runtime.join(ratios, ',')) + '';
@@ -27,7 +27,7 @@ class WgpuEffectGradientRamp {
 
   public static function buildRampData__wgpuEffectGradientRamp(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [(256.0 * 4.0)]);
+    out = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [(256.0 * 4.0)]);
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(colors, 'length'), 0.0))) { return cast out; }
     {
       var i:Dynamic = 0.0;
@@ -42,13 +42,13 @@ class WgpuEffectGradientRamp {
           (r = cast ((Std.int((Std.int(c) >> Std.int(16.0))) & Std.int(255.0)) : Dynamic));
           (g = cast ((Std.int((Std.int(c) >> Std.int(8.0))) & Std.int(255.0)) : Dynamic));
           (b = cast ((Std.int(c) & Std.int(255.0)) : Dynamic));
-          (a = cast (_Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(alphas, 0.0) * 255.0)] : Array<Dynamic>)) : Dynamic));
+          (a = cast (HxMath.round((_Runtime.getIndex(alphas, 0.0) * 255.0)) : Dynamic));
         } else { if (_Runtime.truthy(_Runtime.compare(t, _Runtime.getIndex(ratios, (_Runtime.field(ratios, 'length') - 1.0)), '>='))) {
           var c:Dynamic = _Runtime.getIndex(colors, (_Runtime.field(colors, 'length') - 1.0));
           (r = cast ((Std.int((Std.int(c) >> Std.int(16.0))) & Std.int(255.0)) : Dynamic));
           (g = cast ((Std.int((Std.int(c) >> Std.int(8.0))) & Std.int(255.0)) : Dynamic));
           (b = cast ((Std.int(c) & Std.int(255.0)) : Dynamic));
-          (a = cast (_Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(alphas, (_Runtime.field(alphas, 'length') - 1.0)) * 255.0)] : Array<Dynamic>)) : Dynamic));
+          (a = cast (HxMath.round((_Runtime.getIndex(alphas, (_Runtime.field(alphas, 'length') - 1.0)) * 255.0)) : Dynamic));
         } else {
           {
             var j:Dynamic = 0.0;
@@ -59,10 +59,10 @@ class WgpuEffectGradientRamp {
                 var blend:Dynamic = _Runtime.select(_Runtime.compare(r1, r0, '>'), function():Dynamic return cast ((t - r0) / (r1 - r0)), function():Dynamic return cast 0.0);
                 var c0:Dynamic = _Runtime.getIndex(colors, j);
                 var c1:Dynamic = _Runtime.getIndex(colors, (j + 1.0));
-                (r = cast (_Runtime.callProperty(HxMath, 'round', cast ([(((Std.int((Std.int(c0) >> Std.int(16.0))) & Std.int(255.0)) * (1.0 - blend)) + ((Std.int((Std.int(c1) >> Std.int(16.0))) & Std.int(255.0)) * blend))] : Array<Dynamic>)) : Dynamic));
-                (g = cast (_Runtime.callProperty(HxMath, 'round', cast ([(((Std.int((Std.int(c0) >> Std.int(8.0))) & Std.int(255.0)) * (1.0 - blend)) + ((Std.int((Std.int(c1) >> Std.int(8.0))) & Std.int(255.0)) * blend))] : Array<Dynamic>)) : Dynamic));
-                (b = cast (_Runtime.callProperty(HxMath, 'round', cast ([(((Std.int(c0) & Std.int(255.0)) * (1.0 - blend)) + ((Std.int(c1) & Std.int(255.0)) * blend))] : Array<Dynamic>)) : Dynamic));
-                (a = cast (_Runtime.callProperty(HxMath, 'round', cast ([(((_Runtime.getIndex(alphas, j) * 255.0) * (1.0 - blend)) + ((_Runtime.getIndex(alphas, (j + 1.0)) * 255.0) * blend))] : Array<Dynamic>)) : Dynamic));
+                (r = cast (HxMath.round((((Std.int((Std.int(c0) >> Std.int(16.0))) & Std.int(255.0)) * (1.0 - blend)) + ((Std.int((Std.int(c1) >> Std.int(16.0))) & Std.int(255.0)) * blend))) : Dynamic));
+                (g = cast (HxMath.round((((Std.int((Std.int(c0) >> Std.int(8.0))) & Std.int(255.0)) * (1.0 - blend)) + ((Std.int((Std.int(c1) >> Std.int(8.0))) & Std.int(255.0)) * blend))) : Dynamic));
+                (b = cast (HxMath.round((((Std.int(c0) & Std.int(255.0)) * (1.0 - blend)) + ((Std.int(c1) & Std.int(255.0)) * blend))) : Dynamic));
+                (a = cast (HxMath.round((((_Runtime.getIndex(alphas, j) * 255.0) * (1.0 - blend)) + ((_Runtime.getIndex(alphas, (j + 1.0)) * 255.0) * blend))) : Dynamic));
                 break;
               }
               j++;
@@ -88,11 +88,11 @@ class WgpuEffectGradientRamp {
     data = _Runtime.callValue(WgpuEffectGradientRamp.buildRampData__wgpuEffectGradientRamp, cast ([colors, alphas, ratios] : Array<Dynamic>));
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
-    texture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([256.0, 1.0, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
+    texture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([256.0, 1.0, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'COPY_DST'))) }] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(device, 'queue'), 'writeTexture', cast ([{ texture: texture, origin: cast ([0.0, 0.0, 0.0] : Array<Dynamic>) }, (cast _Runtime.field(data, 'buffer') : haxe.io.Bytes), { offset: 0.0, bytesPerRow: (256.0 * 4.0) }, cast ([256.0, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
     return cast texture;
     return cast null;
   }
 
-  public static final rampCaches__wgpuEffectGradientRamp:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final rampCaches__wgpuEffectGradientRamp:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

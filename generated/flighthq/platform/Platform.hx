@@ -31,14 +31,14 @@ class Platform {
     if (_Runtime.truthy(_Runtime.strictEquals(a, b))) { return cast 0.0; }
     aParts = _Runtime.select(_Runtime.strictEquals(a, ''), function():Dynamic return cast cast ([] : Array<Dynamic>), function():Dynamic return cast _Runtime.callProperty(a, 'split', cast (['.'] : Array<Dynamic>)));
     bParts = _Runtime.select(_Runtime.strictEquals(b, ''), function():Dynamic return cast cast ([] : Array<Dynamic>), function():Dynamic return cast _Runtime.callProperty(b, 'split', cast (['.'] : Array<Dynamic>)));
-    len = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(aParts, 'length'), _Runtime.field(bParts, 'length')] : Array<Dynamic>));
+    len = HxMath.max(_Runtime.field(aParts, 'length'), _Runtime.field(bParts, 'length'));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, len, '<'))) {
-        var aNum:Dynamic = _Runtime.select(_Runtime.compare(i, _Runtime.field(aParts, 'length'), '<'), function():Dynamic return cast _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([_Runtime.getIndex(aParts, i), 10.0] : Array<Dynamic>)), function():Dynamic return cast 0.0);
-        var bNum:Dynamic = _Runtime.select(_Runtime.compare(i, _Runtime.field(bParts, 'length'), '<'), function():Dynamic return cast _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([_Runtime.getIndex(bParts, i), 10.0] : Array<Dynamic>)), function():Dynamic return cast 0.0);
-        var aN:Dynamic = _Runtime.select(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['isNaN'] : Array<Dynamic>)), cast ([aNum] : Array<Dynamic>)), function():Dynamic return cast 0.0, function():Dynamic return cast aNum);
-        var bN:Dynamic = _Runtime.select(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['isNaN'] : Array<Dynamic>)), cast ([bNum] : Array<Dynamic>)), function():Dynamic return cast 0.0, function():Dynamic return cast bNum);
+        var aNum:Dynamic = _Runtime.select(_Runtime.compare(i, _Runtime.field(aParts, 'length'), '<'), function():Dynamic return cast _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(aParts, i), 10.0] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+        var bNum:Dynamic = _Runtime.select(_Runtime.compare(i, _Runtime.field(bParts, 'length'), '<'), function():Dynamic return cast _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(bParts, i), 10.0] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+        var aN:Dynamic = _Runtime.select(_Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([aNum] : Array<Dynamic>)), function():Dynamic return cast 0.0, function():Dynamic return cast aNum);
+        var bN:Dynamic = _Runtime.select(_Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([bNum] : Array<Dynamic>)), function():Dynamic return cast 0.0, function():Dynamic return cast bNum);
         if (_Runtime.truthy(_Runtime.compare(aN, bN, '<'))) { return cast -1.0; }
         if (_Runtime.truthy(_Runtime.compare(aN, bN, '>'))) { return cast 1.0; }
         i++;
@@ -92,15 +92,15 @@ class Platform {
   public static function getWebPlatformInfo__platform(out:PlatformInfo):PlatformInfo {
     var nav:Dynamic = cast _Runtime.UNDEFINED;
     var ua:Dynamic = cast _Runtime.UNDEFINED;
-    nav = _Runtime.select(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), function():Dynamic return cast null);
+    nav = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.globalValue('navigator'), function():Dynamic return cast null);
     ua = _Runtime.coalesce(_Runtime.optionalField(nav, 'userAgent'), function():Dynamic return cast '');
     _Runtime.setField(out, 'name', _Runtime.callValue(parseUserAgentName, cast ([ua] : Array<Dynamic>)));
     _Runtime.setField(out, 'kind', _Runtime.callValue(parseUserAgentKind, cast ([_Runtime.field(out, 'name')] : Array<Dynamic>)));
     _Runtime.setField(out, 'version', _Runtime.callValue(parseUserAgentVersion, cast ([ua, _Runtime.field(out, 'name')] : Array<Dynamic>)));
     _Runtime.setField(out, 'arch', _Runtime.callValue(parseUserAgentArch, cast ([ua] : Array<Dynamic>)));
     _Runtime.setField(out, 'locale', _Runtime.coalesce(_Runtime.optionalField(nav, 'language'), function():Dynamic return cast ''));
-    _Runtime.setField(out, 'isTouch', _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.hasField(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'maxTouchPoints')), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'maxTouchPoints'), 0.0, '>'), function():Dynamic return cast false));
-    _Runtime.setField(out, 'runtime', _Runtime.callValue(parseUserAgentRuntime, cast ([_Runtime.select(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast (cast (cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)) : Dynamic) : Dynamic), function():Dynamic return cast null)] : Array<Dynamic>)));
+    _Runtime.setField(out, 'isTouch', _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'maxTouchPoints')), function():Dynamic return cast _Runtime.compare(_Runtime.field(_Runtime.globalValue('navigator'), 'maxTouchPoints'), 0.0, '>'), function():Dynamic return cast false));
+    _Runtime.setField(out, 'runtime', _Runtime.callValue(parseUserAgentRuntime, cast ([_Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast (cast (cast _Runtime.globalValue('window') : Dynamic) : Dynamic), function():Dynamic return cast null)] : Array<Dynamic>)));
     _Runtime.setField(out, 'engine', _Runtime.callValue(parseUserAgentEngine, cast ([ua] : Array<Dynamic>)));
     _Runtime.setField(out, 'engineVersion', _Runtime.callValue(parseUserAgentEngineVersion, cast ([ua, _Runtime.field(out, 'engine')] : Array<Dynamic>)));
     _Runtime.setField(out, 'endianness', _Runtime.callValue(detectEndianness, cast ([] : Array<Dynamic>)));

@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.FontResource;
 
 class DomFontSource {
-  public static final _domFontAscentCache__domFontSource:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+  public static final _domFontAscentCache__domFontSource:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
 
   public static function getDomFontAscentCached(font:String):Null<Float> {
     return cast _Runtime.callProperty(DomFontSource._domFontAscentCache__domFontSource, 'get', cast ([font] : Array<Dynamic>));

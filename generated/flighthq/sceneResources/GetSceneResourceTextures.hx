@@ -16,7 +16,7 @@ class GetSceneResourceTextures {
     var seen:Dynamic = cast _Runtime.UNDEFINED;
     var slots:Array<Texture> = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out, 0.0);
-    seen = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
+    seen = _Runtime.construct(_Runtime.globalValue('Set'), []);
     slots = cast ([] : Array<Dynamic>);
     _Runtime.callValue(GetSceneResourceTextures.collectNodeResourceTextures__getSceneResourceTextures, cast ([scene, registry, out, seen, slots] : Array<Dynamic>));
     _Runtime.callValue(forEachNodeDescendant, cast ([scene, function(node:Dynamic) return _Runtime.callValue(GetSceneResourceTextures.collectNodeResourceTextures__getSceneResourceTextures, cast ([(cast node : SceneNode), registry, out, seen, slots] : Array<Dynamic>))] : Array<Dynamic>));

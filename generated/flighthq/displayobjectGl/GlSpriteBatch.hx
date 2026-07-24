@@ -29,7 +29,7 @@ class GlSpriteBatch {
   public static function compileSpriteBatchShader__glSpriteBatch(gl:Dynamic):GlQuadBatchShader {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(createGlProgram, cast ([gl, QUAD_BATCH_VS, GlSpriteBatch.QUAD_BATCH_FS__glSpriteBatch, 'Sprite-batch'] : Array<Dynamic>));
-    return cast { program: program, locCorner: 0.0, locMatAB: 1.0, locMatCD: 2.0, locMatTXTY: 3.0, locSize: 4.0, locUvRect: 5.0, locAlpha: 6.0, locWorldMatrix: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_world'] : Array<Dynamic>)), locTexture: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_texture'] : Array<Dynamic>)) };
+    return cast { program: program, locCorner: 0.0, locMatAB: 1.0, locMatCD: 2.0, locMatTXTY: 3.0, locSize: 4.0, locUvRect: 5.0, locAlpha: 6.0, locWorldMatrix: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_world'] : Array<Dynamic>)), locTexture: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_texture'] : Array<Dynamic>)) };
     return cast null;
   }
 
@@ -39,30 +39,30 @@ class GlSpriteBatch {
     var stride:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'quadBatchCornerBuffer')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'enableVertexAttribArray', cast ([locCorner] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribPointer', cast ([locCorner, 2.0, _Runtime.field(gl, 'FLOAT'), false, 8.0, 0.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribDivisor', cast ([locCorner, 0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'quadBatchCornerBuffer')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([locCorner] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([locCorner, 2.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, 8.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribDivisor', cast ([locCorner, 0.0] : Array<Dynamic>));
     stride = GlSpriteBatch.SPRITE_INSTANCE_STRIDE__glSpriteBatch;
-    _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchInstanceBuffer')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'enableVertexAttribArray', cast ([1.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribPointer', cast ([1.0, 2.0, _Runtime.field(gl, 'FLOAT'), false, stride, 0.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribDivisor', cast ([1.0, 1.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'enableVertexAttribArray', cast ([2.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribPointer', cast ([2.0, 2.0, _Runtime.field(gl, 'FLOAT'), false, stride, 8.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribDivisor', cast ([2.0, 1.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'enableVertexAttribArray', cast ([3.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribPointer', cast ([3.0, 2.0, _Runtime.field(gl, 'FLOAT'), false, stride, 16.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribDivisor', cast ([3.0, 1.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'enableVertexAttribArray', cast ([4.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribPointer', cast ([4.0, 2.0, _Runtime.field(gl, 'FLOAT'), false, stride, 24.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribDivisor', cast ([4.0, 1.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'enableVertexAttribArray', cast ([5.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribPointer', cast ([5.0, 4.0, _Runtime.field(gl, 'FLOAT'), false, stride, 32.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribDivisor', cast ([5.0, 1.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'enableVertexAttribArray', cast ([6.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribPointer', cast ([6.0, 1.0, _Runtime.field(gl, 'FLOAT'), false, stride, 48.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribDivisor', cast ([6.0, 1.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchInstanceBuffer')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([1.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([1.0, 2.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, stride, 0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribDivisor', cast ([1.0, 1.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([2.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([2.0, 2.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, stride, 8.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribDivisor', cast ([2.0, 1.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([3.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([3.0, 2.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, stride, 16.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribDivisor', cast ([3.0, 1.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([4.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([4.0, 2.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, stride, 24.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribDivisor', cast ([4.0, 1.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([5.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([5.0, 4.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, stride, 32.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribDivisor', cast ([5.0, 1.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([6.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([6.0, 1.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, stride, 48.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribDivisor', cast ([6.0, 1.0] : Array<Dynamic>));
   }
 
   public static function ensureGlQuadBatchShader(state:GlRenderState):GlQuadBatchShader {
@@ -74,10 +74,10 @@ class GlSpriteBatch {
     if (_Runtime.truthy(_Runtime.field(runtime, 'quadBatchShader'))) { return cast _Runtime.field(runtime, 'quadBatchShader'); }
     gl = _Runtime.field(state, 'gl');
     _Runtime.setField(runtime, 'quadBatchShader', _Runtime.callValue(GlSpriteBatch.compileSpriteBatchShader__glSpriteBatch, cast ([gl] : Array<Dynamic>)));
-    cornerData = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [cast ([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0] : Array<Dynamic>)]);
-    cornerBuf = _Runtime.callProperty(gl, 'createBuffer', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), cornerBuf] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bufferData', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), cornerData, _Runtime.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
+    cornerData = _Runtime.construct(_Runtime.globalValue('Float32Array'), [cast ([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0] : Array<Dynamic>)]);
+    cornerBuf = flighthq._internal.WebGl2RenderingContext.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), cornerBuf] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), cornerData, flighthq._internal.WebGl2RenderingContext.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
     _Runtime.setField(runtime, 'quadBatchCornerBuffer', cornerBuf);
     return cast _Runtime.field(runtime, 'quadBatchShader');
     return cast null;
@@ -109,35 +109,35 @@ class GlSpriteBatch {
     _Runtime.setField(runtime, 'spriteBatchMaterialFloats', 0.0);
     gl = _Runtime.field(state, 'gl');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchInstanceBuffer'), null))) {
-      _Runtime.setField(runtime, 'spriteBatchInstanceBuffer', _Runtime.callProperty(gl, 'createBuffer', cast ([] : Array<Dynamic>)));
-      _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchInstanceBuffer')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'bufferData', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'byteLength'), _Runtime.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
+      _Runtime.setField(runtime, 'spriteBatchInstanceBuffer', flighthq._internal.WebGl2RenderingContext.call(gl, 'createBuffer', cast ([] : Array<Dynamic>)));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchInstanceBuffer')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'byteLength'), flighthq._internal.WebGl2RenderingContext.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
     } else {
-      _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchInstanceBuffer')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchInstanceBuffer')] : Array<Dynamic>));
     }
-    _Runtime.callProperty(gl, 'bufferSubData', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), 0.0, _Runtime.field(runtime, 'spriteBatchInstanceData'), 0.0, (count * GlSpriteBatch.SPRITE_INSTANCE_FLOATS__glSpriteBatch)] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferSubData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), 0.0, _Runtime.field(runtime, 'spriteBatchInstanceData'), 0.0, (count * GlSpriteBatch.SPRITE_INSTANCE_FLOATS__glSpriteBatch)] : Array<Dynamic>));
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, blendMode] : Array<Dynamic>));
     _Runtime.callValue(bindGlImageResourceTexture, cast ([state, texture] : Array<Dynamic>));
     ctHandled = _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.field(runtime, 'glColorAdjustmentFold'), 'flush', cast ([state, count] : Array<Dynamic>)), function():Dynamic return cast false);
     if (_Runtime.truthy(!_Runtime.truthy(ctHandled))) {
       if (_Runtime.truthy(_Runtime.compare(floats, 0.0, '>'))) {
         if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchMaterialBuffer'), null))) {
-          _Runtime.setField(runtime, 'spriteBatchMaterialBuffer', _Runtime.callProperty(gl, 'createBuffer', cast ([] : Array<Dynamic>)));
-          _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchMaterialBuffer')] : Array<Dynamic>));
-          _Runtime.callProperty(gl, 'bufferData', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(_Runtime.field(runtime, 'spriteBatchMaterialData'), 'byteLength'), _Runtime.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
+          _Runtime.setField(runtime, 'spriteBatchMaterialBuffer', flighthq._internal.WebGl2RenderingContext.call(gl, 'createBuffer', cast ([] : Array<Dynamic>)));
+          flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchMaterialBuffer')] : Array<Dynamic>));
+          flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(_Runtime.field(runtime, 'spriteBatchMaterialData'), 'byteLength'), flighthq._internal.WebGl2RenderingContext.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
         } else {
-          _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchMaterialBuffer')] : Array<Dynamic>));
+          flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchMaterialBuffer')] : Array<Dynamic>));
         }
-        _Runtime.callProperty(gl, 'bufferSubData', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), 0.0, _Runtime.field(runtime, 'spriteBatchMaterialData'), 0.0, (count * floats)] : Array<Dynamic>));
+        flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferSubData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), 0.0, _Runtime.field(runtime, 'spriteBatchMaterialData'), 0.0, (count * floats)] : Array<Dynamic>));
       }
       _Runtime.callProperty(renderer, 'bind', cast ([state, material] : Array<Dynamic>));
     }
-    _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ELEMENT_ARRAY_BUFFER'), _Runtime.field(runtime, 'quadIndexBuffer')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'drawElementsInstanced', cast ([_Runtime.field(gl, 'TRIANGLES'), 6.0, _Runtime.field(gl, 'UNSIGNED_SHORT'), 0.0, count] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ELEMENT_ARRAY_BUFFER'), _Runtime.field(runtime, 'quadIndexBuffer')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'drawElementsInstanced', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TRIANGLES'), 6.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'UNSIGNED_SHORT'), 0.0, count] : Array<Dynamic>));
     {
       var loc:Dynamic = 1.0;
       while (_Runtime.truthy(_Runtime.compare(loc, GlSpriteBatch.MAX_INSTANCE_ATTRIB_LOCATION__glSpriteBatch, '<='))) {
-        _Runtime.callProperty(gl, 'vertexAttribDivisor', cast ([loc, 0.0] : Array<Dynamic>));
+        flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribDivisor', cast ([loc, 0.0] : Array<Dynamic>));
         loc++;
       }
     }
@@ -168,23 +168,23 @@ class GlSpriteBatch {
     _Runtime.setField(runtime, 'spriteBatchMaterialFloats', floats);
     needed = ((_Runtime.field(runtime, 'spriteBatchCount') + maxInstances) * GlSpriteBatch.SPRITE_INSTANCE_FLOATS__glSpriteBatch);
     if (_Runtime.truthy(_Runtime.compare(needed, _Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'length'), '>'))) {
-      var newSize:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([needed, (_Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'length') * 2.0)] : Array<Dynamic>));
-      _Runtime.setField(runtime, 'spriteBatchInstanceData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [newSize]));
+      var newSize:Dynamic = HxMath.max(needed, (_Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'length') * 2.0));
+      _Runtime.setField(runtime, 'spriteBatchInstanceData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [newSize]));
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchInstanceBuffer'), null))) {
         var gl:Dynamic = _Runtime.field(state, 'gl');
-        _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchInstanceBuffer')] : Array<Dynamic>));
-        _Runtime.callProperty(gl, 'bufferData', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), (newSize * 4.0), _Runtime.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
+        flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchInstanceBuffer')] : Array<Dynamic>));
+        flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), (newSize * 4.0), flighthq._internal.WebGl2RenderingContext.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
       }
     }
     if (_Runtime.truthy(_Runtime.compare(floats, 0.0, '>'))) {
       var materialNeeded:Dynamic = ((_Runtime.field(runtime, 'spriteBatchCount') + maxInstances) * floats);
       if (_Runtime.truthy(_Runtime.compare(materialNeeded, _Runtime.field(_Runtime.field(runtime, 'spriteBatchMaterialData'), 'length'), '>'))) {
-        var newSize:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([materialNeeded, (_Runtime.field(_Runtime.field(runtime, 'spriteBatchMaterialData'), 'length') * 2.0)] : Array<Dynamic>));
-        _Runtime.setField(runtime, 'spriteBatchMaterialData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [newSize]));
+        var newSize:Dynamic = HxMath.max(materialNeeded, (_Runtime.field(_Runtime.field(runtime, 'spriteBatchMaterialData'), 'length') * 2.0));
+        _Runtime.setField(runtime, 'spriteBatchMaterialData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [newSize]));
         if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchMaterialBuffer'), null))) {
           var gl:Dynamic = _Runtime.field(state, 'gl');
-          _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchMaterialBuffer')] : Array<Dynamic>));
-          _Runtime.callProperty(gl, 'bufferData', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), (newSize * 4.0), _Runtime.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
+          flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchMaterialBuffer')] : Array<Dynamic>));
+          flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), (newSize * 4.0), flighthq._internal.WebGl2RenderingContext.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
         }
       }
     }
@@ -226,15 +226,15 @@ class GlSpriteBatch {
     _Runtime.setIndex(m, 6.0, -1.0);
     _Runtime.setIndex(m, 7.0, 1.0);
     _Runtime.setIndex(m, 8.0, 1.0);
-    _Runtime.callProperty(gl, 'uniformMatrix3fv', cast ([locWorldMatrix, false, m] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1i', cast ([locTexture, 0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniformMatrix3fv', cast ([locWorldMatrix, false, m] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([locTexture, 0.0] : Array<Dynamic>));
   }
 
   public static function useGlQuadBatchProgram(state:GlRenderState, program:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'currentProgram'), program))) {
-      _Runtime.callProperty(_Runtime.field(state, 'gl'), 'useProgram', cast ([program] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(_Runtime.field(state, 'gl'), 'useProgram', cast ([program] : Array<Dynamic>));
       _Runtime.setField(runtime, 'currentProgram', program);
     }
   }

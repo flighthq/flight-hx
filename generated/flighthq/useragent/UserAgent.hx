@@ -12,9 +12,9 @@ import flighthq.types.Platform.PlatformRuntime;
 class UserAgent {
   public static function detectEndianness():PlatformEndianness {
     try {
-      var buf:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['ArrayBuffer'] : Array<Dynamic>)), [2.0]);
+      var buf:Dynamic = _Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [2.0]);
       _Runtime.setIndex(new flighthq._internal._UInt16Array(buf), 0.0, 258.0);
-      var bytes:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [buf]);
+      var bytes:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [buf]);
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.getIndex(bytes, 0.0), 1.0))) { return cast 'big'; }
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.getIndex(bytes, 0.0), 2.0))) { return cast 'little'; }
     } catch (__error:Dynamic) {

@@ -25,7 +25,7 @@ class SurfaceCoverage {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(data, 'length'), '<'))) {
-        if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(data, i) - br)] : Array<Dynamic>)), channelTolerance, '>'), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(data, (i + 1.0)) - bg)] : Array<Dynamic>)), channelTolerance, '>')), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(data, (i + 2.0)) - bb)] : Array<Dynamic>)), channelTolerance, '>')), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(data, (i + 3.0)) - ba)] : Array<Dynamic>)), channelTolerance, '>')))) {
+        if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(HxMath.abs((_Runtime.getIndex(data, i) - br)), channelTolerance, '>'), function():Dynamic return cast _Runtime.compare(HxMath.abs((_Runtime.getIndex(data, (i + 1.0)) - bg)), channelTolerance, '>')), function():Dynamic return cast _Runtime.compare(HxMath.abs((_Runtime.getIndex(data, (i + 2.0)) - bb)), channelTolerance, '>')), function():Dynamic return cast _Runtime.compare(HxMath.abs((_Runtime.getIndex(data, (i + 3.0)) - ba)), channelTolerance, '>')))) {
           covered++;
         }
         (i = cast ((i + 4.0) : Dynamic));

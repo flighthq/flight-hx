@@ -23,7 +23,7 @@ class ParticleDesignerSerialize {
     var rotVar:Dynamic = cast _Runtime.UNDEFINED;
     var vx:Dynamic = cast _Runtime.UNDEFINED;
     var vy:Dynamic = cast _Runtime.UNDEFINED;
-    angleDeg = (_Runtime.callProperty(HxMath, 'atan2', cast ([-_Runtime.field(config, 'directionY'), _Runtime.field(config, 'directionX')] : Array<Dynamic>)) * ParticleDesignerSerialize.RAD2DEG__particleDesignerSerialize);
+    angleDeg = (HxMath.atan2(-_Runtime.field(config, 'directionY'), _Runtime.field(config, 'directionX')) * ParticleDesignerSerialize.RAD2DEG__particleDesignerSerialize);
     startSize = (((_Runtime.field(config, 'scaleMin') + _Runtime.field(config, 'scaleMax')) * 0.5) * textureSize);
     startVar = (((_Runtime.field(config, 'scaleMax') - _Runtime.field(config, 'scaleMin')) * 0.5) * textureSize);
     finishSize = (startSize * _Runtime.field(config, 'scaleEnd'));
@@ -54,7 +54,7 @@ class ParticleDesignerSerialize {
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(value), 'boolean'))) {
         _Runtime.callProperty(lines, 'push', cast (['	<' + Std.string(_Runtime.select(value, function():Dynamic return cast 'true', function():Dynamic return cast 'false')) + '/>'] : Array<Dynamic>));
       } else { if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(value), 'number'))) {
-        if (_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isInteger', cast ([value] : Array<Dynamic>)))) { _Runtime.callProperty(lines, 'push', cast (['	<integer>' + Std.string(value) + '</integer>'] : Array<Dynamic>)); } else { _Runtime.callProperty(lines, 'push', cast (['	<real>' + Std.string(value) + '</real>'] : Array<Dynamic>)); }
+        if (_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([value] : Array<Dynamic>)))) { _Runtime.callProperty(lines, 'push', cast (['	<integer>' + Std.string(value) + '</integer>'] : Array<Dynamic>)); } else { _Runtime.callProperty(lines, 'push', cast (['	<real>' + Std.string(value) + '</real>'] : Array<Dynamic>)); }
       } else {
         _Runtime.callProperty(lines, 'push', cast (['	<string>' + Std.string(_Runtime.callValue(ParticleDesignerSerialize.escapeXml__particleDesignerSerialize, cast ([value] : Array<Dynamic>))) + '</string>'] : Array<Dynamic>));
       } }

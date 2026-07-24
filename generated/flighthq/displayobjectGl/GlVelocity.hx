@@ -107,8 +107,8 @@ class GlVelocity {
         var py:Dynamic = _Runtime.getIndex(transforms, (tt + 1.0));
         var rotation:Dynamic = _Runtime.getIndex(transforms, (tt + 2.0));
         var scale:Dynamic = _Runtime.getIndex(transforms, (tt + 3.0));
-        var cosScale:Dynamic = (_Runtime.callProperty(HxMath, 'cos', cast ([rotation] : Array<Dynamic>)) * scale);
-        var sinScale:Dynamic = (_Runtime.callProperty(HxMath, 'sin', cast ([rotation] : Array<Dynamic>)) * scale);
+        var cosScale:Dynamic = (HxMath.cos(rotation) * scale);
+        var sinScale:Dynamic = (HxMath.sin(rotation) * scale);
         var minX:Dynamic = HxMath.POSITIVE_INFINITY;
         var minY:Dynamic = HxMath.POSITIVE_INFINITY;
         var maxX:Dynamic = -HxMath.POSITIVE_INFINITY;
@@ -251,9 +251,9 @@ class GlVelocity {
     clipY0 = (1.0 - ((y / _Runtime.field(ctx, 'height')) * 2.0));
     clipWidth = ((width / _Runtime.field(ctx, 'width')) * 2.0);
     clipHeight = -((height / _Runtime.field(ctx, 'height')) * 2.0);
-    _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(program, 'locClipRect'), clipX0, clipY0, clipWidth, clipHeight] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform2f', cast ([_Runtime.field(program, 'locVelocity'), (velocityX * _Runtime.field(ctx, 'pixelRatio')), (velocityY * _Runtime.field(ctx, 'pixelRatio'))] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'drawArrays', cast ([_Runtime.field(gl, 'TRIANGLES'), 0.0, 6.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(program, 'locClipRect'), clipX0, clipY0, clipWidth, clipHeight] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2f', cast ([_Runtime.field(program, 'locVelocity'), (velocityX * _Runtime.field(ctx, 'pixelRatio')), (velocityY * _Runtime.field(ctx, 'pixelRatio'))] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'drawArrays', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TRIANGLES'), 0.0, 6.0] : Array<Dynamic>));
   }
 
   public static function getGlVelocityWriter(state:GlRenderState, kind:Kind):Null<GlVelocityWriter> {
@@ -265,7 +265,7 @@ class GlVelocity {
     var writers:Dynamic = cast _Runtime.UNDEFINED;
     writers = _Runtime.callProperty(GlVelocity._velocityWriters__glVelocity, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(writers, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (writers = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) : Dynamic));
+      (writers = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       _Runtime.callProperty(GlVelocity._velocityWriters__glVelocity, 'set', cast ([state, writers] : Array<Dynamic>));
     }
     _Runtime.callProperty(writers, 'set', cast ([kind, writer] : Array<Dynamic>));
@@ -279,19 +279,19 @@ class GlVelocity {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     program = _Runtime.callValue(GlVelocity.ensureGlVelocityProgram__glVelocity, cast ([state] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindFramebuffer', cast ([_Runtime.field(gl, 'FRAMEBUFFER'), _Runtime.field(target, 'framebuffer')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'viewport', cast ([0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'disable', cast ([_Runtime.field(gl, 'BLEND')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'clearColor', cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'clear', cast ([_Runtime.field(gl, 'COLOR_BUFFER_BIT')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'useProgram', cast ([_Runtime.field(program, 'program')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(program, 'quadBuffer')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'enableVertexAttribArray', cast ([_Runtime.field(program, 'locCorner')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribPointer', cast ([_Runtime.field(program, 'locCorner'), 2.0, _Runtime.field(gl, 'FLOAT'), false, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindFramebuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'FRAMEBUFFER'), _Runtime.field(target, 'framebuffer')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'viewport', cast ([0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'disable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'BLEND')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'clearColor', cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'clear', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'COLOR_BUFFER_BIT')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'useProgram', cast ([_Runtime.field(program, 'program')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(program, 'quadBuffer')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(program, 'locCorner')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(program, 'locCorner'), 2.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, 0.0, 0.0] : Array<Dynamic>));
     ctx = { state: state, field: field, width: _Runtime.field(target, 'width'), height: _Runtime.field(target, 'height'), pixelRatio: _Runtime.field(state, 'pixelRatio') };
     _Runtime.callValue(GlVelocity.visitGlVelocity__glVelocity, cast ([ctx, root] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindFramebuffer', cast ([_Runtime.field(gl, 'FRAMEBUFFER'), _Runtime.field(runtime, 'currentFramebuffer')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'disableVertexAttribArray', cast ([_Runtime.field(program, 'locCorner')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindFramebuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'FRAMEBUFFER'), _Runtime.field(runtime, 'currentFramebuffer')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'disableVertexAttribArray', cast ([_Runtime.field(program, 'locCorner')] : Array<Dynamic>));
   }
 
   public static function ensureGlVelocityProgram__glVelocity(state:GlRenderState):GlVelocityProgram__glVelocity {
@@ -303,10 +303,10 @@ class GlVelocity {
     if (_Runtime.truthy(!_Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast program; }
     gl = _Runtime.field(state, 'gl');
     glProgram = _Runtime.callValue(createGlProgram, cast ([gl, GlVelocity.VELOCITY_VERTEX_SRC__glVelocity, GlVelocity.VELOCITY_FRAGMENT_SRC__glVelocity, 'Velocity'] : Array<Dynamic>));
-    quadBuffer = _Runtime.callProperty(gl, 'createBuffer', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), quadBuffer] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bufferData', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [cast ([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0] : Array<Dynamic>)]), _Runtime.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
-    (program = cast ({ program: glProgram, quadBuffer: quadBuffer, locCorner: _Runtime.callProperty(gl, 'getAttribLocation', cast ([glProgram, 'a_corner'] : Array<Dynamic>)), locClipRect: _Runtime.callProperty(gl, 'getUniformLocation', cast ([glProgram, 'u_clipRect'] : Array<Dynamic>)), locVelocity: _Runtime.callProperty(gl, 'getUniformLocation', cast ([glProgram, 'u_velocity'] : Array<Dynamic>)) } : Dynamic));
+    quadBuffer = flighthq._internal.WebGl2RenderingContext.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), quadBuffer] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.construct(_Runtime.globalValue('Float32Array'), [cast ([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0] : Array<Dynamic>)]), flighthq._internal.WebGl2RenderingContext.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
+    (program = cast ({ program: glProgram, quadBuffer: quadBuffer, locCorner: flighthq._internal.WebGl2RenderingContext.call(gl, 'getAttribLocation', cast ([glProgram, 'a_corner'] : Array<Dynamic>)), locClipRect: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([glProgram, 'u_clipRect'] : Array<Dynamic>)), locVelocity: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([glProgram, 'u_velocity'] : Array<Dynamic>)) } : Dynamic));
     _Runtime.callProperty(GlVelocity._velocityPrograms__glVelocity, 'set', cast ([state, program] : Array<Dynamic>));
     return cast program;
     return cast null;
@@ -334,7 +334,7 @@ class GlVelocity {
 
   public static final _scratchVelocity__glVelocity:Velocity2D = { x: 0.0, y: 0.0 };
 
-  public static final _velocityPrograms__glVelocity:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _velocityPrograms__glVelocity:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static final _velocityWriters__glVelocity:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _velocityWriters__glVelocity:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

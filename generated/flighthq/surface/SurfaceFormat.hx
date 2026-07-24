@@ -52,9 +52,9 @@ class SurfaceFormat {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, length, '<'))) {
         var a:Dynamic = (_Runtime.getIndex(source, (i + 3.0)) / 255.0);
-        _Runtime.setIndex(out, i, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(source, i) * a)] : Array<Dynamic>)));
-        _Runtime.setIndex(out, (i + 1.0), _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(source, (i + 1.0)) * a)] : Array<Dynamic>)));
-        _Runtime.setIndex(out, (i + 2.0), _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(source, (i + 2.0)) * a)] : Array<Dynamic>)));
+        _Runtime.setIndex(out, i, HxMath.round((_Runtime.getIndex(source, i) * a)));
+        _Runtime.setIndex(out, (i + 1.0), HxMath.round((_Runtime.getIndex(source, (i + 1.0)) * a)));
+        _Runtime.setIndex(out, (i + 2.0), HxMath.round((_Runtime.getIndex(source, (i + 2.0)) * a)));
         _Runtime.setIndex(out, (i + 3.0), _Runtime.getIndex(source, (i + 3.0)));
         (i = cast ((i + 4.0) : Dynamic));
       }
@@ -73,9 +73,9 @@ class SurfaceFormat {
           _Runtime.setIndex(out, (i + 3.0), 0.0);
         } else {
           var inv:Dynamic = (255.0 / a);
-          _Runtime.setIndex(out, i, _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(source, i) * inv)] : Array<Dynamic>))] : Array<Dynamic>)));
-          _Runtime.setIndex(out, (i + 1.0), _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(source, (i + 1.0)) * inv)] : Array<Dynamic>))] : Array<Dynamic>)));
-          _Runtime.setIndex(out, (i + 2.0), _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(source, (i + 2.0)) * inv)] : Array<Dynamic>))] : Array<Dynamic>)));
+          _Runtime.setIndex(out, i, HxMath.min(255.0, HxMath.round((_Runtime.getIndex(source, i) * inv))));
+          _Runtime.setIndex(out, (i + 1.0), HxMath.min(255.0, HxMath.round((_Runtime.getIndex(source, (i + 1.0)) * inv))));
+          _Runtime.setIndex(out, (i + 2.0), HxMath.min(255.0, HxMath.round((_Runtime.getIndex(source, (i + 2.0)) * inv))));
           _Runtime.setIndex(out, (i + 3.0), a);
         }
         (i = cast ((i + 4.0) : Dynamic));

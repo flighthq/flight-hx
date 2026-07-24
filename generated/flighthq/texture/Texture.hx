@@ -183,8 +183,8 @@ class Texture {
     sy = (_Runtime.field(_Runtime.field(texture, 'uvScale'), 'y') * flipScaleY);
     preOffsetX = _Runtime.select(_Runtime.field(texture, 'flipX'), function():Dynamic return cast _Runtime.field(_Runtime.field(texture, 'uvScale'), 'x'), function():Dynamic return cast 0.0);
     preOffsetY = _Runtime.select(_Runtime.field(texture, 'flipY'), function():Dynamic return cast _Runtime.field(_Runtime.field(texture, 'uvScale'), 'y'), function():Dynamic return cast 0.0);
-    cosR = _Runtime.callProperty(HxMath, 'cos', cast ([r] : Array<Dynamic>));
-    sinR = _Runtime.callProperty(HxMath, 'sin', cast ([r] : Array<Dynamic>));
+    cosR = HxMath.cos(r);
+    sinR = HxMath.sin(r);
     tx = ((_Runtime.field(_Runtime.field(texture, 'uvOffset'), 'x') + (cosR * preOffsetX)) - (sinR * preOffsetY));
     ty = ((_Runtime.field(_Runtime.field(texture, 'uvOffset'), 'y') + (sinR * preOffsetX)) + (cosR * preOffsetY));
     m = _Runtime.field(out, 'm');
@@ -304,8 +304,8 @@ class Texture {
     sy = _Runtime.field(_Runtime.field(texture, 'uvScale'), 'y');
     tx = _Runtime.field(_Runtime.field(texture, 'uvOffset'), 'x');
     ty = _Runtime.field(_Runtime.field(texture, 'uvOffset'), 'y');
-    cosR = _Runtime.callProperty(HxMath, 'cos', cast ([r] : Array<Dynamic>));
-    sinR = _Runtime.callProperty(HxMath, 'sin', cast ([r] : Array<Dynamic>));
+    cosR = HxMath.cos(r);
+    sinR = HxMath.sin(r);
     _Runtime.setField(out, 'x', ((((sx * cosR) * fu) - ((sy * sinR) * fv)) + tx));
     _Runtime.setField(out, 'y', ((((sx * sinR) * fu) + ((sy * cosR) * fv)) + ty));
   }

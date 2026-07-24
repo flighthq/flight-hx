@@ -103,11 +103,11 @@ class WgpuEffectTintShader {
     return cast null;
   }
 
-  public static final tintPipelines__wgpuEffectTintShader:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final tintPipelines__wgpuEffectTintShader:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static final invertTintPipelines__wgpuEffectTintShader:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final invertTintPipelines__wgpuEffectTintShader:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static final INNER_CLIP_WGSL__wgpuEffectTintShader:Dynamic = '\nstruct Uniforms { _u : f32, _pad0 : f32, _pad1 : f32, _pad2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var texGlow : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n@group(2) @binding(0) var texSrc : texture_2d<f32>;\n@group(2) @binding(1) var smp2 : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let glow = textureSampleLevel(texGlow, smp, uv, 0.0);\n  let srcAlpha = textureSampleLevel(texSrc, smp2, uv, 0.0).a;\n  return glow * srcAlpha;\n}';
 
-  public static final innerClipPipelines__wgpuEffectTintShader:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final innerClipPipelines__wgpuEffectTintShader:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

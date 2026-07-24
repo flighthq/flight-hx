@@ -73,7 +73,7 @@ class UpdateBitmapText {
     lineAdvance = (((_Runtime.field(metrics, 'ascent') + _Runtime.field(metrics, 'descent')) + _Runtime.field(metrics, 'lineGap')) * _Runtime.field(data, 'lineHeight'));
     lines = _Runtime.callValue(UpdateBitmapText.layoutBitmapTextLines__updateBitmapText, cast ([glyphSource, data] : Array<Dynamic>));
     refWidth = _Runtime.coalesce(_Runtime.field(data, 'wrapWidth'), function():Dynamic return cast _Runtime.callValue(UpdateBitmapText.maxLineWidth__updateBitmapText, cast ([lines] : Array<Dynamic>)));
-    pages = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    pages = _Runtime.construct(_Runtime.globalValue('Map'), []);
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
     maxX = -HxMath.POSITIVE_INFINITY;
@@ -204,7 +204,7 @@ class UpdateBitmapText {
     quadBatch = _Runtime.getIndex(_Runtime.field(runtime, 'quadBatches'), page);
     atlas = _Runtime.field(_Runtime.field(quadBatch, 'data'), 'atlas');
     _Runtime.setField(atlas, 'image', image);
-    pageBatch = { atlas: atlas, quadBatch: quadBatch, regionByCodepoint: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };
+    pageBatch = { atlas: atlas, quadBatch: quadBatch, regionByCodepoint: _Runtime.construct(_Runtime.globalValue('Map'), []) };
     _Runtime.callProperty(pages, 'set', cast ([page, pageBatch] : Array<Dynamic>));
     return cast pageBatch;
     return cast null;

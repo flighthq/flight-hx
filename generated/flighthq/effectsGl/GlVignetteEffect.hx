@@ -31,10 +31,10 @@ class GlVignetteEffect {
     a = ((Std.int(color) & Std.int(255.0)) / 255.0);
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'lens.vignette', GlVignetteEffect.VIGNETTE_FRAGMENT_SRC__glVignetteEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_intensity'] : Array<Dynamic>)), intensity] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_radius'] : Array<Dynamic>)), radius] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_softness'] : Array<Dynamic>)), softness] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_color'] : Array<Dynamic>)), r, g, b, a] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_intensity'] : Array<Dynamic>)), intensity] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_radius'] : Array<Dynamic>)), radius] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_softness'] : Array<Dynamic>)), softness] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_color'] : Array<Dynamic>)), r, g, b, a] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

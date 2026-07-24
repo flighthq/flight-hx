@@ -69,10 +69,10 @@ class WgpuShapeMesh {
 
   public static function ensureShapeMeshIndexBuffer__wgpuShapeMesh(state:WgpuRenderState, buffers:WgpuShapeMeshBuffers, byteLength:Float):Dynamic {
     var size:Dynamic = cast _Runtime.UNDEFINED;
-    size = _Runtime.callProperty(HxMath, 'max', cast ([4.0, (Std.int((byteLength + 3.0)) & Std.int(~Std.int(3.0)))] : Array<Dynamic>));
+    size = HxMath.max(4.0, (Std.int((byteLength + 3.0)) & Std.int(~Std.int(3.0))));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(buffers, 'indexBuffer'), null), function():Dynamic return cast _Runtime.compare(_Runtime.field(buffers, 'indexCapacity'), size, '<')))) {
       _Runtime.callOptionalProperty(_Runtime.field(buffers, 'indexBuffer'), 'destroy', cast ([] : Array<Dynamic>));
-      _Runtime.setField(buffers, 'indexBuffer', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: size, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'INDEX')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>)));
+      _Runtime.setField(buffers, 'indexBuffer', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: size, usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'INDEX')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST'))) }] : Array<Dynamic>)));
       _Runtime.setField(buffers, 'indexCapacity', size);
     }
     return cast _Runtime.field(buffers, 'indexBuffer');
@@ -81,7 +81,7 @@ class WgpuShapeMesh {
 
   public static function ensureShapeMeshUniform__wgpuShapeMesh(state:WgpuRenderState, pipelineEntry:WgpuShapeMeshPipeline, buffers:WgpuShapeMeshBuffers):flighthq._internal._Float32Array {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(buffers, 'uniformBuffer'), null))) {
-      _Runtime.setField(buffers, 'uniformBuffer', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: WgpuShapeMesh.SHAPE_MESH_UNIFORM_BYTES__wgpuShapeMesh, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>)));
+      _Runtime.setField(buffers, 'uniformBuffer', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: WgpuShapeMesh.SHAPE_MESH_UNIFORM_BYTES__wgpuShapeMesh, usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST'))) }] : Array<Dynamic>)));
       _Runtime.setField(buffers, 'bindGroup', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: _Runtime.field(pipelineEntry, 'bindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: _Runtime.field(buffers, 'uniformBuffer') } }] : Array<Dynamic>) }] : Array<Dynamic>)));
     }
     return cast WgpuShapeMesh._shapeMeshUniformScratch__wgpuShapeMesh;
@@ -102,12 +102,12 @@ class WgpuShapeMesh {
     var entry:WgpuShapeMeshPipeline = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     format = _Runtime.coalesce(_Runtime.field(runtime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
-    cache = _Runtime.coalesce(_Runtime.field(runtime, 'shapeMeshPipelines'), function():Dynamic return cast _Runtime.setField(runtime, 'shapeMeshPipelines', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), [])));
+    cache = _Runtime.coalesce(_Runtime.field(runtime, 'shapeMeshPipelines'), function():Dynamic return cast _Runtime.setField(runtime, 'shapeMeshPipelines', _Runtime.construct(_Runtime.globalValue('Map'), [])));
     existing = _Runtime.callProperty(cache, 'get', cast ([format] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
     device = _Runtime.field(state, 'device');
     module = _Runtime.callProperty(device, 'createShaderModule', cast ([{ code: WgpuShapeMesh.SHAPE_MESH_WGSL__wgpuShapeMesh }] : Array<Dynamic>));
-    bindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'VERTEX')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'))), buffer: { type: 'uniform' } }] : Array<Dynamic>) }] : Array<Dynamic>));
+    bindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: (Std.int(_Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'VERTEX')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'FRAGMENT'))), buffer: { type: 'uniform' } }] : Array<Dynamic>) }] : Array<Dynamic>));
     layout = _Runtime.callProperty(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([bindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
     vertexBuffers = cast ([{ arrayStride: 8.0, attributes: cast ([{ shaderLocation: 0.0, offset: 0.0, format: 'float32x2' }] : Array<Dynamic>) }] : Array<Dynamic>);
     pipeline = _Runtime.callProperty(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: module, entryPoint: 'vs_main', buffers: vertexBuffers }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: { color: { srcFactor: 'one', dstFactor: 'one-minus-src-alpha', operation: 'add' }, alpha: { srcFactor: 'one', dstFactor: 'one-minus-src-alpha', operation: 'add' } } }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list', cullMode: 'none' }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: { compare: 'equal', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' }, stencilBack: { compare: 'equal', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' }, stencilReadMask: 255.0, stencilWriteMask: 0.0 } }] : Array<Dynamic>));
@@ -119,10 +119,10 @@ class WgpuShapeMesh {
 
   public static function ensureShapeMeshVertexBuffer__wgpuShapeMesh(state:WgpuRenderState, buffers:WgpuShapeMeshBuffers, byteLength:Float):Dynamic {
     var size:Dynamic = cast _Runtime.UNDEFINED;
-    size = _Runtime.callProperty(HxMath, 'max', cast ([8.0, byteLength] : Array<Dynamic>));
+    size = HxMath.max(8.0, byteLength);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(buffers, 'vertexBuffer'), null), function():Dynamic return cast _Runtime.compare(_Runtime.field(buffers, 'vertexCapacity'), size, '<')))) {
       _Runtime.callOptionalProperty(_Runtime.field(buffers, 'vertexBuffer'), 'destroy', cast ([] : Array<Dynamic>));
-      _Runtime.setField(buffers, 'vertexBuffer', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: size, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'VERTEX')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>)));
+      _Runtime.setField(buffers, 'vertexBuffer', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: size, usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'VERTEX')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST'))) }] : Array<Dynamic>)));
       _Runtime.setField(buffers, 'vertexCapacity', size);
     }
     return cast _Runtime.field(buffers, 'vertexBuffer');
@@ -174,7 +174,7 @@ class WgpuShapeMesh {
     _Runtime.callProperty(queue, 'writeBuffer', cast ([indexBuffer, 0.0, _Runtime.field(WgpuShapeMesh._shapeMeshIndexScratch__wgpuShapeMesh, 'buffer'), 0.0, paddedBytes] : Array<Dynamic>));
   }
 
-  public static final _shapeMeshUniformScratch__wgpuShapeMesh:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [WgpuShapeMesh.SHAPE_MESH_UNIFORM_FLOATS__wgpuShapeMesh]);
+  public static final _shapeMeshUniformScratch__wgpuShapeMesh:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [WgpuShapeMesh.SHAPE_MESH_UNIFORM_FLOATS__wgpuShapeMesh]);
 
   public static var _shapeMeshIndexScratch__wgpuShapeMesh:Dynamic = new flighthq._internal._UInt16Array(0.0);
 }

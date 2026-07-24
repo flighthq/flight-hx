@@ -37,7 +37,7 @@ class Projection {
     var halfWidth:Dynamic = cast _Runtime.UNDEFINED;
     var halfHeight:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective'))) {
-      var tanHalfFovY:Dynamic = _Runtime.callProperty(HxMath, 'tan', cast ([(_Runtime.field(projection, 'fovY') * 0.5)] : Array<Dynamic>));
+      var tanHalfFovY:Dynamic = HxMath.tan((_Runtime.field(projection, 'fovY') * 0.5));
       _Runtime.callValue(setPerspectiveMatrix4, cast ([out, tanHalfFovY, aspect, near, far] : Array<Dynamic>));
       return;
     }

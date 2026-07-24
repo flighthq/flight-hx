@@ -51,7 +51,13 @@ export type IrExpression =
   | { kind: 'literal'; value: boolean | null | number | string }
   | { kind: 'new'; arguments: IrExpression[]; callee: IrExpression }
   | { kind: 'object'; properties: IrObjectMember[] }
-  | { kind: 'property'; name: string; object: IrExpression; optional?: boolean | undefined }
+  | {
+      binding?: 'CanvasRenderingContext2D' | 'DynamicObject' | 'WebGl2RenderingContext' | undefined;
+      kind: 'property';
+      name: string;
+      object: IrExpression;
+      optional?: boolean | undefined;
+    }
   | { flags: string; kind: 'regexp'; pattern: string }
   | { kind: 'template'; parts: Array<IrExpression | string> }
   | { kind: 'spread'; expression: IrExpression }

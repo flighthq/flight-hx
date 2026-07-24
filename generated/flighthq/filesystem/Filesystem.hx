@@ -63,7 +63,7 @@ class Filesystem {
       if (_Runtime.truthy(_Runtime.strictEquals(handle, null))) { return cast null; }
       try {
         var file:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(handle, 'getFile', cast ([] : Array<Dynamic>)));
-        return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [flighthq._internal._Async.awaitValue(_Runtime.callProperty(file, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
+        return cast _Runtime.construct(_Runtime.globalValue('Uint8Array'), [flighthq._internal._Async.awaitValue(_Runtime.callProperty(file, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
       } catch (__error:Dynamic) {
         return cast null;
       }
@@ -74,9 +74,9 @@ class Filesystem {
       if (_Runtime.truthy(_Runtime.strictEquals(handle, null))) { return cast null; }
       try {
         var file:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(handle, 'getFile', cast ([] : Array<Dynamic>)));
-        if (_Runtime.truthy(_Runtime.compare(offset, _Runtime.field(file, 'size'), '>='))) { return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [0.0]); }
+        if (_Runtime.truthy(_Runtime.compare(offset, _Runtime.field(file, 'size'), '>='))) { return cast _Runtime.construct(_Runtime.globalValue('Uint8Array'), [0.0]); }
         var slice:Dynamic = _Runtime.slice(file, offset, (offset + length));
-        return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [flighthq._internal._Async.awaitValue(_Runtime.callProperty(slice, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
+        return cast _Runtime.construct(_Runtime.globalValue('Uint8Array'), [flighthq._internal._Async.awaitValue(_Runtime.callProperty(slice, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
       } catch (__error:Dynamic) {
         return cast null;
       }
@@ -199,7 +199,7 @@ class Filesystem {
       if (_Runtime.truthy(_Runtime.strictEquals(handle, null))) { return cast false; }
       try {
         var file:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(handle, 'getFile', cast ([] : Array<Dynamic>)));
-        var bytes:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [flighthq._internal._Async.awaitValue(_Runtime.callProperty(file, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
+        var bytes:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [flighthq._internal._Async.awaitValue(_Runtime.callProperty(file, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
         return cast _Runtime.callValue(Filesystem.writeWebFile__filesystem, cast ([to, bytes] : Array<Dynamic>));
       } catch (__error:Dynamic) {
         return cast false;
@@ -251,7 +251,7 @@ class Filesystem {
       if (_Runtime.truthy(!_Runtime.strictEquals(tmpHandle, null))) {
         try {
           var file:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(tmpHandle, 'getFile', cast ([] : Array<Dynamic>)));
-          var bytes:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [flighthq._internal._Async.awaitValue(_Runtime.callProperty(file, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
+          var bytes:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [flighthq._internal._Async.awaitValue(_Runtime.callProperty(file, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
           var ok:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.writeWebFile__filesystem, cast ([path, bytes] : Array<Dynamic>)));
           flighthq._internal._Async.awaitValue(_Runtime.callValue(Filesystem.writeWebRemove__filesystem, cast ([tmpPath, false] : Array<Dynamic>)));
           return cast ok;
@@ -299,8 +299,8 @@ class Filesystem {
       return cast null;
     }), getFileSystemUsage: flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
       var storage:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
-      storage = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'storage');
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
+      storage = _Runtime.field(_Runtime.globalValue('navigator'), 'storage');
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(storage, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(storage, 'estimate')), 'function')))) { return cast null; }
       try {
         var estimate:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(storage, 'estimate', cast ([] : Array<Dynamic>)));
@@ -430,8 +430,8 @@ class Filesystem {
   public static function getWebRoot__filesystem():flighthq._internal._Promise<Null<Dynamic>> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<Dynamic>> {
       var storage:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
-      storage = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'storage');
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
+      storage = _Runtime.field(_Runtime.globalValue('navigator'), 'storage');
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(storage, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(storage, 'getDirectory')), 'function')))) { return cast null; }
       try {
         return cast flighthq._internal._Async.awaitValue(_Runtime.callProperty(storage, 'getDirectory', cast ([] : Array<Dynamic>)));
@@ -468,7 +468,7 @@ class Filesystem {
       }
     }
     (re = cast ((re + '$$') : Dynamic));
-    return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['RegExp'] : Array<Dynamic>)), [re]);
+    return cast _Runtime.construct(_Runtime.globalValue('RegExp'), [re]);
     return cast null;
   }
 
@@ -542,7 +542,7 @@ class Filesystem {
       if (_Runtime.truthy(!_Runtime.strictEquals(fsHandle, null))) {
         try {
           var file:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(fsHandle, 'getFile', cast ([] : Array<Dynamic>)));
-          return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [flighthq._internal._Async.awaitValue(_Runtime.callProperty(file, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
+          return cast _Runtime.construct(_Runtime.globalValue('Uint8Array'), [flighthq._internal._Async.awaitValue(_Runtime.callProperty(file, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
         } catch (__error:Dynamic) {
           return cast null;
         }

@@ -50,7 +50,7 @@ class EmitParticleBurst2D {
     var tintA:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(emitter, 'data');
     liveCount = _Runtime.field(data, 'particleCount');
-    toSpawn = _Runtime.callProperty(HxMath, 'floor', cast ([count] : Array<Dynamic>));
+    toSpawn = HxMath.floor(count);
     maxNew = (_Runtime.field(config, 'maxParticles') - liveCount);
     if (_Runtime.truthy(_Runtime.compare(toSpawn, maxNew, '>'))) { (toSpawn = cast (maxNew : Dynamic)); }
     if (_Runtime.truthy(_Runtime.compare(toSpawn, 0.0, '<='))) { return cast 0.0; }
@@ -71,7 +71,7 @@ class EmitParticleBurst2D {
     hasAlphaCurve = _Runtime.andValue(!_Runtime.looseEquals(alphaCurve, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(alphaCurve, 'length'), 0.0, '>'));
     hasColorCurve = _Runtime.andValue(!_Runtime.looseEquals(colorCurve, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(colorCurve, 'length'), 3.0, '>='));
     hasScaleCurve = _Runtime.andValue(!_Runtime.looseEquals(scaleCurve, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(scaleCurve, 'length'), 0.0, '>'));
-    baseAngle = _Runtime.callProperty(HxMath, 'atan2', cast ([_Runtime.field(config, 'directionY'), _Runtime.field(config, 'directionX')] : Array<Dynamic>));
+    baseAngle = HxMath.atan2(_Runtime.field(config, 'directionY'), _Runtime.field(config, 'directionX'));
     regionRange = (_Runtime.field(config, 'regionIdMax') - _Runtime.field(config, 'regionIdMin'));
     regionIdMin = _Runtime.field(config, 'regionIdMin');
     rotSpeedRange = (_Runtime.field(config, 'rotationSpeedMax') - _Runtime.field(config, 'rotationSpeedMin'));
@@ -93,16 +93,16 @@ class EmitParticleBurst2D {
         var angle:Dynamic = (baseAngle + (((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * 2.0) * _Runtime.field(config, 'spread')));
         var speed:Dynamic = (_Runtime.field(config, 'speedMin') + (_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * (_Runtime.field(config, 'speedMax') - _Runtime.field(config, 'speedMin'))));
         var vt:Dynamic = (idx * PARTICLE_VELOCITY_STRIDE);
-        _Runtime.setIndex(_Runtime.field(state, 'velocities'), vt, (_Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>)) * speed));
-        _Runtime.setIndex(_Runtime.field(state, 'velocities'), (vt + 1.0), (_Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>)) * speed));
+        _Runtime.setIndex(_Runtime.field(state, 'velocities'), vt, (HxMath.cos(angle) * speed));
+        _Runtime.setIndex(_Runtime.field(state, 'velocities'), (vt + 1.0), (HxMath.sin(angle) * speed));
         _Runtime.setIndex(_Runtime.field(state, 'velocities'), (vt + 2.0), 0.0);
         var spawnX:Dynamic = x;
         var spawnY:Dynamic = y;
         if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(config, 'emitterShape'), 'circle'), function():Dynamic return cast _Runtime.compare(_Runtime.field(config, 'emitterRadius'), 0.0, '>')))) {
-          var r:Dynamic = (_Runtime.callProperty(HxMath, 'sqrt', cast ([_Runtime.callValue(random, cast ([] : Array<Dynamic>))] : Array<Dynamic>)) * _Runtime.field(config, 'emitterRadius'));
+          var r:Dynamic = (HxMath.sqrt(_Runtime.callValue(random, cast ([] : Array<Dynamic>))) * _Runtime.field(config, 'emitterRadius'));
           var a:Dynamic = (_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * EmitParticleBurst2D.TWO_PI__emitParticleBurst2D);
-          (spawnX = cast ((spawnX + (_Runtime.callProperty(HxMath, 'cos', cast ([a] : Array<Dynamic>)) * r)) : Dynamic));
-          (spawnY = cast ((spawnY + (_Runtime.callProperty(HxMath, 'sin', cast ([a] : Array<Dynamic>)) * r)) : Dynamic));
+          (spawnX = cast ((spawnX + (HxMath.cos(a) * r)) : Dynamic));
+          (spawnY = cast ((spawnY + (HxMath.sin(a) * r)) : Dynamic));
         } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(config, 'emitterShape'), 'rect'), function():Dynamic return cast _Runtime.orValue(_Runtime.compare(_Runtime.field(config, 'emitterWidth'), 0.0, '>'), function():Dynamic return cast _Runtime.compare(_Runtime.field(config, 'emitterHeight'), 0.0, '>'))))) {
           (spawnX = cast ((spawnX + ((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * _Runtime.field(config, 'emitterWidth'))) : Dynamic));
           (spawnY = cast ((spawnY + ((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) - 0.5) * _Runtime.field(config, 'emitterHeight'))) : Dynamic));

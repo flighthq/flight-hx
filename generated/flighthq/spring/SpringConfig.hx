@@ -13,7 +13,7 @@ class SpringConfig {
   }
 
   public static function createSpringConfigFromPhysical(stiffness:Float, damping:Float, mass:Float):flighthq.types.Spring.SpringConfig {
-    return cast { dampingRatio: (damping / (2.0 * _Runtime.callProperty(HxMath, 'sqrt', cast ([(stiffness * mass)] : Array<Dynamic>)))), frequency: (_Runtime.callProperty(HxMath, 'sqrt', cast ([(stiffness / mass)] : Array<Dynamic>)) / TAU) };
+    return cast { dampingRatio: (damping / (2.0 * HxMath.sqrt((stiffness * mass)))), frequency: (HxMath.sqrt((stiffness / mass)) / TAU) };
     return cast null;
   }
 }

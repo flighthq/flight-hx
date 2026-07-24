@@ -44,14 +44,14 @@ class SurfaceResize {
         while (_Runtime.truthy(_Runtime.compare(dy, dh, '<'))) {
           var oy:Dynamic = (_Runtime.field(dest, 'y') + dy);
           if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oy, 0.0, '<'), function():Dynamic return cast _Runtime.compare(oy, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { dy++; continue; }
-          var sy:Dynamic = (_Runtime.field(source, 'y') + _Runtime.callProperty(HxMath, 'min', cast ([(sh - 1.0), _Runtime.callProperty(HxMath, 'floor', cast ([((dy * sh) / dh)] : Array<Dynamic>))] : Array<Dynamic>)));
+          var sy:Dynamic = (_Runtime.field(source, 'y') + HxMath.min((sh - 1.0), HxMath.floor(((dy * sh) / dh))));
           if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sy, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sy, _Runtime.field(_Runtime.field(source, 'surface'), 'height'), '>=')))) { dy++; continue; }
           {
             var dx:Dynamic = 0.0;
             while (_Runtime.truthy(_Runtime.compare(dx, dw, '<'))) {
               var ox:Dynamic = (_Runtime.field(dest, 'x') + dx);
               if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(ox, 0.0, '<'), function():Dynamic return cast _Runtime.compare(ox, dStride, '>=')))) { dx++; continue; }
-              var sx:Dynamic = (_Runtime.field(source, 'x') + _Runtime.callProperty(HxMath, 'min', cast ([(sw - 1.0), _Runtime.callProperty(HxMath, 'floor', cast ([((dx * sw) / dw)] : Array<Dynamic>))] : Array<Dynamic>)));
+              var sx:Dynamic = (_Runtime.field(source, 'x') + HxMath.min((sw - 1.0), HxMath.floor(((dx * sw) / dw))));
               if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(sx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sx, sStride, '>=')))) { dx++; continue; }
               var si:Dynamic = (((sy * sStride) + sx) * 4.0);
               var di:Dynamic = (((oy * dStride) + ox) * 4.0);
@@ -76,7 +76,7 @@ class SurfaceResize {
           var oy:Dynamic = (_Runtime.field(dest, 'y') + dy);
           if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oy, 0.0, '<'), function():Dynamic return cast _Runtime.compare(oy, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { dy++; continue; }
           var fy:Dynamic = (((dy + 0.5) * scaleY) - 0.5);
-          var y1:Dynamic = _Runtime.callProperty(HxMath, 'floor', cast ([fy] : Array<Dynamic>));
+          var y1:Dynamic = HxMath.floor(fy);
           var ty:Dynamic = (fy - y1);
           {
             var dx:Dynamic = 0.0;
@@ -84,7 +84,7 @@ class SurfaceResize {
               var ox:Dynamic = (_Runtime.field(dest, 'x') + dx);
               if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(ox, 0.0, '<'), function():Dynamic return cast _Runtime.compare(ox, dStride, '>=')))) { dx++; continue; }
               var fx:Dynamic = (((dx + 0.5) * scaleX) - 0.5);
-              var x1:Dynamic = _Runtime.callProperty(HxMath, 'floor', cast ([fx] : Array<Dynamic>));
+              var x1:Dynamic = HxMath.floor(fx);
               var tx:Dynamic = (fx - x1);
               var di:Dynamic = (((oy * dStride) + ox) * 4.0);
               {
@@ -113,16 +113,16 @@ class SurfaceResize {
                       m++;
                     }
                   }
-                  _Runtime.setIndex(dd, (di + c), _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([sum] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
+                  _Runtime.setIndex(dd, (di + c), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(sum))));
                   c++;
                 }
               }
               if (_Runtime.truthy(premultiplied)) {
                 var a:Dynamic = _Runtime.getIndex(dd, (di + 3.0));
                 if (_Runtime.truthy(_Runtime.compare(a, 0.0, '>'))) {
-                  _Runtime.setIndex(dd, di, _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([((_Runtime.getIndex(dd, di) * 255.0) / a)] : Array<Dynamic>))] : Array<Dynamic>)));
-                  _Runtime.setIndex(dd, (di + 1.0), _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([((_Runtime.getIndex(dd, (di + 1.0)) * 255.0) / a)] : Array<Dynamic>))] : Array<Dynamic>)));
-                  _Runtime.setIndex(dd, (di + 2.0), _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([((_Runtime.getIndex(dd, (di + 2.0)) * 255.0) / a)] : Array<Dynamic>))] : Array<Dynamic>)));
+                  _Runtime.setIndex(dd, di, HxMath.min(255.0, HxMath.round(((_Runtime.getIndex(dd, di) * 255.0) / a))));
+                  _Runtime.setIndex(dd, (di + 1.0), HxMath.min(255.0, HxMath.round(((_Runtime.getIndex(dd, (di + 1.0)) * 255.0) / a))));
+                  _Runtime.setIndex(dd, (di + 2.0), HxMath.min(255.0, HxMath.round(((_Runtime.getIndex(dd, (di + 2.0)) * 255.0) / a))));
                 } else {
                   _Runtime.setIndex(dd, di, 0.0);
                   _Runtime.setIndex(dd, (di + 1.0), 0.0);
@@ -143,7 +143,7 @@ class SurfaceResize {
         var oy:Dynamic = (_Runtime.field(dest, 'y') + dy);
         if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oy, 0.0, '<'), function():Dynamic return cast _Runtime.compare(oy, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')))) { dy++; continue; }
         var fy:Dynamic = (((dy + 0.5) * scaleY) - 0.5);
-        var y0:Dynamic = _Runtime.callProperty(HxMath, 'floor', cast ([fy] : Array<Dynamic>));
+        var y0:Dynamic = HxMath.floor(fy);
         var ty:Dynamic = (fy - y0);
         var ry0:Dynamic = _Runtime.callValue(SurfaceResize.resolveResizeEdge__surfaceResize, cast ([y0, sh, edgeMode] : Array<Dynamic>));
         var ry1:Dynamic = _Runtime.callValue(SurfaceResize.resolveResizeEdge__surfaceResize, cast ([(y0 + 1.0), sh, edgeMode] : Array<Dynamic>));
@@ -153,7 +153,7 @@ class SurfaceResize {
             var ox:Dynamic = (_Runtime.field(dest, 'x') + dx);
             if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(ox, 0.0, '<'), function():Dynamic return cast _Runtime.compare(ox, dStride, '>=')))) { dx++; continue; }
             var fx:Dynamic = (((dx + 0.5) * scaleX) - 0.5);
-            var x0:Dynamic = _Runtime.callProperty(HxMath, 'floor', cast ([fx] : Array<Dynamic>));
+            var x0:Dynamic = HxMath.floor(fx);
             var tx:Dynamic = (fx - x0);
             var rx0:Dynamic = _Runtime.callValue(SurfaceResize.resolveResizeEdge__surfaceResize, cast ([x0, sw, edgeMode] : Array<Dynamic>));
             var rx1:Dynamic = _Runtime.callValue(SurfaceResize.resolveResizeEdge__surfaceResize, cast ([(x0 + 1.0), sw, edgeMode] : Array<Dynamic>));
@@ -177,16 +177,16 @@ class SurfaceResize {
                 }
                 var top:Dynamic = ((v00 * (1.0 - tx)) + (v10 * tx));
                 var bottom:Dynamic = ((v01 * (1.0 - tx)) + (v11 * tx));
-                _Runtime.setIndex(dd, (di + c), _Runtime.callProperty(HxMath, 'round', cast ([((top * (1.0 - ty)) + (bottom * ty))] : Array<Dynamic>)));
+                _Runtime.setIndex(dd, (di + c), HxMath.round(((top * (1.0 - ty)) + (bottom * ty))));
                 c++;
               }
             }
             if (_Runtime.truthy(premultiplied)) {
               var a:Dynamic = _Runtime.getIndex(dd, (di + 3.0));
               if (_Runtime.truthy(_Runtime.compare(a, 0.0, '>'))) {
-                _Runtime.setIndex(dd, di, _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([((_Runtime.getIndex(dd, di) * 255.0) / a)] : Array<Dynamic>))] : Array<Dynamic>)));
-                _Runtime.setIndex(dd, (di + 1.0), _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([((_Runtime.getIndex(dd, (di + 1.0)) * 255.0) / a)] : Array<Dynamic>))] : Array<Dynamic>)));
-                _Runtime.setIndex(dd, (di + 2.0), _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([((_Runtime.getIndex(dd, (di + 2.0)) * 255.0) / a)] : Array<Dynamic>))] : Array<Dynamic>)));
+                _Runtime.setIndex(dd, di, HxMath.min(255.0, HxMath.round(((_Runtime.getIndex(dd, di) * 255.0) / a))));
+                _Runtime.setIndex(dd, (di + 1.0), HxMath.min(255.0, HxMath.round(((_Runtime.getIndex(dd, (di + 1.0)) * 255.0) / a))));
+                _Runtime.setIndex(dd, (di + 2.0), HxMath.min(255.0, HxMath.round(((_Runtime.getIndex(dd, (di + 2.0)) * 255.0) / a))));
               } else {
                 _Runtime.setIndex(dd, di, 0.0);
                 _Runtime.setIndex(dd, (di + 1.0), 0.0);
@@ -204,7 +204,7 @@ class SurfaceResize {
 
   public static function catmullRomWeight__surfaceResize(t:Float):Float {
     var a:Dynamic = cast _Runtime.UNDEFINED;
-    a = _Runtime.callProperty(HxMath, 'abs', cast ([t] : Array<Dynamic>));
+    a = HxMath.abs(t);
     if (_Runtime.truthy(_Runtime.compare(a, 2.0, '>='))) { return cast 0.0; }
     if (_Runtime.truthy(_Runtime.compare(a, 1.0, '>='))) { return cast ((((((-0.5 * a) * a) * a) + ((2.5 * a) * a)) - (4.0 * a)) + 2.0); }
     return cast (((((1.5 * a) * a) * a) - ((2.5 * a) * a)) + 1.0);
@@ -216,7 +216,7 @@ class SurfaceResize {
     {
       var __switchValue = mode;
       if (__switchValue == 'clamp') {
-        return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([(size - 1.0), v] : Array<Dynamic>))] : Array<Dynamic>));
+        return cast HxMath.max(0.0, HxMath.min((size - 1.0), v));
       }
       else if (__switchValue == 'wrap') {
         return cast (((v % size) + size) % size);

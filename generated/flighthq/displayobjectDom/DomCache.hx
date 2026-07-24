@@ -70,7 +70,7 @@ class DomCache {
     var targets:Dynamic = cast _Runtime.UNDEFINED;
     targets = _Runtime.callProperty(DomCache._renderCacheTargets__domCache, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (targets = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []) : Dynamic));
+      (targets = cast (_Runtime.construct(_Runtime.globalValue('WeakMap'), []) : Dynamic));
       _Runtime.callProperty(DomCache._renderCacheTargets__domCache, 'set', cast ([state, targets] : Array<Dynamic>));
     }
     return cast targets;
@@ -79,5 +79,5 @@ class DomCache {
 
   public static final defaultDomRenderCacheRenderer:DisplayObjectRenderer = { createData: noopRendererData, submit: DomCache.drawDomRenderCache__domCache };
 
-  public static final _renderCacheTargets__domCache:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _renderCacheTargets__domCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

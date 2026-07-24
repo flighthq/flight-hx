@@ -34,7 +34,7 @@ class MatcapGlMeshMaterialRenderer {
     program = _Runtime.callValue(ensureGlMatcapProgram, cast ([state, _Runtime.callValue(MatcapGlMeshMaterialRenderer.defineKeyForMaterial__matcapGlMeshMaterialRenderer, cast ([matcap] : Array<Dynamic>))] : Array<Dynamic>));
     _Runtime.callValue(beginGlMeshDraw, cast ([state, program, _Runtime.andValue(!_Runtime.strictEquals(matcap, null), function():Dynamic return cast _Runtime.field(matcap, 'doubleSided'))] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshViewProjection, cast ([gl, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniformMatrix4fv', cast ([_Runtime.field(program, 'locView'), false, _Runtime.field(_Runtime.field(camera, 'view'), 'm')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniformMatrix4fv', cast ([_Runtime.field(program, 'locView'), false, _Runtime.field(_Runtime.field(camera, 'view'), 'm')] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(matcap, null))) {
       _Runtime.callValue(bindGlMatcapSurface, cast ([state, program, MatcapGlMeshMaterialRenderer.WHITE__matcapGlMeshMaterialRenderer, null, 0.5] : Array<Dynamic>));
       return;

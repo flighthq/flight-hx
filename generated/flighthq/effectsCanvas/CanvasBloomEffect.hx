@@ -37,13 +37,13 @@ class CanvasBloomEffect {
     }
     _Runtime.callValue(drawCanvasEffectPass, cast ([dest, source, 'none'] : Array<Dynamic>));
     ctx = _Runtime.field(dest, 'context');
-    _Runtime.callProperty(ctx, 'save', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.setField(ctx, 'globalCompositeOperation', 'lighter');
-    _Runtime.setField(ctx, 'globalAlpha', _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, intensity] : Array<Dynamic>))] : Array<Dynamic>)));
-    _Runtime.setField(ctx, 'filter', 'none');
-    _Runtime.callProperty(ctx, 'drawImage', cast ([_Runtime.field(blurred, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.callProperty(ctx, 'restore', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'save', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'globalCompositeOperation', 'lighter');
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'globalAlpha', HxMath.max(0.0, HxMath.min(1.0, intensity)));
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'filter', 'none');
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'drawImage', cast ([_Runtime.field(blurred, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'restore', cast ([] : Array<Dynamic>));
     _Runtime.callValue(releaseCanvasRenderTarget, cast ([pool, bright] : Array<Dynamic>));
     _Runtime.callValue(releaseCanvasRenderTarget, cast ([pool, blurred] : Array<Dynamic>));
   }

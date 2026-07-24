@@ -26,30 +26,30 @@ class GlCustomShaderEffect {
     uniforms = _Runtime.field(effect, 'uniforms');
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
       if (_Runtime.truthy(_Runtime.strictEquals(uniforms, _Runtime.field(_Runtime, 'UNDEFINED')))) { return; }
-      for (name in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([uniforms] : Array<Dynamic>)))) {
+      for (name in _Runtime.iterable(flighthq._internal.DynamicObject.keys(uniforms))) {
         var location:Dynamic = _Runtime.callValue(getGlEffectUniformLocation, cast ([state, p, name] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.strictEquals(location, null))) { continue; }
         var value:Dynamic = _Runtime.getIndex(uniforms, name);
         if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(value), 'number'))) {
-          _Runtime.callProperty(gl, 'uniform1f', cast ([location, value] : Array<Dynamic>));
+          flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([location, value] : Array<Dynamic>));
           continue;
         }
         {
           var __switchValue = _Runtime.field(value, 'length');
           if (__switchValue == 1.0) {
-            _Runtime.callProperty(gl, 'uniform1f', cast ([location, _Runtime.getIndex(value, 0.0)] : Array<Dynamic>));
+            flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([location, _Runtime.getIndex(value, 0.0)] : Array<Dynamic>));
           }
           else if (__switchValue == 2.0) {
-            _Runtime.callProperty(gl, 'uniform2fv', cast ([location, value] : Array<Dynamic>));
+            flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2fv', cast ([location, value] : Array<Dynamic>));
           }
           else if (__switchValue == 3.0) {
-            _Runtime.callProperty(gl, 'uniform3fv', cast ([location, value] : Array<Dynamic>));
+            flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform3fv', cast ([location, value] : Array<Dynamic>));
           }
           else if (__switchValue == 4.0) {
-            _Runtime.callProperty(gl, 'uniform4fv', cast ([location, value] : Array<Dynamic>));
+            flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4fv', cast ([location, value] : Array<Dynamic>));
           }
           else  {
-            _Runtime.callProperty(gl, 'uniform1fv', cast ([location, value] : Array<Dynamic>));
+            flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1fv', cast ([location, value] : Array<Dynamic>));
           }
         }
       }
@@ -69,7 +69,7 @@ class GlCustomShaderEffect {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = _Runtime.callProperty(GlCustomShaderEffect._customShaders__glCustomShaderEffect, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (registry = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) : Dynamic));
+      (registry = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       _Runtime.callProperty(GlCustomShaderEffect._customShaders__glCustomShaderEffect, 'set', cast ([state, registry] : Array<Dynamic>));
     }
     _Runtime.callProperty(registry, 'set', cast ([shaderKey, fragmentSource] : Array<Dynamic>));
@@ -81,5 +81,5 @@ class GlCustomShaderEffect {
 
   public static final PASSTHROUGH_FRAGMENT_SRC__glCustomShaderEffect:Dynamic = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nout vec4 o_color;\nvoid main() {\n  o_color = texture(u_texture0, v_texCoord);\n}';
 
-  public static final _customShaders__glCustomShaderEffect:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _customShaders__glCustomShaderEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

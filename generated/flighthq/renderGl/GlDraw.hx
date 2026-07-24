@@ -31,8 +31,8 @@ class GlDraw {
     _Runtime.setField(runtime, 'currentBlendMode', blendMode);
     gl = _Runtime.field(state, 'gl');
     realization = _Runtime.coalesce(_Runtime.select(!_Runtime.strictEquals(blendMode, null), function():Dynamic return cast _Runtime.callOptionalProperty(_Runtime.field(runtime, 'glBlendModeRegistry'), 'get', cast ([blendMode] : Array<Dynamic>)), function():Dynamic return cast null), function():Dynamic return cast GlDraw.NORMAL_BLEND__glDraw);
-    _Runtime.callProperty(gl, 'blendEquation', cast ([_Runtime.getIndex(gl, _Runtime.coalesce(_Runtime.field(realization, 'equation'), function():Dynamic return cast 'FUNC_ADD'))] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'blendFunc', cast ([_Runtime.getIndex(gl, _Runtime.field(realization, 'src')), _Runtime.getIndex(gl, _Runtime.field(realization, 'dst'))] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'blendEquation', cast ([_Runtime.getIndex(gl, _Runtime.coalesce(_Runtime.field(realization, 'equation'), function():Dynamic return cast 'FUNC_ADD'))] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'blendFunc', cast ([_Runtime.getIndex(gl, _Runtime.field(realization, 'src')), _Runtime.getIndex(gl, _Runtime.field(realization, 'dst'))] : Array<Dynamic>));
   }
 
   public static function bindGlImageResourceTexture(state:GlRenderState, image:ImageResource, ?sampler:Null<SamplerLike>):Dynamic {
@@ -45,10 +45,10 @@ class GlDraw {
     cache = _Runtime.field(runtime, 'imageResourceTextureCache');
     entry = _Runtime.callProperty(cache, 'get', cast ([image] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (entry = cast ({ texture: _Runtime.callProperty(gl, 'createTexture', cast ([] : Array<Dynamic>)), version: -1.0 } : Dynamic));
+      (entry = cast ({ texture: flighthq._internal.WebGl2RenderingContext.call(gl, 'createTexture', cast ([] : Array<Dynamic>)), version: -1.0 } : Dynamic));
       _Runtime.callProperty(cache, 'set', cast ([image, entry] : Array<Dynamic>));
     }
-    _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(entry, 'texture')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), _Runtime.field(entry, 'texture')] : Array<Dynamic>));
     _Runtime.setField(runtime, 'currentTexture', _Runtime.field(entry, 'texture'));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(entry, 'version'), _Runtime.field(image, 'version')))) {
       _Runtime.callValue(GlDraw.uploadGlDisplayTexture__glDraw, cast ([state, image] : Array<Dynamic>));
@@ -69,14 +69,14 @@ class GlDraw {
     textureCache = _Runtime.field(runtime, 'textureCache');
     texture = _Runtime.callProperty(textureCache, 'get', cast ([imageSource] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.truthy(texture))) {
-      (texture = cast (_Runtime.callProperty(gl, 'createTexture', cast ([] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_2D'), texture] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'pixelStorei', cast ([_Runtime.field(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL'), true] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'texImage2D', cast ([_Runtime.field(gl, 'TEXTURE_2D'), 0.0, _Runtime.field(gl, 'RGBA'), _Runtime.field(gl, 'RGBA'), _Runtime.field(gl, 'UNSIGNED_BYTE'), (cast imageSource : Dynamic)] : Array<Dynamic>));
+      (texture = cast (flighthq._internal.WebGl2RenderingContext.call(gl, 'createTexture', cast ([] : Array<Dynamic>)) : Dynamic));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), texture] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'pixelStorei', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL'), true] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'texImage2D', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), 0.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'RGBA'), flighthq._internal.WebGl2RenderingContext.field(gl, 'RGBA'), flighthq._internal.WebGl2RenderingContext.field(gl, 'UNSIGNED_BYTE'), (cast imageSource : Dynamic)] : Array<Dynamic>));
       _Runtime.callProperty(textureCache, 'set', cast ([imageSource, texture] : Array<Dynamic>));
       _Runtime.setField(runtime, 'currentTexture', texture);
     } else {
-      _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_2D'), texture] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), texture] : Array<Dynamic>));
       _Runtime.setField(runtime, 'currentTexture', texture);
     }
     _Runtime.callValue(GlDraw.applyGlSamplerState__glDraw, cast ([state, runtime, texture, _Runtime.coalesce(sampler, function():Dynamic return cast null)] : Array<Dynamic>));
@@ -91,15 +91,15 @@ class GlDraw {
     var entry:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    cache = _Runtime.setField(runtime, 'videoTextureCache', (_Runtime.field(runtime, 'videoTextureCache') ?? _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), [])));
+    cache = _Runtime.setField(runtime, 'videoTextureCache', (_Runtime.field(runtime, 'videoTextureCache') ?? _Runtime.construct(_Runtime.globalValue('WeakMap'), [])));
     entry = _Runtime.callProperty(cache, 'get', cast ([videoTexture] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (entry = cast ({ texture: _Runtime.callProperty(gl, 'createTexture', cast ([] : Array<Dynamic>)), uploadedFrameId: -1.0 } : Dynamic));
+      (entry = cast ({ texture: flighthq._internal.WebGl2RenderingContext.call(gl, 'createTexture', cast ([] : Array<Dynamic>)), uploadedFrameId: -1.0 } : Dynamic));
       _Runtime.callProperty(cache, 'set', cast ([videoTexture, entry] : Array<Dynamic>));
     }
-    _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(entry, 'texture')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), _Runtime.field(entry, 'texture')] : Array<Dynamic>));
     _Runtime.setField(runtime, 'currentTexture', _Runtime.field(entry, 'texture'));
-    _Runtime.callProperty(gl, 'pixelStorei', cast ([_Runtime.field(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL'), true] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'pixelStorei', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL'), true] : Array<Dynamic>));
     _Runtime.setField(entry, 'uploadedFrameId', _Runtime.callValue(uploadGlTextureVideoFrame, cast ([gl, videoTexture, _Runtime.field(entry, 'uploadedFrameId')] : Array<Dynamic>)));
     _Runtime.callValue(GlDraw.applyGlSamplerState__glDraw, cast ([state, runtime, _Runtime.field(entry, 'texture'), _Runtime.coalesce(_Runtime.coalesce(sampler, function():Dynamic return cast _Runtime.field(videoTexture, 'sampler')), function():Dynamic return cast null)] : Array<Dynamic>));
     return cast _Runtime.field(entry, 'texture');
@@ -113,13 +113,13 @@ class GlDraw {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    filter = _Runtime.select(_Runtime.field(state, 'allowSmoothing'), function():Dynamic return cast _Runtime.field(gl, 'LINEAR'), function():Dynamic return cast _Runtime.field(gl, 'NEAREST'));
-    texture = _Runtime.callProperty(gl, 'createTexture', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_2D'), texture] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_MIN_FILTER'), filter] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_MAG_FILTER'), filter] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_WRAP_S'), _Runtime.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_WRAP_T'), _Runtime.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
+    filter = _Runtime.select(_Runtime.field(state, 'allowSmoothing'), function():Dynamic return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'LINEAR'), function():Dynamic return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'NEAREST'));
+    texture = flighthq._internal.WebGl2RenderingContext.call(gl, 'createTexture', cast ([] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), texture] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_MIN_FILTER'), filter] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_MAG_FILTER'), filter] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_WRAP_S'), flighthq._internal.WebGl2RenderingContext.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_WRAP_T'), flighthq._internal.WebGl2RenderingContext.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
     _Runtime.setField(runtime, 'currentTexture', texture);
     return cast texture;
     return cast null;
@@ -158,11 +158,11 @@ class GlDraw {
     _Runtime.setIndex(v, 13.0, y1);
     _Runtime.setIndex(v, 14.0, u0);
     _Runtime.setIndex(v, 15.0, v1);
-    _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), quadVertexBuffer] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bufferSubData', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), 0.0, v] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ELEMENT_ARRAY_BUFFER'), quadIndexBuffer] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), quadVertexBuffer] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferSubData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), 0.0, v] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ELEMENT_ARRAY_BUFFER'), quadIndexBuffer] : Array<Dynamic>));
     _Runtime.callValue(setGlAttributes, cast ([gl, shaderLoc] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'drawElements', cast ([_Runtime.field(gl, 'TRIANGLES'), 6.0, _Runtime.field(gl, 'UNSIGNED_SHORT'), 0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'drawElements', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TRIANGLES'), 6.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'UNSIGNED_SHORT'), 0.0] : Array<Dynamic>));
   }
 
   public static function enableGlBlendModeSupport(state:GlRenderState):Void {
@@ -186,7 +186,7 @@ class GlDraw {
   public static function registerGlBlendMode(state:GlRenderState, blendMode:BlendMode, realization:GlBlendRealization):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.setField(runtime, 'glBlendModeRegistry', (_Runtime.field(runtime, 'glBlendModeRegistry') ?? _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []))), 'set', cast ([blendMode, realization] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.setField(runtime, 'glBlendModeRegistry', (_Runtime.field(runtime, 'glBlendModeRegistry') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))), 'set', cast ([blendMode, realization] : Array<Dynamic>));
   }
 
   public static function setGlQuadMatrixFromOffset(state:GlRenderState, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float, dx:Float, dy:Float):Void {
@@ -200,11 +200,11 @@ class GlDraw {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_2D'), texture] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), texture] : Array<Dynamic>));
     _Runtime.setField(runtime, 'currentTexture', texture);
-    _Runtime.callProperty(gl, 'pixelStorei', cast ([_Runtime.field(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL'), true] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texImage2D', cast ([_Runtime.field(gl, 'TEXTURE_2D'), 0.0, _Runtime.field(gl, 'RGBA'), _Runtime.field(gl, 'RGBA'), _Runtime.field(gl, 'UNSIGNED_BYTE'), canvas] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.callOptionalProperty(_Runtime.field(runtime, 'mipmappedTextures'), 'has', cast ([texture] : Array<Dynamic>)))) { _Runtime.callProperty(gl, 'generateMipmap', cast ([_Runtime.field(gl, 'TEXTURE_2D')] : Array<Dynamic>)); }
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'pixelStorei', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL'), true] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texImage2D', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), 0.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'RGBA'), flighthq._internal.WebGl2RenderingContext.field(gl, 'RGBA'), flighthq._internal.WebGl2RenderingContext.field(gl, 'UNSIGNED_BYTE'), canvas] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.callOptionalProperty(_Runtime.field(runtime, 'mipmappedTextures'), 'has', cast ([texture] : Array<Dynamic>)))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'generateMipmap', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D')] : Array<Dynamic>)); }
   }
 
   public static function useGlProgram(state:GlRenderState, ?shader:GlBitmapShader):Void {
@@ -216,7 +216,7 @@ class GlDraw {
     _Runtime.setField(runtime, 'shaderLoc', _Runtime.field(resolved, 'locations'));
     program = _Runtime.field(resolved, 'program');
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'currentProgram'), program))) {
-      _Runtime.callProperty(_Runtime.field(state, 'gl'), 'useProgram', cast ([program] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(_Runtime.field(state, 'gl'), 'useProgram', cast ([program] : Array<Dynamic>));
       _Runtime.setField(runtime, 'currentProgram', program);
     }
   }
@@ -226,8 +226,8 @@ class GlDraw {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(image, 'source'), null))) {
-      _Runtime.callProperty(gl, 'pixelStorei', cast ([_Runtime.field(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL'), true] : Array<Dynamic>));
-      _Runtime.callValue(uploadGlTextureElement, cast ([gl, _Runtime.field(gl, 'TEXTURE_2D'), (cast _Runtime.field(image, 'source') : Dynamic)] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'pixelStorei', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL'), true] : Array<Dynamic>));
+      _Runtime.callValue(uploadGlTextureElement, cast ([gl, flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), (cast _Runtime.field(image, 'source') : Dynamic)] : Array<Dynamic>));
       return;
     }
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(image, 'data'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(image, 'compressed'), null)))) {
@@ -236,12 +236,12 @@ class GlDraw {
       return;
     }
     data = _Runtime.select(_Runtime.strictEquals(_Runtime.field(image, 'alphaType'), 'straight'), function():Dynamic return cast _Runtime.callValue(GlDraw.premultiplyStraightRgba8__glDraw, cast ([_Runtime.field(image, 'data')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(image, 'data'));
-    _Runtime.callValue(uploadGlTextureData, cast ([gl, _Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(image, 'width'), _Runtime.field(image, 'height'), data] : Array<Dynamic>));
+    _Runtime.callValue(uploadGlTextureData, cast ([gl, flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), _Runtime.field(image, 'width'), _Runtime.field(image, 'height'), data] : Array<Dynamic>));
   }
 
   public static function premultiplyStraightRgba8__glDraw(data:Dynamic):Dynamic {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [_Runtime.field(data, 'length')]);
+    out = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [_Runtime.field(data, 'length')]);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(data, 'length'), '<'))) {
@@ -263,27 +263,27 @@ class GlDraw {
     var ext:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     if (_Runtime.truthy(!_Runtime.truthy(sampler))) {
-      var filter:Dynamic = _Runtime.select(_Runtime.field(state, 'allowSmoothing'), function():Dynamic return cast _Runtime.field(gl, 'LINEAR'), function():Dynamic return cast _Runtime.field(gl, 'NEAREST'));
-      _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_MIN_FILTER'), filter] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_MAG_FILTER'), filter] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_WRAP_S'), _Runtime.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_WRAP_T'), _Runtime.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
+      var filter:Dynamic = _Runtime.select(_Runtime.field(state, 'allowSmoothing'), function():Dynamic return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'LINEAR'), function():Dynamic return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'NEAREST'));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_MIN_FILTER'), filter] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_MAG_FILTER'), filter] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_WRAP_S'), flighthq._internal.WebGl2RenderingContext.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_WRAP_T'), flighthq._internal.WebGl2RenderingContext.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
       return;
     }
     useMips = _Runtime.andValue(_Runtime.field(sampler, 'mipmaps'), function():Dynamic return cast _Runtime.callValue(GlDraw.isGlMipmapFilter__glDraw, cast ([_Runtime.field(sampler, 'minFilter')] : Array<Dynamic>)));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_MIN_FILTER'), _Runtime.callValue(GlDraw.glMinFilterValue__glDraw, cast ([gl, _Runtime.field(sampler, 'minFilter'), useMips] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_MAG_FILTER'), _Runtime.callValue(GlDraw.glMagFilterValue__glDraw, cast ([gl, _Runtime.field(sampler, 'magFilter')] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_WRAP_S'), _Runtime.callValue(GlDraw.glTextureWrapValue__glDraw, cast ([gl, _Runtime.field(sampler, 'wrapU')] : Array<Dynamic>))] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_WRAP_T'), _Runtime.callValue(GlDraw.glTextureWrapValue__glDraw, cast ([gl, _Runtime.field(sampler, 'wrapV')] : Array<Dynamic>))] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_MIN_FILTER'), _Runtime.callValue(GlDraw.glMinFilterValue__glDraw, cast ([gl, _Runtime.field(sampler, 'minFilter'), useMips] : Array<Dynamic>))] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_MAG_FILTER'), _Runtime.callValue(GlDraw.glMagFilterValue__glDraw, cast ([gl, _Runtime.field(sampler, 'magFilter')] : Array<Dynamic>))] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_WRAP_S'), _Runtime.callValue(GlDraw.glTextureWrapValue__glDraw, cast ([gl, _Runtime.field(sampler, 'wrapU')] : Array<Dynamic>))] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_WRAP_T'), _Runtime.callValue(GlDraw.glTextureWrapValue__glDraw, cast ([gl, _Runtime.field(sampler, 'wrapV')] : Array<Dynamic>))] : Array<Dynamic>));
     ext = _Runtime.callValue(GlDraw.ensureGlAnisotropyExt__glDraw, cast ([state, runtime] : Array<Dynamic>));
     if (_Runtime.truthy(ext)) {
-      var level:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(sampler, 'anisotropy'), _Runtime.coalesce(_Runtime.field(runtime, 'maxAnisotropy'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'texParameterf', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(ext, 'TEXTURE_MAX_ANISOTROPY_EXT'), level] : Array<Dynamic>));
+      var level:Dynamic = HxMath.max(1.0, HxMath.min(_Runtime.field(sampler, 'anisotropy'), _Runtime.coalesce(_Runtime.field(runtime, 'maxAnisotropy'), function():Dynamic return cast 1.0)));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameterf', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), _Runtime.field(ext, 'TEXTURE_MAX_ANISOTROPY_EXT'), level] : Array<Dynamic>));
     }
     if (_Runtime.truthy(useMips)) {
-      var mipped:Dynamic = _Runtime.setField(runtime, 'mipmappedTextures', (_Runtime.field(runtime, 'mipmappedTextures') ?? _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakSet'] : Array<Dynamic>)), [])));
+      var mipped:Dynamic = _Runtime.setField(runtime, 'mipmappedTextures', (_Runtime.field(runtime, 'mipmappedTextures') ?? _Runtime.construct(_Runtime.globalValue('WeakSet'), [])));
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(mipped, 'has', cast ([texture] : Array<Dynamic>))))) {
-        _Runtime.callProperty(gl, 'generateMipmap', cast ([_Runtime.field(gl, 'TEXTURE_2D')] : Array<Dynamic>));
+        flighthq._internal.WebGl2RenderingContext.call(gl, 'generateMipmap', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D')] : Array<Dynamic>));
         _Runtime.callProperty(mipped, 'add', cast ([texture] : Array<Dynamic>));
       }
     }
@@ -293,40 +293,40 @@ class GlDraw {
     var ext:Dynamic = cast _Runtime.UNDEFINED;
     ext = _Runtime.field(runtime, 'anisotropyExt');
     if (_Runtime.truthy(_Runtime.strictEquals(ext, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (ext = cast (_Runtime.callProperty(_Runtime.field(state, 'gl'), 'getExtension', cast (['EXT_texture_filter_anisotropic'] : Array<Dynamic>)) : Dynamic));
+      (ext = cast (flighthq._internal.WebGl2RenderingContext.call(_Runtime.field(state, 'gl'), 'getExtension', cast (['EXT_texture_filter_anisotropic'] : Array<Dynamic>)) : Dynamic));
       _Runtime.setField(runtime, 'anisotropyExt', ext);
-      _Runtime.setField(runtime, 'maxAnisotropy', _Runtime.select(ext, function():Dynamic return cast (cast _Runtime.callProperty(_Runtime.field(state, 'gl'), 'getParameter', cast ([_Runtime.field(ext, 'MAX_TEXTURE_MAX_ANISOTROPY_EXT')] : Array<Dynamic>)) : Float), function():Dynamic return cast 1.0));
+      _Runtime.setField(runtime, 'maxAnisotropy', _Runtime.select(ext, function():Dynamic return cast (cast flighthq._internal.WebGl2RenderingContext.call(_Runtime.field(state, 'gl'), 'getParameter', cast ([_Runtime.field(ext, 'MAX_TEXTURE_MAX_ANISOTROPY_EXT')] : Array<Dynamic>)) : Float), function():Dynamic return cast 1.0));
     }
     return cast ext;
     return cast null;
   }
 
   public static function glMagFilterValue__glDraw(gl:Dynamic, filter:TextureFilter):Float {
-    return cast _Runtime.select(StringTools.startsWith(filter, 'nearest'), function():Dynamic return cast _Runtime.field(gl, 'NEAREST'), function():Dynamic return cast _Runtime.field(gl, 'LINEAR'));
+    return cast _Runtime.select(StringTools.startsWith(filter, 'nearest'), function():Dynamic return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'NEAREST'), function():Dynamic return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'LINEAR'));
     return cast null;
   }
 
   public static function glMinFilterValue__glDraw(gl:Dynamic, filter:TextureFilter, useMips:Bool):Float {
-    if (_Runtime.truthy(!_Runtime.truthy(useMips))) { return cast _Runtime.select(StringTools.startsWith(filter, 'nearest'), function():Dynamic return cast _Runtime.field(gl, 'NEAREST'), function():Dynamic return cast _Runtime.field(gl, 'LINEAR')); }
+    if (_Runtime.truthy(!_Runtime.truthy(useMips))) { return cast _Runtime.select(StringTools.startsWith(filter, 'nearest'), function():Dynamic return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'NEAREST'), function():Dynamic return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'LINEAR')); }
     {
       var __switchValue = filter;
       if (__switchValue == 'linear-mipmap-linear') {
-        return cast _Runtime.field(gl, 'LINEAR_MIPMAP_LINEAR');
+        return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'LINEAR_MIPMAP_LINEAR');
       }
       else if (__switchValue == 'linear-mipmap-nearest') {
-        return cast _Runtime.field(gl, 'LINEAR_MIPMAP_NEAREST');
+        return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'LINEAR_MIPMAP_NEAREST');
       }
       else if (__switchValue == 'nearest-mipmap-linear') {
-        return cast _Runtime.field(gl, 'NEAREST_MIPMAP_LINEAR');
+        return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'NEAREST_MIPMAP_LINEAR');
       }
       else if (__switchValue == 'nearest-mipmap-nearest') {
-        return cast _Runtime.field(gl, 'NEAREST_MIPMAP_NEAREST');
+        return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'NEAREST_MIPMAP_NEAREST');
       }
       else if (__switchValue == 'nearest') {
-        return cast _Runtime.field(gl, 'NEAREST');
+        return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'NEAREST');
       }
       else  {
-        return cast _Runtime.field(gl, 'LINEAR');
+        return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'LINEAR');
       }
     }
     return cast null;
@@ -338,9 +338,9 @@ class GlDraw {
   }
 
   public static function glTextureWrapValue__glDraw(gl:Dynamic, wrap:TextureWrap):Float {
-    if (_Runtime.truthy(_Runtime.strictEquals(wrap, 'repeat'))) { return cast _Runtime.field(gl, 'REPEAT'); }
-    if (_Runtime.truthy(_Runtime.strictEquals(wrap, 'mirror-repeat'))) { return cast _Runtime.field(gl, 'MIRRORED_REPEAT'); }
-    return cast _Runtime.field(gl, 'CLAMP_TO_EDGE');
+    if (_Runtime.truthy(_Runtime.strictEquals(wrap, 'repeat'))) { return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'REPEAT'); }
+    if (_Runtime.truthy(_Runtime.strictEquals(wrap, 'mirror-repeat'))) { return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'MIRRORED_REPEAT'); }
+    return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'CLAMP_TO_EDGE');
     return cast null;
   }
 

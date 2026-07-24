@@ -39,7 +39,7 @@ class CanvasParticleEmitter2D {
     imageSource = _Runtime.field(_Runtime.field(atlas, 'image'), 'source');
     context = _Runtime.field(state, 'context');
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'allowSmoothing')))) { _Runtime.setField(context, 'imageSmoothingEnabled', false); }
+    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'allowSmoothing')))) { flighthq._internal.CanvasRenderingContext2D.setField(context, 'imageSmoothingEnabled', false); }
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, particleCount, '<'))) {
@@ -52,8 +52,8 @@ class CanvasParticleEmitter2D {
         var py:Dynamic = _Runtime.getIndex(transforms, (tt + 1.0));
         var rotation:Dynamic = _Runtime.getIndex(transforms, (tt + 2.0));
         var scale:Dynamic = _Runtime.getIndex(transforms, (tt + 3.0));
-        var cosR:Dynamic = (_Runtime.callProperty(HxMath, 'cos', cast ([rotation] : Array<Dynamic>)) * scale);
-        var sinR:Dynamic = (_Runtime.callProperty(HxMath, 'sin', cast ([rotation] : Array<Dynamic>)) * scale);
+        var cosR:Dynamic = (HxMath.cos(rotation) * scale);
+        var sinR:Dynamic = (HxMath.sin(rotation) * scale);
         var a:Float = cast _Runtime.UNDEFINED;
         var b:Float = cast _Runtime.UNDEFINED;
         var c:Float = cast _Runtime.UNDEFINED;
@@ -75,13 +75,13 @@ class CanvasParticleEmitter2D {
           (tx = cast ((((_Runtime.field(t, 'a') * px) + (_Runtime.field(t, 'c') * py)) + _Runtime.field(t, 'tx')) : Dynamic));
           (ty = cast ((((_Runtime.field(t, 'b') * px) + (_Runtime.field(t, 'd') * py)) + _Runtime.field(t, 'ty')) : Dynamic));
         }
-        _Runtime.setField(context, 'globalAlpha', (nodeAlpha * _Runtime.getIndex(alphas, i)));
-        _Runtime.callProperty(context, 'setTransform', cast ([a, b, c, d, tx, ty] : Array<Dynamic>));
-        _Runtime.callProperty(context, 'drawImage', cast ([imageSource, _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), 0.0, 0.0, _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
+        flighthq._internal.CanvasRenderingContext2D.setField(context, 'globalAlpha', (nodeAlpha * _Runtime.getIndex(alphas, i)));
+        flighthq._internal.CanvasRenderingContext2D.call(context, 'setTransform', cast ([a, b, c, d, tx, ty] : Array<Dynamic>));
+        flighthq._internal.CanvasRenderingContext2D.call(context, 'drawImage', cast ([imageSource, _Runtime.field(region, 'x'), _Runtime.field(region, 'y'), _Runtime.field(region, 'width'), _Runtime.field(region, 'height'), 0.0, 0.0, _Runtime.field(region, 'width'), _Runtime.field(region, 'height')] : Array<Dynamic>));
         i++;
       }
     }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'allowSmoothing')))) { _Runtime.setField(context, 'imageSmoothingEnabled', true); }
+    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(state, 'allowSmoothing')))) { flighthq._internal.CanvasRenderingContext2D.setField(context, 'imageSmoothingEnabled', true); }
   }
 
   public static final defaultCanvasParticleEmitter2DRenderer:SpriteRenderer = { createData: noopRendererData, submit: drawCanvasParticleEmitter2D };

@@ -22,7 +22,7 @@ class WgpuClipContours {
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(flushWgpuSpriteBatch, cast ([state] : Array<Dynamic>));
     entry = _Runtime.callProperty(_Runtime.field(runtime, 'clipContourStack'), 'pop', cast ([] : Array<Dynamic>));
-    _Runtime.setField(runtime, 'currentMaskDepth', _Runtime.callProperty(HxMath, 'max', cast ([0.0, (_Runtime.field(runtime, 'currentMaskDepth') - 1.0)] : Array<Dynamic>)));
+    _Runtime.setField(runtime, 'currentMaskDepth', HxMath.max(0.0, (_Runtime.field(runtime, 'currentMaskDepth') - 1.0)));
     pass = _Runtime.field(runtime, 'renderPass');
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(pass, null), function():Dynamic return cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
       var pipelines:Dynamic = _Runtime.callValue(WgpuClipContours.ensureClipContourPipelines__wgpuClipContours, cast ([state] : Array<Dynamic>));
@@ -82,7 +82,7 @@ class WgpuClipContours {
     viewport = _Runtime.coalesce(_Runtime.field(runtime, 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
     iw = (2.0 / _Runtime.field(viewport, 'width'));
     ih = (2.0 / _Runtime.field(viewport, 'height'));
-    m = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [12.0]);
+    m = _Runtime.construct(_Runtime.globalValue('Float32Array'), [12.0]);
     _Runtime.setIndex(m, 0.0, (_Runtime.field(t, 'a') * iw));
     _Runtime.setIndex(m, 1.0, (-_Runtime.field(t, 'b') * ih));
     _Runtime.setIndex(m, 2.0, 0.0);
@@ -92,7 +92,7 @@ class WgpuClipContours {
     _Runtime.setIndex(m, 8.0, ((_Runtime.field(t, 'tx') * iw) - 1.0));
     _Runtime.setIndex(m, 9.0, ((-_Runtime.field(t, 'ty') * ih) + 1.0));
     _Runtime.setIndex(m, 10.0, 1.0);
-    buffer = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: WgpuClipContours.CLIP_UNIFORM_BYTES__wgpuClipContours, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
+    buffer = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: WgpuClipContours.CLIP_UNIFORM_BYTES__wgpuClipContours, usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'UNIFORM')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST'))) }] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([buffer, 0.0, m] : Array<Dynamic>));
     return cast buffer;
     return cast null;
@@ -120,9 +120,9 @@ class WgpuClipContours {
         c++;
       }
     }
-    data = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [tris]);
+    data = _Runtime.construct(_Runtime.globalValue('Float32Array'), [tris]);
     vertexCount = (Std.int(_Runtime.field(data, 'length')) >> Std.int(1.0));
-    vertexBuffer = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: _Runtime.callProperty(HxMath, 'max', cast ([4.0, _Runtime.field(data, 'byteLength')] : Array<Dynamic>)), usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'VERTEX')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
+    vertexBuffer = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: HxMath.max(4.0, _Runtime.field(data, 'byteLength')), usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'VERTEX')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST'))) }] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(data, 'byteLength'), 0.0, '>'))) { _Runtime.callProperty(_Runtime.field(_Runtime.field(state, 'device'), 'queue'), 'writeBuffer', cast ([vertexBuffer, 0.0, data] : Array<Dynamic>)); }
     return cast { vertexBuffer: vertexBuffer, vertexCount: vertexCount };
     return cast null;
@@ -142,12 +142,12 @@ class WgpuClipContours {
     var pipelines:WgpuClipContourPipelines = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     format = _Runtime.coalesce(_Runtime.field(runtime, 'currentColorFormat'), function():Dynamic return cast _Runtime.field(state, 'format'));
-    cache = _Runtime.coalesce(_Runtime.field(runtime, 'clipContourPipelines'), function():Dynamic return cast _Runtime.setField(runtime, 'clipContourPipelines', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), [])));
+    cache = _Runtime.coalesce(_Runtime.field(runtime, 'clipContourPipelines'), function():Dynamic return cast _Runtime.setField(runtime, 'clipContourPipelines', _Runtime.construct(_Runtime.globalValue('Map'), [])));
     existing = _Runtime.callProperty(cache, 'get', cast ([format] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
     device = _Runtime.field(state, 'device');
     module = _Runtime.callProperty(device, 'createShaderModule', cast ([{ code: WgpuClipContours.CLIP_WGSL__wgpuClipContours }] : Array<Dynamic>));
-    bindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'VERTEX'), buffer: { type: 'uniform' } }] : Array<Dynamic>) }] : Array<Dynamic>));
+    bindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'VERTEX'), buffer: { type: 'uniform' } }] : Array<Dynamic>) }] : Array<Dynamic>));
     layout = _Runtime.callProperty(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([bindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
     vertexBuffers = cast ([{ arrayStride: 8.0, attributes: cast ([{ shaderLocation: 0.0, offset: 0.0, format: 'float32x2' }] : Array<Dynamic>) }] : Array<Dynamic>);
     make = function(passOp:Dynamic) return _Runtime.callProperty(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: module, entryPoint: 'vs_main', buffers: vertexBuffers }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, writeMask: 0.0 }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list', cullMode: 'none' }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: { compare: 'equal', passOp: passOp, failOp: 'keep', depthFailOp: 'keep' }, stencilBack: { compare: 'equal', passOp: passOp, failOp: 'keep', depthFailOp: 'keep' }, stencilReadMask: 255.0, stencilWriteMask: 255.0 } }] : Array<Dynamic>));

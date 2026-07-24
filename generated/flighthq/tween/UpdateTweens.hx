@@ -20,7 +20,7 @@ class UpdateTweens {
     target = (cast _Runtime.field(tween, 'target') : Dynamic);
     for (detail in _Runtime.iterable(_Runtime.field(tween, 'properties'))) {
       var value:Dynamic = (_Runtime.field(detail, 'start') + (_Runtime.field(detail, 'change') * easedT));
-      if (_Runtime.truthy(_Runtime.field(tween, 'snapping'))) { (value = cast (_Runtime.callProperty(HxMath, 'round', cast ([value] : Array<Dynamic>)) : Dynamic)); }
+      if (_Runtime.truthy(_Runtime.field(tween, 'snapping'))) { (value = cast (HxMath.round(value) : Dynamic)); }
       _Runtime.setIndex(target, _Runtime.field(detail, 'key'), value);
     }
     _Runtime.setField(tween, 'complete', true);
@@ -38,13 +38,13 @@ class UpdateTweens {
     activeElapsed = (_Runtime.field(tween, 'elapsed') - _Runtime.field(tween, 'delay'));
     if (_Runtime.truthy(_Runtime.compare(activeElapsed, 0.0, '<='))) { return; }
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(tween, 'initialized')))) { _Runtime.callValue(initializeTween, cast ([tween] : Array<Dynamic>)); }
-    t = _Runtime.callProperty(HxMath, 'min', cast ([(activeElapsed / _Runtime.field(tween, 'duration')), 1.0] : Array<Dynamic>));
+    t = HxMath.min((activeElapsed / _Runtime.field(tween, 'duration')), 1.0);
     effectiveT = _Runtime.select(_Runtime.field(tween, 'reverse'), function():Dynamic return cast (1.0 - t), function():Dynamic return cast t);
     easedT = _Runtime.callProperty(tween, 'ease', cast ([effectiveT] : Array<Dynamic>));
     target = (cast _Runtime.field(tween, 'target') : Dynamic);
     for (detail in _Runtime.iterable(_Runtime.field(tween, 'properties'))) {
       var value:Dynamic = (_Runtime.field(detail, 'start') + (_Runtime.field(detail, 'change') * easedT));
-      if (_Runtime.truthy(_Runtime.field(tween, 'snapping'))) { (value = cast (_Runtime.callProperty(HxMath, 'round', cast ([value] : Array<Dynamic>)) : Dynamic)); }
+      if (_Runtime.truthy(_Runtime.field(tween, 'snapping'))) { (value = cast (HxMath.round(value) : Dynamic)); }
       _Runtime.setIndex(target, _Runtime.field(detail, 'key'), value);
     }
     _Runtime.callValue(emitSignal, cast ([_Runtime.field(tween, 'onUpdate')] : Array<Dynamic>));

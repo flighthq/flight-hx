@@ -44,17 +44,17 @@ class WgpuSpriteBatch {
     __destructure1 = runtime;
     uniformBindGroupLayout = _Runtime.field(__destructure1, 'uniformBindGroupLayout');
     textureBindGroupLayout = _Runtime.field(__destructure1, 'textureBindGroupLayout');
-    instanceBindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'VERTEX'), buffer: { type: 'read-only-storage' } }] : Array<Dynamic>) }] : Array<Dynamic>));
-    materialBindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'VERTEX'), buffer: { type: 'read-only-storage' } }] : Array<Dynamic>) }] : Array<Dynamic>));
+    instanceBindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'VERTEX'), buffer: { type: 'read-only-storage' } }] : Array<Dynamic>) }] : Array<Dynamic>));
+    materialBindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'VERTEX'), buffer: { type: 'read-only-storage' } }] : Array<Dynamic>) }] : Array<Dynamic>));
     basePipelineLayout = _Runtime.callProperty(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([uniformBindGroupLayout, textureBindGroupLayout, instanceBindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
     materialPipelineLayout = _Runtime.callProperty(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([uniformBindGroupLayout, textureBindGroupLayout, instanceBindGroupLayout, materialBindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
-    resources = { instanceBindGroupLayout: instanceBindGroupLayout, materialBindGroupLayout: materialBindGroupLayout, basePipelineLayout: basePipelineLayout, materialPipelineLayout: materialPipelineLayout, pipelines: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []) };
+    resources = { instanceBindGroupLayout: instanceBindGroupLayout, materialBindGroupLayout: materialBindGroupLayout, basePipelineLayout: basePipelineLayout, materialPipelineLayout: materialPipelineLayout, pipelines: _Runtime.construct(_Runtime.globalValue('WeakMap'), []) };
     _Runtime.callProperty(WgpuSpriteBatch._quadBatchResources__wgpuSpriteBatch, 'set', cast ([device, resources] : Array<Dynamic>));
     return cast resources;
     return cast null;
   }
 
-  public static final _quadBatchResources__wgpuSpriteBatch:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _quadBatchResources__wgpuSpriteBatch:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static final NORMAL_BLEND__wgpuSpriteBatch:Dynamic = { color: { srcFactor: 'one', dstFactor: 'one-minus-src-alpha', operation: 'add' }, alpha: { srcFactor: 'one', dstFactor: 'one-minus-src-alpha', operation: 'add' } };
 
@@ -144,7 +144,7 @@ class WgpuSpriteBatch {
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     perModule = _Runtime.callProperty(_Runtime.field(resources, 'pipelines'), 'get', cast ([module] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(perModule, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (perModule = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) : Dynamic));
+      (perModule = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       _Runtime.callProperty(_Runtime.field(resources, 'pipelines'), 'set', cast ([module, perModule] : Array<Dynamic>));
     }
     stencilMode = _Runtime.select(_Runtime.field(runtime, 'maskWriteMode'), function():Dynamic return cast 'maskwrite', function():Dynamic return cast _Runtime.select(_Runtime.compare(_Runtime.field(runtime, 'currentMaskDepth'), 0.0, '>'), function():Dynamic return cast 'masked', function():Dynamic return cast 'normal'));
@@ -163,7 +163,7 @@ class WgpuSpriteBatch {
     } else {
       (stencilFace = cast ({ compare: 'always', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' } : Dynamic));
     } }
-    pipeline = _Runtime.callProperty(device, 'createRenderPipeline', cast ([{ layout: _Runtime.select(hasMaterialData, function():Dynamic return cast _Runtime.field(resources, 'materialPipelineLayout'), function():Dynamic return cast _Runtime.field(resources, 'basePipelineLayout')), vertex: { module: module, entryPoint: 'vs_main' }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: _Runtime.select(isMaskWrite, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'), function():Dynamic return cast blend), writeMask: _Runtime.select(isMaskWrite, function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUColorWrite'] : Array<Dynamic>)), 'ALL')) }] : Array<Dynamic>) }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: stencilFace, stencilBack: stencilFace, stencilReadMask: 255.0, stencilWriteMask: _Runtime.select(isMaskWrite, function():Dynamic return cast 255.0, function():Dynamic return cast 0.0) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
+    pipeline = _Runtime.callProperty(device, 'createRenderPipeline', cast ([{ layout: _Runtime.select(hasMaterialData, function():Dynamic return cast _Runtime.field(resources, 'materialPipelineLayout'), function():Dynamic return cast _Runtime.field(resources, 'basePipelineLayout')), vertex: { module: module, entryPoint: 'vs_main' }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: _Runtime.select(isMaskWrite, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'), function():Dynamic return cast blend), writeMask: _Runtime.select(isMaskWrite, function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.field(_Runtime.globalValue('GPUColorWrite'), 'ALL')) }] : Array<Dynamic>) }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: stencilFace, stencilBack: stencilFace, stencilReadMask: 255.0, stencilWriteMask: _Runtime.select(isMaskWrite, function():Dynamic return cast 255.0, function():Dynamic return cast 0.0) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
     _Runtime.callProperty(perModule, 'set', cast ([key, pipeline] : Array<Dynamic>));
     return cast pipeline;
     return cast null;
@@ -203,13 +203,13 @@ class WgpuSpriteBatch {
     needed = ((_Runtime.field(runtime, 'spriteBatchCount') + maxInstances) * SPRITE_INSTANCE_FLOATS);
     if (_Runtime.truthy(_Runtime.compare(needed, _Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'length'), '>'))) {
       var newSize:Dynamic = HxMath.max(HxMath.max(needed, (_Runtime.field(_Runtime.field(runtime, 'spriteBatchInstanceData'), 'length') * 2.0)), (SPRITE_INSTANCE_FLOATS * 256.0));
-      _Runtime.setField(runtime, 'spriteBatchInstanceData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [newSize]));
+      _Runtime.setField(runtime, 'spriteBatchInstanceData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [newSize]));
     }
     if (_Runtime.truthy(_Runtime.compare(floats, 0.0, '>'))) {
       var materialNeeded:Dynamic = ((_Runtime.field(runtime, 'spriteBatchCount') + maxInstances) * floats);
       if (_Runtime.truthy(_Runtime.compare(materialNeeded, _Runtime.field(_Runtime.field(runtime, 'spriteBatchMaterialData'), 'length'), '>'))) {
         var newSize:Dynamic = HxMath.max(HxMath.max(materialNeeded, (_Runtime.field(_Runtime.field(runtime, 'spriteBatchMaterialData'), 'length') * 2.0)), (floats * 256.0));
-        _Runtime.setField(runtime, 'spriteBatchMaterialData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [newSize]));
+        _Runtime.setField(runtime, 'spriteBatchMaterialData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [newSize]));
       }
     }
     return cast (_Runtime.field(runtime, 'spriteBatchCount') * SPRITE_INSTANCE_FLOATS);
@@ -249,7 +249,7 @@ class WgpuSpriteBatch {
   }
 
   public static function createWgpuSpriteBatchBuffer__wgpuSpriteBatch(state:WgpuRenderState, size:Float):Dynamic {
-    return cast _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: size, usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'STORAGE')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>));
+    return cast _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: size, usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'STORAGE')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST'))) }] : Array<Dynamic>));
     return cast null;
   }
 

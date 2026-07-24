@@ -268,9 +268,9 @@ class CanvasShapeCommands {
     height = (cast _Runtime.getIndex(buf, (i + 3.0)) : Float);
     ellipseWidth = (cast _Runtime.getIndex(buf, (i + 4.0)) : Float);
     ellipseHeight = (cast _Runtime.getIndex(buf, (i + 5.0)) : Float);
-    rx = _Runtime.callProperty(HxMath, 'min', cast ([(ellipseWidth / 2.0), (width / 2.0)] : Array<Dynamic>));
-    ry = _Runtime.callProperty(HxMath, 'min', cast ([(ellipseHeight / 2.0), (height / 2.0)] : Array<Dynamic>));
-    radius = _Runtime.callProperty(HxMath, 'min', cast ([rx, ry] : Array<Dynamic>));
+    rx = HxMath.min((ellipseWidth / 2.0), (width / 2.0));
+    ry = HxMath.min((ellipseHeight / 2.0), (height / 2.0));
+    radius = HxMath.min(rx, ry);
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(context, 'roundRect')), 'function'))) {
       _Runtime.callProperty(context, 'roundRect', cast ([x, y, width, height, radius] : Array<Dynamic>));
     } else {

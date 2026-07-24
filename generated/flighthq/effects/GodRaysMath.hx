@@ -10,16 +10,16 @@ class GodRaysMath {
     var samples:Dynamic = cast _Runtime.UNDEFINED;
     var weight:Dynamic = cast _Runtime.UNDEFINED;
     var exposure:Dynamic = cast _Runtime.UNDEFINED;
-    samples = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 100.0)] : Array<Dynamic>));
-    weight = _Runtime.callProperty(HxMath, 'max', cast ([0.000001, _Runtime.coalesce(_Runtime.field(effect, 'weight'), function():Dynamic return cast 0.4)] : Array<Dynamic>));
-    exposure = _Runtime.callProperty(HxMath, 'max', cast ([0.000001, _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 0.1)] : Array<Dynamic>));
+    samples = HxMath.max(1.0, _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 100.0));
+    weight = HxMath.max(0.000001, _Runtime.coalesce(_Runtime.field(effect, 'weight'), function():Dynamic return cast 0.4));
+    exposure = HxMath.max(0.000001, _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 0.1));
     return cast (1.0 / ((samples * weight) * exposure));
     return cast null;
   }
 
   public static function computeGodRaysLightCenter(effect:GodRaysEffect, out:Array<Float>):Void {
-    _Runtime.setIndex(out, 0.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.coalesce(_Runtime.field(effect, 'centerX'), function():Dynamic return cast 0.5)] : Array<Dynamic>))] : Array<Dynamic>)));
-    _Runtime.setIndex(out, 1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.coalesce(_Runtime.field(effect, 'centerY'), function():Dynamic return cast 0.5)] : Array<Dynamic>))] : Array<Dynamic>)));
+    _Runtime.setIndex(out, 0.0, HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'centerX'), function():Dynamic return cast 0.5))));
+    _Runtime.setIndex(out, 1.0, HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'centerY'), function():Dynamic return cast 0.5))));
   }
 
   public static function computeGodRaysSampleWeight(effect:GodRaysEffect, sampleIndex:Float):Float {
@@ -29,7 +29,7 @@ class GodRaysMath {
     decay = _Runtime.coalesce(_Runtime.field(effect, 'decay'), function():Dynamic return cast 0.96);
     weight = _Runtime.coalesce(_Runtime.field(effect, 'weight'), function():Dynamic return cast 0.4);
     exposure = _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 0.1);
-    return cast ((_Runtime.callProperty(HxMath, 'pow', cast ([decay, sampleIndex] : Array<Dynamic>)) * weight) * exposure);
+    return cast ((HxMath.pow(decay, sampleIndex) * weight) * exposure);
     return cast null;
   }
 
@@ -43,7 +43,7 @@ class GodRaysMath {
     cx = _Runtime.coalesce(_Runtime.field(effect, 'centerX'), function():Dynamic return cast 0.5);
     cy = _Runtime.coalesce(_Runtime.field(effect, 'centerY'), function():Dynamic return cast 0.5);
     density = _Runtime.coalesce(_Runtime.field(effect, 'density'), function():Dynamic return cast 0.96);
-    samples = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 100.0)] : Array<Dynamic>));
+    samples = HxMath.max(1.0, _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 100.0));
     dx = (((cx - px) * density) / samples);
     dy = (((cy - py) * density) / samples);
     _Runtime.setIndex(out, 0.0, dx);

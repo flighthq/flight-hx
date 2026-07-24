@@ -21,20 +21,20 @@ import flighthq.types.RenderState;
 typedef LoopState__application = { var fixedAccumulator:Float; var fpsBuffer:Array<Float>; var fpsHead:Float; var frameHandle:Dynamic; var frameRateAccumulated:Float; var lastTime:Float; var maxDeltaTime:Float; };
 
 class Application {
-  public static final _applicationLoopState__application:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _applicationLoopState__application:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static final _applicationObservers__application:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _applicationObservers__application:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function _isApplicationVisible__application():Bool {
-    return cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'hidden')));
+    return cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(_Runtime.globalValue('document'), 'hidden')));
     return cast null;
   }
 
-  public static final _lifecycleKeys__application:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _lifecycleKeys__application:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static var _loopBackend__application:Null<LoopBackend> = _Runtime.explicitNull();
 
-  public static final _mainWindows__application:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _mainWindows__application:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function attachApplicationExit(app:flighthq.types.Application):Void {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
@@ -42,8 +42,8 @@ class Application {
     observers = _Runtime.callValue(Application.getApplicationObservers__application, cast ([app] : Array<Dynamic>));
     _Runtime.callOptionalValue(_Runtime.callProperty(observers, 'get', cast ([Application.kExit__application] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
     handler = function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(app, 'onExit')] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'addEventListener', cast (['beforeunload', handler] : Array<Dynamic>));
-    _Runtime.callProperty(observers, 'set', cast ([Application.kExit__application, function() return _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'removeEventListener', cast (['beforeunload', handler] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['beforeunload', handler] : Array<Dynamic>));
+    _Runtime.callProperty(observers, 'set', cast ([Application.kExit__application, function() return _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast (['beforeunload', handler] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function attachApplicationLifecycle(app:flighthq.types.Application, win:ApplicationWindow):Void {
@@ -140,11 +140,11 @@ class Application {
 
   public static function createWebLoopBackend():LoopBackend {
     return cast { requestFrame: function(callback:Dynamic) {
-      return cast _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['requestAnimationFrame'] : Array<Dynamic>)), cast ([callback] : Array<Dynamic>));
+      return cast _Runtime.callValue(_Runtime.globalValue('requestAnimationFrame'), cast ([callback] : Array<Dynamic>));
     }, cancelFrame: function(handle:Dynamic) {
-      _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['cancelAnimationFrame'] : Array<Dynamic>)), cast ([(cast handle : Float)] : Array<Dynamic>));
+      _Runtime.callValue(_Runtime.globalValue('cancelAnimationFrame'), cast ([(cast handle : Float)] : Array<Dynamic>));
     }, now: function() {
-      return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['performance'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>));
+      return cast _Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>));
     } };
     return cast null;
   }
@@ -292,7 +292,7 @@ class Application {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callProperty(Application._applicationObservers__application, 'get', cast ([app] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(observers, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (observers = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) : Dynamic));
+      (observers = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       _Runtime.callProperty(Application._applicationObservers__application, 'set', cast ([app, observers] : Array<Dynamic>));
     }
     return cast observers;
@@ -554,7 +554,7 @@ class Application {
       }
       delta = _Runtime.select(_Runtime.andValue(_Runtime.compare(activeInterval, 0.0, '>'), function():Dynamic return cast !_Runtime.truthy(isFirstTick)), function():Dynamic return cast _Runtime.field(loopState, 'frameRateAccumulated'), function():Dynamic return cast raw);
       _Runtime.setField(loopState, 'frameRateAccumulated', 0.0);
-      clamped = _Runtime.callProperty(HxMath, 'min', cast ([delta, maxDeltaTime] : Array<Dynamic>));
+      clamped = HxMath.min(delta, maxDeltaTime);
       _Runtime.setField(app, 'deltaTime', clamped);
       _Runtime.setField(app, 'elapsedTime', (_Runtime.field(app, 'elapsedTime') + (clamped / 1000.0)));
       _Runtime.setField(app, 'frameCount', (_Runtime.field(app, 'frameCount') + 1.0));
@@ -608,7 +608,7 @@ class Application {
     var clamped:Dynamic = cast _Runtime.UNDEFINED;
     loopState = _Runtime.callProperty(Application._applicationLoopState__application, 'get', cast ([app] : Array<Dynamic>));
     maxDelta = _Runtime.coalesce(_Runtime.optionalField(loopState, 'maxDeltaTime'), function():Dynamic return cast Application.DEFAULT_MAX_DELTA_TIME__application);
-    clamped = _Runtime.callProperty(HxMath, 'min', cast ([deltaTime, maxDelta] : Array<Dynamic>));
+    clamped = HxMath.min(deltaTime, maxDelta);
     _Runtime.setField(app, 'deltaTime', clamped);
     _Runtime.setField(app, 'elapsedTime', (_Runtime.field(app, 'elapsedTime') + (clamped / 1000.0)));
     _Runtime.setField(app, 'frameCount', (_Runtime.field(app, 'frameCount') + 1.0));

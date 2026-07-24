@@ -113,14 +113,14 @@ class PixiParse {
     __destructure0 = _Runtime.callValue(PixiParse.readStartEnd__pixiParse, cast ([_Runtime.field(raw, 'speed'), 100.0, 50.0] : Array<Dynamic>));
     speedStart = _Runtime.getIndex(__destructure0, 0.0);
     speedEnd = _Runtime.getIndex(__destructure0, 1.0);
-    speedMin = _Runtime.callProperty(HxMath, 'min', cast ([speedStart, speedEnd] : Array<Dynamic>));
-    speedMax = _Runtime.callProperty(HxMath, 'max', cast ([speedStart, speedEnd] : Array<Dynamic>));
+    speedMin = HxMath.min(speedStart, speedEnd);
+    speedMax = HxMath.max(speedStart, speedEnd);
     __destructure1 = _Runtime.callValue(PixiParse.readStartEnd__pixiParse, cast ([_Runtime.field(raw, 'scale'), 1.0, 0.5] : Array<Dynamic>));
     scaleStart = _Runtime.getIndex(__destructure1, 0.0);
     scaleEnd = _Runtime.getIndex(__destructure1, 1.0);
-    scaleMin = _Runtime.callProperty(HxMath, 'min', cast ([scaleStart, scaleEnd] : Array<Dynamic>));
-    scaleMax = _Runtime.callProperty(HxMath, 'max', cast ([scaleStart, scaleEnd] : Array<Dynamic>));
-    scaleEndRatio = _Runtime.select(_Runtime.compare(scaleMax, 0.0, '>'), function():Dynamic return cast (_Runtime.callProperty(HxMath, 'min', cast ([scaleStart, scaleEnd] : Array<Dynamic>)) / scaleMax), function():Dynamic return cast 1.0);
+    scaleMin = HxMath.min(scaleStart, scaleEnd);
+    scaleMax = HxMath.max(scaleStart, scaleEnd);
+    scaleEndRatio = _Runtime.select(_Runtime.compare(scaleMax, 0.0, '>'), function():Dynamic return cast (HxMath.min(scaleStart, scaleEnd) / scaleMax), function():Dynamic return cast 1.0);
     __destructure2 = _Runtime.callValue(PixiParse.readStartEnd__pixiParse, cast ([_Runtime.field(raw, 'alpha'), 1.0, 0.0] : Array<Dynamic>));
     alphaStart = _Runtime.getIndex(__destructure2, 0.0);
     alphaEnd = _Runtime.getIndex(__destructure2, 1.0);
@@ -156,7 +156,7 @@ class PixiParse {
     blendMode = null;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(blendModeStr, 'add'), function():Dynamic return cast _Runtime.strictEquals(blendModeStr, 'additive')))) { (blendMode = cast ('add' : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(blendModeStr, 'multiply'))) { (blendMode = cast ('multiply' : Dynamic)); } else { if (_Runtime.truthy(_Runtime.strictEquals(blendModeStr, 'screen'))) { (blendMode = cast ('screen' : Dynamic)); } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(blendModeStr, 'normal'), function():Dynamic return cast _Runtime.strictEquals(blendModeStr, 'src_alpha')))) { (blendMode = cast ('normal' : Dynamic)); } } } }
     rotationSpeed = (_Runtime.callValue(PixiParse.rn__pixiParse, cast ([_Runtime.field(raw, 'rotationSpeed'), 0.0] : Array<Dynamic>)) * PixiParse.DEG2RAD__pixiParse);
-    return cast _Runtime.callValue(createParticleEmitterConfig, cast ([{ maxParticles: maxParticles, spawnRate: spawnRate, lifetimeMin: lifetimeMin, lifetimeMax: lifetimeMax, speedMin: speedMin, speedMax: speedMax, directionX: _Runtime.callProperty(HxMath, 'cos', cast ([angleMid] : Array<Dynamic>)), directionY: _Runtime.callProperty(HxMath, 'sin', cast ([angleMid] : Array<Dynamic>)), spread: spread, emitterShape: emitterShape, emitterRadius: emitterRadius, emitterWidth: emitterWidth, emitterHeight: emitterHeight, scaleMin: scaleMin, scaleMax: scaleMax, scaleEnd: scaleEndRatio, colorStartR: sr, colorStartG: sg, colorStartB: sb, colorEndR: er, colorEndG: eg, colorEndB: eb, alphaStart: alphaStart, alphaEnd: alphaEnd, rotationSpeedMin: rotationSpeed, rotationSpeedMax: rotationSpeed, blendMode: blendMode }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createParticleEmitterConfig, cast ([{ maxParticles: maxParticles, spawnRate: spawnRate, lifetimeMin: lifetimeMin, lifetimeMax: lifetimeMax, speedMin: speedMin, speedMax: speedMax, directionX: HxMath.cos(angleMid), directionY: HxMath.sin(angleMid), spread: spread, emitterShape: emitterShape, emitterRadius: emitterRadius, emitterWidth: emitterWidth, emitterHeight: emitterHeight, scaleMin: scaleMin, scaleMax: scaleMax, scaleEnd: scaleEndRatio, colorStartR: sr, colorStartG: sg, colorStartB: sb, colorEndR: er, colorEndG: eg, colorEndB: eb, alphaStart: alphaStart, alphaEnd: alphaEnd, rotationSpeedMin: rotationSpeed, rotationSpeedMax: rotationSpeed, blendMode: blendMode }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -170,8 +170,8 @@ class PixiParse {
     s = _Runtime.padEnd(_Runtime.replace(hex, _Runtime.regexp('^#', ''), '', false), 6.0, 'f');
     channel = function(i:Float) {
       var v:Dynamic = cast _Runtime.UNDEFINED;
-      v = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([_Runtime.slice(s, i, (i + 2.0)), 16.0] : Array<Dynamic>));
-      return cast _Runtime.select(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([v] : Array<Dynamic>)), function():Dynamic return cast (v / 255.0), function():Dynamic return cast 1.0);
+      v = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.slice(s, i, (i + 2.0)), 16.0] : Array<Dynamic>));
+      return cast _Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)), function():Dynamic return cast (v / 255.0), function():Dynamic return cast 1.0);
     };
     return cast cast ([_Runtime.callValue(channel, cast ([0.0] : Array<Dynamic>)), _Runtime.callValue(channel, cast ([2.0] : Array<Dynamic>)), _Runtime.callValue(channel, cast ([4.0] : Array<Dynamic>))] : Array<Dynamic>);
     return cast null;
@@ -194,7 +194,7 @@ class PixiParse {
   }
 
   public static function rn__pixiParse(v:Dynamic, def:Dynamic = 0.0):Float {
-    return cast _Runtime.select(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(v), 'number'), function():Dynamic return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([v] : Array<Dynamic>))), function():Dynamic return cast v, function():Dynamic return cast def);
+    return cast _Runtime.select(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(v), 'number'), function():Dynamic return cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>))), function():Dynamic return cast v, function():Dynamic return cast def);
     return cast null;
   }
 

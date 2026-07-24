@@ -6,9 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
 class EaseCircular {
-  public static final easeInCircular:EasingFunction = function(t:Dynamic) return (1.0 - _Runtime.callProperty(HxMath, 'sqrt', cast ([(1.0 - (t * t))] : Array<Dynamic>)));
+  public static final easeInCircular:EasingFunction = function(t:Dynamic) return (1.0 - HxMath.sqrt((1.0 - (t * t))));
 
-  public static final easeInOutCircular:EasingFunction = function(t:Dynamic) return _Runtime.select(_Runtime.compare(t, 0.5, '<'), function():Dynamic return cast ((1.0 - _Runtime.callProperty(HxMath, 'sqrt', cast ([(1.0 - ((4.0 * t) * t))] : Array<Dynamic>))) / 2.0), function():Dynamic return cast ((_Runtime.callProperty(HxMath, 'sqrt', cast ([(1.0 - HxMath.pow(((-2.0 * t) + 2.0), 2.0))] : Array<Dynamic>)) + 1.0) / 2.0));
+  public static final easeInOutCircular:EasingFunction = function(t:Dynamic) return _Runtime.select(_Runtime.compare(t, 0.5, '<'), function():Dynamic return cast ((1.0 - HxMath.sqrt((1.0 - ((4.0 * t) * t)))) / 2.0), function():Dynamic return cast ((HxMath.sqrt((1.0 - HxMath.pow(((-2.0 * t) + 2.0), 2.0))) + 1.0) / 2.0));
 
-  public static final easeOutCircular:EasingFunction = function(t:Dynamic) return _Runtime.callProperty(HxMath, 'sqrt', cast ([(1.0 - ((t - 1.0) * (t - 1.0)))] : Array<Dynamic>));
+  public static final easeOutCircular:EasingFunction = function(t:Dynamic) return HxMath.sqrt((1.0 - ((t - 1.0) * (t - 1.0))));
 }

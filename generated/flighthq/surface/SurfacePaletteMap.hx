@@ -12,8 +12,8 @@ class SurfacePaletteMap {
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var sd:Dynamic = cast _Runtime.UNDEFINED;
     var dd:Dynamic = cast _Runtime.UNDEFINED;
-    w = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'width'), _Runtime.field(source, 'width')] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'height'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+    w = HxMath.min(_Runtime.field(dest, 'width'), _Runtime.field(source, 'width'));
+    h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
     sd = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
     dd = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     {

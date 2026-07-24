@@ -236,7 +236,17 @@ export function lowerTypeScriptSource(
       externalValues.set(bindings.name.text, { imported: '*', specifier });
     }
   }
+  const canvasBindingNames = collectPlatformBindingNames(sourceFile, 'CanvasRenderingContext2D', (node, names) => {
+    if (isCanvasValueExpression(node, names)) return true;
+    return (
+      packageName.toLowerCase().includes('canvas') &&
+      ts.isPropertyAccessExpression(node) &&
+      node.name.text === 'context'
+    );
+  });
+  const webGlBindingNames = collectPlatformBindingNames(sourceFile, 'WebGL2RenderingContext', isWebGlValueExpression);
   const context: LoweringContext = {
+    canvasBindingNames,
     classThis: false,
     diagnostics,
     externalTypes,
@@ -246,6 +256,7 @@ export function lowerTypeScriptSource(
     scopeBindings: new WeakMap(),
     sourceFile,
     temporaryIndex: 0,
+    webGlBindingNames,
     workspaceDirectory,
   };
 
@@ -336,7 +347,113 @@ export function lowerTypeScriptSource(
   return { accountedDeclarations, declarations, diagnostics };
 }
 
+function collectPlatformBindingNames(
+  sourceFile: ts.SourceFile,
+  typeName: string,
+  isBindingValue: (node: ts.Expression, names: ReadonlySet<string>) => boolean,
+): ReadonlySet<string> {
+  const names = new Set<string>();
+  const factories = new Set<string>();
+  const collectFactories = (node: ts.Node): void => {
+    if (ts.isFunctionDeclaration(node) && node.name && node.type?.getText(sourceFile).includes(typeName)) {
+      factories.add(node.name.text);
+    }
+    ts.forEachChild(node, collectFactories);
+  };
+  collectFactories(sourceFile);
+  const visit = (node: ts.Node): void => {
+    if (
+      (ts.isParameter(node) || ts.isVariableDeclaration(node) || ts.isPropertyDeclaration(node)) &&
+      ts.isIdentifier(node.name)
+    ) {
+      const declaredType = node.type?.getText(sourceFile);
+      if (
+        declaredType?.includes(typeName) ||
+        (typeName === 'WebGL2RenderingContext' && node.name.text === 'gl') ||
+        (node.initializer &&
+          ts.isCallExpression(node.initializer) &&
+          ts.isIdentifier(node.initializer.expression) &&
+          factories.has(node.initializer.expression.text)) ||
+        (node.initializer && isBindingValue(node.initializer, names))
+      ) {
+        names.add(node.name.text);
+      }
+    }
+    ts.forEachChild(node, visit);
+  };
+  // Repeat once so a simple alias can refer to a binding declared later in the file.
+  visit(sourceFile);
+  visit(sourceFile);
+  return names;
+}
+
+function isWebGlValueExpression(node: ts.Expression, names: ReadonlySet<string>): boolean {
+  if (ts.isParenthesizedExpression(node) || ts.isAsExpression(node) || ts.isNonNullExpression(node)) {
+    return isWebGlValueExpression(node.expression, names);
+  }
+  if (ts.isIdentifier(node)) return names.has(node.text);
+  return ts.isPropertyAccessExpression(node) && node.name.text === 'gl';
+}
+
+function isCanvasValueExpression(node: ts.Expression, names: ReadonlySet<string>): boolean {
+  if (ts.isParenthesizedExpression(node) || ts.isAsExpression(node) || ts.isNonNullExpression(node)) {
+    return isCanvasValueExpression(node.expression, names);
+  }
+  if (ts.isIdentifier(node)) return names.has(node.text);
+  if (ts.isPropertyAccessExpression(node) && node.name.text === 'ctx') return true;
+  return (
+    ts.isCallExpression(node) &&
+    ts.isPropertyAccessExpression(node.expression) &&
+    node.expression.name.text === 'getContext' &&
+    node.arguments[0] !== undefined &&
+    ts.isStringLiteral(node.arguments[0]) &&
+    node.arguments[0].text === '2d'
+  );
+}
+
+function isBoundPlatformExpression(
+  node: ts.Expression,
+  context: LoweringContext,
+  typeName: 'CanvasRenderingContext2D' | 'WebGL2RenderingContext',
+): boolean {
+  if (ts.isParenthesizedExpression(node) || ts.isAsExpression(node) || ts.isNonNullExpression(node)) {
+    return isBoundPlatformExpression(node.expression, context, typeName);
+  }
+  if (ts.isIdentifier(node)) {
+    const parameter = findEnclosingParameter(node);
+    if (parameter) {
+      if (parameter.type?.getText(context.sourceFile).includes(typeName)) return true;
+      return (
+        typeName === 'WebGL2RenderingContext' &&
+        ts.isIdentifier(parameter.name) &&
+        parameter.name.text === 'gl' &&
+        context.packageName.toLowerCase().includes('-gl')
+      );
+    }
+    const names = typeName === 'CanvasRenderingContext2D' ? context.canvasBindingNames : context.webGlBindingNames;
+    return names.has(node.text);
+  }
+  return typeName === 'CanvasRenderingContext2D'
+    ? isCanvasValueExpression(node, context.canvasBindingNames)
+    : isWebGlValueExpression(node, context.webGlBindingNames);
+}
+
+function findEnclosingParameter(identifier: ts.Identifier): ts.ParameterDeclaration | undefined {
+  let current: ts.Node | undefined = identifier.parent;
+  while (current) {
+    if (ts.isFunctionLike(current)) {
+      const parameter = current.parameters.find(
+        (candidate) => ts.isIdentifier(candidate.name) && candidate.name.text === identifier.text,
+      );
+      if (parameter) return parameter;
+    }
+    current = current.parent;
+  }
+  return undefined;
+}
+
 interface LoweringContext {
+  canvasBindingNames: ReadonlySet<string>;
   classThis: boolean;
   diagnostics: LoweringDiagnostic[];
   externalTypes: ReadonlySet<string>;
@@ -346,6 +463,7 @@ interface LoweringContext {
   scopeBindings: WeakMap<ts.Node, ReadonlySet<string>>;
   sourceFile: ts.SourceFile;
   temporaryIndex: number;
+  webGlBindingNames: ReadonlySet<string>;
   workspaceDirectory: string;
 }
 
@@ -1051,7 +1169,18 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
     };
   }
   if (ts.isPropertyAccessExpression(node)) {
+    const objectIsGlobalObject =
+      ts.isIdentifier(node.expression) &&
+      node.expression.text === 'Object' &&
+      !isLexicallyBound(node.expression, context);
     return {
+      binding: objectIsGlobalObject
+        ? 'DynamicObject'
+        : isBoundPlatformExpression(node.expression, context, 'CanvasRenderingContext2D')
+          ? 'CanvasRenderingContext2D'
+          : isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
+            ? 'WebGl2RenderingContext'
+            : undefined,
       kind: 'property',
       name: node.name.text,
       object: lowerExpression(node.expression, context),

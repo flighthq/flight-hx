@@ -18,11 +18,11 @@ class GlMedianEffect {
   public static function applyMedianEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:MedianEffect):Void {
     var radius:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
-    radius = _Runtime.callProperty(HxMath, 'min', cast ([MAX_MEDIAN_EFFECT_GL_RADIUS, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+    radius = HxMath.min(MAX_MEDIAN_EFFECT_GL_RADIUS, HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 1.0))));
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'stylization.median', GlMedianEffect.MEDIAN_FRAGMENT_SRC__glMedianEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      _Runtime.callProperty(gl, 'uniform2f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_texelSize'] : Array<Dynamic>)), (1.0 / _Runtime.field(source, 'width')), (1.0 / _Runtime.field(source, 'height'))] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1i', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_radius'] : Array<Dynamic>)), radius] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_texelSize'] : Array<Dynamic>)), (1.0 / _Runtime.field(source, 'width')), (1.0 / _Runtime.field(source, 'height'))] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_radius'] : Array<Dynamic>)), radius] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

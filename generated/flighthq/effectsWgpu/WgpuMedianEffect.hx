@@ -18,7 +18,7 @@ class WgpuMedianEffect {
   public static function applyMedianEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:MedianEffect):Void {
     var radius:Dynamic = cast _Runtime.UNDEFINED;
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
-    radius = _Runtime.callProperty(HxMath, 'min', cast ([MAX_MEDIAN_EFFECT_WGPU_RADIUS, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+    radius = HxMath.min(MAX_MEDIAN_EFFECT_WGPU_RADIUS, HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 1.0))));
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.median', WgpuMedianEffect.MEDIAN_WGSL__wgpuMedianEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic, i32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, (1.0 / _Runtime.field(source, 'width')));

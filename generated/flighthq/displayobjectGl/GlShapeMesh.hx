@@ -20,15 +20,15 @@ class GlShapeMesh {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(flushGlSpriteBatch, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    _Runtime.callProperty(gl, 'useProgram', cast ([_Runtime.field(binding, 'program')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'useProgram', cast ([_Runtime.field(binding, 'program')] : Array<Dynamic>));
     _Runtime.setField(runtime, 'currentProgram', _Runtime.field(binding, 'program'));
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniformMatrix3fv', cast ([_Runtime.field(binding, 'matrixLocation'), false, _Runtime.callValue(GlShapeMesh.shapeMeshMatrix__glShapeMesh, cast ([state, renderProxy] : Array<Dynamic>))] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniformMatrix3fv', cast ([_Runtime.field(binding, 'matrixLocation'), false, _Runtime.callValue(GlShapeMesh.shapeMeshMatrix__glShapeMesh, cast ([state, renderProxy] : Array<Dynamic>))] : Array<Dynamic>));
     _Runtime.callOptionalValue(onProgramBound, cast ([state] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(binding, 'vertexBuffer')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'enableVertexAttribArray', cast ([_Runtime.field(binding, 'positionLocation')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribPointer', cast ([_Runtime.field(binding, 'positionLocation'), 2.0, _Runtime.field(gl, 'FLOAT'), false, 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ELEMENT_ARRAY_BUFFER'), _Runtime.field(binding, 'indexBuffer')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(binding, 'vertexBuffer')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(binding, 'positionLocation')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(binding, 'positionLocation'), 2.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ELEMENT_ARRAY_BUFFER'), _Runtime.field(binding, 'indexBuffer')] : Array<Dynamic>));
     nodeAlpha = _Runtime.field(renderProxy, 'alpha');
     {
       var i:Dynamic = 0.0;
@@ -40,14 +40,14 @@ class GlShapeMesh {
         var r:Dynamic = ((Std.int((Std.int(_Runtime.field(mesh, 'color')) >> Std.int(16.0))) & Std.int(255.0)) / 255.0);
         var g:Dynamic = ((Std.int((Std.int(_Runtime.field(mesh, 'color')) >> Std.int(8.0))) & Std.int(255.0)) / 255.0);
         var b:Dynamic = ((Std.int(_Runtime.field(mesh, 'color')) & Std.int(255.0)) / 255.0);
-        _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(binding, 'colorLocation'), (r * a), (g * a), (b * a), a] : Array<Dynamic>));
-        _Runtime.callProperty(gl, 'bufferData', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(mesh, 'vertices'), _Runtime.field(gl, 'STREAM_DRAW')] : Array<Dynamic>));
-        _Runtime.callProperty(gl, 'bufferData', cast ([_Runtime.field(gl, 'ELEMENT_ARRAY_BUFFER'), _Runtime.field(mesh, 'indices'), _Runtime.field(gl, 'STREAM_DRAW')] : Array<Dynamic>));
-        _Runtime.callProperty(gl, 'drawElements', cast ([_Runtime.field(gl, 'TRIANGLES'), _Runtime.field(_Runtime.field(mesh, 'indices'), 'length'), _Runtime.field(gl, 'UNSIGNED_SHORT'), 0.0] : Array<Dynamic>));
+        flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(binding, 'colorLocation'), (r * a), (g * a), (b * a), a] : Array<Dynamic>));
+        flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(mesh, 'vertices'), flighthq._internal.WebGl2RenderingContext.field(gl, 'STREAM_DRAW')] : Array<Dynamic>));
+        flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ELEMENT_ARRAY_BUFFER'), _Runtime.field(mesh, 'indices'), flighthq._internal.WebGl2RenderingContext.field(gl, 'STREAM_DRAW')] : Array<Dynamic>));
+        flighthq._internal.WebGl2RenderingContext.call(gl, 'drawElements', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TRIANGLES'), _Runtime.field(_Runtime.field(mesh, 'indices'), 'length'), flighthq._internal.WebGl2RenderingContext.field(gl, 'UNSIGNED_SHORT'), 0.0] : Array<Dynamic>));
         i++;
       }
     }
-    _Runtime.callProperty(gl, 'disableVertexAttribArray', cast ([_Runtime.field(binding, 'positionLocation')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'disableVertexAttribArray', cast ([_Runtime.field(binding, 'positionLocation')] : Array<Dynamic>));
   }
 
   public static function drawGlShapeMeshes(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.GlShapeMesh>):Void {
@@ -70,7 +70,7 @@ class GlShapeMesh {
     existing = _Runtime.callProperty(GlShapeMesh.shapeMeshPrograms__glShapeMesh, 'get', cast ([gl] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
     program = _Runtime.callValue(GlShapeMesh.compileShapeMeshProgram__glShapeMesh, cast ([gl] : Array<Dynamic>));
-    created = { program: program, vertexBuffer: _Runtime.callProperty(gl, 'createBuffer', cast ([] : Array<Dynamic>)), indexBuffer: _Runtime.callProperty(gl, 'createBuffer', cast ([] : Array<Dynamic>)), positionLocation: _Runtime.callProperty(gl, 'getAttribLocation', cast ([program, 'a_position'] : Array<Dynamic>)), matrixLocation: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_matrix'] : Array<Dynamic>)), colorLocation: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_color'] : Array<Dynamic>)) };
+    created = { program: program, vertexBuffer: flighthq._internal.WebGl2RenderingContext.call(gl, 'createBuffer', cast ([] : Array<Dynamic>)), indexBuffer: flighthq._internal.WebGl2RenderingContext.call(gl, 'createBuffer', cast ([] : Array<Dynamic>)), positionLocation: flighthq._internal.WebGl2RenderingContext.call(gl, 'getAttribLocation', cast ([program, 'a_position'] : Array<Dynamic>)), matrixLocation: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_matrix'] : Array<Dynamic>)), colorLocation: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_color'] : Array<Dynamic>)) };
     _Runtime.callProperty(GlShapeMesh.shapeMeshPrograms__glShapeMesh, 'set', cast ([gl, created] : Array<Dynamic>));
     return cast created;
     return cast null;
@@ -80,7 +80,7 @@ class GlShapeMesh {
 
   public static final FRAGMENT_SOURCE__glShapeMesh:Dynamic = '\nprecision mediump float;\nuniform vec4 u_color;\nvoid main() { gl_FragColor = u_color; }\n';
 
-  public static final shapeMeshPrograms__glShapeMesh:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final shapeMeshPrograms__glShapeMesh:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function compileShapeMeshProgram__glShapeMesh(gl:Dynamic):Dynamic {
     return cast _Runtime.callValue(createGlProgram, cast ([gl, GlShapeMesh.VERTEX_SOURCE__glShapeMesh, GlShapeMesh.FRAGMENT_SOURCE__glShapeMesh, 'Shape-mesh'] : Array<Dynamic>));
@@ -96,7 +96,7 @@ class GlShapeMesh {
     iw = (2.0 / _Runtime.orValue(_Runtime.field(viewport, 'width'), function():Dynamic return cast 1.0));
     ih = (2.0 / _Runtime.orValue(_Runtime.field(viewport, 'height'), function():Dynamic return cast 1.0));
     t = _Runtime.field(renderProxy, 'transform2D');
-    return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [cast ([(_Runtime.field(t, 'a') * iw), (-_Runtime.field(t, 'b') * ih), 0.0, (_Runtime.field(t, 'c') * iw), (-_Runtime.field(t, 'd') * ih), 0.0, ((_Runtime.field(t, 'tx') * iw) - 1.0), ((-_Runtime.field(t, 'ty') * ih) + 1.0), 1.0] : Array<Dynamic>)]);
+    return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [cast ([(_Runtime.field(t, 'a') * iw), (-_Runtime.field(t, 'b') * ih), 0.0, (_Runtime.field(t, 'c') * iw), (-_Runtime.field(t, 'd') * ih), 0.0, ((_Runtime.field(t, 'tx') * iw) - 1.0), ((-_Runtime.field(t, 'ty') * ih) + 1.0), 1.0] : Array<Dynamic>)]);
     return cast null;
   }
 }

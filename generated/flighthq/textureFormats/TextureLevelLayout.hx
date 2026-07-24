@@ -24,8 +24,8 @@ class TextureLevelLayout {
             {
               var mip:Dynamic = 0.0;
               while (_Runtime.truthy(_Runtime.compare(mip, mipLevels, '<'))) {
-                var width:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([1.0, (Std.int(baseWidth) >> Std.int(mip))] : Array<Dynamic>));
-                var height:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([1.0, (Std.int(baseHeight) >> Std.int(mip))] : Array<Dynamic>));
+                var width:Dynamic = HxMath.max(1.0, (Std.int(baseWidth) >> Std.int(mip)));
+                var height:Dynamic = HxMath.max(1.0, (Std.int(baseHeight) >> Std.int(mip)));
                 var byteLength:Dynamic = _Runtime.callValue(getTextureContainerLevelByteLength, cast ([format, width, height] : Array<Dynamic>));
                 _Runtime.callProperty(levels, 'push', cast ([{ byteOffset: offset, byteLength: byteLength, height: height, width: width }] : Array<Dynamic>));
                 (offset = cast ((offset + byteLength) : Dynamic));
@@ -48,8 +48,8 @@ class TextureLevelLayout {
     var blocksHigh:Dynamic = cast _Runtime.UNDEFINED;
     block = _Runtime.callValue(TextureLevelLayout.getTextureContainerFormatBlockInfo__textureLevelLayout, cast ([format] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(block, null))) { return cast -1.0; }
-    blocksWide = _Runtime.callProperty(HxMath, 'ceil', cast ([(width / _Runtime.field(block, 'blockWidth'))] : Array<Dynamic>));
-    blocksHigh = _Runtime.callProperty(HxMath, 'ceil', cast ([(height / _Runtime.field(block, 'blockHeight'))] : Array<Dynamic>));
+    blocksWide = HxMath.ceil((width / _Runtime.field(block, 'blockWidth')));
+    blocksHigh = HxMath.ceil((height / _Runtime.field(block, 'blockHeight')));
     return cast ((blocksWide * blocksHigh) * _Runtime.field(block, 'bytesPerBlock'));
     return cast null;
   }

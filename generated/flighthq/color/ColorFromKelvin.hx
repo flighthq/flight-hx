@@ -13,27 +13,27 @@ class ColorFromKelvin {
     var ri:Dynamic = cast _Runtime.UNDEFINED;
     var gi:Dynamic = cast _Runtime.UNDEFINED;
     var bi:Dynamic = cast _Runtime.UNDEFINED;
-    temp = (_Runtime.callProperty(HxMath, 'max', cast ([1000.0, _Runtime.callProperty(HxMath, 'min', cast ([40000.0, kelvin] : Array<Dynamic>))] : Array<Dynamic>)) / 100.0);
+    temp = (HxMath.max(1000.0, HxMath.min(40000.0, kelvin)) / 100.0);
     if (_Runtime.truthy(_Runtime.compare(temp, 66.0, '<='))) {
       (r = cast (255.0 : Dynamic));
     } else {
-      (r = cast ((329.698727446 * _Runtime.callProperty(HxMath, 'pow', cast ([(temp - 60.0), -0.1332047592] : Array<Dynamic>))) : Dynamic));
+      (r = cast ((329.698727446 * HxMath.pow((temp - 60.0), -0.1332047592)) : Dynamic));
     }
     if (_Runtime.truthy(_Runtime.compare(temp, 66.0, '<='))) {
-      (g = cast (((99.4708025861 * _Runtime.callProperty(HxMath, 'log', cast ([temp] : Array<Dynamic>))) - 161.1195681661) : Dynamic));
+      (g = cast (((99.4708025861 * HxMath.log(temp)) - 161.1195681661) : Dynamic));
     } else {
-      (g = cast ((288.1221695283 * _Runtime.callProperty(HxMath, 'pow', cast ([(temp - 60.0), -0.0755148492] : Array<Dynamic>))) : Dynamic));
+      (g = cast ((288.1221695283 * HxMath.pow((temp - 60.0), -0.0755148492)) : Dynamic));
     }
     if (_Runtime.truthy(_Runtime.compare(temp, 66.0, '>='))) {
       (b = cast (255.0 : Dynamic));
     } else { if (_Runtime.truthy(_Runtime.compare(temp, 19.0, '<='))) {
       (b = cast (0.0 : Dynamic));
     } else {
-      (b = cast (((138.5177312231 * _Runtime.callProperty(HxMath, 'log', cast ([(temp - 10.0)] : Array<Dynamic>))) - 305.0447927307) : Dynamic));
+      (b = cast (((138.5177312231 * HxMath.log((temp - 10.0))) - 305.0447927307) : Dynamic));
     } }
-    ri = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([r] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
-    gi = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([g] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
-    bi = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([b] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+    ri = HxMath.max(0.0, HxMath.min(255.0, HxMath.round(r)));
+    gi = HxMath.max(0.0, HxMath.min(255.0, HxMath.round(g)));
+    bi = HxMath.max(0.0, HxMath.min(255.0, HxMath.round(b)));
     return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(ri) << Std.int(24.0))) | Std.int((Std.int(gi) << Std.int(16.0))))) | Std.int((Std.int(bi) << Std.int(8.0))))) | Std.int(255.0))), Std.int(0.0));
     return cast null;
   }

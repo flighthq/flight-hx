@@ -34,7 +34,7 @@ class TextLineBreaks {
       var lf:Dynamic = _Runtime.callProperty(text, 'indexOf', cast (['\n', (index + 1.0)] : Array<Dynamic>));
       var cr:Dynamic = _Runtime.callProperty(text, 'indexOf', cast (['\r', (index + 1.0)] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(lf, -1.0), function():Dynamic return cast _Runtime.strictEquals(cr, -1.0)))) { break; }
-      (index = cast (_Runtime.select(_Runtime.strictEquals(cr, -1.0), function():Dynamic return cast lf, function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(lf, -1.0), function():Dynamic return cast cr, function():Dynamic return cast _Runtime.callProperty(HxMath, 'min', cast ([cr, lf] : Array<Dynamic>)))) : Dynamic));
+      (index = cast (_Runtime.select(_Runtime.strictEquals(cr, -1.0), function():Dynamic return cast lf, function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(lf, -1.0), function():Dynamic return cast cr, function():Dynamic return cast HxMath.min(cr, lf))) : Dynamic));
       _Runtime.callProperty(out, 'push', cast ([index] : Array<Dynamic>));
     }
   }

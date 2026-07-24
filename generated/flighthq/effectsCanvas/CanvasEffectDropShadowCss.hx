@@ -22,8 +22,8 @@ class CanvasEffectDropShadowCss {
     angle = _Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
     radians = ((angle * HxMath.PI) / 180.0);
-    dx = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'cos', cast ([radians] : Array<Dynamic>)) * distance)] : Array<Dynamic>));
-    dy = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'sin', cast ([radians] : Array<Dynamic>)) * distance)] : Array<Dynamic>));
+    dx = HxMath.round((HxMath.cos(radians) * distance));
+    dy = HxMath.round((HxMath.sin(radians) * distance));
     return cast 'drop-shadow(' + Std.string(dx) + 'px ' + Std.string(dy) + 'px ' + Std.string(blurX) + 'px ' + Std.string(_Runtime.callValue(CanvasEffectDropShadowCss.cssRgbaFromColor__canvasEffectDropShadowCss, cast ([_Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0)] : Array<Dynamic>))) + ')';
     return cast null;
   }

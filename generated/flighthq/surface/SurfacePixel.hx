@@ -29,7 +29,7 @@ class SurfacePixel {
   public static function getSurfacePixelLuminance(source:Surface, x:Float, y:Float):Float {
     var i:Dynamic = cast _Runtime.UNDEFINED;
     i = (((y * _Runtime.field(source, 'width')) + x) * 4.0);
-    return cast _Runtime.callProperty(HxMath, 'round', cast ([(((_Runtime.getIndex(_Runtime.field(source, 'data'), i) * SurfacePixel.LUMA_R__surfacePixel) + (_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 1.0)) * SurfacePixel.LUMA_G__surfacePixel)) + (_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 2.0)) * SurfacePixel.LUMA_B__surfacePixel))] : Array<Dynamic>));
+    return cast HxMath.round((((_Runtime.getIndex(_Runtime.field(source, 'data'), i) * SurfacePixel.LUMA_R__surfacePixel) + (_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 1.0)) * SurfacePixel.LUMA_G__surfacePixel)) + (_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 2.0)) * SurfacePixel.LUMA_B__surfacePixel)));
     return cast null;
   }
 

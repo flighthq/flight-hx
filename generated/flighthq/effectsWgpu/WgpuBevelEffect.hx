@@ -49,14 +49,14 @@ class WgpuBevelEffect {
     blurTemp = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     angle = ((_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0) * HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
-    offsetX = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>)) * distance)] : Array<Dynamic>));
-    offsetY = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>)) * distance)] : Array<Dynamic>));
+    offsetX = HxMath.round((HxMath.cos(angle) * distance));
+    offsetY = HxMath.round((HxMath.sin(angle) * distance));
     shadowColor = _Runtime.coalesce(_Runtime.field(effect, 'shadowColor'), function():Dynamic return cast 0.0);
     shadowAlpha = _Runtime.coalesce(_Runtime.field(effect, 'shadowAlpha'), function():Dynamic return cast 1.0);
     highlightColor = _Runtime.coalesce(_Runtime.field(effect, 'highlightColor'), function():Dynamic return cast 16777215.0);
     highlightAlpha = _Runtime.coalesce(_Runtime.field(effect, 'highlightAlpha'), function():Dynamic return cast 1.0);
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
-    quality = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)));
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
     bevelType = _Runtime.coalesce(_Runtime.field(effect, 'bevelType'), function():Dynamic return cast 'inner');
     _Runtime.callValue(applyWgpuEffectTintPass, cast ([state, src, tinted, 16777215.0, 1.0, 1.0] : Array<Dynamic>));
@@ -106,5 +106,5 @@ class WgpuBevelEffect {
     return cast null;
   }
 
-  public static final bevelCompositePipelines__wgpuBevelEffect:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final bevelCompositePipelines__wgpuBevelEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

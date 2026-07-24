@@ -67,9 +67,9 @@ class RenderQueue {
     var layerBits:Dynamic = cast _Runtime.UNDEFINED;
     var transparentBit:Dynamic = cast _Runtime.UNDEFINED;
     var depthBits:Dynamic = cast _Runtime.UNDEFINED;
-    layerBits = (Std.int((Std.int(_Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([32767.0, (Std.int(layer) | Std.int(0.0))] : Array<Dynamic>))] : Array<Dynamic>))) & Std.int(32767.0))) << Std.int(16.0));
+    layerBits = (Std.int((Std.int(HxMath.max(0.0, HxMath.min(32767.0, (Std.int(layer) | Std.int(0.0))))) & Std.int(32767.0))) << Std.int(16.0));
     transparentBit = _Runtime.select(isTransparent, function():Dynamic return cast (Std.int(1.0) << Std.int(15.0)), function():Dynamic return cast 0.0);
-    depthBits = (Std.int(_Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([32767.0, _Runtime.callProperty(HxMath, 'round', cast ([(depth * 32767.0)] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>))) & Std.int(32767.0));
+    depthBits = (Std.int(HxMath.max(0.0, HxMath.min(32767.0, HxMath.round((depth * 32767.0))))) & Std.int(32767.0));
     return cast (Std.int((Std.int(layerBits) | Std.int(transparentBit))) | Std.int(depthBits));
     return cast null;
   }

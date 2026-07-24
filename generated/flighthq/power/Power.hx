@@ -27,7 +27,7 @@ class Power {
 
   public static final _scratch__power:PowerStatus = _Runtime.callValue(createPowerStatus, cast ([] : Array<Dynamic>));
 
-  public static final _subscriptions__power:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _subscriptions__power:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static var _wakeLockSentinel__power:Null<WebWakeLockSentinel__power> = _Runtime.explicitNull();
 
@@ -153,8 +153,8 @@ class Power {
       var wakeLock:Dynamic = cast _Runtime.UNDEFINED;
       resolvedMode = _Runtime.coalesce(mode, function():Dynamic return cast 'PreventDisplaySleep');
       if (_Runtime.truthy(_Runtime.strictEquals(resolvedMode, 'PreventAppSuspension'))) { return cast false; }
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast false; }
-      wakeLock = _Runtime.field((cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)) : { @:optional var wakeLock:WebWakeLock__power; }), 'wakeLock');
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast false; }
+      wakeLock = _Runtime.field((cast _Runtime.globalValue('navigator') : { @:optional var wakeLock:WebWakeLock__power; }), 'wakeLock');
       if (_Runtime.truthy(_Runtime.strictEquals(wakeLock, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast false; }
       try {
         if (_Runtime.truthy(!_Runtime.truthy(enabled))) {
@@ -167,7 +167,7 @@ class Power {
         _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(wakeLock, 'request', cast (['screen'] : Array<Dynamic>)), 'then', cast ([function(sentinel:Dynamic) {
           (Power._wakeLockSentinel__power = cast (sentinel : Dynamic));
           _Runtime.callOptionalProperty(sentinel, 'addEventListener', cast (['release', function() {
-            if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'hidden'))))) {
+            if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(_Runtime.globalValue('document'), 'hidden'))))) {
               _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(wakeLock, 'request', cast (['screen'] : Array<Dynamic>)), 'then', cast ([function(newSentinel:Dynamic) {
                 if (_Runtime.truthy(_Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel))) { (Power._wakeLockSentinel__power = cast (newSentinel : Dynamic)); }
               }] : Array<Dynamic>)), 'catch', cast ([function() {
@@ -250,17 +250,17 @@ class Power {
       
       };
     }, subscribeResume: function(listener:Dynamic) {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'))) { return cast function() {
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return cast function() {
       
       }; }
-      _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'addEventListener', cast (['resume', listener] : Array<Dynamic>));
-      return cast function() return _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'removeEventListener', cast (['resume', listener] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.globalValue('document'), 'addEventListener', cast (['resume', listener] : Array<Dynamic>));
+      return cast function() return _Runtime.callProperty(_Runtime.globalValue('document'), 'removeEventListener', cast (['resume', listener] : Array<Dynamic>));
     }, subscribeSuspend: function(listener:Dynamic) {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'))) { return cast function() {
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return cast function() {
       
       }; }
-      _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'addEventListener', cast (['freeze', listener] : Array<Dynamic>));
-      return cast function() return _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'removeEventListener', cast (['freeze', listener] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.globalValue('document'), 'addEventListener', cast (['freeze', listener] : Array<Dynamic>));
+      return cast function() return _Runtime.callProperty(_Runtime.globalValue('document'), 'removeEventListener', cast (['freeze', listener] : Array<Dynamic>));
     }, subscribeThermalStateChange: function() {
       return cast function() {
       
@@ -337,8 +337,8 @@ class Power {
 
   public static function getWebBatteryManagerPromise__power():Null<flighthq._internal._Promise<WebBatteryManager__power>> {
     var nav:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
-    nav = (cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)) : { @:optional var getBattery:Dynamic; });
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
+    nav = (cast _Runtime.globalValue('navigator') : { @:optional var getBattery:Dynamic; });
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(nav, 'getBattery')), 'function'))) { return cast null; }
     try {
       return cast _Runtime.callProperty(nav, 'getBattery', cast ([] : Array<Dynamic>));

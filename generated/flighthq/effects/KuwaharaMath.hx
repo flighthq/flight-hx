@@ -13,7 +13,7 @@ class KuwaharaMath {
     var twoSigmaSq:Dynamic = cast _Runtime.UNDEFINED;
     var sum:Dynamic = cast _Runtime.UNDEFINED;
     var invSum:Dynamic = cast _Runtime.UNDEFINED;
-    r = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'floor', cast ([radius] : Array<Dynamic>))] : Array<Dynamic>));
+    r = HxMath.max(1.0, HxMath.floor(radius));
     size = (r + 1.0);
     sigma = (r / 2.0);
     twoSigmaSq = ((2.0 * sigma) * sigma);
@@ -25,7 +25,7 @@ class KuwaharaMath {
           var x:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(x, size, '<'))) {
             var d:Dynamic = ((x * x) + (y * y));
-            _Runtime.setIndex(out, ((y * size) + x), _Runtime.callProperty(HxMath, 'exp', cast ([(-d / twoSigmaSq)] : Array<Dynamic>)));
+            _Runtime.setIndex(out, ((y * size) + x), HxMath.exp((-d / twoSigmaSq)));
             (sum = cast ((sum + _Runtime.getIndex(out, ((y * size) + x))) : Dynamic));
             x++;
           }
@@ -56,7 +56,7 @@ class KuwaharaMath {
     var v5:Dynamic = cast _Runtime.UNDEFINED;
     var v6:Dynamic = cast _Runtime.UNDEFINED;
     var v7:Dynamic = cast _Runtime.UNDEFINED;
-    r = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'floor', cast ([radius] : Array<Dynamic>))] : Array<Dynamic>));
+    r = HxMath.max(1.0, HxMath.floor(radius));
     half = r;
     v0 = -half;
     v1 = -half;
@@ -84,7 +84,7 @@ class KuwaharaMath {
   }
 
   public static function computeKuwaharaSectorSize(effect:KuwaharaEffect):Float {
-    return cast (_Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'floor', cast ([_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 3.0)] : Array<Dynamic>))] : Array<Dynamic>)) + 1.0);
+    return cast (HxMath.max(1.0, HxMath.floor(_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 3.0))) + 1.0);
     return cast null;
   }
 }

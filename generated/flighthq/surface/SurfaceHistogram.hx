@@ -68,7 +68,7 @@ class SurfaceHistogram {
       while (_Runtime.truthy(_Runtime.compare(i, 256.0, '<'))) {
         (cdf = cast ((cdf + _Runtime.getIndex(bins, i)) : Dynamic));
         if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.getIndex(bins, i), 0.0, '>'), function():Dynamic return cast _Runtime.strictEquals(cdfMin, -1.0)))) { (cdfMin = cast (cdf : Dynamic)); }
-        _Runtime.setIndex(map, i, _Runtime.select(_Runtime.strictEquals(total, cdfMin), function():Dynamic return cast i, function():Dynamic return cast _Runtime.callProperty(HxMath, 'round', cast ([(((cdf - cdfMin) / (total - cdfMin)) * 255.0)] : Array<Dynamic>))));
+        _Runtime.setIndex(map, i, _Runtime.select(_Runtime.strictEquals(total, cdfMin), function():Dynamic return cast i, function():Dynamic return cast HxMath.round((((cdf - cdfMin) / (total - cdfMin)) * 255.0))));
         i++;
       }
     }

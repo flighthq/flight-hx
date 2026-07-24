@@ -34,8 +34,8 @@ class Aabb {
   public static function createAabb(?minX:Float, ?minY:Float, ?minZ:Float, ?maxX:Float, ?maxY:Float, ?maxZ:Float):flighthq.types.Aabb {
     var min:Dynamic = cast _Runtime.UNDEFINED;
     var max:Dynamic = cast _Runtime.UNDEFINED;
-    min = _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(minX, function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY')), _Runtime.coalesce(minY, function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY')), _Runtime.coalesce(minZ, function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'))] : Array<Dynamic>));
-    max = _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(maxX, function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY')), _Runtime.coalesce(maxY, function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY')), _Runtime.coalesce(maxZ, function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY'))] : Array<Dynamic>));
+    min = _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(minX, function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY')), _Runtime.coalesce(minY, function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY')), _Runtime.coalesce(minZ, function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY'))] : Array<Dynamic>));
+    max = _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(maxX, function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY')), _Runtime.coalesce(maxY, function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY')), _Runtime.coalesce(maxZ, function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY'))] : Array<Dynamic>));
     return cast _Runtime.callValue(createEntity, cast ([{ max: max, min: min }] : Array<Dynamic>));
     return cast null;
   }
@@ -47,12 +47,12 @@ class Aabb {
     px = _Runtime.field(point, 'x');
     py = _Runtime.field(point, 'y');
     pz = _Runtime.field(point, 'z');
-    _Runtime.setField(_Runtime.field(out, 'min'), 'x', _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(_Runtime.field(aabb, 'min'), 'x'), px] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'y', _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(_Runtime.field(aabb, 'min'), 'y'), py] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'z', _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(_Runtime.field(aabb, 'min'), 'z'), pz] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'x', _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(_Runtime.field(aabb, 'max'), 'x'), px] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'y', _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(_Runtime.field(aabb, 'max'), 'y'), py] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'z', _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(_Runtime.field(aabb, 'max'), 'z'), pz] : Array<Dynamic>)));
+    _Runtime.setField(_Runtime.field(out, 'min'), 'x', HxMath.min(_Runtime.field(_Runtime.field(aabb, 'min'), 'x'), px));
+    _Runtime.setField(_Runtime.field(out, 'min'), 'y', HxMath.min(_Runtime.field(_Runtime.field(aabb, 'min'), 'y'), py));
+    _Runtime.setField(_Runtime.field(out, 'min'), 'z', HxMath.min(_Runtime.field(_Runtime.field(aabb, 'min'), 'z'), pz));
+    _Runtime.setField(_Runtime.field(out, 'max'), 'x', HxMath.max(_Runtime.field(_Runtime.field(aabb, 'max'), 'x'), px));
+    _Runtime.setField(_Runtime.field(out, 'max'), 'y', HxMath.max(_Runtime.field(_Runtime.field(aabb, 'max'), 'y'), py));
+    _Runtime.setField(_Runtime.field(out, 'max'), 'z', HxMath.max(_Runtime.field(_Runtime.field(aabb, 'max'), 'z'), pz));
   }
 
   public static function expandAabbBySphere(out:AabbLike, aabb:AabbLike, sphere:BoundingSphereLike):Void {
@@ -73,12 +73,12 @@ class Aabb {
     cy = _Runtime.field(_Runtime.field(sphere, 'center'), 'y');
     cz = _Runtime.field(_Runtime.field(sphere, 'center'), 'z');
     r = _Runtime.field(sphere, 'radius');
-    _Runtime.setField(_Runtime.field(out, 'min'), 'x', _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(_Runtime.field(aabb, 'min'), 'x'), (cx - r)] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'y', _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(_Runtime.field(aabb, 'min'), 'y'), (cy - r)] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'z', _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(_Runtime.field(aabb, 'min'), 'z'), (cz - r)] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'x', _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(_Runtime.field(aabb, 'max'), 'x'), (cx + r)] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'y', _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(_Runtime.field(aabb, 'max'), 'y'), (cy + r)] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'z', _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(_Runtime.field(aabb, 'max'), 'z'), (cz + r)] : Array<Dynamic>)));
+    _Runtime.setField(_Runtime.field(out, 'min'), 'x', HxMath.min(_Runtime.field(_Runtime.field(aabb, 'min'), 'x'), (cx - r)));
+    _Runtime.setField(_Runtime.field(out, 'min'), 'y', HxMath.min(_Runtime.field(_Runtime.field(aabb, 'min'), 'y'), (cy - r)));
+    _Runtime.setField(_Runtime.field(out, 'min'), 'z', HxMath.min(_Runtime.field(_Runtime.field(aabb, 'min'), 'z'), (cz - r)));
+    _Runtime.setField(_Runtime.field(out, 'max'), 'x', HxMath.max(_Runtime.field(_Runtime.field(aabb, 'max'), 'x'), (cx + r)));
+    _Runtime.setField(_Runtime.field(out, 'max'), 'y', HxMath.max(_Runtime.field(_Runtime.field(aabb, 'max'), 'y'), (cy + r)));
+    _Runtime.setField(_Runtime.field(out, 'max'), 'z', HxMath.max(_Runtime.field(_Runtime.field(aabb, 'max'), 'z'), (cz + r)));
   }
 
   public static function getAabbCenter(out:Vector3Like, aabb:AabbLike):Void {
@@ -106,9 +106,9 @@ class Aabb {
     px = _Runtime.field(point, 'x');
     py = _Runtime.field(point, 'y');
     pz = _Runtime.field(point, 'z');
-    _Runtime.setField(out, 'x', _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callProperty(HxMath, 'max', cast ([px, _Runtime.field(_Runtime.field(aabb, 'min'), 'x')] : Array<Dynamic>)), _Runtime.field(_Runtime.field(aabb, 'max'), 'x')] : Array<Dynamic>)));
-    _Runtime.setField(out, 'y', _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callProperty(HxMath, 'max', cast ([py, _Runtime.field(_Runtime.field(aabb, 'min'), 'y')] : Array<Dynamic>)), _Runtime.field(_Runtime.field(aabb, 'max'), 'y')] : Array<Dynamic>)));
-    _Runtime.setField(out, 'z', _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callProperty(HxMath, 'max', cast ([pz, _Runtime.field(_Runtime.field(aabb, 'min'), 'z')] : Array<Dynamic>)), _Runtime.field(_Runtime.field(aabb, 'max'), 'z')] : Array<Dynamic>)));
+    _Runtime.setField(out, 'x', HxMath.min(HxMath.max(px, _Runtime.field(_Runtime.field(aabb, 'min'), 'x')), _Runtime.field(_Runtime.field(aabb, 'max'), 'x')));
+    _Runtime.setField(out, 'y', HxMath.min(HxMath.max(py, _Runtime.field(_Runtime.field(aabb, 'min'), 'y')), _Runtime.field(_Runtime.field(aabb, 'max'), 'y')));
+    _Runtime.setField(out, 'z', HxMath.min(HxMath.max(pz, _Runtime.field(_Runtime.field(aabb, 'min'), 'z')), _Runtime.field(_Runtime.field(aabb, 'max'), 'z')));
   }
 
   public static function intersectAabb(out:AabbLike, a:AabbLike, b:AabbLike):Void {
@@ -136,12 +136,12 @@ class Aabb {
     bMaxX = _Runtime.field(_Runtime.field(b, 'max'), 'x');
     bMaxY = _Runtime.field(_Runtime.field(b, 'max'), 'y');
     bMaxZ = _Runtime.field(_Runtime.field(b, 'max'), 'z');
-    _Runtime.setField(_Runtime.field(out, 'min'), 'x', _Runtime.callProperty(HxMath, 'max', cast ([aMinX, bMinX] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'y', _Runtime.callProperty(HxMath, 'max', cast ([aMinY, bMinY] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'z', _Runtime.callProperty(HxMath, 'max', cast ([aMinZ, bMinZ] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'x', _Runtime.callProperty(HxMath, 'min', cast ([aMaxX, bMaxX] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'y', _Runtime.callProperty(HxMath, 'min', cast ([aMaxY, bMaxY] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'z', _Runtime.callProperty(HxMath, 'min', cast ([aMaxZ, bMaxZ] : Array<Dynamic>)));
+    _Runtime.setField(_Runtime.field(out, 'min'), 'x', HxMath.max(aMinX, bMinX));
+    _Runtime.setField(_Runtime.field(out, 'min'), 'y', HxMath.max(aMinY, bMinY));
+    _Runtime.setField(_Runtime.field(out, 'min'), 'z', HxMath.max(aMinZ, bMinZ));
+    _Runtime.setField(_Runtime.field(out, 'max'), 'x', HxMath.min(aMaxX, bMaxX));
+    _Runtime.setField(_Runtime.field(out, 'max'), 'y', HxMath.min(aMaxY, bMaxY));
+    _Runtime.setField(_Runtime.field(out, 'max'), 'z', HxMath.min(aMaxZ, bMaxZ));
   }
 
   public static function isAabbIntersectingAabb(a:AabbLike, b:AabbLike):Bool {
@@ -165,12 +165,12 @@ class Aabb {
     var maxX:Dynamic = cast _Runtime.UNDEFINED;
     var maxY:Dynamic = cast _Runtime.UNDEFINED;
     var maxZ:Dynamic = cast _Runtime.UNDEFINED;
-    minX = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    minY = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    minZ = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    maxX = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY');
-    maxY = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY');
-    maxZ = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY');
+    minX = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    minY = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    minZ = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    maxX = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
+    maxY = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
+    maxZ = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(points, 'length'), '<'))) {
@@ -228,9 +228,9 @@ class Aabb {
     tcx = ((((_Runtime.getIndex(_m, 0.0) * cx) + (_Runtime.getIndex(_m, 4.0) * cy)) + (_Runtime.getIndex(_m, 8.0) * cz)) + _Runtime.getIndex(_m, 12.0));
     tcy = ((((_Runtime.getIndex(_m, 1.0) * cx) + (_Runtime.getIndex(_m, 5.0) * cy)) + (_Runtime.getIndex(_m, 9.0) * cz)) + _Runtime.getIndex(_m, 13.0));
     tcz = ((((_Runtime.getIndex(_m, 2.0) * cx) + (_Runtime.getIndex(_m, 6.0) * cy)) + (_Runtime.getIndex(_m, 10.0) * cz)) + _Runtime.getIndex(_m, 14.0));
-    tex = (((_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.getIndex(_m, 0.0)] : Array<Dynamic>)) * ex) + (_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.getIndex(_m, 4.0)] : Array<Dynamic>)) * ey)) + (_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.getIndex(_m, 8.0)] : Array<Dynamic>)) * ez));
-    tey = (((_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.getIndex(_m, 1.0)] : Array<Dynamic>)) * ex) + (_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.getIndex(_m, 5.0)] : Array<Dynamic>)) * ey)) + (_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.getIndex(_m, 9.0)] : Array<Dynamic>)) * ez));
-    tez = (((_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.getIndex(_m, 2.0)] : Array<Dynamic>)) * ex) + (_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.getIndex(_m, 6.0)] : Array<Dynamic>)) * ey)) + (_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.getIndex(_m, 10.0)] : Array<Dynamic>)) * ez));
+    tex = (((HxMath.abs(_Runtime.getIndex(_m, 0.0)) * ex) + (HxMath.abs(_Runtime.getIndex(_m, 4.0)) * ey)) + (HxMath.abs(_Runtime.getIndex(_m, 8.0)) * ez));
+    tey = (((HxMath.abs(_Runtime.getIndex(_m, 1.0)) * ex) + (HxMath.abs(_Runtime.getIndex(_m, 5.0)) * ey)) + (HxMath.abs(_Runtime.getIndex(_m, 9.0)) * ez));
+    tez = (((HxMath.abs(_Runtime.getIndex(_m, 2.0)) * ex) + (HxMath.abs(_Runtime.getIndex(_m, 6.0)) * ey)) + (HxMath.abs(_Runtime.getIndex(_m, 10.0)) * ez));
     _Runtime.setField(_Runtime.field(out, 'min'), 'x', (tcx - tex));
     _Runtime.setField(_Runtime.field(out, 'min'), 'y', (tcy - tey));
     _Runtime.setField(_Runtime.field(out, 'min'), 'z', (tcz - tez));
@@ -264,11 +264,11 @@ class Aabb {
     bMaxX = _Runtime.field(_Runtime.field(b, 'max'), 'x');
     bMaxY = _Runtime.field(_Runtime.field(b, 'max'), 'y');
     bMaxZ = _Runtime.field(_Runtime.field(b, 'max'), 'z');
-    _Runtime.setField(_Runtime.field(out, 'min'), 'x', _Runtime.callProperty(HxMath, 'min', cast ([aMinX, bMinX] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'y', _Runtime.callProperty(HxMath, 'min', cast ([aMinY, bMinY] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'min'), 'z', _Runtime.callProperty(HxMath, 'min', cast ([aMinZ, bMinZ] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'x', _Runtime.callProperty(HxMath, 'max', cast ([aMaxX, bMaxX] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'y', _Runtime.callProperty(HxMath, 'max', cast ([aMaxY, bMaxY] : Array<Dynamic>)));
-    _Runtime.setField(_Runtime.field(out, 'max'), 'z', _Runtime.callProperty(HxMath, 'max', cast ([aMaxZ, bMaxZ] : Array<Dynamic>)));
+    _Runtime.setField(_Runtime.field(out, 'min'), 'x', HxMath.min(aMinX, bMinX));
+    _Runtime.setField(_Runtime.field(out, 'min'), 'y', HxMath.min(aMinY, bMinY));
+    _Runtime.setField(_Runtime.field(out, 'min'), 'z', HxMath.min(aMinZ, bMinZ));
+    _Runtime.setField(_Runtime.field(out, 'max'), 'x', HxMath.max(aMaxX, bMaxX));
+    _Runtime.setField(_Runtime.field(out, 'max'), 'y', HxMath.max(aMaxY, bMaxY));
+    _Runtime.setField(_Runtime.field(out, 'max'), 'z', HxMath.max(aMaxZ, bMaxZ));
   }
 }

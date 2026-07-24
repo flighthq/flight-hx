@@ -60,7 +60,7 @@ class PbrMaterials {
     specB = _Runtime.getIndex(specLinear, 2.0);
     specLuma = (((0.2126 * specR) + (0.7152 * specG)) + (0.0722 * specB));
     DIELECTRIC_F0 = 0.04;
-    metallic = _Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, ((specLuma - DIELECTRIC_F0) / (1.0 - DIELECTRIC_F0))] : Array<Dynamic>))] : Array<Dynamic>));
+    metallic = HxMath.min(1.0, HxMath.max(0.0, ((specLuma - DIELECTRIC_F0) / (1.0 - DIELECTRIC_F0))));
     diffLinear = PbrMaterials.scratchLinear2__pbrMaterials;
     _Runtime.callValue(unpackColorToLinear, cast ([diffLinear, diffuse] : Array<Dynamic>));
     diffR = _Runtime.getIndex(diffLinear, 0.0);
@@ -138,12 +138,12 @@ class PbrMaterials {
   public static function linearChannelToSrgb8__pbrMaterials(value:Float):Float {
     var srgb:Dynamic = cast _Runtime.UNDEFINED;
     srgb = _Runtime.select(_Runtime.compare(value, 0.0031308, '<='), function():Dynamic return cast (value * 12.92), function():Dynamic return cast ((1.055 * HxMath.pow(value, (1.0 / 2.4))) - 0.055));
-    return cast _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, srgb] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>));
+    return cast HxMath.round((HxMath.min(1.0, HxMath.max(0.0, srgb)) * 255.0));
     return cast null;
   }
 
   public static function packLinear__pbrMaterials(r:Float, g:Float, b:Float, a:Float):Float {
-    return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([r] : Array<Dynamic>))) << Std.int(24.0))) | Std.int((Std.int(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([g] : Array<Dynamic>))) << Std.int(16.0))))) | Std.int((Std.int(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([b] : Array<Dynamic>))) << Std.int(8.0))))) | Std.int(_Runtime.callProperty(HxMath, 'round', cast ([(a * 255.0)] : Array<Dynamic>))))), Std.int(0.0));
+    return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([r] : Array<Dynamic>))) << Std.int(24.0))) | Std.int((Std.int(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([g] : Array<Dynamic>))) << Std.int(16.0))))) | Std.int((Std.int(_Runtime.callValue(PbrMaterials.linearChannelToSrgb8__pbrMaterials, cast ([b] : Array<Dynamic>))) << Std.int(8.0))))) | Std.int(HxMath.round((a * 255.0))))), Std.int(0.0));
     return cast null;
   }
 

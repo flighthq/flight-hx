@@ -8,25 +8,25 @@ import flighthq.types.EasingFunction;
 class EaseElastic {
   public static final easeInElastic:EasingFunction = function(t:Dynamic) {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(t, 0.0), function():Dynamic return cast _Runtime.strictEquals(t, 1.0)))) { return cast t; }
-    return cast -(_Runtime.callProperty(HxMath, 'pow', cast ([2.0, (10.0 * (t = cast ((t - 1.0) : Dynamic)))] : Array<Dynamic>)) * _Runtime.callProperty(HxMath, 'sin', cast ([(((t - EaseElastic.s__easeElastic) * (2.0 * HxMath.PI)) / EaseElastic.p__easeElastic)] : Array<Dynamic>)));
+    return cast -(HxMath.pow(2.0, (10.0 * (t = cast ((t - 1.0) : Dynamic)))) * HxMath.sin((((t - EaseElastic.s__easeElastic) * (2.0 * HxMath.PI)) / EaseElastic.p__easeElastic)));
   };
 
   public static final easeInOutElastic:EasingFunction = function(t:Dynamic) {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(t, 0.0), function():Dynamic return cast _Runtime.strictEquals(t, 1.0)))) { return cast t; }
-    if (_Runtime.truthy(_Runtime.compare((t = cast ((t * 2.0) : Dynamic)), 1.0, '<'))) { return cast (-0.5 * (_Runtime.callProperty(HxMath, 'pow', cast ([2.0, (10.0 * (t = cast ((t - 1.0) : Dynamic)))] : Array<Dynamic>)) * _Runtime.callProperty(HxMath, 'sin', cast ([(((t - EaseElastic.s2__easeElastic) * (2.0 * HxMath.PI)) / EaseElastic.p2__easeElastic)] : Array<Dynamic>)))); }
-    return cast (((0.5 * _Runtime.callProperty(HxMath, 'pow', cast ([2.0, (-10.0 * (t = cast ((t - 1.0) : Dynamic)))] : Array<Dynamic>))) * _Runtime.callProperty(HxMath, 'sin', cast ([(((t - EaseElastic.s2__easeElastic) * (2.0 * HxMath.PI)) / EaseElastic.p2__easeElastic)] : Array<Dynamic>))) + 1.0);
+    if (_Runtime.truthy(_Runtime.compare((t = cast ((t * 2.0) : Dynamic)), 1.0, '<'))) { return cast (-0.5 * (HxMath.pow(2.0, (10.0 * (t = cast ((t - 1.0) : Dynamic)))) * HxMath.sin((((t - EaseElastic.s2__easeElastic) * (2.0 * HxMath.PI)) / EaseElastic.p2__easeElastic)))); }
+    return cast (((0.5 * HxMath.pow(2.0, (-10.0 * (t = cast ((t - 1.0) : Dynamic))))) * HxMath.sin((((t - EaseElastic.s2__easeElastic) * (2.0 * HxMath.PI)) / EaseElastic.p2__easeElastic))) + 1.0);
   };
 
   public static final easeOutElastic:EasingFunction = function(t:Dynamic) {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(t, 0.0), function():Dynamic return cast _Runtime.strictEquals(t, 1.0)))) { return cast t; }
-    return cast ((_Runtime.callProperty(HxMath, 'pow', cast ([2.0, (-10.0 * t)] : Array<Dynamic>)) * _Runtime.callProperty(HxMath, 'sin', cast ([(((t - EaseElastic.s__easeElastic) * (2.0 * HxMath.PI)) / EaseElastic.p__easeElastic)] : Array<Dynamic>))) + 1.0);
+    return cast ((HxMath.pow(2.0, (-10.0 * t)) * HxMath.sin((((t - EaseElastic.s__easeElastic) * (2.0 * HxMath.PI)) / EaseElastic.p__easeElastic))) + 1.0);
   };
 
   public static final p__easeElastic:Dynamic = 0.4;
 
   public static final p2__easeElastic:Dynamic = 0.45;
 
-  public static final s__easeElastic:Dynamic = ((EaseElastic.p__easeElastic / (2.0 * HxMath.PI)) * _Runtime.callProperty(HxMath, 'asin', cast ([1.0] : Array<Dynamic>)));
+  public static final s__easeElastic:Dynamic = ((EaseElastic.p__easeElastic / (2.0 * HxMath.PI)) * HxMath.asin(1.0));
 
-  public static final s2__easeElastic:Dynamic = ((EaseElastic.p2__easeElastic / (2.0 * HxMath.PI)) * _Runtime.callProperty(HxMath, 'asin', cast ([1.0] : Array<Dynamic>)));
+  public static final s2__easeElastic:Dynamic = ((EaseElastic.p2__easeElastic / (2.0 * HxMath.PI)) * HxMath.asin(1.0));
 }

@@ -93,7 +93,7 @@ class InteractionSpatialIndex {
     if (_Runtime.truthy(enabled)) { _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>)); }
   }
 
-  public static final managerCandidates__interactionSpatialIndex:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final managerCandidates__interactionSpatialIndex:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static final spatialInsertAabb__interactionSpatialIndex:SpatialAabb = { maxX: 0.0, maxY: 0.0, minX: 0.0, minY: 0.0 };
 

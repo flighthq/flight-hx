@@ -27,15 +27,15 @@ class GlMeshProgram {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     _Runtime.setField(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram', program);
-    _Runtime.callProperty(gl, 'useProgram', cast ([_Runtime.field(program, 'program')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'enable', cast ([_Runtime.field(gl, 'DEPTH_TEST')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'depthFunc', cast ([_Runtime.field(gl, 'LESS')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'depthMask', cast ([true] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'useProgram', cast ([_Runtime.field(program, 'program')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'DEPTH_TEST')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'depthFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'LESS')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'depthMask', cast ([true] : Array<Dynamic>));
     if (_Runtime.truthy(doubleSided)) {
-      _Runtime.callProperty(gl, 'disable', cast ([_Runtime.field(gl, 'CULL_FACE')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'disable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'CULL_FACE')] : Array<Dynamic>));
     } else {
-      _Runtime.callProperty(gl, 'enable', cast ([_Runtime.field(gl, 'CULL_FACE')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'cullFace', cast ([_Runtime.field(gl, 'BACK')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'enable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'CULL_FACE')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'cullFace', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'BACK')] : Array<Dynamic>));
     }
   }
 
@@ -43,12 +43,12 @@ class GlMeshProgram {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.field(program, 'locUvTransform');
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (loc = cast (_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(program, 'program'), 'u_uvTransform'] : Array<Dynamic>)) : Dynamic));
+      (loc = cast (flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(program, 'program'), 'u_uvTransform'] : Array<Dynamic>)) : Dynamic));
       _Runtime.setField((cast program : flighthq.types.GlMeshProgram), 'locUvTransform', loc);
     }
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(loc, null), function():Dynamic return cast _Runtime.strictEquals(texture, null)))) { return; }
     _Runtime.callValue(getTextureUvMatrix, cast ([GlMeshProgram.scratchUvMatrix__glMeshProgram, texture] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniformMatrix3fv', cast ([loc, false, _Runtime.field(GlMeshProgram.scratchUvMatrix__glMeshProgram, 'm')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniformMatrix3fv', cast ([loc, false, _Runtime.field(GlMeshProgram.scratchUvMatrix__glMeshProgram, 'm')] : Array<Dynamic>));
   }
 
   public static function compileGlProgram(gl:Dynamic, vertexSource:String, fragmentSource:String):Dynamic {
@@ -57,7 +57,7 @@ class GlMeshProgram {
   }
 
   public static function destroyGlMeshProgram(state:GlRenderState, program:flighthq.types.GlMeshProgram):Void {
-    _Runtime.callProperty(_Runtime.field(state, 'gl'), 'deleteProgram', cast ([_Runtime.field(program, 'program')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(_Runtime.field(state, 'gl'), 'deleteProgram', cast ([_Runtime.field(program, 'program')] : Array<Dynamic>));
   }
 
   public static function drawGlMeshSubset(state:GlRenderState, program:flighthq.types.GlMeshProgram, proxy:SceneRenderProxy, geometry:MeshGeometry):Void {
@@ -68,29 +68,29 @@ class GlMeshProgram {
     var upload:Dynamic = cast _Runtime.UNDEFINED;
     var subset:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    _Runtime.callProperty(gl, 'uniformMatrix4fv', cast ([_Runtime.field(program, 'locModel'), false, _Runtime.field(_Runtime.field(proxy, 'worldMatrix'), 'm')] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(program, 'locNormalMatrix'), null))) { _Runtime.callProperty(gl, 'uniformMatrix3fv', cast ([_Runtime.field(program, 'locNormalMatrix'), false, _Runtime.field(_Runtime.field(proxy, 'normalMatrix'), 'm')] : Array<Dynamic>)); }
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniformMatrix4fv', cast ([_Runtime.field(program, 'locModel'), false, _Runtime.field(_Runtime.field(proxy, 'worldMatrix'), 'm')] : Array<Dynamic>));
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(program, 'locNormalMatrix'), null))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'uniformMatrix3fv', cast ([_Runtime.field(program, 'locNormalMatrix'), false, _Runtime.field(_Runtime.field(proxy, 'normalMatrix'), 'm')] : Array<Dynamic>)); }
     locObjectAlpha = _Runtime.field(program, 'locObjectAlpha');
     if (_Runtime.truthy(_Runtime.strictEquals(locObjectAlpha, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (locObjectAlpha = cast (_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(program, 'program'), 'u_objectAlpha'] : Array<Dynamic>)) : Dynamic));
+      (locObjectAlpha = cast (flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(program, 'program'), 'u_objectAlpha'] : Array<Dynamic>)) : Dynamic));
       _Runtime.setField((cast program : flighthq.types.GlMeshProgram), 'locObjectAlpha', locObjectAlpha);
     }
-    if (_Runtime.truthy(!_Runtime.strictEquals(locObjectAlpha, null))) { _Runtime.callProperty(gl, 'uniform1f', cast ([locObjectAlpha, _Runtime.coalesce(_Runtime.field(proxy, 'alpha'), function():Dynamic return cast 1.0)] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(locObjectAlpha, null))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([locObjectAlpha, _Runtime.coalesce(_Runtime.field(proxy, 'alpha'), function():Dynamic return cast 1.0)] : Array<Dynamic>)); }
     jointMatrices = _Runtime.field(proxy, 'jointMatrices');
     gpuSkinned = _Runtime.andValue(!_Runtime.looseEquals(_Runtime.field(program, 'locJointTexture'), null), function():Dynamic return cast !_Runtime.looseEquals(jointMatrices, null));
     if (_Runtime.truthy(gpuSkinned)) {
       var palette:Dynamic = _Runtime.callValue(ensureGlSkinPalette, cast ([state] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'activeTexture', cast ([(_Runtime.field(gl, 'TEXTURE0') + SKIN_PALETTE_TEXTURE_UNIT)] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([(flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE0') + SKIN_PALETTE_TEXTURE_UNIT)] : Array<Dynamic>));
       _Runtime.callValue(uploadGlSkinPaletteTexture, cast ([gl, palette, jointMatrices, (Std.int((_Runtime.field(jointMatrices, 'length') / 16.0)) | Std.int(0.0))] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1i', cast ([_Runtime.field(program, 'locJointTexture'), SKIN_PALETTE_TEXTURE_UNIT] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locJointTexture'), SKIN_PALETTE_TEXTURE_UNIT] : Array<Dynamic>));
     }
     upload = _Runtime.callValue(ensureGlMeshUpload, cast ([state, geometry, gpuSkinned] : Array<Dynamic>));
     subset = _Runtime.field(proxy, 'subset');
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null))) {
-      var elementSize:Dynamic = _Runtime.select(_Runtime.strictEquals(_Runtime.field(upload, 'indexType'), _Runtime.field(gl, 'UNSIGNED_INT')), function():Dynamic return cast 4.0, function():Dynamic return cast 2.0);
-      _Runtime.callProperty(gl, 'drawElements', cast ([_Runtime.field(upload, 'primitiveMode'), _Runtime.field(subset, 'indexCount'), _Runtime.field(upload, 'indexType'), (_Runtime.field(subset, 'indexOffset') * elementSize)] : Array<Dynamic>));
+      var elementSize:Dynamic = _Runtime.select(_Runtime.strictEquals(_Runtime.field(upload, 'indexType'), flighthq._internal.WebGl2RenderingContext.field(gl, 'UNSIGNED_INT')), function():Dynamic return cast 4.0, function():Dynamic return cast 2.0);
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'drawElements', cast ([_Runtime.field(upload, 'primitiveMode'), _Runtime.field(subset, 'indexCount'), _Runtime.field(upload, 'indexType'), (_Runtime.field(subset, 'indexOffset') * elementSize)] : Array<Dynamic>));
     } else {
-      _Runtime.callProperty(gl, 'drawArrays', cast ([_Runtime.field(upload, 'primitiveMode'), _Runtime.field(subset, 'indexOffset'), _Runtime.field(subset, 'indexCount')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'drawArrays', cast ([_Runtime.field(upload, 'primitiveMode'), _Runtime.field(subset, 'indexOffset'), _Runtime.field(subset, 'indexCount')] : Array<Dynamic>));
     }
   }
 
@@ -115,14 +115,14 @@ class GlMeshProgram {
   public static function setGlMeshCameraPosition(gl:Dynamic, locCameraPosition:Null<Dynamic>, camera:Camera3D):Void {
     _Runtime.callValue(inverseMatrix4, cast ([GlMeshProgram.scratchInverseView__glMeshProgram, _Runtime.field(camera, 'view')] : Array<Dynamic>));
     _Runtime.callValue(getMatrix4Position, cast ([GlMeshProgram.scratchCameraPosition__glMeshProgram, GlMeshProgram.scratchInverseView__glMeshProgram] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform3f', cast ([locCameraPosition, _Runtime.field(GlMeshProgram.scratchCameraPosition__glMeshProgram, 'x'), _Runtime.field(GlMeshProgram.scratchCameraPosition__glMeshProgram, 'y'), _Runtime.field(GlMeshProgram.scratchCameraPosition__glMeshProgram, 'z')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform3f', cast ([locCameraPosition, _Runtime.field(GlMeshProgram.scratchCameraPosition__glMeshProgram, 'x'), _Runtime.field(GlMeshProgram.scratchCameraPosition__glMeshProgram, 'y'), _Runtime.field(GlMeshProgram.scratchCameraPosition__glMeshProgram, 'z')] : Array<Dynamic>));
   }
 
   public static function setGlMeshViewProjection(gl:Dynamic, locViewProjection:Null<Dynamic>, camera:Camera3D):Void {
     var aspect:Dynamic = cast _Runtime.UNDEFINED;
     aspect = _Runtime.select(_Runtime.strictEquals(_Runtime.field(_Runtime.field(camera, 'projection'), 'kind'), 'perspective'), function():Dynamic return cast _Runtime.field(_Runtime.field(camera, 'projection'), 'aspect'), function():Dynamic return cast 1.0);
     _Runtime.callValue(getCamera3DViewProjectionMatrix4, cast ([GlMeshProgram.scratchViewProjection__glMeshProgram, camera, _Runtime.select(!_Runtime.strictEquals(aspect, 0.0), function():Dynamic return cast aspect, function():Dynamic return cast 1.0)] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniformMatrix4fv', cast ([locViewProjection, false, _Runtime.field(GlMeshProgram.scratchViewProjection__glMeshProgram, 'm')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniformMatrix4fv', cast ([locViewProjection, false, _Runtime.field(GlMeshProgram.scratchViewProjection__glMeshProgram, 'm')] : Array<Dynamic>));
   }
 
   public static final GL_UV_TRANSFORM_VERTEX_GLSL:Dynamic = '\n#ifdef HAS_UV_TRANSFORM\nuniform mat3 u_uvTransform;\nvec2 applyUvTransform(vec2 uv) { return (u_uvTransform * vec3(uv, 1.0)).xy; }\n#else\nvec2 applyUvTransform(vec2 uv) { return uv; }\n#endif\n';

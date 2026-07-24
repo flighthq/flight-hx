@@ -22,11 +22,11 @@ class TiledColor {
     if (_Runtime.truthy(StringTools.startsWith(s, '#'))) { (s = cast (_Runtime.slice(s, 1.0, null) : Dynamic)); }
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.regexp('^[0-9a-fA-F]+$$', ''), 'test', cast ([s] : Array<Dynamic>))))) { return cast null; }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(s, 'length'), 6.0))) {
-      var rgb:Dynamic = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([s, 16.0] : Array<Dynamic>));
+      var rgb:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([s, 16.0] : Array<Dynamic>));
       return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int(rgb) << Std.int(8.0))) | Std.int(255.0))), Std.int(0.0));
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(s, 'length'), 8.0))) {
-      var argb:Dynamic = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([s, 16.0] : Array<Dynamic>));
+      var argb:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([s, 16.0] : Array<Dynamic>));
       var alpha:Dynamic = (Std.int(_Runtime.unsignedShiftRight(Std.int(argb), Std.int(24.0))) & Std.int(255.0));
       var rgb:Dynamic = (Std.int(argb) & Std.int(16777215.0));
       return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int(rgb) << Std.int(8.0))) | Std.int(alpha))), Std.int(0.0));

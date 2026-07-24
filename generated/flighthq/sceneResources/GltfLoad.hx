@@ -51,14 +51,14 @@ class GltfLoad {
       var externalBuffers:Dynamic = cast _Runtime.UNDEFINED;
       var entries:Dynamic = cast _Runtime.UNDEFINED;
       var bytes:Dynamic = cast _Runtime.UNDEFINED;
-      uris = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
+      uris = _Runtime.construct(_Runtime.globalValue('Set'), []);
       for (buffer in _Runtime.iterable(_Runtime.coalesce(_Runtime.field(gltf, 'buffers'), function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
         var uri:Dynamic = _Runtime.field(buffer, 'uri');
         if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(uri, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.truthy(StringTools.startsWith(uri, 'data:'))))) { _Runtime.callProperty(uris, 'add', cast ([uri] : Array<Dynamic>)); }
       }
       externalBuffers = {  };
       entries = _Runtime.concatArrays([_Runtime.toArray(uris)]);
-      bytes = flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'all', cast ([_Runtime.callProperty(entries, 'map', cast ([function(uri:Dynamic) return _Runtime.callValue(loadSceneDocumentBytesFromUrl, cast ([_Runtime.callValue(GltfLoad.resolveGltfBufferUrl__gltfLoad, cast ([uri, basePath] : Array<Dynamic>)), options] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
+      bytes = flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.globalValue('Promise'), 'all', cast ([_Runtime.callProperty(entries, 'map', cast ([function(uri:Dynamic) return _Runtime.callValue(loadSceneDocumentBytesFromUrl, cast ([_Runtime.callValue(GltfLoad.resolveGltfBufferUrl__gltfLoad, cast ([uri, basePath] : Array<Dynamic>)), options] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
       {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(entries, 'length'), '<'))) {

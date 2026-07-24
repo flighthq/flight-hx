@@ -32,7 +32,7 @@ class TiledProject {
     data = _Runtime.field(__destructure0, 'data');
     cellCount = (width * height);
     groups = cast ([] : Array<Dynamic>);
-    byFirstGid = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    byFirstGid = _Runtime.construct(_Runtime.globalValue('Map'), []);
     anyResolved = false;
     {
       var i:Dynamic = 0.0;

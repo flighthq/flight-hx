@@ -35,11 +35,11 @@ class EaseCubicBezier {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, 8.0, '<'))) {
           var xError:Dynamic = (_Runtime.callValue(sampleX, cast ([s] : Array<Dynamic>)) - x);
-          if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([xError] : Array<Dynamic>)), epsilon, '<'))) {
+          if (_Runtime.truthy(_Runtime.compare(HxMath.abs(xError), epsilon, '<'))) {
             return cast s;
           }
           var derivative:Dynamic = _Runtime.callValue(sampleDerivativeX, cast ([s] : Array<Dynamic>));
-          if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([derivative] : Array<Dynamic>)), 0.000001, '<'))) {
+          if (_Runtime.truthy(_Runtime.compare(HxMath.abs(derivative), 0.000001, '<'))) {
             break;
           }
           (s = cast ((s - (xError / derivative)) : Dynamic));
@@ -57,7 +57,7 @@ class EaseCubicBezier {
       }
       while (_Runtime.truthy(_Runtime.compare(low, high, '<'))) {
         var sampled:Dynamic = _Runtime.callValue(sampleX, cast ([s] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(sampled - x)] : Array<Dynamic>)), epsilon, '<'))) {
+        if (_Runtime.truthy(_Runtime.compare(HxMath.abs((sampled - x)), epsilon, '<'))) {
           return cast s;
         }
         if (_Runtime.truthy(_Runtime.compare(x, sampled, '>'))) {

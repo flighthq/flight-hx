@@ -14,7 +14,7 @@ import flighthq.types.ShareSignals;
 class Share {
   public static var _backend__share:Null<ShareBackend> = _Runtime.explicitNull();
 
-  public static final _signalListeners__share:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+  public static final _signalListeners__share:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
 
   public static function attachShareSignals(signals:ShareSignals):Void {
     _Runtime.callValue(detachShareSignals, cast ([signals] : Array<Dynamic>));
@@ -28,34 +28,34 @@ class Share {
 
   public static function createWebShareBackend():ShareBackend {
     return cast { isAvailable: function() {
-      return cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.hasField(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'share'));
+      return cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.hasField(_Runtime.globalValue('navigator'), 'share'));
     }, canShare: function(content:Dynamic) {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'share'))))) { return cast false; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.globalValue('navigator'), 'share'))))) { return cast false; }
       try {
         var data:Dynamic = _Runtime.callValue(Share.shareContentToNavigatorData__share, cast ([content] : Array<Dynamic>));
-        return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'canShare', cast ([data] : Array<Dynamic>)), function():Dynamic return cast false);
+        return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.globalValue('navigator'), 'canShare', cast ([data] : Array<Dynamic>)), function():Dynamic return cast false);
       } catch (__error:Dynamic) {
         return cast false;
       }
     }, share: flighthq._internal._Async.make(function(content:Dynamic, ?_options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'share'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'share')), 'function')))) {
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.globalValue('navigator'), 'share'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('navigator'), 'share')), 'function')))) {
         return cast false;
       }
       try {
         var data:Dynamic = _Runtime.callValue(Share.shareContentToNavigatorData__share, cast ([content] : Array<Dynamic>));
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'share', cast ([data] : Array<Dynamic>)));
+        flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.globalValue('navigator'), 'share', cast ([data] : Array<Dynamic>)));
         return cast true;
       } catch (__error:Dynamic) {
         return cast false;
       }
       return cast null;
     }), shareWithResult: flighthq._internal._Async.make(function(content:Dynamic, ?_options:Dynamic):flighthq._internal._Promise<Dynamic> {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'share'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'share')), 'function')))) {
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.globalValue('navigator'), 'share'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('navigator'), 'share')), 'function')))) {
         return cast { completed: false, activityType: null, dismissed: false };
       }
       try {
         var data:Dynamic = _Runtime.callValue(Share.shareContentToNavigatorData__share, cast ([content] : Array<Dynamic>));
-        flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'share', cast ([data] : Array<Dynamic>)));
+        flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.globalValue('navigator'), 'share', cast ([data] : Array<Dynamic>)));
         return cast { completed: true, activityType: null, dismissed: false };
       } catch (err:Dynamic) {
         var dismissed:Dynamic = _Runtime.andValue(_Runtime.isError(err), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(err, 'name'), 'AbortError'));
@@ -104,7 +104,7 @@ class Share {
   }
 
   public static function shareContent(content:ShareContent, ?options:ShareOptions):flighthq._internal._Promise<Bool> {
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(hasShareContentFields, cast ([content] : Array<Dynamic>))))) { return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([false] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(hasShareContentFields, cast ([content] : Array<Dynamic>))))) { return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([false] : Array<Dynamic>)); }
     return cast _Runtime.callProperty(_Runtime.callValue(getShareBackend, cast ([] : Array<Dynamic>)), 'share', cast ([content, options] : Array<Dynamic>));
     return cast null;
   }
@@ -150,8 +150,8 @@ class Share {
     body = _Runtime.substring(_Runtime.field(file, 'dataUrl'), (comma + 1.0), null);
     isBase64 = _Runtime.includes(header, ';base64');
     if (_Runtime.truthy(isBase64)) {
-      var binary:Dynamic = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['atob'] : Array<Dynamic>)), cast ([body] : Array<Dynamic>));
-      (bytes = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['ArrayBuffer'] : Array<Dynamic>)), [_Runtime.field(binary, 'length')])]) : Dynamic));
+      var binary:Dynamic = _Runtime.callValue(_Runtime.globalValue('atob'), cast ([body] : Array<Dynamic>));
+      (bytes = cast (_Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [_Runtime.field(binary, 'length')])]) : Dynamic));
       {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(binary, 'length'), '<'))) {
@@ -160,12 +160,12 @@ class Share {
         }
       }
     } else {
-      var decoded:Dynamic = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['decodeURIComponent'] : Array<Dynamic>)), cast ([body] : Array<Dynamic>));
-      var encoded:Dynamic = _Runtime.callProperty(_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['TextEncoder'] : Array<Dynamic>)), []), 'encode', cast ([decoded] : Array<Dynamic>));
-      (bytes = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['ArrayBuffer'] : Array<Dynamic>)), [_Runtime.field(encoded, 'length')])]) : Dynamic));
+      var decoded:Dynamic = _Runtime.callValue(_Runtime.globalValue('decodeURIComponent'), cast ([body] : Array<Dynamic>));
+      var encoded:Dynamic = _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('TextEncoder'), []), 'encode', cast ([decoded] : Array<Dynamic>));
+      (bytes = cast (_Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [_Runtime.field(encoded, 'length')])]) : Dynamic));
       _Runtime.callProperty(bytes, 'set', cast ([encoded] : Array<Dynamic>));
     }
-    return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['File'] : Array<Dynamic>)), [cast ([bytes] : Array<Dynamic>), _Runtime.field(file, 'name'), { type: _Runtime.field(file, 'mimeType') }]);
+    return cast _Runtime.construct(_Runtime.globalValue('File'), [cast ([bytes] : Array<Dynamic>), _Runtime.field(file, 'name'), { type: _Runtime.field(file, 'mimeType') }]);
     return cast null;
   }
 

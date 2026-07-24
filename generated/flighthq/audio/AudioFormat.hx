@@ -7,13 +7,13 @@ import flighthq._internal._Runtime;
 class AudioFormat {
   public static function canPlayAudioType(mimeType:String):Bool {
     if (_Runtime.truthy(_Runtime.strictEquals(mimeType, ''))) { return cast false; }
-    return cast !_Runtime.strictEquals(_Runtime.callProperty(_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Audio'] : Array<Dynamic>)), []), 'canPlayType', cast ([mimeType] : Array<Dynamic>)), '');
+    return cast !_Runtime.strictEquals(_Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('Audio'), []), 'canPlayType', cast ([mimeType] : Array<Dynamic>)), '');
     return cast null;
   }
 
   public static function detectAudioMimeType(data:Dynamic):Null<String> {
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    b = _Runtime.select(_Runtime.isInstanceOf(data, _Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>))), function():Dynamic return cast data, function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [data]));
+    b = _Runtime.select(_Runtime.isInstanceOf(data, _Runtime.globalValue('Uint8Array')), function():Dynamic return cast data, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Uint8Array'), [data]));
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(b, 'byteLength'), 4.0, '<'))) { return cast null; }
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.field(b, 'byteLength'), 12.0, '>='), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 0.0), 82.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 1.0), 73.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 2.0), 70.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 3.0), 70.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 8.0), 87.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 9.0), 65.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 10.0), 86.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 11.0), 69.0)))) { return cast 'audio/wav'; }
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.getIndex(b, 0.0), 102.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 1.0), 76.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 2.0), 97.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 3.0), 67.0)))) { return cast 'audio/flac'; }

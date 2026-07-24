@@ -47,7 +47,7 @@ class ParticleEmitter {
     index = _Runtime.field(_Runtime.field(target, 'data'), 'particleCount');
     needed = (index + 1.0);
     if (_Runtime.truthy(_Runtime.compare(_Runtime.callValue(getParticleEmitter2DCapacity, cast ([target] : Array<Dynamic>)), needed, '<'))) {
-      var newCapacity:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([needed, _Runtime.orValue((_Runtime.field(_Runtime.field(target, 'data'), 'particleCount') * 2.0), function():Dynamic return cast 8.0)] : Array<Dynamic>));
+      var newCapacity:Dynamic = HxMath.max(needed, _Runtime.orValue((_Runtime.field(_Runtime.field(target, 'data'), 'particleCount') * 2.0), function():Dynamic return cast 8.0));
       _Runtime.callValue(reserveParticleEmitter2D, cast ([target, newCapacity] : Array<Dynamic>));
     }
     _Runtime.setField(_Runtime.field(target, 'data'), 'particleCount', needed);
@@ -160,8 +160,8 @@ class ParticleEmitter {
         var py:Dynamic = _Runtime.getIndex(transforms, (tt + 1.0));
         var rotation:Dynamic = _Runtime.getIndex(transforms, (tt + 2.0));
         var scale:Dynamic = _Runtime.getIndex(transforms, (tt + 3.0));
-        var cosR:Dynamic = (_Runtime.callProperty(HxMath, 'cos', cast ([rotation] : Array<Dynamic>)) * scale);
-        var sinR:Dynamic = (_Runtime.callProperty(HxMath, 'sin', cast ([rotation] : Array<Dynamic>)) * scale);
+        var cosR:Dynamic = (HxMath.cos(rotation) * scale);
+        var sinR:Dynamic = (HxMath.sin(rotation) * scale);
         var w:Dynamic = _Runtime.field(region, 'width');
         var h:Dynamic = _Runtime.field(region, 'height');
         var x0:Dynamic = px;
@@ -210,7 +210,7 @@ class ParticleEmitter {
   }
 
   public static function createParticleEmitterData(?data:Dynamic):ParticleEmitterData {
-    return cast { alphas: _Runtime.coalesce(_Runtime.optionalField(data, 'alphas'), function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [])), atlas: _Runtime.coalesce(_Runtime.optionalField(data, 'atlas'), function():Dynamic return cast null), colors: _Runtime.coalesce(_Runtime.optionalField(data, 'colors'), function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [])), ids: _Runtime.coalesce(_Runtime.optionalField(data, 'ids'), function():Dynamic return cast new flighthq._internal._UInt16Array()), particleCount: _Runtime.coalesce(_Runtime.optionalField(data, 'particleCount'), function():Dynamic return cast 0.0), positionsZ: _Runtime.coalesce(_Runtime.optionalField(data, 'positionsZ'), function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [])), transforms: _Runtime.coalesce(_Runtime.optionalField(data, 'transforms'), function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [])), velocities: _Runtime.coalesce(_Runtime.optionalField(data, 'velocities'), function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [])), worldSpace: _Runtime.coalesce(_Runtime.optionalField(data, 'worldSpace'), function():Dynamic return cast false) };
+    return cast { alphas: _Runtime.coalesce(_Runtime.optionalField(data, 'alphas'), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [])), atlas: _Runtime.coalesce(_Runtime.optionalField(data, 'atlas'), function():Dynamic return cast null), colors: _Runtime.coalesce(_Runtime.optionalField(data, 'colors'), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [])), ids: _Runtime.coalesce(_Runtime.optionalField(data, 'ids'), function():Dynamic return cast new flighthq._internal._UInt16Array()), particleCount: _Runtime.coalesce(_Runtime.optionalField(data, 'particleCount'), function():Dynamic return cast 0.0), positionsZ: _Runtime.coalesce(_Runtime.optionalField(data, 'positionsZ'), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [])), transforms: _Runtime.coalesce(_Runtime.optionalField(data, 'transforms'), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [])), velocities: _Runtime.coalesce(_Runtime.optionalField(data, 'velocities'), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [])), worldSpace: _Runtime.coalesce(_Runtime.optionalField(data, 'worldSpace'), function():Dynamic return cast false) };
     return cast null;
   }
 

@@ -27,5 +27,5 @@ class WgpuDefaultMaterial {
 
   public static final DEFAULT_MATERIAL_WGSL__wgpuDefaultMaterial:Dynamic = '\nstruct VertexOut {\n  @builtin(position) position : vec4f,\n  @location(0) uv : vec2f,\n  @location(1) alpha : f32,\n}\n\n@vertex\nfn vs_main(@builtin(vertex_index) vi : u32, @builtin(instance_index) ii : u32) -> VertexOut {\n  let bv = quadBaseVertex(vi, ii);\n  return VertexOut(bv.position, bv.uv, bv.alpha);\n}\n\n@fragment\nfn fs_main(in : VertexOut) -> @location(0) vec4f {\n  var color = textureSample(tex, smp, in.uv);\n  if (color.a <= 0.0) { discard; }\n  return color * clamp(in.alpha, 0.0, 1.0);\n}\n';
 
-  public static final _modules__wgpuDefaultMaterial:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _modules__wgpuDefaultMaterial:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

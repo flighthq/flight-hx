@@ -136,8 +136,8 @@ class DrawGlScene {
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(blendedDrawList, 'length'), 0.0, '>'))) {
       _Runtime.callProperty(blendedDrawList, 'sort', cast ([DrawGlScene.compareBlendedEntriesDescending__drawGlScene] : Array<Dynamic>));
       var gl:Dynamic = _Runtime.field(state, 'gl');
-      _Runtime.callProperty(gl, 'enable', cast ([_Runtime.field(gl, 'BLEND')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'blendFunc', cast ([_Runtime.field(gl, 'SRC_ALPHA'), _Runtime.field(gl, 'ONE_MINUS_SRC_ALPHA')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'enable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'BLEND')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'blendFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'SRC_ALPHA'), flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE_MINUS_SRC_ALPHA')] : Array<Dynamic>));
       (boundMaterial = cast (_Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
       (boundRenderer = cast (null : Dynamic));
       (boundSkinned = cast (_Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
@@ -165,7 +165,7 @@ class DrawGlScene {
           i++;
         }
       }
-      _Runtime.callProperty(gl, 'disable', cast ([_Runtime.field(gl, 'BLEND')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'disable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'BLEND')] : Array<Dynamic>));
     }
     _Runtime.callValue(drawGlSceneParticleEmitter2Ds, cast ([state, scene, camera, lights] : Array<Dynamic>));
     _Runtime.callValue(invalidateGlRenderStateCache, cast ([state] : Array<Dynamic>));

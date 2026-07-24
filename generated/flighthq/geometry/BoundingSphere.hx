@@ -66,7 +66,7 @@ class BoundingSphere {
     dx = (_Runtime.field(point, 'x') - cx);
     dy = (_Runtime.field(point, 'y') - cy);
     dz = (_Runtime.field(point, 'z') - cz);
-    dist = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((dx * dx) + (dy * dy)) + (dz * dz))] : Array<Dynamic>));
+    dist = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if (_Runtime.truthy(_Runtime.strictEquals(dist, 0.0))) {
       _Runtime.setField(out, 'x', (cx + r));
       _Runtime.setField(out, 'y', cy);
@@ -135,7 +135,7 @@ class BoundingSphere {
     dx = (bcx - acx);
     dy = (bcy - acy);
     dz = (bcz - acz);
-    dist = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((dx * dx) + (dy * dy)) + (dz * dz))] : Array<Dynamic>));
+    dist = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if (_Runtime.truthy(_Runtime.compare((dist + br), ar, '<='))) {
       _Runtime.setField(_Runtime.field(out, 'center'), 'x', acx);
       _Runtime.setField(_Runtime.field(out, 'center'), 'y', acy);
@@ -200,7 +200,7 @@ class BoundingSphere {
     _Runtime.setField(_Runtime.field(out, 'center'), 'x', cx);
     _Runtime.setField(_Runtime.field(out, 'center'), 'y', cy);
     _Runtime.setField(_Runtime.field(out, 'center'), 'z', cz);
-    _Runtime.setField(out, 'radius', _Runtime.callProperty(HxMath, 'sqrt', cast ([(((ex * ex) + (ey * ey)) + (ez * ez))] : Array<Dynamic>)));
+    _Runtime.setField(out, 'radius', HxMath.sqrt((((ex * ex) + (ey * ey)) + (ez * ez))));
   }
 
   public static function transformBoundingSphereByMatrix4(out:BoundingSphereLike, sphere:BoundingSphereLike, m:Matrix4Like):Void {
@@ -224,9 +224,9 @@ class BoundingSphere {
     tcx = ((((_Runtime.getIndex(_m, 0.0) * cx) + (_Runtime.getIndex(_m, 4.0) * cy)) + (_Runtime.getIndex(_m, 8.0) * cz)) + _Runtime.getIndex(_m, 12.0));
     tcy = ((((_Runtime.getIndex(_m, 1.0) * cx) + (_Runtime.getIndex(_m, 5.0) * cy)) + (_Runtime.getIndex(_m, 9.0) * cz)) + _Runtime.getIndex(_m, 13.0));
     tcz = ((((_Runtime.getIndex(_m, 2.0) * cx) + (_Runtime.getIndex(_m, 6.0) * cy)) + (_Runtime.getIndex(_m, 10.0) * cz)) + _Runtime.getIndex(_m, 14.0));
-    sx = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((_Runtime.getIndex(_m, 0.0) * _Runtime.getIndex(_m, 0.0)) + (_Runtime.getIndex(_m, 1.0) * _Runtime.getIndex(_m, 1.0))) + (_Runtime.getIndex(_m, 2.0) * _Runtime.getIndex(_m, 2.0)))] : Array<Dynamic>));
-    sy = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((_Runtime.getIndex(_m, 4.0) * _Runtime.getIndex(_m, 4.0)) + (_Runtime.getIndex(_m, 5.0) * _Runtime.getIndex(_m, 5.0))) + (_Runtime.getIndex(_m, 6.0) * _Runtime.getIndex(_m, 6.0)))] : Array<Dynamic>));
-    sz = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((_Runtime.getIndex(_m, 8.0) * _Runtime.getIndex(_m, 8.0)) + (_Runtime.getIndex(_m, 9.0) * _Runtime.getIndex(_m, 9.0))) + (_Runtime.getIndex(_m, 10.0) * _Runtime.getIndex(_m, 10.0)))] : Array<Dynamic>));
+    sx = HxMath.sqrt((((_Runtime.getIndex(_m, 0.0) * _Runtime.getIndex(_m, 0.0)) + (_Runtime.getIndex(_m, 1.0) * _Runtime.getIndex(_m, 1.0))) + (_Runtime.getIndex(_m, 2.0) * _Runtime.getIndex(_m, 2.0))));
+    sy = HxMath.sqrt((((_Runtime.getIndex(_m, 4.0) * _Runtime.getIndex(_m, 4.0)) + (_Runtime.getIndex(_m, 5.0) * _Runtime.getIndex(_m, 5.0))) + (_Runtime.getIndex(_m, 6.0) * _Runtime.getIndex(_m, 6.0))));
+    sz = HxMath.sqrt((((_Runtime.getIndex(_m, 8.0) * _Runtime.getIndex(_m, 8.0)) + (_Runtime.getIndex(_m, 9.0) * _Runtime.getIndex(_m, 9.0))) + (_Runtime.getIndex(_m, 10.0) * _Runtime.getIndex(_m, 10.0))));
     maxScale = HxMath.max(HxMath.max(sx, sy), sz);
     _Runtime.setField(_Runtime.field(out, 'center'), 'x', tcx);
     _Runtime.setField(_Runtime.field(out, 'center'), 'y', tcy);

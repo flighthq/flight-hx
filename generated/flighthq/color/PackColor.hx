@@ -33,10 +33,10 @@ class PackColor {
     var gi:Dynamic = cast _Runtime.UNDEFINED;
     var bi:Dynamic = cast _Runtime.UNDEFINED;
     var ai:Dynamic = cast _Runtime.UNDEFINED;
-    ri = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, r] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>));
-    gi = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, g] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>));
-    bi = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, b] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>));
-    ai = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, a] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>));
+    ri = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, r)) * 255.0));
+    gi = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, g)) * 255.0));
+    bi = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, b)) * 255.0));
+    ai = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, a)) * 255.0));
     return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(ri) << Std.int(24.0))) | Std.int((Std.int(gi) << Std.int(16.0))))) | Std.int((Std.int(bi) << Std.int(8.0))))) | Std.int(ai))), Std.int(0.0));
     return cast null;
   }
@@ -46,10 +46,10 @@ class PackColor {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
-    r = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callValue(linearChannelToSrgb, cast ([_Runtime.getIndex(color, 0.0)] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>));
-    g = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callValue(linearChannelToSrgb, cast ([_Runtime.getIndex(color, 1.0)] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>));
-    b = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callValue(linearChannelToSrgb, cast ([_Runtime.getIndex(color, 2.0)] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>));
-    a = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.getIndex(color, 3.0)] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>));
+    r = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.callValue(linearChannelToSrgb, cast ([_Runtime.getIndex(color, 0.0)] : Array<Dynamic>)))) * 255.0));
+    g = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.callValue(linearChannelToSrgb, cast ([_Runtime.getIndex(color, 1.0)] : Array<Dynamic>)))) * 255.0));
+    b = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.callValue(linearChannelToSrgb, cast ([_Runtime.getIndex(color, 2.0)] : Array<Dynamic>)))) * 255.0));
+    a = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.getIndex(color, 3.0))) * 255.0));
     return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(r) << Std.int(24.0))) | Std.int((Std.int(g) << Std.int(16.0))))) | Std.int((Std.int(b) << Std.int(8.0))))) | Std.int(a))), Std.int(0.0));
     return cast null;
   }
@@ -61,7 +61,7 @@ class PackColor {
 
   public static function setColorAlpha(color:Float, alpha:Float):Float {
     var a:Dynamic = cast _Runtime.UNDEFINED;
-    a = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, alpha] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>));
+    a = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, alpha)) * 255.0));
     return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int(color) & Std.int(4294967040.0))) | Std.int(a))), Std.int(0.0));
     return cast null;
   }

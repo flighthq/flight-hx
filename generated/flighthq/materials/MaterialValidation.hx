@@ -7,32 +7,32 @@ import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 
 class MaterialValidation {
   public static function clampStandardPbrMaterialProperties(out:StandardPbrMaterialProperties):StandardPbrMaterialProperties {
-    _Runtime.setField(out, 'metallic', _Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.field(out, 'metallic')] : Array<Dynamic>))] : Array<Dynamic>)));
-    _Runtime.setField(out, 'roughness', _Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.field(out, 'roughness')] : Array<Dynamic>))] : Array<Dynamic>)));
-    _Runtime.setField(out, 'occlusionStrength', _Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.field(out, 'occlusionStrength')] : Array<Dynamic>))] : Array<Dynamic>)));
-    _Runtime.setField(out, 'emissiveStrength', _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.field(out, 'emissiveStrength')] : Array<Dynamic>)));
-    _Runtime.setField(out, 'normalScale', _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.field(out, 'normalScale')] : Array<Dynamic>)));
+    _Runtime.setField(out, 'metallic', HxMath.min(1.0, HxMath.max(0.0, _Runtime.field(out, 'metallic'))));
+    _Runtime.setField(out, 'roughness', HxMath.min(1.0, HxMath.max(0.0, _Runtime.field(out, 'roughness'))));
+    _Runtime.setField(out, 'occlusionStrength', HxMath.min(1.0, HxMath.max(0.0, _Runtime.field(out, 'occlusionStrength'))));
+    _Runtime.setField(out, 'emissiveStrength', HxMath.max(0.0, _Runtime.field(out, 'emissiveStrength')));
+    _Runtime.setField(out, 'normalScale', HxMath.max(0.0, _Runtime.field(out, 'normalScale')));
     return cast out;
     return cast null;
   }
 
   public static function isValidMaterialClearcoat(value:Float):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([value] : Array<Dynamic>)), function():Dynamic return cast _Runtime.compare(value, 0.0, '>=')), function():Dynamic return cast _Runtime.compare(value, 1.0, '<='));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)), function():Dynamic return cast _Runtime.compare(value, 0.0, '>=')), function():Dynamic return cast _Runtime.compare(value, 1.0, '<='));
     return cast null;
   }
 
   public static function isValidMaterialIor(value:Float):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([value] : Array<Dynamic>)), function():Dynamic return cast _Runtime.compare(value, MaterialValidation.MIN_MATERIAL_IOR__materialValidation, '>=')), function():Dynamic return cast _Runtime.compare(value, MaterialValidation.MAX_MATERIAL_IOR__materialValidation, '<='));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)), function():Dynamic return cast _Runtime.compare(value, MaterialValidation.MIN_MATERIAL_IOR__materialValidation, '>=')), function():Dynamic return cast _Runtime.compare(value, MaterialValidation.MAX_MATERIAL_IOR__materialValidation, '<='));
     return cast null;
   }
 
   public static function isValidMaterialIridescenceThickness(value:Float):Bool {
-    return cast _Runtime.andValue(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([value] : Array<Dynamic>)), function():Dynamic return cast _Runtime.compare(value, 0.0, '>='));
+    return cast _Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)), function():Dynamic return cast _Runtime.compare(value, 0.0, '>='));
     return cast null;
   }
 
   public static function isValidMaterialWeight(value:Float):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([value] : Array<Dynamic>)), function():Dynamic return cast _Runtime.compare(value, 0.0, '>=')), function():Dynamic return cast _Runtime.compare(value, 1.0, '<='));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>)), function():Dynamic return cast _Runtime.compare(value, 0.0, '>=')), function():Dynamic return cast _Runtime.compare(value, 1.0, '<='));
     return cast null;
   }
 

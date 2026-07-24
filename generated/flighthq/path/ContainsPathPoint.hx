@@ -153,7 +153,7 @@ class ContainsPathPoint {
       }
     }
     _Runtime.callValue(flushContour, cast ([] : Array<Dynamic>));
-    return cast _Runtime.callProperty(HxMath, 'abs', cast ([windingNumber] : Array<Dynamic>));
+    return cast HxMath.abs(windingNumber);
     return cast null;
   }
 

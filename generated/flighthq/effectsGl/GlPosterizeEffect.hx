@@ -14,10 +14,10 @@ class GlPosterizeEffect {
   public static function applyPosterizeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PosterizeEffect):Void {
     var levels:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
-    levels = _Runtime.callProperty(HxMath, 'max', cast ([2.0, _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 8.0)] : Array<Dynamic>));
+    levels = HxMath.max(2.0, _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 8.0));
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'colorGrade.posterize', GlPosterizeEffect.POSTERIZE_FRAGMENT_SRC__glPosterizeEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_levels'] : Array<Dynamic>)), levels] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_levels'] : Array<Dynamic>)), levels] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

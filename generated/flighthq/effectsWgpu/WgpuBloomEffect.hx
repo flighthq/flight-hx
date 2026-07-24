@@ -67,7 +67,7 @@ class WgpuBloomEffect {
     return cast null;
   }
 
-  public static final _compositePipelines__wgpuBloomEffect:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _compositePipelines__wgpuBloomEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static final BLOOM_BRIGHT_FRAGMENT_WGSL__wgpuBloomEffect:Dynamic = '\nstruct Uniforms { u_threshold : f32, _pad0 : f32, _pad1 : f32, _pad2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let l = dot(c.rgb, vec3f(0.2126, 0.7152, 0.0722));\n  let k = step(uni.u_threshold, l);\n  return vec4f(c.rgb * k, c.a);\n}';
 

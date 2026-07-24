@@ -40,8 +40,8 @@ class SelectableRichTextManager {
     }
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.orValue(_Runtime.field(data, 'ctrlKey'), function():Dynamic return cast _Runtime.field(data, 'metaKey')), function():Dynamic return cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime.field(data, 'key'), 'toLowerCase', cast ([] : Array<Dynamic>)), 'c'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(data, 'keyCode'), KeyCodeValue.C))))) {
       var runtime:Dynamic = _Runtime.callValue(SelectableRichTextManager.getMutableRuntime__selectableRichTextManager, cast ([target] : Array<Dynamic>));
-      var start:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(runtime, 'selectionBeginIndex'), _Runtime.field(runtime, 'selectionEndIndex')] : Array<Dynamic>));
-      var end:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(runtime, 'selectionBeginIndex'), _Runtime.field(runtime, 'selectionEndIndex')] : Array<Dynamic>));
+      var start:Dynamic = HxMath.min(_Runtime.field(runtime, 'selectionBeginIndex'), _Runtime.field(runtime, 'selectionEndIndex'));
+      var end:Dynamic = HxMath.max(_Runtime.field(runtime, 'selectionBeginIndex'), _Runtime.field(runtime, 'selectionEndIndex'));
       var selected:Dynamic = _Runtime.slice(_Runtime.field(_Runtime.field(target, 'data'), 'text'), start, end);
       if (_Runtime.truthy(_Runtime.compare(_Runtime.field(selected, 'length'), 0.0, '>'))) { _Runtime.callOptionalValue(onCopy, cast ([selected] : Array<Dynamic>)); }
       return cast true;
@@ -89,7 +89,7 @@ class SelectableRichTextManager {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.field(manager, 'focused');
     if (_Runtime.truthy(_Runtime.strictEquals(target, null))) { return; }
-    _Runtime.callValue(setRichTextScrollV, cast ([target, (_Runtime.field(_Runtime.field(target, 'data'), 'scrollV') + _Runtime.callProperty(HxMath, 'round', cast ([deltaLines] : Array<Dynamic>)))] : Array<Dynamic>));
+    _Runtime.callValue(setRichTextScrollV, cast ([target, (_Runtime.field(_Runtime.field(target, 'data'), 'scrollV') + HxMath.round(deltaLines))] : Array<Dynamic>));
   }
 
   public static function focusSelectableRichText(manager:flighthq.types.SelectableRichTextManager, target:RichText):Void {
@@ -104,8 +104,8 @@ class SelectableRichTextManager {
     target = _Runtime.field(manager, 'focused');
     if (_Runtime.truthy(_Runtime.strictEquals(target, null))) { return cast ''; }
     runtime = _Runtime.callValue(SelectableRichTextManager.getMutableRuntime__selectableRichTextManager, cast ([target] : Array<Dynamic>));
-    start = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(runtime, 'selectionBeginIndex'), _Runtime.field(runtime, 'selectionEndIndex')] : Array<Dynamic>));
-    end = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(runtime, 'selectionBeginIndex'), _Runtime.field(runtime, 'selectionEndIndex')] : Array<Dynamic>));
+    start = HxMath.min(_Runtime.field(runtime, 'selectionBeginIndex'), _Runtime.field(runtime, 'selectionEndIndex'));
+    end = HxMath.max(_Runtime.field(runtime, 'selectionBeginIndex'), _Runtime.field(runtime, 'selectionEndIndex'));
     return cast _Runtime.slice(_Runtime.field(_Runtime.field(target, 'data'), 'text'), start, end);
     return cast null;
   }

@@ -67,12 +67,12 @@ class ColorTransform {
   }
 
   public static function getColorTransformOffsetRgb(source:ColorTransformLike):Float {
-    return cast (Std.int((Std.int((Std.int(_Runtime.callProperty(HxMath, 'fround', cast ([_Runtime.field(source, 'redOffset')] : Array<Dynamic>))) << Std.int(16.0))) | Std.int((Std.int(_Runtime.callProperty(HxMath, 'fround', cast ([_Runtime.field(source, 'greenOffset')] : Array<Dynamic>))) << Std.int(8.0))))) | Std.int(_Runtime.callProperty(HxMath, 'fround', cast ([_Runtime.field(source, 'blueOffset')] : Array<Dynamic>))));
+    return cast (Std.int((Std.int((Std.int(HxMath.fround(_Runtime.field(source, 'redOffset'))) << Std.int(16.0))) | Std.int((Std.int(HxMath.fround(_Runtime.field(source, 'greenOffset'))) << Std.int(8.0))))) | Std.int(HxMath.fround(_Runtime.field(source, 'blueOffset'))));
     return cast null;
   }
 
   public static function getColorTransformOffsetRgba(source:ColorTransformLike):Float {
-    return cast (Std.int((Std.int((Std.int((Std.int(_Runtime.callProperty(HxMath, 'fround', cast ([_Runtime.field(source, 'redOffset')] : Array<Dynamic>))) << Std.int(24.0))) | Std.int((Std.int(_Runtime.callProperty(HxMath, 'fround', cast ([_Runtime.field(source, 'greenOffset')] : Array<Dynamic>))) << Std.int(16.0))))) | Std.int((Std.int(_Runtime.callProperty(HxMath, 'fround', cast ([_Runtime.field(source, 'blueOffset')] : Array<Dynamic>))) << Std.int(8.0))))) | Std.int(_Runtime.callProperty(HxMath, 'fround', cast ([_Runtime.field(source, 'alphaOffset')] : Array<Dynamic>))));
+    return cast (Std.int((Std.int((Std.int((Std.int(HxMath.fround(_Runtime.field(source, 'redOffset'))) << Std.int(24.0))) | Std.int((Std.int(HxMath.fround(_Runtime.field(source, 'greenOffset'))) << Std.int(16.0))))) | Std.int((Std.int(HxMath.fround(_Runtime.field(source, 'blueOffset'))) << Std.int(8.0))))) | Std.int(HxMath.fround(_Runtime.field(source, 'alphaOffset'))));
     return cast null;
   }
 

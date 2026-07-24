@@ -21,15 +21,15 @@ class Connectivity {
 
   public static final _scratch__connectivity:ConnectivityStatus = _Runtime.callValue(createConnectivityStatus, cast ([] : Array<Dynamic>));
 
-  public static final _subscriptions__connectivity:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _subscriptions__connectivity:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function anyAbortSignal__connectivity(a:Dynamic, b:Dynamic):Dynamic {
     var controller:Dynamic = cast _Runtime.UNDEFINED;
     var onAbort:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['AbortSignal'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.hasField(_Runtime.callProperty(_Runtime, 'globalValue', cast (['AbortSignal'] : Array<Dynamic>)), 'any')))) {
-      return cast _Runtime.callProperty((cast (cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['AbortSignal'] : Array<Dynamic>)) : Dynamic) : { var any:Dynamic; }), 'any', cast ([cast ([a, b] : Array<Dynamic>)] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('AbortSignal'), 'undefined'), function():Dynamic return cast _Runtime.hasField(_Runtime.globalValue('AbortSignal'), 'any')))) {
+      return cast _Runtime.callProperty((cast (cast _Runtime.globalValue('AbortSignal') : Dynamic) : { var any:Dynamic; }), 'any', cast ([cast ([a, b] : Array<Dynamic>)] : Array<Dynamic>));
     }
-    controller = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['AbortController'] : Array<Dynamic>)), []);
+    controller = _Runtime.construct(_Runtime.globalValue('AbortController'), []);
     onAbort = function() {
       _Runtime.callProperty(controller, 'abort', cast ([] : Array<Dynamic>));
       _Runtime.callProperty(a, 'removeEventListener', cast (['abort', onAbort] : Array<Dynamic>));
@@ -88,7 +88,7 @@ class Connectivity {
     return cast { getStatus: function(out:Dynamic) {
       var nav:Dynamic = cast _Runtime.UNDEFINED;
       var conn:Dynamic = cast _Runtime.UNDEFINED;
-      nav = _Runtime.select(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), function():Dynamic return cast null);
+      nav = _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.globalValue('navigator'), function():Dynamic return cast null);
       _Runtime.setField(out, 'online', _Runtime.coalesce(_Runtime.optionalField(nav, 'onLine'), function():Dynamic return cast true));
       conn = _Runtime.callValue(Connectivity.getWebConnection__connectivity, cast ([] : Array<Dynamic>));
       _Runtime.setField(out, 'type', _Runtime.callValue(Connectivity.mapWebConnectionType__connectivity, cast ([_Runtime.optionalField(conn, 'type')] : Array<Dynamic>)));
@@ -105,21 +105,21 @@ class Connectivity {
       var timerId:Dynamic = cast _Runtime.UNDEFINED;
       var combinedSignal:Dynamic = cast _Runtime.UNDEFINED;
       var start:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['fetch'] : Array<Dynamic>)), 'undefined'))) {
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('fetch'), 'undefined'))) {
         _Runtime.setField(out, 'reachable', false);
         _Runtime.setField(out, 'latency', -1.0);
         return cast out;
       }
       timeout = _Runtime.coalesce(_Runtime.field(options, 'timeout'), function():Dynamic return cast 5000.0);
-      controller = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['AbortController'] : Array<Dynamic>)), []);
+      controller = _Runtime.construct(_Runtime.globalValue('AbortController'), []);
       timerId = _Runtime.setTimeout(function() return _Runtime.callProperty(controller, 'abort', cast ([] : Array<Dynamic>)), timeout);
       combinedSignal = _Runtime.select(_Runtime.field(options, 'signal'), function():Dynamic return cast _Runtime.callValue(Connectivity.anyAbortSignal__connectivity, cast ([_Runtime.field(options, 'signal'), _Runtime.field(controller, 'signal')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(controller, 'signal'));
-      start = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Date'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>));
+      start = _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>));
       try {
-        var response:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['fetch'] : Array<Dynamic>)), cast ([_Runtime.field(options, 'url'), { method: 'HEAD', cache: 'no-store', signal: combinedSignal }] : Array<Dynamic>)));
+        var response:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(_Runtime.globalValue('fetch'), cast ([_Runtime.field(options, 'url'), { method: 'HEAD', cache: 'no-store', signal: combinedSignal }] : Array<Dynamic>)));
         _Runtime.clearTimeout(timerId);
         _Runtime.setField(out, 'reachable', _Runtime.field(response, 'ok'));
-        _Runtime.setField(out, 'latency', (_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Date'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>)) - start));
+        _Runtime.setField(out, 'latency', (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) - start));
       } catch (__error:Dynamic) {
         _Runtime.clearTimeout(timerId);
         _Runtime.setField(out, 'reachable', false);
@@ -129,16 +129,16 @@ class Connectivity {
       return cast null;
     }), subscribe: function(listener:Dynamic) {
       var conn:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'))) { return cast function() {
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast function() {
       
       }; }
-      _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'addEventListener', cast (['online', listener] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'addEventListener', cast (['offline', listener] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['online', listener] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['offline', listener] : Array<Dynamic>));
       conn = _Runtime.callValue(Connectivity.getWebConnection__connectivity, cast ([] : Array<Dynamic>));
       _Runtime.callOptionalProperty(conn, 'addEventListener', cast (['change', listener] : Array<Dynamic>));
       return cast function() {
-        _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'removeEventListener', cast (['online', listener] : Array<Dynamic>));
-        _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'removeEventListener', cast (['offline', listener] : Array<Dynamic>));
+        _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast (['online', listener] : Array<Dynamic>));
+        _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast (['offline', listener] : Array<Dynamic>));
         _Runtime.callOptionalProperty(conn, 'removeEventListener', cast (['change', listener] : Array<Dynamic>));
       };
     } };
@@ -191,8 +191,8 @@ class Connectivity {
 
   public static function getWebConnection__connectivity():Null<WebConnectivityConnection__connectivity> {
     var nav:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
-    nav = (cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)) : { @:optional var connection:WebConnectivityConnection__connectivity; });
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
+    nav = (cast _Runtime.globalValue('navigator') : { @:optional var connection:WebConnectivityConnection__connectivity; });
     return cast _Runtime.coalesce(_Runtime.field(nav, 'connection'), function():Dynamic return cast null);
     return cast null;
   }

@@ -12,9 +12,9 @@ class FontResourceFrom {
   public static function loadFontResourceFromBytes(out:FontResource, bytes:Dynamic):flighthq._internal._Promise<FontResource> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<FontResource> {
       var face:Dynamic = cast _Runtime.UNDEFINED;
-      face = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['FontFace'] : Array<Dynamic>)), [_Runtime.field(out, 'family'), _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), (_Runtime.field(bytes, 'byteOffset') + _Runtime.field(bytes, 'byteLength')))]);
+      face = _Runtime.construct(_Runtime.globalValue('FontFace'), [_Runtime.field(out, 'family'), _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), (_Runtime.field(bytes, 'byteOffset') + _Runtime.field(bytes, 'byteLength')))]);
       flighthq._internal._Async.awaitValue(_Runtime.callProperty(face, 'load', cast ([] : Array<Dynamic>)));
-      _Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('document'), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
       _Runtime.setField(out, 'face', face);
       return cast out;
       return cast null;
@@ -24,7 +24,7 @@ class FontResourceFrom {
   public static function loadFontResourceFromName(out:FontResource):flighthq._internal._Promise<FontResource> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<FontResource> {
       var faces:Dynamic = cast _Runtime.UNDEFINED;
-      faces = flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'load', cast ([_Runtime.callValue(getFontShorthand, cast ([_Runtime.field(out, 'family')] : Array<Dynamic>))] : Array<Dynamic>)));
+      faces = flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.field(_Runtime.globalValue('document'), 'fonts'), 'load', cast ([_Runtime.callValue(getFontShorthand, cast ([_Runtime.field(out, 'family')] : Array<Dynamic>))] : Array<Dynamic>)));
       if (_Runtime.truthy(_Runtime.compare(_Runtime.field(faces, 'length'), 0.0, '>'))) { _Runtime.setField(out, 'face', _Runtime.getIndex(faces, 0.0)); }
       return cast out;
       return cast null;
@@ -34,9 +34,9 @@ class FontResourceFrom {
   public static function loadFontResourceFromUrl(out:FontResource, url:String):flighthq._internal._Promise<FontResource> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<FontResource> {
       var face:Dynamic = cast _Runtime.UNDEFINED;
-      face = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['FontFace'] : Array<Dynamic>)), [_Runtime.field(out, 'family'), 'url(' + Std.string(url) + ')']);
+      face = _Runtime.construct(_Runtime.globalValue('FontFace'), [_Runtime.field(out, 'family'), 'url(' + Std.string(url) + ')']);
       flighthq._internal._Async.awaitValue(_Runtime.callProperty(face, 'load', cast ([] : Array<Dynamic>)));
-      _Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('document'), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
       _Runtime.setField(out, 'face', face);
       return cast out;
       return cast null;
@@ -56,9 +56,9 @@ class FontResourceFrom {
         fmt = _Runtime.coalesce(format, function():Dynamic return cast _Runtime.callValue(inferFontFormatFromUrl, cast ([url] : Array<Dynamic>)));
         return cast _Runtime.select(!_Runtime.strictEquals(fmt, null), function():Dynamic return cast 'url(' + Std.string(url) + ') format(\'' + Std.string(fmt) + '\')', function():Dynamic return cast 'url(' + Std.string(url) + ')');
       }] : Array<Dynamic>)), ', ');
-      face = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['FontFace'] : Array<Dynamic>)), [_Runtime.field(out, 'family'), src]);
+      face = _Runtime.construct(_Runtime.globalValue('FontFace'), [_Runtime.field(out, 'family'), src]);
       flighthq._internal._Async.awaitValue(_Runtime.callProperty(face, 'load', cast ([] : Array<Dynamic>)));
-      _Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('document'), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
       _Runtime.setField(out, 'face', face);
       return cast out;
       return cast null;

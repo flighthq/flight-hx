@@ -28,12 +28,12 @@ class StageFit {
   }
 
   public static function computeStageFitFillScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([(viewWidth / contentWidth), (viewHeight / contentHeight)] : Array<Dynamic>));
+    return cast HxMath.max((viewWidth / contentWidth), (viewHeight / contentHeight));
     return cast null;
   }
 
   public static function computeStageFitScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
-    return cast _Runtime.callProperty(HxMath, 'min', cast ([(viewWidth / contentWidth), (viewHeight / contentHeight)] : Array<Dynamic>));
+    return cast HxMath.min((viewWidth / contentWidth), (viewHeight / contentHeight));
     return cast null;
   }
 

@@ -22,10 +22,10 @@ class RenderEffectDefaults {
     if (_Runtime.truthy(!_Runtime.truthy(entry))) { return cast false; }
     effectRec = (cast effect : Dynamic);
     outRec = (cast (cast out : Dynamic) : Dynamic);
-    for (key in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([entry] : Array<Dynamic>)))) {
+    for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(entry))) {
       _Runtime.setIndex(outRec, key, _Runtime.select(!_Runtime.strictEquals(_Runtime.getIndex(effectRec, key), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.getIndex(effectRec, key), function():Dynamic return cast _Runtime.getIndex(entry, key)));
     }
-    for (key in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([effectRec] : Array<Dynamic>)))) {
+    for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(effectRec))) {
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.hasField(entry, key)))) {
         _Runtime.setIndex(outRec, key, _Runtime.getIndex(effectRec, key));
       }

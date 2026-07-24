@@ -21,7 +21,7 @@ class Scalar {
     var t:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(steps, 0.0, '<='), function():Dynamic return cast _Runtime.strictEquals(min, max)))) { return cast min; }
     t = ((value - min) / (max - min));
-    return cast (min + ((_Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, t] : Array<Dynamic>))] : Array<Dynamic>)) * steps)] : Array<Dynamic>)) / steps) * (max - min)));
+    return cast (min + ((HxMath.round((HxMath.max(0.0, HxMath.min(1.0, t)) * steps)) / steps) * (max - min)));
     return cast null;
   }
 

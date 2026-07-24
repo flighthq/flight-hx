@@ -22,7 +22,7 @@ class WgpuFilmGrainEffect {
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.filmGrain', WgpuFilmGrainEffect.FILM_GRAIN_FRAGMENT_WGSL__wgpuFilmGrainEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
       _Runtime.setIndex(f32, 0.0, intensity);
-      _Runtime.setIndex(f32, 1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0001, size] : Array<Dynamic>)));
+      _Runtime.setIndex(f32, 1.0, HxMath.max(0.0001, size));
       _Runtime.setIndex(f32, 2.0, seed);
     }] : Array<Dynamic>));
   }

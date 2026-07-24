@@ -27,7 +27,7 @@ class TauriMenu {
       }] : Array<Dynamic>)));
       return cast true;
     }, popupContextMenu: function(items:Dynamic, x:Dynamic, y:Dynamic) {
-      return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(resolve:Dynamic) {
+      return cast _Runtime.construct(_Runtime.globalValue('Promise'), [function(resolve:Dynamic) {
         _Runtime.voidValue(_Runtime.callProperty(_Runtime.callValue(flighthq._internal._Async.make(function():flighthq._internal._Promise<Dynamic> {
           var built:Dynamic = cast _Runtime.UNDEFINED;
           var menu:Dynamic = cast _Runtime.UNDEFINED;

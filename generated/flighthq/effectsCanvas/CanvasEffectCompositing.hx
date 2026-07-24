@@ -9,40 +9,40 @@ class CanvasEffectCompositing {
   public static function drawCanvasAccumulationPass(dest:Dynamic, source:Dynamic, samples:Float, perSampleTransform:Dynamic):Void {
     var clampedSamples:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
-    clampedSamples = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([samples] : Array<Dynamic>))] : Array<Dynamic>));
+    clampedSamples = HxMath.max(1.0, HxMath.round(samples));
     ctx = _Runtime.field(dest, 'context');
-    _Runtime.callProperty(ctx, 'save', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.setField(ctx, 'globalCompositeOperation', 'source-over');
-    _Runtime.setField(ctx, 'filter', 'none');
-    _Runtime.callProperty(ctx, 'clearRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
-    _Runtime.setField(ctx, 'globalAlpha', (1.0 / clampedSamples));
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'save', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'globalCompositeOperation', 'source-over');
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'filter', 'none');
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'clearRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'globalAlpha', (1.0 / clampedSamples));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, clampedSamples, '<'))) {
-        _Runtime.callProperty(ctx, 'save', cast ([] : Array<Dynamic>));
+        flighthq._internal.CanvasRenderingContext2D.call(ctx, 'save', cast ([] : Array<Dynamic>));
         _Runtime.callValue(perSampleTransform, cast ([ctx, i, clampedSamples] : Array<Dynamic>));
-        _Runtime.callProperty(ctx, 'drawImage', cast ([_Runtime.field(source, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
-        _Runtime.callProperty(ctx, 'restore', cast ([] : Array<Dynamic>));
+        flighthq._internal.CanvasRenderingContext2D.call(ctx, 'drawImage', cast ([_Runtime.field(source, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
+        flighthq._internal.CanvasRenderingContext2D.call(ctx, 'restore', cast ([] : Array<Dynamic>));
         i++;
       }
     }
-    _Runtime.callProperty(ctx, 'restore', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
   public static function drawCanvasEffectPass(dest:Dynamic, source:Dynamic, filter:String, compositeOperation:Dynamic = 'source-over'):Void {
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     ctx = _Runtime.field(dest, 'context');
-    _Runtime.callProperty(ctx, 'save', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.setField(ctx, 'globalAlpha', 1.0);
-    _Runtime.setField(ctx, 'globalCompositeOperation', 'source-over');
-    _Runtime.setField(ctx, 'filter', 'none');
-    _Runtime.callProperty(ctx, 'clearRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
-    _Runtime.setField(ctx, 'globalCompositeOperation', compositeOperation);
-    _Runtime.setField(ctx, 'filter', filter);
-    _Runtime.callProperty(ctx, 'drawImage', cast ([_Runtime.field(source, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.callProperty(ctx, 'restore', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'save', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'globalAlpha', 1.0);
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'globalCompositeOperation', 'source-over');
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'filter', 'none');
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'clearRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'globalCompositeOperation', compositeOperation);
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'filter', filter);
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'drawImage', cast ([_Runtime.field(source, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
   public static function drawCanvasImageDataPass(dest:Dynamic, source:Dynamic, transform:Dynamic):Void {
@@ -57,19 +57,19 @@ class CanvasEffectCompositing {
     h = _Runtime.field(source, 'height');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(w, 0.0, '<='), function():Dynamic return cast _Runtime.compare(h, 0.0, '<=')))) { return; }
     srcCtx = _Runtime.field(source, 'context');
-    imageData = _Runtime.callProperty(srcCtx, 'getImageData', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
+    imageData = flighthq._internal.CanvasRenderingContext2D.call(srcCtx, 'getImageData', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
     data = _Runtime.field(imageData, 'data');
     pixelCount = (w * h);
     _Runtime.callValue(transform, cast ([data, pixelCount] : Array<Dynamic>));
     dstCtx = _Runtime.field(dest, 'context');
-    _Runtime.callProperty(dstCtx, 'save', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(dstCtx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.setField(dstCtx, 'globalAlpha', 1.0);
-    _Runtime.setField(dstCtx, 'globalCompositeOperation', 'source-over');
-    _Runtime.setField(dstCtx, 'filter', 'none');
-    _Runtime.callProperty(dstCtx, 'clearRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
-    _Runtime.callProperty(dstCtx, 'putImageData', cast ([imageData, 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.callProperty(dstCtx, 'restore', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(dstCtx, 'save', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(dstCtx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.setField(dstCtx, 'globalAlpha', 1.0);
+    flighthq._internal.CanvasRenderingContext2D.setField(dstCtx, 'globalCompositeOperation', 'source-over');
+    flighthq._internal.CanvasRenderingContext2D.setField(dstCtx, 'filter', 'none');
+    flighthq._internal.CanvasRenderingContext2D.call(dstCtx, 'clearRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(dstCtx, 'putImageData', cast ([imageData, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(dstCtx, 'restore', cast ([] : Array<Dynamic>));
   }
 
   public static function passthroughCanvasEffectPass(dest:Dynamic, source:Dynamic):Void {

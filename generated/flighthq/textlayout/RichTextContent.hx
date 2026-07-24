@@ -53,7 +53,7 @@ class RichTextContent {
       if (_Runtime.truthy(StringTools.endsWith(Std.string(_Runtime.field(out, 'text')), ' '))) { (value = cast (_Runtime.callProperty(value, 'trimStart', cast ([] : Array<Dynamic>)) : Dynamic)); }
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(value, 'length'), 0.0))) { return; }
-    remaining = _Runtime.select(_Runtime.compare(maxChars, 0.0, '<'), function():Dynamic return cast _Runtime.field(value, 'length'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, (maxChars - _Runtime.field(_Runtime.field(out, 'text'), 'length'))] : Array<Dynamic>)));
+    remaining = _Runtime.select(_Runtime.compare(maxChars, 0.0, '<'), function():Dynamic return cast _Runtime.field(value, 'length'), function():Dynamic return cast HxMath.max(0.0, (maxChars - _Runtime.field(_Runtime.field(out, 'text'), 'length'))));
     if (_Runtime.truthy(_Runtime.strictEquals(remaining, 0.0))) { return; }
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(value, 'length'), remaining, '>'))) { (value = cast (_Runtime.slice(value, 0.0, remaining) : Dynamic)); }
     start = _Runtime.field(_Runtime.field(out, 'text'), 'length');
@@ -66,8 +66,8 @@ class RichTextContent {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(overrides, 'length'), 0.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(out, 'text'), 'length'), 0.0)))) { return; }
     ranges = _Runtime.field(out, 'formatRanges');
     for (override_ in _Runtime.iterable(overrides)) {
-      var start:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(_Runtime.field(out, 'text'), 'length'), _Runtime.field(override_, 'start')] : Array<Dynamic>))] : Array<Dynamic>));
-      var end:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([start, _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(_Runtime.field(out, 'text'), 'length'), _Runtime.field(override_, 'end')] : Array<Dynamic>))] : Array<Dynamic>));
+      var start:Dynamic = HxMath.max(0.0, HxMath.min(_Runtime.field(_Runtime.field(out, 'text'), 'length'), _Runtime.field(override_, 'start')));
+      var end:Dynamic = HxMath.max(start, HxMath.min(_Runtime.field(_Runtime.field(out, 'text'), 'length'), _Runtime.field(override_, 'end')));
       if (_Runtime.truthy(_Runtime.strictEquals(start, end))) { continue; }
       var next:Array<TextFormatRange> = cast ([] : Array<Dynamic>);
       for (range in _Runtime.iterable(ranges)) {
@@ -76,7 +76,7 @@ class RichTextContent {
           continue;
         }
         if (_Runtime.truthy(_Runtime.compare(_Runtime.field(range, 'start'), start, '<'))) { _Runtime.callValue(RichTextContent.writeFormatRange__richTextContent, cast ([next, _Runtime.field(range, 'format'), _Runtime.field(range, 'start'), start] : Array<Dynamic>)); }
-        _Runtime.callValue(RichTextContent.writeFormatRange__richTextContent, cast ([next, _Runtime.callValue(mergeTextFormat, cast ([_Runtime.field(range, 'format'), _Runtime.field(override_, 'format')] : Array<Dynamic>)), _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(range, 'start'), start] : Array<Dynamic>)), _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(range, 'end'), end] : Array<Dynamic>))] : Array<Dynamic>));
+        _Runtime.callValue(RichTextContent.writeFormatRange__richTextContent, cast ([next, _Runtime.callValue(mergeTextFormat, cast ([_Runtime.field(range, 'format'), _Runtime.field(override_, 'format')] : Array<Dynamic>)), HxMath.max(_Runtime.field(range, 'start'), start), HxMath.min(_Runtime.field(range, 'end'), end)] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.compare(_Runtime.field(range, 'end'), end, '>'))) { _Runtime.callValue(RichTextContent.writeFormatRange__richTextContent, cast ([next, _Runtime.field(range, 'format'), end, _Runtime.field(range, 'end')] : Array<Dynamic>)); }
       }
       (ranges = cast (next : Dynamic));
@@ -114,8 +114,8 @@ class RichTextContent {
     return cast _Runtime.replace(value, _Runtime.regexp('&(#x[0-9a-f]+|#[0-9]+|[a-z]+);', 'gi'), function(_match:Dynamic, entity:String) {
       var lower:Dynamic = cast _Runtime.UNDEFINED;
       lower = _Runtime.callProperty(entity, 'toLowerCase', cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(StringTools.startsWith(lower, '#x'))) { return cast _Runtime.fromCodePoint(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'parseInt', cast ([_Runtime.slice(lower, 2.0, null), 16.0] : Array<Dynamic>))); }
-      if (_Runtime.truthy(StringTools.startsWith(lower, '#'))) { return cast _Runtime.fromCodePoint(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'parseInt', cast ([_Runtime.slice(lower, 1.0, null), 10.0] : Array<Dynamic>))); }
+      if (_Runtime.truthy(StringTools.startsWith(lower, '#x'))) { return cast _Runtime.fromCodePoint(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.slice(lower, 2.0, null), 16.0] : Array<Dynamic>))); }
+      if (_Runtime.truthy(StringTools.startsWith(lower, '#'))) { return cast _Runtime.fromCodePoint(_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.slice(lower, 1.0, null), 10.0] : Array<Dynamic>))); }
       return cast _Runtime.coalesce(_Runtime.getIndex(RichTextContent.namedEntities__richTextContent, lower), function():Dynamic return cast '&' + Std.string(entity) + ';');
     }, false);
     return cast null;
@@ -143,8 +143,8 @@ class RichTextContent {
   public static function textFormatEquals__richTextContent(a:TextFormat, b:TextFormat):Bool {
     var aKeys:Dynamic = cast _Runtime.UNDEFINED;
     var bKeys:Dynamic = cast _Runtime.UNDEFINED;
-    aKeys = (cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([a] : Array<Dynamic>)) : Array<TextFormat>);
-    bKeys = (cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([b] : Array<Dynamic>)) : Array<TextFormat>);
+    aKeys = (cast flighthq._internal.DynamicObject.keys(a) : Array<TextFormat>);
+    bKeys = (cast flighthq._internal.DynamicObject.keys(b) : Array<TextFormat>);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(aKeys, 'length'), _Runtime.field(bKeys, 'length')))) { return cast false; }
     for (key in _Runtime.iterable(aKeys)) {
       var aValue:Dynamic = _Runtime.getIndex(a, key);

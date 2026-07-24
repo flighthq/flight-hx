@@ -11,9 +11,9 @@ class PremultiplyColorAlpha {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     a = ((Std.int(color) & Std.int(255.0)) / 255.0);
-    r = _Runtime.callProperty(HxMath, 'round', cast ([((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)) * a)] : Array<Dynamic>));
-    g = _Runtime.callProperty(HxMath, 'round', cast ([((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(16.0))) & Std.int(255.0)) * a)] : Array<Dynamic>));
-    b = _Runtime.callProperty(HxMath, 'round', cast ([((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(255.0)) * a)] : Array<Dynamic>));
+    r = HxMath.round(((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)) * a));
+    g = HxMath.round(((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(16.0))) & Std.int(255.0)) * a));
+    b = HxMath.round(((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(255.0)) * a));
     return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(r) << Std.int(24.0))) | Std.int((Std.int(g) << Std.int(16.0))))) | Std.int((Std.int(b) << Std.int(8.0))))) | Std.int((Std.int(color) & Std.int(255.0))))), Std.int(0.0));
     return cast null;
   }
@@ -25,9 +25,9 @@ class PremultiplyColorAlpha {
     var b:Dynamic = cast _Runtime.UNDEFINED;
     a = ((Std.int(color) & Std.int(255.0)) / 255.0);
     if (_Runtime.truthy(_Runtime.strictEquals(a, 0.0))) { return cast color; }
-    r = _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)) / a)] : Array<Dynamic>))] : Array<Dynamic>));
-    g = _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(16.0))) & Std.int(255.0)) / a)] : Array<Dynamic>))] : Array<Dynamic>));
-    b = _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(255.0)) / a)] : Array<Dynamic>))] : Array<Dynamic>));
+    r = HxMath.min(255.0, HxMath.round(((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)) / a)));
+    g = HxMath.min(255.0, HxMath.round(((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(16.0))) & Std.int(255.0)) / a)));
+    b = HxMath.min(255.0, HxMath.round(((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(255.0)) / a)));
     return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(r) << Std.int(24.0))) | Std.int((Std.int(g) << Std.int(16.0))))) | Std.int((Std.int(b) << Std.int(8.0))))) | Std.int((Std.int(color) & Std.int(255.0))))), Std.int(0.0));
     return cast null;
   }

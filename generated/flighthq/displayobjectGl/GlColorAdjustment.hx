@@ -29,7 +29,7 @@ class GlColorAdjustment {
     _Runtime.setField(runtime, 'glColorAdjustmentFold', GlColorAdjustment.glColorAdjustmentFold__glColorAdjustment);
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformMode'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(runtime, 'spriteBatchColorTransformMode', GlColorAdjustment.CT_MODE_NONE__glColorAdjustment); }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformData'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      _Runtime.setField(runtime, 'spriteBatchColorTransformData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment * 256.0)]));
+      _Runtime.setField(runtime, 'spriteBatchColorTransformData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [(GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment * 256.0)]));
     }
   }
 
@@ -56,8 +56,8 @@ class GlColorAdjustment {
     _Runtime.callValue(useGlQuadBatchProgram, cast ([state, _Runtime.field(shader, 'program')] : Array<Dynamic>));
     _Runtime.callValue(setGlQuadBatchWorldAndTexture, cast ([state, _Runtime.field(shader, 'locWorldMatrix'), _Runtime.field(shader, 'locTexture')] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(shader, 'locColorMultiplier'), _Runtime.field(colorTransform, 'redMultiplier'), _Runtime.field(colorTransform, 'greenMultiplier'), _Runtime.field(colorTransform, 'blueMultiplier'), _Runtime.field(colorTransform, 'alphaMultiplier')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(shader, 'locColorOffset'), (_Runtime.field(colorTransform, 'redOffset') / 255.0), (_Runtime.field(colorTransform, 'greenOffset') / 255.0), (_Runtime.field(colorTransform, 'blueOffset') / 255.0), (_Runtime.field(colorTransform, 'alphaOffset') / 255.0)] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(shader, 'locColorMultiplier'), _Runtime.field(colorTransform, 'redMultiplier'), _Runtime.field(colorTransform, 'greenMultiplier'), _Runtime.field(colorTransform, 'blueMultiplier'), _Runtime.field(colorTransform, 'alphaMultiplier')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(shader, 'locColorOffset'), (_Runtime.field(colorTransform, 'redOffset') / 255.0), (_Runtime.field(colorTransform, 'greenOffset') / 255.0), (_Runtime.field(colorTransform, 'blueOffset') / 255.0), (_Runtime.field(colorTransform, 'alphaOffset') / 255.0)] : Array<Dynamic>));
     _Runtime.callValue(bindGlQuadBatchBaseAttributes, cast ([state, _Runtime.field(shader, 'locCorner')] : Array<Dynamic>));
   }
 
@@ -71,13 +71,13 @@ class GlColorAdjustment {
     _Runtime.callValue(setGlQuadBatchWorldAndTexture, cast ([state, _Runtime.field(shader, 'locWorldMatrix'), _Runtime.field(shader, 'locTexture')] : Array<Dynamic>));
     _Runtime.callValue(bindGlQuadBatchBaseAttributes, cast ([state, _Runtime.field(shader, 'locCorner')] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchColorTransformBuffer')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'enableVertexAttribArray', cast ([7.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribPointer', cast ([7.0, 4.0, _Runtime.field(gl, 'FLOAT'), false, GlColorAdjustment.COLOR_TRANSFORM_STRIDE__glColorAdjustment, 0.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribDivisor', cast ([7.0, 1.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'enableVertexAttribArray', cast ([8.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribPointer', cast ([8.0, 4.0, _Runtime.field(gl, 'FLOAT'), false, GlColorAdjustment.COLOR_TRANSFORM_STRIDE__glColorAdjustment, 16.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribDivisor', cast ([8.0, 1.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchColorTransformBuffer')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([7.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([7.0, 4.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, GlColorAdjustment.COLOR_TRANSFORM_STRIDE__glColorAdjustment, 0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribDivisor', cast ([7.0, 1.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([8.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([8.0, 4.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, GlColorAdjustment.COLOR_TRANSFORM_STRIDE__glColorAdjustment, 16.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribDivisor', cast ([8.0, 1.0] : Array<Dynamic>));
   }
 
   public static function ensureGlColorTransformInstancedShader__glColorAdjustment(state:GlRenderState):GlColorTransformInstancedShader {
@@ -88,7 +88,7 @@ class GlColorAdjustment {
     if (_Runtime.truthy(_Runtime.field(runtime, 'colorTransformInstancedShader'))) { return cast _Runtime.field(runtime, 'colorTransformInstancedShader'); }
     gl = _Runtime.field(state, 'gl');
     program = _Runtime.callValue(createGlProgram, cast ([gl, GlColorAdjustment.CT_INSTANCED_VS__glColorAdjustment, GlColorAdjustment.CT_INSTANCED_FS__glColorAdjustment, 'Sprite-batch color transform (per-instance)'] : Array<Dynamic>));
-    _Runtime.setField(runtime, 'colorTransformInstancedShader', { program: program, locCorner: 0.0, locWorldMatrix: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_world'] : Array<Dynamic>)), locTexture: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_texture'] : Array<Dynamic>)) });
+    _Runtime.setField(runtime, 'colorTransformInstancedShader', { program: program, locCorner: 0.0, locWorldMatrix: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_world'] : Array<Dynamic>)), locTexture: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_texture'] : Array<Dynamic>)) });
     return cast _Runtime.field(runtime, 'colorTransformInstancedShader');
     return cast null;
   }
@@ -101,7 +101,7 @@ class GlColorAdjustment {
     if (_Runtime.truthy(_Runtime.field(runtime, 'uniformColorTransformShader'))) { return cast _Runtime.field(runtime, 'uniformColorTransformShader'); }
     gl = _Runtime.field(state, 'gl');
     program = _Runtime.callValue(createGlProgram, cast ([gl, QUAD_BATCH_VS, GlColorAdjustment.UNIFORM_CT_FS__glColorAdjustment, 'Sprite-batch color transform (uniform)'] : Array<Dynamic>));
-    _Runtime.setField(runtime, 'uniformColorTransformShader', { program: program, locCorner: 0.0, locWorldMatrix: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_world'] : Array<Dynamic>)), locTexture: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_texture'] : Array<Dynamic>)), locColorMultiplier: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_ctMult'] : Array<Dynamic>)), locColorOffset: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_ctOff'] : Array<Dynamic>)) });
+    _Runtime.setField(runtime, 'uniformColorTransformShader', { program: program, locCorner: 0.0, locWorldMatrix: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_world'] : Array<Dynamic>)), locTexture: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_texture'] : Array<Dynamic>)), locColorMultiplier: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_ctMult'] : Array<Dynamic>)), locColorOffset: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_ctOff'] : Array<Dynamic>)) });
     return cast _Runtime.field(runtime, 'uniformColorTransformShader');
     return cast null;
   }
@@ -126,10 +126,10 @@ class GlColorAdjustment {
     if (_Runtime.truthy(_Runtime.strictEquals(ctMode, GlColorAdjustment.CT_MODE_PER_INSTANCE__glColorAdjustment))) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       if (_Runtime.truthy(_Runtime.looseEquals(_Runtime.field(runtime, 'spriteBatchColorTransformBuffer'), null))) {
-        _Runtime.setField(runtime, 'spriteBatchColorTransformBuffer', _Runtime.callProperty(gl, 'createBuffer', cast ([] : Array<Dynamic>)));
+        _Runtime.setField(runtime, 'spriteBatchColorTransformBuffer', flighthq._internal.WebGl2RenderingContext.call(gl, 'createBuffer', cast ([] : Array<Dynamic>)));
       }
-      _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchColorTransformBuffer')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'bufferData', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchColorTransformData').subarray(Std.int(0.0), Std.int((count * GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment))), _Runtime.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchColorTransformBuffer')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'spriteBatchColorTransformData').subarray(Std.int(0.0), Std.int((count * GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment))), flighthq._internal.WebGl2RenderingContext.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
       _Runtime.callValue(GlColorAdjustment.bindGlSpriteBatchInstancedColorTransform__glColorAdjustment, cast ([state] : Array<Dynamic>));
       return cast true;
     }
@@ -153,7 +153,7 @@ class GlColorAdjustment {
     var mode:Dynamic = cast _Runtime.UNDEFINED;
     var tint:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformData'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      _Runtime.setField(runtime, 'spriteBatchColorTransformData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment * 256.0)]));
+      _Runtime.setField(runtime, 'spriteBatchColorTransformData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [(GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment * 256.0)]));
     }
     mode = _Runtime.coalesce(_Runtime.field(runtime, 'spriteBatchColorTransformMode'), function():Dynamic return cast GlColorAdjustment.CT_MODE_NONE__glColorAdjustment);
     tint = _Runtime.coalesce(colorTransform, function():Dynamic return cast null);
@@ -184,8 +184,8 @@ class GlColorAdjustment {
     offset = (instanceIndex * GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment);
     data = _Runtime.field(runtime, 'spriteBatchColorTransformData');
     if (_Runtime.truthy(_Runtime.compare((offset + GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment), _Runtime.field(data, 'length'), '>'))) {
-      var newSize:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([(offset + GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment), (_Runtime.field(data, 'length') * 2.0)] : Array<Dynamic>));
-      var grown:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [newSize]);
+      var newSize:Dynamic = HxMath.max((offset + GlColorAdjustment.COLOR_TRANSFORM_FLOATS__glColorAdjustment), (_Runtime.field(data, 'length') * 2.0));
+      var grown:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [newSize]);
       _Runtime.callProperty(grown, 'set', cast ([data] : Array<Dynamic>));
       _Runtime.setField(runtime, 'spriteBatchColorTransformData', grown);
       (data = cast (grown : Dynamic));
@@ -227,8 +227,8 @@ class GlColorAdjustment {
     _Runtime.callValue(drawGlShapeMeshBatch, cast ([state, renderProxy, meshes, binding, function(bound:Dynamic) {
       var gl:Dynamic = cast _Runtime.UNDEFINED;
       gl = _Runtime.field(bound, 'gl');
-      _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(shader, 'colorMultiplierLocation'), _Runtime.field(colorTransform, 'redMultiplier'), _Runtime.field(colorTransform, 'greenMultiplier'), _Runtime.field(colorTransform, 'blueMultiplier'), _Runtime.field(colorTransform, 'alphaMultiplier')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(shader, 'colorOffsetLocation'), (_Runtime.field(colorTransform, 'redOffset') / 255.0), (_Runtime.field(colorTransform, 'greenOffset') / 255.0), (_Runtime.field(colorTransform, 'blueOffset') / 255.0), (_Runtime.field(colorTransform, 'alphaOffset') / 255.0)] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(shader, 'colorMultiplierLocation'), _Runtime.field(colorTransform, 'redMultiplier'), _Runtime.field(colorTransform, 'greenMultiplier'), _Runtime.field(colorTransform, 'blueMultiplier'), _Runtime.field(colorTransform, 'alphaMultiplier')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(shader, 'colorOffsetLocation'), (_Runtime.field(colorTransform, 'redOffset') / 255.0), (_Runtime.field(colorTransform, 'greenOffset') / 255.0), (_Runtime.field(colorTransform, 'blueOffset') / 255.0), (_Runtime.field(colorTransform, 'alphaOffset') / 255.0)] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 
@@ -240,7 +240,7 @@ class GlColorAdjustment {
     if (_Runtime.truthy(_Runtime.field(runtime, 'shapeMeshColorTransformShader'))) { return cast _Runtime.field(runtime, 'shapeMeshColorTransformShader'); }
     gl = _Runtime.field(state, 'gl');
     program = _Runtime.callValue(createGlProgram, cast ([gl, GlColorAdjustment.SHAPE_MESH_CT_VS__glColorAdjustment, GlColorAdjustment.SHAPE_MESH_CT_FS__glColorAdjustment, 'Shape-mesh color transform'] : Array<Dynamic>));
-    _Runtime.setField(runtime, 'shapeMeshColorTransformShader', { program: program, positionLocation: _Runtime.callProperty(gl, 'getAttribLocation', cast ([program, 'a_position'] : Array<Dynamic>)), matrixLocation: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_matrix'] : Array<Dynamic>)), colorLocation: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_color'] : Array<Dynamic>)), colorMultiplierLocation: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_ctMult'] : Array<Dynamic>)), colorOffsetLocation: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_ctOff'] : Array<Dynamic>)) });
+    _Runtime.setField(runtime, 'shapeMeshColorTransformShader', { program: program, positionLocation: flighthq._internal.WebGl2RenderingContext.call(gl, 'getAttribLocation', cast ([program, 'a_position'] : Array<Dynamic>)), matrixLocation: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_matrix'] : Array<Dynamic>)), colorLocation: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_color'] : Array<Dynamic>)), colorMultiplierLocation: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_ctMult'] : Array<Dynamic>)), colorOffsetLocation: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_ctOff'] : Array<Dynamic>)) });
     return cast _Runtime.field(runtime, 'shapeMeshColorTransformShader');
     return cast null;
   }

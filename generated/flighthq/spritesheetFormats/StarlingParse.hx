@@ -48,13 +48,13 @@ class StarlingParse {
     while (_Runtime.truthy(!_Runtime.strictEquals((m = cast (_Runtime.callProperty(stRE, 'exec', cast ([xml] : Array<Dynamic>)) : Dynamic)), null))) {
       var a:Dynamic = _Runtime.callValue(StarlingParse.parseAttrs__starlingParse, cast ([_Runtime.getIndex(m, 1.0)] : Array<Dynamic>));
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.getIndex(a, 'name')))) { continue; }
-      var st:StarlingSubTexture = { height: _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'height'), function():Dynamic return cast '0')] : Array<Dynamic>)), name: _Runtime.getIndex(a, 'name'), width: _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'width'), function():Dynamic return cast '0')] : Array<Dynamic>)), x: _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'x'), function():Dynamic return cast '0')] : Array<Dynamic>)), y: _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'y'), function():Dynamic return cast '0')] : Array<Dynamic>)) };
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'frameX'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'frameX', _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.getIndex(a, 'frameX')] : Array<Dynamic>))); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'frameY'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'frameY', _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.getIndex(a, 'frameY')] : Array<Dynamic>))); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'frameWidth'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'frameWidth', _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.getIndex(a, 'frameWidth')] : Array<Dynamic>))); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'frameHeight'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'frameHeight', _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.getIndex(a, 'frameHeight')] : Array<Dynamic>))); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotX'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'pivotX', _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.getIndex(a, 'pivotX')] : Array<Dynamic>))); }
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotY'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'pivotY', _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.getIndex(a, 'pivotY')] : Array<Dynamic>))); }
+      var st:StarlingSubTexture = { height: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'height'), function():Dynamic return cast '0')] : Array<Dynamic>)), name: _Runtime.getIndex(a, 'name'), width: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'width'), function():Dynamic return cast '0')] : Array<Dynamic>)), x: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'x'), function():Dynamic return cast '0')] : Array<Dynamic>)), y: _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'y'), function():Dynamic return cast '0')] : Array<Dynamic>)) };
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'frameX'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'frameX', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameX')] : Array<Dynamic>))); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'frameY'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'frameY', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameY')] : Array<Dynamic>))); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'frameWidth'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'frameWidth', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameWidth')] : Array<Dynamic>))); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'frameHeight'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'frameHeight', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'frameHeight')] : Array<Dynamic>))); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotX'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'pivotX', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'pivotX')] : Array<Dynamic>))); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'pivotY'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'pivotY', _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(a, 'pivotY')] : Array<Dynamic>))); }
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.getIndex(a, 'rotated'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(st, 'rotated', _Runtime.strictEquals(_Runtime.getIndex(a, 'rotated'), 'true')); }
       _Runtime.callProperty(subTextures, 'push', cast ([st] : Array<Dynamic>));
     }
@@ -74,7 +74,7 @@ class StarlingParse {
   public static function inferAnimations__starlingParse(frameNames:Array<String>, frameDuration:Float):Array<SpritesheetAnimationData> {
     var groups:Dynamic = cast _Runtime.UNDEFINED;
     var animations:Array<SpritesheetAnimationData> = cast _Runtime.UNDEFINED;
-    groups = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    groups = _Runtime.construct(_Runtime.globalValue('Map'), []);
     for (name in _Runtime.iterable(frameNames)) {
       var noExt:Dynamic = _Runtime.replace(name, _Runtime.regexp('\\.\\w+$$', ''), '', false);
       var match:Dynamic = _Runtime.match(noExt, _Runtime.regexp('^(.*?)_?(\\d+)$$', ''));
@@ -82,7 +82,7 @@ class StarlingParse {
       var __destructure0:Dynamic = match;
       var base:Dynamic = _Runtime.getIndex(__destructure0, 1.0);
       var numStr:Dynamic = _Runtime.getIndex(__destructure0, 2.0);
-      var index:Dynamic = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([numStr, 10.0] : Array<Dynamic>));
+      var index:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([numStr, 10.0] : Array<Dynamic>));
       var bucket:Dynamic = _Runtime.callProperty(groups, 'get', cast ([base] : Array<Dynamic>));
       if (_Runtime.truthy(bucket)) { _Runtime.callProperty(bucket, 'push', cast ([{ index: index, name: name }] : Array<Dynamic>)); } else { _Runtime.callProperty(groups, 'set', cast ([base, cast ([{ index: index, name: name }] : Array<Dynamic>)] : Array<Dynamic>)); }
     }

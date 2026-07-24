@@ -149,10 +149,10 @@ class WgpuRenderEffectPipeline {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
-    r = (Std.int(_Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.coalesce(_Runtime.getIndex(rgba, 0.0), function():Dynamic return cast 0.0) * 255.0)] : Array<Dynamic>))) & Std.int(255.0));
-    g = (Std.int(_Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.coalesce(_Runtime.getIndex(rgba, 1.0), function():Dynamic return cast 0.0) * 255.0)] : Array<Dynamic>))) & Std.int(255.0));
-    b = (Std.int(_Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.coalesce(_Runtime.getIndex(rgba, 2.0), function():Dynamic return cast 0.0) * 255.0)] : Array<Dynamic>))) & Std.int(255.0));
-    a = (Std.int(_Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.coalesce(_Runtime.getIndex(rgba, 3.0), function():Dynamic return cast 0.0) * 255.0)] : Array<Dynamic>))) & Std.int(255.0));
+    r = (Std.int(HxMath.round((_Runtime.coalesce(_Runtime.getIndex(rgba, 0.0), function():Dynamic return cast 0.0) * 255.0))) & Std.int(255.0));
+    g = (Std.int(HxMath.round((_Runtime.coalesce(_Runtime.getIndex(rgba, 1.0), function():Dynamic return cast 0.0) * 255.0))) & Std.int(255.0));
+    b = (Std.int(HxMath.round((_Runtime.coalesce(_Runtime.getIndex(rgba, 2.0), function():Dynamic return cast 0.0) * 255.0))) & Std.int(255.0));
+    a = (Std.int(HxMath.round((_Runtime.coalesce(_Runtime.getIndex(rgba, 3.0), function():Dynamic return cast 0.0) * 255.0))) & Std.int(255.0));
     return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(r) << Std.int(24.0))) | Std.int((Std.int(g) << Std.int(16.0))))) | Std.int((Std.int(b) << Std.int(8.0))))) | Std.int(a))), Std.int(0.0));
     return cast null;
   }

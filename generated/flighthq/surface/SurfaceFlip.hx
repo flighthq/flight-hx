@@ -12,8 +12,8 @@ class SurfaceFlip {
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var stride:Dynamic = cast _Runtime.UNDEFINED;
-    w = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'width'), _Runtime.field(source, 'width')] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'height'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+    w = HxMath.min(_Runtime.field(dest, 'width'), _Runtime.field(source, 'width'));
+    h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
     data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     stride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
     if (_Runtime.truthy(_Runtime.callValue(SurfaceFlip.isSameRegion__surfaceFlip, cast ([dest, source] : Array<Dynamic>)))) {
@@ -47,8 +47,8 @@ class SurfaceFlip {
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var stride:Dynamic = cast _Runtime.UNDEFINED;
-    w = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'width'), _Runtime.field(source, 'width')] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'height'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+    w = HxMath.min(_Runtime.field(dest, 'width'), _Runtime.field(source, 'width'));
+    h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
     data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     stride = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
     if (_Runtime.truthy(_Runtime.callValue(SurfaceFlip.isSameRegion__surfaceFlip, cast ([dest, source] : Array<Dynamic>)))) {

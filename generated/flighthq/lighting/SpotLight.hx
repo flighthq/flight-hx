@@ -32,13 +32,13 @@ class SpotLight {
   }
 
   public static function getSpotLightConeDegrees(out:SpotLightConeAngles, source:flighthq.types.SpotLight):Void {
-    _Runtime.setField(out, 'innerDegrees', ((_Runtime.callProperty(HxMath, 'acos', cast ([_Runtime.field(source, 'innerConeCos')] : Array<Dynamic>)) * 180.0) / HxMath.PI));
-    _Runtime.setField(out, 'outerDegrees', ((_Runtime.callProperty(HxMath, 'acos', cast ([_Runtime.field(source, 'outerConeCos')] : Array<Dynamic>)) * 180.0) / HxMath.PI));
+    _Runtime.setField(out, 'innerDegrees', ((HxMath.acos(_Runtime.field(source, 'innerConeCos')) * 180.0) / HxMath.PI));
+    _Runtime.setField(out, 'outerDegrees', ((HxMath.acos(_Runtime.field(source, 'outerConeCos')) * 180.0) / HxMath.PI));
   }
 
   public static function setSpotLightCone(out:flighthq.types.SpotLight, innerDegrees:Float, outerDegrees:Float):Void {
-    _Runtime.setField(out, 'innerConeCos', _Runtime.callProperty(HxMath, 'cos', cast ([((innerDegrees * HxMath.PI) / 180.0)] : Array<Dynamic>)));
-    _Runtime.setField(out, 'outerConeCos', _Runtime.callProperty(HxMath, 'cos', cast ([((outerDegrees * HxMath.PI) / 180.0)] : Array<Dynamic>)));
+    _Runtime.setField(out, 'innerConeCos', HxMath.cos(((innerDegrees * HxMath.PI) / 180.0)));
+    _Runtime.setField(out, 'outerConeCos', HxMath.cos(((outerDegrees * HxMath.PI) / 180.0)));
   }
 
   public static function setSpotLightDirection(out:flighthq.types.SpotLight, x:Float, y:Float, z:Float):Void {
@@ -49,7 +49,7 @@ class SpotLight {
     lx = x;
     ly = y;
     lz = z;
-    len = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((lx * lx) + (ly * ly)) + (lz * lz))] : Array<Dynamic>));
+    len = HxMath.sqrt((((lx * lx) + (ly * ly)) + (lz * lz)));
     if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
       _Runtime.callValue(setVector3, cast ([_Runtime.field(out, 'direction'), (lx / len), (ly / len), (lz / len)] : Array<Dynamic>));
     }
@@ -69,7 +69,7 @@ class SpotLight {
     dx = (targetX - px);
     dy = (targetY - py);
     dz = (targetZ - pz);
-    len = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((dx * dx) + (dy * dy)) + (dz * dz))] : Array<Dynamic>));
+    len = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
       _Runtime.callValue(setVector3, cast ([_Runtime.field(out, 'direction'), (dx / len), (dy / len), (dz / len)] : Array<Dynamic>));
     }

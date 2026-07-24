@@ -79,7 +79,7 @@ class SvgPathData {
         }
         if (_Runtime.truthy(!_Runtime.truthy(expDigit))) { (pos = cast (expStart : Dynamic)); }
       }
-      return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'parseFloat', cast ([_Runtime.slice(d, start, pos)] : Array<Dynamic>));
+      return cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseFloat', cast ([_Runtime.slice(d, start, pos)] : Array<Dynamic>));
     };
     readFlag = function readFlag():Null<Float> {
       _Runtime.callValue(skipSeparators, cast ([] : Array<Dynamic>));
@@ -279,7 +279,7 @@ class SvgPathData {
     var factor:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(precision, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast Std.string(value); }
     factor = HxMath.pow(10.0, precision);
-    return cast Std.string((_Runtime.callProperty(HxMath, 'round', cast ([(value * factor)] : Array<Dynamic>)) / factor));
+    return cast Std.string((HxMath.round((value * factor)) / factor));
     return cast null;
   }
 

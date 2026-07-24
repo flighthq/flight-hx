@@ -36,7 +36,7 @@ class Number {
   public static function getNumberFormat__number(locale:LocaleInput, options:Null<Dynamic>):Dynamic {
     var key:Dynamic = cast _Runtime.UNDEFINED;
     key = _Runtime.callValue(getCacheKey, cast (['number', locale, options] : Array<Dynamic>));
-    return cast _Runtime.callValue(getCached, cast ([key, function() return _Runtime.construct(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Intl'] : Array<Dynamic>)), 'NumberFormat'), [(cast locale : Dynamic), options])] : Array<Dynamic>));
+    return cast _Runtime.callValue(getCached, cast ([key, function() return _Runtime.construct(_Runtime.field(_Runtime.globalValue('Intl'), 'NumberFormat'), [(cast locale : Dynamic), options])] : Array<Dynamic>));
     return cast null;
   }
 }

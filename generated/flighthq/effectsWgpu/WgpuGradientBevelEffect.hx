@@ -57,16 +57,16 @@ class WgpuGradientBevelEffect {
     s2 = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     angle = ((_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0) * HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
-    quality = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)));
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
     fs = _Runtime.callValue(getWgpuEffectPassState, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(applyWgpuEffectTintPass, cast ([state, src, s0, 16777215.0, 1.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, strength] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callValue(applyWgpuEffectTintPass, cast ([state, src, s0, 16777215.0, 1.0, HxMath.min(1.0, strength)] : Array<Dynamic>));
     _Runtime.callValue(applyWgpuEffectBoxBlur, cast ([state, s0, s1, s2, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), passes: quality }] : Array<Dynamic>));
-    dx = ((_Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>)) * distance) / _Runtime.field(s1, 'width'));
-    dy = -((_Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>)) * distance) / _Runtime.field(s1, 'height'));
+    dx = ((HxMath.cos(angle) * distance) / _Runtime.field(s1, 'width'));
+    dy = -((HxMath.sin(angle) * distance) / _Runtime.field(s1, 'height'));
     encodePipeline = _Runtime.callValue(WgpuGradientBevelEffect.getEncodePipeline__wgpuGradientBevelEffect, cast ([state] : Array<Dynamic>));
     encodeSlot = _Runtime.callProperty(fs, 'acquireSlot', cast ([] : Array<Dynamic>));
     _Runtime.callProperty(fs, 'writeSlot', cast ([encodeSlot, function(f32:Dynamic) {
@@ -150,7 +150,7 @@ class WgpuGradientBevelEffect {
     return cast null;
   }
 
-  public static final encodePipelines__wgpuGradientBevelEffect:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final encodePipelines__wgpuGradientBevelEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static final applyPipelines__wgpuGradientBevelEffect:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final applyPipelines__wgpuGradientBevelEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

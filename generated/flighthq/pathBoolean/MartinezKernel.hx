@@ -15,7 +15,7 @@ typedef ArrangementSegment__martinezKernel = { var ax:Float; var ay:Float; var b
 typedef UniqueSegment__martinezKernel = { var ax:Float; var ay:Float; var bx:Float; var by:Float; var subjectDelta:Float; var clipDelta:Float; };
 
 class DirectedGraph__martinezKernel {
-  private final keys:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+  private final keys:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
   private final xs:Array<Float> = cast ([] : Array<Dynamic>);
   private final ys:Array<Float> = cast ([] : Array<Dynamic>);
   private final outgoing:Array<Array<Float>> = cast ([] : Array<Dynamic>);
@@ -77,13 +77,13 @@ class DirectedGraph__martinezKernel {
     var incomingAngle:Dynamic = cast _Runtime.UNDEFINED;
     var best:Dynamic = cast _Runtime.UNDEFINED;
     var bestGap:Dynamic = cast _Runtime.UNDEFINED;
-    incomingAngle = _Runtime.callProperty(HxMath, 'atan2', cast ([(_Runtime.getIndex(_Runtime.field(this, 'ys'), cameFrom) - _Runtime.getIndex(_Runtime.field(this, 'ys'), at)), (_Runtime.getIndex(_Runtime.field(this, 'xs'), cameFrom) - _Runtime.getIndex(_Runtime.field(this, 'xs'), at))] : Array<Dynamic>));
+    incomingAngle = HxMath.atan2((_Runtime.getIndex(_Runtime.field(this, 'ys'), cameFrom) - _Runtime.getIndex(_Runtime.field(this, 'ys'), at)), (_Runtime.getIndex(_Runtime.field(this, 'xs'), cameFrom) - _Runtime.getIndex(_Runtime.field(this, 'xs'), at)));
     best = -1.0;
     bestGap = HxMath.POSITIVE_INFINITY;
     for (edge in _Runtime.iterable(_Runtime.getIndex(_Runtime.field(this, 'outgoing'), at))) {
       if (_Runtime.truthy(_Runtime.getIndex(_Runtime.field(this, 'used'), edge))) { continue; }
       var to:Dynamic = _Runtime.getIndex(_Runtime.field(this, 'edgeTo'), edge);
-      var angle:Dynamic = _Runtime.callProperty(HxMath, 'atan2', cast ([(_Runtime.getIndex(_Runtime.field(this, 'ys'), to) - _Runtime.getIndex(_Runtime.field(this, 'ys'), at)), (_Runtime.getIndex(_Runtime.field(this, 'xs'), to) - _Runtime.getIndex(_Runtime.field(this, 'xs'), at))] : Array<Dynamic>));
+      var angle:Dynamic = HxMath.atan2((_Runtime.getIndex(_Runtime.field(this, 'ys'), to) - _Runtime.getIndex(_Runtime.field(this, 'ys'), at)), (_Runtime.getIndex(_Runtime.field(this, 'xs'), to) - _Runtime.getIndex(_Runtime.field(this, 'xs'), at)));
       var gap:Dynamic = (incomingAngle - angle);
       while (_Runtime.truthy(_Runtime.compare(gap, 0.0, '<='))) { (gap = cast ((gap + (HxMath.PI * 2.0)) : Dynamic)); }
       while (_Runtime.truthy(_Runtime.compare(gap, (HxMath.PI * 2.0), '>'))) { (gap = cast ((gap - (HxMath.PI * 2.0)) : Dynamic)); }
@@ -460,17 +460,17 @@ class MartinezKernel {
     if (_Runtime.truthy(_Runtime.compare((krossE * krossE), ((MartinezKernel.INTERSECTION_EPS__martinezKernel * sqrLenA) * ((ex * ex) + (ey * ey))), '>'))) { return cast null; }
     sa = (((ex * vax) + (ey * vay)) / sqrLenA);
     sb = (sa + (((vbx * vax) + (vby * vay)) / sqrLenA));
-    lo = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([sa, sb] : Array<Dynamic>))] : Array<Dynamic>));
-    hi = _Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([sa, sb] : Array<Dynamic>))] : Array<Dynamic>));
+    lo = HxMath.max(0.0, HxMath.min(sa, sb));
+    hi = HxMath.min(1.0, HxMath.max(sa, sb));
     if (_Runtime.truthy(_Runtime.compare(lo, (hi + 1e-12), '>'))) { return cast null; }
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(lo - hi)] : Array<Dynamic>)), 1e-12, '<='))) { return cast cast ([cast ([(a1x + (lo * vax)), (a1y + (lo * vay))] : Array<Dynamic>)] : Array<Dynamic>); }
+    if (_Runtime.truthy(_Runtime.compare(HxMath.abs((lo - hi)), 1e-12, '<='))) { return cast cast ([cast ([(a1x + (lo * vax)), (a1y + (lo * vay))] : Array<Dynamic>)] : Array<Dynamic>); }
     return cast cast ([cast ([(a1x + (lo * vax)), (a1y + (lo * vay))] : Array<Dynamic>), cast ([(a1x + (hi * vax)), (a1y + (hi * vay))] : Array<Dynamic>)] : Array<Dynamic>);
     return cast null;
   }
 
   public static function mergeCoincidentSegments__martinezKernel(segments:Array<ArrangementSegment__martinezKernel>):Array<UniqueSegment__martinezKernel> {
     var map:Dynamic = cast _Runtime.UNDEFINED;
-    map = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    map = _Runtime.construct(_Runtime.globalValue('Map'), []);
     for (seg in _Runtime.iterable(segments)) {
       var ax:Dynamic = _Runtime.field(seg, 'ax');
       var ay:Dynamic = _Runtime.field(seg, 'ay');
@@ -524,8 +524,8 @@ class MartinezKernel {
     var winding:Dynamic = cast _Runtime.UNDEFINED;
     winding = 0.0;
     for (v in _Runtime.iterable(unique)) {
-      var lox:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(v, 'ax'), _Runtime.field(v, 'bx')] : Array<Dynamic>));
-      var hix:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(v, 'ax'), _Runtime.field(v, 'bx')] : Array<Dynamic>));
+      var lox:Dynamic = HxMath.min(_Runtime.field(v, 'ax'), _Runtime.field(v, 'bx'));
+      var hix:Dynamic = HxMath.max(_Runtime.field(v, 'ax'), _Runtime.field(v, 'bx'));
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(px, lox, '<'), function():Dynamic return cast _Runtime.compare(px, hix, '>=')))) { continue; }
       var t:Dynamic = ((px - _Runtime.field(v, 'ax')) / (_Runtime.field(v, 'bx') - _Runtime.field(v, 'ax')));
       var yAt:Dynamic = (_Runtime.field(v, 'ay') + (t * (_Runtime.field(v, 'by') - _Runtime.field(v, 'ay'))));
@@ -558,7 +558,7 @@ class MartinezKernel {
     {
       var __switchValue = fillRule;
       if (__switchValue == 'evenOdd') {
-        return cast _Runtime.strictEquals((Std.int(_Runtime.callProperty(HxMath, 'abs', cast ([winding] : Array<Dynamic>))) & Std.int(1.0)), 1.0);
+        return cast _Runtime.strictEquals((Std.int(HxMath.abs(winding)) & Std.int(1.0)), 1.0);
       }
       else if (__switchValue == 'positive') {
         return cast _Runtime.compare(winding, 0.0, '>');
@@ -584,7 +584,7 @@ class MartinezKernel {
   }
 
   public static function approxEqual__martinezKernel(a:Float, b:Float):Bool {
-    return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(a - b)] : Array<Dynamic>)), MartinezKernel.vertexSnap__martinezKernel, '<=');
+    return cast _Runtime.compare(HxMath.abs((a - b)), MartinezKernel.vertexSnap__martinezKernel, '<=');
     return cast null;
   }
 
@@ -614,13 +614,13 @@ class MartinezKernel {
         }
       }
     }
-    extent = _Runtime.callProperty(HxMath, 'max', cast ([(maxX - minX), (maxY - minY)] : Array<Dynamic>));
+    extent = HxMath.max((maxX - minX), (maxY - minY));
     return cast _Runtime.select(_Runtime.compare(extent, 0.0, '>'), function():Dynamic return cast (extent * MartinezKernel.VERTEX_SNAP_RELATIVE__martinezKernel), function():Dynamic return cast MartinezKernel.VERTEX_SNAP_FALLBACK__martinezKernel);
     return cast null;
   }
 
   public static function snap__martinezKernel(v:Float):Float {
-    return cast _Runtime.callProperty(HxMath, 'round', cast ([(v / MartinezKernel.vertexSnap__martinezKernel)] : Array<Dynamic>));
+    return cast HxMath.round((v / MartinezKernel.vertexSnap__martinezKernel));
     return cast null;
   }
 

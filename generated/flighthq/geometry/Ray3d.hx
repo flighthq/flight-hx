@@ -146,7 +146,7 @@ class Ray3d {
     dy = _Runtime.field(_Runtime.field(ray, 'direction'), 'y');
     dz = _Runtime.field(_Runtime.field(ray, 'direction'), 'z');
     tMin = 0.0;
-    tMax = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
+    tMax = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
     if (_Runtime.truthy(!_Runtime.strictEquals(dx, 0.0))) {
       var invDx:Dynamic = (1.0 / dx);
       var t1:Dynamic = ((_Runtime.field(_Runtime.field(aabb, 'min'), 'x') - ox) * invDx);
@@ -156,8 +156,8 @@ class Ray3d {
         (t1 = cast (t2 : Dynamic));
         (t2 = cast (tmp : Dynamic));
       }
-      (tMin = cast (_Runtime.callProperty(HxMath, 'max', cast ([tMin, t1] : Array<Dynamic>)) : Dynamic));
-      (tMax = cast (_Runtime.callProperty(HxMath, 'min', cast ([tMax, t2] : Array<Dynamic>)) : Dynamic));
+      (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
+      (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
       if (_Runtime.truthy(_Runtime.compare(tMin, tMax, '>'))) { return cast -1.0; }
     } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(ox, _Runtime.field(_Runtime.field(aabb, 'min'), 'x'), '<'), function():Dynamic return cast _Runtime.compare(ox, _Runtime.field(_Runtime.field(aabb, 'max'), 'x'), '>')))) {
       return cast -1.0;
@@ -171,8 +171,8 @@ class Ray3d {
         (t1 = cast (t2 : Dynamic));
         (t2 = cast (tmp : Dynamic));
       }
-      (tMin = cast (_Runtime.callProperty(HxMath, 'max', cast ([tMin, t1] : Array<Dynamic>)) : Dynamic));
-      (tMax = cast (_Runtime.callProperty(HxMath, 'min', cast ([tMax, t2] : Array<Dynamic>)) : Dynamic));
+      (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
+      (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
       if (_Runtime.truthy(_Runtime.compare(tMin, tMax, '>'))) { return cast -1.0; }
     } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oy, _Runtime.field(_Runtime.field(aabb, 'min'), 'y'), '<'), function():Dynamic return cast _Runtime.compare(oy, _Runtime.field(_Runtime.field(aabb, 'max'), 'y'), '>')))) {
       return cast -1.0;
@@ -186,8 +186,8 @@ class Ray3d {
         (t1 = cast (t2 : Dynamic));
         (t2 = cast (tmp : Dynamic));
       }
-      (tMin = cast (_Runtime.callProperty(HxMath, 'max', cast ([tMin, t1] : Array<Dynamic>)) : Dynamic));
-      (tMax = cast (_Runtime.callProperty(HxMath, 'min', cast ([tMax, t2] : Array<Dynamic>)) : Dynamic));
+      (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
+      (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
       if (_Runtime.truthy(_Runtime.compare(tMin, tMax, '>'))) { return cast -1.0; }
     } else { if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(oz, _Runtime.field(_Runtime.field(aabb, 'min'), 'z'), '<'), function():Dynamic return cast _Runtime.compare(oz, _Runtime.field(_Runtime.field(aabb, 'max'), 'z'), '>')))) {
       return cast -1.0;
@@ -200,7 +200,7 @@ class Ray3d {
     var denom:Dynamic = cast _Runtime.UNDEFINED;
     var t:Dynamic = cast _Runtime.UNDEFINED;
     denom = (((_Runtime.field(plane, 'a') * _Runtime.field(_Runtime.field(ray, 'direction'), 'x')) + (_Runtime.field(plane, 'b') * _Runtime.field(_Runtime.field(ray, 'direction'), 'y'))) + (_Runtime.field(plane, 'c') * _Runtime.field(_Runtime.field(ray, 'direction'), 'z')));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([denom] : Array<Dynamic>)), 1e-10, '<'))) { return cast -1.0; }
+    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(denom), 1e-10, '<'))) { return cast -1.0; }
     t = (-((((_Runtime.field(plane, 'a') * _Runtime.field(_Runtime.field(ray, 'origin'), 'x')) + (_Runtime.field(plane, 'b') * _Runtime.field(_Runtime.field(ray, 'origin'), 'y'))) + (_Runtime.field(plane, 'c') * _Runtime.field(_Runtime.field(ray, 'origin'), 'z'))) + _Runtime.field(plane, 'd')) / denom);
     return cast _Runtime.select(_Runtime.compare(t, 0.0, '>='), function():Dynamic return cast t, function():Dynamic return cast -1.0);
     return cast null;
@@ -233,7 +233,7 @@ class Ray3d {
     c = ((((ox * ox) + (oy * oy)) + (oz * oz)) - (_Runtime.field(sphere, 'radius') * _Runtime.field(sphere, 'radius')));
     disc = ((b * b) - (a * c));
     if (_Runtime.truthy(_Runtime.compare(disc, 0.0, '<'))) { return cast -1.0; }
-    sqrtDisc = _Runtime.callProperty(HxMath, 'sqrt', cast ([disc] : Array<Dynamic>));
+    sqrtDisc = HxMath.sqrt(disc);
     t = ((-b - sqrtDisc) / a);
     if (_Runtime.truthy(_Runtime.compare(t, 0.0, '>='))) { return cast t; }
     t2 = ((-b + sqrtDisc) / a);
@@ -278,7 +278,7 @@ class Ray3d {
     hy = ((dz * e2x) - (dx * e2z));
     hz = ((dx * e2y) - (dy * e2x));
     det = (((e1x * hx) + (e1y * hy)) + (e1z * hz));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([det] : Array<Dynamic>)), 1e-10, '<'))) { return cast -1.0; }
+    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(det), 1e-10, '<'))) { return cast -1.0; }
     invDet = (1.0 / det);
     sx = (_Runtime.field(_Runtime.field(ray, 'origin'), 'x') - _Runtime.field(a, 'x'));
     sy = (_Runtime.field(_Runtime.field(ray, 'origin'), 'y') - _Runtime.field(a, 'y'));

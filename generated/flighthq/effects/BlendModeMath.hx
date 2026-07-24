@@ -65,12 +65,12 @@ class BlendModeMath {
       }
       else if (__switchValue == AdvancedBlendModeValue.SoftLight) {
         {
-          var d:Dynamic = _Runtime.select(_Runtime.compare(cb, 0.25, '<='), function():Dynamic return cast (((((16.0 * cb) - 12.0) * cb) + 4.0) * cb), function():Dynamic return cast _Runtime.callProperty(HxMath, 'sqrt', cast ([cb] : Array<Dynamic>)));
+          var d:Dynamic = _Runtime.select(_Runtime.compare(cb, 0.25, '<='), function():Dynamic return cast (((((16.0 * cb) - 12.0) * cb) + 4.0) * cb), function():Dynamic return cast HxMath.sqrt(cb));
           return cast _Runtime.select(_Runtime.compare(cs, 0.5, '<='), function():Dynamic return cast (cb - (((1.0 - (2.0 * cs)) * cb) * (1.0 - cb))), function():Dynamic return cast (cb + (((2.0 * cs) - 1.0) * (d - cb))));
         }
       }
       else if (__switchValue == AdvancedBlendModeValue.Difference) {
-        return cast _Runtime.callProperty(HxMath, 'abs', cast ([(cb - cs)] : Array<Dynamic>));
+        return cast HxMath.abs((cb - cs));
       }
       else if (__switchValue == AdvancedBlendModeValue.Exclusion) {
         return cast ((cb + cs) - ((2.0 * cb) * cs));
@@ -78,12 +78,12 @@ class BlendModeMath {
       else if (__switchValue == AdvancedBlendModeValue.ColorDodge) {
         if (_Runtime.truthy(_Runtime.compare(cb, 0.0, '<='))) { return cast 0.0; }
         if (_Runtime.truthy(_Runtime.compare(cs, 1.0, '>='))) { return cast 1.0; }
-        return cast _Runtime.callProperty(HxMath, 'min', cast ([1.0, (cb / (1.0 - cs))] : Array<Dynamic>));
+        return cast HxMath.min(1.0, (cb / (1.0 - cs)));
       }
       else if (__switchValue == AdvancedBlendModeValue.ColorBurn) {
         if (_Runtime.truthy(_Runtime.compare(cb, 1.0, '>='))) { return cast 1.0; }
         if (_Runtime.truthy(_Runtime.compare(cs, 0.0, '<='))) { return cast 0.0; }
-        return cast (1.0 - _Runtime.callProperty(HxMath, 'min', cast ([1.0, ((1.0 - cb) / cs)] : Array<Dynamic>)));
+        return cast (1.0 - HxMath.min(1.0, ((1.0 - cb) / cs)));
       }
       else  {
         return cast cs;

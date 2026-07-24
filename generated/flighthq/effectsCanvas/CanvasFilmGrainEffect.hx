@@ -24,18 +24,18 @@ class CanvasFilmGrainEffect {
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
     var pattern:Dynamic = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.1);
-    size = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'size'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    size = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'size'), function():Dynamic return cast 1.0)));
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
     _Runtime.callValue(drawCanvasEffectPass, cast ([dest, source, 'none'] : Array<Dynamic>));
     cells = 64.0;
     patchSize = (cells * size);
     noise = _Runtime.callValue(acquireCanvasRenderTarget, cast ([pool, patchSize, patchSize] : Array<Dynamic>));
     nctx = _Runtime.field(noise, 'context');
-    _Runtime.callProperty(nctx, 'save', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(nctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.setField(nctx, 'globalCompositeOperation', 'source-over');
-    _Runtime.setField(nctx, 'filter', 'none');
-    _Runtime.callProperty(nctx, 'clearRect', cast ([0.0, 0.0, patchSize, patchSize] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(nctx, 'save', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(nctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.setField(nctx, 'globalCompositeOperation', 'source-over');
+    flighthq._internal.CanvasRenderingContext2D.setField(nctx, 'filter', 'none');
+    flighthq._internal.CanvasRenderingContext2D.call(nctx, 'clearRect', cast ([0.0, 0.0, patchSize, patchSize] : Array<Dynamic>));
     s = seed;
     {
       var y:Dynamic = 0.0;
@@ -44,28 +44,28 @@ class CanvasFilmGrainEffect {
           var x:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(x, cells, '<'))) {
             (s = cast ((Std.int(((s * 1103515245.0) + 12345.0)) & Std.int(2147483647.0)) : Dynamic));
-            var v:Dynamic = _Runtime.callProperty(HxMath, 'floor', cast ([((s / 2147483647.0) * 255.0)] : Array<Dynamic>));
-            _Runtime.setField(nctx, 'fillStyle', 'rgb(' + Std.string(v) + ',' + Std.string(v) + ',' + Std.string(v) + ')');
-            _Runtime.callProperty(nctx, 'fillRect', cast ([(x * size), (y * size), size, size] : Array<Dynamic>));
+            var v:Dynamic = HxMath.floor(((s / 2147483647.0) * 255.0));
+            flighthq._internal.CanvasRenderingContext2D.setField(nctx, 'fillStyle', 'rgb(' + Std.string(v) + ',' + Std.string(v) + ',' + Std.string(v) + ')');
+            flighthq._internal.CanvasRenderingContext2D.call(nctx, 'fillRect', cast ([(x * size), (y * size), size, size] : Array<Dynamic>));
             x++;
           }
         }
         y++;
       }
     }
-    _Runtime.callProperty(nctx, 'restore', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(nctx, 'restore', cast ([] : Array<Dynamic>));
     ctx = _Runtime.field(dest, 'context');
-    _Runtime.callProperty(ctx, 'save', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.setField(ctx, 'filter', 'none');
-    _Runtime.setField(ctx, 'globalCompositeOperation', 'overlay');
-    _Runtime.setField(ctx, 'globalAlpha', _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, intensity] : Array<Dynamic>))] : Array<Dynamic>)));
-    pattern = _Runtime.callProperty(ctx, 'createPattern', cast ([_Runtime.field(noise, 'canvas'), 'repeat'] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'save', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'filter', 'none');
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'globalCompositeOperation', 'overlay');
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'globalAlpha', HxMath.max(0.0, HxMath.min(1.0, intensity)));
+    pattern = flighthq._internal.CanvasRenderingContext2D.call(ctx, 'createPattern', cast ([_Runtime.field(noise, 'canvas'), 'repeat'] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(pattern, null))) {
-      _Runtime.setField(ctx, 'fillStyle', pattern);
-      _Runtime.callProperty(ctx, 'fillRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
+      flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'fillStyle', pattern);
+      flighthq._internal.CanvasRenderingContext2D.call(ctx, 'fillRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
     }
-    _Runtime.callProperty(ctx, 'restore', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'restore', cast ([] : Array<Dynamic>));
     _Runtime.callValue(releaseCanvasRenderTarget, cast ([pool, noise] : Array<Dynamic>));
   }
 

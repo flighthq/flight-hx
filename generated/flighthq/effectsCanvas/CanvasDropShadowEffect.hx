@@ -52,12 +52,12 @@ class CanvasDropShadowEffect {
     blurred = _Runtime.callValue(acquireCanvasRenderTarget, cast ([pool, _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
     angle = ((_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0) * HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
-    dx = (_Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>)) * distance);
-    dy = (_Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>)) * distance);
+    dx = (HxMath.cos(angle) * distance);
+    dy = (HxMath.sin(angle) * distance);
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
-    tintStrength = _Runtime.callProperty(HxMath, 'min', cast ([1.0, strength] : Array<Dynamic>));
-    shadowPasses = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'floor', cast ([strength] : Array<Dynamic>))] : Array<Dynamic>));
-    blur = _Runtime.callProperty(HxMath, 'max', cast ([0.0, ((_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0) + _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0)) / 2.0)] : Array<Dynamic>));
+    tintStrength = HxMath.min(1.0, strength);
+    shadowPasses = HxMath.max(1.0, HxMath.floor(strength));
+    blur = HxMath.max(0.0, ((_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0) + _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0)) / 2.0));
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
     _Runtime.callValue(drawCanvasTintedAlphaMask, cast ([mask, source, _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0), tintStrength] : Array<Dynamic>));
     _Runtime.callValue(drawCanvasEffectPass, cast ([blurred, mask, _Runtime.select(_Runtime.compare(blur, 0.0, '>'), function():Dynamic return cast 'blur(' + Std.string(blur) + 'px)', function():Dynamic return cast 'none')] : Array<Dynamic>));

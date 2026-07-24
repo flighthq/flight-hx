@@ -17,7 +17,7 @@ class PrewarmParticleEmitter2D {
     step = _Runtime.select(_Runtime.compare(stepDeltaTime, 0.0, '>'), function():Dynamic return cast stepDeltaTime, function():Dynamic return cast duration);
     elapsed = 0.0;
     while (_Runtime.truthy(_Runtime.compare(elapsed, duration, '<'))) {
-      var deltaTime:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([step, (duration - elapsed)] : Array<Dynamic>));
+      var deltaTime:Dynamic = HxMath.min(step, (duration - elapsed));
       _Runtime.callValue(updateParticleEmitter2D, cast ([emitter, state, config, deltaTime, callbacks] : Array<Dynamic>));
       (elapsed = cast ((elapsed + deltaTime) : Dynamic));
     }

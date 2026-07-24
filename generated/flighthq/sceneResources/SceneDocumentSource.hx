@@ -30,8 +30,8 @@ class SceneDocumentSource {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<Dynamic>> {
       var response:Dynamic = cast _Runtime.UNDEFINED;
       response = flighthq._internal._Async.awaitValue(_Runtime.callValue(sendNetRequest, cast ([{ method: 'GET', responseType: 'arraybuffer', url: url }, _Runtime.callValue(SceneDocumentSource.createSceneDocumentNetRequestOptions__sceneDocumentSource, cast ([url, options] : Array<Dynamic>))] : Array<Dynamic>)));
-      if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(response, 'ok')), function():Dynamic return cast !_Runtime.truthy(_Runtime.isInstanceOf(_Runtime.field(response, 'body'), _Runtime.callProperty(_Runtime, 'globalValue', cast (['ArrayBuffer'] : Array<Dynamic>))))))) { return cast null; }
-      return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [_Runtime.field(response, 'body')]);
+      if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(response, 'ok')), function():Dynamic return cast !_Runtime.truthy(_Runtime.isInstanceOf(_Runtime.field(response, 'body'), _Runtime.globalValue('ArrayBuffer')))))) { return cast null; }
+      return cast _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.field(response, 'body')]);
       return cast null;
     })();
   }

@@ -72,24 +72,24 @@ class WgpuDraw {
     textureBindGroupLayout = _Runtime.field(__destructure1, 'textureBindGroupLayout');
     width = 1.0;
     height = 1.0;
-    if (_Runtime.truthy(_Runtime.isInstanceOf(imageSource, _Runtime.callProperty(_Runtime, 'globalValue', cast (['HTMLCanvasElement'] : Array<Dynamic>))))) {
+    if (_Runtime.truthy(_Runtime.isInstanceOf(imageSource, _Runtime.globalValue('HTMLCanvasElement')))) {
       (width = cast (_Runtime.orValue(_Runtime.field(imageSource, 'width'), function():Dynamic return cast 1.0) : Dynamic));
       (height = cast (_Runtime.orValue(_Runtime.field(imageSource, 'height'), function():Dynamic return cast 1.0) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.isInstanceOf(imageSource, _Runtime.callProperty(_Runtime, 'globalValue', cast (['HTMLImageElement'] : Array<Dynamic>))))) {
+    } else { if (_Runtime.truthy(_Runtime.isInstanceOf(imageSource, _Runtime.globalValue('HTMLImageElement')))) {
       (width = cast (_Runtime.orValue(_Runtime.field(imageSource, 'naturalWidth'), function():Dynamic return cast 1.0) : Dynamic));
       (height = cast (_Runtime.orValue(_Runtime.field(imageSource, 'naturalHeight'), function():Dynamic return cast 1.0) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.isInstanceOf(imageSource, _Runtime.callProperty(_Runtime, 'globalValue', cast (['HTMLVideoElement'] : Array<Dynamic>))))) {
+    } else { if (_Runtime.truthy(_Runtime.isInstanceOf(imageSource, _Runtime.globalValue('HTMLVideoElement')))) {
       (width = cast (_Runtime.orValue(_Runtime.field(imageSource, 'videoWidth'), function():Dynamic return cast 1.0) : Dynamic));
       (height = cast (_Runtime.orValue(_Runtime.field(imageSource, 'videoHeight'), function():Dynamic return cast 1.0) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.isInstanceOf(imageSource, _Runtime.callProperty(_Runtime, 'globalValue', cast (['ImageBitmap'] : Array<Dynamic>))))) {
+    } else { if (_Runtime.truthy(_Runtime.isInstanceOf(imageSource, _Runtime.globalValue('ImageBitmap')))) {
       (width = cast (_Runtime.orValue(_Runtime.field(imageSource, 'width'), function():Dynamic return cast 1.0) : Dynamic));
       (height = cast (_Runtime.orValue(_Runtime.field(imageSource, 'height'), function():Dynamic return cast 1.0) : Dynamic));
-    } else { if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['OffscreenCanvas'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.isInstanceOf(imageSource, _Runtime.callProperty(_Runtime, 'globalValue', cast (['OffscreenCanvas'] : Array<Dynamic>)))))) {
+    } else { if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('OffscreenCanvas'), 'undefined'), function():Dynamic return cast _Runtime.isInstanceOf(imageSource, _Runtime.globalValue('OffscreenCanvas'))))) {
       (width = cast (_Runtime.orValue(_Runtime.field(imageSource, 'width'), function():Dynamic return cast 1.0) : Dynamic));
       (height = cast (_Runtime.orValue(_Runtime.field(imageSource, 'height'), function():Dynamic return cast 1.0) : Dynamic));
     } } } } }
     mipLevelCount = _Runtime.select(generateMips, function():Dynamic return cast _Runtime.callValue(getWgpuMipLevelCount, cast ([width, height] : Array<Dynamic>)), function():Dynamic return cast 1.0);
-    texture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: 'rgba8unorm', mipLevelCount: mipLevelCount, usage: (Std.int((Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'COPY_DST')))) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
+    texture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: 'rgba8unorm', mipLevelCount: mipLevelCount, usage: (Std.int((Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'COPY_DST')))) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: (cast imageSource : Dynamic), flipY: false }, { texture: texture, premultipliedAlpha: true }, cast ([width, height] : Array<Dynamic>)] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(mipLevelCount, 1.0, '>'))) { _Runtime.callValue(generateWgpuMipmaps, cast ([state, texture, width, height, 'rgba8unorm'] : Array<Dynamic>)); }
     view = _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>));
@@ -127,9 +127,9 @@ class WgpuDraw {
     device = _Runtime.field(__destructure2, 'device');
     __destructure3 = runtime;
     textureBindGroupLayout = _Runtime.field(__destructure3, 'textureBindGroupLayout');
-    w = _Runtime.callProperty(HxMath, 'max', cast ([1.0, width] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'max', cast ([1.0, height] : Array<Dynamic>));
-    texture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (Std.int((Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'COPY_DST')))) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
+    w = HxMath.max(1.0, width);
+    h = HxMath.max(1.0, height);
+    texture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([w, h, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (Std.int((Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'COPY_DST')))) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
     _Runtime.callProperty(_Runtime.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: (cast canvas : Dynamic), flipY: false }, { texture: texture, premultipliedAlpha: true }, cast ([w, h] : Array<Dynamic>)] : Array<Dynamic>));
     view = _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>));
     sampler = _Runtime.select(_Runtime.field(state, 'allowSmoothing'), function():Dynamic return cast _Runtime.field(runtime, 'linearSampler'), function():Dynamic return cast _Runtime.field(runtime, 'nearestSampler'));
@@ -189,8 +189,8 @@ class WgpuDraw {
     var h:Dynamic = cast _Runtime.UNDEFINED;
     __destructure4 = state;
     device = _Runtime.field(__destructure4, 'device');
-    w = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.field(canvas, 'width')] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.field(canvas, 'height')] : Array<Dynamic>));
+    w = HxMath.max(1.0, _Runtime.field(canvas, 'width'));
+    h = HxMath.max(1.0, _Runtime.field(canvas, 'height'));
     _Runtime.callProperty(_Runtime.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: canvas, flipY: false }, { texture: _Runtime.field(entry, 'texture'), premultipliedAlpha: true }, cast ([w, h] : Array<Dynamic>)] : Array<Dynamic>));
   }
 
@@ -201,7 +201,7 @@ class WgpuDraw {
 
   public static function premultiplyStraightRgba8__wgpuDraw(data:Dynamic):Dynamic {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [_Runtime.field(data, 'length')]);
+    out = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [_Runtime.field(data, 'length')]);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(data, 'length'), '<'))) {
@@ -234,7 +234,7 @@ class WgpuDraw {
     width = _Runtime.orValue(_Runtime.field(image, 'width'), function():Dynamic return cast 1.0);
     height = _Runtime.orValue(_Runtime.field(image, 'height'), function():Dynamic return cast 1.0);
     mipLevelCount = _Runtime.select(generateMips, function():Dynamic return cast _Runtime.callValue(getWgpuMipLevelCount, cast ([width, height] : Array<Dynamic>)), function():Dynamic return cast 1.0);
-    texture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: 'rgba8unorm', mipLevelCount: mipLevelCount, usage: (Std.int((Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'COPY_DST')))) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
+    texture = _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: 'rgba8unorm', mipLevelCount: mipLevelCount, usage: (Std.int((Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'COPY_DST')))) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(image, 'source'), null))) {
       _Runtime.callProperty(_Runtime.field(device, 'queue'), 'copyExternalImageToTexture', cast ([{ source: (cast _Runtime.field(image, 'source') : Dynamic), flipY: false }, { texture: texture, premultipliedAlpha: true }, cast ([width, height] : Array<Dynamic>)] : Array<Dynamic>));
     } else {

@@ -18,13 +18,13 @@ class GlFullscreenPass {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'currentFramebuffer'), _Runtime.field(target, 'framebuffer')))) {
-      _Runtime.callProperty(gl, 'bindFramebuffer', cast ([_Runtime.field(gl, 'FRAMEBUFFER'), _Runtime.field(target, 'framebuffer')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'bindFramebuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'FRAMEBUFFER'), _Runtime.field(target, 'framebuffer')] : Array<Dynamic>));
       _Runtime.setField(runtime, 'currentFramebuffer', _Runtime.field(target, 'framebuffer'));
     }
-    _Runtime.callProperty(gl, 'viewport', cast ([0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'viewport', cast ([0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height')] : Array<Dynamic>));
     _Runtime.setField(runtime, 'renderTargetViewport', { width: _Runtime.field(target, 'width'), height: _Runtime.field(target, 'height') });
-    _Runtime.callProperty(gl, 'clearColor', cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'clear', cast ([_Runtime.field(gl, 'COLOR_BUFFER_BIT')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'clearColor', cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'clear', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'COLOR_BUFFER_BIT')] : Array<Dynamic>));
     _Runtime.setField(runtime, 'currentTexture', null);
     _Runtime.setField(runtime, 'currentBlendMode', null);
   }
@@ -38,14 +38,14 @@ class GlFullscreenPass {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, 8.0, '<'))) {
-        var loc:Dynamic = _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_texture' + Std.string(i) + ''] : Array<Dynamic>));
+        var loc:Dynamic = flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_texture' + Std.string(i) + ''] : Array<Dynamic>));
         if (_Runtime.truthy(loc)) { _Runtime.callProperty(textures, 'push', cast ([loc] : Array<Dynamic>)); }
         i++;
       }
     }
-    single = _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_texture'] : Array<Dynamic>));
+    single = flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_texture'] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(textures, 'length'), 0.0), function():Dynamic return cast single))) { _Runtime.callProperty(textures, 'push', cast ([single] : Array<Dynamic>)); }
-    return cast { program: program, locPosition: _Runtime.callProperty(gl, 'getAttribLocation', cast ([program, 'a_position'] : Array<Dynamic>)), locTexCoord: _Runtime.callProperty(gl, 'getAttribLocation', cast ([program, 'a_texCoord'] : Array<Dynamic>)), texture: _Runtime.coalesce(_Runtime.getIndex(textures, 0.0), function():Dynamic return cast single), textures: textures };
+    return cast { program: program, locPosition: flighthq._internal.WebGl2RenderingContext.call(gl, 'getAttribLocation', cast ([program, 'a_position'] : Array<Dynamic>)), locTexCoord: flighthq._internal.WebGl2RenderingContext.call(gl, 'getAttribLocation', cast ([program, 'a_texCoord'] : Array<Dynamic>)), texture: _Runtime.coalesce(_Runtime.getIndex(textures, 0.0), function():Dynamic return cast single), textures: textures };
     return cast null;
   }
 
@@ -58,46 +58,46 @@ class GlFullscreenPass {
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'currentProgram'), _Runtime.field(program, 'program')))) {
-      _Runtime.callProperty(gl, 'useProgram', cast ([_Runtime.field(program, 'program')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'useProgram', cast ([_Runtime.field(program, 'program')] : Array<Dynamic>));
       _Runtime.setField(runtime, 'currentProgram', _Runtime.field(program, 'program'));
     }
     destFramebuffer = _Runtime.coalesce(_Runtime.optionalField(dest, 'framebuffer'), function():Dynamic return cast null);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'currentFramebuffer'), destFramebuffer))) {
-      _Runtime.callProperty(gl, 'bindFramebuffer', cast ([_Runtime.field(gl, 'FRAMEBUFFER'), destFramebuffer] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'bindFramebuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'FRAMEBUFFER'), destFramebuffer] : Array<Dynamic>));
       _Runtime.setField(runtime, 'currentFramebuffer', destFramebuffer);
     }
     destWidth = _Runtime.coalesce(_Runtime.optionalField(dest, 'width'), function():Dynamic return cast _Runtime.field(_Runtime.field(state, 'canvas'), 'width'));
     destHeight = _Runtime.coalesce(_Runtime.optionalField(dest, 'height'), function():Dynamic return cast _Runtime.field(_Runtime.field(state, 'canvas'), 'height'));
-    _Runtime.callProperty(gl, 'viewport', cast ([0.0, 0.0, destWidth, destHeight] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'viewport', cast ([0.0, 0.0, destWidth, destHeight] : Array<Dynamic>));
     _Runtime.setField(runtime, 'renderTargetViewport', _Runtime.select(dest, function():Dynamic return cast { width: destWidth, height: destHeight }, function():Dynamic return cast null));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(inputs, 'length'), '<'))) {
-        _Runtime.callProperty(gl, 'activeTexture', cast ([(_Runtime.field(gl, 'TEXTURE0') + i)] : Array<Dynamic>));
-        _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.getIndex(inputs, i)] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.getIndex(_Runtime.field(program, 'textures'), i))) { _Runtime.callProperty(gl, 'uniform1i', cast ([_Runtime.getIndex(_Runtime.field(program, 'textures'), i), i] : Array<Dynamic>)); }
+        flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([(flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE0') + i)] : Array<Dynamic>));
+        flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), _Runtime.getIndex(inputs, i)] : Array<Dynamic>));
+        if (_Runtime.truthy(_Runtime.getIndex(_Runtime.field(program, 'textures'), i))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([_Runtime.getIndex(_Runtime.field(program, 'textures'), i), i] : Array<Dynamic>)); }
         i++;
       }
     }
-    _Runtime.callProperty(gl, 'activeTexture', cast ([_Runtime.field(gl, 'TEXTURE0')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE0')] : Array<Dynamic>));
     _Runtime.setField(runtime, 'currentTexture', null);
-    _Runtime.callProperty(gl, 'blendEquation', cast ([_Runtime.field(gl, 'FUNC_ADD')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'blendFunc', cast ([_Runtime.field(gl, 'ONE'), _Runtime.field(gl, 'ONE_MINUS_SRC_ALPHA')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'blendEquation', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'FUNC_ADD')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'blendFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE'), flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE_MINUS_SRC_ALPHA')] : Array<Dynamic>));
     _Runtime.setField(runtime, 'currentBlendMode', null);
     _Runtime.callValue(setUniforms, cast ([gl, program] : Array<Dynamic>));
     _Runtime.callValue(GlFullscreenPass.drawGlFullscreenQuad__glFullscreenPass, cast ([state, program] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'blendEquation', cast ([_Runtime.field(gl, 'FUNC_ADD')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'blendFunc', cast ([_Runtime.field(gl, 'ONE'), _Runtime.field(gl, 'ONE_MINUS_SRC_ALPHA')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'blendEquation', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'FUNC_ADD')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'blendFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE'), flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE_MINUS_SRC_ALPHA')] : Array<Dynamic>));
     _Runtime.setField(runtime, 'currentBlendMode', null);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(inputs, 'length'), '<'))) {
-        _Runtime.callProperty(gl, 'activeTexture', cast ([(_Runtime.field(gl, 'TEXTURE0') + i)] : Array<Dynamic>));
-        _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_2D'), null] : Array<Dynamic>));
+        flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([(flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE0') + i)] : Array<Dynamic>));
+        flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), null] : Array<Dynamic>));
         i++;
       }
     }
-    _Runtime.callProperty(gl, 'activeTexture', cast ([_Runtime.field(gl, 'TEXTURE0')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE0')] : Array<Dynamic>));
   }
 
   public static function drawGlFullscreenQuad__glFullscreenPass(state:GlRenderState, program:GlFullscreenProgram):Void {
@@ -109,10 +109,10 @@ class GlFullscreenPass {
     gl = _Runtime.field(state, 'gl');
     quadVao = _Runtime.callProperty(GlFullscreenPass._quadVaos__glFullscreenPass, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(quadVao, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (quadVao = cast (_Runtime.callProperty(gl, 'createVertexArray', cast ([] : Array<Dynamic>)) : Dynamic));
+      (quadVao = cast (flighthq._internal.WebGl2RenderingContext.call(gl, 'createVertexArray', cast ([] : Array<Dynamic>)) : Dynamic));
       _Runtime.callProperty(GlFullscreenPass._quadVaos__glFullscreenPass, 'set', cast ([state, quadVao] : Array<Dynamic>));
     }
-    _Runtime.callProperty(gl, 'bindVertexArray', cast ([quadVao] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindVertexArray', cast ([quadVao] : Array<Dynamic>));
     v = _Runtime.field(runtime, 'quadVertexData');
     _Runtime.setIndex(v, 0.0, -1.0);
     _Runtime.setIndex(v, 1.0, -1.0);
@@ -130,17 +130,17 @@ class GlFullscreenPass {
     _Runtime.setIndex(v, 13.0, 1.0);
     _Runtime.setIndex(v, 14.0, 0.0);
     _Runtime.setIndex(v, 15.0, 1.0);
-    _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'quadVertexBuffer')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bufferSubData', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), 0.0, v] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ELEMENT_ARRAY_BUFFER'), _Runtime.field(runtime, 'quadIndexBuffer')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'enableVertexAttribArray', cast ([_Runtime.field(program, 'locPosition')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'enableVertexAttribArray', cast ([_Runtime.field(program, 'locTexCoord')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribPointer', cast ([_Runtime.field(program, 'locPosition'), 2.0, _Runtime.field(gl, 'FLOAT'), false, 16.0, 0.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribPointer', cast ([_Runtime.field(program, 'locTexCoord'), 2.0, _Runtime.field(gl, 'FLOAT'), false, 16.0, 8.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'drawElements', cast ([_Runtime.field(gl, 'TRIANGLES'), 6.0, _Runtime.field(gl, 'UNSIGNED_SHORT'), 0.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindVertexArray', cast ([null] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), _Runtime.field(runtime, 'quadVertexBuffer')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferSubData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), 0.0, v] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ELEMENT_ARRAY_BUFFER'), _Runtime.field(runtime, 'quadIndexBuffer')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(program, 'locPosition')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(program, 'locTexCoord')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(program, 'locPosition'), 2.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, 16.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(program, 'locTexCoord'), 2.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, 16.0, 8.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'drawElements', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TRIANGLES'), 6.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'UNSIGNED_SHORT'), 0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindVertexArray', cast ([null] : Array<Dynamic>));
     _Runtime.setField(runtime, 'shaderLoc', _Runtime.field(_Runtime.field(runtime, 'defaultBitmapShader'), 'locations'));
   }
 
-  public static final _quadVaos__glFullscreenPass:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _quadVaos__glFullscreenPass:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

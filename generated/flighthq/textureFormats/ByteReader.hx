@@ -7,7 +7,7 @@ import flighthq.types.ByteReader;
 
 class ByteReader {
   public static function createByteReader(bytes:Dynamic, offset:Dynamic = 0.0):flighthq.types.ByteReader {
-    return cast { view: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['DataView'] : Array<Dynamic>)), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]), offset: offset };
+    return cast { view: _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]), offset: offset };
     return cast null;
   }
 

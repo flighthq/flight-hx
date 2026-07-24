@@ -696,6 +696,18 @@ function emitExpression(expression: IrExpression): string {
       }
       if (expression.kind === 'assignment' && expression.left.kind === 'property') {
         const object = emitExpression(expression.left.object);
+        if (
+          expression.left.binding === 'CanvasRenderingContext2D' ||
+          expression.left.binding === 'WebGl2RenderingContext'
+        ) {
+          const binding = `flighthq._internal.${expression.left.binding}`;
+          const current = `${binding}.field(${object}, ${quote(expression.left.name)})`;
+          const value =
+            expression.operator === '='
+              ? emitExpression(expression.right)
+              : `(${current} ${expression.operator.slice(0, -1)} ${emitExpression(expression.right)})`;
+          return `${binding}.setField(${object}, ${quote(expression.left.name)}, ${value})`;
+        }
         if (expression.left.object.kind === 'identifier' && expression.left.object.name === 'this') {
           if (expression.operator === '=') {
             return `(this.${safeName(expression.left.name)} = cast (${emitExpression(expression.right)} : Dynamic))`;
@@ -908,6 +920,12 @@ function emitExpression(expression: IrExpression): string {
         .filter(Boolean)
         .join(', ')} }`;
     case 'property':
+      if (expression.binding === 'DynamicObject') {
+        return `flighthq._internal.DynamicObject.field(${quote(expression.name)})`;
+      }
+      if (expression.binding === 'CanvasRenderingContext2D' || expression.binding === 'WebGl2RenderingContext') {
+        return `flighthq._internal.${expression.binding}.field(${emitExpression(expression.object)}, ${quote(expression.name)})`;
+      }
       if (
         expression.object.kind === 'identifier' &&
         expression.object.name === 'HxMath' &&
@@ -940,6 +958,13 @@ function emitExpression(expression: IrExpression): string {
       if (expression.operator === 'delete') {
         if (expression.operand.kind === 'element') {
           return `_Runtime.deleteIndex(${emitExpression(expression.operand.object)}, ${emitExpression(expression.operand.index)})`;
+        }
+        if (
+          expression.operand.kind === 'property' &&
+          (expression.operand.binding === 'CanvasRenderingContext2D' ||
+            expression.operand.binding === 'WebGl2RenderingContext')
+        ) {
+          return `flighthq._internal.${expression.operand.binding}.deleteField(${emitExpression(expression.operand.object)}, ${quote(expression.operand.name)})`;
         }
         if (expression.operand.kind === 'property')
           return `_Runtime.deleteField(${emitExpression(expression.operand.object)}, ${quote(expression.operand.name)})`;
@@ -1064,6 +1089,12 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
         : `[${emitExpression(argument)}]`,
     );
     if (expression.callee.kind === 'property') {
+      if (
+        expression.callee.binding === 'CanvasRenderingContext2D' ||
+        expression.callee.binding === 'WebGl2RenderingContext'
+      ) {
+        return `flighthq._internal.${expression.callee.binding}.call(${emitExpression(expression.callee.object)}, ${quote(expression.callee.name)}, _Runtime.concatArrays([${chunks.join(', ')}]))`;
+      }
       const method = expression.optional || expression.callee.optional ? 'callOptionalProperty' : 'callProperty';
       return `_Runtime.${method}(${emitExpression(expression.callee.object)}, ${quote(expression.callee.name)}, _Runtime.concatArrays([${chunks.join(', ')}]))`;
     }
@@ -1073,10 +1104,23 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
   if (expression.callee.kind === 'property') {
     const owner = emitExpression(expression.callee.object);
     const name = expression.callee.name;
+    if (expression.callee.binding === 'DynamicObject') {
+      return `flighthq._internal.DynamicObject.${safeName(name)}(${expression.arguments.map(emitExpression).join(', ')})`;
+    }
+    if (
+      expression.callee.binding === 'CanvasRenderingContext2D' ||
+      expression.callee.binding === 'WebGl2RenderingContext'
+    ) {
+      const method = expression.optional || expression.callee.optional ? 'callOptional' : 'call';
+      return `flighthq._internal.${expression.callee.binding}.${method}(${owner}, ${quote(name)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
+    }
     if (expression.callee.optional) {
       return `_Runtime.callOptionalProperty(${owner}, ${quote(name)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
     }
     if (owner === '_Runtime' && name === 'thisValue') return '_Runtime.thisValue()';
+    if (owner === '_Runtime') {
+      return `_Runtime.${safeName(name)}(${expression.arguments.map(emitExpression).join(', ')})`;
+    }
     if (owner === 'Symbol' && name === 'for') {
       return `_Runtime.symbolFor(${expression.arguments.map(emitExpression).join(', ')})`;
     }
@@ -1131,6 +1175,9 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     }
     if (owner === 'HxMath' && name === 'cbrt') {
       return `_Runtime.cbrt(${expression.arguments.map(emitExpression).join(', ')})`;
+    }
+    if (owner === 'HxMath') {
+      return `HxMath.${safeName(name)}(${expression.arguments.map(emitExpression).join(', ')})`;
     }
     if (owner === 'Number' && ['isFinite', 'isInteger'].includes(name)) {
       return `_Runtime.${name}(${expression.arguments.map(emitExpression).join(', ')})`;

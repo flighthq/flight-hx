@@ -19,7 +19,7 @@ class WgpuHalftoneEffect {
     angle = _Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 0.4);
     pipeline = _Runtime.callValue(getWgpuEffectPipeline, cast ([state, 'stylization.halftone', WgpuHalftoneEffect.HALFTONE_FRAGMENT_WGSL__wgpuHalftoneEffect, 'replace'] : Array<Dynamic>));
     _Runtime.callValue(drawWgpuEffectPass, cast ([state, (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), pipeline, function(f32:Dynamic) {
-      _Runtime.setIndex(f32, 0.0, _Runtime.callProperty(HxMath, 'max', cast ([1.0, scale] : Array<Dynamic>)));
+      _Runtime.setIndex(f32, 0.0, HxMath.max(1.0, scale));
       _Runtime.setIndex(f32, 1.0, angle);
       _Runtime.setIndex(f32, 2.0, _Runtime.field(source, 'width'));
       _Runtime.setIndex(f32, 3.0, _Runtime.field(source, 'height'));

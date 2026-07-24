@@ -13,7 +13,7 @@ import flighthq.types.TextFormat.TextFormatListMarker;
 
 class MarkupTagRegistry {
   public static function createMarkupTagRegistry():flighthq.types.MarkupTagRegistry {
-    return cast { handlers: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };
+    return cast { handlers: _Runtime.construct(_Runtime.globalValue('Map'), []) };
     return cast null;
   }
 
@@ -45,15 +45,15 @@ class MarkupTagRegistry {
     if (_Runtime.truthy(StringTools.startsWith(color, '#'))) {
       var hex:Dynamic = _Runtime.slice(color, 1.0, null);
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(hex, 'length'), 3.0))) {
-        var parsed:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'parseInt', cast (['' + Std.string(_Runtime.getIndex(hex, 0.0)) + '' + Std.string(_Runtime.getIndex(hex, 0.0)) + '' + Std.string(_Runtime.getIndex(hex, 1.0)) + '' + Std.string(_Runtime.getIndex(hex, 1.0)) + '' + Std.string(_Runtime.getIndex(hex, 2.0)) + '' + Std.string(_Runtime.getIndex(hex, 2.0)) + '', 16.0] : Array<Dynamic>));
-        return cast _Runtime.select(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isNaN', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast null, function():Dynamic return cast parsed);
+        var parsed:Dynamic = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast (['' + Std.string(_Runtime.getIndex(hex, 0.0)) + '' + Std.string(_Runtime.getIndex(hex, 0.0)) + '' + Std.string(_Runtime.getIndex(hex, 1.0)) + '' + Std.string(_Runtime.getIndex(hex, 1.0)) + '' + Std.string(_Runtime.getIndex(hex, 2.0)) + '' + Std.string(_Runtime.getIndex(hex, 2.0)) + '', 16.0] : Array<Dynamic>));
+        return cast _Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast null, function():Dynamic return cast parsed);
       }
-      var parsed:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'parseInt', cast ([hex, 16.0] : Array<Dynamic>));
-      return cast _Runtime.select(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isNaN', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast null, function():Dynamic return cast parsed);
+      var parsed:Dynamic = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([hex, 16.0] : Array<Dynamic>));
+      return cast _Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast null, function():Dynamic return cast parsed);
     }
     if (_Runtime.truthy(StringTools.startsWith(color, '0x'))) {
-      var parsed:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'parseInt', cast ([_Runtime.slice(color, 2.0, null), 16.0] : Array<Dynamic>));
-      return cast _Runtime.select(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isNaN', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast null, function():Dynamic return cast parsed);
+      var parsed:Dynamic = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.slice(color, 2.0, null), 16.0] : Array<Dynamic>));
+      return cast _Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isNaN', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast null, function():Dynamic return cast parsed);
     }
     return cast null;
     return cast null;
@@ -71,7 +71,7 @@ class MarkupTagRegistry {
       for (name in _Runtime.iterable(_Runtime.callProperty(classes, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)))) {
         if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(name, 'length'), 0.0))) { continue; }
         var contribution:Dynamic = _Runtime.callValue(resolve, cast ([name] : Array<Dynamic>));
-        if (_Runtime.truthy(!_Runtime.strictEquals(contribution, null))) { _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'assign', cast ([format, contribution] : Array<Dynamic>)); }
+        if (_Runtime.truthy(!_Runtime.strictEquals(contribution, null))) { flighthq._internal.DynamicObject.assign(format, contribution); }
       }
       return cast format;
     };
@@ -210,8 +210,8 @@ class MarkupTagRegistry {
 
   public static function parseMarkupNumber__markupTagRegistry(value:String):Null<Float> {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
-    parsed = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'parseFloat', cast ([value] : Array<Dynamic>));
-    return cast _Runtime.select(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast parsed, function():Dynamic return cast null);
+    parsed = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseFloat', cast ([value] : Array<Dynamic>));
+    return cast _Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast parsed, function():Dynamic return cast null);
     return cast null;
   }
 

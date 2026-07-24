@@ -14,7 +14,7 @@ class GlEffectProgramCache {
     var compiled:Dynamic = cast _Runtime.UNDEFINED;
     cache = _Runtime.callProperty(GlEffectProgramCache._programs__glEffectProgramCache, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (cache = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) : Dynamic));
+      (cache = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       _Runtime.callProperty(GlEffectProgramCache._programs__glEffectProgramCache, 'set', cast ([state, cache] : Array<Dynamic>));
     }
     existing = _Runtime.callProperty(cache, 'get', cast ([key] : Array<Dynamic>));
@@ -31,18 +31,18 @@ class GlEffectProgramCache {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     cache = _Runtime.callProperty(GlEffectProgramCache._uniformLocations__glEffectProgramCache, 'get', cast ([program] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (cache = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) : Dynamic));
+      (cache = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       _Runtime.callProperty(GlEffectProgramCache._uniformLocations__glEffectProgramCache, 'set', cast ([program, cache] : Array<Dynamic>));
     }
     existing = _Runtime.callProperty(cache, 'get', cast ([name] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
-    loc = _Runtime.callProperty(_Runtime.field(state, 'gl'), 'getUniformLocation', cast ([_Runtime.field(program, 'program'), name] : Array<Dynamic>));
+    loc = flighthq._internal.WebGl2RenderingContext.call(_Runtime.field(state, 'gl'), 'getUniformLocation', cast ([_Runtime.field(program, 'program'), name] : Array<Dynamic>));
     _Runtime.callProperty(cache, 'set', cast ([name, loc] : Array<Dynamic>));
     return cast loc;
     return cast null;
   }
 
-  public static final _programs__glEffectProgramCache:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _programs__glEffectProgramCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static final _uniformLocations__glEffectProgramCache:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _uniformLocations__glEffectProgramCache:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

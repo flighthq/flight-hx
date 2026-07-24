@@ -172,7 +172,7 @@ class Hierarchy {
     var aAncestors:Dynamic = cast _Runtime.UNDEFINED;
     var cur:Dynamic = cast _Runtime.UNDEFINED;
     var bCur:Null<Node<Traits>> = cast _Runtime.UNDEFINED;
-    aAncestors = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
+    aAncestors = _Runtime.construct(_Runtime.globalValue('Set'), []);
     _Runtime.callProperty(aAncestors, 'add', cast ([(cast a : Node<Traits>)] : Array<Dynamic>));
     cur = _Runtime.callValue(getNodeParent, cast ([(cast a : Node<Traits>)] : Array<Dynamic>));
     while (_Runtime.truthy(!_Runtime.strictEquals(cur, null))) {
@@ -289,13 +289,13 @@ class Hierarchy {
         var b:Dynamic = _Runtime.field(localM, 'b');
         var c:Dynamic = _Runtime.field(localM, 'c');
         var d:Dynamic = _Runtime.field(localM, 'd');
-        _Runtime.setField(child, 'scaleX', _Runtime.callProperty(HxMath, 'sqrt', cast ([((a * a) + (b * b))] : Array<Dynamic>)));
-        _Runtime.setField(child, 'scaleY', _Runtime.callProperty(HxMath, 'sqrt', cast ([((c * c) + (d * d))] : Array<Dynamic>)));
+        _Runtime.setField(child, 'scaleX', HxMath.sqrt(((a * a) + (b * b))));
+        _Runtime.setField(child, 'scaleY', HxMath.sqrt(((c * c) + (d * d))));
         if (_Runtime.truthy(_Runtime.compare(((a * d) - (b * c)), 0.0, '<'))) {
           _Runtime.setField(child, 'scaleY', -_Runtime.field(child, 'scaleY'));
         }
         var skewYRad:Dynamic = (_Runtime.field(child, 'skewY') * Hierarchy.DEG_TO_RAD__hierarchy);
-        _Runtime.setField(child, 'rotation', ((_Runtime.callProperty(HxMath, 'atan2', cast ([b, a] : Array<Dynamic>)) - skewYRad) * Hierarchy.RAD_TO_DEG__hierarchy));
+        _Runtime.setField(child, 'rotation', ((HxMath.atan2(b, a) - skewYRad) * Hierarchy.RAD_TO_DEG__hierarchy));
         _Runtime.setField(child, 'x', (_Runtime.field(localM, 'tx') + ((a * _Runtime.field(child, 'pivotX')) + (c * _Runtime.field(child, 'pivotY')))));
         _Runtime.setField(child, 'y', (_Runtime.field(localM, 'ty') + ((b * _Runtime.field(child, 'pivotX')) + (d * _Runtime.field(child, 'pivotY')))));
         _Runtime.callValue(invalidateNodeLocalTransform, cast ([child] : Array<Dynamic>));

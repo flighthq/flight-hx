@@ -37,7 +37,7 @@ class EnableSceneResourceFailureGuards {
     var failed:Dynamic = cast _Runtime.UNDEFINED;
     var resolved:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.callProperty(EnableSceneResourceFailureGuards._guards__enableSceneResourceFailureGuards, 'has', cast ([resolver] : Array<Dynamic>)))) { return cast function() return _Runtime.callValue(disableSceneResourceFailureGuards, cast ([resolver] : Array<Dynamic>)); }
-    warned = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+    warned = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
     signals = _Runtime.callValue(enableSceneResourceSignals, cast ([resolver] : Array<Dynamic>));
     failed = function(event:Dynamic) {
       var explanation:Dynamic = cast _Runtime.UNDEFINED;
@@ -56,7 +56,7 @@ class EnableSceneResourceFailureGuards {
     return cast null;
   }
 
-  public static final _guards__enableSceneResourceFailureGuards:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _guards__enableSceneResourceFailureGuards:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static var _attemptId__enableSceneResourceFailureGuards:Dynamic = 0.0;
 }

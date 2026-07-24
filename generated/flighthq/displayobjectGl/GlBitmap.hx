@@ -38,7 +38,7 @@ class GlBitmap {
     if (_Runtime.truthy(_Runtime.strictEquals(image, null))) { return; }
     entry = _Runtime.callProperty(_Runtime.field(runtime, 'imageResourceTextureCache'), 'get', cast ([image] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      _Runtime.callProperty(_Runtime.field(state, 'gl'), 'deleteTexture', cast ([_Runtime.field(entry, 'texture')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(_Runtime.field(state, 'gl'), 'deleteTexture', cast ([_Runtime.field(entry, 'texture')] : Array<Dynamic>));
       _Runtime.callProperty(_Runtime.field(runtime, 'imageResourceTextureCache'), 'delete', cast ([image] : Array<Dynamic>));
     }
   }

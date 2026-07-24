@@ -41,7 +41,7 @@ class PathMeshPool {
     var fresh:Dynamic = cast _Runtime.UNDEFINED;
     var mesh:Dynamic = cast _Runtime.UNDEFINED;
     fresh = _Runtime.callValue(tessellatePathTyped, cast ([path, tolerance] : Array<Dynamic>));
-    mesh = _Runtime.select(_Runtime.compare(_Runtime.field(PathMeshPool.typedPool__pathMeshPool, 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(PathMeshPool.typedPool__pathMeshPool, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast { vertices: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [0.0]), indices: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [0.0]) });
+    mesh = _Runtime.select(_Runtime.compare(_Runtime.field(PathMeshPool.typedPool__pathMeshPool, 'length'), 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(PathMeshPool.typedPool__pathMeshPool, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast { vertices: _Runtime.construct(_Runtime.globalValue('Float32Array'), [0.0]), indices: _Runtime.construct(_Runtime.globalValue('Uint32Array'), [0.0]) });
     _Runtime.setField(mesh, 'vertices', _Runtime.field(fresh, 'vertices'));
     _Runtime.setField(mesh, 'indices', _Runtime.field(fresh, 'indices'));
     return cast mesh;

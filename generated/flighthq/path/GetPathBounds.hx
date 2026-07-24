@@ -113,19 +113,19 @@ class GetPathBounds {
     a = (((-p0 + (3.0 * p1)) - (3.0 * p2)) + p3);
     b = (2.0 * ((p0 - (2.0 * p1)) + p2));
     c = (p1 - p0);
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([a] : Array<Dynamic>)), 1e-12, '<'))) {
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([b] : Array<Dynamic>)), 1e-12, '<'))) { return; }
+    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(a), 1e-12, '<'))) {
+      if (_Runtime.truthy(_Runtime.compare(HxMath.abs(b), 1e-12, '<'))) { return; }
       var t:Dynamic = (-c / b);
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(t, 0.0, '>'), function():Dynamic return cast _Runtime.compare(t, 1.0, '<')))) { _Runtime.callValue(cb, cast ([t] : Array<Dynamic>)); }
       return;
     }
     discriminant = ((b * b) - ((4.0 * a) * c));
     if (_Runtime.truthy(_Runtime.compare(discriminant, 0.0, '<'))) { return; }
-    sqrtD = _Runtime.callProperty(HxMath, 'sqrt', cast ([discriminant] : Array<Dynamic>));
+    sqrtD = HxMath.sqrt(discriminant);
     t1 = ((-b + sqrtD) / (2.0 * a));
     t2 = ((-b - sqrtD) / (2.0 * a));
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(t1, 0.0, '>'), function():Dynamic return cast _Runtime.compare(t1, 1.0, '<')))) { _Runtime.callValue(cb, cast ([t1] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(t2, 0.0, '>'), function():Dynamic return cast _Runtime.compare(t2, 1.0, '<')), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(t2 - t1)] : Array<Dynamic>)), 1e-12, '>')))) { _Runtime.callValue(cb, cast ([t2] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(t2, 0.0, '>'), function():Dynamic return cast _Runtime.compare(t2, 1.0, '<')), function():Dynamic return cast _Runtime.compare(HxMath.abs((t2 - t1)), 1e-12, '>')))) { _Runtime.callValue(cb, cast ([t2] : Array<Dynamic>)); }
   }
 
   public static function evalCubic__getPathBounds(p0:Float, p1:Float, p2:Float, p3:Float, t:Float):Float {

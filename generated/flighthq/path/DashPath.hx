@@ -65,7 +65,7 @@ class DashPath {
         var y1:Dynamic = _Runtime.getIndex(pts, (((i + 1.0) * 2.0) + 1.0));
         var dx:Dynamic = (x1 - x0);
         var dy:Dynamic = (y1 - y0);
-        var segLen:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([((dx * dx) + (dy * dy))] : Array<Dynamic>));
+        var segLen:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
         if (_Runtime.truthy(_Runtime.andValue(isOn, function():Dynamic return cast !_Runtime.truthy(segStarted)))) {
           _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.MOVE_TO] : Array<Dynamic>));
           _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([x0, y0] : Array<Dynamic>));
@@ -73,7 +73,7 @@ class DashPath {
         }
         var consumed:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(consumed, segLen, '<'))) {
-          var step:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([remaining, (segLen - consumed)] : Array<Dynamic>));
+          var step:Dynamic = HxMath.min(remaining, (segLen - consumed));
           var t:Dynamic = _Runtime.select(_Runtime.compare(segLen, 0.0, '>'), function():Dynamic return cast ((consumed + step) / segLen), function():Dynamic return cast 0.0);
           var ix:Dynamic = (x0 + (t * dx));
           var iy:Dynamic = (y0 + (t * dy));

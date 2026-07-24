@@ -82,7 +82,7 @@ class ParseAtf {
                 if (_Runtime.truthy(_Runtime.strictEquals(blockLength, 0.0))) { (slot = cast ((slot + 1.0) : Dynamic)); continue; }
                 var byteOffset:Dynamic = _Runtime.field(reader, 'offset');
                 _Runtime.setField(reader, 'offset', (_Runtime.field(reader, 'offset') + blockLength));
-                _Runtime.callProperty(_Runtime.getIndex(perSlotLevels, slot), 'push', cast ([{ byteLength: blockLength, byteOffset: byteOffset, height: _Runtime.callProperty(HxMath, 'max', cast ([1.0, (Std.int(height) >> Std.int(level))] : Array<Dynamic>)), width: _Runtime.callProperty(HxMath, 'max', cast ([1.0, (Std.int(width) >> Std.int(level))] : Array<Dynamic>)) }] : Array<Dynamic>));
+                _Runtime.callProperty(_Runtime.getIndex(perSlotLevels, slot), 'push', cast ([{ byteLength: blockLength, byteOffset: byteOffset, height: HxMath.max(1.0, (Std.int(height) >> Std.int(level))), width: HxMath.max(1.0, (Std.int(width) >> Std.int(level))) }] : Array<Dynamic>));
                 (slot = cast ((slot + 1.0) : Dynamic));
               }
             }
@@ -128,9 +128,9 @@ class ParseAtf {
 
   public static final atfBaseSlotCount__parseAtf:Dynamic = 3.0;
 
-  public static final atfOpaqueFormatCodes__parseAtf:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), [cast ([2.0, 3.0, 12.0] : Array<Dynamic>)]);
+  public static final atfOpaqueFormatCodes__parseAtf:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), [cast ([2.0, 3.0, 12.0] : Array<Dynamic>)]);
 
-  public static final atfAlphaFormatCodes__parseAtf:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), [cast ([4.0, 5.0, 13.0] : Array<Dynamic>)]);
+  public static final atfAlphaFormatCodes__parseAtf:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), [cast ([4.0, 5.0, 13.0] : Array<Dynamic>)]);
 
   public static final atfOpaqueSlotFormats__parseAtf:Array<TextureContainerFormat> = cast (['bc1', 'etc1', 'pvrtc4bppRgb', 'etc2Rgb'] : Array<Dynamic>);
 

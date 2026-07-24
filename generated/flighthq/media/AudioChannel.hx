@@ -44,7 +44,7 @@ class AudioChannel {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callProperty(AudioChannel.channelRuntime__audioChannel, 'get', cast ([channel] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(channel, 'state'), 'playing')))) { return cast _Runtime.field(channel, 'currentTime'); }
-    return cast _Runtime.callProperty(HxMath, 'min', cast ([((_Runtime.field(_Runtime.field(runtime, 'context'), 'currentTime') - _Runtime.field(runtime, 'startedAt')) * 1000.0), _Runtime.field(channel, 'length')] : Array<Dynamic>));
+    return cast HxMath.min(((_Runtime.field(_Runtime.field(runtime, 'context'), 'currentTime') - _Runtime.field(runtime, 'startedAt')) * 1000.0), _Runtime.field(channel, 'length'));
     return cast null;
   }
 
@@ -128,10 +128,10 @@ class AudioChannel {
     _Runtime.setField(channel, 'state', 'stopped');
   }
 
-  public static final channelRuntime__audioChannel:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final channelRuntime__audioChannel:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function clamp__audioChannel(value:Float, min:Float, max:Float):Float {
-    return cast _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callProperty(HxMath, 'max', cast ([value, min] : Array<Dynamic>)), max] : Array<Dynamic>));
+    return cast HxMath.min(HxMath.max(value, min), max);
     return cast null;
   }
 

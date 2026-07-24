@@ -37,12 +37,12 @@ class GlBloomEffect {
     temp = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     brightProgram = _Runtime.callValue(getGlEffectProgram, cast ([state, 'bloom.bright', GlBloomEffect.BLOOM_BRIGHT_FRAGMENT_SRC__glBloomEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, brightProgram, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), bright, function(gl:Dynamic, program:Dynamic) {
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(program, 'program'), 'u_threshold'] : Array<Dynamic>)), threshold] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(program, 'program'), 'u_threshold'] : Array<Dynamic>)), threshold] : Array<Dynamic>));
     }] : Array<Dynamic>));
     _Runtime.callValue(applyGaussianBlurToGl, cast ([state, bright, blurred, temp, { blurX: radius, blurY: radius }] : Array<Dynamic>));
     compositeProgram = _Runtime.callValue(getGlEffectProgram, cast ([state, 'bloom.composite', GlBloomEffect.BLOOM_COMPOSITE_FRAGMENT_SRC__glBloomEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, compositeProgram, cast ([_Runtime.field(source, 'texture'), _Runtime.field(blurred, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, program:Dynamic) {
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(program, 'program'), 'u_intensity'] : Array<Dynamic>)), intensity] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(program, 'program'), 'u_intensity'] : Array<Dynamic>)), intensity] : Array<Dynamic>));
     }] : Array<Dynamic>));
     _Runtime.callValue(releaseGlRenderTarget, cast ([pool, bright] : Array<Dynamic>));
     _Runtime.callValue(releaseGlRenderTarget, cast ([pool, blurred] : Array<Dynamic>));

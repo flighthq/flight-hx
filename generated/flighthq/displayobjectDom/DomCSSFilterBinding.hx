@@ -28,5 +28,5 @@ class DomCSSFilterBinding {
     _Runtime.callProperty(DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding, 'set', cast ([renderProxy, filter] : Array<Dynamic>));
   }
 
-  public static final _cssFilterBindings__domCSSFilterBinding:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _cssFilterBindings__domCSSFilterBinding:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

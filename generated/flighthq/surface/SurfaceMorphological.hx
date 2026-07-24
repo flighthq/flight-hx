@@ -22,7 +22,7 @@ class SurfaceMorphological {
     var surfaceHeight:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var identity:Dynamic = cast _Runtime.UNDEFINED;
-    r = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'round', cast ([radius] : Array<Dynamic>))] : Array<Dynamic>));
+    r = HxMath.max(0.0, HxMath.round(radius));
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
     surfaceWidth = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
@@ -42,11 +42,11 @@ class SurfaceMorphological {
             {
               var ky:Dynamic = -r;
               while (_Runtime.truthy(_Runtime.compare(ky, r, '<='))) {
-                var sy:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([(surfaceHeight - 1.0), ((_Runtime.field(source, 'y') + py) + ky)] : Array<Dynamic>))] : Array<Dynamic>));
+                var sy:Dynamic = HxMath.max(0.0, HxMath.min((surfaceHeight - 1.0), ((_Runtime.field(source, 'y') + py) + ky)));
                 {
                   var kx:Dynamic = -r;
                   while (_Runtime.truthy(_Runtime.compare(kx, r, '<='))) {
-                    var sx:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([(surfaceWidth - 1.0), ((_Runtime.field(source, 'x') + px) + kx)] : Array<Dynamic>))] : Array<Dynamic>));
+                    var sx:Dynamic = HxMath.max(0.0, HxMath.min((surfaceWidth - 1.0), ((_Runtime.field(source, 'x') + px) + kx)));
                     var si:Dynamic = (((sy * surfaceWidth) + sx) * 4.0);
                     if (_Runtime.truthy(dilate)) {
                       if (_Runtime.truthy(_Runtime.compare(_Runtime.getIndex(data, si), vR, '>'))) { (vR = cast (_Runtime.getIndex(data, si) : Dynamic)); }

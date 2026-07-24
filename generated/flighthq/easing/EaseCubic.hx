@@ -8,7 +8,7 @@ import flighthq.types.EasingFunction;
 class EaseCubic {
   public static final easeInCubic:EasingFunction = function(t:Dynamic) return ((t * t) * t);
 
-  public static final easeInOutCubic:EasingFunction = function(t:Dynamic) return _Runtime.select(_Runtime.compare(t, 0.5, '<'), function():Dynamic return cast (((4.0 * t) * t) * t), function():Dynamic return cast (1.0 - (_Runtime.callProperty(HxMath, 'pow', cast ([((-2.0 * t) + 2.0), 3.0] : Array<Dynamic>)) / 2.0)));
+  public static final easeInOutCubic:EasingFunction = function(t:Dynamic) return _Runtime.select(_Runtime.compare(t, 0.5, '<'), function():Dynamic return cast (((4.0 * t) * t) * t), function():Dynamic return cast (1.0 - (HxMath.pow(((-2.0 * t) + 2.0), 3.0) / 2.0)));
 
-  public static final easeOutCubic:EasingFunction = function(t:Dynamic) return (1.0 - _Runtime.callProperty(HxMath, 'pow', cast ([(1.0 - t), 3.0] : Array<Dynamic>)));
+  public static final easeOutCubic:EasingFunction = function(t:Dynamic) return (1.0 - HxMath.pow((1.0 - t), 3.0));
 }

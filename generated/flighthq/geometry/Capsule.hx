@@ -57,7 +57,7 @@ class Capsule {
       (closestY = cast (ay : Dynamic));
       (closestZ = cast (az : Dynamic));
     } else {
-      var t:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callProperty(HxMath, 'max', cast ([(((((px - ax) * abx) + ((py - ay) * aby)) + ((pz - az) * abz)) / abLen2), 0.0] : Array<Dynamic>)), 1.0] : Array<Dynamic>));
+      var t:Dynamic = HxMath.min(HxMath.max((((((px - ax) * abx) + ((py - ay) * aby)) + ((pz - az) * abz)) / abLen2), 0.0), 1.0);
       (closestX = cast ((ax + (t * abx)) : Dynamic));
       (closestY = cast ((ay + (t * aby)) : Dynamic));
       (closestZ = cast ((az + (t * abz)) : Dynamic));
@@ -65,7 +65,7 @@ class Capsule {
     dx = (px - closestX);
     dy = (py - closestY);
     dz = (pz - closestZ);
-    dist = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((dx * dx) + (dy * dy)) + (dz * dz))] : Array<Dynamic>));
+    dist = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if (_Runtime.truthy(_Runtime.compare(dist, 1e-10, '<'))) {
       _Runtime.setField(out, 'x', (closestX + r));
       _Runtime.setField(out, 'y', closestY);
@@ -152,7 +152,7 @@ class Capsule {
       c = ((((mx * mx) + (my * my)) + (mz * mz)) - (r * r));
       disc = ((b * b) - (lenD2 * c));
       if (_Runtime.truthy(_Runtime.compare(disc, 0.0, '<'))) { return cast -1.0; }
-      sqrtD = _Runtime.callProperty(HxMath, 'sqrt', cast ([disc] : Array<Dynamic>));
+      sqrtD = HxMath.sqrt(disc);
       t1 = ((-b - sqrtD) / lenD2);
       if (_Runtime.truthy(_Runtime.compare(t1, 0.0, '>='))) { return cast t1; }
       t2 = ((-b + sqrtD) / lenD2);
@@ -178,7 +178,7 @@ class Capsule {
     if (_Runtime.truthy(_Runtime.compare(qa, 1e-20, '>'))) {
       var disc:Dynamic = ((qb * qb) - (qa * qc));
       if (_Runtime.truthy(_Runtime.compare(disc, 0.0, '>='))) {
-        var sqrtD:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([disc] : Array<Dynamic>));
+        var sqrtD:Dynamic = HxMath.sqrt(disc);
         var t1:Dynamic = ((-qb - sqrtD) / qa);
         var s1:Dynamic = ((aoab + (t1 * dab)) * invAb2);
         if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(t1, 0.0, '>='), function():Dynamic return cast _Runtime.compare(s1, 0.0, '>=')), function():Dynamic return cast _Runtime.compare(s1, 1.0, '<=')))) {
@@ -250,7 +250,7 @@ class Capsule {
     apz = (pz - az);
     len2 = (((abx * abx) + (aby * aby)) + (abz * abz));
     t = _Runtime.select(_Runtime.compare(len2, 0.0, '>'), function():Dynamic return cast ((((apx * abx) + (apy * aby)) + (apz * abz)) / len2), function():Dynamic return cast 0.0);
-    (t = cast (_Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callProperty(HxMath, 'max', cast ([t, 0.0] : Array<Dynamic>)), 1.0] : Array<Dynamic>)) : Dynamic));
+    (t = cast (HxMath.min(HxMath.max(t, 0.0), 1.0) : Dynamic));
     cx = ((ax + (t * abx)) - px);
     cy = ((ay + (t * aby)) - py);
     cz = ((az + (t * abz)) - pz);
@@ -293,27 +293,27 @@ class Capsule {
       (t = cast (0.0 : Dynamic));
     } else { if (_Runtime.truthy(_Runtime.compare(a, 1e-20, '<'))) {
       (s = cast (0.0 : Dynamic));
-      (t = cast (_Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callProperty(HxMath, 'max', cast ([(f / e), 0.0] : Array<Dynamic>)), 1.0] : Array<Dynamic>)) : Dynamic));
+      (t = cast (HxMath.min(HxMath.max((f / e), 0.0), 1.0) : Dynamic));
     } else {
       var c:Dynamic = (((d1x * rx) + (d1y * ry)) + (d1z * rz));
       if (_Runtime.truthy(_Runtime.compare(e, 1e-20, '<'))) {
         (t = cast (0.0 : Dynamic));
-        (s = cast (_Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callProperty(HxMath, 'max', cast ([(-c / a), 0.0] : Array<Dynamic>)), 1.0] : Array<Dynamic>)) : Dynamic));
+        (s = cast (HxMath.min(HxMath.max((-c / a), 0.0), 1.0) : Dynamic));
       } else {
         var b:Dynamic = (((d1x * d2x) + (d1y * d2y)) + (d1z * d2z));
         var denom:Dynamic = ((a * e) - (b * b));
         if (_Runtime.truthy(_Runtime.compare(denom, 1e-20, '>'))) {
-          (s = cast (_Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callProperty(HxMath, 'max', cast ([(((b * f) - (c * e)) / denom), 0.0] : Array<Dynamic>)), 1.0] : Array<Dynamic>)) : Dynamic));
+          (s = cast (HxMath.min(HxMath.max((((b * f) - (c * e)) / denom), 0.0), 1.0) : Dynamic));
         } else {
           (s = cast (0.0 : Dynamic));
         }
         (t = cast ((((b * s) + f) / e) : Dynamic));
         if (_Runtime.truthy(_Runtime.compare(t, 0.0, '<'))) {
           (t = cast (0.0 : Dynamic));
-          (s = cast (_Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callProperty(HxMath, 'max', cast ([(-c / a), 0.0] : Array<Dynamic>)), 1.0] : Array<Dynamic>)) : Dynamic));
+          (s = cast (HxMath.min(HxMath.max((-c / a), 0.0), 1.0) : Dynamic));
         } else { if (_Runtime.truthy(_Runtime.compare(t, 1.0, '>'))) {
           (t = cast (1.0 : Dynamic));
-          (s = cast (_Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callProperty(HxMath, 'max', cast ([((b - c) / a), 0.0] : Array<Dynamic>)), 1.0] : Array<Dynamic>)) : Dynamic));
+          (s = cast (HxMath.min(HxMath.max(((b - c) / a), 0.0), 1.0) : Dynamic));
         } }
       }
     } }

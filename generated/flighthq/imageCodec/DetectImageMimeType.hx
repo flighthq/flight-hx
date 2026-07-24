@@ -7,7 +7,7 @@ import flighthq._internal._Runtime;
 class DetectImageMimeType {
   public static function detectImageMimeType(data:Dynamic):Null<String> {
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    b = _Runtime.select(_Runtime.isInstanceOf(data, _Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>))), function():Dynamic return cast data, function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [data]));
+    b = _Runtime.select(_Runtime.isInstanceOf(data, _Runtime.globalValue('Uint8Array')), function():Dynamic return cast data, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Uint8Array'), [data]));
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(b, 'byteLength'), 4.0, '<'))) { return cast null; }
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.getIndex(b, 0.0), 137.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 1.0), 80.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 2.0), 78.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 3.0), 71.0)))) { return cast 'image/png'; }
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.getIndex(b, 0.0), 255.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 1.0), 216.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 2.0), 255.0)))) { return cast 'image/jpeg'; }

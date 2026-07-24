@@ -25,8 +25,8 @@ class SurfaceBevel {
     h = _Runtime.field(source, 'height');
     angle = _Runtime.coalesce(_Runtime.field(options, 'angle'), function():Dynamic return cast (HxMath.PI / 4.0));
     distance = _Runtime.coalesce(_Runtime.field(options, 'distance'), function():Dynamic return cast 4.0);
-    offsetX = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>)) * distance)] : Array<Dynamic>));
-    offsetY = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>)) * distance)] : Array<Dynamic>));
+    offsetX = HxMath.round((HxMath.cos(angle) * distance));
+    offsetY = HxMath.round((HxMath.sin(angle) * distance));
     type = _Runtime.coalesce(_Runtime.field(options, 'type'), function():Dynamic return cast 'inner');
     intensity = _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0);
     highlightColor = _Runtime.coalesce(_Runtime.field(options, 'highlightColor'), function():Dynamic return cast 4294967295.0);
@@ -62,11 +62,11 @@ class SurfaceBevel {
             var color:Dynamic = _Runtime.select(_Runtime.compare(gradient, 0.0, '>='), function():Dynamic return cast highlightColor, function():Dynamic return cast shadowColor);
             var colorAlpha:Dynamic = ((Std.int(color) & Std.int(255.0)) / 255.0);
             var clip:Dynamic = _Runtime.select(_Runtime.strictEquals(type, 'inner'), function():Dynamic return cast (_Runtime.callValue(SurfaceBevel.readSourceAlpha__surfaceBevel, cast ([source, px, py] : Array<Dynamic>)) / 255.0), function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(type, 'outer'), function():Dynamic return cast (1.0 - (_Runtime.callValue(SurfaceBevel.readSourceAlpha__surfaceBevel, cast ([source, px, py] : Array<Dynamic>)) / 255.0)), function():Dynamic return cast 1.0));
-            var edgeIntensity:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([1.0, (_Runtime.callProperty(HxMath, 'abs', cast ([gradient] : Array<Dynamic>)) * intensity)] : Array<Dynamic>));
+            var edgeIntensity:Dynamic = HxMath.min(1.0, (HxMath.abs(gradient) * intensity));
             _Runtime.setIndex(out, di, (Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)));
             _Runtime.setIndex(out, (di + 1.0), (Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0)));
             _Runtime.setIndex(out, (di + 2.0), (Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0)));
-            _Runtime.setIndex(out, (di + 3.0), _Runtime.callProperty(HxMath, 'round', cast ([(((edgeIntensity * colorAlpha) * clip) * 255.0)] : Array<Dynamic>)));
+            _Runtime.setIndex(out, (di + 3.0), HxMath.round((((edgeIntensity * colorAlpha) * clip) * 255.0)));
             px++;
           }
         }
@@ -81,9 +81,9 @@ class SurfaceBevel {
     var p:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    rx = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(radiusX, function():Dynamic return cast 2.0)] : Array<Dynamic>))] : Array<Dynamic>));
-    ry = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(radiusY, function():Dynamic return cast 2.0)] : Array<Dynamic>))] : Array<Dynamic>));
-    p = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(passes, function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    rx = HxMath.max(0.0, HxMath.round(_Runtime.coalesce(radiusX, function():Dynamic return cast 2.0)));
+    ry = HxMath.max(0.0, HxMath.round(_Runtime.coalesce(radiusY, function():Dynamic return cast 2.0)));
+    p = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(passes, function():Dynamic return cast 1.0)));
     a = field;
     b = scratch;
     {

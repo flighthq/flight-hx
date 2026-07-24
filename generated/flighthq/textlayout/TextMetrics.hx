@@ -13,8 +13,8 @@ class TextMetrics {
   }
 
   public static function getTextMetrics(out:flighthq.types.TextMetrics, layout:TextLayoutResult):Void {
-    _Runtime.setField(out, 'width', _Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(layout, 'textWidth')] : Array<Dynamic>)));
-    _Runtime.setField(out, 'height', _Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(layout, 'textHeight')] : Array<Dynamic>)));
+    _Runtime.setField(out, 'width', HxMath.ceil(_Runtime.field(layout, 'textWidth')));
+    _Runtime.setField(out, 'height', HxMath.ceil(_Runtime.field(layout, 'textHeight')));
     _Runtime.setField(out, 'numLines', _Runtime.field(layout, 'numLines'));
   }
 }

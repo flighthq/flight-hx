@@ -73,13 +73,13 @@ class DomTextInput {
   public static function injectCaretBlinkKeyframes__domTextInput():Void {
     var id:Dynamic = cast _Runtime.UNDEFINED;
     var style:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'))) { return; }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return; }
     id = 'flight-caret-blink-style';
-    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'getElementById', cast ([id] : Array<Dynamic>)))) { return; }
-    style = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['style'] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('document'), 'getElementById', cast ([id] : Array<Dynamic>)))) { return; }
+    style = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['style'] : Array<Dynamic>));
     _Runtime.setField(style, 'id', id);
     _Runtime.setField(style, 'textContent', '@keyframes flight-caret-blink{0%,100%{opacity:1}50%{opacity:0}}');
-    _Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'head'), 'appendChild', cast ([style] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('document'), 'head'), 'appendChild', cast ([style] : Array<Dynamic>));
   }
 
   public static final caretRectangle__domTextInput:Dynamic = { height: 0.0, lineIndex: 0.0, width: 0.0, x: 0.0, y: 0.0 };

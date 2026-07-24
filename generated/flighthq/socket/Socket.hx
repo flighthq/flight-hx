@@ -44,15 +44,15 @@ class Socket {
   public static function createWebSocketBackend():SocketBackend {
     return cast { openSocket: function(options:Dynamic, events:Dynamic) {
       var ws:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['WebSocket'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
-      ws = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(options, 'protocols'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WebSocket'] : Array<Dynamic>)), [_Runtime.field(options, 'url'), (cast _Runtime.field(options, 'protocols') : Array<String>)]), function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WebSocket'] : Array<Dynamic>)), [_Runtime.field(options, 'url')]));
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('WebSocket'), 'undefined'))) { return cast null; }
+      ws = _Runtime.select(!_Runtime.strictEquals(_Runtime.field(options, 'protocols'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('WebSocket'), [_Runtime.field(options, 'url'), (cast _Runtime.field(options, 'protocols') : Array<String>)]), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('WebSocket'), [_Runtime.field(options, 'url')]));
       _Runtime.setField(ws, 'binaryType', _Runtime.coalesce(_Runtime.field(options, 'binaryType'), function():Dynamic return cast 'arraybuffer'));
       _Runtime.setField(ws, 'onopen', function() return _Runtime.callProperty(events, 'handleSocketOpen', cast ([] : Array<Dynamic>)));
       _Runtime.setField(ws, 'onmessage', function(event:Dynamic) return _Runtime.callProperty(events, 'handleSocketMessage', cast ([_Runtime.callValue(Socket.toSocketMessage__socket, cast ([_Runtime.field(event, 'data')] : Array<Dynamic>))] : Array<Dynamic>)));
       _Runtime.setField(ws, 'onclose', function(event:Dynamic) return _Runtime.callProperty(events, 'handleSocketClose', cast ([{ code: _Runtime.field(event, 'code'), reason: _Runtime.field(event, 'reason'), wasClean: _Runtime.field(event, 'wasClean') }] : Array<Dynamic>)));
       _Runtime.setField(ws, 'onerror', function() return _Runtime.callProperty(events, 'handleSocketError', cast ([] : Array<Dynamic>)));
       return cast { sendSocketFrame: function(data:Dynamic) {
-        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(ws, 'readyState'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WebSocket'] : Array<Dynamic>)), 'OPEN')))) { return cast false; }
+        if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(ws, 'readyState'), _Runtime.field(_Runtime.globalValue('WebSocket'), 'OPEN')))) { return cast false; }
         _Runtime.callProperty(ws, 'send', cast ([data] : Array<Dynamic>));
         return cast true;
       }, closeSocketConnection: function(code:Dynamic, reason:Dynamic) {

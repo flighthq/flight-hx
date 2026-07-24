@@ -171,8 +171,8 @@ class TextInputEditing {
     lineEnd = 0.0;
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), closestLineIndex))) { continue; }
-      (lineStart = cast (_Runtime.callProperty(HxMath, 'min', cast ([lineStart, _Runtime.field(group, 'startIndex')] : Array<Dynamic>)) : Dynamic));
-      (lineEnd = cast (_Runtime.callProperty(HxMath, 'max', cast ([lineEnd, _Runtime.field(group, 'endIndex')] : Array<Dynamic>)) : Dynamic));
+      (lineStart = cast (HxMath.min(lineStart, _Runtime.field(group, 'startIndex')) : Dynamic));
+      (lineEnd = cast (HxMath.max(lineEnd, _Runtime.field(group, 'endIndex')) : Dynamic));
       if (_Runtime.truthy(_Runtime.compare(x, _Runtime.field(group, 'offsetX'), '<='))) { return cast _Runtime.field(group, 'startIndex'); }
       if (_Runtime.truthy(_Runtime.compare(x, (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width')), '<='))) { return cast _Runtime.callValue(TextInputEditing.getTextLayoutGroupCharacterIndexAtX__textInputEditing, cast ([group, x] : Array<Dynamic>)); }
     }
@@ -193,14 +193,14 @@ class TextInputEditing {
   public static function getTextInputSelectionBeginIndex(source:RichText):Float {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
-    return cast _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'caretIndex'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>)), _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'selectionIndex'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast HxMath.min(_Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'caretIndex'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>)), _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'selectionIndex'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>)));
     return cast null;
   }
 
   public static function getTextInputSelectionEndIndex(source:RichText):Float {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callValue(TextInputEditing.getInputState__textInputEditing, cast ([source] : Array<Dynamic>));
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'caretIndex'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>)), _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'selectionIndex'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast HxMath.max(_Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'caretIndex'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>)), _Runtime.callValue(TextInputEditing.clampIndex__textInputEditing, cast ([_Runtime.field(state, 'selectionIndex'), _Runtime.field(_Runtime.field(_Runtime.field(source, 'data'), 'text'), 'length')] : Array<Dynamic>)));
     return cast null;
   }
 
@@ -513,7 +513,7 @@ class TextInputEditing {
     caretLeft = (_Runtime.field(out, 'x') - scrollH);
     caretRight = (caretLeft + _Runtime.field(out, 'width'));
     if (_Runtime.truthy(_Runtime.compare(caretLeft, 0.0, '<'))) {
-      _Runtime.callValue(setRichTextScrollH, cast ([source, _Runtime.callProperty(HxMath, 'max', cast ([0.0, (_Runtime.field(out, 'x') - CARET_SCROLL_MARGIN)] : Array<Dynamic>)), layout] : Array<Dynamic>));
+      _Runtime.callValue(setRichTextScrollH, cast ([source, HxMath.max(0.0, (_Runtime.field(out, 'x') - CARET_SCROLL_MARGIN)), layout] : Array<Dynamic>));
     } else { if (_Runtime.truthy(_Runtime.compare((caretRight + CARET_SCROLL_MARGIN), viewportWidth, '>'))) {
       _Runtime.callValue(setRichTextScrollH, cast ([source, (((_Runtime.field(out, 'x') + _Runtime.field(out, 'width')) + CARET_SCROLL_MARGIN) - viewportWidth), layout] : Array<Dynamic>));
     } }
@@ -529,7 +529,7 @@ class TextInputEditing {
     var start:Dynamic = cast _Runtime.UNDEFINED;
     var end:Dynamic = cast _Runtime.UNDEFINED;
     text = _Runtime.field(_Runtime.field(source, 'data'), 'text');
-    clamped = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(text, 'length'), index] : Array<Dynamic>))] : Array<Dynamic>));
+    clamped = HxMath.max(0.0, HxMath.min(_Runtime.field(text, 'length'), index));
     start = clamped;
     end = clamped;
     while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(start, 0.0, '>'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.charAt(text, (start - 1.0)), '\n')))) { start--; }
@@ -543,7 +543,7 @@ class TextInputEditing {
     var start:Dynamic = cast _Runtime.UNDEFINED;
     var end:Dynamic = cast _Runtime.UNDEFINED;
     text = _Runtime.field(_Runtime.field(source, 'data'), 'text');
-    clamped = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(text, 'length'), index] : Array<Dynamic>))] : Array<Dynamic>));
+    clamped = HxMath.max(0.0, HxMath.min(_Runtime.field(text, 'length'), index));
     start = clamped;
     end = clamped;
     while (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(start, 0.0, '>'), function():Dynamic return cast _Runtime.callValue(TextInputEditing.isWordChar__textInputEditing, cast ([_Runtime.charAt(text, (start - 1.0))] : Array<Dynamic>))))) { start--; }
@@ -632,8 +632,8 @@ class TextInputEditing {
   }
 
   public static function clampIndex__textInputEditing(value:Float, length:Float):Float {
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([value] : Array<Dynamic>))))) { return cast 0.0; }
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([length, _Runtime.trunc(value)] : Array<Dynamic>))] : Array<Dynamic>));
+    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>))))) { return cast 0.0; }
+    return cast HxMath.max(0.0, HxMath.min(length, _Runtime.trunc(value)));
     return cast null;
   }
 
@@ -741,7 +741,7 @@ class TextInputEditing {
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var limit:Dynamic = cast _Runtime.UNDEFINED;
     x = _Runtime.field(group, 'offsetX');
-    limit = _Runtime.callProperty(HxMath, 'max', cast ([0.0, (_Runtime.callProperty(HxMath, 'min', cast ([index, _Runtime.field(group, 'endIndex')] : Array<Dynamic>)) - _Runtime.field(group, 'startIndex'))] : Array<Dynamic>));
+    limit = HxMath.max(0.0, (HxMath.min(index, _Runtime.field(group, 'endIndex')) - _Runtime.field(group, 'startIndex')));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, limit, '<'))) {

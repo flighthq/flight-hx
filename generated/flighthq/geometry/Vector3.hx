@@ -108,7 +108,7 @@ class Vector3 {
     lb = _Runtime.callValue(getVector3Length, cast ([b] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(la, 0.0), function():Dynamic return cast _Runtime.strictEquals(lb, 0.0)))) { return cast HxMath.NaN; }
     _dot = (_Runtime.callValue(getVector3Dot, cast ([a, b] : Array<Dynamic>)) / (la * lb));
-    return cast _Runtime.callProperty(HxMath, 'acos', cast ([_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([-1.0, _dot] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, _dot)));
     return cast null;
   }
 
@@ -119,7 +119,7 @@ class Vector3 {
     x = (_Runtime.field(b, 'x') - _Runtime.field(a, 'x'));
     y = (_Runtime.field(b, 'y') - _Runtime.field(a, 'y'));
     z = (_Runtime.field(b, 'z') - _Runtime.field(a, 'z'));
-    return cast _Runtime.callProperty(HxMath, 'sqrt', cast ([((HxMath.pow(x, 2.0) + HxMath.pow(y, 2.0)) + HxMath.pow(z, 2.0))] : Array<Dynamic>));
+    return cast HxMath.sqrt(((HxMath.pow(x, 2.0) + HxMath.pow(y, 2.0)) + HxMath.pow(z, 2.0)));
     return cast null;
   }
 
@@ -140,7 +140,7 @@ class Vector3 {
   }
 
   public static function getVector3Length(source:Vector3Like):Float {
-    return cast _Runtime.callProperty(HxMath, 'sqrt', cast ([((HxMath.pow(_Runtime.field(source, 'x'), 2.0) + HxMath.pow(_Runtime.field(source, 'y'), 2.0)) + HxMath.pow(_Runtime.field(source, 'z'), 2.0))] : Array<Dynamic>));
+    return cast HxMath.sqrt(((HxMath.pow(_Runtime.field(source, 'x'), 2.0) + HxMath.pow(_Runtime.field(source, 'y'), 2.0)) + HxMath.pow(_Runtime.field(source, 'z'), 2.0)));
     return cast null;
   }
 
@@ -157,7 +157,7 @@ class Vector3 {
     x = _Runtime.field(source, 'x');
     y = _Runtime.field(source, 'y');
     z = _Runtime.field(source, 'z');
-    radius = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((x * x) + (y * y)) + (z * z))] : Array<Dynamic>));
+    radius = HxMath.sqrt((((x * x) + (y * y)) + (z * z)));
     if (_Runtime.truthy(_Runtime.strictEquals(radius, 0.0))) {
       _Runtime.setField(out, 'x', 0.0);
       _Runtime.setField(out, 'y', 0.0);
@@ -165,8 +165,8 @@ class Vector3 {
       return;
     }
     _Runtime.setField(out, 'x', radius);
-    _Runtime.setField(out, 'y', _Runtime.callProperty(HxMath, 'acos', cast ([_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([-1.0, (y / radius)] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
-    _Runtime.setField(out, 'z', _Runtime.callProperty(HxMath, 'atan2', cast ([z, x] : Array<Dynamic>)));
+    _Runtime.setField(out, 'y', HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, (y / radius)))));
+    _Runtime.setField(out, 'z', HxMath.atan2(z, x));
   }
 
   public static function interpolateVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like, t:Float):Void {
@@ -200,7 +200,7 @@ class Vector3 {
   }
 
   public static function nearEqualsVector3(a:Vector3Like, b:Vector3Like, tolerance:Float = 0.000001):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.field(a, 'x') - _Runtime.field(b, 'x'))] : Array<Dynamic>)), tolerance, '<'), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.field(a, 'y') - _Runtime.field(b, 'y'))] : Array<Dynamic>)), tolerance, '<')), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.field(a, 'z') - _Runtime.field(b, 'z'))] : Array<Dynamic>)), tolerance, '<'));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.compare(HxMath.abs((_Runtime.field(a, 'x') - _Runtime.field(b, 'x'))), tolerance, '<'), function():Dynamic return cast _Runtime.compare(HxMath.abs((_Runtime.field(a, 'y') - _Runtime.field(b, 'y'))), tolerance, '<')), function():Dynamic return cast _Runtime.compare(HxMath.abs((_Runtime.field(a, 'z') - _Runtime.field(b, 'z'))), tolerance, '<'));
     return cast null;
   }
 
@@ -277,10 +277,10 @@ class Vector3 {
 
   public static function setVector3FromSpherical(out:Vector3Like, radius:Float, theta:Float, phi:Float):Void {
     var sinTheta:Dynamic = cast _Runtime.UNDEFINED;
-    sinTheta = _Runtime.callProperty(HxMath, 'sin', cast ([theta] : Array<Dynamic>));
-    _Runtime.setField(out, 'x', ((radius * sinTheta) * _Runtime.callProperty(HxMath, 'cos', cast ([phi] : Array<Dynamic>))));
-    _Runtime.setField(out, 'y', (radius * _Runtime.callProperty(HxMath, 'cos', cast ([theta] : Array<Dynamic>))));
-    _Runtime.setField(out, 'z', ((radius * sinTheta) * _Runtime.callProperty(HxMath, 'sin', cast ([phi] : Array<Dynamic>))));
+    sinTheta = HxMath.sin(theta);
+    _Runtime.setField(out, 'x', ((radius * sinTheta) * HxMath.cos(phi)));
+    _Runtime.setField(out, 'y', (radius * HxMath.cos(theta)));
+    _Runtime.setField(out, 'z', ((radius * sinTheta) * HxMath.sin(phi)));
   }
 
   public static function setVector3FromVector4(out:Vector3Like, source:Vector4Like):Void {

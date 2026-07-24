@@ -35,8 +35,8 @@ class XmlParse {
 
   public static function decodeXmlEntities__xmlParse(s:String):String {
     return cast _Runtime.replace(s, _Runtime.regexp('&(?:#(\\d+)|#x([\\da-fA-F]+)|(\\w+));', 'g'), function(_:Dynamic, dec:Dynamic, hex:Dynamic, name:Dynamic) {
-      if (_Runtime.truthy(dec)) { return cast _Runtime.fromCodePoint(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([dec, 10.0] : Array<Dynamic>))); }
-      if (_Runtime.truthy(hex)) { return cast _Runtime.fromCodePoint(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([hex, 16.0] : Array<Dynamic>))); }
+      if (_Runtime.truthy(dec)) { return cast _Runtime.fromCodePoint(_Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([dec, 10.0] : Array<Dynamic>))); }
+      if (_Runtime.truthy(hex)) { return cast _Runtime.fromCodePoint(_Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([hex, 16.0] : Array<Dynamic>))); }
       return cast _Runtime.coalesce(_Runtime.getIndex(XmlParse.XML_ENTITIES__xmlParse, name), function():Dynamic return cast _);
     }, false);
     return cast null;

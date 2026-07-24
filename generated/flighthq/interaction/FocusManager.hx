@@ -76,7 +76,7 @@ class FocusManager {
     originX = _Runtime.field(origin, 'x');
     originY = _Runtime.field(origin, 'y');
     best = null;
-    bestScore = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
+    bestScore = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
     for (candidate in _Runtime.iterable(order)) {
       if (_Runtime.truthy(_Runtime.strictEquals(candidate, current))) { continue; }
       var center:Dynamic = _Runtime.callValue(FocusManager.boundsCenter__focusManager, cast ([candidate, FocusManager._candidateCenter__focusManager] : Array<Dynamic>));
@@ -201,8 +201,8 @@ class FocusManager {
         (perpendicular = cast (dx : Dynamic));
       }
     }
-    if (_Runtime.truthy(_Runtime.compare(along, FocusManager.DIRECTION_EPSILON__focusManager, '<='))) { return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'); }
-    return cast (along + (2.0 * _Runtime.callProperty(HxMath, 'abs', cast ([perpendicular] : Array<Dynamic>))));
+    if (_Runtime.truthy(_Runtime.compare(along, FocusManager.DIRECTION_EPSILON__focusManager, '<='))) { return cast _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY'); }
+    return cast (along + (2.0 * HxMath.abs(perpendicular)));
     return cast null;
   }
 
@@ -224,7 +224,7 @@ class FocusManager {
   public static function focusOrderKey__focusManager(node:NodeAny):Float {
     var tabIndex:Dynamic = cast _Runtime.UNDEFINED;
     tabIndex = _Runtime.callValue(getNodeTabIndex, cast ([node] : Array<Dynamic>));
-    return cast _Runtime.select(_Runtime.compare(tabIndex, 0.0, '<'), function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'), function():Dynamic return cast tabIndex);
+    return cast _Runtime.select(_Runtime.compare(tabIndex, 0.0, '<'), function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY'), function():Dynamic return cast tabIndex);
     return cast null;
   }
 

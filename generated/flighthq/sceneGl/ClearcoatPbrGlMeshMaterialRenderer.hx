@@ -42,9 +42,9 @@ class ClearcoatPbrGlMeshMaterialRenderer {
     _Runtime.callValue(setGlMeshCameraPosition, cast ([gl, _Runtime.field(program, 'locCameraPosition'), camera] : Array<Dynamic>));
     _Runtime.callValue(bindGlMeshLightBlock, cast ([state, program, lights] : Array<Dynamic>));
     _Runtime.callValue(bindGlPbrStandardBlock, cast ([state, program, standard] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), _Runtime.select(!_Runtime.strictEquals(clearcoat, null), function():Dynamic return cast _Runtime.field(clearcoat, 'alphaCutoff'), function():Dynamic return cast 0.5)] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locClearcoat'), _Runtime.select(!_Runtime.strictEquals(clearcoat, null), function():Dynamic return cast _Runtime.field(clearcoat, 'clearcoat'), function():Dynamic return cast 0.0)] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locClearcoatRoughness'), _Runtime.select(!_Runtime.strictEquals(clearcoat, null), function():Dynamic return cast _Runtime.field(clearcoat, 'clearcoatRoughness'), function():Dynamic return cast 0.0)] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), _Runtime.select(!_Runtime.strictEquals(clearcoat, null), function():Dynamic return cast _Runtime.field(clearcoat, 'alphaCutoff'), function():Dynamic return cast 0.5)] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locClearcoat'), _Runtime.select(!_Runtime.strictEquals(clearcoat, null), function():Dynamic return cast _Runtime.field(clearcoat, 'clearcoat'), function():Dynamic return cast 0.0)] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locClearcoatRoughness'), _Runtime.select(!_Runtime.strictEquals(clearcoat, null), function():Dynamic return cast _Runtime.field(clearcoat, 'clearcoatRoughness'), function():Dynamic return cast 0.0)] : Array<Dynamic>));
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');

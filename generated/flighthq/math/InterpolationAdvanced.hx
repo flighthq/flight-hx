@@ -7,7 +7,7 @@ import flighthq._internal._Runtime;
 class InterpolationAdvanced {
   public static function damp(current:Float, target:Float, lambda:Float, deltaTime:Float):Float {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(deltaTime, 0.0, '<='), function():Dynamic return cast _Runtime.compare(lambda, 0.0, '<=')))) { return cast current; }
-    return cast (target + ((current - target) * _Runtime.callProperty(HxMath, 'exp', cast ([(-lambda * deltaTime)] : Array<Dynamic>))));
+    return cast (target + ((current - target) * HxMath.exp((-lambda * deltaTime))));
     return cast null;
   }
 
@@ -24,7 +24,7 @@ class InterpolationAdvanced {
   public static function moveTowards(current:Float, target:Float, maxDelta:Float):Float {
     var delta:Dynamic = cast _Runtime.UNDEFINED;
     delta = (target - current);
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([delta] : Array<Dynamic>)), maxDelta, '<='))) { return cast target; }
+    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(delta), maxDelta, '<='))) { return cast target; }
     return cast (current + (_Runtime.sign(delta) * maxDelta));
     return cast null;
   }

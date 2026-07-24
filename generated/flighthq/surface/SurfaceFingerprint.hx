@@ -19,7 +19,7 @@ class SurfaceFingerprint {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(a, 'cells'), 'length'), '<'))) {
-        (sum = cast ((sum + _Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(_Runtime.field(a, 'cells'), i) - _Runtime.getIndex(_Runtime.field(b, 'cells'), i))] : Array<Dynamic>))) : Dynamic));
+        (sum = cast ((sum + HxMath.abs((_Runtime.getIndex(_Runtime.field(a, 'cells'), i) - _Runtime.getIndex(_Runtime.field(b, 'cells'), i)))) : Dynamic));
         i++;
       }
     }
@@ -34,7 +34,7 @@ class SurfaceFingerprint {
     var height:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(gridSize, 1.0, '<'))) { throw _Runtime.error('createSurfaceFingerprint: gridSize must be >= 1 (got ' + Std.string(gridSize) + ')'); }
-    cells = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [((gridSize * gridSize) * 3.0)]);
+    cells = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [((gridSize * gridSize) * 3.0)]);
     __destructure0 = source;
     width = _Runtime.field(__destructure0, 'width');
     height = _Runtime.field(__destructure0, 'height');
@@ -43,13 +43,13 @@ class SurfaceFingerprint {
     {
       var cy:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(cy, gridSize, '<'))) {
-        var y0:Dynamic = _Runtime.callProperty(HxMath, 'floor', cast ([((cy * height) / gridSize)] : Array<Dynamic>));
-        var y1:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([(y0 + 1.0), _Runtime.callProperty(HxMath, 'floor', cast ([(((cy + 1.0) * height) / gridSize)] : Array<Dynamic>))] : Array<Dynamic>));
+        var y0:Dynamic = HxMath.floor(((cy * height) / gridSize));
+        var y1:Dynamic = HxMath.max((y0 + 1.0), HxMath.floor((((cy + 1.0) * height) / gridSize)));
         {
           var cx:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(cx, gridSize, '<'))) {
-            var x0:Dynamic = _Runtime.callProperty(HxMath, 'floor', cast ([((cx * width) / gridSize)] : Array<Dynamic>));
-            var x1:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([(x0 + 1.0), _Runtime.callProperty(HxMath, 'floor', cast ([(((cx + 1.0) * width) / gridSize)] : Array<Dynamic>))] : Array<Dynamic>));
+            var x0:Dynamic = HxMath.floor(((cx * width) / gridSize));
+            var x1:Dynamic = HxMath.max((x0 + 1.0), HxMath.floor((((cx + 1.0) * width) / gridSize)));
             var sumR:Dynamic = 0.0;
             var sumG:Dynamic = 0.0;
             var sumB:Dynamic = 0.0;
@@ -73,9 +73,9 @@ class SurfaceFingerprint {
               }
             }
             var c:Dynamic = (((cy * gridSize) + cx) * 3.0);
-            _Runtime.setIndex(cells, c, _Runtime.select(_Runtime.strictEquals(count, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.callProperty(HxMath, 'round', cast ([(sumR / count)] : Array<Dynamic>))));
-            _Runtime.setIndex(cells, (c + 1.0), _Runtime.select(_Runtime.strictEquals(count, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.callProperty(HxMath, 'round', cast ([(sumG / count)] : Array<Dynamic>))));
-            _Runtime.setIndex(cells, (c + 2.0), _Runtime.select(_Runtime.strictEquals(count, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.callProperty(HxMath, 'round', cast ([(sumB / count)] : Array<Dynamic>))));
+            _Runtime.setIndex(cells, c, _Runtime.select(_Runtime.strictEquals(count, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast HxMath.round((sumR / count))));
+            _Runtime.setIndex(cells, (c + 1.0), _Runtime.select(_Runtime.strictEquals(count, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast HxMath.round((sumG / count))));
+            _Runtime.setIndex(cells, (c + 2.0), _Runtime.select(_Runtime.strictEquals(count, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast HxMath.round((sumB / count))));
             cx++;
           }
         }
@@ -109,11 +109,11 @@ class SurfaceFingerprint {
     var cells:Dynamic = cast _Runtime.UNDEFINED;
     colon = _Runtime.callProperty(text, 'indexOf', cast ([':'] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(colon, 0.0, '<='))) { return cast null; }
-    gridSize = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'parseInt', cast ([_Runtime.slice(text, 0.0, colon), 10.0] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isInteger', cast ([gridSize] : Array<Dynamic>))), function():Dynamic return cast _Runtime.compare(gridSize, 1.0, '<')))) { return cast null; }
+    gridSize = _Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.slice(text, 0.0, colon), 10.0] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([gridSize] : Array<Dynamic>))), function():Dynamic return cast _Runtime.compare(gridSize, 1.0, '<')))) { return cast null; }
     hex = _Runtime.slice(text, (colon + 1.0), null);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(hex, 'length'), (((gridSize * gridSize) * 3.0) * 2.0)))) { return cast null; }
-    cells = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [(_Runtime.field(hex, 'length') / 2.0)]);
+    cells = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [(_Runtime.field(hex, 'length') / 2.0)]);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(cells, 'length'), '<'))) {

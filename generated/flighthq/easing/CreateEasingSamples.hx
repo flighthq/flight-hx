@@ -10,11 +10,11 @@ class CreateEasingSamples {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var result:Dynamic = cast _Runtime.UNDEFINED;
     var step:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([count] : Array<Dynamic>))), function():Dynamic return cast _Runtime.compare(count, 1.0, '<')))) {
+    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([count] : Array<Dynamic>))), function():Dynamic return cast _Runtime.compare(count, 1.0, '<')))) {
       throw _Runtime.error('createEasingSamples: count must be a finite integer >= 1');
     }
-    n = _Runtime.callProperty(HxMath, 'floor', cast ([count] : Array<Dynamic>));
-    result = _Runtime.coalesce(out, function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [n]));
+    n = HxMath.floor(count);
+    result = _Runtime.coalesce(out, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [n]));
     if (_Runtime.truthy(_Runtime.strictEquals(n, 1.0))) {
       _Runtime.setIndex(result, 0.0, _Runtime.callValue(ease, cast ([0.5] : Array<Dynamic>)));
       return cast result;

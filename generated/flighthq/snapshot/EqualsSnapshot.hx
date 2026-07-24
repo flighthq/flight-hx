@@ -45,12 +45,12 @@ class EqualsSnapshot {
     }
     aObject = (cast a : Dynamic);
     bObject = (cast b : Dynamic);
-    aKeys = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([aObject] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(aKeys, 'length'), _Runtime.field(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([bObject] : Array<Dynamic>)), 'length')))) {
+    aKeys = flighthq._internal.DynamicObject.keys(aObject);
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(aKeys, 'length'), _Runtime.field(flighthq._internal.DynamicObject.keys(bObject), 'length')))) {
       return cast false;
     }
     for (key in _Runtime.iterable(aKeys)) {
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.field(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'prototype'), 'hasOwnProperty'), 'call', cast ([bObject, key] : Array<Dynamic>))))) {
+      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.field(flighthq._internal.DynamicObject.field('prototype'), 'hasOwnProperty'), 'call', cast ([bObject, key] : Array<Dynamic>))))) {
         return cast false;
       }
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(EqualsSnapshot.snapshotValuesEqual__equalsSnapshot, cast ([_Runtime.getIndex(aObject, key), _Runtime.getIndex(bObject, key)] : Array<Dynamic>))))) {

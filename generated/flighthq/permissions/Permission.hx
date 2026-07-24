@@ -71,7 +71,7 @@ class Permission {
   }
 
   public static function requestWebGeolocationPermission__permission():flighthq._internal._Promise<PermissionState> {
-    return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(resolve:Dynamic) {
+    return cast _Runtime.construct(_Runtime.globalValue('Promise'), [function(resolve:Dynamic) {
       var geolocation:Dynamic = cast _Runtime.UNDEFINED;
       geolocation = _Runtime.callValue(Permission.getWebGeolocation__permission, cast ([] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(geolocation, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(geolocation, 'getCurrentPosition')), 'function')))) {
@@ -150,19 +150,19 @@ class Permission {
   }
 
   public static function getWebGeolocation__permission():Null<Geolocation> {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
-    return cast _Runtime.coalesce(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'geolocation'), function():Dynamic return cast null);
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
+    return cast _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('navigator'), 'geolocation'), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getWebMediaDevices__permission():Null<Dynamic> {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
-    return cast _Runtime.coalesce(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'mediaDevices'), function():Dynamic return cast null);
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
+    return cast _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('navigator'), 'mediaDevices'), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getWebNotification__permission():Null<Dynamic> {
-    return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['Notification'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['Notification'] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.select(!_Runtime.strictEquals(_Runtime.typeofGlobal('Notification'), 'undefined'), function():Dynamic return cast _Runtime.globalValue('Notification'), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -176,16 +176,16 @@ class Permission {
 
   public static function getWebPermissions__permission():Null<Dynamic> {
     var permissions:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
-    permissions = _Runtime.coalesce(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'permissions'), function():Dynamic return cast null);
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
+    permissions = _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('navigator'), 'permissions'), function():Dynamic return cast null);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(permissions, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(permissions, 'query')), 'function')))) { return cast null; }
     return cast permissions;
     return cast null;
   }
 
   public static function getWebStorageManager__permission():Null<Dynamic> {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
-    return cast _Runtime.coalesce(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'storage'), function():Dynamic return cast null);
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
+    return cast _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('navigator'), 'storage'), function():Dynamic return cast null);
     return cast null;
   }
 

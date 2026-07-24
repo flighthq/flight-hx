@@ -35,8 +35,8 @@ class Mediasession {
         _Runtime.setField(session, 'metadata', null);
         return;
       }
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['MediaMetadata'] : Array<Dynamic>)), 'undefined'))) { return; }
-      _Runtime.setField(session, 'metadata', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['MediaMetadata'] : Array<Dynamic>)), [{ title: _Runtime.field(metadata, 'title'), artist: _Runtime.field(metadata, 'artist'), album: _Runtime.field(metadata, 'album'), artwork: _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(metadata, 'artwork'))]) }]));
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('MediaMetadata'), 'undefined'))) { return; }
+      _Runtime.setField(session, 'metadata', _Runtime.construct(_Runtime.globalValue('MediaMetadata'), [{ title: _Runtime.field(metadata, 'title'), artist: _Runtime.field(metadata, 'artist'), album: _Runtime.field(metadata, 'album'), artwork: _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(metadata, 'artwork'))]) }]));
     }, setPlaybackState: function(state:Dynamic) {
       var session:Dynamic = cast _Runtime.UNDEFINED;
       session = _Runtime.callValue(Mediasession.getWebMediaSession__mediasession, cast ([] : Array<Dynamic>));
@@ -66,8 +66,8 @@ class Mediasession {
   }
 
   public static function getWebMediaSession__mediasession():Null<MediaSession> {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'mediaSession'))))) { return cast null; }
-    return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'mediaSession');
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.globalValue('navigator'), 'mediaSession'))))) { return cast null; }
+    return cast _Runtime.field(_Runtime.globalValue('navigator'), 'mediaSession');
     return cast null;
   }
 

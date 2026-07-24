@@ -52,7 +52,7 @@ class GetPathPointAtDistance {
           while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(contour, 'length'), '<'))) {
             var dx:Dynamic = (_Runtime.getIndex(contour, i) - _Runtime.getIndex(contour, (i - 2.0)));
             var dy:Dynamic = (_Runtime.getIndex(contour, (i + 1.0)) - _Runtime.getIndex(contour, (i - 1.0)));
-            var segLen:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([((dx * dx) + (dy * dy))] : Array<Dynamic>));
+            var segLen:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
             if (_Runtime.truthy(_Runtime.compare(remaining, segLen, '<='))) {
               var t:Dynamic = _Runtime.select(_Runtime.compare(segLen, 0.0, '>'), function():Dynamic return cast (remaining / segLen), function():Dynamic return cast 0.0);
               _Runtime.setField(out, 'x', (_Runtime.getIndex(contour, (i - 2.0)) + (t * dx)));
@@ -95,7 +95,7 @@ class GetPathPointAtDistance {
           while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(contour, 'length'), '<'))) {
             var dx:Dynamic = (_Runtime.getIndex(contour, i) - _Runtime.getIndex(contour, (i - 2.0)));
             var dy:Dynamic = (_Runtime.getIndex(contour, (i + 1.0)) - _Runtime.getIndex(contour, (i - 1.0)));
-            var segLen:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([((dx * dx) + (dy * dy))] : Array<Dynamic>));
+            var segLen:Dynamic = HxMath.sqrt(((dx * dx) + (dy * dy)));
             if (_Runtime.truthy(_Runtime.compare(segLen, 0.0, '>'))) {
               var invLen:Dynamic = (1.0 / segLen);
               (lastTx = cast ((dx * invLen) : Dynamic));

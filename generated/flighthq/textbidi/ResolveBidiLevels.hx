@@ -19,7 +19,7 @@ class ResolveBidiLevels {
     var working:Dynamic = cast _Runtime.UNDEFINED;
     var levelArray:Dynamic = cast _Runtime.UNDEFINED;
     length = _Runtime.field(text, 'length');
-    levels = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [length]);
+    levels = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [length]);
     if (_Runtime.truthy(_Runtime.strictEquals(length, 0.0))) { return cast levels; }
     backend = _Runtime.callValue(getBidiClassBackend, cast ([] : Array<Dynamic>));
     original = _Runtime.createArray(length);
@@ -37,8 +37,8 @@ class ResolveBidiLevels {
       }
     }
     paragraphLevel = _Runtime.select(_Runtime.strictEquals(baseDirection, 'ltr'), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(baseDirection, 'rtl'), function():Dynamic return cast 1.0, function():Dynamic return cast _Runtime.callValue(ResolveBidiLevels.computeParagraphLevel__resolveBidiLevels, cast ([original, 0.0, length] : Array<Dynamic>))));
-    matchingPdi = _Runtime.fill(_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Int32Array'] : Array<Dynamic>)), [length]), length, 0, null, 1);
-    matchingInitiator = _Runtime.fill(_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Int32Array'] : Array<Dynamic>)), [length]), -1.0, 0, null, 1);
+    matchingPdi = _Runtime.fill(_Runtime.construct(_Runtime.globalValue('Int32Array'), [length]), length, 0, null, 1);
+    matchingInitiator = _Runtime.fill(_Runtime.construct(_Runtime.globalValue('Int32Array'), [length]), -1.0, 0, null, 1);
     _Runtime.callValue(ResolveBidiLevels.pairIsolates__resolveBidiLevels, cast ([original, matchingPdi, matchingInitiator] : Array<Dynamic>));
     working = _Runtime.slice(original, 0, null);
     levelArray = _Runtime.createArray(length);
@@ -249,7 +249,7 @@ class ResolveBidiLevels {
         k++;
       }
     }
-    runByFirst = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    runByFirst = _Runtime.construct(_Runtime.globalValue('Map'), []);
     {
       var r:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(r, _Runtime.field(runs, 'length'), '<'))) {
@@ -311,12 +311,12 @@ class ResolveBidiLevels {
     var even:Dynamic = cast _Runtime.UNDEFINED;
     seqLevel = _Runtime.getIndex(levelArray, _Runtime.getIndex(sequence, 0.0));
     prevLevel = _Runtime.select(_Runtime.compare(keptStart, 0.0, '>'), function():Dynamic return cast _Runtime.getIndex(levelArray, _Runtime.getIndex(kept, (keptStart - 1.0))), function():Dynamic return cast paragraphLevel);
-    sos = _Runtime.select(_Runtime.strictEquals((_Runtime.callProperty(HxMath, 'max', cast ([seqLevel, prevLevel] : Array<Dynamic>)) % 2.0), 1.0), function():Dynamic return cast 'R', function():Dynamic return cast 'L');
+    sos = _Runtime.select(_Runtime.strictEquals((HxMath.max(seqLevel, prevLevel) % 2.0), 1.0), function():Dynamic return cast 'R', function():Dynamic return cast 'L');
     lastIdx = _Runtime.getIndex(sequence, (_Runtime.field(sequence, 'length') - 1.0));
     lastType = _Runtime.getIndex(original, lastIdx);
     endsUnmatchedIsolate = _Runtime.andValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(lastType, 'LRI'), function():Dynamic return cast _Runtime.strictEquals(lastType, 'RLI')), function():Dynamic return cast _Runtime.strictEquals(lastType, 'FSI')), function():Dynamic return cast _Runtime.compare(_Runtime.getIndex(matchingPdi, lastIdx), _Runtime.field(original, 'length'), '>='));
     nextLevel = _Runtime.select(endsUnmatchedIsolate, function():Dynamic return cast paragraphLevel, function():Dynamic return cast _Runtime.select(_Runtime.compare(keptEnd, _Runtime.field(kept, 'length'), '<'), function():Dynamic return cast _Runtime.getIndex(levelArray, _Runtime.getIndex(kept, keptEnd)), function():Dynamic return cast paragraphLevel));
-    eos = _Runtime.select(_Runtime.strictEquals((_Runtime.callProperty(HxMath, 'max', cast ([seqLevel, nextLevel] : Array<Dynamic>)) % 2.0), 1.0), function():Dynamic return cast 'R', function():Dynamic return cast 'L');
+    eos = _Runtime.select(_Runtime.strictEquals((HxMath.max(seqLevel, nextLevel) % 2.0), 1.0), function():Dynamic return cast 'R', function():Dynamic return cast 'L');
     len = _Runtime.field(sequence, 'length');
     ty = _Runtime.createArray(len);
     {

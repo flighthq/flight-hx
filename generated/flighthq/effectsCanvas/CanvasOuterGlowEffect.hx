@@ -47,9 +47,9 @@ class CanvasOuterGlowEffect {
     mask = _Runtime.callValue(acquireCanvasRenderTarget, cast ([pool, _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
     blurred = _Runtime.callValue(acquireCanvasRenderTarget, cast ([pool, _Runtime.field(source, 'width'), _Runtime.field(source, 'height')] : Array<Dynamic>));
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
-    tintStrength = _Runtime.callProperty(HxMath, 'min', cast ([1.0, strength] : Array<Dynamic>));
-    glowPasses = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'floor', cast ([strength] : Array<Dynamic>))] : Array<Dynamic>));
-    blur = _Runtime.callProperty(HxMath, 'max', cast ([0.0, ((_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0) + _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0)) / 2.0)] : Array<Dynamic>));
+    tintStrength = HxMath.min(1.0, strength);
+    glowPasses = HxMath.max(1.0, HxMath.floor(strength));
+    blur = HxMath.max(0.0, ((_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0) + _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0)) / 2.0));
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
     _Runtime.callValue(drawCanvasTintedAlphaMask, cast ([mask, source, _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16711680.0), _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0), tintStrength] : Array<Dynamic>));
     _Runtime.callValue(drawCanvasEffectPass, cast ([blurred, mask, _Runtime.select(_Runtime.compare(blur, 0.0, '>'), function():Dynamic return cast 'blur(' + Std.string(blur) + 'px)', function():Dynamic return cast 'none')] : Array<Dynamic>));

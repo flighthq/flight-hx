@@ -21,7 +21,7 @@ class Haptics {
       return cast _Runtime.callValue(Haptics.webVibrate__haptics, cast ([0.0] : Array<Dynamic>));
     }, capabilities: function(out:HapticsCapabilities) {
       var supported:Dynamic = cast _Runtime.UNDEFINED;
-      supported = _Runtime.andValue(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'vibrate')), 'function'));
+      supported = _Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('navigator'), 'vibrate')), 'function'));
       _Runtime.setField(out, 'amplitudeControl', false);
       _Runtime.setField(out, 'customEvents', false);
       _Runtime.setField(out, 'intensity', false);
@@ -32,10 +32,10 @@ class Haptics {
       var base:Dynamic = cast _Runtime.UNDEFINED;
       var ms:Dynamic = cast _Runtime.UNDEFINED;
       base = _Runtime.select(_Runtime.orValue(_Runtime.strictEquals(style, 'heavy'), function():Dynamic return cast _Runtime.strictEquals(style, 'rigid')), function():Dynamic return cast 30.0, function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(style, 'medium'), function():Dynamic return cast 20.0, function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(style, 'soft'), function():Dynamic return cast 25.0, function():Dynamic return cast 10.0)));
-      ms = _Runtime.select(!_Runtime.strictEquals(intensity, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.callProperty(HxMath, 'round', cast ([(base * _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, intensity] : Array<Dynamic>))] : Array<Dynamic>)))] : Array<Dynamic>)), function():Dynamic return cast base);
+      ms = _Runtime.select(!_Runtime.strictEquals(intensity, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast HxMath.round((base * HxMath.max(0.0, HxMath.min(1.0, intensity)))), function():Dynamic return cast base);
       return cast _Runtime.callValue(Haptics.webVibrate__haptics, cast ([ms] : Array<Dynamic>));
     }, isSupported: function() {
-      return cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'vibrate')), 'function'));
+      return cast _Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('navigator'), 'vibrate')), 'function'));
     }, notification: function(type:HapticNotificationType) {
       var pattern:Dynamic = cast _Runtime.UNDEFINED;
       pattern = _Runtime.select(_Runtime.strictEquals(type, 'error'), function():Dynamic return cast cast ([20.0, 60.0, 20.0] : Array<Dynamic>), function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(type, 'warning'), function():Dynamic return cast cast ([20.0, 60.0, 20.0, 60.0] : Array<Dynamic>), function():Dynamic return cast cast ([15.0, 50.0, 15.0] : Array<Dynamic>)));
@@ -120,11 +120,11 @@ class Haptics {
   }
 
   public static function webVibrate__haptics(pattern:Dynamic):Bool {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'vibrate'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'vibrate')), 'function')))) {
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast !_Runtime.truthy(_Runtime.hasField(_Runtime.globalValue('navigator'), 'vibrate'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('navigator'), 'vibrate')), 'function')))) {
       return cast false;
     }
     try {
-      return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'vibrate', cast ([(cast pattern : Dynamic)] : Array<Dynamic>));
+      return cast _Runtime.callProperty(_Runtime.globalValue('navigator'), 'vibrate', cast ([(cast pattern : Dynamic)] : Array<Dynamic>));
     } catch (__error:Dynamic) {
       return cast false;
     }

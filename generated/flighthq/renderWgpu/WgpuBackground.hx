@@ -17,7 +17,7 @@ class WgpuBackground {
       return;
     }
     _Runtime.callOptionalProperty(_Runtime.field(runtime, 'depthStencilTexture'), 'destroy', cast ([] : Array<Dynamic>));
-    texture = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([_Runtime.callProperty(HxMath, 'max', cast ([1.0, width] : Array<Dynamic>)), _Runtime.callProperty(HxMath, 'max', cast ([1.0, height] : Array<Dynamic>)), 1.0] : Array<Dynamic>), format: 'depth24plus-stencil8', usage: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'RENDER_ATTACHMENT') }] : Array<Dynamic>));
+    texture = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([HxMath.max(1.0, width), HxMath.max(1.0, height), 1.0] : Array<Dynamic>), format: 'depth24plus-stencil8', usage: _Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'RENDER_ATTACHMENT') }] : Array<Dynamic>));
     _Runtime.setField(runtime, 'depthStencilTexture', texture);
     _Runtime.setField(runtime, 'depthStencilView', _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>)));
     _Runtime.setField(runtime, 'depthStencilWidth', width);

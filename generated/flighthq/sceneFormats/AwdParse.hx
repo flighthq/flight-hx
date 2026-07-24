@@ -136,7 +136,7 @@ class AwdParse {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromAwd: byte length is smaller than the 12-byte AWD header'] : Array<Dynamic>));
       return cast _Runtime.callValue(AwdParse.emptyAwdDocument__awdParse, cast ([] : Array<Dynamic>));
     }
-    view = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['DataView'] : Array<Dynamic>)), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
+    view = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.getIndex(source, 0.0), AWD_MAGIC_0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(source, 1.0), AWD_MAGIC_1)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(source, 2.0), AWD_MAGIC_2)))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromAwd: magic is not \'AWD\'; not an AWD file'] : Array<Dynamic>));
       return cast _Runtime.callValue(AwdParse.emptyAwdDocument__awdParse, cast ([] : Array<Dynamic>));
@@ -147,13 +147,13 @@ class AwdParse {
       return cast _Runtime.callValue(AwdParse.emptyAwdDocument__awdParse, cast ([] : Array<Dynamic>));
     }
     bodyLength = _Runtime.callProperty(view, 'getUint32', cast ([8.0, true] : Array<Dynamic>));
-    bodyEnd = _Runtime.callProperty(HxMath, 'min', cast ([(AWD_HEADER_BYTES + bodyLength), _Runtime.field(source, 'byteLength')] : Array<Dynamic>));
-    geometryBlocks = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
-    containerBlocks = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
-    meshInstanceBlocks = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
-    materialBlocks = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
-    textureBlocks = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
-    skeletonBlocks = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    bodyEnd = HxMath.min((AWD_HEADER_BYTES + bodyLength), _Runtime.field(source, 'byteLength'));
+    geometryBlocks = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    containerBlocks = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    meshInstanceBlocks = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    materialBlocks = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    textureBlocks = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    skeletonBlocks = _Runtime.construct(_Runtime.globalValue('Map'), []);
     offset = AWD_HEADER_BYTES;
     while (_Runtime.truthy(_Runtime.compare((offset + AWD_BLOCK_HEADER_BYTES), bodyEnd, '<='))) {
       var blockId:Dynamic = _Runtime.callProperty(view, 'getUint32', cast ([offset, true] : Array<Dynamic>));
@@ -192,7 +192,7 @@ class AwdParse {
       (offset = cast ((blockDataStart + blockLength) : Dynamic));
     }
     document = _Runtime.callValue(AwdParse.emptyAwdDocument__awdParse, cast ([] : Array<Dynamic>));
-    nodeIndexForBlock = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    nodeIndexForBlock = _Runtime.construct(_Runtime.globalValue('Map'), []);
     skeletonJointNodeIndices = cast ([] : Array<Dynamic>);
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(skeletonBlocks, 'size'), 0.0, '>'))) {
       var built:Dynamic = _Runtime.callValue(AwdParse.buildAwdSkeletonDocument__awdParse, cast ([_Runtime.field(_Runtime.callProperty(_Runtime.callProperty(skeletonBlocks, 'values', cast ([] : Array<Dynamic>)), 'next', cast ([] : Array<Dynamic>)), 'value'), document] : Array<Dynamic>));
@@ -211,7 +211,7 @@ class AwdParse {
       _Runtime.callProperty(_Runtime.field(document, 'nodes'), 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: SceneNodeKind, name: _Runtime.orValue(_Runtime.field(container, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: _Runtime.callValue(AwdParse.awdTransformToTransform3D__awdParse, cast ([_Runtime.field(container, 'transform')] : Array<Dynamic>)) }] : Array<Dynamic>));
       _Runtime.callProperty(nodeIndexForBlock, 'set', cast ([blockId, nodeIndex] : Array<Dynamic>));
     }
-    resolvedMaterials = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    resolvedMaterials = _Runtime.construct(_Runtime.globalValue('Map'), []);
     materialForSubset = function(meshInst:ParsedMeshInstance__awdParse, subsetIndex:Float) {
       var materialId:Dynamic = cast _Runtime.UNDEFINED;
       var index:Dynamic = cast _Runtime.UNDEFINED;
@@ -260,7 +260,7 @@ class AwdParse {
       }
       _Runtime.callProperty(nodeIndexForBlock, 'set', cast ([blockId, nodeIndex] : Array<Dynamic>));
     }
-    parented = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
+    parented = _Runtime.construct(_Runtime.globalValue('Set'), []);
     for (__iteration2 in _Runtime.iterable(containerBlocks)) {
       var blockId:Dynamic = _Runtime.getIndex(__iteration2, 0.0);
       var container:Dynamic = _Runtime.getIndex(__iteration2, 1.0);
@@ -311,7 +311,7 @@ class AwdParse {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseAwdSkeletonAnimations: byte length is smaller than the 12-byte AWD header'] : Array<Dynamic>));
       return cast {  };
     }
-    view = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['DataView'] : Array<Dynamic>)), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
+    view = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.getIndex(source, 0.0), AWD_MAGIC_0), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(source, 1.0), AWD_MAGIC_1)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.getIndex(source, 2.0), AWD_MAGIC_2)))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['parseAwdSkeletonAnimations: magic is not \'AWD\'; not an AWD file'] : Array<Dynamic>));
       return cast {  };
@@ -322,10 +322,10 @@ class AwdParse {
       return cast {  };
     }
     bodyLength = _Runtime.callProperty(view, 'getUint32', cast ([8.0, true] : Array<Dynamic>));
-    bodyEnd = _Runtime.callProperty(HxMath, 'min', cast ([(AWD_HEADER_BYTES + bodyLength), _Runtime.field(source, 'byteLength')] : Array<Dynamic>));
-    skeletonBlocks = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
-    poseBlocks = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
-    animationBlocks = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    bodyEnd = HxMath.min((AWD_HEADER_BYTES + bodyLength), _Runtime.field(source, 'byteLength'));
+    skeletonBlocks = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    poseBlocks = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    animationBlocks = _Runtime.construct(_Runtime.globalValue('Map'), []);
     offset = AWD_HEADER_BYTES;
     while (_Runtime.truthy(_Runtime.compare((offset + AWD_BLOCK_HEADER_BYTES), bodyEnd, '<='))) {
       var blockId:Dynamic = _Runtime.callProperty(view, 'getUint32', cast ([offset, true] : Array<Dynamic>));
@@ -454,12 +454,12 @@ class AwdParse {
     var animations:Array<SceneDocumentAnimation> = cast _Runtime.UNDEFINED;
     var index:Dynamic = cast _Runtime.UNDEFINED;
     source = (cast bytes : Dynamic);
-    view = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['DataView'] : Array<Dynamic>)), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
+    view = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
     bodyLength = _Runtime.callProperty(view, 'getUint32', cast ([8.0, true] : Array<Dynamic>));
-    bodyEnd = _Runtime.callProperty(HxMath, 'min', cast ([(AWD_HEADER_BYTES + bodyLength), _Runtime.field(source, 'byteLength')] : Array<Dynamic>));
-    skeletonBlocks = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
-    poseBlocks = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
-    animationBlocks = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    bodyEnd = HxMath.min((AWD_HEADER_BYTES + bodyLength), _Runtime.field(source, 'byteLength'));
+    skeletonBlocks = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    poseBlocks = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    animationBlocks = _Runtime.construct(_Runtime.globalValue('Map'), []);
     offset = AWD_HEADER_BYTES;
     while (_Runtime.truthy(_Runtime.compare((offset + AWD_BLOCK_HEADER_BYTES), bodyEnd, '<='))) {
       var namespace:Dynamic = _Runtime.getIndex(source, (offset + 4.0));
@@ -644,7 +644,7 @@ class AwdParse {
     var value:Dynamic = cast _Runtime.UNDEFINED;
     length = _Runtime.callProperty((cast view : Dynamic), 'getUint16', cast ([offset, true] : Array<Dynamic>));
     stringBytes = (cast source : Dynamic).subarray(Std.int((offset + 2.0)), Std.int(((offset + 2.0) + length)));
-    value = _Runtime.callProperty(_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['TextDecoder'] : Array<Dynamic>)), []), 'decode', cast ([stringBytes] : Array<Dynamic>));
+    value = _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('TextDecoder'), []), 'decode', cast ([stringBytes] : Array<Dynamic>));
     return cast { end: ((offset + 2.0) + length), value: value };
     return cast null;
   }
@@ -654,7 +654,7 @@ class AwdParse {
     var transform:Dynamic = cast _Runtime.UNDEFINED;
     var floatSize:Dynamic = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
-    transform = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float64Array'] : Array<Dynamic>)), [12.0]);
+    transform = _Runtime.construct(_Runtime.globalValue('Float64Array'), [12.0]);
     floatSize = _Runtime.select(widePrecision, function():Dynamic return cast 8.0, function():Dynamic return cast 4.0);
     {
       var i:Dynamic = 0.0;
@@ -809,7 +809,7 @@ class AwdParse {
             break;
           }
           if (_Runtime.truthy(_Runtime.strictEquals(streamType, AWD_STREAM_JOINT_INDICES))) {
-            var jointCount:Dynamic = _Runtime.callProperty(HxMath, 'floor', cast ([(streamByteLength / 2.0)] : Array<Dynamic>));
+            var jointCount:Dynamic = HxMath.floor((streamByteLength / 2.0));
             var values:Array<Float> = cast ([] : Array<Dynamic>);
             {
               var i:Dynamic = 0.0;
@@ -823,7 +823,7 @@ class AwdParse {
             continue;
           }
           var elementSize:Dynamic = _Runtime.callValue(AwdParse.awdDataTypeByteSize__awdParse, cast ([dataType] : Array<Dynamic>));
-          var count:Dynamic = _Runtime.callProperty(HxMath, 'floor', cast ([(streamByteLength / elementSize)] : Array<Dynamic>));
+          var count:Dynamic = HxMath.floor((streamByteLength / elementSize));
           var values:Array<Float> = cast ([] : Array<Dynamic>);
           {
             var i:Dynamic = 0.0;
@@ -870,7 +870,7 @@ class AwdParse {
         var vertexCount:Dynamic = (_Runtime.field(positions, 'length') / 3.0);
         var jointsPerVertex:Dynamic = 0.0;
         if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(jointIndices, null), function():Dynamic return cast !_Runtime.strictEquals(jointWeights, null)), function():Dynamic return cast _Runtime.compare(vertexCount, 0.0, '>')))) {
-          (jointsPerVertex = cast (_Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(jointWeights, 'length') / vertexCount)] : Array<Dynamic>)) : Dynamic));
+          (jointsPerVertex = cast (HxMath.floor((_Runtime.field(jointWeights, 'length') / vertexCount)) : Dynamic));
           if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(jointsPerVertex, 1.0, '<'), function():Dynamic return cast _Runtime.compare(_Runtime.field(jointIndices, 'length'), (vertexCount * jointsPerVertex), '<')))) {
             _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromAwd: skin streams do not match vertex count; sub-mesh imported without skin'] : Array<Dynamic>));
             (jointsPerVertex = cast (0.0 : Dynamic));
@@ -878,7 +878,7 @@ class AwdParse {
         }
         var skinned:Dynamic = _Runtime.compare(jointsPerVertex, 0.0, '>');
         var floatsPerVertex:Dynamic = _Runtime.select(skinned, function():Dynamic return cast SKINNED_FLOATS_PER_VERTEX, function():Dynamic return cast CANONICAL_FLOATS_PER_VERTEX);
-        var vertices:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(vertexCount * floatsPerVertex)]);
+        var vertices:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * floatsPerVertex)]);
         var jointScratch:Dynamic = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
         var weightScratch:Dynamic = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
         {
@@ -925,7 +925,7 @@ class AwdParse {
             v++;
           }
         }
-        var indexArray:Dynamic = _Runtime.select(!_Runtime.strictEquals(indices, null), function():Dynamic return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), 'from', cast ([indices] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
+        var indexArray:Dynamic = _Runtime.select(!_Runtime.strictEquals(indices, null), function():Dynamic return cast _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([indices] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
         var geometry:Dynamic = _Runtime.callValue(createMeshGeometry, cast ([{ indices: indexArray, layout: _Runtime.select(skinned, function():Dynamic return cast CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT, function():Dynamic return cast CANONICAL_LAYOUT), vertices: vertices }] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(normals, null), function():Dynamic return cast !_Runtime.strictEquals(indexArray, _Runtime.field(_Runtime, 'UNDEFINED'))))) { _Runtime.callValue(computeMeshGeometryNormals, cast ([geometry, geometry] : Array<Dynamic>)); }
         _Runtime.callProperty(geometries, 'push', cast ([{ geometry: geometry, skinned: skinned }] : Array<Dynamic>));
@@ -1098,11 +1098,11 @@ class AwdParse {
     var listLength:Dynamic = cast _Runtime.UNDEFINED;
     var listEnd:Dynamic = cast _Runtime.UNDEFINED;
     dv = (cast view : Dynamic);
-    values = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    values = _Runtime.construct(_Runtime.globalValue('Map'), []);
     if (_Runtime.truthy(_Runtime.compare((offset + 4.0), end, '>'))) { return cast { end: offset, values: values }; }
     listLength = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
     (offset = cast ((offset + 4.0) : Dynamic));
-    listEnd = _Runtime.callProperty(HxMath, 'min', cast ([(offset + listLength), end] : Array<Dynamic>));
+    listEnd = HxMath.min((offset + listLength), end);
     while (_Runtime.truthy(_Runtime.compare((offset + 6.0), listEnd, '<='))) {
       var key:Dynamic = _Runtime.callProperty(dv, 'getUint16', cast ([offset, true] : Array<Dynamic>));
       (offset = cast ((offset + 2.0) : Dynamic));

@@ -48,7 +48,7 @@ class OrbitCameraController {
     polar = _Runtime.coalesce(_Runtime.optionalField(options, 'polar'), function():Dynamic return cast 0.0);
     distance = _Runtime.coalesce(_Runtime.optionalField(options, 'distance'), function():Dynamic return cast 10.0);
     target = _Runtime.optionalField(options, 'target');
-    return cast _Runtime.callValue(createEntity, cast ([{ azimuth: azimuth, distance: distance, goalAzimuth: azimuth, goalDistance: distance, goalPolar: polar, maxDistance: _Runtime.coalesce(_Runtime.optionalField(options, 'maxDistance'), function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY')), maxPolar: _Runtime.coalesce(_Runtime.optionalField(options, 'maxPolar'), function():Dynamic return cast OrbitCameraController.DEFAULT_MAX_POLAR__orbitCameraController), minDistance: _Runtime.coalesce(_Runtime.optionalField(options, 'minDistance'), function():Dynamic return cast OrbitCameraController.DEFAULT_MIN_DISTANCE__orbitCameraController), minPolar: _Runtime.coalesce(_Runtime.optionalField(options, 'minPolar'), function():Dynamic return cast OrbitCameraController.DEFAULT_MIN_POLAR__orbitCameraController), polar: polar, smoothTime: _Runtime.coalesce(_Runtime.optionalField(options, 'smoothTime'), function():Dynamic return cast 0.0), target: _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(_Runtime.optionalField(target, 'x'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalField(target, 'y'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalField(target, 'z'), function():Dynamic return cast 0.0)] : Array<Dynamic>)) }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ azimuth: azimuth, distance: distance, goalAzimuth: azimuth, goalDistance: distance, goalPolar: polar, maxDistance: _Runtime.coalesce(_Runtime.optionalField(options, 'maxDistance'), function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY')), maxPolar: _Runtime.coalesce(_Runtime.optionalField(options, 'maxPolar'), function():Dynamic return cast OrbitCameraController.DEFAULT_MAX_POLAR__orbitCameraController), minDistance: _Runtime.coalesce(_Runtime.optionalField(options, 'minDistance'), function():Dynamic return cast OrbitCameraController.DEFAULT_MIN_DISTANCE__orbitCameraController), minPolar: _Runtime.coalesce(_Runtime.optionalField(options, 'minPolar'), function():Dynamic return cast OrbitCameraController.DEFAULT_MIN_POLAR__orbitCameraController), polar: polar, smoothTime: _Runtime.coalesce(_Runtime.optionalField(options, 'smoothTime'), function():Dynamic return cast 0.0), target: _Runtime.callValue(createVector3, cast ([_Runtime.coalesce(_Runtime.optionalField(target, 'x'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalField(target, 'y'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalField(target, 'z'), function():Dynamic return cast 0.0)] : Array<Dynamic>)) }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -65,8 +65,8 @@ class OrbitCameraController {
     var cosAzimuth:Dynamic = cast _Runtime.UNDEFINED;
     var sinAzimuth:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
-    cosAzimuth = _Runtime.callProperty(HxMath, 'cos', cast ([_Runtime.field(controller, 'goalAzimuth')] : Array<Dynamic>));
-    sinAzimuth = _Runtime.callProperty(HxMath, 'sin', cast ([_Runtime.field(controller, 'goalAzimuth')] : Array<Dynamic>));
+    cosAzimuth = HxMath.cos(_Runtime.field(controller, 'goalAzimuth'));
+    sinAzimuth = HxMath.sin(_Runtime.field(controller, 'goalAzimuth'));
     target = _Runtime.field(controller, 'target');
     _Runtime.setField(target, 'x', (_Runtime.field(target, 'x') + (cosAzimuth * deltaRight)));
     _Runtime.setField(target, 'y', (_Runtime.field(target, 'y') + deltaUp));
@@ -79,10 +79,10 @@ class OrbitCameraController {
     var cosPolar:Dynamic = cast _Runtime.UNDEFINED;
     var sinPolar:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
-    cosAzimuth = _Runtime.callProperty(HxMath, 'cos', cast ([_Runtime.field(controller, 'goalAzimuth')] : Array<Dynamic>));
-    sinAzimuth = _Runtime.callProperty(HxMath, 'sin', cast ([_Runtime.field(controller, 'goalAzimuth')] : Array<Dynamic>));
-    cosPolar = _Runtime.callProperty(HxMath, 'cos', cast ([_Runtime.field(controller, 'goalPolar')] : Array<Dynamic>));
-    sinPolar = _Runtime.callProperty(HxMath, 'sin', cast ([_Runtime.field(controller, 'goalPolar')] : Array<Dynamic>));
+    cosAzimuth = HxMath.cos(_Runtime.field(controller, 'goalAzimuth'));
+    sinAzimuth = HxMath.sin(_Runtime.field(controller, 'goalAzimuth'));
+    cosPolar = HxMath.cos(_Runtime.field(controller, 'goalPolar'));
+    sinPolar = HxMath.sin(_Runtime.field(controller, 'goalPolar'));
     target = _Runtime.field(controller, 'target');
     _Runtime.setField(target, 'x', (_Runtime.field(target, 'x') + ((cosAzimuth * deltaRight) - ((sinAzimuth * sinPolar) * deltaUp))));
     _Runtime.setField(target, 'y', (_Runtime.field(target, 'y') + (cosPolar * deltaUp)));
@@ -103,7 +103,7 @@ class OrbitCameraController {
     _Runtime.setField(controller, 'goalAzimuth', azimuth);
     _Runtime.setField(controller, 'goalDistance', distance);
     _Runtime.setField(controller, 'goalPolar', polar);
-    _Runtime.setField(controller, 'maxDistance', _Runtime.coalesce(_Runtime.optionalField(options, 'maxDistance'), function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY')));
+    _Runtime.setField(controller, 'maxDistance', _Runtime.coalesce(_Runtime.optionalField(options, 'maxDistance'), function():Dynamic return cast _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY')));
     _Runtime.setField(controller, 'maxPolar', _Runtime.coalesce(_Runtime.optionalField(options, 'maxPolar'), function():Dynamic return cast OrbitCameraController.DEFAULT_MAX_POLAR__orbitCameraController));
     _Runtime.setField(controller, 'minDistance', _Runtime.coalesce(_Runtime.optionalField(options, 'minDistance'), function():Dynamic return cast OrbitCameraController.DEFAULT_MIN_DISTANCE__orbitCameraController));
     _Runtime.setField(controller, 'minPolar', _Runtime.coalesce(_Runtime.optionalField(options, 'minPolar'), function():Dynamic return cast OrbitCameraController.DEFAULT_MIN_POLAR__orbitCameraController));
@@ -141,10 +141,10 @@ class OrbitCameraController {
       _Runtime.setField(controller, 'polar', goalPolar);
       _Runtime.setField(controller, 'distance', goalDistance);
     }
-    cosPolar = _Runtime.callProperty(HxMath, 'cos', cast ([_Runtime.field(controller, 'polar')] : Array<Dynamic>));
-    sinPolar = _Runtime.callProperty(HxMath, 'sin', cast ([_Runtime.field(controller, 'polar')] : Array<Dynamic>));
-    cosAzimuth = _Runtime.callProperty(HxMath, 'cos', cast ([_Runtime.field(controller, 'azimuth')] : Array<Dynamic>));
-    sinAzimuth = _Runtime.callProperty(HxMath, 'sin', cast ([_Runtime.field(controller, 'azimuth')] : Array<Dynamic>));
+    cosPolar = HxMath.cos(_Runtime.field(controller, 'polar'));
+    sinPolar = HxMath.sin(_Runtime.field(controller, 'polar'));
+    cosAzimuth = HxMath.cos(_Runtime.field(controller, 'azimuth'));
+    sinAzimuth = HxMath.sin(_Runtime.field(controller, 'azimuth'));
     target = _Runtime.field(controller, 'target');
     _Runtime.setField(OrbitCameraController.scratchEye__orbitCameraController, 'x', (_Runtime.field(target, 'x') + ((_Runtime.field(controller, 'distance') * sinAzimuth) * cosPolar)));
     _Runtime.setField(OrbitCameraController.scratchEye__orbitCameraController, 'y', (_Runtime.field(target, 'y') + (_Runtime.field(controller, 'distance') * sinPolar)));

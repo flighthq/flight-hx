@@ -101,7 +101,7 @@ class Vector4 {
     lb = _Runtime.callValue(getVector4Length, cast ([b] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(la, 0.0), function():Dynamic return cast _Runtime.strictEquals(lb, 0.0)))) { return cast HxMath.NaN; }
     _dot = (_Runtime.callValue(getVector4Dot, cast ([a, b] : Array<Dynamic>)) / (la * lb));
-    return cast _Runtime.callProperty(HxMath, 'acos', cast ([_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([-1.0, _dot] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, _dot)));
     return cast null;
   }
 
@@ -114,7 +114,7 @@ class Vector4 {
     y = (_Runtime.field(b, 'y') - _Runtime.field(a, 'y'));
     z = (_Runtime.field(b, 'z') - _Runtime.field(a, 'z'));
     w = (_Runtime.field(b, 'w') - _Runtime.field(a, 'w'));
-    return cast _Runtime.callProperty(HxMath, 'sqrt', cast ([(((HxMath.pow(x, 2.0) + HxMath.pow(y, 2.0)) + HxMath.pow(z, 2.0)) + HxMath.pow(w, 2.0))] : Array<Dynamic>));
+    return cast HxMath.sqrt((((HxMath.pow(x, 2.0) + HxMath.pow(y, 2.0)) + HxMath.pow(z, 2.0)) + HxMath.pow(w, 2.0)));
     return cast null;
   }
 
@@ -137,7 +137,7 @@ class Vector4 {
   }
 
   public static function getVector4Length(source:Vector4Like):Float {
-    return cast _Runtime.callProperty(HxMath, 'sqrt', cast ([(((HxMath.pow(_Runtime.field(source, 'x'), 2.0) + HxMath.pow(_Runtime.field(source, 'y'), 2.0)) + HxMath.pow(_Runtime.field(source, 'z'), 2.0)) + HxMath.pow(_Runtime.field(source, 'w'), 2.0))] : Array<Dynamic>));
+    return cast HxMath.sqrt((((HxMath.pow(_Runtime.field(source, 'x'), 2.0) + HxMath.pow(_Runtime.field(source, 'y'), 2.0)) + HxMath.pow(_Runtime.field(source, 'z'), 2.0)) + HxMath.pow(_Runtime.field(source, 'w'), 2.0)));
     return cast null;
   }
 
@@ -183,7 +183,7 @@ class Vector4 {
   }
 
   public static function nearEqualsVector4(a:Vector4Like, b:Vector4Like, tolerance:Float = 0.000001):Bool {
-    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.field(a, 'x') - _Runtime.field(b, 'x'))] : Array<Dynamic>)), tolerance, '<'), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.field(a, 'y') - _Runtime.field(b, 'y'))] : Array<Dynamic>)), tolerance, '<')), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.field(a, 'z') - _Runtime.field(b, 'z'))] : Array<Dynamic>)), tolerance, '<')), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.field(a, 'w') - _Runtime.field(b, 'w'))] : Array<Dynamic>)), tolerance, '<'));
+    return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(HxMath.abs((_Runtime.field(a, 'x') - _Runtime.field(b, 'x'))), tolerance, '<'), function():Dynamic return cast _Runtime.compare(HxMath.abs((_Runtime.field(a, 'y') - _Runtime.field(b, 'y'))), tolerance, '<')), function():Dynamic return cast _Runtime.compare(HxMath.abs((_Runtime.field(a, 'z') - _Runtime.field(b, 'z'))), tolerance, '<')), function():Dynamic return cast _Runtime.compare(HxMath.abs((_Runtime.field(a, 'w') - _Runtime.field(b, 'w'))), tolerance, '<'));
     return cast null;
   }
 

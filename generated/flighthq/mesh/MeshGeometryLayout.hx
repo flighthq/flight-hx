@@ -22,12 +22,12 @@ class MeshGeometryLayout {
     var mappings:Array<AttributeMapping__meshGeometryLayout> = cast _Runtime.UNDEFINED;
     srcStride = _Runtime.field(_Runtime.field(source, 'layout'), 'stride');
     dstStride = _Runtime.field(targetLayout, 'stride');
-    vertexCount = _Runtime.select(_Runtime.compare(srcStride, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(_Runtime.field(source, 'vertices'), 'byteLength') / srcStride)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
-    dstVertices = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [((vertexCount * dstStride) / 4.0)]);
-    sourceBytes = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [_Runtime.field(_Runtime.field(source, 'vertices'), 'buffer'), _Runtime.field(_Runtime.field(source, 'vertices'), 'byteOffset'), _Runtime.field(_Runtime.field(source, 'vertices'), 'byteLength')]);
-    destinationBytes = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [_Runtime.field(dstVertices, 'buffer')]);
-    sourceView = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['DataView'] : Array<Dynamic>)), [_Runtime.field(sourceBytes, 'buffer'), _Runtime.field(sourceBytes, 'byteOffset'), _Runtime.field(sourceBytes, 'byteLength')]);
-    destinationView = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['DataView'] : Array<Dynamic>)), [_Runtime.field(destinationBytes, 'buffer')]);
+    vertexCount = _Runtime.select(_Runtime.compare(srcStride, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(source, 'vertices'), 'byteLength') / srcStride)), function():Dynamic return cast 0.0);
+    dstVertices = _Runtime.construct(_Runtime.globalValue('Float32Array'), [((vertexCount * dstStride) / 4.0)]);
+    sourceBytes = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.field(_Runtime.field(source, 'vertices'), 'buffer'), _Runtime.field(_Runtime.field(source, 'vertices'), 'byteOffset'), _Runtime.field(_Runtime.field(source, 'vertices'), 'byteLength')]);
+    destinationBytes = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.field(dstVertices, 'buffer')]);
+    sourceView = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(sourceBytes, 'buffer'), _Runtime.field(sourceBytes, 'byteOffset'), _Runtime.field(sourceBytes, 'byteLength')]);
+    destinationView = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(destinationBytes, 'buffer')]);
     mappings = cast ([] : Array<Dynamic>);
     for (dstAttr in _Runtime.iterable(_Runtime.field(targetLayout, 'attributes'))) {
       var srcAttr:Dynamic = _Runtime.find(_Runtime.field(_Runtime.field(source, 'layout'), 'attributes'), function(attribute:Dynamic) return _Runtime.strictEquals(_Runtime.field(attribute, 'semantic'), _Runtime.field(dstAttr, 'semantic')));
@@ -49,7 +49,7 @@ class MeshGeometryLayout {
             _Runtime.callProperty(destinationBytes, 'set', cast ([sourceBytes.subarray(Std.int(sourceOffset), Std.int((sourceOffset + _Runtime.field(mapping, 'sourceByteLength')))), destinationOffset] : Array<Dynamic>));
             continue;
           }
-          var componentCount:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callValue(MeshGeometryLayout.getVertexFormatComponentCount__meshGeometryLayout, cast ([_Runtime.field(_Runtime.field(mapping, 'source'), 'format')] : Array<Dynamic>)), _Runtime.callValue(MeshGeometryLayout.getVertexFormatComponentCount__meshGeometryLayout, cast ([_Runtime.field(_Runtime.field(mapping, 'destination'), 'format')] : Array<Dynamic>))] : Array<Dynamic>));
+          var componentCount:Dynamic = HxMath.min(_Runtime.callValue(MeshGeometryLayout.getVertexFormatComponentCount__meshGeometryLayout, cast ([_Runtime.field(_Runtime.field(mapping, 'source'), 'format')] : Array<Dynamic>)), _Runtime.callValue(MeshGeometryLayout.getVertexFormatComponentCount__meshGeometryLayout, cast ([_Runtime.field(_Runtime.field(mapping, 'destination'), 'format')] : Array<Dynamic>)));
           {
             var component:Dynamic = 0.0;
             while (_Runtime.truthy(_Runtime.compare(component, componentCount, '<'))) {
@@ -130,15 +130,15 @@ class MeshGeometryLayout {
         return;
       }
       else if (__switchValue == 'uint16x4') {
-        _Runtime.callProperty(view, 'setUint16', cast ([(byteOffset + (component * 2.0)), _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.callProperty(HxMath, 'min', cast ([65535.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, value] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)), true] : Array<Dynamic>));
+        _Runtime.callProperty(view, 'setUint16', cast ([(byteOffset + (component * 2.0)), HxMath.round(HxMath.min(65535.0, HxMath.max(0.0, value))), true] : Array<Dynamic>));
         return;
       }
       else if (__switchValue == 'uint8x4') {
-        _Runtime.callProperty(view, 'setUint8', cast ([(byteOffset + component), _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, value] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+        _Runtime.callProperty(view, 'setUint8', cast ([(byteOffset + component), HxMath.round(HxMath.min(255.0, HxMath.max(0.0, value)))] : Array<Dynamic>));
         return;
       }
       else if (__switchValue == 'unorm8x4') {
-        _Runtime.callProperty(view, 'setUint8', cast ([(byteOffset + component), _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, value] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>))] : Array<Dynamic>));
+        _Runtime.callProperty(view, 'setUint8', cast ([(byteOffset + component), HxMath.round((HxMath.min(1.0, HxMath.max(0.0, value)) * 255.0))] : Array<Dynamic>));
       }
     }
   }

@@ -39,7 +39,7 @@ class TextMarkup {
   }
 
   public static function codePointToString__textMarkup(code:Float, fallback:String):String {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([code] : Array<Dynamic>))), function():Dynamic return cast _Runtime.compare(code, 0.0, '<')), function():Dynamic return cast _Runtime.compare(code, 1114111.0, '>')))) { return cast fallback; }
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([code] : Array<Dynamic>))), function():Dynamic return cast _Runtime.compare(code, 0.0, '<')), function():Dynamic return cast _Runtime.compare(code, 1114111.0, '>')))) { return cast fallback; }
     return cast _Runtime.fromCodePoint(code);
     return cast null;
   }
@@ -54,8 +54,8 @@ class TextMarkup {
     return cast _Runtime.replace(value, _Runtime.regexp('&(#x[0-9a-f]+|#[0-9]+|[a-z]+);', 'gi'), function(matched:String, entity:String) {
       var lower:Dynamic = cast _Runtime.UNDEFINED;
       lower = _Runtime.callProperty(entity, 'toLowerCase', cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(StringTools.startsWith(lower, '#x'))) { return cast _Runtime.callValue(TextMarkup.codePointToString__textMarkup, cast ([_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'parseInt', cast ([_Runtime.slice(lower, 2.0, null), 16.0] : Array<Dynamic>)), matched] : Array<Dynamic>)); }
-      if (_Runtime.truthy(StringTools.startsWith(lower, '#'))) { return cast _Runtime.callValue(TextMarkup.codePointToString__textMarkup, cast ([_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'parseInt', cast ([_Runtime.slice(lower, 1.0, null), 10.0] : Array<Dynamic>)), matched] : Array<Dynamic>)); }
+      if (_Runtime.truthy(StringTools.startsWith(lower, '#x'))) { return cast _Runtime.callValue(TextMarkup.codePointToString__textMarkup, cast ([_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.slice(lower, 2.0, null), 16.0] : Array<Dynamic>)), matched] : Array<Dynamic>)); }
+      if (_Runtime.truthy(StringTools.startsWith(lower, '#'))) { return cast _Runtime.callValue(TextMarkup.codePointToString__textMarkup, cast ([_Runtime.callProperty(_Runtime.globalValue('Number'), 'parseInt', cast ([_Runtime.slice(lower, 1.0, null), 10.0] : Array<Dynamic>)), matched] : Array<Dynamic>)); }
       return cast _Runtime.coalesce(_Runtime.getIndex(TextMarkup.markupNamedEntities__textMarkup, lower), function():Dynamic return cast matched);
     }, false);
     return cast null;
@@ -68,8 +68,8 @@ class TextMarkup {
   public static function equalsMarkupFormat__textMarkup(a:TextFormat, b:TextFormat):Bool {
     var aKeys:Dynamic = cast _Runtime.UNDEFINED;
     var bKeys:Dynamic = cast _Runtime.UNDEFINED;
-    aKeys = (cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([a] : Array<Dynamic>)) : Array<TextFormat>);
-    bKeys = (cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([b] : Array<Dynamic>)) : Array<TextFormat>);
+    aKeys = (cast flighthq._internal.DynamicObject.keys(a) : Array<TextFormat>);
+    bKeys = (cast flighthq._internal.DynamicObject.keys(b) : Array<TextFormat>);
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(aKeys, 'length'), _Runtime.field(bKeys, 'length')))) { return cast false; }
     for (key in _Runtime.iterable(aKeys)) {
       var aValue:Dynamic = _Runtime.getIndex(a, key);
@@ -345,7 +345,7 @@ class TextMarkup {
   public static function pushMarkupRange__textMarkup(ranges:Array<TextFormatRange>, format:TextFormat, start:Float, end:Float):Void {
     var previous:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(start, end))) { return; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([format] : Array<Dynamic>)), 'length'), 0.0))) { return; }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(flighthq._internal.DynamicObject.keys(format), 'length'), 0.0))) { return; }
     previous = _Runtime.getIndex(ranges, (_Runtime.field(ranges, 'length') - 1.0));
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(previous, 'end'), start)), function():Dynamic return cast _Runtime.callValue(TextMarkup.equalsMarkupFormat__textMarkup, cast ([_Runtime.field(previous, 'format'), format] : Array<Dynamic>))))) {
       _Runtime.setField(previous, 'end', end);
@@ -383,8 +383,8 @@ class TextMarkup {
       }
     }
     for (range in _Runtime.iterable(_Runtime.field(content, 'formatRanges'))) {
-      var start:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([length, _Runtime.field(range, 'start')] : Array<Dynamic>))] : Array<Dynamic>));
-      var end:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([start, _Runtime.callProperty(HxMath, 'min', cast ([length, _Runtime.field(range, 'end')] : Array<Dynamic>))] : Array<Dynamic>));
+      var start:Dynamic = HxMath.max(0.0, HxMath.min(length, _Runtime.field(range, 'start')));
+      var end:Dynamic = HxMath.max(start, HxMath.min(length, _Runtime.field(range, 'end')));
       {
         var i:Dynamic = start;
         while (_Runtime.truthy(_Runtime.compare(i, end, '<'))) {

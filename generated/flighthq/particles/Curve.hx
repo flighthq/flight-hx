@@ -11,7 +11,7 @@ class Curve {
   public static function buildParticleColorCurve(f:Dynamic, samples:Dynamic = 33.0):Array<Float> {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var lut:Dynamic = cast _Runtime.UNDEFINED;
-    n = _Runtime.callProperty(HxMath, 'max', cast ([2.0, (Std.int(samples) | Std.int(0.0))] : Array<Dynamic>));
+    n = HxMath.max(2.0, (Std.int(samples) | Std.int(0.0)));
     lut = _Runtime.createArray((n * 3.0));
     {
       var i:Dynamic = 0.0;
@@ -33,7 +33,7 @@ class Curve {
   public static function buildParticleCurve(f:Dynamic, samples:Dynamic = 33.0):Array<Float> {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var lut:Dynamic = cast _Runtime.UNDEFINED;
-    n = _Runtime.callProperty(HxMath, 'max', cast ([2.0, (Std.int(samples) | Std.int(0.0))] : Array<Dynamic>));
+    n = HxMath.max(2.0, (Std.int(samples) | Std.int(0.0)));
     lut = _Runtime.createArray(n);
     {
       var i:Dynamic = 0.0;
@@ -103,7 +103,7 @@ class Curve {
   public static function particleColorCurveToKeyframes(lut:ParticleCurve):Array<ColorKeyframe> {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     var keys:Array<ColorKeyframe> = cast _Runtime.UNDEFINED;
-    n = _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(lut, 'length') / 3.0)] : Array<Dynamic>));
+    n = HxMath.floor((_Runtime.field(lut, 'length') / 3.0));
     if (_Runtime.truthy(_Runtime.strictEquals(n, 0.0))) { return cast cast ([] : Array<Dynamic>); }
     if (_Runtime.truthy(_Runtime.strictEquals(n, 1.0))) { return cast cast ([{ time: 0.0, r: _Runtime.getIndex(lut, 0.0), g: _Runtime.getIndex(lut, 1.0), b: _Runtime.getIndex(lut, 2.0) }] : Array<Dynamic>); }
     keys = _Runtime.createArray(n);
@@ -153,9 +153,9 @@ class Curve {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     c = (v * s);
-    x = (c * (1.0 - _Runtime.callProperty(HxMath, 'abs', cast ([(((h * 6.0) % 2.0) - 1.0)] : Array<Dynamic>))));
+    x = (c * (1.0 - HxMath.abs((((h * 6.0) % 2.0) - 1.0))));
     m = (v - c);
-    hi = (_Runtime.callProperty(HxMath, 'floor', cast ([(h * 6.0)] : Array<Dynamic>)) % 6.0);
+    hi = (HxMath.floor((h * 6.0)) % 6.0);
     r = 0.0;
     g = 0.0;
     b = 0.0;

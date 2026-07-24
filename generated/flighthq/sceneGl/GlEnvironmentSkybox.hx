@@ -25,21 +25,21 @@ class GlEnvironmentSkybox {
     gl = _Runtime.field(state, 'gl');
     sky = _Runtime.callValue(GlEnvironmentSkybox.ensureGlSkybox__glEnvironmentSkybox, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(getCamera3DInverseViewProjectionMatrix4, cast ([GlEnvironmentSkybox._inverseViewProjection__glEnvironmentSkybox, camera, aspect] : Array<Dynamic>));
-    prevDepthTest = (cast _Runtime.callProperty(gl, 'getParameter', cast ([_Runtime.field(gl, 'DEPTH_TEST')] : Array<Dynamic>)) : Bool);
-    _Runtime.callProperty(gl, 'depthMask', cast ([false] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'disable', cast ([_Runtime.field(gl, 'DEPTH_TEST')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'disable', cast ([_Runtime.field(gl, 'BLEND')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'useProgram', cast ([_Runtime.field(sky, 'program')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniformMatrix4fv', cast ([_Runtime.field(sky, 'locInverseViewProjection'), false, _Runtime.field(GlEnvironmentSkybox._inverseViewProjection__glEnvironmentSkybox, 'm')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(sky, 'locIntensity'), _Runtime.field(environment, 'intensity')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'activeTexture', cast ([_Runtime.field(gl, 'TEXTURE0')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_CUBE_MAP'), cube] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1i', cast ([_Runtime.field(sky, 'locEnvCube'), 0.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindVertexArray', cast ([_Runtime.field(sky, 'vao')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'drawArrays', cast ([_Runtime.field(gl, 'TRIANGLE_STRIP'), 0.0, 4.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindVertexArray', cast ([null] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'depthMask', cast ([true] : Array<Dynamic>));
-    if (_Runtime.truthy(prevDepthTest)) { _Runtime.callProperty(gl, 'enable', cast ([_Runtime.field(gl, 'DEPTH_TEST')] : Array<Dynamic>)); }
+    prevDepthTest = (cast flighthq._internal.WebGl2RenderingContext.call(gl, 'getParameter', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'DEPTH_TEST')] : Array<Dynamic>)) : Bool);
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'depthMask', cast ([false] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'disable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'DEPTH_TEST')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'disable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'BLEND')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'useProgram', cast ([_Runtime.field(sky, 'program')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniformMatrix4fv', cast ([_Runtime.field(sky, 'locInverseViewProjection'), false, _Runtime.field(GlEnvironmentSkybox._inverseViewProjection__glEnvironmentSkybox, 'm')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(sky, 'locIntensity'), _Runtime.field(environment, 'intensity')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE0')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_CUBE_MAP'), cube] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([_Runtime.field(sky, 'locEnvCube'), 0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindVertexArray', cast ([_Runtime.field(sky, 'vao')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'drawArrays', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TRIANGLE_STRIP'), 0.0, 4.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindVertexArray', cast ([null] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'depthMask', cast ([true] : Array<Dynamic>));
+    if (_Runtime.truthy(prevDepthTest)) { flighthq._internal.WebGl2RenderingContext.call(gl, 'enable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'DEPTH_TEST')] : Array<Dynamic>)); }
   }
 
   public static function ensureGlSkybox__glEnvironmentSkybox(state:GlRenderState):GlSkybox__glEnvironmentSkybox {
@@ -52,15 +52,15 @@ class GlEnvironmentSkybox {
     sky = _Runtime.callProperty(GlEnvironmentSkybox._skyboxes__glEnvironmentSkybox, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(sky, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast sky; }
     program = _Runtime.callValue(GlEnvironmentSkybox.linkGlSkyboxProgram__glEnvironmentSkybox, cast ([gl] : Array<Dynamic>));
-    vao = _Runtime.callProperty(gl, 'createVertexArray', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindVertexArray', cast ([vao] : Array<Dynamic>));
-    buffer = _Runtime.callProperty(gl, 'createBuffer', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), buffer] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bufferData', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), GlEnvironmentSkybox._quad__glEnvironmentSkybox, _Runtime.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'enableVertexAttribArray', cast ([0.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribPointer', cast ([0.0, 2.0, _Runtime.field(gl, 'FLOAT'), false, 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindVertexArray', cast ([null] : Array<Dynamic>));
-    (sky = cast ({ locEnvCube: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_envCube'] : Array<Dynamic>)), locInverseViewProjection: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_inverseViewProjection'] : Array<Dynamic>)), locIntensity: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_intensity'] : Array<Dynamic>)), program: program, vao: vao } : Dynamic));
+    vao = flighthq._internal.WebGl2RenderingContext.call(gl, 'createVertexArray', cast ([] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindVertexArray', cast ([vao] : Array<Dynamic>));
+    buffer = flighthq._internal.WebGl2RenderingContext.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), buffer] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), GlEnvironmentSkybox._quad__glEnvironmentSkybox, flighthq._internal.WebGl2RenderingContext.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([0.0, 2.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindVertexArray', cast ([null] : Array<Dynamic>));
+    (sky = cast ({ locEnvCube: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_envCube'] : Array<Dynamic>)), locInverseViewProjection: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_inverseViewProjection'] : Array<Dynamic>)), locIntensity: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_intensity'] : Array<Dynamic>)), program: program, vao: vao } : Dynamic));
     _Runtime.callProperty(GlEnvironmentSkybox._skyboxes__glEnvironmentSkybox, 'set', cast ([state, sky] : Array<Dynamic>));
     return cast sky;
     return cast null;
@@ -73,9 +73,9 @@ class GlEnvironmentSkybox {
 
   public static final _inverseViewProjection__glEnvironmentSkybox:Matrix4 = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 
-  public static final _quad__glEnvironmentSkybox:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [cast ([-1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, 1.0] : Array<Dynamic>)]);
+  public static final _quad__glEnvironmentSkybox:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [cast ([-1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, 1.0] : Array<Dynamic>)]);
 
-  public static final _skyboxes__glEnvironmentSkybox:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _skyboxes__glEnvironmentSkybox:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static final SKYBOX_VERTEX__glEnvironmentSkybox:Dynamic = '#version 300 es\nlayout(location = 0) in vec2 a_position;\nout vec2 v_ndc;\nvoid main() {\n  v_ndc = a_position;\n  // Emit at the far plane (z = w) so the backdrop sits behind every drawn fragment.\n  gl_Position = vec4(a_position, 1.0, 1.0);\n}\n';
 

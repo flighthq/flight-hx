@@ -40,7 +40,7 @@ class LinearSampledGaussian {
   }
 
   public static function getLinearSampledGaussianTapCount(sigma:Float):Float {
-    return cast _Runtime.callProperty(HxMath, 'ceil', cast ([(_Runtime.callValue(getGaussianKernelSize, cast ([sigma] : Array<Dynamic>)) / 2.0)] : Array<Dynamic>));
+    return cast HxMath.ceil((_Runtime.callValue(getGaussianKernelSize, cast ([sigma] : Array<Dynamic>)) / 2.0));
     return cast null;
   }
 

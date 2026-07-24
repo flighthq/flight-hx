@@ -13,8 +13,8 @@ class Luminance {
     var darker:Dynamic = cast _Runtime.UNDEFINED;
     la = _Runtime.callValue(getColorLuminance, cast ([a] : Array<Dynamic>));
     lb = _Runtime.callValue(getColorLuminance, cast ([b] : Array<Dynamic>));
-    lighter = _Runtime.callProperty(HxMath, 'max', cast ([la, lb] : Array<Dynamic>));
-    darker = _Runtime.callProperty(HxMath, 'min', cast ([la, lb] : Array<Dynamic>));
+    lighter = HxMath.max(la, lb);
+    darker = HxMath.min(la, lb);
     return cast ((lighter + 0.05) / (darker + 0.05));
     return cast null;
   }

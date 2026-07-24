@@ -38,7 +38,7 @@ class RichTextQuery {
     if (_Runtime.truthy(_Runtime.compare(y, closestLineBottom, '>'))) {
       var lineEnd:Dynamic = 0.0;
       for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), closestLineIndex))) { (lineEnd = cast (_Runtime.callProperty(HxMath, 'max', cast ([lineEnd, _Runtime.field(group, 'endIndex')] : Array<Dynamic>)) : Dynamic)); }
+        if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), closestLineIndex))) { (lineEnd = cast (HxMath.max(lineEnd, _Runtime.field(group, 'endIndex')) : Dynamic)); }
       }
       return cast lineEnd;
     }
@@ -46,8 +46,8 @@ class RichTextQuery {
     lineEnd = 0.0;
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), closestLineIndex))) { continue; }
-      (lineStart = cast (_Runtime.callProperty(HxMath, 'min', cast ([lineStart, _Runtime.field(group, 'startIndex')] : Array<Dynamic>)) : Dynamic));
-      (lineEnd = cast (_Runtime.callProperty(HxMath, 'max', cast ([lineEnd, _Runtime.field(group, 'endIndex')] : Array<Dynamic>)) : Dynamic));
+      (lineStart = cast (HxMath.min(lineStart, _Runtime.field(group, 'startIndex')) : Dynamic));
+      (lineEnd = cast (HxMath.max(lineEnd, _Runtime.field(group, 'endIndex')) : Dynamic));
       if (_Runtime.truthy(_Runtime.compare(x, _Runtime.field(group, 'offsetX'), '<='))) { return cast _Runtime.field(group, 'startIndex'); }
       if (_Runtime.truthy(_Runtime.compare(x, (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width')), '<='))) {
         var gx:Dynamic = _Runtime.field(group, 'offsetX');
@@ -83,11 +83,11 @@ class RichTextQuery {
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex))) { continue; }
       (found = cast (true : Dynamic));
-      (ascent = cast (_Runtime.callProperty(HxMath, 'max', cast ([ascent, _Runtime.field(group, 'ascent')] : Array<Dynamic>)) : Dynamic));
-      (descent = cast (_Runtime.callProperty(HxMath, 'max', cast ([descent, _Runtime.field(group, 'descent')] : Array<Dynamic>)) : Dynamic));
-      (leading = cast (_Runtime.callProperty(HxMath, 'max', cast ([leading, _Runtime.field(group, 'leading')] : Array<Dynamic>)) : Dynamic));
-      (x = cast (_Runtime.callProperty(HxMath, 'min', cast ([x, _Runtime.field(group, 'offsetX')] : Array<Dynamic>)) : Dynamic));
-      (right = cast (_Runtime.callProperty(HxMath, 'max', cast ([right, (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width'))] : Array<Dynamic>)) : Dynamic));
+      (ascent = cast (HxMath.max(ascent, _Runtime.field(group, 'ascent')) : Dynamic));
+      (descent = cast (HxMath.max(descent, _Runtime.field(group, 'descent')) : Dynamic));
+      (leading = cast (HxMath.max(leading, _Runtime.field(group, 'leading')) : Dynamic));
+      (x = cast (HxMath.min(x, _Runtime.field(group, 'offsetX')) : Dynamic));
+      (right = cast (HxMath.max(right, (_Runtime.field(group, 'offsetX') + _Runtime.field(group, 'width'))) : Dynamic));
     }
     if (_Runtime.truthy(!_Runtime.truthy(found))) { return cast null; }
     return cast { ascent: ascent, descent: descent, height: _Runtime.coalesce(_Runtime.getIndex(_Runtime.field(layout, 'lineHeights'), lineIndex), function():Dynamic return cast ((ascent + descent) + leading)), leading: leading, width: (right - x), x: _Runtime.select(_Runtime.strictEquals(x, HxMath.POSITIVE_INFINITY), function():Dynamic return cast 0.0, function():Dynamic return cast x) };
@@ -102,7 +102,7 @@ class RichTextQuery {
     group = _Runtime.callValue(RichTextQuery.getGroupContainingIndex__richTextQuery, cast ([layout, charIndex] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(group, null))) { return cast false; }
     x = _Runtime.field(group, 'offsetX');
-    limit = _Runtime.callProperty(HxMath, 'min', cast ([(charIndex - _Runtime.field(group, 'startIndex')), _Runtime.field(_Runtime.field(group, 'positions'), 'length')] : Array<Dynamic>));
+    limit = HxMath.min((charIndex - _Runtime.field(group, 'startIndex')), _Runtime.field(_Runtime.field(group, 'positions'), 'length'));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, limit, '<'))) {
@@ -121,7 +121,7 @@ class RichTextQuery {
 
   public static function getRichTextFirstCharInParagraph(text:String, charIndex:Float):Float {
     var clamped:Dynamic = cast _Runtime.UNDEFINED;
-    clamped = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(text, 'length'), charIndex] : Array<Dynamic>))] : Array<Dynamic>));
+    clamped = HxMath.max(0.0, HxMath.min(_Runtime.field(text, 'length'), charIndex));
     {
       var i:Dynamic = (clamped - 1.0);
       while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>='))) {
@@ -169,8 +169,8 @@ class RichTextQuery {
     end = 0.0;
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex))) { continue; }
-      (start = cast (_Runtime.callProperty(HxMath, 'min', cast ([start, _Runtime.field(group, 'startIndex')] : Array<Dynamic>)) : Dynamic));
-      (end = cast (_Runtime.callProperty(HxMath, 'max', cast ([end, _Runtime.field(group, 'endIndex')] : Array<Dynamic>)) : Dynamic));
+      (start = cast (HxMath.min(start, _Runtime.field(group, 'startIndex')) : Dynamic));
+      (end = cast (HxMath.max(end, _Runtime.field(group, 'endIndex')) : Dynamic));
     }
     return cast _Runtime.select(_Runtime.strictEquals(start, HxMath.POSITIVE_INFINITY), function():Dynamic return cast 0.0, function():Dynamic return cast (end - start));
     return cast null;
@@ -191,8 +191,8 @@ class RichTextQuery {
     end = 0.0;
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(group, 'lineIndex'), lineIndex))) { continue; }
-      (start = cast (_Runtime.callProperty(HxMath, 'min', cast ([start, _Runtime.field(group, 'startIndex')] : Array<Dynamic>)) : Dynamic));
-      (end = cast (_Runtime.callProperty(HxMath, 'max', cast ([end, _Runtime.field(group, 'endIndex')] : Array<Dynamic>)) : Dynamic));
+      (start = cast (HxMath.min(start, _Runtime.field(group, 'startIndex')) : Dynamic));
+      (end = cast (HxMath.max(end, _Runtime.field(group, 'endIndex')) : Dynamic));
     }
     return cast _Runtime.select(_Runtime.strictEquals(start, HxMath.POSITIVE_INFINITY), function():Dynamic return cast '', function():Dynamic return cast _Runtime.slice(text, start, end));
     return cast null;
@@ -225,11 +225,11 @@ class RichTextQuery {
     var end:Dynamic = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out, 0.0);
     if (_Runtime.truthy(_Runtime.strictEquals(beginIndex, endIndex))) { return; }
-    start = _Runtime.callProperty(HxMath, 'min', cast ([beginIndex, endIndex] : Array<Dynamic>));
-    end = _Runtime.callProperty(HxMath, 'max', cast ([beginIndex, endIndex] : Array<Dynamic>));
+    start = HxMath.min(beginIndex, endIndex);
+    end = HxMath.max(beginIndex, endIndex);
     for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      var groupStart:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([start, _Runtime.field(group, 'startIndex')] : Array<Dynamic>));
-      var groupEnd:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([end, _Runtime.field(group, 'endIndex')] : Array<Dynamic>));
+      var groupStart:Dynamic = HxMath.max(start, _Runtime.field(group, 'startIndex'));
+      var groupEnd:Dynamic = HxMath.min(end, _Runtime.field(group, 'endIndex'));
       if (_Runtime.truthy(_Runtime.compare(groupStart, groupEnd, '>='))) { continue; }
       var x:Dynamic = _Runtime.callValue(RichTextQuery.getCaretX__richTextQuery, cast ([group, groupStart] : Array<Dynamic>));
       var right:Dynamic = _Runtime.callValue(RichTextQuery.getCaretX__richTextQuery, cast ([group, groupEnd] : Array<Dynamic>));
@@ -241,7 +241,7 @@ class RichTextQuery {
     var x:Dynamic = cast _Runtime.UNDEFINED;
     var limit:Dynamic = cast _Runtime.UNDEFINED;
     x = _Runtime.field(group, 'offsetX');
-    limit = _Runtime.callProperty(HxMath, 'max', cast ([0.0, (_Runtime.callProperty(HxMath, 'min', cast ([index, _Runtime.field(group, 'endIndex')] : Array<Dynamic>)) - _Runtime.field(group, 'startIndex'))] : Array<Dynamic>));
+    limit = HxMath.max(0.0, (HxMath.min(index, _Runtime.field(group, 'endIndex')) - _Runtime.field(group, 'startIndex')));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, limit, '<'))) {

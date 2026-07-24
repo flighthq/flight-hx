@@ -32,7 +32,7 @@ class WgpuScale9Shape {
   public static function createWgpuScale9ShapeData(_state:RenderState, _source:Renderable):RendererData {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
-    canvas = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
+    canvas = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
     _Runtime.setField(canvas, 'width', 1.0);
     _Runtime.setField(canvas, 'height', 1.0);
     ctx = _Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
@@ -82,19 +82,19 @@ class WgpuScale9Shape {
     }
     shapeData = _Runtime.callValue(getWgpuRendererData, cast ([_Runtime.field(renderProxy, 'rendererData')] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(shapeData, null))) { return; }
-    w = _Runtime.callProperty(HxMath, 'ceil', cast ([(_Runtime.field(bounds, 'width') * _Runtime.field(source, 'scaleX'))] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'ceil', cast ([(_Runtime.field(bounds, 'height') * _Runtime.field(source, 'scaleY'))] : Array<Dynamic>));
+    w = HxMath.ceil((_Runtime.field(bounds, 'width') * _Runtime.field(source, 'scaleX')));
+    h = HxMath.ceil((_Runtime.field(bounds, 'height') * _Runtime.field(source, 'scaleY')));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(w, 0.0, '<='), function():Dynamic return cast _Runtime.compare(h, 0.0, '<=')))) { return; }
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(version, _Runtime.field(shapeData, 'lastContentId')), function():Dynamic return cast !_Runtime.strictEquals(w, _Runtime.field(shapeData, 'lastW'))), function():Dynamic return cast !_Runtime.strictEquals(h, _Runtime.field(shapeData, 'lastH'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleX'), _Runtime.field(shapeData, 'lastScaleX'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(source, 'scaleY'), _Runtime.field(shapeData, 'lastScaleY'))))) {
       _Runtime.setField(_Runtime.field(shapeData, 'canvas'), 'width', w);
       _Runtime.setField(_Runtime.field(shapeData, 'canvas'), 'height', h);
       var ctx:Dynamic = _Runtime.field(shapeData, 'ctx');
-      _Runtime.callProperty(ctx, 'clearRect', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
-      _Runtime.callProperty(ctx, 'save', cast ([] : Array<Dynamic>));
+      flighthq._internal.CanvasRenderingContext2D.call(ctx, 'clearRect', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
+      flighthq._internal.CanvasRenderingContext2D.call(ctx, 'save', cast ([] : Array<Dynamic>));
       _Runtime.callValue(remapWgpuScale9Commands, cast ([WgpuScale9Shape._remappedCommands__wgpuScale9Shape, commands, mapper] : Array<Dynamic>));
-      _Runtime.callProperty(ctx, 'translate', cast ([-_Runtime.field(bounds, 'x'), -_Runtime.field(bounds, 'y')] : Array<Dynamic>));
+      flighthq._internal.CanvasRenderingContext2D.call(ctx, 'translate', cast ([-_Runtime.field(bounds, 'x'), -_Runtime.field(bounds, 'y')] : Array<Dynamic>));
       _Runtime.callValue(renderCanvasShapeCommands, cast ([ctx, WgpuScale9Shape._remappedCommands__wgpuScale9Shape] : Array<Dynamic>));
-      _Runtime.callProperty(ctx, 'restore', cast ([] : Array<Dynamic>));
+      flighthq._internal.CanvasRenderingContext2D.call(ctx, 'restore', cast ([] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(shapeData, 'entry'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(shapeData, 'lastW'), w)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(shapeData, 'lastH'), h)))) {
         _Runtime.callOptionalProperty(_Runtime.optionalField(_Runtime.field(shapeData, 'entry'), 'texture'), 'destroy', cast ([] : Array<Dynamic>));
         _Runtime.setField(shapeData, 'entry', _Runtime.callValue(createWgpuTextureEntry, cast ([state, w, h, _Runtime.field(shapeData, 'canvas')] : Array<Dynamic>)));

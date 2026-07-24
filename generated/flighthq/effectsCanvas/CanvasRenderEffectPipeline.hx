@@ -28,8 +28,8 @@ class CanvasRenderEffectPipeline {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var target:Dynamic = cast _Runtime.UNDEFINED;
-    w = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([width] : Array<Dynamic>))] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([height] : Array<Dynamic>))] : Array<Dynamic>));
+    w = HxMath.max(1.0, HxMath.ceil(width));
+    h = HxMath.max(1.0, HxMath.ceil(height));
     target = _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(pool, 'free'), 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(createCanvasRenderTarget, cast ([w, h] : Array<Dynamic>)));
     if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(target, 'width'), w), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(target, 'height'), h)))) { _Runtime.callValue(resizeCanvasRenderTarget, cast ([target, w, h] : Array<Dynamic>)); }
     _Runtime.callProperty(_Runtime.field(pool, 'inUse'), 'push', cast ([target] : Array<Dynamic>));
@@ -137,13 +137,13 @@ class CanvasRenderEffectPipeline {
   public static function presentCanvasRenderEffectResult__canvasRenderEffectPipeline(state:Dynamic, source:Dynamic):Void {
     var context:Dynamic = cast _Runtime.UNDEFINED;
     context = _Runtime.field(state, 'context');
-    _Runtime.callProperty(context, 'save', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(context, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.setField(context, 'globalCompositeOperation', 'source-over');
-    _Runtime.setField(context, 'globalAlpha', 1.0);
-    _Runtime.setField(context, 'filter', 'none');
-    _Runtime.callProperty(context, 'clearRect', cast ([0.0, 0.0, _Runtime.field(_Runtime.field(state, 'canvas'), 'width'), _Runtime.field(_Runtime.field(state, 'canvas'), 'height')] : Array<Dynamic>));
-    _Runtime.callProperty(context, 'drawImage', cast ([_Runtime.field(source, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.callProperty(context, 'restore', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(context, 'save', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(context, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.setField(context, 'globalCompositeOperation', 'source-over');
+    flighthq._internal.CanvasRenderingContext2D.setField(context, 'globalAlpha', 1.0);
+    flighthq._internal.CanvasRenderingContext2D.setField(context, 'filter', 'none');
+    flighthq._internal.CanvasRenderingContext2D.call(context, 'clearRect', cast ([0.0, 0.0, _Runtime.field(_Runtime.field(state, 'canvas'), 'width'), _Runtime.field(_Runtime.field(state, 'canvas'), 'height')] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(context, 'drawImage', cast ([_Runtime.field(source, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(context, 'restore', cast ([] : Array<Dynamic>));
   }
 }

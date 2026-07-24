@@ -85,7 +85,7 @@ class SurfaceGradientFill {
             if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x, surfaceWidth, '>=')))) { px++; continue; }
             var dx:Dynamic = (px - focalX);
             var dy:Dynamic = (py - focalY);
-            var t:Dynamic = ((_Runtime.callProperty(HxMath, 'sqrt', cast ([((dx * dx) + (dy * dy))] : Array<Dynamic>)) * invRadius) - ((((dx * fdx) + (dy * fdy)) * invRadius) * invRadius));
+            var t:Dynamic = ((HxMath.sqrt(((dx * dx) + (dy * dy))) * invRadius) - ((((dx * fdx) + (dy * fdy)) * invRadius) * invRadius));
             var idx:Dynamic = _Runtime.callValue(SurfaceGradientFill.spreadIndex__surfaceGradientFill, cast ([t, spread] : Array<Dynamic>));
             var ri:Dynamic = (idx * 4.0);
             var i:Dynamic = (((y * surfaceWidth) + x) * 4.0);
@@ -108,22 +108,22 @@ class SurfaceGradientFill {
       var __switchValue = spread;
       if (__switchValue == 'repeat') {
         {
-          (s = cast ((t - _Runtime.callProperty(HxMath, 'floor', cast ([t] : Array<Dynamic>))) : Dynamic));
+          (s = cast ((t - HxMath.floor(t)) : Dynamic));
         }
       }
       else if (__switchValue == 'reflect') {
         {
-          var wrapped:Dynamic = (t - (_Runtime.callProperty(HxMath, 'floor', cast ([(t / 2.0)] : Array<Dynamic>)) * 2.0));
+          var wrapped:Dynamic = (t - (HxMath.floor((t / 2.0)) * 2.0));
           (s = cast (_Runtime.select(_Runtime.compare(wrapped, 1.0, '<='), function():Dynamic return cast wrapped, function():Dynamic return cast (2.0 - wrapped)) : Dynamic));
         }
       }
       else  {
         {
-          (s = cast (_Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, t] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));
+          (s = cast (HxMath.max(0.0, HxMath.min(1.0, t)) : Dynamic));
         }
       }
     }
-    return cast _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([(s * 255.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast HxMath.min(255.0, HxMath.round((s * 255.0)));
     return cast null;
   }
 }

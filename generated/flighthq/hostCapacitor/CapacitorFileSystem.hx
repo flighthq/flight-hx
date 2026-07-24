@@ -179,8 +179,8 @@ class CapacitorFileSystem {
   public static function base64ToBytes__capacitorFileSystem(base64:String):Dynamic {
     var binary:Dynamic = cast _Runtime.UNDEFINED;
     var bytes:Dynamic = cast _Runtime.UNDEFINED;
-    binary = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['atob'] : Array<Dynamic>)), cast ([base64] : Array<Dynamic>));
-    bytes = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [_Runtime.field(binary, 'length')]);
+    binary = _Runtime.callValue(_Runtime.globalValue('atob'), cast ([base64] : Array<Dynamic>));
+    bytes = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.field(binary, 'length')]);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(binary, 'length'), '<'))) {
@@ -202,7 +202,7 @@ class CapacitorFileSystem {
         i++;
       }
     }
-    return cast _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['btoa'] : Array<Dynamic>)), cast ([binary] : Array<Dynamic>));
+    return cast _Runtime.callValue(_Runtime.globalValue('btoa'), cast ([binary] : Array<Dynamic>));
     return cast null;
   }
 }

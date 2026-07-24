@@ -19,10 +19,10 @@ class SurfaceCompare {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(_Runtime.field(source, 'data'), 'length'), '<'))) {
-        var dr:Dynamic = _Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(_Runtime.field(source, 'data'), i) - _Runtime.getIndex(_Runtime.field(other, 'data'), i))] : Array<Dynamic>));
-        var dg:Dynamic = _Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 1.0)) - _Runtime.getIndex(_Runtime.field(other, 'data'), (i + 1.0)))] : Array<Dynamic>));
-        var db:Dynamic = _Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 2.0)) - _Runtime.getIndex(_Runtime.field(other, 'data'), (i + 2.0)))] : Array<Dynamic>));
-        var da:Dynamic = _Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 3.0)) - _Runtime.getIndex(_Runtime.field(other, 'data'), (i + 3.0)))] : Array<Dynamic>));
+        var dr:Dynamic = HxMath.abs((_Runtime.getIndex(_Runtime.field(source, 'data'), i) - _Runtime.getIndex(_Runtime.field(other, 'data'), i)));
+        var dg:Dynamic = HxMath.abs((_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 1.0)) - _Runtime.getIndex(_Runtime.field(other, 'data'), (i + 1.0))));
+        var db:Dynamic = HxMath.abs((_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 2.0)) - _Runtime.getIndex(_Runtime.field(other, 'data'), (i + 2.0))));
+        var da:Dynamic = HxMath.abs((_Runtime.getIndex(_Runtime.field(source, 'data'), (i + 3.0)) - _Runtime.getIndex(_Runtime.field(other, 'data'), (i + 3.0))));
         if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(dr, 0.0), function():Dynamic return cast !_Runtime.strictEquals(dg, 0.0)), function():Dynamic return cast !_Runtime.strictEquals(db, 0.0)), function():Dynamic return cast !_Runtime.strictEquals(da, 0.0)))) {
           _Runtime.setIndex(_Runtime.field(result, 'data'), i, dr);
           _Runtime.setIndex(_Runtime.field(result, 'data'), (i + 1.0), dg);
@@ -54,10 +54,10 @@ class SurfaceCompare {
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(a, 'length'), '<'))) {
-        var dr:Dynamic = _Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(a, i) - _Runtime.getIndex(b, i))] : Array<Dynamic>));
-        var dg:Dynamic = _Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(a, (i + 1.0)) - _Runtime.getIndex(b, (i + 1.0)))] : Array<Dynamic>));
-        var db:Dynamic = _Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(a, (i + 2.0)) - _Runtime.getIndex(b, (i + 2.0)))] : Array<Dynamic>));
-        var da:Dynamic = _Runtime.callProperty(HxMath, 'abs', cast ([(_Runtime.getIndex(a, (i + 3.0)) - _Runtime.getIndex(b, (i + 3.0)))] : Array<Dynamic>));
+        var dr:Dynamic = HxMath.abs((_Runtime.getIndex(a, i) - _Runtime.getIndex(b, i)));
+        var dg:Dynamic = HxMath.abs((_Runtime.getIndex(a, (i + 1.0)) - _Runtime.getIndex(b, (i + 1.0))));
+        var db:Dynamic = HxMath.abs((_Runtime.getIndex(a, (i + 2.0)) - _Runtime.getIndex(b, (i + 2.0))));
+        var da:Dynamic = HxMath.abs((_Runtime.getIndex(a, (i + 3.0)) - _Runtime.getIndex(b, (i + 3.0))));
         var pixelDelta:Dynamic = HxMath.max(HxMath.max(HxMath.max(dr, dg), db), da);
         if (_Runtime.truthy(_Runtime.compare(pixelDelta, maxChannelDelta, '>'))) { (maxChannelDelta = cast (pixelDelta : Dynamic)); }
         if (_Runtime.truthy(_Runtime.compare(pixelDelta, channelTolerance, '>'))) { mismatchedPixels++; }

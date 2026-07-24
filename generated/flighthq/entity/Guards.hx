@@ -14,7 +14,7 @@ class Guards {
   }
 
   public static function createGuardedEntity<Type>(entity:Type):Type {
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(Guards._guardsEnabled__guards), function():Dynamic return cast _Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['Proxy'] : Array<Dynamic>)), 'undefined')))) { return cast entity; }
+    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(Guards._guardsEnabled__guards), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined')))) { return cast entity; }
     return cast _Runtime.createProxy(entity, { set: function(target:Dynamic, prop:Dynamic, value:Dynamic) {
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(prop, EntityRuntimeKey), function():Dynamic return cast Guards._guardsEnabled__guards))) {
         _Runtime.console('warn', ['[entity] Direct write to EntityRuntimeKey detected. Use ensureEntityRuntime or attachEntityBinding instead.', entity]);
@@ -26,7 +26,7 @@ class Guards {
   }
 
   public static function createGuardedEntityRuntime(runtime:EntityRuntime):EntityRuntime {
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(Guards._guardsEnabled__guards), function():Dynamic return cast _Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['Proxy'] : Array<Dynamic>)), 'undefined')))) { return cast runtime; }
+    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(Guards._guardsEnabled__guards), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined')))) { return cast runtime; }
     return cast _Runtime.createProxy(runtime, { set: function(target:Dynamic, prop:Dynamic, value:Dynamic) {
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(prop, 'binding'), function():Dynamic return cast Guards._guardsEnabled__guards))) {
         _Runtime.console('warn', ['[entity] Direct write to EntityRuntime.binding detected. Use attachEntityBinding or detachEntityBinding instead.', runtime]);
@@ -38,7 +38,7 @@ class Guards {
   }
 
   public static function enableEntityRuntimeGuards():Void {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['Proxy'] : Array<Dynamic>)), 'undefined'))) { return; }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('Proxy'), 'undefined'))) { return; }
     (Guards._guardsEnabled__guards = cast (true : Dynamic));
   }
 

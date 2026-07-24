@@ -15,7 +15,7 @@ class EdgeDetectMath {
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
-    threshold = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.1)] : Array<Dynamic>));
+    threshold = HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.1));
     feather = (threshold * 0.5);
     color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 255.0);
     r = ((Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0)) / 255.0);
@@ -31,15 +31,15 @@ class EdgeDetectMath {
   }
 
   public static function computeOutlineThicknessPx(effect:OutlineEffect):Float {
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'thickness'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'thickness'), function():Dynamic return cast 1.0)));
     return cast null;
   }
 
   public static function computeSketchEdgeParams(effect:SketchEffect, out:Array<Float>):Void {
     var strength:Dynamic = cast _Runtime.UNDEFINED;
     var threshold:Dynamic = cast _Runtime.UNDEFINED;
-    strength = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
-    threshold = _Runtime.callProperty(HxMath, 'max', cast ([0.01, _Runtime.callProperty(HxMath, 'min', cast ([1.0, (1.0 - (strength * 0.95))] : Array<Dynamic>))] : Array<Dynamic>));
+    strength = HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0)));
+    threshold = HxMath.max(0.01, HxMath.min(1.0, (1.0 - (strength * 0.95))));
     _Runtime.setIndex(out, 0.0, threshold);
     _Runtime.setIndex(out, 1.0, strength);
   }

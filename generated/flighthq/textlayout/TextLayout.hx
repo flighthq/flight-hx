@@ -26,7 +26,7 @@ class TextLayout {
 
   public static final _charAdvances__textLayout:Array<Float> = cast ([] : Array<Dynamic>);
 
-  public static final _paragraphLastLines__textLayout:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
+  public static final _paragraphLastLines__textLayout:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), []);
 
   public static function computeTextLayout(out:TextLayoutResult, params:TextLayoutParams):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -139,7 +139,7 @@ class TextLayout {
       }
     }
     spaceW = (_Runtime.callValue(measure, cast (['    ', format] : Array<Dynamic>)) / 4.0);
-    tabW = (_Runtime.callProperty(HxMath, 'max', cast ([spaceW, 1.0] : Array<Dynamic>)) * 4.0);
+    tabW = (HxMath.max(spaceW, 1.0) * 4.0);
     return cast (tabW - (currentX % tabW));
     return cast null;
   }
@@ -197,7 +197,7 @@ class TextLayout {
     ascent = _Runtime.callValue(getTextFormatAscent, cast ([currentFormat] : Array<Dynamic>));
     descent = _Runtime.callValue(getTextFormatDescent, cast ([currentFormat] : Array<Dynamic>));
     leading = _Runtime.callValue(getTextFormatLeading, cast ([currentFormat] : Array<Dynamic>));
-    lineHeight = _Runtime.callProperty(HxMath, 'ceil', cast ([((ascent + descent) + leading)] : Array<Dynamic>));
+    lineHeight = HxMath.ceil(((ascent + descent) + leading));
     maxAscent = ascent;
     maxLineHeight = lineHeight;
     textIndex = 0.0;
@@ -219,7 +219,7 @@ class TextLayout {
       (ascent = cast (_Runtime.callValue(getTextFormatAscent, cast ([currentFormat] : Array<Dynamic>)) : Dynamic));
       (descent = cast (_Runtime.callValue(getTextFormatDescent, cast ([currentFormat] : Array<Dynamic>)) : Dynamic));
       (leading = cast (_Runtime.callValue(getTextFormatLeading, cast ([currentFormat] : Array<Dynamic>)) : Dynamic));
-      (lineHeight = cast (_Runtime.callProperty(HxMath, 'ceil', cast ([((ascent + descent) + leading)] : Array<Dynamic>)) : Dynamic));
+      (lineHeight = cast (HxMath.ceil(((ascent + descent) + leading)) : Dynamic));
       if (_Runtime.truthy(_Runtime.compare(lineHeight, maxLineHeight, '>'))) { (maxLineHeight = cast (lineHeight : Dynamic)); }
       if (_Runtime.truthy(_Runtime.compare(ascent, maxAscent, '>'))) { (maxAscent = cast (ascent : Dynamic)); }
     };
@@ -310,7 +310,7 @@ class TextLayout {
       if (_Runtime.truthy(!_Runtime.truthy(bulletPending))) { return; }
       (bulletPending = cast (false : Dynamic));
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(currentFormat, 'listMarker'), 'none'))) {
-        if (_Runtime.truthy(_Runtime.compare(indent, 0.0, '<='))) { (indent = cast ((_Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.callValue(measure, cast ([bulletChar, currentFormat] : Array<Dynamic>))] : Array<Dynamic>)) + 2.0) : Dynamic)); }
+        if (_Runtime.truthy(_Runtime.compare(indent, 0.0, '<='))) { (indent = cast ((HxMath.ceil(_Runtime.callValue(measure, cast ([bulletChar, currentFormat] : Array<Dynamic>))) + 2.0) : Dynamic)); }
         return;
       }
       bulletW = _Runtime.callValue(measure, cast ([bulletChar, currentFormat] : Array<Dynamic>));
@@ -326,14 +326,14 @@ class TextLayout {
       _Runtime.setField(bulletGroup, 'height', lineHeight);
       _Runtime.callProperty(groups, 'push', cast ([bulletGroup] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.compare(indent, 0.0, '<='))) {
-        (indent = cast ((_Runtime.callProperty(HxMath, 'ceil', cast ([bulletW] : Array<Dynamic>)) + 2.0) : Dynamic));
+        (indent = cast ((HxMath.ceil(bulletW) + 2.0) : Dynamic));
       }
     };
     placeSpan = function placeSpan(start:Float, end:Float):Void {
       var idx:Dynamic = cast _Runtime.UNDEFINED;
       idx = start;
       while (_Runtime.truthy(_Runtime.compare(idx, end, '<'))) {
-        var rangeEnd:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([end, _Runtime.field(formatRange, 'end')] : Array<Dynamic>));
+        var rangeEnd:Dynamic = HxMath.min(end, _Runtime.field(formatRange, 'end'));
         if (_Runtime.truthy(_Runtime.compare(idx, rangeEnd, '<'))) {
           if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(activeGroup, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(activeGroup, 'startIndex'), _Runtime.field(activeGroup, 'endIndex'))))) {
             (activeGroup = cast (_Runtime.callValue(createTextLayoutGroup, cast ([_Runtime.field(formatRange, 'format'), idx, rangeEnd] : Array<Dynamic>)) : Dynamic));
@@ -379,7 +379,7 @@ class TextLayout {
       idx = start;
       allPositions = cast ([] : Array<Dynamic>);
       while (_Runtime.truthy(_Runtime.compare(idx, end, '<'))) {
-        var rangeEnd:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([end, _Runtime.field(formatRange, 'end')] : Array<Dynamic>));
+        var rangeEnd:Dynamic = HxMath.min(end, _Runtime.field(formatRange, 'end'));
         if (_Runtime.truthy(_Runtime.compare(idx, rangeEnd, '<'))) {
           _Runtime.callValue(TextLayout.charAdvances__textLayout, cast ([TextLayout._charAdvances__textLayout, text, currentFormat, idx, rangeEnd, measure, ((offsetX + _Runtime.callValue(baseX, cast ([] : Array<Dynamic>))) + _Runtime.callValue(TextLayout.sumAdvances__textLayout, cast ([allPositions] : Array<Dynamic>)))] : Array<Dynamic>));
           for (p in _Runtime.iterable(TextLayout._charAdvances__textLayout)) {
@@ -549,7 +549,7 @@ class TextLayout {
           for (g in _Runtime.iterable(lineGroups)) {
             (charCount = cast ((charCount + _Runtime.field(_Runtime.field(g, 'positions'), 'length')) : Dynamic));
           }
-          var gapCount:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([0.0, (charCount - 1.0)] : Array<Dynamic>));
+          var gapCount:Dynamic = HxMath.max(0.0, (charCount - 1.0));
           if (_Runtime.truthy(_Runtime.strictEquals(gapCount, 0.0))) { li++; continue; }
           var extraPerGap:Dynamic = (residual / gapCount);
           var accumulated:Dynamic = 0.0;
@@ -624,14 +624,14 @@ class TextLayout {
         _Runtime.incrementField(out, 'numLines', 1, true);
       }
       var li:Dynamic = _Runtime.field(g, 'lineIndex');
-      _Runtime.setIndex(_Runtime.field(out, 'lineAscents'), li, _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.getIndex(_Runtime.field(out, 'lineAscents'), li), _Runtime.field(g, 'ascent')] : Array<Dynamic>)));
-      _Runtime.setIndex(_Runtime.field(out, 'lineDescents'), li, _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.getIndex(_Runtime.field(out, 'lineDescents'), li), _Runtime.field(g, 'descent')] : Array<Dynamic>)));
-      _Runtime.setIndex(_Runtime.field(out, 'lineHeights'), li, _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.getIndex(_Runtime.field(out, 'lineHeights'), li), _Runtime.field(g, 'height')] : Array<Dynamic>)));
+      _Runtime.setIndex(_Runtime.field(out, 'lineAscents'), li, HxMath.max(_Runtime.getIndex(_Runtime.field(out, 'lineAscents'), li), _Runtime.field(g, 'ascent')));
+      _Runtime.setIndex(_Runtime.field(out, 'lineDescents'), li, HxMath.max(_Runtime.getIndex(_Runtime.field(out, 'lineDescents'), li), _Runtime.field(g, 'descent')));
+      _Runtime.setIndex(_Runtime.field(out, 'lineHeights'), li, HxMath.max(_Runtime.getIndex(_Runtime.field(out, 'lineHeights'), li), _Runtime.field(g, 'height')));
       if (_Runtime.truthy(_Runtime.compare(_Runtime.field(g, 'leading'), _Runtime.getIndex(_Runtime.field(out, 'lineLeadings'), li), '>'))) { _Runtime.setIndex(_Runtime.field(out, 'lineLeadings'), li, _Runtime.field(g, 'leading')); }
       var rightEdge:Dynamic = ((_Runtime.field(g, 'offsetX') - TEXT_LAYOUT_GUTTER) + _Runtime.field(g, 'width'));
       if (_Runtime.truthy(_Runtime.compare(rightEdge, _Runtime.getIndex(_Runtime.field(out, 'lineWidths'), li), '>'))) { _Runtime.setIndex(_Runtime.field(out, 'lineWidths'), li, rightEdge); }
       if (_Runtime.truthy(_Runtime.compare(rightEdge, _Runtime.field(out, 'textWidth'), '>'))) { _Runtime.setField(out, 'textWidth', rightEdge); }
-      var bottom:Dynamic = _Runtime.callProperty(HxMath, 'ceil', cast ([(((_Runtime.field(g, 'offsetY') - TEXT_LAYOUT_GUTTER) + _Runtime.field(g, 'ascent')) + _Runtime.field(g, 'descent'))] : Array<Dynamic>));
+      var bottom:Dynamic = HxMath.ceil((((_Runtime.field(g, 'offsetY') - TEXT_LAYOUT_GUTTER) + _Runtime.field(g, 'ascent')) + _Runtime.field(g, 'descent')));
       if (_Runtime.truthy(_Runtime.compare(bottom, _Runtime.field(out, 'textHeight'), '>'))) { _Runtime.setField(out, 'textHeight', bottom); }
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(out, 'numLines'), 0.0))) { _Runtime.setField(out, 'numLines', 1.0); }

@@ -31,7 +31,7 @@ class GetPathLength {
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(contour, 'length'), '<'))) {
         var dx:Dynamic = (_Runtime.getIndex(contour, i) - _Runtime.getIndex(contour, (i - 2.0)));
         var dy:Dynamic = (_Runtime.getIndex(contour, (i + 1.0)) - _Runtime.getIndex(contour, (i - 1.0)));
-        (len = cast ((len + _Runtime.callProperty(HxMath, 'sqrt', cast ([((dx * dx) + (dy * dy))] : Array<Dynamic>))) : Dynamic));
+        (len = cast ((len + HxMath.sqrt(((dx * dx) + (dy * dy)))) : Dynamic));
         (i = cast ((i + 2.0) : Dynamic));
       }
     }

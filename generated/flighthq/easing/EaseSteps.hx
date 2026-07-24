@@ -14,7 +14,7 @@ class EaseSteps {
     startOffset = _Runtime.select(_Runtime.orValue(_Runtime.strictEquals(position, 'jumpStart'), function():Dynamic return cast _Runtime.strictEquals(position, 'jumpBoth')), function():Dynamic return cast 1.0, function():Dynamic return cast 0.0);
     return cast function(t:Dynamic) {
       var step:Dynamic = cast _Runtime.UNDEFINED;
-      step = (_Runtime.callProperty(HxMath, 'floor', cast ([(t * count)] : Array<Dynamic>)) + startOffset);
+      step = (HxMath.floor((t * count)) + startOffset);
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(t, 0.0, '>='), function():Dynamic return cast _Runtime.compare(step, 0.0, '<')))) {
         (step = cast (0.0 : Dynamic));
       }

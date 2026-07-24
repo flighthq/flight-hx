@@ -139,19 +139,19 @@ class Accessibility {
     var root:Null<Dynamic> = cast _Runtime.UNDEFINED;
     var rootResolved:Dynamic = cast _Runtime.UNDEFINED;
     var getRoot:Void->Null<Dynamic> = cast _Runtime.UNDEFINED;
-    elements = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
-    liveRegions = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    elements = _Runtime.construct(_Runtime.globalValue('Map'), []);
+    liveRegions = _Runtime.construct(_Runtime.globalValue('Map'), []);
     root = _Runtime.coalesce(container, function():Dynamic return cast null);
     rootResolved = !_Runtime.strictEquals(container, _Runtime.field(_Runtime, 'UNDEFINED'));
     getRoot = function getRoot():Null<Dynamic> {
       if (_Runtime.truthy(rootResolved)) { return cast root; }
       (rootResolved = cast (true : Dynamic));
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'body'), null)))) {
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('document'), 'body'), null)))) {
         (root = cast (null : Dynamic));
         return cast null;
       }
-      (root = cast (_Runtime.callValue(Accessibility._createHiddenAccessibilityContainer__accessibility, cast ([_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));
-      _Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'body'), 'appendChild', cast ([root] : Array<Dynamic>));
+      (root = cast (_Runtime.callValue(Accessibility._createHiddenAccessibilityContainer__accessibility, cast ([_Runtime.globalValue('document')] : Array<Dynamic>)) : Dynamic));
+      _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('document'), 'body'), 'appendChild', cast ([root] : Array<Dynamic>));
       return cast root;
     };
     return cast { setNode: function(node:Dynamic) {

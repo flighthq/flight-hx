@@ -18,17 +18,17 @@ class GlEffectBlitShader {
 
   public static final ERASE_FRAGMENT_SRC__glEffectBlitShader:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nout vec4 fragColor;\nvoid main() {\n  float a = texture(u_texture, v_texCoord).a;\n  fragColor = vec4(0.0, 0.0, 0.0, a);\n}';
 
-  public static final blitOffsetShaders__glEffectBlitShader:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final blitOffsetShaders__glEffectBlitShader:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static final blitShaders__glEffectBlitShader:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final blitShaders__glEffectBlitShader:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static final eraseShaders__glEffectBlitShader:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final eraseShaders__glEffectBlitShader:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function applyGlEffectBlitOffsetPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, dx:Float, dy:Float):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlEffectBlitShader.getGlBlitOffsetShader__glEffectBlitShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
-      _Runtime.callProperty(gl, 'uniform2f', cast ([_Runtime.field(loc, 'locOffset'), (-dx / _Runtime.field(source, 'width')), (dy / _Runtime.field(source, 'height'))] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2f', cast ([_Runtime.field(loc, 'locOffset'), (-dx / _Runtime.field(source, 'width')), (dy / _Runtime.field(source, 'height'))] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 
@@ -44,7 +44,7 @@ class GlEffectBlitShader {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlEffectBlitShader.getGlEraseShader__glEffectBlitShader, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
-      _Runtime.callProperty(gl, 'blendFunc', cast ([_Runtime.field(gl, 'ZERO'), _Runtime.field(gl, 'ONE_MINUS_SRC_ALPHA')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'blendFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ZERO'), flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE_MINUS_SRC_ALPHA')] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 
@@ -54,7 +54,7 @@ class GlEffectBlitShader {
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlEffectBlitShader.BLIT_OFFSET_FRAGMENT_SRC__glEffectBlitShader] : Array<Dynamic>));
-      (loc = cast (_Runtime.mergeObjects([base, { locOffset: _Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_offset'] : Array<Dynamic>)) }]) : Dynamic));
+      (loc = cast (_Runtime.mergeObjects([base, { locOffset: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_offset'] : Array<Dynamic>)) }]) : Dynamic));
       _Runtime.callProperty(GlEffectBlitShader.blitOffsetShaders__glEffectBlitShader, 'set', cast ([state, loc] : Array<Dynamic>));
     }
     return cast loc;

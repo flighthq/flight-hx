@@ -21,12 +21,12 @@ class RegisterWebImageEncoders {
       var context:Dynamic = cast _Runtime.UNDEFINED;
       var pixels:Dynamic = cast _Runtime.UNDEFINED;
       var blob:Dynamic = cast _Runtime.UNDEFINED;
-      canvas = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['OffscreenCanvas'] : Array<Dynamic>)), [_Runtime.field(image, 'width'), _Runtime.field(image, 'height')]);
+      canvas = _Runtime.construct(_Runtime.globalValue('OffscreenCanvas'), [_Runtime.field(image, 'width'), _Runtime.field(image, 'height')]);
       context = (cast _Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic);
-      pixels = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [_Runtime.field(image, 'data')]);
-      _Runtime.callProperty(context, 'putImageData', cast ([_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['ImageData'] : Array<Dynamic>)), [pixels, _Runtime.field(image, 'width'), _Runtime.field(image, 'height')]), 0.0, 0.0] : Array<Dynamic>));
+      pixels = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [_Runtime.field(image, 'data')]);
+      flighthq._internal.CanvasRenderingContext2D.call(context, 'putImageData', cast ([_Runtime.construct(_Runtime.globalValue('ImageData'), [pixels, _Runtime.field(image, 'width'), _Runtime.field(image, 'height')]), 0.0, 0.0] : Array<Dynamic>));
       blob = flighthq._internal._Async.awaitValue(_Runtime.callProperty(canvas, 'convertToBlob', cast ([{ type: mimeType, quality: _Runtime.optionalField(options, 'quality') }] : Array<Dynamic>)));
-      return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [flighthq._internal._Async.awaitValue(_Runtime.callProperty(blob, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
+      return cast _Runtime.construct(_Runtime.globalValue('Uint8Array'), [flighthq._internal._Async.awaitValue(_Runtime.callProperty(blob, 'arrayBuffer', cast ([] : Array<Dynamic>)))]);
       return cast null;
     });
     return cast null;

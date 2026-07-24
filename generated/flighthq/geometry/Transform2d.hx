@@ -27,10 +27,10 @@ class Transform2d {
     b = _Runtime.field(source, 'b');
     c = _Runtime.field(source, 'c');
     d = _Runtime.field(source, 'd');
-    scaleX = _Runtime.callProperty(HxMath, 'sqrt', cast ([((a * a) + (b * b))] : Array<Dynamic>));
-    scaleY = _Runtime.select(_Runtime.compare(((a * d) - (b * c)), 0.0, '<'), function():Dynamic return cast -_Runtime.callProperty(HxMath, 'sqrt', cast ([((c * c) + (d * d))] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callProperty(HxMath, 'sqrt', cast ([((c * c) + (d * d))] : Array<Dynamic>)));
-    skewXDegrees = (_Runtime.callProperty(HxMath, 'atan2', cast ([-c, d] : Array<Dynamic>)) * Transform2d.RAD_TO_DEG__transform2d);
-    skewYDegrees = (_Runtime.callProperty(HxMath, 'atan2', cast ([b, a] : Array<Dynamic>)) * Transform2d.RAD_TO_DEG__transform2d);
+    scaleX = HxMath.sqrt(((a * a) + (b * b)));
+    scaleY = _Runtime.select(_Runtime.compare(((a * d) - (b * c)), 0.0, '<'), function():Dynamic return cast -HxMath.sqrt(((c * c) + (d * d))), function():Dynamic return cast HxMath.sqrt(((c * c) + (d * d))));
+    skewXDegrees = (HxMath.atan2(-c, d) * Transform2d.RAD_TO_DEG__transform2d);
+    skewYDegrees = (HxMath.atan2(b, a) * Transform2d.RAD_TO_DEG__transform2d);
     if (_Runtime.truthy(_Runtime.strictEquals(skewXDegrees, skewYDegrees))) {
       _Runtime.setField(out, 'rotation', skewYDegrees);
       _Runtime.setField(out, 'skewX', 0.0);

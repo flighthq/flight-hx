@@ -73,8 +73,8 @@ class AnimationBlend {
 
   public static function createAnimationSampleAccumulator(components:Float, quaternion:Dynamic = false):AnimationSampleAccumulator {
     var width:Dynamic = cast _Runtime.UNDEFINED;
-    width = _Runtime.callProperty(HxMath, 'max', cast ([0.0, (Std.int(components) | Std.int(0.0))] : Array<Dynamic>));
-    return cast _Runtime.callValue(createEntity, cast ([{ components: width, quaternion: quaternion, values: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [width]), weight: 0.0 }] : Array<Dynamic>));
+    width = HxMath.max(0.0, (Std.int(components) | Std.int(0.0)));
+    return cast _Runtime.callValue(createEntity, cast ([{ components: width, quaternion: quaternion, values: _Runtime.construct(_Runtime.globalValue('Float32Array'), [width]), weight: 0.0 }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -134,10 +134,10 @@ class AnimationBlend {
       (bw = cast (-bw : Dynamic));
     }
     if (_Runtime.truthy(_Runtime.compare((1.0 - dot), 0.000001, '>'))) {
-      var angle:Dynamic = _Runtime.callProperty(HxMath, 'acos', cast ([_Runtime.callProperty(HxMath, 'min', cast ([1.0, dot] : Array<Dynamic>))] : Array<Dynamic>));
-      var inverseSin:Dynamic = (1.0 / _Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>)));
-      (scaleA = cast ((_Runtime.callProperty(HxMath, 'sin', cast ([((1.0 - alpha) * angle)] : Array<Dynamic>)) * inverseSin) : Dynamic));
-      (scaleB = cast ((_Runtime.callProperty(HxMath, 'sin', cast ([(alpha * angle)] : Array<Dynamic>)) * inverseSin) : Dynamic));
+      var angle:Dynamic = HxMath.acos(HxMath.min(1.0, dot));
+      var inverseSin:Dynamic = (1.0 / HxMath.sin(angle));
+      (scaleA = cast ((HxMath.sin(((1.0 - alpha) * angle)) * inverseSin) : Dynamic));
+      (scaleB = cast ((HxMath.sin((alpha * angle)) * inverseSin) : Dynamic));
     } else {
       (scaleA = cast ((1.0 - alpha) : Dynamic));
       (scaleB = cast (alpha : Dynamic));
@@ -167,7 +167,7 @@ class AnimationBlend {
     _Runtime.callValue(AnimationBlend.slerpQuaternion__animationBlend, cast ([out, AnimationBlend.IDENTITY_QUATERNION__animationBlend, delta, weight] : Array<Dynamic>));
   }
 
-  public static final IDENTITY_QUATERNION__animationBlend:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>)]);
+  public static final IDENTITY_QUATERNION__animationBlend:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>)]);
 
-  public static final _quaternion__animationBlend:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [4.0]);
+  public static final _quaternion__animationBlend:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [4.0]);
 }

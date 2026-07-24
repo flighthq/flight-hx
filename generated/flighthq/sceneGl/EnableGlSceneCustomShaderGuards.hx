@@ -21,25 +21,25 @@ class EnableGlSceneCustomShaderGuards {
   public static function glUniformTypeName__enableGlSceneCustomShaderGuards(gl:Dynamic, type:Float):String {
     {
       var __switchValue = type;
-      if (__switchValue == _Runtime.field(gl, 'FLOAT_MAT4')) {
+      if (__switchValue == flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT_MAT4')) {
         return cast 'mat4';
       }
-      else if (__switchValue == _Runtime.field(gl, 'FLOAT_MAT3')) {
+      else if (__switchValue == flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT_MAT3')) {
         return cast 'mat3';
       }
-      else if (__switchValue == _Runtime.field(gl, 'FLOAT_MAT2')) {
+      else if (__switchValue == flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT_MAT2')) {
         return cast 'mat2';
       }
-      else if (__switchValue == _Runtime.field(gl, 'FLOAT_VEC4')) {
+      else if (__switchValue == flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT_VEC4')) {
         return cast 'vec4';
       }
-      else if (__switchValue == _Runtime.field(gl, 'FLOAT_VEC3')) {
+      else if (__switchValue == flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT_VEC3')) {
         return cast 'vec3';
       }
-      else if (__switchValue == _Runtime.field(gl, 'FLOAT_VEC2')) {
+      else if (__switchValue == flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT_VEC2')) {
         return cast 'vec2';
       }
-      else if (__switchValue == _Runtime.field(gl, 'FLOAT')) {
+      else if (__switchValue == flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT')) {
         return cast 'float';
       }
       else  {
@@ -56,12 +56,12 @@ class EnableGlSceneCustomShaderGuards {
     if (_Runtime.truthy(_Runtime.callProperty(EnableGlSceneCustomShaderGuards._checkedPrograms__enableGlSceneCustomShaderGuards, 'has', cast ([program] : Array<Dynamic>)))) { return; }
     _Runtime.callProperty(EnableGlSceneCustomShaderGuards._checkedPrograms__enableGlSceneCustomShaderGuards, 'add', cast ([program] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    expected = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), [cast ([cast (['u_model', _Runtime.field(gl, 'FLOAT_MAT4')] : Array<Dynamic>), cast (['u_viewProjection', _Runtime.field(gl, 'FLOAT_MAT4')] : Array<Dynamic>), cast (['u_normalMatrix', _Runtime.field(gl, 'FLOAT_MAT3')] : Array<Dynamic>), cast (['u_cameraPosition', _Runtime.field(gl, 'FLOAT_VEC3')] : Array<Dynamic>)] : Array<Dynamic>)]);
-    count = (cast _Runtime.callProperty(gl, 'getProgramParameter', cast ([program, _Runtime.field(gl, 'ACTIVE_UNIFORMS')] : Array<Dynamic>)) : Float);
+    expected = _Runtime.construct(_Runtime.globalValue('Map'), [cast ([cast (['u_model', flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT_MAT4')] : Array<Dynamic>), cast (['u_viewProjection', flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT_MAT4')] : Array<Dynamic>), cast (['u_normalMatrix', flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT_MAT3')] : Array<Dynamic>), cast (['u_cameraPosition', flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT_VEC3')] : Array<Dynamic>)] : Array<Dynamic>)]);
+    count = (cast flighthq._internal.WebGl2RenderingContext.call(gl, 'getProgramParameter', cast ([program, flighthq._internal.WebGl2RenderingContext.field(gl, 'ACTIVE_UNIFORMS')] : Array<Dynamic>)) : Float);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
-        var info:Dynamic = _Runtime.callProperty(gl, 'getActiveUniform', cast ([program, i] : Array<Dynamic>));
+        var info:Dynamic = flighthq._internal.WebGl2RenderingContext.call(gl, 'getActiveUniform', cast ([program, i] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.strictEquals(info, null))) { i++; continue; }
         var want:Dynamic = _Runtime.callProperty(expected, 'get', cast ([_Runtime.field(info, 'name')] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(want, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(info, 'type'), want)))) { i++; continue; }
@@ -71,5 +71,5 @@ class EnableGlSceneCustomShaderGuards {
     }
   }
 
-  public static final _checkedPrograms__enableGlSceneCustomShaderGuards:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakSet'] : Array<Dynamic>)), []);
+  public static final _checkedPrograms__enableGlSceneCustomShaderGuards:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakSet'), []);
 }

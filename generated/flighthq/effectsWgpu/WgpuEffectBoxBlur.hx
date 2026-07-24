@@ -22,7 +22,7 @@ class WgpuEffectBoxBlur {
     var edgeColor:Dynamic = cast _Runtime.UNDEFINED;
     var read:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     var write:WgpuRenderTarget = cast _Runtime.UNDEFINED;
-    passes = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    passes = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0)));
     blurX = _Runtime.coalesce(_Runtime.field(options, 'blurX'), function():Dynamic return cast 4.0);
     blurY = _Runtime.coalesce(_Runtime.field(options, 'blurY'), function():Dynamic return cast 4.0);
     edgeColor = _Runtime.field(options, 'edgeColor');
@@ -87,5 +87,5 @@ class WgpuEffectBoxBlur {
     return cast null;
   }
 
-  public static final boxBlurPipelines__wgpuEffectBoxBlur:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final boxBlurPipelines__wgpuEffectBoxBlur:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

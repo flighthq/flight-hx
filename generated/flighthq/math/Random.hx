@@ -8,7 +8,7 @@ import flighthq.types.RandomSource;
 class Random {
   public static function createRandomSource(seed:Float):RandomSource {
     var a:Dynamic = cast _Runtime.UNDEFINED;
-    a = _Runtime.select(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([seed] : Array<Dynamic>)), function():Dynamic return cast _Runtime.unsignedShiftRight(Std.int(seed), Std.int(0.0)), function():Dynamic return cast 0.0);
+    a = _Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([seed] : Array<Dynamic>)), function():Dynamic return cast _Runtime.unsignedShiftRight(Std.int(seed), Std.int(0.0)), function():Dynamic return cast 0.0);
     return cast function seededRandom() {
       var t:Dynamic = cast _Runtime.UNDEFINED;
       (a = cast ((Std.int((a + 1831565813.0)) | Std.int(0.0)) : Dynamic));

@@ -22,7 +22,7 @@ class WgpuParticleEmitter2D {
 
   public static final PARTICLE_SHADER_SRC__wgpuParticleEmitter2D:Dynamic = '\nstruct Uniforms {\n  matrix : mat3x3f,\n  alpha : f32,\n  hasColorTransform : u32,\n  _pad0 : f32,\n  _pad1 : f32,\n  colorMultiplier : vec4f,\n  colorOffset : vec4f,\n  x0 : f32, y0 : f32, x1 : f32, y1 : f32,\n  u0 : f32, v0 : f32, u1 : f32, v1 : f32,\n}\n\nstruct InstanceData {\n  px : f32, py : f32,\n  cosScale : f32, sinScale : f32,\n  r : f32, g : f32, b : f32, alpha : f32,\n  u0 : f32, v0 : f32, u1 : f32, v1 : f32,\n  width : f32, height : f32,\n}\n\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n@group(2) @binding(0) var<storage, read> instances : array<InstanceData>;\n\nstruct VertexOut {\n  @builtin(position) position : vec4f,\n  @location(0) uv : vec2f,\n  @location(1) color : vec4f,\n}\n\n@vertex\nfn vs_main(\n  @builtin(vertex_index) vi : u32,\n  @builtin(instance_index) ii : u32,\n) -> VertexOut {\n  let inst = instances[ii];\n  let xi = (vi == 1u || vi == 2u || vi == 4u);\n  let yi = (vi == 2u || vi == 4u || vi == 5u);\n  let lx = select(0.0, inst.width, xi);\n  let ly = select(0.0, inst.height, yi);\n  // Rotate and translate in world space\n  let rx = inst.cosScale * lx - inst.sinScale * ly + inst.px;\n  let ry = inst.sinScale * lx + inst.cosScale * ly + inst.py;\n  let p = uni.matrix * vec3f(rx, ry, 1.0);\n  let u = select(inst.u0, inst.u1, xi);\n  let v = select(inst.v0, inst.v1, yi);\n  var out : VertexOut;\n  out.position = vec4f(p.x, p.y, 0.0, 1.0);\n  out.uv = vec2f(u, v);\n  out.color = vec4f(inst.r, inst.g, inst.b, inst.alpha);\n  return out;\n}\n\n@fragment\nfn fs_main(in : VertexOut) -> @location(0) vec4f {\n  let tex_color = textureSample(tex, smp, in.uv);\n  let out_color = vec4f(tex_color.rgb * in.color.rgb, tex_color.a) * in.color.a;\n  if (out_color.a <= 0.0) { discard; }\n  return out_color;\n}\n';
 
-  public static final _particleResources__wgpuParticleEmitter2D:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _particleResources__wgpuParticleEmitter2D:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function ensureParticleResources__wgpuParticleEmitter2D(state:WgpuRenderState):WgpuParticleResources__wgpuParticleEmitter2D {
     var existing:Dynamic = cast _Runtime.UNDEFINED;
@@ -44,10 +44,10 @@ class WgpuParticleEmitter2D {
     __destructure1 = runtime;
     uniformBindGroupLayout = _Runtime.field(__destructure1, 'uniformBindGroupLayout');
     textureBindGroupLayout = _Runtime.field(__destructure1, 'textureBindGroupLayout');
-    instanceBindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'VERTEX'), buffer: { type: 'read-only-storage' } }] : Array<Dynamic>) }] : Array<Dynamic>));
+    instanceBindGroupLayout = _Runtime.callProperty(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'VERTEX'), buffer: { type: 'read-only-storage' } }] : Array<Dynamic>) }] : Array<Dynamic>));
     pipelineLayout = _Runtime.callProperty(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([uniformBindGroupLayout, textureBindGroupLayout, instanceBindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
     module = _Runtime.callProperty(device, 'createShaderModule', cast ([{ code: WgpuParticleEmitter2D.PARTICLE_SHADER_SRC__wgpuParticleEmitter2D }] : Array<Dynamic>));
-    resources = { pipelines: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), pipelineLayout: pipelineLayout, module: module, instanceBindGroupLayout: instanceBindGroupLayout };
+    resources = { pipelines: _Runtime.construct(_Runtime.globalValue('Map'), []), pipelineLayout: pipelineLayout, module: module, instanceBindGroupLayout: instanceBindGroupLayout };
     _Runtime.callProperty(WgpuParticleEmitter2D._particleResources__wgpuParticleEmitter2D, 'set', cast ([device, resources] : Array<Dynamic>));
     return cast resources;
     return cast null;
@@ -76,10 +76,10 @@ class WgpuParticleEmitter2D {
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(runtime, 'particleInstanceBuffer'), null))) {
       _Runtime.callProperty(_Runtime.coalesce(_Runtime.field(runtime, 'retiredBuffers'), function():Dynamic return cast _Runtime.setField(runtime, 'retiredBuffers', cast ([] : Array<Dynamic>))), 'push', cast ([_Runtime.field(runtime, 'particleInstanceBuffer')] : Array<Dynamic>));
     }
-    newCapacity = _Runtime.callProperty(HxMath, 'max', cast ([needed, (_Runtime.orValue(_Runtime.field(runtime, 'particleInstanceCapacity'), function():Dynamic return cast 0.0) * 2.0)] : Array<Dynamic>));
-    _Runtime.setField(runtime, 'particleInstanceBuffer', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: _Runtime.callProperty(HxMath, 'max', cast ([newCapacity, WgpuParticleEmitter2D.INSTANCE_STRIDE__wgpuParticleEmitter2D] : Array<Dynamic>)), usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'STORAGE')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>)));
+    newCapacity = HxMath.max(needed, (_Runtime.orValue(_Runtime.field(runtime, 'particleInstanceCapacity'), function():Dynamic return cast 0.0) * 2.0));
+    _Runtime.setField(runtime, 'particleInstanceBuffer', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: HxMath.max(newCapacity, WgpuParticleEmitter2D.INSTANCE_STRIDE__wgpuParticleEmitter2D), usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'STORAGE')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST'))) }] : Array<Dynamic>)));
     _Runtime.setField(runtime, 'particleInstanceCapacity', newCapacity);
-    _Runtime.setField(runtime, 'particleInstanceData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(newCapacity / 4.0)]));
+    _Runtime.setField(runtime, 'particleInstanceData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [(newCapacity / 4.0)]));
   }
 
   public static function drawWgpuParticleEmitter2D(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
@@ -151,8 +151,8 @@ class WgpuParticleEmitter2D {
         var py:Dynamic = _Runtime.getIndex(transforms, (tt + 1.0));
         var rotation:Dynamic = _Runtime.getIndex(transforms, (tt + 2.0));
         var scale:Dynamic = _Runtime.getIndex(transforms, (tt + 3.0));
-        var cosR:Dynamic = (_Runtime.callProperty(HxMath, 'cos', cast ([rotation] : Array<Dynamic>)) * scale);
-        var sinR:Dynamic = (_Runtime.callProperty(HxMath, 'sin', cast ([rotation] : Array<Dynamic>)) * scale);
+        var cosR:Dynamic = (HxMath.cos(rotation) * scale);
+        var sinR:Dynamic = (HxMath.sin(rotation) * scale);
         var ct:Dynamic = (i * 3.0);
         var hasColors:Dynamic = _Runtime.andValue(!_Runtime.looseEquals(colors, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(colors, 'length'), (ct + 2.0), '>'));
         _Runtime.setIndex(instanceData, (base + 0.0), px);

@@ -25,7 +25,7 @@ class MeshGeometrySubset {
     var indexCount:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(subsetIndex, 0.0, '<'), function():Dynamic return cast _Runtime.compare(subsetIndex, _Runtime.field(_Runtime.field(geometry, 'subsets'), 'length'), '>=')))) { return cast 0.0; }
     indexCount = _Runtime.field(_Runtime.getIndex(_Runtime.field(geometry, 'subsets'), subsetIndex), 'indexCount');
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-list'))) { return cast _Runtime.callProperty(HxMath, 'floor', cast ([(indexCount / 3.0)] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-list'))) { return cast HxMath.floor((indexCount / 3.0)); }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-strip'))) { return cast _Runtime.select(_Runtime.compare(indexCount, 2.0, '>='), function():Dynamic return cast (indexCount - 2.0), function():Dynamic return cast 0.0); }
     return cast 0.0;
     return cast null;

@@ -25,7 +25,7 @@ class TextSegmenterBackend {
 
   public static var _backend__textSegmenterBackend:Null<flighthq.types.TextSegment.TextSegmenterBackend> = _Runtime.explicitNull();
 
-  public static final _segmenterCache__textSegmenterBackend:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+  public static final _segmenterCache__textSegmenterBackend:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
 
   public static final _segmenterCacheCapacity__textSegmenterBackend:Dynamic = 64.0;
 
@@ -33,11 +33,11 @@ class TextSegmenterBackend {
     var key:Dynamic = cast _Runtime.UNDEFINED;
     var existing:Dynamic = cast _Runtime.UNDEFINED;
     var built:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['Intl'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Intl'] : Array<Dynamic>)), 'Segmenter')), 'undefined')))) { return cast null; }
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('Intl'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('Intl'), 'Segmenter')), 'undefined')))) { return cast null; }
     key = '' + Std.string(_Runtime.coalesce(locale, function():Dynamic return cast '')) + '|' + Std.string(granularity) + '';
     existing = _Runtime.callProperty(TextSegmenterBackend._segmenterCache__textSegmenterBackend, 'get', cast ([key] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast existing; }
-    built = _Runtime.construct(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Intl'] : Array<Dynamic>)), 'Segmenter'), [locale, { granularity: granularity }]);
+    built = _Runtime.construct(_Runtime.field(_Runtime.globalValue('Intl'), 'Segmenter'), [locale, { granularity: granularity }]);
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(TextSegmenterBackend._segmenterCache__textSegmenterBackend, 'size'), TextSegmenterBackend._segmenterCacheCapacity__textSegmenterBackend, '>='))) {
       var oldest:Dynamic = _Runtime.field(_Runtime.callProperty(_Runtime.callProperty(TextSegmenterBackend._segmenterCache__textSegmenterBackend, 'keys', cast ([] : Array<Dynamic>)), 'next', cast ([] : Array<Dynamic>)), 'value');
       if (_Runtime.truthy(!_Runtime.strictEquals(oldest, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(TextSegmenterBackend._segmenterCache__textSegmenterBackend, 'delete', cast ([oldest] : Array<Dynamic>)); }

@@ -15,17 +15,17 @@ class SurfaceEncode {
     var base64:Dynamic = cast _Runtime.UNDEFINED;
     var binary:Dynamic = cast _Runtime.UNDEFINED;
     var bytes:Dynamic = cast _Runtime.UNDEFINED;
-    canvas = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
+    canvas = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
     _Runtime.setField(canvas, 'width', _Runtime.field(source, 'width'));
     _Runtime.setField(canvas, 'height', _Runtime.field(source, 'height'));
-    domImageData = _Runtime.construct(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['globalThis'] : Array<Dynamic>)), 'ImageData'), [_Runtime.field(source, 'width'), _Runtime.field(source, 'height')]);
+    domImageData = _Runtime.construct(_Runtime.field(_Runtime.globalValue('globalThis'), 'ImageData'), [_Runtime.field(source, 'width'), _Runtime.field(source, 'height')]);
     _Runtime.callProperty(_Runtime.field(domImageData, 'data'), 'set', cast ([_Runtime.field(source, 'data')] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(_Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, 0.0, 0.0] : Array<Dynamic>));
     mimeType = _Runtime.select(_Runtime.strictEquals(format, 'jpeg'), function():Dynamic return cast 'image/jpeg', function():Dynamic return cast 'image/png');
     dataUrl = _Runtime.callProperty(canvas, 'toDataURL', cast ([mimeType, quality] : Array<Dynamic>));
     base64 = _Runtime.slice(dataUrl, (_Runtime.callProperty(dataUrl, 'indexOf', cast ([','] : Array<Dynamic>)) + 1.0), null);
-    binary = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['atob'] : Array<Dynamic>)), cast ([base64] : Array<Dynamic>));
-    bytes = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [_Runtime.field(binary, 'length')]);
+    binary = _Runtime.callValue(_Runtime.globalValue('atob'), cast ([base64] : Array<Dynamic>));
+    bytes = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.field(binary, 'length')]);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(binary, 'length'), '<'))) {

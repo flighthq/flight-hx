@@ -36,14 +36,14 @@ class OffsetPath {
         if (_Runtime.truthy(_Runtime.compare(_Runtime.field(ring, 'length'), 6.0, '<'))) { continue; }
         var offsetArea:Dynamic = _Runtime.callValue(OffsetPath.getRingSignedArea__offsetPath, cast ([ring] : Array<Dynamic>));
         var inverted:Dynamic = !_Runtime.strictEquals(_Runtime.sign(offsetArea), orientation);
-        var notReduced:Dynamic = _Runtime.andValue(_Runtime.compare(delta, 0.0, '<'), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([offsetArea] : Array<Dynamic>)), _Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.callValue(OffsetPath.getRingSignedArea__offsetPath, cast ([vertices] : Array<Dynamic>))] : Array<Dynamic>)), '>='));
+        var notReduced:Dynamic = _Runtime.andValue(_Runtime.compare(delta, 0.0, '<'), function():Dynamic return cast _Runtime.compare(HxMath.abs(offsetArea), HxMath.abs(_Runtime.callValue(OffsetPath.getRingSignedArea__offsetPath, cast ([vertices] : Array<Dynamic>))), '>='));
         if (_Runtime.truthy(_Runtime.orValue(inverted, function():Dynamic return cast notReduced))) { continue; }
         _Runtime.callProperty(rawRings, 'push', cast ([_Runtime.select(_Runtime.compare(offsetArea, 0.0, '<'), function():Dynamic return cast _Runtime.callValue(OffsetPath.reverseVertexLoop__offsetPath, cast ([ring] : Array<Dynamic>)), function():Dynamic return cast ring)] : Array<Dynamic>));
       } else {
         if (_Runtime.truthy(_Runtime.compare(_Runtime.field(vertices, 'length'), 4.0, '<'))) { continue; }
-        var caps:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), [cast ([0.0, ((_Runtime.field(vertices, 'length') / 2.0) - 1.0)] : Array<Dynamic>)]);
+        var caps:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), [cast ([0.0, ((_Runtime.field(vertices, 'length') / 2.0) - 1.0)] : Array<Dynamic>)]);
         var loop:Dynamic = _Runtime.callValue(OffsetPath.getOpenContourLoop__offsetPath, cast ([vertices] : Array<Dynamic>));
-        var ring:Dynamic = _Runtime.callValue(OffsetPath.buildOffsetRing__offsetPath, cast ([loop, _Runtime.callProperty(HxMath, 'abs', cast ([delta] : Array<Dynamic>)), caps, join, end, miterLimit, arcTolerance] : Array<Dynamic>));
+        var ring:Dynamic = _Runtime.callValue(OffsetPath.buildOffsetRing__offsetPath, cast ([loop, HxMath.abs(delta), caps, join, end, miterLimit, arcTolerance] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.compare(_Runtime.field(ring, 'length'), 6.0, '>='))) { _Runtime.callProperty(rawRings, 'push', cast ([_Runtime.select(_Runtime.compare(_Runtime.callValue(OffsetPath.getRingSignedArea__offsetPath, cast ([ring] : Array<Dynamic>)), 0.0, '<'), function():Dynamic return cast _Runtime.callValue(OffsetPath.reverseVertexLoop__offsetPath, cast ([ring] : Array<Dynamic>)), function():Dynamic return cast ring)] : Array<Dynamic>)); }
       }
     }
@@ -90,7 +90,7 @@ class OffsetPath {
         var thisStartX:Dynamic = (vx + (signedDelta * _Runtime.getIndex(normalX, k)));
         var thisStartY:Dynamic = (vy + (signedDelta * _Runtime.getIndex(normalY, k)));
         if (_Runtime.truthy(_Runtime.callProperty(capIndices, 'has', cast ([k] : Array<Dynamic>)))) {
-          _Runtime.callValue(OffsetPath.emitOffsetEndCap__offsetPath, cast ([ring, vx, vy, previousEndX, previousEndY, thisStartX, thisStartY, _Runtime.getIndex(dirX, previous), _Runtime.getIndex(dirY, previous), _Runtime.getIndex(dirX, k), _Runtime.getIndex(dirY, k), _Runtime.callProperty(HxMath, 'abs', cast ([signedDelta] : Array<Dynamic>)), end, arcTolerance] : Array<Dynamic>));
+          _Runtime.callValue(OffsetPath.emitOffsetEndCap__offsetPath, cast ([ring, vx, vy, previousEndX, previousEndY, thisStartX, thisStartY, _Runtime.getIndex(dirX, previous), _Runtime.getIndex(dirY, previous), _Runtime.getIndex(dirX, k), _Runtime.getIndex(dirY, k), HxMath.abs(signedDelta), end, arcTolerance] : Array<Dynamic>));
         } else {
           _Runtime.callValue(OffsetPath.emitOffsetJoin__offsetPath, cast ([ring, vx, vy, previousEndX, previousEndY, thisStartX, thisStartY, _Runtime.getIndex(dirX, previous), _Runtime.getIndex(dirY, previous), _Runtime.getIndex(dirX, k), _Runtime.getIndex(dirY, k), signedDelta, join, miterLimit, arcTolerance] : Array<Dynamic>));
         }
@@ -107,9 +107,9 @@ class OffsetPath {
       _Runtime.pushMany(ring, cast ([(previousEndX + (radius * previousDirX)), (previousEndY + (radius * previousDirY))] : Array<Dynamic>));
       _Runtime.pushMany(ring, cast ([(thisStartX - (radius * thisDirX)), (thisStartY - (radius * thisDirY))] : Array<Dynamic>));
     } else { if (_Runtime.truthy(_Runtime.strictEquals(end, 'round'))) {
-      var startAngle:Dynamic = _Runtime.callProperty(HxMath, 'atan2', cast ([(previousEndY - vy), (previousEndX - vx)] : Array<Dynamic>));
-      var midX:Dynamic = _Runtime.callProperty(HxMath, 'cos', cast ([(startAngle + OffsetPath.HALF_PI__offsetPath)] : Array<Dynamic>));
-      var midY:Dynamic = _Runtime.callProperty(HxMath, 'sin', cast ([(startAngle + OffsetPath.HALF_PI__offsetPath)] : Array<Dynamic>));
+      var startAngle:Dynamic = HxMath.atan2((previousEndY - vy), (previousEndX - vx));
+      var midX:Dynamic = HxMath.cos((startAngle + OffsetPath.HALF_PI__offsetPath));
+      var midY:Dynamic = HxMath.sin((startAngle + OffsetPath.HALF_PI__offsetPath));
       var sweep:Dynamic = (_Runtime.select(_Runtime.compare(((midX * previousDirX) + (midY * previousDirY)), 0.0, '>='), function():Dynamic return cast 1.0, function():Dynamic return cast -1.0) * HxMath.PI);
       _Runtime.callValue(OffsetPath.pushOffsetArc__offsetPath, cast ([ring, vx, vy, radius, startAngle, sweep, arcTolerance] : Array<Dynamic>));
     } }
@@ -123,27 +123,27 @@ class OffsetPath {
     turn = ((previousDirX * thisDirY) - (previousDirY * thisDirX));
     convex = _Runtime.compare((turn * signedDelta), 0.0, '>');
     if (_Runtime.truthy(!_Runtime.truthy(convex))) {
-      if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([turn] : Array<Dynamic>)), OffsetPath.PARALLEL_EPS__offsetPath, '>'))) {
+      if (_Runtime.truthy(_Runtime.compare(HxMath.abs(turn), OffsetPath.PARALLEL_EPS__offsetPath, '>'))) {
         var advance:Dynamic = ((((thisStartX - previousEndX) * thisDirY) - ((thisStartY - previousEndY) * thisDirX)) / turn);
         _Runtime.pushMany(ring, cast ([(previousEndX + (advance * previousDirX)), (previousEndY + (advance * previousDirY))] : Array<Dynamic>));
       }
     } else {
       if (_Runtime.truthy(_Runtime.strictEquals(join, 'miter'))) {
-        if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([turn] : Array<Dynamic>)), OffsetPath.PARALLEL_EPS__offsetPath, '>'))) {
+        if (_Runtime.truthy(_Runtime.compare(HxMath.abs(turn), OffsetPath.PARALLEL_EPS__offsetPath, '>'))) {
           var advance:Dynamic = ((((thisStartX - previousEndX) * thisDirY) - ((thisStartY - previousEndY) * thisDirX)) / turn);
           var apexX:Dynamic = (previousEndX + (advance * previousDirX));
           var apexY:Dynamic = (previousEndY + (advance * previousDirY));
           var miterLength:Dynamic = _Runtime.hypot((apexX - vx), (apexY - vy));
-          if (_Runtime.truthy(_Runtime.compare(miterLength, (miterLimit * _Runtime.callProperty(HxMath, 'abs', cast ([signedDelta] : Array<Dynamic>))), '<='))) { _Runtime.pushMany(ring, cast ([apexX, apexY] : Array<Dynamic>)); }
+          if (_Runtime.truthy(_Runtime.compare(miterLength, (miterLimit * HxMath.abs(signedDelta)), '<='))) { _Runtime.pushMany(ring, cast ([apexX, apexY] : Array<Dynamic>)); }
         }
       } else { if (_Runtime.truthy(_Runtime.strictEquals(join, 'square'))) {
-        var radius:Dynamic = _Runtime.callProperty(HxMath, 'abs', cast ([signedDelta] : Array<Dynamic>));
+        var radius:Dynamic = HxMath.abs(signedDelta);
         _Runtime.pushMany(ring, cast ([(previousEndX + (radius * previousDirX)), (previousEndY + (radius * previousDirY))] : Array<Dynamic>));
         _Runtime.pushMany(ring, cast ([(thisStartX - (radius * thisDirX)), (thisStartY - (radius * thisDirY))] : Array<Dynamic>));
       } else { if (_Runtime.truthy(_Runtime.strictEquals(join, 'round'))) {
-        var radius:Dynamic = _Runtime.callProperty(HxMath, 'abs', cast ([signedDelta] : Array<Dynamic>));
-        var startAngle:Dynamic = _Runtime.callProperty(HxMath, 'atan2', cast ([(previousEndY - vy), (previousEndX - vx)] : Array<Dynamic>));
-        var endAngle:Dynamic = _Runtime.callProperty(HxMath, 'atan2', cast ([(thisStartY - vy), (thisStartX - vx)] : Array<Dynamic>));
+        var radius:Dynamic = HxMath.abs(signedDelta);
+        var startAngle:Dynamic = HxMath.atan2((previousEndY - vy), (previousEndX - vx));
+        var endAngle:Dynamic = HxMath.atan2((thisStartY - vy), (thisStartX - vx));
         _Runtime.callValue(OffsetPath.pushOffsetArc__offsetPath, cast ([ring, vx, vy, radius, startAngle, _Runtime.callValue(OffsetPath.getShortSweep__offsetPath, cast ([startAngle, endAngle] : Array<Dynamic>)), arcTolerance] : Array<Dynamic>));
       } } }
     }
@@ -200,7 +200,7 @@ class OffsetPath {
         }
       }
     }
-    extent = _Runtime.callProperty(HxMath, 'max', cast ([(maxX - minX), (maxY - minY)] : Array<Dynamic>));
+    extent = HxMath.max((maxX - minX), (maxY - minY));
     return cast _Runtime.select(_Runtime.compare(extent, 0.0, '>'), function():Dynamic return cast (extent * OffsetPath.POINT_EPS_RELATIVE__offsetPath), function():Dynamic return cast OffsetPath.POINT_EPS__offsetPath);
     return cast null;
   }
@@ -269,13 +269,13 @@ class OffsetPath {
   public static function pushOffsetArc__offsetPath(ring:Array<Float>, cx:Float, cy:Float, radius:Float, startAngle:Float, sweep:Float, arcTolerance:Float):Void {
     var maxAngle:Dynamic = cast _Runtime.UNDEFINED;
     var steps:Dynamic = cast _Runtime.UNDEFINED;
-    maxAngle = _Runtime.select(_Runtime.andValue(_Runtime.compare(arcTolerance, 0.0, '>'), function():Dynamic return cast _Runtime.compare(arcTolerance, radius, '<')), function():Dynamic return cast (2.0 * _Runtime.callProperty(HxMath, 'acos', cast ([(1.0 - (arcTolerance / radius))] : Array<Dynamic>))), function():Dynamic return cast HxMath.PI);
-    steps = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([(_Runtime.callProperty(HxMath, 'abs', cast ([sweep] : Array<Dynamic>)) / maxAngle)] : Array<Dynamic>))] : Array<Dynamic>));
+    maxAngle = _Runtime.select(_Runtime.andValue(_Runtime.compare(arcTolerance, 0.0, '>'), function():Dynamic return cast _Runtime.compare(arcTolerance, radius, '<')), function():Dynamic return cast (2.0 * HxMath.acos((1.0 - (arcTolerance / radius)))), function():Dynamic return cast HxMath.PI);
+    steps = HxMath.max(1.0, HxMath.ceil((HxMath.abs(sweep) / maxAngle)));
     {
       var i:Dynamic = 1.0;
       while (_Runtime.truthy(_Runtime.compare(i, steps, '<'))) {
         var angle:Dynamic = (startAngle + (sweep * (i / steps)));
-        _Runtime.pushMany(ring, cast ([(cx + (radius * _Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>)))), (cy + (radius * _Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>))))] : Array<Dynamic>));
+        _Runtime.pushMany(ring, cast ([(cx + (radius * HxMath.cos(angle))), (cy + (radius * HxMath.sin(angle)))] : Array<Dynamic>));
         i++;
       }
     }
@@ -307,7 +307,7 @@ class OffsetPath {
 
   public static final HALF_PI__offsetPath:Dynamic = (HxMath.PI / 2.0);
 
-  public static final NO_CAPS__offsetPath:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
+  public static final NO_CAPS__offsetPath:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), []);
 
   public static final POINT_EPS__offsetPath:Dynamic = 1e-9;
 

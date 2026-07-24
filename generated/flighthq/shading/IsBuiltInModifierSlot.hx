@@ -12,5 +12,5 @@ class IsBuiltInModifierSlot {
     return cast null;
   }
 
-  public static final BUILT_IN_SLOTS__isBuiltInModifierSlot:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), [cast ([ModifierSlotValue.Diffuse, ModifierSlotValue.Effect, ModifierSlotValue.Emissive, ModifierSlotValue.Normal, ModifierSlotValue.Specular, ModifierSlotValue.Vertex] : Array<Dynamic>)]);
+  public static final BUILT_IN_SLOTS__isBuiltInModifierSlot:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), [cast ([ModifierSlotValue.Diffuse, ModifierSlotValue.Effect, ModifierSlotValue.Emissive, ModifierSlotValue.Normal, ModifierSlotValue.Specular, ModifierSlotValue.Vertex] : Array<Dynamic>)]);
 }

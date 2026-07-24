@@ -17,14 +17,14 @@ class WgpuSurface {
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(runtime, 'frameCaptureEnabled')))) { return cast null; }
-    width = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.field(_Runtime.field(state, 'canvas'), 'width')] : Array<Dynamic>));
-    height = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.field(_Runtime.field(state, 'canvas'), 'height')] : Array<Dynamic>));
+    width = HxMath.max(1.0, _Runtime.field(_Runtime.field(state, 'canvas'), 'width'));
+    height = HxMath.max(1.0, _Runtime.field(_Runtime.field(state, 'canvas'), 'height'));
     existing = _Runtime.field(runtime, 'frameCaptureTexture');
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(existing, null), function():Dynamic return cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED'))), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(existing, 'width'), width)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(existing, 'height'), height)))) {
       return cast existing;
     }
     _Runtime.callOptionalProperty(existing, 'destroy', cast ([] : Array<Dynamic>));
-    texture = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: _Runtime.field(state, 'format'), usage: (Std.int((Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'RENDER_ATTACHMENT')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'TEXTURE_BINDING')))) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'COPY_SRC'))) }] : Array<Dynamic>));
+    texture = _Runtime.callProperty(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: _Runtime.field(state, 'format'), usage: (Std.int((Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'RENDER_ATTACHMENT')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'TEXTURE_BINDING')))) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'COPY_SRC'))) }] : Array<Dynamic>));
     _Runtime.setField(runtime, 'frameCaptureTexture', texture);
     return cast texture;
     return cast null;
@@ -49,8 +49,8 @@ class WgpuSurface {
       width = _Runtime.field(runtime, 'frameCaptureWidth');
       height = _Runtime.field(runtime, 'frameCaptureHeight');
       bytesPerRow = _Runtime.field(runtime, 'frameCaptureBytesPerRow');
-      flighthq._internal._Async.awaitValue(_Runtime.callProperty(buffer, 'mapAsync', cast ([_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUMapMode'] : Array<Dynamic>)), 'READ')] : Array<Dynamic>)));
-      mapped = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [_Runtime.callProperty(buffer, 'getMappedRange', cast ([] : Array<Dynamic>))]);
+      flighthq._internal._Async.awaitValue(_Runtime.callProperty(buffer, 'mapAsync', cast ([_Runtime.field(_Runtime.globalValue('GPUMapMode'), 'READ')] : Array<Dynamic>)));
+      mapped = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.callProperty(buffer, 'getMappedRange', cast ([] : Array<Dynamic>))]);
       surface = _Runtime.callValue(createSurface, cast ([width, height] : Array<Dynamic>));
       out = _Runtime.field(surface, 'data');
       swizzleBGRA = _Runtime.orValue(_Runtime.strictEquals(_Runtime.field(state, 'format'), 'bgra8unorm'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(state, 'format'), 'bgra8unorm-srgb'));
@@ -95,10 +95,10 @@ class WgpuSurface {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(runtime, 'frameCaptureEnabled')), function():Dynamic return cast _Runtime.strictEquals(texture, null)), function():Dynamic return cast _Runtime.strictEquals(texture, _Runtime.field(_Runtime, 'UNDEFINED'))))) { return; }
     width = _Runtime.field(texture, 'width');
     height = _Runtime.field(texture, 'height');
-    bytesPerRow = (_Runtime.callProperty(HxMath, 'ceil', cast ([((width * 4.0) / 256.0)] : Array<Dynamic>)) * 256.0);
+    bytesPerRow = (HxMath.ceil(((width * 4.0) / 256.0)) * 256.0);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(runtime, 'frameCaptureBuffer'), null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(runtime, 'frameCaptureBuffer'), _Runtime.field(_Runtime, 'UNDEFINED'))), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(runtime, 'frameCaptureWidth'), width)), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(runtime, 'frameCaptureHeight'), height)))) {
       _Runtime.callOptionalProperty(_Runtime.field(runtime, 'frameCaptureBuffer'), 'destroy', cast ([] : Array<Dynamic>));
-      _Runtime.setField(runtime, 'frameCaptureBuffer', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: (bytesPerRow * height), usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'COPY_DST')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUBufferUsage'] : Array<Dynamic>)), 'MAP_READ'))) }] : Array<Dynamic>)));
+      _Runtime.setField(runtime, 'frameCaptureBuffer', _Runtime.callProperty(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: (bytesPerRow * height), usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'COPY_DST')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUBufferUsage'), 'MAP_READ'))) }] : Array<Dynamic>)));
       _Runtime.setField(runtime, 'frameCaptureBytesPerRow', bytesPerRow);
       _Runtime.setField(runtime, 'frameCaptureWidth', width);
       _Runtime.setField(runtime, 'frameCaptureHeight', height);

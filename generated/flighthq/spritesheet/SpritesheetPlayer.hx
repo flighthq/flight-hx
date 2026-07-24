@@ -119,7 +119,7 @@ class SpritesheetPlayer {
     __destructure2 = player;
     animation = _Runtime.field(__destructure2, 'animation');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(animation, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(animation, 'frames'), 'length'), 0.0)))) { return; }
-    clamped = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([frameIndex, (_Runtime.field(_Runtime.field(animation, 'frames'), 'length') - 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    clamped = HxMath.max(0.0, HxMath.min(frameIndex, (_Runtime.field(_Runtime.field(animation, 'frames'), 'length') - 1.0)));
     _Runtime.setField(player, 'frameIndex', clamped);
     _Runtime.setField(player, 'elapsed', _Runtime.callValue(SpritesheetPlayer.resolveVirtualIndexStartTime__spritesheetPlayer, cast ([animation, clamped] : Array<Dynamic>)));
   }
@@ -132,7 +132,7 @@ class SpritesheetPlayer {
     animation = _Runtime.field(__destructure3, 'animation');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(animation, null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(animation, 'frames'), 'length'), 0.0)))) { return; }
     totalTime = _Runtime.callValue(SpritesheetPlayer.resolveAnimationTotalTime__spritesheetPlayer, cast ([animation] : Array<Dynamic>));
-    _Runtime.setField(player, 'elapsed', _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([time, totalTime] : Array<Dynamic>))] : Array<Dynamic>)));
+    _Runtime.setField(player, 'elapsed', HxMath.max(0.0, HxMath.min(time, totalTime)));
     _Runtime.setField(player, 'frameIndex', _Runtime.callValue(SpritesheetPlayer.resolveFrameIndexFromElapsed__spritesheetPlayer, cast ([animation, _Runtime.field(player, 'elapsed')] : Array<Dynamic>)));
   }
 
@@ -158,7 +158,7 @@ class SpritesheetPlayer {
     __destructure5 = animation;
     loop = _Runtime.field(__destructure5, 'loop');
     totalTime = _Runtime.callValue(SpritesheetPlayer.resolveAnimationTotalTime__spritesheetPlayer, cast ([animation] : Array<Dynamic>));
-    prevLoopCount = _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(player, 'elapsed') / totalTime)] : Array<Dynamic>));
+    prevLoopCount = HxMath.floor((_Runtime.field(player, 'elapsed') / totalTime));
     _Runtime.setField(player, 'elapsed', (_Runtime.field(player, 'elapsed') + (deltaTime * _Runtime.field(player, 'speed'))));
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.truthy(loop), function():Dynamic return cast _Runtime.compare(_Runtime.field(player, 'elapsed'), totalTime, '>=')))) {
       if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(player, 'queue'), 'length'), 0.0, '>'))) {
@@ -175,7 +175,7 @@ class SpritesheetPlayer {
       _Runtime.callValue(emitSignal, cast ([_Runtime.field(player, 'onComplete')] : Array<Dynamic>));
       return cast true;
     }
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(player, 'elapsed') / totalTime)] : Array<Dynamic>)), prevLoopCount, '>'))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(player, 'onLoop')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.compare(HxMath.floor((_Runtime.field(player, 'elapsed') / totalTime)), prevLoopCount, '>'))) { _Runtime.callValue(emitSignal, cast ([_Runtime.field(player, 'onLoop')] : Array<Dynamic>)); }
     timeInLoop = (_Runtime.field(player, 'elapsed') % totalTime);
     vi = _Runtime.callValue(SpritesheetPlayer.resolveVirtualIndexFromTime__spritesheetPlayer, cast ([animation, timeInLoop] : Array<Dynamic>));
     _Runtime.setField(player, 'frameIndex', _Runtime.callValue(SpritesheetPlayer.resolveVirtualIndexToDisplayIndex__spritesheetPlayer, cast ([animation, vi] : Array<Dynamic>)));
@@ -201,7 +201,7 @@ class SpritesheetPlayer {
     frameDurations = _Runtime.field(__destructure6, 'frameDurations');
     n = _Runtime.field(frames, 'length');
     virtualCount = _Runtime.callValue(SpritesheetPlayer.resolveVirtualFrameCount__spritesheetPlayer, cast ([animation] : Array<Dynamic>));
-    arr = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float64Array'] : Array<Dynamic>)), [(virtualCount + 1.0)]);
+    arr = _Runtime.construct(_Runtime.globalValue('Float64Array'), [(virtualCount + 1.0)]);
     t = 0.0;
     {
       var vi:Dynamic = 0.0;
@@ -279,7 +279,7 @@ class SpritesheetPlayer {
       }
       return cast lo;
     }
-    return cast _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callProperty(HxMath, 'floor', cast ([(timeInLoop / frameDuration)] : Array<Dynamic>)), (virtualCount - 1.0)] : Array<Dynamic>));
+    return cast HxMath.min(HxMath.floor((timeInLoop / frameDuration)), (virtualCount - 1.0));
     return cast null;
   }
 
@@ -330,5 +330,5 @@ class SpritesheetPlayer {
 
   public static final playerPool__spritesheetPlayer:Array<flighthq.types.SpritesheetPlayer> = cast ([] : Array<Dynamic>);
 
-  public static final cumulativeDurationsCache__spritesheetPlayer:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final cumulativeDurationsCache__spritesheetPlayer:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

@@ -9,9 +9,9 @@ import flighthq.types.Matrix;
 class CanvasTransform {
   public static function setCanvasTransform(state:Dynamic, context:Dynamic, transform:Matrix):Void {
     if (_Runtime.truthy(_Runtime.field(state, 'roundPixels'))) {
-      _Runtime.callProperty(context, 'setTransform', cast ([_Runtime.field(transform, 'a'), _Runtime.field(transform, 'b'), _Runtime.field(transform, 'c'), _Runtime.field(transform, 'd'), _Runtime.callProperty(HxMath, 'fround', cast ([_Runtime.field(transform, 'tx')] : Array<Dynamic>)), _Runtime.callProperty(HxMath, 'fround', cast ([_Runtime.field(transform, 'ty')] : Array<Dynamic>))] : Array<Dynamic>));
+      flighthq._internal.CanvasRenderingContext2D.call(context, 'setTransform', cast ([_Runtime.field(transform, 'a'), _Runtime.field(transform, 'b'), _Runtime.field(transform, 'c'), _Runtime.field(transform, 'd'), HxMath.fround(_Runtime.field(transform, 'tx')), HxMath.fround(_Runtime.field(transform, 'ty'))] : Array<Dynamic>));
     } else {
-      _Runtime.callProperty(context, 'setTransform', cast ([_Runtime.field(transform, 'a'), _Runtime.field(transform, 'b'), _Runtime.field(transform, 'c'), _Runtime.field(transform, 'd'), _Runtime.field(transform, 'tx'), _Runtime.field(transform, 'ty')] : Array<Dynamic>));
+      flighthq._internal.CanvasRenderingContext2D.call(context, 'setTransform', cast ([_Runtime.field(transform, 'a'), _Runtime.field(transform, 'b'), _Runtime.field(transform, 'c'), _Runtime.field(transform, 'd'), _Runtime.field(transform, 'tx'), _Runtime.field(transform, 'ty')] : Array<Dynamic>));
     }
   }
 }

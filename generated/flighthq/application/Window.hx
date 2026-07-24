@@ -41,7 +41,7 @@ class Window {
     var onPageHide:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Window.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     _Runtime.callOptionalValue(_Runtime.callProperty(observers, 'get', cast ([Window.kClose__window] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'))) { return; }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return; }
     onBeforeUnload = function(e:Dynamic) {
       _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onCloseRequest')] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(_Runtime.field(_Runtime.field(win, 'onCloseRequest'), 'data'), 'cancelled'), true))) {
@@ -50,11 +50,11 @@ class Window {
       }
     };
     onPageHide = function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onClose')] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'addEventListener', cast (['beforeunload', onBeforeUnload] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'addEventListener', cast (['pagehide', onPageHide] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['beforeunload', onBeforeUnload] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['pagehide', onPageHide] : Array<Dynamic>));
     _Runtime.callProperty(observers, 'set', cast ([Window.kClose__window, function() {
-      _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'removeEventListener', cast (['beforeunload', onBeforeUnload] : Array<Dynamic>));
-      _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'removeEventListener', cast (['pagehide', onPageHide] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast (['beforeunload', onBeforeUnload] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast (['pagehide', onPageHide] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 
@@ -101,8 +101,8 @@ class Window {
     observers = _Runtime.callValue(Window.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     _Runtime.callOptionalValue(_Runtime.callProperty(observers, 'get', cast ([Window.kFullscreen__window] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
     handler = function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onFullscreenChanged')] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'addEventListener', cast (['fullscreenchange', handler] : Array<Dynamic>));
-    _Runtime.callProperty(observers, 'set', cast ([Window.kFullscreen__window, function() return _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'removeEventListener', cast (['fullscreenchange', handler] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.globalValue('document'), 'addEventListener', cast (['fullscreenchange', handler] : Array<Dynamic>));
+    _Runtime.callProperty(observers, 'set', cast ([Window.kFullscreen__window, function() return _Runtime.callProperty(_Runtime.globalValue('document'), 'removeEventListener', cast (['fullscreenchange', handler] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function attachWindowMove(win:ApplicationWindow):Void {
@@ -110,11 +110,11 @@ class Window {
     var handler:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Window.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     _Runtime.callOptionalValue(_Runtime.callProperty(observers, 'get', cast ([Window.kMove__window] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'))) { return; }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return; }
     handler = function() {
-      if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'screenX')), 'number'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'screenY')), 'number')))) {
-        var x:Dynamic = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'screenX');
-        var y:Dynamic = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'screenY');
+      if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('window'), 'screenX')), 'number'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('window'), 'screenY')), 'number')))) {
+        var x:Dynamic = _Runtime.field(_Runtime.globalValue('window'), 'screenX');
+        var y:Dynamic = _Runtime.field(_Runtime.globalValue('window'), 'screenY');
         if (_Runtime.truthy(_Runtime.orValue(!_Runtime.strictEquals(_Runtime.field(win, 'x'), x), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(win, 'y'), y)))) {
           _Runtime.setField(win, 'x', x);
           _Runtime.setField(win, 'y', y);
@@ -122,8 +122,8 @@ class Window {
         }
       }
     };
-    _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'addEventListener', cast (['resize', handler] : Array<Dynamic>));
-    _Runtime.callProperty(observers, 'set', cast ([Window.kMove__window, function() return _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'removeEventListener', cast (['resize', handler] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['resize', handler] : Array<Dynamic>));
+    _Runtime.callProperty(observers, 'set', cast ([Window.kMove__window, function() return _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast (['resize', handler] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function attachWindowOrientation(win:ApplicationWindow):Void {
@@ -131,10 +131,10 @@ class Window {
     var handler:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Window.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     _Runtime.callOptionalValue(_Runtime.callProperty(observers, 'get', cast ([Window.kOrientation__window] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['screen'] : Array<Dynamic>)), 'orientation')))) { return; }
+    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.field(_Runtime.globalValue('screen'), 'orientation')))) { return; }
     handler = function() return _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onOrientationChanged')] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['screen'] : Array<Dynamic>)), 'orientation'), 'addEventListener', cast (['change', handler] : Array<Dynamic>));
-    _Runtime.callProperty(observers, 'set', cast ([Window.kOrientation__window, function() return _Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['screen'] : Array<Dynamic>)), 'orientation'), 'removeEventListener', cast (['change', handler] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('screen'), 'orientation'), 'addEventListener', cast (['change', handler] : Array<Dynamic>));
+    _Runtime.callProperty(observers, 'set', cast ([Window.kOrientation__window, function() return _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('screen'), 'orientation'), 'removeEventListener', cast (['change', handler] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function attachWindowRenderContext(win:ApplicationWindow, canvas:Dynamic):Void {
@@ -162,8 +162,8 @@ class Window {
     observers = _Runtime.callValue(Window.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     _Runtime.callOptionalValue(_Runtime.callProperty(observers, 'get', cast ([Window.kRenderState__window] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
     apply = function() {
-      _Runtime.setField(canvas, 'width', _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.field(win, 'width') * _Runtime.field(win, 'devicePixelRatio'))] : Array<Dynamic>)));
-      _Runtime.setField(canvas, 'height', _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.field(win, 'height') * _Runtime.field(win, 'devicePixelRatio'))] : Array<Dynamic>)));
+      _Runtime.setField(canvas, 'width', HxMath.round((_Runtime.field(win, 'width') * _Runtime.field(win, 'devicePixelRatio'))));
+      _Runtime.setField(canvas, 'height', HxMath.round((_Runtime.field(win, 'height') * _Runtime.field(win, 'devicePixelRatio'))));
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(state, 'renderTransform2D'), null))) { _Runtime.callValue(computeWindowDeviceTransform, cast ([win, _Runtime.field(state, 'renderTransform2D')] : Array<Dynamic>)); }
     };
     _Runtime.callValue(apply, cast ([] : Array<Dynamic>));
@@ -176,11 +176,11 @@ class Window {
     var observer:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callValue(Window.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     _Runtime.callOptionalValue(_Runtime.callProperty(observers, 'get', cast ([Window.kResize__window] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
-    observer = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['ResizeObserver'] : Array<Dynamic>)), [function(entries:Dynamic) {
+    observer = _Runtime.construct(_Runtime.globalValue('ResizeObserver'), [function(entries:Dynamic) {
       for (entry in _Runtime.iterable(entries)) {
-        _Runtime.setField(win, 'width', _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.field(_Runtime.field(entry, 'contentRect'), 'width')] : Array<Dynamic>)));
-        _Runtime.setField(win, 'height', _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.field(_Runtime.field(entry, 'contentRect'), 'height')] : Array<Dynamic>)));
-        _Runtime.setField(win, 'devicePixelRatio', _Runtime.orValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'devicePixelRatio'), function():Dynamic return cast 1.0));
+        _Runtime.setField(win, 'width', HxMath.round(_Runtime.field(_Runtime.field(entry, 'contentRect'), 'width')));
+        _Runtime.setField(win, 'height', HxMath.round(_Runtime.field(_Runtime.field(entry, 'contentRect'), 'height')));
+        _Runtime.setField(win, 'devicePixelRatio', _Runtime.orValue(_Runtime.field(_Runtime.globalValue('window'), 'devicePixelRatio'), function():Dynamic return cast 1.0));
         _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onResize')] : Array<Dynamic>));
       }
     }]);
@@ -194,14 +194,14 @@ class Window {
     observers = _Runtime.callValue(Window.getApplicationWindowObservers__window, cast ([win] : Array<Dynamic>));
     _Runtime.callOptionalValue(_Runtime.callProperty(observers, 'get', cast ([Window.kVisibility__window] : Array<Dynamic>)), cast ([] : Array<Dynamic>));
     handler = function() {
-      if (_Runtime.truthy(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'hidden'))) {
+      if (_Runtime.truthy(_Runtime.field(_Runtime.globalValue('document'), 'hidden'))) {
         _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onDeactivate')] : Array<Dynamic>));
       } else {
         _Runtime.callValue(emitSignal, cast ([_Runtime.field(win, 'onActivate')] : Array<Dynamic>));
       }
     };
-    _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'addEventListener', cast (['visibilitychange', handler] : Array<Dynamic>));
-    _Runtime.callProperty(observers, 'set', cast ([Window.kVisibility__window, function() return _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'removeEventListener', cast (['visibilitychange', handler] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.globalValue('document'), 'addEventListener', cast (['visibilitychange', handler] : Array<Dynamic>));
+    _Runtime.callProperty(observers, 'set', cast ([Window.kVisibility__window, function() return _Runtime.callProperty(_Runtime.globalValue('document'), 'removeEventListener', cast (['visibilitychange', handler] : Array<Dynamic>))] : Array<Dynamic>));
   }
 
   public static function centerWindow(win:ApplicationWindow):Void {
@@ -236,42 +236,42 @@ class Window {
 
   public static function createWebWindowBackend():WindowBackend {
     return cast { open: function() {
-      return cast !_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined');
+      return cast !_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined');
     }, close: function() {
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'close')), 'function')))) {
+      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('window'), 'close')), 'function')))) {
         try {
-          _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'close', cast ([] : Array<Dynamic>));
+          _Runtime.callProperty(_Runtime.globalValue('window'), 'close', cast ([] : Array<Dynamic>));
         } catch (__error:Dynamic) {
         }
       }
     }, setTitle: function(_win:Dynamic, title:Dynamic) {
-      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'))) { _Runtime.setField(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'title', title); }
+      if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { _Runtime.setField(_Runtime.globalValue('document'), 'title', title); }
     }, setPosition: function(_win:Dynamic, x:Dynamic, y:Dynamic) {
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'moveTo')), 'function')))) {
+      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('window'), 'moveTo')), 'function')))) {
         try {
-          _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'moveTo', cast ([x, y] : Array<Dynamic>));
+          _Runtime.callProperty(_Runtime.globalValue('window'), 'moveTo', cast ([x, y] : Array<Dynamic>));
         } catch (__error:Dynamic) {
         }
       }
     }, setSize: function(_win:Dynamic, width:Dynamic, height:Dynamic) {
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'resizeTo')), 'function')))) {
+      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('window'), 'resizeTo')), 'function')))) {
         try {
-          _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'resizeTo', cast ([width, height] : Array<Dynamic>));
+          _Runtime.callProperty(_Runtime.globalValue('window'), 'resizeTo', cast ([width, height] : Array<Dynamic>));
         } catch (__error:Dynamic) {
         }
       }
     }, getBounds: function(win:Dynamic, out:Dynamic) {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'))) {
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) {
         _Runtime.setField(out, 'x', _Runtime.field(win, 'x'));
         _Runtime.setField(out, 'y', _Runtime.field(win, 'y'));
         _Runtime.setField(out, 'width', _Runtime.field(win, 'width'));
         _Runtime.setField(out, 'height', _Runtime.field(win, 'height'));
         return cast out;
       }
-      _Runtime.setField(out, 'x', _Runtime.coalesce(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'screenX'), function():Dynamic return cast _Runtime.field(win, 'x')));
-      _Runtime.setField(out, 'y', _Runtime.coalesce(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'screenY'), function():Dynamic return cast _Runtime.field(win, 'y')));
-      _Runtime.setField(out, 'width', _Runtime.coalesce(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'innerWidth'), function():Dynamic return cast _Runtime.field(win, 'width')));
-      _Runtime.setField(out, 'height', _Runtime.coalesce(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'innerHeight'), function():Dynamic return cast _Runtime.field(win, 'height')));
+      _Runtime.setField(out, 'x', _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('window'), 'screenX'), function():Dynamic return cast _Runtime.field(win, 'x')));
+      _Runtime.setField(out, 'y', _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('window'), 'screenY'), function():Dynamic return cast _Runtime.field(win, 'y')));
+      _Runtime.setField(out, 'width', _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('window'), 'innerWidth'), function():Dynamic return cast _Runtime.field(win, 'width')));
+      _Runtime.setField(out, 'height', _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('window'), 'innerHeight'), function():Dynamic return cast _Runtime.field(win, 'height')));
       return cast out;
     }, minimize: function() {
     
@@ -280,15 +280,15 @@ class Window {
     }, restore: function() {
     
     }, focus: function() {
-      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'focus')), 'function')))) { _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'focus', cast ([] : Array<Dynamic>)); }
+      if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('window'), 'focus')), 'function')))) { _Runtime.callProperty(_Runtime.globalValue('window'), 'focus', cast ([] : Array<Dynamic>)); }
     }, show: function() {
     
     }, hide: function() {
     
     }, center: function(win:Dynamic) {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'moveTo')), 'function')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['screen'] : Array<Dynamic>)), 'undefined')))) { return; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('window'), 'moveTo')), 'function')), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofGlobal('screen'), 'undefined')))) { return; }
       try {
-        _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'moveTo', cast ([_Runtime.callProperty(HxMath, 'round', cast ([((_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['screen'] : Array<Dynamic>)), 'availWidth') - _Runtime.field(win, 'width')) / 2.0)] : Array<Dynamic>)), _Runtime.callProperty(HxMath, 'round', cast ([((_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['screen'] : Array<Dynamic>)), 'availHeight') - _Runtime.field(win, 'height')) / 2.0)] : Array<Dynamic>))] : Array<Dynamic>));
+        _Runtime.callProperty(_Runtime.globalValue('window'), 'moveTo', cast ([HxMath.round(((_Runtime.field(_Runtime.globalValue('screen'), 'availWidth') - _Runtime.field(win, 'width')) / 2.0)), HxMath.round(((_Runtime.field(_Runtime.globalValue('screen'), 'availHeight') - _Runtime.field(win, 'height')) / 2.0))] : Array<Dynamic>));
       } catch (__error:Dynamic) {
       }
     }, setResizable: function() {
@@ -300,19 +300,19 @@ class Window {
     }, setMaximumSize: function() {
     
     }, setFullscreen: function(_win:Dynamic, fullscreen:Dynamic) {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'))) { return; }
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return; }
       try {
-        if (_Runtime.truthy(fullscreen)) { _Runtime.voidValue(_Runtime.callOptionalProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'documentElement'), 'requestFullscreen', cast ([] : Array<Dynamic>))); } else { _Runtime.voidValue(_Runtime.callOptionalProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'exitFullscreen', cast ([] : Array<Dynamic>))); }
+        if (_Runtime.truthy(fullscreen)) { _Runtime.voidValue(_Runtime.callOptionalProperty(_Runtime.field(_Runtime.globalValue('document'), 'documentElement'), 'requestFullscreen', cast ([] : Array<Dynamic>))); } else { _Runtime.voidValue(_Runtime.callOptionalProperty(_Runtime.globalValue('document'), 'exitFullscreen', cast ([] : Array<Dynamic>))); }
       } catch (__error:Dynamic) {
       }
     }, setIcon: function(_win:Dynamic, icon:Dynamic) {
       var link:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'))) { return; }
-      link = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'querySelector', cast (['link[rel="icon"]'] : Array<Dynamic>));
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'))) { return; }
+      link = _Runtime.callProperty(_Runtime.globalValue('document'), 'querySelector', cast (['link[rel="icon"]'] : Array<Dynamic>));
       if (_Runtime.truthy(_Runtime.strictEquals(link, null))) {
-        (link = cast (_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['link'] : Array<Dynamic>)) : Dynamic));
+        (link = cast (_Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['link'] : Array<Dynamic>)) : Dynamic));
         _Runtime.setField(link, 'rel', 'icon');
-        _Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'head'), 'appendChild', cast ([link] : Array<Dynamic>));
+        _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('document'), 'head'), 'appendChild', cast ([link] : Array<Dynamic>));
       }
       _Runtime.setField(link, 'href', icon);
     }, setOpacity: function() {
@@ -417,16 +417,16 @@ class Window {
   }
 
   public static function exitApplicationFullscreen():flighthq._internal._Promise<flighthq._internal._Nothing> {
-    return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'exitFullscreen', cast ([] : Array<Dynamic>));
+    return cast _Runtime.callProperty(_Runtime.globalValue('document'), 'exitFullscreen', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
   public static function exitApplicationPointerLock():flighthq._internal._Promise<flighthq._internal._Nothing> {
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['document'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'exitPointerLock')), 'function')))) {
-      return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('document'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('document'), 'exitPointerLock')), 'function')))) {
+      return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([] : Array<Dynamic>));
     }
-    _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'exitPointerLock', cast ([] : Array<Dynamic>));
-    return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.globalValue('document'), 'exitPointerLock', cast ([] : Array<Dynamic>));
+    return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([] : Array<Dynamic>));
     return cast null;
   }
 
@@ -463,9 +463,9 @@ class Window {
 
   public static function lockApplicationPointer(element:Dynamic):flighthq._internal._Promise<flighthq._internal._Nothing> {
     var result:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(element, 'requestPointerLock')), 'function'))) { return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(element, 'requestPointerLock')), 'function'))) { return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([] : Array<Dynamic>)); }
     result = _Runtime.callProperty(element, 'requestPointerLock', cast ([] : Array<Dynamic>));
-    return cast (cast _Runtime.select(_Runtime.isInstanceOf(result, _Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>))), function():Dynamic return cast result, function():Dynamic return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([] : Array<Dynamic>))) : flighthq._internal._Promise<flighthq._internal._Nothing>);
+    return cast (cast _Runtime.select(_Runtime.isInstanceOf(result, _Runtime.globalValue('Promise')), function():Dynamic return cast result, function():Dynamic return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([] : Array<Dynamic>))) : flighthq._internal._Promise<flighthq._internal._Nothing>);
     return cast null;
   }
 
@@ -512,7 +512,7 @@ class Window {
     _Runtime.setField(_Runtime.field(element, 'style'), 'userSelect', 'none');
     _Runtime.setField(_Runtime.field(element, 'style'), 'webkitUserSelect', 'none');
     _Runtime.setField((cast _Runtime.field(element, 'style') : { var webkitTapHighlightColor:String; }), 'webkitTapHighlightColor', 'transparent');
-    if (_Runtime.truthy(_Runtime.isInstanceOf(element, _Runtime.callProperty(_Runtime, 'globalValue', cast (['HTMLCanvasElement'] : Array<Dynamic>))))) {
+    if (_Runtime.truthy(_Runtime.isInstanceOf(element, _Runtime.globalValue('HTMLCanvasElement')))) {
       _Runtime.setField(_Runtime.field(element, 'style'), 'transform', 'translateZ(0)');
     }
   }
@@ -633,7 +633,7 @@ class Window {
     _Runtime.callProperty(_Runtime.callValue(getWindowBackend, cast ([] : Array<Dynamic>)), 'show', cast ([win] : Array<Dynamic>));
   }
 
-  public static final _applicationWindowObservers__window:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _applicationWindowObservers__window:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static var _windowBackend__window:Null<WindowBackend> = _Runtime.explicitNull();
 
@@ -641,7 +641,7 @@ class Window {
     var observers:Dynamic = cast _Runtime.UNDEFINED;
     observers = _Runtime.callProperty(Window._applicationWindowObservers__window, 'get', cast ([win] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(observers, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (observers = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) : Dynamic));
+      (observers = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       _Runtime.callProperty(Window._applicationWindowObservers__window, 'set', cast ([win, observers] : Array<Dynamic>));
     }
     return cast observers;

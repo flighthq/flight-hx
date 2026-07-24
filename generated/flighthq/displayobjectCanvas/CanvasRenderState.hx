@@ -26,14 +26,14 @@ class CanvasRenderState {
     _Runtime.setField(state, 'canvasCssFilterResolver', null);
     _Runtime.setField((cast state : { var canvas:Dynamic; }), 'canvas', canvas);
     _Runtime.setField((cast state : { var context:Dynamic; }), 'context', context);
-    _Runtime.setField((cast state : { var contextAttributes:Dynamic; }), 'contextAttributes', _Runtime.callProperty(context, 'getContextAttributes', cast ([] : Array<Dynamic>)));
+    _Runtime.setField((cast state : { var contextAttributes:Dynamic; }), 'contextAttributes', flighthq._internal.CanvasRenderingContext2D.call(context, 'getContextAttributes', cast ([] : Array<Dynamic>)));
     runtime = _Runtime.callValue(createCanvasRenderStateRuntime, cast ([] : Array<Dynamic>));
     _Runtime.setIndex(state, EntityRuntimeKey, runtime);
     _Runtime.setField(runtime, 'currentBlendMode', null);
     _Runtime.setField(runtime, 'imageSmoothingEnabled', _Runtime.coalesce(_Runtime.field(options, 'imageSmoothingEnabled'), function():Dynamic return cast true));
     _Runtime.setField(runtime, 'imageSmoothingQuality', _Runtime.coalesce(_Runtime.field(options, 'imageSmoothingQuality'), function():Dynamic return cast 'high'));
-    _Runtime.setField(context, 'imageSmoothingEnabled', _Runtime.field(runtime, 'imageSmoothingEnabled'));
-    _Runtime.setField(context, 'imageSmoothingQuality', _Runtime.field(runtime, 'imageSmoothingQuality'));
+    flighthq._internal.CanvasRenderingContext2D.setField(context, 'imageSmoothingEnabled', _Runtime.field(runtime, 'imageSmoothingEnabled'));
+    flighthq._internal.CanvasRenderingContext2D.setField(context, 'imageSmoothingQuality', _Runtime.field(runtime, 'imageSmoothingQuality'));
     return cast state;
     return cast null;
   }

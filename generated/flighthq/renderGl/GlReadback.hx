@@ -21,16 +21,16 @@ class GlReadback {
     gl = _Runtime.field(state, 'gl');
     readFbo = _Runtime.coalesce(_Runtime.field(target, 'resolveFramebuffer'), function():Dynamic return cast _Runtime.field(target, 'framebuffer'));
     prevFbo = _Runtime.field(runtime, 'currentFramebuffer');
-    _Runtime.callProperty(gl, 'bindFramebuffer', cast ([_Runtime.field(gl, 'READ_FRAMEBUFFER'), readFbo] : Array<Dynamic>));
-    status = _Runtime.callProperty(gl, 'checkFramebufferStatus', cast ([_Runtime.field(gl, 'READ_FRAMEBUFFER')] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(status, _Runtime.field(gl, 'FRAMEBUFFER_COMPLETE')))) {
-      _Runtime.callProperty(gl, 'bindFramebuffer', cast ([_Runtime.field(gl, 'READ_FRAMEBUFFER'), prevFbo] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindFramebuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'READ_FRAMEBUFFER'), readFbo] : Array<Dynamic>));
+    status = flighthq._internal.WebGl2RenderingContext.call(gl, 'checkFramebufferStatus', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'READ_FRAMEBUFFER')] : Array<Dynamic>));
+    if (_Runtime.truthy(!_Runtime.strictEquals(status, flighthq._internal.WebGl2RenderingContext.field(gl, 'FRAMEBUFFER_COMPLETE')))) {
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'bindFramebuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'READ_FRAMEBUFFER'), prevFbo] : Array<Dynamic>));
       return cast false;
     }
-    format = _Runtime.field(gl, 'RGBA');
-    type = _Runtime.select(_Runtime.isInstanceOf(out, _Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>))), function():Dynamic return cast _Runtime.field(gl, 'FLOAT'), function():Dynamic return cast _Runtime.field(gl, 'UNSIGNED_BYTE'));
-    _Runtime.callProperty(gl, 'readPixels', cast ([x, y, width, height, format, type, out] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindFramebuffer', cast ([_Runtime.field(gl, 'READ_FRAMEBUFFER'), prevFbo] : Array<Dynamic>));
+    format = flighthq._internal.WebGl2RenderingContext.field(gl, 'RGBA');
+    type = _Runtime.select(_Runtime.isInstanceOf(out, _Runtime.globalValue('Float32Array')), function():Dynamic return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), function():Dynamic return cast flighthq._internal.WebGl2RenderingContext.field(gl, 'UNSIGNED_BYTE'));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'readPixels', cast ([x, y, width, height, format, type, out] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindFramebuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'READ_FRAMEBUFFER'), prevFbo] : Array<Dynamic>));
     return cast true;
     return cast null;
   }

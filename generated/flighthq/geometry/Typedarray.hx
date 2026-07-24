@@ -8,7 +8,7 @@ class Typedarray {
   public static function reserveFloat32Array(array:flighthq._internal._Float32Array, capacity:Float):flighthq._internal._Float32Array {
     var out:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(array, 'length'), capacity, '>='))) { return cast array; }
-    out = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [capacity]);
+    out = _Runtime.construct(_Runtime.globalValue('Float32Array'), [capacity]);
     if (_Runtime.truthy(array)) { _Runtime.callProperty(out, 'set', cast ([array] : Array<Dynamic>)); }
     return cast out;
     return cast null;

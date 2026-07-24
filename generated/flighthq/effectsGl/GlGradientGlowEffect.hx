@@ -25,7 +25,7 @@ typedef GradientLookupLocations__glGradientGlowEffect = Dynamic;
 class GlGradientGlowEffect {
   public static final GRADIENT_LOOKUP_FRAGMENT_SRC__glGradientGlowEffect:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform sampler2D u_ramp;\nout vec4 fragColor;\nvoid main() {\n  float alpha = texture(u_texture, v_texCoord).a;\n  fragColor = texture(u_ramp, vec2(alpha, 0.5));\n}';
 
-  public static final lookupShaders__glGradientGlowEffect:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final lookupShaders__glGradientGlowEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function applyGradientGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientGlowEffect):Void {
     var descriptor:Dynamic = cast _Runtime.UNDEFINED;
@@ -45,15 +45,15 @@ class GlGradientGlowEffect {
     s2 = _Runtime.callValue(acquireGlRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     src = (cast source : GlRenderTarget);
     dst = (cast dest : GlRenderTarget);
-    quality = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)));
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
     gl = _Runtime.field(state, 'gl');
-    _Runtime.callValue(applyGlEffectTintPass, cast ([state, src, s0, 16777215.0, 1.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, strength] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callValue(applyGlEffectTintPass, cast ([state, src, s0, 16777215.0, 1.0, HxMath.min(1.0, strength)] : Array<Dynamic>));
     _Runtime.callValue(applyGlEffectBoxBlur, cast ([state, s0, s1, s2, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), passes: quality }] : Array<Dynamic>));
     ramp = _Runtime.callValue(createGlEffectGradientRampTexture, cast ([gl, _Runtime.field(effect, 'colors'), _Runtime.field(effect, 'alphas'), _Runtime.field(effect, 'ratios')] : Array<Dynamic>));
     _Runtime.callValue(GlGradientGlowEffect.applyGradientLookupPass__glGradientGlowEffect, cast ([state, s1, ramp, s0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'deleteTexture', cast ([ramp] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteTexture', cast ([ramp] : Array<Dynamic>));
     _Runtime.callValue(clearGlRenderTarget, cast ([state, dst] : Array<Dynamic>));
     _Runtime.callValue(applyGlEffectBlitPass, cast ([state, s0, dst] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(sourceMode, 'knockout'))) {
@@ -74,11 +74,11 @@ class GlGradientGlowEffect {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlGradientGlowEffect.getLookupShader__glGradientGlowEffect, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(blurred, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
-      _Runtime.callProperty(gl, 'activeTexture', cast ([_Runtime.field(gl, 'TEXTURE1')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_2D'), ramp] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1i', cast ([_Runtime.field(loc, 'locRamp'), 1.0] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'activeTexture', cast ([_Runtime.field(gl, 'TEXTURE0')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'blendFunc', cast ([_Runtime.field(gl, 'ONE'), _Runtime.field(gl, 'ZERO')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE1')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), ramp] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([_Runtime.field(loc, 'locRamp'), 1.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE0')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'blendFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE'), flighthq._internal.WebGl2RenderingContext.field(gl, 'ZERO')] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 
@@ -88,7 +88,7 @@ class GlGradientGlowEffect {
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlGradientGlowEffect.GRADIENT_LOOKUP_FRAGMENT_SRC__glGradientGlowEffect] : Array<Dynamic>));
-      (loc = cast (_Runtime.mergeObjects([base, { locRamp: _Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_ramp'] : Array<Dynamic>)) }]) : Dynamic));
+      (loc = cast (_Runtime.mergeObjects([base, { locRamp: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_ramp'] : Array<Dynamic>)) }]) : Dynamic));
       _Runtime.callProperty(GlGradientGlowEffect.lookupShaders__glGradientGlowEffect, 'set', cast ([state, loc] : Array<Dynamic>));
     }
     return cast loc;

@@ -75,7 +75,7 @@ class StarlingPexSerialize {
     var blendMode:Dynamic = cast _Runtime.UNDEFINED;
     var src:Dynamic = cast _Runtime.UNDEFINED;
     var dst:Dynamic = cast _Runtime.UNDEFINED;
-    angleDeg = (_Runtime.callProperty(HxMath, 'atan2', cast ([-_Runtime.field(config, 'directionY'), _Runtime.field(config, 'directionX')] : Array<Dynamic>)) * StarlingPexSerialize.RAD2DEG__starlingPexSerialize);
+    angleDeg = (HxMath.atan2(-_Runtime.field(config, 'directionY'), _Runtime.field(config, 'directionX')) * StarlingPexSerialize.RAD2DEG__starlingPexSerialize);
     startSize = (((_Runtime.field(config, 'scaleMin') + _Runtime.field(config, 'scaleMax')) * 0.5) * textureSize);
     startVar = (((_Runtime.field(config, 'scaleMax') - _Runtime.field(config, 'scaleMin')) * 0.5) * textureSize);
     finishSize = (startSize * _Runtime.field(config, 'scaleEnd'));

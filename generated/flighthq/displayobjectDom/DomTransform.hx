@@ -9,8 +9,8 @@ class DomTransform {
   public static function setDomTransform(element:Dynamic, transform:Matrix, roundPixels:Bool):Void {
     var tx:Dynamic = cast _Runtime.UNDEFINED;
     var ty:Dynamic = cast _Runtime.UNDEFINED;
-    tx = _Runtime.select(roundPixels, function():Dynamic return cast _Runtime.callProperty(HxMath, 'fround', cast ([_Runtime.field(transform, 'tx')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(transform, 'tx'));
-    ty = _Runtime.select(roundPixels, function():Dynamic return cast _Runtime.callProperty(HxMath, 'fround', cast ([_Runtime.field(transform, 'ty')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(transform, 'ty'));
+    tx = _Runtime.select(roundPixels, function():Dynamic return cast HxMath.fround(_Runtime.field(transform, 'tx')), function():Dynamic return cast _Runtime.field(transform, 'tx'));
+    ty = _Runtime.select(roundPixels, function():Dynamic return cast HxMath.fround(_Runtime.field(transform, 'ty')), function():Dynamic return cast _Runtime.field(transform, 'ty'));
     _Runtime.setField(_Runtime.field(element, 'style'), 'transform', 'matrix(' + Std.string(_Runtime.field(transform, 'a')) + ',' + Std.string(_Runtime.field(transform, 'b')) + ',' + Std.string(_Runtime.field(transform, 'c')) + ',' + Std.string(_Runtime.field(transform, 'd')) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
   }
 
@@ -30,8 +30,8 @@ class DomTransform {
     tx = (((a * offsetX) + (c * offsetY)) + _Runtime.field(transform, 'tx'));
     ty = (((b * offsetX) + (d * offsetY)) + _Runtime.field(transform, 'ty'));
     if (_Runtime.truthy(roundPixels)) {
-      (tx = cast (_Runtime.callProperty(HxMath, 'fround', cast ([tx] : Array<Dynamic>)) : Dynamic));
-      (ty = cast (_Runtime.callProperty(HxMath, 'fround', cast ([ty] : Array<Dynamic>)) : Dynamic));
+      (tx = cast (HxMath.fround(tx) : Dynamic));
+      (ty = cast (HxMath.fround(ty) : Dynamic));
     }
     _Runtime.setField(_Runtime.field(element, 'style'), 'transform', 'matrix(' + Std.string(a) + ',' + Std.string(b) + ',' + Std.string(c) + ',' + Std.string(d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
   }

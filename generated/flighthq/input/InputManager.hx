@@ -56,7 +56,7 @@ class InputManager {
       _Runtime.setField(out, 'y', y);
       return;
     }
-    mag = _Runtime.callProperty(HxMath, 'sqrt', cast ([((x * x) + (y * y))] : Array<Dynamic>));
+    mag = HxMath.sqrt(((x * x) + (y * y)));
     if (_Runtime.truthy(_Runtime.compare(mag, deadZone, '<='))) {
       _Runtime.setField(out, 'x', 0.0);
       _Runtime.setField(out, 'y', 0.0);
@@ -101,15 +101,15 @@ class InputManager {
     rafId = 0.0;
     loop = function() {
       _Runtime.callValue(pollGamepadInput, cast ([manager] : Array<Dynamic>));
-      (rafId = cast (_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['requestAnimationFrame'] : Array<Dynamic>)), cast ([loop] : Array<Dynamic>)) : Dynamic));
+      (rafId = cast (_Runtime.callValue(_Runtime.globalValue('requestAnimationFrame'), cast ([loop] : Array<Dynamic>)) : Dynamic));
     };
     _Runtime.callProperty(target, 'addEventListener', cast (['gamepadconnected', onGamepadConnected] : Array<Dynamic>));
     _Runtime.callProperty(target, 'addEventListener', cast (['gamepaddisconnected', onGamepadDisconnected] : Array<Dynamic>));
-    (rafId = cast (_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['requestAnimationFrame'] : Array<Dynamic>)), cast ([loop] : Array<Dynamic>)) : Dynamic));
+    (rafId = cast (_Runtime.callValue(_Runtime.globalValue('requestAnimationFrame'), cast ([loop] : Array<Dynamic>)) : Dynamic));
     _Runtime.callValue(InputManager.setInputBinding__inputManager, cast ([manager, target, InputManager.kGamepadInput__inputManager, function() {
       _Runtime.callProperty(target, 'removeEventListener', cast (['gamepadconnected', onGamepadConnected] : Array<Dynamic>));
       _Runtime.callProperty(target, 'removeEventListener', cast (['gamepaddisconnected', onGamepadDisconnected] : Array<Dynamic>));
-      _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['cancelAnimationFrame'] : Array<Dynamic>)), cast ([rafId] : Array<Dynamic>));
+      _Runtime.callValue(_Runtime.globalValue('cancelAnimationFrame'), cast ([rafId] : Array<Dynamic>));
     }] : Array<Dynamic>));
     _Runtime.voidValue(options);
   }
@@ -415,7 +415,7 @@ class InputManager {
   }
 
   public static function createInputState():InputState {
-    return cast { axisValues: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), gamepadButtonsDown: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []), justPressedGamepadButtons: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []), justPressedKeys: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []), justReleasedGamepadButtons: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []), justReleasedKeys: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []), keysDown: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []), pointerButtonsDown: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };
+    return cast { axisValues: _Runtime.construct(_Runtime.globalValue('Map'), []), gamepadButtonsDown: _Runtime.construct(_Runtime.globalValue('Set'), []), justPressedGamepadButtons: _Runtime.construct(_Runtime.globalValue('Set'), []), justPressedKeys: _Runtime.construct(_Runtime.globalValue('Set'), []), justReleasedGamepadButtons: _Runtime.construct(_Runtime.globalValue('Set'), []), justReleasedKeys: _Runtime.construct(_Runtime.globalValue('Set'), []), keysDown: _Runtime.construct(_Runtime.globalValue('Set'), []), pointerButtonsDown: _Runtime.construct(_Runtime.globalValue('Map'), []) };
     return cast null;
   }
 
@@ -451,8 +451,8 @@ class InputManager {
   }
 
   public static function exitInputPointerLock():Void {
-    if (_Runtime.truthy(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'exitPointerLock'))) {
-      _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'exitPointerLock', cast ([] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.field(_Runtime.globalValue('document'), 'exitPointerLock'))) {
+      _Runtime.callProperty(_Runtime.globalValue('document'), 'exitPointerLock', cast ([] : Array<Dynamic>));
     }
   }
 
@@ -499,10 +499,10 @@ class InputManager {
   public static function getKeyModifierFromDomKeyboardEvent(event:Dynamic):Float {
     var modifier:Dynamic = cast _Runtime.UNDEFINED;
     modifier = KeyModifierValue.NONE;
-    if (_Runtime.truthy(_Runtime.field(event, 'altKey'))) { (modifier = (Std.int(modifier) | Std.int(_Runtime.select(_Runtime.strictEquals(_Runtime.field(event, 'location'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['KeyboardEvent'] : Array<Dynamic>)), 'DOM_KEY_LOCATION_RIGHT')), function():Dynamic return cast KeyModifierValue.RIGHT_ALT, function():Dynamic return cast KeyModifierValue.LEFT_ALT)))); }
-    if (_Runtime.truthy(_Runtime.field(event, 'ctrlKey'))) { (modifier = (Std.int(modifier) | Std.int(_Runtime.select(_Runtime.strictEquals(_Runtime.field(event, 'location'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['KeyboardEvent'] : Array<Dynamic>)), 'DOM_KEY_LOCATION_RIGHT')), function():Dynamic return cast KeyModifierValue.RIGHT_CTRL, function():Dynamic return cast KeyModifierValue.LEFT_CTRL)))); }
-    if (_Runtime.truthy(_Runtime.field(event, 'metaKey'))) { (modifier = (Std.int(modifier) | Std.int(_Runtime.select(_Runtime.strictEquals(_Runtime.field(event, 'location'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['KeyboardEvent'] : Array<Dynamic>)), 'DOM_KEY_LOCATION_RIGHT')), function():Dynamic return cast KeyModifierValue.RIGHT_META, function():Dynamic return cast KeyModifierValue.LEFT_META)))); }
-    if (_Runtime.truthy(_Runtime.field(event, 'shiftKey'))) { (modifier = (Std.int(modifier) | Std.int(_Runtime.select(_Runtime.strictEquals(_Runtime.field(event, 'location'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['KeyboardEvent'] : Array<Dynamic>)), 'DOM_KEY_LOCATION_RIGHT')), function():Dynamic return cast KeyModifierValue.RIGHT_SHIFT, function():Dynamic return cast KeyModifierValue.LEFT_SHIFT)))); }
+    if (_Runtime.truthy(_Runtime.field(event, 'altKey'))) { (modifier = (Std.int(modifier) | Std.int(_Runtime.select(_Runtime.strictEquals(_Runtime.field(event, 'location'), _Runtime.field(_Runtime.globalValue('KeyboardEvent'), 'DOM_KEY_LOCATION_RIGHT')), function():Dynamic return cast KeyModifierValue.RIGHT_ALT, function():Dynamic return cast KeyModifierValue.LEFT_ALT)))); }
+    if (_Runtime.truthy(_Runtime.field(event, 'ctrlKey'))) { (modifier = (Std.int(modifier) | Std.int(_Runtime.select(_Runtime.strictEquals(_Runtime.field(event, 'location'), _Runtime.field(_Runtime.globalValue('KeyboardEvent'), 'DOM_KEY_LOCATION_RIGHT')), function():Dynamic return cast KeyModifierValue.RIGHT_CTRL, function():Dynamic return cast KeyModifierValue.LEFT_CTRL)))); }
+    if (_Runtime.truthy(_Runtime.field(event, 'metaKey'))) { (modifier = (Std.int(modifier) | Std.int(_Runtime.select(_Runtime.strictEquals(_Runtime.field(event, 'location'), _Runtime.field(_Runtime.globalValue('KeyboardEvent'), 'DOM_KEY_LOCATION_RIGHT')), function():Dynamic return cast KeyModifierValue.RIGHT_META, function():Dynamic return cast KeyModifierValue.LEFT_META)))); }
+    if (_Runtime.truthy(_Runtime.field(event, 'shiftKey'))) { (modifier = (Std.int(modifier) | Std.int(_Runtime.select(_Runtime.strictEquals(_Runtime.field(event, 'location'), _Runtime.field(_Runtime.globalValue('KeyboardEvent'), 'DOM_KEY_LOCATION_RIGHT')), function():Dynamic return cast KeyModifierValue.RIGHT_SHIFT, function():Dynamic return cast KeyModifierValue.LEFT_SHIFT)))); }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callOptionalProperty(event, 'getModifierState', cast (['CapsLock'] : Array<Dynamic>)), true))) { (modifier = (Std.int(modifier) | Std.int(KeyModifierValue.CAPS_LOCK))); }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callOptionalProperty(event, 'getModifierState', cast (['NumLock'] : Array<Dynamic>)), true))) { (modifier = (Std.int(modifier) | Std.int(KeyModifierValue.NUM_LOCK))); }
     return cast modifier;
@@ -510,15 +510,15 @@ class InputManager {
   }
 
   public static function getMouseWheelModeFromDomWheelEvent(event:Dynamic):MouseWheelMode {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(event, 'deltaMode'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WheelEvent'] : Array<Dynamic>)), 'DOM_DELTA_PIXEL')))) { return cast 'pixels'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(event, 'deltaMode'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WheelEvent'] : Array<Dynamic>)), 'DOM_DELTA_LINE')))) { return cast 'lines'; }
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(event, 'deltaMode'), _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WheelEvent'] : Array<Dynamic>)), 'DOM_DELTA_PAGE')))) { return cast 'pages'; }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(event, 'deltaMode'), _Runtime.field(_Runtime.globalValue('WheelEvent'), 'DOM_DELTA_PIXEL')))) { return cast 'pixels'; }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(event, 'deltaMode'), _Runtime.field(_Runtime.globalValue('WheelEvent'), 'DOM_DELTA_LINE')))) { return cast 'lines'; }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(event, 'deltaMode'), _Runtime.field(_Runtime.globalValue('WheelEvent'), 'DOM_DELTA_PAGE')))) { return cast 'pages'; }
     return cast 'unknown';
     return cast null;
   }
 
   public static function hasInputPointerLock():Bool {
-    return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'pointerLockElement'), null);
+    return cast !_Runtime.strictEquals(_Runtime.field(_Runtime.globalValue('document'), 'pointerLockElement'), null);
     return cast null;
   }
 
@@ -541,10 +541,10 @@ class InputManager {
     var now:Dynamic = cast _Runtime.UNDEFINED;
     var prev:Dynamic = cast _Runtime.UNDEFINED;
     var gamepads:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(manager, 'enabled')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'getGamepads')), 'function')))) { return; }
-    now = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['performance'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.orValue(!_Runtime.truthy(_Runtime.field(manager, 'enabled')), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('navigator'), 'getGamepads')), 'function')))) { return; }
+    now = _Runtime.callProperty(_Runtime.globalValue('performance'), 'now', cast ([] : Array<Dynamic>));
     prev = _Runtime.callValue(InputManager.getOrCreateGamepadPollState__inputManager, cast ([manager] : Array<Dynamic>));
-    gamepads = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)), 'getGamepads', cast ([] : Array<Dynamic>));
+    gamepads = _Runtime.callProperty(_Runtime.globalValue('navigator'), 'getGamepads', cast ([] : Array<Dynamic>));
     for (pad in _Runtime.iterable(gamepads)) {
       if (_Runtime.truthy(_Runtime.strictEquals(pad, null))) { continue; }
       var prevAxes:Dynamic = _Runtime.coalesce(_Runtime.callProperty(_Runtime.field(prev, 'axes'), 'get', cast ([_Runtime.field(pad, 'index')] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>));
@@ -599,12 +599,12 @@ class InputManager {
   public static function requestInputPointerLock(element:Dynamic):flighthq._internal._Promise<Bool> {
     try {
       var result:Dynamic = _Runtime.callProperty(element, 'requestPointerLock', cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(_Runtime.isInstanceOf(result, _Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>))))) {
+      if (_Runtime.truthy(_Runtime.isInstanceOf(result, _Runtime.globalValue('Promise')))) {
         return cast _Runtime.callProperty(result, 'then', cast ([function() return true, function() return false] : Array<Dynamic>));
       }
-      return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([true] : Array<Dynamic>));
+      return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([true] : Array<Dynamic>));
     } catch (__error:Dynamic) {
-      return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([false] : Array<Dynamic>));
+      return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([false] : Array<Dynamic>));
     }
     return cast null;
   }
@@ -634,7 +634,7 @@ class InputManager {
   }
 
   public static function getKeyCodeFromDomKeyboardCode__inputManager(code:String, location:Float):Float {
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(location, _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['KeyboardEvent'] : Array<Dynamic>)), 'DOM_KEY_LOCATION_NUMPAD')), function():Dynamic return cast _Runtime.hasField(InputManager.numpadKeyCodesByCode__inputManager, code)))) {
+    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(location, _Runtime.field(_Runtime.globalValue('KeyboardEvent'), 'DOM_KEY_LOCATION_NUMPAD')), function():Dynamic return cast _Runtime.hasField(InputManager.numpadKeyCodesByCode__inputManager, code)))) {
       return cast _Runtime.getIndex(InputManager.numpadKeyCodesByCode__inputManager, code);
     }
     return cast _Runtime.coalesce(_Runtime.getIndex(InputManager.keyCodesByCode__inputManager, code), function():Dynamic return cast KeyCodeValue.UNKNOWN);
@@ -704,13 +704,13 @@ class InputManager {
 
   public static final _textData__inputManager:InputTextData = { isComposing: false, text: '' };
 
-  public static final _gamepadPollStates__inputManager:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _gamepadPollStates__inputManager:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function getOrCreateGamepadPollState__inputManager(manager:flighthq.types.InputManager):GamepadPollState__inputManager {
     var state:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.callProperty(InputManager._gamepadPollStates__inputManager, 'get', cast ([manager] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (state = cast ({ axes: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), buttons: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) } : Dynamic));
+      (state = cast ({ axes: _Runtime.construct(_Runtime.globalValue('Map'), []), buttons: _Runtime.construct(_Runtime.globalValue('Map'), []) } : Dynamic));
       _Runtime.callProperty(InputManager._gamepadPollStates__inputManager, 'set', cast ([manager, state] : Array<Dynamic>));
     }
     return cast state;
@@ -735,7 +735,7 @@ class InputManager {
 
   public static final kWheelInput__inputManager:Dynamic = _Runtime.symbol();
 
-  public static final _inputBindings__inputManager:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _inputBindings__inputManager:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function clearInputBinding__inputManager(manager:flighthq.types.InputManager, target:Dynamic, kind:Dynamic):Void {
     var byKind:Dynamic = cast _Runtime.UNDEFINED;
@@ -752,12 +752,12 @@ class InputManager {
     var byKind:Dynamic = cast _Runtime.UNDEFINED;
     byTarget = _Runtime.callProperty(InputManager._inputBindings__inputManager, 'get', cast ([manager] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(byTarget, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (byTarget = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) : Dynamic));
+      (byTarget = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       _Runtime.callProperty(InputManager._inputBindings__inputManager, 'set', cast ([manager, byTarget] : Array<Dynamic>));
     }
     byKind = _Runtime.callProperty(byTarget, 'get', cast ([target] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(byKind, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (byKind = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) : Dynamic));
+      (byKind = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       _Runtime.callProperty(byTarget, 'set', cast ([target, byKind] : Array<Dynamic>));
     }
     _Runtime.callOptionalValue(_Runtime.callProperty(byKind, 'get', cast ([kind] : Array<Dynamic>)), cast ([] : Array<Dynamic>));

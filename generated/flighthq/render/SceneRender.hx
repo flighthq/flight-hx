@@ -88,7 +88,7 @@ class SceneRender {
     pointCount = 0.0;
     point = _Runtime.field(lights, 'point');
     if (_Runtime.truthy(!_Runtime.strictEquals(point, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (pointCount = cast (_Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(point, 'length'), MAX_FORWARD_LIGHTS] : Array<Dynamic>)) : Dynamic));
+      (pointCount = cast (HxMath.min(_Runtime.field(point, 'length'), MAX_FORWARD_LIGHTS) : Dynamic));
       {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, pointCount, '<'))) {
@@ -100,7 +100,7 @@ class SceneRender {
     spotCount = 0.0;
     spot = _Runtime.field(lights, 'spot');
     if (_Runtime.truthy(!_Runtime.strictEquals(spot, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (spotCount = cast (_Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(spot, 'length'), MAX_FORWARD_LIGHTS] : Array<Dynamic>)) : Dynamic));
+      (spotCount = cast (HxMath.min(_Runtime.field(spot, 'length'), MAX_FORWARD_LIGHTS) : Dynamic));
       {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, spotCount, '<'))) {
@@ -112,7 +112,7 @@ class SceneRender {
     hemisphereCount = 0.0;
     hemisphere = _Runtime.field(lights, 'hemisphere');
     if (_Runtime.truthy(!_Runtime.strictEquals(hemisphere, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (hemisphereCount = cast (_Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(hemisphere, 'length'), MAX_FORWARD_LIGHTS] : Array<Dynamic>)) : Dynamic));
+      (hemisphereCount = cast (HxMath.min(_Runtime.field(hemisphere, 'length'), MAX_FORWARD_LIGHTS) : Dynamic));
       {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, hemisphereCount, '<'))) {
@@ -187,7 +187,7 @@ class SceneRender {
     if (_Runtime.truthy(_Runtime.strictEquals(prepared, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var viewProjection:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
       var meshes:Array<Mesh> = cast ([] : Array<Dynamic>);
-      var list:SceneRenderList = { lights: { ambientCount: 0.0, data: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [SCENE_LIGHT_BLOCK_FLOATS]), directionalCount: 0.0, hemisphereCount: 0.0, pointCount: 0.0, spotCount: 0.0, version: 0.0 }, meshCount: 0.0, viewProjection: viewProjection, visibleMeshes: meshes };
+      var list:SceneRenderList = { lights: { ambientCount: 0.0, data: _Runtime.construct(_Runtime.globalValue('Float32Array'), [SCENE_LIGHT_BLOCK_FLOATS]), directionalCount: 0.0, hemisphereCount: 0.0, pointCount: 0.0, spotCount: 0.0, version: 0.0 }, meshCount: 0.0, viewProjection: viewProjection, visibleMeshes: meshes };
       (prepared = cast ({ frustum: _Runtime.callValue(createFrustum, cast ([] : Array<Dynamic>)), list: list, meshes: meshes, viewProjection: viewProjection, worldBounds: _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>)) } : Dynamic));
       _Runtime.callProperty(SceneRender.preparedScenes__sceneRender, 'set', cast ([state, prepared] : Array<Dynamic>));
     }
@@ -297,7 +297,7 @@ class SceneRender {
     var projection:Dynamic = cast _Runtime.UNDEFINED;
     projection = _Runtime.field(camera, 'projection');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(projection, 'kind'), 'perspective'))) {
-      _Runtime.callValue(setPerspectiveMatrix4, cast ([SceneRender.scratchProjection__sceneRender, _Runtime.callProperty(HxMath, 'tan', cast ([(_Runtime.field(projection, 'fovY') * 0.5)] : Array<Dynamic>)), _Runtime.select(!_Runtime.strictEquals(_Runtime.field(projection, 'aspect'), 0.0), function():Dynamic return cast _Runtime.field(projection, 'aspect'), function():Dynamic return cast aspect), _Runtime.field(camera, 'near'), _Runtime.field(camera, 'far')] : Array<Dynamic>));
+      _Runtime.callValue(setPerspectiveMatrix4, cast ([SceneRender.scratchProjection__sceneRender, HxMath.tan((_Runtime.field(projection, 'fovY') * 0.5)), _Runtime.select(!_Runtime.strictEquals(_Runtime.field(projection, 'aspect'), 0.0), function():Dynamic return cast _Runtime.field(projection, 'aspect'), function():Dynamic return cast aspect), _Runtime.field(camera, 'near'), _Runtime.field(camera, 'far')] : Array<Dynamic>));
     } else {
       _Runtime.callValue(setOrthographicMatrix4, cast ([SceneRender.scratchProjection__sceneRender, -_Runtime.field(projection, 'halfWidth'), _Runtime.field(projection, 'halfWidth'), -_Runtime.field(projection, 'halfHeight'), _Runtime.field(projection, 'halfHeight'), _Runtime.field(camera, 'near'), _Runtime.field(camera, 'far')] : Array<Dynamic>));
     }
@@ -306,11 +306,11 @@ class SceneRender {
 
   public static final DEFAULT_VIEWPORT_ASPECT__sceneRender:Dynamic = 1.0;
 
-  public static final preparedScenes__sceneRender:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final preparedScenes__sceneRender:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static final scratchColor__sceneRender:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
 
   public static final scratchProjection__sceneRender:Dynamic = _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>));
 
-  public static final scratchLightData__sceneRender:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [SCENE_LIGHT_BLOCK_FLOATS]);
+  public static final scratchLightData__sceneRender:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [SCENE_LIGHT_BLOCK_FLOATS]);
 }

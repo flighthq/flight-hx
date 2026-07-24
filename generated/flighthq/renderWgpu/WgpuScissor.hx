@@ -18,10 +18,10 @@ class WgpuScissor {
     runtime = _Runtime.callValue(getWgpuRenderStateRuntime, cast ([state] : Array<Dynamic>));
     rect = _Runtime.field(runtime, 'currentScissorRect');
     if (_Runtime.truthy(_Runtime.strictEquals(rect, null))) { return; }
-    x = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'floor', cast ([_Runtime.field(rect, 'x')] : Array<Dynamic>))] : Array<Dynamic>));
-    y = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'floor', cast ([_Runtime.field(rect, 'y')] : Array<Dynamic>))] : Array<Dynamic>));
-    w = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(rect, 'width')] : Array<Dynamic>))] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(rect, 'height')] : Array<Dynamic>))] : Array<Dynamic>));
+    x = HxMath.max(0.0, HxMath.floor(_Runtime.field(rect, 'x')));
+    y = HxMath.max(0.0, HxMath.floor(_Runtime.field(rect, 'y')));
+    w = HxMath.max(1.0, HxMath.ceil(_Runtime.field(rect, 'width')));
+    h = HxMath.max(1.0, HxMath.ceil(_Runtime.field(rect, 'height')));
     _Runtime.callProperty(pass, 'setScissorRect', cast ([x, y, w, h] : Array<Dynamic>));
   }
 

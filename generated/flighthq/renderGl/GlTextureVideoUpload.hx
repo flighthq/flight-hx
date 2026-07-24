@@ -14,7 +14,7 @@ class GlTextureVideoUpload {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(element, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'readyState'), 2.0, '<')), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'videoWidth'), 0.0, '<=')), function():Dynamic return cast _Runtime.compare(_Runtime.field(element, 'videoHeight'), 0.0, '<=')))) {
       return cast uploadedFrameId;
     }
-    _Runtime.callValue(uploadGlTextureElement, cast ([gl, _Runtime.field(gl, 'TEXTURE_2D'), (cast (cast element : Dynamic) : Dynamic)] : Array<Dynamic>));
+    _Runtime.callValue(uploadGlTextureElement, cast ([gl, flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), (cast (cast element : Dynamic) : Dynamic)] : Array<Dynamic>));
     return cast _Runtime.field(videoTexture, 'frameId');
     return cast null;
   }

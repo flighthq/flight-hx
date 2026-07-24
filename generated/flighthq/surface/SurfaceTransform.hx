@@ -15,8 +15,8 @@ class SurfaceTransform {
   public static function applySurfaceColorTransform(dest:SurfaceRegion, source:SurfaceRegion, ct:ColorTransformLike):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
-    w = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'width'), _Runtime.field(source, 'width')] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'height'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+    w = HxMath.min(_Runtime.field(dest, 'width'), _Runtime.field(source, 'width'));
+    h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, h, '<'))) {
@@ -35,10 +35,10 @@ class SurfaceTransform {
             var g:Dynamic = _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 1.0));
             var b:Dynamic = _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 2.0));
             var a:Dynamic = _Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 3.0));
-            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), di, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([((r * _Runtime.field(ct, 'redMultiplier')) + _Runtime.field(ct, 'redOffset'))] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
-            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 1.0), _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([((g * _Runtime.field(ct, 'greenMultiplier')) + _Runtime.field(ct, 'greenOffset'))] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
-            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 2.0), _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([((b * _Runtime.field(ct, 'blueMultiplier')) + _Runtime.field(ct, 'blueOffset'))] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
-            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 3.0), _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([((a * _Runtime.field(ct, 'alphaMultiplier')) + _Runtime.field(ct, 'alphaOffset'))] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>)));
+            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), di, HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((r * _Runtime.field(ct, 'redMultiplier')) + _Runtime.field(ct, 'redOffset'))))));
+            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 1.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((g * _Runtime.field(ct, 'greenMultiplier')) + _Runtime.field(ct, 'greenOffset'))))));
+            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 2.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((b * _Runtime.field(ct, 'blueMultiplier')) + _Runtime.field(ct, 'blueOffset'))))));
+            _Runtime.setIndex(_Runtime.field(_Runtime.field(dest, 'surface'), 'data'), (di + 3.0), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(((a * _Runtime.field(ct, 'alphaMultiplier')) + _Runtime.field(ct, 'alphaOffset'))))));
             px++;
           }
         }
@@ -54,8 +54,8 @@ class SurfaceTransform {
     var sd:Dynamic = cast _Runtime.UNDEFINED;
     var dd:Dynamic = cast _Runtime.UNDEFINED;
     var changed:Dynamic = cast _Runtime.UNDEFINED;
-    w = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'width'), _Runtime.field(source, 'width')] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'height'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+    w = HxMath.min(_Runtime.field(dest, 'width'), _Runtime.field(source, 'width'));
+    h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
     sd = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
     dd = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     changed = 0.0;
@@ -103,8 +103,8 @@ class SurfaceTransform {
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var sd:Dynamic = cast _Runtime.UNDEFINED;
     var dd:Dynamic = cast _Runtime.UNDEFINED;
-    w = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'width'), _Runtime.field(source, 'width')] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'height'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+    w = HxMath.min(_Runtime.field(dest, 'width'), _Runtime.field(source, 'width'));
+    h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
     sd = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
     dd = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     {
@@ -121,10 +121,10 @@ class SurfaceTransform {
             if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(sx, 0.0, '<'), function():Dynamic return cast _Runtime.compare(sx, _Runtime.field(_Runtime.field(source, 'surface'), 'width'), '>=')), function():Dynamic return cast _Runtime.compare(dx, 0.0, '<')), function():Dynamic return cast _Runtime.compare(dx, _Runtime.field(_Runtime.field(dest, 'surface'), 'width'), '>=')))) { px++; continue; }
             var si:Dynamic = (((sy * _Runtime.field(_Runtime.field(source, 'surface'), 'width')) + sx) * 4.0);
             var di:Dynamic = (((dy * _Runtime.field(_Runtime.field(dest, 'surface'), 'width')) + dx) * 4.0);
-            _Runtime.setIndex(dd, di, _Runtime.callProperty(HxMath, 'round', cast ([((_Runtime.getIndex(sd, si) * redMultiplier) + (_Runtime.getIndex(dd, di) * (1.0 - redMultiplier)))] : Array<Dynamic>)));
-            _Runtime.setIndex(dd, (di + 1.0), _Runtime.callProperty(HxMath, 'round', cast ([((_Runtime.getIndex(sd, (si + 1.0)) * greenMultiplier) + (_Runtime.getIndex(dd, (di + 1.0)) * (1.0 - greenMultiplier)))] : Array<Dynamic>)));
-            _Runtime.setIndex(dd, (di + 2.0), _Runtime.callProperty(HxMath, 'round', cast ([((_Runtime.getIndex(sd, (si + 2.0)) * blueMultiplier) + (_Runtime.getIndex(dd, (di + 2.0)) * (1.0 - blueMultiplier)))] : Array<Dynamic>)));
-            _Runtime.setIndex(dd, (di + 3.0), _Runtime.callProperty(HxMath, 'round', cast ([((_Runtime.getIndex(sd, (si + 3.0)) * alphaMultiplier) + (_Runtime.getIndex(dd, (di + 3.0)) * (1.0 - alphaMultiplier)))] : Array<Dynamic>)));
+            _Runtime.setIndex(dd, di, HxMath.round(((_Runtime.getIndex(sd, si) * redMultiplier) + (_Runtime.getIndex(dd, di) * (1.0 - redMultiplier)))));
+            _Runtime.setIndex(dd, (di + 1.0), HxMath.round(((_Runtime.getIndex(sd, (si + 1.0)) * greenMultiplier) + (_Runtime.getIndex(dd, (di + 1.0)) * (1.0 - greenMultiplier)))));
+            _Runtime.setIndex(dd, (di + 2.0), HxMath.round(((_Runtime.getIndex(sd, (si + 2.0)) * blueMultiplier) + (_Runtime.getIndex(dd, (di + 2.0)) * (1.0 - blueMultiplier)))));
+            _Runtime.setIndex(dd, (di + 3.0), HxMath.round(((_Runtime.getIndex(sd, (si + 3.0)) * alphaMultiplier) + (_Runtime.getIndex(dd, (di + 3.0)) * (1.0 - alphaMultiplier)))));
             px++;
           }
         }
@@ -138,7 +138,7 @@ class SurfaceTransform {
     var needed:Dynamic = cast _Runtime.UNDEFINED;
     needed = _Runtime.field(_Runtime.field(out, 'data'), 'length');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(SurfaceTransform._scrollScratch__surfaceTransform, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(SurfaceTransform._scrollScratch__surfaceTransform, 'length'), needed, '<')))) {
-      (SurfaceTransform._scrollScratch__surfaceTransform = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [needed]) : Dynamic));
+      (SurfaceTransform._scrollScratch__surfaceTransform = cast (_Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [needed]) : Dynamic));
     }
     _Runtime.callProperty(SurfaceTransform._scrollScratch__surfaceTransform, 'set', cast ([_Runtime.field(out, 'data'), 0.0] : Array<Dynamic>));
     {

@@ -12,11 +12,11 @@ import flighthq.types.Protocol.ProtocolHandler;
 class Protocol {
   public static var _backend__protocol:Null<ProtocolBackend> = _Runtime.explicitNull();
 
-  public static final _reservedSchemes__protocol:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), [cast (['file', 'ftp', 'ftps', 'http', 'https', 'mailto'] : Array<Dynamic>)]);
+  public static final _reservedSchemes__protocol:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), [cast (['file', 'ftp', 'ftps', 'http', 'https', 'mailto'] : Array<Dynamic>)]);
 
   public static function _safeDecode__protocol(s:String):String {
     try {
-      return cast _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['decodeURIComponent'] : Array<Dynamic>)), cast ([_Runtime.replace(s, _Runtime.regexp('\\+', 'g'), ' ', false)] : Array<Dynamic>));
+      return cast _Runtime.callValue(_Runtime.globalValue('decodeURIComponent'), cast ([_Runtime.replace(s, _Runtime.regexp('\\+', 'g'), ' ', false)] : Array<Dynamic>));
     } catch (__error:Dynamic) {
       return cast s;
     }
@@ -25,7 +25,7 @@ class Protocol {
 
   public static final _schemePattern__protocol:Dynamic = _Runtime.regexp('^[a-z][a-z0-9+\\-.]*$$', '');
 
-  public static final _subscriptions__protocol:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _subscriptions__protocol:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function attachProtocolHandler(handler:ProtocolHandler):Void {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
@@ -62,7 +62,7 @@ class Protocol {
     normalizedPath = _Runtime.select(_Runtime.andValue(path, function():Dynamic return cast !_Runtime.truthy(StringTools.startsWith(path, '/'))), function():Dynamic return cast '/' + Std.string(path) + '', function():Dynamic return cast path);
     url = '' + Std.string(scheme) + ':' + Std.string(authority) + '' + Std.string(normalizedPath) + '';
     if (_Runtime.truthy(query)) {
-      var entries:Dynamic = _Runtime.callProperty(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'entries', cast ([query] : Array<Dynamic>)), 'filter', cast ([function(__parameter0:Dynamic) {
+      var entries:Dynamic = _Runtime.callProperty(flighthq._internal.DynamicObject.entries(query), 'filter', cast ([function(__parameter0:Dynamic) {
         var k:Dynamic = cast _Runtime.UNDEFINED;
         k = _Runtime.getIndex(__parameter0, 0.0);
         return cast _Runtime.compare(_Runtime.field(k, 'length'), 0.0, '>');
@@ -73,7 +73,7 @@ class Protocol {
           var v:Dynamic = cast _Runtime.UNDEFINED;
           k = _Runtime.getIndex(__parameter1, 0.0);
           v = _Runtime.getIndex(__parameter1, 1.0);
-          return cast '' + Std.string(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['encodeURIComponent'] : Array<Dynamic>)), cast ([k] : Array<Dynamic>))) + '=' + Std.string(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['encodeURIComponent'] : Array<Dynamic>)), cast ([v] : Array<Dynamic>))) + '';
+          return cast '' + Std.string(_Runtime.callValue(_Runtime.globalValue('encodeURIComponent'), cast ([k] : Array<Dynamic>))) + '=' + Std.string(_Runtime.callValue(_Runtime.globalValue('encodeURIComponent'), cast ([v] : Array<Dynamic>))) + '';
         }] : Array<Dynamic>)), '&');
         (url = cast ((url + '?' + Std.string(qs) + '') : Dynamic));
       }
@@ -87,11 +87,11 @@ class Protocol {
     _registeredSchemes = cast ([] : Array<Dynamic>);
     return cast { register: function(scheme:Dynamic) {
       var nav:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['location'] : Array<Dynamic>)), 'undefined')))) { return cast false; }
-      nav = (cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)) : { @:optional var registerProtocolHandler:Dynamic; });
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofGlobal('location'), 'undefined')))) { return cast false; }
+      nav = (cast _Runtime.globalValue('navigator') : { @:optional var registerProtocolHandler:Dynamic; });
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(nav, 'registerProtocolHandler')), 'function'))) { return cast false; }
       try {
-        _Runtime.callProperty(nav, 'registerProtocolHandler', cast ([scheme, (_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['location'] : Array<Dynamic>)), 'origin') + '/?url=%s')] : Array<Dynamic>));
+        _Runtime.callProperty(nav, 'registerProtocolHandler', cast ([scheme, (_Runtime.field(_Runtime.globalValue('location'), 'origin') + '/?url=%s')] : Array<Dynamic>));
         if (_Runtime.truthy(!_Runtime.truthy(_Runtime.includes(_registeredSchemes, scheme)))) { _Runtime.callProperty(_registeredSchemes, 'push', cast ([scheme] : Array<Dynamic>)); }
         return cast true;
       } catch (__error:Dynamic) {
@@ -113,9 +113,9 @@ class Protocol {
     }, removeAsDefault: function() {
       return cast false;
     }, getLaunchUrl: function() {
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['location'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('location'), 'undefined'))) { return cast null; }
       try {
-        var params:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['URLSearchParams'] : Array<Dynamic>)), [_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['location'] : Array<Dynamic>)), 'search')]);
+        var params:Dynamic = _Runtime.construct(_Runtime.globalValue('URLSearchParams'), [_Runtime.field(_Runtime.globalValue('location'), 'search')]);
         var url:Dynamic = _Runtime.callProperty(params, 'get', cast (['url'] : Array<Dynamic>));
         return cast _Runtime.select(_Runtime.andValue(url, function():Dynamic return cast _Runtime.compare(_Runtime.field(url, 'length'), 0.0, '>')), function():Dynamic return cast url, function():Dynamic return cast null);
       } catch (__error:Dynamic) {

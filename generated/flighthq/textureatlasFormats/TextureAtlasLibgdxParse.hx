@@ -55,33 +55,33 @@ class TextureAtlasLibgdxParse {
               else if (__switchValue == 'xy') {
                 {
                   var parts:Dynamic = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
-                  (atlasX = cast (_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
-                  (atlasY = cast (_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
+                  (atlasX = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
+                  (atlasY = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
                 }
               }
               else if (__switchValue == 'size') {
                 {
                   var parts:Dynamic = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
-                  (atlasW = cast (_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
-                  (atlasH = cast (_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
+                  (atlasW = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
+                  (atlasH = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
                 }
               }
               else if (__switchValue == 'orig') {
                 {
                   var parts:Dynamic = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
-                  (origW = cast (_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
-                  (origH = cast (_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
+                  (origW = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
+                  (origH = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
                 }
               }
               else if (__switchValue == 'offset') {
                 {
                   var parts:Dynamic = _Runtime.callProperty(value, 'split', cast ([','] : Array<Dynamic>));
-                  (offsetX = cast (_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
-                  (offsetY = cast (_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
+                  (offsetX = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 0.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
+                  (offsetY = cast (_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.getIndex(parts, 1.0), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '0')] : Array<Dynamic>)) : Dynamic));
                 }
               }
               else if (__switchValue == 'index') {
-                (index = cast (_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([value, 10.0] : Array<Dynamic>)) : Dynamic));
+                (index = cast (_Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([value, 10.0] : Array<Dynamic>)) : Dynamic));
               }
             }
           }

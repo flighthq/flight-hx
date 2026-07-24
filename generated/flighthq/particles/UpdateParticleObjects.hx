@@ -70,7 +70,7 @@ class UpdateParticleObjects {
     emitterY = _Runtime.coalesce(_Runtime.optionalField(options, 'emitterY'), function():Dynamic return cast HxMath.NaN);
     emitterVelX = 0.0;
     emitterVelY = 0.0;
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(config, 'velocityInheritance'), 0.0), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['isNaN'] : Array<Dynamic>)), cast ([emitterX] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['isNaN'] : Array<Dynamic>)), cast ([_Runtime.field(state, 'prevX')] : Array<Dynamic>)))))) {
+    if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(config, 'velocityInheritance'), 0.0), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([emitterX] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([_Runtime.field(state, 'prevX')] : Array<Dynamic>)))))) {
       (emitterVelX = cast (((emitterX - _Runtime.field(state, 'prevX')) / deltaTime) : Dynamic));
       (emitterVelY = cast (((emitterY - _Runtime.field(state, 'prevY')) / deltaTime) : Dynamic));
     }
@@ -110,7 +110,7 @@ class UpdateParticleObjects {
     emitting = _Runtime.orValue(_Runtime.orValue(_Runtime.compare(_Runtime.field(config, 'duration'), 0.0, '<='), function():Dynamic return cast _Runtime.field(config, 'loop')), function():Dynamic return cast _Runtime.compare(_Runtime.field(state, 'emitterAge'), _Runtime.field(config, 'duration'), '<'));
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(_Runtime.field(config, 'duration'), 0.0, '>'), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(config, 'loop'))))) { _Runtime.setField(state, 'emitterAge', (_Runtime.field(state, 'emitterAge') + deltaTime)); }
     _Runtime.setField(state, 'spawnAccumulator', (_Runtime.field(state, 'spawnAccumulator') + _Runtime.select(emitting, function():Dynamic return cast (_Runtime.field(config, 'spawnRate') * deltaTime), function():Dynamic return cast 0.0)));
-    toSpawn = _Runtime.callProperty(HxMath, 'floor', cast ([_Runtime.field(state, 'spawnAccumulator')] : Array<Dynamic>));
+    toSpawn = HxMath.floor(_Runtime.field(state, 'spawnAccumulator'));
     _Runtime.setField(state, 'spawnAccumulator', (_Runtime.field(state, 'spawnAccumulator') - toSpawn));
     if (_Runtime.truthy(_Runtime.andValue(emitting, function():Dynamic return cast _Runtime.compare(_Runtime.field(config, 'burstCount'), 0.0, '>')))) {
       _Runtime.setField(state, 'burstTimer', (_Runtime.field(state, 'burstTimer') - deltaTime));
@@ -120,7 +120,7 @@ class UpdateParticleObjects {
       }
     }
     if (_Runtime.truthy(_Runtime.compare(toSpawn, 0.0, '>'))) {
-      var baseAngle:Dynamic = _Runtime.callProperty(HxMath, 'atan2', cast ([_Runtime.field(config, 'directionY'), _Runtime.field(config, 'directionX')] : Array<Dynamic>));
+      var baseAngle:Dynamic = HxMath.atan2(_Runtime.field(config, 'directionY'), _Runtime.field(config, 'directionX'));
       var rotSpeedRange:Dynamic = (_Runtime.field(config, 'rotationSpeedMax') - _Runtime.field(config, 'rotationSpeedMin'));
       var onSpawn:Dynamic = _Runtime.optionalField(_Runtime.optionalField(options, 'callbacks'), 'onSpawn');
       {
@@ -134,15 +134,15 @@ class UpdateParticleObjects {
           var angle:Dynamic = (baseAngle + (((_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) - 0.5) * 2.0) * _Runtime.field(config, 'spread')));
           var speed:Dynamic = (_Runtime.field(config, 'speedMin') + (_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) * (_Runtime.field(config, 'speedMax') - _Runtime.field(config, 'speedMin'))));
           var vt:Dynamic = (i * 2.0);
-          _Runtime.setIndex(velocities, vt, ((_Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>)) * speed) + _Runtime.select(!_Runtime.strictEquals(_Runtime.field(config, 'velocityInheritance'), 0.0), function():Dynamic return cast (emitterVelX * _Runtime.field(config, 'velocityInheritance')), function():Dynamic return cast 0.0)));
-          _Runtime.setIndex(velocities, (vt + 1.0), ((_Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>)) * speed) + _Runtime.select(!_Runtime.strictEquals(_Runtime.field(config, 'velocityInheritance'), 0.0), function():Dynamic return cast (emitterVelY * _Runtime.field(config, 'velocityInheritance')), function():Dynamic return cast 0.0)));
+          _Runtime.setIndex(velocities, vt, ((HxMath.cos(angle) * speed) + _Runtime.select(!_Runtime.strictEquals(_Runtime.field(config, 'velocityInheritance'), 0.0), function():Dynamic return cast (emitterVelX * _Runtime.field(config, 'velocityInheritance')), function():Dynamic return cast 0.0)));
+          _Runtime.setIndex(velocities, (vt + 1.0), ((HxMath.sin(angle) * speed) + _Runtime.select(!_Runtime.strictEquals(_Runtime.field(config, 'velocityInheritance'), 0.0), function():Dynamic return cast (emitterVelY * _Runtime.field(config, 'velocityInheritance')), function():Dynamic return cast 0.0)));
           var spawnX:Dynamic = 0.0;
           var spawnY:Dynamic = 0.0;
           if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(config, 'emitterShape'), 'circle'), function():Dynamic return cast _Runtime.compare(_Runtime.field(config, 'emitterRadius'), 0.0, '>')))) {
-            var r:Dynamic = (_Runtime.callProperty(HxMath, 'sqrt', cast ([_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>))] : Array<Dynamic>)) * _Runtime.field(config, 'emitterRadius'));
+            var r:Dynamic = (HxMath.sqrt(_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>))) * _Runtime.field(config, 'emitterRadius'));
             var a:Dynamic = (_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) * UpdateParticleObjects.TWO_PI__updateParticleObjects);
-            (spawnX = cast ((_Runtime.callProperty(HxMath, 'cos', cast ([a] : Array<Dynamic>)) * r) : Dynamic));
-            (spawnY = cast ((_Runtime.callProperty(HxMath, 'sin', cast ([a] : Array<Dynamic>)) * r) : Dynamic));
+            (spawnX = cast ((HxMath.cos(a) * r) : Dynamic));
+            (spawnY = cast ((HxMath.sin(a) * r) : Dynamic));
           } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(_Runtime.field(config, 'emitterShape'), 'rect'), function():Dynamic return cast _Runtime.orValue(_Runtime.compare(_Runtime.field(config, 'emitterWidth'), 0.0, '>'), function():Dynamic return cast _Runtime.compare(_Runtime.field(config, 'emitterHeight'), 0.0, '>'))))) {
             (spawnX = cast (((_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) - 0.5) * _Runtime.field(config, 'emitterWidth')) : Dynamic));
             (spawnY = cast (((_Runtime.callProperty(state, 'random', cast ([] : Array<Dynamic>)) - 0.5) * _Runtime.field(config, 'emitterHeight')) : Dynamic));
@@ -165,7 +165,7 @@ class UpdateParticleObjects {
         }
       }
     }
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['isNaN'] : Array<Dynamic>)), cast ([emitterX] : Array<Dynamic>))))) {
+    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([emitterX] : Array<Dynamic>))))) {
       _Runtime.setField(state, 'prevX', emitterX);
       _Runtime.setField(state, 'prevY', emitterY);
     }

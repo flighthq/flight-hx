@@ -65,7 +65,7 @@ class VideoChannel {
     if (_Runtime.truthy(!_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       _Runtime.callProperty(element, 'removeEventListener', cast (['ended', _Runtime.field(runtime, 'onEnded')] : Array<Dynamic>));
     }
-    channel = { currentTime: _Runtime.coalesce(_Runtime.optionalField(options, 'currentTime'), function():Dynamic return cast 0.0), gain: _Runtime.coalesce(_Runtime.optionalField(options, 'gain'), function():Dynamic return cast 1.0), length: _Runtime.select(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['isNaN'] : Array<Dynamic>)), cast ([_Runtime.field(element, 'duration')] : Array<Dynamic>)), function():Dynamic return cast 0.0, function():Dynamic return cast (_Runtime.field(element, 'duration') * 1000.0)), loops: _Runtime.coalesce(_Runtime.optionalField(options, 'loops'), function():Dynamic return cast 0.0), playbackRate: _Runtime.coalesce(_Runtime.optionalField(options, 'playbackRate'), function():Dynamic return cast 1.0), source: source, state: 'stopped', onComplete: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
+    channel = { currentTime: _Runtime.coalesce(_Runtime.optionalField(options, 'currentTime'), function():Dynamic return cast 0.0), gain: _Runtime.coalesce(_Runtime.optionalField(options, 'gain'), function():Dynamic return cast 1.0), length: _Runtime.select(_Runtime.callValue(_Runtime.globalValue('isNaN'), cast ([_Runtime.field(element, 'duration')] : Array<Dynamic>)), function():Dynamic return cast 0.0, function():Dynamic return cast (_Runtime.field(element, 'duration') * 1000.0)), loops: _Runtime.coalesce(_Runtime.optionalField(options, 'loops'), function():Dynamic return cast 0.0), playbackRate: _Runtime.coalesce(_Runtime.optionalField(options, 'playbackRate'), function():Dynamic return cast 1.0), source: source, state: 'stopped', onComplete: _Runtime.callValue(createSignal, cast ([] : Array<Dynamic>)) };
     onEnded = function() return _Runtime.callValue(VideoChannel.completeVideoChannel__videoChannel, cast ([channel] : Array<Dynamic>));
     _Runtime.callProperty(VideoChannel.videoChannelRuntimes__videoChannel, 'set', cast ([element, { loopsRemaining: _Runtime.field(channel, 'loops'), onEnded: onEnded }] : Array<Dynamic>));
     _Runtime.setField(element, 'currentTime', (_Runtime.field(channel, 'currentTime') / 1000.0));
@@ -123,10 +123,10 @@ class VideoChannel {
     _Runtime.setField(channel, 'state', 'stopped');
   }
 
-  public static final videoChannelRuntimes__videoChannel:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final videoChannelRuntimes__videoChannel:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function clamp__videoChannel(value:Float, min:Float, max:Float):Float {
-    return cast _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callProperty(HxMath, 'max', cast ([value, min] : Array<Dynamic>)), max] : Array<Dynamic>));
+    return cast HxMath.min(HxMath.max(value, min), max);
     return cast null;
   }
 

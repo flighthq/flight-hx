@@ -13,13 +13,13 @@ class BoxBlurMath {
     lowerWidth = _Runtime.callValue(BoxBlurMath.computeBoxBlurLowerWidth__boxBlurMath, cast ([sigma, passes] : Array<Dynamic>));
     lowerCount = _Runtime.callValue(BoxBlurMath.computeBoxBlurLowerPassCount__boxBlurMath, cast ([sigma, passes, lowerWidth] : Array<Dynamic>));
     width = _Runtime.select(_Runtime.compare(pass, lowerCount, '<'), function():Dynamic return cast lowerWidth, function():Dynamic return cast (lowerWidth + 2.0));
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, ((width - 1.0) / 2.0)] : Array<Dynamic>));
+    return cast HxMath.max(0.0, ((width - 1.0) / 2.0));
     return cast null;
   }
 
   public static function computeBoxBlurRadius(sigma:Float, passes:Float):Float {
     if (_Runtime.truthy(_Runtime.compare(sigma, 0.0, '<='))) { return cast 0.0; }
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'round', cast ([((-1.0 + _Runtime.callProperty(HxMath, 'sqrt', cast ([(1.0 + (((12.0 * sigma) * sigma) / passes))] : Array<Dynamic>))) / 2.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast HxMath.max(0.0, HxMath.round(((-1.0 + HxMath.sqrt((1.0 + (((12.0 * sigma) * sigma) / passes)))) / 2.0)));
     return cast null;
   }
 
@@ -27,20 +27,20 @@ class BoxBlurMath {
     var width:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(radius, 0.0, '<='), function():Dynamic return cast _Runtime.compare(passes, 0.0, '<=')))) { return cast 0.0; }
     width = ((2.0 * radius) + 1.0);
-    return cast _Runtime.callProperty(HxMath, 'sqrt', cast ([(((passes * width) * width) / 12.0)] : Array<Dynamic>));
+    return cast HxMath.sqrt((((passes * width) * width) / 12.0));
     return cast null;
   }
 
   public static function computeBoxBlurLowerWidth__boxBlurMath(sigma:Float, passes:Float):Float {
     var width:Dynamic = cast _Runtime.UNDEFINED;
-    width = _Runtime.callProperty(HxMath, 'floor', cast ([_Runtime.callProperty(HxMath, 'sqrt', cast ([((((12.0 * sigma) * sigma) / passes) + 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    width = HxMath.floor(HxMath.sqrt(((((12.0 * sigma) * sigma) / passes) + 1.0)));
     if (_Runtime.truthy(_Runtime.strictEquals((width % 2.0), 0.0))) { (width = cast ((width - 1.0) : Dynamic)); }
     return cast width;
     return cast null;
   }
 
   public static function computeBoxBlurLowerPassCount__boxBlurMath(sigma:Float, passes:Float, lowerWidth:Float):Float {
-    return cast _Runtime.callProperty(HxMath, 'round', cast ([((((12.0 * sigma) * sigma) - (passes * (((lowerWidth * lowerWidth) + (4.0 * lowerWidth)) + 3.0))) / ((-4.0 * lowerWidth) - 4.0))] : Array<Dynamic>));
+    return cast HxMath.round(((((12.0 * sigma) * sigma) - (passes * (((lowerWidth * lowerWidth) + (4.0 * lowerWidth)) + 3.0))) / ((-4.0 * lowerWidth) - 4.0)));
     return cast null;
   }
 }

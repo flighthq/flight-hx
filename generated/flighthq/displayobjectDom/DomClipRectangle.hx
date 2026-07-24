@@ -121,7 +121,7 @@ class DomClipRectangle {
     if (_Runtime.truthy(_Runtime.strictEquals(match, null))) {
       return cast { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 };
     }
-    parts = _Runtime.callProperty(_Runtime.callProperty(_Runtime.getIndex(match, 1.0), 'split', cast ([','] : Array<Dynamic>)), 'map', cast ([function(value:Dynamic) return _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), cast ([StringTools.trim(Std.string(value))] : Array<Dynamic>))] : Array<Dynamic>));
+    parts = _Runtime.callProperty(_Runtime.callProperty(_Runtime.getIndex(match, 1.0), 'split', cast ([','] : Array<Dynamic>)), 'map', cast ([function(value:Dynamic) return _Runtime.callValue(_Runtime.globalValue('Number'), cast ([StringTools.trim(Std.string(value))] : Array<Dynamic>))] : Array<Dynamic>));
     return cast { a: _Runtime.coalesce(_Runtime.getIndex(parts, 0.0), function():Dynamic return cast 1.0), b: _Runtime.coalesce(_Runtime.getIndex(parts, 1.0), function():Dynamic return cast 0.0), c: _Runtime.coalesce(_Runtime.getIndex(parts, 2.0), function():Dynamic return cast 0.0), d: _Runtime.coalesce(_Runtime.getIndex(parts, 3.0), function():Dynamic return cast 1.0), tx: _Runtime.coalesce(_Runtime.getIndex(parts, 4.0), function():Dynamic return cast 0.0), ty: _Runtime.coalesce(_Runtime.getIndex(parts, 5.0), function():Dynamic return cast 0.0) };
     return cast null;
   }

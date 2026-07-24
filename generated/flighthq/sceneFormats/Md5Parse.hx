@@ -64,8 +64,8 @@ class Md5Parse {
       i++;
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0), function():Dynamic return cast StringTools.startsWith(line, '//')))) { continue; }
       if (_Runtime.truthy(StringTools.startsWith(line, 'MD5Version'))) {
-        var version:Dynamic = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([_Runtime.getIndex(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>));
-        if (_Runtime.truthy(_Runtime.andValue(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([version] : Array<Dynamic>)), function():Dynamic return cast !_Runtime.strictEquals(version, 10.0)))) {
+        var version:Dynamic = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>));
+        if (_Runtime.truthy(_Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([version] : Array<Dynamic>)), function():Dynamic return cast !_Runtime.strictEquals(version, 10.0)))) {
           _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: unsupported MD5Version ' + Std.string(version) + ' (expected 10)'] : Array<Dynamic>));
         }
         continue;
@@ -149,7 +149,7 @@ class Md5Parse {
         }
         _Runtime.callValue(reverseTriangleWinding, cast ([indices] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.compare(_Runtime.field(indices, 'length'), 0.0, '>'))) {
-          var geometry:Dynamic = _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), 'from', cast ([indices] : Array<Dynamic>)), layout: CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT, vertices: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [vertices]) }] : Array<Dynamic>));
+          var geometry:Dynamic = _Runtime.callValue(createMeshGeometry, cast ([{ indices: _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([indices] : Array<Dynamic>)), layout: CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT, vertices: _Runtime.construct(_Runtime.globalValue('Float32Array'), [vertices]) }] : Array<Dynamic>));
           _Runtime.callValue(computeMeshGeometryNormals, cast ([geometry, geometry] : Array<Dynamic>));
           var meshMaterials:Array<Float> = cast ([] : Array<Dynamic>);
           if (_Runtime.truthy(_Runtime.compare(_Runtime.field(_Runtime.field(md5Mesh, 'shader'), 'length'), 0.0, '>'))) {
@@ -320,19 +320,19 @@ class Md5Parse {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed joint on line ' + Std.string((lineIndex + 1.0)) + ': not enough components'] : Array<Dynamic>));
       return cast null;
     }
-    parentIndex = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 0.0), 10.0] : Array<Dynamic>));
-    positionX = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 1.0)] : Array<Dynamic>));
-    positionY = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 2.0)] : Array<Dynamic>));
-    positionZ = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 3.0)] : Array<Dynamic>));
-    orientationX = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 4.0)] : Array<Dynamic>));
-    orientationY = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 5.0)] : Array<Dynamic>));
-    orientationZ = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 6.0)] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([parentIndex] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([positionX] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([positionY] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([positionZ] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([orientationX] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([orientationY] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([orientationZ] : Array<Dynamic>)))))) {
+    parentIndex = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 0.0), 10.0] : Array<Dynamic>));
+    positionX = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 1.0)] : Array<Dynamic>));
+    positionY = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 2.0)] : Array<Dynamic>));
+    positionZ = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 3.0)] : Array<Dynamic>));
+    orientationX = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 4.0)] : Array<Dynamic>));
+    orientationY = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 5.0)] : Array<Dynamic>));
+    orientationZ = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 6.0)] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parentIndex] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionX] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionY] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionZ] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationX] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationY] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([orientationZ] : Array<Dynamic>)))))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed joint on line ' + Std.string((lineIndex + 1.0)) + ': non-numeric values'] : Array<Dynamic>));
       return cast null;
     }
     sumSq = (((orientationX * orientationX) + (orientationY * orientationY)) + (orientationZ * orientationZ));
-    orientationW = _Runtime.select(_Runtime.compare(sumSq, 1.0, '<'), function():Dynamic return cast -_Runtime.callProperty(HxMath, 'sqrt', cast ([(1.0 - sumSq)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    orientationW = _Runtime.select(_Runtime.compare(sumSq, 1.0, '<'), function():Dynamic return cast -HxMath.sqrt((1.0 - sumSq)), function():Dynamic return cast 0.0);
     return cast { name: name, orientationW: orientationW, orientationX: orientationX, orientationY: orientationY, orientationZ: orientationZ, parentIndex: parentIndex, positionX: positionX, positionY: positionY, positionZ: positionZ };
     return cast null;
   }
@@ -398,11 +398,11 @@ class Md5Parse {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed vert on line ' + Std.string((lineIndex + 1.0)) + ''] : Array<Dynamic>));
       return cast null;
     }
-    u = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 2.0)] : Array<Dynamic>));
-    v = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 3.0)] : Array<Dynamic>));
-    startWeight = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 4.0), 10.0] : Array<Dynamic>));
-    countWeights = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 5.0), 10.0] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([u] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([v] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([startWeight] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([countWeights] : Array<Dynamic>)))))) {
+    u = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 2.0)] : Array<Dynamic>));
+    v = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 3.0)] : Array<Dynamic>));
+    startWeight = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 4.0), 10.0] : Array<Dynamic>));
+    countWeights = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 5.0), 10.0] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([u] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([startWeight] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([countWeights] : Array<Dynamic>)))))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed vert on line ' + Std.string((lineIndex + 1.0)) + ': non-numeric values'] : Array<Dynamic>));
       return cast null;
     }
@@ -420,10 +420,10 @@ class Md5Parse {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed tri on line ' + Std.string((lineIndex + 1.0)) + ''] : Array<Dynamic>));
       return cast null;
     }
-    v0 = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 2.0), 10.0] : Array<Dynamic>));
-    v1 = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 3.0), 10.0] : Array<Dynamic>));
-    v2 = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 4.0), 10.0] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([v0] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([v1] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([v2] : Array<Dynamic>)))))) {
+    v0 = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 2.0), 10.0] : Array<Dynamic>));
+    v1 = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 3.0), 10.0] : Array<Dynamic>));
+    v2 = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 4.0), 10.0] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v0] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v1] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([v2] : Array<Dynamic>)))))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed tri on line ' + Std.string((lineIndex + 1.0)) + ': non-numeric indices'] : Array<Dynamic>));
       return cast null;
     }
@@ -443,12 +443,12 @@ class Md5Parse {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed weight on line ' + Std.string((lineIndex + 1.0)) + ''] : Array<Dynamic>));
       return cast null;
     }
-    jointIndex = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 2.0), 10.0] : Array<Dynamic>));
-    bias = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 3.0)] : Array<Dynamic>));
-    positionX = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 4.0)] : Array<Dynamic>));
-    positionY = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 5.0)] : Array<Dynamic>));
-    positionZ = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.getIndex(tokens, 6.0)] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([jointIndex] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([bias] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([positionX] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([positionY] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([positionZ] : Array<Dynamic>)))))) {
+    jointIndex = _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([_Runtime.getIndex(tokens, 2.0), 10.0] : Array<Dynamic>));
+    bias = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 3.0)] : Array<Dynamic>));
+    positionX = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 4.0)] : Array<Dynamic>));
+    positionY = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 5.0)] : Array<Dynamic>));
+    positionZ = _Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.getIndex(tokens, 6.0)] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([jointIndex] : Array<Dynamic>))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([bias] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionX] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionY] : Array<Dynamic>)))), function():Dynamic return cast !_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([positionZ] : Array<Dynamic>)))))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFromMd5Mesh: malformed weight on line ' + Std.string((lineIndex + 1.0)) + ': non-numeric values'] : Array<Dynamic>));
       return cast null;
     }

@@ -31,7 +31,7 @@ class TextFormat {
   public static function mergeTextFormat(base:flighthq.types.TextFormat, override_:flighthq.types.TextFormat):flighthq.types.TextFormat {
     var result:flighthq.types.TextFormat = cast _Runtime.UNDEFINED;
     result = _Runtime.mergeObjects([base]);
-    for (key in _Runtime.iterable((cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([override_] : Array<Dynamic>)) : Array<flighthq.types.TextFormat>))) {
+    for (key in _Runtime.iterable((cast flighthq._internal.DynamicObject.keys(override_) : Array<flighthq.types.TextFormat>))) {
       var value:Dynamic = _Runtime.getIndex(override_, key);
       if (_Runtime.truthy(!_Runtime.looseEquals(value, null))) {
         _Runtime.setIndex((cast result : Dynamic), key, value);

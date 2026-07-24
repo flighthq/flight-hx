@@ -38,7 +38,7 @@ class DomBitmap {
     src = _Runtime.callValue(resolveDomImageSource, cast ([state, imageSource] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(src, null))) { return; }
     sr = _Runtime.coalesce(_Runtime.field(_Runtime.field(source, 'data'), 'sourceRectangle'), function():Dynamic return cast null);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(sr, null), function():Dynamic return cast _Runtime.isInstanceOf(src, _Runtime.callProperty(_Runtime, 'globalValue', cast (['HTMLImageElement'] : Array<Dynamic>)))))) {
+    if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(sr, null), function():Dynamic return cast _Runtime.isInstanceOf(src, _Runtime.globalValue('HTMLImageElement'))))) {
       _Runtime.callValue(DomBitmap.renderBitmapAsImage__domBitmap, cast ([state, renderProxy, data, src] : Array<Dynamic>));
     } else {
       _Runtime.callValue(DomBitmap.renderBitmapAsCanvas__domBitmap, cast ([state, renderProxy, data, _Runtime.field(imageSource, 'width'), _Runtime.field(imageSource, 'height'), src, sr] : Array<Dynamic>));
@@ -51,7 +51,7 @@ class DomBitmap {
       _Runtime.setField(data, 'context', null);
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'image'), null))) {
-      _Runtime.setField(data, 'image', _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['img'] : Array<Dynamic>)));
+      _Runtime.setField(data, 'image', _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['img'] : Array<Dynamic>)));
       _Runtime.setField(_Runtime.field(data, 'image'), 'crossOrigin', 'anonymous');
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'image')] : Array<Dynamic>));
     }
@@ -74,7 +74,7 @@ class DomBitmap {
       _Runtime.setField(data, 'image', null);
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'canvas'), null))) {
-      _Runtime.setField(data, 'canvas', _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>)));
+      _Runtime.setField(data, 'canvas', _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)));
       _Runtime.setField(data, 'context', _Runtime.callProperty(_Runtime.field(data, 'canvas'), 'getContext', cast (['2d'] : Array<Dynamic>)));
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'canvas')] : Array<Dynamic>));
     }

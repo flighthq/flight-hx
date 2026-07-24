@@ -41,9 +41,9 @@ class SurfaceShadow {
     var passes:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    radiusX = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(options, 'radiusX'), function():Dynamic return cast 2.0)] : Array<Dynamic>))] : Array<Dynamic>));
-    radiusY = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(options, 'radiusY'), function():Dynamic return cast 2.0)] : Array<Dynamic>))] : Array<Dynamic>));
-    passes = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    radiusX = HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(options, 'radiusX'), function():Dynamic return cast 2.0)));
+    radiusY = HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(options, 'radiusY'), function():Dynamic return cast 2.0)));
+    passes = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0)));
     a = out;
     b = scratch;
     {
@@ -101,7 +101,7 @@ class SurfaceShadow {
     cg = (Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0));
     cb = (Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0));
     ca = ((Std.int(color) & Std.int(255.0)) / 255.0);
-    scale = (_Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0)] : Array<Dynamic>)) * ca);
+    scale = (HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0)) * ca);
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, h, '<'))) {
@@ -114,7 +114,7 @@ class SurfaceShadow {
             _Runtime.setIndex(out, di, cr);
             _Runtime.setIndex(out, (di + 1.0), cg);
             _Runtime.setIndex(out, (di + 2.0), cb);
-            _Runtime.setIndex(out, (di + 3.0), _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([(((blurred * sourceAlpha) * scale) / 255.0)] : Array<Dynamic>))] : Array<Dynamic>)));
+            _Runtime.setIndex(out, (di + 3.0), HxMath.min(255.0, HxMath.round((((blurred * sourceAlpha) * scale) / 255.0))));
             px++;
           }
         }
@@ -143,7 +143,7 @@ class SurfaceShadow {
     cg = (Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0));
     cb = (Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0));
     ca = ((Std.int(color) & Std.int(255.0)) / 255.0);
-    alphaScale = (_Runtime.callProperty(HxMath, 'max', cast ([0.0, intensity] : Array<Dynamic>)) * ca);
+    alphaScale = (HxMath.max(0.0, intensity) * ca);
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, _Runtime.field(source, 'height'), '<'))) {
@@ -159,7 +159,7 @@ class SurfaceShadow {
             _Runtime.setIndex(out, di, cr);
             _Runtime.setIndex(out, (di + 1.0), cg);
             _Runtime.setIndex(out, (di + 2.0), cb);
-            _Runtime.setIndex(out, (di + 3.0), _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 3.0)) * alphaScale)] : Array<Dynamic>))] : Array<Dynamic>)));
+            _Runtime.setIndex(out, (di + 3.0), HxMath.min(255.0, HxMath.round((_Runtime.getIndex(_Runtime.field(_Runtime.field(source, 'surface'), 'data'), (si + 3.0)) * alphaScale))));
             px++;
           }
         }

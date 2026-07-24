@@ -29,7 +29,7 @@ class DomRenderState {
     _Runtime.setField(runtime, 'domClipHooks', null);
     _Runtime.setField(runtime, 'domClipStack', cast ([] : Array<Dynamic>));
     _Runtime.setField(runtime, 'domCurrentElement', null);
-    _Runtime.setField(runtime, 'domElementMap', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []));
+    _Runtime.setField(runtime, 'domElementMap', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
     _Runtime.setField(runtime, 'domNextOrderList', cast ([] : Array<Dynamic>));
     _Runtime.setField(runtime, 'domOrderLength', -1.0);
     _Runtime.setField(runtime, 'domOrderList', cast ([] : Array<Dynamic>));

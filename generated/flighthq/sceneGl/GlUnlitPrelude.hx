@@ -22,25 +22,25 @@ class GlUnlitPrelude {
   public static function bindGlUnlitSurface(state:GlRenderState, program:GlUnlitProgram, color:LinearColor, intensity:Float, colorMap:Null<Texture>, alphaCutoff:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(program, 'locColor'), _Runtime.getIndex(color, 0.0), _Runtime.getIndex(color, 1.0), _Runtime.getIndex(color, 2.0), _Runtime.getIndex(color, 3.0)] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIntensity'), intensity] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), alphaCutoff] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(program, 'locColor'), _Runtime.getIndex(color, 0.0), _Runtime.getIndex(color, 1.0), _Runtime.getIndex(color, 2.0), _Runtime.getIndex(color, 3.0)] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIntensity'), intensity] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), alphaCutoff] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(colorMap, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(colorMap, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(colorMap, 'image')] : Array<Dynamic>))))) {
-      _Runtime.callProperty(gl, 'activeTexture', cast ([_Runtime.field(gl, 'TEXTURE0')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE0')] : Array<Dynamic>));
       _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(colorMap, 'image'), _Runtime.field(colorMap, 'sampler')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1i', cast ([_Runtime.field(program, 'locColorMap'), 0.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locColorMap'), 0.0] : Array<Dynamic>));
     }
   }
 
   public static function bindGlUnlitVideoSurface(state:GlRenderState, program:GlUnlitProgram, color:LinearColor, intensity:Float, videoMap:VideoTexture, alphaCutoff:Float):Void {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
-    _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(program, 'locColor'), _Runtime.getIndex(color, 0.0), _Runtime.getIndex(color, 1.0), _Runtime.getIndex(color, 2.0), _Runtime.getIndex(color, 3.0)] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIntensity'), intensity] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), alphaCutoff] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'activeTexture', cast ([_Runtime.field(gl, 'TEXTURE0')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(program, 'locColor'), _Runtime.getIndex(color, 0.0), _Runtime.getIndex(color, 1.0), _Runtime.getIndex(color, 2.0), _Runtime.getIndex(color, 3.0)] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locIntensity'), intensity] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), alphaCutoff] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE0')] : Array<Dynamic>));
     _Runtime.callValue(bindGlVideoTexture, cast ([state, videoMap] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1i', cast ([_Runtime.field(program, 'locColorMap'), 0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locColorMap'), 0.0] : Array<Dynamic>));
   }
 
   public static function buildGlUnlitDefineKey(key:GlUnlitDefineKey):String {
@@ -51,7 +51,7 @@ class GlUnlitPrelude {
   public static function compileGlUnlitProgram(gl:Dynamic, key:GlUnlitDefineKey):GlUnlitProgram {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(compileGlProgram, cast ([gl, _Runtime.callValue(getGlUnlitVertexSourceForKey, cast ([key] : Array<Dynamic>)), _Runtime.callValue(getGlUnlitFragmentSourceForKey, cast ([key] : Array<Dynamic>))] : Array<Dynamic>));
-    return cast { locAlphaCutoff: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_alphaCutoff'] : Array<Dynamic>)), locColor: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_color'] : Array<Dynamic>)), locColorMap: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_colorMap'] : Array<Dynamic>)), locIntensity: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_intensity'] : Array<Dynamic>)), locJointTexture: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_jointTexture'] : Array<Dynamic>)), locModel: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_model'] : Array<Dynamic>)), locNormalMatrix: null, locViewProjection: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_viewProjection'] : Array<Dynamic>)), program: program };
+    return cast { locAlphaCutoff: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_alphaCutoff'] : Array<Dynamic>)), locColor: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_color'] : Array<Dynamic>)), locColorMap: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_colorMap'] : Array<Dynamic>)), locIntensity: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_intensity'] : Array<Dynamic>)), locJointTexture: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_jointTexture'] : Array<Dynamic>)), locModel: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_model'] : Array<Dynamic>)), locNormalMatrix: null, locViewProjection: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_viewProjection'] : Array<Dynamic>)), program: program };
     return cast null;
   }
 

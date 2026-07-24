@@ -33,29 +33,29 @@ class CanvasVignetteEffect {
     softness = _Runtime.coalesce(_Runtime.field(effect, 'softness'), function():Dynamic return cast 0.45);
     color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 255.0);
     colorAlpha = ((Std.int(color) & Std.int(255.0)) / 255.0);
-    darken = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, (intensity * colorAlpha)] : Array<Dynamic>))] : Array<Dynamic>));
+    darken = HxMath.max(0.0, HxMath.min(1.0, (intensity * colorAlpha)));
     _Runtime.callValue(drawCanvasEffectPass, cast ([dest, source, 'none'] : Array<Dynamic>));
     ctx = _Runtime.field(dest, 'context');
     w = _Runtime.field(dest, 'width');
     h = _Runtime.field(dest, 'height');
     cx = (w * 0.5);
     cy = (h * 0.5);
-    outer = _Runtime.callProperty(HxMath, 'sqrt', cast ([((cx * cx) + (cy * cy))] : Array<Dynamic>));
-    inner = (_Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([radius, 1.0] : Array<Dynamic>))] : Array<Dynamic>)) * outer);
-    ramp = _Runtime.callProperty(HxMath, 'max', cast ([0.0, (inner - (softness * outer))] : Array<Dynamic>));
-    gradient = _Runtime.callProperty(ctx, 'createRadialGradient', cast ([cx, cy, ramp, cx, cy, outer] : Array<Dynamic>));
+    outer = HxMath.sqrt(((cx * cx) + (cy * cy)));
+    inner = (HxMath.max(0.0, HxMath.min(radius, 1.0)) * outer);
+    ramp = HxMath.max(0.0, (inner - (softness * outer)));
+    gradient = flighthq._internal.CanvasRenderingContext2D.call(ctx, 'createRadialGradient', cast ([cx, cy, ramp, cx, cy, outer] : Array<Dynamic>));
     r = (Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0));
     g = (Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(16.0))) & Std.int(255.0));
     b = (Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(8.0))) & Std.int(255.0));
     _Runtime.callProperty(gradient, 'addColorStop', cast ([0.0, 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',0)'] : Array<Dynamic>));
     _Runtime.callProperty(gradient, 'addColorStop', cast ([1.0, 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',' + Std.string(_Runtime.toFixed(darken, 4.0)) + ')'] : Array<Dynamic>));
-    _Runtime.callProperty(ctx, 'save', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    _Runtime.setField(ctx, 'globalCompositeOperation', 'multiply');
-    _Runtime.setField(ctx, 'filter', 'none');
-    _Runtime.setField(ctx, 'fillStyle', gradient);
-    _Runtime.callProperty(ctx, 'fillRect', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
-    _Runtime.callProperty(ctx, 'restore', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'save', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'globalCompositeOperation', 'multiply');
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'filter', 'none');
+    flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'fillStyle', gradient);
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'fillRect', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
   public static final defaultCanvasVignetteEffectRunner:Dynamic = function(ctx:Dynamic, effect:Dynamic) {

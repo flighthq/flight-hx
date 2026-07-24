@@ -52,7 +52,7 @@ class ElectronShell {
       }
       return cast null;
     }), moveItemsToTrash: flighthq._internal._Async.make(function(paths:Dynamic):flighthq._internal._Promise<Dynamic> {
-      return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'all', cast ([_Runtime.callProperty(paths, 'map', cast ([flighthq._internal._Async.make(function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
+      return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'all', cast ([_Runtime.callProperty(paths, 'map', cast ([flighthq._internal._Async.make(function(path:Dynamic):flighthq._internal._Promise<Dynamic> {
         try {
           flighthq._internal._Async.awaitValue(_Runtime.callProperty(shell, 'trashItem', cast ([path] : Array<Dynamic>)));
           return cast true;

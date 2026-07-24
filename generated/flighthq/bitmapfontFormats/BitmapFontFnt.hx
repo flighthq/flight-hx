@@ -31,7 +31,7 @@ class BitmapFontFnt {
     primaryImage = _Runtime.coalesce(_Runtime.optionalField(_Runtime.getIndex(_Runtime.field(font, 'pages'), 0.0), 'image'), function():Dynamic return cast null);
     scaleW = _Runtime.select(!_Runtime.strictEquals(primaryImage, null), function():Dynamic return cast _Runtime.field(primaryImage, 'width'), function():Dynamic return cast 0.0);
     scaleH = _Runtime.select(!_Runtime.strictEquals(primaryImage, null), function():Dynamic return cast _Runtime.field(primaryImage, 'height'), function():Dynamic return cast 0.0);
-    pageCount = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(_Runtime.field(font, 'pages'), 'length'), 1.0] : Array<Dynamic>));
+    pageCount = HxMath.max(_Runtime.field(_Runtime.field(font, 'pages'), 'length'), 1.0);
     lines = cast ([] : Array<Dynamic>);
     _Runtime.callProperty(lines, 'push', cast (['info face="" size=' + Std.string(lineHeight) + ' bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=0,0 outline=0'] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['common lineHeight=' + Std.string(lineHeight) + ' base=' + Std.string(base) + ' scaleW=' + Std.string(scaleW) + ' scaleH=' + Std.string(scaleH) + ' pages=' + Std.string(pageCount) + ' packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0'] : Array<Dynamic>));
@@ -156,8 +156,8 @@ class BitmapFontFnt {
   public static function readFntNumber__bitmapFontFnt(value:Null<String>):Null<Float> {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(StringTools.trim(Std.string(value)), '')))) { return cast null; }
-    parsed = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), cast ([value] : Array<Dynamic>));
-    return cast _Runtime.select(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast parsed, function():Dynamic return cast null);
+    parsed = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([value] : Array<Dynamic>));
+    return cast _Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast parsed, function():Dynamic return cast null);
     return cast null;
   }
 }

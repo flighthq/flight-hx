@@ -97,7 +97,7 @@ class Tilemap {
     tileset = _Runtime.field(__destructure1, 'tileset');
     columns = _Runtime.field(__destructure1, 'columns');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(tileset, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(tileset, 'tileWidth'), 0.0, '<=')))) { return cast -1.0; }
-    col = _Runtime.callProperty(HxMath, 'floor', cast ([(x / _Runtime.field(tileset, 'tileWidth'))] : Array<Dynamic>));
+    col = HxMath.floor((x / _Runtime.field(tileset, 'tileWidth')));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(col, 0.0, '<'), function():Dynamic return cast _Runtime.compare(col, columns, '>=')))) { return cast -1.0; }
     return cast col;
     return cast null;
@@ -124,7 +124,7 @@ class Tilemap {
     tileset = _Runtime.field(__destructure2, 'tileset');
     rows = _Runtime.field(__destructure2, 'rows');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(tileset, null), function():Dynamic return cast _Runtime.compare(_Runtime.field(tileset, 'tileHeight'), 0.0, '<=')))) { return cast -1.0; }
-    row = _Runtime.callProperty(HxMath, 'floor', cast ([(y / _Runtime.field(tileset, 'tileHeight'))] : Array<Dynamic>));
+    row = HxMath.floor((y / _Runtime.field(tileset, 'tileHeight')));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(row, 0.0, '<'), function():Dynamic return cast _Runtime.compare(row, rows, '>=')))) { return cast -1.0; }
     return cast row;
     return cast null;
@@ -194,8 +194,8 @@ class Tilemap {
     var copyRows:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.field(tilemap, 'data');
     newTiles = _Runtime.fill(new flighthq._internal._Int16Array((columns * rows)), -1.0, 0, null, 1);
-    copyColumns = _Runtime.callProperty(HxMath, 'min', cast ([columns, _Runtime.field(data, 'columns')] : Array<Dynamic>));
-    copyRows = _Runtime.callProperty(HxMath, 'min', cast ([rows, _Runtime.field(data, 'rows')] : Array<Dynamic>));
+    copyColumns = HxMath.min(columns, _Runtime.field(data, 'columns'));
+    copyRows = HxMath.min(rows, _Runtime.field(data, 'rows'));
     {
       var r:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(r, copyRows, '<'))) {

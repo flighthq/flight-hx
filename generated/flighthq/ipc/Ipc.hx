@@ -18,13 +18,13 @@ class Ipc {
 
   public static var _ipcSignals__ipc:Null<IpcSignals> = _Runtime.explicitNull();
 
-  public static final _listeners__ipc:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+  public static final _listeners__ipc:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
 
   public static function _trackListener__ipc(channel:String, unsubscribe:Dynamic):Void {
     var set:Dynamic = cast _Runtime.UNDEFINED;
     set = _Runtime.callProperty(Ipc._listeners__ipc, 'get', cast ([channel] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(set, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (set = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []) : Dynamic));
+      (set = cast (_Runtime.construct(_Runtime.globalValue('Set'), []) : Dynamic));
       _Runtime.callProperty(Ipc._listeners__ipc, 'set', cast ([channel, set] : Array<Dynamic>));
     }
     _Runtime.callProperty(set, 'add', cast ([unsubscribe] : Array<Dynamic>));
@@ -48,7 +48,7 @@ class Ipc {
     return cast { send: function() {
     
     }, invoke: function() {
-      return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([_Runtime.field(_Runtime, 'UNDEFINED')] : Array<Dynamic>));
+      return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([_Runtime.field(_Runtime, 'UNDEFINED')] : Array<Dynamic>));
     }, subscribe: function() {
       return cast function() {
       
@@ -101,12 +101,12 @@ class Ipc {
     var timeout:Dynamic = cast _Runtime.UNDEFINED;
     name = _Runtime.callValue(Ipc.resolveChannel__ipc, cast ([channel] : Array<Dynamic>));
     invoke = _Runtime.callProperty(_Runtime.callValue(getIpcBackend, cast ([] : Array<Dynamic>)), 'invoke', cast ([name, args] : Array<Dynamic>));
-    timeout = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), [function(_:Dynamic, reject:Dynamic) {
+    timeout = _Runtime.construct(_Runtime.globalValue('Promise'), [function(_:Dynamic, reject:Dynamic) {
       var id:Dynamic = cast _Runtime.UNDEFINED;
       id = _Runtime.setTimeout(function() return _Runtime.callValue(reject, cast ([new IpcTimeoutError(name, timeoutMs)] : Array<Dynamic>)), timeoutMs);
       _Runtime.callProperty(invoke, 'then', cast ([function() return _Runtime.clearTimeout(id), function() return _Runtime.clearTimeout(id)] : Array<Dynamic>));
     }]);
-    return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'race', cast ([cast ([invoke, timeout] : Array<Dynamic>)] : Array<Dynamic>));
+    return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'race', cast ([cast ([invoke, timeout] : Array<Dynamic>)] : Array<Dynamic>));
     return cast null;
   }
 

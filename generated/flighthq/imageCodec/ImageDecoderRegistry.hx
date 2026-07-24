@@ -28,5 +28,5 @@ class ImageDecoderRegistry {
     _Runtime.callProperty(ImageDecoderRegistry.decoders__imageDecoderRegistry, 'delete', cast ([mimeType] : Array<Dynamic>));
   }
 
-  public static final decoders__imageDecoderRegistry:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+  public static final decoders__imageDecoderRegistry:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
 }

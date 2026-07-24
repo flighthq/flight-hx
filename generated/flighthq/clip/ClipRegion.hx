@@ -202,10 +202,10 @@ class ClipRegion {
     bContours = _Runtime.field(b, 'contours');
     aWinding = _Runtime.field(a, 'winding');
     bWinding = _Runtime.field(b, 'winding');
-    x0 = _Runtime.callProperty(HxMath, 'max', cast ([ax, bx] : Array<Dynamic>));
-    y0 = _Runtime.callProperty(HxMath, 'max', cast ([ay, by] : Array<Dynamic>));
-    x1 = _Runtime.callProperty(HxMath, 'min', cast ([(ax + aw), (bx + bw)] : Array<Dynamic>));
-    y1 = _Runtime.callProperty(HxMath, 'min', cast ([(ay + ah), (by + bh)] : Array<Dynamic>));
+    x0 = HxMath.max(ax, bx);
+    y0 = HxMath.max(ay, by);
+    x1 = HxMath.min((ax + aw), (bx + bw));
+    y1 = HxMath.min((ay + ah), (by + bh));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x1, x0, '<='), function():Dynamic return cast _Runtime.compare(y1, y0, '<=')))) {
       _Runtime.setField(_Runtime.field(out, 'rect'), 'x', 0.0);
       _Runtime.setField(_Runtime.field(out, 'rect'), 'y', 0.0);
@@ -292,11 +292,11 @@ class ClipRegion {
         while (_Runtime.truthy(_Runtime.compare(i, 8.0, '<'))) {
           var cx:Dynamic = _Runtime.getIndex(c, i);
           var cy:Dynamic = _Runtime.getIndex(c, (i + 1.0));
-          if (_Runtime.truthy(!_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(cx - minX)] : Array<Dynamic>)), e, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(cx - maxX)] : Array<Dynamic>)), e, '<='))))) {
+          if (_Runtime.truthy(!_Runtime.truthy(_Runtime.orValue(_Runtime.compare(HxMath.abs((cx - minX)), e, '<='), function():Dynamic return cast _Runtime.compare(HxMath.abs((cx - maxX)), e, '<='))))) {
             (isAxisAligned = cast (false : Dynamic));
             break;
           }
-          if (_Runtime.truthy(!_Runtime.truthy(_Runtime.orValue(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(cy - minY)] : Array<Dynamic>)), e, '<='), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(cy - maxY)] : Array<Dynamic>)), e, '<='))))) {
+          if (_Runtime.truthy(!_Runtime.truthy(_Runtime.orValue(_Runtime.compare(HxMath.abs((cy - minY)), e, '<='), function():Dynamic return cast _Runtime.compare(HxMath.abs((cy - maxY)), e, '<='))))) {
             (isAxisAligned = cast (false : Dynamic));
             break;
           }
@@ -524,8 +524,8 @@ class ClipRegion {
     var x2:Dynamic = cast _Runtime.UNDEFINED;
     var y1:Dynamic = cast _Runtime.UNDEFINED;
     var y2:Dynamic = cast _Runtime.UNDEFINED;
-    maxR = (_Runtime.callProperty(HxMath, 'min', cast ([w, h] : Array<Dynamic>)) / 2.0);
-    cr = _Runtime.callProperty(HxMath, 'min', cast ([r, maxR] : Array<Dynamic>));
+    maxR = (HxMath.min(w, h) / 2.0);
+    cr = HxMath.min(r, maxR);
     k = (cr * ClipRegion.KAPPA__clipRegion);
     x1 = (x + cr);
     x2 = ((x + w) - cr);

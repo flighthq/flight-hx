@@ -12,7 +12,7 @@ import flighthq.types.GlShaderLocations.GlBitmapShader;
 import flighthq.types.RenderProxy2D;
 
 class GlShaderBinding {
-  public static final _shaderBindings__glShaderBinding:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _shaderBindings__glShaderBinding:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function getGlMaterialShader(state:GlRenderState, kind:Kind):Null<GlBitmapShader> {
     return cast _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'materialBitmapShaderMap'), 'get', cast ([kind] : Array<Dynamic>)), function():Dynamic return cast null);
@@ -27,7 +27,7 @@ class GlShaderBinding {
   public static function registerGlMaterialShader(state:GlRenderState, kind:Kind, shader:GlBitmapShader):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.setField(runtime, 'materialBitmapShaderMap', (_Runtime.field(runtime, 'materialBitmapShaderMap') ?? _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []))), 'set', cast ([kind, shader] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.setField(runtime, 'materialBitmapShaderMap', (_Runtime.field(runtime, 'materialBitmapShaderMap') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))), 'set', cast ([kind, shader] : Array<Dynamic>));
   }
 
   public static function resolveGlShader(state:GlRenderState, renderProxy:RenderProxy2D):GlBitmapShader {

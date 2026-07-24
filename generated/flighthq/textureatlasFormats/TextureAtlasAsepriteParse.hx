@@ -17,7 +17,7 @@ class TextureAtlasAsepriteParse {
         _Runtime.callValue(TextureAtlasAsepriteParse.applyAsepriteFrame__textureAtlasAsepriteParse, cast ([atlas, _Runtime.field(entry, 'filename'), entry] : Array<Dynamic>));
       }
     } else {
-      for (__iteration0 in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'entries', cast ([_Runtime.field(doc, 'frames')] : Array<Dynamic>)))) {
+      for (__iteration0 in _Runtime.iterable(flighthq._internal.DynamicObject.entries(_Runtime.field(doc, 'frames')))) {
         var frameName:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
         var entry:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
         _Runtime.callValue(TextureAtlasAsepriteParse.applyAsepriteFrame__textureAtlasAsepriteParse, cast ([atlas, frameName, entry] : Array<Dynamic>));

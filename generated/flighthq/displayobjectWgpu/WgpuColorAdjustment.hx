@@ -18,7 +18,7 @@ class WgpuColorAdjustment {
     _Runtime.setField(runtime, 'wgpuColorAdjustmentFold', WgpuColorAdjustment.wgpuColorAdjustmentFold__wgpuColorAdjustment);
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformMode'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(runtime, 'spriteBatchColorTransformMode', WgpuColorAdjustment.CT_MODE_NONE__wgpuColorAdjustment); }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformData'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      _Runtime.setField(runtime, 'spriteBatchColorTransformData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment * 256.0)]));
+      _Runtime.setField(runtime, 'spriteBatchColorTransformData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [(WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment * 256.0)]));
     }
   }
 
@@ -34,7 +34,7 @@ class WgpuColorAdjustment {
     var mode:Dynamic = cast _Runtime.UNDEFINED;
     var tint:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(runtime, 'spriteBatchColorTransformData'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      _Runtime.setField(runtime, 'spriteBatchColorTransformData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment * 256.0)]));
+      _Runtime.setField(runtime, 'spriteBatchColorTransformData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [(WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment * 256.0)]));
     }
     mode = _Runtime.coalesce(_Runtime.field(runtime, 'spriteBatchColorTransformMode'), function():Dynamic return cast WgpuColorAdjustment.CT_MODE_NONE__wgpuColorAdjustment);
     tint = _Runtime.coalesce(colorTransform, function():Dynamic return cast null);
@@ -88,7 +88,7 @@ class WgpuColorAdjustment {
     existing = _Runtime.field(runtime, 'spriteBatchColorTransformData');
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.compare(floatsNeeded, _Runtime.field(existing, 'length'), '<=')))) { return; }
     newSize = HxMath.max(HxMath.max(floatsNeeded, (_Runtime.coalesce(_Runtime.optionalField(existing, 'length'), function():Dynamic return cast 0.0) * 2.0)), (WgpuColorAdjustment.COLOR_TRANSFORM_FLOATS__wgpuColorAdjustment * 256.0));
-    grown = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [newSize]);
+    grown = _Runtime.construct(_Runtime.globalValue('Float32Array'), [newSize]);
     if (_Runtime.truthy(!_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callProperty(grown, 'set', cast ([existing] : Array<Dynamic>)); }
     _Runtime.setField(runtime, 'spriteBatchColorTransformData', grown);
   }
@@ -155,7 +155,7 @@ class WgpuColorAdjustment {
 
   public static final COLOR_TRANSFORM_WGSL__wgpuColorAdjustment:Dynamic = '\n@group(3) @binding(0) var<storage, read> ctData : array<f32>;\n\nstruct VertexOut {\n  @builtin(position) position : vec4f,\n  @location(0) uv : vec2f,\n  @location(1) alpha : f32,\n  @location(2) ctMult : vec4f,\n  @location(3) ctOff : vec4f,\n}\n\n@vertex\nfn vs_main(@builtin(vertex_index) vi : u32, @builtin(instance_index) ii : u32) -> VertexOut {\n  let bv = quadBaseVertex(vi, ii);\n  let b = ii * 8u;\n  let ctMult = vec4f(ctData[b + 0u], ctData[b + 1u], ctData[b + 2u], ctData[b + 3u]);\n  let ctOff = vec4f(ctData[b + 4u], ctData[b + 5u], ctData[b + 6u], ctData[b + 7u]);\n  return VertexOut(bv.position, bv.uv, bv.alpha, ctMult, ctOff);\n}\n\n@fragment\nfn fs_main(in : VertexOut) -> @location(0) vec4f {\n  var color = textureSample(tex, smp, in.uv);\n  if (color.a <= 0.0) { discard; }\n  color = color * clamp(in.alpha, 0.0, 1.0);\n  if (color.a > 0.0) {\n    color = vec4f(color.rgb / color.a, color.a);\n    color = clamp(color * in.ctMult + in.ctOff, vec4f(0.0), vec4f(1.0));\n    color = vec4f(color.rgb * color.a, color.a);\n  }\n  return color;\n}\n';
 
-  public static final _colorTransformModules__wgpuColorAdjustment:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _colorTransformModules__wgpuColorAdjustment:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static final wgpuColorAdjustmentFold__wgpuColorAdjustment:WgpuColorAdjustmentFold = { record: WgpuColorAdjustment.recordWgpuColorAdjustment__wgpuColorAdjustment, resolveFlush: WgpuColorAdjustment.resolveWgpuColorAdjustmentFlush__wgpuColorAdjustment };
 }

@@ -45,7 +45,7 @@ class Debug {
     formatter = _Runtime.callValue(createTextLogFormatter, cast ([{ levelPrefix: true }] : Array<Dynamic>));
     return cast function(entry:LogEntry) {
       var method:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['console'] : Array<Dynamic>)), 'undefined'))) { return; }
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('console'), 'undefined'))) { return; }
       method = _Runtime.coalesce(_Runtime.getIndex(Debug._consoleMethods__debug, _Runtime.field(entry, 'level')), function():Dynamic return cast 'log');
       _Runtime.console(Std.string(method), [_Runtime.callValue(formatter, cast ([entry] : Array<Dynamic>))]);
     };
@@ -88,7 +88,7 @@ class Debug {
 
   public static var _savedGlobalLevel__debug:LogLevel = LogLevel.Verbose;
 
-  public static final _subsystems__debug:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+  public static final _subsystems__debug:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
 
   public static function beginDebugSpan(name:String, ?channel:Null<String>):Null<LogTimer> {
     return cast _Runtime.callValue(Facade_Debug_flighthq_debug_DebugTiming.beginDebugSpan, cast ([name, channel] : Array<Dynamic>));

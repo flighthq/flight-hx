@@ -37,32 +37,32 @@ class GlColorLutPass {
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(cache, 'texture'), null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(cache, 'lut'), lut)))) { return cast _Runtime.field(cache, 'texture'); }
     n = _Runtime.field(lut, 'size');
     samples = _Runtime.field(lut, 'samples');
-    data = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [(((n * n) * n) * 4.0)]);
+    data = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [(((n * n) * n) * 4.0)]);
     {
       var i:Dynamic = 0.0;
       var j:Dynamic = 0.0;
       var o:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, ((n * n) * n), '<'))) {
-        _Runtime.setIndex(data, o++, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callValue(GlColorLutPass.clamp01__glColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>)));
-        _Runtime.setIndex(data, o++, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callValue(GlColorLutPass.clamp01__glColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>)));
-        _Runtime.setIndex(data, o++, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callValue(GlColorLutPass.clamp01__glColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>)));
+        _Runtime.setIndex(data, o++, HxMath.round((_Runtime.callValue(GlColorLutPass.clamp01__glColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)));
+        _Runtime.setIndex(data, o++, HxMath.round((_Runtime.callValue(GlColorLutPass.clamp01__glColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)));
+        _Runtime.setIndex(data, o++, HxMath.round((_Runtime.callValue(GlColorLutPass.clamp01__glColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)));
         _Runtime.setIndex(data, o++, 255.0);
         i++;
       }
     }
     texture = _Runtime.field(cache, 'texture');
     if (_Runtime.truthy(_Runtime.strictEquals(texture, null))) {
-      (texture = cast (_Runtime.callProperty(gl, 'createTexture', cast ([] : Array<Dynamic>)) : Dynamic));
+      (texture = cast (flighthq._internal.WebGl2RenderingContext.call(gl, 'createTexture', cast ([] : Array<Dynamic>)) : Dynamic));
       _Runtime.setField(cache, 'texture', texture);
     }
-    _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_3D'), texture] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texImage3D', cast ([_Runtime.field(gl, 'TEXTURE_3D'), 0.0, _Runtime.field(gl, 'RGBA8'), n, n, n, 0.0, _Runtime.field(gl, 'RGBA'), _Runtime.field(gl, 'UNSIGNED_BYTE'), data] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_3D'), _Runtime.field(gl, 'TEXTURE_MIN_FILTER'), _Runtime.field(gl, 'LINEAR')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_3D'), _Runtime.field(gl, 'TEXTURE_MAG_FILTER'), _Runtime.field(gl, 'LINEAR')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_3D'), _Runtime.field(gl, 'TEXTURE_WRAP_S'), _Runtime.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_3D'), _Runtime.field(gl, 'TEXTURE_WRAP_T'), _Runtime.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_3D'), _Runtime.field(gl, 'TEXTURE_WRAP_R'), _Runtime.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_3D'), null] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_3D'), texture] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texImage3D', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_3D'), 0.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'RGBA8'), n, n, n, 0.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'RGBA'), flighthq._internal.WebGl2RenderingContext.field(gl, 'UNSIGNED_BYTE'), data] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_3D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_MIN_FILTER'), flighthq._internal.WebGl2RenderingContext.field(gl, 'LINEAR')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_3D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_MAG_FILTER'), flighthq._internal.WebGl2RenderingContext.field(gl, 'LINEAR')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_3D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_WRAP_S'), flighthq._internal.WebGl2RenderingContext.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_3D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_WRAP_T'), flighthq._internal.WebGl2RenderingContext.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_3D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_WRAP_R'), flighthq._internal.WebGl2RenderingContext.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_3D'), null] : Array<Dynamic>));
     _Runtime.setField(cache, 'lut', lut);
     return cast texture;
     return cast null;

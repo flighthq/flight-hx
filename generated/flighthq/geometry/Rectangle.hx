@@ -19,10 +19,10 @@ class Rectangle {
     var x1:Dynamic = cast _Runtime.UNDEFINED;
     var y0:Dynamic = cast _Runtime.UNDEFINED;
     var y1:Dynamic = cast _Runtime.UNDEFINED;
-    x0 = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.callValue(getRectangleMinX, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMinX, cast ([b] : Array<Dynamic>))] : Array<Dynamic>));
-    x1 = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callValue(getRectangleMaxX, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMaxX, cast ([b] : Array<Dynamic>))] : Array<Dynamic>));
-    y0 = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.callValue(getRectangleMinY, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMinY, cast ([b] : Array<Dynamic>))] : Array<Dynamic>));
-    y1 = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callValue(getRectangleMaxY, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMaxY, cast ([b] : Array<Dynamic>))] : Array<Dynamic>));
+    x0 = HxMath.max(_Runtime.callValue(getRectangleMinX, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMinX, cast ([b] : Array<Dynamic>)));
+    x1 = HxMath.min(_Runtime.callValue(getRectangleMaxX, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMaxX, cast ([b] : Array<Dynamic>)));
+    y0 = HxMath.max(_Runtime.callValue(getRectangleMinY, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMinY, cast ([b] : Array<Dynamic>)));
+    y1 = HxMath.min(_Runtime.callValue(getRectangleMaxY, cast ([a] : Array<Dynamic>)), _Runtime.callValue(getRectangleMaxY, cast ([b] : Array<Dynamic>)));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(x1, x0, '<='), function():Dynamic return cast _Runtime.compare(y1, y0, '<=')))) {
       _Runtime.callValue(setEmptyRectangle, cast ([out] : Array<Dynamic>));
       return;
@@ -43,10 +43,10 @@ class Rectangle {
     var x1:Dynamic = cast _Runtime.UNDEFINED;
     var y0:Dynamic = cast _Runtime.UNDEFINED;
     var y1:Dynamic = cast _Runtime.UNDEFINED;
-    x0 = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(source, 'x'), (_Runtime.field(source, 'x') + _Runtime.field(source, 'width'))] : Array<Dynamic>));
-    x1 = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(source, 'x'), (_Runtime.field(source, 'x') + _Runtime.field(source, 'width'))] : Array<Dynamic>));
-    y0 = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(source, 'y'), (_Runtime.field(source, 'y') + _Runtime.field(source, 'height'))] : Array<Dynamic>));
-    y1 = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(source, 'y'), (_Runtime.field(source, 'y') + _Runtime.field(source, 'height'))] : Array<Dynamic>));
+    x0 = HxMath.min(_Runtime.field(source, 'x'), (_Runtime.field(source, 'x') + _Runtime.field(source, 'width')));
+    x1 = HxMath.max(_Runtime.field(source, 'x'), (_Runtime.field(source, 'x') + _Runtime.field(source, 'width')));
+    y0 = HxMath.min(_Runtime.field(source, 'y'), (_Runtime.field(source, 'y') + _Runtime.field(source, 'height')));
+    y1 = HxMath.max(_Runtime.field(source, 'y'), (_Runtime.field(source, 'y') + _Runtime.field(source, 'height')));
     return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(x, x0, '>='), function():Dynamic return cast _Runtime.compare(x, x1, '<')), function():Dynamic return cast _Runtime.compare(y, y0, '>=')), function():Dynamic return cast _Runtime.compare(y, y1, '<'));
     return cast null;
   }
@@ -74,14 +74,14 @@ class Rectangle {
     var ox1:Dynamic = cast _Runtime.UNDEFINED;
     var oy0:Dynamic = cast _Runtime.UNDEFINED;
     var oy1:Dynamic = cast _Runtime.UNDEFINED;
-    sx0 = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(source, 'x'), (_Runtime.field(source, 'x') + _Runtime.field(source, 'width'))] : Array<Dynamic>));
-    sx1 = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(source, 'x'), (_Runtime.field(source, 'x') + _Runtime.field(source, 'width'))] : Array<Dynamic>));
-    sy0 = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(source, 'y'), (_Runtime.field(source, 'y') + _Runtime.field(source, 'height'))] : Array<Dynamic>));
-    sy1 = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(source, 'y'), (_Runtime.field(source, 'y') + _Runtime.field(source, 'height'))] : Array<Dynamic>));
-    ox0 = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(other, 'x'), (_Runtime.field(other, 'x') + _Runtime.field(other, 'width'))] : Array<Dynamic>));
-    ox1 = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(other, 'x'), (_Runtime.field(other, 'x') + _Runtime.field(other, 'width'))] : Array<Dynamic>));
-    oy0 = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(other, 'y'), (_Runtime.field(other, 'y') + _Runtime.field(other, 'height'))] : Array<Dynamic>));
-    oy1 = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(other, 'y'), (_Runtime.field(other, 'y') + _Runtime.field(other, 'height'))] : Array<Dynamic>));
+    sx0 = HxMath.min(_Runtime.field(source, 'x'), (_Runtime.field(source, 'x') + _Runtime.field(source, 'width')));
+    sx1 = HxMath.max(_Runtime.field(source, 'x'), (_Runtime.field(source, 'x') + _Runtime.field(source, 'width')));
+    sy0 = HxMath.min(_Runtime.field(source, 'y'), (_Runtime.field(source, 'y') + _Runtime.field(source, 'height')));
+    sy1 = HxMath.max(_Runtime.field(source, 'y'), (_Runtime.field(source, 'y') + _Runtime.field(source, 'height')));
+    ox0 = HxMath.min(_Runtime.field(other, 'x'), (_Runtime.field(other, 'x') + _Runtime.field(other, 'width')));
+    ox1 = HxMath.max(_Runtime.field(other, 'x'), (_Runtime.field(other, 'x') + _Runtime.field(other, 'width')));
+    oy0 = HxMath.min(_Runtime.field(other, 'y'), (_Runtime.field(other, 'y') + _Runtime.field(other, 'height')));
+    oy1 = HxMath.max(_Runtime.field(other, 'y'), (_Runtime.field(other, 'y') + _Runtime.field(other, 'height')));
     return cast _Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(ox0, sx0, '>='), function():Dynamic return cast _Runtime.compare(oy0, sy0, '>=')), function():Dynamic return cast _Runtime.compare(ox1, sx1, '<=')), function():Dynamic return cast _Runtime.compare(oy1, sy1, '<='));
     return cast null;
   }
@@ -113,22 +113,22 @@ class Rectangle {
   }
 
   public static function getRectangleMaxX(source:RectangleLike):Float {
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(source, 'x'), (_Runtime.field(source, 'x') + _Runtime.field(source, 'width'))] : Array<Dynamic>));
+    return cast HxMath.max(_Runtime.field(source, 'x'), (_Runtime.field(source, 'x') + _Runtime.field(source, 'width')));
     return cast null;
   }
 
   public static function getRectangleMaxY(source:RectangleLike):Float {
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(source, 'y'), (_Runtime.field(source, 'y') + _Runtime.field(source, 'height'))] : Array<Dynamic>));
+    return cast HxMath.max(_Runtime.field(source, 'y'), (_Runtime.field(source, 'y') + _Runtime.field(source, 'height')));
     return cast null;
   }
 
   public static function getRectangleMinX(source:RectangleLike):Float {
-    return cast _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(source, 'x'), (_Runtime.field(source, 'x') + _Runtime.field(source, 'width'))] : Array<Dynamic>));
+    return cast HxMath.min(_Runtime.field(source, 'x'), (_Runtime.field(source, 'x') + _Runtime.field(source, 'width')));
     return cast null;
   }
 
   public static function getRectangleMinY(source:RectangleLike):Float {
-    return cast _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(source, 'y'), (_Runtime.field(source, 'y') + _Runtime.field(source, 'height'))] : Array<Dynamic>));
+    return cast HxMath.min(_Runtime.field(source, 'y'), (_Runtime.field(source, 'y') + _Runtime.field(source, 'height')));
     return cast null;
   }
 
@@ -221,18 +221,18 @@ class Rectangle {
       _Runtime.setField(out, 'width', _Runtime.select(oEmpty, function():Dynamic return cast sw, function():Dynamic return cast ow));
       _Runtime.setField(out, 'height', _Runtime.select(oEmpty, function():Dynamic return cast sh, function():Dynamic return cast oh));
     } else {
-      var sourceLeft:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([sx, (sx + sw)] : Array<Dynamic>));
-      var sourceRight:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([sx, (sx + sw)] : Array<Dynamic>));
-      var sourceTop:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([sy, (sy + sh)] : Array<Dynamic>));
-      var sourceBottom:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([sy, (sy + sh)] : Array<Dynamic>));
-      var otherLeft:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([ox, (ox + ow)] : Array<Dynamic>));
-      var otherRight:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([ox, (ox + ow)] : Array<Dynamic>));
-      var otherTop:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([oy, (oy + oh)] : Array<Dynamic>));
-      var otherBottom:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([oy, (oy + oh)] : Array<Dynamic>));
-      var x0:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([sourceLeft, otherLeft] : Array<Dynamic>));
-      var x1:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([sourceRight, otherRight] : Array<Dynamic>));
-      var y0:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([sourceTop, otherTop] : Array<Dynamic>));
-      var y1:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([sourceBottom, otherBottom] : Array<Dynamic>));
+      var sourceLeft:Dynamic = HxMath.min(sx, (sx + sw));
+      var sourceRight:Dynamic = HxMath.max(sx, (sx + sw));
+      var sourceTop:Dynamic = HxMath.min(sy, (sy + sh));
+      var sourceBottom:Dynamic = HxMath.max(sy, (sy + sh));
+      var otherLeft:Dynamic = HxMath.min(ox, (ox + ow));
+      var otherRight:Dynamic = HxMath.max(ox, (ox + ow));
+      var otherTop:Dynamic = HxMath.min(oy, (oy + oh));
+      var otherBottom:Dynamic = HxMath.max(oy, (oy + oh));
+      var x0:Dynamic = HxMath.min(sourceLeft, otherLeft);
+      var x1:Dynamic = HxMath.max(sourceRight, otherRight);
+      var y0:Dynamic = HxMath.min(sourceTop, otherTop);
+      var y1:Dynamic = HxMath.max(sourceBottom, otherBottom);
       _Runtime.setField(out, 'x', x0);
       _Runtime.setField(out, 'y', y0);
       _Runtime.setField(out, 'width', (x1 - x0));

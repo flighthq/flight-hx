@@ -33,7 +33,7 @@ class RevealSceneResourcesOnResolve {
     fadeSeconds = _Runtime.coalesce(_Runtime.optionalField(options, 'fadeSeconds'), function():Dynamic return cast 0.4);
     from = _Runtime.coalesce(_Runtime.optionalField(options, 'from'), function():Dynamic return cast 0.0);
     tweenOptions = _Runtime.select(!_Runtime.strictEquals(_Runtime.optionalField(options, 'ease'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast { ease: _Runtime.field(options, 'ease') }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
-    ownersByTexture = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    ownersByTexture = _Runtime.construct(_Runtime.globalValue('Map'), []);
     owners = cast ([] : Array<Dynamic>);
     _Runtime.callValue(RevealSceneResourcesOnResolve.collectPendingTextureOwners__revealSceneResourcesOnResolve, cast ([scene, resolver, ownersByTexture, owners] : Array<Dynamic>));
     for (owner in _Runtime.iterable(owners)) {
@@ -66,7 +66,7 @@ class RevealSceneResourcesOnResolve {
     var ownersByNode:Dynamic = cast _Runtime.UNDEFINED;
     var visit:Dynamic = cast _Runtime.UNDEFINED;
     slots = cast ([] : Array<Dynamic>);
-    ownersByNode = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    ownersByNode = _Runtime.construct(_Runtime.globalValue('Map'), []);
     visit = function(node:SceneNode) {
       var owner:Dynamic = cast _Runtime.UNDEFINED;
       var materials:Dynamic = cast _Runtime.UNDEFINED;
@@ -88,7 +88,7 @@ class RevealSceneResourcesOnResolve {
               if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.looseEquals(ref, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(texture, 'image'), null)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Failed)))) { j++; continue; }
               var ownerState:Dynamic = _Runtime.callProperty(ownersByNode, 'get', cast ([owner] : Array<Dynamic>));
               if (_Runtime.truthy(_Runtime.strictEquals(ownerState, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-                (ownerState = cast ({ node: owner, pending: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []) } : Dynamic));
+                (ownerState = cast ({ node: owner, pending: _Runtime.construct(_Runtime.globalValue('Set'), []) } : Dynamic));
                 _Runtime.callProperty(ownersByNode, 'set', cast ([owner, ownerState] : Array<Dynamic>));
                 _Runtime.callProperty(owners, 'push', cast ([ownerState] : Array<Dynamic>));
               }

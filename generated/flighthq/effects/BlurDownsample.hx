@@ -7,7 +7,7 @@ import flighthq._internal._Runtime;
 class BlurDownsample {
   public static function getBlurDownsampleLevel(sigma:Float):Float {
     if (_Runtime.truthy(_Runtime.compare(sigma, BlurDownsample.BLUR_DOWNSAMPLE_MAX_SIGMA__blurDownsample, '<='))) { return cast 0.0; }
-    return cast _Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.log2((sigma / BlurDownsample.BLUR_DOWNSAMPLE_MAX_SIGMA__blurDownsample))] : Array<Dynamic>));
+    return cast HxMath.ceil(_Runtime.log2((sigma / BlurDownsample.BLUR_DOWNSAMPLE_MAX_SIGMA__blurDownsample)));
     return cast null;
   }
 

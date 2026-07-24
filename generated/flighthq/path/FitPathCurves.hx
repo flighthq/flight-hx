@@ -66,8 +66,8 @@ class FitPathCurves {
         var dy0:Dynamic = (_Runtime.getIndex(pts, ((i * 2.0) + 1.0)) - _Runtime.getIndex(pts, (((i - 1.0) * 2.0) + 1.0)));
         var dx1:Dynamic = (_Runtime.getIndex(pts, ((i + 1.0) * 2.0)) - _Runtime.getIndex(pts, (i * 2.0)));
         var dy1:Dynamic = (_Runtime.getIndex(pts, (((i + 1.0) * 2.0) + 1.0)) - _Runtime.getIndex(pts, ((i * 2.0) + 1.0)));
-        var len0:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([((dx0 * dx0) + (dy0 * dy0))] : Array<Dynamic>));
-        var len1:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([((dx1 * dx1) + (dy1 * dy1))] : Array<Dynamic>));
+        var len0:Dynamic = HxMath.sqrt(((dx0 * dx0) + (dy0 * dy0)));
+        var len1:Dynamic = HxMath.sqrt(((dx1 * dx1) + (dy1 * dy1)));
         if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(len0, 0.0), function():Dynamic return cast _Runtime.strictEquals(len1, 0.0)))) { i++; continue; }
         var dot:Dynamic = (((dx0 * dx1) + (dy0 * dy1)) / (len0 * len1));
         if (_Runtime.truthy(_Runtime.compare(dot, 0.5, '<'))) { _Runtime.callProperty(corners, 'push', cast ([i] : Array<Dynamic>)); }
@@ -85,7 +85,7 @@ class FitPathCurves {
     var len:Dynamic = cast _Runtime.UNDEFINED;
     dx = (_Runtime.getIndex(pts, ((idx + 1.0) * 2.0)) - _Runtime.getIndex(pts, (idx * 2.0)));
     dy = (_Runtime.getIndex(pts, (((idx + 1.0) * 2.0) + 1.0)) - _Runtime.getIndex(pts, ((idx * 2.0) + 1.0)));
-    len = _Runtime.callProperty(HxMath, 'sqrt', cast ([((dx * dx) + (dy * dy))] : Array<Dynamic>));
+    len = HxMath.sqrt(((dx * dx) + (dy * dy)));
     return cast _Runtime.select(_Runtime.compare(len, 0.0, '>'), function():Dynamic return cast cast ([(dx / len), (dy / len)] : Array<Dynamic>), function():Dynamic return cast cast ([1.0, 0.0] : Array<Dynamic>));
     return cast null;
   }
@@ -96,7 +96,7 @@ class FitPathCurves {
     var len:Dynamic = cast _Runtime.UNDEFINED;
     dx = (_Runtime.getIndex(pts, ((idx - 1.0) * 2.0)) - _Runtime.getIndex(pts, (idx * 2.0)));
     dy = (_Runtime.getIndex(pts, (((idx - 1.0) * 2.0) + 1.0)) - _Runtime.getIndex(pts, ((idx * 2.0) + 1.0)));
-    len = _Runtime.callProperty(HxMath, 'sqrt', cast ([((dx * dx) + (dy * dy))] : Array<Dynamic>));
+    len = HxMath.sqrt(((dx * dx) + (dy * dy)));
     return cast _Runtime.select(_Runtime.compare(len, 0.0, '>'), function():Dynamic return cast cast ([(dx / len), (dy / len)] : Array<Dynamic>), function():Dynamic return cast cast ([-1.0, 0.0] : Array<Dynamic>));
     return cast null;
   }
@@ -110,7 +110,7 @@ class FitPathCurves {
       while (_Runtime.truthy(_Runtime.compare(i, last, '<='))) {
         var dx:Dynamic = (_Runtime.getIndex(pts, (i * 2.0)) - _Runtime.getIndex(pts, ((i - 1.0) * 2.0)));
         var dy:Dynamic = (_Runtime.getIndex(pts, ((i * 2.0) + 1.0)) - _Runtime.getIndex(pts, (((i - 1.0) * 2.0) + 1.0)));
-        _Runtime.callProperty(u, 'push', cast ([(_Runtime.getIndex(u, (_Runtime.field(u, 'length') - 1.0)) + _Runtime.callProperty(HxMath, 'sqrt', cast ([((dx * dx) + (dy * dy))] : Array<Dynamic>)))] : Array<Dynamic>));
+        _Runtime.callProperty(u, 'push', cast ([(_Runtime.getIndex(u, (_Runtime.field(u, 'length') - 1.0)) + HxMath.sqrt(((dx * dx) + (dy * dy))))] : Array<Dynamic>));
         i++;
       }
     }
@@ -134,7 +134,7 @@ class FitPathCurves {
     var MAX_ITERATIONS:Dynamic = cast _Runtime.UNDEFINED;
     nPts = ((last - first) + 1.0);
     if (_Runtime.truthy(_Runtime.strictEquals(nPts, 2.0))) {
-      var dist:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([(HxMath.pow((_Runtime.getIndex(pts, (last * 2.0)) - _Runtime.getIndex(pts, (first * 2.0))), 2.0) + HxMath.pow((_Runtime.getIndex(pts, ((last * 2.0) + 1.0)) - _Runtime.getIndex(pts, ((first * 2.0) + 1.0))), 2.0))] : Array<Dynamic>));
+      var dist:Dynamic = HxMath.sqrt((HxMath.pow((_Runtime.getIndex(pts, (last * 2.0)) - _Runtime.getIndex(pts, (first * 2.0))), 2.0) + HxMath.pow((_Runtime.getIndex(pts, ((last * 2.0) + 1.0)) - _Runtime.getIndex(pts, ((first * 2.0) + 1.0))), 2.0)));
       var d:Dynamic = (dist / 3.0);
       _Runtime.callProperty(_Runtime.field(out, 'commands'), 'push', cast ([PathCommandValue.CUBIC_CURVE_TO] : Array<Dynamic>));
       _Runtime.pushMany(_Runtime.field(out, 'data'), cast ([(_Runtime.getIndex(pts, (first * 2.0)) + (_Runtime.getIndex(tHat1, 0.0) * d)), (_Runtime.getIndex(pts, ((first * 2.0) + 1.0)) + (_Runtime.getIndex(tHat1, 1.0) * d)), (_Runtime.getIndex(pts, (last * 2.0)) + (_Runtime.getIndex(tHat2, 0.0) * d)), (_Runtime.getIndex(pts, ((last * 2.0) + 1.0)) + (_Runtime.getIndex(tHat2, 1.0) * d)), _Runtime.getIndex(pts, (last * 2.0)), _Runtime.getIndex(pts, ((last * 2.0) + 1.0))] : Array<Dynamic>));
@@ -207,14 +207,14 @@ class FitPathCurves {
       }
     }
     det = ((c00 * c11) - (c01 * c01));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([det] : Array<Dynamic>)), 1e-12, '<'))) {
-      var dist:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([(HxMath.pow((_Runtime.getIndex(pts, (last * 2.0)) - _Runtime.getIndex(pts, (first * 2.0))), 2.0) + HxMath.pow((_Runtime.getIndex(pts, ((last * 2.0) + 1.0)) - _Runtime.getIndex(pts, ((first * 2.0) + 1.0))), 2.0))] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(det), 1e-12, '<'))) {
+      var dist:Dynamic = HxMath.sqrt((HxMath.pow((_Runtime.getIndex(pts, (last * 2.0)) - _Runtime.getIndex(pts, (first * 2.0))), 2.0) + HxMath.pow((_Runtime.getIndex(pts, ((last * 2.0) + 1.0)) - _Runtime.getIndex(pts, ((first * 2.0) + 1.0))), 2.0)));
       (alpha1 = cast ((alpha2 = cast ((dist / 3.0) : Dynamic)) : Dynamic));
     } else {
       (alpha1 = cast ((((c11 * x0) - (c01 * x1)) / det) : Dynamic));
       (alpha2 = cast ((((c00 * x1) - (c01 * x0)) / det) : Dynamic));
     }
-    segLength = _Runtime.callProperty(HxMath, 'sqrt', cast ([(HxMath.pow((_Runtime.getIndex(pts, (last * 2.0)) - _Runtime.getIndex(pts, (first * 2.0))), 2.0) + HxMath.pow((_Runtime.getIndex(pts, ((last * 2.0) + 1.0)) - _Runtime.getIndex(pts, ((first * 2.0) + 1.0))), 2.0))] : Array<Dynamic>));
+    segLength = HxMath.sqrt((HxMath.pow((_Runtime.getIndex(pts, (last * 2.0)) - _Runtime.getIndex(pts, (first * 2.0))), 2.0) + HxMath.pow((_Runtime.getIndex(pts, ((last * 2.0) + 1.0)) - _Runtime.getIndex(pts, ((first * 2.0) + 1.0))), 2.0)));
     epsilon = (0.000001 * segLength);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(alpha1, epsilon, '<'), function():Dynamic return cast _Runtime.compare(alpha2, epsilon, '<')))) {
       (alpha1 = cast ((alpha2 = cast ((segLength / 3.0) : Dynamic)) : Dynamic));
@@ -282,8 +282,8 @@ class FitPathCurves {
     q2x = (((6.0 * mt) * ((_Runtime.getIndex(bezier, 4.0) - (2.0 * _Runtime.getIndex(bezier, 2.0))) + _Runtime.getIndex(bezier, 0.0))) + ((6.0 * u) * ((_Runtime.getIndex(bezier, 6.0) - (2.0 * _Runtime.getIndex(bezier, 4.0))) + _Runtime.getIndex(bezier, 2.0))));
     q2y = (((6.0 * mt) * ((_Runtime.getIndex(bezier, 5.0) - (2.0 * _Runtime.getIndex(bezier, 3.0))) + _Runtime.getIndex(bezier, 1.0))) + ((6.0 * u) * ((_Runtime.getIndex(bezier, 7.0) - (2.0 * _Runtime.getIndex(bezier, 5.0))) + _Runtime.getIndex(bezier, 3.0))));
     den = ((((q1x * q1x) + (q1y * q1y)) + ((qx - px) * q2x)) + ((qy - py) * q2y));
-    if (_Runtime.truthy(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([den] : Array<Dynamic>)), 1e-12, '<'))) { return cast u; }
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, (u - (num / den))] : Array<Dynamic>))] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.compare(HxMath.abs(den), 1e-12, '<'))) { return cast u; }
+    return cast HxMath.max(0.0, HxMath.min(1.0, (u - (num / den))));
     return cast null;
   }
 
@@ -293,7 +293,7 @@ class FitPathCurves {
     var len:Dynamic = cast _Runtime.UNDEFINED;
     dx = (_Runtime.getIndex(pts, ((idx - 1.0) * 2.0)) - _Runtime.getIndex(pts, ((idx + 1.0) * 2.0)));
     dy = (_Runtime.getIndex(pts, (((idx - 1.0) * 2.0) + 1.0)) - _Runtime.getIndex(pts, (((idx + 1.0) * 2.0) + 1.0)));
-    len = _Runtime.callProperty(HxMath, 'sqrt', cast ([((dx * dx) + (dy * dy))] : Array<Dynamic>));
+    len = HxMath.sqrt(((dx * dx) + (dy * dy)));
     return cast _Runtime.select(_Runtime.compare(len, 0.0, '>'), function():Dynamic return cast cast ([(dx / len), (dy / len)] : Array<Dynamic>), function():Dynamic return cast cast ([1.0, 0.0] : Array<Dynamic>));
     return cast null;
   }

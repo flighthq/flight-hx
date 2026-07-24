@@ -14,8 +14,8 @@ class WgpuRenderTargetPool {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var format:Dynamic = cast _Runtime.UNDEFINED;
-    w = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(descriptor, 'width')] : Array<Dynamic>))] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(descriptor, 'height')] : Array<Dynamic>))] : Array<Dynamic>));
+    w = HxMath.max(1.0, HxMath.ceil(_Runtime.field(descriptor, 'width')));
+    h = HxMath.max(1.0, HxMath.ceil(_Runtime.field(descriptor, 'height')));
     format = _Runtime.coalesce(_Runtime.field(descriptor, 'format'), function():Dynamic return cast _Runtime.field(state, 'format'));
     {
       var i:Dynamic = 0.0;

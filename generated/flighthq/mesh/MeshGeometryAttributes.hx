@@ -37,7 +37,7 @@ class MeshGeometryAttributes {
     floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(geometry, 'layout'), 'tangent'] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(floatOffset, 0.0, '<'))) { return cast false; }
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(vertexIndex, 0.0, '<'), function():Dynamic return cast _Runtime.compare(vertexIndex, vertexCount, '>=')))) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
     _Runtime.setField(out, 'x', _Runtime.getIndex(_Runtime.field(geometry, 'vertices'), base));
@@ -56,7 +56,7 @@ class MeshGeometryAttributes {
     floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(geometry, 'layout'), 'uv0'] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(floatOffset, 0.0, '<'))) { return cast false; }
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(vertexIndex, 0.0, '<'), function():Dynamic return cast _Runtime.compare(vertexIndex, vertexCount, '>=')))) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
     _Runtime.setField(out, 'x', _Runtime.getIndex(_Runtime.field(geometry, 'vertices'), base));
@@ -135,7 +135,7 @@ class MeshGeometryAttributes {
     floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(geometry, 'layout'), 'tangent'] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(floatOffset, 0.0, '<'))) { return cast false; }
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(vertexIndex, 0.0, '<'), function():Dynamic return cast _Runtime.compare(vertexIndex, vertexCount, '>=')))) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
     _Runtime.setIndex(_Runtime.field(geometry, 'vertices'), base, x);
@@ -155,7 +155,7 @@ class MeshGeometryAttributes {
     floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(geometry, 'layout'), 'uv0'] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(floatOffset, 0.0, '<'))) { return cast false; }
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(vertexIndex, 0.0, '<'), function():Dynamic return cast _Runtime.compare(vertexIndex, vertexCount, '>=')))) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
     _Runtime.setIndex(_Runtime.field(geometry, 'vertices'), base, u);
@@ -186,7 +186,7 @@ class MeshGeometryAttributes {
     attribute = _Runtime.callValue(getVertexAttribute, cast ([_Runtime.field(geometry, 'layout'), semantic] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.optionalField(attribute, 'format'), 'float32x2'))) { return cast false; }
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(vertexIndex, 0.0, '<'), function():Dynamic return cast _Runtime.compare(vertexIndex, vertexCount, '>=')))) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
     _Runtime.setField(out, 'x', _Runtime.getIndex(_Runtime.field(geometry, 'vertices'), base));
@@ -274,11 +274,11 @@ class MeshGeometryAttributes {
     attributeByteLength = _Runtime.callValue(MeshGeometryAttributes.getVertexFormatByteLength__meshGeometryAttributes, cast ([_Runtime.field(attribute, 'format')] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(attributeByteLength, 0.0), function():Dynamic return cast _Runtime.compare(_Runtime.field(attribute, 'byteOffset'), 0.0, '<')))) { return cast null; }
     if (_Runtime.truthy(_Runtime.compare((_Runtime.field(attribute, 'byteOffset') + attributeByteLength), _Runtime.field(_Runtime.field(geometry, 'layout'), 'stride'), '>'))) { return cast null; }
-    vertexCount = _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength') / _Runtime.field(_Runtime.field(geometry, 'layout'), 'stride'))] : Array<Dynamic>));
+    vertexCount = HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength') / _Runtime.field(_Runtime.field(geometry, 'layout'), 'stride')));
     if (_Runtime.truthy(_Runtime.compare(vertexIndex, vertexCount, '>='))) { return cast null; }
     byteOffset = ((vertexIndex * _Runtime.field(_Runtime.field(geometry, 'layout'), 'stride')) + _Runtime.field(attribute, 'byteOffset'));
     if (_Runtime.truthy(_Runtime.compare((byteOffset + attributeByteLength), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength'), '>'))) { return cast null; }
-    return cast { attribute: attribute, byteOffset: byteOffset, view: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['DataView'] : Array<Dynamic>)), [_Runtime.field(_Runtime.field(geometry, 'vertices'), 'buffer'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteOffset'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength')]) };
+    return cast { attribute: attribute, byteOffset: byteOffset, view: _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(_Runtime.field(geometry, 'vertices'), 'buffer'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteOffset'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength')]) };
     return cast null;
   }
 
@@ -346,19 +346,19 @@ class MeshGeometryAttributes {
         _Runtime.callProperty(view, 'setFloat32', cast ([(byteOffset + (component * 4.0)), value, true] : Array<Dynamic>));
       }
       else if (__switchValue == 'uint16x4') {
-        _Runtime.callProperty(view, 'setUint16', cast ([(byteOffset + (component * 2.0)), _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.callValue(MeshGeometryAttributes.clamp__meshGeometryAttributes, cast ([value, 0.0, 65535.0] : Array<Dynamic>))] : Array<Dynamic>)), true] : Array<Dynamic>));
+        _Runtime.callProperty(view, 'setUint16', cast ([(byteOffset + (component * 2.0)), HxMath.round(_Runtime.callValue(MeshGeometryAttributes.clamp__meshGeometryAttributes, cast ([value, 0.0, 65535.0] : Array<Dynamic>))), true] : Array<Dynamic>));
       }
       else if (__switchValue == 'uint8x4') {
-        _Runtime.callProperty(view, 'setUint8', cast ([(byteOffset + component), _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.callValue(MeshGeometryAttributes.clamp__meshGeometryAttributes, cast ([value, 0.0, 255.0] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+        _Runtime.callProperty(view, 'setUint8', cast ([(byteOffset + component), HxMath.round(_Runtime.callValue(MeshGeometryAttributes.clamp__meshGeometryAttributes, cast ([value, 0.0, 255.0] : Array<Dynamic>)))] : Array<Dynamic>));
       }
       else if (__switchValue == 'unorm8x4') {
-        _Runtime.callProperty(view, 'setUint8', cast ([(byteOffset + component), _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callValue(MeshGeometryAttributes.clamp__meshGeometryAttributes, cast ([value, 0.0, 1.0] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>))] : Array<Dynamic>));
+        _Runtime.callProperty(view, 'setUint8', cast ([(byteOffset + component), HxMath.round((_Runtime.callValue(MeshGeometryAttributes.clamp__meshGeometryAttributes, cast ([value, 0.0, 1.0] : Array<Dynamic>)) * 255.0))] : Array<Dynamic>));
       }
     }
   }
 
   public static function clamp__meshGeometryAttributes(value:Float, min:Float, max:Float):Float {
-    return cast _Runtime.callProperty(HxMath, 'min', cast ([max, _Runtime.callProperty(HxMath, 'max', cast ([min, value] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast HxMath.min(max, HxMath.max(min, value));
     return cast null;
   }
 
@@ -370,7 +370,7 @@ class MeshGeometryAttributes {
     floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(geometry, 'layout'), semantic] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(floatOffset, 0.0, '<'))) { return cast false; }
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(vertexIndex, 0.0, '<'), function():Dynamic return cast _Runtime.compare(vertexIndex, vertexCount, '>=')))) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
     _Runtime.setField(out, 'x', _Runtime.getIndex(_Runtime.field(geometry, 'vertices'), base));
@@ -388,7 +388,7 @@ class MeshGeometryAttributes {
     floatOffset = _Runtime.callValue(getVertexAttributeFloatOffset, cast ([_Runtime.field(geometry, 'layout'), semantic] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.compare(floatOffset, 0.0, '<'))) { return cast false; }
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(vertexIndex, 0.0, '<'), function():Dynamic return cast _Runtime.compare(vertexIndex, vertexCount, '>=')))) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
     _Runtime.setIndex(_Runtime.field(geometry, 'vertices'), base, x);

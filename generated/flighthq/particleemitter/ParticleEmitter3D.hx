@@ -37,7 +37,7 @@ class ParticleEmitter3D {
     index = _Runtime.field(_Runtime.field(target, 'data'), 'particleCount');
     needed = (index + 1.0);
     if (_Runtime.truthy(_Runtime.compare(_Runtime.callValue(getParticleEmitter3DCapacity, cast ([target] : Array<Dynamic>)), needed, '<'))) {
-      var newCapacity:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([needed, _Runtime.orValue((_Runtime.field(_Runtime.field(target, 'data'), 'particleCount') * 2.0), function():Dynamic return cast 8.0)] : Array<Dynamic>));
+      var newCapacity:Dynamic = HxMath.max(needed, _Runtime.orValue((_Runtime.field(_Runtime.field(target, 'data'), 'particleCount') * 2.0), function():Dynamic return cast 8.0));
       _Runtime.callValue(reserveParticleEmitter3D, cast ([target, newCapacity] : Array<Dynamic>));
     }
     _Runtime.setField(_Runtime.field(target, 'data'), 'particleCount', needed);
@@ -306,7 +306,7 @@ class ParticleEmitter3D {
     var transforms:Dynamic = cast _Runtime.UNDEFINED;
     var positionsZ:Dynamic = cast _Runtime.UNDEFINED;
     count = _Runtime.field(_Runtime.field(source, 'data'), 'particleCount');
-    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isInteger', cast ([count] : Array<Dynamic>))), function():Dynamic return cast _Runtime.compare(count, 0.0, '<')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(getParticleEmitter3DCapacity, cast ([source] : Array<Dynamic>)), count, '<')), function():Dynamic return cast _Runtime.compare(_Runtime.field(outIndices, 'length'), count, '<')), function():Dynamic return cast _Runtime.compare(_Runtime.field(outViewDepths, 'length'), count, '<')))) {
+    if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(!_Runtime.truthy(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isInteger', cast ([count] : Array<Dynamic>))), function():Dynamic return cast _Runtime.compare(count, 0.0, '<')), function():Dynamic return cast _Runtime.compare(_Runtime.callValue(getParticleEmitter3DCapacity, cast ([source] : Array<Dynamic>)), count, '<')), function():Dynamic return cast _Runtime.compare(_Runtime.field(outIndices, 'length'), count, '<')), function():Dynamic return cast _Runtime.compare(_Runtime.field(outViewDepths, 'length'), count, '<')))) {
       return cast false;
     }
     matrix = _Runtime.field(positionToView, 'm');

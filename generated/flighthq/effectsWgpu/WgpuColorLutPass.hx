@@ -46,7 +46,7 @@ class WgpuColorLutPass {
     var layout:Dynamic = cast _Runtime.UNDEFINED;
     layout = _Runtime.callProperty(WgpuColorLutPass.lutBindGroupLayouts__wgpuColorLutPass, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (layout = cast (_Runtime.callProperty(_Runtime.field(state, 'device'), 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), texture: { viewDimension: '3d' } }, { binding: 1.0, visibility: _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUShaderStage'] : Array<Dynamic>)), 'FRAGMENT'), sampler: {  } }] : Array<Dynamic>) }] : Array<Dynamic>)) : Dynamic));
+      (layout = cast (_Runtime.callProperty(_Runtime.field(state, 'device'), 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: _Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'FRAGMENT'), texture: { viewDimension: '3d' } }, { binding: 1.0, visibility: _Runtime.field(_Runtime.globalValue('GPUShaderStage'), 'FRAGMENT'), sampler: {  } }] : Array<Dynamic>) }] : Array<Dynamic>)) : Dynamic));
       _Runtime.callProperty(WgpuColorLutPass.lutBindGroupLayouts__wgpuColorLutPass, 'set', cast ([state, layout] : Array<Dynamic>));
     }
     return cast layout;
@@ -58,7 +58,7 @@ class WgpuColorLutPass {
     var pipeline:Dynamic = cast _Runtime.UNDEFINED;
     byFormat = _Runtime.callProperty(WgpuColorLutPass.lutPipelines__wgpuColorLutPass, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(byFormat, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (byFormat = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) : Dynamic));
+      (byFormat = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       _Runtime.callProperty(WgpuColorLutPass.lutPipelines__wgpuColorLutPass, 'set', cast ([state, byFormat] : Array<Dynamic>));
     }
     pipeline = _Runtime.callProperty(byFormat, 'get', cast ([format] : Array<Dynamic>));
@@ -88,19 +88,19 @@ class WgpuColorLutPass {
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(cache, 'texture'), null), function():Dynamic return cast _Runtime.strictEquals(_Runtime.field(cache, 'lut'), lut)))) { return cast _Runtime.field(cache, 'texture'); }
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(cache, 'texture'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(cache, 'size'), n)))) {
       _Runtime.callOptionalProperty(_Runtime.field(cache, 'texture'), 'destroy', cast ([] : Array<Dynamic>));
-      _Runtime.setField(cache, 'texture', _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([n, n, n] : Array<Dynamic>), dimension: '3d', format: 'rgba8unorm', usage: (Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'COPY_DST'))) }] : Array<Dynamic>)));
+      _Runtime.setField(cache, 'texture', _Runtime.callProperty(device, 'createTexture', cast ([{ size: cast ([n, n, n] : Array<Dynamic>), dimension: '3d', format: 'rgba8unorm', usage: (Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'TEXTURE_BINDING')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'COPY_DST'))) }] : Array<Dynamic>)));
       _Runtime.setField(cache, 'size', n);
     }
     samples = _Runtime.field(lut, 'samples');
-    data = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [(((n * n) * n) * 4.0)]);
+    data = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [(((n * n) * n) * 4.0)]);
     {
       var i:Dynamic = 0.0;
       var j:Dynamic = 0.0;
       var o:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, ((n * n) * n), '<'))) {
-        _Runtime.setIndex(data, o++, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>)));
-        _Runtime.setIndex(data, o++, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>)));
-        _Runtime.setIndex(data, o++, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>)));
+        _Runtime.setIndex(data, o++, HxMath.round((_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)));
+        _Runtime.setIndex(data, o++, HxMath.round((_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)));
+        _Runtime.setIndex(data, o++, HxMath.round((_Runtime.callValue(WgpuColorLutPass.clamp01__wgpuColorLutPass, cast ([_Runtime.getIndex(samples, j++)] : Array<Dynamic>)) * 255.0)));
         _Runtime.setIndex(data, o++, 255.0);
         i++;
       }
@@ -120,7 +120,7 @@ class WgpuColorLutPass {
 
   public static final COLOR_LUT_FRAGMENT_WGSL__wgpuColorLutPass:Dynamic = '\nstruct Uniforms { u_size : f32, _p0 : f32, _p1 : f32, _p2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n@group(2) @binding(0) var lut : texture_3d<f32>;\n@group(2) @binding(1) var lutSmp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let scale = (uni.u_size - 1.0) / uni.u_size;\n  let offset = 0.5 / uni.u_size;\n  let lc = clamp(c.rgb, vec3f(0.0), vec3f(1.0)) * scale + offset;\n  let graded = textureSampleLevel(lut, lutSmp, lc, 0.0).rgb;\n  return vec4f(graded, c.a);\n}';
 
-  public static final lutBindGroupLayouts__wgpuColorLutPass:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final lutBindGroupLayouts__wgpuColorLutPass:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static final lutPipelines__wgpuColorLutPass:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final lutPipelines__wgpuColorLutPass:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

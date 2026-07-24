@@ -92,7 +92,7 @@ class Throttle {
     handler = (cast function(...args:Dynamic) {
       var now:Dynamic = cast _Runtime.UNDEFINED;
       var remaining:Dynamic = cast _Runtime.UNDEFINED;
-      now = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Date'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>));
+      now = _Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>));
       remaining = (intervalMs - (now - lastFiredAt));
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(remaining, 0.0, '<='), function():Dynamic return cast _Runtime.compare(remaining, intervalMs, '>')))) {
         _Runtime.callValue(clearTrailing, cast ([] : Array<Dynamic>));
@@ -106,7 +106,7 @@ class Throttle {
         _Runtime.callValue(clearTrailing, cast ([] : Array<Dynamic>));
         (lastArgs = cast (args : Dynamic));
         (trailingTimer = cast (_Runtime.setTimeout(function() {
-          (lastFiredAt = cast (_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Date'] : Array<Dynamic>)), 'now', cast ([] : Array<Dynamic>)) : Dynamic));
+          (lastFiredAt = cast (_Runtime.callProperty(_Runtime.globalValue('Date'), 'now', cast ([] : Array<Dynamic>)) : Dynamic));
           (trailingTimer = cast (null : Dynamic));
           if (_Runtime.truthy(!_Runtime.strictEquals(lastArgs, null))) {
             _Runtime.apply(slot, _Runtime.concatArrays([_Runtime.toArray(lastArgs)]));

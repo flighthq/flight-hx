@@ -55,8 +55,8 @@ class FlyCameraController {
     var sinYaw:Dynamic = cast _Runtime.UNDEFINED;
     var cosYaw:Dynamic = cast _Runtime.UNDEFINED;
     var position:Dynamic = cast _Runtime.UNDEFINED;
-    sinYaw = _Runtime.callProperty(HxMath, 'sin', cast ([_Runtime.field(controller, 'yaw')] : Array<Dynamic>));
-    cosYaw = _Runtime.callProperty(HxMath, 'cos', cast ([_Runtime.field(controller, 'yaw')] : Array<Dynamic>));
+    sinYaw = HxMath.sin(_Runtime.field(controller, 'yaw'));
+    cosYaw = HxMath.cos(_Runtime.field(controller, 'yaw'));
     position = _Runtime.field(controller, 'position');
     _Runtime.setField(position, 'x', (_Runtime.field(position, 'x') + ((sinYaw * forward) + (cosYaw * right))));
     _Runtime.setField(position, 'y', (_Runtime.field(position, 'y') + up));
@@ -104,10 +104,10 @@ class FlyCameraController {
       _Runtime.setField(controller, 'yaw', _Runtime.field(controller, 'goalYaw'));
       _Runtime.setField(controller, 'pitch', goalPitch);
     }
-    cosPitch = _Runtime.callProperty(HxMath, 'cos', cast ([_Runtime.field(controller, 'pitch')] : Array<Dynamic>));
-    sinPitch = _Runtime.callProperty(HxMath, 'sin', cast ([_Runtime.field(controller, 'pitch')] : Array<Dynamic>));
-    cosYaw = _Runtime.callProperty(HxMath, 'cos', cast ([_Runtime.field(controller, 'yaw')] : Array<Dynamic>));
-    sinYaw = _Runtime.callProperty(HxMath, 'sin', cast ([_Runtime.field(controller, 'yaw')] : Array<Dynamic>));
+    cosPitch = HxMath.cos(_Runtime.field(controller, 'pitch'));
+    sinPitch = HxMath.sin(_Runtime.field(controller, 'pitch'));
+    cosYaw = HxMath.cos(_Runtime.field(controller, 'yaw'));
+    sinYaw = HxMath.sin(_Runtime.field(controller, 'yaw'));
     position = _Runtime.field(controller, 'position');
     _Runtime.setField(FlyCameraController.scratchTarget__flyCameraController, 'x', (_Runtime.field(position, 'x') + (sinYaw * cosPitch)));
     _Runtime.setField(FlyCameraController.scratchTarget__flyCameraController, 'y', (_Runtime.field(position, 'y') + sinPitch));

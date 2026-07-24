@@ -14,10 +14,10 @@ class RandomRange {
   public static function randomInt(random:RandomSource, min:Float, max:Float):Float {
     var lo:Dynamic = cast _Runtime.UNDEFINED;
     var hi:Dynamic = cast _Runtime.UNDEFINED;
-    lo = _Runtime.callProperty(HxMath, 'floor', cast ([min] : Array<Dynamic>));
-    hi = _Runtime.callProperty(HxMath, 'floor', cast ([max] : Array<Dynamic>));
+    lo = HxMath.floor(min);
+    hi = HxMath.floor(max);
     if (_Runtime.truthy(_Runtime.compare(lo, hi, '>'))) { throw _Runtime.rangeError('randomInt: min must be <= max'); }
-    return cast (lo + _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * ((hi - lo) + 1.0))] : Array<Dynamic>)));
+    return cast (lo + HxMath.floor((_Runtime.callValue(random, cast ([] : Array<Dynamic>)) * ((hi - lo) + 1.0))));
     return cast null;
   }
 

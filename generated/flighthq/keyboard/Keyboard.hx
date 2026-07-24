@@ -24,7 +24,7 @@ class Keyboard {
 
   public static final _scratch__keyboard:SoftKeyboardInfo = _Runtime.callValue(createSoftKeyboardInfo, cast ([] : Array<Dynamic>));
 
-  public static final _subscriptions__keyboard:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _subscriptions__keyboard:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function attachSoftKeyboard(keyboard:SoftKeyboard):Void {
     var backend:Dynamic = cast _Runtime.UNDEFINED;
@@ -96,7 +96,7 @@ class Keyboard {
       var fire:Dynamic = cast _Runtime.UNDEFINED;
       var virtualKeyboard:Dynamic = cast _Runtime.UNDEFINED;
       var viewport:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'))) { return cast function() {
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast function() {
       
       }; }
       transition = { durationSeconds: 0.0, height: 0.0 };
@@ -106,7 +106,7 @@ class Keyboard {
         _Runtime.callProperty(virtualKeyboard, 'addEventListener', cast (['geometrychange', fire] : Array<Dynamic>));
         return cast function() return _Runtime.callProperty(virtualKeyboard, 'removeEventListener', cast (['geometrychange', fire] : Array<Dynamic>));
       }
-      viewport = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'visualViewport');
+      viewport = _Runtime.field(_Runtime.globalValue('window'), 'visualViewport');
       if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(viewport, null)))) { return cast function() {
       
       }; }
@@ -170,8 +170,8 @@ class Keyboard {
 
   public static function getVirtualKeyboard__keyboard():Null<VirtualKeyboard__keyboard> {
     var nav:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
-    nav = (cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)) : { @:optional var virtualKeyboard:VirtualKeyboard__keyboard; });
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
+    nav = (cast _Runtime.globalValue('navigator') : { @:optional var virtualKeyboard:VirtualKeyboard__keyboard; });
     return cast _Runtime.coalesce(_Runtime.field(nav, 'virtualKeyboard'), function():Dynamic return cast null);
     return cast null;
   }
@@ -183,17 +183,17 @@ class Keyboard {
     var height:Dynamic = cast _Runtime.UNDEFINED;
     var width:Dynamic = cast _Runtime.UNDEFINED;
     var y:Dynamic = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'))) { return cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 }; }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 }; }
     vk = _Runtime.callValue(Keyboard.getVirtualKeyboard__keyboard, cast ([] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(vk, null))) {
       var rect:Dynamic = _Runtime.field(vk, 'boundingRect');
       return cast { height: _Runtime.field(rect, 'height'), width: _Runtime.field(rect, 'width'), x: _Runtime.field(rect, 'x'), y: _Runtime.field(rect, 'y') };
     }
-    viewport = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'visualViewport');
+    viewport = _Runtime.field(_Runtime.globalValue('window'), 'visualViewport');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(viewport, null)))) { return cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 }; }
-    shrink = (_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'innerHeight') - _Runtime.field(viewport, 'height'));
+    shrink = (_Runtime.field(_Runtime.globalValue('window'), 'innerHeight') - _Runtime.field(viewport, 'height'));
     height = _Runtime.select(_Runtime.compare(shrink, 0.0, '>'), function():Dynamic return cast shrink, function():Dynamic return cast 0.0);
-    width = _Runtime.select(_Runtime.compare(height, 0.0, '>'), function():Dynamic return cast _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'innerWidth'), function():Dynamic return cast 0.0);
+    width = _Runtime.select(_Runtime.compare(height, 0.0, '>'), function():Dynamic return cast _Runtime.field(_Runtime.globalValue('window'), 'innerWidth'), function():Dynamic return cast 0.0);
     y = _Runtime.select(_Runtime.compare(height, 0.0, '>'), function():Dynamic return cast _Runtime.field(viewport, 'height'), function():Dynamic return cast 0.0);
     return cast { height: height, width: width, x: 0.0, y: y };
     return cast null;

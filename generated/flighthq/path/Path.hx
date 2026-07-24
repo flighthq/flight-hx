@@ -52,20 +52,20 @@ class Path {
     var cos_u3C6_:Dynamic = cast _Runtime.UNDEFINED;
     var sin_u3C6_:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(dtheta, 0.0))) { return; }
-    nSegs = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([(_Runtime.callProperty(HxMath, 'abs', cast ([dtheta] : Array<Dynamic>)) / (HxMath.PI / 2.0))] : Array<Dynamic>))] : Array<Dynamic>));
+    nSegs = HxMath.max(1.0, HxMath.ceil((HxMath.abs(dtheta) / (HxMath.PI / 2.0))));
     dt = (dtheta / nSegs);
-    cos_u3C6_ = _Runtime.callProperty(HxMath, 'cos', cast ([xAxisRotation] : Array<Dynamic>));
-    sin_u3C6_ = _Runtime.callProperty(HxMath, 'sin', cast ([xAxisRotation] : Array<Dynamic>));
+    cos_u3C6_ = HxMath.cos(xAxisRotation);
+    sin_u3C6_ = HxMath.sin(xAxisRotation);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, nSegs, '<'))) {
         var t1:Dynamic = (theta1 + (i * dt));
         var t2:Dynamic = (t1 + dt);
-        var cos1:Dynamic = _Runtime.callProperty(HxMath, 'cos', cast ([t1] : Array<Dynamic>));
-        var sin1:Dynamic = _Runtime.callProperty(HxMath, 'sin', cast ([t1] : Array<Dynamic>));
-        var cos2:Dynamic = _Runtime.callProperty(HxMath, 'cos', cast ([t2] : Array<Dynamic>));
-        var sin2:Dynamic = _Runtime.callProperty(HxMath, 'sin', cast ([t2] : Array<Dynamic>));
-        var alpha:Dynamic = ((4.0 / 3.0) * _Runtime.callProperty(HxMath, 'tan', cast ([(dt / 4.0)] : Array<Dynamic>)));
+        var cos1:Dynamic = HxMath.cos(t1);
+        var sin1:Dynamic = HxMath.sin(t1);
+        var cos2:Dynamic = HxMath.cos(t2);
+        var sin2:Dynamic = HxMath.sin(t2);
+        var alpha:Dynamic = ((4.0 / 3.0) * HxMath.tan((dt / 4.0)));
         var dx1:Dynamic = ((-rx * sin1) * alpha);
         var dy1:Dynamic = ((ry * cos1) * alpha);
         var dx2:Dynamic = ((rx * sin2) * alpha);
@@ -92,10 +92,10 @@ class Path {
     var sinEnd:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(radius, 0.0, '<='))) { return; }
     k = (radius * Path.KAPPA__path);
-    cosStart = _Runtime.callProperty(HxMath, 'cos', cast ([startAngle] : Array<Dynamic>));
-    sinStart = _Runtime.callProperty(HxMath, 'sin', cast ([startAngle] : Array<Dynamic>));
-    cosEnd = _Runtime.callProperty(HxMath, 'cos', cast ([endAngle] : Array<Dynamic>));
-    sinEnd = _Runtime.callProperty(HxMath, 'sin', cast ([endAngle] : Array<Dynamic>));
+    cosStart = HxMath.cos(startAngle);
+    sinStart = HxMath.sin(startAngle);
+    cosEnd = HxMath.cos(endAngle);
+    sinEnd = HxMath.sin(endAngle);
     _Runtime.callValue(appendPathCubicCurveTo, cast ([path, ((cx + (cosStart * radius)) - (sinStart * k)), ((cy + (sinStart * radius)) + (cosStart * k)), ((cx + (cosEnd * radius)) + (sinEnd * k)), ((cy + (sinEnd * radius)) - (cosEnd * k)), (cx + (cosEnd * radius)), (cy + (sinEnd * radius))] : Array<Dynamic>));
   }
 
@@ -110,8 +110,8 @@ class Path {
     } else {
       if (_Runtime.truthy(_Runtime.compare(sweep, 0.0, '<'))) { (sweep = cast ((sweep + (HxMath.PI * 2.0)) : Dynamic)); }
     }
-    arcStartX = (cx + (_Runtime.callProperty(HxMath, 'cos', cast ([startAngle] : Array<Dynamic>)) * radius));
-    arcStartY = (cy + (_Runtime.callProperty(HxMath, 'sin', cast ([startAngle] : Array<Dynamic>)) * radius));
+    arcStartX = (cx + (HxMath.cos(startAngle) * radius));
+    arcStartY = (cy + (HxMath.sin(startAngle) * radius));
     if (_Runtime.truthy(connectToCurrent)) {
       _Runtime.callValue(appendPathLineTo, cast ([path, arcStartX, arcStartY] : Array<Dynamic>));
     } else {
@@ -170,10 +170,10 @@ class Path {
     x2 = endX;
     y2 = endY;
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(x1, x2), function():Dynamic return cast _Runtime.strictEquals(y1, y2)))) { return; }
-    rx = _Runtime.callProperty(HxMath, 'abs', cast ([radiusX] : Array<Dynamic>));
-    ry = _Runtime.callProperty(HxMath, 'abs', cast ([radiusY] : Array<Dynamic>));
-    cos_u3C6_ = _Runtime.callProperty(HxMath, 'cos', cast ([xAxisRotation] : Array<Dynamic>));
-    sin_u3C6_ = _Runtime.callProperty(HxMath, 'sin', cast ([xAxisRotation] : Array<Dynamic>));
+    rx = HxMath.abs(radiusX);
+    ry = HxMath.abs(radiusY);
+    cos_u3C6_ = HxMath.cos(xAxisRotation);
+    sin_u3C6_ = HxMath.sin(xAxisRotation);
     dx = ((x1 - x2) / 2.0);
     dy = ((y1 - y2) / 2.0);
     x1p = ((cos_u3C6_ * dx) + (sin_u3C6_ * dy));
@@ -184,7 +184,7 @@ class Path {
     rySq = (ry * ry);
     lambda = ((x1pSq / rxSq) + (y1pSq / rySq));
     if (_Runtime.truthy(_Runtime.compare(lambda, 1.0, '>'))) {
-      var sqrtLambda:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([lambda] : Array<Dynamic>));
+      var sqrtLambda:Dynamic = HxMath.sqrt(lambda);
       (rx = cast ((rx * sqrtLambda) : Dynamic));
       (ry = cast ((ry * sqrtLambda) : Dynamic));
     }
@@ -192,7 +192,7 @@ class Path {
     rySq2 = (ry * ry);
     num = (((rxSq2 * rySq2) - (rxSq2 * y1pSq)) - (rySq2 * x1pSq));
     den = ((rxSq2 * y1pSq) + (rySq2 * x1pSq));
-    sq = _Runtime.select(_Runtime.compare(den, 0.0, '<='), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.callProperty(HxMath, 'sqrt', cast ([_Runtime.callProperty(HxMath, 'max', cast ([0.0, (num / den)] : Array<Dynamic>))] : Array<Dynamic>)));
+    sq = _Runtime.select(_Runtime.compare(den, 0.0, '<='), function():Dynamic return cast 0.0, function():Dynamic return cast HxMath.sqrt(HxMath.max(0.0, (num / den))));
     sign = _Runtime.select(_Runtime.strictEquals(largeArc, sweep), function():Dynamic return cast -1.0, function():Dynamic return cast 1.0);
     cxp = (((sign * sq) * (rx * y1p)) / ry);
     cyp = (((sign * sq) * (-ry * x1p)) / rx);
@@ -453,12 +453,12 @@ class Path {
     rtr = _Runtime.getIndex(__destructure1, 1.0);
     rbr = _Runtime.getIndex(__destructure1, 2.0);
     rbl = _Runtime.getIndex(__destructure1, 3.0);
-    halfW = (_Runtime.callProperty(HxMath, 'abs', cast ([width] : Array<Dynamic>)) / 2.0);
-    halfH = (_Runtime.callProperty(HxMath, 'abs', cast ([height] : Array<Dynamic>)) / 2.0);
-    clampTL = _Runtime.callProperty(HxMath, 'max', cast ([0.0, HxMath.min(HxMath.min(rtl, halfW), halfH)] : Array<Dynamic>));
-    clampTR = _Runtime.callProperty(HxMath, 'max', cast ([0.0, HxMath.min(HxMath.min(rtr, halfW), halfH)] : Array<Dynamic>));
-    clampBR = _Runtime.callProperty(HxMath, 'max', cast ([0.0, HxMath.min(HxMath.min(rbr, halfW), halfH)] : Array<Dynamic>));
-    clampBL = _Runtime.callProperty(HxMath, 'max', cast ([0.0, HxMath.min(HxMath.min(rbl, halfW), halfH)] : Array<Dynamic>));
+    halfW = (HxMath.abs(width) / 2.0);
+    halfH = (HxMath.abs(height) / 2.0);
+    clampTL = HxMath.max(0.0, HxMath.min(HxMath.min(rtl, halfW), halfH));
+    clampTR = HxMath.max(0.0, HxMath.min(HxMath.min(rtr, halfW), halfH));
+    clampBR = HxMath.max(0.0, HxMath.min(HxMath.min(rbr, halfW), halfH));
+    clampBL = HxMath.max(0.0, HxMath.min(HxMath.min(rbl, halfW), halfH));
     return cast cast ([clampTL, clampTR, clampBR, clampBL] : Array<Dynamic>);
     return cast null;
   }
@@ -505,11 +505,11 @@ class Path {
     var cosAngle:Dynamic = cast _Runtime.UNDEFINED;
     var angle:Dynamic = cast _Runtime.UNDEFINED;
     dot = ((ux * vx) + (uy * vy));
-    lenU = _Runtime.callProperty(HxMath, 'sqrt', cast ([((ux * ux) + (uy * uy))] : Array<Dynamic>));
-    lenV = _Runtime.callProperty(HxMath, 'sqrt', cast ([((vx * vx) + (vy * vy))] : Array<Dynamic>));
+    lenU = HxMath.sqrt(((ux * ux) + (uy * uy)));
+    lenV = HxMath.sqrt(((vx * vx) + (vy * vy)));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(lenU, 0.0), function():Dynamic return cast _Runtime.strictEquals(lenV, 0.0)))) { return cast 0.0; }
-    cosAngle = _Runtime.callProperty(HxMath, 'max', cast ([-1.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, (dot / (lenU * lenV))] : Array<Dynamic>))] : Array<Dynamic>));
-    angle = _Runtime.callProperty(HxMath, 'acos', cast ([cosAngle] : Array<Dynamic>));
+    cosAngle = HxMath.max(-1.0, HxMath.min(1.0, (dot / (lenU * lenV))));
+    angle = HxMath.acos(cosAngle);
     return cast _Runtime.select(_Runtime.compare(((ux * vy) - (uy * vx)), 0.0, '<'), function():Dynamic return cast -angle, function():Dynamic return cast angle);
     return cast null;
   }

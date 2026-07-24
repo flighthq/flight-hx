@@ -77,7 +77,7 @@ class WireframeWgpuMeshMaterialRenderer {
 
   public static final _scratch__wireframeWgpuMeshMaterialRenderer:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
 
-  public static final _dynamicOffsets__wireframeWgpuMeshMaterialRenderer:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [1.0]);
+  public static final _dynamicOffsets__wireframeWgpuMeshMaterialRenderer:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [1.0]);
 
   public static final WHITE__wireframeWgpuMeshMaterialRenderer:LinearColor = cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>);
 

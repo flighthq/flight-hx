@@ -37,7 +37,7 @@ class Skeleton3d {
 
   public static function cloneSkeleton3D(skeleton:Skeleton3D):Skeleton3D {
     var clone:Dynamic = cast _Runtime.UNDEFINED;
-    clone = _Runtime.callValue(createEntity, cast ([{ inverseBindMatrices: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [_Runtime.field(skeleton, 'inverseBindMatrices')]), jointMatrices: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [_Runtime.field(skeleton, 'jointMatrices')]), joints: _Runtime.slice(_Runtime.field(skeleton, 'joints'), 0, null), names: _Runtime.select(_Runtime.strictEquals(_Runtime.field(skeleton, 'names'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'), function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(_Runtime.field(skeleton, 'names'), null), function():Dynamic return cast null, function():Dynamic return cast _Runtime.slice(_Runtime.field(skeleton, 'names'), 0, null))) }] : Array<Dynamic>));
+    clone = _Runtime.callValue(createEntity, cast ([{ inverseBindMatrices: _Runtime.construct(_Runtime.globalValue('Float32Array'), [_Runtime.field(skeleton, 'inverseBindMatrices')]), jointMatrices: _Runtime.construct(_Runtime.globalValue('Float32Array'), [_Runtime.field(skeleton, 'jointMatrices')]), joints: _Runtime.slice(_Runtime.field(skeleton, 'joints'), 0, null), names: _Runtime.select(_Runtime.strictEquals(_Runtime.field(skeleton, 'names'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'), function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(_Runtime.field(skeleton, 'names'), null), function():Dynamic return cast null, function():Dynamic return cast _Runtime.slice(_Runtime.field(skeleton, 'names'), 0, null))) }] : Array<Dynamic>));
     return cast clone;
     return cast null;
   }
@@ -48,7 +48,7 @@ class Skeleton3d {
     var clonesBySource:Dynamic = cast _Runtime.UNDEFINED;
     sourceJoints = _Runtime.field(skeleton, 'joints');
     joints = _Runtime.createArray(_Runtime.field(sourceJoints, 'length'));
-    clonesBySource = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    clonesBySource = _Runtime.construct(_Runtime.globalValue('Map'), []);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(sourceJoints, 'length'), '<'))) {
@@ -69,7 +69,7 @@ class Skeleton3d {
         i++;
       }
     }
-    return cast _Runtime.callValue(createEntity, cast ([{ inverseBindMatrices: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [_Runtime.field(skeleton, 'inverseBindMatrices')]), jointMatrices: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [_Runtime.field(skeleton, 'jointMatrices')]), joints: joints, names: _Runtime.select(_Runtime.strictEquals(_Runtime.field(skeleton, 'names'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'), function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(_Runtime.field(skeleton, 'names'), null), function():Dynamic return cast null, function():Dynamic return cast _Runtime.slice(_Runtime.field(skeleton, 'names'), 0, null))) }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ inverseBindMatrices: _Runtime.construct(_Runtime.globalValue('Float32Array'), [_Runtime.field(skeleton, 'inverseBindMatrices')]), jointMatrices: _Runtime.construct(_Runtime.globalValue('Float32Array'), [_Runtime.field(skeleton, 'jointMatrices')]), joints: joints, names: _Runtime.select(_Runtime.strictEquals(_Runtime.field(skeleton, 'names'), _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'), function():Dynamic return cast _Runtime.select(_Runtime.strictEquals(_Runtime.field(skeleton, 'names'), null), function():Dynamic return cast null, function():Dynamic return cast _Runtime.slice(_Runtime.field(skeleton, 'names'), 0, null))) }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -104,7 +104,7 @@ class Skeleton3d {
     var count:Dynamic = cast _Runtime.UNDEFINED;
     var skeleton:Dynamic = cast _Runtime.UNDEFINED;
     count = _Runtime.field(joints, 'length');
-    skeleton = _Runtime.callValue(createEntity, cast ([{ inverseBindMatrices: _Runtime.coalesce(inverseBindMatrices, function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(count * 16.0)])), jointMatrices: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(count * 16.0)]), joints: joints, names: _Runtime.coalesce(names, function():Dynamic return cast null) }] : Array<Dynamic>));
+    skeleton = _Runtime.callValue(createEntity, cast ([{ inverseBindMatrices: _Runtime.coalesce(inverseBindMatrices, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Float32Array'), [(count * 16.0)])), jointMatrices: _Runtime.construct(_Runtime.globalValue('Float32Array'), [(count * 16.0)]), joints: joints, names: _Runtime.coalesce(names, function():Dynamic return cast null) }] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(inverseBindMatrices, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.callValue(setSkeleton3DBindPose, cast ([skeleton] : Array<Dynamic>)); }
     return cast skeleton;
     return cast null;

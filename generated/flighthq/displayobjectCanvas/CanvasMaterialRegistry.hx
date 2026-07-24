@@ -21,9 +21,9 @@ class CanvasMaterialRegistry {
     if (_Runtime.truthy(_Runtime.strictEquals(renderer, null))) { return cast false; }
     drawState = _Runtime.callProperty(renderer, 'getState', cast ([material] : Array<Dynamic>));
     context = _Runtime.field(state, 'context');
-    _Runtime.callProperty(context, 'save', cast ([] : Array<Dynamic>));
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(drawState, 'composite'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(context, 'globalCompositeOperation', _Runtime.field(drawState, 'composite')); }
-    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(drawState, 'filter'), _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setField(context, 'filter', _Runtime.field(drawState, 'filter')); }
+    flighthq._internal.CanvasRenderingContext2D.call(context, 'save', cast ([] : Array<Dynamic>));
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(drawState, 'composite'), _Runtime.field(_Runtime, 'UNDEFINED')))) { flighthq._internal.CanvasRenderingContext2D.setField(context, 'globalCompositeOperation', _Runtime.field(drawState, 'composite')); }
+    if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(drawState, 'filter'), _Runtime.field(_Runtime, 'UNDEFINED')))) { flighthq._internal.CanvasRenderingContext2D.setField(context, 'filter', _Runtime.field(drawState, 'filter')); }
     return cast true;
     return cast null;
   }
@@ -36,7 +36,7 @@ class CanvasMaterialRegistry {
   public static function registerCanvasMaterialRenderer(state:Dynamic, kind:Kind, renderer:Dynamic):Void {
     var runtime:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getCanvasRenderStateRuntime, cast ([state] : Array<Dynamic>));
-    _Runtime.callProperty(_Runtime.setField(runtime, 'materialRendererMap', (_Runtime.field(runtime, 'materialRendererMap') ?? _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []))), 'set', cast ([kind, renderer] : Array<Dynamic>));
+    _Runtime.callProperty(_Runtime.setField(runtime, 'materialRendererMap', (_Runtime.field(runtime, 'materialRendererMap') ?? _Runtime.construct(_Runtime.globalValue('Map'), []))), 'set', cast ([kind, renderer] : Array<Dynamic>));
   }
 
   public static function resolveCanvasMaterialRenderer(state:Dynamic, material:Null<Material>):Null<Dynamic> {

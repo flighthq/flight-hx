@@ -9,7 +9,7 @@ import flighthq.types.DisplayObject;
 import flighthq.types.RenderProxy2D;
 
 class CanvasCSSFilterBinding {
-  public static final _cssFilterBindings__canvasCSSFilterBinding:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _cssFilterBindings__canvasCSSFilterBinding:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function enableCanvasCssFilter(state:Dynamic):Void {
     _Runtime.setField(state, 'canvasCssFilterResolver', resolveCanvasCssFilter);

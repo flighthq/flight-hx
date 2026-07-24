@@ -124,7 +124,7 @@ class BitmapFontJson {
   }
 
   public static function readJsonNumber__bitmapFontJson(value:Dynamic):Null<Float> {
-    return cast _Runtime.select(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(value), 'number'), function():Dynamic return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([value] : Array<Dynamic>))), function():Dynamic return cast value, function():Dynamic return cast null);
+    return cast _Runtime.select(_Runtime.andValue(_Runtime.strictEquals(_Runtime.typeofValue(value), 'number'), function():Dynamic return cast _Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([value] : Array<Dynamic>))), function():Dynamic return cast value, function():Dynamic return cast null);
     return cast null;
   }
 }

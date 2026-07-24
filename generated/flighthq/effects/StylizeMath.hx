@@ -8,8 +8,8 @@ class StylizeMath {
   public static function computeCrtMaskParams(resolution:Float, curvature:Float, out:Array<Float>):Void {
     var maskScale:Dynamic = cast _Runtime.UNDEFINED;
     var curv:Dynamic = cast _Runtime.UNDEFINED;
-    maskScale = (_Runtime.callProperty(HxMath, 'max', cast ([1.0, resolution] : Array<Dynamic>)) / 360.0);
-    curv = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, curvature] : Array<Dynamic>))] : Array<Dynamic>));
+    maskScale = (HxMath.max(1.0, resolution) / 360.0);
+    curv = HxMath.max(0.0, HxMath.min(1.0, curvature));
     _Runtime.setIndex(out, 0.0, maskScale);
     _Runtime.setIndex(out, 1.0, (curv * 0.1));
   }
@@ -18,15 +18,15 @@ class StylizeMath {
     var cellSize:Dynamic = cast _Runtime.UNDEFINED;
     cellSize = _Runtime.select(_Runtime.compare(frequency, 1e-10, '>'), function():Dynamic return cast (1.0 / frequency), function():Dynamic return cast 1.0);
     _Runtime.setIndex(out, 0.0, cellSize);
-    _Runtime.setIndex(out, 1.0, _Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>)));
-    _Runtime.setIndex(out, 2.0, _Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>)));
+    _Runtime.setIndex(out, 1.0, HxMath.cos(angle));
+    _Runtime.setIndex(out, 2.0, HxMath.sin(angle));
   }
 
   public static function computeScanlineParams(resolution:Float, intensity:Float, out:Array<Float>):Void {
     var scale:Dynamic = cast _Runtime.UNDEFINED;
-    scale = (_Runtime.callProperty(HxMath, 'max', cast ([1.0, resolution] : Array<Dynamic>)) / 480.0);
+    scale = (HxMath.max(1.0, resolution) / 480.0);
     _Runtime.setIndex(out, 0.0, scale);
-    _Runtime.setIndex(out, 1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, intensity] : Array<Dynamic>))] : Array<Dynamic>)));
+    _Runtime.setIndex(out, 1.0, HxMath.max(0.0, HxMath.min(1.0, intensity)));
   }
 
   public static function createBayerMatrix(order:Float, out:flighthq._internal._Float32Array):Float {
@@ -35,9 +35,9 @@ class StylizeMath {
     var raw:Dynamic = cast _Runtime.UNDEFINED;
     var currentSize:Dynamic = cast _Runtime.UNDEFINED;
     var invSizeSq:Dynamic = cast _Runtime.UNDEFINED;
-    size = _Runtime.callProperty(HxMath, 'pow', cast ([2.0, _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([order] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+    size = HxMath.pow(2.0, HxMath.max(1.0, HxMath.round(order)));
     sizeSq = (size * size);
-    raw = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [sizeSq]);
+    raw = _Runtime.construct(_Runtime.globalValue('Float32Array'), [sizeSq]);
     _Runtime.setIndex(raw, 0.0, 0.0);
     _Runtime.setIndex(raw, 1.0, 2.0);
     _Runtime.setIndex(raw, 2.0, 3.0);
@@ -46,7 +46,7 @@ class StylizeMath {
     while (_Runtime.truthy(_Runtime.compare(currentSize, size, '<'))) {
       var next:Dynamic = (currentSize * 2.0);
       var nextSq:Dynamic = (next * next);
-      var tmp:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [nextSq]);
+      var tmp:Dynamic = _Runtime.construct(_Runtime.globalValue('Float32Array'), [nextSq]);
       {
         var y:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(y, currentSize, '<'))) {

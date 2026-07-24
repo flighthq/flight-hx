@@ -21,7 +21,7 @@ class PhongToPbr {
   }
 
   public static function getPbrRoughnessFromPhongShininess(shininess:Float):Float {
-    return cast _Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'sqrt', cast ([(2.0 / (_Runtime.callProperty(HxMath, 'max', cast ([0.0, shininess] : Array<Dynamic>)) + 2.0))] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast HxMath.min(1.0, HxMath.max(0.0, HxMath.sqrt((2.0 / (HxMath.max(0.0, shininess) + 2.0)))));
     return cast null;
   }
 

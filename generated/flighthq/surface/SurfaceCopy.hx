@@ -11,8 +11,8 @@ class SurfaceCopy {
   public static function copySurfaceChannel(dest:SurfaceRegion, destChannel:ImageChannel, source:SurfaceRegion, sourceChannel:ImageChannel):Void {
     var w:Dynamic = cast _Runtime.UNDEFINED;
     var h:Dynamic = cast _Runtime.UNDEFINED;
-    w = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'width'), _Runtime.field(source, 'width')] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'height'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+    w = HxMath.min(_Runtime.field(dest, 'width'), _Runtime.field(source, 'width'));
+    h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
     {
       var py:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(py, h, '<'))) {
@@ -42,8 +42,8 @@ class SurfaceCopy {
     var h:Dynamic = cast _Runtime.UNDEFINED;
     var sd:Dynamic = cast _Runtime.UNDEFINED;
     var dd:Dynamic = cast _Runtime.UNDEFINED;
-    w = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'width'), _Runtime.field(source, 'width')] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(dest, 'height'), _Runtime.field(source, 'height')] : Array<Dynamic>));
+    w = HxMath.min(_Runtime.field(dest, 'width'), _Runtime.field(source, 'width'));
+    h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
     sd = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
     dd = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     {
@@ -65,10 +65,10 @@ class SurfaceCopy {
               var dstA:Dynamic = (_Runtime.getIndex(dd, (di + 3.0)) / 255.0);
               var outA:Dynamic = (srcA + (dstA * (1.0 - srcA)));
               if (_Runtime.truthy(_Runtime.compare(outA, 0.0, '>'))) {
-                _Runtime.setIndex(dd, di, _Runtime.callProperty(HxMath, 'round', cast ([(((_Runtime.getIndex(sd, si) * srcA) + ((_Runtime.getIndex(dd, di) * dstA) * (1.0 - srcA))) / outA)] : Array<Dynamic>)));
-                _Runtime.setIndex(dd, (di + 1.0), _Runtime.callProperty(HxMath, 'round', cast ([(((_Runtime.getIndex(sd, (si + 1.0)) * srcA) + ((_Runtime.getIndex(dd, (di + 1.0)) * dstA) * (1.0 - srcA))) / outA)] : Array<Dynamic>)));
-                _Runtime.setIndex(dd, (di + 2.0), _Runtime.callProperty(HxMath, 'round', cast ([(((_Runtime.getIndex(sd, (si + 2.0)) * srcA) + ((_Runtime.getIndex(dd, (di + 2.0)) * dstA) * (1.0 - srcA))) / outA)] : Array<Dynamic>)));
-                _Runtime.setIndex(dd, (di + 3.0), _Runtime.callProperty(HxMath, 'round', cast ([(outA * 255.0)] : Array<Dynamic>)));
+                _Runtime.setIndex(dd, di, HxMath.round((((_Runtime.getIndex(sd, si) * srcA) + ((_Runtime.getIndex(dd, di) * dstA) * (1.0 - srcA))) / outA)));
+                _Runtime.setIndex(dd, (di + 1.0), HxMath.round((((_Runtime.getIndex(sd, (si + 1.0)) * srcA) + ((_Runtime.getIndex(dd, (di + 1.0)) * dstA) * (1.0 - srcA))) / outA)));
+                _Runtime.setIndex(dd, (di + 2.0), HxMath.round((((_Runtime.getIndex(sd, (si + 2.0)) * srcA) + ((_Runtime.getIndex(dd, (di + 2.0)) * dstA) * (1.0 - srcA))) / outA)));
+                _Runtime.setIndex(dd, (di + 3.0), HxMath.round((outA * 255.0)));
               }
             } else {
               _Runtime.setIndex(dd, di, _Runtime.getIndex(sd, si));

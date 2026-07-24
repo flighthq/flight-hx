@@ -60,7 +60,7 @@ class WgpuVideo {
       var __destructure0:Dynamic = runtime;
       var textureBindGroupLayout:Dynamic = _Runtime.field(__destructure0, 'textureBindGroupLayout');
       var linearSampler:Dynamic = _Runtime.field(__destructure0, 'linearSampler');
-      var texture:Dynamic = _Runtime.callProperty(device, 'createTexture', cast ([{ format: 'rgba8unorm', size: cast ([vw, vh, 1.0] : Array<Dynamic>), usage: (Std.int((Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'COPY_DST')) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'RENDER_ATTACHMENT')))) | Std.int(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['GPUTextureUsage'] : Array<Dynamic>)), 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
+      var texture:Dynamic = _Runtime.callProperty(device, 'createTexture', cast ([{ format: 'rgba8unorm', size: cast ([vw, vh, 1.0] : Array<Dynamic>), usage: (Std.int((Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'COPY_DST')) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'RENDER_ATTACHMENT')))) | Std.int(_Runtime.field(_Runtime.globalValue('GPUTextureUsage'), 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
       var view:Dynamic = _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>));
       var bindGroup:Dynamic = _Runtime.callProperty(device, 'createBindGroup', cast ([{ entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: linearSampler }] : Array<Dynamic>), layout: textureBindGroupLayout }] : Array<Dynamic>));
       (entry = cast ({ bindGroup: bindGroup, texture: texture, view: view } : Dynamic));

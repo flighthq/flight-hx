@@ -272,7 +272,7 @@ class Matrix4 {
   public static function createMatrix4(?m00:Float, ?m01:Float, ?m02:Float, ?m03:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m13:Float, ?m20:Float, ?m21:Float, ?m22:Float, ?m23:Float, ?m30:Float, ?m31:Float, ?m32:Float, ?m33:Float):flighthq.types.Matrix4 {
     var m:Dynamic = cast _Runtime.UNDEFINED;
     var out:flighthq.types.Matrix4 = cast _Runtime.UNDEFINED;
-    m = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [Matrix4.__identity__matrix4]);
+    m = _Runtime.construct(_Runtime.globalValue('Float32Array'), [Matrix4.__identity__matrix4]);
     out = _Runtime.callValue(createEntity, cast ([{ m: m }] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(m00, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 0.0, m00); }
     if (_Runtime.truthy(!_Runtime.strictEquals(m01, _Runtime.field(_Runtime, 'UNDEFINED')))) { _Runtime.setIndex(m, 1.0, m01); }
@@ -362,9 +362,9 @@ class Matrix4 {
     tx = _Runtime.getIndex(_m, 12.0);
     ty = _Runtime.getIndex(_m, 13.0);
     tz = _Runtime.getIndex(_m, 14.0);
-    sx = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((m00 * m00) + (m01 * m01)) + (m02 * m02))] : Array<Dynamic>));
-    sy = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((m10 * m10) + (m11 * m11)) + (m12 * m12))] : Array<Dynamic>));
-    sz = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((m20 * m20) + (m21 * m21)) + (m22 * m22))] : Array<Dynamic>));
+    sx = HxMath.sqrt((((m00 * m00) + (m01 * m01)) + (m02 * m02)));
+    sy = HxMath.sqrt((((m10 * m10) + (m11 * m11)) + (m12 * m12)));
+    sz = HxMath.sqrt((((m20 * m20) + (m21 * m21)) + (m22 * m22)));
     det = (((m00 * ((m11 * m22) - (m12 * m21))) - (m10 * ((m01 * m22) - (m02 * m21)))) + (m20 * ((m01 * m12) - (m02 * m11))));
     if (_Runtime.truthy(_Runtime.compare(det, 0.0, '<'))) { (sx = cast (-sx : Dynamic)); }
     _Runtime.setField(outPosition, 'x', tx);
@@ -387,25 +387,25 @@ class Matrix4 {
     r22 = (m22 * invSz);
     trace = ((r00 + r11) + r22);
     if (_Runtime.truthy(_Runtime.compare(trace, 0.0, '>'))) {
-      var s:Dynamic = (0.5 / _Runtime.callProperty(HxMath, 'sqrt', cast ([(trace + 1.0)] : Array<Dynamic>)));
+      var s:Dynamic = (0.5 / HxMath.sqrt((trace + 1.0)));
       _Runtime.setField(outRotation, 'w', (0.25 / s));
       _Runtime.setField(outRotation, 'x', ((r12 - r21) * s));
       _Runtime.setField(outRotation, 'y', ((r20 - r02) * s));
       _Runtime.setField(outRotation, 'z', ((r01 - r10) * s));
     } else { if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(r00, r11, '>'), function():Dynamic return cast _Runtime.compare(r00, r22, '>')))) {
-      var s:Dynamic = (2.0 * _Runtime.callProperty(HxMath, 'sqrt', cast ([(((1.0 + r00) - r11) - r22)] : Array<Dynamic>)));
+      var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + r00) - r11) - r22)));
       _Runtime.setField(outRotation, 'w', ((r12 - r21) / s));
       _Runtime.setField(outRotation, 'x', (0.25 * s));
       _Runtime.setField(outRotation, 'y', ((r10 + r01) / s));
       _Runtime.setField(outRotation, 'z', ((r20 + r02) / s));
     } else { if (_Runtime.truthy(_Runtime.compare(r11, r22, '>'))) {
-      var s:Dynamic = (2.0 * _Runtime.callProperty(HxMath, 'sqrt', cast ([(((1.0 + r11) - r00) - r22)] : Array<Dynamic>)));
+      var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + r11) - r00) - r22)));
       _Runtime.setField(outRotation, 'w', ((r20 - r02) / s));
       _Runtime.setField(outRotation, 'x', ((r10 + r01) / s));
       _Runtime.setField(outRotation, 'y', (0.25 * s));
       _Runtime.setField(outRotation, 'z', ((r21 + r12) / s));
     } else {
-      var s:Dynamic = (2.0 * _Runtime.callProperty(HxMath, 'sqrt', cast ([(((1.0 + r22) - r00) - r11)] : Array<Dynamic>)));
+      var s:Dynamic = (2.0 * HxMath.sqrt((((1.0 + r22) - r00) - r11)));
       _Runtime.setField(outRotation, 'w', ((r01 - r10) / s));
       _Runtime.setField(outRotation, 'x', ((r20 + r02) / s));
       _Runtime.setField(outRotation, 'y', ((r21 + r12) / s));
@@ -489,7 +489,7 @@ class Matrix4 {
     _source = _Runtime.field(source, 'm');
     d = _Runtime.callValue(getMatrix4Determinant, cast ([source] : Array<Dynamic>));
     EPS = 0.000001;
-    invertable = _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([d] : Array<Dynamic>)), EPS, '>');
+    invertable = _Runtime.compare(HxMath.abs(d), EPS, '>');
     if (_Runtime.truthy(!_Runtime.truthy(invertable))) {
       _Runtime.fill(_out, HxMath.NaN, 0, null, 1);
       return cast false;
@@ -893,7 +893,7 @@ class Matrix4 {
     zx = (eyeX - _Runtime.field(target, 'x'));
     zy = (eyeY - _Runtime.field(target, 'y'));
     zz = (eyeZ - _Runtime.field(target, 'z'));
-    zl = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((zx * zx) + (zy * zy)) + (zz * zz))] : Array<Dynamic>));
+    zl = HxMath.sqrt((((zx * zx) + (zy * zy)) + (zz * zz)));
     if (_Runtime.truthy(_Runtime.strictEquals(zl, 0.0))) {
       (zz = cast (1.0 : Dynamic));
       (zl = cast (1.0 : Dynamic));
@@ -904,7 +904,7 @@ class Matrix4 {
     xx = ((_Runtime.field(up, 'y') * zz) - (_Runtime.field(up, 'z') * zy));
     xy = ((_Runtime.field(up, 'z') * zx) - (_Runtime.field(up, 'x') * zz));
     xz = ((_Runtime.field(up, 'x') * zy) - (_Runtime.field(up, 'y') * zx));
-    xl = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((xx * xx) + (xy * xy)) + (xz * xz))] : Array<Dynamic>));
+    xl = HxMath.sqrt((((xx * xx) + (xy * xy)) + (xz * xz)));
     if (_Runtime.truthy(_Runtime.strictEquals(xl, 0.0))) {
       (xx = cast (0.0 : Dynamic));
       (xy = cast (0.0 : Dynamic));
@@ -995,11 +995,11 @@ class Matrix4 {
     _Runtime.setIndex(_out, 7.0, 0.0);
     _Runtime.setIndex(_out, 8.0, ((right + left) / (right - left)));
     _Runtime.setIndex(_out, 9.0, ((top + bottom) / (top - bottom)));
-    _Runtime.setIndex(_out, 10.0, _Runtime.select(_Runtime.strictEquals(zFar, _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY')), function():Dynamic return cast -1.0, function():Dynamic return cast (-(zFar + zNear) / (zFar - zNear))));
+    _Runtime.setIndex(_out, 10.0, _Runtime.select(_Runtime.strictEquals(zFar, _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY')), function():Dynamic return cast -1.0, function():Dynamic return cast (-(zFar + zNear) / (zFar - zNear))));
     _Runtime.setIndex(_out, 11.0, -1.0);
     _Runtime.setIndex(_out, 12.0, 0.0);
     _Runtime.setIndex(_out, 13.0, 0.0);
-    _Runtime.setIndex(_out, 14.0, _Runtime.select(_Runtime.strictEquals(zFar, _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY')), function():Dynamic return cast (-2.0 * zNear), function():Dynamic return cast (((-2.0 * zFar) * zNear) / (zFar - zNear))));
+    _Runtime.setIndex(_out, 14.0, _Runtime.select(_Runtime.strictEquals(zFar, _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY')), function():Dynamic return cast (-2.0 * zNear), function():Dynamic return cast (((-2.0 * zFar) * zNear) / (zFar - zNear))));
     _Runtime.setIndex(_out, 15.0, 0.0);
   }
 
@@ -1044,8 +1044,8 @@ class Matrix4 {
     ay = y;
     az = z;
     rad = -radians;
-    c = _Runtime.callProperty(HxMath, 'cos', cast ([rad] : Array<Dynamic>));
-    s = _Runtime.callProperty(HxMath, 'sin', cast ([rad] : Array<Dynamic>));
+    c = HxMath.cos(rad);
+    s = HxMath.sin(rad);
     t = (1.0 - c);
     _Runtime.setIndex(_out, 0.0, (c + ((ax * ax) * t)));
     _Runtime.setIndex(_out, 5.0, (c + ((ay * ay) * t)));
@@ -1071,5 +1071,5 @@ class Matrix4 {
     _Runtime.setIndex(_Runtime.field(out, 'm'), b, temp);
   }
 
-  public static final __identity__matrix4:flighthq._internal._Float32Array = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [cast ([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>)]);
+  public static final __identity__matrix4:flighthq._internal._Float32Array = _Runtime.construct(_Runtime.globalValue('Float32Array'), [cast ([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0] : Array<Dynamic>)]);
 }

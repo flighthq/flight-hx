@@ -9,7 +9,7 @@ import flighthq.types.TweenManagerOptions;
 
 class TweenManager {
   public static function createTweenManager(?options:TweenManagerOptions):flighthq.types.TweenManager {
-    return cast { __brand: 'TweenManager', defaultEase: _Runtime.coalesce(_Runtime.optionalField(options, 'defaultEase'), function():Dynamic return cast easeOutExponential), tweens: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) };
+    return cast { __brand: 'TweenManager', defaultEase: _Runtime.coalesce(_Runtime.optionalField(options, 'defaultEase'), function():Dynamic return cast easeOutExponential), tweens: _Runtime.construct(_Runtime.globalValue('Map'), []) };
     return cast null;
   }
 

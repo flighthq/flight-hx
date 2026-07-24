@@ -7,7 +7,7 @@ import flighthq._internal._Runtime;
 class FontFormat {
   public static function detectFontFormat(bytes:Dynamic):Null<String> {
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    b = _Runtime.select(_Runtime.isInstanceOf(bytes, _Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>))), function():Dynamic return cast bytes, function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [bytes]));
+    b = _Runtime.select(_Runtime.isInstanceOf(bytes, _Runtime.globalValue('Uint8Array')), function():Dynamic return cast bytes, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Uint8Array'), [bytes]));
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(b, 'byteLength'), 4.0, '<'))) { return cast null; }
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.getIndex(b, 0.0), 0.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 1.0), 1.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 2.0), 0.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 3.0), 0.0)))) { return cast 'truetype'; }
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(_Runtime.getIndex(b, 0.0), 79.0), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 1.0), 84.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 2.0), 84.0)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(b, 3.0), 79.0)))) { return cast 'opentype'; }

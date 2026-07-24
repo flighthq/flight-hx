@@ -316,6 +316,96 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("_Runtime.callProperty(target, 'push', _Runtime.concatArrays");
   });
 
+  it('routes WebGL2 context access through its maintained internal binding', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/render-gl/src/sample.ts',
+      `
+        export function draw(gl: WebGL2RenderingContext, buffer: WebGLBuffer) {
+          gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+          const alias = gl;
+          alias.drawArrays(gl.TRIANGLES, 0, 3);
+        }
+        export const configure = (gl: any) => gl.clear(gl.COLOR_BUFFER_BIT);
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/render-gl', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'WebGlFixture',
+      packageName: '@flighthq/render-gl',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain("flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer'");
+    expect(output).toContain("flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER')");
+    expect(output).toContain("flighthq._internal.WebGl2RenderingContext.call(alias, 'drawArrays'");
+    expect(output).toContain("flighthq._internal.WebGl2RenderingContext.call(gl, 'clear'");
+    expect(output).not.toContain("_Runtime.callProperty(gl, 'bindBuffer'");
+  });
+
+  it('routes Canvas 2D context access through its maintained internal binding', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/render-canvas/src/sample.ts',
+      `
+        export function draw(ctx: CanvasRenderingContext2D) {
+          ctx.fillStyle = '#fff';
+          ctx.fillRect(0, 0, 10, 10);
+        }
+        export const runner = (ctx: any) => ctx.source;
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/render-canvas', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'CanvasFixture',
+      packageName: '@flighthq/render-canvas',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain("flighthq._internal.CanvasRenderingContext2D.setField(ctx, 'fillStyle'");
+    expect(output).toContain("flighthq._internal.CanvasRenderingContext2D.call(ctx, 'fillRect'");
+    expect(output).not.toContain("_Runtime.callProperty(ctx, 'fillRect'");
+    expect(output).toContain("_Runtime.field(ctx, 'source')");
+    expect(output).not.toContain("CanvasRenderingContext2D.field(ctx, 'source')");
+  });
+
+  it('routes global Object operations through named portable bindings', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        export function merge(target: any, source: any) {
+          Object.assign(target, source);
+          return Object.keys(target).length + Object.entries(target).length;
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'ObjectFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('flighthq._internal.DynamicObject.assign(target, source)');
+    expect(output).toContain('flighthq._internal.DynamicObject.keys(target)');
+    expect(output).toContain('flighthq._internal.DynamicObject.entries(target)');
+    expect(output).not.toContain("globalValue', cast (['Object']");
+    expect(output).not.toContain('Reflect.fields');
+  });
+
   it('propagates optional chains through properties and element access', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/example/src/sample.ts',

@@ -21,11 +21,11 @@ class GlRenderEffectRegistry {
     var registry:Dynamic = cast _Runtime.UNDEFINED;
     registry = _Runtime.callProperty(GlRenderEffectRegistry._registries__glRenderEffectRegistry, 'get', cast ([state] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (registry = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []) : Dynamic));
+      (registry = cast (_Runtime.construct(_Runtime.globalValue('Map'), []) : Dynamic));
       _Runtime.callProperty(GlRenderEffectRegistry._registries__glRenderEffectRegistry, 'set', cast ([state, registry] : Array<Dynamic>));
     }
     _Runtime.callProperty(registry, 'set', cast ([kind, runner] : Array<Dynamic>));
   }
 
-  public static final _registries__glRenderEffectRegistry:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final _registries__glRenderEffectRegistry:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

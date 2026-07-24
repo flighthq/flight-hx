@@ -96,7 +96,7 @@ class TextInputManager {
     var target:Dynamic = cast _Runtime.UNDEFINED;
     target = _Runtime.field(manager, 'focused');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(target, null), function():Dynamic return cast !_Runtime.truthy(_Runtime.field(target, 'enabled'))))) { return; }
-    _Runtime.callValue(setRichTextScrollV, cast ([target, (_Runtime.field(_Runtime.field(target, 'data'), 'scrollV') + _Runtime.callProperty(HxMath, 'round', cast ([deltaLines] : Array<Dynamic>)))] : Array<Dynamic>));
+    _Runtime.callValue(setRichTextScrollV, cast ([target, (_Runtime.field(_Runtime.field(target, 'data'), 'scrollV') + HxMath.round(deltaLines))] : Array<Dynamic>));
   }
 
   public static function focusTextInput(manager:flighthq.types.TextInputManager, target:RichText):Void {

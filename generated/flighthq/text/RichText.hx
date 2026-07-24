@@ -170,7 +170,7 @@ class RichText {
   }
 
   public static function dispatchRichTextWheel(source:flighthq.types.RichText, deltaLines:Float, ?layout:TextLayoutResult):Void {
-    _Runtime.callValue(setRichTextScrollV, cast ([source, (_Runtime.field(_Runtime.field(source, 'data'), 'scrollV') + _Runtime.callProperty(HxMath, 'round', cast ([deltaLines] : Array<Dynamic>))), layout] : Array<Dynamic>));
+    _Runtime.callValue(setRichTextScrollV, cast ([source, (_Runtime.field(_Runtime.field(source, 'data'), 'scrollV') + HxMath.round(deltaLines)), layout] : Array<Dynamic>));
   }
 
   public static function enableTextFieldSignals(source:flighthq.types.RichText):TextFieldSignals {
@@ -214,7 +214,7 @@ class RichText {
         (merged = cast (_Runtime.callValue(mergeTextFormat, cast ([merged, _Runtime.field(range, 'format')] : Array<Dynamic>)) : Dynamic));
       }
     }
-    keys = (cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([merged] : Array<Dynamic>)) : Array<TextFormat>);
+    keys = (cast flighthq._internal.DynamicObject.keys(merged) : Array<TextFormat>);
     for (key in _Runtime.iterable(keys)) {
       _Runtime.setIndex((cast out : Dynamic), key, _Runtime.getIndex(merged, key));
     }
@@ -331,7 +331,7 @@ class RichText {
     var delta:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(value, 'length'), 0.0))) { return; }
     text = _Runtime.field(_Runtime.field(source, 'data'), 'text');
-    clampedIndex = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(text, 'length'), index] : Array<Dynamic>))] : Array<Dynamic>));
+    clampedIndex = HxMath.max(0.0, HxMath.min(_Runtime.field(text, 'length'), index));
     previousText = text;
     _Runtime.setField(_Runtime.field(source, 'data'), 'text', ((_Runtime.slice(text, 0.0, clampedIndex) + value) + _Runtime.slice(text, clampedIndex, null)));
     delta = _Runtime.field(value, 'length');
@@ -375,8 +375,8 @@ class RichText {
     var delta:Dynamic = cast _Runtime.UNDEFINED;
     var ranges:Dynamic = cast _Runtime.UNDEFINED;
     text = _Runtime.field(_Runtime.field(source, 'data'), 'text');
-    start = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(text, 'length'), beginIndex] : Array<Dynamic>))] : Array<Dynamic>));
-    end = _Runtime.callProperty(HxMath, 'max', cast ([start, _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(text, 'length'), endIndex] : Array<Dynamic>))] : Array<Dynamic>));
+    start = HxMath.max(0.0, HxMath.min(_Runtime.field(text, 'length'), beginIndex));
+    end = HxMath.max(start, HxMath.min(_Runtime.field(text, 'length'), endIndex));
     previousText = text;
     _Runtime.setField(_Runtime.field(source, 'data'), 'text', ((_Runtime.slice(text, 0.0, start) + value) + _Runtime.slice(text, end, null)));
     removedLength = (end - start);
@@ -489,7 +489,7 @@ class RichText {
     var previousScrollH:Dynamic = cast _Runtime.UNDEFINED;
     var previousScrollV:Dynamic = cast _Runtime.UNDEFINED;
     max = _Runtime.select(!_Runtime.looseEquals(layout, null), function():Dynamic return cast _Runtime.callValue(RichText.computeRichTextMaxScrollHFromLayout__richText, cast ([_Runtime.field(source, 'data'), layout] : Array<Dynamic>)), function():Dynamic return cast HxMath.POSITIVE_INFINITY);
-    clamped = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([max, _Runtime.callProperty(HxMath, 'round', cast ([value] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+    clamped = HxMath.max(0.0, HxMath.min(max, HxMath.round(value)));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'scrollH'), clamped))) { return; }
     previousScrollH = _Runtime.field(_Runtime.field(source, 'data'), 'scrollH');
     previousScrollV = _Runtime.field(_Runtime.field(source, 'data'), 'scrollV');
@@ -504,7 +504,7 @@ class RichText {
     var previousScrollH:Dynamic = cast _Runtime.UNDEFINED;
     var previousScrollV:Dynamic = cast _Runtime.UNDEFINED;
     max = _Runtime.select(!_Runtime.looseEquals(layout, null), function():Dynamic return cast _Runtime.callValue(RichText.computeRichTextMaxScrollVFromLayout__richText, cast ([_Runtime.field(source, 'data'), layout] : Array<Dynamic>)), function():Dynamic return cast HxMath.POSITIVE_INFINITY);
-    clamped = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'min', cast ([max, _Runtime.callProperty(HxMath, 'round', cast ([value] : Array<Dynamic>))] : Array<Dynamic>))] : Array<Dynamic>));
+    clamped = HxMath.max(1.0, HxMath.min(max, HxMath.round(value)));
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(source, 'data'), 'scrollV'), clamped))) { return; }
     previousScrollH = _Runtime.field(_Runtime.field(source, 'data'), 'scrollH');
     previousScrollV = _Runtime.field(_Runtime.field(source, 'data'), 'scrollV');
@@ -563,7 +563,7 @@ class RichText {
   public static function computeRichTextMaxScrollHFromLayout__richText(data:RichTextData, layout:TextLayoutResult):Float {
     var fieldW:Dynamic = cast _Runtime.UNDEFINED;
     fieldW = _Runtime.select(_Runtime.orValue(_Runtime.strictEquals(_Runtime.field(data, 'autoSize'), 'none'), function():Dynamic return cast _Runtime.field(data, 'wordWrap')), function():Dynamic return cast _Runtime.field(data, 'width'), function():Dynamic return cast (_Runtime.field(layout, 'textWidth') + 4.0));
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'ceil', cast ([(_Runtime.field(layout, 'textWidth') - _Runtime.callProperty(HxMath, 'max', cast ([0.0, (fieldW - 4.0)] : Array<Dynamic>)))] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast HxMath.max(0.0, HxMath.ceil((_Runtime.field(layout, 'textWidth') - HxMath.max(0.0, (fieldW - 4.0)))));
     return cast null;
   }
 
@@ -574,7 +574,7 @@ class RichText {
     var count:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.compare(_Runtime.field(layout, 'numLines'), 1.0, '<='))) { return cast 1.0; }
     fieldH = _Runtime.select(_Runtime.strictEquals(_Runtime.field(data, 'autoSize'), 'none'), function():Dynamic return cast _Runtime.field(data, 'height'), function():Dynamic return cast (_Runtime.field(layout, 'textHeight') + 4.0));
-    visibleH = _Runtime.callProperty(HxMath, 'max', cast ([0.0, (fieldH - 4.0)] : Array<Dynamic>));
+    visibleH = HxMath.max(0.0, (fieldH - 4.0));
     total = 0.0;
     count = 0.0;
     for (h in _Runtime.iterable(_Runtime.field(layout, 'lineHeights'))) {
@@ -582,7 +582,7 @@ class RichText {
       (total = cast ((total + h) : Dynamic));
       count++;
     }
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([1.0, ((_Runtime.field(layout, 'numLines') - _Runtime.callProperty(HxMath, 'max', cast ([1.0, count] : Array<Dynamic>))) + 1.0)] : Array<Dynamic>));
+    return cast HxMath.max(1.0, ((_Runtime.field(layout, 'numLines') - HxMath.max(1.0, count)) + 1.0));
     return cast null;
   }
 

@@ -23,13 +23,13 @@ class PointContainment {
       }
       else if (__switchValue == 'obb') {
         {
-          var cos:Dynamic = _Runtime.callProperty(HxMath, 'cos', cast ([_Runtime.field(shape, 'rotation')] : Array<Dynamic>));
-          var sin:Dynamic = _Runtime.callProperty(HxMath, 'sin', cast ([_Runtime.field(shape, 'rotation')] : Array<Dynamic>));
+          var cos:Dynamic = HxMath.cos(_Runtime.field(shape, 'rotation'));
+          var sin:Dynamic = HxMath.sin(_Runtime.field(shape, 'rotation'));
           var dx:Dynamic = (x - _Runtime.field(shape, 'x'));
           var dy:Dynamic = (y - _Runtime.field(shape, 'y'));
           var localX:Dynamic = ((dx * cos) + (dy * sin));
           var localY:Dynamic = ((-dx * sin) + (dy * cos));
-          return cast _Runtime.andValue(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([localX] : Array<Dynamic>)), _Runtime.field(shape, 'halfW'), '<='), function():Dynamic return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([localY] : Array<Dynamic>)), _Runtime.field(shape, 'halfH'), '<='));
+          return cast _Runtime.andValue(_Runtime.compare(HxMath.abs(localX), _Runtime.field(shape, 'halfW'), '<='), function():Dynamic return cast _Runtime.compare(HxMath.abs(localY), _Runtime.field(shape, 'halfH'), '<='));
         }
       }
       else if (__switchValue == 'polygon') {

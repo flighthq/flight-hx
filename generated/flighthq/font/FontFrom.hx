@@ -13,9 +13,9 @@ class FontFrom {
   public static function loadFontFromBytes(bytes:Dynamic, family:String):flighthq._internal._Promise<Font> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Font> {
       var face:Dynamic = cast _Runtime.UNDEFINED;
-      face = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['FontFace'] : Array<Dynamic>)), [family, _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), (_Runtime.field(bytes, 'byteOffset') + _Runtime.field(bytes, 'byteLength')))]);
+      face = _Runtime.construct(_Runtime.globalValue('FontFace'), [family, _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), (_Runtime.field(bytes, 'byteOffset') + _Runtime.field(bytes, 'byteLength')))]);
       flighthq._internal._Async.awaitValue(_Runtime.callProperty(face, 'load', cast ([] : Array<Dynamic>)));
-      _Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('document'), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
       return cast _Runtime.callValue(createFont, cast ([family] : Array<Dynamic>));
       return cast null;
     })();
@@ -23,7 +23,7 @@ class FontFrom {
 
   public static function loadFontFromName(name:String):flighthq._internal._Promise<Font> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Font> {
-      flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'load', cast ([_Runtime.callValue(getFontShorthand, cast ([name] : Array<Dynamic>))] : Array<Dynamic>)));
+      flighthq._internal._Async.awaitValue(_Runtime.callProperty(_Runtime.field(_Runtime.globalValue('document'), 'fonts'), 'load', cast ([_Runtime.callValue(getFontShorthand, cast ([name] : Array<Dynamic>))] : Array<Dynamic>)));
       return cast _Runtime.callValue(createFont, cast ([name] : Array<Dynamic>));
       return cast null;
     })();
@@ -32,9 +32,9 @@ class FontFrom {
   public static function loadFontFromUrl(url:String, family:String):flighthq._internal._Promise<Font> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Font> {
       var face:Dynamic = cast _Runtime.UNDEFINED;
-      face = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['FontFace'] : Array<Dynamic>)), [family, 'url(' + Std.string(url) + ')']);
+      face = _Runtime.construct(_Runtime.globalValue('FontFace'), [family, 'url(' + Std.string(url) + ')']);
       flighthq._internal._Async.awaitValue(_Runtime.callProperty(face, 'load', cast ([] : Array<Dynamic>)));
-      _Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('document'), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
       return cast _Runtime.callValue(createFont, cast ([family] : Array<Dynamic>));
       return cast null;
     })();
@@ -53,9 +53,9 @@ class FontFrom {
         fmt = _Runtime.coalesce(format, function():Dynamic return cast _Runtime.callValue(inferFontFormatFromUrl, cast ([url] : Array<Dynamic>)));
         return cast _Runtime.select(!_Runtime.strictEquals(fmt, null), function():Dynamic return cast 'url(' + Std.string(url) + ') format(\'' + Std.string(fmt) + '\')', function():Dynamic return cast 'url(' + Std.string(url) + ')');
       }] : Array<Dynamic>)), ', ');
-      face = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['FontFace'] : Array<Dynamic>)), [family, src]);
+      face = _Runtime.construct(_Runtime.globalValue('FontFace'), [family, src]);
       flighthq._internal._Async.awaitValue(_Runtime.callProperty(face, 'load', cast ([] : Array<Dynamic>)));
-      _Runtime.callProperty(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.field(_Runtime.globalValue('document'), 'fonts'), 'add', cast ([face] : Array<Dynamic>));
       return cast _Runtime.callValue(createFont, cast ([family] : Array<Dynamic>));
       return cast null;
     })();

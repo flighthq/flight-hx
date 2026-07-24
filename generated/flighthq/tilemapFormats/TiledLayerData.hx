@@ -19,7 +19,7 @@ class TiledLayerData {
       (bytes = cast (inflated : Dynamic));
     }
     count = _Runtime.unsignedShiftRight(Std.int(_Runtime.field(bytes, 'length')), Std.int(2.0));
-    gids = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [count]);
+    gids = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [count]);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, count, '<'))) {
@@ -38,10 +38,10 @@ class TiledLayerData {
     for (part in _Runtime.iterable(_Runtime.callProperty(text, 'split', cast ([','] : Array<Dynamic>)))) {
       var trimmed:Dynamic = StringTools.trim(Std.string(part));
       if (_Runtime.truthy(_Runtime.strictEquals(trimmed, ''))) { continue; }
-      var n:Dynamic = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), cast ([trimmed] : Array<Dynamic>));
-      _Runtime.callProperty(out, 'push', cast ([_Runtime.select(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([n] : Array<Dynamic>)), function():Dynamic return cast _Runtime.unsignedShiftRight(Std.int(n), Std.int(0.0)), function():Dynamic return cast 0.0)] : Array<Dynamic>));
+      var n:Dynamic = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([trimmed] : Array<Dynamic>));
+      _Runtime.callProperty(out, 'push', cast ([_Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([n] : Array<Dynamic>)), function():Dynamic return cast _Runtime.unsignedShiftRight(Std.int(n), Std.int(0.0)), function():Dynamic return cast 0.0)] : Array<Dynamic>));
     }
-    return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), 'from', cast ([out] : Array<Dynamic>));
+    return cast _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([out] : Array<Dynamic>));
     return cast null;
   }
 
@@ -64,7 +64,7 @@ class TiledLayerData {
         (i = cast ((i + 4.0) : Dynamic));
       }
     }
-    return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [out]);
+    return cast _Runtime.construct(_Runtime.globalValue('Uint8Array'), [out]);
     return cast null;
   }
 

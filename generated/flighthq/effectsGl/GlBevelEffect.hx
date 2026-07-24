@@ -55,14 +55,14 @@ class GlBevelEffect {
     dst = (cast dest : GlRenderTarget);
     angle = ((_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0) * HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
-    offsetX = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'cos', cast ([angle] : Array<Dynamic>)) * distance)] : Array<Dynamic>));
-    offsetY = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'sin', cast ([angle] : Array<Dynamic>)) * distance)] : Array<Dynamic>));
+    offsetX = HxMath.round((HxMath.cos(angle) * distance));
+    offsetY = HxMath.round((HxMath.sin(angle) * distance));
     shadowColor = _Runtime.coalesce(_Runtime.field(effect, 'shadowColor'), function():Dynamic return cast 0.0);
     shadowAlpha = _Runtime.coalesce(_Runtime.field(effect, 'shadowAlpha'), function():Dynamic return cast 1.0);
     highlightColor = _Runtime.coalesce(_Runtime.field(effect, 'highlightColor'), function():Dynamic return cast 16777215.0);
     highlightAlpha = _Runtime.coalesce(_Runtime.field(effect, 'highlightAlpha'), function():Dynamic return cast 1.0);
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
-    quality = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)));
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
     bevelType = _Runtime.coalesce(_Runtime.field(effect, 'bevelType'), function():Dynamic return cast 'inner');
     __destructure0 = cast ([s0, s1, s2] : Array<Dynamic>);
@@ -86,17 +86,17 @@ class GlBevelEffect {
 
   public static final BEVEL_COMPOSITE_FRAGMENT_SRC__glBevelEffect:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform vec4 u_highlight;\nuniform vec4 u_shadow;\nuniform vec2 u_offset;\nuniform float u_intensity;\nuniform float u_clipMode;\nout vec4 fragColor;\n\nfloat sampleField(vec2 uv) {\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) return 0.0;\n  return texture(u_texture0, uv).a;\n}\n\nvoid main() {\n  float lit = sampleField(v_texCoord - u_offset);\n  float shade = sampleField(v_texCoord + u_offset);\n  float gradient = lit - shade;\n  float srcA = texture(u_texture1, v_texCoord).a;\n  bool isHighlight = gradient >= 0.0;\n  vec3 color = isHighlight ? u_highlight.rgb : u_shadow.rgb;\n  float colorAlpha = isHighlight ? u_highlight.a : u_shadow.a;\n  float clip = 1.0;\n  if (u_clipMode == 1.0) { clip = srcA; }\n  else if (u_clipMode == 2.0) { clip = 1.0 - srcA; }\n  float edge = min(1.0, abs(gradient) * u_intensity);\n  float a = edge * colorAlpha * clip;\n  fragColor = vec4(color * a, a);\n}';
 
-  public static final bevelCompositeShaders__glBevelEffect:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final bevelCompositeShaders__glBevelEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function applyGlBevelCompositePass__glBevelEffect(state:GlRenderState, field:GlRenderTarget, source:GlRenderTarget, dest:GlRenderTarget, params:BevelCompositeParams__glBevelEffect):Void {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlBevelEffect.getGlBevelCompositeShader__glBevelEffect, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(field, 'texture'), _Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
-      _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(loc, 'locHighlight'), ((Std.int((Std.int(_Runtime.field(params, 'highlightColor')) >> Std.int(16.0))) & Std.int(255.0)) / 255.0), ((Std.int((Std.int(_Runtime.field(params, 'highlightColor')) >> Std.int(8.0))) & Std.int(255.0)) / 255.0), ((Std.int(_Runtime.field(params, 'highlightColor')) & Std.int(255.0)) / 255.0), _Runtime.field(params, 'highlightAlpha')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(loc, 'locShadow'), ((Std.int((Std.int(_Runtime.field(params, 'shadowColor')) >> Std.int(16.0))) & Std.int(255.0)) / 255.0), ((Std.int((Std.int(_Runtime.field(params, 'shadowColor')) >> Std.int(8.0))) & Std.int(255.0)) / 255.0), ((Std.int(_Runtime.field(params, 'shadowColor')) & Std.int(255.0)) / 255.0), _Runtime.field(params, 'shadowAlpha')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform2f', cast ([_Runtime.field(loc, 'locOffset'), _Runtime.field(params, 'offsetX'), _Runtime.field(params, 'offsetY')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(loc, 'locIntensity'), _Runtime.field(params, 'intensity')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(loc, 'locClipMode'), _Runtime.field(params, 'clipMode')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(loc, 'locHighlight'), ((Std.int((Std.int(_Runtime.field(params, 'highlightColor')) >> Std.int(16.0))) & Std.int(255.0)) / 255.0), ((Std.int((Std.int(_Runtime.field(params, 'highlightColor')) >> Std.int(8.0))) & Std.int(255.0)) / 255.0), ((Std.int(_Runtime.field(params, 'highlightColor')) & Std.int(255.0)) / 255.0), _Runtime.field(params, 'highlightAlpha')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(loc, 'locShadow'), ((Std.int((Std.int(_Runtime.field(params, 'shadowColor')) >> Std.int(16.0))) & Std.int(255.0)) / 255.0), ((Std.int((Std.int(_Runtime.field(params, 'shadowColor')) >> Std.int(8.0))) & Std.int(255.0)) / 255.0), ((Std.int(_Runtime.field(params, 'shadowColor')) & Std.int(255.0)) / 255.0), _Runtime.field(params, 'shadowAlpha')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2f', cast ([_Runtime.field(loc, 'locOffset'), _Runtime.field(params, 'offsetX'), _Runtime.field(params, 'offsetY')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(loc, 'locIntensity'), _Runtime.field(params, 'intensity')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(loc, 'locClipMode'), _Runtime.field(params, 'clipMode')] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 
@@ -106,7 +106,7 @@ class GlBevelEffect {
     if (_Runtime.truthy(_Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       var gl:Dynamic = _Runtime.field(state, 'gl');
       var base:Dynamic = _Runtime.callValue(compileGlFullscreenProgram, cast ([gl, GlBevelEffect.BEVEL_COMPOSITE_FRAGMENT_SRC__glBevelEffect] : Array<Dynamic>));
-      (loc = cast (_Runtime.mergeObjects([base, { locHighlight: _Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_highlight'] : Array<Dynamic>)) }, { locShadow: _Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_shadow'] : Array<Dynamic>)) }, { locOffset: _Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_offset'] : Array<Dynamic>)) }, { locIntensity: _Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_intensity'] : Array<Dynamic>)) }, { locClipMode: _Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_clipMode'] : Array<Dynamic>)) }]) : Dynamic));
+      (loc = cast (_Runtime.mergeObjects([base, { locHighlight: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_highlight'] : Array<Dynamic>)) }, { locShadow: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_shadow'] : Array<Dynamic>)) }, { locOffset: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_offset'] : Array<Dynamic>)) }, { locIntensity: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_intensity'] : Array<Dynamic>)) }, { locClipMode: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(base, 'program'), 'u_clipMode'] : Array<Dynamic>)) }]) : Dynamic));
       _Runtime.callProperty(GlBevelEffect.bevelCompositeShaders__glBevelEffect, 'set', cast ([state, loc] : Array<Dynamic>));
     }
     return cast loc;

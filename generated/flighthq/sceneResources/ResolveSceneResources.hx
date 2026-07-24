@@ -40,7 +40,7 @@ class ResolveSceneResources {
     runtime = _Runtime.getIndex((cast resolver : SceneResourceResolverWithRuntime), SceneResourceResolverRuntimeKey);
     textures = cast ([] : Array<Dynamic>);
     _Runtime.callValue(getSceneResourceTextures, cast ([scene, _Runtime.field(resolver, 'registry'), textures] : Array<Dynamic>));
-    working = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    working = _Runtime.construct(_Runtime.globalValue('Map'), []);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(textures, 'length'), '<'))) {
@@ -165,14 +165,14 @@ class ResolveSceneResources {
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(ref, 'state'), ResourceResolutionStateValue.Unresolved))) { continue; }
       _Runtime.setField(ref, 'failure', null);
       _Runtime.setField(ref, 'state', ResourceResolutionStateValue.Loading);
-      var controller:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['AbortController'] : Array<Dynamic>)), []);
+      var controller:Dynamic = _Runtime.construct(_Runtime.globalValue('AbortController'), []);
       var priority:Dynamic = 0.0;
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.optionalField(options, 'priority'), _Runtime.field(_Runtime, 'UNDEFINED')))) {
-        (priority = cast (_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY') : Dynamic));
+        (priority = cast (_Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY') : Dynamic));
         {
           var i:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(subscribers, 'length'), '<'))) {
-            (priority = cast (_Runtime.callProperty(HxMath, 'max', cast ([priority, _Runtime.callProperty(options, 'priority', cast ([_Runtime.getIndex(subscribers, i), ref] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));
+            (priority = cast (HxMath.max(priority, _Runtime.callProperty(options, 'priority', cast ([_Runtime.getIndex(subscribers, i), ref] : Array<Dynamic>))) : Dynamic));
             i++;
           }
         }
@@ -181,13 +181,13 @@ class ResolveSceneResources {
         if (_Runtime.truthy(_Runtime.field(loaderSignal, 'aborted'))) { _Runtime.callProperty(controller, 'abort', cast ([_Runtime.field(loaderSignal, 'reason')] : Array<Dynamic>)); } else { _Runtime.callProperty(loaderSignal, 'addEventListener', cast (['abort', function() return _Runtime.callProperty(controller, 'abort', cast ([_Runtime.field(loaderSignal, 'reason')] : Array<Dynamic>)), { once: true }] : Array<Dynamic>)); }
         return cast _Runtime.callValue(resolveOneSceneResourceTexture, cast ([resolver, ref, _Runtime.field(controller, 'signal')] : Array<Dynamic>));
       }, priority: priority }] : Array<Dynamic>));
-      var entry:SceneResourceInFlight = { controller: controller, promise: ResolveSceneResources._resolvedVoid__resolveSceneResources, subscribers: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), [subscribers]) };
+      var entry:SceneResourceInFlight = { controller: controller, promise: ResolveSceneResources._resolvedVoid__resolveSceneResources, subscribers: _Runtime.construct(_Runtime.globalValue('Set'), [subscribers]) };
       _Runtime.setField(entry, 'promise', _Runtime.callProperty(_Runtime.field(handle, 'promise'), 'then', cast ([function(image:Dynamic) return _Runtime.callValue(ResolveSceneResources.finishSceneResourceResolution__resolveSceneResources, cast ([resolver, ref, entry, image] : Array<Dynamic>)), function(cause:Dynamic) return _Runtime.callValue(ResolveSceneResources.failSceneResourceResolution__resolveSceneResources, cast ([resolver, ref, entry, cause] : Array<Dynamic>))] : Array<Dynamic>)));
       _Runtime.callProperty(_Runtime.field(runtime, 'inFlight'), 'set', cast ([ref, entry] : Array<Dynamic>));
     }
   }
 
-  public static final _resolvedVoid__resolveSceneResources:flighthq._internal._Promise<flighthq._internal._Nothing> = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([] : Array<Dynamic>));
+  public static final _resolvedVoid__resolveSceneResources:flighthq._internal._Promise<flighthq._internal._Nothing> = _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([] : Array<Dynamic>));
 
   public static function createImageResourceFailure__resolveSceneResources(cause:Dynamic):ImageResourceFailure {
     if (_Runtime.truthy(_Runtime.isError(cause))) {

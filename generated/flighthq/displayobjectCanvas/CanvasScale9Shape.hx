@@ -38,7 +38,7 @@ class CanvasScale9Shape {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0))) { return; }
     context = _Runtime.field(state, 'context');
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
-    _Runtime.setField(context, 'globalAlpha', _Runtime.field(renderProxy, 'alpha'));
+    flighthq._internal.CanvasRenderingContext2D.setField(context, 'globalAlpha', _Runtime.field(renderProxy, 'alpha'));
     __destructure1 = source;
     scaleX = _Runtime.field(__destructure1, 'scaleX');
     scaleY = _Runtime.field(__destructure1, 'scaleY');
@@ -142,9 +142,9 @@ class CanvasScale9Shape {
     c = _Runtime.select(!_Runtime.strictEquals(scaleY, 0.0), function():Dynamic return cast (_Runtime.field(t, 'c') / scaleY), function():Dynamic return cast _Runtime.field(t, 'c'));
     d = _Runtime.select(!_Runtime.strictEquals(scaleY, 0.0), function():Dynamic return cast (_Runtime.field(t, 'd') / scaleY), function():Dynamic return cast _Runtime.field(t, 'd'));
     if (_Runtime.truthy(_Runtime.field(state, 'roundPixels'))) {
-      _Runtime.callProperty(context, 'setTransform', cast ([a, b, c, d, _Runtime.callProperty(HxMath, 'fround', cast ([_Runtime.field(t, 'tx')] : Array<Dynamic>)), _Runtime.callProperty(HxMath, 'fround', cast ([_Runtime.field(t, 'ty')] : Array<Dynamic>))] : Array<Dynamic>));
+      flighthq._internal.CanvasRenderingContext2D.call(context, 'setTransform', cast ([a, b, c, d, HxMath.fround(_Runtime.field(t, 'tx')), HxMath.fround(_Runtime.field(t, 'ty'))] : Array<Dynamic>));
     } else {
-      _Runtime.callProperty(context, 'setTransform', cast ([a, b, c, d, _Runtime.field(t, 'tx'), _Runtime.field(t, 'ty')] : Array<Dynamic>));
+      flighthq._internal.CanvasRenderingContext2D.call(context, 'setTransform', cast ([a, b, c, d, _Runtime.field(t, 'tx'), _Runtime.field(t, 'ty')] : Array<Dynamic>));
     }
   }
 

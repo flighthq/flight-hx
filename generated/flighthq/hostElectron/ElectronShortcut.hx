@@ -11,7 +11,7 @@ class ElectronShortcut {
     var globalShortcut:Dynamic = cast _Runtime.UNDEFINED;
     var registered:Dynamic = cast _Runtime.UNDEFINED;
     globalShortcut = _Runtime.field(electron, 'globalShortcut');
-    registered = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
+    registered = _Runtime.construct(_Runtime.globalValue('Set'), []);
     return cast { getRegistered: function() {
       return cast _Runtime.concatArrays([_Runtime.toArray(registered)]);
     }, register: function(accelerator:Dynamic, listener:Dynamic) {

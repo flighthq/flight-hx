@@ -23,7 +23,7 @@ typedef InnerClipLocations__glInnerGlowEffect = GlFullscreenProgram;
 class GlInnerGlowEffect {
   public static final INNER_CLIP_FRAGMENT_SRC__glInnerGlowEffect:Dynamic = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nout vec4 fragColor;\nvoid main() {\n  vec4 glow = texture(u_texture0, v_texCoord);\n  float srcAlpha = texture(u_texture1, v_texCoord).a;\n  fragColor = glow * srcAlpha;\n}';
 
-  public static final clipShaders__glInnerGlowEffect:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final clipShaders__glInnerGlowEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
   public static function applyInnerGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:InnerGlowEffect):Void {
     var descriptor:Dynamic = cast _Runtime.UNDEFINED;
@@ -46,7 +46,7 @@ class GlInnerGlowEffect {
     color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16711680.0);
     alpha = _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0);
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
-    quality = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)));
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
     _Runtime.callValue(applyGlEffectInvertTintPass, cast ([state, src, s0, color, alpha, strength] : Array<Dynamic>));
     _Runtime.callValue(applyGlEffectBoxBlur, cast ([state, s0, s1, s2, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), edgeColor: _Runtime.callValue(GlInnerGlowEffect.getInvertTintEdgeColor__glInnerGlowEffect, cast ([color, alpha, strength] : Array<Dynamic>)), passes: quality }] : Array<Dynamic>));
@@ -70,7 +70,7 @@ class GlInnerGlowEffect {
     var loc:Dynamic = cast _Runtime.UNDEFINED;
     loc = _Runtime.callValue(GlInnerGlowEffect.getClipShader__glInnerGlowEffect, cast ([state] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, loc, cast ([_Runtime.field(glow, 'texture'), _Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic) {
-      _Runtime.callProperty(gl, 'blendFunc', cast ([_Runtime.field(gl, 'ONE'), _Runtime.field(gl, 'ZERO')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'blendFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE'), flighthq._internal.WebGl2RenderingContext.field(gl, 'ZERO')] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 
@@ -89,7 +89,7 @@ class GlInnerGlowEffect {
 
   public static function getInvertTintEdgeColor__glInnerGlowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
     var edgeAlpha:Dynamic = cast _Runtime.UNDEFINED;
-    edgeAlpha = _Runtime.callProperty(HxMath, 'min', cast ([1.0, (alpha * strength)] : Array<Dynamic>));
+    edgeAlpha = HxMath.min(1.0, (alpha * strength));
     return cast cast ([(((Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0)) / 255.0) * edgeAlpha), (((Std.int((Std.int(color) >> Std.int(8.0))) & Std.int(255.0)) / 255.0) * edgeAlpha), (((Std.int(color) & Std.int(255.0)) / 255.0) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
     return cast null;
   }

@@ -78,15 +78,15 @@ class ThreeDsParse {
       return cast document;
     }
     source = (cast bytes : Dynamic);
-    view = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['DataView'] : Array<Dynamic>)), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
+    view = _Runtime.construct(_Runtime.globalValue('DataView'), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
     mainId = _Runtime.callProperty(view, 'getUint16', cast ([0.0, true] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(mainId, THREE_DS_MAIN))) {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: expected main chunk ID 0x4D4D but found 0x' + Std.string(_Runtime.padStart(_Runtime.callProperty(_Runtime.numberToString(mainId, 16.0), 'toUpperCase', cast ([] : Array<Dynamic>)), 4.0, '0')) + ''] : Array<Dynamic>));
       return cast document;
     }
-    materials = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    materials = _Runtime.construct(_Runtime.globalValue('Map'), []);
     meshes = _Runtime.callValue(ThreeDsParse.collectMeshes__threeDsParse, cast ([view, 0.0, materials, warnings] : Array<Dynamic>));
-    materialIndexByName = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    materialIndexByName = _Runtime.construct(_Runtime.globalValue('Map'), []);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(meshes, 'length'), '<'))) {
@@ -102,7 +102,7 @@ class ThreeDsParse {
     var end:Dynamic = cast _Runtime.UNDEFINED;
     var meshes:Array<ThreeDsMesh> = cast _Runtime.UNDEFINED;
     var cursor:Dynamic = cast _Runtime.UNDEFINED;
-    end = _Runtime.callProperty(HxMath, 'min', cast ([(offset + _Runtime.callValue(ThreeDsParse.readChunkLength__threeDsParse, cast ([view, offset] : Array<Dynamic>))), _Runtime.field(view, 'byteLength')] : Array<Dynamic>));
+    end = HxMath.min((offset + _Runtime.callValue(ThreeDsParse.readChunkLength__threeDsParse, cast ([view, offset] : Array<Dynamic>))), _Runtime.field(view, 'byteLength'));
     meshes = cast ([] : Array<Dynamic>);
     cursor = (offset + THREE_DS_CHUNK_HEADER_BYTES);
     while (_Runtime.truthy(_Runtime.compare((cursor + THREE_DS_CHUNK_HEADER_BYTES), end, '<='))) {
@@ -216,7 +216,7 @@ class ThreeDsParse {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: vertex sub-chunk declares ' + Std.string(count) + ' vertices but data is truncated'] : Array<Dynamic>));
       return cast null;
     }
-    vertices = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [floatsNeeded]);
+    vertices = _Runtime.construct(_Runtime.globalValue('Float32Array'), [floatsNeeded]);
     offset = (dataStart + 2.0);
     {
       var i:Dynamic = 0.0;
@@ -294,7 +294,7 @@ class ThreeDsParse {
       _Runtime.callOptionalProperty(warnings, 'push', cast (['createSceneFrom3ds: UV sub-chunk declares ' + Std.string(count) + ' entries but data is truncated'] : Array<Dynamic>));
       return cast null;
     }
-    uvCoords = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [floatsNeeded]);
+    uvCoords = _Runtime.construct(_Runtime.globalValue('Float32Array'), [floatsNeeded]);
     offset = (dataStart + 2.0);
     {
       var i:Dynamic = 0.0;
@@ -327,8 +327,8 @@ class ThreeDsParse {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(vertexCount, 0.0), function():Dynamic return cast _Runtime.strictEquals(faceCount, 0.0)))) { return; }
     positions = _Runtime.toArray(_Runtime.field(mesh, 'vertices'));
     _Runtime.callValue(convertPositionsZUpToYUp, cast ([positions] : Array<Dynamic>));
-    vertices = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(vertexCount * CANONICAL_FLOATS_PER_VERTEX)]);
-    normals = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(vertexCount * 3.0)]);
+    vertices = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * CANONICAL_FLOATS_PER_VERTEX)]);
+    normals = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * 3.0)]);
     {
       var f:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(f, faceCount, '<'))) {
@@ -375,7 +375,7 @@ class ThreeDsParse {
         var nnx:Dynamic = _Runtime.getIndex(normals, (v * 3.0));
         var nny:Dynamic = _Runtime.getIndex(normals, ((v * 3.0) + 1.0));
         var nnz:Dynamic = _Runtime.getIndex(normals, ((v * 3.0) + 2.0));
-        var len:Dynamic = _Runtime.callProperty(HxMath, 'sqrt', cast ([(((nnx * nnx) + (nny * nny)) + (nnz * nnz))] : Array<Dynamic>));
+        var len:Dynamic = HxMath.sqrt((((nnx * nnx) + (nny * nny)) + (nnz * nnz)));
         if (_Runtime.truthy(_Runtime.compare(len, 0.0, '>'))) {
           (nnx = cast ((nnx / len) : Dynamic));
           (nny = cast ((nny / len) : Dynamic));
@@ -391,10 +391,10 @@ class ThreeDsParse {
         v++;
       }
     }
-    indices = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), 'from', cast ([_Runtime.field(mesh, 'faces')] : Array<Dynamic>));
+    indices = _Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([_Runtime.field(mesh, 'faces')] : Array<Dynamic>));
     geometry = _Runtime.callValue(createMeshGeometry, cast ([{ indices: indices, layout: CANONICAL_LAYOUT, vertices: vertices }] : Array<Dynamic>));
     meshMaterials = cast ([] : Array<Dynamic>);
-    seen = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
+    seen = _Runtime.construct(_Runtime.globalValue('Set'), []);
     for (materialName in _Runtime.iterable(_Runtime.field(mesh, 'materialNames'))) {
       if (_Runtime.truthy(_Runtime.callProperty(seen, 'has', cast ([materialName] : Array<Dynamic>)))) { continue; }
       _Runtime.callProperty(seen, 'add', cast ([materialName] : Array<Dynamic>));
@@ -505,9 +505,9 @@ class ThreeDsParse {
     var r:Dynamic = cast _Runtime.UNDEFINED;
     var g:Dynamic = cast _Runtime.UNDEFINED;
     var b:Dynamic = cast _Runtime.UNDEFINED;
-    r = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.getIndex(rgb, 0.0)] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>));
-    g = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.getIndex(rgb, 1.0)] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>));
-    b = _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callProperty(HxMath, 'min', cast ([1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.getIndex(rgb, 2.0)] : Array<Dynamic>))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>));
+    r = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.getIndex(rgb, 0.0))) * 255.0));
+    g = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.getIndex(rgb, 1.0))) * 255.0));
+    b = HxMath.round((HxMath.min(1.0, HxMath.max(0.0, _Runtime.getIndex(rgb, 2.0))) * 255.0));
     return cast _Runtime.unsignedShiftRight(Std.int((Std.int((Std.int((Std.int((Std.int(r) << Std.int(24.0))) | Std.int((Std.int(g) << Std.int(16.0))))) | Std.int((Std.int(b) << Std.int(8.0))))) | Std.int(255.0))), Std.int(0.0));
     return cast null;
   }

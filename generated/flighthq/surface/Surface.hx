@@ -152,7 +152,7 @@ class Surface {
   }
 
   public static function cloneSurface(source:flighthq.types.Surface):flighthq.types.Surface {
-    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(source, 'alphaType'), colorSpace: _Runtime.field(source, 'colorSpace'), compressed: null, data: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [_Runtime.field(source, 'data')]), format: _Runtime.field(source, 'format'), height: _Runtime.field(source, 'height'), source: null, version: 0.0, width: _Runtime.field(source, 'width') }] : Array<Dynamic>));
+    return cast _Runtime.callValue(createEntity, cast ([{ alphaType: _Runtime.field(source, 'alphaType'), colorSpace: _Runtime.field(source, 'colorSpace'), compressed: null, data: _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [_Runtime.field(source, 'data')]), format: _Runtime.field(source, 'format'), height: _Runtime.field(source, 'height'), source: null, version: 0.0, width: _Runtime.field(source, 'width') }] : Array<Dynamic>));
     return cast null;
   }
 
@@ -197,9 +197,9 @@ class Surface {
         var i:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(i, len, '<'))) {
           var a:Dynamic = (_Runtime.getIndex(data, (i + 3.0)) / 255.0);
-          _Runtime.setIndex(data, i, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(data, i) * a)] : Array<Dynamic>)));
-          _Runtime.setIndex(data, (i + 1.0), _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(data, (i + 1.0)) * a)] : Array<Dynamic>)));
-          _Runtime.setIndex(data, (i + 2.0), _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(data, (i + 2.0)) * a)] : Array<Dynamic>)));
+          _Runtime.setIndex(data, i, HxMath.round((_Runtime.getIndex(data, i) * a)));
+          _Runtime.setIndex(data, (i + 1.0), HxMath.round((_Runtime.getIndex(data, (i + 1.0)) * a)));
+          _Runtime.setIndex(data, (i + 2.0), HxMath.round((_Runtime.getIndex(data, (i + 2.0)) * a)));
           (i = cast ((i + 4.0) : Dynamic));
         }
       }
@@ -214,9 +214,9 @@ class Surface {
             _Runtime.setIndex(data, (i + 2.0), 0.0);
           } else {
             var inv:Dynamic = (255.0 / a);
-            _Runtime.setIndex(data, i, _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(data, i) * inv)] : Array<Dynamic>))] : Array<Dynamic>)));
-            _Runtime.setIndex(data, (i + 1.0), _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(data, (i + 1.0)) * inv)] : Array<Dynamic>))] : Array<Dynamic>)));
-            _Runtime.setIndex(data, (i + 2.0), _Runtime.callProperty(HxMath, 'min', cast ([255.0, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(data, (i + 2.0)) * inv)] : Array<Dynamic>))] : Array<Dynamic>)));
+            _Runtime.setIndex(data, i, HxMath.min(255.0, HxMath.round((_Runtime.getIndex(data, i) * inv))));
+            _Runtime.setIndex(data, (i + 1.0), HxMath.min(255.0, HxMath.round((_Runtime.getIndex(data, (i + 1.0)) * inv))));
+            _Runtime.setIndex(data, (i + 2.0), HxMath.min(255.0, HxMath.round((_Runtime.getIndex(data, (i + 2.0)) * inv))));
           }
           (i = cast ((i + 4.0) : Dynamic));
         }
@@ -253,7 +253,7 @@ class Surface {
 
   public static function createSurface(width:Float, height:Float, color:Float = 0.0):flighthq.types.Surface {
     var data:Dynamic = cast _Runtime.UNDEFINED;
-    data = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [((width * height) * 4.0)]);
+    data = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [((width * height) * 4.0)]);
     if (_Runtime.truthy(!_Runtime.strictEquals(color, 0.0))) {
       var r:Dynamic = (Std.int(_Runtime.unsignedShiftRight(Std.int(color), Std.int(24.0))) & Std.int(255.0));
       var g:Dynamic = (Std.int((Std.int(color) >> Std.int(16.0))) & Std.int(255.0));

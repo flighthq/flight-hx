@@ -41,7 +41,7 @@ class ShadowCamera {
     _Runtime.setField(ShadowCamera._target__shadowCamera, 'x', cx);
     _Runtime.setField(ShadowCamera._target__shadowCamera, 'y', cy);
     _Runtime.setField(ShadowCamera._target__shadowCamera, 'z', cz);
-    up = _Runtime.select(_Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([dy] : Array<Dynamic>)), 0.99, '>'), function():Dynamic return cast ShadowCamera._upZ__shadowCamera, function():Dynamic return cast ShadowCamera._upY__shadowCamera);
+    up = _Runtime.select(_Runtime.compare(HxMath.abs(dy), 0.99, '>'), function():Dynamic return cast ShadowCamera._upZ__shadowCamera, function():Dynamic return cast ShadowCamera._upY__shadowCamera);
     _Runtime.callValue(setCamera3DViewMatrix4FromLookAt, cast ([camera, ShadowCamera._eye__shadowCamera, ShadowCamera._target__shadowCamera, up] : Array<Dynamic>));
     _Runtime.setField(camera, 'near', radius);
     _Runtime.setField(camera, 'far', (radius * 3.0));

@@ -43,7 +43,7 @@ class GlShape {
   public static function createGlShapeData__glShape(_state:GlRenderState, _source:Renderable):Null<RendererData> {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var ctx:Dynamic = cast _Runtime.UNDEFINED;
-    canvas = _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>));
+    canvas = _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
     _Runtime.setField(canvas, 'width', 1.0);
     _Runtime.setField(canvas, 'height', 1.0);
     ctx = _Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
@@ -61,7 +61,7 @@ class GlShape {
     image = _Runtime.field(__destructure0, 'image');
     entry = _Runtime.callProperty(_Runtime.field(runtime, 'imageResourceTextureCache'), 'get', cast ([image] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      _Runtime.callProperty(_Runtime.field(state, 'gl'), 'deleteTexture', cast ([_Runtime.field(entry, 'texture')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(_Runtime.field(state, 'gl'), 'deleteTexture', cast ([_Runtime.field(entry, 'texture')] : Array<Dynamic>));
       _Runtime.callProperty(_Runtime.field(runtime, 'imageResourceTextureCache'), 'delete', cast ([image] : Array<Dynamic>));
     }
   }
@@ -99,7 +99,7 @@ class GlShape {
         _Runtime.setField(meshData, 'meshes', _Runtime.callProperty(regions, 'map', cast ([function(region:Dynamic) {
           var mesh:Dynamic = cast _Runtime.UNDEFINED;
           mesh = _Runtime.callValue(tessellatePath, cast ([_Runtime.field(region, 'path')] : Array<Dynamic>));
-          return cast { vertices: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [_Runtime.field(mesh, 'vertices')]), indices: new flighthq._internal._UInt16Array(_Runtime.field(mesh, 'indices')), color: _Runtime.field(region, 'color'), alpha: _Runtime.field(region, 'alpha') };
+          return cast { vertices: _Runtime.construct(_Runtime.globalValue('Float32Array'), [_Runtime.field(mesh, 'vertices')]), indices: new flighthq._internal._UInt16Array(_Runtime.field(mesh, 'indices')), color: _Runtime.field(region, 'color'), alpha: _Runtime.field(region, 'alpha') };
         }] : Array<Dynamic>)));
         _Runtime.setField(meshData, 'meshVersion', version);
       }
@@ -111,18 +111,18 @@ class GlShape {
     if (_Runtime.truthy(_Runtime.strictEquals(materialRenderer, null))) { return; }
     shapeData = _Runtime.callValue(GlShape.getGlShapeData__glShape, cast ([_Runtime.field(renderProxy, 'rendererData')] : Array<Dynamic>));
     bounds = _Runtime.callValue(getNodeLocalBoundsRectangle, cast ([source] : Array<Dynamic>));
-    w = _Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(bounds, 'width')] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.field(bounds, 'height')] : Array<Dynamic>));
+    w = HxMath.ceil(_Runtime.field(bounds, 'width'));
+    h = HxMath.ceil(_Runtime.field(bounds, 'height'));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(w, 0.0, '<='), function():Dynamic return cast _Runtime.compare(h, 0.0, '<=')))) { return; }
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(!_Runtime.strictEquals(version, _Runtime.field(shapeData, 'lastContentId')), function():Dynamic return cast !_Runtime.strictEquals(w, _Runtime.field(shapeData, 'lastW'))), function():Dynamic return cast !_Runtime.strictEquals(h, _Runtime.field(shapeData, 'lastH'))))) {
       _Runtime.setField(_Runtime.field(shapeData, 'canvas'), 'width', w);
       _Runtime.setField(_Runtime.field(shapeData, 'canvas'), 'height', h);
       var ctx:Dynamic = _Runtime.field(shapeData, 'ctx');
-      _Runtime.callProperty(ctx, 'clearRect', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
-      _Runtime.callProperty(ctx, 'save', cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(ctx, 'translate', cast ([-_Runtime.field(bounds, 'x'), -_Runtime.field(bounds, 'y')] : Array<Dynamic>));
+      flighthq._internal.CanvasRenderingContext2D.call(ctx, 'clearRect', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
+      flighthq._internal.CanvasRenderingContext2D.call(ctx, 'save', cast ([] : Array<Dynamic>));
+      flighthq._internal.CanvasRenderingContext2D.call(ctx, 'translate', cast ([-_Runtime.field(bounds, 'x'), -_Runtime.field(bounds, 'y')] : Array<Dynamic>));
       _Runtime.callValue(renderCanvasShapeCommands, cast ([ctx, commands] : Array<Dynamic>));
-      _Runtime.callProperty(ctx, 'restore', cast ([] : Array<Dynamic>));
+      flighthq._internal.CanvasRenderingContext2D.call(ctx, 'restore', cast ([] : Array<Dynamic>));
       _Runtime.callValue(setImageResourceSource, cast ([_Runtime.field(shapeData, 'image'), _Runtime.field(shapeData, 'canvas')] : Array<Dynamic>));
       _Runtime.setField(shapeData, 'lastContentId', version);
       _Runtime.setField(shapeData, 'lastW', w);

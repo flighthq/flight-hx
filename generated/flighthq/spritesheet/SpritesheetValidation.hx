@@ -20,7 +20,7 @@ class SpritesheetValidation {
     animations = _Runtime.field(__destructure0, 'animations');
     frames = _Runtime.field(__destructure0, 'frames');
     if (_Runtime.truthy(!_Runtime.strictEquals(atlas, null))) {
-      var regionIds:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), [_Runtime.callProperty(_Runtime.field(atlas, 'regions'), 'map', cast ([function(r:Dynamic) return _Runtime.field(r, 'id')] : Array<Dynamic>))]);
+      var regionIds:Dynamic = _Runtime.construct(_Runtime.globalValue('Set'), [_Runtime.callProperty(_Runtime.field(atlas, 'regions'), 'map', cast ([function(r:Dynamic) return _Runtime.field(r, 'id')] : Array<Dynamic>))]);
       {
         var fi:Dynamic = 0.0;
         while (_Runtime.truthy(_Runtime.compare(fi, _Runtime.field(frames, 'length'), '<'))) {
@@ -31,7 +31,7 @@ class SpritesheetValidation {
         }
       }
     }
-    for (__iteration1 in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'entries', cast ([animations] : Array<Dynamic>)))) {
+    for (__iteration1 in _Runtime.iterable(flighthq._internal.DynamicObject.entries(animations))) {
       var animName:Dynamic = _Runtime.getIndex(__iteration1, 0.0);
       var anim:Dynamic = _Runtime.getIndex(__iteration1, 1.0);
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(_Runtime.field(anim, 'frames'), 'length'), 0.0))) {
@@ -62,7 +62,7 @@ class SpritesheetValidation {
     __destructure2 = data;
     animations = _Runtime.field(__destructure2, 'animations');
     frames = _Runtime.field(__destructure2, 'frames');
-    frameNameSet = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
+    frameNameSet = _Runtime.construct(_Runtime.globalValue('Set'), []);
     for (fd in _Runtime.iterable(frames)) {
       if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(fd, 'name'), ''))) {
         _Runtime.callProperty(frameNameSet, 'add', cast ([_Runtime.field(fd, 'name')] : Array<Dynamic>));

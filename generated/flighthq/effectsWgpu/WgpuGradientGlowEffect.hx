@@ -46,13 +46,13 @@ class WgpuGradientGlowEffect {
     s0 = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     s1 = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
     s2 = _Runtime.callValue(acquireWgpuRenderTarget, cast ([state, pool, descriptor] : Array<Dynamic>));
-    quality = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)] : Array<Dynamic>))] : Array<Dynamic>));
+    quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)));
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
     fs = _Runtime.callValue(getWgpuEffectPassState, cast ([state] : Array<Dynamic>));
-    _Runtime.callValue(applyWgpuEffectTintPass, cast ([state, src, s0, 16777215.0, 1.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, strength] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callValue(applyWgpuEffectTintPass, cast ([state, src, s0, 16777215.0, 1.0, HxMath.min(1.0, strength)] : Array<Dynamic>));
     _Runtime.callValue(applyWgpuEffectBoxBlur, cast ([state, s0, s1, s2, { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), passes: quality }] : Array<Dynamic>));
     rampTexture = _Runtime.callValue(getWgpuEffectGradientRampTexture, cast ([state, _Runtime.field(effect, 'colors'), _Runtime.field(effect, 'alphas'), _Runtime.field(effect, 'ratios')] : Array<Dynamic>));
     rampBG = _Runtime.callProperty(device, 'createBindGroup', cast ([{ layout: _Runtime.field(fs, 'textureBGLayout'), entries: cast ([{ binding: 0.0, resource: _Runtime.callProperty(rampTexture, 'createView', cast ([] : Array<Dynamic>)) }, { binding: 1.0, resource: _Runtime.field(fs, 'sampler') }] : Array<Dynamic>) }] : Array<Dynamic>));
@@ -105,5 +105,5 @@ class WgpuGradientGlowEffect {
     return cast null;
   }
 
-  public static final lookupPipelines__wgpuGradientGlowEffect:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final lookupPipelines__wgpuGradientGlowEffect:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 }

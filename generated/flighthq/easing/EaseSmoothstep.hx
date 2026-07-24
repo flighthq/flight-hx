@@ -14,7 +14,7 @@ class EaseSmoothstep {
   public static function easeSmoothstepRange(edge0:Float, edge1:Float):ScalarRemap {
     return cast function(x:Dynamic) {
       var t:Dynamic = cast _Runtime.UNDEFINED;
-      t = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, ((x - edge0) / (edge1 - edge0))] : Array<Dynamic>))] : Array<Dynamic>));
+      t = HxMath.max(0.0, HxMath.min(1.0, ((x - edge0) / (edge1 - edge0))));
       return cast ((t * t) * (3.0 - (2.0 * t)));
     };
     return cast null;

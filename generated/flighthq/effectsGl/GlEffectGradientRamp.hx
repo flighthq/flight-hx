@@ -9,21 +9,21 @@ class GlEffectGradientRamp {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Dynamic = cast _Runtime.UNDEFINED;
     data = _Runtime.callValue(GlEffectGradientRamp.buildRampData__glEffectGradientRamp, cast ([colors, alphas, ratios] : Array<Dynamic>));
-    texture = _Runtime.callProperty(gl, 'createTexture', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_2D'), texture] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texImage2D', cast ([_Runtime.field(gl, 'TEXTURE_2D'), 0.0, _Runtime.field(gl, 'RGBA8'), 256.0, 1.0, 0.0, _Runtime.field(gl, 'RGBA'), _Runtime.field(gl, 'UNSIGNED_BYTE'), data] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_MIN_FILTER'), _Runtime.field(gl, 'LINEAR')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_MAG_FILTER'), _Runtime.field(gl, 'LINEAR')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_WRAP_S'), _Runtime.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'texParameteri', cast ([_Runtime.field(gl, 'TEXTURE_2D'), _Runtime.field(gl, 'TEXTURE_WRAP_T'), _Runtime.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindTexture', cast ([_Runtime.field(gl, 'TEXTURE_2D'), null] : Array<Dynamic>));
+    texture = flighthq._internal.WebGl2RenderingContext.call(gl, 'createTexture', cast ([] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), texture] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texImage2D', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), 0.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'RGBA8'), 256.0, 1.0, 0.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'RGBA'), flighthq._internal.WebGl2RenderingContext.field(gl, 'UNSIGNED_BYTE'), data] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_MIN_FILTER'), flighthq._internal.WebGl2RenderingContext.field(gl, 'LINEAR')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_MAG_FILTER'), flighthq._internal.WebGl2RenderingContext.field(gl, 'LINEAR')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_WRAP_S'), flighthq._internal.WebGl2RenderingContext.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'texParameteri', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_WRAP_T'), flighthq._internal.WebGl2RenderingContext.field(gl, 'CLAMP_TO_EDGE')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE_2D'), null] : Array<Dynamic>));
     return cast texture;
     return cast null;
   }
 
   public static function buildRampData__glEffectGradientRamp(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Dynamic {
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8ClampedArray'] : Array<Dynamic>)), [(256.0 * 4.0)]);
+    out = _Runtime.construct(_Runtime.globalValue('Uint8ClampedArray'), [(256.0 * 4.0)]);
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(colors, 'length'), 0.0))) { return cast out; }
     {
       var i:Dynamic = 0.0;
@@ -38,13 +38,13 @@ class GlEffectGradientRamp {
           (r = cast ((Std.int((Std.int(c) >> Std.int(16.0))) & Std.int(255.0)) : Dynamic));
           (g = cast ((Std.int((Std.int(c) >> Std.int(8.0))) & Std.int(255.0)) : Dynamic));
           (b = cast ((Std.int(c) & Std.int(255.0)) : Dynamic));
-          (a = cast (_Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(alphas, 0.0) * 255.0)] : Array<Dynamic>)) : Dynamic));
+          (a = cast (HxMath.round((_Runtime.getIndex(alphas, 0.0) * 255.0)) : Dynamic));
         } else { if (_Runtime.truthy(_Runtime.compare(t, _Runtime.getIndex(ratios, (_Runtime.field(ratios, 'length') - 1.0)), '>='))) {
           var c:Dynamic = _Runtime.getIndex(colors, (_Runtime.field(colors, 'length') - 1.0));
           (r = cast ((Std.int((Std.int(c) >> Std.int(16.0))) & Std.int(255.0)) : Dynamic));
           (g = cast ((Std.int((Std.int(c) >> Std.int(8.0))) & Std.int(255.0)) : Dynamic));
           (b = cast ((Std.int(c) & Std.int(255.0)) : Dynamic));
-          (a = cast (_Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.getIndex(alphas, (_Runtime.field(alphas, 'length') - 1.0)) * 255.0)] : Array<Dynamic>)) : Dynamic));
+          (a = cast (HxMath.round((_Runtime.getIndex(alphas, (_Runtime.field(alphas, 'length') - 1.0)) * 255.0)) : Dynamic));
         } else {
           {
             var j:Dynamic = 0.0;
@@ -55,10 +55,10 @@ class GlEffectGradientRamp {
                 var blend:Dynamic = _Runtime.select(_Runtime.compare(r1, r0, '>'), function():Dynamic return cast ((t - r0) / (r1 - r0)), function():Dynamic return cast 0.0);
                 var c0:Dynamic = _Runtime.getIndex(colors, j);
                 var c1:Dynamic = _Runtime.getIndex(colors, (j + 1.0));
-                (r = cast (_Runtime.callProperty(HxMath, 'round', cast ([(((Std.int((Std.int(c0) >> Std.int(16.0))) & Std.int(255.0)) * (1.0 - blend)) + ((Std.int((Std.int(c1) >> Std.int(16.0))) & Std.int(255.0)) * blend))] : Array<Dynamic>)) : Dynamic));
-                (g = cast (_Runtime.callProperty(HxMath, 'round', cast ([(((Std.int((Std.int(c0) >> Std.int(8.0))) & Std.int(255.0)) * (1.0 - blend)) + ((Std.int((Std.int(c1) >> Std.int(8.0))) & Std.int(255.0)) * blend))] : Array<Dynamic>)) : Dynamic));
-                (b = cast (_Runtime.callProperty(HxMath, 'round', cast ([(((Std.int(c0) & Std.int(255.0)) * (1.0 - blend)) + ((Std.int(c1) & Std.int(255.0)) * blend))] : Array<Dynamic>)) : Dynamic));
-                (a = cast (_Runtime.callProperty(HxMath, 'round', cast ([(((_Runtime.getIndex(alphas, j) * 255.0) * (1.0 - blend)) + ((_Runtime.getIndex(alphas, (j + 1.0)) * 255.0) * blend))] : Array<Dynamic>)) : Dynamic));
+                (r = cast (HxMath.round((((Std.int((Std.int(c0) >> Std.int(16.0))) & Std.int(255.0)) * (1.0 - blend)) + ((Std.int((Std.int(c1) >> Std.int(16.0))) & Std.int(255.0)) * blend))) : Dynamic));
+                (g = cast (HxMath.round((((Std.int((Std.int(c0) >> Std.int(8.0))) & Std.int(255.0)) * (1.0 - blend)) + ((Std.int((Std.int(c1) >> Std.int(8.0))) & Std.int(255.0)) * blend))) : Dynamic));
+                (b = cast (HxMath.round((((Std.int(c0) & Std.int(255.0)) * (1.0 - blend)) + ((Std.int(c1) & Std.int(255.0)) * blend))) : Dynamic));
+                (a = cast (HxMath.round((((_Runtime.getIndex(alphas, j) * 255.0) * (1.0 - blend)) + ((_Runtime.getIndex(alphas, (j + 1.0)) * 255.0) * blend))) : Dynamic));
                 break;
               }
               j++;

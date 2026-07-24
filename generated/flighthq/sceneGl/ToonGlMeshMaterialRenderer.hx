@@ -65,26 +65,26 @@ class ToonGlMeshMaterialRenderer {
     var ramp:Dynamic = cast _Runtime.UNDEFINED;
     gl = _Runtime.field(state, 'gl');
     if (_Runtime.truthy(_Runtime.strictEquals(material, null))) {
-      _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(program, 'locBaseColor'), 1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locSteps'), 3.0] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), 0.5] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(program, 'locBaseColor'), 1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locSteps'), 3.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), 0.5] : Array<Dynamic>));
       return;
     }
     _Runtime.callValue(unpackColorToLinear, cast ([ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer, _Runtime.field(material, 'baseColor')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(program, 'locBaseColor'), _Runtime.getIndex(ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer, 2.0), _Runtime.getIndex(ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer, 3.0)] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locSteps'), _Runtime.field(material, 'steps')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), _Runtime.field(material, 'alphaCutoff')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(program, 'locBaseColor'), _Runtime.getIndex(ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer, 2.0), _Runtime.getIndex(ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer, 3.0)] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locSteps'), _Runtime.field(material, 'steps')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(program, 'locAlphaCutoff'), _Runtime.field(material, 'alphaCutoff')] : Array<Dynamic>));
     baseColorMap = _Runtime.field(material, 'baseColorMap');
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(baseColorMap, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(baseColorMap, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(baseColorMap, 'image')] : Array<Dynamic>))))) {
-      _Runtime.callProperty(gl, 'activeTexture', cast ([_Runtime.field(gl, 'TEXTURE0')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE0')] : Array<Dynamic>));
       _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(baseColorMap, 'image'), _Runtime.field(baseColorMap, 'sampler')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1i', cast ([_Runtime.field(program, 'locBaseColorMap'), 0.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locBaseColorMap'), 0.0] : Array<Dynamic>));
     }
     ramp = _Runtime.field(material, 'ramp');
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(!_Runtime.strictEquals(ramp, null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(ramp, 'image'), null)), function():Dynamic return cast _Runtime.callValue(hasImageResourcePixels, cast ([_Runtime.field(ramp, 'image')] : Array<Dynamic>))))) {
-      _Runtime.callProperty(gl, 'activeTexture', cast ([_Runtime.field(gl, 'TEXTURE1')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'activeTexture', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'TEXTURE1')] : Array<Dynamic>));
       _Runtime.callValue(bindGlImageResourceTexture, cast ([state, _Runtime.field(ramp, 'image'), _Runtime.field(ramp, 'sampler')] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1i', cast ([_Runtime.field(program, 'locRamp'), 1.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([_Runtime.field(program, 'locRamp'), 1.0] : Array<Dynamic>));
     }
     _Runtime.callValue(bindGlUvTransform, cast ([gl, program, baseColorMap] : Array<Dynamic>));
   }

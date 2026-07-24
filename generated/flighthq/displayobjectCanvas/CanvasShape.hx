@@ -26,7 +26,7 @@ class CanvasShape {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0))) { return; }
     context = _Runtime.field(state, 'context');
     _Runtime.callOptionalProperty(state, 'applyBlendMode', cast ([state, _Runtime.field(renderProxy, 'blendMode')] : Array<Dynamic>));
-    _Runtime.setField(context, 'globalAlpha', _Runtime.field(renderProxy, 'alpha'));
+    flighthq._internal.CanvasRenderingContext2D.setField(context, 'globalAlpha', _Runtime.field(renderProxy, 'alpha'));
     _Runtime.callValue(setCanvasTransform, cast ([state, context, _Runtime.field(renderProxy, 'transform2D')] : Array<Dynamic>));
     _Runtime.callValue(renderCanvasShapeCommands, cast ([context, commands] : Array<Dynamic>));
   }
@@ -35,7 +35,7 @@ class CanvasShape {
     var drawState:Dynamic = cast _Runtime.UNDEFINED;
     var i:Dynamic = cast _Runtime.UNDEFINED;
     drawState = _Runtime.callValue(CanvasShape.createCanvasShapeDrawState__canvasShape, cast ([context] : Array<Dynamic>));
-    _Runtime.callProperty(context, 'beginPath', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(context, 'beginPath', cast ([] : Array<Dynamic>));
     i = 0.0;
     while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(commands, 'length'), '<'))) {
       var key:Dynamic = (cast _Runtime.getIndex(commands, i) : String);
@@ -60,24 +60,24 @@ class CanvasShape {
 
   public static function flushCanvasShapePath__canvasShape(context:Dynamic, state:Dynamic):Void {
     if (_Runtime.truthy(_Runtime.field(state, 'hasFill'))) {
-      _Runtime.setField(context, 'fillStyle', _Runtime.field(state, 'fillStyle'));
+      flighthq._internal.CanvasRenderingContext2D.setField(context, 'fillStyle', _Runtime.field(state, 'fillStyle'));
       if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(state, 'fillMatrix'), null), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(state, 'fillMatrixInverse'), null)))) {
         var m:Dynamic = _Runtime.field(state, 'fillMatrix');
         var inv:Dynamic = _Runtime.field(state, 'fillMatrixInverse');
-        _Runtime.callProperty(context, 'transform', cast ([_Runtime.field(m, 'a'), _Runtime.field(m, 'b'), _Runtime.field(m, 'c'), _Runtime.field(m, 'd'), _Runtime.field(m, 'tx'), _Runtime.field(m, 'ty')] : Array<Dynamic>));
-        _Runtime.fill(context, _Runtime.field(state, 'windingRule'), 0, null, 1);
-        _Runtime.callProperty(context, 'transform', cast ([_Runtime.field(inv, 'a'), _Runtime.field(inv, 'b'), _Runtime.field(inv, 'c'), _Runtime.field(inv, 'd'), _Runtime.field(inv, 'tx'), _Runtime.field(inv, 'ty')] : Array<Dynamic>));
+        flighthq._internal.CanvasRenderingContext2D.call(context, 'transform', cast ([_Runtime.field(m, 'a'), _Runtime.field(m, 'b'), _Runtime.field(m, 'c'), _Runtime.field(m, 'd'), _Runtime.field(m, 'tx'), _Runtime.field(m, 'ty')] : Array<Dynamic>));
+        flighthq._internal.CanvasRenderingContext2D.call(context, 'fill', cast ([_Runtime.field(state, 'windingRule')] : Array<Dynamic>));
+        flighthq._internal.CanvasRenderingContext2D.call(context, 'transform', cast ([_Runtime.field(inv, 'a'), _Runtime.field(inv, 'b'), _Runtime.field(inv, 'c'), _Runtime.field(inv, 'd'), _Runtime.field(inv, 'tx'), _Runtime.field(inv, 'ty')] : Array<Dynamic>));
       } else {
-        _Runtime.fill(context, _Runtime.field(state, 'windingRule'), 0, null, 1);
+        flighthq._internal.CanvasRenderingContext2D.call(context, 'fill', cast ([_Runtime.field(state, 'windingRule')] : Array<Dynamic>));
       }
     }
     if (_Runtime.truthy(_Runtime.field(state, 'hasStroke'))) {
-      _Runtime.setField(context, 'strokeStyle', _Runtime.field(state, 'strokeStyle'));
-      _Runtime.setField(context, 'lineWidth', _Runtime.field(state, 'strokeWidth'));
-      _Runtime.callProperty(context, 'stroke', cast ([] : Array<Dynamic>));
+      flighthq._internal.CanvasRenderingContext2D.setField(context, 'strokeStyle', _Runtime.field(state, 'strokeStyle'));
+      flighthq._internal.CanvasRenderingContext2D.setField(context, 'lineWidth', _Runtime.field(state, 'strokeWidth'));
+      flighthq._internal.CanvasRenderingContext2D.call(context, 'stroke', cast ([] : Array<Dynamic>));
     }
     _Runtime.setField(state, 'hasPendingPath', false);
     _Runtime.setField(state, 'hasCurrentPoint', false);
-    _Runtime.callProperty(context, 'beginPath', cast ([] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(context, 'beginPath', cast ([] : Array<Dynamic>));
   }
 }

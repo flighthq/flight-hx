@@ -35,12 +35,12 @@ class GetMeshSkinBounds {
     var maxZ:Dynamic = cast _Runtime.UNDEFINED;
     positions = _Runtime.field(bindPose, 'positions');
     restVertexCount = (Std.int((_Runtime.field(positions, 'length') / 3.0)) | Std.int(0.0));
-    restMinX = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    restMinY = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    restMinZ = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    restMaxX = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY');
-    restMaxY = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY');
-    restMaxZ = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY');
+    restMinX = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    restMinY = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    restMinZ = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    restMaxX = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
+    restMaxY = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
+    restMaxZ = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
     {
       var v:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(v, restVertexCount, '<'))) {
@@ -58,12 +58,12 @@ class GetMeshSkinBounds {
       }
     }
     if (_Runtime.truthy(_Runtime.strictEquals(restVertexCount, 0.0))) {
-      _Runtime.setField(_Runtime.field(out, 'min'), 'x', _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'));
-      _Runtime.setField(_Runtime.field(out, 'min'), 'y', _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'));
-      _Runtime.setField(_Runtime.field(out, 'min'), 'z', _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY'));
-      _Runtime.setField(_Runtime.field(out, 'max'), 'x', _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY'));
-      _Runtime.setField(_Runtime.field(out, 'max'), 'y', _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY'));
-      _Runtime.setField(_Runtime.field(out, 'max'), 'z', _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY'));
+      _Runtime.setField(_Runtime.field(out, 'min'), 'x', _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY'));
+      _Runtime.setField(_Runtime.field(out, 'min'), 'y', _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY'));
+      _Runtime.setField(_Runtime.field(out, 'min'), 'z', _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY'));
+      _Runtime.setField(_Runtime.field(out, 'max'), 'x', _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY'));
+      _Runtime.setField(_Runtime.field(out, 'max'), 'y', _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY'));
+      _Runtime.setField(_Runtime.field(out, 'max'), 'z', _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY'));
       return;
     }
     cx = ((restMinX + restMaxX) * 0.5);
@@ -75,12 +75,12 @@ class GetMeshSkinBounds {
     palette = _Runtime.field(skeleton, 'jointMatrices');
     jointCount = (Std.int((_Runtime.field(palette, 'length') / 16.0)) | Std.int(0.0));
     referenced = _Runtime.callValue(GetMeshSkinBounds.getReferencedJoints__getMeshSkinBounds, cast ([_Runtime.field(bindPose, 'joints'), _Runtime.field(bindPose, 'weights'), jointCount] : Array<Dynamic>));
-    minX = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    minY = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    minZ = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    maxX = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY');
-    maxY = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY');
-    maxZ = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY');
+    minX = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    minY = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    minZ = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    maxX = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
+    maxY = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
+    maxZ = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
     {
       var j:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(j, jointCount, '<'))) {
@@ -89,9 +89,9 @@ class GetMeshSkinBounds {
         var tcx:Dynamic = ((((_Runtime.getIndex(palette, m) * cx) + (_Runtime.getIndex(palette, (m + 4.0)) * cy)) + (_Runtime.getIndex(palette, (m + 8.0)) * cz)) + _Runtime.getIndex(palette, (m + 12.0)));
         var tcy:Dynamic = ((((_Runtime.getIndex(palette, (m + 1.0)) * cx) + (_Runtime.getIndex(palette, (m + 5.0)) * cy)) + (_Runtime.getIndex(palette, (m + 9.0)) * cz)) + _Runtime.getIndex(palette, (m + 13.0)));
         var tcz:Dynamic = ((((_Runtime.getIndex(palette, (m + 2.0)) * cx) + (_Runtime.getIndex(palette, (m + 6.0)) * cy)) + (_Runtime.getIndex(palette, (m + 10.0)) * cz)) + _Runtime.getIndex(palette, (m + 14.0)));
-        var tex:Dynamic = (((_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.getIndex(palette, m)] : Array<Dynamic>)) * ex) + (_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.getIndex(palette, (m + 4.0))] : Array<Dynamic>)) * ey)) + (_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.getIndex(palette, (m + 8.0))] : Array<Dynamic>)) * ez));
-        var tey:Dynamic = (((_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.getIndex(palette, (m + 1.0))] : Array<Dynamic>)) * ex) + (_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.getIndex(palette, (m + 5.0))] : Array<Dynamic>)) * ey)) + (_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.getIndex(palette, (m + 9.0))] : Array<Dynamic>)) * ez));
-        var tez:Dynamic = (((_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.getIndex(palette, (m + 2.0))] : Array<Dynamic>)) * ex) + (_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.getIndex(palette, (m + 6.0))] : Array<Dynamic>)) * ey)) + (_Runtime.callProperty(HxMath, 'abs', cast ([_Runtime.getIndex(palette, (m + 10.0))] : Array<Dynamic>)) * ez));
+        var tex:Dynamic = (((HxMath.abs(_Runtime.getIndex(palette, m)) * ex) + (HxMath.abs(_Runtime.getIndex(palette, (m + 4.0))) * ey)) + (HxMath.abs(_Runtime.getIndex(palette, (m + 8.0))) * ez));
+        var tey:Dynamic = (((HxMath.abs(_Runtime.getIndex(palette, (m + 1.0))) * ex) + (HxMath.abs(_Runtime.getIndex(palette, (m + 5.0))) * ey)) + (HxMath.abs(_Runtime.getIndex(palette, (m + 9.0))) * ez));
+        var tez:Dynamic = (((HxMath.abs(_Runtime.getIndex(palette, (m + 2.0))) * ex) + (HxMath.abs(_Runtime.getIndex(palette, (m + 6.0))) * ey)) + (HxMath.abs(_Runtime.getIndex(palette, (m + 10.0))) * ez));
         if (_Runtime.truthy(_Runtime.compare((tcx - tex), minX, '<'))) { (minX = cast ((tcx - tex) : Dynamic)); }
         if (_Runtime.truthy(_Runtime.compare((tcy - tey), minY, '<'))) { (minY = cast ((tcy - tey) : Dynamic)); }
         if (_Runtime.truthy(_Runtime.compare((tcz - tez), minZ, '<'))) { (minZ = cast ((tcz - tez) : Dynamic)); }
@@ -121,12 +121,12 @@ class GetMeshSkinBounds {
     _Runtime.callValue(skinVertices, cast ([_Runtime.field(bindPose, 'skinnedPositions'), _Runtime.field(bindPose, 'skinnedNormals'), _Runtime.field(bindPose, 'positions'), _Runtime.field(bindPose, 'normals'), _Runtime.field(bindPose, 'joints'), _Runtime.field(bindPose, 'weights'), _Runtime.field(skeleton, 'jointMatrices')] : Array<Dynamic>));
     skinned = _Runtime.field(bindPose, 'skinnedPositions');
     vertexCount = (Std.int((_Runtime.field(skinned, 'length') / 3.0)) | Std.int(0.0));
-    minX = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    minY = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    minZ = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    maxX = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY');
-    maxY = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY');
-    maxZ = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'NEGATIVE_INFINITY');
+    minX = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    minY = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    minZ = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    maxX = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
+    maxY = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
+    maxZ = _Runtime.field(_Runtime.globalValue('Number'), 'NEGATIVE_INFINITY');
     {
       var v:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(v, vertexCount, '<'))) {
@@ -154,7 +154,7 @@ class GetMeshSkinBounds {
   public static function getReferencedJoints__getMeshSkinBounds(joints:flighthq._internal._Float32Array, weights:flighthq._internal._Float32Array, jointCount:Float):Dynamic {
     var referenced:Dynamic = cast _Runtime.UNDEFINED;
     var influenceCount:Dynamic = cast _Runtime.UNDEFINED;
-    referenced = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [jointCount]);
+    referenced = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [jointCount]);
     influenceCount = _Runtime.field(joints, 'length');
     {
       var k:Dynamic = 0.0;

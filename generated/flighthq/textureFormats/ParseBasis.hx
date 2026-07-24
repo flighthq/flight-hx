@@ -68,13 +68,13 @@ class ParseBasis {
         (slice = cast ((slice + 1.0) : Dynamic));
       }
     }
-    return cast { depth: _Runtime.field(shape, 'depth'), faces: _Runtime.field(shape, 'faces'), format: format, height: _Runtime.orValue(baseHeight, function():Dynamic return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.getIndex(levels, 0.0), 'height'), function():Dynamic return cast 0.0)), layers: _Runtime.field(shape, 'layers'), levels: levels, mipLevels: _Runtime.callProperty(HxMath, 'max', cast ([1.0, maxLevel] : Array<Dynamic>)), supercompression: 'None', width: _Runtime.orValue(baseWidth, function():Dynamic return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.getIndex(levels, 0.0), 'width'), function():Dynamic return cast 0.0)) };
+    return cast { depth: _Runtime.field(shape, 'depth'), faces: _Runtime.field(shape, 'faces'), format: format, height: _Runtime.orValue(baseHeight, function():Dynamic return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.getIndex(levels, 0.0), 'height'), function():Dynamic return cast 0.0)), layers: _Runtime.field(shape, 'layers'), levels: levels, mipLevels: HxMath.max(1.0, maxLevel), supercompression: 'None', width: _Runtime.orValue(baseWidth, function():Dynamic return cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.getIndex(levels, 0.0), 'width'), function():Dynamic return cast 0.0)) };
     return cast null;
   }
 
   public static function getBasisTextureShape__parseBasis(textureType:Float, totalImages:Float):Null<{ var depth:Float; var faces:Float; var layers:Float; }> {
     var images:Dynamic = cast _Runtime.UNDEFINED;
-    images = _Runtime.callProperty(HxMath, 'max', cast ([1.0, totalImages] : Array<Dynamic>));
+    images = HxMath.max(1.0, totalImages);
     {
       var __switchValue = textureType;
       if (__switchValue == ParseBasis.basisTextureType2d__parseBasis || __switchValue == ParseBasis.basisTextureType2dArray__parseBasis) {

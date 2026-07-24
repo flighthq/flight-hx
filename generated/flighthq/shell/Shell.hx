@@ -24,9 +24,9 @@ class Shell {
       return cast false;
       return cast null;
     }), openExternal: flighthq._internal._Async.make(function(url:Dynamic):flighthq._internal._Promise<Dynamic> {
-      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'open')), 'function')))) { return cast false; }
+      if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(_Runtime.globalValue('window'), 'open')), 'function')))) { return cast false; }
       try {
-        return cast !_Runtime.strictEquals(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'open', cast ([url, '_blank', 'noopener'] : Array<Dynamic>)), null);
+        return cast !_Runtime.strictEquals(_Runtime.callProperty(_Runtime.globalValue('window'), 'open', cast ([url, '_blank', 'noopener'] : Array<Dynamic>)), null);
       } catch (__error:Dynamic) {
         return cast false;
       }
@@ -59,7 +59,7 @@ class Shell {
   public static function isShellUrlAllowed(url:String):Bool {
     if (_Runtime.truthy(_Runtime.strictEquals(Shell._urlSchemeAllowlist__shell, null))) { return cast true; }
     try {
-      var scheme:Dynamic = _Runtime.replace(_Runtime.field(_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['URL'] : Array<Dynamic>)), [url]), 'protocol'), _Runtime.regexp(':$$', ''), '', false);
+      var scheme:Dynamic = _Runtime.replace(_Runtime.field(_Runtime.construct(_Runtime.globalValue('URL'), [url]), 'protocol'), _Runtime.regexp(':$$', ''), '', false);
       return cast _Runtime.includes(Shell._urlSchemeAllowlist__shell, scheme);
     } catch (__error:Dynamic) {
       return cast false;
@@ -78,7 +78,7 @@ class Shell {
   }
 
   public static function openShellExternalUrl(url:String, ?options:ShellOpenExternalOptions):flighthq._internal._Promise<Bool> {
-    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(isShellUrlAllowed, cast ([url] : Array<Dynamic>))))) { return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Promise'] : Array<Dynamic>)), 'resolve', cast ([false] : Array<Dynamic>)); }
+    if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(isShellUrlAllowed, cast ([url] : Array<Dynamic>))))) { return cast _Runtime.callProperty(_Runtime.globalValue('Promise'), 'resolve', cast ([false] : Array<Dynamic>)); }
     return cast _Runtime.callProperty(_Runtime.callValue(getShellBackend, cast ([] : Array<Dynamic>)), 'openExternal', cast ([url, options] : Array<Dynamic>));
     return cast null;
   }

@@ -48,13 +48,13 @@ class ElectronStorage {
     }, getItem: function(key:Dynamic) {
       var s:Dynamic = cast _Runtime.UNDEFINED;
       s = _Runtime.callValue(load, cast ([] : Array<Dynamic>));
-      return cast _Runtime.select(_Runtime.callProperty(_Runtime.field(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'prototype'), 'hasOwnProperty'), 'call', cast ([s, key] : Array<Dynamic>)), function():Dynamic return cast _Runtime.getIndex(s, key), function():Dynamic return cast null);
+      return cast _Runtime.select(_Runtime.callProperty(_Runtime.field(flighthq._internal.DynamicObject.field('prototype'), 'hasOwnProperty'), 'call', cast ([s, key] : Array<Dynamic>)), function():Dynamic return cast _Runtime.getIndex(s, key), function():Dynamic return cast null);
     }, keys: function() {
-      return cast _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([_Runtime.callValue(load, cast ([] : Array<Dynamic>))] : Array<Dynamic>));
+      return cast flighthq._internal.DynamicObject.keys(_Runtime.callValue(load, cast ([] : Array<Dynamic>)));
     }, removeItem: function(key:Dynamic) {
       var s:Dynamic = cast _Runtime.UNDEFINED;
       s = _Runtime.callValue(load, cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.field(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'prototype'), 'hasOwnProperty'), 'call', cast ([s, key] : Array<Dynamic>))))) { return cast false; }
+      if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(_Runtime.field(flighthq._internal.DynamicObject.field('prototype'), 'hasOwnProperty'), 'call', cast ([s, key] : Array<Dynamic>))))) { return cast false; }
       _Runtime.deleteIndex(s, key);
       return cast _Runtime.callValue(save, cast ([] : Array<Dynamic>));
     }, setItem: function(key:Dynamic, value:Dynamic) {

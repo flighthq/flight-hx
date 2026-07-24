@@ -37,7 +37,7 @@ class GlConvolutionEffect {
     preserveAlpha = _Runtime.coalesce(_Runtime.field(effect, 'preserveAlpha'), function():Dynamic return cast true);
     edgeColor = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 0.0);
     divisor = _Runtime.coalesce(_Runtime.field(effect, 'divisor'), function():Dynamic return cast _Runtime.callValue(GlConvolutionEffect.getAutoDivisor__glConvolutionEffect, cast ([matrix, (matrixX * matrixY)] : Array<Dynamic>)));
-    matrixData = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE]);
+    matrixData = _Runtime.construct(_Runtime.globalValue('Float32Array'), [MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE]);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, (matrixX * matrixY), '<'))) {
@@ -47,15 +47,15 @@ class GlConvolutionEffect {
     }
     program = _Runtime.callValue(getGlEffectProgram, cast ([state, 'stylization.convolution', GlConvolutionEffect.CONVOLUTION_FRAGMENT_SRC__glConvolutionEffect] : Array<Dynamic>));
     _Runtime.callValue(drawGlFullscreenPass, cast ([state, program, cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>), dest, function(gl:Dynamic, p:Dynamic) {
-      _Runtime.callProperty(gl, 'uniform2f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_texelSize'] : Array<Dynamic>)), (1.0 / _Runtime.field(source, 'width')), (1.0 / _Runtime.field(source, 'height'))] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1fv', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_matrix[0]'] : Array<Dynamic>)), matrixData] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1i', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_matrixX'] : Array<Dynamic>)), matrixX] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1i', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_matrixY'] : Array<Dynamic>)), matrixY] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_divisor'] : Array<Dynamic>)), divisor] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_bias'] : Array<Dynamic>)), bias] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1i', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_clamp'] : Array<Dynamic>)), _Runtime.select(clampEdge, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform1i', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_preserveAlpha'] : Array<Dynamic>)), _Runtime.select(preserveAlpha, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)] : Array<Dynamic>));
-      _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.callProperty(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_edgeColor'] : Array<Dynamic>)), ((Std.int((Std.int(edgeColor) >> Std.int(16.0))) & Std.int(255.0)) / 255.0), ((Std.int((Std.int(edgeColor) >> Std.int(8.0))) & Std.int(255.0)) / 255.0), ((Std.int(edgeColor) & Std.int(255.0)) / 255.0), ((Std.int(_Runtime.unsignedShiftRight(Std.int(edgeColor), Std.int(24.0))) & Std.int(255.0)) / 255.0)] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform2f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_texelSize'] : Array<Dynamic>)), (1.0 / _Runtime.field(source, 'width')), (1.0 / _Runtime.field(source, 'height'))] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1fv', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_matrix[0]'] : Array<Dynamic>)), matrixData] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_matrixX'] : Array<Dynamic>)), matrixX] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_matrixY'] : Array<Dynamic>)), matrixY] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_divisor'] : Array<Dynamic>)), divisor] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_bias'] : Array<Dynamic>)), bias] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_clamp'] : Array<Dynamic>)), _Runtime.select(clampEdge, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_preserveAlpha'] : Array<Dynamic>)), _Runtime.select(preserveAlpha, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0)] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([_Runtime.field(p, 'program'), 'u_edgeColor'] : Array<Dynamic>)), ((Std.int((Std.int(edgeColor) >> Std.int(16.0))) & Std.int(255.0)) / 255.0), ((Std.int((Std.int(edgeColor) >> Std.int(8.0))) & Std.int(255.0)) / 255.0), ((Std.int(edgeColor) & Std.int(255.0)) / 255.0), ((Std.int(_Runtime.unsignedShiftRight(Std.int(edgeColor), Std.int(24.0))) & Std.int(255.0)) / 255.0)] : Array<Dynamic>));
     }] : Array<Dynamic>));
   }
 

@@ -31,7 +31,7 @@ class RestoreSnapshot {
     }
     targetObject = (cast target : Dynamic);
     sourceObject = (cast source : Dynamic);
-    for (key in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([sourceObject] : Array<Dynamic>)))) {
+    for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(sourceObject))) {
       _Runtime.setIndex(targetObject, key, _Runtime.callValue(RestoreSnapshot.restoreSnapshotValue__restoreSnapshot, cast ([_Runtime.getIndex(targetObject, key), _Runtime.getIndex(sourceObject, key)] : Array<Dynamic>)));
     }
   }
@@ -46,7 +46,7 @@ class RestoreSnapshot {
       _Runtime.callValue(RestoreSnapshot.restoreSnapshotInto__restoreSnapshot, cast ([(cast targetValue : Dynamic), (cast sourceValue : Dynamic)] : Array<Dynamic>));
       return cast targetValue;
     }
-    return cast _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['structuredClone'] : Array<Dynamic>)), cast ([sourceValue] : Array<Dynamic>));
+    return cast _Runtime.callValue(_Runtime.globalValue('structuredClone'), cast ([sourceValue] : Array<Dynamic>));
     return cast null;
   }
 }

@@ -10,19 +10,19 @@ class ColorTemperatureMath {
     var r:Float = cast _Runtime.UNDEFINED;
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
-    temp = (_Runtime.callProperty(HxMath, 'max', cast ([1000.0, _Runtime.callProperty(HxMath, 'min', cast ([40000.0, kelvin] : Array<Dynamic>))] : Array<Dynamic>)) / 100.0);
+    temp = (HxMath.max(1000.0, HxMath.min(40000.0, kelvin)) / 100.0);
     if (_Runtime.truthy(_Runtime.compare(temp, 66.0, '<='))) {
       (r = cast (1.0 : Dynamic));
-      (g = cast ((((99.4708025861 * _Runtime.callProperty(HxMath, 'log', cast ([temp] : Array<Dynamic>))) - 161.1195681661) / 255.0) : Dynamic));
-      (b = cast (_Runtime.select(_Runtime.compare(temp, 19.0, '<='), function():Dynamic return cast 0.0, function():Dynamic return cast (((138.5177312231 * _Runtime.callProperty(HxMath, 'log', cast ([(temp - 10.0)] : Array<Dynamic>))) - 305.0447927307) / 255.0)) : Dynamic));
+      (g = cast ((((99.4708025861 * HxMath.log(temp)) - 161.1195681661) / 255.0) : Dynamic));
+      (b = cast (_Runtime.select(_Runtime.compare(temp, 19.0, '<='), function():Dynamic return cast 0.0, function():Dynamic return cast (((138.5177312231 * HxMath.log((temp - 10.0))) - 305.0447927307) / 255.0)) : Dynamic));
     } else {
-      (r = cast (((329.698727446 * _Runtime.callProperty(HxMath, 'pow', cast ([(temp - 60.0), -0.1332047592] : Array<Dynamic>))) / 255.0) : Dynamic));
-      (g = cast (((288.1221695283 * _Runtime.callProperty(HxMath, 'pow', cast ([(temp - 60.0), -0.0755148492] : Array<Dynamic>))) / 255.0) : Dynamic));
+      (r = cast (((329.698727446 * HxMath.pow((temp - 60.0), -0.1332047592)) / 255.0) : Dynamic));
+      (g = cast (((288.1221695283 * HxMath.pow((temp - 60.0), -0.0755148492)) / 255.0) : Dynamic));
       (b = cast (1.0 : Dynamic));
     }
-    _Runtime.setIndex(out, 0.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, r] : Array<Dynamic>))] : Array<Dynamic>)));
-    _Runtime.setIndex(out, 1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, g] : Array<Dynamic>))] : Array<Dynamic>)));
-    _Runtime.setIndex(out, 2.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([1.0, b] : Array<Dynamic>))] : Array<Dynamic>)));
+    _Runtime.setIndex(out, 0.0, HxMath.max(0.0, HxMath.min(1.0, r)));
+    _Runtime.setIndex(out, 1.0, HxMath.max(0.0, HxMath.min(1.0, g)));
+    _Runtime.setIndex(out, 2.0, HxMath.max(0.0, HxMath.min(1.0, b)));
   }
 
   public static function computeWhiteBalanceMultipliers(temperature:Float, tint:Float, out:Array<Float>):Void {
@@ -31,8 +31,8 @@ class ColorTemperatureMath {
     kelvin = (6500.0 - (temperature * 4500.0));
     _Runtime.callValue(computeColorTemperatureRgb, cast ([kelvin, out] : Array<Dynamic>));
     greenShift = (-tint * 0.1);
-    _Runtime.setIndex(out, 0.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.getIndex(out, 0.0)] : Array<Dynamic>)));
-    _Runtime.setIndex(out, 1.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, (_Runtime.getIndex(out, 1.0) + greenShift)] : Array<Dynamic>)));
-    _Runtime.setIndex(out, 2.0, _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.getIndex(out, 2.0)] : Array<Dynamic>)));
+    _Runtime.setIndex(out, 0.0, HxMath.max(0.0, _Runtime.getIndex(out, 0.0)));
+    _Runtime.setIndex(out, 1.0, HxMath.max(0.0, (_Runtime.getIndex(out, 1.0) + greenShift)));
+    _Runtime.setIndex(out, 2.0, HxMath.max(0.0, _Runtime.getIndex(out, 2.0)));
   }
 }

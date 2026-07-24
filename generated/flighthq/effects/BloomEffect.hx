@@ -7,7 +7,7 @@ import flighthq.types.BloomEffect;
 
 class BloomEffect {
   public static function computeBloomBlurRadius(effect:flighthq.types.BloomEffect):Float {
-    return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 8.0)] : Array<Dynamic>));
+    return cast HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 8.0));
     return cast null;
   }
 

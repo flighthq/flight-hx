@@ -210,7 +210,7 @@ class PickScene {
     nz = ((e1x * e2y) - (e1y * e2x));
     lengthSquared = (((nx * nx) + (ny * ny)) + (nz * nz));
     if (_Runtime.truthy(_Runtime.strictEquals(lengthSquared, 0.0))) { return cast false; }
-    inv = (1.0 / _Runtime.callProperty(HxMath, 'sqrt', cast ([lengthSquared] : Array<Dynamic>)));
+    inv = (1.0 / HxMath.sqrt(lengthSquared));
     _Runtime.setField(out, 'x', (nx * inv));
     _Runtime.setField(out, 'y', (ny * inv));
     _Runtime.setField(out, 'z', (nz * inv));

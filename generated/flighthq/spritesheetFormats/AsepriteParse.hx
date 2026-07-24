@@ -25,7 +25,7 @@ class AsepriteParse {
   }
 
   public static function metaScale__asepriteParse(meta:AsepriteMeta):Float {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(meta, 'scale')), 'string'))) { return cast _Runtime.orValue(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseFloat'] : Array<Dynamic>)), cast ([_Runtime.field(meta, 'scale')] : Array<Dynamic>)), function():Dynamic return cast 1.0); }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(meta, 'scale')), 'string'))) { return cast _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('parseFloat'), cast ([_Runtime.field(meta, 'scale')] : Array<Dynamic>)), function():Dynamic return cast 1.0); }
     return cast _Runtime.field(meta, 'scale');
     return cast null;
   }
@@ -54,13 +54,13 @@ class AsepriteParse {
     regions = _Runtime.field(_Runtime.callValue(parseTextureAtlasAsepriteDocument, cast ([doc, _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>))] : Array<Dynamic>)), 'regions');
     frames = _Runtime.callProperty(regions, 'map', cast ([AsepriteParse.frameFromRegion__asepriteParse] : Array<Dynamic>));
     frameNames = _Runtime.callProperty(regions, 'map', cast ([function(region:Dynamic) return _Runtime.coalesce(_Runtime.field(region, 'name'), function():Dynamic return cast '')] : Array<Dynamic>));
-    durationMap = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    durationMap = _Runtime.construct(_Runtime.globalValue('Map'), []);
     if (_Runtime.truthy(_Runtime.isArray(_Runtime.field(doc, 'frames')))) {
       for (entry in _Runtime.iterable((cast _Runtime.field(doc, 'frames') : Array<AsepriteArrayFrame>))) {
         _Runtime.callProperty(durationMap, 'set', cast ([_Runtime.field(entry, 'filename'), _Runtime.field(entry, 'duration')] : Array<Dynamic>));
       }
     } else {
-      for (__iteration0 in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'entries', cast ([_Runtime.field(doc, 'frames')] : Array<Dynamic>)))) {
+      for (__iteration0 in _Runtime.iterable(flighthq._internal.DynamicObject.entries(_Runtime.field(doc, 'frames')))) {
         var name:Dynamic = _Runtime.getIndex(__iteration0, 0.0);
         var entry:Dynamic = _Runtime.getIndex(__iteration0, 1.0);
         _Runtime.callProperty(durationMap, 'set', cast ([name, _Runtime.field(entry, 'duration')] : Array<Dynamic>));

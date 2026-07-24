@@ -25,8 +25,8 @@ class HsvColor {
       return;
     }
     hn = (((h % 360.0) + 360.0) % 360.0);
-    i = (_Runtime.callProperty(HxMath, 'floor', cast ([(hn / 60.0)] : Array<Dynamic>)) % 6.0);
-    f = ((hn / 60.0) - _Runtime.callProperty(HxMath, 'floor', cast ([(hn / 60.0)] : Array<Dynamic>)));
+    i = (HxMath.floor((hn / 60.0)) % 6.0);
+    f = ((hn / 60.0) - HxMath.floor((hn / 60.0)));
     p = (v * (1.0 - s));
     q = (v * (1.0 - (f * s)));
     t = (v * (1.0 - ((1.0 - f) * s)));

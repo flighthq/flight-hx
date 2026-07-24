@@ -33,11 +33,11 @@ class WireframeGlMeshMaterialRenderer {
     _Runtime.callValue(beginGlMeshDraw, cast ([state, program, true] : Array<Dynamic>));
     _Runtime.callValue(setGlMeshViewProjection, cast ([gl, _Runtime.field(program, 'locViewProjection'), camera] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(wireframe, null))) {
-      _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(program, 'locColor'), 1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(program, 'locColor'), 1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
       return;
     }
     _Runtime.callValue(unpackColorToLinear, cast ([WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, _Runtime.field(wireframe, 'color')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform4f', cast ([_Runtime.field(program, 'locColor'), _Runtime.getIndex(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 2.0), _Runtime.getIndex(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 3.0)] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform4f', cast ([_Runtime.field(program, 'locColor'), _Runtime.getIndex(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 0.0), _Runtime.getIndex(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 1.0), _Runtime.getIndex(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 2.0), _Runtime.getIndex(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 3.0)] : Array<Dynamic>));
   }, draw: function(state:GlRenderState, proxy:SceneRenderProxy, geometry:MeshGeometry) {
     var gl:Dynamic = cast _Runtime.UNDEFINED;
     var program:Dynamic = cast _Runtime.UNDEFINED;
@@ -47,11 +47,11 @@ class WireframeGlMeshMaterialRenderer {
     gl = _Runtime.field(state, 'gl');
     program = _Runtime.field(_Runtime.callValue(getGlSceneRuntime, cast ([state] : Array<Dynamic>)), 'activeMeshProgram');
     if (_Runtime.truthy(_Runtime.strictEquals(program, null))) { return; }
-    _Runtime.callProperty(gl, 'uniformMatrix4fv', cast ([_Runtime.field(program, 'locModel'), false, _Runtime.field(_Runtime.field(proxy, 'worldMatrix'), 'm')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniformMatrix4fv', cast ([_Runtime.field(program, 'locModel'), false, _Runtime.field(_Runtime.field(proxy, 'worldMatrix'), 'm')] : Array<Dynamic>));
     upload = _Runtime.callValue(ensureGlWireframeUpload, cast ([state, geometry] : Array<Dynamic>));
     subset = _Runtime.field(proxy, 'subset');
-    elementSize = _Runtime.select(_Runtime.strictEquals(_Runtime.field(upload, 'indexType'), _Runtime.field(gl, 'UNSIGNED_INT')), function():Dynamic return cast 4.0, function():Dynamic return cast 2.0);
-    _Runtime.callProperty(gl, 'drawElements', cast ([_Runtime.field(gl, 'LINES'), (_Runtime.field(subset, 'indexCount') * 2.0), _Runtime.field(upload, 'indexType'), ((_Runtime.field(subset, 'indexOffset') * 2.0) * elementSize)] : Array<Dynamic>));
+    elementSize = _Runtime.select(_Runtime.strictEquals(_Runtime.field(upload, 'indexType'), flighthq._internal.WebGl2RenderingContext.field(gl, 'UNSIGNED_INT')), function():Dynamic return cast 4.0, function():Dynamic return cast 2.0);
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'drawElements', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'LINES'), (_Runtime.field(subset, 'indexCount') * 2.0), _Runtime.field(upload, 'indexType'), ((_Runtime.field(subset, 'indexOffset') * 2.0) * elementSize)] : Array<Dynamic>));
   } };
 
   public static function registerWireframeGlMaterial(state:GlRenderState):Void {

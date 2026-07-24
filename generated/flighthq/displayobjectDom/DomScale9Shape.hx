@@ -55,12 +55,12 @@ class DomScale9Shape {
       return;
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(data, 'canvas'), null))) {
-      _Runtime.setField(data, 'canvas', _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['document'] : Array<Dynamic>)), 'createElement', cast (['canvas'] : Array<Dynamic>)));
+      _Runtime.setField(data, 'canvas', _Runtime.callProperty(_Runtime.globalValue('document'), 'createElement', cast (['canvas'] : Array<Dynamic>)));
       _Runtime.setField(data, 'context', _Runtime.callProperty(_Runtime.field(data, 'canvas'), 'getContext', cast (['2d'] : Array<Dynamic>)));
       _Runtime.callValue(prepareDomElement, cast ([_Runtime.field(data, 'canvas')] : Array<Dynamic>));
     }
-    w = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([(_Runtime.field(bounds, 'width') * _Runtime.field(source, 'scaleX'))] : Array<Dynamic>))] : Array<Dynamic>));
-    h = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'ceil', cast ([(_Runtime.field(bounds, 'height') * _Runtime.field(source, 'scaleY'))] : Array<Dynamic>))] : Array<Dynamic>));
+    w = HxMath.max(1.0, HxMath.ceil((_Runtime.field(bounds, 'width') * _Runtime.field(source, 'scaleX'))));
+    h = HxMath.max(1.0, HxMath.ceil((_Runtime.field(bounds, 'height') * _Runtime.field(source, 'scaleY'))));
     _Runtime.setField(_Runtime.field(data, 'canvas'), 'width', w);
     _Runtime.setField(_Runtime.field(data, 'canvas'), 'height', h);
     ctx = _Runtime.field(data, 'context');
@@ -89,8 +89,8 @@ class DomScale9Shape {
     b = _Runtime.select(!_Runtime.strictEquals(scaleX, 0.0), function():Dynamic return cast (_Runtime.field(transform, 'b') / scaleX), function():Dynamic return cast _Runtime.field(transform, 'b'));
     c = _Runtime.select(!_Runtime.strictEquals(scaleY, 0.0), function():Dynamic return cast (_Runtime.field(transform, 'c') / scaleY), function():Dynamic return cast _Runtime.field(transform, 'c'));
     d = _Runtime.select(!_Runtime.strictEquals(scaleY, 0.0), function():Dynamic return cast (_Runtime.field(transform, 'd') / scaleY), function():Dynamic return cast _Runtime.field(transform, 'd'));
-    tx = _Runtime.select(roundPixels, function():Dynamic return cast _Runtime.callProperty(HxMath, 'fround', cast ([_Runtime.field(transform, 'tx')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(transform, 'tx'));
-    ty = _Runtime.select(roundPixels, function():Dynamic return cast _Runtime.callProperty(HxMath, 'fround', cast ([_Runtime.field(transform, 'ty')] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(transform, 'ty'));
+    tx = _Runtime.select(roundPixels, function():Dynamic return cast HxMath.fround(_Runtime.field(transform, 'tx')), function():Dynamic return cast _Runtime.field(transform, 'tx'));
+    ty = _Runtime.select(roundPixels, function():Dynamic return cast HxMath.fround(_Runtime.field(transform, 'ty')), function():Dynamic return cast _Runtime.field(transform, 'ty'));
     _Runtime.setField(_Runtime.field(element, 'style'), 'transform', 'matrix(' + Std.string(a) + ',' + Std.string(b) + ',' + Std.string(c) + ',' + Std.string(d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
   }
 }

@@ -68,8 +68,8 @@ class SurfaceDisplacement {
                 (sampleX = cast ((((rawSampleX % w) + w) % w) : Dynamic));
                 (sampleY = cast ((((rawSampleY % h) + h) % h) : Dynamic));
               } else { if (_Runtime.truthy(_Runtime.strictEquals(mode, 'clamp'))) {
-                (sampleX = cast (_Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([(w - 1.0), rawSampleX] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));
-                (sampleY = cast (_Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([(h - 1.0), rawSampleY] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));
+                (sampleX = cast (HxMath.max(0.0, HxMath.min((w - 1.0), rawSampleX)) : Dynamic));
+                (sampleY = cast (HxMath.max(0.0, HxMath.min((h - 1.0), rawSampleY)) : Dynamic));
               } else { if (_Runtime.truthy(_Runtime.strictEquals(mode, 'ignore'))) {
                 (sampleX = cast (px : Dynamic));
                 (sampleY = cast (py : Dynamic));
@@ -82,16 +82,16 @@ class SurfaceDisplacement {
                 continue;
               } } } }
             }
-            var x0:Dynamic = _Runtime.callProperty(HxMath, 'floor', cast ([sampleX] : Array<Dynamic>));
-            var y0:Dynamic = _Runtime.callProperty(HxMath, 'floor', cast ([sampleY] : Array<Dynamic>));
+            var x0:Dynamic = HxMath.floor(sampleX);
+            var y0:Dynamic = HxMath.floor(sampleY);
             var tx:Dynamic = (sampleX - x0);
             var ty:Dynamic = (sampleY - y0);
             var sStride:Dynamic = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
             var sData:Dynamic = _Runtime.field(_Runtime.field(source, 'surface'), 'data');
-            var x0c:Dynamic = (_Runtime.field(source, 'x') + _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([(w - 1.0), x0] : Array<Dynamic>))] : Array<Dynamic>)));
-            var x1c:Dynamic = (_Runtime.field(source, 'x') + _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([(w - 1.0), (x0 + 1.0)] : Array<Dynamic>))] : Array<Dynamic>)));
-            var y0c:Dynamic = (_Runtime.field(source, 'y') + _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([(h - 1.0), y0] : Array<Dynamic>))] : Array<Dynamic>)));
-            var y1c:Dynamic = (_Runtime.field(source, 'y') + _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([(h - 1.0), (y0 + 1.0)] : Array<Dynamic>))] : Array<Dynamic>)));
+            var x0c:Dynamic = (_Runtime.field(source, 'x') + HxMath.max(0.0, HxMath.min((w - 1.0), x0)));
+            var x1c:Dynamic = (_Runtime.field(source, 'x') + HxMath.max(0.0, HxMath.min((w - 1.0), (x0 + 1.0))));
+            var y0c:Dynamic = (_Runtime.field(source, 'y') + HxMath.max(0.0, HxMath.min((h - 1.0), y0)));
+            var y1c:Dynamic = (_Runtime.field(source, 'y') + HxMath.max(0.0, HxMath.min((h - 1.0), (y0 + 1.0))));
             if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(x0c, 0.0, '<'), function():Dynamic return cast _Runtime.compare(x0c, (_Runtime.field(sData, 'length') / 4.0), '>=')), function():Dynamic return cast _Runtime.compare(y0c, 0.0, '<')))) {
               _Runtime.setIndex(out, di, 0.0);
               _Runtime.setIndex(out, (di + 1.0), 0.0);
@@ -109,7 +109,7 @@ class SurfaceDisplacement {
               while (_Runtime.truthy(_Runtime.compare(c, 4.0, '<'))) {
                 var top:Dynamic = ((_Runtime.getIndex(sData, (i00 + c)) * (1.0 - tx)) + (_Runtime.getIndex(sData, (i10 + c)) * tx));
                 var bottom:Dynamic = ((_Runtime.getIndex(sData, (i01 + c)) * (1.0 - tx)) + (_Runtime.getIndex(sData, (i11 + c)) * tx));
-                _Runtime.setIndex(out, (di + c), _Runtime.callProperty(HxMath, 'round', cast ([((top * (1.0 - ty)) + (bottom * ty))] : Array<Dynamic>)));
+                _Runtime.setIndex(out, (di + c), HxMath.round(((top * (1.0 - ty)) + (bottom * ty))));
                 c++;
               }
             }
@@ -126,7 +126,7 @@ class SurfaceDisplacement {
     {
       var __switchValue = mode;
       if (__switchValue == 'clamp') {
-        return cast _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([(size - 1.0), v] : Array<Dynamic>))] : Array<Dynamic>));
+        return cast HxMath.max(0.0, HxMath.min((size - 1.0), v));
       }
       else if (__switchValue == 'wrap') {
         return cast (((v % size) + size) % size);

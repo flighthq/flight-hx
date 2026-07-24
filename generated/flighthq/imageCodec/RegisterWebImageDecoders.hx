@@ -22,14 +22,14 @@ class RegisterWebImageDecoders {
     var canvas:Dynamic = cast _Runtime.UNDEFINED;
     var context:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
-    bitmap = flighthq._internal._Async.awaitValue(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['createImageBitmap'] : Array<Dynamic>)), cast ([_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Blob'] : Array<Dynamic>)), [cast ([_Runtime.slice(bytes, 0, null)] : Array<Dynamic>)])] : Array<Dynamic>)));
+    bitmap = flighthq._internal._Async.awaitValue(_Runtime.callValue(_Runtime.globalValue('createImageBitmap'), cast ([_Runtime.construct(_Runtime.globalValue('Blob'), [cast ([_Runtime.slice(bytes, 0, null)] : Array<Dynamic>)])] : Array<Dynamic>)));
     width = _Runtime.field(bitmap, 'width');
     height = _Runtime.field(bitmap, 'height');
-    canvas = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['OffscreenCanvas'] : Array<Dynamic>)), [width, height]);
+    canvas = _Runtime.construct(_Runtime.globalValue('OffscreenCanvas'), [width, height]);
     context = (cast _Runtime.callProperty(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)) : Dynamic);
-    _Runtime.callProperty(context, 'drawImage', cast ([bitmap, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.CanvasRenderingContext2D.call(context, 'drawImage', cast ([bitmap, 0.0, 0.0] : Array<Dynamic>));
     _Runtime.callProperty(bitmap, 'close', cast ([] : Array<Dynamic>));
-    data = _Runtime.field(_Runtime.callProperty(context, 'getImageData', cast ([0.0, 0.0, width, height] : Array<Dynamic>)), 'data');
+    data = _Runtime.field(flighthq._internal.CanvasRenderingContext2D.call(context, 'getImageData', cast ([0.0, 0.0, width, height] : Array<Dynamic>)), 'data');
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(options, 'premultiplyAlpha'), true))) { _Runtime.callValue(RegisterWebImageDecoders.premultiplyRgbaInPlace__registerWebImageDecoders, cast ([data] : Array<Dynamic>)); }
     return cast { data: data, width: width, height: height };
     return cast null;

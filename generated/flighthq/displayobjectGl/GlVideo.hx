@@ -41,7 +41,7 @@ class GlVideo {
     cache = _Runtime.field(runtime, 'videoTextureCache');
     entry = _Runtime.callOptionalProperty(cache, 'get', cast ([videoTexture] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      _Runtime.callProperty(_Runtime.field(state, 'gl'), 'deleteTexture', cast ([_Runtime.field(entry, 'texture')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(_Runtime.field(state, 'gl'), 'deleteTexture', cast ([_Runtime.field(entry, 'texture')] : Array<Dynamic>));
       _Runtime.callProperty(cache, 'delete', cast ([videoTexture] : Array<Dynamic>));
     }
   }

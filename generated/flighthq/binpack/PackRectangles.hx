@@ -48,24 +48,24 @@ class PackRectangles {
     needHeight = (2.0 * border);
     totalArea = 0.0;
     for (rect in _Runtime.iterable(sorted)) {
-      var shortSide:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(rect, 'width'), _Runtime.field(rect, 'height')] : Array<Dynamic>));
+      var shortSide:Dynamic = HxMath.min(_Runtime.field(rect, 'width'), _Runtime.field(rect, 'height'));
       var requiredWidth:Dynamic = (_Runtime.select(allowRotation, function():Dynamic return cast shortSide, function():Dynamic return cast _Runtime.field(rect, 'width')) + (2.0 * border));
       var requiredHeight:Dynamic = (_Runtime.select(allowRotation, function():Dynamic return cast shortSide, function():Dynamic return cast _Runtime.field(rect, 'height')) + (2.0 * border));
-      (needWidth = cast (_Runtime.callProperty(HxMath, 'max', cast ([needWidth, requiredWidth] : Array<Dynamic>)) : Dynamic));
-      (needHeight = cast (_Runtime.callProperty(HxMath, 'max', cast ([needHeight, requiredHeight] : Array<Dynamic>)) : Dynamic));
+      (needWidth = cast (HxMath.max(needWidth, requiredWidth) : Dynamic));
+      (needHeight = cast (HxMath.max(needHeight, requiredHeight) : Dynamic));
       (totalArea = cast ((totalArea + ((_Runtime.field(rect, 'width') + padding) * (_Runtime.field(rect, 'height') + padding))) : Dynamic));
     }
-    seed = (_Runtime.callProperty(HxMath, 'ceil', cast ([_Runtime.callProperty(HxMath, 'sqrt', cast ([totalArea] : Array<Dynamic>))] : Array<Dynamic>)) + (2.0 * border));
-    binWidth = _Runtime.select(growable, function():Dynamic return cast _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callProperty(HxMath, 'max', cast ([seed, needWidth] : Array<Dynamic>)), maxWidth] : Array<Dynamic>)), function():Dynamic return cast maxWidth);
-    binHeight = _Runtime.select(growable, function():Dynamic return cast _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callProperty(HxMath, 'max', cast ([seed, needHeight] : Array<Dynamic>)), maxHeight] : Array<Dynamic>)), function():Dynamic return cast maxHeight);
+    seed = (HxMath.ceil(HxMath.sqrt(totalArea)) + (2.0 * border));
+    binWidth = _Runtime.select(growable, function():Dynamic return cast HxMath.min(HxMath.max(seed, needWidth), maxWidth), function():Dynamic return cast maxWidth);
+    binHeight = _Runtime.select(growable, function():Dynamic return cast HxMath.min(HxMath.max(seed, needHeight), maxHeight), function():Dynamic return cast maxHeight);
     attempt = _Runtime.callValue(PackRectangles.packIntoBin__packRectangles, cast ([sorted, binWidth, binHeight, padding, border, allowRotation] : Array<Dynamic>));
     while (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(_Runtime.compare(_Runtime.field(_Runtime.field(attempt, 'unpacked'), 'length'), 0.0, '>'), function():Dynamic return cast growable), function():Dynamic return cast _Runtime.orValue(_Runtime.compare(binWidth, maxWidth, '<'), function():Dynamic return cast _Runtime.compare(binHeight, maxHeight, '<'))))) {
       if (_Runtime.truthy(_Runtime.andValue(_Runtime.compare(binWidth, binHeight, '<='), function():Dynamic return cast _Runtime.compare(binWidth, maxWidth, '<')))) {
-        (binWidth = cast (_Runtime.callProperty(HxMath, 'min', cast ([(binWidth * 2.0), maxWidth] : Array<Dynamic>)) : Dynamic));
+        (binWidth = cast (HxMath.min((binWidth * 2.0), maxWidth) : Dynamic));
       } else { if (_Runtime.truthy(_Runtime.compare(binHeight, maxHeight, '<'))) {
-        (binHeight = cast (_Runtime.callProperty(HxMath, 'min', cast ([(binHeight * 2.0), maxHeight] : Array<Dynamic>)) : Dynamic));
+        (binHeight = cast (HxMath.min((binHeight * 2.0), maxHeight) : Dynamic));
       } else {
-        (binWidth = cast (_Runtime.callProperty(HxMath, 'min', cast ([(binWidth * 2.0), maxWidth] : Array<Dynamic>)) : Dynamic));
+        (binWidth = cast (HxMath.min((binWidth * 2.0), maxWidth) : Dynamic));
       } }
       (attempt = cast (_Runtime.callValue(PackRectangles.packIntoBin__packRectangles, cast ([sorted, binWidth, binHeight, padding, border, allowRotation] : Array<Dynamic>)) : Dynamic));
     }
@@ -90,19 +90,19 @@ class PackRectangles {
     contentRight = 0.0;
     contentBottom = 0.0;
     for (placement in _Runtime.iterable(_Runtime.field(packed, 'placements'))) {
-      (contentRight = cast (_Runtime.callProperty(HxMath, 'max', cast ([contentRight, (_Runtime.field(placement, 'x') + _Runtime.field(placement, 'width'))] : Array<Dynamic>)) : Dynamic));
-      (contentBottom = cast (_Runtime.callProperty(HxMath, 'max', cast ([contentBottom, (_Runtime.field(placement, 'y') + _Runtime.field(placement, 'height'))] : Array<Dynamic>)) : Dynamic));
+      (contentRight = cast (HxMath.max(contentRight, (_Runtime.field(placement, 'x') + _Runtime.field(placement, 'width'))) : Dynamic));
+      (contentBottom = cast (HxMath.max(contentBottom, (_Runtime.field(placement, 'y') + _Runtime.field(placement, 'height'))) : Dynamic));
     }
     width = _Runtime.select(_Runtime.compare(_Runtime.field(_Runtime.field(packed, 'placements'), 'length'), 0.0, '>'), function():Dynamic return cast (contentRight + border), function():Dynamic return cast 0.0);
     height = _Runtime.select(_Runtime.compare(_Runtime.field(_Runtime.field(packed, 'placements'), 'length'), 0.0, '>'), function():Dynamic return cast (contentBottom + border), function():Dynamic return cast 0.0);
     if (_Runtime.truthy(square)) {
-      (width = cast (_Runtime.callProperty(HxMath, 'max', cast ([width, height] : Array<Dynamic>)) : Dynamic));
+      (width = cast (HxMath.max(width, height) : Dynamic));
       (height = cast (width : Dynamic));
     }
     (width = cast (_Runtime.callValue(PackRectangles.finalizeExtent__packRectangles, cast ([width, powerOfTwo] : Array<Dynamic>)) : Dynamic));
     (height = cast (_Runtime.callValue(PackRectangles.finalizeExtent__packRectangles, cast ([height, powerOfTwo] : Array<Dynamic>)) : Dynamic));
     if (_Runtime.truthy(square)) {
-      (width = cast (_Runtime.callProperty(HxMath, 'max', cast ([width, height] : Array<Dynamic>)) : Dynamic));
+      (width = cast (HxMath.max(width, height) : Dynamic));
       (height = cast (width : Dynamic));
     }
     return cast { placements: _Runtime.callProperty(_Runtime.field(packed, 'placements'), 'map', cast ([function(placement:Dynamic) return _Runtime.mergeObjects([placement])] : Array<Dynamic>)), width: width, height: height, unpacked: _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(packed, 'unpacked'))]) };
@@ -119,8 +119,8 @@ class PackRectangles {
     var bestShort:Dynamic = cast _Runtime.UNDEFINED;
     var bestLong:Dynamic = cast _Runtime.UNDEFINED;
     best = null;
-    bestShort = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
-    bestLong = _Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'POSITIVE_INFINITY');
+    bestShort = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
+    bestLong = _Runtime.field(_Runtime.globalValue('Number'), 'POSITIVE_INFINITY');
     for (node in _Runtime.iterable(free)) {
       {
         var rotated:Dynamic = 0.0;
@@ -130,8 +130,8 @@ class PackRectangles {
           if (_Runtime.truthy(_Runtime.orValue(_Runtime.compare(width, _Runtime.field(node, 'width'), '>'), function():Dynamic return cast _Runtime.compare(height, _Runtime.field(node, 'height'), '>')))) { rotated++; continue; }
           var leftoverHorizontal:Dynamic = (_Runtime.field(node, 'width') - width);
           var leftoverVertical:Dynamic = (_Runtime.field(node, 'height') - height);
-          var shortSide:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([leftoverHorizontal, leftoverVertical] : Array<Dynamic>));
-          var longSide:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([leftoverHorizontal, leftoverVertical] : Array<Dynamic>));
+          var shortSide:Dynamic = HxMath.min(leftoverHorizontal, leftoverVertical);
+          var longSide:Dynamic = HxMath.max(leftoverHorizontal, leftoverVertical);
           if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.strictEquals(best, null), function():Dynamic return cast _Runtime.compare(shortSide, bestShort, '<')), function():Dynamic return cast _Runtime.andValue(_Runtime.strictEquals(shortSide, bestShort), function():Dynamic return cast _Runtime.compare(longSide, bestLong, '<'))))) {
             (best = cast ({ x: _Runtime.field(node, 'x'), y: _Runtime.field(node, 'y'), footprintWidth: width, footprintHeight: height, rotated: _Runtime.strictEquals(rotated, 1.0) } : Dynamic));
             (bestShort = cast (shortSide : Dynamic));

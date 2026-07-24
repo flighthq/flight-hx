@@ -14,8 +14,8 @@ class SurfaceNoise {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var surfaceWidth:Dynamic = cast _Runtime.UNDEFINED;
     state = _Runtime.orValue(_Runtime.unsignedShiftRight(Std.int((Std.int(seed) | Std.int(0.0))), Std.int(0.0)), function():Dynamic return cast 1.0);
-    lo = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([255.0, low] : Array<Dynamic>))] : Array<Dynamic>));
-    span = (_Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'min', cast ([255.0, high] : Array<Dynamic>))] : Array<Dynamic>)) - lo);
+    lo = HxMath.max(0.0, HxMath.min(255.0, low));
+    span = (HxMath.max(0.0, HxMath.min(255.0, high)) - lo);
     data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     surfaceWidth = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
     {
@@ -38,9 +38,9 @@ class SurfaceNoise {
             var x:Dynamic = (_Runtime.field(dest, 'x') + px);
             if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(y, 0.0, '<'), function():Dynamic return cast _Runtime.compare(y, _Runtime.field(_Runtime.field(dest, 'surface'), 'height'), '>=')), function():Dynamic return cast _Runtime.compare(x, 0.0, '<')), function():Dynamic return cast _Runtime.compare(x, surfaceWidth, '>=')))) { px++; continue; }
             var i:Dynamic = (((y * surfaceWidth) + x) * 4.0);
-            _Runtime.setIndex(data, i, _Runtime.callProperty(HxMath, 'round', cast ([r] : Array<Dynamic>)));
-            _Runtime.setIndex(data, (i + 1.0), _Runtime.callProperty(HxMath, 'round', cast ([g] : Array<Dynamic>)));
-            _Runtime.setIndex(data, (i + 2.0), _Runtime.callProperty(HxMath, 'round', cast ([b] : Array<Dynamic>)));
+            _Runtime.setIndex(data, i, HxMath.round(r));
+            _Runtime.setIndex(data, (i + 1.0), HxMath.round(g));
+            _Runtime.setIndex(data, (i + 2.0), HxMath.round(b));
             _Runtime.setIndex(data, (i + 3.0), 255.0);
             px++;
           }
@@ -61,7 +61,7 @@ class SurfaceNoise {
     var h:Dynamic = cast _Runtime.UNDEFINED;
     fx0 = _Runtime.select(_Runtime.compare(baseX, 0.0, '>'), function():Dynamic return cast (1.0 / baseX), function():Dynamic return cast 0.0);
     fy0 = _Runtime.select(_Runtime.compare(baseY, 0.0, '>'), function():Dynamic return cast (1.0 / baseY), function():Dynamic return cast 0.0);
-    passes = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([octaves] : Array<Dynamic>))] : Array<Dynamic>));
+    passes = HxMath.max(1.0, HxMath.round(octaves));
     data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     surfaceWidth = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
     w = _Runtime.field(dest, 'width');
@@ -81,23 +81,23 @@ class SurfaceNoise {
             var ny:Dynamic = _Runtime.select(stitch, function():Dynamic return cast _Runtime.callValue(SurfaceNoise.stitchedCoord__surfaceNoise, cast ([(py * fy0), (h * fy0)] : Array<Dynamic>)), function():Dynamic return cast (py * fy0));
             if (_Runtime.truthy(grayScale)) {
               var value:Dynamic = _Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, (Std.int(seed) | Std.int(0.0))] : Array<Dynamic>));
-              var byte:Dynamic = _Runtime.callProperty(HxMath, 'round', cast ([(value * 255.0)] : Array<Dynamic>));
+              var byte:Dynamic = HxMath.round((value * 255.0));
               if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_R)))) { _Runtime.setIndex(data, di, byte); }
               if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_G)))) { _Runtime.setIndex(data, (di + 1.0), byte); }
               if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_B)))) { _Runtime.setIndex(data, (di + 2.0), byte); }
             } else {
               if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_R)))) {
-                _Runtime.setIndex(data, di, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, (Std.int(seed) | Std.int(0.0))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>)));
+                _Runtime.setIndex(data, di, HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, (Std.int(seed) | Std.int(0.0))] : Array<Dynamic>)) * 255.0)));
               }
               if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_G)))) {
-                _Runtime.setIndex(data, (di + 1.0), _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, ((Std.int(seed) | Std.int(0.0)) + 2654435761.0)] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>)));
+                _Runtime.setIndex(data, (di + 1.0), HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, ((Std.int(seed) | Std.int(0.0)) + 2654435761.0)] : Array<Dynamic>)) * 255.0)));
               }
               if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_B)))) {
-                _Runtime.setIndex(data, (di + 2.0), _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, ((Std.int(seed) | Std.int(0.0)) + 2654435762.0)] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>)));
+                _Runtime.setIndex(data, (di + 2.0), HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, ((Std.int(seed) | Std.int(0.0)) + 2654435762.0)] : Array<Dynamic>)) * 255.0)));
               }
             }
             if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_A)))) {
-              _Runtime.setIndex(data, (di + 3.0), _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, ((Std.int(seed) | Std.int(0.0)) + 2654435763.0)] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>)));
+              _Runtime.setIndex(data, (di + 3.0), HxMath.round((_Runtime.callValue(SurfaceNoise.fractalValueNoise__surfaceNoise, cast ([nx, ny, passes, ((Std.int(seed) | Std.int(0.0)) + 2654435763.0)] : Array<Dynamic>)) * 255.0)));
             } else {
               _Runtime.setIndex(data, (di + 3.0), 255.0);
             }
@@ -120,7 +120,7 @@ class SurfaceNoise {
     var h:Dynamic = cast _Runtime.UNDEFINED;
     fx0 = _Runtime.select(_Runtime.compare(baseX, 0.0, '>'), function():Dynamic return cast (1.0 / baseX), function():Dynamic return cast 0.0);
     fy0 = _Runtime.select(_Runtime.compare(baseY, 0.0, '>'), function():Dynamic return cast (1.0 / baseY), function():Dynamic return cast 0.0);
-    passes = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([octaves] : Array<Dynamic>))] : Array<Dynamic>));
+    passes = HxMath.max(1.0, HxMath.round(octaves));
     data = _Runtime.field(_Runtime.field(dest, 'surface'), 'data');
     surfaceWidth = _Runtime.field(_Runtime.field(dest, 'surface'), 'width');
     w = _Runtime.field(dest, 'width');
@@ -140,23 +140,23 @@ class SurfaceNoise {
             var ny:Dynamic = _Runtime.select(stitch, function():Dynamic return cast _Runtime.callValue(SurfaceNoise.stitchedCoord__surfaceNoise, cast ([(py * fy0), (h * fy0)] : Array<Dynamic>)), function():Dynamic return cast (py * fy0));
             if (_Runtime.truthy(grayScale)) {
               var value:Dynamic = _Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, (Std.int(seed) | Std.int(0.0))] : Array<Dynamic>));
-              var byte:Dynamic = _Runtime.callProperty(HxMath, 'round', cast ([(value * 255.0)] : Array<Dynamic>));
+              var byte:Dynamic = HxMath.round((value * 255.0));
               if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_R)))) { _Runtime.setIndex(data, di, byte); }
               if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_G)))) { _Runtime.setIndex(data, (di + 1.0), byte); }
               if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_B)))) { _Runtime.setIndex(data, (di + 2.0), byte); }
             } else {
               if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_R)))) {
-                _Runtime.setIndex(data, di, _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, (Std.int(seed) | Std.int(0.0))] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>)));
+                _Runtime.setIndex(data, di, HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, (Std.int(seed) | Std.int(0.0))] : Array<Dynamic>)) * 255.0)));
               }
               if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_G)))) {
-                _Runtime.setIndex(data, (di + 1.0), _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, ((Std.int(seed) | Std.int(0.0)) + 2654435761.0)] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>)));
+                _Runtime.setIndex(data, (di + 1.0), HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, ((Std.int(seed) | Std.int(0.0)) + 2654435761.0)] : Array<Dynamic>)) * 255.0)));
               }
               if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_B)))) {
-                _Runtime.setIndex(data, (di + 2.0), _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, ((Std.int(seed) | Std.int(0.0)) + 2654435762.0)] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>)));
+                _Runtime.setIndex(data, (di + 2.0), HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, ((Std.int(seed) | Std.int(0.0)) + 2654435762.0)] : Array<Dynamic>)) * 255.0)));
               }
             }
             if (_Runtime.truthy((Std.int(channelOptions) & Std.int(SURFACE_NOISE_CHANNEL_A)))) {
-              _Runtime.setIndex(data, (di + 3.0), _Runtime.callProperty(HxMath, 'round', cast ([(_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, ((Std.int(seed) | Std.int(0.0)) + 2654435763.0)] : Array<Dynamic>)) * 255.0)] : Array<Dynamic>)));
+              _Runtime.setIndex(data, (di + 3.0), HxMath.round((_Runtime.callValue(SurfaceNoise.turbulenceNoise__surfaceNoise, cast ([nx, ny, passes, ((Std.int(seed) | Std.int(0.0)) + 2654435763.0)] : Array<Dynamic>)) * 255.0)));
             } else {
               _Runtime.setIndex(data, (di + 3.0), 255.0);
             }
@@ -240,7 +240,7 @@ class SurfaceNoise {
     {
       var o:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(o, octaves, '<'))) {
-        (sum = cast ((sum + (_Runtime.callProperty(HxMath, 'abs', cast ([((_Runtime.callValue(SurfaceNoise.valueNoise__surfaceNoise, cast ([(x * frequency), (y * frequency), (seed + (o * 2246822507.0))] : Array<Dynamic>)) * 2.0) - 1.0)] : Array<Dynamic>)) * amplitude)) : Dynamic));
+        (sum = cast ((sum + (HxMath.abs(((_Runtime.callValue(SurfaceNoise.valueNoise__surfaceNoise, cast ([(x * frequency), (y * frequency), (seed + (o * 2246822507.0))] : Array<Dynamic>)) * 2.0) - 1.0)) * amplitude)) : Dynamic));
         (amplitudeSum = cast ((amplitudeSum + amplitude) : Dynamic));
         (amplitude = cast ((amplitude * 0.5) : Dynamic));
         (frequency = cast ((frequency * 2.0) : Dynamic));
@@ -262,8 +262,8 @@ class SurfaceNoise {
     var v11:Dynamic = cast _Runtime.UNDEFINED;
     var top:Dynamic = cast _Runtime.UNDEFINED;
     var bottom:Dynamic = cast _Runtime.UNDEFINED;
-    ix = _Runtime.callProperty(HxMath, 'floor', cast ([x] : Array<Dynamic>));
-    iy = _Runtime.callProperty(HxMath, 'floor', cast ([y] : Array<Dynamic>));
+    ix = HxMath.floor(x);
+    iy = HxMath.floor(y);
     fx = _Runtime.callValue(SurfaceNoise.smoothStep__surfaceNoise, cast ([(x - ix)] : Array<Dynamic>));
     fy = _Runtime.callValue(SurfaceNoise.smoothStep__surfaceNoise, cast ([(y - iy)] : Array<Dynamic>));
     v00 = _Runtime.callValue(SurfaceNoise.hashLattice__surfaceNoise, cast ([ix, iy, seed] : Array<Dynamic>));

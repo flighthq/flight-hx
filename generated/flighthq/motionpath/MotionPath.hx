@@ -20,7 +20,7 @@ class MotionPath {
 
   public static function getMotionPathHeading(mp:flighthq.types.MotionPath):Float {
     _Runtime.callValue(getPathTangentAtDistance, cast ([_Runtime.field(mp, 'path'), _Runtime.field(mp, 'distance'), MotionPath.scratchTangent__motionPath] : Array<Dynamic>));
-    return cast _Runtime.callProperty(HxMath, 'atan2', cast ([_Runtime.field(MotionPath.scratchTangent__motionPath, 'y'), _Runtime.field(MotionPath.scratchTangent__motionPath, 'x')] : Array<Dynamic>));
+    return cast HxMath.atan2(_Runtime.field(MotionPath.scratchTangent__motionPath, 'y'), _Runtime.field(MotionPath.scratchTangent__motionPath, 'x'));
     return cast null;
   }
 

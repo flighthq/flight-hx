@@ -121,14 +121,14 @@ class Storage {
       }
     }, subscribeChanges: function(listener:Dynamic) {
       var handler:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'))) { return cast function() {
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast function() {
       
       }; }
       handler = function(event:Dynamic) {
         _Runtime.callValue(listener, cast ([{ key: _Runtime.field(event, 'key'), oldValue: _Runtime.field(event, 'oldValue'), newValue: _Runtime.field(event, 'newValue') }] : Array<Dynamic>));
       };
-      _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'addEventListener', cast (['storage', handler] : Array<Dynamic>));
-      return cast function() return _Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'removeEventListener', cast (['storage', handler] : Array<Dynamic>));
+      _Runtime.callProperty(_Runtime.globalValue('window'), 'addEventListener', cast (['storage', handler] : Array<Dynamic>));
+      return cast function() return _Runtime.callProperty(_Runtime.globalValue('window'), 'removeEventListener', cast (['storage', handler] : Array<Dynamic>));
     } };
     return cast null;
   }
@@ -336,8 +336,8 @@ class Storage {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     raw = _Runtime.callProperty(_Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>)), 'getItem', cast ([key] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(raw, null))) { return cast null; }
-    n = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), cast ([raw] : Array<Dynamic>));
-    return cast _Runtime.select(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isNaN', cast ([n] : Array<Dynamic>)), function():Dynamic return cast null, function():Dynamic return cast n);
+    n = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([raw] : Array<Dynamic>));
+    return cast _Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isNaN', cast ([n] : Array<Dynamic>)), function():Dynamic return cast null, function():Dynamic return cast n);
     return cast null;
   }
 
@@ -349,8 +349,8 @@ class Storage {
   public static function getStorageQuotaEstimate():flighthq._internal._Promise<Null<StorageQuota>> {
     return cast flighthq._internal._Async.make(function():flighthq._internal._Promise<Null<StorageQuota>> {
       var storage:Dynamic = cast _Runtime.UNDEFINED;
-      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['navigator'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
-      storage = _Runtime.field((cast _Runtime.callProperty(_Runtime, 'globalValue', cast (['navigator'] : Array<Dynamic>)) : { @:optional var storage:{ @:optional var estimate:Dynamic; }; }), 'storage');
+      if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('navigator'), 'undefined'))) { return cast null; }
+      storage = _Runtime.field((cast _Runtime.globalValue('navigator') : { @:optional var storage:{ @:optional var estimate:Dynamic; }; }), 'storage');
       if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.optionalField(storage, 'estimate'), _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast null; }
       try {
         var estimate:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(storage, 'estimate', cast ([] : Array<Dynamic>)));
@@ -370,9 +370,9 @@ class Storage {
   }
 
   public static function getWebStorage__storage():Null<Storage> {
-    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.callProperty(_Runtime, 'typeofGlobal', cast (['window'] : Array<Dynamic>)), 'undefined'))) { return cast null; }
+    if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.typeofGlobal('window'), 'undefined'))) { return cast null; }
     try {
-      return cast _Runtime.coalesce(_Runtime.field(_Runtime.callProperty(_Runtime, 'globalValue', cast (['window'] : Array<Dynamic>)), 'localStorage'), function():Dynamic return cast null);
+      return cast _Runtime.coalesce(_Runtime.field(_Runtime.globalValue('window'), 'localStorage'), function():Dynamic return cast null);
     } catch (__error:Dynamic) {
       return cast null;
     }
@@ -397,7 +397,7 @@ class Storage {
     var newVersion:Dynamic = cast _Runtime.UNDEFINED;
     versionKey = '__flight_storage_version';
     raw = _Runtime.select(!_Runtime.strictEquals(namespace, null), function():Dynamic return cast _Runtime.callValue(getNamespacedStorageItem, cast ([namespace, versionKey] : Array<Dynamic>)), function():Dynamic return cast _Runtime.callValue(getStorageItem, cast ([versionKey] : Array<Dynamic>)));
-    currentVersion = _Runtime.select(!_Runtime.strictEquals(raw, null), function():Dynamic return cast _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['parseInt'] : Array<Dynamic>)), cast ([raw, 10.0] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    currentVersion = _Runtime.select(!_Runtime.strictEquals(raw, null), function():Dynamic return cast _Runtime.callValue(_Runtime.globalValue('parseInt'), cast ([raw, 10.0] : Array<Dynamic>)), function():Dynamic return cast 0.0);
     sorted = _Runtime.sortAndReturn(_Runtime.concatArrays([_Runtime.toArray(migrations)]), function(a:Dynamic, b:Dynamic) return (_Runtime.field(a, 'version') - _Runtime.field(b, 'version')));
     newVersion = currentVersion;
     for (migration in _Runtime.iterable(sorted)) {
@@ -489,7 +489,7 @@ class Storage {
     var success:Dynamic = cast _Runtime.UNDEFINED;
     backend = _Runtime.callValue(getStorageBackend, cast ([] : Array<Dynamic>));
     success = true;
-    for (key in _Runtime.iterable(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Object'] : Array<Dynamic>)), 'keys', cast ([record] : Array<Dynamic>)))) {
+    for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(record))) {
       if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callProperty(backend, 'setItem', cast ([key, _Runtime.getIndex(record, key)] : Array<Dynamic>))))) { (success = cast (false : Dynamic)); }
     }
     return cast success;

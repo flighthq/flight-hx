@@ -56,7 +56,7 @@ class DomReconcile {
     var keepSet:Dynamic = cast _Runtime.UNDEFINED;
     var child:Dynamic = cast _Runtime.UNDEFINED;
     var nextSibling:Null<Node<Dynamic>> = cast _Runtime.UNDEFINED;
-    keepSet = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
+    keepSet = _Runtime.construct(_Runtime.globalValue('Set'), []);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, newLength, '<'))) {

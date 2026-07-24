@@ -69,8 +69,8 @@ class TiledXmlParse {
     var n:Dynamic = cast _Runtime.UNDEFINED;
     value = _Runtime.callValue(getXmlElementAttribute, cast ([element, name] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(value, null), function():Dynamic return cast _Runtime.strictEquals(StringTools.trim(Std.string(value)), '')))) { return cast fallback; }
-    n = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), cast ([value] : Array<Dynamic>));
-    return cast _Runtime.select(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([n] : Array<Dynamic>)), function():Dynamic return cast n, function():Dynamic return cast fallback);
+    n = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([value] : Array<Dynamic>));
+    return cast _Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([n] : Array<Dynamic>)), function():Dynamic return cast n, function():Dynamic return cast fallback);
     return cast null;
   }
 
@@ -118,7 +118,7 @@ class TiledXmlParse {
     var data:Dynamic = cast _Runtime.UNDEFINED;
     var encoding:Dynamic = cast _Runtime.UNDEFINED;
     var decoded:Null<Dynamic> = cast _Runtime.UNDEFINED;
-    grid = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [(width * height)]);
+    grid = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [(width * height)]);
     data = _Runtime.callValue(getXmlElementChildByName, cast ([element, 'data'] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(data, null))) { return cast grid; }
     encoding = _Runtime.callValue(getXmlElementAttribute, cast ([data, 'encoding'] : Array<Dynamic>));
@@ -127,7 +127,7 @@ class TiledXmlParse {
     } else { if (_Runtime.truthy(_Runtime.strictEquals(encoding, 'base64'))) {
       (decoded = cast (_Runtime.callValue(decodeTiledBase64Layer, cast ([_Runtime.field(data, 'text'), _Runtime.callValue(TiledXmlParse.asCompression__tiledXmlParse, cast ([_Runtime.callValue(getXmlElementAttribute, cast ([data, 'compression'] : Array<Dynamic>))] : Array<Dynamic>)), _Runtime.optionalField(options, 'inflate')] : Array<Dynamic>)) : Dynamic));
     } else {
-      (decoded = cast (_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), 'from', cast ([_Runtime.callProperty(_Runtime.callValue(getXmlElementChildrenByName, cast ([data, 'tile'] : Array<Dynamic>)), 'map', cast ([function(tile:Dynamic) return _Runtime.unsignedShiftRight(Std.int(_Runtime.callValue(TiledXmlParse.attrNumber__tiledXmlParse, cast ([tile, 'gid', 0.0] : Array<Dynamic>))), Std.int(0.0))] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));
+      (decoded = cast (_Runtime.callProperty(_Runtime.globalValue('Uint32Array'), 'from', cast ([_Runtime.callProperty(_Runtime.callValue(getXmlElementChildrenByName, cast ([data, 'tile'] : Array<Dynamic>)), 'map', cast ([function(tile:Dynamic) return _Runtime.unsignedShiftRight(Std.int(_Runtime.callValue(TiledXmlParse.attrNumber__tiledXmlParse, cast ([tile, 'gid', 0.0] : Array<Dynamic>))), Std.int(0.0))] : Array<Dynamic>))] : Array<Dynamic>)) : Dynamic));
     } }
     if (_Runtime.truthy(_Runtime.strictEquals(decoded, null))) { return cast grid; }
     _Runtime.callProperty(grid, 'set', cast ([decoded.subarray(Std.int(0.0), Std.int(_Runtime.field(grid, 'length')))] : Array<Dynamic>));
@@ -142,7 +142,7 @@ class TiledXmlParse {
     gid = _Runtime.callValue(getXmlElementAttribute, cast ([element, 'gid'] : Array<Dynamic>));
     polygon = _Runtime.callValue(getXmlElementChildByName, cast ([element, 'polygon'] : Array<Dynamic>));
     polyline = _Runtime.callValue(getXmlElementChildByName, cast ([element, 'polyline'] : Array<Dynamic>));
-    return cast { ellipse: !_Runtime.strictEquals(_Runtime.callValue(getXmlElementChildByName, cast ([element, 'ellipse'] : Array<Dynamic>)), null), gid: _Runtime.select(!_Runtime.strictEquals(gid, null), function():Dynamic return cast _Runtime.unsignedShiftRight(Std.int(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), cast ([gid] : Array<Dynamic>))), Std.int(0.0)), function():Dynamic return cast null), height: _Runtime.callValue(TiledXmlParse.attrNumber__tiledXmlParse, cast ([element, 'height', 0.0] : Array<Dynamic>)), id: _Runtime.callValue(TiledXmlParse.attrNumber__tiledXmlParse, cast ([element, 'id', 0.0] : Array<Dynamic>)), name: _Runtime.callValue(TiledXmlParse.attrString__tiledXmlParse, cast ([element, 'name', ''] : Array<Dynamic>)), point: !_Runtime.strictEquals(_Runtime.callValue(getXmlElementChildByName, cast ([element, 'point'] : Array<Dynamic>)), null), polygon: _Runtime.select(!_Runtime.strictEquals(polygon, null), function():Dynamic return cast _Runtime.callValue(TiledXmlParse.parseTiledPoints__tiledXmlParse, cast ([_Runtime.callValue(TiledXmlParse.attrString__tiledXmlParse, cast ([polygon, 'points', ''] : Array<Dynamic>))] : Array<Dynamic>)), function():Dynamic return cast null), polyline: _Runtime.select(!_Runtime.strictEquals(polyline, null), function():Dynamic return cast _Runtime.callValue(TiledXmlParse.parseTiledPoints__tiledXmlParse, cast ([_Runtime.callValue(TiledXmlParse.attrString__tiledXmlParse, cast ([polyline, 'points', ''] : Array<Dynamic>))] : Array<Dynamic>)), function():Dynamic return cast null), properties: _Runtime.callValue(TiledXmlParse.buildTiledPropertiesFromXml__tiledXmlParse, cast ([element] : Array<Dynamic>)), type: _Runtime.callValue(TiledXmlParse.attrString__tiledXmlParse, cast ([element, 'type', _Runtime.callValue(TiledXmlParse.attrString__tiledXmlParse, cast ([element, 'class', ''] : Array<Dynamic>))] : Array<Dynamic>)), width: _Runtime.callValue(TiledXmlParse.attrNumber__tiledXmlParse, cast ([element, 'width', 0.0] : Array<Dynamic>)), x: _Runtime.callValue(TiledXmlParse.attrNumber__tiledXmlParse, cast ([element, 'x', 0.0] : Array<Dynamic>)), y: _Runtime.callValue(TiledXmlParse.attrNumber__tiledXmlParse, cast ([element, 'y', 0.0] : Array<Dynamic>)) };
+    return cast { ellipse: !_Runtime.strictEquals(_Runtime.callValue(getXmlElementChildByName, cast ([element, 'ellipse'] : Array<Dynamic>)), null), gid: _Runtime.select(!_Runtime.strictEquals(gid, null), function():Dynamic return cast _Runtime.unsignedShiftRight(Std.int(_Runtime.callValue(_Runtime.globalValue('Number'), cast ([gid] : Array<Dynamic>))), Std.int(0.0)), function():Dynamic return cast null), height: _Runtime.callValue(TiledXmlParse.attrNumber__tiledXmlParse, cast ([element, 'height', 0.0] : Array<Dynamic>)), id: _Runtime.callValue(TiledXmlParse.attrNumber__tiledXmlParse, cast ([element, 'id', 0.0] : Array<Dynamic>)), name: _Runtime.callValue(TiledXmlParse.attrString__tiledXmlParse, cast ([element, 'name', ''] : Array<Dynamic>)), point: !_Runtime.strictEquals(_Runtime.callValue(getXmlElementChildByName, cast ([element, 'point'] : Array<Dynamic>)), null), polygon: _Runtime.select(!_Runtime.strictEquals(polygon, null), function():Dynamic return cast _Runtime.callValue(TiledXmlParse.parseTiledPoints__tiledXmlParse, cast ([_Runtime.callValue(TiledXmlParse.attrString__tiledXmlParse, cast ([polygon, 'points', ''] : Array<Dynamic>))] : Array<Dynamic>)), function():Dynamic return cast null), polyline: _Runtime.select(!_Runtime.strictEquals(polyline, null), function():Dynamic return cast _Runtime.callValue(TiledXmlParse.parseTiledPoints__tiledXmlParse, cast ([_Runtime.callValue(TiledXmlParse.attrString__tiledXmlParse, cast ([polyline, 'points', ''] : Array<Dynamic>))] : Array<Dynamic>)), function():Dynamic return cast null), properties: _Runtime.callValue(TiledXmlParse.buildTiledPropertiesFromXml__tiledXmlParse, cast ([element] : Array<Dynamic>)), type: _Runtime.callValue(TiledXmlParse.attrString__tiledXmlParse, cast ([element, 'type', _Runtime.callValue(TiledXmlParse.attrString__tiledXmlParse, cast ([element, 'class', ''] : Array<Dynamic>))] : Array<Dynamic>)), width: _Runtime.callValue(TiledXmlParse.attrNumber__tiledXmlParse, cast ([element, 'width', 0.0] : Array<Dynamic>)), x: _Runtime.callValue(TiledXmlParse.attrNumber__tiledXmlParse, cast ([element, 'x', 0.0] : Array<Dynamic>)), y: _Runtime.callValue(TiledXmlParse.attrNumber__tiledXmlParse, cast ([element, 'y', 0.0] : Array<Dynamic>)) };
     return cast null;
   }
 
@@ -195,7 +195,7 @@ class TiledXmlParse {
       var __destructure0:Dynamic = _Runtime.callProperty(pair, 'split', cast ([','] : Array<Dynamic>));
       var x:Dynamic = _Runtime.getIndex(__destructure0, 0.0);
       var y:Dynamic = _Runtime.getIndex(__destructure0, 1.0);
-      _Runtime.callProperty(points, 'push', cast ([{ x: _Runtime.orValue(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), cast ([x] : Array<Dynamic>)), function():Dynamic return cast 0.0), y: _Runtime.orValue(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), cast ([y] : Array<Dynamic>)), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
+      _Runtime.callProperty(points, 'push', cast ([{ x: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('Number'), cast ([x] : Array<Dynamic>)), function():Dynamic return cast 0.0), y: _Runtime.orValue(_Runtime.callValue(_Runtime.globalValue('Number'), cast ([y] : Array<Dynamic>)), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     }
     return cast points;
     return cast null;
@@ -224,8 +224,8 @@ class TiledXmlParse {
   public static function parsePropertyValue__tiledXmlParse(type:TiledPropertyType, raw:String):Dynamic {
     if (_Runtime.truthy(_Runtime.strictEquals(type, 'bool'))) { return cast _Runtime.strictEquals(raw, 'true'); }
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(type, 'int'), function():Dynamic return cast _Runtime.strictEquals(type, 'float')))) {
-      var n:Dynamic = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), cast ([raw] : Array<Dynamic>));
-      return cast _Runtime.select(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([n] : Array<Dynamic>)), function():Dynamic return cast n, function():Dynamic return cast 0.0);
+      var n:Dynamic = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([raw] : Array<Dynamic>));
+      return cast _Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([n] : Array<Dynamic>)), function():Dynamic return cast n, function():Dynamic return cast 0.0);
     }
     return cast raw;
     return cast null;

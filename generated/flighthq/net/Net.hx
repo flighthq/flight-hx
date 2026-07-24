@@ -19,8 +19,8 @@ class Net {
   public static function _decodeNetBuffer__net(buffer:haxe.io.Bytes, responseType:NetResponseType):NetResponseBody {
     var text:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(responseType, 'arraybuffer'))) { return cast buffer; }
-    if (_Runtime.truthy(_Runtime.strictEquals(responseType, 'blob'))) { return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Blob'] : Array<Dynamic>)), [cast ([buffer] : Array<Dynamic>)]); }
-    text = _Runtime.callProperty(_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['TextDecoder'] : Array<Dynamic>)), []), 'decode', cast ([buffer] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.strictEquals(responseType, 'blob'))) { return cast _Runtime.construct(_Runtime.globalValue('Blob'), [cast ([buffer] : Array<Dynamic>)]); }
+    text = _Runtime.callProperty(_Runtime.construct(_Runtime.globalValue('TextDecoder'), []), 'decode', cast ([buffer] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(responseType, 'json'))) {
       try {
         return cast (cast _Runtime.jsonParse(text) : Dynamic);
@@ -37,8 +37,8 @@ class Net {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     raw = _Runtime.callProperty(headers, 'get', cast (['content-length'] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(raw, null))) { return cast -1.0; }
-    parsed = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), cast ([raw] : Array<Dynamic>));
-    return cast _Runtime.select(_Runtime.andValue(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast _Runtime.compare(parsed, 0.0, '>=')), function():Dynamic return cast parsed, function():Dynamic return cast -1.0);
+    parsed = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([raw] : Array<Dynamic>));
+    return cast _Runtime.select(_Runtime.andValue(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast _Runtime.compare(parsed, 0.0, '>=')), function():Dynamic return cast parsed, function():Dynamic return cast -1.0);
     return cast null;
   }
 
@@ -117,7 +117,7 @@ class Net {
           _Runtime.callValue(emitSignal, cast ([progress, { phase: 'download', loaded: loaded, total: _Runtime.select(_Runtime.compare(total, 0.0, '>='), function():Dynamic return cast total, function():Dynamic return cast 0.0) }] : Array<Dynamic>));
         }
       }
-      out = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [loaded]);
+      out = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [loaded]);
       offset = 0.0;
       for (chunk in _Runtime.iterable(chunks)) {
         _Runtime.callProperty(out, 'set', cast ([chunk, offset] : Array<Dynamic>));
@@ -166,11 +166,11 @@ class Net {
     return cast { sendNetRequest: flighthq._internal._Async.make(function(request:Dynamic, options:Dynamic):flighthq._internal._Promise<NetResponse> {
       var controller:Dynamic = cast _Runtime.UNDEFINED;
       var teardownAbort:Dynamic = cast _Runtime.UNDEFINED;
-      controller = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['AbortController'] : Array<Dynamic>)), []);
+      controller = _Runtime.construct(_Runtime.globalValue('AbortController'), []);
       teardownAbort = _Runtime.callValue(Net._wireNetAbort__net, cast ([controller, _Runtime.field(request, 'timeoutMs'), _Runtime.optionalField(options, 'signal')] : Array<Dynamic>));
       try {
         try {
-          var response:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['fetch'] : Array<Dynamic>)), cast ([_Runtime.field(request, 'url'), _Runtime.callValue(Net._toNetFetchInit__net, cast ([request, _Runtime.field(controller, 'signal')] : Array<Dynamic>))] : Array<Dynamic>)));
+          var response:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(_Runtime.globalValue('fetch'), cast ([_Runtime.field(request, 'url'), _Runtime.callValue(Net._toNetFetchInit__net, cast ([request, _Runtime.field(controller, 'signal')] : Array<Dynamic>))] : Array<Dynamic>)));
           var headers:Dynamic = _Runtime.callValue(Net._readNetResponseHeaders__net, cast ([_Runtime.field(response, 'headers')] : Array<Dynamic>));
           var body:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callValue(Net._readNetResponseBody__net, cast ([response, _Runtime.coalesce(_Runtime.field(request, 'responseType'), function():Dynamic return cast 'text'), _Runtime.optionalField(options, 'progress')] : Array<Dynamic>)));
           var __returnValue2:Dynamic = { status: _Runtime.field(response, 'status'), statusText: _Runtime.field(response, 'statusText'), ok: _Runtime.field(response, 'ok'), headers: headers, body: body, url: _Runtime.select(!_Runtime.strictEquals(_Runtime.field(response, 'url'), ''), function():Dynamic return cast _Runtime.field(response, 'url'), function():Dynamic return cast _Runtime.field(request, 'url')) };

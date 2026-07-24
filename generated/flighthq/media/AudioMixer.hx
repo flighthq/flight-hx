@@ -52,7 +52,7 @@ class AudioMixer {
     _Runtime.setField(_Runtime.field(masterGainNode, 'gain'), 'value', _Runtime.coalesce(_Runtime.optionalField(options, 'masterGain'), function():Dynamic return cast 1.0));
     _Runtime.callProperty(masterGainNode, 'connect', cast ([_Runtime.field(context, 'destination')] : Array<Dynamic>));
     mixer = { masterGain: _Runtime.coalesce(_Runtime.optionalField(options, 'masterGain'), function():Dynamic return cast 1.0), masterMuted: _Runtime.coalesce(_Runtime.optionalField(options, 'masterMuted'), function():Dynamic return cast false) };
-    _Runtime.callProperty(AudioMixer.mixerRuntimes__audioMixer, 'set', cast ([mixer, { activeChannels: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []), buses: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), busGainNodes: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), busOutputNodes: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []), channelToBus: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []), context: context, masterGainNode: masterGainNode }] : Array<Dynamic>));
+    _Runtime.callProperty(AudioMixer.mixerRuntimes__audioMixer, 'set', cast ([mixer, { activeChannels: _Runtime.construct(_Runtime.globalValue('Set'), []), buses: _Runtime.construct(_Runtime.globalValue('Map'), []), busGainNodes: _Runtime.construct(_Runtime.globalValue('Map'), []), busOutputNodes: _Runtime.construct(_Runtime.globalValue('Map'), []), channelToBus: _Runtime.construct(_Runtime.globalValue('WeakMap'), []), context: context, masterGainNode: masterGainNode }] : Array<Dynamic>));
     return cast mixer;
     return cast null;
   }
@@ -201,12 +201,12 @@ class AudioMixer {
     _Runtime.callValue(connectAudioChannelToNode, cast ([channel, _Runtime.field(_Runtime.field(runtime, 'context'), 'destination')] : Array<Dynamic>));
   }
 
-  public static final mixerRuntimes__audioMixer:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []);
+  public static final mixerRuntimes__audioMixer:Dynamic = _Runtime.construct(_Runtime.globalValue('WeakMap'), []);
 
-  public static final busToMixerRuntimes__audioMixer:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+  public static final busToMixerRuntimes__audioMixer:Dynamic = _Runtime.construct(_Runtime.globalValue('Map'), []);
 
   public static function clamp__audioMixer(value:Float, min:Float, max:Float):Float {
-    return cast _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.callProperty(HxMath, 'max', cast ([value, min] : Array<Dynamic>)), max] : Array<Dynamic>));
+    return cast HxMath.min(HxMath.max(value, min), max);
     return cast null;
   }
 
@@ -214,7 +214,7 @@ class AudioMixer {
     var runtimes:Dynamic = cast _Runtime.UNDEFINED;
     runtimes = _Runtime.callProperty(AudioMixer.busToMixerRuntimes__audioMixer, 'get', cast ([bus] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(runtimes, _Runtime.field(_Runtime, 'UNDEFINED')))) {
-      (runtimes = cast (_Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []) : Dynamic));
+      (runtimes = cast (_Runtime.construct(_Runtime.globalValue('Set'), []) : Dynamic));
       _Runtime.callProperty(AudioMixer.busToMixerRuntimes__audioMixer, 'set', cast ([bus, runtimes] : Array<Dynamic>));
     }
     _Runtime.callProperty(runtimes, 'add', cast ([runtime] : Array<Dynamic>));

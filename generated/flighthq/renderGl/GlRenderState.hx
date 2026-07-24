@@ -30,14 +30,14 @@ class GlRenderState {
     gl = (cast _Runtime.callProperty(canvas, 'getContext', cast (['webgl2', contextAttribs] : Array<Dynamic>)) : Null<Dynamic>);
     if (_Runtime.truthy(!_Runtime.truthy(gl))) { throw _Runtime.error('Failed to get WebGL2 context.'); }
     shaderLoc = _Runtime.callValue(compileDefaultGlProgram, cast ([gl] : Array<Dynamic>));
-    matrixArray = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [9.0]);
+    matrixArray = _Runtime.construct(_Runtime.globalValue('Float32Array'), [9.0]);
     defaultBitmapShader = _Runtime.callValue(createDefaultGlBitmapShader, cast ([shaderLoc, matrixArray] : Array<Dynamic>));
-    quadIndexBuffer = _Runtime.callProperty(gl, 'createBuffer', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ELEMENT_ARRAY_BUFFER'), quadIndexBuffer] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bufferData', cast ([_Runtime.field(gl, 'ELEMENT_ARRAY_BUFFER'), new flighthq._internal._UInt16Array(cast ([0.0, 1.0, 2.0, 0.0, 2.0, 3.0] : Array<Dynamic>)), _Runtime.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
-    quadVertexBuffer = _Runtime.callProperty(gl, 'createBuffer', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bindBuffer', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), quadVertexBuffer] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'bufferData', cast ([_Runtime.field(gl, 'ARRAY_BUFFER'), 64.0, _Runtime.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
+    quadIndexBuffer = flighthq._internal.WebGl2RenderingContext.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ELEMENT_ARRAY_BUFFER'), quadIndexBuffer] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ELEMENT_ARRAY_BUFFER'), new flighthq._internal._UInt16Array(cast ([0.0, 1.0, 2.0, 0.0, 2.0, 3.0] : Array<Dynamic>)), flighthq._internal.WebGl2RenderingContext.field(gl, 'STATIC_DRAW')] : Array<Dynamic>));
+    quadVertexBuffer = flighthq._internal.WebGl2RenderingContext.call(gl, 'createBuffer', cast ([] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bindBuffer', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), quadVertexBuffer] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'bufferData', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ARRAY_BUFFER'), 64.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'DYNAMIC_DRAW')] : Array<Dynamic>));
     state = (cast _Runtime.callValue(_createRenderState, cast ([{ allowSmoothing: _Runtime.coalesce(_Runtime.field(options, 'imageSmoothingEnabled'), function():Dynamic return cast true), pixelRatio: _Runtime.coalesce(_Runtime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)), roundPixels: _Runtime.coalesce(_Runtime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.field(options, 'sceneGraphSyncPolicy') }] : Array<Dynamic>)) : flighthq.types.GlRenderState);
     _Runtime.setField(state, 'applyBlendMode', null);
     _Runtime.setField((cast state : { var canvas:Dynamic; }), 'canvas', canvas);
@@ -58,23 +58,23 @@ class GlRenderState {
     _Runtime.setField(runtime, 'spriteBatchMaterial', null);
     _Runtime.setField(runtime, 'spriteBatchMaterialRenderer', null);
     _Runtime.setField(runtime, 'spriteBatchMaterialFloats', 0.0);
-    _Runtime.setField(runtime, 'spriteBatchMaterialData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(8.0 * 256.0)]));
+    _Runtime.setField(runtime, 'spriteBatchMaterialData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [(8.0 * 256.0)]));
     _Runtime.setField(runtime, 'spriteBatchMaterialBuffer', null);
     _Runtime.setField(runtime, 'spriteBatchCount', 0.0);
     _Runtime.setField(runtime, 'spriteBatchInstanceBuffer', null);
-    _Runtime.setField(runtime, 'spriteBatchInstanceData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(13.0 * 256.0)]));
+    _Runtime.setField(runtime, 'spriteBatchInstanceData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [(13.0 * 256.0)]));
     _Runtime.setField(runtime, 'spriteBatchTexture', null);
-    _Runtime.setField(runtime, 'textureCache', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []));
-    _Runtime.setField(runtime, 'imageResourceTextureCache', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['WeakMap'] : Array<Dynamic>)), []));
+    _Runtime.setField(runtime, 'textureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
+    _Runtime.setField(runtime, 'imageResourceTextureCache', _Runtime.construct(_Runtime.globalValue('WeakMap'), []));
     _Runtime.setField(runtime, 'quadVertexBuffer', quadVertexBuffer);
     _Runtime.setField(runtime, 'quadIndexBuffer', quadIndexBuffer);
-    _Runtime.setField(runtime, 'quadVertexData', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [16.0]));
+    _Runtime.setField(runtime, 'quadVertexData', _Runtime.construct(_Runtime.globalValue('Float32Array'), [16.0]));
     _Runtime.setField(runtime, 'matrixArray', matrixArray);
     _Runtime.setField(runtime, 'scissorStack', cast ([] : Array<Dynamic>));
     _Runtime.setField(runtime, 'clipForms', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'enable', cast ([_Runtime.field(gl, 'BLEND')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'blendFunc', cast ([_Runtime.field(gl, 'ONE'), _Runtime.field(gl, 'ONE_MINUS_SRC_ALPHA')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'disable', cast ([_Runtime.field(gl, 'DEPTH_TEST')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'BLEND')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'blendFunc', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE'), flighthq._internal.WebGl2RenderingContext.field(gl, 'ONE_MINUS_SRC_ALPHA')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'disable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'DEPTH_TEST')] : Array<Dynamic>));
     return cast state;
     return cast null;
   }
@@ -90,7 +90,7 @@ class GlRenderState {
     var programs:Dynamic = cast _Runtime.UNDEFINED;
     runtime = _Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    programs = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Set'] : Array<Dynamic>)), []);
+    programs = _Runtime.construct(_Runtime.globalValue('Set'), []);
     if (_Runtime.truthy(_Runtime.field(runtime, 'shaderLoc'))) { _Runtime.callProperty(programs, 'add', cast ([_Runtime.field(_Runtime.field(runtime, 'shaderLoc'), 'program')] : Array<Dynamic>)); }
     if (_Runtime.truthy(_Runtime.field(runtime, 'defaultBitmapShader'))) { _Runtime.callProperty(programs, 'add', cast ([_Runtime.field(_Runtime.field(runtime, 'defaultBitmapShader'), 'program')] : Array<Dynamic>)); }
     if (_Runtime.truthy(_Runtime.field(runtime, 'particleShader'))) { _Runtime.callProperty(programs, 'add', cast ([_Runtime.field(_Runtime.field(runtime, 'particleShader'), 'program')] : Array<Dynamic>)); }
@@ -98,16 +98,16 @@ class GlRenderState {
     if (_Runtime.truthy(_Runtime.field(runtime, 'colorTransformInstancedShader'))) { _Runtime.callProperty(programs, 'add', cast ([_Runtime.field(_Runtime.field(runtime, 'colorTransformInstancedShader'), 'program')] : Array<Dynamic>)); }
     if (_Runtime.truthy(_Runtime.field(runtime, 'uniformColorTransformShader'))) { _Runtime.callProperty(programs, 'add', cast ([_Runtime.field(_Runtime.field(runtime, 'uniformColorTransformShader'), 'program')] : Array<Dynamic>)); }
     for (program in _Runtime.iterable(programs)) {
-      _Runtime.callProperty(gl, 'deleteProgram', cast ([program] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteProgram', cast ([program] : Array<Dynamic>));
     }
-    _Runtime.callProperty(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'quadVertexBuffer')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'quadIndexBuffer')] : Array<Dynamic>));
-    if (_Runtime.truthy(_Runtime.field(runtime, 'particleCornerBuffer'))) { _Runtime.callProperty(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'particleCornerBuffer')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.field(runtime, 'particleInstanceBuffer'))) { _Runtime.callProperty(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'particleInstanceBuffer')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.field(runtime, 'quadBatchCornerBuffer'))) { _Runtime.callProperty(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'quadBatchCornerBuffer')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.field(runtime, 'spriteBatchInstanceBuffer'))) { _Runtime.callProperty(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'spriteBatchInstanceBuffer')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.field(runtime, 'spriteBatchMaterialBuffer'))) { _Runtime.callProperty(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'spriteBatchMaterialBuffer')] : Array<Dynamic>)); }
-    if (_Runtime.truthy(_Runtime.field(runtime, 'spriteBatchColorTransformBuffer'))) { _Runtime.callProperty(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'spriteBatchColorTransformBuffer')] : Array<Dynamic>)); }
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'quadVertexBuffer')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'quadIndexBuffer')] : Array<Dynamic>));
+    if (_Runtime.truthy(_Runtime.field(runtime, 'particleCornerBuffer'))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'particleCornerBuffer')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.field(runtime, 'particleInstanceBuffer'))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'particleInstanceBuffer')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.field(runtime, 'quadBatchCornerBuffer'))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'quadBatchCornerBuffer')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.field(runtime, 'spriteBatchInstanceBuffer'))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'spriteBatchInstanceBuffer')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.field(runtime, 'spriteBatchMaterialBuffer'))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'spriteBatchMaterialBuffer')] : Array<Dynamic>)); }
+    if (_Runtime.truthy(_Runtime.field(runtime, 'spriteBatchColorTransformBuffer'))) { flighthq._internal.WebGl2RenderingContext.call(gl, 'deleteBuffer', cast ([_Runtime.field(runtime, 'spriteBatchColorTransformBuffer')] : Array<Dynamic>)); }
   }
 
   public static function getGlRenderStateRuntime(state:flighthq.types.GlRenderState):GlRenderStateRuntime {

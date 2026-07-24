@@ -27,7 +27,7 @@ class MeshGeometryIndex {
       return cast _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>));
     }
     vertexCount = (sourceByteLength / stride);
-    sourceToCompact = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [vertexCount]);
+    sourceToCompact = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [vertexCount]);
     _Runtime.fill(sourceToCompact, MeshGeometryIndex.UINT32_UNMAPPED__meshGeometryIndex, 0, null, 1);
     compactCount = 0.0;
     {
@@ -39,9 +39,9 @@ class MeshGeometryIndex {
         element++;
       }
     }
-    sourceBytes = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [_Runtime.field(_Runtime.field(geometry, 'vertices'), 'buffer'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteOffset'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength')]);
-    compactBuffer = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['ArrayBuffer'] : Array<Dynamic>)), [(compactCount * stride)]);
-    compactBytes = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [compactBuffer]);
+    sourceBytes = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.field(_Runtime.field(geometry, 'vertices'), 'buffer'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteOffset'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength')]);
+    compactBuffer = _Runtime.construct(_Runtime.globalValue('ArrayBuffer'), [(compactCount * stride)]);
+    compactBytes = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [compactBuffer]);
     {
       var sourceIndex:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(sourceIndex, vertexCount, '<'))) {
@@ -52,7 +52,7 @@ class MeshGeometryIndex {
         sourceIndex++;
       }
     }
-    indices = _Runtime.select(_Runtime.compare(compactCount, MeshGeometryIndex.UINT16_INDEX_CEILING__meshGeometryIndex, '>'), function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [_Runtime.field(sourceIndices, 'length')]), function():Dynamic return cast new flighthq._internal._UInt16Array(_Runtime.field(sourceIndices, 'length')));
+    indices = _Runtime.select(_Runtime.compare(compactCount, MeshGeometryIndex.UINT16_INDEX_CEILING__meshGeometryIndex, '>'), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Uint32Array'), [_Runtime.field(sourceIndices, 'length')]), function():Dynamic return cast new flighthq._internal._UInt16Array(_Runtime.field(sourceIndices, 'length')));
     {
       var element:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(element, _Runtime.field(sourceIndices, 'length'), '<'))) {
@@ -61,7 +61,7 @@ class MeshGeometryIndex {
       }
     }
     out = _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>));
-    _Runtime.setField(out, 'vertices', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [compactBuffer]));
+    _Runtime.setField(out, 'vertices', _Runtime.construct(_Runtime.globalValue('Float32Array'), [compactBuffer]));
     _Runtime.setField(out, 'indices', indices);
     return cast out;
     return cast null;
@@ -75,13 +75,13 @@ class MeshGeometryIndex {
     var indexCount:Dynamic = cast _Runtime.UNDEFINED;
     var lines:Array<Float> = cast _Runtime.UNDEFINED;
     var out:Dynamic = cast _Runtime.UNDEFINED;
-    useUint32 = _Runtime.select(_Runtime.field(geometry, 'indices'), function():Dynamic return cast _Runtime.isInstanceOf(_Runtime.field(geometry, 'indices'), _Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>))), function():Dynamic return cast true);
+    useUint32 = _Runtime.select(_Runtime.field(geometry, 'indices'), function():Dynamic return cast _Runtime.isInstanceOf(_Runtime.field(geometry, 'indices'), _Runtime.globalValue('Uint32Array')), function():Dynamic return cast true);
     if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-list'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-strip')))) {
-      return cast _Runtime.select(useUint32, function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [0.0]), function():Dynamic return cast new flighthq._internal._UInt16Array(0.0));
+      return cast _Runtime.select(useUint32, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Uint32Array'), [0.0]), function():Dynamic return cast new flighthq._internal._UInt16Array(0.0));
     }
     indices = _Runtime.field(geometry, 'indices');
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
-    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+    vertexCount = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
     indexCount = _Runtime.select(indices, function():Dynamic return cast _Runtime.field(indices, 'length'), function():Dynamic return cast vertexCount);
     lines = cast ([] : Array<Dynamic>);
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-list'))) {
@@ -108,7 +108,7 @@ class MeshGeometryIndex {
       }
     }
     if (_Runtime.truthy(useUint32)) {
-      var out:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [_Runtime.field(lines, 'length')]);
+      var out:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [_Runtime.field(lines, 'length')]);
       _Runtime.callProperty(out, 'set', cast ([lines] : Array<Dynamic>));
       return cast out;
     }
@@ -128,7 +128,7 @@ class MeshGeometryIndex {
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
     sourceVertices = _Runtime.field(geometry, 'vertices');
     if (_Runtime.truthy(!_Runtime.truthy(indices))) { return cast _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>)); }
-    vertices = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(_Runtime.field(indices, 'length') * floatsPerVertex)]);
+    vertices = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(_Runtime.field(indices, 'length') * floatsPerVertex)]);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(indices, 'length'), '<'))) {
@@ -158,7 +158,7 @@ class MeshGeometryIndex {
     out = _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>));
     if (_Runtime.truthy(!_Runtime.strictEquals(_Runtime.field(out, 'indices'), null))) { return cast out; }
     vertexCount = _Runtime.callValue(getMeshGeometryVertexCount, cast ([out] : Array<Dynamic>));
-    indices = _Runtime.select(_Runtime.compare(vertexCount, MeshGeometryIndex.UINT16_INDEX_CEILING__meshGeometryIndex, '>'), function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [vertexCount]), function():Dynamic return cast new flighthq._internal._UInt16Array(vertexCount));
+    indices = _Runtime.select(_Runtime.compare(vertexCount, MeshGeometryIndex.UINT16_INDEX_CEILING__meshGeometryIndex, '>'), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Uint32Array'), [vertexCount]), function():Dynamic return cast new flighthq._internal._UInt16Array(vertexCount));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
@@ -188,10 +188,10 @@ class MeshGeometryIndex {
     sourceByteLength = _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength');
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.orValue(_Runtime.compare(stride, 0.0, '<='), function():Dynamic return cast !_Runtime.strictEquals((stride % 4.0), 0.0)), function():Dynamic return cast !_Runtime.strictEquals((sourceByteLength % stride), 0.0)))) { return cast _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>)); }
     vertexCount = (sourceByteLength / stride);
-    sourceBytes = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [_Runtime.field(_Runtime.field(geometry, 'vertices'), 'buffer'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteOffset'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength')]);
-    uniqueBytes = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint8Array'] : Array<Dynamic>)), [sourceByteLength]);
-    sourceToUnique = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [vertexCount]);
-    candidatesByHash = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    sourceBytes = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [_Runtime.field(_Runtime.field(geometry, 'vertices'), 'buffer'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteOffset'), _Runtime.field(_Runtime.field(geometry, 'vertices'), 'byteLength')]);
+    uniqueBytes = _Runtime.construct(_Runtime.globalValue('Uint8Array'), [sourceByteLength]);
+    sourceToUnique = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [vertexCount]);
+    candidatesByHash = _Runtime.construct(_Runtime.globalValue('Map'), []);
     uniqueCount = 0.0;
     {
       var vertex:Dynamic = 0.0;
@@ -223,7 +223,7 @@ class MeshGeometryIndex {
       }
     }
     elementCount = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(geometry, 'indices'), 'length'), function():Dynamic return cast vertexCount);
-    indices = _Runtime.select(_Runtime.compare(uniqueCount, MeshGeometryIndex.UINT16_INDEX_CEILING__meshGeometryIndex, '>'), function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [elementCount]), function():Dynamic return cast new flighthq._internal._UInt16Array(elementCount));
+    indices = _Runtime.select(_Runtime.compare(uniqueCount, MeshGeometryIndex.UINT16_INDEX_CEILING__meshGeometryIndex, '>'), function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Uint32Array'), [elementCount]), function():Dynamic return cast new flighthq._internal._UInt16Array(elementCount));
     {
       var element:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(element, elementCount, '<'))) {
@@ -235,7 +235,7 @@ class MeshGeometryIndex {
     }
     weldedBuffer = _Runtime.slice(_Runtime.field(uniqueBytes, 'buffer'), 0.0, (uniqueCount * stride));
     out = _Runtime.callValue(cloneMeshGeometry, cast ([geometry] : Array<Dynamic>));
-    _Runtime.setField(out, 'vertices', _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [weldedBuffer]));
+    _Runtime.setField(out, 'vertices', _Runtime.construct(_Runtime.globalValue('Float32Array'), [weldedBuffer]));
     _Runtime.setField(out, 'indices', indices);
     return cast out;
     return cast null;

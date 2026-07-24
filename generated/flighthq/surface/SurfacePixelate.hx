@@ -13,7 +13,7 @@ class SurfacePixelate {
     var surfaceWidth:Dynamic = cast _Runtime.UNDEFINED;
     var surfaceHeight:Dynamic = cast _Runtime.UNDEFINED;
     var data:Dynamic = cast _Runtime.UNDEFINED;
-    block = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([blockSize] : Array<Dynamic>))] : Array<Dynamic>));
+    block = HxMath.max(1.0, HxMath.round(blockSize));
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
     surfaceWidth = _Runtime.field(_Runtime.field(source, 'surface'), 'width');
@@ -22,11 +22,11 @@ class SurfacePixelate {
     {
       var by:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(by, h, '<'))) {
-        var yEnd:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([(by + block), h] : Array<Dynamic>));
+        var yEnd:Dynamic = HxMath.min((by + block), h);
         {
           var bx:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(bx, w, '<'))) {
-            var xEnd:Dynamic = _Runtime.callProperty(HxMath, 'min', cast ([(bx + block), w] : Array<Dynamic>));
+            var xEnd:Dynamic = HxMath.min((bx + block), w);
             var r:Dynamic = 0.0;
             var g:Dynamic = 0.0;
             var b:Dynamic = 0.0;
@@ -55,10 +55,10 @@ class SurfacePixelate {
               }
             }
             if (_Runtime.truthy(_Runtime.strictEquals(count, 0.0))) { (bx = cast ((bx + block) : Dynamic)); continue; }
-            var ar:Dynamic = _Runtime.callProperty(HxMath, 'round', cast ([(r / count)] : Array<Dynamic>));
-            var ag:Dynamic = _Runtime.callProperty(HxMath, 'round', cast ([(g / count)] : Array<Dynamic>));
-            var ab:Dynamic = _Runtime.callProperty(HxMath, 'round', cast ([(b / count)] : Array<Dynamic>));
-            var aa:Dynamic = _Runtime.callProperty(HxMath, 'round', cast ([(a / count)] : Array<Dynamic>));
+            var ar:Dynamic = HxMath.round((r / count));
+            var ag:Dynamic = HxMath.round((g / count));
+            var ab:Dynamic = HxMath.round((b / count));
+            var aa:Dynamic = HxMath.round((a / count));
             {
               var py:Dynamic = by;
               while (_Runtime.truthy(_Runtime.compare(py, yEnd, '<'))) {

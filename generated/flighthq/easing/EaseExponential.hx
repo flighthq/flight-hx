@@ -6,12 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
 class EaseExponential {
-  public static final easeInExponential:EasingFunction = function(t:Dynamic) return _Runtime.select(_Runtime.strictEquals(t, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast _Runtime.callProperty(HxMath, 'pow', cast ([2.0, ((10.0 * t) - 10.0)] : Array<Dynamic>)));
+  public static final easeInExponential:EasingFunction = function(t:Dynamic) return _Runtime.select(_Runtime.strictEquals(t, 0.0), function():Dynamic return cast 0.0, function():Dynamic return cast HxMath.pow(2.0, ((10.0 * t) - 10.0)));
 
   public static final easeInOutExponential:EasingFunction = function(t:Dynamic) {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(t, 0.0), function():Dynamic return cast _Runtime.strictEquals(t, 1.0)))) { return cast t; }
-    return cast _Runtime.select(_Runtime.compare(t, 0.5, '<'), function():Dynamic return cast (_Runtime.callProperty(HxMath, 'pow', cast ([2.0, ((20.0 * t) - 10.0)] : Array<Dynamic>)) / 2.0), function():Dynamic return cast ((2.0 - _Runtime.callProperty(HxMath, 'pow', cast ([2.0, ((-20.0 * t) + 10.0)] : Array<Dynamic>))) / 2.0));
+    return cast _Runtime.select(_Runtime.compare(t, 0.5, '<'), function():Dynamic return cast (HxMath.pow(2.0, ((20.0 * t) - 10.0)) / 2.0), function():Dynamic return cast ((2.0 - HxMath.pow(2.0, ((-20.0 * t) + 10.0))) / 2.0));
   };
 
-  public static final easeOutExponential:EasingFunction = function(t:Dynamic) return _Runtime.select(_Runtime.strictEquals(t, 1.0), function():Dynamic return cast 1.0, function():Dynamic return cast (1.0 - _Runtime.callProperty(HxMath, 'pow', cast ([2.0, (-10.0 * t)] : Array<Dynamic>))));
+  public static final easeOutExponential:EasingFunction = function(t:Dynamic) return _Runtime.select(_Runtime.strictEquals(t, 1.0), function():Dynamic return cast 1.0, function():Dynamic return cast (1.0 - HxMath.pow(2.0, (-10.0 * t))));
 }

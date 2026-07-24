@@ -50,12 +50,12 @@ class ParseKtx2 {
     if (_Runtime.truthy(_Runtime.strictEquals(supercompression, _Runtime.field(_Runtime, 'UNDEFINED')))) { return cast null; }
     format = _Runtime.callValue(ParseKtx2.mapKtx2Format__parseKtx2, cast ([vkFormat, supercompressionScheme] : Array<Dynamic>));
     if (_Runtime.truthy(_Runtime.strictEquals(format, null))) { return cast null; }
-    width = _Runtime.callProperty(HxMath, 'max', cast ([1.0, pixelWidth] : Array<Dynamic>));
-    height = _Runtime.callProperty(HxMath, 'max', cast ([1.0, pixelHeight] : Array<Dynamic>));
-    depth = _Runtime.callProperty(HxMath, 'max', cast ([1.0, pixelDepth] : Array<Dynamic>));
-    layers = _Runtime.callProperty(HxMath, 'max', cast ([1.0, layerCount] : Array<Dynamic>));
+    width = HxMath.max(1.0, pixelWidth);
+    height = HxMath.max(1.0, pixelHeight);
+    depth = HxMath.max(1.0, pixelDepth);
+    layers = HxMath.max(1.0, layerCount);
     faces = _Runtime.select(_Runtime.strictEquals(faceCount, 6.0), function():Dynamic return cast 6.0, function():Dynamic return cast 1.0);
-    levelCountPresent = _Runtime.callProperty(HxMath, 'max', cast ([1.0, levelCount] : Array<Dynamic>));
+    levelCountPresent = HxMath.max(1.0, levelCount);
     _Runtime.setField(reader, 'offset', ParseKtx2.ktx2LevelIndexOffset__parseKtx2);
     if (_Runtime.truthy(!_Runtime.truthy(_Runtime.callValue(hasByteReaderBytes, cast ([reader, (levelCountPresent * 24.0)] : Array<Dynamic>))))) { return cast null; }
     levels = cast ([] : Array<Dynamic>);
@@ -67,8 +67,8 @@ class ParseKtx2 {
         var byteLength:Dynamic = _Runtime.callValue(readByteReaderU64, cast ([reader] : Array<Dynamic>));
         _Runtime.callValue(skipByteReader, cast ([reader, 8.0] : Array<Dynamic>));
         if (_Runtime.truthy(_Runtime.compare((byteOffset + byteLength), _Runtime.field(bytes, 'byteLength'), '>'))) { return cast null; }
-        var mipWidth:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([1.0, (Std.int(width) >> Std.int(mip))] : Array<Dynamic>));
-        var mipHeight:Dynamic = _Runtime.callProperty(HxMath, 'max', cast ([1.0, (Std.int(height) >> Std.int(mip))] : Array<Dynamic>));
+        var mipWidth:Dynamic = HxMath.max(1.0, (Std.int(width) >> Std.int(mip)));
+        var mipHeight:Dynamic = HxMath.max(1.0, (Std.int(height) >> Std.int(mip)));
         var splittable:Dynamic = _Runtime.andValue(_Runtime.andValue(_Runtime.strictEquals(supercompression, 'None'), function():Dynamic return cast _Runtime.compare(imagesPerLevel, 1.0, '>')), function():Dynamic return cast _Runtime.strictEquals((byteLength % imagesPerLevel), 0.0));
         if (_Runtime.truthy(!_Runtime.truthy(splittable))) {
           _Runtime.callProperty(levels, 'push', cast ([{ byteLength: byteLength, byteOffset: byteOffset, height: mipHeight, width: mipWidth }] : Array<Dynamic>));

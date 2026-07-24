@@ -18,8 +18,8 @@ class XmlQuery {
     var parsed:Dynamic = cast _Runtime.UNDEFINED;
     value = _Runtime.getIndex(_Runtime.field(element, 'attributes'), name);
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(StringTools.trim(Std.string(value)), '')))) { return cast null; }
-    parsed = _Runtime.callValue(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), cast ([value] : Array<Dynamic>));
-    return cast _Runtime.select(_Runtime.callProperty(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Number'] : Array<Dynamic>)), 'isFinite', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast parsed, function():Dynamic return cast null);
+    parsed = _Runtime.callValue(_Runtime.globalValue('Number'), cast ([value] : Array<Dynamic>));
+    return cast _Runtime.select(_Runtime.callProperty(_Runtime.globalValue('Number'), 'isFinite', cast ([parsed] : Array<Dynamic>)), function():Dynamic return cast parsed, function():Dynamic return cast null);
     return cast null;
   }
 

@@ -55,7 +55,7 @@ class GetPathNearestPoint {
     if (_Runtime.truthy(_Runtime.strictEquals(bestDistSq, HxMath.POSITIVE_INFINITY))) { return cast -1.0; }
     _Runtime.setField(out, 'x', bestX);
     _Runtime.setField(out, 'y', bestY);
-    return cast _Runtime.callProperty(HxMath, 'sqrt', cast ([bestDistSq] : Array<Dynamic>));
+    return cast HxMath.sqrt(bestDistSq);
     return cast null;
   }
 }

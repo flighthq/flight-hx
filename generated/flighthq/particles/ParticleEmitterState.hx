@@ -12,7 +12,7 @@ class ParticleEmitterState {
 
   public static function createParticleEmitterState(?random:RandomSource):flighthq.types.ParticleEmitterState {
     if (random == null) random = cast (HxMath.random : Dynamic);
-    return cast { burstTimer: 0.0, colorBirth: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), []), colorDeath: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), []), emitterAge: 0.0, lifetimes: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), []), prevX: HxMath.NaN, prevY: HxMath.NaN, prevZ: HxMath.NaN, random: random, rotationSpeeds: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), []), scales: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), []), spawnAccumulator: 0.0, velocities: _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), []) };
+    return cast { burstTimer: 0.0, colorBirth: _Runtime.construct(_Runtime.globalValue('Float32Array'), []), colorDeath: _Runtime.construct(_Runtime.globalValue('Float32Array'), []), emitterAge: 0.0, lifetimes: _Runtime.construct(_Runtime.globalValue('Float32Array'), []), prevX: HxMath.NaN, prevY: HxMath.NaN, prevZ: HxMath.NaN, random: random, rotationSpeeds: _Runtime.construct(_Runtime.globalValue('Float32Array'), []), scales: _Runtime.construct(_Runtime.globalValue('Float32Array'), []), spawnAccumulator: 0.0, velocities: _Runtime.construct(_Runtime.globalValue('Float32Array'), []) };
     return cast null;
   }
 

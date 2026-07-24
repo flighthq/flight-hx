@@ -7,21 +7,21 @@ import flighthq.math.Constants.EPSILON;
 
 class Comparison {
   public static function approxEqual(a:Float, b:Float, epsilon:Float = 0.000001):Bool {
-    return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([(a - b)] : Array<Dynamic>)), epsilon, '<=');
+    return cast _Runtime.compare(HxMath.abs((a - b)), epsilon, '<=');
     return cast null;
   }
 
   public static function approxEqualRelative(a:Float, b:Float, relativeEpsilon:Float = 0.000001):Bool {
     var diff:Dynamic = cast _Runtime.UNDEFINED;
     var largest:Dynamic = cast _Runtime.UNDEFINED;
-    diff = _Runtime.callProperty(HxMath, 'abs', cast ([(a - b)] : Array<Dynamic>));
-    largest = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.callProperty(HxMath, 'abs', cast ([a] : Array<Dynamic>)), _Runtime.callProperty(HxMath, 'abs', cast ([b] : Array<Dynamic>))] : Array<Dynamic>));
-    return cast _Runtime.compare(diff, _Runtime.callProperty(HxMath, 'max', cast ([(relativeEpsilon * largest), EPSILON] : Array<Dynamic>)), '<=');
+    diff = HxMath.abs((a - b));
+    largest = HxMath.max(HxMath.abs(a), HxMath.abs(b));
+    return cast _Runtime.compare(diff, HxMath.max((relativeEpsilon * largest), EPSILON), '<=');
     return cast null;
   }
 
   public static function approxZero(value:Float, epsilon:Float = 0.000001):Bool {
-    return cast _Runtime.compare(_Runtime.callProperty(HxMath, 'abs', cast ([value] : Array<Dynamic>)), epsilon, '<=');
+    return cast _Runtime.compare(HxMath.abs(value), epsilon, '<=');
     return cast null;
   }
 }

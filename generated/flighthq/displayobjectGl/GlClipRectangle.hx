@@ -24,9 +24,9 @@ class GlClipRectangle {
     _Runtime.callValue(flushGlSpriteBatch, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
     if (_Runtime.truthy(_Runtime.strictEquals(previous, null))) {
-      _Runtime.callProperty(gl, 'disable', cast ([_Runtime.field(gl, 'SCISSOR_TEST')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'disable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'SCISSOR_TEST')] : Array<Dynamic>));
     } else {
-      _Runtime.callProperty(gl, 'scissor', cast ([_Runtime.field(previous, 'x'), _Runtime.field(previous, 'y'), _Runtime.field(previous, 'width'), _Runtime.field(previous, 'height')] : Array<Dynamic>));
+      flighthq._internal.WebGl2RenderingContext.call(gl, 'scissor', cast ([_Runtime.field(previous, 'x'), _Runtime.field(previous, 'y'), _Runtime.field(previous, 'width'), _Runtime.field(previous, 'height')] : Array<Dynamic>));
     }
   }
 
@@ -40,8 +40,8 @@ class GlClipRectangle {
     _Runtime.callProperty(_Runtime.callValue(GlClipRectangle.getScissorStack__glClipRectangle, cast ([state] : Array<Dynamic>)), 'push', cast ([next] : Array<Dynamic>));
     _Runtime.callValue(flushGlSpriteBatch, cast ([state] : Array<Dynamic>));
     gl = _Runtime.field(state, 'gl');
-    _Runtime.callProperty(gl, 'enable', cast ([_Runtime.field(gl, 'SCISSOR_TEST')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'scissor', cast ([_Runtime.field(next, 'x'), _Runtime.field(next, 'y'), _Runtime.field(next, 'width'), _Runtime.field(next, 'height')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enable', cast ([flighthq._internal.WebGl2RenderingContext.field(gl, 'SCISSOR_TEST')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'scissor', cast ([_Runtime.field(next, 'x'), _Runtime.field(next, 'y'), _Runtime.field(next, 'width'), _Runtime.field(next, 'height')] : Array<Dynamic>));
   }
 
   public static function computeScissorRect__glClipRectangle(state:GlRenderState, rect:RectangleLike, transform:MatrixLike):GlScissorRect {
@@ -67,11 +67,11 @@ class GlClipRectangle {
     x3 = (((_Runtime.field(transform, 'a') * (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width'))) + (_Runtime.field(transform, 'c') * (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')))) + _Runtime.field(transform, 'tx'));
     y3 = (((_Runtime.field(transform, 'b') * (_Runtime.field(rect, 'x') + _Runtime.field(rect, 'width'))) + (_Runtime.field(transform, 'd') * (_Runtime.field(rect, 'y') + _Runtime.field(rect, 'height')))) + _Runtime.field(transform, 'ty'));
     viewport = _Runtime.coalesce(_Runtime.field(_Runtime.callValue(getGlRenderStateRuntime, cast ([state] : Array<Dynamic>)), 'renderTargetViewport'), function():Dynamic return cast _Runtime.field(state, 'canvas'));
-    minX = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'floor', cast ([HxMath.min(HxMath.min(HxMath.min(x0, x1), x2), x3)] : Array<Dynamic>))] : Array<Dynamic>));
-    maxX = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(viewport, 'width'), _Runtime.callProperty(HxMath, 'ceil', cast ([HxMath.max(HxMath.max(HxMath.max(x0, x1), x2), x3)] : Array<Dynamic>))] : Array<Dynamic>));
-    minY = _Runtime.callProperty(HxMath, 'max', cast ([0.0, _Runtime.callProperty(HxMath, 'floor', cast ([HxMath.min(HxMath.min(HxMath.min(y0, y1), y2), y3)] : Array<Dynamic>))] : Array<Dynamic>));
-    maxY = _Runtime.callProperty(HxMath, 'min', cast ([_Runtime.field(viewport, 'height'), _Runtime.callProperty(HxMath, 'ceil', cast ([HxMath.max(HxMath.max(HxMath.max(y0, y1), y2), y3)] : Array<Dynamic>))] : Array<Dynamic>));
-    return cast { height: _Runtime.callProperty(HxMath, 'max', cast ([0.0, (maxY - minY)] : Array<Dynamic>)), width: _Runtime.callProperty(HxMath, 'max', cast ([0.0, (maxX - minX)] : Array<Dynamic>)), x: minX, y: _Runtime.callProperty(HxMath, 'max', cast ([0.0, (_Runtime.field(viewport, 'height') - maxY)] : Array<Dynamic>)) };
+    minX = HxMath.max(0.0, HxMath.floor(HxMath.min(HxMath.min(HxMath.min(x0, x1), x2), x3)));
+    maxX = HxMath.min(_Runtime.field(viewport, 'width'), HxMath.ceil(HxMath.max(HxMath.max(HxMath.max(x0, x1), x2), x3)));
+    minY = HxMath.max(0.0, HxMath.floor(HxMath.min(HxMath.min(HxMath.min(y0, y1), y2), y3)));
+    maxY = HxMath.min(_Runtime.field(viewport, 'height'), HxMath.ceil(HxMath.max(HxMath.max(HxMath.max(y0, y1), y2), y3)));
+    return cast { height: HxMath.max(0.0, (maxY - minY)), width: HxMath.max(0.0, (maxX - minX)), x: minX, y: HxMath.max(0.0, (_Runtime.field(viewport, 'height') - maxY)) };
     return cast null;
   }
 
@@ -89,11 +89,11 @@ class GlClipRectangle {
     var right:Dynamic = cast _Runtime.UNDEFINED;
     var bottom:Dynamic = cast _Runtime.UNDEFINED;
     if (_Runtime.truthy(_Runtime.strictEquals(a, null))) { return cast { height: _Runtime.field(b, 'height'), width: _Runtime.field(b, 'width'), x: _Runtime.field(b, 'x'), y: _Runtime.field(b, 'y') }; }
-    x = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(a, 'x'), _Runtime.field(b, 'x')] : Array<Dynamic>));
-    y = _Runtime.callProperty(HxMath, 'max', cast ([_Runtime.field(a, 'y'), _Runtime.field(b, 'y')] : Array<Dynamic>));
-    right = _Runtime.callProperty(HxMath, 'min', cast ([(_Runtime.field(a, 'x') + _Runtime.field(a, 'width')), (_Runtime.field(b, 'x') + _Runtime.field(b, 'width'))] : Array<Dynamic>));
-    bottom = _Runtime.callProperty(HxMath, 'min', cast ([(_Runtime.field(a, 'y') + _Runtime.field(a, 'height')), (_Runtime.field(b, 'y') + _Runtime.field(b, 'height'))] : Array<Dynamic>));
-    return cast { height: _Runtime.callProperty(HxMath, 'max', cast ([0.0, (bottom - y)] : Array<Dynamic>)), width: _Runtime.callProperty(HxMath, 'max', cast ([0.0, (right - x)] : Array<Dynamic>)), x: x, y: y };
+    x = HxMath.max(_Runtime.field(a, 'x'), _Runtime.field(b, 'x'));
+    y = HxMath.max(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'));
+    right = HxMath.min((_Runtime.field(a, 'x') + _Runtime.field(a, 'width')), (_Runtime.field(b, 'x') + _Runtime.field(b, 'width')));
+    bottom = HxMath.min((_Runtime.field(a, 'y') + _Runtime.field(a, 'height')), (_Runtime.field(b, 'y') + _Runtime.field(b, 'height')));
+    return cast { height: HxMath.max(0.0, (bottom - y)), width: HxMath.max(0.0, (right - x)), x: x, y: y };
     return cast null;
   }
 }

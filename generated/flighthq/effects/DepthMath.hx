@@ -10,10 +10,10 @@ class DepthMath {
     var fl:Dynamic = cast _Runtime.UNDEFINED;
     var d:Dynamic = cast _Runtime.UNDEFINED;
     var a:Dynamic = cast _Runtime.UNDEFINED;
-    fd = _Runtime.callProperty(HxMath, 'max', cast ([0.00001, focusDistance] : Array<Dynamic>));
-    fl = (_Runtime.callProperty(HxMath, 'max', cast ([0.00001, focalLength] : Array<Dynamic>)) / 1000.0);
-    d = _Runtime.callProperty(HxMath, 'max', cast ([0.00001, depth] : Array<Dynamic>));
-    a = (fl / _Runtime.callProperty(HxMath, 'max', cast ([0.00001, aperture] : Array<Dynamic>)));
+    fd = HxMath.max(0.00001, focusDistance);
+    fl = (HxMath.max(0.00001, focalLength) / 1000.0);
+    d = HxMath.max(0.00001, depth);
+    a = (fl / HxMath.max(0.00001, aperture));
     return cast ((a * (d - fd)) / (d * (fd - fl)));
     return cast null;
   }
@@ -25,19 +25,19 @@ class DepthMath {
 
   public static function computeSsaoSampleKernel(samples:Float, out:flighthq._internal._Float32Array):Float {
     var n:Dynamic = cast _Runtime.UNDEFINED;
-    n = _Runtime.callProperty(HxMath, 'max', cast ([1.0, _Runtime.callProperty(HxMath, 'round', cast ([samples] : Array<Dynamic>))] : Array<Dynamic>));
+    n = HxMath.max(1.0, HxMath.round(samples));
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, n, '<'))) {
         var h2:Dynamic = _Runtime.callValue(DepthMath.halton__depthMath, cast ([(i + 1.0), 2.0] : Array<Dynamic>));
         var h3:Dynamic = _Runtime.callValue(DepthMath.halton__depthMath, cast ([(i + 1.0), 3.0] : Array<Dynamic>));
         var theta:Dynamic = ((h2 * 2.0) * HxMath.PI);
-        var phi:Dynamic = _Runtime.callProperty(HxMath, 'acos', cast ([(1.0 - h3)] : Array<Dynamic>));
+        var phi:Dynamic = HxMath.acos((1.0 - h3));
         var scale:Dynamic = (i / n);
         var dist:Dynamic = (0.1 + ((0.9 * scale) * scale));
-        _Runtime.setIndex(out, ((i * 3.0) + 0.0), ((_Runtime.callProperty(HxMath, 'sin', cast ([phi] : Array<Dynamic>)) * _Runtime.callProperty(HxMath, 'cos', cast ([theta] : Array<Dynamic>))) * dist));
-        _Runtime.setIndex(out, ((i * 3.0) + 1.0), ((_Runtime.callProperty(HxMath, 'sin', cast ([phi] : Array<Dynamic>)) * _Runtime.callProperty(HxMath, 'sin', cast ([theta] : Array<Dynamic>))) * dist));
-        _Runtime.setIndex(out, ((i * 3.0) + 2.0), (_Runtime.callProperty(HxMath, 'cos', cast ([phi] : Array<Dynamic>)) * dist));
+        _Runtime.setIndex(out, ((i * 3.0) + 0.0), ((HxMath.sin(phi) * HxMath.cos(theta)) * dist));
+        _Runtime.setIndex(out, ((i * 3.0) + 1.0), ((HxMath.sin(phi) * HxMath.sin(theta)) * dist));
+        _Runtime.setIndex(out, ((i * 3.0) + 2.0), (HxMath.cos(phi) * dist));
         i++;
       }
     }
@@ -55,7 +55,7 @@ class DepthMath {
     while (_Runtime.truthy(_Runtime.compare(i, 0.0, '>'))) {
       (f = cast ((f / base) : Dynamic));
       (result = cast ((result + (f * (i % base))) : Dynamic));
-      (i = cast (_Runtime.callProperty(HxMath, 'floor', cast ([(i / base)] : Array<Dynamic>)) : Dynamic));
+      (i = cast (HxMath.floor((i / base)) : Dynamic));
     }
     return cast result;
     return cast null;

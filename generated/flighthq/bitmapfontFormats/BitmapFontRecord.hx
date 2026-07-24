@@ -22,7 +22,7 @@ class BitmapFontRecord {
     var kerning:Array<BitmapFontKerningData> = cast _Runtime.UNDEFINED;
     var data:BitmapFontData = cast _Runtime.UNDEFINED;
     resolvePage = _Runtime.optionalField(options, 'resolvePage');
-    resolved = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Map'] : Array<Dynamic>)), []);
+    resolved = _Runtime.construct(_Runtime.globalValue('Map'), []);
     maxPageId = -1.0;
     if (_Runtime.truthy(!_Runtime.strictEquals(resolvePage, _Runtime.field(_Runtime, 'UNDEFINED')))) {
       for (page in _Runtime.iterable(_Runtime.field(record, 'pages'))) {

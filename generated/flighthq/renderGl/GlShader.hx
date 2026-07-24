@@ -24,7 +24,7 @@ class GlShader {
   public static function compileGlBitmapProgram(gl:Dynamic, fragmentSrc:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform float u_alpha;\nout vec4 fragColor;\nvoid main() {\n  vec4 color = texture(u_texture, v_texCoord) * clamp(u_alpha, 0.0, 1.0);\n  if (color.a <= 0.0) discard;\n  fragColor = color;\n}'):GlShaderLocations {
     var program:Dynamic = cast _Runtime.UNDEFINED;
     program = _Runtime.callValue(createGlProgram, cast ([gl, GlShader.VERTEX_SRC__glShader, fragmentSrc, 'Bitmap'] : Array<Dynamic>));
-    return cast { program: program, locPosition: _Runtime.callProperty(gl, 'getAttribLocation', cast ([program, 'a_position'] : Array<Dynamic>)), locTexCoord: _Runtime.callProperty(gl, 'getAttribLocation', cast ([program, 'a_texCoord'] : Array<Dynamic>)), locMatrix: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_matrix'] : Array<Dynamic>)), locAlpha: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_alpha'] : Array<Dynamic>)), locTexture: _Runtime.callProperty(gl, 'getUniformLocation', cast ([program, 'u_texture'] : Array<Dynamic>)) };
+    return cast { program: program, locPosition: flighthq._internal.WebGl2RenderingContext.call(gl, 'getAttribLocation', cast ([program, 'a_position'] : Array<Dynamic>)), locTexCoord: flighthq._internal.WebGl2RenderingContext.call(gl, 'getAttribLocation', cast ([program, 'a_texCoord'] : Array<Dynamic>)), locMatrix: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_matrix'] : Array<Dynamic>)), locAlpha: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_alpha'] : Array<Dynamic>)), locTexture: flighthq._internal.WebGl2RenderingContext.call(gl, 'getUniformLocation', cast ([program, 'u_texture'] : Array<Dynamic>)) };
     return cast null;
   }
 
@@ -54,15 +54,15 @@ class GlShader {
   }
 
   public static function setGlAttributes(gl:Dynamic, loc:GlShaderLocations):Void {
-    _Runtime.callProperty(gl, 'enableVertexAttribArray', cast ([_Runtime.field(loc, 'locPosition')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'enableVertexAttribArray', cast ([_Runtime.field(loc, 'locTexCoord')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribPointer', cast ([_Runtime.field(loc, 'locPosition'), 2.0, _Runtime.field(gl, 'FLOAT'), false, 16.0, 0.0] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'vertexAttribPointer', cast ([_Runtime.field(loc, 'locTexCoord'), 2.0, _Runtime.field(gl, 'FLOAT'), false, 16.0, 8.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(loc, 'locPosition')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'enableVertexAttribArray', cast ([_Runtime.field(loc, 'locTexCoord')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(loc, 'locPosition'), 2.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, 16.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'vertexAttribPointer', cast ([_Runtime.field(loc, 'locTexCoord'), 2.0, flighthq._internal.WebGl2RenderingContext.field(gl, 'FLOAT'), false, 16.0, 8.0] : Array<Dynamic>));
   }
 
   public static function setGlBaseUniforms(gl:Dynamic, loc:GlShaderLocations, renderProxy:RenderProxy):Void {
-    _Runtime.callProperty(gl, 'uniform1f', cast ([_Runtime.field(loc, 'locAlpha'), _Runtime.field(renderProxy, 'alpha')] : Array<Dynamic>));
-    _Runtime.callProperty(gl, 'uniform1i', cast ([_Runtime.field(loc, 'locTexture'), 0.0] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1f', cast ([_Runtime.field(loc, 'locAlpha'), _Runtime.field(renderProxy, 'alpha')] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniform1i', cast ([_Runtime.field(loc, 'locTexture'), 0.0] : Array<Dynamic>));
   }
 
   public static function setGlMatrixFromTransform(gl:Dynamic, loc:GlShaderLocations, m:flighthq._internal._Float32Array, t:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, viewport:{ var width:Float; var height:Float; }):Void {
@@ -79,7 +79,7 @@ class GlShader {
     _Runtime.setIndex(m, 6.0, ((_Runtime.field(t, 'tx') * iw) - 1.0));
     _Runtime.setIndex(m, 7.0, ((-_Runtime.field(t, 'ty') * ih) + 1.0));
     _Runtime.setIndex(m, 8.0, 1.0);
-    _Runtime.callProperty(gl, 'uniformMatrix3fv', cast ([_Runtime.field(loc, 'locMatrix'), false, m] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniformMatrix3fv', cast ([_Runtime.field(loc, 'locMatrix'), false, m] : Array<Dynamic>));
   }
 
   public static function setGlMatrixFromValues(gl:Dynamic, loc:GlShaderLocations, m:flighthq._internal._Float32Array, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float, viewport:{ var width:Float; var height:Float; }):Void {
@@ -96,6 +96,6 @@ class GlShader {
     _Runtime.setIndex(m, 6.0, ((tx * iw) - 1.0));
     _Runtime.setIndex(m, 7.0, ((-ty * ih) + 1.0));
     _Runtime.setIndex(m, 8.0, 1.0);
-    _Runtime.callProperty(gl, 'uniformMatrix3fv', cast ([_Runtime.field(loc, 'locMatrix'), false, m] : Array<Dynamic>));
+    flighthq._internal.WebGl2RenderingContext.call(gl, 'uniformMatrix3fv', cast ([_Runtime.field(loc, 'locMatrix'), false, m] : Array<Dynamic>));
   }
 }

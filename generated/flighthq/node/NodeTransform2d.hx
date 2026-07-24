@@ -107,8 +107,8 @@ class NodeTransform2d {
         (angle = cast ((angle + 360.0) : Dynamic));
       } }
       var rad:Dynamic = (angle * NodeTransform2d.DEG_TO_RAD__nodeTransform2d);
-      var sin:Dynamic = _Runtime.callProperty(HxMath, 'sin', cast ([rad] : Array<Dynamic>));
-      var cos:Dynamic = _Runtime.callProperty(HxMath, 'cos', cast ([rad] : Array<Dynamic>));
+      var sin:Dynamic = HxMath.sin(rad);
+      var cos:Dynamic = HxMath.cos(rad);
       _Runtime.setField(runtime, 'rotationAngle', angle);
       _Runtime.setField(runtime, 'rotationSine', sin);
       _Runtime.setField(runtime, 'rotationCosine', cos);
@@ -123,10 +123,10 @@ class NodeTransform2d {
     } else {
       var radY:Dynamic = ((_Runtime.field(runtime, 'rotationAngle') + _Runtime.field(target, 'skewY')) * NodeTransform2d.DEG_TO_RAD__nodeTransform2d);
       var radX:Dynamic = ((_Runtime.field(runtime, 'rotationAngle') + _Runtime.field(target, 'skewX')) * NodeTransform2d.DEG_TO_RAD__nodeTransform2d);
-      _Runtime.setField(matrix, 'a', (_Runtime.callProperty(HxMath, 'cos', cast ([radY] : Array<Dynamic>)) * _Runtime.field(target, 'scaleX')));
-      _Runtime.setField(matrix, 'b', (_Runtime.callProperty(HxMath, 'sin', cast ([radY] : Array<Dynamic>)) * _Runtime.field(target, 'scaleX')));
-      _Runtime.setField(matrix, 'c', (-_Runtime.callProperty(HxMath, 'sin', cast ([radX] : Array<Dynamic>)) * _Runtime.field(target, 'scaleY')));
-      _Runtime.setField(matrix, 'd', (_Runtime.callProperty(HxMath, 'cos', cast ([radX] : Array<Dynamic>)) * _Runtime.field(target, 'scaleY')));
+      _Runtime.setField(matrix, 'a', (HxMath.cos(radY) * _Runtime.field(target, 'scaleX')));
+      _Runtime.setField(matrix, 'b', (HxMath.sin(radY) * _Runtime.field(target, 'scaleX')));
+      _Runtime.setField(matrix, 'c', (-HxMath.sin(radX) * _Runtime.field(target, 'scaleY')));
+      _Runtime.setField(matrix, 'd', (HxMath.cos(radX) * _Runtime.field(target, 'scaleY')));
     }
     _Runtime.setField(matrix, 'tx', (_Runtime.field(target, 'x') - ((_Runtime.field(matrix, 'a') * _Runtime.field(target, 'pivotX')) + (_Runtime.field(matrix, 'c') * _Runtime.field(target, 'pivotY')))));
     _Runtime.setField(matrix, 'ty', (_Runtime.field(target, 'y') - ((_Runtime.field(matrix, 'b') * _Runtime.field(target, 'pivotX')) + (_Runtime.field(matrix, 'd') * _Runtime.field(target, 'pivotY')))));

@@ -32,7 +32,7 @@ class MeshGeometryOperations {
     vertexCount = (_Runtime.field(positions, 'length') / 3.0);
     normals = _Runtime.coalesce(_Runtime.field(options, 'normals'), function():Dynamic return cast null);
     uvs = _Runtime.coalesce(_Runtime.field(options, 'uvs'), function():Dynamic return cast null);
-    vertices = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [(vertexCount * MeshGeometryOperations.CANONICAL_FLOATS_PER_VERTEX__meshGeometryOperations)]);
+    vertices = _Runtime.construct(_Runtime.globalValue('Float32Array'), [(vertexCount * MeshGeometryOperations.CANONICAL_FLOATS_PER_VERTEX__meshGeometryOperations)]);
     {
       var i:Dynamic = 0.0;
       while (_Runtime.truthy(_Runtime.compare(i, vertexCount, '<'))) {
@@ -56,7 +56,7 @@ class MeshGeometryOperations {
       var src:Dynamic = _Runtime.field(options, 'indices');
       var needsUint32:Dynamic = _Runtime.compare(vertexCount, MeshGeometryOperations.UINT16_INDEX_CEILING__meshGeometryOperations, '>');
       if (_Runtime.truthy(needsUint32)) {
-        var a:Dynamic = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [_Runtime.field(src, 'length')]);
+        var a:Dynamic = _Runtime.construct(_Runtime.globalValue('Uint32Array'), [_Runtime.field(src, 'length')]);
         {
           var i:Dynamic = 0.0;
           while (_Runtime.truthy(_Runtime.compare(i, _Runtime.field(src, 'length'), '<'))) {
@@ -92,7 +92,7 @@ class MeshGeometryOperations {
   public static function getMeshGeometryTriangleCount(geometry:MeshGeometry):Float {
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-list'))) {
       var indexCount:Dynamic = _Runtime.select(_Runtime.field(geometry, 'indices'), function():Dynamic return cast _Runtime.field(_Runtime.field(geometry, 'indices'), 'length'), function():Dynamic return cast _Runtime.callValue(getMeshGeometryVertexCount, cast ([geometry] : Array<Dynamic>)));
-      return cast _Runtime.callProperty(HxMath, 'floor', cast ([(indexCount / 3.0)] : Array<Dynamic>));
+      return cast HxMath.floor((indexCount / 3.0));
     }
     if (_Runtime.truthy(_Runtime.strictEquals(_Runtime.field(geometry, 'topology'), 'triangle-strip'))) {
       var indexCount:Dynamic = _Runtime.select(_Runtime.field(geometry, 'indices'), function():Dynamic return cast _Runtime.field(_Runtime.field(geometry, 'indices'), 'length'), function():Dynamic return cast _Runtime.callValue(getMeshGeometryVertexCount, cast ([geometry] : Array<Dynamic>)));
@@ -163,7 +163,7 @@ class MeshGeometryOperations {
     totalIndexCount = 0.0;
     allIndexed = true;
     for (geo in _Runtime.iterable(geometries)) {
-      var vc:Dynamic = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(_Runtime.field(geo, 'vertices'), 'length') / floatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+      var vc:Dynamic = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(geo, 'vertices'), 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
       (totalVertexFloats = cast ((totalVertexFloats + (vc * floatsPerVertex)) : Dynamic));
       if (_Runtime.truthy(_Runtime.field(geo, 'indices'))) {
         (totalIndexCount = cast ((totalIndexCount + _Runtime.field(_Runtime.field(geo, 'indices'), 'length')) : Dynamic));
@@ -172,15 +172,15 @@ class MeshGeometryOperations {
         (totalIndexCount = cast ((totalIndexCount + vc) : Dynamic));
       }
     }
-    mergedVertices = _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Float32Array'] : Array<Dynamic>)), [totalVertexFloats]);
+    mergedVertices = _Runtime.construct(_Runtime.globalValue('Float32Array'), [totalVertexFloats]);
     needsUint32 = _Runtime.compare((totalVertexFloats / floatsPerVertex), MeshGeometryOperations.UINT16_INDEX_CEILING__meshGeometryOperations, '>');
-    mergedIndices = _Runtime.select(_Runtime.orValue(allIndexed, function():Dynamic return cast _Runtime.compare(totalIndexCount, 0.0, '>')), function():Dynamic return cast _Runtime.select(needsUint32, function():Dynamic return cast _Runtime.construct(_Runtime.callProperty(_Runtime, 'globalValue', cast (['Uint32Array'] : Array<Dynamic>)), [totalIndexCount]), function():Dynamic return cast new flighthq._internal._UInt16Array(totalIndexCount)), function():Dynamic return cast null);
+    mergedIndices = _Runtime.select(_Runtime.orValue(allIndexed, function():Dynamic return cast _Runtime.compare(totalIndexCount, 0.0, '>')), function():Dynamic return cast _Runtime.select(needsUint32, function():Dynamic return cast _Runtime.construct(_Runtime.globalValue('Uint32Array'), [totalIndexCount]), function():Dynamic return cast new flighthq._internal._UInt16Array(totalIndexCount)), function():Dynamic return cast null);
     mergedSubsets = cast ([] : Array<Dynamic>);
     vertexOffset = 0.0;
     indexOffset = 0.0;
     vertexFloatOffset = 0.0;
     for (geo in _Runtime.iterable(geometries)) {
-      var vc:Dynamic = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(_Runtime.field(geo, 'vertices'), 'length') / floatsPerVertex)] : Array<Dynamic>)), function():Dynamic return cast 0.0);
+      var vc:Dynamic = _Runtime.select(_Runtime.compare(floatsPerVertex, 0.0, '>'), function():Dynamic return cast HxMath.floor((_Runtime.field(_Runtime.field(geo, 'vertices'), 'length') / floatsPerVertex)), function():Dynamic return cast 0.0);
       _Runtime.callProperty(mergedVertices, 'set', cast ([_Runtime.field(geo, 'vertices').subarray(Std.int(0.0), Std.int((vc * floatsPerVertex))), vertexFloatOffset] : Array<Dynamic>));
       if (_Runtime.truthy(mergedIndices)) {
         var srcCount:Dynamic = _Runtime.select(_Runtime.field(geo, 'indices'), function():Dynamic return cast _Runtime.field(_Runtime.field(geo, 'indices'), 'length'), function():Dynamic return cast vc);
@@ -218,7 +218,7 @@ class MeshGeometryOperations {
     floatsPerVertex = (_Runtime.field(_Runtime.field(geometry, 'layout'), 'stride') / 4.0);
     if (_Runtime.truthy(_Runtime.compare(floatsPerVertex, 0.0, '<='))) { return cast false; }
     if (_Runtime.truthy(!_Runtime.strictEquals((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') % floatsPerVertex), 0.0))) { return cast false; }
-    vertexCount = _Runtime.callProperty(HxMath, 'floor', cast ([(_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex)] : Array<Dynamic>));
+    vertexCount = HxMath.floor((_Runtime.field(_Runtime.field(geometry, 'vertices'), 'length') / floatsPerVertex));
     if (_Runtime.truthy(_Runtime.field(geometry, 'indices'))) {
       {
         var i:Dynamic = 0.0;
