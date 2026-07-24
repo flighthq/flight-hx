@@ -2,6 +2,7 @@ package;
 
 import flighthq.math.Math.*;
 import flighthq.types.Vector2.Vector2Like;
+import flighthq._internal._Async;
 
 class CoreSmoke {
   static function main():Void {
@@ -24,6 +25,22 @@ class CoreSmoke {
     flighthq.signals.Signals.connectSignal(signal, function() emitted = true);
     flighthq.signals.Signals.emitSignal(signal);
     if (!emitted) throw 'signals failed';
+
+    #if !js
+    var asyncValue = 0;
+    _Async.flatMap(_Async.resolve(4), function(value:Int) {
+      asyncValue = value + 1;
+      return value;
+    });
+    if (asyncValue != 5) throw 'portable promise flatMap failed';
+
+    var recovered = false;
+    _Async.recover(_Async.reject('expected'), function(_) {
+      recovered = true;
+      return null;
+    });
+    if (!recovered) throw 'portable promise recovery failed';
+    #end
   }
 
   static function quarterForSmoke(value:Float):Float {
