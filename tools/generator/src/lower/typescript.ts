@@ -217,6 +217,23 @@ const canvasElementMembers = new Set([
   'width',
 ]);
 
+const webGpuDeviceMembers = new Set([
+  'createBindGroup',
+  'createBindGroupLayout',
+  'createBuffer',
+  'createCommandEncoder',
+  'createPipelineLayout',
+  'createRenderPipeline',
+  'createSampler',
+  'createShaderModule',
+  'createTexture',
+  'limits',
+  'queue',
+]);
+
+const webGpuQueueMembers = new Set(['copyExternalImageToTexture', 'submit', 'writeBuffer', 'writeTexture']);
+const webGpuCanvasContextMembers = new Set(['configure', 'getCurrentTexture']);
+
 export function lowerTypeScriptSource(
   sourceFile: ts.SourceFile,
   packageName: string,
@@ -267,6 +284,15 @@ export function lowerTypeScriptSource(
     ...collectPlatformBindingNames(sourceFile, 'HTMLCanvasElement', isCanvasElementValueExpression),
     ...collectPlatformBindingNames(sourceFile, 'OffscreenCanvas', isCanvasElementValueExpression),
   ]);
+  const webGpuDeviceBindingNames = collectPlatformBindingNames(sourceFile, 'GPUDevice', (node, names) =>
+    isNamedPlatformValueExpression(node, names, 'device'),
+  );
+  const webGpuQueueBindingNames = collectPlatformBindingNames(sourceFile, 'GPUQueue', (node, names) =>
+    isNamedPlatformValueExpression(node, names, 'queue'),
+  );
+  const webGpuCanvasContextBindingNames = collectPlatformBindingNames(sourceFile, 'GPUCanvasContext', (node, names) =>
+    isNamedPlatformValueExpression(node, names, 'context'),
+  );
   const webGlBindingNames = collectPlatformBindingNames(sourceFile, 'WebGL2RenderingContext', isWebGlValueExpression);
   const context: LoweringContext = {
     canvasBindingNames,
@@ -280,6 +306,9 @@ export function lowerTypeScriptSource(
     scopeBindings: new WeakMap(),
     sourceFile,
     temporaryIndex: 0,
+    webGpuCanvasContextBindingNames,
+    webGpuDeviceBindingNames,
+    webGpuQueueBindingNames,
     webGlBindingNames,
     workspaceDirectory,
   };
@@ -468,6 +497,35 @@ function isBoundCanvasElementExpression(node: ts.Expression, context: LoweringCo
   return isCanvasElementValueExpression(node, context.canvasElementBindingNames);
 }
 
+function isNamedPlatformValueExpression(
+  node: ts.Expression,
+  names: ReadonlySet<string>,
+  propertyName: string,
+): boolean {
+  if (ts.isParenthesizedExpression(node) || ts.isAsExpression(node) || ts.isNonNullExpression(node)) {
+    return isNamedPlatformValueExpression(node.expression, names, propertyName);
+  }
+  if (ts.isIdentifier(node)) return names.has(node.text);
+  return ts.isPropertyAccessExpression(node) && node.name.text === propertyName;
+}
+
+function isBoundNamedPlatformExpression(
+  node: ts.Expression,
+  context: LoweringContext,
+  typeName: string,
+  names: ReadonlySet<string>,
+  propertyName: string,
+): boolean {
+  if (ts.isParenthesizedExpression(node) || ts.isAsExpression(node) || ts.isNonNullExpression(node)) {
+    return isBoundNamedPlatformExpression(node.expression, context, typeName, names, propertyName);
+  }
+  if (ts.isIdentifier(node)) {
+    const parameter = findEnclosingParameter(node);
+    if (parameter?.type?.getText(context.sourceFile).includes(typeName)) return true;
+  }
+  return isNamedPlatformValueExpression(node, names, propertyName);
+}
+
 function isBoundPlatformExpression(
   node: ts.Expression,
   context: LoweringContext,
@@ -521,6 +579,9 @@ interface LoweringContext {
   scopeBindings: WeakMap<ts.Node, ReadonlySet<string>>;
   sourceFile: ts.SourceFile;
   temporaryIndex: number;
+  webGpuCanvasContextBindingNames: ReadonlySet<string>;
+  webGpuDeviceBindingNames: ReadonlySet<string>;
+  webGpuQueueBindingNames: ReadonlySet<string>;
   webGlBindingNames: ReadonlySet<string>;
   workspaceDirectory: string;
 }
@@ -1239,18 +1300,39 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
       !isLexicallyBound(node.expression, context);
     const objectIsCanvasElement =
       canvasElementMembers.has(node.name.text) && isBoundCanvasElementExpression(node.expression, context);
+    const objectIsWebGpuDevice =
+      webGpuDeviceMembers.has(node.name.text) &&
+      isBoundNamedPlatformExpression(node.expression, context, 'GPUDevice', context.webGpuDeviceBindingNames, 'device');
+    const objectIsWebGpuQueue =
+      webGpuQueueMembers.has(node.name.text) &&
+      isBoundNamedPlatformExpression(node.expression, context, 'GPUQueue', context.webGpuQueueBindingNames, 'queue');
+    const objectIsWebGpuCanvasContext =
+      webGpuCanvasContextMembers.has(node.name.text) &&
+      isBoundNamedPlatformExpression(
+        node.expression,
+        context,
+        'GPUCanvasContext',
+        context.webGpuCanvasContextBindingNames,
+        'context',
+      );
     return {
       binding: webGpuConstantNamespace
         ? 'WebGpuConstantsBackend'
         : objectIsCanvasElement
           ? 'CanvasElementBackend'
-          : objectIsGlobalObject
-            ? 'DynamicObject'
-            : isBoundPlatformExpression(node.expression, context, 'CanvasRenderingContext2D')
-              ? 'Canvas2dBackend'
-              : isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
-                ? 'WebGl2Backend'
-                : undefined,
+          : objectIsWebGpuDevice
+            ? 'WebGpuDeviceBackend'
+            : objectIsWebGpuQueue
+              ? 'WebGpuQueueBackend'
+              : objectIsWebGpuCanvasContext
+                ? 'WebGpuCanvasContextBackend'
+                : objectIsGlobalObject
+                  ? 'DynamicObject'
+                  : isBoundPlatformExpression(node.expression, context, 'CanvasRenderingContext2D')
+                    ? 'Canvas2dBackend'
+                    : isBoundPlatformExpression(node.expression, context, 'WebGL2RenderingContext')
+                      ? 'WebGl2Backend'
+                      : undefined,
       kind: 'property',
       name: node.name.text,
       object: webGpuConstantNamespace

@@ -57,7 +57,10 @@ export type IrExpression =
         | 'CanvasElementBackend'
         | 'DynamicObject'
         | 'WebGl2Backend'
+        | 'WebGpuCanvasContextBackend'
         | 'WebGpuConstantsBackend'
+        | 'WebGpuDeviceBackend'
+        | 'WebGpuQueueBackend'
         | undefined;
       kind: 'property';
       name: string;

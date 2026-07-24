@@ -699,7 +699,10 @@ function emitExpression(expression: IrExpression): string {
         if (
           expression.left.binding === 'Canvas2dBackend' ||
           expression.left.binding === 'CanvasElementBackend' ||
-          expression.left.binding === 'WebGl2Backend'
+          expression.left.binding === 'WebGl2Backend' ||
+          expression.left.binding === 'WebGpuCanvasContextBackend' ||
+          expression.left.binding === 'WebGpuDeviceBackend' ||
+          expression.left.binding === 'WebGpuQueueBackend'
         ) {
           const binding = `flighthq._internal.backend.${expression.left.binding}`;
           const current = `${binding}.field(${object}, ${quote(expression.left.name)})`;
@@ -930,7 +933,10 @@ function emitExpression(expression: IrExpression): string {
       if (
         expression.binding === 'Canvas2dBackend' ||
         expression.binding === 'CanvasElementBackend' ||
-        expression.binding === 'WebGl2Backend'
+        expression.binding === 'WebGl2Backend' ||
+        expression.binding === 'WebGpuCanvasContextBackend' ||
+        expression.binding === 'WebGpuDeviceBackend' ||
+        expression.binding === 'WebGpuQueueBackend'
       ) {
         return `flighthq._internal.backend.${expression.binding}.field(${emitExpression(expression.object)}, ${quote(expression.name)})`;
       }
@@ -971,7 +977,10 @@ function emitExpression(expression: IrExpression): string {
           expression.operand.kind === 'property' &&
           (expression.operand.binding === 'Canvas2dBackend' ||
             expression.operand.binding === 'CanvasElementBackend' ||
-            expression.operand.binding === 'WebGl2Backend')
+            expression.operand.binding === 'WebGl2Backend' ||
+            expression.operand.binding === 'WebGpuCanvasContextBackend' ||
+            expression.operand.binding === 'WebGpuDeviceBackend' ||
+            expression.operand.binding === 'WebGpuQueueBackend')
         ) {
           return `flighthq._internal.backend.${expression.operand.binding}.deleteField(${emitExpression(expression.operand.object)}, ${quote(expression.operand.name)})`;
         }
@@ -1101,7 +1110,10 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       if (
         expression.callee.binding === 'Canvas2dBackend' ||
         expression.callee.binding === 'CanvasElementBackend' ||
-        expression.callee.binding === 'WebGl2Backend'
+        expression.callee.binding === 'WebGl2Backend' ||
+        expression.callee.binding === 'WebGpuCanvasContextBackend' ||
+        expression.callee.binding === 'WebGpuDeviceBackend' ||
+        expression.callee.binding === 'WebGpuQueueBackend'
       ) {
         return `flighthq._internal.backend.${expression.callee.binding}.call(${emitExpression(expression.callee.object)}, ${quote(expression.callee.name)}, _Runtime.concatArrays([${chunks.join(', ')}]))`;
       }
@@ -1120,7 +1132,10 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     if (
       expression.callee.binding === 'Canvas2dBackend' ||
       expression.callee.binding === 'CanvasElementBackend' ||
-      expression.callee.binding === 'WebGl2Backend'
+      expression.callee.binding === 'WebGl2Backend' ||
+      expression.callee.binding === 'WebGpuCanvasContextBackend' ||
+      expression.callee.binding === 'WebGpuDeviceBackend' ||
+      expression.callee.binding === 'WebGpuQueueBackend'
     ) {
       const method = expression.optional || expression.callee.optional ? 'callOptional' : 'call';
       return `flighthq._internal.backend.${expression.callee.binding}.${method}(${owner}, ${quote(name)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;

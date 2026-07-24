@@ -484,6 +484,46 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output.match(/WebGpuConstantsBackend\.value\('GPUBufferUsage', 'COPY_DST'\)/gu)).toHaveLength(1);
   });
 
+  it('routes WebGPU device, queue, and canvas-context operations through typed backends', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/render-wgpu/src/sample.ts',
+      `
+        export function render(device: GPUDevice, context: GPUCanvasContext) {
+          const queue = device.queue;
+          const buffer = device.createBuffer({ size: 4, usage: GPUBufferUsage.COPY_DST });
+          queue.writeBuffer(buffer, 0, new Uint8Array([1, 2, 3, 4]));
+          context.configure({ device, format: 'rgba8unorm' });
+          const texture = context.getCurrentTexture();
+          device.queue.submit([]);
+          return { buffer, texture, limits: device.limits };
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/render-wgpu', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'WebGpuFixture',
+      packageName: '@flighthq/render-wgpu',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain("WebGpuDeviceBackend.field(device, 'queue')");
+    expect(output).toContain("WebGpuDeviceBackend.call(device, 'createBuffer'");
+    expect(output).toContain("WebGpuQueueBackend.call(queue, 'writeBuffer'");
+    expect(output).toContain(
+      "WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'submit'",
+    );
+    expect(output).toContain("WebGpuCanvasContextBackend.call(context, 'configure'");
+    expect(output).toContain("WebGpuCanvasContextBackend.call(context, 'getCurrentTexture'");
+    expect(output).toContain("WebGpuDeviceBackend.field(device, 'limits')");
+    expect(output).not.toContain("_Runtime.callProperty(device, 'createBuffer'");
+    expect(output).not.toContain("_Runtime.callProperty(queue, 'writeBuffer'");
+  });
+
   it('propagates optional chains through properties and element access', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/example/src/sample.ts',
