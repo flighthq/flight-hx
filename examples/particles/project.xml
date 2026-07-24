@@ -6,6 +6,7 @@
   <!-- <haxelib name="flight" path="../../" /> -->
   <include path="../../" />
   <classpath name="." />
+  <haxeflag name="-dce" value="full" />
   <haxelib name="lime" />
   <haxelib name="jsasync" />
 </project>
