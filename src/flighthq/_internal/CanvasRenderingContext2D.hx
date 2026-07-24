@@ -1,35 +1,32 @@
 package flighthq._internal;
 
+import flighthq._internal.backend.Canvas2dBackend;
+
 /**
- * Stable target boundary for generated Canvas 2D context access.
+ * Temporary compatibility shim. Generated code still names this type for Canvas 2D
+ * access; the implementation now lives in `flighthq._internal.backend.Canvas2dBackend`.
  *
- * The binding intentionally mirrors WebGl2RenderingContext so target-specific
- * implementations can replace reflection without regenerating translated code.
+ * Builder: once the generator emits `flighthq._internal.backend.Canvas2dBackend`
+ * directly, delete this file. The forwarders are `inline`, so they cost nothing.
  */
 class CanvasRenderingContext2D {
   public static inline function call(context:Dynamic, name:String, arguments:Array<Dynamic>):Dynamic {
-    #if !js
-    if (context == null) return null;
-    #end
-    return Reflect.callMethod(context, Reflect.field(context, name), arguments);
+    return Canvas2dBackend.call(context, name, arguments);
   }
 
   public static inline function callOptional(context:Dynamic, name:String, arguments:Array<Dynamic>):Dynamic {
-    if (context == null) return _Runtime.UNDEFINED;
-    final callable = Reflect.field(context, name);
-    return callable == null ? _Runtime.UNDEFINED : Reflect.callMethod(context, callable, arguments);
+    return Canvas2dBackend.callOptional(context, name, arguments);
   }
 
   public static inline function field(context:Dynamic, name:String):Dynamic {
-    return context == null ? null : Reflect.field(context, name);
+    return Canvas2dBackend.field(context, name);
   }
 
   public static inline function setField(context:Dynamic, name:String, value:Dynamic):Dynamic {
-    Reflect.setField(context, name, value);
-    return value;
+    return Canvas2dBackend.setField(context, name, value);
   }
 
   public static inline function deleteField(context:Dynamic, name:String):Bool {
-    return Reflect.deleteField(context, name);
+    return Canvas2dBackend.deleteField(context, name);
   }
 }
